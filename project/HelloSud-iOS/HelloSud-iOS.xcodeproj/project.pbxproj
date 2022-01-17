@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C192E48279523B000553034 /* HelloSud-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HelloSud-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6C192E4E279523B000553034 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 				6C192E66279523DA00553034 /* Common */,
 				6C192E65279523D000553034 /* Examples */,
 				6C192E64279523C800553034 /* Middle */,
-				6C192E4A279523B000553034 /* HelloSud */,
+				6C192E4A279523B000553034 /* HelloSud-iOS */,
 				6C192E49279523B000553034 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,12 +56,12 @@
 		6C192E49279523B000553034 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C192E48279523B000553034 /* HelloSud.app */,
+				6C192E48279523B000553034 /* HelloSud-iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6C192E4A279523B000553034 /* HelloSud */ = {
+		6C192E4A279523B000553034 /* HelloSud-iOS */ = {
 			isa = PBXGroup;
 			children = (
 				6C192E4B279523B000553034 /* AppDelegate.h */,
@@ -76,7 +76,7 @@
 				6C192E5C279523B100553034 /* Info.plist */,
 				6C192E5D279523B100553034 /* main.m */,
 			);
-			path = HelloSud;
+			path = "HelloSud-iOS";
 			sourceTree = "<group>";
 		};
 		6C192E64279523C800553034 /* Middle */ = {
@@ -167,9 +167,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6C192E47279523B000553034 /* HelloSud */ = {
+		6C192E47279523B000553034 /* HelloSud-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6C192E61279523B100553034 /* Build configuration list for PBXNativeTarget "HelloSud" */;
+			buildConfigurationList = 6C192E61279523B100553034 /* Build configuration list for PBXNativeTarget "HelloSud-iOS" */;
 			buildPhases = (
 				6C192E44279523B000553034 /* Sources */,
 				6C192E45279523B000553034 /* Frameworks */,
@@ -179,9 +179,9 @@
 			);
 			dependencies = (
 			);
-			name = HelloSud;
+			name = "HelloSud-iOS";
 			productName = HelloSud;
-			productReference = 6C192E48279523B000553034 /* HelloSud.app */;
+			productReference = 6C192E48279523B000553034 /* HelloSud-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -198,7 +198,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6C192E43279523B000553034 /* Build configuration list for PBXProject "HelloSud" */;
+			buildConfigurationList = 6C192E43279523B000553034 /* Build configuration list for PBXProject "HelloSud-iOS" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -211,7 +211,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6C192E47279523B000553034 /* HelloSud */,
+				6C192E47279523B000553034 /* HelloSud-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -384,7 +384,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FVM63RW6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HelloSud/Info.plist;
+				INFOPLIST_FILE = "HelloSud-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -412,7 +412,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FVM63RW6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HelloSud/Info.plist;
+				INFOPLIST_FILE = "HelloSud-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -434,7 +434,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6C192E43279523B000553034 /* Build configuration list for PBXProject "HelloSud" */ = {
+		6C192E43279523B000553034 /* Build configuration list for PBXProject "HelloSud-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C192E5F279523B100553034 /* Debug */,
@@ -443,7 +443,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6C192E61279523B100553034 /* Build configuration list for PBXNativeTarget "HelloSud" */ = {
+		6C192E61279523B100553034 /* Build configuration list for PBXNativeTarget "HelloSud-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C192E62279523B100553034 /* Debug */,

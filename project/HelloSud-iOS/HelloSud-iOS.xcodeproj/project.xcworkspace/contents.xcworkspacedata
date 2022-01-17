@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/kaniel/mini-game/hello-sud-ios/project/HelloSud/HelloSud-iOS.xcodeproj">
    </FileRef>
 </Workspace>
