@@ -45,6 +45,7 @@
 		6C192E3F279523B000553034 = {
 			isa = PBXGroup;
 			children = (
+				6C192E6F27965A7500553034 /* Home */,
 				6C192E66279523DA00553034 /* Common */,
 				6C192E65279523D000553034 /* Examples */,
 				6C192E64279523C800553034 /* Middle */,
@@ -162,6 +163,13 @@
 			children = (
 			);
 			path = VideoEngine;
+			sourceTree = "<group>";
+		};
+		6C192E6F27965A7500553034 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
