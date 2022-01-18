@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
+${PODS_XCFRAMEWORKS_BUILD_DIR}/ZegoExpressEngine/ZegoExpressEngine.framework/ZegoExpressEngine
