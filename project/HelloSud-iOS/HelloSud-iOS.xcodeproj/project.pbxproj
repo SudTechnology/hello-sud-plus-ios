@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */; };
+		44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03802796A981006EE6AC /* MediaAudioEngine.m */; };
+		44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03882796AB9C006EE6AC /* GameSudManager.m */; };
+		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
+		44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF039B2796B70B006EE6AC /* GameViewInfoModel.m */; };
 		6C192E4D279523B000553034 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E4C279523B000553034 /* AppDelegate.m */; };
 		6C192E50279523B000553034 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E4F279523B000553034 /* SceneDelegate.m */; };
 		6C192E53279523B000553034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E52279523B000553034 /* ViewController.m */; };
@@ -17,12 +22,36 @@
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
 		6C192E732797B19100553034 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E722797B19100553034 /* UIColor+Extension.m */; };
 		6C192E772797BB7B00553034 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E762797BB7B00553034 /* BaseView.m */; };
-		6C192E7A2797BD5300553034 /* HSSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E792797BD5300553034 /* HSSheetView.m */; };
-		6C192E812797C63100553034 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E802797C63100553034 /* Constant.m */; };
 		6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E852797C86D00553034 /* UIDevice+Extension.m */; };
+		6C192E912797E31200553034 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8C2797E31200553034 /* AppUtil.m */; };
+		6C192E922797E31200553034 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8D2797E31200553034 /* Constant.m */; };
+		6C192E932797E31200553034 /* HSSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8F2797E31200553034 /* HSSheetView.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		44DF038F2796ADCD006EE6AC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		44DF03802796A981006EE6AC /* MediaAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaAudioEngine.m; sourceTree = "<group>"; };
+		44DF03812796A981006EE6AC /* MediaAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngine.h; sourceTree = "<group>"; };
+		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		44DF03872796AB9C006EE6AC /* GameSudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSudManager.h; sourceTree = "<group>"; };
+		44DF03882796AB9C006EE6AC /* GameSudManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameSudManager.m; sourceTree = "<group>"; };
+		44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SudMGP.xcframework; sourceTree = "<group>"; };
+		44DF03972796B2C5006EE6AC /* AppUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
+		44DF039A2796B70B006EE6AC /* GameViewInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewInfoModel.h; sourceTree = "<group>"; };
+		44DF039B2796B70B006EE6AC /* GameViewInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewInfoModel.m; sourceTree = "<group>"; };
 		4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.release.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E48279523B000553034 /* HelloSud-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HelloSud-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,14 +70,18 @@
 		6C192E722797B19100553034 /* UIColor+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
 		6C192E752797BB7B00553034 /* BaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
 		6C192E762797BB7B00553034 /* BaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
-		6C192E782797BD5300553034 /* HSSheetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSSheetView.h; sourceTree = "<group>"; };
-		6C192E792797BD5300553034 /* HSSheetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSheetView.m; sourceTree = "<group>"; };
 		6C192E7F2797C63100553034 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		6C192E802797C63100553034 /* Constant.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
 		6C192E822797C65F00553034 /* CommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonHeader.h; sourceTree = "<group>"; };
-		6C192E832797C6A900553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6C192E842797C86D00553034 /* UIDevice+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extension.h"; sourceTree = "<group>"; };
 		6C192E852797C86D00553034 /* UIDevice+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extension.m"; sourceTree = "<group>"; };
+		6C192E882797E2C700553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		6C192E8A2797E31200553034 /* AppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtil.h; sourceTree = "<group>"; };
+		6C192E8B2797E31200553034 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		6C192E8C2797E31200553034 /* AppUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
+		6C192E8D2797E31200553034 /* Constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
+		6C192E8F2797E31200553034 /* HSSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSheetView.m; sourceTree = "<group>"; };
+		6C192E902797E31200553034 /* HSSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSheetView.h; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,29 +91,100 @@
 			buildActionMask = 2147483647;
 			files = (
 				039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */,
+				44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44DF037E2796A981006EE6AC /* Middle */ = {
+			isa = PBXGroup;
+			children = (
+				44DF03842796A9EF006EE6AC /* Games */,
+				44DF03832796A9AA006EE6AC /* VideoEngine */,
+				44DF037F2796A981006EE6AC /* AudioEngine */,
+			);
+			path = Middle;
+			sourceTree = "<group>";
+		};
+		44DF037F2796A981006EE6AC /* AudioEngine */ = {
+			isa = PBXGroup;
+			children = (
+				44DF03802796A981006EE6AC /* MediaAudioEngine.m */,
+				44DF03812796A981006EE6AC /* MediaAudioEngine.h */,
+			);
+			path = AudioEngine;
+			sourceTree = "<group>";
+		};
+		44DF03832796A9AA006EE6AC /* VideoEngine */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VideoEngine;
+			sourceTree = "<group>";
+		};
+		44DF03842796A9EF006EE6AC /* Games */ = {
+			isa = PBXGroup;
+			children = (
+				44DF03992796B6E3006EE6AC /* Model */,
+				44DF038A2796ADC6006EE6AC /* SudMGPSDK */,
+				44DF03862796AB4C006EE6AC /* GameConfig.h */,
+				44DF03872796AB9C006EE6AC /* GameSudManager.h */,
+				44DF03882796AB9C006EE6AC /* GameSudManager.m */,
+			);
+			path = Games;
+			sourceTree = "<group>";
+		};
+		44DF038A2796ADC6006EE6AC /* SudMGPSDK */ = {
+			isa = PBXGroup;
+			children = (
+				44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */,
+			);
+			path = SudMGPSDK;
+			sourceTree = "<group>";
+		};
+		44DF03902796B22C006EE6AC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6C192E892797E31200553034 /* Utils */,
+				6C192E8E2797E31200553034 /* Views */,
+				6C192E742797BB2000553034 /* Base */,
+				6C192E702797B16E00553034 /* Extension */,
+				6C192E822797C65F00553034 /* CommonHeader.h */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		44DF03992796B6E3006EE6AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				44DF039A2796B70B006EE6AC /* GameViewInfoModel.h */,
+				44DF039B2796B70B006EE6AC /* GameViewInfoModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6C192E3F279523B000553034 = {
 			isa = PBXGroup;
 			children = (
+				44DF03902796B22C006EE6AC /* Common */,
+				44DF037E2796A981006EE6AC /* Middle */,
 				6C192E6F27965A7500553034 /* Home */,
-				6C192E66279523DA00553034 /* Common */,
 				6C192E65279523D000553034 /* Examples */,
-				6C192E64279523C800553034 /* Middle */,
 				6C192E4A279523B000553034 /* HelloSud-iOS */,
 				6C192E49279523B000553034 /* Products */,
 				EC6357AE0D30A512FB9D49C4 /* Pods */,
 				E65466148933C05BB06C9A97 /* Frameworks */,
+				6C192E872797E28600553034 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
 		6C192E49279523B000553034 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				6C192E7F2797C63100553034 /* Constant.h */,
+				6C192E802797C63100553034 /* Constant.m */,
 				6C192E48279523B000553034 /* HelloSud-iOS.app */,
 			);
 			name = Products;
@@ -89,7 +193,7 @@
 		6C192E4A279523B000553034 /* HelloSud-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				6C192E832797C6A900553034 /* PrefixHeader.pch */,
+				6C192E882797E2C700553034 /* PrefixHeader.pch */,
 				6C192E4B279523B000553034 /* AppDelegate.h */,
 				6C192E4C279523B000553034 /* AppDelegate.m */,
 				6C192E4E279523B000553034 /* SceneDelegate.h */,
@@ -105,16 +209,6 @@
 			path = "HelloSud-iOS";
 			sourceTree = "<group>";
 		};
-		6C192E64279523C800553034 /* Middle */ = {
-			isa = PBXGroup;
-			children = (
-				6C192E6E2795244A00553034 /* VideoEngine */,
-				6C192E6D2795243900553034 /* AudioEngine */,
-				6C192E6C2795242400553034 /* Games */,
-			);
-			path = Middle;
-			sourceTree = "<group>";
-		};
 		6C192E65279523D000553034 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,18 +217,6 @@
 				6C192E67279523ED00553034 /* QuickStart */,
 			);
 			path = Examples;
-			sourceTree = "<group>";
-		};
-		6C192E66279523DA00553034 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				6C192E742797BB2000553034 /* Base */,
-				6C192E702797B16E00553034 /* Extension */,
-				6C192E6B2795241700553034 /* Views */,
-				6C192E6A2795240900553034 /* Utils */,
-				6C192E822797C65F00553034 /* CommonHeader.h */,
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		6C192E67279523ED00553034 /* QuickStart */ = {
@@ -156,45 +238,6 @@
 			children = (
 			);
 			path = Video;
-			sourceTree = "<group>";
-		};
-		6C192E6A2795240900553034 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				6C192E7F2797C63100553034 /* Constant.h */,
-				6C192E802797C63100553034 /* Constant.m */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		6C192E6B2795241700553034 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				6C192E782797BD5300553034 /* HSSheetView.h */,
-				6C192E792797BD5300553034 /* HSSheetView.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		6C192E6C2795242400553034 /* Games */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Games;
-			sourceTree = "<group>";
-		};
-		6C192E6D2795243900553034 /* AudioEngine */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AudioEngine;
-			sourceTree = "<group>";
-		};
-		6C192E6E2795244A00553034 /* VideoEngine */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = VideoEngine;
 			sourceTree = "<group>";
 		};
 		6C192E6F27965A7500553034 /* Home */ = {
@@ -248,6 +291,34 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		6C192E872797E28600553034 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				44DF03972796B2C5006EE6AC /* AppUtil.m */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		6C192E892797E31200553034 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6C192E8A2797E31200553034 /* AppUtil.h */,
+				6C192E8B2797E31200553034 /* Constant.h */,
+				6C192E8C2797E31200553034 /* AppUtil.m */,
+				6C192E8D2797E31200553034 /* Constant.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		6C192E8E2797E31200553034 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6C192E8F2797E31200553034 /* HSSheetView.m */,
+				6C192E902797E31200553034 /* HSSheetView.h */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E65466148933C05BB06C9A97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +348,7 @@
 				6C192E45279523B000553034 /* Frameworks */,
 				6C192E46279523B000553034 /* Resources */,
 				1057205B42502B672EE74406 /* [CP] Embed Pods Frameworks */,
+				44DF038F2796ADCD006EE6AC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -380,15 +452,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */,
+				44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */,
 				6C192E53279523B000553034 /* ViewController.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				6C192E732797B19100553034 /* UIColor+Extension.m in Sources */,
+				44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */,
+				6C192E932797E31200553034 /* HSSheetView.m in Sources */,
 				6C192E5E279523B100553034 /* main.m in Sources */,
 				6C192E50279523B000553034 /* SceneDelegate.m in Sources */,
-				6C192E7A2797BD5300553034 /* HSSheetView.m in Sources */,
+				6C192E912797E31200553034 /* AppUtil.m in Sources */,
 				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
 				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
-				6C192E812797C63100553034 /* Constant.m in Sources */,
+				6C192E922797E31200553034 /* Constant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
