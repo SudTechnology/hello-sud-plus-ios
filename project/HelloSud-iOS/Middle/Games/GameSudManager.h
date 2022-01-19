@@ -8,15 +8,31 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+/// Model
+#import "GameViewInfoModel.h"
+#import "GamePublicMsgModel.h"
+#import "GameKeyWordHitModel.h"
+#import "GamePlayerStateModel.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol GameSudManagerDelegate <NSObject>
 
-
 /// 游戏状态变换 - 公屏消息
-/// @param message 消息内容
+/// @param msgModel GamePublicMsgModel
 //@required
-- (void)onGameStateChangePublicMessage:(NSString *)message;
+- (void)onGameStateChangePublicMessage:(GamePublicMsgModel *)msgModel;
+
+/// 游戏状态变换 - 你画我猜关键词获取
+/// @param model GameKeyWordHitModel
+//@required
+- (void)onGameStateChangeDrawKeyWordHit:(GameKeyWordHitModel *)model;
+
+/// 游戏玩家状态变化
+/// @param state 状态类型
+/// @param model GamePlayerStateModel
+//@required
+- (void)onPlayerStateChangeWithModel:(GamePlayerStateModel *)model;
 
 @end
 
@@ -51,7 +67,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 更新code
 /// @param code 新的code
 - (void)updateGameCode:(NSString *)code;
-
 
 @end
 
