@@ -21,14 +21,22 @@ static NSString* APP_COMMON_SELF_CAPTAIN    = @"app_common_self_captain";
 static NSString* APP_COMMON_SELF_KICK       = @"app_common_self_kick";
 /// 结束游戏
 static NSString* APP_COMMON_SELF_END        = @"app_common_self_end";
-/// 房间状态
+/// 房间状态 （depreated 已废弃v1.1.30.xx）
 static NSString* APP_COMMON_SELF_ROOM       = @"app_common_self_room";
-/// 麦位状态
+/// 麦位状态（depreated 已废弃v1.1.30.xx）
 static NSString* APP_COMMON_SELF_SEAT       = @"app_common_self_seat";
 /// 麦克风状态
 static NSString* APP_COMMON_SELF_MICROPHONE = @"app_common_self_microphone";
 /// 文字命中状态
 static NSString* APP_COMMON_SELF_TEXT_HIT   = @"app_common_self_text_hit";
+/// 打开或关闭背景音乐
+static NSString* APP_COMMON_OPEN_BG_MUSIC   = @"app_common_open_bg_music";
+/// 打开或关闭音效
+static NSString* APP_COMMON_OPEN_SOUND   = @"app_common_open_sound";
+/// 打开或关闭游戏中的振动效果
+static NSString* APP_COMMON_OPEN_BRATE   = @"app_common_open_vibrate";
+/// 设置游戏的音量大小
+static NSString* APP_COMMON_SOUND_VOLUME   = @"app_common_game_sound_volume";
 
 #pragma mark - 通用状态-游戏
 /// 公屏消息
@@ -58,6 +66,10 @@ static NSString* MG_COMMON_PLAYER_READY     = @"mg_common_player_ready";
 static NSString* MG_COMMON_PLAYER_CAPTAIN   = @"mg_common_player_captain";
 /// 游戏状态
 static NSString* MG_COMMON_PLAYER_PLAYING   = @"mg_common_player_playing";
+/// 玩家在线状态
+static NSString* MG_COMMON_PLAYER_ONLINE   = @"mg_common_player_online";
+/// 玩家换游戏位状态
+static NSString* MG_COMMON_PLAYER_CHANGE_SEAT   = @"mg_common_player_change_seat";
 
 /// 你画我猜
 /// 选词中
