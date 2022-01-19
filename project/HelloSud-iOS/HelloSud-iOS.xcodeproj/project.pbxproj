@@ -15,6 +15,11 @@
 		6C192E58279523B100553034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E57279523B100553034 /* Assets.xcassets */; };
 		6C192E5B279523B100553034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E59279523B100553034 /* LaunchScreen.storyboard */; };
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
+		6C192E732797B19100553034 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E722797B19100553034 /* UIColor+Extension.m */; };
+		6C192E772797BB7B00553034 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E762797BB7B00553034 /* BaseView.m */; };
+		6C192E7A2797BD5300553034 /* HSSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E792797BD5300553034 /* HSSheetView.m */; };
+		6C192E812797C63100553034 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E802797C63100553034 /* Constant.m */; };
+		6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E852797C86D00553034 /* UIDevice+Extension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,18 @@
 		6C192E5A279523B100553034 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C192E5C279523B100553034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C192E5D279523B100553034 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6C192E712797B19100553034 /* UIColor+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		6C192E722797B19100553034 /* UIColor+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		6C192E752797BB7B00553034 /* BaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
+		6C192E762797BB7B00553034 /* BaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
+		6C192E782797BD5300553034 /* HSSheetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSSheetView.h; sourceTree = "<group>"; };
+		6C192E792797BD5300553034 /* HSSheetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSheetView.m; sourceTree = "<group>"; };
+		6C192E7F2797C63100553034 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		6C192E802797C63100553034 /* Constant.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
+		6C192E822797C65F00553034 /* CommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonHeader.h; sourceTree = "<group>"; };
+		6C192E832797C6A900553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		6C192E842797C86D00553034 /* UIDevice+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extension.h"; sourceTree = "<group>"; };
+		6C192E852797C86D00553034 /* UIDevice+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extension.m"; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +89,7 @@
 		6C192E4A279523B000553034 /* HelloSud-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				6C192E832797C6A900553034 /* PrefixHeader.pch */,
 				6C192E4B279523B000553034 /* AppDelegate.h */,
 				6C192E4C279523B000553034 /* AppDelegate.m */,
 				6C192E4E279523B000553034 /* SceneDelegate.h */,
@@ -110,8 +128,11 @@
 		6C192E66279523DA00553034 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6C192E742797BB2000553034 /* Base */,
+				6C192E702797B16E00553034 /* Extension */,
 				6C192E6B2795241700553034 /* Views */,
 				6C192E6A2795240900553034 /* Utils */,
+				6C192E822797C65F00553034 /* CommonHeader.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -140,6 +161,8 @@
 		6C192E6A2795240900553034 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6C192E7F2797C63100553034 /* Constant.h */,
+				6C192E802797C63100553034 /* Constant.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -147,6 +170,8 @@
 		6C192E6B2795241700553034 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6C192E782797BD5300553034 /* HSSheetView.h */,
+				6C192E792797BD5300553034 /* HSSheetView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,8 +200,52 @@
 		6C192E6F27965A7500553034 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				6C192E7C2797C56400553034 /* Setting */,
+				6C192E7B2797C55D00553034 /* Login */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		6C192E702797B16E00553034 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6C192E712797B19100553034 /* UIColor+Extension.h */,
+				6C192E722797B19100553034 /* UIColor+Extension.m */,
+				6C192E842797C86D00553034 /* UIDevice+Extension.h */,
+				6C192E852797C86D00553034 /* UIDevice+Extension.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		6C192E742797BB2000553034 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				6C192E752797BB7B00553034 /* BaseView.h */,
+				6C192E762797BB7B00553034 /* BaseView.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		6C192E7B2797C55D00553034 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				6C192E7D2797C58C00553034 /* VC */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		6C192E7C2797C56400553034 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		6C192E7D2797C58C00553034 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 		E65466148933C05BB06C9A97 /* Frameworks */ = {
@@ -193,7 +262,6 @@
 				8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */,
 				4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -226,6 +294,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				CLASSPREFIX = HS;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					6C192E47279523B000553034 = {
@@ -313,8 +382,13 @@
 			files = (
 				6C192E53279523B000553034 /* ViewController.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
+				6C192E732797B19100553034 /* UIColor+Extension.m in Sources */,
 				6C192E5E279523B100553034 /* main.m in Sources */,
 				6C192E50279523B000553034 /* SceneDelegate.m in Sources */,
+				6C192E7A2797BD5300553034 /* HSSheetView.m in Sources */,
+				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
+				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
+				6C192E812797C63100553034 /* Constant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +535,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FVM63RW6;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PREFIX_HEADER = "HelloSud-iOS/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "HelloSud-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -490,6 +566,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FVM63RW6;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PREFIX_HEADER = "HelloSud-iOS/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "HelloSud-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
