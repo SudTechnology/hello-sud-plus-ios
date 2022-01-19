@@ -14,21 +14,33 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - Masonry (1.1.0)
+  - MJExtension (3.4.1)
+  - SVProgressHUD (2.2.5)
   - ZegoExpressEngine/Audio (2.15.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
-  - ZegoExpressEngine/Audio
+  - Masonry (~> 1.1.0)
+  - MJExtension
+  - SVProgressHUD (~> 2.2.5)
+  - ZegoExpressEngine/Audio (~> 2.15.0)
 
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - Masonry
+    - MJExtension
+    - SVProgressHUD
     - ZegoExpressEngine
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: 21e0bd5b290239b188bd126c792a35c528fbe5ca
+PODFILE CHECKSUM: aa733b6ed810a13527a4f918b7eb0ecb91616579
 
 COCOAPODS: 1.10.2
