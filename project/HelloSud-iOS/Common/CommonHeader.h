@@ -11,8 +11,10 @@
 #import "BaseView.h"
 /// Extension
 #import "UIColor+Extension.h"
+#import "UIDevice+Extension.h"
 /// Utils
 #import "Constant.h"
+#import "AppUtil.h"
 /// Views
 #import "HSSheetView.h"
 
