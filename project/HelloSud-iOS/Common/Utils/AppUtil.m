@@ -28,4 +28,18 @@
 //    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor RW_colorWithHexString:color] range:NSMakeRange(0, attributedString.length)];
     return attributedString;
 }
+
+/// 当前APP window视图
++ (UIWindow *)currentWindow {
+    UIWindow *win = [UIApplication sharedApplication].keyWindow;
+    if (win.windowLevel != UIWindowLevelNormal) {
+        for (UIWindow *w in [UIApplication sharedApplication].windows) {
+            if (w.windowLevel == UIWindowLevelNormal) {
+                win = w;
+                break;
+            }
+        }
+    }
+    return win;
+}
 @end

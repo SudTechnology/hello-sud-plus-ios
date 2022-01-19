@@ -18,4 +18,9 @@
     }
     return UIEdgeInsetsZero;
 }
+
+/// 是否是iPhone x系列刘海屏设备
++(BOOL)isiPhoneXSeries {
+    return kAppSafeTop > 20;
+}
 @end

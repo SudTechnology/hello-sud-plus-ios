@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 设备安全区
 +(UIEdgeInsets)safeAreaInsets;
+
+/// 是否是iPhone x系列刘海屏设备
++(BOOL)isiPhoneXSeries;
 @end
 
 NS_ASSUME_NONNULL_END
