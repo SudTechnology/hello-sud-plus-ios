@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param color color
 + (NSMutableAttributedString *)getAttributedStringWithString:(NSString *)string color:(NSString*)color;
 
+/// 当前APP window视图
++ (UIWindow *)currentWindow;
 @end
 
 NS_ASSUME_NONNULL_END
