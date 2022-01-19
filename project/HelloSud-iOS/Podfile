@@ -6,8 +6,11 @@ inhibit_all_warnings!
 target 'HelloSud-iOS' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
+  
+  pod 'Masonry', '~> 1.1.0'
+  pod 'MJExtension', '~> 3.4.1'
   pod 'AFNetworking', '~> 4.0.1'
+  pod 'SVProgressHUD', '~> 2.2.5'
   pod 'ZegoExpressEngine/Audio', '~> 2.15.0'
 
 end
