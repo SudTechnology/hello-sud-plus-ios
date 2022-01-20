@@ -6,6 +6,7 @@
 //
 
 #import "HSGameListViewController.h"
+#import "HSHotGameViewController.h"
 #import "HSGameListNaviView.h"
 #import "HSGameListHeaderView.h"
 #import "HSGameListTableViewCell.h"
@@ -54,7 +55,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    HSHotGameViewController *vc = [[HSHotGameViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:true];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
