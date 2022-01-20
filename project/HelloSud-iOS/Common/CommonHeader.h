@@ -10,6 +10,8 @@
 /// Base
 #import "BaseView.h"
 #import "BaseViewController.h"
+#import "BaseNavigationViewController.h"
+
 /// Extension
 #import "UIColor+Extension.h"
 #import "UIDevice+Extension.h"
