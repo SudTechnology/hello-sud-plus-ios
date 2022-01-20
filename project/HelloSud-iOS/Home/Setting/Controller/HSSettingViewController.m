@@ -1,21 +1,21 @@
 //
-//  HSGameListViewController.m
+//  HSSettingViewController.m
 //  HelloSud-iOS
 //
-//  Created by Mary on 2022/1/20.
+//  Created by kaniel on 2022/1/20.
 //
 
-#import "HSGameListViewController.h"
+#import "HSSettingViewController.h"
 
-@interface HSGameListViewController ()
+@interface HSSettingViewController ()
 
 @end
 
-@implementation HSGameListViewController
+@implementation HSSettingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"主页";
+    self.title = @"设置";
     // Do any additional setup after loading the view.
 }
 
