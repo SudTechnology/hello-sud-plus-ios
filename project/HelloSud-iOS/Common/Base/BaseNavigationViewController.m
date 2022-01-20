@@ -53,11 +53,18 @@
 #pragma mark UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-//    if (viewController != self.viewControllers[0] && base)
+    if (viewController != self.viewControllers[0] && [viewController isKindOfClass:[BaseViewController class]]) {
+        self.interactivePopGestureRecognizer.delegate = (BaseViewController *)viewController;
+    } else {
+        self.interactivePopGestureRecognizer.delegate = self;
+    }
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    
+    if (self.viewControllers.count > 0) {
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    [super pushViewController:viewController animated:animated];
 }
 
 @end
