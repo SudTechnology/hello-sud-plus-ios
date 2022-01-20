@@ -18,8 +18,6 @@
 #import "AppUtil.h"
 #import "GameConfig.h"
 
-/// Model
-#import "GameViewInfoModel.h"
 
 @interface GameSudManager () <ISudFSMMG>
 @property (nonatomic, strong) id<ISudFSTAPP> fsmAPP2MG;
@@ -40,16 +38,6 @@
 @end
 
 @implementation GameSudManager
-
-#pragma mark =======单例=======
-//static GameSudManager *_sudManager;
-//+ (GameSudManager *)shared {
-//    static dispatch_once_t oneToken;
-//    dispatch_once(&oneToken, ^{
-//        _sudManager = [[GameSudManager alloc] init];
-//    });
-//    return _sudManager;
-//}
 
 #pragma mark =======ISudFSMMG Delegate=======
 /**
@@ -145,34 +133,39 @@
     
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:公屏消息");
+        GamePublicMsgModel *m = [GamePublicMsgModel mj_objectWithKeyValues: dataJson];
         if ([self.delegate respondsToSelector:@selector(onGameStateChangePublicMessage:)]) {
-            [self.delegate onGameStateChangePublicMessage:dataJson];
+            [self.delegate onGameStateChangePublicMessage:m];
         }
     } else if ([state isEqualToString:MG_COMMON_KEY_WORD_TO_HIT]) {
-//        NSDictionary *dic = [AppUtil turnStringToDictionary:dataJson];
-//        NSString *word = [dic objectForKey:@"word"];
-//        NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:你画我猜关键词获取:%@",word);
-//        /// 记录你画我猜关键字
-//        self.drawKeyWord = word;
-//        if (word == (id) [NSNull null] || [word isEqualToString:@""]) {
-//            /// 隐藏命中按钮
-//            self.hitButton.alpha = 0;
-//            /// 关闭公屏关键词hit状态
-//            self.keyWordHiting = NO;
-//        } else {
-//            /// 添加命中按钮
-//            self.hitButton.alpha = 1;
-//            /// 开启公屏关键词hit状态
-//            self.keyWordHiting = YES;
-//        }
+        NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:你画我猜关键词获取");
+        GameKeyWordHitModel *m = [GameKeyWordHitModel mj_objectWithKeyValues: dataJson];
+        if ([self.delegate respondsToSelector:@selector(onGameStateChangeDrawKeyWordHit:)]) {
+            [self.delegate onGameStateChangeDrawKeyWordHit:m];
+        }
+        self.drawKeyWord = m.word;
     }else {
         /// 其他状态
-        NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@",MG_COMMON_PUBLIC_MESSAGE);
+        /// TODO
+        NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
     }
 }
 
+/**
+ * 游戏玩家状态变化
+ * @param handle 回调句柄
+ * @param userId 用户id
+ * @param state  玩家状态
+ * @param dataJson 回调JSON
+ */
 - (void)onPlayerStateChange:(nullable id<ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
     
+    GamePlayerStateModel *m = [GamePlayerStateModel mj_objectWithKeyValues: dataJson];
+    m.userId = userId;
+    m.state = state;
+    if ([self.delegate respondsToSelector:@selector(onPlayerStateChangeWithModel:)]) {
+        [self.delegate onPlayerStateChangeWithModel:m];
+    }
 }
 
 #pragma mark - ======= Public =======
@@ -228,49 +221,5 @@
     [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@出错，错误码:%@", msg, retCode]];
 }
 
-
-
-
-
-
-
-
-
-
-#pragma mark =======处理公屏消息=======
-/// 处理公屏消息
-/// @param json 公屏消息JSON
-- (void)handlePublicMessage:(NSString *)json {
-    if (!json) {
-        return;
-    }
-    NSDictionary * dic = [AppUtil turnStringToDictionary:json];
-    NSLog(@"%@",dic);
-    if (!dic) {
-        NSLog(@"ISudFSMMG:handlePublicMessage error dic:%@",dic);
-    }
-    NSMutableAttributedString * result = [[NSMutableAttributedString alloc] init];
-    NSArray * array = [dic objectForKey:@"msg"];
-    if (![array respondsToSelector:@selector(objectAtIndex:)]) {
-        /// 格式不符合
-        return;
-    }
-    for (int i = 0; i < array.count; i ++) {
-        NSDictionary * msgDic = [array objectAtIndex:i];
-        if ([[msgDic objectForKey:@"phrase"] intValue] == 2) {
-            NSDictionary * userDic = [msgDic objectForKey:@"user"];
-            NSString * userName = [userDic objectForKey:@"name"];
-            NSString * color = [userDic objectForKey:@"color"];
-            [result appendAttributedString:[AppUtil getAttributedStringWithString:userName color:color]];
-        }else if ([[msgDic objectForKey:@"phrase"] intValue] == 1) {
-            NSDictionary * textDic = [msgDic objectForKey:@"text"];
-            NSString * textString = [textDic objectForKey:self.language];
-            NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc]initWithString:textString];
-            [result appendAttributedString:attributedString];
-        }
-    }
-    /// 插入公屏消息
-//    [self.publicMessageView insertCellWithAttributeString:result];
-}
 @end
 
