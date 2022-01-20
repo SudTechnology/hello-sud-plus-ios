@@ -85,7 +85,7 @@
 		573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C076E51279940A400650209 /* HSMainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSMainTabBarController.h; sourceTree = "<group>"; };
 		6C076E52279940A400650209 /* HSMainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSMainTabBarController.m; sourceTree = "<group>"; };
-		6C192E48279523B000553034 /* HelloSud-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HelloSud-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6C192E4E279523B000553034 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -312,7 +312,7 @@
 			children = (
 				6C192E7F2797C63100553034 /* Constant.h */,
 				6C192E802797C63100553034 /* Constant.m */,
-				6C192E48279523B000553034 /* HelloSud-iOS.app */,
+				6C192E48279523B000553034 /* HelloSud.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -427,7 +427,7 @@
 			);
 			name = "HelloSud-iOS";
 			productName = HelloSud;
-			productReference = 6C192E48279523B000553034 /* HelloSud-iOS.app */;
+			productReference = 6C192E48279523B000553034 /* HelloSud.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -700,6 +700,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -708,10 +709,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = DivToss.HelloSud;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
+				PRODUCT_NAME = HelloSud;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -731,6 +732,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -739,10 +741,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = DivToss.HelloSud;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
+				PRODUCT_NAME = HelloSud;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
