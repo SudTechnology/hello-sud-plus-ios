@@ -20,11 +20,10 @@
     self.delegate = self;
 }
 
-
 /// 配置导航栏
 - (void)configNavbar {
     UINavigationBar *navBar = [UINavigationBar appearance];
-    NSDictionary * dicTitle = @{NSForegroundColorAttributeName: UIColor.blackColor,NSFontAttributeName: [UIFont systemFontOfSize:17]};
+    NSDictionary * dicTitle = @{NSForegroundColorAttributeName: UIColor.blackColor,NSFontAttributeName: [UIFont systemFontOfSize:17 weight:UIFontWeightMedium]};
     navBar.titleTextAttributes = dicTitle;
     
     NSDictionary *dicBarBtn = @{NSForegroundColorAttributeName: UIColor.blackColor, NSFontAttributeName: [UIFont systemFontOfSize:17]};
