@@ -10,6 +10,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseViewController : UIViewController<UIGestureRecognizerDelegate>
+
+/// 是否隐藏导航栏,子类覆盖返回是否需要隐藏导航栏，默认不隐藏
+- (BOOL)hsIsHidenNavigationBar;
 /// 增加子view
 - (void)hsAddViews;
 /// 布局视图
