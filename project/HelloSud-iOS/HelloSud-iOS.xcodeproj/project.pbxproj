@@ -26,6 +26,9 @@
 		6C076E572799450900650209 /* HSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E562799450900650209 /* HSSettingViewController.m */; };
 		6C076E592799491700650209 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E582799491700650209 /* BaseNavigationViewController.m */; };
 		6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E5B27995D3400650209 /* BaseTableViewCell.m */; };
+		6C076E6127995F4C00650209 /* HSSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E6027995F4C00650209 /* HSSettingCell.m */; };
+		6C076E642799605600650209 /* HSSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E632799605600650209 /* HSSettingModel.m */; };
+		6C076E672799621300650209 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E662799621300650209 /* BaseModel.m */; };
 		6C192E4D279523B000553034 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E4C279523B000553034 /* AppDelegate.m */; };
 		6C192E53279523B000553034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E52279523B000553034 /* ViewController.m */; };
 		6C192E56279523B000553034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E54279523B000553034 /* Main.storyboard */; };
@@ -91,6 +94,12 @@
 		6C076E582799491700650209 /* BaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationViewController.m; sourceTree = "<group>"; };
 		6C076E5A27995D3400650209 /* BaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
 		6C076E5B27995D3400650209 /* BaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
+		6C076E5F27995F4C00650209 /* HSSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSSettingCell.h; sourceTree = "<group>"; };
+		6C076E6027995F4C00650209 /* HSSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSettingCell.m; sourceTree = "<group>"; };
+		6C076E622799605600650209 /* HSSettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSSettingModel.h; sourceTree = "<group>"; };
+		6C076E632799605600650209 /* HSSettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSettingModel.m; sourceTree = "<group>"; };
+		6C076E652799621300650209 /* BaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		6C076E662799621300650209 /* BaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -157,6 +166,8 @@
 		445EAA702798FFE4000DCC72 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				6C076E5E27995F3000650209 /* Model */,
+				6C076E5D27995F1E00650209 /* View */,
 				6C076E54279944ED00650209 /* Controller */,
 			);
 			path = Setting;
@@ -306,6 +317,24 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		6C076E5D27995F1E00650209 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C076E5F27995F4C00650209 /* HSSettingCell.h */,
+				6C076E6027995F4C00650209 /* HSSettingCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C076E5E27995F3000650209 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C076E622799605600650209 /* HSSettingModel.h */,
+				6C076E632799605600650209 /* HSSettingModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6C192E3F279523B000553034 = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +400,8 @@
 				445EAA7927990C71000DCC72 /* BaseViewController.m */,
 				6C89D9C9279902A9001D52F9 /* BaseNavigationViewController.h */,
 				6C076E582799491700650209 /* BaseNavigationViewController.m */,
+				6C076E652799621300650209 /* BaseModel.h */,
+				6C076E662799621300650209 /* BaseModel.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -544,7 +575,9 @@
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				6C192E732797B19100553034 /* UIColor+Extension.m in Sources */,
 				445EAA8027994160000DCC72 /* HSGameListViewController.m in Sources */,
+				6C076E642799605600650209 /* HSSettingModel.m in Sources */,
 				44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */,
+				6C076E672799621300650209 /* BaseModel.m in Sources */,
 				445EAA7D279915E8000DCC72 /* HSGenderView.m in Sources */,
 				44DF039F2797B62B006EE6AC /* GamePublicMsgModel.m in Sources */,
 				6C192E5E279523B100553034 /* main.m in Sources */,
@@ -553,6 +586,7 @@
 				445EAA86279941AD000DCC72 /* HSGameListNaviView.m in Sources */,
 				6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */,
 				44DF03AE2797F124006EE6AC /* FsmAppToMgManager.m in Sources */,
+				6C076E6127995F4C00650209 /* HSSettingCell.m in Sources */,
 				6C192E932797E31200553034 /* HSSheetView.m in Sources */,
 				6C192E912797E31200553034 /* AppUtil.m in Sources */,
 				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
