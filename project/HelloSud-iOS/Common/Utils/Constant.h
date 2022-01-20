@@ -22,4 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 底部tabbar高度
 #define kTabBarHeight (kBottomHeight + 49)
 
+/// weakself宏
+#define WeakSelf __weak typeof(self) weakSelf = self;
+
 NS_ASSUME_NONNULL_END
