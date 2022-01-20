@@ -11,6 +11,8 @@
 		445EAA7727990035000DCC72 /* HSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7627990035000DCC72 /* HSLoginViewController.m */; };
 		445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7927990C71000DCC72 /* BaseViewController.m */; };
 		445EAA7D279915E8000DCC72 /* HSGenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7C279915E8000DCC72 /* HSGenderView.m */; };
+		445EAA8027994160000DCC72 /* HSGameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7F27994160000DCC72 /* HSGameListViewController.m */; };
+		445EAA86279941AD000DCC72 /* HSGameListNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA85279941AD000DCC72 /* HSGameListNaviView.m */; };
 		44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03802796A981006EE6AC /* MediaAudioEngine.m */; };
 		44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03882796AB9C006EE6AC /* GameSudManager.m */; };
 		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
@@ -58,6 +60,10 @@
 		445EAA7927990C71000DCC72 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		445EAA7B279915E8000DCC72 /* HSGenderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGenderView.h; sourceTree = "<group>"; };
 		445EAA7C279915E8000DCC72 /* HSGenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGenderView.m; sourceTree = "<group>"; };
+		445EAA7E27994160000DCC72 /* HSGameListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameListViewController.h; sourceTree = "<group>"; };
+		445EAA7F27994160000DCC72 /* HSGameListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameListViewController.m; sourceTree = "<group>"; };
+		445EAA84279941AD000DCC72 /* HSGameListNaviView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameListNaviView.h; sourceTree = "<group>"; };
+		445EAA85279941AD000DCC72 /* HSGameListNaviView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameListNaviView.m; sourceTree = "<group>"; };
 		44DF03802796A981006EE6AC /* MediaAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaAudioEngine.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* MediaAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngine.h; sourceTree = "<group>"; };
 		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
@@ -138,6 +144,9 @@
 		445EAA6F2798FFE4000DCC72 /* GameList */ = {
 			isa = PBXGroup;
 			children = (
+				445EAA8127994176000DCC72 /* Model */,
+				445EAA822799417B000DCC72 /* View */,
+				445EAA8327994181000DCC72 /* Controller */,
 			);
 			path = GameList;
 			sourceTree = "<group>";
@@ -182,6 +191,31 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		445EAA8127994176000DCC72 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		445EAA822799417B000DCC72 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				445EAA84279941AD000DCC72 /* HSGameListNaviView.h */,
+				445EAA85279941AD000DCC72 /* HSGameListNaviView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		445EAA8327994181000DCC72 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				445EAA7E27994160000DCC72 /* HSGameListViewController.h */,
+				445EAA7F27994160000DCC72 /* HSGameListViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		44DF037E2796A981006EE6AC /* Middle */ = {
@@ -496,6 +530,7 @@
 				6C192E53279523B000553034 /* ViewController.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				6C192E732797B19100553034 /* UIColor+Extension.m in Sources */,
+				445EAA8027994160000DCC72 /* HSGameListViewController.m in Sources */,
 				44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */,
 				445EAA7D279915E8000DCC72 /* HSGenderView.m in Sources */,
 				44DF039F2797B62B006EE6AC /* GamePublicMsgModel.m in Sources */,
@@ -504,6 +539,7 @@
 				6C89D9CB279902A9001D52F9 /* BaseNavigationViewController.m in Sources */,
 				44DF03A22797E467006EE6AC /* GameKeyWordHitModel.m in Sources */,
 				445EAA7727990035000DCC72 /* HSLoginViewController.m in Sources */,
+				445EAA86279941AD000DCC72 /* HSGameListNaviView.m in Sources */,
 				44DF03AE2797F124006EE6AC /* FsmAppToMgManager.m in Sources */,
 				6C192E932797E31200553034 /* HSSheetView.m in Sources */,
 				6C192E912797E31200553034 /* AppUtil.m in Sources */,
