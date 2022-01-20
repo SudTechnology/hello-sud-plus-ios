@@ -8,6 +8,7 @@
 #import "HSSettingViewController.h"
 #import "HSSettingCell.h"
 #import "HSSettingModel.h"
+#import "HSSetingHeadView.h"
 
 @interface HSSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong)UITableView *tableView;
@@ -55,6 +56,7 @@
 
 - (void)hsAddViews {
     [super hsAddViews];
+    self.view.backgroundColor = HEX_COLOR(@"#F5F6FB");
     [self.view addSubview:self.tableView];
     
 }
@@ -62,7 +64,7 @@
 - (void)hsLayoutViews {
     [super hsLayoutViews];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        make.edges.mas_equalTo(UIEdgeInsetsMake(20, 16, 0, 16));
     }];
 }
 
@@ -75,6 +77,9 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = HEX_COLOR(@"#F5F6FB");
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        HSSetingHeadView *header = HSSetingHeadView.new;
+        header.frame = CGRectMake(0, 0, kScreenWidth, 104);
+        _tableView.tableHeaderView = header;
     }
     return _tableView;
 }
@@ -82,12 +87,6 @@
 #pragma mark UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSSettingCell" forIndexPath:indexPath];
-    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
-    if (model.isMore) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
     return cell;
 }
 
@@ -99,6 +98,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
+    if (model.isMore) {
+        HSWebViewController *web = HSWebViewController.new;
+        web.url = model.pageURL;
+        [self.navigationController pushViewController:web animated:YES];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,6 +130,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 12;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return UIView.new;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return UIView.new;
 }
 
 @end
