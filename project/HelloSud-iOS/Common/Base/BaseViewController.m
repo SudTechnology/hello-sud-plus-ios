@@ -8,7 +8,8 @@
 #import "BaseViewController.h"
 
 @interface BaseViewController ()
-
+/// 是否隐藏导航栏
+@property(nonatomic, assign)BOOL hiddenNavigationBar;
 @end
 
 @implementation BaseViewController
@@ -20,6 +21,22 @@
     [self hsConfigEvents];
     [self hsConfigUI];
     [self hsUpdateUI];
+    self.hiddenNavigationBar = [self hsIsHidenNavigationBar];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.hiddenNavigationBar = [self hsIsHidenNavigationBar];
+}
+
+- (void)setHiddenNavigationBar:(BOOL)hiddenNavigationBar {
+    _hiddenNavigationBar = hiddenNavigationBar;
+    [self.navigationController setNavigationBarHidden:hiddenNavigationBar animated:YES];
+}
+
+/// 是否隐藏导航栏,子类覆盖返回是否需要隐藏导航栏，默认不隐藏
+- (BOOL)hsIsHidenNavigationBar {
+    return NO;
 }
 
 /// 增加子view
