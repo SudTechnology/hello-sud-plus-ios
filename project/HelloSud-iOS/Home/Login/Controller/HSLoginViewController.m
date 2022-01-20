@@ -11,10 +11,12 @@
 @interface HSLoginViewController ()
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIView *fieldView;
 @property (nonatomic, strong) UITextField *nameTextField;
 @property (nonatomic, strong) HSGenderView *maleView;
 @property (nonatomic, strong) HSGenderView *femaleView;
 @property (nonatomic, strong) UIButton *loginBtn;
+
 @end
 
 @implementation HSLoginViewController
@@ -28,8 +30,28 @@
 - (void)hsAddViews {
     [self.view addSubview:self.iconImageView];
     [self.view addSubview:self.titleLabel];
-    [self.view addSubview:self.nameTextField];
+    [self.view addSubview:self.fieldView];
+    [self.fieldView addSubview:self.nameTextField];
+    [self.view addSubview:self.maleView];
+    [self.view addSubview:self.femaleView];
     [self.view addSubview:self.loginBtn];
+}
+
+- (void)hsConfigEvents {
+    WeakSelf
+    self.maleView.selectBlock = ^{
+        weakSelf.maleView.isSelect = true;
+        weakSelf.femaleView.isSelect = false;
+    };
+    self.femaleView.selectBlock = ^{
+        weakSelf.maleView.isSelect = false;
+        weakSelf.femaleView.isSelect = true;
+    };
+}
+
+/// 立即体验点击事件
+- (void)loginNodeEvent {
+    
 }
 
 - (void)hsLayoutViews {
@@ -43,29 +65,33 @@
         make.top.mas_equalTo(self.iconImageView.mas_bottom).offset(32);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
-    [self.nameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.fieldView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(30);
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(32);
         make.right.mas_equalTo(-30);
         make.height.mas_equalTo(48);
     }];
-//    [self.maleView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(30);
-//        make.top.mas_equalTo(self.nameTextField.mas_bottom).offset(20);
-//        make.height.mas_equalTo(48);
-//    }];
-//    [self.femaleView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self.maleView.mas_right).offset(15);
-//        make.right.mas_equalTo(-30);
-//        make.top.mas_equalTo(self.nameTextField.mas_bottom).offset(20);
-//        make.height.mas_equalTo(48);
-//    }];
-//    [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(30);
-//        make.right.mas_equalTo(-30);
-//        make.top.mas_equalTo(self.maleView.mas_bottom).offset(146);
-//        make.height.mas_equalTo(44);
-//    }];
+    [self.nameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 16, 0, 16));
+    }];
+    [self.maleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(30);
+        make.top.mas_equalTo(self.nameTextField.mas_bottom).offset(20);
+        make.height.mas_equalTo(48);
+    }];
+    [self.femaleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.maleView.mas_right).offset(15);
+        make.right.mas_equalTo(-30);
+        make.top.mas_equalTo(self.nameTextField.mas_bottom).offset(20);
+        make.width.mas_equalTo(self.maleView.mas_width);
+        make.height.mas_equalTo(48);
+    }];
+    [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(30);
+        make.right.mas_equalTo(-30);
+        make.top.mas_equalTo(self.maleView.mas_bottom).offset(146);
+        make.height.mas_equalTo(44);
+    }];
 }
 
 @end
@@ -85,10 +111,21 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"欢迎体验\nHelloSud";
+        _titleLabel.numberOfLines = 0;
         _titleLabel.textColor = [UIColor colorWithHexString:@"#13141A" alpha:1];
         _titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
     }
     return _titleLabel;
+}
+
+- (UIView *)fieldView {
+    if (!_fieldView) {
+        _fieldView = [[UIView alloc] init];
+        _fieldView.layer.borderWidth = 1;
+        _fieldView.layer.borderColor = UIColor.blackColor.CGColor;
+        _fieldView.layer.masksToBounds = true;
+    }
+    return _fieldView;
 }
 
 - (UITextField *)nameTextField {
@@ -97,10 +134,6 @@
         _nameTextField.placeholder = @"请输入你的昵称";
         _nameTextField.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         _nameTextField.textColor = UIColor.blackColor;
-        _nameTextField.layer.borderColor = UIColor.blackColor.CGColor;
-        _nameTextField.layer.borderWidth = 1;
-        _nameTextField.layer.borderColor = UIColor.blackColor.CGColor;
-        _nameTextField.layer.masksToBounds = true;
     }
     return _nameTextField;
 }
@@ -131,7 +164,8 @@
         [_loginBtn setTitle:@"立即体验" forState:normal];
         _loginBtn.backgroundColor = UIColor.blackColor;
         _loginBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        [_loginBtn setTitleColor:UIColor.blackColor forState:normal];
+        [_loginBtn setTitleColor:UIColor.whiteColor forState:normal];
+        [_loginBtn addTarget:self action:@selector(loginNodeEvent) forControlEvents:UIControlEventTouchUpInside];
     }
     return _loginBtn;
 }

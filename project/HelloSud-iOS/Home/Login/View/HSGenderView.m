@@ -20,6 +20,7 @@
     self.layer.borderWidth = 1;
     self.layer.borderColor = UIColor.blackColor.CGColor;
     self.layer.masksToBounds = true;
+    [self setUserInteractionEnabled:true];
 }
 
 - (void)hsAddViews {
@@ -31,7 +32,7 @@
 
 - (void)hsConfigEvents {
     UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectNodeEvent:)];
-    [self.selectNode addGestureRecognizer:tapGesture];
+    [self addGestureRecognizer:tapGesture];
 }
 
 - (void)selectNodeEvent:(UITapGestureRecognizer *)gesture {
@@ -41,24 +42,24 @@
 }
 
 - (void)hsLayoutViews {
-//    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.mas_equalTo(self.mas_centerX).offset(-2);
-//        make.centerY.equalTo(self);
-//        make.size.mas_equalTo(CGSizeMake(24, 24));
-//    }];
-//    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self.iconImageView.mas_right).offset(2);
-//        make.centerY.equalTo(self);
-//        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
-//    }];
-//    [self.selectNode mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.right.equalTo(self);
-//        make.size.mas_equalTo(CGSizeMake(20, 20));
-//    }];
-//    [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.center.equalTo(self.selectNode);
-//        make.size.mas_equalTo(CGSizeMake(16, 16));
-//    }];
+    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.mas_centerX).offset(-2);
+        make.centerY.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(24, 24));
+    }];
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.iconImageView.mas_right).offset(2);
+        make.centerY.equalTo(self);
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+    }];
+    [self.selectNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(20, 20));
+    }];
+    [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.selectNode);
+        make.size.mas_equalTo(CGSizeMake(16, 16));
+    }];
 }
 
 
