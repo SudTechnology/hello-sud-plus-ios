@@ -31,6 +31,11 @@
     return self;
 }
 
+- (void)setModel:(BaseModel *)model {
+    _model = model;
+    [self hsUpdateUI];
+}
+
 /// 增加子view
 - (void)hsAddViews {
     

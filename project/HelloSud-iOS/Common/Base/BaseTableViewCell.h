@@ -6,10 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BaseModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseTableViewCell : UITableViewCell
+@property(nonatomic, strong)BaseModel *model;
 
 /// 增加子view
 - (void)hsAddViews;
