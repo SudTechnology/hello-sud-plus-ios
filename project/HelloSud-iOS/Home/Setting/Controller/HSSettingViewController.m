@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"设置";
+    self.navigationItem.leftBarButtonItem = nil;
     // Do any additional setup after loading the view.
     [self configData];
 }
