@@ -8,6 +8,7 @@
 #import "HSGameListViewController.h"
 #import "HSGameListNaviView.h"
 #import "HSGameListHeaderView.h"
+#import "HSGameListTableViewCell.h"
 
 @interface HSGameListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) HSGameListNaviView *naviView;
@@ -47,11 +48,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cellID"];
-    }
-//    cell.textLabel.text = self.dataList[indexPath.row];
+    HSGameListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSGameListTableViewCell"];
+    
     return cell;
 }
 
@@ -81,7 +79,6 @@
     return self.dataList.count == 0 ? 0 : 52;
 }
 
-
 #pragma mark - get
 - (HSGameListNaviView *)naviView {
     if (!_naviView) {
@@ -92,11 +89,13 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.rowHeight = 90;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellID"];
+        [_tableView registerClass:[HSGameListTableViewCell class] forCellReuseIdentifier:@"HSGameListTableViewCell"];
         _tableView.tableHeaderView = [[HSGameListHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 540)];
     }
     return _tableView;

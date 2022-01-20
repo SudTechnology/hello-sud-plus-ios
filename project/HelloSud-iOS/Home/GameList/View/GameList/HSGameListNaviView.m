@@ -10,7 +10,7 @@
 @interface HSGameListNaviView ()
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *searchView;
-@property (nonatomic, strong) UILabel *searchLabel;
+@property (nonatomic, strong) UITextField *searchTextField;
 @end
 
 @implementation HSGameListNaviView
@@ -22,7 +22,7 @@
 - (void)hsAddViews {
     [self addSubview:self.titleLabel];
     [self addSubview:self.searchView];
-    [self.searchView addSubview:self.searchLabel];
+    [self.searchView addSubview:self.searchTextField];
 }
 
 - (void)hsLayoutViews {
@@ -36,10 +36,10 @@
         make.bottom.mas_equalTo(-6);
         make.size.mas_equalTo(CGSizeMake(120, 32));
     }];
-    [self.searchLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.searchTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(8);
-        make.centerY.mas_equalTo(self.searchView);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.right.mas_equalTo(-8);
+        make.top.bottom.mas_equalTo(self.searchView);
     }];
 }
 
@@ -63,14 +63,14 @@
     return  _searchView;
 }
 
-- (UILabel *)searchLabel {
-    if (!_searchLabel) {
-        _searchLabel = [[UILabel alloc] init];
-        _searchLabel.text = @"房间ID";
-        _searchLabel.textColor = [UIColor colorWithHexString:@"#AAAAAA" alpha:1];
-        _searchLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+- (UITextField *)searchTextField {
+    if (!_searchTextField) {
+        _searchTextField = [[UITextField alloc] init];
+        _searchTextField.placeholder = @"房间ID";
+        _searchTextField.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+        _searchTextField.textColor = UIColor.blackColor;
     }
-    return _searchLabel;
+    return _searchTextField;
 }
 
 @end
