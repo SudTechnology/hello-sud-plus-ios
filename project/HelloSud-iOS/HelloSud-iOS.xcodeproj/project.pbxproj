@@ -13,6 +13,10 @@
 		445EAA7D279915E8000DCC72 /* HSGenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7C279915E8000DCC72 /* HSGenderView.m */; };
 		445EAA8027994160000DCC72 /* HSGameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7F27994160000DCC72 /* HSGameListViewController.m */; };
 		445EAA86279941AD000DCC72 /* HSGameListNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA85279941AD000DCC72 /* HSGameListNaviView.m */; };
+		445EAA89279948D4000DCC72 /* HSRoomTypeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA88279948D4000DCC72 /* HSRoomTypeHeaderView.m */; };
+		445EAA8D27995D5F000DCC72 /* NSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA8C27995D5F000DCC72 /* NSArray+Masonry.m */; };
+		445EAA902799610E000DCC72 /* HSHotGamesHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA8F2799610E000DCC72 /* HSHotGamesHeaderView.m */; };
+		445EAA9327996828000DCC72 /* HSGameListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA9227996828000DCC72 /* HSGameListHeaderView.m */; };
 		44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03802796A981006EE6AC /* MediaAudioEngine.m */; };
 		44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03882796AB9C006EE6AC /* GameSudManager.m */; };
 		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
@@ -63,6 +67,14 @@
 		445EAA7F27994160000DCC72 /* HSGameListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameListViewController.m; sourceTree = "<group>"; };
 		445EAA84279941AD000DCC72 /* HSGameListNaviView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameListNaviView.h; sourceTree = "<group>"; };
 		445EAA85279941AD000DCC72 /* HSGameListNaviView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameListNaviView.m; sourceTree = "<group>"; };
+		445EAA87279948D4000DCC72 /* HSRoomTypeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomTypeHeaderView.h; sourceTree = "<group>"; };
+		445EAA88279948D4000DCC72 /* HSRoomTypeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomTypeHeaderView.m; sourceTree = "<group>"; };
+		445EAA8B27995D5F000DCC72 /* NSArray+Masonry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Masonry.h"; sourceTree = "<group>"; };
+		445EAA8C27995D5F000DCC72 /* NSArray+Masonry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Masonry.m"; sourceTree = "<group>"; };
+		445EAA8E2799610E000DCC72 /* HSHotGamesHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSHotGamesHeaderView.h; sourceTree = "<group>"; };
+		445EAA8F2799610E000DCC72 /* HSHotGamesHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSHotGamesHeaderView.m; sourceTree = "<group>"; };
+		445EAA9127996828000DCC72 /* HSGameListHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameListHeaderView.h; sourceTree = "<group>"; };
+		445EAA9227996828000DCC72 /* HSGameListHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameListHeaderView.m; sourceTree = "<group>"; };
 		44DF03802796A981006EE6AC /* MediaAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaAudioEngine.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* MediaAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngine.h; sourceTree = "<group>"; };
 		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
@@ -158,6 +170,7 @@
 		445EAA712798FFE4000DCC72 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				445EAA8A27995C59000DCC72 /* Manager */,
 				445EAA742798FFF8000DCC72 /* Model */,
 				445EAA732798FFF5000DCC72 /* View */,
 				445EAA722798FFF2000DCC72 /* Controller */,
@@ -202,6 +215,12 @@
 			children = (
 				445EAA84279941AD000DCC72 /* HSGameListNaviView.h */,
 				445EAA85279941AD000DCC72 /* HSGameListNaviView.m */,
+				445EAA9127996828000DCC72 /* HSGameListHeaderView.h */,
+				445EAA9227996828000DCC72 /* HSGameListHeaderView.m */,
+				445EAA87279948D4000DCC72 /* HSRoomTypeHeaderView.h */,
+				445EAA88279948D4000DCC72 /* HSRoomTypeHeaderView.m */,
+				445EAA8E2799610E000DCC72 /* HSHotGamesHeaderView.h */,
+				445EAA8F2799610E000DCC72 /* HSHotGamesHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -213,6 +232,13 @@
 				445EAA7F27994160000DCC72 /* HSGameListViewController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		445EAA8A27995C59000DCC72 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		44DF037E2796A981006EE6AC /* Middle */ = {
@@ -340,6 +366,8 @@
 				6C192E722797B19100553034 /* UIColor+Extension.m */,
 				6C192E842797C86D00553034 /* UIDevice+Extension.h */,
 				6C192E852797C86D00553034 /* UIDevice+Extension.m */,
+				445EAA8B27995D5F000DCC72 /* NSArray+Masonry.h */,
+				445EAA8C27995D5F000DCC72 /* NSArray+Masonry.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -519,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */,
+				445EAA8D27995D5F000DCC72 /* NSArray+Masonry.m in Sources */,
 				44DF03A52797E6FC006EE6AC /* GamePlayerStateModel.m in Sources */,
 				44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */,
 				44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */,
@@ -531,6 +560,7 @@
 				44DF039F2797B62B006EE6AC /* GamePublicMsgModel.m in Sources */,
 				6C192E5E279523B100553034 /* main.m in Sources */,
 				6C192E50279523B000553034 /* SceneDelegate.m in Sources */,
+				445EAA902799610E000DCC72 /* HSHotGamesHeaderView.m in Sources */,
 				6C89D9CB279902A9001D52F9 /* BaseNavigationViewController.m in Sources */,
 				44DF03A22797E467006EE6AC /* GameKeyWordHitModel.m in Sources */,
 				445EAA7727990035000DCC72 /* HSLoginViewController.m in Sources */,
@@ -539,8 +569,10 @@
 				6C192E932797E31200553034 /* HSSheetView.m in Sources */,
 				6C192E912797E31200553034 /* AppUtil.m in Sources */,
 				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
+				445EAA9327996828000DCC72 /* HSGameListHeaderView.m in Sources */,
 				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
 				6C192E922797E31200553034 /* Constant.m in Sources */,
+				445EAA89279948D4000DCC72 /* HSRoomTypeHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

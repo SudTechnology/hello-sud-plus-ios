@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 屏幕高
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 /// 状态栏高度（安全状态栏）
-#define kStatusBarHeight (UIDevice.isiPhoneXSeries() ? kAppSafeTop : 20)
+#define kStatusBarHeight ([UIDevice isiPhoneXSeries] ? kAppSafeTop : 20)
 /// 底部tabbar高度
 #define kTabBarHeight (kBottomHeight + 49)
 
