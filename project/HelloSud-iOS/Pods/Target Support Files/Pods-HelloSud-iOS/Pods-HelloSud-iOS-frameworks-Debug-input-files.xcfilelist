@@ -1,6 +1,0 @@
-${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-frameworks.sh
-${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
-${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework
-${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework
-${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework
-${PODS_XCFRAMEWORKS_BUILD_DIR}/ZegoExpressEngine/ZegoExpressEngine.framework/ZegoExpressEngine
