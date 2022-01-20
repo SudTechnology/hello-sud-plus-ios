@@ -19,6 +19,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;
     
+    self.tabBar.backgroundColor = UIColor.whiteColor;
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:HEX_COLOR(@"#8C8C8C")} forState: UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:HEX_COLOR(@"#000000")} forState: UIControlStateSelected];
     [self configMainPage];
