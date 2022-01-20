@@ -7,7 +7,7 @@
 
 #import "BaseNavigationViewController.h"
 
-@interface BaseNavigationViewController()
+@interface BaseNavigationViewController()<UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 @property(nonatomic, weak)id<UIGestureRecognizerDelegate> popDelegate;
 @end
 
@@ -24,7 +24,40 @@
 /// 配置导航栏
 - (void)configNavbar {
     UINavigationBar *navBar = [UINavigationBar appearance];
-    navBar.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.blackColor};
+    NSDictionary * dicTitle = @{NSForegroundColorAttributeName: UIColor.blackColor,NSFontAttributeName: [UIFont systemFontOfSize:17]};
+    navBar.titleTextAttributes = dicTitle;
+    
+    NSDictionary *dicBarBtn = @{NSForegroundColorAttributeName: UIColor.blackColor, NSFontAttributeName: [UIFont systemFontOfSize:17]};
+    [[UIBarButtonItem appearance] setTitleTextAttributes:dicBarBtn forState:UIControlStateNormal];
+    self.navigationBar.tintColor = UIColor.blackColor;
+    navBar.backgroundColor = UIColor.whiteColor;
+    navBar.barTintColor = UIColor.whiteColor;
+    navBar.shadowImage = [UIImage new];
+    navBar.translucent = NO;
+    [self.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
+    self.navigationBar.shadowImage = UIImage.new;
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *navAppearance = UINavigationBarAppearance.new;
+        [navAppearance configureWithOpaqueBackground];
+        navAppearance.backgroundColor = UIColor.whiteColor;
+        navAppearance.shadowColor = nil;
+        navAppearance.shadowImage = UIImage.new;
+        navAppearance.backgroundEffect = nil;
+        navAppearance.titleTextAttributes = dicTitle;
+        UINavigationBar *bar = [UINavigationBar appearance];
+        bar.standardAppearance = navAppearance;
+        bar.scrollEdgeAppearance = bar.standardAppearance;
+    }
+}
+
+#pragma mark UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+//    if (viewController != self.viewControllers[0] && base)
+}
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    
 }
 
 @end
