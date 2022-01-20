@@ -33,6 +33,7 @@
 		6C192E912797E31200553034 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8C2797E31200553034 /* AppUtil.m */; };
 		6C192E922797E31200553034 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8D2797E31200553034 /* Constant.m */; };
 		6C192E932797E31200553034 /* HSSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8F2797E31200553034 /* HSSheetView.m */; };
+		6C89D9CB279902A9001D52F9 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C89D9CA279902A9001D52F9 /* BaseNavigationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -103,6 +104,8 @@
 		6C192E8D2797E31200553034 /* Constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
 		6C192E8F2797E31200553034 /* HSSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSheetView.m; sourceTree = "<group>"; };
 		6C192E902797E31200553034 /* HSSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSheetView.h; sourceTree = "<group>"; };
+		6C89D9C9279902A9001D52F9 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
+		6C89D9CA279902A9001D52F9 /* BaseNavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationViewController.m; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -314,6 +317,8 @@
 				6C192E762797BB7B00553034 /* BaseView.m */,
 				445EAA7827990C71000DCC72 /* BaseViewController.h */,
 				445EAA7927990C71000DCC72 /* BaseViewController.m */,
+				6C89D9C9279902A9001D52F9 /* BaseNavigationViewController.h */,
+				6C89D9CA279902A9001D52F9 /* BaseNavigationViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -491,10 +496,14 @@
 				44DF039F2797B62B006EE6AC /* GamePublicMsgModel.m in Sources */,
 				6C192E5E279523B100553034 /* main.m in Sources */,
 				6C192E50279523B000553034 /* SceneDelegate.m in Sources */,
+
+				6C89D9CB279902A9001D52F9 /* BaseNavigationViewController.m in Sources */,
+
 				44DF03A22797E467006EE6AC /* GameKeyWordHitModel.m in Sources */,
 				445EAA7727990035000DCC72 /* HSLoginViewController.m in Sources */,
 				44DF03AE2797F124006EE6AC /* FsmAppToMgManager.m in Sources */,
 				6C192E932797E31200553034 /* HSSheetView.m in Sources */,
+
 				6C192E912797E31200553034 /* AppUtil.m in Sources */,
 				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
 				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
