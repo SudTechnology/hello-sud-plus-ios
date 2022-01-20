@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
                                             green:((float)(((v) & 0x00FF00) >> 8))/255.0 \
                                              blue:((float)(v & 0x0000FF))/255.0 \
                                             alpha:a]
+#define HEX_COLOR(hex) [UIColor colorWithHexString:hex alpha:1]
+#define HEX_COLOR_A(hex, a) [UIColor colorWithHexString:hex, alpha: a]
 
 @interface UIColor(Extension)
 /**
