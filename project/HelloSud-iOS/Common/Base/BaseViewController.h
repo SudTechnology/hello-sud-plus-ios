@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BaseViewController : UIViewController
+@interface BaseViewController : UIViewController<UIGestureRecognizerDelegate>
 /// 增加子view
 - (void)hsAddViews;
 /// 布局视图
