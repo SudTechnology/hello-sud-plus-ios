@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 状态栏高度（安全状态栏）
 #define kStatusBarHeight ([UIDevice isiPhoneXSeries] ? kAppSafeTop : 20)
 /// 底部tabbar高度
-#define kTabBarHeight (kBottomHeight + 49)
+#define kTabBarHeight (kAppSafeBottom + 49)
 
 /// weakself宏
 #define WeakSelf __weak typeof(self) weakSelf = self;
