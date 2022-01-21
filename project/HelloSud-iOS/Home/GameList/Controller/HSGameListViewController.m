@@ -10,6 +10,7 @@
 #import "HSGameListNaviView.h"
 #import "HSGameListHeaderView.h"
 #import "HSGameListTableViewCell.h"
+#import "HSRoomViewController.h"
 
 @interface HSGameListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) HSGameListNaviView *naviView;
@@ -59,7 +60,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    HSHotGameViewController *vc = [[HSHotGameViewController alloc] init];
+//    HSHotGameViewController *vc = [[HSHotGameViewController alloc] init];
+    HSRoomViewController *vc = [[HSRoomViewController alloc] init];
     [self.navigationController pushViewController:vc animated:true];
 }
 
