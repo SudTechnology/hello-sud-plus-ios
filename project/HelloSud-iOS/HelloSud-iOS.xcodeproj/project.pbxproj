@@ -33,6 +33,7 @@
 		445EAAC5279A90C0000DCC72 /* HSRoomGiftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAC4279A90C0000DCC72 /* HSRoomGiftTableViewCell.m */; };
 		445EAAC9279A98DB000DCC72 /* HSRoomMsgBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAC8279A98DB000DCC72 /* HSRoomMsgBgView.m */; };
 		445EAACC279A9C30000DCC72 /* HSAudioMicroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAACB279A9C30000DCC72 /* HSAudioMicroView.m */; };
+		445EAACF279AA133000DCC72 /* HSAudioMicContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAACE279AA133000DCC72 /* HSAudioMicContentView.m */; };
 		44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03802796A981006EE6AC /* MediaAudioEngine.m */; };
 		44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03882796AB9C006EE6AC /* GameSudManager.m */; };
 		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
@@ -128,6 +129,8 @@
 		445EAAC8279A98DB000DCC72 /* HSRoomMsgBgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomMsgBgView.m; sourceTree = "<group>"; };
 		445EAACA279A9C30000DCC72 /* HSAudioMicroView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioMicroView.h; sourceTree = "<group>"; };
 		445EAACB279A9C30000DCC72 /* HSAudioMicroView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioMicroView.m; sourceTree = "<group>"; };
+		445EAACD279AA133000DCC72 /* HSAudioMicContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioMicContentView.h; sourceTree = "<group>"; };
+		445EAACE279AA133000DCC72 /* HSAudioMicContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioMicContentView.m; sourceTree = "<group>"; };
 		44DF03802796A981006EE6AC /* MediaAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaAudioEngine.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* MediaAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngine.h; sourceTree = "<group>"; };
 		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
@@ -352,6 +355,8 @@
 				445EAAC8279A98DB000DCC72 /* HSRoomMsgBgView.m */,
 				445EAACA279A9C30000DCC72 /* HSAudioMicroView.h */,
 				445EAACB279A9C30000DCC72 /* HSAudioMicroView.m */,
+				445EAACD279AA133000DCC72 /* HSAudioMicContentView.h */,
+				445EAACE279AA133000DCC72 /* HSAudioMicContentView.m */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -732,6 +737,7 @@
 				6C076E642799605600650209 /* HSSettingModel.m in Sources */,
 				44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */,
 				6C076E672799621300650209 /* BaseModel.m in Sources */,
+				445EAACF279AA133000DCC72 /* HSAudioMicContentView.m in Sources */,
 				445EAACC279A9C30000DCC72 /* HSAudioMicroView.m in Sources */,
 				445EAA7D279915E8000DCC72 /* HSGenderView.m in Sources */,
 				44DF039F2797B62B006EE6AC /* GamePublicMsgModel.m in Sources */,
