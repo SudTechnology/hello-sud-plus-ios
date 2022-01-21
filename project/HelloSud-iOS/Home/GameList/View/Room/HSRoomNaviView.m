@@ -6,6 +6,7 @@
 //
 
 #import "HSRoomNaviView.h"
+#import "HSSwitchRoomModeView.h"
 
 @interface HSRoomNaviView ()
 @property (nonatomic, strong) UILabel *roomNameLabel;
@@ -31,6 +32,18 @@
     [self addSubview:self.roomModeView];
     [self.roomModeView addSubview:self.roomModeLabel];
     [self.roomModeView addSubview:self.roomModeImageView];
+}
+
+- (void)hsConfigEvents {
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectNodeEvent:)];
+    [self.roomModeView addGestureRecognizer:tapGesture];
+}
+
+- (void)selectNodeEvent:(UITapGestureRecognizer *)gesture {
+    HSSheetView *sheet  = [[HSSheetView alloc] init];
+    [sheet showIn:AppUtil.currentWindow customView:[[HSSwitchRoomModeView alloc] init] onCloseCallback:^{
+        
+    }];
 }
 
 - (void)hsLayoutViews {
@@ -127,6 +140,7 @@
     if (!_roomModeView) {
         _roomModeView = [[UIView alloc] init];
         _roomModeView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.1];
+        [_roomModeView setUserInteractionEnabled:true];
     }
     return _roomModeView;
 }

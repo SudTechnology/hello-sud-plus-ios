@@ -8,7 +8,7 @@
 #import "BaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+/// 麦位view
 @interface HSAudioMicroView : BaseView
 
 @end

@@ -8,7 +8,7 @@
 #import "BaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+/// 公屏背景view
 @interface HSRoomMsgBgView : BaseView
 
 @end

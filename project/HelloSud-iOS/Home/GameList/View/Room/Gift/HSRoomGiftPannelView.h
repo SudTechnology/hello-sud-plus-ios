@@ -1,5 +1,5 @@
 //
-//  HSAudioMicContentView.h
+//  HSRoomGiftPannelView.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/21.
@@ -8,8 +8,8 @@
 #import "BaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-/// 语音房麦位视图
-@interface HSAudioMicContentView : BaseView
+/// 礼物弹窗
+@interface HSRoomGiftPannelView : BaseView
 
 @end
 
