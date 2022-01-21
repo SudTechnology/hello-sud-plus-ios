@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - Bugly (2.5.90)
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
   - SVProgressHUD (2.2.5)
@@ -21,6 +22,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
+  - Bugly (= 2.5.90)
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
   - SVProgressHUD (~> 2.2.5)
@@ -29,6 +31,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - Bugly
     - Masonry
     - MJExtension
     - SVProgressHUD
@@ -36,11 +39,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: c212496bb9a999277371a14495342109e251d996
+PODFILE CHECKSUM: adb60d5065a154e4adbd80f309ee60f838c3902e
 
 COCOAPODS: 1.11.2

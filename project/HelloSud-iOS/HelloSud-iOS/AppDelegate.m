@@ -7,6 +7,8 @@
 
 #import "AppDelegate.h"
 #import "HSMainTabBarController.h"
+#import <Bugly/Bugly.h>
+#import "DeviceUtil.h"
 
 @interface AppDelegate () {
     
@@ -18,10 +20,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self configBugly];
+    
     self.window = [[UIWindow alloc]init];
     self.window.rootViewController = [[HSMainTabBarController alloc]init];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)configBugly {
+    NSString *version = [NSString stringWithFormat:@"%@.%@", [DeviceUtil getAppVersion], [DeviceUtil getAppBuildCode]];
+    [Bugly updateAppVersion:version];
+    [Bugly startWithAppId:@"0d680b2d4c"];
 }
 
 
