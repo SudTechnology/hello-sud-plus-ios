@@ -10,6 +10,7 @@
 #import "HSRoomOperatorView.h"
 #import "HSRoomMsgBgView.h"
 #import "HSRoomMsgTableView.h"
+#import "HSAudioMicContentView.h"
 
 @interface HSRoomViewController ()
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) HSRoomOperatorView *operatorView;
 @property (nonatomic, strong) HSRoomMsgBgView *msgBgView;
 @property (nonatomic, strong) HSRoomMsgTableView *msgTableView;
+@property (nonatomic, strong) HSAudioMicContentView *micContentView;
 
 @end
 
@@ -35,6 +37,7 @@
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.naviView];
     [self.view addSubview:self.operatorView];
+    [self.view addSubview:self.micContentView];
     [self.view addSubview:self.msgBgView];
     [self.msgBgView addSubview:self.msgTableView];
 }
@@ -53,10 +56,16 @@
         make.bottom.mas_equalTo(-kAppSafeBottom);
         make.height.mas_equalTo(44);
     }];
+    [self.micContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.naviView.mas_bottom).offset(20);
+        make.left.right.mas_equalTo(self.view);
+        make.height.mas_greaterThanOrEqualTo(0);
+    }];
     [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.micContentView.mas_bottom);
         make.left.right.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.operatorView.mas_top).offset(-20);
-        make.height.mas_equalTo(300);
+        make.height.mas_greaterThanOrEqualTo(0);
     }];
     [self.msgTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.msgBgView);
@@ -98,4 +107,12 @@
     }
     return _msgTableView;
 }
+
+- (HSAudioMicContentView *)micContentView {
+    if (!_micContentView) {
+        _micContentView = [[HSAudioMicContentView alloc] init];
+    }
+    return _micContentView;
+}
+
 @end
