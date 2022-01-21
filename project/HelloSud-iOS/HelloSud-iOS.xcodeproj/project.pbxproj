@@ -30,6 +30,9 @@
 		445EAAB9279A67F3000DCC72 /* HSBaseMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAB8279A67F3000DCC72 /* HSBaseMsgCell.m */; };
 		445EAABC279A6DA0000DCC72 /* HSRoomTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAABB279A6DA0000DCC72 /* HSRoomTextTableViewCell.m */; };
 		445EAAC2279A6DDC000DCC72 /* HSRoomSystemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAC1279A6DDC000DCC72 /* HSRoomSystemTableViewCell.m */; };
+		445EAAC5279A90C0000DCC72 /* HSRoomGiftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAC4279A90C0000DCC72 /* HSRoomGiftTableViewCell.m */; };
+		445EAAC9279A98DB000DCC72 /* HSRoomMsgBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAC8279A98DB000DCC72 /* HSRoomMsgBgView.m */; };
+		445EAACC279A9C30000DCC72 /* HSAudioMicroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAACB279A9C30000DCC72 /* HSAudioMicroView.m */; };
 		44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03802796A981006EE6AC /* MediaAudioEngine.m */; };
 		44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03882796AB9C006EE6AC /* GameSudManager.m */; };
 		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
@@ -119,6 +122,12 @@
 		445EAABB279A6DA0000DCC72 /* HSRoomTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomTextTableViewCell.m; sourceTree = "<group>"; };
 		445EAAC0279A6DDC000DCC72 /* HSRoomSystemTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomSystemTableViewCell.h; sourceTree = "<group>"; };
 		445EAAC1279A6DDC000DCC72 /* HSRoomSystemTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomSystemTableViewCell.m; sourceTree = "<group>"; };
+		445EAAC3279A90C0000DCC72 /* HSRoomGiftTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomGiftTableViewCell.h; sourceTree = "<group>"; };
+		445EAAC4279A90C0000DCC72 /* HSRoomGiftTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomGiftTableViewCell.m; sourceTree = "<group>"; };
+		445EAAC7279A98DB000DCC72 /* HSRoomMsgBgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomMsgBgView.h; sourceTree = "<group>"; };
+		445EAAC8279A98DB000DCC72 /* HSRoomMsgBgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomMsgBgView.m; sourceTree = "<group>"; };
+		445EAACA279A9C30000DCC72 /* HSAudioMicroView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioMicroView.h; sourceTree = "<group>"; };
+		445EAACB279A9C30000DCC72 /* HSAudioMicroView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioMicroView.m; sourceTree = "<group>"; };
 		44DF03802796A981006EE6AC /* MediaAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaAudioEngine.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* MediaAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngine.h; sourceTree = "<group>"; };
 		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
@@ -332,20 +341,34 @@
 		445EAAA7279A561A000DCC72 /* Room */ = {
 			isa = PBXGroup;
 			children = (
+				445EAAC6279A94E0000DCC72 /* Msg */,
 				445EAAA8279A562C000DCC72 /* HSRoomNaviView.h */,
 				445EAAA9279A562C000DCC72 /* HSRoomNaviView.m */,
 				445EAAAB279A5CF6000DCC72 /* HSRoomOperatorView.h */,
 				445EAAAC279A5CF6000DCC72 /* HSRoomOperatorView.m */,
 				445EAAB1279A65B9000DCC72 /* HSRoomMsgTableView.h */,
 				445EAAB2279A65B9000DCC72 /* HSRoomMsgTableView.m */,
+				445EAAC7279A98DB000DCC72 /* HSRoomMsgBgView.h */,
+				445EAAC8279A98DB000DCC72 /* HSRoomMsgBgView.m */,
+				445EAACA279A9C30000DCC72 /* HSAudioMicroView.h */,
+				445EAACB279A9C30000DCC72 /* HSAudioMicroView.m */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		445EAAC6279A94E0000DCC72 /* Msg */ = {
+			isa = PBXGroup;
+			children = (
 				445EAAB7279A67F3000DCC72 /* HSBaseMsgCell.h */,
 				445EAAB8279A67F3000DCC72 /* HSBaseMsgCell.m */,
 				445EAABA279A6DA0000DCC72 /* HSRoomTextTableViewCell.h */,
 				445EAABB279A6DA0000DCC72 /* HSRoomTextTableViewCell.m */,
+				445EAAC3279A90C0000DCC72 /* HSRoomGiftTableViewCell.h */,
+				445EAAC4279A90C0000DCC72 /* HSRoomGiftTableViewCell.m */,
 				445EAAC0279A6DDC000DCC72 /* HSRoomSystemTableViewCell.h */,
 				445EAAC1279A6DDC000DCC72 /* HSRoomSystemTableViewCell.m */,
 			);
-			path = Room;
+			path = Msg;
 			sourceTree = "<group>";
 		};
 		44DF037E2796A981006EE6AC /* Middle */ = {
@@ -709,6 +732,7 @@
 				6C076E642799605600650209 /* HSSettingModel.m in Sources */,
 				44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */,
 				6C076E672799621300650209 /* BaseModel.m in Sources */,
+				445EAACC279A9C30000DCC72 /* HSAudioMicroView.m in Sources */,
 				445EAA7D279915E8000DCC72 /* HSGenderView.m in Sources */,
 				44DF039F2797B62B006EE6AC /* GamePublicMsgModel.m in Sources */,
 				445EAAA227997584000DCC72 /* HSHotGameCollectionViewCell.m in Sources */,
@@ -723,6 +747,7 @@
 				445EAAAA279A562C000DCC72 /* HSRoomNaviView.m in Sources */,
 				6C076E6A27996C2700650209 /* HSSetingHeadView.m in Sources */,
 				44DF03AE2797F124006EE6AC /* FsmAppToMgManager.m in Sources */,
+				445EAAC5279A90C0000DCC72 /* HSRoomGiftTableViewCell.m in Sources */,
 				6C076E6127995F4C00650209 /* HSSettingCell.m in Sources */,
 				6C192E932797E31200553034 /* HSSheetView.m in Sources */,
 				445EAAAD279A5CF6000DCC72 /* HSRoomOperatorView.m in Sources */,
@@ -740,6 +765,7 @@
 				445EAA89279948D4000DCC72 /* HSRoomTypeHeaderView.m in Sources */,
 				6C076E572799450900650209 /* HSSettingViewController.m in Sources */,
 				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
+				445EAAC9279A98DB000DCC72 /* HSRoomMsgBgView.m in Sources */,
 				445EAA9727996BC6000DCC72 /* HSGameListTableViewCell.m in Sources */,
 				6C192E922797E31200553034 /* Constant.m in Sources */,
 				6C076E53279940A400650209 /* HSMainTabBarController.m in Sources */,

@@ -1,15 +1,15 @@
 //
-//  HSBaseMsgCell.h
+//  HSRoomTextTableViewCell.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/21.
 //
 
-#import "BaseTableViewCell.h"
+#import "HSBaseMsgCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HSBaseMsgCell : BaseTableViewCell
+@interface HSRoomTextTableViewCell : HSBaseMsgCell
 
 @end
 

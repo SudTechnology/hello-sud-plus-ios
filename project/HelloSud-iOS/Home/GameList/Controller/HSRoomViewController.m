@@ -8,11 +8,15 @@
 #import "HSRoomViewController.h"
 #import "HSRoomNaviView.h"
 #import "HSRoomOperatorView.h"
+#import "HSRoomMsgBgView.h"
+#import "HSRoomMsgTableView.h"
 
 @interface HSRoomViewController ()
 @property (nonatomic, strong) UIImageView *bgImageView;
 @property (nonatomic, strong) HSRoomNaviView *naviView;
 @property (nonatomic, strong) HSRoomOperatorView *operatorView;
+@property (nonatomic, strong) HSRoomMsgBgView *msgBgView;
+@property (nonatomic, strong) HSRoomMsgTableView *msgTableView;
 
 @end
 
@@ -31,6 +35,8 @@
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.naviView];
     [self.view addSubview:self.operatorView];
+    [self.view addSubview:self.msgBgView];
+    [self.msgBgView addSubview:self.msgTableView];
 }
 
 - (void)hsLayoutViews {
@@ -46,6 +52,14 @@
         make.left.right.equalTo(self.view);
         make.bottom.mas_equalTo(-kAppSafeBottom);
         make.height.mas_equalTo(44);
+    }];
+    [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.operatorView.mas_top).offset(-20);
+        make.height.mas_equalTo(300);
+    }];
+    [self.msgTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.msgBgView);
     }];
 }
 
@@ -69,5 +83,19 @@
         _operatorView = [[HSRoomOperatorView alloc] init];
     }
     return _operatorView;
+}
+
+- (HSRoomMsgBgView *)msgBgView {
+    if (!_msgBgView) {
+        _msgBgView = [[HSRoomMsgBgView alloc] init];
+    }
+    return _msgBgView;
+}
+
+- (HSRoomMsgTableView *)msgTableView {
+    if (!_msgTableView) {
+        _msgTableView = [[HSRoomMsgTableView alloc] init];
+    }
+    return _msgTableView;
 }
 @end

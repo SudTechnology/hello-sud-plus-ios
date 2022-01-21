@@ -5,11 +5,11 @@
 //  Created by Mary on 2022/1/21.
 //
 
-#import "BaseTableViewCell.h"
+#import "HSBaseMsgCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HSRoomSystemTableViewCell : BaseTableViewCell
+@interface HSRoomSystemTableViewCell : HSBaseMsgCell
 
 @end
 
