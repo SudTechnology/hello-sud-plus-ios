@@ -65,6 +65,7 @@
         _inputLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
         _inputLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.4];
         _inputLabel.layer.cornerRadius = 32/2;
+        _inputLabel.layer.masksToBounds = true;
     }
     return _inputLabel;
 }

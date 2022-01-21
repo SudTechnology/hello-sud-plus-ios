@@ -7,6 +7,9 @@
 
 #import "HSRoomMsgTableView.h"
 #import "HSBaseMsgCell.h"
+#import "HSRoomTextTableViewCell.h"
+#import "HSRoomSystemTableViewCell.h"
+#import "HSRoomGiftTableViewCell.h"
 
 @interface HSRoomMsgTableView () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -32,8 +35,19 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HSBaseMsgCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSBaseMsgCell"];
-    return cell;
+    if (indexPath.row == 0) {
+        HSRoomTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSRoomTextTableViewCell"];
+        cell.model = [BaseModel new];
+        return cell;
+    } else if (indexPath.row == 1) {
+        HSRoomSystemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSRoomSystemTableViewCell"];
+        cell.model = [BaseModel new];
+        return cell;
+    } else {
+        HSRoomGiftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSRoomGiftTableViewCell"];
+        cell.model = [BaseModel new];
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -49,7 +63,11 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 26;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.backgroundColor = UIColor.clearColor;
         [_tableView registerClass:[HSBaseMsgCell class] forCellReuseIdentifier:@"HSBaseMsgCell"];
+        [_tableView registerClass:[HSRoomTextTableViewCell class] forCellReuseIdentifier:@"HSRoomTextTableViewCell"];
+        [_tableView registerClass:[HSRoomSystemTableViewCell class] forCellReuseIdentifier:@"HSRoomSystemTableViewCell"];
+        [_tableView registerClass:[HSRoomGiftTableViewCell class] forCellReuseIdentifier:@"HSRoomGiftTableViewCell"];
     }
     return _tableView;
 }

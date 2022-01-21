@@ -18,6 +18,7 @@ PODS:
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
   - SVProgressHUD (2.2.5)
+  - YYText (1.0.7)
   - ZegoExpressEngine/Audio (2.15.0)
 
 DEPENDENCIES:
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
   - SVProgressHUD (~> 2.2.5)
+  - YYText (~> 1.0.7)
   - ZegoExpressEngine/Audio (~> 2.15.0)
 
 SPEC REPOS:
@@ -35,6 +37,7 @@ SPEC REPOS:
     - Masonry
     - MJExtension
     - SVProgressHUD
+    - YYText
     - ZegoExpressEngine
 
 SPEC CHECKSUMS:
@@ -43,8 +46,9 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: adb60d5065a154e4adbd80f309ee60f838c3902e
+PODFILE CHECKSUM: a53c97a350087a0ce59a5e3313b746049616246e
 
 COCOAPODS: 1.10.2
