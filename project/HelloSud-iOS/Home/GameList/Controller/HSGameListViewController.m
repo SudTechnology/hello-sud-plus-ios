@@ -26,6 +26,10 @@
     // Do any additional setup after loading the view.
 }
 
+- (BOOL)hsIsHidenNavigationBar {
+    return YES;
+}
+
 - (void)hsAddViews {
     self.dataList = @[@(1), @(1), @(1)];
     [self.view addSubview:self.naviView];

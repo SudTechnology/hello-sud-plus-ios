@@ -37,6 +37,8 @@
 		6C076E6127995F4C00650209 /* HSSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E6027995F4C00650209 /* HSSettingCell.m */; };
 		6C076E642799605600650209 /* HSSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E632799605600650209 /* HSSettingModel.m */; };
 		6C076E672799621300650209 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E662799621300650209 /* BaseModel.m */; };
+		6C076E6A27996C2700650209 /* HSSetingHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E6927996C2700650209 /* HSSetingHeadView.m */; };
+		6C076E6D2799823A00650209 /* HSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E6C2799823A00650209 /* HSWebViewController.m */; };
 		6C192E4D279523B000553034 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E4C279523B000553034 /* AppDelegate.m */; };
 		6C192E53279523B000553034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E52279523B000553034 /* ViewController.m */; };
 		6C192E56279523B000553034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E54279523B000553034 /* Main.storyboard */; };
@@ -124,6 +126,10 @@
 		6C076E632799605600650209 /* HSSettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSettingModel.m; sourceTree = "<group>"; };
 		6C076E652799621300650209 /* BaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		6C076E662799621300650209 /* BaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		6C076E6827996C2700650209 /* HSSetingHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSSetingHeadView.h; sourceTree = "<group>"; };
+		6C076E6927996C2700650209 /* HSSetingHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSetingHeadView.m; sourceTree = "<group>"; };
+		6C076E6B2799823A00650209 /* HSWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSWebViewController.h; sourceTree = "<group>"; };
+		6C076E6C2799823A00650209 /* HSWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSWebViewController.m; sourceTree = "<group>"; };
 		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -382,6 +388,8 @@
 			children = (
 				6C076E5F27995F4C00650209 /* HSSettingCell.h */,
 				6C076E6027995F4C00650209 /* HSSettingCell.m */,
+				6C076E6827996C2700650209 /* HSSetingHeadView.h */,
+				6C076E6927996C2700650209 /* HSSetingHeadView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -494,6 +502,8 @@
 			children = (
 				6C192E8F2797E31200553034 /* HSSheetView.m */,
 				6C192E902797E31200553034 /* HSSheetView.h */,
+				6C076E6B2799823A00650209 /* HSWebViewController.h */,
+				6C076E6C2799823A00650209 /* HSWebViewController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -651,8 +661,10 @@
 				445EAA902799610E000DCC72 /* HSHotGamesHeaderView.m in Sources */,
 				44DF03A22797E467006EE6AC /* GameKeyWordHitModel.m in Sources */,
 				445EAA7727990035000DCC72 /* HSLoginViewController.m in Sources */,
+				6C076E6D2799823A00650209 /* HSWebViewController.m in Sources */,
 				445EAA86279941AD000DCC72 /* HSGameListNaviView.m in Sources */,
 				6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */,
+				6C076E6A27996C2700650209 /* HSSetingHeadView.m in Sources */,
 				44DF03AE2797F124006EE6AC /* FsmAppToMgManager.m in Sources */,
 				6C076E6127995F4C00650209 /* HSSettingCell.m in Sources */,
 				6C192E932797E31200553034 /* HSSheetView.m in Sources */,
