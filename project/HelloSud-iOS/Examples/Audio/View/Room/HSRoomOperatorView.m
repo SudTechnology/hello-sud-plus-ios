@@ -6,6 +6,7 @@
 //
 
 #import "HSRoomOperatorView.h"
+#import "HSRoomGiftPannelView.h"
 
 @interface HSRoomOperatorView ()
 @property (nonatomic, strong) UIButton *voiceUpBtn;
@@ -21,6 +22,12 @@
     [self addSubview:self.giftBtn];
     [self addSubview:self.inputLabel];
     [self.voiceUpBtn hs_setGradientBackgroundWithColors:@[[UIColor colorWithHexString:@"#FFC243" alpha:1], [UIColor colorWithHexString:@"#F38D2E" alpha:1]] locations:nil startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 0)];
+}
+
+- (void)onClickGiftEvent {
+    [HSSheetView show:[[HSRoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
+        
+    }];
 }
 
 - (void)hsLayoutViews {
@@ -74,6 +81,7 @@
     if (!_giftBtn) {
         _giftBtn = [[UIButton alloc] init];
         [_giftBtn setImage:[UIImage imageNamed:@"room_ope_gift"] forState:UIControlStateNormal];
+        [_giftBtn addTarget:self action:@selector(onClickGiftEvent) forControlEvents:UIControlEventTouchUpInside];
     }
     return _giftBtn;
 }

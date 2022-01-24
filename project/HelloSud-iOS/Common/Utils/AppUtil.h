@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 当前APP window视图
 + (UIWindow *)currentWindow;
+//获取当前最上层的控制器
++ (UIViewController *)currentViewController;
 @end
 
 NS_ASSUME_NONNULL_END
