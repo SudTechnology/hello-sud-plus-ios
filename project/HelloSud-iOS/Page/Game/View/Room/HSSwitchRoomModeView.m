@@ -6,7 +6,7 @@
 //
 
 #import "HSSwitchRoomModeView.h"
-#import "HSHotGameCollectionViewCell.h"
+#import "HSGameItemCollectionViewCell.h"
 
 @interface HSSwitchRoomModeView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UILabel *audioTitleLabel;
@@ -60,7 +60,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    HSHotGameCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSHotGameCollectionViewCell" forIndexPath:indexPath];
+    HSGameItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSGameItemCollectionViewCell" forIndexPath:indexPath];
     return cell;
 }
 
@@ -89,7 +89,7 @@
         _collectionView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView registerClass:[HSHotGameCollectionViewCell class] forCellWithReuseIdentifier:@"HSHotGameCollectionViewCell"];
+        [_collectionView registerClass:[HSGameItemCollectionViewCell class] forCellWithReuseIdentifier:@"HSGameItemCollectionViewCell"];
     }
     return _collectionView;
 }
