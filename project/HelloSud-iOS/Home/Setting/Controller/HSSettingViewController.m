@@ -99,12 +99,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
-    if (model.isMore) {
-        HSWebViewController *web = HSWebViewController.new;
-        web.url = model.pageURL;
-        [self.navigationController pushViewController:web animated:YES];
-    }
+//    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
+//    if (model.isMore) {
+//        HSWebViewController *web = HSWebViewController.new;
+//        web.url = model.pageURL;
+//        [self.navigationController pushViewController:web animated:YES];
+//    }
+    
+    [HSAlertView showTextAlert:@"ajjfhaisjf" sureText:@"ok" cancelText:@"" onSureCallback:^{
+        NSLog(@"0");
+    } onCloseCallback:^{
+        NSLog(@"1");
+    }];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {

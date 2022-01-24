@@ -16,6 +16,40 @@
 
 @implementation HSTextAlertView
 
+/// 文本alert初始化
+/// @param msg content
+/// @param sureText 确定按钮文字
+/// @param cancelText 取消按钮文字 传空则没有取消按钮
+/// @param isClickClose 点击背景是否关闭
+/// @param sureCb 确定item回调
+/// @param closeCb 取消item回调
+- (void)config:(NSString *)msg sureText:(NSString *)sureText cancelText:(NSString *)cancelText isClickClose:(BOOL)isClickClose onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
+    self.onSureItemCallBack = sureCb;
+    self.onCancelItemlCallBack = closeCb;
+    self.isClickClose = isClickClose;
+    self.alertType = cancelText.length == 0 ? HSTypeOnlySure : HSTypeAll;
+    self.contentLabel.text = msg;
+    [self.sureBtn setTitle:sureText forState:UIControlStateNormal];
+    [self.cancelBtn setTitle:cancelText forState:UIControlStateNormal];
+}
+
+/// 文本alert初始化
+/// @param msg content
+/// @param sureText 确定按钮文字
+/// @param cancelText 取消按钮文字 传空则没有取消按钮
+/// @param isClickClose 点击背景是否关闭
+/// @param sureCb 确定item回调
+/// @param closeCb 取消item回调
+- (void)configAttr:(NSAttributedString *)msg sureText:(NSString *)sureText cancelText:(NSString *)cancelText isClickClose:(BOOL)isClickClose onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
+    self.onSureItemCallBack = sureCb;
+    self.onCancelItemlCallBack = closeCb;
+    self.isClickClose = isClickClose;
+    self.alertType = cancelText.length == 0 ? HSTypeOnlySure : HSTypeAll;
+    self.contentLabel.attributedText = msg;
+    [self.sureBtn setTitle:sureText forState:UIControlStateNormal];
+    [self.cancelBtn setTitle:cancelText forState:UIControlStateNormal];
+}
+
 - (void)hsAddViews {
     [self addSubview:self.contentLabel];
     [self addSubview:self.sureBtn];
@@ -44,11 +78,39 @@
     }];
 }
 
+- (void)itemUpdateLayout {
+    if (self.alertType == HSTypeOnlySure) {
+        [self.sureBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.contentLabel.mas_bottom).offset(40);
+            make.size.mas_equalTo(CGSizeMake(140, 36));
+            make.centerX.mas_equalTo(self);
+            make.bottom.mas_equalTo(-24);
+        }];
+        [self.cancelBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        }];
+        [self.cancelBtn setHidden:true];;
+    }
+}
+
+- (void)onSureItemEvent {
+    if (self.onSureItemCallBack) {
+        self.onSureItemCallBack();
+        [HSAlertView close];
+    }
+}
+
+- (void)onCancelItemEvent {
+    if (self.onCancelItemlCallBack) {
+        self.onCancelItemlCallBack();
+        [HSAlertView close];
+    }
+}
+
 - (YYLabel *)contentLabel {
     if (!_contentLabel) {
         _contentLabel = [[YYLabel alloc] init];
         _contentLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
-        _contentLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+        _contentLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         _contentLabel.numberOfLines = 0;
         _contentLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -62,6 +124,7 @@
         [_sureBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
         _sureBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         _sureBtn.backgroundColor = UIColor.blackColor;
+        [_sureBtn addTarget:self action:@selector(onSureItemEvent) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureBtn;
 }
@@ -73,8 +136,13 @@
         [_cancelBtn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
         _cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         _cancelBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        [_cancelBtn addTarget:self action:@selector(onCancelItemEvent) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelBtn;
+}
+
+- (void)setAlertType:(AlertType)alertType {
+    [self itemUpdateLayout];
 }
 
 @end

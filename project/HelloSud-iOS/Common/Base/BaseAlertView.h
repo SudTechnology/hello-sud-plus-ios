@@ -20,12 +20,15 @@ typedef void(^OnCloseViewCallBack)(void);
 @property (nonatomic, copy) OnCloseViewCallBack onCloseViewCallBack;
 
 /// 展示弹窗
-- (void)show;
+- (void)hs_show;
 
 /// 关闭弹窗
-- (void)close;
+- (void)hs_close;
 
++ (BaseAlertView *)getAlert;
+
++ (void)setAlert: (BaseAlertView *)alert;
 @end
 
-static BaseAlertView *h_alertView = nil;
+
 NS_ASSUME_NONNULL_END
