@@ -9,6 +9,7 @@
 #import "HSMainTabBarController.h"
 #import <Bugly/Bugly.h>
 #import "DeviceUtil.h"
+#import "MediaAudioEngineManager.h"
 
 @interface AppDelegate () {
     
@@ -33,6 +34,14 @@
     NSString *version = [NSString stringWithFormat:@"%@.%@", [DeviceUtil getAppVersion], [DeviceUtil getAppBuildCode]];
     [Bugly updateAppVersion:version];
     [Bugly startWithAppId:@"0d680b2d4c"];
+}
+
+
+/// 配置语音SDK
+- (void)configAudioEngine {
+    /// 使用zego语音引擎
+    [MediaAudioEngineManager.shared makeEngine:ZegoAudioEngine.class];
+    [MediaAudioEngineManager.shared.audioEngine config:@"581733944" appKey:@"8d8c5698d49929056462dba41cb48cdd4d05babd8c2c68e450b3883096656b87"];
 }
 
 
