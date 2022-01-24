@@ -148,7 +148,7 @@
 		445EAAE4279ABDC1000DCC72 /* HSAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAlertView.m; sourceTree = "<group>"; };
 		445EAAE6279AC53E000DCC72 /* HSTextAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSTextAlertView.h; sourceTree = "<group>"; };
 		445EAAE7279AC53E000DCC72 /* HSTextAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSTextAlertView.m; sourceTree = "<group>"; };
-<<<<<<< HEAD
+
 		445EAAED279E7CCF000DCC72 /* HSSearchHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSSearchHeaderView.h; sourceTree = "<group>"; };
 		445EAAEE279E7CCF000DCC72 /* HSSearchHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSearchHeaderView.m; sourceTree = "<group>"; };
 		445EAAF0279E8083000DCC72 /* HSHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSHomeViewController.h; sourceTree = "<group>"; };
