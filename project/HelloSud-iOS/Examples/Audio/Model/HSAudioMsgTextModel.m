@@ -8,5 +8,7 @@
 #import "HSAudioMsgTextModel.h"
 
 @implementation HSAudioMsgTextModel
-
+- (NSString *)cellName {
+    return @"HSRoomTextTableViewCell";
+}
 @end

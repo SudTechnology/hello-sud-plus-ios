@@ -86,6 +86,14 @@
     };
 }
 
+/// 展示公屏消息
+/// @param msg 消息体
+- (void)showMsg:(HSAudioMsgBaseModel *)msg {
+    [self.msgTableView showMsg:msg];
+}
+
+#pragma mark lazy
+
 - (UIImageView *)bgImageView {
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] init];

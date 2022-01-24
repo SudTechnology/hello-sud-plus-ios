@@ -1,5 +1,5 @@
 //
-//  HSAudioMsgModel.h
+//  HSAudioMsgBaseModel.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
@@ -11,13 +11,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房消息model
-@interface HSAudioMsgModel : BaseModel
+@interface HSAudioMsgBaseModel : BaseModel
 
 /// 指令值
 @property(nonatomic, assign)NSInteger cmd;
 
 /// 发送者信息
 @property(nonatomic, strong)HSAudioUserModel *sendUser;
+-(NSString *)cellName;
 @end
 
 NS_ASSUME_NONNULL_END
