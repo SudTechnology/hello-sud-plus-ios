@@ -12,16 +12,11 @@
 		445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7927990C71000DCC72 /* BaseViewController.m */; };
 		445EAA7D279915E8000DCC72 /* HSGenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7C279915E8000DCC72 /* HSGenderView.m */; };
 		445EAA8027994160000DCC72 /* HSGameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7F27994160000DCC72 /* HSGameListViewController.m */; };
-		445EAA86279941AD000DCC72 /* HSGameListNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA85279941AD000DCC72 /* HSGameListNaviView.m */; };
-		445EAA89279948D4000DCC72 /* HSRoomTypeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA88279948D4000DCC72 /* HSRoomTypeHeaderView.m */; };
 		445EAA8D27995D5F000DCC72 /* NSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA8C27995D5F000DCC72 /* NSArray+Masonry.m */; };
-		445EAA902799610E000DCC72 /* HSHotGamesHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA8F2799610E000DCC72 /* HSHotGamesHeaderView.m */; };
-		445EAA9327996828000DCC72 /* HSGameListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA9227996828000DCC72 /* HSGameListHeaderView.m */; };
 		445EAA9427996AC6000DCC72 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E582799491700650209 /* BaseNavigationViewController.m */; };
 		445EAA9727996BC6000DCC72 /* HSGameListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA9627996BC6000DCC72 /* HSGameListTableViewCell.m */; };
-		445EAA9A279973CC000DCC72 /* HSHotGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA99279973CC000DCC72 /* HSHotGameViewController.m */; };
 		445EAA9F27997485000DCC72 /* BaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA9E27997485000DCC72 /* BaseCollectionViewCell.m */; };
-		445EAAA227997584000DCC72 /* HSHotGameCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAA127997584000DCC72 /* HSHotGameCollectionViewCell.m */; };
+		445EAAA227997584000DCC72 /* HSGameItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAA127997584000DCC72 /* HSGameItemCollectionViewCell.m */; };
 		445EAAA6279A55E9000DCC72 /* HSRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAA5279A55E9000DCC72 /* HSRoomViewController.m */; };
 		445EAAAA279A562C000DCC72 /* HSRoomNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAA9279A562C000DCC72 /* HSRoomNaviView.m */; };
 		445EAAAD279A5CF6000DCC72 /* HSRoomOperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAAC279A5CF6000DCC72 /* HSRoomOperatorView.m */; };
@@ -42,6 +37,12 @@
 		445EAAE2279ABB22000DCC72 /* BaseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAE1279ABB22000DCC72 /* BaseAlertView.m */; };
 		445EAAE5279ABDC1000DCC72 /* HSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAE4279ABDC1000DCC72 /* HSAlertView.m */; };
 		445EAAE8279AC53E000DCC72 /* HSTextAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAE7279AC53E000DCC72 /* HSTextAlertView.m */; };
+		445EAAEF279E7CCF000DCC72 /* HSSearchHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAEE279E7CCF000DCC72 /* HSSearchHeaderView.m */; };
+		445EAAF2279E8083000DCC72 /* HSHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAF1279E8083000DCC72 /* HSHomeViewController.m */; };
+		445EAAF5279E810C000DCC72 /* BaseCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAF4279E810C000DCC72 /* BaseCollectionReusableView.m */; };
+		445EAAF8279E8183000DCC72 /* HSHomeHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAF7279E8183000DCC72 /* HSHomeHeaderReusableView.m */; };
+		445EAAFB279E8B10000DCC72 /* HSHomeFooterReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAFA279E8B10000DCC72 /* HSHomeFooterReusableView.m */; };
+		44DF03822796A981006EE6AC /* MediaAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03802796A981006EE6AC /* MediaAudioEngine.m */; };
 		44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03882796AB9C006EE6AC /* GameSudManager.m */; };
 		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
 		44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -99,24 +100,14 @@
 		445EAA7C279915E8000DCC72 /* HSGenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGenderView.m; sourceTree = "<group>"; };
 		445EAA7E27994160000DCC72 /* HSGameListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameListViewController.h; sourceTree = "<group>"; };
 		445EAA7F27994160000DCC72 /* HSGameListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameListViewController.m; sourceTree = "<group>"; };
-		445EAA84279941AD000DCC72 /* HSGameListNaviView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameListNaviView.h; sourceTree = "<group>"; };
-		445EAA85279941AD000DCC72 /* HSGameListNaviView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameListNaviView.m; sourceTree = "<group>"; };
-		445EAA87279948D4000DCC72 /* HSRoomTypeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomTypeHeaderView.h; sourceTree = "<group>"; };
-		445EAA88279948D4000DCC72 /* HSRoomTypeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomTypeHeaderView.m; sourceTree = "<group>"; };
 		445EAA8B27995D5F000DCC72 /* NSArray+Masonry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Masonry.h"; sourceTree = "<group>"; };
 		445EAA8C27995D5F000DCC72 /* NSArray+Masonry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Masonry.m"; sourceTree = "<group>"; };
-		445EAA8E2799610E000DCC72 /* HSHotGamesHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSHotGamesHeaderView.h; sourceTree = "<group>"; };
-		445EAA8F2799610E000DCC72 /* HSHotGamesHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSHotGamesHeaderView.m; sourceTree = "<group>"; };
-		445EAA9127996828000DCC72 /* HSGameListHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameListHeaderView.h; sourceTree = "<group>"; };
-		445EAA9227996828000DCC72 /* HSGameListHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameListHeaderView.m; sourceTree = "<group>"; };
 		445EAA9527996BC6000DCC72 /* HSGameListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameListTableViewCell.h; sourceTree = "<group>"; };
 		445EAA9627996BC6000DCC72 /* HSGameListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameListTableViewCell.m; sourceTree = "<group>"; };
-		445EAA98279973CC000DCC72 /* HSHotGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSHotGameViewController.h; sourceTree = "<group>"; };
-		445EAA99279973CC000DCC72 /* HSHotGameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSHotGameViewController.m; sourceTree = "<group>"; };
 		445EAA9D27997485000DCC72 /* BaseCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCollectionViewCell.h; sourceTree = "<group>"; };
 		445EAA9E27997485000DCC72 /* BaseCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionViewCell.m; sourceTree = "<group>"; };
-		445EAAA027997584000DCC72 /* HSHotGameCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSHotGameCollectionViewCell.h; sourceTree = "<group>"; };
-		445EAAA127997584000DCC72 /* HSHotGameCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSHotGameCollectionViewCell.m; sourceTree = "<group>"; };
+		445EAAA027997584000DCC72 /* HSGameItemCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameItemCollectionViewCell.h; sourceTree = "<group>"; };
+		445EAAA127997584000DCC72 /* HSGameItemCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameItemCollectionViewCell.m; sourceTree = "<group>"; };
 		445EAAA4279A55E9000DCC72 /* HSRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomViewController.h; sourceTree = "<group>"; };
 		445EAAA5279A55E9000DCC72 /* HSRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomViewController.m; sourceTree = "<group>"; };
 		445EAAA8279A562C000DCC72 /* HSRoomNaviView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomNaviView.h; sourceTree = "<group>"; };
@@ -157,6 +148,19 @@
 		445EAAE4279ABDC1000DCC72 /* HSAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAlertView.m; sourceTree = "<group>"; };
 		445EAAE6279AC53E000DCC72 /* HSTextAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSTextAlertView.h; sourceTree = "<group>"; };
 		445EAAE7279AC53E000DCC72 /* HSTextAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSTextAlertView.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
+		445EAAED279E7CCF000DCC72 /* HSSearchHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSSearchHeaderView.h; sourceTree = "<group>"; };
+		445EAAEE279E7CCF000DCC72 /* HSSearchHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSearchHeaderView.m; sourceTree = "<group>"; };
+		445EAAF0279E8083000DCC72 /* HSHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSHomeViewController.h; sourceTree = "<group>"; };
+		445EAAF1279E8083000DCC72 /* HSHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSHomeViewController.m; sourceTree = "<group>"; };
+		445EAAF3279E810C000DCC72 /* BaseCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCollectionReusableView.h; sourceTree = "<group>"; };
+		445EAAF4279E810C000DCC72 /* BaseCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionReusableView.m; sourceTree = "<group>"; };
+		445EAAF6279E8183000DCC72 /* HSHomeHeaderReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSHomeHeaderReusableView.h; sourceTree = "<group>"; };
+		445EAAF7279E8183000DCC72 /* HSHomeHeaderReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSHomeHeaderReusableView.m; sourceTree = "<group>"; };
+		445EAAF9279E8B10000DCC72 /* HSHomeFooterReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSHomeFooterReusableView.h; sourceTree = "<group>"; };
+		445EAAFA279E8B10000DCC72 /* HSHomeFooterReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSHomeFooterReusableView.m; sourceTree = "<group>"; };
+		44DF03802796A981006EE6AC /* MediaAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaAudioEngine.m; sourceTree = "<group>"; };
+		44DF03812796A981006EE6AC /* MediaAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngine.h; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* MediaAudioEngineProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngineProtocol.h; sourceTree = "<group>"; };
 		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		44DF03872796AB9C006EE6AC /* GameSudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSudManager.h; sourceTree = "<group>"; };
@@ -244,24 +248,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		445EAA6E2798FFE4000DCC72 /* Home */ = {
+		445EAA6E2798FFE4000DCC72 /* Page */ = {
 			isa = PBXGroup;
 			children = (
-				445EAA6F2798FFE4000DCC72 /* GameList */,
+				445EAAE9279E7C7B000DCC72 /* Home */,
+				445EAA6F2798FFE4000DCC72 /* Game */,
 				445EAA702798FFE4000DCC72 /* Setting */,
 				445EAA712798FFE4000DCC72 /* Login */,
 			);
-			path = Home;
+			path = Page;
 			sourceTree = "<group>";
 		};
-		445EAA6F2798FFE4000DCC72 /* GameList */ = {
+		445EAA6F2798FFE4000DCC72 /* Game */ = {
 			isa = PBXGroup;
 			children = (
 				445EAA8127994176000DCC72 /* Model */,
 				445EAA822799417B000DCC72 /* View */,
 				445EAA8327994181000DCC72 /* Controller */,
 			);
-			path = GameList;
+			path = Game;
 			sourceTree = "<group>";
 		};
 		445EAA702798FFE4000DCC72 /* Setting */ = {
@@ -321,7 +326,6 @@
 			isa = PBXGroup;
 			children = (
 				445EAAA7279A561A000DCC72 /* Room */,
-				445EAA9C2799740B000DCC72 /* HotGame */,
 				445EAA9B279973FE000DCC72 /* GameList */,
 			);
 			path = View;
@@ -332,8 +336,6 @@
 			children = (
 				445EAA7E27994160000DCC72 /* HSGameListViewController.h */,
 				445EAA7F27994160000DCC72 /* HSGameListViewController.m */,
-				445EAA98279973CC000DCC72 /* HSHotGameViewController.h */,
-				445EAA99279973CC000DCC72 /* HSHotGameViewController.m */,
 				445EAAA4279A55E9000DCC72 /* HSRoomViewController.h */,
 				445EAAA5279A55E9000DCC72 /* HSRoomViewController.m */,
 			);
@@ -350,27 +352,10 @@
 		445EAA9B279973FE000DCC72 /* GameList */ = {
 			isa = PBXGroup;
 			children = (
-				445EAA84279941AD000DCC72 /* HSGameListNaviView.h */,
-				445EAA85279941AD000DCC72 /* HSGameListNaviView.m */,
-				445EAA9127996828000DCC72 /* HSGameListHeaderView.h */,
-				445EAA9227996828000DCC72 /* HSGameListHeaderView.m */,
-				445EAA87279948D4000DCC72 /* HSRoomTypeHeaderView.h */,
-				445EAA88279948D4000DCC72 /* HSRoomTypeHeaderView.m */,
-				445EAA8E2799610E000DCC72 /* HSHotGamesHeaderView.h */,
-				445EAA8F2799610E000DCC72 /* HSHotGamesHeaderView.m */,
 				445EAA9527996BC6000DCC72 /* HSGameListTableViewCell.h */,
 				445EAA9627996BC6000DCC72 /* HSGameListTableViewCell.m */,
 			);
 			path = GameList;
-			sourceTree = "<group>";
-		};
-		445EAA9C2799740B000DCC72 /* HotGame */ = {
-			isa = PBXGroup;
-			children = (
-				445EAAA027997584000DCC72 /* HSHotGameCollectionViewCell.h */,
-				445EAAA127997584000DCC72 /* HSHotGameCollectionViewCell.m */,
-			);
-			path = HotGame;
 			sourceTree = "<group>";
 		};
 		445EAAA7279A561A000DCC72 /* Room */ = {
@@ -424,6 +409,47 @@
 				445EAADE279AB2D9000DCC72 /* HSGiftItemCollectionViewCell.m */,
 			);
 			path = Gift;
+			sourceTree = "<group>";
+		};
+		445EAAE9279E7C7B000DCC72 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				445EAAEC279E7C8F000DCC72 /* Model */,
+				445EAAEB279E7C8A000DCC72 /* View */,
+				445EAAEA279E7C85000DCC72 /* Controller */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		445EAAEA279E7C85000DCC72 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				445EAAF0279E8083000DCC72 /* HSHomeViewController.h */,
+				445EAAF1279E8083000DCC72 /* HSHomeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		445EAAEB279E7C8A000DCC72 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				445EAAED279E7CCF000DCC72 /* HSSearchHeaderView.h */,
+				445EAAEE279E7CCF000DCC72 /* HSSearchHeaderView.m */,
+				445EAAF6279E8183000DCC72 /* HSHomeHeaderReusableView.h */,
+				445EAAF7279E8183000DCC72 /* HSHomeHeaderReusableView.m */,
+				445EAAF9279E8B10000DCC72 /* HSHomeFooterReusableView.h */,
+				445EAAFA279E8B10000DCC72 /* HSHomeFooterReusableView.m */,
+				445EAAA027997584000DCC72 /* HSGameItemCollectionViewCell.h */,
+				445EAAA127997584000DCC72 /* HSGameItemCollectionViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		445EAAEC279E7C8F000DCC72 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		44DF037E2796A981006EE6AC /* Middle */ = {
@@ -539,7 +565,7 @@
 		6C192E3F279523B000553034 = {
 			isa = PBXGroup;
 			children = (
-				445EAA6E2798FFE4000DCC72 /* Home */,
+				445EAA6E2798FFE4000DCC72 /* Page */,
 				44DF03902796B22C006EE6AC /* Common */,
 				44DF037E2796A981006EE6AC /* Middle */,
 				6C192E4A279523B000553034 /* HelloSud-iOS */,
@@ -609,6 +635,8 @@
 				6C076E662799621300650209 /* BaseModel.m */,
 				445EAA9D27997485000DCC72 /* BaseCollectionViewCell.h */,
 				445EAA9E27997485000DCC72 /* BaseCollectionViewCell.m */,
+				445EAAF3279E810C000DCC72 /* BaseCollectionReusableView.h */,
+				445EAAF4279E810C000DCC72 /* BaseCollectionReusableView.m */,
 				445EAAE0279ABB22000DCC72 /* BaseAlertView.h */,
 				445EAAE1279ABB22000DCC72 /* BaseAlertView.m */,
 			);
@@ -790,11 +818,13 @@
 				445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */,
 				445EAAD9279AAF69000DCC72 /* HSGiftUserCollectionViewCell.m in Sources */,
 				445EAA8D27995D5F000DCC72 /* NSArray+Masonry.m in Sources */,
+				445EAAEF279E7CCF000DCC72 /* HSSearchHeaderView.m in Sources */,
 				44DF03A52797E6FC006EE6AC /* GamePlayerStateModel.m in Sources */,
 				44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */,
 				44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */,
 				6C192E53279523B000553034 /* ViewController.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
+				445EAAF5279E810C000DCC72 /* BaseCollectionReusableView.m in Sources */,
 				6C192E732797B19100553034 /* UIColor+Extension.m in Sources */,
 				445EAAE2279ABB22000DCC72 /* BaseAlertView.m in Sources */,
 				6C076E71279E429E00650209 /* ZegoAudioEngine.m in Sources */,
@@ -807,41 +837,39 @@
 				445EAACC279A9C30000DCC72 /* HSAudioMicroView.m in Sources */,
 				445EAA7D279915E8000DCC72 /* HSGenderView.m in Sources */,
 				44DF039F2797B62B006EE6AC /* GamePublicMsgModel.m in Sources */,
-				445EAAA227997584000DCC72 /* HSHotGameCollectionViewCell.m in Sources */,
+				445EAAA227997584000DCC72 /* HSGameItemCollectionViewCell.m in Sources */,
 				6C076E7D279E833C00650209 /* MediaAudioEngineManager.m in Sources */,
 				6C192E5E279523B100553034 /* main.m in Sources */,
 				445EAADC279AB262000DCC72 /* HSRoomGiftContentView.m in Sources */,
-				445EAA902799610E000DCC72 /* HSHotGamesHeaderView.m in Sources */,
 				44DF03A22797E467006EE6AC /* GameKeyWordHitModel.m in Sources */,
 				9DD9CB34279A5CA50054B91D /* DeviceUtil.m in Sources */,
 				445EAA7727990035000DCC72 /* HSLoginViewController.m in Sources */,
 				6C076E6D2799823A00650209 /* HSWebViewController.m in Sources */,
-				445EAA86279941AD000DCC72 /* HSGameListNaviView.m in Sources */,
 				6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */,
 				445EAAAA279A562C000DCC72 /* HSRoomNaviView.m in Sources */,
 				6C076E6A27996C2700650209 /* HSSetingHeadView.m in Sources */,
 				44DF03AE2797F124006EE6AC /* FsmAppToMgManager.m in Sources */,
 				445EAAC5279A90C0000DCC72 /* HSRoomGiftTableViewCell.m in Sources */,
+				445EAAF2279E8083000DCC72 /* HSHomeViewController.m in Sources */,
 				6C076E6127995F4C00650209 /* HSSettingCell.m in Sources */,
 				6C192E932797E31200553034 /* HSSheetView.m in Sources */,
 				445EAAAD279A5CF6000DCC72 /* HSRoomOperatorView.m in Sources */,
 				445EAA9F27997485000DCC72 /* BaseCollectionViewCell.m in Sources */,
 				6C192E912797E31200553034 /* AppUtil.m in Sources */,
 				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
-				445EAA9327996828000DCC72 /* HSGameListHeaderView.m in Sources */,
 				445EAAD2279AA64E000DCC72 /* HSSwitchRoomModeView.m in Sources */,
 				445EAAB9279A67F3000DCC72 /* HSBaseMsgCell.m in Sources */,
 				445EAAB3279A65B9000DCC72 /* HSRoomMsgTableView.m in Sources */,
-				445EAA9A279973CC000DCC72 /* HSHotGameViewController.m in Sources */,
 				445EAAC2279A6DDC000DCC72 /* HSRoomSystemTableViewCell.m in Sources */,
 				445EAABC279A6DA0000DCC72 /* HSRoomTextTableViewCell.m in Sources */,
 				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
+				445EAAF8279E8183000DCC72 /* HSHomeHeaderReusableView.m in Sources */,
 				6C192E922797E31200553034 /* Constant.m in Sources */,
 				445EAAE8279AC53E000DCC72 /* HSTextAlertView.m in Sources */,
-				445EAA89279948D4000DCC72 /* HSRoomTypeHeaderView.m in Sources */,
 				6C076E572799450900650209 /* HSSettingViewController.m in Sources */,
 				445EAADF279AB2D9000DCC72 /* HSGiftItemCollectionViewCell.m in Sources */,
 				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
+				445EAAFB279E8B10000DCC72 /* HSHomeFooterReusableView.m in Sources */,
 				445EAAC9279A98DB000DCC72 /* HSRoomMsgBgView.m in Sources */,
 				445EAA9727996BC6000DCC72 /* HSGameListTableViewCell.m in Sources */,
 				6C192E922797E31200553034 /* Constant.m in Sources */,
