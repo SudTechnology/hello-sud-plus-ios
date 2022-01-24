@@ -41,6 +41,7 @@
 - (void)configAudioEngine {
     /// 使用zego语音引擎
     [MediaAudioEngineManager.shared makeEngine:ZegoAudioEngine.class];
+    /// 初始化引擎SDK
     [MediaAudioEngineManager.shared.audioEngine config:@"581733944" appKey:@"8d8c5698d49929056462dba41cb48cdd4d05babd8c2c68e450b3883096656b87"];
 }
 

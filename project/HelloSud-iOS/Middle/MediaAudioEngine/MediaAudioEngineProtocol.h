@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 多媒体语音引擎协议
+/// 多媒体语音引擎协议，多引擎实现一下协议
 @protocol MediaAudioEngineProtocol <NSObject>
 
 /// 设置事件处理器
