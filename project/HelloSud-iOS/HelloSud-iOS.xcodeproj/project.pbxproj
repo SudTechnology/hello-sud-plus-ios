@@ -63,6 +63,11 @@
 		6C076E80279E8EBD00650209 /* MediaAudioCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E7F279E8EBD00650209 /* MediaAudioCommon.m */; };
 		6C076E88279EA2F800650209 /* HSVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E87279EA2F800650209 /* HSVideoViewController.m */; };
 		6C076E8B279EA30A00650209 /* HSQuickStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E8A279EA30A00650209 /* HSQuickStartViewController.m */; };
+		6C076E90279EA50700650209 /* HSAudioRoomViewController+IM.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E8F279EA50700650209 /* HSAudioRoomViewController+IM.m */; };
+		6C076E94279EA7BF00650209 /* HSAudioMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E93279EA7BF00650209 /* HSAudioMsgModel.m */; };
+		6C076E97279EA9B200650209 /* HSAudioUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E96279EA9B200650209 /* HSAudioUserModel.m */; };
+		6C076E9B279EC4F100650209 /* HSAudioMsgTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E9A279EC4F100650209 /* HSAudioMsgTextModel.m */; };
+		6C076E9E279EC54200650209 /* HSAudioMsgGiftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E9D279EC54200650209 /* HSAudioMsgGiftModel.m */; };
 		6C192E4D279523B000553034 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E4C279523B000553034 /* AppDelegate.m */; };
 		6C192E53279523B000553034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E52279523B000553034 /* ViewController.m */; };
 		6C192E56279523B000553034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E54279523B000553034 /* Main.storyboard */; };
@@ -205,6 +210,17 @@
 		6C076E87279EA2F800650209 /* HSVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSVideoViewController.m; sourceTree = "<group>"; };
 		6C076E89279EA30A00650209 /* HSQuickStartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQuickStartViewController.h; sourceTree = "<group>"; };
 		6C076E8A279EA30A00650209 /* HSQuickStartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQuickStartViewController.m; sourceTree = "<group>"; };
+		6C076E8E279EA50700650209 /* HSAudioRoomViewController+IM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSAudioRoomViewController+IM.h"; sourceTree = "<group>"; };
+		6C076E8F279EA50700650209 /* HSAudioRoomViewController+IM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "HSAudioRoomViewController+IM.m"; sourceTree = "<group>"; };
+		6C076E92279EA7BF00650209 /* HSAudioMsgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioMsgModel.h; sourceTree = "<group>"; };
+		6C076E93279EA7BF00650209 /* HSAudioMsgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioMsgModel.m; sourceTree = "<group>"; };
+		6C076E95279EA9B200650209 /* HSAudioUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioUserModel.h; sourceTree = "<group>"; };
+		6C076E96279EA9B200650209 /* HSAudioUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioUserModel.m; sourceTree = "<group>"; };
+		6C076E98279EC43800650209 /* HSAudioMsgConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioMsgConst.h; sourceTree = "<group>"; };
+		6C076E99279EC4F100650209 /* HSAudioMsgTextModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioMsgTextModel.h; sourceTree = "<group>"; };
+		6C076E9A279EC4F100650209 /* HSAudioMsgTextModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioMsgTextModel.m; sourceTree = "<group>"; };
+		6C076E9C279EC54200650209 /* HSAudioMsgGiftModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioMsgGiftModel.h; sourceTree = "<group>"; };
+		6C076E9D279EC54200650209 /* HSAudioMsgGiftModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioMsgGiftModel.m; sourceTree = "<group>"; };
 		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -592,6 +608,7 @@
 		6C076E85279EA2CF00650209 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				6C076E91279EA78F00650209 /* Model */,
 				6C076E8D279EA34700650209 /* View */,
 				6C076E8C279EA30F00650209 /* Controller */,
 			);
@@ -603,6 +620,8 @@
 			children = (
 				445EAAA4279A55E9000DCC72 /* HSAudioRoomViewController.h */,
 				445EAAA5279A55E9000DCC72 /* HSAudioRoomViewController.m */,
+				6C076E8E279EA50700650209 /* HSAudioRoomViewController+IM.h */,
+				6C076E8F279EA50700650209 /* HSAudioRoomViewController+IM.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -613,6 +632,22 @@
 				445EAAA7279A561A000DCC72 /* Room */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		6C076E91279EA78F00650209 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C076E92279EA7BF00650209 /* HSAudioMsgModel.h */,
+				6C076E93279EA7BF00650209 /* HSAudioMsgModel.m */,
+				6C076E95279EA9B200650209 /* HSAudioUserModel.h */,
+				6C076E96279EA9B200650209 /* HSAudioUserModel.m */,
+				6C076E98279EC43800650209 /* HSAudioMsgConst.h */,
+				6C076E99279EC4F100650209 /* HSAudioMsgTextModel.h */,
+				6C076E9A279EC4F100650209 /* HSAudioMsgTextModel.m */,
+				6C076E9C279EC54200650209 /* HSAudioMsgGiftModel.h */,
+				6C076E9D279EC54200650209 /* HSAudioMsgGiftModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6C192E3F279523B000553034 = {
@@ -872,6 +907,7 @@
 				6C076E88279EA2F800650209 /* HSVideoViewController.m in Sources */,
 				445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */,
 				445EAAD9279AAF69000DCC72 /* HSGiftUserCollectionViewCell.m in Sources */,
+				6C076E97279EA9B200650209 /* HSAudioUserModel.m in Sources */,
 				445EAA8D27995D5F000DCC72 /* NSArray+Masonry.m in Sources */,
 				445EAAEF279E7CCF000DCC72 /* HSSearchHeaderView.m in Sources */,
 				44DF03A52797E6FC006EE6AC /* GamePlayerStateModel.m in Sources */,
@@ -887,6 +923,7 @@
 				445EAA8027994160000DCC72 /* HSGameListViewController.m in Sources */,
 				6C076E642799605600650209 /* HSSettingModel.m in Sources */,
 				6C076E672799621300650209 /* BaseModel.m in Sources */,
+				6C076E90279EA50700650209 /* HSAudioRoomViewController+IM.m in Sources */,
 				445EAACF279AA133000DCC72 /* HSAudioMicContentView.m in Sources */,
 				6C076E80279E8EBD00650209 /* MediaAudioCommon.m in Sources */,
 				445EAACC279A9C30000DCC72 /* HSAudioMicroView.m in Sources */,
@@ -912,12 +949,14 @@
 				445EAA9F27997485000DCC72 /* BaseCollectionViewCell.m in Sources */,
 				6C192E912797E31200553034 /* AppUtil.m in Sources */,
 				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
+				6C076E94279EA7BF00650209 /* HSAudioMsgModel.m in Sources */,
 				445EAAD2279AA64E000DCC72 /* HSSwitchRoomModeView.m in Sources */,
 				6C076E8B279EA30A00650209 /* HSQuickStartViewController.m in Sources */,
 				445EAAB9279A67F3000DCC72 /* HSBaseMsgCell.m in Sources */,
 				445EAAB3279A65B9000DCC72 /* HSRoomMsgTableView.m in Sources */,
 				445EAAC2279A6DDC000DCC72 /* HSRoomSystemTableViewCell.m in Sources */,
 				445EAABC279A6DA0000DCC72 /* HSRoomTextTableViewCell.m in Sources */,
+				6C076E9B279EC4F100650209 /* HSAudioMsgTextModel.m in Sources */,
 				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
 				445EAAF8279E8183000DCC72 /* HSHomeHeaderReusableView.m in Sources */,
 				6C192E922797E31200553034 /* Constant.m in Sources */,
@@ -927,6 +966,7 @@
 				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
 				445EAAFB279E8B10000DCC72 /* HSHomeFooterReusableView.m in Sources */,
 				445EAAC9279A98DB000DCC72 /* HSRoomMsgBgView.m in Sources */,
+				6C076E9E279EC54200650209 /* HSAudioMsgGiftModel.m in Sources */,
 				445EAA9727996BC6000DCC72 /* HSGameListTableViewCell.m in Sources */,
 				6C192E922797E31200553034 /* Constant.m in Sources */,
 				445EAAE5279ABDC1000DCC72 /* HSAlertView.m in Sources */,

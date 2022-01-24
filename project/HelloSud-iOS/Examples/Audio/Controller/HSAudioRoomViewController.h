@@ -6,12 +6,12 @@
 //
 
 #import "BaseViewController.h"
-
+#import "MediaAudioEngineManager.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房间场景
-@interface HSAudioRoomViewController : BaseViewController
-
+@interface HSAudioRoomViewController : BaseViewController<MediaAudioEventHandler>
+@property(nonatomic, copy)NSString *roomID;
 @end
 
 NS_ASSUME_NONNULL_END
