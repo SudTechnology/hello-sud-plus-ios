@@ -1,5 +1,5 @@
 //
-//  HSHotGameCollectionViewCell.h
+//  HSGameItemCollectionViewCell.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/20.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HSHotGameCollectionViewCell: BaseCollectionViewCell
+@interface HSGameItemCollectionViewCell: BaseCollectionViewCell
 
 @end
 

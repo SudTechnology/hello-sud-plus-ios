@@ -8,6 +8,7 @@
 #import "HSMainTabBarController.h"
 #import "HSGameListViewController.h"
 #import "HSSettingViewController.h"
+#import "HSHomeViewController.h"
 
 @interface HSMainTabBarController ()
 
@@ -27,11 +28,19 @@
 
 - (void)configMainPage {
     // Do any additional setup after loading the view.
+    
+    HSHomeViewController *home = [[HSHomeViewController alloc]init];
+    BaseNavigationViewController * navHome = [[BaseNavigationViewController alloc]initWithRootViewController:home];
+    home.tabBarItem.title = @"主页";
+    home.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_game_list"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    home.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_game_list"];
+    
     HSGameListViewController *gameList = [[HSGameListViewController alloc]init];
     BaseNavigationViewController * navGameList = [[BaseNavigationViewController alloc]initWithRootViewController:gameList];
-    gameList.tabBarItem.title = @"主页";
+    gameList.tabBarItem.title = @"房间";
     gameList.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_game_list"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     gameList.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_game_list"];
+    
     HSSettingViewController *setting = [[HSSettingViewController alloc]init];
     setting.tabBarItem.title = @"设置";
     setting.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_setting"];
@@ -39,6 +48,7 @@
     BaseNavigationViewController * navSetting = [[BaseNavigationViewController alloc]initWithRootViewController:setting];
     
     
+    [self addChildViewController:navHome];
     [self addChildViewController:navGameList];
     [self addChildViewController:navSetting];
 }
