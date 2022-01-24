@@ -12,6 +12,7 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 #import "CommonHeader.h"
 #import "HSSheetView.h"
+#import "HSAlertView.h"
 
 #import "UIView+Extension.h"
 #import "NSArray+Masonry.h"

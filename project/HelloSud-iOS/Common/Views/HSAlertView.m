@@ -49,7 +49,7 @@
         BOOL contains = CGRectContainsPoint(frame, point);
         if (!contains) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self close];
+                [self hs_close];
             });
             return self;
         }
@@ -70,26 +70,54 @@
     }
     
     /// 如果存在移除当前展示弹窗
-    if (h_alertView != nil && [NSStringFromClass(self) isEqualToString:@"HSAlertView"]) {
-        [h_alertView removeFromSuperview];
+    if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"HSAlertView"]) {
+        [[self getAlert] removeFromSuperview];
     }
     
     HSAlertView *alert = [[HSAlertView alloc] init];
-    alert.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2" alpha:0.9];
+    alert.contentView.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2" alpha:0.9];
     alert.isHitTest = isHitTest;
     alert.customView = view;
-    alert.layer.cornerRadius = 8;
-    alert.layer.masksToBounds = true;
+    alert.contentView.layer.cornerRadius = 8;
+    alert.contentView.layer.masksToBounds = true;
     alert.onCloseViewCallBack = cb;
     [alert setupUI];
     [superView addSubview:alert];
-    h_alertView = alert;
-    [h_alertView show];
+    [self setAlert:alert];
+    [[self getAlert] hs_show];
 }
 
-+ (void)showTextAlert:(NSString *)msg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onCloseCallback:(void(^)(void))cb {
-    HSAlertView *alert = [[HSAlertView alloc] init];
-    
+/// 展示中心弹窗 - （文本 + 确定 + 取消）
+/// @param msg 文本
+/// @param sureText 确定Item文本
+/// @param cancelText 取消Item文本
+/// @param sureCb sure回调
+/// @param closeCb close回调
++ (void)showTextAlert:(NSString *)msg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
+    HSTextAlertView *alert = [[HSTextAlertView alloc] init];
+    [alert config:msg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
+    [HSAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+        closeCb();
+    }];
+}
+
+/// 展示中心弹窗 - （文本 + 确定 + 取消）
+/// @param attrMsg 富文本
+/// @param sureText 确定Item文本
+/// @param cancelText 取消Item文本
+/// @param sureCb sure回调
+/// @param closeCb close回调
++ (void)showAttrTextAlert:(NSAttributedString *)attrMsg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
+    HSTextAlertView *alert = [[HSTextAlertView alloc] init];
+    [alert configAttr:attrMsg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
+    [HSAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+        closeCb();
+    }];
+}
+
+/// 关闭弹窗
++ (void)close {
+    [[self getAlert] hs_close];
 }
 
 @end

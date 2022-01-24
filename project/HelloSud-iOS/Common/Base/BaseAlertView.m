@@ -13,8 +13,11 @@
 
 @implementation BaseAlertView
 
+static BaseAlertView *h_alertView = nil;
+
 /// 展示弹窗
-- (void)show {
+- (void)hs_show {
+    self.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
     self.alpha = 0;
     [UIView animateWithDuration:0.2 animations:^{
         self.alpha = 1;
@@ -23,14 +26,13 @@
 }
 
 /// 关闭弹窗
-- (void)close {
+- (void)hs_close {
     if (h_alertView != nil) {
         [h_alertView closeNode];
     }
 }
 
 - (void)closeNode {
-    
     self.backView.alpha = 0;
     if (self.onCloseViewCallBack) {
         self.onCloseViewCallBack();
@@ -64,5 +66,14 @@
     }
     return _customView;
 }
+
++ (BaseAlertView *)getAlert {
+    return  h_alertView;
+}
+
++ (void)setAlert: (BaseAlertView *)alert {
+    h_alertView = alert;
+}
+
 
 @end
