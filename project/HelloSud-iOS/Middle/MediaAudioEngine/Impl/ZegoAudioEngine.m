@@ -133,4 +133,60 @@
 }
 
 #pragma mark ZegoEventHandler
+
+- (void)onIMRecvCustomCommand:(NSString *)command fromUser:(ZegoUser *)fromUser roomID:(NSString *)roomID {
+    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onIMRecvCustomCommand:fromUser:roomID:)]) {
+        MediaUser *user = MediaUser.new;
+        user.userID = fromUser.userID;
+        user.nickname = fromUser.userName;
+        [self.eventHandler onIMRecvCustomCommand:command fromUser:user roomID:roomID];
+    }
+}
+
+- (void)onCapturedSoundLevelUpdate:(NSNumber *)soundLevel {
+    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onCapturedSoundLevelUpdate:)]) {
+        [self.eventHandler onCapturedSoundLevelUpdate:soundLevel];
+    }
+}
+
+- (void)onRemoteSoundLevelUpdate:(NSDictionary<NSString *,NSNumber *> *)soundLevels {
+    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRemoteSoundLevelUpdate:)]) {
+        [self.eventHandler onRemoteSoundLevelUpdate:soundLevels];
+    }
+}
+
+- (void)onRoomStreamUpdate:(ZegoUpdateType)updateType streamList:(NSArray<ZegoStream *> *)streamList extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {
+    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRoomStreamUpdate:streamList:extendedData:roomID:)]) {
+        NSMutableArray *arr = NSMutableArray.new;
+        for (ZegoStream *m in streamList) {
+            MediaStream *stream = MediaStream.new;
+            MediaUser *user = MediaUser.new;
+            user.userID = m.user.userID;
+            user.nickname = m.user.userName;
+            stream.user = user;
+            stream.streamID = m.streamID;
+            stream.extraInfo = m.extraInfo;
+            [arr addObject:stream];
+        }
+        [self.eventHandler onRoomStreamUpdate:updateType streamList:arr extendedData:extendedData roomID:roomID];
+    }
+}
+
+- (void)onPublisherStateUpdate:(ZegoPublisherState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData streamID:(NSString *)streamID {
+    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onPublisherStateUpdate:errorCode:extendedData:streamID:)]) {
+        [self.eventHandler onPublisherStateUpdate:state errorCode:errorCode extendedData:extendedData streamID:streamID];
+    }
+}
+
+- (void)onPlayerStateUpdate:(ZegoPlayerState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData streamID:(NSString *)streamID {
+    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onPlayerStateUpdate:errorCode:extendedData:streamID:)]) {
+        [self.eventHandler onPlayerStateUpdate:state extendedData:extendedData streamID:streamID];
+    }
+}
+
+- (void)onNetworkModeChanged:(ZegoNetworkMode)mode {
+    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onNetworkModeChanged:)]) {
+        [self.eventHandler onNetworkModeChanged:mode];
+    }
+}
 @end

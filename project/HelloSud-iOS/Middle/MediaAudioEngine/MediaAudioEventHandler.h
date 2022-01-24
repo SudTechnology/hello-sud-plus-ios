@@ -45,6 +45,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// SDK网络状态变化
 /// @param mode mode description
 - (void)onNetworkModeChanged:(MediaAudioEngineNetworkStateType)mode;
+
+/// 接收自定义指令信息回调
+/// @param command 指令内容
+/// @param fromUser 用户
+/// @param roomID 房间ID
+- (void)onIMRecvCustomCommand:(NSString *)command fromUser:(MediaUser *)fromUser roomID:(NSString *)roomID;
 @end
 
 NS_ASSUME_NONNULL_END
