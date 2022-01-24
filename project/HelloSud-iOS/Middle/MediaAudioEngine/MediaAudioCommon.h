@@ -129,9 +129,10 @@ typedef NS_ENUM(NSInteger, MediaAudioEngineNetworkSampleRateType) {
 
 /// 媒体流信息
 @interface MediaStream: NSObject {
-    MediaUser *user;
-    NSString *streamID;
-    NSString *extraInfo;
+
 }
+@property(nonatomic, strong)MediaUser *user;
+@property(nonatomic, copy)NSString *streamID;
+@property(nonatomic, copy)NSString *extraInfo;
 @end
 NS_ASSUME_NONNULL_END
