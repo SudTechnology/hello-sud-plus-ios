@@ -33,8 +33,8 @@
         make.centerX.mas_equalTo(self.contentView);
     }];
     [self.selectView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(-3);
-        make.right.mas_equalTo(3);
+        make.top.mas_equalTo(self.headerView.mas_top).offset(-3);
+        make.right.mas_equalTo(self.headerView.mas_right).offset(3);
         make.size.mas_equalTo(CGSizeMake(16, 16));
     }];
 }
@@ -44,6 +44,7 @@
         _headerView = [[UIImageView alloc] init];
         _selectView.image = [UIImage imageNamed:@"room_mic_up"];
         _headerView.layer.masksToBounds = true;
+        _headerView.backgroundColor = [UIColor yellowColor];
     }
     return _headerView;
 }

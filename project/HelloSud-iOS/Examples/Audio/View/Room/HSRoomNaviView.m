@@ -41,7 +41,14 @@
 
 - (void)selectNodeEvent:(UITapGestureRecognizer *)gesture {
     [HSSheetView show:[[HSSwitchRoomModeView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
-        printf(@"ssss");
+        
+    }];
+}
+
+- (void)onCloseRoomEvent {
+    [HSAlertView showTextAlert:@"确认关闭/离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+        [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
+    } onCloseCallback:^{
     }];
 }
 
@@ -131,6 +138,7 @@
     if (!_closeBtn) {
         _closeBtn = [[UIButton alloc] init];
         [_closeBtn setImage:[UIImage imageNamed:@"room_navi_close"] forState:UIControlStateNormal];
+        [_closeBtn addTarget:self action:@selector(onCloseRoomEvent) forControlEvents:UIControlEventTouchUpInside];
     }
     return _closeBtn;
 }
