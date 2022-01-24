@@ -74,8 +74,13 @@
     if (!_giftBtn) {
         _giftBtn = [[UIButton alloc] init];
         [_giftBtn setImage:[UIImage imageNamed:@"room_ope_gift"] forState:UIControlStateNormal];
+        [_giftBtn addTarget:self action:@selector(onBtnGift:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _giftBtn;
+}
+
+- (void)onBtnGift:(UIButton *)sender {
+    if (self.giftTapBlock) self.giftTapBlock(sender);
 }
 
 @end
