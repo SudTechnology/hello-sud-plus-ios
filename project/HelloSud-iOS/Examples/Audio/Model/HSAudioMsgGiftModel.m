@@ -8,5 +8,7 @@
 #import "HSAudioMsgGiftModel.h"
 
 @implementation HSAudioMsgGiftModel
-
+- (NSString *)cellName {
+    return @"HSRoomGiftTableViewCell";
+}
 @end

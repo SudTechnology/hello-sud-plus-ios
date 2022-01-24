@@ -34,9 +34,30 @@
     }
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[NSData dataWithBytes:command.UTF8String length:command.length] options:NSJSONReadingMutableContainers error:nil];
     NSInteger cmd = [dic[@"cmd"] integerValue];
+    HSAudioMsgBaseModel *msgModel = nil;
     switch (cmd) {
-        
+        case CMD_PUBLIC_MSG_NTF:{
+            msgModel = [HSAudioMsgTextModel mj_objectWithKeyValues:command];
+        }
+            break;
+        case CMD_PUBLIC_SEND_GIFT_NTF:{
+            msgModel = [HSAudioMsgGiftModel mj_objectWithKeyValues:command];
+        }
+            break;
+        case CMD_UP_MIC_NTF:{
+            msgModel = [HSAudioMsgMicModel mj_objectWithKeyValues:command];
+        }
+            break;
+        case CMD_DOWN_MIC_NTF:{
+            msgModel = [HSAudioMsgMicModel mj_objectWithKeyValues:command];
+        }
+            break;
+        default:{
+            HSAudioMsgTextModel *textModel = HSAudioMsgTextModel.new;
+            textModel.content = @"无法显示该消息，请升级最新版本";
+            msgModel = textModel;
+        }
+            break;
     }
-    
 }
 @end

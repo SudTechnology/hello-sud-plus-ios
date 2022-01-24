@@ -1,5 +1,5 @@
 //
-//  HSAudioMsgGiftModel.h
+//  HSAudioMsgMicModel.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
@@ -9,8 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 礼物消息
-@interface HSAudioMsgGiftModel : HSAudioMsgBaseModel
+/// 麦位操作协议
+@interface HSAudioMsgMicModel : HSAudioMsgBaseModel
 
 @end
 
