@@ -52,7 +52,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    HSHotGameViewController *vc = [[HSHotGameViewController alloc] init];
-//    HSRoomViewController *vc = [[HSRoomViewController alloc] init];
+//    HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
 //    [self.navigationController pushViewController:vc animated:true];
 }
 

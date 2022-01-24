@@ -1,18 +1,18 @@
 //
-//  HSRoomViewController.m
+//  HSAudioRoomViewController.m
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/21.
 //
 
-#import "HSRoomViewController.h"
+#import "HSAudioRoomViewController.h"
 #import "HSRoomNaviView.h"
 #import "HSRoomOperatorView.h"
 #import "HSRoomMsgBgView.h"
 #import "HSRoomMsgTableView.h"
 #import "HSAudioMicContentView.h"
 
-@interface HSRoomViewController ()
+@interface HSAudioRoomViewController ()
 @property (nonatomic, strong) UIImageView *bgImageView;
 @property (nonatomic, strong) HSRoomNaviView *naviView;
 @property (nonatomic, strong) HSRoomOperatorView *operatorView;
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation HSRoomViewController
+@implementation HSAudioRoomViewController
 
 - (BOOL)hsIsHidenNavigationBar {
     return YES;

@@ -1,5 +1,5 @@
 //
-//  HSRoomViewController.h
+//  HSAudioRoomViewController.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/21.
@@ -9,7 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HSRoomViewController : BaseViewController
+/// 语音房间场景
+@interface HSAudioRoomViewController : BaseViewController
 
 @end
 
