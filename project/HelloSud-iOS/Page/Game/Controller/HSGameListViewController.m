@@ -8,7 +8,7 @@
 #import "HSGameListViewController.h"
 #import "HSSearchHeaderView.h"
 #import "HSGameListTableViewCell.h"
-#import "HSRoomViewController.h"
+#import "HSAudioRoomViewController.h"
 
 @interface HSGameListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) HSSearchHeaderView *searchHeaderView;
@@ -62,7 +62,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    HSHotGameViewController *vc = [[HSHotGameViewController alloc] init];
-    HSRoomViewController *vc = [[HSRoomViewController alloc] init];
+    HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
     [self.navigationController pushViewController:vc animated:true];
 }
 

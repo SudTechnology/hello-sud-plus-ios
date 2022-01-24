@@ -10,7 +10,7 @@
 #import "HSGameItemCollectionViewCell.h"
 #import "HSHomeHeaderReusableView.h"
 #import "HSHomeFooterReusableView.h"
-#import "HSRoomViewController.h"
+#import "HSAudioRoomViewController.h"
 
 @interface HSHomeViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -79,7 +79,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    HSRoomViewController *vc = [[HSRoomViewController alloc] init];
+    HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
     [self.navigationController pushViewController:vc animated:true];
 }
 

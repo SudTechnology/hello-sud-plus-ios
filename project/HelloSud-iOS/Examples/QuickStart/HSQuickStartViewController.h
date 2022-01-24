@@ -8,7 +8,7 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+/// 快速接入场景
 @interface HSQuickStartViewController : BaseViewController
 
 @end

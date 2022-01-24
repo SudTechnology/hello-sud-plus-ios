@@ -17,7 +17,7 @@
 		445EAA9727996BC6000DCC72 /* HSGameListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA9627996BC6000DCC72 /* HSGameListTableViewCell.m */; };
 		445EAA9F27997485000DCC72 /* BaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA9E27997485000DCC72 /* BaseCollectionViewCell.m */; };
 		445EAAA227997584000DCC72 /* HSGameItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAA127997584000DCC72 /* HSGameItemCollectionViewCell.m */; };
-		445EAAA6279A55E9000DCC72 /* HSRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAA5279A55E9000DCC72 /* HSRoomViewController.m */; };
+		445EAAA6279A55E9000DCC72 /* HSAudioRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAA5279A55E9000DCC72 /* HSAudioRoomViewController.m */; };
 		445EAAAA279A562C000DCC72 /* HSRoomNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAA9279A562C000DCC72 /* HSRoomNaviView.m */; };
 		445EAAAD279A5CF6000DCC72 /* HSRoomOperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAAC279A5CF6000DCC72 /* HSRoomOperatorView.m */; };
 		445EAAB0279A62F1000DCC72 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAAF279A62F1000DCC72 /* UIView+Extension.m */; };
@@ -109,8 +109,8 @@
 		445EAA9E27997485000DCC72 /* BaseCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionViewCell.m; sourceTree = "<group>"; };
 		445EAAA027997584000DCC72 /* HSGameItemCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameItemCollectionViewCell.h; sourceTree = "<group>"; };
 		445EAAA127997584000DCC72 /* HSGameItemCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameItemCollectionViewCell.m; sourceTree = "<group>"; };
-		445EAAA4279A55E9000DCC72 /* HSRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomViewController.h; sourceTree = "<group>"; };
-		445EAAA5279A55E9000DCC72 /* HSRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomViewController.m; sourceTree = "<group>"; };
+		445EAAA4279A55E9000DCC72 /* HSAudioRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioRoomViewController.h; sourceTree = "<group>"; };
+		445EAAA5279A55E9000DCC72 /* HSAudioRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioRoomViewController.m; sourceTree = "<group>"; };
 		445EAAA8279A562C000DCC72 /* HSRoomNaviView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomNaviView.h; sourceTree = "<group>"; };
 		445EAAA9279A562C000DCC72 /* HSRoomNaviView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomNaviView.m; sourceTree = "<group>"; };
 		445EAAAB279A5CF6000DCC72 /* HSRoomOperatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomOperatorView.h; sourceTree = "<group>"; };
@@ -601,8 +601,8 @@
 		6C076E8C279EA30F00650209 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				445EAAA4279A55E9000DCC72 /* HSRoomViewController.h */,
-				445EAAA5279A55E9000DCC72 /* HSRoomViewController.m */,
+				445EAAA4279A55E9000DCC72 /* HSAudioRoomViewController.h */,
+				445EAAA5279A55E9000DCC72 /* HSAudioRoomViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -867,7 +867,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				445EAA9427996AC6000DCC72 /* BaseNavigationViewController.m in Sources */,
-				445EAAA6279A55E9000DCC72 /* HSRoomViewController.m in Sources */,
+				445EAAA6279A55E9000DCC72 /* HSAudioRoomViewController.m in Sources */,
 				445EAAB0279A62F1000DCC72 /* UIView+Extension.m in Sources */,
 				6C076E88279EA2F800650209 /* HSVideoViewController.m in Sources */,
 				445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */,

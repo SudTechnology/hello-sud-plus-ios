@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 视频房间场景
 @interface HSVideoViewController : BaseViewController
 
 @end
