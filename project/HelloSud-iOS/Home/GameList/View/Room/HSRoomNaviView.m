@@ -40,9 +40,8 @@
 }
 
 - (void)selectNodeEvent:(UITapGestureRecognizer *)gesture {
-    HSSheetView *sheet  = [[HSSheetView alloc] init];
-    [sheet showIn:AppUtil.currentWindow customView:[[HSSwitchRoomModeView alloc] init] onCloseCallback:^{
-        
+    [HSSheetView show:[[HSSwitchRoomModeView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
+        printf(@"ssss");
     }];
 }
 
