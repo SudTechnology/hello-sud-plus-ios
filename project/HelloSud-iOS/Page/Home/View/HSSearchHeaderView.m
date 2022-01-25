@@ -66,6 +66,15 @@
     }];
 }
 
+- (void)hsUpdateUI {
+    HSAccountUserModel *userInfo = HSAppManager.shared.loginUserInfo;
+    self.userNameLabel.text = userInfo.name;
+    self.userIdLabel.text = [NSString stringWithFormat:@"用户ID: %@", userInfo.userID];
+    if (userInfo.icon.length > 0) {
+        [self.headerView sd_setImageWithURL:[NSURL URLWithString:userInfo.icon]];
+    }
+}
+
 
 - (UIImageView *)headerView {
     if (!_headerView) {
