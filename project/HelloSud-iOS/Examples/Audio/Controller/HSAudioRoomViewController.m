@@ -15,6 +15,8 @@
 #import "HSRoomMsgTableView.h"
 #import "HSAudioMicContentView.h"
 #import "HSRoomInputView.h"
+#import "HSGameMicContentView.h"
+#import "HSAudioMicroView.h"
 
 @interface HSAudioRoomViewController ()
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -22,8 +24,11 @@
 @property (nonatomic, strong) HSRoomOperatorView *operatorView;
 @property (nonatomic, strong) HSRoomMsgBgView *msgBgView;
 @property (nonatomic, strong) HSRoomMsgTableView *msgTableView;
-@property (nonatomic, strong) HSAudioMicContentView *micContentView;
+@property (nonatomic, strong) HSAudioMicContentView *audioMicContentView;
+@property (nonatomic, strong) HSGameMicContentView *gameMicContentView;
 @property (nonatomic, strong) HSRoomInputView *inputView;
+/// 主播视图列表
+@property (nonatomic, strong) NSArray <HSAudioMicroView *> *arrAnchorView;
 
 @end
 
@@ -41,13 +46,16 @@
     /// 设置语音引擎事件回调
     [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
     [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
+    
+    self.roomType = HSGame;
 }
 
 - (void)hsAddViews {
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.naviView];
     [self.view addSubview:self.operatorView];
-    [self.view addSubview:self.micContentView];
+    [self.view addSubview:self.audioMicContentView];
+    [self.view addSubview:self.gameMicContentView];
     [self.view addSubview:self.msgBgView];
     [self.msgBgView addSubview:self.msgTableView];
     [self.view addSubview:self.inputView];
@@ -67,13 +75,18 @@
         make.bottom.mas_equalTo(-kAppSafeBottom);
         make.height.mas_equalTo(44);
     }];
-    [self.micContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.audioMicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.naviView.mas_bottom).offset(20);
         make.left.right.mas_equalTo(self.view);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
+    [self.gameMicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.naviView.mas_bottom).offset(20);
+        make.left.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(55);
+    }];
     [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.micContentView.mas_bottom);
+        make.top.mas_equalTo(self.audioMicContentView.mas_bottom);
         make.left.right.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.operatorView.mas_top).offset(-20);
         make.height.mas_greaterThanOrEqualTo(0);
@@ -83,7 +96,7 @@
     }];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(50);
+        make.bottom.mas_equalTo(80);
     }];
 }
 
@@ -101,12 +114,46 @@
         [weakSelf sendMsg:m];
         [weakSelf addMsg:m];
     };
+    if (self.roomType == HSAudioMic) {
+        self.audioMicContentView.updateMicArrCallBack = ^(NSArray<HSAudioMicroView *> * _Nonnull micArr) {
+            weakSelf.arrAnchorView = micArr;
+        };
+    } else if (self.roomType == HSGameMic) {
+        self.gameMicContentView.updateMicArrCallBack = ^(NSArray<HSAudioMicroView *> * _Nonnull micArr) {
+            weakSelf.arrAnchorView = micArr;
+        };
+    }
 }
 
 /// 展示公屏消息
 /// @param msg 消息体
 - (void)addMsg:(HSAudioMsgBaseModel *)msg {
     [self.msgTableView addMsg:msg];
+}
+
+
+#pragma mark setter
+- (void)setRoomType:(RoomType)roomType {
+    _roomType = roomType;
+    
+    if (self.roomType == HSAudioMic) {
+        [self.gameMicContentView setHidden:true];
+        [self.audioMicContentView setHidden:false];
+        [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.audioMicContentView.mas_bottom);
+            make.left.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.operatorView.mas_top).offset(-20);
+            make.height.mas_greaterThanOrEqualTo(0);
+        }];
+    } else if (self.roomType == HSGameMic) {
+        [self.gameMicContentView setHidden:false];
+        [self.audioMicContentView setHidden:true];
+        [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.operatorView.mas_top);
+            make.height.mas_equalTo(106);
+        }];
+    }
 }
 
 #pragma mark lazy
@@ -147,11 +194,11 @@
     return _msgTableView;
 }
 
-- (HSAudioMicContentView *)micContentView {
-    if (!_micContentView) {
-        _micContentView = [[HSAudioMicContentView alloc] init];
+- (HSAudioMicContentView *)audioMicContentView {
+    if (!_audioMicContentView) {
+        _audioMicContentView = [[HSAudioMicContentView alloc] init];
     }
-    return _micContentView;
+    return _audioMicContentView;
 }
 
 - (HSRoomInputView *)inputView {
@@ -159,6 +206,13 @@
         _inputView = [[HSRoomInputView alloc] init];
     }
     return _inputView;
+}
+
+- (HSGameMicContentView *)gameMicContentView {
+    if (!_gameMicContentView) {
+        _gameMicContentView = [[HSGameMicContentView alloc] init];
+    }
+    return _gameMicContentView;
 }
 
 @end

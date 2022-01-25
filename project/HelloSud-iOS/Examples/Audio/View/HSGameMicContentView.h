@@ -1,19 +1,18 @@
 //
-//  HSAudioMicContentView.h
+//  HSGameMicContentView.h
 //  HelloSud-iOS
 //
-//  Created by Mary on 2022/1/21.
+//  Created by Mary on 2022/1/25.
 //
 
 #import "BaseView.h"
 #import "HSAudioMicroView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-/// 语音房麦位视图
-@interface HSAudioMicContentView : BaseView
+
+@interface HSGameMicContentView : BaseView
 typedef void(^OnUpdateMicArrCallBack)(NSArray <HSAudioMicroView *> *micArr);
 @property (nonatomic, copy) OnUpdateMicArrCallBack updateMicArrCallBack;
-
 @end
 
 NS_ASSUME_NONNULL_END
