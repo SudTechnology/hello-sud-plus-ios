@@ -21,7 +21,8 @@
 - (void)hsAddViews {
     HSAudioUserModel *user = [HSAudioUserModel makeUserWithUserID:@"123" name:@"nihao" icon:@"" sex:1];
     HSAudioMsgGiftModel *giftModel = [HSAudioMsgGiftModel makeMsgWithGiftID:100 giftCount:10 toUser: user];
-    [self.msgList setArray: @[[HSAudioMsgTextModel makeMsg:@"hello"], giftModel]];
+    [self addMsg:[HSAudioMsgTextModel makeMsg:@"hello"]];
+    [self addMsg:giftModel];
     [self addSubview:self.tableView];
 }
 
@@ -34,8 +35,25 @@
 /// 展示公屏消息
 /// @param msg 消息体
 - (void)addMsg:(HSAudioMsgBaseModel *)msg {
+    [msg prepare];
     [self.msgList addObject:msg];
     [self.tableView reloadData];
+    [self scrollToBottom];
+}
+
+
+/// 滚动到底部
+- (void)scrollToBottom {
+    NSInteger s = self.tableView.numberOfSections;
+    if (s < 1) {
+        return;
+    }
+    NSInteger r = [self.tableView numberOfRowsInSection:s - 1];
+    if (r < 1) {
+        return;
+    }
+    NSIndexPath *path = [NSIndexPath indexPathForRow:r - 1 inSection:s - 1];
+    [self.tableView scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 #pragma mark - UITableViewDelegate || UITableViewDataSource
@@ -46,8 +64,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HSAudioMsgBaseModel *model = self.msgList[indexPath.row];
     BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.cellName];
+//    cell.backgroundColor = indexPath.row % 2 ? UIColor.greenColor : UIColor.orangeColor;
     cell.model = model;
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.msgList[indexPath.row].cellHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -58,10 +81,9 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:self.frame style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:self.frame style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 26;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = UIColor.clearColor;
         

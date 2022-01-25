@@ -59,8 +59,7 @@
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(-offY);
         }];
-        [self setNeedsLayout];
-        [self layoutIfNeeded];
+        [self.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];
 }
