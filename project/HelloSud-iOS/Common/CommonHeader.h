@@ -24,6 +24,7 @@
 /// Views
 #import "HSSheetView.h"
 #import "HSWebViewController.h"
+#import "HSBlurEffectView.h"
 /// button点击回调
 typedef void(^UIBUTTON_TAP_BLOCK)(UIButton *sender);
 /// view点击回调

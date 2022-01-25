@@ -42,7 +42,7 @@
 - (UIImageView *)headerView {
     if (!_headerView) {
         _headerView = [[UIImageView alloc] init];
-        _selectView.image = [UIImage imageNamed:@"room_mic_up"];
+//        _headerView.image = [UIImage imageNamed:@"room_mic_up"];
         _headerView.layer.masksToBounds = true;
         _headerView.backgroundColor = [UIColor yellowColor];
     }

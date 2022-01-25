@@ -8,6 +8,7 @@
 #import "HSRoomGiftPannelView.h"
 #import "HSGiftUserCollectionViewCell.h"
 #import "HSRoomGiftContentView.h"
+#import "HSAudioRoomViewController+IM.h"
 
 @interface HSRoomGiftPannelView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UILabel *sendToLabel;
@@ -15,6 +16,7 @@
 @property (nonatomic, strong) UIButton *sendBtn;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) HSRoomGiftContentView *giftContentView;
+@property (nonatomic, strong)HSBlurEffectView *blurView;
 
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -24,11 +26,12 @@
 @implementation HSRoomGiftPannelView
 
 - (void)hsConfigUI {
-    self.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.6];
+//    self.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.6];
 }
 
 - (void)hsAddViews {
     self.userDataList = @[@(1), @(1), @(1), @(1), @(1), @(1), @(1), @(1), @(1)];
+    [self addSubview:self.blurView];
     [self addSubview:self.sendToLabel];
     [self addSubview:self.checkAllBtn];
     [self addSubview:self.lineView];
@@ -38,6 +41,9 @@
 }
 
 - (void)hsLayoutViews {
+    [self.blurView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self);
+    }];
     [self.sendToLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(16);
         make.top.mas_equalTo(28);
@@ -73,6 +79,21 @@
     }];
 }
 
+- (void)hsConfigEvents {
+    [super hsConfigEvents];
+}
+
+- (void)onBtnSend:(UIButton *)sender {
+    if (!self.giftContentView.didSelectedGift) {
+        [SVProgressHUD showWithStatus:@"请选择一个礼物"];
+        return;
+    }
+    HSGiftModel *giftModel = self.giftContentView.didSelectedGift;
+    HSAudioUserModel *toUser = [HSAudioUserModel makeUserWithUserID:@"1231" name:@"3333" icon:@"" sex:1];
+    HSAudioMsgGiftModel *giftMsg = [HSAudioMsgGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
+    [HSAudioRoomManager.shared.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
+}
+
 
 #pragma mark - UICollectionViewDataSource
 
@@ -82,6 +103,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HSGiftUserCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSGiftUserCollectionViewCell" forIndexPath:indexPath];
+    cell.model = self.userDataList[indexPath.row];
     return cell;
 }
 
@@ -148,6 +170,7 @@
         [_sendBtn setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         _sendBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         _sendBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        [_sendBtn addTarget:self action:@selector(onBtnSend:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sendBtn;
 }
@@ -165,6 +188,16 @@
         _giftContentView = [[HSRoomGiftContentView alloc] init];
     }
     return _giftContentView;
+}
+
+- (HSBlurEffectView *)blurView {
+    if (_blurView == nil) {
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        _blurView = [[HSBlurEffectView alloc]initWithEffect:effect];
+        _blurView.blurLevel = 0.35;
+        _blurView.backgroundColor =  HEX_COLOR_A(@"#000000", 0.7);
+    }
+    return _blurView;
 }
 
 @end

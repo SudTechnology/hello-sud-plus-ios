@@ -44,6 +44,45 @@
     }];
 }
 
+- (void)hsUpdateUI {
+    [super hsUpdateUI];
+    if ([self.model isKindOfClass:HSGiftModel.class]) {
+        HSGiftModel *m = (HSGiftModel *)self.model;
+        WeakSelf
+        m.selectedChangedCallback = ^{
+            [weakSelf checkSelected:YES];
+            [weakSelf hsUpdateUI];
+        };
+        [self.giftIconView sd_setImageWithURL:[NSURL fileURLWithPath:m.smallGiftURL]];
+        self.nameLabel.text = m.giftName;
+        [self checkSelected:NO];
+    }
+}
+
+- (void)checkSelected:(BOOL)isAnimate {
+    if ([self.model isKindOfClass:HSGiftModel.class]) {
+        HSGiftModel *m = (HSGiftModel *)self.model;
+        self.selectView.layer.borderWidth = m.isSelected ? 1 : 0;
+        [self showAnimateState:m.isSelected showAnimate:isAnimate];
+    }
+}
+
+/// 展示动画状态
+- (void)showAnimateState:(BOOL)isSelected showAnimate:(BOOL)showAnimate {
+    CGAffineTransform scaleTrans = CGAffineTransformMakeScale(1.125, 1.125);
+    CGAffineTransform moveTrans = CGAffineTransformMakeTranslation(0, -3);
+    CGAffineTransform mixTrans = CGAffineTransformConcat(moveTrans, scaleTrans);
+    if (showAnimate) {
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:isSelected ? 0.3 : 1 initialSpringVelocity:0.7 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.giftIconView.transform = isSelected ? mixTrans : CGAffineTransformIdentity;
+        } completion:nil];
+    } else {
+        self.giftIconView.transform = isSelected ? mixTrans : CGAffineTransformIdentity;
+    }
+}
+
+#pragma mark lazy
+
 - (UIImageView *)giftIconView {
     if (!_giftIconView) {
         _giftIconView = [[UIImageView alloc] init];
@@ -58,7 +97,7 @@
         _selectView = [[UIView alloc] init];
         _selectView.backgroundColor = UIColor.clearColor;
         _selectView.layer.borderWidth = 1;
-        _selectView.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:0.3].CGColor;
+        _selectView.layer.borderColor = [UIColor colorWithHexString:@"#ffffff" alpha:1].CGColor;
     }
     return _selectView;
 }
@@ -76,7 +115,7 @@
 - (UILabel *)typeLabel {
     if (!_typeLabel) {
         _typeLabel = [[UILabel alloc] init];
-        _typeLabel.text = @"svga";
+        _typeLabel.text = @"";
         _typeLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.5];
         _typeLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     }

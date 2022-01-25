@@ -17,9 +17,19 @@ PODS:
   - Bugly (2.5.90)
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
+  - Protobuf (3.19.1)
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
+  - SSZipArchive (2.4.2)
+  - SVGAPlayer (2.5.6):
+    - SVGAPlayer/Core (= 2.5.6)
+    - SVGAPlayer/ProtoFiles (= 2.5.6)
+  - SVGAPlayer/Core (2.5.6):
+    - SSZipArchive (>= 1.8.1)
+    - SVGAPlayer/ProtoFiles
+  - SVGAPlayer/ProtoFiles (2.5.6):
+    - Protobuf (~> 3.4)
   - SVProgressHUD (2.2.5)
   - YYText (1.0.7)
   - ZegoExpressEngine/Audio (2.15.0)
@@ -30,6 +40,7 @@ DEPENDENCIES:
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
   - SDWebImage
+  - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
   - YYText (~> 1.0.7)
   - ZegoExpressEngine/Audio (~> 2.15.0)
@@ -40,21 +51,36 @@ SPEC REPOS:
     - Bugly
     - Masonry
     - MJExtension
+    - Protobuf
     - SDWebImage
+    - SSZipArchive
     - SVProgressHUD
     - YYText
     - ZegoExpressEngine
+
+EXTERNAL SOURCES:
+  SVGAPlayer:
+    :git: https://github.com/svga/SVGAPlayer-iOS.git
+    :tag: 2.5.6
+
+CHECKOUT OPTIONS:
+  SVGAPlayer:
+    :git: https://github.com/svga/SVGAPlayer-iOS.git
+    :tag: 2.5.6
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
+  Protobuf: 3724efa50cb2846d7ccebc8691c574e85fd74471
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
+  SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
+  SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: 182861a583e4afb7a800d37e6f2d4fd9a37997d4
+PODFILE CHECKSUM: 1ae1f5c0240de34b105bdec42b8e4d6afef7907c
 
 COCOAPODS: 1.11.2

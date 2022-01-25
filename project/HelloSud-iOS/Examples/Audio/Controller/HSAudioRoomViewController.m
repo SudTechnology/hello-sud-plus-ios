@@ -37,6 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.roomID = @"123";
+    HSAudioRoomManager.shared.currentRoomVC = self;
     MediaUser *user = [MediaUser user:HSAppManager.shared.loginUserInfo.userID nickname:HSAppManager.shared.loginUserInfo.name];
     /// 设置语音引擎事件回调
     [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
@@ -97,8 +98,7 @@
     self.inputView.inputMsgBlock = ^(NSString * _Nonnull msg) {
         // 发送公屏消息
         HSAudioMsgTextModel *m = [HSAudioMsgTextModel makeMsg:msg];
-        [weakSelf sendMsg:m];
-        [weakSelf addMsg:m];
+        [weakSelf sendMsg:m isAddToShow:YES];
     };
 }
 
