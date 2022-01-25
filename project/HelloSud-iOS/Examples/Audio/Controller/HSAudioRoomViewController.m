@@ -88,6 +88,7 @@
 - (void)hsConfigEvents {
     WeakSelf
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
+        
         [weakSelf sendMsg:@"hello"];
     };
     self.operatorView.inputTapBlock = ^(UITapGestureRecognizer *gesture) {

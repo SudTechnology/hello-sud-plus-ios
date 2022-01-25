@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 发送消息
 /// @param msg 消息体
-- (void)sendMsg:(NSString *)msg;
+- (void)sendMsg:(HSAudioMsgBaseModel *)msg;
 @end
 
 NS_ASSUME_NONNULL_END
