@@ -32,13 +32,13 @@
 - (void)configData {
     HSSettingModel *sdkModel = [HSSettingModel new];
     sdkModel.title = @"SDK版本号";
-    sdkModel.subTitle = @"v1.0.0";
+    sdkModel.subTitle = [NSString stringWithFormat:@"v%@",GameSudManager.sudSDKVersion];
     sdkModel.isMore = NO;
     sdkModel.pageURL = @"";
     
     HSSettingModel *appModel = [HSSettingModel new];
     appModel.title = @"App版本号";
-    appModel.subTitle = @"v1.0.0";
+    appModel.subTitle = [NSString stringWithFormat:@"v%@.%@", DeviceUtil.getAppVersion, DeviceUtil.getAppBuildCode];
     appModel.isMore = NO;
     appModel.pageURL = @"";
     
@@ -52,6 +52,10 @@
     privacyModel.isMore = YES;
     privacyModel.pageURL = @"https://www.baidu.com";
     self.arrData = @[@[sdkModel, appModel], @[userProtocolModel, privacyModel]];
+    HSSetingHeadView *header = HSSetingHeadView.new;
+    header.frame = CGRectMake(0, 0, kScreenWidth, 104);
+    [header hsUpdateUI];
+    self.tableView.tableHeaderView = header;
     [self.tableView reloadData];
 }
 
@@ -78,9 +82,7 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = HEX_COLOR(@"#F5F6FB");
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        HSSetingHeadView *header = HSSetingHeadView.new;
-        header.frame = CGRectMake(0, 0, kScreenWidth, 104);
-        _tableView.tableHeaderView = header;
+
     }
     return _tableView;
 }

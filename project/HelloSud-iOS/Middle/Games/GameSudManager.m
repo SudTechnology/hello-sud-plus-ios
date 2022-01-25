@@ -39,6 +39,11 @@
 
 @implementation GameSudManager
 
+/// 获取sud sdk版本号
++(NSString *)sudSDKVersion {
+    return SudMGP.getVersion;
+}
+
 #pragma mark =======ISudFSMMG Delegate=======
 /**
  * Code过期
