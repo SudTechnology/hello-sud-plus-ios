@@ -39,8 +39,8 @@
     HSGameListViewController *gameList = [[HSGameListViewController alloc]init];
     BaseNavigationViewController * navGameList = [[BaseNavigationViewController alloc]initWithRootViewController:gameList];
     gameList.tabBarItem.title = @"房间";
-    gameList.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_game_list"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    gameList.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_game_list"];
+    gameList.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_room"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    gameList.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_room"];
     
     HSSettingViewController *setting = [[HSSettingViewController alloc]init];
     setting.tabBarItem.title = @"设置";

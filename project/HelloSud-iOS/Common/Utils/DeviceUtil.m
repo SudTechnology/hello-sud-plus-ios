@@ -10,7 +10,8 @@
 @implementation DeviceUtil
 
 + (NSString *)getAppVersion {
-    NSString *version = [[NSUserDefaults standardUserDefaults] objectForKey:@"CFBundleShortVersionString"];
+    
+    NSString *version = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     if (version != nil) {
         return version;
     } else {
@@ -19,7 +20,7 @@
 }
 
 + (NSString *)getAppBuildCode {
-    NSString *buildCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"CFBundleVersion"];
+    NSString *buildCode = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleVersion"];
     if (buildCode != nil) {
         return buildCode;
     } else {
