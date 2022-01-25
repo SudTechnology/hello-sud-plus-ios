@@ -62,19 +62,19 @@
         make.right.mas_equalTo(-24);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
-    [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(24);
         make.top.mas_equalTo(self.contentLabel.mas_bottom).offset(24);
         make.height.mas_equalTo(36);
         make.width.mas_greaterThanOrEqualTo(0);
         make.bottom.mas_equalTo(-24);
     }];
-    [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.sureBtn.mas_right).offset(40);
+    [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.cancelBtn.mas_right).offset(40);
         make.right.mas_equalTo(-24);
         make.top.mas_equalTo(self.contentLabel.mas_bottom).offset(24);
         make.height.mas_equalTo(36);
-        make.width.mas_equalTo(self.sureBtn.mas_width);
+        make.width.mas_equalTo(self.cancelBtn.mas_width);
     }];
 }
 
@@ -142,6 +142,7 @@
 }
 
 - (void)setAlertType:(AlertType)alertType {
+    _alertType = alertType;
     [self itemUpdateLayout];
 }
 

@@ -15,8 +15,12 @@
 
 @implementation HSRoomGiftContentView
 
+- (void)hsConfigUI {
+    self.backgroundColor = UIColor.clearColor;
+}
+
 - (void)hsAddViews {
-    self.dataList = @[@(1), @(1), @(1), @(1), @(1)];
+    self.dataList = @[@(1), @(1), @(1), @(1)];
     [self addSubview:self.collectionView];
 }
 
@@ -59,7 +63,7 @@
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[HSGiftItemCollectionViewCell class] forCellWithReuseIdentifier:@"HSGiftItemCollectionViewCell"];
