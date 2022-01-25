@@ -400,31 +400,6 @@
 			path = GameList;
 			sourceTree = "<group>";
 		};
-		445EAAA7279A561A000DCC72 /* Room */ = {
-			isa = PBXGroup;
-			children = (
-				445EAAD6279AAF4B000DCC72 /* Gift */,
-				445EAAC6279A94E0000DCC72 /* Msg */,
-				445EAAA8279A562C000DCC72 /* HSRoomNaviView.h */,
-				445EAAA9279A562C000DCC72 /* HSRoomNaviView.m */,
-				445EAAAB279A5CF6000DCC72 /* HSRoomOperatorView.h */,
-				445EAAAC279A5CF6000DCC72 /* HSRoomOperatorView.m */,
-				445EAAB1279A65B9000DCC72 /* HSRoomMsgTableView.h */,
-				445EAAB2279A65B9000DCC72 /* HSRoomMsgTableView.m */,
-				445EAAC7279A98DB000DCC72 /* HSRoomMsgBgView.h */,
-				445EAAC8279A98DB000DCC72 /* HSRoomMsgBgView.m */,
-				445EAACA279A9C30000DCC72 /* HSAudioMicroView.h */,
-				445EAACB279A9C30000DCC72 /* HSAudioMicroView.m */,
-				445EAACD279AA133000DCC72 /* HSAudioMicContentView.h */,
-				445EAACE279AA133000DCC72 /* HSAudioMicContentView.m */,
-				445EAAD0279AA64E000DCC72 /* HSSwitchRoomModeView.h */,
-				445EAAD1279AA64E000DCC72 /* HSSwitchRoomModeView.m */,
-				445EAAFC279F97D0000DCC72 /* HSRoomInputView.h */,
-				445EAAFD279F97D0000DCC72 /* HSRoomInputView.m */,
-			);
-			path = Room;
-			sourceTree = "<group>";
-		};
 		445EAAC6279A94E0000DCC72 /* Msg */ = {
 			isa = PBXGroup;
 			children = (
@@ -660,7 +635,24 @@
 		6C076E8D279EA34700650209 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				445EAAA7279A561A000DCC72 /* Room */,
+				445EAAD6279AAF4B000DCC72 /* Gift */,
+				445EAAC6279A94E0000DCC72 /* Msg */,
+				445EAAA8279A562C000DCC72 /* HSRoomNaviView.h */,
+				445EAAA9279A562C000DCC72 /* HSRoomNaviView.m */,
+				445EAAAB279A5CF6000DCC72 /* HSRoomOperatorView.h */,
+				445EAAAC279A5CF6000DCC72 /* HSRoomOperatorView.m */,
+				445EAAB1279A65B9000DCC72 /* HSRoomMsgTableView.h */,
+				445EAAB2279A65B9000DCC72 /* HSRoomMsgTableView.m */,
+				445EAAC7279A98DB000DCC72 /* HSRoomMsgBgView.h */,
+				445EAAC8279A98DB000DCC72 /* HSRoomMsgBgView.m */,
+				445EAACA279A9C30000DCC72 /* HSAudioMicroView.h */,
+				445EAACB279A9C30000DCC72 /* HSAudioMicroView.m */,
+				445EAACD279AA133000DCC72 /* HSAudioMicContentView.h */,
+				445EAACE279AA133000DCC72 /* HSAudioMicContentView.m */,
+				445EAAD0279AA64E000DCC72 /* HSSwitchRoomModeView.h */,
+				445EAAD1279AA64E000DCC72 /* HSSwitchRoomModeView.m */,
+				445EAAFC279F97D0000DCC72 /* HSRoomInputView.h */,
+				445EAAFD279F97D0000DCC72 /* HSRoomInputView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
