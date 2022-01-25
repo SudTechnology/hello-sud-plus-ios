@@ -11,12 +11,16 @@
 
 /// 发送消息
 /// @param msg 消息体
-- (void)sendMsg:(HSAudioMsgBaseModel *)msg {
+/// @param isAddToShow 是否公屏展示
+- (void)sendMsg:(HSAudioMsgBaseModel *)msg isAddToShow:(BOOL)isAddToShow {
     NSString *command = [[NSString alloc]initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
     NSLog(@"send content:%@", command);
     [MediaAudioEngineManager.shared.audioEngine sendCommand:command roomID:self.roomID result:^(int errorCode) {
         NSLog(@"send result:%d", errorCode);
     }];
+    if (isAddToShow) {
+        [self addMsg:msg];
+    }
 }
 
 /// 接收引擎回调回来消息响应

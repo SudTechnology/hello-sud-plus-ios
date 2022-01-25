@@ -25,7 +25,9 @@
 #import <SDWebImage/SDWebImage.h>
 /// manager
 #import "HSAppManager.h"
+#import "HSGiftManager.h"
 #import "GameSudManager.h"
+#import "HSAudioRoomManager.h"
 /// Comon
 #import "AppUtil.h"
 #import "GameConfig.h"

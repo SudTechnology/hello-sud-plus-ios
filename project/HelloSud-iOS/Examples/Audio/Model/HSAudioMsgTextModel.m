@@ -33,7 +33,7 @@
     h += yMargin * 2;
     NSString *name = self.sendUser.name;
     NSString *content = self.content;
-    UIImage *iconImage = [UIImage imageNamed:@"room_ope_gift"];
+    UIImage *iconImage = self.sendUser.icon.length > 0 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sendUser.icon]]] : [UIImage imageNamed:@"room_ope_gift"];
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：", name]];
     attrName.yy_lineSpacing = 6;

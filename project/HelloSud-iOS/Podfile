@@ -15,6 +15,7 @@ target 'HelloSud-iOS' do
   pod 'ZegoExpressEngine/Audio', '~> 2.15.0'
   pod 'Bugly', '2.5.90'
   pod 'SDWebImage'
+  pod 'SVGAPlayer', :git =>'https://github.com/svga/SVGAPlayer-iOS.git', :tag => '2.5.6'
 
 end
 

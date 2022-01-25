@@ -12,10 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// APP管理模块
 @interface HSAppManager : NSObject
-+ (instancetype)shared;
-
 /// 登录用户信息
 @property(nonatomic, strong, readonly)HSAccountUserModel *loginUserInfo;
+
++ (instancetype)shared;
 
 /// 保持用户信息
 - (void)saveLoginUserInfo;

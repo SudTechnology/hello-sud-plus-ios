@@ -10,7 +10,7 @@
 
 @interface HSRoomGiftContentView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, strong) NSMutableArray<HSGiftModel*> *dataList;
 @end
 
 @implementation HSRoomGiftContentView
@@ -20,7 +20,7 @@
 }
 
 - (void)hsAddViews {
-    self.dataList = @[@(1), @(1), @(1), @(1)];
+    
     [self addSubview:self.collectionView];
 }
 
@@ -28,6 +28,11 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
     }];
+}
+
+- (void)hsUpdateUI {
+    [self.dataList setArray:HSGiftManager.shared.giftList];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -38,6 +43,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HSGiftItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSGiftItemCollectionViewCell" forIndexPath:indexPath];
+    cell.model = self.dataList[indexPath.row];
     return cell;
 }
 
@@ -45,7 +51,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSLog(@"选中cell: %ld", indexPath.row);
+    HSGiftModel *currentModel = self.dataList[indexPath.row];
+    currentModel.isSelected = YES;
+    if (self.didSelectedGift != nil && currentModel.giftID != self.didSelectedGift.giftID) {
+        self.didSelectedGift.isSelected = NO;
+        self.didSelectedGift.selectedChangedCallback();
+    }
+    currentModel.selectedChangedCallback();
+    self.didSelectedGift = currentModel;
+    if (self.didSelectedCallback) self.didSelectedCallback(self.didSelectedGift);
 }
 
 
@@ -53,7 +67,7 @@
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         CGFloat itemW = (kScreenWidth - 16)/4 - 1;
-        CGFloat itemH = 100;
+        CGFloat itemH = 90;
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         flowLayout.itemSize = CGSizeMake(itemW, itemH);
