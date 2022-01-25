@@ -97,7 +97,7 @@
     HSTextAlertView *alert = [[HSTextAlertView alloc] init];
     [alert config:msg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
     [HSAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
-        closeCb();
+//        closeCb();
     }];
 }
 
@@ -111,7 +111,7 @@
     HSTextAlertView *alert = [[HSTextAlertView alloc] init];
     [alert configAttr:attrMsg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
     [HSAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
-        closeCb();
+//        closeCb();
     }];
 }
 

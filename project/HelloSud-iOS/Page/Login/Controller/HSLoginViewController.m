@@ -6,16 +6,16 @@
 //
 
 #import "HSLoginViewController.h"
-#import "HSGenderView.h"
+#import "HSMainTabBarController.h"
 #import "HSSweetPromptView.h"
+#import "AppDelegate.h"
 
 @interface HSLoginViewController ()
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *fieldView;
 @property (nonatomic, strong) UITextField *nameTextField;
-@property (nonatomic, strong) HSGenderView *maleView;
-@property (nonatomic, strong) HSGenderView *femaleView;
+@property (nonatomic, strong) UIButton *changeBtn;
 @property (nonatomic, strong) UIButton *loginBtn;
 
 @end
@@ -28,37 +28,45 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!HSAppManager.shared.isAgreement) {
+        [self showWelcomeUse];
+    }
+}
+
 - (void)hsAddViews {
     [self.view addSubview:self.iconImageView];
     [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.fieldView];
     [self.fieldView addSubview:self.nameTextField];
-    [self.view addSubview:self.maleView];
-    [self.view addSubview:self.femaleView];
+    [self.fieldView addSubview:self.changeBtn];
     [self.view addSubview:self.loginBtn];
-}
-
-- (void)hsConfigEvents {
-    WeakSelf
-    self.maleView.selectBlock = ^{
-        weakSelf.maleView.isSelect = true;
-        weakSelf.femaleView.isSelect = false;
-    };
-    self.femaleView.selectBlock = ^{
-        weakSelf.maleView.isSelect = false;
-        weakSelf.femaleView.isSelect = true;
-    };
 }
 
 /// 立即体验点击事件
 - (void)loginNodeEvent {
+    [HSAppManager.shared saveIsLogin];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.window.rootViewController = [[HSMainTabBarController alloc] init];
+}
+
+/// 更换昵称点击事件
+- (void)changeNodeEvent {
+    WeakSelf
+    [RequestService postRequestWithApi:kBASEURL(@"") param:@{@"": @""} success:^(NSDictionary *rootDict) {
+        
+    } failure:^(id error) {
+        
+    }];
 }
 
 - (void)showWelcomeUse {
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"欢迎使用HelloSud\n"];
-    attrTitle.yy_lineSpacing = 6;
+    attrTitle.yy_lineSpacing = 16;
     attrTitle.yy_font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
     attrTitle.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    attrTitle.yy_alignment = NSTextAlignmentCenter;
     
     NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:@"我们非常重视您的个人信息保护。关于个人信息收集和使用的详细信息，您可以点击"];
     attrStr_0.yy_lineSpacing = 6;
@@ -92,9 +100,17 @@
     [attrTitle appendAttributedString:attrStr_4];
     
     [HSAlertView showAttrTextAlert:attrTitle sureText:@"同意" cancelText:@"不同意" onSureCallback:^{
-        
+        [HSAppManager.shared saveAgreement];
     } onCloseCallback:^{
-        
+        HSSweetPromptView *promptView = [[HSSweetPromptView alloc] init];
+        [HSAlertView show:promptView rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+        }];
+        promptView.agreeTapBlock = ^(UIButton *sender) {
+            [HSAlertView close];
+        };
+        promptView.exitTapBlock = ^(UIButton *sender) {
+            exit(0);
+        };
     }];
 }
 
@@ -116,30 +132,22 @@
         make.height.mas_equalTo(48);
     }];
     [self.nameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 16, 0, 16));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 16, 0, 50));
     }];
-    [self.maleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(30);
-        make.top.mas_equalTo(self.nameTextField.mas_bottom).offset(20);
-        make.height.mas_equalTo(48);
-    }];
-    [self.femaleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.maleView.mas_right).offset(15);
-        make.right.mas_equalTo(-30);
-        make.top.mas_equalTo(self.nameTextField.mas_bottom).offset(20);
-        make.width.mas_equalTo(self.maleView.mas_width);
-        make.height.mas_equalTo(48);
+    [self.changeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-4);
+        make.centerY.mas_equalTo(self.fieldView);
+        make.size.mas_equalTo(CGSizeMake(48, 48));
     }];
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(30);
         make.right.mas_equalTo(-30);
-        make.top.mas_equalTo(self.maleView.mas_bottom).offset(146);
+        make.top.mas_equalTo(self.changeBtn.mas_bottom).offset(190);
         make.height.mas_equalTo(44);
     }];
 }
 
 @end
-
 
 @implementation HSLoginViewController (LAZY)
 
@@ -175,31 +183,21 @@
 - (UITextField *)nameTextField {
     if (!_nameTextField) {
         _nameTextField = [[UITextField alloc] init];
-        _nameTextField.placeholder = @"请输入你的昵称";
+        _nameTextField.text = @"Mary";
         _nameTextField.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         _nameTextField.textColor = UIColor.blackColor;
+        [_nameTextField setUserInteractionEnabled:false];
     }
     return _nameTextField;
 }
 
-- (HSGenderView *)maleView {
-    if (!_maleView) {
-        _maleView = [[HSGenderView alloc] init];
-        _maleView.nameStr = @"男";
-        _maleView.iconStr = @"login_sex_male";
-        _maleView.isSelect = true;
+- (UIButton *)changeBtn {
+    if (!_changeBtn) {
+        _changeBtn = [[UIButton alloc] init];
+        [_changeBtn setImage:[UIImage imageNamed:@"login_change"] forState:UIControlStateNormal];
+        [_loginBtn addTarget:self action:@selector(changeNodeEvent) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _maleView;
-}
-
-- (HSGenderView *)femaleView {
-    if (!_femaleView) {
-        _femaleView = [[HSGenderView alloc] init];
-        _femaleView.nameStr = @"女";
-        _femaleView.iconStr = @"login_sex_female";
-        _femaleView.isSelect = false;
-    }
-    return _femaleView;
+    return _changeBtn;
 }
 
 - (UIButton *)loginBtn {

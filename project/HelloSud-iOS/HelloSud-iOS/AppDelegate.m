@@ -10,6 +10,8 @@
 #import <Bugly/Bugly.h>
 #import "DeviceUtil.h"
 #import "MediaAudioEngineManager.h"
+#import "HSLoginViewController.h"
+
 
 @interface AppDelegate () {
     
@@ -18,14 +20,19 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
     [self configBugly];
     
+    
     self.window = [[UIWindow alloc]init];
-    self.window.rootViewController = [[HSMainTabBarController alloc]init];
+    if (HSAppManager.shared.isLogin) {
+        self.window.rootViewController = [[HSMainTabBarController alloc]init];
+    } else {
+        self.window.rootViewController = [[HSLoginViewController alloc]init];
+    }
+    self.window.backgroundColor = UIColor.whiteColor;
     [self.window makeKeyAndVisible];
     [self configAudioEngine];
     return YES;

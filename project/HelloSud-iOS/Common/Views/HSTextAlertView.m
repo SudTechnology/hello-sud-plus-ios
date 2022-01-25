@@ -94,15 +94,15 @@
 
 - (void)onSureItemEvent {
     if (self.onSureItemCallBack) {
-        self.onSureItemCallBack();
         [HSAlertView close];
+        self.onSureItemCallBack();
     }
 }
 
 - (void)onCancelItemEvent {
     if (self.onCancelItemlCallBack) {
-        self.onCancelItemlCallBack();
         [HSAlertView close];
+        self.onCancelItemlCallBack();
     }
 }
 
@@ -113,6 +113,7 @@
         _contentLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         _contentLabel.numberOfLines = 0;
         _contentLabel.textAlignment = NSTextAlignmentCenter;
+        _contentLabel.preferredMaxLayoutWidth = 296 - 48;
     }
     return _contentLabel;
 }
