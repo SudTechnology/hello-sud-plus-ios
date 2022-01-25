@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HSBaseMsgCell : BaseTableViewCell
 @property (nonatomic, strong) UIView *msgContentView;
-@property (nonatomic, strong) YYLabel *msgLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

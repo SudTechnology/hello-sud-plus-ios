@@ -9,44 +9,42 @@
 
 @implementation HSRoomGiftTableViewCell
 
+- (void)hsAddViews {
+    [super hsAddViews];
+    [self.msgContentView addSubview:self.msgLabel];
+}
+
+- (void)hsLayoutViews {
+    [super hsLayoutViews];
+    [self.msgLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(3, 3, 3, 5));
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+    }];
+
+}
+
 - (void)hsConfigUI {
     self.msgContentView.backgroundColor = [UIColor colorWithHexString:@"#A99862" alpha:0.6];
 }
 
 - (void)setModel:(BaseModel *)model {
-    [self setContent];
+    if ([model isKindOfClass:HSAudioMsgGiftModel.class]) {
+        [self setContent: (HSAudioMsgGiftModel *)model];
+    }
 }
 
-- (void)setContent {
-    NSMutableAttributedString *attrSendName = [[NSMutableAttributedString alloc] initWithString:@"大眼萌嘟宝"];
-    attrSendName.yy_lineSpacing = 6;
-    attrSendName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrSendName.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-    
-    NSMutableAttributedString *attrSend = [[NSMutableAttributedString alloc] initWithString:@"送给"];
-    attrSend.yy_lineSpacing = 6;
-    attrSend.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrSend.yy_color = [UIColor colorWithHexString:@"#AAAAAA" alpha:1];
-    
-    NSMutableAttributedString *attrGetName = [[NSMutableAttributedString alloc] initWithString:@"零乳糖软妹   小仓鼠"];
-    attrGetName.yy_lineSpacing = 6;
-    attrGetName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrGetName.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-    
-    UIImage *iconImage = [UIImage imageNamed:@"room_ope_gift"];
-    NSMutableAttributedString *attrGift = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
-    
-    NSMutableAttributedString *attrGiftCount = [[NSMutableAttributedString alloc] initWithString:@"x1"];
-    attrGiftCount.yy_lineSpacing = 6;
-    attrGiftCount.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrGiftCount.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-    
-    [attrSendName appendAttributedString:attrSend];
-    [attrSendName appendAttributedString:attrGetName];
-    [attrSendName appendAttributedString:attrGift];
-    [attrSendName appendAttributedString:attrGiftCount];
-    
-    self.msgLabel.attributedText = attrSendName;
+- (void)setContent:(HSAudioMsgGiftModel *)model {
+    self.msgLabel.attributedText = model.attrContent;
+}
+
+- (YYLabel *)msgLabel {
+    if (!_msgLabel) {
+        _msgLabel = [[YYLabel alloc] init];
+        _msgLabel.numberOfLines = 0;
+        _msgLabel.preferredMaxLayoutWidth = 260 - 8;
+        _msgLabel.textVerticalAlignment = YYTextVerticalAlignmentTop;
+    }
+    return _msgLabel;
 }
 
 @end

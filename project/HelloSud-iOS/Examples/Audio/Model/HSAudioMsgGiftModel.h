@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param giftCount giftCount description
 /// @param toUser toUser description
 + (instancetype)makeMsgWithGiftID:(NSInteger)giftID giftCount:(NSInteger)giftCount toUser:(HSAudioUserModel *)toUser;
+- (NSAttributedString *)attrContent;
 @end
 
 NS_ASSUME_NONNULL_END

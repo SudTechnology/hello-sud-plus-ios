@@ -42,7 +42,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.roomID = @"123";
-    MediaUser *user = [MediaUser user:@"123" nickname:@"kaniel"];
+    MediaUser *user = [MediaUser user:HSAppManager.shared.loginUserInfo.userID nickname:HSAppManager.shared.loginUserInfo.name];
     /// 设置语音引擎事件回调
     [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
     [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
@@ -88,8 +88,7 @@
     [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.audioMicContentView.mas_bottom);
         make.left.right.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.operatorView.mas_top).offset(-20);
-        make.height.mas_greaterThanOrEqualTo(0);
+        make.bottom.mas_equalTo(self.operatorView.mas_top).offset(0);
     }];
     [self.msgTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.msgBgView);
