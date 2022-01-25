@@ -9,11 +9,15 @@
 #import "HSAudioMsgBaseModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-/// 公屏文本消息
+/// 公屏文本消息model
 @interface HSAudioMsgTextModel : HSAudioMsgBaseModel
 
 /// 消息内容
 @property(nonatomic, copy)NSString *content;
+
+/// 构建消息
+/// @param content 消息内容
++ (instancetype)makeMsg:(NSString *)content;
 @end
 
 NS_ASSUME_NONNULL_END
