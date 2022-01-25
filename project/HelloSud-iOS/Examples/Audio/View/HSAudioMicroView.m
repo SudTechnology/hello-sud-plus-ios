@@ -12,14 +12,43 @@
 @property (nonatomic, strong) YYLabel *nameLabel;
 @property (nonatomic, strong) UIImageView *giftImageView;
 
+/// game
+@property (nonatomic, strong) UIImageView *gameCaptainView;
+@property (nonatomic, strong) UILabel *gameStateLabel;
+
 @end
 
 @implementation HSAudioMicroView
+
+- (void)setMicType:(MicType)micType {
+    _micType = micType;
+    [self switchContentWithType];
+}
+
+- (void)switchContentWithType {
+    if (self.micType == HSAudioMic) {
+        [self.gameCaptainView setHidden:true];
+        [self.gameStateLabel setHidden:true];
+    } else if (self.micType == HSGameMic) {
+        [self.gameCaptainView setHidden:false];
+        [self.gameStateLabel setHidden:false];
+        [self.giftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(-4);
+            make.right.mas_equalTo(4);
+            make.size.mas_equalTo(CGSizeMake(14, 14));
+        }];
+    }
+}
 
 - (void)hsAddViews {
     [self addSubview:self.headerView];
     [self addSubview:self.nameLabel];
     [self addSubview:self.giftImageView];
+    
+    [self addSubview:self.gameCaptainView];
+    [self addSubview:self.gameStateLabel];
+    [self.gameCaptainView setHidden:true];
+    [self.gameStateLabel setHidden:true];
 }
 
 - (void)hsLayoutViews {
@@ -30,7 +59,7 @@
         make.height.mas_equalTo(self.mas_width);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.headerView.mas_bottom).offset(6);
+        make.top.mas_equalTo(self.headerView.mas_bottom).offset(8);
         make.centerX.equalTo(self);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
@@ -39,8 +68,20 @@
         make.right.mas_equalTo(14);
         make.size.mas_equalTo(CGSizeMake(32, 32));
     }];
+    [self.gameCaptainView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.headerView.mas_left).offset(-4);
+        make.top.mas_equalTo(self.headerView.mas_top).offset(-4);
+        make.size.mas_equalTo(CGSizeMake(14, 14));
+    }];
+    [self.gameStateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(26);
+        make.centerX.mas_equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(32, 12));
+    }];
 }
 
+
+#pragma mark - lazy
 - (UIImageView *)headerView {
     if (!_headerView) {
         _headerView = [[UIImageView alloc] init];
@@ -69,4 +110,29 @@
     }
     return _nameLabel;
 }
+
+- (UIImageView *)gameCaptainView {
+    if (!_gameCaptainView) {
+        _gameCaptainView = [[UIImageView alloc] init];
+        _gameCaptainView.image = [UIImage imageNamed:@"room_mic_gift_tag"];
+    }
+    return _gameCaptainView;
+}
+
+- (UILabel *)gameStateLabel {
+    if (!_gameStateLabel) {
+        _gameStateLabel = [[UILabel alloc] init];
+        _gameStateLabel.text = @"未准备";
+        _gameStateLabel.font = [UIFont systemFontOfSize:9 weight:UIFontWeightRegular];
+        _gameStateLabel.textAlignment = NSTextAlignmentCenter;
+        _gameStateLabel.textColor = UIColor.whiteColor;
+        _gameStateLabel.backgroundColor = [UIColor colorWithHexString:@"#F7782F" alpha:1];
+        _gameStateLabel.layer.cornerRadius = 1;
+        _gameStateLabel.layer.borderWidth = 0.5;
+        _gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
+        _gameStateLabel.layer.masksToBounds = true;
+    }
+    return _gameStateLabel;
+}
+
 @end
