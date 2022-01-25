@@ -12,6 +12,7 @@
 #import "HSRoomMsgBgView.h"
 #import "HSRoomMsgTableView.h"
 #import "HSAudioMicContentView.h"
+#import "HSRoomInputView.h"
 
 
 @interface HSAudioRoomViewController ()
@@ -21,7 +22,7 @@
 @property (nonatomic, strong) HSRoomMsgBgView *msgBgView;
 @property (nonatomic, strong) HSRoomMsgTableView *msgTableView;
 @property (nonatomic, strong) HSAudioMicContentView *micContentView;
-
+@property (nonatomic, strong) HSRoomInputView *inputView;
 @end
 
 @implementation HSAudioRoomViewController
@@ -47,6 +48,7 @@
     [self.view addSubview:self.micContentView];
     [self.view addSubview:self.msgBgView];
     [self.msgBgView addSubview:self.msgTableView];
+    [self.view addSubview:self.inputView];
 }
 
 - (void)hsLayoutViews {
@@ -77,12 +79,22 @@
     [self.msgTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.msgBgView);
     }];
+    [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(50);
+    }];
 }
 
 - (void)hsConfigEvents {
     WeakSelf
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
         [weakSelf sendMsg:@"hello"];
+    };
+    self.operatorView.inputTapBlock = ^(UITapGestureRecognizer *gesture) {
+        [weakSelf.inputView hsBecomeFirstResponder];
+    };
+    self.inputView.inputMsgBlock = ^(NSString * _Nonnull msg) {
+        [weakSelf sendMsg:msg];
     };
 }
 
@@ -135,6 +147,13 @@
         _micContentView = [[HSAudioMicContentView alloc] init];
     }
     return _micContentView;
+}
+
+- (HSRoomInputView *)inputView {
+    if (!_inputView) {
+        _inputView = [[HSRoomInputView alloc] init];
+    }
+    return _inputView;
 }
 
 @end

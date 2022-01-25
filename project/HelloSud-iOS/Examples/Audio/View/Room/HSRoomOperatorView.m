@@ -17,6 +17,7 @@
 
 @implementation HSRoomOperatorView
 
+
 - (void)hsAddViews {
     [self addSubview:self.voiceUpBtn];
     [self addSubview:self.giftBtn];
@@ -67,6 +68,9 @@
         _inputLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.4];
         _inputLabel.layer.cornerRadius = 32/2;
         _inputLabel.layer.masksToBounds = true;
+        [_inputLabel setUserInteractionEnabled:true];
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInputEvent:)];
+        [_inputLabel addGestureRecognizer:tapGesture];
     }
     return _inputLabel;
 }
@@ -87,4 +91,9 @@
     }];
 }
 
+- (void)tapInputEvent:(UITapGestureRecognizer *)gesture {
+    if (self.inputTapBlock) {
+        self.inputTapBlock(gesture);
+    }
+}
 @end
