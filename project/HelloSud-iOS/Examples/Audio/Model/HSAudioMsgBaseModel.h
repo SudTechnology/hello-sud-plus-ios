@@ -9,6 +9,8 @@
 #import "HSAudioUserModel.h"
 #import "HSAudioMsgConst.h"
 NS_ASSUME_NONNULL_BEGIN
+/// 最大cell内容宽度
+#define MAX_CELL_CONTENT_WIDTH 260
 
 /// 语音房消息基类model
 @interface HSAudioMsgBaseModel : BaseModel
@@ -20,8 +22,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)HSAudioUserModel *sendUser;
 
 /// 获取model对应cell名称
--(NSString *)cellName;
+- (NSString *)cellName;
 
+/// cell高度
+- (CGFloat)cellHeight;
+
+/// 计算cell高度，子类覆盖返回
+- (CGFloat)caculateHeight;
+
+/// 触发计算属性
+- (void)prepare;
 /// 配置消息
 /// @param cmd 消息指令
 - (void)configBaseInfoWithCmd:(NSInteger)cmd;

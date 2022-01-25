@@ -73,8 +73,7 @@
     [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.micContentView.mas_bottom);
         make.left.right.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.operatorView.mas_top).offset(-20);
-        make.height.mas_greaterThanOrEqualTo(0);
+        make.bottom.mas_equalTo(self.operatorView.mas_top).offset(0);
     }];
     [self.msgTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.msgBgView);
