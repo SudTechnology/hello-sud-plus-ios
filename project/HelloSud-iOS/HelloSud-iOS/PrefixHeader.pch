@@ -29,5 +29,6 @@
 /// Comon
 #import "AppUtil.h"
 #import "GameConfig.h"
+#import "RequestService.h"
 
 #endif /* PrefixHeader_pch */

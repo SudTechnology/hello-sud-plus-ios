@@ -32,4 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 常规字号字体
 #define UIFONT_REGULAR(s) [UIFont systemFontOfSize:s weight:UIFontWeightRegular]
 
+
+#define BaseURL      @"https://dev-interact.sud.tech"
+#define kBASEURL(url) [NSString stringWithFormat:@"%@/%@",BaseURL, url]
+
 NS_ASSUME_NONNULL_END
