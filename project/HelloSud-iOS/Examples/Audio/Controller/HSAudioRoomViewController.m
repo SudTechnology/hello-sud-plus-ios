@@ -37,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.roomID = @"123";
-    MediaUser *user = [MediaUser user:@"123" nickname:@"kaniel"];
+    MediaUser *user = [MediaUser user:HSAppManager.shared.loginUserInfo.userID nickname:HSAppManager.shared.loginUserInfo.name];
     /// 设置语音引擎事件回调
     [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
     [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
