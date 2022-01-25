@@ -104,15 +104,6 @@
 
 - (void)hsResignFirstResponder {
     [self.textView resignFirstResponder];
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(50);
-        }];
-        [self setNeedsLayout];
-        [self layoutIfNeeded];
-    } completion:^(BOOL finished) {
-    }];
 }
 
 - (UIButton *)sendBtn {
@@ -150,6 +141,14 @@
         [self hsResignFirstResponder];
         self.textView.text = @"";
     }
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(80);
+        }];
+        [self.superview layoutIfNeeded];
+    } completion:^(BOOL finished) {
+    }];
 }
 
 @end
