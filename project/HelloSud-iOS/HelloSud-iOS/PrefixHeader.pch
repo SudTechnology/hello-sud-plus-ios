@@ -21,6 +21,7 @@
 #import <Masonry/Masonry.h>
 #import <YYText/YYText.h>
 #import <MJExtension/MJExtension.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 #import <SDWebImage/SDWebImage.h>
 /// manager
 #import "HSAppManager.h"

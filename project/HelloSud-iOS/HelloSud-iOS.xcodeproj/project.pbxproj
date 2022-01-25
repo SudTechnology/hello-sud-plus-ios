@@ -42,6 +42,8 @@
 		445EAAF5279E810C000DCC72 /* BaseCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAF4279E810C000DCC72 /* BaseCollectionReusableView.m */; };
 		445EAAF8279E8183000DCC72 /* HSHomeHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAF7279E8183000DCC72 /* HSHomeHeaderReusableView.m */; };
 		445EAAFB279E8B10000DCC72 /* HSHomeFooterReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAFA279E8B10000DCC72 /* HSHomeFooterReusableView.m */; };
+		445EAAFE279F97D0000DCC72 /* HSRoomInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAFD279F97D0000DCC72 /* HSRoomInputView.m */; };
+		445EAB01279F9901000DCC72 /* BaseTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB00279F9901000DCC72 /* BaseTextView.m */; };
 		44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03882796AB9C006EE6AC /* GameSudManager.m */; };
 		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
 		44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -167,6 +169,10 @@
 		445EAAF7279E8183000DCC72 /* HSHomeHeaderReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSHomeHeaderReusableView.m; sourceTree = "<group>"; };
 		445EAAF9279E8B10000DCC72 /* HSHomeFooterReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSHomeFooterReusableView.h; sourceTree = "<group>"; };
 		445EAAFA279E8B10000DCC72 /* HSHomeFooterReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSHomeFooterReusableView.m; sourceTree = "<group>"; };
+		445EAAFC279F97D0000DCC72 /* HSRoomInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomInputView.h; sourceTree = "<group>"; };
+		445EAAFD279F97D0000DCC72 /* HSRoomInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomInputView.m; sourceTree = "<group>"; };
+		445EAAFF279F9901000DCC72 /* BaseTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTextView.h; sourceTree = "<group>"; };
+		445EAB00279F9901000DCC72 /* BaseTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTextView.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* MediaAudioEngineProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngineProtocol.h; sourceTree = "<group>"; };
 		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		44DF03872796AB9C006EE6AC /* GameSudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSudManager.h; sourceTree = "<group>"; };
@@ -402,6 +408,8 @@
 				445EAACE279AA133000DCC72 /* HSAudioMicContentView.m */,
 				445EAAD0279AA64E000DCC72 /* HSSwitchRoomModeView.h */,
 				445EAAD1279AA64E000DCC72 /* HSSwitchRoomModeView.m */,
+				445EAAFC279F97D0000DCC72 /* HSRoomInputView.h */,
+				445EAAFD279F97D0000DCC72 /* HSRoomInputView.m */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -761,6 +769,8 @@
 				445EAAF4279E810C000DCC72 /* BaseCollectionReusableView.m */,
 				445EAAE0279ABB22000DCC72 /* BaseAlertView.h */,
 				445EAAE1279ABB22000DCC72 /* BaseAlertView.m */,
+				445EAAFF279F9901000DCC72 /* BaseTextView.h */,
+				445EAB00279F9901000DCC72 /* BaseTextView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -941,10 +951,12 @@
 				445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */,
 				445EAAD9279AAF69000DCC72 /* HSGiftUserCollectionViewCell.m in Sources */,
 				6C076E97279EA9B200650209 /* HSAudioUserModel.m in Sources */,
+				445EAAFE279F97D0000DCC72 /* HSRoomInputView.m in Sources */,
 				445EAA8D27995D5F000DCC72 /* NSArray+Masonry.m in Sources */,
 				445EAAEF279E7CCF000DCC72 /* HSSearchHeaderView.m in Sources */,
 				44DF03A52797E6FC006EE6AC /* GamePlayerStateModel.m in Sources */,
 				44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */,
+				445EAB01279F9901000DCC72 /* BaseTextView.m in Sources */,
 				44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */,
 				6C192E53279523B000553034 /* ViewController.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
