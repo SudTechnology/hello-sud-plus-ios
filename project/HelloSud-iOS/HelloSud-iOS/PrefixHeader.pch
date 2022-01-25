@@ -26,5 +26,8 @@
 /// manager
 #import "HSAppManager.h"
 #import "GameSudManager.h"
+/// Comon
+#import "AppUtil.h"
+#import "GameConfig.h"
 
 #endif /* PrefixHeader_pch */
