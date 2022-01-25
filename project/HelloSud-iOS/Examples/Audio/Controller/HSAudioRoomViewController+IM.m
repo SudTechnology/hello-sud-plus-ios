@@ -12,7 +12,7 @@
 /// 发送消息
 /// @param msg 消息体
 - (void)sendMsg:(HSAudioMsgBaseModel *)msg {
-    NSString *command = [msg mj_JSONString];
+    NSString *command = [[NSString alloc]initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
     NSLog(@"send content:%@", command);
     [MediaAudioEngineManager.shared.audioEngine sendCommand:command roomID:self.roomID result:^(int errorCode) {
         NSLog(@"send result:%d", errorCode);
@@ -35,7 +35,13 @@
         NSLog(@"recv content is empty.");
         return;
     }
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[NSData dataWithBytes:command.UTF8String length:command.length] options:NSJSONReadingMutableContainers error:nil];
+    NSData *data = [command dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    if (error) {
+        NSLog(@"parse json err:%@", error.debugDescription);
+        return;
+    }
     NSInteger cmd = [dic[@"cmd"] integerValue];
     HSAudioMsgBaseModel *msgModel = nil;
     switch (cmd) {
