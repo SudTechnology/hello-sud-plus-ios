@@ -7,6 +7,7 @@
 
 #import "HSLoginViewController.h"
 #import "HSGenderView.h"
+#import "HSSweetPromptView.h"
 
 @interface HSLoginViewController ()
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -51,7 +52,50 @@
 
 /// 立即体验点击事件
 - (void)loginNodeEvent {
+}
+
+- (void)showWelcomeUse {
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"欢迎使用HelloSud\n"];
+    attrTitle.yy_lineSpacing = 6;
+    attrTitle.yy_font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
+    attrTitle.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
     
+    NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:@"我们非常重视您的个人信息保护。关于个人信息收集和使用的详细信息，您可以点击"];
+    attrStr_0.yy_lineSpacing = 6;
+    attrStr_0.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+    attrStr_0.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    
+    NSMutableAttributedString *attrStr_1 = [[NSMutableAttributedString alloc] initWithString:@"《用户协议》"];
+    attrStr_1.yy_lineSpacing = 6;
+    attrStr_1.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
+    attrStr_1.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    
+    NSMutableAttributedString *attrStr_2 = [[NSMutableAttributedString alloc] initWithString:@"和"];
+    attrStr_2.yy_lineSpacing = 6;
+    attrStr_2.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+    attrStr_2.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    
+    NSMutableAttributedString *attrStr_3 = [[NSMutableAttributedString alloc] initWithString:@"《隐私政策》"];
+    attrStr_3.yy_lineSpacing = 6;
+    attrStr_3.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
+    attrStr_3.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    
+    NSMutableAttributedString *attrStr_4 = [[NSMutableAttributedString alloc] initWithString:@"进行了解。点击同意及表示您已阅读并同意全部上述协议"];
+    attrStr_4.yy_lineSpacing = 6;
+    attrStr_4.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+    attrStr_4.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    
+    [attrTitle appendAttributedString:attrStr_0];
+    [attrTitle appendAttributedString:attrStr_1];
+    [attrTitle appendAttributedString:attrStr_2];
+    [attrTitle appendAttributedString:attrStr_3];
+    [attrTitle appendAttributedString:attrStr_4];
+    
+    [HSAlertView showAttrTextAlert:attrTitle sureText:@"同意" cancelText:@"不同意" onSureCallback:^{
+        
+    } onCloseCallback:^{
+        
+    }];
 }
 
 - (void)hsLayoutViews {
@@ -97,7 +141,7 @@
 @end
 
 
-@implementation HSLoginViewController (SET)
+@implementation HSLoginViewController (LAZY)
 
 - (UIImageView *)iconImageView {
     if (!_iconImageView) {
