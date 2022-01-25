@@ -6,7 +6,7 @@
 //
 
 #import "BaseTableViewCell.h"
-
+#import "CommonAudioMsgModelHeader.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HSBaseMsgCell : BaseTableViewCell

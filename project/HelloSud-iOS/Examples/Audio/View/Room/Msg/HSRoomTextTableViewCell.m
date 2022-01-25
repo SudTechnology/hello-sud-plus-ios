@@ -14,19 +14,23 @@
 }
 
 - (void)setModel:(BaseModel *)model {
-    
-    [self setMsgContent];
+    if ([model isKindOfClass:HSAudioMsgTextModel.class]) {
+        HSAudioMsgTextModel *m = (HSAudioMsgTextModel *)model;
+        [self setMsgContent: m];
+    }
 }
 
 /// 设置文本消息
-- (void)setMsgContent {
+- (void)setMsgContent:(HSAudioMsgTextModel *)m {
+    NSString *name = m.sendUser.name;
+    NSString *content = m.content;
     UIImage *iconImage = [UIImage imageNamed:@"room_ope_gift"];
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
-    NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:@"傲性小仙女："];
+    NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：", name]];
     attrName.yy_lineSpacing = 6;
     attrName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrName.yy_color = [UIColor colorWithHexString:@"#8FE5F6" alpha:1];
-    NSMutableAttributedString *attrMsg = [[NSMutableAttributedString alloc] initWithString:@"叫上小伙伴们一起来玩"];
+    NSMutableAttributedString *attrMsg = [[NSMutableAttributedString alloc] initWithString:content];
     attrMsg.yy_lineSpacing = 6;
     attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];

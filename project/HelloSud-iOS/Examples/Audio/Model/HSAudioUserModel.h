@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *name;
 @property(nonatomic, copy)NSString *icon;
 @property(nonatomic, assign)NSInteger sex;
++ (instancetype)makeUserWithUserID:(NSString *)userID name:(NSString *)name icon:(NSString *)icon sex:(NSInteger)sex;
 @end
 
 NS_ASSUME_NONNULL_END
