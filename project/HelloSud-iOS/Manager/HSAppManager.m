@@ -35,7 +35,7 @@
         HSAccountUserModel *m = HSAccountUserModel.new;
         _loginUserInfo = m;
         m.userID = @"123";
-        m.name = @"kaniel";
+        m.name = @"小公主";
         m.icon = @"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7af2c723accd90ce5c9e79471a76251ae44f0798.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645674165&t=cb63922664bc54461211e0ae8acd6e95";
         m.sex = 1;
     }
