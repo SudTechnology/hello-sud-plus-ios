@@ -6,11 +6,13 @@
 //
 
 #import "HSAudioRoomViewController.h"
+#import "HSAudioRoomViewController+IM.h"
 #import "HSRoomNaviView.h"
 #import "HSRoomOperatorView.h"
 #import "HSRoomMsgBgView.h"
 #import "HSRoomMsgTableView.h"
 #import "HSAudioMicContentView.h"
+
 
 @interface HSAudioRoomViewController ()
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -31,6 +33,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.roomID = @"123";
+    MediaUser *user = [MediaUser user:@"123" nickname:@"kaniel"];
+    /// 设置语音引擎事件回调
+    [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
+    [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
 }
 
 - (void)hsAddViews {
@@ -71,6 +78,21 @@
         make.edges.mas_equalTo(self.msgBgView);
     }];
 }
+
+- (void)hsConfigEvents {
+    WeakSelf
+    self.operatorView.giftTapBlock = ^(UIButton *sender) {
+        [weakSelf sendMsg:@"hello"];
+    };
+}
+
+/// 展示公屏消息
+/// @param msg 消息体
+- (void)showMsg:(HSAudioMsgBaseModel *)msg {
+    [self.msgTableView showMsg:msg];
+}
+
+#pragma mark lazy
 
 - (UIImageView *)bgImageView {
     if (!_bgImageView) {

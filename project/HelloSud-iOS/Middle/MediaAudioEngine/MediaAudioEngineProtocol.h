@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param roomID 房间ID
 /// @param user 用户
 /// @param config 配置
-- (void)loginRoom:(NSString *)roomID user:(MediaUser *)user config:(MediaRoomConfig *)config;
+- (void)loginRoom:(NSString *)roomID user:(MediaUser *)user config:(nullable MediaRoomConfig *)config;
 
 /// 退出房间
 - (void)logoutRoom;
@@ -79,6 +79,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否麦克风静音 YES静音 NO开启声音
 - (BOOL)isMicrophoneMuted;
+
+/// 发送指令
+/// @param command 指令内容
+/// @param roomID 房间ID
+- (void)sendCommand:(NSString *)command roomID:(NSString *)roomID result:(void(^)(int))result;
 @end
 
 NS_ASSUME_NONNULL_END

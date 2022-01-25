@@ -23,7 +23,7 @@
 /// Views
 #import "HSSheetView.h"
 #import "HSWebViewController.h"
-
-
+/// button点击回调
+typedef void(^UIBUTTON_TAP_BLOCK)(UIButton *sender);
 
 #endif /* CommonHeader_h */

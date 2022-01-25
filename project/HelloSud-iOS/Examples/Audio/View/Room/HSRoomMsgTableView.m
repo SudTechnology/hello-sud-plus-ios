@@ -13,13 +13,13 @@
 
 @interface HSRoomMsgTableView () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *msgList;
+@property (nonatomic, strong) NSMutableArray<HSAudioMsgBaseModel*> *msgList;
 @end
 
 @implementation HSRoomMsgTableView
 
 - (void)hsAddViews {
-    self.msgList = @[@(1), @(1), @(1)];
+    self.msgList = @[HSAudioMsgTextModel.new, HSAudioMsgTextModel.new, HSAudioMsgGiftModel.new];
     [self addSubview:self.tableView];
 }
 
@@ -29,25 +29,23 @@
     }];
 }
 
+/// 展示公屏消息
+/// @param msg 消息体
+- (void)showMsg:(HSAudioMsgBaseModel *)msg {
+    [self.msgList addObject:msg];
+    [self.tableView reloadData];
+}
+
 #pragma mark - UITableViewDelegate || UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.msgList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        HSRoomTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSRoomTextTableViewCell"];
-        cell.model = [BaseModel new];
-        return cell;
-    } else if (indexPath.row == 1) {
-        HSRoomSystemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSRoomSystemTableViewCell"];
-        cell.model = [BaseModel new];
-        return cell;
-    } else {
-        HSRoomGiftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSRoomGiftTableViewCell"];
-        cell.model = [BaseModel new];
-        return cell;
-    }
+    HSAudioMsgBaseModel *model = self.msgList[indexPath.row];
+    BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.cellName];
+    cell.model = model;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,10 +62,11 @@
         _tableView.rowHeight = 26;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = UIColor.clearColor;
-        [_tableView registerClass:[HSBaseMsgCell class] forCellReuseIdentifier:@"HSBaseMsgCell"];
-        [_tableView registerClass:[HSRoomTextTableViewCell class] forCellReuseIdentifier:@"HSRoomTextTableViewCell"];
-        [_tableView registerClass:[HSRoomSystemTableViewCell class] forCellReuseIdentifier:@"HSRoomSystemTableViewCell"];
-        [_tableView registerClass:[HSRoomGiftTableViewCell class] forCellReuseIdentifier:@"HSRoomGiftTableViewCell"];
+        
+        [_tableView registerClass:[HSBaseMsgCell class] forCellReuseIdentifier:NSStringFromClass(HSBaseMsgCell.class)];
+        [_tableView registerClass:[HSRoomTextTableViewCell class] forCellReuseIdentifier:NSStringFromClass(HSRoomTextTableViewCell.class)];
+        [_tableView registerClass:[HSRoomSystemTableViewCell class] forCellReuseIdentifier:NSStringFromClass(HSRoomSystemTableViewCell.class)];
+        [_tableView registerClass:HSRoomGiftTableViewCell.class forCellReuseIdentifier:NSStringFromClass(HSRoomGiftTableViewCell.class)];
     }
     return _tableView;
 }
