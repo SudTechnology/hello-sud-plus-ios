@@ -7,13 +7,14 @@
 
 #import "HSAudioRoomViewController.h"
 #import "HSAudioRoomViewController+IM.h"
+
+/// View
 #import "HSRoomNaviView.h"
 #import "HSRoomOperatorView.h"
 #import "HSRoomMsgBgView.h"
 #import "HSRoomMsgTableView.h"
 #import "HSAudioMicContentView.h"
 #import "HSRoomInputView.h"
-
 
 @interface HSAudioRoomViewController ()
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) HSRoomMsgTableView *msgTableView;
 @property (nonatomic, strong) HSAudioMicContentView *micContentView;
 @property (nonatomic, strong) HSRoomInputView *inputView;
+
 @end
 
 @implementation HSAudioRoomViewController
