@@ -120,6 +120,8 @@ typedef NS_ENUM(NSInteger, MediaAudioEngineNetworkSampleRateType) {
 @property(nonatomic, copy)NSString *userID;
 /// 昵称
 @property(nonatomic, copy)NSString *nickname;
+
++(instancetype)user:(NSString *)userID nickname:(NSString *)nickname;
 @end
 
 /// 房间配置

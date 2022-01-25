@@ -27,6 +27,7 @@
     self.window = [[UIWindow alloc]init];
     self.window.rootViewController = [[HSMainTabBarController alloc]init];
     [self.window makeKeyAndVisible];
+    [self configAudioEngine];
     return YES;
 }
 

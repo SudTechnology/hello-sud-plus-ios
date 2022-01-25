@@ -27,7 +27,7 @@
 /// 设置事件处理器
 /// @param eventHandler 事件处理实例
 - (void)setEventHandler:(id<MediaAudioEventHandler>)eventHandler {
-    self.eventHandler = eventHandler;
+    _eventHandler = eventHandler;
 }
 
 
@@ -65,10 +65,10 @@
 }
 
 
-- (void)loginRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nonnull MediaRoomConfig *)config {
+- (void)loginRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
     ZegoUser *zegoUser = ZegoUser.new;
-    user.userID = user.userID;
-    user.nickname = user.nickname;
+    zegoUser.userID = user.userID;
+    zegoUser.userName = user.nickname;
     ZegoRoomConfig *zegoConfig = [ZegoRoomConfig defaultConfig];
     [ZegoExpressEngine.sharedEngine loginRoom:roomID user:zegoUser config:zegoConfig];
 }
@@ -130,6 +130,15 @@
 - (void)stopPublishStream {
     self.isPublishing = NO;
     [ZegoExpressEngine.sharedEngine stopPublishingStream];
+}
+
+/// 发送指令
+/// @param command 指令内容
+/// @param roomID 房间ID
+- (void)sendCommand:(NSString *)command roomID:(NSString *)roomID result:(void(^)(int))result; {
+    [ZegoExpressEngine.sharedEngine sendCustomCommand:command toUserList:nil roomID:roomID callback:^(int errorCode) {
+        result(errorCode);
+    }];
 }
 
 #pragma mark ZegoEventHandler
