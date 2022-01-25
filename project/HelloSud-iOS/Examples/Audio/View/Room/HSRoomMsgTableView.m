@@ -31,7 +31,7 @@
 
 /// 展示公屏消息
 /// @param msg 消息体
-- (void)showMsg:(HSAudioMsgBaseModel *)msg {
+- (void)addMsg:(HSAudioMsgBaseModel *)msg {
     [self.msgList addObject:msg];
     [self.tableView reloadData];
 }
