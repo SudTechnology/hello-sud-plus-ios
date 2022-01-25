@@ -6,6 +6,7 @@
 //
 
 #import "HSRoomOperatorView.h"
+#import "HSRoomGiftPannelView.h"
 
 @interface HSRoomOperatorView ()
 @property (nonatomic, strong) UIButton *voiceUpBtn;
@@ -81,6 +82,9 @@
 
 - (void)onBtnGift:(UIButton *)sender {
     if (self.giftTapBlock) self.giftTapBlock(sender);
+    [HSSheetView show:[[HSRoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
+        
+    }];
 }
 
 @end

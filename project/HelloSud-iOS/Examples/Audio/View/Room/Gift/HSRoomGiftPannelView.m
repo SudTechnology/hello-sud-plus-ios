@@ -23,8 +23,12 @@
 
 @implementation HSRoomGiftPannelView
 
+- (void)hsConfigUI {
+    self.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.6];
+}
+
 - (void)hsAddViews {
-    self.userDataList = @[@(1), @(1), @(1), @(1), @(1)];
+    self.userDataList = @[@(1), @(1), @(1), @(1), @(1), @(1), @(1), @(1), @(1)];
     [self addSubview:self.sendToLabel];
     [self addSubview:self.checkAllBtn];
     [self addSubview:self.lineView];
@@ -58,11 +62,11 @@
     }];
     [self.giftContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self);
-        make.top.mas_equalTo(self.lineView.mas_bottom);
-        make.height.mas_equalTo(100);
+        make.top.mas_equalTo(self.lineView.mas_bottom).offset(10);
+        make.height.mas_equalTo(110);
     }];
     [self.sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.lineView.mas_bottom).offset(24);
+        make.top.mas_equalTo(self.giftContentView.mas_bottom).offset(24);
         make.right.mas_equalTo(-16);
         make.size.mas_equalTo(CGSizeMake(56, 32));
         make.bottom.mas_equalTo(-kAppSafeBottom - 8);
@@ -93,7 +97,7 @@
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         flowLayout.itemSize = CGSizeMake(32, 72);
         flowLayout.minimumLineSpacing = 8;
         flowLayout.minimumInteritemSpacing = 10;
@@ -101,7 +105,7 @@
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-//        _collectionView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[HSGiftUserCollectionViewCell class] forCellWithReuseIdentifier:@"HSGiftUserCollectionViewCell"];
