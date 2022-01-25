@@ -21,4 +21,6 @@
 #import <YYText/YYText.h>
 #import <MJExtension/MJExtension.h>
 
+#import "HSAppManager.h"
+
 #endif /* PrefixHeader_pch */
