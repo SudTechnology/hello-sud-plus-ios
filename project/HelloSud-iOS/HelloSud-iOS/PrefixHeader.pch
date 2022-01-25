@@ -22,4 +22,6 @@
 #import <MJExtension/MJExtension.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 
+#import "HSAppManager.h"
+
 #endif /* PrefixHeader_pch */
