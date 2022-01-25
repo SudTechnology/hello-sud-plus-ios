@@ -14,6 +14,7 @@ target 'HelloSud-iOS' do
   pod 'SVProgressHUD', '~> 2.2.5'
   pod 'ZegoExpressEngine/Audio', '~> 2.15.0'
   pod 'Bugly', '2.5.90'
+  pod 'SDWebImage'
 
 end
 

@@ -20,6 +20,7 @@
 /// Utils
 #import "Constant.h"
 #import "AppUtil.h"
+#import "DeviceUtil.h"
 /// Views
 #import "HSSheetView.h"
 #import "HSWebViewController.h"
