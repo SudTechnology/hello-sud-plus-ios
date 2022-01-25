@@ -19,7 +19,9 @@
 @implementation HSRoomMsgTableView
 
 - (void)hsAddViews {
-    self.msgList = @[HSAudioMsgTextModel.new, HSAudioMsgTextModel.new, HSAudioMsgGiftModel.new];
+    HSAudioUserModel *user = [HSAudioUserModel makeUserWithUserID:@"123" name:@"nihao" icon:@"" sex:1];
+    HSAudioMsgGiftModel *giftModel = [HSAudioMsgGiftModel makeMsgWithGiftID:100 giftCount:10 toUser: user];
+    [self.msgList setArray: @[[HSAudioMsgTextModel makeMsg:@"hello"], giftModel]];
     [self addSubview:self.tableView];
 }
 

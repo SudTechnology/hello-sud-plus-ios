@@ -10,18 +10,21 @@
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+// basic components
 #import "CommonHeader.h"
 #import "HSSheetView.h"
 #import "HSAlertView.h"
 
 #import "UIView+Extension.h"
 #import "NSArray+Masonry.h"
-
+/// pod libs
 #import <Masonry/Masonry.h>
 #import <YYText/YYText.h>
 #import <MJExtension/MJExtension.h>
 #import <SVProgressHUD/SVProgressHUD.h>
-
+#import <SDWebImage/SDWebImage.h>
+/// manager
 #import "HSAppManager.h"
+#import "GameSudManager.h"
 
 #endif /* PrefixHeader_pch */

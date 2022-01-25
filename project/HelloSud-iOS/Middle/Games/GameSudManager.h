@@ -41,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// delegate
 @property (nonatomic, weak) id <GameSudManagerDelegate> delegate;
 
+/// 获取sud sdk版本号
++(NSString *)sudSDKVersion;
+
 /**
  * 初始化游戏SDK
  *

@@ -62,6 +62,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    HSHotGameViewController *vc = [[HSHotGameViewController alloc] init];
+    /// 跳转到Examples中的语音场景样例
     HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
     [self.navigationController pushViewController:vc animated:true];
 }

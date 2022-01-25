@@ -88,14 +88,16 @@
 - (void)hsConfigEvents {
     WeakSelf
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
-        
-        [weakSelf sendMsg:@"hello"];
+
     };
     self.operatorView.inputTapBlock = ^(UITapGestureRecognizer *gesture) {
         [weakSelf.inputView hsBecomeFirstResponder];
     };
     self.inputView.inputMsgBlock = ^(NSString * _Nonnull msg) {
-        [weakSelf sendMsg:msg];
+        // 发送公屏消息
+        HSAudioMsgTextModel *m = [HSAudioMsgTextModel makeMsg:msg];
+        [weakSelf sendMsg:m];
+        [weakSelf addMsg:m];
     };
 }
 
