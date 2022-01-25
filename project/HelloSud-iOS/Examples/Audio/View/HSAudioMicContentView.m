@@ -11,6 +11,7 @@
 @interface HSAudioMicContentView ()
 @property (nonatomic, strong) HSAudioMicroView *ownerMicView;
 @property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, copy) NSMutableArray <HSAudioMicroView *> *micArr;
 
 @end
 
@@ -30,6 +31,9 @@
                                                        warpCount:4
                                                       topSpacing:0
                                                    bottomSpacing:0 leadSpacing:22 tailSpacing:22];
+    if (self.updateMicArrCallBack) {
+        self.updateMicArrCallBack(self.micArr);
+    }
 }
 
 - (void)hsAddViews {

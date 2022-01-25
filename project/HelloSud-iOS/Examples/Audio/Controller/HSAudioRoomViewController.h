@@ -26,6 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房间场景
 @interface HSAudioRoomViewController : BaseViewController<MediaAudioEventHandler>
+typedef NS_ENUM(NSInteger, RoomType) {
+    HSAudio,
+    HSGame,
+};
+@property (nonatomic, assign) RoomType roomType;
+
 /// ISudFSTAPP
 @property (nonatomic, strong) id<ISudFSTAPP> iSudFSTAPP;
 /// game相关信息Model

@@ -47,6 +47,7 @@
 		445EAB04279FB028000DCC72 /* HSSweetPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB03279FB028000DCC72 /* HSSweetPromptView.m */; };
 		445EAB07279FD15F000DCC72 /* HSAudioRoomViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB06279FD15F000DCC72 /* HSAudioRoomViewController+Game.m */; };
 		445EAB0A279FD44F000DCC72 /* HSRoomGameInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB09279FD44F000DCC72 /* HSRoomGameInfoModel.m */; };
+		445EAB0D279FD930000DCC72 /* HSGameMicContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB0C279FD930000DCC72 /* HSGameMicContentView.m */; };
 		44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03882796AB9C006EE6AC /* GameSudManager.m */; };
 		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
 		44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -182,6 +183,8 @@
 		445EAB06279FD15F000DCC72 /* HSAudioRoomViewController+Game.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "HSAudioRoomViewController+Game.m"; sourceTree = "<group>"; };
 		445EAB08279FD44F000DCC72 /* HSRoomGameInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomGameInfoModel.h; sourceTree = "<group>"; };
 		445EAB09279FD44F000DCC72 /* HSRoomGameInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomGameInfoModel.m; sourceTree = "<group>"; };
+		445EAB0B279FD930000DCC72 /* HSGameMicContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameMicContentView.h; sourceTree = "<group>"; };
+		445EAB0C279FD930000DCC72 /* HSGameMicContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameMicContentView.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* MediaAudioEngineProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngineProtocol.h; sourceTree = "<group>"; };
 		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		44DF03872796AB9C006EE6AC /* GameSudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSudManager.h; sourceTree = "<group>"; };
@@ -649,6 +652,8 @@
 				445EAACB279A9C30000DCC72 /* HSAudioMicroView.m */,
 				445EAACD279AA133000DCC72 /* HSAudioMicContentView.h */,
 				445EAACE279AA133000DCC72 /* HSAudioMicContentView.m */,
+				445EAB0B279FD930000DCC72 /* HSGameMicContentView.h */,
+				445EAB0C279FD930000DCC72 /* HSGameMicContentView.m */,
 				445EAAD0279AA64E000DCC72 /* HSSwitchRoomModeView.h */,
 				445EAAD1279AA64E000DCC72 /* HSSwitchRoomModeView.m */,
 				445EAAFC279F97D0000DCC72 /* HSRoomInputView.h */,
@@ -992,6 +997,7 @@
 				9DD9CB34279A5CA50054B91D /* DeviceUtil.m in Sources */,
 				445EAA7727990035000DCC72 /* HSLoginViewController.m in Sources */,
 				6C076E6D2799823A00650209 /* HSWebViewController.m in Sources */,
+				445EAB0D279FD930000DCC72 /* HSGameMicContentView.m in Sources */,
 				6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */,
 				445EAAAA279A562C000DCC72 /* HSRoomNaviView.m in Sources */,
 				6C076E6A27996C2700650209 /* HSSetingHeadView.m in Sources */,
