@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HSRoomGiftTableViewCell : HSBaseMsgCell
-
+@property (nonatomic, strong) YYLabel *msgLabel;
 @end
 
 NS_ASSUME_NONNULL_END

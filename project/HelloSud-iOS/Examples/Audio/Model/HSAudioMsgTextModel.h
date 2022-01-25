@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 构建消息
 /// @param content 消息内容
 + (instancetype)makeMsg:(NSString *)content;
+- (NSAttributedString *)attrContent;
 @end
 
 NS_ASSUME_NONNULL_END
