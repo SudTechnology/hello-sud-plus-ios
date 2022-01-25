@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HSRoomMsgTableView : BaseView
 /// 展示公屏消息
 /// @param msg 消息体
-- (void)showMsg:(HSAudioMsgBaseModel *)msg;
+- (void)addMsg:(HSAudioMsgBaseModel *)msg;
 @end
 
 NS_ASSUME_NONNULL_END
