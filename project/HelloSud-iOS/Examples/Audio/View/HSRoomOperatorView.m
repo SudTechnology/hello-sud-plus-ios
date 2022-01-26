@@ -22,7 +22,7 @@
     [self addSubview:self.voiceUpBtn];
     [self addSubview:self.giftBtn];
     [self addSubview:self.inputLabel];
-    [self.voiceUpBtn hs_setGradientBackgroundWithColors:@[[UIColor colorWithHexString:@"#FFC243" alpha:1], [UIColor colorWithHexString:@"#F38D2E" alpha:1]] locations:nil startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 0)];
+    self.voiceBtnState = VoiceBtnStateTypeNormal;
 }
 
 - (void)hsLayoutViews {
@@ -45,6 +45,30 @@
     }];
 }
 
+- (void)setVoiceBtnState:(VoiceBtnStateType)voiceBtnState {
+    _voiceBtnState = voiceBtnState;
+    switch (voiceBtnState) {
+        case VoiceBtnStateTypeWaitOpen:
+            [_voiceUpBtn setImage:[UIImage imageNamed:@"room_voice_open_mic"] forState:UIControlStateNormal];
+            [_voiceUpBtn setTitle:nil forState:UIControlStateNormal];
+            _voiceUpBtn.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
+            _voiceUpBtn.az_colors = nil;
+            break;
+        case VoiceBtnStateTypeOnVoice:
+            [_voiceUpBtn setImage:[UIImage imageNamed:@"room_voice_close_mic"] forState:UIControlStateNormal];
+            [_voiceUpBtn setTitle:nil forState:UIControlStateNormal];
+            _voiceUpBtn.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
+            _voiceUpBtn.az_colors = nil;
+            break;
+        default:
+            _voiceUpBtn.backgroundColor = nil;
+            [_voiceUpBtn setImage:[UIImage imageNamed:@"room_ope_voice"] forState:UIControlStateNormal];
+            [_voiceUpBtn setTitle:@"上麦" forState:UIControlStateNormal];
+            [self.voiceUpBtn hs_setGradientBackgroundWithColors:@[[UIColor colorWithHexString:@"#FFC243" alpha:1], [UIColor colorWithHexString:@"#F38D2E" alpha:1]] locations:nil startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 0)];
+            break;
+    }
+}
+
 - (UIButton *)voiceUpBtn {
     if (!_voiceUpBtn) {
         _voiceUpBtn = [[UIButton alloc] init];
@@ -55,6 +79,7 @@
         _voiceUpBtn.backgroundColor = UIColor.darkGrayColor;
         _voiceUpBtn.layer.cornerRadius = 30/2;
         [_voiceUpBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 0)];
+        [_voiceUpBtn addTarget:self action:@selector(onBtnVoice:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _voiceUpBtn;
 }
@@ -91,6 +116,11 @@
         [weakSelf resetAllSelectedUser];
     }];
 }
+
+- (void)onBtnVoice:(UIButton *)sender {
+    if (self.voiceTapBlock) self.voiceTapBlock(sender);
+}
+
 
 - (void)resetAllSelectedUser {
     NSArray *arr = HSAudioRoomManager.shared.currentRoomVC.arrMicModel;

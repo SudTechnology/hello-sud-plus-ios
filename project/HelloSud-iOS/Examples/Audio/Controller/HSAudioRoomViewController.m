@@ -109,6 +109,10 @@
     self.operatorView.inputTapBlock = ^(UITapGestureRecognizer *gesture) {
         [weakSelf.inputView hsBecomeFirstResponder];
     };
+    self.operatorView.voiceTapBlock = ^(UIButton *sender) {
+        // 上麦点击
+        [weakSelf handleTapVoice];
+    };
     self.inputView.inputMsgBlock = ^(NSString * _Nonnull msg) {
         // 发送公屏消息
         HSAudioMsgTextModel *m = [HSAudioMsgTextModel makeMsg:msg];
@@ -142,6 +146,44 @@
         [self sendMsg:upMicModel isAddToShow:YES];
         return;
     }
+}
+
+- (void)handleTapVoice {
+    switch (self.operatorView.voiceBtnState) {
+        case VoiceBtnStateTypeNormal:{
+            // 请求上麦
+            NSArray *arr = self.arrMicModel;
+            HSAudioRoomMicModel *emptyModel = nil;
+            for (HSAudioRoomMicModel *m in arr) {
+                if (m.user == nil) {
+                    emptyModel = m;
+                    break;
+                }
+            }
+            if (emptyModel == nil) {
+                [SVProgressHUD showErrorWithStatus:@"没有空麦位"];
+                return;
+            }
+            self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
+            [self handleMicTap:emptyModel];
+        }
+            break;
+        case VoiceBtnStateTypeWaitOpen:
+            // 开启声音
+            self.operatorView.voiceBtnState = VoiceBtnStateTypeOnVoice;
+            [self startPublish:[NSString stringWithFormat:@"%ld", arc4random()]];
+
+            break;
+        case VoiceBtnStateTypeOnVoice:
+            // 关闭声音
+            self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
+            [self stopPublish];
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 /// 展示公屏消息
