@@ -21,9 +21,18 @@
     for (UIView * v in self.containerView.subviews) {
         [v removeFromSuperview];
     }
-    for (int i = 0; i < 8; i++) {
+    self.ownerMicView.micType = HSAudioMic;
+    self.ownerMicView.onTapCallback = ^(HSAudioRoomMicModel * _Nonnull micModel) {
+        if (weakSelf.onTapCallback) weakSelf.onTapCallback(micModel);
+    };
+    HSAudioRoomMicModel *m = HSAudioRoomMicModel.new;
+    m.micIndex = 0;
+    self.ownerMicView.model = m;
+    [self.micArr addObject:self.ownerMicView];
+    for (int i = 1; i < 9; i++) {
         HSAudioMicroView *micNode = [[HSAudioMicroView alloc] init];
-        
+        micNode.headWidth = 54;
+        micNode.micType = HSAudioMic;
         micNode.onTapCallback = ^(HSAudioRoomMicModel * _Nonnull micModel) {
             if (weakSelf.onTapCallback) weakSelf.onTapCallback(micModel);
         };
@@ -50,6 +59,7 @@
 }
 
 - (void)hsLayoutViews {
+    self.ownerMicView.headWidth = 72;
     [self.ownerMicView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self);
         make.centerX.mas_equalTo(self);

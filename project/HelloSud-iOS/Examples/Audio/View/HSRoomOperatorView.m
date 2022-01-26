@@ -86,9 +86,18 @@
 
 - (void)onBtnGift:(UIButton *)sender {
     if (self.giftTapBlock) self.giftTapBlock(sender);
+    WeakSelf
     [HSSheetView show:[[HSRoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
-        
+        [weakSelf resetAllSelectedUser];
     }];
+}
+
+- (void)resetAllSelectedUser {
+    NSArray *arr = HSAudioRoomManager.shared.currentRoomVC.arrMicModel;
+    for (HSAudioRoomMicModel *m in arr) {
+        m.isSelected = NO;
+    }
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil];
 }
 
 - (void)tapInputEvent:(UITapGestureRecognizer *)gesture {
