@@ -13,7 +13,8 @@
 @property(nonatomic, strong)SVGAParser *svgaParser;
 @property(nonatomic, strong)NSError *parserError;
 @property(nonatomic, strong)SVGAVideoEntity *playItem;
-
+@property(nonatomic, strong)EmptyBlock didFinishedBlock;
+@property(nonatomic, assign)BOOL isNeedToPlay;
 @end
 
 @implementation HSSVGAPlayerView
@@ -30,12 +31,12 @@
 /// 开始播放
 /// @param loops 循环次数
 /// @param didFinished 播放结束
-- (void)play:(NSInteger)loops didFinished:(void(^)(void))didFinished {
-    
-    
+- (void)play:(NSInteger)loops didFinished:(EmptyBlock)didFinished {
+    self.didFinishedBlock = didFinished;
     if (self.svgaPlayer != nil) {
         [self.svgaPlayer removeFromSuperview];
     }
+    self.isNeedToPlay = YES;
     self.svgaPlayer = SVGAPlayer.new;
     self.svgaPlayer.delegate = self;
     self.svgaPlayer.loops = (int)loops;
@@ -46,10 +47,15 @@
         make.edges.equalTo(self);
     }];
     [self layoutIfNeeded];
-    self.svgaPlayer.videoItem = self.playItem;
-    [self.svgaPlayer startAnimation];
-    self.playState = HSSVGAPlayerStateTypePlaying;
-    
+    [self checkIfNeedToPlay];
+}
+
+- (void)checkIfNeedToPlay {
+    if (self.isNeedToPlay && self.playItem) {
+        self.svgaPlayer.videoItem = self.playItem;
+        [self.svgaPlayer startAnimation];
+        self.playState = HSSVGAPlayerStateTypePlaying;
+    }
 }
 
 - (void)prepare:(NSURL *)url {
@@ -60,6 +66,7 @@
         [self.svgaParser parseWithURL:url completionBlock:^(SVGAVideoEntity * _Nullable videoItem) {
             weakSelf.playState = HSSVGAPlayerStateTypeWaitPlay;
             weakSelf.playItem = videoItem;
+            [weakSelf checkIfNeedToPlay];
         } failureBlock:^(NSError * _Nullable error) {
             weakSelf.playState = HSSVGAPlayerStateTypeFailed;
             weakSelf.parserError = error;
@@ -73,6 +80,7 @@
     self.svgaPlayer = nil;
     self.playState = HSSVGAPlayerStateTypeFinished;
     self.playItem = nil;
+    self.isNeedToPlay = NO;
 }
 
 #pragma mark lazy

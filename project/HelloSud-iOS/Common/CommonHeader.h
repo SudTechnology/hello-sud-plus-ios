@@ -7,6 +7,16 @@
 
 #ifndef CommonHeader_h
 #define CommonHeader_h
+#import <UIKit/UIKit.h>
+/// button点击回调
+typedef void(^UIBUTTON_TAP_BLOCK)(UIButton *sender);
+/// view点击回调
+typedef void(^UIVIEW_TAP_BLOCK)(UITapGestureRecognizer *gesture);
+/// 空回调
+typedef void(^EmptyBlock)(void);
+
+
+
 /// Base
 #import "BaseView.h"
 #import "BaseModel.h"
@@ -25,9 +35,6 @@
 #import "HSSheetView.h"
 #import "HSWebViewController.h"
 #import "HSBlurEffectView.h"
-/// button点击回调
-typedef void(^UIBUTTON_TAP_BLOCK)(UIButton *sender);
-/// view点击回调
-typedef void(^UIVIEW_TAP_BLOCK)(UITapGestureRecognizer *gesture);
+#import "HSSVGAPlayerView.h"
 
 #endif /* CommonHeader_h */
