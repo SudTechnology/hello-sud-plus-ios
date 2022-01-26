@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// <#Description#>
 @interface UIView(Extension)
 
 /* The array of CGColorRef objects defining the color of each gradient
@@ -40,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)hs_setGradientBackgroundWithColors:(NSArray<UIColor *> *_Nullable)colors locations:(NSArray<NSNumber *> *_Nullable)locations startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 
+/// 设置圆角
+/// @param cornerRadius 圆角值
+- (void)hs_cornerRadius:(CGFloat)cornerRadius;
 @end
 
 NS_ASSUME_NONNULL_END
