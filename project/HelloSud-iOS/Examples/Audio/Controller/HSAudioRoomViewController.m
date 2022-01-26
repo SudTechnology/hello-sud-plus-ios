@@ -147,8 +147,44 @@
 /// @param msg 消息体
 - (void)addMsg:(HSAudioMsgBaseModel *)msg {
     [self.msgTableView addMsg:msg];
+    if ([msg isKindOfClass:HSAudioMsgMicModel.class]) {
+        [self handleMicChanged:(HSAudioMsgMicModel *)msg];
+    } else if ([msg isKindOfClass:HSAudioMsgGiftModel.class]) {
+        [self handleGiftEffect:(HSAudioMsgGiftModel *)msg];
+    }
 }
 
+/// 处理麦位变化
+/// @param model model description
+- (void)handleMicChanged:(HSAudioMsgMicModel *)model {
+    // 通知麦位变化
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_MIC_CHANGED object:nil userInfo:@{@"micModel": model}];
+}
+
+/// 处理礼物动效
+/// @param model model description
+- (void)handleGiftEffect:(HSAudioMsgGiftModel *)model {
+    HSGiftModel *giftModel = [HSGiftManager.shared giftByID:model.giftID];
+    if (!giftModel) {
+        NSLog(@"No exist the gift info:%ld", model.giftID);
+        return;
+    }
+    if ([giftModel.animateType isEqualToString:@"svga"]) {
+        HSSVGAPlayerView *v = HSSVGAPlayerView.new;
+        NSURL *url = [NSURL fileURLWithPath: giftModel.animateURL];
+        [v setURL:url];
+        [self.view addSubview:v];
+        [v mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(self.view);
+            make.height.equalTo(self.view.mas_width);
+            make.center.equalTo(self.view);
+        }];
+        __weak UIView *weakV = v;
+        [v play:1 didFinished:^{
+            [weakV removeFromSuperview];
+        }];
+    }
+}
 
 #pragma mark setter
 - (void)setRoomType:(RoomType)roomType {
