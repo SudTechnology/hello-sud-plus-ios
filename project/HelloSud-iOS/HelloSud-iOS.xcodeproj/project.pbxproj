@@ -91,6 +91,7 @@
 		6C076EB6279FF3FF00650209 /* HSGiftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EB5279FF3FF00650209 /* HSGiftModel.m */; };
 		6C076EB927A00ABC00650209 /* HSBlurEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EB827A00ABC00650209 /* HSBlurEffectView.m */; };
 		6C076EBC27A01BC000650209 /* HSAudioRoomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EBB27A01BC000650209 /* HSAudioRoomManager.m */; };
+		6C076EC027A0EC2400650209 /* HSAudioRoomMicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EBF27A0EC2400650209 /* HSAudioRoomMicModel.m */; };
 		6C192E4D279523B000553034 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E4C279523B000553034 /* AppDelegate.m */; };
 		6C192E53279523B000553034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E52279523B000553034 /* ViewController.m */; };
 		6C192E56279523B000553034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E54279523B000553034 /* Main.storyboard */; };
@@ -273,7 +274,7 @@
 		6C076E9D279EC54200650209 /* HSAudioMsgGiftModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioMsgGiftModel.m; sourceTree = "<group>"; };
 		6C076E9F279EC62600650209 /* HSAudioMsgMicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioMsgMicModel.h; sourceTree = "<group>"; };
 		6C076EA0279EC62600650209 /* HSAudioMsgMicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioMsgMicModel.m; sourceTree = "<group>"; };
-		6C076EA2279EC6B600650209 /* CommonAudioMsgModelHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonAudioMsgModelHeader.h; sourceTree = "<group>"; };
+		6C076EA2279EC6B600650209 /* CommonAudioModelHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonAudioModelHeader.h; sourceTree = "<group>"; };
 		6C076EA4279F98AA00650209 /* HSAppManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAppManager.h; sourceTree = "<group>"; };
 		6C076EA5279F98AA00650209 /* HSAppManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAppManager.m; sourceTree = "<group>"; };
 		6C076EA8279F993900650209 /* HSAccountUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAccountUserModel.h; sourceTree = "<group>"; };
@@ -289,6 +290,8 @@
 		6C076EB827A00ABC00650209 /* HSBlurEffectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSBlurEffectView.m; sourceTree = "<group>"; };
 		6C076EBA27A01BC000650209 /* HSAudioRoomManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioRoomManager.h; sourceTree = "<group>"; };
 		6C076EBB27A01BC000650209 /* HSAudioRoomManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioRoomManager.m; sourceTree = "<group>"; };
+		6C076EBE27A0EC2400650209 /* HSAudioRoomMicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioRoomMicModel.h; sourceTree = "<group>"; };
+		6C076EBF27A0EC2400650209 /* HSAudioRoomMicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioRoomMicModel.m; sourceTree = "<group>"; };
 		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -720,20 +723,12 @@
 		6C076E91279EA78F00650209 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6C076E92279EA7BF00650209 /* HSAudioMsgBaseModel.h */,
-				6C076E93279EA7BF00650209 /* HSAudioMsgBaseModel.m */,
-				6C076E95279EA9B200650209 /* HSAudioUserModel.h */,
-				6C076E96279EA9B200650209 /* HSAudioUserModel.m */,
-				6C076E98279EC43800650209 /* HSAudioMsgConst.h */,
-				6C076E99279EC4F100650209 /* HSAudioMsgTextModel.h */,
-				6C076E9A279EC4F100650209 /* HSAudioMsgTextModel.m */,
-				6C076E9C279EC54200650209 /* HSAudioMsgGiftModel.h */,
-				6C076E9D279EC54200650209 /* HSAudioMsgGiftModel.m */,
-				6C076E9F279EC62600650209 /* HSAudioMsgMicModel.h */,
-				6C076EA0279EC62600650209 /* HSAudioMsgMicModel.m */,
-				6C076EA2279EC6B600650209 /* CommonAudioMsgModelHeader.h */,
+				6C076EBD27A0EBE400650209 /* Msg */,
+				6C076EA2279EC6B600650209 /* CommonAudioModelHeader.h */,
 				445EAB08279FD44F000DCC72 /* HSRoomGameInfoModel.h */,
 				445EAB09279FD44F000DCC72 /* HSRoomGameInfoModel.m */,
+				6C076EBE27A0EC2400650209 /* HSAudioRoomMicModel.h */,
+				6C076EBF27A0EC2400650209 /* HSAudioRoomMicModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -761,6 +756,24 @@
 				6C076EB5279FF3FF00650209 /* HSGiftModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6C076EBD27A0EBE400650209 /* Msg */ = {
+			isa = PBXGroup;
+			children = (
+				6C076E95279EA9B200650209 /* HSAudioUserModel.h */,
+				6C076E96279EA9B200650209 /* HSAudioUserModel.m */,
+				6C076E92279EA7BF00650209 /* HSAudioMsgBaseModel.h */,
+				6C076E93279EA7BF00650209 /* HSAudioMsgBaseModel.m */,
+				6C076E98279EC43800650209 /* HSAudioMsgConst.h */,
+				6C076E99279EC4F100650209 /* HSAudioMsgTextModel.h */,
+				6C076E9A279EC4F100650209 /* HSAudioMsgTextModel.m */,
+				6C076E9C279EC54200650209 /* HSAudioMsgGiftModel.h */,
+				6C076E9D279EC54200650209 /* HSAudioMsgGiftModel.m */,
+				6C076E9F279EC62600650209 /* HSAudioMsgMicModel.h */,
+				6C076EA0279EC62600650209 /* HSAudioMsgMicModel.m */,
+			);
+			path = Msg;
 			sourceTree = "<group>";
 		};
 		6C192E3F279523B000553034 = {
@@ -1088,11 +1101,8 @@
 				6C076E94279EA7BF00650209 /* HSAudioMsgBaseModel.m in Sources */,
 				445EAAD2279AA64E000DCC72 /* HSSwitchRoomModeView.m in Sources */,
 				6C076EA1279EC62600650209 /* HSAudioMsgMicModel.m in Sources */,
-
 				6C076EB3279FF3DD00650209 /* HSGiftManager.m in Sources */,
-
 				445EAB2327A01233000DCC72 /* HSSwitchMicModel.m in Sources */,
-
 				6C076E8B279EA30A00650209 /* HSQuickStartViewController.m in Sources */,
 				445EAAB9279A67F3000DCC72 /* HSBaseMsgCell.m in Sources */,
 				445EAAB3279A65B9000DCC72 /* HSRoomMsgTableView.m in Sources */,
@@ -1111,11 +1121,9 @@
 				445EAAC9279A98DB000DCC72 /* HSRoomMsgBgView.m in Sources */,
 				6C076E9E279EC54200650209 /* HSAudioMsgGiftModel.m in Sources */,
 				445EAA9727996BC6000DCC72 /* HSGameListTableViewCell.m in Sources */,
-
 				6C076EBC27A01BC000650209 /* HSAudioRoomManager.m in Sources */,
-				6C192E922797E31200553034 /* Constant.m in Sources */,
-
 				445EAAE5279ABDC1000DCC72 /* HSAlertView.m in Sources */,
+				6C076EC027A0EC2400650209 /* HSAudioRoomMicModel.m in Sources */,
 				6C076E53279940A400650209 /* HSMainTabBarController.m in Sources */,
 				445EAB1D27A0108E000DCC72 /* HSExitRoomModel.m in Sources */,
 			);
