@@ -85,7 +85,8 @@
 
 - (void)onBtnSend:(UIButton *)sender {
     if (!self.giftContentView.didSelectedGift) {
-        [SVProgressHUD showWithStatus:@"请选择一个礼物"];
+        
+//        [SVProgressHUD showWithStatus:@"请选择一个礼物"];
         return;
     }
     HSGiftModel *giftModel = self.giftContentView.didSelectedGift;

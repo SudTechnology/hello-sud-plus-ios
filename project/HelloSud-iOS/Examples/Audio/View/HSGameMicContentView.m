@@ -15,12 +15,24 @@
 
 @implementation HSGameMicContentView
 
+- (void)hsAddViews {
+    [self addSubview:self.scrollView];
+    [self.scrollView addSubview:self.contenView];
+}
+
 - (void)hsConfigUI {
     for (UIView * v in self.contenView.subviews) {
         [v removeFromSuperview];
     }
     for (int i = 0; i < 9; i++) {
         HSAudioMicroView *micNode = [[HSAudioMicroView alloc] init];
+        WeakSelf
+        micNode.onTapCallback = ^(HSAudioRoomMicModel * _Nonnull micModel) {
+            if (weakSelf.onTapCallback) weakSelf.onTapCallback(micModel);
+        };
+        HSAudioRoomMicModel *m = HSAudioRoomMicModel.new;
+        m.micIndex = i;
+        micNode.model = m;
         micNode.micType = HSGameMic;
         [self.contenView addSubview:micNode];
         [self.micArr addObject:micNode];
@@ -33,11 +45,6 @@
     if (self.updateMicArrCallBack) {
         self.updateMicArrCallBack(self.micArr);
     }
-}
-
-- (void)hsAddViews {
-    [self addSubview:self.scrollView];
-    [self.scrollView addSubview:self.contenView];
 }
 
 - (UIScrollView *)scrollView {
@@ -57,5 +64,12 @@
         _contenView.clipsToBounds = false;
     }
     return _contenView;
+}
+
+- (NSMutableArray *)micArr {
+    if (_micArr == nil) {
+        _micArr = NSMutableArray.new;
+    }
+    return _micArr;
 }
 @end

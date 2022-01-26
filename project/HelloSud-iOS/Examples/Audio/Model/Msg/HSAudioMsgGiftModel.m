@@ -39,7 +39,21 @@
     CGFloat h = [super caculateHeight];
     CGFloat yMargin = 3;
     h += yMargin * 2;
-    NSMutableAttributedString *attrSendName = [[NSMutableAttributedString alloc] initWithString:@"大眼萌嘟宝"];
+    
+    NSString *sendUserName = self.sendUser.name;
+    NSString *toUserName = self.toUser.name;
+    NSString *giftName = @"";
+    if (!sendUserName) {
+        sendUserName = @"";
+    }
+    if (!toUserName) {
+        toUserName = @"";
+    }
+    HSGiftModel *giftModel = [HSGiftManager.shared giftByID:self.giftID];
+    if (giftModel) {
+        giftName = giftModel.giftName;
+    }
+    NSMutableAttributedString *attrSendName = [[NSMutableAttributedString alloc] initWithString:sendUserName];
     attrSendName.yy_lineSpacing = 6;
     attrSendName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrSendName.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
@@ -49,15 +63,15 @@
     attrSend.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrSend.yy_color = [UIColor colorWithHexString:@"#AAAAAA" alpha:1];
     
-    NSMutableAttributedString *attrGetName = [[NSMutableAttributedString alloc] initWithString:@"零乳糖软妹   小仓鼠"];
+    NSMutableAttributedString *attrGetName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@", toUserName, giftName]];
     attrGetName.yy_lineSpacing = 6;
     attrGetName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrGetName.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     
-    UIImage *iconImage = [UIImage imageNamed:@"room_ope_gift"];
+    UIImage *iconImage = giftModel.smallGiftURL.length > 0 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:giftModel.smallGiftURL]]] : [UIImage new];
     NSMutableAttributedString *attrGift = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     
-    NSMutableAttributedString *attrGiftCount = [[NSMutableAttributedString alloc] initWithString:@"x1"];
+    NSMutableAttributedString *attrGiftCount = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"x%ld", self.giftCount]];
     attrGiftCount.yy_lineSpacing = 6;
     attrGiftCount.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrGiftCount.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];

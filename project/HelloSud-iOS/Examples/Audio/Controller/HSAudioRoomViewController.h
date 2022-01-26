@@ -7,7 +7,7 @@
 
 #import "BaseViewController.h"
 #import "MediaAudioEngineManager.h"
-#import "CommonAudioMsgModelHeader.h"
+#import "CommonAudioModelHeader.h"
 
 /// Model
 #import "GameViewInfoModel.h"
