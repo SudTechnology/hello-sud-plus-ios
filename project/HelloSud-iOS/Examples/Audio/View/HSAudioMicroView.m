@@ -40,6 +40,9 @@
             make.size.mas_equalTo(CGSizeMake(14, 14));
         }];
     }
+    CGFloat w = self.micType == HSGameMic ? 32 : 54;
+    self.headerView.layer.cornerRadius = w / 2;
+    self.headerView.clipsToBounds = YES;
 }
 
 - (void)hsAddViews {
@@ -54,6 +57,7 @@
 }
 
 - (void)hsLayoutViews {
+
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self);
         make.centerX.equalTo(self);
