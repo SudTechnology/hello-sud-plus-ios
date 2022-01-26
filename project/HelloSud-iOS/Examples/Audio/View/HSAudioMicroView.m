@@ -40,8 +40,7 @@
             make.size.mas_equalTo(CGSizeMake(14, 14));
         }];
     }
-    CGFloat w = self.micType == HSGameMic ? 32 : 54;
-    self.headerView.layer.cornerRadius = w / 2;
+    self.headerView.layer.cornerRadius = self.headWidth / 2;
     self.headerView.clipsToBounds = YES;
 }
 
@@ -89,23 +88,35 @@
 - (void)hsConfigEvents {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTapHead:)];
     [self.headerView addGestureRecognizer:tap];
-    
+    WeakSelf
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        HSAudioMsgMicModel *msgModel = note.userInfo[@"micModel"];
+        HSAudioMsgMicModel *msgModel = note.userInfo[@"msgModel"];
         if ([msgModel isKindOfClass:HSAudioMsgMicModel.class] ) {
             // 操作麦位与当前符合
-            if (msgModel.micIndex == self.model.micIndex) {
+            if (msgModel.micIndex == weakSelf.model.micIndex) {
                 if (msgModel.cmd == CMD_DOWN_MIC_NTF) {
                     // 下麦,清空用户信息
-                    self.model.user = nil;
+                    weakSelf.model.user = nil;
                 } else {
-                    self.model.user = msgModel.sendUser;
+                    weakSelf.model.user = msgModel.sendUser;
                 }
-            } else if (self.model.user != nil && [msgModel.sendUser.userID isEqualToString:self.model.user.userID]) {
+            } else if (weakSelf.model.user != nil && [msgModel.sendUser.userID isEqualToString:weakSelf.model.user.userID]) {
                 // 当前用户ID与切换用户ID一致，则清除掉
-                self.model.user = nil;
+                weakSelf.model.user = nil;
             }
-            [self hsUpdateUI];
+            [weakSelf hsUpdateUI];
+        }
+    }];
+    
+    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_SEND_GIFT_USER_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        HSAudioRoomMicModel *micModel = note.userInfo[@"micModel"];
+        if ([micModel isKindOfClass:HSAudioRoomMicModel.class] ) {
+            // 操作麦位与当前符合
+            if (micModel.micIndex == weakSelf.model.micIndex) {
+                weakSelf.giftImageView.hidden = micModel.isSelected ? NO : YES;
+            }
+        } else {
+            [weakSelf hsUpdateUI];
         }
     }];
 }
@@ -120,6 +131,7 @@
     if (self.model.user.icon) {
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.model.user.icon]];
     }
+    self.giftImageView.hidden = self.model.isSelected ? NO : YES;
     self.nameLabel.text = self.model.user.name;
 }
 
@@ -146,6 +158,7 @@
     if (!_giftImageView) {
         _giftImageView = [[UIImageView alloc] init];
         _giftImageView.image = [UIImage imageNamed:@"room_mic_gift_tag"];
+        _giftImageView.hidden = YES;
     }
     return _giftImageView;
 }

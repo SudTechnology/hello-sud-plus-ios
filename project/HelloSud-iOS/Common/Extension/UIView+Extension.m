@@ -31,6 +31,16 @@
     self.az_endPoint = endPoint;
 }
 
+- (void)hs_cornerRadius:(CGFloat)cornerRadius {
+    if (cornerRadius > 0) {
+        self.layer.cornerRadius = cornerRadius;
+        self.clipsToBounds = YES;
+    } else {
+        self.layer.cornerRadius = 0;
+        self.clipsToBounds = NO;
+    }
+}
+
 #pragma mark- Getter&Setter
 
 - (NSArray *)az_colors {

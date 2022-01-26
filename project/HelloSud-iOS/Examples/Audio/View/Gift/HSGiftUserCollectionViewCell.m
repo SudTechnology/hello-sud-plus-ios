@@ -22,6 +22,8 @@
 }
 
 - (void)hsLayoutViews {
+    
+    [self.headerView hs_cornerRadius:16];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(17);
         make.size.mas_equalTo(CGSizeMake(32, 32));
@@ -39,12 +41,23 @@
     }];
 }
 
+- (void)hsUpdateUI {
+    if ([self.model isKindOfClass:HSAudioRoomMicModel.class]) {
+        HSAudioRoomMicModel *m = (HSAudioRoomMicModel *)self.model;
+        if (m.user.icon) {
+            [self.headerView sd_setImageWithURL:[NSURL URLWithString:m.user.icon]];
+        }
+        self.micNumLabel.text = [NSString stringWithFormat:@"%ld麦", m.micIndex];
+        self.selectView.image = m.isSelected ? [UIImage imageNamed:@"room_gift_user_select"] : nil;
+    }
+}
+
+#pragma mark lazy
+
 - (UIImageView *)headerView {
     if (!_headerView) {
         _headerView = [[UIImageView alloc] init];
-//        _headerView.image = [UIImage imageNamed:@"room_mic_up"];
         _headerView.layer.masksToBounds = true;
-        _headerView.backgroundColor = [UIColor yellowColor];
     }
     return _headerView;
 }
@@ -52,7 +65,6 @@
 - (UIImageView *)selectView {
     if (!_selectView) {
         _selectView = [[UIImageView alloc] init];
-        _selectView.image = [UIImage imageNamed:@"room_gift_user_select"];
     }
     return _selectView;
 }
@@ -66,6 +78,7 @@
         _micNumLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         _micNumLabel.layer.borderWidth = 1;
         _micNumLabel.layer.borderColor = [UIColor colorWithHexString:@"#666666" alpha:1].CGColor;
+        _micNumLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _micNumLabel;
 }
