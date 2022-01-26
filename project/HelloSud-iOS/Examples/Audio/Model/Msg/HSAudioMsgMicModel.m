@@ -41,7 +41,7 @@
     CGFloat yMargin = 3;
     h += yMargin * 2;
     NSString *name = self.sendUser.name;
-    NSString *content = self.cmd == CMD_UP_MIC_NTF ? @"上麦" : @"下麦";
+    NSString *content = self.cmd == CMD_UP_MIC_NTF ? [NSString stringWithFormat:@"上%ld号麦", self.micIndex]  : @"下麦";
     UIImage *iconImage = self.sendUser.icon.length > 0 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sendUser.icon]]] : [UIImage new];
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：", name]];

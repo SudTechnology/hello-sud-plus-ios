@@ -48,7 +48,8 @@
     [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
     [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
     
-    self.roomType = HSGame;
+//    self.roomType = HSGame;
+    self.roomType = HSAudio;
 }
 
 - (void)hsAddViews {
