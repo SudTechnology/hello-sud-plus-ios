@@ -18,6 +18,12 @@
 @property (nonatomic, strong) UIImageView *gameCaptainView;
 @property (nonatomic, strong) UILabel *gameStateLabel;
 
+/// 水波纹
+@property (nonatomic, strong) HSRippleAnimationView *rippleView;
+
+/// 声音值
+@property (nonatomic, assign) CGFloat volume;
+
 @end
 
 @implementation HSAudioMicroView
@@ -25,6 +31,15 @@
 - (void)setMicType:(MicType)micType {
     _micType = micType;
     [self switchContentWithType];
+}
+
+- (void)setVolume:(CGFloat)volume {
+    _volume = volume;
+    if (volume > 1.5) {
+        [self.rippleView startAnimate:NO];
+    } else {
+        [self.rippleView stopAnimate:NO];
+    }
 }
 
 - (void)switchContentWithType {
@@ -45,6 +60,7 @@
 }
 
 - (void)hsAddViews {
+    [self addSubview:self.rippleView];
     [self addSubview:self.headerView];
     [self addSubview:self.nameLabel];
     [self addSubview:self.giftImageView];
@@ -57,6 +73,9 @@
 
 - (void)hsLayoutViews {
 
+    [self.rippleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.headerView);
+    }];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self);
         make.centerX.equalTo(self);
@@ -119,6 +138,31 @@
             [weakSelf hsUpdateUI];
         }
     }];
+    
+    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_LOCAL_VOICE_VOLUME_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        NSNumber *soundLevel = note.userInfo[@"volume"];
+        if ([soundLevel isKindOfClass:NSNumber.class] ) {
+            NSString *myUserID = HSAppManager.shared.loginUserInfo.userID;
+            // 操作麦位与当前符合
+            if (self.model.user != nil &&
+                [self.model.user.userID isEqualToString:myUserID]) {
+                self.volume = soundLevel.floatValue;
+            }
+        }
+    }];
+    
+    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_REMOTE_VOICE_VOLUME_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        NSDictionary<NSString*, NSNumber*> * dicSoundLevel = note.userInfo[@"dicVolume"];
+        if ([dicSoundLevel isKindOfClass:NSDictionary.class] ) {
+            NSString *currentStreamID = self.model.streamID;
+            NSNumber * currentSoundLevel = currentStreamID.length > 0 ? dicSoundLevel[currentStreamID] : nil;
+            // 操作麦位与当前符合
+            if (self.model.user != nil &&
+                currentSoundLevel != nil) {
+                self.volume = currentSoundLevel.floatValue;
+            }
+        }
+    }];
 }
 
 
@@ -126,6 +170,7 @@
     if (self.model.user == nil) {
         self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
         self.nameLabel.text = @"点击上麦";
+        [self.rippleView stopAnimate:YES];
         return;
     }
     if (self.model.user.icon) {
@@ -198,6 +243,18 @@
         _gameStateLabel.layer.masksToBounds = true;
     }
     return _gameStateLabel;
+}
+
+- (HSRippleAnimationView *)rippleView {
+    if (_rippleView == nil) {
+        _rippleView = HSRippleAnimationView.new;
+        _rippleView.animateColors = @[(id)HEX_COLOR_A(@"#FF3B2F", 1).CGColor,
+                                      (id)HEX_COLOR_A(@"#FF3B2F", 0.59).CGColor,
+                                      (id)HEX_COLOR_A(@"#FF3B2F", 0.34).CGColor,
+                                      (id)HEX_COLOR_A(@"#FF3B2F", 0).CGColor];
+        _rippleView.animateBackgroundColor = UIColor.clearColor;
+    }
+    return _rippleView;
 }
 
 @end

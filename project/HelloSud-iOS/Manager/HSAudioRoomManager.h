@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "HSAudioRoomViewController.h"
 #import "HSAudioRoomViewController+IM.h"
+#import "HSAudioRoomViewController+Voice.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房间管理

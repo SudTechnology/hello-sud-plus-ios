@@ -86,7 +86,6 @@
 
 
 - (void)muteMicrophone:(BOOL)isMute {
-    NSLog(@"must implementation from sub class");
     dispatch_async(self.queueMute, ^{
         /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
         /// 异步激活采集通道（此处开销成本过大，相对耗时）
@@ -182,6 +181,7 @@
 }
 
 - (void)onPublisherStateUpdate:(ZegoPublisherState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData streamID:(NSString *)streamID {
+    NSLog(@"zego onPublisherStateUpdate:%ld, errorcode:%d, streamID:%@, extendedData:%@", state, errorCode, streamID, extendedData);
     if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onPublisherStateUpdate:errorCode:extendedData:streamID:)]) {
         [self.eventHandler onPublisherStateUpdate:state errorCode:errorCode extendedData:extendedData streamID:streamID];
     }

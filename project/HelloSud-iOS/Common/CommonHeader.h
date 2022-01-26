@@ -36,5 +36,6 @@ typedef void(^EmptyBlock)(void);
 #import "HSWebViewController.h"
 #import "HSBlurEffectView.h"
 #import "HSSVGAPlayerView.h"
+#import "HSRippleAnimationView.h"
 
 #endif /* CommonHeader_h */
