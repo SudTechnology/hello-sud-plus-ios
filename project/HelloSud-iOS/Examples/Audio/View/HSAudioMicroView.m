@@ -85,7 +85,27 @@
 - (void)hsConfigEvents {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTapHead:)];
     [self.headerView addGestureRecognizer:tap];
+    
+    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        HSAudioMsgMicModel *msgModel = note.userInfo[@"micModel"];
+        if ([msgModel isKindOfClass:HSAudioMsgMicModel.class] ) {
+            // 操作麦位与当前符合
+            if (msgModel.micIndex == self.model.micIndex) {
+                if (msgModel.cmd == CMD_DOWN_MIC_NTF) {
+                    // 下麦,清空用户信息
+                    self.model.user = nil;
+                } else {
+                    self.model.user = msgModel.sendUser;
+                }
+            } else if (self.model.user != nil && [msgModel.sendUser.userID isEqualToString:self.model.user.userID]) {
+                // 当前用户ID与切换用户ID一致，则清除掉
+                self.model.user = nil;
+            }
+            [self hsUpdateUI];
+        }
+    }];
 }
+
 
 - (void)hsUpdateUI {
     if (self.model.user == nil) {

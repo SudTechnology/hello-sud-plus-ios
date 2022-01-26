@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 房间麦位信息
 @interface HSAudioRoomMicModel : BaseModel
 /// 麦上用户
-@property(nonatomic, strong)HSAudioUserModel *user;
+@property(nonatomic, strong, nullable)HSAudioUserModel *user;
 /// 麦位索引
 @property(nonatomic, assign)NSInteger micIndex;
 /// 麦位推流ID
