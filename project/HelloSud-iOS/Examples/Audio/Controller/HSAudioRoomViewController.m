@@ -163,7 +163,10 @@
             make.bottom.mas_equalTo(self.operatorView.mas_top).offset(-20);
             make.height.mas_greaterThanOrEqualTo(0);
         }];
-        
+        [self.arrMicModel removeAllObjects];
+        for (HSAudioMicroView *v in self.audioMicContentView.micArr) {
+            [self.arrMicModel addObject:v.model];
+        }
     } else if (self.roomType == HSGameMic) {
         [self.gameMicContentView setHidden:false];
         [self.audioMicContentView setHidden:true];
@@ -172,6 +175,10 @@
             make.bottom.mas_equalTo(self.operatorView.mas_top);
             make.height.mas_equalTo(106);
         }];
+        [self.arrMicModel removeAllObjects];
+        for (HSAudioMicroView *v in self.gameMicContentView.micArr) {
+            [self.arrMicModel addObject:v.model];
+        }
     }
 }
 
@@ -235,7 +242,7 @@
 }
 
 - (NSMutableArray *)arrMicModel {
-    if (_arrMicModel) {
+    if (_arrMicModel == nil) {
         _arrMicModel = NSMutableArray.new;
     }
     return _arrMicModel;

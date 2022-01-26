@@ -35,6 +35,11 @@
     for (HSGiftModel *m in self.dataList) {
         m.isSelected = NO;
     }
+    if (self.dataList.count > 0) {
+        // 默认选中第一个
+        self.dataList[0].isSelected = YES;
+        self.didSelectedGift = self.dataList[0];
+    }
     [self.collectionView reloadData];
 }
 
