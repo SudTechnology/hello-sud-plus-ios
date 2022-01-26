@@ -10,9 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 切换房间游戏
-@interface HSSwitchGameModel : BaseModel
-@property (nonatomic, assign) NSInteger              retCode;
-@property (nonatomic, copy) NSString              * retMsg;
+@interface HSSwitchGameModel : HSBaseRespModel
 
 @end
 

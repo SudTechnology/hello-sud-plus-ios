@@ -45,11 +45,10 @@
     }];
 }
 
-- (void)onCloseRoomEvent {
-    [HSAlertView showTextAlert:@"确认关闭/离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
-        [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
-    } onCloseCallback:^{
-    }];
+- (void)onCloseRoomEvent:(UIButton *)btn {
+    if (self.closeTapBlock) {
+        self.closeTapBlock(btn);
+    }
 }
 
 - (void)hsLayoutViews {
@@ -138,7 +137,7 @@
     if (!_closeBtn) {
         _closeBtn = [[UIButton alloc] init];
         [_closeBtn setImage:[UIImage imageNamed:@"room_navi_close"] forState:UIControlStateNormal];
-        [_closeBtn addTarget:self action:@selector(onCloseRoomEvent) forControlEvents:UIControlEventTouchUpInside];
+        [_closeBtn addTarget:self action:@selector(onCloseRoomEvent:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _closeBtn;
 }

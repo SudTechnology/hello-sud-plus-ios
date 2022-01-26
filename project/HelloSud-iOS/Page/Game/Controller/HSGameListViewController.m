@@ -51,25 +51,8 @@
 
 #pragma mark - requst Data
 - (void)requestData {
-    /// 假数据
-    HSRoomInfoList *m_0 = [[HSRoomInfoList alloc] init];
-    m_0.roomId = 100;
-    m_0.roomName = @"房间名字0001";
-    m_0.roomPic = @"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7af2c723accd90ce5c9e79471a76251ae44f0798.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645674165&t=cb63922664bc54461211e0ae8acd6e95";
-    m_0.memberCount = 3;
-    m_0.sceneType = 1;
-    HSRoomInfoList *m_1 = [[HSRoomInfoList alloc] init];
-    m_1.roomId = 101;
-    m_1.roomName = @"房间名字0007";
-    m_1.roomPic = @"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7af2c723accd90ce5c9e79471a76251ae44f0798.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645674165&t=cb63922664bc54461211e0ae8acd6e95";
-    m_1.memberCount = 6;
-    m_1.sceneType = 1;
-    [self.dataList addObject:m_0];
-    [self.dataList addObject:m_1];
-    [self.tableView reloadData];
-    
     WeakSelf
-    [RequestService postRequestWithApi:kBASEURL(@"room/list/v1") param:@{} success:^(NSDictionary *rootDict) {
+    [RequestService postRequestWithApi:kINTERACTURL(@"room/list/v1") param:nil success:^(NSDictionary *rootDict) {
         HSRoomListModel *model = [HSRoomListModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [SVProgressHUD showErrorWithStatus:model.retMsg];
@@ -95,9 +78,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    /// 跳转到Examples中的语音场景样例
-    HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:true];
+    HSRoomInfoList *m = self.dataList[indexPath.row];
+    [HSAudioRoomManager.shared reqEnterRoom:m.roomId];
 }
 
 #pragma mark - lazy

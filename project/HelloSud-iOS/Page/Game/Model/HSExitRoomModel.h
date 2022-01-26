@@ -10,9 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 用户退出房间Model
-@interface HSExitRoomModel : BaseModel
-@property (nonatomic, assign) NSInteger              retCode;
-@property (nonatomic, copy) NSString              * retMsg;
+@interface HSExitRoomModel : HSBaseRespModel
 
 @end
 
