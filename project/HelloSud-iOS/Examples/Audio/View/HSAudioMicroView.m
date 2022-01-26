@@ -7,6 +7,8 @@
 
 #import "HSAudioMicroView.h"
 
+
+
 @interface HSAudioMicroView ()
 @property (nonatomic, strong) UIImageView *headerView;
 @property (nonatomic, strong) YYLabel *nameLabel;
@@ -80,12 +82,38 @@
     }];
 }
 
+- (void)hsConfigEvents {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTapHead:)];
+    [self.headerView addGestureRecognizer:tap];
+}
+
+- (void)hsUpdateUI {
+    if (self.model.user == nil) {
+        self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
+        self.nameLabel.text = @"点击上麦";
+        return;
+    }
+    if (self.model.user.icon) {
+        [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.model.user.icon]];
+    }
+    self.nameLabel.text = self.model.user.name;
+}
+
+- (void)setModel:(HSAudioRoomMicModel *)model {
+    _model = model;
+    [self hsUpdateUI];
+}
+
+- (void)onTapHead:(UITapGestureRecognizer *)tap {
+    if (self.onTapCallback) self.onTapCallback(self.model);
+}
 
 #pragma mark - lazy
 - (UIImageView *)headerView {
     if (!_headerView) {
         _headerView = [[UIImageView alloc] init];
         _headerView.image = [UIImage imageNamed:@"room_mic_up"];
+        _headerView.userInteractionEnabled = YES;
     }
     return _headerView;
 }

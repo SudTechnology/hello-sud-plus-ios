@@ -8,6 +8,8 @@
 #import "BaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef void(^TapMicViewBlock)(HSAudioRoomMicModel *micModel);
+
 /// 麦位view
 @interface HSAudioMicroView : BaseView
 
@@ -16,7 +18,9 @@ typedef NS_ENUM(NSInteger, MicType) {
     HSGameMic,
 };
 @property (nonatomic, assign) MicType micType;
-
+@property (nonatomic, strong)HSAudioRoomMicModel *model;
+/// 点击麦位回调
+@property (nonatomic, copy)TapMicViewBlock onTapCallback;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,17 +1,18 @@
 //
-//  CommonAudioMsgModelHeader.h
+//  CommonAudioModelHeader.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
 //
 
-#ifndef CommonAudioMsgModelHeader_h
-#define CommonAudioMsgModelHeader_h
+#ifndef CommonAudioModelHeader_h
+#define CommonAudioModelHeader_h
 #import "HSAudioMsgConst.h"
 #import "HSAudioMsgBaseModel.h"
 #import "HSAudioUserModel.h"
 #import "HSAudioMsgTextModel.h"
 #import "HSAudioMsgGiftModel.h"
 #import "HSAudioMsgMicModel.h"
+#import "HSAudioRoomMicModel.h"
 
-#endif /* CommonAudioMsgModelHeader_h */
+#endif /* CommonAudioModelHeader_h */

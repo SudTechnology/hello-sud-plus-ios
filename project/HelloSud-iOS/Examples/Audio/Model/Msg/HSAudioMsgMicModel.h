@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 构建下麦消息
 /// @param micIndex micIndex description
 + (instancetype)makeDownMicMsgWithMicIndex:(NSInteger)micIndex;
+
+- (NSAttributedString *)attrContent;
 @end
 
 NS_ASSUME_NONNULL_END
