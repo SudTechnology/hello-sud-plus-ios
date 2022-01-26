@@ -7,6 +7,10 @@
 
 #import "HSSwitchMicModel.h"
 
+@implementation HSSwitchMicData
+
+@end
+
 @implementation HSSwitchMicModel
 
 @end

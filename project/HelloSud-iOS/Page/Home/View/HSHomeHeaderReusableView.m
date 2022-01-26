@@ -18,6 +18,19 @@
 
 @implementation HSHomeHeaderReusableView
 
+- (void)setHeaderGameList:(NSMutableArray<HSGameList *> *)headerGameList {
+    _headerGameList = headerGameList;
+    
+    [self reloadData];
+}
+
+- (void)setSceneModel:(HSSceneList *)sceneModel {
+    _sceneModel = sceneModel;
+    
+    self.titleLabel.text = sceneModel.sceneName;
+    [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImage]];
+}
+
 - (void)hsConfigUI {
     self.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
     self.itemW = (kScreenWidth - 32 - 24 - 24 )/4;
@@ -28,13 +41,14 @@
     for (UIView * v in self.itemContainerView.subviews) {
         [v removeFromSuperview];
     }
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < self.headerGameList.count; i++) {
+        HSGameList *m = self.headerGameList[i];
         UIView *contenView = [[UIView alloc] init];
         contenView.backgroundColor = UIColor.whiteColor;
         UIImageView *iconImageView = [[UIImageView alloc] init];
-        iconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"game_type_header_item_%d", 0]];
+        [iconImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
         UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.text = @"飞镖达人";
+        titleLabel.text = m.gameName;
         titleLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
@@ -63,7 +77,6 @@
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.previewView];
     [self.contentView addSubview:self.itemContainerView];
-    [self reloadData];
 }
 
 - (void)hsLayoutViews {
@@ -80,7 +93,7 @@
     }];
     [self.previewView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(18);
-        make.left.mas_equalTo(15);
+        make.left.mas_equalTo(12);
         make.width.mas_equalTo(self.itemW * 2 - 2);
         make.height.mas_equalTo(self.itemH * 3 - 11);
     }];

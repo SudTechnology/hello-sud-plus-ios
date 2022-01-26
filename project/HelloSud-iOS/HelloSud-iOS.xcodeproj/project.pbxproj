@@ -214,6 +214,7 @@
 		445EAB2827A0132E000DCC72 /* HSSwitchGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSwitchGameModel.m; sourceTree = "<group>"; };
 		445EAB2A27A013B1000DCC72 /* HSRoomListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomListModel.h; sourceTree = "<group>"; };
 		445EAB2B27A013B1000DCC72 /* HSRoomListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomListModel.m; sourceTree = "<group>"; };
+		445EAB2D27A0E805000DCC72 /* CommonRoomModelHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonRoomModelHeader.h; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* MediaAudioEngineProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngineProtocol.h; sourceTree = "<group>"; };
 		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		44DF03872796AB9C006EE6AC /* GameSudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSudManager.h; sourceTree = "<group>"; };
@@ -418,6 +419,7 @@
 				445EAB2827A0132E000DCC72 /* HSSwitchGameModel.m */,
 				445EAB2A27A013B1000DCC72 /* HSRoomListModel.h */,
 				445EAB2B27A013B1000DCC72 /* HSRoomListModel.m */,
+				445EAB2D27A0E805000DCC72 /* CommonRoomModelHeader.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -425,7 +427,8 @@
 		445EAA822799417B000DCC72 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				445EAA9B279973FE000DCC72 /* GameList */,
+				445EAA9527996BC6000DCC72 /* HSGameListTableViewCell.h */,
+				445EAA9627996BC6000DCC72 /* HSGameListTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -437,15 +440,6 @@
 				445EAA7F27994160000DCC72 /* HSGameListViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		445EAA9B279973FE000DCC72 /* GameList */ = {
-			isa = PBXGroup;
-			children = (
-				445EAA9527996BC6000DCC72 /* HSGameListTableViewCell.h */,
-				445EAA9627996BC6000DCC72 /* HSGameListTableViewCell.m */,
-			);
-			path = GameList;
 			sourceTree = "<group>";
 		};
 		445EAAC6279A94E0000DCC72 /* Msg */ = {
@@ -1088,11 +1082,8 @@
 				6C076E94279EA7BF00650209 /* HSAudioMsgBaseModel.m in Sources */,
 				445EAAD2279AA64E000DCC72 /* HSSwitchRoomModeView.m in Sources */,
 				6C076EA1279EC62600650209 /* HSAudioMsgMicModel.m in Sources */,
-
 				6C076EB3279FF3DD00650209 /* HSGiftManager.m in Sources */,
-
 				445EAB2327A01233000DCC72 /* HSSwitchMicModel.m in Sources */,
-
 				6C076E8B279EA30A00650209 /* HSQuickStartViewController.m in Sources */,
 				445EAAB9279A67F3000DCC72 /* HSBaseMsgCell.m in Sources */,
 				445EAAB3279A65B9000DCC72 /* HSRoomMsgTableView.m in Sources */,
@@ -1111,10 +1102,7 @@
 				445EAAC9279A98DB000DCC72 /* HSRoomMsgBgView.m in Sources */,
 				6C076E9E279EC54200650209 /* HSAudioMsgGiftModel.m in Sources */,
 				445EAA9727996BC6000DCC72 /* HSGameListTableViewCell.m in Sources */,
-
 				6C076EBC27A01BC000650209 /* HSAudioRoomManager.m in Sources */,
-				6C192E922797E31200553034 /* Constant.m in Sources */,
-
 				445EAAE5279ABDC1000DCC72 /* HSAlertView.m in Sources */,
 				6C076E53279940A400650209 /* HSMainTabBarController.m in Sources */,
 				445EAB1D27A0108E000DCC72 /* HSExitRoomModel.m in Sources */,

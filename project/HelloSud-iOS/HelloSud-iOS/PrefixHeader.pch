@@ -33,4 +33,6 @@
 #import "GameConfig.h"
 #import "RequestService.h"
 
+#import "CommonRoomModelHeader.h"
+
 #endif /* PrefixHeader_pch */
