@@ -18,12 +18,13 @@
 @implementation HSAudioMicContentView
 
 - (void)hsConfigUI {
+    WeakSelf
     for (UIView * v in self.containerView.subviews) {
         [v removeFromSuperview];
     }
     for (int i = 0; i < 8; i++) {
         HSAudioMicroView *micNode = [[HSAudioMicroView alloc] init];
-        WeakSelf
+        
         micNode.onTapCallback = ^(HSAudioRoomMicModel * _Nonnull micModel) {
             if (weakSelf.onTapCallback) weakSelf.onTapCallback(micModel);
         };
