@@ -22,9 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// 查询房间麦位列表Model
-@interface HSMicListModel : BaseModel
-@property (nonatomic, assign) NSInteger              retCode;
-@property (nonatomic, copy) NSString              * retMsg;
+@interface HSMicListModel : HSBaseRespModel
 @property (nonatomic, strong) HSMicListData              * data;
 
 @end

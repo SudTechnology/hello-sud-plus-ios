@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 /// 房间导航栏
 @interface HSRoomNaviView : BaseView
-
+@property(nonatomic, copy)UIBUTTON_TAP_BLOCK closeTapBlock;
 @end
 
 NS_ASSUME_NONNULL_END

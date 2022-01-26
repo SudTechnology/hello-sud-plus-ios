@@ -131,8 +131,13 @@
         _searchBtn.backgroundColor = UIColor.blackColor;
         _searchBtn.titleLabel.textColor = UIColor.whiteColor;
         _searchBtn.titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+        [_searchBtn addTarget:self action:@selector(enterEvent) forControlEvents:UIControlEventTouchUpInside];
     }
     return _searchBtn;
+}
+
+- (void)enterEvent {
+    [HSAudioRoomManager.shared reqEnterRoom:self.searchTextField.text.longLongValue];
 }
 
 @end

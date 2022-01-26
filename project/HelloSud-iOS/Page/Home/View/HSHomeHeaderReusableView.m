@@ -18,7 +18,7 @@
 
 @implementation HSHomeHeaderReusableView
 
-- (void)setHeaderGameList:(NSMutableArray<HSGameList *> *)headerGameList {
+- (void)setHeaderGameList:(NSArray<HSGameList *> *)headerGameList {
     _headerGameList = headerGameList;
     
     [self reloadData];
@@ -64,12 +64,22 @@
             make.top.mas_equalTo(iconImageView.mas_bottom).offset(3);
             make.size.mas_greaterThanOrEqualTo(CGSizeZero);
         }];
+        [contenView setUserInteractionEnabled:true];
+        contenView.tag = i;
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInputEvent:)];
+        [contenView addGestureRecognizer:tapGesture];
     }
     [self.itemContainerView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:self.itemW fixedItemHeight:self.itemH
                                                 fixedLineSpacing:0 fixedInteritemSpacing:8
                                                        warpCount:2
                                                       topSpacing:0
                                                    bottomSpacing:0 leadSpacing:0 tailSpacing:0];
+}
+
+- (void)tapInputEvent:(UITapGestureRecognizer *)gesture {
+    NSInteger tag = [gesture view].tag;
+    HSGameList *m = self.headerGameList[tag];
+    [HSAudioRoomManager.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
 }
 
 - (void)hsAddViews {
@@ -131,6 +141,7 @@
     if (!_previewView) {
         _previewView = [[UIImageView alloc] init];
         _previewView.image = [UIImage imageNamed:@"home_preview_0"];
+        _previewView.backgroundColor = UIColor.groupTableViewBackgroundColor;
     }
     return _previewView;
 }

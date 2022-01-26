@@ -135,6 +135,13 @@
         /// 麦位点击回调
         [weakSelf handleMicTap:micModel];
     };
+    self.naviView.closeTapBlock = ^(UIButton *sender) {
+        [HSAlertView showTextAlert:@"确认关闭/离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+            [HSAudioRoomManager.shared reqExitRoom:weakSelf.roomID.longLongValue];
+            [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
+        } onCloseCallback:^{
+        }];
+    };
 }
 
 /// 处理麦位点击

@@ -33,9 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// 查询游戏列表Model
-@interface HSGameListModel: BaseModel
-@property (nonatomic, assign) NSInteger              retCode;
-@property (nonatomic, copy) NSString              * retMsg;
+@interface HSGameListModel: HSBaseRespModel
 @property (nonatomic, strong) HSGameListData              * data;
 
 @end
