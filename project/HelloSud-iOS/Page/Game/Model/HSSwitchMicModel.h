@@ -15,9 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// 房间上下麦Model
-@interface HSSwitchMicModel : BaseModel
-@property (nonatomic, assign) NSInteger              retCode;
-@property (nonatomic, copy) NSString              * retMsg;
+@interface HSSwitchMicModel : HSBaseRespModel
 @property (nonatomic, strong) HSSwitchMicData              * data;
 
 @end
