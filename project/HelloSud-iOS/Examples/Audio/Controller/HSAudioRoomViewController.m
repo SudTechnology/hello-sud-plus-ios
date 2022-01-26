@@ -122,6 +122,25 @@
             weakSelf.arrAnchorView = micArr;
         };
     }
+    self.audioMicContentView.onTapCallback = ^(HSAudioRoomMicModel * _Nonnull micModel) {
+        /// 麦位点击回调
+        [weakSelf handleMicTap:micModel];
+    };
+    self.gameMicContentView.onTapCallback = ^(HSAudioRoomMicModel * _Nonnull micModel) {
+        /// 麦位点击回调
+        [weakSelf handleMicTap:micModel];
+    };
+}
+
+/// 处理麦位点击
+/// @param micModel micModel description
+- (void)handleMicTap:(HSAudioRoomMicModel *)micModel {
+    if (micModel.user == nil) {
+        /// 无人，上麦
+        HSAudioMsgMicModel *upMicModel = [HSAudioMsgMicModel makeUpMicMsgWithMicIndex:micModel.micIndex];
+        [self sendMsg:upMicModel isAddToShow:YES];
+        return;
+    }
 }
 
 /// 展示公屏消息

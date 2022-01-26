@@ -32,6 +32,9 @@
 
 - (void)hsUpdateUI {
     [self.dataList setArray:HSGiftManager.shared.giftList];
+    for (HSGiftModel *m in self.dataList) {
+        m.isSelected = NO;
+    }
     [self.collectionView reloadData];
 }
 

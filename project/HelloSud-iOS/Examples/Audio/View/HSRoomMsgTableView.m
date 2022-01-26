@@ -19,10 +19,10 @@
 @implementation HSRoomMsgTableView
 
 - (void)hsAddViews {
-    HSAudioUserModel *user = [HSAudioUserModel makeUserWithUserID:@"123" name:@"nihao" icon:@"" sex:1];
-    HSAudioMsgGiftModel *giftModel = [HSAudioMsgGiftModel makeMsgWithGiftID:100 giftCount:10 toUser: user];
-    [self addMsg:[HSAudioMsgTextModel makeMsg:@"hello"]];
-    [self addMsg:giftModel];
+//    HSAudioUserModel *user = [HSAudioUserModel makeUserWithUserID:@"123" name:@"nihao" icon:@"" sex:1];
+//    HSAudioMsgGiftModel *giftModel = [HSAudioMsgGiftModel makeMsgWithGiftID:100 giftCount:10 toUser: user];
+//    [self addMsg:[HSAudioMsgTextModel makeMsg:@"hello"]];
+//    [self addMsg:giftModel];
     [self addSubview:self.tableView];
 }
 

@@ -29,16 +29,11 @@
 
 - (void)setModel:(BaseModel *)model {
     
-    [self setSystemContent];
-}
-
-- (void)setSystemContent {
-    NSMutableAttributedString *attrMsg = [[NSMutableAttributedString alloc] initWithString:@"系统消息系统消息系统消息"];
-    attrMsg.yy_lineSpacing = 6;
-    attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-    
-    self.msgLabel.attributedText = attrMsg;
+    /// 上下麦消息通知
+    if ([model isKindOfClass:HSAudioMsgMicModel.class]) {
+        HSAudioMsgMicModel *m = (HSAudioMsgMicModel *)model;
+        self.msgLabel.attributedText = m.attrContent;
+    }
 }
 
 - (YYLabel *)msgLabel {

@@ -7,6 +7,8 @@
 
 #import "HSAudioMicroView.h"
 
+
+
 @interface HSAudioMicroView ()
 @property (nonatomic, strong) UIImageView *headerView;
 @property (nonatomic, strong) YYLabel *nameLabel;
@@ -38,6 +40,9 @@
             make.size.mas_equalTo(CGSizeMake(14, 14));
         }];
     }
+    CGFloat w = self.micType == HSGameMic ? 32 : 54;
+    self.headerView.layer.cornerRadius = w / 2;
+    self.headerView.clipsToBounds = YES;
 }
 
 - (void)hsAddViews {
@@ -52,6 +57,7 @@
 }
 
 - (void)hsLayoutViews {
+
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self);
         make.centerX.equalTo(self);
@@ -80,12 +86,58 @@
     }];
 }
 
+- (void)hsConfigEvents {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTapHead:)];
+    [self.headerView addGestureRecognizer:tap];
+    
+    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        HSAudioMsgMicModel *msgModel = note.userInfo[@"micModel"];
+        if ([msgModel isKindOfClass:HSAudioMsgMicModel.class] ) {
+            // 操作麦位与当前符合
+            if (msgModel.micIndex == self.model.micIndex) {
+                if (msgModel.cmd == CMD_DOWN_MIC_NTF) {
+                    // 下麦,清空用户信息
+                    self.model.user = nil;
+                } else {
+                    self.model.user = msgModel.sendUser;
+                }
+            } else if (self.model.user != nil && [msgModel.sendUser.userID isEqualToString:self.model.user.userID]) {
+                // 当前用户ID与切换用户ID一致，则清除掉
+                self.model.user = nil;
+            }
+            [self hsUpdateUI];
+        }
+    }];
+}
+
+
+- (void)hsUpdateUI {
+    if (self.model.user == nil) {
+        self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
+        self.nameLabel.text = @"点击上麦";
+        return;
+    }
+    if (self.model.user.icon) {
+        [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.model.user.icon]];
+    }
+    self.nameLabel.text = self.model.user.name;
+}
+
+- (void)setModel:(HSAudioRoomMicModel *)model {
+    _model = model;
+    [self hsUpdateUI];
+}
+
+- (void)onTapHead:(UITapGestureRecognizer *)tap {
+    if (self.onTapCallback) self.onTapCallback(self.model);
+}
 
 #pragma mark - lazy
 - (UIImageView *)headerView {
     if (!_headerView) {
         _headerView = [[UIImageView alloc] init];
         _headerView.image = [UIImage imageNamed:@"room_mic_up"];
+        _headerView.userInteractionEnabled = YES;
     }
     return _headerView;
 }

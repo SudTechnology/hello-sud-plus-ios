@@ -17,12 +17,21 @@
 @implementation HSAudioMicContentView
 
 - (void)hsConfigUI {
+    WeakSelf
     for (UIView * v in self.containerView.subviews) {
         [v removeFromSuperview];
     }
     for (int i = 0; i < 8; i++) {
         HSAudioMicroView *micNode = [[HSAudioMicroView alloc] init];
+        
+        micNode.onTapCallback = ^(HSAudioRoomMicModel * _Nonnull micModel) {
+            if (weakSelf.onTapCallback) weakSelf.onTapCallback(micModel);
+        };
+        HSAudioRoomMicModel *m = HSAudioRoomMicModel.new;
+        m.micIndex = i;
+        micNode.model = m;
         [self.containerView addSubview:micNode];
+        [self.micArr addObject:micNode];
     }
     CGFloat interitemSpac = (kScreenWidth - 44 - (54 * 4)) / 4;
     [self.containerView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:54 fixedItemHeight:110
@@ -66,6 +75,13 @@
         _containerView = [[UIView alloc] init];
     }
     return _containerView;
+}
+
+- (NSMutableArray *)micArr {
+    if (_micArr == nil) {
+        _micArr = NSMutableArray.new;
+    }
+    return _micArr;
 }
 
 @end

@@ -21,6 +21,9 @@
     if (isAddToShow) {
         [self addMsg:msg];
     }
+    if ([msg isKindOfClass:HSAudioMsgMicModel.class]) {
+        [self handleMicChanged:(HSAudioMsgMicModel *)msg];
+    }
 }
 
 /// 接收引擎回调回来消息响应
@@ -62,11 +65,13 @@
         case CMD_UP_MIC_NTF:{
             // 上麦消息
             msgModel = [HSAudioMsgMicModel mj_objectWithKeyValues:command];
+            [self handleMicChanged:(HSAudioMsgMicModel*)msgModel];
         }
             break;
         case CMD_DOWN_MIC_NTF:{
             // 下麦消息
             msgModel = [HSAudioMsgMicModel mj_objectWithKeyValues:command];
+            [self handleMicChanged:(HSAudioMsgMicModel*)msgModel];
         }
             break;
         default:
@@ -81,5 +86,13 @@
     if (msgModel) {
         [self addMsg:msgModel];
     }
+}
+
+
+/// 处理麦位变化
+/// @param model model description
+- (void)handleMicChanged:(HSAudioMsgMicModel *)model {
+    // 通知麦位变化
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_MIC_CHANGED object:nil userInfo:@{@"micModel": model}];
 }
 @end
