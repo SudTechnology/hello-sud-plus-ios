@@ -747,8 +747,8 @@
 				6C076EBD27A0EBE400650209 /* Msg */,
 				6C076EA2279EC6B600650209 /* CommonAudioModelHeader.h */,
 				445EAB08279FD44F000DCC72 /* HSRoomGameInfoModel.h */,
-				445EAB09279FD44F000DCC72 /* HSRoomGameInfoModel.m */,
 				6C076EBE27A0EC2400650209 /* HSAudioRoomMicModel.h */,
+				445EAB09279FD44F000DCC72 /* HSRoomGameInfoModel.m */,
 				6C076EBF27A0EC2400650209 /* HSAudioRoomMicModel.m */,
 			);
 			path = Model;
