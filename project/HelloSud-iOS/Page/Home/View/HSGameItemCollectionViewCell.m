@@ -17,6 +17,12 @@
 
 @implementation HSGameItemCollectionViewCell
 
+- (void)setModel:(BaseModel *)model {
+    HSGameList *m = (HSGameList *) model;
+    self.nameLabel.text = m.gameName;
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
+}
+
 - (void)hsAddViews {
     self.itemW = (kScreenWidth - 32 - 24 - 24 )/4;
     self.itemH = self.itemW + 32;
@@ -33,7 +39,7 @@
         make.top.equalTo(self.contentView);
         make.centerX.mas_equalTo(self.contentView);
         make.width.mas_equalTo(self.itemW);
-        make.height.mas_equalTo(self.containerView.mas_width);
+        make.height.mas_equalTo(self.itemW);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.containerView);
