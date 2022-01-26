@@ -17,20 +17,17 @@
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) HSRoomGiftContentView *giftContentView;
 @property (nonatomic, strong)HSBlurEffectView *blurView;
-
-
+/// 选择用户
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *userDataList;
+@property (nonatomic, strong) NSMutableArray<HSAudioRoomMicModel *> *userDataList;
 @end
 
 @implementation HSRoomGiftPannelView
 
 - (void)hsConfigUI {
-//    self.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.6];
 }
 
 - (void)hsAddViews {
-    self.userDataList = @[@(1), @(1), @(1), @(1), @(1), @(1), @(1), @(1), @(1)];
     [self addSubview:self.blurView];
     [self addSubview:self.sendToLabel];
     [self addSubview:self.checkAllBtn];
@@ -83,16 +80,39 @@
     [super hsConfigEvents];
 }
 
+- (void)hsUpdateUI {
+    NSArray *arrModel = HSAudioRoomManager.shared.currentRoomVC.arrMicModel;
+    for (HSAudioRoomMicModel *m in arrModel) {
+        if (m.user != nil) {
+            m.isSelected = NO;
+            [self.userDataList addObject:m];
+        }
+    }
+    [self.collectionView reloadData];
+}
+
 - (void)onBtnSend:(UIButton *)sender {
-    if (!self.giftContentView.didSelectedGift) {
-        
-//        [SVProgressHUD showWithStatus:@"请选择一个礼物"];
+    
+    NSMutableArray<HSAudioUserModel*> *arrWaitForSend = NSMutableArray.new;
+    for (HSAudioRoomMicModel *m in self.userDataList) {
+        if (m.isSelected && m.user != nil) {
+            [arrWaitForSend addObject:m.user];
+        }
+    }
+    if (arrWaitForSend.count == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请选择收礼人"];
         return;
     }
-    HSGiftModel *giftModel = self.giftContentView.didSelectedGift;
-    HSAudioUserModel *toUser = [HSAudioUserModel makeUserWithUserID:@"1231" name:@"3333" icon:@"" sex:1];
-    HSAudioMsgGiftModel *giftMsg = [HSAudioMsgGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
-    [HSAudioRoomManager.shared.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
+    if (!self.giftContentView.didSelectedGift) {
+        [SVProgressHUD showErrorWithStatus:@"请选择一个礼物"];
+        return;
+    }
+    for (HSAudioUserModel *user in arrWaitForSend) {
+        HSGiftModel *giftModel = self.giftContentView.didSelectedGift;
+        HSAudioUserModel *toUser = user;//[HSAudioUserModel makeUserWithUserID:@"1231" name:@"3333" icon:@"" sex:1];
+        HSAudioMsgGiftModel *giftMsg = [HSAudioMsgGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
+        [HSAudioRoomManager.shared.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
+    }
 }
 
 
@@ -108,11 +128,22 @@
     return cell;
 }
 
+
+
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    HSAudioRoomMicModel *m = self.userDataList[indexPath.row];
+    m.isSelected = !m.isSelected;
+    HSGiftUserCollectionViewCell *c = (HSGiftUserCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    c.model = m;
+}
 
-    NSLog(@"选中cell: %ld", indexPath.row);
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    HSAudioRoomMicModel *m = self.userDataList[indexPath.row];
+    m.isSelected = !m.isSelected;
+    HSGiftUserCollectionViewCell *c = (HSGiftUserCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    c.model = m;
 }
 
 
