@@ -33,6 +33,8 @@
 #import "GameConfig.h"
 #import "RequestService.h"
 
+/// Page
+#import "CommonRoomModelHeader.h"
 /// Example Audio
 #import "CommonAudioModelHeader.h"
 

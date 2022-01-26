@@ -215,6 +215,7 @@
 		445EAB2827A0132E000DCC72 /* HSSwitchGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSwitchGameModel.m; sourceTree = "<group>"; };
 		445EAB2A27A013B1000DCC72 /* HSRoomListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRoomListModel.h; sourceTree = "<group>"; };
 		445EAB2B27A013B1000DCC72 /* HSRoomListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRoomListModel.m; sourceTree = "<group>"; };
+		445EAB2D27A0E805000DCC72 /* CommonRoomModelHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonRoomModelHeader.h; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* MediaAudioEngineProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAudioEngineProtocol.h; sourceTree = "<group>"; };
 		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		44DF03872796AB9C006EE6AC /* GameSudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSudManager.h; sourceTree = "<group>"; };
@@ -421,6 +422,7 @@
 				445EAB2827A0132E000DCC72 /* HSSwitchGameModel.m */,
 				445EAB2A27A013B1000DCC72 /* HSRoomListModel.h */,
 				445EAB2B27A013B1000DCC72 /* HSRoomListModel.m */,
+				445EAB2D27A0E805000DCC72 /* CommonRoomModelHeader.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -428,7 +430,8 @@
 		445EAA822799417B000DCC72 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				445EAA9B279973FE000DCC72 /* GameList */,
+				445EAA9527996BC6000DCC72 /* HSGameListTableViewCell.h */,
+				445EAA9627996BC6000DCC72 /* HSGameListTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -440,15 +443,6 @@
 				445EAA7F27994160000DCC72 /* HSGameListViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		445EAA9B279973FE000DCC72 /* GameList */ = {
-			isa = PBXGroup;
-			children = (
-				445EAA9527996BC6000DCC72 /* HSGameListTableViewCell.h */,
-				445EAA9627996BC6000DCC72 /* HSGameListTableViewCell.m */,
-			);
-			path = GameList;
 			sourceTree = "<group>";
 		};
 		445EAAC6279A94E0000DCC72 /* Msg */ = {

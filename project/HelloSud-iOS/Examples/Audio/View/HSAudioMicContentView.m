@@ -11,7 +11,6 @@
 @interface HSAudioMicContentView ()
 @property (nonatomic, strong) HSAudioMicroView *ownerMicView;
 @property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, copy) NSMutableArray <HSAudioMicroView *> *micArr;
 
 @end
 

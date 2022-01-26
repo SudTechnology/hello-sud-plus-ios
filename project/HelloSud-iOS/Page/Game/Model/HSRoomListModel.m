@@ -7,6 +7,14 @@
 
 #import "HSRoomListModel.h"
 
+@implementation HSRoomInfoList
+
+@end
+
+@implementation HSRoomListData
+
+@end
+
 @implementation HSRoomListModel
 
 @end
