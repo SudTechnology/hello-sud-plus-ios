@@ -18,6 +18,14 @@
 
 @implementation HSGameListTableViewCell
 
+- (void)setModel:(BaseModel *)model {
+    HSRoomInfoList *m = (HSRoomInfoList *) model;
+    self.roomNameLabel.text = m.roomName;
+    self.roomNumLabel.text = [NSString stringWithFormat:@"房间号：%ld", m.roomId];
+    self.onlineLabel.text = [NSString stringWithFormat:@"%ld人", m.memberCount];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
+}
+
 - (void)hsConfigUI {
     self.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
@@ -34,7 +42,7 @@
 
 - (void)hsLayoutViews {
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 16, 8, 16));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 8, 0));
     }];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);

@@ -7,6 +7,14 @@
 
 #import "HSMicListModel.h"
 
+@implementation HSRoomMicList
+
+@end
+
+@implementation HSMicListData
+
+@end
+
 @implementation HSMicListModel
 
 @end

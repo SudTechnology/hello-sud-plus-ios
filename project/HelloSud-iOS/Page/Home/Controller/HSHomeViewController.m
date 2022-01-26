@@ -14,7 +14,10 @@
 
 @interface HSHomeViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, strong) NSMutableArray <HSGameList *> *dataList;
+/// 头部数据源
+@property (nonatomic, strong) NSMutableArray <HSSceneList *> *headerSceneList;
+@property (nonatomic, strong) NSMutableArray <HSGameList *> *headerGameList;
 @property (nonatomic, strong) HSSearchHeaderView *searchHeaderView;
 @property (nonatomic, assign) CGFloat itemW;
 @property (nonatomic, assign) CGFloat itemH;
@@ -35,11 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    self.dataList = @[@(1), @(1), @(1), @(1)];
-    
-    [self.collectionView reloadData];
+    [self requestData];
 }
 
 - (void)hsAddViews {
@@ -60,6 +59,69 @@
     }];
 }
 
+#pragma mark - requst Data
+- (void)requestData {
+    /// 假数据
+    HSSceneList *m_0 = [[HSSceneList alloc] init];
+    m_0.sceneId = 100;
+    m_0.sceneName = @"语音场景DDD";
+    m_0.sceneImage = @"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7af2c723accd90ce5c9e79471a76251ae44f0798.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645674165&t=cb63922664bc54461211e0ae8acd6e95";
+    [self.headerSceneList addObject:m_0];
+    [self.headerSceneList addObject:m_0];
+    [self.headerSceneList addObject:m_0];
+    [self.headerSceneList addObject:m_0];
+    
+    
+    HSGameList *m1 = [[HSGameList alloc] init];
+    m1.gameId = 10002;
+    m1.gameName = @"游戏名";
+    m1.gamePic = @"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7af2c723accd90ce5c9e79471a76251ae44f0798.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645674165&t=cb63922664bc54461211e0ae8acd6e95";
+    [self.headerGameList addObject:m1];
+    [self.headerGameList addObject:m1];
+    [self.headerGameList addObject:m1];
+    [self.headerGameList addObject:m1];
+    [self.headerGameList addObject:m1];
+    [self.headerGameList addObject:m1];
+    
+    
+    [self.dataList addObject:m1];
+    [self.dataList addObject:m1];
+    [self.dataList addObject:m1];
+    [self.dataList addObject:m1];
+    [self.collectionView reloadData];
+    
+    WeakSelf
+    [RequestService postRequestWithApi:kBASEURL(@"game/list/v1") param:@{} success:^(NSDictionary *rootDict) {
+        HSGameListModel *model = [HSGameListModel mj_objectWithKeyValues:rootDict];
+        if (model.retCode != 0) {
+            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            return;
+        }
+        [self.headerSceneList removeAllObjects];
+        [self.headerGameList removeAllObjects];
+        [self.dataList removeAllObjects];
+        
+        [weakSelf.headerSceneList addObjectsFromArray:model.data.sceneList];
+        if (model.data.sceneList.count <= 6) {
+            [weakSelf.headerGameList addObjectsFromArray:model.data.gameList];
+        } else {
+            [weakSelf.headerGameList subarrayWithRange:NSMakeRange(0, 6)];
+            [self.dataList subarrayWithRange:NSMakeRange(6, model.data.gameList.count)];
+            
+            /// 求余 填满整个屏幕
+            double fmodCount = fmod(model.data.gameList.count, 4);
+            for (int i = 0; i < fmodCount; i++) {
+                HSGameList *m = [[HSGameList alloc] init];
+                m.isBlank = true;
+                [self.dataList addObject:m];
+            }
+        }
+        [self.collectionView reloadData];
+    } failure:^(id error) {
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+    }];
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -72,6 +134,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HSGameItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSGameItemCollectionViewCell" forIndexPath:indexPath];
+    cell.model = self.dataList[indexPath.row];
     return cell;
 }
 
@@ -97,6 +160,8 @@
     UICollectionReusableView *supplementaryView;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
         HSHomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HSHomeHeaderReusableView" forIndexPath:indexPath];
+        view.headerGameList = self.headerGameList;
+        view.sceneModel = self.headerSceneList[indexPath.section];
         supplementaryView = view;
     } else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
         HSHomeFooterReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HSHomeFooterReusableView" forIndexPath:indexPath];
@@ -109,7 +174,11 @@
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         CGFloat itemW = (kScreenWidth -32)/4;
-        CGFloat itemH = itemW + 32;
+//        CGFloat itemH = itemW + 32 - 8;
+        
+        CGFloat realitemW = (kScreenWidth - 32 - 24 - 24 )/4;
+        CGFloat itemH = realitemW + 24;
+        
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         flowLayout.itemSize = CGSizeMake(itemW, itemH);
@@ -144,6 +213,20 @@
         _dataList = [NSMutableArray array];
     }
     return _dataList;
+}
+
+- (NSMutableArray<HSGameList *> *)headerGameList {
+    if (!_headerGameList) {
+        _headerGameList = [NSMutableArray array];
+    }
+    return _headerGameList;
+}
+
+- (NSMutableArray<HSSceneList *> *)headerSceneList {
+    if (!_headerSceneList) {
+        _headerSceneList = [NSMutableArray array];
+    }
+    return _headerSceneList;
 }
 
 @end

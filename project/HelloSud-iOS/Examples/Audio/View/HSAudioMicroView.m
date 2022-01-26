@@ -166,7 +166,7 @@
 - (UIImageView *)gameCaptainView {
     if (!_gameCaptainView) {
         _gameCaptainView = [[UIImageView alloc] init];
-        _gameCaptainView.image = [UIImage imageNamed:@"room_mic_gift_tag"];
+        _gameCaptainView.image = [UIImage imageNamed:@"room_game_captain"];
     }
     return _gameCaptainView;
 }

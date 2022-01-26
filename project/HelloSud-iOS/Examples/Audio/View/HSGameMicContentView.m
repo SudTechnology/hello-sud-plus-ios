@@ -10,7 +10,6 @@
 @interface HSGameMicContentView ()
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contenView;
-@property (nonatomic, copy) NSMutableArray <HSAudioMicroView *> *micArr;
 
 @end
 
