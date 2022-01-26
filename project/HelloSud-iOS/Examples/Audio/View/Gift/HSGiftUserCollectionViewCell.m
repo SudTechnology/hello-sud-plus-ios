@@ -22,6 +22,8 @@
 }
 
 - (void)hsLayoutViews {
+    
+    [self.headerView hs_cornerRadius:16];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(17);
         make.size.mas_equalTo(CGSizeMake(32, 32));
