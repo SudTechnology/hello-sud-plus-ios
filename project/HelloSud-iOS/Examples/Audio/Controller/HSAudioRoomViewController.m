@@ -159,7 +159,7 @@
 /// @param model model description
 - (void)handleMicChanged:(HSAudioMsgMicModel *)model {
     // 通知麦位变化
-    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_MIC_CHANGED object:nil userInfo:@{@"micModel": model}];
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_MIC_CHANGED object:nil userInfo:@{@"msgModel": model}];
 }
 
 /// 处理礼物动效
