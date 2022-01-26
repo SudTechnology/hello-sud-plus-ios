@@ -26,6 +26,7 @@
     }
     for (int i = 0; i < 9; i++) {
         HSAudioMicroView *micNode = [[HSAudioMicroView alloc] init];
+        micNode.headWidth = 32;
         WeakSelf
         micNode.onTapCallback = ^(HSAudioRoomMicModel * _Nonnull micModel) {
             if (weakSelf.onTapCallback) weakSelf.onTapCallback(micModel);

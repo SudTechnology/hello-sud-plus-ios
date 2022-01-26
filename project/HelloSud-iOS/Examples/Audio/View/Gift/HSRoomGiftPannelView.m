@@ -137,6 +137,7 @@
     m.isSelected = !m.isSelected;
     HSGiftUserCollectionViewCell *c = (HSGiftUserCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     c.model = m;
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,6 +145,7 @@
     m.isSelected = !m.isSelected;
     HSGiftUserCollectionViewCell *c = (HSGiftUserCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     c.model = m;
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
 }
 
 

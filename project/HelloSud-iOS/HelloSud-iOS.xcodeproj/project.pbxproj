@@ -293,6 +293,7 @@
 		6C076EBB27A01BC000650209 /* HSAudioRoomManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioRoomManager.m; sourceTree = "<group>"; };
 		6C076EBE27A0EC2400650209 /* HSAudioRoomMicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioRoomMicModel.h; sourceTree = "<group>"; };
 		6C076EBF27A0EC2400650209 /* HSAudioRoomMicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioRoomMicModel.m; sourceTree = "<group>"; };
+		6C076EC127A13A5C00650209 /* AudioConstantHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConstantHeader.h; sourceTree = "<group>"; };
 		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -670,6 +671,7 @@
 				6C076E91279EA78F00650209 /* Model */,
 				6C076E8D279EA34700650209 /* View */,
 				6C076E8C279EA30F00650209 /* Controller */,
+				6C076EC127A13A5C00650209 /* AudioConstantHeader.h */,
 			);
 			path = Audio;
 			sourceTree = "<group>";

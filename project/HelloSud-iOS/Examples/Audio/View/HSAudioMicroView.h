@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, MicType) {
 };
 /// 麦位view
 @interface HSAudioMicroView : BaseView
-
+@property (nonatomic, assign) CGFloat headWidth;
 @property (nonatomic, assign) MicType micType;
 @property (nonatomic, strong)HSAudioRoomMicModel *model;
 /// 点击麦位回调

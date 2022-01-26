@@ -9,8 +9,7 @@
 #import "HSAudioRoomViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-/// 麦位变化通知
-#define NTF_MIC_CHANGED @"NTF_MIC_CHANGED"
+
 
 /// 语音房信令模块
 @interface HSAudioRoomViewController(IM)
