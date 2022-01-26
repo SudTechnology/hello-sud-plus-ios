@@ -24,9 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// 所有开播房间列表
-@interface HSRoomListModel : BaseModel
-@property (nonatomic, assign) NSInteger              retCode;
-@property (nonatomic, copy) NSString              * retMsg;
+@interface HSRoomListModel : HSBaseRespModel
 @property (nonatomic, strong) HSRoomListData              * data;
 
 @end

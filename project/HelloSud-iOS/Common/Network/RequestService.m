@@ -20,9 +20,13 @@ static AFHTTPSessionManager *aManager;
         //以下三项manager的属性根据需要进行配置
         aManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/xml",@"text/json",@"text/plain",@"text/JavaScript",@"application/json",@"image/jpeg",@"image/png",@"application/octet-stream",nil];
         
+        aManager.requestSerializer = [AFJSONRequestSerializer serializer];
         aManager.responseSerializer = [AFHTTPResponseSerializer serializer];
         // 设置超时时间
         aManager.requestSerializer.timeoutInterval = kAFNetworkingTimeoutInterval;
+        
+        [aManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
     });
     return aManager;
 }
@@ -88,6 +92,13 @@ static AFHTTPSessionManager *aManager;
     }
 }
 
+/// 设置请求头
++ (void)setupHeader:(NSDictionary *)dic {
+    for (NSString *key in dic) {
+        NSString *value = [dic objectForKey:key];
+        [[self sharedAFManager].requestSerializer setValue:value forHTTPHeaderField:key];
+    }
+}
 
 + (void)postRequestWithApi:(NSString *)api
                      param:(NSDictionary *)param

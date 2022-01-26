@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 匹配开播的游戏，并进入游戏房间
 /// @param gameId 游戏ID
-- (void)reqMatchRoom:(long)gameId;
+- (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType;
 
 /// 用户上麦或下麦
 /// @param roomId 房间ID

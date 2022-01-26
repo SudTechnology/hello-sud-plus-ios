@@ -16,6 +16,11 @@
 @end
 
 @implementation HSGameListData
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"gameList": [HSGameList class],
+             @"sceneList": [HSSceneList class]
+    };
+}
 
 @end
 

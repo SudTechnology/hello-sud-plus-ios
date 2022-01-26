@@ -68,4 +68,7 @@ extern NSInteger const kAFNetworkingTimeoutInterval;
                   success:(void(^)(NSDictionary *rootDict))success
                   failure:(void(^)(id error))failure;
 
+/// 设置请求头
++ (void)setupHeader:(NSDictionary *)dic;
+
 @end

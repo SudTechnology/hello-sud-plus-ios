@@ -10,6 +10,12 @@
 #define kKeyLoginUserInfo @"key_login_user_info"
 #define kKeyLoginAgreement @"key_login_agreement"
 #define kKeyLoginIsLogin @"key_login_isLogin"
+#define kKeyLoginToken @"key_login_token"
+
+@interface HSAppManager ()
+@property (nonatomic, strong) NSArray <NSString *> *randomNameArr;
+
+@end
 
 @implementation HSAppManager
 + (instancetype)shared {
@@ -44,6 +50,13 @@
     
     _isAgreement = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginAgreement];
     _isLogin = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginIsLogin];
+    id temp_token = [NSUserDefaults.standardUserDefaults objectForKey:kKeyLoginToken];
+    if (temp_token && [temp_token isKindOfClass:NSString.class]) {
+        _token = temp_token;
+        [self saveIsLogin];
+        [self setupNetWorkHeader];
+        [self reqConfigData];
+    }
 }
 
 /// 保持用户信息
@@ -62,12 +75,56 @@
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 
-/// 保存是否同意协议
+/// 保存登录状态
 - (void)saveIsLogin {
     _isLogin = true;
     [NSUserDefaults.standardUserDefaults setBool:true forKey:kKeyLoginIsLogin];
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 
+/// 随机名字
+- (NSString *)randomUserName {
+    int num = arc4random() % 100;
+    return self.randomNameArr[num];
+}
+
+/// 设置请求header
+- (void)setupNetWorkHeader {
+    [RequestService setupHeader:@{@"Authorization": self.token}];
+}
+
+/// 保存token
+- (void)saveToken:(NSString *)token {
+    _token = token;
+    [self setupNetWorkHeader];
+    [NSUserDefaults.standardUserDefaults setValue:token forKey:kKeyLoginToken];
+    [NSUserDefaults.standardUserDefaults synchronize];
+    
+    [self reqConfigData];
+}
+
+/// 登录成功请求配置信息
+- (void)reqConfigData {
+    WeakSelf
+    [RequestService postRequestWithApi:kBASEURL(@"base/config/v1") param:nil success:^(NSDictionary *rootDict) {
+        HSConfigModel *model = [HSConfigModel mj_objectWithKeyValues:rootDict];
+        if (model.retCode != 0) {
+            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            return;
+        }
+        weakSelf.configData = model.data;
+    } failure:^(id error) {
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+    }];
+}
+
+- (NSArray<NSString *> *)randomNameArr {
+    if (!_randomNameArr) {
+        _randomNameArr = @[@"哈利", @"祺祥", @"沐辰", @"阿米莉亚", @"齐默尔曼", @"陌北", @"旺仔", @"半夏", @"朝雨", @"卫斯理", @"阿道夫", @"长青", @"安小六", @"小凡", @"炎月", @"醉风", @"斯科特", @"布卢默", @"宛岩", @"平萱", @"凝雁", @"怀亚特", @"格伦巴特", @"尔白", @"南露", @"爱丽丝", @"埃尔维斯", @"奥利维亚", @"妙竹", @"雲思衣", @"少女大佬", @"兔兔别跑", @"夏纱", @"嘉慕", @"阿拉贝拉", @"星剑", @"罗德斯", @"渡满归", @"星浅", @"问水", @"星奕晨", @"丹尼尔", @"白止扇", @"暖暖", @"埃迪", @"杰里米", @"玛德琳", @"波佩", @"卡诺", @"泡芙", @"帕特里克", @"梅雷迪斯", @"公孙昕", @"青弘", @"潘豆豆", @"小番秀二", @"大一宇", @"米奇", @"戴夫", @"伯特", @"米洛布雷", @"阿德莱德", @"吉宝", @"伊娃", @"路易斯", @"希拉姆", @"杰西", @"贝特西", @"利奥波德", @"丽塔", @"拉姆斯登", @"伯纳德", @"理查德", @"奥尔德里奇", @"劳里", @"奥兰多", @"埃尔罗伊", @"栗和顺", @"朱雀佳行", @"理德拉", @"凡勃伦", @"科波菲尔", @"玉谷大三", @"大木元司", @"钮阳冰", @"盖勤", @"紫心", @"弘慕慕", @"怀星驰", @"泉宏胜", @"闻人星海", @"Watt", @"Kevin", @"Toby", @"瓦利斯", @"苏珊娜", @"罗密欧", @"福克纳", @"多萝西", @"贝尔", @"卡门", @"安德烈", @"朱丽叶", @"吉姆"];
+    }
+    return _randomNameArr;
+}
+
 @end
+
 
