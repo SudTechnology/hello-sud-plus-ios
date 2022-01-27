@@ -6,16 +6,31 @@
 //
 
 #import "HSAudioRoomViewController+Game.h"
+#import <SudMGP/ISudFSMMG.h>
+#import <SudMGP/ISudFSTAPP.h>
+#import <SudMGP/SudMGP.h>
+#import <SudMGP/ISudAPPD.h>
+#import <SudMGP/ISudFSMStateHandle.h>
+
+#define APP_ID_SZ_001        @"1486637108889305089"
+#define APP_KEY_SZ_001       @"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR"
 
 @implementation HSAudioRoomViewController(Game)
 
 /// 游戏业务服务登录
 - (void)loginGame {
-    [RequestService postRequestWithApi:kBASEURL(@"game-login/v1") param:@{} success:^(NSDictionary *rootDict) {
-        
-    } failure:^(id error) {
-        
+
+    WeakSelf
+    [HSGameManager.shared reqGameLoginWithSuccess:^(HSRespGameInfoDataModel * _Nonnull gameInfo) {
+        weakSelf.gameInfoModel.code = gameInfo.code;
+        [weakSelf loadGame];
+    } fail:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:error.debugDescription];
     }];
+}
+
+- (void)loadGame {
+    [self initGameSDKWithAppID:APP_ID_SZ_001 appKey:APP_KEY_SZ_001 isTestEnv:YES mgID:self.gameId rootView:self.gameView];
 }
 
 
@@ -159,11 +174,13 @@
  * @param mgID             NSInteger      游戏ID，如 碰碰我最强:1001；飞刀我最强:1002；你画我猜:1003
  */
 - (void)initGameSDKWithAppID:(NSString *)appID appKey:(NSString *)appKey isTestEnv:(Boolean)isTestEnv mgID:(int64_t)mgID rootView:(UIView*)rootView {
+    [ISudAPPD e:4];
+    [ISudAPPD d];
     [SudMGP initSDK:appID appKey:appKey isTestEnv:isTestEnv listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
             NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
             // SudMGPSDK初始化成功 加载MG
-            [self loadMG:self.gameInfoModel.currentPlayerUserId roomId:@"1234567" code:self.gameInfoModel.code mgId:mgID language:self.gameInfoModel.language fsmMG:self rootView:rootView];
+            [self loadMG:self.gameInfoModel.currentPlayerUserId roomId:self.roomID code:self.gameInfoModel.code mgId:mgID language:self.gameInfoModel.language fsmMG:self rootView:rootView];
         } else {
             /// 初始化失败, 可根据业务重试
             NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@",retMsg);

@@ -61,6 +61,7 @@
         }
         HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
         vc.roomID = [NSString stringWithFormat:@"%ld", model.data.roomId];
+        vc.gameId = model.data.gameId;
         vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
 //        vc.roomType = HSAudio;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];

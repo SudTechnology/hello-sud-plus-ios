@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shared;
 
 /// 登录游戏
-//- (void)reqGameLoginWithSucess:(void(^)());
+- (void)reqGameLoginWithSuccess:(void(^)(HSRespGameInfoDataModel *gameInfo))success fail:(ErrorBlock)fail;
 @end
 
 NS_ASSUME_NONNULL_END

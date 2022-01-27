@@ -7,6 +7,7 @@
 
 #import "HSAudioRoomViewController.h"
 #import "HSAudioRoomViewController+IM.h"
+#import "HSAudioRoomViewController+Game.h"
 
 /// View
 #import "HSRoomNaviView.h"
@@ -48,6 +49,10 @@
     /// 设置语音引擎事件回调
     [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
     [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
+    if (self.gameId > 0) {
+        self.gameInfoModel.currentPlayerUserId = HSAppManager.shared.loginUserInfo.userID;
+        [self loginGame];
+    }
     [self hsUpdateUI];
 }
 
@@ -56,6 +61,7 @@
     [self.view addSubview:self.naviView];
     [self.view addSubview:self.operatorView];
     [self.view addSubview:self.audioMicContentView];
+    [self.view addSubview:self.gameView];
     [self.view addSubview:self.gameMicContentView];
     [self.view addSubview:self.msgBgView];
     [self.msgBgView addSubview:self.msgTableView];
@@ -80,6 +86,9 @@
         make.top.mas_equalTo(self.naviView.mas_bottom).offset(20);
         make.left.right.mas_equalTo(self.view);
         make.height.mas_greaterThanOrEqualTo(0);
+    }];
+    [self.gameView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
     }];
     [self.gameMicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.naviView.mas_bottom).offset(20);
@@ -297,6 +306,7 @@
     if (self.roomType == HSAudioMic) {
         [self.gameMicContentView setHidden:true];
         [self.audioMicContentView setHidden:false];
+        self.gameView.hidden = YES;
         [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.audioMicContentView.mas_bottom);
             make.left.right.mas_equalTo(self.view);
@@ -309,6 +319,7 @@
             self.dicMicModel[key] = v.model;
         }
     } else if (self.roomType == HSGameMic) {
+        self.gameView.hidden = NO;
         [self.gameMicContentView setHidden:false];
         [self.audioMicContentView setHidden:true];
         [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -384,11 +395,25 @@
     return _gameMicContentView;
 }
 
+- (UIView *)gameView {
+    if (_gameView == nil) {
+        _gameView = UIView.new;
+    }
+    return _gameView;
+}
+
 - (NSMutableDictionary *)dicMicModel {
     if (_dicMicModel == nil) {
         _dicMicModel = NSMutableDictionary.new;
     }
     return _dicMicModel;
+}
+
+- (HSRoomGameInfoModel *)gameInfoModel {
+    if (_gameInfoModel == nil) {
+        _gameInfoModel = HSRoomGameInfoModel.new;
+    }
+    return _gameInfoModel;
 }
 
 @end

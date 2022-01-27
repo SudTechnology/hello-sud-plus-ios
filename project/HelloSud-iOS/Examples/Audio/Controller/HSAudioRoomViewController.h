@@ -31,7 +31,8 @@ typedef NS_ENUM(NSInteger, RoomType) {
     HSGame,
 };
 @property (nonatomic, assign) RoomType roomType;
-
+/// 游戏加载主view
+@property (nonatomic, strong) UIView *gameView;
 /// ISudFSTAPP
 @property (nonatomic, strong) id<ISudFSTAPP> iSudFSTAPP;
 /// game相关信息Model
