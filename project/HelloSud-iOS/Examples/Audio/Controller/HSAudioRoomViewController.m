@@ -17,6 +17,7 @@
 #import "HSRoomInputView.h"
 #import "HSGameMicContentView.h"
 #import "HSAudioMicroView.h"
+#import "HSMicOperateView.h"
 
 @interface HSAudioRoomViewController ()
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -151,6 +152,20 @@
         /// 无人，上麦
         [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:0];
         return;
+    } else if ([HSAppManager.shared.loginUserInfo isMeByUserID:micModel.user.userID]) {
+        // 是自己
+        HSMicOperateView *v = HSMicOperateView.new;
+        v.downMicCallback = ^(UIButton *sender) {
+            // 下麦
+            [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1];
+            [HSSheetView close];
+        };
+        v.cancelCallback = ^(UIButton *sender) {
+            [HSSheetView close];
+        };
+        [HSSheetView show:v rootView:self.view onCloseCallback:^{
+                    
+        }];
     }
 }
 
