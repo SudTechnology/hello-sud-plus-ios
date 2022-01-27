@@ -16,8 +16,60 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
+  desc "正在构建HelloSudPlus-iOS版本"
+
+  SCHEME_NAME = "HelloSud-iOS"
+  VERSION_NUM = "1.0.0"  
+  OUTPUT_DIR = "../build/#{ENV['CI_BUILD_ID']}"
+  OUTPUT_DYSM_DIR = "../#{OUTPUT_DIR}"
+  TEST_OUTPU_DIR = "../build/iOSBuild"
+  TEST_DYSM_DIR="../#{TEST_OUTPU_DIR}"
+  RESULT_PRE_NAME = "HelloSud-iOS-#{ENV['CI_BUILD_ID']}"
+  DYSM_LOAD_PATH = "#{RESULT_PRE_NAME}-dSYM"
+  DYSM_NAME = "#{RESULT_PRE_NAME}.app.dSYM"
+  IPA_NAME = "#{RESULT_PRE_NAME}.ipa"
+
+  before_all do
+    cocoapods(clean_install: true, podfile:"./Podfile")
+  end
+
+  lane :buildHeader do
+    increment_build_number(build_number: ENV['CI_BUILD_ID'])
+    unlock_keychain(
+      path: "/Users/packagemini/Library/Keychains/login.keychain-db",
+      password: "divtossABC"
+    )
+  end
+
+  lane :buildFooter do
+    # echo "footer"
+  end
+
+  lane :buildDebugIOS do
     # add actions here: https://docs.fastlane.tools/actions
+    buildHeader
+    build_app(
+      clean: true,
+      include_symbols: true,
+      scheme: "HelloSud-iOS",
+      workspace: "HelloSud-iOS.xcworkspace",
+      include_bitcode: false,
+      configuration: "Debug",
+      export_options: {
+        method: "development",
+        provisioningProfiles: {
+          "tech.sud.mgp.hello" => "Dev_Sud_MGP"
+        }
+      },
+      xcargs: "-allowProvisioningUpdates",
+      output_directory: TEST_OUTPU_DIR,
+      output_name: IPA_NAME
+    )
+    # 上传符号表到bugly
+    sh("unzip -d #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH} #{TEST_DYSM_DIR}/#{DYSM_NAME}.zip")
+    sh("mkdir #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
+    sh("mv #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud.app.dSYM #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
+    # sh("java -jar ../../tool/buglyqq-upload-symbol.jar -appid e2b403656a -appkey 10de6587-999b-4b25-85c8-596dfb9f75d6 -bundleid tech.sud.mgp.hello -version #{VERSION_NUM}.#{ENV['CI_BUILD_ID']} -platform IOS -inputSymbol #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
+    buildFooter
   end
 end
