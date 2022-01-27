@@ -12,9 +12,6 @@
 #import <SudMGP/ISudAPPD.h>
 #import <SudMGP/ISudFSMStateHandle.h>
 
-#define APP_ID_SZ_001        @"1486637108889305089"
-#define APP_KEY_SZ_001       @"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR"
-
 @implementation HSAudioRoomViewController(Game)
 
 /// 游戏业务服务登录
@@ -30,7 +27,13 @@
 }
 
 - (void)loadGame {
-    [self initGameSDKWithAppID:APP_ID_SZ_001 appKey:APP_KEY_SZ_001 isTestEnv:YES mgID:self.gameId rootView:self.gameView];
+    NSString *appID = HSAppManager.shared.configData.sudCfg.appId;
+    NSString *appKey = HSAppManager.shared.configData.sudCfg.appKey;
+    if (appID.length == 0 || appKey.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"Game appID or appKey is empty"];
+        return;
+    }
+    [self initGameSDKWithAppID:appID appKey:appKey isTestEnv:YES mgID:self.gameId rootView:self.gameView];
 }
 
 

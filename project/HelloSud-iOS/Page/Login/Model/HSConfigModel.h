@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString              *thirdId;
 @property (nonatomic, strong) HSConfigContent              *zegoCfg;
 @property (nonatomic, strong) HSConfigContent              *agoraCfg;
+@property (nonatomic, strong) HSConfigContent              *sudCfg;
 
 @end
 
