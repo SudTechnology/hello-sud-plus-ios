@@ -125,6 +125,8 @@
                 weakSelf.model.user = nil;
             }
             [weakSelf hsUpdateUI];
+        } else {
+            [weakSelf hsUpdateUI];
         }
     }];
     

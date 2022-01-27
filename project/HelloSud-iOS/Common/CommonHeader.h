@@ -14,6 +14,8 @@ typedef void(^UIBUTTON_TAP_BLOCK)(UIButton *sender);
 typedef void(^UIVIEW_TAP_BLOCK)(UITapGestureRecognizer *gesture);
 /// 空回调
 typedef void(^EmptyBlock)(void);
+/// 错误回调
+typedef void(^ErrorBlock)(NSError *error);
 
 
 
@@ -27,6 +29,7 @@ typedef void(^EmptyBlock)(void);
 /// Extension
 #import "UIColor+Extension.h"
 #import "UIDevice+Extension.h"
+#import "NSError+Custom.h"
 /// Utils
 #import "Constant.h"
 #import "AppUtil.h"

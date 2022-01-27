@@ -59,6 +59,8 @@
                     weakSelf.voiceBtnState = VoiceBtnStateTypeWaitOpen;
                 }
             }
+        } else {
+            [weakSelf hsUpdateUI];
         }
     }];
 }
@@ -141,7 +143,7 @@
 
 
 - (void)resetAllSelectedUser {
-    NSArray *arr = HSAudioRoomManager.shared.currentRoomVC.arrMicModel;
+    NSArray *arr = HSAudioRoomManager.shared.currentRoomVC.dicMicModel.allValues;
     for (HSAudioRoomMicModel *m in arr) {
         m.isSelected = NO;
     }

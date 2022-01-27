@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 麦位索引
 @property(nonatomic, assign)NSInteger micIndex;
 /// 麦位推流ID
-@property(nonatomic, assign)NSString * streamID;
+@property(nonatomic, strong)NSString * streamID;
 
 /// 是否选中
 @property(nonatomic, assign)BOOL isSelected;
