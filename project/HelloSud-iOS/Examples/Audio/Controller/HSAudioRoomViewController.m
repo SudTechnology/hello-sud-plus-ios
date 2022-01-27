@@ -58,10 +58,10 @@
 
 - (void)hsAddViews {
     [self.view addSubview:self.bgImageView];
+    [self.view addSubview:self.gameView];
     [self.view addSubview:self.naviView];
     [self.view addSubview:self.operatorView];
     [self.view addSubview:self.audioMicContentView];
-    [self.view addSubview:self.gameView];
     [self.view addSubview:self.gameMicContentView];
     [self.view addSubview:self.msgBgView];
     [self.msgBgView addSubview:self.msgTableView];
