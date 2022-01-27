@@ -31,7 +31,7 @@
         vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
     }];
 }
 
@@ -46,7 +46,7 @@
         }
         
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
     }];
 }
 
@@ -61,10 +61,11 @@
         }
         HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
         vc.roomID = [NSString stringWithFormat:@"%ld", model.data.roomId];
-        vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
+        //vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
+        vc.roomType = HSAudio;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
     }];
 }
 
@@ -91,23 +92,32 @@
         }
         
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
     }];
 }
 
 /// 查询房间麦位列表
 /// @param roomId 房间ID
-- (void)reqMicList:(long)roomId {
+- (void)reqMicList:(long)roomId success:(void(^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail {
     WeakSelf
     [RequestService postRequestWithApi:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSMicListModel *model = [HSMicListModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [SVProgressHUD showErrorWithStatus:model.retMsg];
+            if (fail) {
+                fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
+            }
             return;
+        }
+        if (success) {
+            success(model.data.roomMicList);
         }
         
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
+        if (fail) {
+            fail(error);
+        }
     }];
 }
 
@@ -123,8 +133,9 @@
         }
         
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
     }];
 }
+
 
 @end

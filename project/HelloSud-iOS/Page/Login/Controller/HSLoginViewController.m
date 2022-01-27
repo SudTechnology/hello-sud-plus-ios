@@ -48,29 +48,10 @@
 /// 立即体验点击事件
 - (void)loginNodeEvent {
     
-    NSString *deviceId = [UIDevice currentDevice].identifierForVendor.UUIDString;
-    [RequestService postRequestWithApi:kBASEURL(@"login/v1") param:@{@"nickname": self.nameTextField.text, @"deviceId": deviceId} success:^(NSDictionary *rootDict) {
-        HSLoginModel *model = [HSLoginModel mj_objectWithKeyValues:rootDict];
-        if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
-            return;
-        }
-        /// 存储用户信息
-        HSAppManager.shared.loginUserInfo.name = model.data.nickname;
-        HSAppManager.shared.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.data.userId];
-        HSAppManager.shared.loginUserInfo.icon = model.data.avatar;
-        HSAppManager.shared.loginUserInfo.sex = 1;
-        [HSAppManager.shared saveLoginUserInfo];
-        
-        [HSAppManager.shared saveToken: model.data.token];
-        [HSAppManager.shared saveIsLogin];
-        
+    [HSAppManager.shared reqLogin:self.nameTextField.text userID:nil sucess:^{
         /// 切根式图
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         appDelegate.window.rootViewController = [[HSMainTabBarController alloc] init];
-        
-    } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
     }];
 }
 

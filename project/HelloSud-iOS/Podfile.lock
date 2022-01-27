@@ -39,7 +39,7 @@ DEPENDENCIES:
   - Bugly (= 2.5.90)
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
-  - SDWebImage
+  - SDWebImage (= 5.12.2)
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
   - YYText (~> 1.0.7)
@@ -81,6 +81,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: 1ae1f5c0240de34b105bdec42b8e4d6afef7907c
+PODFILE CHECKSUM: 4590bb61e0d1cc98d9ce4835928020ba0e4bce59
 
 COCOAPODS: 1.11.2
