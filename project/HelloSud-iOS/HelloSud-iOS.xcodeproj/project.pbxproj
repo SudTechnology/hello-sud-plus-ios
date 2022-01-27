@@ -103,6 +103,8 @@
 		6C076ECE27A24E8800650209 /* NSError+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ECD27A24E8800650209 /* NSError+Custom.m */; };
 		6C076ED127A253C100650209 /* HSRespUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED027A253C100650209 /* HSRespUserInfoModel.m */; };
 		6C076ED427A274FE00650209 /* HSUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED327A274FE00650209 /* HSUserManager.m */; };
+		6C076ED727A298FC00650209 /* HSGameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED627A298FC00650209 /* HSGameManager.m */; };
+		6C076EDA27A2993C00650209 /* HSRespGameInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED927A2993C00650209 /* HSRespGameInfoModel.m */; };
 		6C192E4D279523B000553034 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E4C279523B000553034 /* AppDelegate.m */; };
 		6C192E53279523B000553034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E52279523B000553034 /* ViewController.m */; };
 		6C192E56279523B000553034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E54279523B000553034 /* Main.storyboard */; };
@@ -327,6 +329,10 @@
 		6C076ED027A253C100650209 /* HSRespUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRespUserInfoModel.m; sourceTree = "<group>"; };
 		6C076ED227A274FE00650209 /* HSUserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSUserManager.h; sourceTree = "<group>"; };
 		6C076ED327A274FE00650209 /* HSUserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSUserManager.m; sourceTree = "<group>"; };
+		6C076ED527A298FC00650209 /* HSGameManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGameManager.h; sourceTree = "<group>"; };
+		6C076ED627A298FC00650209 /* HSGameManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGameManager.m; sourceTree = "<group>"; };
+		6C076ED827A2993C00650209 /* HSRespGameInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSRespGameInfoModel.h; sourceTree = "<group>"; };
+		6C076ED927A2993C00650209 /* HSRespGameInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSRespGameInfoModel.m; sourceTree = "<group>"; };
 		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -786,6 +792,8 @@
 				6C076EBB27A01BC000650209 /* HSAudioRoomManager.m */,
 				6C076ED227A274FE00650209 /* HSUserManager.h */,
 				6C076ED327A274FE00650209 /* HSUserManager.m */,
+				6C076ED527A298FC00650209 /* HSGameManager.h */,
+				6C076ED627A298FC00650209 /* HSGameManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -801,6 +809,8 @@
 				6C076EB5279FF3FF00650209 /* HSGiftModel.m */,
 				6C076ECF27A253C100650209 /* HSRespUserInfoModel.h */,
 				6C076ED027A253C100650209 /* HSRespUserInfoModel.m */,
+				6C076ED827A2993C00650209 /* HSRespGameInfoModel.h */,
+				6C076ED927A2993C00650209 /* HSRespGameInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1103,6 +1113,7 @@
 				445EAB3C27A1428C000DCC72 /* HSGameLoginModel.m in Sources */,
 				44DF03A52797E6FC006EE6AC /* GamePlayerStateModel.m in Sources */,
 				44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */,
+				6C076ED727A298FC00650209 /* HSGameManager.m in Sources */,
 				445EAB01279F9901000DCC72 /* BaseTextView.m in Sources */,
 				44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */,
 				6C192E53279523B000553034 /* ViewController.m in Sources */,
@@ -1177,6 +1188,7 @@
 				6C076E572799450900650209 /* HSSettingViewController.m in Sources */,
 				445EAB3627A1330D000DCC72 /* HSBaseRespModel.m in Sources */,
 				445EAADF279AB2D9000DCC72 /* HSGiftItemCollectionViewCell.m in Sources */,
+				6C076EDA27A2993C00650209 /* HSRespGameInfoModel.m in Sources */,
 				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
 				445EAAFB279E8B10000DCC72 /* HSHomeFooterReusableView.m in Sources */,
 				445EAB2027A01176000DCC72 /* HSMatchRoomModel.m in Sources */,

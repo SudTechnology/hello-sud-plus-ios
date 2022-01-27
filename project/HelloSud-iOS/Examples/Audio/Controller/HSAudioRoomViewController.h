@@ -38,7 +38,10 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, copy) HSRoomGameInfoModel *gameInfoModel;
 /// 麦位model map容器[micIndex:model]
 @property (nonatomic, strong)NSMutableDictionary<NSString*, HSAudioRoomMicModel *> *dicMicModel;
+// 房间ID
 @property(nonatomic, copy)NSString *roomID;
+/// 游戏ID
+@property (nonatomic, assign)NSInteger  gameId;
 /// 房间总人数
 @property (nonatomic, assign)NSInteger totalUserCount;
 /// 展示公屏消息

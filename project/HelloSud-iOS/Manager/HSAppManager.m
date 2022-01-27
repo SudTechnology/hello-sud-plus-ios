@@ -39,7 +39,6 @@
     if (temp && [temp isKindOfClass:NSString.class]) {
         HSAccountUserModel *m = [HSAccountUserModel mj_objectWithKeyValues:temp];
         _loginUserInfo = m;
-//        m.icon = @"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7af2c723accd90ce5c9e79471a76251ae44f0798.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645674165&t=cb63922664bc54461211e0ae8acd6e95";
     } else {
         HSAccountUserModel *m = HSAccountUserModel.new;
         _loginUserInfo = m;
@@ -92,6 +91,9 @@
 /// 设置请求header
 - (void)setupNetWorkHeader {
     [RequestService setupHeader:@{@"Authorization": self.token}];
+    // 图片拉取鉴权
+    SDWebImageDownloader *downloader = (SDWebImageDownloader *)[SDWebImageManager sharedManager].imageLoader;
+    [downloader setValue:self.token forHTTPHeaderField:@"Authorization"];
 }
 
 /// 保存token
@@ -156,7 +158,7 @@
         /// 存储用户信息
         HSAppManager.shared.loginUserInfo.name = model.data.nickname;
         HSAppManager.shared.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.data.userId];
-//        HSAppManager.shared.loginUserInfo.icon = model.data.avatar;
+        HSAppManager.shared.loginUserInfo.icon = model.data.avatar;
         HSAppManager.shared.loginUserInfo.sex = 1;
         [HSAppManager.shared saveLoginUserInfo];
         
