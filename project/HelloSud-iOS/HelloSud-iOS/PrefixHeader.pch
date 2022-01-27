@@ -23,11 +23,7 @@
 #import <MJExtension/MJExtension.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <SDWebImage/SDWebImage.h>
-/// manager
-#import "HSAppManager.h"
-#import "HSGiftManager.h"
-#import "GameSudManager.h"
-#import "HSAudioRoomManager.h"
+
 /// Comon
 #import "AppUtil.h"
 #import "GameConfig.h"
@@ -38,5 +34,11 @@
 /// Example Audio
 #import "AudioConstantHeader.h"
 #import "CommonAudioModelHeader.h"
-
+/// manager
+#import "HSRespUserInfoModel.h"
+#import "HSAppManager.h"
+#import "HSUserManager.h"
+#import "HSGiftManager.h"
+#import "GameSudManager.h"
+#import "HSAudioRoomManager.h"
 #endif /* PrefixHeader_pch */

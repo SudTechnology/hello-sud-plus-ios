@@ -39,13 +39,13 @@
     if (temp && [temp isKindOfClass:NSString.class]) {
         HSAccountUserModel *m = [HSAccountUserModel mj_objectWithKeyValues:temp];
         _loginUserInfo = m;
-        m.icon = @"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7af2c723accd90ce5c9e79471a76251ae44f0798.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645674165&t=cb63922664bc54461211e0ae8acd6e95";
+//        m.icon = @"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7af2c723accd90ce5c9e79471a76251ae44f0798.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645674165&t=cb63922664bc54461211e0ae8acd6e95";
     } else {
         HSAccountUserModel *m = HSAccountUserModel.new;
         _loginUserInfo = m;
         m.userID = [NSString stringWithFormat:@"%u", arc4random()];
         m.name = @"小公主2";
-        m.icon = @"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7af2c723accd90ce5c9e79471a76251ae44f0798.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645674165&t=cb63922664bc54461211e0ae8acd6e95";
+//        m.icon = @"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7af2c723accd90ce5c9e79471a76251ae44f0798.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645674165&t=cb63922664bc54461211e0ae8acd6e95";
         m.sex = 1;
     }
     
@@ -130,8 +130,9 @@
 - (void)refreshToken {
     if (HSAppManager.shared.isLogin) {
         NSString *name = HSAppManager.shared.loginUserInfo.name;
+        NSString *userID = HSAppManager.shared.loginUserInfo.userID;
         if (name.length > 0) {
-            [self reqLogin:name sucess:nil];
+            [self reqLogin:name userID:userID sucess:nil];
         }
     }
 }
@@ -139,9 +140,14 @@
 
 /// 请求登录
 /// @param name 昵称
-- (void)reqLogin:(NSString *)name sucess:(EmptyBlock)success {
+/// @param userID 用户ID
+- (void)reqLogin:(NSString *)name userID:(nullable NSString *)userID sucess:(EmptyBlock)success {
     NSString *deviceId = [UIDevice currentDevice].identifierForVendor.UUIDString;
-    [RequestService postRequestWithApi:kBASEURL(@"login/v1") param:@{@"nickname": name, @"deviceId": deviceId} success:^(NSDictionary *rootDict) {
+    NSMutableDictionary *dicParam = [NSMutableDictionary dictionaryWithDictionary:@{@"nickname": name, @"deviceId": deviceId}];
+    if (userID.length > 0) {
+        dicParam[@"userId"] = [NSNumber numberWithInteger:userID.integerValue];
+    }
+    [RequestService postRequestWithApi:kBASEURL(@"login/v1") param:dicParam success:^(NSDictionary *rootDict) {
         HSLoginModel *model = [HSLoginModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [SVProgressHUD showErrorWithStatus:model.retMsg];
