@@ -45,6 +45,24 @@
     }];
 }
 
+- (void)hsConfigEvents {
+    WeakSelf
+    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        HSAudioMsgMicModel *msgModel = note.userInfo[@"msgModel"];
+        if ([msgModel isKindOfClass:HSAudioMsgMicModel.class] ) {
+            // 操作麦位与当前符合
+            if ([HSAppManager.shared.loginUserInfo isMeByUserID:msgModel.sendUser.userID]) {
+                if (msgModel.cmd == CMD_DOWN_MIC_NTF) {
+                    // 下麦
+                    weakSelf.voiceBtnState = VoiceBtnStateTypeNormal;
+                } else {
+                    weakSelf.voiceBtnState = VoiceBtnStateTypeWaitOpen;
+                }
+            }
+        }
+    }];
+}
+
 - (void)setVoiceBtnState:(VoiceBtnStateType)voiceBtnState {
     _voiceBtnState = voiceBtnState;
     switch (voiceBtnState) {

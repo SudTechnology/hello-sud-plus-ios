@@ -45,12 +45,12 @@
     HSSettingModel *userProtocolModel = [HSSettingModel new];
     userProtocolModel.title = @"用户协议";
     userProtocolModel.isMore = YES;
-    userProtocolModel.pageURL = @"https://www.baidu.com";
+    userProtocolModel.pageURL = HSAppManager.shared.appProtocolURL.absoluteString;
     
     HSSettingModel *privacyModel = [HSSettingModel new];
     privacyModel.title = @"隐私政策";
     privacyModel.isMore = YES;
-    privacyModel.pageURL = @"https://www.baidu.com";
+    privacyModel.pageURL = HSAppManager.shared.appPrivacyURL.absoluteString;
     self.arrData = @[@[sdkModel, appModel], @[userProtocolModel, privacyModel]];
     HSSetingHeadView *header = HSSetingHeadView.new;
     header.frame = CGRectMake(0, 0, kScreenWidth, 104);
@@ -101,18 +101,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
-//    if (model.isMore) {
-//        HSWebViewController *web = HSWebViewController.new;
-//        web.url = model.pageURL;
-//        [self.navigationController pushViewController:web animated:YES];
-//    }
+    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
+    if (model.isMore) {
+        HSWebViewController *web = HSWebViewController.new;
+        web.url = model.pageURL;
+        [self.navigationController pushViewController:web animated:YES];
+    }
     
-    [HSAlertView showTextAlert:@"ajjfhaisjf" sureText:@"ok" cancelText:@"" onSureCallback:^{
-        NSLog(@"0");
-    } onCloseCallback:^{
-        NSLog(@"1");
-    }];
+//    [HSAlertView showTextAlert:@"ajjfhaisjf" sureText:@"ok" cancelText:@"" onSureCallback:^{
+//        NSLog(@"0");
+//    } onCloseCallback:^{
+//        NSLog(@"1");
+//    }];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
