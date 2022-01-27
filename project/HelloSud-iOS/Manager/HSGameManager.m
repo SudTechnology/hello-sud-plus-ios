@@ -16,4 +16,25 @@
     });
     return g_manager;
 }
+
+/// 登录游戏
+- (void)reqGameLoginWithSuccess:(void(^)(HSRespGameInfoDataModel *gameInfo))success fail:(ErrorBlock)fail {
+    [RequestService postRequestWithApi:kBASEURL(@"game-login/v1") param:@{} success:^(NSDictionary *rootDict) {
+        HSRespGameInfoModel *model = [HSRespGameInfoModel mj_objectWithKeyValues:rootDict];
+        if (model.retCode != 0) {
+            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            if (fail) {
+                fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
+            }
+            return;
+        }
+        if (success) {
+            success(model.data);
+        }
+    } failure:^(id error) {
+        if (fail) {
+            fail(error);
+        }
+    }];
+}
 @end
