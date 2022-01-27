@@ -149,8 +149,7 @@
 - (void)handleMicTap:(HSAudioRoomMicModel *)micModel {
     if (micModel.user == nil) {
         /// 无人，上麦
-        HSAudioMsgMicModel *upMicModel = [HSAudioMsgMicModel makeUpMicMsgWithMicIndex:micModel.micIndex];
-        [self sendMsg:upMicModel isAddToShow:YES];
+        [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:0];
         return;
     }
 }

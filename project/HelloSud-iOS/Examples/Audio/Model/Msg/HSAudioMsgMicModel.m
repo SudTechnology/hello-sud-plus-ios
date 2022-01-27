@@ -28,6 +28,7 @@
 /// @param micIndex micIndex description
 + (instancetype)makeDownMicMsgWithMicIndex:(NSInteger)micIndex {
     HSAudioMsgMicModel *m = HSAudioMsgMicModel.new;
+    m.micIndex = micIndex;
     [m configBaseInfoWithCmd:CMD_DOWN_MIC_NTF];
     return m;
 }

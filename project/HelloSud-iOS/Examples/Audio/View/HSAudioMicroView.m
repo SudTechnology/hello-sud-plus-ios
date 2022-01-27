@@ -118,6 +118,7 @@
                     weakSelf.model.user = nil;
                 } else {
                     weakSelf.model.user = msgModel.sendUser;
+                    weakSelf.model.streamID = msgModel.streamID;
                 }
             } else if (weakSelf.model.user != nil && [msgModel.sendUser.userID isEqualToString:weakSelf.model.user.userID]) {
                 // 当前用户ID与切换用户ID一致，则清除掉
