@@ -46,6 +46,8 @@
         case MediaAudioEngineUpdateTypeAdd:
             for (MediaStream *item in streamList) {
                 [MediaAudioEngineManager.shared.audioEngine startPlayingStream:item.streamID];
+                [[NSNotificationCenter defaultCenter]postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey:item}];
+                
             }
             break;
         case MediaAudioEngineUpdateTypeDelete:
@@ -54,5 +56,25 @@
             }
             break;
     }
+}
+
+- (void)onRoomOnlineUserCountUpdate:(int)count roomID:(NSString *)roomID {
+    NSInteger oldCount = self.totalUserCount;
+    self.totalUserCount = count;
+    if (oldCount != count) {
+        [self hsUpdateUI];
+    }
+}
+
+- (void)onRoomUserUpdate:(MediaAudioEngineUpdateType)updateType userList:(NSArray<MediaUser *> *)userList roomID:(NSString *)roomID {
+    if (updateType == MediaAudioEngineUpdateTypeAdd) {
+        self.totalUserCount += userList.count;
+    } else if (updateType == MediaAudioEngineUpdateTypeDelete) {
+        self.totalUserCount -= userList.count;
+        if (self.totalUserCount < 0) {
+            self.totalUserCount = 0;
+        }
+    }
+    [self hsUpdateUI];
 }
 @end

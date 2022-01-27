@@ -48,6 +48,7 @@
     /// 设置语音引擎事件回调
     [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
     [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
+    [self hsUpdateUI];
 }
 
 - (void)hsAddViews {
@@ -140,6 +141,10 @@
         } onCloseCallback:^{
         }];
     };
+}
+
+- (void)hsUpdateUI {
+    [self.naviView hsUpdateUI];
 }
 
 /// 处理麦位点击
