@@ -162,7 +162,16 @@
     }];
 }
 
-
+/// APP隐私协议地址
+- (NSURL *)appPrivacyURL {
+    NSString *path = [NSBundle.mainBundle pathForResource:@"user_privacy" ofType:@"html" inDirectory:@"Res"];
+    return [NSURL fileURLWithPath:path];
+}
+/// APP用户协议
+- (NSURL *)appProtocolURL {
+    NSString *path = [NSBundle.mainBundle pathForResource:@"user_protocol" ofType:@"html" inDirectory:@"Res"];
+    return [NSURL fileURLWithPath:path];
+}
 
 @end
 

@@ -52,6 +52,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 请求登录
 /// @param name 昵称
 - (void)reqLogin:(NSString *)name sucess:(EmptyBlock)success;
+
+/// APP隐私协议地址
+- (NSURL *)appPrivacyURL;
+/// APP用户协议
+- (NSURL *)appProtocolURL;
 @end
 
 NS_ASSUME_NONNULL_END
