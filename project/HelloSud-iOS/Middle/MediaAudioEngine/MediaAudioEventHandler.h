@@ -46,6 +46,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param mode mode description
 - (void)onNetworkModeChanged:(MediaAudioEngineNetworkStateType)mode;
 
+/// 房间人员变动
+/// @param updateType 变动类型
+/// @param userList 用户列表
+/// @param roomID 房间ID
+- (void)onRoomUserUpdate:(MediaAudioEngineUpdateType)updateType userList:(NSArray<MediaUser *> *)userList roomID:(NSString *)roomID;
+
+/// 房间总人数
+/// @param count 总数
+/// @param roomID 房间ID
+- (void)onRoomOnlineUserCountUpdate:(int)count roomID:(NSString *)roomID;
+
 /// 接收自定义指令信息回调
 /// @param command 指令内容
 /// @param fromUser 用户

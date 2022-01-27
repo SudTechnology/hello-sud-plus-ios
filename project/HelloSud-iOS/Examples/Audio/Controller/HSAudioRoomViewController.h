@@ -39,7 +39,8 @@ typedef NS_ENUM(NSInteger, RoomType) {
 /// 麦位model map容器[micIndex:model]
 @property (nonatomic, strong)NSMutableDictionary<NSString*, HSAudioRoomMicModel *> *dicMicModel;
 @property(nonatomic, copy)NSString *roomID;
-
+/// 房间总人数
+@property (nonatomic, assign)NSInteger totalUserCount;
 /// 展示公屏消息
 /// @param msg 消息体
 - (void)addMsg:(HSAudioMsgBaseModel *)msg;
