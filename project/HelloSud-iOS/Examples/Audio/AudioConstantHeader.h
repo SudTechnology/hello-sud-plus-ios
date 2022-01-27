@@ -15,4 +15,8 @@
 #define NTF_LOCAL_VOICE_VOLUME_CHANGED @"NTF_LOCAL_VOICE_VOLUME_CHANGED"
 /// 远程声音变化通知
 #define NTF_REMOTE_VOICE_VOLUME_CHANGED @"NTF_REMOTE_VOICE_VOLUME_CHANGED"
+/// 流信息变化通知
+#define NTF_STREAM_INFO_CHANGED @"NTF_STREAM_INFO_CHANGED"
+
+#define kNTFStreamInfoKey @"streamInfo"
 #endif /* AudioConstantHeader_h */

@@ -166,6 +166,16 @@
             }
         }
     }];
+    // 同步采集到的流ID到麦位
+    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_STREAM_INFO_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        MediaStream *streamInfo = note.userInfo[kNTFStreamInfoKey];
+        if ([streamInfo isKindOfClass:MediaStream.class] ) {
+            if (self.model.user && [self.model.user.userID isEqualToString:streamInfo.user.userID]) {
+                self.model.streamID = streamInfo.streamID;
+            }
+        }
+    }];
+    
 }
 
 

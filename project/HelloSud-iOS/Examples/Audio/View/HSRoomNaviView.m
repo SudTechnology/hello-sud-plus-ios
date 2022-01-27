@@ -39,6 +39,11 @@
     [self.roomModeView addGestureRecognizer:tapGesture];
 }
 
+- (void)hsUpdateUI {
+    self.roomNumLabel.text = [NSString stringWithFormat: @"房号 %@", HSAudioRoomManager.shared.currentRoomVC.roomID];
+    self.onlineLabel.text = [NSString stringWithFormat:@"%ld", HSAudioRoomManager.shared.currentRoomVC.totalUserCount];
+}
+
 - (void)selectNodeEvent:(UITapGestureRecognizer *)gesture {
     [HSSheetView show:[[HSSwitchRoomModeView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
         
