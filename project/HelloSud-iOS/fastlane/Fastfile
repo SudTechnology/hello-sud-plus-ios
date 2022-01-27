@@ -70,7 +70,6 @@ platform :ios do
     sh("mkdir #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
     sh("mv #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud.app.dSYM #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
     sh("pwd")
-    sh("source ~/.bash_java8")
     sh("java -version")
     sh("java -jar ../../tool/buglyqq-upload-symbol.jar -appid 0d680b2d4c -appkey fdea2fe7-9b55-48fe-9d14-eb294dd1c4df -bundleid tech.sud.mgp.hello -version #{VERSION_NUM}.#{ENV['CI_BUILD_ID']} -platform IOS -inputSymbol #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
     buildFooter
