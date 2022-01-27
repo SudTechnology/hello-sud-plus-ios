@@ -52,6 +52,9 @@
     }];
 }
 
+- (void)hsConfigUI {
+    self.backgroundColor = UIColor.whiteColor;
+}
 
 #pragma mark - UICollectionViewDataSource
 

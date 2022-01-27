@@ -73,7 +73,6 @@
     HSSheetView *alert = [[HSSheetView alloc] init];
     alert.contentView.backgroundColor = UIColor.clearColor;// [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     alert.isHitTest = true;
-    view.backgroundColor = [UIColor clearColor];
     alert.customView = view;
     alert.contentView.layer.cornerRadius = 12;
     alert.contentView.layer.masksToBounds = true;
