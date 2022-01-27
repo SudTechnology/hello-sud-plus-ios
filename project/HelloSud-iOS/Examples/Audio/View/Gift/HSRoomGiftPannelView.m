@@ -81,7 +81,7 @@
 }
 
 - (void)hsUpdateUI {
-    NSArray *arrModel = HSAudioRoomManager.shared.currentRoomVC.arrMicModel;
+    NSArray *arrModel = HSAudioRoomManager.shared.currentRoomVC.dicMicModel.allValues;
     for (HSAudioRoomMicModel *m in arrModel) {
         if (m.user != nil) {
             m.isSelected = NO;

@@ -42,15 +42,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.roomID = @"123";
+//    self.roomID = @"123";
     HSAudioRoomManager.shared.currentRoomVC = self;
     MediaUser *user = [MediaUser user:HSAppManager.shared.loginUserInfo.userID nickname:HSAppManager.shared.loginUserInfo.name];
     /// 设置语音引擎事件回调
     [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
     [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
-    
-//    self.roomType = HSGame;
-    self.roomType = HSAudio;
 }
 
 - (void)hsAddViews {
@@ -173,7 +170,7 @@
     switch (self.operatorView.voiceBtnState) {
         case VoiceBtnStateTypeNormal:{
             // 请求上麦
-            NSArray *arr = self.arrMicModel;
+            NSArray *arr = self.dicMicModel.allValues;
             HSAudioRoomMicModel *emptyModel = nil;
             for (HSAudioRoomMicModel *m in arr) {
                 if (m.user == nil) {
@@ -250,6 +247,44 @@
     }
 }
 
+/// 同步麦位列表
+- (void)reqMicList {
+    WeakSelf
+    [HSAudioRoomManager.shared reqMicList:self.roomID.integerValue success:^(NSArray<HSRoomMicList *> * _Nonnull micList) {
+        [weakSelf handleMicList:micList];
+    } fail:^(NSError *error) {
+    }];
+}
+
+- (void)handleMicList:(NSArray<HSRoomMicList *> *)micList {
+    NSMutableArray<NSNumber *> *arrUserID = NSMutableArray.new;
+    for (HSRoomMicList *m in micList) {
+        [arrUserID addObject:[NSNumber numberWithInteger:m.userId]];
+    }
+    // 缓存用户信息
+    [HSUserManager.shared asyncCacheUserInfo:arrUserID finished:^{
+        for (HSRoomMicList *m in micList) {
+            NSString *key = [NSString stringWithFormat:@"%ld",m.micIndex];
+            HSAudioRoomMicModel *micModel = self.dicMicModel[key];
+            HSUserInfoModel *userInfo = [HSUserManager.shared getCacheUserInfo:m.userId];
+            if (micModel) {
+                if (!micModel.user) {
+                    micModel.user = HSAudioUserModel.new;
+                }
+                micModel.user.roleType = m.roleType;
+                micModel.user.userID = [NSString stringWithFormat:@"%ld", m.userId];
+                if (userInfo) {
+                    micModel.user.name = userInfo.nickname;
+                    micModel.user.icon = userInfo.avatar;
+                    micModel.user.sex = [userInfo.gender isEqualToString:@"male"] ? 1 : 2;
+                }
+            }
+        }
+        [NSNotificationCenter.defaultCenter postNotificationName:NTF_MIC_CHANGED object:nil];
+    }];
+
+}
+
 #pragma mark setter
 - (void)setRoomType:(RoomType)roomType {
     _roomType = roomType;
@@ -263,9 +298,10 @@
             make.bottom.mas_equalTo(self.operatorView.mas_top).offset(-20);
             make.height.mas_greaterThanOrEqualTo(0);
         }];
-        [self.arrMicModel removeAllObjects];
+        [self.dicMicModel removeAllObjects];
         for (HSAudioMicroView *v in self.audioMicContentView.micArr) {
-            [self.arrMicModel addObject:v.model];
+            NSString *key = [NSString stringWithFormat:@"%ld", v.model.micIndex];
+            self.dicMicModel[key] = v.model;
         }
     } else if (self.roomType == HSGameMic) {
         [self.gameMicContentView setHidden:false];
@@ -275,11 +311,13 @@
             make.bottom.mas_equalTo(self.operatorView.mas_top);
             make.height.mas_equalTo(106);
         }];
-        [self.arrMicModel removeAllObjects];
+        [self.dicMicModel removeAllObjects];
         for (HSAudioMicroView *v in self.gameMicContentView.micArr) {
-            [self.arrMicModel addObject:v.model];
+            NSString *key = [NSString stringWithFormat:@"%ld", v.model.micIndex];
+            self.dicMicModel[key] = v.model;
         }
     }
+    [self reqMicList];
 }
 
 #pragma mark lazy
@@ -341,11 +379,11 @@
     return _gameMicContentView;
 }
 
-- (NSMutableArray *)arrMicModel {
-    if (_arrMicModel == nil) {
-        _arrMicModel = NSMutableArray.new;
+- (NSMutableDictionary *)dicMicModel {
+    if (_dicMicModel == nil) {
+        _dicMicModel = NSMutableDictionary.new;
     }
-    return _arrMicModel;
+    return _dicMicModel;
 }
 
 @end

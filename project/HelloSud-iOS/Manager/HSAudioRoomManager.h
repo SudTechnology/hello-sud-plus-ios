@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 查询房间麦位列表
 /// @param roomId 房间ID
-- (void)reqMicList:(long)roomId;
+- (void)reqMicList:(long)roomId success:(void(^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail;
 
 /// 切换房间游戏接口
 /// @param roomId 房间ID
