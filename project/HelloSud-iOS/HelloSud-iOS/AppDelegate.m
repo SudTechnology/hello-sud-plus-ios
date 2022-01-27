@@ -36,7 +36,7 @@
     self.window.backgroundColor = UIColor.whiteColor;
     [self.window makeKeyAndVisible];
     [self configAudioEngine];
-    
+
     return YES;
 }
 
@@ -45,7 +45,6 @@
     [Bugly updateAppVersion:version];
     [Bugly startWithAppId:@"0d680b2d4c"];
 }
-
 
 /// 配置语音SDK
 - (void)configAudioEngine {

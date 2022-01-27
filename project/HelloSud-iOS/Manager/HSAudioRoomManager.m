@@ -61,8 +61,8 @@
         }
         HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
         vc.roomID = [NSString stringWithFormat:@"%ld", model.data.roomId];
-        //vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
-        vc.roomType = HSAudio;
+        vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
+//        vc.roomType = HSAudio;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
         [SVProgressHUD showErrorWithStatus:[error debugDescription]];

@@ -41,4 +41,6 @@
 #import "HSGiftManager.h"
 #import "GameSudManager.h"
 #import "HSAudioRoomManager.h"
+#import "HSGameManager.h"
+
 #endif /* PrefixHeader_pch */

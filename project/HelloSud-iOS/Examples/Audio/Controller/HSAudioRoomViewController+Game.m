@@ -9,6 +9,16 @@
 
 @implementation HSAudioRoomViewController(Game)
 
+/// 游戏业务服务登录
+- (void)loginGame {
+    [RequestService postRequestWithApi:kBASEURL(@"game-login/v1") param:@{} success:^(NSDictionary *rootDict) {
+        
+    } failure:^(id error) {
+        
+    }];
+}
+
+
 #pragma mark =======ISudFSMMG Delegate=======
 /**
  * Code过期
