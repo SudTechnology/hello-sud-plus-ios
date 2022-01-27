@@ -80,6 +80,15 @@
             [SVProgressHUD showErrorWithStatus:model.retMsg];
             return;
         }
+        if (handleType == 0) {
+            HSAudioMsgMicModel *upMicModel = [HSAudioMsgMicModel makeUpMicMsgWithMicIndex:micIndex];
+            upMicModel.streamID = model.data.streamId;
+            [self.currentRoomVC sendMsg:upMicModel isAddToShow:YES];
+        } else {
+            HSAudioMsgMicModel *downMicModel = [HSAudioMsgMicModel makeDownMicMsgWithMicIndex:micIndex];
+            downMicModel.streamID = nil;
+            [self.currentRoomVC sendMsg:downMicModel isAddToShow:YES];
+        }
         
     } failure:^(id error) {
         [SVProgressHUD showErrorWithStatus:@"网络错误"];

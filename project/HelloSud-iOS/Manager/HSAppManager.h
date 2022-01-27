@@ -46,6 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 保存token
 - (void)saveToken:(NSString *)token;
 
+/// 刷新token
+- (void)refreshToken;
+
+/// 请求登录
+/// @param name 昵称
+- (void)reqLogin:(NSString *)name sucess:(EmptyBlock)success;
 @end
 
 NS_ASSUME_NONNULL_END

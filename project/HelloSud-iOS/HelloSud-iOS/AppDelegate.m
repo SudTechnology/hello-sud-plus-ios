@@ -28,6 +28,7 @@
     
     self.window = [[UIWindow alloc]init];
     if (HSAppManager.shared.isLogin) {
+        [HSAppManager.shared refreshToken];
         self.window.rootViewController = [[HSMainTabBarController alloc]init];
     } else {
         self.window.rootViewController = [[HSLoginViewController alloc]init];
@@ -35,6 +36,7 @@
     self.window.backgroundColor = UIColor.whiteColor;
     [self.window makeKeyAndVisible];
     [self configAudioEngine];
+    
     return YES;
 }
 

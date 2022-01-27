@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 麦位索引
 @property(nonatomic, assign)NSInteger micIndex;
+/// 流ID
+@property(nonatomic, copy, nullable)NSString *streamID;
 
 /// 构建上麦消息
 /// @param micIndex micIndex description

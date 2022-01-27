@@ -47,10 +47,12 @@
             for (MediaStream *item in streamList) {
                 [MediaAudioEngineManager.shared.audioEngine startPlayingStream:item.streamID];
             }
+            break;
         case MediaAudioEngineUpdateTypeDelete:
             for (MediaStream *item in streamList) {
                 [MediaAudioEngineManager.shared.audioEngine stopPlayingStream:item.streamID];
             }
+            break;
     }
 }
 @end
