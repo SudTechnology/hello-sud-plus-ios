@@ -40,5 +40,6 @@ typedef void(^ErrorBlock)(NSError *error);
 #import "HSBlurEffectView.h"
 #import "HSSVGAPlayerView.h"
 #import "HSRippleAnimationView.h"
+#import "HSPaddingLabel.h"
 
 #endif /* CommonHeader_h */

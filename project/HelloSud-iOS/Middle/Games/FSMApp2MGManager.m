@@ -1,20 +1,20 @@
 //
-//  FsmAppToMgManager.m
+//  FSMApp2MGManager.m
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/19.
 //
 
-#import "FsmAppToMgManager.h"
+#import "FSMApp2MGManager.h"
 
-@implementation FsmAppToMgManager
+@implementation FSMApp2MGManager
 
 - (instancetype)init:(id<ISudFSTAPP>)fsmAPP2MG {
     self = [super init];
-        if (self) {
-            self.fsmAPP2MG = fsmAPP2MG;
-        }
-        return self;
+    if (self) {
+        self.fsmAPP2MG = fsmAPP2MG;
+    }
+    return self;
 }
 
 /// 加入,退出游戏
@@ -23,7 +23,7 @@
 /// @param isSeatRandom 默认为ture, 带有游戏位(座位号)的时候，如果游戏位(座位号)已经被占用，是否随机分配一个空位坐下 isSeatRandom=true 随机分配空位坐下，isSeatRandom=false 不随机分配
 /// @param teamId 不支持分队的游戏：数值填1；支持分队的游戏：数值填1或2（两支队伍）
 - (void)sendComonSelfIn:(BOOL)isIn seatIndex:(int)seatIndex isSeatRandom:(BOOL)isSeatRandom teamId:(int)teamId {
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isIn), @"isIn", @(1), @"teamId", nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isIn), @"isIn", @(seatIndex), @"seatIndex", isSeatRandom, @"isSeatRandom", @(1), @"teamId", nil];
     [self notifyStateChange:APP_COMMON_SELF_IN dataJson:[AppUtil dictionaryToJson:dic]];
 }
 
@@ -77,6 +77,15 @@
 /// @param numberList 在number模式下才有，返回转写的多个数字
 - (void)sendComonDrawTextHit:(BOOL)isHit keyWord:(NSString *)keyWord text:(NSString *)text wordType:(NSString *)wordType keyWordList:(NSArray<NSString *> *)keyWordList numberList:(NSArray<NSNumber *> *)numberList {
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isHit), @"isHit", keyWord, @"keyWord", text, @"text", wordType, @"wordType", keyWordList, @"keyWordList", numberList, @"numberList", nil];
+    [self notifyStateChange:APP_COMMON_SELF_TEXT_HIT dataJson:[AppUtil dictionaryToJson:dic]];
+}
+
+/// 文字命中状态
+/// @param isHit true 命中，false 未命中
+/// @param keyWord 单个关键词， 兼容老版本
+/// @param text 返回转写文本
+- (void)sendComonDrawTextHit:(BOOL)isHit keyWord:(NSString *)keyWord text:(NSString *)text {
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isHit), @"isHit", keyWord, @"keyWord", text, @"text", nil];
     [self notifyStateChange:APP_COMMON_SELF_TEXT_HIT dataJson:[AppUtil dictionaryToJson:dic]];
 }
 

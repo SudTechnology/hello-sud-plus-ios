@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏业务服务登录
 - (void)loginGame;
+/// 销毁MG
+- (void)destroyMG;
+
 @end
 
 NS_ASSUME_NONNULL_END

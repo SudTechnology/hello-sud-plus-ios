@@ -416,4 +416,12 @@
     return _gameInfoModel;
 }
 
+- (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
+    [self.fsm2MGManager sendComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
+}
+
+- (void)dealloc {
+    [self destroyMG];
+}
+
 @end

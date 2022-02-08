@@ -17,6 +17,8 @@
 /// game
 @property (nonatomic, strong) UIImageView *gameCaptainView;
 @property (nonatomic, strong) UILabel *gameStateLabel;
+@property (nonatomic, strong) HSPaddingLabel *gameBadgeLabel;
+@property (nonatomic, strong) UIImageView * gamingImageView;
 
 /// 水波纹
 @property (nonatomic, strong) HSRippleAnimationView *rippleView;
@@ -43,12 +45,12 @@
 }
 
 - (void)switchContentWithType {
+    [self.gameCaptainView setHidden:true];
+    [self.gameStateLabel setHidden:true];
+    [self.gameBadgeLabel setHidden:true];
+    [self.gamingImageView setHidden:true];
     if (self.micType == HSAudioMic) {
-        [self.gameCaptainView setHidden:true];
-        [self.gameStateLabel setHidden:true];
     } else if (self.micType == HSGameMic) {
-        [self.gameCaptainView setHidden:false];
-        [self.gameStateLabel setHidden:false];
         [self.giftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(-4);
             make.right.mas_equalTo(4);
@@ -67,8 +69,8 @@
     
     [self addSubview:self.gameCaptainView];
     [self addSubview:self.gameStateLabel];
-    [self.gameCaptainView setHidden:true];
-    [self.gameStateLabel setHidden:true];
+    [self addSubview:self.gameBadgeLabel];
+    [self addSubview:self.gamingImageView];
 }
 
 - (void)hsLayoutViews {
@@ -175,9 +177,52 @@
             }
         }
     }];
-    
+    /// 游戏玩家状态变化
+    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_PLAYER_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        GamePlayerStateModel *m = note.userInfo[@"model"];
+        if ([m isKindOfClass:GamePlayerStateModel.class] ) {
+            NSString *state = m.state;
+            /// 设置队长状态 - （队长有且只有一个）
+            if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
+                [self.gameCaptainView setHidden:!m.isCaptain];
+            }
+            if (m.userId != self.model.user.userID) {
+                return;
+            }
+            /// 设置玩家游戏状态
+            [self.gameBadgeLabel setHidden:true];
+            if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
+                NSLog(@"玩家: 准备状态");
+                [self.gameStateLabel setHidden:!m.isReady];
+                self.gameStateLabel.text = m.isReady ? @"已准备" : @"未准备";
+                self.gameStateLabel.textColor = [UIColor whiteColor];
+                self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:m.isReady ? @"#13AD21" : @"#FF6E65" alpha:1];
+                self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
+            } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
+                NSLog(@"玩家: 游戏中状态");
+                [self.gamingImageView setHidden:!m.isPlaying];
+            } else if ([state isEqualToString:MG_DG_SELECTING] || [state isEqualToString:MG_DG_PAINTING] || [state isEqualToString:MG_DG_SCORE]) {
+                NSLog(@"你画我猜 玩家: 选词中 || 作画中 || 错误答");
+                [self.gameStateLabel setHidden:false];
+                self.gameStateLabel.text = m.msg;
+                self.gameStateLabel.textColor = [UIColor colorWithHexString:@"#FF95CA" alpha:1];
+                self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.7];
+                self.gameStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.5].CGColor;
+            }  else if ([state isEqualToString:MG_DG_SCORE]) {
+                NSLog(@"你画我猜 玩家: 本次积分");
+                [self.gameStateLabel setHidden:false];
+                self.gameStateLabel.text = m.msg;
+                self.gameStateLabel.textColor = [UIColor colorWithHexString:@"#65FF73" alpha:1];
+                self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.7];
+                self.gameStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.5].CGColor;
+            } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
+                NSLog(@"你画我猜 玩家: 总积分");
+                [self.gameBadgeLabel setHidden:false];
+                self.gameBadgeLabel.text = m.msg;
+            }
+        }
+    }];
 }
-
 
 - (void)hsUpdateUI {
     if (self.model.user == nil) {
@@ -238,6 +283,7 @@
     if (!_gameCaptainView) {
         _gameCaptainView = [[UIImageView alloc] init];
         _gameCaptainView.image = [UIImage imageNamed:@"room_game_captain"];
+        [_gameCaptainView setHidden:true];
     }
     return _gameCaptainView;
 }
@@ -254,8 +300,26 @@
         _gameStateLabel.layer.borderWidth = 0.5;
         _gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
         _gameStateLabel.layer.masksToBounds = true;
+        [_gameStateLabel setHidden:true];
     }
     return _gameStateLabel;
+}
+
+- (HSPaddingLabel *)gameBadgeLabel {
+    if (!_gameBadgeLabel) {
+        _gameBadgeLabel = [[HSPaddingLabel alloc] init];
+        _gameBadgeLabel.backgroundColor = [UIColor colorWithHexString:@"#FF4DA6" alpha:1];
+        _gameBadgeLabel.layer.cornerRadius = 14/2;
+        _gameBadgeLabel.layer.masksToBounds = true;
+        _gameBadgeLabel.numberOfLines = 1;
+        _gameBadgeLabel.textAlignment = NSTextAlignmentCenter;
+        _gameBadgeLabel.text = @"99";
+        _gameBadgeLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
+        _gameBadgeLabel.textColor = [UIColor whiteColor];
+        _gameBadgeLabel.paddingX = 4;
+        [_gameBadgeLabel setHidden:true];
+    }
+    return _gameBadgeLabel;
 }
 
 - (HSRippleAnimationView *)rippleView {
@@ -268,6 +332,15 @@
         _rippleView.animateBackgroundColor = UIColor.clearColor;
     }
     return _rippleView;
+}
+
+- (UIImageView *)gamingImageView {
+    if (!_gamingImageView) {
+        _gamingImageView = [[UIImageView alloc]init];
+        _gamingImageView.image = [UIImage imageNamed:@"room_game_mic_ing"];
+        [_gamingImageView setHidden:true];
+    }
+    return _gamingImageView;
 }
 
 @end
