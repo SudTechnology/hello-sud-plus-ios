@@ -13,6 +13,7 @@
 #import "HSAudioMsgTextModel.h"
 #import "HSAudioMsgGiftModel.h"
 #import "HSAudioMsgMicModel.h"
+#import "HSAudioMsgSystemModel.h"
 #import "HSAudioRoomMicModel.h"
 
 #endif /* CommonAudioModelHeader_h */

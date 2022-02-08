@@ -82,8 +82,11 @@
             [dataMap setValue:dic forKey:[NSString stringWithFormat:@"%ld", m.sceneId]];
         }
         
+        /// 非重复游戏列表
+        NSMutableArray <HSGameList *> *originalGameArr = [NSMutableArray array];
         /// 遍历gameList 分类 suitId
         for (int i = 0; i < model.data.gameList.count; i++) {
+            [originalGameArr addObject:model.data.gameList[i]];
             for (NSNumber *value in model.data.gameList[i].suitScene) {
                 int suitId = value.intValue;
                 NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%d", suitId]];
@@ -91,6 +94,8 @@
                 [arr addObject:model.data.gameList[i]];
             }
         }
+        NSSet *set = [NSSet setWithArray:originalGameArr];
+        HSAppManager.shared.gameList = [set allObjects];
         
         /// dataList  headerGameList  headerSceneList 业务需求赋值
         for (HSSceneList *m in model.data.sceneList) {

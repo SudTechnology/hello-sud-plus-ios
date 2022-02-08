@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy, readonly) NSString *token;
 /// 配置信息
 @property(nonatomic, strong) HSConfigData *configData;
+/// 所有游戏列表
+@property(nonatomic, strong) NSArray <HSGameList *> *gameList;
 
 + (instancetype)shared;
 
@@ -58,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSURL *)appPrivacyURL;
 /// APP用户协议
 - (NSURL *)appProtocolURL;
+
 @end
 
 NS_ASSUME_NONNULL_END
