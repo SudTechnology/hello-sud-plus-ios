@@ -20,7 +20,7 @@
 /// 请求进入房间
 /// @param roomId 房间ID
 - (void)reqEnterRoom:(long)roomId {
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/enter/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
+    [RequestService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSEnterRoomModel *model = [HSEnterRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [SVProgressHUD showErrorWithStatus:model.retMsg];
@@ -38,7 +38,7 @@
 /// 请求退出房间
 /// @param roomId 房间ID
 - (void)reqExitRoom:(long)roomId{
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/exit/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
+    [RequestService postRequestWithApi:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSExitRoomModel *model = [HSExitRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [SVProgressHUD showErrorWithStatus:model.retMsg];
@@ -53,7 +53,7 @@
 /// 匹配开播的游戏，并进入游戏房间
 /// @param gameId 游戏ID
 - (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType {
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/match/v1") param:@{@"gameId": @(gameId), @"sceneType": @(sceneType)} success:^(NSDictionary *rootDict) {
+    [RequestService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:@{@"gameId": @(gameId), @"sceneType": @(sceneType)} success:^(NSDictionary *rootDict) {
         HSMatchRoomModel *model = [HSMatchRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [SVProgressHUD showErrorWithStatus:model.retMsg];
@@ -76,7 +76,7 @@
 /// @param handleType 0：上麦 1: 下麦
 - (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType {
     WeakSelf
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/mic/switch/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
+    [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
         HSSwitchMicModel *model = [HSSwitchMicModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [SVProgressHUD showErrorWithStatus:model.retMsg];
@@ -126,7 +126,7 @@
 /// @param roomId 房间ID
 - (void)reqSwitchGame:(long)roomId gameId:(long)gameId {
     WeakSelf
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/game/switch/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} success:^(NSDictionary *rootDict) {
+    [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} success:^(NSDictionary *rootDict) {
         HSSwitchGameModel *model = [HSSwitchGameModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [SVProgressHUD showErrorWithStatus:model.retMsg];
