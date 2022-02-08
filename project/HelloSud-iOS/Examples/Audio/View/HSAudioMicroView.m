@@ -58,7 +58,6 @@
         }];
     }
     self.headerView.layer.cornerRadius = self.headWidth / 2;
-    self.headerView.clipsToBounds = YES;
 }
 
 - (void)hsAddViews {
@@ -253,6 +252,7 @@
         _headerView = [[UIImageView alloc] init];
         _headerView.image = [UIImage imageNamed:@"room_mic_up"];
         _headerView.userInteractionEnabled = YES;
+        _headerView.clipsToBounds = YES;
     }
     return _headerView;
 }

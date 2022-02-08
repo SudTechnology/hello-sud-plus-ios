@@ -331,6 +331,7 @@
         for (HSAudioMicroView *v in self.audioMicContentView.micArr) {
             NSString *key = [NSString stringWithFormat:@"%ld", v.model.micIndex];
             self.dicMicModel[key] = v.model;
+            v.micType = HSAudioMic;
         }
     } else if (self.roomType == HSGameMic) {
         self.gameView.hidden = NO;
@@ -345,6 +346,7 @@
         for (HSAudioMicroView *v in self.gameMicContentView.micArr) {
             NSString *key = [NSString stringWithFormat:@"%ld", v.model.micIndex];
             self.dicMicModel[key] = v.model;
+            v.micType = HSGameMic;
         }
     }
     [self reqMicList];

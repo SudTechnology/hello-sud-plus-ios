@@ -42,7 +42,7 @@
         [self.containerView addSubview:micNode];
         [self.micArr addObject:micNode];
     }
-    CGFloat interitemSpac = (kScreenWidth - 44 - (54 * 4)) / 4;
+    CGFloat interitemSpac = (kScreenWidth - 44 - (54 * 4)) / 3;
     [self.containerView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:54 fixedItemHeight:110
                                                 fixedLineSpacing:0 fixedInteritemSpacing:interitemSpac
                                                        warpCount:4
