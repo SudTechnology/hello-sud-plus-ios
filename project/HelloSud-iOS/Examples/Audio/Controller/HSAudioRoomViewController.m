@@ -150,6 +150,18 @@
         } onCloseCallback:^{
         }];
     };
+    self.naviView.onTapGameCallBack = ^(HSGameList * _Nonnull m) {
+        if (m.isAudioRoom) {
+            weakSelf.roomType = HSAudio;
+        } else {
+            weakSelf.gameId = m.gameId;
+            if (weakSelf.gameId > 0) {
+                weakSelf.gameInfoModel.currentPlayerUserId = HSAppManager.shared.loginUserInfo.userID;
+                [weakSelf loginGame];
+            }
+            weakSelf.roomType = HSGame;
+        }
+    };
 }
 
 - (void)hsUpdateUI {
@@ -304,6 +316,8 @@
     _roomType = roomType;
     
     if (self.roomType == HSAudioMic) {
+        /// 销毁游戏
+        [self destroyMG];
         [self.gameMicContentView setHidden:true];
         [self.audioMicContentView setHidden:false];
         self.gameView.hidden = YES;

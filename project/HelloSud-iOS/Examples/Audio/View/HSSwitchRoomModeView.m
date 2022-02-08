@@ -56,6 +56,14 @@
     self.backgroundColor = UIColor.whiteColor;
 }
 
+- (void)tapAudioEvent:(UITapGestureRecognizer *)gesture {
+    HSGameList *m = [[HSGameList alloc] init];
+    m.isAudioRoom = true;
+    if (self.onTapGameCallBack) {
+        self.onTapGameCallBack(m);
+    }
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -75,7 +83,6 @@
         self.onTapGameCallBack(self.dataList[indexPath.row]);
     }
 }
-
 
 #pragma mark - 懒加载
 - (UICollectionView *)collectionView {
@@ -148,6 +155,9 @@
             make.center.mas_equalTo(_audioView);
             make.size.mas_greaterThanOrEqualTo(CGSizeZero);
         }];
+        [_audioView setUserInteractionEnabled:true];
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAudioEvent:)];
+        [_audioView addGestureRecognizer:tapGesture];
     }
     return _audioView;
 }

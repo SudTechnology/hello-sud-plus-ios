@@ -49,8 +49,12 @@
     [HSSheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
         
     }];
+    WeakSelf
     modeView.onTapGameCallBack = ^(HSGameList * _Nonnull m) {
-        
+        [HSSheetView close];
+        if (weakSelf.onTapGameCallBack) {
+            weakSelf.onTapGameCallBack(m);
+        }
     };
 }
 
