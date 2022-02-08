@@ -16,6 +16,15 @@ PODS:
     - AFNetworking/NSURLSession
   - BDAlphaPlayer (1.2.0)
   - Bugly (2.5.90)
+  - libwebp (1.2.1):
+    - libwebp/demux (= 1.2.1)
+    - libwebp/mux (= 1.2.1)
+    - libwebp/webp (= 1.2.1)
+  - libwebp/demux (1.2.1):
+    - libwebp/webp
+  - libwebp/mux (1.2.1):
+    - libwebp/demux
+  - libwebp/webp (1.2.1)
   - lottie-ios (2.5.3)
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
@@ -23,6 +32,9 @@ PODS:
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
+  - SDWebImageWebPCoder (0.8.4):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.10)
   - SSZipArchive (2.4.2)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -44,6 +56,7 @@ DEPENDENCIES:
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
   - SDWebImage (= 5.12.2)
+  - SDWebImageWebPCoder
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
   - YYText (~> 1.0.7)
@@ -54,11 +67,13 @@ SPEC REPOS:
     - AFNetworking
     - BDAlphaPlayer
     - Bugly
+    - libwebp
     - lottie-ios
     - Masonry
     - MJExtension
     - Protobuf
     - SDWebImage
+    - SDWebImageWebPCoder
     - SSZipArchive
     - SVProgressHUD
     - YYText
@@ -78,17 +93,19 @@ SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   BDAlphaPlayer: 8af2048ee8ef8c31a73a99f83882cf4242e89df0
   Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
+  libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   Protobuf: 3724efa50cb2846d7ccebc8691c574e85fd74471
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
+  SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: 306ecd60c8ebfe49223da1faf46051f403f25824
+PODFILE CHECKSUM: f3209d5f4655d76d9b467a2f48661a5656c74a01
 
 COCOAPODS: 1.11.2

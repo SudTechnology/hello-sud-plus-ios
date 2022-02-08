@@ -23,6 +23,7 @@
 #import <MJExtension/MJExtension.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <SDWebImage/SDWebImage.h>
+#import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
 #import <BDAlphaPlayer/BDAlphaPlayer.h>
 #import "Lottie.h"
 
