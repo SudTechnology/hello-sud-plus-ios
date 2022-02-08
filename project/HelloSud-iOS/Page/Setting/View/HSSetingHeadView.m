@@ -76,7 +76,8 @@
 - (UIImageView *)headImageView {
     if (_headImageView == nil) {
         _headImageView = UIImageView.new;
-        _headImageView.layer.cornerRadius = 2;
+        _headImageView.clipsToBounds = true;
+        _headImageView.layer.cornerRadius = 64/2;
         _headImageView.backgroundColor = HEX_COLOR(@"#8A8A8E");
     }
     return _headImageView;

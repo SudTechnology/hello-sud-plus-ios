@@ -79,6 +79,8 @@
 - (UIImageView *)headerView {
     if (!_headerView) {
         _headerView = [[UIImageView alloc] init];
+        _headerView.clipsToBounds = true;
+        _headerView.layer.cornerRadius = 56/2;
     }
     return _headerView;
 }
