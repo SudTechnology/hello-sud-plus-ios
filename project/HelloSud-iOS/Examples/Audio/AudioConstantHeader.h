@@ -17,6 +17,8 @@
 #define NTF_REMOTE_VOICE_VOLUME_CHANGED @"NTF_REMOTE_VOICE_VOLUME_CHANGED"
 /// 流信息变化通知
 #define NTF_STREAM_INFO_CHANGED @"NTF_STREAM_INFO_CHANGED"
+/// 玩家游戏状态变更通知
+#define NTF_PLAYER_STATE_CHANGED @"NTF_PLAYER_STATE_CHANGED"
 
 #define kNTFStreamInfoKey @"streamInfo"
 #endif /* AudioConstantHeader_h */

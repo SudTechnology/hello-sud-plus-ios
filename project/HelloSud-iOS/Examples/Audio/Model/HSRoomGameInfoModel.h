@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *drawKeyWord;
 /// 你画我猜，进入猜词环节，用来公屏识别关键字的状态标识
 @property (nonatomic, assign) BOOL keyWordHiting;
+/// 是否准备
+@property (nonatomic, assign) BOOL isReady;
 @end
 
 NS_ASSUME_NONNULL_END

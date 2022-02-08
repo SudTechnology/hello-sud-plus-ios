@@ -51,7 +51,11 @@
     switch (cmd) {
         case CMD_PUBLIC_MSG_NTF:{
             // 公屏消息
-            msgModel = [HSAudioMsgTextModel mj_objectWithKeyValues:command];
+            HSAudioMsgTextModel *msgTextModel = [HSAudioMsgTextModel mj_objectWithKeyValues:command];
+            msgModel = msgTextModel;
+            
+            /// Game
+            [self gameKeyWordHiting: msgTextModel.content];
         }
             break;
         case CMD_PUBLIC_SEND_GIFT_NTF:{
@@ -62,11 +66,17 @@
         case CMD_UP_MIC_NTF:{
             // 上麦消息
             msgModel = [HSAudioMsgMicModel mj_objectWithKeyValues:command];
+            
+            /// Game
+            [self gameUpMic];
         }
             break;
         case CMD_DOWN_MIC_NTF:{
             // 下麦消息
             msgModel = [HSAudioMsgMicModel mj_objectWithKeyValues:command];
+            
+            /// Game
+            [self gameDownMic];
         }
             break;
         default:
@@ -82,4 +92,31 @@
         [self addMsg:msgModel];
     }
 }
+
+
+#pragma mark - 业务处理
+/// 上麦
+- (void)gameUpMic {
+    /// 上麦，就是加入游戏
+    [self.fsm2MGManager sendComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+}
+
+/// 下麦
+- (void)gameDownMic {
+    if (self.gameInfoModel.isReady) {
+        /// 如果已经准备先退出准备状态
+        [self.fsm2MGManager sendComonSetReady:false];
+    }
+    /// 下麦，就是退出游戏
+    [self.fsm2MGManager sendComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+}
+
+/// 你画我猜命中
+- (void)gameKeyWordHiting:(NSString *)content {
+    if (self.gameInfoModel.keyWordHiting == YES && [content isEqualToString:self.gameInfoModel.drawKeyWord]) {
+        /// 关键词命中
+        [self.fsm2MGManager sendComonDrawTextHit:true keyWord:self.gameInfoModel.drawKeyWord text:self.gameInfoModel.drawKeyWord];
+    }
+}
+
 @end

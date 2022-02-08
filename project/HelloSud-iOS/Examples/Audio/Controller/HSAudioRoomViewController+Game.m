@@ -45,9 +45,7 @@
 - (void)onExpireCode:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
     NSLog(@"ISudFSMMG:onExpireCode:Code过期");
     // 请求业务服务器刷新令牌
-    /// TODO: Code更新
-#warning Code更新 不能copy此代码，接入时需要刷新使用新的令
-    WeakSelf
+    // Code更新
     [HSGameManager.shared reqGameLoginWithSuccess:^(HSRespGameInfoDataModel * _Nonnull gameInfo) {
         // 调用小游戏接口更新令牌
         [self updateGameCode:gameInfo.code];
@@ -141,10 +139,12 @@
     } else if ([state isEqualToString:MG_COMMON_KEY_WORD_TO_HIT]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:你画我猜关键词获取");
         GameKeyWordHitModel *m = [GameKeyWordHitModel mj_objectWithKeyValues: dataJson];
-//        if ([self.delegate respondsToSelector:@selector(onGameStateChangeDrawKeyWordHit:)]) {
-//            [self.delegate onGameStateChangeDrawKeyWordHit:m];
-//        }
         self.gameInfoModel.drawKeyWord = m.word;
+        if (m.word == (id) [NSNull null] || [m.word isEqualToString:@""]) {
+            self.gameInfoModel.keyWordHiting = false;
+        } else {
+            self.gameInfoModel.keyWordHiting = true;
+        }
     }else {
         /// 其他状态
         /// TODO
@@ -160,17 +160,53 @@
  * @param dataJson 回调JSON
  */
 - (void)onPlayerStateChange:(nullable id<ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
-    
     GamePlayerStateModel *m = [GamePlayerStateModel mj_objectWithKeyValues: dataJson];
     m.userId = userId;
     m.state = state;
-//    if ([self.delegate respondsToSelector:@selector(onPlayerStateChangeWithModel:)]) {
-//        [self.delegate onPlayerStateChangeWithModel:m];
-//    }
+    [self handleGameState:m];
+    
+    /// 通知麦位处理ui
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:@{@"model":m}];
+
+    /// 回调
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@(0), @"ret_code", @"return form APP onPlayerStateChange", @"ret_msg", nil];
+    [handle success:[AppUtil dictionaryToJson:dict]];
 }
 
-#pragma mark - ======= Public =======
-#pragma mark - ======= Private =======
+#pragma mark - 状态解析
+- (void)handleGameState: (GamePlayerStateModel *)m {
+    NSString *state = m.state;
+    /// 状态解析
+    NSString *dataStr = @"";
+    if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
+        dataStr = @"玩家: 加入状态";
+        if (m.isIn) {
+            /// 加入麦位
+            [self handleTapVoice];
+        }
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
+        dataStr = @"玩家: 准备状态";
+        self.gameInfoModel.isReady = m.isReady;
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
+        dataStr = @"玩家: 队长状态";
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
+        dataStr = @"玩家: 游戏状态";
+    } else if ([state isEqualToString:MG_DG_SELECTING]) {
+        dataStr = @"你画我猜 玩家: 选词中";
+    } else if ([state isEqualToString:MG_DG_PAINTING]) {
+        dataStr = @"你画我猜 玩家: 作画中";
+    } else if ([state isEqualToString:MG_DG_ERRORANSWER]) {
+        dataStr = @"你画我猜 玩家: 错误答";
+    } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
+        dataStr = @"你画我猜 玩家: 总积分";
+    } else if ([state isEqualToString:MG_DG_SCORE]) {
+        dataStr = @"你画我猜 玩家: 本次积分";
+    }else {
+        NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态:%@", MG_DG_SCORE);
+    }
+    NSLog(@"ISudFSMMG:onPlayerStateChange:dataStr:%@", dataStr);
+}
+
 /**
  * 初始化游戏SDK
  *
@@ -204,6 +240,7 @@
 /// @param rootView 游戏根视图
 - (void)loadMG:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t) mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView*)rootView {
     self.iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:fsmMG rootView:rootView];
+    self.fsm2MGManager = [[FSMApp2MGManager alloc] init:self.iSudFSTAPP];
 }
 
 /// 销毁MG
