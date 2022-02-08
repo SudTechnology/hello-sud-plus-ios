@@ -23,7 +23,7 @@
 /// @param isSeatRandom 默认为ture, 带有游戏位(座位号)的时候，如果游戏位(座位号)已经被占用，是否随机分配一个空位坐下 isSeatRandom=true 随机分配空位坐下，isSeatRandom=false 不随机分配
 /// @param teamId 不支持分队的游戏：数值填1；支持分队的游戏：数值填1或2（两支队伍）
 - (void)sendComonSelfIn:(BOOL)isIn seatIndex:(int)seatIndex isSeatRandom:(BOOL)isSeatRandom teamId:(int)teamId {
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isIn), @"isIn", @(seatIndex), @"seatIndex", isSeatRandom, @"isSeatRandom", @(1), @"teamId", nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isIn), @"isIn", seatIndex, @"seatIndex", @(isSeatRandom), @"isSeatRandom", @(1), @"teamId", nil];
     [self notifyStateChange:APP_COMMON_SELF_IN dataJson:[AppUtil dictionaryToJson:dic]];
 }
 

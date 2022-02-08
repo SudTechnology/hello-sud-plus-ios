@@ -115,6 +115,13 @@
     }
 }
 
+- (void)onCheckAllSelect:(UIButton *)sender {
+    [self.checkAllBtn setSelected:!self.checkAllBtn.isSelected];
+    for (HSAudioRoomMicModel *m in self.userDataList) {
+        m.isSelected = self.checkAllBtn.isSelected ? true : false;
+    }
+    [self.collectionView reloadData];
+}
 
 #pragma mark - UICollectionViewDataSource
 
@@ -127,8 +134,6 @@
     cell.model = self.userDataList[indexPath.row];
     return cell;
 }
-
-
 
 #pragma mark - UICollectionViewDelegate
 
@@ -190,9 +195,11 @@
     if (!_checkAllBtn) {
         _checkAllBtn = [[UIButton alloc] init];
         [_checkAllBtn setTitle:@"全选" forState:UIControlStateNormal];
+        [_checkAllBtn setTitle:@"取消全选" forState:UIControlStateSelected];
         [_checkAllBtn setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         _checkAllBtn.titleLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
         _checkAllBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        [_checkAllBtn addTarget:self action:@selector(onCheckAllSelect:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _checkAllBtn;
 }
