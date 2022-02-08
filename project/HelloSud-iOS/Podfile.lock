@@ -14,7 +14,9 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - BDAlphaPlayer (1.2.0)
   - Bugly (2.5.90)
+  - lottie-ios (2.5.3)
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
   - Protobuf (3.19.1)
@@ -36,7 +38,9 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
+  - BDAlphaPlayer (~> 1.2.0)
   - Bugly (= 2.5.90)
+  - lottie-ios (~> 2.5.3)
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
   - SDWebImage (= 5.12.2)
@@ -48,7 +52,9 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - BDAlphaPlayer
     - Bugly
+    - lottie-ios
     - Masonry
     - MJExtension
     - Protobuf
@@ -70,7 +76,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  BDAlphaPlayer: 8af2048ee8ef8c31a73a99f83882cf4242e89df0
   Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
+  lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   Protobuf: 3724efa50cb2846d7ccebc8691c574e85fd74471
@@ -81,6 +89,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: 4590bb61e0d1cc98d9ce4835928020ba0e4bce59
+PODFILE CHECKSUM: 306ecd60c8ebfe49223da1faf46051f403f25824
 
 COCOAPODS: 1.11.2

@@ -20,7 +20,7 @@
 #import "HSAudioMicroView.h"
 #import "HSMicOperateView.h"
 
-@interface HSAudioRoomViewController ()
+@interface HSAudioRoomViewController () <BDAlphaPlayerMetalViewDelegate>
 @property (nonatomic, strong) UIImageView *bgImageView;
 @property (nonatomic, strong) HSRoomNaviView *naviView;
 @property (nonatomic, strong) HSRoomOperatorView *operatorView;
@@ -270,6 +270,35 @@
         [v play:1 didFinished:^{
             [weakV removeFromSuperview];
         }];
+    } else if ([giftModel.animateType isEqualToString:@"lottie"]) {
+        NSURL *url = [NSURL fileURLWithPath: giftModel.animateURL];
+        
+        LOTAnimationView *v = [[LOTAnimationView alloc] initWithContentsOfURL:url];
+        [self.view addSubview:v];
+        
+        [v mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(self.view);
+            make.height.equalTo(self.view.mas_width);
+            make.center.equalTo(self.view);
+        }];
+        __weak UIView *weakV = v;
+        [v playWithCompletion:^(BOOL animationFinished) {
+            [weakV removeFromSuperview];
+        }];
+    } else if ([giftModel.animateType isEqualToString:@"mp4"]) {
+        BDAlphaPlayerMetalView *v = [[BDAlphaPlayerMetalView alloc] initWithDelegate: self];
+        [self.view addSubview:v];
+        [v mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(self.view);
+            make.height.equalTo(self.view.mas_width);
+            make.center.equalTo(self.view);
+        }];
+        BDAlphaPlayerMetalConfiguration *configuration = [BDAlphaPlayerMetalConfiguration defaultConfiguration];
+        configuration.directory = giftModel.animateURL;
+        configuration.renderSuperViewFrame = self.view.frame;
+        configuration.orientation = BDAlphaPlayerOrientationPortrait;
+
+        [v playWithMetalConfiguration:configuration];
     }
 }
 
@@ -438,6 +467,11 @@
 
 - (void)dealloc {
     [self destroyMG];
+}
+
+#pragma mark - BDAlphaPlayerMetalViewDelegate
+- (void)metalView:(nonnull BDAlphaPlayerMetalView *)metalView didFinishPlayingWithError:(nonnull NSError *)error {
+    [metalView removeFromSuperview];
 }
 
 @end

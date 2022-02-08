@@ -59,7 +59,10 @@
     giftMP4.giftID = 4;
     giftMP4.smallGiftURL = [NSBundle.mainBundle pathForResource:@"mp4_128" ofType:@"png" inDirectory:@"Res"];
     giftMP4.giftURL = [NSBundle.mainBundle pathForResource:@"mp4_600" ofType:@"png" inDirectory:@"Res"];
-    giftMP4.animateURL = [NSBundle.mainBundle pathForResource:@"mp4_600" ofType:@"mp4" inDirectory:@"Res"];
+    NSString *testResourcePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Res"];
+    NSString *directory = [testResourcePath stringByAppendingPathComponent:@"mp4_600"];
+    giftMP4.animateURL = directory;
+//    giftMP4.animateURL = [NSBundle.mainBundle pathForResource:@"mp4_600" ofType:@"mp4" inDirectory:@"Res"];
     giftMP4.animateType = @"mp4";
     giftMP4.giftName = @"mp4";
     _giftList = @[giftSvga, giftLottie, giftWebp, giftMP4];
