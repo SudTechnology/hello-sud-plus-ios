@@ -285,6 +285,26 @@
         [v playWithCompletion:^(BOOL animationFinished) {
             [weakV removeFromSuperview];
         }];
+    } else if ([giftModel.animateType isEqualToString:@"webp"]) {
+//        [[SDWebImageDownloader sharedDownloader] setValue:@"image/webp,image/*,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
+//        SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
+//        [[SDImageCodersManager sharedManager] addCoder:webPCoder];
+        
+        NSData *webpData = [NSData dataWithContentsOfFile:giftModel.animateURL];
+        UIImage *wimage = [[SDImageWebPCoder sharedCoder] decodedImageWithData:webpData options:nil];
+        
+        UIImageView *v = [[UIImageView alloc] initWithImage:wimage];
+        [self.view addSubview:v];
+        [v mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(self.view);
+            make.height.equalTo(self.view.mas_width);
+            make.center.equalTo(self.view);
+        }];
+        __weak UIView *weakV = v;
+        dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC);
+        dispatch_after(timer, dispatch_get_main_queue(), ^(void){
+            [weakV removeFromSuperview];
+        });
     } else if ([giftModel.animateType isEqualToString:@"mp4"]) {
         BDAlphaPlayerMetalView *v = [[BDAlphaPlayerMetalView alloc] initWithDelegate: self];
         [self.view addSubview:v];
