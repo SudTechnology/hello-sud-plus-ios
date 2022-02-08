@@ -45,9 +45,13 @@
 }
 
 - (void)selectNodeEvent:(UITapGestureRecognizer *)gesture {
-    [HSSheetView show:[[HSSwitchRoomModeView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
+    HSSwitchRoomModeView *modeView = [[HSSwitchRoomModeView alloc] init];
+    [HSSheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
         
     }];
+    modeView.onTapGameCallBack = ^(HSGameList * _Nonnull m) {
+        
+    };
 }
 
 - (void)onCloseRoomEvent:(UIButton *)btn {

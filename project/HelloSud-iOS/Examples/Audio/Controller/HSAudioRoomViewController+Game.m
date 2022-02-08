@@ -47,9 +47,13 @@
     // 请求业务服务器刷新令牌
     /// TODO: Code更新
 #warning Code更新 不能copy此代码，接入时需要刷新使用新的令
-    NSString *testCode = @"code";
-    // 调用小游戏接口更新令牌
-    [self updateGameCode:testCode];
+    WeakSelf
+    [HSGameManager.shared reqGameLoginWithSuccess:^(HSRespGameInfoDataModel * _Nonnull gameInfo) {
+        // 调用小游戏接口更新令牌
+        [self updateGameCode:gameInfo.code];
+    } fail:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:error.debugDescription];
+    }];
     
     // 回调结果
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@(0), @"ret_code", @"return form APP onExpireCode", @"ret_msg", nil];
@@ -131,10 +135,9 @@
     
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:公屏消息");
-        GamePublicMsgModel *m = [GamePublicMsgModel mj_objectWithKeyValues: dataJson];
-//        if ([self.delegate respondsToSelector:@selector(onGameStateChangePublicMessage:)]) {
-//            [self.delegate onGameStateChangePublicMessage:m];
-//        }
+        GamePublicMsgModel *publicMsgModel = [GamePublicMsgModel mj_objectWithKeyValues: dataJson];
+        HSAudioMsgSystemModel *msgModel = [HSAudioMsgSystemModel makeMsg:publicMsgModel language:self.gameInfoModel.language];
+        [self addMsg:msgModel];
     } else if ([state isEqualToString:MG_COMMON_KEY_WORD_TO_HIT]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:你画我猜关键词获取");
         GameKeyWordHitModel *m = [GameKeyWordHitModel mj_objectWithKeyValues: dataJson];

@@ -14,13 +14,13 @@
 @property (nonatomic, strong) UILabel *gameTitleLabel;
 
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, strong) NSArray <HSGameList *> *dataList;
 @end
 
 @implementation HSSwitchRoomModeView
 
 - (void)hsAddViews {
-    self.dataList = @[@(1), @(1), @(1), @(1), @(1)];
+    self.dataList = HSAppManager.shared.gameList;
     [self addSubview:self.audioTitleLabel];
     [self addSubview:self.audioView];
     [self addSubview:self.gameTitleLabel];
@@ -64,14 +64,16 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HSGameItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSGameItemCollectionViewCell" forIndexPath:indexPath];
+    cell.model = self.dataList[indexPath.row];
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
-    NSLog(@"选中cell: %ld", indexPath.row);
+    if (self.onTapGameCallBack) {
+        self.onTapGameCallBack(self.dataList[indexPath.row]);
+    }
 }
 
 
@@ -89,7 +91,7 @@
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+        _collectionView.backgroundColor = UIColor.whiteColor;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[HSGameItemCollectionViewCell class] forCellWithReuseIdentifier:@"HSGameItemCollectionViewCell"];
@@ -97,9 +99,9 @@
     return _collectionView;
 }
 
-- (NSMutableArray *)dataList {
+- (NSArray *)dataList {
     if (!_dataList) {
-        _dataList = [NSMutableArray array];
+        _dataList = [NSArray array];
     }
     return _dataList;
 }

@@ -10,6 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 /// 房间模式切换
 @interface HSSwitchRoomModeView : BaseView
+typedef void(^OnTapGameCallBack)(HSGameList *m);
+@property (nonatomic, copy) OnTapGameCallBack onTapGameCallBack;
 
 @end
 

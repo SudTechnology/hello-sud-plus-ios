@@ -24,8 +24,7 @@
 
 + (NSMutableAttributedString *)getAttributedStringWithString:(NSString *)string color:(NSString*)color {
     NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc]initWithString:string];
-    /// todo
-//    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor RW_colorWithHexString:color] range:NSMakeRange(0, attributedString.length)];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:color alpha:1] range:NSMakeRange(0, attributedString.length)];
     return attributedString;
 }
 
