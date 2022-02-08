@@ -14,7 +14,7 @@
 @property(nonatomic, strong)UITableView *tableView;
 
 /// 页面数据
-@property(nonatomic, strong)NSArray<NSArray<HSSettingModel*> *> *arrData;
+@property(nonatomic, strong)NSArray <HSSettingModel *> *arrData;
 @end
 
 @implementation HSSettingViewController
@@ -51,7 +51,13 @@
     privacyModel.title = @"隐私政策";
     privacyModel.isMore = YES;
     privacyModel.pageURL = HSAppManager.shared.appPrivacyURL.absoluteString;
-    self.arrData = @[@[sdkModel, appModel], @[userProtocolModel, privacyModel]];
+    
+    HSSettingModel *contactModel = [HSSettingModel new];
+    contactModel.title = @"联系我们";
+    contactModel.isMore = YES;
+    contactModel.pageURL = @"";
+    
+    self.arrData = @[sdkModel, appModel, userProtocolModel, privacyModel, contactModel];
     HSSetingHeadView *header = HSSetingHeadView.new;
     header.frame = CGRectMake(0, 0, kScreenWidth, 104);
     [header hsUpdateUI];
@@ -96,37 +102,49 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     HSSettingCell *c = (HSSettingCell *)cell;
     c.isShowTopLine = indexPath.row > 0;
-    c.model = self.arrData[indexPath.section][indexPath.row];
+    c.model = self.arrData[indexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
-    if (model.isMore) {
-        HSWebViewController *web = HSWebViewController.new;
-        web.url = model.pageURL;
-        [self.navigationController pushViewController:web animated:YES];
+    HSSettingModel *model = self.arrData[indexPath.row];
+    if ([model.title isEqualToString:@"联系我们"]) {
+        NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"如需了解更多资讯或反馈问题，可联系："];
+        attrTitle.yy_lineSpacing = 8;
+        attrTitle.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+        attrTitle.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        attrTitle.yy_alignment = NSTextAlignmentCenter;
+        
+        NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:@"help@sud.tech"];
+        attrStr_0.yy_lineSpacing = 8;
+        attrStr_0.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
+        attrStr_0.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        
+        [attrTitle appendAttributedString:attrStr_0];
+        
+        [HSAlertView showAttrTextAlert:attrTitle sureText:@"好的" cancelText:@"" onSureCallback:^{
+        } onCloseCallback:^{
+        }];
+    } else {
+        if (model.isMore) {
+            HSWebViewController *web = HSWebViewController.new;
+            web.url = model.pageURL;
+            [self.navigationController pushViewController:web animated:YES];
+        }
     }
-    
-//    [HSAlertView showTextAlert:@"ajjfhaisjf" sureText:@"ok" cancelText:@"" onSureCallback:^{
-//        NSLog(@"0");
-//    } onCloseCallback:^{
-//        NSLog(@"1");
-//    }];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
+    HSSettingModel *model = self.arrData[indexPath.row];
     return model.isMore;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
-    return self.arrData.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrData[section].count;
+    return self.arrData.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -138,7 +156,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 12;
+    return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
