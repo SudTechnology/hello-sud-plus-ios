@@ -108,7 +108,6 @@
 		6C076ED727A298FC00650209 /* HSGameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED627A298FC00650209 /* HSGameManager.m */; };
 		6C076EDA27A2993C00650209 /* HSRespGameInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED927A2993C00650209 /* HSRespGameInfoModel.m */; };
 		6C192E4D279523B000553034 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E4C279523B000553034 /* AppDelegate.m */; };
-		6C192E53279523B000553034 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E52279523B000553034 /* ViewController.m */; };
 		6C192E56279523B000553034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E54279523B000553034 /* Main.storyboard */; };
 		6C192E58279523B100553034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E57279523B100553034 /* Assets.xcassets */; };
 		6C192E5B279523B100553034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E59279523B100553034 /* LaunchScreen.storyboard */; };
@@ -342,8 +341,6 @@
 		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6C192E51279523B000553034 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6C192E52279523B000553034 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6C192E55279523B000553034 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C192E57279523B100553034 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C192E5A279523B100553034 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -386,7 +383,8 @@
 		445EAA6E2798FFE4000DCC72 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				445EAAE9279E7C7B000DCC72 /* Home */,
+				6C076E82279EA2CF00650209 /* Room */,
+				445EAAE9279E7C7B000DCC72 /* Main */,
 				445EAA6F2798FFE4000DCC72 /* Game */,
 				445EAA702798FFE4000DCC72 /* Setting */,
 				445EAA712798FFE4000DCC72 /* Login */,
@@ -529,14 +527,14 @@
 			path = Gift;
 			sourceTree = "<group>";
 		};
-		445EAAE9279E7C7B000DCC72 /* Home */ = {
+		445EAAE9279E7C7B000DCC72 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				445EAAEC279E7C8F000DCC72 /* Model */,
 				445EAAEB279E7C8A000DCC72 /* View */,
 				445EAAEA279E7C85000DCC72 /* Controller */,
 			);
-			path = Home;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		445EAAEA279E7C85000DCC72 /* Controller */ = {
@@ -579,19 +577,19 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		44DF037E2796A981006EE6AC /* Middle */ = {
+		44DF037E2796A981006EE6AC /* RTC */ = {
 			isa = PBXGroup;
 			children = (
-				44DF03842796A9EF006EE6AC /* Games */,
-				44DF037F2796A981006EE6AC /* MediaAudioEngine */,
+				6C239FEB27B398EE00B19FE4 /* Video */,
+				44DF037F2796A981006EE6AC /* Audio */,
 			);
-			path = Middle;
+			path = RTC;
 			sourceTree = "<group>";
 		};
-		44DF037F2796A981006EE6AC /* MediaAudioEngine */ = {
+		44DF037F2796A981006EE6AC /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				6C076E6E279E424900650209 /* Impl */,
+				6C076E6E279E424900650209 /* Zego */,
 				44DF03812796A981006EE6AC /* MediaAudioEngineProtocol.h */,
 				6C076E72279E457D00650209 /* MediaAudioEventHandler.h */,
 				6C076E7B279E833C00650209 /* MediaAudioEngineManager.h */,
@@ -599,10 +597,10 @@
 				6C076E7E279E8EBD00650209 /* MediaAudioCommon.h */,
 				6C076E7F279E8EBD00650209 /* MediaAudioCommon.m */,
 			);
-			path = MediaAudioEngine;
+			path = Audio;
 			sourceTree = "<group>";
 		};
-		44DF03842796A9EF006EE6AC /* Games */ = {
+		44DF03842796A9EF006EE6AC /* Game */ = {
 			isa = PBXGroup;
 			children = (
 				44DF03992796B6E3006EE6AC /* Model */,
@@ -613,7 +611,7 @@
 				44DF03AC2797F124006EE6AC /* FSMApp2MGManager.h */,
 				44DF03AD2797F124006EE6AC /* FSMApp2MGManager.m */,
 			);
-			path = Games;
+			path = Game;
 			sourceTree = "<group>";
 		};
 		44DF038A2796ADC6006EE6AC /* SudMGPSDK */ = {
@@ -681,23 +679,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		6C076E6E279E424900650209 /* Impl */ = {
+		6C076E6E279E424900650209 /* Zego */ = {
 			isa = PBXGroup;
 			children = (
 				6C076E6F279E429E00650209 /* ZegoAudioEngine.h */,
 				6C076E70279E429E00650209 /* ZegoAudioEngine.m */,
 			);
-			path = Impl;
+			path = Zego;
 			sourceTree = "<group>";
 		};
-		6C076E82279EA2CF00650209 /* Examples */ = {
+		6C076E82279EA2CF00650209 /* Room */ = {
 			isa = PBXGroup;
 			children = (
 				6C076E83279EA2CF00650209 /* Video */,
 				6C076E84279EA2CF00650209 /* QuickStart */,
 				6C076E85279EA2CF00650209 /* Audio */,
 			);
-			path = Examples;
+			path = Room;
 			sourceTree = "<group>";
 		};
 		6C076E83279EA2CF00650209 /* Video */ = {
@@ -844,11 +842,6 @@
 		6C192E3F279523B000553034 = {
 			isa = PBXGroup;
 			children = (
-				44DF03902796B22C006EE6AC /* Common */,
-				44DF037E2796A981006EE6AC /* Middle */,
-				6C076EA3279F983100650209 /* Manager */,
-				445EAA6E2798FFE4000DCC72 /* UI */,
-				6C076E82279EA2CF00650209 /* Examples */,
 				6C192E4A279523B000553034 /* HelloSud-iOS */,
 				6C192E49279523B000553034 /* Products */,
 				EC6357AE0D30A512FB9D49C4 /* Pods */,
@@ -870,12 +863,15 @@
 		6C192E4A279523B000553034 /* HelloSud-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				44DF03842796A9EF006EE6AC /* Game */,
+				44DF03902796B22C006EE6AC /* Common */,
+				6C076EA3279F983100650209 /* Manager */,
+				445EAA6E2798FFE4000DCC72 /* UI */,
+				44DF037E2796A981006EE6AC /* RTC */,
 				6C076EAF279FF37200650209 /* Res */,
 				6C192E882797E2C700553034 /* PrefixHeader.pch */,
 				6C192E4B279523B000553034 /* AppDelegate.h */,
 				6C192E4C279523B000553034 /* AppDelegate.m */,
-				6C192E51279523B000553034 /* ViewController.h */,
-				6C192E52279523B000553034 /* ViewController.m */,
 				6C192E54279523B000553034 /* Main.storyboard */,
 				6C192E57279523B100553034 /* Assets.xcassets */,
 				6C192E59279523B100553034 /* LaunchScreen.storyboard */,
@@ -970,6 +966,13 @@
 				44F29F4F27B2474900F57DEE /* HSPaddingLabel.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		6C239FEB27B398EE00B19FE4 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		E65466148933C05BB06C9A97 /* Frameworks */ = {
@@ -1126,7 +1129,6 @@
 				6C076ED727A298FC00650209 /* HSGameManager.m in Sources */,
 				445EAB01279F9901000DCC72 /* BaseTextView.m in Sources */,
 				44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */,
-				6C192E53279523B000553034 /* ViewController.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				6C076EB6279FF3FF00650209 /* HSGiftModel.m in Sources */,
 				445EAAF5279E810C000DCC72 /* BaseCollectionReusableView.m in Sources */,
