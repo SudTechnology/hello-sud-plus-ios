@@ -10,7 +10,7 @@
 		</data>
 		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeDirectory</key>
 		<data>
-		jDHWYfVeGowLiNQfHhBS0Z3p8ck=
+		U4cubFPfT2n+QApbXIm2fGW1B4E=
 		</data>
 		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements</key>
 		<data>
@@ -18,11 +18,11 @@
 		</data>
 		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements-1</key>
 		<data>
-		pysZR5dqUskGbTrnvYOpoLFzPwI=
+		muj1o6L+njvxx86d5ZSUAnpTP84=
 		</data>
 		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeResources</key>
 		<data>
-		0XEkjGoNwMTLOas0t23M7oq0+4M=
+		/H+GCq1u2MTuKeO3UnDWOp72vHI=
 		</data>
 		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeSignature</key>
 		<data>
@@ -30,23 +30,39 @@
 		</data>
 		<key>EgretNativeJSConsoleRes.bundle/index.html</key>
 		<data>
-		1EK0bKj8IjKXmEDMKPu8ESj2qkI=
+		K/tLkR3L9CMKspWcGjDkJx9cc/Y=
+		</data>
+		<key>Headers/IRTSS.h</key>
+		<data>
+		0y2WBGK/l2oHGrnViE8PdEyEqAQ=
+		</data>
+		<key>Headers/IRTSSEventHandler.h</key>
+		<data>
+		iWV0UMnNIAgZLzHTvn5M9FO64eU=
 		</data>
 		<key>Headers/ISudAPPD.h</key>
 		<data>
 		05P2/6AiTFKVAetmtU1REHdE/W0=
 		</data>
+		<key>Headers/ISudASR.h</key>
+		<data>
+		z/fF/gwkFzbH6ef/Q1mk8qcyNas=
+		</data>
 		<key>Headers/ISudFSMMG.h</key>
 		<data>
-		XcWRX0zODldY2T/dbtzT+iwrcGo=
+		r1CyFyzrDUpN0ti2gOy2g14t1CU=
 		</data>
 		<key>Headers/ISudFSMStateHandle.h</key>
 		<data>
-		MmmEVO5IgV32yJ2ZERWSAfVUeM0=
+		FJ3VAY39qQGfsA5RzchJsPYbjvI=
 		</data>
 		<key>Headers/ISudFSTAPP.h</key>
 		<data>
-		sLTq/NBd7J9DjTQeOiyvDodIkKs=
+		aItvrTmWvreLyI4LUg68DlFUGfw=
+		</data>
+		<key>Headers/ISudListenerASR.h</key>
+		<data>
+		e1c1vcvpzWtzpR0M8LXL7DAPJ+M=
 		</data>
 		<key>Headers/ISudListenerGetFQSInfo.h</key>
 		<data>
@@ -68,17 +84,33 @@
 		<data>
 		iZ8b1pdDNuD7nHEQYBLp65/hkV4=
 		</data>
+		<key>Headers/ISudListenerUninitSDK.h</key>
+		<data>
+		ClT1ZLLUSYZr2uY6o7Itdtw1i/Y=
+		</data>
 		<key>Headers/ISudLogger.h</key>
 		<data>
 		jTVkYtMibuUnks31dwc+LW0ScQE=
 		</data>
+		<key>Headers/RTSSResult.h</key>
+		<data>
+		80kyv8aQpoAipg6Ia8MkA8kinNQ=
+		</data>
+		<key>Headers/SmRtAsr.h</key>
+		<data>
+		wvXLscKLU/iJogrD+w0w3hzlhaI=
+		</data>
+		<key>Headers/SmRtAsrClient.h</key>
+		<data>
+		hshBcpfi1tW5ptVbt6Ox0YI/Wog=
+		</data>
 		<key>Headers/SudMGP-umbrella.h</key>
 		<data>
-		xXX+opwvrxgD36S9Gjov1bWs0aQ=
+		CiDY/99QZbrSottMgxuMLMyad9M=
 		</data>
 		<key>Headers/SudMGP.h</key>
 		<data>
-		mYtQ+zZje1tiPQL6OLw4BQYkCEo=
+		jnWohTHm9H1gS2UqqpuB7FST1Vc=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -98,7 +130,11 @@
 		</data>
 		<key>plugin.zip</key>
 		<data>
-		6vSlLL/95R3E982FmhPDbVfCNuo=
+		DT5CFEb70VfK0g/AcgYOm5zx5pU=
+		</data>
+		<key>sud.png</key>
+		<data>
+		vQlHDEdu0+Q1In7/lmqL55xESZU=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -118,11 +154,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			jDHWYfVeGowLiNQfHhBS0Z3p8ck=
+			U4cubFPfT2n+QApbXIm2fGW1B4E=
 			</data>
 			<key>hash2</key>
 			<data>
-			31nONgWehM7yxAXJ8nzNAunZYny5YumRJyKDx0pi1YE=
+			wyRBJ57jjdWBHfyHsD3FjEx+hRbs5MA9T0rtCkAdbjw=
 			</data>
 		</dict>
 		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements</key>
@@ -140,22 +176,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			pysZR5dqUskGbTrnvYOpoLFzPwI=
+			muj1o6L+njvxx86d5ZSUAnpTP84=
 			</data>
 			<key>hash2</key>
 			<data>
-			RbtmjRb+6E2+iJRms7G6794xQDWa2LBPMkngJp5Sr6s=
+			p4ZGdcZRsD5sItRbkkNihcG9edsDi6w7duzPJwUJ6m0=
 			</data>
 		</dict>
 		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0XEkjGoNwMTLOas0t23M7oq0+4M=
+			/H+GCq1u2MTuKeO3UnDWOp72vHI=
 			</data>
 			<key>hash2</key>
 			<data>
-			XR7E4uSYyYFqzHQ50uLzT944795X+M93I18hs+MCuro=
+			Xz9YqA4rNI0tJMd5iF39XvmYDFNr/Hiq9RiILIbB/AY=
 			</data>
 		</dict>
 		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeSignature</key>
@@ -173,11 +209,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1EK0bKj8IjKXmEDMKPu8ESj2qkI=
+			K/tLkR3L9CMKspWcGjDkJx9cc/Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			lcmGQLI6i7bfjRoktmJmReP5P5xGuecktRXseyAXFAo=
+			gC2TRtg8NJ8h6hVrPmNen2ffzD1Q2jUcUnOpVwi3ue8=
+			</data>
+		</dict>
+		<key>Headers/IRTSS.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			0y2WBGK/l2oHGrnViE8PdEyEqAQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			YNoK/u1U5uqAhDGev/Pdd4U/8jlbyvsdbjxDS8eRHdI=
+			</data>
+		</dict>
+		<key>Headers/IRTSSEventHandler.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			iWV0UMnNIAgZLzHTvn5M9FO64eU=
+			</data>
+			<key>hash2</key>
+			<data>
+			s8mjvTPpchpyiJRpe9ZkU7itdCSpwiDHXIUUf9AIeeE=
 			</data>
 		</dict>
 		<key>Headers/ISudAPPD.h</key>
@@ -191,37 +249,59 @@
 			iLOzMPy0oThM1XmDMM6C7c4UWFPM6QlHQZ51R9VFD+Y=
 			</data>
 		</dict>
+		<key>Headers/ISudASR.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			z/fF/gwkFzbH6ef/Q1mk8qcyNas=
+			</data>
+			<key>hash2</key>
+			<data>
+			qFUhmka9/RnhpNwRpSnwObjSu65Tuhd6QLcQE7wxQU4=
+			</data>
+		</dict>
 		<key>Headers/ISudFSMMG.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XcWRX0zODldY2T/dbtzT+iwrcGo=
+			r1CyFyzrDUpN0ti2gOy2g14t1CU=
 			</data>
 			<key>hash2</key>
 			<data>
-			lS+ZbLyAYfdQD0SUzr661NIlJMaaevzdNZwYqQHv9QU=
+			B9ptVM7f8cBx/ZSr6oHGwR+vMmnJiY1UlCi3lpl3BmU=
 			</data>
 		</dict>
 		<key>Headers/ISudFSMStateHandle.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MmmEVO5IgV32yJ2ZERWSAfVUeM0=
+			FJ3VAY39qQGfsA5RzchJsPYbjvI=
 			</data>
 			<key>hash2</key>
 			<data>
-			kEVuxYBNFZvmZA6T8CcDK66LSOLm+jyF59zc8/IcvuM=
+			fLMmUKo+hrfIj90HWIRHdfq7v8MI/x0MWQRd9lN1cPE=
 			</data>
 		</dict>
 		<key>Headers/ISudFSTAPP.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sLTq/NBd7J9DjTQeOiyvDodIkKs=
+			aItvrTmWvreLyI4LUg68DlFUGfw=
 			</data>
 			<key>hash2</key>
 			<data>
-			bx7lUNLp8LVm9/kFBh9e6iKEJ4locpbbtUjjb3N0Avw=
+			en0ZkBmchkyvslIrw3Io4hxHho1yObQIgflmboI/7B4=
+			</data>
+		</dict>
+		<key>Headers/ISudListenerASR.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			e1c1vcvpzWtzpR0M8LXL7DAPJ+M=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZvLZlglJKF/cbA2rxnPKK/qnPFnSrFjK7mN35COkbT0=
 			</data>
 		</dict>
 		<key>Headers/ISudListenerGetFQSInfo.h</key>
@@ -279,6 +359,17 @@
 			PWJ/qoGQoZ7q06cdLh64YQbMcdOfkPQ76KGjgzLEbPU=
 			</data>
 		</dict>
+		<key>Headers/ISudListenerUninitSDK.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ClT1ZLLUSYZr2uY6o7Itdtw1i/Y=
+			</data>
+			<key>hash2</key>
+			<data>
+			Cuq7ZfNPUJdvjQh33Bn4AiC5gjOAavE6Pu9n6FVoVwM=
+			</data>
+		</dict>
 		<key>Headers/ISudLogger.h</key>
 		<dict>
 			<key>hash</key>
@@ -290,26 +381,59 @@
 			iCdKI3ofxZf+tL///BgQljkcPTaFTTY5fU0ptZqIceg=
 			</data>
 		</dict>
+		<key>Headers/RTSSResult.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			80kyv8aQpoAipg6Ia8MkA8kinNQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			pU2NBhGvfAME1J7lBpqvtZhFVMFZuDiajV/0wiZNDNk=
+			</data>
+		</dict>
+		<key>Headers/SmRtAsr.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			wvXLscKLU/iJogrD+w0w3hzlhaI=
+			</data>
+			<key>hash2</key>
+			<data>
+			eDzfspvlVv95CQYGVBtfIw/sq8Xp831Y9aewbgc0BpA=
+			</data>
+		</dict>
+		<key>Headers/SmRtAsrClient.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			hshBcpfi1tW5ptVbt6Ox0YI/Wog=
+			</data>
+			<key>hash2</key>
+			<data>
+			wZqO4WGOpYS+n8/gPU5eimIMFfeYuZCaezw/2uzmh6w=
+			</data>
+		</dict>
 		<key>Headers/SudMGP-umbrella.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xXX+opwvrxgD36S9Gjov1bWs0aQ=
+			CiDY/99QZbrSottMgxuMLMyad9M=
 			</data>
 			<key>hash2</key>
 			<data>
-			gKyEFzeFFhwRuZPxynhLb2l5s5A3duZ26uUmWUCKMW4=
+			guPQE5ynbPZNhglA9m1j1LEVSet0AmuMV7bUVmscRa4=
 			</data>
 		</dict>
 		<key>Headers/SudMGP.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mYtQ+zZje1tiPQL6OLw4BQYkCEo=
+			jnWohTHm9H1gS2UqqpuB7FST1Vc=
 			</data>
 			<key>hash2</key>
 			<data>
-			xGC2e+pPx9Q+FtYa6x1qKQmjsUdLwGAcajLjBHk2f+I=
+			4bMB1wRViS9RykPPIBLHvJkQ5Y87+6xIrwQjRLTwFaU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -349,11 +473,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6vSlLL/95R3E982FmhPDbVfCNuo=
+			DT5CFEb70VfK0g/AcgYOm5zx5pU=
 			</data>
 			<key>hash2</key>
 			<data>
-			uwCau29WEjeABIYGqB3lUwi/cMhypKyHQTS+alI/O6Q=
+			tLA/Jt5EMBrB1OYfN5RMEx4QjkdrTxizY217oGxA+SU=
+			</data>
+		</dict>
+		<key>sud.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vQlHDEdu0+Q1In7/lmqL55xESZU=
+			</data>
+			<key>hash2</key>
+			<data>
+			jGjXGnBah08RrghQiM7wJELGteiQM/iZdJDXE8Bq6C8=
 			</data>
 		</dict>
 	</dict>
