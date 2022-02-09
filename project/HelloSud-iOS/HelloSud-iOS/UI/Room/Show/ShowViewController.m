@@ -1,17 +1,17 @@
 //
-//  HSVideoViewController.m
+//  ShowViewController.m
 //  HelloSud-iOS
 //
-//  Created by kaniel on 2022/1/24.
+//  Created by kaniel on 2022/2/9.
 //
 
-#import "HSVideoViewController.h"
+#import "ShowViewController.h"
 
-@interface HSVideoViewController ()
+@interface ShowViewController ()
 
 @end
 
-@implementation HSVideoViewController
+@implementation ShowViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

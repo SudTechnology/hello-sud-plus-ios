@@ -82,8 +82,6 @@
 		6C076E71279E429E00650209 /* ZegoAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E70279E429E00650209 /* ZegoAudioEngine.m */; };
 		6C076E7D279E833C00650209 /* MediaAudioEngineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E7C279E833C00650209 /* MediaAudioEngineManager.m */; };
 		6C076E80279E8EBD00650209 /* MediaAudioCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E7F279E8EBD00650209 /* MediaAudioCommon.m */; };
-		6C076E88279EA2F800650209 /* HSVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E87279EA2F800650209 /* HSVideoViewController.m */; };
-		6C076E8B279EA30A00650209 /* HSQuickStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E8A279EA30A00650209 /* HSQuickStartViewController.m */; };
 		6C076E90279EA50700650209 /* HSAudioRoomViewController+IM.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E8F279EA50700650209 /* HSAudioRoomViewController+IM.m */; };
 		6C076E94279EA7BF00650209 /* HSAudioMsgBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E93279EA7BF00650209 /* HSAudioMsgBaseModel.m */; };
 		6C076E97279EA9B200650209 /* HSAudioUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E96279EA9B200650209 /* HSAudioUserModel.m */; };
@@ -117,6 +115,8 @@
 		6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E852797C86D00553034 /* UIDevice+Extension.m */; };
 		6C192E912797E31200553034 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8C2797E31200553034 /* AppUtil.m */; };
 		6C192E932797E31200553034 /* HSSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8F2797E31200553034 /* HSSheetView.m */; };
+		6C239FEF27B39BD200B19FE4 /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FEE27B39BD200B19FE4 /* ShowViewController.m */; };
+		6C239FF827B39CBE00B19FE4 /* One2OneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FF727B39CBE00B19FE4 /* One2OneViewController.m */; };
 		9DD9CB34279A5CA50054B91D /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9CB33279A5CA50054B91D /* DeviceUtil.m */; };
 /* End PBXBuildFile section */
 
@@ -286,10 +286,6 @@
 		6C076E7C279E833C00650209 /* MediaAudioEngineManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaAudioEngineManager.m; sourceTree = "<group>"; };
 		6C076E7E279E8EBD00650209 /* MediaAudioCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaAudioCommon.h; sourceTree = "<group>"; };
 		6C076E7F279E8EBD00650209 /* MediaAudioCommon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaAudioCommon.m; sourceTree = "<group>"; };
-		6C076E86279EA2F800650209 /* HSVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSVideoViewController.h; sourceTree = "<group>"; };
-		6C076E87279EA2F800650209 /* HSVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSVideoViewController.m; sourceTree = "<group>"; };
-		6C076E89279EA30A00650209 /* HSQuickStartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQuickStartViewController.h; sourceTree = "<group>"; };
-		6C076E8A279EA30A00650209 /* HSQuickStartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQuickStartViewController.m; sourceTree = "<group>"; };
 		6C076E8E279EA50700650209 /* HSAudioRoomViewController+IM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSAudioRoomViewController+IM.h"; sourceTree = "<group>"; };
 		6C076E8F279EA50700650209 /* HSAudioRoomViewController+IM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "HSAudioRoomViewController+IM.m"; sourceTree = "<group>"; };
 		6C076E92279EA7BF00650209 /* HSAudioMsgBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioMsgBaseModel.h; sourceTree = "<group>"; };
@@ -361,6 +357,10 @@
 		6C192E8C2797E31200553034 /* AppUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
 		6C192E8F2797E31200553034 /* HSSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSheetView.m; sourceTree = "<group>"; };
 		6C192E902797E31200553034 /* HSSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSheetView.h; sourceTree = "<group>"; };
+		6C239FED27B39BD200B19FE4 /* ShowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowViewController.h; sourceTree = "<group>"; };
+		6C239FEE27B39BD200B19FE4 /* ShowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowViewController.m; sourceTree = "<group>"; };
+		6C239FF627B39CBE00B19FE4 /* One2OneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = One2OneViewController.h; sourceTree = "<group>"; };
+		6C239FF727B39CBE00B19FE4 /* One2OneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = One2OneViewController.m; sourceTree = "<group>"; };
 		6C89D9C9279902A9001D52F9 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9DD9CB32279A5CA50054B91D /* DeviceUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
@@ -691,29 +691,29 @@
 		6C076E82279EA2CF00650209 /* Room */ = {
 			isa = PBXGroup;
 			children = (
-				6C076E83279EA2CF00650209 /* Video */,
-				6C076E84279EA2CF00650209 /* QuickStart */,
+				6C076E83279EA2CF00650209 /* Show */,
+				6C076E84279EA2CF00650209 /* 1V1 */,
 				6C076E85279EA2CF00650209 /* Audio */,
 			);
 			path = Room;
 			sourceTree = "<group>";
 		};
-		6C076E83279EA2CF00650209 /* Video */ = {
+		6C076E83279EA2CF00650209 /* Show */ = {
 			isa = PBXGroup;
 			children = (
-				6C076E86279EA2F800650209 /* HSVideoViewController.h */,
-				6C076E87279EA2F800650209 /* HSVideoViewController.m */,
+				6C239FED27B39BD200B19FE4 /* ShowViewController.h */,
+				6C239FEE27B39BD200B19FE4 /* ShowViewController.m */,
 			);
-			path = Video;
+			path = Show;
 			sourceTree = "<group>";
 		};
-		6C076E84279EA2CF00650209 /* QuickStart */ = {
+		6C076E84279EA2CF00650209 /* 1V1 */ = {
 			isa = PBXGroup;
 			children = (
-				6C076E89279EA30A00650209 /* HSQuickStartViewController.h */,
-				6C076E8A279EA30A00650209 /* HSQuickStartViewController.m */,
+				6C239FF627B39CBE00B19FE4 /* One2OneViewController.h */,
+				6C239FF727B39CBE00B19FE4 /* One2OneViewController.m */,
 			);
-			path = QuickStart;
+			path = 1V1;
 			sourceTree = "<group>";
 		};
 		6C076E85279EA2CF00650209 /* Audio */ = {
@@ -1114,7 +1114,6 @@
 				445EAAA6279A55E9000DCC72 /* HSAudioRoomViewController.m in Sources */,
 				445EAB3027A12948000DCC72 /* HSLoginModel.m in Sources */,
 				445EAAB0279A62F1000DCC72 /* UIView+Extension.m in Sources */,
-				6C076E88279EA2F800650209 /* HSVideoViewController.m in Sources */,
 				445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */,
 				445EAAD9279AAF69000DCC72 /* HSGiftUserCollectionViewCell.m in Sources */,
 				445EAB04279FB028000DCC72 /* HSSweetPromptView.m in Sources */,
@@ -1128,6 +1127,7 @@
 				44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */,
 				6C076ED727A298FC00650209 /* HSGameManager.m in Sources */,
 				445EAB01279F9901000DCC72 /* BaseTextView.m in Sources */,
+				6C239FEF27B39BD200B19FE4 /* ShowViewController.m in Sources */,
 				44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				6C076EB6279FF3FF00650209 /* HSGiftModel.m in Sources */,
@@ -1170,6 +1170,7 @@
 				6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */,
 				445EAAAA279A562C000DCC72 /* HSRoomNaviView.m in Sources */,
 				6C076E6A27996C2700650209 /* HSSetingHeadView.m in Sources */,
+				6C239FF827B39CBE00B19FE4 /* One2OneViewController.m in Sources */,
 				44DF03AE2797F124006EE6AC /* FSMApp2MGManager.m in Sources */,
 				445EAAC5279A90C0000DCC72 /* HSRoomGiftTableViewCell.m in Sources */,
 				445EAAF2279E8083000DCC72 /* HSHomeViewController.m in Sources */,
@@ -1188,7 +1189,6 @@
 				6C076EA1279EC62600650209 /* HSAudioMsgMicModel.m in Sources */,
 				6C076EB3279FF3DD00650209 /* HSGiftManager.m in Sources */,
 				445EAB2327A01233000DCC72 /* HSSwitchMicModel.m in Sources */,
-				6C076E8B279EA30A00650209 /* HSQuickStartViewController.m in Sources */,
 				445EAAB9279A67F3000DCC72 /* HSBaseMsgCell.m in Sources */,
 				445EAAB3279A65B9000DCC72 /* HSRoomMsgTableView.m in Sources */,
 				445EAAC2279A6DDC000DCC72 /* HSRoomSystemTableViewCell.m in Sources */,

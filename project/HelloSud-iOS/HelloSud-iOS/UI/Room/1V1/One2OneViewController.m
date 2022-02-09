@@ -1,17 +1,17 @@
 //
-//  HSQuickStartViewController.m
+//  One2OneViewController.m
 //  HelloSud-iOS
 //
-//  Created by kaniel on 2022/1/24.
+//  Created by kaniel on 2022/2/9.
 //
 
-#import "HSQuickStartViewController.h"
+#import "One2OneViewController.h"
 
-@interface HSQuickStartViewController ()
+@interface One2OneViewController ()
 
 @end
 
-@implementation HSQuickStartViewController
+@implementation One2OneViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
