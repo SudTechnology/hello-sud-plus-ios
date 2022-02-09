@@ -51,21 +51,20 @@
     switch (cmd) {
         case CMD_PUBLIC_MSG_NTF:{
             // 公屏消息
-            HSAudioMsgTextModel *msgTextModel = [HSAudioMsgTextModel mj_objectWithKeyValues:command];
+            HSAudioMsgTextModel *msgTextModel = [HSAudioMsgTextModel decodeModel:command];
             msgModel = msgTextModel;
-            
             /// Game
             [self gameKeyWordHiting: msgTextModel.content];
         }
             break;
         case CMD_PUBLIC_SEND_GIFT_NTF:{
             // 礼物消息
-            msgModel = [HSAudioMsgGiftModel mj_objectWithKeyValues:command];
+            msgModel = [HSAudioMsgGiftModel decodeModel:command];
         }
             break;
         case CMD_UP_MIC_NTF:{
             // 上麦消息
-            msgModel = [HSAudioMsgMicModel mj_objectWithKeyValues:command];
+            msgModel = [HSAudioMsgMicModel decodeModel:command];
             
             /// Game
             [self gameUpMic];
@@ -73,7 +72,7 @@
             break;
         case CMD_DOWN_MIC_NTF:{
             // 下麦消息
-            msgModel = [HSAudioMsgMicModel mj_objectWithKeyValues:command];
+            msgModel = [HSAudioMsgMicModel decodeModel:command];
             
             /// Game
             [self gameDownMic];
@@ -81,8 +80,8 @@
             break;
         case CMD_GAME_CHANGE: {
             // 游戏切换
-            NSInteger gameID = [dic[@"gameID"] integerValue];
-            [self handleGameChange:gameID];
+            ExChangeGameMsgModel *m = [ExChangeGameMsgModel decodeModel:command];
+            [self handleGameChange:m.gameID];
         }
             break;
         default:
