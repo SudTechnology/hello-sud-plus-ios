@@ -494,6 +494,7 @@
 - (HSRoomGameInfoModel *)gameInfoModel {
     if (_gameInfoModel == nil) {
         _gameInfoModel = HSRoomGameInfoModel.new;
+        _gameInfoModel.language = @"zh-CN";
     }
     return _gameInfoModel;
 }

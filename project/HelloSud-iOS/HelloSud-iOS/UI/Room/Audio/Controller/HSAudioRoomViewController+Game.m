@@ -218,8 +218,8 @@
  * @param mgID             NSInteger      游戏ID，如 碰碰我最强:1001；飞刀我最强:1002；你画我猜:1003
  */
 - (void)initGameSDKWithAppID:(NSString *)appID appKey:(NSString *)appKey isTestEnv:(Boolean)isTestEnv mgID:(int64_t)mgID rootView:(UIView*)rootView {
-    [ISudAPPD e:4];
-    [ISudAPPD d];
+//    [ISudAPPD e:4];
+//    [ISudAPPD d];
     [SudMGP initSDK:appID appKey:appKey isTestEnv:isTestEnv listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
             NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
