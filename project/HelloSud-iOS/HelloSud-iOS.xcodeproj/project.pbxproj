@@ -117,6 +117,7 @@
 		6C192E932797E31200553034 /* HSSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8F2797E31200553034 /* HSSheetView.m */; };
 		6C239FEF27B39BD200B19FE4 /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FEE27B39BD200B19FE4 /* ShowViewController.m */; };
 		6C239FF827B39CBE00B19FE4 /* One2OneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FF727B39CBE00B19FE4 /* One2OneViewController.m */; };
+		6C239FFB27B3AAD900B19FE4 /* ExChangeGameMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FFA27B3AAD900B19FE4 /* ExChangeGameMsgModel.m */; };
 		9DD9CB34279A5CA50054B91D /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9CB33279A5CA50054B91D /* DeviceUtil.m */; };
 /* End PBXBuildFile section */
 
@@ -361,6 +362,8 @@
 		6C239FEE27B39BD200B19FE4 /* ShowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowViewController.m; sourceTree = "<group>"; };
 		6C239FF627B39CBE00B19FE4 /* One2OneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = One2OneViewController.h; sourceTree = "<group>"; };
 		6C239FF727B39CBE00B19FE4 /* One2OneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = One2OneViewController.m; sourceTree = "<group>"; };
+		6C239FF927B3AAD900B19FE4 /* ExChangeGameMsgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExChangeGameMsgModel.h; sourceTree = "<group>"; };
+		6C239FFA27B3AAD900B19FE4 /* ExChangeGameMsgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExChangeGameMsgModel.m; sourceTree = "<group>"; };
 		6C89D9C9279902A9001D52F9 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9DD9CB32279A5CA50054B91D /* DeviceUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
@@ -835,6 +838,8 @@
 				6C076EA0279EC62600650209 /* HSAudioMsgMicModel.m */,
 				44F29F4B27B21A4D00F57DEE /* HSAudioMsgSystemModel.h */,
 				44F29F4C27B21A4D00F57DEE /* HSAudioMsgSystemModel.m */,
+				6C239FF927B3AAD900B19FE4 /* ExChangeGameMsgModel.h */,
+				6C239FFA27B3AAD900B19FE4 /* ExChangeGameMsgModel.m */,
 			);
 			path = Msg;
 			sourceTree = "<group>";
@@ -1173,6 +1178,7 @@
 				6C239FF827B39CBE00B19FE4 /* One2OneViewController.m in Sources */,
 				44DF03AE2797F124006EE6AC /* FSMApp2MGManager.m in Sources */,
 				445EAAC5279A90C0000DCC72 /* HSRoomGiftTableViewCell.m in Sources */,
+				6C239FFB27B3AAD900B19FE4 /* ExChangeGameMsgModel.m in Sources */,
 				445EAAF2279E8083000DCC72 /* HSHomeViewController.m in Sources */,
 				445EAB0A279FD44F000DCC72 /* HSRoomGameInfoModel.m in Sources */,
 				445EAB1A27A0101F000DCC72 /* HSEnterRoomModel.m in Sources */,

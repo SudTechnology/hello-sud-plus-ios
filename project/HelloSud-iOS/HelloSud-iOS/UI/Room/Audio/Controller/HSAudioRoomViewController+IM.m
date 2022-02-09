@@ -79,6 +79,12 @@
             [self gameDownMic];
         }
             break;
+        case CMD_GAME_CHANGE: {
+            // 游戏切换
+            NSInteger gameID = [dic[@"gameID"] integerValue];
+            [self handleGameChange:gameID];
+        }
+            break;
         default:
 //        {
 //            // 无法解析消息
@@ -126,6 +132,21 @@
         /// 关键词命中
         [self.fsm2MGManager sendComonDrawTextHit:true keyWord:self.gameInfoModel.drawKeyWord text:self.gameInfoModel.drawKeyWord];
     }
+}
+
+/// 处理切换游戏
+/// @param gameID 新的游戏ID
+- (void)handleGameChange:(NSInteger)gameID {
+    if (gameID == 0) {
+        // 切换语音房间
+        self.gameId = 0;
+        self.roomType = HSAudio;
+        return;
+    }
+    self.gameId = gameID;
+    self.gameInfoModel.currentPlayerUserId = HSAppManager.shared.loginUserInfo.userID;
+    [self loginGame];
+    self.roomType = HSGame;
 }
 
 @end

@@ -15,5 +15,6 @@
 #import "HSAudioMsgMicModel.h"
 #import "HSAudioMsgSystemModel.h"
 #import "HSAudioRoomMicModel.h"
+#import "ExChangeGameMsgModel.h"
 
 #endif /* CommonAudioModelHeader_h */

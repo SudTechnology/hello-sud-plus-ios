@@ -26,6 +26,8 @@
     }];
 }
 
+
+/// 加载游戏
 - (void)loadGame {
     NSString *appID = HSAppManager.shared.configData.sudCfg.appId;
     NSString *appKey = HSAppManager.shared.configData.sudCfg.appKey;
@@ -243,8 +245,9 @@
     self.fsm2MGManager = [[FSMApp2MGManager alloc] init:self.iSudFSTAPP];
 }
 
-/// 销毁MG
-- (void)destroyMG {
+/// 退出游戏
+- (void)logoutGame {
+    // 销毁游戏
     [self.iSudFSTAPP destroyMG];
 }
 
