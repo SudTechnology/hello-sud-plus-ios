@@ -383,7 +383,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		445EAA6E2798FFE4000DCC72 /* Page */ = {
+		445EAA6E2798FFE4000DCC72 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				445EAAE9279E7C7B000DCC72 /* Home */,
@@ -391,7 +391,7 @@
 				445EAA702798FFE4000DCC72 /* Setting */,
 				445EAA712798FFE4000DCC72 /* Login */,
 			);
-			path = Page;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		445EAA6F2798FFE4000DCC72 /* Game */ = {
@@ -847,7 +847,7 @@
 				44DF03902796B22C006EE6AC /* Common */,
 				44DF037E2796A981006EE6AC /* Middle */,
 				6C076EA3279F983100650209 /* Manager */,
-				445EAA6E2798FFE4000DCC72 /* Page */,
+				445EAA6E2798FFE4000DCC72 /* UI */,
 				6C076E82279EA2CF00650209 /* Examples */,
 				6C192E4A279523B000553034 /* HelloSud-iOS */,
 				6C192E49279523B000553034 /* Products */,
