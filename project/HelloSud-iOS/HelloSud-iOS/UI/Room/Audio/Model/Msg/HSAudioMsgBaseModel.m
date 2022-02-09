@@ -45,4 +45,10 @@
     userModel.sex = HSAppManager.shared.loginUserInfo.sex;
     self.sendUser = userModel;
 }
+
+/// 解码model
+/// @param keyValues keyValues json对象
++ (instancetype)decodeModel:(id)keyValues {
+    return [self mj_objectWithKeyValues:keyValues];
+}
 @end

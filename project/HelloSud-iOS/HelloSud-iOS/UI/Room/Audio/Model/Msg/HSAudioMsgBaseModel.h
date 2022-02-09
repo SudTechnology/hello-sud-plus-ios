@@ -35,6 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 配置消息
 /// @param cmd 消息指令
 - (void)configBaseInfoWithCmd:(NSInteger)cmd;
+
+/// 解码model
+/// @param keyValues keyValues json对象
++ (instancetype)decodeModel:(id)keyValues;
 @end
 
 NS_ASSUME_NONNULL_END
