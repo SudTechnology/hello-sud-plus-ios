@@ -81,6 +81,9 @@
     self.playState = HSSVGAPlayerStateTypeFinished;
     self.playItem = nil;
     self.isNeedToPlay = NO;
+    if (self.didFinishedBlock) {
+        self.didFinishedBlock();
+    }
 }
 
 #pragma mark lazy
