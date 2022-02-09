@@ -91,7 +91,7 @@
 - (void)onGetGameCfg:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     dict[@"ret_code"] = @(0);
-    dict[@"ret_msg"] = @"return form APP onGetGameCfg";
+    dict[@"ret_msg"] = @"success";
     NSString *dataJsonRet = @"";
     NSData *dataJsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
     if (dataJsonData != nil) {
@@ -118,7 +118,7 @@
     viewRect.bottom = 0;
     viewRect.right = 0;
     m.ret_code = 0;
-    m.ret_msg = @"return form APP onGetGameViewInfo";
+    m.ret_msg = @"success";
     m.view_size = viewSize;
     m.view_game_rect = viewRect;
     /// 回调

@@ -22,10 +22,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    [self configBugly];
-    
-    
     self.window = [[UIWindow alloc]init];
     if (HSAppManager.shared.isLogin) {
         [HSAppManager.shared refreshToken];
@@ -35,8 +31,8 @@
     }
     self.window.backgroundColor = UIColor.whiteColor;
     [self.window makeKeyAndVisible];
+    [self configBugly];
     [self configAudioEngine];
-
     return YES;
 }
 
