@@ -151,6 +151,20 @@
         }];
     };
     self.naviView.onTapGameCallBack = ^(HSGameList * _Nonnull m) {
+        [weakSelf handleChangeRoomMode:m];
+    };
+}
+
+- (void)hsUpdateUI {
+    [self.naviView hsUpdateUI];
+}
+
+/// 处理切换房间
+/// @param m m description
+- (void)handleChangeRoomMode:(HSGameList *)m {
+    WeakSelf
+    [HSAudioRoomManager.shared reqSwitchGame:self.roomID.integerValue gameId:self.gameId success:^{
+        
         ExChangeGameMsgModel *msg = nil;
         if (m.isAudioRoom) {
             weakSelf.roomType = HSAudio;
@@ -166,11 +180,10 @@
         if (msg) {
             [weakSelf sendMsg:msg isAddToShow:false];
         }
-    };
-}
-
-- (void)hsUpdateUI {
-    [self.naviView hsUpdateUI];
+    } fail:^(NSError *error) {
+        NSLog(@"reqSwitchGame error:%@", error.debugDescription);
+    }];
+    
 }
 
 /// 处理麦位点击

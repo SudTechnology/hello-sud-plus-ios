@@ -85,12 +85,12 @@
         }
             break;
         default:
-//        {
-//            // 无法解析消息
-//            HSAudioMsgTextModel *textModel = HSAudioMsgTextModel.new;
-//            textModel.content = @"无法显示该消息，请升级最新版本";
-//            msgModel = textModel;
-//        }
+        {
+            // 无法解析消息
+            HSAudioMsgTextModel *textModel = HSAudioMsgTextModel.new;
+            textModel.content = [NSString stringWithFormat:@"无法显示该消息，请升级最新版本,cmd:%ld", cmd];
+            msgModel = textModel;
+        }
             break;
     }
     if (msgModel) {
