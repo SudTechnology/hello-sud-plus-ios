@@ -251,6 +251,22 @@
     [self.iSudFSTAPP destroyMG];
 }
 
+/// 处理切换游戏
+/// @param gameID 新的游戏ID
+- (void)handleGameChange:(NSInteger)gameID {
+    if (gameID == 0) {
+        // 切换语音房间
+        self.gameId = 0;
+        self.roomType = HSAudio;
+        return;
+    }
+    [self logoutGame];
+    self.gameId = gameID;
+    self.gameInfoModel.currentPlayerUserId = HSAppManager.shared.loginUserInfo.userID;
+    [self loginGame];
+    self.roomType = HSGame;
+}
+
 /// 更新code
 /// @param code 新的code
 - (void)updateGameCode:(NSString *)code {

@@ -169,11 +169,8 @@
             weakSelf.roomType = HSAudio;
             msg = [ExChangeGameMsgModel makeMsg:0];
         } else if(m.gameId > 0) {
-            weakSelf.gameId = m.gameId;
-            weakSelf.gameInfoModel.currentPlayerUserId = HSAppManager.shared.loginUserInfo.userID;
-            [weakSelf loginGame];
-            weakSelf.roomType = HSGame;
             msg = [ExChangeGameMsgModel makeMsg:m.gameId];
+            [self handleGameChange:m.gameId];
         }
         // 发送游戏切换给其它用户
         if (msg) {

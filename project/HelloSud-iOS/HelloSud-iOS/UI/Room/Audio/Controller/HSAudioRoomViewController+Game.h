@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)loginGame;
 /// 退出游戏
 - (void)logoutGame;
+/// 处理切换游戏
+/// @param gameID 新的游戏ID
+- (void)handleGameChange:(NSInteger)gameID;
 @end
 
 NS_ASSUME_NONNULL_END
