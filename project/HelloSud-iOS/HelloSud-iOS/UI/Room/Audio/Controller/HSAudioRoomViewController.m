@@ -151,15 +151,20 @@
         }];
     };
     self.naviView.onTapGameCallBack = ^(HSGameList * _Nonnull m) {
+        ExChangeGameMsgModel *msg = nil;
         if (m.isAudioRoom) {
             weakSelf.roomType = HSAudio;
-        } else {
+            msg = [ExChangeGameMsgModel makeMsg:0];
+        } else if(m.gameId > 0) {
             weakSelf.gameId = m.gameId;
-            if (weakSelf.gameId > 0) {
-                weakSelf.gameInfoModel.currentPlayerUserId = HSAppManager.shared.loginUserInfo.userID;
-                [weakSelf loginGame];
-            }
+            weakSelf.gameInfoModel.currentPlayerUserId = HSAppManager.shared.loginUserInfo.userID;
+            [weakSelf loginGame];
             weakSelf.roomType = HSGame;
+            msg = [ExChangeGameMsgModel makeMsg:m.gameId];
+        }
+        // 发送游戏切换给其它用户
+        if (msg) {
+            [weakSelf sendMsg:msg isAddToShow:false];
         }
     };
 }
@@ -366,7 +371,7 @@
     
     if (self.roomType == HSAudioMic) {
         /// 销毁游戏
-        [self destroyMG];
+        [self logoutGame];
         [self.gameMicContentView setHidden:true];
         [self.audioMicContentView setHidden:false];
         self.gameView.hidden = YES;
@@ -486,7 +491,7 @@
 }
 
 - (void)dealloc {
-    [self destroyMG];
+    [self logoutGame];
 }
 
 #pragma mark - BDAlphaPlayerMetalViewDelegate

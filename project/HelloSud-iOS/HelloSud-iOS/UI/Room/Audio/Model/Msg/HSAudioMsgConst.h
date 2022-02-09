@@ -12,4 +12,5 @@
 #define CMD_PUBLIC_SEND_GIFT_NTF    0x02 /// 发送礼物
 #define CMD_UP_MIC_NTF              0x03 /// 上麦
 #define CMD_DOWN_MIC_NTF            0x04 /// 下麦
+#define CMD_GAME_CHANGE             0x05 /// 游戏切换
 #endif /* HSAudioMsgConst_h */

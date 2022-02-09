@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "HSAudioRoomViewController.h"
 #import "HSAudioRoomViewController+IM.h"
+#import "HSAudioRoomViewController+Game.h"
 #import "HSAudioRoomViewController+Voice.h"
 NS_ASSUME_NONNULL_BEGIN
 
