@@ -124,17 +124,26 @@
 
 /// 切换房间游戏接口
 /// @param roomId 房间ID
-- (void)reqSwitchGame:(long)roomId gameId:(long)gameId {
-    WeakSelf
+- (void)reqSwitchGame:(long)roomId gameId:(long)gameId success:(EmptyBlock)success fail:(ErrorBlock)fail {
+
     [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} success:^(NSDictionary *rootDict) {
         HSSwitchGameModel *model = [HSSwitchGameModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [SVProgressHUD showErrorWithStatus:model.retMsg];
+            if (fail) {
+                fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
+            }
             return;
+        }
+        if (success) {
+            success();
         }
         
     } failure:^(id error) {
         [SVProgressHUD showErrorWithStatus:[error debugDescription]];
+        if (fail) {
+            fail(error);
+        }
     }];
 }
 

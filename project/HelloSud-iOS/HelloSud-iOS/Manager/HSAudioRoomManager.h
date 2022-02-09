@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 切换房间游戏接口
 /// @param roomId 房间ID
-- (void)reqSwitchGame:(long)roomId gameId:(long)gameId;
+- (void)reqSwitchGame:(long)roomId gameId:(long)gameId success:(EmptyBlock)success fail:(ErrorBlock)fail;
 
 @end
 
