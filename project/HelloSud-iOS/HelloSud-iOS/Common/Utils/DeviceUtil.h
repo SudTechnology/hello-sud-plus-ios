@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)getAppBuildCode;
 
+/// 检测权限
+/// @param result 结果回调
++ (void)checkMicAuth:(void(^)(BOOL isAuth))result;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -236,11 +236,24 @@
             [self handleMicTap:emptyModel];
         }
             break;
-        case VoiceBtnStateTypeWaitOpen:
+        case VoiceBtnStateTypeWaitOpen:{
+            
             // 开启声音
-            self.operatorView.voiceBtnState = VoiceBtnStateTypeOnVoice;
-            [self startPublish:[NSString stringWithFormat:@"%ld", arc4random()]];
-
+            [DeviceUtil checkMicAuth:^(BOOL isAuth) {
+                if (isAuth) {
+                    self.operatorView.voiceBtnState = VoiceBtnStateTypeOnVoice;
+                    [self startPublish:[NSString stringWithFormat:@"%u", arc4random()]];
+                } else {
+                    // 提示开启权限
+                    [HSAlertView showTextAlert:@"无法访问麦克风，请到“设置-隐私“中开启麦克风访问权限" sureText:@"去开启" cancelText:@"暂时不用" onSureCallback:^{
+                        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                        if (url && [[UIApplication sharedApplication]canOpenURL:url]) {
+                            [[UIApplication sharedApplication] openURL:url];
+                        }
+                    } onCloseCallback:nil];
+                }
+            }];
+        }
             break;
         case VoiceBtnStateTypeOnVoice:
             // 关闭声音
