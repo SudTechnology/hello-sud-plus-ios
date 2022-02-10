@@ -106,10 +106,11 @@
                 [weakSelf.headerGameList addObject:arr];
                 [weakSelf.dataList addObject:@[]];
             } else {
-                [weakSelf.headerGameList subarrayWithRange:NSMakeRange(0, 6)];
-                
-                NSMutableArray <HSGameList *> *cellDataArray = [NSMutableArray arrayWithArray:[arr subarrayWithRange:NSMakeRange(6, arr.count)]];
-                
+                NSMutableArray <HSGameList *> *h_arr = NSMutableArray.new;
+                [h_arr setArray:[arr subarrayWithRange:NSMakeRange(0, 6)]];
+                [weakSelf.headerGameList addObject:h_arr];
+//                [weakSelf.headerGameList setArray:[arr subarrayWithRange:NSMakeRange(0, 6)]];
+                NSMutableArray <HSGameList *> *cellDataArray = [NSMutableArray arrayWithArray:[arr subarrayWithRange:NSMakeRange(6, arr.count-6)]];
                 
                 /// 求余 填满整个屏幕
                 double fmodCount = fmod(cellDataArray.count, 4);
