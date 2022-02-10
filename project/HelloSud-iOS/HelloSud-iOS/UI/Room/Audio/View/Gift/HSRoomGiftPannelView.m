@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UILabel *sendToLabel;
 @property (nonatomic, strong) UIButton *checkAllBtn;
 @property (nonatomic, strong) UIButton *sendBtn;
+@property (nonatomic, strong) UIView *sendView;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) HSRoomGiftContentView *giftContentView;
 @property (nonatomic, strong)HSBlurEffectView *blurView;
@@ -34,7 +35,7 @@
     [self addSubview:self.lineView];
     [self addSubview:self.collectionView];
     [self addSubview:self.giftContentView];
-    [self addSubview:self.sendBtn];
+    [self addSubview:self.sendView];
 }
 
 - (void)hsLayoutViews {
@@ -68,10 +69,10 @@
         make.top.mas_equalTo(self.lineView.mas_bottom).offset(10);
         make.height.mas_equalTo(110);
     }];
-    [self.sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.sendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.giftContentView.mas_bottom).offset(24);
         make.right.mas_equalTo(-16);
-        make.size.mas_equalTo(CGSizeMake(56, 32));
+        make.size.mas_equalTo(CGSizeMake(56 + 56, 32));
         make.bottom.mas_equalTo(-kAppSafeBottom - 8);
     }];
 }
@@ -214,6 +215,43 @@
         [_sendBtn addTarget:self action:@selector(onBtnSend:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sendBtn;
+}
+
+- (UIView *)sendView {
+    if (!_sendView) {
+        _sendView = [[UIView alloc] init];
+        _sendView.backgroundColor = [UIColor blackColor];
+        _sendView.layer.borderWidth = 1;
+        _sendView.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1].CGColor;
+        _sendView.layer.masksToBounds = true;
+        
+        UILabel *numLabel = [[UILabel alloc] init];
+        numLabel.text = @"x1";
+        numLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        numLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
+        
+        UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"room_gift_send_num"]];
+        [_sendView addSubview:numLabel];
+        [_sendView addSubview:iconView];
+        [_sendView addSubview:self.sendBtn];
+        
+        [numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.centerY.mas_equalTo(_sendView);
+            make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        }];
+        [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(numLabel.mas_right).offset(5);
+            make.centerY.mas_equalTo(_sendView);
+            make.size.mas_equalTo(CGSizeMake(12, 12));
+        }];
+        [self.sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(54);
+            make.top.right.bottom.mas_equalTo(_sendView);
+            make.width.mas_equalTo(56);
+        }];
+    }
+    return _sendView;
 }
 
 - (UIView *)lineView {
