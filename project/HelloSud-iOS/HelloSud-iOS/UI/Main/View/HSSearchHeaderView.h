@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HSSearchHeaderView : BaseView
+@property (nonatomic, strong) UITextField *searchTextField;
 
 @end
 
