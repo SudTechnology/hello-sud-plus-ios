@@ -96,6 +96,7 @@
         }
         NSSet *set = [NSSet setWithArray:originalGameArr];
         HSAppManager.shared.gameList = [set allObjects];
+        HSAppManager.shared.sceneList = model.data.sceneList;
         
         /// dataList  headerGameList  headerSceneList 业务需求赋值
         for (HSSceneList *m in model.data.sceneList) {
