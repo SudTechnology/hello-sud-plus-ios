@@ -75,6 +75,16 @@
     }
 }
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *v = self.textFieldView;
+    CGRect frame = [v convertRect:v.bounds toView:self];
+    BOOL contains = CGRectContainsPoint(frame, point);
+    if (!contains) {
+        [self.textFieldView resignFirstResponder];
+        return self;
+    }
+    return [super hitTest:point withEvent:event];
+}
 
 - (UIImageView *)headerView {
     if (!_headerView) {
@@ -118,7 +128,7 @@
 - (UITextField *)searchTextField {
     if (!_searchTextField) {
         _searchTextField = [[UITextField alloc] init];
-        _searchTextField.placeholder = @"房间ID";
+        _searchTextField.placeholder = @"输入房间号";
         _searchTextField.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         _searchTextField.textColor = UIColor.blackColor;
         _searchTextField.keyboardType = UIKeyboardTypeNumberPad;
