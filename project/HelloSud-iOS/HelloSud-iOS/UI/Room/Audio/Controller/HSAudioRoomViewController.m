@@ -170,7 +170,7 @@
             msg = [ExChangeGameMsgModel makeMsg:0];
         } else if(m.gameId > 0) {
             msg = [ExChangeGameMsgModel makeMsg:m.gameId];
-            [self handleGameChange:m.gameId];
+            [weakSelf handleGameChange:m.gameId];
         }
         // 发送游戏切换给其它用户
         if (msg) {
