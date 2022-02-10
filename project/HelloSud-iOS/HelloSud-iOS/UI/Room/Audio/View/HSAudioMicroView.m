@@ -183,7 +183,7 @@
             NSString *state = m.state;
             /// 设置队长状态 - （队长有且只有一个）
             if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
-                [self.gameCaptainView setHidden:!m.isCaptain];
+                [self.gameCaptainView setHidden:!(m.isCaptain && m.userId == self.model.user.userID)];
             }
             if (m.userId != self.model.user.userID) {
                 return;

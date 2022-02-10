@@ -75,7 +75,7 @@
     }
     
     HSAlertView *alert = [[HSAlertView alloc] init];
-    alert.contentView.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2" alpha:0.9];
+    alert.contentView.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2" alpha:1];
     alert.isHitTest = isHitTest;
     alert.customView = view;
     alert.contentView.layer.cornerRadius = 8;
