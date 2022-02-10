@@ -29,9 +29,8 @@
 
 - (void)setModel:(BaseModel *)model {
     
-    /// 上下麦消息通知
-    if ([model isKindOfClass:HSAudioMsgMicModel.class]) {
-        HSAudioMsgMicModel *m = (HSAudioMsgMicModel *)model;
+    if ([model isKindOfClass:HSAudioMsgSystemModel.class]) {
+        HSAudioMsgSystemModel *m = (HSAudioMsgSystemModel *)model;
         self.msgLabel.attributedText = m.attrContent;
     }
 }

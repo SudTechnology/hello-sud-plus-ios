@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否准备
 @property (nonatomic, assign) BOOL isReady;
 /// 是否正在游戏中
-@property (nonatomic, assign) BOOL isGaming;
+@property (nonatomic, assign) BOOL isInGame;
 @end
 
 NS_ASSUME_NONNULL_END

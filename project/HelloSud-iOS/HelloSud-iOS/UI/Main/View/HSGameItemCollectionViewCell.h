@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HSGameItemCollectionViewCell: BaseCollectionViewCell
+@property (nonatomic, strong) UILabel *inGameLabel;
 
 @end
 

@@ -11,13 +11,14 @@
 #import "HSAudioRoomViewController+IM.h"
 
 @interface HSRoomGiftPannelView ()<UICollectionViewDelegate, UICollectionViewDataSource>
+@property (nonatomic, strong) UIView *topView;
 @property (nonatomic, strong) UILabel *sendToLabel;
 @property (nonatomic, strong) UIButton *checkAllBtn;
 @property (nonatomic, strong) UIButton *sendBtn;
 @property (nonatomic, strong) UIView *sendView;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) HSRoomGiftContentView *giftContentView;
-@property (nonatomic, strong)HSBlurEffectView *blurView;
+@property (nonatomic, strong) HSBlurEffectView *blurView;
 /// 选择用户
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray<HSAudioRoomMicModel *> *userDataList;
@@ -30,10 +31,11 @@
 
 - (void)hsAddViews {
     [self addSubview:self.blurView];
-    [self addSubview:self.sendToLabel];
-    [self addSubview:self.checkAllBtn];
-    [self addSubview:self.lineView];
-    [self addSubview:self.collectionView];
+    [self addSubview:self.topView];
+    [self.topView addSubview:self.sendToLabel];
+    [self.topView addSubview:self.checkAllBtn];
+    [self.topView addSubview:self.lineView];
+    [self.topView addSubview:self.collectionView];
     [self addSubview:self.giftContentView];
     [self addSubview:self.sendView];
 }
@@ -41,6 +43,10 @@
 - (void)hsLayoutViews {
     [self.blurView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
+    }];
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_equalTo(self);
+        make.height.mas_equalTo(0);
     }];
     [self.sendToLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(16);
@@ -66,7 +72,7 @@
     }];
     [self.giftContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self);
-        make.top.mas_equalTo(self.lineView.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.topView.mas_bottom).offset(10);
         make.height.mas_equalTo(110);
     }];
     [self.sendView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,6 +96,18 @@
         }
     }
     [self.collectionView reloadData];
+    
+    if (self.userDataList.count > 0) {
+        [self.topView setHidden:false];
+        [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(72);
+        }];
+    } else {
+        [self.topView setHidden:true];
+        [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }
 }
 
 - (void)onBtnSend:(UIButton *)sender {
@@ -179,6 +197,13 @@
         _userDataList = [NSMutableArray array];
     }
     return _userDataList;
+}
+
+- (UIView *)topView {
+    if (!_topView) {
+        _topView = [[UIView alloc] init];
+    }
+    return _topView;
 }
 
 - (UILabel *)sendToLabel {
