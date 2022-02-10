@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *fieldView;
+@property (nonatomic, strong) UILabel *nameTitleLabel;
 @property (nonatomic, strong) UITextField *nameTextField;
 @property (nonatomic, strong) UIButton *changeBtn;
 @property (nonatomic, strong) UIButton *loginBtn;
@@ -38,6 +39,7 @@
 - (void)hsAddViews {
     [self.view addSubview:self.iconImageView];
     [self.view addSubview:self.titleLabel];
+    [self.view addSubview:self.nameTitleLabel];
     [self.view addSubview:self.fieldView];
     [self.fieldView addSubview:self.nameTextField];
     [self.fieldView addSubview:self.changeBtn];
@@ -125,9 +127,14 @@
         make.top.mas_equalTo(self.iconImageView.mas_bottom).offset(32);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
+    [self.nameTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(30);
+        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(24);
+        make.height.with.mas_greaterThanOrEqualTo(0);
+    }];
     [self.fieldView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(30);
-        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(32);
+        make.top.mas_equalTo(self.nameTitleLabel.mas_bottom).offset(8);
         make.right.mas_equalTo(-30);
         make.height.mas_equalTo(48);
     }];
@@ -165,9 +172,19 @@
         _titleLabel.text = @"欢迎体验\nHelloSud";
         _titleLabel.numberOfLines = 0;
         _titleLabel.textColor = [UIColor colorWithHexString:@"#13141A" alpha:1];
-        _titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
+        _titleLabel.font = [UIFont systemFontOfSize:24 weight:UIFontWeightSemibold];
     }
     return _titleLabel;
+}
+
+- (UILabel *)nameTitleLabel {
+    if (!_nameTitleLabel) {
+        _nameTitleLabel = [[UILabel alloc] init];
+        _nameTitleLabel.text = @"你的昵称";
+        _nameTitleLabel.textColor = [UIColor colorWithHexString:@"#13141A" alpha:1];
+        _nameTitleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
+    }
+    return _nameTitleLabel;
 }
 
 - (UIView *)fieldView {
