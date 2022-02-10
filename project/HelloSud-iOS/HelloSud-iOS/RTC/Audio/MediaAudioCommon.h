@@ -9,6 +9,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 房间状态
+typedef NS_ENUM(NSUInteger, MediaAudioEngineRoomState) {
+    /// 已断开
+    MediaAudioEngineStateDisconnected = 0,
+    /// 连接中
+    MediaAudioEngineStateConnecting = 1,
+    /// 已连接
+    MediaAudioEngineStateConnected = 2
+};
+
 /// 媒体流更新类型
 typedef NS_ENUM(NSInteger, MediaAudioEngineUpdateType) {
     /// Add

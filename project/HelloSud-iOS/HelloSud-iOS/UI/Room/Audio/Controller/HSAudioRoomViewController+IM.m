@@ -23,6 +23,14 @@
     }
 }
 
+/// 发送进房消息
+- (void)sendEnterRoomMsg {
+    self.isEnteredRoom = YES;
+    HSAudioMsgTextModel *msg = [HSAudioMsgTextModel makeMsg:@"进入房间"];
+    [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NTF];
+    [self sendMsg:msg isAddToShow:YES];
+}
+
 /// 接收引擎回调回来消息响应
 - (void)onIMRecvCustomCommand:(NSString *)command fromUser:(MediaUser *)fromUser roomID:(NSString *)roomID {
     NSLog(@"recv command:\nroom:%@\nuserID:%@\nnickname:%@,content:%@", roomID, fromUser.userID,fromUser.nickname, command);
@@ -82,6 +90,14 @@
             // 游戏切换
             ExChangeGameMsgModel *m = [ExChangeGameMsgModel decodeModel:command];
             [self handleGameChange:m.gameID];
+        }
+            break;
+            
+        case CMD_ENTER_ROOM_NTF: {
+            // 进入房间
+            HSAudioMsgTextModel *m = [HSAudioMsgTextModel decodeModel:command];
+            m.content = @"进入了房间";
+            msgModel = m;
         }
             break;
         default:

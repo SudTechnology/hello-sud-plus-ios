@@ -23,7 +23,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSEnterRoomModel *model = [HSEnterRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             return;
         }
         HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
@@ -33,7 +33,7 @@
         vc.roomName = model.data.roomName;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
+        [ToastUtil show:[error debugDescription]];
     }];
 }
 
@@ -43,12 +43,12 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSExitRoomModel *model = [HSExitRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             return;
         }
         
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
+        [ToastUtil show:[error debugDescription]];
     }];
 }
 
@@ -58,7 +58,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:@{@"gameId": @(gameId), @"sceneType": @(sceneType)} success:^(NSDictionary *rootDict) {
         HSMatchRoomModel *model = [HSMatchRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             return;
         }
         HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
@@ -68,7 +68,7 @@
         vc.roomName = model.data.roomName;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
+        [ToastUtil show:[error debugDescription]];
     }];
 }
 
@@ -81,7 +81,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
         HSSwitchMicModel *model = [HSSwitchMicModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             return;
         }
         if (handleType == 0) {
@@ -95,7 +95,7 @@
         }
         
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
+        [ToastUtil show:[error debugDescription]];
     }];
 }
 
@@ -106,7 +106,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSMicListModel *model = [HSMicListModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             if (fail) {
                 fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
             }
@@ -117,7 +117,7 @@
         }
         
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
+        [ToastUtil show:[error debugDescription]];
         if (fail) {
             fail(error);
         }
@@ -131,7 +131,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} success:^(NSDictionary *rootDict) {
         HSSwitchGameModel *model = [HSSwitchGameModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             if (fail) {
                 fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
             }
@@ -142,7 +142,7 @@
         }
         
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
+        [ToastUtil show:[error debugDescription]];
         if (fail) {
             fail(error);
         }
