@@ -119,6 +119,7 @@
                     weakSelf.model.user = nil;
                 } else {
                     weakSelf.model.user = msgModel.sendUser;
+                    weakSelf.model.user.roleType = msgModel.roleType;
                     weakSelf.model.streamID = msgModel.streamID;
                 }
             } else if (weakSelf.model.user != nil && [msgModel.sendUser.userID isEqualToString:weakSelf.model.user.userID]) {
