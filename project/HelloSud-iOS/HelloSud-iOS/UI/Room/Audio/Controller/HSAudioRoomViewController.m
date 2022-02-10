@@ -56,10 +56,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     HSAudioRoomManager.shared.currentRoomVC = self;
-    MediaUser *user = [MediaUser user:HSAppManager.shared.loginUserInfo.userID nickname:HSAppManager.shared.loginUserInfo.name];
-    /// 设置语音引擎事件回调
-    [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
-    [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
+    [self loginRoom];
     if (self.gameId > 0) {
         self.gameInfoModel.currentPlayerUserId = HSAppManager.shared.loginUserInfo.userID;
         [self loginGame];
@@ -157,6 +154,7 @@
     self.naviView.closeTapBlock = ^(UIButton *sender) {
         [HSAlertView showTextAlert:@"确认关闭/离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             [HSAudioRoomManager.shared reqExitRoom:weakSelf.roomID.longLongValue];
+            [weakSelf logoutRoom];
             [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
         } onCloseCallback:^{
         }];
