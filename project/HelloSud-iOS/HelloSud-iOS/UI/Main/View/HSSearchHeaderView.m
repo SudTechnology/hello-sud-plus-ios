@@ -12,7 +12,6 @@
 @property (nonatomic, strong) UILabel *userNameLabel;
 @property (nonatomic, strong) UILabel *userIdLabel;
 @property (nonatomic, strong) UIView *textFieldView;
-@property (nonatomic, strong) UITextField *searchTextField;
 @property (nonatomic, strong) UIButton *searchBtn;
 @end
 
@@ -73,17 +72,6 @@
     if (userInfo.icon.length > 0) {
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:userInfo.icon]];
     }
-}
-
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    UIView *v = self.textFieldView;
-    CGRect frame = [v convertRect:v.bounds toView:self];
-    BOOL contains = CGRectContainsPoint(frame, point);
-    if (!contains) {
-        [self.textFieldView resignFirstResponder];
-        return self;
-    }
-    return [super hitTest:point withEvent:event];
 }
 
 - (UIImageView *)headerView {
@@ -149,6 +137,7 @@
 }
 
 - (void)enterEvent {
+    [self.searchTextField resignFirstResponder];
     [HSAudioRoomManager.shared reqEnterRoom:self.searchTextField.text.longLongValue];
 }
 
