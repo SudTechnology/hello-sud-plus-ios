@@ -33,6 +33,8 @@
     [self.window makeKeyAndVisible];
     [self configBugly];
     [self configAudioEngine];
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     return YES;
 }
 
