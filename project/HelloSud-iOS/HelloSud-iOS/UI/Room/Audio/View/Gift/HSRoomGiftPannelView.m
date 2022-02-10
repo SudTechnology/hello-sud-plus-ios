@@ -84,7 +84,7 @@
 - (void)hsUpdateUI {
     NSArray *arrModel = HSAudioRoomManager.shared.currentRoomVC.dicMicModel.allValues;
     for (HSAudioRoomMicModel *m in arrModel) {
-        if (m.user != nil) {
+        if (m.user != nil && ![HSAppManager.shared.loginUserInfo isMeByUserID:m.user.userID]) {
             m.isSelected = NO;
             [self.userDataList addObject:m];
         }
