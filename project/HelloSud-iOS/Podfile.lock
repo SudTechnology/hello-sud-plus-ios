@@ -16,6 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - BDAlphaPlayer (1.2.0)
   - Bugly (2.5.90)
+  - IQKeyboardManager (6.5.9)
   - libwebp (1.2.1):
     - libwebp/demux (= 1.2.1)
     - libwebp/mux (= 1.2.1)
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
   - BDAlphaPlayer (~> 1.2.0)
   - Bugly (= 2.5.90)
+  - IQKeyboardManager
   - lottie-ios (~> 2.5.3)
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
@@ -67,6 +69,7 @@ SPEC REPOS:
     - AFNetworking
     - BDAlphaPlayer
     - Bugly
+    - IQKeyboardManager
     - libwebp
     - lottie-ios
     - Masonry
@@ -93,6 +96,7 @@ SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   BDAlphaPlayer: 8af2048ee8ef8c31a73a99f83882cf4242e89df0
   Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
+  IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -106,6 +110,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: f3209d5f4655d76d9b467a2f48661a5656c74a01
+PODFILE CHECKSUM: 5ad538e9356527c8da0c130b9aac1e8683b31942
 
 COCOAPODS: 1.11.2
