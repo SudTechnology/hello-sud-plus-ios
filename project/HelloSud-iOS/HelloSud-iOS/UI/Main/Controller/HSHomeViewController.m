@@ -114,10 +114,12 @@
                 
                 /// 求余 填满整个屏幕
                 double fmodCount = fmod(cellDataArray.count, 4);
-                for (int i = fmodCount; i < 4; i++) {
-                    HSGameList *m = [[HSGameList alloc] init];
-                    m.isBlank = true;
-                    [cellDataArray addObject:m];
+                if (fmodCount > 0) {
+                    for (int i = fmodCount; i < 4; i++) {
+                        HSGameList *m = [[HSGameList alloc] init];
+                        m.isBlank = true;
+                        [cellDataArray addObject:m];
+                    }
                 }
                 
                 [weakSelf.dataList addObject:cellDataArray];
