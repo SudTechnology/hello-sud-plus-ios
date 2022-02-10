@@ -109,12 +109,11 @@
                 NSMutableArray <HSGameList *> *h_arr = NSMutableArray.new;
                 [h_arr setArray:[arr subarrayWithRange:NSMakeRange(0, 6)]];
                 [weakSelf.headerGameList addObject:h_arr];
-//                [weakSelf.headerGameList setArray:[arr subarrayWithRange:NSMakeRange(0, 6)]];
                 NSMutableArray <HSGameList *> *cellDataArray = [NSMutableArray arrayWithArray:[arr subarrayWithRange:NSMakeRange(6, arr.count-6)]];
                 
                 /// 求余 填满整个屏幕
                 double fmodCount = fmod(cellDataArray.count, 4);
-                for (int i = 0; i < fmodCount; i++) {
+                for (int i = fmodCount; i < 4; i++) {
                     HSGameList *m = [[HSGameList alloc] init];
                     m.isBlank = true;
                     [cellDataArray addObject:m];
