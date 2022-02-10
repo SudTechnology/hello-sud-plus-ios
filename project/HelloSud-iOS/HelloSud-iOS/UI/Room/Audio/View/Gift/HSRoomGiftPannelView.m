@@ -120,6 +120,7 @@
     [self.checkAllBtn setSelected:!self.checkAllBtn.isSelected];
     for (HSAudioRoomMicModel *m in self.userDataList) {
         m.isSelected = self.checkAllBtn.isSelected ? true : false;
+        [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
     }
     [self.collectionView reloadData];
 }
@@ -139,18 +140,16 @@
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    self.userDataList[indexPath.row].isSelected = !self.userDataList[indexPath.row].isSelected;
+    [self.collectionView reloadData];
     HSAudioRoomMicModel *m = self.userDataList[indexPath.row];
-    m.isSelected = !m.isSelected;
-    HSGiftUserCollectionViewCell *c = (HSGiftUserCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    c.model = m;
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    self.userDataList[indexPath.row].isSelected = !self.userDataList[indexPath.row].isSelected;
+    [self.collectionView reloadData];
     HSAudioRoomMicModel *m = self.userDataList[indexPath.row];
-    m.isSelected = !m.isSelected;
-    HSGiftUserCollectionViewCell *c = (HSGiftUserCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    c.model = m;
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
 }
 
