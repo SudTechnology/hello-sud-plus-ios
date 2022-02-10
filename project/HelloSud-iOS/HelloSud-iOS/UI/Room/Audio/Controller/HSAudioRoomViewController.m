@@ -19,6 +19,7 @@
 #import "HSGameMicContentView.h"
 #import "HSAudioMicroView.h"
 #import "HSMicOperateView.h"
+#import "HSRoomGiftPannelView.h"
 
 @interface HSAudioRoomViewController () <BDAlphaPlayerMetalViewDelegate>
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -57,6 +58,7 @@
     // Do any additional setup after loading the view.
     HSAudioRoomManager.shared.currentRoomVC = self;
     [self loginRoom];
+//    [self sendEnterRoomMsg];
     if (self.gameId > 0) {
         self.gameInfoModel.currentPlayerUserId = HSAppManager.shared.loginUserInfo.userID;
         [self loginGame];
@@ -120,7 +122,9 @@
 - (void)hsConfigEvents {
     WeakSelf
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
-
+        [HSSheetView show:[[HSRoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
+            [weakSelf.operatorView resetAllSelectedUser];
+        }];
     };
     self.operatorView.inputTapBlock = ^(UITapGestureRecognizer *gesture) {
         [weakSelf.inputView hsBecomeFirstResponder];
@@ -232,7 +236,7 @@
                 }
             }
             if (emptyModel == nil) {
-                [SVProgressHUD showErrorWithStatus:@"没有空麦位"];
+                [ToastUtil show:@"没有空麦位"];
                 return;
             }
             self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;

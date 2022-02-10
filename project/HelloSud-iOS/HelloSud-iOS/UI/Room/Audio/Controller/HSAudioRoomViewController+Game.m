@@ -22,7 +22,7 @@
         weakSelf.gameInfoModel.code = gameInfo.code;
         [weakSelf loadGame];
     } fail:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:error.debugDescription];
+        [ToastUtil show:error.debugDescription];
     }];
 }
 
@@ -32,7 +32,7 @@
     NSString *appID = HSAppManager.shared.configData.sudCfg.appId;
     NSString *appKey = HSAppManager.shared.configData.sudCfg.appKey;
     if (appID.length == 0 || appKey.length == 0) {
-        [SVProgressHUD showErrorWithStatus:@"Game appID or appKey is empty"];
+        [ToastUtil show:@"Game appID or appKey is empty"];
         return;
     }
     [self initGameSDKWithAppID:appID appKey:appKey isTestEnv:YES mgID:self.gameId rootView:self.gameView];
@@ -52,7 +52,7 @@
         // 调用小游戏接口更新令牌
         [self updateGameCode:gameInfo.code];
     } fail:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:error.debugDescription];
+        [ToastUtil show:error.debugDescription];
     }];
     
     // 回调结果
@@ -276,7 +276,7 @@
 
 #pragma mark =======处理返回消息=======
 - (void)handleRetCode:(NSString *)retCode errorMsg:(NSString *)msg {
-    [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@出错，错误码:%@", msg, retCode]];
+    [ToastUtil show:[NSString stringWithFormat:@"%@出错，错误码:%@", msg, retCode]];
 }
 
 @end

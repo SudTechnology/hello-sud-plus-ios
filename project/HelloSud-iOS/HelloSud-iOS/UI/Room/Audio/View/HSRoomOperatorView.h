@@ -27,6 +27,9 @@ typedef NS_ENUM(NSInteger, VoiceBtnStateType) {
 
 /// 上麦按钮状态
 @property(nonatomic, assign)VoiceBtnStateType voiceBtnState;
+
+/// 重置所有选择用户
+- (void)resetAllSelectedUser;
 @end
 
 NS_ASSUME_NONNULL_END

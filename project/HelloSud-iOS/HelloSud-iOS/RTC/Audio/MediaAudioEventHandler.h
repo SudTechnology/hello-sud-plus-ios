@@ -62,6 +62,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param fromUser 用户
 /// @param roomID 房间ID
 - (void)onIMRecvCustomCommand:(NSString *)command fromUser:(MediaUser *)fromUser roomID:(NSString *)roomID;
+
+/// 房间状态通知
+/// @param state 状态
+/// @param errorCode 错误码
+/// @param extendedData 扩展数据
+/// @param roomID 房间ID
+- (void)onRoomStateUpdate:(MediaAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(nullable NSDictionary *)extendedData roomID:(NSString *)roomID;
 @end
 
 NS_ASSUME_NONNULL_END

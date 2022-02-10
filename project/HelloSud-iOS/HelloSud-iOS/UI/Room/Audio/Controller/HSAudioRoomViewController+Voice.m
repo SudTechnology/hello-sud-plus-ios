@@ -88,4 +88,10 @@
     }
     [self hsUpdateUI];
 }
+
+- (void)onRoomStateUpdate:(MediaAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {
+    if (state == MediaAudioEngineStateConnected && !self.isSentEnterRoom) {
+        [self sendEnterRoomMsg];
+    }
+}
 @end

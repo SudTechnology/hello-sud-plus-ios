@@ -22,7 +22,7 @@
     [RequestService postRequestWithApi:kBASEURL(@"game-login/v1") param:@{} success:^(NSDictionary *rootDict) {
         HSRespGameInfoModel *model = [HSRespGameInfoModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             if (fail) {
                 fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
             }

@@ -12,7 +12,7 @@
 @implementation ToastUtil
 /// 展示信息，挂载当前window上
 /// @param msg 需要展示内容
-+ (void)showToast:(NSString *)msg {
++ (void)show:(NSString *)msg {
     if (msg.length == 0) {
         return;
     }
