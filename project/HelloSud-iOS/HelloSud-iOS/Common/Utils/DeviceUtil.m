@@ -35,7 +35,9 @@
     if (status != AVAuthorizationStatusAuthorized) {
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted) {
             if (result) {
-                result(granted);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    result(granted);
+                });
             }
         }];
         return;
