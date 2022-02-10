@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) HSConfigData *configData;
 /// 所有游戏列表
 @property(nonatomic, strong) NSArray <HSGameList *> *gameList;
+/// 所有sceneList游戏列表
+@property(nonatomic, strong) NSArray <HSSceneList *> *sceneList;
 
 + (instancetype)shared;
 
