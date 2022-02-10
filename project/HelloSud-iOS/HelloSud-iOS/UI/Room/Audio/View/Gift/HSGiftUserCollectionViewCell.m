@@ -49,6 +49,12 @@
         }
         self.micNumLabel.text = [NSString stringWithFormat:@"%ld麦", m.micIndex];
         self.selectView.image = m.isSelected ? [UIImage imageNamed:@"room_gift_user_select"] : nil;
+        
+        
+        self.headerView.layer.borderWidth = m.isSelected ? 1 : 0;
+        self.headerView.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1].CGColor;
+        
+        self.micNumLabel.layer.borderColor = [UIColor colorWithHexString:m.isSelected ? @"#FFFFFF" : @"#666666" alpha:1].CGColor;
     }
 }
 
