@@ -14,7 +14,7 @@
 /// 响应用户信息model
 @implementation HSRespUserDataModel
 + (NSDictionary *)mj_objectClassInArray {
-    return @{@"userInfos": [HSUserInfoModel class]};
+    return @{@"userInfoList": [HSUserInfoModel class]};
 }
 
 @end
