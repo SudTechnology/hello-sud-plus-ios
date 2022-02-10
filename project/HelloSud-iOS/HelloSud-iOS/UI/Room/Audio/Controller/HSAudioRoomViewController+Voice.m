@@ -25,7 +25,7 @@
 /// @param soundLevel 本地音量级别，取值范围[0, 100]
 - (void)onCapturedSoundLevelUpdate:(NSNumber*)soundLevel {
     if (soundLevel.intValue > 0) {
-        NSLog(@"local voice:%@", soundLevel);
+//        NSLog(@"local voice:%@", soundLevel);
         [[NSNotificationCenter defaultCenter]postNotificationName:NTF_LOCAL_VOICE_VOLUME_CHANGED object:nil userInfo:@{@"volume":soundLevel}];
     }
 }
