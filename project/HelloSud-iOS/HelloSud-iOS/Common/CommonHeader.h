@@ -18,7 +18,11 @@ typedef void(^EmptyBlock)(void);
 typedef void(^ErrorBlock)(NSError *error);
 
 
-
+/// Utils
+#import "Constant.h"
+#import "AppUtil.h"
+#import "DeviceUtil.h"
+#import "ToastUtil.h"
 /// Base
 #import "BaseView.h"
 #import "BaseModel.h"
@@ -30,10 +34,7 @@ typedef void(^ErrorBlock)(NSError *error);
 #import "UIColor+Extension.h"
 #import "UIDevice+Extension.h"
 #import "NSError+Custom.h"
-/// Utils
-#import "Constant.h"
-#import "AppUtil.h"
-#import "DeviceUtil.h"
+
 /// Views
 #import "HSSheetView.h"
 #import "HSWebViewController.h"
