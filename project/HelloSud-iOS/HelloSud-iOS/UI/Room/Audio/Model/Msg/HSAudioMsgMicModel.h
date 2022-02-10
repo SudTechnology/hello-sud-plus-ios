@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 麦位索引
 @property(nonatomic, assign)NSInteger micIndex;
+/// 麦位角色
+@property(nonatomic, assign)NSInteger roleType;
 /// 流ID
 @property(nonatomic, copy, nullable)NSString *streamID;
 

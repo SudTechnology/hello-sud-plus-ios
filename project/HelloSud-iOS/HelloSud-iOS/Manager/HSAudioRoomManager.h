@@ -14,10 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房间管理
 @interface HSAudioRoomManager : NSObject
-+ (instancetype)shared;
-
 /// 当前房间VC
 @property(nonatomic, weak)HSAudioRoomViewController *currentRoomVC;
+
+/// 当前用户在房间角色
+@property(nonatomic, assign)NSInteger roleType;
+/// 当前用户麦位
+@property(nonatomic, assign)NSInteger micIndex;
+
++ (instancetype)shared;
 
 /// 请求进入房间
 /// @param roomId 房间ID
