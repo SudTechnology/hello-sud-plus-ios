@@ -51,7 +51,7 @@
         HSAudioMsgMicModel *msgModel = note.userInfo[@"msgModel"];
         if ([msgModel isKindOfClass:HSAudioMsgMicModel.class] ) {
             // 操作麦位与当前符合
-            if ([HSAppManager.shared.loginUserInfo isMeByUserID:msgModel.sendUser.userID]) {
+            if (HSAudioRoomManager.shared.micIndex == msgModel.micIndex) {
                 if (msgModel.cmd == CMD_DOWN_MIC_NTF) {
                     // 下麦
                     weakSelf.voiceBtnState = VoiceBtnStateTypeNormal;

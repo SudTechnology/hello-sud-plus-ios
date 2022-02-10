@@ -17,6 +17,12 @@
     return g_manager;
 }
 
+/// 重置用户信息
+- (void)resetRoomInfo {
+    self.roleType = 0;
+    self.micIndex = -1;
+}
+
 /// 请求进入房间
 /// @param roomId 房间ID
 - (void)reqEnterRoom:(long)roomId {
@@ -39,7 +45,8 @@
 
 /// 请求退出房间
 /// @param roomId 房间ID
-- (void)reqExitRoom:(long)roomId{
+- (void)reqExitRoom:(long)roomId {
+    [self resetRoomInfo];
     [RequestService postRequestWithApi:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSExitRoomModel *model = [HSExitRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
@@ -77,7 +84,7 @@
 /// @param micIndex 麦位索引
 /// @param handleType 0：上麦 1: 下麦
 - (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType {
-    WeakSelf
+    
     [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
         HSSwitchMicModel *model = [HSSwitchMicModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
@@ -86,6 +93,8 @@
         }
         if (handleType == 0) {
             HSAudioMsgMicModel *upMicModel = [HSAudioMsgMicModel makeUpMicMsgWithMicIndex:micIndex];
+            self.micIndex = micIndex;
+            upMicModel.roleType = self.roleType;
             upMicModel.streamID = model.data.streamId;
             [self.currentRoomVC sendMsg:upMicModel isAddToShow:YES];
         } else {
@@ -102,7 +111,7 @@
 /// 查询房间麦位列表
 /// @param roomId 房间ID
 - (void)reqMicList:(long)roomId success:(void(^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail {
-    WeakSelf
+
     [RequestService postRequestWithApi:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSMicListModel *model = [HSMicListModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
