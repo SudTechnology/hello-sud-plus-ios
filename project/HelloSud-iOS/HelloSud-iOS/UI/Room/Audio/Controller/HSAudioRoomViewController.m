@@ -58,6 +58,7 @@
     // Do any additional setup after loading the view.
     HSAudioRoomManager.shared.currentRoomVC = self;
     [self loginRoom];
+//    [self sendEnterRoomMsg];
     if (self.gameId > 0) {
         self.gameInfoModel.currentPlayerUserId = HSAppManager.shared.loginUserInfo.userID;
         [self loginGame];
