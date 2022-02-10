@@ -70,6 +70,8 @@ static NSString* MG_COMMON_PLAYER_PLAYING   = @"mg_common_player_playing";
 static NSString* MG_COMMON_PLAYER_ONLINE   = @"mg_common_player_online";
 /// 玩家换游戏位状态
 static NSString* MG_COMMON_PLAYER_CHANGE_SEAT   = @"mg_common_player_change_seat";
+/// 游戏状态
+static NSString* MG_COMMON_GAME_STATE   = @"mg_common_game_state";
 
 /// 你画我猜
 /// 选词中

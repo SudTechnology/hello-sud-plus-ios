@@ -24,7 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL keyWordHiting;
 /// 是否准备
 @property (nonatomic, assign) BOOL isReady;
-/// 是否正在游戏中
+// 游戏状态： 0 = 空闲 1 = loading 2 = playing
+@property (nonatomic, assign) NSInteger gameState;
+/// true 已加入，false 未加入
 @property (nonatomic, assign) BOOL isInGame;
 @end
 
