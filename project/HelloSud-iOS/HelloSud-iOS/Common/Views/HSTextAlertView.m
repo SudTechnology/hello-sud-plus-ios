@@ -100,8 +100,8 @@
 }
 
 - (void)onCancelItemEvent {
+    [HSAlertView close];
     if (self.onCancelItemlCallBack) {
-        [HSAlertView close];
         self.onCancelItemlCallBack();
     }
 }

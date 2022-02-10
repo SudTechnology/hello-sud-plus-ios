@@ -28,4 +28,21 @@
     }
 }
 
+/// 检测权限
+/// @param result 结果回调
++ (void)checkMicAuth:(void(^)(BOOL isAuth))result {
+    AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    if (status != AVAuthorizationStatusAuthorized) {
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted) {
+            if (result) {
+                result(granted);
+            }
+        }];
+        return;
+    }
+    if (result) {
+        result(YES);
+    }
+}
+
 @end
