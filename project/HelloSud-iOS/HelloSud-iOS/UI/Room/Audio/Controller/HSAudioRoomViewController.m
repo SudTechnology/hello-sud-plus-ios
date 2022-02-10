@@ -156,9 +156,8 @@
         [weakSelf handleMicTap:micModel];
     };
     self.naviView.closeTapBlock = ^(UIButton *sender) {
-        [HSAlertView showTextAlert:@"确认关闭/离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+        [HSAlertView showTextAlert:@"确认离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                // 需要在主线程执行的代码
                 [HSAudioRoomManager.shared reqExitRoom:weakSelf.roomID.longLongValue];
                 [weakSelf logoutRoom];
                 [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
@@ -167,6 +166,10 @@
         }];
     };
     self.naviView.onTapGameCallBack = ^(HSGameList * _Nonnull m) {
+        if (weakSelf.gameInfoModel.isInGame) {
+            [ToastUtil show:@"正在游戏中, 无法切换游戏"];
+            return;
+        }
         [weakSelf handleChangeRoomMode:m];
     };
 }
@@ -407,6 +410,7 @@
 #pragma mark setter
 - (void)setRoomType:(RoomType)roomType {
     _roomType = roomType;
+    _gameInfoModel = nil;
     
     if (self.roomType == HSAudioMic) {
         /// 销毁游戏
@@ -533,6 +537,11 @@
 - (void)setRoomName:(NSString *)roomName {
     _roomName = roomName;
     self.naviView.roomNameLabel.text = roomName;
+}
+
+- (void)setGameId:(NSInteger)gameId {
+    _gameId = gameId;
+    HSGameManager.shared.gameId = gameId;
 }
 
 - (void)dealloc {

@@ -192,6 +192,7 @@
         dataStr = @"玩家: 队长状态";
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         dataStr = @"玩家: 游戏状态";
+        self.gameInfoModel.isInGame = m.isPlaying;
     } else if ([state isEqualToString:MG_DG_SELECTING]) {
         dataStr = @"你画我猜 玩家: 选词中";
     } else if ([state isEqualToString:MG_DG_PAINTING]) {

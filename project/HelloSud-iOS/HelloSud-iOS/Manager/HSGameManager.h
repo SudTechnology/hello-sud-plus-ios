@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HSGameManager : NSObject
 + (instancetype)shared;
 
+/// 游戏ID
+@property (nonatomic, assign)NSInteger  gameId;
+
 /// 登录游戏
 - (void)reqGameLoginWithSuccess:(void(^)(HSRespGameInfoDataModel *gameInfo))success fail:(ErrorBlock)fail;
 @end
