@@ -14,13 +14,22 @@
 @property (nonatomic, strong) UILabel *gameTitleLabel;
 
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSArray <HSGameList *> *dataList;
+@property (nonatomic, strong) NSMutableArray <HSGameList *> *dataList;
 @end
 
 @implementation HSSwitchRoomModeView
 
 - (void)hsAddViews {
-    self.dataList = HSAppManager.shared.gameList;
+    NSArray <HSGameList *> *dataArr = HSAppManager.shared.gameList;
+    [self.dataList setArray:dataArr];
+    
+    WeakSelf
+    [self.dataList enumerateObjectsUsingBlock:^(HSGameList * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.gameId == HSGameManager.shared.gameId) {
+            [weakSelf.dataList exchangeObjectAtIndex:0 withObjectAtIndex:idx];
+        }
+    }];
+    
     [self addSubview:self.audioTitleLabel];
     [self addSubview:self.audioView];
     [self addSubview:self.gameTitleLabel];
@@ -73,6 +82,11 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HSGameItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSGameItemCollectionViewCell" forIndexPath:indexPath];
     cell.model = self.dataList[indexPath.row];
+    if (self.dataList[indexPath.row].gameId == HSGameManager.shared.gameId) {
+        [cell.inGameLabel setHidden:false];
+    } else {
+        [cell.inGameLabel setHidden:true];
+    }
     return cell;
 }
 
@@ -106,9 +120,9 @@
     return _collectionView;
 }
 
-- (NSArray *)dataList {
+- (NSMutableArray *)dataList {
     if (!_dataList) {
-        _dataList = [NSArray array];
+        _dataList = [NSMutableArray array];
     }
     return _dataList;
 }

@@ -20,6 +20,11 @@
     }];
     if (isAddToShow) {
         [self addMsg:msg];
+        /// Game - 发送文本命中
+        if ([msg isKindOfClass:HSAudioMsgTextModel.class]) {
+            HSAudioMsgTextModel *m = (HSAudioMsgTextModel *)msg;
+            [self gameKeyWordHiting: m.content];
+        }
     }
 }
 
@@ -61,8 +66,6 @@
             // 公屏消息
             HSAudioMsgTextModel *msgTextModel = [HSAudioMsgTextModel decodeModel:command];
             msgModel = msgTextModel;
-            /// Game
-            [self gameKeyWordHiting: msgTextModel.content];
         }
             break;
         case CMD_PUBLIC_SEND_GIFT_NTF:{
