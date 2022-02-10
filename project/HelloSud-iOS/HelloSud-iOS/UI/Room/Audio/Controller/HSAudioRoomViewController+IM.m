@@ -20,10 +20,17 @@
     }];
     if (isAddToShow) {
         [self addMsg:msg];
-        /// Game - 发送文本命中
-        if ([msg isKindOfClass:HSAudioMsgTextModel.class]) {
-            HSAudioMsgTextModel *m = (HSAudioMsgTextModel *)msg;
-            [self gameKeyWordHiting: m.content];
+    }
+    /// Game - 发送文本命中
+    if ([msg isKindOfClass:HSAudioMsgTextModel.class]) {
+        HSAudioMsgTextModel *m = (HSAudioMsgTextModel *)msg;
+        [self gameKeyWordHiting: m.content];
+    } else if ([msg isKindOfClass:HSAudioMsgMicModel.class]) {
+        HSAudioMsgMicModel *m = (HSAudioMsgMicModel *)msg;
+        if (m.cmd == CMD_UP_MIC_NTF) {
+            [self gameUpMic];
+        } else if (m.cmd == CMD_DOWN_MIC_NTF) {
+            [self gameDownMic];
         }
     }
 }
@@ -76,17 +83,11 @@
         case CMD_UP_MIC_NTF:{
             // 上麦消息
             msgModel = [HSAudioMsgMicModel decodeModel:command];
-            
-            /// Game
-            [self gameUpMic];
         }
             break;
         case CMD_DOWN_MIC_NTF:{
             // 下麦消息
             msgModel = [HSAudioMsgMicModel decodeModel:command];
-            
-            /// Game
-            [self gameDownMic];
         }
             break;
         case CMD_GAME_CHANGE: {
@@ -124,8 +125,10 @@
     if (self.roomType == HSAudio) {
         return;
     }
-    /// 上麦，就是加入游戏
-    [self.fsm2MGManager sendComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+    if (self.gameInfoModel.gameState == 0 || !self.gameInfoModel.isInGame) {
+        /// 上麦，就是加入游戏
+        [self.fsm2MGManager sendComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+    }
 }
 
 /// 下麦
