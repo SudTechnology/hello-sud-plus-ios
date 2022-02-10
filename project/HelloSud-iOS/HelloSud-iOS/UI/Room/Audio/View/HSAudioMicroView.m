@@ -329,10 +329,10 @@
 - (HSRippleAnimationView *)rippleView {
     if (_rippleView == nil) {
         _rippleView = HSRippleAnimationView.new;
-        _rippleView.animateColors = @[(id)HEX_COLOR_A(@"#FF3B2F", 1).CGColor,
-                                      (id)HEX_COLOR_A(@"#FF3B2F", 0.59).CGColor,
-                                      (id)HEX_COLOR_A(@"#FF3B2F", 0.34).CGColor,
-                                      (id)HEX_COLOR_A(@"#FF3B2F", 0).CGColor];
+        _rippleView.animateColors = @[(id)HEX_COLOR_A(@"#FFFFFF", 1).CGColor,
+                                      (id)HEX_COLOR_A(@"#FFFFFF", 0.15).CGColor,
+                                      (id)HEX_COLOR_A(@"#FFFFFF", 0.05).CGColor,
+                                      (id)HEX_COLOR_A(@"#FFFFFF", 0).CGColor];
         _rippleView.animateBackgroundColor = UIColor.clearColor;
     }
     return _rippleView;
