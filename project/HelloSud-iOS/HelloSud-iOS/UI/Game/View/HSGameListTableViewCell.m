@@ -60,13 +60,14 @@
     [self.roomTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.iconImageView.mas_top).offset(4);
         make.left.mas_equalTo(self.iconImageView.mas_right).offset(10);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.width.mas_greaterThanOrEqualTo(0);
+        make.height.mas_equalTo(20);
     }];
     [self.roomNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.iconImageView.mas_top).offset(3);
         make.left.mas_equalTo(self.roomTypeLabel.mas_right).offset(6);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
-        make.right.mas_equalTo(-80);
+        make.right.mas_lessThanOrEqualTo(-80);
     }];
     [self.onlineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-16);

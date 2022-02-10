@@ -62,7 +62,7 @@
 
 
 - (BOOL)isPublishing {
-    return self.isPublishing;
+    return _isPublishing;
 }
 
 

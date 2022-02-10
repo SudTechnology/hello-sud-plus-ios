@@ -153,9 +153,12 @@
     };
     self.naviView.closeTapBlock = ^(UIButton *sender) {
         [HSAlertView showTextAlert:@"确认关闭/离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
-            [HSAudioRoomManager.shared reqExitRoom:weakSelf.roomID.longLongValue];
-            [weakSelf logoutRoom];
-            [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 需要在主线程执行的代码
+                [HSAudioRoomManager.shared reqExitRoom:weakSelf.roomID.longLongValue];
+                [weakSelf logoutRoom];
+                [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
+            });
         } onCloseCallback:^{
         }];
     };
