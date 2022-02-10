@@ -9,7 +9,6 @@
 #import "HSSwitchRoomModeView.h"
 
 @interface HSRoomNaviView ()
-@property (nonatomic, strong) UILabel *roomNameLabel;
 @property (nonatomic, strong) UILabel *roomNumLabel;
 @property (nonatomic, strong) UIImageView *onlineImageView;
 @property (nonatomic, strong) UILabel *onlineLabel;

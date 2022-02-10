@@ -12,7 +12,7 @@
 @property (nonatomic, strong) BaseTextView *textView;
 @property (nonatomic, strong) UIButton *sendBtn;
 
-@property (nonatomic, assign) NSUInteger lineNumber;
+@property (nonatomic, assign) CGFloat lineNumber;
 @property (assign, nonatomic) CGFloat heightSystemKeyboard;
 
 @end
@@ -70,7 +70,7 @@
 }
 
 - (void)hsLayoutViews {
-    self.lineNumber = 2;
+    self.lineNumber = 1.5;
     CGFloat oneLineHeight = [self textViewSingleLineHeight];
     CGFloat maxHeight = oneLineHeight * self.lineNumber;
     NSUInteger preferredHeight = 48;

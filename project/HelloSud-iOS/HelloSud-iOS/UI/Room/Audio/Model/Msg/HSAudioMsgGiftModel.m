@@ -58,18 +58,18 @@
     attrSendName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrSendName.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     
-    NSMutableAttributedString *attrSend = [[NSMutableAttributedString alloc] initWithString:@"送给"];
+    NSMutableAttributedString *attrSend = [[NSMutableAttributedString alloc] initWithString:@" 送给 "];
     attrSend.yy_lineSpacing = 6;
     attrSend.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrSend.yy_color = [UIColor colorWithHexString:@"#AAAAAA" alpha:1];
     
-    NSMutableAttributedString *attrGetName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@", toUserName, giftName]];
+    NSMutableAttributedString *attrGetName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@   %@", toUserName, giftName]];
     attrGetName.yy_lineSpacing = 6;
     attrGetName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrGetName.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     
     UIImage *iconImage = giftModel.smallGiftURL.length > 0 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:giftModel.smallGiftURL]]] : [UIImage new];
-    NSMutableAttributedString *attrGift = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
+    NSMutableAttributedString *attrGift = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(24, 20) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     
     NSMutableAttributedString *attrGiftCount = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"x%ld", self.giftCount]];
     attrGiftCount.yy_lineSpacing = 6;
