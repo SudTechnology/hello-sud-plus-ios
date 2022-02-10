@@ -41,7 +41,8 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, assign)NSInteger  gameId;
 /// 房间总人数
 @property (nonatomic, assign)NSInteger totalUserCount;
-
+// 房间ID
+@property(nonatomic, copy)NSString *roomName;
 /// 是否发送进入房间
 @property (nonatomic, assign)BOOL isSentEnterRoom;
 /// 展示公屏消息

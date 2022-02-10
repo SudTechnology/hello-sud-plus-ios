@@ -73,12 +73,6 @@
     return self.msgList[indexPath.row].cellHeight;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    HSHotGameViewController *vc = [[HSHotGameViewController alloc] init];
-//    HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:true];
-}
-
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:self.frame style:UITableViewStylePlain];

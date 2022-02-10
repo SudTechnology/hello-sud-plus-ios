@@ -530,6 +530,11 @@
     [self.fsm2MGManager sendComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
+- (void)setRoomName:(NSString *)roomName {
+    _roomName = roomName;
+    self.naviView.roomNameLabel.text = roomName;
+}
+
 - (void)dealloc {
     [self logoutGame];
 }
