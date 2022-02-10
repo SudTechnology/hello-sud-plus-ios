@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^OnTapGameCallBack)(HSGameList *m);
 @property (nonatomic, copy) OnTapGameCallBack onTapGameCallBack;
 @property(nonatomic, copy)UIBUTTON_TAP_BLOCK closeTapBlock;
+@property (nonatomic, strong) UILabel *roomNameLabel;
 @end
 
 NS_ASSUME_NONNULL_END
