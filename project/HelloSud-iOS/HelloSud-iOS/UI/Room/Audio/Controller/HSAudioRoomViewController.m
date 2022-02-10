@@ -19,6 +19,7 @@
 #import "HSGameMicContentView.h"
 #import "HSAudioMicroView.h"
 #import "HSMicOperateView.h"
+#import "HSRoomGiftPannelView.h"
 
 @interface HSAudioRoomViewController () <BDAlphaPlayerMetalViewDelegate>
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -120,7 +121,9 @@
 - (void)hsConfigEvents {
     WeakSelf
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
-
+        [HSSheetView show:[[HSRoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
+            [weakSelf.operatorView resetAllSelectedUser];
+        }];
     };
     self.operatorView.inputTapBlock = ^(UITapGestureRecognizer *gesture) {
         [weakSelf.inputView hsBecomeFirstResponder];
