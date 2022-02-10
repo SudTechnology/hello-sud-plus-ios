@@ -65,7 +65,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"game/list/v1") param:@{} success:^(NSDictionary *rootDict) {
         HSGameListModel *model = [HSGameListModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             return;
         }
         [weakSelf.headerSceneList removeAllObjects];
@@ -129,7 +129,7 @@
         
         [weakSelf.collectionView reloadData];
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [ToastUtil show:@"网络错误"];
     }];
 }
 

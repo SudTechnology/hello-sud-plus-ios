@@ -112,12 +112,12 @@
     [RequestService postRequestWithApi:kBASEURL(@"base/config/v1") param:nil success:^(NSDictionary *rootDict) {
         HSConfigModel *model = [HSConfigModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             return;
         }
         weakSelf.configData = model.data;
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [ToastUtil show:@"网络错误"];
     }];
 }
 
@@ -152,7 +152,7 @@
     [RequestService postRequestWithApi:kBASEURL(@"login/v1") param:dicParam success:^(NSDictionary *rootDict) {
         HSLoginModel *model = [HSLoginModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             return;
         }
         /// 存储用户信息
@@ -166,7 +166,7 @@
         [HSAppManager.shared saveIsLogin];
         if (success) success();
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [ToastUtil show:@"网络错误"];
     }];
 }
 

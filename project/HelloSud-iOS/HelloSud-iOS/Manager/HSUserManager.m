@@ -69,7 +69,7 @@
     [RequestService postRequestWithApi:kBASEURL(@"batch/user-info/v1") param:@{@"userIds": userIDList} success:^(NSDictionary *rootDict) {
         HSRespUserInfoModel *model = [HSRespUserInfoModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             if (fail) {
                 fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
             }
@@ -80,7 +80,7 @@
         }
         
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:[error debugDescription]];
+        [ToastUtil show:[error debugDescription]];
         if (fail) {
             fail(error);
         }

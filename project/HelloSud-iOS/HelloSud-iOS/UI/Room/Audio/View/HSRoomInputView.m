@@ -133,7 +133,7 @@
 
 - (void)sendBtnEvent {
     if (self.textView.text.length == 0) {
-        [SVProgressHUD showErrorWithStatus:@"输入内容不能为空"];
+        [ToastUtil show:@"输入内容不能为空"];
         return;
     }
     if (self.inputMsgBlock) {
