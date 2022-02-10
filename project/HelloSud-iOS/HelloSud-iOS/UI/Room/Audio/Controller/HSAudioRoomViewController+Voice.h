@@ -18,6 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 关闭推流
 - (void)stopPublish;
+
+/// 登录房间
+- (void)loginRoom;
+
+/// 退出房间
+- (void)logoutRoom;
 @end
 
 NS_ASSUME_NONNULL_END

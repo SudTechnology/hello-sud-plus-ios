@@ -53,7 +53,7 @@ DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
   - BDAlphaPlayer (~> 1.2.0)
   - Bugly (= 2.5.90)
-  - IQKeyboardManager
+  - IQKeyboardManager (~> 6.5.9)
   - lottie-ios (~> 2.5.3)
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
@@ -110,6 +110,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: 5ad538e9356527c8da0c130b9aac1e8683b31942
+PODFILE CHECKSUM: 93160219bccd0a4bffa4e0fd2f08718b322f44b2
 
 COCOAPODS: 1.11.2

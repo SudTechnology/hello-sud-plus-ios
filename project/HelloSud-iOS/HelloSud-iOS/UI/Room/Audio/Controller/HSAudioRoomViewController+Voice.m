@@ -20,6 +20,17 @@
     [MediaAudioEngineManager.shared.audioEngine stopPublishStream];
 }
 
+- (void)loginRoom {
+    /// 设置语音引擎事件回调
+    [MediaAudioEngineManager.shared.audioEngine setEventHandler:self];
+    MediaUser *user = [MediaUser user:HSAppManager.shared.loginUserInfo.userID nickname:HSAppManager.shared.loginUserInfo.name];
+    [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
+}
+
+- (void)logoutRoom {
+    [MediaAudioEngineManager.shared.audioEngine logoutRoom];
+}
+
 #pragma mark delegate
 /// 捕获本地音量变化
 /// @param soundLevel 本地音量级别，取值范围[0, 100]

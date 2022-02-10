@@ -13,6 +13,7 @@
 @property(nonatomic, assign)BOOL isPublishing;
 @property(nonatomic, strong)dispatch_queue_t queueMute;
 @property(nonatomic, weak)id<MediaAudioEventHandler> eventHandler;
+@property(nonatomic, strong)NSString *roomID;
 @end
 
 @implementation ZegoAudioEngine
@@ -66,6 +67,10 @@
 
 
 - (void)loginRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
+    if (self.roomID.length > 0) {
+        [self logoutRoom];
+    }
+    self.roomID = roomID;
     ZegoUser *zegoUser = ZegoUser.new;
     zegoUser.userID = user.userID;
     zegoUser.userName = user.nickname;
@@ -75,6 +80,9 @@
 
 
 - (void)logoutRoom {
+    if (self.isPublishing) {
+        [self stopPublishStream];
+    }
     [ZegoExpressEngine.sharedEngine logoutRoom];
 }
 
