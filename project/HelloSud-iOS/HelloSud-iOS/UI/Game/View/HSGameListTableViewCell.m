@@ -10,6 +10,7 @@
 @interface HSGameListTableViewCell ()
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) HSPaddingLabel *roomTypeLabel;
 @property (nonatomic, strong) UILabel *roomNameLabel;
 @property (nonatomic, strong) UILabel *roomNumLabel;
 @property (nonatomic, strong) UILabel *onlineLabel;
@@ -24,6 +25,12 @@
     self.roomNumLabel.text = [NSString stringWithFormat:@"房间号：%ld", m.roomId];
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld人", m.memberCount];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
+    
+    for (HSSceneList *sModel in HSAppManager.shared.sceneList) {
+        if (sModel.sceneId == m.sceneType) {
+            self.roomTypeLabel.text = sModel.sceneName;
+        }
+    }
 }
 
 - (void)hsConfigUI {
@@ -34,6 +41,7 @@
 - (void)hsAddViews {
     [self.contentView addSubview:self.containerView];
     [self.containerView addSubview:self.iconImageView];
+    [self.containerView addSubview:self.roomTypeLabel];
     [self.containerView addSubview:self.roomNameLabel];
     [self.containerView addSubview:self.roomNumLabel];
     [self.containerView addSubview:self.onlineLabel];
@@ -49,9 +57,14 @@
         make.centerY.equalTo(self.contentView);
         make.size.mas_equalTo(CGSizeMake(64, 64));
     }];
+    [self.roomTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.iconImageView.mas_top).offset(4);
+        make.left.mas_equalTo(self.iconImageView.mas_right).offset(10);
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+    }];
     [self.roomNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.iconImageView.mas_top).offset(3);
-        make.left.mas_equalTo(self.iconImageView.mas_right).offset(10);
+        make.left.mas_equalTo(self.roomTypeLabel.mas_right).offset(6);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
         make.right.mas_equalTo(-80);
     }];
@@ -68,7 +81,7 @@
     [self.enterRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-16);
         make.bottom.mas_equalTo(-12);
-        make.size.mas_equalTo(CGSizeMake(72, 24));
+        make.size.mas_equalTo(CGSizeMake(48, 24));
     }];
 }
 
@@ -86,6 +99,19 @@
         _iconImageView.image = [UIImage imageNamed:@"game_type_header_item_0"];
     }
     return _iconImageView;
+}
+
+- (HSPaddingLabel *)roomTypeLabel {
+    if (!_roomTypeLabel) {
+        _roomTypeLabel = [[HSPaddingLabel alloc] init];
+        _roomTypeLabel.paddingX = 5;
+        _roomTypeLabel.text = @"语音房";
+        _roomTypeLabel.textColor = [UIColor colorWithHexString:@"#999999" alpha:1];
+        _roomTypeLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
+        _roomTypeLabel.textAlignment = NSTextAlignmentCenter;
+        _roomTypeLabel.backgroundColor = [UIColor colorWithHexString:@"#F5F5F5" alpha:1];
+    }
+    return _roomTypeLabel;
 }
 
 - (UILabel *)roomNameLabel {
@@ -122,7 +148,7 @@
 - (UIButton *)enterRoomBtn {
     if (!_enterRoomBtn) {
         _enterRoomBtn = [[UIButton alloc] init];
-        [_enterRoomBtn setTitle:@"加入游戏" forState:normal];
+        [_enterRoomBtn setTitle:@"加入" forState:normal];
         _enterRoomBtn.backgroundColor = UIColor.blackColor;
         _enterRoomBtn.titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
         [_enterRoomBtn setTitleColor:UIColor.whiteColor forState:normal];

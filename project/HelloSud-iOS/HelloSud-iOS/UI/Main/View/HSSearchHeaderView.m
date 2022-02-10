@@ -7,12 +7,13 @@
 
 #import "HSSearchHeaderView.h"
 
-@interface HSSearchHeaderView ()
+@interface HSSearchHeaderView () <UITextFieldDelegate>
 @property (nonatomic, strong) UIImageView *headerView;
 @property (nonatomic, strong) UILabel *userNameLabel;
 @property (nonatomic, strong) UILabel *userIdLabel;
 @property (nonatomic, strong) UIView *textFieldView;
 @property (nonatomic, strong) UIButton *searchBtn;
+@property (nonatomic, strong) UITextField *searchTextField;
 @end
 
 @implementation HSSearchHeaderView
@@ -68,7 +69,7 @@
 - (void)hsUpdateUI {
     HSAccountUserModel *userInfo = HSAppManager.shared.loginUserInfo;
     self.userNameLabel.text = userInfo.name;
-    self.userIdLabel.text = [NSString stringWithFormat:@"用户ID: %@", userInfo.userID];
+    self.userIdLabel.text = [NSString stringWithFormat:@"用户ID %@", userInfo.userID];
     if (userInfo.icon.length > 0) {
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:userInfo.icon]];
     }
@@ -120,6 +121,7 @@
         _searchTextField.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         _searchTextField.textColor = UIColor.blackColor;
         _searchTextField.keyboardType = UIKeyboardTypeNumberPad;
+        _searchTextField.delegate = self;
     }
     return _searchTextField;
 }
@@ -132,6 +134,7 @@
         _searchBtn.titleLabel.textColor = UIColor.whiteColor;
         _searchBtn.titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
         [_searchBtn addTarget:self action:@selector(enterEvent) forControlEvents:UIControlEventTouchUpInside];
+        [_searchBtn setHidden:true];
     }
     return _searchBtn;
 }
@@ -139,6 +142,15 @@
 - (void)enterEvent {
     [self.searchTextField resignFirstResponder];
     [HSAudioRoomManager.shared reqEnterRoom:self.searchTextField.text.longLongValue];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (range.location == 0 && string.length == 0) {
+        [self.searchBtn setHidden:true];
+    } else {
+        [self.searchBtn setHidden:false];
+    }
+    return true;
 }
 
 @end

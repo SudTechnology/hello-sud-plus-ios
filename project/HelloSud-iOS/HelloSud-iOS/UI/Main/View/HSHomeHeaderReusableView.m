@@ -142,7 +142,6 @@
         _previewView = [[UIImageView alloc] init];
         _previewView.image = [UIImage imageNamed:@"home_preview_0"];
         [_previewView hs_cornerRadius:8];
-        _previewView.backgroundColor = UIColor.groupTableViewBackgroundColor;
     }
     return _previewView;
 }
