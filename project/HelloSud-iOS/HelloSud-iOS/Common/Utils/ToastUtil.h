@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 展示信息，挂载当前window上
 /// @param msg 需要展示内容
-+ (void)showToast:(NSString *)msg;
++ (void)show:(NSString *)msg;
 @end
 
 NS_ASSUME_NONNULL_END

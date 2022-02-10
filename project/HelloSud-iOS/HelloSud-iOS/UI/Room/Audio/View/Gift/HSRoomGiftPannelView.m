@@ -101,11 +101,11 @@
         }
     }
     if (arrWaitForSend.count == 0) {
-        [SVProgressHUD showErrorWithStatus:@"请选择收礼人"];
+        [ToastUtil show:@"请选择收礼人"];
         return;
     }
     if (!self.giftContentView.didSelectedGift) {
-        [SVProgressHUD showErrorWithStatus:@"请选择一个礼物"];
+        [ToastUtil show:@"请选择一个礼物"];
         return;
     }
     for (HSAudioUserModel *user in arrWaitForSend) {

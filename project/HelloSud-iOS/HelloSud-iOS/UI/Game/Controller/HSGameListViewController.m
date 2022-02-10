@@ -55,14 +55,14 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/list/v1") param:nil success:^(NSDictionary *rootDict) {
         HSRoomListModel *model = [HSRoomListModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
-            [SVProgressHUD showErrorWithStatus:model.retMsg];
+            [ToastUtil show:model.retMsg];
             return;
         }
         [self.dataList removeAllObjects];
         [weakSelf.dataList addObjectsFromArray:model.data.roomInfoList];
         [weakSelf.tableView reloadData];
     } failure:^(id error) {
-        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [ToastUtil show:@"网络错误"];
     }];
 }
 

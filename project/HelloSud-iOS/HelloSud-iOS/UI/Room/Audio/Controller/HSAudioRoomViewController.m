@@ -236,7 +236,7 @@
                 }
             }
             if (emptyModel == nil) {
-                [SVProgressHUD showErrorWithStatus:@"没有空麦位"];
+                [ToastUtil show:@"没有空麦位"];
                 return;
             }
             self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
