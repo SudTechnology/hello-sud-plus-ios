@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIView *itemContainerView;
 @property (nonatomic, assign) CGFloat itemW;
 @property (nonatomic, assign) CGFloat itemH;
+@property (nonatomic, strong) UILabel *tipLabel;
 @end
 
 @implementation HSHomeHeaderReusableView
@@ -38,6 +39,7 @@
 }
 
 - (void)reloadData {
+    [self.tipLabel setHidden:self.headerGameList.count != 0];
     for (UIView * v in self.itemContainerView.subviews) {
         [v removeFromSuperview];
     }
@@ -86,6 +88,7 @@
     [self addSubview:self.contentView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.previewView];
+    [self.contentView addSubview:self.tipLabel];
     [self.contentView addSubview:self.itemContainerView];
 }
 
@@ -113,14 +116,16 @@
         make.width.mas_equalTo(self.itemW * 2 + 8);
         make.height.mas_equalTo(self.itemH * 3);
     }];
+    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self.itemContainerView);
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+    }];
 }
 
 - (BaseView *)contentView {
     if (!_contentView) {
         _contentView = [[BaseView alloc] init];
         _contentView.backgroundColor = UIColor.whiteColor;
-//        _contentView.layer.cornerRadius = 8;
-//        _contentView.layer.masksToBounds = true;
         [_contentView setPartRoundCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:8];
     }
     return _contentView;
@@ -135,6 +140,17 @@
         _titleLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
     }
     return _titleLabel;
+}
+
+- (UILabel *)tipLabel {
+    if (!_tipLabel) {
+        _tipLabel = [[UILabel alloc] init];
+        _tipLabel.text = @"敬请期待";
+        _tipLabel.numberOfLines = 1;
+        _tipLabel.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _tipLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightRegular];
+    }
+    return _tipLabel;
 }
 
 - (UIImageView *)previewView {

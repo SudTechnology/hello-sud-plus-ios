@@ -33,5 +33,8 @@
 @end
 
 @implementation GamePublicMsgModel
-
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"msg": [GamePublicMsg class]
+    };
+}
 @end

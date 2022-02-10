@@ -27,8 +27,10 @@
             return;
         }
         HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
+        vc.gameId = model.data.gameId;
         vc.roomID = [NSString stringWithFormat:@"%ld", model.data.roomId];
         vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
+        vc.roomName = model.data.roomName;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
         [SVProgressHUD showErrorWithStatus:[error debugDescription]];
@@ -63,7 +65,7 @@
         vc.roomID = [NSString stringWithFormat:@"%ld", model.data.roomId];
         vc.gameId = model.data.gameId;
         vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
-//        vc.roomType = HSAudio;
+        vc.roomName = model.data.roomName;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
         [SVProgressHUD showErrorWithStatus:[error debugDescription]];

@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface GamePublicMsg :NSObject
-@property (nonatomic, assign) NSInteger phrase;
+@property (nonatomic, assign) long phrase;
 @property (nonatomic, strong) GamePublicText *text;
 @property (nonatomic, strong) GamePublicUser *user;
 
