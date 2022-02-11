@@ -6,20 +6,20 @@
 //
 
 #import "HSAudioMsgBaseModel.h"
-#import "GamePublicMsgModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HSAudioMsgSystemModel : HSAudioMsgBaseModel
-
-/// 消息内容
-@property(nonatomic, strong)GamePublicMsgModel *msgModel;
-@property(nonatomic, copy)NSString *language;
-
 /// 构建消息
-/// @param msgModel 消息内容
-/// @param language 语言
-+ (instancetype)makeMsg:(GamePublicMsgModel *)msgModel language: (NSString *)language;
+/// @param content 消息内容
++ (instancetype)makeMsgWithAttr:(NSMutableAttributedString*)content;
+/// 构建消息
+/// @param content 消息内容
++ (instancetype)makeMsg:(NSString*)content;
+
+/// 设置内容
+/// @param content 内容
+- (void)updateContent:(NSString *)content;
 - (NSAttributedString *)attrContent;
 @end
 
