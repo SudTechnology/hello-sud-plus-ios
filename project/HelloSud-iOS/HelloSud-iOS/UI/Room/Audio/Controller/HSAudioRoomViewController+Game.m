@@ -26,6 +26,12 @@
     }];
 }
 
+/// 退出游戏
+- (void)logoutGame {
+    // 销毁游戏
+    [self.iSudFSTAPP destroyMG];
+}
+
 
 /// 加载游戏
 - (void)loadGame {
@@ -218,11 +224,21 @@
 - (void)initGameSDKWithAppID:(NSString *)appID appKey:(NSString *)appKey isTestEnv:(Boolean)isTestEnv mgID:(int64_t)mgID rootView:(UIView*)rootView {
 //    [ISudAPPD e:4];
 //    [ISudAPPD d];
+    WeakSelf
     [SudMGP initSDK:appID appKey:appKey isTestEnv:isTestEnv listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
             NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
-            // SudMGPSDK初始化成功 加载MG
-            [self loadMG:self.gameInfoModel.currentPlayerUserId roomId:self.roomID code:self.gameInfoModel.code mgId:mgID language:self.gameInfoModel.language fsmMG:self rootView:rootView];
+            if (weakSelf) {
+                // SudMGPSDK初始化成功 加载MG
+                NSString *userID =weakSelf.gameInfoModel.currentPlayerUserId;
+                NSString *roomID = weakSelf.roomID;
+                NSString *code = weakSelf.gameInfoModel.code;
+                if (userID.length == 0 || roomID.length == 0 || code.length == 0) {
+                    [ToastUtil show:@"加载游戏失败，请检查参数"];
+                    return;
+                }
+                [weakSelf loadMG:userID roomId:roomID code:code mgId:mgID language:weakSelf.gameInfoModel.language fsmMG:weakSelf rootView:rootView];
+            }
         } else {
             /// 初始化失败, 可根据业务重试
             NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@",retMsg);
@@ -243,11 +259,7 @@
     self.fsm2MGManager = [[FSMApp2MGManager alloc] init:self.iSudFSTAPP];
 }
 
-/// 退出游戏
-- (void)logoutGame {
-    // 销毁游戏
-    [self.iSudFSTAPP destroyMG];
-}
+
 
 /// 处理切换游戏
 /// @param gameID 新的游戏ID

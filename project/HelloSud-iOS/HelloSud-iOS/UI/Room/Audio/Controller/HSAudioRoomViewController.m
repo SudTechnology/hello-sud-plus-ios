@@ -413,8 +413,6 @@
 #pragma mark setter
 - (void)setRoomType:(RoomType)roomType {
     _roomType = roomType;
-    _gameInfoModel = nil;
-    
     if (self.roomType == HSAudioMic) {
         /// 销毁游戏
         [self logoutGame];
