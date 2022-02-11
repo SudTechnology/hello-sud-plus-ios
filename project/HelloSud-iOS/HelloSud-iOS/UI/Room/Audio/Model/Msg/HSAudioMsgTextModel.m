@@ -43,10 +43,12 @@
     attrMsg.yy_lineSpacing = 6;
     attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-    [attrIcon appendAttributedString:attrName];
-    [attrIcon appendAttributedString:attrMsg];
-    _attrContent = attrIcon;
-    YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(MAX_CELL_CONTENT_WIDTH - 8, CGFLOAT_MAX) text:attrIcon];
+    if (!_hiddeHeadIcon) {
+        [attrName insertAttributedString:attrIcon atIndex:0];
+    }
+    [attrName appendAttributedString:attrMsg];
+    _attrContent = attrName;
+    YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(MAX_CELL_CONTENT_WIDTH - 8, CGFLOAT_MAX) text:attrName];
     if (layout) {
         h += layout.textBoundingSize.height;
     }
