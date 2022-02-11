@@ -36,9 +36,8 @@
 /// 发送进房消息
 - (void)sendEnterRoomMsg {
     self.isEnteredRoom = YES;
-    HSAudioMsgTextModel *msg = [HSAudioMsgTextModel makeMsg:@"进入了房间"];
+    HSAudioMsgSystemModel *msg = [HSAudioMsgSystemModel makeMsg:[NSString stringWithFormat:@"%@ 进入了房间", HSAppManager.shared.loginUserInfo.name]];
     [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NTF];
-    msg.hiddeHeadIcon = YES;
     [self sendMsg:msg isAddToShow:YES];
 }
 
@@ -105,9 +104,8 @@
             
         case CMD_ENTER_ROOM_NTF: {
             // 进入房间
-            HSAudioMsgTextModel *m = [HSAudioMsgTextModel decodeModel:command];
-            m.content = @"进入了房间";
-            m.hiddeHeadIcon = YES;
+            HSAudioMsgSystemModel *m = [HSAudioMsgSystemModel decodeModel:command];
+            [m updateContent:[NSString stringWithFormat:@"%@ 进入了房间", m.sendUser.name]];
             msgModel = m;
         }
             break;
