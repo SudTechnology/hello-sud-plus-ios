@@ -22,6 +22,9 @@
 /// 选择用户
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray<HSAudioRoomMicModel *> *userDataList;
+
+/// 选中用户状态缓存
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *selectedCacheMap;
 @end
 
 @implementation HSRoomGiftPannelView
@@ -85,19 +88,32 @@
 
 - (void)hsConfigEvents {
     [super hsConfigEvents];
+    WeakSelf
+    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf hsUpdateUI];
+    }];
 }
 
 - (void)hsUpdateUI {
     NSArray *arrModel = HSAudioRoomManager.shared.currentRoomVC.dicMicModel.allValues;
+    NSMutableArray *userList = NSMutableArray.new;
+    NSMutableDictionary *tempSelectedCacheMap = NSMutableDictionary.new;
     for (HSAudioRoomMicModel *m in arrModel) {
         if (m.user != nil && ![HSAppManager.shared.loginUserInfo isMeByUserID:m.user.userID]) {
+            [userList addObject:m];
             m.isSelected = NO;
-            [self.userDataList addObject:m];
+            if (self.selectedCacheMap[m.user.userID]) {
+                m.isSelected = YES;
+                tempSelectedCacheMap[m.user.userID] = @(YES);
+            }
         }
     }
+    [self.userDataList setArray:userList];
+    [self.selectedCacheMap setDictionary:tempSelectedCacheMap];
+    
     
     if (self.userDataList.count > 0) {
-        self.userDataList[0].isSelected = true;
+        self.userDataList[0].isSelected = YES;
         [self.topView setHidden:false];
         [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(72);
@@ -111,6 +127,7 @@
         }];
     }
     [self.collectionView reloadData];
+    [self updateAllSelectedState];
 }
 
 - (void)onBtnSend:(UIButton *)sender {
@@ -131,7 +148,7 @@
     }
     for (HSAudioUserModel *user in arrWaitForSend) {
         HSGiftModel *giftModel = self.giftContentView.didSelectedGift;
-        HSAudioUserModel *toUser = user;//[HSAudioUserModel makeUserWithUserID:@"1231" name:@"3333" icon:@"" sex:1];
+        HSAudioUserModel *toUser = user;
         HSAudioMsgGiftModel *giftMsg = [HSAudioMsgGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
         [HSAudioRoomManager.shared.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
     }
@@ -139,11 +156,32 @@
 
 - (void)onCheckAllSelect:(UIButton *)sender {
     [self.checkAllBtn setSelected:!self.checkAllBtn.isSelected];
+    
     for (HSAudioRoomMicModel *m in self.userDataList) {
         m.isSelected = self.checkAllBtn.isSelected ? true : false;
+        if (m.user) {
+            if (m.isSelected) {
+                self.selectedCacheMap[m.user.userID] = @(YES);
+            } else {
+                [self.selectedCacheMap removeObjectForKey:m.user.userID];
+            }
+        }
         [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
     }
     [self.collectionView reloadData];
+}
+
+
+/// 更新全选状态
+- (void)updateAllSelectedState {
+    BOOL isAllSelected = YES;
+    for (HSAudioRoomMicModel *m in self.userDataList) {
+        if (!m.isSelected) {
+            isAllSelected = NO;
+            break;
+        }
+    }
+    self.checkAllBtn.selected = isAllSelected;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -164,14 +202,28 @@
     self.userDataList[indexPath.row].isSelected = !self.userDataList[indexPath.row].isSelected;
     [self.collectionView reloadData];
     HSAudioRoomMicModel *m = self.userDataList[indexPath.row];
+    if (m.user && m.user.userID) {
+        if (m.isSelected) {
+            self.selectedCacheMap[m.user.userID] = @(YES);
+        } else {
+            [self.selectedCacheMap removeObjectForKey:m.user.userID];
+        }
+    }
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
+    [self updateAllSelectedState];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.userDataList[indexPath.row].isSelected = !self.userDataList[indexPath.row].isSelected;
     [self.collectionView reloadData];
     HSAudioRoomMicModel *m = self.userDataList[indexPath.row];
+    if (m.user && m.user.userID) {
+        if (!m.isSelected) {
+            [self.selectedCacheMap removeObjectForKey:m.user.userID];
+        }
+    }
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
+    [self updateAllSelectedState];
 }
 
 
@@ -200,6 +252,13 @@
         _userDataList = [NSMutableArray array];
     }
     return _userDataList;
+}
+
+- (NSMutableDictionary *)selectedCacheMap {
+    if (!_selectedCacheMap) {
+        _selectedCacheMap = NSMutableDictionary.new;
+    }
+    return _selectedCacheMap;
 }
 
 - (UIView *)topView {
