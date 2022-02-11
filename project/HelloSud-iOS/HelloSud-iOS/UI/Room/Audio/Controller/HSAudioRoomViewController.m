@@ -41,18 +41,6 @@
     return YES;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-//    [[IQKeyboardManager sharedManager] setEnable:YES];
-//    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-//    [[IQKeyboardManager sharedManager] setEnable:NO];
-//    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

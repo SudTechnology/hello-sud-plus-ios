@@ -79,6 +79,7 @@
 }
 
 - (void)tapInputEvent:(UITapGestureRecognizer *)gesture {
+    [IQKeyboardManager.sharedManager resignFirstResponder];
     NSInteger tag = [gesture view].tag;
     HSGameList *m = self.headerGameList[tag];
     [HSAudioRoomManager.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
