@@ -36,7 +36,7 @@
 /// 发送进房消息
 - (void)sendEnterRoomMsg {
     self.isEnteredRoom = YES;
-    HSAudioMsgTextModel *msg = [HSAudioMsgTextModel makeMsg:@"进入房间"];
+    HSAudioMsgTextModel *msg = [HSAudioMsgTextModel makeMsg:@"进入了房间"];
     [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NTF];
     [self sendMsg:msg isAddToShow:YES];
 }
