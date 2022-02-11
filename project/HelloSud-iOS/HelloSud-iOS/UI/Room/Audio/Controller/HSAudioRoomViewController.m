@@ -43,14 +43,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[IQKeyboardManager sharedManager] setEnable:NO];
-    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
+//    [[IQKeyboardManager sharedManager] setEnable:YES];
+//    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[IQKeyboardManager sharedManager] setEnable:YES];
-    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+//    [[IQKeyboardManager sharedManager] setEnable:NO];
+//    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
 }
 
 - (void)viewDidLoad {
