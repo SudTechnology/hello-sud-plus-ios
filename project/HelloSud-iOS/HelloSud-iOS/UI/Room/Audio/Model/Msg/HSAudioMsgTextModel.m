@@ -44,6 +44,7 @@
     attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     if (!_hiddeHeadIcon) {
+        [attrName insertAttributedString:[[NSAttributedString alloc] initWithString:@" "] atIndex:0];
         [attrName insertAttributedString:attrIcon atIndex:0];
     }
     [attrName appendAttributedString:attrMsg];
