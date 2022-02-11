@@ -198,7 +198,7 @@
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.model.user.icon]];
     }
     self.giftImageView.hidden = self.model.isSelected && self.micType == HSAudioMic ? NO : YES;
-    [self showUserName:self.model.user.name showOwner:self.model.user.roleType == 1];
+    [self showUserName:self.model.user.name showOwner:self.model.user.roleType == 1 && self.micType == HSAudioMic];
     
     [self.gameCaptainView setHidden:HSGameManager.shared.captainUserId != self.model.user.userID];
 }

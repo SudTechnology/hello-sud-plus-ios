@@ -188,6 +188,7 @@
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         dataStr = @"玩家: 加入状态";
         self.gameInfoModel.isInGame = m.isIn;
+        
     } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
         dataStr = @"玩家: 准备状态";
         self.gameInfoModel.isReady = m.isReady;
@@ -288,7 +289,7 @@
 
 #pragma mark =======处理返回消息=======
 - (void)handleRetCode:(NSString *)retCode errorMsg:(NSString *)msg {
-    [ToastUtil show:[NSString stringWithFormat:@"%@出错，错误码:%@", msg, retCode]];
+//    [ToastUtil show:[NSString stringWithFormat:@"%@出错，错误码:%@", msg, retCode]];
 }
 
 @end
