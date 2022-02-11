@@ -18,9 +18,7 @@
     [MediaAudioEngineManager.shared.audioEngine sendCommand:command roomID:self.roomID result:^(int errorCode) {
         NSLog(@"send result:%d", errorCode);
     }];
-    if (isAddToShow) {
-        [self addMsg:msg];
-    }
+    [self addMsg:msg isShowOnScreen:isAddToShow];
     /// Game - 发送文本命中
     if ([msg isKindOfClass:HSAudioMsgTextModel.class]) {
         HSAudioMsgTextModel *m = (HSAudioMsgTextModel *)msg;
@@ -68,6 +66,7 @@
     }
     NSInteger cmd = [dic[@"cmd"] integerValue];
     HSAudioMsgBaseModel *msgModel = nil;
+    BOOL isShowOnScreen = YES;
     switch (cmd) {
         case CMD_PUBLIC_MSG_NTF:{
             // 公屏消息
@@ -83,11 +82,17 @@
         case CMD_UP_MIC_NTF:{
             // 上麦消息
             msgModel = [HSAudioMsgMicModel decodeModel:command];
+            isShowOnScreen = NO;
+            /// Game
+            [self gameUpMic];
         }
             break;
         case CMD_DOWN_MIC_NTF:{
             // 下麦消息
             msgModel = [HSAudioMsgMicModel decodeModel:command];
+            isShowOnScreen = NO;
+            /// Game
+            [self gameDownMic];
         }
             break;
         case CMD_GAME_CHANGE: {
@@ -114,7 +119,7 @@
             break;
     }
     if (msgModel) {
-        [self addMsg:msgModel];
+        [self addMsg:msgModel isShowOnScreen:isShowOnScreen];
     }
 }
 
