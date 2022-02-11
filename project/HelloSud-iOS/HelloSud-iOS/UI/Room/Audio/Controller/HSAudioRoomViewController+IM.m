@@ -130,7 +130,7 @@
     if (self.roomType == HSAudio) {
         return;
     }
-    if (self.gameInfoModel.gameState == 0 || !self.gameInfoModel.isInGame) {
+    if (self.gameInfoModel.gameState == 0 && !self.gameInfoModel.isInGame) {
         /// 上麦，就是加入游戏
         [self.fsm2MGManager sendComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
     }

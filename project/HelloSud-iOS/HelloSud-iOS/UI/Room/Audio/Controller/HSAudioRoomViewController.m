@@ -359,9 +359,7 @@
         BDAlphaPlayerMetalView *v = [[BDAlphaPlayerMetalView alloc] initWithDelegate: self];
         [self.view addSubview:v];
         [v mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(self.view);
-            make.height.equalTo(self.view.mas_width);
-            make.center.equalTo(self.view);
+            make.edges.mas_equalTo(self.view);
         }];
         BDAlphaPlayerMetalConfiguration *configuration = [BDAlphaPlayerMetalConfiguration defaultConfiguration];
         configuration.directory = giftModel.animateURL;

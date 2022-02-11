@@ -95,19 +95,22 @@
             [self.userDataList addObject:m];
         }
     }
-    [self.collectionView reloadData];
     
     if (self.userDataList.count > 0) {
+        self.userDataList[0].isSelected = true;
         [self.topView setHidden:false];
         [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(72);
         }];
+        HSAudioRoomMicModel *m = self.userDataList[0];
+        [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
     } else {
         [self.topView setHidden:true];
         [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(0);
         }];
     }
+    [self.collectionView reloadData];
 }
 
 - (void)onBtnSend:(UIButton *)sender {
