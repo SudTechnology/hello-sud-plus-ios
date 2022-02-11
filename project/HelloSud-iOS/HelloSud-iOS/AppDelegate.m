@@ -34,6 +34,7 @@
     [self configBugly];
     [self configAudioEngine];
     [[IQKeyboardManager sharedManager] setEnable:YES];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     return YES;
 }
