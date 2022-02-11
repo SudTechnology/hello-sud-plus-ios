@@ -117,6 +117,7 @@
                 if (msgModel.cmd == CMD_DOWN_MIC_NTF) {
                     // 下麦,清空用户信息
                     weakSelf.model.user = nil;
+                    weakSelf.giftImageView.hidden = true;
                 } else {
                     weakSelf.model.user = msgModel.sendUser;
                     weakSelf.model.user.roleType = msgModel.roleType;
@@ -125,6 +126,7 @@
             } else if (weakSelf.model.user != nil && [msgModel.sendUser.userID isEqualToString:weakSelf.model.user.userID]) {
                 // 当前用户ID与切换用户ID一致，则清除掉
                 weakSelf.model.user = nil;
+                weakSelf.giftImageView.hidden = true;
             }
             [weakSelf hsUpdateUI];
         } else {
@@ -137,7 +139,7 @@
         if ([micModel isKindOfClass:HSAudioRoomMicModel.class] ) {
             // 操作麦位与当前符合
             if (micModel.micIndex == weakSelf.model.micIndex) {
-                weakSelf.giftImageView.hidden = micModel.isSelected ? NO : YES;
+                weakSelf.giftImageView.hidden = micModel.isSelected && weakSelf.micType == HSAudioMic ? NO : YES;
             }
         } else {
             [weakSelf hsUpdateUI];
@@ -194,7 +196,7 @@
     if (self.model.user.icon) {
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.model.user.icon]];
     }
-    self.giftImageView.hidden = self.model.isSelected ? NO : YES;
+    self.giftImageView.hidden = self.model.isSelected && self.micType == HSAudioMic ? NO : YES;
     self.nameLabel.text = self.model.user.name;
 }
 
