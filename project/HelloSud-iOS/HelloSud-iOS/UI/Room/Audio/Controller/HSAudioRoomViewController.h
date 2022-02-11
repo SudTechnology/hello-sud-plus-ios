@@ -47,7 +47,8 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, assign)BOOL isSentEnterRoom;
 /// 展示公屏消息
 /// @param msg 消息体
-- (void)addMsg:(HSAudioMsgBaseModel *)msg;
+/// @param isShowOnScreen 是否展示公屏
+- (void)addMsg:(HSAudioMsgBaseModel *)msg isShowOnScreen:(BOOL)isShowOnScreen;
 
 
 #pragma mark - GAME

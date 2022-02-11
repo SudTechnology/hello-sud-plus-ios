@@ -279,8 +279,11 @@
 
 /// 展示公屏消息
 /// @param msg 消息体
-- (void)addMsg:(HSAudioMsgBaseModel *)msg {
-    [self.msgTableView addMsg:msg];
+/// @param isShowOnScreen 是否展示公屏
+- (void)addMsg:(HSAudioMsgBaseModel *)msg isShowOnScreen:(BOOL)isShowOnScreen {
+    if (isShowOnScreen) {    
+        [self.msgTableView addMsg:msg];
+    }
     if ([msg isKindOfClass:HSAudioMsgMicModel.class]) {
         [self handleMicChanged:(HSAudioMsgMicModel *)msg];
     } else if ([msg isKindOfClass:HSAudioMsgGiftModel.class]) {

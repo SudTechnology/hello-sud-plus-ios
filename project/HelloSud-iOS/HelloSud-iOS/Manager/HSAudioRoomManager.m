@@ -96,11 +96,11 @@
             self.micIndex = micIndex;
             upMicModel.roleType = self.roleType;
             upMicModel.streamID = model.data.streamId;
-            [self.currentRoomVC sendMsg:upMicModel isAddToShow:YES];
+            [self.currentRoomVC sendMsg:upMicModel isAddToShow:NO];
         } else {
             HSAudioMsgMicModel *downMicModel = [HSAudioMsgMicModel makeDownMicMsgWithMicIndex:micIndex];
             downMicModel.streamID = nil;
-            [self.currentRoomVC sendMsg:downMicModel isAddToShow:YES];
+            [self.currentRoomVC sendMsg:downMicModel isAddToShow:NO];
         }
         
     } failure:^(id error) {
