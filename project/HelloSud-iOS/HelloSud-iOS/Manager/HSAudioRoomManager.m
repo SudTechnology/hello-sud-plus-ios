@@ -26,6 +26,7 @@
 /// 请求进入房间
 /// @param roomId 房间ID
 - (void)reqEnterRoom:(long)roomId {
+    WeakSelf
     [RequestService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSEnterRoomModel *model = [HSEnterRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
@@ -37,6 +38,7 @@
         vc.roomID = [NSString stringWithFormat:@"%ld", model.data.roomId];
         vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
         vc.roomName = model.data.roomName;
+        weakSelf.roleType = model.data.roleType;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];
@@ -62,6 +64,7 @@
 /// 匹配开播的游戏，并进入游戏房间
 /// @param gameId 游戏ID
 - (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType {
+    WeakSelf
     [RequestService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:@{@"gameId": @(gameId), @"sceneType": @(sceneType)} success:^(NSDictionary *rootDict) {
         HSMatchRoomModel *model = [HSMatchRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
@@ -73,6 +76,7 @@
         vc.gameId = model.data.gameId;
         vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
         vc.roomName = model.data.roomName;
+        weakSelf.roleType = model.data.roleType;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];

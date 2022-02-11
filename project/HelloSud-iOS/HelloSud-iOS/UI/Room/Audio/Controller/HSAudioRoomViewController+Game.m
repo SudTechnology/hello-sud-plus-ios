@@ -193,6 +193,7 @@
         self.gameInfoModel.isReady = m.isReady;
     } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
         dataStr = @"玩家: 队长状态";
+        HSGameManager.shared.captainUserId = m.userId;
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         dataStr = @"玩家: 游戏状态";
     } else if ([state isEqualToString:MG_DG_SELECTING]) {

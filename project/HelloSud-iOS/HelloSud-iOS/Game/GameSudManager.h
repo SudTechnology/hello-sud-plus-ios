@@ -15,26 +15,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//@protocol GameSudManagerDelegate <NSObject>
-//
-///// 游戏状态变换 - 公屏消息
-///// @param msgModel GamePublicMsgModel
-////@required
-//- (void)onGameStateChangePublicMessage:(GamePublicMsgModel *)msgModel;
-//
-///// 游戏状态变换 - 你画我猜关键词获取
-///// @param model GameKeyWordHitModel
-////@required
-//- (void)onGameStateChangeDrawKeyWordHit:(GameKeyWordHitModel *)model;
-//
-///// 游戏玩家状态变化
-///// @param state 状态类型
-///// @param model GamePlayerStateModel
-////@required
-//- (void)onPlayerStateChangeWithModel:(GamePlayerStateModel *)model;
-//
-//@end
-
 @interface GameSudManager : NSObject
 
 /// 获取sud sdk版本号
