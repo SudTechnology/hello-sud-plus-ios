@@ -128,7 +128,6 @@
             make.height.mas_equalTo(72);
         }];
         HSAudioRoomMicModel *m = self.userDataList[0];
-        [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
     } else {
         [self.topView setHidden:true];
         [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -137,6 +136,7 @@
     }
     [self.collectionView reloadData];
     [self updateAllSelectedState];
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil];
 }
 
 - (void)onBtnSend:(UIButton *)sender {
