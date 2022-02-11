@@ -96,7 +96,7 @@
 
 - (void)hsUpdateUI {
     NSArray *arrModel = HSAudioRoomManager.shared.currentRoomVC.dicMicModel.allValues;
-    NSMutableArray *userList = NSMutableArray.new;
+    NSMutableArray<HSAudioRoomMicModel *> *userList = NSMutableArray.new;
     NSMutableDictionary *tempSelectedCacheMap = NSMutableDictionary.new;
     for (HSAudioRoomMicModel *m in arrModel) {
         if (m.user != nil && ![HSAppManager.shared.loginUserInfo isMeByUserID:m.user.userID]) {
@@ -108,6 +108,9 @@
             }
         }
     }
+    [userList sortedArrayUsingComparator:^NSComparisonResult(HSAudioRoomMicModel *  _Nonnull obj1, HSAudioRoomMicModel *  _Nonnull obj2) {
+        return obj1.micIndex < obj2.micIndex;
+    }];
     [self.userDataList setArray:userList];
     [self.selectedCacheMap setDictionary:tempSelectedCacheMap];
     
