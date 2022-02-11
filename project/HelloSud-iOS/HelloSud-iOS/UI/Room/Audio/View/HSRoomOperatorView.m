@@ -69,13 +69,13 @@
     _voiceBtnState = voiceBtnState;
     switch (voiceBtnState) {
         case VoiceBtnStateTypeWaitOpen:
-            [_voiceUpBtn setImage:[UIImage imageNamed:@"room_voice_open_mic"] forState:UIControlStateNormal];
+            [_voiceUpBtn setImage:[UIImage imageNamed:@"room_voice_close_mic"] forState:UIControlStateNormal];
             [_voiceUpBtn setTitle:nil forState:UIControlStateNormal];
             _voiceUpBtn.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
             _voiceUpBtn.az_colors = nil;
             break;
         case VoiceBtnStateTypeOnVoice:
-            [_voiceUpBtn setImage:[UIImage imageNamed:@"room_voice_close_mic"] forState:UIControlStateNormal];
+            [_voiceUpBtn setImage:[UIImage imageNamed:@"room_voice_open_mic"] forState:UIControlStateNormal];
             [_voiceUpBtn setTitle:nil forState:UIControlStateNormal];
             _voiceUpBtn.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
             _voiceUpBtn.az_colors = nil;
