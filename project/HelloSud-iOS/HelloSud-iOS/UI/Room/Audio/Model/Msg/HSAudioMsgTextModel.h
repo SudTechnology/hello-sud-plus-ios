@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 消息内容
 @property(nonatomic, copy)NSString *content;
 
+/// 是否隐藏头像
+@property(nonatomic, assign)BOOL hiddeHeadIcon;
+
 /// 构建消息
 /// @param content 消息内容
 + (instancetype)makeMsg:(NSString *)content;
