@@ -155,7 +155,7 @@
         attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
         attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
         
-        HSAudioMsgSystemModel *msgModel = [HSAudioMsgSystemModel makeMsg:attrMsg];
+        HSAudioMsgSystemModel *msgModel = [HSAudioMsgSystemModel makeMsgWithAttr:attrMsg];
         [self addMsg:msgModel isShowOnScreen:YES];
     } else if ([state isEqualToString:MG_COMMON_KEY_WORD_TO_HIT]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:你画我猜关键词获取");
