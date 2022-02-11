@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString              * roomName;
 @property (nonatomic, assign) NSInteger              gameId;
 @property (nonatomic, assign) NSInteger              memberCount;
+@property (nonatomic, assign) NSInteger              roleType;
 
 @end
 

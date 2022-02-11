@@ -202,11 +202,13 @@
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         dataStr = @"玩家: 加入状态";
         self.gameInfoModel.isInGame = m.isIn;
+        
     } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
         dataStr = @"玩家: 准备状态";
         self.gameInfoModel.isReady = m.isReady;
     } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
         dataStr = @"玩家: 队长状态";
+        HSGameManager.shared.captainUserId = m.userId;
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         dataStr = @"玩家: 游戏状态";
     } else if ([state isEqualToString:MG_DG_SELECTING]) {
@@ -301,7 +303,7 @@
 
 #pragma mark =======处理返回消息=======
 - (void)handleRetCode:(NSString *)retCode errorMsg:(NSString *)msg {
-    [ToastUtil show:[NSString stringWithFormat:@"%@出错，错误码:%@", msg, retCode]];
+//    [ToastUtil show:[NSString stringWithFormat:@"%@出错，错误码:%@", msg, retCode]];
 }
 
 @end

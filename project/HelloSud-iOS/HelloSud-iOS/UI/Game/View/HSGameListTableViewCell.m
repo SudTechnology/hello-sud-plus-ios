@@ -28,7 +28,7 @@
     
     for (HSSceneList *sModel in HSAppManager.shared.sceneList) {
         if (sModel.sceneId == m.sceneType) {
-            self.roomTypeLabel.text = sModel.sceneName;
+            self.roomTypeLabel.text = [sModel.sceneName stringByReplacingOccurrencesOfString:@"场景"withString:@""];
         }
     }
 }

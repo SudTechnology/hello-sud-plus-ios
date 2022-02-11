@@ -189,15 +189,35 @@
 - (void)hsUpdateUI {
     if (self.model.user == nil) {
         self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
-        self.nameLabel.text = @"点击上麦";
+        [self showUserName:@"点击上麦" showOwner:false];
         [self.rippleView stopAnimate:YES];
+        [self.gameCaptainView setHidden:true];
         return;
     }
     if (self.model.user.icon) {
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.model.user.icon]];
     }
     self.giftImageView.hidden = self.model.isSelected && self.micType == HSAudioMic ? NO : YES;
-    self.nameLabel.text = self.model.user.name;
+    [self showUserName:self.model.user.name showOwner:self.model.user.roleType == 1 && self.micType == HSAudioMic];
+    
+    [self.gameCaptainView setHidden:HSGameManager.shared.captainUserId != self.model.user.userID];
+}
+
+- (void)showUserName:(NSString *)name showOwner:(BOOL)isShowTag {
+    UIImage *tagImage = [UIImage imageNamed:@"room_mic_owner_name"];
+    NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:tagImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(24, 12) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
+    
+    NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:name];
+    attrName.yy_lineSpacing = 6;
+    attrName.yy_font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
+    attrName.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+    
+    if (isShowTag) {
+        [attrIcon appendAttributedString:attrName];
+        self.nameLabel.attributedText = attrIcon;
+    } else {
+        self.nameLabel.attributedText = attrName;
+    }
 }
 
 - (void)setModel:(HSAudioRoomMicModel *)model {
@@ -281,7 +301,6 @@
         _nameLabel.textVerticalAlignment = YYTextVerticalAlignmentTop;
         _nameLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.4];
         _nameLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
-        _nameLabel.text = @"点击上麦";
     }
     return _nameLabel;
 }
