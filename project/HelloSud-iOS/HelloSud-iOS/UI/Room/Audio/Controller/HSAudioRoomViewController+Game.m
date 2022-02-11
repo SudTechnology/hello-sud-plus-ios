@@ -136,7 +136,7 @@
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:公屏消息");
         GamePublicMsgModel *publicMsgModel = [GamePublicMsgModel mj_objectWithKeyValues: dataJson];
         HSAudioMsgSystemModel *msgModel = [HSAudioMsgSystemModel makeMsg:publicMsgModel language:self.gameInfoModel.language];
-        [self addMsg:msgModel];
+        [self addMsg:msgModel isShowOnScreen:YES];
     } else if ([state isEqualToString:MG_COMMON_KEY_WORD_TO_HIT]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:你画我猜关键词获取");
         GameKeyWordHitModel *m = [GameKeyWordHitModel mj_objectWithKeyValues: dataJson];
