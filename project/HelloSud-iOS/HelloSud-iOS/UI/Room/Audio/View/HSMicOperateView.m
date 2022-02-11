@@ -31,12 +31,16 @@
         make.height.mas_equalTo(0.5);
         make.top.equalTo(self.downMicBtn.mas_bottom);
     }];
+    CGFloat bottom = kAppSafeBottom;
+    if (bottom == 0) {
+        bottom = 20;
+    }
     [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lineView.mas_bottom).offset(0);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
         make.height.mas_equalTo(56);
-        make.bottom.mas_equalTo(-(kAppSafeBottom + 20));
+        make.bottom.mas_equalTo(-bottom);
     }];
 }
 
