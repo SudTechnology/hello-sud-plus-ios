@@ -38,6 +38,7 @@
     self.isEnteredRoom = YES;
     HSAudioMsgTextModel *msg = [HSAudioMsgTextModel makeMsg:@"进入了房间"];
     [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NTF];
+    msg.hiddeHeadIcon = YES;
     [self sendMsg:msg isAddToShow:YES];
 }
 
@@ -106,6 +107,7 @@
             // 进入房间
             HSAudioMsgTextModel *m = [HSAudioMsgTextModel decodeModel:command];
             m.content = @"进入了房间";
+            m.hiddeHeadIcon = YES;
             msgModel = m;
         }
             break;
