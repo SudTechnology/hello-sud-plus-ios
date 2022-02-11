@@ -108,10 +108,10 @@
             }
         }
     }
-    [userList sortedArrayUsingComparator:^NSComparisonResult(HSAudioRoomMicModel *  _Nonnull obj1, HSAudioRoomMicModel *  _Nonnull obj2) {
-        return obj1.micIndex < obj2.micIndex;
+    NSArray *sortArr = [userList sortedArrayUsingComparator:^NSComparisonResult(HSAudioRoomMicModel *  _Nonnull obj1, HSAudioRoomMicModel *  _Nonnull obj2) {
+        return obj1.micIndex > obj2.micIndex;
     }];
-    [self.userDataList setArray:userList];
+    [self.userDataList setArray:sortArr];
     [self.selectedCacheMap setDictionary:tempSelectedCacheMap];
     
     
