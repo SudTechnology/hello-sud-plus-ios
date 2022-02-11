@@ -166,7 +166,7 @@
         }];
     };
     self.naviView.onTapGameCallBack = ^(HSGameList * _Nonnull m) {
-        if (weakSelf.gameInfoModel.isInGame) {
+        if (weakSelf.gameInfoModel.gameState == 2) {
             [ToastUtil show:@"正在游戏中, 无法切换游戏"];
             return;
         }

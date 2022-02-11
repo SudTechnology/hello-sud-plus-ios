@@ -23,6 +23,13 @@
     if ([msg isKindOfClass:HSAudioMsgTextModel.class]) {
         HSAudioMsgTextModel *m = (HSAudioMsgTextModel *)msg;
         [self gameKeyWordHiting: m.content];
+    } else if ([msg isKindOfClass:HSAudioMsgMicModel.class]) {
+        HSAudioMsgMicModel *m = (HSAudioMsgMicModel *)msg;
+        if (m.cmd == CMD_UP_MIC_NTF) {
+            [self gameUpMic];
+        } else if (m.cmd == CMD_DOWN_MIC_NTF) {
+            [self gameDownMic];
+        }
     }
 }
 
@@ -123,8 +130,10 @@
     if (self.roomType == HSAudio) {
         return;
     }
-    /// 上麦，就是加入游戏
-    [self.fsm2MGManager sendComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+    if (self.gameInfoModel.gameState == 0 || !self.gameInfoModel.isInGame) {
+        /// 上麦，就是加入游戏
+        [self.fsm2MGManager sendComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+    }
 }
 
 /// 下麦

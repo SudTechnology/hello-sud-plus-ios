@@ -122,6 +122,13 @@ NS_ASSUME_NONNULL_BEGIN
  }
 */
 
+#pragma mark - 游戏状态  MG_COMMON_GAME_STATE
+/*
+ {
+     "gameState": 0    // 0 = 空闲 1 = loading 2 = playing
+ }
+*/
+@property (nonatomic, assign) NSInteger gameState;
 
 @end
 
