@@ -112,7 +112,7 @@
     viewSize.width = kScreenWidth * scale;
     viewSize.height = kScreenHeight * scale;
     ViewGameRect *viewRect = [[ViewGameRect alloc] init];
-    viewRect.top = (kAppSafeTop + 100) * scale;
+    viewRect.top = (kStatusBarHeight + 120) * scale;
     viewRect.left = 0;
     viewRect.bottom = (kAppSafeBottom + 150) * scale;
     viewRect.right = 0;
@@ -181,6 +181,7 @@
     NSString *dataStr = @"";
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         dataStr = @"玩家: 加入状态";
+        self.gameInfoModel.isInGame = m.isIn;
     } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
         dataStr = @"玩家: 准备状态";
         self.gameInfoModel.isReady = m.isReady;
@@ -188,7 +189,6 @@
         dataStr = @"玩家: 队长状态";
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         dataStr = @"玩家: 游戏状态";
-        self.gameInfoModel.isInGame = m.isPlaying;
     } else if ([state isEqualToString:MG_DG_SELECTING]) {
         dataStr = @"你画我猜 玩家: 选词中";
     } else if ([state isEqualToString:MG_DG_PAINTING]) {
@@ -199,12 +199,14 @@
         dataStr = @"你画我猜 玩家: 总积分";
     } else if ([state isEqualToString:MG_DG_SCORE]) {
         dataStr = @"你画我猜 玩家: 本次积分";
-    }else {
+    } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
+        dataStr = @"游戏状态";
+        self.gameInfoModel.gameState = m.gameState;
+    } else {
         NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态:%@", MG_DG_SCORE);
     }
     NSLog(@"ISudFSMMG:onPlayerStateChange:dataStr:%@", dataStr);
 }
-
 /**
  * 初始化游戏SDK
  *
