@@ -38,7 +38,7 @@
 /// 发送进房消息
 - (void)sendEnterRoomMsg {
     self.isEnteredRoom = YES;
-    HSAudioMsgTextModel *msg = [HSAudioMsgTextModel makeMsg:@"进入房间"];
+    HSAudioMsgTextModel *msg = [HSAudioMsgTextModel makeMsg:@"进入了房间"];
     [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NTF];
     [self sendMsg:msg isAddToShow:YES];
 }
@@ -125,7 +125,7 @@
     if (self.roomType == HSAudio) {
         return;
     }
-    if (self.gameInfoModel.gameState == 0 || !self.gameInfoModel.isInGame) {
+    if (self.gameInfoModel.gameState == 0 && !self.gameInfoModel.isInGame) {
         /// 上麦，就是加入游戏
         [self.fsm2MGManager sendComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
     }
