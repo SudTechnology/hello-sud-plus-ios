@@ -47,7 +47,7 @@
         if (m.user.icon) {
             [self.headerView sd_setImageWithURL:[NSURL URLWithString:m.user.icon]];
         }
-        self.micNumLabel.text = [NSString stringWithFormat:@"%ld麦", m.micIndex + 1];
+        self.micNumLabel.text = m.user.roleType == 1 ? @"房主" : [NSString stringWithFormat:@"%ld麦", m.micIndex + 1];
         self.selectView.image = m.isSelected ? [UIImage imageNamed:@"room_gift_user_select"] : nil;
         
         
