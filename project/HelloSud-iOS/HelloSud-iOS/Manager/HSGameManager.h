@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏ID
 @property (nonatomic, assign)NSInteger  gameId;
+/// 队长userid
+@property (nonatomic, copy) NSString *captainUserId;
 
 /// 登录游戏
 - (void)reqGameLoginWithSuccess:(void(^)(HSRespGameInfoDataModel *gameInfo))success fail:(ErrorBlock)fail;

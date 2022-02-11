@@ -429,6 +429,8 @@
             self.dicMicModel[key] = v.model;
             v.micType = HSAudioMic;
         }
+        HSGameManager.shared.captainUserId = @"";
+        HSGameManager.shared.gameId = 0;
     } else if (self.roomType == HSGameMic) {
         self.gameView.hidden = NO;
         [self.gameMicContentView setHidden:false];
