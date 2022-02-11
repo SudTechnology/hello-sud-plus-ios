@@ -22,6 +22,7 @@
 /// 选择用户
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray<HSAudioRoomMicModel *> *userDataList;
+@property (nonatomic, assign) BOOL isFirstSelected;
 
 /// 选中用户状态缓存
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *selectedCacheMap;
@@ -116,7 +117,12 @@
     
     
     if (self.userDataList.count > 0) {
-        self.userDataList[0].isSelected = YES;
+        // 没有选中时，首次默认选中第一个
+        if (self.selectedCacheMap.count == 0 && !self.isFirstSelected) {
+            self.userDataList[0].isSelected = YES;
+            self.isFirstSelected = YES;
+            self.selectedCacheMap[self.userDataList[0].user.userID] = @(YES);
+        }
         [self.topView setHidden:false];
         [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(72);
@@ -285,7 +291,7 @@
     if (!_checkAllBtn) {
         _checkAllBtn = [[UIButton alloc] init];
         [_checkAllBtn setTitle:@"全选" forState:UIControlStateNormal];
-        [_checkAllBtn setTitle:@"取消全选" forState:UIControlStateSelected];
+        [_checkAllBtn setTitle:@"取消" forState:UIControlStateSelected];
         [_checkAllBtn setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         _checkAllBtn.titleLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
         _checkAllBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
