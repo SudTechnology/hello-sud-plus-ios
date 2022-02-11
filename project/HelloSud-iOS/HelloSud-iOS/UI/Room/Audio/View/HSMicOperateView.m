@@ -9,32 +9,39 @@
 @interface HSMicOperateView()
 @property(nonatomic, strong)UIButton *downMicBtn;
 @property(nonatomic, strong)UIButton *cancelBtn;
+@property(nonatomic, strong)UIView *lineView;
 @end
 
 @implementation HSMicOperateView
 - (void)hsAddViews {
     [self addSubview:self.downMicBtn];
+    [self addSubview:self.lineView];
     [self addSubview:self.cancelBtn];
 }
 
 - (void)hsLayoutViews {
     [self.downMicBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
-        make.left.mas_equalTo(16);
-        make.right.mas_equalTo(-16);
-        make.height.mas_equalTo(40);
+        make.top.mas_equalTo(13);
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        make.height.mas_equalTo(56);
+    }];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(0.5);
+        make.top.equalTo(self.downMicBtn.mas_bottom);
     }];
     [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.downMicBtn.mas_bottom).offset(20);
-        make.left.mas_equalTo(16);
-        make.right.mas_equalTo(-16);
-        make.height.mas_equalTo(40);
+        make.top.equalTo(self.lineView.mas_bottom).offset(0);
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        make.height.mas_equalTo(56);
         make.bottom.mas_equalTo(-(kAppSafeBottom + 20));
     }];
 }
 
 - (void)hsConfigUI {
-    self.backgroundColor = HEX_COLOR_A(@"#F2F2F2", 0.9);
+    self.backgroundColor = HEX_COLOR(@"#F2F2F2");
 }
 
 - (void)onBtnDown:(UIButton *)sender {
@@ -50,8 +57,7 @@
         _downMicBtn = UIButton.new;
         [_downMicBtn setTitle:@"下麦" forState:UIControlStateNormal];
         _downMicBtn.titleLabel.font = UIFONT_REGULAR(13);
-        [_downMicBtn setTitleColor:HEX_COLOR(@"#ffffff") forState:UIControlStateNormal];
-        _downMicBtn.backgroundColor = HEX_COLOR(@"#000000");
+        [_downMicBtn setTitleColor:HEX_COLOR(@"#000000") forState:UIControlStateNormal];
         [_downMicBtn addTarget:self action:@selector(onBtnDown:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _downMicBtn;
@@ -63,9 +69,16 @@
         [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         _cancelBtn.titleLabel.font = UIFONT_REGULAR(13);
         [_cancelBtn setTitleColor:HEX_COLOR(@"#000000") forState:UIControlStateNormal];
-        _cancelBtn.backgroundColor = HEX_COLOR(@"#ffffff");
         [_cancelBtn addTarget:self action:@selector(onBtnCancel:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelBtn;
+}
+
+- (UIView *)lineView {
+    if (_lineView == nil) {
+        _lineView = UIView.new;
+        _lineView.backgroundColor = HEX_COLOR(@"#D1D2D8");
+    }
+    return _lineView;
 }
 @end

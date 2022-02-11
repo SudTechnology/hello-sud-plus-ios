@@ -170,7 +170,7 @@
 /// @param m m description
 - (void)handleChangeRoomMode:(HSGameList *)m {
     WeakSelf
-    [HSAudioRoomManager.shared reqSwitchGame:self.roomID.integerValue gameId:self.gameId success:^{
+    [HSAudioRoomManager.shared reqSwitchGame:self.roomID.integerValue gameId:m.gameId success:^{
         
         ExChangeGameMsgModel *msg = nil;
         if (m.isAudioRoom) {
