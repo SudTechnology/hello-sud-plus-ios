@@ -166,7 +166,11 @@
         } else {
             self.gameInfoModel.keyWordHiting = true;
         }
-    }else {
+    } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
+        NSLog(@"游戏状态");
+        GameCommonStateModel *m = [GameCommonStateModel mj_objectWithKeyValues: dataJson];
+        self.gameInfoModel.gameState = m.gameState;
+    } else {
         /// 其他状态
         /// TODO
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
@@ -202,7 +206,23 @@
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         dataStr = @"玩家: 加入状态";
         self.gameInfoModel.isInGame = m.isIn;
-        
+//        if (m.isIn) {
+//            /// 上麦
+//            // 请求上麦
+//            NSArray *arr = self.dicMicModel.allValues;
+//            HSAudioRoomMicModel *emptyModel = nil;
+//            for (HSAudioRoomMicModel *m in arr) {
+//                if (m.user == nil) {
+//                    emptyModel = m;
+//                    break;
+//                }
+//            }
+//            if (emptyModel == nil) {
+//                return;
+//            }
+//            /// 无人，上麦
+//            [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)emptyModel.micIndex handleType:0];
+//        }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
         dataStr = @"玩家: 准备状态";
         self.gameInfoModel.isReady = m.isReady;
@@ -211,6 +231,7 @@
         HSGameManager.shared.captainUserId = m.userId;
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         dataStr = @"玩家: 游戏状态";
+//        self.gameInfoModel.gameState = 2;
     } else if ([state isEqualToString:MG_DG_SELECTING]) {
         dataStr = @"你画我猜 玩家: 选词中";
     } else if ([state isEqualToString:MG_DG_PAINTING]) {
@@ -221,9 +242,6 @@
         dataStr = @"你画我猜 玩家: 总积分";
     } else if ([state isEqualToString:MG_DG_SCORE]) {
         dataStr = @"你画我猜 玩家: 本次积分";
-    } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
-        dataStr = @"游戏状态";
-        self.gameInfoModel.gameState = m.gameState;
     } else {
         NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态:%@", MG_DG_SCORE);
     }
