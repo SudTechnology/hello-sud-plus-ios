@@ -169,10 +169,10 @@
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
         NSLog(@"游戏状态");
-        GameCommonStateModel *m = [GameCommonStateModel mj_objectWithKeyValues: dataJson];
+        GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
         self.gameInfoModel.gameState = m.gameState;
     }  else if ([state isEqualToString:MG_COMMON_GAME_ASR]) {
-        GameCommonStateModel *m = [GameCommonStateModel mj_objectWithKeyValues: dataJson];
+        GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
         if (m.isOpen) {
             self.keyWordASRing = YES;
             /// 语音采集

@@ -14,7 +14,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        [self config];
+//        [self config];
     }
     return self;
 }

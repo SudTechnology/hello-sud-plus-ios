@@ -250,6 +250,7 @@
         /// 设置队长状态 - （队长有且只有一个）
         if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
             [self.gameCaptainView setHidden:!(m.isCaptain && m.userId == self.model.user.userID)];
+            return;
         }
         if (m.userId != self.model.user.userID) {
             return;
@@ -257,7 +258,7 @@
         /// 设置玩家游戏状态
         [self.gameBadgeLabel setHidden:true];
         [self.gameStateLabel setHidden:true];
-        if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
+        if (([state isEqualToString:MG_COMMON_PLAYER_IN] && m.isIn) || ([state isEqualToString:MG_COMMON_PLAYER_READY])) {
             NSLog(@"玩家: 准备状态");
             [self.gameStateLabel setHidden:false];
             self.gameStateLabel.text = m.isReady ? @"已准备" : @"未准备";
