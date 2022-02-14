@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import "IMediaAudioEngine.h"
-#import "ZegoAudioEngine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
