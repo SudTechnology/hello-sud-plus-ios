@@ -84,6 +84,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param command 指令内容
 /// @param roomID 房间ID
 - (void)sendCommand:(NSString *)command roomID:(NSString *)roomID result:(void(^)(int))result;
+
+/// 开始原始音频采集
+- (void)startCapture;
+/// 结束原始音频采集
+- (void)stopCapture;
 @end
 
 NS_ASSUME_NONNULL_END

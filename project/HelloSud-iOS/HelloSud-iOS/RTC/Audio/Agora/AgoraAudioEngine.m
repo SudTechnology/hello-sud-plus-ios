@@ -10,7 +10,7 @@
 #import <AgoraRtcKit/AgoraRtcEngineKit.h>
 #import <AgoraRtmKit/AgoraRtmKit.h>
 
-@interface AgoraAudioEngine()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate>
+@interface AgoraAudioEngine()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate, AgoraAudioDataFrameProtocol>
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
 @property(nonatomic, assign)BOOL isPublishing;
 @property(nonatomic, strong)dispatch_queue_t queueMute;
@@ -43,6 +43,7 @@
 - (void)config:(nonnull NSString *)appID appKey:(nonnull NSString *)appKey {
     _agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:appID delegate:self];
     _agoraIM = [[AgoraRtmKit alloc]initWithAppId:appID delegate:self];
+    [_agoraKit setAudioDataFrame:self];
 }
 
 - (void)destroy {
@@ -64,6 +65,15 @@
     return _isPublishing;
 }
 
+/// 开始原始音频采集
+- (void)startCapture {
+    [_agoraKit setAudioDataFrame:self];
+}
+
+/// 结束原始音频采集
+- (void)stopCapture {
+    [_agoraKit setAudioDataFrame:nil];
+}
 
 - (void)loginRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
     if (self.roomID.length > 0) {
@@ -336,6 +346,30 @@
         user.userID = member.userId;
         [self.listener onIMRecvCustomCommand:message.text fromUser:user roomID:member.channelId];
     }
+}
+
+#pragma mark - AgoraAudioDataFrameProtocol
+
+- (AgoraAudioFramePosition)getObservedAudioFramePosition {
+    return AgoraAudioFramePositionRecord;
+}
+
+- (AgoraAudioParam * _Nonnull)getRecordAudioParams {
+    AgoraAudioParam *param = AgoraAudioParam.new;
+    param.channel = 1;
+    param.mode = AgoraAudioRawFrameOperationModeReadOnly;
+    param.sampleRate = 44100;
+    param.samplesPerCall = 1024;
+    return param;
+}
+
+- (BOOL)onRecordAudioFrame:(AgoraAudioFrame * _Nonnull)frame {
+    NSUInteger length = frame.samplesPerChannel * frame.channels * frame.bytesPerSample;
+    NSData *a_data = [[NSData alloc] initWithBytes:frame.buffer length:length];
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onCapturedAudioData:)]) {
+        [self.listener onCapturedAudioData:a_data];
+    }
+    return true;
 }
 
 @end

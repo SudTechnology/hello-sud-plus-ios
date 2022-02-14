@@ -334,17 +334,12 @@
 
 /// 开始音频采集
 - (void)startCaptureAudioToASR {
-    WeakSelf
-    [self.audioCapture startAudioRecording:^(NSData * _Nonnull data) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.iSudFSTAPP pushAudio:data];
-        });
-    }];
+    [MediaAudioEngineManager.shared.audioEngine startCapture];
 }
 
 /// 停止音频采集
 - (void)stopCapture {
-    [self.audioCapture stopCapture];
+    [MediaAudioEngineManager.shared.audioEngine stopCapture];
 }
 
 @end
