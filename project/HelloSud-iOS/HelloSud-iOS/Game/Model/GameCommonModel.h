@@ -1,5 +1,5 @@
 //
-//  GameCommonStateModel.h
+//  GameCommonModel.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/2/14.
@@ -9,8 +9,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GameCommonStateModel : NSObject
+@interface GameCommonModel : NSObject
 @property (nonatomic, assign) NSInteger gameState;
+@property (nonatomic, assign) BOOL isOpen;
+
 @end
 
 NS_ASSUME_NONNULL_END

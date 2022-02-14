@@ -28,6 +28,7 @@
 
 /// 退出游戏
 - (void)logoutGame {
+    [self stopCapture];
     // 销毁游戏
     [self.iSudFSTAPP destroyMG];
 }
@@ -168,9 +169,19 @@
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
         NSLog(@"游戏状态");
-        GameCommonStateModel *m = [GameCommonStateModel mj_objectWithKeyValues: dataJson];
+        GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
         self.gameInfoModel.gameState = m.gameState;
-    } else {
+    }  else if ([state isEqualToString:MG_COMMON_GAME_ASR]) {
+        GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
+        if (m.isOpen) {
+            self.keyWordASRing = YES;
+            /// 语音采集
+            [self startCaptureAudioToASR];
+        } else {
+            self.keyWordASRing = NO;
+            [self stopCapture];
+        }
+    }else {
         /// 其他状态
         /// TODO
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
@@ -322,6 +333,22 @@
 #pragma mark =======处理返回消息=======
 - (void)handleRetCode:(NSString *)retCode errorMsg:(NSString *)msg {
 //    [ToastUtil show:[NSString stringWithFormat:@"%@出错，错误码:%@", msg, retCode]];
+}
+
+
+/// 开始音频采集
+- (void)startCaptureAudioToASR {
+    WeakSelf
+    [self.audioCapture startAudioRecording:^(NSData * _Nonnull data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.iSudFSTAPP pushAudio:data];
+        });
+    }];
+}
+
+/// 停止音频采集
+- (void)stopCapture {
+    [self.audioCapture stopCapture];
 }
 
 @end
