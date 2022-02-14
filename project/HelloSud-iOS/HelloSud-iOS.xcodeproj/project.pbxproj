@@ -71,7 +71,6 @@
 		44DF03AE2797F124006EE6AC /* FSMApp2MGManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03AD2797F124006EE6AC /* FSMApp2MGManager.m */; };
 		44F29F4D27B21A4D00F57DEE /* HSAudioMsgSystemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F4C27B21A4D00F57DEE /* HSAudioMsgSystemModel.m */; };
 		44F29F5027B2474900F57DEE /* HSPaddingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F4F27B2474900F57DEE /* HSPaddingLabel.m */; };
-		44F29F5627BA0F1E00F57DEE /* MediaAudioCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F5527BA0F1E00F57DEE /* MediaAudioCapture.m */; };
 		6C076E53279940A400650209 /* HSMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E52279940A400650209 /* HSMainTabBarController.m */; };
 		6C076E572799450900650209 /* HSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E562799450900650209 /* HSSettingViewController.m */; };
 		6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E5B27995D3400650209 /* BaseTableViewCell.m */; };
@@ -265,8 +264,6 @@
 		44F29F4C27B21A4D00F57DEE /* HSAudioMsgSystemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioMsgSystemModel.m; sourceTree = "<group>"; };
 		44F29F4E27B2474900F57DEE /* HSPaddingLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSPaddingLabel.h; sourceTree = "<group>"; };
 		44F29F4F27B2474900F57DEE /* HSPaddingLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSPaddingLabel.m; sourceTree = "<group>"; };
-		44F29F5427BA0F1E00F57DEE /* MediaAudioCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaAudioCapture.h; sourceTree = "<group>"; };
-		44F29F5527BA0F1E00F57DEE /* MediaAudioCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaAudioCapture.m; sourceTree = "<group>"; };
 		4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.release.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C076E51279940A400650209 /* HSMainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSMainTabBarController.h; sourceTree = "<group>"; };
@@ -612,8 +609,6 @@
 				6C076E7C279E833C00650209 /* MediaAudioEngineManager.m */,
 				6C076E7E279E8EBD00650209 /* MediaAudioCommon.h */,
 				6C076E7F279E8EBD00650209 /* MediaAudioCommon.m */,
-				44F29F5427BA0F1E00F57DEE /* MediaAudioCapture.h */,
-				44F29F5527BA0F1E00F57DEE /* MediaAudioCapture.m */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -1159,7 +1154,6 @@
 				44DF03A52797E6FC006EE6AC /* GamePlayerStateModel.m in Sources */,
 				44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */,
 				6C076ED727A298FC00650209 /* HSGameManager.m in Sources */,
-				44F29F5627BA0F1E00F57DEE /* MediaAudioCapture.m in Sources */,
 				445EAB01279F9901000DCC72 /* BaseTextView.m in Sources */,
 				6C239FEF27B39BD200B19FE4 /* ShowViewController.m in Sources */,
 				44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */,

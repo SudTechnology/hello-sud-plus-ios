@@ -547,13 +547,6 @@
     return _gameInfoModel;
 }
 
-- (MediaAudioCapture *)audioCapture {
-    if (!_audioCapture) {
-        _audioCapture = [[MediaAudioCapture alloc] init];
-    }
-    return _audioCapture;
-}
-
 - (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
     [self.fsm2MGManager sendComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
 }
