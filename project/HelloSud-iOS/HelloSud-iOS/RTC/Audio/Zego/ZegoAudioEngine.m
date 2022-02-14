@@ -14,9 +14,19 @@
 @property(nonatomic, strong)dispatch_queue_t queueMute;
 @property(nonatomic, weak)id<MediaAudioEventListener> eventHandler;
 @property(nonatomic, strong)NSString *roomID;
+
+/// 流与ID关系[streamID:userID]
+@property(nonatomic, strong)NSMutableDictionary<NSString *, NSString *> *dicStreamUser;
 @end
 
 @implementation ZegoAudioEngine
+
+- (NSMutableDictionary<NSString *, NSString *>*)dicStreamUser {
+    if (!_dicStreamUser) {
+        _dicStreamUser = NSMutableDictionary.new;
+    }
+    return _dicStreamUser;
+}
 
 - (dispatch_queue_t)queueMute {
     if (_queueMute == nil) {
@@ -167,7 +177,15 @@
 
 - (void)onRemoteSoundLevelUpdate:(NSDictionary<NSString *,NSNumber *> *)soundLevels {
     if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRemoteSoundLevelUpdate:)]) {
-        [self.eventHandler onRemoteSoundLevelUpdate:soundLevels];
+        NSMutableDictionary *dicSoundTemp = NSMutableDictionary.new;
+        NSArray *allStrems = soundLevels.allKeys;
+        for (NSString *key in allStrems) {
+            NSString *userID = self.dicStreamUser[key];
+            if (userID) {
+                dicSoundTemp[userID] = soundLevels[key];
+            }
+        }
+        [self.eventHandler onRemoteSoundLevelUpdate:dicSoundTemp];
     }
 }
 
@@ -183,6 +201,11 @@
             stream.streamID = m.streamID;
             stream.extraInfo = m.extraInfo;
             [arr addObject:stream];
+            if (updateType == ZegoUpdateTypeAdd) {
+                self.dicStreamUser[m.streamID] = user.userID;
+            } else {
+                [self.dicStreamUser removeObjectForKey:m.streamID];
+            }
         }
         [self.eventHandler onRoomStreamUpdate:updateType streamList:arr extendedData:extendedData roomID:roomID];
     }
