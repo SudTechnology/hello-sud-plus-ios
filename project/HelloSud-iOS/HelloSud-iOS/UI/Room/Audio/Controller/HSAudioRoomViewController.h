@@ -7,7 +7,6 @@
 
 #import "BaseViewController.h"
 #import "MediaAudioEngineManager.h"
-#import "MediaAudioCapture.h"
 #import "CommonAudioModelHeader.h"
 #import "FSMApp2MGManager.h"
 
@@ -68,9 +67,6 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, assign) BOOL isEnteredRoom;
 /// ASR功能的开启关闭的状态标志
 @property (nonatomic, assign) BOOL keyWordASRing;
-#pragma mark =======音频=======
-@property (nonatomic, strong) MediaAudioCapture *audioCapture;
-
 
 - (void)handleTapVoice;
 @end

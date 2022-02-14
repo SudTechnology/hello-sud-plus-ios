@@ -94,4 +94,10 @@
         [self sendEnterRoomMsg];
     }
 }
+
+- (void)onCapturedAudioData:(NSData *)data {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.iSudFSTAPP pushAudio:data];
+    });
+}
 @end
