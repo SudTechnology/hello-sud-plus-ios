@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param roomId 房间ID
 /// @param micIndex 麦位索引
 /// @param handleType 0：上麦 1: 下麦
-- (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType;
+- (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail;
 
 /// 查询房间麦位列表
 /// @param roomId 房间ID

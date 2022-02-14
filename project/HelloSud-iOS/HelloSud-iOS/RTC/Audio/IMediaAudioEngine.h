@@ -6,16 +6,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MediaAudioEventHandler.h"
+#import "MediaAudioEventListener.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 多媒体语音引擎协议，多引擎实现一下协议
-@protocol MediaAudioEngineProtocol <NSObject>
+/// 多媒体语音引擎接口，多引擎实现以下接口
+@protocol IMediaAudioEngine <NSObject>
 
 /// 设置事件处理器
-/// @param eventHandler 事件处理实例
-- (void)setEventHandler:(id<MediaAudioEventHandler>)eventHandler;
+/// @param listener 事件处理实例
+- (void)setEventListener:(id<MediaAudioEventListener>)listener;
 
 /// 配置引擎SDK
 /// @param appID APPID

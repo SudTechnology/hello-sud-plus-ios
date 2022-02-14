@@ -12,7 +12,6 @@ target 'HelloSud-iOS' do
   pod 'MJExtension', '~> 3.4.1'
   pod 'AFNetworking', '~> 4.0.1'
   pod 'SVProgressHUD', '~> 2.2.5'
-  pod 'ZegoExpressEngine/Audio', '~> 2.15.0'
   pod 'Bugly', '2.5.90'
   pod 'SDWebImage', '5.12.2'
   pod 'SDWebImageWebPCoder'
@@ -20,6 +19,11 @@ target 'HelloSud-iOS' do
   pod 'lottie-ios', '~> 2.5.3'
   pod 'BDAlphaPlayer', '~> 1.2.0'
   pod 'IQKeyboardManager', '~> 6.5.9'
+  # RTC厂商引入
+  # zego语音SDK
+  pod 'ZegoExpressEngine/Audio', '~> 2.15.0'
+  # agora语音SDK
+  pod 'AgoraAudio_iOS', '3.6.1.1'
   
 
 end
