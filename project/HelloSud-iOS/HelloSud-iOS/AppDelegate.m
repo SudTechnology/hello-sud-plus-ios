@@ -49,15 +49,15 @@
 
 /// 配置语音SDK
 - (void)configAudioEngine {
-//    /// 使用zego语音引擎
-//    [MediaAudioEngineManager.shared makeEngine:ZegoAudioEngine.class];
-//    /// 初始化zego引擎SDK
-//    [MediaAudioEngineManager.shared.audioEngine config:@"581733944" appKey:@"8d8c5698d49929056462dba41cb48cdd4d05babd8c2c68e450b3883096656b87"];
+    /// 使用zego语音引擎
+    [MediaAudioEngineManager.shared makeEngine:ZegoAudioEngine.class];
+    /// 初始化zego引擎SDK
+    [MediaAudioEngineManager.shared.audioEngine config:@"581733944" appKey:@"8d8c5698d49929056462dba41cb48cdd4d05babd8c2c68e450b3883096656b87"];
     
-    /// 使用agora语音引擎
-    [MediaAudioEngineManager.shared makeEngine:AgoraAudioEngine.class];
-    /// 初始化agora引擎SDK
-    [MediaAudioEngineManager.shared.audioEngine config:@"fae6bf5147f740fe975dfec61013a308" appKey:@""];
+//    /// 使用agora语音引擎
+//    [MediaAudioEngineManager.shared makeEngine:AgoraAudioEngine.class];
+//    /// 初始化agora引擎SDK
+//    [MediaAudioEngineManager.shared.audioEngine config:@"fae6bf5147f740fe975dfec61013a308" appKey:@""];
 }
 
 
