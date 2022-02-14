@@ -141,7 +141,21 @@
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:公屏消息");
         GamePublicMsgModel *publicMsgModel = [GamePublicMsgModel mj_objectWithKeyValues: dataJson];
-        HSAudioMsgSystemModel *msgModel = [HSAudioMsgSystemModel makeMsg:publicMsgModel language:self.gameInfoModel.language];
+        NSMutableAttributedString * attrMsg = [[NSMutableAttributedString alloc] init];
+        for (GamePublicMsg *m in publicMsgModel.msg) {
+            if (m.phrase == 2) {
+                [attrMsg appendAttributedString:[AppUtil getAttributedStringWithString:m.user.name color:m.user.color]];
+            } else if (m.phrase == 1) {
+                NSString *textString = m.text.mj_keyValues[self.gameInfoModel.language];
+                NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc]initWithString:textString];
+                [attrMsg appendAttributedString:attributedString];
+            }
+        }
+        attrMsg.yy_lineSpacing = 6;
+        attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+        attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        
+        HSAudioMsgSystemModel *msgModel = [HSAudioMsgSystemModel makeMsgWithAttr:attrMsg];
         [self addMsg:msgModel isShowOnScreen:YES];
     } else if ([state isEqualToString:MG_COMMON_KEY_WORD_TO_HIT]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:你画我猜关键词获取");

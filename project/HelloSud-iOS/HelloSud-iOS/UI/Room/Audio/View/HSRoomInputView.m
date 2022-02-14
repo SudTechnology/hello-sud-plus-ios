@@ -13,7 +13,6 @@
 @property (nonatomic, strong) UIButton *sendBtn;
 
 @property (nonatomic, assign) CGFloat lineNumber;
-@property (assign, nonatomic) CGFloat heightSystemKeyboard;
 
 @end
 
@@ -33,7 +32,8 @@
     self.textView.heightChangeBlock = ^{
         [ws layoutIfNeeded];
     };
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrameNotification:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrameNotification:) name:UIKeyboardWillShowNotification object:nil];
 }
 
 #pragma -mark event response
@@ -46,11 +46,6 @@
     if (@available(iOS 11.0, *)) {
         offY = MAX(offY, kAppSafeBottom);
     }
-    if (self.heightSystemKeyboard == offY)
-        return;
-    
-    self.heightSystemKeyboard = offY;
-    
     NSTimeInterval duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     UIViewAnimationCurve animationCurve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
     CGFloat animationCurveOption = (animationCurve << 16);
@@ -62,6 +57,10 @@
         [self.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];
+}
+
+- (void)keyboardWillHidden:(NSNotification *)notification {
+    [self hiddenInputView];
 }
 
 - (void)hsAddViews {
@@ -142,6 +141,10 @@
         self.textView.text = @"";
     }
     
+    [self hiddenInputView];
+}
+
+- (void)hiddenInputView {
     [UIView animateWithDuration:0.2 animations:^{
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(80);

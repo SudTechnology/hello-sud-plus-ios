@@ -10,20 +10,44 @@
 @interface HSAudioMsgSystemModel(){
     NSAttributedString *_attrContent;
 }
-
+@property(nonatomic, copy)NSMutableAttributedString *content;
 @end
 
 @implementation HSAudioMsgSystemModel
+
++ (NSMutableArray *)mj_totalIgnoredPropertyNames {
+    NSMutableArray *arr = NSMutableArray.new;
+    [arr addObject:@"content"];
+    [arr addObject:@"_attrContent"];
+    return arr;
+}
+
 /// 构建消息
-/// @param msgModel 消息内容
-/// @param language 语言
-+ (instancetype)makeMsg:(GamePublicMsgModel *)msgModel language: (NSString *)language {
+/// @param content 消息内容
++ (instancetype)makeMsgWithAttr:(NSMutableAttributedString*)content {
     HSAudioMsgSystemModel *m = HSAudioMsgSystemModel.new;
-//    [m configBaseInfoWithCmd:CMD_PUBLIC_MSG_NTF];
-//    m.content = content;
-    m.msgModel = msgModel;
-    m.language = language;
+    [m configBaseInfoWithCmd:CMD_PUBLIC_MSG_NTF];
+    m.content = content;
     return m;
+}
+
+/// 构建消息
+/// @param content 消息内容
++ (instancetype)makeMsg:(NSString*)content {
+    HSAudioMsgSystemModel *m = HSAudioMsgSystemModel.new;
+    [m configBaseInfoWithCmd:CMD_PUBLIC_MSG_NTF];
+    [m updateContent:content];
+    return m;
+}
+
+/// 设置内容
+/// @param content 内容
+- (void)updateContent:(NSString *)content {
+    NSMutableAttributedString *attrMsg = [[NSMutableAttributedString alloc] initWithString:content];
+    attrMsg.yy_lineSpacing = 6;
+    attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+    attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+    self.content = attrMsg;
 }
 
 - (NSString *)cellName {
@@ -36,21 +60,11 @@
     h += yMargin * 2;
     
     NSMutableAttributedString * attrMsg = [[NSMutableAttributedString alloc] init];
-    for (GamePublicMsg *m in self.msgModel.msg) {
-        if (m.phrase == 2) {
-            [attrMsg appendAttributedString:[AppUtil getAttributedStringWithString:m.user.name color:m.user.color]];
-        } else if (m.phrase == 1) {
-            NSString *textString = m.text.mj_keyValues[self.language];
-            NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc]initWithString:textString];
-            [attrMsg appendAttributedString:attributedString];
-        }
+    if (self.content) {
+        [attrMsg setAttributedString:_content];
     }
-//    NSMutableAttributedString *attrMsg = [[NSMutableAttributedString alloc] initWithString:self.content];
-    attrMsg.yy_lineSpacing = 6;
-    attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     _attrContent = attrMsg;
-    YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(MAX_CELL_CONTENT_WIDTH - 8, CGFLOAT_MAX) text:attrMsg];
+    YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(MAX_CELL_CONTENT_WIDTH - 8, CGFLOAT_MAX) text:_attrContent];
     if (layout) {
         h += layout.textBoundingSize.height;
     }
