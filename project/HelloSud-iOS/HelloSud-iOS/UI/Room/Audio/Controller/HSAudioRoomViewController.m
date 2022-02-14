@@ -146,9 +146,16 @@
     self.naviView.closeTapBlock = ^(UIButton *sender) {
         [HSAlertView showTextAlert:@"确认离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                [HSAudioRoomManager.shared reqExitRoom:weakSelf.roomID.longLongValue];
-                [weakSelf logoutRoom];
-                [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
+                // 如果在麦位上，则下麦
+                if (HSAudioRoomManager.shared.micIndex >= 0) {
+                    [HSAudioRoomManager.shared reqSwitchMic:weakSelf.roomID.integerValue micIndex:(int)HSAudioRoomManager.shared.micIndex handleType:1 success:^{
+                        [weakSelf handleExitRoom];
+                    } fail:^(NSError *error) {
+                        [weakSelf handleExitRoom];
+                    }];
+                } else {
+                    [weakSelf handleExitRoom];
+                }
             });
         } onCloseCallback:^{
         }];
@@ -164,6 +171,13 @@
 
 - (void)hsUpdateUI {
     [self.naviView hsUpdateUI];
+}
+
+/// 退出房间
+- (void)handleExitRoom {
+    [HSAudioRoomManager.shared reqExitRoom:self.roomID.longLongValue];
+    [self logoutRoom];
+    [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
 }
 
 /// 处理切换房间
@@ -195,14 +209,14 @@
 - (void)handleMicTap:(HSAudioRoomMicModel *)micModel {
     if (micModel.user == nil) {
         /// 无人，上麦
-        [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:0];
+        [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:0 success:nil fail:nil];
         return;
     } else if ([HSAppManager.shared.loginUserInfo isMeByUserID:micModel.user.userID] || micModel.user.roleType == 1) {
         // 是自己或者房主
         HSMicOperateView *v = HSMicOperateView.new;
         v.downMicCallback = ^(UIButton *sender) {
             // 下麦
-            [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1];
+            [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
             [HSSheetView close];
         };
         v.cancelCallback = ^(UIButton *sender) {
