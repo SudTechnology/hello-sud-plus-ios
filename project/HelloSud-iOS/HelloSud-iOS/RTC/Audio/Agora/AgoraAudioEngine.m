@@ -86,11 +86,7 @@
     NSUInteger uid = (NSUInteger)[user.userID longLongValue];
     // 加入房间通道
     [self.agoraKit muteLocalAudioStream:YES];
-    [_agoraKit joinChannelByToken:nil channelId:roomID info:nil uid:uid joinSuccess:^(NSString * _Nonnull channel, NSUInteger uid, NSInteger elapsed) {
-        NSLog(@"join channel success:%@", channel);
-        [weakSelf.agoraKit setEnableSpeakerphone:YES];
-        
-    }];
+    [_agoraKit joinChannelByToken:nil channelId:roomID info:nil uid:uid joinSuccess:nil];
     // 登录IM
     [_agoraIM loginByToken:nil user:user.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
         weakSelf.imChannel = [weakSelf.agoraIM createChannelWithId:roomID delegate:self];
@@ -178,6 +174,16 @@
 }
 
 #pragma mark AgoraRtcEngineDelegate
+
+- (void)rtcEngine:(AgoraRtcEngineKit *)engine didJoinChannel:(NSString *)channel withUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
+    NSLog(@"join channel success:%@", channel);
+    [self.agoraKit setEnableSpeakerphone:YES];
+    NSMutableArray *arr = NSMutableArray.new;
+    MediaUser *user = MediaUser.new;
+    user.userID = [NSString stringWithFormat:@"%ld", uid];
+    [arr addObject:user];
+    [self.listener onRoomUserUpdate:MediaAudioEngineUpdateTypeAdd userList:arr roomID:self.roomID];
+}
 
 - (void)rtcEngine:(AgoraRtcEngineKit* _Nonnull)engine didJoinedOfUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomUserUpdate:userList:roomID:)]) {
