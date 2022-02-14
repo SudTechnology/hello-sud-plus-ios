@@ -17,7 +17,7 @@
 #import "GameKeyWordHitModel.h"
 #import "GamePlayerStateModel.h"
 #import "HSRoomGameInfoModel.h"
-#import "GameCommonStateModel.h"
+#import "GameCommonModel.h"
 
 /// SudMGPSDK
 #import <SudMGP/ISudFSMMG.h>
