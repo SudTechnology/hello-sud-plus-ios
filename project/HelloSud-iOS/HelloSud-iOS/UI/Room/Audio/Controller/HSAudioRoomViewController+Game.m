@@ -166,7 +166,11 @@
         } else {
             self.gameInfoModel.keyWordHiting = true;
         }
-    }else {
+    } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
+        NSLog(@"游戏状态");
+        GameCommonStateModel *m = [GameCommonStateModel mj_objectWithKeyValues: dataJson];
+        self.gameInfoModel.gameState = m.gameState;
+    } else {
         /// 其他状态
         /// TODO
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
@@ -227,6 +231,7 @@
         HSGameManager.shared.captainUserId = m.userId;
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         dataStr = @"玩家: 游戏状态";
+//        self.gameInfoModel.gameState = 2;
     } else if ([state isEqualToString:MG_DG_SELECTING]) {
         dataStr = @"你画我猜 玩家: 选词中";
     } else if ([state isEqualToString:MG_DG_PAINTING]) {
@@ -237,9 +242,6 @@
         dataStr = @"你画我猜 玩家: 总积分";
     } else if ([state isEqualToString:MG_DG_SCORE]) {
         dataStr = @"你画我猜 玩家: 本次积分";
-    } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
-        dataStr = @"游戏状态";
-        self.gameInfoModel.gameState = m.gameState;
     } else {
         NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态:%@", MG_DG_SCORE);
     }
