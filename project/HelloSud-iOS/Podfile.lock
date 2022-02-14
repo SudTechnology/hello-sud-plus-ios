@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - AgoraAudio_iOS (3.6.1.1)
   - BDAlphaPlayer (1.2.0)
   - Bugly (2.5.90)
   - IQKeyboardManager (6.5.9)
@@ -51,6 +52,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
+  - AgoraAudio_iOS (= 3.6.1.1)
   - BDAlphaPlayer (~> 1.2.0)
   - Bugly (= 2.5.90)
   - IQKeyboardManager (~> 6.5.9)
@@ -67,6 +69,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - AgoraAudio_iOS
     - BDAlphaPlayer
     - Bugly
     - IQKeyboardManager
@@ -94,6 +97,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  AgoraAudio_iOS: d64f3fcd15576a8bb9b715997978ec427008f287
   BDAlphaPlayer: 8af2048ee8ef8c31a73a99f83882cf4242e89df0
   Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
   IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
@@ -110,6 +114,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: 93160219bccd0a4bffa4e0fd2f08718b322f44b2
+PODFILE CHECKSUM: d788dd92ca4ad52c29fd85aa2d4c0f9bc8b68414
 
 COCOAPODS: 1.11.2
