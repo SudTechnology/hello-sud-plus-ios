@@ -17,7 +17,7 @@
     return manager;
 }
 
-- (void)makeEngine:(Class<MediaAudioEngineProtocol>)cls {
+- (void)makeEngine:(Class<IMediaAudioEngine>)cls {
     _audioEngine = cls.new;
 }
 @end
