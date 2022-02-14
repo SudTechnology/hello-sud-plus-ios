@@ -69,6 +69,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param extendedData 扩展数据
 /// @param roomID 房间ID
 - (void)onRoomStateUpdate:(MediaAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(nullable NSDictionary *)extendedData roomID:(NSString *)roomID;
+
+/// 语音原始音频采集
+/// @param data 数据
+- (void)onCapturedAudioData:(NSData *)data;
 @end
 
 NS_ASSUME_NONNULL_END

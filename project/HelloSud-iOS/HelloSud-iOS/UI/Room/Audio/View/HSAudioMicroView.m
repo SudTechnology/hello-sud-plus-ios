@@ -256,8 +256,13 @@
             return;
         }
         /// 设置玩家游戏状态
-        [self.gameBadgeLabel setHidden:true];
+//        [self.gameStateLabel setHidden:false];
+//        [self.gamingImageView setHidden:true];
+//        [self.gameBadgeLabel setHidden:true];
         [self.gameStateLabel setHidden:true];
+        if ([state isEqualToString:MG_COMMON_PLAYER_IN] && !m.isIn) {
+            self.gameModel = nil;
+        }
         if (([state isEqualToString:MG_COMMON_PLAYER_IN] && m.isIn) || ([state isEqualToString:MG_COMMON_PLAYER_READY])) {
             NSLog(@"玩家: 准备状态");
             [self.gameStateLabel setHidden:false];
@@ -265,28 +270,25 @@
             self.gameStateLabel.textColor = [UIColor whiteColor];
             self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:m.isReady ? @"#13AD21" : @"#FF6E65" alpha:1];
             self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
-        } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
-            NSLog(@"玩家: 游戏中状态");
-            [self.gamingImageView setHidden:!m.isPlaying];
-        } else if ([state isEqualToString:MG_DG_SELECTING] || [state isEqualToString:MG_DG_PAINTING] || [state isEqualToString:MG_DG_SCORE]) {
-            NSLog(@"你画我猜 玩家: 选词中 || 作画中 || 错误答");
-            [self.gameStateLabel setHidden:false];
-            self.gameStateLabel.text = m.msg;
-            self.gameStateLabel.textColor = [UIColor colorWithHexString:@"#FF95CA" alpha:1];
-            self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.7];
-            self.gameStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.5].CGColor;
-        }  else if ([state isEqualToString:MG_DG_SCORE]) {
-            NSLog(@"你画我猜 玩家: 本次积分");
-            [self.gameStateLabel setHidden:false];
-            self.gameStateLabel.text = m.msg;
-            self.gameStateLabel.textColor = [UIColor colorWithHexString:@"#65FF73" alpha:1];
-            self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.7];
-            self.gameStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.5].CGColor;
-        } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
-            NSLog(@"你画我猜 玩家: 总积分");
-            [self.gameBadgeLabel setHidden:false];
-            self.gameBadgeLabel.text = m.msg;
         }
+//        else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
+//            NSLog(@"玩家: 游戏中状态");
+//            [self.gameStateLabel setHidden:true];
+//            [self.gameStateLabel setHidden:true];
+//            [self.gamingImageView setHidden:false];
+//            [self.gamingImageView setHidden:!m.isPlaying];
+//        }
+//        else if ([state isEqualToString:MG_DG_SCORE]) {
+//            NSLog(@"你画我猜 玩家: 本次积分");
+//            self.gameStateLabel.text = m.msg;
+//            self.gameStateLabel.textColor = [UIColor colorWithHexString:@"#65FF73" alpha:1];
+//            self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.7];
+//            self.gameStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.5].CGColor;
+//        } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
+//            NSLog(@"你画我猜 玩家: 总积分");
+//            [self.gameBadgeLabel setHidden:m.msg.length == 0];
+//            self.gameBadgeLabel.text = m.msg;
+//        }
     }
 }
 

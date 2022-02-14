@@ -217,23 +217,20 @@
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         dataStr = @"玩家: 加入状态";
         self.gameInfoModel.isInGame = m.isIn;
-//        if (m.isIn) {
-//            /// 上麦
-//            // 请求上麦
-//            NSArray *arr = self.dicMicModel.allValues;
-//            HSAudioRoomMicModel *emptyModel = nil;
-//            for (HSAudioRoomMicModel *m in arr) {
-//                if (m.user == nil) {
-//                    emptyModel = m;
-//                    break;
-//                }
-//            }
-//            if (emptyModel == nil) {
-//                return;
-//            }
-//            /// 无人，上麦
-//            [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)emptyModel.micIndex handleType:0];
-//        }
+        if (m.isIn && m.userId == HSAppManager.shared.loginUserInfo.userID) {
+            // 请求上麦
+            BOOL isUpMic = false;
+            NSArray *arr = self.dicMicModel.allValues;
+            for (HSAudioRoomMicModel *m in arr) {
+                if (m.user != nil && m.user.userID == HSAppManager.shared.loginUserInfo.userID) {
+                    isUpMic = true;
+                }
+            }
+            if (!isUpMic) {
+                [self handleTapVoice];
+            }
+        }
+        
     } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
         dataStr = @"玩家: 准备状态";
         self.gameInfoModel.isReady = m.isReady;
@@ -242,7 +239,6 @@
         HSGameManager.shared.captainUserId = m.userId;
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         dataStr = @"玩家: 游戏状态";
-//        self.gameInfoModel.gameState = 2;
     } else if ([state isEqualToString:MG_DG_SELECTING]) {
         dataStr = @"你画我猜 玩家: 选词中";
     } else if ([state isEqualToString:MG_DG_PAINTING]) {
@@ -338,17 +334,12 @@
 
 /// 开始音频采集
 - (void)startCaptureAudioToASR {
-    WeakSelf
-    [self.audioCapture startAudioRecording:^(NSData * _Nonnull data) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.iSudFSTAPP pushAudio:data];
-        });
-    }];
+    [MediaAudioEngineManager.shared.audioEngine startCapture];
 }
 
 /// 停止音频采集
 - (void)stopCapture {
-    [self.audioCapture stopCapture];
+    [MediaAudioEngineManager.shared.audioEngine stopCapture];
 }
 
 @end
