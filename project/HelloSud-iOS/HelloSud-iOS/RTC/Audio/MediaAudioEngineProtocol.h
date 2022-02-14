@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MediaAudioEventHandler.h"
+#import "MediaAudioEventListener.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MediaAudioEngineProtocol <NSObject>
 
 /// 设置事件处理器
-/// @param eventHandler 事件处理实例
-- (void)setEventHandler:(id<MediaAudioEventHandler>)eventHandler;
+/// @param listener 事件处理实例
+- (void)setEventListener:(id<MediaAudioEventListener>)listener;
 
 /// 配置引擎SDK
 /// @param appID APPID
