@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GameCommonStateModel : NSObject
 @property (nonatomic, assign) NSInteger gameState;
+@property (nonatomic, assign) BOOL isOpen;
+
 @end
 
 NS_ASSUME_NONNULL_END
