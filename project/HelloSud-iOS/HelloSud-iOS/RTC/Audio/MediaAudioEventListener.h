@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onCapturedSoundLevelUpdate:(NSNumber*)soundLevel;
 
 /// 捕获远程音流音量变化
-/// @param soundLevels [流ID: 音量]，音量取值范围[0, 100]
+/// @param soundLevels [suerID: 音量]，音量取值范围[0, 100]
 - (void)onRemoteSoundLevelUpdate:(NSDictionary<NSString*, NSNumber*>*)soundLevels;
 
 /// 房间流更新 增、减，需要收到此事件后播放对应流
