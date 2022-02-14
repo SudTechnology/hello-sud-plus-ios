@@ -188,7 +188,23 @@
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         dataStr = @"玩家: 加入状态";
         self.gameInfoModel.isInGame = m.isIn;
-        
+//        if (m.isIn) {
+//            /// 上麦
+//            // 请求上麦
+//            NSArray *arr = self.dicMicModel.allValues;
+//            HSAudioRoomMicModel *emptyModel = nil;
+//            for (HSAudioRoomMicModel *m in arr) {
+//                if (m.user == nil) {
+//                    emptyModel = m;
+//                    break;
+//                }
+//            }
+//            if (emptyModel == nil) {
+//                return;
+//            }
+//            /// 无人，上麦
+//            [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)emptyModel.micIndex handleType:0];
+//        }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
         dataStr = @"玩家: 准备状态";
         self.gameInfoModel.isReady = m.isReady;
