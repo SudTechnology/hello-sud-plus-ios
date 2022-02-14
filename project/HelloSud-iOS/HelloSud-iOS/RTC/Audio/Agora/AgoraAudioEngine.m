@@ -1,14 +1,15 @@
 //
-//  ZegoAudioEngine.m
+//  AgoraAudioEngine.m
 //  HelloSud-iOS
 //
-//  Created by kaniel on 2022/1/24.
+//  Created by kaniel on 2022/2/14.
 //
 
-#import "ZegoAudioEngine.h"
+#import "AgoraAudioEngine.h"
 #import <ZegoExpressEngine/ZegoExpressEngine.h>
+#import <AgoraRtcKit/AgoraRtcEngineKit.h>
 
-@interface ZegoAudioEngine()<ZegoEventHandler>
+@interface AgoraAudioEngine()
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
 @property(nonatomic, assign)BOOL isPublishing;
 @property(nonatomic, strong)dispatch_queue_t queueMute;
@@ -16,7 +17,7 @@
 @property(nonatomic, strong)NSString *roomID;
 @end
 
-@implementation ZegoAudioEngine
+@implementation AgoraAudioEngine
 
 - (dispatch_queue_t)queueMute {
     if (_queueMute == nil) {
@@ -26,24 +27,24 @@
 }
 
 /// 设置事件处理器
-/// @param eventHandler 事件处理实例
-- (void)setEventListener:(id<MediaAudioEventListener>)listener {
+/// @param listener 事件处理实例
+- (void)setEventHandler:(id<MediaAudioEventListener>)listener {
     _eventHandler = listener;
 }
 
 
 - (void)config:(nonnull NSString *)appID appKey:(nonnull NSString *)appKey {
-    ZegoEngineConfig *engineConfig = ZegoEngineConfig.new;
-    // 控制音频采集开关与推流关系，推静音帧
-    engineConfig.advancedConfig = @{@"audio_capture_dummy": @"true", @"init_domain_name": @"ze-config.divtoss.com"};
-    [ZegoExpressEngine setEngineConfig:engineConfig];
-    ZegoEngineProfile *profile = ZegoEngineProfile.new;
-    profile.appID = [appID intValue];
-    profile.appSign = appKey;
-    profile.scenario = ZegoScenarioGeneral;
-    [ZegoExpressEngine createEngineWithProfile:profile eventHandler:self];
-    [[ZegoExpressEngine sharedEngine] startSoundLevelMonitor];
-    [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:NO];
+//    ZegoEngineConfig *engineConfig = ZegoEngineConfig.new;
+//    // 控制音频采集开关与推流关系，推静音帧
+//    engineConfig.advancedConfig = @{@"audio_capture_dummy": @"true", @"init_domain_name": @"ze-config.divtoss.com"};
+//    [ZegoExpressEngine setEngineConfig:engineConfig];
+//    ZegoEngineProfile *profile = ZegoEngineProfile.new;
+//    profile.appID = [appID intValue];
+//    profile.appSign = appKey;
+//    profile.scenario = ZegoScenarioGeneral;
+//    [ZegoExpressEngine createEngineWithProfile:profile eventHandler:self];
+//    [[ZegoExpressEngine sharedEngine] startSoundLevelMonitor];
+//    [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:NO];
 }
 
 - (void)destroy {

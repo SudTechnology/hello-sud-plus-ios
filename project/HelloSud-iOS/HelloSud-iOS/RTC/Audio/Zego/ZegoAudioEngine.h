@@ -6,11 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MediaAudioEngineProtocol.h"
+#import "IMediaAudioEngine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /// zego语音引擎
-@interface ZegoAudioEngine: NSObject<MediaAudioEngineProtocol>
+@interface ZegoAudioEngine: NSObject<IMediaAudioEngine>
 
 @end
 
