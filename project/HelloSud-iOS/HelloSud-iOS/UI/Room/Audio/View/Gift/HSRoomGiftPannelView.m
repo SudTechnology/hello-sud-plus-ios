@@ -22,6 +22,10 @@
 /// 选择用户
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray<HSAudioRoomMicModel *> *userDataList;
+@property (nonatomic, assign) BOOL isFirstSelected;
+
+/// 选中用户状态缓存
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *selectedCacheMap;
 @end
 
 @implementation HSRoomGiftPannelView
@@ -85,25 +89,45 @@
 
 - (void)hsConfigEvents {
     [super hsConfigEvents];
+    WeakSelf
+    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf hsUpdateUI];
+    }];
 }
 
 - (void)hsUpdateUI {
     NSArray *arrModel = HSAudioRoomManager.shared.currentRoomVC.dicMicModel.allValues;
+    NSMutableArray<HSAudioRoomMicModel *> *userList = NSMutableArray.new;
+    NSMutableDictionary *tempSelectedCacheMap = NSMutableDictionary.new;
     for (HSAudioRoomMicModel *m in arrModel) {
         if (m.user != nil && ![HSAppManager.shared.loginUserInfo isMeByUserID:m.user.userID]) {
+            [userList addObject:m];
             m.isSelected = NO;
-            [self.userDataList addObject:m];
+            if (self.selectedCacheMap[m.user.userID]) {
+                m.isSelected = YES;
+                tempSelectedCacheMap[m.user.userID] = @(YES);
+            }
         }
     }
+    NSArray *sortArr = [userList sortedArrayUsingComparator:^NSComparisonResult(HSAudioRoomMicModel *  _Nonnull obj1, HSAudioRoomMicModel *  _Nonnull obj2) {
+        return obj1.micIndex > obj2.micIndex;
+    }];
+    [self.userDataList setArray:sortArr];
+    [self.selectedCacheMap setDictionary:tempSelectedCacheMap];
+    
     
     if (self.userDataList.count > 0) {
-        self.userDataList[0].isSelected = true;
+        // 没有选中时，首次默认选中第一个
+        if (self.selectedCacheMap.count == 0 && !self.isFirstSelected) {
+            self.userDataList[0].isSelected = YES;
+            self.isFirstSelected = YES;
+            self.selectedCacheMap[self.userDataList[0].user.userID] = @(YES);
+        }
         [self.topView setHidden:false];
         [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(72);
         }];
         HSAudioRoomMicModel *m = self.userDataList[0];
-        [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
     } else {
         [self.topView setHidden:true];
         [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -111,6 +135,8 @@
         }];
     }
     [self.collectionView reloadData];
+    [self updateAllSelectedState];
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil];
 }
 
 - (void)onBtnSend:(UIButton *)sender {
@@ -131,7 +157,7 @@
     }
     for (HSAudioUserModel *user in arrWaitForSend) {
         HSGiftModel *giftModel = self.giftContentView.didSelectedGift;
-        HSAudioUserModel *toUser = user;//[HSAudioUserModel makeUserWithUserID:@"1231" name:@"3333" icon:@"" sex:1];
+        HSAudioUserModel *toUser = user;
         HSAudioMsgGiftModel *giftMsg = [HSAudioMsgGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
         [HSAudioRoomManager.shared.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
     }
@@ -139,11 +165,32 @@
 
 - (void)onCheckAllSelect:(UIButton *)sender {
     [self.checkAllBtn setSelected:!self.checkAllBtn.isSelected];
+    
     for (HSAudioRoomMicModel *m in self.userDataList) {
         m.isSelected = self.checkAllBtn.isSelected ? true : false;
+        if (m.user) {
+            if (m.isSelected) {
+                self.selectedCacheMap[m.user.userID] = @(YES);
+            } else {
+                [self.selectedCacheMap removeObjectForKey:m.user.userID];
+            }
+        }
         [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
     }
     [self.collectionView reloadData];
+}
+
+
+/// 更新全选状态
+- (void)updateAllSelectedState {
+    BOOL isAllSelected = YES;
+    for (HSAudioRoomMicModel *m in self.userDataList) {
+        if (!m.isSelected) {
+            isAllSelected = NO;
+            break;
+        }
+    }
+    self.checkAllBtn.selected = isAllSelected;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -164,14 +211,28 @@
     self.userDataList[indexPath.row].isSelected = !self.userDataList[indexPath.row].isSelected;
     [self.collectionView reloadData];
     HSAudioRoomMicModel *m = self.userDataList[indexPath.row];
+    if (m.user && m.user.userID) {
+        if (m.isSelected) {
+            self.selectedCacheMap[m.user.userID] = @(YES);
+        } else {
+            [self.selectedCacheMap removeObjectForKey:m.user.userID];
+        }
+    }
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
+    [self updateAllSelectedState];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.userDataList[indexPath.row].isSelected = !self.userDataList[indexPath.row].isSelected;
     [self.collectionView reloadData];
     HSAudioRoomMicModel *m = self.userDataList[indexPath.row];
+    if (m.user && m.user.userID) {
+        if (!m.isSelected) {
+            [self.selectedCacheMap removeObjectForKey:m.user.userID];
+        }
+    }
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
+    [self updateAllSelectedState];
 }
 
 
@@ -202,6 +263,13 @@
     return _userDataList;
 }
 
+- (NSMutableDictionary *)selectedCacheMap {
+    if (!_selectedCacheMap) {
+        _selectedCacheMap = NSMutableDictionary.new;
+    }
+    return _selectedCacheMap;
+}
+
 - (UIView *)topView {
     if (!_topView) {
         _topView = [[UIView alloc] init];
@@ -223,7 +291,7 @@
     if (!_checkAllBtn) {
         _checkAllBtn = [[UIButton alloc] init];
         [_checkAllBtn setTitle:@"全选" forState:UIControlStateNormal];
-        [_checkAllBtn setTitle:@"取消全选" forState:UIControlStateSelected];
+        [_checkAllBtn setTitle:@"取消" forState:UIControlStateSelected];
         [_checkAllBtn setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         _checkAllBtn.titleLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
         _checkAllBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];

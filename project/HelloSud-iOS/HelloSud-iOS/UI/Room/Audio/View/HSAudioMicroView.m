@@ -213,6 +213,7 @@
     attrName.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     
     if (isShowTag) {
+        [attrName insertAttributedString:[[NSAttributedString alloc] initWithString:@" "] atIndex:0];
         [attrIcon appendAttributedString:attrName];
         self.nameLabel.attributedText = attrIcon;
     } else {
