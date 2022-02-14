@@ -233,7 +233,20 @@
     switch (self.operatorView.voiceBtnState) {
         case VoiceBtnStateTypeNormal:{
             // 请求上麦
-            NSArray *arr = self.dicMicModel.allValues;
+            NSArray *o_arr = self.dicMicModel.allValues;
+            /// 重新排序
+            NSArray *arr = [o_arr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                HSAudioRoomMicModel *model1 = obj1;
+                HSAudioRoomMicModel *model2 = obj2;
+                if (model1.micIndex > model2.micIndex){
+                    return NSOrderedDescending;
+                } else if (model1.micIndex < model2.micIndex){
+                    return NSOrderedAscending;
+                } else {
+                    return NSOrderedAscending;
+                }
+            }];
+            
             HSAudioRoomMicModel *emptyModel = nil;
             for (HSAudioRoomMicModel *m in arr) {
                 if (m.user == nil) {
