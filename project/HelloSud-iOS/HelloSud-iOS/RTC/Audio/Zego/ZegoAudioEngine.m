@@ -192,7 +192,7 @@
 }
 
 - (void)onCapturedSoundLevelUpdate:(NSNumber *)soundLevel {
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onCapturedSoundLevelUpdate:)]) {
+    if (self.isPublishing && self.listener != nil && [self.listener respondsToSelector:@selector(onCapturedSoundLevelUpdate:)]) {
         [self.listener onCapturedSoundLevelUpdate:soundLevel];
     }
 }
@@ -225,11 +225,9 @@
             [arr addObject:stream];
             if (updateType == ZegoUpdateTypeAdd) {
                 self.dicStreamUser[m.streamID] = user.userID;
+            } else {
+                [self.dicStreamUser removeObjectForKey:m.streamID];
             }
-            // 暂时不清空
-//            else {
-//                [self.dicStreamUser removeObjectForKey:m.streamID];
-//            }
         }
         [self.listener onRoomStreamUpdate:updateType streamList:arr extendedData:extendedData roomID:roomID];
     }
