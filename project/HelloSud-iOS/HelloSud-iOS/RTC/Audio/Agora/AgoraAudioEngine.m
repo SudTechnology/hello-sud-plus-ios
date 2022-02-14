@@ -127,7 +127,7 @@
 
 
 - (void)mutePlayStreamAudio:(BOOL)isMute streamID:(nonnull NSString *)streamID {
-    NSLog(@"暂未实现mutePlayStreamAudio");
+    NSLog(@"暂不实现mutePlayStreamAudio");
 }
 
 
@@ -137,14 +137,14 @@
 
 
 - (void)setPlayVolume:(NSInteger)volume streamID:(nonnull NSString *)streamID {
-    NSLog(@"暂未实现setPlayVolume");
+    NSLog(@"暂不实现setPlayVolume");
     NSUInteger uid = 0;
     [self.agoraKit adjustUserPlaybackSignalVolume:uid volume:(int)volume];
 }
 
 
 - (void)startPlayingStream:(nonnull NSString *)streamID {
-    NSLog(@"暂未实现setPlayVolume");
+    NSLog(@"暂不实现setPlayVolume");
 }
 
 
@@ -155,7 +155,7 @@
 
 
 - (void)stopPlayingStream:(nonnull NSString *)streamID {
-    NSLog(@"暂未实现stopPlayingStream");
+    NSLog(@"暂不实现stopPlayingStream");
 }
 
 
@@ -260,7 +260,7 @@ There are two reasons for users to be offline:
  @param reason The reason for the connection state change. See AgoraRtmConnectionChangeReason.
  */
 - (void)rtmKit:(AgoraRtmKit * _Nonnull)kit connectionStateChanged:(AgoraRtmConnectionState)state reason:(AgoraRtmConnectionChangeReason)reason {
-    NSLog(@"rtmKit 链接状态:%ld, reason:%ld", (long)state, (long)reason);
+    NSLog(@"rtmKit connectionStateChanged:%ld, reason:%ld", (long)state, (long)reason);
 }
 
 /**
