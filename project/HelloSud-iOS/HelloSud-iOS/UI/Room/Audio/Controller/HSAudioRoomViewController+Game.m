@@ -217,9 +217,8 @@
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         dataStr = @"玩家: 加入状态";
         self.gameInfoModel.isInGame = m.isIn;
-        if (m.isIn) {
+        if (m.isIn && m.userId == HSAppManager.shared.loginUserInfo.userID) {
             // 请求上麦
-            
             BOOL isUpMic = false;
             NSArray *arr = self.dicMicModel.allValues;
             for (HSAudioRoomMicModel *m in arr) {
