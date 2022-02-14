@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UILabel *gameStateLabel;
 @property (nonatomic, strong) HSPaddingLabel *gameBadgeLabel;
 @property (nonatomic, strong) UIImageView * gamingImageView;
+@property (nonatomic, strong) GamePlayerStateModel *gameModel;
 
 /// 水波纹
 @property (nonatomic, strong) HSRippleAnimationView *rippleView;
@@ -50,6 +51,7 @@
     [self.gameBadgeLabel setHidden:true];
     [self.gamingImageView setHidden:true];
     if (self.micType == HSAudioMic) {
+        self.gameModel = nil;
     } else if (self.micType == HSGameMic) {
         [self.giftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(-4);
@@ -70,6 +72,13 @@
     [self addSubview:self.gameStateLabel];
     [self addSubview:self.gameBadgeLabel];
     [self addSubview:self.gamingImageView];
+}
+
+- (void)hiddenGameNode {
+    [self.gameCaptainView setHidden:true];
+    [self.gameStateLabel setHidden:true];
+    [self.gameBadgeLabel setHidden:true];
+    [self.gamingImageView setHidden:true];
 }
 
 - (void)hsLayoutViews {
@@ -118,6 +127,7 @@
                     // 下麦,清空用户信息
                     weakSelf.model.user = nil;
                     weakSelf.giftImageView.hidden = true;
+                    [weakSelf hiddenGameNode];
                 } else {
                     weakSelf.model.user = msgModel.sendUser;
                     weakSelf.model.user.roleType = msgModel.roleType;
@@ -182,6 +192,7 @@
     /// 游戏玩家状态变化
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_PLAYER_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         GamePlayerStateModel *m = note.userInfo[@"model"];
+        weakSelf.gameModel = m;
         [weakSelf gamePlayerStateNOT:m];
     }];
 }
@@ -191,7 +202,7 @@
         self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
         [self showUserName:@"点击上麦" showOwner:false];
         [self.rippleView stopAnimate:YES];
-        [self.gameCaptainView setHidden:true];
+        [self hiddenGameNode];
         return;
     }
     if (self.model.user.icon) {
@@ -201,6 +212,9 @@
     [self showUserName:self.model.user.name showOwner:self.model.user.roleType == 1 && self.micType == HSAudioMic];
     
     [self.gameCaptainView setHidden:HSGameManager.shared.captainUserId != self.model.user.userID];
+    if (self.micType == HSGameMic && self.gameModel != nil) {
+        [self gamePlayerStateNOT:self.gameModel];
+    }
 }
 
 - (void)showUserName:(NSString *)name showOwner:(BOOL)isShowTag {
@@ -242,9 +256,10 @@
         }
         /// 设置玩家游戏状态
         [self.gameBadgeLabel setHidden:true];
+        [self.gameStateLabel setHidden:true];
         if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
             NSLog(@"玩家: 准备状态");
-            [self.gameStateLabel setHidden:!m.isReady];
+            [self.gameStateLabel setHidden:false];
             self.gameStateLabel.text = m.isReady ? @"已准备" : @"未准备";
             self.gameStateLabel.textColor = [UIColor whiteColor];
             self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:m.isReady ? @"#13AD21" : @"#FF6E65" alpha:1];
