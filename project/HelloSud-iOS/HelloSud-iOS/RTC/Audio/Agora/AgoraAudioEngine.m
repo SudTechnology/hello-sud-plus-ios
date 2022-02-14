@@ -16,6 +16,7 @@
 @property(nonatomic, strong)dispatch_queue_t queueMute;
 @property(nonatomic, weak)id<MediaAudioEventListener> listener;
 @property(nonatomic, strong)NSString *roomID;
+/// 声网语音引擎
 @property(nonatomic, strong)AgoraRtcEngineKit *agoraKit;
 /// agora信令
 @property(nonatomic, strong)AgoraRtmKit *agoraIM;
@@ -78,6 +79,9 @@
     WeakSelf
     [_agoraIM loginByToken:nil user:user.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
         weakSelf.imChannel = [weakSelf.agoraIM createChannelWithId:roomID delegate:self];
+        [weakSelf.imChannel joinWithCompletion:^(AgoraRtmJoinChannelErrorCode errorCode) {
+            NSLog(@"join im channel state:%ld", (long)errorCode);
+        }];
     }];
 }
 
@@ -150,9 +154,6 @@
 /// @param command 指令内容
 /// @param roomID 房间ID
 - (void)sendCommand:(NSString *)command roomID:(NSString *)roomID result:(void(^)(int))result; {
-    [ZegoExpressEngine.sharedEngine sendCustomCommand:command toUserList:nil roomID:roomID callback:^(int errorCode) {
-        result(errorCode);
-    }];
     AgoraRtmMessage *msg = AgoraRtmMessage.new;
     msg.text = command;
     [self.imChannel sendMessage:msg completion:^(AgoraRtmSendChannelMessageErrorCode errorCode) {
@@ -326,6 +327,15 @@
  */
 - (void)channel:(AgoraRtmChannel * _Nonnull)channel messageReceived:(AgoraRtmMessage * _Nonnull)message fromMember:(AgoraRtmMember * _Nonnull)member {
     NSLog(@"rtmKit messageReceived:%@, userId:%@", message.text, member.userId);
+    if (message.type != AgoraRtmMessageTypeText) {
+        NSLog(@"未识别信令消息");
+        return;
+    }
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onIMRecvCustomCommand:fromUser:roomID:)]) {
+        MediaUser *user = MediaUser.new;
+        user.userID = member.userId;
+        [self.listener onIMRecvCustomCommand:message.text fromUser:user roomID:member.channelId];
+    }
 }
 
 @end
