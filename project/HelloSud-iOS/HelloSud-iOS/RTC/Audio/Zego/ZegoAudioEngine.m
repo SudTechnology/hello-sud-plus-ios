@@ -26,7 +26,7 @@
 }
 
 /// 设置事件处理器
-/// @param eventHandler 事件处理实例
+/// @param listener 事件处理实例
 - (void)setEventListener:(id<MediaAudioEventListener>)listener {
     _eventHandler = listener;
 }

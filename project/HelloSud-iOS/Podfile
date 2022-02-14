@@ -24,7 +24,8 @@ target 'HelloSud-iOS' do
   pod 'ZegoExpressEngine/Audio', '~> 2.15.0'
   # agora语音SDK
   pod 'AgoraAudio_iOS', '3.6.1.1'
-  
+  # agora云信令SDK
+  pod 'AgoraRtm_iOS', '1.4.9'
 
 end
 
