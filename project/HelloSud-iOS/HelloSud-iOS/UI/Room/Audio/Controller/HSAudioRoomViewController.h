@@ -7,6 +7,7 @@
 
 #import "BaseViewController.h"
 #import "MediaAudioEngineManager.h"
+#import "MediaAudioCapture.h"
 #import "CommonAudioModelHeader.h"
 #import "FSMApp2MGManager.h"
 
@@ -16,13 +17,15 @@
 #import "GameKeyWordHitModel.h"
 #import "GamePlayerStateModel.h"
 #import "HSRoomGameInfoModel.h"
-#import "GameCommonStateModel.h"
+#import "GameCommonModel.h"
 
 /// SudMGPSDK
 #import <SudMGP/ISudFSMMG.h>
 #import <SudMGP/ISudFSTAPP.h>
 #import <SudMGP/SudMGP.h>
 #import <SudMGP/ISudFSMStateHandle.h>
+#import <SudMGP/ISudASR.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -63,6 +66,10 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, copy) HSRoomGameInfoModel *gameInfoModel;
 /// 记录游戏所需状态
 @property (nonatomic, assign) BOOL isEnteredRoom;
+/// ASR功能的开启关闭的状态标志
+@property (nonatomic, assign) BOOL keyWordASRing;
+#pragma mark =======音频=======
+@property (nonatomic, strong) MediaAudioCapture *audioCapture;
 
 
 - (void)handleTapVoice;

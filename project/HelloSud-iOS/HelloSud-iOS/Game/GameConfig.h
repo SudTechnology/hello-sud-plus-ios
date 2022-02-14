@@ -55,6 +55,10 @@ static NSString* MG_COMMON_SELF_CLICK_READY_BTN  = @"mg_common_self_click_ready_
 static NSString* MG_COMMON_SELF_CLICK_CANCEL_READY_BTN  = @"mg_common_self_click_cancel_ready_btn";
 /// 开始游戏按钮点击状态
 static NSString* MG_COMMON_SELF_CLICK_START_BTN  = @"mg_common_self_click_start_btn";
+/// 游戏状态
+static NSString* MG_COMMON_GAME_STATE   = @"mg_common_game_state";
+/// ASR状态
+static NSString* MG_COMMON_GAME_ASR = @"mg_common_game_asr";
 
 
 #pragma mark - 通用状态-玩家
@@ -70,8 +74,6 @@ static NSString* MG_COMMON_PLAYER_PLAYING   = @"mg_common_player_playing";
 static NSString* MG_COMMON_PLAYER_ONLINE   = @"mg_common_player_online";
 /// 玩家换游戏位状态
 static NSString* MG_COMMON_PLAYER_CHANGE_SEAT   = @"mg_common_player_change_seat";
-/// 游戏状态
-static NSString* MG_COMMON_GAME_STATE   = @"mg_common_game_state";
 
 /// 你画我猜
 /// 选词中

@@ -54,6 +54,7 @@
     [self hsUpdateUI];
 }
 
+
 - (void)hsAddViews {
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.gameView];
@@ -531,6 +532,13 @@
         _gameInfoModel.language = @"zh-CN";
     }
     return _gameInfoModel;
+}
+
+- (MediaAudioCapture *)audioCapture {
+    if (!_audioCapture) {
+        _audioCapture = [[MediaAudioCapture alloc] init];
+    }
+    return _audioCapture;
 }
 
 - (void)setIsEnteredRoom:(BOOL)isEnteredRoom {

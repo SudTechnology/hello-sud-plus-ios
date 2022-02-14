@@ -54,7 +54,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
   - AgoraAudio_iOS (= 3.6.1.1)
-  - AgoraRtm_iOS
+  - AgoraRtm_iOS (= 1.4.9)
   - BDAlphaPlayer (~> 1.2.0)
   - Bugly (= 2.5.90)
   - IQKeyboardManager (~> 6.5.9)
