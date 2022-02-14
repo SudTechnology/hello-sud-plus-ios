@@ -83,16 +83,12 @@
             // 上麦消息
             msgModel = [HSAudioMsgMicModel decodeModel:command];
             isShowOnScreen = NO;
-            /// Game
-            [self gameUpMic];
         }
             break;
         case CMD_DOWN_MIC_NTF:{
             // 下麦消息
             msgModel = [HSAudioMsgMicModel decodeModel:command];
             isShowOnScreen = NO;
-            /// Game
-            [self gameDownMic];
         }
             break;
         case CMD_GAME_CHANGE: {
