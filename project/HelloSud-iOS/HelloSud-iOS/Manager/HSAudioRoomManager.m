@@ -87,12 +87,15 @@
 /// @param roomId 房间ID
 /// @param micIndex 麦位索引
 /// @param handleType 0：上麦 1: 下麦
-- (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType {
+- (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     
     [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
         HSSwitchMicModel *model = [HSSwitchMicModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:[NSString stringWithFormat:@"%@(%ld)", model.retMsg, model.retCode]];
+            if (fail) {
+                fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
+            }
             return;
         }
         if (handleType == 0) {
@@ -106,9 +109,15 @@
             downMicModel.streamID = nil;
             [self.currentRoomVC sendMsg:downMicModel isAddToShow:NO];
         }
+        if (success) {
+            success();
+        }
         
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];
+        if (fail) {
+            fail(error);
+        }
     }];
 }
 
