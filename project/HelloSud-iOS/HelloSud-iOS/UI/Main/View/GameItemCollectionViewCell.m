@@ -18,7 +18,7 @@
 @implementation GameItemCollectionViewCell
 
 - (void)setModel:(BaseModel *)model {
-    HSGameList *m = (HSGameList *) model;
+    HSGameItem *m = (HSGameItem *) model;
     self.nameLabel.text = m.gameName;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
 }

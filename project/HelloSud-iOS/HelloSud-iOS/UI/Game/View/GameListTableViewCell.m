@@ -28,7 +28,7 @@
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld人", m.memberCount];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
     
-    for (HSSceneList *sModel in AppManager.shared.sceneList) {
+    for (HSSceneModel *sModel in AppManager.shared.sceneList) {
         if (sModel.sceneId == m.sceneType) {
             self.roomTypeLabel.text = [sModel.sceneName stringByReplacingOccurrencesOfString:@"场景"withString:@""];
         }

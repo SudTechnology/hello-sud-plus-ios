@@ -10,18 +10,18 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HSRoomInfoList: BaseModel
-@property (nonatomic, assign) NSInteger              roomId;
-@property (nonatomic, copy) NSString              * roomName;
-@property (nonatomic, assign) NSInteger              memberCount;
-@property (nonatomic, copy) NSString              * roomPic;
-@property (nonatomic, assign) NSInteger              sceneType;
-@property (nonatomic, copy) NSString              * rtcType;
+@property (nonatomic, assign) NSInteger roomId;
+@property (nonatomic, copy) NSString * roomName;
+@property (nonatomic, assign) NSInteger memberCount;
+@property (nonatomic, copy) NSString * roomPic;
+@property (nonatomic, assign) NSInteger sceneType;
+@property (nonatomic, copy) NSString * rtcType;
 
 @end
 
 /// 所有开播房间列表
 @interface RoomListModel : BaseRespModel
-@property (nonatomic, copy) NSArray<HSRoomInfoList *>              * roomInfoList;
+@property (nonatomic, copy) NSArray<HSRoomInfoList *> * roomInfoList;
 
 @end
 

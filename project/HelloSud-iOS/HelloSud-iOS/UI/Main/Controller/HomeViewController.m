@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *dataList;
 /// 头部数据源
-@property (nonatomic, strong) NSMutableArray <HSSceneList *> *headerSceneList;
+@property (nonatomic, strong) NSMutableArray <HSSceneModel *> *headerSceneList;
 @property (nonatomic, strong) NSMutableArray *headerGameList;
 @property (nonatomic, strong) SearchHeaderView *searchHeaderView;
 @property (nonatomic, assign) CGFloat itemW;
@@ -78,8 +78,8 @@
         
         /// ap存储 suitId 对应的dataArr
         NSMutableDictionary *dataMap = [NSMutableDictionary dictionary];
-        for (HSSceneList *m in model.sceneList) {
-            NSMutableArray <HSGameList *> *arr = [NSMutableArray array];
+        for (HSSceneModel *m in model.sceneList) {
+            NSMutableArray <HSGameItem *> *arr = [NSMutableArray array];
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             [dic setValue:@(m.sceneId) forKey:@"suitId"];
             [dic setValue:arr forKey:@"dataArr"];
@@ -87,14 +87,14 @@
         }
         
         /// 非重复游戏列表
-        NSMutableArray <HSGameList *> *originalGameArr = [NSMutableArray array];
+        NSMutableArray <HSGameItem *> *originalGameArr = [NSMutableArray array];
         /// 遍历gameList 分类 suitId
         for (int i = 0; i < model.gameList.count; i++) {
             [originalGameArr addObject:model.gameList[i]];
             for (NSNumber *value in model.gameList[i].suitScene) {
                 int suitId = value.intValue;
                 NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%d", suitId]];
-                NSMutableArray <HSGameList *> *arr = [dic objectForKey:@"dataArr"];
+                NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
                 [arr addObject:model.gameList[i]];
             }
         }
@@ -103,24 +103,24 @@
         AppManager.shared.sceneList = model.sceneList;
         
         /// dataList  headerGameList  headerSceneList 业务需求赋值
-        for (HSSceneList *m in model.sceneList) {
+        for (HSSceneModel *m in model.sceneList) {
             NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%ld", (long)m.sceneId]];
-            NSMutableArray <HSGameList *> *arr = [dic objectForKey:@"dataArr"];
+            NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
             
             if (arr.count <= 6) {
                 [weakSelf.headerGameList addObject:arr];
                 [weakSelf.dataList addObject:@[]];
             } else {
-                NSMutableArray <HSGameList *> *h_arr = NSMutableArray.new;
+                NSMutableArray <HSGameItem *> *h_arr = NSMutableArray.new;
                 [h_arr setArray:[arr subarrayWithRange:NSMakeRange(0, 6)]];
                 [weakSelf.headerGameList addObject:h_arr];
-                NSMutableArray <HSGameList *> *cellDataArray = [NSMutableArray arrayWithArray:[arr subarrayWithRange:NSMakeRange(6, arr.count-6)]];
+                NSMutableArray <HSGameItem *> *cellDataArray = [NSMutableArray arrayWithArray:[arr subarrayWithRange:NSMakeRange(6, arr.count-6)]];
                 
                 /// 求余 填满整个屏幕
                 double fmodCount = fmod(cellDataArray.count, 4);
                 if (fmodCount > 0) {
                     for (int i = fmodCount; i < 4; i++) {
-                        HSGameList *m = [[HSGameList alloc] init];
+                        HSGameItem *m = [[HSGameItem alloc] init];
                         m.isBlank = true;
                         [cellDataArray addObject:m];
                     }
@@ -150,7 +150,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GameItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
-    NSArray<HSGameList *> *arr = self.dataList[indexPath.section];
+    NSArray<HSGameItem *> *arr = self.dataList[indexPath.section];
     cell.model = arr[indexPath.row];
     return cell;
 }
@@ -159,7 +159,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    HSGameList *model = self.dataList[indexPath.section][indexPath.row];
+    HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
     [AudioRoomManager.shared reqMatchRoom:model.gameId sceneType:self.headerSceneList[indexPath.section].sceneId];
 }
 
@@ -177,7 +177,7 @@
     UICollectionReusableView *supplementaryView;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
         HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
-        NSArray<HSGameList *> *arr = self.headerGameList[indexPath.section];
+        NSArray<HSGameItem *> *arr = self.headerGameList[indexPath.section];
         view.headerGameList = arr;
         view.sceneModel = self.headerSceneList[indexPath.section];
         supplementaryView = view;
@@ -233,14 +233,14 @@
     return _dataList;
 }
 
-- (NSMutableArray<HSGameList *> *)headerGameList {
+- (NSMutableArray<HSGameItem *> *)headerGameList {
     if (!_headerGameList) {
         _headerGameList = [NSMutableArray array];
     }
     return _headerGameList;
 }
 
-- (NSMutableArray<HSSceneList *> *)headerSceneList {
+- (NSMutableArray<HSSceneModel *> *)headerSceneList {
     if (!_headerSceneList) {
         _headerSceneList = [NSMutableArray array];
     }

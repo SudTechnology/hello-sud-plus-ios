@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 配置信息
 @property(nonatomic, strong) ConfigModel *configModel;
 /// 所有游戏列表
-@property(nonatomic, strong) NSArray <HSGameList *> *gameList;
+@property(nonatomic, strong) NSArray <HSGameItem *> *gameList;
 /// 所有sceneList游戏列表
-@property(nonatomic, strong) NSArray <HSSceneList *> *sceneList;
+@property(nonatomic, strong) NSArray <HSSceneModel *> *sceneList;
 /// 所有支持rtc厂商列表
 @property(nonatomic, strong) NSArray <HSConfigContent *> *rtcList;
 /// 选中rtc厂商类型

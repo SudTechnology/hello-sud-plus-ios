@@ -10,8 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeHeaderReusableView : BaseCollectionReusableView
-@property (nonatomic, strong) NSArray <HSGameList *> *headerGameList;
-@property (nonatomic, strong) HSSceneList *sceneModel;
+@property (nonatomic, strong) NSArray <HSGameItem *> *headerGameList;
+@property (nonatomic, strong) HSSceneModel *sceneModel;
 @end
 
 NS_ASSUME_NONNULL_END

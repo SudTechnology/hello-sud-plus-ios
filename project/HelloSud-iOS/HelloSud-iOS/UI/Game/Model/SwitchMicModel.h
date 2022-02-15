@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 房间上下麦Model
 @interface SwitchMicModel : BaseRespModel
-@property (nonatomic, copy) NSString              * streamId;
+@property (nonatomic, copy) NSString * streamId;
 
 @end
 

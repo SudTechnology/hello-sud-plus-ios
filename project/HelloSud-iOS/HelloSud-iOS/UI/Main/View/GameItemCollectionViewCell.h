@@ -8,7 +8,7 @@
 #import "BaseCollectionViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+/// 游戏item cell
 @interface GameItemCollectionViewCell: BaseCollectionViewCell
 @property (nonatomic, strong) UILabel *inGameLabel;
 

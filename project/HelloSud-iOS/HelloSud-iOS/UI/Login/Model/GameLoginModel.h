@@ -10,8 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GameLoginModel : BaseRespModel
-@property (nonatomic, assign) int                   expireDate;
-@property (nonatomic, strong) NSString              *code;
+@property (nonatomic, assign) int expireDate;
+@property (nonatomic, strong) NSString *code;
 @end
 
 NS_ASSUME_NONNULL_END

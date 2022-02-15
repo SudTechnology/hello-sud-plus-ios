@@ -8,17 +8,17 @@
 #import "BaseModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+/// 房间麦位列表model
 @interface HSRoomMicList: NSObject
-@property (nonatomic, assign) NSInteger              roleType;
-@property (nonatomic, assign) NSInteger              userId;
-@property (nonatomic, assign) NSInteger              micIndex;
+@property (nonatomic, assign) NSInteger roleType;
+@property (nonatomic, assign) NSInteger userId;
+@property (nonatomic, assign) NSInteger micIndex;
 
 @end
 
 /// 查询房间麦位列表Model
 @interface MicListModel : BaseRespModel
-@property (nonatomic , copy) NSArray<HSRoomMicList *>              * roomMicList;
+@property (nonatomic , copy) NSArray<HSRoomMicList *> * roomMicList;
 
 @end
 
