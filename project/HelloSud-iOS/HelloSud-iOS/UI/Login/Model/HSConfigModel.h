@@ -16,17 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface HSConfigData : BaseModel
-@property (nonatomic, strong) NSString              *thirdId;
-@property (nonatomic, strong) HSConfigContent              *zegoCfg;
-@property (nonatomic, strong) HSConfigContent              *agoraCfg;
-@property (nonatomic, strong) HSConfigContent              *sudCfg;
-
-@end
-
 /// 配置
 @interface HSConfigModel : HSBaseRespModel
-@property (nonatomic, strong) HSConfigData              *data;
+@property (nonatomic, strong) HSConfigContent *zegoCfg;
+@property (nonatomic, strong) HSConfigContent *agoraCfg;
+@property (nonatomic, strong) HSConfigContent *sudCfg;
 @end
 
 NS_ASSUME_NONNULL_END
