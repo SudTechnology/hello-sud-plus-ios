@@ -16,14 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface HSMicListData: BaseModel
-@property (nonatomic , copy) NSArray<HSRoomMicList *>              * roomMicList;
-
-@end
-
 /// 查询房间麦位列表Model
 @interface HSMicListModel : HSBaseRespModel
-@property (nonatomic, strong) HSMicListData              * data;
+@property (nonatomic , copy) NSArray<HSRoomMicList *>              * roomMicList;
 
 @end
 

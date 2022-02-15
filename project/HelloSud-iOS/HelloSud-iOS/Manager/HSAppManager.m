@@ -176,7 +176,7 @@
         dicParam[@"userId"] = [NSNumber numberWithInteger:userID.integerValue];
     }
     [RequestService postRequestWithApi:kBASEURL(@"login/v1") param:dicParam success:^(NSDictionary *rootDict) {
-        HSLoginModel *model = [HSLoginModel mj_objectWithKeyValues:rootDict];
+        HSLoginModel *model = [HSLoginModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
             return;

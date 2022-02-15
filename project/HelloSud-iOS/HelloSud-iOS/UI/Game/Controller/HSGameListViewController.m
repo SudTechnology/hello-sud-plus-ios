@@ -57,13 +57,13 @@
 - (void)requestData {
     WeakSelf
     [RequestService postRequestWithApi:kINTERACTURL(@"room/list/v1") param:nil success:^(NSDictionary *rootDict) {
-        HSRoomListModel *model = [HSRoomListModel mj_objectWithKeyValues:rootDict];
+        HSRoomListModel *model = [HSRoomListModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
             return;
         }
         [self.dataList removeAllObjects];
-        [weakSelf.dataList addObjectsFromArray:model.data.roomInfoList];
+        [weakSelf.dataList addObjectsFromArray:model.roomInfoList];
         [weakSelf.tableView reloadData];
     } failure:^(id error) {
         [ToastUtil show:@"网络错误"];

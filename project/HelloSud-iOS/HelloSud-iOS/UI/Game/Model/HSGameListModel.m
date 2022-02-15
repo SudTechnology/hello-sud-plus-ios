@@ -15,15 +15,10 @@
 
 @end
 
-@implementation HSGameListData
+@implementation HSGameListModel
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"gameList": [HSGameList class],
              @"sceneList": [HSSceneList class]
     };
 }
-
-@end
-
-@implementation HSGameListModel
-
 @end

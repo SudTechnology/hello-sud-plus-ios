@@ -28,15 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface HSGameListData: BaseModel
-@property (nonatomic, copy) NSArray<HSGameList *>              * gameList;
-@property (nonatomic, copy) NSArray<HSSceneList *>              * sceneList;
-
-@end
-
 /// 查询游戏列表Model
 @interface HSGameListModel: HSBaseRespModel
-@property (nonatomic, strong) HSGameListData              * data;
+@property (nonatomic, copy) NSArray<HSGameList *>              * gameList;
+@property (nonatomic, copy) NSArray<HSSceneList *>              * sceneList;
 
 @end
 
