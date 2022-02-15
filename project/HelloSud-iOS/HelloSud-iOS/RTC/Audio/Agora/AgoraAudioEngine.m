@@ -91,8 +91,10 @@
     self.roomID = roomID;
     WeakSelf
     NSUInteger uid = (NSUInteger)[user.userID longLongValue];
-    // 加入房间通道
+    // 关闭推流、采集
+    [self.agoraKit enableLocalAudio:NO];
     [self.agoraKit muteLocalAudioStream:YES];
+    // 加入房间通道
     [_agoraKit joinChannelByToken:nil channelId:roomID info:nil uid:uid joinSuccess:nil];
     // 登录IM
     [_agoraIM loginByToken:nil user:user.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
