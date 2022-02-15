@@ -71,6 +71,8 @@
 		44DF03AE2797F124006EE6AC /* FSMApp2MGManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03AD2797F124006EE6AC /* FSMApp2MGManager.m */; };
 		44F29F4D27B21A4D00F57DEE /* HSAudioMsgSystemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F4C27B21A4D00F57DEE /* HSAudioMsgSystemModel.m */; };
 		44F29F5027B2474900F57DEE /* HSPaddingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F4F27B2474900F57DEE /* HSPaddingLabel.m */; };
+		44F29F5927BB98D900F57DEE /* HSSetingHeadItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F5827BB98D900F57DEE /* HSSetingHeadItemView.m */; };
+		44F29F5C27BB9C0800F57DEE /* HSSettingHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F5B27BB9C0800F57DEE /* HSSettingHeaderModel.m */; };
 		6C076E53279940A400650209 /* HSMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E52279940A400650209 /* HSMainTabBarController.m */; };
 		6C076E572799450900650209 /* HSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E562799450900650209 /* HSSettingViewController.m */; };
 		6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E5B27995D3400650209 /* BaseTableViewCell.m */; };
@@ -264,6 +266,10 @@
 		44F29F4C27B21A4D00F57DEE /* HSAudioMsgSystemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSAudioMsgSystemModel.m; sourceTree = "<group>"; };
 		44F29F4E27B2474900F57DEE /* HSPaddingLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSPaddingLabel.h; sourceTree = "<group>"; };
 		44F29F4F27B2474900F57DEE /* HSPaddingLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSPaddingLabel.m; sourceTree = "<group>"; };
+		44F29F5727BB98D900F57DEE /* HSSetingHeadItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSSetingHeadItemView.h; sourceTree = "<group>"; };
+		44F29F5827BB98D900F57DEE /* HSSetingHeadItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSetingHeadItemView.m; sourceTree = "<group>"; };
+		44F29F5A27BB9C0800F57DEE /* HSSettingHeaderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSSettingHeaderModel.h; sourceTree = "<group>"; };
+		44F29F5B27BB9C0800F57DEE /* HSSettingHeaderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSettingHeaderModel.m; sourceTree = "<group>"; };
 		4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.release.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C076E51279940A400650209 /* HSMainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSMainTabBarController.h; sourceTree = "<group>"; };
@@ -681,6 +687,8 @@
 				6C076E6027995F4C00650209 /* HSSettingCell.m */,
 				6C076E6827996C2700650209 /* HSSetingHeadView.h */,
 				6C076E6927996C2700650209 /* HSSetingHeadView.m */,
+				44F29F5727BB98D900F57DEE /* HSSetingHeadItemView.h */,
+				44F29F5827BB98D900F57DEE /* HSSetingHeadItemView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -690,6 +698,8 @@
 			children = (
 				6C076E622799605600650209 /* HSSettingModel.h */,
 				6C076E632799605600650209 /* HSSettingModel.m */,
+				44F29F5A27BB9C0800F57DEE /* HSSettingHeaderModel.h */,
+				44F29F5B27BB9C0800F57DEE /* HSSettingHeaderModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1202,6 +1212,7 @@
 				44DF03AE2797F124006EE6AC /* FSMApp2MGManager.m in Sources */,
 				445EAAC5279A90C0000DCC72 /* HSRoomGiftTableViewCell.m in Sources */,
 				6C239FFB27B3AAD900B19FE4 /* ExChangeGameMsgModel.m in Sources */,
+				44F29F5C27BB9C0800F57DEE /* HSSettingHeaderModel.m in Sources */,
 				445EAAF2279E8083000DCC72 /* HSHomeViewController.m in Sources */,
 				445EAB0A279FD44F000DCC72 /* HSRoomGameInfoModel.m in Sources */,
 				445EAB1A27A0101F000DCC72 /* HSEnterRoomModel.m in Sources */,
@@ -1245,6 +1256,7 @@
 				6C076EC027A0EC2400650209 /* HSAudioRoomMicModel.m in Sources */,
 				6C076E53279940A400650209 /* HSMainTabBarController.m in Sources */,
 				44F29F4D27B21A4D00F57DEE /* HSAudioMsgSystemModel.m in Sources */,
+				44F29F5927BB98D900F57DEE /* HSSetingHeadItemView.m in Sources */,
 				445EAB1D27A0108E000DCC72 /* HSExitRoomModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
