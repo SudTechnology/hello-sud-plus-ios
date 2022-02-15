@@ -62,6 +62,7 @@
         [self reqConfigData];
     }
     _rtcType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
+    _rtcType = @"agora";
     NSString *configStr = [NSUserDefaults.standardUserDefaults stringForKey:kKeyConfigModel];
     if (configStr) {
         _configModel = [HSConfigModel mj_objectWithKeyValues:configStr];
@@ -116,7 +117,11 @@
 
 /// 设置请求header
 - (void)setupNetWorkHeader {
-    [RequestService setupHeader:@{@"Authorization": self.token}];
+    if (self.token) {
+        [RequestService setupHeader:@{@"Authorization": self.token}];
+    } else {
+        NSLog(@"设置APP请求头token为空");
+    }
     // 图片拉取鉴权
     SDWebImageDownloader *downloader = (SDWebImageDownloader *)[SDWebImageManager sharedManager].imageLoader;
     [downloader setValue:self.token forHTTPHeaderField:@"Authorization"];
@@ -176,7 +181,7 @@
         dicParam[@"userId"] = [NSNumber numberWithInteger:userID.integerValue];
     }
     [RequestService postRequestWithApi:kBASEURL(@"login/v1") param:dicParam success:^(NSDictionary *rootDict) {
-        HSLoginModel *model = [HSLoginModel mj_objectWithKeyValues:rootDict];
+        HSLoginModel *model = [HSLoginModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
             return;
@@ -210,7 +215,14 @@
 
 /// 处理rtc厂商信息
 - (void)handleRTCConfigInfo {
-    _rtcList = @[self.configModel.zegoCfg, self.configModel.agoraCfg];
+    NSMutableArray *rtcList = NSMutableArray.new;
+    if (self.configModel.zegoCfg) {
+        [rtcList addObject:self.configModel.zegoCfg];
+    }
+    if (self.configModel.agoraCfg) {
+        [rtcList addObject:self.configModel.agoraCfg];
+    }
+    _rtcList = rtcList;
     // 默认zego
     if (self.rtcType.length == 0) {
         self.rtcType = self.configModel.zegoCfg.rtcType;
