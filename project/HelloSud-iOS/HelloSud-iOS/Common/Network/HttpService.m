@@ -1,15 +1,15 @@
 //
-//  RequestService.m
+//  HttpService.m
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/25.
 //
 
-#import "RequestService.h"
+#import "HttpService.h"
 
 NSInteger const kAFNetworkingTimeoutInterval = 10;
 
-@implementation RequestService
+@implementation HttpService
 
 static AFHTTPSessionManager *aManager;
 

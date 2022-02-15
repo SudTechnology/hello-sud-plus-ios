@@ -31,7 +31,7 @@
 /// Comon
 #import "AppUtil.h"
 #import "GameConfig.h"
-#import "RequestService.h"
+#import "HttpService.h"
 
 /// Page
 #import "CommonRoomModelHeader.h"

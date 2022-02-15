@@ -118,7 +118,7 @@
 /// 设置请求header
 - (void)setupNetWorkHeader {
     if (self.token) {
-        [RequestService setupHeader:@{@"Authorization": self.token}];
+        [HttpService setupHeader:@{@"Authorization": self.token}];
     } else {
         NSLog(@"设置APP请求头token为空");
     }
@@ -140,7 +140,7 @@
 /// 登录成功请求配置信息
 - (void)reqConfigData {
     WeakSelf
-    [RequestService postRequestWithApi:kBASEURL(@"base/config/v1") param:nil success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithApi:kBASEURL(@"base/config/v1") param:nil success:^(NSDictionary *rootDict) {
         ConfigModel *model = [ConfigModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
@@ -180,7 +180,7 @@
     if (userID.length > 0) {
         dicParam[@"userId"] = [NSNumber numberWithInteger:userID.integerValue];
     }
-    [RequestService postRequestWithApi:kBASEURL(@"login/v1") param:dicParam success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithApi:kBASEURL(@"login/v1") param:dicParam success:^(NSDictionary *rootDict) {
         LoginModel *model = [LoginModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];

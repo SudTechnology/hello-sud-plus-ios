@@ -1,5 +1,5 @@
 //
-//  RequestService.h
+//  HttpService.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/25.
@@ -35,7 +35,7 @@ typedef void (^HTTPRequestFailedBlock)(NSError *error);
 extern NSInteger const kAFNetworkingTimeoutInterval;
 
 
-@interface RequestService : NSObject
+@interface HttpService : NSObject
 
 /**
  *  网络请求的实例方法

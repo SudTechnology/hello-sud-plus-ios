@@ -66,7 +66,7 @@
 #pragma mark - requst Data
 - (void)requestData {
     WeakSelf
-    [RequestService postRequestWithApi:kINTERACTURL(@"game/list/v1") param:@{} success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithApi:kINTERACTURL(@"game/list/v1") param:@{} success:^(NSDictionary *rootDict) {
         GameListModel *model = [GameListModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
