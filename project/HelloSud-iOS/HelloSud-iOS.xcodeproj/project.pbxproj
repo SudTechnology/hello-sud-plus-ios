@@ -601,14 +601,14 @@
 		44DF037F2796A981006EE6AC /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				6C1D007527BA03DC000F0998 /* Agora */,
-				6C076E6E279E424900650209 /* Zego */,
+				6C076E7E279E8EBD00650209 /* MediaAudioCommon.h */,
+				6C076E7F279E8EBD00650209 /* MediaAudioCommon.m */,
 				44DF03812796A981006EE6AC /* IMediaAudioEngine.h */,
 				6C076E72279E457D00650209 /* MediaAudioEventListener.h */,
 				6C076E7B279E833C00650209 /* MediaAudioEngineManager.h */,
 				6C076E7C279E833C00650209 /* MediaAudioEngineManager.m */,
-				6C076E7E279E8EBD00650209 /* MediaAudioCommon.h */,
-				6C076E7F279E8EBD00650209 /* MediaAudioCommon.m */,
+				6C1D007527BA03DC000F0998 /* Agora */,
+				6C076E6E279E424900650209 /* Zego */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
