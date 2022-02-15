@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *captainUserId;
 
 /// 登录游戏
-- (void)reqGameLoginWithSuccess:(void(^)(HSRespGameInfoDataModel *gameInfo))success fail:(ErrorBlock)fail;
+- (void)reqGameLoginWithSuccess:(void(^)(HSRespGameInfoModel *gameInfo))success fail:(ErrorBlock)fail;
 @end
 
 NS_ASSUME_NONNULL_END
