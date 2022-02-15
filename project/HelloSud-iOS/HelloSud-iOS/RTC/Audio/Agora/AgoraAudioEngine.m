@@ -11,10 +11,16 @@
 #import <AgoraRtmKit/AgoraRtmKit.h>
 
 @interface AgoraAudioEngine()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate, AgoraAudioDataFrameProtocol>
+
+/// 是否静音所有播放流
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
+/// 是否在推流
 @property(nonatomic, assign)BOOL isPublishing;
+/// 静音队列
 @property(nonatomic, strong)dispatch_queue_t queueMute;
+/// 事件监听者
 @property(nonatomic, weak)id<MediaAudioEventListener> listener;
+/// 当前进入房间
 @property(nonatomic, strong)NSString *roomID;
 /// 声网语音引擎
 @property(nonatomic, strong)AgoraRtcEngineKit *agoraKit;
@@ -218,16 +224,11 @@
         NSString *userID = [NSString stringWithFormat:@"%ld", item.uid];
         // 转换0-100声音值
         NSUInteger volume = item.volume / 255.0 * 100;
-        
+        NSLog(@"reportAudioVolumeIndicationOfSpeakers userID:%@, volume:%@", userID, @(volume));
         if (item.uid > 0) {
-            NSLog(@"reportAudioVolumeIndicationOfSpeakers userID:%@, volume:%@", userID, @(volume));
             soundLevels[userID] = @(volume);
         } else {
-            // 说话时才回调
-            if (item.vad == 1) {
-                NSLog(@"reportAudioVolume local, volume:%@", @(volume));
-                localSoundLevel = @(volume);
-            }
+            localSoundLevel = @(volume);
         }
     }
     
