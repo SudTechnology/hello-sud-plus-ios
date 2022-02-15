@@ -265,17 +265,6 @@
     }
 }
 
-/// The callback triggered every 30 seconds to report the current number of online users.
-///
-/// Available since: 1.7.0
-/// Description: This method will notify the user of the current number of online users in the room..
-/// Use cases: Developers can use this callback to show the number of user online in the current room.
-/// When to call /Trigger: After successfully logging in to the room.
-/// Restrictions: None.
-/// Caution: 1. This function is called back every 30 seconds. 2. Because of this design, when the number of users in the room exceeds 500, there will be some errors in the statistics of the number of online people in the room.
-///
-/// @param count Count of online users.
-/// @param roomID Room ID where the user is logged in, a string of up to 128 bytes in length.
 - (void)onRoomOnlineUserCountUpdate:(int)count roomID:(NSString *)roomID {
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomOnlineUserCountUpdate:roomID:)]) {
         [self.listener onRoomOnlineUserCountUpdate:count roomID:roomID];
@@ -290,7 +279,6 @@
 
 
 // 根据需要实现以下三个回调，分别对应上述 Bitmask 的三个选项
-
 - (void)onCapturedAudioData:(const unsigned char *)data dataLength:(unsigned int)dataLength param:(ZegoAudioFrameParam *)param {
     // 本地采集音频数据，推流后可收到回调
     NSData *a_data = [[NSData alloc] initWithBytes:data length:dataLength];
