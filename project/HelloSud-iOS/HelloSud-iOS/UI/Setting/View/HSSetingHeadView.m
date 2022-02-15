@@ -33,9 +33,8 @@
         m.size = sizeArr[i];
         [self.dataArray addObject:m];
     }
-    
-    NSMutableArray <UIView *>*scaleNodeArr = NSMutableArray.new;
-    NSMutableArray <UIView *>*itemNodeArr = NSMutableArray.new;
+    UIView *lastNode;
+    CGFloat v_w = kScreenWidth - 36 * 2;
     for (int i = 0; i < self.dataArray.count; i++) {
         UIView *node = UIView.new;
         node.backgroundColor = colorArr[i];
@@ -44,28 +43,24 @@
         HSSetingHeadItemView *item = HSSetingHeadItemView.new;
         item.model = self.dataArray[i];
         [self.itemsView addSubview:item];
-        [scaleNodeArr addObject:node];
-        [itemNodeArr addObject:item];
+        
+        CGFloat item_w = v_w * ratioArr[i].floatValue;
+        [node mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(item_w);
+            if (lastNode == nil) {
+                make.left.mas_equalTo(self.scaleView);
+            } else {
+                make.left.mas_equalTo(lastNode.mas_right);
+            }
+            make.top.bottom.mas_equalTo(self.scaleView);
+        }];
+        lastNode = node;
     }
-    [scaleNodeArr hs_mas_distributeSudokuViewsWithFixedItemWidth:(kScreenWidth - 36 * 2)/5 fixedItemHeight:40
-                                                fixedLineSpacing:0 fixedInteritemSpacing:0
-                                                       warpCount:5
-                                                      topSpacing:0
-                                                   bottomSpacing:0 leadSpacing:0 tailSpacing:0];
-    [itemNodeArr hs_mas_distributeSudokuViewsWithFixedItemWidth:kScreenWidth - 36 * 2 fixedItemHeight:30
+    [self.itemsView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:kScreenWidth - 36 * 2 fixedItemHeight:30
                                                 fixedLineSpacing:0 fixedInteritemSpacing:0
                                                        warpCount:1
                                                       topSpacing:0
                                                    bottomSpacing:0 leadSpacing:0 tailSpacing:0];
-    CGFloat v_w = kScreenWidth - 36 * 2;
-    
-    for (int i = 0; i < ratioArr.count; i++) {
-        CGFloat s = ratioArr[i].floatValue;
-        CGFloat item_w = v_w * s;
-        [scaleNodeArr[i] mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@(item_w));
-        }];
-    }
 }
 
 - (void)hsAddViews {

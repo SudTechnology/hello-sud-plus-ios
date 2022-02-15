@@ -1,22 +1,21 @@
 //
-//  HSSettingCell.m
+//  ChangeRTCTCell.m
 //  HelloSud-iOS
 //
-//  Created by kaniel on 2022/1/20.
+//  Created by Mary on 2022/2/15.
 //
 
-#import "HSSettingCell.h"
-#import "HSSettingModel.h"
+#import "ChangeRTCTCell.h"
+#import "ChangeRTCModel.h"
 
-@interface HSSettingCell()
+@interface ChangeRTCTCell()
 @property(nonatomic, strong)UIView *topView;
 @property(nonatomic, strong)UIImageView *rightImageView;
 @property(nonatomic, strong)UILabel *titleLabel;
-@property(nonatomic, strong)UILabel *subLabel;
 
 @end
 
-@implementation HSSettingCell
+@implementation ChangeRTCTCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -33,7 +32,6 @@
     [super hsAddViews];
     [self.contentView addSubview:self.topView];
     [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.subLabel];
     [self.contentView addSubview:self.rightImageView];
 }
 
@@ -47,8 +45,8 @@
         
     }];
     [self.rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(12, 12));
-        make.right.mas_equalTo(-18);
+        make.size.mas_equalTo(CGSizeMake(20, 20));
+        make.right.mas_equalTo(-20);
         make.centerY.equalTo(self.contentView);
         
     }];
@@ -56,25 +54,17 @@
         make.left.mas_equalTo(20);
         make.width.height.mas_greaterThanOrEqualTo(0);
         make.centerY.equalTo(self.contentView);
-        
-    }];
-    [self.subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-46);
-        make.width.height.mas_greaterThanOrEqualTo(0);
-        make.centerY.equalTo(self.contentView);
-        
     }];
 }
 
 - (void)hsUpdateUI {
     [super hsUpdateUI];
-    if (![self.model isKindOfClass:[HSSettingModel class]]) {
+    if (![self.model isKindOfClass:[ChangeRTCModel class]]) {
         return;
     }
-    HSSettingModel *model = (HSSettingModel *)self.model;
+    ChangeRTCModel *model = (ChangeRTCModel *)self.model;
     self.titleLabel.text = model.title;
-    self.subLabel.text = model.subTitle;
-    self.rightImageView.hidden = model.isMore ? NO : YES;
+    self.rightImageView.hidden = model.isSlect ? NO : YES;
     
 }
 
@@ -95,7 +85,7 @@
 - (UIView *)rightImageView {
     if (_rightImageView == nil) {
         _rightImageView = UIImageView.new;
-        _rightImageView.image = [UIImage imageNamed:@"right_more"];
+        _rightImageView.image = [UIImage imageNamed:@"cell_selected"];
         _rightImageView.hidden = YES;
     }
     return _rightImageView;
@@ -111,15 +101,5 @@
     return _titleLabel;
 }
 
-- (UILabel *)subLabel {
- 
-    if (_subLabel == nil) {
-        _subLabel = UILabel.new;
-        _subLabel.font = [UIFont systemFontOfSize:14];
-        _subLabel.textColor = HEX_COLOR(@"#8A8A8E");
-        _subLabel.textAlignment = NSTextAlignmentRight;
-    }
-    return _subLabel;
-}
 
 @end
