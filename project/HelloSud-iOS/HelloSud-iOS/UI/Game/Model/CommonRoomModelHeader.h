@@ -8,19 +8,19 @@
 #ifndef CommonRoomModelHeader_h
 #define CommonRoomModelHeader_h
 
-#import "HSBaseRespModel.h"
+#import "BaseRespModel.h"
 
-#import "HSGameListModel.h"
-#import "HSEnterRoomModel.h"
-#import "HSExitRoomModel.h"
-#import "HSMatchRoomModel.h"
-#import "HSSwitchMicModel.h"
-#import "HSMicListModel.h"
-#import "HSSwitchGameModel.h"
-#import "HSRoomListModel.h"
+#import "GameListModel.h"
+#import "EnterRoomModel.h"
+#import "ExitRoomModel.h"
+#import "MatchRoomModel.h"
+#import "SwitchMicModel.h"
+#import "MicListModel.h"
+#import "SwitchGameModel.h"
+#import "RoomListModel.h"
 
-#import "HSLoginModel.h"
-#import "HSConfigModel.h"
-#import "HSUserInfoListModel.h"
+#import "LoginModel.h"
+#import "ConfigModel.h"
+#import "UserInfoListModel.h"
 
 #endif /* CommonRoomModelHeader_h */

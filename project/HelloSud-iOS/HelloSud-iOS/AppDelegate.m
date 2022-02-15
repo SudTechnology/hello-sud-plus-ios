@@ -6,11 +6,11 @@
 //
 
 #import "AppDelegate.h"
-#import "HSMainTabBarController.h"
+#import "MainTabBarController.h"
 #import <Bugly/Bugly.h>
 #import "DeviceUtil.h"
 #import "MediaAudioEngineManager.h"
-#import "HSLoginViewController.h"
+#import "LoginViewController.h"
 @interface AppDelegate () {
     
 }
@@ -21,11 +21,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc]init];
-    if (HSAppManager.shared.isLogin) {
-        [HSAppManager.shared refreshToken];
-        self.window.rootViewController = [[HSMainTabBarController alloc]init];
+    if (AppManager.shared.isLogin) {
+        [AppManager.shared refreshToken];
+        self.window.rootViewController = [[MainTabBarController alloc]init];
     } else {
-        self.window.rootViewController = [[HSLoginViewController alloc]init];
+        self.window.rootViewController = [[LoginViewController alloc]init];
     }
     self.window.backgroundColor = UIColor.whiteColor;
     [self.window makeKeyAndVisible];

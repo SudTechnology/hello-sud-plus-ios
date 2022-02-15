@@ -28,14 +28,14 @@
 }
 
 - (void)setModel:(BaseModel *)model {
-    if ([model isKindOfClass:HSAudioMsgTextModel.class]) {
-        HSAudioMsgTextModel *m = (HSAudioMsgTextModel *)model;
+    if ([model isKindOfClass:AudioMsgTextModel.class]) {
+        AudioMsgTextModel *m = (AudioMsgTextModel *)model;
         [self setMsgContent: m];
     }
 }
 
 /// 设置文本消息
-- (void)setMsgContent:(HSAudioMsgTextModel *)m {
+- (void)setMsgContent:(AudioMsgTextModel *)m {
     self.msgLabel.attributedText = m.attrContent;
 }
 
