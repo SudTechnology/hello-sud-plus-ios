@@ -212,7 +212,7 @@
         /// 无人，上麦
         [HSAudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:0 success:nil fail:nil];
         return;
-    } else if ([HSAppManager.shared.loginUserInfo isMeByUserID:micModel.user.userID] || micModel.user.roleType == 1) {
+    } else if ([HSAppManager.shared.loginUserInfo isMeByUserID:micModel.user.userID]) {
         // 是自己或者房主
         HSMicOperateView *v = HSMicOperateView.new;
         v.downMicCallback = ^(UIButton *sender) {
