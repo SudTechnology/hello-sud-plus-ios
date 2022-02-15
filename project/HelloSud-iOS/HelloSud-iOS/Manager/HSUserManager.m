@@ -67,7 +67,7 @@
 /// @param fail 失败
 - (void)reqUserInfo:(NSArray<NSNumber*>*)userIDList success:(void(^)(NSArray<HSUserInfoModel *> *userList))success fail:(ErrorBlock)fail {
     [RequestService postRequestWithApi:kBASEURL(@"batch/user-info/v1") param:@{@"userIds": userIDList} success:^(NSDictionary *rootDict) {
-        HSRespUserInfoModel *model = [HSRespUserInfoModel mj_objectWithKeyValues:rootDict];
+        HSRespUserInfoModel *model = [HSRespUserInfoModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
             if (fail) {

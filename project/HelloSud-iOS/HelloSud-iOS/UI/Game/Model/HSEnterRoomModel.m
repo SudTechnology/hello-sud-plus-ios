@@ -7,10 +7,6 @@
 
 #import "HSEnterRoomModel.h"
 
-@implementation HSEnterRoomData
-
-@end
-
 @implementation HSEnterRoomModel
 
 @end

@@ -67,7 +67,7 @@
 - (void)requestData {
     WeakSelf
     [RequestService postRequestWithApi:kINTERACTURL(@"game/list/v1") param:@{} success:^(NSDictionary *rootDict) {
-        HSGameListModel *model = [HSGameListModel mj_objectWithKeyValues:rootDict];
+        HSGameListModel *model = [HSGameListModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
             return;
@@ -78,7 +78,7 @@
         
         /// ap存储 suitId 对应的dataArr
         NSMutableDictionary *dataMap = [NSMutableDictionary dictionary];
-        for (HSSceneList *m in model.data.sceneList) {
+        for (HSSceneList *m in model.sceneList) {
             NSMutableArray <HSGameList *> *arr = [NSMutableArray array];
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             [dic setValue:@(m.sceneId) forKey:@"suitId"];
@@ -89,21 +89,21 @@
         /// 非重复游戏列表
         NSMutableArray <HSGameList *> *originalGameArr = [NSMutableArray array];
         /// 遍历gameList 分类 suitId
-        for (int i = 0; i < model.data.gameList.count; i++) {
-            [originalGameArr addObject:model.data.gameList[i]];
-            for (NSNumber *value in model.data.gameList[i].suitScene) {
+        for (int i = 0; i < model.gameList.count; i++) {
+            [originalGameArr addObject:model.gameList[i]];
+            for (NSNumber *value in model.gameList[i].suitScene) {
                 int suitId = value.intValue;
                 NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%d", suitId]];
                 NSMutableArray <HSGameList *> *arr = [dic objectForKey:@"dataArr"];
-                [arr addObject:model.data.gameList[i]];
+                [arr addObject:model.gameList[i]];
             }
         }
         NSSet *set = [NSSet setWithArray:originalGameArr];
         HSAppManager.shared.gameList = [set allObjects];
-        HSAppManager.shared.sceneList = model.data.sceneList;
+        HSAppManager.shared.sceneList = model.sceneList;
         
         /// dataList  headerGameList  headerSceneList 业务需求赋值
-        for (HSSceneList *m in model.data.sceneList) {
+        for (HSSceneList *m in model.sceneList) {
             NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%ld", (long)m.sceneId]];
             NSMutableArray <HSGameList *> *arr = [dic objectForKey:@"dataArr"];
             
@@ -129,7 +129,7 @@
                 [weakSelf.dataList addObject:cellDataArray];
             }
         }
-        [weakSelf.headerSceneList addObjectsFromArray:model.data.sceneList];
+        [weakSelf.headerSceneList addObjectsFromArray:model.sceneList];
         
         [weakSelf.collectionView reloadData];
     } failure:^(id error) {

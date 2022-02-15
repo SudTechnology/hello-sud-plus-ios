@@ -20,7 +20,7 @@
 /// 登录游戏
 - (void)reqGameLoginWithSuccess:(void(^)(HSRespGameInfoDataModel *gameInfo))success fail:(ErrorBlock)fail {
     [RequestService postRequestWithApi:kBASEURL(@"game-login/v1") param:@{} success:^(NSDictionary *rootDict) {
-        HSRespGameInfoModel *model = [HSRespGameInfoModel mj_objectWithKeyValues:rootDict];
+        HSRespGameInfoModel *model = [HSRespGameInfoModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
             if (fail) {

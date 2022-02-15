@@ -9,18 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HSMatchRoomData: BaseModel
+/// 匹配游戏房Model
+@interface HSMatchRoomModel : HSBaseRespModel
 @property (nonatomic, assign) NSInteger              roomId;
 @property (nonatomic, copy) NSString              * roomName;
 @property (nonatomic, assign) NSInteger              gameId;
 @property (nonatomic, assign) NSInteger              memberCount;
 @property (nonatomic, assign) NSInteger              roleType;
-
-@end
-
-/// 匹配游戏房Model
-@interface HSMatchRoomModel : HSBaseRespModel
-@property (nonatomic, strong) HSMatchRoomData              * data;
 
 @end
 

@@ -7,10 +7,6 @@
 
 #import "HSMatchRoomModel.h"
 
-@implementation HSMatchRoomData
-
-@end
-
 @implementation HSMatchRoomModel
 
 @end
