@@ -56,6 +56,7 @@
 
 - (void)destroy {
     [AgoraRtcEngineKit destroy];
+    _agoraKit = nil;
 }
 
 
