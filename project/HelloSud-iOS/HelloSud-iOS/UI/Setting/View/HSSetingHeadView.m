@@ -57,7 +57,7 @@
 }
 
 - (void)hsUpdateUI {
-    HSAccountUserModel *userInfo = HSAppManager.shared.loginUserInfo;
+    AccountUserModel *userInfo = AppManager.shared.loginUserInfo;
     self.nameLabel.text = userInfo.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"用户ID: %@", userInfo.userID];
     if (userInfo.icon.length > 0) {
