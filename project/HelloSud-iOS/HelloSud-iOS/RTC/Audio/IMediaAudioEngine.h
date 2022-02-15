@@ -18,13 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param listener 事件处理实例
 - (void)setEventListener:(id<MediaAudioEventListener>)listener;
 
-/// 配置引擎SDK
-/// @param appID APPID
-/// @param appKey APP秘钥
-- (void)config:(NSString *)appID appKey:(NSString *)appKey;
+/// 必须优先调用初始化配置引擎SDK
+/// @param config config
+- (void)initWithConfig:(NSDictionary *)config;
 
-/// 销毁
-- (void)destroy;
+/// 销毁引擎SDK
+- (void)unInit;
 
 /// 登录房间
 /// @param roomID 房间ID

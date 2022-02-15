@@ -42,7 +42,9 @@
 }
 
 
-- (void)config:(nonnull NSString *)appID appKey:(nonnull NSString *)appKey {
+- (void)initWithConfig:(NSDictionary *)config {
+    NSString *appID = config[@"appID"];
+    NSString *appKey = config[@"appKey"];
     ZegoEngineConfig *engineConfig = ZegoEngineConfig.new;
     // 控制音频采集开关与推流关系，推静音帧
     engineConfig.advancedConfig = @{@"audio_capture_dummy": @"true", @"init_domain_name": @"ze-config.divtoss.com"};
@@ -68,7 +70,7 @@
     [[ZegoExpressEngine sharedEngine] startAudioDataObserver:bitmask param:param];
 }
 
-- (void)destroy {
+- (void)unInit {
     [ZegoExpressEngine destroyEngine:nil];
 }
 

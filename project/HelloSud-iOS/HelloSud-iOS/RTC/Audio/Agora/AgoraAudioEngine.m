@@ -45,7 +45,9 @@
 }
 
 
-- (void)config:(nonnull NSString *)appID appKey:(nonnull NSString *)appKey {
+- (void)initWithConfig:(NSDictionary *)config {
+    NSString *appID = config[@"appID"];
+    NSString *appKey = config[@"appKey"];
     _agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:appID delegate:self];
     [_agoraKit enableAudioVolumeIndication:300 smooth:3 report_vad:YES];
     [_agoraKit enableLocalAudio:NO];
@@ -53,7 +55,7 @@
     [_agoraKit setAudioDataFrame:self];
 }
 
-- (void)destroy {
+- (void)unInit {
     [AgoraRtcEngineKit destroy];
     _agoraKit = nil;
 }
