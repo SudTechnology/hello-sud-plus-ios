@@ -36,8 +36,8 @@
 
 /// 加载游戏
 - (void)loadGame {
-    NSString *appID = HSAppManager.shared.configData.sudCfg.appId;
-    NSString *appKey = HSAppManager.shared.configData.sudCfg.appKey;
+    NSString *appID = HSAppManager.shared.configModel.sudCfg.appId;
+    NSString *appKey = HSAppManager.shared.configModel.sudCfg.appKey;
     if (appID.length == 0 || appKey.length == 0) {
         [ToastUtil show:@"Game appID or appKey is empty"];
         return;

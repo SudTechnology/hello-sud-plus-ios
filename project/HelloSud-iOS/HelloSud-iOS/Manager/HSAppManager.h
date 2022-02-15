@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// token
 @property(nonatomic, copy, readonly) NSString *token;
 /// 配置信息
-@property(nonatomic, strong) HSConfigData *configData;
+@property(nonatomic, strong) HSConfigModel *configModel;
 /// 所有游戏列表
 @property(nonatomic, strong) NSArray <HSGameList *> *gameList;
 /// 所有sceneList游戏列表

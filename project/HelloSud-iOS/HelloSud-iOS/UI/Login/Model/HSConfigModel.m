@@ -11,10 +11,6 @@
 
 @end
 
-@implementation HSConfigData
-
-@end
-
 @implementation HSConfigModel
 
 @end

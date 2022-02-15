@@ -110,12 +110,12 @@
 - (void)reqConfigData {
     WeakSelf
     [RequestService postRequestWithApi:kBASEURL(@"base/config/v1") param:nil success:^(NSDictionary *rootDict) {
-        HSConfigModel *model = [HSConfigModel mj_objectWithKeyValues:rootDict];
+        HSConfigModel *model = [HSConfigModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
             return;
         }
-        weakSelf.configData = model.data;
+        weakSelf.configModel = model;
     } failure:^(id error) {
         [ToastUtil show:@"网络错误"];
     }];
