@@ -72,17 +72,6 @@
     [ZegoExpressEngine destroyEngine:nil];
 }
 
-
-- (BOOL)isMicrophoneMuted {
-    return ZegoExpressEngine.sharedEngine.isMicrophoneMuted;
-}
-
-
-- (BOOL)isMuteAllPlayStreamAudio {
-    return self.isMuteAllPlayStreamAudio;
-}
-
-
 - (BOOL)isPublishing {
     return _isPublishing;
 }
@@ -118,13 +107,6 @@
     [ZegoExpressEngine.sharedEngine logoutRoom];
 }
 
-
-- (void)muteAllPlayStreamAudio:(BOOL)isMute {
-    self.isMuteAllPlayStreamAudio = isMute;
-    [ZegoExpressEngine.sharedEngine muteAllPlayStreamAudio:isMute];
-}
-
-
 - (void)muteMicrophone:(BOOL)isMute {
     dispatch_async(self.queueMute, ^{
         /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
@@ -133,22 +115,6 @@
         [ZegoExpressEngine.sharedEngine muteMicrophone:isMute];
     });
 }
-
-
-- (void)mutePlayStreamAudio:(BOOL)isMute streamID:(nonnull NSString *)streamID {
-    [ZegoExpressEngine.sharedEngine mutePlayStreamAudio:isMute streamID:streamID];
-}
-
-
-- (void)setAllPlayStreamVolume:(NSInteger)volume {
-    [ZegoExpressEngine.sharedEngine setAllPlayStreamVolume:(unsigned)volume];
-}
-
-
-- (void)setPlayVolume:(NSInteger)volume streamID:(nonnull NSString *)streamID {
-    [ZegoExpressEngine.sharedEngine setPlayVolume:(unsigned)volume streamID:streamID];
-}
-
 
 - (void)startPlayingStream:(nonnull NSString *)streamID {
     [ZegoExpressEngine.sharedEngine startPlayingStream:streamID];
