@@ -66,6 +66,7 @@
         _configModel = [HSConfigModel mj_objectWithKeyValues:configStr];
     }
     _rtcType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
+    _rtcType = @"agora";
     [self handleRTCConfigInfo];
     [self switchAudioEngine];
 }
