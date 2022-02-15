@@ -62,7 +62,7 @@
         [self reqConfigData];
     }
     _rtcType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
-    _rtcType = @"agora";
+//    _rtcType = @"agora";
     NSString *configStr = [NSUserDefaults.standardUserDefaults stringForKey:kKeyConfigModel];
     if (configStr) {
         _configModel = [HSConfigModel mj_objectWithKeyValues:configStr];
