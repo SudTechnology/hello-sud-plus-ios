@@ -45,12 +45,12 @@
     HSSettingModel *userProtocolModel = [HSSettingModel new];
     userProtocolModel.title = @"用户协议";
     userProtocolModel.isMore = YES;
-    userProtocolModel.pageURL = HSAppManager.shared.appProtocolURL.absoluteString;
+    userProtocolModel.pageURL = AppManager.shared.appProtocolURL.absoluteString;
     
     HSSettingModel *privacyModel = [HSSettingModel new];
     privacyModel.title = @"隐私政策";
     privacyModel.isMore = YES;
-    privacyModel.pageURL = HSAppManager.shared.appPrivacyURL.absoluteString;
+    privacyModel.pageURL = AppManager.shared.appPrivacyURL.absoluteString;
     
     HSSettingModel *contactModel = [HSSettingModel new];
     contactModel.title = @"联系我们";
