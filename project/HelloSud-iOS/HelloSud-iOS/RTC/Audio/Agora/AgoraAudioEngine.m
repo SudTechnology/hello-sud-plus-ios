@@ -42,6 +42,8 @@
 
 - (void)config:(nonnull NSString *)appID appKey:(nonnull NSString *)appKey {
     _agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:appID delegate:self];
+    [_agoraKit enableAudioVolumeIndication:300 smooth:3 report_vad:YES];
+    [_agoraKit enableLocalAudio:NO];
     _agoraIM = [[AgoraRtmKit alloc]initWithAppId:appID delegate:self];
     [_agoraKit setAudioDataFrame:self];
 }
@@ -80,15 +82,15 @@
         [self logoutRoom];
     }
     self.roomID = roomID;
-    
-    NSUInteger uid = (NSUInteger)[user.userID longLongValue];
-    [_agoraKit joinChannelByToken:nil channelId:roomID info:nil uid:uid joinSuccess:^(NSString * _Nonnull channel, NSUInteger uid, NSInteger elapsed) {
-        NSLog(@"join channel success:%@", channel);
-    }];
-    // 登录IM
     WeakSelf
+    NSUInteger uid = (NSUInteger)[user.userID longLongValue];
+    // 加入房间通道
+    [self.agoraKit muteLocalAudioStream:YES];
+    [_agoraKit joinChannelByToken:nil channelId:roomID info:nil uid:uid joinSuccess:nil];
+    // 登录IM
     [_agoraIM loginByToken:nil user:user.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
         weakSelf.imChannel = [weakSelf.agoraIM createChannelWithId:roomID delegate:self];
+        // 加入房间信令通道
         [weakSelf.imChannel joinWithCompletion:^(AgoraRtmJoinChannelErrorCode errorCode) {
             NSLog(@"join im channel state:%ld", (long)errorCode);
         }];
@@ -115,15 +117,13 @@
     dispatch_async(self.queueMute, ^{
         /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
         /// 异步激活采集通道（此处开销成本过大，相对耗时）
-        [self.agoraKit setEnableSpeakerphone:isMute];
+        [self.agoraKit enableLocalAudio:isMute ? NO : YES];
     });
 }
 
 
 - (void)mutePlayStreamAudio:(BOOL)isMute streamID:(nonnull NSString *)streamID {
-    NSLog(@"暂未实现mutePlayStreamAudio");
-    
-//    [ZegoExpressEngine.sharedEngine mutePlayStreamAudio:isMute streamID:streamID];
+    NSLog(@"暂不实现mutePlayStreamAudio");
 }
 
 
@@ -133,31 +133,31 @@
 
 
 - (void)setPlayVolume:(NSInteger)volume streamID:(nonnull NSString *)streamID {
-    NSLog(@"暂未实现setPlayVolume");
+    NSLog(@"暂不实现setPlayVolume");
     NSUInteger uid = 0;
     [self.agoraKit adjustUserPlaybackSignalVolume:uid volume:(int)volume];
 }
 
 
 - (void)startPlayingStream:(nonnull NSString *)streamID {
-    NSLog(@"暂未实现setPlayVolume");
+    NSLog(@"暂不实现setPlayVolume");
 }
 
 
 - (void)startPublish:(nonnull NSString *)streamID {
     self.isPublishing = YES;
-    [self.agoraKit setEnableSpeakerphone:YES];
+    [self.agoraKit muteLocalAudioStream:NO];
 }
 
 
 - (void)stopPlayingStream:(nonnull NSString *)streamID {
-    NSLog(@"暂未实现stopPlayingStream");
+    NSLog(@"暂不实现stopPlayingStream");
 }
 
 
 - (void)stopPublishStream {
     self.isPublishing = NO;
-    [self.agoraKit setEnableSpeakerphone:NO];
+    [self.agoraKit muteLocalAudioStream:YES];
 }
 
 /// 发送指令
@@ -173,99 +173,87 @@
     }];
 }
 
-#pragma mark ZegoEventHandler
+#pragma mark AgoraRtcEngineDelegate
 
-- (void)onIMRecvCustomCommand:(NSString *)command fromUser:(ZegoUser *)fromUser roomID:(NSString *)roomID {
-//    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onIMRecvCustomCommand:fromUser:roomID:)]) {
-//        MediaUser *user = MediaUser.new;
-//        user.userID = fromUser.userID;
-//        user.nickname = fromUser.userName;
-//        [self.eventHandler onIMRecvCustomCommand:command fromUser:user roomID:roomID];
-//    }
+- (void)rtcEngine:(AgoraRtcEngineKit *)engine didJoinChannel:(NSString *)channel withUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
+    NSLog(@"join channel success:%@", channel);
+    [self.agoraKit setEnableSpeakerphone:YES];
+    NSMutableArray *arr = NSMutableArray.new;
+    MediaUser *user = MediaUser.new;
+    user.userID = [NSString stringWithFormat:@"%ld", uid];
+    [arr addObject:user];
+    [self.listener onRoomUserUpdate:MediaAudioEngineUpdateTypeAdd userList:arr roomID:self.roomID];
 }
 
-- (void)onCapturedSoundLevelUpdate:(NSNumber *)soundLevel {
-//    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onCapturedSoundLevelUpdate:)]) {
-//        [self.eventHandler onCapturedSoundLevelUpdate:soundLevel];
-//    }
+- (void)rtcEngine:(AgoraRtcEngineKit* _Nonnull)engine didJoinedOfUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomUserUpdate:userList:roomID:)]) {
+        NSMutableArray *arr = NSMutableArray.new;
+        MediaUser *user = MediaUser.new;
+        user.userID = [NSString stringWithFormat:@"%ld", uid];
+        [arr addObject:user];
+        [self.listener onRoomUserUpdate:MediaAudioEngineUpdateTypeAdd userList:arr roomID:self.roomID];
+    }
 }
 
-- (void)onRemoteSoundLevelUpdate:(NSDictionary<NSString *,NSNumber *> *)soundLevels {
-//    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRemoteSoundLevelUpdate:)]) {
-//        [self.eventHandler onRemoteSoundLevelUpdate:soundLevels];
-//    }
+/** Occurs when a remote user (Communication)/host (Live Broadcast) leaves a channel. Same as [userOfflineBlock]([AgoraRtcEngineKit userOfflineBlock:]).
+
+There are two reasons for users to be offline:
+
+- Leave a channel: When the user/host leaves a channel, the user/host sends a goodbye message. When the message is received, the SDK assumes that the user/host leaves a channel.
+- Drop offline: When no data packet of the user or host is received for a certain period of time (20 seconds for the Communication profile, and more for the interactive live streaming profile), the SDK assumes that the user/host drops offline. Unreliable network connections may lead to NO detections, so Agora recommends using the [Agora RTM SDK](https://docs.agora.io/en/Real-time-Messaging/product_rtm?platform=All%20Platforms) for more reliable offline detection.
+
+ @param engine AgoraRtcEngineKit object.
+ @param uid    ID of the user or host who leaves a channel or goes offline.
+ @param reason Reason why the user goes offline, see AgoraUserOfflineReason.
+ */
+- (void)rtcEngine:(AgoraRtcEngineKit* _Nonnull)engine didOfflineOfUid:(NSUInteger)uid reason:(AgoraUserOfflineReason)reason {
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomUserUpdate:userList:roomID:)]) {
+        NSMutableArray *arr = NSMutableArray.new;
+        MediaUser *user = MediaUser.new;
+        user.userID = [NSString stringWithFormat:@"%ld", uid];
+        [arr addObject:user];
+        [self.listener onRoomUserUpdate:MediaAudioEngineUpdateTypeDelete userList:arr roomID:self.roomID];
+    }
 }
 
-- (void)onRoomStreamUpdate:(ZegoUpdateType)updateType streamList:(NSArray<ZegoStream *> *)streamList extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {
-//    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRoomStreamUpdate:streamList:extendedData:roomID:)]) {
-//        NSMutableArray *arr = NSMutableArray.new;
-//        for (ZegoStream *m in streamList) {
-//            MediaStream *stream = MediaStream.new;
-//            MediaUser *user = MediaUser.new;
-//            user.userID = m.user.userID;
-//            user.nickname = m.user.userName;
-//            stream.user = user;
-//            stream.streamID = m.streamID;
-//            stream.extraInfo = m.extraInfo;
-//            [arr addObject:stream];
-//        }
-//        [self.eventHandler onRoomStreamUpdate:updateType streamList:arr extendedData:extendedData roomID:roomID];
-//    }
+- (void)rtcEngine:(AgoraRtcEngineKit *)engine didAudioMuted:(BOOL)muted byUid:(NSUInteger)uid {
+    NSLog(@"audio muted state:%@, uid:%ld", @(muted), uid);
 }
 
-- (void)onPublisherStateUpdate:(ZegoPublisherState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData streamID:(NSString *)streamID {
-    NSLog(@"zego onPublisherStateUpdate:%ld, errorcode:%d, streamID:%@, extendedData:%@", state, errorCode, streamID, extendedData);
-//    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onPublisherStateUpdate:errorCode:extendedData:streamID:)]) {
-//        [self.eventHandler onPublisherStateUpdate:state errorCode:errorCode extendedData:extendedData streamID:streamID];
-//    }
-}
+// objective-c
+// 获取瞬时说话音量最高的几个用户（即说话者）的用户 ID、他们的音量及本地用户是否在说话。
+// @param speakers 为一个数组，包含说话者的用户 ID 、音量及本地用户人声状态。音量的取值范围为 [0, 255]。
+// @param totalVolume 指混音后频道内的总音量，取值范围为 [0, 255]。
+- (void)rtcEngine:(AgoraRtcEngineKit *_Nonnull)engine reportAudioVolumeIndicationOfSpeakers:(NSArray<AgoraRtcAudioVolumeInfo*> *_Nonnull)speakers totalVolume:(NSInteger)totalVolume {
+    
+    NSNumber *localSoundLevel = nil;
+    NSMutableDictionary *soundLevels = NSMutableDictionary.new;
+    for (AgoraRtcAudioVolumeInfo *item in speakers) {
 
-- (void)onPlayerStateUpdate:(ZegoPlayerState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData streamID:(NSString *)streamID {
-//    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onPlayerStateUpdate:errorCode:extendedData:streamID:)]) {
-//        [self.eventHandler onPlayerStateUpdate:state extendedData:extendedData streamID:streamID];
-//    }
-}
-
-- (void)onNetworkModeChanged:(ZegoNetworkMode)mode {
-//    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onNetworkModeChanged:)]) {
-//        [self.eventHandler onNetworkModeChanged:mode];
-//    }
-}
-
-- (void)onRoomUserUpdate:(ZegoUpdateType)updateType userList:(NSArray<ZegoUser *> *)userList roomID:(NSString *)roomID {
-//    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRoomUserUpdate:userList:roomID:)]) {
-//        NSMutableArray *arr = NSMutableArray.new;
-//        for (ZegoUser *u in userList) {
-//            MediaUser *user = MediaUser.new;
-//            user.userID = u.userID;
-//            user.nickname = u.userName;
-//            [arr addObject:user];
-//        }
-//        [self.eventHandler onRoomUserUpdate:updateType userList:arr roomID:roomID];
-//    }
-}
-
-/// The callback triggered every 30 seconds to report the current number of online users.
-///
-/// Available since: 1.7.0
-/// Description: This method will notify the user of the current number of online users in the room..
-/// Use cases: Developers can use this callback to show the number of user online in the current room.
-/// When to call /Trigger: After successfully logging in to the room.
-/// Restrictions: None.
-/// Caution: 1. This function is called back every 30 seconds. 2. Because of this design, when the number of users in the room exceeds 500, there will be some errors in the statistics of the number of online people in the room.
-///
-/// @param count Count of online users.
-/// @param roomID Room ID where the user is logged in, a string of up to 128 bytes in length.
-- (void)onRoomOnlineUserCountUpdate:(int)count roomID:(NSString *)roomID {
-//    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRoomOnlineUserCountUpdate:roomID:)]) {
-//        [self.eventHandler onRoomOnlineUserCountUpdate:count roomID:roomID];
-//    }
-}
-
-- (void)onRoomStateUpdate:(ZegoRoomState)state errorCode:(int)errorCode extendedData:(nullable NSDictionary *)extendedData roomID:(NSString *)roomID {
-//    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRoomStateUpdate:errorCode:extendedData:roomID:)]) {
-//        [self.eventHandler onRoomStateUpdate:(MediaAudioEngineRoomState)state errorCode:errorCode extendedData:extendedData roomID:roomID];
-//    }
+        NSString *userID = [NSString stringWithFormat:@"%ld", item.uid];
+        NSUInteger volume = item.volume / 255.0 * 100;
+        
+        if (item.uid > 0) {
+            NSLog(@"reportAudioVolumeIndicationOfSpeakers userID:%@, volume:%@", userID, @(volume));
+            soundLevels[userID] = @(volume);
+        } else {
+            // 说话时才回调
+            if (item.vad == 1) {
+                NSLog(@"reportAudioVolume local, volume:%@", @(volume));
+                localSoundLevel = @(volume);
+            }
+        }
+    }
+    
+    // 本地采集音量
+    if (self.isPublishing && localSoundLevel && self.listener != nil && [self.listener respondsToSelector:@selector(onCapturedSoundLevelUpdate:)]) {
+        [self.listener onCapturedSoundLevelUpdate:localSoundLevel];
+    }
+    // 远程用户音量
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRemoteSoundLevelUpdate:)]) {
+        [self.listener onRemoteSoundLevelUpdate:soundLevels];
+    }
+    
 }
 
 #pragma mark AgoraRtmDelegate
@@ -278,7 +266,7 @@
  @param reason The reason for the connection state change. See AgoraRtmConnectionChangeReason.
  */
 - (void)rtmKit:(AgoraRtmKit * _Nonnull)kit connectionStateChanged:(AgoraRtmConnectionState)state reason:(AgoraRtmConnectionChangeReason)reason {
-    
+    NSLog(@"rtmKit connectionStateChanged:%ld, reason:%ld", (long)state, (long)reason);
 }
 
 /**
@@ -307,7 +295,7 @@
  @param member The user joining the channel. See AgoraRtmMember.
  */
 - (void)channel:(AgoraRtmChannel * _Nonnull)channel memberJoined:(AgoraRtmMember * _Nonnull)member {
-    
+    NSLog(@"rtmKit memberJoined:%@", member.userId);
 }
 
 /**
@@ -323,7 +311,7 @@
  @param member The channel member that leaves the channel. See AgoraRtmMember.
  */
 - (void)channel:(AgoraRtmChannel * _Nonnull)channel memberLeft:(AgoraRtmMember * _Nonnull)member {
-    
+    NSLog(@"rtmKit memberLeft:%@", member.userId);
 }
 
 /**

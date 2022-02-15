@@ -171,8 +171,8 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_REMOTE_VOICE_VOLUME_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         NSDictionary<NSString*, NSNumber*> * dicSoundLevel = note.userInfo[@"dicVolume"];
         if ([dicSoundLevel isKindOfClass:NSDictionary.class] ) {
-            NSString *currentStreamID = weakSelf.model.streamID;
-            NSNumber * currentSoundLevel = currentStreamID.length > 0 ? dicSoundLevel[currentStreamID] : nil;
+            NSString *userID = weakSelf.model.user.userID;
+            NSNumber * currentSoundLevel = userID.length > 0 ? dicSoundLevel[userID] : nil;
             // 操作麦位与当前符合
             if (weakSelf.model.user != nil &&
                 currentSoundLevel != nil) {
