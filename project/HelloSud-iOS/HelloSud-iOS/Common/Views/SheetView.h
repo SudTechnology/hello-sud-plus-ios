@@ -1,5 +1,5 @@
 //
-//  HSSheetView.h
+//  SheetView.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/19.
@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 半屏弹出sheet视图
-@interface HSSheetView : BaseAlertView
+@interface SheetView : BaseAlertView
 
 /// 展示中心弹窗 - （内容自定义）
 /// - Parameters:

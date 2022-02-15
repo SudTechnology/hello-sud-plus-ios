@@ -10,7 +10,7 @@
 @interface GameListTableViewCell ()
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIImageView *iconImageView;
-@property (nonatomic, strong) HSPaddingLabel *roomTypeLabel;
+@property (nonatomic, strong) PaddingLabel *roomTypeLabel;
 @property (nonatomic, strong) UILabel *roomNameLabel;
 @property (nonatomic, strong) UILabel *roomNumLabel;
 @property (nonatomic, strong) UILabel *onlineLabel;
@@ -28,7 +28,7 @@
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld人", m.memberCount];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
     
-    for (HSSceneList *sModel in AppManager.shared.sceneList) {
+    for (HSSceneModel *sModel in AppManager.shared.sceneList) {
         if (sModel.sceneId == m.sceneType) {
             self.roomTypeLabel.text = [sModel.sceneName stringByReplacingOccurrencesOfString:@"场景"withString:@""];
         }
@@ -115,9 +115,9 @@
     return _iconImageView;
 }
 
-- (HSPaddingLabel *)roomTypeLabel {
+- (PaddingLabel *)roomTypeLabel {
     if (!_roomTypeLabel) {
-        _roomTypeLabel = [[HSPaddingLabel alloc] init];
+        _roomTypeLabel = [[PaddingLabel alloc] init];
         _roomTypeLabel.paddingX = 5;
         _roomTypeLabel.text = @"语音房";
         _roomTypeLabel.textColor = [UIColor colorWithHexString:@"#999999" alpha:1];

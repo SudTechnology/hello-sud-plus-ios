@@ -1,18 +1,18 @@
 //
-//  HSSheetView.m
+//  SheetView.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/19.
 //
 
-#import "HSSheetView.h"
+#import "SheetView.h"
 
-@interface HSSheetView()
+@interface SheetView()
 /// 是否响应hitTest
 @property(nonatomic, assign) BOOL isHitTest;
 @end
 
-@implementation HSSheetView
+@implementation SheetView
 
 - (void)hsConfigUI {
     self.isHitTest = true;
@@ -66,11 +66,11 @@
     }
     
     /// 如果存在移除当前展示弹窗
-    if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"HSSheetView"]) {
+    if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"SheetView"]) {
         [[self getAlert] removeFromSuperview];
     }
     
-    HSSheetView *alert = [[HSSheetView alloc] init];
+    SheetView *alert = [[SheetView alloc] init];
     alert.contentView.backgroundColor = UIColor.clearColor;// [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     alert.isHitTest = true;
     alert.customView = view;

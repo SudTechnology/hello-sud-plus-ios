@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AudioRoomManager : NSObject
 /// 当前房间VC
 @property(nonatomic, weak)AudioRoomViewController *currentRoomVC;
-
 /// 当前用户在房间角色
 @property(nonatomic, assign)NSInteger roleType;
 /// 当前用户麦位

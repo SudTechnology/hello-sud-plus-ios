@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 /// 房间导航栏
 @interface RoomNaviView : BaseView
-typedef void(^OnTapGameCallBack)(HSGameList *m);
+typedef void(^OnTapGameCallBack)(HSGameItem *m);
 @property (nonatomic, copy) OnTapGameCallBack onTapGameCallBack;
 @property(nonatomic, copy)UIBUTTON_TAP_BLOCK closeTapBlock;
 @property (nonatomic, strong) UILabel *roomNameLabel;

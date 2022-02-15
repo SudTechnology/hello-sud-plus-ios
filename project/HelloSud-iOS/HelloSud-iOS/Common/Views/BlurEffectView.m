@@ -1,20 +1,20 @@
 //
-//  HSBlurEffectView.m
+//  BlurEffectView.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
 //
 
-#import "HSBlurEffectView.h"
+#import "BlurEffectView.h"
 
 API_AVAILABLE(ios(10.0))
-@interface HSBlurEffectView()
+@interface BlurEffectView()
 
 @property(nonatomic, strong)UIVisualEffect *theEffect;
 @property(nonatomic, strong)UIViewPropertyAnimator *animator;
 @end
 
-@implementation HSBlurEffectView
+@implementation BlurEffectView
 
 - (instancetype)initWithEffect:(UIVisualEffect *)effect {
     if (self = [super initWithEffect:effect]) {

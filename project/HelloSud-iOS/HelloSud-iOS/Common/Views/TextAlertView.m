@@ -1,20 +1,20 @@
 //
-//  HSTextAlertView.m
+//  TextAlertView.m
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/21.
 //
 
-#import "HSTextAlertView.h"
+#import "TextAlertView.h"
 
-@interface HSTextAlertView ()
+@interface TextAlertView ()
 @property(nonatomic, strong) YYLabel *contentLabel;
 @property(nonatomic, strong) UIButton *sureBtn;
 @property(nonatomic, strong) UIButton *cancelBtn;
 
 @end
 
-@implementation HSTextAlertView
+@implementation TextAlertView
 
 /// 文本alert初始化
 /// @param msg content
@@ -94,13 +94,13 @@
 
 - (void)onSureItemEvent {
     if (self.onSureItemCallBack) {
-        [HSAlertView close];
+        [AlertView close];
         self.onSureItemCallBack();
     }
 }
 
 - (void)onCancelItemEvent {
-    [HSAlertView close];
+    [AlertView close];
     if (self.onCancelItemlCallBack) {
         self.onCancelItemlCallBack();
     }

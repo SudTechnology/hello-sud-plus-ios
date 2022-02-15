@@ -1,18 +1,18 @@
 //
-//  HSWebViewController.m
+//  WebViewController.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/20.
 //
 
-#import "HSWebViewController.h"
+#import "WebViewController.h"
 #import <WebKit/WebKit.h>
 
-@interface HSWebViewController ()<WKNavigationDelegate>
+@interface WebViewController ()<WKNavigationDelegate>
 @property(nonatomic, strong)WKWebView *webView;
 @end
 
-@implementation HSWebViewController
+@implementation WebViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

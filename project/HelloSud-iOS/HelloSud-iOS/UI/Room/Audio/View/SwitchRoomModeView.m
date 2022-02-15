@@ -14,17 +14,17 @@
 @property (nonatomic, strong) UILabel *gameTitleLabel;
 
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray <HSGameList *> *dataList;
+@property (nonatomic, strong) NSMutableArray <HSGameItem *> *dataList;
 @end
 
 @implementation SwitchRoomModeView
 
 - (void)hsAddViews {
-    NSArray <HSGameList *> *dataArr = AppManager.shared.gameList;
+    NSArray <HSGameItem *> *dataArr = AppManager.shared.gameList;
     [self.dataList setArray:dataArr];
     
     WeakSelf
-    [self.dataList enumerateObjectsUsingBlock:^(HSGameList * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.dataList enumerateObjectsUsingBlock:^(HSGameItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.gameId == GameManager.shared.gameId) {
             [weakSelf.dataList exchangeObjectAtIndex:0 withObjectAtIndex:idx];
         }
@@ -66,7 +66,7 @@
 }
 
 - (void)tapAudioEvent:(UITapGestureRecognizer *)gesture {
-    HSGameList *m = [[HSGameList alloc] init];
+    HSGameItem *m = [[HSGameItem alloc] init];
     m.isAudioRoom = true;
     if (self.onTapGameCallBack) {
         self.onTapGameCallBack(m);
