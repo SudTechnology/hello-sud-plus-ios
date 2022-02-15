@@ -9,14 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HSGameLoginData : BaseModel
+@interface HSGameLoginModel : HSBaseRespModel
 @property (nonatomic, assign) int                   expireDate;
 @property (nonatomic, strong) NSString              *code;
-
-@end
-
-@interface HSGameLoginModel : HSBaseRespModel
-@property (nonatomic, strong) HSGameLoginData              *data;
 @end
 
 NS_ASSUME_NONNULL_END

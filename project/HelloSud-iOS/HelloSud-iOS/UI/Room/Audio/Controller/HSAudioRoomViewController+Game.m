@@ -18,7 +18,7 @@
 - (void)loginGame {
 
     WeakSelf
-    [HSGameManager.shared reqGameLoginWithSuccess:^(HSRespGameInfoDataModel * _Nonnull gameInfo) {
+    [HSGameManager.shared reqGameLoginWithSuccess:^(HSRespGameInfoModel * _Nonnull gameInfo) {
         weakSelf.gameInfoModel.code = gameInfo.code;
         [weakSelf loadGame];
     } fail:^(NSError *error) {
@@ -55,7 +55,7 @@
     NSLog(@"ISudFSMMG:onExpireCode:Code过期");
     // 请求业务服务器刷新令牌
     // Code更新
-    [HSGameManager.shared reqGameLoginWithSuccess:^(HSRespGameInfoDataModel * _Nonnull gameInfo) {
+    [HSGameManager.shared reqGameLoginWithSuccess:^(HSRespGameInfoModel * _Nonnull gameInfo) {
         // 调用小游戏接口更新令牌
         [self updateGameCode:gameInfo.code];
     } fail:^(NSError *error) {

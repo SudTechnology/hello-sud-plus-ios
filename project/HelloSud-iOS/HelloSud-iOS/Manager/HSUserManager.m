@@ -76,7 +76,7 @@
             return;
         }
         if (success) {
-            success(model.data.userInfoList);
+            success(model.userInfoList);
         }
         
     } failure:^(id error) {

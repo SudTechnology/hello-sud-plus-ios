@@ -7,10 +7,6 @@
 
 #import "HSGameLoginModel.h"
 
-@implementation HSGameLoginData
-
-@end
-
 @implementation HSGameLoginModel
 
 @end

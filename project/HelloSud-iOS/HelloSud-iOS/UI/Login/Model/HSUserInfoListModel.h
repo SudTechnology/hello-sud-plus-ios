@@ -17,14 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface HSUserInfoListData : BaseModel
-@property (nonatomic, strong) NSArray <HSUserInfoData *>              *userInfos;
-
-@end
-
 /// 批量查询用户信息列表
 @interface HSUserInfoListModel : HSBaseRespModel
-@property (nonatomic, strong) HSUserInfoListData              *data;
+@property (nonatomic, strong) NSArray <HSUserInfoData *>              *userInfos;
 
 @end
 

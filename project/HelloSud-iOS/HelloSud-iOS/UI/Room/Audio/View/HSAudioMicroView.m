@@ -218,6 +218,9 @@
 }
 
 - (void)showUserName:(NSString *)name showOwner:(BOOL)isShowTag {
+    if (name == nil) {
+        return;
+    }
     UIImage *tagImage = [UIImage imageNamed:@"room_mic_owner_name"];
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:tagImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(24, 12) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     
