@@ -1,5 +1,5 @@
 //
-//  HSPaddingLabel.h
+//  PaddingLabel.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/2/8.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HSPaddingLabel : UILabel
+@interface PaddingLabel : UILabel
 @property (nonatomic, assign) CGFloat paddingX;
 @end
 

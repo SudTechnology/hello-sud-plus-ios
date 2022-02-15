@@ -1,20 +1,20 @@
 //
-//  HSAlertView.m
+//  AlertView.m
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/21.
 //
 
-#import "HSAlertView.h"
-#import "HSTextAlertView.h"
+#import "AlertView.h"
+#import "TextAlertView.h"
 
-@interface HSAlertView ()
+@interface AlertView ()
 @property(nonatomic, assign) CGFloat hsWidth;
 @property(nonatomic, assign) BOOL isHitTest;
 
 @end
 
-@implementation HSAlertView
+@implementation AlertView
 
 - (void)hsConfigUI {
     self.hsWidth = 296;
@@ -70,11 +70,11 @@
     }
     
     /// 如果存在移除当前展示弹窗
-    if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"HSAlertView"]) {
+    if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"AlertView"]) {
         [[self getAlert] removeFromSuperview];
     }
     
-    HSAlertView *alert = [[HSAlertView alloc] init];
+    AlertView *alert = [[AlertView alloc] init];
     alert.contentView.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2" alpha:1];
     alert.isHitTest = isHitTest;
     alert.customView = view;
@@ -94,9 +94,9 @@
 /// @param sureCb sure回调
 /// @param closeCb close回调
 + (void)showTextAlert:(NSString *)msg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
-    HSTextAlertView *alert = [[HSTextAlertView alloc] init];
+    TextAlertView *alert = [[TextAlertView alloc] init];
     [alert config:msg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
-    [HSAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+    [AlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
 //        closeCb();
     }];
 }
@@ -108,9 +108,9 @@
 /// @param sureCb sure回调
 /// @param closeCb close回调
 + (void)showAttrTextAlert:(NSAttributedString *)attrMsg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
-    HSTextAlertView *alert = [[HSTextAlertView alloc] init];
+    TextAlertView *alert = [[TextAlertView alloc] init];
     [alert configAttr:attrMsg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
-    [HSAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+    [AlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
 //        closeCb();
     }];
 }

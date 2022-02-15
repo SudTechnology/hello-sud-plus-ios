@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UIView *sendView;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) RoomGiftContentView *giftContentView;
-@property (nonatomic, strong) HSBlurEffectView *blurView;
+@property (nonatomic, strong) BlurEffectView *blurView;
 /// 选择用户
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray<AudioRoomMicModel *> *userDataList;
@@ -364,10 +364,10 @@
     return _giftContentView;
 }
 
-- (HSBlurEffectView *)blurView {
+- (BlurEffectView *)blurView {
     if (_blurView == nil) {
         UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-        _blurView = [[HSBlurEffectView alloc]initWithEffect:effect];
+        _blurView = [[BlurEffectView alloc]initWithEffect:effect];
         _blurView.blurLevel = 0.35;
         _blurView.backgroundColor =  HEX_COLOR_A(@"#000000", 0.7);
     }

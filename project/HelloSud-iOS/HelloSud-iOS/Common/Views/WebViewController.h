@@ -1,5 +1,5 @@
 //
-//  HSWebViewController.h
+//  WebViewController.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/20.
@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 加载web页面
-@interface HSWebViewController : BaseViewController
+@interface WebViewController : BaseViewController
 
 /// 加载URL地址
 @property(nonatomic, copy)NSString *url;

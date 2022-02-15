@@ -111,7 +111,7 @@
 - (void)hsConfigEvents {
     WeakSelf
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
-        [HSSheetView show:[[RoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
+        [SheetView show:[[RoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
             [weakSelf.operatorView resetAllSelectedUser];
         }];
     };
@@ -145,7 +145,7 @@
         [weakSelf handleMicTap:micModel];
     };
     self.naviView.closeTapBlock = ^(UIButton *sender) {
-        [HSAlertView showTextAlert:@"确认离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+        [AlertView showTextAlert:@"确认离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 如果在麦位上，则下麦
                 if (AudioRoomManager.shared.micIndex >= 0) {
@@ -218,12 +218,12 @@
         v.downMicCallback = ^(UIButton *sender) {
             // 下麦
             [AudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
-            [HSSheetView close];
+            [SheetView close];
         };
         v.cancelCallback = ^(UIButton *sender) {
-            [HSSheetView close];
+            [SheetView close];
         };
-        [HSSheetView show:v rootView:self.view onCloseCallback:^{
+        [SheetView show:v rootView:self.view onCloseCallback:^{
                     
         }];
     }
@@ -271,7 +271,7 @@
                     [self startPublish:[NSString stringWithFormat:@"%u", arc4random()]];
                 } else {
                     // 提示开启权限
-                    [HSAlertView showTextAlert:@"无法访问麦克风，请到“设置-隐私“中开启麦克风访问权限" sureText:@"去开启" cancelText:@"暂时不用" onSureCallback:^{
+                    [AlertView showTextAlert:@"无法访问麦克风，请到“设置-隐私“中开启麦克风访问权限" sureText:@"去开启" cancelText:@"暂时不用" onSureCallback:^{
                         NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                         if (url && [[UIApplication sharedApplication]canOpenURL:url]) {
                             [[UIApplication sharedApplication] openURL:url];
@@ -323,7 +323,7 @@
         return;
     }
     if ([giftModel.animateType isEqualToString:@"svga"]) {
-        HSSVGAPlayerView *v = HSSVGAPlayerView.new;
+        SVGAPlayerView *v = SVGAPlayerView.new;
         NSURL *url = [NSURL fileURLWithPath: giftModel.animateURL];
         [v setURL:url];
         [self.view addSubview:v];

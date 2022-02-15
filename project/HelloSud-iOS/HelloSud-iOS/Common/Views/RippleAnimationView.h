@@ -1,5 +1,5 @@
 //
-//  HSRippleAnimationView.h
+//  RippleAnimationView.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/26.
@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 水波纹动效视图
-@interface HSRippleAnimationView : BaseView
+@interface RippleAnimationView : BaseView
 /// 扩散倍率
 @property(nonatomic, assign)double rate;
 /// 单次动画时长 默认3秒
