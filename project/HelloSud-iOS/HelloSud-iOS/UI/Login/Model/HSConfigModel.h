@@ -11,8 +11,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface HSConfigContent : BaseModel
-@property (nonatomic, strong) NSString              *appId;
-@property (nonatomic, strong) NSString              *appKey;
+@property (nonatomic, strong) NSString *appId;
+@property (nonatomic, strong) NSString *appKey;
+/// rtc厂商类型
+@property (nonatomic, strong) NSString *rtcType;
+/// 厂商描述
+@property (nonatomic, strong) NSString *desc;
+
 
 @end
 

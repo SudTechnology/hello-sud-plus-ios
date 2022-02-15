@@ -11,10 +11,6 @@
 #import "DeviceUtil.h"
 #import "MediaAudioEngineManager.h"
 #import "HSLoginViewController.h"
-
-#import "ZegoAudioEngine.h"
-#import "AgoraAudioEngine.h"
-
 @interface AppDelegate () {
     
 }
@@ -34,7 +30,6 @@
     self.window.backgroundColor = UIColor.whiteColor;
     [self.window makeKeyAndVisible];
     [self configBugly];
-    [self configAudioEngine];
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
@@ -46,20 +41,6 @@
     [Bugly updateAppVersion:version];
     [Bugly startWithAppId:@"0d680b2d4c"];
 }
-
-/// 配置语音SDK
-- (void)configAudioEngine {
-    /// 使用zego语音引擎
-    [MediaAudioEngineManager.shared makeEngine:ZegoAudioEngine.class];
-    /// 初始化zego引擎SDK
-    [MediaAudioEngineManager.shared.audioEngine config:@"581733944" appKey:@"8d8c5698d49929056462dba41cb48cdd4d05babd8c2c68e450b3883096656b87"];
-    
-    /// 使用agora语音引擎
-//    [MediaAudioEngineManager.shared makeEngine:AgoraAudioEngine.class];
-//    /// 初始化agora引擎SDK
-//    [MediaAudioEngineManager.shared.audioEngine config:@"fae6bf5147f740fe975dfec61013a308" appKey:@""];
-}
-
 
 #pragma mark - UISceneSession lifecycle
 
