@@ -9,12 +9,13 @@
 #import "HSSettingCell.h"
 #import "HSSettingModel.h"
 #import "HSSetingHeadView.h"
+#import "ChangeRTCViewController.h"
 
 @interface HSSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong)UITableView *tableView;
-
+@property(nonatomic, strong)UIView *contactUsView;
 /// 页面数据
-@property(nonatomic, strong)NSArray <HSSettingModel *> *arrData;
+@property(nonatomic, strong)NSArray <NSArray <HSSettingModel *>*>*arrData;
 @end
 
 @implementation HSSettingViewController
@@ -30,34 +31,42 @@
 
 /// 配置页面数据
 - (void)configData {
-    HSSettingModel *sdkModel = [HSSettingModel new];
-    sdkModel.title = @"SDK版本号";
-    sdkModel.subTitle = [NSString stringWithFormat:@"v%@",GameSudManager.sudSDKVersion];
-    sdkModel.isMore = NO;
-    sdkModel.pageURL = @"";
+    HSSettingModel *verModel = [HSSettingModel new];
+    verModel.title = @"版本信息";
+    verModel.isMore = YES;
+    verModel.pageURL = @"";
     
-    HSSettingModel *appModel = [HSSettingModel new];
-    appModel.title = @"App版本号";
-    appModel.subTitle = [NSString stringWithFormat:@"v%@.%@", DeviceUtil.getAppVersion, DeviceUtil.getAppBuildCode];
-    appModel.isMore = NO;
-    appModel.pageURL = @"";
+    HSSettingModel *rtcModel = [HSSettingModel new];
+    rtcModel.title = @"切换RTC服务商";
+    rtcModel.subTitle = @"即购";
+    rtcModel.isMore = YES;
+    rtcModel.pageURL = @"";
+    HSSettingModel *languageModel = [HSSettingModel new];
+    languageModel.title = @"切换语言";
+    languageModel.isMore = YES;
+    languageModel.pageURL = @"";
     
+    
+    HSSettingModel *gitHubModel = [HSSettingModel new];
+    gitHubModel.title = @"GitHub";
+    gitHubModel.subTitle = @"hello-sud";
+    gitHubModel.isMore = YES;
+    gitHubModel.pageURL = @"";
+    HSSettingModel *oProtocolModel = [HSSettingModel new];
+    oProtocolModel.title = @"开源协议";
+    oProtocolModel.isMore = YES;
+    oProtocolModel.pageURL = AppManager.shared.appProtocolURL.absoluteString;
     HSSettingModel *userProtocolModel = [HSSettingModel new];
     userProtocolModel.title = @"用户协议";
     userProtocolModel.isMore = YES;
     userProtocolModel.pageURL = AppManager.shared.appProtocolURL.absoluteString;
-    
     HSSettingModel *privacyModel = [HSSettingModel new];
     privacyModel.title = @"隐私政策";
     privacyModel.isMore = YES;
     privacyModel.pageURL = AppManager.shared.appPrivacyURL.absoluteString;
     
-    HSSettingModel *contactModel = [HSSettingModel new];
-    contactModel.title = @"联系我们";
-    contactModel.isMore = YES;
-    contactModel.pageURL = @"";
+    self.arrData = @[@[verModel], @[rtcModel, languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
     
-    self.arrData = @[sdkModel, appModel, userProtocolModel, privacyModel, contactModel];
     HSSetingHeadView *header = HSSetingHeadView.new;
     header.frame = CGRectMake(0, 0, kScreenWidth, 247);
     [header hsUpdateUI];
@@ -89,8 +98,26 @@
         _tableView.backgroundColor = HEX_COLOR(@"#F5F6FB");
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
+        _tableView.tableFooterView = self.contactUsView;
+        
     }
     return _tableView;
+}
+
+- (UIView *)contactUsView {
+    if (_contactUsView == nil) {
+        _contactUsView = UIView.new;
+        _contactUsView.frame = CGRectMake(0, 0, kScreenWidth, 50);
+        UILabel *usLabel = UILabel.new;
+        usLabel.numberOfLines = 0;
+        usLabel.text = @"如需要了解更多资讯或反馈问题，可通过邮箱联系我们：\nhelp@sud.tech";
+        usLabel.textColor = HEX_COLOR(@"#8A8A8E");
+        usLabel.font = UIFONT_REGULAR(12);
+        usLabel.textAlignment = NSTextAlignmentCenter;
+        usLabel.frame = CGRectMake(17, 0, kScreenWidth-34, 34);
+        [_contactUsView addSubview:usLabel];
+    }
+    return _contactUsView;
 }
 
 #pragma mark UITableViewDelegate
@@ -102,29 +129,15 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     HSSettingCell *c = (HSSettingCell *)cell;
     c.isShowTopLine = indexPath.row > 0;
-    c.model = self.arrData[indexPath.row];
+    c.model = self.arrData[indexPath.section][indexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HSSettingModel *model = self.arrData[indexPath.row];
-    if ([model.title isEqualToString:@"联系我们"]) {
-        NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"如需了解更多资讯或反馈问题，可联系："];
-        attrTitle.yy_lineSpacing = 8;
-        attrTitle.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
-        attrTitle.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
-        attrTitle.yy_alignment = NSTextAlignmentCenter;
-        
-        NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:@"help@sud.tech"];
-        attrStr_0.yy_lineSpacing = 8;
-        attrStr_0.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
-        attrStr_0.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
-        
-        [attrTitle appendAttributedString:attrStr_0];
-        
-        [HSAlertView showAttrTextAlert:attrTitle sureText:@"好的" cancelText:@"" onSureCallback:^{
-        } onCloseCallback:^{
-        }];
+    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
+    if ([model.title isEqualToString:@"切换RTC服务商"]) {
+        ChangeRTCViewController *vc = ChangeRTCViewController.new;
+        [self.navigationController pushViewController:vc animated:YES];
     } else {
         if (model.isMore) {
             HSWebViewController *web = HSWebViewController.new;
@@ -135,16 +148,16 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    HSSettingModel *model = self.arrData[indexPath.row];
+    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
     return model.isMore;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.arrData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrData.count;
+    return self.arrData[section].count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -152,7 +165,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.01;
+    return 24;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
