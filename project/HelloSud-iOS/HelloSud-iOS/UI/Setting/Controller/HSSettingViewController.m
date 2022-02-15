@@ -59,7 +59,7 @@
     
     self.arrData = @[sdkModel, appModel, userProtocolModel, privacyModel, contactModel];
     HSSetingHeadView *header = HSSetingHeadView.new;
-    header.frame = CGRectMake(0, 0, kScreenWidth, 104);
+    header.frame = CGRectMake(0, 0, kScreenWidth, 247);
     [header hsUpdateUI];
     self.tableView.tableHeaderView = header;
     [self.tableView reloadData];

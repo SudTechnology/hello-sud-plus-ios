@@ -15,6 +15,8 @@
 @property (nonatomic, strong) UILabel *roomNumLabel;
 @property (nonatomic, strong) UILabel *onlineLabel;
 @property (nonatomic, strong) UIButton *enterRoomBtn;
+@property (nonatomic, strong) UIView *enterNode;
+@property (nonatomic, strong) UILabel *typeLabel;
 @end
 
 @implementation HSGameListTableViewCell
@@ -45,7 +47,9 @@
     [self.containerView addSubview:self.roomNameLabel];
     [self.containerView addSubview:self.roomNumLabel];
     [self.containerView addSubview:self.onlineLabel];
-    [self.containerView addSubview:self.enterRoomBtn];
+    [self.containerView addSubview:self.enterNode];
+    [self.enterNode addSubview:self.enterRoomBtn];
+    [self.enterNode addSubview:self.typeLabel];
 }
 
 - (void)hsLayoutViews {
@@ -79,10 +83,19 @@
         make.left.mas_equalTo(self.iconImageView.mas_right).offset(10);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
-    [self.enterRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.enterNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-16);
         make.bottom.mas_equalTo(-12);
-        make.size.mas_equalTo(CGSizeMake(48, 24));
+        make.size.mas_equalTo(CGSizeMake(48 + 36, 24));
+    }];
+    [self.enterRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.top.bottom.mas_equalTo(self.enterNode);
+        make.width.mas_equalTo(48);
+    }];
+    [self.typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(self.enterNode).offset(1);
+        make.bottom.mas_equalTo(self.enterNode).offset(-1);
+        make.width.mas_equalTo(36);
     }];
 }
 
@@ -149,13 +162,33 @@
 - (UIButton *)enterRoomBtn {
     if (!_enterRoomBtn) {
         _enterRoomBtn = [[UIButton alloc] init];
-        [_enterRoomBtn setTitle:@"加入" forState:normal];
+        [_enterRoomBtn setTitle:@"进入" forState:normal];
         _enterRoomBtn.backgroundColor = UIColor.blackColor;
         _enterRoomBtn.titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
         [_enterRoomBtn setTitleColor:UIColor.whiteColor forState:normal];
         [_enterRoomBtn setUserInteractionEnabled:false];
     }
     return _enterRoomBtn;
+}
+
+- (UIView *)enterNode {
+    if (!_enterNode) {
+        _enterNode = [[UIView alloc] init];
+        _enterNode.backgroundColor = UIColor.blackColor;
+    }
+    return _enterNode;
+}
+
+- (UILabel *)typeLabel {
+    if (!_typeLabel) {
+        _typeLabel = UILabel.new;
+        _typeLabel.text = @"即构";
+        _typeLabel.textColor = UIColor.blackColor;
+        _typeLabel.backgroundColor = UIColor.whiteColor;
+        _typeLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
+        _typeLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _typeLabel;
 }
 
 @end
