@@ -7,6 +7,13 @@
 
 #import "HSUserInfoListModel.h"
 
+@implementation HSUserInfoData
+
+@end
 @implementation HSUserInfoListModel
 
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"userInfos": [HSUserInfoData class]
+    };
+}
 @end

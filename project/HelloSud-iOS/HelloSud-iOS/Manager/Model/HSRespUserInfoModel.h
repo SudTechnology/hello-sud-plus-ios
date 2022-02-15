@@ -18,13 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// 响应用户信息model
-@interface HSRespUserDataModel : BaseModel
-@property(nonatomic, strong)NSArray<HSUserInfoModel *> * userInfoList;
-@end
-
-/// 响应用户信息model
 @interface HSRespUserInfoModel : HSBaseRespModel
-@property(nonatomic, strong)HSRespUserDataModel *data;
+@property(nonatomic, strong)NSArray<HSUserInfoModel *> * userInfoList;
 @end
 
 NS_ASSUME_NONNULL_END

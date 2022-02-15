@@ -19,14 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface HSRoomListData: BaseModel
-@property (nonatomic, copy) NSArray<HSRoomInfoList *>              * roomInfoList;
-
-@end
-
 /// 所有开播房间列表
 @interface HSRoomListModel : HSBaseRespModel
-@property (nonatomic, strong) HSRoomListData              * data;
+@property (nonatomic, copy) NSArray<HSRoomInfoList *>              * roomInfoList;
 
 @end
 

@@ -11,12 +11,9 @@
 
 @end
 
-@implementation HSMicListData
+@implementation HSMicListModel
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"roomMicList": [HSRoomMicList class]};
 }
-@end
-
-@implementation HSMicListModel
 
 @end
