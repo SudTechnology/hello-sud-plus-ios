@@ -35,7 +35,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
         HSEnterRoomModel *model = [HSEnterRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
-            [ToastUtil show:[NSString stringWithFormat:@"%@(%ld)", model.retMsg, model.retCode]];
+            [ToastUtil show:model.errorMsg];
             return;
         }
         HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
@@ -57,7 +57,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSExitRoomModel *model = [HSExitRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
-            [ToastUtil show:[NSString stringWithFormat:@"%@(%ld)", model.retMsg, model.retCode]];
+            [ToastUtil show:model.errorMsg];
             return;
         }
         
@@ -79,7 +79,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
         HSMatchRoomModel *model = [HSMatchRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
-            [ToastUtil show:[NSString stringWithFormat:@"%@(%ld)", model.retMsg, model.retCode]];
+            [ToastUtil show:model.errorMsg];
             return;
         }
         HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
@@ -103,7 +103,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
         HSSwitchMicModel *model = [HSSwitchMicModel decodeModel:rootDict];
         if (model.retCode != 0) {
-            [ToastUtil show:[NSString stringWithFormat:@"%@(%ld)", model.retMsg, model.retCode]];
+            [ToastUtil show:model.errorMsg];
             if (fail) {
                 fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
             }
@@ -139,7 +139,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         HSMicListModel *model = [HSMicListModel decodeModel:rootDict];
         if (model.retCode != 0) {
-            [ToastUtil show:[NSString stringWithFormat:@"%@(%ld)", model.retMsg, model.retCode]];
+            [ToastUtil show:model.errorMsg];
             if (fail) {
                 fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
             }
@@ -164,7 +164,7 @@
     [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} success:^(NSDictionary *rootDict) {
         HSSwitchGameModel *model = [HSSwitchGameModel decodeModel:rootDict];
         if (model.retCode != 0) {
-            [ToastUtil show:[NSString stringWithFormat:@"%@(%ld)", model.retMsg, model.retCode]];
+            [ToastUtil show:model.errorMsg];
             if (fail) {
                 fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
             }

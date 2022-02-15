@@ -23,4 +23,12 @@
     m.retCode = [rootDic[@"retCode"] integerValue];
     return m;
 }
+
+/// 业务错误信息
+- (nullable NSString *)errorMsg {
+    if (self.retCode == 0) {
+        return nil;
+    }
+    return [NSString stringWithFormat:@"%@(%ld)", self.retMsg, self.retCode];
+}
 @end
