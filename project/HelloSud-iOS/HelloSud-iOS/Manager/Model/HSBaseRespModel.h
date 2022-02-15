@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 解码消息
 /// @param rootDic 根JSON
 + (instancetype)decodeModel:(NSDictionary *)rootDic;
+
+/// 业务错误信息
+- (nullable NSString *)errorMsg;
 @end
 
 NS_ASSUME_NONNULL_END
