@@ -16,6 +16,8 @@
     NSDictionary *data = rootDic[@"data"];
     if (data) {
         m = [[self class] mj_objectWithKeyValues:data];
+    } else {
+        m = HSBaseRespModel.new;
     }
     m.retMsg = rootDic[@"retMsg"];
     m.retCode = [rootDic[@"retCode"] integerValue];
