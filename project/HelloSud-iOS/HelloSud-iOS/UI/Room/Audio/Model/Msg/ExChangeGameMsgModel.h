@@ -5,12 +5,12 @@
 //  Created by kaniel on 2022/2/9.
 //
 
-#import "HSAudioMsgBaseModel.h"
+#import "AudioMsgBaseModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏切换model
-@interface ExChangeGameMsgModel : HSAudioMsgBaseModel
+@interface ExChangeGameMsgModel : AudioMsgBaseModel
 
 /// 游戏ID
 @property(nonatomic, assign)NSInteger gameID;

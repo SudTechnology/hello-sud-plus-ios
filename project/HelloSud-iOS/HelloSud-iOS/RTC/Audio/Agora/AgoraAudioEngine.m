@@ -11,10 +11,16 @@
 #import <AgoraRtmKit/AgoraRtmKit.h>
 
 @interface AgoraAudioEngine()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate, AgoraAudioDataFrameProtocol>
+
+/// 是否静音所有播放流
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
+/// 是否在推流
 @property(nonatomic, assign)BOOL isPublishing;
+/// 静音队列
 @property(nonatomic, strong)dispatch_queue_t queueMute;
+/// 事件监听者
 @property(nonatomic, weak)id<MediaAudioEventListener> listener;
+/// 当前进入房间
 @property(nonatomic, strong)NSString *roomID;
 /// 声网语音引擎
 @property(nonatomic, strong)AgoraRtcEngineKit *agoraKit;
@@ -50,6 +56,7 @@
 
 - (void)destroy {
     [AgoraRtcEngineKit destroy];
+    _agoraKit = nil;
 }
 
 
@@ -84,8 +91,10 @@
     self.roomID = roomID;
     WeakSelf
     NSUInteger uid = (NSUInteger)[user.userID longLongValue];
-    // 加入房间通道
+    // 关闭推流、采集
+    [self.agoraKit enableLocalAudio:NO];
     [self.agoraKit muteLocalAudioStream:YES];
+    // 加入房间通道
     [_agoraKit joinChannelByToken:nil channelId:roomID info:nil uid:uid joinSuccess:nil];
     // 登录IM
     [_agoraIM loginByToken:nil user:user.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
@@ -195,17 +204,6 @@
     }
 }
 
-/** Occurs when a remote user (Communication)/host (Live Broadcast) leaves a channel. Same as [userOfflineBlock]([AgoraRtcEngineKit userOfflineBlock:]).
-
-There are two reasons for users to be offline:
-
-- Leave a channel: When the user/host leaves a channel, the user/host sends a goodbye message. When the message is received, the SDK assumes that the user/host leaves a channel.
-- Drop offline: When no data packet of the user or host is received for a certain period of time (20 seconds for the Communication profile, and more for the interactive live streaming profile), the SDK assumes that the user/host drops offline. Unreliable network connections may lead to NO detections, so Agora recommends using the [Agora RTM SDK](https://docs.agora.io/en/Real-time-Messaging/product_rtm?platform=All%20Platforms) for more reliable offline detection.
-
- @param engine AgoraRtcEngineKit object.
- @param uid    ID of the user or host who leaves a channel or goes offline.
- @param reason Reason why the user goes offline, see AgoraUserOfflineReason.
- */
 - (void)rtcEngine:(AgoraRtcEngineKit* _Nonnull)engine didOfflineOfUid:(NSUInteger)uid reason:(AgoraUserOfflineReason)reason {
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomUserUpdate:userList:roomID:)]) {
         NSMutableArray *arr = NSMutableArray.new;
@@ -220,10 +218,6 @@ There are two reasons for users to be offline:
     NSLog(@"audio muted state:%@, uid:%ld", @(muted), uid);
 }
 
-// objective-c
-// 获取瞬时说话音量最高的几个用户（即说话者）的用户 ID、他们的音量及本地用户是否在说话。
-// @param speakers 为一个数组，包含说话者的用户 ID 、音量及本地用户人声状态。音量的取值范围为 [0, 255]。
-// @param totalVolume 指混音后频道内的总音量，取值范围为 [0, 255]。
 - (void)rtcEngine:(AgoraRtcEngineKit *_Nonnull)engine reportAudioVolumeIndicationOfSpeakers:(NSArray<AgoraRtcAudioVolumeInfo*> *_Nonnull)speakers totalVolume:(NSInteger)totalVolume {
     
     NSNumber *localSoundLevel = nil;
@@ -231,17 +225,13 @@ There are two reasons for users to be offline:
     for (AgoraRtcAudioVolumeInfo *item in speakers) {
 
         NSString *userID = [NSString stringWithFormat:@"%ld", item.uid];
+        // 转换0-100声音值
         NSUInteger volume = item.volume / 255.0 * 100;
-        
+        NSLog(@"reportAudioVolumeIndicationOfSpeakers userID:%@, volume:%@", userID, @(volume));
         if (item.uid > 0) {
-            NSLog(@"reportAudioVolumeIndicationOfSpeakers userID:%@, volume:%@", userID, @(volume));
             soundLevels[userID] = @(volume);
         } else {
-            // 说话时才回调
-            if (item.vad == 1) {
-                NSLog(@"reportAudioVolume local, volume:%@", @(volume));
-                localSoundLevel = @(volume);
-            }
+            localSoundLevel = @(volume);
         }
     }
     
@@ -258,71 +248,24 @@ There are two reasons for users to be offline:
 
 #pragma mark AgoraRtmDelegate
 
-/**
- Occurs when the connection state between the SDK and the Agora RTM system changes.
-
- @param kit An [AgoraRtmKit](AgoraRtmKit) instance.
- @param state The new connection state. See AgoraRtmConnectionState.
- @param reason The reason for the connection state change. See AgoraRtmConnectionChangeReason.
- */
 - (void)rtmKit:(AgoraRtmKit * _Nonnull)kit connectionStateChanged:(AgoraRtmConnectionState)state reason:(AgoraRtmConnectionChangeReason)reason {
     NSLog(@"rtmKit connectionStateChanged:%ld, reason:%ld", (long)state, (long)reason);
 }
 
-/**
- Occurs when receiving a peer-to-peer message.
-
- @param kit An [AgoraRtmKit](AgoraRtmKit) instance.
- @param message The received message. Ensure that you check the `type` property when receiving the message instance: If the message type is `AgoraRtmMessageTypeRaw`, you need to downcast the received instance from AgoraRtmMessage to AgoraRtmRawMessage. See AgoraRtmMessageType.
- @param peerId The user ID of the sender.
- */
 - (void)rtmKit:(AgoraRtmKit * _Nonnull)kit messageReceived:(AgoraRtmMessage * _Nonnull)message fromPeer:(NSString * _Nonnull)peerId {
     NSLog(@"rtmKit messageReceived:%@, peerId:%@", message, peerId);
 }
 
 #pragma mark AgoraRtmChannelDelegate
 
-/**
- Occurs when a user joins the channel.
-
- When a remote user calls the [joinWithCompletion]([AgoraRtmChannel joinWithCompletion:]) method and successfully joins the channel, the local user receives this callback.
-
- **NOTE**
-
- This callback is disabled when the number of the channel members exceeds 512.
-
- @param channel The channel that the user joins. See AgoraRtmChannel.
- @param member The user joining the channel. See AgoraRtmMember.
- */
 - (void)channel:(AgoraRtmChannel * _Nonnull)channel memberJoined:(AgoraRtmMember * _Nonnull)member {
     NSLog(@"rtmKit memberJoined:%@", member.userId);
 }
 
-/**
- Occurs when a channel member leaves the channel.
-
- When a remote channel member calls the [leaveWithCompletion]([AgoraRtmChannel leaveWithCompletion:]) method and successfully leaves the channel, the local user receives this callback.
-
- **NOTE**
-
- This callback is disabled when the number of the channel members exceeds 512.
-
- @param channel The channel that the user leaves. See AgoraRtmChannel.
- @param member The channel member that leaves the channel. See AgoraRtmMember.
- */
 - (void)channel:(AgoraRtmChannel * _Nonnull)channel memberLeft:(AgoraRtmMember * _Nonnull)member {
     NSLog(@"rtmKit memberLeft:%@", member.userId);
 }
 
-/**
- Occurs when receiving a channel message.
-
- When a remote channel member calls the [sendMessage]([AgoraRtmChannel sendMessage:completion:]) method and successfully sends out a channel message, the local user receives this callback.
-
- @param channel The channel, to which the local user belongs. See AgoraRtmChannel.
- @param message The received channel message. See AgoraRtmMessage. Ensure that you check the `type` property when receiving the message instance: If the message type is `AgoraRtmMessageTypeRaw`, you need to downcast the received instance from AgoraRtmMessage to AgoraRtmRawMessage. See AgoraRtmMessageType.
- @param member The message sender. See AgoraRtmMember.
- */
 - (void)channel:(AgoraRtmChannel * _Nonnull)channel messageReceived:(AgoraRtmMessage * _Nonnull)message fromMember:(AgoraRtmMember * _Nonnull)member {
     NSLog(@"rtmKit messageReceived:%@, userId:%@", message.text, member.userId);
     if (message.type != AgoraRtmMessageTypeText) {
