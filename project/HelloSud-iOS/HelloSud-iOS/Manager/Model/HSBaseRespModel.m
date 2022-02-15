@@ -14,7 +14,7 @@
 + (instancetype)decodeModel:(NSDictionary *)rootDic {
     HSBaseRespModel *m = nil;
     NSDictionary *data = rootDic[@"data"];
-    if (data) {
+    if (data && ![data isKindOfClass:[NSNull class]]) {
         m = [[self class] mj_objectWithKeyValues:data];
     } else {
         m = [self class].new;
