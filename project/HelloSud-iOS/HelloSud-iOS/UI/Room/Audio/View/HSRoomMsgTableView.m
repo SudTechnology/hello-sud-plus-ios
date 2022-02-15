@@ -80,7 +80,7 @@
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = UIColor.clearColor;
-        
+        _tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
         [_tableView registerClass:[HSBaseMsgCell class] forCellReuseIdentifier:NSStringFromClass(HSBaseMsgCell.class)];
         [_tableView registerClass:[HSRoomTextTableViewCell class] forCellReuseIdentifier:NSStringFromClass(HSRoomTextTableViewCell.class)];
         [_tableView registerClass:[HSRoomSystemTableViewCell class] forCellReuseIdentifier:NSStringFromClass(HSRoomSystemTableViewCell.class)];
