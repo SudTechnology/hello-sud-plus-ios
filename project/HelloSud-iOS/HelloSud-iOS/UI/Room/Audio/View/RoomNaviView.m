@@ -49,7 +49,7 @@
         
     }];
     WeakSelf
-    modeView.onTapGameCallBack = ^(HSGameList * _Nonnull m) {
+    modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
         [SheetView close];
         if (weakSelf.onTapGameCallBack) {
             weakSelf.onTapGameCallBack(m);

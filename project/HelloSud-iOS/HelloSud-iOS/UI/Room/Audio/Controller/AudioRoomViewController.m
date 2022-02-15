@@ -161,7 +161,7 @@
         } onCloseCallback:^{
         }];
     };
-    self.naviView.onTapGameCallBack = ^(HSGameList * _Nonnull m) {
+    self.naviView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
         if (weakSelf.gameInfoModel.gameState == 2) {
             [ToastUtil show:@"正在游戏中, 无法切换游戏"];
             return;
@@ -183,7 +183,7 @@
 
 /// 处理切换房间
 /// @param m m description
-- (void)handleChangeRoomMode:(HSGameList *)m {
+- (void)handleChangeRoomMode:(HSGameItem *)m {
     WeakSelf
     [AudioRoomManager.shared reqSwitchGame:self.roomID.integerValue gameId:m.gameId success:^{
         

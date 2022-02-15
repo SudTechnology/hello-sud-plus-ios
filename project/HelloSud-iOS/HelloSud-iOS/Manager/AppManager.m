@@ -8,12 +8,17 @@
 #import "AppManager.h"
 #import "ZegoAudioEngine.h"
 #import "AgoraAudioEngine.h"
-
+/// 用户信息缓存key
 #define kKeyLoginUserInfo @"key_login_user_info"
+/// 用户登录确认key
 #define kKeyLoginAgreement @"key_login_agreement"
+/// 用户是否登录缓存key
 #define kKeyLoginIsLogin @"key_login_isLogin"
+/// 用户是否登录token缓存key
 #define kKeyLoginToken @"key_login_token"
+/// 当前选中RTC类型缓存key
 #define kKeyCurrentRTCType @"key_current_rtc_type"
+/// 配置信息缓存key
 #define kKeyConfigModel @"key_config_model"
 
 @interface AppManager ()

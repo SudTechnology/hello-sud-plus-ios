@@ -87,6 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 开始原始音频采集
 - (void)startCapture;
+
 /// 结束原始音频采集
 - (void)stopCapture;
 @end

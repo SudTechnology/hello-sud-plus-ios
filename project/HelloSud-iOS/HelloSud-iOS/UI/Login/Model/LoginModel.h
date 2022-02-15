@@ -10,10 +10,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LoginModel: BaseRespModel
-@property (nonatomic, copy) NSString              * avatar;
-@property (nonatomic, assign) NSInteger              userId;
-@property (nonatomic, copy) NSString              * nickname;
-@property (nonatomic, copy) NSString              * token;
+@property (nonatomic, copy) NSString * avatar;
+@property (nonatomic, assign) NSInteger userId;
+@property (nonatomic, copy) NSString * nickname;
+@property (nonatomic, copy) NSString * token;
 
 @end
 

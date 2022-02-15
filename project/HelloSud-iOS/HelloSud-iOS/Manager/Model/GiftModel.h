@@ -25,8 +25,7 @@ typedef void(^HSGiftModelSelectedBlock)(void);
 @property(nonatomic, copy)NSString *animateType;
 /// 礼物ID
 @property(nonatomic, assign)NSInteger giftID;
-
-
+/// 是否选中
 @property(nonatomic, assign)BOOL isSelected;
 @property(nonatomic, copy)HSGiftModelSelectedBlock selectedChangedCallback;
 @end

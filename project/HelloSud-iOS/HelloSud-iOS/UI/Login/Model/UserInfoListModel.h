@@ -10,16 +10,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HSUserInfoData : BaseModel
-@property (nonatomic, assign) int                   userId;
-@property (nonatomic, strong) NSString              *avatar;
-@property (nonatomic, strong) NSString              *nickname;
-@property (nonatomic, strong) NSString              *gender;
+@property (nonatomic, assign) int userId;
+@property (nonatomic, strong) NSString *avatar;
+@property (nonatomic, strong) NSString *nickname;
+@property (nonatomic, strong) NSString *gender;
 
 @end
 
 /// 批量查询用户信息列表
 @interface UserInfoListModel : BaseRespModel
-@property (nonatomic, strong) NSArray <HSUserInfoData *>              *userInfos;
+@property (nonatomic, strong) NSArray <HSUserInfoData *> *userInfos;
 
 @end
 
