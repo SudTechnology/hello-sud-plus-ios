@@ -61,12 +61,12 @@
         [self setupNetWorkHeader];
         [self reqConfigData];
     }
+    _rtcType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
     NSString *configStr = [NSUserDefaults.standardUserDefaults stringForKey:kKeyConfigModel];
     if (configStr) {
         _configModel = [HSConfigModel mj_objectWithKeyValues:configStr];
         [self handleRTCConfigInfo];
     }
-    _rtcType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
     [self switchAudioEngine];
 }
 
