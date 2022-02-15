@@ -6,7 +6,6 @@
 //
 
 #import "AgoraAudioEngine.h"
-#import <ZegoExpressEngine/ZegoExpressEngine.h>
 #import <AgoraRtcKit/AgoraRtcEngineKit.h>
 #import <AgoraRtmKit/AgoraRtmKit.h>
 
@@ -59,17 +58,6 @@
     _agoraKit = nil;
 }
 
-
-- (BOOL)isMicrophoneMuted {
-    return [_agoraKit isSpeakerphoneEnabled];
-}
-
-
-- (BOOL)isMuteAllPlayStreamAudio {
-    return self.isMuteAllPlayStreamAudio;
-}
-
-
 - (BOOL)isPublishing {
     return _isPublishing;
 }
@@ -114,37 +102,12 @@
     [_agoraKit leaveChannel:nil];
 }
 
-
-- (void)muteAllPlayStreamAudio:(BOOL)isMute {
-    self.isMuteAllPlayStreamAudio = isMute;
-    [_agoraKit muteLocalAudioStream:isMute];
-    [_agoraKit muteAllRemoteAudioStreams:isMute];
-}
-
-
 - (void)muteMicrophone:(BOOL)isMute {
     dispatch_async(self.queueMute, ^{
         /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
         /// 异步激活采集通道（此处开销成本过大，相对耗时）
         [self.agoraKit enableLocalAudio:isMute ? NO : YES];
     });
-}
-
-
-- (void)mutePlayStreamAudio:(BOOL)isMute streamID:(nonnull NSString *)streamID {
-    NSLog(@"暂不实现mutePlayStreamAudio");
-}
-
-
-- (void)setAllPlayStreamVolume:(NSInteger)volume {
-    [self.agoraKit adjustPlaybackSignalVolume:volume];
-}
-
-
-- (void)setPlayVolume:(NSInteger)volume streamID:(nonnull NSString *)streamID {
-    NSLog(@"暂不实现setPlayVolume");
-    NSUInteger uid = 0;
-    [self.agoraKit adjustUserPlaybackSignalVolume:uid volume:(int)volume];
 }
 
 

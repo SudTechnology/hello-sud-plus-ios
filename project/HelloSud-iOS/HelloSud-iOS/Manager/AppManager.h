@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSArray <HSSceneModel *> *sceneList;
 /// 所有支持rtc厂商列表
 @property(nonatomic, strong) NSArray <HSConfigContent *> *rtcList;
-/// 选中rtc厂商类型
+/// 选中rtc厂商类型，设置时同时切换到对应RTC厂商并初始化
 @property(nonatomic, copy)NSString *rtcType;
 
 + (instancetype)shared;
@@ -64,6 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// APP隐私协议地址
 - (NSURL *)appPrivacyURL;
+
 /// APP用户协议
 - (NSURL *)appProtocolURL;
 
