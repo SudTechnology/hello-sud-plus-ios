@@ -7,11 +7,6 @@
 
 #import "HSRespGameInfoModel.h"
 
-
-@implementation HSRespGameInfoDataModel
-
-@end
-
 @implementation HSRespGameInfoModel
 
 @end

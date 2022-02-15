@@ -33,17 +33,17 @@
         dicParam[@"rtcType"] = HSAppManager.shared.rtcType;
     }
     [RequestService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
-        HSEnterRoomModel *model = [HSEnterRoomModel mj_objectWithKeyValues:rootDict];
+        HSEnterRoomModel *model = [HSEnterRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
             return;
         }
         HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
-        vc.gameId = model.data.gameId;
-        vc.roomID = [NSString stringWithFormat:@"%ld", model.data.roomId];
-        vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
-        vc.roomName = model.data.roomName;
-        weakSelf.roleType = model.data.roleType;
+        vc.gameId = model.gameId;
+        vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
+        vc.roomType = model.gameId == 0 ? HSAudio : HSGame;
+        vc.roomName = model.roomName;
+        weakSelf.roleType = model.roleType;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];
@@ -55,7 +55,7 @@
 - (void)reqExitRoom:(long)roomId {
     [self resetRoomInfo];
     [RequestService postRequestWithApi:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
-        HSExitRoomModel *model = [HSExitRoomModel mj_objectWithKeyValues:rootDict];
+        HSExitRoomModel *model = [HSExitRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
             return;
@@ -77,17 +77,17 @@
         dicParam[@"rtcType"] = HSAppManager.shared.rtcType;
     }
     [RequestService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
-        HSMatchRoomModel *model = [HSMatchRoomModel mj_objectWithKeyValues:rootDict];
+        HSMatchRoomModel *model = [HSMatchRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
             return;
         }
         HSAudioRoomViewController *vc = [[HSAudioRoomViewController alloc] init];
-        vc.roomID = [NSString stringWithFormat:@"%ld", model.data.roomId];
-        vc.gameId = model.data.gameId;
-        vc.roomType = model.data.gameId == 0 ? HSAudio : HSGame;
-        vc.roomName = model.data.roomName;
-        weakSelf.roleType = model.data.roleType;
+        vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
+        vc.gameId = model.gameId;
+        vc.roomType = model.gameId == 0 ? HSAudio : HSGame;
+        vc.roomName = model.roomName;
+        weakSelf.roleType = model.roleType;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];
@@ -101,7 +101,7 @@
 - (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     
     [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
-        HSSwitchMicModel *model = [HSSwitchMicModel mj_objectWithKeyValues:rootDict];
+        HSSwitchMicModel *model = [HSSwitchMicModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
             if (fail) {
@@ -113,7 +113,7 @@
             HSAudioMsgMicModel *upMicModel = [HSAudioMsgMicModel makeUpMicMsgWithMicIndex:micIndex];
             self.micIndex = micIndex;
             upMicModel.roleType = self.roleType;
-            upMicModel.streamID = model.data.streamId;
+            upMicModel.streamID = model.streamId;
             [self.currentRoomVC sendMsg:upMicModel isAddToShow:NO];
         } else {
             HSAudioMsgMicModel *downMicModel = [HSAudioMsgMicModel makeDownMicMsgWithMicIndex:micIndex];
@@ -137,7 +137,7 @@
 - (void)reqMicList:(long)roomId success:(void(^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail {
 
     [RequestService postRequestWithApi:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
-        HSMicListModel *model = [HSMicListModel mj_objectWithKeyValues:rootDict];
+        HSMicListModel *model = [HSMicListModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
             if (fail) {
@@ -146,7 +146,7 @@
             return;
         }
         if (success) {
-            success(model.data.roomMicList);
+            success(model.roomMicList);
         }
         
     } failure:^(id error) {
@@ -162,7 +162,7 @@
 - (void)reqSwitchGame:(long)roomId gameId:(long)gameId success:(EmptyBlock)success fail:(ErrorBlock)fail {
 
     [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} success:^(NSDictionary *rootDict) {
-        HSSwitchGameModel *model = [HSSwitchGameModel mj_objectWithKeyValues:rootDict];
+        HSSwitchGameModel *model = [HSSwitchGameModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
             if (fail) {

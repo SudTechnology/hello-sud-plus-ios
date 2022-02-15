@@ -9,16 +9,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HSLoginData: BaseModel
+@interface HSLoginModel: HSBaseRespModel
 @property (nonatomic, copy) NSString              * avatar;
 @property (nonatomic, assign) NSInteger              userId;
 @property (nonatomic, copy) NSString              * nickname;
 @property (nonatomic, copy) NSString              * token;
-
-@end
-
-@interface HSLoginModel: HSBaseRespModel
-@property (nonatomic, strong) HSLoginData              *data;
 
 @end
 

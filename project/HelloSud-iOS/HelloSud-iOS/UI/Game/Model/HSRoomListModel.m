@@ -11,14 +11,10 @@
 
 @end
 
-@implementation HSRoomListData
+@implementation HSRoomListModel
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"roomInfoList": [HSRoomInfoList class]
     };
 }
-
-@end
-
-@implementation HSRoomListModel
 
 @end
