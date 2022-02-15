@@ -12,11 +12,21 @@
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
 @property(nonatomic, assign)BOOL isPublishing;
 @property(nonatomic, strong)dispatch_queue_t queueMute;
-@property(nonatomic, weak)id<MediaAudioEventListener> eventHandler;
+@property(nonatomic, weak)id<MediaAudioEventListener> listener;
 @property(nonatomic, strong)NSString *roomID;
+
+/// 流与ID关系[streamID:userID]
+@property(nonatomic, strong)NSMutableDictionary<NSString *, NSString *> *dicStreamUser;
 @end
 
 @implementation ZegoAudioEngine
+
+- (NSMutableDictionary<NSString *, NSString *>*)dicStreamUser {
+    if (!_dicStreamUser) {
+        _dicStreamUser = NSMutableDictionary.new;
+    }
+    return _dicStreamUser;
+}
 
 - (dispatch_queue_t)queueMute {
     if (_queueMute == nil) {
@@ -28,7 +38,7 @@
 /// 设置事件处理器
 /// @param listener 事件处理实例
 - (void)setEventListener:(id<MediaAudioEventListener>)listener {
-    _eventHandler = listener;
+    _listener = listener;
 }
 
 
@@ -173,28 +183,36 @@
 #pragma mark ZegoEventHandler
 
 - (void)onIMRecvCustomCommand:(NSString *)command fromUser:(ZegoUser *)fromUser roomID:(NSString *)roomID {
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onIMRecvCustomCommand:fromUser:roomID:)]) {
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onIMRecvCustomCommand:fromUser:roomID:)]) {
         MediaUser *user = MediaUser.new;
         user.userID = fromUser.userID;
         user.nickname = fromUser.userName;
-        [self.eventHandler onIMRecvCustomCommand:command fromUser:user roomID:roomID];
+        [self.listener onIMRecvCustomCommand:command fromUser:user roomID:roomID];
     }
 }
 
 - (void)onCapturedSoundLevelUpdate:(NSNumber *)soundLevel {
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onCapturedSoundLevelUpdate:)]) {
-        [self.eventHandler onCapturedSoundLevelUpdate:soundLevel];
+    if (self.isPublishing && self.listener != nil && [self.listener respondsToSelector:@selector(onCapturedSoundLevelUpdate:)]) {
+        [self.listener onCapturedSoundLevelUpdate:soundLevel];
     }
 }
 
 - (void)onRemoteSoundLevelUpdate:(NSDictionary<NSString *,NSNumber *> *)soundLevels {
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRemoteSoundLevelUpdate:)]) {
-        [self.eventHandler onRemoteSoundLevelUpdate:soundLevels];
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRemoteSoundLevelUpdate:)]) {
+        NSMutableDictionary *dicSoundTemp = NSMutableDictionary.new;
+        NSArray *allStrems = soundLevels.allKeys;
+        for (NSString *key in allStrems) {
+            NSString *userID = self.dicStreamUser[key];
+            if (userID) {
+                dicSoundTemp[userID] = soundLevels[key];
+            }
+        }
+        [self.listener onRemoteSoundLevelUpdate:dicSoundTemp];
     }
 }
 
 - (void)onRoomStreamUpdate:(ZegoUpdateType)updateType streamList:(NSArray<ZegoStream *> *)streamList extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRoomStreamUpdate:streamList:extendedData:roomID:)]) {
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomStreamUpdate:streamList:extendedData:roomID:)]) {
         NSMutableArray *arr = NSMutableArray.new;
         for (ZegoStream *m in streamList) {
             MediaStream *stream = MediaStream.new;
@@ -205,32 +223,37 @@
             stream.streamID = m.streamID;
             stream.extraInfo = m.extraInfo;
             [arr addObject:stream];
+            if (updateType == ZegoUpdateTypeAdd) {
+                self.dicStreamUser[m.streamID] = user.userID;
+            } else {
+                [self.dicStreamUser removeObjectForKey:m.streamID];
+            }
         }
-        [self.eventHandler onRoomStreamUpdate:updateType streamList:arr extendedData:extendedData roomID:roomID];
+        [self.listener onRoomStreamUpdate:updateType streamList:arr extendedData:extendedData roomID:roomID];
     }
 }
 
 - (void)onPublisherStateUpdate:(ZegoPublisherState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData streamID:(NSString *)streamID {
     NSLog(@"zego onPublisherStateUpdate:%ld, errorcode:%d, streamID:%@, extendedData:%@", state, errorCode, streamID, extendedData);
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onPublisherStateUpdate:errorCode:extendedData:streamID:)]) {
-        [self.eventHandler onPublisherStateUpdate:state errorCode:errorCode extendedData:extendedData streamID:streamID];
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onPublisherStateUpdate:errorCode:extendedData:streamID:)]) {
+        [self.listener onPublisherStateUpdate:state errorCode:errorCode extendedData:extendedData streamID:streamID];
     }
 }
 
 - (void)onPlayerStateUpdate:(ZegoPlayerState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData streamID:(NSString *)streamID {
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onPlayerStateUpdate:errorCode:extendedData:streamID:)]) {
-        [self.eventHandler onPlayerStateUpdate:state extendedData:extendedData streamID:streamID];
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerStateUpdate:errorCode:extendedData:streamID:)]) {
+        [self.listener onPlayerStateUpdate:state extendedData:extendedData streamID:streamID];
     }
 }
 
 - (void)onNetworkModeChanged:(ZegoNetworkMode)mode {
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onNetworkModeChanged:)]) {
-        [self.eventHandler onNetworkModeChanged:mode];
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onNetworkModeChanged:)]) {
+        [self.listener onNetworkModeChanged:mode];
     }
 }
 
 - (void)onRoomUserUpdate:(ZegoUpdateType)updateType userList:(NSArray<ZegoUser *> *)userList roomID:(NSString *)roomID {
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRoomUserUpdate:userList:roomID:)]) {
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomUserUpdate:userList:roomID:)]) {
         NSMutableArray *arr = NSMutableArray.new;
         for (ZegoUser *u in userList) {
             MediaUser *user = MediaUser.new;
@@ -238,7 +261,7 @@
             user.nickname = u.userName;
             [arr addObject:user];
         }
-        [self.eventHandler onRoomUserUpdate:updateType userList:arr roomID:roomID];
+        [self.listener onRoomUserUpdate:updateType userList:arr roomID:roomID];
     }
 }
 
@@ -254,14 +277,14 @@
 /// @param count Count of online users.
 /// @param roomID Room ID where the user is logged in, a string of up to 128 bytes in length.
 - (void)onRoomOnlineUserCountUpdate:(int)count roomID:(NSString *)roomID {
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRoomOnlineUserCountUpdate:roomID:)]) {
-        [self.eventHandler onRoomOnlineUserCountUpdate:count roomID:roomID];
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomOnlineUserCountUpdate:roomID:)]) {
+        [self.listener onRoomOnlineUserCountUpdate:count roomID:roomID];
     }
 }
 
 - (void)onRoomStateUpdate:(ZegoRoomState)state errorCode:(int)errorCode extendedData:(nullable NSDictionary *)extendedData roomID:(NSString *)roomID {
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onRoomStateUpdate:errorCode:extendedData:roomID:)]) {
-        [self.eventHandler onRoomStateUpdate:(MediaAudioEngineRoomState)state errorCode:errorCode extendedData:extendedData roomID:roomID];
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomStateUpdate:errorCode:extendedData:roomID:)]) {
+        [self.listener onRoomStateUpdate:(MediaAudioEngineRoomState)state errorCode:errorCode extendedData:extendedData roomID:roomID];
     }
 }
 
@@ -271,8 +294,8 @@
 - (void)onCapturedAudioData:(const unsigned char *)data dataLength:(unsigned int)dataLength param:(ZegoAudioFrameParam *)param {
     // 本地采集音频数据，推流后可收到回调
     NSData *a_data = [[NSData alloc] initWithBytes:data length:dataLength];
-    if (self.eventHandler != nil && [self.eventHandler respondsToSelector:@selector(onCapturedAudioData:)]) {
-        [self.eventHandler onCapturedAudioData:a_data];
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onCapturedAudioData:)]) {
+        [self.listener onCapturedAudioData:a_data];
     }
 }
 
