@@ -6,101 +6,123 @@
 //
 
 #import "HSSetingHeadView.h"
+#import "HSSetingHeadItemView.h"
+#import "HSSettingHeaderModel.h"
 
 @interface HSSetingHeadView()
-/// 内容
-@property(nonatomic, strong)UIView *contentView;
-/// 头像
-@property(nonatomic, strong)UIImageView *headImageView;
-/// 名称
-@property(nonatomic, strong)UILabel *nameLabel;
-/// 用户ID
-@property(nonatomic, strong)UILabel *userIDLabel;
+@property(nonatomic, strong)UILabel *titleLabel;
+@property(nonatomic, strong)UIView *scaleView;
+@property(nonatomic, strong)UIView *itemsView;
+@property(nonatomic, strong)NSMutableArray <HSSettingHeaderModel *>*dataArray;
 @end
 
 @implementation HSSetingHeadView
 
+- (void)updateUI {
+    
+    self.dataArray = NSMutableArray.new;
+    NSArray <UIColor *>*colorArr = @[HEX_COLOR(@"#FC955B"), HEX_COLOR(@"#FC5BCA"), HEX_COLOR(@"#614BFF"), HEX_COLOR_A(@"#000000", 0.2), HEX_COLOR_A(@"#000000", 0.1)];
+    NSArray <NSString *>*titleArr = @[@"SudMGP Core", @"SudMGP ASR", @"HelloSud", @"Zego RTC SDK", @"Agora RTC SDK"];
+    NSArray <NSString *>*sizeArr = @[@"358KB", @"358KB", @"358KB", @"358KB", @"358KB"];
+    
+    NSArray <NSNumber *>*ratioArr = @[@0.1, @0.1, @0.2, @0.3, @0.3];
+    for (int i = 0; i < colorArr.count; i++) {
+        HSSettingHeaderModel *m = HSSettingHeaderModel.new;
+        m.color = colorArr[i];
+        m.title = titleArr[i];
+        m.size = sizeArr[i];
+        [self.dataArray addObject:m];
+    }
+    
+    NSMutableArray <UIView *>*scaleNodeArr = NSMutableArray.new;
+    NSMutableArray <UIView *>*itemNodeArr = NSMutableArray.new;
+    for (int i = 0; i < self.dataArray.count; i++) {
+        UIView *node = UIView.new;
+        node.backgroundColor = colorArr[i];
+        [self.scaleView addSubview:node];
+        
+        HSSetingHeadItemView *item = HSSetingHeadItemView.new;
+        item.model = self.dataArray[i];
+        [self.itemsView addSubview:item];
+        [scaleNodeArr addObject:node];
+        [itemNodeArr addObject:item];
+    }
+    [scaleNodeArr hs_mas_distributeSudokuViewsWithFixedItemWidth:(kScreenWidth - 36 * 2)/5 fixedItemHeight:40
+                                                fixedLineSpacing:0 fixedInteritemSpacing:0
+                                                       warpCount:5
+                                                      topSpacing:0
+                                                   bottomSpacing:0 leadSpacing:0 tailSpacing:0];
+    [itemNodeArr hs_mas_distributeSudokuViewsWithFixedItemWidth:kScreenWidth - 36 * 2 fixedItemHeight:30
+                                                fixedLineSpacing:0 fixedInteritemSpacing:0
+                                                       warpCount:1
+                                                      topSpacing:0
+                                                   bottomSpacing:0 leadSpacing:0 tailSpacing:0];
+    CGFloat v_w = kScreenWidth - 36 * 2;
+    
+    for (int i = 0; i < ratioArr.count; i++) {
+        CGFloat s = ratioArr[i].floatValue;
+        CGFloat item_w = v_w * s;
+        [scaleNodeArr[i] mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(item_w));
+        }];
+    }
+}
+
 - (void)hsAddViews {
     [super hsAddViews];
-    self.backgroundColor = UIColor.redColor;
-    [self addSubview: self.contentView];
-    [self.contentView addSubview:self.headImageView];
-    [self.contentView addSubview:self.nameLabel];
-    [self.contentView addSubview:self.userIDLabel];
+    self.backgroundColor = UIColor.whiteColor;
+    [self addSubview: self.titleLabel];
+    [self addSubview: self.scaleView];
+    [self addSubview: self.itemsView];
+    
+    [self updateUI];
 }
 
 - (void)hsLayoutViews {
     [super hsLayoutViews];
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(0);
-        make.height.mas_equalTo(104);
-        make.left.mas_equalTo(0);
-        make.right.mas_equalTo(0);
-    }];
-    [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(64, 64));
-        make.centerY.equalTo(self);
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(16);
         make.left.mas_equalTo(20);
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(28);
-        make.top.equalTo(self.headImageView.mas_top).offset(6);
-        make.left.equalTo(self.headImageView.mas_right).offset(16);
-        make.width.mas_greaterThanOrEqualTo(0);
+    [self.scaleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(12);
+        make.left.mas_equalTo(20);
+        make.right.mas_equalTo(-20);
+        make.height.mas_equalTo(40);
     }];
-    [self.userIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(18);
-        make.top.equalTo(self.nameLabel.mas_bottom).offset(4);
-        make.left.equalTo(self.nameLabel);
-        make.width.mas_greaterThanOrEqualTo(0);
+    [self.itemsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.scaleView.mas_bottom).offset(2);
+        make.left.mas_equalTo(20);
+        make.right.mas_equalTo(-20);
+        make.height.mas_greaterThanOrEqualTo(0);
     }];
 }
 
-- (void)hsUpdateUI {
-    AccountUserModel *userInfo = AppManager.shared.loginUserInfo;
-    self.nameLabel.text = userInfo.name;
-    self.userIDLabel.text = [NSString stringWithFormat:@"用户ID: %@", userInfo.userID];
-    if (userInfo.icon.length > 0) {
-        [self.headImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.icon]];
-    }
-}
 
 #pragma mark lazy
-- (UIView *)contentView {
-    if (_contentView == nil) {
-        _contentView = UIView.new;
-        _contentView.backgroundColor = UIColor.whiteColor;
+- (UILabel *)titleLabel {
+    if (_titleLabel == nil) {
+        _titleLabel = UILabel.new;
+        _titleLabel.textColor = HEX_COLOR(@"#1A1A1A");
+        _titleLabel.font = UIFONT_MEDIUM(16);
+        _titleLabel.text = @"占用大小";
     }
-    return _contentView;
-}
-- (UIImageView *)headImageView {
-    if (_headImageView == nil) {
-        _headImageView = UIImageView.new;
-        _headImageView.clipsToBounds = true;
-        _headImageView.layer.cornerRadius = 64/2;
-        _headImageView.backgroundColor = HEX_COLOR(@"#8A8A8E");
-    }
-    return _headImageView;
+    return _titleLabel;
 }
 
-- (UILabel *)nameLabel {
-    if (_nameLabel == nil) {
-        _nameLabel = UILabel.new;
-        _nameLabel.textColor = HEX_COLOR(@"#000000");
-        _nameLabel.font = UIFONT_MEDIUM(20);
-        _nameLabel.text = @"西峡县女";
+- (UIView *)scaleView {
+    if (_scaleView == nil) {
+        _scaleView = UIView.new;
     }
-    return _nameLabel;
+    return _scaleView;
 }
 
-- (UILabel *)userIDLabel {
-    if (_userIDLabel == nil) {
-        _userIDLabel = UILabel.new;
-        _userIDLabel.textColor = HEX_COLOR(@"#8A8A8E");
-        _userIDLabel.font = UIFONT_REGULAR(12);
-        _userIDLabel.text = @"用户ID: 123445";
+- (UIView *)itemsView {
+    if (_itemsView == nil) {
+        _itemsView = UIView.new;
     }
-    return _userIDLabel;
+    return _itemsView;
 }
 
 @end
