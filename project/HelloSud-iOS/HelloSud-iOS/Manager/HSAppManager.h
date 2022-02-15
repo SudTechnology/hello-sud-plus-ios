@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSArray <HSGameList *> *gameList;
 /// 所有sceneList游戏列表
 @property(nonatomic, strong) NSArray <HSSceneList *> *sceneList;
+/// 所有支持rtc厂商列表
+@property(nonatomic, strong) NSArray <HSConfigContent *> *rtcList;
+/// 选中rtc厂商类型
+@property(nonatomic, copy)NSString *rtcType;
 
 + (instancetype)shared;
 

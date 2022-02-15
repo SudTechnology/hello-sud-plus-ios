@@ -6,11 +6,15 @@
 //
 
 #import "HSAppManager.h"
+#import "ZegoAudioEngine.h"
+#import "AgoraAudioEngine.h"
 
 #define kKeyLoginUserInfo @"key_login_user_info"
 #define kKeyLoginAgreement @"key_login_agreement"
 #define kKeyLoginIsLogin @"key_login_isLogin"
 #define kKeyLoginToken @"key_login_token"
+#define kKeyCurrentRTCType @"key_current_rtc_type"
+#define kKeyConfigModel @"key_config_model"
 
 @interface HSAppManager ()
 @property (nonatomic, strong) NSArray <NSString *> *randomNameArr;
@@ -57,6 +61,28 @@
         [self setupNetWorkHeader];
         [self reqConfigData];
     }
+    NSString *configStr = [NSUserDefaults.standardUserDefaults stringForKey:kKeyConfigModel];
+    if (configStr) {
+        _configModel = [HSConfigModel mj_objectWithKeyValues:configStr];
+    }
+    _rtcType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
+    [self handleRTCConfigInfo];
+    [self switchAudioEngine];
+}
+
+- (void)setConfigModel:(HSConfigModel *)configModel {
+    _configModel = configModel;
+    [NSUserDefaults.standardUserDefaults setObject:[configModel mj_JSONString] forKey:kKeyConfigModel];
+    [NSUserDefaults.standardUserDefaults synchronize];
+    
+    [self handleRTCConfigInfo];
+}
+
+- (void)setRtcType:(NSString *)rtcType {
+    _rtcType = rtcType;
+    [NSUserDefaults.standardUserDefaults setObject:rtcType forKey:kKeyCurrentRTCType];
+    [NSUserDefaults.standardUserDefaults synchronize];
+    [self switchAudioEngine];
 }
 
 /// 保持用户信息
@@ -179,6 +205,35 @@
 - (NSURL *)appProtocolURL {
     NSString *path = [NSBundle.mainBundle pathForResource:@"user_protocol" ofType:@"html" inDirectory:@"Res"];
     return [NSURL fileURLWithPath:path];
+}
+
+/// 处理rtc厂商信息
+- (void)handleRTCConfigInfo {
+    _rtcList = @[self.configModel.zegoCfg, self.configModel.agoraCfg];
+    // 默认zego
+    if (self.rtcType.length == 0) {
+        self.rtcType = self.configModel.zegoCfg.rtcType;
+    }
+}
+
+/// 切换RTC语音SDK
+- (void)switchAudioEngine {
+    
+    NSLog(@"当前使用RTC厂商:%@", self.rtcType);
+    [MediaAudioEngineManager.shared.audioEngine destroy];
+    if ([self.rtcType isEqualToString:self.configModel.zegoCfg.rtcType]) {
+        NSLog(@"使用zego语音引擎");
+        /// 使用zego语音引擎
+        [MediaAudioEngineManager.shared makeEngine:ZegoAudioEngine.class];
+        /// 初始化zego引擎SDK
+        [MediaAudioEngineManager.shared.audioEngine config:self.configModel.zegoCfg.appId appKey:self.configModel.zegoCfg.appKey];
+    } else if ([self.rtcType isEqualToString:self.configModel.agoraCfg.rtcType]) {
+        NSLog(@"使用agora语音引擎");
+        /// 使用agora语音引擎
+        [MediaAudioEngineManager.shared makeEngine:AgoraAudioEngine.class];
+        /// 初始化agora引擎SDK
+        [MediaAudioEngineManager.shared.audioEngine config:self.configModel.agoraCfg.appId appKey:self.configModel.agoraCfg.appKey];
+    }
 }
 
 @end

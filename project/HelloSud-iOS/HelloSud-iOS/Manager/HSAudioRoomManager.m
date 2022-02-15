@@ -27,7 +27,12 @@
 /// @param roomId 房间ID
 - (void)reqEnterRoom:(long)roomId {
     WeakSelf
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
+    NSMutableDictionary *dicParam = NSMutableDictionary.new;
+    dicParam[@"roomId"] = @(roomId);
+    if (HSAppManager.shared.rtcType.length > 0) {
+        dicParam[@"rtcType"] = HSAppManager.shared.rtcType;
+    }
+    [RequestService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
         HSEnterRoomModel *model = [HSEnterRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:[NSString stringWithFormat:@"%@(%ld)", model.retMsg, model.retCode]];
@@ -65,7 +70,13 @@
 /// @param gameId 游戏ID
 - (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType {
     WeakSelf
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:@{@"gameId": @(gameId), @"sceneType": @(sceneType)} success:^(NSDictionary *rootDict) {
+    NSMutableDictionary *dicParam = NSMutableDictionary.new;
+    dicParam[@"gameId"] = @(gameId);
+    dicParam[@"sceneType"] = @(sceneType);
+    if (HSAppManager.shared.rtcType.length > 0) {
+        dicParam[@"rtcType"] = HSAppManager.shared.rtcType;
+    }
+    [RequestService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
         HSMatchRoomModel *model = [HSMatchRoomModel mj_objectWithKeyValues:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:[NSString stringWithFormat:@"%@(%ld)", model.retMsg, model.retCode]];
