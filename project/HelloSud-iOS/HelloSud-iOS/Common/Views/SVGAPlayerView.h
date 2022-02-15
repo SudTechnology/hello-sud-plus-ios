@@ -1,5 +1,5 @@
 //
-//  HSSVGAPlayerView.h
+//  SVGAPlayerView.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, HSSVGAPlayerStateType) {
 };
 
 /// svga播放视图
-@interface HSSVGAPlayerView : BaseView
+@interface SVGAPlayerView : BaseView
 
 /// 播放状态
 @property(nonatomic, assign)HSSVGAPlayerStateType playState;

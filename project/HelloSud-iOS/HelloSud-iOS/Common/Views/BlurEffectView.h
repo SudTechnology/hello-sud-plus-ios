@@ -1,5 +1,5 @@
 //
-//  HSBlurEffectView.h
+//  BlurEffectView.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HSBlurEffectView : UIVisualEffectView
+@interface BlurEffectView : UIVisualEffectView
 /// 模糊等级 （0 ~ 1）
 @property(nonatomic, assign)CGFloat blurLevel;
 

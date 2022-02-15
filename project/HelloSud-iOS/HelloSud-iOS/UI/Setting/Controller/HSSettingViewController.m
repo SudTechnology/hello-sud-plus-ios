@@ -122,12 +122,12 @@
         
         [attrTitle appendAttributedString:attrStr_0];
         
-        [HSAlertView showAttrTextAlert:attrTitle sureText:@"好的" cancelText:@"" onSureCallback:^{
+        [AlertView showAttrTextAlert:attrTitle sureText:@"好的" cancelText:@"" onSureCallback:^{
         } onCloseCallback:^{
         }];
     } else {
         if (model.isMore) {
-            HSWebViewController *web = HSWebViewController.new;
+            WebViewController *web = WebViewController.new;
             web.url = model.pageURL;
             [self.navigationController pushViewController:web animated:YES];
         }

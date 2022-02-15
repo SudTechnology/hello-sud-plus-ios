@@ -1,5 +1,5 @@
 //
-//  HSTextAlertView.h
+//  TextAlertView.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/21.
@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 文本弹窗
-@interface HSTextAlertView : BaseView
+@interface TextAlertView : BaseView
 typedef NS_ENUM(NSInteger, AlertType)
 {
     HSTypeOnlySure,
