@@ -18,6 +18,7 @@
 /// 关闭推流
 - (void)stopPublish {
     [MediaAudioEngineManager.shared.audioEngine stopPublishStream];
+    [MediaAudioEngineManager.shared.audioEngine muteMicrophone:YES];
 }
 
 - (void)loginRoom {
