@@ -64,10 +64,9 @@
     NSString *configStr = [NSUserDefaults.standardUserDefaults stringForKey:kKeyConfigModel];
     if (configStr) {
         _configModel = [HSConfigModel mj_objectWithKeyValues:configStr];
+        [self handleRTCConfigInfo];
     }
     _rtcType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
-    _rtcType = @"agora";
-    [self handleRTCConfigInfo];
     [self switchAudioEngine];
 }
 
@@ -183,13 +182,14 @@
             return;
         }
         /// 存储用户信息
-        HSAppManager.shared.loginUserInfo.name = model.data.nickname;
-        HSAppManager.shared.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.data.userId];
-        HSAppManager.shared.loginUserInfo.icon = model.data.avatar;
+        HSAppManager.shared.loginUserInfo.name = model.nickname;
+        HSAppManager.shared.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.userId];
+        HSAppManager.shared.loginUserInfo.icon = model.avatar;
+        
         HSAppManager.shared.loginUserInfo.sex = 1;
         [HSAppManager.shared saveLoginUserInfo];
         
-        [HSAppManager.shared saveToken: model.data.token];
+        [HSAppManager.shared saveToken: model.token];
         [HSAppManager.shared saveIsLogin];
         if (success) success();
     } failure:^(id error) {
