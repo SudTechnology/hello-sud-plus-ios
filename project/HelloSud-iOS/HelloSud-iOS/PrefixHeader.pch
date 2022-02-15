@@ -12,8 +12,8 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 // basic components
 #import "CommonHeader.h"
-#import "HSSheetView.h"
-#import "HSAlertView.h"
+#import "SheetView.h"
+#import "AlertView.h"
 
 #import "UIView+Extension.h"
 #import "NSArray+Masonry.h"
@@ -31,7 +31,7 @@
 /// Comon
 #import "AppUtil.h"
 #import "GameConfig.h"
-#import "RequestService.h"
+#import "HttpService.h"
 
 /// Page
 #import "CommonRoomModelHeader.h"

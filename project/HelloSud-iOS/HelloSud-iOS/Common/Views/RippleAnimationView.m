@@ -1,12 +1,12 @@
 //
-//  HSRippleAnimationView.m
+//  RippleAnimationView.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/26.
 //
 
-#import "HSRippleAnimationView.h"
-@interface HSRippleAnimationView()
+#import "RippleAnimationView.h"
+@interface RippleAnimationView()
 
 @property(nonatomic, strong)CALayer * aniLayer;
 /// 是否正在动画
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation HSRippleAnimationView
+@implementation RippleAnimationView
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.rate = 1.8;

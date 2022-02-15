@@ -101,14 +101,14 @@
     [attrTitle appendAttributedString:attrStr_3];
     [attrTitle appendAttributedString:attrStr_4];
     
-    [HSAlertView showAttrTextAlert:attrTitle sureText:@"同意" cancelText:@"不同意" onSureCallback:^{
+    [AlertView showAttrTextAlert:attrTitle sureText:@"同意" cancelText:@"不同意" onSureCallback:^{
         [AppManager.shared saveAgreement];
     } onCloseCallback:^{
         SweetPromptView *promptView = [[SweetPromptView alloc] init];
-        [HSAlertView show:promptView rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+        [AlertView show:promptView rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
         }];
         promptView.agreeTapBlock = ^(UIButton *sender) {
-            [HSAlertView close];
+            [AlertView close];
         };
         promptView.exitTapBlock = ^(UIButton *sender) {
             exit(0);

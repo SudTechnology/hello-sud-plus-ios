@@ -19,13 +19,13 @@
 
 @implementation HomeHeaderReusableView
 
-- (void)setHeaderGameList:(NSArray<HSGameList *> *)headerGameList {
+- (void)setHeaderGameList:(NSArray<HSGameItem *> *)headerGameList {
     _headerGameList = headerGameList;
     
     [self reloadData];
 }
 
-- (void)setSceneModel:(HSSceneList *)sceneModel {
+- (void)setSceneModel:(HSSceneModel *)sceneModel {
     _sceneModel = sceneModel;
     
     self.titleLabel.text = sceneModel.sceneName;
@@ -44,7 +44,7 @@
         [v removeFromSuperview];
     }
     for (int i = 0; i < self.headerGameList.count; i++) {
-        HSGameList *m = self.headerGameList[i];
+        HSGameItem *m = self.headerGameList[i];
         UIView *contenView = [[UIView alloc] init];
         contenView.backgroundColor = UIColor.whiteColor;
         UIImageView *iconImageView = [[UIImageView alloc] init];
@@ -81,7 +81,7 @@
 - (void)tapInputEvent:(UITapGestureRecognizer *)gesture {
     [IQKeyboardManager.sharedManager resignFirstResponder];
     NSInteger tag = [gesture view].tag;
-    HSGameList *m = self.headerGameList[tag];
+    HSGameItem *m = self.headerGameList[tag];
     [AudioRoomManager.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
 }
 

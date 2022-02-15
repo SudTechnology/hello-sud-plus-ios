@@ -1,13 +1,13 @@
 //
-//  HSPaddingLabel.m
+//  PaddingLabel.m
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/2/8.
 //
 
-#import "HSPaddingLabel.h"
+#import "PaddingLabel.h"
 
-@implementation HSPaddingLabel
+@implementation PaddingLabel
 
 - (CGSize)intrinsicContentSize {
     CGSize size = [super intrinsicContentSize];

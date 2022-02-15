@@ -7,18 +7,18 @@
 
 #import "GameListModel.h"
 
-@implementation HSGameList
+@implementation HSGameItem
 
 @end
 
-@implementation HSSceneList
+@implementation HSSceneModel
 
 @end
 
 @implementation GameListModel
 + (NSDictionary *)mj_objectClassInArray {
-    return @{@"gameList": [HSGameList class],
-             @"sceneList": [HSSceneList class]
+    return @{@"gameList": [HSGameItem class],
+             @"sceneList": [HSSceneModel class]
     };
 }
 @end

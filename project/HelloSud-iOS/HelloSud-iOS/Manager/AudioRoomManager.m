@@ -32,7 +32,7 @@
     if (AppManager.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppManager.shared.rtcType;
     }
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
         EnterRoomModel *model = [EnterRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
@@ -54,7 +54,7 @@
 /// @param roomId 房间ID
 - (void)reqExitRoom:(long)roomId {
     [self resetRoomInfo];
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithApi:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         ExitRoomModel *model = [ExitRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
@@ -76,7 +76,7 @@
     if (AppManager.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppManager.shared.rtcType;
     }
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
         MatchRoomModel *model = [MatchRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
@@ -100,7 +100,7 @@
 /// @param handleType 0：上麦 1: 下麦
 - (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithApi:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
         SwitchMicModel *model = [SwitchMicModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
@@ -136,7 +136,7 @@
 /// @param roomId 房间ID
 - (void)reqMicList:(long)roomId success:(void(^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail {
 
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithApi:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
         MicListModel *model = [MicListModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
@@ -161,7 +161,7 @@
 /// @param roomId 房间ID
 - (void)reqSwitchGame:(long)roomId gameId:(long)gameId success:(EmptyBlock)success fail:(ErrorBlock)fail {
 
-    [RequestService postRequestWithApi:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithApi:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} success:^(NSDictionary *rootDict) {
         SwitchGameModel *model = [SwitchGameModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];

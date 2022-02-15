@@ -140,7 +140,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         if (model.isMore) {
-            HSWebViewController *web = HSWebViewController.new;
+            WebViewController *web = WebViewController.new;
             web.url = model.pageURL;
             [self.navigationController pushViewController:web animated:YES];
         }

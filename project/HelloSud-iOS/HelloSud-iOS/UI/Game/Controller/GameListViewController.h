@@ -8,7 +8,7 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+/// 游戏列表
 @interface GameListViewController : BaseViewController
 
 @end

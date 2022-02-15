@@ -9,29 +9,29 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HSGameList: BaseModel
-@property (nonatomic, assign) NSInteger              gameId;
-@property (nonatomic, copy) NSString              * gameName;
-@property (nonatomic, copy) NSArray<NSNumber *>              * suitScene;
-@property (nonatomic, copy) NSString              * gamePic;
+@interface HSGameItem: BaseModel
+@property (nonatomic, assign) NSInteger gameId;
+@property (nonatomic, copy) NSString * gameName;
+@property (nonatomic, copy) NSArray<NSNumber *> * suitScene;
+@property (nonatomic, copy) NSString * gamePic;
 /// 是否是空白区域占位
-@property (nonatomic, assign) BOOL              isBlank;
+@property (nonatomic, assign) BOOL isBlank;
 /// 业务需要 是否为语音房间
-@property (nonatomic, assign) BOOL              isAudioRoom;
+@property (nonatomic, assign) BOOL isAudioRoom;
 
 @end
-
-@interface HSSceneList: BaseModel
-@property (nonatomic, assign) NSInteger              sceneId;
-@property (nonatomic, copy) NSString              * sceneName;
-@property (nonatomic, copy) NSString              * sceneImage;
+/// 列表场景model
+@interface HSSceneModel: BaseModel
+@property (nonatomic, assign) NSInteger sceneId;
+@property (nonatomic, copy) NSString * sceneName;
+@property (nonatomic, copy) NSString * sceneImage;
 
 @end
 
 /// 查询游戏列表Model
 @interface GameListModel: BaseRespModel
-@property (nonatomic, copy) NSArray<HSGameList *>              * gameList;
-@property (nonatomic, copy) NSArray<HSSceneList *>              * sceneList;
+@property (nonatomic, copy) NSArray<HSGameItem *>  * gameList;
+@property (nonatomic, copy) NSArray<HSSceneModel *> * sceneList;
 
 @end
 

@@ -45,12 +45,12 @@
 
 - (void)selectNodeEvent:(UITapGestureRecognizer *)gesture {
     SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
-    [HSSheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
+    [SheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
         
     }];
     WeakSelf
-    modeView.onTapGameCallBack = ^(HSGameList * _Nonnull m) {
-        [HSSheetView close];
+    modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
+        [SheetView close];
         if (weakSelf.onTapGameCallBack) {
             weakSelf.onTapGameCallBack(m);
         }
