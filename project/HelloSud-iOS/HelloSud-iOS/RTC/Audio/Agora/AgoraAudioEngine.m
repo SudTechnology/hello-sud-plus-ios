@@ -238,11 +238,11 @@
 }
 
 - (AgoraAudioParam * _Nonnull)getRecordAudioParams {
-    AgoraAudioParam *param = AgoraAudioParam.new;
+    AgoraAudioParam * param = [[AgoraAudioParam alloc] init];
     param.channel = 1;
+    param.sampleRate = 16000;
     param.mode = AgoraAudioRawFrameOperationModeReadOnly;
-    param.sampleRate = 44100;
-    param.samplesPerCall = 1024;
+    param.samplesPerCall = 160;
     return param;
 }
 
