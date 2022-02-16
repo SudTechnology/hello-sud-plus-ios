@@ -15,8 +15,6 @@
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
 /// 是否在推流
 @property(nonatomic, assign)BOOL isPublishing;
-/// 静音队列
-@property(nonatomic, strong)dispatch_queue_t queueMute;
 /// 事件监听者
 @property(nonatomic, weak)id<MediaAudioEventListener> listener;
 /// 当前进入房间
@@ -30,13 +28,6 @@
 @end
 
 @implementation AgoraAudioEngine
-
-- (dispatch_queue_t)queueMute {
-    if (_queueMute == nil) {
-        _queueMute = dispatch_queue_create("mute_queue", DISPATCH_QUEUE_SERIAL);
-    }
-    return _queueMute;
-}
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
@@ -105,11 +96,7 @@
 }
 
 - (void)muteMicrophone:(BOOL)isMute {
-    dispatch_async(self.queueMute, ^{
-        /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
-        /// 异步激活采集通道（此处开销成本过大，相对耗时）
-        [self.agoraKit enableLocalAudio:isMute ? NO : YES];
-    });
+    [self.agoraKit enableLocalAudio:isMute ? NO : YES];
 }
 
 

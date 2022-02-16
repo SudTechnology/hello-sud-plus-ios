@@ -11,8 +11,8 @@
 /// 开启推流
 /// @param streamID 流ID
 - (void)startPublish:(NSString*)streamID {
-    [MediaAudioEngineManager.shared.audioEngine startPublish:streamID];
     [MediaAudioEngineManager.shared.audioEngine muteMicrophone:NO];
+    [MediaAudioEngineManager.shared.audioEngine startPublish:streamID];
 }
 
 /// 关闭推流
