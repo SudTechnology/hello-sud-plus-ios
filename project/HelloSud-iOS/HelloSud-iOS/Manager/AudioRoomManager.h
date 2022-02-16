@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shared;
 
+/// 请求创建房间
+/// @param sceneType 场景类型
+- (void)reqCreateRoom:(NSInteger)sceneType;
+
 /// 请求进入房间
 /// @param roomId 房间ID
 - (void)reqEnterRoom:(long)roomId;
@@ -48,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 切换房间游戏接口
 /// @param roomId 房间ID
 - (void)reqSwitchGame:(long)roomId gameId:(long)gameId success:(EmptyBlock)success fail:(ErrorBlock)fail;
+
+
 
 @end
 

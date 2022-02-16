@@ -32,7 +32,7 @@
 
 - (void)hsConfigUI {
     self.itemW = (kScreenWidth - 32 - 24 - 24 )/4;
-    self.itemH = self.itemW + 32;
+    self.itemH = 125;//self.itemW + 32;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
@@ -165,7 +165,9 @@
 
 // 设置Header的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(kScreenWidth, 84 + self.itemH * 3);
+    NSInteger lineCount = 3;
+    NSInteger lineSpace = 12;
+    return CGSizeMake(kScreenWidth, 48 + self.itemH * lineCount + lineSpace * (lineCount - 1));
 }
  
 // 设置Footer的尺寸
@@ -195,12 +197,12 @@
 //        CGFloat itemH = itemW + 32 - 8;
         
         CGFloat realitemW = (kScreenWidth - 32 - 24 - 24 )/4;
-        CGFloat itemH = realitemW + 24;
+        CGFloat itemH = 125;//realitemW + 24;
         
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         flowLayout.itemSize = CGSizeMake(itemW, itemH);
-        flowLayout.minimumLineSpacing = 0;
+        flowLayout.minimumLineSpacing = 12;
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
