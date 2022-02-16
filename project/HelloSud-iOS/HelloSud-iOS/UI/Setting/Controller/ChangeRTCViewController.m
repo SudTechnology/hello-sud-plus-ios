@@ -110,8 +110,8 @@
                 }
                 model.isSlect = true;
                 
-                AppManager.shared.rtcType = [model.title isEqualToString:@"即构"] ? @"zego" : @"agora";
-                [AppManager.shared switchAudioEngine:AppManager.shared.rtcType configModel:AppManager.shared.configModel];
+                NSString *rtcType = [model.title isEqualToString:@"即构"] ? @"zego" : @"agora";
+                [AppManager.shared switchRtcType:rtcType];
                 [weakSelf.tableView reloadData];
                 
                 if (self.onRTCChangeBlock) {
