@@ -37,8 +37,8 @@
 
 - (void)hsConfigUI {
     self.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
-    self.itemW = (kScreenWidth -32) / 4;
-    self.itemH = 125;
+    self.itemW = (kScreenWidth - 32) / 4;
+    self.itemH = 125 + 12;
 }
 
 - (void)reloadData {
@@ -97,7 +97,7 @@
         enterLabel.hidden = m.isGameWait;
     }
     [self.itemContainerView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:self.itemW fixedItemHeight:self.itemH
-                                                fixedLineSpacing:12 fixedInteritemSpacing:0
+                                                fixedLineSpacing:0 fixedInteritemSpacing:0
                                                        warpCount:2
                                                       topSpacing:0
                                                    bottomSpacing:0 leadSpacing:0 tailSpacing:0];
@@ -157,15 +157,12 @@
     [self.createBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(4, 4, 4, 4));
     }];
-    NSInteger lineCount = 3;
-    NSInteger lineSpace = 12;
     CGFloat w = (kScreenWidth - 32) / 2;
-    CGFloat h = self.itemH * lineCount + lineSpace * (lineCount - 1);
     [self.itemContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_centerX);
         make.top.mas_equalTo(36);
         make.width.mas_equalTo(w);
-        make.height.mas_equalTo(h);
+        make.bottom.mas_equalTo(0);
     }];
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.itemContainerView);

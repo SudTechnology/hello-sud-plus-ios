@@ -14,7 +14,7 @@
 @implementation HomeFooterReusableView
 
 - (void)hsConfigUI {
-//    self.backgroundColor = UIColor.whiteColor;
+    self.backgroundColor = HEX_COLOR(@"#F5F6FB");
 }
 
 - (void)hsAddViews {
@@ -23,7 +23,8 @@
 
 - (void)hsLayoutViews {
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self);
+        make.left.top.right.mas_equalTo(0);
+        make.height.mas_equalTo(12);
     }];
 }
 
