@@ -111,6 +111,7 @@
                 if (arr.count == 0) {
                     // 构建敬请期待数据
                     [weakSelf.headerGameList addObject:[self makeGameWaitItems:6]];
+                    m.isGameWait = YES;
                 } else {
                     [weakSelf.headerGameList addObject:arr];
                 }

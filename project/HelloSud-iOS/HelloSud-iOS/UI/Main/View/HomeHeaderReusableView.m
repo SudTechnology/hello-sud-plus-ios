@@ -33,6 +33,7 @@
     
     self.titleLabel.text = sceneModel.sceneName;
     [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImage]];
+    [self.createBtn setTitleColor:sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A") forState:UIControlStateNormal];
 }
 
 - (void)hsConfigUI {
@@ -116,6 +117,9 @@
 
 - (void)onBtnClick:(UIButton *)sender {
     // 创建房间
+    if (self.sceneModel.isGameWait) {
+        return;
+    }
     [AudioRoomManager.shared reqCreateRoom:self.sceneModel.sceneId];
 }
 
@@ -231,7 +235,6 @@
     if (!_createBtn) {
         _createBtn = UIButton.new;
         [_createBtn setTitle:@"创建房间" forState:UIControlStateNormal];
-        [_createBtn setTitleColor:HEX_COLOR(@"#1A1A1A") forState:UIControlStateNormal];
         _createBtn.backgroundColor = HEX_COLOR(@"#FFFFFF");
         _createBtn.titleLabel.font = UIFONT_BOLD(18);
         _createBtn.layer.cornerRadius = 18;
