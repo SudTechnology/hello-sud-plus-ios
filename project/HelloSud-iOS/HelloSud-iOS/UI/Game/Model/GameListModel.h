@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * gamePic;
 /// 是否是空白区域占位
 @property (nonatomic, assign) BOOL isBlank;
+/// 是否等待数据
+@property (nonatomic, assign) BOOL isGameWait;
 /// 业务需要 是否为语音房间
 @property (nonatomic, assign) BOOL isAudioRoom;
 

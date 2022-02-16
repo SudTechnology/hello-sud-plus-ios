@@ -17,7 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *dataList;
 /// 头部数据源
 @property (nonatomic, strong) NSMutableArray <HSSceneModel *> *headerSceneList;
-@property (nonatomic, strong) NSMutableArray *headerGameList;
+@property (nonatomic, strong) NSMutableArray <NSArray<HSGameItem *>*> *headerGameList;
 @property (nonatomic, strong) SearchHeaderView *searchHeaderView;
 @property (nonatomic, assign) CGFloat itemW;
 @property (nonatomic, assign) CGFloat itemH;
@@ -108,8 +108,14 @@
             NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
             
             if (arr.count <= 6) {
-                [weakSelf.headerGameList addObject:arr];
+                if (arr.count == 0) {
+                    // 构建敬请期待数据
+                    [weakSelf.headerGameList addObject:[self makeGameWaitItems:6]];
+                } else {
+                    [weakSelf.headerGameList addObject:arr];
+                }
                 [weakSelf.dataList addObject:@[]];
+
             } else {
                 NSMutableArray <HSGameItem *> *h_arr = NSMutableArray.new;
                 [h_arr setArray:[arr subarrayWithRange:NSMakeRange(0, 6)]];
@@ -135,6 +141,21 @@
     } failure:^(id error) {
         [ToastUtil show:@"网络错误"];
     }];
+}
+
+
+/// 构建等待数据
+/// @param count count description
+- (NSArray *)makeGameWaitItems:(NSInteger)count {
+    NSMutableArray *arr = NSMutableArray.new;
+    for (int i = 0; i < count; i++) {
+        HSGameItem *item = HSGameItem.new;
+        item.gameName = @"敬请期待";
+        item.isGameWait = YES;
+        item.gamePic = @"game_wait";
+        [arr addObject:item];
+    }
+    return arr;
 }
 
 #pragma mark - UICollectionViewDataSource
