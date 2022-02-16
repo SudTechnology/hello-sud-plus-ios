@@ -52,11 +52,11 @@
     gitHubModel.title = @"GitHub";
     gitHubModel.subTitle = @"hello-sud";
     gitHubModel.isMore = YES;
-    gitHubModel.pageURL = @"";
+    gitHubModel.pageURL = @"https://github.com/SudTechnology/hello-sud-ios";
     HSSettingModel *oProtocolModel = [HSSettingModel new];
     oProtocolModel.title = @"开源协议";
     oProtocolModel.isMore = YES;
-    oProtocolModel.pageURL = AppManager.shared.appProtocolURL.absoluteString;
+    oProtocolModel.pageURL = @"https://github.com/SudTechnology/hello-sud-ios/license.txt";
     HSSettingModel *userProtocolModel = [HSSettingModel new];
     userProtocolModel.title = @"用户协议";
     userProtocolModel.isMore = YES;
@@ -149,6 +149,12 @@
         };
     } else if ([model.title isEqualToString:@"切换语言"]) {
         [ToastUtil show:@"正在制作中, 敬请期待!"];
+    } else if ([model.title isEqualToString:@"GitHub"] || [model.title isEqualToString:@"开源协议"]) {
+        if (@available(iOS 10.0, *)) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.pageURL] options:@{} completionHandler:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.pageURL]];
+        }
     } else {
         if (model.isMore) {
             WebViewController *web = WebViewController.new;

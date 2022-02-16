@@ -6,20 +6,17 @@
 //
 
 #import "SwitchRoomModeView.h"
-#import "GameItemCollectionViewCell.h"
+#import "SwitchRoomCell.h"
 
 @interface SwitchRoomModeView ()<UICollectionViewDelegate, UICollectionViewDataSource>
-@property (nonatomic, strong) UILabel *audioTitleLabel;
-@property (nonatomic, strong) UIView *audioView;
-@property (nonatomic, strong) UILabel *gameTitleLabel;
-
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray <HSGameItem *> *dataList;
 @end
 
 @implementation SwitchRoomModeView
 
-- (void)hsAddViews {
+- (void)reloadData:(BOOL)isAudioRoom {
     NSArray <HSGameItem *> *dataArr = AppManager.shared.gameList;
     [self.dataList setArray:dataArr];
     
@@ -30,33 +27,31 @@
         }
     }];
     
-    [self addSubview:self.audioTitleLabel];
-    [self addSubview:self.audioView];
-    [self addSubview:self.gameTitleLabel];
+    if (isAudioRoom == NO) {
+        HSGameItem *m = HSGameItem.new;
+        m.isAudioRoom = true;
+        [self.dataList insertObject:m atIndex:0];
+    }
+    
+    [self.collectionView reloadData];
+}
+
+- (void)hsAddViews {
+    
+    [self addSubview:self.titleLabel];
     [self addSubview:self.collectionView];
 }
 
 - (void)hsLayoutViews {
-    [self.audioTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(16);
         make.top.mas_equalTo(22);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
-    [self.audioView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(16);
-        make.top.mas_equalTo(self.audioTitleLabel.mas_bottom).offset(19);
-        make.height.mas_equalTo(100);
-        make.width.mas_equalTo((kScreenWidth-32)/2);
-    }];
-    [self.gameTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(16);
-        make.top.mas_equalTo(self.audioView.mas_bottom).offset(30);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
-    }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self);
-        make.top.mas_equalTo(self.gameTitleLabel.mas_bottom).offset(30);
-        make.height.mas_equalTo(350);
+        make.top.mas_equalTo(self.titleLabel.mas_bottom);
+        make.height.mas_equalTo(500);
         make.bottom.mas_equalTo(-kAppSafeBottom);
     }];
 }
@@ -80,7 +75,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    GameItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
+    SwitchRoomCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SwitchRoomCell" forIndexPath:indexPath];
     cell.model = self.dataList[indexPath.row];
     if (self.dataList[indexPath.row].gameId == GameManager.shared.gameId) {
         [cell.inGameLabel setHidden:false];
@@ -115,7 +110,7 @@
         _collectionView.backgroundColor = UIColor.whiteColor;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView registerClass:[GameItemCollectionViewCell class] forCellWithReuseIdentifier:@"GameItemCollectionViewCell"];
+        [_collectionView registerClass:[SwitchRoomCell class] forCellWithReuseIdentifier:@"SwitchRoomCell"];
     }
     return _collectionView;
 }
@@ -127,53 +122,14 @@
     return _dataList;
 }
 
-- (UILabel *)audioTitleLabel {
-    if (!_audioTitleLabel) {
-        _audioTitleLabel = [[UILabel alloc] init];
-        _audioTitleLabel.text = @"娱乐聊天";
-        _audioTitleLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
-        _audioTitleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.text = @"选择游戏";
+        _titleLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        _titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
     }
-    return _audioTitleLabel;
-}
-
-- (UILabel *)gameTitleLabel {
-    if (!_gameTitleLabel) {
-        _gameTitleLabel = [[UILabel alloc] init];
-        _gameTitleLabel.text = @"选择房间模式";
-        _gameTitleLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
-        _gameTitleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
-    }
-    return _gameTitleLabel;
-}
-
-- (UIView *)audioView {
-    if (!_audioView) {
-        _audioView = [[UIView alloc] init];
-        _audioView.backgroundColor = UIColor.blackColor;
-        UIImageView *iconImageView = [[UIImageView alloc] init];
-        iconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"game_type_header_item_%d", 0]];
-        UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.text = @"语聊房";
-        titleLabel.textColor = UIColor.whiteColor;
-        titleLabel.font = [UIFont systemFontOfSize:24 weight:UIFontWeightSemibold];
-        [self addSubview:_audioView];
-        [_audioView addSubview:iconImageView];
-        [_audioView addSubview:titleLabel];
-        [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
-            make.centerY.mas_equalTo(_audioView);
-            make.size.mas_equalTo(CGSizeMake(72, 72));
-        }];
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.mas_equalTo(_audioView);
-            make.size.mas_greaterThanOrEqualTo(CGSizeZero);
-        }];
-        [_audioView setUserInteractionEnabled:true];
-        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAudioEvent:)];
-        [_audioView addGestureRecognizer:tapGesture];
-    }
-    return _audioView;
+    return _titleLabel;
 }
 
 @end
