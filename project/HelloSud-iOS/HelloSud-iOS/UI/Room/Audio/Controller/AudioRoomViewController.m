@@ -54,6 +54,13 @@
     [self hsUpdateUI];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return NO;
+}
 
 - (void)hsAddViews {
     [self.view addSubview:self.bgImageView];
