@@ -79,6 +79,7 @@
 		44F29F6827BBB9D000F57DEE /* VersionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F6727BBB9D000F57DEE /* VersionInfoViewController.m */; };
 		44F29F6B27BCA6DF00F57DEE /* VersionInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F6A27BCA6DF00F57DEE /* VersionInfoModel.m */; };
 		44F29F6E27BCA75000F57DEE /* VersionInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F6D27BCA75000F57DEE /* VersionInfoCell.m */; };
+		44F29F7227BCCE6D00F57DEE /* SwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F7127BCCE6D00F57DEE /* SwitchRoomCell.m */; };
 		6C076E53279940A400650209 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E52279940A400650209 /* MainTabBarController.m */; };
 		6C076E572799450900650209 /* HSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E562799450900650209 /* HSSettingViewController.m */; };
 		6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E5B27995D3400650209 /* BaseTableViewCell.m */; };
@@ -288,6 +289,8 @@
 		44F29F6A27BCA6DF00F57DEE /* VersionInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionInfoModel.m; sourceTree = "<group>"; };
 		44F29F6C27BCA75000F57DEE /* VersionInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionInfoCell.h; sourceTree = "<group>"; };
 		44F29F6D27BCA75000F57DEE /* VersionInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionInfoCell.m; sourceTree = "<group>"; };
+		44F29F7027BCCE6D00F57DEE /* SwitchRoomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchRoomCell.h; sourceTree = "<group>"; };
+		44F29F7127BCCE6D00F57DEE /* SwitchRoomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchRoomCell.m; sourceTree = "<group>"; };
 		4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.release.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C076E51279940A400650209 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -689,6 +692,19 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		44F29F6F27BCCE3900F57DEE /* Mic */ = {
+			isa = PBXGroup;
+			children = (
+				445EAACA279A9C30000DCC72 /* AudioMicroView.h */,
+				445EAACB279A9C30000DCC72 /* AudioMicroView.m */,
+				445EAACD279AA133000DCC72 /* AudioMicContentView.h */,
+				445EAACE279AA133000DCC72 /* AudioMicContentView.m */,
+				445EAB0B279FD930000DCC72 /* GameMicContentView.h */,
+				445EAB0C279FD930000DCC72 /* GameMicContentView.m */,
+			);
+			path = Mic;
+			sourceTree = "<group>";
+		};
 		6C076E54279944ED00650209 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,6 +816,7 @@
 		6C076E8D279EA34700650209 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				44F29F6F27BCCE3900F57DEE /* Mic */,
 				445EAAD6279AAF4B000DCC72 /* Gift */,
 				445EAAC6279A94E0000DCC72 /* Msg */,
 				445EAAA8279A562C000DCC72 /* RoomNaviView.h */,
@@ -810,14 +827,10 @@
 				445EAAB2279A65B9000DCC72 /* RoomMsgTableView.m */,
 				445EAAC7279A98DB000DCC72 /* RoomMsgBgView.h */,
 				445EAAC8279A98DB000DCC72 /* RoomMsgBgView.m */,
-				445EAACA279A9C30000DCC72 /* AudioMicroView.h */,
-				445EAACB279A9C30000DCC72 /* AudioMicroView.m */,
-				445EAACD279AA133000DCC72 /* AudioMicContentView.h */,
-				445EAACE279AA133000DCC72 /* AudioMicContentView.m */,
-				445EAB0B279FD930000DCC72 /* GameMicContentView.h */,
-				445EAB0C279FD930000DCC72 /* GameMicContentView.m */,
 				445EAAD0279AA64E000DCC72 /* SwitchRoomModeView.h */,
 				445EAAD1279AA64E000DCC72 /* SwitchRoomModeView.m */,
+				44F29F7027BCCE6D00F57DEE /* SwitchRoomCell.h */,
+				44F29F7127BCCE6D00F57DEE /* SwitchRoomCell.m */,
 				445EAAFC279F97D0000DCC72 /* RoomInputView.h */,
 				445EAAFD279F97D0000DCC72 /* RoomInputView.m */,
 				6C076EC827A23E9300650209 /* MicOperateView.h */,
@@ -1249,6 +1262,7 @@
 				44F29F5C27BB9C0800F57DEE /* HSSettingHeaderModel.m in Sources */,
 				445EAAF2279E8083000DCC72 /* HomeViewController.m in Sources */,
 				445EAB0A279FD44F000DCC72 /* RoomGameInfoModel.m in Sources */,
+				44F29F7227BCCE6D00F57DEE /* SwitchRoomCell.m in Sources */,
 				44F29F6227BBB51A00F57DEE /* ChangeRTCTCell.m in Sources */,
 				445EAB1A27A0101F000DCC72 /* EnterRoomModel.m in Sources */,
 				6C076E6127995F4C00650209 /* HSSettingCell.m in Sources */,
