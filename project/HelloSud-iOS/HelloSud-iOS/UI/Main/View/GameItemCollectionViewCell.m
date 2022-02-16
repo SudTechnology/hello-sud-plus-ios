@@ -11,6 +11,8 @@
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
+/// 加入
+@property (nonatomic, strong) UILabel *enterLabel;
 @property (nonatomic, assign) CGFloat itemW;
 @property (nonatomic, assign) CGFloat itemH;
 @end
@@ -21,14 +23,16 @@
     HSGameItem *m = (HSGameItem *) model;
     self.nameLabel.text = m.gameName;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
+    self.enterLabel.hidden = m.isBlank;
 }
 
 - (void)hsAddViews {
-    self.itemW = (kScreenWidth - 32 - 24 - 24 )/4;
+    self.itemW = 72;//(kScreenWidth - 32 - 24 - 24 )/4;
     self.itemH = self.itemW + 32;
     [self.contentView addSubview:self.containerView];
     [self.containerView addSubview:self.iconImageView];
     [self.containerView addSubview:self.nameLabel];
+    [self.containerView addSubview:self.enterLabel];
     [self.containerView addSubview:self.inGameLabel];
 }
 
@@ -46,6 +50,11 @@
         make.left.right.equalTo(self.containerView);
         make.top.mas_equalTo(self.iconImageView.mas_bottom).offset(3);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+    }];
+    [self.enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.containerView);
+        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(6);
+        make.size.mas_greaterThanOrEqualTo(CGSizeMake(54, 28));
     }];
     [self.inGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(self.iconImageView);
@@ -68,6 +77,21 @@
     }
     return _iconImageView;
 }
+
+- (UILabel *)enterLabel {
+    if (!_enterLabel) {
+        _enterLabel = [[UILabel alloc] init];
+        _enterLabel.text = @"加入";
+        _enterLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        _enterLabel.font = UIFONT_BOLD(12);
+        _enterLabel.layer.borderColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1].CGColor;
+        _enterLabel.layer.borderWidth = 1;
+        _enterLabel.layer.cornerRadius = 14;
+        _enterLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _enterLabel;
+}
+
 
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
