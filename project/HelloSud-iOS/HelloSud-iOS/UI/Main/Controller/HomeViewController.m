@@ -186,12 +186,12 @@
 
 // 设置Header的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(kScreenWidth, 36 + self.itemH * 3);
+    return CGSizeMake(kScreenWidth, 36 + 20 + self.itemH * 3);
 }
  
 // 设置Footer的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    return CGSizeMake(kScreenWidth, 32);
+    return CGSizeMake(kScreenWidth, 12);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
