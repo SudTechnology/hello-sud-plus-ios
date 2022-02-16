@@ -16,7 +16,7 @@
 /// 是否在推流
 @property(nonatomic, assign)BOOL isPublishing;
 /// 事件监听者
-@property(nonatomic, weak)id<MediaAudioEventListener> listener;
+@property(nonatomic, weak)id<HSAudioEventListener> listener;
 /// 当前进入房间
 @property(nonatomic, strong)NSString *roomID;
 /// 声网语音引擎
@@ -31,7 +31,7 @@
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
-- (void)setEventListener:(id<MediaAudioEventListener>)listener {
+- (void)setEventListener:(id<HSAudioEventListener>)listener {
     _listener = listener;
 }
 
@@ -143,7 +143,7 @@
     MediaUser *user = MediaUser.new;
     user.userID = [NSString stringWithFormat:@"%ld", uid];
     [arr addObject:user];
-    [self.listener onRoomUserUpdate:MediaAudioEngineUpdateTypeAdd userList:arr roomID:self.roomID];
+    [self.listener onRoomUserUpdate:HSAudioEngineUpdateTypeAdd userList:arr roomID:self.roomID];
 }
 
 - (void)rtcEngine:(AgoraRtcEngineKit* _Nonnull)engine didJoinedOfUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
@@ -152,7 +152,7 @@
         MediaUser *user = MediaUser.new;
         user.userID = [NSString stringWithFormat:@"%ld", uid];
         [arr addObject:user];
-        [self.listener onRoomUserUpdate:MediaAudioEngineUpdateTypeAdd userList:arr roomID:self.roomID];
+        [self.listener onRoomUserUpdate:HSAudioEngineUpdateTypeAdd userList:arr roomID:self.roomID];
     }
 }
 
@@ -162,7 +162,7 @@
         MediaUser *user = MediaUser.new;
         user.userID = [NSString stringWithFormat:@"%ld", uid];
         [arr addObject:user];
-        [self.listener onRoomUserUpdate:MediaAudioEngineUpdateTypeDelete userList:arr roomID:self.roomID];
+        [self.listener onRoomUserUpdate:HSAudioEngineUpdateTypeDelete userList:arr roomID:self.roomID];
     }
 }
 
