@@ -50,10 +50,14 @@
         UIView *contenView = [[UIView alloc] init];
         contenView.backgroundColor = UIColor.whiteColor;
         UIImageView *iconImageView = [[UIImageView alloc] init];
-        [iconImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
+        if (m.isGameWait) {
+            iconImageView.image = [UIImage imageNamed:m.gamePic];
+        } else {
+            [iconImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
+        }
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.text = m.gameName;
-        titleLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        titleLabel.textColor = [UIColor colorWithHexString:m.isGameWait ? @"#AAAAAA" : @"#1A1A1A" alpha:1];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
         
@@ -89,6 +93,7 @@
         contenView.tag = i;
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInputEvent:)];
         [contenView addGestureRecognizer:tapGesture];
+        enterLabel.hidden = m.isGameWait;
     }
     [self.itemContainerView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:self.itemW fixedItemHeight:self.itemH
                                                 fixedLineSpacing:12 fixedInteritemSpacing:0
@@ -101,6 +106,10 @@
     [IQKeyboardManager.sharedManager resignFirstResponder];
     NSInteger tag = [gesture view].tag;
     HSGameItem *m = self.headerGameList[tag];
+    if (m.isGameWait) {
+        // 假数据
+        return;
+    }
     [AudioRoomManager.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
 }
 
