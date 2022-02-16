@@ -15,7 +15,7 @@
 - (void)sendMsg:(AudioMsgBaseModel *)msg isAddToShow:(BOOL)isAddToShow {
     NSString *command = [[NSString alloc]initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
     NSLog(@"send content:%@", command);
-    [MediaAudioEngineManager.shared.audioEngine sendCommand:command roomID:self.roomID result:^(int errorCode) {
+    [HSAudioEngineManager.shared.audioEngine sendCommand:command roomID:self.roomID result:^(int errorCode) {
         NSLog(@"send result:%d", errorCode);
     }];
     [self addMsg:msg isShowOnScreen:isAddToShow];

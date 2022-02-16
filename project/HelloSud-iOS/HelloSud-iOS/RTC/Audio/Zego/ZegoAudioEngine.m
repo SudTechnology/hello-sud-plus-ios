@@ -12,7 +12,7 @@
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
 @property(nonatomic, assign)BOOL isPublishing;
 @property(nonatomic, strong)dispatch_queue_t queueMute;
-@property(nonatomic, weak)id<MediaAudioEventListener> listener;
+@property(nonatomic, weak)id<HSAudioEventListener> listener;
 @property(nonatomic, strong)NSString *roomID;
 
 /// 流与ID关系[streamID:userID]
@@ -37,7 +37,7 @@
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
-- (void)setEventListener:(id<MediaAudioEventListener>)listener {
+- (void)setEventListener:(id<HSAudioEventListener>)listener {
     _listener = listener;
 }
 
@@ -241,7 +241,7 @@
 
 - (void)onRoomStateUpdate:(ZegoRoomState)state errorCode:(int)errorCode extendedData:(nullable NSDictionary *)extendedData roomID:(NSString *)roomID {
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomStateUpdate:errorCode:extendedData:roomID:)]) {
-        [self.listener onRoomStateUpdate:(MediaAudioEngineRoomState)state errorCode:errorCode extendedData:extendedData roomID:roomID];
+        [self.listener onRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:errorCode extendedData:extendedData roomID:roomID];
     }
 }
 

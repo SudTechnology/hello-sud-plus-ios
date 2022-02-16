@@ -5,10 +5,10 @@
 //  Created by kaniel on 2022/1/24.
 //
 
-#import "MediaAudioCommon.h"
+#import "HSAudioCommon.h"
 
 /// 音频流帧参数
-@implementation MediaAudioEngineFrameParamModel
+@implementation HSAudioEngineFrameParamModel
 @end
 
 @implementation MediaUser
