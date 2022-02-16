@@ -11,25 +11,25 @@
 /// 开启推流
 /// @param streamID 流ID
 - (void)startPublish:(NSString*)streamID {
-    [MediaAudioEngineManager.shared.audioEngine muteMicrophone:NO];
-    [MediaAudioEngineManager.shared.audioEngine startPublish:streamID];
+    [HSAudioEngineManager.shared.audioEngine muteMicrophone:NO];
+    [HSAudioEngineManager.shared.audioEngine startPublish:streamID];
 }
 
 /// 关闭推流
 - (void)stopPublish {
-    [MediaAudioEngineManager.shared.audioEngine stopPublishStream];
-    [MediaAudioEngineManager.shared.audioEngine muteMicrophone:YES];
+    [HSAudioEngineManager.shared.audioEngine stopPublishStream];
+    [HSAudioEngineManager.shared.audioEngine muteMicrophone:YES];
 }
 
 - (void)loginRoom {
     /// 设置语音引擎事件回调
-    [MediaAudioEngineManager.shared.audioEngine setEventListener:self];
+    [HSAudioEngineManager.shared.audioEngine setEventListener:self];
     MediaUser *user = [MediaUser user:AppManager.shared.loginUserInfo.userID nickname:AppManager.shared.loginUserInfo.name];
-    [MediaAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
+    [HSAudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
 }
 
 - (void)logoutRoom {
-    [MediaAudioEngineManager.shared.audioEngine logoutRoom];
+    [HSAudioEngineManager.shared.audioEngine logoutRoom];
 }
 
 #pragma mark delegate
@@ -53,18 +53,18 @@
 /// @param streamList 变动流列表
 /// @param extendedData 扩展信息
 /// @param roomID 房间ID
-- (void)onRoomStreamUpdate:(MediaAudioEngineUpdateType)updateType streamList:(NSArray<MediaStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData roomID:(NSString *)roomID {
+- (void)onRoomStreamUpdate:(HSAudioEngineUpdateType)updateType streamList:(NSArray<MediaStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData roomID:(NSString *)roomID {
     switch (updateType) {
-        case MediaAudioEngineUpdateTypeAdd:
+        case HSAudioEngineUpdateTypeAdd:
             for (MediaStream *item in streamList) {
-                [MediaAudioEngineManager.shared.audioEngine startPlayingStream:item.streamID];
+                [HSAudioEngineManager.shared.audioEngine startPlayingStream:item.streamID];
                 [[NSNotificationCenter defaultCenter]postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey:item}];
                 
             }
             break;
-        case MediaAudioEngineUpdateTypeDelete:
+        case HSAudioEngineUpdateTypeDelete:
             for (MediaStream *item in streamList) {
-                [MediaAudioEngineManager.shared.audioEngine stopPlayingStream:item.streamID];
+                [HSAudioEngineManager.shared.audioEngine stopPlayingStream:item.streamID];
             }
             break;
     }
@@ -78,10 +78,10 @@
     }
 }
 
-- (void)onRoomUserUpdate:(MediaAudioEngineUpdateType)updateType userList:(NSArray<MediaUser *> *)userList roomID:(NSString *)roomID {
-    if (updateType == MediaAudioEngineUpdateTypeAdd) {
+- (void)onRoomUserUpdate:(HSAudioEngineUpdateType)updateType userList:(NSArray<MediaUser *> *)userList roomID:(NSString *)roomID {
+    if (updateType == HSAudioEngineUpdateTypeAdd) {
         self.totalUserCount += userList.count;
-    } else if (updateType == MediaAudioEngineUpdateTypeDelete) {
+    } else if (updateType == HSAudioEngineUpdateTypeDelete) {
         self.totalUserCount -= userList.count;
         if (self.totalUserCount < 0) {
             self.totalUserCount = 0;
@@ -90,8 +90,8 @@
     [self hsUpdateUI];
 }
 
-- (void)onRoomStateUpdate:(MediaAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {
-    if (state == MediaAudioEngineStateConnected && !self.isSentEnterRoom) {
+- (void)onRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {
+    if (state == HSAudioEngineStateConnected && !self.isSentEnterRoom) {
         [self sendEnterRoomMsg];
     }
 }

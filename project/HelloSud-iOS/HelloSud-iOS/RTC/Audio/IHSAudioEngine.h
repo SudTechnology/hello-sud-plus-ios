@@ -1,22 +1,22 @@
 //
-//  MediaAudioEngine.h
+//  HSAudioEngine.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/18.
 //
 
 #import <Foundation/Foundation.h>
-#import "MediaAudioEventListener.h"
+#import "HSAudioEventListener.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 多媒体语音引擎接口，多引擎实现以下接口
-@protocol IMediaAudioEngine <NSObject>
+@protocol IHSAudioEngine <NSObject>
 @required
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
-- (void)setEventListener:(id<MediaAudioEventListener>)listener;
+- (void)setEventListener:(id<HSAudioEventListener>)listener;
 
 /// 必须优先调用初始化配置引擎SDK
 /// @param config config
