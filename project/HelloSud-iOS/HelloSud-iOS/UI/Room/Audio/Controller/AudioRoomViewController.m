@@ -161,12 +161,19 @@
         } onCloseCallback:^{
         }];
     };
-    self.naviView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
-        if (weakSelf.gameInfoModel.gameState == 2) {
-            [ToastUtil show:@"正在游戏中, 无法切换游戏"];
-            return;
-        }
-        [weakSelf handleChangeRoomMode:m];
+    self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
+        SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
+        [modeView reloadData:weakSelf.roomType == HSAudio];
+        [SheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
+        }];
+        modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
+            [SheetView close];
+            if (weakSelf.gameInfoModel.gameState == 2) {
+                [ToastUtil show:@"正在游戏中, 无法切换游戏"];
+                return;
+            }
+            [weakSelf handleChangeRoomMode:m];
+        };
     };
 }
 

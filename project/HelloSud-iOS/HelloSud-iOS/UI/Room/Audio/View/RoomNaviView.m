@@ -6,7 +6,6 @@
 //
 
 #import "RoomNaviView.h"
-#import "SwitchRoomModeView.h"
 
 @interface RoomNaviView ()
 @property (nonatomic, strong) UILabel *roomNumLabel;
@@ -44,17 +43,21 @@
 }
 
 - (void)selectNodeEvent:(UITapGestureRecognizer *)gesture {
-    SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
-    [SheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
-        
-    }];
-    WeakSelf
-    modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
-        [SheetView close];
-        if (weakSelf.onTapGameCallBack) {
-            weakSelf.onTapGameCallBack(m);
-        }
-    };
+    if (self.changeRoomTapBlock) {
+        self.changeRoomTapBlock(gesture);
+    }
+//    SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
+//    [modeView reloadData:<#(BOOL)#>];
+//    [SheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
+//        
+//    }];
+//    WeakSelf
+//    modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
+//        [SheetView close];
+//        if (weakSelf.onTapGameCallBack) {
+//            weakSelf.onTapGameCallBack(m);
+//        }
+//    };
 }
 
 - (void)onCloseRoomEvent:(UIButton *)btn {
@@ -92,7 +95,7 @@
     [self.roomModeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-52);
         make.centerY.mas_equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(102, 20));
+        make.size.mas_equalTo(CGSizeMake(78, 20));
     }];
     [self.roomModeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(8);
@@ -166,7 +169,7 @@
 - (UILabel *)roomModeLabel {
     if (!_roomModeLabel) {
         _roomModeLabel = [[UILabel alloc] init];
-        _roomModeLabel.text = @"选择房间模式";
+        _roomModeLabel.text = @"选择游戏";
         _roomModeLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
         _roomModeLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
     }
