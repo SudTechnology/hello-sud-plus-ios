@@ -15,6 +15,8 @@
 @property (nonatomic, assign) CGFloat itemW;
 @property (nonatomic, assign) CGFloat itemH;
 @property (nonatomic, strong) UILabel *tipLabel;
+/// 创建房间
+@property (nonatomic, strong) UIButton *createBtn;
 @end
 
 @implementation HomeHeaderReusableView
@@ -34,8 +36,8 @@
 
 - (void)hsConfigUI {
     self.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
-    self.itemW = (kScreenWidth - 32 - 24 - 24 )/4;
-    self.itemH = self.itemW + 32;
+    self.itemW = (kScreenWidth -32) / 4;
+    self.itemH = 125;
 }
 
 - (void)reloadData {
@@ -54,17 +56,34 @@
         titleLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+        
+        UILabel *enterLabel = [[UILabel alloc] init];
+        enterLabel.text = @"加入";
+        enterLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        enterLabel.font = UIFONT_BOLD(12);
+        enterLabel.layer.borderColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1].CGColor;
+        enterLabel.layer.borderWidth = 1;
+        enterLabel.layer.cornerRadius = 14;
+        enterLabel.textAlignment = NSTextAlignmentCenter;
+        
         [self.itemContainerView addSubview:contenView];
         [contenView addSubview:iconImageView];
         [contenView addSubview:titleLabel];
+        [contenView addSubview:enterLabel];
         [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.right.mas_equalTo(contenView);
-            make.height.mas_equalTo(contenView.mas_width);
+            make.top.mas_equalTo(contenView);
+            make.centerX.equalTo(contenView);
+            make.size.mas_equalTo(CGSizeMake(72, 72));
         }];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(contenView);
             make.top.mas_equalTo(iconImageView.mas_bottom).offset(3);
             make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        }];
+        [enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(contenView);
+            make.top.mas_equalTo(titleLabel.mas_bottom).offset(6);
+            make.size.mas_greaterThanOrEqualTo(CGSizeMake(54, 28));
         }];
         [contenView setUserInteractionEnabled:true];
         contenView.tag = i;
@@ -72,7 +91,7 @@
         [contenView addGestureRecognizer:tapGesture];
     }
     [self.itemContainerView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:self.itemW fixedItemHeight:self.itemH
-                                                fixedLineSpacing:0 fixedInteritemSpacing:8
+                                                fixedLineSpacing:12 fixedInteritemSpacing:0
                                                        warpCount:2
                                                       topSpacing:0
                                                    bottomSpacing:0 leadSpacing:0 tailSpacing:0];
@@ -85,17 +104,23 @@
     [AudioRoomManager.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
 }
 
+- (void)onBtnClick:(UIButton *)sender {
+    // 创建房间
+    [AudioRoomManager.shared reqCreateRoom:self.sceneModel.sceneId];
+}
+
 - (void)hsAddViews {
     [self addSubview:self.contentView];
-    [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.previewView];
+    [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.tipLabel];
+    [self.contentView addSubview:self.createBtn];
     [self.contentView addSubview:self.itemContainerView];
 }
 
 - (void)hsLayoutViews {
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
+        make.top.mas_equalTo(0);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
@@ -103,19 +128,30 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(12);
         make.top.mas_equalTo(18);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.height.mas_equalTo(33);
+        make.width.mas_greaterThanOrEqualTo(0);
     }];
     [self.previewView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(18);
-        make.left.mas_equalTo(12);
-        make.width.mas_equalTo(self.itemW * 2 - 2);
-        make.height.mas_equalTo(self.itemH * 3 - 11);
+        make.top.mas_equalTo(36);
+        make.left.mas_equalTo(15);
+        make.width.mas_equalTo(kScaleByW_375(146));
+        make.bottom.mas_equalTo(-12);
     }];
+    [self.createBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.previewView.mas_bottom).offset(-26);
+        make.centerX.equalTo(self.previewView);
+        make.width.mas_equalTo(110);
+        make.height.mas_equalTo(36);
+    }];
+    NSInteger lineCount = 3;
+    NSInteger lineSpace = 12;
+    CGFloat w = (kScreenWidth - 32) / 2;
+    CGFloat h = self.itemH * lineCount + lineSpace * (lineCount - 1);
     [self.itemContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.mas_centerX).offset(4);
-        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(18);
-        make.width.mas_equalTo(self.itemW * 2 + 8);
-        make.height.mas_equalTo(self.itemH * 3);
+        make.left.mas_equalTo(self.mas_centerX);
+        make.top.mas_equalTo(36);
+        make.width.mas_equalTo(w);
+        make.height.mas_equalTo(h);
     }];
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.itemContainerView);
@@ -158,6 +194,7 @@
     if (!_previewView) {
         _previewView = [[UIImageView alloc] init];
         _previewView.image = [UIImage imageNamed:@"home_preview_0"];
+        _previewView.clipsToBounds = YES;
         [_previewView hs_cornerRadius:8];
     }
     return _previewView;
@@ -168,6 +205,21 @@
         _itemContainerView = [[UIView alloc] init];
     }
     return _itemContainerView;
+}
+
+- (UIButton *)createBtn {
+    if (!_createBtn) {
+        _createBtn = UIButton.new;
+        [_createBtn setTitle:@"创建房间" forState:UIControlStateNormal];
+        [_createBtn setTitleColor:HEX_COLOR(@"#1A1A1A") forState:UIControlStateNormal];
+        _createBtn.backgroundColor = HEX_COLOR(@"#FFFFFF");
+        _createBtn.titleLabel.font = UIFONT_BOLD(18);
+        _createBtn.layer.borderColor = HEX_COLOR_A(@"#FFFFFF", 0.31).CGColor;
+        _createBtn.layer.borderWidth = 4;
+        _createBtn.layer.cornerRadius = 18;
+        [_createBtn addTarget:self action:@selector(onBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _createBtn;
 }
 
 @end

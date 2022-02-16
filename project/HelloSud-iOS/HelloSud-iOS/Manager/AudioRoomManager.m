@@ -23,6 +23,27 @@
     self.micIndex = -1;
 }
 
+/// 请求创建房间
+/// @param sceneType 场景类型
+- (void)reqCreateRoom:(NSInteger)sceneType {
+
+    NSMutableDictionary *dicParam = NSMutableDictionary.new;
+    dicParam[@"sceneType"] = @(sceneType);
+    if (AppManager.shared.rtcType.length > 0) {
+        dicParam[@"rtcType"] = AppManager.shared.rtcType;
+    }
+    [HttpService postRequestWithApi:kINTERACTURL(@"room/create-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
+        EnterRoomModel *model = [EnterRoomModel decodeModel:rootDict];
+        if (model.retCode != 0) {
+            [ToastUtil show:model.errorMsg];
+            return;
+        }
+        [self reqEnterRoom:model.roomId];
+    } failure:^(id error) {
+        [ToastUtil show:[error debugDescription]];
+    }];
+}
+
 /// 请求进入房间
 /// @param roomId 房间ID
 - (void)reqEnterRoom:(long)roomId {
