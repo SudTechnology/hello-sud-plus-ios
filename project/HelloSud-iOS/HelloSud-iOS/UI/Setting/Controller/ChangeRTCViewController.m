@@ -82,7 +82,7 @@
     ChangeRTCModel *model = self.arrData[indexPath.row];
     if (model.isSlect == NO) {
         WeakSelf
-        [HSAlertView showTextAlert:[NSString stringWithFormat:@"确认将RTC服务商切换为【%@】？", model.title] sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+        [AlertView showTextAlert:[NSString stringWithFormat:@"确认将RTC服务商切换为【%@】？", model.title] sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             for (ChangeRTCModel *m in self.arrData) {
                 m.isSlect = NO;
             }
