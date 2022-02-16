@@ -104,6 +104,11 @@
     [AudioRoomManager.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
 }
 
+- (void)onBtnClick:(UIButton *)sender {
+    // 创建房间
+    [AudioRoomManager.shared reqCreateRoom:self.sceneModel.sceneId];
+}
+
 - (void)hsAddViews {
     [self addSubview:self.contentView];
     [self.contentView addSubview:self.previewView];
@@ -212,6 +217,7 @@
         _createBtn.layer.borderColor = HEX_COLOR_A(@"#FFFFFF", 0.31).CGColor;
         _createBtn.layer.borderWidth = 4;
         _createBtn.layer.cornerRadius = 18;
+        [_createBtn addTarget:self action:@selector(onBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _createBtn;
 }
