@@ -239,7 +239,7 @@
 /// 切换RTC厂商
 /// @param rtcType 对应rtc厂商类型
 - (void)switchRtcType:(NSString *)rtcType {
-    _rtcType = rtcType;
+    self.rtcType = rtcType;
     [self switchAudioEngine:self.rtcType configModel:self.configModel];
 }
 

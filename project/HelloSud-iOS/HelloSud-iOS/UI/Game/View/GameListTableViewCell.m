@@ -27,6 +27,7 @@
     self.roomNumLabel.text = [NSString stringWithFormat:@"房间号：%ld", m.roomId];
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld人", m.memberCount];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
+    self.typeLabel.text = [m.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
     
     for (HSSceneModel *sModel in AppManager.shared.sceneList) {
         if (sModel.sceneId == m.sceneType) {
