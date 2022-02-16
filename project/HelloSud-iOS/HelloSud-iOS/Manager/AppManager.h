@@ -71,7 +71,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 切换RTC厂商
 /// @param rtcType 对应rtc厂商类型
 - (void)switchRtcType:(NSString *)rtcType;
-
 @end
 
 NS_ASSUME_NONNULL_END
