@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 所有支持rtc厂商列表
 @property(nonatomic, strong) NSArray <HSConfigContent *> *rtcList;
 /// 选中rtc厂商类型
-@property(nonatomic, copy)NSString *rtcType;
+@property(nonatomic, copy, readonly)NSString *rtcType;
 
 + (instancetype)shared;
 
@@ -67,6 +67,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// APP用户协议
 - (NSURL *)appProtocolURL;
+
+/// 切换RTC厂商
+/// @param rtcType 对应rtc厂商类型
+- (void)switchRtcType:(NSString *)rtcType;
 
 @end
 

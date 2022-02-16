@@ -66,14 +66,13 @@
         [self setupNetWorkHeader];
         [self reqConfigData];
     }
-    _rtcType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
-    _rtcType = @"agora";
+    NSString *cacheRTCType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
     NSString *configStr = [NSUserDefaults.standardUserDefaults stringForKey:kKeyConfigModel];
     if (configStr) {
         _configModel = [ConfigModel mj_objectWithKeyValues:configStr];
         [self handleRTCConfigInfo];
     }
-    [self switchAudioEngine:self.rtcType configModel:self.configModel];
+    [self switchRtcType:cacheRTCType];
 }
 
 - (void)setConfigModel:(ConfigModel *)configModel {
@@ -82,12 +81,13 @@
     [NSUserDefaults.standardUserDefaults synchronize];
     // 处理厂商配置列表
     [self handleRTCConfigInfo];
+    NSString *rtcType = self.rtcType;
     // 默认zego，切换引擎
-    if (self.rtcType.length == 0) {
-        self.rtcType = self.configModel.zegoCfg.rtcType;
+    if (rtcType.length == 0) {
+        rtcType = self.configModel.zegoCfg.rtcType;
     }
-    if (!MediaAudioEngineManager.shared.audioEngine) {    
-        [self switchAudioEngine:self.rtcType configModel:self.configModel];
+    if (self.rtcType.length == 0 || !MediaAudioEngineManager.shared.audioEngine) {
+        [self switchRtcType:rtcType];
     }
 }
 
@@ -234,6 +234,13 @@
         [rtcList addObject:self.configModel.agoraCfg];
     }
     _rtcList = rtcList;
+}
+
+/// 切换RTC厂商
+/// @param rtcType 对应rtc厂商类型
+- (void)switchRtcType:(NSString *)rtcType {
+    _rtcType = rtcType;
+    [self switchAudioEngine:self.rtcType configModel:self.configModel];
 }
 
 /// 切换RTC语音SDK
