@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UILabel *tipLabel;
 /// 创建房间
 @property (nonatomic, strong) UIButton *createBtn;
+@property (nonatomic, strong) UIView *borderView;
 @end
 
 @implementation HomeHeaderReusableView
@@ -123,7 +124,8 @@
     [self.contentView addSubview:self.previewView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.tipLabel];
-    [self.contentView addSubview:self.createBtn];
+    [self.contentView addSubview:self.borderView];
+    [self.borderView addSubview:self.createBtn];
     [self.contentView addSubview:self.itemContainerView];
 }
 
@@ -146,11 +148,14 @@
         make.width.mas_equalTo(kScaleByW_375(146));
         make.bottom.mas_equalTo(-12);
     }];
-    [self.createBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.previewView.mas_bottom).offset(-26);
         make.centerX.equalTo(self.previewView);
-        make.width.mas_equalTo(110);
-        make.height.mas_equalTo(36);
+        make.width.mas_equalTo(118);
+        make.height.mas_equalTo(44);
+    }];
+    [self.createBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(4, 4, 4, 4));
     }];
     NSInteger lineCount = 3;
     NSInteger lineSpace = 12;
@@ -216,6 +221,15 @@
     return _itemContainerView;
 }
 
+- (UIView *)borderView {
+    if (!_borderView) {
+        _borderView = [[UIView alloc] init];
+        _borderView.backgroundColor = HEX_COLOR_A(@"#FFFFFF", 0.31);
+        _borderView.layer.cornerRadius = 22;
+    }
+    return _borderView;
+}
+
 - (UIButton *)createBtn {
     if (!_createBtn) {
         _createBtn = UIButton.new;
@@ -223,8 +237,6 @@
         [_createBtn setTitleColor:HEX_COLOR(@"#1A1A1A") forState:UIControlStateNormal];
         _createBtn.backgroundColor = HEX_COLOR(@"#FFFFFF");
         _createBtn.titleLabel.font = UIFONT_BOLD(18);
-        _createBtn.layer.borderColor = HEX_COLOR_A(@"#FFFFFF", 0.31).CGColor;
-        _createBtn.layer.borderWidth = 4;
         _createBtn.layer.cornerRadius = 18;
         [_createBtn addTarget:self action:@selector(onBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
