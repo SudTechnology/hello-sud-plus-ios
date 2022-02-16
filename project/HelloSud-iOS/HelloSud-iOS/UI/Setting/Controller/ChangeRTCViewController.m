@@ -27,13 +27,32 @@
 - (void)configData {
     ChangeRTCModel *m0 = [ChangeRTCModel new];
     m0.title = @"即构";
-    m0.isSlect = YES;
+    m0.isSlect = [AppManager.shared.rtcType isEqualToString:@"zego"] ? YES : NO;
+    m0.isClickable = YES;
     
     ChangeRTCModel *m1 = [ChangeRTCModel new];
     m1.title = @"声网";
-    m1.isSlect = NO;
+    m1.isSlect = [AppManager.shared.rtcType isEqualToString:@"agora"] ? YES : NO;
+    m1.isClickable = YES;
     
-    self.arrData = @[m0, m1];
+    ChangeRTCModel *m2 = [ChangeRTCModel new];
+    m2.title = @"网易云信";
+    m2.isSlect = NO;
+    m2.isClickable = NO;
+    ChangeRTCModel *m3 = [ChangeRTCModel new];
+    m3.title = @"火山";
+    m3.isSlect = NO;
+    m3.isClickable = NO;
+    ChangeRTCModel *m4 = [ChangeRTCModel new];
+    m4.title = @"阿里云";
+    m4.isSlect = NO;
+    m4.isClickable = NO;
+    ChangeRTCModel *m5 = [ChangeRTCModel new];
+    m5.title = @"腾讯";
+    m5.isSlect = NO;
+    m5.isClickable = NO;
+    
+    self.arrData = @[m0, m1, m2, m3, m4, m5];
     [self.tableView reloadData];
 }
 
@@ -80,17 +99,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ChangeRTCModel *model = self.arrData[indexPath.row];
-    if (model.isSlect == NO) {
-        WeakSelf
-        [AlertView showTextAlert:[NSString stringWithFormat:@"确认将RTC服务商切换为【%@】？", model.title] sureText:@"确定" cancelText:@"取消" onSureCallback:^{
-            for (ChangeRTCModel *m in self.arrData) {
-                m.isSlect = NO;
-            }
-            model.isSlect = true;
-            [weakSelf.tableView reloadData];
-        } onCloseCallback:^{
-            
-        }];
+    if (model.isClickable == NO) {
+        [ToastUtil show:@"正在制作中, 敬请期待!"];
+    } else {
+        if (model.isSlect == NO) {
+            WeakSelf
+            [AlertView showTextAlert:[NSString stringWithFormat:@"确认将RTC服务商切换为【%@】？", model.title] sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+                for (ChangeRTCModel *m in self.arrData) {
+                    m.isSlect = NO;
+                }
+                model.isSlect = true;
+                [weakSelf.tableView reloadData];
+            } onCloseCallback:^{
+                
+            }];
+        }
     }
 }
 

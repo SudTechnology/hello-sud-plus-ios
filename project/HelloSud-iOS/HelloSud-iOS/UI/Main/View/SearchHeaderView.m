@@ -117,7 +117,7 @@
 - (UITextField *)searchTextField {
     if (!_searchTextField) {
         _searchTextField = [[UITextField alloc] init];
-        _searchTextField.placeholder = @"输入房间号";
+        _searchTextField.placeholder = @"输入房间号快速进入";
         _searchTextField.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         _searchTextField.textColor = UIColor.blackColor;
         _searchTextField.keyboardType = UIKeyboardTypeNumberPad;
