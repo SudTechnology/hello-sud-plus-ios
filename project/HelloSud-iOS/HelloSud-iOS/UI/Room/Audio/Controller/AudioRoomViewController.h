@@ -9,6 +9,7 @@
 #import "MediaAudioEngineManager.h"
 #import "CommonAudioModelHeader.h"
 #import "FSMApp2MGManager.h"
+#import "SwitchRoomModeView.h"
 
 /// Model
 #import "GameViewInfoModel.h"
