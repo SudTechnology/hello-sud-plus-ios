@@ -10,6 +10,7 @@
 #import "HSSettingModel.h"
 #import "HSSetingHeadView.h"
 #import "ChangeRTCViewController.h"
+#import "VersionInfoViewController.h"
 
 @interface HSSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong)UITableView *tableView;
@@ -38,7 +39,7 @@
     
     HSSettingModel *rtcModel = [HSSettingModel new];
     rtcModel.title = @"切换RTC服务商";
-    rtcModel.subTitle = @"即购";
+    rtcModel.subTitle = [AppManager.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
     HSSettingModel *languageModel = [HSSettingModel new];
@@ -135,9 +136,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
-    if ([model.title isEqualToString:@"切换RTC服务商"]) {
+    if ([model.title isEqualToString:@"版本信息"]) {
+        VersionInfoViewController *vc = VersionInfoViewController.new;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([model.title isEqualToString:@"切换RTC服务商"]) {
         ChangeRTCViewController *vc = ChangeRTCViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
+    } else if ([model.title isEqualToString:@"切换语言"]) {
+        [ToastUtil show:@"正在制作中, 敬请期待!"];
     } else {
         if (model.isMore) {
             WebViewController *web = WebViewController.new;
