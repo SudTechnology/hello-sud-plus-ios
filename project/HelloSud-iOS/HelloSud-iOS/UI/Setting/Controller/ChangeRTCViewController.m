@@ -109,7 +109,14 @@
                     m.isSlect = NO;
                 }
                 model.isSlect = true;
+                
+                AppManager.shared.rtcType = [model.title isEqualToString:@"即构"] ? @"zego" : @"agora";
+                [AppManager.shared switchAudioEngine:AppManager.shared.rtcType configModel:AppManager.shared.configModel];
                 [weakSelf.tableView reloadData];
+                
+                if (self.onRTCChangeBlock) {
+                    self.onRTCChangeBlock(AppManager.shared.rtcType);
+                }
             } onCloseCallback:^{
                 
             }];
