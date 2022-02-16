@@ -142,6 +142,11 @@
     } else if ([model.title isEqualToString:@"切换RTC服务商"]) {
         ChangeRTCViewController *vc = ChangeRTCViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
+        WeakSelf
+        vc.onRTCChangeBlock = ^(NSString * _Nonnull str) {
+            weakSelf.arrData[1][0].subTitle = [AppManager.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
+            [weakSelf.tableView reloadData];
+        };
     } else if ([model.title isEqualToString:@"切换语言"]) {
         [ToastUtil show:@"正在制作中, 敬请期待!"];
     } else {

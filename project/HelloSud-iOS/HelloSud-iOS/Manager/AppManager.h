@@ -68,6 +68,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// APP用户协议
 - (NSURL *)appProtocolURL;
 
+/// 切换RTC语音SDK
+/// @param rtcType 厂商类型
+/// @param configModel 配置信息
+- (void)switchAudioEngine:(NSString *)rtcType configModel:(ConfigModel *)configModel;
 @end
 
 NS_ASSUME_NONNULL_END
