@@ -14,6 +14,14 @@
 
 @implementation DTWebViewController
 
+- (void)hsNavigationBackClick {
+    if (self.isPresent) {
+        [self dismissViewControllerAnimated:true completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:true];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
