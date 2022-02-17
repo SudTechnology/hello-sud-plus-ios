@@ -105,12 +105,13 @@
 /// @param attrMsg 富文本
 /// @param sureText 确定Item文本
 /// @param cancelText 取消Item文本
+/// @param rootView rootView
 /// @param sureCb sure回调
 /// @param closeCb close回调
-+ (void)showAttrTextAlert:(NSAttributedString *)attrMsg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
++ (void)showAttrTextAlert:(NSAttributedString *)attrMsg sureText:(NSString *)sureText cancelText:(NSString *)cancelText rootView:(UIView *)rootView onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
     DTTextAlertView *alert = [[DTTextAlertView alloc] init];
     [alert configAttr:attrMsg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
-    [DTAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+    [DTAlertView show:alert rootView:rootView == nil ? AppUtil.currentWindow : rootView isHitTest:false onCloseCallback:^{
 //        closeCb();
     }];
 }

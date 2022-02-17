@@ -31,9 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param attrMsg 富文本
 /// @param sureText 确定Item文本
 /// @param cancelText 取消Item文本
+/// @param rootView rootView
 /// @param sureCb sure回调
 /// @param closeCb close回调
-+ (void)showAttrTextAlert:(NSAttributedString *)attrMsg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb;
++ (void)showAttrTextAlert:(NSAttributedString *)attrMsg sureText:(NSString *)sureText cancelText:(NSString *)cancelText rootView:(UIView *)rootView onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb;
 
 /// 关闭弹窗
 + (void)close;
