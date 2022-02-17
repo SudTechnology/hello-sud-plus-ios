@@ -429,7 +429,7 @@
 				6C076E82279EA2CF00650209 /* Room */,
 				445EAAE9279E7C7B000DCC72 /* Home */,
 				445EAA6F2798FFE4000DCC72 /* Game */,
-				445EAA702798FFE4000DCC72 /* Setting */,
+				445EAA702798FFE4000DCC72 /* Settings */,
 				445EAA712798FFE4000DCC72 /* Login */,
 			);
 			path = UI;
@@ -445,14 +445,14 @@
 			path = Game;
 			sourceTree = "<group>";
 		};
-		445EAA702798FFE4000DCC72 /* Setting */ = {
+		445EAA702798FFE4000DCC72 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				6C076E5E27995F3000650209 /* Model */,
 				6C076E5D27995F1E00650209 /* View */,
 				6C076E54279944ED00650209 /* Controller */,
 			);
-			path = Setting;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		445EAA712798FFE4000DCC72 /* Login */ = {
