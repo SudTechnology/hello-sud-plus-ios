@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define HEX_COLOR(hex) [UIColor colorWithHexString:hex alpha:1]
 #define HEX_COLOR_A(hex, a) [UIColor colorWithHexString:hex alpha:(a)]
 
-@interface UIColor(Extension)
+@interface UIColor(DTColorExtension)
 /**
  16进制颜色转换为UIColor
  @param hex 16进制字符串（可以以0x开头，可以以#开头，也可以就是6位的16进制）

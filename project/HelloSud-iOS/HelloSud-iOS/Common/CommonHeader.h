@@ -31,9 +31,9 @@ typedef void(^ErrorBlock)(NSError *error);
 #import "BaseNavigationViewController.h"
 
 /// Extension
-#import "UIColor+Extension.h"
-#import "UIDevice+Extension.h"
-#import "NSError+Custom.h"
+#import "DTUIColor+Extension.h"
+#import "DTUIDevice+Extension.h"
+#import "DTNSError+Custom.h"
 
 /// Views
 #import "DTSheetView.h"

@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// <#Description#>
-@interface UIView(Extension)
+@interface UIView(DTViewExtension)
 
 /* The array of CGColorRef objects defining the color of each gradient
  * stop. Defaults to nil. Animatable. */

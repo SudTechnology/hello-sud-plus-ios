@@ -5,9 +5,9 @@
 //  Created by kaniel on 2022/1/19.
 //
 
-#import "UIDevice+Extension.h"
+#import "DTUIDevice+Extension.h"
 
-@implementation UIDevice(Extension)
+@implementation UIDevice(DTDeviceExtension)
 
 /// 设备安全区
 +(UIEdgeInsets)safeAreaInsets {
