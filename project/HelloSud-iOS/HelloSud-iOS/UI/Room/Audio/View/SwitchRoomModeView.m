@@ -12,6 +12,8 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray <HSGameItem *> *dataList;
+/// 当前是否位语聊房
+@property (nonatomic, assign) BOOL isAudioRoom;
 @end
 
 @implementation SwitchRoomModeView
@@ -27,12 +29,11 @@
         }
     }];
     
-    if (isAudioRoom == NO) {
-        HSGameItem *m = HSGameItem.new;
-        m.isAudioRoom = true;
-        [self.dataList insertObject:m atIndex:0];
-    }
+    HSGameItem *m = HSGameItem.new;
+    m.isAudioRoom = true;
+    [self.dataList insertObject:m atIndex:0];
     
+    self.isAudioRoom = isAudioRoom;
     [self.collectionView reloadData];
 }
 
@@ -77,7 +78,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SwitchRoomCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SwitchRoomCell" forIndexPath:indexPath];
     cell.model = self.dataList[indexPath.row];
-    if (self.dataList[indexPath.row].gameId == GameManager.shared.gameId) {
+    if (self.dataList[indexPath.row].gameId == GameManager.shared.gameId && self.dataList[indexPath.row].gameId != 0) {
         [cell.inGameLabel setHidden:false];
     } else {
         [cell.inGameLabel setHidden:true];
@@ -88,6 +89,10 @@
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    HSGameItem *model = self.dataList[indexPath.row];
+    if (model.isAudioRoom && self.isAudioRoom) {
+        return;
+    }
     if (self.onTapGameCallBack) {
         self.onTapGameCallBack(self.dataList[indexPath.row]);
     }
