@@ -117,6 +117,7 @@
                 if (self.onRTCChangeBlock) {
                     self.onRTCChangeBlock(AppManager.shared.rtcType);
                 }
+                [weakSelf.navigationController popViewControllerAnimated:true];
             } onCloseCallback:^{
                 
             }];
