@@ -1,13 +1,13 @@
 //
-//  FSMApp2MGManager.m
+//  SudFSTAPPManager.m
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/19.
 //
 
-#import "FSMApp2MGManager.h"
+#import "SudFSTAPPManager.h"
 
-@implementation FSMApp2MGManager
+@implementation SudFSTAPPManager
 
 - (instancetype)init:(id<ISudFSTAPP>)fsmAPP2MG {
     self = [super init];

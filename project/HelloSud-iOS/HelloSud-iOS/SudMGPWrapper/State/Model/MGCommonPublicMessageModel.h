@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface GamePublicMsgModel : NSObject
+@interface MGCommonPublicMessageModel : NSObject
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, copy) NSArray<GamePublicMsg *> *msg;
 @end

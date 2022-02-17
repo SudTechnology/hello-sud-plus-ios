@@ -8,13 +8,13 @@
 #import "BaseViewController.h"
 #import "AudioEngineFactory.h"
 #import "CommonAudioModelHeader.h"
-#import "FSMApp2MGManager.h"
+#import "SudFSTAPPManager.h"
 #import "SwitchRoomModeView.h"
 
 /// Model
 #import "GameViewInfoModel.h"
-#import "GamePublicMsgModel.h"
-#import "GameKeyWordHitModel.h"
+#import "MGCommonPublicMessageModel.h"
+#import "MGCommonKeyWrodToHitModel.h"
 #import "GamePlayerStateModel.h"
 #import "RoomGameInfoModel.h"
 #import "GameCommonModel.h"
@@ -61,8 +61,8 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, strong) UIView *gameView;
 /// ISudFSTAPP
 @property (nonatomic, strong) id<ISudFSTAPP> iSudFSTAPP;
-/// FSMApp2MGManager
-@property (nonatomic, strong) FSMApp2MGManager *fsm2MGManager;
+/// app To 游戏 管理类
+@property (nonatomic, strong) SudFSTAPPManager *sudFSTAPPManager;
 /// game相关信息Model
 @property (nonatomic, copy) RoomGameInfoModel *gameInfoModel;
 /// 记录游戏所需状态

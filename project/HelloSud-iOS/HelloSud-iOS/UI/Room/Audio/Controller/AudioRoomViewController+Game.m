@@ -14,58 +14,7 @@
 
 @implementation AudioRoomViewController(Game)
 
-/// 游戏业务服务登录
-- (void)loginGame {
-
-    WeakSelf
-    [GameManager.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
-        weakSelf.gameInfoModel.code = gameInfo.code;
-        [weakSelf loadGame];
-    } fail:^(NSError *error) {
-        [ToastUtil show:error.debugDescription];
-    }];
-}
-
-/// 退出游戏
-- (void)logoutGame {
-    [self stopCapture];
-    // 销毁游戏
-    [self.iSudFSTAPP destroyMG];
-}
-
-
-/// 加载游戏
-- (void)loadGame {
-    NSString *appID = AppManager.shared.configModel.sudCfg.appId;
-    NSString *appKey = AppManager.shared.configModel.sudCfg.appKey;
-    if (appID.length == 0 || appKey.length == 0) {
-        [ToastUtil show:@"Game appID or appKey is empty"];
-        return;
-    }
-    [self initGameSDKWithAppID:appID appKey:appKey isTestEnv:YES mgID:self.gameId rootView:self.gameView];
-}
-
-
 #pragma mark =======ISudFSMMG Delegate=======
-/**
- * Code过期
- * @param dataJson {"code":"value"}
- */
-- (void)onExpireCode:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    NSLog(@"ISudFSMMG:onExpireCode:Code过期");
-    // 请求业务服务器刷新令牌
-    // Code更新
-    [GameManager.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
-        // 调用小游戏接口更新令牌
-        [self updateGameCode:gameInfo.code];
-    } fail:^(NSError *error) {
-        [ToastUtil show:error.debugDescription];
-    }];
-    
-    // 回调结果
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@(0), @"ret_code", @"return form APP onExpireCode", @"ret_msg", nil];
-    [handle success: [AppUtil dictionaryToJson: dict]];
-}
 
 /**
  * 游戏开始
@@ -83,6 +32,7 @@
 
 /**
  * 游戏日志
+ * 最低版本：v1.1.30.xx
  */
 - (void)onGameLog:(nonnull NSString *)dataJson {
     NSLog(@"ISudFSMMG:onGameLog:%@", dataJson);
@@ -91,27 +41,55 @@
 }
 
 /**
- * 获取游戏配置
- * @param handle 回调句柄
- * @param dataJson {}
+ * 短期令牌code过期  【需要实现】
+ * APP接入方需要调用handle.success或handle.fail
+ * @param dataJson {"code":"value"}
+ */
+- (void)onExpireCode:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
+    NSLog(@"ISudFSMMG:onExpireCode:Code过期");
+    // 请求业务服务器刷新令牌
+    // Code更新
+    [GameManager.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
+        // 调用游戏接口更新令牌
+        [self updateGameCode:gameInfo.code];
+        
+        // 回调成功结果
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@(0), @"ret_code", @"success", @"ret_msg", nil];
+        [handle success: [AppUtil dictionaryToJson: dict]];
+    } fail:^(NSError *error) {
+        [ToastUtil show:error.debugDescription];
+        
+        // 回调失败结果
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@(0), @"ret_code", error.debugDescription, @"ret_msg", nil];
+        [handle success: [AppUtil dictionaryToJson: dict]];
+    }];
+}
+
+/**
+ *  获取游戏Config  【需要实现】
+ *  文档：https://github.com/SudTechnology/sud-mgp-doc/blob/main/Client/API/ISudFSMMG/onGetGameCfg.md
+ *  APP接入方需要调用handle.success或handle.fail
+ *  @param handle ISudFSMStateHandle
+ *  @param dataJson dataJson
+ *   最低版本：v1.1.30.xx
  */
 - (void)onGetGameCfg:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    
     GameCfgLobbyPlayers *l = [[GameCfgLobbyPlayers alloc] init];
     l.hide = true;
     GameCfgUIModel *ui = [[GameCfgUIModel alloc] init];
     ui.lobby_players = l;
-    
     GameCfgModel *m = [[GameCfgModel alloc] init];
     m.ui = ui;
     NSString *dataJsonRet = [m mj_JSONString];
-    
     [handle success:dataJsonRet];
 }
 
 /**
- * 获取游戏View信息
- * @param handle 回调句柄
+ * 获取游戏View信息  【需要实现】
+ * 处理游戏视图信息(游戏安全区)
+ * 文档：https://github.com/SudTechnology/sud-mgp-doc/blob/main/Client/API/ISudFSMMG/onGetGameViewInfo.md
+ * APP接入方需要调用handle.success或handle.fail
+ * @param handle ISudFSMStateHandle
  * @param dataJson {}
  */
 - (void)onGetGameViewInfo:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
@@ -129,7 +107,6 @@
     m.ret_msg = @"success";
     m.view_size = viewSize;
     m.view_game_rect = viewRect;
-    /// 回调
     [handle success:[AppUtil dictionaryToJson:m.mj_keyValues]];
 }
 
@@ -140,10 +117,11 @@
  * @param dataJson 回调json
  */
 - (void)onGameStateChange:(nonnull id<ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
+    NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:onGameStateChange:%@ --dataJson:%@", state, dataJson]);
     
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:公屏消息");
-        GamePublicMsgModel *publicMsgModel = [GamePublicMsgModel mj_objectWithKeyValues: dataJson];
+        MGCommonPublicMessageModel *publicMsgModel = [MGCommonPublicMessageModel mj_objectWithKeyValues: dataJson];
         NSMutableAttributedString * attrMsg = [[NSMutableAttributedString alloc] init];
         for (GamePublicMsg *m in publicMsgModel.msg) {
             if (m.phrase == 2) {
@@ -157,12 +135,12 @@
         attrMsg.yy_lineSpacing = 6;
         attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
         attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-        
         AudioMsgSystemModel *msgModel = [AudioMsgSystemModel makeMsgWithAttr:attrMsg];
+        /// 公屏添加消息
         [self addMsg:msgModel isShowOnScreen:YES];
     } else if ([state isEqualToString:MG_COMMON_KEY_WORD_TO_HIT]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:你画我猜关键词获取");
-        GameKeyWordHitModel *m = [GameKeyWordHitModel mj_objectWithKeyValues: dataJson];
+        MGCommonKeyWrodToHitModel *m = [MGCommonKeyWrodToHitModel mj_objectWithKeyValues: dataJson];
         self.gameInfoModel.drawKeyWord = m.word;
         if (m.word == (id) [NSNull null] || [m.word isEqualToString:@""]) {
             self.gameInfoModel.keyWordHiting = false;
@@ -174,6 +152,7 @@
         GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
         self.gameInfoModel.gameState = m.gameState;
     }  else if ([state isEqualToString:MG_COMMON_GAME_ASR]) {
+        NSLog(@"ASR");
         GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
         if (m.isOpen) {
             self.keyWordASRing = YES;
@@ -183,11 +162,15 @@
             self.keyWordASRing = NO;
             [self stopCapture];
         }
-    }else {
+    } else {
         /// 其他状态
         /// TODO
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
     }
+    
+    /// 回调
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@(0), @"ret_code", @"success", @"ret_msg", nil];
+    [handle success:[AppUtil dictionaryToJson:dict]];
 }
 
 /**
@@ -206,13 +189,14 @@
         [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
     }
     
+    /// 处理状态解析
     [self handleGameState:m];
     
     /// 通知麦位处理ui
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:@{@"model":m}];
 
     /// 回调
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@(0), @"ret_code", @"return form APP onPlayerStateChange", @"ret_msg", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@(0), @"ret_code", @"success", @"ret_msg", nil];
     [handle success:[AppUtil dictionaryToJson:dict]];
 }
 
@@ -269,6 +253,40 @@
     }
     NSLog(@"ISudFSMMG:onPlayerStateChange:dataStr:%@", dataStr);
 }
+
+
+#pragma mark =======登录 加载 游戏=======
+/// 游戏登录
+/// 接入方客户端 调用 接入方服务端 login 获取 短期令牌code
+/// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
+- (void)login {
+    WeakSelf
+    [GameManager.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
+        weakSelf.gameInfoModel.code = gameInfo.code;
+        [weakSelf loadGame];
+    } fail:^(NSError *error) {
+        [ToastUtil show:error.debugDescription];
+    }];
+}
+
+/// 退出游戏
+- (void)logoutGame {
+    [self stopCapture];
+    // 销毁游戏
+    [self.iSudFSTAPP destroyMG];
+}
+
+/// 加载游戏
+- (void)loadGame {
+    NSString *appID = AppManager.shared.configModel.sudCfg.appId;
+    NSString *appKey = AppManager.shared.configModel.sudCfg.appKey;
+    if (appID.length == 0 || appKey.length == 0) {
+        [ToastUtil show:@"Game appID or appKey is empty"];
+        return;
+    }
+    [self initGameSDKWithAppID:appID appKey:appKey isTestEnv:YES mgID:self.gameId rootView:self.gameView];
+}
+
 /**
  * 初始化游戏SDK
  *
@@ -278,8 +296,6 @@
  * @param mgID             NSInteger      游戏ID，如 碰碰我最强:1001；飞刀我最强:1002；你画我猜:1003
  */
 - (void)initGameSDKWithAppID:(NSString *)appID appKey:(NSString *)appKey isTestEnv:(Boolean)isTestEnv mgID:(int64_t)mgID rootView:(UIView*)rootView {
-//    [ISudAPPD e:4];
-//    [ISudAPPD d];
     WeakSelf
     [SudMGP initSDK:appID appKey:appKey isTestEnv:isTestEnv listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
@@ -312,10 +328,8 @@
 /// @param rootView 游戏根视图
 - (void)loadMG:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t) mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView*)rootView {
     self.iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:fsmMG rootView:rootView];
-    self.fsm2MGManager = [[FSMApp2MGManager alloc] init:self.iSudFSTAPP];
+    self.sudFSTAPPManager = [[SudFSTAPPManager alloc] init:self.iSudFSTAPP];
 }
-
-
 
 /// 处理切换游戏
 /// @param gameID 新的游戏ID
@@ -329,7 +343,7 @@
     [self logoutGame];
     self.gameId = gameID;
     self.gameInfoModel.currentPlayerUserId = AppManager.shared.loginUserInfo.userID;
-    [self loginGame];
+    [self login];
     self.roomType = HSGame;
 }
 

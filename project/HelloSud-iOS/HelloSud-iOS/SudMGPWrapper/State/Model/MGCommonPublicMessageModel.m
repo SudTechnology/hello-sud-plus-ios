@@ -5,7 +5,7 @@
 //  Created by Mary on 2022/1/19.
 //
 
-#import "GamePublicMsgModel.h"
+#import "MGCommonPublicMessageModel.h"
 
 @implementation GamePublicText
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
@@ -32,7 +32,7 @@
 
 @end
 
-@implementation GamePublicMsgModel
+@implementation MGCommonPublicMessageModel
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"msg": [GamePublicMsg class]
     };

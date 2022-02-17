@@ -1,5 +1,5 @@
 //
-//  FSMApp2MGManager.h
+//  SudFSTAPPManager.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/19.
@@ -17,7 +17,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FSMApp2MGManager : NSObject
+/// app -> 游戏
+@interface SudFSTAPPManager : NSObject
 
 @property (nonatomic, weak) id<ISudFSTAPP> fsmAPP2MG;
 - (instancetype)init:(id<ISudFSTAPP>)fsmAPP2MG;
