@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 队长userid
 @property (nonatomic, copy) NSString *captainUserId;
 
+@property (nonatomic, strong) NSMutableDictionary *gamePlayerStateMap;
+
 /// 登录游戏
 - (void)reqGameLoginWithSuccess:(void(^)(RespGameInfoModel *gameInfo))success fail:(ErrorBlock)fail;
 @end

@@ -80,6 +80,7 @@
 		44F29F6B27BCA6DF00F57DEE /* VersionInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F6A27BCA6DF00F57DEE /* VersionInfoModel.m */; };
 		44F29F6E27BCA75000F57DEE /* VersionInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F6D27BCA75000F57DEE /* VersionInfoCell.m */; };
 		44F29F7227BCCE6D00F57DEE /* SwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F7127BCCE6D00F57DEE /* SwitchRoomCell.m */; };
+		44F29F7527BE005900F57DEE /* GameCfgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F7427BE005900F57DEE /* GameCfgModel.m */; };
 		6C076E53279940A400650209 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E52279940A400650209 /* MainTabBarController.m */; };
 		6C076E572799450900650209 /* HSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E562799450900650209 /* HSSettingViewController.m */; };
 		6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E5B27995D3400650209 /* BaseTableViewCell.m */; };
@@ -291,6 +292,8 @@
 		44F29F6D27BCA75000F57DEE /* VersionInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionInfoCell.m; sourceTree = "<group>"; };
 		44F29F7027BCCE6D00F57DEE /* SwitchRoomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchRoomCell.h; sourceTree = "<group>"; };
 		44F29F7127BCCE6D00F57DEE /* SwitchRoomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchRoomCell.m; sourceTree = "<group>"; };
+		44F29F7327BE005900F57DEE /* GameCfgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameCfgModel.h; sourceTree = "<group>"; };
+		44F29F7427BE005900F57DEE /* GameCfgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameCfgModel.m; sourceTree = "<group>"; };
 		4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.release.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C076E51279940A400650209 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -688,6 +691,8 @@
 				44DF03A12797E467006EE6AC /* GameKeyWordHitModel.m */,
 				44DF03A32797E6FC006EE6AC /* GamePlayerStateModel.h */,
 				44DF03A42797E6FC006EE6AC /* GamePlayerStateModel.m */,
+				44F29F7327BE005900F57DEE /* GameCfgModel.h */,
+				44F29F7427BE005900F57DEE /* GameCfgModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1191,6 +1196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				445EAA9427996AC6000DCC72 /* BaseNavigationViewController.m in Sources */,
+				44F29F7527BE005900F57DEE /* GameCfgModel.m in Sources */,
 				6C076ECA27A23E9300650209 /* MicOperateView.m in Sources */,
 				44F29F5F27BBB3D700F57DEE /* ChangeRTCViewController.m in Sources */,
 				445EAAA6279A55E9000DCC72 /* AudioRoomViewController.m in Sources */,

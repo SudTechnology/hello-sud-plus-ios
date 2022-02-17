@@ -212,8 +212,10 @@
     [self showUserName:self.model.user.name showOwner:self.model.user.roleType == 1 && self.micType == HSAudioMic];
     
     [self.gameCaptainView setHidden:GameManager.shared.captainUserId != self.model.user.userID];
-    if (self.micType == HSGameMic && self.gameModel != nil) {
-        [self gamePlayerStateNOT:self.gameModel];
+    if (self.micType == HSGameMic) {
+        if ([GameManager.shared.gamePlayerStateMap objectForKey:self.model.user.userID] != nil) {
+            [self gamePlayerStateNOT:GameManager.shared.gamePlayerStateMap];
+        }
     }
 }
 

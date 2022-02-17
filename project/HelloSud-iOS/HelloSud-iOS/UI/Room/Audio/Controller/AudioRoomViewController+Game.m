@@ -96,14 +96,16 @@
  * @param dataJson {}
  */
 - (void)onGetGameCfg:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    dict[@"ret_code"] = @(0);
-    dict[@"ret_msg"] = @"success";
-    NSString *dataJsonRet = @"";
-    NSData *dataJsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
-    if (dataJsonData != nil) {
-        dataJsonRet = [[NSString alloc]initWithData:dataJsonData encoding:NSUTF8StringEncoding];
-    }
+    
+    GameCfgLobbyPlayers *l = [[GameCfgLobbyPlayers alloc] init];
+    l.hide = true;
+    GameCfgUIModel *ui = [[GameCfgUIModel alloc] init];
+    ui.lobby_players = l;
+    
+    GameCfgModel *m = [[GameCfgModel alloc] init];
+    m.ui = ui;
+    NSString *dataJsonRet = [m mj_JSONString];
+    
     [handle success:dataJsonRet];
 }
 
@@ -199,6 +201,11 @@
     GamePlayerStateModel *m = [GamePlayerStateModel mj_objectWithKeyValues: dataJson];
     m.userId = userId;
     m.state = state;
+    
+    if (![m.state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
+    }
+    
     [self handleGameState:m];
     
     /// 通知麦位处理ui
@@ -230,13 +237,21 @@
                 [self handleTapVoice];
             }
         }
-        
+        if (!m.isIn) {
+            [GameManager.shared.gamePlayerStateMap removeObjectForKey:m.userId];
+        }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
         dataStr = @"玩家: 准备状态";
         self.gameInfoModel.isReady = m.isReady;
     } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
         dataStr = @"玩家: 队长状态";
-        GameManager.shared.captainUserId = m.userId;
+        if (m.isCaptain) {
+            GameManager.shared.captainUserId = m.userId;
+        } else {
+            if (GameManager.shared.captainUserId == m.userId) {
+                GameManager.shared.captainUserId = @"";
+            }
+        }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         dataStr = @"玩家: 游戏状态";
     } else if ([state isEqualToString:MG_DG_SELECTING]) {

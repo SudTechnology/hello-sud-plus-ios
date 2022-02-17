@@ -23,14 +23,14 @@
     self.dataArray = NSMutableArray.new;
     NSArray <UIColor *>*colorArr = @[HEX_COLOR(@"#FC955B"), HEX_COLOR(@"#FC5BCA"), HEX_COLOR(@"#614BFF"), HEX_COLOR_A(@"#000000", 0.2), HEX_COLOR_A(@"#000000", 0.1)];
     NSArray <NSString *>*titleArr = @[@"SudMGP Core", @"SudMGP ASR", @"HelloSud", @"Zego RTC SDK", @"Agora RTC SDK"];
-    NSArray <NSString *>*sizeArr = @[@"358KB", @"358KB", @"358KB", @"358KB", @"358KB"];
+    NSArray <NSNumber *>*sizeArr = @[@1.6, @0.135, @28.5, @10.4, @15.5];
+    CGFloat sum = [[sizeArr valueForKeyPath:@"@sum.floatValue"] floatValue];
     
-    NSArray <NSNumber *>*ratioArr = @[@0.1, @0.1, @0.2, @0.3, @0.3];
     for (int i = 0; i < colorArr.count; i++) {
         HSSettingHeaderModel *m = HSSettingHeaderModel.new;
         m.color = colorArr[i];
         m.title = titleArr[i];
-        m.size = sizeArr[i];
+        m.size = sizeArr[i].intValue < 1 ? [NSString stringWithFormat:@"%ldKB", lround(sizeArr[i].floatValue*1000)] : [NSString stringWithFormat:@"%@MB", sizeArr[i]];
         [self.dataArray addObject:m];
     }
     UIView *lastNode;
@@ -44,9 +44,9 @@
         item.model = self.dataArray[i];
         [self.itemsView addSubview:item];
         
-        CGFloat item_w = v_w * ratioArr[i].floatValue;
+        CGFloat item_w = v_w * (sizeArr[i].floatValue/sum);
         [node mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(item_w);
+            make.width.mas_equalTo(item_w < 1 ? 2 : item_w);
             if (lastNode == nil) {
                 make.left.mas_equalTo(self.scaleView);
             } else {
