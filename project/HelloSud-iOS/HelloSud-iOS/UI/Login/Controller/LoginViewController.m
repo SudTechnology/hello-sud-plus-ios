@@ -49,8 +49,7 @@
 
 /// 立即体验点击事件
 - (void)loginNodeEvent {
-    
-    [AppManager.shared reqLogin:self.nameTextField.text userID:nil sucess:^{
+    [LoginService.shared reqLogin:self.nameTextField.text userID:nil sucess:^{
         /// 切根式图
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         appDelegate.window.rootViewController = [[MainTabBarController alloc] init];

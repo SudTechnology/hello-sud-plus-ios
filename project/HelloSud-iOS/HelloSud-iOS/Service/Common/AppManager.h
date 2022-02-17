@@ -57,11 +57,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 刷新token
 - (void)refreshToken;
 
-/// 请求登录
-/// @param name 昵称
-/// @param userID 用户ID
-- (void)reqLogin:(NSString *)name userID:(nullable NSString *)userID sucess:(EmptyBlock)success;
-
 /// APP隐私协议地址
 - (NSURL *)appPrivacyURL;
 
