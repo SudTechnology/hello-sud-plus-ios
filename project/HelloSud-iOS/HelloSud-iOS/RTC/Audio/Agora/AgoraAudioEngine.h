@@ -6,10 +6,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IHSAudioEngine.h"
+#import "IAudioEngine.h"
 NS_ASSUME_NONNULL_BEGIN
 /// agora语音引擎
-@interface AgoraAudioEngine : NSObject<IHSAudioEngine>
+@interface AgoraAudioEngine : NSObject<IAudioEngine>
 
 @end
 

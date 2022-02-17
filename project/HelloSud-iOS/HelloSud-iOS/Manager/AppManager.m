@@ -86,7 +86,7 @@
     if (rtcType.length == 0) {
         rtcType = self.configModel.zegoCfg.rtcType;
     }
-    if (self.rtcType.length == 0 || !HSAudioEngineManager.shared.audioEngine) {
+    if (self.rtcType.length == 0 || !AudioEngineManager.shared.audioEngine) {
         [self switchRtcType:rtcType];
     }
 }
@@ -253,22 +253,22 @@
     }
     
     NSLog(@"切换RTC厂商:%@", rtcType);
-    [HSAudioEngineManager.shared.audioEngine unInit];
+    [AudioEngineManager.shared.audioEngine unInit];
 
     if ([rtcType isEqualToString:configModel.zegoCfg.rtcType]) {
         NSLog(@"使用zego语音引擎");
         /// 使用zego语音引擎
-        [HSAudioEngineManager.shared makeEngine:ZegoAudioEngine.class];
+        [AudioEngineManager.shared makeEngine:ZegoAudioEngine.class];
         /// 初始化zego引擎SDK
         NSDictionary *config = @{@"appID": configModel.zegoCfg.appId, @"appKey": configModel.zegoCfg.appKey};
-        [HSAudioEngineManager.shared.audioEngine initWithConfig:config];
+        [AudioEngineManager.shared.audioEngine initWithConfig:config];
     } else if ([rtcType isEqualToString:configModel.agoraCfg.rtcType]) {
         NSLog(@"使用agora语音引擎");
         /// 使用agora语音引擎
-        [HSAudioEngineManager.shared makeEngine:AgoraAudioEngine.class];
+        [AudioEngineManager.shared makeEngine:AgoraAudioEngine.class];
         /// 初始化agora引擎SDK
         NSDictionary *config = @{@"appID": configModel.agoraCfg.appId, @"appKey": configModel.agoraCfg.appKey};
-        [HSAudioEngineManager.shared.audioEngine initWithConfig:config];
+        [AudioEngineManager.shared.audioEngine initWithConfig:config];
     }
 
 }
