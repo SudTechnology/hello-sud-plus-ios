@@ -21,7 +21,7 @@
 
 @implementation RoomNaviView
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.roomNameLabel];
     [self addSubview:self.roomNumLabel];
     [self addSubview:self.onlineImageView];
@@ -32,12 +32,12 @@
     [self.roomModeView addSubview:self.roomModeImageView];
 }
 
-- (void)hsConfigEvents {
+- (void)dtConfigEvents {
     UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectNodeEvent:)];
     [self.roomModeView addGestureRecognizer:tapGesture];
 }
 
-- (void)hsUpdateUI {
+- (void)dtUpdateUI {
     self.roomNumLabel.text = [NSString stringWithFormat: @"房号 %@", AudioRoomManager.shared.currentRoomVC.roomID];
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld", AudioRoomManager.shared.currentRoomVC.totalUserCount];
 }
@@ -66,7 +66,7 @@
     }
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.roomNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(16);
         make.top.mas_equalTo(6);

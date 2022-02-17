@@ -74,7 +74,7 @@
     NSInteger oldCount = self.totalUserCount;
     self.totalUserCount = count;
     if (oldCount != count) {
-        [self hsUpdateUI];
+        [self dtUpdateUI];
     }
 }
 
@@ -87,7 +87,7 @@
             self.totalUserCount = 0;
         }
     }
-    [self hsUpdateUI];
+    [self dtUpdateUI];
 }
 
 - (void)onRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {

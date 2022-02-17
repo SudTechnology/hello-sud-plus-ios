@@ -36,13 +36,13 @@
     [self.collectionView reloadData];
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     
     [self addSubview:self.titleLabel];
     [self addSubview:self.collectionView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(16);
         make.top.mas_equalTo(22);
@@ -56,7 +56,7 @@
     }];
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.backgroundColor = UIColor.whiteColor;
 }
 

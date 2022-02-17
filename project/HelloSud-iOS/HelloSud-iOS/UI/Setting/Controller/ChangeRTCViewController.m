@@ -56,15 +56,15 @@
     [self.tableView reloadData];
 }
 
-- (void)hsAddViews {
-    [super hsAddViews];
+- (void)dtAddViews {
+    [super dtAddViews];
     self.view.backgroundColor = HEX_COLOR(@"#F5F6FB");
     [self.view addSubview:self.tableView];
     
 }
 
-- (void)hsLayoutViews {
-    [super hsLayoutViews];
+- (void)dtLayoutViews {
+    [super dtLayoutViews];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(20, 16, 0, 16));
     }];

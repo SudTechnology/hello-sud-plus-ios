@@ -13,13 +13,13 @@
 @end
 
 @implementation MicOperateView
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.downMicBtn];
     [self addSubview:self.lineView];
     [self addSubview:self.cancelBtn];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.downMicBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(13);
         make.left.mas_equalTo(0);
@@ -44,7 +44,7 @@
     }];
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.backgroundColor = HEX_COLOR(@"#F2F2F2");
 }
 

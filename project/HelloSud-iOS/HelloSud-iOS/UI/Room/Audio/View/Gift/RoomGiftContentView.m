@@ -15,22 +15,22 @@
 
 @implementation RoomGiftContentView
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.backgroundColor = UIColor.clearColor;
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     
     [self addSubview:self.collectionView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
     }];
 }
 
-- (void)hsUpdateUI {
+- (void)dtUpdateUI {
     [self.dataList setArray:GiftManager.shared.giftList];
     for (GiftModel *m in self.dataList) {
         m.isSelected = NO;

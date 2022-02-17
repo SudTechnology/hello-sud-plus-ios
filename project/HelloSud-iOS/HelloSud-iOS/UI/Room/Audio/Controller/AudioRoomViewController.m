@@ -37,7 +37,7 @@
 
 @implementation AudioRoomViewController
 
-- (BOOL)hsIsHidenNavigationBar {
+- (BOOL)dtIsHidenNavigationBar {
     return YES;
 }
 
@@ -51,7 +51,7 @@
         self.gameInfoModel.currentPlayerUserId = AppManager.shared.loginUserInfo.userID;
         [self loginGame];
     }
-    [self hsUpdateUI];
+    [self dtUpdateUI];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,7 +62,7 @@
     return NO;
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.gameView];
     [self.view addSubview:self.naviView];
@@ -74,7 +74,7 @@
     [self.view addSubview:self.inputView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
@@ -115,7 +115,7 @@
     }];
 }
 
-- (void)hsConfigEvents {
+- (void)dtConfigEvents {
     WeakSelf
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
         [DTSheetView show:[[RoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
@@ -184,8 +184,8 @@
     };
 }
 
-- (void)hsUpdateUI {
-    [self.naviView hsUpdateUI];
+- (void)dtUpdateUI {
+    [self.naviView dtUpdateUI];
 }
 
 /// 退出房间

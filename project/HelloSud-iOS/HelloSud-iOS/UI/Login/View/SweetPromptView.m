@@ -15,7 +15,7 @@
 
 @implementation SweetPromptView
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"温馨提示\n"];
     attrTitle.yy_lineSpacing = 16;
     attrTitle.yy_font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
@@ -31,13 +31,13 @@
     self.contentLabel.attributedText = attrTitle;
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.contentLabel];
     [self addSubview:self.agreeBtn];
     [self addSubview:self.exitBtn];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(24);
         make.right.mas_equalTo(-24);

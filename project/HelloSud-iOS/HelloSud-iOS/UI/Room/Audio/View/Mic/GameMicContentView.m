@@ -15,12 +15,12 @@
 
 @implementation GameMicContentView
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.scrollView];
     [self.scrollView addSubview:self.contenView];
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     for (UIView * v in self.contenView.subviews) {
         [v removeFromSuperview];
     }

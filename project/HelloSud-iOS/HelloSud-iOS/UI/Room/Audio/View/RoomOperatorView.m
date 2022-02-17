@@ -18,14 +18,14 @@
 @implementation RoomOperatorView
 
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.voiceUpBtn];
     [self addSubview:self.giftBtn];
     [self addSubview:self.inputLabel];
     self.voiceBtnState = VoiceBtnStateTypeNormal;
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.voiceUpBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(16);
         make.centerY.mas_equalTo(self);
@@ -45,7 +45,7 @@
     }];
 }
 
-- (void)hsConfigEvents {
+- (void)dtConfigEvents {
     WeakSelf
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         AudioMsgMicModel *msgModel = note.userInfo[@"msgModel"];
@@ -60,7 +60,7 @@
                 }
             }
         } else {
-            [weakSelf hsUpdateUI];
+            [weakSelf dtUpdateUI];
         }
     }];
 }

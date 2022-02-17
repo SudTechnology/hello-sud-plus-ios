@@ -50,13 +50,13 @@
     [self.cancelBtn setTitle:cancelText forState:UIControlStateNormal];
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.contentLabel];
     [self addSubview:self.sureBtn];
     [self addSubview:self.cancelBtn];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(24);
         make.right.mas_equalTo(-24);

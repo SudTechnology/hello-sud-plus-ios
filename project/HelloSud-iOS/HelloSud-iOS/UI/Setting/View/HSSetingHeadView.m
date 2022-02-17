@@ -63,8 +63,8 @@
                                                    bottomSpacing:0 leadSpacing:0 tailSpacing:0];
 }
 
-- (void)hsAddViews {
-    [super hsAddViews];
+- (void)dtAddViews {
+    [super dtAddViews];
     self.backgroundColor = UIColor.whiteColor;
     [self addSubview: self.titleLabel];
     [self addSubview: self.scaleView];
@@ -73,8 +73,8 @@
     [self updateUI];
 }
 
-- (void)hsLayoutViews {
-    [super hsLayoutViews];
+- (void)dtLayoutViews {
+    [super dtLayoutViews];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(16);
         make.left.mas_equalTo(20);

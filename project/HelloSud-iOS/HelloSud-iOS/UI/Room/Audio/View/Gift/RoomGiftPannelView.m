@@ -30,10 +30,10 @@
 
 @implementation RoomGiftPannelView
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.blurView];
     [self addSubview:self.topView];
     [self.topView addSubview:self.sendToLabel];
@@ -44,7 +44,7 @@
     [self addSubview:self.sendView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.blurView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
     }];
@@ -87,15 +87,15 @@
     }];
 }
 
-- (void)hsConfigEvents {
-    [super hsConfigEvents];
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
     WeakSelf
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        [weakSelf hsUpdateUI];
+        [weakSelf dtUpdateUI];
     }];
 }
 
-- (void)hsUpdateUI {
+- (void)dtUpdateUI {
     NSArray *arrModel = AudioRoomManager.shared.currentRoomVC.dicMicModel.allValues;
     NSMutableArray<AudioRoomMicModel *> *userList = NSMutableArray.new;
     NSMutableDictionary *tempSelectedCacheMap = NSMutableDictionary.new;

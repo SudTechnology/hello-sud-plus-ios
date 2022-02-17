@@ -16,7 +16,7 @@
 
 @implementation AudioMicContentView
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     WeakSelf
     for (UIView * v in self.containerView.subviews) {
         [v removeFromSuperview];
@@ -53,12 +53,12 @@
     }
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.ownerMicView];
     [self addSubview:self.containerView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     self.ownerMicView.headWidth = 72;
     [self.ownerMicView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self);

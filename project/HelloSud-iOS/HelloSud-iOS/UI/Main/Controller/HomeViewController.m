@@ -26,11 +26,11 @@
 
 @implementation HomeViewController
 
-- (BOOL)hsIsHidenNavigationBar {
+- (BOOL)dtIsHidenNavigationBar {
     return YES;
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.itemW = (kScreenWidth - 32 - 24 - 24 )/4;
     self.itemH = 125 + 12;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
@@ -45,12 +45,12 @@
     [self requestData];
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self.view addSubview:self.searchHeaderView];
     [self.view addSubview:self.collectionView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.searchHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(self.view);
         make.height.mas_greaterThanOrEqualTo(0);

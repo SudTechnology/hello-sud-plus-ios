@@ -27,20 +27,20 @@
     [self requestData];
 }
 
-- (BOOL)hsIsHidenNavigationBar {
+- (BOOL)dtIsHidenNavigationBar {
     return YES;
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self.view addSubview:self.searchHeaderView];
     [self.view addSubview:self.tableView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.searchHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(self.view);
         make.height.mas_greaterThanOrEqualTo(0);
