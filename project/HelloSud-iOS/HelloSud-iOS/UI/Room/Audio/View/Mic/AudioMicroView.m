@@ -107,6 +107,11 @@
         make.top.mas_equalTo(self.headerView.mas_top).offset(-4);
         make.size.mas_equalTo(CGSizeMake(14, 14));
     }];
+    [self.gamingImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.headerView);
+        make.top.mas_equalTo(self.headerView.mas_top).offset(15);
+        make.size.mas_equalTo(CGSizeMake(32, 32));
+    }];
     [self.gameStateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(26);
         make.centerX.mas_equalTo(self);
@@ -262,7 +267,7 @@
         }
         /// 设置玩家游戏状态
 //        [self.gameStateLabel setHidden:false];
-//        [self.gamingImageView setHidden:true];
+        [self.gamingImageView setHidden:true];
 //        [self.gameBadgeLabel setHidden:true];
         [self.gameStateLabel setHidden:true];
         if ([state isEqualToString:MG_COMMON_PLAYER_IN] && !m.isIn) {
@@ -275,14 +280,11 @@
             self.gameStateLabel.textColor = [UIColor whiteColor];
             self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:m.isReady ? @"#13AD21" : @"#FF6E65" alpha:1];
             self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
-        }
-//        else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
-//            NSLog(@"玩家: 游戏中状态");
-//            [self.gameStateLabel setHidden:true];
-//            [self.gameStateLabel setHidden:true];
+        } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
+            NSLog(@"玩家: 游戏中状态");
 //            [self.gamingImageView setHidden:false];
-//            [self.gamingImageView setHidden:!m.isPlaying];
-//        }
+            [self.gamingImageView setHidden:!m.isPlaying];
+        }
 //        else if ([state isEqualToString:MG_DG_SCORE]) {
 //            NSLog(@"你画我猜 玩家: 本次积分");
 //            self.gameStateLabel.text = m.msg;

@@ -30,6 +30,7 @@
 @property (nonatomic, strong) AudioMicContentView *audioMicContentView;
 @property (nonatomic, strong) GameMicContentView *gameMicContentView;
 @property (nonatomic, strong) RoomInputView *inputView;
+@property (nonatomic, strong) UILabel *gameNumLabel;
 /// 主播视图列表
 @property (nonatomic, strong) NSArray <AudioMicroView *> *arrAnchorView;
 
@@ -69,6 +70,7 @@
     [self.view addSubview:self.operatorView];
     [self.view addSubview:self.audioMicContentView];
     [self.view addSubview:self.gameMicContentView];
+    [self.view addSubview:self.gameNumLabel];
     [self.view addSubview:self.msgBgView];
     [self.msgBgView addSubview:self.msgTableView];
     [self.view addSubview:self.inputView];
@@ -100,6 +102,11 @@
         make.top.mas_equalTo(self.naviView.mas_bottom).offset(20);
         make.left.right.mas_equalTo(self.view);
         make.height.mas_equalTo(55);
+    }];
+    [self.gameNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(14);
+        make.top.mas_equalTo(self.gameMicContentView.mas_bottom).offset(3);
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.audioMicContentView.mas_bottom);
@@ -181,6 +188,12 @@
             }
             [weakSelf handleChangeRoomMode:m];
         };
+    };
+    self.naviView.endGameBlock = ^(UIButton *sender) {
+        [DTAlertView showTextAlert:@"确定结束游戏吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+            [weakSelf.sudFSTAPPManager sendComonSetEnd];
+        } onCloseCallback:^{
+        }];
     };
 }
 
@@ -447,6 +460,7 @@
         [self.gameMicContentView setHidden:true];
         [self.audioMicContentView setHidden:false];
         self.gameView.hidden = YES;
+        self.gameNumLabel.hidden = YES;
         [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.audioMicContentView.mas_bottom);
             make.left.right.mas_equalTo(self.view);
@@ -463,6 +477,7 @@
         GameManager.shared.gameId = 0;
     } else if (self.roomType == HSGameMic) {
         self.gameView.hidden = NO;
+        self.gameNumLabel.hidden = NO;
         [self.gameMicContentView setHidden:false];
         [self.audioMicContentView setHidden:true];
         [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -562,6 +577,16 @@
     return _gameInfoModel;
 }
 
+- (UILabel *)gameNumLabel {
+    if (!_gameNumLabel) {
+        _gameNumLabel = UILabel.new;
+        _gameNumLabel.text = @"游戏人数：0/0";
+        _gameNumLabel.font = UIFONT_REGULAR(12);
+        _gameNumLabel.textColor = UIColor.whiteColor;
+    }
+    return _gameNumLabel;
+}
+
 - (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
     [self.sudFSTAPPManager sendComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
 }
@@ -574,6 +599,11 @@
 - (void)setGameId:(NSInteger)gameId {
     _gameId = gameId;
     GameManager.shared.gameId = gameId;
+}
+
+- (void)setIsShowEndGame:(BOOL)isShowEndGame {
+    _isShowEndGame = isShowEndGame;
+    self.naviView.endGameBtn.hidden = !isShowEndGame;
 }
 
 - (void)dealloc {
