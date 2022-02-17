@@ -425,8 +425,9 @@
 		445EAA6E2798FFE4000DCC72 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6CD6E84C27BE321700D8F76C /* Main */,
 				6C076E82279EA2CF00650209 /* Room */,
-				445EAAE9279E7C7B000DCC72 /* Main */,
+				445EAAE9279E7C7B000DCC72 /* Home */,
 				445EAA6F2798FFE4000DCC72 /* Game */,
 				445EAA702798FFE4000DCC72 /* Setting */,
 				445EAA712798FFE4000DCC72 /* Login */,
@@ -569,14 +570,14 @@
 			path = Gift;
 			sourceTree = "<group>";
 		};
-		445EAAE9279E7C7B000DCC72 /* Main */ = {
+		445EAAE9279E7C7B000DCC72 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				445EAAEC279E7C8F000DCC72 /* Model */,
 				445EAAEB279E7C8A000DCC72 /* View */,
 				445EAAEA279E7C85000DCC72 /* Controller */,
 			);
-			path = Main;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		445EAAEA279E7C85000DCC72 /* Controller */ = {
@@ -1033,11 +1034,18 @@
 				6C192E59279523B100553034 /* LaunchScreen.storyboard */,
 				6C192E5C279523B100553034 /* Info.plist */,
 				6C192E5D279523B100553034 /* main.m */,
-				6C076E51279940A400650209 /* MainTabBarController.h */,
-				6C076E52279940A400650209 /* MainTabBarController.m */,
 				6C076EAF279FF37200650209 /* Res */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		6CD6E84C27BE321700D8F76C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6C076E51279940A400650209 /* MainTabBarController.h */,
+				6C076E52279940A400650209 /* MainTabBarController.m */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		BC210060BE34F958814B970C /* Base */ = {
