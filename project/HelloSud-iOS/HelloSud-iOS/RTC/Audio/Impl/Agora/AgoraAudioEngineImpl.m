@@ -41,7 +41,6 @@
     NSString *appKey = config[@"appKey"];
     _agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:appID delegate:self];
     [_agoraKit enableAudioVolumeIndication:300 smooth:3 report_vad:YES];
-    [_agoraKit enableLocalAudio:NO];
     _agoraIM = [[AgoraRtmKit alloc]initWithAppId:appID delegate:self];
     [_agoraKit setAudioDataFrame:self];
 }
@@ -179,7 +178,7 @@
         NSString *userID = [NSString stringWithFormat:@"%ld", item.uid];
         // 转换0-100声音值
         NSUInteger volume = item.volume / 255.0 * 100;
-        NSLog(@"reportAudioVolumeIndicationOfSpeakers userID:%@, volume:%@", userID, @(volume));
+//        NSLog(@"reportAudioVolumeIndicationOfSpeakers userID:%@, volume:%@", userID, @(volume));
         if (item.uid > 0) {
             soundLevels[userID] = @(volume);
         } else {
@@ -198,6 +197,11 @@
     
 }
 
+- (void)rtcEngine:(AgoraRtcEngineKit *)engine localAudioStateChange:(AgoraAudioLocalState)state error:(AgoraAudioLocalError)error {
+
+    NSLog(@"localAudioStateChange:%@, error:%@", @(state), @(error));
+}
+
 #pragma mark AgoraRtmDelegate
 
 - (void)rtmKit:(AgoraRtmKit * _Nonnull)kit connectionStateChanged:(AgoraRtmConnectionState)state reason:(AgoraRtmConnectionChangeReason)reason {
@@ -207,6 +211,7 @@
 - (void)rtmKit:(AgoraRtmKit * _Nonnull)kit messageReceived:(AgoraRtmMessage * _Nonnull)message fromPeer:(NSString * _Nonnull)peerId {
     NSLog(@"rtmKit messageReceived:%@, peerId:%@", message, peerId);
 }
+
 
 #pragma mark AgoraRtmChannelDelegate
 
