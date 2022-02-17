@@ -6,7 +6,7 @@
 //
 
 #import "BaseViewController.h"
-#import "HSAudioEngineManager.h"
+#import "AudioEngineManager.h"
 #import "CommonAudioModelHeader.h"
 #import "FSMApp2MGManager.h"
 #import "SwitchRoomModeView.h"
@@ -31,7 +31,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房间场景
-@interface AudioRoomViewController : BaseViewController<HSAudioEventListener>
+@interface AudioRoomViewController : BaseViewController<AudioEventListener>
 typedef NS_ENUM(NSInteger, RoomType) {
     HSAudio,
     HSGame,

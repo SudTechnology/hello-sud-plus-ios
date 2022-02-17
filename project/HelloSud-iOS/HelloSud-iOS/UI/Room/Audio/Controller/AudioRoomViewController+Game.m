@@ -349,12 +349,12 @@
 
 /// 开始音频采集
 - (void)startCaptureAudioToASR {
-    [HSAudioEngineManager.shared.audioEngine startCapture];
+    [AudioEngineManager.shared.audioEngine startCapture];
 }
 
 /// 停止音频采集
 - (void)stopCapture {
-    [HSAudioEngineManager.shared.audioEngine stopCapture];
+    [AudioEngineManager.shared.audioEngine stopCapture];
 }
 
 @end

@@ -1,20 +1,20 @@
 //
-//  AlertView.m
+//  DTAlertView.m
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/21.
 //
 
-#import "AlertView.h"
-#import "TextAlertView.h"
+#import "DTAlertView.h"
+#import "DTTextAlertView.h"
 
-@interface AlertView ()
+@interface DTAlertView ()
 @property(nonatomic, assign) CGFloat hsWidth;
 @property(nonatomic, assign) BOOL isHitTest;
 
 @end
 
-@implementation AlertView
+@implementation DTAlertView
 
 - (void)hsConfigUI {
     self.hsWidth = 296;
@@ -70,11 +70,11 @@
     }
     
     /// 如果存在移除当前展示弹窗
-    if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"AlertView"]) {
+    if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"DTAlertView"]) {
         [[self getAlert] removeFromSuperview];
     }
     
-    AlertView *alert = [[AlertView alloc] init];
+    DTAlertView *alert = [[DTAlertView alloc] init];
     alert.contentView.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2" alpha:1];
     alert.isHitTest = isHitTest;
     alert.customView = view;
@@ -94,9 +94,9 @@
 /// @param sureCb sure回调
 /// @param closeCb close回调
 + (void)showTextAlert:(NSString *)msg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
-    TextAlertView *alert = [[TextAlertView alloc] init];
+    DTTextAlertView *alert = [[DTTextAlertView alloc] init];
     [alert config:msg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
-    [AlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+    [DTAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
 //        closeCb();
     }];
 }
@@ -108,9 +108,9 @@
 /// @param sureCb sure回调
 /// @param closeCb close回调
 + (void)showAttrTextAlert:(NSAttributedString *)attrMsg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
-    TextAlertView *alert = [[TextAlertView alloc] init];
+    DTTextAlertView *alert = [[DTTextAlertView alloc] init];
     [alert configAttr:attrMsg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
-    [AlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+    [DTAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
 //        closeCb();
     }];
 }

@@ -1,20 +1,20 @@
 //
-//  BlurEffectView.m
+//  DTBlurEffectView.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
 //
 
-#import "BlurEffectView.h"
+#import "DTBlurEffectView.h"
 
 API_AVAILABLE(ios(10.0))
-@interface BlurEffectView()
+@interface DTBlurEffectView()
 
 @property(nonatomic, strong)UIVisualEffect *theEffect;
 @property(nonatomic, strong)UIViewPropertyAnimator *animator;
 @end
 
-@implementation BlurEffectView
+@implementation DTBlurEffectView
 
 - (instancetype)initWithEffect:(UIVisualEffect *)effect {
     if (self = [super initWithEffect:effect]) {

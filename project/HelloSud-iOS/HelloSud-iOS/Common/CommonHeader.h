@@ -36,11 +36,11 @@ typedef void(^ErrorBlock)(NSError *error);
 #import "NSError+Custom.h"
 
 /// Views
-#import "SheetView.h"
-#import "WebViewController.h"
-#import "BlurEffectView.h"
-#import "SVGAPlayerView.h"
-#import "RippleAnimationView.h"
-#import "PaddingLabel.h"
+#import "DTSheetView.h"
+#import "DTWebViewController.h"
+#import "DTBlurEffectView.h"
+#import "DTSVGAPlayerView.h"
+#import "DTRippleAnimationView.h"
+#import "DTPaddingLabel.h"
 
 #endif /* CommonHeader_h */

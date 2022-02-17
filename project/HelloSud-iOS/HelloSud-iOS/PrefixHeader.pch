@@ -12,8 +12,8 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 // basic components
 #import "CommonHeader.h"
-#import "SheetView.h"
-#import "AlertView.h"
+#import "DTSheetView.h"
+#import "DTAlertView.h"
 
 #import "UIView+Extension.h"
 #import "NSArray+Masonry.h"

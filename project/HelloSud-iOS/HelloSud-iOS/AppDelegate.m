@@ -9,7 +9,7 @@
 #import "MainTabBarController.h"
 #import <Bugly/Bugly.h>
 #import "DeviceUtil.h"
-#import "HSAudioEngineManager.h"
+#import "AudioEngineManager.h"
 #import "LoginViewController.h"
 @interface AppDelegate () {
     

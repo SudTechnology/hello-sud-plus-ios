@@ -6,17 +6,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HSAudioEventListener.h"
+#import "AudioEventListener.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 多媒体语音引擎接口，多引擎实现以下接口
-@protocol IHSAudioEngine <NSObject>
+@protocol IAudioEngine <NSObject>
 @required
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
-- (void)setEventListener:(id<HSAudioEventListener>)listener;
+- (void)setEventListener:(id<AudioEventListener>)listener;
 
 /// 必须优先调用初始化配置引擎SDK
 /// @param config config

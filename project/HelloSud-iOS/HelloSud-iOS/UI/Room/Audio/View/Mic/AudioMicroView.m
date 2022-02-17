@@ -17,12 +17,12 @@
 /// game
 @property (nonatomic, strong) UIImageView *gameCaptainView;
 @property (nonatomic, strong) UILabel *gameStateLabel;
-@property (nonatomic, strong) PaddingLabel *gameBadgeLabel;
+@property (nonatomic, strong) DTPaddingLabel *gameBadgeLabel;
 @property (nonatomic, strong) UIImageView * gamingImageView;
 @property (nonatomic, strong) GamePlayerStateModel *gameModel;
 
 /// 水波纹
-@property (nonatomic, strong) RippleAnimationView *rippleView;
+@property (nonatomic, strong) DTRippleAnimationView *rippleView;
 
 /// 声音值
 @property (nonatomic, assign) CGFloat volume;
@@ -355,9 +355,9 @@
     return _gameStateLabel;
 }
 
-- (PaddingLabel *)gameBadgeLabel {
+- (DTPaddingLabel *)gameBadgeLabel {
     if (!_gameBadgeLabel) {
-        _gameBadgeLabel = [[PaddingLabel alloc] init];
+        _gameBadgeLabel = [[DTPaddingLabel alloc] init];
         _gameBadgeLabel.backgroundColor = [UIColor colorWithHexString:@"#FF4DA6" alpha:1];
         _gameBadgeLabel.layer.cornerRadius = 14/2;
         _gameBadgeLabel.layer.masksToBounds = true;
@@ -372,9 +372,9 @@
     return _gameBadgeLabel;
 }
 
-- (RippleAnimationView *)rippleView {
+- (DTRippleAnimationView *)rippleView {
     if (_rippleView == nil) {
-        _rippleView = RippleAnimationView.new;
+        _rippleView = DTRippleAnimationView.new;
         _rippleView.animateColors = @[(id)HEX_COLOR_A(@"#FFFFFF", 1).CGColor,
                                       (id)HEX_COLOR_A(@"#FFFFFF", 0.15).CGColor,
                                       (id)HEX_COLOR_A(@"#FFFFFF", 0.05).CGColor,
