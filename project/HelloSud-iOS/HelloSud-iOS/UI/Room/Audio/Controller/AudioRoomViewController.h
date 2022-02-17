@@ -6,7 +6,7 @@
 //
 
 #import "BaseViewController.h"
-#import "HSAudioEngineManager.h"
+#import "AudioEngineManager.h"
 #import "CommonAudioModelHeader.h"
 #import "FSMApp2MGManager.h"
 #import "SwitchRoomModeView.h"

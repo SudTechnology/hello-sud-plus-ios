@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 多媒体语音引擎接口，多引擎实现以下接口
-@protocol IHSAudioEngine <NSObject>
+@protocol IAudioEngine <NSObject>
 @required
 
 /// 设置事件处理器
