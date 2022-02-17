@@ -131,6 +131,9 @@
     HSSettingCell *c = (HSSettingCell *)cell;
     c.isShowTopLine = indexPath.row > 0;
     c.model = self.arrData[indexPath.section][indexPath.row];
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        c.isShowTopLine = true;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

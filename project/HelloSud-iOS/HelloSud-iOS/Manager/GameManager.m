@@ -37,4 +37,11 @@
         }
     }];
 }
+
+- (NSMutableDictionary *)gamePlayerStateMap {
+    if (_gamePlayerStateMap == nil) {
+        _gamePlayerStateMap = NSMutableDictionary.new;
+    }
+    return _gamePlayerStateMap;
+}
 @end

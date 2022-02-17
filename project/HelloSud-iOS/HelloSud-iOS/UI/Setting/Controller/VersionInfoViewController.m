@@ -8,6 +8,7 @@
 #import "VersionInfoViewController.h"
 #import "VersionInfoCell.h"
 #import "VersionInfoModel.h"
+#import <SudMGP/ISudFSMMG.h>
 
 @interface VersionInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong)UITableView *tableView;
@@ -25,21 +26,22 @@
 
 /// 配置页面数据
 - (void)configData {
+    
     VersionInfoModel *m0 = [VersionInfoModel new];
     m0.title = @"HelloSud App";
-    m0.subTitle = @"V1.2.1";
+    m0.subTitle = [NSString stringWithFormat:@"V%@", [DeviceUtil getAppVersion]];
     
     VersionInfoModel *m1 = [VersionInfoModel new];
     m1.title = @"SudMGP SDK";
-    m1.subTitle = @"V1.2.1";
+    m1.subTitle = [NSString stringWithFormat:@"V%@", [SudMGP getVersion]];
     
     VersionInfoModel *m2 = [VersionInfoModel new];
     m2.title = @"Zego SDK";
-    m2.subTitle = @"V1.2.1";
+    m2.subTitle = @"V2.15.0";
     
     VersionInfoModel *m3 = [VersionInfoModel new];
     m3.title = @"Agora SDK";
-    m3.subTitle = @"V1.2.1";
+    m3.subTitle = @"V3.6.1.1";
     
     self.arrData = @[m0, m1, m2, m3];
     [self.tableView reloadData];
