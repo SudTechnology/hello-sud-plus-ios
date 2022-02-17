@@ -11,6 +11,7 @@
 
 @interface HSSetingHeadView()
 @property(nonatomic, strong)UILabel *titleLabel;
+@property(nonatomic, strong)UILabel *sizeLabel;
 @property(nonatomic, strong)UIView *scaleView;
 @property(nonatomic, strong)UIView *itemsView;
 @property(nonatomic, strong)NSMutableArray <HSSettingHeaderModel *>*dataArray;
@@ -25,6 +26,7 @@
     NSArray <NSString *>*titleArr = @[@"SudMGP Core", @"SudMGP ASR", @"HelloSud", @"Zego RTC SDK", @"Agora RTC SDK"];
     NSArray <NSNumber *>*sizeArr = @[@1.6, @0.135, @28.5, @10.4, @15.5];
     CGFloat sum = [[sizeArr valueForKeyPath:@"@sum.floatValue"] floatValue];
+    self.sizeLabel.text = [NSString stringWithFormat:@"总%.02fM", sum];
     
     for (int i = 0; i < colorArr.count; i++) {
         HSSettingHeaderModel *m = HSSettingHeaderModel.new;
@@ -67,6 +69,7 @@
     [super hsAddViews];
     self.backgroundColor = UIColor.whiteColor;
     [self addSubview: self.titleLabel];
+    [self addSubview:self.sizeLabel];
     [self addSubview: self.scaleView];
     [self addSubview: self.itemsView];
     
@@ -78,6 +81,11 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(16);
         make.left.mas_equalTo(20);
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+    }];
+    [self.sizeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-20);
+        make.centerY.mas_equalTo(self.titleLabel);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.scaleView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -104,6 +112,16 @@
         _titleLabel.text = @"占用大小";
     }
     return _titleLabel;
+}
+
+- (UILabel *)sizeLabel {
+    if (_sizeLabel == nil) {
+        _sizeLabel = UILabel.new;
+        _sizeLabel.textColor = HEX_COLOR(@"#1A1A1A");
+        _sizeLabel.font = UIFONT_REGULAR(16);
+        _sizeLabel.text = @"";
+    }
+    return _sizeLabel;
 }
 
 - (UIView *)scaleView {
