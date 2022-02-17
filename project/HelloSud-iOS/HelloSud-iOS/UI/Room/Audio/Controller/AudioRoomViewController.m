@@ -478,6 +478,7 @@
         }
     }
     [self reqMicList];
+    [self.naviView hiddenNodeWithRoleType: AudioRoomManager.shared.roleType];
 }
 
 #pragma mark lazy
