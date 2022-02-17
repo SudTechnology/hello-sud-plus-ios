@@ -69,6 +69,8 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, assign) BOOL isEnteredRoom;
 /// ASR功能的开启关闭的状态标志
 @property (nonatomic, assign) BOOL keyWordASRing;
+/// 是否展示结束游戏
+@property (nonatomic, assign) BOOL isShowEndGame;
 
 - (void)handleTapVoice;
 @end
