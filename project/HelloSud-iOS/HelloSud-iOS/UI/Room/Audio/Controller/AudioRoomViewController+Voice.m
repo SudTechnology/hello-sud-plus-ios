@@ -11,25 +11,25 @@
 /// 开启推流
 /// @param streamID 流ID
 - (void)startPublish:(NSString*)streamID {
-    [AudioEngineManager.shared.audioEngine muteMicrophone:NO];
-    [AudioEngineManager.shared.audioEngine startPublish:streamID];
+    [AudioEngineFactory.shared.audioEngine muteMicrophone:NO];
+    [AudioEngineFactory.shared.audioEngine startPublish:streamID];
 }
 
 /// 关闭推流
 - (void)stopPublish {
-    [AudioEngineManager.shared.audioEngine stopPublishStream];
-    [AudioEngineManager.shared.audioEngine muteMicrophone:YES];
+    [AudioEngineFactory.shared.audioEngine stopPublishStream];
+    [AudioEngineFactory.shared.audioEngine muteMicrophone:YES];
 }
 
 - (void)loginRoom {
     /// 设置语音引擎事件回调
-    [AudioEngineManager.shared.audioEngine setEventListener:self];
+    [AudioEngineFactory.shared.audioEngine setEventListener:self];
     MediaUser *user = [MediaUser user:AppManager.shared.loginUserInfo.userID nickname:AppManager.shared.loginUserInfo.name];
-    [AudioEngineManager.shared.audioEngine loginRoom:self.roomID user:user config:nil];
+    [AudioEngineFactory.shared.audioEngine loginRoom:self.roomID user:user config:nil];
 }
 
 - (void)logoutRoom {
-    [AudioEngineManager.shared.audioEngine logoutRoom];
+    [AudioEngineFactory.shared.audioEngine logoutRoom];
 }
 
 #pragma mark delegate
@@ -57,14 +57,14 @@
     switch (updateType) {
         case HSAudioEngineUpdateTypeAdd:
             for (MediaStream *item in streamList) {
-                [AudioEngineManager.shared.audioEngine startPlayingStream:item.streamID];
+                [AudioEngineFactory.shared.audioEngine startPlayingStream:item.streamID];
                 [[NSNotificationCenter defaultCenter]postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey:item}];
                 
             }
             break;
         case HSAudioEngineUpdateTypeDelete:
             for (MediaStream *item in streamList) {
-                [AudioEngineManager.shared.audioEngine stopPlayingStream:item.streamID];
+                [AudioEngineFactory.shared.audioEngine stopPlayingStream:item.streamID];
             }
             break;
     }

@@ -1,5 +1,5 @@
 //
-//  AudioEngineManager.h
+//  AudioEngineFactory.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 多媒体语音引擎管理模块
-@interface AudioEngineManager : NSObject
+@interface AudioEngineFactory : NSObject
 
 + (instancetype)shared;
 
