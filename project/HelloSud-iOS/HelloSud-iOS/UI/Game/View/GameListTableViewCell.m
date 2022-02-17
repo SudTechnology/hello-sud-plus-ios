@@ -10,7 +10,7 @@
 @interface GameListTableViewCell ()
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIImageView *iconImageView;
-@property (nonatomic, strong) PaddingLabel *roomTypeLabel;
+@property (nonatomic, strong) DTPaddingLabel *roomTypeLabel;
 @property (nonatomic, strong) UILabel *roomNameLabel;
 @property (nonatomic, strong) UILabel *roomNumLabel;
 @property (nonatomic, strong) UILabel *onlineLabel;
@@ -116,9 +116,9 @@
     return _iconImageView;
 }
 
-- (PaddingLabel *)roomTypeLabel {
+- (DTPaddingLabel *)roomTypeLabel {
     if (!_roomTypeLabel) {
-        _roomTypeLabel = [[PaddingLabel alloc] init];
+        _roomTypeLabel = [[DTPaddingLabel alloc] init];
         _roomTypeLabel.paddingX = 5;
         _roomTypeLabel.text = @"语音房";
         _roomTypeLabel.textColor = [UIColor colorWithHexString:@"#999999" alpha:1];

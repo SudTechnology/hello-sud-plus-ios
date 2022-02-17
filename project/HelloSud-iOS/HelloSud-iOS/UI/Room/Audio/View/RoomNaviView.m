@@ -48,12 +48,12 @@
     }
 //    SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
 //    [modeView reloadData:<#(BOOL)#>];
-//    [SheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
+//    [DTSheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
 //        
 //    }];
 //    WeakSelf
 //    modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
-//        [SheetView close];
+//        [DTSheetView close];
 //        if (weakSelf.onTapGameCallBack) {
 //            weakSelf.onTapGameCallBack(m);
 //        }

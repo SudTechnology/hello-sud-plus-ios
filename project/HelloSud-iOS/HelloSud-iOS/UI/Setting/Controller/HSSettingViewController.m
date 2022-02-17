@@ -160,7 +160,7 @@
         }
     } else {
         if (model.isMore) {
-            WebViewController *web = WebViewController.new;
+            DTWebViewController *web = DTWebViewController.new;
             web.url = model.pageURL;
             [self.navigationController pushViewController:web animated:YES];
         }
