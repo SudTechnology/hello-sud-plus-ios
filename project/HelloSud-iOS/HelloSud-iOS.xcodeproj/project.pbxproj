@@ -912,22 +912,12 @@
 		6C192E4A279523B000553034 /* HelloSud-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				6CD6E84B27BE30BE00D8F76C /* App */,
 				44DF03902796B22C006EE6AC /* Common */,
 				44DF03842796A9EF006EE6AC /* Game */,
 				6C076EA3279F983100650209 /* Manager */,
 				445EAA6E2798FFE4000DCC72 /* UI */,
 				44DF037E2796A981006EE6AC /* RTC */,
-				6C076EAF279FF37200650209 /* Res */,
-				6C192E882797E2C700553034 /* PrefixHeader.pch */,
-				6C192E4B279523B000553034 /* AppDelegate.h */,
-				6C192E4C279523B000553034 /* AppDelegate.m */,
-				6C192E54279523B000553034 /* Main.storyboard */,
-				6C192E57279523B100553034 /* Assets.xcassets */,
-				6C192E59279523B100553034 /* LaunchScreen.storyboard */,
-				6C192E5C279523B100553034 /* Info.plist */,
-				6C192E5D279523B100553034 /* main.m */,
-				6C076E51279940A400650209 /* MainTabBarController.h */,
-				6C076E52279940A400650209 /* MainTabBarController.m */,
 			);
 			path = "HelloSud-iOS";
 			sourceTree = "<group>";
@@ -1030,6 +1020,24 @@
 				BC210D4E52B63622AFCD7CC7 /* Core */,
 			);
 			path = Audio;
+			sourceTree = "<group>";
+		};
+		6CD6E84B27BE30BE00D8F76C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6C192E882797E2C700553034 /* PrefixHeader.pch */,
+				6C192E4B279523B000553034 /* AppDelegate.h */,
+				6C192E4C279523B000553034 /* AppDelegate.m */,
+				6C192E54279523B000553034 /* Main.storyboard */,
+				6C192E57279523B100553034 /* Assets.xcassets */,
+				6C192E59279523B100553034 /* LaunchScreen.storyboard */,
+				6C192E5C279523B100553034 /* Info.plist */,
+				6C192E5D279523B100553034 /* main.m */,
+				6C076E51279940A400650209 /* MainTabBarController.h */,
+				6C076E52279940A400650209 /* MainTabBarController.m */,
+				6C076EAF279FF37200650209 /* Res */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		BC210060BE34F958814B970C /* Base */ = {
@@ -1495,9 +1503,9 @@
 				DEVELOPMENT_TEAM = P6FVM63RW6;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
-				GCC_PREFIX_HEADER = "HelloSud-iOS/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "HelloSud-iOS/App/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "HelloSud-iOS/Info.plist";
+				INFOPLIST_FILE = "HelloSud-iOS/App/Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间语音聊天功能.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1531,9 +1539,9 @@
 				DEVELOPMENT_TEAM = P6FVM63RW6;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
-				GCC_PREFIX_HEADER = "HelloSud-iOS/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "HelloSud-iOS/App/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "HelloSud-iOS/Info.plist";
+				INFOPLIST_FILE = "HelloSud-iOS/App/Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间语音聊天功能.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
