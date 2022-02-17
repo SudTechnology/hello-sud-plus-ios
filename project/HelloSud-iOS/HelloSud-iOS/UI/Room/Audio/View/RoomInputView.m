@@ -22,12 +22,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.backgroundColor = UIColor.whiteColor;
     [self setPartRoundCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:8];
 }
 
-- (void)hsConfigEvents {
+- (void)dtConfigEvents {
     __weak typeof(self) ws = self;
     self.textView.heightChangeBlock = ^{
         [ws layoutIfNeeded];
@@ -63,12 +63,12 @@
     [self hiddenInputView];
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.textView];
     [self addSubview:self.sendBtn];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     self.lineNumber = 1.5;
     CGFloat oneLineHeight = [self textViewSingleLineHeight];
     CGFloat maxHeight = oneLineHeight * self.lineNumber;

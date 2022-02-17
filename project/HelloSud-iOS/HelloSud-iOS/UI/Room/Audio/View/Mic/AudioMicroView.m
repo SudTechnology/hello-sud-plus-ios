@@ -62,7 +62,7 @@
     self.headerView.layer.cornerRadius = self.headWidth / 2;
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.rippleView];
     [self addSubview:self.headerView];
     [self addSubview:self.nameLabel];
@@ -81,7 +81,7 @@
     [self.gamingImageView setHidden:true];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
 
     [self.rippleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.headerView);
@@ -114,7 +114,7 @@
     }];
 }
 
-- (void)hsConfigEvents {
+- (void)dtConfigEvents {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTapHead:)];
     [self.headerView addGestureRecognizer:tap];
     WeakSelf
@@ -138,9 +138,9 @@
                 weakSelf.model.user = nil;
                 weakSelf.giftImageView.hidden = true;
             }
-            [weakSelf hsUpdateUI];
+            [weakSelf dtUpdateUI];
         } else {
-            [weakSelf hsUpdateUI];
+            [weakSelf dtUpdateUI];
         }
     }];
     
@@ -152,7 +152,7 @@
                 weakSelf.giftImageView.hidden = micModel.isSelected && weakSelf.micType == HSAudioMic ? NO : YES;
             }
         } else {
-            [weakSelf hsUpdateUI];
+            [weakSelf dtUpdateUI];
         }
     }];
     
@@ -197,7 +197,7 @@
     }];
 }
 
-- (void)hsUpdateUI {
+- (void)dtUpdateUI {
     if (self.model.user == nil) {
         self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
         [self showUserName:@"点击上麦" showOwner:false];
@@ -242,7 +242,7 @@
 
 - (void)setModel:(AudioRoomMicModel *)model {
     _model = model;
-    [self hsUpdateUI];
+    [self dtUpdateUI];
 }
 
 - (void)onTapHead:(UITapGestureRecognizer *)tap {

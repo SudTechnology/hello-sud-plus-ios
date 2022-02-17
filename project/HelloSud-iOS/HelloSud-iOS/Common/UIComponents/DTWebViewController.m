@@ -24,20 +24,20 @@
                       forKeyPath:NSStringFromSelector(@selector(title))];
 }
 
-- (void)hsAddViews {
-    [super hsAddViews];
+- (void)dtAddViews {
+    [super dtAddViews];
     [self.view addSubview:self.webView];
 }
 
-- (void)hsLayoutViews {
-    [super hsLayoutViews];
+- (void)dtLayoutViews {
+    [super dtLayoutViews];
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
 }
 
-- (void)hsConfigEvents {
-    [super hsConfigEvents];
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
     //添加监测网页标题title的观察者
     [self.webView addObserver:self
                    forKeyPath:@"title"

@@ -16,7 +16,7 @@
 
 @implementation DTAlertView
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.hsWidth = 296;
     self.isHitTest = false;
 }

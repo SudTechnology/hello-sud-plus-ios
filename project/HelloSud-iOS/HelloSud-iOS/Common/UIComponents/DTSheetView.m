@@ -14,7 +14,7 @@
 
 @implementation DTSheetView
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.isHitTest = true;
 }
 

@@ -36,7 +36,7 @@
     }
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self.view addSubview:self.iconImageView];
     [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.nameTitleLabel];
@@ -116,7 +116,7 @@
     }];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(126);
         make.left.mas_equalTo(30);

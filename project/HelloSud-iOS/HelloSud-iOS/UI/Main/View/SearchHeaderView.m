@@ -18,11 +18,11 @@
 
 @implementation SearchHeaderView
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.backgroundColor = UIColor.whiteColor;
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.headerView];
     [self addSubview:self.userNameLabel];
     [self addSubview:self.userIdLabel];
@@ -31,7 +31,7 @@
     [self.textFieldView addSubview:self.searchBtn];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(7 + kAppSafeTop);
         make.left.mas_equalTo(24);
@@ -66,7 +66,7 @@
     }];
 }
 
-- (void)hsUpdateUI {
+- (void)dtUpdateUI {
     AccountUserModel *userInfo = AppManager.shared.loginUserInfo;
     self.userNameLabel.text = userInfo.name;
     self.userIdLabel.text = [NSString stringWithFormat:@"用户ID %@", userInfo.userID];

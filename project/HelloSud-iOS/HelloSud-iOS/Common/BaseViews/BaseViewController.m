@@ -16,18 +16,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"navi_back"] style:UIBarButtonItemStylePlain target:self action:@selector(hsNavigationBackClick)];
-    [self hsAddViews];
-    [self hsLayoutViews];
-    [self hsConfigEvents];
-    [self hsConfigUI];
-    [self hsUpdateUI];
-    self.hiddenNavigationBar = [self hsIsHidenNavigationBar];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navi_back"] style:UIBarButtonItemStylePlain target:self action:@selector(dtNavigationBackClick)];
+    [self dtAddViews];
+    [self dtLayoutViews];
+    [self dtConfigEvents];
+    [self dtConfigUI];
+    [self dtUpdateUI];
+    self.hiddenNavigationBar = [self dtIsHidenNavigationBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.hiddenNavigationBar = [self hsIsHidenNavigationBar];
+    self.hiddenNavigationBar = [self dtIsHidenNavigationBar];
 }
 
 - (void)setHiddenNavigationBar:(BOOL)hiddenNavigationBar {
@@ -36,37 +36,37 @@
 }
 
 /// 是否隐藏导航栏,子类覆盖返回是否需要隐藏导航栏，默认不隐藏
-- (BOOL)hsIsHidenNavigationBar {
+- (BOOL)dtIsHidenNavigationBar {
     return NO;
 }
 
 /// 导航栏点击返回，子类实现是否处理格外逻辑
-- (void)hsNavigationBackClick {
+- (void)dtNavigationBackClick {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 /// 增加子view
-- (void)hsAddViews {
+- (void)dtAddViews {
     
 }
 
 /// 布局视图
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     
 }
 
 /// 配置事件
-- (void)hsConfigEvents {
+- (void)dtConfigEvents {
     
 }
 
 /// 试图初始化
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     
 }
 
 /// 更新UI
-- (void)hsUpdateUI {
+- (void)dtUpdateUI {
     
 }
 

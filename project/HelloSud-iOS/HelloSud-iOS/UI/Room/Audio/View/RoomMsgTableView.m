@@ -18,7 +18,7 @@
 
 @implementation RoomMsgTableView
 
-- (void)hsAddViews {
+- (void)dtAddViews {
 //    AudioUserModel *user = [AudioUserModel makeUserWithUserID:@"123" name:@"nihao" icon:@"" sex:1];
 //    AudioMsgGiftModel *giftModel = [AudioMsgGiftModel makeMsgWithGiftID:100 giftCount:10 toUser: user];
 //    [self addMsg:[AudioMsgTextModel makeMsg:@"hello"]];
@@ -26,7 +26,7 @@
     [self addSubview:self.tableView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
     }];

@@ -21,13 +21,13 @@
     self.sizeLabel.text = model.size;
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.tagView];
     [self addSubview:self.titleLabel];
     [self addSubview:self.sizeLabel];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self);
         make.centerY.mas_equalTo(self);
