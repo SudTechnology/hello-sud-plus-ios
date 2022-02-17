@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 加载URL地址
 @property(nonatomic, copy)NSString *url;
+@property(nonatomic, assign)BOOL isPresent;
 @end
 
 NS_ASSUME_NONNULL_END

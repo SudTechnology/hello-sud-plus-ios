@@ -95,6 +95,23 @@
     attrStr_4.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
     attrStr_4.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
     
+    [attrStr_1 yy_setTextHighlightRange:attrStr_1.yy_rangeOfAll color:[UIColor colorWithHexString:@"#1A1A1A" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+        WebViewController *web = WebViewController.new;
+        web.url = AppManager.shared.appProtocolURL.absoluteString;
+        web.isPresent = true;
+        BaseNavigationViewController *nv = [[BaseNavigationViewController alloc] initWithRootViewController:web];
+        nv.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:nv animated:YES completion:nil];
+    }];
+    [attrStr_3 yy_setTextHighlightRange:attrStr_3.yy_rangeOfAll color:[UIColor colorWithHexString:@"#1A1A1A" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+        WebViewController *web = WebViewController.new;
+        web.url = AppManager.shared.appPrivacyURL.absoluteString;
+        web.isPresent = true;
+        BaseNavigationViewController *nv = [[BaseNavigationViewController alloc] initWithRootViewController:web];
+        nv.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:nv animated:YES completion:nil];
+    }];
+    
     [attrTitle appendAttributedString:attrStr_0];
     [attrTitle appendAttributedString:attrStr_1];
     [attrTitle appendAttributedString:attrStr_2];
