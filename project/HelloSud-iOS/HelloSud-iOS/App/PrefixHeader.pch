@@ -46,5 +46,7 @@
 #import "GameSudManager.h"
 #import "AudioRoomManager.h"
 #import "GameManager.h"
+#import "LoginService.h"
+
 
 #endif /* PrefixHeader_pch */
