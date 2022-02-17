@@ -11,7 +11,6 @@
 		445EAA7727990035000DCC72 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7627990035000DCC72 /* LoginViewController.m */; };
 		445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7927990C71000DCC72 /* BaseViewController.m */; };
 		445EAA8027994160000DCC72 /* GameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA7F27994160000DCC72 /* GameListViewController.m */; };
-		445EAA8D27995D5F000DCC72 /* NSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA8C27995D5F000DCC72 /* NSArray+Masonry.m */; };
 		445EAA9427996AC6000DCC72 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E582799491700650209 /* BaseNavigationViewController.m */; };
 		445EAA9727996BC6000DCC72 /* GameListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA9627996BC6000DCC72 /* GameListTableViewCell.m */; };
 		445EAA9F27997485000DCC72 /* BaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAA9E27997485000DCC72 /* BaseCollectionViewCell.m */; };
@@ -19,7 +18,6 @@
 		445EAAA6279A55E9000DCC72 /* AudioRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAA5279A55E9000DCC72 /* AudioRoomViewController.m */; };
 		445EAAAA279A562C000DCC72 /* RoomNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAA9279A562C000DCC72 /* RoomNaviView.m */; };
 		445EAAAD279A5CF6000DCC72 /* RoomOperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAAC279A5CF6000DCC72 /* RoomOperatorView.m */; };
-		445EAAB0279A62F1000DCC72 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAAF279A62F1000DCC72 /* UIView+Extension.m */; };
 		445EAAB3279A65B9000DCC72 /* RoomMsgTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAB2279A65B9000DCC72 /* RoomMsgTableView.m */; };
 		445EAAB9279A67F3000DCC72 /* BaseMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAAB8279A67F3000DCC72 /* BaseMsgCell.m */; };
 		445EAABC279A6DA0000DCC72 /* HSRoomTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAABB279A6DA0000DCC72 /* HSRoomTextTableViewCell.m */; };
@@ -47,7 +45,6 @@
 		445EAB07279FD15F000DCC72 /* AudioRoomViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB06279FD15F000DCC72 /* AudioRoomViewController+Game.m */; };
 		445EAB0A279FD44F000DCC72 /* RoomGameInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB09279FD44F000DCC72 /* RoomGameInfoModel.m */; };
 		445EAB0D279FD930000DCC72 /* GameMicContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB0C279FD930000DCC72 /* GameMicContentView.m */; };
-		445EAB14279FFECC000DCC72 /* HttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB13279FFECC000DCC72 /* HttpService.m */; };
 		445EAB1727A00F27000DCC72 /* GameListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB1627A00F27000DCC72 /* GameListModel.m */; };
 		445EAB1A27A0101F000DCC72 /* EnterRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB1927A0101F000DCC72 /* EnterRoomModel.m */; };
 		445EAB1D27A0108E000DCC72 /* ExitRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB1C27A0108E000DCC72 /* ExitRoomModel.m */; };
@@ -109,7 +106,6 @@
 		6C076EC427A1442500650209 /* AudioRoomViewController+Voice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EC327A1442500650209 /* AudioRoomViewController+Voice.m */; };
 		6C076EC727A152F900650209 /* RippleAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EC627A152F900650209 /* RippleAnimationView.m */; };
 		6C076ECA27A23E9300650209 /* MicOperateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EC927A23E9300650209 /* MicOperateView.m */; };
-		6C076ECE27A24E8800650209 /* NSError+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ECD27A24E8800650209 /* NSError+Custom.m */; };
 		6C076ED127A253C100650209 /* RespUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED027A253C100650209 /* RespUserInfoModel.m */; };
 		6C076ED427A274FE00650209 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED327A274FE00650209 /* UserManager.m */; };
 		6C076ED727A298FC00650209 /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED627A298FC00650209 /* GameManager.m */; };
@@ -119,18 +115,22 @@
 		6C192E58279523B100553034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E57279523B100553034 /* Assets.xcassets */; };
 		6C192E5B279523B100553034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E59279523B100553034 /* LaunchScreen.storyboard */; };
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
-		6C192E732797B19100553034 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E722797B19100553034 /* UIColor+Extension.m */; };
 		6C192E772797BB7B00553034 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E762797BB7B00553034 /* BaseView.m */; };
-		6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E852797C86D00553034 /* UIDevice+Extension.m */; };
-		6C192E912797E31200553034 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8C2797E31200553034 /* AppUtil.m */; };
 		6C192E932797E31200553034 /* SheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8F2797E31200553034 /* SheetView.m */; };
 		6C1D007827BA0400000F0998 /* AgoraAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngine.m */; };
 		6C1D007B27BA0DC1000F0998 /* GameCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007927BA0DC1000F0998 /* GameCommonModel.m */; };
 		6C239FEF27B39BD200B19FE4 /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FEE27B39BD200B19FE4 /* ShowViewController.m */; };
 		6C239FF827B39CBE00B19FE4 /* One2OneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FF727B39CBE00B19FE4 /* One2OneViewController.m */; };
 		6C239FFB27B3AAD900B19FE4 /* ExChangeGameMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FFA27B3AAD900B19FE4 /* ExChangeGameMsgModel.m */; };
-		6C6DD5E227B4C95E0061DD67 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD5E127B4C95E0061DD67 /* ToastUtil.m */; };
-		9DD9CB34279A5CA50054B91D /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9CB33279A5CA50054B91D /* DeviceUtil.m */; };
+		BC2101199D87BB6081A8FBC0 /* NSError+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5A0981935974C33E8B /* NSError+Custom.m */; };
+		BC210452F6884908D768A126 /* NSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106C0581A7D8986B9FC83 /* NSArray+Masonry.m */; };
+		BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102EB58A8CE4A527A5167 /* ToastUtil.m */; };
+		BC2106F693B8FDA87CC699D2 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210414A9AE16CEC8607D9D /* AppUtil.m */; };
+		BC2107427C1CF2D51754990F /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F6353BF8EDAB3DC23C6 /* UIColor+Extension.m */; };
+		BC210868A0B206FC2641B7C6 /* HttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C175D2FCB747B52B179 /* HttpService.m */; };
+		BC210B53D5A4A718BC45B63C /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104782AE3890C13208B73 /* UIDevice+Extension.m */; };
+		BC210D70BDEB097F49794C9B /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210018D3BC93246BBB40FE /* UIView+Extension.m */; };
+		BC210FDF9C7CAC234D035EF6 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105042E549C236540DC05 /* DeviceUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -154,8 +154,6 @@
 		445EAA7927990C71000DCC72 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		445EAA7E27994160000DCC72 /* GameListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameListViewController.h; sourceTree = "<group>"; };
 		445EAA7F27994160000DCC72 /* GameListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameListViewController.m; sourceTree = "<group>"; };
-		445EAA8B27995D5F000DCC72 /* NSArray+Masonry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Masonry.h"; sourceTree = "<group>"; };
-		445EAA8C27995D5F000DCC72 /* NSArray+Masonry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Masonry.m"; sourceTree = "<group>"; };
 		445EAA9527996BC6000DCC72 /* GameListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameListTableViewCell.h; sourceTree = "<group>"; };
 		445EAA9627996BC6000DCC72 /* GameListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameListTableViewCell.m; sourceTree = "<group>"; };
 		445EAA9D27997485000DCC72 /* BaseCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCollectionViewCell.h; sourceTree = "<group>"; };
@@ -168,8 +166,6 @@
 		445EAAA9279A562C000DCC72 /* RoomNaviView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomNaviView.m; sourceTree = "<group>"; };
 		445EAAAB279A5CF6000DCC72 /* RoomOperatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomOperatorView.h; sourceTree = "<group>"; };
 		445EAAAC279A5CF6000DCC72 /* RoomOperatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomOperatorView.m; sourceTree = "<group>"; };
-		445EAAAE279A62F1000DCC72 /* UIView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		445EAAAF279A62F1000DCC72 /* UIView+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		445EAAB1279A65B9000DCC72 /* RoomMsgTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomMsgTableView.h; sourceTree = "<group>"; };
 		445EAAB2279A65B9000DCC72 /* RoomMsgTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomMsgTableView.m; sourceTree = "<group>"; };
 		445EAAB7279A67F3000DCC72 /* BaseMsgCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseMsgCell.h; sourceTree = "<group>"; };
@@ -224,8 +220,6 @@
 		445EAB09279FD44F000DCC72 /* RoomGameInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomGameInfoModel.m; sourceTree = "<group>"; };
 		445EAB0B279FD930000DCC72 /* GameMicContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameMicContentView.h; sourceTree = "<group>"; };
 		445EAB0C279FD930000DCC72 /* GameMicContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameMicContentView.m; sourceTree = "<group>"; };
-		445EAB12279FFECC000DCC72 /* HttpService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpService.h; sourceTree = "<group>"; };
-		445EAB13279FFECC000DCC72 /* HttpService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HttpService.m; sourceTree = "<group>"; };
 		445EAB1527A00F27000DCC72 /* GameListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameListModel.h; sourceTree = "<group>"; };
 		445EAB1627A00F27000DCC72 /* GameListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameListModel.m; sourceTree = "<group>"; };
 		445EAB1827A0101F000DCC72 /* EnterRoomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterRoomModel.h; sourceTree = "<group>"; };
@@ -355,8 +349,6 @@
 		6C076EC627A152F900650209 /* RippleAnimationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RippleAnimationView.m; sourceTree = "<group>"; };
 		6C076EC827A23E9300650209 /* MicOperateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MicOperateView.h; sourceTree = "<group>"; };
 		6C076EC927A23E9300650209 /* MicOperateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MicOperateView.m; sourceTree = "<group>"; };
-		6C076ECC27A24E8800650209 /* NSError+Custom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSError+Custom.h"; sourceTree = "<group>"; };
-		6C076ECD27A24E8800650209 /* NSError+Custom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+Custom.m"; sourceTree = "<group>"; };
 		6C076ECF27A253C100650209 /* RespUserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespUserInfoModel.h; sourceTree = "<group>"; };
 		6C076ED027A253C100650209 /* RespUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespUserInfoModel.m; sourceTree = "<group>"; };
 		6C076ED227A274FE00650209 /* UserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
@@ -373,19 +365,12 @@
 		6C192E5A279523B100553034 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C192E5C279523B100553034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C192E5D279523B100553034 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6C192E712797B19100553034 /* UIColor+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
-		6C192E722797B19100553034 /* UIColor+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
 		6C192E752797BB7B00553034 /* BaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
 		6C192E762797BB7B00553034 /* BaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
 		6C192E7F2797C63100553034 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		6C192E802797C63100553034 /* Constant.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
 		6C192E822797C65F00553034 /* CommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonHeader.h; sourceTree = "<group>"; };
-		6C192E842797C86D00553034 /* UIDevice+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extension.h"; sourceTree = "<group>"; };
-		6C192E852797C86D00553034 /* UIDevice+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extension.m"; sourceTree = "<group>"; };
 		6C192E882797E2C700553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		6C192E8A2797E31200553034 /* AppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtil.h; sourceTree = "<group>"; };
-		6C192E8B2797E31200553034 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
-		6C192E8C2797E31200553034 /* AppUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
 		6C192E8F2797E31200553034 /* SheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheetView.m; sourceTree = "<group>"; };
 		6C192E902797E31200553034 /* SheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheetView.h; sourceTree = "<group>"; };
 		6C1D007627BA0400000F0998 /* AgoraAudioEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraAudioEngine.h; sourceTree = "<group>"; };
@@ -398,12 +383,27 @@
 		6C239FF727B39CBE00B19FE4 /* One2OneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = One2OneViewController.m; sourceTree = "<group>"; };
 		6C239FF927B3AAD900B19FE4 /* ExChangeGameMsgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExChangeGameMsgModel.h; sourceTree = "<group>"; };
 		6C239FFA27B3AAD900B19FE4 /* ExChangeGameMsgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExChangeGameMsgModel.m; sourceTree = "<group>"; };
-		6C6DD5E027B4C95E0061DD67 /* ToastUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToastUtil.h; sourceTree = "<group>"; };
-		6C6DD5E127B4C95E0061DD67 /* ToastUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToastUtil.m; sourceTree = "<group>"; };
 		6C89D9C9279902A9001D52F9 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		9DD9CB32279A5CA50054B91D /* DeviceUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
-		9DD9CB33279A5CA50054B91D /* DeviceUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceUtil.m; sourceTree = "<group>"; };
+		BC210018D3BC93246BBB40FE /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		BC2100EC41AFF28046FF7B87 /* NSError+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Custom.h"; sourceTree = "<group>"; };
+		BC21028A9B31B91D6B801B04 /* UIDevice+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extension.h"; sourceTree = "<group>"; };
+		BC2102EB58A8CE4A527A5167 /* ToastUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastUtil.m; sourceTree = "<group>"; };
+		BC210414A9AE16CEC8607D9D /* AppUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
+		BC21046606D40897C9A2BC55 /* ToastUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastUtil.h; sourceTree = "<group>"; };
+		BC2104782AE3890C13208B73 /* UIDevice+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extension.m"; sourceTree = "<group>"; };
+		BC2104E0C4F556A77F556FE4 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		BC2105042E549C236540DC05 /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUtil.m; sourceTree = "<group>"; };
+		BC2105A5541CEAB895D23262 /* HttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpService.h; sourceTree = "<group>"; };
+		BC21060831A4FEB9BEE1510A /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
+		BC2106C0581A7D8986B9FC83 /* NSArray+Masonry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Masonry.m"; sourceTree = "<group>"; };
+		BC21088A4C435532A51CB545 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		BC2108E4617436951A41ABBE /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		BC210C175D2FCB747B52B179 /* HttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpService.m; sourceTree = "<group>"; };
+		BC210D3011853BFBEBA259DB /* NSArray+Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Masonry.h"; sourceTree = "<group>"; };
+		BC210D5A0981935974C33E8B /* NSError+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Custom.m"; sourceTree = "<group>"; };
+		BC210F6353BF8EDAB3DC23C6 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		BC210F9ABB08F9D04A052246 /* AppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtil.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -607,15 +607,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		445EAB0E279FFE09000DCC72 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				445EAB12279FFECC000DCC72 /* HttpService.h */,
-				445EAB13279FFECC000DCC72 /* HttpService.m */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		44DF037E2796A981006EE6AC /* RTC */ = {
 			isa = PBXGroup;
 			children = (
@@ -665,11 +656,9 @@
 		44DF03902796B22C006EE6AC /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6C192E742797BB2000553034 /* Base */,
-				445EAB0E279FFE09000DCC72 /* Network */,
-				6C192E892797E31200553034 /* Utils */,
-				6C192E8E2797E31200553034 /* Views */,
-				6C192E702797B16E00553034 /* Extension */,
+				BC210060BE34F958814B970C /* Base */,
+				6C192E742797BB2000553034 /* BaseViews */,
+				6C192E8E2797E31200553034 /* UIComponents */,
 				6C192E822797C65F00553034 /* CommonHeader.h */,
 			);
 			path = Common;
@@ -953,24 +942,7 @@
 			path = "HelloSud-iOS";
 			sourceTree = "<group>";
 		};
-		6C192E702797B16E00553034 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				6C192E712797B19100553034 /* UIColor+Extension.h */,
-				6C192E722797B19100553034 /* UIColor+Extension.m */,
-				6C192E842797C86D00553034 /* UIDevice+Extension.h */,
-				6C192E852797C86D00553034 /* UIDevice+Extension.m */,
-				445EAA8B27995D5F000DCC72 /* NSArray+Masonry.h */,
-				445EAA8C27995D5F000DCC72 /* NSArray+Masonry.m */,
-				445EAAAE279A62F1000DCC72 /* UIView+Extension.h */,
-				445EAAAF279A62F1000DCC72 /* UIView+Extension.m */,
-				6C076ECC27A24E8800650209 /* NSError+Custom.h */,
-				6C076ECD27A24E8800650209 /* NSError+Custom.m */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
-		6C192E742797BB2000553034 /* Base */ = {
+		6C192E742797BB2000553034 /* BaseViews */ = {
 			isa = PBXGroup;
 			children = (
 				6C192E752797BB7B00553034 /* BaseView.h */,
@@ -992,7 +964,7 @@
 				445EAAFF279F9901000DCC72 /* BaseTextView.h */,
 				445EAB00279F9901000DCC72 /* BaseTextView.m */,
 			);
-			path = Base;
+			path = BaseViews;
 			sourceTree = "<group>";
 		};
 		6C192E872797E28600553034 /* Recovered References */ = {
@@ -1003,21 +975,7 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		6C192E892797E31200553034 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				6C192E8A2797E31200553034 /* AppUtil.h */,
-				6C192E8C2797E31200553034 /* AppUtil.m */,
-				6C192E8B2797E31200553034 /* Constant.h */,
-				9DD9CB32279A5CA50054B91D /* DeviceUtil.h */,
-				9DD9CB33279A5CA50054B91D /* DeviceUtil.m */,
-				6C6DD5E027B4C95E0061DD67 /* ToastUtil.h */,
-				6C6DD5E127B4C95E0061DD67 /* ToastUtil.m */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		6C192E8E2797E31200553034 /* Views */ = {
+		6C192E8E2797E31200553034 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
 				6C192E902797E31200553034 /* SheetView.h */,
@@ -1037,7 +995,7 @@
 				44F29F4E27B2474900F57DEE /* PaddingLabel.h */,
 				44F29F4F27B2474900F57DEE /* PaddingLabel.m */,
 			);
-			path = Views;
+			path = UIComponents;
 			sourceTree = "<group>";
 		};
 		6C1D007527BA03DC000F0998 /* Agora */ = {
@@ -1054,6 +1012,56 @@
 			children = (
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		BC210060BE34F958814B970C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				BC210D1343990E4440E57238 /* Network */,
+				BC21072D5C3283C6595AF15A /* Extension */,
+				BC210D84E0A8533AF1EC7625 /* Utils */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		BC21072D5C3283C6595AF15A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BC2104E0C4F556A77F556FE4 /* UIColor+Extension.h */,
+				BC210F6353BF8EDAB3DC23C6 /* UIColor+Extension.m */,
+				BC21028A9B31B91D6B801B04 /* UIDevice+Extension.h */,
+				BC2104782AE3890C13208B73 /* UIDevice+Extension.m */,
+				BC210D3011853BFBEBA259DB /* NSArray+Masonry.h */,
+				BC2106C0581A7D8986B9FC83 /* NSArray+Masonry.m */,
+				BC2108E4617436951A41ABBE /* UIView+Extension.h */,
+				BC210018D3BC93246BBB40FE /* UIView+Extension.m */,
+				BC2100EC41AFF28046FF7B87 /* NSError+Custom.h */,
+				BC210D5A0981935974C33E8B /* NSError+Custom.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		BC210D1343990E4440E57238 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BC2105A5541CEAB895D23262 /* HttpService.h */,
+				BC210C175D2FCB747B52B179 /* HttpService.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		BC210D84E0A8533AF1EC7625 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BC210F9ABB08F9D04A052246 /* AppUtil.h */,
+				BC210414A9AE16CEC8607D9D /* AppUtil.m */,
+				BC21088A4C435532A51CB545 /* Constant.h */,
+				BC21060831A4FEB9BEE1510A /* DeviceUtil.h */,
+				BC2105042E549C236540DC05 /* DeviceUtil.m */,
+				BC21046606D40897C9A2BC55 /* ToastUtil.h */,
+				BC2102EB58A8CE4A527A5167 /* ToastUtil.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		E65466148933C05BB06C9A97 /* Frameworks */ = {
@@ -1195,14 +1203,12 @@
 				44F29F5F27BBB3D700F57DEE /* ChangeRTCViewController.m in Sources */,
 				445EAAA6279A55E9000DCC72 /* AudioRoomViewController.m in Sources */,
 				445EAB3027A12948000DCC72 /* LoginModel.m in Sources */,
-				445EAAB0279A62F1000DCC72 /* UIView+Extension.m in Sources */,
 				445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */,
 				445EAAD9279AAF69000DCC72 /* GiftUserCollectionViewCell.m in Sources */,
 				445EAB04279FB028000DCC72 /* SweetPromptView.m in Sources */,
 				6C076E97279EA9B200650209 /* AudioUserModel.m in Sources */,
 				445EAAFE279F97D0000DCC72 /* RoomInputView.m in Sources */,
 				6C076EC727A152F900650209 /* RippleAnimationView.m in Sources */,
-				445EAA8D27995D5F000DCC72 /* NSArray+Masonry.m in Sources */,
 				445EAAEF279E7CCF000DCC72 /* SearchHeaderView.m in Sources */,
 				445EAB3C27A1428C000DCC72 /* GameLoginModel.m in Sources */,
 				44DF03A52797E6FC006EE6AC /* GamePlayerStateModel.m in Sources */,
@@ -1214,13 +1220,11 @@
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				6C076EB6279FF3FF00650209 /* GiftModel.m in Sources */,
 				445EAAF5279E810C000DCC72 /* BaseCollectionReusableView.m in Sources */,
-				6C192E732797B19100553034 /* UIColor+Extension.m in Sources */,
 				6C076EA6279F98AA00650209 /* AppManager.m in Sources */,
 				6C076ED427A274FE00650209 /* UserManager.m in Sources */,
 				44F29F6527BBB55900F57DEE /* ChangeRTCModel.m in Sources */,
 				445EAB07279FD15F000DCC72 /* AudioRoomViewController+Game.m in Sources */,
 				445EAB3327A1325F000DCC72 /* ConfigModel.m in Sources */,
-				445EAB14279FFECC000DCC72 /* HttpService.m in Sources */,
 				445EAB1727A00F27000DCC72 /* GameListModel.m in Sources */,
 				445EAAE2279ABB22000DCC72 /* BaseAlertView.m in Sources */,
 				6C076E71279E429E00650209 /* ZegoAudioEngine.m in Sources */,
@@ -1241,7 +1245,6 @@
 				6C192E5E279523B100553034 /* main.m in Sources */,
 				445EAADC279AB262000DCC72 /* RoomGiftContentView.m in Sources */,
 				44DF03A22797E467006EE6AC /* GameKeyWordHitModel.m in Sources */,
-				9DD9CB34279A5CA50054B91D /* DeviceUtil.m in Sources */,
 				6C076EC427A1442500650209 /* AudioRoomViewController+Voice.m in Sources */,
 				445EAA7727990035000DCC72 /* LoginViewController.m in Sources */,
 				44F29F5027B2474900F57DEE /* PaddingLabel.m in Sources */,
@@ -1271,11 +1274,9 @@
 				445EAAAD279A5CF6000DCC72 /* RoomOperatorView.m in Sources */,
 				445EAA9F27997485000DCC72 /* BaseCollectionViewCell.m in Sources */,
 				445EAB2C27A013B1000DCC72 /* RoomListModel.m in Sources */,
-				6C192E912797E31200553034 /* AppUtil.m in Sources */,
 				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
 				6C076E94279EA7BF00650209 /* AudioMsgBaseModel.m in Sources */,
 				445EAAD2279AA64E000DCC72 /* SwitchRoomModeView.m in Sources */,
-				6C076ECE27A24E8800650209 /* NSError+Custom.m in Sources */,
 				6C076EA1279EC62600650209 /* AudioMsgMicModel.m in Sources */,
 				6C076EB3279FF3DD00650209 /* GiftManager.m in Sources */,
 				445EAB2327A01233000DCC72 /* SwitchMicModel.m in Sources */,
@@ -1285,15 +1286,12 @@
 				445EAABC279A6DA0000DCC72 /* HSRoomTextTableViewCell.m in Sources */,
 				6C076E9B279EC4F100650209 /* AudioMsgTextModel.m in Sources */,
 				6C076EAA279F993900650209 /* AccountUserModel.m in Sources */,
-				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
 				445EAAF8279E8183000DCC72 /* HomeHeaderReusableView.m in Sources */,
 				445EAAE8279AC53E000DCC72 /* TextAlertView.m in Sources */,
 				6C076E572799450900650209 /* HSSettingViewController.m in Sources */,
-				6C6DD5E227B4C95E0061DD67 /* ToastUtil.m in Sources */,
 				445EAB3627A1330D000DCC72 /* BaseRespModel.m in Sources */,
 				445EAADF279AB2D9000DCC72 /* GiftItemCollectionViewCell.m in Sources */,
 				6C076EDA27A2993C00650209 /* RespGameInfoModel.m in Sources */,
-				6C192E862797C86E00553034 /* UIDevice+Extension.m in Sources */,
 				445EAAFB279E8B10000DCC72 /* HomeFooterReusableView.m in Sources */,
 				445EAB2027A01176000DCC72 /* MatchRoomModel.m in Sources */,
 				445EAAC9279A98DB000DCC72 /* RoomMsgBgView.m in Sources */,
@@ -1308,6 +1306,15 @@
 				6C076E53279940A400650209 /* MainTabBarController.m in Sources */,
 				44F29F4D27B21A4D00F57DEE /* AudioMsgSystemModel.m in Sources */,
 				445EAB1D27A0108E000DCC72 /* ExitRoomModel.m in Sources */,
+				BC210868A0B206FC2641B7C6 /* HttpService.m in Sources */,
+				BC2107427C1CF2D51754990F /* UIColor+Extension.m in Sources */,
+				BC210B53D5A4A718BC45B63C /* UIDevice+Extension.m in Sources */,
+				BC210452F6884908D768A126 /* NSArray+Masonry.m in Sources */,
+				BC210D70BDEB097F49794C9B /* UIView+Extension.m in Sources */,
+				BC2101199D87BB6081A8FBC0 /* NSError+Custom.m in Sources */,
+				BC2106F693B8FDA87CC699D2 /* AppUtil.m in Sources */,
+				BC210FDF9C7CAC234D035EF6 /* DeviceUtil.m in Sources */,
+				BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
