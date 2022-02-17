@@ -1,18 +1,18 @@
 //
-//  WebViewController.m
+//  DTWebViewController.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/20.
 //
 
-#import "WebViewController.h"
+#import "DTWebViewController.h"
 #import <WebKit/WebKit.h>
 
-@interface WebViewController ()<WKNavigationDelegate>
+@interface DTWebViewController ()<WKNavigationDelegate>
 @property(nonatomic, strong)WKWebView *webView;
 @end
 
-@implementation WebViewController
+@implementation DTWebViewController
 
 - (void)hsNavigationBackClick {
     if (self.isPresent) {

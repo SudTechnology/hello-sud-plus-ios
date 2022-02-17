@@ -1,5 +1,5 @@
 //
-//  AlertView.h
+//  DTAlertView.h
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/21.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AlertView : BaseAlertView
+@interface DTAlertView : BaseAlertView
 
 /// 展示中心弹窗 - （内容自定义）
 /// - Parameters:

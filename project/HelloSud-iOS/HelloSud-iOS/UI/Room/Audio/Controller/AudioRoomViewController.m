@@ -118,7 +118,7 @@
 - (void)hsConfigEvents {
     WeakSelf
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
-        [SheetView show:[[RoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
+        [DTSheetView show:[[RoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
             [weakSelf.operatorView resetAllSelectedUser];
         }];
     };
@@ -152,7 +152,7 @@
         [weakSelf handleMicTap:micModel];
     };
     self.naviView.closeTapBlock = ^(UIButton *sender) {
-        [AlertView showTextAlert:@"确认离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+        [DTAlertView showTextAlert:@"确认离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 如果在麦位上，则下麦
                 if (AudioRoomManager.shared.micIndex >= 0) {
@@ -171,10 +171,10 @@
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
         SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
         [modeView reloadData:weakSelf.roomType == HSAudio];
-        [SheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
+        [DTSheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
         }];
         modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
-            [SheetView close];
+            [DTSheetView close];
             if (weakSelf.gameInfoModel.gameState == 2) {
                 [ToastUtil show:@"正在游戏中, 无法切换游戏"];
                 return;
@@ -232,12 +232,12 @@
         v.downMicCallback = ^(UIButton *sender) {
             // 下麦
             [AudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
-            [SheetView close];
+            [DTSheetView close];
         };
         v.cancelCallback = ^(UIButton *sender) {
-            [SheetView close];
+            [DTSheetView close];
         };
-        [SheetView show:v rootView:self.view onCloseCallback:^{
+        [DTSheetView show:v rootView:self.view onCloseCallback:^{
                     
         }];
     }
@@ -285,7 +285,7 @@
                     [self startPublish:[NSString stringWithFormat:@"%u", arc4random()]];
                 } else {
                     // 提示开启权限
-                    [AlertView showTextAlert:@"无法访问麦克风，请到“设置-隐私“中开启麦克风访问权限" sureText:@"去开启" cancelText:@"暂时不用" onSureCallback:^{
+                    [DTAlertView showTextAlert:@"无法访问麦克风，请到“设置-隐私“中开启麦克风访问权限" sureText:@"去开启" cancelText:@"暂时不用" onSureCallback:^{
                         NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                         if (url && [[UIApplication sharedApplication]canOpenURL:url]) {
                             [[UIApplication sharedApplication] openURL:url];
@@ -337,7 +337,7 @@
         return;
     }
     if ([giftModel.animateType isEqualToString:@"svga"]) {
-        SVGAPlayerView *v = SVGAPlayerView.new;
+        DTSVGAPlayerView *v = DTSVGAPlayerView.new;
         NSURL *url = [NSURL fileURLWithPath: giftModel.animateURL];
         [v setURL:url];
         [self.view addSubview:v];

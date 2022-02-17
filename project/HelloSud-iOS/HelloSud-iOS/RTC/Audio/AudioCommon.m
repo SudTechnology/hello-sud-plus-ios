@@ -5,7 +5,7 @@
 //  Created by kaniel on 2022/1/24.
 //
 
-#import "HSAudioCommon.h"
+#import "AudioCommon.h"
 
 /// 音频流帧参数
 @implementation HSAudioEngineFrameParamModel

@@ -1,14 +1,14 @@
 //
-//  SVGAPlayerView.m
+//  DTSVGAPlayerView.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
 //
 
-#import "SVGAPlayerView.h"
+#import "DTSVGAPlayerView.h"
 #import <SVGAPlayer/SVGAPlayer.h>
 #import <SVGAPlayer/SVGAParser.h>
-@interface SVGAPlayerView()<SVGAPlayerDelegate>
+@interface DTSVGAPlayerView()<SVGAPlayerDelegate>
 @property(nonatomic, strong)SVGAPlayer *svgaPlayer;
 @property(nonatomic, strong)SVGAParser *svgaParser;
 @property(nonatomic, strong)NSError *parserError;
@@ -17,7 +17,7 @@
 @property(nonatomic, assign)BOOL isNeedToPlay;
 @end
 
-@implementation SVGAPlayerView
+@implementation DTSVGAPlayerView
 - (void)setContentMode:(UIViewContentMode)contentMode {
     self.svgaPlayer.contentMode = contentMode;
 }
