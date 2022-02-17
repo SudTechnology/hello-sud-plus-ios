@@ -99,7 +99,7 @@
     viewSize.width = kScreenWidth * scale;
     viewSize.height = kScreenHeight * scale;
     ViewGameRect *viewRect = [[ViewGameRect alloc] init];
-    viewRect.top = (kStatusBarHeight + 120) * scale;
+    viewRect.top = (kStatusBarHeight + 120 + 20) * scale;
     viewRect.left = 0;
     viewRect.bottom = (kAppSafeBottom + 150) * scale;
     viewRect.right = 0;
@@ -151,6 +151,12 @@
         NSLog(@"游戏状态");
         GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
         self.gameInfoModel.gameState = m.gameState;
+        
+        if (m.gameState == 2 && [AppManager.shared.loginUserInfo.userID isEqualToString:GameManager.shared.captainUserId]) {
+            self.isShowEndGame = true;
+        } else {
+            self.isShowEndGame = false;
+        }
     }  else if ([state isEqualToString:MG_COMMON_GAME_ASR]) {
         NSLog(@"ASR");
         GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
