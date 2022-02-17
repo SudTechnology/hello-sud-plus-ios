@@ -1,16 +1,16 @@
 //
-//  ExChangeGameMsgModel.h
+//  RoomCmdChangeGameModel.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/2/9.
 //
 
-#import "AudioMsgBaseModel.h"
+#import "RoomBaseCMDModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏切换model
-@interface ExChangeGameMsgModel : AudioMsgBaseModel
+@interface RoomCmdChangeGameModel : RoomBaseCMDModel
 
 /// 游戏ID
 @property(nonatomic, assign)NSInteger gameID;

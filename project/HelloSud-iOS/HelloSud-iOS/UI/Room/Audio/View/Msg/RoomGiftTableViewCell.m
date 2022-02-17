@@ -28,12 +28,12 @@
 }
 
 - (void)setModel:(BaseModel *)model {
-    if ([model isKindOfClass:AudioMsgGiftModel.class]) {
-        [self setContent: (AudioMsgGiftModel *)model];
+    if ([model isKindOfClass:RoomCmdSendGiftModel.class]) {
+        [self setContent: (RoomCmdSendGiftModel *)model];
     }
 }
 
-- (void)setContent:(AudioMsgGiftModel *)model {
+- (void)setContent:(RoomCmdSendGiftModel *)model {
     self.msgLabel.attributedText = model.attrContent;
 }
 

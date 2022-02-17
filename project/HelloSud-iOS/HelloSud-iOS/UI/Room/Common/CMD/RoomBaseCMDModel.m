@@ -1,19 +1,19 @@
 //
-//  AudioMsgBaseModel.m
+//  RoomBaseCMDModel.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
 //
 
-#import "AudioMsgBaseModel.h"
+#import "RoomBaseCMDModel.h"
 
-@interface AudioMsgBaseModel(){
+@interface RoomBaseCMDModel(){
     CGFloat _cellHeight;
 }
 
 @end
 
-@implementation AudioMsgBaseModel
+@implementation RoomBaseCMDModel
 
 -(NSString *)cellName {
     return @"cell";
@@ -48,7 +48,7 @@
 
 /// 解码model
 /// @param keyValues keyValues json对象
-+ (instancetype)decodeModel:(id)keyValues {
++ (instancetype)fromJSON:(id)keyValues {
     return [self mj_objectWithKeyValues:keyValues];
 }
 @end

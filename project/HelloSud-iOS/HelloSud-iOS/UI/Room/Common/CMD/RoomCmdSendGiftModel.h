@@ -1,16 +1,16 @@
 //
-//  AudioMsgGiftModel.h
+//  RoomCmdSendGiftModel.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
 //
 
-#import "AudioMsgBaseModel.h"
+#import "RoomBaseCMDModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 礼物消息model
-@interface AudioMsgGiftModel : AudioMsgBaseModel
+@interface RoomCmdSendGiftModel : RoomBaseCMDModel
 /// 接受者
 @property(nonatomic, assign)AudioUserModel *toUser;
 /// 礼物ID
