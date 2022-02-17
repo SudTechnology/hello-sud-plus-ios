@@ -176,41 +176,9 @@
         NSString *name = AppManager.shared.loginUserInfo.name;
         NSString *userID = AppManager.shared.loginUserInfo.userID;
         if (name.length > 0) {
-            [self reqLogin:name userID:userID sucess:nil];
+            [LoginService.shared reqLogin:name userID:userID sucess:nil];
         }
     }
-}
-
-
-/// 请求登录
-/// @param name 昵称
-/// @param userID 用户ID
-- (void)reqLogin:(NSString *)name userID:(nullable NSString *)userID sucess:(EmptyBlock)success {
-    NSString *deviceId = [UIDevice currentDevice].identifierForVendor.UUIDString;
-    NSMutableDictionary *dicParam = [NSMutableDictionary dictionaryWithDictionary:@{@"nickname": name, @"deviceId": deviceId}];
-    if (userID.length > 0) {
-        dicParam[@"userId"] = [NSNumber numberWithInteger:userID.integerValue];
-    }
-    [HttpService postRequestWithApi:kBASEURL(@"login/v1") param:dicParam success:^(NSDictionary *rootDict) {
-        LoginModel *model = [LoginModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.retMsg];
-            return;
-        }
-        /// 存储用户信息
-        AppManager.shared.loginUserInfo.name = model.nickname;
-        AppManager.shared.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.userId];
-        AppManager.shared.loginUserInfo.icon = model.avatar;
-        
-        AppManager.shared.loginUserInfo.sex = 1;
-        [AppManager.shared saveLoginUserInfo];
-        
-        [AppManager.shared saveToken: model.token];
-        [AppManager.shared saveIsLogin];
-        if (success) success();
-    } failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
-    }];
 }
 
 /// APP隐私协议地址
