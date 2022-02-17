@@ -6,8 +6,8 @@
 //
 
 #import "AppManager.h"
-#import "ZegoAudioEngine.h"
-#import "AgoraAudioEngine.h"
+#import "ZegoAudioEngineImpl.h"
+#import "AgoraAudioEngineImpl.h"
 /// 用户信息缓存key
 #define kKeyLoginUserInfo @"key_login_user_info"
 /// 用户登录确认key
@@ -258,14 +258,14 @@
     if ([rtcType isEqualToString:configModel.zegoCfg.rtcType]) {
         NSLog(@"使用zego语音引擎");
         /// 使用zego语音引擎
-        [AudioEngineManager.shared makeEngine:ZegoAudioEngine.class];
+        [AudioEngineManager.shared createEngine:ZegoAudioEngineImpl.class];
         /// 初始化zego引擎SDK
         NSDictionary *config = @{@"appID": configModel.zegoCfg.appId, @"appKey": configModel.zegoCfg.appKey};
         [AudioEngineManager.shared.audioEngine initWithConfig:config];
     } else if ([rtcType isEqualToString:configModel.agoraCfg.rtcType]) {
         NSLog(@"使用agora语音引擎");
         /// 使用agora语音引擎
-        [AudioEngineManager.shared makeEngine:AgoraAudioEngine.class];
+        [AudioEngineManager.shared createEngine:AgoraAudioEngineImpl.class];
         /// 初始化agora引擎SDK
         NSDictionary *config = @{@"appID": configModel.agoraCfg.appId, @"appKey": configModel.agoraCfg.appKey};
         [AudioEngineManager.shared.audioEngine initWithConfig:config];

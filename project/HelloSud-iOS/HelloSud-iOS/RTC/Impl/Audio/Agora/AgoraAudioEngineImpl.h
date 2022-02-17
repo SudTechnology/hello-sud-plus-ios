@@ -1,5 +1,5 @@
 //
-//  AgoraAudioEngine.h
+//  AgoraAudioEngineImpl.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/2/14.
@@ -9,7 +9,7 @@
 #import "IAudioEngine.h"
 NS_ASSUME_NONNULL_BEGIN
 /// agora语音引擎
-@interface AgoraAudioEngine : NSObject<IAudioEngine>
+@interface AgoraAudioEngineImpl : NSObject<IAudioEngine>
 
 @end
 

@@ -1,15 +1,15 @@
 //
-//  AgoraAudioEngine.m
+//  AgoraAudioEngineImpl.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/2/14.
 //
 
-#import "AgoraAudioEngine.h"
+#import "AgoraAudioEngineImpl.h"
 #import <AgoraRtcKit/AgoraRtcEngineKit.h>
 #import <AgoraRtmKit/AgoraRtmKit.h>
 
-@interface AgoraAudioEngine()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate, AgoraAudioDataFrameProtocol>
+@interface AgoraAudioEngineImpl()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate, AgoraAudioDataFrameProtocol>
 
 /// 是否静音所有播放流
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
@@ -27,7 +27,7 @@
 @property(nonatomic, strong)AgoraRtmChannel *imChannel;
 @end
 
-@implementation AgoraAudioEngine
+@implementation AgoraAudioEngineImpl
 
 /// 设置事件处理器
 /// @param listener 事件处理实例

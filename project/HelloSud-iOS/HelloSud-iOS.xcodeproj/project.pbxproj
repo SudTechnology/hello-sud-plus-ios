@@ -86,7 +86,7 @@
 		6C076E672799621300650209 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E662799621300650209 /* BaseModel.m */; };
 		6C076E6A27996C2700650209 /* HSSetingHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E6927996C2700650209 /* HSSetingHeadView.m */; };
 		6C076E6D2799823A00650209 /* DTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E6C2799823A00650209 /* DTWebViewController.m */; };
-		6C076E71279E429E00650209 /* ZegoAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E70279E429E00650209 /* ZegoAudioEngine.m */; };
+		6C076E71279E429E00650209 /* ZegoAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E70279E429E00650209 /* ZegoAudioEngineImpl.m */; };
 		6C076E7D279E833C00650209 /* AudioEngineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E7C279E833C00650209 /* AudioEngineManager.m */; };
 		6C076E80279E8EBD00650209 /* AudioCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E7F279E8EBD00650209 /* AudioCommon.m */; };
 		6C076E90279EA50700650209 /* AudioRoomViewController+IM.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E8F279EA50700650209 /* AudioRoomViewController+IM.m */; };
@@ -118,7 +118,7 @@
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
 		6C192E772797BB7B00553034 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E762797BB7B00553034 /* BaseView.m */; };
 		6C192E932797E31200553034 /* DTSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8F2797E31200553034 /* DTSheetView.m */; };
-		6C1D007827BA0400000F0998 /* AgoraAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngine.m */; };
+		6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */; };
 		6C1D007B27BA0DC1000F0998 /* GameCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007927BA0DC1000F0998 /* GameCommonModel.m */; };
 		6C239FEF27B39BD200B19FE4 /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FEE27B39BD200B19FE4 /* ShowViewController.m */; };
 		6C239FF827B39CBE00B19FE4 /* One2OneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FF727B39CBE00B19FE4 /* One2OneViewController.m */; };
@@ -307,8 +307,8 @@
 		6C076E6927996C2700650209 /* HSSetingHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSSetingHeadView.m; sourceTree = "<group>"; };
 		6C076E6B2799823A00650209 /* DTWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTWebViewController.h; sourceTree = "<group>"; };
 		6C076E6C2799823A00650209 /* DTWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTWebViewController.m; sourceTree = "<group>"; };
-		6C076E6F279E429E00650209 /* ZegoAudioEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZegoAudioEngine.h; sourceTree = "<group>"; };
-		6C076E70279E429E00650209 /* ZegoAudioEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZegoAudioEngine.m; sourceTree = "<group>"; };
+		6C076E6F279E429E00650209 /* ZegoAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZegoAudioEngineImpl.h; sourceTree = "<group>"; };
+		6C076E70279E429E00650209 /* ZegoAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZegoAudioEngineImpl.m; sourceTree = "<group>"; };
 		6C076E72279E457D00650209 /* AudioEventListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioEventListener.h; sourceTree = "<group>"; };
 		6C076E7B279E833C00650209 /* AudioEngineManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioEngineManager.h; sourceTree = "<group>"; };
 		6C076E7C279E833C00650209 /* AudioEngineManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioEngineManager.m; sourceTree = "<group>"; };
@@ -376,8 +376,8 @@
 		6C192E882797E2C700553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6C192E8F2797E31200553034 /* DTSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTSheetView.m; sourceTree = "<group>"; };
 		6C192E902797E31200553034 /* DTSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSheetView.h; sourceTree = "<group>"; };
-		6C1D007627BA0400000F0998 /* AgoraAudioEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraAudioEngine.h; sourceTree = "<group>"; };
-		6C1D007727BA0400000F0998 /* AgoraAudioEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgoraAudioEngine.m; sourceTree = "<group>"; };
+		6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraAudioEngineImpl.h; sourceTree = "<group>"; };
+		6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgoraAudioEngineImpl.m; sourceTree = "<group>"; };
 		6C1D007927BA0DC1000F0998 /* GameCommonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCommonModel.m; sourceTree = "<group>"; };
 		6C1D007A27BA0DC1000F0998 /* GameCommonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCommonModel.h; sourceTree = "<group>"; };
 		6C239FED27B39BD200B19FE4 /* ShowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowViewController.h; sourceTree = "<group>"; };
@@ -613,8 +613,9 @@
 		44DF037E2796A981006EE6AC /* RTC */ = {
 			isa = PBXGroup;
 			children = (
-				6C239FEB27B398EE00B19FE4 /* Video */,
-				44DF037F2796A981006EE6AC /* Audio */,
+				6CD6E84827BE2E5400D8F76C /* Factory */,
+				6CD6E84727BE2CDA00D8F76C /* Impl */,
+				BC210D4E52B63622AFCD7CC7 /* Core */,
 			);
 			path = RTC;
 			sourceTree = "<group>";
@@ -622,12 +623,6 @@
 		44DF037F2796A981006EE6AC /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				6C076E7E279E8EBD00650209 /* AudioCommon.h */,
-				6C076E7F279E8EBD00650209 /* AudioCommon.m */,
-				44DF03812796A981006EE6AC /* IAudioEngine.h */,
-				6C076E72279E457D00650209 /* AudioEventListener.h */,
-				6C076E7B279E833C00650209 /* AudioEngineManager.h */,
-				6C076E7C279E833C00650209 /* AudioEngineManager.m */,
 				6C1D007527BA03DC000F0998 /* Agora */,
 				6C076E6E279E424900650209 /* Zego */,
 			);
@@ -747,8 +742,8 @@
 		6C076E6E279E424900650209 /* Zego */ = {
 			isa = PBXGroup;
 			children = (
-				6C076E6F279E429E00650209 /* ZegoAudioEngine.h */,
-				6C076E70279E429E00650209 /* ZegoAudioEngine.m */,
+				6C076E6F279E429E00650209 /* ZegoAudioEngineImpl.h */,
+				6C076E70279E429E00650209 /* ZegoAudioEngineImpl.m */,
 			);
 			path = Zego;
 			sourceTree = "<group>";
@@ -1006,8 +1001,8 @@
 		6C1D007527BA03DC000F0998 /* Agora */ = {
 			isa = PBXGroup;
 			children = (
-				6C1D007627BA0400000F0998 /* AgoraAudioEngine.h */,
-				6C1D007727BA0400000F0998 /* AgoraAudioEngine.m */,
+				6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */,
+				6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */,
 			);
 			path = Agora;
 			sourceTree = "<group>";
@@ -1017,6 +1012,24 @@
 			children = (
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		6CD6E84727BE2CDA00D8F76C /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				6C239FEB27B398EE00B19FE4 /* Video */,
+				44DF037F2796A981006EE6AC /* Audio */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
+		6CD6E84827BE2E5400D8F76C /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				6C076E7B279E833C00650209 /* AudioEngineManager.h */,
+				6C076E7C279E833C00650209 /* AudioEngineManager.m */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		BC210060BE34F958814B970C /* Base */ = {
@@ -1053,6 +1066,17 @@
 				BC210C175D2FCB747B52B179 /* HttpService.m */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		BC210D4E52B63622AFCD7CC7 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6C076E7E279E8EBD00650209 /* AudioCommon.h */,
+				6C076E7F279E8EBD00650209 /* AudioCommon.m */,
+				44DF03812796A981006EE6AC /* IAudioEngine.h */,
+				6C076E72279E457D00650209 /* AudioEventListener.h */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		BC210D84E0A8533AF1EC7625 /* Utils */ = {
@@ -1233,7 +1257,7 @@
 				445EAB3327A1325F000DCC72 /* ConfigModel.m in Sources */,
 				445EAB1727A00F27000DCC72 /* GameListModel.m in Sources */,
 				445EAAE2279ABB22000DCC72 /* BaseAlertView.m in Sources */,
-				6C076E71279E429E00650209 /* ZegoAudioEngine.m in Sources */,
+				6C076E71279E429E00650209 /* ZegoAudioEngineImpl.m in Sources */,
 				445EAAD5279AAC19000DCC72 /* RoomGiftPannelView.m in Sources */,
 				445EAA8027994160000DCC72 /* GameListViewController.m in Sources */,
 				6C076ED127A253C100650209 /* RespUserInfoModel.m in Sources */,
@@ -1306,7 +1330,7 @@
 				445EAA9727996BC6000DCC72 /* GameListTableViewCell.m in Sources */,
 				6C076EBC27A01BC000650209 /* AudioRoomManager.m in Sources */,
 				445EAAE5279ABDC1000DCC72 /* DTAlertView.m in Sources */,
-				6C1D007827BA0400000F0998 /* AgoraAudioEngine.m in Sources */,
+				6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */,
 				44F29F5927BB98D900F57DEE /* HSSetingHeadItemView.m in Sources */,
 				6C076EC027A0EC2400650209 /* AudioRoomMicModel.m in Sources */,
 				6C076E53279940A400650209 /* MainTabBarController.m in Sources */,

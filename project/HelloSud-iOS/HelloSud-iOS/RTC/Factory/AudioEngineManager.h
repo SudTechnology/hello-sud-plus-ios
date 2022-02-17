@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 构建语音引擎, 必须优先初始化一个实现了语音引擎协议类
 /// @param cls 指定引擎实现类，多引擎构建
-- (void)makeEngine:(Class<IAudioEngine>)cls;
+- (void)createEngine:(Class<IAudioEngine>)cls;
 
 /// 语音引擎
 @property(nonatomic, strong, readonly)id<IAudioEngine> audioEngine;

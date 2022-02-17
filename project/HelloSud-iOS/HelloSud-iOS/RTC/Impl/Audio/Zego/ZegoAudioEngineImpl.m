@@ -1,14 +1,14 @@
 //
-//  ZegoAudioEngine.m
+//  ZegoAudioEngineImpl.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
 //
 
-#import "ZegoAudioEngine.h"
+#import "ZegoAudioEngineImpl.h"
 #import <ZegoExpressEngine/ZegoExpressEngine.h>
 
-@interface ZegoAudioEngine()<ZegoEventHandler, ZegoAudioDataHandler>
+@interface ZegoAudioEngineImpl()<ZegoEventHandler, ZegoAudioDataHandler>
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
 @property(nonatomic, assign)BOOL isPublishing;
 @property(nonatomic, strong)dispatch_queue_t queueMute;
@@ -19,7 +19,7 @@
 @property(nonatomic, strong)NSMutableDictionary<NSString *, NSString *> *dicStreamUser;
 @end
 
-@implementation ZegoAudioEngine
+@implementation ZegoAudioEngineImpl
 
 - (NSMutableDictionary<NSString *, NSString *>*)dicStreamUser {
     if (!_dicStreamUser) {
