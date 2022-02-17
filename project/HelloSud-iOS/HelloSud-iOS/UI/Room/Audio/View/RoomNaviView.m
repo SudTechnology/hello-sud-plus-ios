@@ -32,6 +32,7 @@
     [self addSubview:self.onlineLabel];
     [self addSubview:self.closeBtn];
     [self addSubview:self.roomModeView];
+    [self addSubview:self.endGameBtn];
     [self.roomModeView addSubview:self.roomModeLabel];
     [self.roomModeView addSubview:self.roomModeImageView];
 }
@@ -67,6 +68,12 @@
 - (void)onCloseRoomEvent:(UIButton *)btn {
     if (self.closeTapBlock) {
         self.closeTapBlock(btn);
+    }
+}
+
+- (void)onEndGameEvent:(UIButton *)btn {
+    if (self.endGameBlock) {
+        self.endGameBlock(btn);
     }
 }
 
@@ -110,6 +117,11 @@
         make.left.mas_equalTo(self.roomModeLabel.mas_right).offset(4);
         make.centerY.mas_equalTo(self.roomModeView);
         make.size.mas_equalTo(CGSizeMake(10, 10));
+    }];
+    [self.endGameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.roomModeView.mas_left).offset(-8);
+        make.centerY.mas_equalTo(self.roomModeView);
+        make.size.mas_equalTo(CGSizeMake(64, 20));
     }];
 }
 
@@ -186,6 +198,18 @@
         _roomModeImageView.image = [UIImage imageNamed:@"room_navi_mode"];
     }
     return _roomModeImageView;
+}
+
+- (UIButton *)endGameBtn {
+    if (!_endGameBtn) {
+        _endGameBtn = [[UIButton alloc] init];
+        _endGameBtn.hidden = true;
+        _endGameBtn.titleLabel.font = UIFONT_MEDIUM(12);
+        [_endGameBtn setTitle:@"结束游戏" forState:UIControlStateNormal];
+        _endGameBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.2];
+        [_endGameBtn addTarget:self action:@selector(onEndGameEvent:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _endGameBtn;
 }
 
 @end

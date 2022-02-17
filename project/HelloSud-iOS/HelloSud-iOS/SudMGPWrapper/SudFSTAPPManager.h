@@ -37,7 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param keyWord 单个关键词， 兼容老版本
 /// @param text 返回转写文本
 - (void)sendComonDrawTextHit:(BOOL)isHit keyWord:(NSString *)keyWord text:(NSString *)text;
-
+/// 结束游戏
+- (void)sendComonSetEnd;
 @end
 
 NS_ASSUME_NONNULL_END
