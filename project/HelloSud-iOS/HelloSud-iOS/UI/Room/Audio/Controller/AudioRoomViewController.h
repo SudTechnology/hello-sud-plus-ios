@@ -31,7 +31,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房间场景
-@interface AudioRoomViewController : BaseViewController<HSAudioEventListener>
+@interface AudioRoomViewController : BaseViewController<AudioEventListener>
 typedef NS_ENUM(NSInteger, RoomType) {
     HSAudio,
     HSGame,

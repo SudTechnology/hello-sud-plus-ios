@@ -16,7 +16,7 @@
 /// 是否在推流
 @property(nonatomic, assign)BOOL isPublishing;
 /// 事件监听者
-@property(nonatomic, weak)id<HSAudioEventListener> listener;
+@property(nonatomic, weak)id<AudioEventListener> listener;
 /// 当前进入房间
 @property(nonatomic, strong)NSString *roomID;
 /// 声网语音引擎
@@ -31,7 +31,7 @@
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
-- (void)setEventListener:(id<HSAudioEventListener>)listener {
+- (void)setEventListener:(id<AudioEventListener>)listener {
     _listener = listener;
 }
 
