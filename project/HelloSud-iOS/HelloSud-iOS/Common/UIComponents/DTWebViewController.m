@@ -14,7 +14,7 @@
 
 @implementation DTWebViewController
 
-- (void)hsNavigationBackClick {
+- (void)dtNavigationBackClick {
     if (self.isPresent) {
         [self dismissViewControllerAnimated:true completion:nil];
     } else {
