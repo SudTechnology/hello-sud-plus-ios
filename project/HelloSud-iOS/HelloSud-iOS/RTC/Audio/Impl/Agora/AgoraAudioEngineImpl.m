@@ -41,7 +41,6 @@
     NSString *appKey = config[@"appKey"];
     _agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:appID delegate:self];
     [_agoraKit enableAudioVolumeIndication:300 smooth:3 report_vad:YES];
-    [_agoraKit enableLocalAudio:NO];
     _agoraIM = [[AgoraRtmKit alloc]initWithAppId:appID delegate:self];
     [_agoraKit setAudioDataFrame:self];
 }
@@ -74,7 +73,6 @@
     NSUInteger uid = (NSUInteger)[user.userID longLongValue];
     // 关闭推流、采集
     [self.agoraKit enableLocalAudio:NO];
-    [self.agoraKit muteLocalAudioStream:YES];
     // 加入房间通道
     [_agoraKit joinChannelByToken:nil channelId:roomID info:nil uid:uid joinSuccess:nil];
     // 登录IM
@@ -138,6 +136,7 @@
 
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine didJoinChannel:(NSString *)channel withUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
     NSLog(@"join channel success:%@", channel);
+    [self.agoraKit muteLocalAudioStream:YES];
     [self.agoraKit setEnableSpeakerphone:YES];
     NSMutableArray *arr = NSMutableArray.new;
     MediaUser *user = MediaUser.new;
@@ -198,6 +197,11 @@
     
 }
 
+- (void)rtcEngine:(AgoraRtcEngineKit *)engine localAudioStateChange:(AgoraAudioLocalState)state error:(AgoraAudioLocalError)error {
+
+    NSLog(@"localAudioStateChange:%@, error:%@", @(state), @(error));
+}
+
 #pragma mark AgoraRtmDelegate
 
 - (void)rtmKit:(AgoraRtmKit * _Nonnull)kit connectionStateChanged:(AgoraRtmConnectionState)state reason:(AgoraRtmConnectionChangeReason)reason {
@@ -207,6 +211,7 @@
 - (void)rtmKit:(AgoraRtmKit * _Nonnull)kit messageReceived:(AgoraRtmMessage * _Nonnull)message fromPeer:(NSString * _Nonnull)peerId {
     NSLog(@"rtmKit messageReceived:%@, peerId:%@", message, peerId);
 }
+
 
 #pragma mark AgoraRtmChannelDelegate
 
@@ -232,6 +237,10 @@
 }
 
 #pragma mark - AgoraAudioDataFrameProtocol
+
+- (BOOL)isMultipleChannelFrameWanted {
+    return NO;
+}
 
 - (AgoraAudioFramePosition)getObservedAudioFramePosition {
     return AgoraAudioFramePositionRecord;
