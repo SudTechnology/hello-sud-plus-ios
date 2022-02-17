@@ -1,13 +1,13 @@
 //
-//  PaddingLabel.m
+//  DTPaddingLabel.m
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/2/8.
 //
 
-#import "PaddingLabel.h"
+#import "DTPaddingLabel.h"
 
-@implementation PaddingLabel
+@implementation DTPaddingLabel
 
 - (CGSize)intrinsicContentSize {
     CGSize size = [super intrinsicContentSize];

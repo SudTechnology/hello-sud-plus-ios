@@ -1,5 +1,5 @@
 //
-//  BlurEffectView.h
+//  DTBlurEffectView.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BlurEffectView : UIVisualEffectView
+@interface DTBlurEffectView : UIVisualEffectView
 /// 模糊等级 （0 ~ 1）
 @property(nonatomic, assign)CGFloat blurLevel;
 

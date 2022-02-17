@@ -1,20 +1,20 @@
 //
-//  TextAlertView.m
+//  DTTextAlertView.m
 //  HelloSud-iOS
 //
 //  Created by Mary on 2022/1/21.
 //
 
-#import "TextAlertView.h"
+#import "DTTextAlertView.h"
 
-@interface TextAlertView ()
+@interface DTTextAlertView ()
 @property(nonatomic, strong) YYLabel *contentLabel;
 @property(nonatomic, strong) UIButton *sureBtn;
 @property(nonatomic, strong) UIButton *cancelBtn;
 
 @end
 
-@implementation TextAlertView
+@implementation DTTextAlertView
 
 /// 文本alert初始化
 /// @param msg content
@@ -94,13 +94,13 @@
 
 - (void)onSureItemEvent {
     if (self.onSureItemCallBack) {
-        [AlertView close];
+        [DTAlertView close];
         self.onSureItemCallBack();
     }
 }
 
 - (void)onCancelItemEvent {
-    [AlertView close];
+    [DTAlertView close];
     if (self.onCancelItemlCallBack) {
         self.onCancelItemlCallBack();
     }

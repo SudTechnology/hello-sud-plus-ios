@@ -1,18 +1,18 @@
 //
-//  SheetView.m
+//  DTSheetView.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/19.
 //
 
-#import "SheetView.h"
+#import "DTSheetView.h"
 
-@interface SheetView()
+@interface DTSheetView()
 /// 是否响应hitTest
 @property(nonatomic, assign) BOOL isHitTest;
 @end
 
-@implementation SheetView
+@implementation DTSheetView
 
 - (void)hsConfigUI {
     self.isHitTest = true;
@@ -66,11 +66,11 @@
     }
     
     /// 如果存在移除当前展示弹窗
-    if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"SheetView"]) {
+    if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"DTSheetView"]) {
         [[self getAlert] removeFromSuperview];
     }
     
-    SheetView *alert = [[SheetView alloc] init];
+    DTSheetView *alert = [[DTSheetView alloc] init];
     alert.contentView.backgroundColor = UIColor.clearColor;// [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     alert.isHitTest = true;
     alert.customView = view;
