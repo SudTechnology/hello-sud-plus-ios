@@ -12,7 +12,7 @@
 /// 发送消息
 /// @param msg 消息体
 /// @param isAddToShow 是否公屏展示
-- (void)sendMsg:(AudioMsgBaseModel *)msg isAddToShow:(BOOL)isAddToShow {
+- (void)sendMsg:(RoomBaseCMDModel *)msg isAddToShow:(BOOL)isAddToShow {
     NSString *command = [[NSString alloc]initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
     NSLog(@"send content:%@", command);
     [AudioEngineFactory.shared.audioEngine sendCommand:command roomID:self.roomID result:^(int errorCode) {
@@ -20,14 +20,14 @@
     }];
     [self addMsg:msg isShowOnScreen:isAddToShow];
     /// Game - 发送文本命中
-    if ([msg isKindOfClass:AudioMsgTextModel.class]) {
-        AudioMsgTextModel *m = (AudioMsgTextModel *)msg;
+    if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
+        RoomCmdChatTextModel *m = (RoomCmdChatTextModel *)msg;
         [self gameKeyWordHiting: m.content];
-    } else if ([msg isKindOfClass:AudioMsgMicModel.class]) {
-        AudioMsgMicModel *m = (AudioMsgMicModel *)msg;
-        if (m.cmd == CMD_UP_MIC_NTF) {
+    } else if ([msg isKindOfClass:RoomCmdUpMicModel.class]) {
+        RoomCmdUpMicModel *m = (RoomCmdUpMicModel *)msg;
+        if (m.cmd == CMD_UP_MIC_NOTIFY) {
             [self gameUpMic];
-        } else if (m.cmd == CMD_DOWN_MIC_NTF) {
+        } else if (m.cmd == CMD_DOWN_MIC_NOTIFY) {
             [self gameDownMic];
         }
     }
@@ -37,7 +37,7 @@
 - (void)sendEnterRoomMsg {
     self.isEnteredRoom = YES;
     AudioMsgSystemModel *msg = [AudioMsgSystemModel makeMsg:[NSString stringWithFormat:@"%@ 进入了房间", AppManager.shared.loginUserInfo.name]];
-    [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NTF];
+    [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NOTIFY];
     [self sendMsg:msg isAddToShow:YES];
 }
 
@@ -65,42 +65,42 @@
         return;
     }
     NSInteger cmd = [dic[@"cmd"] integerValue];
-    AudioMsgBaseModel *msgModel = nil;
+    RoomBaseCMDModel *msgModel = nil;
     BOOL isShowOnScreen = YES;
     switch (cmd) {
-        case CMD_PUBLIC_MSG_NTF:{
+        case CMD_CHAT_TEXT_NOTIFY:{
             // 公屏消息
-            AudioMsgTextModel *msgTextModel = [AudioMsgTextModel decodeModel:command];
+            RoomCmdChatTextModel *msgTextModel = [RoomCmdChatTextModel fromJSON:command];
             msgModel = msgTextModel;
         }
             break;
-        case CMD_PUBLIC_SEND_GIFT_NTF:{
+        case CMD_SEND_GIFT_NOTIFY:{
             // 礼物消息
-            msgModel = [AudioMsgGiftModel decodeModel:command];
+            msgModel = [RoomCmdSendGiftModel fromJSON:command];
         }
             break;
-        case CMD_UP_MIC_NTF:{
+        case CMD_UP_MIC_NOTIFY:{
             // 上麦消息
-            msgModel = [AudioMsgMicModel decodeModel:command];
+            msgModel = [RoomCmdUpMicModel fromJSON:command];
             isShowOnScreen = NO;
         }
             break;
-        case CMD_DOWN_MIC_NTF:{
+        case CMD_DOWN_MIC_NOTIFY:{
             // 下麦消息
-            msgModel = [AudioMsgMicModel decodeModel:command];
+            msgModel = [RoomCmdUpMicModel fromJSON:command];
             isShowOnScreen = NO;
         }
             break;
-        case CMD_GAME_CHANGE: {
+        case CMD_CHANGE_GAME_NOTIFY: {
             // 游戏切换
-            ExChangeGameMsgModel *m = [ExChangeGameMsgModel decodeModel:command];
+            RoomCmdChangeGameModel *m = [RoomCmdChangeGameModel fromJSON:command];
             [self handleGameChange:m.gameID];
         }
             break;
             
-        case CMD_ENTER_ROOM_NTF: {
+        case CMD_ENTER_ROOM_NOTIFY: {
             // 进入房间
-            AudioMsgSystemModel *m = [AudioMsgSystemModel decodeModel:command];
+            AudioMsgSystemModel *m = [AudioMsgSystemModel fromJSON:command];
             [m updateContent:[NSString stringWithFormat:@"%@ 进入了房间", m.sendUser.name]];
             msgModel = m;
         }
@@ -108,7 +108,7 @@
         default:
         {
             // 无法解析消息
-            AudioMsgTextModel *textModel = AudioMsgTextModel.new;
+            RoomCmdChatTextModel *textModel = RoomCmdChatTextModel.new;
             textModel.content = [NSString stringWithFormat:@"无法显示该消息，请升级最新版本,cmd:%ld", cmd];
             msgModel = textModel;
         }

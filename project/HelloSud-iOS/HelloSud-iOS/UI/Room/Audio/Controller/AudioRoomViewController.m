@@ -131,7 +131,7 @@
     };
     self.inputView.inputMsgBlock = ^(NSString * _Nonnull msg) {
         // 发送公屏消息
-        AudioMsgTextModel *m = [AudioMsgTextModel makeMsg:msg];
+        RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:msg];
         [weakSelf sendMsg:m isAddToShow:YES];
     };
     if (self.roomType == HSAudioMic) {
@@ -201,12 +201,12 @@
     WeakSelf
     [AudioRoomManager.shared reqSwitchGame:self.roomID.integerValue gameId:m.gameId success:^{
         
-        ExChangeGameMsgModel *msg = nil;
+        RoomCmdChangeGameModel *msg = nil;
         if (m.isAudioRoom) {
             weakSelf.roomType = HSAudio;
-            msg = [ExChangeGameMsgModel makeMsg:0];
+            msg = [RoomCmdChangeGameModel makeMsg:0];
         } else if(m.gameId > 0) {
-            msg = [ExChangeGameMsgModel makeMsg:m.gameId];
+            msg = [RoomCmdChangeGameModel makeMsg:m.gameId];
             [weakSelf handleGameChange:m.gameId];
         }
         // 发送游戏切换给其它用户
@@ -310,27 +310,27 @@
 /// 展示公屏消息
 /// @param msg 消息体
 /// @param isShowOnScreen 是否展示公屏
-- (void)addMsg:(AudioMsgBaseModel *)msg isShowOnScreen:(BOOL)isShowOnScreen {
+- (void)addMsg:(RoomBaseCMDModel *)msg isShowOnScreen:(BOOL)isShowOnScreen {
     if (isShowOnScreen) {    
         [self.msgTableView addMsg:msg];
     }
-    if ([msg isKindOfClass:AudioMsgMicModel.class]) {
-        [self handleMicChanged:(AudioMsgMicModel *)msg];
-    } else if ([msg isKindOfClass:AudioMsgGiftModel.class]) {
-        [self handleGiftEffect:(AudioMsgGiftModel *)msg];
+    if ([msg isKindOfClass:RoomCmdUpMicModel.class]) {
+        [self handleMicChanged:(RoomCmdUpMicModel *)msg];
+    } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
+        [self handleGiftEffect:(RoomCmdSendGiftModel *)msg];
     }
 }
 
 /// 处理麦位变化
 /// @param model model description
-- (void)handleMicChanged:(AudioMsgMicModel *)model {
+- (void)handleMicChanged:(RoomCmdUpMicModel *)model {
     // 通知麦位变化
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_MIC_CHANGED object:nil userInfo:@{@"msgModel": model}];
 }
 
 /// 处理礼物动效
 /// @param model model description
-- (void)handleGiftEffect:(AudioMsgGiftModel *)model {
+- (void)handleGiftEffect:(RoomCmdSendGiftModel *)model {
     GiftModel *giftModel = [GiftManager.shared giftByID:model.giftID];
     if (!giftModel) {
         NSLog(@"No exist the gift info:%ld", model.giftID);

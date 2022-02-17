@@ -5,11 +5,11 @@
 //  Created by Mary on 2022/2/8.
 //
 
-#import "AudioMsgBaseModel.h"
+#import "RoomBaseCMDModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AudioMsgSystemModel : AudioMsgBaseModel
+@interface AudioMsgSystemModel : RoomBaseCMDModel
 /// 构建消息
 /// @param content 消息内容
 + (instancetype)makeMsgWithAttr:(NSMutableAttributedString*)content;

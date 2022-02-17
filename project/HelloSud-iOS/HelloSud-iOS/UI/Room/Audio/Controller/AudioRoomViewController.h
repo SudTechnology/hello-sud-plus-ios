@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, RoomType) {
 /// 展示公屏消息
 /// @param msg 消息体
 /// @param isShowOnScreen 是否展示公屏
-- (void)addMsg:(AudioMsgBaseModel *)msg isShowOnScreen:(BOOL)isShowOnScreen;
+- (void)addMsg:(RoomBaseCMDModel *)msg isShowOnScreen:(BOOL)isShowOnScreen;
 
 
 #pragma mark - GAME

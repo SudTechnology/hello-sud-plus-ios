@@ -90,11 +90,11 @@
 		6C076E7D279E833C00650209 /* AudioEngineFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E7C279E833C00650209 /* AudioEngineFactory.m */; };
 		6C076E80279E8EBD00650209 /* AudioCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E7F279E8EBD00650209 /* AudioCommon.m */; };
 		6C076E90279EA50700650209 /* AudioRoomViewController+IM.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E8F279EA50700650209 /* AudioRoomViewController+IM.m */; };
-		6C076E94279EA7BF00650209 /* AudioMsgBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E93279EA7BF00650209 /* AudioMsgBaseModel.m */; };
+		6C076E94279EA7BF00650209 /* RoomBaseCMDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E93279EA7BF00650209 /* RoomBaseCMDModel.m */; };
 		6C076E97279EA9B200650209 /* AudioUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E96279EA9B200650209 /* AudioUserModel.m */; };
-		6C076E9B279EC4F100650209 /* AudioMsgTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E9A279EC4F100650209 /* AudioMsgTextModel.m */; };
-		6C076E9E279EC54200650209 /* AudioMsgGiftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E9D279EC54200650209 /* AudioMsgGiftModel.m */; };
-		6C076EA1279EC62600650209 /* AudioMsgMicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EA0279EC62600650209 /* AudioMsgMicModel.m */; };
+		6C076E9B279EC4F100650209 /* RoomCmdChatTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E9A279EC4F100650209 /* RoomCmdChatTextModel.m */; };
+		6C076E9E279EC54200650209 /* RoomCmdSendGiftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E9D279EC54200650209 /* RoomCmdSendGiftModel.m */; };
+		6C076EA1279EC62600650209 /* RoomCmdUpMicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EA0279EC62600650209 /* RoomCmdUpMicModel.m */; };
 		6C076EA6279F98AA00650209 /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EA5279F98AA00650209 /* AppManager.m */; };
 		6C076EAA279F993900650209 /* AccountUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EA9279F993900650209 /* AccountUserModel.m */; };
 		6C076EAD279FEB6E00650209 /* DTSVGAPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076EAC279FEB6E00650209 /* DTSVGAPlayerView.m */; };
@@ -122,9 +122,10 @@
 		6C1D007B27BA0DC1000F0998 /* GameCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007927BA0DC1000F0998 /* GameCommonModel.m */; };
 		6C239FEF27B39BD200B19FE4 /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FEE27B39BD200B19FE4 /* ShowViewController.m */; };
 		6C239FF827B39CBE00B19FE4 /* OneOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FF727B39CBE00B19FE4 /* OneOneViewController.m */; };
-		6C239FFB27B3AAD900B19FE4 /* ExChangeGameMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FFA27B3AAD900B19FE4 /* ExChangeGameMsgModel.m */; };
+		6C239FFB27B3AAD900B19FE4 /* RoomCmdChangeGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FFA27B3AAD900B19FE4 /* RoomCmdChangeGameModel.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
 		6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85627BE37D600D8F76C /* SettingsService.m */; };
+		6CD6E85B27BE409B00D8F76C /* TalentRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85A27BE409B00D8F76C /* TalentRoomViewController.m */; };
 		BC2101199D87BB6081A8FBC0 /* DTNSError+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5A0981935974C33E8B /* DTNSError+Custom.m */; };
 		BC210452F6884908D768A126 /* DTNSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106C0581A7D8986B9FC83 /* DTNSArray+Masonry.m */; };
 		BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102EB58A8CE4A527A5167 /* ToastUtil.m */; };
@@ -318,17 +319,17 @@
 		6C076E7F279E8EBD00650209 /* AudioCommon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioCommon.m; sourceTree = "<group>"; };
 		6C076E8E279EA50700650209 /* AudioRoomViewController+IM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AudioRoomViewController+IM.h"; sourceTree = "<group>"; };
 		6C076E8F279EA50700650209 /* AudioRoomViewController+IM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AudioRoomViewController+IM.m"; sourceTree = "<group>"; };
-		6C076E92279EA7BF00650209 /* AudioMsgBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioMsgBaseModel.h; sourceTree = "<group>"; };
-		6C076E93279EA7BF00650209 /* AudioMsgBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioMsgBaseModel.m; sourceTree = "<group>"; };
+		6C076E92279EA7BF00650209 /* RoomBaseCMDModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomBaseCMDModel.h; sourceTree = "<group>"; };
+		6C076E93279EA7BF00650209 /* RoomBaseCMDModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomBaseCMDModel.m; sourceTree = "<group>"; };
 		6C076E95279EA9B200650209 /* AudioUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUserModel.h; sourceTree = "<group>"; };
 		6C076E96279EA9B200650209 /* AudioUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUserModel.m; sourceTree = "<group>"; };
-		6C076E98279EC43800650209 /* AudioMsgConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioMsgConst.h; sourceTree = "<group>"; };
-		6C076E99279EC4F100650209 /* AudioMsgTextModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioMsgTextModel.h; sourceTree = "<group>"; };
-		6C076E9A279EC4F100650209 /* AudioMsgTextModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioMsgTextModel.m; sourceTree = "<group>"; };
-		6C076E9C279EC54200650209 /* AudioMsgGiftModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioMsgGiftModel.h; sourceTree = "<group>"; };
-		6C076E9D279EC54200650209 /* AudioMsgGiftModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioMsgGiftModel.m; sourceTree = "<group>"; };
-		6C076E9F279EC62600650209 /* AudioMsgMicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioMsgMicModel.h; sourceTree = "<group>"; };
-		6C076EA0279EC62600650209 /* AudioMsgMicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioMsgMicModel.m; sourceTree = "<group>"; };
+		6C076E98279EC43800650209 /* RoomCmd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCmd.h; sourceTree = "<group>"; };
+		6C076E99279EC4F100650209 /* RoomCmdChatTextModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCmdChatTextModel.h; sourceTree = "<group>"; };
+		6C076E9A279EC4F100650209 /* RoomCmdChatTextModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCmdChatTextModel.m; sourceTree = "<group>"; };
+		6C076E9C279EC54200650209 /* RoomCmdSendGiftModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCmdSendGiftModel.h; sourceTree = "<group>"; };
+		6C076E9D279EC54200650209 /* RoomCmdSendGiftModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCmdSendGiftModel.m; sourceTree = "<group>"; };
+		6C076E9F279EC62600650209 /* RoomCmdUpMicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCmdUpMicModel.h; sourceTree = "<group>"; };
+		6C076EA0279EC62600650209 /* RoomCmdUpMicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCmdUpMicModel.m; sourceTree = "<group>"; };
 		6C076EA2279EC6B600650209 /* CommonAudioModelHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonAudioModelHeader.h; sourceTree = "<group>"; };
 		6C076EA4279F98AA00650209 /* AppManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppManager.h; sourceTree = "<group>"; };
 		6C076EA5279F98AA00650209 /* AppManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppManager.m; sourceTree = "<group>"; };
@@ -386,13 +387,15 @@
 		6C239FEE27B39BD200B19FE4 /* ShowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowViewController.m; sourceTree = "<group>"; };
 		6C239FF627B39CBE00B19FE4 /* OneOneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneOneViewController.h; sourceTree = "<group>"; };
 		6C239FF727B39CBE00B19FE4 /* OneOneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOneViewController.m; sourceTree = "<group>"; };
-		6C239FF927B3AAD900B19FE4 /* ExChangeGameMsgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExChangeGameMsgModel.h; sourceTree = "<group>"; };
-		6C239FFA27B3AAD900B19FE4 /* ExChangeGameMsgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExChangeGameMsgModel.m; sourceTree = "<group>"; };
+		6C239FF927B3AAD900B19FE4 /* RoomCmdChangeGameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCmdChangeGameModel.h; sourceTree = "<group>"; };
+		6C239FFA27B3AAD900B19FE4 /* RoomCmdChangeGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCmdChangeGameModel.m; sourceTree = "<group>"; };
 		6C89D9C9279902A9001D52F9 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
 		6CD6E85227BE37C300D8F76C /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		6CD6E85327BE37C300D8F76C /* LoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 		6CD6E85527BE37D600D8F76C /* SettingsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsService.h; sourceTree = "<group>"; };
 		6CD6E85627BE37D600D8F76C /* SettingsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsService.m; sourceTree = "<group>"; };
+		6CD6E85927BE409B00D8F76C /* TalentRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TalentRoomViewController.h; sourceTree = "<group>"; };
+		6CD6E85A27BE409B00D8F76C /* TalentRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TalentRoomViewController.m; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIView+Extension.m"; sourceTree = "<group>"; };
 		BC2100EC41AFF28046FF7B87 /* DTNSError+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTNSError+Custom.h"; sourceTree = "<group>"; };
@@ -748,6 +751,8 @@
 		6C076E82279EA2CF00650209 /* Room */ = {
 			isa = PBXGroup;
 			children = (
+				6CD6E85C27BE427500D8F76C /* Common */,
+				6CD6E85827BE407900D8F76C /* Talent */,
 				6C076E83279EA2CF00650209 /* Show */,
 				6C076E84279EA2CF00650209 /* OneOne */,
 				6C076E85279EA2CF00650209 /* Audio */,
@@ -803,7 +808,6 @@
 			isa = PBXGroup;
 			children = (
 				44F29F6F27BCCE3900F57DEE /* Mic */,
-				445EAAD6279AAF4B000DCC72 /* Gift */,
 				445EAAC6279A94E0000DCC72 /* Msg */,
 				445EAAA8279A562C000DCC72 /* RoomNaviView.h */,
 				445EAAA9279A562C000DCC72 /* RoomNaviView.m */,
@@ -828,7 +832,6 @@
 		6C076E91279EA78F00650209 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6C076EBD27A0EBE400650209 /* Msg */,
 				6C076EA2279EC6B600650209 /* CommonAudioModelHeader.h */,
 				445EAB08279FD44F000DCC72 /* RoomGameInfoModel.h */,
 				6C076EBE27A0EC2400650209 /* AudioRoomMicModel.h */,
@@ -867,26 +870,26 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		6C076EBD27A0EBE400650209 /* Msg */ = {
+		6C076EBD27A0EBE400650209 /* CMD */ = {
 			isa = PBXGroup;
 			children = (
 				6C076E95279EA9B200650209 /* AudioUserModel.h */,
 				6C076E96279EA9B200650209 /* AudioUserModel.m */,
-				6C076E92279EA7BF00650209 /* AudioMsgBaseModel.h */,
-				6C076E93279EA7BF00650209 /* AudioMsgBaseModel.m */,
-				6C076E98279EC43800650209 /* AudioMsgConst.h */,
-				6C076E99279EC4F100650209 /* AudioMsgTextModel.h */,
-				6C076E9A279EC4F100650209 /* AudioMsgTextModel.m */,
-				6C076E9C279EC54200650209 /* AudioMsgGiftModel.h */,
-				6C076E9D279EC54200650209 /* AudioMsgGiftModel.m */,
-				6C076E9F279EC62600650209 /* AudioMsgMicModel.h */,
-				6C076EA0279EC62600650209 /* AudioMsgMicModel.m */,
+				6C076E92279EA7BF00650209 /* RoomBaseCMDModel.h */,
+				6C076E93279EA7BF00650209 /* RoomBaseCMDModel.m */,
+				6C076E98279EC43800650209 /* RoomCmd.h */,
+				6C076E99279EC4F100650209 /* RoomCmdChatTextModel.h */,
+				6C076E9A279EC4F100650209 /* RoomCmdChatTextModel.m */,
+				6C076E9C279EC54200650209 /* RoomCmdSendGiftModel.h */,
+				6C076E9D279EC54200650209 /* RoomCmdSendGiftModel.m */,
+				6C076E9F279EC62600650209 /* RoomCmdUpMicModel.h */,
+				6C076EA0279EC62600650209 /* RoomCmdUpMicModel.m */,
 				44F29F4B27B21A4D00F57DEE /* AudioMsgSystemModel.h */,
 				44F29F4C27B21A4D00F57DEE /* AudioMsgSystemModel.m */,
-				6C239FF927B3AAD900B19FE4 /* ExChangeGameMsgModel.h */,
-				6C239FFA27B3AAD900B19FE4 /* ExChangeGameMsgModel.m */,
+				6C239FF927B3AAD900B19FE4 /* RoomCmdChangeGameModel.h */,
+				6C239FFA27B3AAD900B19FE4 /* RoomCmdChangeGameModel.m */,
 			);
-			path = Msg;
+			path = CMD;
 			sourceTree = "<group>";
 		};
 		6C192E3F279523B000553034 = {
@@ -1086,6 +1089,24 @@
 				6C076EA5279F98AA00650209 /* AppManager.m */,
 				6C076ED227A274FE00650209 /* UserManager.h */,
 				6C076ED327A274FE00650209 /* UserManager.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		6CD6E85827BE407900D8F76C /* Talent */ = {
+			isa = PBXGroup;
+			children = (
+				6CD6E85927BE409B00D8F76C /* TalentRoomViewController.h */,
+				6CD6E85A27BE409B00D8F76C /* TalentRoomViewController.m */,
+			);
+			path = Talent;
+			sourceTree = "<group>";
+		};
+		6CD6E85C27BE427500D8F76C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6C076EBD27A0EBE400650209 /* CMD */,
+				445EAAD6279AAF4B000DCC72 /* Gift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1351,7 +1372,7 @@
 				6C239FF827B39CBE00B19FE4 /* OneOneViewController.m in Sources */,
 				44DF03AE2797F124006EE6AC /* FSMApp2MGManager.m in Sources */,
 				445EAAC5279A90C0000DCC72 /* RoomGiftTableViewCell.m in Sources */,
-				6C239FFB27B3AAD900B19FE4 /* ExChangeGameMsgModel.m in Sources */,
+				6C239FFB27B3AAD900B19FE4 /* RoomCmdChangeGameModel.m in Sources */,
 				44F29F5C27BB9C0800F57DEE /* HSSettingHeaderModel.m in Sources */,
 				445EAAF2279E8083000DCC72 /* HomeViewController.m in Sources */,
 				445EAB0A279FD44F000DCC72 /* RoomGameInfoModel.m in Sources */,
@@ -1365,19 +1386,20 @@
 				445EAA9F27997485000DCC72 /* BaseCollectionViewCell.m in Sources */,
 				445EAB2C27A013B1000DCC72 /* RoomListModel.m in Sources */,
 				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
-				6C076E94279EA7BF00650209 /* AudioMsgBaseModel.m in Sources */,
+				6C076E94279EA7BF00650209 /* RoomBaseCMDModel.m in Sources */,
 				445EAAD2279AA64E000DCC72 /* SwitchRoomModeView.m in Sources */,
-				6C076EA1279EC62600650209 /* AudioMsgMicModel.m in Sources */,
+				6C076EA1279EC62600650209 /* RoomCmdUpMicModel.m in Sources */,
 				6C076EB3279FF3DD00650209 /* GiftManager.m in Sources */,
 				445EAB2327A01233000DCC72 /* SwitchMicModel.m in Sources */,
 				445EAAB9279A67F3000DCC72 /* BaseMsgCell.m in Sources */,
 				445EAAB3279A65B9000DCC72 /* RoomMsgTableView.m in Sources */,
 				445EAAC2279A6DDC000DCC72 /* RoomSystemTableViewCell.m in Sources */,
 				445EAABC279A6DA0000DCC72 /* HSRoomTextTableViewCell.m in Sources */,
-				6C076E9B279EC4F100650209 /* AudioMsgTextModel.m in Sources */,
+				6C076E9B279EC4F100650209 /* RoomCmdChatTextModel.m in Sources */,
 				6C076EAA279F993900650209 /* AccountUserModel.m in Sources */,
 				445EAAF8279E8183000DCC72 /* HomeHeaderReusableView.m in Sources */,
 				445EAAE8279AC53E000DCC72 /* DTTextAlertView.m in Sources */,
+				6CD6E85B27BE409B00D8F76C /* TalentRoomViewController.m in Sources */,
 				6C076E572799450900650209 /* HSSettingViewController.m in Sources */,
 				445EAB3627A1330D000DCC72 /* BaseRespModel.m in Sources */,
 				445EAADF279AB2D9000DCC72 /* GiftItemCollectionViewCell.m in Sources */,
@@ -1385,7 +1407,7 @@
 				445EAAFB279E8B10000DCC72 /* HomeFooterReusableView.m in Sources */,
 				445EAB2027A01176000DCC72 /* MatchRoomModel.m in Sources */,
 				445EAAC9279A98DB000DCC72 /* RoomMsgBgView.m in Sources */,
-				6C076E9E279EC54200650209 /* AudioMsgGiftModel.m in Sources */,
+				6C076E9E279EC54200650209 /* RoomCmdSendGiftModel.m in Sources */,
 				44F29F6E27BCA75000F57DEE /* VersionInfoCell.m in Sources */,
 				445EAA9727996BC6000DCC72 /* GameListTableViewCell.m in Sources */,
 				6C076EBC27A01BC000650209 /* AudioRoomManager.m in Sources */,

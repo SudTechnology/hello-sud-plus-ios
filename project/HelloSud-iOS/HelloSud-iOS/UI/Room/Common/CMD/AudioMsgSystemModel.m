@@ -26,7 +26,7 @@
 /// @param content 消息内容
 + (instancetype)makeMsgWithAttr:(NSMutableAttributedString*)content {
     AudioMsgSystemModel *m = AudioMsgSystemModel.new;
-    [m configBaseInfoWithCmd:CMD_PUBLIC_MSG_NTF];
+    [m configBaseInfoWithCmd:CMD_CHAT_TEXT_NOTIFY];
     m.content = content;
     return m;
 }
@@ -35,7 +35,7 @@
 /// @param content 消息内容
 + (instancetype)makeMsg:(NSString*)content {
     AudioMsgSystemModel *m = AudioMsgSystemModel.new;
-    [m configBaseInfoWithCmd:CMD_PUBLIC_MSG_NTF];
+    [m configBaseInfoWithCmd:CMD_CHAT_TEXT_NOTIFY];
     [m updateContent:content];
     return m;
 }

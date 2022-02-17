@@ -1,19 +1,19 @@
 //
-//  AudioMsgGiftModel.m
+//  RoomCmdSendGiftModel.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
 //
 
-#import "AudioMsgGiftModel.h"
+#import "RoomCmdSendGiftModel.h"
 
-@interface AudioMsgGiftModel(){
+@interface RoomCmdSendGiftModel(){
     NSAttributedString *_attrContent;
 }
 
 @end
 
-@implementation AudioMsgGiftModel
+@implementation RoomCmdSendGiftModel
 - (NSString *)cellName {
     return @"RoomGiftTableViewCell";
 }
@@ -27,8 +27,8 @@
 /// @param giftCount giftCount description
 /// @param toUser toUser description
 + (instancetype)makeMsgWithGiftID:(NSInteger)giftID giftCount:(NSInteger)giftCount toUser:(AudioUserModel *)toUser {
-    AudioMsgGiftModel *m = AudioMsgGiftModel.new;
-    [m configBaseInfoWithCmd:CMD_PUBLIC_SEND_GIFT_NTF];
+    RoomCmdSendGiftModel *m = RoomCmdSendGiftModel.new;
+    [m configBaseInfoWithCmd:CMD_SEND_GIFT_NOTIFY];
     m.giftID = giftID;
     m.giftCount = giftCount;
     m.toUser = toUser;
