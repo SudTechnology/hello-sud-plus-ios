@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HSAudioEventListener.h"
+#import "AudioEventListener.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
-- (void)setEventListener:(id<HSAudioEventListener>)listener;
+- (void)setEventListener:(id<AudioEventListener>)listener;
 
 /// 必须优先调用初始化配置引擎SDK
 /// @param config config

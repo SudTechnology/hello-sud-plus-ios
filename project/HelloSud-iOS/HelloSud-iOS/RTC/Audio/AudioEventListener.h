@@ -1,5 +1,5 @@
 //
-//  HSAudioEventListener.h
+//  AudioEventListener.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 多媒体语音事件处理协议,SDK回调事件，用户根据业务需求选择实现自己业务逻辑
-@protocol HSAudioEventListener <NSObject>
+@protocol AudioEventListener <NSObject>
 @optional
 
 /// 捕获本地音量变化

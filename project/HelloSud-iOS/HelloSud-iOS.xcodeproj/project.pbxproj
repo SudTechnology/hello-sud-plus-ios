@@ -309,7 +309,7 @@
 		6C076E6C2799823A00650209 /* DTWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTWebViewController.m; sourceTree = "<group>"; };
 		6C076E6F279E429E00650209 /* ZegoAudioEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZegoAudioEngine.h; sourceTree = "<group>"; };
 		6C076E70279E429E00650209 /* ZegoAudioEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZegoAudioEngine.m; sourceTree = "<group>"; };
-		6C076E72279E457D00650209 /* HSAudioEventListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAudioEventListener.h; sourceTree = "<group>"; };
+		6C076E72279E457D00650209 /* AudioEventListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioEventListener.h; sourceTree = "<group>"; };
 		6C076E7B279E833C00650209 /* AudioEngineManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioEngineManager.h; sourceTree = "<group>"; };
 		6C076E7C279E833C00650209 /* AudioEngineManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioEngineManager.m; sourceTree = "<group>"; };
 		6C076E7E279E8EBD00650209 /* AudioCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioCommon.h; sourceTree = "<group>"; };
@@ -625,7 +625,7 @@
 				6C076E7E279E8EBD00650209 /* AudioCommon.h */,
 				6C076E7F279E8EBD00650209 /* AudioCommon.m */,
 				44DF03812796A981006EE6AC /* IAudioEngine.h */,
-				6C076E72279E457D00650209 /* HSAudioEventListener.h */,
+				6C076E72279E457D00650209 /* AudioEventListener.h */,
 				6C076E7B279E833C00650209 /* AudioEngineManager.h */,
 				6C076E7C279E833C00650209 /* AudioEngineManager.m */,
 				6C1D007527BA03DC000F0998 /* Agora */,

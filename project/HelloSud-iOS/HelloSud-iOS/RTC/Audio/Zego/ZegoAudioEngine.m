@@ -12,7 +12,7 @@
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
 @property(nonatomic, assign)BOOL isPublishing;
 @property(nonatomic, strong)dispatch_queue_t queueMute;
-@property(nonatomic, weak)id<HSAudioEventListener> listener;
+@property(nonatomic, weak)id<AudioEventListener> listener;
 @property(nonatomic, strong)NSString *roomID;
 
 /// 流与ID关系[streamID:userID]
@@ -37,7 +37,7 @@
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
-- (void)setEventListener:(id<HSAudioEventListener>)listener {
+- (void)setEventListener:(id<AudioEventListener>)listener {
     _listener = listener;
 }
 
