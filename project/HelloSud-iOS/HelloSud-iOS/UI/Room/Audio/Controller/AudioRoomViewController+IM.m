@@ -128,7 +128,7 @@
     }
     if (self.gameInfoModel.gameState == 0 && !self.gameInfoModel.isInGame) {
         /// 上麦，就是加入游戏
-        [self.fsm2MGManager sendComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+        [self.sudFSTAPPManager sendComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
     }
 }
 
@@ -139,10 +139,10 @@
     }
     if (self.gameInfoModel.isReady) {
         /// 如果已经准备先退出准备状态
-        [self.fsm2MGManager sendComonSetReady:false];
+        [self.sudFSTAPPManager sendComonSetReady:false];
     }
     /// 下麦，就是退出游戏
-    [self.fsm2MGManager sendComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+    [self.sudFSTAPPManager sendComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 /// 你画我猜命中
@@ -152,7 +152,7 @@
     }
     if (self.gameInfoModel.keyWordHiting == YES && [content isEqualToString:self.gameInfoModel.drawKeyWord]) {
         /// 关键词命中
-        [self.fsm2MGManager sendComonDrawTextHit:true keyWord:self.gameInfoModel.drawKeyWord text:self.gameInfoModel.drawKeyWord];
+        [self.sudFSTAPPManager sendComonDrawTextHit:true keyWord:self.gameInfoModel.drawKeyWord text:self.gameInfoModel.drawKeyWord];
     }
 }
 

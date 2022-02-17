@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 关键词状态Model
-@interface GameKeyWordHitModel : NSObject
+@interface MGCommonKeyWrodToHitModel : NSObject
 /// 单个关键词，兼容老版本
 @property (nonatomic, copy) NSString *word;
 /// 必填字段；关键词列表，可以传送多个关键词

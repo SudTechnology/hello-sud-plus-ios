@@ -5,8 +5,8 @@
 //  Created by Mary on 2022/1/19.
 //
 
-#import "GameKeyWordHitModel.h"
+#import "MGCommonKeyWrodToHitModel.h"
 
-@implementation GameKeyWordHitModel
+@implementation MGCommonKeyWrodToHitModel
 
 @end

@@ -49,7 +49,7 @@
 //    [self sendEnterRoomMsg];
     if (self.gameId > 0) {
         self.gameInfoModel.currentPlayerUserId = AppManager.shared.loginUserInfo.userID;
-        [self loginGame];
+        [self login];
     }
     [self dtUpdateUI];
 }
@@ -563,7 +563,7 @@
 }
 
 - (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
-    [self.fsm2MGManager sendComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
+    [self.sudFSTAPPManager sendComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 - (void)setRoomName:(NSString *)roomName {

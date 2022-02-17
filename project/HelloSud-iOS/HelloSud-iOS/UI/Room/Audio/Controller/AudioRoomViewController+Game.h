@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AudioRoomViewController(Game) <ISudFSMMG>
 
 /// 登录游戏业务服务
-- (void)loginGame;
+- (void)login;
 /// 退出游戏
 - (void)logoutGame;
 /// 处理切换游戏

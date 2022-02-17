@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface GameCfgLobbyPlayers : BaseModel
+/// 是否隐藏游戏麦位
 @property (nonatomic, assign) BOOL hide;
 
 @end

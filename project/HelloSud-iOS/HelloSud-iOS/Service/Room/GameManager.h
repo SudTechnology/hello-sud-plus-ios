@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign)NSInteger  gameId;
 /// 队长userid
 @property (nonatomic, copy) NSString *captainUserId;
-
+/// 当前游戏成员的游戏状态Map
 @property (nonatomic, strong) NSMutableDictionary *gamePlayerStateMap;
 
 /// 登录游戏
