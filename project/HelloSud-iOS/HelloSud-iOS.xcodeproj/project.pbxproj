@@ -626,7 +626,7 @@
 			path = RTC;
 			sourceTree = "<group>";
 		};
-		44DF03842796A9EF006EE6AC /* Game */ = {
+		44DF03842796A9EF006EE6AC /* SudMGPWrapper */ = {
 			isa = PBXGroup;
 			children = (
 				44DF03992796B6E3006EE6AC /* Model */,
@@ -637,7 +637,7 @@
 				44DF03AC2797F124006EE6AC /* FSMApp2MGManager.h */,
 				44DF03AD2797F124006EE6AC /* FSMApp2MGManager.m */,
 			);
-			path = Game;
+			path = SudMGPWrapper;
 			sourceTree = "<group>";
 		};
 		44DF038A2796ADC6006EE6AC /* SudMGPSDK */ = {
@@ -915,7 +915,7 @@
 			children = (
 				6CD6E84B27BE30BE00D8F76C /* App */,
 				44DF03902796B22C006EE6AC /* Common */,
-				44DF03842796A9EF006EE6AC /* Game */,
+				44DF03842796A9EF006EE6AC /* SudMGPWrapper */,
 				6C076EA3279F983100650209 /* Service */,
 				445EAA6E2798FFE4000DCC72 /* UI */,
 				44DF037E2796A981006EE6AC /* RTC */,
