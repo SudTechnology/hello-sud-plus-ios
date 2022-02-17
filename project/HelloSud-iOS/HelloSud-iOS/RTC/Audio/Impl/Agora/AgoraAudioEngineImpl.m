@@ -73,7 +73,6 @@
     NSUInteger uid = (NSUInteger)[user.userID longLongValue];
     // 关闭推流、采集
     [self.agoraKit enableLocalAudio:NO];
-    [self.agoraKit muteLocalAudioStream:YES];
     // 加入房间通道
     [_agoraKit joinChannelByToken:nil channelId:roomID info:nil uid:uid joinSuccess:nil];
     // 登录IM
@@ -137,6 +136,7 @@
 
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine didJoinChannel:(NSString *)channel withUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
     NSLog(@"join channel success:%@", channel);
+    [self.agoraKit muteLocalAudioStream:YES];
     [self.agoraKit setEnableSpeakerphone:YES];
     NSMutableArray *arr = NSMutableArray.new;
     MediaUser *user = MediaUser.new;
@@ -178,7 +178,7 @@
         NSString *userID = [NSString stringWithFormat:@"%ld", item.uid];
         // 转换0-100声音值
         NSUInteger volume = item.volume / 255.0 * 100;
-//        NSLog(@"reportAudioVolumeIndicationOfSpeakers userID:%@, volume:%@", userID, @(volume));
+        NSLog(@"reportAudioVolumeIndicationOfSpeakers userID:%@, volume:%@", userID, @(volume));
         if (item.uid > 0) {
             soundLevels[userID] = @(volume);
         } else {
@@ -237,6 +237,10 @@
 }
 
 #pragma mark - AgoraAudioDataFrameProtocol
+
+- (BOOL)isMultipleChannelFrameWanted {
+    return NO;
+}
 
 - (AgoraAudioFramePosition)getObservedAudioFramePosition {
     return AgoraAudioFramePositionRecord;
