@@ -1,5 +1,5 @@
 //
-//  One2OneViewController.h
+//  OneOneViewController.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/2/9.
@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 1v1场景
-@interface One2OneViewController : BaseViewController
+@interface OneOneViewController : BaseViewController
 
 @end
 
