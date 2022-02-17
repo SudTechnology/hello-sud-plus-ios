@@ -5,9 +5,9 @@
 //  Created by kaniel on 2022/1/19.
 //
 
-#import "UIColor+Extension.h"
+#import "DTUIColor+Extension.h"
 
-@implementation UIColor(Extension)
+@implementation UIColor(DTColorExtension)
 
 /**
  16进制颜色转换为UIColor

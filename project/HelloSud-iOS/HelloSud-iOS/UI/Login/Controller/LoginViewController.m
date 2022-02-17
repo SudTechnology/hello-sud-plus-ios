@@ -96,7 +96,7 @@
     attrStr_4.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
     
     [attrStr_1 yy_setTextHighlightRange:attrStr_1.yy_rangeOfAll color:[UIColor colorWithHexString:@"#1A1A1A" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-        WebViewController *web = WebViewController.new;
+        DTWebViewController *web = DTWebViewController.new;
         web.url = AppManager.shared.appProtocolURL.absoluteString;
         web.isPresent = true;
         BaseNavigationViewController *nv = [[BaseNavigationViewController alloc] initWithRootViewController:web];
@@ -104,7 +104,7 @@
         [self presentViewController:nv animated:YES completion:nil];
     }];
     [attrStr_3 yy_setTextHighlightRange:attrStr_3.yy_rangeOfAll color:[UIColor colorWithHexString:@"#1A1A1A" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-        WebViewController *web = WebViewController.new;
+        DTWebViewController *web = DTWebViewController.new;
         web.url = AppManager.shared.appPrivacyURL.absoluteString;
         web.isPresent = true;
         BaseNavigationViewController *nv = [[BaseNavigationViewController alloc] initWithRootViewController:web];

@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 设备扩展
-@interface UIDevice(Extension)
+@interface UIDevice(DTDeviceExtension)
 
 /// 设备安全区
 +(UIEdgeInsets)safeAreaInsets;

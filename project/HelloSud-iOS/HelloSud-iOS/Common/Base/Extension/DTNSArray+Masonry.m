@@ -5,10 +5,10 @@
 //  Created by Mary on 2022/1/20.
 //
 
-#import "NSArray+Masonry.h"
+#import "DTNSArray+Masonry.h"
 #import "View+MASAdditions.h"
 
-@implementation NSArray(Masonry)
+@implementation NSArray(DTArrayMasonry)
 
 - (MAS_VIEW *)star_commonSuperviewOfViews {
     

@@ -5,10 +5,10 @@
 //  Created by Mary on 2022/1/21.
 //
 
-#import "UIView+Extension.h"
+#import "DTUIView+Extension.h"
 #import <objc/runtime.h>
 
-@implementation UIView (Extension)
+@implementation UIView (DTViewExtension)
 
 + (Class)layerClass {
     return [CAGradientLayer class];

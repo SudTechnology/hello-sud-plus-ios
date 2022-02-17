@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSError(Custom)
+@interface NSError(DTErrorCustom)
 /// 用户自定义错误码
 /// @param code 错误码
 /// @param msg 错误描述

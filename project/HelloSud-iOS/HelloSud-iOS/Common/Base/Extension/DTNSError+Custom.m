@@ -5,9 +5,9 @@
 //  Created by kaniel on 2022/1/27.
 //
 
-#import "NSError+Custom.h"
+#import "DTNSError+Custom.h"
 
-@implementation NSError(Custom)
+@implementation NSError(DTErrorCustom)
 
 /// 用户自定义错误码
 /// @param code 错误码
