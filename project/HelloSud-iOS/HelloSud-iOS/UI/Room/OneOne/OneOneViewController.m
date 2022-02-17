@@ -1,17 +1,17 @@
 //
-//  One2OneViewController.m
+//  OneOneViewController.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/2/9.
 //
 
-#import "One2OneViewController.h"
+#import "OneOneViewController.h"
 
-@interface One2OneViewController ()
+@interface OneOneViewController ()
 
 @end
 
-@implementation One2OneViewController
+@implementation OneOneViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
