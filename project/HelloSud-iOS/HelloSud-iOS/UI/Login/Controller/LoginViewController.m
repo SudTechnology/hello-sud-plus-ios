@@ -27,13 +27,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    if (!AppManager.shared.isAgreement) {
+        [self showWelcomeUse];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (!AppManager.shared.isAgreement) {
-        [self showWelcomeUse];
-    }
 }
 
 - (void)dtAddViews {
@@ -117,7 +117,7 @@
     [attrTitle appendAttributedString:attrStr_3];
     [attrTitle appendAttributedString:attrStr_4];
     
-    [DTAlertView showAttrTextAlert:attrTitle sureText:@"同意" cancelText:@"不同意" onSureCallback:^{
+    [DTAlertView showAttrTextAlert:attrTitle sureText:@"同意" cancelText:@"不同意" rootView:self.view onSureCallback:^{
         [AppManager.shared saveAgreement];
     } onCloseCallback:^{
         SweetPromptView *promptView = [[SweetPromptView alloc] init];

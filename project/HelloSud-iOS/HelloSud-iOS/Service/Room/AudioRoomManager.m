@@ -59,12 +59,12 @@
             [ToastUtil show:model.errorMsg];
             return;
         }
+        weakSelf.roleType = model.roleType;
         AudioRoomViewController *vc = [[AudioRoomViewController alloc] init];
         vc.gameId = model.gameId;
         vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
         vc.roomType = model.gameId == 0 ? HSAudio : HSGame;
         vc.roomName = model.roomName;
-        weakSelf.roleType = model.roleType;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];
@@ -103,12 +103,12 @@
             [ToastUtil show:model.errorMsg];
             return;
         }
+        weakSelf.roleType = model.roleType;
         AudioRoomViewController *vc = [[AudioRoomViewController alloc] init];
         vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
         vc.gameId = model.gameId;
         vc.roomType = model.gameId == 0 ? HSAudio : HSGame;
         vc.roomName = model.roomName;
-        weakSelf.roleType = model.roleType;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];
