@@ -1,18 +1,18 @@
 //
-//  AudioEngineManager.m
+//  AudioEngineFactory.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
 //
 
-#import "AudioEngineManager.h"
+#import "AudioEngineFactory.h"
 
-@implementation AudioEngineManager
+@implementation AudioEngineFactory
 + (instancetype)shared {
-    static AudioEngineManager *manager = nil;
+    static AudioEngineFactory *manager = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        manager = AudioEngineManager.new;
+        manager = AudioEngineFactory.new;
     });
     return manager;
 }
