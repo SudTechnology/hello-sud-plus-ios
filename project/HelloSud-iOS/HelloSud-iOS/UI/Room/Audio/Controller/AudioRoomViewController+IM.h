@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 发送消息
 /// @param msg 消息体
 /// @param isAddToShow 是否公屏展示
-- (void)sendMsg:(AudioMsgBaseModel *)msg isAddToShow:(BOOL)isAddToShow;
+- (void)sendMsg:(RoomBaseCMDModel *)msg isAddToShow:(BOOL)isAddToShow;
 
 /// 发送进房消息
 - (void)sendEnterRoomMsg;

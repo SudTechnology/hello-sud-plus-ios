@@ -1,30 +1,40 @@
 //
-//  AudioMsgTextModel.m
+//  RoomCmdUpMicModel.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
 //
 
-#import "AudioMsgTextModel.h"
+#import "RoomCmdUpMicModel.h"
 
-@interface AudioMsgTextModel(){
+@interface RoomCmdUpMicModel(){
     NSAttributedString *_attrContent;
 }
 
 @end
 
-@implementation AudioMsgTextModel
+@implementation RoomCmdUpMicModel
+
 /// 构建消息
-/// @param content 消息内容
-+ (instancetype)makeMsg:(NSString *)content {
-    AudioMsgTextModel *m = AudioMsgTextModel.new;
-    [m configBaseInfoWithCmd:CMD_PUBLIC_MSG_NTF];
-    m.content = content;
+/// @param micIndex micIndex description
++ (instancetype)makeUpMicMsgWithMicIndex:(NSInteger)micIndex {
+    RoomCmdUpMicModel *m = RoomCmdUpMicModel.new;
+    m.micIndex = micIndex;
+    [m configBaseInfoWithCmd:CMD_UP_MIC_NOTIFY];
+    return m;
+}
+
+/// 构建下麦消息
+/// @param micIndex micIndex description
++ (instancetype)makeDownMicMsgWithMicIndex:(NSInteger)micIndex {
+    RoomCmdUpMicModel *m = RoomCmdUpMicModel.new;
+    m.micIndex = micIndex;
+    [m configBaseInfoWithCmd:CMD_DOWN_MIC_NOTIFY];
     return m;
 }
 
 - (NSString *)cellName {
-    return @"HSRoomTextTableViewCell";
+    return @"RoomSystemTableViewCell";
 }
 
 - (CGFloat)caculateHeight {
@@ -32,8 +42,8 @@
     CGFloat yMargin = 3;
     h += yMargin * 2;
     NSString *name = self.sendUser.name;
-    NSString *content = self.content;
-    UIImage *iconImage = self.sendUser.icon.length > 0 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sendUser.icon]]] : [UIImage imageNamed:@"room_ope_gift"];
+    NSString *content = self.cmd == CMD_UP_MIC_NOTIFY ? [NSString stringWithFormat:@"上%ld号麦", self.micIndex]  : @"下麦";
+    UIImage *iconImage = self.sendUser.icon.length > 0 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sendUser.icon]]] : [UIImage new];
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：", name]];
     attrName.yy_lineSpacing = 6;
@@ -43,13 +53,10 @@
     attrMsg.yy_lineSpacing = 6;
     attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-    if (!_hiddeHeadIcon) {
-        [attrName insertAttributedString:[[NSAttributedString alloc] initWithString:@" "] atIndex:0];
-        [attrName insertAttributedString:attrIcon atIndex:0];
-    }
-    [attrName appendAttributedString:attrMsg];
-    _attrContent = attrName;
-    YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(MAX_CELL_CONTENT_WIDTH - 8, CGFLOAT_MAX) text:attrName];
+    [attrIcon appendAttributedString:attrName];
+    [attrIcon appendAttributedString:attrMsg];
+    _attrContent = attrIcon;
+    YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(MAX_CELL_CONTENT_WIDTH - 8, CGFLOAT_MAX) text:attrIcon];
     if (layout) {
         h += layout.textBoundingSize.height;
     }

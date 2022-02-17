@@ -1,5 +1,5 @@
 //
-//  AudioMsgBaseModel.h
+//  RoomBaseCMDModel.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
@@ -7,13 +7,13 @@
 
 #import <Foundation/Foundation.h>
 #import "AudioUserModel.h"
-#import "AudioMsgConst.h"
+#import "RoomCmd.h"
 NS_ASSUME_NONNULL_BEGIN
 /// 最大cell内容宽度
 #define MAX_CELL_CONTENT_WIDTH 260
 
 /// 语音房消息基类model
-@interface AudioMsgBaseModel : BaseModel
+@interface RoomBaseCMDModel : BaseModel
 
 /// 指令值
 @property(nonatomic, assign)NSInteger cmd;
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 解码model
 /// @param keyValues keyValues json对象
-+ (instancetype)decodeModel:(id)keyValues;
++ (instancetype)fromJSON:(id)keyValues;
 @end
 
 NS_ASSUME_NONNULL_END

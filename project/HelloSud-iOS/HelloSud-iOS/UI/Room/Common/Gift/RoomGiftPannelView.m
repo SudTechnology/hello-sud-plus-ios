@@ -158,7 +158,7 @@
     for (AudioUserModel *user in arrWaitForSend) {
         GiftModel *giftModel = self.giftContentView.didSelectedGift;
         AudioUserModel *toUser = user;
-        AudioMsgGiftModel *giftMsg = [AudioMsgGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
+        RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
         [AudioRoomManager.shared.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
     }
 }

@@ -28,14 +28,14 @@
 }
 
 - (void)setModel:(BaseModel *)model {
-    if ([model isKindOfClass:AudioMsgTextModel.class]) {
-        AudioMsgTextModel *m = (AudioMsgTextModel *)model;
+    if ([model isKindOfClass:RoomCmdChatTextModel.class]) {
+        RoomCmdChatTextModel *m = (RoomCmdChatTextModel *)model;
         [self setMsgContent: m];
     }
 }
 
 /// 设置文本消息
-- (void)setMsgContent:(AudioMsgTextModel *)m {
+- (void)setMsgContent:(RoomCmdChatTextModel *)m {
     self.msgLabel.attributedText = m.attrContent;
 }
 

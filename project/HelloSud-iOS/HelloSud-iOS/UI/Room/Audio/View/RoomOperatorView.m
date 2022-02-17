@@ -48,11 +48,11 @@
 - (void)dtConfigEvents {
     WeakSelf
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        AudioMsgMicModel *msgModel = note.userInfo[@"msgModel"];
-        if ([msgModel isKindOfClass:AudioMsgMicModel.class] ) {
+        RoomCmdUpMicModel *msgModel = note.userInfo[@"msgModel"];
+        if ([msgModel isKindOfClass:RoomCmdUpMicModel.class] ) {
             // 操作麦位与当前符合
             if (AudioRoomManager.shared.micIndex == msgModel.micIndex) {
-                if (msgModel.cmd == CMD_DOWN_MIC_NTF) {
+                if (msgModel.cmd == CMD_DOWN_MIC_NOTIFY) {
                     // 下麦
                     weakSelf.voiceBtnState = VoiceBtnStateTypeNormal;
                 } else {

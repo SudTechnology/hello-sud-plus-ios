@@ -131,13 +131,13 @@
             return;
         }
         if (handleType == 0) {
-            AudioMsgMicModel *upMicModel = [AudioMsgMicModel makeUpMicMsgWithMicIndex:micIndex];
+            RoomCmdUpMicModel *upMicModel = [RoomCmdUpMicModel makeUpMicMsgWithMicIndex:micIndex];
             self.micIndex = micIndex;
             upMicModel.roleType = self.roleType;
             upMicModel.streamID = model.streamId;
             [self.currentRoomVC sendMsg:upMicModel isAddToShow:NO];
         } else {
-            AudioMsgMicModel *downMicModel = [AudioMsgMicModel makeDownMicMsgWithMicIndex:micIndex];
+            RoomCmdUpMicModel *downMicModel = [RoomCmdUpMicModel makeDownMicMsgWithMicIndex:micIndex];
             downMicModel.streamID = nil;
             [self.currentRoomVC sendMsg:downMicModel isAddToShow:NO];
         }

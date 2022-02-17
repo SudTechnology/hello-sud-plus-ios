@@ -7,14 +7,14 @@
 
 #ifndef CommonAudioModelHeader_h
 #define CommonAudioModelHeader_h
-#import "AudioMsgConst.h"
-#import "AudioMsgBaseModel.h"
+#import "RoomCmd.h"
+#import "RoomBaseCMDModel.h"
 #import "AudioUserModel.h"
-#import "AudioMsgTextModel.h"
-#import "AudioMsgGiftModel.h"
-#import "AudioMsgMicModel.h"
+#import "RoomCmdChatTextModel.h"
+#import "RoomCmdSendGiftModel.h"
+#import "RoomCmdUpMicModel.h"
 #import "AudioMsgSystemModel.h"
 #import "AudioRoomMicModel.h"
-#import "ExChangeGameMsgModel.h"
+#import "RoomCmdChangeGameModel.h"
 
 #endif /* CommonAudioModelHeader_h */
