@@ -13,15 +13,15 @@
 
 @interface RoomMsgTableView () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray<AudioMsgBaseModel*> *msgList;
+@property (nonatomic, strong) NSMutableArray<RoomBaseCMDModel*> *msgList;
 @end
 
 @implementation RoomMsgTableView
 
 - (void)dtAddViews {
 //    AudioUserModel *user = [AudioUserModel makeUserWithUserID:@"123" name:@"nihao" icon:@"" sex:1];
-//    AudioMsgGiftModel *giftModel = [AudioMsgGiftModel makeMsgWithGiftID:100 giftCount:10 toUser: user];
-//    [self addMsg:[AudioMsgTextModel makeMsg:@"hello"]];
+//    RoomCmdSendGiftModel *giftModel = [RoomCmdSendGiftModel makeMsgWithGiftID:100 giftCount:10 toUser: user];
+//    [self addMsg:[RoomCmdChatTextModel makeMsg:@"hello"]];
 //    [self addMsg:giftModel];
     [self addSubview:self.tableView];
 }
@@ -34,7 +34,7 @@
 
 /// 展示公屏消息
 /// @param msg 消息体
-- (void)addMsg:(AudioMsgBaseModel *)msg {
+- (void)addMsg:(RoomBaseCMDModel *)msg {
     [msg prepare];
     [self.msgList addObject:msg];
     [self.tableView reloadData];
@@ -62,7 +62,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AudioMsgBaseModel *model = self.msgList[indexPath.row];
+    RoomBaseCMDModel *model = self.msgList[indexPath.row];
     BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.cellName];
 //    cell.backgroundColor = indexPath.row % 2 ? UIColor.greenColor : UIColor.orangeColor;
     cell.model = model;

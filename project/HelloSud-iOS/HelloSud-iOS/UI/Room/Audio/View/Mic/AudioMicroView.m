@@ -119,11 +119,11 @@
     [self.headerView addGestureRecognizer:tap];
     WeakSelf
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        AudioMsgMicModel *msgModel = note.userInfo[@"msgModel"];
-        if ([msgModel isKindOfClass:AudioMsgMicModel.class] ) {
+        RoomCmdUpMicModel *msgModel = note.userInfo[@"msgModel"];
+        if ([msgModel isKindOfClass:RoomCmdUpMicModel.class] ) {
             // 操作麦位与当前符合
             if (msgModel.micIndex == weakSelf.model.micIndex) {
-                if (msgModel.cmd == CMD_DOWN_MIC_NTF) {
+                if (msgModel.cmd == CMD_DOWN_MIC_NOTIFY) {
                     // 下麦,清空用户信息
                     weakSelf.model.user = nil;
                     weakSelf.giftImageView.hidden = true;

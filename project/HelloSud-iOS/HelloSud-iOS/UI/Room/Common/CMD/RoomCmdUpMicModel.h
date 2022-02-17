@@ -1,16 +1,16 @@
 //
-//  AudioMsgMicModel.h
+//  RoomCmdUpMicModel.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
 //
 
-#import "AudioMsgBaseModel.h"
+#import "RoomBaseCMDModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 麦位操作消息model
-@interface AudioMsgMicModel : AudioMsgBaseModel
+@interface RoomCmdUpMicModel : RoomBaseCMDModel
 
 /// 麦位索引
 @property(nonatomic, assign)NSInteger micIndex;

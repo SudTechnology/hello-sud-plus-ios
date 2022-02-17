@@ -1,16 +1,16 @@
 //
-//  AudioMsgTextModel.h
+//  RoomCmdChatTextModel.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/24.
 //
 
 #import "BaseModel.h"
-#import "AudioMsgBaseModel.h"
+#import "RoomBaseCMDModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 公屏文本消息model
-@interface AudioMsgTextModel : AudioMsgBaseModel
+@interface RoomCmdChatTextModel : RoomBaseCMDModel
 
 /// 消息内容
 @property(nonatomic, copy)NSString *content;
