@@ -21,6 +21,10 @@
 
 @implementation RoomNaviView
 
+- (void)hiddenNodeWithRoleType:(NSInteger)roleType {
+    self.roomModeView.hidden = roleType != 1;
+}
+
 - (void)dtAddViews {
     [self addSubview:self.roomNameLabel];
     [self addSubview:self.roomNumLabel];
