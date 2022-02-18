@@ -12,6 +12,8 @@
 typedef void(^UIBUTTON_TAP_BLOCK)(UIButton *sender);
 /// view点击回调
 typedef void(^UIVIEW_TAP_BLOCK)(UITapGestureRecognizer *gesture);
+/// NSString
+typedef void(^StringBlock)(NSString *str);
 /// 空回调
 typedef void(^EmptyBlock)(void);
 /// 错误回调
