@@ -176,7 +176,9 @@
         NSString *name = AppManager.shared.loginUserInfo.name;
         NSString *userID = AppManager.shared.loginUserInfo.userID;
         if (name.length > 0) {
-            [LoginService.shared reqLogin:name userID:userID sucess:nil];
+            [LoginService.shared reqLogin:name userID:userID sucess:^{
+                self.isRefreshedToken = YES;
+            }];
         }
     }
 }

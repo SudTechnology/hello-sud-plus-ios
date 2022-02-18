@@ -6,6 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
+/// token刷新通知
+extern NSString * const TOKEN_REFRESH_NTF;
 
 NS_ASSUME_NONNULL_BEGIN
 /// 登录服务
