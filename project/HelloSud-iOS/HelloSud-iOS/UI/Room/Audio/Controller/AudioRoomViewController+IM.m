@@ -150,10 +150,23 @@
     if (self.roomType == HSAudio) {
         return;
     }
+    if (self.gameInfoModel.isHitBomb) {
+        if ([self isPureInt: content]) {
+            /// 关键词命中
+            [self.sudFSTAPPManager sendComonDrawTextHit:true keyWord:content text:content];
+        }
+        return;
+    }
     if (self.gameInfoModel.keyWordHiting == YES && [content isEqualToString:self.gameInfoModel.drawKeyWord]) {
         /// 关键词命中
         [self.sudFSTAPPManager sendComonDrawTextHit:true keyWord:self.gameInfoModel.drawKeyWord text:self.gameInfoModel.drawKeyWord];
     }
+}
+
+- (BOOL)isPureInt:(NSString *)string{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    int val;
+    return [scan scanInt:&val] && [scan isAtEnd];
 }
 
 @end

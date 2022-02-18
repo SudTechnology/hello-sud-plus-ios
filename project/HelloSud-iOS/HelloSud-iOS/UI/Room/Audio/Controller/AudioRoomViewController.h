@@ -71,6 +71,10 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, assign) BOOL keyWordASRing;
 /// 是否展示结束游戏
 @property (nonatomic, assign) BOOL isShowEndGame;
+/// 当前游戏在线userid列表
+@property (nonatomic, strong) NSMutableArray <NSString *>*onlineUserIdList;
+/// 游戏在线人数
+@property (nonatomic, strong) UILabel *gameNumLabel;
 
 - (void)handleTapVoice;
 @end

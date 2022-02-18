@@ -139,13 +139,16 @@
         /// 公屏添加消息
         [self addMsg:msgModel isShowOnScreen:YES];
     } else if ([state isEqualToString:MG_COMMON_KEY_WORD_TO_HIT]) {
-        NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:你画我猜关键词获取");
+        NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:关键词获取");
         MGCommonKeyWrodToHitModel *m = [MGCommonKeyWrodToHitModel mj_objectWithKeyValues: dataJson];
         self.gameInfoModel.drawKeyWord = m.word;
         if (m.word == (id) [NSNull null] || [m.word isEqualToString:@""]) {
             self.gameInfoModel.keyWordHiting = false;
         } else {
             self.gameInfoModel.keyWordHiting = true;
+        }
+        if ([m.wordType isEqualToString:@"number"]) {
+            self.gameInfoModel.isHitBomb = true;
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
         NSLog(@"游戏状态");
@@ -156,6 +159,9 @@
             self.isShowEndGame = true;
         } else {
             self.isShowEndGame = false;
+        }
+        if (m.gameState != 2) {
+            self.gameInfoModel.isHitBomb = false;
         }
     }  else if ([state isEqualToString:MG_COMMON_GAME_ASR]) {
         NSLog(@"ASR");
@@ -229,7 +235,17 @@
         }
         if (!m.isIn) {
             [GameManager.shared.gamePlayerStateMap removeObjectForKey:m.userId];
+            for (NSString *item in self.onlineUserIdList) {
+                if ([item isEqualToString:m.userId]) {
+                    [self.onlineUserIdList removeObject:m.userId];
+                }
+            }
+        } else {
+            [self.onlineUserIdList addObject:m.userId];
+            NSSet *set = [NSSet setWithArray:self.onlineUserIdList];
+            [self.onlineUserIdList setArray:[set allObjects]];
         }
+        self.gameNumLabel.text = [NSString stringWithFormat:@"游戏人数：%ld/0", self.onlineUserIdList.count];
     } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
         dataStr = @"玩家: 准备状态";
         self.gameInfoModel.isReady = m.isReady;
