@@ -100,7 +100,7 @@
     NSMutableArray<AudioRoomMicModel *> *userList = NSMutableArray.new;
     NSMutableDictionary *tempSelectedCacheMap = NSMutableDictionary.new;
     for (AudioRoomMicModel *m in arrModel) {
-        if (m.user != nil && ![AppManager.shared.loginUserInfo isMeByUserID:m.user.userID]) {
+        if (m.user != nil) {
             [userList addObject:m];
             m.isSelected = NO;
             if (self.selectedCacheMap[m.user.userID]) {
