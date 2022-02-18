@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 登录游戏
 - (void)reqGameLoginWithSuccess:(void(^)(RespGameInfoModel *gameInfo))success fail:(ErrorBlock)fail;
+
+/// 清空所有状态
+- (void)clearAllStates;
 @end
 
 NS_ASSUME_NONNULL_END

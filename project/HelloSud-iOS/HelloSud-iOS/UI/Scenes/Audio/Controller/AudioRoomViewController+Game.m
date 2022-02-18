@@ -359,6 +359,7 @@
 /// 处理切换游戏
 /// @param gameID 新的游戏ID
 - (void)handleGameChange:(NSInteger)gameID {
+    [GameManager.shared clearAllStates];
     if (gameID == 0) {
         // 切换语音房间
         self.gameId = 0;
