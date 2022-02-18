@@ -5,9 +5,9 @@
 //  Created by Mary on 2022/1/19.
 //
 
-#import "SudFSTAPPManager.h"
+#import "SudFSTAPPDeorator.h"
 
-@implementation SudFSTAPPManager
+@implementation SudFSTAPPDeorator
 
 - (instancetype)init:(id<ISudFSTAPP>)fsmAPP2MG {
     self = [super init];

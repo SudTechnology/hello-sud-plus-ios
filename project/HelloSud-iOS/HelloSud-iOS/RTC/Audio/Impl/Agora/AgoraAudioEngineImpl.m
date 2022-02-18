@@ -38,7 +38,6 @@
 
 - (void)initWithConfig:(NSDictionary *)config {
     NSString *appID = config[@"appID"];
-    NSString *appKey = config[@"appKey"];
     _agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:appID delegate:self];
     [_agoraKit enableAudioVolumeIndication:300 smooth:3 report_vad:YES];
     _agoraIM = [[AgoraRtmKit alloc]initWithAppId:appID delegate:self];

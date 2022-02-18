@@ -121,59 +121,16 @@
     
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:公屏消息");
-        MGCommonPublicMessageModel *publicMsgModel = [MGCommonPublicMessageModel mj_objectWithKeyValues: dataJson];
-        NSMutableAttributedString * attrMsg = [[NSMutableAttributedString alloc] init];
-        for (GamePublicMsg *m in publicMsgModel.msg) {
-            if (m.phrase == 2) {
-                [attrMsg appendAttributedString:[AppUtil getAttributedStringWithString:m.user.name color:m.user.color]];
-            } else if (m.phrase == 1) {
-                NSString *textString = m.text.mj_keyValues[self.gameInfoModel.language];
-                NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc]initWithString:textString];
-                [attrMsg appendAttributedString:attributedString];
-            }
-        }
-        attrMsg.yy_lineSpacing = 6;
-        attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-        attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-        AudioMsgSystemModel *msgModel = [AudioMsgSystemModel makeMsgWithAttr:attrMsg];
-        /// 公屏添加消息
-        [self addMsg:msgModel isShowOnScreen:YES];
+        [self sendPublicMsgdWithDataJson:dataJson];
     } else if ([state isEqualToString:MG_COMMON_KEY_WORD_TO_HIT]) {
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:关键词获取");
-        MGCommonKeyWrodToHitModel *m = [MGCommonKeyWrodToHitModel mj_objectWithKeyValues: dataJson];
-        self.gameInfoModel.drawKeyWord = m.word;
-        if (m.word == (id) [NSNull null] || [m.word isEqualToString:@""]) {
-            self.gameInfoModel.keyWordHiting = false;
-        } else {
-            self.gameInfoModel.keyWordHiting = true;
-        }
-        if ([m.wordType isEqualToString:@"number"]) {
-            self.gameInfoModel.isHitBomb = true;
-        }
+        [self KeyWrodToHitWithDataJson:dataJson];
     } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
         NSLog(@"游戏状态");
-        GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
-        self.gameInfoModel.gameState = m.gameState;
-        
-        if (m.gameState == 2 && [AppManager.shared.loginUserInfo.userID isEqualToString:GameManager.shared.captainUserId]) {
-            self.isShowEndGame = true;
-        } else {
-            self.isShowEndGame = false;
-        }
-        if (m.gameState != 2) {
-            self.gameInfoModel.isHitBomb = false;
-        }
+        [self gameStateWithDataJson:dataJson];
     }  else if ([state isEqualToString:MG_COMMON_GAME_ASR]) {
         NSLog(@"ASR");
-        GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
-        if (m.isOpen) {
-            self.keyWordASRing = YES;
-            /// 语音采集
-            [self startCaptureAudioToASR];
-        } else {
-            self.keyWordASRing = NO;
-            [self stopCapture];
-        }
+        [self gameASRWithDataJson:dataJson];
     } else {
         /// 其他状态
         /// TODO
@@ -197,6 +154,7 @@
     m.userId = userId;
     m.state = state;
     
+    /// 更新当前游戏状态map
     if (![m.state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
         [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
     }
@@ -212,69 +170,6 @@
     [handle success:[AppUtil dictionaryToJson:dict]];
 }
 
-#pragma mark - 状态解析
-- (void)handleGameState: (GamePlayerStateModel *)m {
-    NSString *state = m.state;
-    /// 状态解析
-    NSString *dataStr = @"";
-    if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
-        dataStr = @"玩家: 加入状态";
-        self.gameInfoModel.isInGame = m.isIn;
-        if (m.isIn && m.userId == AppManager.shared.loginUserInfo.userID) {
-            // 请求上麦
-            BOOL isUpMic = false;
-            NSArray *arr = self.dicMicModel.allValues;
-            for (AudioRoomMicModel *m in arr) {
-                if (m.user != nil && m.user.userID == AppManager.shared.loginUserInfo.userID) {
-                    isUpMic = true;
-                }
-            }
-            if (!isUpMic) {
-                [self handleTapVoice];
-            }
-        }
-        if (!m.isIn) {
-            [GameManager.shared.gamePlayerStateMap removeObjectForKey:m.userId];
-            for (NSString *item in self.onlineUserIdList) {
-                if ([item isEqualToString:m.userId]) {
-                    [self.onlineUserIdList removeObject:m.userId];
-                }
-            }
-        } else {
-            [self.onlineUserIdList addObject:m.userId];
-            NSSet *set = [NSSet setWithArray:self.onlineUserIdList];
-            [self.onlineUserIdList setArray:[set allObjects]];
-        }
-        self.gameNumLabel.text = [NSString stringWithFormat:@"游戏人数：%ld/0", self.onlineUserIdList.count];
-    } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
-        dataStr = @"玩家: 准备状态";
-        self.gameInfoModel.isReady = m.isReady;
-    } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
-        dataStr = @"玩家: 队长状态";
-        if (m.isCaptain) {
-            GameManager.shared.captainUserId = m.userId;
-        } else {
-            if (GameManager.shared.captainUserId == m.userId) {
-                GameManager.shared.captainUserId = @"";
-            }
-        }
-    } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
-        dataStr = @"玩家: 游戏状态";
-    } else if ([state isEqualToString:MG_DG_SELECTING]) {
-        dataStr = @"你画我猜 玩家: 选词中";
-    } else if ([state isEqualToString:MG_DG_PAINTING]) {
-        dataStr = @"你画我猜 玩家: 作画中";
-    } else if ([state isEqualToString:MG_DG_ERRORANSWER]) {
-        dataStr = @"你画我猜 玩家: 错误答";
-    } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
-        dataStr = @"你画我猜 玩家: 总积分";
-    } else if ([state isEqualToString:MG_DG_SCORE]) {
-        dataStr = @"你画我猜 玩家: 本次积分";
-    } else {
-        NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态:%@", MG_DG_SCORE);
-    }
-    NSLog(@"ISudFSMMG:onPlayerStateChange:dataStr:%@", dataStr);
-}
 
 
 #pragma mark =======登录 加载 游戏=======
@@ -350,7 +245,7 @@
 /// @param rootView 游戏根视图
 - (void)loadMG:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t) mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView*)rootView {
     self.iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:fsmMG rootView:rootView];
-    self.sudFSTAPPManager = [[SudFSTAPPManager alloc] init:self.iSudFSTAPP];
+    self.sudFSTAPPManager = [[SudFSTAPPDeorator alloc] init:self.iSudFSTAPP];
 }
 
 /// 处理切换游戏
@@ -393,5 +288,128 @@
     [AudioEngineFactory.shared.audioEngine stopCapture];
 }
 
+#pragma mark =======游戏状态变化处理=======
+- (void)sendPublicMsgdWithDataJson:(NSString *)dataJson {
+    MGCommonPublicMessageModel *publicMsgModel = [MGCommonPublicMessageModel mj_objectWithKeyValues: dataJson];
+    NSMutableAttributedString * attrMsg = [[NSMutableAttributedString alloc] init];
+    for (GamePublicMsg *m in publicMsgModel.msg) {
+        if (m.phrase == 2) {
+            [attrMsg appendAttributedString:[AppUtil getAttributedStringWithString:m.user.name color:m.user.color]];
+        } else if (m.phrase == 1) {
+            NSString *textString = m.text.mj_keyValues[self.gameInfoModel.language];
+            NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc]initWithString:textString];
+            [attrMsg appendAttributedString:attributedString];
+        }
+    }
+    attrMsg.yy_lineSpacing = 6;
+    attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+    attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+    AudioMsgSystemModel *msgModel = [AudioMsgSystemModel makeMsgWithAttr:attrMsg];
+    /// 公屏添加消息
+    [self addMsg:msgModel isShowOnScreen:YES];
+}
+
+- (void)KeyWrodToHitWithDataJson:(NSString *)dataJson {
+    MGCommonKeyWrodToHitModel *m = [MGCommonKeyWrodToHitModel mj_objectWithKeyValues: dataJson];
+    self.gameInfoModel.drawKeyWord = m.word;
+    if (m.word == (id) [NSNull null] || [m.word isEqualToString:@""]) {
+        self.gameInfoModel.keyWordHiting = false;
+    } else {
+        self.gameInfoModel.keyWordHiting = true;
+    }
+    if ([m.wordType isEqualToString:@"number"]) {
+        self.gameInfoModel.isHitBomb = true;
+    }
+}
+
+- (void)gameStateWithDataJson:(NSString *)dataJson {
+    MGCommonGameStateModel *m = [MGCommonGameStateModel mj_objectWithKeyValues: dataJson];
+    self.gameInfoModel.gameState = m.gameState;
+    
+    if (m.gameState == 2 && [AppManager.shared.loginUserInfo.userID isEqualToString:GameManager.shared.captainUserId]) {
+        self.isShowEndGame = true;
+    } else {
+        self.isShowEndGame = false;
+    }
+    if (m.gameState != 2) {
+        self.gameInfoModel.isHitBomb = false;
+    }
+}
+
+- (void)gameASRWithDataJson:(NSString *)dataJson {
+    MGCommonGameASRModel *m = [MGCommonGameASRModel mj_objectWithKeyValues: dataJson];
+    if (m.isOpen) {
+        self.keyWordASRing = YES;
+        /// 语音采集
+        [self startCaptureAudioToASR];
+    } else {
+        self.keyWordASRing = NO;
+        [self stopCapture];
+    }
+}
+
+#pragma mark - =======游戏玩家状态变化=======
+- (void)handleGameState: (GamePlayerStateModel *)m {
+    NSString *state = m.state;
+    /// 状态解析
+    NSString *dataStr = @"";
+    if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
+        dataStr = @"玩家: 加入状态";
+        self.gameInfoModel.isInGame = m.isIn;
+        if (m.isIn && m.userId == AppManager.shared.loginUserInfo.userID) {
+            // 请求上麦
+            BOOL isUpMic = false;
+            NSArray *arr = self.dicMicModel.allValues;
+            for (AudioRoomMicModel *m in arr) {
+                if (m.user != nil && m.user.userID == AppManager.shared.loginUserInfo.userID) {
+                    isUpMic = true;
+                }
+            }
+            if (!isUpMic) {
+                [self handleTapVoice];
+            }
+        }
+        if (!m.isIn) {
+            [GameManager.shared.gamePlayerStateMap removeObjectForKey:m.userId];
+            for (NSString *item in self.onlineUserIdList) {
+                if ([item isEqualToString:m.userId]) {
+                    [self.onlineUserIdList removeObject:m.userId];
+                }
+            }
+        } else {
+            [self.onlineUserIdList addObject:m.userId];
+            NSSet *set = [NSSet setWithArray:self.onlineUserIdList];
+            [self.onlineUserIdList setArray:[set allObjects]];
+        }
+        self.gameNumLabel.text = [NSString stringWithFormat:@"游戏人数：%ld/0", self.onlineUserIdList.count];
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
+        dataStr = @"玩家: 准备状态";
+        self.gameInfoModel.isReady = m.isReady;
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
+        dataStr = @"玩家: 队长状态";
+        if (m.isCaptain) {
+            GameManager.shared.captainUserId = m.userId;
+        } else {
+            if (GameManager.shared.captainUserId == m.userId) {
+                GameManager.shared.captainUserId = @"";
+            }
+        }
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
+        dataStr = @"玩家: 游戏状态";
+    } else if ([state isEqualToString:MG_DG_SELECTING]) {
+        dataStr = @"你画我猜 玩家: 选词中";
+    } else if ([state isEqualToString:MG_DG_PAINTING]) {
+        dataStr = @"你画我猜 玩家: 作画中";
+    } else if ([state isEqualToString:MG_DG_ERRORANSWER]) {
+        dataStr = @"你画我猜 玩家: 错误答";
+    } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
+        dataStr = @"你画我猜 玩家: 总积分";
+    } else if ([state isEqualToString:MG_DG_SCORE]) {
+        dataStr = @"你画我猜 玩家: 本次积分";
+    } else {
+        NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态:%@", MG_DG_SCORE);
+    }
+    NSLog(@"ISudFSMMG:onPlayerStateChange:dataStr:%@", dataStr);
+}
 @end
 

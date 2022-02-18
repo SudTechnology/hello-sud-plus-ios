@@ -7,8 +7,6 @@
 
 #import "AudioMicroView.h"
 
-
-
 @interface AudioMicroView ()
 @property (nonatomic, strong) UIImageView *headerView;
 @property (nonatomic, strong) YYLabel *nameLabel;

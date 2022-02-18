@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 废弃
 /// 玩家状态
 @interface GamePlayerStateModel : NSObject
 
