@@ -36,6 +36,17 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
+- (void)dtConfigEvents {
+    WeakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        if (AppManager.shared.isRefreshedToken) {
+            [weakSelf requestData];
+        } else {
+            [weakSelf.tableView.mj_header endRefreshing];
+        }
+    }];
+}
+
 - (void)dtAddViews {
     [self.view addSubview:self.searchHeaderView];
     [self.view addSubview:self.tableView];
@@ -58,6 +69,10 @@
 - (void)addRefreshHeader {
     WeakSelf
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        if (!AppManager.shared.isRefreshedToken) {
+            [AppManager.shared refreshToken];
+            return;
+        }
         [weakSelf requestData];
     }];
     self.tableView.mj_header = header;
