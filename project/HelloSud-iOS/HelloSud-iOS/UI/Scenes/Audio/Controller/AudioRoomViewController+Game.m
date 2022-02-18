@@ -219,18 +219,20 @@
     NSString *dataStr = @"";
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         dataStr = @"玩家: 加入状态";
-        self.gameInfoModel.isInGame = m.isIn;
-        if (m.isIn && m.userId == AppManager.shared.loginUserInfo.userID) {
-            // 请求上麦
-            BOOL isUpMic = false;
-            NSArray *arr = self.dicMicModel.allValues;
-            for (AudioRoomMicModel *m in arr) {
-                if (m.user != nil && m.user.userID == AppManager.shared.loginUserInfo.userID) {
-                    isUpMic = true;
+        if (m.userId == AppManager.shared.loginUserInfo.userID) {
+            self.gameInfoModel.isInGame = m.isIn;
+            if (m.isIn) {
+                // 请求上麦
+                BOOL isUpMic = false;
+                NSArray *arr = self.dicMicModel.allValues;
+                for (AudioRoomMicModel *m in arr) {
+                    if (m.user != nil && m.user.userID == AppManager.shared.loginUserInfo.userID) {
+                        isUpMic = true;
+                    }
                 }
-            }
-            if (!isUpMic) {
-                [self handleTapVoice];
+                if (!isUpMic) {
+                    [self handleTapVoice];
+                }
             }
         }
         if (!m.isIn) {
