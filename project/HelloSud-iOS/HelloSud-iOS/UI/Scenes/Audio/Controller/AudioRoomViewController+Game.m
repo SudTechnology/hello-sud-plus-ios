@@ -366,6 +366,7 @@
         self.roomType = HSAudio;
         return;
     }
+    [self resetGameInfoModel];
     [self logoutGame];
     self.gameId = gameID;
     self.gameInfoModel.currentPlayerUserId = AppManager.shared.loginUserInfo.userID;
