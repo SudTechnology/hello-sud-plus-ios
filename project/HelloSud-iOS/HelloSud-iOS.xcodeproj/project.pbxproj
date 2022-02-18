@@ -126,6 +126,14 @@
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
 		6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85627BE37D600D8F76C /* SettingsService.m */; };
 		6CD6E85B27BE409B00D8F76C /* TalentRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85A27BE409B00D8F76C /* TalentRoomViewController.m */; };
+		6CD6E86027BF412500D8F76C /* TicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85F27BF412500D8F76C /* TicketViewController.m */; };
+		6CD6E86427BF41A600D8F76C /* CrossroomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E86327BF41A600D8F76C /* CrossroomViewController.m */; };
+		6CD6E86827BF41F400D8F76C /* OrderentertainmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E86727BF41F400D8F76C /* OrderentertainmentViewController.m */; };
+		6CD6E86C27BF421C00D8F76C /* ASRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E86B27BF421C00D8F76C /* ASRViewController.m */; };
+		6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87227BF42B200D8F76C /* NeteaseAudioEngineImpl.m */; };
+		6CD6E87627BF42F900D8F76C /* VolcAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87527BF42F900D8F76C /* VolcAudioEngineImpl.m */; };
+		6CD6E87927BF431500D8F76C /* AliyunAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87827BF431500D8F76C /* AliyunAudioEngineImpl.m */; };
+		6CD6E87C27BF433500D8F76C /* TXAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */; };
 		BC2101199D87BB6081A8FBC0 /* DTNSError+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5A0981935974C33E8B /* DTNSError+Custom.m */; };
 		BC210452F6884908D768A126 /* DTNSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106C0581A7D8986B9FC83 /* DTNSArray+Masonry.m */; };
 		BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102EB58A8CE4A527A5167 /* ToastUtil.m */; };
@@ -396,6 +404,22 @@
 		6CD6E85627BE37D600D8F76C /* SettingsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsService.m; sourceTree = "<group>"; };
 		6CD6E85927BE409B00D8F76C /* TalentRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TalentRoomViewController.h; sourceTree = "<group>"; };
 		6CD6E85A27BE409B00D8F76C /* TalentRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TalentRoomViewController.m; sourceTree = "<group>"; };
+		6CD6E85E27BF412500D8F76C /* TicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketViewController.h; sourceTree = "<group>"; };
+		6CD6E85F27BF412500D8F76C /* TicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketViewController.m; sourceTree = "<group>"; };
+		6CD6E86227BF41A600D8F76C /* CrossroomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrossroomViewController.h; sourceTree = "<group>"; };
+		6CD6E86327BF41A600D8F76C /* CrossroomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrossroomViewController.m; sourceTree = "<group>"; };
+		6CD6E86627BF41F400D8F76C /* OrderentertainmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderentertainmentViewController.h; sourceTree = "<group>"; };
+		6CD6E86727BF41F400D8F76C /* OrderentertainmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderentertainmentViewController.m; sourceTree = "<group>"; };
+		6CD6E86A27BF421C00D8F76C /* ASRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASRViewController.h; sourceTree = "<group>"; };
+		6CD6E86B27BF421C00D8F76C /* ASRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASRViewController.m; sourceTree = "<group>"; };
+		6CD6E87127BF42B200D8F76C /* NeteaseAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NeteaseAudioEngineImpl.h; sourceTree = "<group>"; };
+		6CD6E87227BF42B200D8F76C /* NeteaseAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NeteaseAudioEngineImpl.m; sourceTree = "<group>"; };
+		6CD6E87427BF42F900D8F76C /* VolcAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VolcAudioEngineImpl.h; sourceTree = "<group>"; };
+		6CD6E87527BF42F900D8F76C /* VolcAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VolcAudioEngineImpl.m; sourceTree = "<group>"; };
+		6CD6E87727BF431500D8F76C /* AliyunAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AliyunAudioEngineImpl.h; sourceTree = "<group>"; };
+		6CD6E87827BF431500D8F76C /* AliyunAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AliyunAudioEngineImpl.m; sourceTree = "<group>"; };
+		6CD6E87A27BF433500D8F76C /* TXAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAudioEngineImpl.h; sourceTree = "<group>"; };
+		6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAudioEngineImpl.m; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIView+Extension.m"; sourceTree = "<group>"; };
 		BC2100EC41AFF28046FF7B87 /* DTNSError+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTNSError+Custom.h"; sourceTree = "<group>"; };
@@ -435,7 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				6CD6E84C27BE321700D8F76C /* Main */,
-				6C076E82279EA2CF00650209 /* Room */,
+				6C076E82279EA2CF00650209 /* Scenes */,
 				445EAAE9279E7C7B000DCC72 /* Home */,
 				445EAA6F2798FFE4000DCC72 /* RoomList */,
 				445EAA702798FFE4000DCC72 /* Settings */,
@@ -772,16 +796,20 @@
 			path = Zego;
 			sourceTree = "<group>";
 		};
-		6C076E82279EA2CF00650209 /* Room */ = {
+		6C076E82279EA2CF00650209 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				6CD6E86927BF420900D8F76C /* ASR */,
+				6CD6E86527BF41D900D8F76C /* Orderentertainment */,
+				6CD6E86127BF417300D8F76C /* Crossroom */,
+				6CD6E85D27BF410100D8F76C /* Ticket */,
 				6CD6E85C27BE427500D8F76C /* Common */,
 				6CD6E85827BE407900D8F76C /* Talent */,
 				6C076E83279EA2CF00650209 /* Show */,
 				6C076E84279EA2CF00650209 /* OneOne */,
 				6C076E85279EA2CF00650209 /* Audio */,
 			);
-			path = Room;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		6C076E83279EA2CF00650209 /* Show */ = {
@@ -1018,6 +1046,10 @@
 		6CD6E84727BE2CDA00D8F76C /* Impl */ = {
 			isa = PBXGroup;
 			children = (
+				6CD6E87027BF428200D8F76C /* TX */,
+				6CD6E86F27BF427800D8F76C /* Aliyun */,
+				6CD6E86E27BF426B00D8F76C /* Volc */,
+				6CD6E86D27BF425800D8F76C /* Netease */,
 				6C1D007527BA03DC000F0998 /* Agora */,
 				6C076E6E279E424900650209 /* Zego */,
 			);
@@ -1133,6 +1165,78 @@
 				445EAAD6279AAF4B000DCC72 /* Gift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		6CD6E85D27BF410100D8F76C /* Ticket */ = {
+			isa = PBXGroup;
+			children = (
+				6CD6E85E27BF412500D8F76C /* TicketViewController.h */,
+				6CD6E85F27BF412500D8F76C /* TicketViewController.m */,
+			);
+			path = Ticket;
+			sourceTree = "<group>";
+		};
+		6CD6E86127BF417300D8F76C /* Crossroom */ = {
+			isa = PBXGroup;
+			children = (
+				6CD6E86227BF41A600D8F76C /* CrossroomViewController.h */,
+				6CD6E86327BF41A600D8F76C /* CrossroomViewController.m */,
+			);
+			path = Crossroom;
+			sourceTree = "<group>";
+		};
+		6CD6E86527BF41D900D8F76C /* Orderentertainment */ = {
+			isa = PBXGroup;
+			children = (
+				6CD6E86627BF41F400D8F76C /* OrderentertainmentViewController.h */,
+				6CD6E86727BF41F400D8F76C /* OrderentertainmentViewController.m */,
+			);
+			path = Orderentertainment;
+			sourceTree = "<group>";
+		};
+		6CD6E86927BF420900D8F76C /* ASR */ = {
+			isa = PBXGroup;
+			children = (
+				6CD6E86A27BF421C00D8F76C /* ASRViewController.h */,
+				6CD6E86B27BF421C00D8F76C /* ASRViewController.m */,
+			);
+			path = ASR;
+			sourceTree = "<group>";
+		};
+		6CD6E86D27BF425800D8F76C /* Netease */ = {
+			isa = PBXGroup;
+			children = (
+				6CD6E87127BF42B200D8F76C /* NeteaseAudioEngineImpl.h */,
+				6CD6E87227BF42B200D8F76C /* NeteaseAudioEngineImpl.m */,
+			);
+			path = Netease;
+			sourceTree = "<group>";
+		};
+		6CD6E86E27BF426B00D8F76C /* Volc */ = {
+			isa = PBXGroup;
+			children = (
+				6CD6E87427BF42F900D8F76C /* VolcAudioEngineImpl.h */,
+				6CD6E87527BF42F900D8F76C /* VolcAudioEngineImpl.m */,
+			);
+			path = Volc;
+			sourceTree = "<group>";
+		};
+		6CD6E86F27BF427800D8F76C /* Aliyun */ = {
+			isa = PBXGroup;
+			children = (
+				6CD6E87727BF431500D8F76C /* AliyunAudioEngineImpl.h */,
+				6CD6E87827BF431500D8F76C /* AliyunAudioEngineImpl.m */,
+			);
+			path = Aliyun;
+			sourceTree = "<group>";
+		};
+		6CD6E87027BF428200D8F76C /* TX */ = {
+			isa = PBXGroup;
+			children = (
+				6CD6E87A27BF433500D8F76C /* TXAudioEngineImpl.h */,
+				6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */,
+			);
+			path = TX;
 			sourceTree = "<group>";
 		};
 		BC210060BE34F958814B970C /* Base */ = {
@@ -1340,6 +1444,7 @@
 				6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */,
 				445EAAD9279AAF69000DCC72 /* GiftUserCollectionViewCell.m in Sources */,
 				445EAB04279FB028000DCC72 /* SweetPromptView.m in Sources */,
+				6CD6E87C27BF433500D8F76C /* TXAudioEngineImpl.m in Sources */,
 				6C076E97279EA9B200650209 /* AudioUserModel.m in Sources */,
 				445EAAFE279F97D0000DCC72 /* RoomInputView.m in Sources */,
 				6C076EC727A152F900650209 /* DTRippleAnimationView.m in Sources */,
@@ -1358,6 +1463,7 @@
 				6C076ED427A274FE00650209 /* UserManager.m in Sources */,
 				44F29F6527BBB55900F57DEE /* ChangeRTCModel.m in Sources */,
 				445EAB07279FD15F000DCC72 /* AudioRoomViewController+Game.m in Sources */,
+				6CD6E86027BF412500D8F76C /* TicketViewController.m in Sources */,
 				445EAB3327A1325F000DCC72 /* ConfigModel.m in Sources */,
 				445EAB1727A00F27000DCC72 /* GameListModel.m in Sources */,
 				445EAAE2279ABB22000DCC72 /* BaseAlertView.m in Sources */,
@@ -1375,7 +1481,9 @@
 				445EAACC279A9C30000DCC72 /* AudioMicroView.m in Sources */,
 				44DF039F2797B62B006EE6AC /* MGCommonPublicMessageModel.m in Sources */,
 				445EAAA227997584000DCC72 /* GameItemCollectionViewCell.m in Sources */,
+				6CD6E86827BF41F400D8F76C /* OrderentertainmentViewController.m in Sources */,
 				6C076E7D279E833C00650209 /* AudioEngineFactory.m in Sources */,
+				6CD6E87627BF42F900D8F76C /* VolcAudioEngineImpl.m in Sources */,
 				6C192E5E279523B100553034 /* main.m in Sources */,
 				445EAADC279AB262000DCC72 /* RoomGiftContentView.m in Sources */,
 				44DF03A22797E467006EE6AC /* MGCommonKeyWrodToHitModel.m in Sources */,
@@ -1419,6 +1527,7 @@
 				445EAAB3279A65B9000DCC72 /* RoomMsgTableView.m in Sources */,
 				445EAAC2279A6DDC000DCC72 /* RoomSystemTableViewCell.m in Sources */,
 				445EAABC279A6DA0000DCC72 /* HSRoomTextTableViewCell.m in Sources */,
+				6CD6E86427BF41A600D8F76C /* CrossroomViewController.m in Sources */,
 				6C076E9B279EC4F100650209 /* RoomCmdChatTextModel.m in Sources */,
 				6C076EAA279F993900650209 /* AccountUserModel.m in Sources */,
 				445EAAF8279E8183000DCC72 /* HomeHeaderReusableView.m in Sources */,
@@ -1445,11 +1554,14 @@
 				BC210868A0B206FC2641B7C6 /* HttpService.m in Sources */,
 				BC2107427C1CF2D51754990F /* DTUIColor+Extension.m in Sources */,
 				BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */,
+				6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */,
 				BC210452F6884908D768A126 /* DTNSArray+Masonry.m in Sources */,
+				6CD6E86C27BF421C00D8F76C /* ASRViewController.m in Sources */,
 				BC210D70BDEB097F49794C9B /* DTUIView+Extension.m in Sources */,
 				BC2101199D87BB6081A8FBC0 /* DTNSError+Custom.m in Sources */,
 				BC2106F693B8FDA87CC699D2 /* AppUtil.m in Sources */,
 				BC210FDF9C7CAC234D035EF6 /* DeviceUtil.m in Sources */,
+				6CD6E87927BF431500D8F76C /* AliyunAudioEngineImpl.m in Sources */,
 				BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

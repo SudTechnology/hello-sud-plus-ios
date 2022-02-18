@@ -50,6 +50,7 @@ NSString *const TOKEN_REFRESH_NTF = @"TOKEN_REFRESH_NTF";
         if (success) success();
     } failure:^(id error) {
         [ToastUtil show:@"网络错误"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_NTF object:nil];
     }];
 }
 @end
