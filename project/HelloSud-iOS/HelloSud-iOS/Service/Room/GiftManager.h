@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shared;
 
+/// 从磁盘加载礼物
+- (void)loadFromDisk;
+
 /// 获取礼物信息
 /// @param giftID 礼物ID
 - (nullable GiftModel *)giftByID:(NSInteger)giftID;
