@@ -45,6 +45,9 @@
             [weakSelf.collectionView.mj_header endRefreshing];
         }
     }];
+    if (AppManager.shared.isRefreshedToken) {
+        [self requestData];
+    }
 }
 
 - (void)viewDidLoad {
