@@ -77,6 +77,9 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, strong) UILabel *gameNumLabel;
 
 - (void)handleTapVoice;
+
+/// 重置游戏状态信息model
+- (void)resetGameInfoModel;
 @end
 
 NS_ASSUME_NONNULL_END

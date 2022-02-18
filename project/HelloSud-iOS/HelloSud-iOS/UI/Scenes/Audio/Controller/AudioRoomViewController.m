@@ -324,6 +324,10 @@
     
 }
 
+- (void)resetGameInfoModel {
+    _gameInfoModel = nil;
+}
+
 /// 展示公屏消息
 /// @param msg 消息体
 /// @param isShowOnScreen 是否展示公屏

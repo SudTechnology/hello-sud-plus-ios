@@ -31,8 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否是数字炸弹  number
 @property (nonatomic, assign) BOOL isHitBomb;
-
-
 @end
 
 NS_ASSUME_NONNULL_END
