@@ -39,7 +39,11 @@
 - (void)dtConfigEvents {
     WeakSelf
     [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        [weakSelf requestData];
+        if (AppManager.shared.isRefreshedToken) {
+            [weakSelf requestData];
+        } else {
+            [weakSelf.collectionView.mj_header endRefreshing];
+        }
     }];
 }
 
@@ -74,6 +78,10 @@
 - (void)addRefreshHeader {
     WeakSelf
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        if (!AppManager.shared.isRefreshedToken) {
+            [AppManager.shared refreshToken];
+            return;
+        }
         [weakSelf requestData];
     }];
     self.collectionView.mj_header = header;
