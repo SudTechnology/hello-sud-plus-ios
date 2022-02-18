@@ -239,11 +239,16 @@
         [AudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:0 success:nil fail:nil];
         return;
     } else if ([AppManager.shared.loginUserInfo isMeByUserID:micModel.user.userID]) {
+        BOOL isGameing = NO;
         // 是自己或者房主
-        MicOperateView *v = MicOperateView.new;
-        v.downMicCallback = ^(UIButton *sender) {
-            // 下麦
-            [AudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
+        MicOperateView *v = [[MicOperateView alloc]initWithOperateList:isGameing ? @[@"下麦", @"踢出游戏"] : @[@"下麦"]];
+        v.operateCallback = ^(NSString *str) {
+            if ([str isEqualToString: @"下麦"]) {
+                // 下麦
+                [AudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
+            } else if ([str isEqualToString: @"踢出游戏"]) {
+                // 踢出游戏
+            }
             [DTSheetView close];
         };
         v.cancelCallback = ^(UIButton *sender) {
