@@ -153,7 +153,7 @@
     if (self.gameInfoModel.isHitBomb) {
         if ([self isPureInt: content]) {
             /// 关键词命中
-            [self.sudFSTAPPManager sendComonDrawTextHit:true keyWord:content text:content];
+            [self.sudFSTAPPManager sendComonDrawTextHit:false keyWord:@"" text:content];
         }
         return;
     }

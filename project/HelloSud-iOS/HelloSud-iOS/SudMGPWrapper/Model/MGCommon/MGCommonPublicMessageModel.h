@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 公屏消息Model
+/// 通用状态-游戏: 公屏消息   MG_COMMON_PUBLIC_MESSAGE
 @interface GamePublicText :NSObject
 @property (nonatomic, copy) NSString *def;
 @property (nonatomic, copy) NSString *en_GB;

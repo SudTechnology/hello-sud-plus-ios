@@ -16,5 +16,6 @@
 #import "AudioMsgSystemModel.h"
 #import "AudioRoomMicModel.h"
 #import "RoomCmdChangeGameModel.h"
+#import "RoomGameInfoModel.h"
 
 #endif /* CommonAudioModelHeader_h */

@@ -13,12 +13,11 @@
 #import <SudMGP/ISudFSMStateHandle.h>
 
 #import "AppUtil.h"
-#import "GameConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// app -> 游戏
-@interface SudFSTAPPManager : NSObject
+@interface SudFSTAPPDeorator : NSObject
 
 @property (nonatomic, weak) id<ISudFSTAPP> fsmAPP2MG;
 - (instancetype)init:(id<ISudFSTAPP>)fsmAPP2MG;

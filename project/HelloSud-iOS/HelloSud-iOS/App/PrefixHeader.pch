@@ -30,7 +30,10 @@
 
 /// Comon
 #import "AppUtil.h"
-#import "GameConfig.h"
+#import "SudMGPAPPState.h"
+#import "SudMGPMGState.h"
+#import "CommonGameModelHeader.h"
+#import "MGPlayerHeader.h"
 #import "HttpService.h"
 
 /// Page
@@ -43,7 +46,6 @@
 #import "AppManager.h"
 #import "UserManager.h"
 #import "GiftManager.h"
-#import "GameSudManager.h"
 #import "AudioRoomManager.h"
 #import "GameManager.h"
 #import "LoginService.h"

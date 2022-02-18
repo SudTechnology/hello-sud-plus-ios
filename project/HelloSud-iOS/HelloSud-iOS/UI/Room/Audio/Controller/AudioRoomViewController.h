@@ -8,17 +8,10 @@
 #import "BaseViewController.h"
 #import "AudioEngineFactory.h"
 #import "CommonAudioModelHeader.h"
-#import "SudFSTAPPManager.h"
+#import "SudFSTAPPDeorator.h"
 #import "SwitchRoomModeView.h"
 
 /// Model
-#import "GameViewInfoModel.h"
-#import "MGCommonPublicMessageModel.h"
-#import "MGCommonKeyWrodToHitModel.h"
-#import "GamePlayerStateModel.h"
-#import "RoomGameInfoModel.h"
-#import "GameCommonModel.h"
-#import "GameCfgModel.h"
 
 /// SudMGPSDK
 #import <SudMGP/ISudFSMMG.h>
@@ -62,10 +55,10 @@ typedef NS_ENUM(NSInteger, RoomType) {
 /// ISudFSTAPP
 @property (nonatomic, strong) id<ISudFSTAPP> iSudFSTAPP;
 /// app To 游戏 管理类
-@property (nonatomic, strong) SudFSTAPPManager *sudFSTAPPManager;
+@property (nonatomic, strong) SudFSTAPPDeorator *sudFSTAPPManager;
 /// game相关信息Model
 @property (nonatomic, copy) RoomGameInfoModel *gameInfoModel;
-/// 记录游戏所需状态
+/// 是否进入游戏
 @property (nonatomic, assign) BOOL isEnteredRoom;
 /// ASR功能的开启关闭的状态标志
 @property (nonatomic, assign) BOOL keyWordASRing;
@@ -73,6 +66,7 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, assign) BOOL isShowEndGame;
 /// 当前游戏在线userid列表
 @property (nonatomic, strong) NSMutableArray <NSString *>*onlineUserIdList;
+
 /// 游戏在线人数
 @property (nonatomic, strong) UILabel *gameNumLabel;
 
