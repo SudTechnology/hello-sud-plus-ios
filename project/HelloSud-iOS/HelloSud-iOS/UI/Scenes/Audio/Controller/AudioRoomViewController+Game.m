@@ -235,9 +235,12 @@
         }
         if (!m.isIn) {
             [GameManager.shared.gamePlayerStateMap removeObjectForKey:m.userId];
-            for (NSString *item in self.onlineUserIdList) {
-                if ([item isEqualToString:m.userId]) {
-                    [self.onlineUserIdList removeObject:m.userId];
+            if (self.onlineUserIdList.count > 0) {
+                NSMutableArray *arrTemp = [[NSMutableArray alloc]initWithArray:self.onlineUserIdList];
+                for (NSString *item in arrTemp) {
+                    if ([item isEqualToString:m.userId]) {
+                        [self.onlineUserIdList removeObject:m.userId];
+                    }
                 }
             }
         } else {
