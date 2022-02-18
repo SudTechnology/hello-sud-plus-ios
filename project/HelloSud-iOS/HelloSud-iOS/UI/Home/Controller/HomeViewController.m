@@ -36,13 +36,20 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
+- (void)dtConfigEvents {
+    WeakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf requestData];
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addRefreshHeader];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self requestData];
 }
 
 - (void)dtAddViews {
@@ -63,10 +70,21 @@
     }];
 }
 
+// 添加下来刷新
+- (void)addRefreshHeader {
+    WeakSelf
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf requestData];
+    }];
+    self.collectionView.mj_header = header;
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+}
+
 #pragma mark - requst Data
 - (void)requestData {
     WeakSelf
     [HttpService postRequestWithApi:kINTERACTURL(@"game/list/v1") param:@{} success:^(NSDictionary *rootDict) {
+        [weakSelf.collectionView.mj_header endRefreshing];
         GameListModel *model = [GameListModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
