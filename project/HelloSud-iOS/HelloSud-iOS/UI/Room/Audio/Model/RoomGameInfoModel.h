@@ -28,6 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger gameState;
 /// true 已加入，false 未加入
 @property (nonatomic, assign) BOOL isInGame;
+
+/// 是否是数字炸弹  number
+@property (nonatomic, assign) BOOL isHitBomb;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

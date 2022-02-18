@@ -30,7 +30,6 @@
 @property (nonatomic, strong) AudioMicContentView *audioMicContentView;
 @property (nonatomic, strong) GameMicContentView *gameMicContentView;
 @property (nonatomic, strong) RoomInputView *inputView;
-@property (nonatomic, strong) UILabel *gameNumLabel;
 /// 主播视图列表
 @property (nonatomic, strong) NSArray <AudioMicroView *> *arrAnchorView;
 
@@ -585,6 +584,13 @@
         _gameNumLabel.textColor = UIColor.whiteColor;
     }
     return _gameNumLabel;
+}
+
+- (NSMutableArray<NSString *> *)onlineUserIdList {
+    if (_onlineUserIdList == nil) {
+        _onlineUserIdList = NSMutableArray.new;
+    }
+    return _onlineUserIdList;;
 }
 
 - (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
