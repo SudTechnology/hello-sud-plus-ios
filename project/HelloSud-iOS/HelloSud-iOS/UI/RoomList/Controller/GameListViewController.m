@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addRefreshHeader];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -33,6 +34,20 @@
 
 - (void)dtConfigUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+}
+
+- (void)dtConfigEvents {
+    WeakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        if (AppManager.shared.isRefreshedToken) {
+            [weakSelf requestData];
+        } else {
+            [weakSelf.tableView.mj_header endRefreshing];
+        }
+    }];
+    if (AppManager.shared.isRefreshedToken) {
+        [self requestData];
+    }
 }
 
 - (void)dtAddViews {
@@ -53,10 +68,25 @@
     }];
 }
 
+// 添加下来刷新
+- (void)addRefreshHeader {
+    WeakSelf
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        if (!AppManager.shared.isRefreshedToken) {
+            [AppManager.shared refreshToken];
+            return;
+        }
+        [weakSelf requestData];
+    }];
+    self.tableView.mj_header = header;
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+}
+
 #pragma mark - requst Data
 - (void)requestData {
     WeakSelf
     [HttpService postRequestWithApi:kINTERACTURL(@"room/list/v1") param:nil success:^(NSDictionary *rootDict) {
+        [weakSelf.tableView.mj_header endRefreshing];
         RoomListModel *model = [RoomListModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];

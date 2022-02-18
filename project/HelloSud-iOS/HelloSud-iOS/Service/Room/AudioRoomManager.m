@@ -13,6 +13,7 @@
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         g_manager = AudioRoomManager.new;
+        [g_manager resetRoomInfo];
     });
     return g_manager;
 }
@@ -137,6 +138,7 @@
             upMicModel.streamID = model.streamId;
             [self.currentRoomVC sendMsg:upMicModel isAddToShow:NO];
         } else {
+            self.micIndex = -1;
             RoomCmdUpMicModel *downMicModel = [RoomCmdUpMicModel makeDownMicMsgWithMicIndex:micIndex];
             downMicModel.streamID = nil;
             [self.currentRoomVC sendMsg:downMicModel isAddToShow:NO];

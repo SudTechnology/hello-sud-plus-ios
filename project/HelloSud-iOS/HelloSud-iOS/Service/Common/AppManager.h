@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否已经登录
 @property(nonatomic, assign, readonly) BOOL isLogin;
+/// 是否已经刷新token
+@property(nonatomic, assign) BOOL isRefreshedToken;
 
 /// 保存是否同意协议
 - (void)saveIsLogin;

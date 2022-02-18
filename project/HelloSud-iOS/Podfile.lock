@@ -31,6 +31,7 @@ PODS:
   - lottie-ios (2.5.3)
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
+  - MJRefresh (3.7.5)
   - Protobuf (3.19.1)
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
@@ -61,6 +62,7 @@ DEPENDENCIES:
   - lottie-ios (~> 2.5.3)
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
+  - MJRefresh (= 3.7.5)
   - SDWebImage (= 5.12.2)
   - SDWebImageWebPCoder
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
@@ -80,6 +82,7 @@ SPEC REPOS:
     - lottie-ios
     - Masonry
     - MJExtension
+    - MJRefresh
     - Protobuf
     - SDWebImage
     - SDWebImageWebPCoder
@@ -109,6 +112,7 @@ SPEC CHECKSUMS:
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Protobuf: 3724efa50cb2846d7ccebc8691c574e85fd74471
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
@@ -118,6 +122,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
 
-PODFILE CHECKSUM: 0c0c05244fb61dfe7d112710ea8cb369f548e8aa
+PODFILE CHECKSUM: 9f3699a541cbd5956ac1ae125451120cc9db3c63
 
 COCOAPODS: 1.11.2

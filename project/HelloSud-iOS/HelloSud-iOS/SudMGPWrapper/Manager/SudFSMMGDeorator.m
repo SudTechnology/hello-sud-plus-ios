@@ -40,6 +40,12 @@
 @property (nonatomic, assign) BOOL isHitBomb;
 /// ASR功能的开启关闭的状态标志
 @property (nonatomic, assign) BOOL keyWordASRing;
+/// 当前游戏在线userid列表
+@property (nonatomic, strong) NSMutableArray <NSString *>*onlineUserIdList;
+/// 队长userid
+@property (nonatomic, copy) NSString *captainUserId;
+/// 当前游戏成员的游戏状态Map
+@property (nonatomic, strong) NSMutableDictionary *gamePlayerStateMap;
 
 @end
 
@@ -295,21 +301,37 @@
 }
 
 /// 关键词获取状态 - 更新
-- (void)updateCommonPlayerIn:(MGCommonPlayerInModel *)m {
-//    if (m.isIn) {
-//        [self.onlineUserIdList addObject:m.userId];
-//        NSSet *set = [NSSet setWithArray:self.onlineUserIdList];
-//        [self.onlineUserIdList setArray:[set allObjects]];
-//    } else {
-//        /// TODO
-//        [GameManager.shared.gamePlayerStateMap removeObjectForKey:m.userId];
-//        for (NSString *item in self.onlineUserIdList) {
-//            if ([item isEqualToString:m.userId]) {
-//                [self.onlineUserIdList removeObject:m.userId];
-//            }
-//        }
-//    }
+- (void)updateCommonPlayerIn:(MGCommonPlayerInModel *)m userId:(nonnull NSString *)userId  {
     
+    if (userId == AppManager.shared.loginUserInfo.userID) {
+        self.isInGame = m.isIn;
+    }
+    
+    if (m.isIn) {
+        [self.onlineUserIdList addObject:userId];
+        NSSet *set = [NSSet setWithArray:self.onlineUserIdList];
+        [self.onlineUserIdList setArray:[set allObjects]];
+    } else {
+        [self.gamePlayerStateMap removeObjectForKey:userId];
+        if (self.onlineUserIdList.count > 0) {
+            NSMutableArray *arrTemp = [[NSMutableArray alloc]initWithArray:self.onlineUserIdList];
+            for (NSString *item in arrTemp) {
+                if ([item isEqualToString:userId]) {
+                    [self.onlineUserIdList removeObject:userId];
+                }
+            }
+        }
+    }
+}
+
+- (void)updateCommonPlayerCaptain:(MGCommonPlayerCaptainModel *)m userId:(nonnull NSString *)userId  {
+    if (m.isCaptain) {
+        self.captainUserId = userId;
+    } else {
+        if (self.captainUserId == userId) {
+            self.captainUserId = @"";
+        }
+    }
 }
 /**
  * 游戏玩家状态变化
@@ -323,61 +345,78 @@
     
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
+        /// 更新
+        [self updateCommonPlayerIn:m userId:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerIn:model:)]) {
             [self.listener onPlayerMGCommonPlayerIn:state model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
         MGCommonPlayerReadyModel *m = [MGCommonPlayerReadyModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
+        /// 更新
+        self.isReady = m.isReady;
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerReady:model:)]) {
             [self.listener onPlayerMGCommonPlayerReady:state model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
         MGCommonPlayerCaptainModel *m = [MGCommonPlayerCaptainModel mj_objectWithKeyValues: dataJson];
+        /// 更新
+        [self updateCommonPlayerCaptain:m userId:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerCaptain:model:)]) {
             [self.listener onPlayerMGCommonPlayerCaptain:state model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         MGCommonPlayerPlayingModel *m = [MGCommonPlayerPlayingModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerPlaying:model:)]) {
             [self.listener onPlayerMGCommonPlayerPlaying:state model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_ONLINE]) {
         MGCommonPlayerOnlineModel *m = [MGCommonPlayerOnlineModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerOnline:model:)]) {
             [self.listener onPlayerMGCommonPlayerOnline:state model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_CHANGE_SEAT]) {
         MGCommonPlayerChangeSeatModel *m = [MGCommonPlayerChangeSeatModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerChangeSeat:model:)]) {
             [self.listener onPlayerMGCommonPlayerChangeSeat:state model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_GAME_PLAYER_ICON]) {
         MGCommonSelfClickGamePlayerIconModel *m = [MGCommonSelfClickGamePlayerIconModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonSelfClickGamePlayerIcon:model:)]) {
             [self.listener onPlayerMGCommonSelfClickGamePlayerIcon:state model:m];
         }
     } else if ([state isEqualToString:MG_DG_SELECTING]) {
         MGDGSelectingModel *m = [MGDGSelectingModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGSelecting:model:)]) {
             [self.listener onPlayerMGDGSelecting:state model:m];
         }
     } else if ([state isEqualToString:MG_DG_PAINTING]) {
         MGDGPaintingModel *m = [MGDGPaintingModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGPainting:model:)]) {
             [self.listener onPlayerMGDGPainting:state model:m];
         }
     } else if ([state isEqualToString:MG_DG_ERRORANSWER]) {
         MGDGErrorAnswerModel *m = [MGDGErrorAnswerModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGErrorAnswer:model:)]) {
             [self.listener onPlayerMGDGErrorAnswer:state model:m];
         }
     } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
         MGDGTotalScoreModel *m = [MGDGTotalScoreModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGTotalScore:model:)]) {
             [self.listener onPlayerMGDGTotalScore:state model:m];
         }
     } else if ([state isEqualToString:MG_DG_SCORE]) {
         MGDGScoreModel *m = [MGDGScoreModel mj_objectWithKeyValues: dataJson];
+        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGScore:model:)]) {
             [self.listener onPlayerMGDGScore:state model:m];
         }
@@ -485,6 +524,21 @@
 - (NSString *)handleMGFailure {
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@(0), @"ret_code", @"success", @"ret_msg", nil];
     return dict.mj_JSONString;
+}
+
+
+- (NSMutableArray<NSString *> *)onlineUserIdList {
+    if (_onlineUserIdList == nil) {
+        _onlineUserIdList = NSMutableArray.new;
+    }
+    return _onlineUserIdList;;
+}
+
+- (NSMutableDictionary *)gamePlayerStateMap {
+    if (_gamePlayerStateMap == nil) {
+        _gamePlayerStateMap = NSMutableDictionary.new;
+    }
+    return _gamePlayerStateMap;
 }
 
 @end

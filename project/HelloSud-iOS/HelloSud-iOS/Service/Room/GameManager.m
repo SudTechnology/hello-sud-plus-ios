@@ -44,4 +44,9 @@
     }
     return _gamePlayerStateMap;
 }
+
+/// 清空所有状态
+- (void)clearAllStates {
+    [self.gamePlayerStateMap removeAllObjects];
+}
 @end
