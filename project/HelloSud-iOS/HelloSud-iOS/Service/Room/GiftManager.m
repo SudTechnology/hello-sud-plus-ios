@@ -22,42 +22,37 @@
     return g_manager;
 }
 
-- (instancetype)init {
-    if (self = [super init]) {
-        [self config];
-    }
-    return self;
-}
-
-- (void)config {
+/// 从磁盘加载礼物
+- (void)loadFromDisk {
     
     GiftModel *giftSvga = GiftModel.new;
     giftSvga.giftID = 1;
-    giftSvga.smallGiftURL = [NSBundle.mainBundle pathForResource:@"svga_128" ofType:@"png" inDirectory:@"Res"];
-    giftSvga.giftURL = [NSBundle.mainBundle pathForResource:@"svga_600" ofType:@"png" inDirectory:@"Res"];
-    giftSvga.animateURL = [NSBundle.mainBundle pathForResource:@"svga_600" ofType:@"svga" inDirectory:@"Res"];
+    giftSvga.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
+    giftSvga.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
+    giftSvga.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
     giftSvga.animateType = @"svga";
     giftSvga.giftName = @"svga";
     
     GiftModel *giftLottie = GiftModel.new;
     giftLottie.giftID = 2;
-    giftLottie.smallGiftURL = [NSBundle.mainBundle pathForResource:@"lottie_128" ofType:@"png" inDirectory:@"Res"];
-    giftLottie.giftURL = [NSBundle.mainBundle pathForResource:@"lottie_600" ofType:@"png" inDirectory:@"Res"];
-    giftLottie.animateURL = [NSBundle.mainBundle pathForResource:@"lottie_600" ofType:@"json" inDirectory:@"Res"];
+    giftLottie.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
+    giftLottie.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
+    giftLottie.animateURL = [NSBundle.mainBundle pathForResource:@"sud_lottie" ofType:@"json" inDirectory:@"Res"];
     giftLottie.animateType = @"lottie";
     giftLottie.giftName = @"lottie";
     
     GiftModel *giftWebp = GiftModel.new;
     giftWebp.giftID = 3;
-    giftWebp.smallGiftURL = [NSBundle.mainBundle pathForResource:@"webp_128" ofType:@"png" inDirectory:@"Res"];
-    giftWebp.giftURL = [NSBundle.mainBundle pathForResource:@"webp_600" ofType:@"png" inDirectory:@"Res"];
-    giftWebp.animateURL = [NSBundle.mainBundle pathForResource:@"webp_600" ofType:@"webp" inDirectory:@"Res"];
+    giftWebp.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
+    giftWebp.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
+    giftWebp.animateURL = [NSBundle.mainBundle pathForResource:@"sud_webp" ofType:@"webp" inDirectory:@"Res"];
     giftWebp.animateType = @"webp";
     giftWebp.giftName = @"webp";
+    [giftWebp loadWebp:nil];
     
     GiftModel *giftMP4 = GiftModel.new;
     giftMP4.giftID = 4;
-    giftMP4.smallGiftURL = [NSBundle.mainBundle pathForResource:@"mp4_128" ofType:@"png" inDirectory:@"Res"];
+    giftMP4.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
     giftMP4.giftURL = [NSBundle.mainBundle pathForResource:@"mp4_600" ofType:@"png" inDirectory:@"Res"];
     NSString *testResourcePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Res"];
     NSString *directory = [testResourcePath stringByAppendingPathComponent:@"mp4_600"];

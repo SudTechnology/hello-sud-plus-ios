@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^HSGiftModelSelectedBlock)(void);
+typedef void(^GiftLoadImageBlock)(UIImage *image);
 
 /// 礼物model
 @interface GiftModel : BaseModel
@@ -28,6 +29,9 @@ typedef void(^HSGiftModelSelectedBlock)(void);
 /// 是否选中
 @property(nonatomic, assign)BOOL isSelected;
 @property(nonatomic, copy)HSGiftModelSelectedBlock selectedChangedCallback;
+
+/// 加载webp
+- (void)loadWebp:(nullable GiftLoadImageBlock)result;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -33,6 +33,7 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    [GiftManager.shared loadFromDisk];
     return YES;
 }
 
