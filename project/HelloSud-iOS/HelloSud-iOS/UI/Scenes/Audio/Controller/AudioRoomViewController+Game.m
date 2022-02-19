@@ -212,16 +212,7 @@
 - (void)updatePlayerCommonPlayerIn:(MGCommonPlayerInModel *)model userId:(NSString *)userId {
     if (model.isIn && [AppService.shared.loginUserInfo.userID isEqualToString:userId]) {
         // 请求上麦
-        BOOL isUpMic = false;
-        NSArray *arr = self.dicMicModel.allValues;
-        for (AudioRoomMicModel *m in arr) {
-            if (m.user != nil && m.user.userID == AppService.shared.loginUserInfo.userID) {
-                isUpMic = true;
-            }
-        }
-        if (!isUpMic) {
-            [self handleTapVoice];
-        }
+        [self handleGameUpMic];
     }
     self.gameNumLabel.text = [NSString stringWithFormat:@"游戏人数：%ld/%ld", self.sudFSMMGDecorator.onlineUserIdList.count, self.totalGameUserCount];
 }
