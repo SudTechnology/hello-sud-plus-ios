@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 请求进入房间
 /// @param roomId 房间ID
-- (void)reqEnterRoom:(long)roomId;
+- (void)reqEnterRoom:(long)roomId success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail;
 
 /// 请求退出房间
 /// @param roomId 房间ID

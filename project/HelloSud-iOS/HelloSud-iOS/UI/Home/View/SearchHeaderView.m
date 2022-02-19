@@ -141,7 +141,11 @@
 
 - (void)enterEvent {
     [self.searchTextField resignFirstResponder];
-    [AudioRoomService.shared reqEnterRoom:self.searchTextField.text.longLongValue];
+    NSString *searchText = self.searchTextField.text;
+    WeakSelf
+    [AudioRoomService.shared reqEnterRoom:searchText.longLongValue success:^{
+        weakSelf.searchTextField.text = nil;
+    } fail:nil];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

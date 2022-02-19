@@ -39,7 +39,7 @@
             [ToastUtil show:model.errorMsg];
             return;
         }
-        [self reqEnterRoom:model.roomId];
+        [self reqEnterRoom:model.roomId success:nil fail:nil];
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];
     }];
@@ -47,7 +47,7 @@
 
 /// 请求进入房间
 /// @param roomId 房间ID
-- (void)reqEnterRoom:(long)roomId {
+- (void)reqEnterRoom:(long)roomId success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"roomId"] = @(roomId);
@@ -67,8 +67,14 @@
         vc.roomType = model.gameId == 0 ? HSAudio : HSGame;
         vc.roomName = model.roomName;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
+        if (success) {
+            success();
+        }
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];
+        if (fail) {
+            fail(error);
+        }
     }];
 }
 

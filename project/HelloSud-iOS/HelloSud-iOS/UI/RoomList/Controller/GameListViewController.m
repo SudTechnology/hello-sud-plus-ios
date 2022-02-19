@@ -113,7 +113,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HSRoomInfoList *m = self.dataList[indexPath.row];
-    [AudioRoomService.shared reqEnterRoom:m.roomId];
+    [AudioRoomService.shared reqEnterRoom:m.roomId success:nil fail:nil];
 }
 
 #pragma mark - lazy
