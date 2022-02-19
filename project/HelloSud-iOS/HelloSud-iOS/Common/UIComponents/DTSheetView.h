@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - onView: 当前的父视图
 ///   - isHitTest: 是否可点击 -- 默认不可点击
 ///   - onCloseCallBack: 关闭弹窗回调
-+ (void)show:(UIView *)view rootView:(UIView *)rootView onCloseCallback:(void(^)(void))cb;
++ (void)show:(UIView *)view rootView:(UIView *)rootView hiddenBackCover:(BOOL)hiddenBackCover onCloseCallback:(void (^)(void))cb;
 /// 关闭弹窗
 + (void)close;
 @end

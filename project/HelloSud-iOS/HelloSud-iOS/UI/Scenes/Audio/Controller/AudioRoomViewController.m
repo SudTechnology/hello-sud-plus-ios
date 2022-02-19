@@ -124,7 +124,7 @@
 - (void)dtConfigEvents {
     WeakSelf
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
-        [DTSheetView show:[[RoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow onCloseCallback:^{
+        [DTSheetView show:[[RoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow hiddenBackCover:YES onCloseCallback:^{
             [weakSelf.operatorView resetAllSelectedUser];
         }];
     };
@@ -177,7 +177,7 @@
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
         SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
         [modeView reloadData:weakSelf.roomType == HSAudio];
-        [DTSheetView show:modeView rootView:AppUtil.currentWindow onCloseCallback:^{
+        [DTSheetView show:modeView rootView:AppUtil.currentWindow hiddenBackCover:NO onCloseCallback:^{
         }];
         modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
             [DTSheetView close];
@@ -254,8 +254,8 @@
         v.cancelCallback = ^(UIButton *sender) {
             [DTSheetView close];
         };
-        [DTSheetView show:v rootView:self.view onCloseCallback:^{
-                    
+        [DTSheetView show:v rootView:self.view hiddenBackCover:NO onCloseCallback:^{
+
         }];
     }
 }

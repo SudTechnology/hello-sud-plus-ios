@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIView *customView;
+/// 隐藏蒙版背景
+@property (nonatomic, assign) BOOL hiddeBackCover;
 
 typedef void(^OnCloseViewCallBack)(void);
 @property (nonatomic, copy) OnCloseViewCallBack onCloseViewCallBack;
