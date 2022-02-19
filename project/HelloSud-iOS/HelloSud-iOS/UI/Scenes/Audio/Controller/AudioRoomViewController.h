@@ -77,17 +77,8 @@ typedef NS_ENUM(NSInteger, RoomType) {
 /// 当前游戏语言
 @property (nonatomic, assign) NSString *language;
 
-
-/// ISudFSTAPP
-//@property (nonatomic, strong) id<ISudFSTAPP> iSudFSTAPP;
-/// game相关信息Model
-//@property (nonatomic, copy) RoomGameInfoModel *gameInfoModel;
 /// 是否进入游戏
 @property (nonatomic, assign) BOOL isEnteredRoom;
-/// ASR功能的开启关闭的状态标志
-//@property (nonatomic, assign) BOOL keyWordASRing;
-/// 当前游戏在线userid列表
-//@property (nonatomic, strong) NSMutableArray <NSString *>*onlineUserIdList;
 
 /// 游戏在线人数
 @property (nonatomic, strong) UILabel *gameNumLabel;
