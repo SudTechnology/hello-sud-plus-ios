@@ -1,12 +1,12 @@
 //
-//  SudMGPAPPState.h
+//  SudMGPAPPState2.h
 //  HelloSud-iOS
 //
-//  Created by Mary on 2022/2/18.
+//  Created by Mary on 2022/2/19.
 //
 
-#ifndef SudMGPAPPState_h
-#define SudMGPAPPState_h
+#ifndef SudMGPAPPState2_h
+#define SudMGPAPPState2_h
 
 #pragma mark - APP-->MG 状态
 /// 加入状态
@@ -38,4 +38,5 @@ static NSString* APP_COMMON_OPEN_BRATE   = @"app_common_open_vibrate";
 /// 设置游戏的音量大小
 static NSString* APP_COMMON_SOUND_VOLUME   = @"app_common_game_sound_volume";
 
-#endif /* SudMGPAPPState_h */
+
+#endif /* SudMGPAPPState2_h */

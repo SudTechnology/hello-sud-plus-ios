@@ -8,34 +8,13 @@
 #import "SudFSMMGDecorator.h"
 
 @interface SudFSMMGDecorator () <ISudFSMMG>
-/// ISudFSTAPP
-@property (nonatomic, strong) id<ISudFSTAPP> iSudFSTAPP;
-/// app To 游戏 管理类
-@property (nonatomic, strong) SudFSTAPPDecorator *sudFSTAPPManager;
 /// 事件处理器
 @property(nonatomic, weak) id<SudFSMMGListener> listener;
-
-#pragma mark - 初始化需要的信息
-/// 当前用户的游戏id
-@property (nonatomic, copy) NSString *userID;
-/// 当前游戏语言
-@property (nonatomic, copy) NSString *language;
-/// 房间ID
-@property(nonatomic, copy)NSString *roomID;
 
 @end
 
 @implementation SudFSMMGDecorator
 
-- (instancetype)init:(NSString *)roomID userID:(NSString *)userID language:(NSString *)language loadSuccess:(GameLoadSuccessBlock)loadSuccess {
-    if (self = [super init]) {
-        self.roomID = roomID;
-        self.userID = userID;
-        self.language = language;
-        self.gameLoadSuccessBlock = loadSuccess;
-    }
-    return self;
-}
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
@@ -148,103 +127,103 @@
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         MGCommonPublicMessageModel *m = [MGCommonPublicMessageModel mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonPublicMessage:model:)]) {
-            [self.listener onGameMGCommonPublicMessage:state model:m];
+            [self.listener onGameMGCommonPublicMessage:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_KEY_WORD_TO_HIT]) {
         MGCommonKeyWrodToHitModel *m = [MGCommonKeyWrodToHitModel mj_objectWithKeyValues: dataJson];
         /// 更新当前状态
         [self updateCommonKeyWrodToHit:m];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonKeyWordToHit:model:)]) {
-            [self.listener onGameMGCommonKeyWordToHit:state model:m];
+            [self.listener onGameMGCommonKeyWordToHit:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
-        MGCommonGameStateModel *m = [MGCommonGameStateModel mj_objectWithKeyValues: dataJson];
+        MGCommonGameState *m = [MGCommonGameState mj_objectWithKeyValues: dataJson];
         /// 更新当前状态
         [self updateCommonGameState:m];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameState:model:)]) {
-            [self.listener onGameMGCommonGameState:state model:m];
+            [self.listener onGameMGCommonGameState:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_JOIN_BTN]) {
-        MGCommonSelfClickJoinBtnModel *m = [MGCommonSelfClickJoinBtnModel mj_objectWithKeyValues: dataJson];
+        MGCommonSelfClickJoinBtn *m = [MGCommonSelfClickJoinBtn mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickJoinBtn:model:)]) {
-            [self.listener onGameMGCommonSelfClickJoinBtn:state model:m];
+            [self.listener onGameMGCommonSelfClickJoinBtn:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_CANCEL_JOIN_BTN]) {
-        MGCommonSelfClickCancelJoinBtnModel *m = [MGCommonSelfClickCancelJoinBtnModel mj_objectWithKeyValues: dataJson];
+        MGCommonSelfClickCancelJoinBtn *m = [MGCommonSelfClickCancelJoinBtn mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickCancelJoinBtn:model:)]) {
-            [self.listener onGameMGCommonSelfClickCancelJoinBtn:state model:m];
+            [self.listener onGameMGCommonSelfClickCancelJoinBtn:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_READY_BTN]) {
-        MGCommonSelfClickReadyBtnModel *m = [MGCommonSelfClickReadyBtnModel mj_objectWithKeyValues: dataJson];
+        MGCommonSelfClickReadyBtn *m = [MGCommonSelfClickReadyBtn mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickReadyBtn:model:)]) {
-            [self.listener onGameMGCommonSelfClickReadyBtn:state model:m];
+            [self.listener onGameMGCommonSelfClickReadyBtn:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_CANCEL_READY_BTN]) {
-        MGCommonSelfClickCancelReadyBtnModel *m = [MGCommonSelfClickCancelReadyBtnModel mj_objectWithKeyValues: dataJson];
+        MGCommonSelfClickCancelReadyBtn *m = [MGCommonSelfClickCancelReadyBtn mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickCancelReadyBtn:model:)]) {
-            [self.listener onGameMGCommonSelfClickCancelReadyBtn:state model:m];
+            [self.listener onGameMGCommonSelfClickCancelReadyBtn:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_START_BTN]) {
-        MGCommonSelfClickStartBtnModel *m = [MGCommonSelfClickStartBtnModel mj_objectWithKeyValues: dataJson];
+        MGCommonSelfClickStartBtn *m = [MGCommonSelfClickStartBtn mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickStartBtn:model:)]) {
-            [self.listener onGameMGCommonSelfClickStartBtn:state model:m];
+            [self.listener onGameMGCommonSelfClickStartBtn:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_SHARE_BTN]) {
-        MGCommonSelfClickShareBtnModel *m = [MGCommonSelfClickShareBtnModel mj_objectWithKeyValues: dataJson];
+        MGCommonSelfClickShareBtn *m = [MGCommonSelfClickShareBtn mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickShareBtn:model:)]) {
-            [self.listener onGameMGCommonSelfClickShareBtn:state model:m];
+            [self.listener onGameMGCommonSelfClickShareBtn:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
-        MGCommonGameStateModel *m = [MGCommonGameStateModel mj_objectWithKeyValues: dataJson];
+        MGCommonGameState *m = [MGCommonGameState mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameState:model:)]) {
-            [self.listener onGameMGCommonGameState:state model:m];
+            [self.listener onGameMGCommonGameState:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_GAME_SETTLE_CLOSE_BTN]) {
-        MGCommonSelfClickGameSettleCloseBtnModel *m = [MGCommonSelfClickGameSettleCloseBtnModel mj_objectWithKeyValues: dataJson];
+        MGCommonSelfClickGameSettleCloseBtn *m = [MGCommonSelfClickGameSettleCloseBtn mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickGameSettleCloseBtn:model:)]) {
-            [self.listener onGameMGCommonSelfClickGameSettleCloseBtn:state model:m];
+            [self.listener onGameMGCommonSelfClickGameSettleCloseBtn:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_GAME_SETTLE_AGAIN_BTN]) {
-        MGCommonSelfClickGameSettleAgainBtnModel *m = [MGCommonSelfClickGameSettleAgainBtnModel mj_objectWithKeyValues: dataJson];
+        MGCommonSelfClickGameSettleAgainBtn *m = [MGCommonSelfClickGameSettleAgainBtn mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickGameSettleAgainBtn:model:)]) {
-            [self.listener onGameMGCommonSelfClickGameSettleAgainBtn:state model:m];
+            [self.listener onGameMGCommonSelfClickGameSettleAgainBtn:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_SOUND_LIST]) {
         MGCommonGameSoundListModel *m = [MGCommonGameSoundListModel mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameSoundList:model:)]) {
-            [self.listener onGameMGCommonGameSoundList:state model:m];
+            [self.listener onGameMGCommonGameSoundList:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_SOUND]) {
-        MGCommonGameSoundModel *m = [MGCommonGameSoundModel mj_objectWithKeyValues: dataJson];
+        MGCommonGameSound *m = [MGCommonGameSound mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameSound:model:)]) {
-            [self.listener onGameMGCommonGameSound:state model:m];
+            [self.listener onGameMGCommonGameSound:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_BG_MUSIC_STATE]) {
-        MGCommonGameBgMusicStateModel *m = [MGCommonGameBgMusicStateModel mj_objectWithKeyValues: dataJson];
+        MGCommonGameBgMusicState *m = [MGCommonGameBgMusicState mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameBgMusicState:model:)]) {
-            [self.listener onGameMGCommonGameBgMusicState:state model:m];
+            [self.listener onGameMGCommonGameBgMusicState:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_SOUND_STATE]) {
-        MGCommonGameSoundStateModel *m = [MGCommonGameSoundStateModel mj_objectWithKeyValues: dataJson];
+        MGCommonGameSoundState *m = [MGCommonGameSoundState mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameSoundState:model:)]) {
-            [self.listener onGameMGCommonGameSoundState:state model:m];
+            [self.listener onGameMGCommonGameSoundState:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_ASR]) {
         MGCommonGameASRModel *m = [MGCommonGameASRModel mj_objectWithKeyValues: dataJson];
         /// 更新当前状态
         [self updateCommonGameASR:m];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameASR:model:)]) {
-            [self.listener onGameMGCommonGameASR:state model:m];
+            [self.listener onGameMGCommonGameASR:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_SELF_MICROPHONE]) {
-        MGCommonGameSelfMicrophoneModel *m = [MGCommonGameSelfMicrophoneModel mj_objectWithKeyValues: dataJson];
+        MGCommonGameSelfMicrophone *m = [MGCommonGameSelfMicrophone mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameSelfMicrophone:model:)]) {
-            [self.listener onGameMGCommonGameSelfMicrophone:state model:m];
+            [self.listener onGameMGCommonGameSelfMicrophone:handle model:m];
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_SELF_HEADEPHONE]) {
-        MGCommonGameSelfHeadphoneModel *m = [MGCommonGameSelfHeadphoneModel mj_objectWithKeyValues: dataJson];
+        MGCommonGameSelfHeadphone *m = [MGCommonGameSelfHeadphone mj_objectWithKeyValues: dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameSelfHeadphone:model:)]) {
-            [self.listener onGameMGCommonGameSelfHeadphone:state model:m];
+            [self.listener onGameMGCommonGameSelfHeadphone:handle model:m];
         }
     } else {
         /// 其他状态
@@ -269,83 +248,96 @@
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues: dataJson];
         /// 更新
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerIn:model:)]) {
-            [self.listener onPlayerMGCommonPlayerIn:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerIn:userId:model:)]) {
+            [self.listener onPlayerMGCommonPlayerIn:handle userId:userId model:m];
+            return;
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
         MGCommonPlayerReadyModel *m = [MGCommonPlayerReadyModel mj_objectWithKeyValues: dataJson];
         /// 更新
         [self setValueGamePlayerStateMap:userId state:state model:m];
         self.isReady = m.isReady;
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerReady:model:)]) {
-            [self.listener onPlayerMGCommonPlayerReady:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerReady:userId:model:)]) {
+            [self.listener onPlayerMGCommonPlayerReady:handle userId:userId model:m];
+            return;
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
         MGCommonPlayerCaptainModel *m = [MGCommonPlayerCaptainModel mj_objectWithKeyValues: dataJson];
         /// 更新
         [self updateCommonPlayerCaptain:m userId:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerCaptain:model:)]) {
-            [self.listener onPlayerMGCommonPlayerCaptain:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerCaptain:userId:model:)]) {
+            [self.listener onPlayerMGCommonPlayerCaptain:handle userId:userId model:m];
+            return;
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         MGCommonPlayerPlayingModel *m = [MGCommonPlayerPlayingModel mj_objectWithKeyValues: dataJson];
         self.isPlaying = m.isPlaying;
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerPlaying:model:)]) {
-            [self.listener onPlayerMGCommonPlayerPlaying:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerPlaying:userId:model:)]) {
+            [self.listener onPlayerMGCommonPlayerPlaying:handle userId:userId model:m];
+            return;
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_ONLINE]) {
         MGCommonPlayerOnlineModel *m = [MGCommonPlayerOnlineModel mj_objectWithKeyValues: dataJson];
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerOnline:model:)]) {
-            [self.listener onPlayerMGCommonPlayerOnline:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerOnline:userId:model:)]) {
+            [self.listener onPlayerMGCommonPlayerOnline:handle userId:userId model:m];
+            return;
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_CHANGE_SEAT]) {
         MGCommonPlayerChangeSeatModel *m = [MGCommonPlayerChangeSeatModel mj_objectWithKeyValues: dataJson];
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerChangeSeat:model:)]) {
-            [self.listener onPlayerMGCommonPlayerChangeSeat:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerChangeSeat:userId:model:)]) {
+            [self.listener onPlayerMGCommonPlayerChangeSeat:handle userId:userId model:m];
+            return;
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_GAME_PLAYER_ICON]) {
         MGCommonSelfClickGamePlayerIconModel *m = [MGCommonSelfClickGamePlayerIconModel mj_objectWithKeyValues: dataJson];
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonSelfClickGamePlayerIcon:model:)]) {
-            [self.listener onPlayerMGCommonSelfClickGamePlayerIcon:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonSelfClickGamePlayerIcon:userId:model:)]) {
+            [self.listener onPlayerMGCommonSelfClickGamePlayerIcon:handle userId:userId model:m];
+            return;
         }
     } else if ([state isEqualToString:MG_DG_SELECTING]) {
         MGDGSelectingModel *m = [MGDGSelectingModel mj_objectWithKeyValues: dataJson];
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGSelecting:model:)]) {
-            [self.listener onPlayerMGDGSelecting:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGSelecting:userId:model:)]) {
+            [self.listener onPlayerMGDGSelecting:handle userId:userId model:m];
+            return;
         }
     } else if ([state isEqualToString:MG_DG_PAINTING]) {
         MGDGPaintingModel *m = [MGDGPaintingModel mj_objectWithKeyValues: dataJson];
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGPainting:model:)]) {
-            [self.listener onPlayerMGDGPainting:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGPainting:userId:model:)]) {
+            [self.listener onPlayerMGDGPainting:handle userId:userId model:m];
+            return;
         }
     } else if ([state isEqualToString:MG_DG_ERRORANSWER]) {
         MGDGErrorAnswerModel *m = [MGDGErrorAnswerModel mj_objectWithKeyValues: dataJson];
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGErrorAnswer:model:)]) {
-            [self.listener onPlayerMGDGErrorAnswer:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGErrorAnswer:userId:model:)]) {
+            [self.listener onPlayerMGDGErrorAnswer:handle userId:userId model:m];
+            return;
         }
     } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
         MGDGTotalScoreModel *m = [MGDGTotalScoreModel mj_objectWithKeyValues: dataJson];
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGTotalScore:model:)]) {
-            [self.listener onPlayerMGDGTotalScore:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGTotalScore:userId:model:)]) {
+            [self.listener onPlayerMGDGTotalScore:handle userId:userId model:m];
+            return;
+        } else {
+            [handle success:[self handleMGSuccess]];
         }
     } else if ([state isEqualToString:MG_DG_SCORE]) {
         MGDGScoreModel *m = [MGDGScoreModel mj_objectWithKeyValues: dataJson];
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGScore:model:)]) {
-            [self.listener onPlayerMGDGScore:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGScore:userId:model:)]) {
+            [self.listener onPlayerMGDGScore:handle userId:userId model:m];
+            return;
         }
     } else {
         NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态");
     }
-    
     [handle success:[self handleMGSuccess]];
 }
 
@@ -364,7 +356,7 @@
 }
 
 /// 游戏状态 - 更新
-- (void)updateCommonGameState:(MGCommonGameStateModel *)m {
+- (void)updateCommonGameState:(MGCommonGameState *)m {
     self.gameStateType = m.gameState;
     if (m.gameState != 2) {
         self.isHitBomb = false;
@@ -422,74 +414,6 @@
     mapModel.state = state;
     mapModel.model = model;
     [self.gamePlayerStateMap setValue:mapModel forKey:userId];
-}
-
-#pragma mark =======登录 加载 游戏=======
-/// 游戏登录
-/// 接入方客户端 调用 接入方服务端 login 获取 短期令牌code
-/// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
-- (void)login:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
-    [self initSdk:rootView gameId:gameId code:code appID:appID appKey:appKey];
-}
-
-/// 退出游戏
-- (void)logoutGame {
-    // 销毁游戏
-    [self.iSudFSTAPP destroyMG];
-}
-
-/// 加载游戏
-- (void)initSdk:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
-    WeakSelf
-    [SudMGP initSDK:appID appKey:appKey isTestEnv:true listener:^(int retCode, const NSString *retMsg) {
-        if (retCode == 0) {
-            NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
-            if (weakSelf) {
-                // SudMGPSDK初始化成功 加载MG
-                NSString *userID = weakSelf.userID;
-                NSString *roomID = weakSelf.roomID;
-                if (userID.length == 0 || roomID.length == 0 || code.length == 0) {
-                    [ToastUtil show:@"加载游戏失败，请检查参数"];
-                    return;
-                }
-                [weakSelf loadGame:userID roomId:roomID code:code mgId:gameId language:weakSelf.language fsmMG:weakSelf rootView:rootView];
-            }
-        } else {
-            /// 初始化失败, 可根据业务重试
-            NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@",retMsg);
-        }
-    }];
-}
-
-/// 加载游戏MG
-/// @param userId 用户唯一ID
-/// @param roomId 房间ID
-/// @param code 游戏登录code
-/// @param mgId 游戏ID
-/// @param language 支持简体"zh-CN "    繁体"zh-TW"    英语"en-US"   马来"ms-MY"
-/// @param fsmMG 控制器
-/// @param rootView 游戏根视图
-- (void)loadGame:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t) mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView*)rootView {
-    self.iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:fsmMG rootView:rootView];
-    if (self.gameLoadSuccessBlock != nil) {
-        self.gameLoadSuccessBlock(self.iSudFSTAPP);
-    }
-}
-
-/// 更新code
-/// @param code 新的code
-- (void)updateGameCode:(NSString *)code {
-    [self.iSudFSTAPP updateCode:code listener:^(int retCode, const NSString *retMsg, const NSString *dataJson) {
-        NSLog(@"ISudFSMMG:updateGameCode retCode=%@ retMsg=%@ dataJson=%@", @(retCode), retMsg, dataJson);
-    }];
-}
-
-/// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
-- (void)pushAudio:(NSData *)data {
-    /// 必须要在主线程
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.iSudFSTAPP pushAudio:data];
-    });
 }
 
 /// 清除所有存储数组
