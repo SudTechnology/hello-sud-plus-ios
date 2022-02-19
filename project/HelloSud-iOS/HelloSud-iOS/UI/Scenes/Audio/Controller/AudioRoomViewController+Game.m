@@ -60,9 +60,9 @@
 
 /// 获取游戏Config  【需要实现】
 - (void)onGetGameCfg:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    GameCfgLobbyPlayers *l = [[GameCfgLobbyPlayers alloc] init];
+    LobbyPlayers *l = [[LobbyPlayers alloc] init];
     l.hide = true;
-    GameCfgUIModel *ui = [[GameCfgUIModel alloc] init];
+    GameUi *ui = [[GameUi alloc] init];
     ui.lobby_players = l;
     GameCfgModel *m = [[GameCfgModel alloc] init];
     m.ui = ui;
