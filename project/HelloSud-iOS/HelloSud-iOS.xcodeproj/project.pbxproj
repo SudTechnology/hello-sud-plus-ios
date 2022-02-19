@@ -288,7 +288,6 @@
 		44F29F7127BCCE6D00F57DEE /* SwitchRoomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchRoomCell.m; sourceTree = "<group>"; };
 		44F29F7327BE005900F57DEE /* GameCfgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameCfgModel.h; sourceTree = "<group>"; };
 		44F29F7427BE005900F57DEE /* GameCfgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameCfgModel.m; sourceTree = "<group>"; };
-		44F29F8127BF410800F57DEE /* CommonGameModelHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonGameModelHeader.h; sourceTree = "<group>"; };
 		44F29F8327BF4B1D00F57DEE /* SudFSMMGDecorator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudFSMMGDecorator.h; sourceTree = "<group>"; };
 		44F29F8427BF4B1D00F57DEE /* SudFSMMGDecorator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudFSMMGDecorator.m; sourceTree = "<group>"; };
 		44F29F8627BF7CD900F57DEE /* SudFSMMGListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudFSMMGListener.h; sourceTree = "<group>"; };
@@ -690,7 +689,6 @@
 				44F29F7427BE005900F57DEE /* GameCfgModel.m */,
 				44F29FA927C0A4A000F57DEE /* MGPlayerStateMapModel.h */,
 				44F29FAA27C0A4A000F57DEE /* MGPlayerStateMapModel.m */,
-				44F29F8127BF410800F57DEE /* CommonGameModelHeader.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
