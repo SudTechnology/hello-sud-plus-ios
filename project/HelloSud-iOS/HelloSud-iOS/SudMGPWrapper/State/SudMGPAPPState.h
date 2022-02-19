@@ -2,6 +2,8 @@
 //  SudMGPAPPState2.h
 //  HelloSud-iOS
 //
+// Copyright © Sud.Tech (https://sud.tech)
+//
 //  Created by Mary on 2022/2/19.
 //
 
