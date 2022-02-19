@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// app -> 游戏
 @interface SudFSTAPPDecorator : NSObject
 
-@property (nonatomic, weak) id<ISudFSTAPP> fsmAPP2MG;
-- (instancetype)init:(id<ISudFSTAPP>)fsmAPP2MG;
+@property (nonatomic, weak) id<ISudFSTAPP> iSudFSTAPP;
+- (void)setISudFSTAPP:(id<ISudFSTAPP>)iSudFSTAPP;
 
 /// 加入,退出游戏
 /// @param isIn true 加入游戏，false 退出游戏
@@ -39,6 +39,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyComonDrawTextHit:(BOOL)isHit keyWord:(NSString *)keyWord text:(NSString *)text;
 /// 结束游戏
 - (void)notifyComonSetEnd;
+
+- (void)destroyMG;
+- (UIView *) getGameView;
+/// 更新code
+/// @param code 新的code
+- (void)updateCode:(NSString *) code;
+
+/// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
+- (void)pushAudio:(NSData *)data;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

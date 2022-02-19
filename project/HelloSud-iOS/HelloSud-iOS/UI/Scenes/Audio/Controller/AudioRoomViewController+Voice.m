@@ -97,6 +97,6 @@
 }
 
 - (void)onCapturedAudioData:(NSData *)data {
-    [self.sudFSMMGDecorator pushAudio:data];
+    [self.sudFSTAPPDecorator pushAudio:data];
 }
 @end

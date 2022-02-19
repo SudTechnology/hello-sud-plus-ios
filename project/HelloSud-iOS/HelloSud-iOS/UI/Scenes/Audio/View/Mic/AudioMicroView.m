@@ -17,7 +17,6 @@
 @property (nonatomic, strong) UILabel *gameStateLabel;
 @property (nonatomic, strong) DTPaddingLabel *gameBadgeLabel;
 @property (nonatomic, strong) UIImageView * gamingImageView;
-@property (nonatomic, strong) GamePlayerStateModel *gameModel;
 
 /// 水波纹
 @property (nonatomic, strong) DTRippleAnimationView *rippleView;
@@ -49,7 +48,7 @@
     [self.gameBadgeLabel setHidden:true];
     [self.gamingImageView setHidden:true];
     if (self.micType == HSAudioMic) {
-        self.gameModel = nil;
+//        self.gameModel = nil;
     } else if (self.micType == HSGameMic) {
         [self.giftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(-4);

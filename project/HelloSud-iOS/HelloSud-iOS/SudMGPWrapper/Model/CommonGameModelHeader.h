@@ -9,15 +9,7 @@
 #define CommonGameModelHeader_h
 
 #import "GameViewInfoModel.h"
-#import "MGCommonPublicMessageModel.h"
-#import "MGCommonKeyWrodToHitModel.h"
-#import "MGCommonGameASRModel.h"
-#import "GamePlayerStateModel.h"
 #import "GameCfgModel.h"
+#import "MGPlayerStateMapModel.h"
 
-#import "MGCommonModel.h"
-#import "MGCommonGameSettleModel.h"
-#import "MGCommonGameSoundListModel.h"
-
-#import "GameCommonModel.h"
 #endif /* CommonGameModelHeader_h */

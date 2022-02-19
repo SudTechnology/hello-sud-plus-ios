@@ -50,31 +50,9 @@ typedef NS_ENUM(NSInteger, GameStateType) {
 /// 当前游戏在线userid列表
 @property (nonatomic, strong) NSMutableArray <NSString *>*onlineUserIdList;
 
-
-typedef void (^GameLoadSuccessBlock)(id<ISudFSTAPP> iSudFSTAPP);
-@property (nonatomic, copy) GameLoadSuccessBlock gameLoadSuccessBlock;
-/// 初始化
-- (instancetype)init:(NSString *)roomID userID:(NSString *)userID language:(NSString *)language loadSuccess:(GameLoadSuccessBlock)loadSuccess;
-
 /// 设置事件处理器
 /// @param listener 事件处理实例
 - (void)setEventListener:(id<SudFSMMGListener>)listener;
-
-/// 更新code
-/// @param code 新的code
-- (void)updateGameCode:(NSString *)code;
-
-/// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
-- (void)pushAudio:(NSData *)data;
-
-/// 游戏登录
-/// 接入方客户端 调用 接入方服务端 login 获取 短期令牌code
-/// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
-- (void)login:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey;
-
-/// 退出游戏
-- (void)logoutGame;
-
 
 /// 清除所有存储数组
 - (void)clearAllStates;
