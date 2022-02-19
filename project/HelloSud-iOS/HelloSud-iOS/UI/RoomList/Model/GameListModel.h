@@ -9,6 +9,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 游戏模式
+@interface HSGameModeModel : BaseModel
+
+/// 游戏模式默认1
+@property (nonatomic, assign) NSInteger mode;
+/// 人数[在线，总人数]
+@property (nonatomic, strong) NSArray<NSNumber *> *count;
+@end
+
 @interface HSGameItem: BaseModel
 @property (nonatomic, assign) NSInteger gameId;
 @property (nonatomic, copy) NSString * gameName;
@@ -20,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isGameWait;
 /// 业务需要 是否为语音房间
 @property (nonatomic, assign) BOOL isAudioRoom;
+@property (nonatomic, strong) NSArray<HSGameModeModel *> * gameModeList;
 
 @end
 /// 列表场景model
