@@ -483,10 +483,11 @@
         self.gameNumLabel.hidden = NO;
         [self.gameMicContentView setHidden:false];
         [self.audioMicContentView setHidden:true];
+        CGFloat h = [UIDevice isiPhoneXSeries] ? 106 : 50;
         [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.view);
             make.bottom.mas_equalTo(self.operatorView.mas_top);
-            make.height.mas_equalTo(106);
+            make.height.mas_equalTo(h);
         }];
         [self.dicMicModel removeAllObjects];
         for (AudioMicroView *v in self.gameMicContentView.micArr) {
