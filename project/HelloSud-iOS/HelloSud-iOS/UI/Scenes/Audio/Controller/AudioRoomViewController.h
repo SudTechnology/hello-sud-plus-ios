@@ -85,6 +85,9 @@ typedef NS_ENUM(NSInteger, RoomType) {
 /// 游戏在线人数
 @property (nonatomic, strong) UILabel *gameNumLabel;
 
+/// 是否在座位上
+- (BOOL)isInMic;
+
 - (void)handleTapVoice;
 /// 游戏触发上麦
 - (void)handleGameUpMic;
