@@ -232,6 +232,21 @@
 
 }
 
+/// 通过gameID获取游戏总人数
+/// @param gameID 游戏ID
+- (NSInteger)getTotalGameCountWithGameID:(NSInteger)gameID {
+    NSInteger count = 0;
+    for (HSGameItem *item in self.gameList) {
+        if (gameID == item.gameId) {
+            if (item.gameModeList.count > 0) {
+                count = [[item.gameModeList[0].count lastObject] integerValue];
+            }
+            break;
+        }
+    }
+    return count;
+}
+
 @end
 
 
