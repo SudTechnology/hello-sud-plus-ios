@@ -410,7 +410,7 @@
     if (m.isCaptain) {
         self.captainUserId = userId;
     } else {
-        if (self.captainUserId == userId) {
+        if ([self.captainUserId isEqualToString:userId]) {
             self.captainUserId = @"";
         }
     }
@@ -547,6 +547,12 @@
         return m.isPlaying;
     }
     return false;
+}
+
+/// 获取用户是否在队长
+- (BOOL)isPlayerIsCaptain:(NSString *)userId {
+    BOOL isCaptain = [self.captainUserId isEqualToString:userId];
+    return isCaptain;
 }
 
 - (NSMutableArray<NSString *> *)onlineUserIdList {

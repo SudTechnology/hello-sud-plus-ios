@@ -682,7 +682,7 @@
 		44DF03842796A9EF006EE6AC /* SudMGPWrapper */ = {
 			isa = PBXGroup;
 			children = (
-				44F29F8227BF420000F57DEE /* Manager */,
+				44F29F8227BF420000F57DEE /* Decorator */,
 				44DF03992796B6E3006EE6AC /* Model */,
 				44F29F7627BE6EDD00F57DEE /* State */,
 				44DF038A2796ADC6006EE6AC /* SudMGPSDK */,
@@ -747,7 +747,7 @@
 			path = State;
 			sourceTree = "<group>";
 		};
-		44F29F8227BF420000F57DEE /* Manager */ = {
+		44F29F8227BF420000F57DEE /* Decorator */ = {
 			isa = PBXGroup;
 			children = (
 				44DF03AC2797F124006EE6AC /* SudFSTAPPDecorator.h */,
@@ -756,7 +756,7 @@
 				44F29F8427BF4B1D00F57DEE /* SudFSMMGDecorator.m */,
 				44F29F8627BF7CD900F57DEE /* SudFSMMGListener.h */,
 			);
-			path = Manager;
+			path = Decorator;
 			sourceTree = "<group>";
 		};
 		44F29F9B27BF96A800F57DEE /* MGCommon */ = {
