@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GameMicContentView : BaseView
+
+@property (nonatomic, weak) SudFSMMGDecorator *iSudFSMMG;
+
 typedef void(^OnUpdateMicArrCallBack)(NSArray <AudioMicroView *> *micArr);
 @property (nonatomic, copy) OnUpdateMicArrCallBack updateMicArrCallBack;
 @property (nonatomic, copy) NSMutableArray <AudioMicroView *> *micArr;

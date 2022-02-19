@@ -10,5 +10,6 @@
 
 #import "MGCommonPlayerModel.h"
 #import "MGDGPlayerModel.h"
+#import "MGPlayerStateMapModel.h"
 
 #endif /* MGPlayerHeader_h */

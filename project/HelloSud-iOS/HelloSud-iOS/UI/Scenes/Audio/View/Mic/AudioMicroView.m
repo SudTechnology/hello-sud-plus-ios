@@ -194,9 +194,7 @@
     }];
     /// 游戏玩家状态变化
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_PLAYER_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        GamePlayerStateModel *m = note.userInfo[@"model"];
-        weakSelf.gameModel = m;
-        [weakSelf gamePlayerStateNOT:m];
+        [weakSelf updateGameUI];
     }];
 }
 
@@ -214,11 +212,42 @@
     self.giftImageView.hidden = self.model.isSelected && self.micType == HSAudioMic ? NO : YES;
     [self showUserName:self.model.user.name showOwner:self.model.user.roleType == 1 && self.micType == HSAudioMic];
     
-    [self.gameCaptainView setHidden:GameManager.shared.captainUserId != self.model.user.userID];
+    [self updateGameUI];
+}
+
+- (void)updateGameUI {
     if (self.micType == HSGameMic) {
-        if ([GameManager.shared.gamePlayerStateMap objectForKey:self.model.user.userID] != nil) {
-            [self gamePlayerStateNOT:[GameManager.shared.gamePlayerStateMap objectForKey:self.model.user.userID]];
+        /// 设置队长状态 - （队长有且只有一个）
+        [self.gameCaptainView setHidden:self.iSudFSMMG.captainUserId != self.model.user.userID];
+        /// 设置玩家游戏状态
+        [self.gamingImageView setHidden:true];
+        [self.gameStateLabel setHidden:true];
+        
+        if ([self.iSudFSMMG isPlayerIsReady:self.model.user.userID]) {
+            [self.gameStateLabel setHidden:false];
+            self.gameStateLabel.text = @"已准备";
+            self.gameStateLabel.textColor = [UIColor whiteColor];
+            self.gameStateLabel.backgroundColor = [UIColor colorWithHexString: @"#13AD21" alpha:1];
+            self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
+        } else {
+            
+            [self.gameStateLabel setHidden:false];
+            self.gameStateLabel.text = @"未准备";
+            self.gameStateLabel.textColor = [UIColor whiteColor];
+            self.gameStateLabel.backgroundColor = [UIColor colorWithHexString: @"#FF6E65" alpha:1];
+            self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
+            
+            if ([self.iSudFSMMG isPlayerIn:self.model.user.userID] == false) {
+                [self hiddenGameNode];
+            }
         }
+        if ([self.iSudFSMMG isPlayerIsPlaying:self.model.user.userID]) {
+            [self.gamingImageView setHidden:false];
+        } else {
+            [self.gamingImageView setHidden:true];
+        }
+    } else {
+        [self hiddenGameNode];
     }
 }
 
@@ -250,51 +279,6 @@
 
 - (void)onTapHead:(UITapGestureRecognizer *)tap {
     if (self.onTapCallback) self.onTapCallback(self.model);
-}
-
-- (void)gamePlayerStateNOT:(GamePlayerStateModel *)m {
-    if ([m isKindOfClass:GamePlayerStateModel.class] ) {
-        NSString *state = m.state;
-        /// 设置队长状态 - （队长有且只有一个）
-        if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
-            [self.gameCaptainView setHidden:!(m.isCaptain && m.userId == self.model.user.userID)];
-            return;
-        }
-        if (m.userId != self.model.user.userID) {
-            return;
-        }
-        /// 设置玩家游戏状态
-//        [self.gameStateLabel setHidden:false];
-        [self.gamingImageView setHidden:true];
-//        [self.gameBadgeLabel setHidden:true];
-        [self.gameStateLabel setHidden:true];
-        if ([state isEqualToString:MG_COMMON_PLAYER_IN] && !m.isIn) {
-            self.gameModel = nil;
-        }
-        if (([state isEqualToString:MG_COMMON_PLAYER_IN] && m.isIn) || ([state isEqualToString:MG_COMMON_PLAYER_READY])) {
-            NSLog(@"玩家: 准备状态");
-            [self.gameStateLabel setHidden:false];
-            self.gameStateLabel.text = m.isReady ? @"已准备" : @"未准备";
-            self.gameStateLabel.textColor = [UIColor whiteColor];
-            self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:m.isReady ? @"#13AD21" : @"#FF6E65" alpha:1];
-            self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
-        } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
-            NSLog(@"玩家: 游戏中状态");
-//            [self.gamingImageView setHidden:false];
-            [self.gamingImageView setHidden:!m.isPlaying];
-        }
-//        else if ([state isEqualToString:MG_DG_SCORE]) {
-//            NSLog(@"你画我猜 玩家: 本次积分");
-//            self.gameStateLabel.text = m.msg;
-//            self.gameStateLabel.textColor = [UIColor colorWithHexString:@"#65FF73" alpha:1];
-//            self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.7];
-//            self.gameStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.5].CGColor;
-//        } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
-//            NSLog(@"你画我猜 玩家: 总积分");
-//            [self.gameBadgeLabel setHidden:m.msg.length == 0];
-//            self.gameBadgeLabel.text = m.msg;
-//        }
-    }
 }
 
 #pragma mark - lazy

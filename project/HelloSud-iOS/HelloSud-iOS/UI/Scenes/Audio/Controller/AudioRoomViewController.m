@@ -9,17 +9,6 @@
 #import "AudioRoomViewController+IM.h"
 #import "AudioRoomViewController+Game.h"
 
-/// View
-#import "RoomNaviView.h"
-#import "RoomOperatorView.h"
-#import "RoomMsgBgView.h"
-#import "RoomMsgTableView.h"
-#import "AudioMicContentView.h"
-#import "RoomInputView.h"
-#import "GameMicContentView.h"
-#import "AudioMicroView.h"
-#import "MicOperateView.h"
-#import "RoomGiftPannelView.h"
 
 @interface AudioRoomViewController () <BDAlphaPlayerMetalViewDelegate>
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -27,8 +16,6 @@
 @property (nonatomic, strong) RoomOperatorView *operatorView;
 @property (nonatomic, strong) RoomMsgBgView *msgBgView;
 @property (nonatomic, strong) RoomMsgTableView *msgTableView;
-@property (nonatomic, strong) AudioMicContentView *audioMicContentView;
-@property (nonatomic, strong) GameMicContentView *gameMicContentView;
 @property (nonatomic, strong) RoomInputView *inputView;
 /// 主播视图列表
 @property (nonatomic, strong) NSArray <AudioMicroView *> *arrAnchorView;
@@ -44,11 +31,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.language = @"zh-CN";
+    
     AudioRoomManager.shared.currentRoomVC = self;
     [self loginRoom];
-//    [self sendEnterRoomMsg];
     if (self.gameId > 0) {
-        self.gameInfoModel.currentPlayerUserId = AppManager.shared.loginUserInfo.userID;
+        [self initSudFSMMG];
         [self login];
     }
     [self dtUpdateUI];
@@ -181,7 +170,7 @@
         }];
         modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
             [DTSheetView close];
-            if (weakSelf.gameInfoModel.gameState == 2) {
+            if (weakSelf.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
                 [ToastUtil show:@"正在游戏中, 无法切换游戏"];
                 return;
             }
@@ -190,7 +179,7 @@
     };
     self.naviView.endGameBlock = ^(UIButton *sender) {
         [DTAlertView showTextAlert:@"确定结束游戏吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
-            [weakSelf.sudFSTAPPManager sendComonSetEnd];
+            [weakSelf.sudFSTAPPDecorator notifyComonSetEnd];
         } onCloseCallback:^{
         }];
     };
@@ -239,17 +228,22 @@
         [AudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:0 success:nil fail:nil];
         return;
     } else if ([AppManager.shared.loginUserInfo isMeByUserID:micModel.user.userID]) {
-        BOOL isGameing = NO;
+        BOOL isGameing = self.sudFSMMGDecorator.isPlaying;
         // 是自己或者房主
-        MicOperateView *v = [[MicOperateView alloc]initWithOperateList:isGameing ? @[@"下麦", @"踢出游戏"] : @[@"下麦"]];
+        MicOperateView *v = [[MicOperateView alloc]initWithOperateList: @[@"下麦"]];
         v.operateCallback = ^(NSString *str) {
-            if ([str isEqualToString: @"下麦"]) {
+            if (isGameing) {
+                [DTSheetView close];
+                [DTAlertView showTextAlert:@"当前正在游戏中，是否离开？" sureText:@"离开" cancelText:@"返回游戏" onSureCallback:^{
+                    [self.sudFSTAPPDecorator notifyComonSelfPlaying:false];
+                } onCloseCallback:^{
+                    
+                }];
+            } else {
                 // 下麦
                 [AudioRoomManager.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
-            } else if ([str isEqualToString: @"踢出游戏"]) {
-                // 踢出游戏
+                [DTSheetView close];
             }
-            [DTSheetView close];
         };
         v.cancelCallback = ^(UIButton *sender) {
             [DTSheetView close];
@@ -324,9 +318,9 @@
     
 }
 
-- (void)resetGameInfoModel {
-    _gameInfoModel = nil;
-}
+//- (void)resetGameInfoModel {
+//    _gameInfoModel = nil;
+//}
 
 /// 展示公屏消息
 /// @param msg 消息体
@@ -476,8 +470,10 @@
             self.dicMicModel[key] = v.model;
             v.micType = HSAudioMic;
         }
-        GameManager.shared.captainUserId = @"";
-        GameManager.shared.gameId = 0;
+//        GameManager.shared.captainUserId = @"";
+//        GameManager.shared.gameId = 0;
+        
+        [self.sudFSMMGDecorator clearAllStates];
     } else if (self.roomType == HSGameMic) {
         self.gameView.hidden = NO;
         self.gameNumLabel.hidden = NO;
@@ -572,13 +568,13 @@
     return _dicMicModel;
 }
 
-- (RoomGameInfoModel *)gameInfoModel {
-    if (_gameInfoModel == nil) {
-        _gameInfoModel = RoomGameInfoModel.new;
-        _gameInfoModel.language = @"zh-CN";
-    }
-    return _gameInfoModel;
-}
+//- (RoomGameInfoModel *)gameInfoModel {
+//    if (_gameInfoModel == nil) {
+//        _gameInfoModel = RoomGameInfoModel.new;
+//        _gameInfoModel.language = @"zh-CN";
+//    }
+//    return _gameInfoModel;
+//}
 
 - (UILabel *)gameNumLabel {
     if (!_gameNumLabel) {
@@ -590,15 +586,15 @@
     return _gameNumLabel;
 }
 
-- (NSMutableArray<NSString *> *)onlineUserIdList {
-    if (_onlineUserIdList == nil) {
-        _onlineUserIdList = NSMutableArray.new;
-    }
-    return _onlineUserIdList;;
-}
+//- (NSMutableArray<NSString *> *)onlineUserIdList {
+//    if (_onlineUserIdList == nil) {
+//        _onlineUserIdList = NSMutableArray.new;
+//    }
+//    return _onlineUserIdList;;
+//}
 
 - (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
-    [self.sudFSTAPPManager sendComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
+    [self.sudFSTAPPDecorator notifyComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 - (void)setRoomName:(NSString *)roomName {
