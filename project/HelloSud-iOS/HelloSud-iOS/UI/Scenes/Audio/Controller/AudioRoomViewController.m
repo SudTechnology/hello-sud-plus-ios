@@ -341,6 +341,9 @@
 
 /// 游戏触发上麦
 - (void)handleGameUpMic {
+    if ([self.dicMicModel objectForKey:[NSString stringWithFormat:@"%ld", AudioRoomService.shared.micIndex]] != nil) {
+        return;
+    }
     AudioRoomMicModel *micModel = [self getOneEmptyMic];
     if (micModel == nil) {
         NSLog(@"没有空麦位, 不上了");

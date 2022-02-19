@@ -127,9 +127,11 @@
         return;
     }
     
-    if (self.sudFSMMGDecorator.gameStateType == GameStateTypeLeisure && !self.sudFSMMGDecorator.isInGame) {
-        /// 上麦，就是加入游戏
-        [self.sudFSTAPPDecorator notifyComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+    if ([self.dicMicModel objectForKey:[NSString stringWithFormat:@"%ld", AudioRoomService.shared.micIndex]] == nil) {
+        if (self.sudFSMMGDecorator.gameStateType == GameStateTypeLeisure && !self.sudFSMMGDecorator.isInGame) {
+            /// 上麦，就是加入游戏
+            [self.sudFSTAPPDecorator notifyComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+        }
     }
 }
 
@@ -138,12 +140,14 @@
     if (self.roomType == HSAudio) {
         return;
     }
-    if (self.sudFSMMGDecorator.isReady) {
-        /// 如果已经准备先退出准备状态
-        [self.sudFSTAPPDecorator notifyComonSetReady:false];
+    if ([self.dicMicModel objectForKey:[NSString stringWithFormat:@"%ld", AudioRoomService.shared.micIndex]] != nil) {
+        if (self.sudFSMMGDecorator.isReady) {
+            /// 如果已经准备先退出准备状态
+            [self.sudFSTAPPDecorator notifyComonSetReady:false];
+        }
+        /// 下麦，就是退出游戏
+        [self.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
     }
-    /// 下麦，就是退出游戏
-    [self.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 /// 你画我猜命中
