@@ -1,23 +1,23 @@
 //
-//  GiftManager.m
+//  GiftService.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
 //
 
-#import "GiftManager.h"
+#import "GiftService.h"
 
-@interface GiftManager()
+@interface GiftService()
 @property(nonatomic, strong)NSDictionary<NSString*, GiftModel*> *dicGift;
 @end
 
-@implementation GiftManager
+@implementation GiftService
 
 + (instancetype)shared {
-    static GiftManager *g_manager = nil;
+    static GiftService *g_manager = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        g_manager = GiftManager.new;
+        g_manager = GiftService.new;
     });
     return g_manager;
 }

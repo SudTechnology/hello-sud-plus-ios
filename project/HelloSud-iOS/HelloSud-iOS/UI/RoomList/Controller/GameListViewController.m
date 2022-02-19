@@ -39,13 +39,13 @@
 - (void)dtConfigEvents {
     WeakSelf
     [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        if (AppManager.shared.isRefreshedToken) {
+        if (AppService.shared.isRefreshedToken) {
             [weakSelf requestData];
         } else {
             [weakSelf.tableView.mj_header endRefreshing];
         }
     }];
-    if (AppManager.shared.isRefreshedToken) {
+    if (AppService.shared.isRefreshedToken) {
         [self requestData];
     }
 }
@@ -72,8 +72,8 @@
 - (void)addRefreshHeader {
     WeakSelf
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        if (!AppManager.shared.isRefreshedToken) {
-            [AppManager.shared refreshToken];
+        if (!AppService.shared.isRefreshedToken) {
+            [AppService.shared refreshToken];
             return;
         }
         [weakSelf requestData];
@@ -113,7 +113,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HSRoomInfoList *m = self.dataList[indexPath.row];
-    [AudioRoomManager.shared reqEnterRoom:m.roomId];
+    [AudioRoomService.shared reqEnterRoom:m.roomId];
 }
 
 #pragma mark - lazy

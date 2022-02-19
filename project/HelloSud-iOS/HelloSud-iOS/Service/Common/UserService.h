@@ -1,5 +1,5 @@
 //
-//  UserManager.h
+//  UserService.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/27.
@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 用户管理模块
-@interface UserManager : NSObject
+@interface UserService : NSObject
 
 + (instancetype)shared;
 

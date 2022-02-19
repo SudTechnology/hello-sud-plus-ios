@@ -1,5 +1,5 @@
 //
-//  AppManager.h
+//  AppService.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// APP管理模块
-@interface AppManager : NSObject
+@interface AppService : NSObject
 /// 登录用户信息
 @property(nonatomic, strong, readonly) AccountUserModel *loginUserInfo;
 /// token
@@ -58,12 +58,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 刷新token
 - (void)refreshToken;
-
-/// APP隐私协议地址
-- (NSURL *)appPrivacyURL;
-
-/// APP用户协议
-- (NSURL *)appProtocolURL;
 
 /// 切换RTC厂商
 /// @param rtcType 对应rtc厂商类型

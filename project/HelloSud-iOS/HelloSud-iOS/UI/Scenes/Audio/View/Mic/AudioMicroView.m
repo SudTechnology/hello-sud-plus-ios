@@ -164,7 +164,7 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_LOCAL_VOICE_VOLUME_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         NSNumber *soundLevel = note.userInfo[@"volume"];
         if ([soundLevel isKindOfClass:NSNumber.class] ) {
-            NSString *myUserID = AppManager.shared.loginUserInfo.userID;
+            NSString *myUserID = AppService.shared.loginUserInfo.userID;
             // 操作麦位与当前符合
             if (weakSelf.model.user != nil &&
                 [weakSelf.model.user.userID isEqualToString:myUserID]) {
@@ -216,10 +216,10 @@
     self.giftImageView.hidden = self.model.isSelected && self.micType == HSAudioMic ? NO : YES;
     [self showUserName:self.model.user.name showOwner:self.model.user.roleType == 1 && self.micType == HSAudioMic];
     
-    [self.gameCaptainView setHidden:GameManager.shared.captainUserId != self.model.user.userID];
+    [self.gameCaptainView setHidden:GameService.shared.captainUserId != self.model.user.userID];
     if (self.micType == HSGameMic) {
-        if ([GameManager.shared.gamePlayerStateMap objectForKey:self.model.user.userID] != nil) {
-            [self gamePlayerStateNOT:[GameManager.shared.gamePlayerStateMap objectForKey:self.model.user.userID]];
+        if ([GameService.shared.gamePlayerStateMap objectForKey:self.model.user.userID] != nil) {
+            [self gamePlayerStateNOT:[GameService.shared.gamePlayerStateMap objectForKey:self.model.user.userID]];
         }
     }
 }

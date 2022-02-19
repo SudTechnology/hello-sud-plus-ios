@@ -29,7 +29,7 @@
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
     self.typeLabel.text = [m.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
     
-    for (HSSceneModel *sModel in AppManager.shared.sceneList) {
+    for (HSSceneModel *sModel in AppService.shared.sceneList) {
         if (sModel.sceneId == m.sceneType) {
             self.roomTypeLabel.text = [sModel.sceneName stringByReplacingOccurrencesOfString:@"场景"withString:@""];
         }

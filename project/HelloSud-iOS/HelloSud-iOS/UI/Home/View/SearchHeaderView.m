@@ -67,7 +67,7 @@
 }
 
 - (void)dtUpdateUI {
-    AccountUserModel *userInfo = AppManager.shared.loginUserInfo;
+    AccountUserModel *userInfo = AppService.shared.loginUserInfo;
     self.userNameLabel.text = userInfo.name;
     self.userIdLabel.text = [NSString stringWithFormat:@"用户ID %@", userInfo.userID];
     if (userInfo.icon.length > 0) {
@@ -141,7 +141,7 @@
 
 - (void)enterEvent {
     [self.searchTextField resignFirstResponder];
-    [AudioRoomManager.shared reqEnterRoom:self.searchTextField.text.longLongValue];
+    [AudioRoomService.shared reqEnterRoom:self.searchTextField.text.longLongValue];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
