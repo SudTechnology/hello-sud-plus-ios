@@ -229,11 +229,14 @@
         BOOL isGameing = self.sudFSMMGDecorator.isPlaying;
         // 是自己或者房主
         MicOperateView *v = [[MicOperateView alloc]initWithOperateList: @[@"下麦"]];
+        WeakSelf
         v.operateCallback = ^(NSString *str) {
             if (isGameing) {
                 [DTSheetView close];
                 [DTAlertView showTextAlert:@"当前正在游戏中，是否离开？" sureText:@"离开" cancelText:@"返回游戏" onSureCallback:^{
-                    [self.sudFSTAPPDecorator notifyComonSelfPlaying:false];
+                    // 下麦
+                    [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
+                    [weakSelf.sudFSTAPPDecorator notifyComonSelfPlaying:false reportGameInfoExtras:@""];
                 } onCloseCallback:^{
                     
                 }];
