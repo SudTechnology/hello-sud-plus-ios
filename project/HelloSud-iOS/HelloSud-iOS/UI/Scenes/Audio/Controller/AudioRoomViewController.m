@@ -612,7 +612,8 @@
 
 - (void)setIsShowEndGame:(BOOL)isShowEndGame {
     _isShowEndGame = isShowEndGame;
-    self.naviView.endGameBtn.hidden = !isShowEndGame;
+    
+    [self.naviView isHiddenEndGameBtn:!isShowEndGame];
 }
 
 - (void)dealloc {
