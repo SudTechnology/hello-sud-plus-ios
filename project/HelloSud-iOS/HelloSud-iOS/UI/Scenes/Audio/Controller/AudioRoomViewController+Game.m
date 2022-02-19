@@ -32,7 +32,7 @@
     viewSize.width = kScreenWidth * scale;
     viewSize.height = kScreenHeight * scale;
     ViewGameRect *viewRect = [[ViewGameRect alloc] init];
-    viewRect.top = (kStatusBarHeight + 120 + 20) * scale;
+    viewRect.top = (kStatusBarHeight + 120) * scale;
     viewRect.left = 0;
     viewRect.bottom = (kAppSafeBottom + 150) * scale;
     viewRect.right = 0;
