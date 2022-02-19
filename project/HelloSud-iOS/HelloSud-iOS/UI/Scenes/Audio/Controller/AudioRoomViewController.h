@@ -8,7 +8,6 @@
 #import "BaseViewController.h"
 #import "AudioEngineFactory.h"
 #import "CommonAudioModelHeader.h"
-#import "SudFSTAPPDecorator.h"
 #import "SwitchRoomModeView.h"
 
 /// Model
