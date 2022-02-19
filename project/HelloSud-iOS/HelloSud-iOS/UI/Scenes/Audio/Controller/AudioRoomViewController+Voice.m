@@ -11,12 +11,18 @@
 /// 开启推流
 /// @param streamID 流ID
 - (void)startPublish:(NSString*)streamID {
+    if (self.sudFSMMGDecorator.keyWordASRing) {
+        [self startCaptureAudioToASR];
+    }
     [AudioEngineFactory.shared.audioEngine muteMicrophone:NO];
     [AudioEngineFactory.shared.audioEngine startPublish:streamID];
 }
 
 /// 关闭推流
 - (void)stopPublish {
+    if (self.sudFSMMGDecorator.keyWordASRing) {
+        [self stopCaptureAudioToASR];
+    }
     [AudioEngineFactory.shared.audioEngine stopPublishStream];
     [AudioEngineFactory.shared.audioEngine muteMicrophone:YES];
 }
@@ -30,6 +36,17 @@
 
 - (void)logoutRoom {
     [AudioEngineFactory.shared.audioEngine logoutRoom];
+}
+
+#pragma mark =======音频采集=======
+/// 开始音频采集
+- (void)startCaptureAudioToASR {
+    [AudioEngineFactory.shared.audioEngine startCapture];
+}
+
+/// 停止音频采集
+- (void)stopCaptureAudioToASR {
+    [AudioEngineFactory.shared.audioEngine stopCapture];
 }
 
 #pragma mark delegate

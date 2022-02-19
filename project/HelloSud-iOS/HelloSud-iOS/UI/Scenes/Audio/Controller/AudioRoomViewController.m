@@ -85,7 +85,7 @@
         make.edges.equalTo(self.view);
     }];
     [self.gameMicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.naviView.mas_bottom).offset(20);
+        make.top.mas_equalTo(self.naviView.mas_bottom).offset(0);
         make.left.right.mas_equalTo(self.view);
         make.height.mas_equalTo(55);
     }];
@@ -177,7 +177,7 @@
     };
     self.naviView.endGameBlock = ^(UIButton *sender) {
         [DTAlertView showTextAlert:@"确定结束游戏吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
-            [weakSelf.sudFSTAPPDecorator notifyComonSetEnd];
+            [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
         } onCloseCallback:^{
         }];
     };
@@ -240,7 +240,7 @@
                     // 下麦
                     [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
                     
-                    [weakSelf.sudFSTAPPDecorator notifyComonSelfPlaying:false reportGameInfoExtras:@""];
+                    [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
                 } onCloseCallback:^{
                     
                 }];
@@ -251,15 +251,15 @@
                 
                 if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.loginUserInfo.userID]) {
                     /// 先退出结束游戏，再退出当前游戏
-                    [weakSelf.sudFSTAPPDecorator notifyComonSelfPlaying:false reportGameInfoExtras:@""];
-                    [weakSelf.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                    [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
+                    [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
                 } else if ([self.sudFSMMGDecorator isPlayerIsReady:AppService.shared.loginUserInfo.userID]) {
                     /// 先取消准备游戏，再退出当前游戏
-                    [weakSelf.sudFSTAPPDecorator notifyComonSetReady:false];
-                    [weakSelf.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                    [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:false];
+                    [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
                 }  else if ([self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID]) {
                     /// 退出当前游戏
-                    [weakSelf.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                    [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
                 }
                 [DTSheetView close];
             }
@@ -651,7 +651,7 @@
 //}
 
 - (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
-    [self.sudFSTAPPDecorator notifyComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
+    [self.sudFSTAPPDecorator notifyAppComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 - (void)setRoomName:(NSString *)roomName {

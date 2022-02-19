@@ -57,17 +57,6 @@
     [[ZegoExpressEngine sharedEngine] startSoundLevelMonitor];
     [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:NO];
     
-    
-    // 需要的音频数据类型 Bitmask，此处示例三个回调都开启
-    ZegoAudioDataCallbackBitMask bitmask = ZegoAudioDataCallbackBitMaskCaptured | ZegoAudioDataCallbackBitMaskPlayback | ZegoAudioDataCallbackBitMaskMixed;
-
-    // 需要的音频数据参数，此处示例单声道、16K
-    ZegoAudioFrameParam *param = [[ZegoAudioFrameParam alloc] init];
-    param.channel = ZegoAudioChannelMono;
-    param.sampleRate = ZegoAudioSampleRate16K;
-
-    // 开启获取原始音频数据功能
-    [[ZegoExpressEngine sharedEngine] startAudioDataObserver:bitmask param:param];
 }
 
 - (void)unInit {
@@ -82,11 +71,20 @@
 - (void)startCapture {
     // 设置音频数据回调
     [[ZegoExpressEngine sharedEngine] setAudioDataHandler:self];
+    // 需要的音频数据类型 Bitmask，此处示例三个回调都开启
+    ZegoAudioDataCallbackBitMask bitmask = ZegoAudioDataCallbackBitMaskCaptured | ZegoAudioDataCallbackBitMaskPlayback | ZegoAudioDataCallbackBitMaskMixed;
+    // 需要的音频数据参数，此处示例单声道、16K
+    ZegoAudioFrameParam *param = [[ZegoAudioFrameParam alloc] init];
+    param.channel = ZegoAudioChannelMono;
+    param.sampleRate = ZegoAudioSampleRate16K;
+    // 开启获取原始音频数据功能
+    [[ZegoExpressEngine sharedEngine] startAudioDataObserver:bitmask param:param];
 }
 
 /// 结束原始音频采集
 - (void)stopCapture {
     [[ZegoExpressEngine sharedEngine] setAudioDataHandler:nil];
+    [[ZegoExpressEngine sharedEngine] stopAudioDataObserver];
 }
 
 - (void)loginRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
@@ -113,7 +111,8 @@
     dispatch_async(self.queueMute, ^{
         /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
         /// 异步激活采集通道（此处开销成本过大，相对耗时）
-        [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:YES];
+        NSLog(@"muteMicrophone:%@", @(isMute));
+        [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:isMute ? NO : YES];
         [ZegoExpressEngine.sharedEngine muteMicrophone:isMute];
     });
 }
