@@ -29,7 +29,7 @@
     
     VersionInfoModel *m0 = [VersionInfoModel new];
     m0.title = @"HelloSud App";
-    m0.subTitle = [NSString stringWithFormat:@"V%@", [DeviceUtil getAppVersion]];
+    m0.subTitle = [NSString stringWithFormat:@"V%@.%@", [DeviceUtil getAppVersion], [DeviceUtil getAppBuildCode]];
     
     VersionInfoModel *m1 = [VersionInfoModel new];
     m1.title = @"SudMGP SDK";
