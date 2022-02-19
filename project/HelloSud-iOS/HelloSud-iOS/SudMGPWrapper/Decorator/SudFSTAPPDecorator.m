@@ -36,23 +36,23 @@
 
 /// 游戏中状态设置
 /// @param isPlaying   true 开始游戏，false 结束游戏
-- (void)notifyComonSelfPlaying:(BOOL)isPlaying {
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isPlaying), @"isPlaying", nil];
-    [self notifyStateChange:APP_COMMON_SELF_READY dataJson:dic.mj_JSONString];
+- (void)notifyComonSelfPlaying:(BOOL)isPlaying reportGameInfoExtras:(NSString *)reportGameInfoExtras {
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isPlaying), @"isPlaying", reportGameInfoExtras, @"reportGameInfoExtras", nil];
+    [self notifyStateChange:APP_COMMON_SELF_PLAYING dataJson:dic.mj_JSONString];
 }
 
 /// 设置用户为队长
 /// @param userId   必填，指定队长uid
 - (void)notifyComonSetCaptainStateWithUserId:(NSString *)userId {
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"curCaptainUID", nil];
-    [self notifyStateChange:APP_COMMON_SELF_READY dataJson:dic.mj_JSONString];
+    [self notifyStateChange:APP_COMMON_SELF_CAPTAIN dataJson:dic.mj_JSONString];
 }
 
 /// 踢出用户
 /// @param userId   被踢用户uid
 - (void)notifyComonKickStateWithUserId:(NSString *)userId {
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"kickedUID", nil];
-    [self notifyStateChange:APP_COMMON_SELF_READY dataJson:dic.mj_JSONString];
+    [self notifyStateChange:APP_COMMON_SELF_KICK dataJson:dic.mj_JSONString];
 }
 
 /// 结束游戏
@@ -114,7 +114,7 @@
 /// @param volume  音量大小 0 到 100
 - (void)notifyComonOpenSoundVolume:(int)volume {
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(volume), @"volume", nil];
-    [self notifyStateChange:APP_COMMON_OPEN_BRATE dataJson:dic.mj_JSONString];
+    [self notifyStateChange:APP_COMMON_SOUND_VOLUME dataJson:dic.mj_JSONString];
 }
 
 

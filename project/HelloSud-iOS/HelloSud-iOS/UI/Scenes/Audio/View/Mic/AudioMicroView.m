@@ -218,7 +218,8 @@
 - (void)updateGameUI {
     if (self.micType == HSGameMic) {
         /// 设置队长状态 - （队长有且只有一个）
-        [self.gameCaptainView setHidden:self.iSudFSMMG.captainUserId != self.model.user.userID];
+        BOOL isCaptain = [self.iSudFSMMG.captainUserId isEqualToString:self.model.user.userID];
+        [self.gameCaptainView setHidden:!isCaptain];
         /// 设置玩家游戏状态
         [self.gamingImageView setHidden:true];
         [self.gameStateLabel setHidden:true];

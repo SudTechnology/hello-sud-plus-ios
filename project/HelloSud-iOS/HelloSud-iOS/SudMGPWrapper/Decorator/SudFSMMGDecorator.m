@@ -410,7 +410,7 @@
     if (m.isCaptain) {
         self.captainUserId = userId;
     } else {
-        if (self.captainUserId == userId) {
+        if ([self.captainUserId isEqualToString:userId]) {
             self.captainUserId = @"";
         }
     }

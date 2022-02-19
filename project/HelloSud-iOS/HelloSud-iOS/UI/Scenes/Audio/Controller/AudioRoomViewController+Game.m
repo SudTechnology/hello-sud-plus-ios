@@ -14,6 +14,7 @@
 
 @implementation AudioRoomViewController(Game)
 
+/// 初始化sud
 - (void)initSudFSMMG {
     WeakSelf
     self.sudFSMMGDecorator = [[SudFSMMGDecorator alloc] init:self.roomID userID:AppService.shared.loginUserInfo.userID language:self.language loadSuccess:^(id<ISudFSTAPP>  _Nonnull iSudFSTAPP) {
