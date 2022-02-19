@@ -72,8 +72,10 @@
     [self addSubview:self.gamingImageView];
 }
 
-- (void)hiddenGameNode {
-    [self.gameCaptainView setHidden:true];
+- (void)hiddenGameNode:(BOOL)hiddenCaptain {
+    if (hiddenCaptain) {
+        [self.gameCaptainView setHidden:true];
+    }
     [self.gameStateLabel setHidden:true];
     [self.gameBadgeLabel setHidden:true];
     [self.gamingImageView setHidden:true];
@@ -130,7 +132,7 @@
                     // 下麦,清空用户信息
                     weakSelf.model.user = nil;
                     weakSelf.giftImageView.hidden = true;
-                    [weakSelf hiddenGameNode];
+                    [weakSelf hiddenGameNode:true];
                 } else {
                     weakSelf.model.user = msgModel.sendUser;
                     weakSelf.model.user.roleType = msgModel.roleType;
@@ -203,7 +205,7 @@
         self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
         [self showUserName:@"点击上麦" showOwner:false];
         [self.rippleView stopAnimate:YES];
-        [self hiddenGameNode];
+        [self hiddenGameNode:true];
         return;
     }
     if (self.model.user.icon) {
@@ -218,7 +220,11 @@
 - (void)updateGameUI {
     if (self.micType == HSGameMic) {
         /// 设置队长状态 - （队长有且只有一个）
-        [self.gameCaptainView setHidden:self.iSudFSMMG.captainUserId != self.model.user.userID];
+        [self.gameCaptainView setHidden:true];
+        BOOL isCaptain = [self.iSudFSMMG isPlayerIsCaptain:self.model.user.userID];
+        if (isCaptain) {
+            [self.gameCaptainView setHidden:false];
+        }
         /// 设置玩家游戏状态
         [self.gamingImageView setHidden:true];
         [self.gameStateLabel setHidden:true];
@@ -238,7 +244,7 @@
             self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
             
             if ([self.iSudFSMMG isPlayerIn:self.model.user.userID] == false) {
-                [self hiddenGameNode];
+                [self hiddenGameNode:false];
             }
         }
         if ([self.iSudFSMMG isPlayerIsPlaying:self.model.user.userID]) {
@@ -247,7 +253,7 @@
             [self.gamingImageView setHidden:true];
         }
     } else {
-        [self hiddenGameNode];
+        [self hiddenGameNode:false];
     }
 }
 

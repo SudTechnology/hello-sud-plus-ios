@@ -91,6 +91,8 @@ typedef void (^GameLoadSuccessBlock)(id<ISudFSTAPP> iSudFSTAPP);
 - (BOOL)isPlayerIsReady:(NSString *)userId;
 /// 获取用户是否在游戏中
 - (BOOL)isPlayerIsPlaying:(NSString *)userId;
+/// 获取用户是否在队长
+- (BOOL)isPlayerIsCaptain:(NSString *)userId;
 
 @end
 

@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyComonSetReady:(BOOL)isReady;
 /// 游戏中状态设置
 /// @param isPlaying   true 开始游戏，false 结束游戏
-- (void)notifyComonSelfPlaying:(BOOL)isPlaying;
+- (void)notifyComonSelfPlaying:(BOOL)isPlaying reportGameInfoExtras:(NSString *)reportGameInfoExtras;
 /// 文字命中状态
 /// @param isHit true 命中，false 未命中
 /// @param keyWord 单个关键词， 兼容老版本
