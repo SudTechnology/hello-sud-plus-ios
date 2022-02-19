@@ -130,7 +130,7 @@
     if (![self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID]) {
         if (self.sudFSMMGDecorator.gameStateType == GameStateTypeLeisure && !self.sudFSMMGDecorator.isInGame) {
             /// 上麦，就是加入游戏
-            [self.sudFSTAPPDecorator notifyComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+            [self.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
         }
     }
 }
@@ -143,10 +143,10 @@
     
     if (self.sudFSMMGDecorator.isReady) {
         /// 如果已经准备先退出准备状态
-        [self.sudFSTAPPDecorator notifyComonSetReady:false];
+        [self.sudFSTAPPDecorator notifyAppComonSetReady:false];
     }
     /// 下麦，就是退出游戏
-    [self.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+    [self.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 /// 你画我猜命中
@@ -157,13 +157,13 @@
     if (self.sudFSMMGDecorator.isHitBomb) {
         if ([self isPureInt: content]) {
             /// 关键词命中
-            [self.sudFSTAPPDecorator notifyComonDrawTextHit:false keyWord:@"" text:content];
+            [self.sudFSTAPPDecorator notifyAppComonDrawTextHit:false keyWord:@"" text:content];
         }
         return;
     }
     if (self.sudFSMMGDecorator.keyWordHiting == YES && [content isEqualToString:self.sudFSMMGDecorator.drawKeyWord]) {
         /// 关键词命中
-        [self.sudFSTAPPDecorator notifyComonDrawTextHit:true keyWord:self.sudFSMMGDecorator.drawKeyWord text:self.sudFSMMGDecorator.drawKeyWord];
+        [self.sudFSTAPPDecorator notifyAppComonDrawTextHit:true keyWord:self.sudFSMMGDecorator.drawKeyWord text:self.sudFSMMGDecorator.drawKeyWord];
     }
 }
 

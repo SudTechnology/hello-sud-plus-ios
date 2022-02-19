@@ -37,6 +37,8 @@ static NSString* APP_COMMON_OPEN_SOUND   = @"app_common_open_sound";
 static NSString* APP_COMMON_OPEN_BRATE   = @"app_common_open_vibrate";
 /// 设置游戏的音量大小
 static NSString* APP_COMMON_SOUND_VOLUME   = @"app_common_game_sound_volume";
+/// 设置游戏上报信息扩展参数（透传)
+static NSString* APP_COMMON_GAME_INFO_EXTRAS   = @"app_common_report_game_info_extras";
 
 
 #endif /* SudMGPAPPState2_h */
