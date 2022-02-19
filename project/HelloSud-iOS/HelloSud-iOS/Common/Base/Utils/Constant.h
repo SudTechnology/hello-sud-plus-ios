@@ -36,12 +36,4 @@ NS_ASSUME_NONNULL_BEGIN
 /// 常规字号字体
 #define UIFONT_REGULAR(s) [UIFont systemFontOfSize:s weight:UIFontWeightRegular]
 
-
-#define InteractURL      @"https://fat-interact.sud.tech"
-#define BaseURL      @"https://fat-base.sud.tech"
-//#define BaseURL      @"http://192.168.101.223:8081"
-
-#define kBASEURL(url) [NSString stringWithFormat:@"%@/%@",BaseURL, url]
-#define kINTERACTURL(url) [NSString stringWithFormat:@"%@/%@",InteractURL, url]
-
 NS_ASSUME_NONNULL_END
