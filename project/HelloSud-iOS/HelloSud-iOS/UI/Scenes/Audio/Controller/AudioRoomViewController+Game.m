@@ -153,7 +153,7 @@
 
 
 #pragma mark =======玩家状态处理=======
-/// 公屏消息状态 ---> 添加公屏消息
+/// 加入状态处理
 - (void)updatePlayerCommonPlayerIn:(MGCommonPlayerInModel *)model userId:(NSString *)userId {
     if (model.isIn && [AppService.shared.loginUserInfo.userID isEqualToString:userId]) {
         // 请求上麦
