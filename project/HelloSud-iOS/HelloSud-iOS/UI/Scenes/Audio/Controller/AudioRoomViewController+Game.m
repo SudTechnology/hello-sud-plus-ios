@@ -163,18 +163,6 @@
 }
 
 
-#pragma mark =======音频采集=======
-/// 开始音频采集
-- (void)startCaptureAudioToASR {
-    [AudioEngineFactory.shared.audioEngine startCapture];
-}
-
-/// 停止音频采集
-- (void)stopCaptureAudioToASR {
-    [AudioEngineFactory.shared.audioEngine stopCapture];
-}
-
-
 #pragma mark =======登录 加载 游戏=======
 /// 游戏登录
 /// 接入方客户端 调用 接入方服务端 login 获取 短期令牌code
