@@ -11,6 +11,13 @@
 #define SudMGPWrapperHeader_h
 
 #import "SudMGPAPPState.h"
-#import "CommonGameModelHeader.h"
+#import "SudMGPMGState.h"
+
+#import "SudFSTAPPDecorator.h"
+#import "SudFSMMGDecorator.h"
+
+#import "GameViewInfoModel.h"
+#import "GameCfgModel.h"
+#import "MGPlayerStateMapModel.h"
 
 #endif /* SudMGPWrapperHeader_h */

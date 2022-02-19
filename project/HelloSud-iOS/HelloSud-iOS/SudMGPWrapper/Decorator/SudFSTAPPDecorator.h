@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) id<ISudFSTAPP> iSudFSTAPP;
 
+/// setI SudFSTAPP
 - (void)setISudFSTAPP:(id<ISudFSTAPP>)iSudFSTAPP;
 
 /// 加入,退出游戏
