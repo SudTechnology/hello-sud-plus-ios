@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// app -> 游戏
 @interface SudFSTAPPDecorator : NSObject
 
-@property (nonatomic, weak) id<ISudFSTAPP> iSudFSTAPP;
+@property (nonatomic, strong) id<ISudFSTAPP> iSudFSTAPP;
+
 - (void)setISudFSTAPP:(id<ISudFSTAPP>)iSudFSTAPP;
 
 /// 加入,退出游戏

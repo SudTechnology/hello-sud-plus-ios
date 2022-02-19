@@ -129,61 +129,6 @@
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
-#pragma mark =======登录 加载 游戏=======
-/// 游戏登录
-/// 接入方客户端 调用 接入方服务端 login 获取 短期令牌code
-/// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
-- (void)login {
-    NSString *appID = AppService.shared.configModel.sudCfg.appId;
-    NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
-    if (appID.length == 0 || appKey.length == 0) {
-        [ToastUtil show:@"Game appID or appKey is empty"];
-        return;
-    }
-    WeakSelf
-    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
-        [weakSelf login:self.gameView gameId:self.gameId code:gameInfo.code appID:appID appKey:appKey];
-    } fail:^(NSError *error) {
-        [ToastUtil show:error.debugDescription];
-    }];
-}
-
-/// 退出游戏
-- (void)logoutGame {
-    [self stopCaptureAudioToASR];
-    // 销毁游戏
-    [self.sudFSTAPPDecorator destroyMG];
-}
-
-/// 处理切换游戏
-/// @param gameID 新的游戏ID
-- (void)handleGameChange:(NSInteger)gameID {
-    [self.sudFSMMGDecorator clearAllStates];
-    if (gameID == 0) {
-        // 切换语音房间
-        self.gameId = 0;
-        self.roomType = HSAudio;
-        return;
-    }
-    /// 退出游戏
-    [self logoutGame];
-    /// 更新gameID
-    self.gameId = gameID;
-    self.roomType = HSGame;
-    [self login];
-}
-
-
-#pragma mark =======音频采集=======
-/// 开始音频采集
-- (void)startCaptureAudioToASR {
-    [AudioEngineFactory.shared.audioEngine startCapture];
-}
-
-/// 停止音频采集
-- (void)stopCaptureAudioToASR {
-    [AudioEngineFactory.shared.audioEngine stopCapture];
-}
 
 #pragma mark =======Comonn状态处理=======
 /// 公屏消息状态 ---> 添加公屏消息
@@ -217,6 +162,62 @@
     self.gameNumLabel.text = [NSString stringWithFormat:@"游戏人数：%ld/%ld", self.sudFSMMGDecorator.onlineUserIdList.count, self.totalGameUserCount];
 }
 
+
+#pragma mark =======音频采集=======
+/// 开始音频采集
+- (void)startCaptureAudioToASR {
+    [AudioEngineFactory.shared.audioEngine startCapture];
+}
+
+/// 停止音频采集
+- (void)stopCaptureAudioToASR {
+    [AudioEngineFactory.shared.audioEngine stopCapture];
+}
+
+
+#pragma mark =======登录 加载 游戏=======
+/// 游戏登录
+/// 接入方客户端 调用 接入方服务端 login 获取 短期令牌code
+/// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
+- (void)login {
+    NSString *appID = AppService.shared.configModel.sudCfg.appId;
+    NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
+    if (appID.length == 0 || appKey.length == 0) {
+        [ToastUtil show:@"Game appID or appKey is empty"];
+        return;
+    }
+    WeakSelf
+    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
+        [weakSelf login:weakSelf.gameView gameId:weakSelf.gameId code:gameInfo.code appID:appID appKey:appKey];
+    } fail:^(NSError *error) {
+        [ToastUtil show:error.debugDescription];
+    }];
+}
+
+/// 退出游戏
+- (void)logoutGame {
+    [self stopCaptureAudioToASR];
+    // 销毁游戏
+    [self.sudFSTAPPDecorator destroyMG];
+}
+
+/// 处理切换游戏
+/// @param gameID 新的游戏ID
+- (void)handleGameChange:(NSInteger)gameID {
+    [self.sudFSMMGDecorator clearAllStates];
+    if (gameID == 0) {
+        // 切换语音房间
+        self.gameId = 0;
+        self.roomType = HSAudio;
+        return;
+    }
+    /// 退出游戏
+    [self logoutGame];
+    /// 更新gameID
+    self.gameId = gameID;
+    self.roomType = HSGame;
+    [self login];
+}
 
 #pragma mark =======登录 加载 游戏=======
 /// 游戏登录
@@ -258,7 +259,8 @@
 /// @param fsmMG 控制器
 /// @param rootView 游戏根视图
 - (void)loadGame:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t) mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView*)rootView {
-    id<ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:fsmMG rootView:rootView];
+    
+    id<ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:self.sudFSMMGDecorator rootView:rootView];
     [self.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
 }
 

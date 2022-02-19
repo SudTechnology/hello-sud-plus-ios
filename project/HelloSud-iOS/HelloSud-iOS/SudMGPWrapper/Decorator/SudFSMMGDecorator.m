@@ -7,14 +7,13 @@
 
 #import "SudFSMMGDecorator.h"
 
-@interface SudFSMMGDecorator () <ISudFSMMG>
+@interface SudFSMMGDecorator ()
 /// 事件处理器
 @property(nonatomic, weak) id<SudFSMMGListener> listener;
 
 @end
 
 @implementation SudFSMMGDecorator
-
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
