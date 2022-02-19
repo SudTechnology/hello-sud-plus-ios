@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)UIVIEW_TAP_BLOCK changeRoomTapBlock;
 
 @property (nonatomic, strong) UILabel *roomNameLabel;
-@property (nonatomic, strong) UIButton *endGameBtn;
 
+- (void)isHiddenEndGameBtn:(BOOL)hidden;
 - (void)hiddenNodeWithRoleType:(NSInteger)roleType;
 @end
 

@@ -58,14 +58,10 @@
 		445EAB3627A1330D000DCC72 /* BaseRespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB3527A1330D000DCC72 /* BaseRespModel.m */; };
 		445EAB3927A1347E000DCC72 /* UserInfoListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB3827A1347E000DCC72 /* UserInfoListModel.m */; };
 		445EAB3C27A1428C000DCC72 /* GameLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB3B27A1428C000DCC72 /* GameLoginModel.m */; };
-		44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03882796AB9C006EE6AC /* GameSudManager.m */; };
 		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
 		44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF039B2796B70B006EE6AC /* GameViewInfoModel.m */; };
-		44DF039F2797B62B006EE6AC /* MGCommonPublicMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF039E2797B62B006EE6AC /* MGCommonPublicMessageModel.m */; };
-		44DF03A22797E467006EE6AC /* MGCommonKeyWrodToHitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03A12797E467006EE6AC /* MGCommonKeyWrodToHitModel.m */; };
-		44DF03A52797E6FC006EE6AC /* GamePlayerStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03A42797E6FC006EE6AC /* GamePlayerStateModel.m */; };
-		44DF03AE2797F124006EE6AC /* SudFSTAPPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03AD2797F124006EE6AC /* SudFSTAPPManager.m */; };
+		44DF03AE2797F124006EE6AC /* SudFSTAPPDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF03AD2797F124006EE6AC /* SudFSTAPPDecorator.m */; };
 		44F29F4D27B21A4D00F57DEE /* AudioMsgSystemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F4C27B21A4D00F57DEE /* AudioMsgSystemModel.m */; };
 		44F29F5027B2474900F57DEE /* DTPaddingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F4F27B2474900F57DEE /* DTPaddingLabel.m */; };
 		44F29F5927BB98D900F57DEE /* HSSetingHeadItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F5827BB98D900F57DEE /* HSSetingHeadItemView.m */; };
@@ -78,6 +74,9 @@
 		44F29F6E27BCA75000F57DEE /* VersionInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F6D27BCA75000F57DEE /* VersionInfoCell.m */; };
 		44F29F7227BCCE6D00F57DEE /* SwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F7127BCCE6D00F57DEE /* SwitchRoomCell.m */; };
 		44F29F7527BE005900F57DEE /* GameCfgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F7427BE005900F57DEE /* GameCfgModel.m */; };
+		44F29F8527BF4B1D00F57DEE /* SudFSMMGDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F8427BF4B1D00F57DEE /* SudFSMMGDecorator.m */; };
+		44F29F9F27BF99EE00F57DEE /* SudMGPMGState.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F9E27BF99EE00F57DEE /* SudMGPMGState.m */; };
+		44F29FAB27C0A4A000F57DEE /* MGPlayerStateMapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29FAA27C0A4A000F57DEE /* MGPlayerStateMapModel.m */; };
 		6C076E53279940A400650209 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E52279940A400650209 /* MainTabBarController.m */; };
 		6C076E572799450900650209 /* HSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E562799450900650209 /* HSSettingViewController.m */; };
 		6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E5B27995D3400650209 /* BaseTableViewCell.m */; };
@@ -119,7 +118,6 @@
 		6C192E772797BB7B00553034 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E762797BB7B00553034 /* BaseView.m */; };
 		6C192E932797E31200553034 /* DTSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E8F2797E31200553034 /* DTSheetView.m */; };
 		6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */; };
-		6C1D007B27BA0DC1000F0998 /* GameCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007927BA0DC1000F0998 /* GameCommonModel.m */; };
 		6C239FEF27B39BD200B19FE4 /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FEE27B39BD200B19FE4 /* ShowViewController.m */; };
 		6C239FF827B39CBE00B19FE4 /* OneOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FF727B39CBE00B19FE4 /* OneOneViewController.m */; };
 		6C239FFB27B3AAD900B19FE4 /* RoomCmdChangeGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C239FFA27B3AAD900B19FE4 /* RoomCmdChangeGameModel.m */; };
@@ -260,21 +258,12 @@
 		445EAB3A27A1428C000DCC72 /* GameLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameLoginModel.h; sourceTree = "<group>"; };
 		445EAB3B27A1428C000DCC72 /* GameLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameLoginModel.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* IAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAudioEngine.h; sourceTree = "<group>"; };
-		44DF03862796AB4C006EE6AC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
-		44DF03872796AB9C006EE6AC /* GameSudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSudManager.h; sourceTree = "<group>"; };
-		44DF03882796AB9C006EE6AC /* GameSudManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameSudManager.m; sourceTree = "<group>"; };
 		44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SudMGP.xcframework; sourceTree = "<group>"; };
 		44DF03972796B2C5006EE6AC /* AppUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
 		44DF039A2796B70B006EE6AC /* GameViewInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewInfoModel.h; sourceTree = "<group>"; };
 		44DF039B2796B70B006EE6AC /* GameViewInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewInfoModel.m; sourceTree = "<group>"; };
-		44DF039D2797B62B006EE6AC /* MGCommonPublicMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGCommonPublicMessageModel.h; sourceTree = "<group>"; };
-		44DF039E2797B62B006EE6AC /* MGCommonPublicMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGCommonPublicMessageModel.m; sourceTree = "<group>"; };
-		44DF03A02797E467006EE6AC /* MGCommonKeyWrodToHitModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGCommonKeyWrodToHitModel.h; sourceTree = "<group>"; };
-		44DF03A12797E467006EE6AC /* MGCommonKeyWrodToHitModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGCommonKeyWrodToHitModel.m; sourceTree = "<group>"; };
-		44DF03A32797E6FC006EE6AC /* GamePlayerStateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GamePlayerStateModel.h; sourceTree = "<group>"; };
-		44DF03A42797E6FC006EE6AC /* GamePlayerStateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GamePlayerStateModel.m; sourceTree = "<group>"; };
-		44DF03AC2797F124006EE6AC /* SudFSTAPPManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudFSTAPPManager.h; sourceTree = "<group>"; };
-		44DF03AD2797F124006EE6AC /* SudFSTAPPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudFSTAPPManager.m; sourceTree = "<group>"; };
+		44DF03AC2797F124006EE6AC /* SudFSTAPPDecorator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudFSTAPPDecorator.h; sourceTree = "<group>"; };
+		44DF03AD2797F124006EE6AC /* SudFSTAPPDecorator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudFSTAPPDecorator.m; sourceTree = "<group>"; };
 		44F29F4B27B21A4D00F57DEE /* AudioMsgSystemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioMsgSystemModel.h; sourceTree = "<group>"; };
 		44F29F4C27B21A4D00F57DEE /* AudioMsgSystemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioMsgSystemModel.m; sourceTree = "<group>"; };
 		44F29F4E27B2474900F57DEE /* DTPaddingLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTPaddingLabel.h; sourceTree = "<group>"; };
@@ -299,6 +288,16 @@
 		44F29F7127BCCE6D00F57DEE /* SwitchRoomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchRoomCell.m; sourceTree = "<group>"; };
 		44F29F7327BE005900F57DEE /* GameCfgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameCfgModel.h; sourceTree = "<group>"; };
 		44F29F7427BE005900F57DEE /* GameCfgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameCfgModel.m; sourceTree = "<group>"; };
+		44F29F8127BF410800F57DEE /* CommonGameModelHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonGameModelHeader.h; sourceTree = "<group>"; };
+		44F29F8327BF4B1D00F57DEE /* SudFSMMGDecorator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudFSMMGDecorator.h; sourceTree = "<group>"; };
+		44F29F8427BF4B1D00F57DEE /* SudFSMMGDecorator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudFSMMGDecorator.m; sourceTree = "<group>"; };
+		44F29F8627BF7CD900F57DEE /* SudFSMMGListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudFSMMGListener.h; sourceTree = "<group>"; };
+		44F29F9D27BF99EE00F57DEE /* SudMGPMGState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudMGPMGState.h; sourceTree = "<group>"; };
+		44F29F9E27BF99EE00F57DEE /* SudMGPMGState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudMGPMGState.m; sourceTree = "<group>"; };
+		44F29FA927C0A4A000F57DEE /* MGPlayerStateMapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGPlayerStateMapModel.h; sourceTree = "<group>"; };
+		44F29FAA27C0A4A000F57DEE /* MGPlayerStateMapModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGPlayerStateMapModel.m; sourceTree = "<group>"; };
+		44F29FAF27C0EA9400F57DEE /* SudMGPAPPState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudMGPAPPState.h; sourceTree = "<group>"; };
+		44F29FB027C0EBB100F57DEE /* SudMGPWrapperHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudMGPWrapperHeader.h; sourceTree = "<group>"; };
 		4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.release.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C076E51279940A400650209 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -389,8 +388,6 @@
 		6C192E902797E31200553034 /* DTSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSheetView.h; sourceTree = "<group>"; };
 		6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraAudioEngineImpl.h; sourceTree = "<group>"; };
 		6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgoraAudioEngineImpl.m; sourceTree = "<group>"; };
-		6C1D007927BA0DC1000F0998 /* GameCommonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCommonModel.m; sourceTree = "<group>"; };
-		6C1D007A27BA0DC1000F0998 /* GameCommonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCommonModel.h; sourceTree = "<group>"; };
 		6C239FED27B39BD200B19FE4 /* ShowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowViewController.h; sourceTree = "<group>"; };
 		6C239FEE27B39BD200B19FE4 /* ShowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowViewController.m; sourceTree = "<group>"; };
 		6C239FF627B39CBE00B19FE4 /* OneOneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneOneViewController.h; sourceTree = "<group>"; };
@@ -657,12 +654,10 @@
 		44DF03842796A9EF006EE6AC /* SudMGPWrapper */ = {
 			isa = PBXGroup;
 			children = (
+				44F29F8227BF420000F57DEE /* Decorator */,
+				44DF03992796B6E3006EE6AC /* Model */,
 				44F29F7627BE6EDD00F57DEE /* State */,
-				44DF038A2796ADC6006EE6AC /* SudMGPSDK */,
-				44DF03872796AB9C006EE6AC /* GameSudManager.h */,
-				44DF03882796AB9C006EE6AC /* GameSudManager.m */,
-				44DF03AC2797F124006EE6AC /* SudFSTAPPManager.h */,
-				44DF03AD2797F124006EE6AC /* SudFSTAPPManager.m */,
+				44F29FB027C0EBB100F57DEE /* SudMGPWrapperHeader.h */,
 			);
 			path = SudMGPWrapper;
 			sourceTree = "<group>";
@@ -689,18 +684,13 @@
 		44DF03992796B6E3006EE6AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6C1D007A27BA0DC1000F0998 /* GameCommonModel.h */,
-				6C1D007927BA0DC1000F0998 /* GameCommonModel.m */,
 				44DF039A2796B70B006EE6AC /* GameViewInfoModel.h */,
 				44DF039B2796B70B006EE6AC /* GameViewInfoModel.m */,
-				44DF039D2797B62B006EE6AC /* MGCommonPublicMessageModel.h */,
-				44DF039E2797B62B006EE6AC /* MGCommonPublicMessageModel.m */,
-				44DF03A02797E467006EE6AC /* MGCommonKeyWrodToHitModel.h */,
-				44DF03A12797E467006EE6AC /* MGCommonKeyWrodToHitModel.m */,
-				44DF03A32797E6FC006EE6AC /* GamePlayerStateModel.h */,
-				44DF03A42797E6FC006EE6AC /* GamePlayerStateModel.m */,
 				44F29F7327BE005900F57DEE /* GameCfgModel.h */,
 				44F29F7427BE005900F57DEE /* GameCfgModel.m */,
+				44F29FA927C0A4A000F57DEE /* MGPlayerStateMapModel.h */,
+				44F29FAA27C0A4A000F57DEE /* MGPlayerStateMapModel.m */,
+				44F29F8127BF410800F57DEE /* CommonGameModelHeader.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -721,26 +711,23 @@
 		44F29F7627BE6EDD00F57DEE /* State */ = {
 			isa = PBXGroup;
 			children = (
-				44F29F7727BE6F2400F57DEE /* App */,
-				44F29F7827BE6F3000F57DEE /* MG */,
-				44DF03992796B6E3006EE6AC /* Model */,
-				44DF03862796AB4C006EE6AC /* GameConfig.h */,
+				44F29F9D27BF99EE00F57DEE /* SudMGPMGState.h */,
+				44F29F9E27BF99EE00F57DEE /* SudMGPMGState.m */,
+				44F29FAF27C0EA9400F57DEE /* SudMGPAPPState.h */,
 			);
 			path = State;
 			sourceTree = "<group>";
 		};
-		44F29F7727BE6F2400F57DEE /* App */ = {
+		44F29F8227BF420000F57DEE /* Decorator */ = {
 			isa = PBXGroup;
 			children = (
+				44DF03AC2797F124006EE6AC /* SudFSTAPPDecorator.h */,
+				44DF03AD2797F124006EE6AC /* SudFSTAPPDecorator.m */,
+				44F29F8327BF4B1D00F57DEE /* SudFSMMGDecorator.h */,
+				44F29F8427BF4B1D00F57DEE /* SudFSMMGDecorator.m */,
+				44F29F8627BF7CD900F57DEE /* SudFSMMGListener.h */,
 			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		44F29F7827BE6F3000F57DEE /* MG */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MG;
+			path = Decorator;
 			sourceTree = "<group>";
 		};
 		6C076E54279944ED00650209 /* Controller */ = {
@@ -800,11 +787,11 @@
 		6C076E82279EA2CF00650209 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				6CD6E85C27BE427500D8F76C /* Common */,
 				6CD6E86927BF420900D8F76C /* ASR */,
 				6CD6E86527BF41D900D8F76C /* Orderentertainment */,
 				6CD6E86127BF417300D8F76C /* Crossroom */,
 				6CD6E85D27BF410100D8F76C /* Ticket */,
-				6CD6E85C27BE427500D8F76C /* Common */,
 				6CD6E85827BE407900D8F76C /* Talent */,
 				6C076E83279EA2CF00650209 /* Show */,
 				6C076E84279EA2CF00650209 /* OneOne */,
@@ -886,10 +873,10 @@
 			isa = PBXGroup;
 			children = (
 				6C076EA2279EC6B600650209 /* CommonAudioModelHeader.h */,
-				445EAB08279FD44F000DCC72 /* RoomGameInfoModel.h */,
 				6C076EBE27A0EC2400650209 /* AudioRoomMicModel.h */,
-				445EAB09279FD44F000DCC72 /* RoomGameInfoModel.m */,
 				6C076EBF27A0EC2400650209 /* AudioRoomMicModel.m */,
+				445EAB08279FD44F000DCC72 /* RoomGameInfoModel.h */,
+				445EAB09279FD44F000DCC72 /* RoomGameInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1305,6 +1292,7 @@
 		E65466148933C05BB06C9A97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44DF038A2796ADC6006EE6AC /* SudMGPSDK */,
 				573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */,
 			);
 			name = Frameworks;
@@ -1452,12 +1440,10 @@
 				6C076EC727A152F900650209 /* DTRippleAnimationView.m in Sources */,
 				445EAAEF279E7CCF000DCC72 /* SearchHeaderView.m in Sources */,
 				445EAB3C27A1428C000DCC72 /* GameLoginModel.m in Sources */,
-				44DF03A52797E6FC006EE6AC /* GamePlayerStateModel.m in Sources */,
 				44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */,
 				6C076ED727A298FC00650209 /* GameService.m in Sources */,
 				445EAB01279F9901000DCC72 /* BaseTextView.m in Sources */,
 				6C239FEF27B39BD200B19FE4 /* ShowViewController.m in Sources */,
-				44DF03892796AB9C006EE6AC /* GameSudManager.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				6C076EB6279FF3FF00650209 /* GiftModel.m in Sources */,
 				445EAAF5279E810C000DCC72 /* BaseCollectionReusableView.m in Sources */,
@@ -1481,14 +1467,13 @@
 				6C076E80279E8EBD00650209 /* AudioCommon.m in Sources */,
 				6C076EB927A00ABC00650209 /* DTBlurEffectView.m in Sources */,
 				445EAACC279A9C30000DCC72 /* AudioMicroView.m in Sources */,
-				44DF039F2797B62B006EE6AC /* MGCommonPublicMessageModel.m in Sources */,
+				44F29F8527BF4B1D00F57DEE /* SudFSMMGDecorator.m in Sources */,
 				445EAAA227997584000DCC72 /* GameItemCollectionViewCell.m in Sources */,
 				6CD6E86827BF41F400D8F76C /* OrderentertainmentViewController.m in Sources */,
 				6C076E7D279E833C00650209 /* AudioEngineFactory.m in Sources */,
 				6CD6E87627BF42F900D8F76C /* VolcAudioEngineImpl.m in Sources */,
 				6C192E5E279523B100553034 /* main.m in Sources */,
 				445EAADC279AB262000DCC72 /* RoomGiftContentView.m in Sources */,
-				44DF03A22797E467006EE6AC /* MGCommonKeyWrodToHitModel.m in Sources */,
 				6C076EC427A1442500650209 /* AudioRoomViewController+Voice.m in Sources */,
 				445EAA7727990035000DCC72 /* LoginViewController.m in Sources */,
 				44F29F5027B2474900F57DEE /* DTPaddingLabel.m in Sources */,
@@ -1504,9 +1489,10 @@
 				6C076E6A27996C2700650209 /* HSSetingHeadView.m in Sources */,
 				6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */,
 				6C239FF827B39CBE00B19FE4 /* OneOneViewController.m in Sources */,
-				44DF03AE2797F124006EE6AC /* SudFSTAPPManager.m in Sources */,
+				44DF03AE2797F124006EE6AC /* SudFSTAPPDecorator.m in Sources */,
 				445EAAC5279A90C0000DCC72 /* RoomGiftTableViewCell.m in Sources */,
 				6C239FFB27B3AAD900B19FE4 /* RoomCmdChangeGameModel.m in Sources */,
+				44F29FAB27C0A4A000F57DEE /* MGPlayerStateMapModel.m in Sources */,
 				44F29F5C27BB9C0800F57DEE /* HSSettingHeaderModel.m in Sources */,
 				445EAAF2279E8083000DCC72 /* HomeViewController.m in Sources */,
 				445EAB0A279FD44F000DCC72 /* RoomGameInfoModel.m in Sources */,
@@ -1515,7 +1501,6 @@
 				445EAB1A27A0101F000DCC72 /* EnterRoomModel.m in Sources */,
 				6C076E6127995F4C00650209 /* HSSettingCell.m in Sources */,
 				6C192E932797E31200553034 /* DTSheetView.m in Sources */,
-				6C1D007B27BA0DC1000F0998 /* GameCommonModel.m in Sources */,
 				445EAAAD279A5CF6000DCC72 /* RoomOperatorView.m in Sources */,
 				445EAA9F27997485000DCC72 /* BaseCollectionViewCell.m in Sources */,
 				445EAB2C27A013B1000DCC72 /* RoomListModel.m in Sources */,
@@ -1558,6 +1543,7 @@
 				BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */,
 				6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */,
 				BC210452F6884908D768A126 /* DTNSArray+Masonry.m in Sources */,
+				44F29F9F27BF99EE00F57DEE /* SudMGPMGState.m in Sources */,
 				6CD6E86C27BF421C00D8F76C /* ASRViewController.m in Sources */,
 				BC210D70BDEB097F49794C9B /* DTUIView+Extension.m in Sources */,
 				BC2101199D87BB6081A8FBC0 /* DTNSError+Custom.m in Sources */,

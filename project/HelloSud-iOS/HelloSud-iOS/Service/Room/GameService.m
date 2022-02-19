@@ -38,15 +38,4 @@
     }];
 }
 
-- (NSMutableDictionary *)gamePlayerStateMap {
-    if (_gamePlayerStateMap == nil) {
-        _gamePlayerStateMap = NSMutableDictionary.new;
-    }
-    return _gamePlayerStateMap;
-}
-
-/// 清空所有状态
-- (void)clearAllStates {
-    [self.gamePlayerStateMap removeAllObjects];
-}
 @end

@@ -16,9 +16,11 @@ typedef NS_ENUM(NSInteger, MicType) {
 };
 /// 麦位view
 @interface AudioMicroView : BaseView
+@property (nonatomic, weak) SudFSMMGDecorator *iSudFSMMG;
+
 @property (nonatomic, assign) CGFloat headWidth;
 @property (nonatomic, assign) MicType micType;
-@property (nonatomic, strong)AudioRoomMicModel *model;
+@property (nonatomic, strong) AudioRoomMicModel *model;
 /// 点击麦位回调
 @property (nonatomic, copy)TapMicViewBlock onTapCallback;
 @end
