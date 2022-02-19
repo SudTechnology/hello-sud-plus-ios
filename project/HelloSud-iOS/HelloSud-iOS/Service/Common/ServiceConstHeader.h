@@ -11,7 +11,6 @@
 #if DEBUG
 #define InteractURL      @"https://fat-interact.sud.tech"
 #define BaseURL          @"https://fat-base.sud.tech"
-//#define BaseURL        @"http://192.168.101.223:8081"
 #else
 #define InteractURL      @"https://interact-hello-sud.sud.tech"
 #define BaseURL          @"https://base-hello-sud.sud.tech"

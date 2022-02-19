@@ -218,6 +218,13 @@
 
 - (void)updateGameUI {
     if (self.micType == HSGameMic) {
+        if (self.model.user == nil) {
+            self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
+            [self showUserName:@"点击上麦" showOwner:false];
+            [self.rippleView stopAnimate:YES];
+            [self hiddenGameNode:true];
+            return;
+        }
         /// 设置队长状态 - （队长有且只有一个）
         [self.gameCaptainView setHidden:true];
         BOOL isCaptain = [self.iSudFSMMG isPlayerIsCaptain:self.model.user.userID];
@@ -235,14 +242,13 @@
             self.gameStateLabel.backgroundColor =  [UIColor dt_colorWithHexString: @"#13AD21" alpha:1];
             self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
         } else {
-            
-            [self.gameStateLabel setHidden:false];
-            self.gameStateLabel.text = @"未准备";
-            self.gameStateLabel.textColor = [UIColor whiteColor];
-            self.gameStateLabel.backgroundColor = [UIColor dt_colorWithHexString: @"#FF6E65" alpha:1];
-            self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
-            
-            if ([self.iSudFSMMG isPlayerIn:self.model.user.userID] == false) {
+            if ([self.iSudFSMMG isPlayerIn:self.model.user.userID]) {
+                [self.gameStateLabel setHidden:false];
+                self.gameStateLabel.text = @"未准备";
+                self.gameStateLabel.textColor = [UIColor whiteColor];
+                self.gameStateLabel.backgroundColor = [UIColor dt_colorWithHexString: @"#FF6E65" alpha:1];
+                self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
+            } else {
                 [self hiddenGameNode:false];
             }
         }

@@ -32,7 +32,7 @@
     viewSize.width = kScreenWidth * scale;
     viewSize.height = kScreenHeight * scale;
     ViewGameRect *viewRect = [[ViewGameRect alloc] init];
-    viewRect.top = (kStatusBarHeight + 120 + 20) * scale;
+    viewRect.top = (kStatusBarHeight + 120) * scale;
     viewRect.left = 0;
     viewRect.bottom = (kAppSafeBottom + 150) * scale;
     viewRect.right = 0;
@@ -60,9 +60,9 @@
 
 /// 获取游戏Config  【需要实现】
 - (void)onGetGameCfg:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    GameCfgLobbyPlayers *l = [[GameCfgLobbyPlayers alloc] init];
+    LobbyPlayers *l = [[LobbyPlayers alloc] init];
     l.hide = true;
-    GameCfgUIModel *ui = [[GameCfgUIModel alloc] init];
+    GameUi *ui = [[GameUi alloc] init];
     ui.lobby_players = l;
     GameCfgModel *m = [[GameCfgModel alloc] init];
     m.ui = ui;
@@ -153,25 +153,13 @@
 
 
 #pragma mark =======玩家状态处理=======
-/// 公屏消息状态 ---> 添加公屏消息
+/// 加入状态处理
 - (void)updatePlayerCommonPlayerIn:(MGCommonPlayerInModel *)model userId:(NSString *)userId {
     if (model.isIn && [AppService.shared.loginUserInfo.userID isEqualToString:userId]) {
         // 请求上麦
         [self handleGameUpMic];
     }
     self.gameNumLabel.text = [NSString stringWithFormat:@"游戏人数：%ld/%ld", self.sudFSMMGDecorator.onlineUserIdList.count, self.totalGameUserCount];
-}
-
-
-#pragma mark =======音频采集=======
-/// 开始音频采集
-- (void)startCaptureAudioToASR {
-    [AudioEngineFactory.shared.audioEngine startCapture];
-}
-
-/// 停止音频采集
-- (void)stopCaptureAudioToASR {
-    [AudioEngineFactory.shared.audioEngine stopCapture];
 }
 
 
