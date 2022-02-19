@@ -134,7 +134,7 @@
         }
         attrMsg.yy_lineSpacing = 6;
         attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-        attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         AudioMsgSystemModel *msgModel = [AudioMsgSystemModel makeMsgWithAttr:attrMsg];
         /// 公屏添加消息
         [self addMsg:msgModel isShowOnScreen:YES];

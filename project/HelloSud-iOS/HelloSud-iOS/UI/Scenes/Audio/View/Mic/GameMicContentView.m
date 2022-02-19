@@ -38,11 +38,11 @@
         [self.contenView addSubview:micNode];
         [self.micArr addObject:micNode];
     }
-    [self.contenView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:32 fixedItemHeight:55
-                                                fixedLineSpacing:16 fixedInteritemSpacing:16
-                                                       warpCount:9
-                                                      topSpacing:0
-                                                   bottomSpacing:0 leadSpacing:16 tailSpacing:16];
+    [self.contenView.subviews dt_mas_distributeSudokuViewsWithFixedItemWidth:32 fixedItemHeight:55
+                                                            fixedLineSpacing:16 fixedInteritemSpacing:16
+                                                                   warpCount:9
+                                                                  topSpacing:0
+                                                               bottomSpacing:0 leadSpacing:16 tailSpacing:16];
     if (self.updateMicArrCallBack) {
         self.updateMicArrCallBack(self.micArr);
     }

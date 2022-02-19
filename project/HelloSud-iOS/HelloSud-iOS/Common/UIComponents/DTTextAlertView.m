@@ -109,7 +109,7 @@
 - (YYLabel *)contentLabel {
     if (!_contentLabel) {
         _contentLabel = [[YYLabel alloc] init];
-        _contentLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        _contentLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _contentLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         _contentLabel.numberOfLines = 0;
         _contentLabel.textAlignment = NSTextAlignmentCenter;
@@ -122,7 +122,7 @@
     if (!_sureBtn) {
         _sureBtn = [[UIButton alloc] init];
         [_sureBtn setTitle:@"确定" forState:UIControlStateNormal];
-        [_sureBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
+        [_sureBtn setTitleColor:[UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
         _sureBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         _sureBtn.backgroundColor = UIColor.blackColor;
         [_sureBtn addTarget:self action:@selector(onSureItemEvent) forControlEvents:UIControlEventTouchUpInside];
@@ -136,7 +136,7 @@
         [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelBtn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
         _cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
-        _cancelBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        _cancelBtn.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         [_cancelBtn addTarget:self action:@selector(onCancelItemEvent) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelBtn;

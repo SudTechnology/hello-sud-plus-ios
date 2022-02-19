@@ -43,11 +43,11 @@
         [self.micArr addObject:micNode];
     }
     CGFloat interitemSpac = (kScreenWidth - 44 - (54 * 4)) / 3;
-    [self.containerView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:54 fixedItemHeight:110
-                                                fixedLineSpacing:0 fixedInteritemSpacing:interitemSpac
-                                                       warpCount:4
-                                                      topSpacing:0
-                                                   bottomSpacing:0 leadSpacing:22 tailSpacing:22];
+    [self.containerView.subviews dt_mas_distributeSudokuViewsWithFixedItemWidth:54 fixedItemHeight:110
+                                                               fixedLineSpacing:0 fixedInteritemSpacing:interitemSpac
+                                                                      warpCount:4
+                                                                     topSpacing:0
+                                                                  bottomSpacing:0 leadSpacing:22 tailSpacing:22];
     if (self.updateMicArrCallBack) {
         self.updateMicArrCallBack(self.micArr);
     }

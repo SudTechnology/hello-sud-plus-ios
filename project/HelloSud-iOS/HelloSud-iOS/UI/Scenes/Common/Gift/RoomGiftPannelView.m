@@ -281,7 +281,7 @@
     if (!_sendToLabel) {
         _sendToLabel = [[UILabel alloc] init];
         _sendToLabel.text = @"送给";
-        _sendToLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        _sendToLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _sendToLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
     }
     return _sendToLabel;
@@ -292,9 +292,9 @@
         _checkAllBtn = [[UIButton alloc] init];
         [_checkAllBtn setTitle:@"全选" forState:UIControlStateNormal];
         [_checkAllBtn setTitle:@"取消" forState:UIControlStateSelected];
-        [_checkAllBtn setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        [_checkAllBtn setTitleColor:[UIColor dt_colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         _checkAllBtn.titleLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
-        _checkAllBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        _checkAllBtn.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         [_checkAllBtn addTarget:self action:@selector(onCheckAllSelect:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _checkAllBtn;
@@ -304,9 +304,9 @@
     if (!_sendBtn) {
         _sendBtn = [[UIButton alloc] init];
         [_sendBtn setTitle:@"赠送" forState:UIControlStateNormal];
-        [_sendBtn setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        [_sendBtn setTitleColor:[UIColor dt_colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         _sendBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
-        _sendBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        _sendBtn.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         [_sendBtn addTarget:self action:@selector(onBtnSend:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sendBtn;
@@ -317,12 +317,12 @@
         _sendView = [[UIView alloc] init];
         _sendView.backgroundColor = [UIColor blackColor];
         _sendView.layer.borderWidth = 1;
-        _sendView.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1].CGColor;
+        _sendView.layer.borderColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1].CGColor;
         _sendView.layer.masksToBounds = true;
         
         UILabel *numLabel = [[UILabel alloc] init];
         numLabel.text = @"x1";
-        numLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        numLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         numLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
         
         UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"room_gift_send_num"]];
@@ -352,7 +352,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [[UIView alloc] init];
-        _lineView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.1];
+        _lineView.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.1];
     }
     return _lineView;
 }

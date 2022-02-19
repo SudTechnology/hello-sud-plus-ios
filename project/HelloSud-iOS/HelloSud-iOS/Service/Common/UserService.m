@@ -71,7 +71,7 @@
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
             if (fail) {
-                fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
+                fail([NSError dt_errorWithCode:model.retCode msg:model.retMsg]);
             }
             return;
         }

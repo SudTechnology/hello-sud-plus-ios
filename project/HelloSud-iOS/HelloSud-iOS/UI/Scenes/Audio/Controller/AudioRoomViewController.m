@@ -483,7 +483,7 @@
         self.gameNumLabel.hidden = NO;
         [self.gameMicContentView setHidden:false];
         [self.audioMicContentView setHidden:true];
-        CGFloat h = [UIDevice isiPhoneXSeries] ? 106 : 50;
+        CGFloat h = [UIDevice dt_isiPhoneXSeries] ? 106 : 50;
         [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.view);
             make.bottom.mas_equalTo(self.operatorView.mas_top);

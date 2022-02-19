@@ -39,11 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIView *_Nullable)hs_gradientViewWithColors:(NSArray<UIColor *> *_Nullable)colors locations:(NSArray<NSNumber *> *_Nullable)locations startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 
-- (void)hs_setGradientBackgroundWithColors:(NSArray<UIColor *> *_Nullable)colors locations:(NSArray<NSNumber *> *_Nullable)locations startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
+- (void)dt_setGradientBackgroundWithColors:(NSArray<UIColor *> *_Nullable)colors locations:(NSArray<NSNumber *> *_Nullable)locations startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 
 /// 设置圆角
 /// @param cornerRadius 圆角值
-- (void)hs_cornerRadius:(CGFloat)cornerRadius;
+- (void)dt_cornerRadius:(CGFloat)cornerRadius;
 @end
 
 NS_ASSUME_NONNULL_END

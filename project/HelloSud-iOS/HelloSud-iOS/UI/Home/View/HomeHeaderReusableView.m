@@ -37,7 +37,7 @@
 }
 
 - (void)hsConfigUI {
-    self.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+    self.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
     self.itemW = (kScreenWidth - 32) / 4;
     self.itemH = 125 + 12;
 }
@@ -59,15 +59,15 @@
         }
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.text = m.gameName;
-        titleLabel.textColor = [UIColor colorWithHexString:m.isGameWait ? @"#AAAAAA" : @"#1A1A1A" alpha:1];
+        titleLabel.textColor = [UIColor dt_colorWithHexString:m.isGameWait ? @"#AAAAAA" : @"#1A1A1A" alpha:1];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
         
         UILabel *enterLabel = [[UILabel alloc] init];
         enterLabel.text = @"加入";
-        enterLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        enterLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         enterLabel.font = UIFONT_BOLD(12);
-        enterLabel.layer.borderColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1].CGColor;
+        enterLabel.layer.borderColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1].CGColor;
         enterLabel.layer.borderWidth = 1;
         enterLabel.layer.cornerRadius = 14;
         enterLabel.textAlignment = NSTextAlignmentCenter;
@@ -97,11 +97,11 @@
         [contenView addGestureRecognizer:tapGesture];
         enterLabel.hidden = m.isGameWait;
     }
-    [self.itemContainerView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:self.itemW fixedItemHeight:self.itemH
-                                                fixedLineSpacing:0 fixedInteritemSpacing:0
-                                                       warpCount:2
-                                                      topSpacing:0
-                                                   bottomSpacing:0 leadSpacing:0 tailSpacing:0];
+    [self.itemContainerView.subviews dt_mas_distributeSudokuViewsWithFixedItemWidth:self.itemW fixedItemHeight:self.itemH
+                                                                   fixedLineSpacing:0 fixedInteritemSpacing:0
+                                                                          warpCount:2
+                                                                         topSpacing:0
+                                                                      bottomSpacing:0 leadSpacing:0 tailSpacing:0];
 }
 
 - (void)tapInputEvent:(UITapGestureRecognizer *)gesture {
@@ -188,7 +188,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"语聊房场景";
         _titleLabel.numberOfLines = 1;
-        _titleLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#000000" alpha:1];
         _titleLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
     }
     return _titleLabel;
@@ -199,7 +199,7 @@
         _tipLabel = [[UILabel alloc] init];
         _tipLabel.text = @"敬请期待";
         _tipLabel.numberOfLines = 1;
-        _tipLabel.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _tipLabel.textColor = [UIColor dt_colorWithHexString:@"#666666" alpha:1];
         _tipLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightRegular];
     }
     return _tipLabel;
@@ -210,7 +210,7 @@
         _previewView = [[UIImageView alloc] init];
         _previewView.image = [UIImage imageNamed:@"home_preview_0"];
         _previewView.clipsToBounds = YES;
-        [_previewView hs_cornerRadius:8];
+        [_previewView dt_cornerRadius:8];
     }
     return _previewView;
 }

@@ -89,7 +89,7 @@
         _userNameLabel = [[UILabel alloc] init];
         _userNameLabel.text = @"傲性小仙女";
         _userNameLabel.numberOfLines = 1;
-        _userNameLabel.textColor = [UIColor colorWithHexString:@"#13141A" alpha:1];
+        _userNameLabel.textColor = [UIColor dt_colorWithHexString:@"#13141A" alpha:1];
         _userNameLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightMedium];
     }
     return _userNameLabel;
@@ -100,7 +100,7 @@
         _userIdLabel = [[UILabel alloc] init];
         _userIdLabel.text = @"用户ID 0";
         _userIdLabel.numberOfLines = 1;
-        _userIdLabel.textColor = [UIColor colorWithHexString:@"#13141A" alpha:1];
+        _userIdLabel.textColor = [UIColor dt_colorWithHexString:@"#13141A" alpha:1];
         _userIdLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     }
     return _userIdLabel;
@@ -109,7 +109,7 @@
 - (UIView *)textFieldView {
     if (!_textFieldView) {
         _textFieldView = [[UIView alloc] init];
-        _textFieldView.backgroundColor = [UIColor colorWithHexString:@"#F2F3F7" alpha:1];
+        _textFieldView.backgroundColor = [UIColor dt_colorWithHexString:@"#F2F3F7" alpha:1];
     }
     return _textFieldView;
 }
