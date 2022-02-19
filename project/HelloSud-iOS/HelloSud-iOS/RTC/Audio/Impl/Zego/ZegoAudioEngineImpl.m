@@ -113,7 +113,7 @@
     dispatch_async(self.queueMute, ^{
         /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
         /// 异步激活采集通道（此处开销成本过大，相对耗时）
-        [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:YES];
+        [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:isMute];
         [ZegoExpressEngine.sharedEngine muteMicrophone:isMute];
     });
 }
