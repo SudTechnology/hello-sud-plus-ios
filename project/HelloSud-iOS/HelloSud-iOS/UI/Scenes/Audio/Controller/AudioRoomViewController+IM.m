@@ -26,9 +26,9 @@
     } else if ([msg isKindOfClass:RoomCmdUpMicModel.class]) {
         RoomCmdUpMicModel *m = (RoomCmdUpMicModel *)msg;
         if (m.cmd == CMD_UP_MIC_NOTIFY) {
-            [self gameUpMic];
+            [self joinGame];
         } else if (m.cmd == CMD_DOWN_MIC_NOTIFY) {
-            [self gameDownMic];
+            [self exitGame];
         }
     }
 }
@@ -121,14 +121,13 @@
 
 
 #pragma mark - 业务处理
-/// 上麦
-- (void)gameUpMic {
+/// 加入游戏
+- (void)joinGame {
     if (self.roomType == HSAudio) {
         return;
     }
     
-    
-    if (![self isInMic]) {
+    if (![self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID]) {
         if (self.sudFSMMGDecorator.gameStateType == GameStateTypeLeisure && !self.sudFSMMGDecorator.isInGame) {
             /// 上麦，就是加入游戏
             [self.sudFSTAPPDecorator notifyComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
@@ -136,19 +135,18 @@
     }
 }
 
-/// 下麦
-- (void)gameDownMic {
+/// 退出游戏
+- (void)exitGame {
     if (self.roomType == HSAudio) {
         return;
     }
-    if ([self isInMic]) {
-        if (self.sudFSMMGDecorator.isReady) {
-            /// 如果已经准备先退出准备状态
-            [self.sudFSTAPPDecorator notifyComonSetReady:false];
-        }
-        /// 下麦，就是退出游戏
-        [self.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+    
+    if (self.sudFSMMGDecorator.isReady) {
+        /// 如果已经准备先退出准备状态
+        [self.sudFSTAPPDecorator notifyComonSetReady:false];
     }
+    /// 下麦，就是退出游戏
+    [self.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 /// 你画我猜命中
