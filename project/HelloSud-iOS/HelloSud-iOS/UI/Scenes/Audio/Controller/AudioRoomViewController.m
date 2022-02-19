@@ -32,10 +32,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.language = @"zh-CN";
+    [self initSudFSMMG];
     AudioRoomService.shared.currentRoomVC = self;
     [self loginRoom];
     if (self.gameId > 0) {
-        [self initSudFSMMG];
         [self login];
     }
     [self dtUpdateUI];

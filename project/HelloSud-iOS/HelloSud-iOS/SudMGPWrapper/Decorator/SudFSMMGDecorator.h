@@ -17,7 +17,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// game -> app
-@interface SudFSMMGDecorator : NSObject
+@interface SudFSMMGDecorator : NSObject <ISudFSMMG>
+
 typedef NS_ENUM(NSInteger, GameStateType) {
     /// 空闲
     GameStateTypeLeisure = 0,
