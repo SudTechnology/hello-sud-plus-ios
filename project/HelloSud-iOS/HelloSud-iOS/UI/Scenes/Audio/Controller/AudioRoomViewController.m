@@ -255,31 +255,41 @@
     }
 }
 
+
+/// 获取空麦位
+- (nullable AudioRoomMicModel *)getOneEmptyMic {
+    // 请求上麦
+    NSArray *o_arr = self.dicMicModel.allValues;
+    /// 重新排序
+    NSArray *arr = [o_arr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        AudioRoomMicModel *model1 = obj1;
+        AudioRoomMicModel *model2 = obj2;
+        if (model1.micIndex > model2.micIndex){
+            return NSOrderedDescending;
+        } else if (model1.micIndex < model2.micIndex){
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedAscending;
+        }
+    }];
+    
+    AudioRoomMicModel *emptyModel = nil;
+    for (AudioRoomMicModel *m in arr) {
+        if (m.user == nil) {
+            emptyModel = m;
+            break;
+        }
+    }
+    return emptyModel;
+}
+
+
+/// 处理点击上麦按钮
 - (void)handleTapVoice {
     switch (self.operatorView.voiceBtnState) {
         case VoiceBtnStateTypeNormal:{
             // 请求上麦
-            NSArray *o_arr = self.dicMicModel.allValues;
-            /// 重新排序
-            NSArray *arr = [o_arr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-                AudioRoomMicModel *model1 = obj1;
-                AudioRoomMicModel *model2 = obj2;
-                if (model1.micIndex > model2.micIndex){
-                    return NSOrderedDescending;
-                } else if (model1.micIndex < model2.micIndex){
-                    return NSOrderedAscending;
-                } else {
-                    return NSOrderedAscending;
-                }
-            }];
-            
-            AudioRoomMicModel *emptyModel = nil;
-            for (AudioRoomMicModel *m in arr) {
-                if (m.user == nil) {
-                    emptyModel = m;
-                    break;
-                }
-            }
+            AudioRoomMicModel *emptyModel = [self getOneEmptyMic];
             if (emptyModel == nil) {
                 [ToastUtil show:@"没有空麦位"];
                 return;
@@ -317,6 +327,21 @@
             break;
     }
     
+}
+
+
+/// 游戏触发上麦
+- (void)handleGameUpMic {
+    AudioRoomMicModel *micModel = [self getOneEmptyMic];
+    if (micModel == nil) {
+        NSLog(@"没有空麦位, 不上了");
+        return;
+    }
+    if (micModel.user == nil) {
+        /// 无人，上麦
+        [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:0 success:nil fail:nil];
+        return;
+    }
 }
 
 //- (void)resetGameInfoModel {
