@@ -549,6 +549,12 @@
     return false;
 }
 
+/// 获取用户是否在队长
+- (BOOL)isPlayerIsCaptain:(NSString *)userId {
+    BOOL isCaptain = [self.captainUserId isEqualToString:userId];
+    return isCaptain;
+}
+
 - (NSMutableArray<NSString *> *)onlineUserIdList {
     if (_onlineUserIdList == nil) {
         _onlineUserIdList = NSMutableArray.new;
