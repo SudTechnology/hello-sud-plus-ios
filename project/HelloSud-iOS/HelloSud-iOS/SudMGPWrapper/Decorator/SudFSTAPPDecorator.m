@@ -10,7 +10,7 @@
 @implementation SudFSTAPPDecorator
 
 - (void)setISudFSTAPP:(id<ISudFSTAPP>)iSudFSTAPP {
-    self.iSudFSTAPP = iSudFSTAPP;
+    _iSudFSTAPP = iSudFSTAPP;
 }
 /// 加入,退出游戏
 /// @param isIn true 加入游戏，false 退出游戏

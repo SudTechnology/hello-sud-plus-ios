@@ -237,9 +237,15 @@
             if (isGameing) {
                 [DTSheetView close];
                 [DTAlertView showTextAlert:@"当前正在游戏中，是否离开？" sureText:@"离开" cancelText:@"返回游戏" onSureCallback:^{
+                    if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.loginUserInfo.userID]) {
+                        [weakSelf.sudFSTAPPDecorator notifyComonSelfPlaying:false reportGameInfoExtras:@""];
+                    } else if ([self.sudFSMMGDecorator isPlayerIsReady:AppService.shared.loginUserInfo.userID]) {
+                        [weakSelf.sudFSTAPPDecorator notifyComonSetReady:false];
+                    }  else if ([self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID]) {
+                        [weakSelf.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                    }
                     // 下麦
                     [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
-                    [weakSelf.sudFSTAPPDecorator notifyComonSelfPlaying:false reportGameInfoExtras:@""];
                 } onCloseCallback:^{
                     
                 }];
