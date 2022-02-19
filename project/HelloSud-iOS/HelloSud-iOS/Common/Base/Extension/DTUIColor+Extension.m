@@ -15,7 +15,7 @@
  @param opacity 透明度
  @return 16进制字符串对应的颜色
  */
-+(UIColor *)colorWithHexString:(NSString *)hex alpha:(float)opacity {
++(UIColor *)dt_colorWithHexString:(NSString *)hex alpha:(float)opacity {
     NSString * cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
     
     // String should be 6 or 8 characters

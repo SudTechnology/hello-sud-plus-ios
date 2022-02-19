@@ -36,7 +36,7 @@
 /// 发送进房消息
 - (void)sendEnterRoomMsg {
     self.isEnteredRoom = YES;
-    AudioMsgSystemModel *msg = [AudioMsgSystemModel makeMsg:[NSString stringWithFormat:@"%@ 进入了房间", AppManager.shared.loginUserInfo.name]];
+    AudioMsgSystemModel *msg = [AudioMsgSystemModel makeMsg:[NSString stringWithFormat:@"%@ 进入了房间", AppService.shared.loginUserInfo.name]];
     [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NOTIFY];
     [self sendMsg:msg isAddToShow:YES];
 }

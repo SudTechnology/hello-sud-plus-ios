@@ -22,8 +22,8 @@
 }
 
 - (void)hsLayoutViews {
-    
-    [self.headerView hs_cornerRadius:16];
+
+    [self.headerView dt_cornerRadius:16];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(17);
         make.size.mas_equalTo(CGSizeMake(32, 32));
@@ -52,9 +52,9 @@
         
         
         self.headerView.layer.borderWidth = m.isSelected ? 1 : 0;
-        self.headerView.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1].CGColor;
+        self.headerView.layer.borderColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1].CGColor;
         
-        self.micNumLabel.layer.borderColor = [UIColor colorWithHexString:m.isSelected ? @"#FFFFFF" : @"#666666" alpha:1].CGColor;
+        self.micNumLabel.layer.borderColor = [UIColor dt_colorWithHexString:m.isSelected ? @"#FFFFFF" : @"#666666" alpha:1].CGColor;
     }
 }
 
@@ -79,11 +79,11 @@
     if (!_micNumLabel) {
         _micNumLabel = [[UILabel alloc] init];
         _micNumLabel.text = @"1麦";
-        _micNumLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        _micNumLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _micNumLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
-        _micNumLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        _micNumLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#000000" alpha:1];
         _micNumLabel.layer.borderWidth = 1;
-        _micNumLabel.layer.borderColor = [UIColor colorWithHexString:@"#666666" alpha:1].CGColor;
+        _micNumLabel.layer.borderColor = [UIColor dt_colorWithHexString:@"#666666" alpha:1].CGColor;
         _micNumLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _micNumLabel;

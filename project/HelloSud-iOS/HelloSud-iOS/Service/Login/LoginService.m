@@ -36,16 +36,16 @@ NSString *const TOKEN_REFRESH_NTF = @"TOKEN_REFRESH_NTF";
             return;
         }
         /// 存储用户信息
-        AppManager.shared.loginUserInfo.name = model.nickname;
-        AppManager.shared.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.userId];
-        AppManager.shared.loginUserInfo.icon = model.avatar;
+        AppService.shared.loginUserInfo.name = model.nickname;
+        AppService.shared.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.userId];
+        AppService.shared.loginUserInfo.icon = model.avatar;
         
-        AppManager.shared.loginUserInfo.sex = 1;
-        [AppManager.shared saveLoginUserInfo];
+        AppService.shared.loginUserInfo.sex = 1;
+        [AppService.shared saveLoginUserInfo];
         
-        [AppManager.shared saveToken: model.token];
-        [AppManager.shared saveIsLogin];
-        AppManager.shared.isRefreshedToken = YES;
+        [AppService.shared saveToken: model.token];
+        [AppService.shared saveIsLogin];
+        AppService.shared.isRefreshedToken = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_NTF object:nil];
         if (success) success();
     } failure:^(id error) {

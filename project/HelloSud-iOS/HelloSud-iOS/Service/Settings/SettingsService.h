@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置服务
 @interface SettingsService : NSObject
 
+/// APP隐私协议地址
++ (NSURL *)appPrivacyURL;
+
+/// APP用户协议
++ (NSURL *)appProtocolURL;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -24,7 +24,7 @@
 }
 
 - (void)hsConfigUI {
-    self.msgContentView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
+    self.msgContentView.backgroundColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.3];
 }
 
 - (void)setModel:(BaseModel *)model {

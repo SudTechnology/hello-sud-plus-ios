@@ -27,7 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (!AppManager.shared.isAgreement) {
+    if (!AppService.shared.isAgreement) {
         [self showWelcomeUse];
     }
 }
@@ -58,7 +58,7 @@
 
 /// 更换昵称点击事件
 - (void)changeNodeEvent {
-    NSString *randomUserName = [AppManager.shared randomUserName];
+    NSString *randomUserName = [AppService.shared randomUserName];
     self.nameTextField.text = randomUserName;
 }
 
@@ -66,45 +66,45 @@
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"欢迎使用HelloSud\n"];
     attrTitle.yy_lineSpacing = 16;
     attrTitle.yy_font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
-    attrTitle.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    attrTitle.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     attrTitle.yy_alignment = NSTextAlignmentCenter;
     
     NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:@"我们非常重视您的个人信息保护。关于个人信息收集和使用的详细信息，您可以点击"];
     attrStr_0.yy_lineSpacing = 6;
     attrStr_0.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
-    attrStr_0.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    attrStr_0.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     
     NSMutableAttributedString *attrStr_1 = [[NSMutableAttributedString alloc] initWithString:@"《用户协议》"];
     attrStr_1.yy_lineSpacing = 6;
     attrStr_1.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
-    attrStr_1.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    attrStr_1.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     
     NSMutableAttributedString *attrStr_2 = [[NSMutableAttributedString alloc] initWithString:@"和"];
     attrStr_2.yy_lineSpacing = 6;
     attrStr_2.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
-    attrStr_2.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    attrStr_2.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     
     NSMutableAttributedString *attrStr_3 = [[NSMutableAttributedString alloc] initWithString:@"《隐私政策》"];
     attrStr_3.yy_lineSpacing = 6;
     attrStr_3.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
-    attrStr_3.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    attrStr_3.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     
     NSMutableAttributedString *attrStr_4 = [[NSMutableAttributedString alloc] initWithString:@"进行了解。点击同意及表示您已阅读并同意全部上述协议"];
     attrStr_4.yy_lineSpacing = 6;
     attrStr_4.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
-    attrStr_4.yy_color = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+    attrStr_4.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     
-    [attrStr_1 yy_setTextHighlightRange:attrStr_1.yy_rangeOfAll color:[UIColor colorWithHexString:@"#1A1A1A" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+    [attrStr_1 yy_setTextHighlightRange:attrStr_1.yy_rangeOfAll color:[UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         DTWebViewController *web = DTWebViewController.new;
-        web.url = AppManager.shared.appProtocolURL.absoluteString;
+        web.url = [SettingsService appProtocolURL].absoluteString;
         web.isPresent = true;
         BaseNavigationViewController *nv = [[BaseNavigationViewController alloc] initWithRootViewController:web];
         nv.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:nv animated:YES completion:nil];
     }];
-    [attrStr_3 yy_setTextHighlightRange:attrStr_3.yy_rangeOfAll color:[UIColor colorWithHexString:@"#1A1A1A" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+    [attrStr_3 yy_setTextHighlightRange:attrStr_3.yy_rangeOfAll color:[UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         DTWebViewController *web = DTWebViewController.new;
-        web.url = AppManager.shared.appPrivacyURL.absoluteString;
+        web.url = [SettingsService appPrivacyURL].absoluteString;
         web.isPresent = true;
         BaseNavigationViewController *nv = [[BaseNavigationViewController alloc] initWithRootViewController:web];
         nv.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -118,7 +118,7 @@
     [attrTitle appendAttributedString:attrStr_4];
     
     [DTAlertView showAttrTextAlert:attrTitle sureText:@"同意" cancelText:@"不同意" rootView:self.view onSureCallback:^{
-        [AppManager.shared saveAgreement];
+        [AppService.shared saveAgreement];
     } onCloseCallback:^{
         SweetPromptView *promptView = [[SweetPromptView alloc] init];
         [DTAlertView show:promptView rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
@@ -187,7 +187,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"欢迎体验\nHelloSud";
         _titleLabel.numberOfLines = 0;
-        _titleLabel.textColor = [UIColor colorWithHexString:@"#13141A" alpha:1];
+        _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#13141A" alpha:1];
         _titleLabel.font = [UIFont systemFontOfSize:24 weight:UIFontWeightSemibold];
     }
     return _titleLabel;
@@ -197,7 +197,7 @@
     if (!_nameTitleLabel) {
         _nameTitleLabel = [[UILabel alloc] init];
         _nameTitleLabel.text = @"你的昵称";
-        _nameTitleLabel.textColor = [UIColor colorWithHexString:@"#13141A" alpha:1];
+        _nameTitleLabel.textColor = [UIColor dt_colorWithHexString:@"#13141A" alpha:1];
         _nameTitleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
     }
     return _nameTitleLabel;

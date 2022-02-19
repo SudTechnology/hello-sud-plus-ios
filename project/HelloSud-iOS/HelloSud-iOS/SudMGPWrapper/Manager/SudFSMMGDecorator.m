@@ -384,7 +384,7 @@
 /// 加入状态 - 更新
 - (void)updateCommonPlayerIn:(MGCommonPlayerInModel *)m userId:(nonnull NSString *)userId  {
     
-    if (userId == AppManager.shared.loginUserInfo.userID) {
+    if (userId == AppService.shared.loginUserInfo.userID) {
         self.isInGame = m.isIn;
     }
     

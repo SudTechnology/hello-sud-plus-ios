@@ -43,8 +43,8 @@
 }
 
 - (void)dtUpdateUI {
-    self.roomNumLabel.text = [NSString stringWithFormat: @"房号 %@", AudioRoomManager.shared.currentRoomVC.roomID];
-    self.onlineLabel.text = [NSString stringWithFormat:@"%ld", AudioRoomManager.shared.currentRoomVC.totalUserCount];
+    self.roomNumLabel.text = [NSString stringWithFormat: @"房号 %@", AudioRoomService.shared.currentRoomVC.roomID];
+    self.onlineLabel.text = [NSString stringWithFormat:@"%ld", AudioRoomService.shared.currentRoomVC.totalUserCount];
 }
 
 - (void)selectNodeEvent:(UITapGestureRecognizer *)gesture {
@@ -129,7 +129,7 @@
     if (!_roomNameLabel) {
         _roomNameLabel = [[UILabel alloc] init];
         _roomNameLabel.text = @"这世界那么多人";
-        _roomNameLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        _roomNameLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _roomNameLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         _roomNameLabel.textAlignment = NSTextAlignmentLeft;
     }
@@ -140,7 +140,7 @@
     if (!_roomNumLabel) {
         _roomNumLabel = [[UILabel alloc] init];
         _roomNumLabel.text = @"房号 0";
-        _roomNumLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6];
+        _roomNumLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.6];
         _roomNumLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
     }
     return _roomNumLabel;
@@ -150,7 +150,7 @@
     if (!_onlineLabel) {
         _onlineLabel = [[UILabel alloc] init];
         _onlineLabel.text = @"0";
-        _onlineLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6];
+        _onlineLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.6];
         _onlineLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
     }
     return _onlineLabel;
@@ -176,7 +176,7 @@
 - (UIView *)roomModeView {
     if (!_roomModeView) {
         _roomModeView = [[UIView alloc] init];
-        _roomModeView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.1];
+        _roomModeView.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.1];
         [_roomModeView setUserInteractionEnabled:true];
     }
     return _roomModeView;
@@ -186,7 +186,7 @@
     if (!_roomModeLabel) {
         _roomModeLabel = [[UILabel alloc] init];
         _roomModeLabel.text = @"选择游戏";
-        _roomModeLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        _roomModeLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _roomModeLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
     }
     return _roomModeLabel;
@@ -206,7 +206,7 @@
         _endGameBtn.hidden = true;
         _endGameBtn.titleLabel.font = UIFONT_MEDIUM(12);
         [_endGameBtn setTitle:@"结束游戏" forState:UIControlStateNormal];
-        _endGameBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.2];
+        _endGameBtn.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.2];
         [_endGameBtn addTarget:self action:@selector(onEndGameEvent:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _endGameBtn;

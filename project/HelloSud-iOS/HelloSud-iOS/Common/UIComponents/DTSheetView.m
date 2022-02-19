@@ -59,24 +59,28 @@
 ///   - onView: 当前的父视图
 ///   - isHitTest: 是否可点击 -- 默认不可点击
 ///   - onCloseCallBack: 关闭弹窗回调
-+ (void)show:(UIView *)view rootView:(UIView *)rootView onCloseCallback:(void(^)(void))cb {
++ (void)show:(UIView *)view rootView:(UIView *)rootView hiddenBackCover:(BOOL)hiddenBackCover onCloseCallback:(void (^)(void))cb {
     UIView *superView = rootView;
     if (rootView == nil) {
         superView = AppUtil.currentWindow;
     }
-    
+
     /// 如果存在移除当前展示弹窗
     if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"DTSheetView"]) {
         [[self getAlert] removeFromSuperview];
     }
-    
+
     DTSheetView *alert = [[DTSheetView alloc] init];
-    alert.contentView.backgroundColor = UIColor.clearColor;// [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+    alert.contentView.backgroundColor = UIColor.clearColor;
     alert.isHitTest = true;
     alert.customView = view;
     alert.contentView.layer.cornerRadius = 12;
     alert.contentView.layer.masksToBounds = true;
     alert.onCloseViewCallBack = cb;
+    alert.hiddeBackCover = hiddenBackCover;
+    if (hiddenBackCover) {
+        alert.backView.alpha = 0;
+    }
     [alert setupUI];
     [superView addSubview:alert];
     [self setAlert:alert];

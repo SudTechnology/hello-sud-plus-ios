@@ -39,7 +39,7 @@
     
     HSSettingModel *rtcModel = [HSSettingModel new];
     rtcModel.title = @"切换RTC服务商";
-    rtcModel.subTitle = [AppManager.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
+    rtcModel.subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
     HSSettingModel *languageModel = [HSSettingModel new];
@@ -60,11 +60,11 @@
     HSSettingModel *userProtocolModel = [HSSettingModel new];
     userProtocolModel.title = @"用户协议";
     userProtocolModel.isMore = YES;
-    userProtocolModel.pageURL = AppManager.shared.appProtocolURL.absoluteString;
+    userProtocolModel.pageURL = [SettingsService appProtocolURL].absoluteString;
     HSSettingModel *privacyModel = [HSSettingModel new];
     privacyModel.title = @"隐私政策";
     privacyModel.isMore = YES;
-    privacyModel.pageURL = AppManager.shared.appPrivacyURL.absoluteString;
+    privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
     
     self.arrData = @[@[verModel], @[rtcModel, languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
     
@@ -147,7 +147,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         WeakSelf
         vc.onRTCChangeBlock = ^(NSString * _Nonnull str) {
-            weakSelf.arrData[1][0].subTitle = [AppManager.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
+            weakSelf.arrData[1][0].subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
             [weakSelf.tableView reloadData];
         };
     } else if ([model.title isEqualToString:@"切换语言"]) {

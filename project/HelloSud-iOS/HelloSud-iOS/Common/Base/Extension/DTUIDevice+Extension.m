@@ -10,7 +10,7 @@
 @implementation UIDevice(DTDeviceExtension)
 
 /// 设备安全区
-+(UIEdgeInsets)safeAreaInsets {
++(UIEdgeInsets)dt_safeAreaInsets {
     if (@available(iOS 11.0, *)) {
         return [[[UIApplication sharedApplication] keyWindow] safeAreaInsets];
     } else {
@@ -20,7 +20,7 @@
 }
 
 /// 是否是iPhone x系列刘海屏设备
-+(BOOL)isiPhoneXSeries {
++(BOOL)dt_isiPhoneXSeries {
     return kAppSafeTop > 20;
 }
 @end

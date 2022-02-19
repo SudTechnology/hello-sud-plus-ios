@@ -16,11 +16,11 @@
 
 + (UIView *)hs_gradientViewWithColors:(NSArray<UIColor *> *)colors locations:(NSArray<NSNumber *> *)locations startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
     UIView *view = [[self alloc] init];
-    [view hs_setGradientBackgroundWithColors:colors locations:locations startPoint:startPoint endPoint:endPoint];
+    [view dt_setGradientBackgroundWithColors:colors locations:locations startPoint:startPoint endPoint:endPoint];
     return view;
 }
 
-- (void)hs_setGradientBackgroundWithColors:(NSArray<UIColor *> *)colors locations:(NSArray<NSNumber *> *)locations startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
+- (void)dt_setGradientBackgroundWithColors:(NSArray<UIColor *> *_Nullable)colors locations:(NSArray<NSNumber *> *_Nullable)locations startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
     NSMutableArray *colorsM = [NSMutableArray array];
     for (UIColor *color in colors) {
         [colorsM addObject:(__bridge id)color.CGColor];
@@ -31,7 +31,7 @@
     self.az_endPoint = endPoint;
 }
 
-- (void)hs_cornerRadius:(CGFloat)cornerRadius {
+- (void)dt_cornerRadius:(CGFloat)cornerRadius {
     if (cornerRadius > 0) {
         self.layer.cornerRadius = cornerRadius;
         self.clipsToBounds = YES;

@@ -162,7 +162,7 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_LOCAL_VOICE_VOLUME_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         NSNumber *soundLevel = note.userInfo[@"volume"];
         if ([soundLevel isKindOfClass:NSNumber.class] ) {
-            NSString *myUserID = AppManager.shared.loginUserInfo.userID;
+            NSString *myUserID = AppService.shared.loginUserInfo.userID;
             // 操作麦位与当前符合
             if (weakSelf.model.user != nil &&
                 [weakSelf.model.user.userID isEqualToString:myUserID]) {
@@ -227,14 +227,14 @@
             [self.gameStateLabel setHidden:false];
             self.gameStateLabel.text = @"已准备";
             self.gameStateLabel.textColor = [UIColor whiteColor];
-            self.gameStateLabel.backgroundColor = [UIColor colorWithHexString: @"#13AD21" alpha:1];
+            self.gameStateLabel.backgroundColor =  [UIColor dt_colorWithHexString: @"#13AD21" alpha:1];
             self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
         } else {
             
             [self.gameStateLabel setHidden:false];
             self.gameStateLabel.text = @"未准备";
             self.gameStateLabel.textColor = [UIColor whiteColor];
-            self.gameStateLabel.backgroundColor = [UIColor colorWithHexString: @"#FF6E65" alpha:1];
+            self.gameStateLabel.backgroundColor = [UIColor dt_colorWithHexString: @"#FF6E65" alpha:1];
             self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
             
             if ([self.iSudFSMMG isPlayerIn:self.model.user.userID] == false) {
@@ -261,7 +261,7 @@
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:name];
     attrName.yy_lineSpacing = 6;
     attrName.yy_font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
-    attrName.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+    attrName.yy_color = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
     
     if (isShowTag) {
         [attrName insertAttributedString:[[NSAttributedString alloc] initWithString:@" "] atIndex:0];
@@ -307,7 +307,7 @@
         _nameLabel.numberOfLines = 2;
         _nameLabel.preferredMaxLayoutWidth = 70;
         _nameLabel.textVerticalAlignment = YYTextVerticalAlignmentTop;
-        _nameLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.4];
+        _nameLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.4];
         _nameLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
     }
     return _nameLabel;
@@ -329,7 +329,7 @@
         _gameStateLabel.font = [UIFont systemFontOfSize:9 weight:UIFontWeightRegular];
         _gameStateLabel.textAlignment = NSTextAlignmentCenter;
         _gameStateLabel.textColor = UIColor.whiteColor;
-        _gameStateLabel.backgroundColor = [UIColor colorWithHexString:@"#F7782F" alpha:1];
+        _gameStateLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#F7782F" alpha:1];
         _gameStateLabel.layer.cornerRadius = 1;
         _gameStateLabel.layer.borderWidth = 0.5;
         _gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
@@ -342,7 +342,7 @@
 - (DTPaddingLabel *)gameBadgeLabel {
     if (!_gameBadgeLabel) {
         _gameBadgeLabel = [[DTPaddingLabel alloc] init];
-        _gameBadgeLabel.backgroundColor = [UIColor colorWithHexString:@"#FF4DA6" alpha:1];
+        _gameBadgeLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#FF4DA6" alpha:1];
         _gameBadgeLabel.layer.cornerRadius = 14/2;
         _gameBadgeLabel.layer.masksToBounds = true;
         _gameBadgeLabel.numberOfLines = 1;

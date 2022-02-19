@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用户自定义错误码
 /// @param code 错误码
 /// @param msg 错误描述
-+ (NSError *)hsErrorWithCode:(NSInteger)code msg:(NSString *)msg;
++ (NSError *)dt_errorWithCode:(NSInteger)code msg:(NSString *)msg;
 @end
 
 NS_ASSUME_NONNULL_END
