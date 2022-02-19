@@ -11,8 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房游戏模块，处理游戏交互逻辑
-@interface AudioRoomViewController(Game) <ISudFSMMG>
+@interface AudioRoomViewController(Game) <SudFSMMGListener>
 
+- (void)initSudFSMMG;
 /// 登录游戏业务服务
 - (void)login;
 /// 退出游戏

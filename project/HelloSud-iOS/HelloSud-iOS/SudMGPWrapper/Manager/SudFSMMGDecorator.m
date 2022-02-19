@@ -5,13 +5,14 @@
 //  Created by Mary on 2022/2/18.
 //
 
-#import "SudFSMMGDeorator.h"
-#import "SudFSMMGListener.h"
+#import "SudFSMMGDecorator.h"
 
-@interface SudFSMMGDeorator () <ISudFSMMG>
+@interface SudFSMMGDecorator () <ISudFSMMG>
 /// ISudFSTAPP
 @property (nonatomic, strong) id<ISudFSTAPP> iSudFSTAPP;
-
+/// app To 游戏 管理类
+@property (nonatomic, strong) SudFSTAPPDecorator *sudFSTAPPManager;
+/// 事件处理器
 @property(nonatomic, weak) id<SudFSMMGListener> listener;
 
 #pragma mark - 初始化需要的信息
@@ -22,43 +23,26 @@
 /// 房间ID
 @property(nonatomic, copy)NSString *roomID;
 
-/// 当前用户登录游戏的code
-@property (nonatomic, copy) NSString *code;
-
-#pragma mark - 游戏需要暂存的状态
-/// 你画我猜专用，游戏中选中的关键词，会回调出来，通过 drawKeyWord 进行保存。
-@property (nonatomic, copy) NSString *drawKeyWord;
-/// 你画我猜，进入猜词环节，用来公屏识别关键字的状态标识
-@property (nonatomic, assign) BOOL keyWordHiting;
-/// 是否准备
-@property (nonatomic, assign) BOOL isReady;
-// 游戏状态： 0 = 空闲 1 = loading 2 = playing
-@property (nonatomic, assign) NSInteger gameState;
-/// true 已加入，false 未加入
-@property (nonatomic, assign) BOOL isInGame;
-/// 是否是数字炸弹  number
-@property (nonatomic, assign) BOOL isHitBomb;
-/// ASR功能的开启关闭的状态标志
-@property (nonatomic, assign) BOOL keyWordASRing;
-/// 当前游戏在线userid列表
-@property (nonatomic, strong) NSMutableArray <NSString *>*onlineUserIdList;
-/// 队长userid
-@property (nonatomic, copy) NSString *captainUserId;
-/// 当前游戏成员的游戏状态Map
-@property (nonatomic, strong) NSMutableDictionary *gamePlayerStateMap;
-
 @end
 
-@implementation SudFSMMGDeorator
+@implementation SudFSMMGDecorator
 
-- (instancetype)init:(NSString *)roomID userID:(NSString *)userID language:(NSString *)language {
+- (instancetype)init:(NSString *)roomID userID:(NSString *)userID language:(NSString *)language loadSuccess:(GameLoadSuccessBlock)loadSuccess {
     if (self = [super init]) {
         self.roomID = roomID;
         self.userID = userID;
         self.language = language;
+        self.gameLoadSuccessBlock = loadSuccess;
     }
     return self;
 }
+
+/// 设置事件处理器
+/// @param listener 事件处理实例
+- (void)setEventListener:(id<SudFSMMGListener>)listener {
+    _listener = listener;
+}
+
 
 #pragma mark =======ISudFSMMG Delegate=======
 
@@ -149,36 +133,6 @@
         m.view_size = viewSize;
         m.view_game_rect = viewRect;
         [handle success:m.mj_JSONString];
-    }
-}
-
-/// 关键词获取状态 - 更新
-- (void)updateCommonKeyWrodToHit:(MGCommonKeyWrodToHitModel *)m {
-    self.drawKeyWord = m.word;
-    if (m.word == (id) [NSNull null] || [m.word isEqualToString:@""]) {
-        self.keyWordHiting = false;
-    } else {
-        self.keyWordHiting = true;
-    }
-    if ([m.wordType isEqualToString:@"number"]) {
-        self.isHitBomb = true;
-    }
-}
-
-/// 关键词获取状态 - 更新
-- (void)updateCommonGameState:(MGCommonGameStateModel *)m {
-    self.gameState = m.gameState;
-    if (m.gameState != 2) {
-        self.isHitBomb = false;
-    }
-}
-
-/// 关键词获取状态 - 更新
-- (void)updateCommonGameASR:(MGCommonGameASRModel *)m {
-    if (m.isOpen) {
-        self.keyWordASRing = YES;
-    } else {
-        self.keyWordASRing = NO;
     }
 }
 
@@ -300,7 +254,134 @@
     [handle success:[self handleMGSuccess]];
 }
 
+
+/**
+ * 游戏玩家状态变化
+ * @param handle 回调句柄
+ * @param userId 用户id
+ * @param state  玩家状态
+ * @param dataJson 回调JSON
+ */
+- (void)onPlayerStateChange:(nullable id<ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
+    NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:onPlayerStateChange:%@ --dataJson:%@", state, dataJson]);
+    
+    if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
+        MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues: dataJson];
+        /// 更新
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerIn:model:)]) {
+            [self.listener onPlayerMGCommonPlayerIn:state model:m];
+        }
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
+        MGCommonPlayerReadyModel *m = [MGCommonPlayerReadyModel mj_objectWithKeyValues: dataJson];
+        /// 更新
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        self.isReady = m.isReady;
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerReady:model:)]) {
+            [self.listener onPlayerMGCommonPlayerReady:state model:m];
+        }
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
+        MGCommonPlayerCaptainModel *m = [MGCommonPlayerCaptainModel mj_objectWithKeyValues: dataJson];
+        /// 更新
+        [self updateCommonPlayerCaptain:m userId:userId];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerCaptain:model:)]) {
+            [self.listener onPlayerMGCommonPlayerCaptain:state model:m];
+        }
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
+        MGCommonPlayerPlayingModel *m = [MGCommonPlayerPlayingModel mj_objectWithKeyValues: dataJson];
+        self.isPlaying = m.isPlaying;
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerPlaying:model:)]) {
+            [self.listener onPlayerMGCommonPlayerPlaying:state model:m];
+        }
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_ONLINE]) {
+        MGCommonPlayerOnlineModel *m = [MGCommonPlayerOnlineModel mj_objectWithKeyValues: dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerOnline:model:)]) {
+            [self.listener onPlayerMGCommonPlayerOnline:state model:m];
+        }
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_CHANGE_SEAT]) {
+        MGCommonPlayerChangeSeatModel *m = [MGCommonPlayerChangeSeatModel mj_objectWithKeyValues: dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerChangeSeat:model:)]) {
+            [self.listener onPlayerMGCommonPlayerChangeSeat:state model:m];
+        }
+    } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_GAME_PLAYER_ICON]) {
+        MGCommonSelfClickGamePlayerIconModel *m = [MGCommonSelfClickGamePlayerIconModel mj_objectWithKeyValues: dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonSelfClickGamePlayerIcon:model:)]) {
+            [self.listener onPlayerMGCommonSelfClickGamePlayerIcon:state model:m];
+        }
+    } else if ([state isEqualToString:MG_DG_SELECTING]) {
+        MGDGSelectingModel *m = [MGDGSelectingModel mj_objectWithKeyValues: dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGSelecting:model:)]) {
+            [self.listener onPlayerMGDGSelecting:state model:m];
+        }
+    } else if ([state isEqualToString:MG_DG_PAINTING]) {
+        MGDGPaintingModel *m = [MGDGPaintingModel mj_objectWithKeyValues: dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGPainting:model:)]) {
+            [self.listener onPlayerMGDGPainting:state model:m];
+        }
+    } else if ([state isEqualToString:MG_DG_ERRORANSWER]) {
+        MGDGErrorAnswerModel *m = [MGDGErrorAnswerModel mj_objectWithKeyValues: dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGErrorAnswer:model:)]) {
+            [self.listener onPlayerMGDGErrorAnswer:state model:m];
+        }
+    } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
+        MGDGTotalScoreModel *m = [MGDGTotalScoreModel mj_objectWithKeyValues: dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGTotalScore:model:)]) {
+            [self.listener onPlayerMGDGTotalScore:state model:m];
+        }
+    } else if ([state isEqualToString:MG_DG_SCORE]) {
+        MGDGScoreModel *m = [MGDGScoreModel mj_objectWithKeyValues: dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGScore:model:)]) {
+            [self.listener onPlayerMGDGScore:state model:m];
+        }
+    } else {
+        NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态");
+    }
+    
+    [handle success:[self handleMGSuccess]];
+}
+
+#pragma mark - GameState状态处理
 /// 关键词获取状态 - 更新
+- (void)updateCommonKeyWrodToHit:(MGCommonKeyWrodToHitModel *)m {
+    self.drawKeyWord = m.word;
+    if (m.word == (id) [NSNull null] || [m.word isEqualToString:@""]) {
+        self.keyWordHiting = false;
+    } else {
+        self.keyWordHiting = true;
+    }
+    if ([m.wordType isEqualToString:@"number"]) {
+        self.isHitBomb = true;
+    }
+}
+
+/// 游戏状态 - 更新
+- (void)updateCommonGameState:(MGCommonGameStateModel *)m {
+    self.gameStateType = m.gameState;
+    if (m.gameState != 2) {
+        self.isHitBomb = false;
+    }
+}
+
+/// ASR状态 - 更新
+- (void)updateCommonGameASR:(MGCommonGameASRModel *)m {
+    if (m.isOpen) {
+        self.keyWordASRing = YES;
+    } else {
+        self.keyWordASRing = NO;
+    }
+}
+
+#pragma mark - PlayerState状态处理
+/// 加入状态 - 更新
 - (void)updateCommonPlayerIn:(MGCommonPlayerInModel *)m userId:(nonnull NSString *)userId  {
     
     if (userId == AppManager.shared.loginUserInfo.userID) {
@@ -324,6 +405,7 @@
     }
 }
 
+/// 队长状态 - 更新
 - (void)updateCommonPlayerCaptain:(MGCommonPlayerCaptainModel *)m userId:(nonnull NSString *)userId  {
     if (m.isCaptain) {
         self.captainUserId = userId;
@@ -333,114 +415,21 @@
         }
     }
 }
-/**
- * 游戏玩家状态变化
- * @param handle 回调句柄
- * @param userId 用户id
- * @param state  玩家状态
- * @param dataJson 回调JSON
- */
-- (void)onPlayerStateChange:(nullable id<ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
-    NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:onPlayerStateChange:%@ --dataJson:%@", state, dataJson]);
-    
-    if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
-        MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        /// 更新
-        [self updateCommonPlayerIn:m userId:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerIn:model:)]) {
-            [self.listener onPlayerMGCommonPlayerIn:state model:m];
-        }
-    } else if ([state isEqualToString:MG_COMMON_PLAYER_READY]) {
-        MGCommonPlayerReadyModel *m = [MGCommonPlayerReadyModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        /// 更新
-        self.isReady = m.isReady;
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerReady:model:)]) {
-            [self.listener onPlayerMGCommonPlayerReady:state model:m];
-        }
-    } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
-        MGCommonPlayerCaptainModel *m = [MGCommonPlayerCaptainModel mj_objectWithKeyValues: dataJson];
-        /// 更新
-        [self updateCommonPlayerCaptain:m userId:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerCaptain:model:)]) {
-            [self.listener onPlayerMGCommonPlayerCaptain:state model:m];
-        }
-    } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
-        MGCommonPlayerPlayingModel *m = [MGCommonPlayerPlayingModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerPlaying:model:)]) {
-            [self.listener onPlayerMGCommonPlayerPlaying:state model:m];
-        }
-    } else if ([state isEqualToString:MG_COMMON_PLAYER_ONLINE]) {
-        MGCommonPlayerOnlineModel *m = [MGCommonPlayerOnlineModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerOnline:model:)]) {
-            [self.listener onPlayerMGCommonPlayerOnline:state model:m];
-        }
-    } else if ([state isEqualToString:MG_COMMON_PLAYER_CHANGE_SEAT]) {
-        MGCommonPlayerChangeSeatModel *m = [MGCommonPlayerChangeSeatModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerChangeSeat:model:)]) {
-            [self.listener onPlayerMGCommonPlayerChangeSeat:state model:m];
-        }
-    } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_GAME_PLAYER_ICON]) {
-        MGCommonSelfClickGamePlayerIconModel *m = [MGCommonSelfClickGamePlayerIconModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonSelfClickGamePlayerIcon:model:)]) {
-            [self.listener onPlayerMGCommonSelfClickGamePlayerIcon:state model:m];
-        }
-    } else if ([state isEqualToString:MG_DG_SELECTING]) {
-        MGDGSelectingModel *m = [MGDGSelectingModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGSelecting:model:)]) {
-            [self.listener onPlayerMGDGSelecting:state model:m];
-        }
-    } else if ([state isEqualToString:MG_DG_PAINTING]) {
-        MGDGPaintingModel *m = [MGDGPaintingModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGPainting:model:)]) {
-            [self.listener onPlayerMGDGPainting:state model:m];
-        }
-    } else if ([state isEqualToString:MG_DG_ERRORANSWER]) {
-        MGDGErrorAnswerModel *m = [MGDGErrorAnswerModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGErrorAnswer:model:)]) {
-            [self.listener onPlayerMGDGErrorAnswer:state model:m];
-        }
-    } else if ([state isEqualToString:MG_DG_TOTALSCORE]) {
-        MGDGTotalScoreModel *m = [MGDGTotalScoreModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGTotalScore:model:)]) {
-            [self.listener onPlayerMGDGTotalScore:state model:m];
-        }
-    } else if ([state isEqualToString:MG_DG_SCORE]) {
-        MGDGScoreModel *m = [MGDGScoreModel mj_objectWithKeyValues: dataJson];
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGScore:model:)]) {
-            [self.listener onPlayerMGDGScore:state model:m];
-        }
-    } else {
-        NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态");
-    }
-    
-    [handle success:[self handleMGSuccess]];
+
+/// 存储playerMap
+- (void)setValueGamePlayerStateMap:(NSString *)userId state:(NSString *)state model:(id)model {
+    MGPlayerStateMapModel *mapModel = MGPlayerStateMapModel.new;
+    mapModel.state = state;
+    mapModel.model = model;
+    [self.gamePlayerStateMap setValue:mapModel forKey:userId];
 }
-
-
 
 #pragma mark =======登录 加载 游戏=======
 /// 游戏登录
 /// 接入方客户端 调用 接入方服务端 login 获取 短期令牌code
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
-- (void)login:(UIView *)rootView gameId:(int64_t)gameId {
-    WeakSelf
-    [GameManager.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
-        weakSelf.code = gameInfo.code;
-        [weakSelf initSdk:rootView gameId:gameId];
-    } fail:^(NSError *error) {
-        [ToastUtil show:error.debugDescription];
-    }];
+- (void)login:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
+    [self initSdk:rootView gameId:gameId code:code appID:appID appKey:appKey];
 }
 
 /// 退出游戏
@@ -450,13 +439,7 @@
 }
 
 /// 加载游戏
-- (void)initSdk:(UIView *)rootView gameId:(int64_t)gameId {
-    NSString *appID = AppManager.shared.configModel.sudCfg.appId;
-    NSString *appKey = AppManager.shared.configModel.sudCfg.appKey;
-    if (appID.length == 0 || appKey.length == 0) {
-        [ToastUtil show:@"Game appID or appKey is empty"];
-        return;
-    }
+- (void)initSdk:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
     WeakSelf
     [SudMGP initSDK:appID appKey:appKey isTestEnv:true listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
@@ -465,7 +448,6 @@
                 // SudMGPSDK初始化成功 加载MG
                 NSString *userID = weakSelf.userID;
                 NSString *roomID = weakSelf.roomID;
-                NSString *code = weakSelf.code;
                 if (userID.length == 0 || roomID.length == 0 || code.length == 0) {
                     [ToastUtil show:@"加载游戏失败，请检查参数"];
                     return;
@@ -489,20 +471,9 @@
 /// @param rootView 游戏根视图
 - (void)loadGame:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t) mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView*)rootView {
     self.iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:fsmMG rootView:rootView];
-    self.sudFSTAPPManager = [[SudFSTAPPDeorator alloc] init:self.iSudFSTAPP];
-}
-
-/// 处理切换游戏
-/// @param gameId 新的游戏ID
-- (void)switchGameWithRootView:(UIView *)rootView gameId:(NSInteger)gameId  {
-    if (gameId == 0) {
-        // 切换语音房间
-//        self.roomType = HSAudio;
-        return;
+    if (self.gameLoadSuccessBlock != nil) {
+        self.gameLoadSuccessBlock(self.iSudFSTAPP);
     }
-    [self logoutGame];
-    [self login:rootView gameId:gameId];
-//    self.roomType = HSGame;
 }
 
 /// 更新code
@@ -513,6 +484,28 @@
     }];
 }
 
+/// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
+- (void)pushAudio:(NSData *)data {
+    /// 必须要在主线程
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.iSudFSTAPP pushAudio:data];
+    });
+}
+
+/// 清除所有存储数组
+- (void)clearAllStates {
+    [self.onlineUserIdList removeAllObjects];
+    self.drawKeyWord = @"";
+    self.captainUserId = @"";
+    self.keyWordHiting = false;
+    self.isReady = false;
+    self.isInGame = false;
+    self.isHitBomb = false;
+    self.keyWordASRing = false;
+    self.isPlaying = false;
+    self.gameStateType = GameStateTypeLeisure;
+    [self.gamePlayerStateMap removeAllObjects];
+}
 
 /// 2MG成功回调
 - (NSString *)handleMGSuccess {
@@ -526,6 +519,35 @@
     return dict.mj_JSONString;
 }
 
+/// 获取用户加入状态
+- (BOOL)isPlayerIn:(NSString *)userId {
+    MGPlayerStateMapModel *mapModel = [self.gamePlayerStateMap objectForKey:userId];
+    if ([mapModel.state isEqualToString:MG_COMMON_PLAYER_IN] && [mapModel.model isKindOfClass:MGCommonPlayerInModel.class]) {
+        MGCommonPlayerInModel *m = mapModel.model;
+        return m.isIn;
+    }
+    return false;
+}
+
+/// 获取用户是否在准备中
+- (BOOL)isPlayerIsReady:(NSString *)userId {
+    MGPlayerStateMapModel *mapModel = [self.gamePlayerStateMap objectForKey:userId];
+    if ([mapModel.state isEqualToString:MG_COMMON_PLAYER_READY] && [mapModel.model isKindOfClass:MGCommonPlayerReadyModel.class]) {
+        MGCommonPlayerReadyModel *m = mapModel.model;
+        return m.isReady;
+    }
+    return false;
+}
+
+/// 获取用户是否在游戏中
+- (BOOL)isPlayerIsPlaying:(NSString *)userId {
+    MGPlayerStateMapModel *mapModel = [self.gamePlayerStateMap objectForKey:userId];
+    if ([mapModel.state isEqualToString:MG_COMMON_PLAYER_PLAYING] && [mapModel.model isKindOfClass:MGCommonPlayerPlayingModel.class]) {
+        MGCommonPlayerPlayingModel *m = mapModel.model;
+        return m.isPlaying;
+    }
+    return false;
+}
 
 - (NSMutableArray<NSString *> *)onlineUserIdList {
     if (_onlineUserIdList == nil) {

@@ -73,4 +73,12 @@
     }
     return _micArr;
 }
+
+- (void)setISudFSMMG:(SudFSMMGDecorator *)iSudFSMMG {
+    _iSudFSMMG = iSudFSMMG;
+    for (AudioMicroView *v in self.micArr) {
+        v.iSudFSMMG = iSudFSMMG;
+    }
+}
+
 @end
