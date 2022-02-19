@@ -185,6 +185,9 @@
 
 - (void)dtUpdateUI {
     [self.naviView dtUpdateUI];
+    if (self.gameId > 0) {
+        self.totalGameUserCount = [AppService.shared getTotalGameCountWithGameID:self.gameId];
+    }
 }
 
 /// 退出房间

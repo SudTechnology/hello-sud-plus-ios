@@ -215,7 +215,7 @@
             [self handleTapVoice];
         }
     }
-    self.gameNumLabel.text = [NSString stringWithFormat:@"游戏人数：%ld/0", self.sudFSMMGDecorator.onlineUserIdList.count];
+    self.gameNumLabel.text = [NSString stringWithFormat:@"游戏人数：%ld/%ld", self.sudFSMMGDecorator.onlineUserIdList.count, self.totalGameUserCount];
 }
 @end
 

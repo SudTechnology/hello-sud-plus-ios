@@ -62,6 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 切换RTC厂商
 /// @param rtcType 对应rtc厂商类型
 - (void)switchRtcType:(NSString *)rtcType;
+
+/// 通过gameID获取游戏总人数
+/// @param gameID 游戏ID
+- (NSInteger)getTotalGameCountWithGameID:(NSInteger)gameID;
 @end
 
 NS_ASSUME_NONNULL_END

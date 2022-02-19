@@ -7,7 +7,13 @@
 
 #import "GameListModel.h"
 
+@implementation HSGameModeModel
+@end
+
 @implementation HSGameItem
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"gameModeList": [HSGameModeModel class]};
+}
 
 @end
 
