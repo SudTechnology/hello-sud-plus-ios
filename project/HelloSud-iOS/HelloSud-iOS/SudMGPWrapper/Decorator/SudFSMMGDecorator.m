@@ -245,6 +245,7 @@
     
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues: dataJson];
+        [self updateCommonPlayerIn:m userId:userId];
         /// 更新
         [self setValueGamePlayerStateMap:userId state:state model:m];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerIn:userId:model:)]) {
