@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 #define kTabBarHeight (kAppSafeBottom + 49)
 /// 按照宽度比例等比缩放
 #define kScaleByW_375(f) ((f) * kScreenWidth / 375.0)
+/// 按照iPhone X 812高度比例等比缩放
+#define kScaleByH_812(f) ((f) * kScreenHeight / 812.0)
 
 /// weakself宏
 #define WeakSelf __weak typeof(self) weakSelf = self;
