@@ -9,9 +9,12 @@
 #define ServiceConstHeader_h
 
 #if DEBUG
-#define InteractURL      @"https://fat-interact.sud.tech"
-#define BaseURL          @"https://fat-base.sud.tech"
+//#define InteractURL      @"https://fat-interact.sud.tech"
+//#define BaseURL          @"https://fat-base.sud.tech"
 //#define BaseURL        @"http://192.168.101.223:8081"
+// 线上
+#define InteractURL      @"https://interact-hello-sud.sud.tech"
+#define BaseURL          @"https://base-hello-sud.sud.tech"
 #else
 #define InteractURL      @"https://interact-hello-sud.sud.tech"
 #define BaseURL          @"https://base-hello-sud.sud.tech"
