@@ -237,21 +237,30 @@
             if (isGameing) {
                 [DTSheetView close];
                 [DTAlertView showTextAlert:@"当前正在游戏中，是否离开？" sureText:@"离开" cancelText:@"返回游戏" onSureCallback:^{
-                    if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.loginUserInfo.userID]) {
-                        [weakSelf.sudFSTAPPDecorator notifyComonSelfPlaying:false reportGameInfoExtras:@""];
-                    } else if ([self.sudFSMMGDecorator isPlayerIsReady:AppService.shared.loginUserInfo.userID]) {
-                        [weakSelf.sudFSTAPPDecorator notifyComonSetReady:false];
-                    }  else if ([self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID]) {
-                        [weakSelf.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
-                    }
                     // 下麦
                     [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
+                    
+                    [weakSelf.sudFSTAPPDecorator notifyComonSelfPlaying:false reportGameInfoExtras:@""];
                 } onCloseCallback:^{
                     
                 }];
             } else {
+                
                 // 下麦
                 [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
+                
+                if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.loginUserInfo.userID]) {
+                    /// 先退出结束游戏，再退出当前游戏
+                    [weakSelf.sudFSTAPPDecorator notifyComonSelfPlaying:false reportGameInfoExtras:@""];
+                    [weakSelf.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                } else if ([self.sudFSMMGDecorator isPlayerIsReady:AppService.shared.loginUserInfo.userID]) {
+                    /// 先取消准备游戏，再退出当前游戏
+                    [weakSelf.sudFSTAPPDecorator notifyComonSetReady:false];
+                    [weakSelf.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                }  else if ([self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID]) {
+                    /// 退出当前游戏
+                    [weakSelf.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                }
                 [DTSheetView close];
             }
         };
@@ -341,7 +350,7 @@
 
 /// 游戏触发上麦
 - (void)handleGameUpMic {
-    if ([self.dicMicModel objectForKey:[NSString stringWithFormat:@"%ld", AudioRoomService.shared.micIndex]] != nil) {
+    if ([self isInMic]) {
         return;
     }
     AudioRoomMicModel *micModel = [self getOneEmptyMic];
@@ -530,6 +539,17 @@
     }
     [self reqMicList];
     [self.naviView hiddenNodeWithRoleType: AudioRoomService.shared.roleType];
+}
+
+- (BOOL)isInMic {
+    BOOL isInMic = false;
+    NSArray *micArr = self.dicMicModel.allValues;
+    for (AudioRoomMicModel *m in micArr) {
+        if ([m.user.userID isEqualToString:AppService.shared.loginUserInfo.userID]) {
+            isInMic = true;
+        }
+    }
+    return isInMic;
 }
 
 #pragma mark lazy
