@@ -127,7 +127,7 @@
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
             if (fail) {
-                fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
+                fail([NSError dt_errorWithCode:model.retCode msg:model.retMsg]);
             }
             return;
         }
@@ -164,7 +164,7 @@
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
             if (fail) {
-                fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
+                fail([NSError dt_errorWithCode:model.retCode msg:model.retMsg]);
             }
             return;
         }
@@ -189,7 +189,7 @@
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
             if (fail) {
-                fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
+                fail([NSError dt_errorWithCode:model.retCode msg:model.retMsg]);
             }
             return;
         }

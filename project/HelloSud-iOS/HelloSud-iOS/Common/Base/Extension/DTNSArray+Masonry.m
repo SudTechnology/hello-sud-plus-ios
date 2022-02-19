@@ -35,13 +35,13 @@
 
 
 
-- (void)hs_mas_distributeSudokuViewsWithFixedItemWidth:(CGFloat)fixedItemWidth
-                                    fixedItemHeight:(CGFloat)fixedItemHeight
-                                          warpCount:(NSInteger)warpCount
-                                         topSpacing:(CGFloat)topSpacing
-                                      bottomSpacing:(CGFloat)bottomSpacing
-                                        leadSpacing:(CGFloat)leadSpacing
-                                        tailSpacing:(CGFloat)tailSpacing {
+- (void)dt_mas_distributeSudokuViewsWithFixedItemWidth:(CGFloat)fixedItemWidth
+                                       fixedItemHeight:(CGFloat)fixedItemHeight
+                                             warpCount:(NSInteger)warpCount
+                                            topSpacing:(CGFloat)topSpacing
+                                         bottomSpacing:(CGFloat)bottomSpacing
+                                           leadSpacing:(CGFloat)leadSpacing
+                                           tailSpacing:(CGFloat)tailSpacing {
     if (self.count < 2) {
         NSAssert(self.count>1,@"views to distribute need to bigger than one");
         return;
@@ -102,15 +102,15 @@
     }
 }
 
-- (void)hs_mas_distributeSudokuViewsWithFixedLineSpacing:(CGFloat)fixedLineSpacing
-                                fixedInteritemSpacing:(CGFloat)fixedInteritemSpacing
-                                            warpCount:(NSInteger)warpCount
-                                           topSpacing:(CGFloat)topSpacing
-                                        bottomSpacing:(CGFloat)bottomSpacing
-                                          leadSpacing:(CGFloat)leadSpacing
-                                          tailSpacing:(CGFloat)tailSpacing {
-    
-    [self hs_mas_distributeSudokuViewsWithFixedItemWidth:0 fixedItemHeight:0 fixedLineSpacing:fixedLineSpacing fixedInteritemSpacing:fixedInteritemSpacing warpCount:warpCount topSpacing:topSpacing bottomSpacing:bottomSpacing leadSpacing:leadSpacing tailSpacing:tailSpacing];
+- (void)dt_mas_distributeSudokuViewsWithFixedLineSpacing:(CGFloat)fixedLineSpacing
+                                   fixedInteritemSpacing:(CGFloat)fixedInteritemSpacing
+                                               warpCount:(NSInteger)warpCount
+                                              topSpacing:(CGFloat)topSpacing
+                                           bottomSpacing:(CGFloat)bottomSpacing
+                                             leadSpacing:(CGFloat)leadSpacing
+                                             tailSpacing:(CGFloat)tailSpacing {
+
+    [self dt_mas_distributeSudokuViewsWithFixedItemWidth:0 fixedItemHeight:0 fixedLineSpacing:fixedLineSpacing fixedInteritemSpacing:fixedInteritemSpacing warpCount:warpCount topSpacing:topSpacing bottomSpacing:bottomSpacing leadSpacing:leadSpacing tailSpacing:tailSpacing];
 }
 
 /**
@@ -134,15 +134,15 @@
  *  @return 一般情况下会返回[self copy], 如果warpCount大于[self count]，则会返回一个被空白view填充过的数组，可以让你循环调用removeFromSuperview或者干一些其他的事情;
  *  @return Normal will return [self copy], If warpCount bigger than [self count] , It will return a empty views filled array, you could enumerate [subview removeFromSuperview] or do other things;
  */
-- (NSArray *)hs_mas_distributeSudokuViewsWithFixedItemWidth:(CGFloat)fixedItemWidth
-                                         fixedItemHeight:(CGFloat)fixedItemHeight
-                                        fixedLineSpacing:(CGFloat)fixedLineSpacing
-                                   fixedInteritemSpacing:(CGFloat)fixedInteritemSpacing
-                                               warpCount:(NSInteger)warpCount
-                                              topSpacing:(CGFloat)topSpacing
-                                           bottomSpacing:(CGFloat)bottomSpacing
-                                             leadSpacing:(CGFloat)leadSpacing
-                                             tailSpacing:(CGFloat)tailSpacing {
+- (NSArray *)dt_mas_distributeSudokuViewsWithFixedItemWidth:(CGFloat)fixedItemWidth
+                                            fixedItemHeight:(CGFloat)fixedItemHeight
+                                           fixedLineSpacing:(CGFloat)fixedLineSpacing
+                                      fixedInteritemSpacing:(CGFloat)fixedInteritemSpacing
+                                                  warpCount:(NSInteger)warpCount
+                                                 topSpacing:(CGFloat)topSpacing
+                                              bottomSpacing:(CGFloat)bottomSpacing
+                                                leadSpacing:(CGFloat)leadSpacing
+                                                tailSpacing:(CGFloat)tailSpacing {
     if (self.count < 1) {
         return self.copy;
     }

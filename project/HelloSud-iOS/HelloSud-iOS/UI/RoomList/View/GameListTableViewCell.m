@@ -37,8 +37,8 @@
 }
 
 - (void)hsConfigUI {
-    self.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
-    self.contentView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+    self.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
+    self.contentView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
 - (void)hsAddViews {
@@ -121,10 +121,10 @@
         _roomTypeLabel = [[DTPaddingLabel alloc] init];
         _roomTypeLabel.paddingX = 5;
         _roomTypeLabel.text = @"语音房";
-        _roomTypeLabel.textColor = [UIColor colorWithHexString:@"#999999" alpha:1];
+        _roomTypeLabel.textColor = [UIColor dt_colorWithHexString:@"#999999" alpha:1];
         _roomTypeLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
         _roomTypeLabel.textAlignment = NSTextAlignmentCenter;
-        _roomTypeLabel.backgroundColor = [UIColor colorWithHexString:@"#F5F5F5" alpha:1];
+        _roomTypeLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F5F5" alpha:1];
     }
     return _roomTypeLabel;
 }
@@ -133,7 +133,7 @@
     if (!_roomNameLabel) {
         _roomNameLabel = [[UILabel alloc] init];
         _roomNameLabel.text = @"飞镖达人";
-        _roomNameLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        _roomNameLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _roomNameLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightRegular];
         _roomNameLabel.textAlignment = NSTextAlignmentLeft;
     }
@@ -144,7 +144,7 @@
     if (!_roomNumLabel) {
         _roomNumLabel = [[UILabel alloc] init];
         _roomNumLabel.text = @"房间号：0";
-        _roomNumLabel.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _roomNumLabel.textColor = [UIColor dt_colorWithHexString:@"#666666" alpha:1];
         _roomNumLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     }
     return _roomNumLabel;
@@ -154,7 +154,7 @@
     if (!_onlineLabel) {
         _onlineLabel = [[UILabel alloc] init];
         _onlineLabel.text = @"0人";
-        _onlineLabel.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _onlineLabel.textColor = [UIColor dt_colorWithHexString:@"#666666" alpha:1];
         _onlineLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     }
     return _onlineLabel;

@@ -12,7 +12,7 @@
 /// 用户自定义错误码
 /// @param code 错误码
 /// @param msg 错误描述
-+ (NSError *)hsErrorWithCode:(NSInteger)code msg:(NSString *)msg {
++ (NSError *)dt_errorWithCode:(NSInteger)code msg:(NSString *)msg {
     NSError *error = [NSError errorWithDomain:@"appCustomError" code:code userInfo:@{NSLocalizedFailureReasonErrorKey:msg}];
     return error;
 }

@@ -84,7 +84,7 @@
             _voiceUpBtn.backgroundColor = nil;
             [_voiceUpBtn setImage:[UIImage imageNamed:@"room_ope_voice"] forState:UIControlStateNormal];
             [_voiceUpBtn setTitle:@"上麦" forState:UIControlStateNormal];
-            [self.voiceUpBtn hs_setGradientBackgroundWithColors:@[[UIColor colorWithHexString:@"#FFC243" alpha:1], [UIColor colorWithHexString:@"#F38D2E" alpha:1]] locations:nil startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 0)];
+            [self.voiceUpBtn dt_setGradientBackgroundWithColors:@[[UIColor dt_colorWithHexString:@"#FFC243" alpha:1], [UIColor dt_colorWithHexString:@"#F38D2E" alpha:1]] locations:nil startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 0)];
             break;
     }
 }
@@ -94,7 +94,7 @@
         _voiceUpBtn = [[UIButton alloc] init];
         [_voiceUpBtn setImage:[UIImage imageNamed:@"room_ope_voice"] forState:UIControlStateNormal];
         [_voiceUpBtn setTitle:@"上麦" forState:UIControlStateNormal];
-        [_voiceUpBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
+        [_voiceUpBtn setTitleColor:[UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
         _voiceUpBtn.titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
         _voiceUpBtn.backgroundColor = UIColor.darkGrayColor;
         _voiceUpBtn.layer.cornerRadius = 30/2;
@@ -108,9 +108,9 @@
     if (!_inputLabel) {
         _inputLabel = [[UILabel alloc] init];
         _inputLabel.text = @"    聊一聊~";
-        _inputLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.5];
+        _inputLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.5];
         _inputLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
-        _inputLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.4];
+        _inputLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.4];
         _inputLabel.layer.cornerRadius = 32/2;
         _inputLabel.layer.masksToBounds = true;
         [_inputLabel setUserInteractionEnabled:true];

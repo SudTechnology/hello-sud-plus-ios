@@ -131,7 +131,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"选择游戏";
-        _titleLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
     }
     return _titleLabel;

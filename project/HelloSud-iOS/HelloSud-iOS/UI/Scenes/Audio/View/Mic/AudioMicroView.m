@@ -234,7 +234,7 @@
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:name];
     attrName.yy_lineSpacing = 6;
     attrName.yy_font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
-    attrName.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+    attrName.yy_color = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
     
     if (isShowTag) {
         [attrName insertAttributedString:[[NSAttributedString alloc] initWithString:@" "] atIndex:0];
@@ -278,7 +278,7 @@
             [self.gameStateLabel setHidden:false];
             self.gameStateLabel.text = m.isReady ? @"已准备" : @"未准备";
             self.gameStateLabel.textColor = [UIColor whiteColor];
-            self.gameStateLabel.backgroundColor = [UIColor colorWithHexString:m.isReady ? @"#13AD21" : @"#FF6E65" alpha:1];
+            self.gameStateLabel.backgroundColor = [UIColor dt_colorWithHexString:m.isReady ? @"#13AD21" : @"#FF6E65" alpha:1];
             self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
         } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
             NSLog(@"玩家: 游戏中状态");
@@ -325,7 +325,7 @@
         _nameLabel.numberOfLines = 2;
         _nameLabel.preferredMaxLayoutWidth = 70;
         _nameLabel.textVerticalAlignment = YYTextVerticalAlignmentTop;
-        _nameLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.4];
+        _nameLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.4];
         _nameLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
     }
     return _nameLabel;
@@ -347,7 +347,7 @@
         _gameStateLabel.font = [UIFont systemFontOfSize:9 weight:UIFontWeightRegular];
         _gameStateLabel.textAlignment = NSTextAlignmentCenter;
         _gameStateLabel.textColor = UIColor.whiteColor;
-        _gameStateLabel.backgroundColor = [UIColor colorWithHexString:@"#F7782F" alpha:1];
+        _gameStateLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#F7782F" alpha:1];
         _gameStateLabel.layer.cornerRadius = 1;
         _gameStateLabel.layer.borderWidth = 0.5;
         _gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
@@ -360,7 +360,7 @@
 - (DTPaddingLabel *)gameBadgeLabel {
     if (!_gameBadgeLabel) {
         _gameBadgeLabel = [[DTPaddingLabel alloc] init];
-        _gameBadgeLabel.backgroundColor = [UIColor colorWithHexString:@"#FF4DA6" alpha:1];
+        _gameBadgeLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#FF4DA6" alpha:1];
         _gameBadgeLabel.layer.cornerRadius = 14/2;
         _gameBadgeLabel.layer.masksToBounds = true;
         _gameBadgeLabel.numberOfLines = 1;

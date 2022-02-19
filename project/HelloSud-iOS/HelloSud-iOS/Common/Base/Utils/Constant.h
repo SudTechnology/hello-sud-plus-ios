@@ -10,15 +10,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// app顶部安全区
-#define kAppSafeTop [UIDevice safeAreaInsets].top
+#define kAppSafeTop [UIDevice dt_safeAreaInsets].top
 /// 底部安全区
-#define kAppSafeBottom [UIDevice safeAreaInsets].bottom
+#define kAppSafeBottom [UIDevice dt_safeAreaInsets].bottom
 /// 屏幕宽
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 /// 屏幕高
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 /// 状态栏高度（安全状态栏）
-#define kStatusBarHeight ([UIDevice isiPhoneXSeries] ? kAppSafeTop : 20)
+#define kStatusBarHeight ([UIDevice dt_isiPhoneXSeries] ? kAppSafeTop : 20)
 /// 底部tabbar高度
 #define kTabBarHeight (kAppSafeBottom + 49)
 /// 按照宽度比例等比缩放

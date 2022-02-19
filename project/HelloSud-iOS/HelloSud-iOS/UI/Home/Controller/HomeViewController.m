@@ -33,7 +33,7 @@
 - (void)dtConfigUI {
     self.itemW = (kScreenWidth - 32 - 24 - 24 )/4;
     self.itemH = 125 + 12;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+    self.view.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
 - (void)dtConfigEvents {
@@ -88,7 +88,7 @@
         [weakSelf requestData];
     }];
     self.collectionView.mj_header = header;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+    self.collectionView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
 #pragma mark - requst Data
@@ -262,7 +262,7 @@
         [_collectionView registerClass:[HomeHeaderReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView"];
         [_collectionView registerClass:[HomeFooterReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HomeFooterReusableView"];
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        v.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+        v.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
         _collectionView.backgroundView = v;
     }
     return _collectionView;
