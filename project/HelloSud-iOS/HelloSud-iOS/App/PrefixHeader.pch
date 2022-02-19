@@ -2,6 +2,8 @@
 //  PrefixHeader.pch
 //  HelloSud-iOS
 //
+// Copyright © Sud.Tech (https://sud.tech)
+//
 //  Created by kaniel on 2022/1/19.
 //
 
@@ -31,7 +33,10 @@
 
 /// Comon
 #import "AppUtil.h"
-#import "GameConfig.h"
+#import "SudMGPAPPState.h"
+#import "SudMGPMGState.h"
+#import "CommonGameModelHeader.h"
+#import "SudMGPWrapperHeader.h"
 #import "HttpService.h"
 
 /// Page
@@ -45,9 +50,10 @@
 #import "AppService.h"
 #import "UserService.h"
 #import "GiftService.h"
-#import "GameSudManager.h"
+//#import "GameSudManager.h"
 #import "AudioRoomService.h"
 #import "GameService.h"
+
 #import "LoginService.h"
 #import "SettingsService.h"
 

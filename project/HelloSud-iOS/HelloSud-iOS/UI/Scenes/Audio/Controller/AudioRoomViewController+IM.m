@@ -26,9 +26,9 @@
     } else if ([msg isKindOfClass:RoomCmdUpMicModel.class]) {
         RoomCmdUpMicModel *m = (RoomCmdUpMicModel *)msg;
         if (m.cmd == CMD_UP_MIC_NOTIFY) {
-            [self gameUpMic];
+            [self joinGame];
         } else if (m.cmd == CMD_DOWN_MIC_NOTIFY) {
-            [self gameDownMic];
+            [self exitGame];
         }
     }
 }
@@ -121,28 +121,32 @@
 
 
 #pragma mark - 业务处理
-/// 上麦
-- (void)gameUpMic {
+/// 加入游戏
+- (void)joinGame {
     if (self.roomType == HSAudio) {
         return;
     }
-    if (self.gameInfoModel.gameState == 0 && !self.gameInfoModel.isInGame) {
-        /// 上麦，就是加入游戏
-        [self.sudFSTAPPManager sendComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+    
+    if (![self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID]) {
+        if (self.sudFSMMGDecorator.gameStateType == GameStateTypeLeisure && !self.sudFSMMGDecorator.isInGame) {
+            /// 上麦，就是加入游戏
+            [self.sudFSTAPPDecorator notifyComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+        }
     }
 }
 
-/// 下麦
-- (void)gameDownMic {
+/// 退出游戏
+- (void)exitGame {
     if (self.roomType == HSAudio) {
         return;
     }
-    if (self.gameInfoModel.isReady) {
+    
+    if (self.sudFSMMGDecorator.isReady) {
         /// 如果已经准备先退出准备状态
-        [self.sudFSTAPPManager sendComonSetReady:false];
+        [self.sudFSTAPPDecorator notifyComonSetReady:false];
     }
     /// 下麦，就是退出游戏
-    [self.sudFSTAPPManager sendComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+    [self.sudFSTAPPDecorator notifyComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 /// 你画我猜命中
@@ -150,16 +154,16 @@
     if (self.roomType == HSAudio) {
         return;
     }
-    if (self.gameInfoModel.isHitBomb) {
+    if (self.sudFSMMGDecorator.isHitBomb) {
         if ([self isPureInt: content]) {
             /// 关键词命中
-            [self.sudFSTAPPManager sendComonDrawTextHit:true keyWord:content text:content];
+            [self.sudFSTAPPDecorator notifyComonDrawTextHit:false keyWord:@"" text:content];
         }
         return;
     }
-    if (self.gameInfoModel.keyWordHiting == YES && [content isEqualToString:self.gameInfoModel.drawKeyWord]) {
+    if (self.sudFSMMGDecorator.keyWordHiting == YES && [content isEqualToString:self.sudFSMMGDecorator.drawKeyWord]) {
         /// 关键词命中
-        [self.sudFSTAPPManager sendComonDrawTextHit:true keyWord:self.gameInfoModel.drawKeyWord text:self.gameInfoModel.drawKeyWord];
+        [self.sudFSTAPPDecorator notifyComonDrawTextHit:true keyWord:self.sudFSMMGDecorator.drawKeyWord text:self.sudFSMMGDecorator.drawKeyWord];
     }
 }
 

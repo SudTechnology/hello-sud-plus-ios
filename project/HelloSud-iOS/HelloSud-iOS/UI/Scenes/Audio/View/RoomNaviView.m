@@ -13,6 +13,8 @@
 @property (nonatomic, strong) UILabel *onlineLabel;
 @property (nonatomic, strong) UIButton *closeBtn;
 
+@property (nonatomic, strong) UIButton *endGameBtn;
+
 @property (nonatomic, strong) UIView *roomModeView;
 @property (nonatomic, strong) UILabel *roomModeLabel;
 @property (nonatomic, strong) UIImageView *roomModeImageView;
@@ -23,6 +25,22 @@
 
 - (void)hiddenNodeWithRoleType:(NSInteger)roleType {
     self.roomModeView.hidden = roleType != 1;
+}
+
+- (void)isHiddenEndGameBtn:(BOOL)hidden {
+    if (!hidden) {
+        self.endGameBtn.hidden = false;
+        
+        [self.endGameBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            if (self.roomModeView.isHidden) {
+                make.right.mas_equalTo(self.roomModeView.mas_left).offset(-8 + 80);
+            } else {
+                make.right.mas_equalTo(self.roomModeView.mas_left).offset(-8);
+            }
+        }];
+    } else {
+        self.endGameBtn.hidden = true;
+    }
 }
 
 - (void)dtAddViews {

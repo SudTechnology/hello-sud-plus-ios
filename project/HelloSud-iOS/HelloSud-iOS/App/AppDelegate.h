@@ -2,6 +2,8 @@
 //  AppDelegate.h
 //  HelloSud
 //
+// Copyright © Sud.Tech (https://sud.tech)
+//
 //  Created by kaniel on 2022/1/17.
 //
 
