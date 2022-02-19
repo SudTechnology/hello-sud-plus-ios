@@ -49,7 +49,7 @@
     if (!toUserName) {
         toUserName = @"";
     }
-    GiftModel *giftModel = [GiftManager.shared giftByID:self.giftID];
+    GiftModel *giftModel = [GiftService.shared giftByID:self.giftID];
     if (giftModel) {
         giftName = giftModel.giftName;
     }

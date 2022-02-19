@@ -1,18 +1,18 @@
 //
-//  AudioRoomManager.m
+//  AudioRoomService.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
 //
 
-#import "AudioRoomManager.h"
+#import "AudioRoomService.h"
 
-@implementation AudioRoomManager
+@implementation AudioRoomService
 + (instancetype)shared {
-    static AudioRoomManager *g_manager = nil;
+    static AudioRoomService *g_manager = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        g_manager = AudioRoomManager.new;
+        g_manager = AudioRoomService.new;
         [g_manager resetRoomInfo];
     });
     return g_manager;
@@ -30,8 +30,8 @@
 
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"sceneType"] = @(sceneType);
-    if (AppManager.shared.rtcType.length > 0) {
-        dicParam[@"rtcType"] = AppManager.shared.rtcType;
+    if (AppService.shared.rtcType.length > 0) {
+        dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
     [HttpService postRequestWithApi:kINTERACTURL(@"room/create-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
         EnterRoomModel *model = [EnterRoomModel decodeModel:rootDict];
@@ -51,8 +51,8 @@
     WeakSelf
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"roomId"] = @(roomId);
-    if (AppManager.shared.rtcType.length > 0) {
-        dicParam[@"rtcType"] = AppManager.shared.rtcType;
+    if (AppService.shared.rtcType.length > 0) {
+        dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
     [HttpService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
         EnterRoomModel *model = [EnterRoomModel decodeModel:rootDict];
@@ -95,8 +95,8 @@
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"gameId"] = @(gameId);
     dicParam[@"sceneType"] = @(sceneType);
-    if (AppManager.shared.rtcType.length > 0) {
-        dicParam[@"rtcType"] = AppManager.shared.rtcType;
+    if (AppService.shared.rtcType.length > 0) {
+        dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
     [HttpService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
         MatchRoomModel *model = [MatchRoomModel decodeModel:rootDict];

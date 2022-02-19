@@ -1,5 +1,5 @@
 //
-//  GiftManager.h
+//  GiftService.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 礼物管理
-@interface GiftManager : BaseView
+@interface GiftService : BaseView
 
 /// 礼物列表
 @property(nonatomic, strong, readonly)NSArray<GiftModel*> *giftList;

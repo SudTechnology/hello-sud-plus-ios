@@ -41,13 +41,14 @@
 #import "CommonAudioModelHeader.h"
 /// manager
 #import "RespUserInfoModel.h"
-#import "AppManager.h"
-#import "UserManager.h"
-#import "GiftManager.h"
+#import "AppService.h"
+#import "UserService.h"
+#import "GiftService.h"
 #import "GameSudManager.h"
-#import "AudioRoomManager.h"
-#import "GameManager.h"
+#import "AudioRoomService.h"
+#import "GameService.h"
 #import "LoginService.h"
+#import "SettingsService.h"
 
 
 #endif /* PrefixHeader_pch */

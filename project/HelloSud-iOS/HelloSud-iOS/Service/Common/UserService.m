@@ -1,22 +1,22 @@
 //
-//  UserManager.m
+//  UserService.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/27.
 //
 
-#import "UserManager.h"
+#import "UserService.h"
 
-@interface UserManager()
+@interface UserService()
 @property(nonatomic, strong)NSMutableDictionary<NSString*, HSUserInfoModel*> *dicUserInfo;
 @end
 
-@implementation UserManager
+@implementation UserService
 + (instancetype)shared {
-    static UserManager *g_manager = nil;
+    static UserService *g_manager = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        g_manager = UserManager.new;
+        g_manager = UserService.new;
     });
     return g_manager;
 }

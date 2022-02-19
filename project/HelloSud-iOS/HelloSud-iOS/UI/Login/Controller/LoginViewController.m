@@ -27,7 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (!AppManager.shared.isAgreement) {
+    if (!AppService.shared.isAgreement) {
         [self showWelcomeUse];
     }
 }
@@ -58,7 +58,7 @@
 
 /// 更换昵称点击事件
 - (void)changeNodeEvent {
-    NSString *randomUserName = [AppManager.shared randomUserName];
+    NSString *randomUserName = [AppService.shared randomUserName];
     self.nameTextField.text = randomUserName;
 }
 
@@ -96,7 +96,7 @@
     
     [attrStr_1 yy_setTextHighlightRange:attrStr_1.yy_rangeOfAll color:[UIColor colorWithHexString:@"#1A1A1A" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         DTWebViewController *web = DTWebViewController.new;
-        web.url = AppManager.shared.appProtocolURL.absoluteString;
+        web.url = [SettingsService appProtocolURL].absoluteString;
         web.isPresent = true;
         BaseNavigationViewController *nv = [[BaseNavigationViewController alloc] initWithRootViewController:web];
         nv.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -104,7 +104,7 @@
     }];
     [attrStr_3 yy_setTextHighlightRange:attrStr_3.yy_rangeOfAll color:[UIColor colorWithHexString:@"#1A1A1A" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         DTWebViewController *web = DTWebViewController.new;
-        web.url = AppManager.shared.appPrivacyURL.absoluteString;
+        web.url = [SettingsService appPrivacyURL].absoluteString;
         web.isPresent = true;
         BaseNavigationViewController *nv = [[BaseNavigationViewController alloc] initWithRootViewController:web];
         nv.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -118,7 +118,7 @@
     [attrTitle appendAttributedString:attrStr_4];
     
     [DTAlertView showAttrTextAlert:attrTitle sureText:@"同意" cancelText:@"不同意" rootView:self.view onSureCallback:^{
-        [AppManager.shared saveAgreement];
+        [AppService.shared saveAgreement];
     } onCloseCallback:^{
         SweetPromptView *promptView = [[SweetPromptView alloc] init];
         [DTAlertView show:promptView rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{

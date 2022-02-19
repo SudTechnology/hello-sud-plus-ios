@@ -1,5 +1,5 @@
 //
-//  AudioRoomManager.h
+//  AudioRoomService.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房间管理
-@interface AudioRoomManager : NSObject
+@interface AudioRoomService : NSObject
 /// 当前房间VC
 @property(nonatomic, weak)AudioRoomViewController *currentRoomVC;
 /// 当前用户在房间角色

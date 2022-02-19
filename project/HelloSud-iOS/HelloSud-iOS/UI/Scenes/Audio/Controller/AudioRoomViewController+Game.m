@@ -49,7 +49,7 @@
     NSLog(@"ISudFSMMG:onExpireCode:Code过期");
     // 请求业务服务器刷新令牌
     // Code更新
-    [GameManager.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
+    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
         // 调用游戏接口更新令牌
         [self updateGameCode:gameInfo.code];
         
@@ -155,7 +155,7 @@
         GameCommonModel *m = [GameCommonModel mj_objectWithKeyValues: dataJson];
         self.gameInfoModel.gameState = m.gameState;
         
-        if (m.gameState == 2 && [AppManager.shared.loginUserInfo.userID isEqualToString:GameManager.shared.captainUserId]) {
+        if (m.gameState == 2 && [AppService.shared.loginUserInfo.userID isEqualToString:GameService.shared.captainUserId]) {
             self.isShowEndGame = true;
         } else {
             self.isShowEndGame = false;
@@ -198,7 +198,7 @@
     m.state = state;
     
     if (![m.state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
-        [GameManager.shared.gamePlayerStateMap setValue:m forKey:userId];
+        [GameService.shared.gamePlayerStateMap setValue:m forKey:userId];
     }
     
     /// 处理状态解析
@@ -219,14 +219,14 @@
     NSString *dataStr = @"";
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         dataStr = @"玩家: 加入状态";
-        if (m.userId == AppManager.shared.loginUserInfo.userID) {
+        if (m.userId == AppService.shared.loginUserInfo.userID) {
             self.gameInfoModel.isInGame = m.isIn;
             if (m.isIn) {
                 // 请求上麦
                 BOOL isUpMic = false;
                 NSArray *arr = self.dicMicModel.allValues;
                 for (AudioRoomMicModel *m in arr) {
-                    if (m.user != nil && m.user.userID == AppManager.shared.loginUserInfo.userID) {
+                    if (m.user != nil && m.user.userID == AppService.shared.loginUserInfo.userID) {
                         isUpMic = true;
                     }
                 }
@@ -236,7 +236,7 @@
             }
         }
         if (!m.isIn) {
-            [GameManager.shared.gamePlayerStateMap removeObjectForKey:m.userId];
+            [GameService.shared.gamePlayerStateMap removeObjectForKey:m.userId];
             if (self.onlineUserIdList.count > 0) {
                 NSMutableArray *arrTemp = [[NSMutableArray alloc]initWithArray:self.onlineUserIdList];
                 for (NSString *item in arrTemp) {
@@ -257,10 +257,10 @@
     } else if ([state isEqualToString:MG_COMMON_PLAYER_CAPTAIN]) {
         dataStr = @"玩家: 队长状态";
         if (m.isCaptain) {
-            GameManager.shared.captainUserId = m.userId;
+            GameService.shared.captainUserId = m.userId;
         } else {
-            if (GameManager.shared.captainUserId == m.userId) {
-                GameManager.shared.captainUserId = @"";
+            if (GameService.shared.captainUserId == m.userId) {
+                GameService.shared.captainUserId = @"";
             }
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
@@ -288,7 +288,7 @@
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
 - (void)login {
     WeakSelf
-    [GameManager.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
+    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
         weakSelf.gameInfoModel.code = gameInfo.code;
         [weakSelf loadGame];
     } fail:^(NSError *error) {
@@ -305,8 +305,8 @@
 
 /// 加载游戏
 - (void)loadGame {
-    NSString *appID = AppManager.shared.configModel.sudCfg.appId;
-    NSString *appKey = AppManager.shared.configModel.sudCfg.appKey;
+    NSString *appID = AppService.shared.configModel.sudCfg.appId;
+    NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
     if (appID.length == 0 || appKey.length == 0) {
         [ToastUtil show:@"Game appID or appKey is empty"];
         return;
@@ -361,7 +361,7 @@
 /// 处理切换游戏
 /// @param gameID 新的游戏ID
 - (void)handleGameChange:(NSInteger)gameID {
-    [GameManager.shared clearAllStates];
+    [GameService.shared clearAllStates];
     if (gameID == 0) {
         // 切换语音房间
         self.gameId = 0;
@@ -371,7 +371,7 @@
     [self resetGameInfoModel];
     [self logoutGame];
     self.gameId = gameID;
-    self.gameInfoModel.currentPlayerUserId = AppManager.shared.loginUserInfo.userID;
+    self.gameInfoModel.currentPlayerUserId = AppService.shared.loginUserInfo.userID;
     [self login];
     self.roomType = HSGame;
 }

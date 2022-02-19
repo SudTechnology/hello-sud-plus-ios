@@ -112,7 +112,7 @@
         // 假数据
         return;
     }
-    [AudioRoomManager.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
+    [AudioRoomService.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
 }
 
 - (void)onBtnClick:(UIButton *)sender {
@@ -120,7 +120,7 @@
     if (self.sceneModel.isGameWait) {
         return;
     }
-    [AudioRoomManager.shared reqCreateRoom:self.sceneModel.sceneId];
+    [AudioRoomService.shared reqCreateRoom:self.sceneModel.sceneId];
 }
 
 - (void)hsAddViews {

@@ -43,8 +43,8 @@
 }
 
 - (void)dtUpdateUI {
-    self.roomNumLabel.text = [NSString stringWithFormat: @"房号 %@", AudioRoomManager.shared.currentRoomVC.roomID];
-    self.onlineLabel.text = [NSString stringWithFormat:@"%ld", AudioRoomManager.shared.currentRoomVC.totalUserCount];
+    self.roomNumLabel.text = [NSString stringWithFormat: @"房号 %@", AudioRoomService.shared.currentRoomVC.roomID];
+    self.onlineLabel.text = [NSString stringWithFormat:@"%ld", AudioRoomService.shared.currentRoomVC.totalUserCount];
 }
 
 - (void)selectNodeEvent:(UITapGestureRecognizer *)gesture {

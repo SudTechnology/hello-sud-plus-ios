@@ -31,7 +31,7 @@
 }
 
 - (void)dtUpdateUI {
-    [self.dataList setArray:GiftManager.shared.giftList];
+    [self.dataList setArray:GiftService.shared.giftList];
     for (GiftModel *m in self.dataList) {
         m.isSelected = NO;
     }

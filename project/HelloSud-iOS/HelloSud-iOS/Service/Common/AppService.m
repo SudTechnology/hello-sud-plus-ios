@@ -1,11 +1,11 @@
 //
-//  AppManager.m
+//  AppService.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
 //
 
-#import "AppManager.h"
+#import "AppService.h"
 #import "ZegoAudioEngineImpl.h"
 #import "AgoraAudioEngineImpl.h"
 /// 用户信息缓存key
@@ -21,17 +21,17 @@
 /// 配置信息缓存key
 #define kKeyConfigModel @"key_config_model"
 
-@interface AppManager ()
+@interface AppService ()
 @property (nonatomic, strong) NSArray <NSString *> *randomNameArr;
 
 @end
 
-@implementation AppManager
+@implementation AppService
 + (instancetype)shared {
-    static AppManager *g_manager = nil;
+    static AppService *g_manager = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        g_manager = AppManager.new;
+        g_manager = AppService.new;
     });
     return g_manager;
 }
@@ -172,26 +172,15 @@
 
 /// 刷新token
 - (void)refreshToken {
-    if (AppManager.shared.isLogin) {
-        NSString *name = AppManager.shared.loginUserInfo.name;
-        NSString *userID = AppManager.shared.loginUserInfo.userID;
+    if (AppService.shared.isLogin) {
+        NSString *name = AppService.shared.loginUserInfo.name;
+        NSString *userID = AppService.shared.loginUserInfo.userID;
         if (name.length > 0) {
             [LoginService.shared reqLogin:name userID:userID sucess:^{
                 self.isRefreshedToken = YES;
             }];
         }
     }
-}
-
-/// APP隐私协议地址
-- (NSURL *)appPrivacyURL {
-    NSString *path = [NSBundle.mainBundle pathForResource:@"user_privacy" ofType:@"html" inDirectory:@"Res"];
-    return [NSURL fileURLWithPath:path];
-}
-/// APP用户协议
-- (NSURL *)appProtocolURL {
-    NSString *path = [NSBundle.mainBundle pathForResource:@"user_protocol" ofType:@"html" inDirectory:@"Res"];
-    return [NSURL fileURLWithPath:path];
 }
 
 /// 处理rtc厂商信息

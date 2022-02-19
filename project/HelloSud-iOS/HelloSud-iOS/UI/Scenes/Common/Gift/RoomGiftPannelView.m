@@ -96,7 +96,7 @@
 }
 
 - (void)dtUpdateUI {
-    NSArray *arrModel = AudioRoomManager.shared.currentRoomVC.dicMicModel.allValues;
+    NSArray *arrModel = AudioRoomService.shared.currentRoomVC.dicMicModel.allValues;
     NSMutableArray<AudioRoomMicModel *> *userList = NSMutableArray.new;
     NSMutableDictionary *tempSelectedCacheMap = NSMutableDictionary.new;
     for (AudioRoomMicModel *m in arrModel) {
@@ -159,7 +159,7 @@
         GiftModel *giftModel = self.giftContentView.didSelectedGift;
         AudioUserModel *toUser = user;
         RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
-        [AudioRoomManager.shared.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
+        [AudioRoomService.shared.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
     }
 }
 
