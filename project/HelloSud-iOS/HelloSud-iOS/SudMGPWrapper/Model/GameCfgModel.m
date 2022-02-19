@@ -9,17 +9,6 @@
 
 #import "GameCfgModel.h"
 
-//@implementation GameCfgLobbyPlayers
-//
-//@end
-//
-//@implementation GameCfgUIModel
-//
-//@end
-//
-//@implementation GameCfgModel
-//
-//@end
 @implementation LobbyPlayerCaptainIcon
 
 @end
