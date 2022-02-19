@@ -97,7 +97,7 @@
         _selectView = [[UIView alloc] init];
         _selectView.backgroundColor = UIColor.clearColor;
         _selectView.layer.borderWidth = 1;
-        _selectView.layer.borderColor = [UIColor colorWithHexString:@"#ffffff" alpha:1].CGColor;
+        _selectView.layer.borderColor = [UIColor dt_colorWithHexString:@"#ffffff" alpha:1].CGColor;
     }
     return _selectView;
 }
@@ -106,7 +106,7 @@
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.text = @"小仓鼠";
-        _nameLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+        _nameLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _nameLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
     }
     return _nameLabel;
@@ -116,7 +116,7 @@
     if (!_typeLabel) {
         _typeLabel = [[UILabel alloc] init];
         _typeLabel.text = @"";
-        _typeLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.5];
+        _typeLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.5];
         _typeLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     }
     return _typeLabel;

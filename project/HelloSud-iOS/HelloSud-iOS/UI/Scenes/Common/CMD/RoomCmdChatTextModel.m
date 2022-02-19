@@ -38,11 +38,11 @@
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：", name]];
     attrName.yy_lineSpacing = 6;
     attrName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrName.yy_color = [UIColor colorWithHexString:@"#8FE5F6" alpha:1];
+    attrName.yy_color = [UIColor dt_colorWithHexString:@"#8FE5F6" alpha:1];
     NSMutableAttributedString *attrMsg = [[NSMutableAttributedString alloc] initWithString:content];
     attrMsg.yy_lineSpacing = 6;
     attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+    attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
     if (!_hiddeHeadIcon) {
         [attrName insertAttributedString:[[NSAttributedString alloc] initWithString:@" "] atIndex:0];
         [attrName insertAttributedString:attrIcon atIndex:0];

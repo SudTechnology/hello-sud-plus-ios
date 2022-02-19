@@ -1,18 +1,18 @@
 //
-//  GameManager.m
+//  GameService.m
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/27.
 //
 
-#import "GameManager.h"
+#import "GameService.h"
 
-@implementation GameManager
+@implementation GameService
 + (instancetype)shared {
-    static GameManager *g_manager = nil;
+    static GameService *g_manager = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        g_manager = GameManager.new;
+        g_manager = GameService.new;
     });
     return g_manager;
 }
@@ -24,7 +24,7 @@
         if (model.retCode != 0) {
             [ToastUtil show:model.retMsg];
             if (fail) {
-                fail([NSError hsErrorWithCode:model.retCode msg:model.retMsg]);
+                fail([NSError dt_errorWithCode:model.retCode msg:model.retMsg]);
             }
             return;
         }

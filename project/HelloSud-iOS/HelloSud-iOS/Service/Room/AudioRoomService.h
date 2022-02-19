@@ -1,5 +1,5 @@
 //
-//  AudioRoomManager.h
+//  AudioRoomService.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/25.
@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房间管理
-@interface AudioRoomManager : NSObject
+@interface AudioRoomService : NSObject
 /// 当前房间VC
 @property(nonatomic, weak)AudioRoomViewController *currentRoomVC;
 /// 当前用户在房间角色
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 请求进入房间
 /// @param roomId 房间ID
-- (void)reqEnterRoom:(long)roomId;
+- (void)reqEnterRoom:(long)roomId success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail;
 
 /// 请求退出房间
 /// @param roomId 房间ID

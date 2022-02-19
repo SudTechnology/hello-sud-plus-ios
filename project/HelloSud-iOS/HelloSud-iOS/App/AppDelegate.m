@@ -21,8 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc]init];
-    if (AppManager.shared.isLogin) {
-        [AppManager.shared refreshToken];
+    if (AppService.shared.isLogin) {
+        [AppService.shared refreshToken];
         self.window.rootViewController = [[MainTabBarController alloc]init];
     } else {
         self.window.rootViewController = [[LoginViewController alloc]init];
@@ -33,7 +33,7 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
-    [GiftManager.shared loadFromDisk];
+    [GiftService.shared loadFromDisk];
     return YES;
 }
 

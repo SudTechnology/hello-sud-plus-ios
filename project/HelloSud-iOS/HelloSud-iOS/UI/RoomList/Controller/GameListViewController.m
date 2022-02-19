@@ -33,19 +33,19 @@
 }
 
 - (void)dtConfigUI {
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+    self.view.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
 - (void)dtConfigEvents {
     WeakSelf
     [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        if (AppManager.shared.isRefreshedToken) {
+        if (AppService.shared.isRefreshedToken) {
             [weakSelf requestData];
         } else {
             [weakSelf.tableView.mj_header endRefreshing];
         }
     }];
-    if (AppManager.shared.isRefreshedToken) {
+    if (AppService.shared.isRefreshedToken) {
         [self requestData];
     }
 }
@@ -72,14 +72,14 @@
 - (void)addRefreshHeader {
     WeakSelf
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        if (!AppManager.shared.isRefreshedToken) {
-            [AppManager.shared refreshToken];
+        if (!AppService.shared.isRefreshedToken) {
+            [AppService.shared refreshToken];
             return;
         }
         [weakSelf requestData];
     }];
     self.tableView.mj_header = header;
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+    self.tableView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
 #pragma mark - requst Data
@@ -113,7 +113,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HSRoomInfoList *m = self.dataList[indexPath.row];
-    [AudioRoomManager.shared reqEnterRoom:m.roomId];
+    [AudioRoomService.shared reqEnterRoom:m.roomId success:nil fail:nil];
 }
 
 #pragma mark - lazy
@@ -125,10 +125,10 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 90;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+        _tableView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
         [_tableView registerClass:[GameListTableViewCell class] forCellReuseIdentifier:@"GameListTableViewCell"];
         UIView *headerNode = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
-        headerNode.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+        headerNode.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
         _tableView.tableHeaderView = headerNode;
     }
     return _tableView;

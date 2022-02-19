@@ -1,5 +1,5 @@
 //
-//  GameManager.h
+//  GameService.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/27.
@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏管理模块
-@interface GameManager : NSObject
+@interface GameService : NSObject
 + (instancetype)shared;
 
 /// 游戏ID

@@ -16,7 +16,7 @@
 
 - (void)initSudFSMMG {
     WeakSelf
-    self.sudFSMMGDecorator = [[SudFSMMGDecorator alloc] init:self.roomID userID:AppManager.shared.loginUserInfo.userID language:self.language loadSuccess:^(id<ISudFSTAPP>  _Nonnull iSudFSTAPP) {
+    self.sudFSMMGDecorator = [[SudFSMMGDecorator alloc] init:self.roomID userID:AppService.shared.loginUserInfo.userID language:self.language loadSuccess:^(id<ISudFSTAPP>  _Nonnull iSudFSTAPP) {
         weakSelf.sudFSTAPPDecorator = [[SudFSTAPPDecorator alloc] init:iSudFSTAPP];
     }];
     self.gameMicContentView.iSudFSMMG = self.sudFSMMGDecorator;
@@ -47,7 +47,7 @@
 /// 短期令牌code过期  【需要实现】
 - (void)onExpireCode:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
     // 请求业务服务器刷新令牌 Code更新
-    [GameManager.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
+    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
         // 调用游戏接口更新令牌
         [self.sudFSMMGDecorator updateGameCode:gameInfo.code];
         // 回调成功结果
@@ -84,7 +84,7 @@
 
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
 - (void)onGameMGCommonGameState:(nonnull NSString *)state model:(MGCommonGameStateModel *)model {
-    if (model.gameState == 2 && [AppManager.shared.loginUserInfo.userID isEqualToString:self.sudFSMMGDecorator.captainUserId]) {
+    if (model.gameState == 2 && [AppService.shared.loginUserInfo.userID isEqualToString:self.sudFSMMGDecorator.captainUserId]) {
         self.isShowEndGame = true;
     } else {
         self.isShowEndGame = false;
@@ -127,14 +127,14 @@
 /// 接入方客户端 调用 接入方服务端 login 获取 短期令牌code
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
 - (void)login {
-    NSString *appID = AppManager.shared.configModel.sudCfg.appId;
-    NSString *appKey = AppManager.shared.configModel.sudCfg.appKey;
+    NSString *appID = AppService.shared.configModel.sudCfg.appId;
+    NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
     if (appID.length == 0 || appKey.length == 0) {
         [ToastUtil show:@"Game appID or appKey is empty"];
         return;
     }
     WeakSelf
-    [GameManager.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
+    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel * _Nonnull gameInfo) {
         [weakSelf.sudFSMMGDecorator login:self.gameView gameId:self.gameId code:gameInfo.code appID:appID appKey:appKey];
     } fail:^(NSError *error) {
         [ToastUtil show:error.debugDescription];
@@ -192,7 +192,7 @@
     }
     attrMsg.yy_lineSpacing = 6;
     attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrMsg.yy_color = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
+    attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
     AudioMsgSystemModel *msgModel = [AudioMsgSystemModel makeMsgWithAttr:attrMsg];
     /// 公屏添加消息
     [self addMsg:msgModel isShowOnScreen:YES];
@@ -207,7 +207,7 @@
         BOOL isUpMic = false;
         NSArray *arr = self.dicMicModel.allValues;
         for (AudioRoomMicModel *m in arr) {
-            if (m.user != nil && m.user.userID == AppManager.shared.loginUserInfo.userID) {
+            if (m.user != nil && m.user.userID == AppService.shared.loginUserInfo.userID) {
                 isUpMic = true;
             }
         }

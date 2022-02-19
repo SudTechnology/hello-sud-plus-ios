@@ -19,12 +19,12 @@
 @implementation SwitchRoomModeView
 
 - (void)reloadData:(BOOL)isAudioRoom {
-    NSArray <HSGameItem *> *dataArr = AppManager.shared.gameList;
+    NSArray <HSGameItem *> *dataArr = AppService.shared.gameList;
     [self.dataList setArray:dataArr];
     
     WeakSelf
     [self.dataList enumerateObjectsUsingBlock:^(HSGameItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.gameId == GameManager.shared.gameId) {
+        if (obj.gameId == GameService.shared.gameId) {
             [weakSelf.dataList exchangeObjectAtIndex:0 withObjectAtIndex:idx];
         }
     }];
@@ -78,7 +78,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SwitchRoomCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SwitchRoomCell" forIndexPath:indexPath];
     cell.model = self.dataList[indexPath.row];
-    if (self.dataList[indexPath.row].gameId == GameManager.shared.gameId && self.dataList[indexPath.row].gameId != 0) {
+    if (self.dataList[indexPath.row].gameId == GameService.shared.gameId && self.dataList[indexPath.row].gameId != 0) {
         [cell.inGameLabel setHidden:false];
     } else {
         [cell.inGameLabel setHidden:true];
@@ -131,7 +131,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"选择游戏";
-        _titleLabel.textColor = [UIColor colorWithHexString:@"#1A1A1A" alpha:1];
+        _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
     }
     return _titleLabel;

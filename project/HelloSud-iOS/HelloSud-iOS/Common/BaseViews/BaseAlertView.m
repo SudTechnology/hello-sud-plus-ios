@@ -21,7 +21,9 @@ static BaseAlertView *h_alertView = nil;
     self.alpha = 0;
     [UIView animateWithDuration:0.2 animations:^{
         self.alpha = 1;
-        self.backView.alpha = 0.4;
+        if (!self.hiddeBackCover) {
+            self.backView.alpha = 0.4;
+        }
     }];
 }
 

@@ -33,19 +33,19 @@
 - (void)dtConfigUI {
     self.itemW = (kScreenWidth - 32 - 24 - 24 )/4;
     self.itemH = 125 + 12;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+    self.view.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
 - (void)dtConfigEvents {
     WeakSelf
     [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        if (AppManager.shared.isRefreshedToken) {
+        if (AppService.shared.isRefreshedToken) {
             [weakSelf requestData];
         } else {
             [weakSelf.collectionView.mj_header endRefreshing];
         }
     }];
-    if (AppManager.shared.isRefreshedToken) {
+    if (AppService.shared.isRefreshedToken) {
         [self requestData];
     }
 }
@@ -81,14 +81,14 @@
 - (void)addRefreshHeader {
     WeakSelf
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        if (!AppManager.shared.isRefreshedToken) {
-            [AppManager.shared refreshToken];
+        if (!AppService.shared.isRefreshedToken) {
+            [AppService.shared refreshToken];
             return;
         }
         [weakSelf requestData];
     }];
     self.collectionView.mj_header = header;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+    self.collectionView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
 #pragma mark - requst Data
@@ -128,8 +128,8 @@
             }
         }
         NSSet *set = [NSSet setWithArray:originalGameArr];
-        AppManager.shared.gameList = [set allObjects];
-        AppManager.shared.sceneList = model.sceneList;
+        AppService.shared.gameList = [set allObjects];
+        AppService.shared.sceneList = model.sceneList;
         
         /// dataList  headerGameList  headerSceneList 业务需求赋值
         for (HSSceneModel *m in model.sceneList) {
@@ -211,7 +211,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
-    [AudioRoomManager.shared reqMatchRoom:model.gameId sceneType:self.headerSceneList[indexPath.section].sceneId];
+    [AudioRoomService.shared reqMatchRoom:model.gameId sceneType:self.headerSceneList[indexPath.section].sceneId];
 }
 
 // 设置Header的尺寸
@@ -262,7 +262,7 @@
         [_collectionView registerClass:[HomeHeaderReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView"];
         [_collectionView registerClass:[HomeFooterReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HomeFooterReusableView"];
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        v.backgroundColor = [UIColor colorWithHexString:@"#F5F6FB" alpha:1];
+        v.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
         _collectionView.backgroundView = v;
     }
     return _collectionView;

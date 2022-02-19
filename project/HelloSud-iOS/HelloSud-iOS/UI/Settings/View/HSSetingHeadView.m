@@ -58,11 +58,11 @@
         }];
         lastNode = node;
     }
-    [self.itemsView.subviews hs_mas_distributeSudokuViewsWithFixedItemWidth:kScreenWidth - 36 * 2 fixedItemHeight:30
-                                                fixedLineSpacing:0 fixedInteritemSpacing:0
-                                                       warpCount:1
-                                                      topSpacing:0
-                                                   bottomSpacing:0 leadSpacing:0 tailSpacing:0];
+    [self.itemsView.subviews dt_mas_distributeSudokuViewsWithFixedItemWidth:kScreenWidth - 36 * 2 fixedItemHeight:30
+                                                           fixedLineSpacing:0 fixedInteritemSpacing:0
+                                                                  warpCount:1
+                                                                 topSpacing:0
+                                                              bottomSpacing:0 leadSpacing:0 tailSpacing:0];
 }
 
 - (void)dtAddViews {
