@@ -393,6 +393,7 @@
 		6C239FF727B39CBE00B19FE4 /* OneOneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOneViewController.m; sourceTree = "<group>"; };
 		6C239FF927B3AAD900B19FE4 /* RoomCmdChangeGameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCmdChangeGameModel.h; sourceTree = "<group>"; };
 		6C239FFA27B3AAD900B19FE4 /* RoomCmdChangeGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCmdChangeGameModel.m; sourceTree = "<group>"; };
+		6C75F36A27C348A50019BB74 /* KeyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHeader.h; sourceTree = "<group>"; };
 		6C89D9C9279902A9001D52F9 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
 		6CD6E85227BE37C300D8F76C /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		6CD6E85327BE37C300D8F76C /* LoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
@@ -1080,6 +1081,7 @@
 				6C192E5C279523B100553034 /* Info.plist */,
 				6C192E5D279523B100553034 /* main.m */,
 				6C076EAF279FF37200650209 /* Res */,
+				6C75F36A27C348A50019BB74 /* KeyHeader.h */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1337,6 +1339,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				CLASSPREFIX = "";
 				LastUpgradeCheck = 1310;
+				ORGANIZATIONNAME = "Sud.Tech (https://sud.tech)";
 				TargetAttributes = {
 					6C192E47279523B000553034 = {
 						CreatedOnToolsVersion = 13.1;
@@ -1694,7 +1697,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = P6FVM63RW6;
 				ENABLE_BITCODE = NO;
@@ -1715,7 +1718,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = Dev_Sud_MGP;
@@ -1732,7 +1735,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FVM63RW6;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
@@ -1752,7 +1755,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = Dis_Tech_Sud_Mgp_Hello;
