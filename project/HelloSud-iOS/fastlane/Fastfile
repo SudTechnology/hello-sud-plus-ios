@@ -112,7 +112,7 @@ platform :ios do
       skip_submission: true,
       skip_waiting_for_build_processing: true,
       api_key_path: "fastlane/RV2AG3W74H.json",
-      ipa: "#{OUTPUT_DIR}/#{IPA_NAME}"
+      ipa: "#{TEST_OUTPU_DIR}/#{IPA_NAME}"
     )                  
     puts "Successfully uploaded a new App Store build"
   end
