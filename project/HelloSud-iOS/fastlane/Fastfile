@@ -74,4 +74,34 @@ platform :ios do
     sh("java -jar ../../tool/buglyqq-upload-symbol.jar -appid 0d680b2d4c -appkey fdea2fe7-9b55-48fe-9d14-eb294dd1c4df -bundleid tech.sud.mgp.hello -version #{VERSION_NUM}.#{ENV['CI_BUILD_ID']} -platform IOS -inputSymbol #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
     buildFooter
   end
+
+  lane :buildReleaseIOS do
+    # add actions here: https://docs.fastlane.tools/actions
+    buildHeader
+    build_app(
+      clean: true,
+      include_symbols: true,
+      scheme: "HelloSud-iOS",
+      workspace: "HelloSud-iOS.xcworkspace",
+      include_bitcode: false,
+      configuration: "Release",
+      export_options: {
+        method: "app-store",
+        provisioningProfiles: {
+          "tech.sud.mgp.hello" => "Dev_Sud_MGP"
+        }
+      },
+      xcargs: "-allowProvisioningUpdates",
+      output_directory: TEST_OUTPU_DIR,
+      output_name: IPA_NAME
+    )
+    # 上传符号表到bugly
+    sh("unzip -d #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH} #{TEST_DYSM_DIR}/#{DYSM_NAME}.zip")
+    sh("mkdir #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
+    sh("mv #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud.app.dSYM #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
+    sh("pwd")
+    sh("java -version")
+    sh("java -jar ../../tool/buglyqq-upload-symbol.jar -appid 8385698b84 -appkey 1010766c-9314-490c-8be3-e153c0bfba6f -bundleid tech.sud.mgp.hello -version #{VERSION_NUM}.#{ENV['CI_BUILD_ID']} -platform IOS -inputSymbol #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
+    buildFooter
+  end
 end
