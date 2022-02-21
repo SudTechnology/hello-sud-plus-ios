@@ -218,7 +218,7 @@
 /// 加载游戏
 - (void)initSdk:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
     WeakSelf
-    [SudMGP initSDK:appID appKey:appKey isTestEnv:true listener:^(int retCode, const NSString *retMsg) {
+    [SudMGP initSDK:appID appKey:appKey isTestEnv:GAME_TEST_ENV listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
             NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
             if (weakSelf) {
