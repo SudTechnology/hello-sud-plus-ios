@@ -56,7 +56,7 @@
     HSSettingModel *oProtocolModel = [HSSettingModel new];
     oProtocolModel.title = @"开源协议";
     oProtocolModel.isMore = YES;
-    oProtocolModel.pageURL = @"https://github.com/SudTechnology/hello-sud-ios/license.txt";
+    oProtocolModel.pageURL = [SettingsService appLicenseURL].absoluteString;
     HSSettingModel *userProtocolModel = [HSSettingModel new];
     userProtocolModel.title = @"用户协议";
     userProtocolModel.isMore = YES;
@@ -152,7 +152,7 @@
         };
     } else if ([model.title isEqualToString:@"切换语言"]) {
         [ToastUtil show:@"正在制作中, 敬请期待!"];
-    } else if ([model.title isEqualToString:@"GitHub"] || [model.title isEqualToString:@"开源协议"]) {
+    } else if ([model.title isEqualToString:@"GitHub"]) {
         if (@available(iOS 10.0, *)) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.pageURL] options:@{} completionHandler:nil];
         } else {

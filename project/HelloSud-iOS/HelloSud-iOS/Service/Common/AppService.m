@@ -214,20 +214,34 @@
     NSLog(@"切换RTC厂商:%@", rtcType);
     [AudioEngineFactory.shared.audioEngine unInit];
 
-    if ([rtcType isEqualToString:configModel.zegoCfg.rtcType]) {
+    if (configModel.zegoCfg && [rtcType isEqualToString:configModel.zegoCfg.rtcType]) {
         NSLog(@"使用zego语音引擎");
         /// 使用zego语音引擎
         [AudioEngineFactory.shared createEngine:ZegoAudioEngineImpl.class];
         /// 初始化zego引擎SDK
-        NSDictionary *config = @{@"appID": configModel.zegoCfg.appId, @"appKey": configModel.zegoCfg.appKey};
-        [AudioEngineFactory.shared.audioEngine initWithConfig:config];
-    } else if ([rtcType isEqualToString:configModel.agoraCfg.rtcType]) {
+        NSString *appID = configModel.zegoCfg.appId;
+        NSString *appKey = configModel.zegoCfg.appKey;
+        if (appID.length > 0 && appKey.length > 0) {
+            NSDictionary *config = @{@"appID": appID, @"appKey": appKey};
+            [AudioEngineFactory.shared.audioEngine initWithConfig:config];
+        } else {
+            [ToastUtil show:@"切换zego语音引擎失败，对应配置为空"];
+        }
+    } else if (configModel.agoraCfg && [rtcType isEqualToString:configModel.agoraCfg.rtcType]) {
         NSLog(@"使用agora语音引擎");
         /// 使用agora语音引擎
         [AudioEngineFactory.shared createEngine:AgoraAudioEngineImpl.class];
         /// 初始化agora引擎SDK
-        NSDictionary *config = @{@"appID": configModel.agoraCfg.appId, @"appKey": configModel.agoraCfg.appKey};
-        [AudioEngineFactory.shared.audioEngine initWithConfig:config];
+        NSString *appID = configModel.agoraCfg.appId;
+        if (appID.length > 0) {
+            NSMutableDictionary *config = NSMutableDictionary.new;
+            config[@"appID"] = appID;
+            [AudioEngineFactory.shared.audioEngine initWithConfig:config];
+        } else {
+            [ToastUtil show:@"切换agora语音引擎失败，对应配置为空"];
+        }
+    } else {
+        [ToastUtil show:@"切换RTC厂商失败，对应配置为空"];
     }
 
 }
