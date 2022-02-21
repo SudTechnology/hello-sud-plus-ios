@@ -13,6 +13,8 @@
 #import "DeviceUtil.h"
 #import "AudioEngineFactory.h"
 #import "LoginViewController.h"
+#import "KeyHeader.h"
+
 @interface AppDelegate () {
     
 }
@@ -42,7 +44,7 @@
 - (void)configBugly {
     NSString *version = [NSString stringWithFormat:@"%@.%@", [DeviceUtil getAppVersion], [DeviceUtil getAppBuildCode]];
     [Bugly updateAppVersion:version];
-    [Bugly startWithAppId:@"0d680b2d4c"];
+    [Bugly startWithAppId:BUGLEY_APP_ID];
 }
 
 #pragma mark - UISceneSession lifecycle
