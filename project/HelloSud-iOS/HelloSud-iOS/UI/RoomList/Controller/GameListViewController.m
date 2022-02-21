@@ -14,6 +14,7 @@
 @property (nonatomic, strong) SearchHeaderView *searchHeaderView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray <HSRoomInfoList *> *dataList;
+@property (nonatomic, strong) UILabel *noDataLabel;
 @end
 
 @implementation GameListViewController
@@ -53,6 +54,7 @@
 - (void)dtAddViews {
     [self.view addSubview:self.searchHeaderView];
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.noDataLabel];
 }
 
 - (void)dtLayoutViews {
@@ -65,6 +67,11 @@
         make.left.mas_equalTo(16);
         make.right.mas_equalTo(-16);
         make.bottom.mas_equalTo(-kTabBarHeight);
+    }];
+    [self.noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.searchHeaderView.mas_bottom).offset(109);
+        make.centerX.mas_equalTo(self.view);
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
 }
 
@@ -92,9 +99,10 @@
             [ToastUtil show:model.retMsg];
             return;
         }
-        [self.dataList removeAllObjects];
+        [weakSelf.dataList removeAllObjects];
         [weakSelf.dataList addObjectsFromArray:model.roomInfoList];
         [weakSelf.tableView reloadData];
+        weakSelf.noDataLabel.hidden = weakSelf.dataList.count != 0;
     } failure:^(id error) {
         [ToastUtil show:@"网络错误"];
     }];
@@ -146,6 +154,19 @@
         _dataList = [NSMutableArray array];
     }
     return _dataList;
+}
+
+- (UILabel *)noDataLabel {
+    if (!_noDataLabel) {
+        _noDataLabel = UILabel.new;
+        _noDataLabel.text = @"暂无房间开播\n去首页创建一个吧~";
+        _noDataLabel.textColor = [UIColor dt_colorWithHexString:@"#8A8A8E" alpha:1];
+        _noDataLabel.font = UIFONT_REGULAR(14);
+        _noDataLabel.numberOfLines = 0;
+        _noDataLabel.textAlignment = NSTextAlignmentCenter;
+        _noDataLabel.hidden = true;
+    }
+    return _noDataLabel;
 }
 
 @end
