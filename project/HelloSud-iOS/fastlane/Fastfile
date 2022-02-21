@@ -104,4 +104,16 @@ platform :ios do
     sh("java -jar ../../tool/buglyqq-upload-symbol.jar -appid 8385698b84 -appkey 1010766c-9314-490c-8be3-e153c0bfba6f -bundleid tech.sud.mgp.hello -version #{VERSION_NUM}.#{ENV['CI_BUILD_ID']} -platform IOS -inputSymbol #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
     buildFooter
   end
+
+  lane :appstore do
+    # upload your app to App Store Connect
+    puts "publish to appstore"
+    upload_to_testflight(
+      skip_submission: true,
+      skip_waiting_for_build_processing: true,
+      api_key_path: "fastlane/RV2AG3W74H.json",
+      ipa: "#{OUTPUT_DIR}/#{IPA_NAME}"
+    )                  
+    puts "Successfully uploaded a new App Store build"
+  end
 end
