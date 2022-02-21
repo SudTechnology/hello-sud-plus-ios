@@ -43,6 +43,7 @@
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
+    WeakSelf
     [HttpService postRequestWithApi:kINTERACTURL(@"room/create-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
         self.isReqCreate = NO;
         EnterRoomModel *model = [EnterRoomModel decodeModel:rootDict];
@@ -50,7 +51,7 @@
             [ToastUtil show:model.errorMsg];
             return;
         }
-        [self reqEnterRoom:model.roomId success:nil fail:nil];
+        [weakSelf reqEnterRoom:model.roomId success:nil fail:nil];
     } failure:^(id error) {
         self.isReqCreate = NO;
         [ToastUtil show:[error debugDescription]];
@@ -146,7 +147,7 @@
 /// @param micIndex 麦位索引
 /// @param handleType 0：上麦 1: 下麦
 - (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
-    
+    WeakSelf
     [HttpService postRequestWithApi:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
         SwitchMicModel *model = [SwitchMicModel decodeModel:rootDict];
         if (model.retCode != 0) {
@@ -158,15 +159,15 @@
         }
         if (handleType == 0) {
             RoomCmdUpMicModel *upMicModel = [RoomCmdUpMicModel makeUpMicMsgWithMicIndex:micIndex];
-            self.micIndex = micIndex;
+            weakSelf.micIndex = micIndex;
             upMicModel.roleType = self.roleType;
             upMicModel.streamID = model.streamId;
-            [self.currentRoomVC sendMsg:upMicModel isAddToShow:NO];
+            [weakSelf.currentRoomVC sendMsg:upMicModel isAddToShow:NO];
         } else {
-            self.micIndex = -1;
+            weakSelf.micIndex = -1;
             RoomCmdUpMicModel *downMicModel = [RoomCmdUpMicModel makeDownMicMsgWithMicIndex:micIndex];
             downMicModel.streamID = nil;
-            [self.currentRoomVC sendMsg:downMicModel isAddToShow:NO];
+            [weakSelf.currentRoomVC sendMsg:downMicModel isAddToShow:NO];
         }
         if (success) {
             success();
