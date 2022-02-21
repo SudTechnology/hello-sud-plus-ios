@@ -11,9 +11,11 @@
 #if DEBUG
 #define InteractURL      @"https://fat-interact.sud.tech"
 #define BaseURL          @"https://fat-base.sud.tech"
+#define GAME_TEST_ENV    YES
 #else
 #define InteractURL      @"https://interact-hello-sud.sud.tech"
 #define BaseURL          @"https://base-hello-sud.sud.tech"
+#define GAME_TEST_ENV    NO
 #endif
 
 #define kBASEURL(url) [NSString stringWithFormat:@"%@/%@",BaseURL, url]
