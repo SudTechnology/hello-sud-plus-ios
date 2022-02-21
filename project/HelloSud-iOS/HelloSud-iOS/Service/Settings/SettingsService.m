@@ -19,4 +19,9 @@
     NSString *path = [NSBundle.mainBundle pathForResource:@"user_protocol" ofType:@"html" inDirectory:@"Res"];
     return [NSURL fileURLWithPath:path];
 }
+/// 开源协议
++ (NSURL *)appLicenseURL {
+    NSString *path = [NSBundle.mainBundle pathForResource:@"license" ofType:@"html" inDirectory:@"Res"];
+    return [NSURL fileURLWithPath:path];
+}
 @end
