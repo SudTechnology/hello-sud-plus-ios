@@ -393,6 +393,7 @@
 		6C239FF727B39CBE00B19FE4 /* OneOneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOneViewController.m; sourceTree = "<group>"; };
 		6C239FF927B3AAD900B19FE4 /* RoomCmdChangeGameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCmdChangeGameModel.h; sourceTree = "<group>"; };
 		6C239FFA27B3AAD900B19FE4 /* RoomCmdChangeGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCmdChangeGameModel.m; sourceTree = "<group>"; };
+		6C75F36A27C348A50019BB74 /* KeyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHeader.h; sourceTree = "<group>"; };
 		6C89D9C9279902A9001D52F9 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
 		6CD6E85227BE37C300D8F76C /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		6CD6E85327BE37C300D8F76C /* LoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
@@ -1080,6 +1081,7 @@
 				6C192E5C279523B100553034 /* Info.plist */,
 				6C192E5D279523B100553034 /* main.m */,
 				6C076EAF279FF37200650209 /* Res */,
+				6C75F36A27C348A50019BB74 /* KeyHeader.h */,
 			);
 			path = App;
 			sourceTree = "<group>";
