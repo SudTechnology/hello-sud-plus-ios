@@ -88,7 +88,7 @@ platform :ios do
       export_options: {
         method: "app-store",
         provisioningProfiles: {
-          "tech.sud.mgp.hello" => "Dev_Sud_MGP"
+          "tech.sud.mgp.hello" => "Dis_Tech_Sud_Mgp_Hello"
         }
       },
       xcargs: "-allowProvisioningUpdates",
