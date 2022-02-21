@@ -1,0 +1,10 @@
+{
+    "portrait": {
+        "align": 2,
+        "path": "sud_mp4.mp4"
+    },
+    "landscape": {
+        "align": 8,
+        "path": "sud_mp4.mp4"
+    }
+}
