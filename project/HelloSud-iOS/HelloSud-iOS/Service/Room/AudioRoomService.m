@@ -7,6 +7,11 @@
 
 #import "AudioRoomService.h"
 
+@interface AudioRoomService()
+@property(nonatomic, assign)BOOL isReqCreate;
+@property(nonatomic, assign)BOOL isReqEnter;
+@end
+
 @implementation AudioRoomService
 + (instancetype)shared {
     static AudioRoomService *g_manager = nil;
@@ -22,18 +27,24 @@
 - (void)resetRoomInfo {
     self.roleType = 0;
     self.micIndex = -1;
+    self.currentRoomVC = nil;
 }
 
 /// 请求创建房间
 /// @param sceneType 场景类型
 - (void)reqCreateRoom:(NSInteger)sceneType {
-
+    if (self.isReqCreate) {
+        NSLog(@"there is req create room, so skip it");
+        return;
+    }
+    self.isReqCreate = YES;
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"sceneType"] = @(sceneType);
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
     [HttpService postRequestWithApi:kINTERACTURL(@"room/create-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
+        self.isReqCreate = NO;
         EnterRoomModel *model = [EnterRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
@@ -41,6 +52,7 @@
         }
         [self reqEnterRoom:model.roomId success:nil fail:nil];
     } failure:^(id error) {
+        self.isReqCreate = NO;
         [ToastUtil show:[error debugDescription]];
     }];
 }
@@ -49,12 +61,18 @@
 /// @param roomId 房间ID
 - (void)reqEnterRoom:(long)roomId success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
+    if (self.isReqEnter) {
+        NSLog(@"there is req enter room, so skip it");
+        return;
+    }
+    self.isReqEnter = YES;
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"roomId"] = @(roomId);
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
     [HttpService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
+        self.isReqEnter = NO;
         EnterRoomModel *model = [EnterRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
@@ -71,6 +89,7 @@
             success();
         }
     } failure:^(id error) {
+        self.isReqEnter = NO;
         [ToastUtil show:[error debugDescription]];
         if (fail) {
             fail(error);
