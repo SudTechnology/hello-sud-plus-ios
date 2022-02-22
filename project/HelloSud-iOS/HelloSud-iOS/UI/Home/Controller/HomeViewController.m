@@ -209,6 +209,11 @@
 
 #pragma mark - UICollectionViewDelegate
 
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
+    return (model.isBlank || model.isGameWait) ? NO : YES;
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
