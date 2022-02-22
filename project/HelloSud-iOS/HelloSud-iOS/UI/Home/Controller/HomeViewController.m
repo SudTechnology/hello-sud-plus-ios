@@ -127,8 +127,9 @@
                 [arr addObject:model.gameList[i]];
             }
         }
-        NSSet *set = [NSSet setWithArray:originalGameArr];
-        AppService.shared.gameList = [set allObjects];
+//        NSSet *set = [NSSet setWithArray:originalGameArr];
+//        AppService.shared.gameList = [set allObjects];
+        AppService.shared.gameList = originalGameArr;
         AppService.shared.sceneList = model.sceneList;
         
         /// dataList  headerGameList  headerSceneList 业务需求赋值
