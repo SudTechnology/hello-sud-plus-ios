@@ -268,9 +268,9 @@
     
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues: dataJson];
-        [self updateCommonPlayerIn:m userId:userId];
         /// 更新
         [self setValueGamePlayerStateMap:userId state:state model:m];
+        [self updateCommonPlayerIn:m userId:userId];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerIn:userId:model:)]) {
             [self.listener onPlayerMGCommonPlayerIn:handle userId:userId model:m];
             return;
@@ -492,6 +492,15 @@
     if ([mapModel.state isEqualToString:MG_COMMON_PLAYER_PLAYING] && [mapModel.model isKindOfClass:MGCommonPlayerPlayingModel.class]) {
         MGCommonPlayerPlayingModel *m = mapModel.model;
         return m.isPlaying;
+    }
+    return false;
+}
+
+/// 获取用户是否已经加入了游戏
+- (BOOL)isPlayerInGame:(NSString *)userId {
+    MGPlayerStateMapModel *mapModel = [self.gamePlayerStateMap objectForKey:userId];
+    if (mapModel != nil) {
+        return true;
     }
     return false;
 }

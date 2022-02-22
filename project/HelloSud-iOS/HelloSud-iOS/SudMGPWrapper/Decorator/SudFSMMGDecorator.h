@@ -74,6 +74,8 @@ typedef NS_ENUM(NSInteger, GameStateType) {
 - (BOOL)isPlayerIsPlaying:(NSString *)userId;
 /// 获取用户是否在队长
 - (BOOL)isPlayerIsCaptain:(NSString *)userId;
+/// 获取用户是否已经加入了游戏
+- (BOOL)isPlayerInGame:(NSString *)userId;
 @end
 
 NS_ASSUME_NONNULL_END
