@@ -98,7 +98,8 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = HEX_COLOR(@"#F5F6FB");
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+        _tableView.showsHorizontalScrollIndicator = NO;
+        _tableView.showsVerticalScrollIndicator = NO;
         _tableView.tableFooterView = self.contactUsView;
         
     }
