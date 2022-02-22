@@ -236,7 +236,7 @@
         v.operateCallback = ^(NSString *str) {
             if (isGameing) {
                 [DTSheetView close];
-                [DTAlertView showTextAlert:@"当前正在游戏中，是否离开？" sureText:@"离开" cancelText:@"返回游戏" onSureCallback:^{
+                [DTAlertView showTextAlert:@"当前正在游戏中，是否逃跑？" sureText:@"确认逃跑" cancelText:@"返回游戏" onSureCallback:^{
                     // 下麦
                     [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
                     
