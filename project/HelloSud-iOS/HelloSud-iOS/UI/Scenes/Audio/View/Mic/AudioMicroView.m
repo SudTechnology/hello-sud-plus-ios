@@ -235,14 +235,16 @@
         [self.gamingImageView setHidden:true];
         [self.gameStateLabel setHidden:true];
         
-        if ([self.iSudFSMMG isPlayerIsReady:self.model.user.userID]) {
+        /// 是否是在准备
+        if ([self.iSudFSMMG isPlayerIsReady:self.model.user.userID] == 1) {
             [self.gameStateLabel setHidden:false];
             self.gameStateLabel.text = @"已准备";
             self.gameStateLabel.textColor = [UIColor whiteColor];
             self.gameStateLabel.backgroundColor =  [UIColor dt_colorWithHexString: @"#13AD21" alpha:1];
             self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
         } else {
-            if ([self.iSudFSMMG isPlayerIn:self.model.user.userID]) {
+            /// 是否还在游戏中
+            if ([self.iSudFSMMG isPlayerInGame:self.model.user.userID]) {
                 [self.gameStateLabel setHidden:false];
                 self.gameStateLabel.text = @"未准备";
                 self.gameStateLabel.textColor = [UIColor whiteColor];
@@ -253,6 +255,7 @@
             }
         }
         if ([self.iSudFSMMG isPlayerIsPlaying:self.model.user.userID]) {
+            [self hiddenGameNode:false];
             [self.gamingImageView setHidden:false];
         } else {
             [self.gamingImageView setHidden:true];
