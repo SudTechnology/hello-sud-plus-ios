@@ -66,6 +66,7 @@ typedef NS_ENUM(NSInteger, GameStateType) {
 /// 2MG失败回调
 - (NSString *)handleMGFailure;
 
+#pragma mark - 获取gamePlayerStateMap中最新的一个状态
 /// 获取用户加入状态
 - (BOOL)isPlayerIn:(NSString *)userId;
 /// 获取用户是否在准备中
@@ -74,6 +75,8 @@ typedef NS_ENUM(NSInteger, GameStateType) {
 - (BOOL)isPlayerIsPlaying:(NSString *)userId;
 /// 获取用户是否在队长
 - (BOOL)isPlayerIsCaptain:(NSString *)userId;
+
+#pragma mark - 获取是否存在gamePlayerStateMap中 （用于判断用户是否在游戏里了）
 /// 获取用户是否已经加入了游戏
 - (BOOL)isPlayerInGame:(NSString *)userId;
 @end
