@@ -539,6 +539,7 @@
     }
     [self reqMicList];
     [self.naviView hiddenNodeWithRoleType: AudioRoomService.shared.roleType];
+    [self dtUpdateUI];
 }
 
 - (BOOL)isInMic {
