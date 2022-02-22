@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 礼物消息model
 @interface RoomCmdSendGiftModel : RoomBaseCMDModel
 /// 接受者
-@property(nonatomic, assign)AudioUserModel *toUser;
+@property(nonatomic, strong)AudioUserModel *toUser;
 /// 礼物ID
 @property(nonatomic, assign)NSInteger giftID;
 /// 礼物数量
