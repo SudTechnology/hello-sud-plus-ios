@@ -1,5 +1,5 @@
 //
-//  MGCommonModel.h
+//  SudMGPMGState.h
 //  HelloSud-iOS
 //
 // Copyright © Sud.Tech (https://sud.tech)
