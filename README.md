@@ -10,7 +10,7 @@
 #
 ## 3. 快速运行示例方法
 
-### 3.1 使用Sud官方部署的hello-sud-plus-java服务，且使用HelloSud的appId、appKey、applicationId(Android)、bundleID(iOS)
+### 方法1：使用Sud官方部署的hello-sud-plus-java服务，且使用HelloSud的appId、appKey、applicationId(Android)、bundleID(iOS)
         
         Android 
            1. Android Studio打开hello-sud-android-v1.1.1/project
@@ -22,7 +22,7 @@
            3. xcode打开HelloSud-iOS.xcworkspace
            4. run
 
-### 3.2 使用APP接入方部署的hello-sud-plus-java服务，且使用HelloSud的appId、appKey、applicationId(Android)、bundleID(iOS)
+### 方法2：使用APP接入方部署的hello-sud-plus-java服务，且使用HelloSud的appId、appKey、applicationId(Android)、bundleID(iOS)
         
         Android
            1. Android Studio打开hello-sud-android-v1.1.1/project
@@ -35,7 +35,7 @@
            3. xcode打开HelloSud-iOS.xcworkspace
            4. 将https://base-hello-sud.sud.tech/和https://interact-hello-sud.sud.tech/替换成APP接入方部署的hello-sud-plus-java服务地址
            5. run
-### 3.3 使用APP接入方部署的hello-sud-plus-java服务，且使用APP接入方自己的appId、appKey、applicationId(Android)、bundleID(iOS)
+### 方法3：使用APP接入方部署的hello-sud-plus-java服务，且使用APP接入方自己的appId、appKey、applicationId(Android)、bundleID(iOS)
         
         Android 
            1. Android Studio打开hello-sud-android-v1.1.1/project
