@@ -10,6 +10,7 @@
 @interface AudioRoomService()
 @property(nonatomic, assign)BOOL isReqCreate;
 @property(nonatomic, assign)BOOL isReqEnter;
+@property(nonatomic, assign)BOOL isMatchingRoom;
 @end
 
 @implementation AudioRoomService
@@ -79,8 +80,13 @@
             [ToastUtil show:model.errorMsg];
             return;
         }
+        if (AudioRoomService.shared.currentRoomVC != nil) {
+            NSLog(@"there is a AudioRoomViewController in the stack");
+            return;
+        }
         weakSelf.roleType = model.roleType;
         AudioRoomViewController *vc = [[AudioRoomViewController alloc] init];
+        AudioRoomService.shared.currentRoomVC = vc;
         vc.gameId = model.gameId;
         vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
         vc.roomType = model.gameId == 0 ? HSAudio : HSGame;
@@ -118,6 +124,11 @@
 /// @param gameId 游戏ID
 - (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType {
     WeakSelf
+    if (self.isMatchingRoom) {
+        NSLog(@"there is req match room, so skip it");
+        return;
+    }
+    self.isMatchingRoom = YES;
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"gameId"] = @(gameId);
     dicParam[@"sceneType"] = @(sceneType);
@@ -125,13 +136,19 @@
         dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
     [HttpService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
+        weakSelf.isMatchingRoom = NO;
         MatchRoomModel *model = [MatchRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [ToastUtil show:model.errorMsg];
             return;
         }
+        if (AudioRoomService.shared.currentRoomVC != nil) {
+            NSLog(@"there is a AudioRoomViewController in the stack");
+            return;
+        }
         weakSelf.roleType = model.roleType;
         AudioRoomViewController *vc = [[AudioRoomViewController alloc] init];
+        AudioRoomService.shared.currentRoomVC = vc;
         vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
         vc.gameId = model.gameId;
         vc.roomType = model.gameId == 0 ? HSAudio : HSGame;
@@ -139,6 +156,7 @@
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];
+        weakSelf.isMatchingRoom = NO;
     }];
 }
 
