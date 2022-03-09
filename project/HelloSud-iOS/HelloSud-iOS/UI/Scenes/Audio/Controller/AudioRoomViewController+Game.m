@@ -199,8 +199,6 @@
         self.roomType = HSAudio;
         return;
     }
-    /// 退出游戏
-    [self logoutGame];
     /// 更新gameID
     self.gameId = gameID;
     self.roomType = HSGame;
@@ -218,6 +216,7 @@
 /// 加载游戏
 - (void)initSdk:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
     WeakSelf
+    [self logoutGame];
     [SudMGP initSDK:appID appKey:appKey isTestEnv:GAME_TEST_ENV listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
             NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
