@@ -8,6 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ISudFSTAPP;
 @protocol ISudFSMMG;
+@protocol ISudCfg;
 
 @interface SudMGP : NSObject
 
@@ -16,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @return 示例:"1.1.35.286"
  */
 + (NSString*_Nonnull)getVersion;
+
++ (id<ISudCfg>_Nonnull)getCfg;
 
 /**
  * 初始化SDK
