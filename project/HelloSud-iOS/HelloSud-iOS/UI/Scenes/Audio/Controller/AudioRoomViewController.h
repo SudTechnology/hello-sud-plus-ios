@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, RoomType) {
 - (void)handleGameUpMic;
 
 /// 游戏开关麦
-- (void)handleGameTapVoice;
+- (void)handleGameTapVoice: (BOOL)isOn;
 @end
 
 NS_ASSUME_NONNULL_END
