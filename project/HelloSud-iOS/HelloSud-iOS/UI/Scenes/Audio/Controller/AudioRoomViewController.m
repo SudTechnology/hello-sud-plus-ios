@@ -348,7 +348,7 @@
 }
 
 /// 游戏开关麦
-- (void)handleGameTapVoice: (BOOL)isOn {
+- (void)handleGameTapVoice:(BOOL)isOn {
     // 只有开启、关闭声音的状态时才响应
     if (self.operatorView.voiceBtnState == VoiceBtnStateTypeWaitOpen && isOn) {
         [self handleTapVoice];

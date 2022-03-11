@@ -132,12 +132,21 @@
 
 /// 游戏: 麦克风状态   MG_COMMON_GAME_SELF_MICROPHONE
 - (void)onGameMGCommonGameSelfMicrophone:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameSelfMicrophone *)model {
-    [self handleGameTapVoice];
+    [self handleGameTapVoice: model.isOn];
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 游戏: 耳机（听筒，扬声器）状态   MG_COMMON_GAME_SELF_HEADEPHONE
 - (void)onGameMGCommonGameSelfHeadphone:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameSelfHeadphone *)model {
+    if (model.isOn) {
+        [self.dicMicModel.allValues enumerateObjectsUsingBlock:^(AudioRoomMicModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [AudioEngineFactory.shared.audioEngine startPlayingStream:obj.streamID];
+        }];
+    } else {
+        [self.dicMicModel.allValues enumerateObjectsUsingBlock:^(AudioRoomMicModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [AudioEngineFactory.shared.audioEngine stopPlayingStream:obj.streamID];
+        }];
+    }
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
