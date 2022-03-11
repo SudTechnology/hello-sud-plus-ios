@@ -347,6 +347,18 @@
     
 }
 
+/// 游戏开关麦
+- (void)handleGameTapVoice: (BOOL)isOn {
+    // 只有开启、关闭声音的状态时才响应
+    if (self.operatorView.voiceBtnState == VoiceBtnStateTypeWaitOpen && isOn) {
+        [self handleTapVoice];
+    } else if (self.operatorView.voiceBtnState == VoiceBtnStateTypeOnVoice && !isOn){
+        [self handleTapVoice];
+    }else {
+        NSLog(@"handleGameTapVoice， 当前状态不处开关麦状态，state:%@, isOn:%@", @(self.operatorView.voiceBtnState), @(isOn));
+    }
+}
+
 
 /// 游戏触发上麦
 - (void)handleGameUpMic {

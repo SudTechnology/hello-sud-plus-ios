@@ -130,6 +130,18 @@
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
+/// 游戏: 麦克风状态   MG_COMMON_GAME_SELF_MICROPHONE
+- (void)onGameMGCommonGameSelfMicrophone:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameSelfMicrophone *)model {
+    [self handleGameTapVoice];
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+}
+
+/// 游戏: 耳机（听筒，扬声器）状态   MG_COMMON_GAME_SELF_HEADEPHONE
+- (void)onGameMGCommonGameSelfHeadphone:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameSelfHeadphone *)model {
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+}
+
+
 #pragma mark =======Comonn状态处理=======
 /// 公屏消息状态 ---> 添加公屏消息
 - (void)updateCommonPublicMessageAddMsg:(MGCommonPublicMessageModel *)model {
