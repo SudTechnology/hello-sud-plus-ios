@@ -17,6 +17,8 @@
 @property (nonatomic, strong) RoomMsgBgView *msgBgView;
 @property (nonatomic, strong) RoomMsgTableView *msgTableView;
 @property (nonatomic, strong) RoomInputView *inputView;
+/// 是否游戏禁言
+@property (nonatomic, assign)BOOL isGameForbiddenVoice;
 /// 主播视图列表
 @property (nonatomic, strong) NSArray <AudioMicroView *> *arrAnchorView;
 
@@ -120,6 +122,10 @@
     };
     self.operatorView.voiceTapBlock = ^(UIButton *sender) {
         // 上麦点击
+        if (weakSelf.isGameForbiddenVoice) {
+            [ToastUtil show:@"当前不能发言"];
+            return;
+        }
         [weakSelf handleTapVoice];
     };
     self.inputView.inputMsgBlock = ^(NSString * _Nonnull msg) {
@@ -356,6 +362,16 @@
         [self handleTapVoice];
     }else {
         NSLog(@"handleGameTapVoice， 当前状态不处开关麦状态，state:%@, isOn:%@", @(self.operatorView.voiceBtnState), @(isOn));
+    }
+    BOOL isPlaying = [self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID];
+    NSLog(@"handleGameTapVoice, isPlaying:%@, isOn:%@", @(isPlaying), @(isOn));
+    if (isOn) {
+        self.isGameForbiddenVoice = NO;
+    } else {
+        if (isPlaying) {
+            // 正在游戏中，而且游戏关闭麦克风，此时标记游戏禁止发言
+            self.isGameForbiddenVoice = YES;
+        }
     }
 }
 
