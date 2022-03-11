@@ -17,8 +17,6 @@
 @property (nonatomic, strong) RoomMsgBgView *msgBgView;
 @property (nonatomic, strong) RoomMsgTableView *msgTableView;
 @property (nonatomic, strong) RoomInputView *inputView;
-/// 是否游戏禁言
-@property (nonatomic, assign)BOOL isGameForbiddenVoice;
 /// 主播视图列表
 @property (nonatomic, strong) NSArray <AudioMicroView *> *arrAnchorView;
 
