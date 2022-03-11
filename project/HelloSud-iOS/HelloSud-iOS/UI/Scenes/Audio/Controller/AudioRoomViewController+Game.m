@@ -214,6 +214,7 @@
 /// @param gameID 新的游戏ID
 - (void)handleGameChange:(NSInteger)gameID {
     [self.sudFSMMGDecorator clearAllStates];
+    self.isGameForbiddenVoice = NO;
     if (gameID == 0) {
         // 切换语音房间
         self.gameId = 0;

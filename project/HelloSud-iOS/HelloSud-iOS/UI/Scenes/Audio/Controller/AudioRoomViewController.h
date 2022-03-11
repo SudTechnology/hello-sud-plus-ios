@@ -83,6 +83,8 @@ typedef NS_ENUM(NSInteger, RoomType) {
 
 /// 游戏在线人数
 @property (nonatomic, strong) UILabel *gameNumLabel;
+/// 是否游戏禁言
+@property (nonatomic, assign)BOOL isGameForbiddenVoice;
 
 /// 是否在座位上
 - (BOOL)isInMic;
