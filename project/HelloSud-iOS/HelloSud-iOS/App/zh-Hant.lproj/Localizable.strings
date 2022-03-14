@@ -7,3 +7,22 @@
 */
 
 /// 登录
+"login_" = "";
+"login_welcome_helloSud" = "欢迎使用HelloSud";
+"login_we_take_information" = "我们非常重视您的个人信息保护。关于个人信息收集和使用的详细信息，您可以点击";
+"login_user_agreement" = "《用户协议》";
+"login_and" = "和";
+"login_privacy_policy" = "《隐私政策》";
+"login_click_agree_agreement" = "进行了解。点击同意及表示您已阅读并同意全部上述协议";
+"login_welcome_to_the" = "欢迎体验";
+"login_your_nickname" = "你的昵称";
+"login_experience_immediately" = "立即体验";
+"login_warm_prompt" = "温馨提示";
+"login_warm_prompt_des" = "HelloSud仅会将您的信息用于提供服务和改善体验，我们将全力保障您的信息安全，请同意后使用。\n若您不同意本隐私政策，很遗憾我们将无法为您提供完整的产品和服务";
+"login_agree_continue" = "同意并继续使用";
+"login_quit_application" = "退出应用";
+
+/// common
+"common_" = "";
+"common_agree" = "同意";
+"common_not_agree" = "不同意";
