@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   HelloSud-iOS
 
@@ -6,23 +6,44 @@
   Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
 */
 
-/// 登录
-"login_" = "";
-"login_welcome_helloSud" = "欢迎使用HelloSud";
-"login_we_take_information" = "我们非常重视您的个人信息保护。关于个人信息收集和使用的详细信息，您可以点击";
-"login_user_agreement" = "《用户协议》";
-"login_and" = "和";
-"login_privacy_policy" = "《隐私政策》";
-"login_click_agree_agreement" = "进行了解。点击同意及表示您已阅读并同意全部上述协议";
-"login_welcome_to_the" = "欢迎体验";
-"login_your_nickname" = "你的昵称";
-"login_experience_immediately" = "立即体验";
-"login_warm_prompt" = "温馨提示";
-"login_warm_prompt_des" = "HelloSud仅会将您的信息用于提供服务和改善体验，我们将全力保障您的信息安全，请同意后使用。\n若您不同意本隐私政策，很遗憾我们将无法为您提供完整的产品和服务";
-"login_agree_continue" = "同意并继续使用";
-"login_quit_application" = "退出应用";
+/// Login
+"dt_login_welcome_helloSud" = "欢迎使用HelloSud";
+"dt_login_we_take_information" = "我们非常重视您的个人信息保护。关于个人信息收集和使用的详细信息，您可以点击";
+"dt_login_user_agreement" = "《用户协议》";
+"dt_login_and" = "和";
+"dt_login_privacy_policy" = "《隐私政策》";
+"dt_login_click_agree_agreement" = "进行了解。点击同意及表示您已阅读并同意全部上述协议";
+"dt_login_welcome_to_the" = "欢迎体验";
+"dt_login_your_nickname" = "你的昵称";
+"dt_login_experience_immediately" = "立即体验";
+"dt_login_warm_prompt" = "温馨提示";
+"dt_login_warm_prompt_des" = "HelloSud仅会将您的信息用于提供服务和改善体验，我们将全力保障您的信息安全，请同意后使用。\n若您不同意本隐私政策，很遗憾我们将无法为您提供完整的产品和服务";
+"dt_login_agree_continue" = "同意并继续使用";
+"dt_login_quit_application" = "退出应用";
+
+/// Settings
+"dt_settings_total" = "总";
+"dt_settings_size_occupied" = "占用大小";
+"dt_settings_set" = "设置";
+"dt_settings_version_info" = "版本信息";
+"dt_settings_switch_rtc " = "切换RTC服务商";
+"dt_settings_zego" = "即构";
+"dt_settings_agora" = "声网";
+"dt_settings_net_ease" = "网易云信";
+"dt_settings_volcano" = "火山";
+"dt_settings_alicloud" = "阿里云";
+"dt_settings_tencent" = "腾讯";
+"dt_settings_switch_language" = "切换语言";
+"dt_settings_open_source" = "开源协议";
+"dt_settings_user_agreement" = "用户协议";
+"dt_settings_privacy_policy" = "隐私政策";
+"dt_settings_contact_us" = "如需要了解更多资讯或反馈问题，可通过邮箱联系我们：\nhelp@sud.tech";
+"dt_settings_work_in_progress" = "正在制作中, 敬请期待!";
+"dt_settings_confirm_switch_rtc" = "确认将RTC服务商切换为";
+
 
 /// common
-"common_" = "";
-"common_agree" = "同意";
-"common_not_agree" = "不同意";
+"dt_common_agree" = "同意";
+"dt_common_not_agree" = "不同意";
+"dt_common_sure" = "确定";
+"dt_common_cancel" = "取消";
