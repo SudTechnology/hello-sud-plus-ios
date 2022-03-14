@@ -30,5 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)common_agree;
 + (NSString *)common_not_agree;
 
+// Main
++ (NSString *)dt_tab_home;
++ (NSString *)dt_tab_room;
++ (NSString *)dt_tab_setting;
+
 @end
 NS_ASSUME_NONNULL_END
