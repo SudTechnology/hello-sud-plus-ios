@@ -148,11 +148,11 @@
         }
     }
     if (arrWaitForSend.count == 0) {
-        [ToastUtil show:@"请选择收礼人"];
+        [ToastUtil show:NSString.dt_select_person];
         return;
     }
     if (!self.giftContentView.didSelectedGift) {
-        [ToastUtil show:@"请选择一个礼物"];
+        [ToastUtil show:NSString.dt_select_gift];
         return;
     }
     for (AudioUserModel *user in arrWaitForSend) {
@@ -280,7 +280,7 @@
 - (UILabel *)sendToLabel {
     if (!_sendToLabel) {
         _sendToLabel = [[UILabel alloc] init];
-        _sendToLabel.text = @"送给";
+        _sendToLabel.text = NSString.dt_send;
         _sendToLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _sendToLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
     }
@@ -290,8 +290,8 @@
 - (UIButton *)checkAllBtn {
     if (!_checkAllBtn) {
         _checkAllBtn = [[UIButton alloc] init];
-        [_checkAllBtn setTitle:@"全选" forState:UIControlStateNormal];
-        [_checkAllBtn setTitle:@"取消" forState:UIControlStateSelected];
+        [_checkAllBtn setTitle:NSString.dt_common_select_all forState:UIControlStateNormal];
+        [_checkAllBtn setTitle:NSString.dt_common_cancel forState:UIControlStateSelected];
         [_checkAllBtn setTitleColor:[UIColor dt_colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         _checkAllBtn.titleLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
         _checkAllBtn.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
@@ -303,7 +303,7 @@
 - (UIButton *)sendBtn {
     if (!_sendBtn) {
         _sendBtn = [[UIButton alloc] init];
-        [_sendBtn setTitle:@"赠送" forState:UIControlStateNormal];
+        [_sendBtn setTitle:NSString.dt_send_gift forState:UIControlStateNormal];
         [_sendBtn setTitleColor:[UIColor dt_colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         _sendBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         _sendBtn.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
