@@ -353,29 +353,34 @@
 
 /// 游戏开关麦
 - (void)handleGameTapVoice:(BOOL)isOn {
-    // 只有开启、关闭声音的状态时才响应
-    if (self.operatorView.voiceBtnState == VoiceBtnStateTypeWaitOpen && isOn) {
-        [self handleTapVoice];
-    } else if (self.operatorView.voiceBtnState == VoiceBtnStateTypeOnVoice && !isOn){
-        [self handleTapVoice];
-    }else {
-        NSLog(@"handleGameTapVoice， 当前状态不处开关麦状态，state:%@, isOn:%@", @(self.operatorView.voiceBtnState), @(isOn));
-    }
     BOOL isPlaying = [self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID];
-    NSLog(@"handleGameTapVoice, isPlaying:%@, isOn:%@", @(isPlaying), @(isOn));
+    NSLog(@"handleGameTapVoice, isPlaying:%@, isOn:%@, btn state:%@", @(isPlaying), @(isOn), @(self.operatorView.voiceBtnState));
     if (isOn) {
         self.isGameForbiddenVoice = NO;
+        // 游戏同步推流，如果没有推流，同步推流
+        if (self.operatorView.voiceBtnState != VoiceBtnStateTypeOnVoice) {
+            if (self.operatorView.voiceBtnState != VoiceBtnStateTypeWaitOpen) {
+                self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
+            }
+            [self handleTapVoice];
+        }
     } else {
         if (isPlaying) {
             // 正在游戏中，而且游戏关闭麦克风，此时标记游戏禁止发言
             self.isGameForbiddenVoice = YES;
         }
+        // 游戏要禁言，如果开启了声音，禁止掉推流
+        if (self.operatorView.voiceBtnState == VoiceBtnStateTypeOnVoice){
+            [self handleTapVoice];
+        }
     }
+
 }
 
 
 /// 游戏触发上麦
 - (void)handleGameUpMic {
+    NSLog(@"handleGameUpMic");
     if ([self isInMic]) {
         return;
     }
