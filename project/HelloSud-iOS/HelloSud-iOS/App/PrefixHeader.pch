@@ -49,6 +49,7 @@
 #import "GiftService.h"
 #import "AudioRoomService.h"
 #import "GameService.h"
+#import "LocalizedService.h"
 
 #import "LoginService.h"
 #import "SettingsService.h"

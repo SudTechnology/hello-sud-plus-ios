@@ -60,6 +60,7 @@
 		445EAB3C27A1428C000DCC72 /* GameLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445EAB3B27A1428C000DCC72 /* GameLoginModel.m */; };
 		448A6E0027DEED6C00004928 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 448A6DFF27DEED6B00004928 /* InfoPlist.strings */; };
 		448A6E0127DEEDAD00004928 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 448A6E0327DEEDAD00004928 /* Localizable.strings */; };
+		448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */ = {isa = PBXBuildFile; fileRef = 448A6E0A27DEFF3200004928 /* LocalizedService.m */; };
 		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
 		44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF039B2796B70B006EE6AC /* GameViewInfoModel.m */; };
@@ -267,6 +268,8 @@
 		448A6E0227DEEDAD00004928 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		448A6E0427DEEDAF00004928 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		448A6E0527DEEDB000004928 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		448A6E0927DEFF3200004928 /* LocalizedService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalizedService.h; sourceTree = "<group>"; };
+		448A6E0A27DEFF3200004928 /* LocalizedService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalizedService.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* IAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAudioEngine.h; sourceTree = "<group>"; };
 		44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SudMGP.xcframework; sourceTree = "<group>"; };
 		44DF03972796B2C5006EE6AC /* AppUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
@@ -1145,6 +1148,8 @@
 				6C076EA5279F98AA00650209 /* AppService.m */,
 				6C076ED227A274FE00650209 /* UserService.h */,
 				6C076ED327A274FE00650209 /* UserService.m */,
+				448A6E0927DEFF3200004928 /* LocalizedService.h */,
+				448A6E0A27DEFF3200004928 /* LocalizedService.m */,
 				6CD6E87D27C0A36100D8F76C /* ServiceConstHeader.h */,
 			);
 			path = Common;
@@ -1553,6 +1558,7 @@
 				44F29F5927BB98D900F57DEE /* HSSetingHeadItemView.m in Sources */,
 				6C076EC027A0EC2400650209 /* AudioRoomMicModel.m in Sources */,
 				6C076E53279940A400650209 /* MainTabBarController.m in Sources */,
+				448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */,
 				44F29F4D27B21A4D00F57DEE /* AudioMsgSystemModel.m in Sources */,
 				445EAB1D27A0108E000DCC72 /* ExitRoomModel.m in Sources */,
 				BC210868A0B206FC2641B7C6 /* HttpService.m in Sources */,
