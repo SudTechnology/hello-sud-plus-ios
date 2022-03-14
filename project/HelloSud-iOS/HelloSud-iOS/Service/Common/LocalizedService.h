@@ -48,7 +48,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// common
 + (NSString *)dt_common_select_all;
-+ (NSString *)dt_common_cancel;
 + (NSString *)dt_common_agree;
 + (NSString *)dt_common_not_agree;
 + (NSString *)dt_common_sure;
@@ -61,7 +60,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Scenes
 + (NSString *)dt_send;
-+ (NSString *)dt_down_mic;
 + (NSString *)dt_down_mic;
 + (NSString *)dt_up_mic;
 + (NSString *)dt_select_person;

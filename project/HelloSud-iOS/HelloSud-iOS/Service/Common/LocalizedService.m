@@ -47,7 +47,6 @@
 
 /// common
 + (NSString *)dt_common_select_all { return @"dt_common_select_all".localized; }
-+ (NSString *)dt_common_cancel { return @"dt_common_cancel".localized; }
 + (NSString *)dt_common_agree { return @"dt_common_agree".localized; }
 + (NSString *)dt_common_not_agree { return @"dt_common_not_agree".localized; }
 + (NSString *)dt_common_sure { return @"dt_common_sure".localized; }
@@ -60,7 +59,6 @@
 
 /// Scenes
 + (NSString *)dt_send { return @"dt_send".localized; }
-+ (NSString *)dt_down_mic { return @"dt_down_mic".localized; }
 + (NSString *)dt_down_mic { return @"dt_down_mic".localized; }
 + (NSString *)dt_up_mic { return @"dt_up_mic".localized; }
 + (NSString *)dt_select_person { return @"dt_select_person".localized; }
