@@ -41,9 +41,13 @@
 "dt_settings_work_in_progress" = "正在制作中, 敬请期待!";
 "dt_settings_confirm_switch_rtc" = "确认将RTC服务商切换为";
 
-
 /// common
 "dt_common_agree" = "同意";
 "dt_common_not_agree" = "不同意";
 "dt_common_sure" = "确定";
 "dt_common_cancel" = "取消";
+
+// Main
+"dt_tab_home" = "主页";
+"dt_tab_room" = "房间";
+"dt_tab_setting" = "设置";
