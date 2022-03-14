@@ -52,4 +52,9 @@
 + (NSString *)dt_common_sure { return @"dt_common_sure".localized; }
 + (NSString *)dt_common_cancel { return @"dt_common_cancel".localized; }
 
+// Main
++ (NSString *)dt_tab_home { return @"dt_tab_home".localized; }
++ (NSString *)dt_tab_room { return @"dt_tab_room".localized; }
++ (NSString *)dt_tab_setting { return @"dt_tab_setting".localized; }
+
 @end
