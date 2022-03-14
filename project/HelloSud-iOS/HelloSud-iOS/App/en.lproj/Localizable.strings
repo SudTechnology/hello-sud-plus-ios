@@ -7,7 +7,6 @@
 */
 
 /// 登录
-"login_" = "";
 "login_welcome_helloSud" = "欢迎使用HelloSud";
 "login_we_take_information" = "我们非常重视您的个人信息保护。关于个人信息收集和使用的详细信息，您可以点击";
 "login_user_agreement" = "《用户协议》";
@@ -23,6 +22,5 @@
 "login_quit_application" = "退出应用";
 
 /// common
-"common_" = "";
 "common_agree" = "同意";
 "common_not_agree" = "不同意";
