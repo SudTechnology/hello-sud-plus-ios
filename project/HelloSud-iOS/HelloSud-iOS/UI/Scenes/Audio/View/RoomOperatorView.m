@@ -56,13 +56,24 @@
                     // 下麦
                     weakSelf.voiceBtnState = VoiceBtnStateTypeNormal;
                 } else {
-                    weakSelf.voiceBtnState = VoiceBtnStateTypeWaitOpen;
+                    if (weakSelf.voiceBtnState == VoiceBtnStateTypeNormal) {
+                        weakSelf.voiceBtnState = VoiceBtnStateTypeWaitOpen;
+                    }
                 }
+                NSLog(@"NTF_MIC_CHANGED btn state:%@", @(weakSelf.voiceBtnState));
             }
         } else {
             [weakSelf dtUpdateUI];
         }
     }];
+}
+
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
+    BOOL isInMic = [AudioRoomService.shared.currentRoomVC isInMic];
+    if (isInMic && self.voiceBtnState == VoiceBtnStateTypeNormal) {
+        self.voiceBtnState = VoiceBtnStateTypeWaitOpen;
+    }
 }
 
 - (void)setVoiceBtnState:(VoiceBtnStateType)voiceBtnState {
