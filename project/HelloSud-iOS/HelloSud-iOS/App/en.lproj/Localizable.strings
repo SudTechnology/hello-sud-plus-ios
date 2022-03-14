@@ -41,6 +41,13 @@
 "dt_settings_work_in_progress" = "正在制作中, 敬请期待!";
 "dt_settings_confirm_switch_rtc" = "确认将RTC服务商切换为";
 
+/// RoomList
+"dt_room_list_room_number" = "房间号";
+"dt_room_list_users" = "人";
+"dt_room_list_scene" = "场景";
+"dt_room_list_enter" = "进入";
+"dt_room_list_no_room_available" = "暂无房间开播\n去首页创建一个吧~";
+
 /// common
 "dt_common_agree" = "同意";
 "dt_common_not_agree" = "不同意";

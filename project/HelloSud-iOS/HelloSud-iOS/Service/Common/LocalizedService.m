@@ -45,6 +45,12 @@
 + (NSString *)dt_settings_work_in_progress { return @"dt_settings_work_in_progress".localized; }
 + (NSString *)dt_settings_confirm_switch_rtc { return @"dt_settings_confirm_switch_rtc".localized; }
 
+/// RoomList
++ (NSString *)dt_room_list_room_number { return @"dt_room_list_room_number".localized; }
++ (NSString *)dt_room_list_users { return @"dt_room_list_users".localized; }
++ (NSString *)dt_room_list_scene { return @"dt_room_list_scene".localized; }
++ (NSString *)dt_room_list_enter { return @"dt_room_list_enter".localized; }
++ (NSString *)dt_room_list_no_room_available { return @"dt_room_list_no_room_available".localized; }
 
 /// common
 + (NSString *)dt_common_agree { return @"dt_common_agree".localized; }
