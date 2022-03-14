@@ -216,7 +216,7 @@
 - (UITextField *)nameTextField {
     if (!_nameTextField) {
         _nameTextField = [[UITextField alloc] init];
-        _nameTextField.text = @"Mary";
+        _nameTextField.text = @"";
         _nameTextField.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         _nameTextField.textColor = UIColor.blackColor;
         [_nameTextField setUserInteractionEnabled:false];
