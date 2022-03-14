@@ -49,12 +49,24 @@
 "dt_room_list_no_room_available" = "暂无房间开播\n去首页创建一个吧~";
 
 /// common
+"dt_common_select_all" = "全选";
 "dt_common_agree" = "同意";
 "dt_common_not_agree" = "不同意";
 "dt_common_sure" = "确定";
 "dt_common_cancel" = "取消";
 
-// Main
+/// Main
 "dt_tab_home" = "主页";
 "dt_tab_room" = "房间";
 "dt_tab_setting" = "设置";
+
+/// Scenes
+"dt_send" = "送给";
+"dt_down_mic" = "下麦";
+"dt_up_mic" = "上%ld号麦";
+"dt_select_person" = "请选择收礼人";
+"dt_select_gift" = "请选择一个礼物";
+"dt_send_gift" = "赠送";
+"dt_room_owner" = "房主";
+"dt_mic_index" = "%ld麦";
+"dt_mic_name" = "麦";

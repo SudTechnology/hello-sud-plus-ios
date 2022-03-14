@@ -54,15 +54,27 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_room_list_no_room_available;
 
 /// common
++ (NSString *)dt_common_select_all;
 + (NSString *)dt_common_agree;
 + (NSString *)dt_common_not_agree;
 + (NSString *)dt_common_sure;
 + (NSString *)dt_common_cancel;
 
-// Main
+/// Main
 + (NSString *)dt_tab_home;
 + (NSString *)dt_tab_room;
 + (NSString *)dt_tab_setting;
+
+/// Scenes
++ (NSString *)dt_send;
++ (NSString *)dt_down_mic;
++ (NSString *)dt_up_mic;
++ (NSString *)dt_select_person;
++ (NSString *)dt_select_gift;
++ (NSString *)dt_send_gift;
++ (NSString *)dt_room_owner;
++ (NSString *)dt_mic_index;
++ (NSString *)dt_mic_name;
 
 @end
 NS_ASSUME_NONNULL_END
