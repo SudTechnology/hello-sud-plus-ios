@@ -16,13 +16,13 @@
 @implementation SweetPromptView
 
 - (void)dtConfigUI {
-    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"温馨提示\n"];
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", NSString.login_warm_prompt]];
     attrTitle.yy_lineSpacing = 16;
     attrTitle.yy_font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
     attrTitle.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     attrTitle.yy_alignment = NSTextAlignmentCenter;
     
-    NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:@"HelloSud仅会将您的信息用于提供服务和改善体验，我们将全力保障您的信息安全，请同意后使用。\n若您不同意本隐私政策，很遗憾我们将无法为您提供完整的产品和服务"];
+    NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:NSString.login_warm_prompt_des];
     attrStr_0.yy_lineSpacing = 6;
     attrStr_0.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
     attrStr_0.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
@@ -73,7 +73,7 @@
 - (UIButton *)agreeBtn {
     if (!_agreeBtn) {
         _agreeBtn = [[UIButton alloc] init];
-        [_agreeBtn setTitle:@"同意并继续使用" forState:UIControlStateNormal];
+        [_agreeBtn setTitle:NSString.login_agree_continue forState:UIControlStateNormal];
         [_agreeBtn setTitleColor:[UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
         _agreeBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         _agreeBtn.backgroundColor = UIColor.blackColor;
@@ -85,7 +85,7 @@
 - (UIButton *)exitBtn {
     if (!_exitBtn) {
         _exitBtn = [[UIButton alloc] init];
-        [_exitBtn setTitle:@"退出应用" forState:UIControlStateNormal];
+        [_exitBtn setTitle:NSString.login_quit_application forState:UIControlStateNormal];
         [_exitBtn setTitleColor:[UIColor dt_colorWithHexString:@"#666666" alpha:1] forState:UIControlStateNormal];
         _exitBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         [_exitBtn addTarget:self action:@selector(onExitItemEvent:) forControlEvents:UIControlEventTouchUpInside];
