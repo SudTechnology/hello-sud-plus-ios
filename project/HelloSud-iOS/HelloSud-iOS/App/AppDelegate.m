@@ -14,7 +14,6 @@
 #import "AudioEngineFactory.h"
 #import "LoginViewController.h"
 #import "KeyHeader.h"
-#import "NSString+Localized.h"
 
 @interface AppDelegate () {
     
@@ -39,7 +38,6 @@
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     [GiftService.shared loadFromDisk];
-    NSString.login_welcome_helloSud;
     return YES;
 }
 
