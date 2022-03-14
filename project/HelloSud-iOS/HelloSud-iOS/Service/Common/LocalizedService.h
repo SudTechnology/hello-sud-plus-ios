@@ -26,14 +26,48 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)login_agree_continue;
 + (NSString *)login_quit_application;
 
+/// Settings
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
++ (NSString *)settings_;
+
+
 /// common
 + (NSString *)common_agree;
 + (NSString *)common_not_agree;
++ (NSString *)dt_common_select_all;
++ (NSString *)dt_common_cancel;
 
-// Main
+/// Main
 + (NSString *)dt_tab_home;
 + (NSString *)dt_tab_room;
 + (NSString *)dt_tab_setting;
+
+/// Scenes
++ (NSString *)dt_send;
++ (NSString *)dt_down_mic;
++ (NSString *)dt_down_mic;
++ (NSString *)dt_up_mic;
++ (NSString *)dt_select_person;
++ (NSString *)dt_select_gift;
++ (NSString *)dt_send_gift;
++ (NSString *)dt_room_owner;
++ (NSString *)dt_mic_index;
++ (NSString *)dt_mic_name;
 
 @end
 NS_ASSUME_NONNULL_END
