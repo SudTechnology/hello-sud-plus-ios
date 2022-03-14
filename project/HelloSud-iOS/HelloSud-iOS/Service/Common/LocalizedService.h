@@ -46,6 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_settings_work_in_progress;
 + (NSString *)dt_settings_confirm_switch_rtc;
 
+/// RoomList
++ (NSString *)dt_room_list_room_number;
++ (NSString *)dt_room_list_users;
++ (NSString *)dt_room_list_scene;
++ (NSString *)dt_room_list_enter;
++ (NSString *)dt_room_list_no_room_available;
 
 /// common
 + (NSString *)dt_common_agree;
