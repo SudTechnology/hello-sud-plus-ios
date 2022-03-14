@@ -42,8 +42,7 @@
 "dt_settings_confirm_switch_rtc" = "确认将RTC服务商切换为";
 
 /// common
-"dt_common_select_all" = "全选"
-"dt_common_cancel" = "取消"
+"dt_common_select_all" = "全选";
 "dt_common_agree" = "同意";
 "dt_common_not_agree" = "不同意";
 "dt_common_sure" = "确定";
@@ -57,10 +56,9 @@
 /// Scenes
 "dt_send" = "送给";
 "dt_down_mic" = "下麦";
-"dt_down_mic" = "下";
 "dt_up_mic" = "上%ld号麦";
 "dt_select_person" = "请选择收礼人";
-"dt_select_gift" = "请选择一个礼物"
+"dt_select_gift" = "请选择一个礼物";
 "dt_send_gift" = "赠送";
 "dt_room_owner" = "房主";
 "dt_mic_index" = "%ld麦";
