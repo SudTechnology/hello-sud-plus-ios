@@ -24,3 +24,8 @@
 /// common
 "common_agree" = "同意";
 "common_not_agree" = "不同意";
+
+// Main
+"dt_tab_home" = "主页";
+"dt_tab_room" = "房间";
+"dt_tab_setting" = "设置";

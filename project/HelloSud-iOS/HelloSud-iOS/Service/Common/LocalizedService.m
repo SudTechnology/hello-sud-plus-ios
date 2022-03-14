@@ -29,4 +29,9 @@
 + (NSString *)common_agree { return @"common_agree".localized; }
 + (NSString *)common_not_agree { return @"common_not_agree".localized; }
 
+// Main
++ (NSString *)dt_tab_home { return @"dt_tab_home".localized; }
++ (NSString *)dt_tab_room { return @"dt_tab_room".localized; }
++ (NSString *)dt_tab_setting { return @"dt_tab_setting".localized; }
+
 @end
