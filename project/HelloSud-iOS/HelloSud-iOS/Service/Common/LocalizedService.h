@@ -53,6 +53,15 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_room_list_enter;
 + (NSString *)dt_room_list_no_room_available;
 
+/// Home
++ (NSString *)dt_home_user_id;
++ (NSString *)dt_home_enter_room_num;
++ (NSString *)dt_home_enter;
++ (NSString *)dt_home_join;
++ (NSString *)dt_home_coming_soon;
++ (NSString *)dt_home_create_room;
++ (NSString *)dt_home_in_game;
+
 /// common
 + (NSString *)dt_common_select_all;
 + (NSString *)dt_common_agree;

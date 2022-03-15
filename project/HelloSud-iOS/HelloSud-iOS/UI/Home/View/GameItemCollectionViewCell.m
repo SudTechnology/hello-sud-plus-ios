@@ -96,7 +96,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"飞镖达人";
+        _nameLabel.text = @"";
         _nameLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _nameLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
         _nameLabel.textAlignment = NSTextAlignmentCenter;

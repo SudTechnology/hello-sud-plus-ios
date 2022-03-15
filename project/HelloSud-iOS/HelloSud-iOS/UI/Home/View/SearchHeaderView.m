@@ -87,7 +87,7 @@
 - (UILabel *)userNameLabel {
     if (!_userNameLabel) {
         _userNameLabel = [[UILabel alloc] init];
-        _userNameLabel.text = @"傲性小仙女";
+        _userNameLabel.text = @"";
         _userNameLabel.numberOfLines = 1;
         _userNameLabel.textColor = [UIColor dt_colorWithHexString:@"#13141A" alpha:1];
         _userNameLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightMedium];

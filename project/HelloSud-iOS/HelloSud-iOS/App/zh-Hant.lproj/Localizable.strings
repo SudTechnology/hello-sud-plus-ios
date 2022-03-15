@@ -48,6 +48,15 @@
 "dt_room_list_enter" = "进入";
 "dt_room_list_no_room_available" = "暂无房间开播\n去首页创建一个吧~";
 
+/// Home
+"dt_home_user_id" = "用户ID";
+"dt_home_enter_room_num" = "输入房间号快速进入";
+"dt_home_enter" = "进入";
+"dt_home_join" = "加入";
+"dt_home_coming_soon" = "敬请期待";
+"dt_home_create_room" = "创建房间";
+"dt_home_in_game" = "游戏中";
+
 /// common
 "dt_common_select_all" = "全选";
 "dt_common_agree" = "同意";
