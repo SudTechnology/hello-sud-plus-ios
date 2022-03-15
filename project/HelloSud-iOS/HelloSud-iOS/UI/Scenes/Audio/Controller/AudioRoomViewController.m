@@ -353,7 +353,7 @@
 
 /// 游戏开关麦
 - (void)handleGameTapVoice:(BOOL)isOn {
-    BOOL isPlaying = [self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID];
+    BOOL isPlaying = [self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.loginUserInfo.userID];
     NSLog(@"handleGameTapVoice, isPlaying:%@, isOn:%@, btn state:%@", @(isPlaying), @(isOn), @(self.operatorView.voiceBtnState));
     if (isOn) {
         self.isGameForbiddenVoice = NO;
