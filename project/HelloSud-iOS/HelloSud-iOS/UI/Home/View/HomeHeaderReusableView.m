@@ -187,7 +187,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"语聊房场景";
+        _titleLabel.text = @"";
         _titleLabel.numberOfLines = 1;
         _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#000000" alpha:1];
         _titleLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];

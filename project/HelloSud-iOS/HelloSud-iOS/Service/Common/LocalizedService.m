@@ -52,6 +52,15 @@
 + (NSString *)dt_room_list_enter { return @"dt_room_list_enter".localized; }
 + (NSString *)dt_room_list_no_room_available { return @"dt_room_list_no_room_available".localized; }
 
+/// Home
++ (NSString *)dt_home_user_id { return @"dt_home_user_id".localized; }
++ (NSString *)dt_home_enter_room_num { return @"dt_home_enter_room_num".localized; }
++ (NSString *)dt_home_enter { return @"dt_home_enter".localized; }
++ (NSString *)dt_home_join { return @"dt_home_join".localized; }
++ (NSString *)dt_home_coming_soon { return @"dt_home_coming_soon".localized; }
++ (NSString *)dt_home_create_room { return @"dt_home_create_room".localized; }
++ (NSString *)dt_home_in_game { return @"dt_home_in_game".localized; }
+
 /// common
 + (NSString *)dt_common_select_all { return @"dt_common_select_all".localized; }
 + (NSString *)dt_common_agree { return @"dt_common_agree".localized; }
