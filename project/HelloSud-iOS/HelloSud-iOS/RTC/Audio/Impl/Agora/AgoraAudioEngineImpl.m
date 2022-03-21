@@ -36,11 +36,10 @@
 }
 
 
-- (void)initWithConfig:(NSDictionary *)config {
-    NSString *appID = config[@"appID"];
-    _agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:appID delegate:self];
+- (void)initWithConfig:(AudioConfigModel *)model {
+    _agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:model.appId delegate:self];
     [_agoraKit enableAudioVolumeIndication:300 smooth:3 report_vad:YES];
-    _agoraIM = [[AgoraRtmKit alloc]initWithAppId:appID delegate:self];
+    _agoraIM = [[AgoraRtmKit alloc]initWithAppId:model.appId delegate:self];
     [_agoraKit setAudioDataFrame:self];
 }
 
@@ -59,20 +58,20 @@
     [_agoraKit setAudioDataFrame:nil];
 }
 
-- (void)joinRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
+- (void)joinRoom:(AudioJoinRoomModel *)model {
     if (self.roomID.length > 0) {
         [self leaveRoom];
     }
-    self.roomID = roomID;
+    self.roomID = model.roomID;
     WeakSelf
-    NSUInteger uid = (NSUInteger)[user.userID longLongValue];
+    NSUInteger uid = (NSUInteger)[model.userID longLongValue];
     // 关闭推流、采集
     [self.agoraKit enableLocalAudio:NO];
     // 加入房间通道
-    [_agoraKit joinChannelByToken:nil channelId:roomID info:nil uid:uid joinSuccess:nil];
+    [_agoraKit joinChannelByToken:nil channelId:model.roomID info:nil uid:uid joinSuccess:nil];
     // 登录IM
-    [_agoraIM loginByToken:nil user:user.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
-        weakSelf.imChannel = [weakSelf.agoraIM createChannelWithId:roomID delegate:self];
+    [_agoraIM loginByToken:nil user:model.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
+        weakSelf.imChannel = [weakSelf.agoraIM createChannelWithId:model.roomID delegate:self];
         // 加入房间信令通道
         [weakSelf.imChannel joinWithCompletion:^(AgoraRtmJoinChannelErrorCode errorCode) {
             NSLog(@"join im channel state:%ld", (long)errorCode);

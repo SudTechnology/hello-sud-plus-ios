@@ -27,8 +27,11 @@
 - (void)loginRoom {
     /// 设置语音引擎事件回调
     [AudioEngineFactory.shared.audioEngine setEventListener:self];
-    MediaUser *user = [MediaUser user:AppService.shared.loginUserInfo.userID nickname:AppService.shared.loginUserInfo.name];
-    [AudioEngineFactory.shared.audioEngine joinRoom:self.roomID user:user config:nil];
+    AudioJoinRoomModel *model = [[AudioJoinRoomModel alloc] init];
+    model.roomID = self.roomID;
+    model.userID = AppService.shared.loginUserInfo.userID;
+    model.userName = AppService.shared.loginUserInfo.name;
+    [AudioEngineFactory.shared.audioEngine joinRoom:model];
 }
 
 - (void)logoutRoom {

@@ -222,8 +222,10 @@
         NSString *appID = configModel.zegoCfg.appId;
         NSString *appKey = configModel.zegoCfg.appKey;
         if (appID.length > 0 && appKey.length > 0) {
-            NSDictionary *config = @{@"appID": appID, @"appKey": appKey};
-            [AudioEngineFactory.shared.audioEngine initWithConfig:config];
+            AudioConfigModel *model = [[AudioConfigModel alloc] init];
+            model.appId = appID;
+            model.appSign = appKey;
+            [AudioEngineFactory.shared.audioEngine initWithConfig:model];
         } else {
             [ToastUtil show:@"切换zego语音引擎失败，对应配置为空"];
         }
@@ -234,9 +236,9 @@
         /// 初始化agora引擎SDK
         NSString *appID = configModel.agoraCfg.appId;
         if (appID.length > 0) {
-            NSMutableDictionary *config = NSMutableDictionary.new;
-            config[@"appID"] = appID;
-            [AudioEngineFactory.shared.audioEngine initWithConfig:config];
+            AudioConfigModel *model = [[AudioConfigModel alloc] init];
+            model.appId = appID;
+            [AudioEngineFactory.shared.audioEngine initWithConfig:model];
         } else {
             [ToastUtil show:@"切换agora语音引擎失败，对应配置为空"];
         }
