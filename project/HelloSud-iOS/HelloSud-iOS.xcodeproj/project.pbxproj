@@ -141,6 +141,8 @@
 		BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104782AE3890C13208B73 /* DTUIDevice+Extension.m */; };
 		BC210D70BDEB097F49794C9B /* DTUIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */; };
 		BC210FDF9C7CAC234D035EF6 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105042E549C236540DC05 /* DeviceUtil.m */; };
+		E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */; };
+		E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -438,6 +440,10 @@
 		BC210D5A0981935974C33E8B /* DTNSError+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTNSError+Custom.m"; sourceTree = "<group>"; };
 		BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIColor+Extension.m"; sourceTree = "<group>"; };
 		BC210F9ABB08F9D04A052246 /* AppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtil.h; sourceTree = "<group>"; };
+		E5EDB8BB27E873A300EE99D0 /* AudioConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConfigModel.h; sourceTree = "<group>"; };
+		E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioConfigModel.m; sourceTree = "<group>"; };
+		E5EDB8BE27E8775D00EE99D0 /* AudioJoinRoomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioJoinRoomModel.h; sourceTree = "<group>"; };
+		E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioJoinRoomModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1062,6 +1068,7 @@
 		6CD6E84A27BE306500D8F76C /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				E5EDB8BA27E8737700EE99D0 /* Model */,
 				6CD6E84827BE2E5400D8F76C /* Factory */,
 				6CD6E84727BE2CDA00D8F76C /* Impl */,
 				BC210D4E52B63622AFCD7CC7 /* Core */,
@@ -1289,6 +1296,17 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		E5EDB8BA27E8737700EE99D0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E5EDB8BB27E873A300EE99D0 /* AudioConfigModel.h */,
+				E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */,
+				E5EDB8BE27E8775D00EE99D0 /* AudioJoinRoomModel.h */,
+				E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E65466148933C05BB06C9A97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1503,6 +1521,7 @@
 				6C076E6127995F4C00650209 /* HSSettingCell.m in Sources */,
 				6C192E932797E31200553034 /* DTSheetView.m in Sources */,
 				445EAAAD279A5CF6000DCC72 /* RoomOperatorView.m in Sources */,
+				E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */,
 				445EAA9F27997485000DCC72 /* BaseCollectionViewCell.m in Sources */,
 				445EAB2C27A013B1000DCC72 /* RoomListModel.m in Sources */,
 				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
@@ -1527,6 +1546,7 @@
 				6C076EDA27A2993C00650209 /* RespGameInfoModel.m in Sources */,
 				445EAAFB279E8B10000DCC72 /* HomeFooterReusableView.m in Sources */,
 				445EAB2027A01176000DCC72 /* MatchRoomModel.m in Sources */,
+				E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */,
 				445EAAC9279A98DB000DCC72 /* RoomMsgBgView.m in Sources */,
 				6C076E9E279EC54200650209 /* RoomCmdSendGiftModel.m in Sources */,
 				44F29F6E27BCA75000F57DEE /* VersionInfoCell.m in Sources */,

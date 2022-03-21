@@ -9,11 +9,11 @@
 
 @implementation NeteaseAudioEngineImpl
 
-- (void)initWithConfig:(nonnull NSDictionary *)config {
+- (void)initWithConfig:(AudioConfigModel *)model {
     NSLog(@"暂未实现");
 }
 
-- (void)joinRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
+- (void)joinRoom:(AudioJoinRoomModel *)model {
     NSLog(@"暂未实现");
 }
 

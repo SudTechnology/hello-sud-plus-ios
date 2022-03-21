@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import "ISudAudioEventListener.h"
+#import "AudioConfigModel.h"
+#import "AudioJoinRoomModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,18 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setEventListener:(id<ISudAudioEventListener>)listener;
 
 /// 必须优先调用初始化配置引擎SDK
-/// @param config config
-- (void)initWithConfig:(NSDictionary *)config;
+- (void)initWithConfig:(AudioConfigModel *)model;
 
 /// 销毁引擎SDK
 - (void)destroy;
 
 #pragma mark -2. 登录房间、退出房间
 /// 登录房间
-/// @param roomID 房间ID
-/// @param user 用户
-/// @param config 配置
-- (void)joinRoom:(NSString *)roomID user:(MediaUser *)user config:(nullable MediaRoomConfig *)config;
+- (void)joinRoom:(AudioJoinRoomModel *)model;
 
 /// 退出房间
 - (void)leaveRoom;

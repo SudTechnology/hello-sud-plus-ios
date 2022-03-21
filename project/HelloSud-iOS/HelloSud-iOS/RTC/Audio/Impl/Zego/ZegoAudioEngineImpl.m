@@ -42,16 +42,14 @@
 }
 
 
-- (void)initWithConfig:(NSDictionary *)config {
-    NSString *appID = config[@"appID"];
-    NSString *appKey = config[@"appKey"];
+- (void)initWithConfig:(AudioConfigModel *)model {
     ZegoEngineConfig *engineConfig = ZegoEngineConfig.new;
     // 控制音频采集开关与推流关系，推静音帧
     engineConfig.advancedConfig = @{@"audio_capture_dummy": @"true", @"init_domain_name": @"ze-config.divtoss.com"};
     [ZegoExpressEngine setEngineConfig:engineConfig];
     ZegoEngineProfile *profile = ZegoEngineProfile.new;
-    profile.appID = [appID intValue];
-    profile.appSign = appKey;
+    profile.appID = [model.appId intValue];
+    profile.appSign = model.appSign;
     profile.scenario = ZegoScenarioGeneral;
     [ZegoExpressEngine createEngineWithProfile:profile eventHandler:self];
     [[ZegoExpressEngine sharedEngine] startSoundLevelMonitor];
@@ -83,16 +81,16 @@
     [[ZegoExpressEngine sharedEngine] stopAudioDataObserver];
 }
 
-- (void)joinRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
+- (void)joinRoom:(AudioJoinRoomModel *)model {
     if (self.roomID.length > 0) {
         [self leaveRoom];
     }
-    self.roomID = roomID;
+    self.roomID = model.roomID;
     ZegoUser *zegoUser = ZegoUser.new;
-    zegoUser.userID = user.userID;
-    zegoUser.userName = user.nickname;
+    zegoUser.userID = model.userID;
+    zegoUser.userName = model.userName;
     ZegoRoomConfig *zegoConfig = [ZegoRoomConfig defaultConfig];
-    [ZegoExpressEngine.sharedEngine loginRoom:roomID user:zegoUser config:zegoConfig];
+    [ZegoExpressEngine.sharedEngine loginRoom:model.roomID user:zegoUser config:zegoConfig];
 }
 
 
