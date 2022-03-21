@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IAudioEngine.h"
+#import "ISudAudioEngine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,10 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 构建语音引擎, 必须优先初始化一个实现了语音引擎协议类
 /// @param cls 指定引擎实现类，多引擎构建
-- (void)createEngine:(Class<IAudioEngine>)cls;
+- (void)createEngine:(Class<ISudAudioEngine>)cls;
 
 /// 语音引擎
-@property(nonatomic, strong, readonly)id<IAudioEngine> audioEngine;
+@property(nonatomic, strong, readonly)id<ISudAudioEngine> audioEngine;
 @end
 
 NS_ASSUME_NONNULL_END

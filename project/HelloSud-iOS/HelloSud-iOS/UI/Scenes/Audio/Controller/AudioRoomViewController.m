@@ -326,7 +326,7 @@
             [DeviceUtil checkMicAuth:^(BOOL isAuth) {
                 if (isAuth) {
                     self.operatorView.voiceBtnState = VoiceBtnStateTypeOnVoice;
-                    [self startPublish:[NSString stringWithFormat:@"%u", arc4random()]];
+                    [self startPublishStream];
                 } else {
                     // 提示开启权限
                     [DTAlertView showTextAlert:@"无法访问麦克风，请到“设置-隐私“中开启麦克风访问权限" sureText:@"去开启" cancelText:@"暂时不用" onSureCallback:^{

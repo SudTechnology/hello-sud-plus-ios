@@ -6,11 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IAudioEngine.h"
+#import "ISudAudioEngine.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 阿里云语音引擎
-@interface AliyunAudioEngineImpl : NSObject<IAudioEngine>
+@interface AliyunAudioEngineImpl : NSObject<ISudAudioEngine>
 
 @end
 

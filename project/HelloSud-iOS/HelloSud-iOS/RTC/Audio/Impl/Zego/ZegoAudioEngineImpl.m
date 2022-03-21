@@ -12,7 +12,7 @@
 @property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
 @property(nonatomic, assign)BOOL isPublishing;
 @property(nonatomic, strong)dispatch_queue_t queueMute;
-@property(nonatomic, weak)id<AudioEventListener> listener;
+@property(nonatomic, weak)id<ISudAudioEventListener> listener;
 @property(nonatomic, strong)NSString *roomID;
 
 /// 流与ID关系[streamID:userID]
@@ -37,7 +37,7 @@
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
-- (void)setEventListener:(id<AudioEventListener>)listener {
+- (void)setEventListener:(id<ISudAudioEventListener>)listener {
     _listener = listener;
 }
 
@@ -59,16 +59,12 @@
     
 }
 
-- (void)unInit {
+- (void)destroy {
     [ZegoExpressEngine destroyEngine:nil];
 }
 
-- (BOOL)isPublishing {
-    return _isPublishing;
-}
-
 /// 开始原始音频采集
-- (void)startCapture {
+- (void)startPCMCapture {
     // 设置音频数据回调
     [[ZegoExpressEngine sharedEngine] setAudioDataHandler:self];
     // 需要的音频数据类型 Bitmask，此处示例三个回调都开启
@@ -82,14 +78,14 @@
 }
 
 /// 结束原始音频采集
-- (void)stopCapture {
+- (void)stopPCMCapture {
     [[ZegoExpressEngine sharedEngine] setAudioDataHandler:nil];
     [[ZegoExpressEngine sharedEngine] stopAudioDataObserver];
 }
 
-- (void)loginRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
+- (void)joinRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
     if (self.roomID.length > 0) {
-        [self logoutRoom];
+        [self leaveRoom];
     }
     self.roomID = roomID;
     ZegoUser *zegoUser = ZegoUser.new;
@@ -100,51 +96,57 @@
 }
 
 
-- (void)logoutRoom {
+- (void)leaveRoom {
     if (self.isPublishing) {
         [self stopPublishStream];
     }
     [ZegoExpressEngine.sharedEngine logoutRoom];
 }
 
-- (void)muteMicrophone:(BOOL)isMute {
+- (void)startPublishStream {
+    self.isPublishing = YES;
+    CFUUIDRef uuid = CFUUIDCreate(nil);
+    NSString *streamID = (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuid);
+    CFRelease(uuid);
+    [ZegoExpressEngine.sharedEngine startPublishingStream:streamID];
+    
     dispatch_async(self.queueMute, ^{
         /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
         /// 异步激活采集通道（此处开销成本过大，相对耗时）
-        NSLog(@"muteMicrophone:%@", @(isMute));
-        [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:isMute ? NO : YES];
-        [ZegoExpressEngine.sharedEngine muteMicrophone:isMute];
+        [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:NO];
+        [ZegoExpressEngine.sharedEngine muteMicrophone:YES];
     });
 }
-
-- (void)startPlayingStream:(nonnull NSString *)streamID {
-    [ZegoExpressEngine.sharedEngine startPlayingStream:streamID];
-}
-
-
-- (void)startPublish:(nonnull NSString *)streamID {
-    self.isPublishing = YES;
-    [ZegoExpressEngine.sharedEngine startPublishingStream:streamID];
-}
-
-
-- (void)stopPlayingStream:(nonnull NSString *)streamID {
-    [ZegoExpressEngine.sharedEngine stopPlayingStream:streamID];
-}
-
 
 - (void)stopPublishStream {
     self.isPublishing = NO;
     [ZegoExpressEngine.sharedEngine stopPublishingStream];
+    dispatch_async(self.queueMute, ^{
+        /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
+        /// 异步激活采集通道（此处开销成本过大，相对耗时）
+        [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:YES];
+        [ZegoExpressEngine.sharedEngine muteMicrophone:NO];
+    });
 }
 
 /// 发送指令
 /// @param command 指令内容
-/// @param roomID 房间ID
-- (void)sendCommand:(NSString *)command roomID:(NSString *)roomID result:(void(^)(int))result; {
-    [ZegoExpressEngine.sharedEngine sendCustomCommand:command toUserList:nil roomID:roomID callback:^(int errorCode) {
-        result(errorCode);
+- (void)sendCommand:(NSString *)command listener:(void(^)(int))listener {
+    [ZegoExpressEngine.sharedEngine sendCustomCommand:command toUserList:nil roomID:self.roomID callback:^(int errorCode) {
+        listener(errorCode);
     }];
+}
+
+- (void)startSubscribingStream {
+    [ZegoExpressEngine.sharedEngine muteAllPlayStreamAudio:NO];
+}
+
+- (void)stopSubscribingStream {
+    [ZegoExpressEngine.sharedEngine muteAllPlayStreamAudio:YES];
+}
+
+- (void)setAudioRouteToSpeaker:(BOOL) enabled {
+    
 }
 
 #pragma mark ZegoEventHandler
@@ -196,6 +198,17 @@
                 [self.dicStreamUser removeObjectForKey:m.streamID];
             }
         }
+        
+        if (updateType == ZegoUpdateTypeAdd) {
+            for (ZegoStream * zegoStream in streamList) {
+                [ZegoExpressEngine.sharedEngine startPlayingStream:zegoStream.streamID];
+            }
+        } else if (updateType == ZegoUpdateTypeDelete) {
+            for (ZegoStream * zegoStream in streamList) {
+                [ZegoExpressEngine.sharedEngine stopPlayingStream:zegoStream.streamID];
+            }
+        }
+        
         [self.listener onRoomStreamUpdate:updateType streamList:arr extendedData:extendedData roomID:roomID];
     }
 }

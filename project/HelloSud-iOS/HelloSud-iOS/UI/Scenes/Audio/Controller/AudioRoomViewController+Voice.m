@@ -9,13 +9,11 @@
 @implementation AudioRoomViewController(Voice)
 
 /// 开启推流
-/// @param streamID 流ID
-- (void)startPublish:(NSString*)streamID {
+- (void)startPublishStream {
     if (self.sudFSMMGDecorator.keyWordASRing) {
         [self startCaptureAudioToASR];
     }
-    [AudioEngineFactory.shared.audioEngine muteMicrophone:NO];
-    [AudioEngineFactory.shared.audioEngine startPublish:streamID];
+    [AudioEngineFactory.shared.audioEngine startPublishStream];
 }
 
 /// 关闭推流
@@ -24,29 +22,28 @@
         [self stopCaptureAudioToASR];
     }
     [AudioEngineFactory.shared.audioEngine stopPublishStream];
-    [AudioEngineFactory.shared.audioEngine muteMicrophone:YES];
 }
 
 - (void)loginRoom {
     /// 设置语音引擎事件回调
     [AudioEngineFactory.shared.audioEngine setEventListener:self];
     MediaUser *user = [MediaUser user:AppService.shared.loginUserInfo.userID nickname:AppService.shared.loginUserInfo.name];
-    [AudioEngineFactory.shared.audioEngine loginRoom:self.roomID user:user config:nil];
+    [AudioEngineFactory.shared.audioEngine joinRoom:self.roomID user:user config:nil];
 }
 
 - (void)logoutRoom {
-    [AudioEngineFactory.shared.audioEngine logoutRoom];
+    [AudioEngineFactory.shared.audioEngine leaveRoom];
 }
 
 #pragma mark =======音频采集=======
 /// 开始音频采集
 - (void)startCaptureAudioToASR {
-    [AudioEngineFactory.shared.audioEngine startCapture];
+    [AudioEngineFactory.shared.audioEngine startPCMCapture];
 }
 
 /// 停止音频采集
 - (void)stopCaptureAudioToASR {
-    [AudioEngineFactory.shared.audioEngine stopCapture];
+    [AudioEngineFactory.shared.audioEngine stopPCMCapture];
 }
 
 #pragma mark delegate
@@ -74,15 +71,10 @@
     switch (updateType) {
         case HSAudioEngineUpdateTypeAdd:
             for (MediaStream *item in streamList) {
-                [AudioEngineFactory.shared.audioEngine startPlayingStream:item.streamID];
-                [[NSNotificationCenter defaultCenter]postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey:item}];
-                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey:item}];
             }
             break;
         case HSAudioEngineUpdateTypeDelete:
-            for (MediaStream *item in streamList) {
-                [AudioEngineFactory.shared.audioEngine stopPlayingStream:item.streamID];
-            }
             break;
     }
 }
