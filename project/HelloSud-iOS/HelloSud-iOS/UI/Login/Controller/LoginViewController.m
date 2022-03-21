@@ -63,33 +63,33 @@
 }
 
 - (void)showWelcomeUse {
-    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"欢迎使用HelloSud\n"];
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", NSString.dt_login_welcome_helloSud]];
     attrTitle.yy_lineSpacing = 16;
     attrTitle.yy_font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
     attrTitle.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     attrTitle.yy_alignment = NSTextAlignmentCenter;
     
-    NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:@"我们非常重视您的个人信息保护。关于个人信息收集和使用的详细信息，您可以点击"];
+    NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:NSString.dt_login_we_take_information];
     attrStr_0.yy_lineSpacing = 6;
     attrStr_0.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
     attrStr_0.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     
-    NSMutableAttributedString *attrStr_1 = [[NSMutableAttributedString alloc] initWithString:@"《用户协议》"];
+    NSMutableAttributedString *attrStr_1 = [[NSMutableAttributedString alloc] initWithString:NSString.dt_login_user_agreement];
     attrStr_1.yy_lineSpacing = 6;
     attrStr_1.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
     attrStr_1.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     
-    NSMutableAttributedString *attrStr_2 = [[NSMutableAttributedString alloc] initWithString:@"和"];
+    NSMutableAttributedString *attrStr_2 = [[NSMutableAttributedString alloc] initWithString:NSString.dt_login_and];
     attrStr_2.yy_lineSpacing = 6;
     attrStr_2.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
     attrStr_2.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     
-    NSMutableAttributedString *attrStr_3 = [[NSMutableAttributedString alloc] initWithString:@"《隐私政策》"];
+    NSMutableAttributedString *attrStr_3 = [[NSMutableAttributedString alloc] initWithString:NSString.dt_login_privacy_policy];
     attrStr_3.yy_lineSpacing = 6;
     attrStr_3.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
     attrStr_3.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     
-    NSMutableAttributedString *attrStr_4 = [[NSMutableAttributedString alloc] initWithString:@"进行了解。点击同意及表示您已阅读并同意全部上述协议"];
+    NSMutableAttributedString *attrStr_4 = [[NSMutableAttributedString alloc] initWithString:NSString.dt_login_click_agree_agreement];
     attrStr_4.yy_lineSpacing = 6;
     attrStr_4.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
     attrStr_4.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
@@ -117,7 +117,7 @@
     [attrTitle appendAttributedString:attrStr_3];
     [attrTitle appendAttributedString:attrStr_4];
     
-    [DTAlertView showAttrTextAlert:attrTitle sureText:@"同意" cancelText:@"不同意" rootView:self.view onSureCallback:^{
+    [DTAlertView showAttrTextAlert:attrTitle sureText:NSString.dt_common_agree cancelText:NSString.dt_common_not_agree rootView:self.view onSureCallback:^{
         [AppService.shared saveAgreement];
     } onCloseCallback:^{
         SweetPromptView *promptView = [[SweetPromptView alloc] init];
@@ -196,7 +196,7 @@
 - (UILabel *)nameTitleLabel {
     if (!_nameTitleLabel) {
         _nameTitleLabel = [[UILabel alloc] init];
-        _nameTitleLabel.text = @"你的昵称";
+        _nameTitleLabel.text = NSString.dt_login_your_nickname;
         _nameTitleLabel.textColor = [UIColor dt_colorWithHexString:@"#13141A" alpha:1];
         _nameTitleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
     }
@@ -216,7 +216,7 @@
 - (UITextField *)nameTextField {
     if (!_nameTextField) {
         _nameTextField = [[UITextField alloc] init];
-        _nameTextField.text = @"Mary";
+        _nameTextField.text = @"";
         _nameTextField.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         _nameTextField.textColor = UIColor.blackColor;
         [_nameTextField setUserInteractionEnabled:false];
@@ -236,7 +236,7 @@
 - (UIButton *)loginBtn {
     if (!_loginBtn) {
         _loginBtn = [[UIButton alloc] init];
-        [_loginBtn setTitle:@"立即体验" forState:normal];
+        [_loginBtn setTitle:NSString.dt_login_experience_immediately forState:normal];
         _loginBtn.backgroundColor = UIColor.blackColor;
         _loginBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [_loginBtn setTitleColor:UIColor.whiteColor forState:normal];

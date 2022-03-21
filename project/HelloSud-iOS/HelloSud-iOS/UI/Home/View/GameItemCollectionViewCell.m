@@ -81,7 +81,7 @@
 - (UILabel *)enterLabel {
     if (!_enterLabel) {
         _enterLabel = [[UILabel alloc] init];
-        _enterLabel.text = @"加入";
+        _enterLabel.text = NSString.dt_home_join;
         _enterLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _enterLabel.font = UIFONT_BOLD(12);
         _enterLabel.layer.borderColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1].CGColor;
@@ -96,7 +96,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"飞镖达人";
+        _nameLabel.text = @"";
         _nameLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _nameLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -107,7 +107,7 @@
 - (UILabel *)inGameLabel {
     if (!_inGameLabel) {
         _inGameLabel = [[UILabel alloc] init];
-        _inGameLabel.text = @"游戏中";
+        _inGameLabel.text = NSString.dt_home_in_game;
         _inGameLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _inGameLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
         _inGameLabel.textAlignment = NSTextAlignmentCenter;

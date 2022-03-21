@@ -159,7 +159,7 @@
 - (UILabel *)noDataLabel {
     if (!_noDataLabel) {
         _noDataLabel = UILabel.new;
-        _noDataLabel.text = @"暂无房间开播\n去首页创建一个吧~";
+        _noDataLabel.text = NSString.dt_room_list_no_room_available;
         _noDataLabel.textColor = [UIColor dt_colorWithHexString:@"#8A8A8E" alpha:1];
         _noDataLabel.font = UIFONT_REGULAR(14);
         _noDataLabel.numberOfLines = 0;

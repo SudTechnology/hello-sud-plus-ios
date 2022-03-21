@@ -19,36 +19,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"切换RTC服务商";
+    self.title = NSString.dt_settings_switch_rtc;
     [self configData];
 }
 
 /// 配置页面数据
 - (void)configData {
     ChangeRTCModel *m0 = [ChangeRTCModel new];
-    m0.title = @"即构";
+    m0.title = NSString.dt_settings_zego;
     m0.isSlect = [AppService.shared.rtcType isEqualToString:@"zego"] ? YES : NO;
     m0.isClickable = YES;
     
     ChangeRTCModel *m1 = [ChangeRTCModel new];
-    m1.title = @"声网";
+    m1.title = NSString.dt_settings_agora;
     m1.isSlect = [AppService.shared.rtcType isEqualToString:@"agora"] ? YES : NO;
     m1.isClickable = YES;
     
     ChangeRTCModel *m2 = [ChangeRTCModel new];
-    m2.title = @"网易云信";
+    m2.title = NSString.dt_settings_net_ease;
     m2.isSlect = NO;
     m2.isClickable = NO;
     ChangeRTCModel *m3 = [ChangeRTCModel new];
-    m3.title = @"火山";
+    m3.title = NSString.dt_settings_volcano;
     m3.isSlect = NO;
     m3.isClickable = NO;
     ChangeRTCModel *m4 = [ChangeRTCModel new];
-    m4.title = @"阿里云";
+    m4.title = NSString.dt_settings_alicloud;
     m4.isSlect = NO;
     m4.isClickable = NO;
     ChangeRTCModel *m5 = [ChangeRTCModel new];
-    m5.title = @"腾讯";
+    m5.title = NSString.dt_settings_tencent;
     m5.isSlect = NO;
     m5.isClickable = NO;
     
@@ -100,17 +100,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ChangeRTCModel *model = self.arrData[indexPath.row];
     if (model.isClickable == NO) {
-        [ToastUtil show:@"正在制作中, 敬请期待!"];
+        [ToastUtil show:NSString.dt_settings_work_in_progress];
     } else {
         if (model.isSlect == NO) {
             WeakSelf
-            [DTAlertView showTextAlert:[NSString stringWithFormat:@"确认将RTC服务商切换为【%@】？", model.title] sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+            [DTAlertView showTextAlert:[NSString stringWithFormat:@"%@【%@】？", NSString.dt_settings_confirm_switch_rtc, model.title] sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
                 for (ChangeRTCModel *m in self.arrData) {
                     m.isSlect = NO;
                 }
                 model.isSlect = true;
                 
-                NSString *rtcType = [model.title isEqualToString:@"即构"] ? @"zego" : @"agora";
+                NSString *rtcType = [model.title isEqualToString:NSString.dt_settings_zego] ? @"zego" : @"agora";
                 [AppService.shared switchRtcType:rtcType];
                 [weakSelf.tableView reloadData];
                 

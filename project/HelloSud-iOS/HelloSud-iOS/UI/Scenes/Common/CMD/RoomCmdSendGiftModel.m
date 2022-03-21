@@ -58,7 +58,7 @@
     attrSendName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrSendName.yy_color = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
     
-    NSMutableAttributedString *attrSend = [[NSMutableAttributedString alloc] initWithString:@" 送给 "];
+    NSMutableAttributedString *attrSend = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ ", NSString.dt_send]];
     attrSend.yy_lineSpacing = 6;
     attrSend.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrSend.yy_color = [UIColor dt_colorWithHexString:@"#AAAAAA" alpha:1];

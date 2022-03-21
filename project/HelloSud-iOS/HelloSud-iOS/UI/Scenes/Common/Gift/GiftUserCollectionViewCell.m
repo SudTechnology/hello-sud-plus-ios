@@ -47,7 +47,7 @@
         if (m.user.icon) {
             [self.headerView sd_setImageWithURL:[NSURL URLWithString:m.user.icon]];
         }
-        self.micNumLabel.text = m.user.roleType == 1 ? @"房主" : [NSString stringWithFormat:@"%ld麦", m.micIndex + 1];
+        self.micNumLabel.text = m.user.roleType == 1 ? NSString.dt_room_owner : [NSString stringWithFormat:NSString.dt_mic_index, m.micIndex + 1];
         self.selectView.image = m.isSelected ? [UIImage imageNamed:@"room_gift_user_select"] : nil;
         
         
@@ -78,7 +78,7 @@
 - (UILabel *)micNumLabel {
     if (!_micNumLabel) {
         _micNumLabel = [[UILabel alloc] init];
-        _micNumLabel.text = @"1麦";
+        _micNumLabel.text =  [NSString stringWithFormat:@"1%@", NSString.dt_mic_name];
         _micNumLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _micNumLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
         _micNumLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#000000" alpha:1];

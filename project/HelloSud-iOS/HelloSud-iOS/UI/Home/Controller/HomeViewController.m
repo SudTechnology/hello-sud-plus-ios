@@ -181,7 +181,7 @@
     NSMutableArray *arr = NSMutableArray.new;
     for (int i = 0; i < count; i++) {
         HSGameItem *item = HSGameItem.new;
-        item.gameName = @"敬请期待";
+        item.gameName = NSString.dt_home_coming_soon;
         item.isGameWait = YES;
         item.gamePic = @"game_wait";
         [arr addObject:item];
