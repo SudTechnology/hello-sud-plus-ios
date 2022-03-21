@@ -64,7 +64,7 @@
         titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
         
         UILabel *enterLabel = [[UILabel alloc] init];
-        enterLabel.text = @"加入";
+        enterLabel.text = NSString.dt_home_join;
         enterLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         enterLabel.font = UIFONT_BOLD(12);
         enterLabel.layer.borderColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1].CGColor;
@@ -187,7 +187,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"语聊房场景";
+        _titleLabel.text = @"";
         _titleLabel.numberOfLines = 1;
         _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#000000" alpha:1];
         _titleLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
@@ -198,7 +198,7 @@
 - (UILabel *)tipLabel {
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
-        _tipLabel.text = @"敬请期待";
+        _tipLabel.text = NSString.dt_home_coming_soon;
         _tipLabel.numberOfLines = 1;
         _tipLabel.textColor = [UIColor dt_colorWithHexString:@"#666666" alpha:1];
         _tipLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightRegular];
@@ -235,7 +235,7 @@
 - (UIButton *)createBtn {
     if (!_createBtn) {
         _createBtn = UIButton.new;
-        [_createBtn setTitle:@"创建房间" forState:UIControlStateNormal];
+        [_createBtn setTitle:NSString.dt_home_create_room forState:UIControlStateNormal];
         _createBtn.backgroundColor = HEX_COLOR(@"#FFFFFF");
         _createBtn.titleLabel.font = UIFONT_BOLD(18);
         _createBtn.layer.cornerRadius = 18;
