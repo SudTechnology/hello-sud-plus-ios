@@ -13,8 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AudioRoomViewController(Voice)
 
 /// 开启推流
-/// @param streamID 流ID
-- (void)startPublish:(NSString*)streamID;
+- (void)startPublishStream;
 
 /// 关闭推流
 - (void)stopPublish;

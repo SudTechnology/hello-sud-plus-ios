@@ -212,7 +212,7 @@
     }
     
     NSLog(@"切换RTC厂商:%@", rtcType);
-    [AudioEngineFactory.shared.audioEngine unInit];
+    [AudioEngineFactory.shared.audioEngine destroy];
 
     if (configModel.zegoCfg && [rtcType isEqualToString:configModel.zegoCfg.rtcType]) {
         NSLog(@"使用zego语音引擎");

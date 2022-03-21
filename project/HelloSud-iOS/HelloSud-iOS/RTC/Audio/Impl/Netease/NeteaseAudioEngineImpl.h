@@ -6,11 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IAudioEngine.h"
+#import "ISudAudioEngine.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 网易云信语音引擎
-@interface NeteaseAudioEngineImpl : NSObject<IAudioEngine>
+@interface NeteaseAudioEngineImpl : NSObject<ISudAudioEngine>
 
 @end
 

@@ -17,7 +17,7 @@
     return manager;
 }
 
-- (void)createEngine:(Class<IAudioEngine>)cls {
+- (void)createEngine:(Class<ISudAudioEngine>)cls {
     _audioEngine = cls.new;
 }
 @end

@@ -257,7 +257,7 @@
 		445EAB3827A1347E000DCC72 /* UserInfoListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoListModel.m; sourceTree = "<group>"; };
 		445EAB3A27A1428C000DCC72 /* GameLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameLoginModel.h; sourceTree = "<group>"; };
 		445EAB3B27A1428C000DCC72 /* GameLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameLoginModel.m; sourceTree = "<group>"; };
-		44DF03812796A981006EE6AC /* IAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAudioEngine.h; sourceTree = "<group>"; };
+		44DF03812796A981006EE6AC /* ISudAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISudAudioEngine.h; sourceTree = "<group>"; };
 		44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SudMGP.xcframework; sourceTree = "<group>"; };
 		44DF03972796B2C5006EE6AC /* AppUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
 		44DF039A2796B70B006EE6AC /* GameViewInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewInfoModel.h; sourceTree = "<group>"; };
@@ -318,7 +318,7 @@
 		6C076E6C2799823A00650209 /* DTWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTWebViewController.m; sourceTree = "<group>"; };
 		6C076E6F279E429E00650209 /* ZegoAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZegoAudioEngineImpl.h; sourceTree = "<group>"; };
 		6C076E70279E429E00650209 /* ZegoAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZegoAudioEngineImpl.m; sourceTree = "<group>"; };
-		6C076E72279E457D00650209 /* AudioEventListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioEventListener.h; sourceTree = "<group>"; };
+		6C076E72279E457D00650209 /* ISudAudioEventListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISudAudioEventListener.h; sourceTree = "<group>"; };
 		6C076E7B279E833C00650209 /* AudioEngineFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioEngineFactory.h; sourceTree = "<group>"; };
 		6C076E7C279E833C00650209 /* AudioEngineFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioEngineFactory.m; sourceTree = "<group>"; };
 		6C076E7E279E8EBD00650209 /* AudioCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioCommon.h; sourceTree = "<group>"; };
@@ -1269,8 +1269,8 @@
 			children = (
 				6C076E7E279E8EBD00650209 /* AudioCommon.h */,
 				6C076E7F279E8EBD00650209 /* AudioCommon.m */,
-				44DF03812796A981006EE6AC /* IAudioEngine.h */,
-				6C076E72279E457D00650209 /* AudioEventListener.h */,
+				44DF03812796A981006EE6AC /* ISudAudioEngine.h */,
+				6C076E72279E457D00650209 /* ISudAudioEventListener.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";

@@ -12,48 +12,31 @@
     NSLog(@"暂未实现");
 }
 
-- (BOOL)isPublishing {
-    NSLog(@"暂未实现");
-    return NO;
-}
-
-- (void)loginRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
+- (void)joinRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
     NSLog(@"暂未实现");
 }
 
-- (void)logoutRoom {
+- (void)leaveRoom {
     NSLog(@"暂未实现");
 }
 
-- (void)muteMicrophone:(BOOL)isMute {
+- (void)sendCommand:(nonnull NSString *)command listener:(nonnull void (^)(int))listener {
     NSLog(@"暂未实现");
 }
 
-- (void)sendCommand:(nonnull NSString *)command roomID:(nonnull NSString *)roomID result:(nonnull void (^)(int))result {
+- (void)setEventListener:(nonnull id<ISudAudioEventListener>)listener {
     NSLog(@"暂未实现");
 }
 
-- (void)setEventListener:(nonnull id<AudioEventListener>)listener {
+- (void)startPCMCapture {
     NSLog(@"暂未实现");
 }
 
-- (void)startCapture {
+- (void)startPublishStream {
     NSLog(@"暂未实现");
 }
 
-- (void)startPlayingStream:(nonnull NSString *)streamID {
-    NSLog(@"暂未实现");
-}
-
-- (void)startPublish:(nonnull NSString *)streamID {
-    NSLog(@"暂未实现");
-}
-
-- (void)stopCapture {
-    NSLog(@"暂未实现");
-}
-
-- (void)stopPlayingStream:(nonnull NSString *)streamID {
+- (void)stopPCMCapture {
     NSLog(@"暂未实现");
 }
 
@@ -61,7 +44,19 @@
     NSLog(@"暂未实现");
 }
 
-- (void)unInit {
+- (void)startSubscribingStream {
+    NSLog(@"暂未实现");
+}
+
+- (void)stopSubscribingStream {
+    NSLog(@"暂未实现");
+}
+
+- (void)destroy {
+    NSLog(@"暂未实现");
+}
+
+- (void)setAudioRouteToSpeaker:(BOOL) enabled {
     NSLog(@"暂未实现");
 }
 @end

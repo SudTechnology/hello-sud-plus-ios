@@ -16,7 +16,7 @@
 /// 是否在推流
 @property(nonatomic, assign)BOOL isPublishing;
 /// 事件监听者
-@property(nonatomic, weak)id<AudioEventListener> listener;
+@property(nonatomic, weak)id<ISudAudioEventListener> listener;
 /// 当前进入房间
 @property(nonatomic, strong)NSString *roomID;
 /// 声网语音引擎
@@ -31,7 +31,7 @@
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
-- (void)setEventListener:(id<AudioEventListener>)listener {
+- (void)setEventListener:(id<ISudAudioEventListener>)listener {
     _listener = listener;
 }
 
@@ -44,28 +44,24 @@
     [_agoraKit setAudioDataFrame:self];
 }
 
-- (void)unInit {
+- (void)destroy {
     [AgoraRtcEngineKit destroy];
     _agoraKit = nil;
 }
 
-- (BOOL)isPublishing {
-    return _isPublishing;
-}
-
 /// 开始原始音频采集
-- (void)startCapture {
+- (void)startPCMCapture {
     [_agoraKit setAudioDataFrame:self];
 }
 
 /// 结束原始音频采集
-- (void)stopCapture {
+- (void)stopPCMCapture {
     [_agoraKit setAudioDataFrame:nil];
 }
 
-- (void)loginRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
+- (void)joinRoom:(nonnull NSString *)roomID user:(nonnull MediaUser *)user config:(nullable MediaRoomConfig *)config {
     if (self.roomID.length > 0) {
-        [self logoutRoom];
+        [self leaveRoom];
     }
     self.roomID = roomID;
     WeakSelf
@@ -85,50 +81,47 @@
 }
 
 
-- (void)logoutRoom {
+- (void)leaveRoom {
     if (self.isPublishing) {
         [self stopPublishStream];
     }
     [_agoraKit leaveChannel:nil];
 }
 
-- (void)muteMicrophone:(BOOL)isMute {
-    [self.agoraKit enableLocalAudio:isMute ? NO : YES];
-}
-
-
-- (void)startPlayingStream:(nonnull NSString *)streamID {
-    NSLog(@"暂不实现setPlayVolume");
-}
-
-
-- (void)startPublish:(nonnull NSString *)streamID {
+- (void)startPublishStream {
     self.isPublishing = YES;
     [self.agoraKit muteLocalAudioStream:NO];
+    [self.agoraKit enableLocalAudio:YES];
 }
-
-
-- (void)stopPlayingStream:(nonnull NSString *)streamID {
-    NSLog(@"暂不实现stopPlayingStream");
-}
-
 
 - (void)stopPublishStream {
     self.isPublishing = NO;
     [self.agoraKit muteLocalAudioStream:YES];
+    [self.agoraKit enableLocalAudio:NO];
+}
+
+- (void)startSubscribingStream {
+    [self.agoraKit muteAllRemoteAudioStreams:NO];
+}
+
+- (void)stopSubscribingStream {
+    [self.agoraKit muteAllRemoteAudioStreams:YES];
 }
 
 /// 发送指令
 /// @param command 指令内容
-/// @param roomID 房间ID
-- (void)sendCommand:(NSString *)command roomID:(NSString *)roomID result:(void(^)(int))result; {
+- (void)sendCommand:(NSString *)command listener:(void(^)(int))listener {
     AgoraRtmMessage *msg = AgoraRtmMessage.new;
     msg.text = command;
     [self.imChannel sendMessage:msg completion:^(AgoraRtmSendChannelMessageErrorCode errorCode) {
-        if (result) {
-            result((int)errorCode);
+        if (listener) {
+            listener((int)errorCode);
         }
     }];
+}
+
+- (void)setAudioRouteToSpeaker:(BOOL) enabled {
+    
 }
 
 #pragma mark AgoraRtcEngineDelegate
