@@ -5,14 +5,15 @@
 //  Created by Mary on 2022/1/25.
 //
 
-#import "AudioRoomViewController+Game.h"
+#import "BaseSceneViewController+Game.h"
+#import "BaseSceneViewController+Voice.h"
 #import <SudMGP/ISudFSMMG.h>
 #import <SudMGP/ISudFSTAPP.h>
 #import <SudMGP/SudMGP.h>
 #import <SudMGP/ISudAPPD.h>
 #import <SudMGP/ISudFSMStateHandle.h>
 
-@implementation AudioRoomViewController(Game)
+@implementation BaseSceneViewController(Game)
 
 /// 初始化sud
 - (void)initSudFSMMG {

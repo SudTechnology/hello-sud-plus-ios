@@ -5,9 +5,9 @@
 //  Created by kaniel on 2022/1/24.
 //
 
-#import "AudioRoomViewController+IM.h"
+#import "BaseSceneViewController+IM.h"
 
-@implementation AudioRoomViewController(IM)
+@implementation BaseSceneViewController(IM)
 
 /// 发送消息
 /// @param msg 消息体

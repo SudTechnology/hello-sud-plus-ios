@@ -9,8 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 语音控制模块
-@interface AudioRoomViewController(Voice)
+/// 基础场景语音控制模块
+@interface BaseSceneViewController(Voice)
 
 /// 开启推流
 /// @param streamID 流ID

@@ -6,12 +6,12 @@
 //
 
 #import "BaseViewController.h"
-#import "AudioRoomViewController.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 语音房游戏模块，处理游戏交互逻辑
-@interface AudioRoomViewController(Game) <SudFSMMGListener>
+/// 基础场景游戏模块，处理游戏交互逻辑
+@interface BaseSceneViewController(Game) <SudFSMMGListener>
 
 /// 初始化sud
 - (void)initSudFSMMG;

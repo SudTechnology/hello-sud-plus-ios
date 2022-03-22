@@ -85,7 +85,7 @@
             return;
         }
         weakSelf.roleType = model.roleType;
-        AudioRoomViewController *vc = [[AudioRoomViewController alloc] init];
+        BaseSceneViewController *vc = [[BaseSceneViewController alloc] init];
         AudioRoomService.shared.currentRoomVC = vc;
         vc.gameId = model.gameId;
         vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
@@ -147,7 +147,7 @@
             return;
         }
         weakSelf.roleType = model.roleType;
-        AudioRoomViewController *vc = [[AudioRoomViewController alloc] init];
+        BaseSceneViewController *vc = [[BaseSceneViewController alloc] init];
         AudioRoomService.shared.currentRoomVC = vc;
         vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
         vc.gameId = model.gameId;

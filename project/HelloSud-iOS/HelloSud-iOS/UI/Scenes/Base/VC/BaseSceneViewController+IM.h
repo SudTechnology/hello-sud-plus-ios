@@ -6,13 +6,13 @@
 //
 
 #import "BaseViewController.h"
-#import "AudioRoomViewController.h"
+#import "BaseSceneViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 
-/// 语音房信令模块
-@interface AudioRoomViewController(IM)
+/// 基础场景信令模块
+@interface BaseSceneViewController(IM)
 
 /// 发送消息
 /// @param msg 消息体
