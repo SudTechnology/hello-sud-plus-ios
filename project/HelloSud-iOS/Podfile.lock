@@ -16,7 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - AgoraAudio_iOS (3.6.1.1)
   - AgoraRtm_iOS (1.4.9)
-  - BDAlphaPlayer (1.2.0)
+  - BDAlphaPlayer (1.2.2)
   - Bugly (2.5.90)
   - IQKeyboardManager (6.5.9)
   - libwebp (1.2.1):
@@ -32,14 +32,14 @@ PODS:
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
   - MJRefresh (3.7.5)
-  - Protobuf (3.19.1)
+  - Protobuf (3.19.4)
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
   - SDWebImageWebPCoder (0.8.4):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
-  - SSZipArchive (2.4.2)
+  - SSZipArchive (2.4.3)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
     - SVGAPlayer/ProtoFiles (= 2.5.6)
@@ -105,7 +105,7 @@ SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   AgoraAudio_iOS: d64f3fcd15576a8bb9b715997978ec427008f287
   AgoraRtm_iOS: b4bb9a431ce36f9b44cda423e66b2f96945ca2ab
-  BDAlphaPlayer: 8af2048ee8ef8c31a73a99f83882cf4242e89df0
+  BDAlphaPlayer: 3b31756760ea37b9710bfb36a18b431ad05f6da7
   Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
   IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
@@ -113,10 +113,10 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
-  Protobuf: 3724efa50cb2846d7ccebc8691c574e85fd74471
+  Protobuf: 235750e4696ff59fb07d949a9dbbc92b3c0700fe
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
-  SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
