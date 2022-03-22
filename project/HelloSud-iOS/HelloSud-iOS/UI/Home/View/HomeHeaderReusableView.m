@@ -91,7 +91,7 @@
         make.bottom.mas_equalTo(-10);
     }];
     [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.previewView).offset(12);
+        make.centerY.equalTo(self.previewView);
         make.right.equalTo(self.previewView).offset(-12);
         make.width.mas_equalTo(118);
         make.height.mas_equalTo(44);
