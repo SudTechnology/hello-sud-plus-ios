@@ -5,11 +5,11 @@
 //  Created by kaniel on 2022/2/17.
 //
 
-#import "BaseViewController.h"
+#import "BaseSceneViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TalentRoomViewController : BaseViewController
+@interface TalentRoomViewController : BaseSceneViewController
 
 @end
 

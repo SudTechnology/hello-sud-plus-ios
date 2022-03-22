@@ -14,6 +14,14 @@
 
 @implementation AudioRoomViewController
 
+- (void)setConfigModel:(BaseSceneConfigModel *)configModel {
+    [super setConfigModel:configModel];
+    if ([configModel isKindOfClass:[AudioSceneConfigModel class]]) {
+        AudioSceneConfigModel *m = (AudioSceneConfigModel *)configModel;
+        self.roomType = (RoomType) m.roomType;
+    }
+}
+
 - (void)dtAddViews {
     [super dtAddViews];
     [self.sceneView addSubview:self.audioMicContentView];
