@@ -22,13 +22,13 @@
     /// Game - 发送文本命中
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *)msg;
-        [self gameKeyWordHiting: m.content];
+        [self handleGameKeywordHitting:m.content];
     } else if ([msg isKindOfClass:RoomCmdUpMicModel.class]) {
         RoomCmdUpMicModel *m = (RoomCmdUpMicModel *)msg;
         if (m.cmd == CMD_UP_MIC_NOTIFY) {
-            [self joinGame];
+            [self notifyGameToJoin];
         } else if (m.cmd == CMD_DOWN_MIC_NOTIFY) {
-            [self exitGame];
+            [self notifyGameToExit];
         }
     }
 }
@@ -122,11 +122,8 @@
 
 #pragma mark - 业务处理
 /// 加入游戏
-- (void)joinGame {
-    if (self.roomType == HSAudio) {
-        return;
-    }
-    
+- (void)notifyGameToJoin {
+
     if (![self.sudFSMMGDecorator isPlayerIn:AppService.shared.loginUserInfo.userID]) {
         if (self.sudFSMMGDecorator.gameStateType == GameStateTypeLeisure && !self.sudFSMMGDecorator.isInGame) {
             /// 上麦，就是加入游戏
@@ -136,11 +133,8 @@
 }
 
 /// 退出游戏
-- (void)exitGame {
-    if (self.roomType == HSAudio) {
-        return;
-    }
-    
+- (void)notifyGameToExit {
+
     if (self.sudFSMMGDecorator.isReady) {
         /// 如果已经准备先退出准备状态
         [self.sudFSTAPPDecorator notifyAppComonSetReady:false];
@@ -150,10 +144,8 @@
 }
 
 /// 你画我猜命中
-- (void)gameKeyWordHiting:(NSString *)content {
-    if (self.roomType == HSAudio) {
-        return;
-    }
+- (void)handleGameKeywordHitting:(NSString *)content {
+
     if (self.sudFSMMGDecorator.isHitBomb) {
         if ([self isPureInt: content]) {
             /// 关键词命中

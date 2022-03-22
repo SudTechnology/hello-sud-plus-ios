@@ -187,9 +187,9 @@
 
 #pragma mark =======登录 加载 游戏=======
 /// 游戏登录
-/// 接入方客户端 调用 接入方服务端 login 获取 短期令牌code
+/// 接入方客户端 调用 接入方服务端 loginGame 获取 短期令牌code
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
-- (void)login {
+- (void)loginGame {
     NSString *appID = AppService.shared.configModel.sudCfg.appId;
     NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
     if (appID.length == 0 || appKey.length == 0) {
@@ -219,18 +219,18 @@
     if (gameID == 0) {
         // 切换语音房间
         self.gameId = 0;
-        self.roomType = HSAudio;
+        [self roomGameDidChanged:gameID];
         return;
     }
     /// 更新gameID
     self.gameId = gameID;
-    self.roomType = HSGame;
-    [self login];
+    [self loginGame];
+    [self roomGameDidChanged:gameID];
 }
 
 #pragma mark =======登录 加载 游戏=======
 /// 游戏登录
-/// 接入方客户端 调用 接入方服务端 login 获取 短期令牌code
+/// 接入方客户端 调用 接入方服务端 loginGame 获取 短期令牌code
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
 - (void)login:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
     [self initSdk:rootView gameId:gameId code:code appID:appID appKey:appKey];

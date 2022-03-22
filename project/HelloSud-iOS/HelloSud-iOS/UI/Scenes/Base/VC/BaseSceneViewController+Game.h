@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 初始化sud
 - (void)initSudFSMMG;
 /// 登录游戏业务服务
-- (void)login;
+- (void)loginGame;
 /// 退出游戏
 - (void)logoutGame;
 /// 处理切换游戏
