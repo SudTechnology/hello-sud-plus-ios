@@ -13,8 +13,7 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 /// 加入
 @property (nonatomic, strong) UILabel *enterLabel;
-@property (nonatomic, assign) CGFloat itemW;
-@property (nonatomic, assign) CGFloat itemH;
+
 @end
 
 @implementation GameItemCollectionViewCell
@@ -26,13 +25,28 @@
     self.enterLabel.hidden = m.isBlank;
 }
 
+- (void)setIndexPath:(NSIndexPath *)indexPath {
+    _indexPath = indexPath;
+    NSInteger v = indexPath.row % 3;
+
+    [self.iconImageView dt_cornerRadius:8];
+    [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        if (v == 0) {
+            make.left.mas_equalTo(13);
+        } else if (v == 1) {
+            make.centerX.equalTo(self.containerView);
+        } else {
+            make.right.mas_equalTo(-13);
+        }
+        make.size.mas_equalTo(CGSizeMake(100, 52));
+    }];
+}
+
 - (void)hsAddViews {
-    self.itemW = 72;//(kScreenWidth - 32 - 24 - 24 )/4;
-    self.itemH = self.itemW + 32;
     [self.contentView addSubview:self.containerView];
     [self.containerView addSubview:self.iconImageView];
     [self.containerView addSubview:self.nameLabel];
-    [self.containerView addSubview:self.enterLabel];
     [self.containerView addSubview:self.inGameLabel];
 }
 
@@ -41,25 +55,23 @@
         make.edges.equalTo(self.contentView);
     }];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView);
-        make.centerX.mas_equalTo(self.contentView);
-        make.width.mas_equalTo(self.itemW);
-        make.height.mas_equalTo(self.itemW);
+        make.top.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(100, 52));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.containerView);
-        make.top.mas_equalTo(self.iconImageView.mas_bottom).offset(3);
+        make.left.equalTo(self.iconImageView).offset(8);
+        make.top.equalTo(self.iconImageView).offset(12);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
-    [self.enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.containerView);
-        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(6);
-        make.size.mas_greaterThanOrEqualTo(CGSizeMake(54, 28));
-    }];
     [self.inGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(self.iconImageView);
+        make.left.top.equalTo(self.iconImageView);
         make.size.mas_equalTo(CGSizeMake(40, 16));
     }];
+}
+
+- (void)hsConfigUI {
+    self.backgroundColor = UIColor.whiteColor;
 }
 
 - (UIView *)containerView {
@@ -97,8 +109,8 @@
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.text = @"";
-        _nameLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
-        _nameLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+        _nameLabel.textColor = UIColor.whiteColor;
+        _nameLabel.font = UIFONT_MEDIUM(14);
         _nameLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _nameLabel;
