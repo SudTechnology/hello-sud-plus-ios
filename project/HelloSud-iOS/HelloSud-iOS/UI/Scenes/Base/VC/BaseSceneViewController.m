@@ -24,6 +24,12 @@
     return YES;
 }
 
+- (void)setConfigModel:(BaseSceneConfigModel *)configModel {
+    self.gameId = configModel.gameId;
+    self.roomID = configModel.roomID;
+    self.roomName = configModel.roomName;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

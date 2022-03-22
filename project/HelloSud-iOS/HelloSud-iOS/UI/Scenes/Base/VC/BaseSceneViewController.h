@@ -25,11 +25,14 @@
 #import "AudioMicroView.h"
 #import "MicOperateView.h"
 #import "RoomGiftPannelView.h"
+#import "BaseSceneConfigModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 基础场景
 @interface BaseSceneViewController : BaseViewController<AudioEventListener>
+
+@property (nonatomic, strong)BaseSceneConfigModel *configModel;
 
 /// 背景视图
 @property (nonatomic, strong, readonly) UIImageView *bgImageView;

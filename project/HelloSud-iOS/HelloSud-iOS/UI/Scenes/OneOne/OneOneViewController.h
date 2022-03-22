@@ -5,12 +5,12 @@
 //  Created by kaniel on 2022/2/9.
 //
 
-#import "BaseViewController.h"
+#import "BaseSceneViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 1v1场景
-@interface OneOneViewController : BaseViewController
+@interface OneOneViewController : BaseSceneViewController
 
 @end
 

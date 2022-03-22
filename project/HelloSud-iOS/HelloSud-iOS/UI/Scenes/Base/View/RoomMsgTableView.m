@@ -6,10 +6,10 @@
 //
 
 #import "RoomMsgTableView.h"
-#import "BaseMsgCell.h"
-#import "HSRoomTextTableViewCell.h"
-#import "RoomSystemTableViewCell.h"
-#import "RoomGiftTableViewCell.h"
+#import "Msg/BaseMsgCell.h"
+#import "Msg/HSRoomTextTableViewCell.h"
+#import "Msg/RoomSystemTableViewCell.h"
+#import "Msg/RoomGiftTableViewCell.h"
 
 @interface RoomMsgTableView () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;

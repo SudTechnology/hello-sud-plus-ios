@@ -29,8 +29,8 @@
 #import "BaseSceneViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, RoomType) {
-    HSAudio,
-    HSGame,
+    HSAudio = 0,
+    HSGame = 1,
 };
 
 /// 语音房间场景

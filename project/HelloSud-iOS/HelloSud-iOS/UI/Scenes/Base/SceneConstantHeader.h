@@ -1,12 +1,12 @@
 //
-//  AudioConstantHeader.h
+//  SceneConstantHeader.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/1/26.
 //
 
-#ifndef AudioConstantHeader_h
-#define AudioConstantHeader_h
+#ifndef SceneConstantHeader_h
+#define SceneConstantHeader_h
 /// 麦位变化通知
 #define NTF_MIC_CHANGED @"NTF_MIC_CHANGED"
 /// 收礼选中通知
@@ -21,4 +21,4 @@
 #define NTF_PLAYER_STATE_CHANGED @"NTF_PLAYER_STATE_CHANGED"
 
 #define kNTFStreamInfoKey @"streamInfo"
-#endif /* AudioConstantHeader_h */
+#endif /* SceneConstantHeader_h */
