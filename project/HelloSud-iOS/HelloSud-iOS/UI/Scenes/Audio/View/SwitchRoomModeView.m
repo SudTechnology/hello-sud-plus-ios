@@ -21,14 +21,6 @@
 - (void)reloadData:(BOOL)isAudioRoom {
     NSArray <HSGameItem *> *dataArr = AppService.shared.gameList;
     [self.dataList setArray:dataArr];
-    
-//    WeakSelf
-//    [self.dataList enumerateObjectsUsingBlock:^(HSGameItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if (obj.gameId == GameService.shared.gameId) {
-//            [weakSelf.dataList exchangeObjectAtIndex:0 withObjectAtIndex:idx];
-//        }
-//    }];
-//
     HSGameItem *m = HSGameItem.new;
     m.isAudioRoom = true;
     [self.dataList insertObject:m atIndex:0];

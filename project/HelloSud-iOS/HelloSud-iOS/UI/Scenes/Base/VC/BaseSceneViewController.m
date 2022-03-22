@@ -15,13 +15,6 @@
 /// 场景视图，所有子类场景
 @property (nonatomic, strong) BaseView *sceneView;
 
-@property (nonatomic, strong) RoomNaviView *naviView;
-@property (nonatomic, strong) RoomOperatorView *operatorView;
-@property (nonatomic, strong) RoomMsgBgView *msgBgView;
-@property (nonatomic, strong) RoomMsgTableView *msgTableView;
-@property (nonatomic, strong) RoomInputView *inputView;
-/// 主播视图列表
-@property (nonatomic, strong) NSArray <AudioMicroView *> *arrAnchorView;
 
 @end
 
@@ -39,7 +32,7 @@
     AudioRoomService.shared.currentRoomVC = self;
     [self loginRoom];
     if (self.gameId > 0) {
-        [self login];
+        [self loginGame];
     }
     [self dtUpdateUI];
 }
@@ -59,7 +52,6 @@
 
     [self.sceneView addSubview:self.naviView];
     [self.sceneView addSubview:self.operatorView];
-    [self.sceneView addSubview:self.audioMicContentView];
     [self.sceneView addSubview:self.gameMicContentView];
     [self.sceneView addSubview:self.gameNumLabel];
     [self.sceneView addSubview:self.msgBgView];
@@ -85,11 +77,7 @@
         make.bottom.mas_equalTo(-kAppSafeBottom);
         make.height.mas_equalTo(44);
     }];
-    [self.audioMicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.naviView.mas_bottom).offset(20);
-        make.left.right.mas_equalTo(self.view);
-        make.height.mas_greaterThanOrEqualTo(0);
-    }];
+
     [self.gameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
@@ -104,7 +92,7 @@
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.audioMicContentView.mas_bottom);
+        make.height.mas_equalTo(106);
         make.left.right.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.operatorView.mas_top).offset(0);
     }];
@@ -140,19 +128,11 @@
         RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:msg];
         [weakSelf sendMsg:m isAddToShow:YES];
     };
-    if (self.roomType == HSAudioMic) {
-        self.audioMicContentView.updateMicArrCallBack = ^(NSArray<AudioMicroView *> * _Nonnull micArr) {
-            weakSelf.arrAnchorView = micArr;
-        };
-    } else if (self.roomType == HSGameMic) {
-        self.gameMicContentView.updateMicArrCallBack = ^(NSArray<AudioMicroView *> * _Nonnull micArr) {
-            weakSelf.arrAnchorView = micArr;
-        };
-    }
-    self.audioMicContentView.onTapCallback = ^(AudioRoomMicModel * _Nonnull micModel) {
-        /// 麦位点击回调
-        [weakSelf handleMicTap:micModel];
+
+    self.gameMicContentView.updateMicArrCallBack = ^(NSArray<AudioMicroView *> * _Nonnull micArr) {
+        weakSelf.arrAnchorView = micArr;
     };
+
     self.gameMicContentView.onTapCallback = ^(AudioRoomMicModel * _Nonnull micModel) {
         /// 麦位点击回调
         [weakSelf handleMicTap:micModel];
@@ -176,7 +156,8 @@
     };
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
         SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
-        [modeView reloadData:weakSelf.roomType == HSAudio];
+        BOOL isGame = weakSelf.isSupportGame;
+        [modeView reloadData:!isGame];
         [DTSheetView show:modeView rootView:AppUtil.currentWindow hiddenBackCover:NO onCloseCallback:^{
         }];
         modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
@@ -218,12 +199,11 @@
         
         RoomCmdChangeGameModel *msg = nil;
         if (m.isAudioRoom) {
-            weakSelf.roomType = HSAudio;
             msg = [RoomCmdChangeGameModel makeMsg:0];
         } else if(m.gameId > 0) {
             msg = [RoomCmdChangeGameModel makeMsg:m.gameId];
-            [weakSelf handleGameChange:m.gameId];
         }
+        [weakSelf handleGameChange:m.gameId];
         // 发送游戏切换给其它用户
         if (msg) {
             [weakSelf sendMsg:msg isAddToShow:false];
@@ -286,6 +266,9 @@
     }
 }
 
+- (BOOL)isSupportGame {
+    return YES;
+}
 
 /// 获取空麦位
 - (nullable AudioRoomMicModel *)getOneEmptyMic {
@@ -506,6 +489,11 @@
     }];
 }
 
+- (void)roomGameDidChanged:(NSInteger)gameID {
+
+}
+
+
 - (void)handleMicList:(NSArray<HSRoomMicList *> *)micList {
     NSMutableArray<NSNumber *> *arrUserID = NSMutableArray.new;
     for (HSRoomMicList *m in micList) {
@@ -536,51 +524,7 @@
 }
 
 #pragma mark setter
-- (void)setRoomType:(RoomType)roomType {
-    _roomType = roomType;
-    if (self.roomType == HSAudioMic) {
-        /// 销毁游戏
-        [self logoutGame];
-        [self.gameMicContentView setHidden:true];
-        [self.audioMicContentView setHidden:false];
-        self.gameView.hidden = YES;
-        self.gameNumLabel.hidden = YES;
-        [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.audioMicContentView.mas_bottom);
-            make.left.right.mas_equalTo(self.view);
-            make.bottom.mas_equalTo(self.operatorView.mas_top).offset(-20);
-            make.height.mas_greaterThanOrEqualTo(0);
-        }];
-        [self.dicMicModel removeAllObjects];
-        for (AudioMicroView *v in self.audioMicContentView.micArr) {
-            NSString *key = [NSString stringWithFormat:@"%ld", v.model.micIndex];
-            self.dicMicModel[key] = v.model;
-            v.micType = HSAudioMic;
-        }
-        [self.sudFSMMGDecorator clearAllStates];
-        GameService.shared.gameId = 0;
-    } else if (self.roomType == HSGameMic) {
-        self.gameView.hidden = NO;
-        self.gameNumLabel.hidden = NO;
-        [self.gameMicContentView setHidden:false];
-        [self.audioMicContentView setHidden:true];
-        CGFloat h = [UIDevice dt_isiPhoneXSeries] ? 106 : 50;
-        [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(self.view);
-            make.bottom.mas_equalTo(self.operatorView.mas_top);
-            make.height.mas_equalTo(h);
-        }];
-        [self.dicMicModel removeAllObjects];
-        for (AudioMicroView *v in self.gameMicContentView.micArr) {
-            NSString *key = [NSString stringWithFormat:@"%ld", v.model.micIndex];
-            self.dicMicModel[key] = v.model;
-            v.micType = HSGameMic;
-        }
-    }
-    [self reqMicList];
-    [self.naviView hiddenNodeWithRoleType: AudioRoomService.shared.roleType];
-    [self dtUpdateUI];
-}
+
 
 - (BOOL)isInMic {
     BOOL isInMic = false;
@@ -631,12 +575,7 @@
     return _msgTableView;
 }
 
-- (AudioMicContentView *)audioMicContentView {
-    if (!_audioMicContentView) {
-        _audioMicContentView = [[AudioMicContentView alloc] init];
-    }
-    return _audioMicContentView;
-}
+
 
 - (RoomInputView *)inputView {
     if (!_inputView) {
@@ -673,14 +612,6 @@
     return _dicMicModel;
 }
 
-//- (RoomGameInfoModel *)gameInfoModel {
-//    if (_gameInfoModel == nil) {
-//        _gameInfoModel = RoomGameInfoModel.new;
-//        _gameInfoModel.language = @"zh-CN";
-//    }
-//    return _gameInfoModel;
-//}
-
 - (UILabel *)gameNumLabel {
     if (!_gameNumLabel) {
         _gameNumLabel = UILabel.new;
@@ -690,13 +621,6 @@
     }
     return _gameNumLabel;
 }
-
-//- (NSMutableArray<NSString *> *)onlineUserIdList {
-//    if (_onlineUserIdList == nil) {
-//        _onlineUserIdList = NSMutableArray.new;
-//    }
-//    return _onlineUserIdList;;
-//}
 
 - (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
     [self.sudFSTAPPDecorator notifyAppComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];

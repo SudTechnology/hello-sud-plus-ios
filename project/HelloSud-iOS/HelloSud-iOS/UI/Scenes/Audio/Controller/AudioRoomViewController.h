@@ -28,10 +28,16 @@
 #import "RoomGiftPannelView.h"
 #import "BaseSceneViewController.h"
 NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger, RoomType) {
+    HSAudio,
+    HSGame,
+};
 
 /// 语音房间场景
 @interface AudioRoomViewController : BaseSceneViewController
-
+@property (nonatomic, assign) RoomType roomType;
+/// 业务需要 是否为语音房间
+@property (nonatomic, assign) BOOL isAudioRoom;
 @end
 
 NS_ASSUME_NONNULL_END

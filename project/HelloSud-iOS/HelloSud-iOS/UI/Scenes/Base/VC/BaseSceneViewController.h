@@ -27,10 +27,7 @@
 #import "RoomGiftPannelView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-typedef NS_ENUM(NSInteger, RoomType) {
-    HSAudio,
-    HSGame,
-};
+
 /// 基础场景
 @interface BaseSceneViewController : BaseViewController<AudioEventListener>
 
@@ -43,9 +40,17 @@ typedef NS_ENUM(NSInteger, RoomType) {
 /// 场景视图，所有子类场景
 @property (nonatomic, strong, readonly) BaseView *sceneView;
 
-@property (nonatomic, assign) RoomType roomType;
-@property (nonatomic, strong) AudioMicContentView *audioMicContentView;
+
 @property (nonatomic, strong) GameMicContentView *gameMicContentView;
+@property (nonatomic, strong) RoomNaviView *naviView;
+@property (nonatomic, strong) RoomOperatorView *operatorView;
+@property (nonatomic, strong) RoomMsgBgView *msgBgView;
+@property (nonatomic, strong) RoomMsgTableView *msgTableView;
+@property (nonatomic, strong) RoomInputView *inputView;
+/// 主播视图列表
+@property (nonatomic, strong) NSArray <AudioMicroView *> *arrAnchorView;
+
+
 /// 麦位model map容器[micIndex:model]
 @property (nonatomic, strong)NSMutableDictionary<NSString*, AudioRoomMicModel *> *dicMicModel;
 // 房间ID
@@ -96,6 +101,20 @@ typedef NS_ENUM(NSInteger, RoomType) {
 /// @param msg 消息体
 /// @param isShowOnScreen 是否展示公屏
 - (void)addMsg:(RoomBaseCMDModel *)msg isShowOnScreen:(BOOL)isShowOnScreen;
+
+/// 同步麦位列表
+- (void)reqMicList;
+
+/// 游戏切换
+/// @param gameID
+- (void)roomGameDidChanged:(NSInteger)gameID;
+
+/// 处理麦位点击
+/// @param micModel micModel description
+- (void)handleMicTap:(AudioRoomMicModel *)micModel;
+
+/// 是否支持游戏
+- (BOOL)isSupportGame;
 @end
 
 NS_ASSUME_NONNULL_END

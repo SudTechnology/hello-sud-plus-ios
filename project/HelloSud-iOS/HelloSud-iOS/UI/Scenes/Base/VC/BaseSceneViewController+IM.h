@@ -21,6 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 发送进房消息
 - (void)sendEnterRoomMsg;
+
+/// 加入游戏
+- (void)notifyGameToJoin;
+
+/// 退出游戏
+- (void)notifyGameToExit;
+
+/// 你画我猜命中
+- (void)handleGameKeywordHitting:(NSString *)content;
 @end
 
 NS_ASSUME_NONNULL_END
