@@ -26,7 +26,7 @@
 
 @implementation HomeViewController
 
-- (BOOL)dtIsHidenNavigationBar {
+- (BOOL)dtIsHiddenNavigationBar {
     return YES;
 }
 

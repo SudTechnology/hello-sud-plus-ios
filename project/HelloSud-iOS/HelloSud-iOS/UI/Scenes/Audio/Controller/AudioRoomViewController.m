@@ -24,7 +24,7 @@
 
 @implementation AudioRoomViewController
 
-- (BOOL)dtIsHidenNavigationBar {
+- (BOOL)dtIsHiddenNavigationBar {
     return YES;
 }
 
