@@ -5,8 +5,10 @@
 //  Created by kaniel on 2022/1/26.
 //
 
-#import "AudioRoomViewController+Voice.h"
-@implementation AudioRoomViewController(Voice)
+#import "BaseSceneViewController+Voice.h"
+#import "BaseSceneViewController.h"
+
+@implementation BaseSceneViewController(Voice)
 
 /// 开启推流
 /// @param streamID 流ID

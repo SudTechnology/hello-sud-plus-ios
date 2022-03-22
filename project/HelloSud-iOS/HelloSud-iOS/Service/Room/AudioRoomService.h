@@ -7,15 +7,15 @@
 
 #import <Foundation/Foundation.h>
 #import "AudioRoomViewController.h"
-#import "AudioRoomViewController+IM.h"
-#import "AudioRoomViewController+Game.h"
-#import "AudioRoomViewController+Voice.h"
+#import "BaseSceneViewController+IM.h"
+#import "BaseSceneViewController+Game.h"
+#import "BaseSceneViewController+Voice.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房间管理
 @interface AudioRoomService : NSObject
 /// 当前房间VC
-@property(nonatomic, weak)AudioRoomViewController *currentRoomVC;
+@property(nonatomic, weak)BaseSceneViewController *currentRoomVC;
 /// 当前用户在房间角色
 @property(nonatomic, assign)NSInteger roleType;
 /// 当前用户麦位

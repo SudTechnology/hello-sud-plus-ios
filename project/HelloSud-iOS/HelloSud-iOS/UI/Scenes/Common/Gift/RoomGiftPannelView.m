@@ -8,7 +8,7 @@
 #import "RoomGiftPannelView.h"
 #import "GiftUserCollectionViewCell.h"
 #import "RoomGiftContentView.h"
-#import "AudioRoomViewController+IM.h"
+#import "../../Base/VC/BaseSceneViewController+IM.h"
 
 @interface RoomGiftPannelView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UIView *topView;
