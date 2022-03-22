@@ -29,7 +29,7 @@
     [self requestData];
 }
 
-- (BOOL)dtIsHidenNavigationBar {
+- (BOOL)dtIsHiddenNavigationBar {
     return YES;
 }
 
