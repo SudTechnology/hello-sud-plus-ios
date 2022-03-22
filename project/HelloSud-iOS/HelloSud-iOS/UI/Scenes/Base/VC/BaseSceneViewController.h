@@ -27,15 +27,23 @@
 #import "RoomGiftPannelView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-/// 基础场景
-@interface BaseSceneViewController : BaseViewController<AudioEventListener>
 typedef NS_ENUM(NSInteger, RoomType) {
     HSAudio,
     HSGame,
 };
-@property (nonatomic, assign) RoomType roomType;
+/// 基础场景
+@interface BaseSceneViewController : BaseViewController<AudioEventListener>
 
+/// 背景视图
+@property (nonatomic, strong, readonly) UIImageView *bgImageView;
+
+/// 游戏加载主view
+@property (nonatomic, strong, readonly) UIView *gameView;
+
+/// 场景视图，所有子类场景
+@property (nonatomic, strong, readonly) BaseView *sceneView;
+
+@property (nonatomic, assign) RoomType roomType;
 @property (nonatomic, strong) AudioMicContentView *audioMicContentView;
 @property (nonatomic, strong) GameMicContentView *gameMicContentView;
 /// 麦位model map容器[micIndex:model]
@@ -52,15 +60,8 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, assign)BOOL isSentEnterRoom;
 /// 游戏总人数
 @property (nonatomic, assign)NSInteger totalGameUserCount;
-/// 展示公屏消息
-/// @param msg 消息体
-/// @param isShowOnScreen 是否展示公屏
-- (void)addMsg:(RoomBaseCMDModel *)msg isShowOnScreen:(BOOL)isShowOnScreen;
-
-
 #pragma mark - GAME
-/// 游戏加载主view
-@property (nonatomic, strong) UIView *gameView;
+
 
 /// ISudFSTAPP
 @property (nonatomic, strong) SudFSMMGDecorator *sudFSMMGDecorator;
@@ -84,11 +85,17 @@ typedef NS_ENUM(NSInteger, RoomType) {
 - (BOOL)isInMic;
 
 - (void)handleTapVoice;
+
 /// 游戏触发上麦
 - (void)handleGameUpMic;
 
 /// 游戏开关麦
 - (void)handleGameTapVoice: (BOOL)isOn;
+
+/// 展示公屏消息
+/// @param msg 消息体
+/// @param isShowOnScreen 是否展示公屏
+- (void)addMsg:(RoomBaseCMDModel *)msg isShowOnScreen:(BOOL)isShowOnScreen;
 @end
 
 NS_ASSUME_NONNULL_END
