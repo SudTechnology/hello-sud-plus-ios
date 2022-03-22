@@ -11,15 +11,6 @@
 @implementation HSAudioEngineFrameParamModel
 @end
 
-@implementation MediaUser
-+(instancetype)user:(NSString *)userID nickname:(NSString *)nickname {
-    MediaUser *user = MediaUser.new;
-    user.userID = userID;
-    user.nickname = nickname;
-    return user;
-}
-@end
-
 @implementation MediaRoomConfig
 @end
 

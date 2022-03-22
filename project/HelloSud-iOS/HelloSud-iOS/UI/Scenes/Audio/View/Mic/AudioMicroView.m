@@ -188,7 +188,7 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_STREAM_INFO_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         MediaStream *streamInfo = note.userInfo[kNTFStreamInfoKey];
         if ([streamInfo isKindOfClass:MediaStream.class] ) {
-            if (weakSelf.model.user && [weakSelf.model.user.userID isEqualToString:streamInfo.user.userID]) {
+            if (weakSelf.model.user && [weakSelf.model.user.userID isEqualToString:streamInfo.userID]) {
                 weakSelf.model.streamID = streamInfo.streamID;
             }
         }

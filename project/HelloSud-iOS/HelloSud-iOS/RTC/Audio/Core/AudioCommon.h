@@ -123,17 +123,6 @@ typedef NS_ENUM(NSInteger, HSAudioEngineNetworkSampleRateType) {
 }
 @end
 
-/// 媒体用户信息
-@interface MediaUser : NSObject
-
-/// 用户ID
-@property(nonatomic, copy)NSString *userID;
-/// 昵称
-@property(nonatomic, copy)NSString *nickname;
-
-+(instancetype)user:(NSString *)userID nickname:(NSString *)nickname;
-@end
-
 /// 房间配置
 @interface MediaRoomConfig : NSObject
 
@@ -143,7 +132,7 @@ typedef NS_ENUM(NSInteger, HSAudioEngineNetworkSampleRateType) {
 @interface MediaStream: NSObject {
 
 }
-@property(nonatomic, strong)MediaUser *user;
+@property(nonatomic, copy)NSString *userID;
 @property(nonatomic, copy)NSString *streamID;
 @property(nonatomic, copy)NSString *extraInfo;
 @end

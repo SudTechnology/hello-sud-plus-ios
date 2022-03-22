@@ -11,8 +11,6 @@
 
 @interface AgoraAudioEngineImpl()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate, AgoraAudioDataFrameProtocol>
 
-/// 是否静音所有播放流
-@property(nonatomic, assign)BOOL isMuteAllPlayStreamAudio;
 /// 是否在推流
 @property(nonatomic, assign)BOOL isPublishing;
 /// 事件监听者
@@ -129,31 +127,14 @@
     NSLog(@"join channel success:%@", channel);
     [self.agoraKit muteLocalAudioStream:YES];
     [self.agoraKit setEnableSpeakerphone:YES];
-    NSMutableArray *arr = NSMutableArray.new;
-    MediaUser *user = MediaUser.new;
-    user.userID = [NSString stringWithFormat:@"%ld", uid];
-    [arr addObject:user];
-    [self.listener onRoomUserUpdate:HSAudioEngineUpdateTypeAdd userList:arr roomID:self.roomID];
 }
 
 - (void)rtcEngine:(AgoraRtcEngineKit* _Nonnull)engine didJoinedOfUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomUserUpdate:userList:roomID:)]) {
-        NSMutableArray *arr = NSMutableArray.new;
-        MediaUser *user = MediaUser.new;
-        user.userID = [NSString stringWithFormat:@"%ld", uid];
-        [arr addObject:user];
-        [self.listener onRoomUserUpdate:HSAudioEngineUpdateTypeAdd userList:arr roomID:self.roomID];
-    }
+
 }
 
 - (void)rtcEngine:(AgoraRtcEngineKit* _Nonnull)engine didOfflineOfUid:(NSUInteger)uid reason:(AgoraUserOfflineReason)reason {
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomUserUpdate:userList:roomID:)]) {
-        NSMutableArray *arr = NSMutableArray.new;
-        MediaUser *user = MediaUser.new;
-        user.userID = [NSString stringWithFormat:@"%ld", uid];
-        [arr addObject:user];
-        [self.listener onRoomUserUpdate:HSAudioEngineUpdateTypeDelete userList:arr roomID:self.roomID];
-    }
+
 }
 
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine didAudioMuted:(BOOL)muted byUid:(NSUInteger)uid {
@@ -220,10 +201,8 @@
         NSLog(@"未识别信令消息");
         return;
     }
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onIMRecvCustomCommand:fromUser:roomID:)]) {
-        MediaUser *user = MediaUser.new;
-        user.userID = member.userId;
-        [self.listener onIMRecvCustomCommand:message.text fromUser:user roomID:member.channelId];
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRecvCommand:command:)]) {
+        [self.listener onRecvCommand:member.userId command:message.text];
     }
 }
 
@@ -249,8 +228,8 @@
 - (BOOL)onRecordAudioFrame:(AgoraAudioFrame * _Nonnull)frame {
     NSUInteger length = frame.samplesPerChannel * frame.channels * frame.bytesPerSample;
     NSData *a_data = [[NSData alloc] initWithBytes:frame.buffer length:length];
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onCapturedAudioData:)]) {
-        [self.listener onCapturedAudioData:a_data];
+    if (self.listener != nil && [self.listener respondsToSelector:@selector(onCapturedPCMData:)]) {
+        [self.listener onCapturedPCMData:a_data];
     }
     return true;
 }

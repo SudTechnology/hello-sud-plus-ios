@@ -66,11 +66,11 @@
 }
 
 /// 房间流更新 增、减，需要收到此事件后播放对应流
+/// @param roomID 房间ID
 /// @param updateType 流更新类型 增，减
 /// @param streamList 变动流列表
 /// @param extendedData 扩展信息
-/// @param roomID 房间ID
-- (void)onRoomStreamUpdate:(HSAudioEngineUpdateType)updateType streamList:(NSArray<MediaStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData roomID:(NSString *)roomID {
+- (void)onRoomStreamUpdate:(NSString *)roomID updateType:(HSAudioEngineUpdateType)updateType streamList:(NSArray<MediaStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData {
     switch (updateType) {
         case HSAudioEngineUpdateTypeAdd:
             for (MediaStream *item in streamList) {
@@ -82,7 +82,7 @@
     }
 }
 
-- (void)onRoomOnlineUserCountUpdate:(int)count roomID:(NSString *)roomID {
+- (void)onRoomOnlineUserCountUpdate:(NSString *)roomID count:(int)count {
     NSInteger oldCount = self.totalUserCount;
     self.totalUserCount = count;
     if (oldCount != count) {
@@ -90,25 +90,13 @@
     }
 }
 
-- (void)onRoomUserUpdate:(HSAudioEngineUpdateType)updateType userList:(NSArray<MediaUser *> *)userList roomID:(NSString *)roomID {
-    if (updateType == HSAudioEngineUpdateTypeAdd) {
-        self.totalUserCount += userList.count;
-    } else if (updateType == HSAudioEngineUpdateTypeDelete) {
-        self.totalUserCount -= userList.count;
-        if (self.totalUserCount < 0) {
-            self.totalUserCount = 0;
-        }
-    }
-    [self dtUpdateUI];
-}
-
-- (void)onRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {
+- (void)onRoomStateUpdate:(NSString *)roomID state:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData {
     if (state == HSAudioEngineStateConnected && !self.isSentEnterRoom) {
         [self sendEnterRoomMsg];
     }
 }
 
-- (void)onCapturedAudioData:(NSData *)data {
+- (void)onCapturedPCMData:(NSData *)data {
     [self.sudFSTAPPDecorator pushAudio:data];
 }
 @end
