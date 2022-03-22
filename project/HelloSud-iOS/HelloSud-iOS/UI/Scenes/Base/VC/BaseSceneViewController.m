@@ -5,14 +5,16 @@
 //  Created by Mary on 2022/1/21.
 //
 
-#import "BaseSceneViewController.h"
-#import "BaseSceneViewController+IM.h"
-#import "BaseSceneViewController+Game.h"
-#import "BaseSceneViewController+Voice.h"
-
-
 @interface BaseSceneViewController () <BDAlphaPlayerMetalViewDelegate>
+/// 背景视图
 @property (nonatomic, strong) UIImageView *bgImageView;
+
+/// 游戏加载主view
+@property (nonatomic, strong) UIView *gameView;
+
+/// 场景视图，所有子类场景
+@property (nonatomic, strong) BaseView *sceneView;
+
 @property (nonatomic, strong) RoomNaviView *naviView;
 @property (nonatomic, strong) RoomOperatorView *operatorView;
 @property (nonatomic, strong) RoomMsgBgView *msgBgView;
@@ -53,20 +55,26 @@
 - (void)dtAddViews {
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.gameView];
-    [self.view addSubview:self.naviView];
-    [self.view addSubview:self.operatorView];
-    [self.view addSubview:self.audioMicContentView];
-    [self.view addSubview:self.gameMicContentView];
-    [self.view addSubview:self.gameNumLabel];
-    [self.view addSubview:self.msgBgView];
+    [self.view addSubview:self.sceneView];
+
+    [self.sceneView addSubview:self.naviView];
+    [self.sceneView addSubview:self.operatorView];
+    [self.sceneView addSubview:self.audioMicContentView];
+    [self.sceneView addSubview:self.gameMicContentView];
+    [self.sceneView addSubview:self.gameNumLabel];
+    [self.sceneView addSubview:self.msgBgView];
     [self.msgBgView addSubview:self.msgTableView];
-    [self.view addSubview:self.inputView];
+    [self.sceneView addSubview:self.inputView];
 }
 
 - (void)dtLayoutViews {
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
+    [self.sceneView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+
     [self.naviView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.mas_equalTo(kStatusBarHeight);
@@ -644,11 +652,18 @@
     return _gameMicContentView;
 }
 
-- (UIView *)gameView {
+- (BaseView *)gameView {
     if (_gameView == nil) {
-        _gameView = UIView.new;
+        _gameView = BaseView.new;
     }
     return _gameView;
+}
+
+- (BaseView *)sceneView {
+    if (_sceneView == nil) {
+        _sceneView = BaseView.new;
+    }
+    return _sceneView;
 }
 
 - (NSMutableDictionary *)dicMicModel {
