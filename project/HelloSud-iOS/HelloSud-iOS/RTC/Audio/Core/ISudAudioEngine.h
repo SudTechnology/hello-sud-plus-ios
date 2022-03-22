@@ -62,7 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark -7. 发送信令
 /// 发送指令
 /// @param command 指令内容
-/// @param roomID 房间ID
 - (void)sendCommand:(NSString *)command listener:(void(^)(int))listener;
 
 @end
