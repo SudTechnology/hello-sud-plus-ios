@@ -89,6 +89,14 @@
     }];
     self.collectionView.mj_header = header;
     self.collectionView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
+    UIView *v = [[UIView alloc] init];
+    v.backgroundColor = UIColor.redColor;
+    [self.collectionView addSubview:v];
+    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.bottom.equalTo(header.mas_top);
+        make.height.mas_equalTo(100);
+    }];
 }
 
 #pragma mark - requst Data
@@ -127,8 +135,6 @@
                 [arr addObject:model.gameList[i]];
             }
         }
-//        NSSet *set = [NSSet setWithArray:originalGameArr];
-//        AppService.shared.gameList = [set allObjects];
         AppService.shared.gameList = originalGameArr;
         AppService.shared.sceneList = model.sceneList;
         
@@ -136,35 +142,18 @@
         for (HSSceneModel *m in model.sceneList) {
             NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%ld", (long)m.sceneId]];
             NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
-            
-            if (arr.count <= 6) {
-                if (arr.count == 0) {
-                    // 构建敬请期待数据
-                    [weakSelf.headerGameList addObject:[self makeGameWaitItems:6]];
-                    m.isGameWait = YES;
-                } else {
-                    [weakSelf.headerGameList addObject:arr];
+            /// 求余 填满整个屏幕
+            int row = 3;
+            double fmodCount = fmod(arr.count, row);
+            if (fmodCount > 0) {
+                for (int i = fmodCount; i < row; i++) {
+                    HSGameItem *m = [[HSGameItem alloc] init];
+                    m.isBlank = true;
+                    [arr addObject:m];
                 }
-                [weakSelf.dataList addObject:@[]];
-
-            } else {
-                NSMutableArray <HSGameItem *> *h_arr = NSMutableArray.new;
-                [h_arr setArray:[arr subarrayWithRange:NSMakeRange(0, 6)]];
-                [weakSelf.headerGameList addObject:h_arr];
-                NSMutableArray <HSGameItem *> *cellDataArray = [NSMutableArray arrayWithArray:[arr subarrayWithRange:NSMakeRange(6, arr.count-6)]];
-                
-                /// 求余 填满整个屏幕
-                double fmodCount = fmod(cellDataArray.count, 4);
-                if (fmodCount > 0) {
-                    for (int i = fmodCount; i < 4; i++) {
-                        HSGameItem *m = [[HSGameItem alloc] init];
-                        m.isBlank = true;
-                        [cellDataArray addObject:m];
-                    }
-                }
-                
-                [weakSelf.dataList addObject:cellDataArray];
             }
+
+            [weakSelf.dataList addObject:arr];
         }
         [weakSelf.headerSceneList addObjectsFromArray:model.sceneList];
         
@@ -204,6 +193,7 @@
     GameItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
     NSArray<HSGameItem *> *arr = self.dataList[indexPath.section];
     cell.model = arr[indexPath.row];
+    cell.indexPath = indexPath;
     return cell;
 }
 
@@ -222,7 +212,7 @@
 
 // 设置Header的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(kScreenWidth, 36 + 20 + self.itemH * 3);
+    return CGSizeMake(kScreenWidth, 150);
 }
  
 // 设置Footer的尺寸
@@ -234,8 +224,6 @@
     UICollectionReusableView *supplementaryView;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
         HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
-        NSArray<HSGameItem *> *arr = self.headerGameList[indexPath.section];
-        view.headerGameList = arr;
         view.sceneModel = self.headerSceneList[indexPath.section];
         supplementaryView = view;
     } else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
@@ -248,9 +236,8 @@
 #pragma mark - 懒加载
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        CGFloat itemW = (kScreenWidth -32)/4;
-        CGFloat realitemW = (kScreenWidth - 32 - 24 - 24 )/4;
-        CGFloat itemH = 125 + 12;
+        CGFloat itemW = (kScreenWidth - 32) / 3;
+        CGFloat itemH = 62;
         
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -261,7 +248,6 @@
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-//        _collectionView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[GameItemCollectionViewCell class] forCellWithReuseIdentifier:@"GameItemCollectionViewCell"];
@@ -269,7 +255,7 @@
         [_collectionView registerClass:[HomeFooterReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HomeFooterReusableView"];
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         v.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-        _collectionView.backgroundView = v;
+//        _collectionView.backgroundView = v;
     }
     return _collectionView;
 }
