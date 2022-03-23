@@ -39,10 +39,10 @@
 - (void)configBaseInfoWithCmd:(NSInteger)cmd {
     self.cmd = cmd;
     AudioUserModel *userModel = AudioUserModel.new;
-    userModel.userID = LoginService.shared.loginUserInfo.userID;
-    userModel.name = LoginService.shared.loginUserInfo.name;
-    userModel.icon = LoginService.shared.loginUserInfo.icon;
-    userModel.sex = LoginService.shared.loginUserInfo.sex;
+    userModel.userID = AppService.shared.login.loginUserInfo.userID;
+    userModel.name = AppService.shared.login.loginUserInfo.name;
+    userModel.icon = AppService.shared.login.loginUserInfo.icon;
+    userModel.sex = AppService.shared.login.loginUserInfo.sex;
     self.sendUser = userModel;
 }
 
