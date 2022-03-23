@@ -53,7 +53,7 @@
     /* 请通过官网注册获取，格式为 123456789L */
     profile.appID = (unsigned int)[model.appId longLongValue];
     /* 64个字符，请通过官网注册获取 */
-    profile.appSign = model.appSign;
+    profile.appSign = model.appKey;
     /* 通用场景接入 */
     profile.scenario = ZegoScenarioCommunication;
     /* 创建引擎 */

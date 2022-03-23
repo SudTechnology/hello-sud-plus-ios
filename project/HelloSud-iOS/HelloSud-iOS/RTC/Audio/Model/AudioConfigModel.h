@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AudioConfigModel : NSObject
 
 @property(nonatomic, copy) NSString *appId;
-@property(nonatomic, copy) NSString *appSign;
+@property(nonatomic, copy) NSString *appKey;
+@property(nonatomic, copy) NSString *token;
 
 @end
 
