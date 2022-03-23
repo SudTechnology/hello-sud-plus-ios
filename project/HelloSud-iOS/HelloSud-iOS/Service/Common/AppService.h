@@ -8,15 +8,13 @@
 #import <UIKit/UIKit.h>
 #import "AccountUserModel.h"
 #import "ConfigModel.h"
+#import "LoginService.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// APP管理模块
 @interface AppService : NSObject
-/// 登录用户信息
-@property(nonatomic, strong, readonly) AccountUserModel *loginUserInfo;
-/// token
-@property(nonatomic, copy, readonly) NSString *token;
+
 /// 配置信息
 @property(nonatomic, strong) ConfigModel *configModel;
 /// 所有游戏列表
@@ -28,10 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 选中rtc厂商类型
 @property(nonatomic, copy, readonly)NSString *rtcType;
 
+/// 登录服务
+@property (nonatomic, strong)LoginService *login;
+
 + (instancetype)shared;
 
-/// 保持用户信息
-- (void)saveLoginUserInfo;
+- (void)prepare;
 
 /// 是否同意登录协议
 @property(nonatomic, assign, readonly) BOOL isAgreement;
@@ -39,25 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 保存是否同意协议
 - (void)saveAgreement;
 
-/// 是否已经登录
-@property(nonatomic, assign, readonly) BOOL isLogin;
-/// 是否已经刷新token
-@property(nonatomic, assign) BOOL isRefreshedToken;
-
-/// 保存是否同意协议
-- (void)saveIsLogin;
-
 /// 随机名字
 - (NSString *)randomUserName;
 
 /// 设置请求header
 - (void)setupNetWorkHeader;
-
-/// 保存token
-- (void)saveToken:(NSString *)token;
-
-/// 刷新token
-- (void)refreshToken;
 
 /// 切换RTC厂商
 /// @param rtcType 对应rtc厂商类型
@@ -66,6 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 通过gameID获取游戏总人数
 /// @param gameID 游戏ID
 - (NSInteger)getTotalGameCountWithGameID:(NSInteger)gameID;
+
+/// 登录成功请求配置信息
+- (void)reqConfigData;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,14 +8,10 @@
 #import "AppService.h"
 #import "ZegoAudioEngineImpl.h"
 #import "AgoraAudioEngineImpl.h"
-/// 用户信息缓存key
-#define kKeyLoginUserInfo @"key_login_user_info"
+
 /// 用户登录确认key
 #define kKeyLoginAgreement @"key_login_agreement"
-/// 用户是否登录缓存key
-#define kKeyLoginIsLogin @"key_login_isLogin"
-/// 用户是否登录token缓存key
-#define kKeyLoginToken @"key_login_token"
+
 /// 当前选中RTC类型缓存key
 #define kKeyCurrentRTCType @"key_current_rtc_type"
 /// 配置信息缓存key
@@ -36,36 +32,22 @@
     return g_manager;
 }
 
-- (instancetype)init {
-    if (self = [super init]) {
-        [self config];
+- (LoginService *)login {
+    if (!_login) {
+        _login = [[LoginService alloc] init];
     }
-    return self;
+    return _login;
+}
+
+- (void)prepare {
+    [self config];
+    [self.login prepare];
 }
 
 - (void)config {
-    id temp = [NSUserDefaults.standardUserDefaults objectForKey:kKeyLoginUserInfo];
-    if (temp && [temp isKindOfClass:NSString.class]) {
-        AccountUserModel *m = [AccountUserModel mj_objectWithKeyValues:temp];
-        _loginUserInfo = m;
-    } else {
-        AccountUserModel *m = AccountUserModel.new;
-        _loginUserInfo = m;
-        m.userID = @"";
-        m.name = @"";
-        m.icon = @"";
-        m.sex = 1;
-    }
-    
+
     _isAgreement = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginAgreement];
-    _isLogin = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginIsLogin];
-    id temp_token = [NSUserDefaults.standardUserDefaults objectForKey:kKeyLoginToken];
-    if (temp_token && [temp_token isKindOfClass:NSString.class]) {
-        _token = temp_token;
-        [self saveIsLogin];
-        [self setupNetWorkHeader];
-        [self reqConfigData];
-    }
+
     NSString *cacheRTCType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
     NSString *configStr = [NSUserDefaults.standardUserDefaults stringForKey:kKeyConfigModel];
     if (configStr) {
@@ -97,26 +79,11 @@
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 
-/// 保持用户信息
-- (void)saveLoginUserInfo {
-    if (self.loginUserInfo) {
-        NSString *jsonStr = [self.loginUserInfo mj_JSONString];
-        [NSUserDefaults.standardUserDefaults setObject:jsonStr forKey:kKeyLoginUserInfo];
-        [NSUserDefaults.standardUserDefaults synchronize];
-    }
-}
 
 /// 保存是否同意协议
 - (void)saveAgreement {
     _isAgreement = true;
     [NSUserDefaults.standardUserDefaults setBool:true forKey:kKeyLoginAgreement];
-    [NSUserDefaults.standardUserDefaults synchronize];
-}
-
-/// 保存登录状态
-- (void)saveIsLogin {
-    _isLogin = true;
-    [NSUserDefaults.standardUserDefaults setBool:true forKey:kKeyLoginIsLogin];
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 
@@ -128,24 +95,33 @@
 
 /// 设置请求header
 - (void)setupNetWorkHeader {
-    if (self.token) {
-        [HttpService setupHeader:@{@"Authorization": self.token}];
+    NSString *token = LoginService.shared.token;
+    if (LoginService.shared.token) {
+        [HttpService setupHeader:@{@"Authorization": token}];
+        // 图片拉取鉴权
+        SDWebImageDownloader *downloader = (SDWebImageDownloader *)[SDWebImageManager sharedManager].imageLoader;
+        [downloader setValue:token forHTTPHeaderField:@"Authorization"];
     } else {
         NSLog(@"设置APP请求头token为空");
     }
-    // 图片拉取鉴权
-    SDWebImageDownloader *downloader = (SDWebImageDownloader *)[SDWebImageManager sharedManager].imageLoader;
-    [downloader setValue:self.token forHTTPHeaderField:@"Authorization"];
-}
-
-/// 保存token
-- (void)saveToken:(NSString *)token {
-    _token = token;
-    [self setupNetWorkHeader];
-    [NSUserDefaults.standardUserDefaults setValue:token forKey:kKeyLoginToken];
-    [NSUserDefaults.standardUserDefaults synchronize];
-    
-    [self reqConfigData];
+    NSString *locale = @"zh-CN";
+    NSString *clientChannel = @"appstore";
+    NSString *clientVersion = [NSString stringWithFormat:@"%@.%@", DeviceUtil.getAppVersion, DeviceUtil.getAppBuildCode];
+    NSString *deviceId = DeviceUtil.getIdfv;
+    NSString *systemType = @"iOS";
+    NSString *systemVersion = DeviceUtil.getSystemVersion;
+    NSString *clientTimestamp = [NSString stringWithFormat:@"%ld", (NSInteger)[NSDate date].timeIntervalSince1970];
+    NSArray *arr = @[
+            locale,
+            clientChannel,
+            clientVersion,
+            deviceId,
+            systemType,
+            systemVersion,
+            clientTimestamp
+            ];
+    NSString *sudMeta = [arr componentsJoinedByString:@","];
+    [HttpService setupHeader:@{@"Sud-Meta": sudMeta}];
 }
 
 /// 登录成功请求配置信息
@@ -172,14 +148,7 @@
 
 /// 刷新token
 - (void)refreshToken {
-    if (AppService.shared.isLogin) {
-        NSString *name = AppService.shared.loginUserInfo.name;
-        NSString *userID = AppService.shared.loginUserInfo.userID;
-        if (name.length > 0) {
-            [LoginService.shared reqLogin:name userID:userID sucess:^{
-                self.isRefreshedToken = YES;
-            }];
-        }
+    if (LoginService.shared.isLogin) {
     }
 }
 
@@ -260,6 +229,7 @@
     }
     return count;
 }
+
 
 @end
 

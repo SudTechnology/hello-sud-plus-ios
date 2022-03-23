@@ -67,7 +67,7 @@
 }
 
 - (void)dtUpdateUI {
-    AccountUserModel *userInfo = AppService.shared.loginUserInfo;
+    AccountUserModel *userInfo = LoginService.shared.loginUserInfo;
     self.userNameLabel.text = userInfo.name;
     self.userIdLabel.text = [NSString stringWithFormat:@"%@ %@", NSString.dt_home_user_id, userInfo.userID];
     if (userInfo.icon.length > 0) {
