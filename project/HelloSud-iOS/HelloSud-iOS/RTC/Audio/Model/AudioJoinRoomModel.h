@@ -18,11 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, copy) NSString *roomID;
 
+@property(nonatomic, copy) NSString *roomName;
+
 @property(nonatomic, copy) NSString *token;
 
-@property(nonatomic, assign) int maxMemberCount;
+@property(nonatomic, copy) NSString *nonce;
 
-@property(nonatomic, assign) BOOL isUserStatusNotify;
+@property(nonatomic, assign) long timestamp;
 
 @end
 

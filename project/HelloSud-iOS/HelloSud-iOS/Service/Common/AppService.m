@@ -224,7 +224,7 @@
         if (appID.length > 0 && appKey.length > 0) {
             AudioConfigModel *model = [[AudioConfigModel alloc] init];
             model.appId = appID;
-            model.appSign = appKey;
+            model.appKey = appKey;
             [AudioEngineFactory.shared.audioEngine initWithConfig:model];
         } else {
             [ToastUtil show:@"切换zego语音引擎失败，对应配置为空"];
