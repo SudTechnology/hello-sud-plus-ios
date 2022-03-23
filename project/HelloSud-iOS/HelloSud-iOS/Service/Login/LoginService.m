@@ -6,8 +6,20 @@
 //
 
 #import "LoginService.h"
+
+/// 配置信息缓存key
+#define kKeyRefreshToken @"key_refresh_token"
+/// 用户信息缓存key
+#define kKeyLoginUserInfo @"key_login_user_info"
+/// 用户是否登录缓存key
+#define kKeyLoginIsLogin @"key_login_isLogin"
+/// 用户是否登录token缓存key
+#define kKeyLoginToken @"key_login_token"
+
 /// token刷新通知
-NSString *const TOKEN_REFRESH_NTF = @"TOKEN_REFRESH_NTF";
+NSString *const TOKEN_REFRESH_SUCCESS_NTF = @"TOKEN_REFRESH_SUCCESS_NTF";
+/// token刷新失败通知
+NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
 
 @implementation LoginService
 
@@ -20,6 +32,59 @@ NSString *const TOKEN_REFRESH_NTF = @"TOKEN_REFRESH_NTF";
     return service;
 }
 
+- (void)config {
+    id temp = [NSUserDefaults.standardUserDefaults objectForKey:kKeyLoginUserInfo];
+    if (temp && [temp isKindOfClass:NSString.class]) {
+        AccountUserModel *m = [AccountUserModel mj_objectWithKeyValues:temp];
+        _loginUserInfo = m;
+    } else {
+        AccountUserModel *m = AccountUserModel.new;
+        _loginUserInfo = m;
+        m.userID = @"";
+        m.name = @"";
+        m.icon = @"";
+        m.sex = 1;
+    }
+
+    _isLogin = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginIsLogin];
+    id temp_token = [NSUserDefaults.standardUserDefaults objectForKey:kKeyLoginToken];
+    if (temp_token && [temp_token isKindOfClass:NSString.class]) {
+        _token = temp_token;
+        [self saveIsLogin];
+    }
+
+}
+
+/// 保存登录状态
+- (void)saveIsLogin {
+    _isLogin = true;
+    [NSUserDefaults.standardUserDefaults setBool:true forKey:kKeyLoginIsLogin];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+/// 保持用户信息
+- (void)saveLoginUserInfo {
+    if (self.loginUserInfo) {
+        NSString *jsonStr = [self.loginUserInfo mj_JSONString];
+        [NSUserDefaults.standardUserDefaults setObject:jsonStr forKey:kKeyLoginUserInfo];
+        [NSUserDefaults.standardUserDefaults synchronize];
+    }
+}
+
+/// 保存token
+- (void)saveToken:(NSString *)token {
+    _token = token;
+    [[AppService shared] setupNetWorkHeader];
+    [NSUserDefaults.standardUserDefaults setValue:token forKey:kKeyLoginToken];
+    [NSUserDefaults.standardUserDefaults synchronize];
+
+    [[AppService shared] reqConfigData];
+}
+
+- (void)prepare {
+    [self config];
+}
+
 /// 请求登录
 /// @param name 昵称
 /// @param userID 用户ID
@@ -27,7 +92,7 @@ NSString *const TOKEN_REFRESH_NTF = @"TOKEN_REFRESH_NTF";
     NSString *deviceId = [UIDevice currentDevice].identifierForVendor.UUIDString;
     NSMutableDictionary *dicParam = [NSMutableDictionary dictionaryWithDictionary:@{@"nickname": name, @"deviceId": deviceId}];
     if (userID.length > 0) {
-        dicParam[@"userId"] = [NSNumber numberWithInteger:userID.integerValue];
+        dicParam[@"userId"] = @(userID.integerValue);
     }
     [HttpService postRequestWithApi:kBASEURL(@"login/v1") param:dicParam success:^(NSDictionary *rootDict) {
         LoginModel *model = [LoginModel decodeModel:rootDict];
@@ -36,21 +101,62 @@ NSString *const TOKEN_REFRESH_NTF = @"TOKEN_REFRESH_NTF";
             return;
         }
         /// 存储用户信息
-        AppService.shared.loginUserInfo.name = model.nickname;
-        AppService.shared.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.userId];
-        AppService.shared.loginUserInfo.icon = model.avatar;
-        
-        AppService.shared.loginUserInfo.sex = 1;
-        [AppService.shared saveLoginUserInfo];
-        
-        [AppService.shared saveToken: model.token];
-        [AppService.shared saveIsLogin];
-        AppService.shared.isRefreshedToken = YES;
-        [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_NTF object:nil];
+        self.loginUserInfo.name = model.nickname;
+        self.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.userId];
+        self.loginUserInfo.icon = model.avatar;
+
+        self.loginUserInfo.sex = 1;
+        [self saveLoginUserInfo];
+
+        [self saveToken:model.token];
+        [self saveIsLogin];
+        self.isRefreshedToken = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_SUCCESS_NTF object:nil];
         if (success) success();
+    }                       failure:^(id error) {
+        [ToastUtil show:@"网络错误"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_FAIL_NTF object:nil];
+    }];
+}
+
+- (void)checkToken {
+    [self refreshToken];
+}
+
+
+/// 刷新token
+- (void)refreshToken {
+    NSString *refreshToken = [self getRefreshToken];
+    if (refreshToken.length == 0) {
+        NSLog(@"refreshTokenWithSuccess err, refresh token is empty");
+        return;
+    }
+    NSDictionary *dicParam = @{@"getRefreshToken": refreshToken};
+    WeakSelf
+    [HttpService postRequestWithApi:kBASEURL(@"refresh-token/v1") param:dicParam success:^(NSDictionary *rootDict) {
+        RespRefreshTokenModel *model = [RespRefreshTokenModel decodeModel:rootDict];
+        if (model.retCode != 0) {
+            [ToastUtil show:model.retMsg];
+            return;
+        }
+        [weakSelf saveRefreshToken:model.refreshToken];
+        [weakSelf saveToken:model.token];
+        [weakSelf saveIsLogin];
+        weakSelf.isRefreshedToken = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_SUCCESS_NTF object:nil];
+
     } failure:^(id error) {
         [ToastUtil show:@"网络错误"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_NTF object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_SUCCESS_NTF object:nil];
     }];
+}
+
+- (void)saveRefreshToken:(NSString *)refreshToken {
+    [[NSUserDefaults standardUserDefaults] setObject:refreshToken forKey:kKeyRefreshToken];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+- (NSString *)getRefreshToken {
+    return [NSUserDefaults.standardUserDefaults objectForKey:kKeyRefreshToken];
 }
 @end

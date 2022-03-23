@@ -163,7 +163,7 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:NTF_LOCAL_VOICE_VOLUME_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         NSNumber *soundLevel = note.userInfo[@"volume"];
         if ([soundLevel isKindOfClass:NSNumber.class] ) {
-            NSString *myUserID = AppService.shared.loginUserInfo.userID;
+            NSString *myUserID = LoginService.shared.loginUserInfo.userID;
             // 操作麦位与当前符合
             if (weakSelf.model.user != nil &&
                 [weakSelf.model.user.userID isEqualToString:myUserID]) {

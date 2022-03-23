@@ -86,7 +86,7 @@
 
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
 - (void)onGameMGCommonGameState:(id<ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
-    if (model.gameState == 2 && [AppService.shared.loginUserInfo.userID isEqualToString:self.sudFSMMGDecorator.captainUserId]) {
+    if (model.gameState == 2 && [LoginService.shared.loginUserInfo.userID isEqualToString:self.sudFSMMGDecorator.captainUserId]) {
         self.isShowEndGame = true;
     } else {
         self.isShowEndGame = false;
@@ -187,7 +187,7 @@
 #pragma mark =======玩家状态处理=======
 /// 加入状态处理
 - (void)updatePlayerCommonPlayerIn:(MGCommonPlayerInModel *)model userId:(NSString *)userId {
-    if (model.isIn && [AppService.shared.loginUserInfo.userID isEqualToString:userId]) {
+    if (model.isIn && [LoginService.shared.loginUserInfo.userID isEqualToString:userId]) {
         // 请求上麦
         [self handleGameUpMic];
     }
@@ -255,7 +255,7 @@
             NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
             if (weakSelf) {
                 // SudMGPSDK初始化成功 加载MG
-                NSString *userID = AppService.shared.loginUserInfo.userID;
+                NSString *userID = LoginService.shared.loginUserInfo.userID;
                 NSString *roomID = weakSelf.roomID;
                 if (userID.length == 0 || roomID.length == 0 || code.length == 0) {
                     [ToastUtil show:@"加载游戏失败，请检查参数"];

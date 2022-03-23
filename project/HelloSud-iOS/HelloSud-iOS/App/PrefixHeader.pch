@@ -45,6 +45,7 @@
 #import "SceneFactory.h"
 /// manager
 #import "RespUserInfoModel.h"
+#import "RespModel.h"
 #import "ServiceConstHeader.h"
 #import "AppService.h"
 #import "UserService.h"

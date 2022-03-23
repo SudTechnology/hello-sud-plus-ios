@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)getAppBuildCode;
 
+/// 系统标识
++ (NSString *)getIdfv;
+
++ (NSString *)getSystemVersion;
+
 /// 检测权限
 /// @param result 结果回调
 + (void)checkMicAuth:(void(^)(BOOL isAuth))result;

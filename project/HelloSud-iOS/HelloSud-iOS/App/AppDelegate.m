@@ -24,9 +24,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    [[AppService shared] prepare];
+    [[AppService shared] setupNetWorkHeader];
+    [self observerNTF];
     self.window = [[UIWindow alloc]init];
-    if (AppService.shared.isLogin) {
-        [AppService.shared refreshToken];
+    if (LoginService.shared.isLogin) {
+        [AppService.shared.login checkToken];
         self.window.rootViewController = [[MainTabBarController alloc]init];
     } else {
         self.window.rootViewController = [[LoginViewController alloc]init];
@@ -47,21 +51,19 @@
     [Bugly startWithAppId:BUGLEY_APP_ID];
 }
 
-#pragma mark - UISceneSession lifecycle
-
-
-//- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
-//    // Called when a new scene session is being created.
-//    // Use this method to select a configuration to create the new scene with.
-//    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
-//}
-//
-//
-//- (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
-//    // Called when the user discards a scene session.
-//    // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-//    // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-//}
-
-
+- (void)observerNTF {
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        if (LoginService.shared.isRefreshedToken && ![self.window.rootViewController isKindOfClass:[MainTabBarController class]]) {
+            /// 切根式图
+            self.window.rootViewController = [[MainTabBarController alloc] init];
+        }
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_FAIL_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        if (![self.window.rootViewController isKindOfClass:[LoginViewController class]]) {
+            /// 切根式图
+            self.window.rootViewController = [[LoginViewController alloc]init];
+            [ToastUtil show:@"登录已过期，请重新进入"];
+        }
+    }];
+}
 @end
