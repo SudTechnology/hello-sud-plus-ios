@@ -244,7 +244,7 @@
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomStreamUpdate:updateType:streamList:extendedData:)]) {
         NSMutableArray *arr = NSMutableArray.new;
         for (ZegoStream *m in streamList) {
-            MediaStream *stream = MediaStream.new;
+            AudioStream *stream = AudioStream.new;
             stream.userID = m.user.userID;
             stream.streamID = m.streamID;
             stream.extraInfo = m.extraInfo;
