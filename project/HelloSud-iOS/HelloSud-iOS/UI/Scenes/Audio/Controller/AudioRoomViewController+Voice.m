@@ -70,10 +70,10 @@
 /// @param updateType 流更新类型 增，减
 /// @param streamList 变动流列表
 /// @param extendedData 扩展信息
-- (void)onRoomStreamUpdate:(NSString *)roomID updateType:(HSAudioEngineUpdateType)updateType streamList:(NSArray<MediaStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData {
+- (void)onRoomStreamUpdate:(NSString *)roomID updateType:(HSAudioEngineUpdateType)updateType streamList:(NSArray<AudioStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData {
     switch (updateType) {
         case HSAudioEngineUpdateTypeAdd:
-            for (MediaStream *item in streamList) {
+            for (AudioStream *item in streamList) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey:item}];
             }
             break;

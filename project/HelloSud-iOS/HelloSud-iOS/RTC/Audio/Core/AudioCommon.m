@@ -7,15 +7,9 @@
 
 #import "AudioCommon.h"
 
-/// 音频流帧参数
-@implementation HSAudioEngineFrameParamModel
-@end
-
-@implementation MediaRoomConfig
-@end
 
 /// 媒体流信息
-@implementation MediaStream
+@implementation AudioStream
 @end
 
 

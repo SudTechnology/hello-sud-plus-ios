@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param updateType 流更新类型 增，减
 /// @param streamList 变动流列表
 /// @param extendedData 扩展信息
-- (void)onRoomStreamUpdate:(NSString *)roomID updateType:(HSAudioEngineUpdateType)updateType streamList:(NSArray<MediaStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData;
+- (void)onRoomStreamUpdate:(NSString *)roomID updateType:(HSAudioEngineUpdateType)updateType streamList:(NSArray<AudioStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData;
 
 /// 接收自定义指令信息回调
 /// @param fromUserID 用户
