@@ -10,7 +10,7 @@
 
 @interface ZegoAudioEngineImpl()<ZegoEventHandler, ZegoAudioDataHandler>
 @property(nonatomic, strong)dispatch_queue_t queueMute;
-@property(nonatomic, weak)id<ISudAudioEventListener> listener;
+@property(nonatomic, weak)id<ISudAudioEventListener> mISudAudioEventListener;
 @property(nonatomic, strong)NSString *mRoomId;
 
 /// 流与ID关系[streamID:userID]
@@ -36,12 +36,13 @@
 /// 设置事件处理器
 /// @param listener 事件处理实例
 - (void)setEventListener:(id<ISudAudioEventListener>)listener {
-    _listener = listener;
+    _mISudAudioEventListener = listener;
 }
 
 
 - (void)initWithConfig:(AudioConfigModel *)model {
-    if (model == nil)
+    ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
+    if (model == nil || engine != nil)
         return;
     
     ZegoEngineConfig *engineConfig = ZegoEngineConfig.new;
@@ -49,12 +50,14 @@
     engineConfig.advancedConfig = @{@"audio_capture_dummy": @"true", @"init_domain_name": @"ze-config.divtoss.com"};
     [ZegoExpressEngine setEngineConfig:engineConfig];
     ZegoEngineProfile *profile = ZegoEngineProfile.new;
-    profile.appID = [model.appId intValue];
+    /* 请通过官网注册获取，格式为 123456789L */
+    profile.appID = (unsigned int)[model.appId longLongValue];
+    /* 64个字符，请通过官网注册获取 */
     profile.appSign = model.appSign;
+    /* 通用场景接入 */
     profile.scenario = ZegoScenarioCommunication;
-    [ZegoExpressEngine createEngineWithProfile:profile eventHandler:self];
-    
-    ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
+    /* 创建引擎 */
+    engine = [ZegoExpressEngine createEngineWithProfile:profile eventHandler:self];
     if (engine != nil) {
         [engine startSoundLevelMonitor];
     }
@@ -68,16 +71,24 @@
 - (void)joinRoom:(AudioJoinRoomModel *)model {
     if (model == nil)
         return;
+    
+    if (model.roomID == nil || [model.roomID length] == 0
+        || model.userID == nil || [model.userID length] == 0) {
+        @throw [NSException exceptionWithName:@"Invalid Argument" reason:@"roomID or userID can't be empty" userInfo:nil];
+    }
 
     ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
     if (engine != nil) {
+        /* 创建用户 */
         ZegoUser *zegoUser = ZegoUser.new;
         zegoUser.userID = model.userID;
         zegoUser.userName = model.userName;
-        ZegoRoomConfig *zegoConfig = [ZegoRoomConfig defaultConfig];
-        zegoConfig.isUserStatusNotify = YES;
-        
-        [engine loginRoom:model.roomID user:zegoUser config:zegoConfig];
+        ZegoRoomConfig *zegoRoomConfig = [ZegoRoomConfig defaultConfig];
+        /* Enable notification when user login or logout */
+        zegoRoomConfig.isUserStatusNotify = YES;
+        zegoRoomConfig.token = model.token;
+        /* 开始登陆房间 */
+        [engine loginRoom:model.roomID user:zegoUser config:zegoRoomConfig];
     }
 }
 
@@ -152,6 +163,7 @@
 - (void)stopPCMCapture {
     ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
     if (engine != nil) {
+        /* 置空原始音频数据回调 */
         [engine setAudioDataHandler:nil];
         [engine stopAudioDataObserver];
     }
@@ -182,24 +194,23 @@
         self.mRoomId = roomID;
     }
     
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomStateUpdate:state:errorCode:extendedData:)]) {
-        [self.listener onRoomStateUpdate:roomID state:(HSAudioEngineRoomState)state errorCode:errorCode extendedData:extendedData];
+    if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRoomStateUpdate:state:errorCode:extendedData:)]) {
+        [self.mISudAudioEventListener onRoomStateUpdate:roomID state:(HSAudioEngineRoomState)state errorCode:errorCode extendedData:extendedData];
     }
 }
 
 - (void)onCapturedSoundLevelUpdate:(NSNumber *)soundLevel {
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onCapturedSoundLevelUpdate:)]) {
-        [self.listener onCapturedSoundLevelUpdate:soundLevel];
+    if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onCapturedSoundLevelUpdate:)]) {
+        [self.mISudAudioEventListener onCapturedSoundLevelUpdate:soundLevel];
     }
 }
 
 - (void)onRemoteSoundLevelUpdate:(NSDictionary<NSString *,NSNumber *> *)soundLevels {
-
     if (soundLevels == nil || [soundLevels count] == 0) {
         return;
     }
 
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRemoteSoundLevelUpdate:)]) {
+    if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRemoteSoundLevelUpdate:)]) {
         NSMutableDictionary *userSoundLevels = NSMutableDictionary.new;
         NSArray *allStrems = soundLevels.allKeys;
         for (NSString *key in allStrems) {
@@ -208,11 +219,12 @@
                 userSoundLevels[userID] = soundLevels[key];
             }
         }
-        [self.listener onRemoteSoundLevelUpdate:userSoundLevels];
+        [self.mISudAudioEventListener onRemoteSoundLevelUpdate:userSoundLevels];
     }
 }
 
 - (void)onRoomStreamUpdate:(ZegoUpdateType)updateType streamList:(NSArray<ZegoStream *> *)streamList extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {
+    // 存储userId对应的streamId
     if (streamList != nil) {
         for (ZegoStream *m in streamList) {
             if (updateType == ZegoUpdateTypeAdd) {
@@ -241,7 +253,7 @@
         }
     }
     
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomStreamUpdate:updateType:streamList:extendedData:)]) {
+    if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRoomStreamUpdate:updateType:streamList:extendedData:)]) {
         NSMutableArray *arr = NSMutableArray.new;
         for (ZegoStream *m in streamList) {
             AudioStream *stream = AudioStream.new;
@@ -251,19 +263,19 @@
             [arr addObject:stream];
         }
         
-        [self.listener onRoomStreamUpdate:roomID updateType:updateType streamList:arr extendedData:extendedData];
+        [self.mISudAudioEventListener onRoomStreamUpdate:roomID updateType:updateType streamList:arr extendedData:extendedData];
     }
 }
 
 - (void)onIMRecvCustomCommand:(NSString *)command fromUser:(ZegoUser *)fromUser roomID:(NSString *)roomID {
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRecvCommand:command:)]) {
-        [self.listener onRecvCommand:fromUser.userID command:command];
+    if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRecvCommand:command:)]) {
+        [self.mISudAudioEventListener onRecvCommand:fromUser.userID command:command];
     }
 }
 
 - (void)onRoomOnlineUserCountUpdate:(int)count roomID:(NSString *)roomID {
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onRoomOnlineUserCountUpdate:count:)]) {
-        [self.listener onRoomOnlineUserCountUpdate:roomID count:count];
+    if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRoomOnlineUserCountUpdate:count:)]) {
+        [self.mISudAudioEventListener onRoomOnlineUserCountUpdate:roomID count:count];
     }
 }
 
@@ -271,8 +283,8 @@
 - (void)onCapturedAudioData:(const unsigned char *)data dataLength:(unsigned int)dataLength param:(ZegoAudioFrameParam *)param {
     // 本地采集音频数据，推流后可收到回调
     NSData *a_data = [[NSData alloc] initWithBytes:data length:dataLength];
-    if (self.listener != nil && [self.listener respondsToSelector:@selector(onCapturedPCMData:)]) {
-        [self.listener onCapturedPCMData:a_data];
+    if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onCapturedPCMData:)]) {
+        [self.mISudAudioEventListener onCapturedPCMData:a_data];
     }
 }
 
