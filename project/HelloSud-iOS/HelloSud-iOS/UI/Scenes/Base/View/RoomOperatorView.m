@@ -51,7 +51,7 @@
         RoomCmdUpMicModel *msgModel = note.userInfo[@"msgModel"];
         if ([msgModel isKindOfClass:RoomCmdUpMicModel.class] ) {
             // 操作麦位与当前符合
-            if ([LoginService.shared.loginUserInfo isMeByUserID: msgModel.sendUser.userID]) {
+            if ([AppService.shared.login.loginUserInfo isMeByUserID: msgModel.sendUser.userID]) {
                 if (msgModel.cmd == CMD_DOWN_MIC_NOTIFY) {
                     // 下麦
                     weakSelf.voiceBtnState = VoiceBtnStateTypeNormal;

@@ -227,7 +227,7 @@
         /// 无人，上麦
         [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:0 success:nil fail:nil];
         return;
-    } else if ([LoginService.shared.loginUserInfo isMeByUserID:micModel.user.userID]) {
+    } else if ([AppService.shared.login.loginUserInfo isMeByUserID:micModel.user.userID]) {
         BOOL isGameing = self.sudFSMMGDecorator.isPlaying;
         // 是自己或者房主
         MicOperateView *v = [[MicOperateView alloc]initWithOperateList: @[@"下麦"]];
@@ -248,15 +248,15 @@
                 // 下麦
                 [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
                 
-                if ([self.sudFSMMGDecorator isPlayerIsPlaying:LoginService.shared.loginUserInfo.userID]) {
+                if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.login.loginUserInfo.userID]) {
                     /// 先退出结束游戏，再退出当前游戏
                     [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
                     [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
-                } else if ([self.sudFSMMGDecorator isPlayerIsReady:LoginService.shared.loginUserInfo.userID]) {
+                } else if ([self.sudFSMMGDecorator isPlayerIsReady:AppService.shared.login.loginUserInfo.userID]) {
                     /// 先取消准备游戏，再退出当前游戏
                     [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:false];
                     [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
-                }  else if ([self.sudFSMMGDecorator isPlayerIn:LoginService.shared.loginUserInfo.userID]) {
+                }  else if ([self.sudFSMMGDecorator isPlayerIn:AppService.shared.login.loginUserInfo.userID]) {
                     /// 退出当前游戏
                     [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
                 }
@@ -351,7 +351,7 @@
 
 /// 游戏开关麦
 - (void)handleGameTapVoice:(BOOL)isOn {
-    BOOL isPlaying = [self.sudFSMMGDecorator isPlayerIsPlaying:LoginService.shared.loginUserInfo.userID];
+    BOOL isPlaying = [self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.login.loginUserInfo.userID];
     NSLog(@"handleGameTapVoice, isPlaying:%@, isOn:%@, btn state:%@", @(isPlaying), @(isOn), @(self.operatorView.voiceBtnState));
     if (isOn) {
         self.isGameForbiddenVoice = NO;
@@ -536,7 +536,7 @@
     BOOL isInMic = false;
     NSArray *micArr = self.dicMicModel.allValues;
     for (AudioRoomMicModel *m in micArr) {
-        if ([m.user.userID isEqualToString:LoginService.shared.loginUserInfo.userID]) {
+        if ([m.user.userID isEqualToString:AppService.shared.login.loginUserInfo.userID]) {
             isInMic = true;
         }
     }

@@ -16,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 登录服务
 @interface LoginService : NSObject
 
-+ (instancetype)shared;
-
 /// 是否已经登录
 @property(nonatomic, assign, readonly) BOOL isLogin;
 /// 是否已经刷新token

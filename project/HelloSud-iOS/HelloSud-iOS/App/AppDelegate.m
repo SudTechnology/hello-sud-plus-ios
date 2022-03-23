@@ -29,7 +29,7 @@
     [[AppService shared] setupNetWorkHeader];
     [self observerNTF];
     self.window = [[UIWindow alloc]init];
-    if (LoginService.shared.isLogin) {
+    if (AppService.shared.login.isLogin) {
         [AppService.shared.login checkToken];
         self.window.rootViewController = [[MainTabBarController alloc]init];
     } else {
@@ -53,7 +53,7 @@
 
 - (void)observerNTF {
     [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        if (LoginService.shared.isRefreshedToken && ![self.window.rootViewController isKindOfClass:[MainTabBarController class]]) {
+        if (AppService.shared.login.isRefreshedToken && ![self.window.rootViewController isKindOfClass:[MainTabBarController class]]) {
             /// 切根式图
             self.window.rootViewController = [[MainTabBarController alloc] init];
         }

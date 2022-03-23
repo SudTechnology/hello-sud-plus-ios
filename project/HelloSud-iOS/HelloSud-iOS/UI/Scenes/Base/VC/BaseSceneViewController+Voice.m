@@ -32,7 +32,7 @@
 - (void)loginRoom {
     /// 设置语音引擎事件回调
     [AudioEngineFactory.shared.audioEngine setEventListener:self];
-    MediaUser *user = [MediaUser user:LoginService.shared.loginUserInfo.userID nickname:LoginService.shared.loginUserInfo.name];
+    MediaUser *user = [MediaUser user:AppService.shared.login.loginUserInfo.userID nickname:AppService.shared.login.loginUserInfo.name];
     [AudioEngineFactory.shared.audioEngine loginRoom:self.roomID user:user config:nil];
 }
 

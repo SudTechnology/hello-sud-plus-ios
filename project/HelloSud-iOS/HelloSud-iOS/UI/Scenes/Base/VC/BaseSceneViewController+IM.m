@@ -36,7 +36,7 @@
 /// 发送进房消息
 - (void)sendEnterRoomMsg {
     self.isEnteredRoom = YES;
-    AudioMsgSystemModel *msg = [AudioMsgSystemModel makeMsg:[NSString stringWithFormat:@"%@ 进入了房间", LoginService.shared.loginUserInfo.name]];
+    AudioMsgSystemModel *msg = [AudioMsgSystemModel makeMsg:[NSString stringWithFormat:@"%@ 进入了房间", AppService.shared.login.loginUserInfo.name]];
     [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NOTIFY];
     [self sendMsg:msg isAddToShow:YES];
 }
@@ -124,7 +124,7 @@
 /// 加入游戏
 - (void)notifyGameToJoin {
 
-    if (![self.sudFSMMGDecorator isPlayerIn:LoginService.shared.loginUserInfo.userID]) {
+    if (![self.sudFSMMGDecorator isPlayerIn:AppService.shared.login.loginUserInfo.userID]) {
         if (self.sudFSMMGDecorator.gameStateType == GameStateTypeLeisure && !self.sudFSMMGDecorator.isInGame) {
             /// 上麦，就是加入游戏
             [self.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];

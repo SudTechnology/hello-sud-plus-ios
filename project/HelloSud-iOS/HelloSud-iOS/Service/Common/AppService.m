@@ -95,8 +95,8 @@
 
 /// 设置请求header
 - (void)setupNetWorkHeader {
-    NSString *token = LoginService.shared.token;
-    if (LoginService.shared.token) {
+    NSString *token = AppService.shared.login.token;
+    if (AppService.shared.login.token) {
         [HttpService setupHeader:@{@"Authorization": token}];
         // 图片拉取鉴权
         SDWebImageDownloader *downloader = (SDWebImageDownloader *)[SDWebImageManager sharedManager].imageLoader;
@@ -148,7 +148,7 @@
 
 /// 刷新token
 - (void)refreshToken {
-    if (LoginService.shared.isLogin) {
+    if (AppService.shared.login.isLogin) {
     }
 }
 
