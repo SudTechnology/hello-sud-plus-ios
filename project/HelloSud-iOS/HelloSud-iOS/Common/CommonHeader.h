@@ -25,6 +25,7 @@ typedef void(^ErrorBlock)(NSError *error);
 #import "AppUtil.h"
 #import "DeviceUtil.h"
 #import "ToastUtil.h"
+#import "LanguageUtil.h"
 /// Base
 #import "BaseView.h"
 #import "BaseModel.h"
@@ -36,6 +37,7 @@ typedef void(^ErrorBlock)(NSError *error);
 #import "DTUIColor+Extension.h"
 #import "DTUIDevice+Extension.h"
 #import "DTNSError+Custom.h"
+#import "NSBundle+Language.h"
 
 /// Views
 #import "DTSheetView.h"
