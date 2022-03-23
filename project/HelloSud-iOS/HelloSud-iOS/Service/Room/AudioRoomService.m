@@ -85,12 +85,13 @@
             return;
         }
         weakSelf.roleType = model.roleType;
-        AudioRoomViewController *vc = [[AudioRoomViewController alloc] init];
+        AudioSceneConfigModel *config = [[AudioSceneConfigModel alloc] init];
+        config.gameId = model.gameId;
+        config.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
+        config.roomType = model.gameId == 0 ? HSAudio : HSGame;
+        config.roomName = model.roomName;
+        AudioRoomViewController *vc = (AudioRoomViewController *) [SceneFactory createSceneVC:SceneFactoryTypeVoice configModel:config];
         AudioRoomService.shared.currentRoomVC = vc;
-        vc.gameId = model.gameId;
-        vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
-        vc.roomType = model.gameId == 0 ? HSAudio : HSGame;
-        vc.roomName = model.roomName;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
         if (success) {
             success();
