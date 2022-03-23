@@ -65,9 +65,9 @@
 "dt_common_cancel" = "取消";
 
 /// Main
-"dt_tab_home" = "主页";
-"dt_tab_room" = "房间";
-"dt_tab_setting" = "设置";
+"dt_tab_home" = "主页en";
+"dt_tab_room" = "房间en";
+"dt_tab_setting" = "设置en";
 
 /// Scenes
 "dt_send" = "送给";

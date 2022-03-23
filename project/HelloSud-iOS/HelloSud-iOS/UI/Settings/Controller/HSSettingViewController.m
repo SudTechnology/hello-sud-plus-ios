@@ -11,6 +11,7 @@
 #import "HSSetingHeadView.h"
 #import "ChangeRTCViewController.h"
 #import "VersionInfoViewController.h"
+#import "SwitchLanguageViewController.h"
 
 @interface HSSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong)UITableView *tableView;
@@ -152,7 +153,9 @@
             [weakSelf.tableView reloadData];
         };
     } else if ([model.title isEqualToString:NSString.dt_settings_switch_language]) {
-        [ToastUtil show:NSString.dt_settings_work_in_progress];
+//        [ToastUtil show:NSString.dt_settings_work_in_progress];
+        SwitchLanguageViewController *vc = SwitchLanguageViewController.new;
+        [self.navigationController pushViewController:vc animated:YES];
     } else if ([model.title isEqualToString:@"GitHub"]) {
         if (@available(iOS 10.0, *)) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.pageURL] options:@{} completionHandler:nil];

@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 开源协议
 + (NSURL *)appLicenseURL;
+
 @end
 
 NS_ASSUME_NONNULL_END

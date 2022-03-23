@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */; };
+		44241ADB27EACF39001EE125 /* SwitchLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44241ADA27EACF39001EE125 /* SwitchLanguageViewController.m */; };
+		44241ADE27EACF9C001EE125 /* SwitchLangModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44241ADD27EACF9C001EE125 /* SwitchLangModel.m */; };
+		44241AE127EAD07B001EE125 /* SwitchLangTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44241AE027EAD07B001EE125 /* SwitchLangTableViewCell.m */; };
+		44241AE427EAD599001EE125 /* NSBundle+Language.m in Sources */ = {isa = PBXBuildFile; fileRef = 44241AE327EAD599001EE125 /* NSBundle+Language.m */; };
+		44241AE727EAD6E3001EE125 /* LanguageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 44241AE627EAD6E3001EE125 /* LanguageUtil.m */; };
 		4455AD8427EAC658001516EE /* HSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455ACC127EAC657001516EE /* HSSettingViewController.m */; };
 		4455AD8527EAC658001516EE /* VersionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455ACC327EAC657001516EE /* VersionInfoViewController.m */; };
 		4455AD8627EAC658001516EE /* ChangeRTCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455ACC527EAC657001516EE /* ChangeRTCViewController.m */; };
@@ -170,6 +175,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		44241AD927EACF39001EE125 /* SwitchLanguageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchLanguageViewController.h; sourceTree = "<group>"; };
+		44241ADA27EACF39001EE125 /* SwitchLanguageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchLanguageViewController.m; sourceTree = "<group>"; };
+		44241ADC27EACF9C001EE125 /* SwitchLangModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchLangModel.h; sourceTree = "<group>"; };
+		44241ADD27EACF9C001EE125 /* SwitchLangModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchLangModel.m; sourceTree = "<group>"; };
+		44241ADF27EAD07B001EE125 /* SwitchLangTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchLangTableViewCell.h; sourceTree = "<group>"; };
+		44241AE027EAD07B001EE125 /* SwitchLangTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchLangTableViewCell.m; sourceTree = "<group>"; };
+		44241AE227EAD599001EE125 /* NSBundle+Language.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Language.h"; sourceTree = "<group>"; };
+		44241AE327EAD599001EE125 /* NSBundle+Language.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Language.m"; sourceTree = "<group>"; };
+		44241AE527EAD6E3001EE125 /* LanguageUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageUtil.h; sourceTree = "<group>"; };
+		44241AE627EAD6E3001EE125 /* LanguageUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageUtil.m; sourceTree = "<group>"; };
 		4455ACC027EAC657001516EE /* VersionInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionInfoViewController.h; sourceTree = "<group>"; };
 		4455ACC127EAC657001516EE /* HSSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSettingViewController.m; sourceTree = "<group>"; };
 		4455ACC227EAC657001516EE /* ChangeRTCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeRTCViewController.h; sourceTree = "<group>"; };
@@ -519,12 +534,14 @@
 		4455ACBF27EAC657001516EE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4455ACC027EAC657001516EE /* VersionInfoViewController.h */,
+				4455ACC427EAC657001516EE /* HSSettingViewController.h */,
 				4455ACC127EAC657001516EE /* HSSettingViewController.m */,
 				4455ACC227EAC657001516EE /* ChangeRTCViewController.h */,
-				4455ACC327EAC657001516EE /* VersionInfoViewController.m */,
-				4455ACC427EAC657001516EE /* HSSettingViewController.h */,
 				4455ACC527EAC657001516EE /* ChangeRTCViewController.m */,
+				4455ACC027EAC657001516EE /* VersionInfoViewController.h */,
+				4455ACC327EAC657001516EE /* VersionInfoViewController.m */,
+				44241AD927EACF39001EE125 /* SwitchLanguageViewController.h */,
+				44241ADA27EACF39001EE125 /* SwitchLanguageViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -532,14 +549,16 @@
 		4455ACC627EAC657001516EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4455ACC727EAC657001516EE /* VersionInfoModel.m */,
 				4455ACC827EAC657001516EE /* HSSettingModel.h */,
-				4455ACC927EAC657001516EE /* ChangeRTCModel.h */,
-				4455ACCA27EAC657001516EE /* HSSettingHeaderModel.m */,
-				4455ACCB27EAC657001516EE /* VersionInfoModel.h */,
-				4455ACCC27EAC657001516EE /* ChangeRTCModel.m */,
 				4455ACCD27EAC657001516EE /* HSSettingModel.m */,
 				4455ACCE27EAC657001516EE /* HSSettingHeaderModel.h */,
+				4455ACCA27EAC657001516EE /* HSSettingHeaderModel.m */,
+				4455ACCB27EAC657001516EE /* VersionInfoModel.h */,
+				4455ACC727EAC657001516EE /* VersionInfoModel.m */,
+				4455ACC927EAC657001516EE /* ChangeRTCModel.h */,
+				4455ACCC27EAC657001516EE /* ChangeRTCModel.m */,
+				44241ADC27EACF9C001EE125 /* SwitchLangModel.h */,
+				44241ADD27EACF9C001EE125 /* SwitchLangModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -547,16 +566,18 @@
 		4455ACCF27EAC657001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4455ACD027EAC657001516EE /* VersionInfoCell.m */,
-				4455ACD127EAC657001516EE /* HSSettingCell.m */,
-				4455ACD227EAC657001516EE /* HSSetingHeadView.h */,
-				4455ACD327EAC657001516EE /* ChangeRTCTCell.m */,
-				4455ACD427EAC657001516EE /* HSSetingHeadItemView.h */,
-				4455ACD527EAC657001516EE /* HSSetingHeadView.m */,
 				4455ACD627EAC657001516EE /* VersionInfoCell.h */,
+				4455ACD027EAC657001516EE /* VersionInfoCell.m */,
 				4455ACD727EAC657001516EE /* HSSettingCell.h */,
-				4455ACD827EAC657001516EE /* HSSetingHeadItemView.m */,
+				4455ACD127EAC657001516EE /* HSSettingCell.m */,
 				4455ACD927EAC657001516EE /* ChangeRTCTCell.h */,
+				4455ACD327EAC657001516EE /* ChangeRTCTCell.m */,
+				44241ADF27EAD07B001EE125 /* SwitchLangTableViewCell.h */,
+				44241AE027EAD07B001EE125 /* SwitchLangTableViewCell.m */,
+				4455ACD427EAC657001516EE /* HSSetingHeadItemView.h */,
+				4455ACD827EAC657001516EE /* HSSetingHeadItemView.m */,
+				4455ACD227EAC657001516EE /* HSSetingHeadView.h */,
+				4455ACD527EAC657001516EE /* HSSetingHeadView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -710,7 +731,6 @@
 				4455AD6927EAC658001516EE /* Ticket */,
 				4455AD7B27EAC658001516EE /* Crossroom */,
 				4455AD7E27EAC658001516EE /* OneOne */,
-				4455AD8127EAC658001516EE /* Talent */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -839,14 +859,15 @@
 		4455AD7227EAC658001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4455AD7327EAC658001516EE /* TicketJoinPopView.m */,
-				4455AD7427EAC658001516EE /* TicketChooseItemView.m */,
 				4455AD7527EAC658001516EE /* TicketChooseNoticeView.h */,
-				4455AD7627EAC658001516EE /* DTRollTableView.h */,
-				4455AD7727EAC658001516EE /* TicketJoinPopView.h */,
-				4455AD7827EAC658001516EE /* TicketChooseItemView.h */,
 				4455AD7927EAC658001516EE /* TicketChooseNoticeView.m */,
+				4455AD8127EAC658001516EE /* Talent */,
+				4455AD7627EAC658001516EE /* DTRollTableView.h */,
 				4455AD7A27EAC658001516EE /* DTRollTableView.m */,
+				4455AD7727EAC658001516EE /* TicketJoinPopView.h */,
+				4455AD7327EAC658001516EE /* TicketJoinPopView.m */,
+				4455AD7827EAC658001516EE /* TicketChooseItemView.h */,
+				4455AD7427EAC658001516EE /* TicketChooseItemView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -892,13 +913,13 @@
 		4455ADD427EAC6F7001516EE /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				4455ADD527EAC6F7001516EE /* BaseSceneViewController+Game.m */,
-				4455ADD627EAC6F7001516EE /* BaseSceneViewController.m */,
-				4455ADD727EAC6F7001516EE /* BaseSceneViewController+Voice.m */,
-				4455ADD827EAC6F7001516EE /* BaseSceneViewController+IM.h */,
 				4455ADD927EAC6F7001516EE /* BaseSceneViewController.h */,
+				4455ADD627EAC6F7001516EE /* BaseSceneViewController.m */,
 				4455ADDA27EAC6F7001516EE /* BaseSceneViewController+Game.h */,
+				4455ADD527EAC6F7001516EE /* BaseSceneViewController+Game.m */,
+				4455ADD827EAC6F7001516EE /* BaseSceneViewController+IM.h */,
 				4455ADDB27EAC6F7001516EE /* BaseSceneViewController+IM.m */,
+				4455ADD727EAC6F7001516EE /* BaseSceneViewController+Voice.m */,
 				4455ADDC27EAC6F7001516EE /* BaseSceneViewController+Voice.h */,
 			);
 			path = VC;
@@ -1124,10 +1145,10 @@
 		6C192E4A279523B000553034 /* HelloSud-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				44018CE027EAC49900FD9D0F /* UI */,
-				44DF03902796B22C006EE6AC /* Common */,
 				6CD6E84B27BE30BE00D8F76C /* App */,
+				44DF03902796B22C006EE6AC /* Common */,
 				44DF03842796A9EF006EE6AC /* SudMGPWrapper */,
+				44018CE027EAC49900FD9D0F /* UI */,
 				6C076EA3279F983100650209 /* Service */,
 				44DF037E2796A981006EE6AC /* RTC */,
 			);
@@ -1361,6 +1382,8 @@
 				BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */,
 				BC2100EC41AFF28046FF7B87 /* DTNSError+Custom.h */,
 				BC210D5A0981935974C33E8B /* DTNSError+Custom.m */,
+				44241AE227EAD599001EE125 /* NSBundle+Language.h */,
+				44241AE327EAD599001EE125 /* NSBundle+Language.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1395,6 +1418,8 @@
 				BC2105042E549C236540DC05 /* DeviceUtil.m */,
 				BC21046606D40897C9A2BC55 /* ToastUtil.h */,
 				BC2102EB58A8CE4A527A5167 /* ToastUtil.m */,
+				44241AE527EAD6E3001EE125 /* LanguageUtil.h */,
+				44241AE627EAD6E3001EE125 /* LanguageUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1544,8 +1569,10 @@
 				445EAA9427996AC6000DCC72 /* BaseNavigationViewController.m in Sources */,
 				4455AE0727EAC6F7001516EE /* BaseSceneViewController+Voice.m in Sources */,
 				4455AE0E27EAC6F7001516EE /* HSRoomTextTableViewCell.m in Sources */,
+				44241AE427EAD599001EE125 /* NSBundle+Language.m in Sources */,
 				44F29F7527BE005900F57DEE /* GameCfgModel.m in Sources */,
 				445EAA7A27990C71000DCC72 /* BaseViewController.m in Sources */,
+				44241AE127EAD07B001EE125 /* SwitchLangTableViewCell.m in Sources */,
 				4455AE0A27EAC6F7001516EE /* RoomGameInfoModel.m in Sources */,
 				6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */,
 				4455AD8427EAC658001516EE /* HSSettingViewController.m in Sources */,
@@ -1558,6 +1585,7 @@
 				4455ADC927EAC658001516EE /* TicketChooseViewController.m in Sources */,
 				4455ADCD27EAC658001516EE /* TicketChooseItemView.m in Sources */,
 				4455AD8827EAC658001516EE /* HSSettingHeaderModel.m in Sources */,
+				44241AE727EAD6E3001EE125 /* LanguageUtil.m in Sources */,
 				44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */,
 				4455ADCB27EAC658001516EE /* TocketChooseModel.m in Sources */,
 				4455AD8927EAC658001516EE /* ChangeRTCModel.m in Sources */,
@@ -1567,6 +1595,7 @@
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				4455ADAE27EAC658001516EE /* AudioUserModel.m in Sources */,
 				4455ADAD27EAC658001516EE /* RoomCmdChangeGameModel.m in Sources */,
+				44241ADB27EACF39001EE125 /* SwitchLanguageViewController.m in Sources */,
 				6C076EB6279FF3FF00650209 /* GiftModel.m in Sources */,
 				4455ADCF27EAC658001516EE /* DTRollTableView.m in Sources */,
 				4455AD8727EAC658001516EE /* VersionInfoModel.m in Sources */,
@@ -1671,6 +1700,7 @@
 				4455AD9527EAC658001516EE /* SweetPromptView.m in Sources */,
 				4455AE1827EAC6F7001516EE /* SwitchRoomModeView.m in Sources */,
 				6CD6E87927BF431500D8F76C /* AliyunAudioEngineImpl.m in Sources */,
+				44241ADE27EACF9C001EE125 /* SwitchLangModel.m in Sources */,
 				BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */,
 				4455AD9227EAC658001516EE /* LoginModel.m in Sources */,
 				4455AD9A27EAC658001516EE /* GameItemCollectionViewCell.m in Sources */,
