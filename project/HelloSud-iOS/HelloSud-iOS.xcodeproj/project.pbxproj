@@ -64,6 +64,8 @@
 		44F29F8527BF4B1D00F57DEE /* SudFSMMGDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F8427BF4B1D00F57DEE /* SudFSMMGDecorator.m */; };
 		44F29F9F27BF99EE00F57DEE /* SudMGPMGState.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29F9E27BF99EE00F57DEE /* SudMGPMGState.m */; };
 		44F29FAB27C0A4A000F57DEE /* MGPlayerStateMapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F29FAA27C0A4A000F57DEE /* MGPlayerStateMapModel.m */; };
+		6C02C13427EAC04400347DDC /* BaseSceneConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C02C13127EAC04400347DDC /* BaseSceneConfigModel.m */; };
+		6C02C13527EAC04400347DDC /* SceneFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C02C13327EAC04400347DDC /* SceneFactory.m */; };
 		6C076E53279940A400650209 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E52279940A400650209 /* MainTabBarController.m */; };
 		6C076E572799450900650209 /* HSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E562799450900650209 /* HSSettingViewController.m */; };
 		6C076E5C27995D3400650209 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076E5B27995D3400650209 /* BaseTableViewCell.m */; };
@@ -131,13 +133,11 @@
 		BC2106F693B8FDA87CC699D2 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210414A9AE16CEC8607D9D /* AppUtil.m */; };
 		BC2107427C1CF2D51754990F /* DTUIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */; };
 		BC2107A0AA402FF1477B05A2 /* RoomMsgTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F1BDA29B0CF8F7D348F /* RoomMsgTableView.m */; };
-		BC2108222203433FCAA1B2DF /* SceneFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21056D06A0CD3AB9DFD5F2 /* SceneFactory.m */; };
 		BC210868A0B206FC2641B7C6 /* HttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C175D2FCB747B52B179 /* HttpService.m */; };
 		BC2109AD853113716CC73B2E /* SwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210446BE6EB1C5FE08AA81 /* SwitchRoomModeView.m */; };
 		BC2109E24A1F02C75A59CDD7 /* RoomMsgBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2103D8805B749F9704DF84 /* RoomMsgBgView.m */; };
 		BC2109E3583F1C9AE0AD5A9F /* BaseMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106B033566B513200E5A0 /* BaseMsgCell.m */; };
 		BC210A5359242D3AA80AADBC /* BaseSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050ED9AC28078167F2A4 /* BaseSceneViewController.m */; };
-		BC210AA71EF1E34D570E4356 /* BaseSceneConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210ED5AB126F944E2A6114 /* BaseSceneConfigModel.m */; };
 		BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104782AE3890C13208B73 /* DTUIDevice+Extension.m */; };
 		BC210BA188C5ACDF5CF5A269 /* RoomSystemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21084A331547A8D4F0B8CE /* RoomSystemTableViewCell.m */; };
 		BC210C47B88497F1D5DF1AB8 /* AudioMicroView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210562A3A8019A0FAB1549 /* AudioMicroView.m */; };
@@ -283,6 +283,10 @@
 		44F29FB027C0EBB100F57DEE /* SudMGPWrapperHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudMGPWrapperHeader.h; sourceTree = "<group>"; };
 		4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.release.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C02C12F27EAC04400347DDC /* SceneFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneFactory.h; sourceTree = "<group>"; };
+		6C02C13127EAC04400347DDC /* BaseSceneConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSceneConfigModel.m; sourceTree = "<group>"; };
+		6C02C13227EAC04400347DDC /* BaseSceneConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSceneConfigModel.h; sourceTree = "<group>"; };
+		6C02C13327EAC04400347DDC /* SceneFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneFactory.m; sourceTree = "<group>"; };
 		6C076E51279940A400650209 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		6C076E52279940A400650209 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		6C076E552799450900650209 /* HSSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSSettingViewController.h; sourceTree = "<group>"; };
@@ -419,9 +423,7 @@
 		BC21050ED9AC28078167F2A4 /* BaseSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSceneViewController.m; sourceTree = "<group>"; };
 		BC21053C067010D7ACBA622D /* RoomOperatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomOperatorView.h; sourceTree = "<group>"; };
 		BC210562A3A8019A0FAB1549 /* AudioMicroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioMicroView.m; sourceTree = "<group>"; };
-		BC21056D06A0CD3AB9DFD5F2 /* SceneFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneFactory.m; sourceTree = "<group>"; };
 		BC2105A5541CEAB895D23262 /* HttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpService.h; sourceTree = "<group>"; };
-		BC2105C1AD60AAF01869DD2F /* SceneFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneFactory.h; sourceTree = "<group>"; };
 		BC2105D980AFBA417817C212 /* MicOperateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicOperateView.m; sourceTree = "<group>"; };
 		BC2105E0029F5F604F83A2F2 /* RoomNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomNaviView.h; sourceTree = "<group>"; };
 		BC21060831A4FEB9BEE1510A /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
@@ -444,7 +446,6 @@
 		BC210C175D2FCB747B52B179 /* HttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpService.m; sourceTree = "<group>"; };
 		BC210C83241FD7301A18D91C /* SwitchRoomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchRoomCell.m; sourceTree = "<group>"; };
 		BC210CF8378808C0B28867B6 /* RoomMsgTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomMsgTableView.h; sourceTree = "<group>"; };
-		BC210D1AE7C5EA87D8469C82 /* BaseSceneConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSceneConfigModel.h; sourceTree = "<group>"; };
 		BC210D3011853BFBEBA259DB /* DTNSArray+Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTNSArray+Masonry.h"; sourceTree = "<group>"; };
 		BC210D5A0981935974C33E8B /* DTNSError+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTNSError+Custom.m"; sourceTree = "<group>"; };
 		BC210D5CA86BE974FB079D3F /* BaseSceneViewController+IM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BaseSceneViewController+IM.h"; sourceTree = "<group>"; };
@@ -452,7 +453,6 @@
 		BC210DBB4907FE9774922487 /* BaseSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSceneViewController.h; sourceTree = "<group>"; };
 		BC210E4FDC11F6104B7A808F /* RoomNaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomNaviView.m; sourceTree = "<group>"; };
 		BC210E9E26D5858511CFD6D1 /* RoomOperatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomOperatorView.m; sourceTree = "<group>"; };
-		BC210ED5AB126F944E2A6114 /* BaseSceneConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSceneConfigModel.m; sourceTree = "<group>"; };
 		BC210F1BDA29B0CF8F7D348F /* RoomMsgTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomMsgTableView.m; sourceTree = "<group>"; };
 		BC210F48CA6E49BFBFE854BC /* AudioRoomMicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioRoomMicModel.m; sourceTree = "<group>"; };
 		BC210F5020657F128FE3263E /* BaseMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMsgCell.h; sourceTree = "<group>"; };
@@ -721,6 +721,25 @@
 				44F29F8627BF7CD900F57DEE /* SudFSMMGListener.h */,
 			);
 			path = Decorator;
+			sourceTree = "<group>";
+		};
+		6C02C12E27EAC04400347DDC /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				6C02C12F27EAC04400347DDC /* SceneFactory.h */,
+				6C02C13027EAC04400347DDC /* Model */,
+				6C02C13327EAC04400347DDC /* SceneFactory.m */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		6C02C13027EAC04400347DDC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C02C13127EAC04400347DDC /* BaseSceneConfigModel.m */,
+				6C02C13227EAC04400347DDC /* BaseSceneConfigModel.h */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6C076E54279944ED00650209 /* Controller */ = {
@@ -1103,9 +1122,9 @@
 		6CD6E85C27BE427500D8F76C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6C02C12E27EAC04400347DDC /* Factory */,
 				6C076EBD27A0EBE400650209 /* CMD */,
 				445EAAD6279AAF4B000DCC72 /* Gift */,
-				BC21072AAFC12368DBC2BE37 /* Factory */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1190,25 +1209,6 @@
 				BC210D84E0A8533AF1EC7625 /* Utils */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		BC2103D8CADCCE00290966F1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				BC210ED5AB126F944E2A6114 /* BaseSceneConfigModel.m */,
-				BC210D1AE7C5EA87D8469C82 /* BaseSceneConfigModel.h */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		BC21072AAFC12368DBC2BE37 /* Factory */ = {
-			isa = PBXGroup;
-			children = (
-				BC21056D06A0CD3AB9DFD5F2 /* SceneFactory.m */,
-				BC2105C1AD60AAF01869DD2F /* SceneFactory.h */,
-				BC2103D8CADCCE00290966F1 /* Model */,
-			);
-			path = Factory;
 			sourceTree = "<group>";
 		};
 		BC21072D5C3283C6595AF15A /* Extension */ = {
@@ -1510,10 +1510,12 @@
 				44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */,
 				6C076ED727A298FC00650209 /* GameService.m in Sources */,
 				445EAB01279F9901000DCC72 /* BaseTextView.m in Sources */,
+				6C02C13427EAC04400347DDC /* BaseSceneConfigModel.m in Sources */,
 				6C239FEF27B39BD200B19FE4 /* ShowViewController.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				6C076EB6279FF3FF00650209 /* GiftModel.m in Sources */,
 				445EAAF5279E810C000DCC72 /* BaseCollectionReusableView.m in Sources */,
+				6C02C13527EAC04400347DDC /* SceneFactory.m in Sources */,
 				6C076EA6279F98AA00650209 /* AppService.m in Sources */,
 				6C076ED427A274FE00650209 /* UserService.m in Sources */,
 				44F29F6527BBB55900F57DEE /* ChangeRTCModel.m in Sources */,
@@ -1622,8 +1624,6 @@
 				BC210F41C08140833AF0BA29 /* SwitchRoomCell.m in Sources */,
 				BC2105A7AE48E6D3EE722DD2 /* RoomInputView.m in Sources */,
 				BC210EDF622898E68D5B8168 /* MicOperateView.m in Sources */,
-				BC2108222203433FCAA1B2DF /* SceneFactory.m in Sources */,
-				BC210AA71EF1E34D570E4356 /* BaseSceneConfigModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
