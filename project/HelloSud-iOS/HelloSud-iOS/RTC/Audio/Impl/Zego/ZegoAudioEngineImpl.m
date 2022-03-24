@@ -11,7 +11,7 @@
 @interface ZegoAudioEngineImpl()<ZegoEventHandler, ZegoAudioDataHandler>
 @property(nonatomic, strong)dispatch_queue_t queueMute;
 @property(nonatomic, weak)id<ISudAudioEventListener> mISudAudioEventListener;
-@property(nonatomic, strong)NSString *mRoomId;
+@property(nonatomic, copy)NSString *mRoomId;
 
 /// 流与ID关系[streamID:userID]
 @property(nonatomic, strong)NSMutableDictionary<NSString *, NSString *> *dicStreamUser;
@@ -64,6 +64,7 @@
 }
 
 - (void)destroy {
+    /* 销毁 SDK */
     [ZegoExpressEngine destroyEngine:nil];
     self.mRoomId = nil;
 }
@@ -95,6 +96,7 @@
 - (void)leaveRoom {
     ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
     if (engine != nil) {
+        /* 退出房间 */
         [engine logoutRoom];
         self.mRoomId = nil;
     }
@@ -282,9 +284,9 @@
 // 根据需要实现以下三个回调，分别对应上述 Bitmask 的三个选项
 - (void)onCapturedAudioData:(const unsigned char *)data dataLength:(unsigned int)dataLength param:(ZegoAudioFrameParam *)param {
     // 本地采集音频数据，推流后可收到回调
-    NSData *a_data = [[NSData alloc] initWithBytes:data length:dataLength];
     if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onCapturedPCMData:)]) {
-        [self.mISudAudioEventListener onCapturedPCMData:a_data];
+        NSData *pcmData = [[NSData alloc] initWithBytes:data length:dataLength];
+        [self.mISudAudioEventListener onCapturedPCMData:pcmData];
     }
 }
 
