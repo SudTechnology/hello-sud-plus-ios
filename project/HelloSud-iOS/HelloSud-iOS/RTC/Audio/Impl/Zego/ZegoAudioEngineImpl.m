@@ -41,8 +41,7 @@
 
 
 - (void)initWithConfig:(AudioConfigModel *)model {
-    ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
-    if (model == nil || engine != nil)
+    if (model == nil)
         return;
     
     ZegoEngineConfig *engineConfig = ZegoEngineConfig.new;
@@ -57,7 +56,7 @@
     /* 通用场景接入 */
     profile.scenario = ZegoScenarioCommunication;
     /* 创建引擎 */
-    engine = [ZegoExpressEngine createEngineWithProfile:profile eventHandler:self];
+    ZegoExpressEngine *engine = [ZegoExpressEngine createEngineWithProfile:profile eventHandler:self];
     if (engine != nil) {
         [engine startSoundLevelMonitor];
     }
