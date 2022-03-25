@@ -141,6 +141,7 @@
 		BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104782AE3890C13208B73 /* DTUIDevice+Extension.m */; };
 		BC210D70BDEB097F49794C9B /* DTUIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */; };
 		BC210FDF9C7CAC234D035EF6 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105042E549C236540DC05 /* DeviceUtil.m */; };
+		E5C2420127EDCBAA00EA2377 /* ThreadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2420027EDCBAA00EA2377 /* ThreadUtils.m */; };
 		E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */; };
 		E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */; };
 /* End PBXBuildFile section */
@@ -440,6 +441,8 @@
 		BC210D5A0981935974C33E8B /* DTNSError+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTNSError+Custom.m"; sourceTree = "<group>"; };
 		BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIColor+Extension.m"; sourceTree = "<group>"; };
 		BC210F9ABB08F9D04A052246 /* AppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtil.h; sourceTree = "<group>"; };
+		E5C241FF27EDCB8800EA2377 /* ThreadUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadUtils.h; sourceTree = "<group>"; };
+		E5C2420027EDCBAA00EA2377 /* ThreadUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadUtils.m; sourceTree = "<group>"; };
 		E5EDB8BB27E873A300EE99D0 /* AudioConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConfigModel.h; sourceTree = "<group>"; };
 		E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioConfigModel.m; sourceTree = "<group>"; };
 		E5EDB8BE27E8775D00EE99D0 /* AudioJoinRoomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioJoinRoomModel.h; sourceTree = "<group>"; };
@@ -1292,6 +1295,8 @@
 				BC2105042E549C236540DC05 /* DeviceUtil.m */,
 				BC21046606D40897C9A2BC55 /* ToastUtil.h */,
 				BC2102EB58A8CE4A527A5167 /* ToastUtil.m */,
+				E5C241FF27EDCB8800EA2377 /* ThreadUtils.h */,
+				E5C2420027EDCBAA00EA2377 /* ThreadUtils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1474,6 +1479,7 @@
 				445EAB3327A1325F000DCC72 /* ConfigModel.m in Sources */,
 				445EAB1727A00F27000DCC72 /* GameListModel.m in Sources */,
 				445EAAE2279ABB22000DCC72 /* BaseAlertView.m in Sources */,
+				E5C2420127EDCBAA00EA2377 /* ThreadUtils.m in Sources */,
 				6C076E71279E429E00650209 /* ZegoAudioEngineImpl.m in Sources */,
 				445EAAD5279AAC19000DCC72 /* RoomGiftPannelView.m in Sources */,
 				445EAA8027994160000DCC72 /* GameListViewController.m in Sources */,

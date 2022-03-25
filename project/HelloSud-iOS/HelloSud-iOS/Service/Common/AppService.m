@@ -238,6 +238,8 @@
         if (appID.length > 0) {
             AudioConfigModel *model = [[AudioConfigModel alloc] init];
             model.appId = appID;
+            model.userID = AppService.shared.loginUserInfo.userID;
+            model.token = @"";
             [AudioEngineFactory.shared.audioEngine initWithConfig:model];
         } else {
             [ToastUtil show:@"切换agora语音引擎失败，对应配置为空"];

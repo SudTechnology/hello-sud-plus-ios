@@ -16,7 +16,9 @@ typedef NS_ENUM(NSUInteger, HSAudioEngineRoomState) {
     /// 连接中
     HSAudioEngineStateConnecting = 1,
     /// 已连接
-    HSAudioEngineStateConnected = 2
+    HSAudioEngineStateConnected = 2,
+    //  超出范围
+    HSAudioEngineStateUndefined = 3
 };
 
 /// 媒体流更新类型
