@@ -238,7 +238,7 @@
         if (appID.length > 0) {
             AudioConfigModel *model = [[AudioConfigModel alloc] init];
             model.appId = appID;
-            model.userID = AppService.shared.loginUserInfo.userID;
+            model.userID = _loginUserInfo.userID;
             model.token = @"";
             [AudioEngineFactory.shared.audioEngine initWithConfig:model];
         } else {
