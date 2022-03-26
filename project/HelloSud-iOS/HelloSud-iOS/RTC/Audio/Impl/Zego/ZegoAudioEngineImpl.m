@@ -59,6 +59,7 @@
     ZegoExpressEngine *engine = [ZegoExpressEngine createEngineWithProfile:profile eventHandler:self];
     if (engine != nil) {
         [engine startSoundLevelMonitor];
+        [engine enableAudioCaptureDevice:NO];
     }
 }
 
