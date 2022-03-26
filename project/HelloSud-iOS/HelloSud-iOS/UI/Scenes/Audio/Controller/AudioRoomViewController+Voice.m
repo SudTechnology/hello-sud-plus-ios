@@ -26,12 +26,25 @@
 
 - (void)loginRoom {
     /// 设置语音引擎事件回调
+
+    AudioJoinRoomModel *audioJoinRoomModel = nil;
+    if ([AppService.shared.rtcType compare:@"zego" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        audioJoinRoomModel = [[AudioJoinRoomModel alloc] init];
+        audioJoinRoomModel.userID = AppService.shared.loginUserInfo.userID;
+        audioJoinRoomModel.userName = AppService.shared.loginUserInfo.name;
+        audioJoinRoomModel.roomID = self.roomID;
+    } else if ([AppService.shared.rtcType compare:@"agora" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        audioJoinRoomModel = [[AudioJoinRoomModel alloc] init];
+        audioJoinRoomModel.userID = AppService.shared.loginUserInfo.userID;
+        audioJoinRoomModel.roomID = self.roomID;
+    }
+    
+    if (audioJoinRoomModel == nil)
+        return;
+    
+    [AudioEngineFactory.shared.audioEngine joinRoom:audioJoinRoomModel];
     [AudioEngineFactory.shared.audioEngine setEventListener:self];
-    AudioJoinRoomModel *model = [[AudioJoinRoomModel alloc] init];
-    model.roomID = self.roomID;
-    model.userID = AppService.shared.loginUserInfo.userID;
-    model.userName = AppService.shared.loginUserInfo.name;
-    [AudioEngineFactory.shared.audioEngine joinRoom:model];
+    [AudioEngineFactory.shared.audioEngine setAudioRouteToSpeaker:YES];
 }
 
 - (void)logoutRoom {

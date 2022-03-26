@@ -27,12 +27,12 @@
 - (void)configData {
     ChangeRTCModel *m0 = [ChangeRTCModel new];
     m0.title = @"即构";
-    m0.isSlect = [AppService.shared.rtcType isEqualToString:@"zego"] ? YES : NO;
+    m0.isSlect = ([AppService.shared.rtcType compare:@"zego" options:NSCaseInsensitiveSearch] == NSOrderedSame) ? YES : NO;
     m0.isClickable = YES;
     
     ChangeRTCModel *m1 = [ChangeRTCModel new];
     m1.title = @"声网";
-    m1.isSlect = [AppService.shared.rtcType isEqualToString:@"agora"] ? YES : NO;
+    m1.isSlect = ([AppService.shared.rtcType compare:@"agora" options:NSCaseInsensitiveSearch] == NSOrderedSame) ? YES : NO;
     m1.isClickable = YES;
     
     ChangeRTCModel *m2 = [ChangeRTCModel new];

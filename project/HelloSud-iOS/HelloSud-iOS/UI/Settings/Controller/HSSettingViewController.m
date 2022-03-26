@@ -39,7 +39,7 @@
     
     HSSettingModel *rtcModel = [HSSettingModel new];
     rtcModel.title = @"切换RTC服务商";
-    rtcModel.subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
+    rtcModel.subTitle = ([AppService.shared.rtcType compare:@"zego" options:NSCaseInsensitiveSearch] == NSOrderedSame) ? @"即构" : @"声网";
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
     HSSettingModel *languageModel = [HSSettingModel new];
@@ -148,7 +148,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         WeakSelf
         vc.onRTCChangeBlock = ^(NSString * _Nonnull str) {
-            weakSelf.arrData[1][0].subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
+            weakSelf.arrData[1][0].subTitle = ([AppService.shared.rtcType compare:@"zego" options:NSCaseInsensitiveSearch] == NSOrderedSame) ? @"即构" : @"声网";
             [weakSelf.tableView reloadData];
         };
     } else if ([model.title isEqualToString:@"切换语言"]) {
