@@ -10,7 +10,7 @@
 @property (nonatomic, strong) UIImageView *bgImageView;
 
 /// 游戏加载主view
-@property (nonatomic, strong) UIView *gameView;
+@property (nonatomic, strong) BaseView *gameView;
 
 /// 场景视图，所有子类场景
 @property (nonatomic, strong) BaseView *sceneView;

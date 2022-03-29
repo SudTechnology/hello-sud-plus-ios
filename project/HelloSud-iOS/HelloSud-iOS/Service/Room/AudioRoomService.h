@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)reqSwitchGame:(long)roomId gameId:(long)gameId success:(EmptyBlock)success fail:(ErrorBlock)fail;
 
 
+#pragma mark - TicketService
+- (NSMutableArray <NSAttributedString *> *)getTicketRewardAttributedStrArr;
 
 @end
 

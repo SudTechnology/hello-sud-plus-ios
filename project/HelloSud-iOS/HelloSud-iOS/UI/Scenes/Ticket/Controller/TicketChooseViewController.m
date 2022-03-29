@@ -11,6 +11,7 @@
 #import "TocketChooseModel.h"
 #import "DTRollTableView.h"
 #import "TicketJoinPopView.h"
+#import "TicketService.h"
 
 @interface TicketChooseViewController ()
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -38,16 +39,7 @@
     [self.view addSubview:self.noticeView];
     [self setupContentItems];
     
-    NSArray <NSString *> *strArr = @[@"恭喜沐辰在高级场赢得900金币！", @"恭喜 安小六 在初级场赢得20金币！", @"恭喜 兔兔 在中级场赢得250金币！", @"恭喜 Toby 在高级场赢得900金币！", @"恭喜 Jennie 在高级场赢得900金币！", @"恭喜 Bell 在中级场赢得250金币！"];
-    NSMutableArray <NSAttributedString *> *dataArr = [NSMutableArray array];
-    for (int i = 0; i < strArr.count; i++) {
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:strArr[i]];
-        attrStr.yy_lineSpacing = 6;
-        attrStr.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-        attrStr.yy_color = [UIColor dt_colorWithHexString:@"#FFE77D" alpha:1];
-        [dataArr addObject:attrStr];
-    }
-    self.noticeView.dataArray = dataArr;
+    self.noticeView.dataArray = [TicketService.shared getTicketRewardAttributedStrArr];
     [self.noticeView reloadData];
 }
 

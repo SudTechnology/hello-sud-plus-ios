@@ -107,6 +107,7 @@
 		448A6E0027DEED6C00004928 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 448A6DFF27DEED6B00004928 /* InfoPlist.strings */; };
 		448A6E0127DEEDAD00004928 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 448A6E0327DEEDAD00004928 /* Localizable.strings */; };
 		448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */ = {isa = PBXBuildFile; fileRef = 448A6E0A27DEFF3200004928 /* LocalizedService.m */; };
+		44C8FF9227F318A70030ED40 /* TicketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C8FF9127F318A70030ED40 /* TicketService.m */; };
 		44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; };
 		44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DF039C2796B70B006EE6AC /* GameViewInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF039B2796B70B006EE6AC /* GameViewInfoModel.m */; };
@@ -380,6 +381,8 @@
 		448A6E0527DEEDB000004928 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		448A6E0927DEFF3200004928 /* LocalizedService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalizedService.h; sourceTree = "<group>"; };
 		448A6E0A27DEFF3200004928 /* LocalizedService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalizedService.m; sourceTree = "<group>"; };
+		44C8FF9027F318A70030ED40 /* TicketService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketService.h; sourceTree = "<group>"; };
+		44C8FF9127F318A70030ED40 /* TicketService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketService.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* IAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAudioEngine.h; sourceTree = "<group>"; };
 		44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SudMGP.xcframework; sourceTree = "<group>"; };
 		44DF03972796B2C5006EE6AC /* AppUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
@@ -730,6 +733,7 @@
 				4455AD1727EAC658001516EE /* Show */,
 				4455AD1A27EAC658001516EE /* Common */,
 				4455AD3427EAC658001516EE /* Audio */,
+				4455AD8127EAC658001516EE /* Talent */,
 				4455AD6627EAC658001516EE /* ASR */,
 				4455AD6927EAC658001516EE /* Ticket */,
 				4455AD7B27EAC658001516EE /* Crossroom */,
@@ -864,7 +868,6 @@
 			children = (
 				4455AD7527EAC658001516EE /* TicketChooseNoticeView.h */,
 				4455AD7927EAC658001516EE /* TicketChooseNoticeView.m */,
-				4455AD8127EAC658001516EE /* Talent */,
 				4455AD7627EAC658001516EE /* DTRollTableView.h */,
 				4455AD7A27EAC658001516EE /* DTRollTableView.m */,
 				4455AD7727EAC658001516EE /* TicketJoinPopView.h */,
@@ -1310,6 +1313,8 @@
 				6C076ED627A298FC00650209 /* GameService.m */,
 				6C076EB1279FF3DD00650209 /* GiftService.h */,
 				6C076EB2279FF3DD00650209 /* GiftService.m */,
+				44C8FF9027F318A70030ED40 /* TicketService.h */,
+				44C8FF9127F318A70030ED40 /* TicketService.m */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -1680,6 +1685,7 @@
 				445EAAE5279ABDC1000DCC72 /* DTAlertView.m in Sources */,
 				4455AE2027EAC71A001516EE /* BaseSceneConfigModel.m in Sources */,
 				4455AE1727EAC6F7001516EE /* RoomMsgTableView.m in Sources */,
+				44C8FF9227F318A70030ED40 /* TicketService.m in Sources */,
 				6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */,
 				448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */,
 				4455AD9827EAC658001516EE /* SearchHeaderView.m in Sources */,

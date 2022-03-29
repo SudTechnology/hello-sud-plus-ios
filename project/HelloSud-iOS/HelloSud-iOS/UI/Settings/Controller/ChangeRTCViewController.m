@@ -25,14 +25,15 @@
 
 /// 配置页面数据
 - (void)configData {
+    NSString *str = AppService.shared.rtcType;
     ChangeRTCModel *m0 = [ChangeRTCModel new];
     m0.title = NSString.dt_settings_zego;
-    m0.isSlect = [AppService.shared.rtcType isEqualToString:@"zego"] ? YES : NO;
+    m0.isSlect = [AppService.shared.rtcType isEqualToString:@"Zego"] ? YES : NO;
     m0.isClickable = YES;
     
     ChangeRTCModel *m1 = [ChangeRTCModel new];
     m1.title = NSString.dt_settings_agora;
-    m1.isSlect = [AppService.shared.rtcType isEqualToString:@"agora"] ? YES : NO;
+    m1.isSlect = [AppService.shared.rtcType isEqualToString:@"Agora"] ? YES : NO;
     m1.isClickable = YES;
     
     ChangeRTCModel *m2 = [ChangeRTCModel new];
@@ -110,7 +111,7 @@
                 }
                 model.isSlect = true;
                 
-                NSString *rtcType = [model.title isEqualToString:NSString.dt_settings_zego] ? @"zego" : @"agora";
+                NSString *rtcType = [model.title isEqualToString:NSString.dt_settings_zego] ? @"Zego" : @"Agora";
                 [AppService.shared switchRtcType:rtcType];
                 [weakSelf.tableView reloadData];
                 
