@@ -11,6 +11,7 @@
 #import "HSSetingHeadView.h"
 #import "ChangeRTCViewController.h"
 #import "VersionInfoViewController.h"
+#import "MoreSettingViewController.h"
 
 @interface HSSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong)UITableView *tableView;
@@ -38,8 +39,7 @@
     verModel.pageURL = @"";
     
     HSSettingModel *rtcModel = [HSSettingModel new];
-    rtcModel.title = @"切换RTC服务商";
-    rtcModel.subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
+    rtcModel.title = @"更多设置";
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
     HSSettingModel *languageModel = [HSSettingModel new];
@@ -143,14 +143,9 @@
     if ([model.title isEqualToString:@"版本信息"]) {
         VersionInfoViewController *vc = VersionInfoViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ([model.title isEqualToString:@"切换RTC服务商"]) {
-        ChangeRTCViewController *vc = ChangeRTCViewController.new;
+    } else if ([model.title isEqualToString:@"更多设置"]) {
+        MoreSettingViewController *vc = MoreSettingViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
-        WeakSelf
-        vc.onRTCChangeBlock = ^(NSString * _Nonnull str) {
-            weakSelf.arrData[1][0].subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
-            [weakSelf.tableView reloadData];
-        };
     } else if ([model.title isEqualToString:@"切换语言"]) {
         [ToastUtil show:@"正在制作中, 敬请期待!"];
     } else if ([model.title isEqualToString:@"GitHub"]) {
