@@ -132,6 +132,7 @@
 		6CD6E87627BF42F900D8F76C /* VolcAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87527BF42F900D8F76C /* VolcAudioEngineImpl.m */; };
 		6CD6E87927BF431500D8F76C /* AliyunAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87827BF431500D8F76C /* AliyunAudioEngineImpl.m */; };
 		6CD6E87C27BF433500D8F76C /* TXAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */; };
+		6CEF766527F31B8D00A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766427F31B8D00A12220 /* MoreSettingViewController.m */; };
 		BC2101199D87BB6081A8FBC0 /* DTNSError+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5A0981935974C33E8B /* DTNSError+Custom.m */; };
 		BC210452F6884908D768A126 /* DTNSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106C0581A7D8986B9FC83 /* DTNSArray+Masonry.m */; };
 		BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102EB58A8CE4A527A5167 /* ToastUtil.m */; };
@@ -418,6 +419,8 @@
 		6CD6E87A27BF433500D8F76C /* TXAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAudioEngineImpl.h; sourceTree = "<group>"; };
 		6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAudioEngineImpl.m; sourceTree = "<group>"; };
 		6CD6E87D27C0A36100D8F76C /* ServiceConstHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceConstHeader.h; sourceTree = "<group>"; };
+		6CEF766327F31B8D00A12220 /* MoreSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreSettingViewController.h; sourceTree = "<group>"; };
+		6CEF766427F31B8D00A12220 /* MoreSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSettingViewController.m; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIView+Extension.m"; sourceTree = "<group>"; };
 		BC2100EC41AFF28046FF7B87 /* DTNSError+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTNSError+Custom.h"; sourceTree = "<group>"; };
@@ -732,6 +735,8 @@
 		6C076E54279944ED00650209 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6CEF766327F31B8D00A12220 /* MoreSettingViewController.h */,
+				6CEF766427F31B8D00A12220 /* MoreSettingViewController.m */,
 				6C076E552799450900650209 /* HSSettingViewController.h */,
 				6C076E562799450900650209 /* HSSettingViewController.m */,
 				44F29F5D27BBB3D700F57DEE /* ChangeRTCViewController.h */,
@@ -1527,6 +1532,7 @@
 				6C076EDA27A2993C00650209 /* RespGameInfoModel.m in Sources */,
 				445EAAFB279E8B10000DCC72 /* HomeFooterReusableView.m in Sources */,
 				445EAB2027A01176000DCC72 /* MatchRoomModel.m in Sources */,
+				6CEF766527F31B8D00A12220 /* MoreSettingViewController.m in Sources */,
 				445EAAC9279A98DB000DCC72 /* RoomMsgBgView.m in Sources */,
 				6C076E9E279EC54200650209 /* RoomCmdSendGiftModel.m in Sources */,
 				44F29F6E27BCA75000F57DEE /* VersionInfoCell.m in Sources */,
