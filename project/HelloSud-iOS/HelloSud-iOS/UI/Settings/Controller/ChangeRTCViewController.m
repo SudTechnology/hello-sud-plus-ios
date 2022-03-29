@@ -25,7 +25,6 @@
 
 /// 配置页面数据
 - (void)configData {
-    NSString *str = AppService.shared.rtcType;
     ChangeRTCModel *m0 = [ChangeRTCModel new];
     m0.title = NSString.dt_settings_zego;
     m0.isSlect = [AppService.shared.rtcType isEqualToString:@"Zego"] ? YES : NO;
