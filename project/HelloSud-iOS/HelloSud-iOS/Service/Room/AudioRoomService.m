@@ -250,5 +250,8 @@
     }];
 }
 
-
+#pragma mark - TicketService
+- (NSMutableArray <NSAttributedString *> *)getTicketRewardAttributedStrArr {
+    return @[];
+}
 @end

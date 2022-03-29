@@ -40,7 +40,7 @@
     
     HSSettingModel *rtcModel = [HSSettingModel new];
     rtcModel.title = NSString.dt_settings_switch_rtc;
-    rtcModel.subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? NSString.dt_settings_zego : NSString.dt_settings_agora;
+    rtcModel.subTitle = [AppService.shared.rtcType isEqualToString:@"Zego"] ? NSString.dt_settings_zego : NSString.dt_settings_agora;
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
     HSSettingModel *languageModel = [HSSettingModel new];
@@ -149,7 +149,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         WeakSelf
         vc.onRTCChangeBlock = ^(NSString * _Nonnull str) {
-            weakSelf.arrData[1][0].subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? NSString.dt_settings_zego : NSString.dt_settings_agora;
+            weakSelf.arrData[1][0].subTitle = [AppService.shared.rtcType isEqualToString:@"Zego"] ? NSString.dt_settings_zego : NSString.dt_settings_agora;
             [weakSelf.tableView reloadData];
         };
     } else if ([model.title isEqualToString:NSString.dt_settings_switch_language]) {
