@@ -25,6 +25,14 @@
 
 #pragma mark =======SudFSMMGListener=======
 
+/// 游戏开始
+- (void)onGameStarted {
+    /// 如果当前用户在麦上，自动加入游戏
+    if ([self isInMic]) {
+        [self notifyGameToJoin];
+    }
+}
+
 /// 获取游戏View信息  【需要实现】
 - (void)onGetGameViewInfo:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
     CGFloat scale = [[UIScreen mainScreen] nativeScale];
