@@ -311,7 +311,7 @@
             // 请求上麦
             AudioRoomMicModel *emptyModel = [self getOneEmptyMic];
             if (emptyModel == nil) {
-                [ToastUtil show:@"没有空麦位"];
+                [ToastUtil show:@"没有空位啦"];
                 return;
             }
             self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
@@ -506,6 +506,7 @@
         [arrUserID addObject:[NSNumber numberWithInteger:m.userId]];
     }
     // 缓存用户信息
+    WeakSelf
     [UserService.shared asyncCacheUserInfo:arrUserID finished:^{
         for (HSRoomMicList *m in micList) {
             NSString *key = [NSString stringWithFormat:@"%ld",m.micIndex];
@@ -524,9 +525,18 @@
                 }
             }
         }
+        
+        [weakSelf handleAutoUpMic];
         [NSNotificationCenter.defaultCenter postNotificationName:NTF_MIC_CHANGED object:nil];
     }];
 
+}
+
+/// 进入房间 自动上麦
+- (void)handleAutoUpMic {
+    if (![self isInMic]) {
+        [self handleTapVoice];
+    }
 }
 
 #pragma mark setter
