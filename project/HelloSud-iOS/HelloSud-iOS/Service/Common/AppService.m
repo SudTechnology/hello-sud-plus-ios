@@ -22,13 +22,13 @@
 #define kKeyConfigModel @"key_config_model"
 
 
-NSString *const kRtcNameZego = @"Zego";
-NSString *const kRtcNameAgora = @"Agora";
-NSString *const kRtcNameRongCloud = @"RongCloud";
-NSString *const kRtcNameCommEase = @"CommsEase";
-NSString *const kRtcNameVoicEngine = @"VoicEngine";
-NSString *const kRtcNameAlibabaCloud = @"Alibaba Cloud";
-NSString *const kRtcNameTencentCloud = @"Tencent Cloud";
+NSString *const kRtcNameZego = @"即构";
+NSString *const kRtcNameAgora = @"声网";
+NSString *const kRtcNameRongCloud = @"融云";
+NSString *const kRtcNameCommEase = @"网易云信";
+NSString *const kRtcNameVoicEngine = @"火山引擎";
+NSString *const kRtcNameAlibabaCloud = @"阿里云";
+NSString *const kRtcNameTencentCloud = @"腾讯云";
 
 
 @interface AppService ()
