@@ -22,7 +22,7 @@
 - (void)updateUI {
     
     self.dataArray = NSMutableArray.new;
-    NSArray <UIColor *>*colorArr = @[HEX_COLOR(@"#FC955B"), HEX_COLOR(@"#FC5BCA"), HEX_COLOR(@"#614BFF"), HEX_COLOR_A(@"#000000", 0.2)];
+    NSArray <UIColor *>*colorArr = @[HEX_COLOR(@"#FC955B"), HEX_COLOR(@"#FC5BCA"), HEX_COLOR(@"#614BFF"), HEX_COLOR_A(@"#000000", 0.1)];
     NSArray <NSString *>*titleArr = @[@"SudMGP Core", @"SudMGP ASR", @"HelloSud", @"RTC SDK"];
     CGFloat zego = 10.4;
     CGFloat agora = 15.5;
