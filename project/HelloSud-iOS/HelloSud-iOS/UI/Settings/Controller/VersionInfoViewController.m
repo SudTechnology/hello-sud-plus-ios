@@ -35,15 +35,15 @@
     m1.title = @"SudMGP SDK";
     m1.subTitle = [NSString stringWithFormat:@"V%@", [SudMGP getVersion]];
     
-    VersionInfoModel *m2 = [VersionInfoModel new];
-    m2.title = @"Zego SDK";
-    m2.subTitle = @"V2.15.0";
+//    VersionInfoModel *m2 = [VersionInfoModel new];
+//    m2.title = @"Zego SDK";
+//    m2.subTitle = @"V2.15.0";
+//
+//    VersionInfoModel *m3 = [VersionInfoModel new];
+//    m3.title = @"Agora SDK";
+//    m3.subTitle = @"V3.6.1.1";
     
-    VersionInfoModel *m3 = [VersionInfoModel new];
-    m3.title = @"Agora SDK";
-    m3.subTitle = @"V3.6.1.1";
-    
-    self.arrData = @[m0, m1, m2, m3];
+    self.arrData = @[m0, m1];
     [self.tableView reloadData];
 }
 

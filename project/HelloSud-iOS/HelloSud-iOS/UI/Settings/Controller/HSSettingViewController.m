@@ -69,7 +69,7 @@
     privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
 
     if (self.showMoreSetting) {
-        self.arrData = @[@[verModel], @[rtcModel, languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+        self.arrData = @[@[verModel], @[languageModel, rtcModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
     } else {
         self.arrData = @[@[verModel], @[languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
     }
