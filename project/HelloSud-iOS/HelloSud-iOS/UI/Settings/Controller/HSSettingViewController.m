@@ -9,15 +9,16 @@
 #import "HSSettingCell.h"
 #import "HSSettingModel.h"
 #import "HSSetingHeadView.h"
-#import "ChangeRTCViewController.h"
 #import "VersionInfoViewController.h"
 #import "MoreSettingViewController.h"
 
-@interface HSSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
-@property(nonatomic, strong)UITableView *tableView;
-@property(nonatomic, strong)UIView *contactUsView;
+@interface HSSettingViewController () <UITableViewDelegate, UITableViewDataSource>
+@property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) UIView *contactUsView;
 /// 页面数据
-@property(nonatomic, strong)NSArray <NSArray <HSSettingModel *>*>*arrData;
+@property(nonatomic, strong) NSArray <NSArray <HSSettingModel *> *> *arrData;
+/// 是否展示更多设置
+@property(nonatomic, assign) BOOL showMoreSetting;
 @end
 
 @implementation HSSettingViewController
@@ -37,17 +38,18 @@
     verModel.title = @"版本信息";
     verModel.isMore = YES;
     verModel.pageURL = @"";
-    
+
     HSSettingModel *rtcModel = [HSSettingModel new];
     rtcModel.title = @"更多设置";
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
+
     HSSettingModel *languageModel = [HSSettingModel new];
     languageModel.title = @"切换语言";
     languageModel.isMore = YES;
     languageModel.pageURL = @"";
-    
-    
+
+
     HSSettingModel *gitHubModel = [HSSettingModel new];
     gitHubModel.title = @"GitHub";
     gitHubModel.subTitle = @"hello-sud";
@@ -65,21 +67,33 @@
     privacyModel.title = @"隐私政策";
     privacyModel.isMore = YES;
     privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
-    
-    self.arrData = @[@[verModel], @[rtcModel, languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
-    
+
+    if (self.showMoreSetting) {
+        self.arrData = @[@[verModel], @[rtcModel, languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+    } else {
+        self.arrData = @[@[verModel], @[languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+    }
+
     HSSetingHeadView *header = HSSetingHeadView.new;
-    header.frame = CGRectMake(0, 0, kScreenWidth, 247);
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    tap.numberOfTapsRequired = 3;
+    [header addGestureRecognizer:tap];
+    header.frame = CGRectMake(0, 0, kScreenWidth, 217);
     [header dtUpdateUI];
     self.tableView.tableHeaderView = header;
     [self.tableView reloadData];
+}
+
+- (void)onTap:(id)tap {
+    self.showMoreSetting = YES;
+    [self configData];
 }
 
 - (void)dtAddViews {
     [super dtAddViews];
     self.view.backgroundColor = HEX_COLOR(@"#F5F6FB");
     [self.view addSubview:self.tableView];
-    
+
 }
 
 - (void)dtLayoutViews {
@@ -90,9 +104,10 @@
 }
 
 #pragma makr lazy
+
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         [_tableView registerClass:[HSSettingCell class] forCellReuseIdentifier:@"HSSettingCell"];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -101,7 +116,7 @@
         _tableView.showsHorizontalScrollIndicator = NO;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.tableFooterView = self.contactUsView;
-        
+
     }
     return _tableView;
 }
@@ -116,20 +131,21 @@
         usLabel.textColor = HEX_COLOR(@"#8A8A8E");
         usLabel.font = UIFONT_REGULAR(12);
         usLabel.textAlignment = NSTextAlignmentCenter;
-        usLabel.frame = CGRectMake(17, 0, kScreenWidth-34, 34);
+        usLabel.frame = CGRectMake(17, 0, kScreenWidth - 34, 34);
         [_contactUsView addSubview:usLabel];
     }
     return _contactUsView;
 }
 
 #pragma mark UITableViewDelegate
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSSettingCell" forIndexPath:indexPath];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    HSSettingCell *c = (HSSettingCell *)cell;
+    HSSettingCell *c = (HSSettingCell *) cell;
     c.isShowTopLine = indexPath.row > 0;
     c.model = self.arrData[indexPath.section][indexPath.row];
     if (indexPath.section == 0 && indexPath.row == 0) {

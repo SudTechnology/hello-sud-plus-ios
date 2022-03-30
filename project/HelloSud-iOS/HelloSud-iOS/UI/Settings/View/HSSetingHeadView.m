@@ -22,9 +22,11 @@
 - (void)updateUI {
     
     self.dataArray = NSMutableArray.new;
-    NSArray <UIColor *>*colorArr = @[HEX_COLOR(@"#FC955B"), HEX_COLOR(@"#FC5BCA"), HEX_COLOR(@"#614BFF"), HEX_COLOR_A(@"#000000", 0.2), HEX_COLOR_A(@"#000000", 0.1)];
-    NSArray <NSString *>*titleArr = @[@"SudMGP Core", @"SudMGP ASR", @"HelloSud", @"Zego RTC SDK", @"Agora RTC SDK"];
-    NSArray <NSNumber *>*sizeArr = @[@1.6, @0.135, @32.21, @10.4, @15.5];
+    NSArray <UIColor *>*colorArr = @[HEX_COLOR(@"#FC955B"), HEX_COLOR(@"#FC5BCA"), HEX_COLOR(@"#614BFF"), HEX_COLOR_A(@"#000000", 0.2)];
+    NSArray <NSString *>*titleArr = @[@"SudMGP Core", @"SudMGP ASR", @"HelloSud", @"RTC SDK"];
+    CGFloat zego = 10.4;
+    CGFloat agora = 15.5;
+    NSArray <NSNumber *>*sizeArr = @[@1.6, @0.135, @32.21, @(zego + agora)];
     CGFloat sum = [[sizeArr valueForKeyPath:@"@sum.floatValue"] floatValue];
     self.sizeLabel.text = [NSString stringWithFormat:@"总%.02fM", sum];
     

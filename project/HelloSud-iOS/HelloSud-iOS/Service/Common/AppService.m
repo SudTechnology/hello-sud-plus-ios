@@ -21,8 +21,18 @@
 /// 配置信息缓存key
 #define kKeyConfigModel @"key_config_model"
 
+
+NSString *const kRtcNameZego = @"Zego";
+NSString *const kRtcNameAgora = @"Agora";
+NSString *const kRtcNameRongCloud = @"RongCloud";
+NSString *const kRtcNameCommEase = @"CommsEase";
+NSString *const kRtcNameVoicEngine = @"VoicEngine";
+NSString *const kRtcNameAlibabaCloud = @"Alibaba Cloud";
+NSString *const kRtcNameTencentCloud = @"Tencent Cloud";
+
+
 @interface AppService ()
-@property (nonatomic, strong) NSArray <NSString *> *randomNameArr;
+@property(nonatomic, strong) NSArray <NSString *> *randomNameArr;
 
 @end
 
@@ -56,7 +66,7 @@
         m.icon = @"";
         m.sex = 1;
     }
-    
+
     _isAgreement = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginAgreement];
     _isLogin = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginIsLogin];
     id temp_token = [NSUserDefaults.standardUserDefaults objectForKey:kKeyLoginToken];
@@ -134,7 +144,7 @@
         NSLog(@"设置APP请求头token为空");
     }
     // 图片拉取鉴权
-    SDWebImageDownloader *downloader = (SDWebImageDownloader *)[SDWebImageManager sharedManager].imageLoader;
+    SDWebImageDownloader *downloader = (SDWebImageDownloader *) [SDWebImageManager sharedManager].imageLoader;
     [downloader setValue:self.token forHTTPHeaderField:@"Authorization"];
 }
 
@@ -144,7 +154,7 @@
     [self setupNetWorkHeader];
     [NSUserDefaults.standardUserDefaults setValue:token forKey:kKeyLoginToken];
     [NSUserDefaults.standardUserDefaults synchronize];
-    
+
     [self reqConfigData];
 }
 
@@ -158,7 +168,7 @@
             return;
         }
         weakSelf.configModel = model;
-    } failure:^(id error) {
+    }                       failure:^(id error) {
         [ToastUtil show:@"网络错误"];
     }];
 }
@@ -210,7 +220,7 @@
         NSLog(@"切换RTC厂商失败，参数异常:%@, configModel:%@", rtcType, configModel);
         return;
     }
-    
+
     NSLog(@"切换RTC厂商:%@", rtcType);
     [AudioEngineFactory.shared.audioEngine unInit];
 
