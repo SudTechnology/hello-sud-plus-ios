@@ -33,7 +33,7 @@
 
     HSSettingModel *rtcModel = [HSSettingModel new];
     rtcModel.title = @"切换RTC服务商";
-    rtcModel.subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
+    rtcModel.subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? kRtcNameZego : kRtcNameAgora;
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
     
@@ -94,7 +94,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         WeakSelf
         vc.onRTCChangeBlock = ^(NSString * _Nonnull str) {
-            weakSelf.arrData[0][0].subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
+            weakSelf.arrData[0][0].subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? kRtcNameZego : kRtcNameAgora;
             [weakSelf.tableView reloadData];
         };
     }
