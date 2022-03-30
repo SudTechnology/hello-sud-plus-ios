@@ -74,19 +74,16 @@
         self.arrData = @[@[verModel], @[languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
     }
 
+    WeakSelf
     HSSetingHeadView *header = HSSetingHeadView.new;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    tap.numberOfTapsRequired = 3;
-    [header addGestureRecognizer:tap];
+    header.tapCallback = ^{
+        weakSelf.showMoreSetting = YES;
+        [weakSelf configData];
+    };
     header.frame = CGRectMake(0, 0, kScreenWidth, 217);
     [header dtUpdateUI];
     self.tableView.tableHeaderView = header;
     [self.tableView reloadData];
-}
-
-- (void)onTap:(id)tap {
-    self.showMoreSetting = YES;
-    [self configData];
 }
 
 - (void)dtAddViews {
