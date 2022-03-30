@@ -83,6 +83,10 @@
     header.frame = CGRectMake(0, 0, kScreenWidth, 217);
     [header dtUpdateUI];
     self.tableView.tableHeaderView = header;
+    [header mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(0);
+        make.height.mas_equalTo(217);
+    }];
     [self.tableView reloadData];
 }
 
