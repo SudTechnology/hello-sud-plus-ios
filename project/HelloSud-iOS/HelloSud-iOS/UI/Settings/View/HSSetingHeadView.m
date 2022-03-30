@@ -9,32 +9,33 @@
 #import "HSSetingHeadItemView.h"
 #import "HSSettingHeaderModel.h"
 
-@interface HSSetingHeadView()
-@property(nonatomic, strong)UILabel *titleLabel;
-@property(nonatomic, strong)UILabel *sizeLabel;
-@property(nonatomic, strong)UIView *scaleView;
-@property(nonatomic, strong)UIView *itemsView;
-@property(nonatomic, strong)NSMutableArray <HSSettingHeaderModel *>*dataArray;
+@interface HSSetingHeadView ()
+@property(nonatomic, strong) UILabel *titleLabel;
+@property(nonatomic, strong) UILabel *sizeLabel;
+@property(nonatomic, strong) UIView *scaleView;
+@property(nonatomic, strong) UIView *itemsView;
+@property(nonatomic, strong) UIView *hitView;
+@property(nonatomic, strong) NSMutableArray <HSSettingHeaderModel *> *dataArray;
 @end
 
 @implementation HSSetingHeadView
 
 - (void)updateUI {
-    
+
     self.dataArray = NSMutableArray.new;
-    NSArray <UIColor *>*colorArr = @[HEX_COLOR(@"#FC955B"), HEX_COLOR(@"#FC5BCA"), HEX_COLOR(@"#614BFF"), HEX_COLOR_A(@"#000000", 0.1)];
-    NSArray <NSString *>*titleArr = @[@"SudMGP Core", @"SudMGP ASR", @"HelloSud", @"RTC SDK"];
+    NSArray <UIColor *> *colorArr = @[HEX_COLOR(@"#FC955B"), HEX_COLOR(@"#FC5BCA"), HEX_COLOR(@"#614BFF"), HEX_COLOR_A(@"#000000", 0.1)];
+    NSArray <NSString *> *titleArr = @[@"SudMGP Core", @"SudMGP ASR", @"HelloSud", @"RTC SDK"];
     CGFloat zego = 10.4;
     CGFloat agora = 15.5;
-    NSArray <NSNumber *>*sizeArr = @[@1.6, @0.135, @32.21, @(zego + agora)];
+    NSArray <NSNumber *> *sizeArr = @[@1.6, @0.135, @32.21, @(zego + agora)];
     CGFloat sum = [[sizeArr valueForKeyPath:@"@sum.floatValue"] floatValue];
     self.sizeLabel.text = [NSString stringWithFormat:@"总%.02fM", sum];
-    
+
     for (int i = 0; i < colorArr.count; i++) {
         HSSettingHeaderModel *m = HSSettingHeaderModel.new;
         m.color = colorArr[i];
         m.title = titleArr[i];
-        m.size = sizeArr[i].intValue < 1 ? [NSString stringWithFormat:@"%ldKB", lround(sizeArr[i].floatValue*1000)] : [NSString stringWithFormat:@"%@MB", sizeArr[i]];
+        m.size = sizeArr[i].intValue < 1 ? [NSString stringWithFormat:@"%ldKB", lround(sizeArr[i].floatValue * 1000)] : [NSString stringWithFormat:@"%@MB", sizeArr[i]];
         [self.dataArray addObject:m];
     }
     UIView *lastNode;
@@ -43,12 +44,12 @@
         UIView *node = UIView.new;
         node.backgroundColor = colorArr[i];
         [self.scaleView addSubview:node];
-        
+
         HSSetingHeadItemView *item = HSSetingHeadItemView.new;
         item.model = self.dataArray[i];
         [self.itemsView addSubview:item];
-        
-        CGFloat item_w = v_w * (sizeArr[i].floatValue/sum);
+
+        CGFloat item_w = v_w * (sizeArr[i].floatValue / sum);
         [node mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(item_w < 1 ? 2 : item_w);
             if (lastNode == nil) {
@@ -70,11 +71,12 @@
 - (void)dtAddViews {
     [super dtAddViews];
     self.backgroundColor = UIColor.whiteColor;
-    [self addSubview: self.titleLabel];
+    [self addSubview:self.titleLabel];
     [self addSubview:self.sizeLabel];
-    [self addSubview: self.scaleView];
-    [self addSubview: self.itemsView];
-    
+    [self addSubview:self.scaleView];
+    [self addSubview:self.itemsView];
+    [self addSubview:self.hitView];
+
     [self updateUI];
 }
 
@@ -102,10 +104,15 @@
         make.right.mas_equalTo(-20);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
+    [self.hitView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(0);
+        make.bottom.equalTo(self.scaleView.mas_top);
+    }];
 }
 
 
 #pragma mark lazy
+
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
         _titleLabel = UILabel.new;
@@ -138,6 +145,23 @@
         _itemsView = UIView.new;
     }
     return _itemsView;
+}
+
+- (UIView *)hitView {
+    if (_hitView == nil) {
+        _hitView = UIView.new;
+        _hitView.backgroundColor = [UIColor clearColor];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+        tap.numberOfTapsRequired = 3;
+        [_hitView addGestureRecognizer:tap];
+    }
+    return _hitView;
+}
+
+- (void)onTap:(id)tap {
+    if (self.tapCallback) {
+        self.tapCallback();
+    }
 }
 
 @end
