@@ -11,13 +11,11 @@
 @implementation BaseSceneViewController(Voice)
 
 /// 开启推流
-/// @param streamID 流ID
-- (void)startPublish:(NSString*)streamID {
+- (void)startPublishStream {
     if (self.sudFSMMGDecorator.keyWordASRing) {
         [self startCaptureAudioToASR];
     }
-    [AudioEngineFactory.shared.audioEngine muteMicrophone:NO];
-    [AudioEngineFactory.shared.audioEngine startPublish:streamID];
+    [AudioEngineFactory.shared.audioEngine startPublishStream];
 }
 
 /// 关闭推流
@@ -26,29 +24,45 @@
         [self stopCaptureAudioToASR];
     }
     [AudioEngineFactory.shared.audioEngine stopPublishStream];
-    [AudioEngineFactory.shared.audioEngine muteMicrophone:YES];
 }
 
 - (void)loginRoom {
     /// 设置语音引擎事件回调
+
+    AudioJoinRoomModel *audioJoinRoomModel = nil;
+    if ([AppService.shared.rtcType compare:@"zego" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        audioJoinRoomModel = [[AudioJoinRoomModel alloc] init];
+        audioJoinRoomModel.userID = AppService.shared.loginUserInfo.userID;
+        audioJoinRoomModel.userName = AppService.shared.loginUserInfo.name;
+        audioJoinRoomModel.roomID = self.roomID;
+    } else if ([AppService.shared.rtcType compare:@"agora" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        audioJoinRoomModel = [[AudioJoinRoomModel alloc] init];
+        audioJoinRoomModel.userID = AppService.shared.loginUserInfo.userID;
+        audioJoinRoomModel.roomID = self.roomID;
+    }
+    
+    if (audioJoinRoomModel == nil)
+        return;
+    
+    [AudioEngineFactory.shared.audioEngine joinRoom:audioJoinRoomModel];
     [AudioEngineFactory.shared.audioEngine setEventListener:self];
-    MediaUser *user = [MediaUser user:AppService.shared.login.loginUserInfo.userID nickname:AppService.shared.login.loginUserInfo.name];
-    [AudioEngineFactory.shared.audioEngine loginRoom:self.roomID user:user config:nil];
+    [AudioEngineFactory.shared.audioEngine setAudioRouteToSpeaker:YES];
+
 }
 
 - (void)logoutRoom {
-    [AudioEngineFactory.shared.audioEngine logoutRoom];
+    [AudioEngineFactory.shared.audioEngine leaveRoom];
 }
 
 #pragma mark =======音频采集=======
 /// 开始音频采集
 - (void)startCaptureAudioToASR {
-    [AudioEngineFactory.shared.audioEngine startCapture];
+    [AudioEngineFactory.shared.audioEngine startPCMCapture];
 }
 
 /// 停止音频采集
 - (void)stopCaptureAudioToASR {
-    [AudioEngineFactory.shared.audioEngine stopCapture];
+    [AudioEngineFactory.shared.audioEngine stopPCMCapture];
 }
 
 #pragma mark delegate
@@ -68,28 +82,23 @@
 }
 
 /// 房间流更新 增、减，需要收到此事件后播放对应流
+/// @param roomID 房间ID
 /// @param updateType 流更新类型 增，减
 /// @param streamList 变动流列表
 /// @param extendedData 扩展信息
-/// @param roomID 房间ID
-- (void)onRoomStreamUpdate:(HSAudioEngineUpdateType)updateType streamList:(NSArray<MediaStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData roomID:(NSString *)roomID {
+- (void)onRoomStreamUpdate:(NSString *)roomID updateType:(HSAudioEngineUpdateType)updateType streamList:(NSArray<AudioStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData {
     switch (updateType) {
         case HSAudioEngineUpdateTypeAdd:
-            for (MediaStream *item in streamList) {
-                [AudioEngineFactory.shared.audioEngine startPlayingStream:item.streamID];
-                [[NSNotificationCenter defaultCenter]postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey:item}];
-                
+            for (AudioStream *item in streamList) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey:item}];
             }
             break;
         case HSAudioEngineUpdateTypeDelete:
-            for (MediaStream *item in streamList) {
-                [AudioEngineFactory.shared.audioEngine stopPlayingStream:item.streamID];
-            }
             break;
     }
 }
 
-- (void)onRoomOnlineUserCountUpdate:(int)count roomID:(NSString *)roomID {
+- (void)onRoomOnlineUserCountUpdate:(NSString *)roomID count:(int)count {
     NSInteger oldCount = self.totalUserCount;
     self.totalUserCount = count;
     if (oldCount != count) {
@@ -97,25 +106,13 @@
     }
 }
 
-- (void)onRoomUserUpdate:(HSAudioEngineUpdateType)updateType userList:(NSArray<MediaUser *> *)userList roomID:(NSString *)roomID {
-    if (updateType == HSAudioEngineUpdateTypeAdd) {
-        self.totalUserCount += userList.count;
-    } else if (updateType == HSAudioEngineUpdateTypeDelete) {
-        self.totalUserCount -= userList.count;
-        if (self.totalUserCount < 0) {
-            self.totalUserCount = 0;
-        }
-    }
-    [self dtUpdateUI];
-}
-
-- (void)onRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {
+- (void)onRoomStateUpdate:(NSString *)roomID state:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData {
     if (state == HSAudioEngineStateConnected && !self.isSentEnterRoom) {
         [self sendEnterRoomMsg];
     }
 }
 
-- (void)onCapturedAudioData:(NSData *)data {
+- (void)onCapturedPCMData:(NSData *)data {
     [self.sudFSTAPPDecorator pushAudio:data];
 }
 @end

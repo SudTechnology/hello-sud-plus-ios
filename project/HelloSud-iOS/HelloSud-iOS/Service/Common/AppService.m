@@ -17,8 +17,18 @@
 /// 配置信息缓存key
 #define kKeyConfigModel @"key_config_model"
 
+
+NSString *const kRtcNameZego = @"即构";
+NSString *const kRtcNameAgora = @"声网";
+NSString *const kRtcNameRongCloud = @"融云";
+NSString *const kRtcNameCommEase = @"网易云信";
+NSString *const kRtcNameVoicEngine = @"火山引擎";
+NSString *const kRtcNameAlibabaCloud = @"阿里云";
+NSString *const kRtcNameTencentCloud = @"腾讯云";
+
+
 @interface AppService ()
-@property (nonatomic, strong) NSArray <NSString *> *randomNameArr;
+@property(nonatomic, strong) NSArray <NSString *> *randomNameArr;
 
 @end
 
@@ -122,6 +132,7 @@
             ];
     NSString *sudMeta = [arr componentsJoinedByString:@","];
     [HttpService setupHeader:@{@"Sud-Meta": sudMeta}];
+
 }
 
 /// 登录成功请求配置信息
@@ -134,7 +145,7 @@
             return;
         }
         weakSelf.configModel = model;
-    } failure:^(id error) {
+    }                       failure:^(id error) {
         [ToastUtil show:@"网络错误"];
     }];
 }
@@ -179,9 +190,9 @@
         NSLog(@"切换RTC厂商失败，参数异常:%@, configModel:%@", rtcType, configModel);
         return;
     }
-    
+
     NSLog(@"切换RTC厂商:%@", rtcType);
-    [AudioEngineFactory.shared.audioEngine unInit];
+    [AudioEngineFactory.shared.audioEngine destroy];
 
     if (configModel.zegoCfg && [rtcType isEqualToString:configModel.zegoCfg.rtcType]) {
         NSLog(@"使用zego语音引擎");
@@ -191,8 +202,10 @@
         NSString *appID = configModel.zegoCfg.appId;
         NSString *appKey = configModel.zegoCfg.appKey;
         if (appID.length > 0 && appKey.length > 0) {
-            NSDictionary *config = @{@"appID": appID, @"appKey": appKey};
-            [AudioEngineFactory.shared.audioEngine initWithConfig:config];
+            AudioConfigModel *model = [[AudioConfigModel alloc] init];
+            model.appId = appID;
+            model.appKey = appKey;
+            [AudioEngineFactory.shared.audioEngine initWithConfig:model];
         } else {
             [ToastUtil show:@"切换zego语音引擎失败，对应配置为空"];
         }
@@ -203,9 +216,11 @@
         /// 初始化agora引擎SDK
         NSString *appID = configModel.agoraCfg.appId;
         if (appID.length > 0) {
-            NSMutableDictionary *config = NSMutableDictionary.new;
-            config[@"appID"] = appID;
-            [AudioEngineFactory.shared.audioEngine initWithConfig:config];
+            AudioConfigModel *model = [[AudioConfigModel alloc] init];
+            model.appId = appID;
+            model.userID = _loginUserInfo.userID;
+            model.token = @"";
+            [AudioEngineFactory.shared.audioEngine initWithConfig:model];
         } else {
             [ToastUtil show:@"切换agora语音引擎失败，对应配置为空"];
         }
