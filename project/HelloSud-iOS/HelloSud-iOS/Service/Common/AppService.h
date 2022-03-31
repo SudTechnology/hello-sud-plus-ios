@@ -10,6 +10,14 @@
 #import "ConfigModel.h"
 #import "LoginService.h"
 
+extern NSString *const kRtcNameZego;
+extern NSString *const kRtcNameAgora;
+extern NSString *const kRtcNameRongCloud;
+extern NSString *const kRtcNameCommEase;
+extern NSString *const kRtcNameVoicEngine;
+extern NSString *const kRtcNameAlibabaCloud;
+extern NSString *const kRtcNameTencentCloud;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// APP管理模块
@@ -24,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 所有支持rtc厂商列表
 @property(nonatomic, strong) NSArray <HSConfigContent *> *rtcList;
 /// 选中rtc厂商类型
-@property(nonatomic, copy, readonly)NSString *rtcType;
+@property(nonatomic, copy, readonly) NSString *rtcType;
 
 /// 登录服务
 @property (nonatomic, strong)LoginService *login;

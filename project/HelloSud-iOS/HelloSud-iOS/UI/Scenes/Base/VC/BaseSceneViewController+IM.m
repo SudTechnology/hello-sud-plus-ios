@@ -15,7 +15,7 @@
 - (void)sendMsg:(RoomBaseCMDModel *)msg isAddToShow:(BOOL)isAddToShow {
     NSString *command = [[NSString alloc]initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
     NSLog(@"send content:%@", command);
-    [AudioEngineFactory.shared.audioEngine sendCommand:command roomID:self.roomID result:^(int errorCode) {
+    [AudioEngineFactory.shared.audioEngine sendCommand:command listener:^(int errorCode) {
         NSLog(@"send result:%d", errorCode);
     }];
     [self addMsg:msg isShowOnScreen:isAddToShow];
@@ -42,17 +42,16 @@
 }
 
 /// 接收引擎回调回来消息响应
-- (void)onIMRecvCustomCommand:(NSString *)command fromUser:(MediaUser *)fromUser roomID:(NSString *)roomID {
-    NSLog(@"recv command:\nroom:%@\nuserID:%@\nnickname:%@,content:%@", roomID, fromUser.userID,fromUser.nickname, command);
-    [self handleCommand:command user:fromUser.userID roomID:roomID];
+- (void)onRecvCommand:(NSString *)fromUserID command:(NSString *)command {
+    NSLog(@"recv command:\nuserID:%@\ncontent:%@", fromUserID, command);
+    [self handleCommand:command user:fromUserID];
 }
 
 
 /// 处理收到房间信令
 /// @param command 指令内容
 /// @param userID 发送者
-/// @param roomID 房间号
-- (void)handleCommand:(NSString *)command user:(NSString *)userID roomID:(NSString *)roomID {
+- (void)handleCommand:(NSString *)command user:(NSString *)userID {
     if (command.length == 0) {
         NSLog(@"recv content is empty.");
         return;

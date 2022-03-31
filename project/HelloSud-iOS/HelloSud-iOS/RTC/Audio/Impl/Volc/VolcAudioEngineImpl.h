@@ -6,11 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IAudioEngine.h"
+#import "ISudAudioEngine.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 火山语音引起
-@interface VolcAudioEngineImpl : NSObject<IAudioEngine>
+@interface VolcAudioEngineImpl : NSObject<ISudAudioEngine>
 
 @end
 
