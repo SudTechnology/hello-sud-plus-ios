@@ -8,9 +8,7 @@
 #import "MoreSettingViewController.h"
 #import "HSSettingCell.h"
 #import "HSSettingModel.h"
-#import "HSSetingHeadView.h"
 #import "ChangeRTCViewController.h"
-#import "VersionInfoViewController.h"
 
 @interface MoreSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong)UITableView *tableView;
