@@ -30,7 +30,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 基础场景
-@interface BaseSceneViewController : BaseViewController<AudioEventListener>
+@interface BaseSceneViewController : BaseViewController<ISudAudioEventListener>
 
 @property (nonatomic, strong)BaseSceneConfigModel *configModel;
 

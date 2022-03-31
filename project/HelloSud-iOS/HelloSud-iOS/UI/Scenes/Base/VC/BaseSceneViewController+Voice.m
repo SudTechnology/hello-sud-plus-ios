@@ -32,12 +32,12 @@
     AudioJoinRoomModel *audioJoinRoomModel = nil;
     if ([AppService.shared.rtcType compare:@"zego" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
         audioJoinRoomModel = [[AudioJoinRoomModel alloc] init];
-        audioJoinRoomModel.userID = AppService.shared.loginUserInfo.userID;
-        audioJoinRoomModel.userName = AppService.shared.loginUserInfo.name;
+        audioJoinRoomModel.userID = AppService.shared.login.loginUserInfo.userID;
+        audioJoinRoomModel.userName = AppService.shared.login.loginUserInfo.name;
         audioJoinRoomModel.roomID = self.roomID;
     } else if ([AppService.shared.rtcType compare:@"agora" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
         audioJoinRoomModel = [[AudioJoinRoomModel alloc] init];
-        audioJoinRoomModel.userID = AppService.shared.loginUserInfo.userID;
+        audioJoinRoomModel.userID = AppService.shared.login.loginUserInfo.userID;
         audioJoinRoomModel.roomID = self.roomID;
     }
     

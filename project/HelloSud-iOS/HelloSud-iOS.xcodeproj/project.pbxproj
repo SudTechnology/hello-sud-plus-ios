@@ -150,7 +150,7 @@
 		6CD6E87627BF42F900D8F76C /* VolcAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87527BF42F900D8F76C /* VolcAudioEngineImpl.m */; };
 		6CD6E87927BF431500D8F76C /* AliyunAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87827BF431500D8F76C /* AliyunAudioEngineImpl.m */; };
 		6CD6E87C27BF433500D8F76C /* TXAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */; };
-		6CEF766527F31B8D00A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766427F31B8D00A12220 /* MoreSettingViewController.m */; };
+		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
 		BC2101199D87BB6081A8FBC0 /* DTNSError+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5A0981935974C33E8B /* DTNSError+Custom.m */; };
 		BC210452F6884908D768A126 /* DTNSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106C0581A7D8986B9FC83 /* DTNSArray+Masonry.m */; };
 		BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102EB58A8CE4A527A5167 /* ToastUtil.m */; };
@@ -387,10 +387,6 @@
 		448A6E0A27DEFF3200004928 /* LocalizedService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalizedService.m; sourceTree = "<group>"; };
 		44C8FF9027F318A70030ED40 /* TicketService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketService.h; sourceTree = "<group>"; };
 		44C8FF9127F318A70030ED40 /* TicketService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketService.m; sourceTree = "<group>"; };
-		445EAB3727A1347E000DCC72 /* UserInfoListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoListModel.h; sourceTree = "<group>"; };
-		445EAB3827A1347E000DCC72 /* UserInfoListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoListModel.m; sourceTree = "<group>"; };
-		445EAB3A27A1428C000DCC72 /* GameLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameLoginModel.h; sourceTree = "<group>"; };
-		445EAB3B27A1428C000DCC72 /* GameLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameLoginModel.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* ISudAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISudAudioEngine.h; sourceTree = "<group>"; };
 		44DF038B2796ADC6006EE6AC /* SudMGP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SudMGP.xcframework; sourceTree = "<group>"; };
 		44DF03972796B2C5006EE6AC /* AppUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
@@ -485,8 +481,8 @@
 		6CD6E87A27BF433500D8F76C /* TXAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAudioEngineImpl.h; sourceTree = "<group>"; };
 		6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAudioEngineImpl.m; sourceTree = "<group>"; };
 		6CD6E87D27C0A36100D8F76C /* ServiceConstHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceConstHeader.h; sourceTree = "<group>"; };
-		6CEF766327F31B8D00A12220 /* MoreSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreSettingViewController.h; sourceTree = "<group>"; };
-		6CEF766427F31B8D00A12220 /* MoreSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSettingViewController.m; sourceTree = "<group>"; };
+		6CEF766627F5A22000A12220 /* MoreSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreSettingViewController.h; sourceTree = "<group>"; };
+		6CEF766727F5A22000A12220 /* MoreSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSettingViewController.m; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIView+Extension.m"; sourceTree = "<group>"; };
 		BC2100EC41AFF28046FF7B87 /* DTNSError+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTNSError+Custom.h"; sourceTree = "<group>"; };
@@ -556,6 +552,8 @@
 		4455ACBF27EAC657001516EE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6CEF766627F5A22000A12220 /* MoreSettingViewController.h */,
+				6CEF766727F5A22000A12220 /* MoreSettingViewController.m */,
 				4455ACC427EAC657001516EE /* HSSettingViewController.h */,
 				4455ACC127EAC657001516EE /* HSSettingViewController.m */,
 				4455ACC227EAC657001516EE /* ChangeRTCViewController.h */,
@@ -1002,23 +1000,12 @@
 		4455ADF327EAC6F7001516EE /* Mic */ = {
 			isa = PBXGroup;
 			children = (
-
 				4455ADF427EAC6F7001516EE /* AudioMicContentView.h */,
 				4455ADF527EAC6F7001516EE /* AudioMicroView.m */,
 				4455ADF627EAC6F7001516EE /* GameMicContentView.h */,
 				4455ADF727EAC6F7001516EE /* AudioMicContentView.m */,
 				4455ADF827EAC6F7001516EE /* AudioMicroView.h */,
 				4455ADF927EAC6F7001516EE /* GameMicContentView.m */,
-
-				6CEF766327F31B8D00A12220 /* MoreSettingViewController.h */,
-				6CEF766427F31B8D00A12220 /* MoreSettingViewController.m */,
-				6C076E552799450900650209 /* HSSettingViewController.h */,
-				6C076E562799450900650209 /* HSSettingViewController.m */,
-				44F29F5D27BBB3D700F57DEE /* ChangeRTCViewController.h */,
-				44F29F5E27BBB3D700F57DEE /* ChangeRTCViewController.m */,
-				44F29F6627BBB9D000F57DEE /* VersionInfoViewController.h */,
-				44F29F6727BBB9D000F57DEE /* VersionInfoViewController.m */,
-
 			);
 			path = Mic;
 			sourceTree = "<group>";
@@ -1456,13 +1443,10 @@
 				BC2105042E549C236540DC05 /* DeviceUtil.m */,
 				BC21046606D40897C9A2BC55 /* ToastUtil.h */,
 				BC2102EB58A8CE4A527A5167 /* ToastUtil.m */,
-
 				44241AE527EAD6E3001EE125 /* LanguageUtil.h */,
 				44241AE627EAD6E3001EE125 /* LanguageUtil.m */,
-
 				E5C241FF27EDCB8800EA2377 /* ThreadUtils.h */,
 				E5C2420027EDCBAA00EA2377 /* ThreadUtils.m */,
-
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1657,7 +1641,6 @@
 				6C076EA6279F98AA00650209 /* AppService.m in Sources */,
 				6C076ED427A274FE00650209 /* UserService.m in Sources */,
 				445EAAE2279ABB22000DCC72 /* BaseAlertView.m in Sources */,
-
 				4455AE1427EAC6F7001516EE /* RoomNaviView.m in Sources */,
 				4455AE0D27EAC6F7001516EE /* BaseMsgCell.m in Sources */,
 				4455ADA927EAC658001516EE /* RoomCmdSendGiftModel.m in Sources */,
@@ -1665,9 +1648,7 @@
 				4455AD8D27EAC658001516EE /* ChangeRTCTCell.m in Sources */,
 				4455AE0927EAC6F7001516EE /* AudioRoomMicModel.m in Sources */,
 				4455ADA727EAC658001516EE /* ShowViewController.m in Sources */,
-
 				E5C2420127EDCBAA00EA2377 /* ThreadUtils.m in Sources */,
-
 				6C076E71279E429E00650209 /* ZegoAudioEngineImpl.m in Sources */,
 				6C076ED127A253C100650209 /* RespUserInfoModel.m in Sources */,
 				4455ADA127EAC658001516EE /* MicListModel.m in Sources */,
@@ -1675,6 +1656,7 @@
 				6C076E672799621300650209 /* BaseModel.m in Sources */,
 				4455ADB027EAC658001516EE /* RoomGiftContentView.m in Sources */,
 				4455AD9027EAC658001516EE /* LoginViewController.m in Sources */,
+				6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */,
 				6C076E80279E8EBD00650209 /* AudioCommon.m in Sources */,
 				6C076EB927A00ABC00650209 /* DTBlurEffectView.m in Sources */,
 				44F29F8527BF4B1D00F57DEE /* SudFSMMGDecorator.m in Sources */,
@@ -1707,11 +1689,7 @@
 				4455ADCE27EAC658001516EE /* TicketChooseNoticeView.m in Sources */,
 				44F29FAB27C0A4A000F57DEE /* MGPlayerStateMapModel.m in Sources */,
 				6C192E932797E31200553034 /* DTSheetView.m in Sources */,
-
-
-				445EAAAD279A5CF6000DCC72 /* RoomOperatorView.m in Sources */,
 				E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */,
-
 				445EAA9F27997485000DCC72 /* BaseCollectionViewCell.m in Sources */,
 				4455AE0B27EAC6F7001516EE /* SwitchRoomCell.m in Sources */,
 				6C192E772797BB7B00553034 /* BaseView.m in Sources */,
@@ -1730,19 +1708,9 @@
 				445EAB3627A1330D000DCC72 /* BaseRespModel.m in Sources */,
 				4455AD8B27EAC658001516EE /* VersionInfoCell.m in Sources */,
 				6C076EDA27A2993C00650209 /* RespGameInfoModel.m in Sources */,
-
 				4455AD9727EAC658001516EE /* HomeViewController.m in Sources */,
 				4455AE0F27EAC6F7001516EE /* RoomGiftTableViewCell.m in Sources */,
-
-				445EAAFB279E8B10000DCC72 /* HomeFooterReusableView.m in Sources */,
-				445EAB2027A01176000DCC72 /* MatchRoomModel.m in Sources */,
 				E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */,
-				6CEF766527F31B8D00A12220 /* MoreSettingViewController.m in Sources */,
-				445EAAC9279A98DB000DCC72 /* RoomMsgBgView.m in Sources */,
-				6C076E9E279EC54200650209 /* RoomCmdSendGiftModel.m in Sources */,
-				44F29F6E27BCA75000F57DEE /* VersionInfoCell.m in Sources */,
-				445EAA9727996BC6000DCC72 /* GameListTableViewCell.m in Sources */,
-
 				6C076EBC27A01BC000650209 /* AudioRoomService.m in Sources */,
 				4455AD9627EAC658001516EE /* MainTabBarController.m in Sources */,
 				4455ADA827EAC658001516EE /* RoomCmdChatTextModel.m in Sources */,
