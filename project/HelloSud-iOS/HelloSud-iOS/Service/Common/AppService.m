@@ -218,7 +218,7 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
         if (appID.length > 0) {
             AudioConfigModel *model = [[AudioConfigModel alloc] init];
             model.appId = appID;
-            model.userID = _loginUserInfo.userID;
+            model.userID = AppService.shared.login.loginUserInfo.userID;
             model.token = @"";
             [AudioEngineFactory.shared.audioEngine initWithConfig:model];
         } else {
