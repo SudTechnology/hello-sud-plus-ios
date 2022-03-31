@@ -1,49 +1,43 @@
 //
-//  VersionInfoViewController.m
+//  HSSettingViewController.m
 //  HelloSud-iOS
 //
-//  Created by Mary on 2022/2/15.
+//  Created by kaniel on 2022/1/20.
 //
 
+#import "MoreSettingViewController.h"
+#import "HSSettingCell.h"
+#import "HSSettingModel.h"
+#import "HSSetingHeadView.h"
+#import "ChangeRTCViewController.h"
 #import "VersionInfoViewController.h"
-#import "VersionInfoCell.h"
-#import "VersionInfoModel.h"
-#import <SudMGP/ISudFSMMG.h>
 
-@interface VersionInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface MoreSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong)UITableView *tableView;
-@property(nonatomic, strong)NSArray <VersionInfoModel *>*arrData;
-
+/// 页面数据
+@property(nonatomic, strong)NSArray <NSArray <HSSettingModel *>*>*arrData;
 @end
 
-@implementation VersionInfoViewController
+@implementation MoreSettingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"版本信息";
+    self.title = @"更多设置";
+    // Do any additional setup after loading the view.
     [self configData];
 }
 
+
 /// 配置页面数据
 - (void)configData {
+
+    HSSettingModel *rtcModel = [HSSettingModel new];
+    rtcModel.title = @"切换RTC服务商";
+    rtcModel.subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? kRtcNameZego : kRtcNameAgora;
+    rtcModel.isMore = YES;
+    rtcModel.pageURL = @"";
     
-    VersionInfoModel *m0 = [VersionInfoModel new];
-    m0.title = @"HelloSud App";
-    m0.subTitle = [NSString stringWithFormat:@"V%@.%@", [DeviceUtil getAppVersion], [DeviceUtil getAppBuildCode]];
-    
-    VersionInfoModel *m1 = [VersionInfoModel new];
-    m1.title = @"SudMGP SDK";
-    m1.subTitle = [NSString stringWithFormat:@"V%@", [SudMGP getVersion]];
-    
-//    VersionInfoModel *m2 = [VersionInfoModel new];
-//    m2.title = @"Zego SDK";
-//    m2.subTitle = @"V2.15.0";
-//
-//    VersionInfoModel *m3 = [VersionInfoModel new];
-//    m3.title = @"Agora SDK";
-//    m3.subTitle = @"V3.6.1.1";
-    
-    self.arrData = @[m0, m1];
+    self.arrData = @[@[rtcModel]];
     [self.tableView reloadData];
 }
 
@@ -65,42 +59,58 @@
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        [_tableView registerClass:[VersionInfoCell class] forCellReuseIdentifier:@"VersionInfoCell"];
+        [_tableView registerClass:[HSSettingCell class] forCellReuseIdentifier:@"HSSettingCell"];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = HEX_COLOR(@"#F5F6FB");
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
+        _tableView.showsHorizontalScrollIndicator = NO;
+        _tableView.showsVerticalScrollIndicator = NO;
+
     }
     return _tableView;
 }
 
 #pragma mark UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VersionInfoCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSSettingCell" forIndexPath:indexPath];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    VersionInfoCell *c = (VersionInfoCell *)cell;
+    HSSettingCell *c = (HSSettingCell *)cell;
     c.isShowTopLine = indexPath.row > 0;
-    c.model = self.arrData[indexPath.row];
+    c.model = self.arrData[indexPath.section][indexPath.row];
+//    if (indexPath.section == 0 && indexPath.row == 0) {
+//        c.isShowTopLine = true;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
+    if ([model.title isEqualToString:@"切换RTC服务商"]) {
+        ChangeRTCViewController *vc = ChangeRTCViewController.new;
+        [self.navigationController pushViewController:vc animated:YES];
+        WeakSelf
+        vc.onRTCChangeBlock = ^(NSString * _Nonnull str) {
+            weakSelf.arrData[0][0].subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? kRtcNameZego : kRtcNameAgora;
+            [weakSelf.tableView reloadData];
+        };
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return true;
+    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
+    return model.isMore;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.arrData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrData.count;
+    return self.arrData[section].count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,7 +118,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
+    return 24;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
