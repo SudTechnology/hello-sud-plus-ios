@@ -183,7 +183,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"欢迎体验\nHelloSud";
+        _titleLabel.text = NSString.dt_login_welcome;
         _titleLabel.numberOfLines = 0;
         _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#13141A" alpha:1];
         _titleLabel.font = [UIFont systemFontOfSize:24 weight:UIFontWeightSemibold];

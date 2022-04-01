@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"切换语言";
+    self.title = NSString.dt_settings_switch_language;
     [self configData];
 }
 
@@ -46,7 +46,40 @@
     m_3.title = @"English";
     m_3.language = @"en";
     
-    NSArray <SwitchLangModel *>*dataArray = @[m_0, m_1, m_2, m_3];
+    SwitchLangModel *m_4 = [SwitchLangModel new];
+    m_4.title = @"لغة عربية";
+    m_4.language = @"ar";
+    
+    SwitchLangModel *m_5 = [SwitchLangModel new];
+    m_5.title = @"Bahasa Indonesia";
+    m_5.language = @"id";
+    
+    SwitchLangModel *m_6 = [SwitchLangModel new];
+    m_6.title = @"Bahasa Melayu";
+    m_6.language = @"ms";
+    
+    SwitchLangModel *m_7 = [SwitchLangModel new];
+    m_7.title = @"ภาษาไทย";
+    m_7.language = @"th";
+    
+    SwitchLangModel *m_8 = [SwitchLangModel new];
+    m_8.title = @"Tiếng Việt";
+    m_8.language = @"vi";
+    
+    SwitchLangModel *m_9 = [SwitchLangModel new];
+    m_9.title = @"한국어";
+    m_9.language = @"ko";
+    
+    SwitchLangModel *m_10 = [SwitchLangModel new];
+    m_10.title = @"Español";
+    m_10.language = @"es";
+    
+    SwitchLangModel *m_11 = [SwitchLangModel new];
+    m_11.title = @"日本語";
+    m_11.language = @"ja";
+    
+    
+    NSArray <SwitchLangModel *>*dataArray = @[m_0, m_1, m_2, m_3, m_4, m_5, m_6, m_7, m_8, m_9, m_10, m_11];
     
     if (LanguageUtil.userLanguage.length > 0) {
         NSString *str = [NSBundle currentLanguage];
