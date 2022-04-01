@@ -130,9 +130,10 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
     NSString *refreshToken = [self getRefreshToken];
     if (refreshToken.length == 0) {
         NSLog(@"refreshTokenWithSuccess err, refresh token is empty");
+        [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_FAIL_NTF object:nil];
         return;
     }
-    NSDictionary *dicParam = @{@"getRefreshToken": refreshToken};
+    NSDictionary *dicParam = @{@"refreshToken": refreshToken};
     WeakSelf
     [HttpService postRequestWithApi:kBASEURL(@"refresh-token/v1") param:dicParam success:^(NSDictionary *rootDict) {
         RespRefreshTokenModel *model = [RespRefreshTokenModel decodeModel:rootDict];

@@ -29,6 +29,7 @@
     [[AppService shared] setupNetWorkHeader];
     [self observerNTF];
     self.window = [[UIWindow alloc]init];
+    // 登录过后，检测刷新token
     if (AppService.shared.login.isLogin) {
         [AppService.shared.login checkToken];
         self.window.rootViewController = [[MainTabBarController alloc]init];
@@ -52,6 +53,7 @@
 }
 
 - (void)observerNTF {
+    // 监听token刷新状态切换视图
     [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         if (AppService.shared.login.isRefreshedToken && ![self.window.rootViewController isKindOfClass:[MainTabBarController class]]) {
             /// 切根式图
