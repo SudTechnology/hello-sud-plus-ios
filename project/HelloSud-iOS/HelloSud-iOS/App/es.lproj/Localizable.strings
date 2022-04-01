@@ -1,0 +1,80 @@
+/*
+  Localizable.strings
+  HelloSud-iOS
+
+  Created by Mary on 2022/3/14.
+  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
+*/
+
+/// Login
+"dt_login_welcome" = "Le damos la bienvenida por probar \nHelloSud";
+"dt_login_welcome_helloSud" = "Le damos la bienvenida por usar HelloSud";
+"dt_login_we_take_information" = "Consideremos muy importante la protección de su información personal. Para conocer en detalle la recopilación de datos y el uso de la información personal, puede hacer clic en";
+"dt_login_user_agreement" = "Acuerdo del Usuario";
+"dt_login_and" = "y";
+"dt_login_privacy_policy" = "Política de Privacidad";
+"dt_login_click_agree_agreement" = "para obtener la información. Haga clic en Aceptar e indique que ha leído y aceptado todas las cláusulas anteriores.";
+"dt_login_welcome_to_the" = "Pruébelo ahora";
+"dt_login_your_nickname" = "Su apodo";
+"dt_login_experience_immediately" = "Pruébelo ahora";
+"dt_login_warm_prompt" = "Consejos";
+"dt_login_warm_prompt_des" = "HelloSud utilizará su información exclusivamente para prestar servicios y mejorar la experiencia del usario. Garantizamos la seguridad de su información. Por favor, acepte para continuar.";
+"dt_login_agree_continue" = "Aceptar y continuar";
+"dt_login_quit_application" = "Cerrar la App";
+
+/// Settings
+"dt_settings_total" = "total";
+"dt_settings_size_occupied" = "Espacio ocupado";
+"dt_settings_version_info" = "Información de la versión";
+"dt_settings_switch_rtc" = "Cambiar el proveedor de servicio RTC";
+"dt_settings_zego" = "即构";
+"dt_settings_agora" = "声网";
+"dt_settings_net_ease" = "网易云信";
+"dt_settings_volcano" = "火山";
+"dt_settings_alicloud" = "阿里云";
+"dt_settings_tencent" = "腾讯";
+"dt_settings_switch_language" = "Cambiar el idioma";
+"dt_settings_open_source" = "Protocolo de código abierto";
+"dt_settings_user_agreement" = "Acuerdo del Usuario";
+"dt_settings_privacy_policy" = "Política de Privacidad";
+"dt_settings_contact_us" = "Para obtener más información o comentarios, contáctenos por correo electrónico: \nhelp@sud.tech";
+"dt_settings_work_in_progress" = "Elaborando, ¡manténganse al tanto!";
+"dt_settings_confirm_switch_rtc" = "¿Desea cambiar el proveedor de servicios RTC a ";
+
+/// RoomList
+"dt_room_list_room_number" = "Número de sala";
+"dt_room_list_users" = "人";
+"dt_room_list_scene" = "场景";
+"dt_room_list_no_room_available" = "No se dispone de salas\nVaya a la página de inicio para crear una!";
+
+/// Home
+"dt_home_user_id" = "ID de usuario";
+"dt_home_enter_room_num" = "Introduzca el número de sala de acceso rápido";
+"dt_home_enter" = "Entrar";
+"dt_home_join" = "Jugar";
+"dt_home_coming_soon" = "Manténganse al tanto";
+"dt_home_create_room" = "Crear una sala";
+"dt_home_in_game" = "En juego";
+
+/// common
+"dt_common_select_all" = "Seleccionar todo";
+"dt_common_agree" = "Aceptar";
+"dt_common_not_agree" = "No aceptar";
+"dt_common_sure" = "Aceptar";
+"dt_common_cancel" = "Cancelar";
+
+/// Main
+"dt_tab_home" = "Página de inicio";
+"dt_tab_room" = "Sala";
+"dt_tab_setting" = "Ajustes";
+
+/// Scenes
+"dt_send" = "Regalar a";
+"dt_down_mic" = "Desactivar micrófono";
+"dt_up_mic" = "上%ld号麦";
+"dt_select_person" = "Seleccione el destinatario del regalo";
+"dt_select_gift" = "Seleccione un regalo";
+"dt_send_gift" = "Regalar";
+"dt_room_owner" = "Creador de la sala";
+"dt_mic_index" = "%ld麦";
+"dt_mic_name" = "麦";
