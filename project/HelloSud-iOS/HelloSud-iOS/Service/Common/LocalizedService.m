@@ -11,6 +11,7 @@
 */
 
 /// Login
++ (NSString *)dt_login_welcome { return @"dt_login_welcome".localized; }
 + (NSString *)dt_login_welcome_helloSud { return @"dt_login_welcome_helloSud".localized; }
 + (NSString *)dt_login_we_take_information { return @"dt_login_we_take_information".localized; }
 + (NSString *)dt_login_user_agreement { return @"dt_login_user_agreement".localized; }
@@ -28,7 +29,6 @@
 /// Settings
 + (NSString *)dt_settings_total { return @"dt_settings_total".localized; }
 + (NSString *)dt_settings_size_occupied { return @"dt_settings_size_occupied".localized; }
-+ (NSString *)dt_settings_set { return @"dt_settings_set".localized; }
 + (NSString *)dt_settings_version_info { return @"dt_settings_version_info".localized; }
 + (NSString *)dt_settings_switch_rtc { return @"dt_settings_switch_rtc".localized; }
 + (NSString *)dt_settings_zego { return @"dt_settings_zego".localized; }
@@ -49,7 +49,6 @@
 + (NSString *)dt_room_list_room_number { return @"dt_room_list_room_number".localized; }
 + (NSString *)dt_room_list_users { return @"dt_room_list_users".localized; }
 + (NSString *)dt_room_list_scene { return @"dt_room_list_scene".localized; }
-+ (NSString *)dt_room_list_enter { return @"dt_room_list_enter".localized; }
 + (NSString *)dt_room_list_no_room_available { return @"dt_room_list_no_room_available".localized; }
 
 /// Home

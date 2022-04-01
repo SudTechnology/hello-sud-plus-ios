@@ -143,7 +143,6 @@
 - (UILabel *)roomNumLabel {
     if (!_roomNumLabel) {
         _roomNumLabel = [[UILabel alloc] init];
-        _roomNumLabel.text = @"房间号：0";
         _roomNumLabel.textColor = [UIColor dt_colorWithHexString:@"#666666" alpha:1];
         _roomNumLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     }
@@ -163,7 +162,7 @@
 - (UIButton *)enterRoomBtn {
     if (!_enterRoomBtn) {
         _enterRoomBtn = [[UIButton alloc] init];
-        [_enterRoomBtn setTitle:NSString.dt_room_list_enter forState:normal];
+        [_enterRoomBtn setTitle:NSString.dt_home_enter forState:normal];
         _enterRoomBtn.backgroundColor = UIColor.blackColor;
         _enterRoomBtn.titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
         [_enterRoomBtn setTitleColor:UIColor.whiteColor forState:normal];

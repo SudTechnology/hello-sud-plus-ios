@@ -1,0 +1,80 @@
+/*
+  Localizable.strings
+  HelloSud-iOS
+
+  Created by Mary on 2022/3/14.
+  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
+*/
+
+/// Login
+"dt_login_welcome" = "\nHelloSud 체험을 환영합니다.";
+"dt_login_welcome_helloSud" = "HelloSud사용을 환영합니다.";
+"dt_login_we_take_information" = "저희는개인 정보 보호에 각별히 주의하고 있습니다. 개인 정보 수집 및 사용에 관한 세부 정보는 ";
+"dt_login_user_agreement" = "<사용자 약관>";
+"dt_login_and" = "및";
+"dt_login_privacy_policy" = "<개인 정보 정책>";
+"dt_login_click_agree_agreement" = "을 클릭하여 이해할 수 있습니다. 동의를 클릭하면 상기 모든 약관을 열람하고 동의함을 의미합니다.";
+"dt_login_welcome_to_the" = "즉시 체험하기";
+"dt_login_your_nickname" = "닉네임";
+"dt_login_experience_immediately" = "즉시 체험하기";
+"dt_login_warm_prompt" = "도움말";
+"dt_login_warm_prompt_des" = "HelloSud는 서비스 및 체험 개선 용도로만 개인 정보를 사용합니다. 개인 정보 보호에 최선을 다 할 예정이니 동의 후 사용하여주시기 바랍니다.";
+"dt_login_agree_continue" = "동의 및 계속 사용";
+"dt_login_quit_application" = "앱 종료";
+
+/// Settings
+"dt_settings_total" = "총";
+"dt_settings_size_occupied" = "점용 크기";
+"dt_settings_version_info" = "버전 정보";
+"dt_settings_switch_rtc" = "RTC서비스 제공자로 전환";
+"dt_settings_zego" = "即构";
+"dt_settings_agora" = "声网";
+"dt_settings_net_ease" = "网易云信";
+"dt_settings_volcano" = "火山";
+"dt_settings_alicloud" = "阿里云";
+"dt_settings_tencent" = "腾讯";
+"dt_settings_switch_language" = "언어 전환";
+"dt_settings_open_source" = "오픈소스 약관";
+"dt_settings_user_agreement" = "사용자 약관";
+"dt_settings_privacy_policy" = "개인정보 정책";
+"dt_settings_contact_us" = "더 많은 자문이나 피드백이 필요하시면 이메일로 연락해주세요：\nhelp@sud.tech";
+"dt_settings_work_in_progress" = "제작 중이니 잠시 기다려주세요!";
+"dt_settings_confirm_switch_rtc" = "RTC서비스 제공자를 로 전환하시겠습니까";
+
+/// RoomList
+"dt_room_list_room_number" = "방 번호";
+"dt_room_list_users" = "人";
+"dt_room_list_scene" = "场景";
+"dt_room_list_no_room_available" = "방송 중인 방이 없음 \n홈에서 생성하세요~";
+
+/// Home
+"dt_home_user_id" = "사용자ID";
+"dt_home_enter_room_num" = "방 번호를 입력하여 빠르게 들어가기";
+"dt_home_enter" = "들어가기";
+"dt_home_join" = "가입";
+"dt_home_coming_soon" = "기다려주세요.";
+"dt_home_create_room" = "방 생성";
+"dt_home_in_game" = "게임 중";
+
+/// common
+"dt_common_select_all" = "모두 선택";
+"dt_common_agree" = "동의";
+"dt_common_not_agree" = "거절";
+"dt_common_sure" = "확인";
+"dt_common_cancel" = "취소";
+
+/// Main
+"dt_tab_home" = "홈";
+"dt_tab_room" = "방";
+"dt_tab_setting" = "설정";
+
+/// Scenes
+"dt_send" = "보내기";
+"dt_down_mic" = "마이크 끄기";
+"dt_up_mic" = "上%ld号麦";
+"dt_select_person" = "받는 대상을 선택하세요.";
+"dt_select_gift" = "선물 선택";
+"dt_send_gift" = "증정";
+"dt_room_owner" = "방 주인";
+"dt_mic_index" = "%ld麦";
+"dt_mic_name" = "麦";

@@ -7,7 +7,7 @@
 //
 
 #import "LanguageUtil.h"
-static NSString *const MQUserLanguageKey = @"MQUserLanguageKey";
+static NSString *const DTUserLanguageKey = @"DTUserLanguageKey";
 #define STANDARD_USER_DEFAULT  [NSUserDefaults standardUserDefaults]
 
 @implementation LanguageUtil
@@ -20,18 +20,18 @@ static NSString *const MQUserLanguageKey = @"MQUserLanguageKey";
         return;
     }
     //用户自定义
-    [STANDARD_USER_DEFAULT setValue:userLanguage forKey:MQUserLanguageKey];
+    [STANDARD_USER_DEFAULT setValue:userLanguage forKey:DTUserLanguageKey];
     [STANDARD_USER_DEFAULT setValue:@[userLanguage] forKey:@"AppleLanguages"];
     [STANDARD_USER_DEFAULT synchronize];
 }
 
 + (NSString *)userLanguage {
-    return [STANDARD_USER_DEFAULT valueForKey:MQUserLanguageKey];
+    return [STANDARD_USER_DEFAULT valueForKey:DTUserLanguageKey];
 }
 
 //** 重置系统语言 */
 + (void)resetSystemLanguage {
-    [STANDARD_USER_DEFAULT removeObjectForKey:MQUserLanguageKey];
+    [STANDARD_USER_DEFAULT removeObjectForKey:DTUserLanguageKey];
     [STANDARD_USER_DEFAULT setValue:nil forKey:@"AppleLanguages"];
     [STANDARD_USER_DEFAULT synchronize];
 }
