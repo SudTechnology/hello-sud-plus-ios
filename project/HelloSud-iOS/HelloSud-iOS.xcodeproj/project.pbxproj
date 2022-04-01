@@ -158,6 +158,7 @@
 		BC2107427C1CF2D51754990F /* DTUIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */; };
 		BC210868A0B206FC2641B7C6 /* HttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C175D2FCB747B52B179 /* HttpService.m */; };
 		BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104782AE3890C13208B73 /* DTUIDevice+Extension.m */; };
+		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
 		BC210D70BDEB097F49794C9B /* DTUIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */; };
 		BC210FDF9C7CAC234D035EF6 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105042E549C236540DC05 /* DeviceUtil.m */; };
@@ -503,8 +504,10 @@
 		BC210C677DD6442EA5963655 /* RespModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespModel.m; sourceTree = "<group>"; };
 		BC210D3011853BFBEBA259DB /* DTNSArray+Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTNSArray+Masonry.h"; sourceTree = "<group>"; };
 		BC210D5A0981935974C33E8B /* DTNSError+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTNSError+Custom.m"; sourceTree = "<group>"; };
+		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
 		BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIColor+Extension.m"; sourceTree = "<group>"; };
 		BC210F9ABB08F9D04A052246 /* AppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtil.h; sourceTree = "<group>"; };
+		BC210FAF33BAD4283645718B /* UserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailView.h; sourceTree = "<group>"; };
 		E5C241FF27EDCB8800EA2377 /* ThreadUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadUtils.h; sourceTree = "<group>"; };
 		E5C2420027EDCBAA00EA2377 /* ThreadUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadUtils.m; sourceTree = "<group>"; };
 		E5EDB8BB27E873A300EE99D0 /* AudioConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConfigModel.h; sourceTree = "<group>"; };
@@ -683,6 +686,8 @@
 				4455ACF727EAC658001516EE /* HomeHeaderReusableView.h */,
 				4455ACF827EAC658001516EE /* HomeFooterReusableView.h */,
 				4455ACF927EAC658001516EE /* GameItemCollectionViewCell.h */,
+				BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */,
+				BC210FAF33BAD4283645718B /* UserDetailView.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1750,6 +1755,7 @@
 				4455ADA327EAC658001516EE /* ExitRoomModel.m in Sources */,
 				4455ADB227EAC658001516EE /* GiftItemCollectionViewCell.m in Sources */,
 				BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */,
+				BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
