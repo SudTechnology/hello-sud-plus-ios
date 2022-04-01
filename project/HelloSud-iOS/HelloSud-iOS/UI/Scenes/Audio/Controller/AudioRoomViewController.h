@@ -58,6 +58,9 @@ typedef NS_ENUM(NSInteger, RoomType) {
 @property (nonatomic, assign)BOOL isSentEnterRoom;
 /// 游戏总人数
 @property (nonatomic, assign)NSInteger totalGameUserCount;
+/// 进入房间信息
+@property (nonatomic, strong) EnterRoomModel *enterModel;
+
 /// 展示公屏消息
 /// @param msg 消息体
 /// @param isShowOnScreen 是否展示公屏
