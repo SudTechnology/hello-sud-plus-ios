@@ -1,0 +1,80 @@
+/*
+  Localizable.strings
+  HelloSud-iOS
+
+  Created by Mary on 2022/3/14.
+  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
+*/
+
+/// Login
+"dt_login_welcome" = "Selamat datang \ndi HelloSud";
+"dt_login_welcome_helloSud" = "Selamat menggunakan HaloSud";
+"dt_login_we_take_information" = "Kami sangat mementingkan perlindungan informasi pribadi Anda. Untuk informasi terperinci tentang pengumpulan dan penggunaan informasi pribadi, Anda bisa mengetuk";
+"dt_login_user_agreement" = "Perjanjian Pengguna";
+"dt_login_and" = "dan";
+"dt_login_privacy_policy" = "Kebijakan Privasi";
+"dt_login_click_agree_agreement" = "Pahami isinya. Ketuk Setuju berarti Anda telah membaca dan menyetujui semua ketentuan yang tersebut di atas.";
+"dt_login_welcome_to_the" = "Coba sekarang";
+"dt_login_your_nickname" = "Nama panggilan Anda";
+"dt_login_experience_immediately" = "Coba sekarang";
+"dt_login_warm_prompt" = "Tips";
+"dt_login_warm_prompt_des" = "HelloSud hanya menggunakan informasi pribadi Anda untuk menyediakan pelayanan dan meningkatkan pengalaman Anda, kami akan berusaha keras untuk melindungi keamanan informasi Anda. Silakan gunakan setelah ketuk Setuju.";
+"dt_login_agree_continue" = "Setuju dan lanjut";
+"dt_login_quit_application" = "Keluar dari aplikasi";
+
+/// Settings
+"dt_settings_total" = "Total";
+"dt_settings_size_occupied" = "Ukuran yang ditempati";
+"dt_settings_version_info" = "Informasi versi";
+"dt_settings_switch_rtc" = "Ganti penyedia RTC";
+"dt_settings_zego" = "即构";
+"dt_settings_agora" = "声网";
+"dt_settings_net_ease" = "网易云信";
+"dt_settings_volcano" = "火山";
+"dt_settings_alicloud" = "阿里云";
+"dt_settings_tencent" = "腾讯";
+"dt_settings_switch_language" = "Ganti bahasa";
+"dt_settings_open_source" = "Perjanjian Sumber Terbuka";
+"dt_settings_user_agreement" = "Perjanjian Pengguna";
+"dt_settings_privacy_policy" = "Kebijakan Privasi";
+"dt_settings_contact_us" = "Jika Anda ingin mengetahui lebih banyak informasi atau menyampaikan umpan balik, silakan hubungi kami melalui e-mail: \nhelp@sud.tech";
+"dt_settings_work_in_progress" = "Sedang membuat, silakan tunggu!";
+"dt_settings_confirm_switch_rtc" = "Yakin ingin mengganti penyedia RTC menjadi";
+
+/// RoomList
+"dt_room_list_room_number" = "Nomor ruangan";
+"dt_room_list_users" = "人";
+"dt_room_list_scene" = "场景";
+"dt_room_list_no_room_available" = "Tidak ada ruangan yang tersedia\nBuat ruangan di Beranda";
+
+/// Home
+"dt_home_user_id" = "ID pengguna";
+"dt_home_enter_room_num" = "Masukkan nomor ruangan agar bisa segera masuk";
+"dt_home_enter" = "Masuk";
+"dt_home_join" = "Bergabung";
+"dt_home_coming_soon" = "Silakan nantikan";
+"dt_home_create_room" = "Buat ruangan";
+"dt_home_in_game" = "Sedang bermain";
+
+/// common
+"dt_common_select_all" = "Pilih semua";
+"dt_common_agree" = "Setuju";
+"dt_common_not_agree" = "Tidak setuju";
+"dt_common_sure" = "Oke";
+"dt_common_cancel" = "Batal";
+
+/// Main
+"dt_tab_home" = "Beranda";
+"dt_tab_room" = "Ruangan";
+"dt_tab_setting" = "Pengaturan";
+
+/// Scenes
+"dt_send" = "Berikan";
+"dt_down_mic" = "Selesai bicara";
+"dt_up_mic" = "上%ld号麦";
+"dt_select_person" = "Silakan pilih penerima hadiah";
+"dt_select_gift" = "Silakan pilih hadiah";
+"dt_send_gift" = "Hadiahkan";
+"dt_room_owner" = "Host";
+"dt_mic_index" = "%ld麦";
+"dt_mic_name" = "麦";

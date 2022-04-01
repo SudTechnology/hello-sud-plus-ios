@@ -7,6 +7,7 @@
 */
 
 /// Login
+"dt_login_welcome" = "欢迎体验 \nHelloSud";
 "dt_login_welcome_helloSud" = "欢迎使用HelloSud";
 "dt_login_we_take_information" = "我们非常重视您的个人信息保护。关于个人信息收集和使用的详细信息，您可以点击";
 "dt_login_user_agreement" = "《用户协议》";
@@ -24,7 +25,6 @@
 /// Settings
 "dt_settings_total" = "总";
 "dt_settings_size_occupied" = "占用大小";
-"dt_settings_set" = "设置";
 "dt_settings_version_info" = "版本信息";
 "dt_settings_switch_rtc" = "切换RTC服务商";
 "dt_settings_zego" = "即构";
@@ -45,7 +45,6 @@
 "dt_room_list_room_number" = "房间号";
 "dt_room_list_users" = "人";
 "dt_room_list_scene" = "场景";
-"dt_room_list_enter" = "进入";
 "dt_room_list_no_room_available" = "暂无房间开播\n去首页创建一个吧~";
 
 /// Home
@@ -65,7 +64,7 @@
 "dt_common_cancel" = "取消";
 
 /// Main
-"dt_tab_home" = "主页";
+"dt_tab_home" = "首页";
 "dt_tab_room" = "房间";
 "dt_tab_setting" = "设置";
 
@@ -73,8 +72,8 @@
 "dt_send" = "送给";
 "dt_down_mic" = "下麦";
 "dt_up_mic" = "上%ld号麦";
-"dt_select_person" = "请选择收礼人";
-"dt_select_gift" = "请选择一个礼物";
+"dt_select_person" = "请选择收礼对象";
+"dt_select_gift" = "请选择礼物";
 "dt_send_gift" = "赠送";
 "dt_room_owner" = "房主";
 "dt_mic_index" = "%ld麦";

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 
 /// Login
++ (NSString *)dt_login_welcome;
 + (NSString *)dt_login_welcome_helloSud;
 + (NSString *)dt_login_we_take_information;
 + (NSString *)dt_login_user_agreement;
@@ -29,7 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Settings
 + (NSString *)dt_settings_total;
 + (NSString *)dt_settings_size_occupied;
-+ (NSString *)dt_settings_set;
 + (NSString *)dt_settings_version_info;
 + (NSString *)dt_settings_switch_rtc;
 + (NSString *)dt_settings_zego;
@@ -50,7 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_room_list_room_number;
 + (NSString *)dt_room_list_users;
 + (NSString *)dt_room_list_scene;
-+ (NSString *)dt_room_list_enter;
 + (NSString *)dt_room_list_no_room_available;
 
 /// Home
