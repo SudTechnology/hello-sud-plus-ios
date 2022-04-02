@@ -16,7 +16,7 @@
 #import "KeyHeader.h"
 
 @interface AppDelegate () {
-    
+
 }
 @end
 
@@ -58,6 +58,7 @@
             /// 切根式图
             self.window.rootViewController = [[MainTabBarController alloc] init];
         }
+        [self checkAppVersion];
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_FAIL_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         if (![self.window.rootViewController isKindOfClass:[LoginViewController class]]) {
@@ -66,5 +67,40 @@
             [ToastUtil show:@"登录已过期，请重新进入"];
         }
     }];
+}
+
+- (void)checkAppVersion {
+    [[AppService shared] reqAppUpdate:^(BaseRespModel *resp) {
+        [self showUpgrade:(RespVersionUpdateInfoModel *) resp];
+    } fail:nil];
+}
+
+- (void)showUpgrade:(RespVersionUpdateInfoModel *)model {
+
+    if (model == nil || model.packageUrl.length == 0) {
+        return;
+    }
+    if (model.upgradeType == 1) {
+        /// 强制升级
+        [DTAlertView showTextAlert:@"您的App版本较低，请先升级版本" sureText:@"立即更新" cancelText:nil onSureCallback:^{
+            [self openPath:model.packageUrl];
+        } onCloseCallback:nil];
+    } else if (model.upgradeType == 2) {
+        /// 引导升级
+        [DTAlertView showTextAlert:@"已有新版本的体验，是否更新？" sureText:@"立即更新" cancelText:@"下次再说" onSureCallback:^{
+            [self openPath:model.packageUrl];
+        } onCloseCallback:nil];
+    }
+}
+
+- (void)openPath:(NSString *)path {
+    NSURL *url = [[NSURL alloc] initWithString:path];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        if (@available(iOS 10.0, *)) {
+            [[UIApplication sharedApplication] openURL:url options:nil completionHandler:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }
 }
 @end

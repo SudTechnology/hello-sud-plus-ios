@@ -10,3 +10,7 @@
 
 }
 @end
+
+@implementation RespVersionUpdateInfoModel
+
+@end
