@@ -8,7 +8,7 @@
 #import "AppService.h"
 #import "ZegoAudioEngineImpl.h"
 #import "AgoraAudioEngineImpl.h"
-
+#import "AudioConfigModel.h"
 /// 用户登录确认key
 #define kKeyLoginAgreement @"key_login_agreement"
 
@@ -205,7 +205,7 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
             AudioConfigModel *model = [[AudioConfigModel alloc] init];
             model.appId = appID;
             model.appKey = appKey;
-            [AudioEngineFactory.shared.audioEngine initWithConfig:model];
+            self.rtcConfigModel = model;
         } else {
             [ToastUtil show:@"切换zego语音引擎失败，对应配置为空"];
         }
@@ -220,7 +220,7 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
             model.appId = appID;
             model.userID = AppService.shared.login.loginUserInfo.userID;
             model.token = @"";
-            [AudioEngineFactory.shared.audioEngine initWithConfig:model];
+            self.rtcConfigModel = model;
         } else {
             [ToastUtil show:@"切换agora语音引擎失败，对应配置为空"];
         }

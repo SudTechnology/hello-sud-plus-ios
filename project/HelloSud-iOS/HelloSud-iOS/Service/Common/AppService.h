@@ -10,6 +10,8 @@
 #import "ConfigModel.h"
 #import "LoginService.h"
 
+@class AudioConfigModel;
+
 extern NSString *const kRtcNameZego;
 extern NSString *const kRtcNameAgora;
 extern NSString *const kRtcNameRongCloud;
@@ -33,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSArray <HSConfigContent *> *rtcList;
 /// 选中rtc厂商类型
 @property(nonatomic, copy, readonly) NSString *rtcType;
+/// rtc配置
+@property(nonatomic, strong) AudioConfigModel *rtcConfigModel;
 
 /// 登录服务
 @property (nonatomic, strong)LoginService *login;

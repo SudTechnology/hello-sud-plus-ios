@@ -66,6 +66,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *roomName;
 /// 是否发送进入房间
 @property (nonatomic, assign)BOOL isSentEnterRoom;
+/// 进入房间信息
+@property (nonatomic, strong) EnterRoomModel *enterModel;
 /// 游戏总人数
 @property (nonatomic, assign)NSInteger totalGameUserCount;
 #pragma mark - GAME

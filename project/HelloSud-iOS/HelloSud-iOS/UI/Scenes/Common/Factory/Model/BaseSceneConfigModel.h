@@ -10,6 +10,7 @@
 @property(nonatomic, assign) NSInteger gameId;
 @property(nonatomic, copy) NSString * roomID;
 @property(nonatomic, copy) NSString *roomName;
+@property(nonatomic, strong)EnterRoomModel *enterRoomModel;
 @end
 
 /// 场景配置model

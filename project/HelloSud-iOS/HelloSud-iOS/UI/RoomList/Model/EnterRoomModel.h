@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger              gameId;
 @property (nonatomic, assign) NSInteger              memberCount;
 @property (nonatomic, assign) NSInteger              roleType;
+@property (nonatomic, copy) NSString              * rtcToken;
+@property (nonatomic, copy) NSString              * rtiToken;
 @end
 
 NS_ASSUME_NONNULL_END
