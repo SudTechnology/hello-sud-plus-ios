@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger              roleType;
 @property (nonatomic, copy) NSString              * rtcToken;
 @property (nonatomic, copy) NSString              * rtiToken;
+@property (nonatomic, assign) NSInteger              gameLevel;
+@property (nonatomic, assign) NSInteger              sceneType;
 @end
 
 NS_ASSUME_NONNULL_END
