@@ -19,6 +19,7 @@
     NSMutableArray *arr = NSMutableArray.new;
     [arr addObject:@"content"];
     [arr addObject:@"_attrContent"];
+    [arr addObject:@"bgColor"];
     return arr;
 }
 
