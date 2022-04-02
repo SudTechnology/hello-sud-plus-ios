@@ -17,3 +17,6 @@
     return @{@"userInfoList": [HSUserInfoModel class]};
 }
 @end
+
+@implementation RespUserCoinInfoModel
+@end

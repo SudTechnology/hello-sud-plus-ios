@@ -61,6 +61,26 @@
     }];
 }
 
+- (void)reqUserCoinDetail:(Int64Block)success fail:(StringBlock)fail {
+    [HttpService postRequestWithApi:kBASEURL(@"get-account/v1") param:@{} success:^(NSDictionary *rootDict) {
+        RespUserCoinInfoModel *model = [RespUserCoinInfoModel decodeModel:rootDict];
+        if (model.retCode != 0) {
+            if (fail) {
+                fail(model.errorMsg);
+            }
+            return;
+        }
+        if (success) {
+            success(model.coin);
+        }
+    } failure:^(id error) {
+        if (fail) {
+            fail([error debugDescription]);
+        }
+    }];
+}
+
+
 /// 查询用户信息
 /// @param userIDList 用户ID列表
 /// @param success 成功

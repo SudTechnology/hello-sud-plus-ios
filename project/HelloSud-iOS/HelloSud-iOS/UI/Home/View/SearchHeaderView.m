@@ -6,6 +6,7 @@
 //
 
 #import "SearchHeaderView.h"
+#import "UserDetailView.h"
 
 @interface SearchHeaderView () <UITextFieldDelegate>
 @property (nonatomic, strong) UIImageView *headerView;
@@ -73,6 +74,20 @@
     if (userInfo.icon.length > 0) {
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:userInfo.icon]];
     }
+}
+
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    self.headerView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapHead:)];
+    [self.headerView addGestureRecognizer:tap];
+}
+
+- (void)onTapHead:(id)tap {
+    UserDetailView *v = [[UserDetailView alloc] init];
+    [DTAlertView show:v rootView:AppUtil.currentWindow isHitTest:YES onCloseCallback:^{
+
+    }];
 }
 
 - (UIImageView *)headerView {

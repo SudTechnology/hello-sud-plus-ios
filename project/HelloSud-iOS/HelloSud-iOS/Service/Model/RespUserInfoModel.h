@@ -22,4 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)NSArray<HSUserInfoModel *> * userInfoList;
 @end
 
+/// 响应用户信息model
+@interface RespUserCoinInfoModel : BaseRespModel
+@property(nonatomic, assign)int64_t userId;
+@property(nonatomic, assign)int64_t coin;
+@end
+
 NS_ASSUME_NONNULL_END
