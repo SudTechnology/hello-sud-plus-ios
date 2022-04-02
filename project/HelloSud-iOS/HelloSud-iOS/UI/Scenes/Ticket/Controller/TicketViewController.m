@@ -19,17 +19,25 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)dtConfigUI {
+    [super dtConfigUI];
+    [self setupGameRoomContent];
+}
+
 #pragma mark - SudFSMMGListener
 
 /// 获取游戏Config  【需要实现】
 - (NSString *)onGetGameCfg {
     LobbyPlayers *l = [[LobbyPlayers alloc] init];
     l.hide = true;
+    GameCfgStartBtn *start_btn = [[GameCfgStartBtn alloc] init];
+    start_btn.custom = false;
     GameCfgReadyBtn *ready_btn = [[GameCfgReadyBtn alloc] init];
     ready_btn.custom = true;
     GameUi *ui = [[GameUi alloc] init];
     ui.lobby_players = l;
     ui.ready_btn = ready_btn;
+    ui.start_btn = start_btn;
     GameCfgModel *m = [[GameCfgModel alloc] init];
     m.ui = ui;
     return [m mj_JSONString];
@@ -39,16 +47,24 @@
 - (void)onGameMGCommonSelfClickReadyBtn {
     if (![AppService.shared.ticket getPopTicketJoin]) {
         TicketJoinPopView *node = TicketJoinPopView.new;
+        node.ticketLevelType = AppService.shared.ticket.ticketLevelType;
         [DTSheetView show:node rootView:AppUtil.currentWindow hiddenBackCover:false onCloseCallback:^{}];
         WeakSelf
         node.onJoinCallBack = ^(UIButton *sender) {
-            [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:true];
+            [AppService.shared.ticket reqJoinRoom:(long)self.roomID sceneId:AudioRoomService.shared.sceneType gameId:self.gameId gameLevel: AppService.shared.ticket.ticketLevelType finished:^{
+                [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:true];
+            }];
         };
     } else {
         [self.sudFSTAPPDecorator notifyAppComonSetReady:true];
     }
 }
 
+/// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
+- (void)onGameMGCommonSelfClickStartBtn {
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(AppService.shared.ticket.joinModel.gameSessionId), @"gameSessionId", nil];
+    [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
+}
 
 #pragma mark - GAME
 

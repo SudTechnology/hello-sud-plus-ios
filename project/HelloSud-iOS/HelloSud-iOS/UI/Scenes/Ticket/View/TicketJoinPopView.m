@@ -35,12 +35,17 @@
     [self.remindImgView setSelected:!self.remindImgView.isSelected];
 }
 
+- (void)cancelEvent:(UIButton *)btn {
+    [DTSheetView close];
+}
+
 - (void)joinEvent:(UIButton *)btn {
     if (self.onJoinCallBack) {
         if (self.remindImgView.isSelected) {
             [AppService.shared.ticket savePopTicketJoin:true];
         }
         self.onJoinCallBack(btn);
+        [DTSheetView close];
     }
 }
 
@@ -48,7 +53,7 @@
     switch (self.ticketLevelType) {
         case TicketLevelTypePrimary:
             self.desTitleLabel.text = @"最高可获得200金币奖励";
-            self.detailLabel.text = @"参与游戏需消耗2金币，是否继续";
+            self.detailLabel.text = @"参与游戏需消耗20金币，是否继续";
             break;
         case TicketLevelTypeMedia:
             self.desTitleLabel.text = @"最高可获得250金币奖励";
@@ -268,6 +273,7 @@
         [_cancelBtn setBackgroundImage:[UIImage imageNamed:@"tickets_join_cancel"] forState:UIControlStateNormal];
         _cancelBtn.titleLabel.font = UIFONT_MEDIUM(14);
         [_cancelBtn setTitleColor:[UIColor dt_colorWithHexString:@"#C5C1AE" alpha:1] forState:UIControlStateNormal];
+        [_cancelBtn addTarget:self action:@selector(cancelEvent:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelBtn;
 }

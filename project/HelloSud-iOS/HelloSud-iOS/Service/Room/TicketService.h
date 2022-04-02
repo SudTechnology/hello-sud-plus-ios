@@ -7,6 +7,7 @@
 //
 
 #import "AudioRoomService.h"
+#import "TicketJoinModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /// 门票加入弹窗key
@@ -20,6 +21,12 @@ typedef NS_ENUM(NSInteger, TicketLevelType) {
 };
 /// 门票场景等级类型
 @property (nonatomic, assign) TicketLevelType ticketLevelType;
+/// 确认加入门票游戏Model
+@property (nonatomic, strong) TicketJoinModel *joinModel;
+
+/// 请求确认加入门票游戏
+/// @param roomId 房间ID
+- (void)reqJoinRoom:(long)roomId sceneId:(NSInteger)sceneId gameId:(NSInteger)gameId gameLevel:(NSInteger)gameLevel finished:(void (^)(void))finished;
 
 #pragma mark - NSUserDefaults
 - (void)savePopTicketJoin:(BOOL)isShow;
