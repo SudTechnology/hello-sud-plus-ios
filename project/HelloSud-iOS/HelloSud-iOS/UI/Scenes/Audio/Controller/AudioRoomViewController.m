@@ -14,6 +14,10 @@
 
 @implementation AudioRoomViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self roomTypeReloadContent];
+}
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {
     [super setConfigModel:configModel];
     if ([configModel isKindOfClass:[AudioSceneConfigModel class]]) {
@@ -45,15 +49,7 @@
     };
 }
 
-- (AudioMicContentView *)audioMicContentView {
-    if (!_audioMicContentView) {
-        _audioMicContentView = [[AudioMicContentView alloc] init];
-    }
-    return _audioMicContentView;
-}
-
-- (void)setRoomType:(RoomType)roomType {
-    _roomType = roomType;
+- (void)roomTypeReloadContent {
     if (self.roomType == HSAudioMic) {
         /// 销毁游戏
         [self logoutGame];
@@ -84,13 +80,21 @@
     }
 }
 
+- (AudioMicContentView *)audioMicContentView {
+    if (!_audioMicContentView) {
+        _audioMicContentView = [[AudioMicContentView alloc] init];
+    }
+    return _audioMicContentView;
+}
+
 - (void)roomGameDidChanged:(NSInteger)gameID {
     [super roomGameDidChanged:gameID];
     if (gameID == 0) {
         self.roomType = HSAudio;
-    }else {
+    } else {
         self.roomType = HSGame;
     }
+    [self roomTypeReloadContent];
 }
 
 - (void)notifyGameToJoin {
