@@ -13,6 +13,7 @@
 		44241AE127EAD07B001EE125 /* SwitchLangTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44241AE027EAD07B001EE125 /* SwitchLangTableViewCell.m */; };
 		44241AE427EAD599001EE125 /* NSBundle+Language.m in Sources */ = {isa = PBXBuildFile; fileRef = 44241AE327EAD599001EE125 /* NSBundle+Language.m */; };
 		44241AE727EAD6E3001EE125 /* LanguageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 44241AE627EAD6E3001EE125 /* LanguageUtil.m */; };
+		444F59EB27F7035800FA1FB2 /* TicketChooseLevelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 444F59EA27F7035800FA1FB2 /* TicketChooseLevelView.m */; };
 		4455AD8427EAC658001516EE /* HSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455ACC127EAC657001516EE /* HSSettingViewController.m */; };
 		4455AD8527EAC658001516EE /* VersionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455ACC327EAC657001516EE /* VersionInfoViewController.m */; };
 		4455AD8627EAC658001516EE /* ChangeRTCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455ACC527EAC657001516EE /* ChangeRTCViewController.m */; };
@@ -216,6 +217,8 @@
 		44241AE327EAD599001EE125 /* NSBundle+Language.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Language.m"; sourceTree = "<group>"; };
 		44241AE527EAD6E3001EE125 /* LanguageUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageUtil.h; sourceTree = "<group>"; };
 		44241AE627EAD6E3001EE125 /* LanguageUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageUtil.m; sourceTree = "<group>"; };
+		444F59E927F7035800FA1FB2 /* TicketChooseLevelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketChooseLevelView.h; sourceTree = "<group>"; };
+		444F59EA27F7035800FA1FB2 /* TicketChooseLevelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketChooseLevelView.m; sourceTree = "<group>"; };
 		4455ACC027EAC657001516EE /* VersionInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionInfoViewController.h; sourceTree = "<group>"; };
 		4455ACC127EAC657001516EE /* HSSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSettingViewController.m; sourceTree = "<group>"; };
 		4455ACC227EAC657001516EE /* ChangeRTCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeRTCViewController.h; sourceTree = "<group>"; };
@@ -893,6 +896,7 @@
 				4455AD6E27EAC658001516EE /* TicketViewController.m */,
 				4455AD6D27EAC658001516EE /* TicketChooseViewController.h */,
 				4455AD6C27EAC658001516EE /* TicketChooseViewController.m */,
+				444F59E927F7035800FA1FB2 /* TicketChooseLevelView.h */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -917,6 +921,7 @@
 				4455AD7327EAC658001516EE /* TicketJoinPopView.m */,
 				4455AD7827EAC658001516EE /* TicketChooseItemView.h */,
 				4455AD7427EAC658001516EE /* TicketChooseItemView.m */,
+				444F59EA27F7035800FA1FB2 /* TicketChooseLevelView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1750,6 +1755,7 @@
 				E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */,
 				6C076EBC27A01BC000650209 /* AudioRoomService.m in Sources */,
 				4455AD9627EAC658001516EE /* MainTabBarController.m in Sources */,
+				444F59EB27F7035800FA1FB2 /* TicketChooseLevelView.m in Sources */,
 				4455ADA827EAC658001516EE /* RoomCmdChatTextModel.m in Sources */,
 				445EAAE5279ABDC1000DCC72 /* DTAlertView.m in Sources */,
 				4455AE2027EAC71A001516EE /* BaseSceneConfigModel.m in Sources */,
