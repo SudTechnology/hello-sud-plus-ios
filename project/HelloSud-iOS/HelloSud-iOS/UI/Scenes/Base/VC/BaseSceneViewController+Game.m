@@ -78,6 +78,12 @@
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
+/// 游戏: 结算界面再来一局按钮点击状态   MG_COMMON_SELF_CLICK_GAME_SETTLE_AGAIN_BTN
+- (void)onGameMGCommonSelfClickGameSettleAgainBtn:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonSelfClickGameSettleAgainBtn *)model {
+    [self onGameMGCommonSelfClickReadyBtn];
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+}
+
 /// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
 - (void)onGameMGCommonSelfClickStartBtn:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonSelfClickStartBtn *)model {
     [self onGameMGCommonSelfClickStartBtn];

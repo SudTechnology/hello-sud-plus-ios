@@ -19,11 +19,6 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)dtConfigUI {
-    [super dtConfigUI];
-    [self setupGameRoomContent];
-}
-
 #pragma mark - SudFSMMGListener
 
 /// 获取游戏Config  【需要实现】
@@ -31,13 +26,16 @@
     LobbyPlayers *l = [[LobbyPlayers alloc] init];
     l.hide = true;
     GameCfgStartBtn *start_btn = [[GameCfgStartBtn alloc] init];
-    start_btn.custom = false;
+    start_btn.custom = true;
     GameCfgReadyBtn *ready_btn = [[GameCfgReadyBtn alloc] init];
     ready_btn.custom = true;
+    GameSettleAgainBtn *game_settle_again_btn = [[GameSettleAgainBtn alloc] init];
+    game_settle_again_btn.custom = true;
     GameUi *ui = [[GameUi alloc] init];
     ui.lobby_players = l;
     ui.ready_btn = ready_btn;
     ui.start_btn = start_btn;
+    ui.game_settle_again_btn = game_settle_again_btn;
     GameCfgModel *m = [[GameCfgModel alloc] init];
     m.ui = ui;
     return [m mj_JSONString];
