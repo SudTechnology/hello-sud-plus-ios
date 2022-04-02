@@ -16,6 +16,7 @@
 @property(nonatomic, strong) UILabel *asrTipLabel;
 @property(nonatomic, strong) NSTimer *timer;
 @property(nonatomic, weak) id stateNTF;
+@property(nonatomic, weak) id asrStateNTF;
 @end
 
 @implementation ASRViewController
@@ -23,6 +24,9 @@
 - (void)dealloc {
     if (self.stateNTF) {
         [[NSNotificationCenter defaultCenter] removeObserver:self.stateNTF];
+    }
+    if (self.asrStateNTF) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self.asrStateNTF];
     }
 }
 
@@ -52,6 +56,11 @@
     self.stateNTF = [[NSNotificationCenter defaultCenter]addObserverForName:NTF_PLAYER_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         [weakSelf handlePlayerStateChanged];
     }];
+    /// asr状态变化
+    self.asrStateNTF = [[NSNotificationCenter defaultCenter]addObserverForName:NTF_ASR_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf handlePlayerStateChanged];
+    }];
+
 }
 
 /// 处理游戏状态变化
