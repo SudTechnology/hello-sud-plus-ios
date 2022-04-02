@@ -39,7 +39,7 @@
     [self.view addSubview:self.noticeView];
     [self setupContentItems];
     
-    self.noticeView.dataArray = [TicketService.shared getTicketRewardAttributedStrArr];
+    self.noticeView.dataArray = [AppService.shared.ticket getTicketRewardAttributedStrArr];
     [self.noticeView reloadData];
 }
 
@@ -88,7 +88,7 @@
 }
 
 - (void)clickItemsEvent:(UITapGestureRecognizer *)tap {
-    NSInteger tag = tap.view.tag - 1000;
+    NSInteger tag = tap.view.tag - 1000 + 1;
     [AudioRoomService.shared reqMatchRoom:self.gameId sceneType:self.sceneId gameLevel:tag];
 }
 
