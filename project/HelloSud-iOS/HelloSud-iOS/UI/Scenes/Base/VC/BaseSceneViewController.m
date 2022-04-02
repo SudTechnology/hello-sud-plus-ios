@@ -6,6 +6,9 @@
 //
 
 @interface BaseSceneViewController () <BDAlphaPlayerMetalViewDelegate>
+
+@property (nonatomic, strong) SceneContentView *contentView;
+
 /// 背景视图
 @property (nonatomic, strong) UIImageView *bgImageView;
 
@@ -53,9 +56,10 @@
 }
 
 - (void)dtAddViews {
-    [self.view addSubview:self.bgImageView];
-    [self.view addSubview:self.gameView];
-    [self.view addSubview:self.sceneView];
+    [self.view addSubview:self.contentView];
+    [self.contentView addSubview:self.bgImageView];
+    [self.contentView addSubview:self.gameView];
+    [self.contentView addSubview:self.sceneView];
 
     [self.sceneView addSubview:self.naviView];
     [self.sceneView addSubview:self.operatorView];
@@ -67,30 +71,33 @@
 }
 
 - (void)dtLayoutViews {
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.edges.equalTo(self.view);
+    }];
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.view);
+        make.edges.mas_equalTo(self.contentView);
     }];
     [self.sceneView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.edges.equalTo(self.contentView);
     }];
 
     [self.naviView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
+        make.left.right.equalTo(self.contentView);
         make.top.mas_equalTo(kStatusBarHeight);
         make.height.mas_equalTo(44);
     }];
     [self.operatorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
+        make.left.right.equalTo(self.contentView);
         make.bottom.mas_equalTo(-kAppSafeBottom);
         make.height.mas_equalTo(44);
     }];
 
     [self.gameView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.edges.equalTo(self.contentView);
     }];
     [self.gameMicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.naviView.mas_bottom).offset(0);
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.contentView);
         make.height.mas_equalTo(55);
     }];
     [self.gameNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -100,20 +107,26 @@
     }];
     [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(106);
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(self.operatorView.mas_top).offset(0);
     }];
     [self.msgTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.msgBgView);
     }];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(80);
     }];
 }
 
 - (void)dtConfigEvents {
     WeakSelf
+    self.contentView.hitTestChangedCallback = ^(UIView *currentView) {
+        if (weakSelf.sceneView == currentView) {
+            return weakSelf.gameView;
+        }
+        return currentView;
+    };
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
         [DTSheetView show:[[RoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow hiddenBackCover:YES onCloseCallback:^{
             [weakSelf.operatorView resetAllSelectedUser];
@@ -637,6 +650,13 @@
         _gameNumLabel.textColor = UIColor.whiteColor;
     }
     return _gameNumLabel;
+}
+
+- (SceneContentView *)contentView {
+    if (!_contentView) {
+        _contentView = [[SceneContentView alloc] init];
+    }
+    return _contentView;
 }
 
 - (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
