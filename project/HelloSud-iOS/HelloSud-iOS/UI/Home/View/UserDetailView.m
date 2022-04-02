@@ -9,15 +9,25 @@
 @property(nonatomic, strong) UIImageView *headerView;
 @property(nonatomic, strong) UILabel *userNameLabel;
 @property(nonatomic, strong) UILabel *userIdLabel;
-@property(nonatomic, strong) UIImageView *coinContentView;
+@property(nonatomic, strong) UIView *coinContentView;
 @property(nonatomic, strong) UIImageView *coinImageView;
 @property(nonatomic, strong) UILabel *coinLabel;
 @end
 
 @implementation UserDetailView
 
+- (void)reqData {
+    WeakSelf
+    [UserService.shared reqUserCoinDetail:^(int64_t i) {
+        weakSelf.coinLabel.text = [NSString stringWithFormat:@"%lld", i];
+    } fail:^(NSString *errStr) {
+        [ToastUtil show:errStr];
+    }];
+}
+
 - (void)dtConfigUI {
     self.backgroundColor = UIColor.whiteColor;
+    [self reqData];
 }
 
 - (void)dtAddViews {
@@ -37,17 +47,20 @@
     }];
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.headerView);
-        make.top.mas_equalTo(self.headerView.mas_top).offset(8);
+        make.top.mas_equalTo(self.headerView.mas_bottom).offset(8);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.userIdLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.headerView);
-        make.top.mas_equalTo(self.userNameLabel.mas_top).offset(4);
+        make.top.mas_equalTo(self.userNameLabel.mas_bottom).offset(4);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.coinContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.userIdLabel.mas_bottom).offset(19);
         make.height.mas_equalTo(30);
         make.width.mas_greaterThanOrEqualTo(0);
+        make.centerX.equalTo(self.headerView);
+        make.bottom.mas_equalTo(-31);
     }];
     [self.coinImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(14);
@@ -55,11 +68,10 @@
         make.centerY.equalTo(self.coinContentView);
     }];
     [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(14);
+        make.width.height.mas_greaterThanOrEqualTo(0);
         make.left.equalTo(self.coinImageView.mas_right).offset(3);
         make.centerY.equalTo(self.coinContentView);
-        make.width.mas_greaterThanOrEqualTo(0);
-        make.right.equalTo(self.coinContentView).offset(19);
+        make.right.mas_equalTo(-19);
     }];
 }
 
@@ -107,7 +119,7 @@
     if (!_coinContentView) {
         _coinContentView = [[UIView alloc] init];
         _coinContentView.clipsToBounds = true;
-        _coinContentView.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
+        _coinContentView.backgroundColor = HEX_COLOR_A(@"#000000", 0.04);
         [_coinContentView dt_cornerRadius:15];
     }
     return _coinContentView;
@@ -116,7 +128,7 @@
 - (UIImageView *)coinImageView {
     if (!_coinImageView) {
         _coinImageView = [[UIImageView alloc] init];
-        _coinImageView.image = [UIImage imageNamed:@""];
+        _coinImageView.image = [UIImage imageNamed:@"coin"];
     }
     return _coinImageView;
 }
@@ -124,7 +136,7 @@
 - (UILabel *)coinLabel {
     if (!_coinLabel) {
         _coinLabel = [[UILabel alloc] init];
-        _coinLabel.text = @"10000";
+        _coinLabel.text = @"0";
         _coinLabel.numberOfLines = 1;
         _coinLabel.textColor = [UIColor dt_colorWithHexString:@"#F6A209" alpha:1];
         _coinLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];

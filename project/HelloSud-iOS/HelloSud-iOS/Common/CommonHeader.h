@@ -18,6 +18,8 @@ typedef void(^StringBlock)(NSString *str);
 typedef void(^EmptyBlock)(void);
 /// 错误回调
 typedef void(^ErrorBlock)(NSError *error);
+/// 整形回调
+typedef void(^Int64Block)(int64_t);
 
 
 /// Utils

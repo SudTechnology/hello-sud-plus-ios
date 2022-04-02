@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - onView: 当前的父视图
 ///   - isHitTest: 是否可点击 -- 默认不可点击
 ///   - onCloseCallBack: 关闭弹窗回调
-+ (void)show:(UIView *)view rootView:(UIView *)rootView isHitTest:(BOOL)isHitTest onCloseCallback:(void(^)(void))cb;
++ (DTAlertView *)show:(UIView *)view rootView:(UIView *)rootView isHitTest:(BOOL)isHitTest onCloseCallback:(void(^)(void))cb;
 
 /// 展示中心弹窗 - （文本 + 确定 + 取消）
 /// @param msg 文本
