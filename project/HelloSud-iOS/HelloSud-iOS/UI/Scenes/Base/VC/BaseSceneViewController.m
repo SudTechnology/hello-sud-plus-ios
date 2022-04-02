@@ -28,6 +28,7 @@
     self.gameId = configModel.gameId;
     self.roomID = configModel.roomID;
     self.roomName = configModel.roomName;
+    self.enterModel = configModel.enterRoomModel;
 }
 
 - (void)viewDidLoad {

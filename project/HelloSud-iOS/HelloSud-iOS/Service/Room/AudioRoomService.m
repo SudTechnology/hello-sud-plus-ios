@@ -90,6 +90,7 @@
         config.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
         config.roomType = model.gameId == 0 ? HSAudio : HSGame;
         config.roomName = model.roomName;
+        config.enterRoomModel = model;
         AudioRoomViewController *vc = (AudioRoomViewController *) [SceneFactory createSceneVC:SceneFactoryTypeVoice configModel:config];
         AudioRoomService.shared.currentRoomVC = vc;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
@@ -137,24 +138,19 @@
         dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
     [HttpService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
-        weakSelf.isMatchingRoom = NO;
+
         MatchRoomModel *model = [MatchRoomModel decodeModel:rootDict];
         if (model.retCode != 0) {
+            weakSelf.isMatchingRoom = NO;
             [ToastUtil show:model.errorMsg];
             return;
         }
-        if (AudioRoomService.shared.currentRoomVC != nil) {
-            NSLog(@"there is a AudioRoomViewController in the stack");
-            return;
-        }
-        weakSelf.roleType = model.roleType;
-        AudioRoomViewController *vc = [[AudioRoomViewController alloc] init];
-        AudioRoomService.shared.currentRoomVC = vc;
-        vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
-        vc.gameId = model.gameId;
-        vc.roomType = model.gameId == 0 ? HSAudio : HSGame;
-        vc.roomName = model.roomName;
-        [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
+        [self reqEnterRoom:model.roomId success:^{
+            weakSelf.isMatchingRoom = NO;
+        } fail:^(NSError *error) {
+            [ToastUtil show:[error debugDescription]];
+            weakSelf.isMatchingRoom = NO;
+        }];
     } failure:^(id error) {
         [ToastUtil show:[error debugDescription]];
         weakSelf.isMatchingRoom = NO;
