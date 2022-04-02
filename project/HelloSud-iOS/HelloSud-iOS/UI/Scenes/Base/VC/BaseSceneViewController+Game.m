@@ -69,15 +69,14 @@
 
 /// 获取游戏Config  【需要实现】
 - (void)onGetGameCfg:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    LobbyPlayers *l = [[LobbyPlayers alloc] init];
-    l.hide = true;
-    GameUi *ui = [[GameUi alloc] init];
-    ui.lobby_players = l;
-    GameCfgModel *m = [[GameCfgModel alloc] init];
-    m.ui = ui;
-    [handle success:[m mj_JSONString]];
+    [handle success:[self onGetGameCfg]];
 }
 
+/// 游戏: 准备按钮点击状态   MG_COMMON_SELF_CLICK_READY_BTN
+- (void)onGameMGCommonSelfClickReadyBtn:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonSelfClickReadyBtn *)model {
+    [self onGameMGCommonSelfClickReadyBtn];
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+}
 
 /// 通用状态-游戏
 /// 游戏: 公屏消息状态    MG_COMMON_PUBLIC_MESSAGE

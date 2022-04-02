@@ -35,6 +35,43 @@
     [self.remindImgView setSelected:!self.remindImgView.isSelected];
 }
 
+- (void)joinEvent:(UIButton *)btn {
+    if (self.onJoinCallBack) {
+        if (self.remindImgView.isSelected) {
+            [AppService.shared.ticket savePopTicketJoin:true];
+        }
+        self.onJoinCallBack(btn);
+    }
+}
+
+- (void)dtUpdateUI {
+    switch (self.ticketLevelType) {
+        case TicketLevelTypePrimary:
+            self.desTitleLabel.text = @"最高可获得200金币奖励";
+            self.detailLabel.text = @"参与游戏需消耗2金币，是否继续";
+            break;
+        case TicketLevelTypeMedia:
+            self.desTitleLabel.text = @"最高可获得250金币奖励";
+            self.detailLabel.text = @"参与游戏需消耗5金币，是否继续";
+            break;
+        case TicketLevelTypeSenior:
+            self.desTitleLabel.text = @"最高可获得900金币奖励";
+            self.detailLabel.text = @"参与游戏需消耗10金币，是否继续";
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)dtConfigEvents {
+    WeakSelf
+    [UserService.shared reqUserCoinDetail:^(int64_t i) {
+        weakSelf.goldNumLabel.text = [NSString stringWithFormat:@"%lld", i];
+    } fail:^(NSString *errStr) {
+        [ToastUtil show:errStr];
+    }];
+}
+
 - (void)dtAddViews {
     [self addSubview:self.bgImageView];
     [self addSubview:self.topGoldView];
@@ -242,8 +279,14 @@
         [_sureBtn setBackgroundImage:[UIImage imageNamed:@"tickets_join_sure"] forState:UIControlStateNormal];
         _sureBtn.titleLabel.font = UIFONT_MEDIUM(14);
         [_sureBtn setTitleColor:[UIColor dt_colorWithHexString:@"#FFE88D" alpha:1] forState:UIControlStateNormal];
+        [_sureBtn addTarget:self action:@selector(joinEvent:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureBtn;
+}
+
+- (void)setTicketLevelType:(TicketLevelType)ticketLevelType {
+    _ticketLevelType = ticketLevelType;
+    [self dtUpdateUI];
 }
 
 @end

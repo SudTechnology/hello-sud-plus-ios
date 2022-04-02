@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TicketJoinPopView : BaseView
-
+@property (nonatomic, copy) UIBUTTON_TAP_BLOCK onJoinCallBack;
+/// 门票场景等级类型
+@property (nonatomic, assign) TicketLevelType ticketLevelType;
 @end
 
 NS_ASSUME_NONNULL_END
