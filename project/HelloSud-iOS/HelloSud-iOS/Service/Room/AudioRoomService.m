@@ -39,14 +39,13 @@
         NSLog(@"there is req create room, so skip it");
         return;
     }
-    self.sceneType = sceneType;
     self.isReqCreate = YES;
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"sceneType"] = @(sceneType);
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
-    if (self.sceneType == SceneTypeTicket) {
+    if (sceneType == SceneTypeTicket) {
         dicParam[@"gameLevel"] = @(gameLevel);
     }
     WeakSelf
@@ -89,6 +88,8 @@
             NSLog(@"there is a AudioRoomViewController in the stack");
             return;
         }
+        weakSelf.sceneType = model.sceneType;
+        AppService.shared.ticket.ticketLevelType = model.gameLevel;
         weakSelf.roleType = model.roleType;
         AudioSceneConfigModel *config = [[AudioSceneConfigModel alloc] init];
         config.gameId = model.gameId;
@@ -96,7 +97,7 @@
         config.roomType = model.gameId == 0 ? HSAudio : HSGame;
         config.roomName = model.roomName;
         config.enterRoomModel = model;
-        AudioRoomViewController *vc = (AudioRoomViewController *) [SceneFactory createSceneVC:SceneFactoryTypeVoice configModel:config];
+        AudioRoomViewController *vc = (AudioRoomViewController *) [SceneFactory createSceneVC:weakSelf.sceneType configModel:config];
         AudioRoomService.shared.currentRoomVC = vc;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
         if (success) {
@@ -136,7 +137,6 @@
         NSLog(@"there is req match room, so skip it");
         return;
     }
-    self.sceneType = sceneType;
     self.isMatchingRoom = YES;
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"gameId"] = @(gameId);
@@ -144,7 +144,7 @@
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
-    if (self.sceneType == SceneTypeTicket) {
+    if (sceneType == SceneTypeTicket) {
         dicParam[@"gameLevel"] = @(gameLevel);
     }
     [HttpService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {

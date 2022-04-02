@@ -23,4 +23,15 @@
     return dataArr;
 }
 
+#pragma mark - NSUserDefaults
+
+- (void)savePopTicketJoin:(BOOL)isShow {
+    [[NSUserDefaults standardUserDefaults] setBool:isShow forKey:kKeyTicketJoinPop];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+- (BOOL)getPopTicketJoin {
+    return [NSUserDefaults.standardUserDefaults boolForKey:kKeyTicketJoinPop];
+}
+
 @end

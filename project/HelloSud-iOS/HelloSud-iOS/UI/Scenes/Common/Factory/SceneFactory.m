@@ -6,17 +6,20 @@
 #import "SceneFactory.h"
 #import "AudioRoomViewController.h"
 #import "BaseSceneConfigModel.h"
-
+#import "TicketViewController.h"
 
 @implementation SceneFactory {
 
 }
 
-+ (BaseSceneViewController *)createSceneVC:(SceneFactoryType)sceneType configModel:(BaseSceneConfigModel *)configModel {
++ (BaseSceneViewController *)createSceneVC:(SceneType)sceneType configModel:(BaseSceneConfigModel *)configModel {
     BaseSceneViewController *vc = nil;
     switch (sceneType) {
-        case SceneFactoryTypeVoice:
+        case SceneTypeAudio:
             vc =  [[AudioRoomViewController alloc] init];
+            break;
+        case SceneTypeTicket:
+            vc =  [[TicketViewController alloc] init];
             break;
         default:
             vc = [[BaseSceneViewController alloc] init];

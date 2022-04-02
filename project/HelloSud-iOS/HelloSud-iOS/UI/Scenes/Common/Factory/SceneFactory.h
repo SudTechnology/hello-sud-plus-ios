@@ -6,19 +6,13 @@
 #import <Foundation/Foundation.h>
 #import "BaseSceneViewController.h"
 #import "BaseSceneConfigModel.h"
+#import "AudioRoomService.h"
 
 @class BaseSceneConfigModel;
-
-/// 场景类
-typedef NS_ENUM(NSInteger, SceneFactoryType) {
-    SceneFactoryTypeVoice = 0,
-};
 
 /// 场景工厂
 @interface SceneFactory : NSObject
 
 /// 构建场景控制器
-/// @param sceneType
-/// @return
-+ (BaseSceneViewController *)createSceneVC:(SceneFactoryType)sceneType configModel:(BaseSceneConfigModel*)configModel;
++ (BaseSceneViewController *)createSceneVC:(SceneType)sceneType configModel:(BaseSceneConfigModel *)configModel;
 @end

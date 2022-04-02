@@ -668,4 +668,17 @@
     [metalView removeFromSuperview];
 }
 
+#pragma mark - SudFSMMGListener
+- (NSString *)onGetGameCfg {
+    LobbyPlayers *l = [[LobbyPlayers alloc] init];
+    l.hide = true;
+    GameUi *ui = [[GameUi alloc] init];
+    ui.lobby_players = l;
+    GameCfgModel *m = [[GameCfgModel alloc] init];
+    m.ui = ui;
+    return [m mj_JSONString];
+}
+
+- (void)onGameMGCommonSelfClickReadyBtn {}
+
 @end

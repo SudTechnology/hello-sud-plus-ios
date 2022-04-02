@@ -65,13 +65,14 @@
 }
 
 - (void)setupContentItems {
+    NSArray <NSString *>*rewardArr = @[@"10", @"50", @"90"];
     for (int i = 0; i < 3; i++) {
         TicketChooseItemView *item = TicketChooseItemView.new;
         TocketChooseModel *model = TocketChooseModel.new;
         model.bgImgStr = [NSString stringWithFormat:@"tickets_item_%d_bg", i];
         model.goldImgStr = [NSString stringWithFormat:@"tickets_item_%d_gold", i];
         model.btnImgStr = [NSString stringWithFormat:@"tickets_item_%d_btn", i];
-        model.rewardStr = @"赢10倍奖励";
+        model.rewardStr = [NSString stringWithFormat:@"赢%@倍奖励", rewardArr[i]];
         model.isHiddenHot = i == 0;
         item.model = model;
         item.tag = 1000 + i;

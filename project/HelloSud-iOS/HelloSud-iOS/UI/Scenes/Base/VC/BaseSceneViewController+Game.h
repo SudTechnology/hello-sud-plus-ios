@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIColor *)systemMsgBgColor;
 /// 系统消息文本颜色
 - (UIColor *)systemMsgTextColor;
+
 @end
 
 NS_ASSUME_NONNULL_END
