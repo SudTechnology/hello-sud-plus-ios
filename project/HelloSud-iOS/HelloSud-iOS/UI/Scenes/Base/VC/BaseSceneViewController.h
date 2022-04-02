@@ -111,6 +111,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param isShowOnScreen 是否展示公屏
 - (void)addMsg:(RoomBaseCMDModel *)msg isShowOnScreen:(BOOL)isShowOnScreen;
 
+/// 设置游戏房间内容
+- (void)setupGameRoomContent;
+
 /// 同步麦位列表
 - (void)reqMicList;
 
@@ -127,6 +130,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - SudFSMMGListener
 - (NSString *)onGetGameCfg;
 - (void)onGameMGCommonSelfClickReadyBtn;
+- (void)onGameMGCommonSelfClickStartBtn;
 
 @end
 
