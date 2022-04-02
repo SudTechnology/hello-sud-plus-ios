@@ -33,16 +33,21 @@
 
 /// 请求创建房间
 /// @param sceneType 场景类型
-- (void)reqCreateRoom:(NSInteger)sceneType {
+/// @param gameLevel 游戏等级（适配当前门票场景）= -1
+- (void)reqCreateRoom:(NSInteger)sceneType gameLevel:(NSInteger)gameLevel {
     if (self.isReqCreate) {
         NSLog(@"there is req create room, so skip it");
         return;
     }
+    self.sceneType = sceneType;
     self.isReqCreate = YES;
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"sceneType"] = @(sceneType);
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
+    }
+    if (self.sceneType == SceneTypeTicket) {
+        dicParam[@"gameLevel"] = @(gameLevel);
     }
     WeakSelf
     [HttpService postRequestWithApi:kINTERACTURL(@"room/create-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
@@ -124,18 +129,23 @@
 
 /// 匹配开播的游戏，并进入游戏房间
 /// @param gameId 游戏ID
-- (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType {
+/// @param gameLevel 游戏等级（适配当前门票场景）= -1 
+- (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType gameLevel:(NSInteger)gameLevel {
     WeakSelf
     if (self.isMatchingRoom) {
         NSLog(@"there is req match room, so skip it");
         return;
     }
+    self.sceneType = sceneType;
     self.isMatchingRoom = YES;
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     dicParam[@"gameId"] = @(gameId);
     dicParam[@"sceneType"] = @(sceneType);
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
+    }
+    if (self.sceneType == SceneTypeTicket) {
+        dicParam[@"gameLevel"] = @(gameLevel);
     }
     [HttpService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
 

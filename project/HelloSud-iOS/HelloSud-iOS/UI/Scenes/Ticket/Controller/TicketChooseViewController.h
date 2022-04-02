@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TicketChooseViewController : BaseViewController
+@property (nonatomic, assign) NSInteger gameId;
+@property (nonatomic, assign) NSInteger sceneId;
 
 @end
 

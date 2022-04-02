@@ -89,11 +89,7 @@
 
 - (void)clickItemsEvent:(UITapGestureRecognizer *)tap {
     NSInteger tag = tap.view.tag - 1000;
-    if (tag == 0) {
-        [DTSheetView show:TicketJoinPopView.new rootView:AppUtil.currentWindow hiddenBackCover:false onCloseCallback:^{
-                    
-        }];
-    }
+    [AudioRoomService.shared reqMatchRoom:self.gameId sceneType:self.sceneId gameLevel:tag];
 }
 
 - (void)backEvent {

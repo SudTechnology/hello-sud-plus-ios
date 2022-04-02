@@ -6,6 +6,7 @@
 //
 
 #import "HomeHeaderReusableView.h"
+#import "TicketChooseLevelView.h"
 
 @interface HomeHeaderReusableView ()
 @property (nonatomic, strong) BaseView *contentView;
@@ -49,7 +50,7 @@
         return;
     }
     
-    [AudioRoomService.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
+//    [AudioRoomService.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
 }
 
 - (void)onBtnClick:(UIButton *)sender {
@@ -57,7 +58,16 @@
     if (self.sceneModel.isGameWait) {
         return;
     }
-    [AudioRoomService.shared reqCreateRoom:self.sceneModel.sceneId];
+    /// 门票场景
+    if (self.sceneModel.sceneId == SceneTypeTicket) {
+        TicketChooseLevelView *node = TicketChooseLevelView.new;
+        [DTSheetView show:node rootView:AppUtil.currentWindow hiddenBackCover:false onCloseCallback:^{}];
+        node.onGameLevelCallBack = ^(NSInteger gameLevel) {
+            [AudioRoomService.shared reqCreateRoom:self.sceneModel.sceneId gameLevel: gameLevel];
+        };
+    } else {
+        [AudioRoomService.shared reqCreateRoom:self.sceneModel.sceneId gameLevel: -1];
+    }
 }
 
 - (void)hsAddViews {
