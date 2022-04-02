@@ -157,6 +157,7 @@
 		BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102EB58A8CE4A527A5167 /* ToastUtil.m */; };
 		BC2106F693B8FDA87CC699D2 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210414A9AE16CEC8607D9D /* AppUtil.m */; };
 		BC2107427C1CF2D51754990F /* DTUIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */; };
+		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
 		BC210868A0B206FC2641B7C6 /* HttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C175D2FCB747B52B179 /* HttpService.m */; };
 		BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104782AE3890C13208B73 /* DTUIDevice+Extension.m */; };
 		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
@@ -514,6 +515,7 @@
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIView+Extension.m"; sourceTree = "<group>"; };
 		BC2100EC41AFF28046FF7B87 /* DTNSError+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTNSError+Custom.h"; sourceTree = "<group>"; };
+		BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentView.m; sourceTree = "<group>"; };
 		BC21028A9B31B91D6B801B04 /* DTUIDevice+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTUIDevice+Extension.h"; sourceTree = "<group>"; };
 		BC2102EB58A8CE4A527A5167 /* ToastUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastUtil.m; sourceTree = "<group>"; };
 		BC210414A9AE16CEC8607D9D /* AppUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 		BC210D5A0981935974C33E8B /* DTNSError+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTNSError+Custom.m"; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
 		BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIColor+Extension.m"; sourceTree = "<group>"; };
+		BC210F7B6D59DA493CE16350 /* SceneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentView.h; sourceTree = "<group>"; };
 		BC210F9ABB08F9D04A052246 /* AppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtil.h; sourceTree = "<group>"; };
 		BC210FAF33BAD4283645718B /* UserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailView.h; sourceTree = "<group>"; };
 		E5C241FF27EDCB8800EA2377 /* ThreadUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadUtils.h; sourceTree = "<group>"; };
@@ -1012,6 +1015,8 @@
 				4455AE0127EAC6F7001516EE /* RoomMsgBgView.m */,
 				4455AE0227EAC6F7001516EE /* RoomOperatorView.h */,
 				4455AE0327EAC6F7001516EE /* RoomNaviView.h */,
+				BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */,
+				BC210F7B6D59DA493CE16350 /* SceneContentView.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1794,6 +1799,7 @@
 				4455ADB227EAC658001516EE /* GiftItemCollectionViewCell.m in Sources */,
 				BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */,
 				BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */,
+				BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

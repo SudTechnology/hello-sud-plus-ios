@@ -26,6 +26,7 @@
 #import "MicOperateView.h"
 #import "RoomGiftPannelView.h"
 #import "BaseSceneConfigModel.h"
+#import "SceneContentView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BaseSceneViewController : BaseViewController<ISudAudioEventListener>
 
 @property (nonatomic, strong)BaseSceneConfigModel *configModel;
+
+/// 基础层级视图，最底层视图
+@property (nonatomic, strong, readonly) SceneContentView *contentView;
 
 /// 背景视图
 @property (nonatomic, strong, readonly) UIImageView *bgImageView;
