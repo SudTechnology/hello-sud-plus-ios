@@ -116,6 +116,7 @@
         self.timer = nil;
     }
     [self.btnTip removeFromSuperview];
+    self.btnTip = nil;
 }
 
 - (UILabel *)asrTipLabel {
