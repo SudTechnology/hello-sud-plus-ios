@@ -8,6 +8,8 @@
 #import "BaseModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@class BaseRespModel;
+typedef void(^RespModelBlock)(BaseRespModel *resp);
 
 @interface BaseRespModel : BaseModel
 

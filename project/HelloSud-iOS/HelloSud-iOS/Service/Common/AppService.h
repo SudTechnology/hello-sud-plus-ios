@@ -67,6 +67,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 登录成功请求配置信息
 - (void)reqConfigData;
+/// 请求版本更新
+/// @param success
+/// @param fail
+- (void)reqAppUpdate:(RespModelBlock)success fail:(nullable ErrorStringBlock)fail;
 @end
 
 NS_ASSUME_NONNULL_END
