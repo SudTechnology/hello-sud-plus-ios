@@ -56,14 +56,23 @@
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.gameView];
     [self.view addSubview:self.sceneView];
-
-    [self.sceneView addSubview:self.naviView];
-    [self.sceneView addSubview:self.operatorView];
-    [self.sceneView addSubview:self.gameMicContentView];
-    [self.sceneView addSubview:self.gameNumLabel];
-    [self.sceneView addSubview:self.msgBgView];
+//
+//    [self.sceneView addSubview:self.naviView];
+//    [self.sceneView addSubview:self.operatorView];
+//    [self.sceneView addSubview:self.gameMicContentView];
+//    [self.sceneView addSubview:self.gameNumLabel];
+//    [self.sceneView addSubview:self.msgBgView];
+//    [self.msgBgView addSubview:self.msgTableView];
+//    [self.sceneView addSubview:self.inputView];
+    
+    [self.sceneView setUserInteractionEnabled:false];
+    [self.view addSubview:self.naviView];
+    [self.view addSubview:self.operatorView];
+    [self.view addSubview:self.gameMicContentView];
+    [self.view addSubview:self.gameNumLabel];
+    [self.view addSubview:self.msgBgView];
     [self.msgBgView addSubview:self.msgTableView];
-    [self.sceneView addSubview:self.inputView];
+    [self.view addSubview:self.inputView];
 }
 
 - (void)dtLayoutViews {
@@ -500,7 +509,6 @@
 
 }
 
-
 - (void)handleMicList:(NSArray<HSRoomMicList *> *)micList {
     NSMutableArray<NSNumber *> *arrUserID = NSMutableArray.new;
     for (HSRoomMicList *m in micList) {
@@ -663,6 +671,29 @@
     [self logoutGame];
 }
 
+/// 设置游戏房间内容
+- (void)setupGameRoomContent {
+    self.gameView.hidden = NO;
+    self.gameNumLabel.hidden = NO;
+    [self.gameMicContentView setHidden:false];
+    CGFloat h = [UIDevice dt_isiPhoneXSeries] ? 106 : 50;
+    [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.operatorView.mas_top);
+        make.height.mas_equalTo(h);
+    }];
+    [self.dicMicModel removeAllObjects];
+    for (AudioMicroView *v in self.gameMicContentView.micArr) {
+        NSString *key = [NSString stringWithFormat:@"%ld", v.model.micIndex];
+        self.dicMicModel[key] = v.model;
+        v.micType = HSGameMic;
+    }
+    
+    [self reqMicList];
+    [self.naviView hiddenNodeWithRoleType: AudioRoomService.shared.roleType];
+    [self dtUpdateUI];
+}
+
 #pragma mark - BDAlphaPlayerMetalViewDelegate
 - (void)metalView:(nonnull BDAlphaPlayerMetalView *)metalView didFinishPlayingWithError:(nonnull NSError *)error {
     [metalView removeFromSuperview];
@@ -680,5 +711,6 @@
 }
 
 - (void)onGameMGCommonSelfClickReadyBtn {}
+- (void)onGameMGCommonSelfClickStartBtn {}
 
 @end
