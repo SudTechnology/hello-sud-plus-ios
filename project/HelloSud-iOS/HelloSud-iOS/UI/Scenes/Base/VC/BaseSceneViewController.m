@@ -45,6 +45,7 @@
         [self loginGame];
     }
     [self dtUpdateUI];
+    [self setupGameRoomContent];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
