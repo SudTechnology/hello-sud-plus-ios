@@ -111,7 +111,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)reqMicList;
 
 /// 游戏切换
-/// @param gameID
 - (void)roomGameDidChanged:(NSInteger)gameID;
 
 /// 处理麦位点击
@@ -120,6 +119,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否支持游戏
 - (BOOL)isSupportGame;
+
+#pragma mark - SudFSMMGListener
+- (NSString *)onGetGameCfg;
+- (void)onGameMGCommonSelfClickReadyBtn;
+
 @end
 
 NS_ASSUME_NONNULL_END
