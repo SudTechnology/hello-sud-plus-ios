@@ -207,11 +207,13 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
     if (self.headerSceneList[indexPath.section].sceneId == SceneTypeTicket) {
         TicketChooseViewController *vc = TicketChooseViewController.new;
+        vc.gameId = model.gameId;
+        vc.sceneId = self.headerSceneList[indexPath.section].sceneId;
         [self.navigationController pushViewController:vc animated:true];
     } else {
-        HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
         [AudioRoomService.shared reqMatchRoom:model.gameId sceneType:self.headerSceneList[indexPath.section].sceneId gameLevel:-1];
     }
 }
