@@ -122,6 +122,7 @@
 - (void)dtConfigEvents {
     WeakSelf
     self.contentView.hitTestChangedCallback = ^(UIView *currentView) {
+        // 如果场景视图没有响应事件，将该事件穿透到游戏中去
         if (weakSelf.sceneView == currentView) {
             return weakSelf.gameView;
         }
