@@ -7,6 +7,7 @@
 #import "AudioRoomViewController.h"
 #import "BaseSceneConfigModel.h"
 #import "TicketViewController.h"
+#import "ASRViewController.h"
 
 @implementation SceneFactory {
 
@@ -20,6 +21,9 @@
             break;
         case SceneTypeTicket:
             vc =  [[TicketViewController alloc] init];
+            break;
+        case SceneTypeASR:
+            vc =  [[ASRViewController alloc] init];
             break;
         default:
             vc = [[BaseSceneViewController alloc] init];
