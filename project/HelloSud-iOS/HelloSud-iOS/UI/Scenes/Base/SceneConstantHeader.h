@@ -19,6 +19,8 @@
 #define NTF_STREAM_INFO_CHANGED @"NTF_STREAM_INFO_CHANGED"
 /// 玩家游戏状态变更通知
 #define NTF_PLAYER_STATE_CHANGED @"NTF_PLAYER_STATE_CHANGED"
+/// ASR状态变更通知
+#define NTF_ASR_STATE_CHANGED @"NTF_ASR_STATE_CHANGED"
 
 #define kNTFStreamInfoKey @"streamInfo"
 #endif /* SceneConstantHeader_h */

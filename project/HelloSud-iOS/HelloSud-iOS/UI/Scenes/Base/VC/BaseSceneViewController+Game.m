@@ -116,6 +116,7 @@
         [self stopCaptureAudioToASR];
     }
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_ASR_STATE_CHANGED object:nil userInfo:nil];
 }
 
 /// 玩家状态变化
