@@ -896,7 +896,6 @@
 				4455AD6E27EAC658001516EE /* TicketViewController.m */,
 				4455AD6D27EAC658001516EE /* TicketChooseViewController.h */,
 				4455AD6C27EAC658001516EE /* TicketChooseViewController.m */,
-				444F59E927F7035800FA1FB2 /* TicketChooseLevelView.h */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -921,6 +920,7 @@
 				4455AD7327EAC658001516EE /* TicketJoinPopView.m */,
 				4455AD7827EAC658001516EE /* TicketChooseItemView.h */,
 				4455AD7427EAC658001516EE /* TicketChooseItemView.m */,
+				444F59E927F7035800FA1FB2 /* TicketChooseLevelView.h */,
 				444F59EA27F7035800FA1FB2 /* TicketChooseLevelView.m */,
 			);
 			path = View;

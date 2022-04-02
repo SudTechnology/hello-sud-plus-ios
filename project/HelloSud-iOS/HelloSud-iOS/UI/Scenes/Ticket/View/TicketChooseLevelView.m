@@ -52,7 +52,7 @@
 }
 
 - (void)onTapItem:(UITapGestureRecognizer *)tap {
-    if (self.onGameLevelCallBack) self.onGameLevelCallBack(tap.view.tag);
+    if (self.onGameLevelCallBack) self.onGameLevelCallBack(tap.view.tag + 1);
     [DTSheetView close];
 }
 

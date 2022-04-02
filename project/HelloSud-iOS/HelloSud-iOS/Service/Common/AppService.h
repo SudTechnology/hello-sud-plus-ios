@@ -9,6 +9,7 @@
 #import "AccountUserModel.h"
 #import "ConfigModel.h"
 #import "LoginService.h"
+#import "TicketService.h"
 
 @class AudioConfigModel;
 
@@ -40,6 +41,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 登录服务
 @property (nonatomic, strong)LoginService *login;
+/// 房间场景服务
+@property (nonatomic, strong)AudioRoomService *audioRoom;
+/// 门票场景服务
+@property (nonatomic, strong)TicketService *ticket;
 
 + (instancetype)shared;
 

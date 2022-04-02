@@ -49,6 +49,20 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
     return _login;
 }
 
+- (AudioRoomService *)audioRoom {
+    if (!_audioRoom) {
+        _audioRoom = [[AudioRoomService alloc] init];
+    }
+    return _audioRoom;
+}
+
+- (TicketService *)ticket {
+    if (!_ticket) {
+        _ticket = [[TicketService alloc] init];
+    }
+    return _ticket;
+}
+
 - (void)prepare {
     [self config];
     [self.login prepare];
