@@ -78,6 +78,12 @@
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
+/// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
+- (void)onGameMGCommonSelfClickStartBtn:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonSelfClickStartBtn *)model {
+    [self onGameMGCommonSelfClickStartBtn];
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+}
+
 /// 通用状态-游戏
 /// 游戏: 公屏消息状态    MG_COMMON_PUBLIC_MESSAGE
 - (void)onGameMGCommonPublicMessage:(id<ISudFSMStateHandle>)handle model:(MGCommonPublicMessageModel *)model {
