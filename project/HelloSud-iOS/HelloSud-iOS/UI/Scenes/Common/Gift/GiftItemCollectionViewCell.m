@@ -105,7 +105,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"小仓鼠";
+        _nameLabel.text = @"";
         _nameLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _nameLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
     }

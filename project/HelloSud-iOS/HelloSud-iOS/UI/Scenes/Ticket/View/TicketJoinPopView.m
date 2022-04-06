@@ -50,18 +50,21 @@
 }
 
 - (void)dtUpdateUI {
+    NSArray <NSString *>*goldArr = @[@"200", @"250", @"900"];
+    NSArray <NSString *>*payArr = @[@"2", @"5", @"10"];
+    
     switch (self.ticketLevelType) {
         case TicketLevelTypePrimary:
-            self.desTitleLabel.text = @"最高可获得200金币奖励";
-            self.detailLabel.text = @"参与游戏需消耗20金币，是否继续";
+            self.desTitleLabel.text = [NSString stringWithFormat:NSString.dt_ticket_choose_pop_des_title, goldArr[0]];
+            self.detailLabel.text = [NSString stringWithFormat:NSString.dt_ticket_choose_pop_des_detail, payArr[0]];
             break;
         case TicketLevelTypeMedia:
-            self.desTitleLabel.text = @"最高可获得250金币奖励";
-            self.detailLabel.text = @"参与游戏需消耗5金币，是否继续";
+            self.desTitleLabel.text = [NSString stringWithFormat:NSString.dt_ticket_choose_pop_des_title, goldArr[1]];
+            self.detailLabel.text = [NSString stringWithFormat:NSString.dt_ticket_choose_pop_des_detail, payArr[1]];
             break;
         case TicketLevelTypeSenior:
-            self.desTitleLabel.text = @"最高可获得900金币奖励";
-            self.detailLabel.text = @"参与游戏需消耗10金币，是否继续";
+            self.desTitleLabel.text = [NSString stringWithFormat:NSString.dt_ticket_choose_pop_des_title, goldArr[2]];
+            self.detailLabel.text = [NSString stringWithFormat:NSString.dt_ticket_choose_pop_des_detail, payArr[2]];
             break;
         default:
             break;
@@ -182,7 +185,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = UILabel.new;
-        _titleLabel.text = @"夺得第一名";
+        _titleLabel.text = NSString.dt_ticket_choose_pop_title;
         _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#FFE2AD" alpha:1];
         _titleLabel.font = UIFONT_BOLD(16);
     }
@@ -192,7 +195,6 @@
 - (UILabel *)desTitleLabel {
     if (!_desTitleLabel) {
         _desTitleLabel = UILabel.new;
-        _desTitleLabel.text = @"最高可获得10金币奖励";
         _desTitleLabel.textColor = [UIColor dt_colorWithHexString:@"#FFE2AD" alpha:1];
         _desTitleLabel.font = UIFONT_BOLD(16);
     }
@@ -202,7 +204,6 @@
 - (UILabel *)detailLabel {
     if (!_detailLabel) {
         _detailLabel = UILabel.new;
-        _detailLabel.text = @"参与游戏需消耗2金币，是否继续";
         _detailLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _detailLabel.font = UIFONT_MEDIUM(16);
     }
@@ -259,7 +260,7 @@
 - (UILabel *)remindLabel {
     if (!_remindLabel) {
         _remindLabel = UILabel.new;
-        _remindLabel.text = @"不再提醒";
+        _remindLabel.text = NSString.dt_ticket_choose_pop_not_alert;
         _remindLabel.textColor = [UIColor dt_colorWithHexString:@"#FEEFB3" alpha:1];
         _remindLabel.font = UIFONT_REGULAR(12);
     }
@@ -269,7 +270,7 @@
 - (UIButton *)cancelBtn {
     if (!_cancelBtn) {
         _cancelBtn = UIButton.new;
-        [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelBtn setTitle:NSString.dt_common_cancel forState:UIControlStateNormal];
         [_cancelBtn setBackgroundImage:[UIImage imageNamed:@"tickets_join_cancel"] forState:UIControlStateNormal];
         _cancelBtn.titleLabel.font = UIFONT_MEDIUM(14);
         [_cancelBtn setTitleColor:[UIColor dt_colorWithHexString:@"#C5C1AE" alpha:1] forState:UIControlStateNormal];
@@ -281,7 +282,7 @@
 - (UIButton *)sureBtn {
     if (!_sureBtn) {
         _sureBtn = UIButton.new;
-        [_sureBtn setTitle:@"确认加入" forState:UIControlStateNormal];
+        [_sureBtn setTitle:NSString.dt_ticket_choose_pop_sure_enter forState:UIControlStateNormal];
         [_sureBtn setBackgroundImage:[UIImage imageNamed:@"tickets_join_sure"] forState:UIControlStateNormal];
         _sureBtn.titleLabel.font = UIFONT_MEDIUM(14);
         [_sureBtn setTitleColor:[UIColor dt_colorWithHexString:@"#FFE88D" alpha:1] forState:UIControlStateNormal];

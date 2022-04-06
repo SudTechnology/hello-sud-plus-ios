@@ -41,7 +41,7 @@
     verModel.pageURL = @"";
 
     HSSettingModel *rtcModel = [HSSettingModel new];
-    rtcModel.title = @"更多设置";
+    rtcModel.title = NSString.dt_settings_more_set;
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
 
@@ -161,7 +161,7 @@
     if ([model.title isEqualToString:NSString.dt_settings_version_info]) {
         VersionInfoViewController *vc = VersionInfoViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ([model.title isEqualToString:@"更多设置"]) {
+    } else if ([model.title isEqualToString:NSString.dt_settings_more_set]) {
         MoreSettingViewController *vc = MoreSettingViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([model.title isEqualToString:NSString.dt_settings_switch_language]) {

@@ -160,10 +160,9 @@
         
         [weakSelf.collectionView reloadData];
     } failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
+        [ToastUtil show:[error debugDescription]];
     }];
 }
-
 
 /// 构建等待数据
 /// @param count count description
@@ -212,6 +211,7 @@
         TicketChooseViewController *vc = TicketChooseViewController.new;
         vc.gameId = model.gameId;
         vc.sceneId = self.headerSceneList[indexPath.section].sceneId;
+        vc.gameName = model.gameName;
         [self.navigationController pushViewController:vc animated:true];
     } else {
         [AudioRoomService.shared reqMatchRoom:model.gameId sceneType:self.headerSceneList[indexPath.section].sceneId gameLevel:-1];

@@ -30,7 +30,7 @@
 /// 配置页面数据
 - (void)configData {
     SwitchLangModel *m_0 = [SwitchLangModel new];
-    m_0.title = @"跟随系统";
+    m_0.title = NSString.dt_follow_system;
     m_0.language = nil;
     m_0.isSelect = YES;
     

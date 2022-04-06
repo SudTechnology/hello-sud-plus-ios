@@ -122,7 +122,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"选择游戏";
+        _titleLabel.text = NSString.dt_room_choose_game;
         _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
     }

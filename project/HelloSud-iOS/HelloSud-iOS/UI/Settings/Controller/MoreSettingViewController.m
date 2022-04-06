@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"更多设置";
+    self.title = NSString.dt_settings_more_set;
     // Do any additional setup after loading the view.
     [self configData];
 }

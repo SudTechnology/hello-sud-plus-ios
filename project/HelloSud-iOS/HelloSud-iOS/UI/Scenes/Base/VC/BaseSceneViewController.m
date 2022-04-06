@@ -140,7 +140,7 @@
     self.operatorView.voiceTapBlock = ^(UIButton *sender) {
         // 上麦点击
         if (weakSelf.isGameForbiddenVoice) {
-            [ToastUtil show:@"当前不能发言"];
+            [ToastUtil show:NSString.dt_room_unable_speak_present];
             return;
         }
         [weakSelf handleTapVoice];
@@ -160,7 +160,7 @@
         [weakSelf handleMicTap:micModel];
     };
     self.naviView.closeTapBlock = ^(UIButton *sender) {
-        [DTAlertView showTextAlert:@"确认离开当前房间吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+        [DTAlertView showTextAlert:NSString.dt_room_sure_leave_cur_room sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 如果在麦位上，则下麦
                 if (AudioRoomService.shared.micIndex >= 0) {
@@ -185,14 +185,14 @@
         modeView.onTapGameCallBack = ^(HSGameItem * _Nonnull m) {
             [DTSheetView close];
             if (weakSelf.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
-                [ToastUtil show:@"正在游戏中, 无法切换游戏"];
+                [ToastUtil show:NSString.dt_room_unable_switch_game];
                 return;
             }
             [weakSelf handleChangeRoomMode:m];
         };
     };
     self.naviView.endGameBlock = ^(UIButton *sender) {
-        [DTAlertView showTextAlert:@"确定结束游戏吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+        [DTAlertView showTextAlert:NSString.dt_room_sure_end_game sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
             [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
         } onCloseCallback:^{
         }];
@@ -246,12 +246,12 @@
     } else if ([AppService.shared.login.loginUserInfo isMeByUserID:micModel.user.userID]) {
         BOOL isGameing = self.sudFSMMGDecorator.isPlaying;
         // 是自己或者房主
-        MicOperateView *v = [[MicOperateView alloc]initWithOperateList: @[@"下麦"]];
+        MicOperateView *v = [[MicOperateView alloc]initWithOperateList: @[NSString.dt_down_mic]];
         WeakSelf
         v.operateCallback = ^(NSString *str) {
             if (isGameing) {
                 [DTSheetView close];
-                [DTAlertView showTextAlert:@"当前正在游戏中，是否逃跑？" sureText:@"确认逃跑" cancelText:@"返回游戏" onSureCallback:^{
+                [DTAlertView showTextAlert:NSString.dt_room_flight_tile sureText:NSString.dt_room_confirm_flight cancelText:NSString.dt_room_back_game onSureCallback:^{
                     // 下麦
                     [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
                     
@@ -327,7 +327,7 @@
             // 请求上麦
             AudioRoomMicModel *emptyModel = [self getOneEmptyMic];
             if (emptyModel == nil) {
-                [ToastUtil show:@"没有空位啦"];
+                [ToastUtil show:NSString.dt_room_there_no_mic];
                 return;
             }
             self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
@@ -343,7 +343,7 @@
                     [self startPublishStream];
                 } else {
                     // 提示开启权限
-                    [DTAlertView showTextAlert:@"无法访问麦克风，请到“设置-隐私“中开启麦克风访问权限" sureText:@"去开启" cancelText:@"暂时不用" onSureCallback:^{
+                    [DTAlertView showTextAlert:NSString.dt_unable_microphone_tip sureText:NSString.dt_unable_microphone_open cancelText:NSString.dt_unable_microphone_not_have onSureCallback:^{
                         NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                         if (url && [[UIApplication sharedApplication]canOpenURL:url]) {
                             [[UIApplication sharedApplication] openURL:url];
@@ -400,7 +400,7 @@
     }
     AudioRoomMicModel *micModel = [self getOneEmptyMic];
     if (micModel == nil) {
-        [ToastUtil show:@"没有空位啦"];
+        [ToastUtil show:NSString.dt_room_there_no_mic];
         return;
     }
     if (micModel.user == nil) {
