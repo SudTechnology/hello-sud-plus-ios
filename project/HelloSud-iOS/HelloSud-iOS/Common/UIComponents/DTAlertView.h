@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param cancelText 取消Item文本
 /// @param sureCb sure回调
 /// @param closeCb close回调
-+ (void)showTextAlert:(NSString *)msg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb;
++ (void)showTextAlert:(NSString *)msg sureText:(NSString *)sureText cancelText:(nullable NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(nullable void(^)(void))closeCb;
 
 /// 展示中心弹窗 - （文本 + 确定 + 取消）
 /// @param attrMsg 富文本
