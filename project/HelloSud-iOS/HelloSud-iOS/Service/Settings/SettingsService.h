@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SwitchLangModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 开源协议
 + (NSURL *)appLicenseURL;
 
++ (NSString *)getCurLanguageLocale;
+
++ (NSArray <SwitchLangModel *> *)getLanguageArr;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -29,57 +29,7 @@
 
 /// 配置页面数据
 - (void)configData {
-    SwitchLangModel *m_0 = [SwitchLangModel new];
-    m_0.title = NSString.dt_follow_system;
-    m_0.language = nil;
-    m_0.isSelect = YES;
-    
-    SwitchLangModel *m_1 = [SwitchLangModel new];
-    m_1.title = @"简体中文";
-    m_1.language = @"zh-Hans";
-    
-    SwitchLangModel *m_2 = [SwitchLangModel new];
-    m_2.title = @"繁體中文";
-    m_2.language = @"zh-Hant";
-    
-    SwitchLangModel *m_3 = [SwitchLangModel new];
-    m_3.title = @"English";
-    m_3.language = @"en";
-    
-    SwitchLangModel *m_4 = [SwitchLangModel new];
-    m_4.title = @"لغة عربية";
-    m_4.language = @"ar";
-    
-    SwitchLangModel *m_5 = [SwitchLangModel new];
-    m_5.title = @"Bahasa Indonesia";
-    m_5.language = @"id";
-    
-    SwitchLangModel *m_6 = [SwitchLangModel new];
-    m_6.title = @"Bahasa Melayu";
-    m_6.language = @"ms";
-    
-    SwitchLangModel *m_7 = [SwitchLangModel new];
-    m_7.title = @"ภาษาไทย";
-    m_7.language = @"th";
-    
-    SwitchLangModel *m_8 = [SwitchLangModel new];
-    m_8.title = @"Tiếng Việt";
-    m_8.language = @"vi";
-    
-    SwitchLangModel *m_9 = [SwitchLangModel new];
-    m_9.title = @"한국어";
-    m_9.language = @"ko";
-    
-    SwitchLangModel *m_10 = [SwitchLangModel new];
-    m_10.title = @"Español";
-    m_10.language = @"es";
-    
-    SwitchLangModel *m_11 = [SwitchLangModel new];
-    m_11.title = @"日本語";
-    m_11.language = @"ja";
-    
-    
-    NSArray <SwitchLangModel *>*dataArray = @[m_0, m_1, m_2, m_3, m_4, m_5, m_6, m_7, m_8, m_9, m_10, m_11];
+    NSArray <SwitchLangModel *>*dataArray = [SettingsService getLanguageArr];
     
     if (LanguageUtil.userLanguage.length > 0) {
         NSString *str = [NSBundle currentLanguage];
@@ -137,9 +87,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SwitchLangModel *model = self.arrData[indexPath.row];
-    if (model.isSelect) {
-        return;
-    }
+//    if (model.isSelect) {
+//        return;
+//    }
     for (SwitchLangModel *model in self.arrData) {
         model.isSelect = NO;
     }
