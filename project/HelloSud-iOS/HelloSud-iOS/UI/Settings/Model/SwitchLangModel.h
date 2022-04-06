@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SwitchLangModel : BaseModel
 @property(nonatomic, copy)NSString *title;
 @property (nullable, nonatomic, copy) NSString *language;
+@property(nonatomic, copy)NSString *locale;
 @property(nonatomic, assign)BOOL isSelect;
 @property(nonatomic, assign)BOOL isMore;
 

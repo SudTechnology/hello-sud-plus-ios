@@ -128,7 +128,7 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
     } else {
         NSLog(@"设置APP请求头token为空");
     }
-    NSString *locale = @"zh-CN";
+    NSString *locale = [SettingsService getCurLanguageLocale];
     NSString *clientChannel = @"appstore";
     NSString *clientVersion = [NSString stringWithFormat:@"%@.%@", DeviceUtil.getAppVersion, DeviceUtil.getAppBuildCode];
     NSString *deviceId = DeviceUtil.getIdfv;
