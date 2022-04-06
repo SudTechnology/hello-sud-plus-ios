@@ -202,7 +202,7 @@
 - (void)dtUpdateUI {
     if (self.model.user == nil) {
         self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
-        [self showUserName:@"点击上麦" showOwner:false];
+        [self showUserName:NSString.dt_room_click_mic showOwner:false];
         [self.rippleView stopAnimate:YES];
         [self hiddenGameNode:true];
         return;
@@ -220,7 +220,7 @@
     if (self.micType == HSGameMic) {
         if (self.model.user == nil) {
             self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
-            [self showUserName:@"点击上麦" showOwner:false];
+            [self showUserName:NSString.dt_room_click_mic showOwner:false];
             [self.rippleView stopAnimate:YES];
             [self hiddenGameNode:true];
             return;
@@ -238,7 +238,7 @@
         /// 是否是在准备
         if ([self.iSudFSMMG isPlayerIsReady:self.model.user.userID] == 1) {
             [self.gameStateLabel setHidden:false];
-            self.gameStateLabel.text = @"已准备";
+            self.gameStateLabel.text = NSString.dt_room_is_ready;
             self.gameStateLabel.textColor = [UIColor whiteColor];
             self.gameStateLabel.backgroundColor =  [UIColor dt_colorWithHexString: @"#13AD21" alpha:1];
             self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
@@ -246,7 +246,7 @@
             /// 是否还在游戏中
             if ([self.iSudFSMMG isPlayerInGame:self.model.user.userID]) {
                 [self.gameStateLabel setHidden:false];
-                self.gameStateLabel.text = @"未准备";
+                self.gameStateLabel.text = NSString.dt_room_not_ready;
                 self.gameStateLabel.textColor = [UIColor whiteColor];
                 self.gameStateLabel.backgroundColor = [UIColor dt_colorWithHexString: @"#FF6E65" alpha:1];
                 self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
@@ -339,7 +339,7 @@
 - (UILabel *)gameStateLabel {
     if (!_gameStateLabel) {
         _gameStateLabel = [[UILabel alloc] init];
-        _gameStateLabel.text = @"未准备";
+        _gameStateLabel.text = NSString.dt_room_not_ready;
         _gameStateLabel.font = [UIFont systemFontOfSize:9 weight:UIFontWeightRegular];
         _gameStateLabel.textAlignment = NSTextAlignmentCenter;
         _gameStateLabel.textColor = UIColor.whiteColor;

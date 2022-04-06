@@ -16,7 +16,7 @@
 @implementation TicketChooseLevelView
 
 - (void)dtConfigUI {
-    NSArray *titleArr = @[@"初级场", @"中级场", @"高级场"];
+    NSArray *titleArr = @[NSString.dt_ticket_choose_level_item_title_one, NSString.dt_ticket_choose_level_item_title_two, NSString.dt_ticket_choose_level_item_title_thr];
     NSMutableArray <UIView *>*nodeArr = NSMutableArray.new;
     for (int i = 0; i < 3; i++) {
         UIImageView *bgNode = UIImageView.new;
@@ -79,7 +79,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = UILabel.new;
-        _titleLabel.text = @"选择创建的门票场次级别";
+        _titleLabel.text = NSString.dt_ticket_choose_level_title;
         _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _titleLabel.font = UIFONT_REGULAR(16);
     }

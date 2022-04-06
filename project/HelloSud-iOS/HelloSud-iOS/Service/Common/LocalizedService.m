@@ -82,5 +82,55 @@
 + (NSString *)dt_room_owner { return @"dt_room_owner".localized; }
 + (NSString *)dt_mic_index { return @"dt_mic_index".localized; }
 + (NSString *)dt_mic_name { return @"dt_mic_name".localized; }
++ (NSString *)dt_ticket_choose_item_reward { return @"dt_ticket_choose_item_reward".localized; }
++ (NSString *)dt_ticket_choose_item_join { return @"dt_ticket_choose_item_join".localized; }
++ (NSString *)dt_ticket_choose_play_user_num { return @"dt_ticket_choose_play_user_num".localized; }
++ (NSString *)dt_ticket_choose_level_item_title_one { return @"dt_ticket_choose_level_item_title_one".localized; }
++ (NSString *)dt_ticket_choose_level_item_title_two { return @"dt_ticket_choose_level_item_title_two".localized; }
++ (NSString *)dt_ticket_choose_level_item_title_thr { return @"dt_ticket_choose_level_item_title_thr".localized; }
++ (NSString *)dt_ticket_choose_level_title { return @"dt_ticket_choose_level_title".localized; }
++ (NSString *)dt_ticket_choose_pop_title { return @"dt_ticket_choose_pop_title".localized; }
++ (NSString *)dt_ticket_choose_pop_des_title { return @"dt_ticket_choose_pop_des_title".localized; }
++ (NSString *)dt_ticket_choose_pop_des_detail { return @"dt_ticket_choose_pop_des_detail".localized; }
++ (NSString *)dt_ticket_choose_pop_not_alert { return @"dt_ticket_choose_pop_not_alert".localized; }
++ (NSString *)dt_ticket_choose_pop_sure_enter { return @"dt_ticket_choose_pop_sure_enter".localized; }
++ (NSString *)dt_ticket_reward_str_one { return @"dt_ticket_reward_str_one".localized; }
++ (NSString *)dt_ticket_reward_str_two { return @"dt_ticket_reward_str_two".localized; }
++ (NSString *)dt_ticket_reward_str_thr { return @"dt_ticket_reward_str_thr".localized; }
++ (NSString *)dt_ticket_reward_str_four { return @"dt_ticket_reward_str_four".localized; }
++ (NSString *)dt_ticket_reward_str_five { return @"dt_ticket_reward_str_five".localized; }
++ (NSString *)dt_ticket_reward_str_six { return @"dt_ticket_reward_str_six".localized; }
++ (NSString *)dt_room_input_text { return @"dt_room_input_text".localized; }
++ (NSString *)dt_room_up_mic { return @"dt_room_up_mic".localized; }
++ (NSString *)dt_room_choose_game { return @"dt_room_choose_game".localized; }
++ (NSString *)dt_room_send { return @"dt_room_send".localized; }
++ (NSString *)dt_room_please_input { return @"dt_room_please_input".localized; }
++ (NSString *)dt_room_input_not_null { return @"dt_room_input_not_null".localized; }
++ (NSString *)dt_room_end_game { return @"dt_room_end_game".localized; }
++ (NSString *)dt_room_num_id { return @"dt_room_num_id".localized; }
++ (NSString *)dt_room_not_ready { return @"dt_room_not_ready".localized; }
++ (NSString *)dt_room_is_ready { return @"dt_room_is_ready".localized; }
++ (NSString *)dt_room_click_mic { return @"dt_room_click_mic".localized; }
++ (NSString *)dt_room_close_game { return @"dt_room_close_game".localized; }
++ (NSString *)dt_room_there_no_mic { return @"dt_room_there_no_mic".localized; }
++ (NSString *)dt_room_back_game { return @"dt_room_back_game".localized; }
++ (NSString *)dt_room_confirm_flight { return @"dt_room_confirm_flight".localized; }
++ (NSString *)dt_room_flight_tile { return @"dt_room_flight_tile".localized; }
++ (NSString *)dt_room_sure_end_game { return @"dt_room_sure_end_game".localized; }
++ (NSString *)dt_room_unable_switch_game { return @"dt_room_unable_switch_game".localized; }
++ (NSString *)dt_room_sure_leave_cur_room { return @"dt_room_sure_leave_cur_room".localized; }
++ (NSString *)dt_room_unable_speak_present { return @"dt_room_unable_speak_present".localized; }
+
++ (NSString *)dt_login_has_expired { return @"dt_login_has_expired".localized; }
++ (NSString *)dt_next_time_again_say { return @"dt_next_time_again_say".localized; }
++ (NSString *)dt_update_now { return @"dt_update_now".localized; }
++ (NSString *)dt_update_app_ver_low { return @"dt_update_app_ver_low".localized; }
++ (NSString *)dt_update_app_ver_new { return @"dt_update_app_ver_new".localized; }
++ (NSString *)dt_unable_microphone_open { return @"dt_unable_microphone_open".localized; }
++ (NSString *)dt_unable_microphone_not_have { return @"dt_unable_microphone_not_have".localized; }
++ (NSString *)dt_unable_microphone_tip { return @"dt_unable_microphone_tip".localized; }
++ (NSString *)dt_settings_more_set { return @"dt_settings_more_set".localized; }
++ (NSString *)dt_follow_system { return @"dt_follow_system".localized; }
+
 
 @end

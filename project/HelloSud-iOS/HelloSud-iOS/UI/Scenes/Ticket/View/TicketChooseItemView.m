@@ -136,7 +136,6 @@
 - (UILabel *)rewardLabel {
     if (!_rewardLabel) {
         _rewardLabel = UILabel.new;
-        _rewardLabel.text = @"赢10倍奖励";
         _rewardLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFCAB" alpha:1];
         _rewardLabel.font = UIFONT_BOLD(30);
     }
@@ -146,7 +145,7 @@
 - (UILabel *)enterLabel {
     if (!_enterLabel) {
         _enterLabel = UILabel.new;
-        _enterLabel.text = @"立即参与";
+        _enterLabel.text = NSString.dt_ticket_choose_item_join;
         _enterLabel.textColor = [UIColor dt_colorWithHexString:@"#FFF19A" alpha:1];
         _enterLabel.font = UIFONT_MEDIUM(14);
     }
@@ -156,7 +155,7 @@
 - (UILabel *)onlineLabel {
     if (!_onlineLabel) {
         _onlineLabel = UILabel.new;
-        _onlineLabel.text = @"87367人在玩";
+        _onlineLabel.text = [NSString stringWithFormat:NSString.dt_ticket_choose_play_user_num, 87367];
         _onlineLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.7];
         _onlineLabel.font = UIFONT_REGULAR(12);
     }

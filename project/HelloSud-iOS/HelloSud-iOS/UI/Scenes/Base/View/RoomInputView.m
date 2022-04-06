@@ -108,7 +108,7 @@
 - (UIButton *)sendBtn {
     if (!_sendBtn) {
         _sendBtn = [[UIButton alloc] init];
-        [_sendBtn setTitle:@"发送" forState:UIControlStateNormal];
+        [_sendBtn setTitle:NSString.dt_room_send forState:UIControlStateNormal];
         [_sendBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         _sendBtn.backgroundColor = UIColor.blackColor;
         _sendBtn.titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
@@ -122,7 +122,7 @@
         BaseTextView *txv = [[BaseTextView alloc] init];
         txv.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         txv.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        txv.placeHolder = @"请输入内容";
+        txv.placeHolder = NSString.dt_room_please_input;
         txv.textColor = [UIColor blackColor];
         txv.backgroundColor = [UIColor whiteColor];
         _textView = txv;
@@ -132,7 +132,7 @@
 
 - (void)sendBtnEvent {
     if (self.textView.text.length == 0) {
-        [ToastUtil show:@"输入内容不能为空"];
+        [ToastUtil show:NSString.dt_room_input_not_null];
         return;
     }
     if (self.inputMsgBlock) {

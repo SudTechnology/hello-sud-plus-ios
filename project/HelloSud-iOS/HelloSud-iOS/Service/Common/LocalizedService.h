@@ -83,6 +83,56 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_room_owner;
 + (NSString *)dt_mic_index;
 + (NSString *)dt_mic_name;
++ (NSString *)dt_ticket_choose_item_reward;
++ (NSString *)dt_ticket_choose_item_join;
++ (NSString *)dt_ticket_choose_play_user_num;
++ (NSString *)dt_ticket_choose_level_item_title_one;
++ (NSString *)dt_ticket_choose_level_item_title_two;
++ (NSString *)dt_ticket_choose_level_item_title_thr;
++ (NSString *)dt_ticket_choose_level_title;
++ (NSString *)dt_ticket_choose_pop_title;
++ (NSString *)dt_ticket_choose_pop_des_title;
++ (NSString *)dt_ticket_choose_pop_des_detail;
++ (NSString *)dt_ticket_choose_pop_not_alert;
++ (NSString *)dt_ticket_choose_pop_sure_enter;
++ (NSString *)dt_ticket_reward_str_one;
++ (NSString *)dt_ticket_reward_str_two;
++ (NSString *)dt_ticket_reward_str_thr;
++ (NSString *)dt_ticket_reward_str_four;
++ (NSString *)dt_ticket_reward_str_five;
++ (NSString *)dt_ticket_reward_str_six;
++ (NSString *)dt_room_input_text;
++ (NSString *)dt_room_up_mic;
++ (NSString *)dt_room_choose_game;
++ (NSString *)dt_room_send;
++ (NSString *)dt_room_please_input;
++ (NSString *)dt_room_input_not_null;
++ (NSString *)dt_room_end_game;
++ (NSString *)dt_room_num_id;
++ (NSString *)dt_room_not_ready;
++ (NSString *)dt_room_is_ready;
++ (NSString *)dt_room_click_mic;
++ (NSString *)dt_room_close_game;
++ (NSString *)dt_room_there_no_mic;
++ (NSString *)dt_room_back_game;
++ (NSString *)dt_room_confirm_flight;
++ (NSString *)dt_room_flight_tile;
++ (NSString *)dt_room_sure_end_game;
++ (NSString *)dt_room_unable_switch_game;
++ (NSString *)dt_room_sure_leave_cur_room;
++ (NSString *)dt_room_unable_speak_present;
+
++ (NSString *)dt_login_has_expired;
++ (NSString *)dt_next_time_again_say;
++ (NSString *)dt_update_now;
++ (NSString *)dt_update_app_ver_low;
++ (NSString *)dt_update_app_ver_new;
++ (NSString *)dt_unable_microphone_open;
++ (NSString *)dt_unable_microphone_not_have;
++ (NSString *)dt_unable_microphone_tip;
++ (NSString *)dt_settings_more_set;
++ (NSString *)dt_follow_system;
+
 
 @end
 NS_ASSUME_NONNULL_END

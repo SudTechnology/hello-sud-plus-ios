@@ -82,12 +82,12 @@
     }
     if (model.upgradeType == 1) {
         /// 强制升级
-        [DTAlertView showTextAlert:@"您的App版本较低，请先升级版本" sureText:@"立即更新" cancelText:nil onSureCallback:^{
+        [DTAlertView showTextAlert:NSString.dt_update_app_ver_low sureText:NSString.dt_update_now cancelText:nil onSureCallback:^{
             [self openPath:model.packageUrl];
         } onCloseCallback:nil];
     } else if (model.upgradeType == 2) {
         /// 引导升级
-        [DTAlertView showTextAlert:@"已有新版本的体验，是否更新？" sureText:@"立即更新" cancelText:@"下次再说" onSureCallback:^{
+        [DTAlertView showTextAlert:NSString.dt_update_app_ver_new sureText:NSString.dt_update_now cancelText:NSString.dt_next_time_again_say onSureCallback:^{
             [self openPath:model.packageUrl];
         } onCloseCallback:nil];
     }

@@ -32,6 +32,11 @@
     
 }
 
+- (void)setGameName:(NSString *)gameName {
+    _gameName = gameName;
+    self.titleLabel.text = gameName;
+}
+
 - (BOOL)dtIsHiddenNavigationBar {
     return true;
 }
@@ -76,7 +81,7 @@
         model.bgImgStr = [NSString stringWithFormat:@"tickets_item_%d_bg", i];
         model.goldImgStr = [NSString stringWithFormat:@"tickets_item_%d_gold", i];
         model.btnImgStr = [NSString stringWithFormat:@"tickets_item_%d_btn", i];
-        model.rewardStr = [NSString stringWithFormat:@"赢%@倍奖励", rewardArr[i]];
+        model.rewardStr = [NSString stringWithFormat:NSString.dt_ticket_choose_item_reward, rewardArr[i]];
         model.isHiddenHot = i == 0;
         item.model = model;
         item.tag = 1000 + i;
@@ -111,7 +116,6 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = UILabel.new;
-        _titleLabel.text = @"狼人杀";
         _titleLabel.textColor = UIColor.whiteColor;
         _titleLabel.font = UIFONT_MEDIUM(18);
     }

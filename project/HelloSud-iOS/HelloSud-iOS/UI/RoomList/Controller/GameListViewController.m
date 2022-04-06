@@ -104,7 +104,7 @@
         [weakSelf.tableView reloadData];
         weakSelf.noDataLabel.hidden = weakSelf.dataList.count != 0;
     } failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
+        [ToastUtil show:[error debugDescription]];
     }];
 }
 

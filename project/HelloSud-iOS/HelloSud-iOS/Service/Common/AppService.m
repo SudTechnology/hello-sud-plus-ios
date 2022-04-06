@@ -159,8 +159,8 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
             return;
         }
         weakSelf.configModel = model;
-    }                       failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
+    } failure:^(id error) {
+        [ToastUtil show:[error debugDescription]];
     }];
 }
 

@@ -61,7 +61,7 @@
 }
 
 - (void)dtUpdateUI {
-    self.roomNumLabel.text = [NSString stringWithFormat: @"房号 %@", AudioRoomService.shared.currentRoomVC.roomID];
+    self.roomNumLabel.text = [NSString stringWithFormat: NSString.dt_room_num_id, AudioRoomService.shared.currentRoomVC.roomID];
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld", AudioRoomService.shared.currentRoomVC.totalUserCount];
 }
 
@@ -146,7 +146,7 @@
 - (UILabel *)roomNameLabel {
     if (!_roomNameLabel) {
         _roomNameLabel = [[UILabel alloc] init];
-        _roomNameLabel.text = @"这世界那么多人";
+        _roomNameLabel.text = @"";
         _roomNameLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _roomNameLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         _roomNameLabel.textAlignment = NSTextAlignmentLeft;
@@ -157,7 +157,6 @@
 - (UILabel *)roomNumLabel {
     if (!_roomNumLabel) {
         _roomNumLabel = [[UILabel alloc] init];
-        _roomNumLabel.text = @"房号 0";
         _roomNumLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.6];
         _roomNumLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
     }
@@ -203,7 +202,7 @@
 - (UILabel *)roomModeLabel {
     if (!_roomModeLabel) {
         _roomModeLabel = [[UILabel alloc] init];
-        _roomModeLabel.text = @"选择游戏";
+        _roomModeLabel.text = NSString.dt_room_choose_game;
         _roomModeLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _roomModeLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
     }
@@ -223,7 +222,7 @@
         _endGameBtn = [[UIButton alloc] init];
         _endGameBtn.hidden = true;
         _endGameBtn.titleLabel.font = UIFONT_MEDIUM(12);
-        [_endGameBtn setTitle:@"结束游戏" forState:UIControlStateNormal];
+        [_endGameBtn setTitle:NSString.dt_room_end_game forState:UIControlStateNormal];
         _endGameBtn.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.2];
         [_endGameBtn addTarget:self action:@selector(onEndGameEvent:) forControlEvents:UIControlEventTouchUpInside];
     }

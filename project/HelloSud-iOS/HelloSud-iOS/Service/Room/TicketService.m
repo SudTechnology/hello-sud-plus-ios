@@ -28,7 +28,7 @@
 }
 
 - (NSMutableArray <NSAttributedString *> *)getTicketRewardAttributedStrArr {
-    NSArray <NSString *> *strArr = @[@"恭喜沐辰在高级场赢得900金币！", @"恭喜 安小六 在初级场赢得20金币！", @"恭喜 兔兔 在中级场赢得250金币！", @"恭喜 Toby 在高级场赢得900金币！", @"恭喜 Jennie 在高级场赢得900金币！", @"恭喜 Bell 在中级场赢得250金币！"];
+    NSArray <NSString *> *strArr = @[NSString.dt_ticket_reward_str_one, NSString.dt_ticket_reward_str_two, NSString.dt_ticket_reward_str_thr, NSString.dt_ticket_reward_str_four, NSString.dt_ticket_reward_str_five, NSString.dt_ticket_reward_str_six];
     NSMutableArray <NSAttributedString *> *dataArr = [NSMutableArray array];
     for (int i = 0; i < strArr.count; i++) {
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:strArr[i]];
