@@ -93,7 +93,7 @@
 /// @param cancelText 取消Item文本
 /// @param sureCb sure回调
 /// @param closeCb close回调
-+ (void)showTextAlert:(NSString *)msg sureText:(NSString *)sureText cancelText:(NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
++ (void)showTextAlert:(NSString *)msg sureText:(NSString *)sureText cancelText:(nullable NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(nullable void(^)(void))closeCb {
     DTTextAlertView *alert = [[DTTextAlertView alloc] init];
     [alert config:msg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
     [DTAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
