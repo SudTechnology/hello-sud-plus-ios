@@ -131,6 +131,7 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
     NSString *locale = [SettingsService getCurLanguageLocale];
     NSString *clientChannel = @"appstore";
     NSString *clientVersion = [NSString stringWithFormat:@"%@.%@", DeviceUtil.getAppVersion, DeviceUtil.getAppBuildCode];
+    NSString *buildNumber = DeviceUtil.getAppBuildCode;
     NSString *deviceId = DeviceUtil.getIdfv;
     NSString *systemType = @"iOS";
     NSString *systemVersion = DeviceUtil.getSystemVersion;
@@ -139,6 +140,7 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
             locale,
             clientChannel,
             clientVersion,
+            buildNumber,
             deviceId,
             systemType,
             systemVersion,
