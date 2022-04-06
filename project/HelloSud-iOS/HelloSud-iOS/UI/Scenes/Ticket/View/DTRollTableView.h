@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DTRollTableView : BaseView
 @property (nonatomic, strong) NSMutableArray <NSAttributedString *> *dataArray;
 - (void)reloadData;
+- (void)endTimer;
 @end
 
 NS_ASSUME_NONNULL_END

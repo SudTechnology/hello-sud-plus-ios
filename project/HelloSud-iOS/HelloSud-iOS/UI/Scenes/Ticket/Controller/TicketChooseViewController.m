@@ -22,6 +22,10 @@
 
 @implementation TicketChooseViewController
 
+- (void)dealloc {
+    [self.noticeView endTimer];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

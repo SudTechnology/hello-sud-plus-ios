@@ -36,10 +36,11 @@
         [tempArr addObject:self.dataArray[0]];
         self.dataArray = [NSMutableArray arrayWithArray:tempArr];;
         [self.tableView reloadData];
+        WeakSelf
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (self.dataArray.count > 0) {
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:false];
-                [self configTimer];
+            if (weakSelf.dataArray.count > 0) {
+                [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:false];
+                [weakSelf configTimer];
             }
         });
     } else {
@@ -64,9 +65,10 @@
     if (contentOffset.y >= self.rowHeight * self.dataArray.count) {
         NSLog(@"开始重复滚动动画");
         contentOffset.y = 0;
+        WeakSelf
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (self.dataArray.count > 0) {
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:false];
+            if (weakSelf.dataArray.count > 0) {
+                [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:false];
             }
         });
     }
