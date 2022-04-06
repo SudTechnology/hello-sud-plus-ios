@@ -243,41 +243,71 @@
         /// 无人，上麦
         [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:0 success:nil fail:nil];
         return;
-    } else if ([AppService.shared.login.loginUserInfo isMeByUserID:micModel.user.userID]) {
+    } else {
         BOOL isGameing = self.sudFSMMGDecorator.isPlaying;
+        // 是否是队长
+        BOOL isCaptain = self.sudFSMMGDecorator.captainUserId.length > 0 && [self.sudFSMMGDecorator.captainUserId isEqualToString:AppService.shared.login.loginUserInfo.userID];
+        NSString *micUserID = micModel.user.userID;
+        BOOL isMicUserInGame = [self.sudFSMMGDecorator isPlayerInGame:micUserID];
+        NSString *transCaptainStr = @"转让队长";
+        NSString *kickOutStr = @"踢出游戏";
+        NSArray *arrOperate = nil;
+        if ([AppService.shared.login.loginUserInfo isMeByUserID:micUserID]) {
+            arrOperate = @[NSString.dt_down_mic];
+        } else if (isCaptain && isMicUserInGame) {
+            arrOperate = @[transCaptainStr, kickOutStr];
+        }
+
+        if (!arrOperate) {
+            return;
+        }
+
         // 是自己或者房主
-        MicOperateView *v = [[MicOperateView alloc]initWithOperateList: @[NSString.dt_down_mic]];
+        MicOperateView *v = [[MicOperateView alloc]initWithOperateList: arrOperate];
         WeakSelf
         v.operateCallback = ^(NSString *str) {
-            if (isGameing) {
+
+            if ([str isEqualToString:transCaptainStr]) {
+                // 转让队长
+                [weakSelf.sudFSTAPPDecorator notifyAppComonSetCaptainStateWithUserId:micUserID];
                 [DTSheetView close];
-                [DTAlertView showTextAlert:NSString.dt_room_flight_tile sureText:NSString.dt_room_confirm_flight cancelText:NSString.dt_room_back_game onSureCallback:^{
+            } else if ([str isEqualToString:kickOutStr]) {
+                // 踢人
+                [weakSelf.sudFSTAPPDecorator notifyAppComonKickStateWithUserId:micUserID];
+                [DTSheetView close];
+            } else {
+
+                if (isGameing) {
+                    [DTSheetView close];
+                    [DTAlertView showTextAlert:NSString.dt_room_flight_tile sureText:NSString.dt_room_confirm_flight cancelText:NSString.dt_room_back_game onSureCallback:^{
+                        // 下麦
+                        [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
+
+                        [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
+                    } onCloseCallback:^{
+
+                    }];
+                } else {
+
                     // 下麦
                     [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
-                    
-                    [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
-                } onCloseCallback:^{
-                    
-                }];
-            } else {
-                
-                // 下麦
-                [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int)micModel.micIndex handleType:1 success:nil fail:nil];
-                
-                if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.login.loginUserInfo.userID]) {
-                    /// 先退出结束游戏，再退出当前游戏
-                    [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
-                    [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
-                } else if ([self.sudFSMMGDecorator isPlayerIsReady:AppService.shared.login.loginUserInfo.userID]) {
-                    /// 先取消准备游戏，再退出当前游戏
-                    [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:false];
-                    [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
-                }  else if ([self.sudFSMMGDecorator isPlayerIn:AppService.shared.login.loginUserInfo.userID]) {
-                    /// 退出当前游戏
-                    [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+
+                    if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.login.loginUserInfo.userID]) {
+                        /// 先退出结束游戏，再退出当前游戏
+                        [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
+                        [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                    } else if ([self.sudFSMMGDecorator isPlayerIsReady:AppService.shared.login.loginUserInfo.userID]) {
+                        /// 先取消准备游戏，再退出当前游戏
+                        [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:false];
+                        [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                    }  else if ([self.sudFSMMGDecorator isPlayerIn:AppService.shared.login.loginUserInfo.userID]) {
+                        /// 退出当前游戏
+                        [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                    }
+                    [DTSheetView close];
                 }
-                [DTSheetView close];
             }
+
         };
         v.cancelCallback = ^(UIButton *sender) {
             [DTSheetView close];
