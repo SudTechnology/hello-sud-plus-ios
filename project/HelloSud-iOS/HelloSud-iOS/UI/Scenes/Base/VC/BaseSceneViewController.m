@@ -379,6 +379,8 @@
         return;
     }
     switch (state) {
+        case VoiceBtnStateTypeNormal:
+            break;
         case VoiceBtnStateTypeUpMic: {
             // 请求上麦
             AudioRoomMicModel *emptyModel = [self getOneEmptyMic];
@@ -412,8 +414,6 @@
                     }          onCloseCallback:nil];
                 }
             }];
-            break;
-        default:
             break;
     }
 
