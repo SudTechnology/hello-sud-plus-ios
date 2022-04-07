@@ -8,9 +8,12 @@
 #import <UIKit/UIKit.h>
 #import "AccountUserModel.h"
 #import "ConfigModel.h"
+#import "LoginService.h"
+#import "TicketService.h"
 
 @class AudioConfigModel;
 
+/// RTC厂商类型名称
 extern NSString *const kRtcNameZego;
 extern NSString *const kRtcNameAgora;
 extern NSString *const kRtcNameRongCloud;
@@ -19,14 +22,20 @@ extern NSString *const kRtcNameVoicEngine;
 extern NSString *const kRtcNameAlibabaCloud;
 extern NSString *const kRtcNameTencentCloud;
 
+/// RTC厂商类型key
+extern NSString *const kRtcTypeZego;
+extern NSString *const kRtcTypeAgora;
+extern NSString *const kRtcTypeRongCloud;
+extern NSString *const kRtcTypeCommEase;
+extern NSString *const kRtcTypeVoicEngine;
+extern NSString *const kRtcTypeAlibabaCloud;
+extern NSString *const kRtcTypeTencentCloud;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// APP管理模块
 @interface AppService : NSObject
-/// 登录用户信息
-@property(nonatomic, strong, readonly) AccountUserModel *loginUserInfo;
-/// token
-@property(nonatomic, copy, readonly) NSString *token;
+
 /// 配置信息
 @property(nonatomic, strong) ConfigModel *configModel;
 /// 所有游戏列表
@@ -40,10 +49,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// rtc配置
 @property(nonatomic, strong) AudioConfigModel *rtcConfigModel;
 
+/// 登录服务
+@property (nonatomic, strong)LoginService *login;
+/// 房间场景服务
+@property (nonatomic, strong)AudioRoomService *audioRoom;
+/// 门票场景服务
+@property (nonatomic, strong)TicketService *ticket;
+
 + (instancetype)shared;
 
-/// 保持用户信息
-- (void)saveLoginUserInfo;
+- (void)prepare;
 
 /// 是否同意登录协议
 @property(nonatomic, assign, readonly) BOOL isAgreement;
@@ -51,25 +66,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 保存是否同意协议
 - (void)saveAgreement;
 
-/// 是否已经登录
-@property(nonatomic, assign, readonly) BOOL isLogin;
-/// 是否已经刷新token
-@property(nonatomic, assign) BOOL isRefreshedToken;
-
-/// 保存是否同意协议
-- (void)saveIsLogin;
-
 /// 随机名字
 - (NSString *)randomUserName;
 
 /// 设置请求header
 - (void)setupNetWorkHeader;
-
-/// 保存token
-- (void)saveToken:(NSString *)token;
-
-/// 刷新token
-- (void)refreshToken;
 
 /// 切换RTC厂商
 /// @param rtcType 对应rtc厂商类型
@@ -78,6 +79,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// 通过gameID获取游戏总人数
 /// @param gameID 游戏ID
 - (NSInteger)getTotalGameCountWithGameID:(NSInteger)gameID;
+
+/// 登录成功请求配置信息
+- (void)reqConfigData;
+/// 请求版本更新
+/// @param success
+/// @param fail
+- (void)reqAppUpdate:(RespModelBlock)success fail:(nullable ErrorStringBlock)fail;
+
+
+/// 获取RTC厂商名称
+/// @param rtcType rtc类型
+- (NSString *)getRTCTypeName:(NSString *)rtcType;
 @end
 
 NS_ASSUME_NONNULL_END

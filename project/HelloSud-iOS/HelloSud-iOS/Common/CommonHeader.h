@@ -18,6 +18,10 @@ typedef void(^StringBlock)(NSString *str);
 typedef void(^EmptyBlock)(void);
 /// 错误回调
 typedef void(^ErrorBlock)(NSError *error);
+/// 错误回调
+typedef void(^ErrorStringBlock)(NSString *errMsg);
+/// 整形回调
+typedef void(^Int64Block)(int64_t);
 
 
 /// Utils
@@ -25,6 +29,7 @@ typedef void(^ErrorBlock)(NSError *error);
 #import "AppUtil.h"
 #import "DeviceUtil.h"
 #import "ToastUtil.h"
+#import "LanguageUtil.h"
 /// Base
 #import "BaseView.h"
 #import "BaseModel.h"
@@ -36,6 +41,7 @@ typedef void(^ErrorBlock)(NSError *error);
 #import "DTUIColor+Extension.h"
 #import "DTUIDevice+Extension.h"
 #import "DTNSError+Custom.h"
+#import "NSBundle+Language.h"
 
 /// Views
 #import "DTSheetView.h"

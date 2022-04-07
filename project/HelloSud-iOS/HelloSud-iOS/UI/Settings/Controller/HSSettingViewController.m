@@ -10,6 +10,7 @@
 #import "HSSettingModel.h"
 #import "HSSetingHeadView.h"
 #import "VersionInfoViewController.h"
+#import "SwitchLanguageViewController.h"
 #import "MoreSettingViewController.h"
 
 @interface HSSettingViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -25,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"设置";
+    self.title = NSString.dt_tab_setting;
     self.navigationItem.leftBarButtonItem = nil;
     // Do any additional setup after loading the view.
     [self configData];
@@ -35,17 +36,17 @@
 /// 配置页面数据
 - (void)configData {
     HSSettingModel *verModel = [HSSettingModel new];
-    verModel.title = @"版本信息";
+    verModel.title = NSString.dt_settings_version_info;
     verModel.isMore = YES;
     verModel.pageURL = @"";
 
     HSSettingModel *rtcModel = [HSSettingModel new];
-    rtcModel.title = @"更多设置";
+    rtcModel.title = NSString.dt_settings_more_set;
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
 
     HSSettingModel *languageModel = [HSSettingModel new];
-    languageModel.title = @"切换语言";
+    languageModel.title = NSString.dt_settings_switch_language;
     languageModel.isMore = YES;
     languageModel.pageURL = @"";
 
@@ -56,15 +57,15 @@
     gitHubModel.isMore = YES;
     gitHubModel.pageURL = @"https://github.com/SudTechnology/hello-sud-ios";
     HSSettingModel *oProtocolModel = [HSSettingModel new];
-    oProtocolModel.title = @"开源协议";
+    oProtocolModel.title = NSString.dt_settings_open_source;
     oProtocolModel.isMore = YES;
     oProtocolModel.pageURL = [SettingsService appLicenseURL].absoluteString;
     HSSettingModel *userProtocolModel = [HSSettingModel new];
-    userProtocolModel.title = @"用户协议";
+    userProtocolModel.title = NSString.dt_settings_user_agreement;
     userProtocolModel.isMore = YES;
     userProtocolModel.pageURL = [SettingsService appProtocolURL].absoluteString;
     HSSettingModel *privacyModel = [HSSettingModel new];
-    privacyModel.title = @"隐私政策";
+    privacyModel.title = NSString.dt_settings_privacy_policy;
     privacyModel.isMore = YES;
     privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
 
@@ -128,7 +129,7 @@
         _contactUsView.frame = CGRectMake(0, 0, kScreenWidth, 50);
         UILabel *usLabel = UILabel.new;
         usLabel.numberOfLines = 0;
-        usLabel.text = @"如需要了解更多资讯或反馈问题，可通过邮箱联系我们：\nhelp@sud.tech";
+        usLabel.text = NSString.dt_settings_contact_us;
         usLabel.textColor = HEX_COLOR(@"#8A8A8E");
         usLabel.font = UIFONT_REGULAR(12);
         usLabel.textAlignment = NSTextAlignmentCenter;
@@ -157,14 +158,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
-    if ([model.title isEqualToString:@"版本信息"]) {
+    if ([model.title isEqualToString:NSString.dt_settings_version_info]) {
         VersionInfoViewController *vc = VersionInfoViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ([model.title isEqualToString:@"更多设置"]) {
+    } else if ([model.title isEqualToString:NSString.dt_settings_more_set]) {
         MoreSettingViewController *vc = MoreSettingViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ([model.title isEqualToString:@"切换语言"]) {
-        [ToastUtil show:@"正在制作中, 敬请期待!"];
+    } else if ([model.title isEqualToString:NSString.dt_settings_switch_language]) {
+//        [ToastUtil show:NSString.dt_settings_work_in_progress];
+        SwitchLanguageViewController *vc = SwitchLanguageViewController.new;
+        [self.navigationController pushViewController:vc animated:YES];
     } else if ([model.title isEqualToString:@"GitHub"]) {
         if (@available(iOS 10.0, *)) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.pageURL] options:@{} completionHandler:nil];

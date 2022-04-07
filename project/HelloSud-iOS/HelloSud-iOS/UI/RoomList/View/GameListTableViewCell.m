@@ -24,14 +24,14 @@
 - (void)setModel:(BaseModel *)model {
     HSRoomInfoList *m = (HSRoomInfoList *) model;
     self.roomNameLabel.text = m.roomName;
-    self.roomNumLabel.text = [NSString stringWithFormat:@"房间号：%ld", m.roomId];
-    self.onlineLabel.text = [NSString stringWithFormat:@"%ld人", m.memberCount];
+    self.roomNumLabel.text = [NSString stringWithFormat:@"%@：%ld", NSString.dt_room_list_room_number, m.roomId];
+    self.onlineLabel.text = [NSString stringWithFormat:@"%ld%@", m.memberCount, NSString.dt_room_list_users];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
-    self.typeLabel.text = [m.rtcType isEqualToString:@"zego"] ? @"即构" : @"声网";
+    self.typeLabel.text = [AppService.shared getRTCTypeName:m.rtcType];
     
     for (HSSceneModel *sModel in AppService.shared.sceneList) {
         if (sModel.sceneId == m.sceneType) {
-            self.roomTypeLabel.text = [sModel.sceneName stringByReplacingOccurrencesOfString:@"场景"withString:@""];
+            self.roomTypeLabel.text = [sModel.sceneName stringByReplacingOccurrencesOfString:NSString.dt_room_list_scene withString:@""];
         }
     }
 }
@@ -120,7 +120,7 @@
     if (!_roomTypeLabel) {
         _roomTypeLabel = [[DTPaddingLabel alloc] init];
         _roomTypeLabel.paddingX = 5;
-        _roomTypeLabel.text = @"语音房";
+        _roomTypeLabel.text = @"";
         _roomTypeLabel.textColor = [UIColor dt_colorWithHexString:@"#999999" alpha:1];
         _roomTypeLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
         _roomTypeLabel.textAlignment = NSTextAlignmentCenter;
@@ -132,7 +132,7 @@
 - (UILabel *)roomNameLabel {
     if (!_roomNameLabel) {
         _roomNameLabel = [[UILabel alloc] init];
-        _roomNameLabel.text = @"飞镖达人";
+        _roomNameLabel.text = @"";
         _roomNameLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _roomNameLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightRegular];
         _roomNameLabel.textAlignment = NSTextAlignmentLeft;
@@ -143,7 +143,6 @@
 - (UILabel *)roomNumLabel {
     if (!_roomNumLabel) {
         _roomNumLabel = [[UILabel alloc] init];
-        _roomNumLabel.text = @"房间号：0";
         _roomNumLabel.textColor = [UIColor dt_colorWithHexString:@"#666666" alpha:1];
         _roomNumLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     }
@@ -163,7 +162,7 @@
 - (UIButton *)enterRoomBtn {
     if (!_enterRoomBtn) {
         _enterRoomBtn = [[UIButton alloc] init];
-        [_enterRoomBtn setTitle:@"进入" forState:normal];
+        [_enterRoomBtn setTitle:NSString.dt_home_enter forState:normal];
         _enterRoomBtn.backgroundColor = UIColor.blackColor;
         _enterRoomBtn.titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
         [_enterRoomBtn setTitleColor:UIColor.whiteColor forState:normal];
@@ -183,7 +182,7 @@
 - (UILabel *)typeLabel {
     if (!_typeLabel) {
         _typeLabel = UILabel.new;
-        _typeLabel.text = @"即构";
+        _typeLabel.text = @"";
         _typeLabel.textColor = UIColor.blackColor;
         _typeLabel.backgroundColor = UIColor.whiteColor;
         _typeLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];

@@ -29,8 +29,8 @@
     CGFloat agora = 15.5;
     NSArray <NSNumber *> *sizeArr = @[@1.6, @0.135, @32.21, @(zego + agora)];
     CGFloat sum = [[sizeArr valueForKeyPath:@"@sum.floatValue"] floatValue];
-    self.sizeLabel.text = [NSString stringWithFormat:@"总%.02fM", sum];
 
+    self.sizeLabel.text = [NSString stringWithFormat:@"%@%.02fM", NSString.dt_settings_total, sum];
     for (int i = 0; i < colorArr.count; i++) {
         HSSettingHeaderModel *m = HSSettingHeaderModel.new;
         m.color = colorArr[i];
@@ -118,7 +118,7 @@
         _titleLabel = UILabel.new;
         _titleLabel.textColor = HEX_COLOR(@"#1A1A1A");
         _titleLabel.font = UIFONT_MEDIUM(16);
-        _titleLabel.text = @"占用大小";
+        _titleLabel.text = NSString.dt_settings_size_occupied;
     }
     return _titleLabel;
 }

@@ -33,7 +33,8 @@
 
 /// 请求创建房间
 /// @param sceneType 场景类型
-- (void)reqCreateRoom:(NSInteger)sceneType {
+/// @param gameLevel 游戏等级（适配当前门票场景）= -1
+- (void)reqCreateRoom:(NSInteger)sceneType gameLevel:(NSInteger)gameLevel {
     if (self.isReqCreate) {
         NSLog(@"there is req create room, so skip it");
         return;
@@ -43,6 +44,9 @@
     dicParam[@"sceneType"] = @(sceneType);
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
+    }
+    if (sceneType == SceneTypeTicket) {
+        dicParam[@"gameLevel"] = @(gameLevel);
     }
     WeakSelf
     [HttpService postRequestWithApi:kINTERACTURL(@"room/create-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
@@ -84,14 +88,17 @@
             NSLog(@"there is a AudioRoomViewController in the stack");
             return;
         }
+        weakSelf.sceneType = model.sceneType;
+        AppService.shared.ticket.ticketLevelType = model.gameLevel;
         weakSelf.roleType = model.roleType;
-        AudioRoomViewController *vc = [[AudioRoomViewController alloc] init];
+        AudioSceneConfigModel *config = [[AudioSceneConfigModel alloc] init];
+        config.gameId = model.gameId;
+        config.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
+        config.roomType = model.gameId == 0 ? HSAudio : HSGame;
+        config.roomName = model.roomName;
+        config.enterRoomModel = model;
+        BaseSceneViewController *vc = [SceneFactory createSceneVC:weakSelf.sceneType configModel:config];
         AudioRoomService.shared.currentRoomVC = vc;
-        vc.gameId = model.gameId;
-        vc.enterModel = model;
-        vc.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
-        vc.roomType = model.gameId == 0 ? HSAudio : HSGame;
-        vc.roomName = model.roomName;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
         if (success) {
             success();
@@ -123,7 +130,8 @@
 
 /// 匹配开播的游戏，并进入游戏房间
 /// @param gameId 游戏ID
-- (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType {
+/// @param gameLevel 游戏等级（适配当前门票场景）= -1 
+- (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType gameLevel:(NSInteger)gameLevel {
     WeakSelf
     if (self.isMatchingRoom) {
         NSLog(@"there is req match room, so skip it");
@@ -135,6 +143,9 @@
     dicParam[@"sceneType"] = @(sceneType);
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
+    }
+    if (sceneType == SceneTypeTicket) {
+        dicParam[@"gameLevel"] = @(gameLevel);
     }
     [HttpService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
 
@@ -245,5 +256,8 @@
     }];
 }
 
-
+#pragma mark - TicketService
+- (NSMutableArray <NSAttributedString *> *)getTicketRewardAttributedStrArr {
+    return @[];
+}
 @end

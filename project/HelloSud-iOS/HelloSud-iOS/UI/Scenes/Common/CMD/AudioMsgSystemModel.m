@@ -19,6 +19,7 @@
     NSMutableArray *arr = NSMutableArray.new;
     [arr addObject:@"content"];
     [arr addObject:@"_attrContent"];
+    [arr addObject:@"bgColor"];
     return arr;
 }
 
@@ -28,6 +29,7 @@
     AudioMsgSystemModel *m = AudioMsgSystemModel.new;
     [m configBaseInfoWithCmd:CMD_CHAT_TEXT_NOTIFY];
     m.content = content;
+    m.bgColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.3];
     return m;
 }
 
@@ -37,6 +39,7 @@
     AudioMsgSystemModel *m = AudioMsgSystemModel.new;
     [m configBaseInfoWithCmd:CMD_CHAT_TEXT_NOTIFY];
     [m updateContent:content];
+    m.bgColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.3];
     return m;
 }
 

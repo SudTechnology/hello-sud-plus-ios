@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param arrUserID arrUserID description
 /// @param finished finished description
 - (void)asyncCacheUserInfo:(NSArray<NSNumber *>*)arrUserID finished:(EmptyBlock)finished;
+/// 获取用户金币
+/// @param success
+/// @param fail
+- (void)reqUserCoinDetail:(Int64Block)success fail:(StringBlock)fail;
 @end
 
 NS_ASSUME_NONNULL_END

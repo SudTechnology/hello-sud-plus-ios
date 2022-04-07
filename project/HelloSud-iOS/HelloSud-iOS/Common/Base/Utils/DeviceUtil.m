@@ -28,6 +28,15 @@
     }
 }
 
++ (NSString *)getIdfv {
+    return [UIDevice currentDevice].identifierForVendor.UUIDString;
+}
+
++ (NSString *)getSystemVersion {
+    return [UIDevice currentDevice].systemVersion;
+}
+
+
 /// 检测权限
 /// @param result 结果回调
 + (void)checkMicAuth:(void(^)(BOOL isAuth))result {

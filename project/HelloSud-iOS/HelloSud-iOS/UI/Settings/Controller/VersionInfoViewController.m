@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"版本信息";
+    self.title = NSString.dt_settings_version_info;
     [self configData];
 }
 

@@ -8,15 +8,13 @@
 #import "AppService.h"
 #import "ZegoAudioEngineImpl.h"
 #import "AgoraAudioEngineImpl.h"
-#import "AudioConfigModel.h"
-/// 用户信息缓存key
-#define kKeyLoginUserInfo @"key_login_user_info"
+#import "NeteaseAudioEngineImpl.h"
+#import "TXAudioEngineImpl.h"
+#import "VolcAudioEngineImpl.h"
+#import "AliyunAudioEngineImpl.h"
 /// 用户登录确认key
 #define kKeyLoginAgreement @"key_login_agreement"
-/// 用户是否登录缓存key
-#define kKeyLoginIsLogin @"key_login_isLogin"
-/// 用户是否登录token缓存key
-#define kKeyLoginToken @"key_login_token"
+
 /// 当前选中RTC类型缓存key
 #define kKeyCurrentRTCType @"key_current_rtc_type"
 /// 配置信息缓存key
@@ -30,6 +28,14 @@ NSString *const kRtcNameCommEase = @"网易云信";
 NSString *const kRtcNameVoicEngine = @"火山引擎";
 NSString *const kRtcNameAlibabaCloud = @"阿里云";
 NSString *const kRtcNameTencentCloud = @"腾讯云";
+
+NSString *const kRtcTypeZego = @"Zego";
+NSString *const kRtcTypeAgora = @"Agora";
+NSString *const kRtcTypeRongCloud = @"RongCloud";
+NSString *const kRtcTypeCommEase = @"CommsEase";
+NSString *const kRtcTypeVoicEngine = @"VoicEngine";
+NSString *const kRtcTypeAlibabaCloud = @"AlibabaCloud";
+NSString *const kRtcTypeTencentCloud = @"TencentCloud";
 
 
 @interface AppService ()
@@ -47,36 +53,36 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
     return g_manager;
 }
 
-- (instancetype)init {
-    if (self = [super init]) {
-        [self config];
+- (LoginService *)login {
+    if (!_login) {
+        _login = [[LoginService alloc] init];
     }
-    return self;
+    return _login;
+}
+
+- (AudioRoomService *)audioRoom {
+    if (!_audioRoom) {
+        _audioRoom = [[AudioRoomService alloc] init];
+    }
+    return _audioRoom;
+}
+
+- (TicketService *)ticket {
+    if (!_ticket) {
+        _ticket = [[TicketService alloc] init];
+    }
+    return _ticket;
+}
+
+- (void)prepare {
+    [self.login prepare];
+    [self config];
 }
 
 - (void)config {
-    id temp = [NSUserDefaults.standardUserDefaults objectForKey:kKeyLoginUserInfo];
-    if (temp && [temp isKindOfClass:NSString.class]) {
-        AccountUserModel *m = [AccountUserModel mj_objectWithKeyValues:temp];
-        _loginUserInfo = m;
-    } else {
-        AccountUserModel *m = AccountUserModel.new;
-        _loginUserInfo = m;
-        m.userID = @"";
-        m.name = @"";
-        m.icon = @"";
-        m.sex = 1;
-    }
 
     _isAgreement = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginAgreement];
-    _isLogin = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginIsLogin];
-    id temp_token = [NSUserDefaults.standardUserDefaults objectForKey:kKeyLoginToken];
-    if (temp_token && [temp_token isKindOfClass:NSString.class]) {
-        _token = temp_token;
-        [self saveIsLogin];
-        [self setupNetWorkHeader];
-        [self reqConfigData];
-    }
+
     NSString *cacheRTCType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
     NSString *configStr = [NSUserDefaults.standardUserDefaults stringForKey:kKeyConfigModel];
     if (configStr) {
@@ -108,26 +114,11 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 
-/// 保持用户信息
-- (void)saveLoginUserInfo {
-    if (self.loginUserInfo) {
-        NSString *jsonStr = [self.loginUserInfo mj_JSONString];
-        [NSUserDefaults.standardUserDefaults setObject:jsonStr forKey:kKeyLoginUserInfo];
-        [NSUserDefaults.standardUserDefaults synchronize];
-    }
-}
 
 /// 保存是否同意协议
 - (void)saveAgreement {
     _isAgreement = true;
     [NSUserDefaults.standardUserDefaults setBool:true forKey:kKeyLoginAgreement];
-    [NSUserDefaults.standardUserDefaults synchronize];
-}
-
-/// 保存登录状态
-- (void)saveIsLogin {
-    _isLogin = true;
-    [NSUserDefaults.standardUserDefaults setBool:true forKey:kKeyLoginIsLogin];
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 
@@ -139,24 +130,36 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
 
 /// 设置请求header
 - (void)setupNetWorkHeader {
-    if (self.token) {
-        [HttpService setupHeader:@{@"Authorization": self.token}];
+    NSString *token = AppService.shared.login.token;
+    if (AppService.shared.login.token) {
+        [HttpService setupHeader:@{@"Authorization": token}];
+        // 图片拉取鉴权
+        SDWebImageDownloader *downloader = (SDWebImageDownloader *) [SDWebImageManager sharedManager].imageLoader;
+        [downloader setValue:token forHTTPHeaderField:@"Authorization"];
     } else {
         NSLog(@"设置APP请求头token为空");
     }
-    // 图片拉取鉴权
-    SDWebImageDownloader *downloader = (SDWebImageDownloader *) [SDWebImageManager sharedManager].imageLoader;
-    [downloader setValue:self.token forHTTPHeaderField:@"Authorization"];
-}
+    NSString *locale = [SettingsService getCurLanguageLocale];
+    NSString *clientChannel = @"appstore";
+    NSString *clientVersion = [NSString stringWithFormat:@"%@", DeviceUtil.getAppVersion];
+    NSString *buildNumber = DeviceUtil.getAppBuildCode;
+    NSString *deviceId = DeviceUtil.getIdfv;
+    NSString *systemType = @"iOS";
+    NSString *systemVersion = DeviceUtil.getSystemVersion;
+    NSString *clientTimestamp = [NSString stringWithFormat:@"%ld", (NSInteger) [NSDate date].timeIntervalSince1970];
+    NSArray *arr = @[
+            locale,
+            clientChannel,
+            clientVersion,
+            buildNumber,
+            deviceId,
+            systemType,
+            systemVersion,
+            clientTimestamp
+    ];
+    NSString *sudMeta = [arr componentsJoinedByString:@","];
+    [HttpService setupHeader:@{@"Sud-Meta": sudMeta}];
 
-/// 保存token
-- (void)saveToken:(NSString *)token {
-    _token = token;
-    [self setupNetWorkHeader];
-    [NSUserDefaults.standardUserDefaults setValue:token forKey:kKeyLoginToken];
-    [NSUserDefaults.standardUserDefaults synchronize];
-
-    [self reqConfigData];
 }
 
 /// 登录成功请求配置信息
@@ -174,6 +177,46 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
     }];
 }
 
+- (void)reqAppUpdate:(RespModelBlock)success fail:(nullable ErrorStringBlock)fail {
+
+    [HttpService postRequestWithApi:kBASEURL(@"check-upgrade/v1") param:nil success:^(NSDictionary *rootDict) {
+        RespVersionUpdateInfoModel *model = [RespVersionUpdateInfoModel decodeModel:rootDict];
+        if (model.retCode != 0) {
+            if (fail) {
+                fail(model.errorMsg);
+            }
+            return;
+        }
+        success(model);
+    }                       failure:^(id error) {
+        if (fail) {
+            fail([error debugDescription]);
+        }
+    }];
+}
+
+/// 获取RTC厂商名称
+/// @param rtcType rtc类型
+- (NSString *)getRTCTypeName:(NSString *)rtcType {
+
+    if ([rtcType isEqualToString:kRtcTypeZego]) {
+        return NSString.dt_settings_zego;
+    } else if ([rtcType isEqualToString:kRtcTypeAgora]) {
+        return NSString.dt_settings_agora;
+    } else if ([rtcType isEqualToString:kRtcTypeRongCloud]) {
+        return kRtcNameRongCloud;
+    } else if ([rtcType isEqualToString:kRtcTypeCommEase]) {
+        return kRtcNameCommEase;
+    } else if ([rtcType isEqualToString:kRtcTypeVoicEngine]) {
+        return kRtcNameVoicEngine;
+    } else if ([rtcType isEqualToString:kRtcTypeAlibabaCloud]) {
+        return kRtcNameAlibabaCloud;
+    } else if ([rtcType isEqualToString:kRtcTypeTencentCloud]) {
+        return kRtcNameTencentCloud;
+    }
+    return @"";
+}
+
 - (NSArray<NSString *> *)randomNameArr {
     if (!_randomNameArr) {
         _randomNameArr = @[@"哈利", @"祺祥", @"沐辰", @"阿米莉亚", @"齐默尔曼", @"陌北", @"旺仔", @"半夏", @"朝雨", @"卫斯理", @"阿道夫", @"长青", @"安小六", @"小凡", @"炎月", @"醉风", @"斯科特", @"布卢默", @"宛岩", @"平萱", @"凝雁", @"怀亚特", @"格伦巴特", @"尔白", @"南露", @"爱丽丝", @"埃尔维斯", @"奥利维亚", @"妙竹", @"雲思衣", @"少女大佬", @"兔兔别跑", @"夏纱", @"嘉慕", @"阿拉贝拉", @"星剑", @"罗德斯", @"渡满归", @"星浅", @"问水", @"星奕晨", @"丹尼尔", @"白止扇", @"暖暖", @"埃迪", @"杰里米", @"玛德琳", @"波佩", @"卡诺", @"泡芙", @"帕特里克", @"梅雷迪斯", @"公孙昕", @"青弘", @"潘豆豆", @"小番秀二", @"大一宇", @"米奇", @"戴夫", @"伯特", @"米洛布雷", @"阿德莱德", @"吉宝", @"伊娃", @"路易斯", @"希拉姆", @"杰西", @"贝特西", @"利奥波德", @"丽塔", @"拉姆斯登", @"伯纳德", @"理查德", @"奥尔德里奇", @"劳里", @"奥兰多", @"埃尔罗伊", @"栗和顺", @"朱雀佳行", @"理德拉", @"凡勃伦", @"科波菲尔", @"玉谷大三", @"大木元司", @"钮阳冰", @"盖勤", @"紫心", @"弘慕慕", @"怀星驰", @"泉宏胜", @"闻人星海", @"Watt", @"Kevin", @"Toby", @"瓦利斯", @"苏珊娜", @"罗密欧", @"福克纳", @"多萝西", @"贝尔", @"卡门", @"安德烈", @"朱丽叶", @"吉姆"];
@@ -183,14 +226,7 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
 
 /// 刷新token
 - (void)refreshToken {
-    if (AppService.shared.isLogin) {
-        NSString *name = AppService.shared.loginUserInfo.name;
-        NSString *userID = AppService.shared.loginUserInfo.userID;
-        if (name.length > 0) {
-            [LoginService.shared reqLogin:name userID:userID sucess:^{
-                self.isRefreshedToken = YES;
-            }];
-        }
+    if (AppService.shared.login.isLogin) {
     }
 }
 
@@ -223,41 +259,55 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
     }
 
     NSLog(@"切换RTC厂商:%@", rtcType);
+    HSConfigContent *rtcConfig = nil;
     [AudioEngineFactory.shared.audioEngine destroy];
-
     if (configModel.zegoCfg && [rtcType isEqualToString:configModel.zegoCfg.rtcType]) {
+
         NSLog(@"使用zego语音引擎");
-        /// 使用zego语音引擎
         [AudioEngineFactory.shared createEngine:ZegoAudioEngineImpl.class];
-        /// 初始化zego引擎SDK
-        NSString *appID = configModel.zegoCfg.appId;
-        NSString *appKey = configModel.zegoCfg.appKey;
-        if (appID.length > 0 && appKey.length > 0) {
+        rtcConfig = configModel.zegoCfg;
+    } else if (configModel.agoraCfg && [rtcType isEqualToString:configModel.agoraCfg.rtcType]) {
+
+        NSLog(@"使用agora语音引擎");
+        [AudioEngineFactory.shared createEngine:AgoraAudioEngineImpl.class];
+        rtcConfig = configModel.agoraCfg;
+    } else if (configModel.commsEaseCfg && [rtcType isEqualToString:configModel.commsEaseCfg.rtcType]) {
+
+        NSLog(@"使用commsEas语音引擎");
+        [AudioEngineFactory.shared createEngine:NeteaseAudioEngineImpl.class];
+        rtcConfig = configModel.commsEaseCfg;
+    } else if (configModel.tencentCloudCfg && [rtcType isEqualToString:configModel.tencentCloudCfg.rtcType]) {
+
+        NSLog(@"使用TencentCloud语音引擎");
+        [AudioEngineFactory.shared createEngine:TXAudioEngineImpl.class];
+        rtcConfig = configModel.tencentCloudCfg;
+    } else if (configModel.voicEngineCfg && [rtcType isEqualToString:configModel.voicEngineCfg.rtcType]) {
+
+        NSLog(@"使用VoicEngine语音引擎");
+        [AudioEngineFactory.shared createEngine:VolcAudioEngineImpl.class];
+        rtcConfig = configModel.voicEngineCfg;
+    } else if (configModel.alibabaCloudCfg && [rtcType isEqualToString:configModel.alibabaCloudCfg.rtcType]) {
+
+        NSLog(@"使用AlibabaCloud语音引擎");
+        [AudioEngineFactory.shared createEngine:AliyunAudioEngineImpl.class];
+        rtcConfig = configModel.alibabaCloudCfg;
+    } else {
+        [ToastUtil show:@"切换RTC厂商失败，对应配置为空"];
+    }
+
+    /// 初始化引擎SDK
+    if (rtcConfig) {
+        NSString *appID = rtcConfig.appId;
+        NSString *appKey = rtcConfig.appKey;
+        if (appID.length > 0) {
             AudioConfigModel *model = [[AudioConfigModel alloc] init];
             model.appId = appID;
             model.appKey = appKey;
             self.rtcConfigModel = model;
-        } else {
-            [ToastUtil show:@"切换zego语音引擎失败，对应配置为空"];
+            return;
         }
-    } else if (configModel.agoraCfg && [rtcType isEqualToString:configModel.agoraCfg.rtcType]) {
-        NSLog(@"使用agora语音引擎");
-        /// 使用agora语音引擎
-        [AudioEngineFactory.shared createEngine:AgoraAudioEngineImpl.class];
-        /// 初始化agora引擎SDK
-        NSString *appID = configModel.agoraCfg.appId;
-        if (appID.length > 0) {
-            AudioConfigModel *model = [[AudioConfigModel alloc] init];
-            model.appId = appID;
-            model.userID = _loginUserInfo.userID;
-            model.token = @"";
-            self.rtcConfigModel = model;
-        } else {
-            [ToastUtil show:@"切换agora语音引擎失败，对应配置为空"];
-        }
-    } else {
-        [ToastUtil show:@"切换RTC厂商失败，对应配置为空"];
     }
+    [ToastUtil show:[NSString stringWithFormat:@"切换%@语音引擎失败，对应配置为空", rtcConfig.rtcType]];
 
 }
 
@@ -275,6 +325,7 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
     }
     return count;
 }
+
 
 @end
 

@@ -6,6 +6,7 @@
 //
 
 #import "SearchHeaderView.h"
+#import "UserDetailView.h"
 
 @interface SearchHeaderView () <UITextFieldDelegate>
 @property (nonatomic, strong) UIImageView *headerView;
@@ -67,12 +68,27 @@
 }
 
 - (void)dtUpdateUI {
-    AccountUserModel *userInfo = AppService.shared.loginUserInfo;
+    AccountUserModel *userInfo = AppService.shared.login.loginUserInfo;
     self.userNameLabel.text = userInfo.name;
-    self.userIdLabel.text = [NSString stringWithFormat:@"用户ID %@", userInfo.userID];
+    self.userIdLabel.text = [NSString stringWithFormat:@"%@ %@", NSString.dt_home_user_id, userInfo.userID];
     if (userInfo.icon.length > 0) {
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:userInfo.icon]];
     }
+}
+
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    self.headerView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapHead:)];
+    [self.headerView addGestureRecognizer:tap];
+}
+
+- (void)onTapHead:(id)tap {
+    /// 展示用户金币信息
+    UserDetailView *v = [[UserDetailView alloc] init];
+    [DTAlertView show:v rootView:AppUtil.currentWindow isHitTest:YES onCloseCallback:^{
+
+    }];
 }
 
 - (UIImageView *)headerView {
@@ -87,7 +103,7 @@
 - (UILabel *)userNameLabel {
     if (!_userNameLabel) {
         _userNameLabel = [[UILabel alloc] init];
-        _userNameLabel.text = @"傲性小仙女";
+        _userNameLabel.text = @"";
         _userNameLabel.numberOfLines = 1;
         _userNameLabel.textColor = [UIColor dt_colorWithHexString:@"#13141A" alpha:1];
         _userNameLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightMedium];
@@ -117,7 +133,7 @@
 - (UITextField *)searchTextField {
     if (!_searchTextField) {
         _searchTextField = [[UITextField alloc] init];
-        _searchTextField.placeholder = @"输入房间号快速进入";
+        _searchTextField.placeholder = NSString.dt_home_enter_room_num;
         _searchTextField.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         _searchTextField.textColor = UIColor.blackColor;
         _searchTextField.keyboardType = UIKeyboardTypeNumberPad;
@@ -129,7 +145,7 @@
 - (UIButton *)searchBtn {
     if (!_searchBtn) {
         _searchBtn = [[UIButton alloc] init];
-        [_searchBtn setTitle:@"进入" forState:UIControlStateNormal];
+        [_searchBtn setTitle:NSString.dt_home_enter forState:UIControlStateNormal];
         _searchBtn.backgroundColor = UIColor.blackColor;
         _searchBtn.titleLabel.textColor = UIColor.whiteColor;
         _searchBtn.titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];

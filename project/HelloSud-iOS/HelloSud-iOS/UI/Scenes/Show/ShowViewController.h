@@ -5,12 +5,12 @@
 //  Created by kaniel on 2022/2/9.
 //
 
-#import "BaseViewController.h"
+#import "BaseSceneViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 秀场场景
-@interface ShowViewController : BaseViewController
+@interface ShowViewController : BaseSceneViewController
 
 @end
 

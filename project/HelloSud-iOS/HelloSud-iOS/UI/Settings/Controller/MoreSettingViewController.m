@@ -8,9 +8,7 @@
 #import "MoreSettingViewController.h"
 #import "HSSettingCell.h"
 #import "HSSettingModel.h"
-#import "HSSetingHeadView.h"
 #import "ChangeRTCViewController.h"
-#import "VersionInfoViewController.h"
 
 @interface MoreSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong)UITableView *tableView;
@@ -22,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"更多设置";
+    self.title = NSString.dt_settings_more_set;
     // Do any additional setup after loading the view.
     [self configData];
 }
@@ -32,8 +30,8 @@
 - (void)configData {
 
     HSSettingModel *rtcModel = [HSSettingModel new];
-    rtcModel.title = @"切换RTC服务商";
-    rtcModel.subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? kRtcNameZego : kRtcNameAgora;
+    rtcModel.title = NSString.dt_settings_switch_rtc;
+    rtcModel.subTitle = [AppService.shared getRTCTypeName:AppService.shared.rtcType];
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
     
@@ -89,12 +87,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
-    if ([model.title isEqualToString:@"切换RTC服务商"]) {
+    if ([model.title isEqualToString:NSString.dt_settings_switch_rtc]) {
         ChangeRTCViewController *vc = ChangeRTCViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
         WeakSelf
         vc.onRTCChangeBlock = ^(NSString * _Nonnull str) {
-            weakSelf.arrData[0][0].subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? kRtcNameZego : kRtcNameAgora;
+            weakSelf.arrData[0][0].subTitle = [AppService.shared getRTCTypeName:AppService.shared.rtcType];
             [weakSelf.tableView reloadData];
         };
     }

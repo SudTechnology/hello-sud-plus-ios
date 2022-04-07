@@ -1,0 +1,142 @@
+/*
+  Localizable.strings
+  HelloSud-iOS
+
+  Created by Mary on 2022/3/14.
+  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
+*/
+
+/// Login
+"dt_login_welcome" = "مرحبًا بكم في تجربة \ nHelloSud";
+"dt_login_welcome_helloSud" = "مرحبا بكم في HelloSud";
+"dt_login_we_take_information" = "نحن نتعامل مع حماية معلوماتك الشخصية على محمل الجد. لمزيد من  المعلومات حول جمع المعلومات الشخصية واستخدامها، يمكنك النقر فوق";
+"dt_login_user_agreement" = "اتفاقية المستخدم";
+"dt_login_and" = "و";
+"dt_login_privacy_policy" = "سياسة الخصوصية";
+"dt_login_click_agree_agreement" = "للمعرفة. انقر فوق موافق وذلك يشير إلى أنك قد قرأت جميع الاتفاقيات المذكورة أعلاه ووافقت عليها";
+"dt_login_welcome_to_the" = "جرب الآن";
+"dt_login_your_nickname" = "لقبك";
+"dt_login_experience_immediately" = "جرب الآن";
+"dt_login_warm_prompt" = "نصائح";
+"dt_login_warm_prompt_des" = "ستستخدم HelloSud معلوماتك لتقديم الخدمات وتحسين التجربة فقط، وسنبذل قصارى جهدنا لضمان أمان معلوماتك، يرجى استخدامها بعد النقر فوقموافق";
+"dt_login_agree_continue" = "توافق مع الاستمرار في الاستخدام";
+"dt_login_quit_application" = "الخروج من التطبيق";
+
+/// Settings
+"dt_settings_total" = "إجمالي";
+"dt_settings_size_occupied" = "حجم مشغول";
+"dt_settings_version_info" = "معلومات الإصدار";
+"dt_settings_switch_rtc" = "مزود خدمة التبديل RTC";
+"dt_settings_zego" = "Zego";
+"dt_settings_agora" = "Agora";
+"dt_settings_net_ease" = "CommsEase";
+"dt_settings_volcano" = "VolcEngine";
+"dt_settings_alicloud" = "Alibaba Cloud";
+"dt_settings_tencent" = "Tencent Cloud";
+"dt_settings_switch_language" = "تبديل اللغة";
+"dt_settings_open_source" = "بروتوكول مفتوح المصدر";
+"dt_settings_user_agreement" = "اتفاقية المستخدم";
+"dt_settings_privacy_policy" = "سياسة الخصوصية";
+"dt_settings_contact_us" = "لمزيد من المعلومات أو الملاحظات، يرجى الاتصال بنا عبر البريد الإلكتروني: \nhelp@sud.tech";
+"dt_settings_work_in_progress" = "في الإنشاء، ابقوا متابعين!";
+"dt_settings_confirm_switch_rtc" = "هل أنت تريد تبديل مزود خدمة RTC إلى ";
+
+/// RoomList
+"dt_room_list_room_number" = "رقم الغرفة";
+"dt_room_list_users" = "人";
+"dt_room_list_scene" = "场景";
+"dt_room_list_no_room_available" = "لا توجد غرف متاحة حاليًا \nانتقل إلى الصفحة الرئيسية لإنشاء واحد ~";
+
+/// Home
+"dt_home_user_id" = "معرف المستخدم ";
+"dt_home_enter_room_num" = "أدخل رقم الغرفة للوصول السريع";
+"dt_home_enter" = "دخول";
+"dt_home_join" = "إنضم إلى";
+"dt_home_coming_soon" = "قريباً";
+"dt_home_create_room" = "إنشاء غرفة";
+"dt_home_in_game" = "في اللعبة";
+
+/// common
+"dt_common_select_all" = "اختر الكل";
+"dt_common_agree" = "موافق";
+"dt_common_not_agree" = "لا اوفق";
+"dt_common_sure" = "تأكيد";
+"dt_common_cancel" = "إلغاء";
+
+/// Main
+"dt_tab_home" = "الصفحة الرئيسية";
+"dt_tab_room" = "غرفة";
+"dt_tab_setting" = "إعدادات";
+
+/// Scenes
+"dt_send" = "يعطى";
+"dt_down_mic" = "الخروج من ميكروفون";
+"dt_up_mic" = "上%ld号麦";
+"dt_select_person" = "الرجاء اختيار متلقي الهدية";
+"dt_select_gift" = "الرجاء اختيار هدية";
+"dt_send_gift" = "يهدى";
+"dt_room_owner" = "صاحب المنزل";
+"dt_mic_index" = "%ld麦";
+"dt_mic_name" = "麦";
+"dt_ticket_choose_item_reward" = "اكسب %@ ضعفًا من المكافآت";
+"dt_ticket_choose_item_join" = "شارك الآن";
+"dt_ticket_choose_play_user_num" = "%d من الأشخاص يلعبون";
+"dt_ticket_choose_level_item_title_one" = "مستوى أساسي";
+"dt_ticket_choose_level_item_title_two" = "مستوى متوسط";
+"dt_ticket_choose_level_item_title_thr" = "مستوى متقدم";
+"dt_ticket_choose_level_title" = "选择创建的门票场次级别";
+"dt_ticket_choose_pop_title" = "夺得第一名";
+"dt_ticket_choose_pop_des_title" = "最高可获得%@金币奖励";
+"dt_ticket_choose_pop_des_detail" = "الاشتراك في اللعبة سيتطلب عملتين ذهبيتين هل تريد الاستمرار؟";
+"dt_ticket_choose_pop_not_alert" = "لا مزيد من التذكيرات";
+"dt_ticket_choose_pop_sure_enter" = "تأكيد للانضمام";
+"dt_ticket_reward_str" = "تهانينا لـ%@ لربح %@ عملية ذهبية في المستوى المتوسط!";
+"dt_room_input_text" = "دعنا نتحادث ~";
+"dt_room_up_mic" = "على ميكروفون";
+"dt_room_choose_game" = "اختر اللعبة";
+"dt_room_send" = "发送";
+"dt_room_please_input" = "请输入内容";
+"dt_room_input_not_null" = "输入内容不能为空";
+"dt_room_end_game" = "نهاية اللعبة";
+"dt_room_num_id" = "رقم غرفة %@";
+"dt_room_not_ready" = "غير جاهز";
+"dt_room_is_ready" = "مستعد";
+"dt_room_click_mic" = "انقر فوق ميكروفون";
+"dt_room_close_game" = "أغلق اللعبة";
+"dt_room_there_no_mic" = "没有空位啦";
+"dt_room_back_game" = "返回游戏";
+"dt_room_confirm_flight" = "تأكيد الهروب";
+"dt_room_flight_tile" = "حاليا في اللعبة ، سواء أن تهرب؟";
+"dt_room_sure_end_game" = "هل أنت تريد إنهاء اللعبة؟";
+"dt_room_unable_switch_game" = "正在游戏中, 无法切换游戏";
+"dt_room_sure_leave_cur_room" = "هل أنت ترود الخروج من الغرفة الحالية؟";
+"dt_room_unable_speak_present" = "当前不能发言";
+
+"dt_login_has_expired" = "登录已过期，请重新进入";
+"dt_next_time_again_say" = "المرة القادمة";
+"dt_update_now" = "التحديث على الفور";
+"dt_update_app_ver_low" = "إصدار التطبيق الخاص بك منخفض، يرجى ترقية الإصدار أولاً";
+"dt_update_app_ver_new" = "هناك إصدار جديد متاح، هل تريد تحديثه؟";
+"dt_unable_microphone_open" = "去开启";
+"dt_unable_microphone_not_have" = "暂时不用";
+"dt_unable_microphone_tip" = "无法访问麦克风，请到“设置-隐私“中开启麦克风访问权限";
+"dt_settings_more_set" = "更多设置";
+"dt_follow_system" = "跟随系统";
+
+"MJRefreshHeaderIdleText" = "Pull down to refresh";
+"MJRefreshHeaderPullingText" = "Release to refresh";
+"MJRefreshHeaderRefreshingText" = "Loading...";
+
+"MJRefreshAutoFooterIdleText" = "Tap or pull up to load more";
+"MJRefreshAutoFooterRefreshingText" = "Loading...";
+"MJRefreshAutoFooterNoMoreDataText" = "No more data";
+
+"MJRefreshBackFooterIdleText" = "Pull up to load more";
+"MJRefreshBackFooterPullingText" = "Release to load more";
+"MJRefreshBackFooterRefreshingText" = "Loading...";
+"MJRefreshBackFooterNoMoreDataText" = "No more data";
+
+"MJRefreshHeaderLastTimeText" = "Last update: ";
+"MJRefreshHeaderDateTodayText" = "Today";
+"MJRefreshHeaderNoneLastDateText" = "No record";
+

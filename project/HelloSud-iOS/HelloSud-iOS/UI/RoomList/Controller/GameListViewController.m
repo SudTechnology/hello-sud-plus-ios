@@ -29,7 +29,7 @@
     [self requestData];
 }
 
-- (BOOL)dtIsHidenNavigationBar {
+- (BOOL)dtIsHiddenNavigationBar {
     return YES;
 }
 
@@ -39,14 +39,14 @@
 
 - (void)dtConfigEvents {
     WeakSelf
-    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        if (AppService.shared.isRefreshedToken) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        if (AppService.shared.login.isRefreshedToken) {
             [weakSelf requestData];
         } else {
             [weakSelf.tableView.mj_header endRefreshing];
         }
     }];
-    if (AppService.shared.isRefreshedToken) {
+    if (AppService.shared.login.isRefreshedToken) {
         [self requestData];
     }
 }
@@ -79,8 +79,8 @@
 - (void)addRefreshHeader {
     WeakSelf
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        if (!AppService.shared.isRefreshedToken) {
-            [AppService.shared refreshToken];
+        if (!AppService.shared.login.isRefreshedToken) {
+            [AppService.shared.login checkToken];
             return;
         }
         [weakSelf requestData];
@@ -159,7 +159,7 @@
 - (UILabel *)noDataLabel {
     if (!_noDataLabel) {
         _noDataLabel = UILabel.new;
-        _noDataLabel.text = @"暂无房间开播\n去首页创建一个吧~";
+        _noDataLabel.text = NSString.dt_room_list_no_room_available;
         _noDataLabel.textColor = [UIColor dt_colorWithHexString:@"#8A8A8E" alpha:1];
         _noDataLabel.font = UIFONT_REGULAR(14);
         _noDataLabel.numberOfLines = 0;

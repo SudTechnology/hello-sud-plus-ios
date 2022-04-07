@@ -16,7 +16,7 @@
 #import "KeyHeader.h"
 
 @interface AppDelegate () {
-    
+
 }
 @end
 
@@ -24,9 +24,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[AppService shared] prepare];
+    [[AppService shared] setupNetWorkHeader];
+    [self observerNTF];
     self.window = [[UIWindow alloc]init];
-    if (AppService.shared.isLogin) {
-        [AppService.shared refreshToken];
+    // 登录过后，检测刷新token
+    if (AppService.shared.login.isLogin) {
+        [AppService.shared.login checkToken];
         self.window.rootViewController = [[MainTabBarController alloc]init];
     } else {
         self.window.rootViewController = [[LoginViewController alloc]init];
@@ -47,21 +51,56 @@
     [Bugly startWithAppId:BUGLEY_APP_ID];
 }
 
-#pragma mark - UISceneSession lifecycle
+- (void)observerNTF {
+    // 监听token刷新状态切换视图
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        if (AppService.shared.login.isRefreshedToken && ![self.window.rootViewController isKindOfClass:[MainTabBarController class]]) {
+            /// 切根式图
+            self.window.rootViewController = [[MainTabBarController alloc] init];
+        }
+        [self checkAppVersion];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_FAIL_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        if (![self.window.rootViewController isKindOfClass:[LoginViewController class]]) {
+            /// 切根式图
+            self.window.rootViewController = [[LoginViewController alloc]init];
+            [ToastUtil show:@"登录已过期，请重新进入"];
+        }
+    }];
+}
 
+- (void)checkAppVersion {
+    [[AppService shared] reqAppUpdate:^(BaseRespModel *resp) {
+        [self showUpgrade:(RespVersionUpdateInfoModel *) resp];
+    } fail:nil];
+}
 
-//- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
-//    // Called when a new scene session is being created.
-//    // Use this method to select a configuration to create the new scene with.
-//    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
-//}
-//
-//
-//- (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
-//    // Called when the user discards a scene session.
-//    // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-//    // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-//}
+- (void)showUpgrade:(RespVersionUpdateInfoModel *)model {
 
+    if (model == nil || model.packageUrl.length == 0) {
+        return;
+    }
+    if (model.upgradeType == 1) {
+        /// 强制升级
+        [DTAlertView showTextAlert:NSString.dt_update_app_ver_low sureText:NSString.dt_update_now cancelText:nil onSureCallback:^{
+            [self openPath:model.packageUrl];
+        } onCloseCallback:nil];
+    } else if (model.upgradeType == 2) {
+        /// 引导升级
+        [DTAlertView showTextAlert:NSString.dt_update_app_ver_new sureText:NSString.dt_update_now cancelText:NSString.dt_next_time_again_say onSureCallback:^{
+            [self openPath:model.packageUrl];
+        } onCloseCallback:nil];
+    }
+}
 
+- (void)openPath:(NSString *)path {
+    NSURL *url = [[NSURL alloc] initWithString:path];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        if (@available(iOS 10.0, *)) {
+            [[UIApplication sharedApplication] openURL:url options:nil completionHandler:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }
+}
 @end

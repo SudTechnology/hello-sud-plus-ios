@@ -9,12 +9,11 @@
 
 @interface GameItemCollectionViewCell ()
 @property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UIImageView *gameImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 /// 加入
 @property (nonatomic, strong) UILabel *enterLabel;
-@property (nonatomic, assign) CGFloat itemW;
-@property (nonatomic, assign) CGFloat itemH;
+
 @end
 
 @implementation GameItemCollectionViewCell
@@ -22,17 +21,36 @@
 - (void)setModel:(BaseModel *)model {
     HSGameItem *m = (HSGameItem *) model;
     self.nameLabel.text = m.gameName;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
+    if (m.isGameWait) {
+        self.gameImageView.image = [UIImage imageNamed:m.gamePic];
+    } else {
+        [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
+    }
     self.enterLabel.hidden = m.isBlank;
 }
 
+- (void)setIndexPath:(NSIndexPath *)indexPath {
+    _indexPath = indexPath;
+    NSInteger v = indexPath.row % 3;
+
+    [self.gameImageView dt_cornerRadius:8];
+    [self.gameImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        if (v == 0) {
+            make.left.mas_equalTo(13);
+        } else if (v == 1) {
+            make.centerX.equalTo(self.containerView);
+        } else {
+            make.right.mas_equalTo(-13);
+        }
+        make.size.mas_equalTo(CGSizeMake(100, 52));
+    }];
+}
+
 - (void)hsAddViews {
-    self.itemW = 72;//(kScreenWidth - 32 - 24 - 24 )/4;
-    self.itemH = self.itemW + 32;
     [self.contentView addSubview:self.containerView];
-    [self.containerView addSubview:self.iconImageView];
+    [self.containerView addSubview:self.gameImageView];
     [self.containerView addSubview:self.nameLabel];
-    [self.containerView addSubview:self.enterLabel];
     [self.containerView addSubview:self.inGameLabel];
 }
 
@@ -40,26 +58,24 @@
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView);
-        make.centerX.mas_equalTo(self.contentView);
-        make.width.mas_equalTo(self.itemW);
-        make.height.mas_equalTo(self.itemW);
+    [self.gameImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(100, 52));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.containerView);
-        make.top.mas_equalTo(self.iconImageView.mas_bottom).offset(3);
+        make.left.equalTo(self.gameImageView).offset(8);
+        make.top.equalTo(self.gameImageView).offset(12);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
-    [self.enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.containerView);
-        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(6);
-        make.size.mas_greaterThanOrEqualTo(CGSizeMake(54, 28));
-    }];
     [self.inGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(self.iconImageView);
+        make.left.top.equalTo(self.gameImageView);
         make.size.mas_equalTo(CGSizeMake(40, 16));
     }];
+}
+
+- (void)hsConfigUI {
+    self.backgroundColor = UIColor.whiteColor;
 }
 
 - (UIView *)containerView {
@@ -70,18 +86,18 @@
     return _containerView;
 }
 
-- (UIImageView *)iconImageView {
-    if (!_iconImageView) {
-        _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.image = [UIImage imageNamed:@"game_type_header_item_0"];
+- (UIImageView *)gameImageView {
+    if (!_gameImageView) {
+        _gameImageView = [[UIImageView alloc] init];
+        _gameImageView.image = [UIImage imageNamed:@"game_type_header_item_0"];
     }
-    return _iconImageView;
+    return _gameImageView;
 }
 
 - (UILabel *)enterLabel {
     if (!_enterLabel) {
         _enterLabel = [[UILabel alloc] init];
-        _enterLabel.text = @"加入";
+        _enterLabel.text = NSString.dt_home_join;
         _enterLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _enterLabel.font = UIFONT_BOLD(12);
         _enterLabel.layer.borderColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1].CGColor;
@@ -96,9 +112,9 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"飞镖达人";
-        _nameLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
-        _nameLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+        _nameLabel.text = @"";
+        _nameLabel.textColor = UIColor.whiteColor;
+        _nameLabel.font = UIFONT_MEDIUM(14);
         _nameLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _nameLabel;
@@ -107,7 +123,7 @@
 - (UILabel *)inGameLabel {
     if (!_inGameLabel) {
         _inGameLabel = [[UILabel alloc] init];
-        _inGameLabel.text = @"游戏中";
+        _inGameLabel.text = NSString.dt_home_in_game;
         _inGameLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _inGameLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightMedium];
         _inGameLabel.textAlignment = NSTextAlignmentCenter;

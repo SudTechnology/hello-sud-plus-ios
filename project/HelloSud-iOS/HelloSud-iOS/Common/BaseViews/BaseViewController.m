@@ -22,12 +22,12 @@
     [self dtConfigEvents];
     [self dtConfigUI];
     [self dtUpdateUI];
-    self.hiddenNavigationBar = [self dtIsHidenNavigationBar];
+    self.hiddenNavigationBar = [self dtIsHiddenNavigationBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.hiddenNavigationBar = [self dtIsHidenNavigationBar];
+    self.hiddenNavigationBar = [self dtIsHiddenNavigationBar];
 }
 
 - (void)setHiddenNavigationBar:(BOOL)hiddenNavigationBar {
@@ -36,7 +36,7 @@
 }
 
 /// 是否隐藏导航栏,子类覆盖返回是否需要隐藏导航栏，默认不隐藏
-- (BOOL)dtIsHidenNavigationBar {
+- (BOOL)dtIsHiddenNavigationBar {
     return NO;
 }
 
