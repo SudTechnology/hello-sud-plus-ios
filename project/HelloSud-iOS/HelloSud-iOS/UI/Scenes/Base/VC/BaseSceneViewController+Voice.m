@@ -30,18 +30,11 @@
     /// 设置语音引擎事件回调
 
     AudioJoinRoomModel *audioJoinRoomModel = nil;
-    if ([AppService.shared.rtcType compare:@"zego" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-        audioJoinRoomModel = [[AudioJoinRoomModel alloc] init];
-        audioJoinRoomModel.userID = AppService.shared.login.loginUserInfo.userID;
-        audioJoinRoomModel.userName = AppService.shared.login.loginUserInfo.name;
-        audioJoinRoomModel.roomID = self.roomID;
-        audioJoinRoomModel.token = self.enterModel.rtcToken;
-    } else if ([AppService.shared.rtcType compare:@"agora" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-        audioJoinRoomModel = [[AudioJoinRoomModel alloc] init];
-        audioJoinRoomModel.userID = AppService.shared.login.loginUserInfo.userID;
-        audioJoinRoomModel.roomID = self.roomID;
-        audioJoinRoomModel.token = self.enterModel.rtcToken;
-    }
+    audioJoinRoomModel = [[AudioJoinRoomModel alloc] init];
+    audioJoinRoomModel.userID = AppService.shared.login.loginUserInfo.userID;
+    audioJoinRoomModel.userName = AppService.shared.login.loginUserInfo.name;
+    audioJoinRoomModel.roomID = self.roomID;
+    audioJoinRoomModel.token = self.enterModel.rtcToken;
     
     if (audioJoinRoomModel == nil)
         return;
@@ -49,6 +42,7 @@
     // 配置语音引擎
     AudioConfigModel *configModel = AppService.shared.rtcConfigModel;
     if (configModel) {
+        configModel.userID = AppService.shared.login.loginUserInfo.userID;
         configModel.token = self.enterModel.rtiToken;
         [AudioEngineFactory.shared.audioEngine initWithConfig:configModel];
     }

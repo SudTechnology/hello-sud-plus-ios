@@ -13,6 +13,7 @@
 
 @class AudioConfigModel;
 
+/// RTC厂商类型名称
 extern NSString *const kRtcNameZego;
 extern NSString *const kRtcNameAgora;
 extern NSString *const kRtcNameRongCloud;
@@ -20,6 +21,15 @@ extern NSString *const kRtcNameCommEase;
 extern NSString *const kRtcNameVoicEngine;
 extern NSString *const kRtcNameAlibabaCloud;
 extern NSString *const kRtcNameTencentCloud;
+
+/// RTC厂商类型key
+extern NSString *const kRtcTypeZego;
+extern NSString *const kRtcTypeAgora;
+extern NSString *const kRtcTypeRongCloud;
+extern NSString *const kRtcTypeCommEase;
+extern NSString *const kRtcTypeVoicEngine;
+extern NSString *const kRtcTypeAlibabaCloud;
+extern NSString *const kRtcTypeTencentCloud;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -76,6 +86,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param success
 /// @param fail
 - (void)reqAppUpdate:(RespModelBlock)success fail:(nullable ErrorStringBlock)fail;
+
+
+/// 获取RTC厂商名称
+/// @param rtcType rtc类型
+- (NSString *)getRTCTypeName:(NSString *)rtcType;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -45,10 +45,10 @@
         [self loginGame];
     }
     [self dtUpdateUI];
-    
+
     [self setupGameRoomContent];
     [self reqMicList];
-    [self.naviView hiddenNodeWithRoleType: AudioRoomService.shared.roleType];
+    [self.naviView hiddenNodeWithRoleType:AudioRoomService.shared.roleType];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -146,7 +146,22 @@
             [ToastUtil show:NSString.dt_room_unable_speak_present];
             return;
         }
-        [weakSelf handleTapVoice];
+        switch (weakSelf.operatorView.voiceBtnState) {
+            case VoiceBtnStateTypeNormal:
+                [weakSelf changeTapVoiceState:VoiceBtnStateTypeUpMic];
+                break;
+            case VoiceBtnStateTypeUpMic:
+                [weakSelf changeTapVoiceState:VoiceBtnStateTypeOnVoice];
+                break;
+            case VoiceBtnStateTypeWaitOpen:
+                [weakSelf changeTapVoiceState:VoiceBtnStateTypeOnVoice];
+                break;
+            case VoiceBtnStateTypeOnVoice:
+                [weakSelf changeTapVoiceState:VoiceBtnStateTypeWaitOpen];
+                break;
+            default:
+                break;
+        }
     };
     self.inputView.inputMsgBlock = ^(NSString *_Nonnull msg) {
         // 发送公屏消息
@@ -357,23 +372,33 @@
     return emptyModel;
 }
 
-
-/// 处理点击上麦按钮
-- (void)handleTapVoice {
-    switch (self.operatorView.voiceBtnState) {
-        case VoiceBtnStateTypeNormal: {
+/// 改变语音按钮状态
+- (void)changeTapVoiceState:(VoiceBtnStateType)state {
+    VoiceBtnStateType currentState = self.operatorView.voiceBtnState;
+    if (currentState == state) {
+        return;
+    }
+    switch (state) {
+        case VoiceBtnStateTypeNormal:
+            break;
+        case VoiceBtnStateTypeUpMic: {
             // 请求上麦
             AudioRoomMicModel *emptyModel = [self getOneEmptyMic];
             if (emptyModel == nil) {
                 [ToastUtil show:NSString.dt_room_there_no_mic];
                 return;
             }
-            self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
+            self.operatorView.voiceBtnState = VoiceBtnStateTypeUpMic;
             [self handleMicTap:emptyModel];
         }
             break;
         case VoiceBtnStateTypeWaitOpen: {
-
+            // 关闭声音
+            self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
+            [self stopPublish];
+        }
+            break;
+        case VoiceBtnStateTypeOnVoice:
             // 开启声音
             [DeviceUtil checkMicAuth:^(BOOL isAuth) {
                 if (isAuth) {
@@ -389,15 +414,6 @@
                     }          onCloseCallback:nil];
                 }
             }];
-        }
-            break;
-        case VoiceBtnStateTypeOnVoice:
-            // 关闭声音
-            self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
-            [self stopPublish];
-            break;
-
-        default:
             break;
     }
 
@@ -410,12 +426,7 @@
     if (isOn) {
         self.isGameForbiddenVoice = NO;
         // 游戏同步推流，如果没有推流，同步推流
-        if (self.operatorView.voiceBtnState != VoiceBtnStateTypeOnVoice) {
-            if (self.operatorView.voiceBtnState != VoiceBtnStateTypeWaitOpen) {
-                self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
-            }
-            [self handleTapVoice];
-        }
+        [self changeTapVoiceState:VoiceBtnStateTypeOnVoice];
     } else {
         if (isPlaying) {
             // 正在游戏中，而且游戏关闭麦克风，此时标记游戏禁止发言
@@ -423,7 +434,7 @@
         }
         // 游戏要禁言，如果开启了声音，禁止掉推流
         if (self.operatorView.voiceBtnState == VoiceBtnStateTypeOnVoice) {
-            [self handleTapVoice];
+            [self changeTapVoiceState: VoiceBtnStateTypeWaitOpen];
         }
     }
 
@@ -588,7 +599,7 @@
 /// 进入房间 自动上麦
 - (void)handleAutoUpMic {
     if (![self isInMic]) {
-        [self handleTapVoice];
+        [self changeTapVoiceState: VoiceBtnStateTypeNormal];
     }
 }
 

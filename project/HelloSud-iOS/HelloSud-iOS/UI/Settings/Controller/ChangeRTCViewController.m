@@ -26,20 +26,22 @@
 /// 配置页面数据
 - (void)configData {
 
-    NSArray *arr = @[kRtcNameZego, kRtcNameAgora, kRtcNameRongCloud, kRtcNameCommEase, kRtcNameVoicEngine, kRtcNameAlibabaCloud, kRtcNameTencentCloud];
-    NSDictionary *dicSupport = @{kRtcNameZego: kRtcNameZego, kRtcNameAgora: kRtcNameAgora};
+    /// rtc类型列表
+    NSArray *arr = @[kRtcTypeZego, kRtcTypeAgora, kRtcTypeRongCloud, kRtcTypeCommEase, kRtcTypeVoicEngine, kRtcTypeAlibabaCloud, kRtcTypeTencentCloud];
+    /// 当前支持类型
+    NSDictionary *dicSupport = @{kRtcTypeZego: kRtcTypeZego, kRtcTypeAgora: kRtcTypeAgora};
     NSMutableArray <ChangeRTCModel *>* arrModel = [NSMutableArray array];
     for (NSUInteger i = 0; i < arr.count; ++i) {
         ChangeRTCModel *m = [ChangeRTCModel new];
-        NSString *name = arr[i];
-        m.title = name;
+        NSString *rtcType = arr[i];
+        m.rtcType = rtcType;
+        m.title = [AppService.shared getRTCTypeName:rtcType];
         m.isSlect = NO;
         /// 是否可点击
-        m.isClickable = dicSupport[name] != nil ? YES : NO;
+        m.isClickable = dicSupport[rtcType] != nil ? YES : NO;
 
         /// 是否选中
-        if (([AppService.shared.rtcType compare:@"zego" options:NSCaseInsensitiveSearch] == NSOrderedSame) ||
-            ([AppService.shared.rtcType compare:@"agora" options:NSCaseInsensitiveSearch] == NSOrderedSame)) {
+        if ([AppService.shared.rtcType isEqualToString:rtcType]) {
             m.isSlect = YES;
         }
         [arrModel addObject:m];
@@ -103,7 +105,7 @@
                     m.isSlect = NO;
                 }
                 model.isSlect = true;
-                NSString *rtcType = [model.title isEqualToString:kRtcNameZego] ? @"zego" : @"agora";
+                NSString *rtcType = model.rtcType;
                 [AppService.shared switchRtcType:rtcType];
                 [weakSelf.tableView reloadData];
 

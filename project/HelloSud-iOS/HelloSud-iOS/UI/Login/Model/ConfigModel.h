@@ -25,6 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ConfigModel : BaseRespModel
 @property (nonatomic, strong) HSConfigContent *zegoCfg;
 @property (nonatomic, strong) HSConfigContent *agoraCfg;
+@property (nonatomic, strong) HSConfigContent *tencentCloudCfg;
+@property (nonatomic, strong) HSConfigContent *rongCloudCfg;
+@property (nonatomic, strong) HSConfigContent *commsEaseCfg;
+@property (nonatomic, strong) HSConfigContent *alibabaCloudCfg;
+@property (nonatomic, strong) HSConfigContent *voicEngineCfg;
 @property (nonatomic, strong) HSConfigContent *sudCfg;
 @end
 
