@@ -8,7 +8,10 @@
 #import "AppService.h"
 #import "ZegoAudioEngineImpl.h"
 #import "AgoraAudioEngineImpl.h"
-#import "AudioConfigModel.h"
+#import "NeteaseAudioEngineImpl.h"
+#import "TXAudioEngineImpl.h"
+#import "VolcAudioEngineImpl.h"
+#import "AliyunAudioEngineImpl.h"
 /// 用户登录确认key
 #define kKeyLoginAgreement @"key_login_agreement"
 
@@ -131,7 +134,7 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
     if (AppService.shared.login.token) {
         [HttpService setupHeader:@{@"Authorization": token}];
         // 图片拉取鉴权
-        SDWebImageDownloader *downloader = (SDWebImageDownloader *)[SDWebImageManager sharedManager].imageLoader;
+        SDWebImageDownloader *downloader = (SDWebImageDownloader *) [SDWebImageManager sharedManager].imageLoader;
         [downloader setValue:token forHTTPHeaderField:@"Authorization"];
     } else {
         NSLog(@"设置APP请求头token为空");
@@ -143,7 +146,7 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
     NSString *deviceId = DeviceUtil.getIdfv;
     NSString *systemType = @"iOS";
     NSString *systemVersion = DeviceUtil.getSystemVersion;
-    NSString *clientTimestamp = [NSString stringWithFormat:@"%ld", (NSInteger)[NSDate date].timeIntervalSince1970];
+    NSString *clientTimestamp = [NSString stringWithFormat:@"%ld", (NSInteger) [NSDate date].timeIntervalSince1970];
     NSArray *arr = @[
             locale,
             clientChannel,
@@ -153,7 +156,7 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
             systemType,
             systemVersion,
             clientTimestamp
-            ];
+    ];
     NSString *sudMeta = [arr componentsJoinedByString:@","];
     [HttpService setupHeader:@{@"Sud-Meta": sudMeta}];
 
@@ -169,7 +172,7 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
             return;
         }
         weakSelf.configModel = model;
-    } failure:^(id error) {
+    }                       failure:^(id error) {
         [ToastUtil show:@"网络错误"];
     }];
 }
@@ -185,7 +188,7 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
             return;
         }
         success(model);
-    } failure:^(id error) {
+    }                       failure:^(id error) {
         if (fail) {
             fail([error debugDescription]);
         }
@@ -195,7 +198,7 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
 /// 获取RTC厂商名称
 /// @param rtcType rtc类型
 - (NSString *)getRTCTypeName:(NSString *)rtcType {
-    
+
     if ([rtcType isEqualToString:kRtcTypeZego]) {
         return NSString.dt_settings_zego;
     } else if ([rtcType isEqualToString:kRtcTypeAgora]) {
@@ -211,8 +214,6 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
     } else if ([rtcType isEqualToString:kRtcTypeTencentCloud]) {
         return kRtcNameTencentCloud;
     }
-    
-    
     return @"";
 }
 
@@ -258,41 +259,55 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
     }
 
     NSLog(@"切换RTC厂商:%@", rtcType);
+    HSConfigContent *rtcConfig = nil;
     [AudioEngineFactory.shared.audioEngine destroy];
-
     if (configModel.zegoCfg && [rtcType isEqualToString:configModel.zegoCfg.rtcType]) {
+
         NSLog(@"使用zego语音引擎");
-        /// 使用zego语音引擎
         [AudioEngineFactory.shared createEngine:ZegoAudioEngineImpl.class];
-        /// 初始化zego引擎SDK
-        NSString *appID = configModel.zegoCfg.appId;
-        NSString *appKey = configModel.zegoCfg.appKey;
-        if (appID.length > 0 && appKey.length > 0) {
+        rtcConfig = configModel.zegoCfg;
+    } else if (configModel.agoraCfg && [rtcType isEqualToString:configModel.agoraCfg.rtcType]) {
+
+        NSLog(@"使用agora语音引擎");
+        [AudioEngineFactory.shared createEngine:AgoraAudioEngineImpl.class];
+        rtcConfig = configModel.agoraCfg;
+    } else if (configModel.commsEaseCfg && [rtcType isEqualToString:configModel.commsEaseCfg.rtcType]) {
+
+        NSLog(@"使用commsEas语音引擎");
+        [AudioEngineFactory.shared createEngine:NeteaseAudioEngineImpl.class];
+        rtcConfig = configModel.commsEaseCfg;
+    } else if (configModel.tencentCloudCfg && [rtcType isEqualToString:configModel.tencentCloudCfg.rtcType]) {
+
+        NSLog(@"使用TencentCloud语音引擎");
+        [AudioEngineFactory.shared createEngine:TXAudioEngineImpl.class];
+        rtcConfig = configModel.tencentCloudCfg;
+    } else if (configModel.voicEngineCfg && [rtcType isEqualToString:configModel.voicEngineCfg.rtcType]) {
+
+        NSLog(@"使用VoicEngine语音引擎");
+        [AudioEngineFactory.shared createEngine:VolcAudioEngineImpl.class];
+        rtcConfig = configModel.voicEngineCfg;
+    } else if (configModel.alibabaCloudCfg && [rtcType isEqualToString:configModel.alibabaCloudCfg.rtcType]) {
+
+        NSLog(@"使用AlibabaCloud语音引擎");
+        [AudioEngineFactory.shared createEngine:AliyunAudioEngineImpl.class];
+        rtcConfig = configModel.alibabaCloudCfg;
+    } else {
+        [ToastUtil show:@"切换RTC厂商失败，对应配置为空"];
+    }
+
+    /// 初始化引擎SDK
+    if (rtcConfig) {
+        NSString *appID = rtcConfig.appId;
+        NSString *appKey = rtcConfig.appKey;
+        if (appID.length > 0) {
             AudioConfigModel *model = [[AudioConfigModel alloc] init];
             model.appId = appID;
             model.appKey = appKey;
             self.rtcConfigModel = model;
-        } else {
-            [ToastUtil show:@"切换zego语音引擎失败，对应配置为空"];
+            return;
         }
-    } else if (configModel.agoraCfg && [rtcType isEqualToString:configModel.agoraCfg.rtcType]) {
-        NSLog(@"使用agora语音引擎");
-        /// 使用agora语音引擎
-        [AudioEngineFactory.shared createEngine:AgoraAudioEngineImpl.class];
-        /// 初始化agora引擎SDK
-        NSString *appID = configModel.agoraCfg.appId;
-        if (appID.length > 0) {
-            AudioConfigModel *model = [[AudioConfigModel alloc] init];
-            model.appId = appID;
-            model.userID = AppService.shared.login.loginUserInfo.userID;
-            model.token = @"";
-            self.rtcConfigModel = model;
-        } else {
-            [ToastUtil show:@"切换agora语音引擎失败，对应配置为空"];
-        }
-    } else {
-        [ToastUtil show:@"切换RTC厂商失败，对应配置为空"];
     }
+    [ToastUtil show:[NSString stringWithFormat:@"切换%@语音引擎失败，对应配置为空", rtcConfig.rtcType]];
 
 }
 
