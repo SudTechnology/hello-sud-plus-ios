@@ -31,7 +31,7 @@
 
     HSSettingModel *rtcModel = [HSSettingModel new];
     rtcModel.title = NSString.dt_settings_switch_rtc;
-    rtcModel.subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? kRtcNameZego : kRtcNameAgora;
+    rtcModel.subTitle = [AppService.shared getRTCTypeName:AppService.shared.rtcType];
     rtcModel.isMore = YES;
     rtcModel.pageURL = @"";
     
@@ -92,7 +92,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         WeakSelf
         vc.onRTCChangeBlock = ^(NSString * _Nonnull str) {
-            weakSelf.arrData[0][0].subTitle = [AppService.shared.rtcType isEqualToString:@"zego"] ? kRtcNameZego : kRtcNameAgora;
+            weakSelf.arrData[0][0].subTitle = [AppService.shared getRTCTypeName:AppService.shared.rtcType];
             [weakSelf.tableView reloadData];
         };
     }

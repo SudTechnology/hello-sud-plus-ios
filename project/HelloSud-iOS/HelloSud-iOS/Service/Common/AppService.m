@@ -26,6 +26,14 @@ NSString *const kRtcNameVoicEngine = @"火山引擎";
 NSString *const kRtcNameAlibabaCloud = @"阿里云";
 NSString *const kRtcNameTencentCloud = @"腾讯云";
 
+NSString *const kRtcTypeZego = @"Zego";
+NSString *const kRtcTypeAgora = @"Agora";
+NSString *const kRtcTypeRongCloud = @"RongCloud";
+NSString *const kRtcTypeCommEase = @"CommsEase";
+NSString *const kRtcTypeVoicEngine = @"VoicEngine";
+NSString *const kRtcTypeAlibabaCloud = @"AlibabaCloud";
+NSString *const kRtcTypeTencentCloud = @"TencentCloud";
+
 
 @interface AppService ()
 @property(nonatomic, strong) NSArray <NSString *> *randomNameArr;
@@ -182,6 +190,30 @@ NSString *const kRtcNameTencentCloud = @"腾讯云";
             fail([error debugDescription]);
         }
     }];
+}
+
+/// 获取RTC厂商名称
+/// @param rtcType rtc类型
+- (NSString *)getRTCTypeName:(NSString *)rtcType {
+    
+    if ([rtcType isEqualToString:kRtcTypeZego]) {
+        return NSString.dt_settings_zego;
+    } else if ([rtcType isEqualToString:kRtcTypeAgora]) {
+        return NSString.dt_settings_agora;
+    } else if ([rtcType isEqualToString:kRtcTypeRongCloud]) {
+        return kRtcNameRongCloud;
+    } else if ([rtcType isEqualToString:kRtcTypeCommEase]) {
+        return kRtcNameCommEase;
+    } else if ([rtcType isEqualToString:kRtcTypeVoicEngine]) {
+        return kRtcNameVoicEngine;
+    } else if ([rtcType isEqualToString:kRtcTypeAlibabaCloud]) {
+        return kRtcNameAlibabaCloud;
+    } else if ([rtcType isEqualToString:kRtcTypeTencentCloud]) {
+        return kRtcNameTencentCloud;
+    }
+    
+    
+    return @"";
 }
 
 - (NSArray<NSString *> *)randomNameArr {

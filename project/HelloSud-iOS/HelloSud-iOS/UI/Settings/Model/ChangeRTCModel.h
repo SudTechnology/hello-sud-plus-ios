@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ChangeRTCModel : BaseModel
 @property(nonatomic, copy)NSString *title;
+@property(nonatomic, copy)NSString *rtcType;
 @property(nonatomic, assign)BOOL isSlect;
 @property(nonatomic, assign)BOOL isClickable;
 

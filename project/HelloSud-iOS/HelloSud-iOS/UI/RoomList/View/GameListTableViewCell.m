@@ -27,7 +27,7 @@
     self.roomNumLabel.text = [NSString stringWithFormat:@"%@：%ld", NSString.dt_room_list_room_number, m.roomId];
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld%@", m.memberCount, NSString.dt_room_list_users];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
-    self.typeLabel.text = [m.rtcType isEqualToString:@"zego"] ? NSString.dt_settings_zego : NSString.dt_settings_agora;
+    self.typeLabel.text = [AppService.shared getRTCTypeName:m.rtcType];
     
     for (HSSceneModel *sModel in AppService.shared.sceneList) {
         if (sModel.sceneId == m.sceneType) {
