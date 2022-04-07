@@ -45,7 +45,10 @@
         [self loginGame];
     }
     [self dtUpdateUI];
+    
     [self setupGameRoomContent];
+    [self reqMicList];
+    [self.naviView hiddenNodeWithRoleType: AudioRoomService.shared.roleType];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -735,10 +738,6 @@
         self.dicMicModel[key] = v.model;
         v.micType = HSGameMic;
     }
-
-    [self reqMicList];
-    [self.naviView hiddenNodeWithRoleType:AudioRoomService.shared.roleType];
-    [self dtUpdateUI];
 }
 
 #pragma mark - BDAlphaPlayerMetalViewDelegate
