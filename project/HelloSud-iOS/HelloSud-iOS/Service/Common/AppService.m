@@ -72,8 +72,8 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
 }
 
 - (void)prepare {
-    [self config];
     [self.login prepare];
+    [self config];
 }
 
 - (void)config {
