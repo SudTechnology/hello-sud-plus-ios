@@ -72,6 +72,7 @@
         channelMediaOptions.publishLocalVideo = NO;
         // 加入频道
         [self.mEngine joinChannelByUserAccount:model.userID token:model.token channelId:model.roomID options:channelMediaOptions];
+        [self.mEngine setEnableSpeakerphone:YES];
         self.mRoomID = model.roomID;
     }
 }
