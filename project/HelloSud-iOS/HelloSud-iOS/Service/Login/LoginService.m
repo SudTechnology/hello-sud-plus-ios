@@ -139,7 +139,7 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         RespRefreshTokenModel *model = [RespRefreshTokenModel decodeModel:rootDict];
         if (model.retCode != 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_FAIL_NTF object:nil];
-            [ToastUtil show:model.retMsg];
+            [ToastUtil show:[model errorMsg]];
             return;
         }
         [weakSelf saveRefreshToken:model.refreshToken];
