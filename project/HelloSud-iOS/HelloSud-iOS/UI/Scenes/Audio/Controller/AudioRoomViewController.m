@@ -71,13 +71,13 @@
         }
         [self.sudFSMMGDecorator clearAllStates];
         GameService.shared.gameId = 0;
-        [self reqMicList];
-        [self.naviView hiddenNodeWithRoleType: AudioRoomService.shared.roleType];
-        [self dtUpdateUI];
     } else if (self.roomType == HSGameMic) {
         [self.audioMicContentView setHidden:true];
         [self setupGameRoomContent];
     }
+//    [self reqMicList];
+//    [self.naviView hiddenNodeWithRoleType: AudioRoomService.shared.roleType];
+//    [self dtUpdateUI];
 }
 
 - (AudioMicContentView *)audioMicContentView {
