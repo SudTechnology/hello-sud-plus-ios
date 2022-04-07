@@ -145,6 +145,7 @@
             NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
             if (arr.count == 0) {
                 NSArray *waitArr = [self makeGameWaitItems:3];
+                m.isGameWait = YES;
                 [arr setArray:waitArr];
             } else {
                 
@@ -176,7 +177,7 @@
     NSMutableArray *arr = NSMutableArray.new;
     for (int i = 0; i < count; i++) {
         HSGameItem *item = HSGameItem.new;
-        item.gameName = NSString.dt_home_coming_soon;
+        item.gameName = nil;
         item.isGameWait = YES;
         item.gamePic = @"default_game_bg";
         [arr addObject:item];
