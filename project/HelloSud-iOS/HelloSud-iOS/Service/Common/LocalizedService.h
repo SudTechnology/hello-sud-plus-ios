@@ -95,6 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_ticket_choose_pop_des_detail;
 + (NSString *)dt_ticket_choose_pop_not_alert;
 + (NSString *)dt_ticket_choose_pop_sure_enter;
++ (NSString *)dt_ticket_reward_str;
 + (NSString *)dt_ticket_reward_str_one;
 + (NSString *)dt_ticket_reward_str_two;
 + (NSString *)dt_ticket_reward_str_thr;

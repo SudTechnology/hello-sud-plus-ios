@@ -87,15 +87,10 @@
 "dt_ticket_choose_level_title" = "选择创建的门票场次级别";
 "dt_ticket_choose_pop_title" = "夺得第一名";
 "dt_ticket_choose_pop_des_title" = "最高可获得%@金币奖励";
-"dt_ticket_choose_pop_des_detail" = "参与游戏需消耗%@金币，是否继续";
+"dt_ticket_choose_pop_des_detail" = "参与游戏需消耗%@金币，是否继续?";
 "dt_ticket_choose_pop_not_alert" = "不再提醒";
 "dt_ticket_choose_pop_sure_enter" = "确认加入";
-"dt_ticket_reward_str_one" = "恭喜沐辰在高级场赢得900金币！";
-"dt_ticket_reward_str_two" = "恭喜 安小六 在初级场赢得20金币！";
-"dt_ticket_reward_str_thr" = "恭喜 兔兔 在中级场赢得250金币！";
-"dt_ticket_reward_str_four" = "恭喜 Toby 在高级场赢得900金币！";
-"dt_ticket_reward_str_five" = "恭喜 Jennie 在高级场赢得900金币！";
-"dt_ticket_reward_str_six" = "恭喜 Bell 在中级场赢得250金币！";
+"dt_ticket_reward_str" = "恭喜 %@ 在高级场赢得%@金币！";
 "dt_room_input_text" = "聊一聊~";
 "dt_room_up_mic" = "上麦";
 "dt_room_choose_game" = "选择游戏";

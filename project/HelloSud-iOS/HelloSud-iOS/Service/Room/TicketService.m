@@ -28,10 +28,12 @@
 }
 
 - (NSMutableArray <NSAttributedString *> *)getTicketRewardAttributedStrArr {
-    NSArray <NSString *> *strArr = @[NSString.dt_ticket_reward_str_one, NSString.dt_ticket_reward_str_two, NSString.dt_ticket_reward_str_thr, NSString.dt_ticket_reward_str_four, NSString.dt_ticket_reward_str_five, NSString.dt_ticket_reward_str_six];
+    NSArray <NSString *> *nameArr = @[@"沐辰", @"安小六", @"兔兔", @"Toby", @"Jennie", @"Bell"];
+    NSArray <NSString *> *goldArr = @[@"900", @"20", @"250", @"900", @"900", @"250"];
+    
     NSMutableArray <NSAttributedString *> *dataArr = [NSMutableArray array];
-    for (int i = 0; i < strArr.count; i++) {
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:strArr[i]];
+    for (int i = 0; i < nameArr.count; i++) {
+        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSString.dt_ticket_reward_str, nameArr[i], goldArr[i]]];
         attrStr.yy_lineSpacing = 6;
         attrStr.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
         attrStr.yy_color = [UIColor dt_colorWithHexString:@"#FFE77D" alpha:1];
