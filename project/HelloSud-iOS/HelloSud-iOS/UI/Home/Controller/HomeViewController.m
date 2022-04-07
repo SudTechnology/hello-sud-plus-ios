@@ -143,17 +143,23 @@
         for (HSSceneModel *m in model.sceneList) {
             NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%ld", (long)m.sceneId]];
             NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
-            /// 求余 填满整个屏幕
-            int row = 3;
-            double fmodCount = fmod(arr.count, row);
-            if (fmodCount > 0) {
-                for (int i = fmodCount; i < row; i++) {
-                    HSGameItem *m = [[HSGameItem alloc] init];
-                    m.isBlank = true;
-                    [arr addObject:m];
+            if (arr.count == 0) {
+                NSArray *waitArr = [self makeGameWaitItems:3];
+                [arr setArray:waitArr];
+            } else {
+                
+                /// 求余 填满整个屏幕
+                int row = 3;
+                double fmodCount = fmod(arr.count, row);
+                if (fmodCount > 0) {
+                    for (int i = fmodCount; i < row; i++) {
+                        HSGameItem *m = [[HSGameItem alloc] init];
+                        m.isBlank = true;
+                        [arr addObject:m];
+                    }
                 }
             }
-
+            
             [weakSelf.dataList addObject:arr];
         }
         [weakSelf.headerSceneList addObjectsFromArray:model.sceneList];
@@ -172,7 +178,7 @@
         HSGameItem *item = HSGameItem.new;
         item.gameName = NSString.dt_home_coming_soon;
         item.isGameWait = YES;
-        item.gamePic = @"game_wait";
+        item.gamePic = @"default_game_bg";
         [arr addObject:item];
     }
     return arr;
@@ -222,7 +228,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     return CGSizeMake(kScreenWidth, 150);
 }
- 
+
 // 设置Footer的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     return CGSizeMake(kScreenWidth, 12);
@@ -263,7 +269,7 @@
         [_collectionView registerClass:[HomeFooterReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HomeFooterReusableView"];
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         v.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-//        _collectionView.backgroundView = v;
+        //        _collectionView.backgroundView = v;
     }
     return _collectionView;
 }

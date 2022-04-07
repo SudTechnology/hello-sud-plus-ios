@@ -9,7 +9,7 @@
 
 @interface GameItemCollectionViewCell ()
 @property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UIImageView *gameImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 /// 加入
 @property (nonatomic, strong) UILabel *enterLabel;
@@ -21,7 +21,11 @@
 - (void)setModel:(BaseModel *)model {
     HSGameItem *m = (HSGameItem *) model;
     self.nameLabel.text = m.gameName;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
+    if (m.isGameWait) {
+        self.gameImageView.image = [UIImage imageNamed:m.gamePic];
+    } else {
+        [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
+    }
     self.enterLabel.hidden = m.isBlank;
 }
 
@@ -29,8 +33,8 @@
     _indexPath = indexPath;
     NSInteger v = indexPath.row % 3;
 
-    [self.iconImageView dt_cornerRadius:8];
-    [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.gameImageView dt_cornerRadius:8];
+    [self.gameImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         if (v == 0) {
             make.left.mas_equalTo(13);
@@ -45,7 +49,7 @@
 
 - (void)hsAddViews {
     [self.contentView addSubview:self.containerView];
-    [self.containerView addSubview:self.iconImageView];
+    [self.containerView addSubview:self.gameImageView];
     [self.containerView addSubview:self.nameLabel];
     [self.containerView addSubview:self.inGameLabel];
 }
@@ -54,18 +58,18 @@
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.gameImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.right.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(100, 52));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconImageView).offset(8);
-        make.top.equalTo(self.iconImageView).offset(12);
+        make.left.equalTo(self.gameImageView).offset(8);
+        make.top.equalTo(self.gameImageView).offset(12);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.inGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self.iconImageView);
+        make.left.top.equalTo(self.gameImageView);
         make.size.mas_equalTo(CGSizeMake(40, 16));
     }];
 }
@@ -82,12 +86,12 @@
     return _containerView;
 }
 
-- (UIImageView *)iconImageView {
-    if (!_iconImageView) {
-        _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.image = [UIImage imageNamed:@"game_type_header_item_0"];
+- (UIImageView *)gameImageView {
+    if (!_gameImageView) {
+        _gameImageView = [[UIImageView alloc] init];
+        _gameImageView.image = [UIImage imageNamed:@"game_type_header_item_0"];
     }
-    return _iconImageView;
+    return _gameImageView;
 }
 
 - (UILabel *)enterLabel {
