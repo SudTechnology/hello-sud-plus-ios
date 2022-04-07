@@ -177,7 +177,7 @@
         _createBtn = UIButton.new;
         [_createBtn setTitle:NSString.dt_home_create_room forState:UIControlStateNormal];
         _createBtn.backgroundColor = HEX_COLOR(@"#FFFFFF");
-        _createBtn.titleLabel.font = UIFONT_BOLD(18);
+        _createBtn.titleLabel.font = UIFONT_BOLD(17);
         _createBtn.layer.cornerRadius = 18;
         [_createBtn addTarget:self action:@selector(onBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }

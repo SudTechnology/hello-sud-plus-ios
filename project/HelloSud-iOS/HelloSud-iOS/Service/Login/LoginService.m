@@ -115,7 +115,7 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_SUCCESS_NTF object:nil];
         if (success) success();
     } failure:^(id error) {
-        [ToastUtil show:[error debugDescription]];
+        [ToastUtil show:@"网络错误"];
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_FAIL_NTF object:nil];
     }];
 }
@@ -149,7 +149,7 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_SUCCESS_NTF object:nil];
 
     } failure:^(id error) {
-        [ToastUtil show:[error debugDescription]];
+        [ToastUtil show:@"网络错误"];
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_FAIL_NTF object:nil];
     }];
 }

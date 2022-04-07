@@ -94,6 +94,7 @@
 + (NSString *)dt_ticket_choose_pop_des_detail { return @"dt_ticket_choose_pop_des_detail".localized; }
 + (NSString *)dt_ticket_choose_pop_not_alert { return @"dt_ticket_choose_pop_not_alert".localized; }
 + (NSString *)dt_ticket_choose_pop_sure_enter { return @"dt_ticket_choose_pop_sure_enter".localized; }
++ (NSString *)dt_ticket_reward_str { return @"dt_ticket_reward_str".localized; }
 + (NSString *)dt_ticket_reward_str_one { return @"dt_ticket_reward_str_one".localized; }
 + (NSString *)dt_ticket_reward_str_two { return @"dt_ticket_reward_str_two".localized; }
 + (NSString *)dt_ticket_reward_str_thr { return @"dt_ticket_reward_str_thr".localized; }

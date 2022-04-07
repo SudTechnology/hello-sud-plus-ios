@@ -160,7 +160,7 @@
         
         [weakSelf.collectionView reloadData];
     } failure:^(id error) {
-        [ToastUtil show:[error debugDescription]];
+        [ToastUtil show:@"网络错误"];
     }];
 }
 
