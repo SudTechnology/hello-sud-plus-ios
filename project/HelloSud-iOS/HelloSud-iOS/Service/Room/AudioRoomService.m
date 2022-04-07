@@ -97,7 +97,7 @@
         config.roomType = model.gameId == 0 ? HSAudio : HSGame;
         config.roomName = model.roomName;
         config.enterRoomModel = model;
-        AudioRoomViewController *vc = (AudioRoomViewController *) [SceneFactory createSceneVC:weakSelf.sceneType configModel:config];
+        BaseSceneViewController *vc = [SceneFactory createSceneVC:weakSelf.sceneType configModel:config];
         AudioRoomService.shared.currentRoomVC = vc;
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
         if (success) {
