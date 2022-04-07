@@ -98,7 +98,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否在座位上
 - (BOOL)isInMic;
 
-- (void)handleTapVoice;
+/// 改变语音按钮状态
+- (void)changeTapVoiceState:(VoiceBtnStateType)state;
 
 /// 游戏触发上麦
 - (void)handleGameUpMic;

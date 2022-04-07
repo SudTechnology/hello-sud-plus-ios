@@ -26,7 +26,9 @@
 /// 配置页面数据
 - (void)configData {
 
+    /// rtc类型列表
     NSArray *arr = @[kRtcTypeZego, kRtcTypeAgora, kRtcTypeRongCloud, kRtcTypeCommEase, kRtcTypeVoicEngine, kRtcTypeAlibabaCloud, kRtcTypeTencentCloud];
+    /// 当前支持类型
     NSDictionary *dicSupport = @{kRtcTypeZego: kRtcTypeZego, kRtcTypeAgora: kRtcTypeAgora};
     NSMutableArray <ChangeRTCModel *>* arrModel = [NSMutableArray array];
     for (NSUInteger i = 0; i < arr.count; ++i) {

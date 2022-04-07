@@ -79,6 +79,8 @@
 - (void)setVoiceBtnState:(VoiceBtnStateType)voiceBtnState {
     _voiceBtnState = voiceBtnState;
     switch (voiceBtnState) {
+        case VoiceBtnStateTypeUpMic:
+            /// 与等待开启一致
         case VoiceBtnStateTypeWaitOpen:
             [_voiceUpBtn setImage:[UIImage imageNamed:@"room_voice_close_mic"] forState:UIControlStateNormal];
             [_voiceUpBtn setTitle:nil forState:UIControlStateNormal];

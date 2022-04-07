@@ -11,22 +11,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 上麦按钮状态
 typedef NS_ENUM(NSInteger, VoiceBtnStateType) {
-    VoiceBtnStateTypeNormal = 0, /// 显示普通上麦
-    VoiceBtnStateTypeWaitOpen = 1,  /// 显示开麦
-    VoiceBtnStateTypeOnVoice = 2, /// 显示正在开麦
+    VoiceBtnStateTypeNormal = 0, /// 默认状态
+    VoiceBtnStateTypeUpMic = 1, /// 上麦
+    VoiceBtnStateTypeWaitOpen = 2,  /// 显示开麦
+    VoiceBtnStateTypeOnVoice = 3, /// 显示正在开麦
 };
+
 /// 房间底部操作
 @interface RoomOperatorView : BaseView
 
 /// 礼物点击
-@property(nonatomic, copy)UIBUTTON_TAP_BLOCK giftTapBlock;
+@property(nonatomic, copy) UIBUTTON_TAP_BLOCK giftTapBlock;
 /// 上麦点击
-@property(nonatomic, copy)UIBUTTON_TAP_BLOCK voiceTapBlock;
+@property(nonatomic, copy) UIBUTTON_TAP_BLOCK voiceTapBlock;
 /// 礼物点击
-@property(nonatomic, copy)UIVIEW_TAP_BLOCK inputTapBlock;
+@property(nonatomic, copy) UIVIEW_TAP_BLOCK inputTapBlock;
 
 /// 上麦按钮状态
-@property(nonatomic, assign)VoiceBtnStateType voiceBtnState;
+@property(nonatomic, assign) VoiceBtnStateType voiceBtnState;
 
 /// 重置所有选择用户
 - (void)resetAllSelectedUser;
