@@ -49,7 +49,7 @@
 
 /// 立即体验点击事件
 - (void)loginNodeEvent {
-    [AppService.shared.login reqLogin:self.nameTextField.text userID:nil sucess:^{
+    [AppService.shared.login reqLogin:self.nameTextField.text userID:AppService.shared.login.loginUserInfo.userID sucess:^{
 
     }];
 }

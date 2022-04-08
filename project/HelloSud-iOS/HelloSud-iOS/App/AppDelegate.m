@@ -64,7 +64,6 @@
         if (![self.window.rootViewController isKindOfClass:[LoginViewController class]]) {
             /// 切根式图
             self.window.rootViewController = [[LoginViewController alloc]init];
-            [ToastUtil show:@"登录已过期，请重新进入"];
         }
     }];
 }
