@@ -23,6 +23,7 @@ static NSString *const DTUserLanguageKey = @"DTUserLanguageKey";
     [STANDARD_USER_DEFAULT setValue:userLanguage forKey:DTUserLanguageKey];
     [STANDARD_USER_DEFAULT setValue:@[userLanguage] forKey:@"AppleLanguages"];
     [STANDARD_USER_DEFAULT synchronize];
+    [self updateRTL];
 }
 
 + (NSString *)userLanguage {
@@ -35,5 +36,26 @@ static NSString *const DTUserLanguageKey = @"DTUserLanguageKey";
     [STANDARD_USER_DEFAULT setValue:nil forKey:@"AppleLanguages"];
     [STANDARD_USER_DEFAULT synchronize];
 }
+
+/// 是否语言从右到左，目前阿拉伯语
++ (BOOL)isLanguageRTL {
+    NSString *lang = NSBundle.currentLanguage;
+    return [lang hasPrefix:@"ar"];
+}
+
+/// 更新APP语言方向
++ (void)updateRTL {
+    if ([self isLanguageRTL]) {
+        
+        [UIView appearance].semanticContentAttribute = UISemanticContentAttributeForceRightToLeft;
+        [UISearchBar appearance].semanticContentAttribute = UISemanticContentAttributeForceRightToLeft;
+        [[UINavigationBar appearance] setSemanticContentAttribute:UISemanticContentAttributeForceRightToLeft];
+    } else {
+        [UIView appearance].semanticContentAttribute = UISemanticContentAttributeForceLeftToRight;
+        [UISearchBar appearance].semanticContentAttribute = UISemanticContentAttributeForceLeftToRight;
+        [[UINavigationBar appearance] setSemanticContentAttribute:UISemanticContentAttributeForceLeftToRight];
+    }
+}
+
 
 @end

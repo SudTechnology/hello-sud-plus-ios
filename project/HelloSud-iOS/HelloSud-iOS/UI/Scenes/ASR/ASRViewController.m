@@ -44,7 +44,7 @@
     [super dtLayoutViews];
     [self.asrTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(kStatusBarHeight + 105);
-        make.right.mas_equalTo(-16);
+        make.trailing.mas_equalTo(-16);
         make.width.height.mas_greaterThanOrEqualTo(0);
     }];
 }
@@ -98,7 +98,7 @@
             make.width.mas_greaterThanOrEqualTo(0);
             make.height.mas_equalTo(41);
             make.bottom.equalTo(self.operatorView.mas_top).offset(0);
-            make.left.mas_equalTo(16);
+            make.leading.mas_equalTo(16);
         }];
         WeakSelf
         if (self.timer) {

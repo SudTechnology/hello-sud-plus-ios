@@ -59,13 +59,13 @@
 
 - (void)dtLayoutViews {
     [self.searchHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(self.view);
+        make.top.leading.trailing.mas_equalTo(self.view);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.searchHeaderView.mas_bottom);
-        make.left.mas_equalTo(16);
-        make.right.mas_equalTo(-16);
+        make.leading.mas_equalTo(16);
+        make.trailing.mas_equalTo(-16);
         make.bottom.mas_equalTo(-kTabBarHeight);
     }];
     [self.noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {

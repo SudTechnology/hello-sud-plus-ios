@@ -70,7 +70,7 @@
     }];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(50);
-        make.left.right.mas_equalTo(self);
+        make.leading.trailing.mas_equalTo(self);
         make.height.mas_equalTo(110);
         make.bottom.mas_equalTo(-kAppSafeBottom - 40);
     }];

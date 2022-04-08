@@ -37,11 +37,11 @@
     [self.gameImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         if (v == 0) {
-            make.left.mas_equalTo(13);
+            make.leading.mas_equalTo(13);
         } else if (v == 1) {
             make.centerX.equalTo(self.containerView);
         } else {
-            make.right.mas_equalTo(-13);
+            make.trailing.mas_equalTo(-13);
         }
         make.size.mas_equalTo(CGSizeMake(100, 52));
     }];
@@ -60,16 +60,16 @@
     }];
     [self.gameImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
-        make.right.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(100, 52));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.gameImageView).offset(8);
+        make.leading.equalTo(self.gameImageView).offset(8);
         make.top.equalTo(self.gameImageView).offset(12);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.inGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self.gameImageView);
+        make.leading.top.equalTo(self.gameImageView);
         make.size.mas_equalTo(CGSizeMake(40, 16));
     }];
 }

@@ -49,39 +49,39 @@
         make.edges.equalTo(self);
     }];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(self);
+        make.top.leading.trailing.mas_equalTo(self);
         make.height.mas_equalTo(0);
     }];
     [self.sendToLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(16);
+        make.leading.mas_equalTo(16);
         make.top.mas_equalTo(28);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.sendToLabel.mas_right).offset(10);
+        make.leading.mas_equalTo(self.sendToLabel.mas_trailing).offset(10);
         make.top.mas_equalTo(self);
         make.height.mas_equalTo(72);
         make.width.mas_greaterThanOrEqualTo(0);
-        make.right.mas_equalTo(self.checkAllBtn.mas_left).offset(-16);
+        make.trailing.mas_equalTo(self.checkAllBtn.mas_leading).offset(-16);
     }];
     [self.checkAllBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-16);
+        make.trailing.mas_equalTo(-16);
         make.top.mas_equalTo(25);
         make.size.mas_equalTo(CGSizeMake(42, 22));
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self);
+        make.leading.trailing.mas_equalTo(self);
         make.top.mas_equalTo(self.collectionView.mas_bottom);
         make.height.mas_equalTo(0.5);
     }];
     [self.giftContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self);
+        make.leading.trailing.mas_equalTo(self);
         make.top.mas_equalTo(self.topView.mas_bottom).offset(10);
         make.height.mas_equalTo(110);
     }];
     [self.sendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.giftContentView.mas_bottom).offset(24);
-        make.right.mas_equalTo(-16);
+        make.trailing.mas_equalTo(-16);
         make.size.mas_equalTo(CGSizeMake(56 + 56, 32));
         make.bottom.mas_equalTo(-kAppSafeBottom - 8);
     }];
@@ -331,18 +331,18 @@
         [_sendView addSubview:self.sendBtn];
         
         [numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
+            make.leading.mas_equalTo(15);
             make.centerY.mas_equalTo(_sendView);
             make.size.mas_greaterThanOrEqualTo(CGSizeZero);
         }];
         [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(numLabel.mas_right).offset(5);
+            make.leading.mas_equalTo(numLabel.mas_trailing).offset(5);
             make.centerY.mas_equalTo(_sendView);
             make.size.mas_equalTo(CGSizeMake(12, 12));
         }];
         [self.sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(54);
-            make.top.right.bottom.mas_equalTo(_sendView);
+            make.leading.mas_equalTo(54);
+            make.top.trailing.bottom.mas_equalTo(_sendView);
             make.width.mas_equalTo(56);
         }];
     }

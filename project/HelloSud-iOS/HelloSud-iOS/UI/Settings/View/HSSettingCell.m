@@ -41,25 +41,25 @@
     [super hsLayoutViews];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
-        make.right.mas_equalTo(-20);
-        make.left.mas_equalTo(20);
+        make.trailing.mas_equalTo(-20);
+        make.leading.mas_equalTo(20);
         make.height.mas_equalTo(0.5);
         
     }];
     [self.rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(12, 12));
-        make.right.mas_equalTo(-18);
+        make.trailing.mas_equalTo(-18);
         make.centerY.equalTo(self.contentView);
         
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(20);
+        make.leading.mas_equalTo(20);
         make.width.height.mas_greaterThanOrEqualTo(0);
         make.centerY.equalTo(self.contentView);
         
     }];
     [self.subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-46);
+        make.trailing.mas_equalTo(-46);
         make.width.height.mas_greaterThanOrEqualTo(0);
         make.centerY.equalTo(self.contentView);
         

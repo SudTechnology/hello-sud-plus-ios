@@ -36,7 +36,7 @@
     }];
     [self.selectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headerView.mas_top).offset(-3);
-        make.right.mas_equalTo(self.headerView.mas_right).offset(3);
+        make.trailing.mas_equalTo(self.headerView.mas_trailing).offset(3);
         make.size.mas_equalTo(CGSizeMake(16, 16));
     }];
 }

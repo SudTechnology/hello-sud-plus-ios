@@ -49,22 +49,22 @@
         make.edges.mas_equalTo(self);
     }];
     [self.goldImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self);
+        make.trailing.mas_equalTo(self);
         make.top.mas_equalTo(self.mas_top).offset(-24);
         make.size.mas_equalTo(CGSizeMake(105, 105));
     }];
     [self.hotImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.mas_left).offset(-14);
+        make.leading.mas_equalTo(self.mas_leading).offset(-14);
         make.top.mas_equalTo(self.mas_top).offset(-23);
         make.size.mas_equalTo(CGSizeMake(50, 50));
     }];
     [self.btnImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-20);
+        make.trailing.mas_equalTo(-20);
         make.bottom.mas_equalTo(-18);
         make.size.mas_equalTo(CGSizeMake(88, 30));
     }];
     [self.rewardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(22);
+        make.top.leading.mas_equalTo(22);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,12 +72,12 @@
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.usersView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(17);
+        make.leading.mas_equalTo(17);
         make.bottom.mas_equalTo(-21);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.onlineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.usersView.mas_right).offset(10);
+        make.leading.mas_equalTo(self.usersView.mas_trailing).offset(10);
         make.centerY.mas_equalTo(self.usersView);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
@@ -91,11 +91,11 @@
         node.layer.masksToBounds = true;
         [self.usersView addSubview:node];
         [node mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-17 * i);
+            make.trailing.mas_equalTo(-17 * i);
             make.centerY.mas_equalTo(self.usersView);
             make.size.mas_equalTo(CGSizeMake(24, 24));
             if (i == 3) {
-                make.left.mas_equalTo(self.usersView);
+                make.leading.mas_equalTo(self.usersView);
             }
         }];
     }

@@ -33,9 +33,9 @@
         
         [self.endGameBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             if (self.roomModeView.isHidden) {
-                make.right.mas_equalTo(self.roomModeView.mas_left).offset(-8 + 80);
+                make.trailing.mas_equalTo(self.roomModeView.mas_leading).offset(-8 + 80);
             } else {
-                make.right.mas_equalTo(self.roomModeView.mas_left).offset(-8);
+                make.trailing.mas_equalTo(self.roomModeView.mas_leading).offset(-8);
             }
         }];
     } else {
@@ -97,47 +97,48 @@
 
 - (void)dtLayoutViews {
     [self.roomNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(16);
+        make.leading.mas_equalTo(16);
         make.top.mas_equalTo(6);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.roomNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(16);
+        make.leading.mas_equalTo(16);
         make.top.mas_equalTo(self.roomNameLabel.mas_bottom);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.onlineImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.roomNumLabel.mas_right).offset(6);
+        make.leading.mas_equalTo(self.roomNumLabel.mas_trailing).offset(6);
         make.centerY.mas_equalTo(self.roomNumLabel);
         make.size.mas_equalTo(CGSizeMake(8, 8));
     }];
     [self.onlineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.onlineImageView.mas_right).offset(3);
+        make.leading.mas_equalTo(self.onlineImageView.mas_trailing).offset(3);
         make.centerY.mas_equalTo(self.roomNumLabel);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
+    
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-6);
+        make.trailing.mas_equalTo(-6);
         make.centerY.mas_equalTo(self);
         make.size.mas_equalTo(CGSizeMake(44, 44));
     }];
     [self.roomModeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-52);
+        make.trailing.mas_equalTo(-52);
         make.centerY.mas_equalTo(self);
         make.size.mas_equalTo(CGSizeMake(78, 20));
     }];
     [self.roomModeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(8);
+        make.leading.mas_equalTo(8);
         make.centerY.mas_equalTo(self.roomModeView);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.roomModeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.roomModeLabel.mas_right).offset(4);
+        make.leading.mas_equalTo(self.roomModeLabel.mas_trailing).offset(4);
         make.centerY.mas_equalTo(self.roomModeView);
         make.size.mas_equalTo(CGSizeMake(10, 10));
     }];
     [self.endGameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.roomModeView.mas_left).offset(-8);
+        make.trailing.mas_equalTo(self.roomModeView.mas_leading).offset(-8);
         make.centerY.mas_equalTo(self.roomModeView);
         make.size.mas_equalTo(CGSizeMake(64, 20));
     }];

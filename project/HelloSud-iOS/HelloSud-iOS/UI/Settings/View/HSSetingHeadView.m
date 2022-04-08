@@ -53,9 +53,9 @@
         [node mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(item_w < 1 ? 2 : item_w);
             if (lastNode == nil) {
-                make.left.mas_equalTo(self.scaleView);
+                make.leading.mas_equalTo(self.scaleView);
             } else {
-                make.left.mas_equalTo(lastNode.mas_right);
+                make.leading.mas_equalTo(lastNode.mas_trailing);
             }
             make.top.bottom.mas_equalTo(self.scaleView);
         }];
@@ -84,28 +84,28 @@
     [super dtLayoutViews];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(16);
-        make.left.mas_equalTo(20);
+        make.leading.mas_equalTo(20);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.sizeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-20);
+        make.trailing.mas_equalTo(-20);
         make.centerY.mas_equalTo(self.titleLabel);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.scaleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(12);
-        make.left.mas_equalTo(20);
-        make.right.mas_equalTo(-20);
+        make.leading.mas_equalTo(20);
+        make.trailing.mas_equalTo(-20);
         make.height.mas_equalTo(40);
     }];
     [self.itemsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.scaleView.mas_bottom).offset(2);
-        make.left.mas_equalTo(20);
-        make.right.mas_equalTo(-20);
+        make.leading.mas_equalTo(20);
+        make.trailing.mas_equalTo(-20);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
     [self.hitView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(0);
+        make.leading.top.trailing.mas_equalTo(0);
         make.bottom.equalTo(self.scaleView.mas_top);
     }];
 }

@@ -21,7 +21,7 @@
 - (void)hsLayoutViews {
     [self.msgContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView);
-        make.left.mas_equalTo(16);
+        make.leading.mas_equalTo(16);
         make.bottom.mas_equalTo(-4);
         make.width.mas_lessThanOrEqualTo(260);
         make.height.mas_greaterThanOrEqualTo(0);

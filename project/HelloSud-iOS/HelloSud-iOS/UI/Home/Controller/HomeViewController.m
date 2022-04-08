@@ -67,13 +67,13 @@
 
 - (void)dtLayoutViews {
     [self.searchHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(self.view);
+        make.top.leading.trailing.mas_equalTo(self.view);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.searchHeaderView.mas_bottom);
-        make.left.mas_equalTo(16);
-        make.right.mas_equalTo(-16);
+        make.leading.mas_equalTo(16);
+        make.trailing.mas_equalTo(-16);
         make.bottom.mas_equalTo(-kTabBarHeight);
     }];
 }
@@ -94,7 +94,7 @@
     v.backgroundColor = UIColor.redColor;
     [self.collectionView addSubview:v];
     [v mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
+        make.leading.trailing.mas_equalTo(0);
         make.bottom.equalTo(header.mas_top);
         make.height.mas_equalTo(100);
     }];

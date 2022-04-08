@@ -85,8 +85,9 @@
     [header dtUpdateUI];
     self.tableView.tableHeaderView = header;
     [header mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(0);
+        make.leading.top.trailing.mas_equalTo(0);
         make.height.mas_equalTo(217);
+        make.width.mas_equalTo(kScreenWidth - 32);
     }];
     [self.tableView reloadData];
 }

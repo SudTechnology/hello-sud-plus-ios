@@ -99,39 +99,39 @@
 - (void)dtLayoutViews {
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(13);
-        make.left.bottom.right.mas_equalTo(self);
+        make.leading.bottom.trailing.mas_equalTo(self);
     }];
     [self.topGoldView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(16);
+        make.leading.mas_equalTo(16);
         make.top.mas_equalTo(self);
         make.size.mas_equalTo(CGSizeMake(72, 72));
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.topGoldView.mas_right);
+        make.leading.mas_equalTo(self.topGoldView.mas_trailing);
         make.top.mas_equalTo(self.bgImageView.mas_top).offset(8);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.desTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.titleLabel);
+        make.leading.mas_equalTo(self.titleLabel);
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(2);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.goldBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.bgImageView.mas_top).offset(24);
-        make.right.mas_equalTo(20);
+        make.trailing.mas_equalTo(20);
         make.width.mas_greaterThanOrEqualTo(0);
         make.height.mas_equalTo(24);
     }];
     [self.goldImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(8);
+        make.leading.mas_equalTo(8);
         make.centerY.mas_equalTo(self.goldBgView);
         make.size.mas_equalTo(CGSizeMake(14, 14));
     }];
     [self.goldNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.goldImgView.mas_right).offset(3);
+        make.leading.mas_equalTo(self.goldImgView.mas_trailing).offset(3);
         make.centerY.mas_equalTo(self.goldBgView);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
-        make.right.mas_equalTo(-20 - 16);
+        make.trailing.mas_equalTo(-20 - 16);
     }];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.topGoldView.mas_bottom).offset(20);
@@ -145,22 +145,22 @@
         make.height.mas_equalTo(16);
     }];
     [self.remindImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.centerY.mas_equalTo(self.remindView);
+        make.leading.centerY.mas_equalTo(self.remindView);
         make.size.mas_equalTo(CGSizeMake(16, 16));
     }];
     [self.remindLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.remindImgView.mas_right).offset(2);
-        make.right.centerY.mas_equalTo(self.remindView);
+        make.leading.mas_equalTo(self.remindImgView.mas_trailing).offset(2);
+        make.trailing.centerY.mas_equalTo(self.remindView);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.remindView.mas_centerX).offset(-18);
+        make.trailing.mas_equalTo(self.remindView.mas_centerX).offset(-18);
         make.top.mas_equalTo(self.remindView.mas_bottom).offset(23);
         make.size.mas_equalTo(CGSizeMake(130, 36));
         make.bottom.mas_equalTo(-16 - kAppSafeBottom);
     }];
     [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.remindView.mas_centerX).offset(18);
+        make.leading.mas_equalTo(self.remindView.mas_centerX).offset(18);
         make.top.mas_equalTo(self.remindView.mas_bottom).offset(23);
         make.size.mas_equalTo(CGSizeMake(130, 36));
     }];

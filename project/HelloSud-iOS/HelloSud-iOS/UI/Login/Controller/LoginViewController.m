@@ -133,36 +133,36 @@
 - (void)dtLayoutViews {
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(126);
-        make.left.mas_equalTo(30);
+        make.leading.mas_equalTo(30);
         make.size.mas_equalTo(CGSizeMake(49, 22));
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(30);
+        make.leading.mas_equalTo(30);
         make.top.mas_equalTo(self.iconImageView.mas_bottom).offset(32);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.nameTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(30);
+        make.leading.mas_equalTo(30);
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(24);
         make.height.with.mas_greaterThanOrEqualTo(0);
     }];
     [self.fieldView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(30);
+        make.leading.mas_equalTo(30);
         make.top.mas_equalTo(self.nameTitleLabel.mas_bottom).offset(8);
-        make.right.mas_equalTo(-30);
+        make.trailing.mas_equalTo(-30);
         make.height.mas_equalTo(48);
     }];
     [self.nameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 16, 0, 50));
     }];
     [self.changeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-4);
+        make.trailing.mas_equalTo(-4);
         make.centerY.mas_equalTo(self.fieldView);
         make.size.mas_equalTo(CGSizeMake(48, 48));
     }];
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(30);
-        make.right.mas_equalTo(-30);
+        make.leading.mas_equalTo(30);
+        make.trailing.mas_equalTo(-30);
         make.top.mas_equalTo(self.changeBtn.mas_bottom).offset(190);
         make.height.mas_equalTo(44);
     }];
