@@ -299,7 +299,7 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
     if (rtcConfig) {
         NSString *appID = rtcConfig.appId;
         NSString *appKey = rtcConfig.appKey;
-        if (appID.length > 0) {
+        if (appID.length > 0 || appKey.length > 0) {
             AudioConfigModel *model = [[AudioConfigModel alloc] init];
             model.appId = appID;
             model.appKey = appKey;

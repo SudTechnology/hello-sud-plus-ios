@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 必须优先调用初始化配置引擎SDK
 - (void)initWithConfig:(AudioConfigModel *)model;
 
+/// 必须优先调用初始化配置引擎SDK
+- (void)initWithConfig:(AudioConfigModel *)model success:(nullable dispatch_block_t)success;
+
 /// 销毁引擎SDK
 - (void)destroy;
 

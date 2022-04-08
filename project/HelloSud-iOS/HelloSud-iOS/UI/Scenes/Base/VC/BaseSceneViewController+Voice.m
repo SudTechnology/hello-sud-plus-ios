@@ -44,13 +44,25 @@
     if (configModel) {
         configModel.userID = AppService.shared.login.loginUserInfo.userID;
         configModel.token = self.enterModel.rtiToken;
+        
+        NSString *rtcType = AppService.shared.rtcType;
+        if ([rtcType isEqualToString:kRtcTypeRongCloud] || [rtcType isEqualToString:kRtcTypeCommEase]) {
+            [AudioEngineFactory.shared.audioEngine initWithConfig:configModel success:^{
+                [self joinRoom:audioJoinRoomModel];
+            }];
+            return;
+        }
+    
         [AudioEngineFactory.shared.audioEngine initWithConfig:configModel];
     }
 
+    [self joinRoom:audioJoinRoomModel];
+}
+
+- (void)joinRoom:(AudioJoinRoomModel *)audioJoinRoomModel {
     [AudioEngineFactory.shared.audioEngine joinRoom:audioJoinRoomModel];
     [AudioEngineFactory.shared.audioEngine setEventListener:self];
     [AudioEngineFactory.shared.audioEngine setAudioRouteToSpeaker:YES];
-
 }
 
 - (void)logoutRoom {
