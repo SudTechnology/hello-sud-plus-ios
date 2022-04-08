@@ -14,7 +14,7 @@
 /// @param api
 /// @param param
 /// @param respCls 解析model class
-/// @param showErrorToast 是否在错误是展示toast
+/// @param showErrorToast 是否在错误时展示toast YES:在发送错误时toast错误信息，NO:则否
 /// @param success
 /// @param failure
 + (void)postRequestWithURL:(NSString *)api
