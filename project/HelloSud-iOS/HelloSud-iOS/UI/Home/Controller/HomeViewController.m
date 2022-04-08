@@ -173,9 +173,9 @@
     NSMutableArray *arr = NSMutableArray.new;
     for (int i = 0; i < count; i++) {
         HSGameItem *item = HSGameItem.new;
-        item.gameName = nil;
+        item.gameName = @"敬请期待";
         item.isGameWait = YES;
-        item.gamePic = @"default_game_bg";
+        item.gamePic = @"wait_game_icon";
         [arr addObject:item];
     }
     return arr;

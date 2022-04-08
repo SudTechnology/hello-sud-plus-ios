@@ -18,13 +18,23 @@
 
 @implementation GameItemCollectionViewCell
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    self.nameLabel.text = nil;
+    self.gameImageView.image = nil;
+}
+
 - (void)setModel:(BaseModel *)model {
     HSGameItem *m = (HSGameItem *) model;
     self.nameLabel.text = m.gameName;
     if (m.isGameWait) {
+        self.nameLabel.textColor = HEX_COLOR(@"#AAAAAA");
         self.gameImageView.image = [UIImage imageNamed:m.gamePic];
-    } else {
-        [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
+    } else if (m.isBlank){
+        self.gameImageView.image = nil;
+    }  else {
+        self.nameLabel.textColor = UIColor.whiteColor;
+        [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic] placeholderImage:[UIImage imageNamed:@"default_game_bg"]];
     }
     self.enterLabel.hidden = m.isBlank;
 }
@@ -89,7 +99,6 @@
 - (UIImageView *)gameImageView {
     if (!_gameImageView) {
         _gameImageView = [[UIImageView alloc] init];
-        _gameImageView.image = [UIImage imageNamed:@"game_type_header_item_0"];
     }
     return _gameImageView;
 }
