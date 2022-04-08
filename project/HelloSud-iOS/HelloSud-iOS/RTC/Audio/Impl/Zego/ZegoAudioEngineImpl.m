@@ -63,6 +63,10 @@
     }
 }
 
+- (void)initWithConfig:(AudioConfigModel *)model success:(nullable dispatch_block_t)success {
+    [self initWithConfig:model];
+}
+
 - (void)destroy {
     /* 销毁 SDK */
     [ZegoExpressEngine destroyEngine:nil];
