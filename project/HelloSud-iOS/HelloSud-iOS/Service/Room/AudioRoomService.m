@@ -49,17 +49,12 @@
         dicParam[@"gameLevel"] = @(gameLevel);
     }
     WeakSelf
-    [HttpService postRequestWithApi:kINTERACTURL(@"room/create-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithURL:kINTERACTURL(@"room/create-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         self.isReqCreate = NO;
-        EnterRoomModel *model = [EnterRoomModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.errorMsg];
-            return;
-        }
+        EnterRoomModel *model = (EnterRoomModel *)resp;
         [weakSelf reqEnterRoom:model.roomId success:nil fail:nil];
-    } failure:^(id error) {
+    } failure:^(NSError *error) {
         self.isReqCreate = NO;
-        [ToastUtil show:[error debugDescription]];
     }];
 }
 
@@ -77,13 +72,9 @@
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
-    [HttpService postRequestWithApi:kINTERACTURL(@"room/enter-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithURL:kINTERACTURL(@"room/enter-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         self.isReqEnter = NO;
-        EnterRoomModel *model = [EnterRoomModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.errorMsg];
-            return;
-        }
+        EnterRoomModel *model = (EnterRoomModel *)resp;
         if (AudioRoomService.shared.currentRoomVC != nil) {
             NSLog(@"there is a AudioRoomViewController in the stack");
             return;
@@ -103,9 +94,8 @@
         if (success) {
             success();
         }
-    } failure:^(id error) {
+    } failure:^(NSError *error) {
         self.isReqEnter = NO;
-        [ToastUtil show:[error debugDescription]];
         if (fail) {
             fail(error);
         }
@@ -116,16 +106,7 @@
 /// @param roomId 房间ID
 - (void)reqExitRoom:(long)roomId {
     [self resetRoomInfo];
-    [HttpService postRequestWithApi:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
-        ExitRoomModel *model = [ExitRoomModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.errorMsg];
-            return;
-        }
-        
-    } failure:^(id error) {
-        [ToastUtil show:[error debugDescription]];
-    }];
+    [HttpService postRequestWithURL:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} respClass:ExitRoomModel.class showErrorToast:YES success:nil failure:nil];
 }
 
 /// 匹配开播的游戏，并进入游戏房间
@@ -147,22 +128,15 @@
     if (sceneType == SceneTypeTicket) {
         dicParam[@"gameLevel"] = @(gameLevel);
     }
-    [HttpService postRequestWithApi:kINTERACTURL(@"room/match-room/v1") param:dicParam success:^(NSDictionary *rootDict) {
-
-        MatchRoomModel *model = [MatchRoomModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            weakSelf.isMatchingRoom = NO;
-            [ToastUtil show:model.errorMsg];
-            return;
-        }
+    [HttpService postRequestWithURL:kINTERACTURL(@"room/match-room/v1") param:dicParam respClass:MatchRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        MatchRoomModel *model = (MatchRoomModel *)resp;
         [self reqEnterRoom:model.roomId success:^{
             weakSelf.isMatchingRoom = NO;
         } fail:^(NSError *error) {
             [ToastUtil show:[error debugDescription]];
             weakSelf.isMatchingRoom = NO;
         }];
-    } failure:^(id error) {
-        [ToastUtil show:[error debugDescription]];
+    } failure:^(NSError *error) {
         weakSelf.isMatchingRoom = NO;
     }];
 }
@@ -173,15 +147,8 @@
 /// @param handleType 0：上麦 1: 下麦
 - (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
-    [HttpService postRequestWithApi:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} success:^(NSDictionary *rootDict) {
-        SwitchMicModel *model = [SwitchMicModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.errorMsg];
-            if (fail) {
-                fail([NSError dt_errorWithCode:model.retCode msg:model.retMsg]);
-            }
-            return;
-        }
+    [HttpService postRequestWithURL:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} respClass:SwitchMicModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        SwitchMicModel *model = (SwitchMicModel *)resp;
         if (handleType == 0) {
             RoomCmdUpMicModel *upMicModel = [RoomCmdUpMicModel makeUpMicMsgWithMicIndex:micIndex];
             weakSelf.micIndex = micIndex;
@@ -197,63 +164,30 @@
         if (success) {
             success();
         }
-        
-    } failure:^(id error) {
-        [ToastUtil show:[error debugDescription]];
-        if (fail) {
-            fail(error);
-        }
-    }];
+    } failure:fail];
 }
 
 /// 查询房间麦位列表
 /// @param roomId 房间ID
 - (void)reqMicList:(long)roomId success:(void(^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail {
 
-    [HttpService postRequestWithApi:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)} success:^(NSDictionary *rootDict) {
-        MicListModel *model = [MicListModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.errorMsg];
-            if (fail) {
-                fail([NSError dt_errorWithCode:model.retCode msg:model.retMsg]);
-            }
-            return;
-        }
+    [HttpService postRequestWithURL:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)}  respClass:MicListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        MicListModel *model = (MicListModel *)resp;
         if (success) {
             success(model.roomMicList);
         }
-        
-    } failure:^(id error) {
-        [ToastUtil show:[error debugDescription]];
-        if (fail) {
-            fail(error);
-        }
-    }];
+    } failure:fail];
 }
 
 /// 切换房间游戏接口
 /// @param roomId 房间ID
 - (void)reqSwitchGame:(long)roomId gameId:(long)gameId success:(EmptyBlock)success fail:(ErrorBlock)fail {
 
-    [HttpService postRequestWithApi:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} success:^(NSDictionary *rootDict) {
-        SwitchGameModel *model = [SwitchGameModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.errorMsg];
-            if (fail) {
-                fail([NSError dt_errorWithCode:model.retCode msg:model.retMsg]);
-            }
-            return;
-        }
+    [HttpService postRequestWithURL:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} respClass:SwitchGameModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (success) {
             success();
         }
-        
-    } failure:^(id error) {
-        [ToastUtil show:[error debugDescription]];
-        if (fail) {
-            fail(error);
-        }
-    }];
+    } failure:fail];
 }
 
 #pragma mark - TicketService

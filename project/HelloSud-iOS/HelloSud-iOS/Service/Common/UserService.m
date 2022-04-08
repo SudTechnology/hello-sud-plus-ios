@@ -62,20 +62,14 @@
 }
 
 - (void)reqUserCoinDetail:(Int64Block)success fail:(StringBlock)fail {
-    [HttpService postRequestWithApi:kBASEURL(@"get-account/v1") param:@{} success:^(NSDictionary *rootDict) {
-        RespUserCoinInfoModel *model = [RespUserCoinInfoModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            if (fail) {
-                fail(model.errorMsg);
-            }
-            return;
-        }
+    [HttpService postRequestWithURL:kBASEURL(@"get-account/v1") param:@{} respClass:RespUserCoinInfoModel.class showErrorToast:NO success:^(BaseRespModel *resp) {
+        RespUserCoinInfoModel *model = (RespUserCoinInfoModel*)resp;
         if (success) {
             success(model.coin);
         }
-    } failure:^(id error) {
+    } failure:^(NSError *error) {
         if (fail) {
-            fail([error debugDescription]);
+            fail(error.dt_errMsg);
         }
     }];
 }
@@ -86,25 +80,13 @@
 /// @param success 成功
 /// @param fail 失败
 - (void)reqUserInfo:(NSArray<NSNumber*>*)userIDList success:(void(^)(NSArray<HSUserInfoModel *> *userList))success fail:(ErrorBlock)fail {
-    [HttpService postRequestWithApi:kBASEURL(@"batch/user-info/v1") param:@{@"userIds": userIDList} success:^(NSDictionary *rootDict) {
-        RespUserInfoModel *model = [RespUserInfoModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.retMsg];
-            if (fail) {
-                fail([NSError dt_errorWithCode:model.retCode msg:model.retMsg]);
-            }
-            return;
-        }
+
+    [HttpService postRequestWithURL:kBASEURL(@"batch/user-info/v1") param:@{@"userIds": userIDList} respClass:RespUserInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        RespUserInfoModel *model = (RespUserInfoModel *)resp;
         if (success) {
             success(model.userInfoList);
         }
-        
-    } failure:^(id error) {
-        [ToastUtil show:[error debugDescription]];
-        if (fail) {
-            fail(error);
-        }
-    }];
+    } failure:fail];
 }
 
 - (NSMutableDictionary *)dicUserInfo {

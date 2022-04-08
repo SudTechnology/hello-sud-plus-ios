@@ -165,32 +165,17 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
 /// 登录成功请求配置信息
 - (void)reqConfigData {
     WeakSelf
-    [HttpService postRequestWithApi:kBASEURL(@"base/config/v1") param:nil success:^(NSDictionary *rootDict) {
-        ConfigModel *model = [ConfigModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.retMsg];
-            return;
-        }
-        weakSelf.configModel = model;
-    }                       failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
-    }];
+    [HttpService postRequestWithURL:kBASEURL(@"base/config/v1") param:nil respClass:ConfigModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        weakSelf.configModel = (ConfigModel *)resp;
+    } failure:nil];
 }
 
 - (void)reqAppUpdate:(RespModelBlock)success fail:(nullable ErrorStringBlock)fail {
-
-    [HttpService postRequestWithApi:kBASEURL(@"check-upgrade/v1") param:nil success:^(NSDictionary *rootDict) {
-        RespVersionUpdateInfoModel *model = [RespVersionUpdateInfoModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            if (fail) {
-                fail(model.errorMsg);
-            }
-            return;
-        }
-        success(model);
-    }                       failure:^(id error) {
+    [HttpService postRequestWithURL:kBASEURL(@"check-upgrade/v1") param:nil respClass:RespVersionUpdateInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        success(resp);
+    } failure: ^(NSError *error){
         if (fail) {
-            fail([error debugDescription]);
+            fail(error.dt_errMsg);
         }
     }];
 }

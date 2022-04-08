@@ -18,24 +18,13 @@
 }
 
 /// 登录游戏
-- (void)reqGameLoginWithSuccess:(void(^)(RespGameInfoModel *gameInfo))success fail:(ErrorBlock)fail {
-    [HttpService postRequestWithApi:kGameURL(@"base/login/v1") param:@{} success:^(NSDictionary *rootDict) {
-        RespGameInfoModel *model = [RespGameInfoModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.retMsg];
-            if (fail) {
-                fail([NSError dt_errorWithCode:model.retCode msg:model.retMsg]);
-            }
-            return;
-        }
+- (void)reqGameLoginWithSuccess:(void (^)(RespGameInfoModel *gameInfo))success fail:(ErrorBlock)fail {
+    [HttpService postRequestWithURL:kGameURL(@"base/login/v1") param:@{} respClass:RespGameInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        RespGameInfoModel *model = (RespGameInfoModel *) resp;
         if (success) {
             success(model);
         }
-    } failure:^(id error) {
-        if (fail) {
-            fail(error);
-        }
-    }];
+    } failure:fail];
 }
 
 @end

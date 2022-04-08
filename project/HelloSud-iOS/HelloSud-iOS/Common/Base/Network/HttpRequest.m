@@ -5,11 +5,11 @@
 //  Created by Mary on 2022/1/25.
 //
 
-#import "HttpService.h"
+#import "HttpRequest.h"
 
 NSInteger const kAFNetworkingTimeoutInterval = 10;
 
-@implementation HttpService
+@implementation HttpRequest
 
 static AFHTTPSessionManager *aManager;
 

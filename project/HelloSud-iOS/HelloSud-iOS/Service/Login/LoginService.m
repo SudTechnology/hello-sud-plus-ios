@@ -95,12 +95,8 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         dicParam[@"userId"] = @(userID.integerValue);
     }
     WeakSelf
-    [HttpService postRequestWithApi:kBASEURL(@"login/v1") param:dicParam success:^(NSDictionary *rootDict) {
-        LoginModel *model = [LoginModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.retMsg];
-            return;
-        }
+    [HttpService postRequestWithURL:kBASEURL(@"login/v1") param:dicParam respClass:LoginModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        LoginModel *model = (LoginModel *)resp;
         /// 存储用户信息
         weakSelf.loginUserInfo.name = model.nickname;
         weakSelf.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.userId];
@@ -114,8 +110,7 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         weakSelf.isRefreshedToken = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_SUCCESS_NTF object:nil];
         if (success) success();
-    } failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
+    } failure:^(NSError *error) {
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_FAIL_NTF object:nil];
     }];
 }
@@ -135,8 +130,8 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
     }
     NSDictionary *dicParam = @{@"refreshToken": refreshToken};
     WeakSelf
-    [HttpService postRequestWithApi:kBASEURL(@"refresh-token/v1") param:dicParam success:^(NSDictionary *rootDict) {
-        RespRefreshTokenModel *model = [RespRefreshTokenModel decodeModel:rootDict];
+    [HttpService postRequestWithURL:kBASEURL(@"refresh-token/v1") param:dicParam respClass:RespRefreshTokenModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        RespRefreshTokenModel *model = (RespRefreshTokenModel *) resp;
         if (model.retCode != 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_FAIL_NTF object:nil];
             [ToastUtil show:[model errorMsg]];
@@ -147,9 +142,7 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         [weakSelf saveIsLogin];
         weakSelf.isRefreshedToken = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_SUCCESS_NTF object:nil];
-
-    } failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
+    } failure:^(NSError *error) {
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_FAIL_NTF object:nil];
     }];
 }

@@ -13,18 +13,13 @@
 /// 请求确认加入门票游戏
 /// @param roomId 房间ID
 - (void)reqJoinRoom:(long)roomId sceneId:(NSInteger)sceneId gameId:(NSInteger)gameId gameLevel:(NSInteger)gameLevel finished:(void (^)(void))finished {
-    [HttpService postRequestWithApi:kINTERACTURL(@"game/ticket/confirm-join/v1") param:@{@"roomId": @(roomId), @"sceneId": @(sceneId), @"gameId": @(gameId), @"gameLevel": @(gameLevel)} success:^(NSDictionary *rootDict) {
-        self.joinModel = [TicketJoinModel decodeModel:rootDict];
-        if (self.joinModel.retCode != 0) {
-            [ToastUtil show:self.joinModel.errorMsg];
-            return;
-        }
+    NSDictionary *dicParam = @{@"roomId": @(roomId), @"sceneId": @(sceneId), @"gameId": @(gameId), @"gameLevel": @(gameLevel)};
+    [HttpService postRequestWithURL:kINTERACTURL(@"game/ticket/confirm-join/v1") param:dicParam respClass:TicketJoinModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        self.joinModel = (TicketJoinModel*)resp;
         if (finished) {
             finished();
         }
-    } failure:^(id error) {
-        [ToastUtil show:[error debugDescription]];
-    }];
+    } failure:nil];
 }
 
 - (NSMutableArray <NSAttributedString *> *)getTicketRewardAttributedStrArr {

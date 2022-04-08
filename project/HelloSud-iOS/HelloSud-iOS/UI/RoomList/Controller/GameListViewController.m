@@ -92,19 +92,15 @@
 #pragma mark - requst Data
 - (void)requestData {
     WeakSelf
-    [HttpService postRequestWithApi:kINTERACTURL(@"room/list/v1") param:nil success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithURL:kINTERACTURL(@"room/list/v1") param:nil respClass:RoomListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         [weakSelf.tableView.mj_header endRefreshing];
-        RoomListModel *model = [RoomListModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.retMsg];
-            return;
-        }
+        RoomListModel *model = (RoomListModel *)resp;
         [weakSelf.dataList removeAllObjects];
         [weakSelf.dataList addObjectsFromArray:model.roomInfoList];
         [weakSelf.tableView reloadData];
         weakSelf.noDataLabel.hidden = weakSelf.dataList.count != 0;
-    } failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
+    } failure:^(NSError *error) {
+        [weakSelf.tableView.mj_header endRefreshing];
     }];
 }
 

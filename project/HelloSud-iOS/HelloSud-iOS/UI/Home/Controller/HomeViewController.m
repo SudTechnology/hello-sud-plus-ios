@@ -103,17 +103,13 @@
 #pragma mark - requst Data
 - (void)requestData {
     WeakSelf
-    [HttpService postRequestWithApi:kINTERACTURL(@"game/list/v1") param:@{} success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithURL:kINTERACTURL(@"game/list/v1") param:@{} respClass:GameListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         [weakSelf.collectionView.mj_header endRefreshing];
-        GameListModel *model = [GameListModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.retMsg];
-            return;
-        }
+        GameListModel *model = (GameListModel *)resp;
         [weakSelf.headerSceneList removeAllObjects];
         [weakSelf.headerGameList removeAllObjects];
         [weakSelf.dataList removeAllObjects];
-        
+
         /// ap存储 suitId 对应的dataArr
         NSMutableDictionary *dataMap = [NSMutableDictionary dictionary];
         for (HSSceneModel *m in model.sceneList) {
@@ -123,7 +119,7 @@
             [dic setValue:arr forKey:@"dataArr"];
             [dataMap setValue:dic forKey:[NSString stringWithFormat:@"%ld", m.sceneId]];
         }
-        
+
         /// 非重复游戏列表
         NSMutableArray <HSGameItem *> *originalGameArr = [NSMutableArray array];
         /// 遍历gameList 分类 suitId
@@ -138,7 +134,7 @@
         }
         AppService.shared.gameList = originalGameArr;
         AppService.shared.sceneList = model.sceneList;
-        
+
         /// dataList  headerGameList  headerSceneList 业务需求赋值
         for (HSSceneModel *m in model.sceneList) {
             NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%ld", (long)m.sceneId]];
@@ -148,7 +144,7 @@
                 m.isGameWait = YES;
                 [arr setArray:waitArr];
             } else {
-                
+
                 /// 求余 填满整个屏幕
                 int row = 3;
                 double fmodCount = fmod(arr.count, row);
@@ -160,14 +156,14 @@
                     }
                 }
             }
-            
+
             [weakSelf.dataList addObject:arr];
         }
         [weakSelf.headerSceneList addObjectsFromArray:model.sceneList];
-        
+
         [weakSelf.collectionView reloadData];
-    } failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
+    } failure: ^(NSError *error){
+        [weakSelf.collectionView.mj_header endRefreshing];
     }];
 }
 

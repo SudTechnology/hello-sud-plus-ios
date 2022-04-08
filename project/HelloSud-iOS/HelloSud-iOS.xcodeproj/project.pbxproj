@@ -155,11 +155,12 @@
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
 		BC2101199D87BB6081A8FBC0 /* DTNSError+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5A0981935974C33E8B /* DTNSError+Custom.m */; };
 		BC210452F6884908D768A126 /* DTNSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106C0581A7D8986B9FC83 /* DTNSArray+Masonry.m */; };
+		BC2105663A6D9E26AA05DAD3 /* HttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HttpService.m */; };
 		BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102EB58A8CE4A527A5167 /* ToastUtil.m */; };
 		BC2106F693B8FDA87CC699D2 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210414A9AE16CEC8607D9D /* AppUtil.m */; };
 		BC2107427C1CF2D51754990F /* DTUIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */; };
 		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
-		BC210868A0B206FC2641B7C6 /* HttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C175D2FCB747B52B179 /* HttpService.m */; };
+		BC210868A0B206FC2641B7C6 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C175D2FCB747B52B179 /* HttpRequest.m */; };
 		BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104782AE3890C13208B73 /* DTUIDevice+Extension.m */; };
 		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
@@ -526,17 +527,19 @@
 		BC2104782AE3890C13208B73 /* DTUIDevice+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIDevice+Extension.m"; sourceTree = "<group>"; };
 		BC2104E0C4F556A77F556FE4 /* DTUIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTUIColor+Extension.h"; sourceTree = "<group>"; };
 		BC2105042E549C236540DC05 /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUtil.m; sourceTree = "<group>"; };
-		BC2105A5541CEAB895D23262 /* HttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpService.h; sourceTree = "<group>"; };
+		BC2105A5541CEAB895D23262 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
 		BC21060831A4FEB9BEE1510A /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
 		BC2106C0581A7D8986B9FC83 /* DTNSArray+Masonry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTNSArray+Masonry.m"; sourceTree = "<group>"; };
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
+		BC21085C9AA17435A1C0A820 /* HttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpService.h; sourceTree = "<group>"; };
 		BC21088A4C435532A51CB545 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		BC2108E4617436951A41ABBE /* DTUIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTUIView+Extension.h"; sourceTree = "<group>"; };
-		BC210C175D2FCB747B52B179 /* HttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpService.m; sourceTree = "<group>"; };
+		BC210C175D2FCB747B52B179 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
 		BC210C677DD6442EA5963655 /* RespModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespModel.m; sourceTree = "<group>"; };
 		BC210D3011853BFBEBA259DB /* DTNSArray+Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTNSArray+Masonry.h"; sourceTree = "<group>"; };
 		BC210D5A0981935974C33E8B /* DTNSError+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTNSError+Custom.m"; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
+		BC210F28C7CAB6BCA3140175 /* HttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpService.m; sourceTree = "<group>"; };
 		BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIColor+Extension.m"; sourceTree = "<group>"; };
 		BC210F7B6D59DA493CE16350 /* SceneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentView.h; sourceTree = "<group>"; };
 		BC210F9ABB08F9D04A052246 /* AppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtil.h; sourceTree = "<group>"; };
@@ -1388,6 +1391,8 @@
 				448A6E0927DEFF3200004928 /* LocalizedService.h */,
 				448A6E0A27DEFF3200004928 /* LocalizedService.m */,
 				6CD6E87D27C0A36100D8F76C /* ServiceConstHeader.h */,
+				BC210F28C7CAB6BCA3140175 /* HttpService.m */,
+				BC21085C9AA17435A1C0A820 /* HttpService.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1460,8 +1465,8 @@
 		BC210D1343990E4440E57238 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				BC2105A5541CEAB895D23262 /* HttpService.h */,
-				BC210C175D2FCB747B52B179 /* HttpService.m */,
+				BC2105A5541CEAB895D23262 /* HttpRequest.h */,
+				BC210C175D2FCB747B52B179 /* HttpRequest.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1775,7 +1780,7 @@
 				6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */,
 				448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */,
 				4455AD9827EAC658001516EE /* SearchHeaderView.m in Sources */,
-				BC210868A0B206FC2641B7C6 /* HttpService.m in Sources */,
+				BC210868A0B206FC2641B7C6 /* HttpRequest.m in Sources */,
 				BC2107427C1CF2D51754990F /* DTUIColor+Extension.m in Sources */,
 				BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */,
 				6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */,
@@ -1806,6 +1811,7 @@
 				BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */,
 				BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */,
 				BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */,
+				BC2105663A6D9E26AA05DAD3 /* HttpService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

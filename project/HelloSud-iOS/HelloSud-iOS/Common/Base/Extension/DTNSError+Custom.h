@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param code 错误码
 /// @param msg 错误描述
 + (NSError *)dt_errorWithCode:(NSInteger)code msg:(NSString *)msg;
+/// 错误信息，格式: msg(code)
+/// @return
+- (NSString *)dt_errMsg;
 @end
 
 NS_ASSUME_NONNULL_END
