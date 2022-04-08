@@ -172,6 +172,7 @@
 		E5C82F7E27FFE34300A409D5 /* NIMSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7327FFE09C00A409D5 /* NIMSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E5C82F7F27FFE34500A409D5 /* NMCBasicModuleFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */; };
 		E5C82F8027FFE34500A409D5 /* NMCBasicModuleFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */; };
 		E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */; };
 		E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */; };
 /* End PBXBuildFile section */
@@ -555,6 +556,8 @@
 		E5C82F7227FFE09C00A409D5 /* NERtcSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NERtcSDK.framework; path = Vendors/netease/NERtcSDK.framework; sourceTree = "<group>"; };
 		E5C82F7327FFE09C00A409D5 /* NIMSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NIMSDK.framework; path = Vendors/netease/NIMSDK.framework; sourceTree = "<group>"; };
 		E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMCBasicModuleFramework.framework; path = Vendors/netease/NMCBasicModuleFramework.framework; sourceTree = "<group>"; };
+		E5C82F8227FFE56900A409D5 /* RCloudAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCloudAudioEngineImpl.h; sourceTree = "<group>"; };
+		E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCloudAudioEngineImpl.m; sourceTree = "<group>"; };
 		E5EDB8BB27E873A300EE99D0 /* AudioConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConfigModel.h; sourceTree = "<group>"; };
 		E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioConfigModel.m; sourceTree = "<group>"; };
 		E5EDB8BE27E8775D00EE99D0 /* AudioJoinRoomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioJoinRoomModel.h; sourceTree = "<group>"; };
@@ -1304,6 +1307,7 @@
 		6CD6E84727BE2CDA00D8F76C /* Impl */ = {
 			isa = PBXGroup;
 			children = (
+				E5C82F8127FFE52000A409D5 /* RCloud */,
 				6CD6E87027BF428200D8F76C /* TX */,
 				6CD6E86F27BF427800D8F76C /* Aliyun */,
 				6CD6E86E27BF426B00D8F76C /* Volc */,
@@ -1510,6 +1514,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		E5C82F8127FFE52000A409D5 /* RCloud */ = {
+			isa = PBXGroup;
+			children = (
+				E5C82F8227FFE56900A409D5 /* RCloudAudioEngineImpl.h */,
+				E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */,
+			);
+			path = RCloud;
+			sourceTree = "<group>";
+		};
 		E5EDB8BA27E8737700EE99D0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1555,6 +1568,7 @@
 				6C192E46279523B000553034 /* Resources */,
 				1057205B42502B672EE74406 /* [CP] Embed Pods Frameworks */,
 				44DF038F2796ADCD006EE6AC /* Embed Frameworks */,
+				7B794445875629A1759C23F6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1641,6 +1655,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B794445875629A1759C23F6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D23D6C32901616787A057FFD /* [CP] Check Pods Manifest.lock */ = {
@@ -1798,6 +1829,7 @@
 				BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */,
 				6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */,
 				4455ADCC27EAC658001516EE /* TicketJoinPopView.m in Sources */,
+				E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */,
 				4455AE0827EAC6F7001516EE /* BaseSceneViewController+IM.m in Sources */,
 				4455ADD127EAC658001516EE /* OneOneViewController.m in Sources */,
 				BC210452F6884908D768A126 /* DTNSArray+Masonry.m in Sources */,

@@ -27,6 +27,7 @@ target 'HelloSud-iOS' do
   pod 'AgoraAudio_iOS', '3.6.1.1'
   # agora云信令SDK
   pod 'AgoraRtm_iOS', '1.4.9'
-
+  # rongcloud音频SDK
+  pod 'RCVoiceRoomLib', '~> 2.0.7'
 end
 

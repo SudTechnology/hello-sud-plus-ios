@@ -8,6 +8,7 @@
 #import "AppService.h"
 #import "ZegoAudioEngineImpl.h"
 #import "AgoraAudioEngineImpl.h"
+#import "RCloudAudioEngineImpl.h"
 #import "NeteaseAudioEngineImpl.h"
 #import "TXAudioEngineImpl.h"
 #import "VolcAudioEngineImpl.h"
@@ -239,6 +240,12 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
     if (self.configModel.agoraCfg) {
         [rtcList addObject:self.configModel.agoraCfg];
     }
+    if (self.configModel.rongCloudCfg) {
+        [rtcList addObject:self.configModel.rongCloudCfg];
+    }
+    if (self.configModel.commsEaseCfg) {
+        [rtcList addObject:self.configModel.commsEaseCfg];
+    }
     _rtcList = rtcList;
 }
 
@@ -271,6 +278,11 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
         NSLog(@"使用agora语音引擎");
         [AudioEngineFactory.shared createEngine:AgoraAudioEngineImpl.class];
         rtcConfig = configModel.agoraCfg;
+    } else if (configModel.rongCloudCfg && [rtcType isEqualToString:configModel.rongCloudCfg.rtcType]) {
+        
+        NSLog(@"使用rongCloud语音引擎");
+        [AudioEngineFactory.shared createEngine:RCloudAudioEngineImpl.class];
+        rtcConfig = configModel.rongCloudCfg;
     } else if (configModel.commsEaseCfg && [rtcType isEqualToString:configModel.commsEaseCfg.rtcType]) {
 
         NSLog(@"使用commsEas语音引擎");

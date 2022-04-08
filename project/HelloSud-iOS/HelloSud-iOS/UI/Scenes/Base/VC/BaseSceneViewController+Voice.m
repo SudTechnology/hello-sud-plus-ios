@@ -42,10 +42,14 @@
     // 配置语音引擎
     AudioConfigModel *configModel = AppService.shared.rtcConfigModel;
     if (configModel) {
-        configModel.userID = AppService.shared.login.loginUserInfo.userID;
-        configModel.token = self.enterModel.rtiToken;
-        
         NSString *rtcType = AppService.shared.rtcType;
+        
+        configModel.userID = AppService.shared.login.loginUserInfo.userID;
+        if ([rtcType isEqualToString:kRtcTypeRongCloud]) {
+            configModel.token = self.enterModel.rtcToken;
+        } else {
+            configModel.token = self.enterModel.rtiToken;
+        }
         if ([rtcType isEqualToString:kRtcTypeRongCloud] || [rtcType isEqualToString:kRtcTypeCommEase]) {
             [AudioEngineFactory.shared.audioEngine initWithConfig:configModel success:^{
                 [self joinRoom:audioJoinRoomModel];
