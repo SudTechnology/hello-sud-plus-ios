@@ -60,7 +60,7 @@
     SwitchLangModel *m_4 = [SwitchLangModel new];
     m_4.title = @"لغة عربية";
     m_4.language = @"ar";
-    m_4.locale = @"ar-AE";
+    m_4.locale = @"ar-SA";
     
     SwitchLangModel *m_5 = [SwitchLangModel new];
     m_5.title = @"Bahasa Indonesia";
