@@ -774,8 +774,8 @@
 		4455AD1027EAC658001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4455AD1127EAC658001516EE /* GameListTableViewCell.m */,
 				4455AD1227EAC658001516EE /* GameListTableViewCell.h */,
+				4455AD1127EAC658001516EE /* GameListTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
