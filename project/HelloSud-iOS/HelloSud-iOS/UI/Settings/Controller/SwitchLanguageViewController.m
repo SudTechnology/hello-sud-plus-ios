@@ -32,7 +32,7 @@
     NSArray <SwitchLangModel *>*dataArray = [SettingsService getLanguageArr];
     
     if (LanguageUtil.userLanguage.length > 0) {
-        NSString *str = [NSBundle currentLanguage];
+        NSString *str = [[NSBundle currentLanguage] languageCountryCode];
         for (NSInteger i = 0; i < dataArray.count; i++) {
             SwitchLangModel *model = dataArray[i];
             model.isSelect = [model.language isEqualToString:str];
