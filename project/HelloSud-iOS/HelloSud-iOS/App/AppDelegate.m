@@ -87,9 +87,19 @@
         } onCloseCallback:nil];
     } else if (model.upgradeType == 2) {
         /// 引导升级
-        [DTAlertView showTextAlert:NSString.dt_update_app_ver_new sureText:NSString.dt_update_now cancelText:NSString.dt_next_time_again_say onSureCallback:^{
-            [self openPath:model.packageUrl];
-        } onCloseCallback:nil];
+        // 2.格式化日期
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd";
+        NSString *keyTodayShow = [NSString stringWithFormat:@"keyUpgrade_%@", [formatter stringFromDate:[NSDate date]]];
+        BOOL isTodayShow = [NSUserDefaults.standardUserDefaults boolForKey:keyTodayShow];
+        if (!isTodayShow) {
+            [NSUserDefaults.standardUserDefaults setBool:YES forKey:keyTodayShow];
+            [NSUserDefaults.standardUserDefaults synchronize];
+            [DTAlertView showTextAlert:NSString.dt_update_app_ver_new sureText:NSString.dt_update_now cancelText:NSString.dt_next_time_again_say onSureCallback:^{
+                [self openPath:model.packageUrl];
+            } onCloseCallback:nil];
+        }
+        
     }
 }
 
