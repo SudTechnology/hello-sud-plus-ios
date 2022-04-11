@@ -17,6 +17,7 @@ static NSString *const DTUserLanguageKey = @"DTUserLanguageKey";
     //跟随手机系统
     if (userLanguage.length == 0) {
         [self resetSystemLanguage];
+        [self updateRTL];
         return;
     }
     //用户自定义

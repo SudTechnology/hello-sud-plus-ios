@@ -44,7 +44,7 @@
 
 /// RoomList
 "dt_room_list_room_number" = "Số phòng";
-"dt_room_list_users" = "人";
+"dt_room_list_users" = "người";
 "dt_room_list_scene" = "场景";
 "dt_room_list_no_room_available" = "Tạm thời không có phòng nào đang phát sóng\nĐến trang chủ tạo một cái nào~";
 

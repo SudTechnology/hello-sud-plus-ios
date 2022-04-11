@@ -162,6 +162,10 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
 
 }
 
+- (void)setDefLanguage {
+    
+}
+
 /// 登录成功请求配置信息
 - (void)reqConfigData {
     WeakSelf
