@@ -224,7 +224,7 @@
 
 // 设置Header的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(kScreenWidth, 150);
+    return CGSizeMake(kScreenWidth, 170);
 }
 
 // 设置Footer的尺寸

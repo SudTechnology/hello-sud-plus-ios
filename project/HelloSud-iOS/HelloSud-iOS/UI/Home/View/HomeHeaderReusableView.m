@@ -85,7 +85,6 @@
         make.leading.mas_equalTo(0);
         make.trailing.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
-        make.size.mas_greaterThanOrEqualTo(0);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(15);
@@ -109,17 +108,6 @@
     [self.createBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(4, 4, 4, 4));
     }];
-    CGFloat w = (kScreenWidth - 32) / 2;
-//    [self.itemContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.leading.mas_equalTo(self.mas_centerX);
-//        make.top.mas_equalTo(36);
-//        make.width.mas_equalTo(w);
-//        make.bottom.mas_equalTo(0);
-//    }];
-//    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.center.mas_equalTo(self.itemContainerView);
-//        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
-//    }];
 }
 
 - (BaseView *)contentView {

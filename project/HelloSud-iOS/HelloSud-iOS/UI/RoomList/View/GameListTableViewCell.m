@@ -28,11 +28,17 @@
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld%@", m.memberCount, NSString.dt_room_list_users];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
     self.typeLabel.text = [AppService.shared getRTCTypeName:m.rtcType];
+    self.roomTypeLabel.text = m.sceneTag;
     
-    for (HSSceneModel *sModel in AppService.shared.sceneList) {
-        if (sModel.sceneId == m.sceneType) {
-            self.roomTypeLabel.text = [sModel.sceneName stringByReplacingOccurrencesOfString:NSString.dt_room_list_scene withString:@""];
-        }
+    if (m.sceneType == SceneTypeTicket) {
+        self.roomTypeLabel.textColor = [UIColor dt_colorWithHexString:@"#E8C958" alpha:1];
+        self.roomTypeLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#262732" alpha:1];
+    } else if (m.sceneType == SceneTypeASR) {
+        self.roomTypeLabel.textColor = [UIColor dt_colorWithHexString:@"#66A067" alpha:1];
+        self.roomTypeLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#DDF5D9" alpha:1];
+    } else {
+        self.roomTypeLabel.textColor = [UIColor dt_colorWithHexString:@"#999999" alpha:1];
+        self.roomTypeLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F5F5" alpha:1];
     }
 }
 
@@ -124,9 +130,9 @@
         _roomTypeLabel = [[DTPaddingLabel alloc] init];
         _roomTypeLabel.paddingX = 5;
         _roomTypeLabel.text = @"";
-        _roomTypeLabel.textColor = [UIColor dt_colorWithHexString:@"#999999" alpha:1];
         _roomTypeLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
         _roomTypeLabel.textAlignment = NSTextAlignmentCenter;
+        _roomTypeLabel.textColor = [UIColor dt_colorWithHexString:@"#999999" alpha:1];
         _roomTypeLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F5F5" alpha:1];
     }
     return _roomTypeLabel;

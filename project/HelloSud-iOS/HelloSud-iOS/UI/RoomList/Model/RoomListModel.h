@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * roomPic;
 @property (nonatomic, assign) NSInteger sceneType;
 @property (nonatomic, copy) NSString * rtcType;
+@property (nonatomic, copy) NSString * sceneTag;
 
 @end
 
