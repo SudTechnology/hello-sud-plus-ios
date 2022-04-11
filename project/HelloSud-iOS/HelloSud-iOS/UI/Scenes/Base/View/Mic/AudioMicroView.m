@@ -220,7 +220,7 @@
     if (self.micType == HSGameMic) {
         if (self.model.user == nil) {
             self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
-            [self showUserName:NSString.dt_room_click_mic showOwner:false];
+            [self showUserName:@"" showOwner:false];
             [self.rippleView stopAnimate:YES];
             [self hiddenGameNode:true];
             return;

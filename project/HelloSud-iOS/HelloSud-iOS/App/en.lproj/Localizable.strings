@@ -44,7 +44,7 @@
 
 /// RoomList
 "dt_room_list_room_number" = "Room Number";
-"dt_room_list_users" = "人";
+"dt_room_list_users" = "users";
 "dt_room_list_scene" = "场景";
 "dt_room_list_no_room_available" = "No live streams right now \nGo to homepage to create one~";
 

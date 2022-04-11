@@ -23,8 +23,17 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSURL *)appLicenseURL;
 
 + (NSString *)getCurLanguageLocale;
+/// 不支持的语言
++ (BOOL)isNotSupportLanguage;
 
 + (NSArray <SwitchLangModel *> *)getLanguageArr;
 @end
 
 NS_ASSUME_NONNULL_END
+
+
+@interface NSString (Language)
+
+- (NSString *)languageCountryCode;
+
+@end

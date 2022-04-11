@@ -44,7 +44,7 @@
 
 /// RoomList
 "dt_room_list_room_number" = "Nomor ruangan";
-"dt_room_list_users" = "人";
+"dt_room_list_users" = "orang";
 "dt_room_list_scene" = "场景";
 "dt_room_list_no_room_available" = "Tidak ada ruangan yang tersedia\nBuat ruangan di Beranda";
 

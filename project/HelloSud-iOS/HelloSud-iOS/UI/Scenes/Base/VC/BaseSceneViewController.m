@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.language = @"zh-CN";
+    self.language = [SettingsService getCurLanguageLocale];
     [self initSudFSMMG];
     AudioRoomService.shared.currentRoomVC = self;
     [self loginRoom];
