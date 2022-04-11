@@ -29,9 +29,9 @@ target 'HelloSud-iOS' do
   pod 'AgoraRtm_iOS', '1.4.9'
   # rongcloud音频SDK
   pod 'RCVoiceRoomLib', '~> 2.0.7'
-  # netease 语音SDK
-  pod 'NERtcSDK', '~> 4.6.0'
-  # netease IM SDK
-  pod 'NIMSDK_LITE', '9.0.1'
+#  # netease 语音SDK
+#  pod 'NERtcSDK', '~> 4.6.0'
+#  # netease IM SDK
+#  pod 'NIMSDK_LITE', '9.0.1'
 end
 
