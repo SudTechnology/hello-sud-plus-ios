@@ -64,17 +64,11 @@
     
     id<INERtcEngineEx> engine = [self getEngine];
     if (engine != nil) {
-        
-//        NERtcLogSetting *logSetting = [[NERtcLogSetting alloc] init];
-//        logSetting.logLevel = kNERtcLogLevelInfo;
-        
         NERtcEngineContext *context = [[NERtcEngineContext alloc] init];
         // 设置通话相关信息的回调
         context.engineDelegate = self;
         // 设置当前应用的appKey
         context.appKey = model.appKey;
-//        context.appKey = @"";
-//        context.logSetting = logSetting;
         
         [engine setupEngineWithContext:context];
         [engine setAudioProfile:kNERtcAudioProfileHighQuality scenario:kNERtcAudioScenarioChatRoom];
