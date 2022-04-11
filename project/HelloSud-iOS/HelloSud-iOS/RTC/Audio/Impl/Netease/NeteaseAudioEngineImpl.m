@@ -54,7 +54,9 @@
     [[[NIMSDK sharedSDK] loginManager] login:model.userID token:model.token completion:^(NSError * _Nullable error) {
         if (error == nil) {
             if (success != nil) {
-                success();
+                [ThreadUtils runOnUiThread:^{
+                    success();
+                }];
             }
         }
     }];

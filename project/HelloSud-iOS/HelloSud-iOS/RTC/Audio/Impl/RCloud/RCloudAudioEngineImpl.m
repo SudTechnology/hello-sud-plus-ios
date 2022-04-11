@@ -69,7 +69,9 @@
         
     } success:^(NSString *userId) {
         if (success != nil) {
-            success();
+            [ThreadUtils runOnUiThread:^{
+                success();
+            }];
         }
     } error:^(RCConnectErrorCode errorCode) {
         

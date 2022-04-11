@@ -50,7 +50,7 @@
         } else {
             configModel.token = self.enterModel.rtiToken;
         }
-        if ([rtcType isEqualToString:kRtcTypeRongCloud] || [rtcType isEqualToString:kRtcTypeCommEase]) {
+        if ([rtcType isEqualToString:kRtcTypeRongCloud] || [rtcType isEqualToString:kRtcTypeCommEase] || [rtcType isEqualToString:kRtcTypeAgora]) {
             [AudioEngineFactory.shared.audioEngine initWithConfig:configModel success:^{
                 [self joinRoom:audioJoinRoomModel];
             }];
@@ -70,7 +70,7 @@
 }
 
 - (void)logoutRoom {
-    [AudioEngineFactory.shared.audioEngine leaveRoom];
+    [AudioEngineFactory.shared.audioEngine destroy];
 }
 
 #pragma mark =======音频采集=======
