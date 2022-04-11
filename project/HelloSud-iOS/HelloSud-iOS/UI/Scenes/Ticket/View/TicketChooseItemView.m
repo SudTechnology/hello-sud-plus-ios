@@ -39,9 +39,28 @@
     [self addSubview:self.hotImageView];
     [self addSubview:self.btnImageView];
     [self addSubview:self.rewardLabel];
-    [self addSubview:self.enterLabel];
+    [self.btnImageView addSubview:self.enterLabel];
     [self addSubview:self.onlineLabel];
     [self addSubview:self.usersView];
+    
+    [self animaEnterNode];
+}
+
+- (void)dealloc {
+    NSLog(@"");
+}
+
+- (void)animaEnterNode {
+    WeakSelf
+    [UIView animateWithDuration:1 animations:^{
+        weakSelf.btnImageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 animations:^{
+            weakSelf.btnImageView.transform = CGAffineTransformMakeScale(1, 1);
+        } completion:^(BOOL finished) {
+            [weakSelf animaEnterNode];
+        }];
+    }];
 }
 
 - (void)dtLayoutViews {
@@ -61,7 +80,9 @@
     [self.btnImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-20);
         make.bottom.mas_equalTo(-18);
-        make.size.mas_equalTo(CGSizeMake(88, 30));
+        make.height.mas_equalTo(30);
+        make.width.mas_greaterThanOrEqualTo(0);
+//        make.size.mas_equalTo(CGSizeMake(88, 30));
     }];
     [self.rewardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.leading.mas_equalTo(22);
@@ -69,6 +90,8 @@
     }];
     [self.enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.btnImageView);
+        make.leading.mas_equalTo(18);
+        make.trailing.mas_equalTo(-18);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.usersView mas_makeConstraints:^(MASConstraintMaker *make) {
