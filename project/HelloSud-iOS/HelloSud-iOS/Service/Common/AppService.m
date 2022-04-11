@@ -163,35 +163,24 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
 
 }
 
+- (void)setDefLanguage {
+    
+}
+
 /// 登录成功请求配置信息
 - (void)reqConfigData {
     WeakSelf
-    [HttpService postRequestWithApi:kBASEURL(@"base/config/v1") param:nil success:^(NSDictionary *rootDict) {
-        ConfigModel *model = [ConfigModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.retMsg];
-            return;
-        }
-        weakSelf.configModel = model;
-    }                       failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
-    }];
+    [HttpService postRequestWithURL:kBASEURL(@"base/config/v1") param:nil respClass:ConfigModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        weakSelf.configModel = (ConfigModel *)resp;
+    } failure:nil];
 }
 
 - (void)reqAppUpdate:(RespModelBlock)success fail:(nullable ErrorStringBlock)fail {
-
-    [HttpService postRequestWithApi:kBASEURL(@"check-upgrade/v1") param:nil success:^(NSDictionary *rootDict) {
-        RespVersionUpdateInfoModel *model = [RespVersionUpdateInfoModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            if (fail) {
-                fail(model.errorMsg);
-            }
-            return;
-        }
-        success(model);
-    }                       failure:^(id error) {
+    [HttpService postRequestWithURL:kBASEURL(@"check-upgrade/v1") param:nil respClass:RespVersionUpdateInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        success(resp);
+    } failure: ^(NSError *error){
         if (fail) {
-            fail([error debugDescription]);
+            fail(error.dt_errMsg);
         }
     }];
 }
@@ -205,15 +194,15 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
     } else if ([rtcType isEqualToString:kRtcTypeAgora]) {
         return NSString.dt_settings_agora;
     } else if ([rtcType isEqualToString:kRtcTypeRongCloud]) {
-        return kRtcNameRongCloud;
+        return NSString.dt_settings_rong_cloud;
     } else if ([rtcType isEqualToString:kRtcTypeCommEase]) {
-        return kRtcNameCommEase;
+        return NSString.dt_settings_net_ease;
     } else if ([rtcType isEqualToString:kRtcTypeVoicEngine]) {
-        return kRtcNameVoicEngine;
+        return NSString.dt_settings_volcano;
     } else if ([rtcType isEqualToString:kRtcTypeAlibabaCloud]) {
-        return kRtcNameAlibabaCloud;
+        return NSString.dt_settings_alicloud;
     } else if ([rtcType isEqualToString:kRtcTypeTencentCloud]) {
-        return kRtcNameTencentCloud;
+        return NSString.dt_settings_tencent;
     }
     return @"";
 }

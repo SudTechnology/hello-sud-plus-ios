@@ -27,18 +27,18 @@
 
 - (void)dtLayoutViews {
     [self.voiceUpBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(16);
+        make.leading.mas_equalTo(16);
         make.centerY.mas_equalTo(self);
         make.size.mas_equalTo(CGSizeMake(56, 30));
     }];
     [self.giftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-16);
+        make.trailing.mas_equalTo(-16);
         make.centerY.mas_equalTo(self);
         make.size.mas_equalTo(CGSizeMake(32, 32));
     }];
     [self.inputLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.voiceUpBtn.mas_right).offset(12);
-        make.right.mas_equalTo(self.giftBtn.mas_left).offset(-12);
+        make.leading.mas_equalTo(self.voiceUpBtn.mas_trailing).offset(12);
+        make.trailing.mas_equalTo(self.giftBtn.mas_leading).offset(-12);
         make.centerY.mas_equalTo(self);
         make.height.mas_equalTo(32);
         make.width.mas_greaterThanOrEqualTo(0);

@@ -28,15 +28,20 @@
     return [self dt_localizedStringForKey:key value:value table:tableName];
 }
 
-
-
 + (BOOL)isChineseLanguage {
     NSString *currentLanguage = [self currentLanguage];
     return [currentLanguage hasPrefix:@"zh-Hans"];
 }
 
 + (NSString *)currentLanguage {
-    return [LanguageUtil userLanguage] ? : [NSLocale preferredLanguages].firstObject;
+    NSString *language =  [LanguageUtil userLanguage] ? : [NSLocale preferredLanguages].firstObject;
+    if (@available(iOS 10.0, *)) {
+        language = [language stringByReplacingOccurrencesOfString: [NSString stringWithFormat:@"-%@", NSLocale.currentLocale.countryCode] withString:@""];
+    } else {
+        // Fallback on earlier versions
+    }
+    
+    return language;
 }
 
 @end

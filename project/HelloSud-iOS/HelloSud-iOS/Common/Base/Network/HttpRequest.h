@@ -35,7 +35,7 @@ typedef void (^HTTPRequestFailedBlock)(NSError *error);
 extern NSInteger const kAFNetworkingTimeoutInterval;
 
 
-@interface HttpService : NSObject
+@interface HttpRequest : NSObject
 
 /**
  *  网络请求的实例方法

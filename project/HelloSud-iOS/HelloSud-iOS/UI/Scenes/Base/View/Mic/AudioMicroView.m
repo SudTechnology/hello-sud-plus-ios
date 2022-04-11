@@ -52,7 +52,7 @@
     } else if (self.micType == HSGameMic) {
         [self.giftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(-4);
-            make.right.mas_equalTo(4);
+            make.trailing.mas_equalTo(4);
             make.size.mas_equalTo(CGSizeMake(14, 14));
         }];
     }
@@ -98,11 +98,11 @@
     }];
     [self.giftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(-14);
-        make.right.mas_equalTo(14);
+        make.trailing.mas_equalTo(14);
         make.size.mas_equalTo(CGSizeMake(32, 32));
     }];
     [self.gameCaptainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.headerView.mas_left).offset(-4);
+        make.leading.mas_equalTo(self.headerView.mas_leading).offset(-4);
         make.top.mas_equalTo(self.headerView.mas_top).offset(-4);
         make.size.mas_equalTo(CGSizeMake(14, 14));
     }];
@@ -220,7 +220,7 @@
     if (self.micType == HSGameMic) {
         if (self.model.user == nil) {
             self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
-            [self showUserName:NSString.dt_room_click_mic showOwner:false];
+            [self showUserName:@"" showOwner:false];
             [self.rippleView stopAnimate:YES];
             [self hiddenGameNode:true];
             return;

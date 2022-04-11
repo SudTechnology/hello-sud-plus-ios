@@ -33,6 +33,7 @@
 + (NSString *)dt_settings_switch_rtc { return @"dt_settings_switch_rtc".localized; }
 + (NSString *)dt_settings_zego { return @"dt_settings_zego".localized; }
 + (NSString *)dt_settings_agora { return @"dt_settings_agora".localized; }
++ (NSString *)dt_settings_rong_cloud { return @"dt_settings_rong_cloud".localized; }
 + (NSString *)dt_settings_net_ease { return @"dt_settings_net_ease".localized; }
 + (NSString *)dt_settings_volcano { return @"dt_settings_volcano".localized; }
 + (NSString *)dt_settings_alicloud { return @"dt_settings_alicloud".localized; }
@@ -95,12 +96,6 @@
 + (NSString *)dt_ticket_choose_pop_not_alert { return @"dt_ticket_choose_pop_not_alert".localized; }
 + (NSString *)dt_ticket_choose_pop_sure_enter { return @"dt_ticket_choose_pop_sure_enter".localized; }
 + (NSString *)dt_ticket_reward_str { return @"dt_ticket_reward_str".localized; }
-+ (NSString *)dt_ticket_reward_str_one { return @"dt_ticket_reward_str_one".localized; }
-+ (NSString *)dt_ticket_reward_str_two { return @"dt_ticket_reward_str_two".localized; }
-+ (NSString *)dt_ticket_reward_str_thr { return @"dt_ticket_reward_str_thr".localized; }
-+ (NSString *)dt_ticket_reward_str_four { return @"dt_ticket_reward_str_four".localized; }
-+ (NSString *)dt_ticket_reward_str_five { return @"dt_ticket_reward_str_five".localized; }
-+ (NSString *)dt_ticket_reward_str_six { return @"dt_ticket_reward_str_six".localized; }
 + (NSString *)dt_room_input_text { return @"dt_room_input_text".localized; }
 + (NSString *)dt_room_up_mic { return @"dt_room_up_mic".localized; }
 + (NSString *)dt_room_choose_game { return @"dt_room_choose_game".localized; }
@@ -132,6 +127,23 @@
 + (NSString *)dt_unable_microphone_tip { return @"dt_unable_microphone_tip".localized; }
 + (NSString *)dt_settings_more_set { return @"dt_settings_more_set".localized; }
 + (NSString *)dt_follow_system { return @"dt_follow_system".localized; }
+
++ (NSString *)MJRefreshHeaderIdleText { return @"MJRefreshHeaderIdleText".localized; }
++ (NSString *)MJRefreshHeaderPullingText { return @"MJRefreshHeaderPullingText".localized; }
++ (NSString *)MJRefreshHeaderRefreshingText { return @"MJRefreshHeaderRefreshingText".localized; }
+
++ (NSString *)MJRefreshAutoFooterIdleText { return @"MJRefreshAutoFooterIdleText".localized; }
++ (NSString *)MJRefreshAutoFooterRefreshingText { return @"MJRefreshAutoFooterRefreshingText".localized; }
++ (NSString *)MJRefreshAutoFooterNoMoreDataText { return @"MJRefreshAutoFooterNoMoreDataText".localized; }
+
++ (NSString *)MJRefreshBackFooterIdleText { return @"MJRefreshBackFooterIdleText".localized; }
++ (NSString *)MJRefreshBackFooterPullingText { return @"MJRefreshBackFooterPullingText".localized; }
++ (NSString *)MJRefreshBackFooterRefreshingText { return @"MJRefreshBackFooterRefreshingText".localized; }
++ (NSString *)MJRefreshBackFooterNoMoreDataText { return @"MJRefreshBackFooterNoMoreDataText".localized; }
+
++ (NSString *)MJRefreshHeaderLastTimeText { return @"MJRefreshHeaderLastTimeText".localized; }
++ (NSString *)MJRefreshHeaderDateTodayText { return @"MJRefreshHeaderDateTodayText".localized; }
++ (NSString *)MJRefreshHeaderNoneLastDateText { return @"MJRefreshHeaderNoneLastDateText".localized; }
 
 
 @end

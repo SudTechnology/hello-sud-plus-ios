@@ -58,43 +58,46 @@
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 8, 0));
     }];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(10);
+        make.leading.mas_equalTo(10);
         make.centerY.equalTo(self.contentView);
         make.size.mas_equalTo(CGSizeMake(64, 64));
     }];
     [self.roomTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.iconImageView.mas_top).offset(4);
-        make.left.mas_equalTo(self.iconImageView.mas_right).offset(10);
+        make.leading.mas_equalTo(self.iconImageView.mas_trailing).offset(10);
         make.width.mas_greaterThanOrEqualTo(0);
         make.height.mas_equalTo(20);
     }];
     [self.roomNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.iconImageView.mas_top).offset(3);
-        make.left.mas_equalTo(self.roomTypeLabel.mas_right).offset(6);
+        make.leading.mas_equalTo(self.roomTypeLabel.mas_trailing).offset(6);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
-        make.right.mas_lessThanOrEqualTo(-80);
+        make.trailing.mas_lessThanOrEqualTo(-80);
     }];
     [self.onlineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-16);
+        make.trailing.mas_equalTo(-16);
         make.centerY.mas_equalTo(self.roomNameLabel);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.roomNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.roomNameLabel.mas_bottom).offset(12);
-        make.left.mas_equalTo(self.iconImageView.mas_right).offset(10);
+        make.leading.mas_equalTo(self.iconImageView.mas_trailing).offset(10);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.enterNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-16);
+        make.trailing.mas_equalTo(-16);
         make.bottom.mas_equalTo(-12);
         make.size.mas_equalTo(CGSizeMake(48 + 36, 24));
     }];
+    
     [self.enterRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.top.bottom.mas_equalTo(self.enterNode);
+        make.leading.equalTo(self.typeLabel.mas_trailing);
+        make.top.bottom.mas_equalTo(self.enterNode);
         make.width.mas_equalTo(48);
     }];
     [self.typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(self.enterNode).offset(1);
+        make.leading.mas_equalTo(1);
+        make.top.mas_equalTo(self.enterNode).offset(1);
         make.bottom.mas_equalTo(self.enterNode).offset(-1);
         make.width.mas_equalTo(36);
     }];

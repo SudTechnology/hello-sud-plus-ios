@@ -29,17 +29,17 @@
 
 - (void)dtLayoutViews {
     [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self);
+        make.leading.mas_equalTo(self);
         make.centerY.mas_equalTo(self);
         make.size.mas_equalTo(CGSizeMake(16, 16));
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.tagView.mas_right).offset(4);
+        make.leading.mas_equalTo(self.tagView.mas_trailing).offset(4);
         make.centerY.mas_equalTo(self);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.sizeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self);
+        make.trailing.mas_equalTo(self);
         make.centerY.mas_equalTo(self);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];

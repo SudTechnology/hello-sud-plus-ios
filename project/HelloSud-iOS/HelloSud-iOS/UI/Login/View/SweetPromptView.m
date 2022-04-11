@@ -39,20 +39,20 @@
 
 - (void)dtLayoutViews {
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(24);
-        make.right.mas_equalTo(-24);
+        make.top.leading.mas_equalTo(24);
+        make.trailing.mas_equalTo(-24);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.agreeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentLabel.mas_bottom).offset(24);
-        make.left.mas_equalTo(43);
-        make.right.mas_equalTo(-43);
+        make.leading.mas_equalTo(43);
+        make.trailing.mas_equalTo(-43);
         make.height.mas_equalTo(36);
     }];
     [self.exitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.agreeBtn.mas_bottom).offset(8);
-        make.left.mas_equalTo(43);
-        make.right.mas_equalTo(-43);
+        make.leading.mas_equalTo(43);
+        make.trailing.mas_equalTo(-43);
         make.height.mas_equalTo(36);
         make.bottom.mas_equalTo(-12);
     }];

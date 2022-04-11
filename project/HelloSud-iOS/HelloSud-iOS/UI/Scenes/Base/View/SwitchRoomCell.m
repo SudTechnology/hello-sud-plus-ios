@@ -49,12 +49,12 @@
         make.height.mas_equalTo(self.itemW);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.containerView);
+        make.leading.trailing.equalTo(self.containerView);
         make.top.mas_equalTo(self.iconImageView.mas_bottom).offset(3);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.inGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(self.iconImageView);
+        make.leading.top.mas_equalTo(self.iconImageView);
         make.size.mas_equalTo(CGSizeMake(40, 16));
     }];
 }

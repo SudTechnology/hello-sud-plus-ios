@@ -23,7 +23,7 @@
 
 - (void)hsLayoutViews {
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(0);
+        make.leading.top.trailing.mas_equalTo(0);
         make.height.mas_equalTo(12);
     }];
 }

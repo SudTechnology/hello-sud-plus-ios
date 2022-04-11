@@ -64,14 +64,14 @@
     }];
     [self.coinImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(14);
-        make.left.mas_equalTo(18);
+        make.leading.mas_equalTo(18);
         make.centerY.equalTo(self.coinContentView);
     }];
     [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_greaterThanOrEqualTo(0);
-        make.left.equalTo(self.coinImageView.mas_right).offset(3);
+        make.leading.equalTo(self.coinImageView.mas_trailing).offset(3);
         make.centerY.equalTo(self.coinContentView);
-        make.right.mas_equalTo(-19);
+        make.trailing.mas_equalTo(-19);
     }];
 }
 

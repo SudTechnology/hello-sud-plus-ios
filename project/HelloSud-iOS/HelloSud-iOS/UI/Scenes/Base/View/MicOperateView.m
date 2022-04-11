@@ -34,20 +34,20 @@
     
     [self.operateView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(13);
-        make.left.mas_equalTo(0);
-        make.right.mas_equalTo(0);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
+        make.leading.trailing.mas_equalTo(0);
         make.height.mas_equalTo(0.5);
         make.top.equalTo(self.operateView.mas_bottom);
     }];
     CGFloat bottom = kAppSafeBottom;
     [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lineView.mas_bottom).offset(0);
-        make.left.mas_equalTo(0);
-        make.right.mas_equalTo(0);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
         make.height.mas_equalTo(56);
         make.bottom.mas_equalTo(-bottom);
     }];
@@ -72,8 +72,8 @@
         if (lastBtn == nil) {
             [btn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(0);
-                make.left.mas_equalTo(0);
-                make.right.mas_equalTo(0);
+                make.leading.mas_equalTo(0);
+                make.trailing.mas_equalTo(0);
                 make.height.mas_equalTo(56);
                 // 只有一个
                 if (self.operateList.count == 1) {
@@ -85,8 +85,8 @@
                 // 最后一个
                 [btn mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.top.equalTo(lastBtn.mas_bottom);
-                    make.left.mas_equalTo(0);
-                    make.right.mas_equalTo(0);
+                    make.leading.mas_equalTo(0);
+                    make.trailing.mas_equalTo(0);
                     make.height.mas_equalTo(56);
                     make.bottom.mas_equalTo(0);
                 }];
@@ -94,8 +94,8 @@
                 
                 [btn mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.top.equalTo(lastBtn.mas_bottom);
-                    make.left.mas_equalTo(0);
-                    make.right.mas_equalTo(0);
+                    make.leading.mas_equalTo(0);
+                    make.trailing.mas_equalTo(0);
                     make.height.mas_equalTo(56);
                 }];
             }

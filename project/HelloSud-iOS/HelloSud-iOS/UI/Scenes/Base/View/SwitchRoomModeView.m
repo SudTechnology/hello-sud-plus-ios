@@ -37,12 +37,12 @@
 
 - (void)dtLayoutViews {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(16);
+        make.leading.mas_equalTo(16);
         make.top.mas_equalTo(22);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self);
+        make.leading.trailing.mas_equalTo(self);
         make.top.mas_equalTo(self.titleLabel.mas_bottom);
         make.height.mas_equalTo(500);
         make.bottom.mas_equalTo(-kAppSafeBottom);

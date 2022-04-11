@@ -29,6 +29,7 @@
 "dt_settings_switch_rtc" = "RTC서비스 제공자로 전환";
 "dt_settings_zego" = "Zego";
 "dt_settings_agora" = "Agora";
+"dt_settings_rong_cloud" = "RongCloud";
 "dt_settings_net_ease" = "CommsEase";
 "dt_settings_volcano" = "VolcEngine";
 "dt_settings_alicloud" = "Alibaba Cloud";
@@ -43,7 +44,7 @@
 
 /// RoomList
 "dt_room_list_room_number" = "방 번호";
-"dt_room_list_users" = "人";
+"dt_room_list_users" = "인";
 "dt_room_list_scene" = "场景";
 "dt_room_list_no_room_available" = "방송 중인 방이 없음 \n홈에서 생성하세요~";
 

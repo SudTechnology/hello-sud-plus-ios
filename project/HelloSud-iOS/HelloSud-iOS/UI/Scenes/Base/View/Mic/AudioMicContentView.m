@@ -67,7 +67,7 @@
     }];
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.ownerMicView.mas_bottom);
-        make.left.right.equalTo(self);
+        make.leading.trailing.equalTo(self);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
         make.bottom.mas_equalTo(0);
     }];

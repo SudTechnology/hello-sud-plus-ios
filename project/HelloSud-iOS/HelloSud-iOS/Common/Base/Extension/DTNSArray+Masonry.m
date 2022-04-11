@@ -86,16 +86,16 @@
             
             // 第一列
             if (currentColumn == 0) {
-                make.left.equalTo(tempSuperView).offset(leadSpacing);
+                make.leading.equalTo(tempSuperView).offset(leadSpacing);
             }
             // 最后一列
             if (currentColumn == warpCount - 1) {
-                make.right.equalTo(tempSuperView).offset(-tailSpacing);
+                make.trailing.equalTo(tempSuperView).offset(-tailSpacing);
             }
             // 中间若干列
             if (currentColumn != 0 && currentColumn != warpCount - 1) {
                 CGFloat offset = (1-(currentColumn/((CGFloat)warpCount-1)))*(fixedItemWidth+leadSpacing)-currentColumn*tailSpacing/(((CGFloat)warpCount-1));
-                make.right.equalTo(tempSuperView).multipliedBy(currentColumn/((CGFloat)warpCount-1)).offset(offset);
+                make.trailing.equalTo(tempSuperView).multipliedBy(currentColumn/((CGFloat)warpCount-1)).offset(offset);
             }
         }];
         prev = v;
@@ -207,19 +207,19 @@
             
             // 第一列
             if (currentColumn == 0) {
-                make.left.equalTo(tempSuperView).offset(leadSpacing);
+                make.leading.equalTo(tempSuperView).offset(leadSpacing);
             }
             // 最后一列
             if (currentColumn == columnCount - 1) {
                 // 如果只有一列
                 if (currentColumn != 0) {
-                    make.left.equalTo(prev.mas_right).offset(fixedInteritemSpacing);
+                    make.leading.equalTo(prev.mas_trailing).offset(fixedInteritemSpacing);
                 }
-                make.right.equalTo(tempSuperView).offset(-tailSpacing);
+                make.trailing.equalTo(tempSuperView).offset(-tailSpacing);
             }
             // 中间若干列
             if (currentColumn != 0 && currentColumn != warpCount - 1) {
-                make.left.equalTo(prev.mas_right).offset(fixedInteritemSpacing);
+                make.leading.equalTo(prev.mas_trailing).offset(fixedInteritemSpacing);
             }
         }];
         prev = v;

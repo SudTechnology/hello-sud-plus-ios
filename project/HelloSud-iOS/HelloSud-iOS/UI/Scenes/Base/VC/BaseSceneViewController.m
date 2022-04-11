@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.language = @"zh-CN";
+    self.language = [SettingsService getCurLanguageLocale];
     [self initSudFSMMG];
     AudioRoomService.shared.currentRoomVC = self;
     [self loginRoom];
@@ -84,14 +84,13 @@
     [self.sceneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
-
     [self.naviView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.contentView);
+        make.leading.trailing.equalTo(self.contentView);
         make.top.mas_equalTo(kStatusBarHeight);
         make.height.mas_equalTo(44);
     }];
     [self.operatorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.contentView);
+        make.leading.trailing.equalTo(self.contentView);
         make.bottom.mas_equalTo(-kAppSafeBottom);
         make.height.mas_equalTo(44);
     }];
@@ -101,24 +100,24 @@
     }];
     [self.gameMicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.naviView.mas_bottom).offset(0);
-        make.left.right.mas_equalTo(self.contentView);
+        make.leading.trailing.mas_equalTo(self.contentView);
         make.height.mas_equalTo(55);
     }];
     [self.gameNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(14);
+        make.leading.mas_equalTo(14);
         make.top.mas_equalTo(self.gameMicContentView.mas_bottom).offset(3);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(106);
-        make.left.right.mas_equalTo(self.contentView);
+        make.leading.trailing.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(self.operatorView.mas_top).offset(0);
     }];
     [self.msgTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.msgBgView);
     }];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.contentView);
+        make.leading.trailing.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(80);
     }];
 }
@@ -739,7 +738,7 @@
     [self.gameMicContentView setHidden:false];
     CGFloat h = [UIDevice dt_isiPhoneXSeries] ? 106 : 50;
     [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.view);
+        make.leading.trailing.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.operatorView.mas_top);
         make.height.mas_equalTo(h);
     }];

@@ -35,7 +35,7 @@
     [super dtLayoutViews];
     [self.audioMicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.naviView.mas_bottom).offset(20);
-        make.left.right.mas_equalTo(self.view);
+        make.leading.trailing.mas_equalTo(self.view);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
 }
@@ -59,7 +59,7 @@
         self.gameNumLabel.hidden = YES;
         [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.audioMicContentView.mas_bottom);
-            make.left.right.mas_equalTo(self.view);
+            make.leading.trailing.mas_equalTo(self.view);
             make.bottom.mas_equalTo(self.operatorView.mas_top).offset(-20);
             make.height.mas_greaterThanOrEqualTo(0);
         }];

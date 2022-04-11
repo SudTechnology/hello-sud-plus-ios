@@ -24,15 +24,21 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     // Override point for customization after application launch.
     [[AppService shared] prepare];
+    /// 不支持的多语言，默认英文
+    if ([SettingsService isNotSupportLanguage]) {
+        LanguageUtil.userLanguage = @"en";
+    }
     [[AppService shared] setupNetWorkHeader];
+    
     [self observerNTF];
     self.window = [[UIWindow alloc]init];
     // 登录过后，检测刷新token
     if (AppService.shared.login.isLogin) {
-        [AppService.shared.login checkToken];
         self.window.rootViewController = [[MainTabBarController alloc]init];
+        [AppService.shared.login checkToken];
     } else {
         self.window.rootViewController = [[LoginViewController alloc]init];
     }
@@ -69,7 +75,6 @@
         if (![self.window.rootViewController isKindOfClass:[LoginViewController class]]) {
             /// 切根式图
             self.window.rootViewController = [[LoginViewController alloc]init];
-            [ToastUtil show:@"登录已过期，请重新进入"];
         }
     }];
 }
@@ -92,9 +97,19 @@
         } onCloseCallback:nil];
     } else if (model.upgradeType == 2) {
         /// 引导升级
-        [DTAlertView showTextAlert:NSString.dt_update_app_ver_new sureText:NSString.dt_update_now cancelText:NSString.dt_next_time_again_say onSureCallback:^{
-            [self openPath:model.packageUrl];
-        } onCloseCallback:nil];
+        // 2.格式化日期
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd";
+        NSString *keyTodayShow = [NSString stringWithFormat:@"keyUpgrade_%@", [formatter stringFromDate:[NSDate date]]];
+        BOOL isTodayShow = [NSUserDefaults.standardUserDefaults boolForKey:keyTodayShow];
+        if (!isTodayShow) {
+            [NSUserDefaults.standardUserDefaults setBool:YES forKey:keyTodayShow];
+            [NSUserDefaults.standardUserDefaults synchronize];
+            [DTAlertView showTextAlert:NSString.dt_update_app_ver_new sureText:NSString.dt_update_now cancelText:NSString.dt_next_time_again_say onSureCallback:^{
+                [self openPath:model.packageUrl];
+            } onCloseCallback:nil];
+        }
+        
     }
 }
 

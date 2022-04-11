@@ -21,6 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)resetSystemLanguage;
 
+/// 是否语言从右到左，目前阿拉伯语
++ (BOOL)isLanguageRTL;
+
+/// 更新APP语言方向
++ (void)updateRTL;
 @end
 
 NS_ASSUME_NONNULL_END

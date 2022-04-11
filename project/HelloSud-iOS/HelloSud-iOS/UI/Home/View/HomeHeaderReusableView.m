@@ -82,27 +82,27 @@
 - (void)hsLayoutViews {
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
-        make.left.mas_equalTo(0);
-        make.right.mas_equalTo(0);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
         make.size.mas_greaterThanOrEqualTo(0);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
+        make.leading.mas_equalTo(15);
+        make.trailing.mas_equalTo(-15);
         make.top.mas_equalTo(16);
         make.height.mas_equalTo(33);
         make.width.mas_greaterThanOrEqualTo(0);
     }];
     [self.previewView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
-        make.left.mas_equalTo(13);
-        make.right.mas_equalTo(-13);
+        make.leading.mas_equalTo(13);
+        make.trailing.mas_equalTo(-13);
         make.height.mas_equalTo(80);
-        make.bottom.mas_equalTo(-10);
     }];
     [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.previewView);
-        make.right.equalTo(self.previewView).offset(-12);
+        make.trailing.equalTo(self.previewView).offset(-12);
         make.width.mas_equalTo(118);
         make.height.mas_equalTo(44);
     }];
@@ -111,7 +111,7 @@
     }];
     CGFloat w = (kScreenWidth - 32) / 2;
 //    [self.itemContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self.mas_centerX);
+//        make.leading.mas_equalTo(self.mas_centerX);
 //        make.top.mas_equalTo(36);
 //        make.width.mas_equalTo(w);
 //        make.bottom.mas_equalTo(0);

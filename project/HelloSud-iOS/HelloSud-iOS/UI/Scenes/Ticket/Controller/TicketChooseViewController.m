@@ -63,7 +63,7 @@
     }];
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(kAppSafeTop);
-        make.left.mas_equalTo(6);
+        make.leading.mas_equalTo(6);
         make.size.mas_equalTo(CGSizeMake(44, 44));
     }];
     [self.noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,8 +90,8 @@
         [self.view addSubview:item];
         [item mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(kStatusBarHeight + 44 + 85 + i * 187);
-            make.left.mas_equalTo(14);
-            make.right.mas_equalTo(-14);
+            make.leading.mas_equalTo(14);
+            make.trailing.mas_equalTo(-14);
             make.height.mas_equalTo(154);
         }];
     }

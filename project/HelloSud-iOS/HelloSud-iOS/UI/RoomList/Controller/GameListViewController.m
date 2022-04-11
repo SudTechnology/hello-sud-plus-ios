@@ -59,13 +59,13 @@
 
 - (void)dtLayoutViews {
     [self.searchHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(self.view);
+        make.top.leading.trailing.mas_equalTo(self.view);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.searchHeaderView.mas_bottom);
-        make.left.mas_equalTo(16);
-        make.right.mas_equalTo(-16);
+        make.leading.mas_equalTo(16);
+        make.trailing.mas_equalTo(-16);
         make.bottom.mas_equalTo(-kTabBarHeight);
     }];
     [self.noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -92,19 +92,16 @@
 #pragma mark - requst Data
 - (void)requestData {
     WeakSelf
-    [HttpService postRequestWithApi:kINTERACTURL(@"room/list/v1") param:nil success:^(NSDictionary *rootDict) {
+    [HttpService postRequestWithURL:kINTERACTURL(@"room/list/v1") param:nil respClass:RoomListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
         [weakSelf.tableView.mj_header endRefreshing];
-        RoomListModel *model = [RoomListModel decodeModel:rootDict];
-        if (model.retCode != 0) {
-            [ToastUtil show:model.retMsg];
-            return;
-        }
+        RoomListModel *model = (RoomListModel *)resp;
         [weakSelf.dataList removeAllObjects];
         [weakSelf.dataList addObjectsFromArray:model.roomInfoList];
         [weakSelf.tableView reloadData];
         weakSelf.noDataLabel.hidden = weakSelf.dataList.count != 0;
-    } failure:^(id error) {
-        [ToastUtil show:@"网络错误"];
+    } failure:^(NSError *error) {
+        [ToastUtil show:error.dt_errMsg];
+        [weakSelf.tableView.mj_header endRefreshing];
     }];
 }
 

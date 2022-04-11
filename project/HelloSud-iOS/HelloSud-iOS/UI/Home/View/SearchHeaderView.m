@@ -35,35 +35,38 @@
 - (void)dtLayoutViews {
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(7 + kAppSafeTop);
-        make.left.mas_equalTo(24);
+        make.leading.mas_equalTo(24);
         make.size.mas_equalTo(CGSizeMake(56, 56));
     }];
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.headerView.mas_right).offset(10);
+        make.leading.mas_equalTo(self.headerView.mas_trailing).offset(10);
         make.top.mas_equalTo(self.headerView.mas_top).offset(3);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.userIdLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.headerView.mas_right).offset(10);
+        make.leading.mas_equalTo(self.headerView.mas_trailing).offset(10);
         make.top.mas_equalTo(self.userNameLabel.mas_bottom).offset(6);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.textFieldView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(24);
-        make.right.mas_equalTo(-24);
+        make.leading.mas_equalTo(24);
+        make.trailing.mas_equalTo(-24);
         make.top.mas_equalTo(self.headerView.mas_bottom).offset(15);
         make.height.mas_equalTo(32);
         make.bottom.mas_equalTo(-10);
     }];
     [self.searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.bottom.mas_equalTo(self.textFieldView);
+        make.top.trailing.bottom.mas_equalTo(self.textFieldView);
         make.width.mas_equalTo(56);
     }];
+    if (LanguageUtil.isLanguageRTL) {
+        self.searchTextField.textAlignment = NSTextAlignmentRight;
+    }
     [self.searchTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(10);
-        make.right.mas_equalTo(self.searchBtn.mas_left).offset(-10);
+        make.leading.mas_equalTo(10);
+        make.trailing.mas_equalTo(self.searchBtn.mas_leading).offset(-10);
         make.top.bottom.mas_equalTo(self.textFieldView);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.height.mas_greaterThanOrEqualTo(0);
     }];
 }
 
@@ -137,6 +140,7 @@
         _searchTextField.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         _searchTextField.textColor = UIColor.blackColor;
         _searchTextField.keyboardType = UIKeyboardTypeNumberPad;
+        _searchTextField.textAlignment = NSTextAlignmentLeft;
         _searchTextField.delegate = self;
     }
     return _searchTextField;

@@ -76,15 +76,15 @@
     CGFloat topMargin = (preferredHeight - oneLineHeight) * 0.5;
     
     [self.sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-16);
+        make.trailing.mas_equalTo(-16);
         make.bottom.mas_equalTo(-12);
         make.size.mas_equalTo(CGSizeMake(56, 24));
     }];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(16);
+        make.leading.mas_equalTo(16);
         make.top.mas_equalTo(topMargin);
         make.bottom.mas_equalTo(-topMargin);
-        make.right.mas_equalTo(self.sendBtn.mas_left).offset(-16);
+        make.trailing.mas_equalTo(self.sendBtn.mas_leading).offset(-16);
         make.height.mas_equalTo(oneLineHeight);
         make.height.mas_greaterThanOrEqualTo(oneLineHeight);
         make.height.mas_lessThanOrEqualTo(maxHeight);

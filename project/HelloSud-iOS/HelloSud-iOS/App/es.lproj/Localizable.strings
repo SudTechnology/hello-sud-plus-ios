@@ -29,6 +29,7 @@
 "dt_settings_switch_rtc" = "Cambiar el proveedor de servicio RTC";
 "dt_settings_zego" = "Zego";
 "dt_settings_agora" = "Agora";
+"dt_settings_rong_cloud" = "RongCloud";
 "dt_settings_net_ease" = "CommsEase";
 "dt_settings_volcano" = "VolcEngine";
 "dt_settings_alicloud" = "Alibaba Cloud";
@@ -43,7 +44,7 @@
 
 /// RoomList
 "dt_room_list_room_number" = "Número de sala";
-"dt_room_list_users" = "人";
+"dt_room_list_users" = "personas";
 "dt_room_list_scene" = "场景";
 "dt_room_list_no_room_available" = "No se dispone de salas\nVaya a la página de inicio para crear una!";
 

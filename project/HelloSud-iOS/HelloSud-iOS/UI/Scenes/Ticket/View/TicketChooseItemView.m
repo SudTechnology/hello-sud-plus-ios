@@ -39,9 +39,28 @@
     [self addSubview:self.hotImageView];
     [self addSubview:self.btnImageView];
     [self addSubview:self.rewardLabel];
-    [self addSubview:self.enterLabel];
+    [self.btnImageView addSubview:self.enterLabel];
     [self addSubview:self.onlineLabel];
     [self addSubview:self.usersView];
+    
+    [self animaEnterNode];
+}
+
+- (void)dealloc {
+    NSLog(@"");
+}
+
+- (void)animaEnterNode {
+    WeakSelf
+    [UIView animateWithDuration:1 animations:^{
+        weakSelf.btnImageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 animations:^{
+            weakSelf.btnImageView.transform = CGAffineTransformMakeScale(1, 1);
+        } completion:^(BOOL finished) {
+            [weakSelf animaEnterNode];
+        }];
+    }];
 }
 
 - (void)dtLayoutViews {
@@ -49,35 +68,39 @@
         make.edges.mas_equalTo(self);
     }];
     [self.goldImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self);
+        make.trailing.mas_equalTo(self);
         make.top.mas_equalTo(self.mas_top).offset(-24);
         make.size.mas_equalTo(CGSizeMake(105, 105));
     }];
     [self.hotImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.mas_left).offset(-14);
+        make.leading.mas_equalTo(self.mas_leading).offset(-14);
         make.top.mas_equalTo(self.mas_top).offset(-23);
         make.size.mas_equalTo(CGSizeMake(50, 50));
     }];
     [self.btnImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-20);
+        make.trailing.mas_equalTo(-20);
         make.bottom.mas_equalTo(-18);
-        make.size.mas_equalTo(CGSizeMake(88, 30));
+        make.height.mas_equalTo(30);
+        make.width.mas_greaterThanOrEqualTo(0);
+//        make.size.mas_equalTo(CGSizeMake(88, 30));
     }];
     [self.rewardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(22);
+        make.top.leading.mas_equalTo(22);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.btnImageView);
+        make.leading.mas_equalTo(18);
+        make.trailing.mas_equalTo(-18);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.usersView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(17);
+        make.leading.mas_equalTo(17);
         make.bottom.mas_equalTo(-21);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.onlineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.usersView.mas_right).offset(10);
+        make.leading.mas_equalTo(self.usersView.mas_trailing).offset(10);
         make.centerY.mas_equalTo(self.usersView);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
@@ -91,11 +114,11 @@
         node.layer.masksToBounds = true;
         [self.usersView addSubview:node];
         [node mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-17 * i);
+            make.trailing.mas_equalTo(-17 * i);
             make.centerY.mas_equalTo(self.usersView);
             make.size.mas_equalTo(CGSizeMake(24, 24));
             if (i == 3) {
-                make.left.mas_equalTo(self.usersView);
+                make.leading.mas_equalTo(self.usersView);
             }
         }];
     }

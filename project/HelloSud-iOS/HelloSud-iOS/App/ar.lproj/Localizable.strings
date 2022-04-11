@@ -29,6 +29,7 @@
 "dt_settings_switch_rtc" = "مزود خدمة التبديل RTC";
 "dt_settings_zego" = "Zego";
 "dt_settings_agora" = "Agora";
+"dt_settings_rong_cloud" = "RongCloud";
 "dt_settings_net_ease" = "CommsEase";
 "dt_settings_volcano" = "VolcEngine";
 "dt_settings_alicloud" = "Alibaba Cloud";
@@ -43,7 +44,7 @@
 
 /// RoomList
 "dt_room_list_room_number" = "رقم الغرفة";
-"dt_room_list_users" = "人";
+"dt_room_list_users" = " شخص";
 "dt_room_list_scene" = "场景";
 "dt_room_list_no_room_available" = "لا توجد غرف متاحة حاليًا \nانتقل إلى الصفحة الرئيسية لإنشاء واحد ~";
 
