@@ -99,7 +99,6 @@
         make.leading.mas_equalTo(13);
         make.trailing.mas_equalTo(-13);
         make.height.mas_equalTo(80);
-        make.bottom.mas_equalTo(-10);
     }];
     [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.previewView);
