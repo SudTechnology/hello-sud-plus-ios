@@ -99,6 +99,7 @@
 - (UIImageView *)gameImageView {
     if (!_gameImageView) {
         _gameImageView = [[UIImageView alloc] init];
+        _gameImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _gameImageView;
 }
