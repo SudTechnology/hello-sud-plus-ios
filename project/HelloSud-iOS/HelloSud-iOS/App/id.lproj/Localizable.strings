@@ -29,6 +29,7 @@
 "dt_settings_switch_rtc" = "Ganti penyedia RTC";
 "dt_settings_zego" = "Zego";
 "dt_settings_agora" = "Agora";
+"dt_settings_rong_cloud" = "RongCloud";
 "dt_settings_net_ease" = "CommsEase";
 "dt_settings_volcano" = "VolcEngine";
 "dt_settings_alicloud" = "Alibaba Cloud";

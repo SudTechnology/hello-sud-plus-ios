@@ -98,22 +98,25 @@
     
     LanguageUtil.userLanguage = model.language;
     
+    [[AppService shared] setupNetWorkHeader];
+    
     //创建新的UITabbarController
     MainTabBarController *tabbar = [MainTabBarController new];
     //找到对应的nav
-    tabbar.selectedIndex = 2;
-    BaseNavigationViewController *nav = tabbar.selectedViewController;
-    NSMutableArray *navVCs = nav.viewControllers.mutableCopy;
-    
-    //添加指定vc到nav栈中
-    SwitchLanguageViewController *vc = [SwitchLanguageViewController new];
-    vc.hidesBottomBarWhenPushed = YES;
-    [navVCs addObject:vc];
+//    tabbar.selectedIndex = 2;
+//    BaseNavigationViewController *nav = tabbar.selectedViewController;
+//    NSMutableArray *navVCs = nav.viewControllers.mutableCopy;
+//    
+//    //添加指定vc到nav栈中
+//    SwitchLanguageViewController *vc = [SwitchLanguageViewController new];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [navVCs addObject:vc];
     
     //主线程刷新UI
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].delegate.window.rootViewController = tabbar;
-        nav.viewControllers = navVCs;
+//        nav.viewControllers = navVCs;
+        [ToastUtil show:@"已切换语言"];
         NSLog(@"当前语言 %@", [NSBundle currentLanguage]);
     });
 }

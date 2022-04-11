@@ -1391,8 +1391,8 @@
 				448A6E0927DEFF3200004928 /* LocalizedService.h */,
 				448A6E0A27DEFF3200004928 /* LocalizedService.m */,
 				6CD6E87D27C0A36100D8F76C /* ServiceConstHeader.h */,
-				BC210F28C7CAB6BCA3140175 /* HttpService.m */,
 				BC21085C9AA17435A1C0A820 /* HttpService.h */,
+				BC210F28C7CAB6BCA3140175 /* HttpService.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";

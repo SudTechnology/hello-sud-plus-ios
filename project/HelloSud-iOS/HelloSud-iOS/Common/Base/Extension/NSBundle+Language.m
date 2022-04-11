@@ -36,7 +36,8 @@
 }
 
 + (NSString *)currentLanguage {
-    return [LanguageUtil userLanguage] ? : [NSLocale preferredLanguages].firstObject;
+    NSString *language =  [LanguageUtil userLanguage] ? : [NSLocale preferredLanguages].firstObject;
+    return language;
 }
 
 @end

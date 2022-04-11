@@ -189,15 +189,15 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
     } else if ([rtcType isEqualToString:kRtcTypeAgora]) {
         return NSString.dt_settings_agora;
     } else if ([rtcType isEqualToString:kRtcTypeRongCloud]) {
-        return kRtcNameRongCloud;
+        return NSString.dt_settings_rong_cloud;
     } else if ([rtcType isEqualToString:kRtcTypeCommEase]) {
-        return kRtcNameCommEase;
+        return NSString.dt_settings_net_ease;
     } else if ([rtcType isEqualToString:kRtcTypeVoicEngine]) {
-        return kRtcNameVoicEngine;
+        return NSString.dt_settings_volcano;
     } else if ([rtcType isEqualToString:kRtcTypeAlibabaCloud]) {
-        return kRtcNameAlibabaCloud;
+        return NSString.dt_settings_alicloud;
     } else if ([rtcType isEqualToString:kRtcTypeTencentCloud]) {
-        return kRtcNameTencentCloud;
+        return NSString.dt_settings_tencent;
     }
     return @"";
 }

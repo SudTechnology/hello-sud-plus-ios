@@ -29,10 +29,11 @@
 "dt_settings_switch_rtc" = "切換RTC服務商";
 "dt_settings_zego" = "即构";
 "dt_settings_agora" = "声网";
+"dt_settings_rong_cloud" = "融云";
 "dt_settings_net_ease" = "网易云信";
-"dt_settings_volcano" = "火山";
+"dt_settings_volcano" = "火山引擎";
 "dt_settings_alicloud" = "阿里云";
-"dt_settings_tencent" = "腾讯";
+"dt_settings_tencent" = "腾讯云";
 "dt_settings_switch_language" = "切換語言";
 "dt_settings_open_source" = "開源協議";
 "dt_settings_user_agreement" = "用戶協議";

@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_settings_switch_rtc;
 + (NSString *)dt_settings_zego;
 + (NSString *)dt_settings_agora;
++ (NSString *)dt_settings_rong_cloud;
 + (NSString *)dt_settings_net_ease;
 + (NSString *)dt_settings_volcano;
 + (NSString *)dt_settings_alicloud;
@@ -96,12 +97,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_ticket_choose_pop_not_alert;
 + (NSString *)dt_ticket_choose_pop_sure_enter;
 + (NSString *)dt_ticket_reward_str;
-+ (NSString *)dt_ticket_reward_str_one;
-+ (NSString *)dt_ticket_reward_str_two;
-+ (NSString *)dt_ticket_reward_str_thr;
-+ (NSString *)dt_ticket_reward_str_four;
-+ (NSString *)dt_ticket_reward_str_five;
-+ (NSString *)dt_ticket_reward_str_six;
 + (NSString *)dt_room_input_text;
 + (NSString *)dt_room_up_mic;
 + (NSString *)dt_room_choose_game;
@@ -133,6 +128,23 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_unable_microphone_tip;
 + (NSString *)dt_settings_more_set;
 + (NSString *)dt_follow_system;
+
++ (NSString *)MJRefreshHeaderIdleText;
++ (NSString *)MJRefreshHeaderPullingText;
++ (NSString *)MJRefreshHeaderRefreshingText;
+
++ (NSString *)MJRefreshAutoFooterIdleText;
++ (NSString *)MJRefreshAutoFooterRefreshingText;
++ (NSString *)MJRefreshAutoFooterNoMoreDataText;
+
++ (NSString *)MJRefreshBackFooterIdleText;
++ (NSString *)MJRefreshBackFooterPullingText;
++ (NSString *)MJRefreshBackFooterRefreshingText;
++ (NSString *)MJRefreshBackFooterNoMoreDataText;
+
++ (NSString *)MJRefreshHeaderLastTimeText;
++ (NSString *)MJRefreshHeaderDateTodayText;
++ (NSString *)MJRefreshHeaderNoneLastDateText;
 
 
 @end
