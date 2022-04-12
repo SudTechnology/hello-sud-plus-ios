@@ -62,7 +62,7 @@
 }
 
 - (void)reqUserCoinDetail:(Int64Block)success fail:(StringBlock)fail {
-    [HttpService postRequestWithURL:kBASEURL(@"get-account/v1") param:@{} respClass:RespUserCoinInfoModel.class showErrorToast:NO success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kBASEURL(@"get-account/v1") param:@{} respClass:RespUserCoinInfoModel.class showErrorToast:NO success:^(BaseRespModel *resp) {
         RespUserCoinInfoModel *model = (RespUserCoinInfoModel*)resp;
         if (success) {
             success(model.coin);
@@ -81,7 +81,7 @@
 /// @param fail 失败
 - (void)reqUserInfo:(NSArray<NSNumber*>*)userIDList success:(void(^)(NSArray<HSUserInfoModel *> *userList))success fail:(ErrorBlock)fail {
 
-    [HttpService postRequestWithURL:kBASEURL(@"batch/user-info/v1") param:@{@"userIds": userIDList} respClass:RespUserInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kBASEURL(@"batch/user-info/v1") param:@{@"userIds": userIDList} respClass:RespUserInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         RespUserInfoModel *model = (RespUserInfoModel *)resp;
         if (success) {
             success(model.userInfoList);

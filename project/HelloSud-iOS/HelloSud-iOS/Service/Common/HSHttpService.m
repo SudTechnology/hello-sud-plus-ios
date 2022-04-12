@@ -3,12 +3,12 @@
 // Copyright (c) 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "HttpService.h"
+#import "HSHttpService.h"
 #import "HttpRequest.h"
 #import "DTNSError+Custom.h"
 
 
-@implementation HttpService
+@implementation HSHttpService
 + (void)postRequestWithURL:(NSString *)api
                      param:(NSDictionary *)param
                  respClass:(Class)respCls

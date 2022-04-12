@@ -92,7 +92,7 @@
 #pragma mark - requst Data
 - (void)requestData {
     WeakSelf
-    [HttpService postRequestWithURL:kINTERACTURL(@"room/list/v1") param:nil respClass:RoomListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/list/v1") param:nil respClass:RoomListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
         [weakSelf.tableView.mj_header endRefreshing];
         RoomListModel *model = (RoomListModel *)resp;
         [weakSelf.dataList removeAllObjects];

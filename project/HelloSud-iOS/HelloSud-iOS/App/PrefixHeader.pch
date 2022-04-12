@@ -34,7 +34,7 @@
 /// Comon
 #import "AppUtil.h"
 #import "SudMGPWrapperHeader.h"
-#import "HttpService.h"
+#import "HSHttpService.h"
 
 /// Page
 #import "CommonRoomModelHeader.h"

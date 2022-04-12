@@ -132,7 +132,7 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
 - (void)setupNetWorkHeader {
     NSString *token = AppService.shared.login.token;
     if (AppService.shared.login.token) {
-        [HttpService setupHeader:@{@"Authorization": token}];
+        [HSHttpService setupHeader:@{@"Authorization": token}];
         // 图片拉取鉴权
         SDWebImageDownloader *downloader = (SDWebImageDownloader *) [SDWebImageManager sharedManager].imageLoader;
         [downloader setValue:token forHTTPHeaderField:@"Authorization"];
@@ -158,7 +158,7 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
             clientTimestamp
     ];
     NSString *sudMeta = [arr componentsJoinedByString:@","];
-    [HttpService setupHeader:@{@"Sud-Meta": sudMeta}];
+    [HSHttpService setupHeader:@{@"Sud-Meta": sudMeta}];
 
 }
 
@@ -169,13 +169,13 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
 /// 登录成功请求配置信息
 - (void)reqConfigData {
     WeakSelf
-    [HttpService postRequestWithURL:kBASEURL(@"base/config/v1") param:nil respClass:ConfigModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kBASEURL(@"base/config/v1") param:nil respClass:ConfigModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         weakSelf.configModel = (ConfigModel *)resp;
     } failure:nil];
 }
 
 - (void)reqAppUpdate:(RespModelBlock)success fail:(nullable ErrorStringBlock)fail {
-    [HttpService postRequestWithURL:kBASEURL(@"check-upgrade/v1") param:nil respClass:RespVersionUpdateInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kBASEURL(@"check-upgrade/v1") param:nil respClass:RespVersionUpdateInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         success(resp);
     } failure: ^(NSError *error){
         if (fail) {

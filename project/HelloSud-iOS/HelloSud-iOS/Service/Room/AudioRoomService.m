@@ -49,7 +49,7 @@
         dicParam[@"gameLevel"] = @(gameLevel);
     }
     WeakSelf
-    [HttpService postRequestWithURL:kINTERACTURL(@"room/create-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/create-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         self.isReqCreate = NO;
         EnterRoomModel *model = (EnterRoomModel *)resp;
         [weakSelf reqEnterRoom:model.roomId success:nil fail:nil];
@@ -72,7 +72,7 @@
     if (AppService.shared.rtcType.length > 0) {
         dicParam[@"rtcType"] = AppService.shared.rtcType;
     }
-    [HttpService postRequestWithURL:kINTERACTURL(@"room/enter-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/enter-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         self.isReqEnter = NO;
         EnterRoomModel *model = (EnterRoomModel *)resp;
         if (AudioRoomService.shared.currentRoomVC != nil) {
@@ -106,7 +106,7 @@
 /// @param roomId 房间ID
 - (void)reqExitRoom:(long)roomId {
     [self resetRoomInfo];
-    [HttpService postRequestWithURL:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} respClass:ExitRoomModel.class showErrorToast:YES success:nil failure:nil];
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/exit-room/v1") param:@{@"roomId": @(roomId)} respClass:ExitRoomModel.class showErrorToast:YES success:nil failure:nil];
 }
 
 /// 匹配开播的游戏，并进入游戏房间
@@ -128,7 +128,7 @@
     if (sceneType == SceneTypeTicket) {
         dicParam[@"gameLevel"] = @(gameLevel);
     }
-    [HttpService postRequestWithURL:kINTERACTURL(@"room/match-room/v1") param:dicParam respClass:MatchRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/match-room/v1") param:dicParam respClass:MatchRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         MatchRoomModel *model = (MatchRoomModel *)resp;
         [self reqEnterRoom:model.roomId success:^{
             weakSelf.isMatchingRoom = NO;
@@ -147,7 +147,7 @@
 /// @param handleType 0：上麦 1: 下麦
 - (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
-    [HttpService postRequestWithURL:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} respClass:SwitchMicModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} respClass:SwitchMicModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         SwitchMicModel *model = (SwitchMicModel *)resp;
         if (handleType == 0) {
             RoomCmdUpMicModel *upMicModel = [RoomCmdUpMicModel makeUpMicMsgWithMicIndex:micIndex];
@@ -171,7 +171,7 @@
 /// @param roomId 房间ID
 - (void)reqMicList:(long)roomId success:(void(^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail {
 
-    [HttpService postRequestWithURL:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)}  respClass:MicListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)}  respClass:MicListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         MicListModel *model = (MicListModel *)resp;
         if (success) {
             success(model.roomMicList);
@@ -183,7 +183,7 @@
 /// @param roomId 房间ID
 - (void)reqSwitchGame:(long)roomId gameId:(long)gameId success:(EmptyBlock)success fail:(ErrorBlock)fail {
 
-    [HttpService postRequestWithURL:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} respClass:SwitchGameModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/switch-game/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId)} respClass:SwitchGameModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (success) {
             success();
         }

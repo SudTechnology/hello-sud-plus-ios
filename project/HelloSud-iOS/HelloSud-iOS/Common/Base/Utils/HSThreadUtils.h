@@ -1,5 +1,5 @@
 //
-//  ThreadUtils.h
+//  HSThreadUtils.h
 //  HelloSud-iOS
 //
 //  Created by Herbert on 2022/3/25.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface ThreadUtils : NSObject
+@interface HSThreadUtils : NSObject
 
 +(void)runOnUiThread:(dispatch_block_t) block;
 

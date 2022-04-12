@@ -8,7 +8,7 @@
 @class BaseRespModel;
 
 /// 网络请求服务
-@interface HttpService : NSObject
+@interface HSHttpService : NSObject
 
 /// 业务网络请求接口，做了错误异常处理
 /// @param api

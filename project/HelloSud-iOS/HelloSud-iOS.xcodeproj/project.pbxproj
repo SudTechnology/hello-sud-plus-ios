@@ -155,7 +155,7 @@
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
 		BC2101199D87BB6081A8FBC0 /* DTNSError+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5A0981935974C33E8B /* DTNSError+Custom.m */; };
 		BC210452F6884908D768A126 /* DTNSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106C0581A7D8986B9FC83 /* DTNSArray+Masonry.m */; };
-		BC2105663A6D9E26AA05DAD3 /* HttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HttpService.m */; };
+		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
 		BC210690A3C1CDFF90B3A424 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102EB58A8CE4A527A5167 /* ToastUtil.m */; };
 		BC2106F693B8FDA87CC699D2 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210414A9AE16CEC8607D9D /* AppUtil.m */; };
 		BC2107427C1CF2D51754990F /* DTUIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */; };
@@ -166,7 +166,7 @@
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
 		BC210D70BDEB097F49794C9B /* DTUIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */; };
 		BC210FDF9C7CAC234D035EF6 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105042E549C236540DC05 /* DeviceUtil.m */; };
-		E5C2420127EDCBAA00EA2377 /* ThreadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2420027EDCBAA00EA2377 /* ThreadUtils.m */; };
+		E5C2420127EDCBAA00EA2377 /* HSThreadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2420027EDCBAA00EA2377 /* HSThreadUtils.m */; };
 		E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */; };
 		E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */; };
 /* End PBXBuildFile section */
@@ -531,7 +531,7 @@
 		BC21060831A4FEB9BEE1510A /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
 		BC2106C0581A7D8986B9FC83 /* DTNSArray+Masonry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTNSArray+Masonry.m"; sourceTree = "<group>"; };
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
-		BC21085C9AA17435A1C0A820 /* HttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpService.h; sourceTree = "<group>"; };
+		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
 		BC21088A4C435532A51CB545 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		BC2108E4617436951A41ABBE /* DTUIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTUIView+Extension.h"; sourceTree = "<group>"; };
 		BC210C175D2FCB747B52B179 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
@@ -539,13 +539,13 @@
 		BC210D3011853BFBEBA259DB /* DTNSArray+Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTNSArray+Masonry.h"; sourceTree = "<group>"; };
 		BC210D5A0981935974C33E8B /* DTNSError+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTNSError+Custom.m"; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
-		BC210F28C7CAB6BCA3140175 /* HttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpService.m; sourceTree = "<group>"; };
+		BC210F28C7CAB6BCA3140175 /* HSHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSHttpService.m; sourceTree = "<group>"; };
 		BC210F6353BF8EDAB3DC23C6 /* DTUIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTUIColor+Extension.m"; sourceTree = "<group>"; };
 		BC210F7B6D59DA493CE16350 /* SceneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentView.h; sourceTree = "<group>"; };
 		BC210F9ABB08F9D04A052246 /* AppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtil.h; sourceTree = "<group>"; };
 		BC210FAF33BAD4283645718B /* UserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailView.h; sourceTree = "<group>"; };
-		E5C241FF27EDCB8800EA2377 /* ThreadUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadUtils.h; sourceTree = "<group>"; };
-		E5C2420027EDCBAA00EA2377 /* ThreadUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadUtils.m; sourceTree = "<group>"; };
+		E5C241FF27EDCB8800EA2377 /* HSThreadUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSThreadUtils.h; sourceTree = "<group>"; };
+		E5C2420027EDCBAA00EA2377 /* HSThreadUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSThreadUtils.m; sourceTree = "<group>"; };
 		E5EDB8BB27E873A300EE99D0 /* AudioConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConfigModel.h; sourceTree = "<group>"; };
 		E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioConfigModel.m; sourceTree = "<group>"; };
 		E5EDB8BE27E8775D00EE99D0 /* AudioJoinRoomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioJoinRoomModel.h; sourceTree = "<group>"; };
@@ -1391,8 +1391,8 @@
 				448A6E0927DEFF3200004928 /* LocalizedService.h */,
 				448A6E0A27DEFF3200004928 /* LocalizedService.m */,
 				6CD6E87D27C0A36100D8F76C /* ServiceConstHeader.h */,
-				BC21085C9AA17435A1C0A820 /* HttpService.h */,
-				BC210F28C7CAB6BCA3140175 /* HttpService.m */,
+				BC21085C9AA17435A1C0A820 /* HSHttpService.h */,
+				BC210F28C7CAB6BCA3140175 /* HSHttpService.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1494,8 +1494,8 @@
 				BC2102EB58A8CE4A527A5167 /* ToastUtil.m */,
 				44241AE527EAD6E3001EE125 /* LanguageUtil.h */,
 				44241AE627EAD6E3001EE125 /* LanguageUtil.m */,
-				E5C241FF27EDCB8800EA2377 /* ThreadUtils.h */,
-				E5C2420027EDCBAA00EA2377 /* ThreadUtils.m */,
+				E5C241FF27EDCB8800EA2377 /* HSThreadUtils.h */,
+				E5C2420027EDCBAA00EA2377 /* HSThreadUtils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1706,7 +1706,7 @@
 				4455AD8D27EAC658001516EE /* ChangeRTCTCell.m in Sources */,
 				4455AE0927EAC6F7001516EE /* AudioRoomMicModel.m in Sources */,
 				4455ADA727EAC658001516EE /* ShowViewController.m in Sources */,
-				E5C2420127EDCBAA00EA2377 /* ThreadUtils.m in Sources */,
+				E5C2420127EDCBAA00EA2377 /* HSThreadUtils.m in Sources */,
 				6C076E71279E429E00650209 /* ZegoAudioEngineImpl.m in Sources */,
 				6C076ED127A253C100650209 /* RespUserInfoModel.m in Sources */,
 				4455ADA127EAC658001516EE /* MicListModel.m in Sources */,
@@ -1811,7 +1811,7 @@
 				BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */,
 				BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */,
 				BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */,
-				BC2105663A6D9E26AA05DAD3 /* HttpService.m in Sources */,
+				BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

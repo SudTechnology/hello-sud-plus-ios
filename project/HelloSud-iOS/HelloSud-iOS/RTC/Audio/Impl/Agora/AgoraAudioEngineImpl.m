@@ -8,7 +8,7 @@
 #import "AgoraAudioEngineImpl.h"
 #import <AgoraRtcKit/AgoraRtcEngineKit.h>
 #import <AgoraRtmKit/AgoraRtmKit.h>
-#import "ThreadUtils.h"
+#import "HSThreadUtils.h"
 
 @interface AgoraAudioEngineImpl()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate, AgoraAudioDataFrameProtocol>
 
@@ -168,7 +168,7 @@
         return;
     }
     
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         NSMutableDictionary *soundLevels = nil;
         NSNumber *localSoundLevel = nil;
         for (AgoraRtcAudioVolumeInfo *speaker in speakers) {
@@ -200,7 +200,7 @@
 - (void)rtcEngine:(AgoraRtcEngineKit *_Nonnull)engine connectionChangedToState:(AgoraConnectionStateType)state reason:(AgoraConnectionChangedReason)reason {
     HSAudioEngineRoomState audioRoomState = [self convertAudioRoomState:state];
     if (audioRoomState != HSAudioEngineStateUndefined) {
-        [ThreadUtils runOnUiThread:^{
+        [HSThreadUtils runOnUiThread:^{
             if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRoomStateUpdate:state:errorCode:extendedData:)]) {
                 [self.mISudAudioEventListener onRoomStateUpdate:self.mRoomID state:audioRoomState errorCode:0 extendedData:nil];
             }
@@ -218,7 +218,7 @@
 
 #pragma mark - AgoraAudioDataFrameProtocol
 - (BOOL)onRecordAudioFrame:(AgoraAudioFrame * _Nonnull)frame {
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onCapturedPCMData:)]) {
             NSUInteger length = frame.samplesPerChannel * frame.channels * frame.bytesPerSample;
             NSData *pcmData = [[NSData alloc] initWithBytes:frame.buffer length:length];
@@ -331,7 +331,7 @@
         return;
     }
     
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRecvCommand:command:)]) {
             [self.mISudAudioEventListener onRecvCommand:member.userId command:message.text];
         }
@@ -340,7 +340,7 @@
 
 - (void)channel:(AgoraRtmChannel * _Nonnull)channel memberCount:(int)count {
     
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRoomOnlineUserCountUpdate:count:)]) {
             [self.mISudAudioEventListener onRoomOnlineUserCountUpdate:self.mRoomID count:count];
         }

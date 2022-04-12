@@ -19,7 +19,7 @@
 
 /// 登录游戏
 - (void)reqGameLoginWithSuccess:(void (^)(RespGameInfoModel *gameInfo))success fail:(ErrorBlock)fail {
-    [HttpService postRequestWithURL:kGameURL(@"base/login/v1") param:@{} respClass:RespGameInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kGameURL(@"base/login/v1") param:@{} respClass:RespGameInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         RespGameInfoModel *model = (RespGameInfoModel *) resp;
         if (success) {
             success(model);

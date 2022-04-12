@@ -103,7 +103,7 @@
 #pragma mark - requst Data
 - (void)requestData {
     WeakSelf
-    [HttpService postRequestWithURL:kINTERACTURL(@"game/list/v1") param:@{} respClass:GameListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"game/list/v1") param:@{} respClass:GameListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
         [weakSelf.collectionView.mj_header endRefreshing];
         GameListModel *model = (GameListModel *)resp;
         [weakSelf.headerSceneList removeAllObjects];
