@@ -65,13 +65,16 @@
 
 /// 处理游戏状态变化
 - (void)handlePlayerStateChanged {
+    if (!self.sudFSMMGDecorator.keyWordASRing) {
+        return;
+    }
     // 正在游戏中 && 开麦按钮不打开时，提示用户
     if (self.gameId == DIGITAL_BOMB) {
-        if (self.sudFSMMGDecorator.isPlaying && self.operatorView.voiceBtnState == VoiceBtnStateTypeWaitOpen) {
+        if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.login.loginUserInfo.userID] && self.operatorView.voiceBtnState == VoiceBtnStateTypeWaitOpen) {
             [self showVoiceTip];
         }
     } else if (self.gameId == I_GUESS_YOU_SAID || self.gameId == YOU_DRAW_AND_I_GUESS) {
-        if (self.sudFSMMGDecorator.keyWordASRing && self.operatorView.voiceBtnState == VoiceBtnStateTypeWaitOpen) {
+        if (self.operatorView.voiceBtnState == VoiceBtnStateTypeWaitOpen) {
             [self showVoiceTip];
         }
     }
