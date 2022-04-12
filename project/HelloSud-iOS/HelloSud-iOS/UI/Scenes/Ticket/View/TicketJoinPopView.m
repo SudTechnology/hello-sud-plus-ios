@@ -50,7 +50,7 @@
 }
 
 - (void)dtUpdateUI {
-    NSArray <NSString *>*goldArr = @[@"200", @"250", @"900"];
+    NSArray <NSString *>*goldArr = @[@"20", @"250", @"900"];
     NSArray <NSString *>*payArr = @[@"2", @"5", @"10"];
     
     switch (self.ticketLevelType) {
