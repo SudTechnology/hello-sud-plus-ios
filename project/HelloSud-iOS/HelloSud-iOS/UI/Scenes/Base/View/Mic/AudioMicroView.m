@@ -205,6 +205,7 @@
         [self showUserName:NSString.dt_room_click_mic showOwner:false];
         [self.rippleView stopAnimate:YES];
         [self hiddenGameNode:true];
+        [self updateGameUI];
         return;
     }
     if (self.model.user.icon) {

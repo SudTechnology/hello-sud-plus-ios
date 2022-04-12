@@ -280,7 +280,7 @@
             }
         }
 
-        if (!arrOperate) {
+        if (arrOperate.count == 0) {
             return;
         }
 
