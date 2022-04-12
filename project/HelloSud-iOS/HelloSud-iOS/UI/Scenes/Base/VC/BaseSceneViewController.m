@@ -598,7 +598,7 @@
 /// 进入房间 自动上麦
 - (void)handleAutoUpMic {
     if (![self isInMic]) {
-        [self changeTapVoiceState: VoiceBtnStateTypeNormal];
+        [self handleGameUpMic];
     }
 }
 
