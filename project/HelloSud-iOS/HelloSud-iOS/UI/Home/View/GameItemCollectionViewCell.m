@@ -37,6 +37,14 @@
         [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.homeGamePic] placeholderImage:[UIImage imageNamed:@"default_game_bg"]];
     }
     self.enterLabel.hidden = m.isBlank;
+    
+//    NSMutableAttributedString *attributedString=[[NSMutableAttributedString alloc]initWithString:m.gameName];
+//    NSShadow *shadow = [[NSShadow alloc]init];
+//    shadow.shadowBlurRadius = 1.0;
+//    shadow.shadowOffset = CGSizeMake(1, 1);
+//    shadow.shadowColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.4];
+//    [attributedString addAttribute:NSShadowAttributeName value:shadow  range:NSMakeRange(0, attributedString.length)];
+//    self.nameLabel.attributedText = attributedString;
 }
 
 - (void)setIndexPath:(NSIndexPath *)indexPath {
@@ -75,9 +83,9 @@
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.gameImageView).offset(8);
-        make.top.equalTo(self.gameImageView).offset(12);
+//        make.top.equalTo(self.gameImageView).offset(12);
         make.height.mas_greaterThanOrEqualTo(0);
-        make.trailing.equalTo(self.gameImageView);
+        make.centerY.trailing.equalTo(self.gameImageView);
     }];
     [self.inGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.equalTo(self.gameImageView);
@@ -126,7 +134,12 @@
         _nameLabel.text = @"";
         _nameLabel.textColor = UIColor.whiteColor;
         _nameLabel.font = UIFONT_MEDIUM(14);
-        _nameLabel.textAlignment = NSTextAlignmentCenter;
+        _nameLabel.textAlignment = NSTextAlignmentLeft;
+        _nameLabel.layer.shadowColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.4].CGColor;
+        _nameLabel.layer.shadowOffset = CGSizeMake(2, 2);
+        _nameLabel.layer.shadowOpacity = 0.8;
+        _nameLabel.layer.shadowRadius = 1;
+        _nameLabel.numberOfLines = 2;
     }
     return _nameLabel;
 }
