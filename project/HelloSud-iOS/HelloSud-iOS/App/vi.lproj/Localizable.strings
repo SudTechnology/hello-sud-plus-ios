@@ -141,5 +141,6 @@
 "MJRefreshHeaderDateTodayText" = "Today";
 "MJRefreshHeaderNoneLastDateText" = "No record";
 
-
-
+"dt_asr_tip" = "Trò chơi có hỗ trợ nhận dạng giọng nói, hãy mở mic để tạo sức hút của bạn";
+"dt_asr_open_mic_tip" = "Mở mic giành quyền trả lời, sẽ nhanh hơn so với gõ chữ đấy!";
+"dt_asr_open_mic_num_tip" = "Thử mở mic điểm danh, để nhận phúc lợi cho người lười!";

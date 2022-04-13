@@ -33,6 +33,29 @@ PODS:
   - MJExtension (3.4.1)
   - MJRefresh (3.7.5)
   - Protobuf (3.19.4)
+  - RCVoiceRoomLib (2.0.7.2):
+    - RongCloudIM/IMLib (~> 5.1.6)
+    - RongCloudRTC/RongRTCLib (~> 5.1.13)
+  - RongCloudIM/ChatRoom (5.1.8):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/CustomerService (5.1.8):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/Discussion (5.1.8):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/IMLib (5.1.8):
+    - RongCloudIM/ChatRoom
+    - RongCloudIM/CustomerService
+    - RongCloudIM/Discussion
+    - RongCloudIM/IMLibCore
+    - RongCloudIM/Location
+    - RongCloudIM/PublicService
+  - RongCloudIM/IMLibCore (5.1.8)
+  - RongCloudIM/Location (5.1.8):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/PublicService (5.1.8):
+    - RongCloudIM/IMLibCore
+  - RongCloudRTC/RongRTCLib (5.1.17):
+    - RongCloudIM/IMLibCore (>= 5.1.3)
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
@@ -50,7 +73,7 @@ PODS:
     - Protobuf (~> 3.4)
   - SVProgressHUD (2.2.5)
   - YYText (1.0.7)
-  - ZegoExpressEngine/Audio (2.15.0)
+  - ZegoExpressEngine/Audio (2.17.1.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
@@ -63,12 +86,13 @@ DEPENDENCIES:
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
   - MJRefresh (= 3.7.5)
+  - RCVoiceRoomLib (~> 2.0.7)
   - SDWebImage (= 5.12.2)
   - SDWebImageWebPCoder
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
   - YYText (~> 1.0.7)
-  - ZegoExpressEngine/Audio (~> 2.15.0)
+  - ZegoExpressEngine/Audio (~> 2.17.0)
 
 SPEC REPOS:
   trunk:
@@ -84,6 +108,9 @@ SPEC REPOS:
     - MJExtension
     - MJRefresh
     - Protobuf
+    - RCVoiceRoomLib
+    - RongCloudIM
+    - RongCloudRTC
     - SDWebImage
     - SDWebImageWebPCoder
     - SSZipArchive
@@ -114,14 +141,17 @@ SPEC CHECKSUMS:
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Protobuf: 235750e4696ff59fb07d949a9dbbc92b3c0700fe
+  RCVoiceRoomLib: 8242df93f9a2b8fc1cf28e95c8fa48a135de1e3d
+  RongCloudIM: c871de12fdc601a4335e17d8df17232f56b8d089
+  RongCloudRTC: 6171037c157b9c8ce8f4c2868b72b197a84eea13
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
-  ZegoExpressEngine: b3f8f173c5af47ee53caf29c6d62660118b63b97
+  ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
 
-PODFILE CHECKSUM: 9f3699a541cbd5956ac1ae125451120cc9db3c63
+PODFILE CHECKSUM: a5bab009d20d132bfe161261874c89c2749189ca
 
 COCOAPODS: 1.11.2

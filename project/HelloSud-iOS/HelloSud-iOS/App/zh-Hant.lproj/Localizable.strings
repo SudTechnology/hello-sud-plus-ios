@@ -143,3 +143,7 @@
 "MJRefreshHeaderLastTimeText" = "最後更新：";
 "MJRefreshHeaderDateTodayText" = "今天";
 "MJRefreshHeaderNoneLastDateText" = "無記錄";
+
+"dt_asr_tip" = "本遊戲支持語音識別，請開麥展現你的魅力~";
+"dt_asr_open_mic_tip" = "開麥搶答，比打字更快哦！";
+"dt_asr_open_mic_num_tip" = "試試打開麥克風報數，懶人福利！";

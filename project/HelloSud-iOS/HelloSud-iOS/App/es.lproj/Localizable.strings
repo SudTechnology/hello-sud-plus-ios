@@ -141,5 +141,6 @@
 "MJRefreshHeaderDateTodayText" = "Today";
 "MJRefreshHeaderNoneLastDateText" = "No record";
 
-
-
+"dt_asr_tip" = "Este juego admite el reconocimiento de voz. ¡Abre el micrófono y demuestra tu encanto!";
+"dt_asr_open_mic_tip" = "¡Abre el micrófono para responder! ¡Será más rápido que escribir!";
+"dt_asr_open_mic_num_tip" = "¡Abre el micrófono para contear! !Esto le ayudará a obtener bienestares!";

@@ -76,7 +76,8 @@
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.gameImageView).offset(8);
         make.top.equalTo(self.gameImageView).offset(12);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.height.mas_greaterThanOrEqualTo(0);
+        make.trailing.equalTo(self.gameImageView);
     }];
     [self.inGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.equalTo(self.gameImageView);

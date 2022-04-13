@@ -42,19 +42,35 @@
     // 配置语音引擎
     AudioConfigModel *configModel = AppService.shared.rtcConfigModel;
     if (configModel) {
+        NSString *rtcType = AppService.shared.rtcType;
+        
         configModel.userID = AppService.shared.login.loginUserInfo.userID;
-        configModel.token = self.enterModel.rtiToken;
+        if ([rtcType isEqualToString:kRtcTypeRongCloud]) {
+            configModel.token = self.enterModel.rtcToken;
+        } else {
+            configModel.token = self.enterModel.rtiToken;
+        }
+        if ([rtcType isEqualToString:kRtcTypeRongCloud] || [rtcType isEqualToString:kRtcTypeCommEase] || [rtcType isEqualToString:kRtcTypeAgora]) {
+            [AudioEngineFactory.shared.audioEngine initWithConfig:configModel success:^{
+                [self joinRoom:audioJoinRoomModel];
+            }];
+            return;
+        }
+    
         [AudioEngineFactory.shared.audioEngine initWithConfig:configModel];
     }
 
+    [self joinRoom:audioJoinRoomModel];
+}
+
+- (void)joinRoom:(AudioJoinRoomModel *)audioJoinRoomModel {
     [AudioEngineFactory.shared.audioEngine joinRoom:audioJoinRoomModel];
     [AudioEngineFactory.shared.audioEngine setEventListener:self];
     [AudioEngineFactory.shared.audioEngine setAudioRouteToSpeaker:YES];
-
 }
 
 - (void)logoutRoom {
-    [AudioEngineFactory.shared.audioEngine leaveRoom];
+    [AudioEngineFactory.shared.audioEngine destroy];
 }
 
 #pragma mark =======音频采集=======

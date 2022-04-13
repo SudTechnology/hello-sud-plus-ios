@@ -146,6 +146,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)MJRefreshHeaderDateTodayText;
 + (NSString *)MJRefreshHeaderNoneLastDateText;
 
++ (NSString *)dt_asr_tip;
++ (NSString *)dt_asr_open_mic_tip;
++ (NSString *)dt_asr_open_mic_num_tip;
+
 
 @end
 NS_ASSUME_NONNULL_END

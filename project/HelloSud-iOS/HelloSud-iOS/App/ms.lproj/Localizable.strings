@@ -141,5 +141,6 @@
 "MJRefreshHeaderDateTodayText" = "Today";
 "MJRefreshHeaderNoneLastDateText" = "No record";
 
-
-
+"dt_asr_tip" = "Permainan ini menyokong pengecaman suara, sila buka mikrofon untuk menunjukkan daya tarikan anda~";
+"dt_asr_open_mic_tip" = "Buka mikrofon untuk menjawab, lebih pantas daripada menaip!";
+"dt_asr_open_mic_num_tip" = "Cuba hidupkan mikrofon untuk melaporkan nombor. Inilah satu kebajikan untuk pemalas!";

@@ -12,6 +12,10 @@
     NSLog(@"暂未实现");
 }
 
+- (void)initWithConfig:(AudioConfigModel *)model success:(nullable dispatch_block_t)success {
+    NSLog(@"暂未实现");
+}
+
 - (void)joinRoom:(AudioJoinRoomModel *)model {
     NSLog(@"暂未实现");
 }

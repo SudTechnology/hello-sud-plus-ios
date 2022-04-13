@@ -35,6 +35,10 @@
 
 /// model.token, 这里的token是RTM的token，用于信令
 - (void)initWithConfig:(AudioConfigModel *)model {
+    [self initWithConfig:model success:nil];
+}
+
+- (void)initWithConfig:(AudioConfigModel *)model success:(nullable dispatch_block_t)success {
     AgoraRtcEngineConfig * config = [[AgoraRtcEngineConfig alloc] init];
     config.appId = model.appId;
     config.areaCode = AgoraAreaCodeGLOB;
@@ -45,7 +49,7 @@
         [self.mEngine enableAudioVolumeIndication:300 smooth:3 report_vad:YES];
         
         // 初始化rtm信令
-        [self initRtm:model];
+        [self initRtm:model success:success];
     }
 }
 
@@ -72,6 +76,7 @@
         channelMediaOptions.publishLocalVideo = NO;
         // 加入频道
         [self.mEngine joinChannelByUserAccount:model.userID token:model.token channelId:model.roomID options:channelMediaOptions];
+        [self.mEngine setEnableSpeakerphone:YES];
         self.mRoomID = model.roomID;
     }
 }
@@ -271,14 +276,22 @@
 
 #pragma mark RTM 信令操作
 /// 初始化rtm信令, 登录 Agora RTM 系统
-- (void)initRtm:(AudioConfigModel *)model {
+- (void)initRtm:(AudioConfigModel *)model success:(nullable dispatch_block_t)success {
     if (self.mRtmKit == nil) {
         self.mRtmKit = [[AgoraRtmKit alloc]initWithAppId:model.appId delegate:self];
     }
     
     if (self.mRtmKit != nil) {
         // 登录Agora RTM 系统
-        [_mRtmKit loginByToken:model.token user:model.userID completion:nil];
+        [_mRtmKit loginByToken:model.token user:model.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
+            if (errorCode == AgoraRtmLoginErrorOk) {
+                if (success != nil) {
+                    [HSThreadUtils runOnUiThread:^{
+                        success();
+                    }];
+                }
+            }
+        }];
     }
 }
 
@@ -297,7 +310,9 @@
         // 创建频道
         self.mRtmChannel = [self.mRtmKit createChannelWithId:roomId delegate:self];
         if (self.mRtmChannel != nil) {
-            [self.mRtmChannel joinWithCompletion:nil];
+            [self.mRtmChannel joinWithCompletion:^(AgoraRtmJoinChannelErrorCode errorCode) {
+                
+            }];
         }
     }
 }

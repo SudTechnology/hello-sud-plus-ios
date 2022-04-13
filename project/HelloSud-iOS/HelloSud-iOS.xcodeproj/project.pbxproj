@@ -167,6 +167,13 @@
 		BC210D70BDEB097F49794C9B /* DTUIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */; };
 		BC210FDF9C7CAC234D035EF6 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105042E549C236540DC05 /* DeviceUtil.m */; };
 		E5C2420127EDCBAA00EA2377 /* HSThreadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2420027EDCBAA00EA2377 /* HSThreadUtils.m */; };
+		E5C82F7B27FFE34200A409D5 /* NERtcSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7227FFE09C00A409D5 /* NERtcSDK.framework */; };
+		E5C82F7C27FFE34200A409D5 /* NERtcSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7227FFE09C00A409D5 /* NERtcSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5C82F7D27FFE34300A409D5 /* NIMSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7327FFE09C00A409D5 /* NIMSDK.framework */; };
+		E5C82F7E27FFE34300A409D5 /* NIMSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7327FFE09C00A409D5 /* NIMSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5C82F7F27FFE34500A409D5 /* NMCBasicModuleFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */; };
+		E5C82F8027FFE34500A409D5 /* NMCBasicModuleFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */; };
 		E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */; };
 		E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */; };
 /* End PBXBuildFile section */
@@ -178,7 +185,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E5C82F7E27FFE34300A409D5 /* NIMSDK.framework in Embed Frameworks */,
+				E5C82F7C27FFE34200A409D5 /* NERtcSDK.framework in Embed Frameworks */,
 				44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */,
+				E5C82F8027FFE34500A409D5 /* NMCBasicModuleFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,6 +556,11 @@
 		BC210FAF33BAD4283645718B /* UserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailView.h; sourceTree = "<group>"; };
 		E5C241FF27EDCB8800EA2377 /* HSThreadUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSThreadUtils.h; sourceTree = "<group>"; };
 		E5C2420027EDCBAA00EA2377 /* HSThreadUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSThreadUtils.m; sourceTree = "<group>"; };
+		E5C82F7227FFE09C00A409D5 /* NERtcSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NERtcSDK.framework; path = Vendors/netease/NERtcSDK.framework; sourceTree = "<group>"; };
+		E5C82F7327FFE09C00A409D5 /* NIMSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NIMSDK.framework; path = Vendors/netease/NIMSDK.framework; sourceTree = "<group>"; };
+		E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMCBasicModuleFramework.framework; path = Vendors/netease/NMCBasicModuleFramework.framework; sourceTree = "<group>"; };
+		E5C82F8227FFE56900A409D5 /* RCloudAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCloudAudioEngineImpl.h; sourceTree = "<group>"; };
+		E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCloudAudioEngineImpl.m; sourceTree = "<group>"; };
 		E5EDB8BB27E873A300EE99D0 /* AudioConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConfigModel.h; sourceTree = "<group>"; };
 		E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioConfigModel.m; sourceTree = "<group>"; };
 		E5EDB8BE27E8775D00EE99D0 /* AudioJoinRoomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioJoinRoomModel.h; sourceTree = "<group>"; };
@@ -559,6 +574,9 @@
 			files = (
 				039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */,
 				44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */,
+				E5C82F7D27FFE34300A409D5 /* NIMSDK.framework in Frameworks */,
+				E5C82F7B27FFE34200A409D5 /* NERtcSDK.framework in Frameworks */,
+				E5C82F7F27FFE34500A409D5 /* NMCBasicModuleFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1292,6 +1310,7 @@
 		6CD6E84727BE2CDA00D8F76C /* Impl */ = {
 			isa = PBXGroup;
 			children = (
+				E5C82F8127FFE52000A409D5 /* RCloud */,
 				6CD6E87027BF428200D8F76C /* TX */,
 				6CD6E86F27BF427800D8F76C /* Aliyun */,
 				6CD6E86E27BF426B00D8F76C /* Volc */,
@@ -1500,6 +1519,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		E5C82F8127FFE52000A409D5 /* RCloud */ = {
+			isa = PBXGroup;
+			children = (
+				E5C82F8227FFE56900A409D5 /* RCloudAudioEngineImpl.h */,
+				E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */,
+			);
+			path = RCloud;
+			sourceTree = "<group>";
+		};
 		E5EDB8BA27E8737700EE99D0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1514,6 +1542,9 @@
 		E65466148933C05BB06C9A97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E5C82F7227FFE09C00A409D5 /* NERtcSDK.framework */,
+				E5C82F7327FFE09C00A409D5 /* NIMSDK.framework */,
+				E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */,
 				44DF038A2796ADC6006EE6AC /* SudMGPSDK */,
 				573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */,
 			);
@@ -1542,6 +1573,7 @@
 				6C192E46279523B000553034 /* Resources */,
 				1057205B42502B672EE74406 /* [CP] Embed Pods Frameworks */,
 				44DF038F2796ADCD006EE6AC /* Embed Frameworks */,
+				7B794445875629A1759C23F6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1628,6 +1660,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B794445875629A1759C23F6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D23D6C32901616787A057FFD /* [CP] Check Pods Manifest.lock */ = {
@@ -1785,6 +1834,7 @@
 				BC210B53D5A4A718BC45B63C /* DTUIDevice+Extension.m in Sources */,
 				6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */,
 				4455ADCC27EAC658001516EE /* TicketJoinPopView.m in Sources */,
+				E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */,
 				4455AE0827EAC6F7001516EE /* BaseSceneViewController+IM.m in Sources */,
 				4455ADD127EAC658001516EE /* OneOneViewController.m in Sources */,
 				BC210452F6884908D768A126 /* DTNSArray+Masonry.m in Sources */,
@@ -2001,6 +2051,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = P6FVM63RW6;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendors/netease",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "HelloSud-iOS/App/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2024,6 +2078,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = Dev_Sud_MGP;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -2038,6 +2093,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FVM63RW6;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendors/netease",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "HelloSud-iOS/App/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2061,6 +2120,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = Dis_Tech_Sud_Mgp_Hello;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};
