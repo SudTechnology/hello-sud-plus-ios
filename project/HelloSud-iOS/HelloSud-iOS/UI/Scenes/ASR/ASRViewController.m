@@ -62,10 +62,6 @@
     self.asrStateNTF = [[NSNotificationCenter defaultCenter]addObserverForName:NTF_ASR_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         [weakSelf handlePlayerStateChanged];
     }];
-    
-    self.operatorView.giftTapBlock = ^(UIButton *sender) {
-        [self showVoiceTip];
-    };
 
 }
 
@@ -101,8 +97,7 @@
         [self.btnTip setTitle:tip forState:UIControlStateNormal];
         [self.btnTip setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
         self.btnTip.titleLabel.font = UIFONT_REGULAR(16);
-        self.btnTip.titleLabel.numberOfLines = 0;
-        [self.btnTip setContentEdgeInsets:UIEdgeInsetsMake(6, 12, 18, 6)];
+        [self.btnTip setContentEdgeInsets:UIEdgeInsetsMake(0, 12, 12, 6)];
         [self.sceneView addSubview:self.btnTip];
         [self.btnTip mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_lessThanOrEqualTo(kScreenWidth - 32);
