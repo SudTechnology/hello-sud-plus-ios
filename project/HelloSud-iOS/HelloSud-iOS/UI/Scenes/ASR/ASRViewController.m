@@ -35,6 +35,7 @@
 
 }
 
+
 - (void)dtAddViews {
     [super dtAddViews];
     [self.sceneView addSubview:self.asrTipLabel];
@@ -45,7 +46,8 @@
     [self.asrTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(kStatusBarHeight + 105);
         make.trailing.mas_equalTo(-16);
-        make.width.height.mas_greaterThanOrEqualTo(0);
+        make.height.mas_greaterThanOrEqualTo(0);
+        make.width.mas_lessThanOrEqualTo(kScreenWidth - 32);
     }];
 }
 
@@ -60,6 +62,10 @@
     self.asrStateNTF = [[NSNotificationCenter defaultCenter]addObserverForName:NTF_ASR_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         [weakSelf handlePlayerStateChanged];
     }];
+    
+    self.operatorView.giftTapBlock = ^(UIButton *sender) {
+        [self showVoiceTip];
+    };
 
 }
 
@@ -95,11 +101,12 @@
         [self.btnTip setTitle:tip forState:UIControlStateNormal];
         [self.btnTip setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
         self.btnTip.titleLabel.font = UIFONT_REGULAR(16);
-        [self.btnTip setContentEdgeInsets:UIEdgeInsetsMake(0, 12, 12, 6)];
+        self.btnTip.titleLabel.numberOfLines = 0;
+        [self.btnTip setContentEdgeInsets:UIEdgeInsetsMake(6, 12, 18, 6)];
         [self.sceneView addSubview:self.btnTip];
         [self.btnTip mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_lessThanOrEqualTo(0);
-            make.height.mas_equalTo(41);
+            make.width.mas_lessThanOrEqualTo(kScreenWidth - 32);
+            make.height.mas_greaterThanOrEqualTo(0);
             make.bottom.equalTo(self.operatorView.mas_top).offset(0);
             make.leading.mas_equalTo(16);
         }];
