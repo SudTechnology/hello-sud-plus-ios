@@ -88,9 +88,9 @@
         [self.btnTip setBackgroundImage:bgImage forState:UIControlStateNormal];
         NSString *tip = @"";
         if (self.gameId == DIGITAL_BOMB) {
-            tip = @"试试打开麦克风报数，懒人福利！";
+            tip = NSString.dt_asr_open_mic_num_tip;
         } else {
-            tip = @"开麦抢答，比打字更快哦！";
+            tip = NSString.dt_asr_open_mic_tip;
         }
         [self.btnTip setTitle:tip forState:UIControlStateNormal];
         [self.btnTip setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
@@ -98,7 +98,7 @@
         [self.btnTip setContentEdgeInsets:UIEdgeInsetsMake(0, 12, 12, 6)];
         [self.sceneView addSubview:self.btnTip];
         [self.btnTip mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_greaterThanOrEqualTo(0);
+            make.width.mas_lessThanOrEqualTo(0);
             make.height.mas_equalTo(41);
             make.bottom.equalTo(self.operatorView.mas_top).offset(0);
             make.leading.mas_equalTo(16);
@@ -126,8 +126,9 @@
     if (!_asrTipLabel) {
         _asrTipLabel = [[UILabel alloc] init];
         _asrTipLabel.font = UIFONT_MEDIUM(11);
+        _asrTipLabel.numberOfLines = 0;
         _asrTipLabel.textColor = UIColor.whiteColor;
-        _asrTipLabel.text = @"本游戏支持语音识别，请开麦展现你的魅力~";
+        _asrTipLabel.text = NSString.dt_asr_tip;
     }
     return _asrTipLabel;
 }

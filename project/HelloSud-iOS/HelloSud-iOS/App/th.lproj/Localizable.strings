@@ -141,5 +141,6 @@
 "MJRefreshHeaderDateTodayText" = "Today";
 "MJRefreshHeaderNoneLastDateText" = "No record";
 
-
-
+"dt_asr_tip" = "เกมนี้รองรับการจดจำเสียง โปรดเปิดไมค์เพื่อแสดงเสน่ห์ของคุณ";
+"dt_asr_open_mic_tip" = "เปิดไมค์รับสาย จะเร็วกว่าการพิมพ์";
+"dt_asr_open_mic_num_tip" = "ลองเปิดไมค์แจ้งตัวเลข รางวัลสำหรับคนขี้เกียจ";

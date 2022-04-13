@@ -10,7 +10,7 @@
 #import <NERtcSDK/NERtcEngineDelegate.h>
 #import <NERtcSDK/NERtcSDK.h>
 #import <NIMSDK/NIMSDK.h>
-#import "ThreadUtils.h"
+#import "HSThreadUtils.h"
 
 @interface NeteaseAudioEngineImpl () <NIMLoginManagerDelegate, NIMChatManagerDelegate, NERtcEngineDelegateEx, NERtcEngineAudioFrameObserver>
 
@@ -54,7 +54,7 @@
     [[[NIMSDK sharedSDK] loginManager] login:model.userID token:model.token completion:^(NSError * _Nullable error) {
         if (error == nil) {
             if (success != nil) {
-                [ThreadUtils runOnUiThread:^{
+                [HSThreadUtils runOnUiThread:^{
                     success();
                 }];
             }
@@ -98,7 +98,7 @@
         // 默认关闭麦克风，关掉推流
 //        [self stopPublishStream];
         [engine joinChannelWithToken:model.token channelName:model.roomID myUid:[model.userID longLongValue] completion:^ (NSError * _Nullable error, uint64_t channelId, uint64_t elapesd, uint64_t uid) {
-            [ThreadUtils runOnUiThread:^{
+            [HSThreadUtils runOnUiThread:^{
                 if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRoomStateUpdate:state:errorCode:extendedData:)]) {
                     [self.mISudAudioEventListener onRoomStateUpdate:self.mRoomID state:HSAudioEngineStateConnected errorCode:0 extendedData:nil];
                 }
@@ -221,7 +221,7 @@
         return;
     }
     
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         for (NIMMessage *message in messages) {
             if (message.messageType == NIMMessageTypeText) {
                 if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRecvCommand:command:)]) {
@@ -234,7 +234,7 @@
 
 #pragma mark ---------------- NERtcEngineDelegateEx ----------------
 - (void)onLocalAudioVolumeIndication:(int)volume {
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         // 本地采集音量
         if ([self.mISudAudioEventListener respondsToSelector:@selector(onCapturedSoundLevelUpdate:)]) {
             [self.mISudAudioEventListener onCapturedSoundLevelUpdate:@(volume)];
@@ -243,7 +243,7 @@
 }
 
 -(void)onRemoteAudioVolumeIndication:(nullable NSArray<NERtcAudioVolumeInfo*> *)speakers totalVolume:(int)totalVolume {
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         NSMutableDictionary *soundLevels = NSMutableDictionary.new;
         for (NERtcAudioVolumeInfo *speaker in speakers) {
             NSString *userID = [NSString stringWithFormat:@"%llu", speaker.uid];
@@ -258,14 +258,14 @@
 }
 
 - (void)onNERtcEngineUserDidJoinWithUserID:(uint64_t)userID userName:(NSString *)userName {
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         [self.roomUserList addObject:@(userID)];
         [self updateRoomUserCount];
     }];
 }
 
 - (void)onNERtcEngineUserDidLeaveWithUserID:(uint64_t)userID reason:(NERtcSessionLeaveReason)reason {
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         [self.roomUserList removeObject:@(userID)];
         [self updateRoomUserCount];
     }];

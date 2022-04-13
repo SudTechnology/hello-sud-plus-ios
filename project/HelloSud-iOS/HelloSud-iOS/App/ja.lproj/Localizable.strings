@@ -141,5 +141,6 @@
 "MJRefreshHeaderDateTodayText" = "Today";
 "MJRefreshHeaderNoneLastDateText" = "No record";
 
-
-
+"dt_asr_tip" = "このゲームは音声認識をしています、マイクをオンにして魅力を伝えてみましょう~";
+"dt_asr_open_mic_tip" = "マイクで答えてみて、タイピングよりも速いですよ！";
+"dt_asr_open_mic_num_tip" = "マイクをつけて報告してみてください！便利ですよ！";

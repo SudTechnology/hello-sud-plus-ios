@@ -12,7 +12,7 @@
 #import <RongRTCLib/RCRTCMicOutputStream.h>
 #import <RongRTCLib/RCRTCRoom.h>
 #import <RongIMLib/RongIMLib.h>
-#import "ThreadUtils.h"
+#import "HSThreadUtils.h"
 
 @interface RCloudAudioEngineImpl() <RCVoiceRoomDelegate, RCIMClientReceiveMessageDelegate>
 
@@ -69,7 +69,7 @@
         
     } success:^(NSString *userId) {
         if (success != nil) {
-            [ThreadUtils runOnUiThread:^{
+            [HSThreadUtils runOnUiThread:^{
                 success();
             }];
         }
@@ -95,7 +95,7 @@
         [engine setDelegate:self];
         
         [engine joinRoom:model.roomID success:^{
-            [ThreadUtils runOnUiThread:^{
+            [HSThreadUtils runOnUiThread:^{
                 if (self.mISudAudioEventListener != nil) {
                     if ([self.mISudAudioEventListener respondsToSelector:@selector(onRoomStateUpdate:state:errorCode:extendedData:)]) {
                         [self.mISudAudioEventListener onRoomStateUpdate:model.roomID state:HSAudioEngineStateConnected errorCode:0 extendedData:nil];
@@ -232,7 +232,7 @@
 //#pragma mark ---------------- RCIMClientReceiveMessageDelegate -------------------
 - (void)onReceived:(RCMessage *)message left:(int)nLeft object:(id)object {
     if (message != nil) {
-        [ThreadUtils runOnUiThread:^{
+        [HSThreadUtils runOnUiThread:^{
             RCMessageContent *messageContent = message.content;
             if ([messageContent isKindOfClass:[RCTextMessage class]]) {
                 RCTextMessage *textMessage = (RCTextMessage *)messageContent;
@@ -246,13 +246,13 @@
 
 //#pragma mark ---------------- RCVoiceRoomDelegate -------------------
 - (void)userDidEnterSeat:(NSInteger)seatIndex user:(NSString *)userId {
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         [self.seatUserMap setObject:userId forKey:@(seatIndex)];
     }];
 }
 
 - (void)userDidLeaveSeat:(NSInteger)seatIndex user:(NSString *)userId {
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         [self.seatUserMap removeObjectForKey:@(seatIndex)];
     }];
 }
@@ -260,7 +260,7 @@
 - (void)seatSpeakingStateChanged:(BOOL)speaking
                          atIndex:(NSInteger)index
                       audioLevel:(NSInteger)level {
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         NSString *userId = [self.seatUserMap objectForKey:@(index)];
         if (userId == nil)
             return;
@@ -282,14 +282,14 @@
 }
 
 - (void)userDidEnter:(NSString *)userId {
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         [self.roomUserList addObject:userId];
         [self updateRoomUserCount];
     }];
 }
 
 - (void)userDidExit:(NSString *)userId {
-    [ThreadUtils runOnUiThread:^{
+    [HSThreadUtils runOnUiThread:^{
         [self.roomUserList removeObject:userId];
         [self updateRoomUserCount];
     }];

@@ -286,7 +286,7 @@
         [_mRtmKit loginByToken:model.token user:model.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
             if (errorCode == AgoraRtmLoginErrorOk) {
                 if (success != nil) {
-                    [ThreadUtils runOnUiThread:^{
+                    [HSThreadUtils runOnUiThread:^{
                         success();
                     }];
                 }

@@ -143,3 +143,8 @@
 "MJRefreshHeaderLastTimeText" = "最后更新：";
 "MJRefreshHeaderDateTodayText" = "今天";
 "MJRefreshHeaderNoneLastDateText" = "无记录";
+
+"dt_asr_tip" = "本游戏支持语音识别，请开麦展现你的魅力~";
+"dt_asr_open_mic_tip" = "开麦抢答，比打字更快哦！";
+"dt_asr_open_mic_num_tip" = "试试打开麦克风报数，懒人福利！";
+
