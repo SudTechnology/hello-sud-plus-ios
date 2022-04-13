@@ -43,10 +43,10 @@
 - (void)dtLayoutViews {
     [super dtLayoutViews];
     [self.asrTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(kStatusBarHeight + 105);
         make.trailing.mas_equalTo(-16);
         make.height.mas_greaterThanOrEqualTo(0);
-        make.width.mas_lessThanOrEqualTo(kScreenWidth - 32);
+        make.width.mas_equalTo(230);
+        make.bottom.equalTo(self.gameNumLabel);
     }];
 }
 

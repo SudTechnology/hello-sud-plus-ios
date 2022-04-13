@@ -96,7 +96,7 @@
 "dt_room_up_mic" = "เชื่อมต่อไมค์";
 "dt_room_choose_game" = "เลือกเกม";
 "dt_room_send" = "ส่ง";
-"dt_room_please_input" = "请输入内容";
+"dt_room_please_input" = "ส่งข้อความ …";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "จบเกม";
 "dt_room_num_id" = "หมายเลขห้อง %@";

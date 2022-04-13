@@ -119,7 +119,8 @@
     [self.gameNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(14);
         make.top.mas_equalTo(self.gameMicContentView.mas_bottom).offset(3);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.width.mas_greaterThanOrEqualTo(0);
+        make.height.mas_equalTo(16);
     }];
     [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(106);
