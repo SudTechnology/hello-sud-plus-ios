@@ -48,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) BaseView *sceneView;
 
 
+/// 游戏上遮罩背景视图
+@property(nonatomic, strong) UIImageView *gameTopShadeNode;
 @property (nonatomic, strong) GameMicContentView *gameMicContentView;
 @property (nonatomic, strong) RoomNaviView *naviView;
 @property (nonatomic, strong) RoomOperatorView *operatorView;

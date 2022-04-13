@@ -17,8 +17,8 @@
 @property (nonatomic, assign) CGFloat itemH;
 @property (nonatomic, strong) UILabel *tipLabel;
 /// 创建房间
-@property (nonatomic, strong) UIButton *createBtn;
 @property (nonatomic, strong) UIView *borderView;
+@property (nonatomic, strong) DTPaddingLabel *createNode;
 @end
 
 @implementation HomeHeaderReusableView
@@ -32,7 +32,7 @@
     
     self.titleLabel.text = sceneModel.sceneName;
     [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImage]];
-    [self.createBtn setTitleColor:sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A") forState:UIControlStateNormal];
+    self.createNode.textColor = sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A");
 }
 
 - (void)hsConfigUI {
@@ -53,7 +53,7 @@
 //    [AudioRoomService.shared reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
 }
 
-- (void)onBtnClick:(UIButton *)sender {
+- (void)clickCreateEvent:(UITapGestureRecognizer *)tap {
     // 创建房间
     if (self.sceneModel.isGameWait) {
         return;
@@ -76,7 +76,7 @@
     [self.contentView addSubview:self.previewView];
 //    [self.contentView addSubview:self.tipLabel];
     [self.contentView addSubview:self.borderView];
-    [self.borderView addSubview:self.createBtn];
+    [self.borderView addSubview:self.createNode];
 }
 
 - (void)hsLayoutViews {
@@ -102,11 +102,12 @@
     [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.previewView);
         make.trailing.equalTo(self.previewView).offset(-12);
-        make.width.mas_equalTo(118);
+        make.width.mas_greaterThanOrEqualTo(0);
         make.height.mas_equalTo(44);
     }];
-    [self.createBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.createNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(4, 4, 4, 4));
+        make.width.mas_greaterThanOrEqualTo(0);
     }];
 }
 
@@ -160,16 +161,20 @@
     return _borderView;
 }
 
-- (UIButton *)createBtn {
-    if (!_createBtn) {
-        _createBtn = UIButton.new;
-        [_createBtn setTitle:NSString.dt_home_create_room forState:UIControlStateNormal];
-        _createBtn.backgroundColor = HEX_COLOR(@"#FFFFFF");
-        _createBtn.titleLabel.font = UIFONT_BOLD(17);
-        _createBtn.layer.cornerRadius = 18;
-        [_createBtn addTarget:self action:@selector(onBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+- (DTPaddingLabel *)createNode {
+    if (!_createNode) {
+        _createNode = DTPaddingLabel.new;
+        _createNode.text = NSString.dt_home_create_room;
+        _createNode.textAlignment = NSTextAlignmentCenter;
+        _createNode.paddingX = 27;
+        _createNode.font = UIFONT_BOLD(17);
+        [_createNode setUserInteractionEnabled:true];
+        _createNode.clipsToBounds = true;
+        _createNode.layer.cornerRadius = 18;
+        _createNode.backgroundColor = HEX_COLOR(@"#FFFFFF");
+        [_createNode addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickCreateEvent:)]];
     }
-    return _createBtn;
+    return _createNode;
 }
 
 @end

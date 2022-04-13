@@ -165,7 +165,10 @@
     WeakSelf
     [AudioRoomService.shared reqEnterRoom:searchText.longLongValue success:^{
         weakSelf.searchTextField.text = nil;
-    } fail:nil];
+    } fail:^(NSError *error) {
+        weakSelf.searchTextField.text = @"";
+        [weakSelf.searchBtn setHidden:true];
+    }];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

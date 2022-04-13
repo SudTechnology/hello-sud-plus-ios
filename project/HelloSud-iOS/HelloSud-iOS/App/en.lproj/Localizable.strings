@@ -114,7 +114,7 @@
 "dt_room_unable_speak_present" = "当前不能发言";
 
 "dt_login_has_expired" = "登录已过期，请重新进入";
-"dt_next_time_again_say" = "المرة القادمة";
+"dt_next_time_again_say" = "Later";
 "dt_update_now" = "Update now";
 "dt_update_app_ver_low" = "This version of the app is low, please update to the latest version";
 "dt_update_app_ver_new" = "There is a new version available, update now?";

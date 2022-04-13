@@ -51,6 +51,14 @@
     [self.naviView hiddenNodeWithRoleType:AudioRoomService.shared.roleType];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
@@ -65,6 +73,7 @@
     [self.contentView addSubview:self.gameView];
     [self.contentView addSubview:self.sceneView];
 
+    [self.sceneView addSubview:self.gameTopShadeNode];
     [self.sceneView addSubview:self.naviView];
     [self.sceneView addSubview:self.operatorView];
     [self.sceneView addSubview:self.gameMicContentView];
@@ -83,6 +92,10 @@
     }];
     [self.sceneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
+    }];
+    [self.gameTopShadeNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(self.sceneView);
+        make.height.mas_equalTo(145);
     }];
     [self.naviView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(self.contentView);
@@ -624,6 +637,14 @@
         _bgImageView.image = [UIImage imageNamed:@"room_bg"];
     }
     return _bgImageView;
+}
+
+- (UIImageView *)gameTopShadeNode {
+    if (!_gameTopShadeNode) {
+        _gameTopShadeNode = [[UIImageView alloc] init];
+        _gameTopShadeNode.image = [UIImage imageNamed:@"room_game_top_v"];
+    }
+    return _gameTopShadeNode;
 }
 
 - (RoomNaviView *)naviView {

@@ -75,6 +75,7 @@
         [self.audioMicContentView setHidden:true];
         [self setupGameRoomContent];
     }
+    [self.gameTopShadeNode setHidden:self.roomType == HSAudioMic];
 //    [self reqMicList];
 //    [self.naviView hiddenNodeWithRoleType: AudioRoomService.shared.roleType];
 //    [self dtUpdateUI];

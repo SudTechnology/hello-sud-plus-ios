@@ -68,7 +68,7 @@
 
 /// 系统消息背景颜色
 - (UIColor *)systemMsgBgColor {
-    return [UIColor dt_colorWithHexString:@"#C84319" alpha:0.3];
+    return [UIColor dt_colorWithHexString:@"#C84319" alpha:0.7];
 }
 
 /// 系统消息文本颜色
