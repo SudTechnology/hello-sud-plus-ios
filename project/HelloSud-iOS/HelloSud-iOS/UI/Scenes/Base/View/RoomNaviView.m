@@ -125,7 +125,7 @@
     [self.roomModeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-52);
         make.centerY.mas_equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(78, 20));
+        make.size.mas_greaterThanOrEqualTo(CGSizeMake(78, 20));
     }];
     [self.roomModeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(8);
@@ -136,6 +136,7 @@
         make.leading.mas_equalTo(self.roomModeLabel.mas_trailing).offset(4);
         make.centerY.mas_equalTo(self.roomModeView);
         make.size.mas_equalTo(CGSizeMake(10, 10));
+        make.trailing.mas_equalTo(-8);
     }];
     [self.endGameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(self.roomModeView.mas_leading).offset(-8);
