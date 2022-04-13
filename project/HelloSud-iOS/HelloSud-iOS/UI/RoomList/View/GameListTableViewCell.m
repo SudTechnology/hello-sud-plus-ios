@@ -21,6 +21,32 @@
 
 @implementation GameListTableViewCell
 
+/// 标签颜色
++ (NSString *)tagColor:(SceneType)sceneType {
+
+    static NSDictionary *dicSencen = nil;
+    if (!dicSencen) {
+        dicSencen = @{
+            @(SceneTypeAudio):@"#8324DF",
+            @(SceneTypeOneOne):@"#1378F1",
+            @(SceneTypeTalent):@"#F7268B",
+            @(SceneTypeShow):@"#EC5420",
+            @(SceneTypeTicket):@"#E35017",
+            @(SceneTypeGuess):@"#FDAB26",
+            @(SceneTypeCross):@"#504EEB",
+            @(SceneTypeOrder):@"#27B7E8",
+            @(SceneTypeASR):@"#9622C1",
+            @(SceneTypeLeague):@"#CB1530",
+            @(SceneTypeCustom):@"#198DE2",
+        };
+    }
+    NSString *colorStr = dicSencen[@(sceneType)];
+    if (colorStr.length == 0) {
+        colorStr = @"#8324DF";
+    }
+    return colorStr;
+}
+
 - (void)setModel:(BaseModel *)model {
     HSRoomInfoList *m = (HSRoomInfoList *) model;
     if (m.gameLevelDesc == nil) {
@@ -34,16 +60,8 @@
     self.typeLabel.text = [AppService.shared getRTCTypeName:m.rtcType];
     self.roomTypeLabel.text = m.sceneTag;
     
-    if (m.sceneType == SceneTypeTicket) {
-        self.roomTypeLabel.textColor = [UIColor dt_colorWithHexString:@"#E8C958" alpha:1];
-        self.roomTypeLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#262732" alpha:1];
-    } else if (m.sceneType == SceneTypeASR) {
-        self.roomTypeLabel.textColor = [UIColor dt_colorWithHexString:@"#66A067" alpha:1];
-        self.roomTypeLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#DDF5D9" alpha:1];
-    } else {
-        self.roomTypeLabel.textColor = [UIColor dt_colorWithHexString:@"#999999" alpha:1];
-        self.roomTypeLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F5F5" alpha:1];
-    }
+    self.roomTypeLabel.textColor = UIColor.whiteColor;
+    self.roomTypeLabel.backgroundColor = HEX_COLOR([GameListTableViewCell tagColor:m.sceneType]);
 }
 
 - (void)hsConfigUI {
