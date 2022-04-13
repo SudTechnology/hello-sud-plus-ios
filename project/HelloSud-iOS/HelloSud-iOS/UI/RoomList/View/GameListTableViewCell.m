@@ -82,7 +82,8 @@
         make.top.mas_equalTo(self.iconImageView.mas_top).offset(3);
         make.leading.mas_equalTo(self.roomTypeLabel.mas_trailing).offset(6);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
-        make.trailing.mas_lessThanOrEqualTo(-80);
+//        make.trailing.mas_lessThanOrEqualTo(-80);
+        make.trailing.mas_lessThanOrEqualTo(self.onlineLabel.mas_leading).offset(-8);
     }];
     [self.onlineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
