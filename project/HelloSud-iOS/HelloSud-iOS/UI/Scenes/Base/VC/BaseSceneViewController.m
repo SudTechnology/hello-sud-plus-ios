@@ -714,7 +714,7 @@
 - (UILabel *)gameNumLabel {
     if (!_gameNumLabel) {
         _gameNumLabel = UILabel.new;
-        _gameNumLabel.text = @"游戏人数：0/0";
+        _gameNumLabel.text = @"";
         _gameNumLabel.font = UIFONT_REGULAR(12);
         _gameNumLabel.textColor = UIColor.whiteColor;
     }

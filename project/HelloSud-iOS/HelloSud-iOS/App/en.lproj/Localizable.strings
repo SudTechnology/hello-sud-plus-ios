@@ -145,4 +145,5 @@
 "dt_asr_open_mic_tip" = "Using the mike is faster than typing!";
 "dt_asr_open_mic_num_tip" = "You can turn on the mic to count off. Bonus for slackers!";
 "dt_enter_room_tip" = "Entered the room";
+"dt_game_person_count" = "Number of players";
 

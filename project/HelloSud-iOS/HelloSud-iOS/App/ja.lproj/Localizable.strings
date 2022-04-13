@@ -145,3 +145,4 @@
 "dt_asr_open_mic_tip" = "マイクで答えてみて、タイピングよりも速いですよ！";
 "dt_asr_open_mic_num_tip" = "マイクをつけて報告してみてください！便利ですよ！";
 "dt_enter_room_tip" = "ルームに入りました";
+"dt_game_person_count" = "プレイヤー数";

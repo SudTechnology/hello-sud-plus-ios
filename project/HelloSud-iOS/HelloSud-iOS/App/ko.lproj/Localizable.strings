@@ -145,3 +145,4 @@
 "dt_asr_open_mic_tip" = "마이크를 켜고 문제에 대답해 보세요, 타자를 더 빨리 쳐 보십시오!";
 "dt_asr_open_mic_num_tip" = "마이크 켜고 숫자 확인하기, 귀차니즘이 있는 분들을 위한 혜택!";
 "dt_enter_room_tip" = "방에 들어왔습니다";
+"dt_game_person_count" = "게임 인원수";

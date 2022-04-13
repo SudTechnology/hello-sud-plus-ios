@@ -145,3 +145,4 @@
 "dt_asr_open_mic_tip" = "¡Abre el micrófono para responder! ¡Será más rápido que escribir!";
 "dt_asr_open_mic_num_tip" = "¡Abre el micrófono para contear! !Esto le ayudará a obtener bienestares!";
 "dt_enter_room_tip" = "Entró en la sala";
+"dt_game_person_count" = "Número de jugadores";

@@ -150,6 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_asr_open_mic_tip;
 + (NSString *)dt_asr_open_mic_num_tip;
 + (NSString *)dt_enter_room_tip;
++ (NSString *)dt_game_person_count;
 
 
 @end
