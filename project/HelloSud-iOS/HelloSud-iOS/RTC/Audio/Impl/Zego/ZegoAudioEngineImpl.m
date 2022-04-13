@@ -51,8 +51,6 @@
     ZegoEngineProfile *profile = ZegoEngineProfile.new;
     /* 请通过官网注册获取，格式为 123456789L */
     profile.appID = (unsigned int)[model.appId longLongValue];
-    /* 64个字符，请通过官网注册获取 */
-    profile.appSign = model.appKey;
     /* 通用场景接入 */
     profile.scenario = ZegoScenarioCommunication;
     /* 创建引擎 */
@@ -61,6 +59,10 @@
         [engine startSoundLevelMonitor];
         [engine enableAudioCaptureDevice:NO];
     }
+}
+
+- (void)initWithConfig:(AudioConfigModel *)model success:(nullable dispatch_block_t)success {
+    [self initWithConfig:model];
 }
 
 - (void)destroy {
@@ -190,6 +192,10 @@
 }
 
 #pragma mark ZegoEventHandler
+
+- (void)onDebugError:(int)errorCode funcName:(NSString *)funcName info:(NSString *)info {
+    
+}
 
 - (void)onRoomStateUpdate:(ZegoRoomState)state errorCode:(int)errorCode extendedData:(nullable NSDictionary *)extendedData roomID:(NSString *)roomID {
     if (state == ZegoRoomStateConnected) {
