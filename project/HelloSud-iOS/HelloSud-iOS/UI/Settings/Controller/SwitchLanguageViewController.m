@@ -87,9 +87,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SwitchLangModel *model = self.arrData[indexPath.row];
-//    if (model.isSelect) {
-//        return;
-//    }
+    if (model.isSelect) {
+        return;
+    }
     for (SwitchLangModel *model in self.arrData) {
         model.isSelect = NO;
     }

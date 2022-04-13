@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger sceneType;
 @property (nonatomic, copy) NSString * rtcType;
 @property (nonatomic, copy) NSString * sceneTag;
+@property (nonatomic, copy) NSString * gameLevelDesc;
 
 @end
 
