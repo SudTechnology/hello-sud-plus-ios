@@ -543,7 +543,7 @@
                 make.center.equalTo(self.view);
             }];
             __weak UIView *weakV = v;
-            dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC);
+            dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 5.0 * NSEC_PER_SEC);
             dispatch_after(timer, dispatch_get_main_queue(), ^(void) {
                 [weakV removeFromSuperview];
             });
