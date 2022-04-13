@@ -168,6 +168,7 @@
         _createNode.textAlignment = NSTextAlignmentCenter;
         _createNode.paddingX = 27;
         _createNode.font = UIFONT_BOLD(17);
+        [_createNode setUserInteractionEnabled:true];
         _createNode.clipsToBounds = true;
         _createNode.layer.cornerRadius = 18;
         _createNode.backgroundColor = HEX_COLOR(@"#FFFFFF");

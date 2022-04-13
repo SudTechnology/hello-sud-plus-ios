@@ -261,7 +261,7 @@
     if (!_remindLabel) {
         _remindLabel = UILabel.new;
         _remindLabel.text = NSString.dt_ticket_choose_pop_not_alert;
-        _remindLabel.textColor = [UIColor dt_colorWithHexString:@"#FEEFB3" alpha:1];
+        _remindLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.6];
         _remindLabel.font = UIFONT_REGULAR(12);
     }
     return _remindLabel;

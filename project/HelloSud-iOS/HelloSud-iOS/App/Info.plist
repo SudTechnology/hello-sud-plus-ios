@@ -14,5 +14,7 @@
 		<string>remote-notification</string>
 		<string>voip</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
