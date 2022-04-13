@@ -95,7 +95,7 @@
 "dt_room_input_text" = "Jom sembang~";
 "dt_room_up_mic" = "Jadual di atas";
 "dt_room_choose_game" = "Pilih permainan";
-"dt_room_send" = "发送";
+"dt_room_send" = "Hantar";
 "dt_room_please_input" = "请输入内容";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "Tamatkan permainan";
@@ -144,3 +144,4 @@
 "dt_asr_tip" = "Permainan ini menyokong pengecaman suara, sila buka mikrofon untuk menunjukkan daya tarikan anda~";
 "dt_asr_open_mic_tip" = "Buka mikrofon untuk menjawab, lebih pantas daripada menaip!";
 "dt_asr_open_mic_num_tip" = "Cuba hidupkan mikrofon untuk melaporkan nombor. Inilah satu kebajikan untuk pemalas!";
+"dt_enter_room_tip" = "Sudah masuk ke ruangan";

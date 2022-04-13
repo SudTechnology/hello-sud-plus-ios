@@ -95,7 +95,7 @@
 "dt_room_input_text" = "دعنا نتحادث ~";
 "dt_room_up_mic" = "على ميكروفون";
 "dt_room_choose_game" = "اختر اللعبة";
-"dt_room_send" = "发送";
+"dt_room_send" = "إرسال";
 "dt_room_please_input" = "请输入内容";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "نهاية اللعبة";
@@ -144,3 +144,4 @@
 "dt_asr_tip" = "تدعم هذه اللعبة التعرف على الصوت، يرجى فتح الميكروفون لإظهار سحرك ~";
 "dt_asr_open_mic_tip" = "افتح الميكروفون للرد، وهو أسرع من الكتابة!";
 "dt_asr_open_mic_num_tip" = "حاول تشغيل الميكروفون للإبلاغ عن الرقم، الرفاهية الكسولة!";
+"dt_enter_room_tip" = "دخل الغرفة";

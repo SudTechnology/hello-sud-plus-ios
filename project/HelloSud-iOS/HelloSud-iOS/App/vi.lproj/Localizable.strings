@@ -95,7 +95,7 @@
 "dt_room_input_text" = "Trò chuyện một chút~";
 "dt_room_up_mic" = "Bật mic";
 "dt_room_choose_game" = "Chọn trò chơi";
-"dt_room_send" = "发送";
+"dt_room_send" = "Kirim";
 "dt_room_please_input" = "请输入内容";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "Kết thúc trò chơi";
@@ -144,3 +144,4 @@
 "dt_asr_tip" = "Trò chơi có hỗ trợ nhận dạng giọng nói, hãy mở mic để tạo sức hút của bạn";
 "dt_asr_open_mic_tip" = "Mở mic giành quyền trả lời, sẽ nhanh hơn so với gõ chữ đấy!";
 "dt_asr_open_mic_num_tip" = "Thử mở mic điểm danh, để nhận phúc lợi cho người lười!";
+"dt_enter_room_tip" = "Đã vào phòng";

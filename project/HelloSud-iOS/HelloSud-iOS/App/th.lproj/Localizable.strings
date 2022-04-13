@@ -95,7 +95,7 @@
 "dt_room_input_text" = "มาคุยกัน~";
 "dt_room_up_mic" = "เชื่อมต่อไมค์";
 "dt_room_choose_game" = "เลือกเกม";
-"dt_room_send" = "发送";
+"dt_room_send" = "ส่ง";
 "dt_room_please_input" = "请输入内容";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "จบเกม";
@@ -144,3 +144,4 @@
 "dt_asr_tip" = "เกมนี้รองรับการจดจำเสียง โปรดเปิดไมค์เพื่อแสดงเสน่ห์ของคุณ";
 "dt_asr_open_mic_tip" = "เปิดไมค์รับสาย จะเร็วกว่าการพิมพ์";
 "dt_asr_open_mic_num_tip" = "ลองเปิดไมค์แจ้งตัวเลข รางวัลสำหรับคนขี้เกียจ";
+"dt_enter_room_tip" = "เข้าห้องแล้ว";

@@ -95,7 +95,7 @@
 "dt_room_input_text" = "채팅~";
 "dt_room_up_mic" = "마이크 켜기";
 "dt_room_choose_game" = "게임 선택";
-"dt_room_send" = "发送";
+"dt_room_send" = "발송";
 "dt_room_please_input" = "请输入内容";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "게임 종료";
@@ -144,3 +144,4 @@
 "dt_asr_tip" = "본 게임은 음성 식별을 지원합니다. 마이크 켜고 매력을 어필해 보세요~";
 "dt_asr_open_mic_tip" = "마이크를 켜고 문제에 대답해 보세요, 타자를 더 빨리 쳐 보십시오!";
 "dt_asr_open_mic_num_tip" = "마이크 켜고 숫자 확인하기, 귀차니즘이 있는 분들을 위한 혜택!";
+"dt_enter_room_tip" = "방에 들어왔습니다";

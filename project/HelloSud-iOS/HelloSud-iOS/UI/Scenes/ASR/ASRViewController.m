@@ -35,7 +35,6 @@
 
 }
 
-
 - (void)dtAddViews {
     [super dtAddViews];
     [self.sceneView addSubview:self.asrTipLabel];

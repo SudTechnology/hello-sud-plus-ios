@@ -95,7 +95,7 @@
 "dt_room_input_text" = "聊一聊~";
 "dt_room_up_mic" = "上麥";
 "dt_room_choose_game" = "選擇遊戲";
-"dt_room_send" = "发送";
+"dt_room_send" = "送信";
 "dt_room_please_input" = "请输入内容";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "結束遊戲";
@@ -147,3 +147,4 @@
 "dt_asr_tip" = "本遊戲支持語音識別，請開麥展現你的魅力~";
 "dt_asr_open_mic_tip" = "開麥搶答，比打字更快哦！";
 "dt_asr_open_mic_num_tip" = "試試打開麥克風報數，懶人福利！";
+"dt_enter_room_tip" = "進入了房間";

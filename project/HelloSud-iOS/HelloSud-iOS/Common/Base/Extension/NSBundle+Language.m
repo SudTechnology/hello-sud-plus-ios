@@ -21,9 +21,13 @@
 
 - (NSString *)dt_localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName {
     NSString *path = [[NSBundle mainBundle] pathForResource:[NSBundle currentLanguage] ofType:@"lproj"];
+    if ([key isEqualToString:@"dt_room_send"]) {
+        int i = 0;
+    }
     if (path.length > 0) {
         NSBundle *bundle = [NSBundle bundleWithPath:path];
-        return [bundle dt_localizedStringForKey:key value:value table:tableName];
+        NSString *name = [bundle dt_localizedStringForKey:key value:value table:tableName];
+        return name;
     }
     return [self dt_localizedStringForKey:key value:value table:tableName];
 }

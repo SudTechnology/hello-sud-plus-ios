@@ -148,6 +148,7 @@
 + (NSString *)dt_asr_tip { return @"dt_asr_tip".localized; }
 + (NSString *)dt_asr_open_mic_tip { return @"dt_asr_open_mic_tip".localized; }
 + (NSString *)dt_asr_open_mic_num_tip { return @"dt_asr_open_mic_num_tip".localized; }
++ (NSString *)dt_enter_room_tip { return @"dt_enter_room_tip".localized; }
 
 
 @end

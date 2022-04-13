@@ -95,7 +95,7 @@
 "dt_room_input_text" = "Let's chat~";
 "dt_room_up_mic" = "Mike on";
 "dt_room_choose_game" = "Select game";
-"dt_room_send" = "发送";
+"dt_room_send" = "Send";
 "dt_room_please_input" = "请输入内容";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "End Game";
@@ -144,4 +144,5 @@
 "dt_asr_tip" = "Our game supports speech recognition, turn your mic on and show your charming side~";
 "dt_asr_open_mic_tip" = "Using the mike is faster than typing!";
 "dt_asr_open_mic_num_tip" = "You can turn on the mic to count off. Bonus for slackers!";
+"dt_enter_room_tip" = "Entered the room";
 
