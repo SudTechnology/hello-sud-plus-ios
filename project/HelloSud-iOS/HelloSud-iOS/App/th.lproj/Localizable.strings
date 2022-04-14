@@ -72,13 +72,13 @@
 /// Scenes
 "dt_send" = "ส่งให้";
 "dt_down_mic" = "ปิดไมค์";
-"dt_up_mic" = "上%ld号麦";
+"dt_up_mic" = "上%ldไมค์";
 "dt_select_person" = "โปรดเลือกผู้รับของขวัญ";
 "dt_select_gift" = "โปรดเลือกของขวัญ";
 "dt_send_gift" = "แถม";
 "dt_room_owner" = "เจ้าของห้อง";
-"dt_mic_index" = "%ld麦";
-"dt_mic_name" = "麦";
+"dt_mic_index" = "%ldไมค์";
+"dt_mic_name" = "ไมค์";
 "dt_ticket_choose_item_reward" = "รับรางวัล %@ เท่า";
 "dt_ticket_choose_item_join" = "เข้าร่วมทันที";
 "dt_ticket_choose_play_user_num" = "%d คนกำลังเล่น";

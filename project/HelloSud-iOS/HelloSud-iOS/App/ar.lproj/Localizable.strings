@@ -72,13 +72,13 @@
 /// Scenes
 "dt_send" = "يعطى";
 "dt_down_mic" = "الخروج من ميكروفون";
-"dt_up_mic" = "上%ld号麦";
+"dt_up_mic" = "上%ldميكروفون";
 "dt_select_person" = "الرجاء اختيار متلقي الهدية";
 "dt_select_gift" = "الرجاء اختيار هدية";
 "dt_send_gift" = "يهدى";
 "dt_room_owner" = "صاحب المنزل";
-"dt_mic_index" = "%ld麦";
-"dt_mic_name" = "麦";
+"dt_mic_index" = "%ldميكروفون";
+"dt_mic_name" = "ميكروفون";
 "dt_ticket_choose_item_reward" = "اكسب %@ ضعفًا من المكافآت";
 "dt_ticket_choose_item_join" = "شارك الآن";
 "dt_ticket_choose_play_user_num" = "%d من الأشخاص يلعبون";

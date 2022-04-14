@@ -77,8 +77,8 @@
 "dt_select_gift" = "Xin chọn quà tặng";
 "dt_send_gift" = "Tặng";
 "dt_room_owner" = "Chủ phòng";
-"dt_mic_index" = "%ld麦";
-"dt_mic_name" = "麦";
+"dt_mic_index" = "%ldMicrófono";
+"dt_mic_name" = "Micrófono";
 "dt_ticket_choose_item_reward" = "Thắng được phần thưởng gấp %@ lần";
 "dt_ticket_choose_item_join" = "Tham gia ngay";
 "dt_ticket_choose_play_user_num" = "%d người đang chơi";

@@ -72,13 +72,13 @@
 /// Scenes
 "dt_send" = "送給";
 "dt_down_mic" = "下麥";
-"dt_up_mic" = "上%ld号麦";
+"dt_up_mic" = "上%ldmic";
 "dt_select_person" = "請選擇收禮對象";
 "dt_select_gift" = "請選擇禮物";
 "dt_send_gift" = "贈送";
 "dt_room_owner" = "房主";
-"dt_mic_index" = "%ld麦";
-"dt_mic_name" = "麦";
+"dt_mic_index" = "%ldmic";
+"dt_mic_name" = "mic";
 "dt_ticket_choose_item_reward" = "贏%@倍獎勵";
 "dt_ticket_choose_item_join" = "立即參與";
 "dt_ticket_choose_play_user_num" = "%d人在玩";

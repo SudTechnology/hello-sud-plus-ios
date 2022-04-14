@@ -77,8 +77,8 @@
 "dt_select_gift" = "プレゼントを選んでください";
 "dt_send_gift" = "ギフト";
 "dt_room_owner" = "ルームキャスター";
-"dt_mic_index" = "%ld麦";
-"dt_mic_name" = "麦";
+"dt_mic_index" = "%ldマイク";
+"dt_mic_name" = "マイク";
 "dt_ticket_choose_item_reward" = "%@倍のボーナス";
 "dt_ticket_choose_item_join" = "今すぐ参加";
 "dt_ticket_choose_play_user_num" = "%d人がプレイしています";

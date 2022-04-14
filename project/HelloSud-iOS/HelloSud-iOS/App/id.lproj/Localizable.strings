@@ -77,8 +77,8 @@
 "dt_select_gift" = "Silakan pilih hadiah";
 "dt_send_gift" = "Hadiahkan";
 "dt_room_owner" = "Host";
-"dt_mic_index" = "%ld麦";
-"dt_mic_name" = "麦";
+"dt_mic_index" = "%ldMikrofon";
+"dt_mic_name" = "Mikrofon";
 "dt_ticket_choose_item_reward" = "Menangkan hadiah %@x";
 "dt_ticket_choose_item_join" = "Ikut sekarang";
 "dt_ticket_choose_play_user_num" = "%d orang sedang bermain";

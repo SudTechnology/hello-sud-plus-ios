@@ -67,7 +67,8 @@
     [self.checkAllBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
         make.top.mas_equalTo(25);
-        make.size.mas_equalTo(CGSizeMake(42, 22));
+        make.height.mas_equalTo(22);
+        make.width.mas_greaterThanOrEqualTo(42);
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.mas_equalTo(self);
