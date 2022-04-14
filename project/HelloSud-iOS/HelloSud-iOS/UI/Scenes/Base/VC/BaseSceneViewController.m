@@ -30,6 +30,7 @@
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {
     self.gameId = configModel.gameId;
     self.roomID = configModel.roomID;
+    self.roomNumber = configModel.roomNumber;
     self.roomName = configModel.roomName;
     self.enterModel = configModel.enterRoomModel;
 }
@@ -119,7 +120,8 @@
     [self.gameNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(14);
         make.top.mas_equalTo(self.gameMicContentView.mas_bottom).offset(3);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.width.mas_greaterThanOrEqualTo(0);
+        make.height.mas_equalTo(16);
     }];
     [self.msgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(106);
@@ -538,7 +540,7 @@
                 make.center.equalTo(self.view);
             }];
             __weak UIView *weakV = v;
-            dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC);
+            dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 5.0 * NSEC_PER_SEC);
             dispatch_after(timer, dispatch_get_main_queue(), ^(void) {
                 [weakV removeFromSuperview];
             });

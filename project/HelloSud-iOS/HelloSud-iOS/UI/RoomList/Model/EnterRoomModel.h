@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用户进入房间Model
 @interface EnterRoomModel : BaseRespModel
 @property (nonatomic, assign) NSInteger              roomId;
+@property (nonatomic, assign) NSInteger              roomNumber;
 @property (nonatomic, copy) NSString              * roomName;
 @property (nonatomic, assign) NSInteger              gameId;
 @property (nonatomic, assign) NSInteger              memberCount;

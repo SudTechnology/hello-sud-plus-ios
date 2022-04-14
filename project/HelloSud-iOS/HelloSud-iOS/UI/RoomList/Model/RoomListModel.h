@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HSRoomInfoList: BaseModel
 @property (nonatomic, assign) NSInteger roomId;
+@property (nonatomic, assign) NSInteger roomNumber;
 @property (nonatomic, copy) NSString * roomName;
 @property (nonatomic, assign) NSInteger memberCount;
 @property (nonatomic, copy) NSString * roomPic;

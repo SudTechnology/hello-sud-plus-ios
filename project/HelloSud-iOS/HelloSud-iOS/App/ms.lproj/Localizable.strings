@@ -96,7 +96,7 @@
 "dt_room_up_mic" = "Jadual di atas";
 "dt_room_choose_game" = "Pilih permainan";
 "dt_room_send" = "Hantar";
-"dt_room_please_input" = "请输入内容";
+"dt_room_please_input" = "Menghantar mesej...";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "Tamatkan permainan";
 "dt_room_num_id" = "Nombor bilik %@";
