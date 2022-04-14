@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UILabel *onlineLabel;
 @property (nonatomic, strong) UIButton *enterRoomBtn;
 @property (nonatomic, strong) UIView *enterNode;
-@property (nonatomic, strong) UILabel *typeLabel;
+@property (nonatomic, strong) DTPaddingLabel *typeLabel;
 @end
 
 @implementation GameListTableViewCell
@@ -111,6 +111,7 @@
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.roomNumLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.enterNode setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.roomNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.roomNameLabel.mas_bottom).offset(12);
         make.leading.mas_equalTo(self.iconImageView.mas_trailing).offset(10);
@@ -120,19 +121,20 @@
     [self.enterNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
         make.bottom.mas_equalTo(-12);
-        make.size.mas_equalTo(CGSizeMake(48 + 36, 24));
+        make.size.mas_greaterThanOrEqualTo(CGSizeMake(48 + 36, 24));
     }];
     
     [self.enterRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.typeLabel.mas_trailing);
         make.top.bottom.mas_equalTo(self.enterNode);
         make.width.mas_equalTo(48);
+        make.trailing.mas_equalTo(0);
     }];
     [self.typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(1);
         make.top.mas_equalTo(self.enterNode).offset(1);
         make.bottom.mas_equalTo(self.enterNode).offset(-1);
-        make.width.mas_equalTo(36);
+        make.width.mas_greaterThanOrEqualTo(36);
     }];
 }
 
@@ -215,9 +217,10 @@
     return _enterNode;
 }
 
-- (UILabel *)typeLabel {
+- (DTPaddingLabel *)typeLabel {
     if (!_typeLabel) {
-        _typeLabel = UILabel.new;
+        _typeLabel = DTPaddingLabel.new;
+        _typeLabel.paddingX = 5;
         _typeLabel.text = @"";
         _typeLabel.textColor = UIColor.blackColor;
         _typeLabel.backgroundColor = UIColor.whiteColor;
