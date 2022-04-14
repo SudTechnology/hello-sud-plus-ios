@@ -95,7 +95,7 @@
 "dt_room_input_text" = "¡Chateemos!";
 "dt_room_up_mic" = "Activar micrófono";
 "dt_room_choose_game" = "Elegir un juego";
-"dt_room_send" = "Gửi";
+"dt_room_send" = "Enviar";
 "dt_room_please_input" = "Mensaje en envío…";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "Fin del juego";

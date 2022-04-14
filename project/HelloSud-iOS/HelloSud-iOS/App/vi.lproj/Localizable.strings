@@ -95,7 +95,7 @@
 "dt_room_input_text" = "Trò chuyện một chút~";
 "dt_room_up_mic" = "Bật mic";
 "dt_room_choose_game" = "Chọn trò chơi";
-"dt_room_send" = "Kirim";
+"dt_room_send" = "Gửi";
 "dt_room_please_input" = "Gửi tin nhắn...";
 "dt_room_input_not_null" = "输入内容不能为空";
 "dt_room_end_game" = "Kết thúc trò chơi";
