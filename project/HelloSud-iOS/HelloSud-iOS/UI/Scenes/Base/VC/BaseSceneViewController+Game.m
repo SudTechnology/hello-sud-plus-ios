@@ -177,8 +177,14 @@
             [attrMsg appendAttributedString:[AppUtil getAttributedStringWithString:m.user.name color:m.user.color]];
         } else if (m.phrase == 1) {
             NSString *textString = m.text.mj_keyValues[self.language];
-            NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc]initWithString:textString];
-            [attrMsg appendAttributedString:attributedString];
+            if (textString.length == 0) {
+                // 没有对应语言，取英文
+                textString = m.text.mj_keyValues[@"en_US"];
+            }
+            if (textString) {
+                NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc]initWithString:textString];
+                [attrMsg appendAttributedString:attributedString];
+            }
         }
     }
     attrMsg.yy_lineSpacing = 6;
