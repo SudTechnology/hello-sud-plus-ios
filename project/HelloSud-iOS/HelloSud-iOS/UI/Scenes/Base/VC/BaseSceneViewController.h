@@ -127,9 +127,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param micModel micModel description
 - (void)handleMicTap:(AudioRoomMicModel *)micModel;
 
-/// 是否支持游戏
-- (BOOL)isSupportGame;
-
 #pragma mark - SudFSMMGListener
 - (NSString *)onGetGameCfg;
 - (void)onGameMGCommonSelfClickReadyBtn;

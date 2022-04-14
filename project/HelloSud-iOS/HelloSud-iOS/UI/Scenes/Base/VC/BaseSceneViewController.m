@@ -208,8 +208,7 @@
     };
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
         SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
-        BOOL isGame = weakSelf.isSupportGame;
-        [modeView reloadData:!isGame];
+        [modeView reloadData:weakSelf.enterModel.sceneType];
         [DTSheetView show:modeView rootView:AppUtil.currentWindow hiddenBackCover:NO onCloseCallback:^{
         }];
         modeView.onTapGameCallBack = ^(HSGameItem *_Nonnull m) {
@@ -260,7 +259,7 @@
         if (msg) {
             [weakSelf sendMsg:msg isAddToShow:false];
         }
-    }                                 fail:^(NSError *error) {
+    } fail:^(NSError *error) {
         NSLog(@"reqSwitchGame error:%@", error.debugDescription);
     }];
 
@@ -351,10 +350,6 @@
 
         }];
     }
-}
-
-- (BOOL)isSupportGame {
-    return YES;
 }
 
 /// 获取空麦位
@@ -573,7 +568,9 @@
 }
 
 - (void)roomGameDidChanged:(NSInteger)gameID {
-
+//    if (gameID == HSAudio && self.enterModel.sceneType != SceneTypeAudio) {
+//        [self logoutGame];
+//    }
 }
 
 - (void)handleMicList:(NSArray<HSRoomMicList *> *)micList {

@@ -740,8 +740,8 @@
 				4455ACF727EAC658001516EE /* HomeHeaderReusableView.h */,
 				4455ACF827EAC658001516EE /* HomeFooterReusableView.h */,
 				4455ACF927EAC658001516EE /* GameItemCollectionViewCell.h */,
-				BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */,
 				BC210FAF33BAD4283645718B /* UserDetailView.h */,
+				BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";

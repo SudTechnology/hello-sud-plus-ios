@@ -116,8 +116,4 @@
     }
 }
 
-- (BOOL)isSupportGame {
-    return self.roomType == HSGame;
-}
-
 @end

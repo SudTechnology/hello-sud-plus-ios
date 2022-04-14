@@ -22,6 +22,16 @@
              @"zh_MO" : @"zh-MO",
              @"zh_SG" : @"zh-SG",
              @"zh_TW" : @"zh-TW",
+             
+             @"vi_VN" : @"vi-VN",
+             @"th_TH" : @"th-TH",
+             @"ko_KR" : @"ko-KR",
+             @"ja_JP" : @"ja-JP",
+             @"es_ES" : @"es-ES",
+             @"id_ID" : @"id-ID",
+             @"ar_SA" : @"ar-SA",
+             @"tr_TR" : @"tr-TR",
+             @"ur_PK" : @"ur-PK",
              };
 }
 @end
