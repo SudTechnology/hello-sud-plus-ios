@@ -224,7 +224,10 @@
 
 // 设置Header的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(kScreenWidth, 170);
+    HSSceneModel *m = self.headerSceneList[section];
+    UIFont *font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
+    CGRect rect = [m.sceneName boundingRectWithSize:CGSizeMake(kScreenWidth - 62, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
+    return CGSizeMake(kScreenWidth, 140 + rect.size.height);
 }
 
 // 设置Footer的尺寸

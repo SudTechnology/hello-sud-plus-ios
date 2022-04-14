@@ -90,7 +90,7 @@
         make.leading.mas_equalTo(15);
         make.trailing.mas_equalTo(-15);
         make.top.mas_equalTo(16);
-        make.height.mas_equalTo(33);
+        make.height.mas_greaterThanOrEqualTo(0);
         make.width.mas_greaterThanOrEqualTo(0);
     }];
     [self.previewView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -124,7 +124,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"";
-        _titleLabel.numberOfLines = 1;
+        _titleLabel.numberOfLines = 0;
         _titleLabel.textColor = [UIColor dt_colorWithHexString:@"#000000" alpha:1];
         _titleLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
     }
