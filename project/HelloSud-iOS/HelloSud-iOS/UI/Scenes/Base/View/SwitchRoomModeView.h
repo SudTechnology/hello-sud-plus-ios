@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^OnTapGameCallBack)(HSGameItem *m);
 @property (nonatomic, copy) OnTapGameCallBack onTapGameCallBack;
 
-- (void)reloadData:(BOOL)isAudioRoom;
+- (void)reloadData:(NSInteger)sceneType;
 @end
 
 NS_ASSUME_NONNULL_END

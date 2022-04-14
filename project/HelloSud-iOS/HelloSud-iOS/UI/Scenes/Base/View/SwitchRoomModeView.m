@@ -18,14 +18,20 @@
 
 @implementation SwitchRoomModeView
 
-- (void)reloadData:(BOOL)isAudioRoom {
+- (void)reloadData:(NSInteger)sceneType {
     NSArray <HSGameItem *> *dataArr = AppService.shared.gameList;
-    [self.dataList setArray:dataArr];
+    for (HSGameItem *item in dataArr) {
+        for (NSNumber *scene in item.suitScene) {
+            if ([scene integerValue] == sceneType) {
+                [self.dataList addObject:item];
+            }
+        }
+    }
     HSGameItem *m = HSGameItem.new;
     m.isAudioRoom = true;
     [self.dataList insertObject:m atIndex:0];
     
-    self.isAudioRoom = isAudioRoom;
+    self.isAudioRoom = sceneType == SceneTypeAudio;
     [self.collectionView reloadData];
 }
 

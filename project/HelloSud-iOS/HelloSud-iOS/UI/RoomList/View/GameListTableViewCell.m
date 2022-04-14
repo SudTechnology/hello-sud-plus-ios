@@ -96,6 +96,8 @@
         make.width.mas_greaterThanOrEqualTo(0);
         make.height.mas_equalTo(20);
     }];
+    
+    [self.roomNameLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.roomNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.iconImageView.mas_top).offset(3);
         make.leading.mas_equalTo(self.roomTypeLabel.mas_trailing).offset(6);
@@ -108,10 +110,12 @@
         make.centerY.mas_equalTo(self.roomNameLabel);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
+    [self.roomNumLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.roomNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.roomNameLabel.mas_bottom).offset(12);
         make.leading.mas_equalTo(self.iconImageView.mas_trailing).offset(10);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.trailing.mas_lessThanOrEqualTo(self.enterNode.mas_leading);
     }];
     [self.enterNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);

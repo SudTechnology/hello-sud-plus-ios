@@ -101,8 +101,17 @@ static NSString* MG_DG_SCORE                = @"mg_dg_score";
 @property (nonatomic, copy) NSString *zh_MO;
 @property (nonatomic, copy) NSString *zh_SG;
 @property (nonatomic, copy) NSString *zh_TW;
-@end
 
+@property (nonatomic, copy) NSString *vi_VN;
+@property (nonatomic, copy) NSString *th_TH;
+@property (nonatomic, copy) NSString *ko_KR;
+@property (nonatomic, copy) NSString *ja_JP;
+@property (nonatomic, copy) NSString *es_ES;
+@property (nonatomic, copy) NSString *id_ID;
+@property (nonatomic, copy) NSString *ar_SA;
+@property (nonatomic, copy) NSString *tr_TR;
+@property (nonatomic, copy) NSString *ur_PK;
+@end
 @interface GamePublicUser :NSObject
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *uid;
