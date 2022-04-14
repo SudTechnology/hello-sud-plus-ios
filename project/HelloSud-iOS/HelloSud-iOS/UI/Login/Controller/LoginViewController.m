@@ -138,6 +138,7 @@
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(30);
+        make.trailing.mas_equalTo(-30);
         make.top.mas_equalTo(self.iconImageView.mas_bottom).offset(32);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
