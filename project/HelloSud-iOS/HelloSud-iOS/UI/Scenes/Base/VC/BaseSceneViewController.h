@@ -64,6 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)NSMutableDictionary<NSString*, AudioRoomMicModel *> *dicMicModel;
 // 房间ID
 @property(nonatomic, copy)NSString *roomID;
+// 房间ID
+@property(nonatomic, copy)NSString *roomNumber;
 /// 游戏ID
 @property (nonatomic, assign)NSInteger  gameId;
 /// 房间总人数

@@ -30,6 +30,7 @@
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {
     self.gameId = configModel.gameId;
     self.roomID = configModel.roomID;
+    self.roomNumber = configModel.roomNumber;
     self.roomName = configModel.roomName;
     self.enterModel = configModel.enterRoomModel;
 }

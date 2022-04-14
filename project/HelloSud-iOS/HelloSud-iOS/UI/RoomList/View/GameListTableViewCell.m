@@ -54,7 +54,7 @@
     } else {
         self.roomNameLabel.text = [NSString stringWithFormat:@"%@·%@", m.roomName, m.gameLevelDesc];
     }
-    self.roomNumLabel.text = [NSString stringWithFormat:@"%@：%ld", NSString.dt_room_list_room_number, m.roomId];
+    self.roomNumLabel.text = [NSString stringWithFormat:@"%@：%ld", NSString.dt_room_list_room_number, m.roomNumber];
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld%@", m.memberCount, NSString.dt_room_list_users];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
     self.typeLabel.text = [AppService.shared getRTCTypeName:m.rtcType];
