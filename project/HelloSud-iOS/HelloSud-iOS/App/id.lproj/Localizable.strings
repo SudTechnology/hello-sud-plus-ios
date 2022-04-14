@@ -77,7 +77,7 @@
 "dt_select_gift" = "Silakan pilih hadiah";
 "dt_send_gift" = "Hadiahkan";
 "dt_room_owner" = "Host";
-"dt_mic_index" = "%ldMikrofon";
+"dt_mic_index" = "Mikrofon %ld";
 "dt_mic_name" = "Mikrofon";
 "dt_ticket_choose_item_reward" = "Menangkan hadiah %@x";
 "dt_ticket_choose_item_join" = "Ikut sekarang";
@@ -109,7 +109,7 @@
 "dt_room_confirm_flight" = "Yakin mau kabur";
 "dt_room_flight_tile" = "Sedang bermain, yakin ingin kabur?";
 "dt_room_sure_end_game" = "Yakin ingin mengakhiri permainan";
-"dt_room_unable_switch_game" = "正在游戏中, 无法切换游戏";
+"dt_room_unable_switch_game" = "Sedang bermain, tidak bisa mengganti permainan";
 "dt_room_sure_leave_cur_room" = "Yakin ingin keluar dari ruangan ini";
 "dt_room_unable_speak_present" = "当前不能发言";
 
@@ -146,3 +146,5 @@
 "dt_asr_open_mic_num_tip" = "Coba aktifkan mikrofon untuk menyebutkan angka, ini bonus buat pemalas!";
 "dt_enter_room_tip" = "Masuk bilik";
 "dt_game_person_count" = "Number of players";
+
+"dt_network_error_p_check" = "网络错误，请检查网络连接";

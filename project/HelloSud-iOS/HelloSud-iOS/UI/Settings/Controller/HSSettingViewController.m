@@ -127,15 +127,21 @@
 - (UIView *)contactUsView {
     if (_contactUsView == nil) {
         _contactUsView = UIView.new;
-        _contactUsView.frame = CGRectMake(0, 0, kScreenWidth, 50);
+        _contactUsView.frame = CGRectMake(0, 0, kScreenWidth, 80);
         UILabel *usLabel = UILabel.new;
         usLabel.numberOfLines = 0;
         usLabel.text = NSString.dt_settings_contact_us;
         usLabel.textColor = HEX_COLOR(@"#8A8A8E");
         usLabel.font = UIFONT_REGULAR(12);
         usLabel.textAlignment = NSTextAlignmentCenter;
-        usLabel.frame = CGRectMake(17, 0, kScreenWidth - 34, 34);
+        usLabel.numberOfLines = 0;
         [_contactUsView addSubview:usLabel];
+        [usLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(17);
+            make.top.mas_equalTo(0);
+            make.trailing.mas_equalTo(-17);
+            make.height.mas_greaterThanOrEqualTo(0);
+        }];
     }
     return _contactUsView;
 }

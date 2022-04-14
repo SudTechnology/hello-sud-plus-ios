@@ -151,5 +151,7 @@
 + (NSString *)dt_enter_room_tip { return @"dt_enter_room_tip".localized; }
 + (NSString *)dt_game_person_count { return @"dt_game_person_count".localized; }
 
++ (NSString *)dt_network_error_p_check { return @"dt_network_error_p_check".localized; }
+
 
 @end

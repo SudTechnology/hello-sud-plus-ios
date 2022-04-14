@@ -152,6 +152,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_enter_room_tip;
 + (NSString *)dt_game_person_count;
 
++ (NSString *)dt_network_error_p_check;
+
 
 @end
 NS_ASSUME_NONNULL_END

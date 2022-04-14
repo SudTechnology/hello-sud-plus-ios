@@ -72,12 +72,12 @@
 /// Scenes
 "dt_send" = "ส่งให้";
 "dt_down_mic" = "ปิดไมค์";
-"dt_up_mic" = "上%ldไมค์";
+"dt_up_mic" = "上%ld号麦";
 "dt_select_person" = "โปรดเลือกผู้รับของขวัญ";
 "dt_select_gift" = "โปรดเลือกของขวัญ";
 "dt_send_gift" = "แถม";
 "dt_room_owner" = "เจ้าของห้อง";
-"dt_mic_index" = "%ldไมค์";
+"dt_mic_index" = "%ld ไมค์";
 "dt_mic_name" = "ไมค์";
 "dt_ticket_choose_item_reward" = "รับรางวัล %@ เท่า";
 "dt_ticket_choose_item_join" = "เข้าร่วมทันที";
@@ -109,7 +109,7 @@
 "dt_room_confirm_flight" = "ยืนยันการหลบหนี";
 "dt_room_flight_tile" = "กำลังเล่นเกมอยู่ จะหลบหนีหรือไม่";
 "dt_room_sure_end_game" = "ตกลงจบเกมหรือไม่";
-"dt_room_unable_switch_game" = "正在游戏中, 无法切换游戏";
+"dt_room_unable_switch_game" = "เล่นเกมอยู่ สลับเกมไม่ได้";
 "dt_room_sure_leave_cur_room" = "ตกลงจะออกจากห้องนี้ไหม";
 "dt_room_unable_speak_present" = "当前不能发言";
 
@@ -146,3 +146,5 @@
 "dt_asr_open_mic_num_tip" = "ลองเปิดไมค์แจ้งตัวเลข รางวัลสำหรับคนขี้เกียจ";
 "dt_enter_room_tip" = "เข้าห้องแล้ว";
 "dt_game_person_count" = "จำนวนผู้เล่นเกม";
+
+"dt_network_error_p_check" = "网络错误，请检查网络连接";

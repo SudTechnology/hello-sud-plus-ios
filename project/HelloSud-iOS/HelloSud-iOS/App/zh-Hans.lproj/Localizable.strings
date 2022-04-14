@@ -150,3 +150,5 @@
 "dt_enter_room_tip" = "进入了房间";
 "dt_game_person_count" = "游戏人数";
 
+"dt_network_error_p_check" = "网络错误，请检查网络连接";
+

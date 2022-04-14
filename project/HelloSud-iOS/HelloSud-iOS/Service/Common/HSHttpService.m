@@ -36,7 +36,7 @@
             NSLog(@"非resp响应子类");
         }
     }  failure:^(NSError *error) {
-        error = [NSError dt_errorWithCode:error.code msg:@"网络错误，请检查网络连接"];
+        error = [NSError dt_errorWithCode:error.code msg:NSString.dt_network_error_p_check];
         if (failure) failure(error);
         if (showErrorToast) {
             [ToastUtil show:error.dt_errMsg];
