@@ -35,6 +35,8 @@
         titleNode.text = titleArr[i];
         titleNode.textColor = [UIColor dt_colorWithHexString:@"#FFCE45" alpha:1];
         titleNode.font = UIFONT_BOLD(20);
+        titleNode.numberOfLines = 0;
+        titleNode.textAlignment = NSTextAlignmentCenter;
         [bgNode addSubview:titleNode];
         
         [goldNode mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,9 +45,9 @@
             make.size.mas_equalTo(CGSizeMake(80, 80));
         }];
         [titleNode mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(70);
-            make.centerX.mas_equalTo(bgNode);
-            make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+            make.bottom.mas_equalTo(-12);
+            make.leading.trailing.mas_equalTo(bgNode);
+            make.height.mas_greaterThanOrEqualTo(0);
         }];
     }
     [nodeArr dt_mas_distributeSudokuViewsWithFixedItemWidth:101 fixedItemHeight:110 fixedLineSpacing:0 fixedInteritemSpacing:20 warpCount:3 topSpacing:0 bottomSpacing:0 leadSpacing:16 tailSpacing:16];
