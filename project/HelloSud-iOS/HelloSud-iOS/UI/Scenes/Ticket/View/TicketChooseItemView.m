@@ -82,10 +82,10 @@
         make.bottom.mas_equalTo(-18);
         make.height.mas_equalTo(30);
         make.width.mas_greaterThanOrEqualTo(0);
-//        make.size.mas_equalTo(CGSizeMake(88, 30));
     }];
     [self.rewardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.leading.mas_equalTo(22);
+        make.trailing.mas_equalTo(-22);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.enterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -161,6 +161,8 @@
         _rewardLabel = UILabel.new;
         _rewardLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFCAB" alpha:1];
         _rewardLabel.font = UIFONT_BOLD(30);
+        _rewardLabel.numberOfLines = 0;
+        _rewardLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _rewardLabel;
 }

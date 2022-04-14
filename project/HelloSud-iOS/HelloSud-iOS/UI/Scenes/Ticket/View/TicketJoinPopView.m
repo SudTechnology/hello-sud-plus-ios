@@ -137,6 +137,8 @@
         make.top.mas_equalTo(self.topGoldView.mas_bottom).offset(20);
         make.centerX.mas_equalTo(self);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.leading.mas_equalTo(20);
+        make.trailing.mas_equalTo(-20);
     }];
     [self.remindView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.detailLabel.mas_bottom).offset(17);
@@ -206,6 +208,8 @@
         _detailLabel = UILabel.new;
         _detailLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _detailLabel.font = UIFONT_MEDIUM(16);
+        _detailLabel.numberOfLines = 0;
+        _detailLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _detailLabel;
 }

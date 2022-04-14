@@ -87,7 +87,7 @@
     SwitchLangModel *m_5 = [SwitchLangModel new];
     m_5.title = @"Bahasa Indonesia";
     m_5.language = [@"id" languageCountryCode];
-    m_5.locale = @"in-ID";
+    m_5.locale = @"id-ID";
     
     SwitchLangModel *m_6 = [SwitchLangModel new];
     m_6.title = @"Bahasa Melayu";
