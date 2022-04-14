@@ -47,10 +47,15 @@
 //    self.nameLabel.attributedText = attributedString;
 }
 
+- (CGFloat)imageW {
+    return (kScreenWidth - 16 * 2 - 13 * 2 - 9 * 2) / 3;
+}
+
 - (void)setIndexPath:(NSIndexPath *)indexPath {
     _indexPath = indexPath;
     NSInteger v = indexPath.row % 3;
 
+    CGFloat w = [self imageW];
     [self.gameImageView dt_cornerRadius:8];
     [self.gameImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
@@ -61,7 +66,7 @@
         } else {
             make.trailing.mas_equalTo(-13);
         }
-        make.size.mas_equalTo(CGSizeMake(100, 52));
+        make.size.mas_equalTo(CGSizeMake(w, 52));
     }];
 }
 
@@ -76,10 +81,11 @@
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
+    CGFloat w = [self imageW];
     [self.gameImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.trailing.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(100, 52));
+        make.size.mas_equalTo(CGSizeMake(w, 52));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.gameImageView).offset(8);
