@@ -85,6 +85,7 @@
         AudioSceneConfigModel *config = [[AudioSceneConfigModel alloc] init];
         config.gameId = model.gameId;
         config.roomID = [NSString stringWithFormat:@"%ld", model.roomId];
+        config.roomNumber = [NSString stringWithFormat:@"%ld", model.roomNumber];
         config.roomType = model.gameId == 0 ? HSAudio : HSGame;
         config.roomName = model.roomName;
         config.enterRoomModel = model;
