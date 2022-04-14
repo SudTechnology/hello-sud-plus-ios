@@ -27,6 +27,11 @@
 - (void)setModel:(BaseModel *)model {
     HSGameItem *m = (HSGameItem *) model;
     self.nameLabel.text = m.gameName;
+    if (LanguageUtil.isLanguageRTL) {
+        self.nameLabel.textAlignment = NSTextAlignmentRight;
+    } else {
+        self.nameLabel.textAlignment = NSTextAlignmentLeft;
+    }
     if (m.isGameWait) {
         self.nameLabel.textColor = HEX_COLOR(@"#AAAAAA");
         self.gameImageView.image = [UIImage imageNamed:m.gamePic];
@@ -73,7 +78,7 @@
 - (void)hsAddViews {
     [self.contentView addSubview:self.containerView];
     [self.containerView addSubview:self.gameImageView];
-    [self.containerView addSubview:self.nameLabel];
+    [self.gameImageView addSubview:self.nameLabel];
     [self.containerView addSubview:self.inGameLabel];
 }
 
@@ -88,10 +93,10 @@
         make.size.mas_equalTo(CGSizeMake(w, 52));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.gameImageView).offset(8);
-//        make.top.equalTo(self.gameImageView).offset(12);
+        make.leading.mas_equalTo(8);
+        make.trailing.mas_equalTo(0);
         make.height.mas_greaterThanOrEqualTo(0);
-        make.centerY.trailing.equalTo(self.gameImageView);
+        make.centerY.equalTo(self.gameImageView);
     }];
     [self.inGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.equalTo(self.gameImageView);
