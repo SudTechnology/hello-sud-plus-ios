@@ -29,6 +29,7 @@
 #import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
 #import <BDAlphaPlayer/BDAlphaPlayer.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+@import MarqueeLabel;
 #import "Lottie.h"
 
 /// Comon

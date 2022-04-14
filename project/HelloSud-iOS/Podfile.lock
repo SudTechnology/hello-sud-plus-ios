@@ -29,6 +29,7 @@ PODS:
     - libwebp/demux
   - libwebp/webp (1.2.1)
   - lottie-ios (2.5.3)
+  - MarqueeLabel (4.3.0)
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
   - MJRefresh (3.7.5)
@@ -83,6 +84,7 @@ DEPENDENCIES:
   - Bugly (= 2.5.90)
   - IQKeyboardManager (~> 6.5.9)
   - lottie-ios (~> 2.5.3)
+  - MarqueeLabel
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
   - MJRefresh (= 3.7.5)
@@ -104,6 +106,7 @@ SPEC REPOS:
     - IQKeyboardManager
     - libwebp
     - lottie-ios
+    - MarqueeLabel
     - Masonry
     - MJExtension
     - MJRefresh
@@ -137,6 +140,7 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
+  MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
@@ -152,6 +156,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
 
-PODFILE CHECKSUM: a5bab009d20d132bfe161261874c89c2749189ca
+PODFILE CHECKSUM: ef9f81716130fca1b7a29619cb76fca56e4bf38e
 
 COCOAPODS: 1.11.2

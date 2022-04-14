@@ -20,6 +20,8 @@ target 'HelloSud-iOS' do
   pod 'lottie-ios', '~> 2.5.3'
   pod 'BDAlphaPlayer', '~> 1.2.0'
   pod 'IQKeyboardManager', '~> 6.5.9'
+  # 跑马灯
+  pod 'MarqueeLabel'
   # RTC厂商引入
   # zego语音SDK
   pod 'ZegoExpressEngine/Audio', '~> 2.17.0'

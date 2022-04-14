@@ -11,12 +11,13 @@
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) DTPaddingLabel *roomTypeLabel;
-@property (nonatomic, strong) UILabel *roomNameLabel;
+@property (nonatomic, strong) MarqueeLabel *roomNameLabel;
 @property (nonatomic, strong) UILabel *roomNumLabel;
 @property (nonatomic, strong) UILabel *onlineLabel;
 @property (nonatomic, strong) UIButton *enterRoomBtn;
 @property (nonatomic, strong) UIView *enterNode;
 @property (nonatomic, strong) DTPaddingLabel *typeLabel;
+@property (nonatomic, strong) BaseView *maskView;
 @end
 
 @implementation GameListTableViewCell
@@ -167,10 +168,12 @@
     return _roomTypeLabel;
 }
 
-- (UILabel *)roomNameLabel {
+- (MarqueeLabel *)roomNameLabel {
     if (!_roomNameLabel) {
-        _roomNameLabel = [[UILabel alloc] init];
+        _roomNameLabel = [[MarqueeLabel alloc] init];
         _roomNameLabel.text = @"";
+        _roomNameLabel.fadeLength = 10;
+        _roomNameLabel.trailingBuffer = 20;
         _roomNameLabel.textColor = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
         _roomNameLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightRegular];
         _roomNameLabel.textAlignment = NSTextAlignmentLeft;

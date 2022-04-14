@@ -35,6 +35,16 @@ NS_ASSUME_NONNULL_BEGIN
  @param cornerRadius 圆角半径
  */
 - (void)setPartRoundCorners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius;
+
+/// 增加渐变图层
+/// @param locations <#locations description#>
+/// @param colors <#colors description#>
+/// @param startPoint <#startPoint description#>
+/// @param endPoint <#endPoint description#>
+- (void)dtAddGradientLayer:(NSArray<NSNumber *>*)locations colors:(NSArray*)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
+
+/// 移除渐变图层
+- (void)dtRemoveGradient;
 @end
 
 NS_ASSUME_NONNULL_END

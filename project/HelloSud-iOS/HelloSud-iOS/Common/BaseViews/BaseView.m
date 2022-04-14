@@ -9,6 +9,8 @@
 
 @interface BaseView ()
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
+/// 渐变图层
+@property (nonatomic, strong) CAGradientLayer *gradient;
 @property (nonatomic, assign) UIRectCorner corners;
 @property (nonatomic, assign) CGFloat cornerRadius;
 @property (nonatomic, assign) BOOL isCorners;
@@ -54,11 +56,16 @@
 }
 
 - (void)layoutSubviews {
+    [super layoutSubviews];
+    if (self.gradient) {
+        self.gradient.frame = self.bounds;
+    }
     if (self.isCorners == false) {
         return;
     }
     self.shapeLayer.path = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:self.corners cornerRadii:CGSizeMake(self.cornerRadius, self.cornerRadius)].CGPath;
     self.layer.mask = self.shapeLayer;
+
 }
 
 /**
@@ -84,6 +91,34 @@
         _shapeLayer = [CAShapeLayer layer];
     }
     return _shapeLayer;
+}
+
+
+/// 增加渐变图层
+/// @param locations <#locations description#>
+/// @param colors <#colors description#>
+/// @param startPoint <#startPoint description#>
+/// @param endPoint <#endPoint description#>
+- (void)dtAddGradientLayer:(NSArray<NSNumber *>*)locations colors:(NSArray*)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
+    if (self.gradient != nil) {
+        [self.gradient removeFromSuperlayer];
+    }
+    self.gradient = [[CAGradientLayer alloc]init];
+    self.gradient.frame = self.bounds;
+    self.gradient.colors = colors;
+    self.gradient.locations = locations;
+    self.gradient.startPoint = startPoint;
+    self.gradient.endPoint = endPoint;
+    [self.layer addSublayer:self.gradient];
+//    [self.layer insertSublayer:self.gradient atIndex:0];
+}
+
+/// 移除渐变图层
+- (void)dtRemoveGradient {
+    if (self.gradient) {
+        [self.gradient removeFromSuperlayer];
+        self.gradient = nil;
+    }
 }
 
 @end
