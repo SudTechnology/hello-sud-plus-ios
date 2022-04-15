@@ -752,6 +752,7 @@
 }
 
 - (void)dealloc {
+    NSLog(@"base scene vc dealloc");
 }
 
 /// 设置游戏房间内容

@@ -110,7 +110,6 @@
             make.bottom.equalTo(self.operatorView.mas_top).offset(0);
             make.leading.mas_equalTo(16);
         }];
-        WeakSelf
         if (self.timer) {
             [self.timer invalidate];
         }

@@ -21,7 +21,6 @@
 
 - (void)dtConfigUI {
     self.backgroundColor = UIColor.whiteColor;
-    [self dtUpdateUI];
 }
 
 - (void)dtAddViews {
