@@ -61,7 +61,7 @@
 }
 
 - (void)dtUpdateUI {
-    self.roomNumLabel.text = [NSString stringWithFormat: NSString.dt_room_num_id, AudioRoomService.shared.currentRoomVC.roomNumber];
+    self.roomNumLabel.text = [NSString stringWithFormat: @"%@ %@", NSString.dt_room_list_room_number, AudioRoomService.shared.currentRoomVC.roomNumber];
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld", AudioRoomService.shared.currentRoomVC.totalUserCount];
 }
 
