@@ -114,10 +114,12 @@
         if (self.timer) {
             [self.timer invalidate];
         }
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:3 repeats:NO block:^(NSTimer *timer) {
-            [weakSelf closeTip];
-        }];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
     }
+}
+
+- (void)onTimer:(NSTimer *)timer {
+    [self closeTip];
 }
 
 - (void)closeTip {

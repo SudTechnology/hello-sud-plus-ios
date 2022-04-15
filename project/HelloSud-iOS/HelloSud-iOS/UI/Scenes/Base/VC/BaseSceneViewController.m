@@ -209,7 +209,7 @@
     };
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
         SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
-        [modeView reloadData:weakSelf.enterModel.sceneType gameID: self.gameId];
+        [modeView reloadData:weakSelf.enterModel.sceneType gameID: weakSelf.gameId];
         [DTSheetView show:modeView rootView:AppUtil.currentWindow hiddenBackCover:NO onCloseCallback:^{
         }];
         modeView.onTapGameCallBack = ^(HSGameItem *_Nonnull m) {
@@ -752,7 +752,6 @@
 }
 
 - (void)dealloc {
-    [self logoutGame];
 }
 
 /// 设置游戏房间内容
