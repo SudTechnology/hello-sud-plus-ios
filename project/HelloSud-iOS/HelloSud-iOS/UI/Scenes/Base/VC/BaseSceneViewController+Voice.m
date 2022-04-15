@@ -127,6 +127,7 @@
 
 - (void)onRoomStateUpdate:(NSString *)roomID state:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData {
     if (state == HSAudioEngineStateConnected && !self.isSentEnterRoom) {
+        self.isSentEnterRoom = YES;
         [self sendEnterRoomMsg];
     }
 }
