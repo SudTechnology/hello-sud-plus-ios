@@ -166,6 +166,7 @@
         [ToastUtil show:error.dt_errMsg];
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
+    [self.searchHeaderView dtUpdateUI];
 }
 
 /// 构建等待数据
