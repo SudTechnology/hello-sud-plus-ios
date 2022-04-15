@@ -190,21 +190,10 @@
     }
     attrMsg.yy_lineSpacing = 6;
     attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrMsg.yy_color = [self systemMsgTextColor];
+    attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#FFD620" alpha:1];
     AudioMsgSystemModel *msgModel = [AudioMsgSystemModel makeMsgWithAttr:attrMsg];
-    msgModel.bgColor = [self systemMsgBgColor];
     /// 公屏添加消息
     [self addMsg:msgModel isShowOnScreen:YES];
-}
-
-/// 系统消息背景颜色
-- (UIColor *)systemMsgBgColor {
-    return [UIColor dt_colorWithHexString:@"#000000" alpha:0.3];
-}
-
-/// 系统消息文本颜色
-- (UIColor *)systemMsgTextColor {
-    return [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
 }
 
 #pragma mark =======玩家状态处理=======

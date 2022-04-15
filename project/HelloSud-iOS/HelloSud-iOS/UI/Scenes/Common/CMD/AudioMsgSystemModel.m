@@ -29,7 +29,6 @@
     AudioMsgSystemModel *m = AudioMsgSystemModel.new;
     [m configBaseInfoWithCmd:CMD_CHAT_TEXT_NOTIFY];
     m.content = content;
-    m.bgColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.3];
     return m;
 }
 
@@ -39,7 +38,6 @@
     AudioMsgSystemModel *m = AudioMsgSystemModel.new;
     [m configBaseInfoWithCmd:CMD_CHAT_TEXT_NOTIFY];
     [m updateContent:content];
-    m.bgColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.3];
     return m;
 }
 
@@ -49,7 +47,7 @@
     NSMutableAttributedString *attrMsg = [[NSMutableAttributedString alloc] initWithString:content];
     attrMsg.yy_lineSpacing = 6;
     attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
+    attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#FFD620" alpha:1];
     self.content = attrMsg;
 }
 

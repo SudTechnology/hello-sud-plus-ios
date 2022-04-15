@@ -24,7 +24,7 @@
 }
 
 - (void)hsConfigUI {
-//    self.msgContentView.backgroundColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.3];
+    self.msgContentView.backgroundColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.3];
 }
 
 - (void)setModel:(BaseModel *)model {
@@ -32,8 +32,6 @@
     if ([model isKindOfClass:AudioMsgSystemModel.class]) {
         AudioMsgSystemModel *m = (AudioMsgSystemModel *)model;
         self.msgLabel.attributedText = m.attrContent;
-        
-        self.msgContentView.backgroundColor = m.bgColor;
     }
 }
 

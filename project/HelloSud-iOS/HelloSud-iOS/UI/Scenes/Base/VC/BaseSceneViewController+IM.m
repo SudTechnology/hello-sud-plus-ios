@@ -38,7 +38,6 @@
     self.isEnteredRoom = YES;
     AudioMsgSystemModel *msg = [AudioMsgSystemModel makeMsg:[NSString stringWithFormat:@"%@ %@", AppService.shared.login.loginUserInfo.name, NSString.dt_enter_room_tip]];
     [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NOTIFY];
-    msg.bgColor = [self systemMsgBgColor];
     /// 公屏添加消息
     [self sendMsg:msg isAddToShow:YES];
     [self reqMicList];
@@ -103,7 +102,6 @@
         case CMD_ENTER_ROOM_NOTIFY: {
             // 进入房间
             AudioMsgSystemModel *m = [AudioMsgSystemModel fromJSON:command];
-            m.bgColor = [self systemMsgBgColor];
             [m updateContent:[NSString stringWithFormat:@"%@ %@", m.sendUser.name, NSString.dt_enter_room_tip]];
             msgModel = m;
         }

@@ -64,15 +64,4 @@
     [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
 }
 
-#pragma mark - GAME
-
-/// 系统消息背景颜色
-- (UIColor *)systemMsgBgColor {
-    return [UIColor dt_colorWithHexString:@"#C84319" alpha:0.7];
-}
-
-/// 系统消息文本颜色
-- (UIColor *)systemMsgTextColor {
-    return [UIColor dt_colorWithHexString:@"#FFE77D" alpha:1];
-}
 @end

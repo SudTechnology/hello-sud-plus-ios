@@ -22,10 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 处理切换游戏
 /// @param gameID 新的游戏ID
 - (void)handleGameChange:(NSInteger)gameID;
-/// 系统消息背景颜色
-- (UIColor *)systemMsgBgColor;
-/// 系统消息文本颜色
-- (UIColor *)systemMsgTextColor;
 
 @end
 

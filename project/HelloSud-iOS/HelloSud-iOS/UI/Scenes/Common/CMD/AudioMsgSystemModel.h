@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AudioMsgSystemModel : RoomBaseCMDModel
-@property (nonatomic, strong) UIColor *bgColor;
 /// 构建消息
 /// @param content 消息内容
 + (instancetype)makeMsgWithAttr:(NSMutableAttributedString*)content;
