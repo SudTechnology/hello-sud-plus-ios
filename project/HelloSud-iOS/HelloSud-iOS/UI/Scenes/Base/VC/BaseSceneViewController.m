@@ -592,7 +592,7 @@
     [UserService.shared asyncCacheUserInfo:arrUserID finished:^{
         for (HSRoomMicList *m in micList) {
             NSString *key = [NSString stringWithFormat:@"%ld", m.micIndex];
-            AudioRoomMicModel *micModel = self.dicMicModel[key];
+            AudioRoomMicModel *micModel = weakSelf.dicMicModel[key];
             HSUserInfoModel *userInfo = [UserService.shared getCacheUserInfo:m.userId];
             if (micModel) {
                 if (!micModel.user) {
