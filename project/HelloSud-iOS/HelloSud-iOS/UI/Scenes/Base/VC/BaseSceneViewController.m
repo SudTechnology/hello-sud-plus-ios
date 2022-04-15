@@ -734,11 +734,6 @@
     return _contentView;
 }
 
-- (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
-    _isEnteredRoom = isEnteredRoom;
-//    [self.sudFSTAPPDecorator notifyAppComonSelfIn:isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
-}
-
 - (void)setRoomName:(NSString *)roomName {
     _roomName = roomName;
     self.naviView.roomNameLabel.text = roomName;
