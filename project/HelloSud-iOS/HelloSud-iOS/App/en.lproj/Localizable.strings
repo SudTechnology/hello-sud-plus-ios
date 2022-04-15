@@ -43,7 +43,7 @@
 "dt_settings_confirm_switch_rtc" = "Are you sure you wan't to switch the RTC service provider to";
 
 /// RoomList
-"dt_room_list_room_number" = "Room Number";
+"dt_room_list_room_number" = "room ID";
 "dt_room_list_users" = "users";
 "dt_room_list_scene" = "场景";
 "dt_room_list_no_room_available" = "No live streams right now \nGo to homepage to create one~";
@@ -58,7 +58,7 @@
 "dt_home_in_game" = "In Game";
 
 /// common
-"dt_common_select_all" = "Select all";
+"dt_common_select_all" = "all";
 "dt_common_agree" = "Agree";
 "dt_common_not_agree" = "Don't agree";
 "dt_common_sure" = "Confirm";

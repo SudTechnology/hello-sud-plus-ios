@@ -24,11 +24,13 @@
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *)msg;
         [self handleGameKeywordHitting:m.content];
     } else if ([msg isKindOfClass:RoomCmdUpMicModel.class]) {
-        RoomCmdUpMicModel *m = (RoomCmdUpMicModel *)msg;
-        if (m.cmd == CMD_UP_MIC_NOTIFY) {
-            [self notifyGameToJoin];
-        } else if (m.cmd == CMD_DOWN_MIC_NOTIFY) {
-            [self notifyGameToExit];
+        if (self.isEnteredRoom) {
+            RoomCmdUpMicModel *m = (RoomCmdUpMicModel *)msg;
+            if (m.cmd == CMD_UP_MIC_NOTIFY) {
+                [self notifyGameToJoin];
+            } else if (m.cmd == CMD_DOWN_MIC_NOTIFY) {
+                [self notifyGameToExit];
+            }
         }
     }
 }

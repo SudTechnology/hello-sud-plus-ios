@@ -43,7 +43,7 @@
 "dt_settings_confirm_switch_rtc" = "RTCプロバイダーをに切り替えてもよろしいですか";
 
 /// RoomList
-"dt_room_list_room_number" = "ルーム番号";
+"dt_room_list_room_number" = "部屋ID";
 "dt_room_list_users" = "人";
 "dt_room_list_scene" = "场景";
 "dt_room_list_no_room_available" = "現在開始しているルームはありません\nトップページに1つ作成しましょう~";
@@ -58,7 +58,7 @@
 "dt_home_in_game" = "ゲーム中";
 
 /// common
-"dt_common_select_all" = "すべて選択";
+"dt_common_select_all" = "すべて";
 "dt_common_agree" = "同意";
 "dt_common_not_agree" = "同意しない";
 "dt_common_sure" = "確定";
