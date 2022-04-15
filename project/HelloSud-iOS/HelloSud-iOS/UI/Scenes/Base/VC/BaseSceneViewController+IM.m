@@ -41,6 +41,7 @@
     msg.bgColor = [self systemMsgBgColor];
     /// 公屏添加消息
     [self sendMsg:msg isAddToShow:YES];
+    [self reqMicList];
 }
 
 /// 接收引擎回调回来消息响应
