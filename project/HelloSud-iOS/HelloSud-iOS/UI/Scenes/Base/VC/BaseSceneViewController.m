@@ -198,14 +198,14 @@
                 if (AudioRoomService.shared.micIndex >= 0) {
                     [AudioRoomService.shared reqSwitchMic:weakSelf.roomID.integerValue micIndex:(int) AudioRoomService.shared.micIndex handleType:1 success:^{
                         [weakSelf handleExitRoom];
-                    }                                fail:^(NSError *error) {
+                    } fail:^(NSError *error) {
                         [weakSelf handleExitRoom];
                     }];
                 } else {
                     [weakSelf handleExitRoom];
                 }
             });
-        }          onCloseCallback:^{
+        } onCloseCallback:^{
         }];
     };
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
@@ -239,6 +239,10 @@
 
 /// 退出房间
 - (void)handleExitRoom {
+    if ([self.sudFSMMGDecorator isInGame]) {
+        [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
+    }
+    
     [AudioRoomService.shared reqExitRoom:self.roomID.longLongValue];
     [self logoutRoom];
     [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
