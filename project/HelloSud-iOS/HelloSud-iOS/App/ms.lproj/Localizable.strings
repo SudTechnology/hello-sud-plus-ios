@@ -81,7 +81,7 @@
 "dt_mic_name" = "Jadual";
 "dt_ticket_choose_item_reward" = "Menangi %@x Ganjaran";
 "dt_ticket_choose_item_join" = "Sertai sekarang";
-"dt_ticket_choose_play_user_num" = "Sertai sekarang";
+"dt_ticket_choose_play_user_num" = "%d orang sedang bermain";
 "dt_ticket_choose_level_item_title_one" = "Medan pertama";
 "dt_ticket_choose_level_item_title_two" = "Medan pertengahan";
 "dt_ticket_choose_level_item_title_thr" = "Medan lanjutan";
