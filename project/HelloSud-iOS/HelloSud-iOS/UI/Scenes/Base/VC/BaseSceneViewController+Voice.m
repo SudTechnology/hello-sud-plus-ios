@@ -71,6 +71,7 @@
 
 - (void)logoutRoom {
     [AudioEngineFactory.shared.audioEngine destroy];
+    [self logoutGame];
 }
 
 #pragma mark =======音频采集=======

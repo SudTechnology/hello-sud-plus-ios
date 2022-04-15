@@ -110,14 +110,15 @@
             make.bottom.equalTo(self.operatorView.mas_top).offset(0);
             make.leading.mas_equalTo(16);
         }];
-        WeakSelf
         if (self.timer) {
             [self.timer invalidate];
         }
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:3 repeats:NO block:^(NSTimer *timer) {
-            [weakSelf closeTip];
-        }];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
     }
+}
+
+- (void)onTimer:(NSTimer *)timer {
+    [self closeTip];
 }
 
 - (void)closeTip {

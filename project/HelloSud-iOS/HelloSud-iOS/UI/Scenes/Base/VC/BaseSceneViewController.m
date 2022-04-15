@@ -209,7 +209,7 @@
     };
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
         SwitchRoomModeView *modeView = [[SwitchRoomModeView alloc] init];
-        [modeView reloadData:weakSelf.enterModel.sceneType gameID: self.gameId];
+        [modeView reloadData:weakSelf.enterModel.sceneType gameID: weakSelf.gameId];
         [DTSheetView show:modeView rootView:AppUtil.currentWindow hiddenBackCover:NO onCloseCallback:^{
         }];
         modeView.onTapGameCallBack = ^(HSGameItem *_Nonnull m) {
@@ -593,7 +593,7 @@
     [UserService.shared asyncCacheUserInfo:arrUserID finished:^{
         for (HSRoomMicList *m in micList) {
             NSString *key = [NSString stringWithFormat:@"%ld", m.micIndex];
-            AudioRoomMicModel *micModel = self.dicMicModel[key];
+            AudioRoomMicModel *micModel = weakSelf.dicMicModel[key];
             HSUserInfoModel *userInfo = [UserService.shared getCacheUserInfo:m.userId];
             if (micModel) {
                 if (!micModel.user) {
@@ -752,7 +752,7 @@
 }
 
 - (void)dealloc {
-    [self logoutGame];
+    NSLog(@"base scene vc dealloc");
 }
 
 /// 设置游戏房间内容

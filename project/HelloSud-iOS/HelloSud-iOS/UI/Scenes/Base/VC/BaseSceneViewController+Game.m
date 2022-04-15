@@ -273,7 +273,7 @@
                     [ToastUtil show:@"加载游戏失败，请检查参数"];
                     return;
                 }
-                [weakSelf loadGame:userID roomId:roomID code:code mgId:gameId language:weakSelf.language fsmMG:self.sudFSMMGDecorator rootView:rootView];
+                [weakSelf loadGame:userID roomId:roomID code:code mgId:gameId language:weakSelf.language fsmMG:weakSelf.sudFSMMGDecorator rootView:rootView];
             }
         } else {
             /// 初始化失败, 可根据业务重试
