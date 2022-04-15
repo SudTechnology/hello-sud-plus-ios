@@ -43,18 +43,20 @@
 
 /// 游戏: 准备按钮点击状态   MG_COMMON_SELF_CLICK_READY_BTN
 - (void)onGameMGCommonSelfClickReadyBtn {
+    WeakSelf
     if (![AppService.shared.ticket getPopTicketJoin]) {
         TicketJoinPopView *node = TicketJoinPopView.new;
         node.ticketLevelType = AppService.shared.ticket.ticketLevelType;
         [DTSheetView show:node rootView:AppUtil.currentWindow hiddenBackCover:false onCloseCallback:^{}];
-        WeakSelf
         node.onJoinCallBack = ^(UIButton *sender) {
             [AppService.shared.ticket reqJoinRoom:(long)self.roomID sceneId:AudioRoomService.shared.sceneType gameId:self.gameId gameLevel: AppService.shared.ticket.ticketLevelType finished:^{
                 [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:true];
             }];
         };
     } else {
-        [self.sudFSTAPPDecorator notifyAppComonSetReady:true];
+        [AppService.shared.ticket reqJoinRoom:(long)self.roomID sceneId:AudioRoomService.shared.sceneType gameId:self.gameId gameLevel: AppService.shared.ticket.ticketLevelType finished:^{
+            [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:true];
+        }];
     }
 }
 
