@@ -735,7 +735,8 @@
 }
 
 - (void)setIsEnteredRoom:(BOOL)isEnteredRoom {
-    [self.sudFSTAPPDecorator notifyAppComonSelfIn:_isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
+    _isEnteredRoom = isEnteredRoom;
+    [self.sudFSTAPPDecorator notifyAppComonSelfIn:isEnteredRoom seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 - (void)setRoomName:(NSString *)roomName {

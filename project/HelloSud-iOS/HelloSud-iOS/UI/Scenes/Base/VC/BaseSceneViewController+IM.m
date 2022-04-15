@@ -40,6 +40,7 @@
     [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NOTIFY];
     /// 公屏添加消息
     [self sendMsg:msg isAddToShow:YES];
+    /// 连接成功后拉取麦位列表
     [self reqMicList];
 }
 

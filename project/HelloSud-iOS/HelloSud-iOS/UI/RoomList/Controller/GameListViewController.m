@@ -103,6 +103,8 @@
         [ToastUtil show:error.dt_errMsg];
         [weakSelf.tableView.mj_header endRefreshing];
     }];
+ 
+    [self.searchHeaderView dtUpdateUI];
 }
 
 #pragma mark - UITableViewDelegate || UITableViewDataSource
