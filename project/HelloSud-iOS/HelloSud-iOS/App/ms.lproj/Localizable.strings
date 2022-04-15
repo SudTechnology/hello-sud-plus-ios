@@ -43,7 +43,7 @@
 "dt_settings_confirm_switch_rtc" = "Adakah anda pasti mahu menukar pembekal perkhidmatan RTC kepada ";
 
 /// RoomList
-"dt_room_list_room_number" = "Nombor bilik";
+"dt_room_list_room_number" = "ID bilik";
 "dt_room_list_users" = "orang";
 "dt_room_list_scene" = "场景";
 "dt_room_list_no_room_available" = "Tiada bilik untuk memulakan penstriman pada masa ini /nKunjungi laman utama untuk mencipta satu~";
@@ -58,7 +58,7 @@
 "dt_home_in_game" = "Pada masa ini dalam permainan";
 
 /// common
-"dt_common_select_all" = "Pilih semua";
+"dt_common_select_all" = "semua";
 "dt_common_agree" = "Setuju";
 "dt_common_not_agree" = "Tidak setuju";
 "dt_common_sure" = "Takrifkan";

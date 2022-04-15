@@ -43,7 +43,7 @@
 "dt_settings_confirm_switch_rtc" = "ตกลงเปลี่ยนผู้ให้บริการ RTCเป็น หรือไม่";
 
 /// RoomList
-"dt_room_list_room_number" = "หมายเลขห้อง ";
+"dt_room_list_room_number" = "รหัสห้อง";
 "dt_room_list_users" = "คน";
 "dt_room_list_scene" = "场景";
 "dt_room_list_no_room_available" = "ยังไม่มีห้องถ่ายทอดสดในขณะนี้ \nไปสร้างที่ี่หน้าแรกเลย~";
@@ -58,7 +58,7 @@
 "dt_home_in_game" = "เล่นเกมอยู่";
 
 /// common
-"dt_common_select_all" = "เลือกทั้งหมด";
+"dt_common_select_all" = "ทั้งหมด";
 "dt_common_agree" = "ตกลง";
 "dt_common_not_agree" = "ปฏิเสธ";
 "dt_common_sure" = "ตกลง";
