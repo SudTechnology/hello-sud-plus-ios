@@ -19,6 +19,7 @@
 - (void)reqData {
     WeakSelf
     [UserService.shared reqUserCoinDetail:^(int64_t i) {
+        [weakSelf dtUpdateUI];
         weakSelf.coinLabel.text = [NSString stringWithFormat:@"%lld", i];
     } fail:^(NSString *errStr) {
         [ToastUtil show:errStr];
@@ -28,6 +29,7 @@
 - (void)dtConfigUI {
     self.backgroundColor = UIColor.whiteColor;
     [self reqData];
+    [self dtUpdateUI];
 }
 
 - (void)dtAddViews {
