@@ -241,11 +241,14 @@
     if ([self.sudFSMMGDecorator isInGame]) {
         [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
     }
-    
-    [AudioRoomService.shared reqExitRoom:self.roomID.longLongValue];
-    [self logoutRoom];
-    [self logoutGame];
-    [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
+    // 延迟关闭以便上面指令执行
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(500 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+        
+        [AudioRoomService.shared reqExitRoom:self.roomID.longLongValue];
+        [self logoutRoom];
+        [self logoutGame];
+        [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
+    });
 }
 
 /// 处理切换房间
