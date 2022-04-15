@@ -48,7 +48,6 @@
     [self dtUpdateUI];
 
     [self setupGameRoomContent];
-    [self reqMicList];
     [self.naviView hiddenNodeWithRoleType:AudioRoomService.shared.roleType];
 }
 
