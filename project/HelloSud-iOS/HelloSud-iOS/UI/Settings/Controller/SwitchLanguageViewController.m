@@ -31,11 +31,16 @@
 - (void)configData {
     NSArray <SwitchLangModel *>*dataArray = [SettingsService getLanguageArr];
     
+    BOOL isNotSupportLanguage = [SettingsService isNotSupportLanguage];
     if (LanguageUtil.userLanguage.length > 0) {
         NSString *str = [[NSBundle currentLanguage] languageCountryCode];
         for (NSInteger i = 0; i < dataArray.count; i++) {
             SwitchLangModel *model = dataArray[i];
-            model.isSelect = [model.language isEqualToString:str];
+            if (isNotSupportLanguage) {
+                model.isSelect = i == 0;
+            } else {
+                model.isSelect = [model.language isEqualToString:str];
+            }
         }
     }
     self.arrData = dataArray;
