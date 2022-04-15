@@ -89,6 +89,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     HSGameItem *model = self.dataList[indexPath.row];
     if (model.isAudioRoom && self.isAudioRoom) {
+        [DTSheetView close];
         return;
     }
     if (self.onTapGameCallBack) {
