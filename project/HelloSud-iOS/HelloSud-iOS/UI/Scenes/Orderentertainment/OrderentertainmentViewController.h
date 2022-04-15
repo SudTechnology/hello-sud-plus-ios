@@ -5,12 +5,12 @@
 //  Created by kaniel on 2022/2/18.
 //
 
-#import "BaseSceneViewController.h"
+#import "AudioRoomViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 点单娱乐类场景
-@interface OrderentertainmentViewController : BaseSceneViewController
+@interface OrderentertainmentViewController : AudioRoomViewController
 
 @end
 
