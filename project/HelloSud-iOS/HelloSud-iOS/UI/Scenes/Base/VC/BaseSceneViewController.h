@@ -34,22 +34,18 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BaseSceneViewController : BaseViewController<ISudAudioEventListener>
 
 @property (nonatomic, strong)BaseSceneConfigModel *configModel;
-
 /// 基础层级视图，最底层视图
 @property (nonatomic, strong, readonly) SceneContentView *contentView;
-
 /// 背景视图
 @property (nonatomic, strong, readonly) UIImageView *bgImageView;
-
 /// 游戏加载主view
 @property (nonatomic, strong, readonly) UIView *gameView;
-
 /// 场景视图，所有子类场景
 @property (nonatomic, strong, readonly) BaseView *sceneView;
 
 
 /// 游戏上遮罩背景视图
-@property(nonatomic, strong) UIImageView *gameTopShadeNode;
+@property (nonatomic, strong) UIImageView *gameTopShadeNode;
 @property (nonatomic, strong) GameMicContentView *gameMicContentView;
 @property (nonatomic, strong) RoomNaviView *naviView;
 @property (nonatomic, strong) RoomOperatorView *operatorView;

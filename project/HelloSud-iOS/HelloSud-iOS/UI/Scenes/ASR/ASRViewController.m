@@ -64,6 +64,11 @@
 
 }
 
+- (void)roomGameDidChanged:(NSInteger)gameID {
+    [super roomGameDidChanged:gameID];
+    [self.asrTipLabel setHidden:gameID == HSAudio];
+}
+
 /// 处理游戏状态变化
 - (void)handlePlayerStateChanged {
     if (!self.sudFSMMGDecorator.keyWordASRing) {
