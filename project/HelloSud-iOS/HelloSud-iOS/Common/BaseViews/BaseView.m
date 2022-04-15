@@ -25,7 +25,6 @@
         [self dtLayoutViews];
         [self dtConfigEvents];
         [self dtConfigUI];
-        [self dtUpdateUI];
     }
     return self;
 }
