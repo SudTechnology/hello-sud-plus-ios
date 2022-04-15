@@ -145,6 +145,6 @@
 "dt_asr_open_mic_tip" = "Aktifkan mikrofon untuk menjawab kuis, lebih cepat daripada pakai cara ketik lho!";
 "dt_asr_open_mic_num_tip" = "Coba aktifkan mikrofon untuk menyebutkan angka, ini bonus buat pemalas!";
 "dt_enter_room_tip" = "Sudah masuk ke ruangan";
-"dt_game_person_count" = "Number of players";
+"dt_game_person_count" = "Jumlah pemain";
 
 "dt_network_error_p_check" = "网络错误，请检查网络连接";
