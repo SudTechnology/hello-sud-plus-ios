@@ -199,10 +199,18 @@
     }];
 }
 
+- (void)dtConfigUI {
+    [super dtConfigUI];
+    /// 默认游戏
+    self.micType = HSGameMic;
+}
+
 - (void)dtUpdateUI {
     if (self.model.user == nil) {
         self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
-        [self showUserName:NSString.dt_room_click_mic showOwner:false];
+        if (self.micType == HSAudioMic) {
+            [self showUserName:NSString.dt_room_click_mic showOwner:false];
+        }
         [self.rippleView stopAnimate:YES];
         [self hiddenGameNode:true];
         [self updateGameUI];
