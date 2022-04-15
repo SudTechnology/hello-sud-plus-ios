@@ -244,6 +244,7 @@
     
     [AudioRoomService.shared reqExitRoom:self.roomID.longLongValue];
     [self logoutRoom];
+    [self logoutGame];
     [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
 }
 
