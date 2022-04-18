@@ -27,7 +27,7 @@
     NSArray <NSString *> *titleArr = @[@"SudMGP Core", @"SudMGP ASR", @"HelloSud", @"RTC SDK"];
     CGFloat zego = 10.4;
     CGFloat agora = 15.5;
-    NSArray <NSNumber *> *sizeArr = @[@1.6, @0.135, @32.21, @(zego + agora)];
+    NSArray <NSNumber *> *sizeArr = @[@1.6, @0.135, @40.05, @(zego + agora)];
     CGFloat sum = [[sizeArr valueForKeyPath:@"@sum.floatValue"] floatValue];
 
     self.sizeLabel.text = [NSString stringWithFormat:@"%@%.02fM", NSString.dt_settings_total, sum];
