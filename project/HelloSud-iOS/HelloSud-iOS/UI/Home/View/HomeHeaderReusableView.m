@@ -31,7 +31,7 @@
     _sceneModel = sceneModel;
     
     self.titleLabel.text = sceneModel.sceneName;
-    [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImage]];
+    [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImageNew]];
     self.createNode.textColor = sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A");
 }
 
