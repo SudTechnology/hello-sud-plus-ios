@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger sceneId;
 @property (nonatomic, copy) NSString * sceneName;
 @property (nonatomic, copy) NSString * sceneImage;
+/// 新版本
+@property (nonatomic, copy) NSString * sceneImageNew;
 /// 是否等待数据
 @property (nonatomic, assign) BOOL isGameWait;
 @end
