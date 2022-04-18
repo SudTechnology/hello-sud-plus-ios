@@ -132,6 +132,7 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 90;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.showsVerticalScrollIndicator = NO;
         _tableView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
         [_tableView registerClass:[GameListTableViewCell class] forCellReuseIdentifier:@"GameListTableViewCell"];
         UIView *headerNode = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
