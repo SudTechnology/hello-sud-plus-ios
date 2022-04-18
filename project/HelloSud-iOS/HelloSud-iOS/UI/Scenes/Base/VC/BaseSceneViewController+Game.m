@@ -182,18 +182,23 @@
                 // 没有对应语言，取英文
                 textString = m.text.mj_keyValues[@"en_US"];
             }
-            if (textString) {
+            if (textString.length > 0) {
                 NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc]initWithString:textString];
                 [attrMsg appendAttributedString:attributedString];
             }
         }
     }
-    attrMsg.yy_lineSpacing = 6;
-    attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#FFD620" alpha:1];
-    AudioMsgSystemModel *msgModel = [AudioMsgSystemModel makeMsgWithAttr:attrMsg];
-    /// 公屏添加消息
-    [self addMsg:msgModel isShowOnScreen:YES];
+    if (attrMsg.length > 0) {
+        attrMsg.yy_lineSpacing = 6;
+        attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+        attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#FFD620" alpha:1];
+        AudioMsgSystemModel *msgModel = [AudioMsgSystemModel makeMsgWithAttr:attrMsg];
+        /// 公屏添加消息
+        [self addMsg:msgModel isShowOnScreen:YES];
+    } else {
+        NSLog(@"error msg is empty");
+    }
+    
 }
 
 #pragma mark =======玩家状态处理=======
