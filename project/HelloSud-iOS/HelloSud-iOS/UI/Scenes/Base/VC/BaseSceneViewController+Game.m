@@ -137,18 +137,18 @@
 /// 玩家: 队长状态  MG_COMMON_PLAYER_CAPTAIN
 - (void)onPlayerMGCommonPlayerCaptain:(id<ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerCaptainModel *)model {
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
-    
-    if ([AppService.shared.login.loginUserInfo.userID isEqualToString:self.sudFSMMGDecorator.captainUserId]) {
-        self.isShowEndGame = true;
-    } else {
-        self.isShowEndGame = false;
-    }
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 玩家: 游戏状态  MG_COMMON_PLAYER_PLAYING
 - (void)onPlayerMGCommonPlayerPlaying:(id<ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerPlayingModel *)model {
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
+    
+    if ([AppService.shared.login.loginUserInfo.userID isEqualToString:self.sudFSMMGDecorator.captainUserId] && self.sudFSMMGDecorator.isPlaying) {
+        self.isShowEndGame = true;
+    } else {
+        self.isShowEndGame = false;
+    }
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
