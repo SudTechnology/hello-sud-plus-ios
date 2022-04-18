@@ -28,7 +28,9 @@
                 /// token过期
                 [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_FAIL_NTF object:nil];
             }
-            failure([NSError dt_errorWithCode:resp.retCode msg:resp.retMsg]);
+            if (failure) {
+                failure([NSError dt_errorWithCode:resp.retCode msg:resp.retMsg]);
+            }
             if (showErrorToast) {
                 [ToastUtil show:resp.errorMsg];
             }
