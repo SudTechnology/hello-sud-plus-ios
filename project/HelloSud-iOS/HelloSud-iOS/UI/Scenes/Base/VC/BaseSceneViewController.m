@@ -575,7 +575,7 @@
 /// 处理房间切换
 - (void)roomGameDidChanged:(NSInteger)gameID {
     if (gameID == HSAudio) {
-        self.isShowEndGame = false;
+//        self.isShowEndGame = false;
         if (self.enterModel.sceneType != SceneTypeAudio) {
             [self logoutGame];
         }
