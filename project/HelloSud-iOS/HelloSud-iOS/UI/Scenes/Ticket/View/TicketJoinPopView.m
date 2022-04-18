@@ -245,6 +245,7 @@
 - (UIView *)remindView {
     if (!_remindView) {
         _remindView = UIView.new;
+        [_remindView setHidden:true];
         [_remindView setUserInteractionEnabled:true];
         [_remindView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickRemindViewEvent:)]];
     }
