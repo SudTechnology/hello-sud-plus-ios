@@ -209,7 +209,7 @@
         _detailLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         _detailLabel.font = UIFONT_MEDIUM(16);
         _detailLabel.numberOfLines = 0;
-        _detailLabel.textAlignment = NSTextAlignmentLeft;
+        _detailLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _detailLabel;
 }
