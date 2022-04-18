@@ -13,7 +13,7 @@
 
 @interface ASRViewController ()
 @property(nonatomic, strong) UIButton *btnTip;
-@property(nonatomic, strong) UILabel *asrTipLabel;
+@property(nonatomic, strong) MarqueeLabel *asrTipLabel;
 @property(nonatomic, strong) NSTimer *timer;
 @property(nonatomic, weak) id stateNTF;
 @property(nonatomic, weak) id asrStateNTF;
@@ -91,7 +91,7 @@
 
     if (!self.btnTip) {
         self.btnTip = [[UIButton alloc] init];
-        UIImage *bgImage = [[UIImage imageNamed:@"voice_tip"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 50, 19, 49) resizingMode:UIImageResizingModeStretch];
+        UIImage *bgImage = [[[UIImage imageNamed:@"voice_tip"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 50, 19, 49) resizingMode:UIImageResizingModeStretch] imageFlippedForRightToLeftLayoutDirection];
         [self.btnTip setBackgroundImage:bgImage forState:UIControlStateNormal];
         NSString *tip = @"";
         if (self.gameId == DIGITAL_BOMB) {
@@ -130,11 +130,12 @@
     self.btnTip = nil;
 }
 
-- (UILabel *)asrTipLabel {
+- (MarqueeLabel *)asrTipLabel {
     if (!_asrTipLabel) {
-        _asrTipLabel = [[UILabel alloc] init];
+        _asrTipLabel = [[MarqueeLabel alloc] init];
+        _asrTipLabel.fadeLength = 10;
+        _asrTipLabel.trailingBuffer = 20;
         _asrTipLabel.font = UIFONT_MEDIUM(11);
-        _asrTipLabel.numberOfLines = 0;
         _asrTipLabel.textColor = UIColor.whiteColor;
         _asrTipLabel.text = NSString.dt_asr_tip;
     }
