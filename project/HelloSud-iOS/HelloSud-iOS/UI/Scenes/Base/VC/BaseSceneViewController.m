@@ -51,12 +51,8 @@
     [self.naviView hiddenNodeWithRoleType:AudioRoomService.shared.roleType];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
