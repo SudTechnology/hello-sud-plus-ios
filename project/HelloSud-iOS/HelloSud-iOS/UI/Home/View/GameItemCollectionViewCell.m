@@ -146,10 +146,10 @@
         _nameLabel.textColor = UIColor.whiteColor;
         _nameLabel.font = UIFONT_MEDIUM(14);
         _nameLabel.textAlignment = NSTextAlignmentLeft;
-        _nameLabel.layer.shadowColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.4].CGColor;
-        _nameLabel.layer.shadowOffset = CGSizeMake(2, 2);
-        _nameLabel.layer.shadowOpacity = 0.8;
-        _nameLabel.layer.shadowRadius = 1;
+//        _nameLabel.layer.shadowColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.4].CGColor;
+//        _nameLabel.layer.shadowOffset = CGSizeMake(2, 2);
+//        _nameLabel.layer.shadowOpacity = 0.8;
+//        _nameLabel.layer.shadowRadius = 1;
         _nameLabel.numberOfLines = 2;
     }
     return _nameLabel;
