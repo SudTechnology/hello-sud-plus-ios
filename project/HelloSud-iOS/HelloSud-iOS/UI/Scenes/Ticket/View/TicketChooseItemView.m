@@ -162,7 +162,7 @@
         _rewardLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFCAB" alpha:1];
         _rewardLabel.font = UIFONT_BOLD(30);
         _rewardLabel.numberOfLines = 0;
-        _rewardLabel.textAlignment = NSTextAlignmentLeft;
+        _rewardLabel.textAlignment = [LanguageUtil isLanguageRTL] ? NSTextAlignmentRight : NSTextAlignmentLeft;
     }
     return _rewardLabel;
 }
