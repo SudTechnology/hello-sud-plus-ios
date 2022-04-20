@@ -30,13 +30,13 @@ NSString *const kRtcNameVoicEngine = @"火山引擎";
 NSString *const kRtcNameAlibabaCloud = @"阿里云";
 NSString *const kRtcNameTencentCloud = @"腾讯云";
 
-NSString *const kRtcTypeZego = @"Zego";
-NSString *const kRtcTypeAgora = @"Agora";
-NSString *const kRtcTypeRongCloud = @"RongCloud";
-NSString *const kRtcTypeCommEase = @"CommsEase";
-NSString *const kRtcTypeVoicEngine = @"VoicEngine";
-NSString *const kRtcTypeAlibabaCloud = @"AlibabaCloud";
-NSString *const kRtcTypeTencentCloud = @"TencentCloud";
+NSString *const kRtcTypeZego = @"zego";
+NSString *const kRtcTypeAgora = @"agora";
+NSString *const kRtcTypeRongCloud = @"rongCloud";
+NSString *const kRtcTypeCommEase = @"commsEase";
+NSString *const kRtcTypeVoicEngine = @"voicEngine";
+NSString *const kRtcTypeAlibabaCloud = @"alibabaCloud";
+NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 
 
 @interface AppService ()
