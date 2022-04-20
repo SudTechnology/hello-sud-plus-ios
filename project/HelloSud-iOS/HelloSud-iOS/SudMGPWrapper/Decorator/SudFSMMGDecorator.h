@@ -75,6 +75,8 @@ typedef NS_ENUM(NSInteger, GameStateType) {
 - (BOOL)isPlayerIsPlaying:(NSString *)userId;
 /// 获取用户是否在队长
 - (BOOL)isPlayerIsCaptain:(NSString *)userId;
+/// 获取用户是否在在绘画
+- (BOOL)isPlayerPaining:(NSString *)userId;
 
 #pragma mark - 获取是否存在gamePlayerStateMap中 （用于判断用户是否在游戏里了）
 /// 获取用户是否已经加入了游戏
