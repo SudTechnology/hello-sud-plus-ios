@@ -2071,6 +2071,8 @@
 				GCC_PREFIX_HEADER = "HelloSud-iOS/App/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "HelloSud-iOS/App/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间视频聊天功能.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中提供精准推荐房间功能.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间语音聊天功能.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -2113,6 +2115,8 @@
 				GCC_PREFIX_HEADER = "HelloSud-iOS/App/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "HelloSud-iOS/App/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间视频聊天功能.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中提供精准推荐房间功能.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间语音聊天功能.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
