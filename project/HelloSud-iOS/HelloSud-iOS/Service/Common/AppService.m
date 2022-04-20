@@ -188,20 +188,19 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
 /// 获取RTC厂商名称
 /// @param rtcType rtc类型
 - (NSString *)getRTCTypeName:(NSString *)rtcType {
-
-    if ([rtcType isEqualToString:kRtcTypeZego]) {
+    if ([rtcType dt_isInsensitiveEqualToString:kRtcTypeZego]) {
         return NSString.dt_settings_zego;
-    } else if ([rtcType isEqualToString:kRtcTypeAgora]) {
+    } else if ([rtcType dt_isInsensitiveEqualToString:kRtcTypeAgora]) {
         return NSString.dt_settings_agora;
-    } else if ([rtcType isEqualToString:kRtcTypeRongCloud]) {
+    } else if ([rtcType dt_isInsensitiveEqualToString:kRtcTypeRongCloud]) {
         return NSString.dt_settings_rong_cloud;
-    } else if ([rtcType isEqualToString:kRtcTypeCommEase]) {
+    } else if ([rtcType dt_isInsensitiveEqualToString:kRtcTypeCommEase]) {
         return NSString.dt_settings_net_ease;
-    } else if ([rtcType isEqualToString:kRtcTypeVoicEngine]) {
+    } else if ([rtcType dt_isInsensitiveEqualToString:kRtcTypeVoicEngine]) {
         return NSString.dt_settings_volcano;
-    } else if ([rtcType isEqualToString:kRtcTypeAlibabaCloud]) {
+    } else if ([rtcType dt_isInsensitiveEqualToString:kRtcTypeAlibabaCloud]) {
         return NSString.dt_settings_alicloud;
-    } else if ([rtcType isEqualToString:kRtcTypeTencentCloud]) {
+    } else if ([rtcType dt_isInsensitiveEqualToString:kRtcTypeTencentCloud]) {
         return NSString.dt_settings_tencent;
     }
     return @"";
@@ -257,37 +256,37 @@ NSString *const kRtcTypeTencentCloud = @"TencentCloud";
     NSLog(@"切换RTC厂商:%@", rtcType);
     HSConfigContent *rtcConfig = nil;
     [AudioEngineFactory.shared.audioEngine destroy];
-    if (configModel.zegoCfg && [rtcType isEqualToString:configModel.zegoCfg.rtcType]) {
+    if (configModel.zegoCfg && [rtcType dt_isInsensitiveEqualToString:configModel.zegoCfg.rtcType]) {
 
         NSLog(@"使用zego语音引擎");
         [AudioEngineFactory.shared createEngine:ZegoAudioEngineImpl.class];
         rtcConfig = configModel.zegoCfg;
-    } else if (configModel.agoraCfg && [rtcType isEqualToString:configModel.agoraCfg.rtcType]) {
+    } else if (configModel.agoraCfg && [rtcType dt_isInsensitiveEqualToString:configModel.agoraCfg.rtcType]) {
 
         NSLog(@"使用agora语音引擎");
         [AudioEngineFactory.shared createEngine:AgoraAudioEngineImpl.class];
         rtcConfig = configModel.agoraCfg;
-    } else if (configModel.rongCloudCfg && [rtcType isEqualToString:configModel.rongCloudCfg.rtcType]) {
+    } else if (configModel.rongCloudCfg && [rtcType dt_isInsensitiveEqualToString:configModel.rongCloudCfg.rtcType]) {
         
         NSLog(@"使用rongCloud语音引擎");
         [AudioEngineFactory.shared createEngine:RCloudAudioEngineImpl.class];
         rtcConfig = configModel.rongCloudCfg;
-    } else if (configModel.commsEaseCfg && [rtcType isEqualToString:configModel.commsEaseCfg.rtcType]) {
+    } else if (configModel.commsEaseCfg && [rtcType dt_isInsensitiveEqualToString:configModel.commsEaseCfg.rtcType]) {
 
         NSLog(@"使用commsEas语音引擎");
         [AudioEngineFactory.shared createEngine:NeteaseAudioEngineImpl.class];
         rtcConfig = configModel.commsEaseCfg;
-    } else if (configModel.tencentCloudCfg && [rtcType isEqualToString:configModel.tencentCloudCfg.rtcType]) {
+    } else if (configModel.tencentCloudCfg && [rtcType dt_isInsensitiveEqualToString:configModel.tencentCloudCfg.rtcType]) {
 
         NSLog(@"使用TencentCloud语音引擎");
         [AudioEngineFactory.shared createEngine:TXAudioEngineImpl.class];
         rtcConfig = configModel.tencentCloudCfg;
-    } else if (configModel.voicEngineCfg && [rtcType isEqualToString:configModel.voicEngineCfg.rtcType]) {
+    } else if (configModel.voicEngineCfg && [rtcType dt_isInsensitiveEqualToString:configModel.voicEngineCfg.rtcType]) {
 
         NSLog(@"使用VoicEngine语音引擎");
         [AudioEngineFactory.shared createEngine:VolcAudioEngineImpl.class];
         rtcConfig = configModel.voicEngineCfg;
-    } else if (configModel.alibabaCloudCfg && [rtcType isEqualToString:configModel.alibabaCloudCfg.rtcType]) {
+    } else if (configModel.alibabaCloudCfg && [rtcType dt_isInsensitiveEqualToString:configModel.alibabaCloudCfg.rtcType]) {
 
         NSLog(@"使用AlibabaCloud语音引擎");
         [AudioEngineFactory.shared createEngine:AliyunAudioEngineImpl.class];

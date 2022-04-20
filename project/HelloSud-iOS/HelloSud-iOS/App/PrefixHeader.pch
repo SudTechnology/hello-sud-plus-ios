@@ -19,6 +19,7 @@
 
 #import "DTUIView+Extension.h"
 #import "DTNSArray+Masonry.h"
+#import "NSString+DTNSString.h"
 /// pod libs
 #import <Masonry/Masonry.h>
 #import <YYText/YYText.h>
