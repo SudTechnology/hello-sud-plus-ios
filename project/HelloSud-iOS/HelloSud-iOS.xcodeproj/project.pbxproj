@@ -167,13 +167,13 @@
 		BC210D70BDEB097F49794C9B /* DTUIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210018D3BC93246BBB40FE /* DTUIView+Extension.m */; };
 		BC210FDF9C7CAC234D035EF6 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105042E549C236540DC05 /* DeviceUtil.m */; };
 		E5C2420127EDCBAA00EA2377 /* HSThreadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2420027EDCBAA00EA2377 /* HSThreadUtils.m */; };
-		E5C82F7B27FFE34200A409D5 /* NERtcSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7227FFE09C00A409D5 /* NERtcSDK.framework */; };
-		E5C82F7C27FFE34200A409D5 /* NERtcSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7227FFE09C00A409D5 /* NERtcSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E5C82F7D27FFE34300A409D5 /* NIMSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7327FFE09C00A409D5 /* NIMSDK.framework */; };
-		E5C82F7E27FFE34300A409D5 /* NIMSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7327FFE09C00A409D5 /* NIMSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E5C82F7F27FFE34500A409D5 /* NMCBasicModuleFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */; };
-		E5C82F8027FFE34500A409D5 /* NMCBasicModuleFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */; };
+		E5D4B4DA280FDFC6000E7AC4 /* NIMSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D7280FDFC6000E7AC4 /* NIMSDK.xcframework */; };
+		E5D4B4DB280FDFC6000E7AC4 /* NIMSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D7280FDFC6000E7AC4 /* NIMSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5D4B4DC280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D8280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework */; };
+		E5D4B4DD280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D8280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5D4B4DE280FDFC6000E7AC4 /* NERtcSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D9280FDFC6000E7AC4 /* NERtcSDK.xcframework */; };
+		E5D4B4DF280FDFC6000E7AC4 /* NERtcSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D9280FDFC6000E7AC4 /* NERtcSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */; };
 		E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */; };
 /* End PBXBuildFile section */
@@ -185,10 +185,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E5C82F7E27FFE34300A409D5 /* NIMSDK.framework in Embed Frameworks */,
-				E5C82F7C27FFE34200A409D5 /* NERtcSDK.framework in Embed Frameworks */,
 				44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */,
-				E5C82F8027FFE34500A409D5 /* NMCBasicModuleFramework.framework in Embed Frameworks */,
+				E5D4B4DF280FDFC6000E7AC4 /* NERtcSDK.xcframework in Embed Frameworks */,
+				E5D4B4DB280FDFC6000E7AC4 /* NIMSDK.xcframework in Embed Frameworks */,
+				E5D4B4DD280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,6 +561,9 @@
 		E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMCBasicModuleFramework.framework; path = Vendors/netease/NMCBasicModuleFramework.framework; sourceTree = "<group>"; };
 		E5C82F8227FFE56900A409D5 /* RCloudAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCloudAudioEngineImpl.h; sourceTree = "<group>"; };
 		E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCloudAudioEngineImpl.m; sourceTree = "<group>"; };
+		E5D4B4D7280FDFC6000E7AC4 /* NIMSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = NIMSDK.xcframework; path = Vendors/netease/NIMSDK.xcframework; sourceTree = "<group>"; };
+		E5D4B4D8280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = NMCBasicModuleFramework.xcframework; path = Vendors/netease/NMCBasicModuleFramework.xcframework; sourceTree = "<group>"; };
+		E5D4B4D9280FDFC6000E7AC4 /* NERtcSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = NERtcSDK.xcframework; path = Vendors/netease/NERtcSDK.xcframework; sourceTree = "<group>"; };
 		E5EDB8BB27E873A300EE99D0 /* AudioConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConfigModel.h; sourceTree = "<group>"; };
 		E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioConfigModel.m; sourceTree = "<group>"; };
 		E5EDB8BE27E8775D00EE99D0 /* AudioJoinRoomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioJoinRoomModel.h; sourceTree = "<group>"; };
@@ -574,9 +577,9 @@
 			files = (
 				039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */,
 				44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */,
-				E5C82F7D27FFE34300A409D5 /* NIMSDK.framework in Frameworks */,
-				E5C82F7B27FFE34200A409D5 /* NERtcSDK.framework in Frameworks */,
-				E5C82F7F27FFE34500A409D5 /* NMCBasicModuleFramework.framework in Frameworks */,
+				E5D4B4DC280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework in Frameworks */,
+				E5D4B4DE280FDFC6000E7AC4 /* NERtcSDK.xcframework in Frameworks */,
+				E5D4B4DA280FDFC6000E7AC4 /* NIMSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1542,6 +1545,9 @@
 		E65466148933C05BB06C9A97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E5D4B4D9280FDFC6000E7AC4 /* NERtcSDK.xcframework */,
+				E5D4B4D7280FDFC6000E7AC4 /* NIMSDK.xcframework */,
+				E5D4B4D8280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework */,
 				E5C82F7227FFE09C00A409D5 /* NERtcSDK.framework */,
 				E5C82F7327FFE09C00A409D5 /* NIMSDK.framework */,
 				E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */,
