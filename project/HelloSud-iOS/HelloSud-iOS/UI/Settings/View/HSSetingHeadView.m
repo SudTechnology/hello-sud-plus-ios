@@ -89,7 +89,7 @@
     }];
     [self.sizeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-20);
-        make.centerY.mas_equalTo(self.titleLabel);
+        make.centerY.equalTo(self.titleLabel);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.scaleView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -99,7 +99,7 @@
         make.height.mas_equalTo(40);
     }];
     [self.itemsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.scaleView.mas_bottom).offset(2);
+        make.top.equalTo(self.scaleView.mas_bottom).offset(2);
         make.leading.mas_equalTo(20);
         make.trailing.mas_equalTo(-20);
         make.height.mas_greaterThanOrEqualTo(0);
