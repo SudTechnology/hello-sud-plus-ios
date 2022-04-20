@@ -16,9 +16,8 @@
 #else
 #define InteractURL      @"https://interact-hello-sud.sud.tech"
 #define BaseURL          @"https://base-hello-sud.sud.tech"
-#define GameURL          @"https://game.sud.tech"
+#define GameURL          @"https://game-hello-sud.sud.tech"
 #define GAME_TEST_ENV    NO
-
 #endif
 
 #define kBASEURL(url) [NSString stringWithFormat:@"%@/%@",BaseURL, url]
