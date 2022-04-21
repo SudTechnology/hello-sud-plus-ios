@@ -137,6 +137,13 @@
 /// 玩家: 队长状态  MG_COMMON_PLAYER_CAPTAIN
 - (void)onPlayerMGCommonPlayerCaptain:(id<ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerCaptainModel *)model {
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
+    
+    if ([AppService.shared.login.loginUserInfo.userID isEqualToString:userId] && self.sudFSMMGDecorator.isPlaying && model.isCaptain) {
+        self.isShowEndGame = true;
+    } else {
+        self.isShowEndGame = false;
+    }
+    
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
