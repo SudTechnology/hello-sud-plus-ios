@@ -89,6 +89,10 @@
         make.height.mas_equalTo(217);
         make.width.mas_equalTo(kScreenWidth - 32);
     }];
+    CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
+    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
+    self.contactUsView.frame = targetFrame;
+    self.tableView.tableFooterView = self.contactUsView;
     [self.tableView reloadData];
 }
 
@@ -118,7 +122,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsHorizontalScrollIndicator = NO;
         _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.tableFooterView = self.contactUsView;
+        
 
     }
     return _tableView;
@@ -127,7 +131,6 @@
 - (UIView *)contactUsView {
     if (_contactUsView == nil) {
         _contactUsView = UIView.new;
-        _contactUsView.frame = CGRectMake(0, 0, kScreenWidth, 80);
         UILabel *usLabel = UILabel.new;
         usLabel.numberOfLines = 0;
         usLabel.text = NSString.dt_settings_contact_us;
@@ -136,11 +139,12 @@
         usLabel.textAlignment = NSTextAlignmentCenter;
         usLabel.numberOfLines = 0;
         [_contactUsView addSubview:usLabel];
+        usLabel.preferredMaxLayoutWidth = kScreenWidth - 34;
         [usLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(17);
             make.top.mas_equalTo(0);
-            make.trailing.mas_equalTo(-17);
-            make.height.mas_greaterThanOrEqualTo(0);
+            make.width.height.mas_greaterThanOrEqualTo(0);
+            make.bottom.mas_equalTo(0);
         }];
     }
     return _contactUsView;

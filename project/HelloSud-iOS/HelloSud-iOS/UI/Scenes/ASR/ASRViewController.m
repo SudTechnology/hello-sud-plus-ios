@@ -53,14 +53,15 @@
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     WeakSelf
-    /// 游戏玩家状态变化
-    self.stateNTF = [[NSNotificationCenter defaultCenter]addObserverForName:NTF_PLAYER_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        [weakSelf handlePlayerStateChanged];
-    }];
+//    /// 游戏玩家状态变化
+//    self.stateNTF = [[NSNotificationCenter defaultCenter]addObserverForName:NTF_PLAYER_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+//        [weakSelf handlePlayerStateChanged];
+//    }];
     /// asr状态变化
     self.asrStateNTF = [[NSNotificationCenter defaultCenter]addObserverForName:NTF_ASR_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         [weakSelf handlePlayerStateChanged];
     }];
+
 
 }
 
@@ -71,19 +72,15 @@
 
 /// 处理游戏状态变化
 - (void)handlePlayerStateChanged {
+    
     if (!self.sudFSMMGDecorator.keyWordASRing) {
         return;
     }
-    // 正在游戏中 && 开麦按钮不打开时，提示用户
-    if (self.gameId == DIGITAL_BOMB || self.gameId == YOU_DRAW_AND_I_GUESS) {
-        if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.login.loginUserInfo.userID] && self.operatorView.voiceBtnState == VoiceBtnStateTypeWaitOpen) {
-            [self showVoiceTip];
-        }
-    } else if (self.gameId == I_GUESS_YOU_SAID) {
-        // 只要游戏中都提示
-        if (self.sudFSMMGDecorator.isPlaying && self.operatorView.voiceBtnState == VoiceBtnStateTypeWaitOpen) {
-            [self showVoiceTip];
-        }
+    if (self.operatorView.voiceBtnState != VoiceBtnStateTypeWaitOpen) {
+        return;
+    }
+    if (self.gameId == DIGITAL_BOMB || self.gameId == YOU_DRAW_AND_I_GUESS || self.gameId == I_GUESS_YOU_SAID) {
+        [self showVoiceTip];
     }
 }
 

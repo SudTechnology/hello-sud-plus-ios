@@ -264,7 +264,7 @@
  * @param dataJson 回调JSON
  */
 - (void)onPlayerStateChange:(nullable id<ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
-    NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:onPlayerStateChange:%@ --dataJson:%@", state, dataJson]);
+    NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:userId:%@, onPlayerStateChange:%@ --dataJson:%@", userId, state, dataJson]);
     
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues: dataJson];
@@ -330,7 +330,9 @@
         }
     } else if ([state isEqualToString:MG_DG_PAINTING]) {
         MGDGPaintingModel *m = [MGDGPaintingModel mj_objectWithKeyValues: dataJson];
-        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (m.isPainting) {
+            [self setValueGamePlayerStateMap:userId state:state model:m];
+        }
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGPainting:userId:model:)]) {
             [self.listener onPlayerMGDGPainting:handle userId:userId model:m];
             return;
@@ -505,11 +507,25 @@
     return false;
 }
 
+/// 获取用户是否在在绘画
+- (BOOL)isPlayerPaining:(NSString *)userId {
+
+    MGPlayerStateMapModel *mapModel = [self.gamePlayerStateMap objectForKey:userId];
+    if ([mapModel.state isEqualToString:MG_DG_PAINTING] && [mapModel.model isKindOfClass:MGDGPaintingModel.class]) {
+        MGDGPaintingModel *m = mapModel.model;
+        return m.isPainting;
+    }
+    return false;
+
+}
+
 /// 获取用户是否在队长
 - (BOOL)isPlayerIsCaptain:(NSString *)userId {
     BOOL isCaptain = [self.captainUserId isEqualToString:userId];
     return isCaptain;
 }
+
+
 
 - (NSMutableArray<NSString *> *)onlineUserIdList {
     if (_onlineUserIdList == nil) {

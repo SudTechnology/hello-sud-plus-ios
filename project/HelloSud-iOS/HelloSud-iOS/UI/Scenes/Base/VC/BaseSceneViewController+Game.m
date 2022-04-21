@@ -159,6 +159,12 @@
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
+/// 你画我猜: 作画中状态  MG_DG_PAINTING
+- (void)onPlayerMGDGPainting:(nonnull id<ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGDGPaintingModel *)model {
+    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+}
+
 /// 游戏: 麦克风状态   MG_COMMON_GAME_SELF_MICROPHONE
 - (void)onGameMGCommonGameSelfMicrophone:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameSelfMicrophone *)model {
     [self handleGameTapVoice: model.isOn];
