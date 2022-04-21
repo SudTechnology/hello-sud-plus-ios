@@ -27,10 +27,6 @@
     
     // Override point for customization after application launch.
     [[AppService shared] prepare];
-    /// 不支持的多语言，默认英文
-    if ([SettingsService isNotSupportLanguage]) {
-        LanguageUtil.userLanguage = @"en";
-    }
     [[AppService shared] setupNetWorkHeader];
     
     [self observerNTF];

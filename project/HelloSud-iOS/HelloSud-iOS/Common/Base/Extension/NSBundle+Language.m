@@ -21,6 +21,15 @@
 
 - (NSString *)dt_localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName {
     NSString *path = [[NSBundle mainBundle] pathForResource:[NSBundle currentLanguage] ofType:@"lproj"];
+    if (path == nil) {
+        NSString *language =  @"en";
+        if (@available(iOS 10.0, *)) {
+            language = [language stringByReplacingOccurrencesOfString: [NSString stringWithFormat:@"-%@", NSLocale.currentLocale.countryCode] withString:@""];
+        } else {
+            // Fallback on earlier versions
+        }
+        path = [[NSBundle mainBundle] pathForResource:language ofType:@"lproj"];
+    }
     if ([key isEqualToString:@"dt_room_send"]) {
         int i = 0;
     }
