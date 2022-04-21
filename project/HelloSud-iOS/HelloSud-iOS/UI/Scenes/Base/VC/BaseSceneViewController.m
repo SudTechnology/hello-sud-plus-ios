@@ -318,7 +318,7 @@
 
                 if (isPlaying) {
                     [DTSheetView close];
-                    [DTAlertView showTextAlert:NSString.dt_room_flight_tile sureText:NSString.dt_room_confirm_flight cancelText:NSString.dt_room_back_game onSureCallback:^{
+                    [DTAlertView showTextAlert:NSString.dt_room_flight_tile sureText:NSString.dt_room_confirm_flight cancelText:NSString.dt_common_cancel onSureCallback:^{
                         // 下麦
                         [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 success:nil fail:nil];
 
