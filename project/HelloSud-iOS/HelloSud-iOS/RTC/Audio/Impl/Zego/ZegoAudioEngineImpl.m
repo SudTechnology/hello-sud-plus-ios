@@ -41,6 +41,10 @@
 
 
 - (void)initWithConfig:(AudioConfigModel *)model {
+    [self initWithConfig:model success:nil];
+}
+
+- (void)initWithConfig:(AudioConfigModel *)model success:(nullable dispatch_block_t)success {
     if (model == nil)
         return;
     
@@ -59,10 +63,10 @@
         [engine startSoundLevelMonitor];
         [engine enableAudioCaptureDevice:NO];
     }
-}
-
-- (void)initWithConfig:(AudioConfigModel *)model success:(nullable dispatch_block_t)success {
-    [self initWithConfig:model];
+    
+    if (success != nil) {
+        success();
+    }
 }
 
 - (void)destroy {
