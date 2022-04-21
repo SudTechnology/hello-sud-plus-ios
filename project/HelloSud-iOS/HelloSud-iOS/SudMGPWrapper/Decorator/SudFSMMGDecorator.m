@@ -294,7 +294,9 @@
         }
     } else if ([state isEqualToString:MG_COMMON_PLAYER_PLAYING]) {
         MGCommonPlayerPlayingModel *m = [MGCommonPlayerPlayingModel mj_objectWithKeyValues: dataJson];
-        self.isPlaying = m.isPlaying;
+        if ([userId isEqualToString:AppService.shared.login.loginUserInfo.userID]) {
+            self.isPlaying = m.isPlaying;
+        }
         [self setValueGamePlayerStateMap:userId state:state model:m];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerPlaying:userId:model:)]) {
             [self.listener onPlayerMGCommonPlayerPlaying:handle userId:userId model:m];
