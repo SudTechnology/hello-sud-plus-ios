@@ -50,14 +50,11 @@
         } else {
             configModel.token = self.enterModel.rtiToken;
         }
-        if ([rtcType isEqualToString:kRtcTypeRongCloud] || [rtcType isEqualToString:kRtcTypeCommEase] || [rtcType isEqualToString:kRtcTypeAgora]) {
-            [AudioEngineFactory.shared.audioEngine initWithConfig:configModel success:^{
-                [self joinRoom:audioJoinRoomModel];
-            }];
-            return;
-        }
-    
-        [AudioEngineFactory.shared.audioEngine initWithConfig:configModel];
+
+        [AudioEngineFactory.shared.audioEngine initWithConfig:configModel success:^{
+            [self joinRoom:audioJoinRoomModel];
+        }];
+        return;
     }
 
     [self joinRoom:audioJoinRoomModel];
