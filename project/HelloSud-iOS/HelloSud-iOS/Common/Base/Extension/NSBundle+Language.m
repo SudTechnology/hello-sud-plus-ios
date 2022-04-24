@@ -30,13 +30,15 @@
         }
         path = [[NSBundle mainBundle] pathForResource:language ofType:@"lproj"];
     }
-    if ([key isEqualToString:@"dt_room_send"]) {
-        int i = 0;
-    }
     if (path.length > 0) {
         NSBundle *bundle = [NSBundle bundleWithPath:path];
-        NSString *name = [bundle dt_localizedStringForKey:key value:value table:tableName];
-        return name;
+        if ([name isEqualToString:value]) {
+            // 执行系统多语言
+            [self dt_localizedStringForKey:key value:value table:tableName];
+        } else {
+            return name;
+        }
+
     }
     return [self dt_localizedStringForKey:key value:value table:tableName];
 }
