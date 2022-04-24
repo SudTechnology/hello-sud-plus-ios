@@ -32,6 +32,7 @@
     }
     if (path.length > 0) {
         NSBundle *bundle = [NSBundle bundleWithPath:path];
+        NSString *name = [bundle dt_localizedStringForKey:key value:value table:tableName];
         if ([name isEqualToString:value]) {
             // 执行系统多语言
             [self dt_localizedStringForKey:key value:value table:tableName];
