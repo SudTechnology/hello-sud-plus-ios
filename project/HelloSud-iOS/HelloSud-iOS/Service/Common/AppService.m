@@ -148,7 +148,7 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     NSString *systemType = @"iOS";
     NSString *systemVersion = DeviceUtil.getSystemVersion;
     NSString *clientTimestamp = [NSString stringWithFormat:@"%ld", (NSInteger) [NSDate date].timeIntervalSince1970];
-    NSString *rtcType = AppService.shared.rtcType;
+    NSString *rtcType = AppService.shared.rtcType ? AppService.shared.rtcType : @"";
     NSArray *arr = @[
             locale,
             clientChannel,
@@ -244,6 +244,7 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 - (void)switchRtcType:(NSString *)rtcType {
     self.rtcType = rtcType;
     [self switchAudioEngine:self.rtcType configModel:self.configModel];
+    [self setupNetWorkHeader];
 }
 
 /// 切换RTC语音SDK
