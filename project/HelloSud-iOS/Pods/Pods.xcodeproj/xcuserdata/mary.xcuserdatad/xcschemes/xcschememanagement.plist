@@ -81,103 +81,117 @@
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
-		<key>Pods-HelloSud-iOS.xcscheme</key>
+		<key>NERtcSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
-		<key>Protobuf.xcscheme</key>
+		<key>NIMSDK_LITE.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
-		<key>RCVoiceRoomLib.xcscheme</key>
+		<key>Pods-HelloSud-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
-		<key>RongCloudIM.xcscheme</key>
+		<key>Protobuf.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
-		<key>RongCloudRTC.xcscheme</key>
+		<key>RCVoiceRoomLib.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>
-		<key>SDWebImage.xcscheme</key>
+		<key>RongCloudIM.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>17</integer>
 		</dict>
-		<key>SDWebImageWebPCoder.xcscheme</key>
+		<key>RongCloudRTC.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>18</integer>
 		</dict>
-		<key>SSZipArchive.xcscheme</key>
+		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>19</integer>
 		</dict>
-		<key>SVGAPlayer.xcscheme</key>
+		<key>SDWebImageWebPCoder.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
-		<key>SVProgressHUD.xcscheme</key>
+		<key>SSZipArchive.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
-		<key>YYText.xcscheme</key>
+		<key>SVGAPlayer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>22</integer>
 		</dict>
-		<key>ZegoExpressEngine.xcscheme</key>
+		<key>SVProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>23</integer>
 		</dict>
-		<key>libwebp.xcscheme</key>
+		<key>YYText.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>24</integer>
 		</dict>
-		<key>lottie-ios.xcscheme</key>
+		<key>ZegoExpressEngine.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>25</integer>
+		</dict>
+		<key>libwebp.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>26</integer>
+		</dict>
+		<key>lottie-ios.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>27</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

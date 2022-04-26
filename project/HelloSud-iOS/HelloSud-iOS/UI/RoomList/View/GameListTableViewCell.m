@@ -15,8 +15,8 @@
 @property (nonatomic, strong) UILabel *roomNumLabel;
 @property (nonatomic, strong) UILabel *onlineLabel;
 @property (nonatomic, strong) UIButton *enterRoomBtn;
-@property (nonatomic, strong) UIView *enterNode;
-@property (nonatomic, strong) DTPaddingLabel *typeLabel;
+//@property (nonatomic, strong) UIView *enterNode;
+//@property (nonatomic, strong) DTPaddingLabel *typeLabel;
 @property (nonatomic, strong) BaseView *maskView;
 @end
 
@@ -58,7 +58,7 @@
     self.roomNumLabel.text = [NSString stringWithFormat:@"%@：%ld", NSString.dt_room_list_room_number, m.roomNumber];
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld%@", m.memberCount, NSString.dt_room_list_users];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
-    self.typeLabel.text = [AppService.shared getRTCTypeName:m.rtcType];
+//    self.typeLabel.text = [AppService.shared getRTCTypeName:m.rtcType];
     self.roomTypeLabel.text = m.sceneTag;
     
     self.roomTypeLabel.textColor = UIColor.whiteColor;
@@ -77,9 +77,10 @@
     [self.containerView addSubview:self.roomNameLabel];
     [self.containerView addSubview:self.roomNumLabel];
     [self.containerView addSubview:self.onlineLabel];
-    [self.containerView addSubview:self.enterNode];
-    [self.enterNode addSubview:self.enterRoomBtn];
-    [self.enterNode addSubview:self.typeLabel];
+//    [self.containerView addSubview:self.enterNode];
+//    [self.enterNode addSubview:self.enterRoomBtn];
+//    [self.enterNode addSubview:self.typeLabel];
+    [self.containerView addSubview:self.enterRoomBtn];
 }
 
 - (void)hsLayoutViews {
@@ -111,32 +112,35 @@
         make.centerY.mas_equalTo(self.roomNameLabel);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
-    [self.roomNumLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [self.enterNode setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+//    [self.roomNumLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+//    [self.enterNode setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.roomNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.roomNameLabel.mas_bottom).offset(12);
         make.leading.mas_equalTo(self.iconImageView.mas_trailing).offset(10);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
-        make.trailing.mas_lessThanOrEqualTo(self.enterNode.mas_leading);
+        make.trailing.mas_lessThanOrEqualTo(self.enterRoomBtn.mas_leading);
     }];
-    [self.enterNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.mas_equalTo(-16);
-        make.bottom.mas_equalTo(-12);
-        make.size.mas_greaterThanOrEqualTo(CGSizeMake(48 + 36, 24));
-    }];
+//    [self.enterNode mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.trailing.mas_equalTo(-16);
+//        make.bottom.mas_equalTo(-12);
+//        make.size.mas_greaterThanOrEqualTo(CGSizeMake(48 + 36, 24));
+//    }];
     
     [self.enterRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.typeLabel.mas_trailing);
-        make.top.bottom.mas_equalTo(self.enterNode);
+//        make.leading.equalTo(self.typeLabel.mas_trailing);
+//        make.top.bottom.mas_equalTo(self.enterNode);
+        make.bottom.mas_equalTo(-12);
+        make.trailing.mas_equalTo(-16);
         make.width.mas_equalTo(48);
-        make.trailing.mas_equalTo(0);
+        make.height.mas_equalTo(24);
+//        make.trailing.mas_equalTo(0);
     }];
-    [self.typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.mas_equalTo(1);
-        make.top.mas_equalTo(self.enterNode).offset(1);
-        make.bottom.mas_equalTo(self.enterNode).offset(-1);
-        make.width.mas_greaterThanOrEqualTo(36);
-    }];
+//    [self.typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.leading.mas_equalTo(1);
+//        make.top.mas_equalTo(self.enterNode).offset(1);
+//        make.bottom.mas_equalTo(self.enterNode).offset(-1);
+//        make.width.mas_greaterThanOrEqualTo(36);
+//    }];
 }
 
 - (UIView *)containerView {
@@ -212,25 +216,25 @@
     return _enterRoomBtn;
 }
 
-- (UIView *)enterNode {
-    if (!_enterNode) {
-        _enterNode = [[UIView alloc] init];
-        _enterNode.backgroundColor = UIColor.blackColor;
-    }
-    return _enterNode;
-}
-
-- (DTPaddingLabel *)typeLabel {
-    if (!_typeLabel) {
-        _typeLabel = DTPaddingLabel.new;
-        _typeLabel.paddingX = 5;
-        _typeLabel.text = @"";
-        _typeLabel.textColor = UIColor.blackColor;
-        _typeLabel.backgroundColor = UIColor.whiteColor;
-        _typeLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
-        _typeLabel.textAlignment = NSTextAlignmentCenter;
-    }
-    return _typeLabel;
-}
+//- (UIView *)enterNode {
+//    if (!_enterNode) {
+//        _enterNode = [[UIView alloc] init];
+//        _enterNode.backgroundColor = UIColor.blackColor;
+//    }
+//    return _enterNode;
+//}
+//
+//- (DTPaddingLabel *)typeLabel {
+//    if (!_typeLabel) {
+//        _typeLabel = DTPaddingLabel.new;
+//        _typeLabel.paddingX = 5;
+//        _typeLabel.text = @"";
+//        _typeLabel.textColor = UIColor.blackColor;
+//        _typeLabel.backgroundColor = UIColor.whiteColor;
+//        _typeLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
+//        _typeLabel.textAlignment = NSTextAlignmentCenter;
+//    }
+//    return _typeLabel;
+//}
 
 @end

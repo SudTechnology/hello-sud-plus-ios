@@ -148,6 +148,7 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     NSString *systemType = @"iOS";
     NSString *systemVersion = DeviceUtil.getSystemVersion;
     NSString *clientTimestamp = [NSString stringWithFormat:@"%ld", (NSInteger) [NSDate date].timeIntervalSince1970];
+    NSString *rtcType = AppService.shared.rtcType;
     NSArray *arr = @[
             locale,
             clientChannel,
@@ -156,7 +157,8 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
             deviceId,
             systemType,
             systemVersion,
-            clientTimestamp
+            clientTimestamp,
+            rtcType
     ];
     NSString *sudMeta = [arr componentsJoinedByString:@","];
     [HSHttpService setupHeader:@{@"Sud-Meta": sudMeta}];
