@@ -33,6 +33,8 @@ PODS:
   - Masonry (1.1.0)
   - MJExtension (3.4.1)
   - MJRefresh (3.7.5)
+  - NERtcSDK (4.6.0)
+  - NIMSDK_LITE (9.0.1)
   - Protobuf (3.19.4)
   - RCVoiceRoomLib (2.0.7.2):
     - RongCloudIM/IMLib (~> 5.1.6)
@@ -88,6 +90,8 @@ DEPENDENCIES:
   - Masonry (~> 1.1.0)
   - MJExtension (~> 3.4.1)
   - MJRefresh (= 3.7.5)
+  - NERtcSDK (~> 4.6.0)
+  - NIMSDK_LITE (= 9.0.1)
   - RCVoiceRoomLib (~> 2.0.7)
   - SDWebImage (= 5.12.2)
   - SDWebImageWebPCoder
@@ -110,6 +114,8 @@ SPEC REPOS:
     - Masonry
     - MJExtension
     - MJRefresh
+    - NERtcSDK
+    - NIMSDK_LITE
     - Protobuf
     - RCVoiceRoomLib
     - RongCloudIM
@@ -144,6 +150,8 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  NERtcSDK: a0edad2337710fbd99a2c0c76c77d175f4b906e2
+  NIMSDK_LITE: c376a3f90c1cd79d9cca39fbdeb6a718e99e244a
   Protobuf: 235750e4696ff59fb07d949a9dbbc92b3c0700fe
   RCVoiceRoomLib: 8242df93f9a2b8fc1cf28e95c8fa48a135de1e3d
   RongCloudIM: c871de12fdc601a4335e17d8df17232f56b8d089
@@ -156,6 +164,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
 
-PODFILE CHECKSUM: ef9f81716130fca1b7a29619cb76fca56e4bf38e
+PODFILE CHECKSUM: 4625b567e88462a3a83922a8e22e4685f4e3b650
 
 COCOAPODS: 1.11.2

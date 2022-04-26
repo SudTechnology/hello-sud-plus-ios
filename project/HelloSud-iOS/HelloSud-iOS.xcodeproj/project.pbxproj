@@ -169,12 +169,6 @@
 		BC210FDF9C7CAC234D035EF6 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105042E549C236540DC05 /* DeviceUtil.m */; };
 		E5C2420127EDCBAA00EA2377 /* HSThreadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2420027EDCBAA00EA2377 /* HSThreadUtils.m */; };
 		E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */; };
-		E5D4B4DA280FDFC6000E7AC4 /* NIMSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D7280FDFC6000E7AC4 /* NIMSDK.xcframework */; };
-		E5D4B4DB280FDFC6000E7AC4 /* NIMSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D7280FDFC6000E7AC4 /* NIMSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E5D4B4DC280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D8280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework */; };
-		E5D4B4DD280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D8280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E5D4B4DE280FDFC6000E7AC4 /* NERtcSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D9280FDFC6000E7AC4 /* NERtcSDK.xcframework */; };
-		E5D4B4DF280FDFC6000E7AC4 /* NERtcSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5D4B4D9280FDFC6000E7AC4 /* NERtcSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */; };
 		E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */; };
 /* End PBXBuildFile section */
@@ -187,9 +181,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				44DF038E2796ADCD006EE6AC /* SudMGP.xcframework in Embed Frameworks */,
-				E5D4B4DF280FDFC6000E7AC4 /* NERtcSDK.xcframework in Embed Frameworks */,
-				E5D4B4DB280FDFC6000E7AC4 /* NIMSDK.xcframework in Embed Frameworks */,
-				E5D4B4DD280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,9 +571,6 @@
 			files = (
 				039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */,
 				44DF038D2796ADCD006EE6AC /* SudMGP.xcframework in Frameworks */,
-				E5D4B4DC280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework in Frameworks */,
-				E5D4B4DE280FDFC6000E7AC4 /* NERtcSDK.xcframework in Frameworks */,
-				E5D4B4DA280FDFC6000E7AC4 /* NIMSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
