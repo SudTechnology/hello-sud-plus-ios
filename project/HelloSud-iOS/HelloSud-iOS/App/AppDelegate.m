@@ -82,7 +82,7 @@
 }
 
 - (void)showUpgrade:(RespVersionUpdateInfoModel *)model {
-
+    
     if (model == nil || model.packageUrl.length == 0) {
         return;
     }
@@ -103,6 +103,7 @@
             [NSUserDefaults.standardUserDefaults synchronize];
             [DTAlertView showTextAlert:NSString.dt_update_app_ver_new sureText:NSString.dt_update_now cancelText:NSString.dt_next_time_again_say onSureCallback:^{
                 [self openPath:model.packageUrl];
+                [DTAlertView close];
             } onCloseCallback:nil];
         }
         

@@ -188,6 +188,7 @@
     };
     self.naviView.closeTapBlock = ^(UIButton *sender) {
         [DTAlertView showTextAlert:NSString.dt_room_sure_leave_cur_room sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
+            [DTAlertView close];
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 如果在麦位上，则下麦
                 if (AudioRoomService.shared.micIndex >= 0) {
@@ -219,6 +220,7 @@
     };
     self.naviView.endGameBlock = ^(UIButton *sender) {
         [DTAlertView showTextAlert:NSString.dt_room_sure_end_game sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
+            [DTAlertView close];
             [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
         }          onCloseCallback:^{
         }];
@@ -319,6 +321,7 @@
                 if (isPlaying) {
                     [DTSheetView close];
                     [DTAlertView showTextAlert:NSString.dt_room_flight_tile sureText:NSString.dt_room_confirm_flight cancelText:NSString.dt_common_cancel onSureCallback:^{
+                        [DTAlertView close];
                         // 下麦
                         [AudioRoomService.shared reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 success:nil fail:nil];
 
@@ -419,6 +422,7 @@
                 } else {
                     // 提示开启权限
                     [DTAlertView showTextAlert:NSString.dt_unable_microphone_tip sureText:NSString.dt_unable_microphone_open cancelText:NSString.dt_unable_microphone_not_have onSureCallback:^{
+                        [DTAlertView close];
                         NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                         if (url && [[UIApplication sharedApplication] canOpenURL:url]) {
                             [[UIApplication sharedApplication] openURL:url];

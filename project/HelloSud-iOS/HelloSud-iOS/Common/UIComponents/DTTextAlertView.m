@@ -94,7 +94,7 @@
 
 - (void)onSureItemEvent {
     if (self.onSureItemCallBack) {
-        [DTAlertView close];
+//        [DTAlertView close];
         self.onSureItemCallBack();
     }
 }

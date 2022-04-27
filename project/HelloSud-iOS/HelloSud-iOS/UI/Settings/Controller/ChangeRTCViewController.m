@@ -102,6 +102,7 @@
         if (model.isSlect == NO) {
             WeakSelf
             [DTAlertView showTextAlert:[NSString stringWithFormat:@"%@【%@】？", NSString.dt_settings_confirm_switch_rtc, model.title] sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
+                [DTAlertView close];
                 for (ChangeRTCModel *m in self.arrData) {
                     m.isSlect = NO;
                 }

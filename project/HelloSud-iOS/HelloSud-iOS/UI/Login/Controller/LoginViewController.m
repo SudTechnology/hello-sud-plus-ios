@@ -116,6 +116,7 @@
     [attrTitle appendAttributedString:attrStr_4];
     
     [DTAlertView showAttrTextAlert:attrTitle sureText:NSString.dt_common_agree cancelText:NSString.dt_common_not_agree rootView:self.view onSureCallback:^{
+        [DTAlertView close];
         [AppService.shared saveAgreement];
     } onCloseCallback:^{
         SweetPromptView *promptView = [[SweetPromptView alloc] init];
