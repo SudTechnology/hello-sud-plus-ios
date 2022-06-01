@@ -243,6 +243,7 @@
 		BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
 		BC210E3D2377EDF7498C2DF1 /* PKGameEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */; };
+		BC210F74B7434253E2FEF91D /* GuessRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */; };
 		BC210FF63EC24685CBC7FBAC /* SuspendRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */; };
 		E51A737828091CD00097007C /* ZIMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51A737728091CD00097007C /* ZIMManager.m */; };
 		E551BF31281500900046D417 /* IMRoomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E551BF30281500900046D417 /* IMRoomManager.m */; };
@@ -689,11 +690,13 @@
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC2100A5544CF78174597F1D /* PKGameEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGameEmptyView.h; sourceTree = "<group>"; };
 		BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentView.m; sourceTree = "<group>"; };
+		BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessRoomViewController.h; sourceTree = "<group>"; };
 		BC210203F8E7C5CAEFF19056 /* PKService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKService.h; sourceTree = "<group>"; };
 		BC21032C5553ABB17B21F173 /* QSGameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameListViewController.m; sourceTree = "<group>"; };
 		BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGameEmptyView.m; sourceTree = "<group>"; };
 		BC210337708736FFF222750A /* BaseSceneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSceneService.m; sourceTree = "<group>"; };
 		BC2103C043B5568FCBA68B06 /* BaseSceneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSceneService.h; sourceTree = "<group>"; };
+		BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessRoomViewController.m; sourceTree = "<group>"; };
 		BC2105087E91B70E68E3D640 /* PKStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStateView.h; sourceTree = "<group>"; };
 		BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdPKModel.m; sourceTree = "<group>"; };
 		BC2105467EA8857361624481 /* RoomMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomMoreView.m; sourceTree = "<group>"; };
@@ -1026,6 +1029,7 @@
 				44D9F39F280FB06A000B14B5 /* Custom */,
 				4455AD7B27EAC658001516EE /* Crossroom */,
 				4455AD7E27EAC658001516EE /* OneOne */,
+				BC210F37AC7DEE92904D5429 /* Guess */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -1882,6 +1886,15 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		BC210F37AC7DEE92904D5429 /* Guess */ = {
+			isa = PBXGroup;
+			children = (
+				BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */,
+				BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */,
+			);
+			path = Guess;
+			sourceTree = "<group>";
+		};
 		BC210F7EBEE7DBCC883BD9B2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2353,6 +2366,7 @@
 				BC210E3D2377EDF7498C2DF1 /* PKGameEmptyView.m in Sources */,
 				BC21032F94AB142E1BAA2114 /* PKRoomListCell.m in Sources */,
 				BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */,
+				BC210F74B7434253E2FEF91D /* GuessRoomViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
