@@ -1,0 +1,78 @@
+//
+//  PrefixHeader.pch
+//  HelloSud-iOS
+//
+// Copyright © Sud.Tech (https://sud.tech)
+//
+//  Created by kaniel on 2022/1/19.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+// basic components
+/// pod libs
+#import <CocoaLumberjack/CocoaLumberjack.h>
+// 使用新版本
+#ifdef DEBUG
+    static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#else
+    static const DDLogLevel ddLogLevel = DDLogLevelWarning;
+#endif
+#import <Masonry/Masonry.h>
+#import <YYText/YYText.h>
+#import <MJExtension/MJExtension.h>
+#import <MJRefresh/MJRefresh.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <SDWebImage/SDWebImage.h>
+#import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
+#import <BDAlphaPlayer/BDAlphaPlayer.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <JXCategoryView/JXCategoryView.h>
+
+#import "CommonHeader.h"
+#import "DTSheetView.h"
+#import "DTAlertView.h"
+
+#import "DTUIView+Extension.h"
+#import "DTNSArray+Masonry.h"
+#import "NSString+DTNSString.h"
+
+
+//@import CocoaLumberjack;
+@import MarqueeLabel;
+#import "Lottie.h"
+
+/// Comon
+#import "AppUtil.h"
+#import "SudMGPWrapperHeader.h"
+#import "ServiceConstHeader.h"
+#import "HSHttpService.h"
+#import "BaseSceneService.h"
+
+/// Page
+#import "CommonRoomModelHeader.h"
+/// Example Audio
+#import "../UI/Scenes/Base/SceneConstantHeader.h"
+#import "CommonAudioModelHeader.h"
+
+#import "SceneFactory.h"
+/// manager
+#import "RespUserInfoModel.h"
+#import "RespModel.h"
+
+
+#import "AppService.h"
+#import "UserService.h"
+#import "GiftService.h"
+#import "AudioRoomService.h"
+#import "GameService.h"
+#import "LocalizedService.h"
+
+#import "LoginService.h"
+#import "SettingsService.h"
+
+
+#endif /* PrefixHeader_pch */
