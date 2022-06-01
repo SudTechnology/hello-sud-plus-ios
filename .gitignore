@@ -33,6 +33,14 @@ project/HelloSud-iOS/DerivedData/
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
-project/HelloSud-iOS/Pods/
+project/Pods/
 
 
+workspace.xml
+project/.idea/.gitignore
+project/.idea/project.iml
+project/.idea/vcs.xml
+project/.idea/.name
+project/.idea/misc.xml
+project/.idea/project2.iml
+project/.idea/xcode.xml

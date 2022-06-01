@@ -1,0 +1,295 @@
+/*
+  Localizable.strings
+  HelloSud-iOS
+
+  Created by Mary on 2022/3/14.
+  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
+*/
+
+/// Login
+"dt_login_welcome" = "Anda dialu-alukan untuk mencubanya\nHelloSud";
+"dt_login_welcome_helloSud" = "Anda dialu-alukan untuk menggunakan HelloSud";
+"dt_login_we_take_information" = "Kami memandang serius perlindungan maklumat peribadi anda. Untuk maklumat lanjut tentang pengumpulan dan penggunaan maklumat peribadi, anda boleh klik";
+"dt_login_user_agreement" = "Perjanjian Pengguna";
+"dt_login_and" = "Dan";
+"dt_login_privacy_policy" = "Dasar Privasi";
+"dt_login_click_agree_agreement" = "Untuk memahami kandungannya. Klik Setuju dan nyatakan bahawa anda telah membaca dan bersetuju dengan semua perjanjian di atas";
+"dt_login_welcome_to_the" = "Cubalah sekarang";
+"dt_login_your_nickname" = "Nama anda";
+"dt_login_experience_immediately" = "Cubalah sekarang";
+"dt_login_warm_prompt" = "Petua";
+"dt_login_warm_prompt_des" = "HelloSud hanya akan menggunakan maklumat anda untuk menyediakan perkhidmatan dan meningkatkan pengalaman, kami akan melakukan yang terbaik untuk melindungi keselamatan maklumat anda, sila gunakannya selepas persetujuan.";
+"dt_login_agree_continue" = "Setuju dan terus guna";
+"dt_login_quit_application" = "Keluar dari aplikasi";
+
+/// Settings
+"dt_settings_total" = "Jumlah";
+"dt_settings_size_occupied" = "Saiz yang diduduki";
+"dt_settings_version_info" = "Maklumat versi";
+"dt_settings_switch_rtc" = "Tukar pembekal perkhidmatan RTC";
+"dt_settings_zego" = "Zego";
+"dt_settings_agora" = "Agora";
+"dt_settings_rong_cloud" = "RongCloud";
+"dt_settings_net_ease" = "CommsEase";
+"dt_settings_volcano" = "VolcEngine";
+"dt_settings_alicloud" = "Alibaba Cloud";
+"dt_settings_tencent" = "Tencent Cloud";
+"dt_settings_switch_language" = "Tukar bahasa";
+"dt_settings_open_source" = "Perjanjian sumber terbuka";
+"dt_settings_user_agreement" = "Perjanjian pengguna";
+"dt_settings_privacy_policy" = "Dasar privasi";
+"dt_settings_contact_us" = "Untuk maklumat lanjut atau maklum balas, sila hubungi kami melalui e-mel: help@sud.tech";
+"dt_settings_work_in_progress" = "Kami sedang mengusahakannya, jadi nantikan!";
+"dt_settings_confirm_switch_rtc" = "Adakah anda pasti mahu menukar pembekal perkhidmatan RTC kepada ";
+
+/// RoomList
+"dt_room_list_room_number" = "ID bilik";
+"dt_room_list_users" = "orang";
+"dt_room_list_no_room_available" = "Tiada bilik untuk memulakan penstriman pada masa ini /nKunjungi laman utama untuk mencipta satu~";
+
+/// Home
+"dt_home_user_id" = "ID Pengguna";
+"dt_home_enter_room_num" = "Masukkan nombor bilik untuk akses pantas";
+"dt_home_enter" = "Masuk";
+"dt_home_join" = "Sertai";
+"dt_home_coming_soon" = "Sila nantikan";
+"dt_home_create_room" = "Bina bilik";
+"dt_home_in_game" = "Pada masa ini dalam permainan";
+
+/// common
+"dt_common_select_all" = "semua";
+"dt_common_agree" = "Setuju";
+"dt_common_not_agree" = "Tidak setuju";
+"dt_common_sure" = "Takrifkan";
+"dt_common_cancel" = "Batal";
+"dt_common_forward" = "Pergi";
+"dt_common_close" = "Tutup";
+"dt_common_back" = "Kembali";
+
+/// Main
+"dt_tab_home" = "Laman utama";
+"dt_tab_room" = "Bilik";
+"dt_tab_setting" = "Tetapan";
+
+/// Scenes
+"dt_send" = "Kongsikan kepada";
+"dt_down_mic" = "Selesai bercakap";
+"dt_select_person" = "Sila pilih penerima hadiah";
+"dt_select_gift" = "Sila pilih hadiah";
+"dt_send_gift" = "Kongsikan";
+"dt_room_owner" = "Ketua bilik";
+"dt_mic_index" = "Jadual %ld";
+"dt_mic_name" = "Jadual";
+"dt_ticket_choose_item_reward" = "Menangi %@x Ganjaran";
+"dt_ticket_choose_item_join" = "Sertai sekarang";
+"dt_ticket_choose_play_user_num" = "%d orang sedang bermain";
+"dt_ticket_choose_level_item_title_one" = "Medan pertama";
+"dt_ticket_choose_level_item_title_two" = "Medan pertengahan";
+"dt_ticket_choose_level_item_title_thr" = "Medan lanjutan";
+"dt_ticket_choose_pop_des_detail" = "Menyertai permainan memerlukan %@ syiling emas. Adakah anda mahu teruskan?";
+"dt_ticket_choose_pop_not_alert" = "Tiada lagi peringatan";
+"dt_ticket_choose_pop_sure_enter" = "Sahkan untuk menyertai";
+"dt_ticket_reward_str" = "Tahniah kepada%@ kerana memenangi %@ Syiling dalam Pertengahan!";
+"dt_room_input_text" = "Jom sembang~";
+"dt_room_up_mic" = "Jadual di atas";
+"dt_room_choose_game" = "Pilih permainan";
+"dt_room_send" = "Hantar";
+"dt_room_please_input" = "Menghantar mesej...";
+"dt_room_end_game" = "Tamatkan permainan";
+"dt_room_num_id" = "Nombor bilik %@";
+"dt_room_not_ready" = "Tidak bersedia";
+"dt_room_is_ready" = "Sudah bersedia";
+"dt_room_click_mic" = "Klik pada jadual di atas";
+"dt_room_close_game" = "Matikan permainan";
+"dt_room_confirm_flight" = "Sudah tentu lari";
+"dt_room_flight_tile" = "Anda sedang dalam permainan, adakah anda mahu melarikan diri?";
+"dt_room_sure_end_game" = "Adakah anda pasti untuk menamatkan permainan?";
+"dt_room_unable_switch_game" = "Anda mesti menamatkan permainan ini sebelum anda boleh menukar permainan";
+"dt_room_sure_leave_cur_room" = "Adakah anda pasti untuk meninggalkan bilik semasa?";
+
+"dt_next_time_again_say" = "Lain kali";
+"dt_update_now" = "Kemas kini dengan segera";
+"dt_update_app_ver_low" = "Versi aplikasi anda lebih rendah, sila tingkatkan versi dahulu";
+"dt_update_app_ver_new" = "Terdapat versi baharu yang tersedia, adakah anda ingin mengemas kininya?";
+
+"MJRefreshHeaderIdleText" = "Pull down to refresh";
+"MJRefreshHeaderPullingText" = "Release to refresh";
+"MJRefreshHeaderRefreshingText" = "Loading...";
+
+"MJRefreshAutoFooterIdleText" = "Tap or pull up to load more";
+"MJRefreshAutoFooterRefreshingText" = "Loading...";
+"MJRefreshAutoFooterNoMoreDataText" = "No more data";
+
+"MJRefreshBackFooterIdleText" = "Pull up to load more";
+"MJRefreshBackFooterPullingText" = "Release to load more";
+"MJRefreshBackFooterRefreshingText" = "Loading...";
+"MJRefreshBackFooterNoMoreDataText" = "No more data";
+
+"MJRefreshHeaderLastTimeText" = "Last update: ";
+"MJRefreshHeaderDateTodayText" = "Today";
+"MJRefreshHeaderNoneLastDateText" = "No record";
+
+"dt_asr_tip" = "Permainan ini menyokong pengecaman suara, sila buka mikrofon untuk menunjukkan daya tarikan anda~";
+"dt_asr_open_mic_tip" = "Buka mikrofon untuk menjawab, lebih pantas daripada menaip!";
+"dt_asr_open_mic_num_tip" = "Cuba hidupkan mikrofon untuk melaporkan nombor. Inilah satu kebajikan untuk pemalas!";
+"dt_enter_room_tip" = "Masuk bilik";
+"dt_game_person_count" = "Bilangan pemain";
+
+
+"dt_custom_game_system" = "Game system";
+"dt_custom_game_cpu" = "The CPU power dissipation of the game";
+"dt_custom_game_cpu_normal" = "0: normal";
+"dt_custom_game_cpu_low" = "1：low";
+"dt_custom_in_game_sound" = "Indicates whether the game plays sound";
+"dt_custom_game_play_sound" = "0：the game plays sound";
+"dt_custom_app_play_sound" = "1：the game does not play sound";
+"dt_custom_in_game_volume" = "The volume level of the game";
+"dt_custom_hide_settlement" = "Indicates whether to hide the post-game screen";
+"dt_custom_hide_ping" = "Indicates whether to hide the ping value";
+"dt_custom_hide_version" = "Indicates whether to hide the version information";
+"dt_custom_hide_rank" = "Indicates whether to hide the ranking tier";
+"dt_custom_hide_lobby_sound" = "Indicates whether to hide the Settings/Sound Effect button in the lobby";
+"dt_custom_hide_lobby_help" = "Indicates whether to hide the Help button in the lobby";
+"dt_custom_hide_lobby_slot" = "Indicates whether to hide the game seat area in the lobby";
+"dt_custom_hide_lobby_captain" = "Indicates whether to hide the captain logo on the game seat in the lobby";
+"dt_custom_hide_lobby_kick" = "Indicates whether to hide the Kick button on the game seat in the lobby";
+"dt_custom_hide_lobby_des" = "Indicates whether to hide the description of game rules in the lobby";
+"dt_custom_hide_lobby_settings" = "Indicates whether to hide the game settings checkbox in the lobby";
+"dt_custom_hide_btn_join_game" = "Indicates whether to hide the Join button";
+"dt_custom_hide_btn_exit_game" = "Indicates whether to hide the Exit button";
+"dt_custom_hide_btn_prepare" = "Indicates whether to hide the Ready button";
+"dt_custom_hide_btn_cancel_prepare" = "Indicates whether to hide the Cancel Ready button";
+"dt_custom_hide_btn_start_game" = "Indicates whether to hide the Start button";
+"dt_custom_hide_btn_share" = "Indicates whether to hide the Share button";
+"dt_custom_hide_btn_sound" = "Indicates whether to hide the Settings/Sound Effect button in the game";
+"dt_custom_hide_btn_help_scene" = "Indicates whether to hide the Help button in the game";
+"dt_custom_hide_game_bg" = "Indicates whether to hide the background images, including the lobby and the game scene";
+"dt_custom_click_join_game" = "Indicates whether players can join a team by tapping the game seat";
+"dt_custom_handle_join_game" = "Indicates whether players can join a game by tapping the Join button";
+"dt_custom_handle_exit_game" = "Indicates whether players can exit the game by tapping the Exit button";
+"dt_custom_handle_prepare" = "Indicates whether players can get ready by tapping the Ready button";
+"dt_custom_handle_cancel_prepare" = "Indicates whether players can cancel their ready state by tapping the Cancel Ready button";
+"dt_custom_handle_start_game" = "Indicates whether players can enter the game by tapping the Start button";
+"dt_custom_handle_share" = "Indicates whether players can share their team by tapping the Share button";
+"dt_custom_btn_close" = "Indicates whether players can close the post-game screen and go back to the lobby by tapping the Close button on the post-game screen";
+"dt_custom_btn_one_more_round" = "Indicates whether players can play again by tapping the Play Again button on the post-game screen";
+"dt_custom_prevent_change_seat" = "Indicates whether to disable the seat change feature";
+"dt_custom_false_change_seat" = "false: player seats can be changed";
+"dt_custom_true_not_change_seat" = "true: player seats cannot be changed";
+"dt_custom_false_ready_state" = "false: the post-game screen is closed and players go back to the lobby with a Ready state";
+"dt_custom_false_close_settlement" = "false: the game notifies the app of the user tap";
+"dt_custom_true_game_notifies" = "true: the game notifies the app of the user tap";
+"dt_custom_false_game_processing" = "false: based on the game processing logic";
+"dt_custom_true_only_notifies" = "true: the game notifies the app of the user tap";
+"dt_custom_false_show" = "false: show";
+"dt_custom_true_hide" = "true: hide";
+
+/// 1.3.0
+"dt_room_unable_speak_present" = "Tidak boleh bercakap sekarang";
+"dt_room_there_no_mic" = "Tiada ruang";
+"dt_settings_more_set" = "Lebih banyak tetapan";
+"dt_ticket_choose_level_title" = "Pilih tahap sesi tiket yang dibuat";
+"dt_ticket_choose_pop_title" = "Memenangi tempat pertama";
+"dt_room_transfer_leader" = "Memindahkan ketua pasukan";
+"dt_room_kick_game" = "Menendang keluar daripada permainan";
+"dt_network_error_p_check" = "Ralat rangkaian, sila semak sambungan rangkaian";
+"dt_room_switched_language" = "Bahasa telah ditukar";
+"dt_room_my_order_list" = "Saya ingin memesan";
+"dt_room_select_mic_users" = "Pilih pengguna MaiShang";
+"dt_room_designate_mc_anchor" = "Tetapkan hos MaiShang untuk bermain dengan anda";
+"dt_room_place_order_play" = "Mulakan";
+"dt_room_seleted_people" = "Telah memilih %ld orang ";
+"dt_home_all_scenes" = "Semua adegan";
+"dt_room_hang_room" = "Bilik digantung";
+"dt_room_exit_room" = "Keluar dari bilik";
+"dt_room_bureau_person" = "200/permainan/orang";
+"dt_room_need_end_game_can_switch" = "Anda mesti menamatkan permainan ini  sebelum menutupkan permainan";
+"dt_room_hope_play_is_join" = "%@ \n mahu bermain [%@] dengan anda\n Adakah anda mahu menyertai";
+"dt_room_reject" = "Menolak";
+"dt_room_place_order" = "Pesan";
+"dt_room_custom_ready" = "Sedia";
+"dt_room_custom_cancel_ready" = "Tidak Sedia";
+"dt_room_custom_quit_game" = "Keluar";
+"dt_room_custom_start_game" = "Mulakan";
+"dt_room_custom_escape" = "Melarikan diri:";
+"dt_room_custom_dissolve_game" = "Bubarkan permainan（Kapten）";
+"dt_room_game_config" = "Tetapan permainan";
+"dt_room_exit_room_reload" = "Sila muat semula permainan selepas berundur daipada bilik";
+"dt_room_game_stage" = "Fasa permainan";
+"dt_room_api_interface" = "API";
+"dt_room_before_join_game" = "Sebelum menyertai permainan";
+"dt_room_c_join_game" = "①Menyertai permainan";
+"dt_room_c_preparation_stage" = "Fasa penyediaan";
+"dt_room_c_preparation" = "②Sediakan";
+"dt_room_cancel_preparation" = "Tidak Sedia";
+"dt_room_c_start_game" = "③Mulakan";
+"dt_room_quit_game" = "Keluar dari permainan";
+"dt_room_custom_in_game" = "Dalam permainan";
+"dt_room_base_escape" = "Melarikan diri";
+"dt_room_dissolve_game" = "Bubarkan permainan";
+"dt_room_suspend_game" = "Menangguhkan permainan";
+"dt_room_enter_game" = "Memasuki permainan";
+"dt_room_select_anchor" = "Sila pilih hos";
+"dt_room_select_game" = "Sila pilih permainan";
+"dt_room_to_be_started" = "Tidak bermula";
+"dt_room_closed" = "Selesai";
+"dt_room_empty_seat" = "";
+"dt_room_pk_cross_room" = "Mulakan permainan merentas bilik";
+"dt_room_start_pk" = "Mulakan permainan";
+"dt_room_pk_settings" = "Tetapan";
+"dt_room_pk_select_one_game" = "Sila pilih permainan untuk pertandingan";
+"dt_room_air_room_list" = "Senarai bilik atas talian";
+"dt_room_pk_rules" = "Syarat-syarat pertandingan";
+"dt_room_order_placed" = "Telah memesan";
+"dt_room_pk_duration_set" = "Tetapan tempoh permainan";
+"dt_room_close_cross_room" = "Matikan permainan merentas bilik";
+"dt_room_minutes" = "%@ minit";
+"dt_room_confirm_modification" = "Mengesahkan pengubahan";
+"dt_room_pk_no_room_available" = "Tiada bilik lain yang tersedia buat masa ini";
+"dt_room_pk_invitation_accept" = "Bilik %@ menghantar jemputan untuk bermain permainan merentas bilik. Adakah anda menerimanya?";
+"dt_room_acceptance" = "Pasti";
+"dt_room_pk_red_team" = "Kumpulan merah";
+"dt_room_pk_blue_team" = "Kumpulan biru";
+"dt_room_pk_enter_other_room_tip" = "Adakah anda pergi ke bilik orang lain?";
+"dt_room_pk_remove_gaming_toast_tip" = "Permainan masih berlangsung dan tidak boleh disingkirkan buat masa ini";
+"dt_room_pk_remove_toast_tip" = "Pertandingan masih berlangsung dan tidak boleh disingkirkan buat masa ini";
+"dt_room_pk_remove_other_tip" = "Adakah anda mahu menyingkirkan lawan ini?";
+"dt_room_game_system" = "Sistem permainan";
+"dt_room_pk_rules_content" = "1. Dibahagikan kepada kumpulan merah dan Kumpulan biru, pengguna dalam bilik yang sama adalah satu kumpulan. \n\n 2. Dalam tempoh pertandingan, mata ranking yang diperolehi dengan bermain permainan boleh menambah mata kepada kumpulan sendiri. \n\n 3. Mata ranking untuk setiap buah permainan adalah seperti berikut:\n Tempat pertama+100 mata \n Tempat kedua+50 mata \n Tempat ketiga+20 mata\n\n 4. Demi keadilan, kedua-dua pihak boleh berunding untuk menghantar jumlah pemain yang sama untuk menyertai permainan~";
+"dt_room_pk_select_game" = "Pilih permainan";
+"dt_room_pk_wait_onwer_select" = "Menunggu pemilik bilik untuk memilih permainan";
+"dt_room_invitation_failed" = "Gagal menghantar jemputan (%ld)";
+"dt_room_invitation_send" = "Jemputan dihantar, sila tunggu";
+"dt_room_opposite_room_id_empty" = "ID bilik pihak lain kosong";
+"dt_room_another_pk" = "Sekali lagi";
+"dt_room_close_pk" = "Matikan permainan merentas bilik";
+"dt_room_close_pk_advance_tip" = "Adakah anda pasti untuk mematikan permainan merentas bilik? \n Penutupan akan diselesaikan lebih awal dan permainan akan ditamatkan";
+"dt_room_refuse_invitation_find" = "%@ menolak jemputan anda, mencari orang lain untuk bermain ";
+"dt_room_round_game_over" = "Permainan ini telah tamat,\n Adakah anda mahu membuat pesanan lain?";
+"dt_room_unable_display_msg" = "Mesej tidak boleh dipaparkan, sila mengemaskini kepada versi terkini, cmd:%ld";
+"dt_room_cross_id_not_empty" = "ID merentas bilik tidak boleh dikosongkan";
+"dt_room_load_failed" = "Gagal memuatkan permainan, sila semak parameter-parameter";
+"dt_follow_system" = "Ikut sistem";
+"dt_unable_microphone_tip" = "Tidak dapat mengakses mikrofon, sila pergi ke ”Tetapan-Privasi” untuk mendayakan akses mikrofon";
+"dt_unable_microphone_not_have" = "Tiada mikrofon buat masa ini";
+"dt_unable_microphone_open" = "Hidupkan";
+"dt_login_has_expired" = "Log masuk telah tamat tempoh, sila masukkan semula";
+"dt_room_back_game" = "Kembali ke permainan";
+"dt_room_input_not_null" = "Input tidak boleh dikosongkan";
+"dt_ticket_choose_pop_des_title" = "Boleh mendapat %@ ganjaran emas yang tertinggi";
+"dt_up_mic" = "Masukkan mikrofon %ld ";
+
+"dt_win_first_tip" = "Tahniah kepada %@ kerana memenangi tempat pertama dengan %@ penambahan %@ mata!";
+"dt_win_second_tip" = "%@ tempat ke-2 dengan %@ penambahan %@ mata!";
+"dt_win_third_tip" = "%@ mendapatkan tempat ke-3 dengan  %@ penambahan %@ mata!";
+"dt_room_pk_score_fmt" = "%@恭喜%@夺得第%@为%@加%@分! ";
+"dt_user_receive_invite_msg" = "%@ bersetuju untuk bermain [%@] dengan anda.";
+"dt_room_pk_show_invite_tip" = "Sila jemput lawan anda dahulu";
+"dt_room_join_status" = "Sertai";
+"dt_room_pk_closed_msg" = "Permainan tamat awal kerana pihak lawan menarik diri secara paksa daripada permainan";
+"dt_room_pk_status_ing" = "Dalam permainan";
+"dt_room_pk_waitting" = "Padanan";
+"dt_room_pk_remove_sure" = "ya";
+"dt_room_pk_invite" = "Jemput";
+"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_room_mic_game_ing" = "Dalam permainan";

@@ -1,0 +1,296 @@
+/*
+  Localizable.strings
+  HelloSud-iOS
+
+  Created by Mary on 2022/3/14.
+  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
+*/
+
+/// Login
+"dt_login_welcome" = "ยินดีต้อนรับ \nHelloSud";
+"dt_login_welcome_helloSud" = "ยินดีต้อนรับสู่ HelloSud";
+"dt_login_we_take_information" = "เราให้ความสำคัญกับการปกป้องข้อมูลส่วนบุคคลของคุณเป็นอย่างมาก สำหรับข้อมูลเพิ่มเติมเกี่ยวกับการรวบรวมและการใช้ข้อมูลส่วนบุคคล คุณสามารถคลิก";
+"dt_login_user_agreement" = "ข้อตกลงผู้ใช้";
+"dt_login_and" = "และ";
+"dt_login_privacy_policy" = "“นโยบายความเป็นส่วนตัว”";
+"dt_login_click_agree_agreement" = "เพื่อทำความเข้าใจ คลิก“ตกลง” และถือว่าคุณได้อ่านและยอมรับข้อตกลงข้างต้นทั้งหมดแล้ว";
+"dt_login_welcome_to_the" = "ลดลองใช้งาน";
+"dt_login_your_nickname" = "ชื่อเล่นของคุณ";
+"dt_login_experience_immediately" = "ลดลองใช้งาน";
+"dt_login_warm_prompt" = "เคล็ดลับ";
+"dt_login_warm_prompt_des" = "HelloSud จะใช้ข้อมูลของคุณเพื่อให้บริการและปรับปรุงประสบการณ์เท่านั้น เราจะพยายามอย่างเต็มที่เพื่อให้ข้อมูลของคุณปลอดภัย จะใช้บริการได้หลังจากคลิกตกลง";
+"dt_login_agree_continue" = "ตกลงและใช้งานต่อ";
+"dt_login_quit_application" = "ออกจากระบบ";
+
+/// Settings
+"dt_settings_total" = "รวม";
+"dt_settings_size_occupied" = "ขนาดที่ใช้งาน";
+"dt_settings_version_info" = "ข้อมูลเวอร์ชัน";
+"dt_settings_switch_rtc" = "เปลี่ยนผู้ให้บริการ RTC";
+"dt_settings_zego" = "Zego";
+"dt_settings_agora" = "Agora";
+"dt_settings_rong_cloud" = "RongCloud";
+"dt_settings_net_ease" = "CommsEase";
+"dt_settings_volcano" = "VolcEngine";
+"dt_settings_alicloud" = "Alibaba Cloud";
+"dt_settings_tencent" = "Tencent Cloud";
+"dt_settings_switch_language" = "เปลี่ยนภาษา";
+"dt_settings_open_source" = "ข้อตกลงการบุกเบิก";
+"dt_settings_user_agreement" = "ข้อตกลงผู้ใช้";
+"dt_settings_privacy_policy" = "นโยบายความเป็นส่วนตัว";
+"dt_settings_contact_us" = "สำหรับข้อมูลเพิ่มเติมหรือข้อเสนอแนะ โปรดติดต่อเราทางอีเมล: help@sud.tech";
+"dt_settings_work_in_progress" = "กำลังจัดทำ โปรดคอยติดตาม";
+"dt_settings_confirm_switch_rtc" = "ตกลงเปลี่ยนผู้ให้บริการ RTCเป็น หรือไม่";
+
+/// RoomList
+"dt_room_list_room_number" = "รหัสห้อง";
+"dt_room_list_users" = "คน";
+"dt_room_list_no_room_available" = "ยังไม่มีห้องถ่ายทอดสดในขณะนี้ \nไปสร้างที่ี่หน้าแรกเลย~";
+
+/// Home
+"dt_home_user_id" = "ID ผู้ใช้ ";
+"dt_home_enter_room_num" = "ใส่หมายเลขห้องเพื่อเข้าห้องอย่างรวดเร็ว";
+"dt_home_enter" = "เข้าสู่";
+"dt_home_join" = "ร่วมเกม";
+"dt_home_coming_soon" = "โปรดติดตาม";
+"dt_home_create_room" = "สร้างห้อง";
+"dt_home_in_game" = "เล่นเกมอยู่";
+
+/// common
+"dt_common_select_all" = "ทั้งหมด";
+"dt_common_agree" = "ตกลง";
+"dt_common_not_agree" = "ปฏิเสธ";
+"dt_common_sure" = "ตกลง";
+"dt_common_cancel" = "ยกเลิก";
+"dt_common_forward" = "ไป";
+"dt_common_close" = "ปิด";
+"dt_common_back" = "กลับไปก่อนหน้า";
+
+/// Main
+"dt_tab_home" = "หน้าแรก";
+"dt_tab_room" = "ห้อง";
+"dt_tab_setting" = "ตั้งค่า";
+
+/// Scenes
+"dt_send" = "ส่งให้";
+"dt_down_mic" = "ปิดไมค์";
+"dt_select_person" = "โปรดเลือกผู้รับของขวัญ";
+"dt_select_gift" = "โปรดเลือกของขวัญ";
+"dt_send_gift" = "แถม";
+"dt_room_owner" = "เจ้าของห้อง";
+"dt_mic_index" = "%ld ไมค์";
+"dt_mic_name" = "ไมค์";
+"dt_ticket_choose_item_reward" = "รับรางวัล %@ เท่า";
+"dt_ticket_choose_item_join" = "เข้าร่วมทันที";
+"dt_ticket_choose_play_user_num" = "%d คนกำลังเล่น";
+"dt_ticket_choose_level_item_title_one" = "รอบระดับเริ่มต้น";
+"dt_ticket_choose_level_item_title_two" = "รอบระดับกลาง";
+"dt_ticket_choose_level_item_title_thr" = "รอบระดับสูง";
+"dt_ticket_choose_pop_des_detail" = "ร่วมเกมต้องใช้ %@ เหรียญทอง เล่นต่อหรือไม่";
+"dt_ticket_choose_pop_not_alert" = "ไม่ค้องเตือนอีก";
+"dt_ticket_choose_pop_sure_enter" = "ยืนยันการเข้าร่วม";
+"dt_ticket_reward_str" = "ยินดีด้วย%@ ได้รับ %@ เหรียญในรอบระดับกลาง";
+"dt_room_input_text" = "มาคุยกัน~";
+"dt_room_up_mic" = "เชื่อมต่อไมค์";
+"dt_room_choose_game" = "เลือกเกม";
+"dt_room_send" = "ส่ง";
+"dt_room_please_input" = "ส่งข้อความ …";
+"dt_room_end_game" = "จบเกม";
+"dt_room_num_id" = "หมายเลขห้อง %@";
+"dt_room_not_ready" = "ยังไม่พร้อม";
+"dt_room_is_ready" = "พร้อมแล้ว";
+"dt_room_click_mic" = "คลิดเพื่อเชื่อมต่อไมค์";
+"dt_room_close_game" = "ปิดเกม";
+"dt_room_confirm_flight" = "ยืนยันการหลบหนี";
+"dt_room_flight_tile" = "กำลังเล่นเกมอยู่ จะหลบหนีหรือไม่";
+"dt_room_sure_end_game" = "ตกลงจบเกมหรือไม่";
+"dt_room_unable_switch_game" = "ต้องจบเกมก่อน จึงจะปิดเกมได้";
+"dt_room_sure_leave_cur_room" = "ตกลงจะออกจากห้องนี้ไหม";
+
+"dt_next_time_again_say" = "อัปเดตคราวหน้า";
+"dt_update_now" = "อัปเดตทันที";
+"dt_update_app_ver_low" = "เวอร์ชัน App ของคุณต่ำกว่า โปรดอัปเกรดเวอร์ชันก่อน";
+"dt_update_app_ver_new" = "มีเวอร์ชั่นใหม่แล้ว จะอัปเดตหรือไม่";
+
+"MJRefreshHeaderIdleText" = "Pull down to refresh";
+"MJRefreshHeaderPullingText" = "Release to refresh";
+"MJRefreshHeaderRefreshingText" = "Loading...";
+
+"MJRefreshAutoFooterIdleText" = "Tap or pull up to load more";
+"MJRefreshAutoFooterRefreshingText" = "Loading...";
+"MJRefreshAutoFooterNoMoreDataText" = "No more data";
+
+"MJRefreshBackFooterIdleText" = "Pull up to load more";
+"MJRefreshBackFooterPullingText" = "Release to load more";
+"MJRefreshBackFooterRefreshingText" = "Loading...";
+"MJRefreshBackFooterNoMoreDataText" = "No more data";
+
+"MJRefreshHeaderLastTimeText" = "Last update: ";
+"MJRefreshHeaderDateTodayText" = "Today";
+"MJRefreshHeaderNoneLastDateText" = "No record";
+
+"dt_asr_tip" = "เกมนี้รองรับการจดจำเสียง โปรดเปิดไมค์เพื่อแสดงเสน่ห์ของคุณ";
+"dt_asr_open_mic_tip" = "เปิดไมค์รับสาย จะเร็วกว่าการพิมพ์";
+"dt_asr_open_mic_num_tip" = "ลองเปิดไมค์แจ้งตัวเลข รางวัลสำหรับคนขี้เกียจ";
+"dt_enter_room_tip" = "เข้าห้องแล้ว";
+"dt_game_person_count" = "จำนวนผู้เล่นเกม";
+
+
+"dt_custom_game_system" = "Game system";
+"dt_custom_game_cpu" = "The CPU power dissipation of the game";
+"dt_custom_game_cpu_normal" = "0: normal";
+"dt_custom_game_cpu_low" = "1：low";
+"dt_custom_in_game_sound" = "Indicates whether the game plays sound";
+"dt_custom_game_play_sound" = "0：the game plays sound";
+"dt_custom_app_play_sound" = "1：the game does not play sound";
+"dt_custom_in_game_volume" = "The volume level of the game";
+"dt_custom_hide_settlement" = "Indicates whether to hide the post-game screen";
+"dt_custom_hide_ping" = "Indicates whether to hide the ping value";
+"dt_custom_hide_version" = "Indicates whether to hide the version information";
+"dt_custom_hide_rank" = "Indicates whether to hide the ranking tier";
+"dt_custom_hide_lobby_sound" = "Indicates whether to hide the Settings/Sound Effect button in the lobby";
+"dt_custom_hide_lobby_help" = "Indicates whether to hide the Help button in the lobby";
+"dt_custom_hide_lobby_slot" = "Indicates whether to hide the game seat area in the lobby";
+"dt_custom_hide_lobby_captain" = "Indicates whether to hide the captain logo on the game seat in the lobby";
+"dt_custom_hide_lobby_kick" = "Indicates whether to hide the Kick button on the game seat in the lobby";
+"dt_custom_hide_lobby_des" = "Indicates whether to hide the description of game rules in the lobby";
+"dt_custom_hide_lobby_settings" = "Indicates whether to hide the game settings checkbox in the lobby";
+"dt_custom_hide_btn_join_game" = "Indicates whether to hide the Join button";
+"dt_custom_hide_btn_exit_game" = "Indicates whether to hide the Exit button";
+"dt_custom_hide_btn_prepare" = "Indicates whether to hide the Ready button";
+"dt_custom_hide_btn_cancel_prepare" = "Indicates whether to hide the Cancel Ready button";
+"dt_custom_hide_btn_start_game" = "Indicates whether to hide the Start button";
+"dt_custom_hide_btn_share" = "Indicates whether to hide the Share button";
+"dt_custom_hide_btn_sound" = "Indicates whether to hide the Settings/Sound Effect button in the game";
+"dt_custom_hide_btn_help_scene" = "Indicates whether to hide the Help button in the game";
+"dt_custom_hide_game_bg" = "Indicates whether to hide the background images, including the lobby and the game scene";
+"dt_custom_click_join_game" = "Indicates whether players can join a team by tapping the game seat";
+"dt_custom_handle_join_game" = "Indicates whether players can join a game by tapping the Join button";
+"dt_custom_handle_exit_game" = "Indicates whether players can exit the game by tapping the Exit button";
+"dt_custom_handle_prepare" = "Indicates whether players can get ready by tapping the Ready button";
+"dt_custom_handle_cancel_prepare" = "Indicates whether players can cancel their ready state by tapping the Cancel Ready button";
+"dt_custom_handle_start_game" = "Indicates whether players can enter the game by tapping the Start button";
+"dt_custom_handle_share" = "Indicates whether players can share their team by tapping the Share button";
+"dt_custom_btn_close" = "Indicates whether players can close the post-game screen and go back to the lobby by tapping the Close button on the post-game screen";
+"dt_custom_btn_one_more_round" = "Indicates whether players can play again by tapping the Play Again button on the post-game screen";
+"dt_custom_prevent_change_seat" = "Indicates whether to disable the seat change feature";
+"dt_custom_false_change_seat" = "false: player seats can be changed";
+"dt_custom_true_not_change_seat" = "true: player seats cannot be changed";
+"dt_custom_false_ready_state" = "false: the post-game screen is closed and players go back to the lobby with a Ready state";
+"dt_custom_false_close_settlement" = "false: the game notifies the app of the user tap";
+"dt_custom_true_game_notifies" = "true: the game notifies the app of the user tap";
+"dt_custom_false_game_processing" = "false: based on the game processing logic";
+"dt_custom_true_only_notifies" = "true: the game notifies the app of the user tap";
+"dt_custom_false_show" = "false: show";
+"dt_custom_true_hide" = "true: hide";
+
+/// 1.3.0
+"dt_room_unable_speak_present" = "ไม่สามารถใช้เสียง่ได้ในขณะนี้";
+"dt_room_there_no_mic" = "ไม่มีที่ว่างแล้ว";
+"dt_settings_more_set" = "ตั้งค่าเพิ่มเติม";
+"dt_ticket_choose_pop_title" = "ได้รับอันดับหนึ่ง";
+"dt_room_transfer_leader" = "โอนตำแหน่งหัวหน้าทีม";
+"dt_room_kick_game" = "ไล่ออกจากเกม";
+"dt_network_error_p_check" = "อินเทอร์เน็ตผิดพลาด โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต";
+"dt_room_switched_language" = "เปลี่ยนภาษาแล้ว";
+"dt_room_my_order_list" = "ฉันต้องการออเดอร์";
+"dt_room_select_mic_users" = "เลือกผู้ใช้ที่ใช้ไมค์";
+"dt_room_designate_mc_anchor" = "กำหนดโฮสต์ที่ใช้ไมค์เพื่อเล่นกับคุณ";
+"dt_room_place_order_play" = "ริเริ่ม";
+"dt_room_seleted_people" = "ได้เลือก %ld คน";
+"dt_home_all_scenes" = "ทุกฉาก";
+"dt_room_hang_room" = "ระงับห้อง";
+"dt_room_exit_room" = "ออกจากห้อง";
+"dt_room_bureau_person" = "200/รอบ/คน";
+"dt_room_need_end_game_can_switch" = "ต้องจบเกมก่อน จึงจะปิดเกมได้";
+"dt_room_hope_play_is_join" = "%@ \n หวังว่าจะเล่น [%@] กับคุณ\n คุณต้องการที่จะเข้าร่วมหรือไม่";
+"dt_room_reject" = "ปฏิเสธ";
+"dt_room_place_order" = "ไปออเดอร์";
+"dt_room_custom_ready" = "เตรียม";
+"dt_room_custom_cancel_ready" = "ยกเลิกเตรียม";
+"dt_room_custom_quit_game" = "ออกเกม";
+"dt_room_custom_start_game" = "เริ่มเกม";
+"dt_room_custom_escape" = "วิ่งหนี";
+"dt_room_custom_dissolve_game" = "ยุบเกม (หัวหน้าทีม):";
+"dt_room_game_config" = "กำหนดค่าเกม";
+"dt_room_exit_room_reload" = "หลังแก้ไขกำหนดค่าแล้ว โปรดออกจากห้องและโหลดเกมใหม่อีกครั้ง";
+"dt_room_game_stage" = "ขั้นตอนของเกม";
+"dt_room_api_interface" = "API";
+"dt_room_before_join_game" = "ก่อนเข้าร่วมเกม";
+"dt_room_c_join_game" = "① เข้าร่วมเกม";
+"dt_room_c_preparation_stage" = "ขั้นตอนการเตรียมการ";
+"dt_room_c_preparation" = "② เตรียมตัว";
+"dt_room_cancel_preparation" = "ยกเลิกเตรียม";
+"dt_room_c_start_game" = "③เริ่มเกม";
+"dt_room_quit_game" = "ออกจากเกม";
+"dt_room_custom_in_game" = "เล่นเกมอยู่";
+
+"dt_room_base_escape" = "วิ่งหนี";
+"dt_room_dissolve_game" = "ยุบเกม";
+"dt_room_suspend_game" = "ระงับเกม";
+"dt_room_enter_game" = "เข้าร่วมเกม";
+"dt_room_select_anchor" = "โปรดเลือกโฮสต์";
+"dt_room_select_game" = "โปรดเลือกเกม";
+"dt_room_to_be_started" = "รอเริ่ม";
+"dt_room_closed" = "เกิน";
+"dt_room_empty_seat" = "";
+"dt_room_pk_cross_room" = "เปิดการเล่นแบบข้ามห้อง";
+"dt_room_start_pk" = "เริ่มการแข่งขัน";
+"dt_room_pk_settings" = "ตั้งค่า";
+"dt_room_pk_select_one_game" = "โปรดเลือกเกมที่จะแข่งขัน";
+"dt_room_air_room_list" = "รายการห้องออนแอร์";
+"dt_room_pk_rules" = "กติกาการแข่งขัน";
+"dt_room_order_placed" = "สั่งซื้อแล้ว";
+"dt_room_pk_duration_set" = "ตั้งค่าระยะเวลาการแข่งขัน";
+"dt_room_close_cross_room" = "ปิดการเล่นแบบข้ามห้อง";
+"dt_room_minutes" = "%@ นาที";
+"dt_room_confirm_modification" = "ยืนยันการแก้ไข";
+"dt_room_pk_no_room_available" = "ขณะนี้ไม่มีห้องอื่นที่เข้ากันได้";
+"dt_room_pk_invitation_accept" = "ห้องของ %@ ส่งคำเชิญให้เล่นเกมข้ามห้อง คุณยอมรับไหม";
+"dt_room_acceptance" = "ตกลง";
+"dt_room_pk_red_team" = "ทีมสีแดง";
+"dt_room_pk_blue_team" = "ทีมสีน้ำเงิน";
+"dt_room_pk_enter_other_room_tip" = "จะไปที่ห้องของอีกฝ่ายใช่หรือไม่";
+"dt_room_pk_remove_toast_tip" = "การแข่งขันยังไม่จบและไม่สามารถลบได้ในขณะนี้";
+"dt_room_pk_remove_gaming_toast_tip" = "เกมยังไม่จบและไม่สามารถลบได้ในขณะนี้";
+"dt_room_pk_remove_other_tip" = "จะลบคู่ต่อสู้นี้ใช่หรือไม่";
+"dt_room_game_system" = "ระบบเกม";
+"dt_room_pk_rules_content" = "1. แบ่งออกเป็นทีมสีแดงและสีน้ำเงิน ผู้ใช้ที่อยู่ในห้องเดียวกันเป็นทีมเดียวกัน \n\n2. ในช่วงเวลาการแข่งขัน คะแนนอันดับที่ได้รับจากการเล่นเกมสามารถเพิ่มคะแนนให้กับทีมได้ \n\n3.คะแนนสำหรับอันดับในแต่ละรอบของเกมมีดังนี้ \n อันดับที่หนึ่ง +100 คะแนน \n อันดับที่สอง +500 คะแนน \n อันดับที่สาม +20 คะแนน  \n\n4. เพื่อความเป็นธรรม ทั้งสองทีมสามารถเจรจาจำนวนผู้เล่นให้เท่ากัน เพื่อเข้าร่วมในเกมได้~";
+"dt_room_pk_select_game" = "เลือกเกม";
+"dt_room_pk_wait_onwer_select" = "รอให้เจ้าของห้องเลือกเกม";
+"dt_room_invitation_failed" = "การส่งคำเชิญล้มเหลว";
+"dt_room_invitation_send" = "ส่งคำเชิญแล้ว กรุณารอสักครู่";
+"dt_room_opposite_room_id_empty" = "ID ห้องของอีกฝ่ายว่างเปล่า";
+"dt_room_another_pk" = "เล่นอีกครั้ง";
+"dt_room_close_pk" = "ปิดการเล่นแบบข้ามห้อง";
+"dt_room_close_pk_advance_tip" = "ตกลงจะปิดการเล่นแบบข้ามห้อง n การปิดจะทำให้เกมจบก่อนเวลา และเกมจะสิ้นสุดลง";
+"dt_room_refuse_invitation_find" = "%@ ปฏิเสธคำเชิญของคุณ หาคนอื่นเล่นด้วย";
+"dt_room_round_game_over" = "เกมรอบนี้จบแล้ว \n จะเล่นอีกครั้งหรือไม่";
+"dt_room_unable_display_msg" = "ไม่สามารถแสดงข้อความนี้ได้ โปรดอัปเกรดเป็นเวอร์ชันล่าสุด cmd:%ld";
+"dt_room_cross_id_not_empty" = "ID ห้องของอีกฝ่ายต้องไม่เว้นว่าง";
+"dt_room_load_failed" = "ไม่สามารถโหลดเกมได้ โปรดตรวจสอบพารามิเตอร์ก่อน";
+"dt_follow_system" = "ระบบปฏิบัติตาม";
+"dt_unable_microphone_tip" = "ไม่สามารถเข้าถึงไมค์ได้ โปรดไปที่ ”ตั้งค่า-ความเป็นส่วนตัว” เพื่อเปิดใช้งานการเข้าถึงไมค์";
+"dt_unable_microphone_not_have" = "ไม่ใช้ตอนนี้";
+"dt_unable_microphone_open" = "ไปเปิด";
+"dt_login_has_expired" = "ล็อคอินหมดอายุ โปรดเข้าสู่ระบบอีกครั้ง";
+"dt_room_back_game" = "กลับไปเกม";
+"dt_room_input_not_null" = "เนื้อหาต้องไม่ว่างเปล่า";
+"dt_ticket_choose_pop_des_title" = "สูงสุดจะได้รับเหรียญทองได้มากถึง %@ เหรียญ";
+"dt_ticket_choose_level_title" = "โปรดเลือกระดับตั๋วที่สร้างขึ้น";
+"dt_up_mic" = "เชื่อมต่อไมค์ %ld";
+
+"dt_win_first_tip" = "ยินดีกับ %@ ที่ได้ชนะอันดับที่หนึ่ง บวก %@ คะแนนให้กับ %@";
+"dt_win_second_tip" = " %@ ที่ได้ชนะอันดับที่สอง บวก %@ คะแนนให้กับ %@";
+"dt_win_third_tip" = " %@ ที่ได้ชนะอันดับที่สาม บวก %@ คะแนนให้กับ %@";
+"dt_room_pk_score_fmt" = "%@恭喜%@夺得第%@为%@加%@分! ";
+"dt_user_receive_invite_msg" = "%@ ยอมรับที่จะเล่น [%@] กับคุณ";
+"dt_room_pk_show_invite_tip" = "โปรดเชิญคู่ต่อสู้ก่อน";
+"dt_room_join_status" = "ร่วมเกม";
+"dt_room_pk_closed_msg" = "เกมจบเร็วเพราะฝ่ายตรงข้ามบังคับถอนตัวออกจากเกม";
+"dt_room_pk_status_ing" = "ในเกม";
+"dt_room_pk_waitting" = "จับคู่";
+"dt_room_pk_remove_sure" = "ใช่";
+"dt_room_pk_invite" = "เชิญ";
+"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_room_mic_game_ing" = "กำลังเล่นเกม";

@@ -1,0 +1,91 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+inhibit_all_warnings!
+
+target 'HelloSud-iOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  # 富文本
+  pod 'YYText', '~> 1.0.7'
+  # 自动布局
+  pod 'Masonry', '~> 1.1.0'
+  # json序列化
+  pod 'MJExtension', '~> 3.4.1'
+  # 下拉刷新
+  pod 'MJRefresh', '3.7.5'
+  # Http网络请求库
+  pod 'AFNetworking', '~> 4.0.1'
+  # Toast
+  pod 'SVProgressHUD', '~> 2.2.5'
+  # 异常追踪
+  pod 'Bugly', '2.5.90'
+  # 图片加载
+  pod 'SDWebImage', '5.12.2'
+  pod 'SDWebImageWebPCoder'
+  # SVGA动画库
+  pod 'SVGAPlayer', :git =>'https://github.com/svga/SVGAPlayer-iOS.git', :tag => '2.5.6'
+  # lottie动画库
+  pod 'lottie-ios', '~> 2.5.3'
+  # mp4格式动画库
+  pod 'BDAlphaPlayer', '~> 1.2.0'
+  # 键盘管理
+  pod 'IQKeyboardManager', '~> 6.5.9'
+  # 导航分类
+  pod 'JXCategoryView', '~> 1.5.9'
+  # 跑马灯
+  pod 'MarqueeLabel'
+  # 日志
+  pod 'CocoaLumberjack'
+  # SudMGP包装类
+  pod 'SudMGPWrapper', :path => './'
+  # RTC厂商引入
+  # zego语音SDK
+  pod 'ZegoExpressEngine/Audio', '~> 2.17.0'
+  # zego IM SDK
+  pod 'ZIM', '2.1.1'
+  # agora语音SDK
+  pod 'AgoraAudio_iOS', '3.6.1.1'
+  # agora云信令SDK
+  pod 'AgoraRtm_iOS', '1.4.9'
+  # rongcloud音频SDK
+  pod 'RCVoiceRoomLib', '~> 2.0.7'
+  # netease 语音SDK
+  pod 'NERtcSDK', '~> 4.6.0'
+  # netease IM SDK
+  pod 'NIMSDK_LITE', '9.0.1'
+  # volc火山引擎SDK
+  pod 'VolcEngineRTC', '3.37.101',:source => 'https://github.com/volcengine/volcengine-specs.git'
+  # tx腾讯云SDK
+  pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
+end
+
+# QuickStart
+target 'QuickStart' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # 富文本
+  pod 'YYText', '~> 1.0.7'
+  # 自动布局
+  pod 'Masonry', '~> 1.1.0'
+  # json序列化
+  pod 'MJExtension', '~> 3.4.1'
+  # 下拉刷新
+  pod 'MJRefresh', '3.7.5'
+  # Http网络请求库
+  pod 'AFNetworking', '~> 4.0.1'
+  # Toast
+  pod 'SVProgressHUD', '~> 2.2.5'
+  # 图片加载
+  pod 'SDWebImage', '5.12.2'
+  # 键盘管理
+  pod 'IQKeyboardManager', '~> 6.5.9'
+  # 跑马灯
+  pod 'MarqueeLabel'
+  # 日志
+  pod 'CocoaLumberjack'
+  # SudMGPSDK包装类
+  pod 'SudMGPWrapper', :path => './'
+end
+

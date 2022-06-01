@@ -1,0 +1,205 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - AgoraAudio_iOS (3.6.1.1)
+  - AgoraRtm_iOS (1.4.9)
+  - BDAlphaPlayer (1.2.2)
+  - Bugly (2.5.90)
+  - CocoaLumberjack (3.7.4):
+    - CocoaLumberjack/Core (= 3.7.4)
+  - CocoaLumberjack/Core (3.7.4)
+  - IQKeyboardManager (6.5.9)
+  - JXCategoryView (1.5.9)
+  - libwebp (1.2.1):
+    - libwebp/demux (= 1.2.1)
+    - libwebp/mux (= 1.2.1)
+    - libwebp/webp (= 1.2.1)
+  - libwebp/demux (1.2.1):
+    - libwebp/webp
+  - libwebp/mux (1.2.1):
+    - libwebp/demux
+  - libwebp/webp (1.2.1)
+  - lottie-ios (2.5.3)
+  - MarqueeLabel (4.3.0)
+  - Masonry (1.1.0)
+  - MJExtension (3.4.1)
+  - MJRefresh (3.7.5)
+  - NERtcSDK (4.6.0)
+  - NIMSDK_LITE (9.0.1)
+  - Protobuf (3.20.0)
+  - RCVoiceRoomLib (2.0.7.2):
+    - RongCloudIM/IMLib (~> 5.1.6)
+    - RongCloudRTC/RongRTCLib (~> 5.1.13)
+  - RongCloudIM/ChatRoom (5.1.8):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/CustomerService (5.1.8):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/Discussion (5.1.8):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/IMLib (5.1.8):
+    - RongCloudIM/ChatRoom
+    - RongCloudIM/CustomerService
+    - RongCloudIM/Discussion
+    - RongCloudIM/IMLibCore
+    - RongCloudIM/Location
+    - RongCloudIM/PublicService
+  - RongCloudIM/IMLibCore (5.1.8)
+  - RongCloudIM/Location (5.1.8):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/PublicService (5.1.8):
+    - RongCloudIM/IMLibCore
+  - RongCloudRTC/RongRTCLib (5.1.17):
+    - RongCloudIM/IMLibCore (>= 5.1.3)
+  - SDWebImage (5.12.2):
+    - SDWebImage/Core (= 5.12.2)
+  - SDWebImage/Core (5.12.2)
+  - SDWebImageWebPCoder (0.8.4):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.10)
+  - SSZipArchive (2.4.3)
+  - SudMGPWrapper (0.0.1):
+    - SudMGPWrapper/SudMGPWrapper (= 0.0.1)
+  - SudMGPWrapper/SudMGPWrapper (0.0.1):
+    - MJExtension (~> 3.4.1)
+  - SVGAPlayer (2.5.6):
+    - SVGAPlayer/Core (= 2.5.6)
+    - SVGAPlayer/ProtoFiles (= 2.5.6)
+  - SVGAPlayer/Core (2.5.6):
+    - SSZipArchive (>= 1.8.1)
+    - SVGAPlayer/ProtoFiles
+  - SVGAPlayer/ProtoFiles (2.5.6):
+    - Protobuf (~> 3.4)
+  - SVProgressHUD (2.2.5)
+  - TXLiteAVSDK_TRTC (9.9.11217):
+    - TXLiteAVSDK_TRTC/TRTC (= 9.9.11217)
+  - TXLiteAVSDK_TRTC/TRTC (9.9.11217)
+  - VolcEngineRTC (3.37.101):
+    - VolcEngineRTC/Core (= 3.37.101)
+  - VolcEngineRTC/Core (3.37.101)
+  - YYText (1.0.7)
+  - ZegoExpressEngine/Audio (2.17.1.1)
+  - ZIM (2.1.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 4.0.1)
+  - AgoraAudio_iOS (= 3.6.1.1)
+  - AgoraRtm_iOS (= 1.4.9)
+  - BDAlphaPlayer (~> 1.2.0)
+  - Bugly (= 2.5.90)
+  - CocoaLumberjack
+  - IQKeyboardManager (~> 6.5.9)
+  - JXCategoryView (~> 1.5.9)
+  - lottie-ios (~> 2.5.3)
+  - MarqueeLabel
+  - Masonry (~> 1.1.0)
+  - MJExtension (~> 3.4.1)
+  - MJRefresh (= 3.7.5)
+  - NERtcSDK (~> 4.6.0)
+  - NIMSDK_LITE (= 9.0.1)
+  - RCVoiceRoomLib (~> 2.0.7)
+  - SDWebImage (= 5.12.2)
+  - SDWebImageWebPCoder
+  - SudMGPWrapper (from `./`)
+  - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
+  - SVProgressHUD (~> 2.2.5)
+  - TXLiteAVSDK_TRTC (from `https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec`)
+  - VolcEngineRTC (= 3.37.101)
+  - YYText (~> 1.0.7)
+  - ZegoExpressEngine/Audio (~> 2.17.0)
+  - ZIM (= 2.1.1)
+
+SPEC REPOS:
+  https://github.com/volcengine/volcengine-specs.git:
+    - VolcEngineRTC
+  trunk:
+    - AFNetworking
+    - AgoraAudio_iOS
+    - AgoraRtm_iOS
+    - BDAlphaPlayer
+    - Bugly
+    - CocoaLumberjack
+    - IQKeyboardManager
+    - JXCategoryView
+    - libwebp
+    - lottie-ios
+    - MarqueeLabel
+    - Masonry
+    - MJExtension
+    - MJRefresh
+    - NERtcSDK
+    - NIMSDK_LITE
+    - Protobuf
+    - RCVoiceRoomLib
+    - RongCloudIM
+    - RongCloudRTC
+    - SDWebImage
+    - SDWebImageWebPCoder
+    - SSZipArchive
+    - SVProgressHUD
+    - YYText
+    - ZegoExpressEngine
+    - ZIM
+
+EXTERNAL SOURCES:
+  SudMGPWrapper:
+    :path: "./"
+  SVGAPlayer:
+    :git: https://github.com/svga/SVGAPlayer-iOS.git
+    :tag: 2.5.6
+  TXLiteAVSDK_TRTC:
+    :podspec: https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec
+
+CHECKOUT OPTIONS:
+  SVGAPlayer:
+    :git: https://github.com/svga/SVGAPlayer-iOS.git
+    :tag: 2.5.6
+
+SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  AgoraAudio_iOS: d64f3fcd15576a8bb9b715997978ec427008f287
+  AgoraRtm_iOS: b4bb9a431ce36f9b44cda423e66b2f96945ca2ab
+  BDAlphaPlayer: 3b31756760ea37b9710bfb36a18b431ad05f6da7
+  Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
+  IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
+  JXCategoryView: 2ef9ecfd3735158d009ce02d1f29811aa822da65
+  libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
+  lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
+  MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  NERtcSDK: a0edad2337710fbd99a2c0c76c77d175f4b906e2
+  NIMSDK_LITE: c376a3f90c1cd79d9cca39fbdeb6a718e99e244a
+  Protobuf: 66e2f3b26a35e4cc379831f4ced538274ee4b923
+  RCVoiceRoomLib: 8242df93f9a2b8fc1cf28e95c8fa48a135de1e3d
+  RongCloudIM: c871de12fdc601a4335e17d8df17232f56b8d089
+  RongCloudRTC: 6171037c157b9c8ce8f4c2868b72b197a84eea13
+  SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
+  SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
+  SudMGPWrapper: 97bcd0001370efb3c43126788617296afdfff39d
+  SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  TXLiteAVSDK_TRTC: 3c0721f34b3140b5d1e6ee183865f8c1383d2987
+  VolcEngineRTC: 6db475579381dd86105092ef7cc8100eb8db3345
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
+  ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
+  ZIM: 6a4f294825ac93f16c5101d3e97d211c2d17fa33
+
+PODFILE CHECKSUM: 9a1ac431192d75294238c5fd91ae284d5882ccbe
+
+COCOAPODS: 1.11.2
