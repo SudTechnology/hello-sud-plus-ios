@@ -144,8 +144,8 @@
 "dt_custom_game_cpu_normal" = "0：CPU正常功耗";
 "dt_custom_game_cpu_low" = "1：CPU低功耗";
 "dt_custom_in_game_sound" = "游戏中声音";
-"dt_custom_game_play_sound" = "0：游戏播放声音";
-"dt_custom_app_play_sound" = "1：app层播放声音,游戏中不播放任何声音";
+"dt_custom_game_play_sound" = "0：游戏内置";
+"dt_custom_app_play_sound" = "1：APP调度";
 "dt_custom_in_game_volume" = "游戏中音量";
 "dt_custom_hide_settlement" = "是否隐藏结算界面";
 "dt_custom_hide_ping" = "是否隐藏ping值";

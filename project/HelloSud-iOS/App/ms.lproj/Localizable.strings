@@ -141,7 +141,7 @@
 "dt_custom_game_cpu_normal" = "0: normal";
 "dt_custom_game_cpu_low" = "1：low";
 "dt_custom_in_game_sound" = "Indicates whether the game plays sound";
-"dt_custom_game_play_sound" = "0：the game plays sound";
+"dt_custom_game_play_sound" = "0：game plays sound";
 "dt_custom_app_play_sound" = "1：the game does not play sound";
 "dt_custom_in_game_volume" = "The volume level of the game";
 "dt_custom_hide_settlement" = "Indicates whether to hide the post-game screen";
