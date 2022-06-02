@@ -20,9 +20,66 @@
 @property (nonatomic, strong) UIView *borderView;
 @property (nonatomic, strong) DTPaddingLabel *createNode;
 @property (nonatomic, strong) UIButton *customView;
+/// 更多内容
+@property (nonatomic, strong) UIButton *moreBtn;
+@property (nonatomic, strong) DTSVGAPlayerView *moreEffectView;
 @end
 
 @implementation HomeHeaderReusableView
+
+- (void)hsAddViews {
+    [self addSubview:self.contentView];
+    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.previewView];
+    [self.contentView addSubview:self.borderView];
+    [self.borderView addSubview:self.createNode];
+    [self.contentView addSubview:self.customView];
+
+}
+
+- (void)hsLayoutViews {
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(20);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+    }];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(15);
+        make.trailing.mas_equalTo(-15);
+        make.top.mas_equalTo(16);
+        make.height.mas_greaterThanOrEqualTo(0);
+        make.width.mas_greaterThanOrEqualTo(0);
+    }];
+    [self.previewView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
+        make.leading.mas_equalTo(13);
+        make.trailing.mas_equalTo(-13);
+        make.height.mas_equalTo(80);
+    }];
+    [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.previewView);
+        make.trailing.equalTo(self.previewView).offset(-12);
+        make.width.mas_greaterThanOrEqualTo(0);
+        make.height.mas_equalTo(44);
+    }];
+    [self.createNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(4, 4, 4, 4));
+        make.width.mas_greaterThanOrEqualTo(0);
+    }];
+
+    [self.customView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.mas_equalTo(-14);
+        make.centerY.mas_equalTo(self.titleLabel);
+        make.size.mas_equalTo(CGSizeMake(24, 24));
+    }];
+}
+
+- (void)hsConfigUI {
+    self.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
+    self.itemW = (kScreenWidth - 32) / 4;
+    self.itemH = 125 + 12;
+}
 
 - (void)setHeaderGameList:(NSArray<HSGameItem *> *)headerGameList {
     _headerGameList = headerGameList;
@@ -35,13 +92,36 @@
     self.titleLabel.text = sceneModel.sceneName;
     [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImageNew]];
     self.createNode.textColor = sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A");
+
+    /// 竞猜场景视图
+    if (self.sceneModel.sceneId == SceneTypeGuess) {
+        [self.contentView addSubview:self.moreEffectView];
+        [self.contentView addSubview:self.moreBtn];
+        [self.moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.mas_equalTo(-14);
+            make.centerY.mas_equalTo(self.titleLabel);
+            make.size.mas_greaterThanOrEqualTo(CGSizeMake(84, 24));
+        }];
+        [self.moreEffectView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.mas_equalTo(-14);
+            make.centerY.mas_equalTo(self.titleLabel);
+            make.size.mas_greaterThanOrEqualTo(CGSizeMake(84, 24));
+        }];
+        [self.moreEffectView play:100000000 didFinished:nil];
+    } else {
+        if (_moreBtn) {
+            [_moreBtn removeFromSuperview];
+            _moreBtn = nil;
+        }
+        if (_moreEffectView) {
+            [_moreEffectView stop];
+            [_moreEffectView removeFromSuperview];
+            _moreEffectView = nil;
+        }
+    }
 }
 
-- (void)hsConfigUI {
-    self.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-    self.itemW = (kScreenWidth - 32) / 4;
-    self.itemH = 125 + 12;
-}
+
 
 - (void)tapInputEvent:(UITapGestureRecognizer *)gesture {
     [IQKeyboardManager.sharedManager resignFirstResponder];
@@ -78,52 +158,10 @@
     }
 }
 
-- (void)hsAddViews {
-    [self addSubview:self.contentView];
-    [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.previewView];
-//    [self.contentView addSubview:self.tipLabel];
-    [self.contentView addSubview:self.borderView];
-    [self.borderView addSubview:self.createNode];
-    [self.contentView addSubview:self.customView];
+- (void)onClickMoreBtn:(UIButton *)btn {
+
 }
 
-- (void)hsLayoutViews {
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
-        make.leading.mas_equalTo(0);
-        make.trailing.mas_equalTo(0);
-        make.bottom.mas_equalTo(0);
-    }];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.mas_equalTo(15);
-        make.trailing.mas_equalTo(-15);
-        make.top.mas_equalTo(16);
-        make.height.mas_greaterThanOrEqualTo(0);
-        make.width.mas_greaterThanOrEqualTo(0);
-    }];
-    [self.previewView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
-        make.leading.mas_equalTo(13);
-        make.trailing.mas_equalTo(-13);
-        make.height.mas_equalTo(80);
-    }];
-    [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.previewView);
-        make.trailing.equalTo(self.previewView).offset(-12);
-        make.width.mas_greaterThanOrEqualTo(0);
-        make.height.mas_equalTo(44);
-    }];
-    [self.createNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(4, 4, 4, 4));
-        make.width.mas_greaterThanOrEqualTo(0);
-    }];
-    [self.customView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.mas_equalTo(-14);
-        make.centerY.mas_equalTo(self.titleLabel);
-        make.size.mas_equalTo(CGSizeMake(24, 24));
-    }];
-}
 
 - (BaseView *)contentView {
     if (!_contentView) {
@@ -199,6 +237,28 @@
         [_customView addTarget:self action:@selector(customBtnEvent:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _customView;
+}
+
+- (UIButton *)moreBtn {
+    if (!_moreBtn) {
+        _moreBtn = [[UIButton alloc] init];
+        [_moreBtn setTitle:@"更多活动" forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        _moreBtn.titleLabel.font = UIFONT_BOLD(14);
+        [_moreBtn addTarget:self action:@selector(onClickMoreBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _moreBtn;
+}
+
+- (DTSVGAPlayerView *)moreEffectView {
+    if (!_moreEffectView) {
+        _moreEffectView = [[DTSVGAPlayerView alloc] init];
+        NSString *path = [NSBundle.mainBundle pathForResource:@"scense_more" ofType:@"svga" inDirectory:@"Res"];
+        if (path) {
+            [_moreEffectView setURL:[NSURL fileURLWithPath:path]];
+        }
+    }
+    return _moreEffectView;
 }
 
 @end

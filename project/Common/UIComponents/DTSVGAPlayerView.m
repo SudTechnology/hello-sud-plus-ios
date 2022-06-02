@@ -50,6 +50,12 @@
     [self checkIfNeedToPlay];
 }
 
+/// 停止播放
+- (void)stop {
+    [self.svgaPlayer stopAnimation];
+    self.playState = HSSVGAPlayerStateTypeFinished;
+}
+
 - (void)checkIfNeedToPlay {
     if (self.isNeedToPlay && self.playItem) {
         self.svgaPlayer.videoItem = self.playItem;
