@@ -7,6 +7,7 @@
 
 #import "HomeHeaderReusableView.h"
 #import "TicketChooseLevelView.h"
+#import "GuessCategoryView.h"
 
 @interface HomeHeaderReusableView ()
 @property (nonatomic, strong) BaseView *contentView;
@@ -23,6 +24,8 @@
 /// 更多内容
 @property (nonatomic, strong) UIButton *moreBtn;
 @property (nonatomic, strong) DTSVGAPlayerView *moreEffectView;
+/// 竞猜视图
+@property (nonatomic, strong) GuessCategoryView *guessView;
 @end
 
 @implementation HomeHeaderReusableView
@@ -81,6 +84,23 @@
     self.itemH = 125 + 12;
 }
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    if (_moreBtn) {
+        [_moreBtn removeFromSuperview];
+        _moreBtn = nil;
+    }
+    if (_moreEffectView) {
+        [_moreEffectView stop];
+        [_moreEffectView removeFromSuperview];
+        _moreEffectView = nil;
+    }
+    if (_guessView) {
+        [_guessView removeFromSuperview];
+        _guessView = nil;
+    }
+}
+
 - (void)setHeaderGameList:(NSArray<HSGameItem *> *)headerGameList {
     _headerGameList = headerGameList;
 }
@@ -108,16 +128,16 @@
             make.size.mas_greaterThanOrEqualTo(CGSizeMake(84, 24));
         }];
         [self.moreEffectView play:100000000 didFinished:nil];
-    } else {
-        if (_moreBtn) {
-            [_moreBtn removeFromSuperview];
-            _moreBtn = nil;
-        }
-        if (_moreEffectView) {
-            [_moreEffectView stop];
-            [_moreEffectView removeFromSuperview];
-            _moreEffectView = nil;
-        }
+
+        [self.contentView addSubview:self.guessView];
+        [self.guessView mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.leading.trailing.equalTo(@0);
+           make.top.equalTo(self.previewView.mas_bottom).offset(10);
+           make.height.equalTo(@290);
+           make.bottom.equalTo(@(-20));
+        }];
+        self.guessView.gameList = @[[[HSGameItem alloc] init], [[HSGameItem alloc] init] ];
+        [self.guessView dtUpdateUI];
     }
 }
 
@@ -260,5 +280,13 @@
     }
     return _moreEffectView;
 }
+
+- (GuessCategoryView *)guessView {
+    if (!_guessView) {
+        _guessView = [[GuessCategoryView alloc] init];
+    }
+    return _guessView;
+}
+
 
 @end

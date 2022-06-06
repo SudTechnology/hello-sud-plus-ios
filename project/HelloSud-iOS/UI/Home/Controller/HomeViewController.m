@@ -15,6 +15,7 @@
 #import "TicketChooseViewController.h"
 #import "AllCategoryView.h"
 #import "GameConfigViewController.h"
+#import "GuessCategoryView.h"
 
 @interface HomeViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -55,11 +56,14 @@
         [self requestData];
     }
     self.homeCategoryView.selectSectionBlock = ^(NSInteger section) {
-        weakSelf.isClickSegItem = true;
-        UICollectionViewLayoutAttributes *attributes = [weakSelf.collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-        CGRect rect = attributes.frame;
-        CGFloat bottomY = weakSelf.collectionView.contentSize.height - weakSelf.collectionView.mj_h;
-        [weakSelf.collectionView setContentOffset:CGPointMake(weakSelf.collectionView.bounds.origin.x, rect.origin.y - 150 > bottomY ? bottomY : rect.origin.y - 150) animated:true];
+//
+//        TestColVC *vc = [[TestColVC alloc] init];
+//        [weakSelf.navigationController pushViewController:vc animated:YES];
+//        weakSelf.isClickSegItem = true;
+//        UICollectionViewLayoutAttributes *attributes = [weakSelf.collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+//        CGRect rect = attributes.frame;
+//        CGFloat bottomY = weakSelf.collectionView.contentSize.height - weakSelf.collectionView.mj_h;
+//        [weakSelf.collectionView setContentOffset:CGPointMake(weakSelf.collectionView.bounds.origin.x, rect.origin.y - 150 > bottomY ? bottomY : rect.origin.y - 150) animated:true];
     };
 }
 
@@ -266,7 +270,11 @@
     HSSceneModel *m = self.headerSceneList[section];
     UIFont *font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
     CGRect rect = [m.sceneName boundingRectWithSize:CGSizeMake(kScreenWidth - 62, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
-    return CGSizeMake(kScreenWidth, 140 + rect.size.height);
+    CGFloat baseH = 140;
+    if (m.sceneId == SceneTypeGuess) {
+        baseH += 290;
+    }
+    return CGSizeMake(kScreenWidth, baseH + rect.size.height);
 }
 
 // 设置Footer的尺寸
