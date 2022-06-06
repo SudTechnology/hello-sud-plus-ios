@@ -16,6 +16,7 @@
 #import "AllCategoryView.h"
 #import "GameConfigViewController.h"
 #import "GuessCategoryView.h"
+#import "MoreGuessViewController.h"
 
 @interface HomeViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -295,6 +296,10 @@
         view.headerGameList = self.dataList[indexPath.section];
         view.customBlock = ^(UIButton *sender) {
             GameConfigViewController *vc = GameConfigViewController.new;
+            [weakSelf.navigationController pushViewController:vc animated:true];
+        };
+        view.moreGuessBlock = ^(UIButton *sender) {
+            MoreGuessViewController *vc = MoreGuessViewController.new;
             [weakSelf.navigationController pushViewController:vc animated:true];
         };
         supplementaryView = view;

@@ -179,7 +179,9 @@
 }
 
 - (void)onClickMoreBtn:(UIButton *)btn {
-
+    if (self.moreGuessBlock) {
+        self.moreGuessBlock(btn);
+    }
 }
 
 
