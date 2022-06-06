@@ -233,6 +233,10 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    HSSceneModel *m = self.headerSceneList[section];
+    if (m.sceneId == SceneTypeGuess) {
+        return 0;
+    }
     NSArray *arr = self.dataList[section];
     return arr.count;
 }
@@ -288,6 +292,7 @@
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
         HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
         view.sceneModel = self.headerSceneList[indexPath.section];
+        view.headerGameList = self.dataList[indexPath.section];
         view.customBlock = ^(UIButton *sender) {
             GameConfigViewController *vc = GameConfigViewController.new;
             [weakSelf.navigationController pushViewController:vc animated:true];

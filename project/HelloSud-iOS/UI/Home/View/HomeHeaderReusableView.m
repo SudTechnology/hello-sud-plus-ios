@@ -134,9 +134,9 @@
            make.leading.trailing.equalTo(@0);
            make.top.equalTo(self.previewView.mas_bottom).offset(10);
            make.height.equalTo(@290);
-           make.bottom.equalTo(@(-20));
+           make.bottom.equalTo(@(0));
         }];
-        self.guessView.gameList = @[[[HSGameItem alloc] init], [[HSGameItem alloc] init] ];
+        self.guessView.gameList = self.headerGameList;
         [self.guessView dtUpdateUI];
     }
 }

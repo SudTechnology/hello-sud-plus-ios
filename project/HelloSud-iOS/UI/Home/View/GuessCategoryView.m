@@ -4,6 +4,7 @@
 //
 
 #import "GuessCategoryView.h"
+#import "HomeGuessCell.h"
 
 #define ITEM_WIDTH (kScreenWidth - 32 - 62)
 
@@ -48,9 +49,9 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
+    HomeGuessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeGuessCell" forIndexPath:indexPath];
     [cell dt_cornerRadius:8];
-    cell.backgroundColor = indexPath.row % 2 ? UIColor.blueColor : UIColor.orangeColor;
+    cell.model = self.gameList[indexPath.row];
     return cell;
 }
 
@@ -64,7 +65,7 @@
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     CGPoint point = *targetContentOffset;
     *targetContentOffset = scrollView.contentOffset;
-    CGFloat lineSpace = 10;// 行间距
+    CGFloat lineSpace = 13;// 行间距
     CGFloat itemW = ITEM_WIDTH;
     float pageWidth = itemW + lineSpace;
     if (velocity.x > 0) {
@@ -82,21 +83,22 @@
 
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
+        CGFloat lineSpace = 13;// 行间距
         CGFloat itemW = ITEM_WIDTH;
         CGFloat itemH = 290;
 
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         flowLayout.itemSize = CGSizeMake(itemW, itemH);
-        flowLayout.minimumLineSpacing = 10;
+        flowLayout.minimumLineSpacing = lineSpace;
         flowLayout.minimumInteritemSpacing = 0;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 13, 0, 13);
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
+        [_collectionView registerClass:[HomeGuessCell class] forCellWithReuseIdentifier:@"HomeGuessCell"];
     }
     return _collectionView;
 }
