@@ -4,7 +4,7 @@
 //
 
 #import "MoreGuessHeaderView.h"
-#import "HomeGuessCell.h"
+#import "MoreGuessHeaderCell.h"
 
 #define ITEM_WIDTH (kScreenWidth - 32 - 62)
 
@@ -33,10 +33,28 @@
         make.top.equalTo(@12);
         make.leading.equalTo(@16);
         make.trailing.equalTo(@-16);
+        make.height.equalTo(@100);
+    }];
+    [self.titleOneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bannerImageView.mas_bottom).offset(20);
+        make.leading.equalTo(@16);
+        make.trailing.equalTo(@-16);
+        make.height.greaterThanOrEqualTo(@0);
     }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.top.bottom.equalTo(@0);
+        make.top.equalTo(self.titleOneLabel.mas_bottom).offset(10);
+        make.leading.equalTo(@0);
+        make.trailing.equalTo(@0);
+        make.height.equalTo(@302);
     }];
+    [self.titleTwoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionView.mas_bottom).offset(20);
+        make.leading.equalTo(@16);
+        make.trailing.equalTo(@-16);
+        make.height.greaterThanOrEqualTo(@0);
+        make.bottom.equalTo(@-5);
+    }];
+
 }
 
 - (void)dtConfigUI {
@@ -60,7 +78,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    HomeGuessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeGuessCell" forIndexPath:indexPath];
+    MoreGuessHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MoreGuessHeaderCell" forIndexPath:indexPath];
     [cell dt_cornerRadius:8];
     cell.model = self.gameList[indexPath.row];
     return cell;
@@ -96,6 +114,8 @@
     if (!_bannerImageView) {
         _bannerImageView = [[UIImageView alloc] init];
         _bannerImageView.image = [UIImage imageNamed:@"guess_rank"];
+        _bannerImageView.contentMode = UIViewContentModeScaleAspectFill;
+        [_bannerImageView dt_cornerRadius:8];
     }
     return _bannerImageView;
 }
@@ -106,6 +126,7 @@
         _titleOneLabel.font = UIFONT_MEDIUM(22);
         _titleOneLabel.textColor = UIColor.blackColor;
         _titleOneLabel.text = @"跨房玩游戏，猜猜谁最强？";
+        _titleOneLabel.numberOfLines = 0;
     }
     return _titleOneLabel;
 }
@@ -116,6 +137,7 @@
         _titleTwoLabel.font = UIFONT_MEDIUM(22);
         _titleTwoLabel.textColor = UIColor.blackColor;
         _titleTwoLabel.text = @"限时竞猜活动";
+        _titleTwoLabel.numberOfLines = 0;
     }
     return _titleTwoLabel;
 }
@@ -124,7 +146,7 @@
     if (!_collectionView) {
         CGFloat lineSpace = 13;// 行间距
         CGFloat itemW = ITEM_WIDTH;
-        CGFloat itemH = 290;
+        CGFloat itemH = 302;
 
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -137,7 +159,7 @@
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView registerClass:[HomeGuessCell class] forCellWithReuseIdentifier:@"HomeGuessCell"];
+        [_collectionView registerClass:[MoreGuessHeaderCell class] forCellWithReuseIdentifier:@"MoreGuessHeaderCell"];
     }
     return _collectionView;
 }

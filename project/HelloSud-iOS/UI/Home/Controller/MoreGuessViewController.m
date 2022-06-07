@@ -42,6 +42,8 @@
     self.view.backgroundColor = UIColor.whiteColor;
     self.headerView.mj_h = 524;
     self.tableView.tableHeaderView = self.headerView;
+    self.headerView.backgroundColor = UIColor.clearColor;
+    self.tableView.backgroundColor = UIColor.clearColor;
 }
 
 - (void)dtUpdateUI {

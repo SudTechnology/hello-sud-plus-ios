@@ -6,58 +6,69 @@
 #import "MoreGuessHeaderCell.h"
 
 @interface MoreGuessHeaderCell ()
-@property(nonatomic, strong) UIImageView *iconImageView;
-@property(nonatomic, strong) UIView *awardBackgroundView;
-@property(nonatomic, strong) YYLabel *awardLabel;
-@property(nonatomic, strong) UILabel *nameLabel;
-@property(nonatomic, strong) YYLabel *infoLabel;
-@property(nonatomic, strong) UIButton *enterBtn;
+@property(nonatomic, strong) UIImageView *vsImageView;
+@property(nonatomic, strong) UIView *stateContentView;
+@property(nonatomic, strong) UILabel *stateLabel;
+
+@property(nonatomic, strong) UILabel *leftNameLabel;
+@property(nonatomic, strong) UILabel *leftIDLabel;
+@property(nonatomic, strong) UILabel *leftSupportLabel;
+@property(nonatomic, strong) UIImageView *leftImageView;
+@property(nonatomic, strong) UIImageView *leftSupportImageView;
+@property(nonatomic, strong) UIButton *leftSupportBtn;
+
+@property(nonatomic, strong) UILabel *rightNameLabel;
+@property(nonatomic, strong) UILabel *rightIDLabel;
+@property(nonatomic, strong) UILabel *rightSupportLabel;
+@property(nonatomic, strong) UIImageView *rightImageView;
+@property(nonatomic, strong) UIImageView *rightSupportImageView;
+@property(nonatomic, strong) UIButton *rightSupportBtn;
 @end
 
 @implementation MoreGuessHeaderCell
 
 - (void)dtAddViews {
 
-    [self.contentView addSubview:self.iconImageView];
-    [self.contentView addSubview:self.awardBackgroundView];
-    [self.awardBackgroundView addSubview:self.awardLabel];
-    [self.contentView addSubview:self.nameLabel];
-    [self.contentView addSubview:self.infoLabel];
-    [self.contentView addSubview:self.enterBtn];
+    [self.contentView addSubview:self.vsImageView];
+    [self.contentView addSubview:self.stateContentView];
+    [self.stateContentView addSubview:self.stateLabel];
+    [self.contentView addSubview:self.leftNameLabel];
+    [self.contentView addSubview:self.leftSupportLabel];
+    [self.contentView addSubview:self.leftSupportBtn];
 }
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.vsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.equalTo(@0);
         make.height.equalTo(@100);
     }];
-    [self.awardBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.stateContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(@8);
-        make.centerY.equalTo(self.iconImageView);
+        make.centerY.equalTo(self.vsImageView);
         make.height.equalTo(@40);
         make.width.greaterThanOrEqualTo(@0);
     }];
-    [self.awardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.stateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@10);
         make.trailing.equalTo(@-18);
-        make.centerY.equalTo(self.awardBackgroundView);
+        make.centerY.equalTo(self.stateContentView);
         make.width.height.greaterThanOrEqualTo(@0);
     }];
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.leftNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(@0);
-        make.top.equalTo(self.iconImageView.mas_bottom).offset(0);
+        make.top.equalTo(self.vsImageView.mas_bottom).offset(0);
         make.height.equalTo(@40);
     }];
-    [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.leftSupportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@10);
         make.trailing.equalTo(@-10);
-        make.top.equalTo(self.nameLabel.mas_bottom).offset(0);
+        make.top.equalTo(self.leftNameLabel.mas_bottom).offset(0);
     }];
-    [self.enterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.leftSupportBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@10);
         make.trailing.equalTo(@(-10));
-        make.top.equalTo(self.infoLabel.mas_bottom).offset(12);
+        make.top.equalTo(self.leftSupportLabel.mas_bottom).offset(12);
         make.height.equalTo(@44);
         make.bottom.equalTo(@-14);
     }];
@@ -76,9 +87,9 @@
         return;
     }
     if (m.homeGamePic) {
-        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.homeGamePic]];
+        [self.vsImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.homeGamePic]];
     }
-    self.nameLabel.text = m.gameName;
+    self.leftNameLabel.text = m.gameName;
     [self updateInfoLabel];
 }
 
@@ -122,80 +133,110 @@
     enterTitleValue.yy_color = HEX_COLOR(@"#000000");
     [full appendAttributedString:enterTitleValue];
 
-    _infoLabel.attributedText = full;
+    _leftSupportLabel.attributedText = full;
 }
 
-- (UIImageView *)iconImageView {
-    if (!_iconImageView) {
-        _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _iconImageView.clipsToBounds = YES;
+- (UIImageView *)vsImageView {
+    if (!_vsImageView) {
+        _vsImageView = [[UIImageView alloc] init];
+        _vsImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _vsImageView.clipsToBounds = YES;
     }
-    return _iconImageView;
+    return _vsImageView;
 }
 
-- (UIView *)awardBackgroundView {
-    if (!_awardBackgroundView) {
-        _awardBackgroundView = [[UIView alloc] init];
-        _awardBackgroundView.backgroundColor = HEX_COLOR(@"#FF711A");
-        [_awardBackgroundView dt_cornerRadius:8];
+- (UIView *)stateContentView {
+    if (!_stateContentView) {
+        _stateContentView = [[UIView alloc] init];
+        _stateContentView.backgroundColor = HEX_COLOR(@"#FF711A");
+        [_stateContentView dt_cornerRadius:8];
     }
-    return _awardBackgroundView;
+    return _stateContentView;
 }
 
-- (YYLabel *)awardLabel {
-    if (!_awardLabel) {
-        _awardLabel = [[YYLabel alloc] init];
-
-        NSMutableAttributedString *full = [[NSMutableAttributedString alloc] initWithString:@"奖励 "];
-        full.yy_font = UIFONT_MEDIUM(14);
-        full.yy_color = HEX_COLOR(@"#ffffff");
-
-        UIImage *iconImage = [UIImage imageNamed:@"guess_award_coin"];
-        NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(18, 18) alignToFont:[UIFont systemFontOfSize:16 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
-        [full appendAttributedString:attrIcon];
-
-        NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:@" 1000"];
-        attrAwardValue.yy_font = UIFONT_MEDIUM(16);
-        attrAwardValue.yy_color = HEX_COLOR(@"#FFFF22");
-        [full appendAttributedString:attrAwardValue];
-
-        _awardLabel.attributedText = full;
+- (UILabel *)stateLabel {
+    if (!_stateLabel) {
+        _stateLabel = [[UILabel alloc] init];
+        _stateLabel.textColor = HEX_COLOR(@"#6C3800");
+        _stateLabel.font = UIFONT_MEDIUM(14);
+        _stateLabel.text = @"距离开始 02:38:28:56";
     }
-    return _awardLabel;
+    return _stateLabel;
 }
 
-- (UILabel *)nameLabel {
-    if (!_nameLabel) {
-        _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"UMO";
-        _nameLabel.font = UIFONT_MEDIUM(14);
-        _nameLabel.textColor = HEX_COLOR(@"#000000");
-        _nameLabel.textAlignment = NSTextAlignmentCenter;
+- (UILabel *)leftNameLabel {
+    if (!_leftNameLabel) {
+        _leftNameLabel = [[UILabel alloc] init];
+        _leftNameLabel.text = @"趣味辩论";
+        _leftNameLabel.font = UIFONT_REGULAR(16);
+        _leftNameLabel.textColor = HEX_COLOR(@"#ffffff");
+        _leftNameLabel.textAlignment = NSTextAlignmentCenter;
     }
-    return _nameLabel;
+    return _leftNameLabel;
 }
 
-- (YYLabel *)infoLabel {
-    if (!_infoLabel) {
-        _infoLabel = [[YYLabel alloc] init];
-        _infoLabel.text = @"剩余：00000\n参与人数上限：xxx\n入场 免费";
-        _infoLabel.font = UIFONT_REGULAR(12);
-        _infoLabel.textColor = HEX_COLOR(@"#666666");
-        _infoLabel.numberOfLines = 0;
-        _infoLabel.backgroundColor = HEX_COLOR(@"#F8F8F8");
+- (YYLabel *)leftSupportLabel {
+    if (!_leftSupportLabel) {
+        _leftSupportLabel = [[UILabel alloc] init];
+        _leftSupportLabel.text = @"已支持 100";
+        _leftSupportLabel.font = UIFONT_MEDIUM(10);
+        _leftSupportLabel.textColor = HEX_COLOR(@"#FFFF22");
     }
-    return _infoLabel;
+    return _leftSupportLabel;
 }
 
-- (UIButton *)enterBtn {
-    if (!_enterBtn) {
-        _enterBtn = [[UIButton alloc] init];
-        [_enterBtn setTitle:@"立即加入" forState:UIControlStateNormal];
-        [_enterBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        _enterBtn.titleLabel.font = UIFONT_REGULAR(16);
-        _enterBtn.backgroundColor = UIColor.blackColor;
+- (UILabel *)leftIDLabel {
+    if (!_leftIDLabel) {
+        _leftIDLabel = [[UILabel alloc] init];
+        _leftIDLabel.text = @"ID 8721";
+        _leftIDLabel.font = UIFONT_MEDIUM(14);
+        _leftIDLabel.textColor = HEX_COLOR_A(@"#ffffff", 0.7);
+        _leftIDLabel.textAlignment = NSTextAlignmentCenter;
     }
-    return _enterBtn;
+    return _leftIDLabel;
+}
+
+- (UIImageView *)leftImageView {
+    if (!_leftImageView) {
+        _leftImageView = [[UIImageView alloc] init];
+        _leftImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _leftImageView.clipsToBounds = YES;
+        _leftImageView.image = [UIImage imageNamed:@"ic_avatar_7"];
+        [_leftImageView dt_cornerRadius:6];
+        _leftImageView.clipsToBounds = YES;
+        _leftImageView.layer.borderColor = HEX_COLOR(@"#ffffff").CGColor;
+        _leftImageView.layer.borderWidth = 0.75;
+    }
+    return _leftImageView;
+}
+
+- (UIImageView *)leftSupportImageView {
+    if (!_leftSupportImageView) {
+        _leftSupportImageView = [[UIImageView alloc] init];
+        _leftSupportImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _leftSupportImageView.clipsToBounds = YES;
+        _leftSupportImageView.image = [UIImage imageNamed:@"more_guess_like"];
+    }
+    return _leftSupportImageView;
+}
+
+- (UIButton *)leftSupportBtn {
+    if (!_leftSupportBtn) {
+        _leftSupportBtn = [[UIButton alloc] init];
+        [_leftSupportBtn setTitle:@"猜TA赢" forState:UIControlStateNormal];
+        [_leftSupportBtn setTitle:@"加投" forState:UIControlStateSelected];
+
+        [_leftSupportBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
+        [_leftSupportBtn setTitleColor:HEX_COLOR_A(@"#6C3800", 0.3) forState:UIControlStateDisabled];
+
+        [_leftSupportBtn setBackgroundImage:HEX_COLOR(@"#FFE373").dt_toImage forState:UIControlStateNormal];
+        [_leftSupportBtn setBackgroundImage:HEX_COLOR(@"#FBF2D0").dt_toImage forState:UIControlStateDisabled];
+
+        _leftSupportBtn.layer.borderWidth = 1;
+        _leftSupportBtn.layer.borderColor = HEX_COLOR(@"#FFBF3A").CGColor;
+
+        _leftSupportBtn.titleLabel.font = UIFONT_BOLD(16);
+    }
+    return _leftSupportBtn;
 }
 @end
