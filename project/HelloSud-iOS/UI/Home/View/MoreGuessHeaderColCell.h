@@ -5,6 +5,7 @@
 
 #import "BaseCollectionViewCell.h"
 
+
 /// 更多竞猜头部cell
-@interface MoreGuessHeaderCell : BaseCollectionViewCell
+@interface MoreGuessHeaderColCell : BaseCollectionViewCell
 @end

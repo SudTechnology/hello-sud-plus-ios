@@ -13,12 +13,12 @@
 
 @implementation BaseMsgCell
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     self.backgroundColor = UIColor.clearColor;
     [self.contentView addSubview:self.msgContentView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.msgContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView);
         make.left.mas_equalTo(16);

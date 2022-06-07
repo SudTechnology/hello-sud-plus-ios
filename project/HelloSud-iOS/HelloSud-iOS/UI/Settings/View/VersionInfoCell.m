@@ -28,15 +28,15 @@
     // Configure the view for the selected state
 }
 
-- (void)hsAddViews {
-    [super hsAddViews];
+- (void)dtAddViews {
+    [super dtAddViews];
     [self.contentView addSubview:self.topView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.subLabel];
 }
 
-- (void)hsLayoutViews {
-    [super hsLayoutViews];
+- (void)dtLayoutViews {
+    [super dtLayoutViews];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.right.mas_equalTo(-20);
@@ -58,8 +58,8 @@
     }];
 }
 
-- (void)hsUpdateUI {
-    [super hsUpdateUI];
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
     if (![self.model isKindOfClass:[VersionInfoModel class]]) {
         return;
     }

@@ -4,7 +4,8 @@
 //
 
 #import "MoreGuessHeaderView.h"
-#import "MoreGuessHeaderCell.h"
+#import "MoreGuessHeaderColCell.h"
+#import "MoreGuessHeaderCellModel.h"
 
 #define ITEM_WIDTH (kScreenWidth - 32 - 62)
 
@@ -59,6 +60,11 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
+    MoreGuessHeaderCellModel *one = [[MoreGuessHeaderCellModel alloc]init];
+    one.duration = 1000;
+    MoreGuessHeaderCellModel *two = [[MoreGuessHeaderCellModel alloc]init];
+    two.duration = 0;
+    self.gameList = @[one, two];
 }
 
 - (void)dtUpdateUI {
@@ -78,7 +84,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    MoreGuessHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MoreGuessHeaderCell" forIndexPath:indexPath];
+    MoreGuessHeaderColCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MoreGuessHeaderColCell" forIndexPath:indexPath];
     [cell dt_cornerRadius:8];
     cell.model = self.gameList[indexPath.row];
     return cell;
@@ -159,7 +165,8 @@
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView registerClass:[MoreGuessHeaderCell class] forCellWithReuseIdentifier:@"MoreGuessHeaderCell"];
+        _collectionView.backgroundColor = UIColor.clearColor;
+        [_collectionView registerClass:[MoreGuessHeaderColCell class] forCellWithReuseIdentifier:@"MoreGuessHeaderColCell"];
     }
     return _collectionView;
 }

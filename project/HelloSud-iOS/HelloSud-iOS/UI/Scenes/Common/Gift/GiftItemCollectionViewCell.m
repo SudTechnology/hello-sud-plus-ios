@@ -16,14 +16,14 @@
 
 @implementation GiftItemCollectionViewCell
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self.contentView addSubview:self.giftIconView];
     [self.contentView addSubview:self.nameLabel];;
     [self.contentView addSubview:self.typeLabel];
     [self.contentView addSubview:self.selectView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.giftIconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(64, 64));
@@ -44,14 +44,14 @@
     }];
 }
 
-- (void)hsUpdateUI {
-    [super hsUpdateUI];
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
     if ([self.model isKindOfClass:GiftModel.class]) {
         GiftModel *m = (GiftModel *)self.model;
         WeakSelf
         m.selectedChangedCallback = ^{
             [weakSelf checkSelected:YES];
-            [weakSelf hsUpdateUI];
+            [weakSelf dtUpdateUI];
         };
         [self.giftIconView sd_setImageWithURL:[NSURL fileURLWithPath:m.smallGiftURL]];
         self.nameLabel.text = m.giftName;

@@ -24,13 +24,13 @@
     self.lineView.hidden = self.hiddenLine;
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.selectedImgView];
     [self.contentView addSubview:self.lineView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(36);
         make.centerY.mas_equalTo(self.contentView);

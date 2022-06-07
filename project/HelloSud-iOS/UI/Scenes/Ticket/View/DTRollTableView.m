@@ -134,20 +134,20 @@
 @end
 @implementation DTRollTableViewCell
 
-- (void)hsUpdateUI {
+- (void)dtUpdateUI {
     if (self.attributedText == nil) {
         return;
     }
     self.contentLabel.attributedText = self.attributedText;
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     self.backgroundColor = UIColor.clearColor;
     self.backgroundView.backgroundColor = UIColor.clearColor;
     [self.contentView addSubview:self.contentLabel];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.contentView);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
@@ -168,7 +168,7 @@
 
 - (void)setAttributedText:(NSAttributedString *)attributedText {
     _attributedText = attributedText;
-    [self hsUpdateUI];
+    [self dtUpdateUI];
 }
 
 @end

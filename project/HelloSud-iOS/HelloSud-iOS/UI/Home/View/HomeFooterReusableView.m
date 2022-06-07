@@ -13,15 +13,15 @@
 
 @implementation HomeFooterReusableView
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.backgroundColor = HEX_COLOR(@"#F5F6FB");
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.contentView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
         make.height.mas_equalTo(12);

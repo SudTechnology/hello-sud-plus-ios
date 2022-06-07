@@ -36,7 +36,7 @@
     [self.createBtn setTitleColor:sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A") forState:UIControlStateNormal];
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
     self.itemW = (kScreenWidth - 32) / 4;
     self.itemH = 125 + 12;
@@ -124,7 +124,7 @@
     [AudioRoomService.shared reqCreateRoom:self.sceneModel.sceneId];
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.contentView];
     [self.contentView addSubview:self.previewView];
     [self.contentView addSubview:self.titleLabel];
@@ -134,7 +134,7 @@
     [self.contentView addSubview:self.itemContainerView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
         make.left.mas_equalTo(0);

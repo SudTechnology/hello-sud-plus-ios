@@ -30,7 +30,7 @@
 
 @implementation HomeHeaderReusableView
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self addSubview:self.contentView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.previewView];
@@ -40,7 +40,7 @@
 
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
         make.leading.mas_equalTo(0);
@@ -78,7 +78,7 @@
     }];
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
     self.itemW = (kScreenWidth - 32) / 4;
     self.itemH = 125 + 12;

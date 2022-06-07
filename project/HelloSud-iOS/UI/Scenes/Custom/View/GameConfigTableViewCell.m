@@ -49,7 +49,7 @@
     }
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     self.backgroundColor = UIColor.whiteColor;
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.subTitleLabel];
@@ -61,7 +61,7 @@
     [self.contentView addSubview:self.lineView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(20);
         make.trailing.mas_equalTo(-20);

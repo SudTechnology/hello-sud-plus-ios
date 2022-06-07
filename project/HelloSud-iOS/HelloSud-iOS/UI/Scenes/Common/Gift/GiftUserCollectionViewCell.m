@@ -15,13 +15,13 @@
 
 @implementation GiftUserCollectionViewCell
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self.contentView addSubview:self.headerView];
     [self.contentView addSubview:self.micNumLabel];
     [self.contentView addSubview:self.selectView];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
 
     [self.headerView dt_cornerRadius:16];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -41,7 +41,7 @@
     }];
 }
 
-- (void)hsUpdateUI {
+- (void)dtUpdateUI {
     if ([self.model isKindOfClass:AudioRoomMicModel.class]) {
         AudioRoomMicModel *m = (AudioRoomMicModel *)self.model;
         if (m.user.icon) {

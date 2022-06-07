@@ -62,12 +62,12 @@
     self.roomTypeLabel.backgroundColor = HEX_COLOR([GameListTableViewCell tagColor:m.sceneType]);
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
     self.contentView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self.contentView addSubview:self.containerView];
     [self.containerView addSubview:self.iconImageView];
     [self.containerView addSubview:self.roomTypeLabel];
@@ -77,7 +77,7 @@
     [self.containerView addSubview:self.enterRoomBtn];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 8, 0));
     }];

@@ -26,7 +26,7 @@
     self.enterLabel.hidden = m.isBlank;
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     self.itemW = 72;//(kScreenWidth - 32 - 24 - 24 )/4;
     self.itemH = self.itemW + 32;
     [self.contentView addSubview:self.containerView];
@@ -36,7 +36,7 @@
     [self.containerView addSubview:self.inGameLabel];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];

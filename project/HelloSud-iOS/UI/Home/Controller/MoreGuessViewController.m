@@ -44,6 +44,8 @@
     self.tableView.tableHeaderView = self.headerView;
     self.headerView.backgroundColor = UIColor.clearColor;
     self.tableView.backgroundColor = UIColor.clearColor;
+
+    self.dataList = @[[[HSGameItem alloc]init], [[HSGameItem alloc]init]];
 }
 
 - (void)dtUpdateUI {
@@ -73,7 +75,7 @@
         _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 124;
+        _tableView.rowHeight = 134;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];

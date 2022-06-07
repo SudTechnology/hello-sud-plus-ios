@@ -11,38 +11,38 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self hsAddViews];
-        [self hsLayoutViews];
-        [self hsConfigUI];
-        [self hsConfigEvents];
-        [self hsUpdateUI];
+        [self dtAddViews];
+        [self dtLayoutViews];
+        [self dtConfigUI];
+        [self dtConfigEvents];
+        [self dtUpdateUI];
     }
     return self;
 }
 
 - (void)setModel:(BaseModel *)model {
     _model = model;
-    [self hsUpdateUI];
+    [self dtUpdateUI];
 }
 
 /// 增加子view
-- (void)hsAddViews {
+- (void)dtAddViews {
     
 }
 /// 布局视图
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     
 }
 /// 配置事件
-- (void)hsConfigEvents {
+- (void)dtConfigEvents {
     
 }
 /// 试图初始化
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     
 }
 /// 更新UI
-- (void)hsUpdateUI {
+- (void)dtUpdateUI {
     
 }
 
