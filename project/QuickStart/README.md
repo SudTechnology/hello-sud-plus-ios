@@ -17,20 +17,17 @@
  - 准备中，敬请期待
 
 # 2. SudMGPWrapper
-- `SudMGPWrapper封装SudMGP的App和游戏相互调用接口`；
-- `SudMGPWrapper会长期维护和保持更新`；
-- `推荐APP接入方使用SudMGPWrapper`
-- `SudMGPAPPState` ，`SudMGPMGState`，`SudFSMMGListener`，`SudFSMMGDecorator` ，`SudFSTAPPDecorator核心类`；
+- `SudMGPWrapper封装SudMGP，简化App和游戏相互调用接口`；
+- `SudMGPWrapper长期维护和保持更新`；
+- `推荐APP接入方使用SudMGPWrapper`；
+- `SudMGPAPPState`、`SudMGPMGState`、`SudFSMMGListener`、`SudFSMMGDecorator`、`SudFSTAPPDecorator核心类`；
 
 ### 2.1 App状态和游戏状态
-- `SudMGPAPPState` [App通用状态](https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html)
-- `SudMGPMGState` [通用状态-游戏](https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStateGame.html) 和 [通用状态-玩家](https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStatePlayer.html)
-
-### 2.2 App调用游戏
-- [ISudFSTAPP](https://docs.sud.tech/zh-CN/app/Client/API/ISudFSTAPP.html) 的装饰类`SudFSTAPPDecorator`，负责封装每一个App状态接口
-- `SudFSTAPPDecorator`封装ISudFSTAPP两类接口[notifyStateChange](https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html) 和 foo
+- `SudMGPAPPState` 封装 [App通用状态](https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html) ；
+- `SudFSTAPPDecorator` 封装 [ISudFSTAPP](https://docs.sud.tech/zh-CN/app/Client/API/ISudFSTAPP.html) 两类接口，[notifyStateChange](https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html) 、 foo；
+- `SudFSTAPPDecorator` 负责把每一个App通用状态封装成接口；
     <details>
-    <summary>class SudFSTAPPDecorator</summary>
+    <summary>代码框架 objc class SudFSTAPPDecorator</summary>
 
     ``` objc
     /// app -> 游戏
@@ -59,11 +56,12 @@
     ```
     </details>
 
-### 2.3 游戏调用App
-- `SudFSMMGListener`负责把游戏每一个状态封装成单独的回调函数
-- `SudFSMMGListener`封装[ISudFSMMG](https://docs.sud.tech/zh-CN/app/Client/API/ISudFSMMG.html) 三类回调函数onGameStateChange，onPlayerStateChange，onFoo
+### 2.2 游戏调用App
+- `SudMGPMGState` 封装 [通用状态-游戏](https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStateGame.html) 和 [通用状态-玩家](https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStatePlayer.html) ；
+- `SudFSMMGListener` 封装[ISudFSMMG](https://docs.sud.tech/zh-CN/app/Client/API/ISudFSMMG.html) 三类回调函数，onGameStateChange、onPlayerStateChange、onFoo；
+- `SudFSMMGListener` 负责把游戏每一个状态封装成单独的回调函数；
     <details>
-    <summary>interface SudFSMMGListener</summary>
+    <summary>代码框架 objc interface SudFSMMGListener</summary>
     
     ``` objc
     @protocol SudFSMMGListener <NSObject>
