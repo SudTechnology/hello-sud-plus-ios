@@ -80,9 +80,9 @@
 - (void)logoutRoom {
     [kAudioRoomService reqExitRoom:self.roomID.longLongValue];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
-    
-    [AudioEngineFactory.shared.audioEngine destroy];
-    [[IMRoomManager sharedInstance] destroy];
+    // 离开房间
+    [AudioEngineFactory.shared.audioEngine leaveRoom];
+    [[IMRoomManager sharedInstance] leaveRoom];
     [self logoutGame];
 }
 
