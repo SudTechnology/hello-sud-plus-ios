@@ -53,6 +53,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 语音原始音频采集
 /// @param data 数据
 - (void)onCapturedPCMData:(NSData *)data;
+
+/// 观众加入直播通知
+- (void)onLiveStreamingCome;
+
+/// 观众参与直播结束通知
+- (void)onLiveStreamingCancle;
 @end
 
 NS_ASSUME_NONNULL_END

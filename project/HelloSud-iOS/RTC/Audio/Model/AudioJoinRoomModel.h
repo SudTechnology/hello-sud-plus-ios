@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, copy) NSString *appId;
 
+@property(nonatomic, weak) UIView *localView;
+
 @end
 
 
