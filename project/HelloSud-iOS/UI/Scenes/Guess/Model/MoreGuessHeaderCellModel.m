@@ -5,7 +5,6 @@
 
 #import "MoreGuessHeaderCellModel.h"
 
-
 @implementation MoreGuessHeaderCellModel {
 
 }

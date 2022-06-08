@@ -9,4 +9,6 @@
 @interface MoreGuessHeaderCellModel : BaseModel
 /// 时长
 @property (nonatomic, assign) NSInteger duration;
+@property (nonatomic, assign) NSInteger leftSupportCoin;
+@property (nonatomic, assign) NSInteger rightSupportCoin;
 @end

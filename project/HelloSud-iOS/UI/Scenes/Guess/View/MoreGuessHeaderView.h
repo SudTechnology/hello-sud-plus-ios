@@ -5,5 +5,5 @@
 
 /// 更多竞猜头部视图
 @interface MoreGuessHeaderView : BaseView
-@property (nonatomic, strong) NSArray <HSGameItem *> *gameList;
+@property (nonatomic, strong) NSArray <BaseModel *> *gameList;
 @end

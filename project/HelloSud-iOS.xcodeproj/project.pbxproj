@@ -249,6 +249,8 @@
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
 		BC210D9F0C69893639DD84A5 /* HomeGuessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21056B5487F677973E97B8 /* HomeGuessCell.m */; };
 		BC210E3D2377EDF7498C2DF1 /* PKGameEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */; };
+		BC210E9E33806A6BFD2AE89A /* MoreGuessCoinItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */; };
+		BC210F738CED39591CB7541D /* MoreGuessCoinPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */; };
 		BC210F74B7434253E2FEF91D /* GuessRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */; };
 		BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */; };
 		BC210FF63EC24685CBC7FBAC /* SuspendRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */; };
@@ -706,6 +708,7 @@
 		BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGameEmptyView.m; sourceTree = "<group>"; };
 		BC210337708736FFF222750A /* BaseSceneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSceneService.m; sourceTree = "<group>"; };
 		BC2103C043B5568FCBA68B06 /* BaseSceneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSceneService.h; sourceTree = "<group>"; };
+		BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinItemView.m; sourceTree = "<group>"; };
 		BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderView.h; sourceTree = "<group>"; };
 		BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessRoomViewController.m; sourceTree = "<group>"; };
 		BC2105087E91B70E68E3D640 /* PKStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStateView.h; sourceTree = "<group>"; };
@@ -720,6 +723,7 @@
 		BC2106F2C4C48C00499B89E4 /* RoomMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomMoreView.h; sourceTree = "<group>"; };
 		BC2106F845ECA957808046FE /* MoreGuessHeaderCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderCellModel.h; sourceTree = "<group>"; };
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
+		BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinPopView.h; sourceTree = "<group>"; };
 		BC2107929CECA531C851C092 /* PKSelectRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSelectRoomView.h; sourceTree = "<group>"; };
 		BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessCategoryView.h; sourceTree = "<group>"; };
 		BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessViewController.h; sourceTree = "<group>"; };
@@ -735,6 +739,8 @@
 		BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessTableViewCell.m; sourceTree = "<group>"; };
 		BC210C677DD6442EA5963655 /* RespModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespModel.m; sourceTree = "<group>"; };
 		BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameItemModel.m; sourceTree = "<group>"; };
+		BC210D0CC9CCF32570421BA2 /* MoreGuessCoinItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinItemView.h; sourceTree = "<group>"; };
+		BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinPopView.m; sourceTree = "<group>"; };
 		BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderColCell.h; sourceTree = "<group>"; };
 		BC210DBB3E69BCD73E9DC870 /* PKService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKService.m; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
@@ -960,8 +966,6 @@
 			children = (
 				4455ACF027EAC658001516EE /* HomeViewController.h */,
 				4455ACEF27EAC658001516EE /* HomeViewController.m */,
-				BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */,
-				BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -983,16 +987,6 @@
 				443BA4EB280D5F11008B2BFB /* HomeCategoryView.m */,
 				3306D63E22DDCC827A67B80F /* AllCategoryView.h */,
 				3306DC54D7DCF6D286A5C732 /* AllCategoryView.m */,
-				BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */,
-				BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */,
-				BC21056B5487F677973E97B8 /* HomeGuessCell.m */,
-				BC21011EFE2917ED676C1C64 /* HomeGuessCell.h */,
-				BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */,
-				BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */,
-				BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */,
-				BC210A8B9F817A0399951BD7 /* MoreGuessTableViewCell.h */,
-				BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */,
-				BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1518,6 +1512,47 @@
 			path = Agora;
 			sourceTree = "<group>";
 		};
+		6C4607A528503E0B005C99EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */,
+				BC2106F845ECA957808046FE /* MoreGuessHeaderCellModel.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6C4607A628503E13005C99EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */,
+				BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */,
+				BC21056B5487F677973E97B8 /* HomeGuessCell.m */,
+				BC21011EFE2917ED676C1C64 /* HomeGuessCell.h */,
+				BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */,
+				BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */,
+				BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */,
+				BC210A8B9F817A0399951BD7 /* MoreGuessTableViewCell.h */,
+				BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */,
+				BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */,
+				BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */,
+				BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */,
+				BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */,
+				BC210D0CC9CCF32570421BA2 /* MoreGuessCoinItemView.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C4607A728503E1A005C99EF /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */,
+				BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */,
+				BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */,
+				BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
 		6C702B68283F80DF005D80B8 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -1903,8 +1938,6 @@
 		BC21001B5F7B2F0EA130BEDF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */,
-				BC2106F845ECA957808046FE /* MoreGuessHeaderCellModel.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1932,8 +1965,9 @@
 		BC210F37AC7DEE92904D5429 /* Guess */ = {
 			isa = PBXGroup;
 			children = (
-				BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */,
-				BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */,
+				6C4607A728503E1A005C99EF /* VC */,
+				6C4607A628503E13005C99EF /* View */,
+				6C4607A528503E0B005C99EF /* Model */,
 			);
 			path = Guess;
 			sourceTree = "<group>";
@@ -2417,6 +2451,8 @@
 				BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */,
 				BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */,
 				BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */,
+				BC210F738CED39591CB7541D /* MoreGuessCoinPopView.m in Sources */,
+				BC210E9E33806A6BFD2AE89A /* MoreGuessCoinItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

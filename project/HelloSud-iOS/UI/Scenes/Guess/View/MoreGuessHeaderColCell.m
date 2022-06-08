@@ -5,6 +5,7 @@
 
 #import "MoreGuessHeaderColCell.h"
 #import "MoreGuessHeaderCellModel.h"
+#import "MoreGuessCoinPopView.h"
 
 @interface MoreGuessHeaderColCell ()
 @property(nonatomic, strong) UIImageView *vsImageView;
@@ -219,6 +220,12 @@
     self.layer.borderColor = HEX_COLOR_A(@"#000000", 0.1).CGColor;
 }
 
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    [self.leftSupportBtn addTarget:self action:@selector(onLeftSupportClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rightSupportBtn addTarget:self action:@selector(onRightSupportClick:) forControlEvents:UIControlEventTouchUpInside];
+}
+
 - (void)dtUpdateUI {
     [super dtUpdateUI];
     MoreGuessHeaderCellModel *m = self.model;
@@ -226,6 +233,24 @@
         return;
     }
     if (m.duration > 0) {
+        if (m.leftSupportCoin > 0) {
+            self.leftSupportImageView.hidden = NO;
+            self.leftSupportLabel.text = [NSString stringWithFormat:@"已支持 %@", @(m.leftSupportCoin)];
+            self.rightSupportBtn.enabled = NO;
+            self.leftSupportBtn.selected = YES;
+        } else {
+            self.leftSupportLabel.text = nil;
+            self.leftSupportImageView.hidden = YES;
+        }
+        if (m.rightSupportCoin > 0) {
+            self.rightSupportImageView.hidden = NO;
+            self.rightSupportLabel.text = [NSString stringWithFormat:@"已支持 %@", @(m.rightSupportCoin)];
+            self.leftSupportBtn.enabled = NO;
+            self.rightSupportBtn.selected = YES;
+        } else {
+            self.rightSupportLabel.text = nil;
+            self.rightSupportImageView.hidden = YES;
+        }
         self.leftResultImageView.hidden = YES;
         self.rightResultImageView.hidden = YES;
         self.leftSupportBtn.hidden = NO;
@@ -253,6 +278,37 @@
 
         [self updateCoin:30000];
     }
+}
+
+- (void)onLeftSupportClick:(id)sender {
+    WeakSelf
+    MoreGuessCoinPopView *v = [[MoreGuessCoinPopView alloc]init];
+    v.onSupportCoinBlock = ^(NSInteger coin) {
+
+        MoreGuessHeaderCellModel *m = weakSelf.model;
+        if (![m isKindOfClass:[MoreGuessHeaderCellModel class]]) {
+            return;
+        }
+        m.leftSupportCoin += coin;
+        [weakSelf dtUpdateUI];
+        [DTSheetView close];
+    };
+    [DTSheetView show:v onCloseCallback:nil];
+}
+
+- (void)onRightSupportClick:(id)sender {
+    WeakSelf
+    MoreGuessCoinPopView *v = [[MoreGuessCoinPopView alloc]init];
+    v.onSupportCoinBlock = ^(NSInteger coin) {
+        MoreGuessHeaderCellModel *m = weakSelf.model;
+        if (![m isKindOfClass:[MoreGuessHeaderCellModel class]]) {
+            return;
+        }
+        m.rightSupportCoin += coin;
+        [weakSelf dtUpdateUI];
+        [DTSheetView close];
+    };
+    [DTSheetView show:v onCloseCallback:nil];
 }
 
 - (void)updateCoin:(NSInteger)coin {

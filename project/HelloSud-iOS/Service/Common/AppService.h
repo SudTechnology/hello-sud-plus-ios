@@ -55,6 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)LoginService *login;
 /// 场景服务
 @property (nonatomic, strong)BaseSceneService *scene;
+/// 更多竞猜头部数据列表缓存
+@property(nonatomic, strong) NSArray <BaseModel *> *moreGuessHeaderArrayCache;
 
 + (instancetype)shared;
 
