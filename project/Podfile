@@ -41,8 +41,8 @@ target 'HelloSud-iOS' do
   # SudMGP包装类
   pod 'SudMGPWrapper', :path => './'
   # RTC厂商引入
-  # zego语音SDK
-  pod 'ZegoExpressEngine/Audio', '~> 2.17.0'
+  # zego语音/视频SDK
+  pod 'ZegoExpressEngine', '~> 2.17.0'
   # zego IM SDK
   pod 'ZIM', '2.1.1'
   # agora语音SDK

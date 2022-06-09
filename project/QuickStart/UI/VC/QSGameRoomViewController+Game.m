@@ -184,21 +184,28 @@
 
     // 屏幕缩放比例，游戏内部采用px，需要开发者获取本设备比值 x 屏幕点数来获得真实px值设置相关字段中
     CGFloat scale = [[UIScreen mainScreen] nativeScale];
+    // 屏幕尺寸
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    // 屏幕安全区
+    UIEdgeInsets safeArea = [self safeAreaInsets];
+    // 状态栏高度
+    CGFloat statusBarHeight = safeArea.top == 0 ? 20 : safeArea.top;
+
     GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
     // 游戏展示区域
     GameViewSize *viewSize = [[GameViewSize alloc] init];
-    viewSize.width = kScreenWidth * scale;
-    viewSize.height = kScreenHeight * scale;
+    viewSize.width = screenSize.width * scale;
+    viewSize.height = screenSize.height * scale;
     ViewGameRect *viewRect = [[ViewGameRect alloc] init];
     // 游戏内容布局安全区域，根据自身业务调整顶部间距
     // 顶部间距
-    viewRect.top = (kStatusBarHeight + 80) * scale;
+    viewRect.top = (statusBarHeight + 80) * scale;
     // 左边
     viewRect.left = 0;
     // 右边
     viewRect.right = 0;
     // 底部安全区域
-    viewRect.bottom = (kAppSafeBottom + 100) * scale;
+    viewRect.bottom = (safeArea.bottom + 100) * scale;
 
     m.ret_code = 0;
     m.ret_msg = @"success";
@@ -291,6 +298,16 @@
 }
 
 #pragma mark ======= 执行游戏状态方法, 用户业务相关逻辑 =======
+
+/// 设备安全区
+-(UIEdgeInsets)safeAreaInsets {
+    if (@available(iOS 11.0, *)) {
+        return [[[UIApplication sharedApplication] keyWindow] safeAreaInsets];
+    } else {
+        // Fallback on earlier versions
+    }
+    return UIEdgeInsetsZero;
+}
 
 /// 加入状态处理
 - (void)handleCommonPlayerJoin:(MGCommonPlayerInModel *)model userId:(NSString *)userId {

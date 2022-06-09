@@ -90,7 +90,9 @@ PODS:
     - VolcEngineRTC/Core (= 3.37.101)
   - VolcEngineRTC/Core (3.37.101)
   - YYText (1.0.7)
-  - ZegoExpressEngine/Audio (2.17.1.1)
+  - ZegoExpressEngine (2.17.1.1):
+    - ZegoExpressEngine/Video (= 2.17.1.1)
+  - ZegoExpressEngine/Video (2.17.1.1)
   - ZIM (2.1.1)
 
 DEPENDENCIES:
@@ -118,7 +120,7 @@ DEPENDENCIES:
   - TXLiteAVSDK_TRTC (from `https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec`)
   - VolcEngineRTC (= 3.37.101)
   - YYText (~> 1.0.7)
-  - ZegoExpressEngine/Audio (~> 2.17.0)
+  - ZegoExpressEngine (~> 2.17.0)
   - ZIM (= 2.1.1)
 
 SPEC REPOS:
@@ -200,6 +202,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 6a4f294825ac93f16c5101d3e97d211c2d17fa33
 
-PODFILE CHECKSUM: 5e2879721dbb5c245578b6169152078c8f850b0d
+PODFILE CHECKSUM: 1dfd2707a48351ba72e3198039b19b75c2bf850a
 
 COCOAPODS: 1.11.2
