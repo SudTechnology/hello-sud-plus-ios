@@ -8,6 +8,7 @@
 #import "HomeHeaderReusableView.h"
 #import "TicketChooseLevelView.h"
 #import "GuessCategoryView.h"
+#import "UIImage+GIF.h"
 
 @interface HomeHeaderReusableView ()
 @property (nonatomic, strong) BaseView *contentView;
@@ -110,7 +111,15 @@
     
     [self.customView setHidden:sceneModel.sceneId != SceneTypeCustom];
     self.titleLabel.text = sceneModel.sceneName;
-    [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImageNew]];
+    if (self.sceneModel.sceneId == SceneTypeDanmaku) {
+        NSString *path = [NSBundle.mainBundle pathForResource:@"home_danmuka" ofType:@"webp" inDirectory:@"Res"];
+        NSData * gifData = [NSData dataWithContentsOfFile:path];
+//    UIImage * gifImage = [UIImage sd_imageWithGIFData:gifData];
+        UIImage *wimage = [[SDImageWebPCoder sharedCoder] decodedImageWithData:gifData options:nil];
+        self.previewView.image = wimage;
+    } else {
+        [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImageNew]];
+    }
     self.createNode.textColor = sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A");
 
     /// 竞猜场景视图
