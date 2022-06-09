@@ -12,6 +12,7 @@
 #import "AudioRoomService.h"
 #import "TicketService.h"
 #import "PKService.h"
+#import "GuessService.h"
 
 // 语音服务
 #define kAudioRoomService ((AudioRoomService *)AppService.shared.scene)

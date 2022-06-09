@@ -9,4 +9,9 @@
 @implementation GuessRoomViewController {
 
 }
+
+- (Class)serviceClass {
+    return GuessService.class;
+}
+
 @end

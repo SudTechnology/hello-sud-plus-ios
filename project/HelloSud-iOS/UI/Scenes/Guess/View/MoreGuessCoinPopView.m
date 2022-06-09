@@ -129,9 +129,12 @@
 }
 
 - (void)onSupportBtnCLick:(id)sender {
-    if (self.onSupportCoinBlock) {
-        self.onSupportCoinBlock(self.selectedCoin);
-    }
+
+    [GuessService reqBet:1 coin:self.selectedCoin userList:nil finished:^{
+        if (self.onSupportCoinBlock) {
+            self.onSupportCoinBlock(self.selectedCoin);
+        }
+    }];
 }
 
 - (void)updateSelectState:(MoreGuessCoinItemView *)selectedView {
