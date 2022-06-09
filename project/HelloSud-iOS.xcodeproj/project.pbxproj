@@ -141,6 +141,13 @@
 		6C192E5B279523B100553034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E59279523B100553034 /* LaunchScreen.storyboard */; };
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
 		6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */; };
+		6C4607AA285083CB005C99EF /* GuessRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607A9285083CB005C99EF /* GuessRankViewController.m */; };
+		6C4607AD2850A818005C99EF /* GuessRankContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AC2850A817005C99EF /* GuessRankContentView.m */; };
+		6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AF28518FB7005C99EF /* GuessRankHeaderView.m */; };
+		6C4607B32851908F005C99EF /* GuessRankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607B22851908F005C99EF /* GuessRankTableViewCell.m */; };
+		6C4607B628519618005C99EF /* RankHeadItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607B528519618005C99EF /* RankHeadItemView.m */; };
+		6C4607B928519FB3005C99EF /* RankNumItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607B828519FB3005C99EF /* RankNumItemView.m */; };
+		6C4607BC2851D29F005C99EF /* GuessRankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607BB2851D29E005C99EF /* GuessRankModel.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6C702B722844CD38005D80B8 /* QSSudMGPLoadConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B712844CD37005D80B8 /* QSSudMGPLoadConfigModel.m */; };
@@ -578,6 +585,20 @@
 		6C192E882797E2C700553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraAudioEngineImpl.h; sourceTree = "<group>"; };
 		6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgoraAudioEngineImpl.m; sourceTree = "<group>"; };
+		6C4607A8285083CB005C99EF /* GuessRankViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankViewController.h; sourceTree = "<group>"; };
+		6C4607A9285083CB005C99EF /* GuessRankViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankViewController.m; sourceTree = "<group>"; };
+		6C4607AB2850A817005C99EF /* GuessRankContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankContentView.h; sourceTree = "<group>"; };
+		6C4607AC2850A817005C99EF /* GuessRankContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankContentView.m; sourceTree = "<group>"; };
+		6C4607AE28518FB7005C99EF /* GuessRankHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankHeaderView.h; sourceTree = "<group>"; };
+		6C4607AF28518FB7005C99EF /* GuessRankHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankHeaderView.m; sourceTree = "<group>"; };
+		6C4607B12851908F005C99EF /* GuessRankTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankTableViewCell.h; sourceTree = "<group>"; };
+		6C4607B22851908F005C99EF /* GuessRankTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankTableViewCell.m; sourceTree = "<group>"; };
+		6C4607B428519618005C99EF /* RankHeadItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankHeadItemView.h; sourceTree = "<group>"; };
+		6C4607B528519618005C99EF /* RankHeadItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankHeadItemView.m; sourceTree = "<group>"; };
+		6C4607B728519FB2005C99EF /* RankNumItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankNumItemView.h; sourceTree = "<group>"; };
+		6C4607B828519FB3005C99EF /* RankNumItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankNumItemView.m; sourceTree = "<group>"; };
+		6C4607BA2851D29E005C99EF /* GuessRankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankModel.h; sourceTree = "<group>"; };
+		6C4607BB2851D29E005C99EF /* GuessRankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankModel.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1517,6 +1538,8 @@
 			children = (
 				BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */,
 				BC2106F845ECA957808046FE /* MoreGuessHeaderCellModel.h */,
+				6C4607BA2851D29E005C99EF /* GuessRankModel.h */,
+				6C4607BB2851D29E005C99EF /* GuessRankModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1524,6 +1547,8 @@
 		6C4607A628503E13005C99EF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6C4607B728519FB2005C99EF /* RankNumItemView.h */,
+				6C4607B828519FB3005C99EF /* RankNumItemView.m */,
 				BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */,
 				BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */,
 				BC21056B5487F677973E97B8 /* HomeGuessCell.m */,
@@ -1538,6 +1563,14 @@
 				BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */,
 				BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */,
 				BC210D0CC9CCF32570421BA2 /* MoreGuessCoinItemView.h */,
+				6C4607AB2850A817005C99EF /* GuessRankContentView.h */,
+				6C4607AC2850A817005C99EF /* GuessRankContentView.m */,
+				6C4607AE28518FB7005C99EF /* GuessRankHeaderView.h */,
+				6C4607AF28518FB7005C99EF /* GuessRankHeaderView.m */,
+				6C4607B12851908F005C99EF /* GuessRankTableViewCell.h */,
+				6C4607B22851908F005C99EF /* GuessRankTableViewCell.m */,
+				6C4607B428519618005C99EF /* RankHeadItemView.h */,
+				6C4607B528519618005C99EF /* RankHeadItemView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1549,6 +1582,8 @@
 				BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */,
 				BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */,
 				BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */,
+				6C4607A8285083CB005C99EF /* GuessRankViewController.h */,
+				6C4607A9285083CB005C99EF /* GuessRankViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2283,6 +2318,7 @@
 				4455ADCD27EAC658001516EE /* TicketChooseItemView.m in Sources */,
 				4455AD8827EAC658001516EE /* HSSettingHeaderModel.m in Sources */,
 				6CE6CD5E283F591D0026BDAB /* DeviceUtil.m in Sources */,
+				6C4607BC2851D29F005C99EF /* GuessRankModel.m in Sources */,
 				4455ADCB27EAC658001516EE /* TocketChooseModel.m in Sources */,
 				4455AD8927EAC658001516EE /* ChangeRTCModel.m in Sources */,
 				6CE6CD28283F591C0026BDAB /* DTWebViewController.m in Sources */,
@@ -2301,6 +2337,7 @@
 				6CE6CD4A283F591C0026BDAB /* DTUIDevice+Extension.m in Sources */,
 				6CE6CD36283F591C0026BDAB /* DTBlurEffectView.m in Sources */,
 				4455AE1427EAC6F7001516EE /* RoomNaviView.m in Sources */,
+				6C4607AD2850A818005C99EF /* GuessRankContentView.m in Sources */,
 				4455AE0D27EAC6F7001516EE /* BaseMsgCell.m in Sources */,
 				4455ADA927EAC658001516EE /* RoomCmdSendGiftModel.m in Sources */,
 				4455AE1227EAC6F7001516EE /* AudioMicContentView.m in Sources */,
@@ -2358,6 +2395,7 @@
 				44BC48E228153ABB00E4E3F7 /* RoomOrderCreateModel.m in Sources */,
 				443BA4E6280D41FF008B2BFB /* OrderChooseGamesCell.m in Sources */,
 				6CE6CD4E283F591D0026BDAB /* NSBundle+Language.m in Sources */,
+				6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */,
 				4452DDDB28112BFE001FEEDB /* CustomRoomHelpView.m in Sources */,
 				6CE6CD34283F591C0026BDAB /* DTSlider.m in Sources */,
 				4455AE0B27EAC6F7001516EE /* SwitchRoomCell.m in Sources */,
@@ -2387,10 +2425,13 @@
 				444F59EB27F7035800FA1FB2 /* TicketChooseLevelView.m in Sources */,
 				4455ADA827EAC658001516EE /* RoomCmdChatTextModel.m in Sources */,
 				44D9F3B3280FFF83000B14B5 /* GameConfigPopView.m in Sources */,
+				6C4607B928519FB3005C99EF /* RankNumItemView.m in Sources */,
+				6C4607B628519618005C99EF /* RankHeadItemView.m in Sources */,
 				4455AE2027EAC71A001516EE /* BaseSceneConfigModel.m in Sources */,
 				4455AE1727EAC6F7001516EE /* RoomMsgTableView.m in Sources */,
 				443BA4E9280D450B008B2BFB /* OrderChooseGamesView.m in Sources */,
 				44C8FF9227F318A70030ED40 /* TicketService.m in Sources */,
+				6C4607B32851908F005C99EF /* GuessRankTableViewCell.m in Sources */,
 				44D9F3B0280FF6CC000B14B5 /* RoomCustomModel.m in Sources */,
 				44BC48E8281543FE00E4E3F7 /* RoomCmdOrderOperateModel.m in Sources */,
 				6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */,
@@ -2436,6 +2477,7 @@
 				BC210FF63EC24685CBC7FBAC /* SuspendRoomView.m in Sources */,
 				BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */,
 				BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */,
+				6C4607AA285083CB005C99EF /* GuessRankViewController.m in Sources */,
 				BC2104A997878EE07744E080 /* PKService.m in Sources */,
 				6CE6CD46283F591C0026BDAB /* BaseNavigationViewController.m in Sources */,
 				BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */,

@@ -6,6 +6,7 @@
 #import "MoreGuessHeaderView.h"
 #import "MoreGuessHeaderColCell.h"
 #import "MoreGuessHeaderCellModel.h"
+#import "GuessRankViewController.h"
 
 #define ITEM_WIDTH (kScreenWidth - 32 - 62)
 
@@ -77,6 +78,16 @@
     [self.collectionView reloadData];
 }
 
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapBanner:)];
+    [self.bannerImageView addGestureRecognizer:tap];
+}
+
+- (void)onTapBanner:(id)tap {
+    GuessRankViewController *vc = [[GuessRankViewController alloc] init];
+    [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
+}
 
 #pragma mark - UICollectionViewDataSource
 
@@ -126,6 +137,7 @@
         _bannerImageView = [[UIImageView alloc] init];
         _bannerImageView.image = [UIImage imageNamed:@"guess_rank"];
         _bannerImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _bannerImageView.userInteractionEnabled = YES;
         [_bannerImageView dt_cornerRadius:8];
     }
     return _bannerImageView;
