@@ -59,7 +59,7 @@
         if (fail) {
             fail([NSError errorWithDomain:nil code:-1 userInfo:@{NSDebugDescriptionErrorKey: @"参数错误"}]);
         }
-        DDLogError(@"用户ID不能为空");
+        NSLog(@"reqGameLogin: 用户ID不能为空");
         return;
     }
     NSDictionary *dicParam = @{@"user_id": userId};
@@ -72,7 +72,7 @@
         success(code, nil, retCode);
 
     }                       failure:^(NSError *error) {
-        DDLogError(@"login game server error:%@", error.debugDescription);
+        NSLog(@"reqGameLogin: login game server error:%@", error.debugDescription);
         if (fail) {
             fail(error);
         }
@@ -86,7 +86,7 @@
     // 确保初始化前不存在已加载的游戏 保证SudMGP initSDK前，销毁SudMGP
     [self logoutGame];
     if (configModel.gameId <= 0) {
-        DDLogDebug(@"游戏ID为空，无法加载游戏:%@, currentRoomID:%@", @(configModel.gameId), configModel.roomId);
+        NSLog(@"initSudMGPSDK: 游戏ID为空，无法加载游戏:%@, currentRoomID:%@", @(configModel.gameId), configModel.roomId);
         return;
     }
     // 2. 初始化SudMGP SDK<SudMGP initSDK>
@@ -97,10 +97,10 @@
 
                if (retCode != 0) {
                    /// 初始化失败, 可根据业务重试
-                   DDLogError(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@", retMsg);
+                   NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@", retMsg);
                    return;
                }
-               DDLogInfo(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
+               NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
                // 加载游戏SDK
                [weakSelf loadGame:configModel code:code];
            }];
@@ -110,14 +110,14 @@
 /// @param configModel 配置model
 - (void)loadGame:(QSSudMGPLoadConfigModel *)configModel code:(NSString *)code {
 
-    DDLogInfo(@"loadMG:userId:%@, gameRoomId:%@, gameId:%@", configModel.userId, configModel.roomId, @(configModel.gameId));
+    NSLog(@"loadMG:userId:%@, gameRoomId:%@, gameId:%@", configModel.userId, configModel.roomId, @(configModel.gameId));
     if (configModel.userId.length == 0 ||
             configModel.roomId.length == 0 ||
             code.length == 0 ||
             configModel.language.length == 0 ||
             configModel.gameId <= 0) {
 
-        [ToastUtil show:@"游戏加载参数存在异常空值，请检查参数loadMG传入参数"];
+        NSLog(@"游戏加载参数存在异常空值，请检查参数loadMG传入参数");
         return;
     }
     // 必须配置当前登录用户
@@ -159,7 +159,7 @@
         // 回调成功结果
         [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     }             fail:^(NSError *error) {
-        [ToastUtil show:error.debugDescription];
+        NSLog(@"reqGameLogin error:%@", error.debugDescription);
         // 回调失败结果
         [handle failure:[self.sudFSMMGDecorator handleMGFailure]];
     }];
@@ -174,9 +174,7 @@
 
     // 默认游戏配置
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
-    NSString *configJsonStr = [m mj_JSONString];
-
-    [handle success:configJsonStr];
+    [handle success:m.toJSON];
 }
 
 /// 获取游戏View信息  【需要实现】
@@ -206,8 +204,7 @@
     m.ret_msg = @"success";
     m.view_size = viewSize;
     m.view_game_rect = viewRect;
-
-    [handle success:m.mj_JSONString];
+    [handle success:m.toJSON];
 }
 
 #pragma mark 游戏相关事件状态回调通知
@@ -293,7 +290,7 @@
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
-#pragma mark ======= 执行游戏状态方法 =======
+#pragma mark ======= 执行游戏状态方法, 用户业务相关逻辑 =======
 
 /// 加入状态处理
 - (void)handleCommonPlayerJoin:(MGCommonPlayerInModel *)model userId:(NSString *)userId {

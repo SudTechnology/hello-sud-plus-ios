@@ -167,6 +167,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger              gameCPU;
 /// 默认配置
 + (GameCfgModel *)defaultCfgModel;
+/// 转成JSON串
+- (NSString *)toJSON;
 @end
 
 

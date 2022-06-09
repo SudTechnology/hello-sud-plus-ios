@@ -8,6 +8,8 @@
 //
 
 #import "GameCfgModel.h"
+#import "NSObject+MJKeyValue.h"
+#import <MJExtension/MJExtension.h>
 
 @implementation LobbyPlayerCaptainIcon
 
@@ -86,6 +88,11 @@
     m.gameSoundVolume = 100;
     m.ui = ui;
     return m;
+}
+
+/// 转成JSON串
+- (NSString *)toJSON {
+    return [self mj_JSONString];
 }
 @end
 @implementation GameBG
