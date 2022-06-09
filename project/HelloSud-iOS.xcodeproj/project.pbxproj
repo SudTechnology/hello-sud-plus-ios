@@ -149,6 +149,7 @@
 		6C4607B928519FB3005C99EF /* RankNumItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607B828519FB3005C99EF /* RankNumItemView.m */; };
 		6C4607BC2851D29F005C99EF /* GuessRankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607BB2851D29E005C99EF /* GuessRankModel.m */; };
 		6C4607C12851F725005C99EF /* DanmakuRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607C02851F725005C99EF /* DanmakuRoomViewController.m */; };
+		6C4607C528520175005C99EF /* DanmakuQuickSendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607C428520175005C99EF /* DanmakuQuickSendView.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6C702B722844CD38005D80B8 /* QSSudMGPLoadConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B712844CD37005D80B8 /* QSSudMGPLoadConfigModel.m */; };
@@ -602,6 +603,8 @@
 		6C4607BB2851D29E005C99EF /* GuessRankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankModel.m; sourceTree = "<group>"; };
 		6C4607BF2851F725005C99EF /* DanmakuRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanmakuRoomViewController.h; sourceTree = "<group>"; };
 		6C4607C02851F725005C99EF /* DanmakuRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanmakuRoomViewController.m; sourceTree = "<group>"; };
+		6C4607C328520175005C99EF /* DanmakuQuickSendView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanmakuQuickSendView.h; sourceTree = "<group>"; };
+		6C4607C428520175005C99EF /* DanmakuQuickSendView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanmakuQuickSendView.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1595,10 +1598,20 @@
 		6C4607BE2851F701005C99EF /* Danmaku */ = {
 			isa = PBXGroup;
 			children = (
+				6C4607C228520148005C99EF /* View */,
 				6C4607BF2851F725005C99EF /* DanmakuRoomViewController.h */,
 				6C4607C02851F725005C99EF /* DanmakuRoomViewController.m */,
 			);
 			path = Danmaku;
+			sourceTree = "<group>";
+		};
+		6C4607C228520148005C99EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C4607C328520175005C99EF /* DanmakuQuickSendView.h */,
+				6C4607C428520175005C99EF /* DanmakuQuickSendView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		6C702B68283F80DF005D80B8 /* App */ = {
@@ -2328,6 +2341,7 @@
 				4455AE0527EAC6F7001516EE /* BaseSceneViewController+Game.m in Sources */,
 				4455ADC927EAC658001516EE /* TicketChooseViewController.m in Sources */,
 				443BA4DD280D1557008B2BFB /* OrderChooseView.m in Sources */,
+				6C4607C528520175005C99EF /* DanmakuQuickSendView.m in Sources */,
 				4455ADCD27EAC658001516EE /* TicketChooseItemView.m in Sources */,
 				4455AD8827EAC658001516EE /* HSSettingHeaderModel.m in Sources */,
 				6CE6CD5E283F591D0026BDAB /* DeviceUtil.m in Sources */,

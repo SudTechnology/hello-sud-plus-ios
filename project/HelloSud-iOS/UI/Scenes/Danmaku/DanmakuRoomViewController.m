@@ -7,9 +7,12 @@
 //
 
 #import "DanmakuRoomViewController.h"
-
+#import "DanmakuQuickSendView.h"
 @interface DanmakuRoomViewController ()
-
+/// 快速发送视图
+@property (nonatomic, strong)DanmakuQuickSendView *quickSendView;
+/// 视频视图
+@property (nonatomic, strong)BaseView *videoView;
 @end
 
 @implementation DanmakuRoomViewController
@@ -19,14 +22,29 @@
     // Do any additional setup after loading the view.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)dtAddViews {
+    [super dtAddViews];
+    [self.gameView addSubview:self.videoView];
 }
-*/
+
+- (void)dtLayoutViews {
+    [super dtLayoutViews];
+    [self.videoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviView.mas_bottom).offset(5);
+        make.leading.trailing.equalTo(@0);
+        make.edges.equalTo(self.view);
+        make.height.equalTo(@212);
+    }];
+
+}
+
+- (BaseView *)videoView {
+    if (!_videoView) {
+        _videoView = [[BaseView alloc]init];
+        _videoView.backgroundColor = UIColor.greenColor;
+    }
+    return _videoView;
+}
+
 
 @end
