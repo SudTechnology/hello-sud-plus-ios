@@ -1,6 +1,6 @@
 # 三分钟集成代码
 - 第一步：将QuickStart同级目录下的`'SudMGPSDK'`、`'SudMGPWrapper'`两个目录所有文件及`SudMGPWrapper.podspec`文件拷贝到目标工程Podfile所在的目录下，并在Podfile中加入  `pod 'SudMGPWrapper', :path => './'`，然后执行`pod install`
-- 第二步：拷贝QuickStart目录路径(UI->VC)下的分类`QuickStartViewController+Game.h`及`QuickStartViewController+Game.m`到目标工程引用位置，并将分类名称改为将要集成游戏的ViewController名称
+- 第二步：拷贝QuickStart目录路径(UI->VC)下的分类(集成游戏登录、加载、销毁、响应游戏通知事件)`QuickStartViewController+Game.h`及`QuickStartViewController+Game.m`到目标工程引用位置，并将分类名称改为将要集成游戏的ViewController名称
 - 第三步：在引用所在`ViewController`的`viewDidLoad`中键入如下顺序代码：
 
     ``` objc
