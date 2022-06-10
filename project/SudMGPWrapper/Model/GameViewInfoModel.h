@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) GameViewSize          * view_size;
 @property (nonatomic, assign) NSInteger             ret_code;
 @property (nonatomic, copy) NSString                * ret_msg;
-/// 转成JSON串
-- (NSString *)toJSON;
+/// 序列化成JSON格式字符串串
+- (nullable NSString *)toJSON;
 @end
 
 NS_ASSUME_NONNULL_END

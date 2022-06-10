@@ -43,6 +43,5 @@
 #import "SudMGPWrapperHeader.h"
 
 #import "QSAppPreferences.h"
-#import "QSSudMGPConfigHeader.h"
 
 #endif /* PrefixHeader_pch */

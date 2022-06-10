@@ -1,3 +1,35 @@
+# 三分钟集成代码
+- 第一步：将QuickStart同级目录下的`'SudMGPSDK'`、`'SudMGPWrapper'`两个目录所有文件及`SudMGPWrapper.podspec`文件拷贝到目标工程Podfile所在的目录下，并在Podfile中加入  `pod 'SudMGPWrapper', :path => './'`，然后执行`pod install`
+- 第二步：拷贝QuickStart目录路径(UI->VC)下的分类(集成游戏登录、加载、销毁、响应游戏通知事件)`QuickStartViewController+Game.h`及`QuickStartViewController+Game.m`到目标工程引用位置，并将分类名称改为将要集成游戏的ViewController名称
+- 第三步：在引用所在`ViewController`的`viewDidLoad`中键入如下顺序代码：
+
+    ``` objc
+    - (void)viewDidLoad {
+        [super viewDidLoad];
+
+        /// 加载游戏三部曲
+
+        // 1. 创建SudMDPWrapper
+        [self createSudMGPWrapper];
+
+        // 2. 配置加载SudMGP必须参数
+        SudMGPLoadConfigModel *sudGameConfigModel = [[SudMGPLoadConfigModel alloc] init];
+        sudGameConfigModel.gameId = 替换游戏ID;
+        sudGameConfigModel.roomId = @"替换房间ID";
+        sudGameConfigModel.language = @"zh-CN";
+        sudGameConfigModel.gameView = 替换游戏展示视图;
+        sudGameConfigModel.userId = 替换为当前用户ID;
+
+        // 3. 登录游戏
+        if (sudGameConfigModel.gameId > 0) {
+            [self loginGame:self.sudMGPLoadConfigModel];
+        }
+    }       
+    ```
+
+
+- 第四步：页面销毁时调用`QuickStartViewController+Game`分类的`logoutGame`方法销毁游戏
+
 # QuickStart 架构图
 ![QuickStartArch.png](doc/QuickStartArch.png)
 

@@ -7,7 +7,7 @@
 #import "QSHomeHeaderView.h"
 #import "QSGameListCell.h"
 #import "QSGameItemModel.h"
-#import "QSGameRoomViewController.h"
+#import "QuickStartViewController.h"
 
 /// 游戏视图列表
 @interface QSGameListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -62,7 +62,7 @@
     [super dtConfigEvents];
     WeakSelf
     self.searchHeaderView.onSearchEnterBlock = ^(NSString *searchText) {
-        QSGameRoomViewController *vc = [[QSGameRoomViewController alloc]init];
+        QuickStartViewController *vc = [[QuickStartViewController alloc]init];
         vc.roomId = searchText;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
@@ -99,7 +99,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     QSGameItemModel *model = self.dataList[indexPath.row];
-    QSGameRoomViewController *vc = [[QSGameRoomViewController alloc]init];
+    QuickStartViewController *vc = [[QuickStartViewController alloc]init];
     vc.gameId = model.gameId;
     [self.navigationController pushViewController:vc animated:YES];
 }

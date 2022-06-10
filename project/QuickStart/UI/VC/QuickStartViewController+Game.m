@@ -3,11 +3,16 @@
 // Copyright (c) 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "QSGameRoomViewController+Game.h"
-#import "HttpRequest.h"
+#import "QuickStartViewController+Game.h"
+#import <objc/runtime.h>
 
-@implementation QSGameRoomViewController (Game)
+@implementation SudMGPLoadConfigModel
 
+@end
+
+#pragma mark =======QuickStartViewController (Game)=======
+
+@implementation QuickStartViewController (Game)
 
 #pragma mark =======初始化 登录 加载 游戏=======
 
@@ -21,25 +26,25 @@
 }
 
 /// 二：游戏登录
-/// 接入方客户端 调用 接入方服务端 loginGame: 获取 短期令牌code
+/// 接入方客户端 调用 接入方服务端 getCode: 获取 短期令牌code
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
 /// 执行步骤：
-/// 1. 请求业务服务接口获取游戏初始化SDK需要的code码<reqGameLoginWithSuccess>
+/// 1. 请求业务服务接口获取游戏初始化SDK需要的code码<getCode>
 /// 2. 初始化SudMGP SDK<SudMGP initSDK>
 /// 3. 加载SudMGP SDK<SudMGP loadMG>
-- (void)loginGame:(QSSudMGPLoadConfigModel *)configModel {
+- (void)loginGame:(SudMGPLoadConfigModel *)configModel {
     NSString *appID = SUDMGP_APP_ID;
     NSString *appKey = SUDMGP_APP_KEY;
     if (appID.length == 0 || appKey.length == 0) {
-        [ToastUtil show:@"Game appID or appKey is empty"];
+        NSLog(@"Game appID or appKey is empty");
         return;
     }
-    WeakSelf
+    __weak typeof(self) weakSelf = self;
     // 1. 请求业务服务接口获取游戏初始化SDK需要的code码<reqGameLoginWithSuccess>
-    [self reqGameLogin:configModel.userId success:^(NSString *code, NSError *error, int retCode) {
+    [self getCode:configModel.userId success:^(NSString *code, NSError *error, int retCode) {
         [weakSelf initSudMGPSDK:configModel code:code];
-    }             fail:^(NSError *error) {
-        [ToastUtil show:error.debugDescription];
+    }        fail:^(NSError *error) {
+        NSLog(@"getCode err:%@", error.debugDescription);
     }];
 }
 
@@ -53,17 +58,17 @@
 /// 业务服务接口获取游戏授权code码
 /// @param success 成功回调
 /// @param fail 错误回调
-- (void)reqGameLogin:(NSString *)userId success:(void (^)(NSString *code, NSError *error, int retCode))success fail:(ErrorBlock)fail {
+- (void)getCode:(NSString *)userId success:(void (^)(NSString *code, NSError *error, int retCode))success fail:(void(^)(NSError *error))fail {
 
     if (userId.length == 0) {
         if (fail) {
             fail([NSError errorWithDomain:nil code:-1 userInfo:@{NSDebugDescriptionErrorKey: @"参数错误"}]);
         }
-        NSLog(@"reqGameLogin: 用户ID不能为空");
+        NSLog(@"用户ID不能为空");
         return;
     }
     NSDictionary *dicParam = @{@"user_id": userId};
-    [HttpRequest postRequestWithApi:SUDMGP_GAME_LOGIN_URL param:dicParam success:^(NSDictionary *rootDict) {
+    [self postHttpRequestWithURL:SUDMGP_GAME_LOGIN_URL param:dicParam success:^(NSDictionary *rootDict) {
 
         NSDictionary *dic = [rootDict objectForKey:@"data"];
         /// 这里的code用于登录游戏sdk服务器
@@ -71,8 +76,8 @@
         int retCode = (int) [[dic objectForKey:@"ret_code"] longValue];
         success(code, nil, retCode);
 
-    }                       failure:^(NSError *error) {
-        NSLog(@"reqGameLogin: login game server error:%@", error.debugDescription);
+    }                    failure:^(NSError *error) {
+        NSLog(@"login game server error:%@", error.debugDescription);
         if (fail) {
             fail(error);
         }
@@ -80,13 +85,13 @@
 }
 
 /// 初始化游戏SudMDP SDK
-- (void)initSudMGPSDK:(QSSudMGPLoadConfigModel *)configModel code:(NSString *)code {
+- (void)initSudMGPSDK:(SudMGPLoadConfigModel *)configModel code:(NSString *)code {
 
-    WeakSelf
+    __weak typeof(self) weakSelf = self;
     // 确保初始化前不存在已加载的游戏 保证SudMGP initSDK前，销毁SudMGP
     [self logoutGame];
     if (configModel.gameId <= 0) {
-        NSLog(@"initSudMGPSDK: 游戏ID为空，无法加载游戏:%@, currentRoomID:%@", @(configModel.gameId), configModel.roomId);
+        NSLog(@"游戏ID为空，无法加载游戏:%@, currentRoomID:%@", @(configModel.gameId), configModel.roomId);
         return;
     }
     // 2. 初始化SudMGP SDK<SudMGP initSDK>
@@ -108,7 +113,7 @@
 
 /// 加载游戏MG
 /// @param configModel 配置model
-- (void)loadGame:(QSSudMGPLoadConfigModel *)configModel code:(NSString *)code {
+- (void)loadGame:(SudMGPLoadConfigModel *)configModel code:(NSString *)code {
 
     NSLog(@"loadMG:userId:%@, gameRoomId:%@, gameId:%@", configModel.userId, configModel.roomId, @(configModel.gameId));
     if (configModel.userId.length == 0 ||
@@ -117,7 +122,7 @@
             configModel.language.length == 0 ||
             configModel.gameId <= 0) {
 
-        NSLog(@"游戏加载参数存在异常空值，请检查参数loadMG传入参数");
+        NSLog(@"loadGame: 游戏加载参数存在异常空值，请检查参数loadMG传入参数");
         return;
     }
     // 必须配置当前登录用户
@@ -134,36 +139,6 @@
 }
 
 #pragma mark =======SudFSMMGListener 游戏SDK回调=======
-
-#pragma mark 游戏生命周期回调
-
-/// 游戏开始
-- (void)onGameStarted {
-
-}
-
-/// 游戏销毁
-- (void)onGameDestroyed {
-
-}
-
-/// 短期令牌code过期  【需要实现】
-- (void)onExpireCode:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-
-    // TODO: 需要开发者根据该游戏code码失效，刷新code码
-
-    // 请求业务服务器刷新令牌 Code更新
-    [self reqGameLogin:self.sudFSMMGDecorator.currentUserId success:^(NSString *code, NSError *error, int retCode) {
-        // 调用游戏接口更新令牌
-        [self.sudFSTAPPDecorator updateCode:code];
-        // 回调成功结果
-        [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
-    }             fail:^(NSError *error) {
-        NSLog(@"reqGameLogin error:%@", error.debugDescription);
-        // 回调失败结果
-        [handle failure:[self.sudFSMMGDecorator handleMGFailure]];
-    }];
-}
 
 #pragma mark 启动游戏开发者针对游戏相关自定义配置
 
@@ -214,6 +189,38 @@
     [handle success:m.toJSON];
 }
 
+#pragma mark 游戏生命周期回调
+
+/// 游戏开始
+- (void)onGameStarted {
+    /// 此时表明游戏加载成功
+    NSLog(@"游戏加载完毕");
+}
+
+/// 游戏销毁
+- (void)onGameDestroyed {
+    NSLog(@"游戏已销毁");
+}
+
+/// 短期令牌code过期  【需要实现】
+- (void)onExpireCode:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
+
+    // TODO: 需要开发者根据该游戏code码失效，刷新code码
+
+    // 请求业务服务器刷新令牌 Code更新
+    [self getCode:self.sudFSMMGDecorator.currentUserId success:^(NSString *code, NSError *error, int retCode) {
+        // 调用游戏接口更新令牌
+        [self.sudFSTAPPDecorator updateCode:code];
+        // 回调成功结果
+        [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    }        fail:^(NSError *error) {
+        NSLog(@"getCode err:%@", error.debugDescription);
+        // 回调失败结果
+        [handle failure:[self.sudFSMMGDecorator handleMGFailure]];
+    }];
+}
+
+
 #pragma mark 游戏相关事件状态回调通知
 
 /// 游戏: 准备按钮点击状态   MG_COMMON_SELF_CLICK_READY_BTN
@@ -257,7 +264,6 @@
 /// 玩家状态变化
 /// 玩家: 加入状态  MG_COMMON_PLAYER_IN
 - (void)onPlayerMGCommonPlayerIn:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerInModel *)model {
-    [self handleCommonPlayerJoin:model userId:userId];
 
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
@@ -297,7 +303,70 @@
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
-#pragma mark ======= 执行游戏状态方法, 用户业务相关逻辑 =======
+#pragma mark ======= private =======
+
+- (void)setSudFSMMGDecorator:(SudFSMMGDecorator *)sudFSMMGDecorator {
+    objc_setAssociatedObject(self, @selector(sudFSMMGDecorator), sudFSMMGDecorator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+}
+
+- (SudFSMMGDecorator *)sudFSMMGDecorator {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setSudFSTAPPDecorator:(SudFSTAPPDecorator *)sudFSTAPPDecorator {
+    objc_setAssociatedObject(self, @selector(sudFSTAPPDecorator), sudFSTAPPDecorator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (SudFSTAPPDecorator *)sudFSTAPPDecorator {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+/// 基础接口请求
+- (void)postHttpRequestWithURL:(NSString *)api
+                         param:(NSDictionary *)param
+                       success:(void (^)(NSDictionary *_Nonnull))success
+                       failure:(void (^)(id _Nonnull))failure {
+    //请求地址
+    NSURL *url = [NSURL URLWithString:api];
+    //设置请求地址
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    //设置请求方式
+    request.HTTPMethod = @"POST";
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+    //设置请求参数
+    if (param) {
+        NSData *bodyData = [NSJSONSerialization dataWithJSONObject:param options:NSJSONReadingMutableContainers error:nil];
+        request.HTTPBody = bodyData;
+    }
+    //设置请求session
+    NSURLSession *session = [NSURLSession sharedSession];
+    //设置网络请求的返回接收器
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                if (failure) {
+                    failure(error);
+                }
+                return;
+            }
+            NSError *error;
+            NSMutableDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+            if (error) {
+                if (failure) {
+                    failure(error);
+                }
+                return;
+            }
+            if (success) {
+                success(responseObject);
+            }
+        });
+    }];
+    //开始请求
+    [dataTask resume];
+}
 
 /// 设备安全区
 -(UIEdgeInsets)safeAreaInsets {
@@ -309,10 +378,7 @@
     return UIEdgeInsetsZero;
 }
 
-/// 加入状态处理
-- (void)handleCommonPlayerJoin:(MGCommonPlayerInModel *)model userId:(NSString *)userId {
-    [self updateGamePersons:self.sudFSMMGDecorator.onlineUserIdList.count];
-}
+#pragma mark ======= 执行业务与游戏状态交互方法 =======
 
 @end
 

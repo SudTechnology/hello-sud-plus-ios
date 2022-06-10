@@ -19,8 +19,8 @@
 @end
 
 @implementation GameViewInfoModel
-/// 转成JSON串
-- (NSString *)toJSON {
-    return [self mj_JSONString];
+/// 序列化成JSON格式字符串串
+- (nullable NSString *)toJSON {
+    return self.mj_JSONString;
 }
 @end
