@@ -54,11 +54,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param data 数据
 - (void)onCapturedPCMData:(NSData *)data;
 
-/// 观众加入直播通知
-- (void)onLiveStreamingCome;
+/// 观众拉流成功通知
+- (void)onPlayingStreamingAdd:(NSString *)streamID;
 
-/// 观众参与直播结束通知
-- (void)onLiveStreamingCancle;
+/// 观众拉流结束通知
+- (void)onPlayingStreamingDelete:(NSString *)streamID;
 @end
 
 NS_ASSUME_NONNULL_END
