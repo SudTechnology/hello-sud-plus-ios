@@ -264,7 +264,6 @@
 /// 玩家状态变化
 /// 玩家: 加入状态  MG_COMMON_PLAYER_IN
 - (void)onPlayerMGCommonPlayerIn:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerInModel *)model {
-    [self handleCommonPlayerJoin:model userId:userId];
 
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
@@ -379,12 +378,7 @@
     return UIEdgeInsetsZero;
 }
 
-#pragma mark ======= 执行游戏状态方法 =======
-
-/// 加入状态处理
-- (void)handleCommonPlayerJoin:(MGCommonPlayerInModel *)model userId:(NSString *)userId {
-//    [self updateGamePersons:self.sudFSMMGDecorator.onlineUserIdList.count];
-}
+#pragma mark ======= 执行业务与游戏状态交互方法 =======
 
 @end
 
