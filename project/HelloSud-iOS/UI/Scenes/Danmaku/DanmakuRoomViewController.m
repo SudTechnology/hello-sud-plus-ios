@@ -8,11 +8,12 @@
 
 #import "DanmakuRoomViewController.h"
 #import "DanmakuQuickSendView.h"
+
 @interface DanmakuRoomViewController ()
 /// 快速发送视图
-@property (nonatomic, strong)DanmakuQuickSendView *quickSendView;
+@property(nonatomic, strong) DanmakuQuickSendView *quickSendView;
 /// 视频视图
-@property (nonatomic, strong)BaseView *videoView;
+@property(nonatomic, strong) BaseView *videoView;
 @end
 
 @implementation DanmakuRoomViewController
@@ -25,6 +26,7 @@
 - (void)dtAddViews {
     [super dtAddViews];
     [self.sceneView addSubview:self.videoView];
+    [self.sceneView addSubview:self.quickSendView];
 }
 
 - (void)dtLayoutViews {
@@ -34,7 +36,37 @@
         make.leading.trailing.equalTo(@0);
         make.height.equalTo(@212);
     }];
+    [self.quickSendView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.videoView.mas_bottom).offset(0);
+        make.leading.trailing.equalTo(@0);
+        make.height.equalTo(@24);
+    }];
 
+}
+
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    WeakSelf
+    self.quickSendView.onOpenBlock = ^(BOOL isOpen) {
+        if (isOpen) {
+            [UIView animateWithDuration:0.25 animations:^{
+                [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@120);
+                }];
+                [weakSelf.quickSendView.superview layoutIfNeeded];
+                [weakSelf.quickSendView showOpen:YES];
+            }];
+
+        } else {
+            [UIView animateWithDuration:0.25 animations:^{
+                [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@24);
+                }];
+                [weakSelf.quickSendView.superview layoutIfNeeded];
+                [weakSelf.quickSendView showOpen:NO];
+            }];
+        }
+    };
 }
 
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {
@@ -52,11 +84,17 @@
 
 - (BaseView *)videoView {
     if (!_videoView) {
-        _videoView = [[BaseView alloc]init];
+        _videoView = [[BaseView alloc] init];
         _videoView.backgroundColor = UIColor.greenColor;
     }
     return _videoView;
 }
 
-
+- (DanmakuQuickSendView *)quickSendView {
+    if (!_quickSendView) {
+        _quickSendView = [[DanmakuQuickSendView alloc] init];
+        [_quickSendView showOpen:NO];
+    }
+    return _quickSendView;
+}
 @end
