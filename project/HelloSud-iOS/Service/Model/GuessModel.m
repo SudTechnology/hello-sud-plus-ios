@@ -8,6 +8,10 @@
 
 #import "GuessModel.h"
 
-@implementation GuessModel
+@implementation MoreGuessGameModel
+
+@end
+
+@implementation RespMoreGuessModel
 
 @end
