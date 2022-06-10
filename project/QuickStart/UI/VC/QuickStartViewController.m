@@ -6,8 +6,8 @@
 //  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "QSGameRoomViewController.h"
-#import "QSGameRoomViewController+Game.h"
+#import "QuickStartViewController.h"
+#import "QuickStartViewController+Game.h"
 #import "QSRoomNaviView.h"
 #import "QSRoomMoreView.h"
 #import "QSRoomOperatorView.h"
@@ -15,7 +15,7 @@
 #import "QSSwitchRoomModeView.h"
 #import "QSGameItemModel.h"
 
-@interface QSGameRoomViewController ()
+@interface QuickStartViewController ()
 /// 内容视图
 @property(nonatomic, strong) BaseView *contentView;
 /// 背景视图
@@ -33,28 +33,34 @@
 /// 游戏在线人数
 @property (nonatomic, strong) UILabel *gameNumLabel;
 
+/// SudMGP SDK加载业务参数
+@property (nonatomic, strong)SudMGPLoadConfigModel *sudMGPLoadConfigModel;
 @end
 
-@implementation QSGameRoomViewController
+@implementation QuickStartViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColor.blackColor;
-    // 初始化SudMDPWrapper
+
+
+    /// 加载游戏三部曲
+
+    // 1. 创建SudMDPWrapper
     [self createSudMGPWrapper];
 
-    // 配置加载SudMGP必须参数
-    QSSudMGPLoadConfigModel *sudGameConfigModel = [[QSSudMGPLoadConfigModel alloc] init];
+    // 2. 配置加载SudMGP必须参数
+    SudMGPLoadConfigModel *sudGameConfigModel = [[SudMGPLoadConfigModel alloc] init];
     sudGameConfigModel.gameId = self.gameId;
     sudGameConfigModel.roomId = self.roomId;
     sudGameConfigModel.language = @"zh-CN";
     sudGameConfigModel.gameView = self.gameView;
     sudGameConfigModel.userId = QSAppPreferences.shared.currentUserID;
     self.sudMGPLoadConfigModel = sudGameConfigModel;
-    
-    // 登录游戏
-    if (self.gameId > 0) {
+
+    // 3. 登录游戏
+    if (self.sudMGPLoadConfigModel.gameId > 0) {
         [self loginGame:self.sudMGPLoadConfigModel];
     }
 }

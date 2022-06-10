@@ -143,7 +143,6 @@
 		6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
-		6C702B722844CD38005D80B8 /* QSSudMGPLoadConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B712844CD37005D80B8 /* QSSudMGPLoadConfigModel.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
 		6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85627BE37D600D8F76C /* SettingsService.m */; };
 		6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87227BF42B200D8F76C /* NeteaseAudioEngineImpl.m */; };
@@ -222,12 +221,12 @@
 		6CE6CD63283F591D0026BDAB /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD22283F591C0026BDAB /* ToastUtil.m */; };
 		6CE6CD64283F591D0026BDAB /* HSThreadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD23283F591C0026BDAB /* HSThreadUtils.m */; };
 		6CE6CD65283F591D0026BDAB /* HSThreadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD23283F591C0026BDAB /* HSThreadUtils.m */; };
-		6CE6CD68283F5AA20026BDAB /* QSGameRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD67283F5AA20026BDAB /* QSGameRoomViewController.m */; };
+		6CE6CD68283F5AA20026BDAB /* QuickStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD67283F5AA20026BDAB /* QuickStartViewController.m */; };
 		6CE6CD71283F61770026BDAB /* QSRoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD6A283F61770026BDAB /* QSRoomMoreView.m */; };
 		6CE6CD72283F61770026BDAB /* QSRoomOperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD6B283F61770026BDAB /* QSRoomOperatorView.m */; };
 		6CE6CD73283F61770026BDAB /* QSRoomNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD6D283F61770026BDAB /* QSRoomNaviView.m */; };
 		6CE6CD74283F61770026BDAB /* QSRoomInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD6E283F61770026BDAB /* QSRoomInputView.m */; };
-		6CE6CD77283F66680026BDAB /* QSGameRoomViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD76283F66670026BDAB /* QSGameRoomViewController+Game.m */; };
+		6CE6CD77283F66680026BDAB /* QuickStartViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD76283F66670026BDAB /* QuickStartViewController+Game.m */; };
 		6CE6CD7C283F68330026BDAB /* QSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD7B283F68330026BDAB /* QSAppPreferences.m */; };
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
 		BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */; };
@@ -572,8 +571,6 @@
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
 		6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomCell.m; sourceTree = "<group>"; };
-		6C702B702844CD37005D80B8 /* QSSudMGPLoadConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSSudMGPLoadConfigModel.h; sourceTree = "<group>"; };
-		6C702B712844CD37005D80B8 /* QSSudMGPLoadConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSSudMGPLoadConfigModel.m; sourceTree = "<group>"; };
 		6C75F36A27C348A50019BB74 /* KeyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHeader.h; sourceTree = "<group>"; };
 		6CD6E85227BE37C300D8F76C /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		6CD6E85327BE37C300D8F76C /* LoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
@@ -668,8 +665,8 @@
 		6CE6CD23283F591C0026BDAB /* HSThreadUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSThreadUtils.m; sourceTree = "<group>"; };
 		6CE6CD24283F591C0026BDAB /* LanguageUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageUtil.h; sourceTree = "<group>"; };
 		6CE6CD25283F591C0026BDAB /* CommonHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeader.h; sourceTree = "<group>"; };
-		6CE6CD66283F5AA20026BDAB /* QSGameRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSGameRoomViewController.h; sourceTree = "<group>"; };
-		6CE6CD67283F5AA20026BDAB /* QSGameRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSGameRoomViewController.m; sourceTree = "<group>"; };
+		6CE6CD66283F5AA20026BDAB /* QuickStartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickStartViewController.h; sourceTree = "<group>"; };
+		6CE6CD67283F5AA20026BDAB /* QuickStartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickStartViewController.m; sourceTree = "<group>"; };
 		6CE6CD69283F61770026BDAB /* QSRoomNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSRoomNaviView.h; sourceTree = "<group>"; };
 		6CE6CD6A283F61770026BDAB /* QSRoomMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSRoomMoreView.m; sourceTree = "<group>"; };
 		6CE6CD6B283F61770026BDAB /* QSRoomOperatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSRoomOperatorView.m; sourceTree = "<group>"; };
@@ -678,11 +675,10 @@
 		6CE6CD6E283F61770026BDAB /* QSRoomInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSRoomInputView.m; sourceTree = "<group>"; };
 		6CE6CD6F283F61770026BDAB /* QSRoomInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSRoomInputView.h; sourceTree = "<group>"; };
 		6CE6CD70283F61770026BDAB /* QSRoomMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSRoomMoreView.h; sourceTree = "<group>"; };
-		6CE6CD75283F66670026BDAB /* QSGameRoomViewController+Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QSGameRoomViewController+Game.h"; sourceTree = "<group>"; };
-		6CE6CD76283F66670026BDAB /* QSGameRoomViewController+Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QSGameRoomViewController+Game.m"; sourceTree = "<group>"; };
+		6CE6CD75283F66670026BDAB /* QuickStartViewController+Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QuickStartViewController+Game.h"; sourceTree = "<group>"; };
+		6CE6CD76283F66670026BDAB /* QuickStartViewController+Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QuickStartViewController+Game.m"; sourceTree = "<group>"; };
 		6CE6CD7A283F68330026BDAB /* QSAppPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSAppPreferences.h; sourceTree = "<group>"; };
 		6CE6CD7B283F68330026BDAB /* QSAppPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSAppPreferences.m; sourceTree = "<group>"; };
-		6CE6CD7D283F71770026BDAB /* QSSudMGPConfigHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSSudMGPConfigHeader.h; sourceTree = "<group>"; };
 		6CEF766627F5A22000A12220 /* MoreSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreSettingViewController.h; sourceTree = "<group>"; };
 		6CEF766727F5A22000A12220 /* MoreSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSettingViewController.m; sourceTree = "<group>"; };
 		7A720CB3011AA758F160BFED /* Pods-QuickStart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickStart.debug.xcconfig"; path = "Target Support Files/Pods-QuickStart/Pods-QuickStart.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1495,15 +1491,6 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		6C702B6F2844CD02005D80B8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				6C702B702844CD37005D80B8 /* QSSudMGPLoadConfigModel.h */,
-				6C702B712844CD37005D80B8 /* QSSudMGPLoadConfigModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		6CD6E84727BE2CDA00D8F76C /* Impl */ = {
 			isa = PBXGroup;
 			children = (
@@ -1679,12 +1666,12 @@
 		6CE6CB74283E4C300026BDAB /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				6CE6CD75283F66670026BDAB /* QSGameRoomViewController+Game.h */,
-				6CE6CD76283F66670026BDAB /* QSGameRoomViewController+Game.m */,
+				6CE6CD75283F66670026BDAB /* QuickStartViewController+Game.h */,
+				6CE6CD76283F66670026BDAB /* QuickStartViewController+Game.m */,
 				BC21032C5553ABB17B21F173 /* QSGameListViewController.m */,
 				BC2107BC94088B9F062BBA4B /* QSGameListViewController.h */,
-				6CE6CD66283F5AA20026BDAB /* QSGameRoomViewController.h */,
-				6CE6CD67283F5AA20026BDAB /* QSGameRoomViewController.m */,
+				6CE6CD66283F5AA20026BDAB /* QuickStartViewController.h */,
+				6CE6CD67283F5AA20026BDAB /* QuickStartViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1715,7 +1702,6 @@
 		6CE6CCD5283F1EF70026BDAB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				6C702B6F2844CD02005D80B8 /* Model */,
 				6CE6CCD4283F1EE70026BDAB /* View */,
 				6CE6CB74283E4C300026BDAB /* VC */,
 			);
@@ -1857,7 +1843,6 @@
 				BC21079FFAE4B7B10EB8C5DA /* Model */,
 				6CE6CD7A283F68330026BDAB /* QSAppPreferences.h */,
 				6CE6CD7B283F68330026BDAB /* QSAppPreferences.m */,
-				6CE6CD7D283F71770026BDAB /* QSSudMGPConfigHeader.h */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -2372,7 +2357,7 @@
 				6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */,
 				6CE6CD61283F591D0026BDAB /* AppUtil.m in Sources */,
 				6CE6CD39283F591C0026BDAB /* BaseTableViewCell.m in Sources */,
-				6CE6CD77283F66680026BDAB /* QSGameRoomViewController+Game.m in Sources */,
+				6CE6CD77283F66680026BDAB /* QuickStartViewController+Game.m in Sources */,
 				6CE6CD73283F61770026BDAB /* QSRoomNaviView.m in Sources */,
 				6CE6CD29283F591C0026BDAB /* DTWebViewController.m in Sources */,
 				6CE6CCD3283F1EA90026BDAB /* QSGameListViewController.m in Sources */,
@@ -2384,12 +2369,11 @@
 				6CE6CD72283F61770026BDAB /* QSRoomOperatorView.m in Sources */,
 				6CE6CD5B283F591D0026BDAB /* DTTimer.m in Sources */,
 				6CE6CD4D283F591D0026BDAB /* NSString+DTNSString.m in Sources */,
-				6CE6CD68283F5AA20026BDAB /* QSGameRoomViewController.m in Sources */,
+				6CE6CD68283F5AA20026BDAB /* QuickStartViewController.m in Sources */,
 				6CE6CB5B283CB6890026BDAB /* AppDelegate.m in Sources */,
 				6CE6CD31283F591C0026BDAB /* DTSheetView.m in Sources */,
 				6CE6CD71283F61770026BDAB /* QSRoomMoreView.m in Sources */,
 				6CE6CD5F283F591D0026BDAB /* DeviceUtil.m in Sources */,
-				6C702B722844CD38005D80B8 /* QSSudMGPLoadConfigModel.m in Sources */,
 				6CE6CD5D283F591D0026BDAB /* LanguageUtil.m in Sources */,
 				6CE6CB6C283CB68B0026BDAB /* main.m in Sources */,
 				6CE6CD57283F591D0026BDAB /* DTNSError+Custom.m in Sources */,

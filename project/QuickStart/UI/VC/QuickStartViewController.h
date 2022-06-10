@@ -7,22 +7,10 @@
 //
 
 #import "BaseViewController.h"
-/// Model
-#import "SudFSMMGDecorator.h"
-#import "QSSudMGPLoadConfigModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /// 游戏房间控制器
-@interface QSGameRoomViewController : BaseViewController
-
-/// SudFSMMGDecorator game -> app 辅助接收解析SudMGP SDK抛出的游戏回调事件、获取相关游戏状态模块
-@property (nonatomic, strong) SudFSMMGDecorator *sudFSMMGDecorator;
-
-/// SudFSTAPPDecorator app -> game 辅助APP操作游戏相关指令模块
-@property (nonatomic, strong) SudFSTAPPDecorator *sudFSTAPPDecorator;
-
-/// SudMGP SDK加载业务参数
-@property (nonatomic, strong)QSSudMGPLoadConfigModel *sudMGPLoadConfigModel;
+@interface QuickStartViewController : BaseViewController
 
 /// 游戏房间ID
 @property(nonatomic, assign)NSString * roomId;
