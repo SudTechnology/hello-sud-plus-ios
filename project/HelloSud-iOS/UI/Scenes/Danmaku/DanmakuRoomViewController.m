@@ -24,7 +24,7 @@
 
 - (void)dtAddViews {
     [super dtAddViews];
-    [self.gameView addSubview:self.videoView];
+    [self.sceneView addSubview:self.videoView];
 }
 
 - (void)dtLayoutViews {
