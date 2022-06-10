@@ -17,26 +17,9 @@
 /// 流与ID关系[streamID:userID]
 @property(nonatomic, strong)NSMutableDictionary<NSString *, NSString *> *dicStreamUser;
 
-/// 默认的频道场景为通信场景
-@property(nonatomic)SudRTIChannelProfile mChannelProfile;
-
-/// 默认的用户角色为观众
-@property(nonatomic)SudRTIClientRole mClientRole;
-
-/// 直播场景下的视频画面
-@property(nonatomic, weak)UIView *mLocalView;
-
 @end
 
 @implementation ZegoAudioEngineImpl
-
--(instancetype)init {
-    if (self = [super init]) {
-        self.mChannelProfile = SudRTIChannelProfileCommunication;
-        self.mClientRole = SudRTIClientRoleAudience;
-    }
-    return self;
-}
 
 - (NSMutableDictionary<NSString *, NSString *>*)dicStreamUser {
     if (!_dicStreamUser) {
@@ -50,28 +33,6 @@
         _queueMute = dispatch_queue_create("mute_queue", DISPATCH_QUEUE_SERIAL);
     }
     return _queueMute;
-}
-
-- (void)setChannelProfile:(SudRTIChannelProfile)profile {
-    self.mChannelProfile = profile;
-    if (self.mChannelProfile == SudRTIChannelProfileLiveBroadcasting) {
-        self.mClientRole = SudRTIClientRoleAudience;
-    }
-}
-
-- (void)setClientRole:(SudRTIClientRole)clientRole {
-    if (self.mChannelProfile == SudRTIChannelProfileLiveBroadcasting) {
-        self.mClientRole = clientRole;
-    }
-}
-
-/// 是否是直播场景下的用户角色
-- (BOOL)isLiveStreamAudience {
-    if (self.mChannelProfile == SudRTIChannelProfileLiveBroadcasting && self.mClientRole == SudRTIClientRoleAudience) {
-        return YES;
-    }
-    
-    return NO;
 }
 
 /// 设置事件处理器
@@ -134,8 +95,6 @@
         zegoRoomConfig.token = model.token;
         /* 开始登陆房间 */
         [engine loginRoom:model.roomID user:zegoUser config:zegoRoomConfig];
-        
-        self.mLocalView = model.localView;
     }
 }
 
@@ -149,10 +108,6 @@
 }
 
 - (void)startPublishStream {
-    if ([self isLiveStreamAudience]) {
-        return;
-    }
-    
     ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
     if (engine != nil) {
         CFUUIDRef uuid = CFUUIDCreate(nil);
@@ -239,44 +194,20 @@
     }
 }
 
-/// 主播开启直播，只有直播场景下设置才有效
-- (void)startLiveStreaming:(UIView *)view {
-    if ([self isLiveStreamAudience]) {
-        return;
-    }
-    
+/// 观众开始拉流
+- (void)startPlayingStream:(NSString *)streamID view:(UIView *)view {
     ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
     if (engine != nil) {
-        CFUUIDRef uuid = CFUUIDCreate(nil);
-        UInt64 recordTime = [[NSDate date] timeIntervalSince1970] * 1000;
-        NSString * streamId = [NSString stringWithFormat:@"%@-%llu", (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuid), recordTime];
-        CFRelease(uuid);
-        
-        [engine startPublishingStream:streamId];
-        dispatch_async(self.queueMute, ^{
-            /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
-            /// 异步激活采集通道（此处开销成本过大，相对耗时）
-            [engine enableAudioCaptureDevice:YES];
-        });
-        
-        if (view != nil) {
-            ZegoCanvas *canvas = [ZegoCanvas canvasWithView:view];
-            [engine startPreview:canvas];
-        }
+        ZegoCanvas *canvas = [ZegoCanvas canvasWithView:view];
+        [engine startPlayingStream:streamID canvas:canvas];
     }
 }
 
-/// 主播关闭直播，只有直播场景下设置才有效
-- (void)stopLiveStreaming {
+/// 观众停止拉流
+- (void)stopPlayingStream:(NSString *)streamID {
     ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
     if (engine != nil) {
-        [engine stopPublishingStream];
-        dispatch_async(self.queueMute, ^{
-            /// 把采集设备停掉，（静音时不再状态栏提示采集数据）
-            /// 异步激活采集通道（此处开销成本过大，相对耗时）
-            [ZegoExpressEngine.sharedEngine enableAudioCaptureDevice:NO];
-        });
-        [engine stopPreview];
+        [engine stopPlayingStream:streamID];
     }
 }
 
@@ -338,29 +269,12 @@
             switch (updateType) {
                 case ZegoUpdateTypeAdd:
                     for (ZegoStream * zegoStream in streamList) {
-                        if (self.mChannelProfile == SudRTIChannelProfileLiveBroadcasting && self.mClientRole == SudRTIClientRoleAudience) {
-                            if (self.mLocalView != nil) {
-                                ZegoCanvas *canvas = [ZegoCanvas canvasWithView:self.mLocalView];
-                                [engine startPlayingStream:zegoStream.streamID canvas:canvas];
-                                
-                                if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onLiveStreamingCome)]) {
-                                    [self.mISudAudioEventListener onLiveStreamingCome];
-                                }
-                                break;
-                            }
-                        }
                         [engine startPlayingStream:zegoStream.streamID canvas:nil];
                     }
                     break;
                 case ZegoUpdateTypeDelete:
                     for (ZegoStream * zegoStream in streamList) {
                         [engine stopPlayingStream:zegoStream.streamID];
-                        
-                        if (self.mChannelProfile == SudRTIChannelProfileLiveBroadcasting && self.mClientRole == SudRTIClientRoleAudience) {
-                            if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onLiveStreamingCancle)]) {
-                                [self.mISudAudioEventListener onLiveStreamingCancle];
-                            }
-                        }
                     }
                     break;
             }
@@ -403,6 +317,18 @@
 - (void)onRoomOnlineUserCountUpdate:(int)count roomID:(NSString *)roomID {
     if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRoomOnlineUserCountUpdate:)]) {
         [self.mISudAudioEventListener onRoomOnlineUserCountUpdate:count];
+    }
+}
+
+- (void)onPlayerStateUpdate:(ZegoPlayerState) state errorCode:(int) errorCode extendedData:(nullable NSDictionary *) extendedData streamID:(NSString *) streamID {    
+    if (state == ZegoPlayerStatePlaying) {
+        if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onPlayingStreamingAdd:)]) {
+            [self.mISudAudioEventListener onPlayingStreamingAdd:streamID];
+        }
+    } else if (state == ZegoPlayerStateNoPlay) {
+        if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onPlayingStreamingDelete:)]) {
+            [self.mISudAudioEventListener onPlayingStreamingDelete:streamID];
+        }
     }
 }
 
