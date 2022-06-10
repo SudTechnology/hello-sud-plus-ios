@@ -41,8 +41,10 @@
             break;
         case SceneTypeGuess:
             vc = [[GuessRoomViewController alloc]init];
+            break;
         case SceneTypeDanmaku:
             vc = [[DanmakuRoomViewController alloc]init];
+            break;
         default:
             vc = [[BaseSceneViewController alloc] init];
             break;

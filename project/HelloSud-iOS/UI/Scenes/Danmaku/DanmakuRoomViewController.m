@@ -32,10 +32,22 @@
     [self.videoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviView.mas_bottom).offset(5);
         make.leading.trailing.equalTo(@0);
-        make.edges.equalTo(self.view);
         make.height.equalTo(@212);
     }];
 
+}
+
+- (void)setConfigModel:(BaseSceneConfigModel *)configModel {
+    [super setConfigModel:configModel];
+    self.gameId = 0;
+}
+
+- (BOOL)isShowAudioContent {
+    return NO;
+}
+
+- (BOOL)isShowGameMic {
+    return NO;
 }
 
 - (BaseView *)videoView {
