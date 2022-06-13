@@ -12,7 +12,7 @@
 
 @property(nonatomic, strong) UIImageView *bgImageView;
 @property(nonatomic, strong) UILabel *titleLabel;
-@property(nonatomic, strong) MarqueeLabel *tipLabel;
+@property(nonatomic, strong) UILabel *tipLabel;
 @property(nonatomic, strong) UIButton *openBtn;
 @property(nonatomic, strong) UIButton *closeBtn;
 @end
@@ -76,14 +76,20 @@
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    [self addGestureRecognizer:tap];
-
+    [self.closeBtn addTarget:self action:@selector(onCloseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.openBtn addTarget:self action:@selector(onOpenBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)onTap:(id)tap {
-    SwitchAutoGuessPopView *v = [[SwitchAutoGuessPopView alloc]init];
-    [DTSheetView show:v onCloseCallback:nil];
+- (void)onCloseBtnClick:(id)sender {
+    if (self.onCloseBlock) {
+        self.onCloseBlock();
+    }
+}
+
+- (void)onOpenBtnClick:(id)sender {
+    if (self.onOpenBlock) {
+        self.onOpenBlock();
+    }
 }
 
 - (UIImageView *)bgImageView {
@@ -102,16 +108,16 @@
         _titleLabel.font = UIFONT_BOLD(30);
         _titleLabel.textColor = HEX_COLOR(@"#000000");
         _titleLabel.shadowColor = HEX_COLOR(@"#FFDE00");
+        _titleLabel.shadowOffset = CGSizeMake(1, 2);
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.numberOfLines = 0;
     }
     return _titleLabel;
 }
 
-- (MarqueeLabel *)tipLabel {
+- (UILabel *)tipLabel {
     if (!_tipLabel) {
-        _tipLabel = [[MarqueeLabel alloc] init];
-        _tipLabel.text = @"UMO";
+        _tipLabel = [[UILabel alloc] init];
         _tipLabel.font = UIFONT_REGULAR(16);
         _tipLabel.textColor = HEX_COLOR(@"#000000");
         _tipLabel.textAlignment = NSTextAlignmentCenter;

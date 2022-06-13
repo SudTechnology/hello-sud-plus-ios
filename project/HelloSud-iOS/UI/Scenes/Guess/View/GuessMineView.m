@@ -56,14 +56,6 @@
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    [self addGestureRecognizer:tap];
-
-}
-
-- (void)onTap:(id)tap {
-    SwitchAutoGuessPopView *v = [[SwitchAutoGuessPopView alloc]init];
-    [DTSheetView show:v onCloseCallback:nil];
 }
 
 - (UIImageView *)bgImageView {

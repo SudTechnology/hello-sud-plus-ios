@@ -8,5 +8,7 @@
 
 /// 竞猜场景
 @interface GuessRoomViewController : AudioRoomViewController
-
+/// 展示自动竞猜状态视图
+/// @param show  show
+- (void)showNaviAutoStateView:(BOOL)show;
 @end
