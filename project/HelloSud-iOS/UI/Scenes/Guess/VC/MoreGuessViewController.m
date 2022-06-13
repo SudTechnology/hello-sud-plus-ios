@@ -10,7 +10,7 @@
 @interface MoreGuessViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIImageView *bgImageView;
 @property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray <HSGameItem *> *dataList;
+@property(nonatomic, strong) NSArray <MoreGuessGameModel *> *dataList;
 @property(nonatomic, strong) MoreGuessHeaderView *headerView;
 @end
 
@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"精彩竞猜活动";
+    [self reqData];
 }
 
 - (void)dtAddViews {
@@ -44,12 +45,19 @@
     self.tableView.tableHeaderView = self.headerView;
     self.headerView.backgroundColor = UIColor.clearColor;
     self.tableView.backgroundColor = UIColor.clearColor;
-
-    self.dataList = @[[[HSGameItem alloc]init], [[HSGameItem alloc]init]];
 }
 
 - (void)dtUpdateUI {
 
+}
+
+- (void)reqData {
+
+    WeakSelf
+    [GuessService reqGuessListWithFinished:^(RespMoreGuessModel *model) {
+        weakSelf.dataList = model.quizGameInfoList;
+        [weakSelf.tableView reloadData];
+    }];
 }
 
 #pragma mark - UITableViewDelegate || UITableViewDataSource

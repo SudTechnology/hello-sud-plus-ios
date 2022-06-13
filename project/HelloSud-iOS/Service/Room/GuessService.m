@@ -11,7 +11,7 @@
 @implementation GuessService
 
 
-/// 下注1：跨房PK 2：游戏)
+/// 下注1：跨房PK 2：游戏
 /// @param betType betType
 /// @param coin 消费金额
 /// @param userList 用户ID列表
@@ -24,16 +24,14 @@
         }
     }                         failure:nil];
 }
-/// 下注1：跨房PK 2：游戏)
-/// @param betType betType
-/// @param coin 消费金额
-/// @param userList 用户ID列表
+
+/// 查询竞猜游戏列表
 /// @param finished 完成回调
-+ (void)reqBet2:(NSInteger)betType coin:(NSInteger)coin userList:(NSArray <NSString *> *)userList finished:(void (^)(void))finished {
-    NSDictionary *dicParam = @{@"quizType": @(betType), @"coin": @(coin), @"supportedUserIdList": userList == nil ? @[] : userList};
-    [HSHttpService postRequestWithURL:kINTERACTURL(@"quiz/bet/v1") param:dicParam respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
++ (void)reqGuessListWithFinished:(void(^)(RespMoreGuessModel *))finished {
+    NSDictionary *dicParam = @{};
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"quiz/list/v1") param:dicParam respClass:RespMoreGuessModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (finished) {
-            finished();
+            finished((RespMoreGuessModel *)resp);
         }
     }                         failure:nil];
 }

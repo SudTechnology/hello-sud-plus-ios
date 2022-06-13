@@ -13,5 +13,7 @@
 @end
 
 @implementation RespMoreGuessModel
-
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"quizGameInfoList": [MoreGuessGameModel class]};
+}
 @end
