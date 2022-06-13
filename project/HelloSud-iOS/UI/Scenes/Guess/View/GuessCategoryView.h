@@ -6,4 +6,5 @@
 /// 竞猜视图cell
 @interface GuessCategoryView : BaseView
 @property (nonatomic, strong) NSArray <MoreGuessGameModel *> *gameList;
+@property (nonatomic, strong) HSSceneModel *sceneModel;
 @end

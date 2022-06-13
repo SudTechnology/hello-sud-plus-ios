@@ -50,6 +50,10 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HomeGuessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeGuessCell" forIndexPath:indexPath];
+    WeakSelf;
+    cell.onEnterRoomBlock = ^(MoreGuessGameModel *m) {
+        [AudioRoomService reqMatchRoom:m.gameId sceneType:weakSelf.sceneModel.sceneId gameLevel:-1];
+    };
     [cell dt_cornerRadius:8];
     cell.model = self.gameList[indexPath.row];
     return cell;

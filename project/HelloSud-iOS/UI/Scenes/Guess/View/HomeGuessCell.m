@@ -32,6 +32,7 @@
 
 - (void)dtAddViews {
 
+    [super dtAddViews];
     [self.contentView addSubview:self.iconImageView];
     [self.contentView addSubview:self.awardBackgroundView];
     [self.awardBackgroundView addSubview:self.awardLabel];
@@ -96,6 +97,22 @@
     [self updateInfoLabel:@"00:00:00"];
     [self updateAward:m.winCoin];
     [self beginCountdown];
+}
+
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    [self.enterBtn addTarget:self action:@selector(onEnterBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+
+}
+
+- (void)onEnterBtnClick:(id)sender {
+    if (![self.model isKindOfClass:[MoreGuessGameModel class]]) {
+        return;
+    }
+    MoreGuessGameModel *m = (MoreGuessGameModel *)self.model;
+    if (self.onEnterRoomBlock) {
+        self.onEnterRoomBlock(m);
+    }
 }
 
 /// 更新文案信息

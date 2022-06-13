@@ -6,4 +6,5 @@
 #import "BaseCollectionViewCell.h"
 
 @interface HomeGuessCell : BaseCollectionViewCell
+@property (nonatomic, copy)void(^onEnterRoomBlock)(MoreGuessGameModel *model);
 @end

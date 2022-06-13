@@ -146,6 +146,7 @@
            make.bottom.equalTo(@(0));
         }];
         self.guessView.gameList = self.quizGameInfoList;
+        self.guessView.sceneModel = self.sceneModel;
         [self.guessView dtUpdateUI];
     }
 }
