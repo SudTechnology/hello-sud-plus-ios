@@ -61,20 +61,24 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
+
+}
+
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
     if (!AppService.shared.moreGuessHeaderArrayCache) {
         MoreGuessHeaderCellModel *one = [[MoreGuessHeaderCellModel alloc]init];
-        one.duration = 1000;
+        one.duration = self.duration;
         MoreGuessHeaderCellModel *two = [[MoreGuessHeaderCellModel alloc]init];
         two.duration = 0;
         self.gameList = @[one, two];
         AppService.shared.moreGuessHeaderArrayCache = self.gameList;
     } else {
         self.gameList = AppService.shared.moreGuessHeaderArrayCache;
+        if (self.gameList.count > 0) {
+            ((MoreGuessHeaderCellModel *)self.gameList[0]).duration = self.duration;
+        }
     }
-}
-
-- (void)dtUpdateUI {
-    [super dtUpdateUI];
     [self.collectionView reloadData];
 }
 

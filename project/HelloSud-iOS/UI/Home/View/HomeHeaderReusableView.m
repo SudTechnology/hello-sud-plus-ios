@@ -145,7 +145,7 @@
            make.height.equalTo(@290);
            make.bottom.equalTo(@(0));
         }];
-        self.guessView.gameList = self.headerGameList;
+        self.guessView.gameList = self.quizGameInfoList;
         [self.guessView dtUpdateUI];
     }
 }

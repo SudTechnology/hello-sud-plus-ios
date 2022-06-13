@@ -29,6 +29,8 @@
 @property (nonatomic, assign) CGFloat itemW;
 @property (nonatomic, assign) CGFloat itemH;
 @property (nonatomic, assign) BOOL isClickSegItem;
+/// 竞猜游戏列表
+@property (nonatomic, strong)NSArray<MoreGuessGameModel *> *quizGameInfoList;
 
 @end
 
@@ -183,6 +185,9 @@
             }
 
             [weakSelf.dataList addObject:arr];
+            if (m.sceneId == SceneTypeGuess) {
+                [weakSelf reqGuessGameList:m];
+            }
         }
         [weakSelf.headerSceneList addObjectsFromArray:model.sceneList];
 
@@ -193,6 +198,19 @@
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
     [self.searchHeaderView dtUpdateUI];
+}
+
+- (void)reqGuessGameList:(HSSceneModel *)guessModel {
+    WeakSelf
+    [GuessService reqGuessListWithFinished:^(RespMoreGuessModel *model) {
+        if (model.quizGameInfoList.count > 5) {
+            // 取前5个即可
+            weakSelf.quizGameInfoList = [model.quizGameInfoList subarrayWithRange:NSMakeRange(0, 5)];
+        } else {
+            weakSelf.quizGameInfoList = model.quizGameInfoList;
+        }
+        [weakSelf.collectionView reloadData];
+    }];
 }
 
 /// 构建等待数据
@@ -294,6 +312,7 @@
         HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
         view.sceneModel = self.headerSceneList[indexPath.section];
         view.headerGameList = self.dataList[indexPath.section];
+        view.quizGameInfoList = self.quizGameInfoList;
         view.customBlock = ^(UIButton *sender) {
             GameConfigViewController *vc = GameConfigViewController.new;
             [weakSelf.navigationController pushViewController:vc animated:true];

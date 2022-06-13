@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 更多竞猜数据model
 @interface RespMoreGuessModel : BaseRespModel
 /// 跨房pk倒计时间隔（秒）
-@property (nonatomic, assign)NSInteger gameCountDownCycle;
+@property (nonatomic, assign)NSInteger pkCountDownCycle;
 @property (nonatomic, strong)NSArray<MoreGuessGameModel *> *quizGameInfoList;
 @end
 

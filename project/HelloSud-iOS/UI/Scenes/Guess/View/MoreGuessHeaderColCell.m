@@ -7,9 +7,13 @@
 #import "MoreGuessHeaderCellModel.h"
 #import "MoreGuessCoinPopView.h"
 
+#define DAY_SEC (24 * 3600)
+#define HOUR_SEC 3600
+#define MINUTE_SEC 60
+
 @interface MoreGuessHeaderColCell ()
 @property(nonatomic, strong) UIImageView *vsImageView;
-@property(nonatomic, strong) UIView *stateContentView;
+@property(nonatomic, strong) BaseView *stateContentView;
 @property(nonatomic, strong) UILabel *stateLabel;
 
 @property(nonatomic, strong) UILabel *leftNameLabel;
@@ -35,6 +39,9 @@
 
 @property(nonatomic, strong) UIImageView *leftResultImageView;
 @property(nonatomic, strong) UIImageView *rightResultImageView;
+
+@property (nonatomic, strong)DTTimer *timer;
+@property (nonatomic, assign)NSInteger countdown;
 @end
 
 @implementation MoreGuessHeaderColCell
@@ -75,16 +82,17 @@
 - (void)dtLayoutViews {
     [super dtLayoutViews];
 
+    [self.stateContentView setPartRoundCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadius:8];
     [self.stateContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@-8);
-        make.height.equalTo(@38);
+        make.top.equalTo(@0);
+        make.height.equalTo(@30);
         make.centerX.equalTo(self.contentView);
         make.width.greaterThanOrEqualTo(@0);
     }];
 
     [self.stateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@10);
-        make.trailing.equalTo(@-18);
+        make.trailing.equalTo(@-10);
         make.width.height.greaterThanOrEqualTo(@0);
         make.bottom.equalTo(@-5);
     }];
@@ -260,6 +268,7 @@
         self.leftIDLabel.text = @"ID 8721";
         self.rightIDLabel.text = @"ID 8719";
         [self updateCoin:50000];
+        [self beginCountdown];
     } else {
         self.stateLabel.text = @"已结束";
         self.coinTipLabel.text = @"13人预测成功瓜分奖池";
@@ -280,12 +289,36 @@
     }
 }
 
+- (void)beginCountdown {
+    WeakSelf
+    MoreGuessHeaderCellModel *m = (MoreGuessHeaderCellModel *)self.model;
+    if (!self.timer) {
+        self.countdown = m.duration;
+        self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
+            [weakSelf updateCountdown];
+        }];
+    }
+}
+
+- (void)updateCountdown {
+    self.countdown--;
+    if (self.countdown < 0) {
+        MoreGuessHeaderCellModel *m = (MoreGuessHeaderCellModel *)self.model;
+        self.countdown = m.duration;
+    }
+    NSInteger day = self.countdown / DAY_SEC;
+    NSInteger hour = (self.countdown - day * DAY_SEC) / HOUR_SEC;
+    NSInteger min = (self.countdown - day * DAY_SEC - hour * HOUR_SEC) / MINUTE_SEC;
+    NSInteger sec = self.countdown - day * DAY_SEC - hour * HOUR_SEC - min * MINUTE_SEC;
+    _stateLabel.text = [NSString stringWithFormat:@"距离开始 %02ld:%02ld:%02ld:%02ld", day, hour, min, sec];
+}
+
 - (void)onLeftSupportClick:(id)sender {
     WeakSelf
     MoreGuessCoinPopView *v = [[MoreGuessCoinPopView alloc]init];
     v.onSupportCoinBlock = ^(NSInteger coin) {
 
-        MoreGuessHeaderCellModel *m = weakSelf.model;
+        MoreGuessHeaderCellModel *m = (MoreGuessHeaderCellModel *)weakSelf.model;
         if (![m isKindOfClass:[MoreGuessHeaderCellModel class]]) {
             return;
         }
@@ -338,11 +371,11 @@
     return _vsImageView;
 }
 
-- (UIView *)stateContentView {
+- (BaseView *)stateContentView {
     if (!_stateContentView) {
-        _stateContentView = [[UIView alloc] init];
+        _stateContentView = [[BaseView alloc] init];
         _stateContentView.backgroundColor = HEX_COLOR(@"#FF711A");
-        [_stateContentView dt_cornerRadius:8];
+//        [_stateContentView dt_cornerRadius:8];
 
         _stateContentView.layer.borderWidth = 1;
         _stateContentView.layer.borderColor = HEX_COLOR(@"#FFBF3A").CGColor;

@@ -56,6 +56,8 @@
     WeakSelf
     [GuessService reqGuessListWithFinished:^(RespMoreGuessModel *model) {
         weakSelf.dataList = model.quizGameInfoList;
+        weakSelf.headerView.duration = model.pkCountDownCycle;
+        [weakSelf.headerView dtUpdateUI];
         [weakSelf.tableView reloadData];
     }];
 }
