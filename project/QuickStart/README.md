@@ -327,13 +327,18 @@
 - 3.1 请使用QuickStart项目运行；
 - 3.2 QuickStart使用SudMGPWrapper、SudMGPSDK实现快速接入游戏；
 - 3.3 快速接入文档：[StartUp-Android](https://docs.sud.tech/zh-CN/app/Client/StartUp-Android.html) 和 [StartUp-iOS](https://docs.sud.tech/zh-CN/app/Client/StartUp-iOS.html)
-- 3.4 `QSGameRoomViewController(Game)`游戏部分相关调用逻辑：负责login(App getCode) --> SudMGP.initSDK --> SudMGP.loadMG
-- 3.5 `QSGameRoomViewController`展示游戏房相关UI展示
+- 3.4 `QuickStartViewController(Game)`游戏部分相关调用逻辑：负责login(App getCode) --> SudMGP.initSDK --> SudMGP.loadMG
+- 3.5 `QuickStartViewController`展示游戏房相关UI展示
 - 3.6 `QuickStart 服务端`[hello-sud-java](https://github.com/SudTechnology/hello-sud-java) ，login(App getCode 获取短期令牌code) ，`如果访问不了，请联系SUD添加，github账号`
 
 # 4. QuickStart运行效果图
 ![QuickStartHome.PNG](./doc/QuickStartHome.PNG)
 ![QuickStartGame.PNG](./doc/QuickStartGame.PNG)
+
+- HelloSud体验Demo（展示多业务场景）
+
+![Android](doc/hello_sudplus_android.png)
+![iPhone](doc/hello_sudplus_iphone.png)
 
 # 5. 接入方客户端和SudMGP SDK调用时序图
 ![AppCallSudMGPSeqDiag.png](doc/AppCallSudMGPSeqDiag.png)
