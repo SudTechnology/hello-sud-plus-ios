@@ -3,7 +3,7 @@
   <details>
   <summary>详细描述</summary>
 
-      1.使用APP自己的appId、appKey、isTestEnv=true、bundleId(iOS Bundle ID)；
+      1.保持使用QuickStart的appId、appKey、isTestEnv=true；bundleId/applicationId(可使用给Sud平台'接入信息表'中的bundleId/applicationId)；
       2.使用QuickStart的后端服务，login/getCode获取短期令牌code；
       3.完成集成，游戏跑起来;
   QuickStart 后端服务[hello-sud-java代码仓库](https://github.com/SudTechnology/hello-sud-java) ，`如果访问不了代码仓库，请联系SUD添加，github账号`；
@@ -13,11 +13,11 @@
 - 第二步：APP客户端和APP服务端联调
   <details>
   <summary>详细描述</summary>
-
-      1.APP服务端实现5个HTTP API（接入信息表填的）
-      2.APP客户端替换login/getCode获取短期令牌code逻辑代码；
-      3.APP客户端和APP服务端联调5个HTTP API；
-      4.完成HTTP API联调；
+      1.使用APP自己的appId、appKey、isTestEnv=true、bundleId(Android applicationId)；
+      2.APP服务端实现5个HTTP API（接入信息表填的）
+      3.APP客户端替换login/getCode获取短期令牌code逻辑代码；
+      4.APP客户端和APP服务端联调5个HTTP API；
+      5.完成HTTP API联调；
   </details>
 
 
@@ -51,7 +51,7 @@
   </details>
   
 
-- 第二步：拷贝QuickStart 3个文件，并保持配置参数不变
+- 第二步：拷贝QuickStart 两个文件，并保持配置参数不变
   <details>
   <summary>详细描述</summary>
 
@@ -127,11 +127,16 @@
 
         // 配置加载SudMGP必须参数
         SudMGPLoadConfigModel *sudGameConfigModel = [[SudMGPLoadConfigModel alloc] init];
-        sudGameConfigModel.gameId = 1461227817776713818;// 碰碰我最强， SudMGP平台64bit游戏ID
-        sudGameConfigModel.roomId = @"10000"; // 房间ID
-        sudGameConfigModel.language = @"zh-CN";// 游戏语言
-        sudGameConfigModel.gameView = self.gameView;// 游戏视图
-        sudGameConfigModel.userId = @"123456";// 业务方APP当前登录的用户ID
+        // 碰碰我最强， SudMGP平台64bit游戏ID（此id与QuickStart绑定。替换Sud平台AppId之后，请修改为对应mgId）
+        sudGameConfigModel.gameId = 1461227817776713818;
+        // 房间ID
+        sudGameConfigModel.roomId = @"10000"; 
+        // 游戏语言
+        sudGameConfigModel.language = @"zh-CN";
+        // 游戏视图
+        sudGameConfigModel.gameView = self.gameView;
+        // 业务方APP当前登录的用户ID
+        sudGameConfigModel.userId = @"123456";
 
         // 加载游戏
         if (sudGameConfigModel.gameId > 0) {
