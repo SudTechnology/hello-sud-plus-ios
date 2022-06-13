@@ -3,9 +3,13 @@
   <details>
   <summary>详细描述</summary>
 
-      1.保持使用QuickStart的appId、appKey、isTestEnv=true；bundleId/applicationId(可使用给Sud平台'接入信息表'中的bundleId/applicationId)；
-      2.使用QuickStart的后端服务，login/getCode获取短期令牌code；
-      3.完成集成，游戏跑起来;
+      1.appId、appKey和isTestEnv=true，请使用QuickStart客户端的；
+      2.iOS bundleId、Android applicationId，请使用APP客户端自己的；(接入信息表中的bundleId/applicationId)；
+      3.短期令牌code，请使用QuickStart的后端服务（login/getCode获取的）；
+      4.完成集成，游戏跑起来;
+  
+      *** SUD平台支持一个appId绑定多个bundleId和applicationId；***
+      *** 填完接入信息表后，SUD会将APP的bundleId和applicationId，绑定到QuickStart的appId上，仅支持测试环境；***
   QuickStart 后端服务[hello-sud-java代码仓库](https://github.com/SudTechnology/hello-sud-java) ，`如果访问不了代码仓库，请联系SUD添加，github账号`；
   </details>
 
@@ -13,9 +17,10 @@
 - 第二步：APP客户端和APP服务端联调
   <details>
   <summary>详细描述</summary>
-      1.使用APP自己的appId、appKey、isTestEnv=true、bundleId(Android applicationId)；
-      2.APP服务端实现5个HTTP API（接入信息表填的）
-      3.APP客户端替换login/getCode获取短期令牌code逻辑代码；
+
+      1.APP服务端实现了5个HTTP API；（接入信息表填的）
+      2.请使用APP客户端自己的appId、appKey、isTestEnv=true、bundleId(iOS)、applicationId(Android)；
+      3.请使用APP自己的服务端login/getCode接口，获取短期令牌code；
       4.APP客户端和APP服务端联调5个HTTP API；
       5.完成HTTP API联调；
   </details>
@@ -60,7 +65,6 @@
         QuickStartViewController+Game.m
       2.保持配置参数不变，appId和appKey使用QuickStart
         QuickStartViewController+Game.h
-      3.QuickStartViewController+Game分类名称改成目标ViewController对应名称
   ``` objc
     // TODO: 登录接入方服务器url
     #define SUDMGP_GAME_LOGIN_URL          @"https://fat-mgp-hello.sudden.ltd/login/v2"
@@ -76,9 +80,10 @@
     #define GAME_TEST_ENV    NO
     #endif
   ```
-      3.保持使用QuickStart后端服务login/getCode；
-        3.1 实现APP快速加载运行游戏，使用QuickStart服务；
-        3.2 填好接入信息表后，测试环境，会把APP的bundleId和applicationId，同时加入到QuickStart的appId；
+      3.QuickStartViewController+Game分类名称改成目标ViewController对应名称
+      4.保持使用QuickStart后端服务login/getCode；
+        4.1 实现APP快速加载运行游戏，使用QuickStart服务；
+        4.2 填好接入信息表后，测试环境，会把APP的bundleId和applicationId，同时加入到QuickStart的appId；
   </details>
   
 
@@ -165,19 +170,15 @@
 ![QuickStartArch.png](doc/QuickStartArch.png)
 
 # 1. SudMGP SDK
-### 1.1 SudMGP Android 客户端SDK
-- 例如：SudMGP-v1.1.52.554.aar
-- [下载 SudMGP-Android SDK](https://github.com/SudTechnology/sud-mgp-android/releases)
-  
-### 1.2 SudMGP iOS 客户端SDK
-- 例如：SudMGP.xcframework
-- [下载 SudMGP-iOS SDK](https://github.com/SudTechnology/sud-mgp-ios/releases)
+### 1.1 SudMGP Client SDK
 
-### 1.3 接入文档
-- [接入文档](https://docs.sud.tech/zh-CN/app/Client/)
+- [下载 SudMGP-Android-v1.1.52.554.zip](https://github.com/SudTechnology/sud-mgp-android/releases)
+- [下载 SudMGP-iOS-v1.1.52.527.zip](https://github.com/SudTechnology/sud-mgp-ios/releases)
 
-### 1.4 接入FAQ
- - 准备中，敬请期待
+### 1.2 接入文档
+
+- [接入文档](https://docs.sud.tech/zh-CN/app/Client/API/)
+- [FAQ](https://docs.sud.tech/zh-CN/app/Client/FAQ/)
 
 # 2. SudMGPWrapper
 - `SudMGPWrapper封装SudMGP，简化App和游戏相互调用接口`；
@@ -322,13 +323,18 @@
 - 3.1 请使用QuickStart项目运行；
 - 3.2 QuickStart使用SudMGPWrapper、SudMGPSDK实现快速接入游戏；
 - 3.3 快速接入文档：[StartUp-Android](https://docs.sud.tech/zh-CN/app/Client/StartUp-Android.html) 和 [StartUp-iOS](https://docs.sud.tech/zh-CN/app/Client/StartUp-iOS.html)
-- 3.4 `QSGameRoomViewController(Game)`游戏部分相关调用逻辑：负责login(App getCode) --> SudMGP.initSDK --> SudMGP.loadMG
-- 3.5 `QSGameRoomViewController`展示游戏房相关UI展示
+- 3.4 `QuickStartViewController(Game)`游戏部分相关调用逻辑：负责login(App getCode) --> SudMGP.initSDK --> SudMGP.loadMG
+- 3.5 `QuickStartViewController`展示游戏房相关UI展示
 - 3.6 `QuickStart 服务端`[hello-sud-java](https://github.com/SudTechnology/hello-sud-java) ，login(App getCode 获取短期令牌code) ，`如果访问不了，请联系SUD添加，github账号`
 
 # 4. QuickStart运行效果图
 ![QuickStartHome.PNG](./doc/QuickStartHome.PNG)
 ![QuickStartGame.PNG](./doc/QuickStartGame.PNG)
+
+- HelloSud体验Demo（展示多业务场景）
+
+![Android](doc/hello_sudplus_android.png)
+![iPhone](doc/hello_sudplus_iphone.png)
 
 # 5. 接入方客户端和SudMGP SDK调用时序图
 ![AppCallSudMGPSeqDiag.png](doc/AppCallSudMGPSeqDiag.png)
