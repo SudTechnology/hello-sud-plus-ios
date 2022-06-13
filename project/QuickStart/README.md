@@ -3,9 +3,13 @@
   <details>
   <summary>详细描述</summary>
 
-      1.保持使用QuickStart的appId、appKey、isTestEnv=true；bundleId/applicationId(可使用给Sud平台'接入信息表'中的bundleId/applicationId)；
-      2.使用QuickStart的后端服务，login/getCode获取短期令牌code；
-      3.完成集成，游戏跑起来;
+      1.appId、appKey和isTestEnv=true，请使用QuickStart客户端的；
+      2.iOS bundleId、Android applicationId，请使用APP客户端自己的；(接入信息表中的bundleId/applicationId)；
+      3.短期令牌code，请使用QuickStart的后端服务（login/getCode获取的）；
+      4.完成集成，游戏跑起来;
+  
+      *** SUD平台支持一个appId绑定多个bundleId和applicationId；***
+      *** 填完接入信息表后，SUD会将APP的bundleId和applicationId，绑定到QuickStart的appId上，仅支持测试环境；***
   QuickStart 后端服务[hello-sud-java代码仓库](https://github.com/SudTechnology/hello-sud-java) ，`如果访问不了代码仓库，请联系SUD添加，github账号`；
   </details>
 
@@ -13,9 +17,10 @@
 - 第二步：APP客户端和APP服务端联调
   <details>
   <summary>详细描述</summary>
-      1.使用APP自己的appId、appKey、isTestEnv=true、bundleId(Android applicationId)；
-      2.APP服务端实现5个HTTP API（接入信息表填的）
-      3.APP客户端替换login/getCode获取短期令牌code逻辑代码；
+
+      1.APP服务端实现了5个HTTP API；（接入信息表填的）
+      2.请使用APP客户端自己的appId、appKey、isTestEnv=true、bundleId(iOS)、applicationId(Android)；
+      3.请使用APP自己的服务端login/getCode接口，获取短期令牌code；
       4.APP客户端和APP服务端联调5个HTTP API；
       5.完成HTTP API联调；
   </details>
