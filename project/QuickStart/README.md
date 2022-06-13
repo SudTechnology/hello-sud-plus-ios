@@ -1,34 +1,160 @@
+# 开启快速接入和联调SUD游戏之旅
+- 第一步：APP客户端集成SUD游戏（三分钟集成代码）
+  <details>
+  <summary>详细描述</summary>
+
+      1.使用APP自己的appId、appKey、isTestEnv=true、bundleId(iOS Bundle ID)；
+      2.使用QuickStart的后端服务，login/getCode获取短期令牌code；
+      3.完成集成，游戏跑起来;
+  QuickStart 后端服务[hello-sud-java代码仓库](https://github.com/SudTechnology/hello-sud-java) ，`如果访问不了代码仓库，请联系SUD添加，github账号`；
+  </details>
+
+  
+- 第二步：APP客户端和APP服务端联调
+  <details>
+  <summary>详细描述</summary>
+
+      1.APP服务端实现5个HTTP API（接入信息表填的）
+      2.APP客户端替换login/getCode获取短期令牌code逻辑代码；
+      3.APP客户端和APP服务端联调5个HTTP API；
+      4.完成HTTP API联调；
+  </details>
+
+
+- 第三步：APP专注于自身业务需求
+  <details>
+  <summary>详细描述</summary>
+
+      1.参考SudMGP文档、SudMGPWrapper、QuickStart、HelloSud体验Demo（展示多场景，Custom自定义场景）；
+      2.专注于APP UI交互、功能是否支持、如何实现
+      比如：
+      调整游戏View大小、位置；
+      调整APP和游戏交互流程，UI元素是否可隐藏，按钮是否可隐藏APP实现，点击事件是否支持拦截回调；
+      
+      3.专注于APP业务逻辑流程、实现
+      比如：
+      一局游戏开始如何透传数值类型参数、Key类型参数；（结算）
+  ![Android](doc/hello_sudplus_android.png)
+  ![iPhone](doc/hello_sudplus_iphone.png)
+  </details>
 # 三分钟集成代码
-- 第一步：将QuickStart同级目录下的`'SudMGPSDK'`、`'SudMGPWrapper'`两个目录所有文件及`SudMGPWrapper.podspec`文件拷贝到目标工程Podfile所在的目录下，并在Podfile中加入  `pod 'SudMGPWrapper', :path => './'`，然后执行`pod install`
-- 第二步：拷贝QuickStart目录路径(UI->VC)下的分类(集成游戏登录、加载、销毁、响应游戏通知事件)`QuickStartViewController+Game.h`及`QuickStartViewController+Game.m`到目标工程引用位置，并将分类名称改为将要集成游戏的ViewController名称
-- 第三步：在引用所在`ViewController`的`viewDidLoad`中键入如下顺序代码：
+- 第一步：导入模块SudMGPSDK、SudMGPWrapper
+  <details>
+  <summary>详细描述</summary>
+
+      1.将QuickStart同级目录下的SudMGPSDK、SudMGPWrapper两个目录所有文件及SudMGPWrapper.podspec文件拷贝到目标工程Podfile所在的目录下
+      2.APP主工程Podfile文件中，添加 SudMGPWrapper 依赖;
+  ``` ruby
+  pod 'SudMGPWrapper', :path => './'
+  ```
+      3. 执行pod install，将SudMGPWrapper模块依赖进工程中
+  </details>
+  
+
+- 第二步：拷贝QuickStart 3个文件，并保持配置参数不变
+  <details>
+  <summary>详细描述</summary>
+
+      1.拷贝两个文件，Demo工程目录路径(QuickStart->UI->VC):
+        QuickStartViewController+Game.h
+        QuickStartViewController+Game.m
+      2.保持配置参数不变，appId和appKey使用QuickStart
+        QuickStartViewController+Game.h
+      3.QuickStartViewController+Game分类名称改成目标ViewController对应名称
+  ``` objc
+    // TODO: 登录接入方服务器url
+    #define SUDMGP_GAME_LOGIN_URL          @"https://fat-mgp-hello.sudden.ltd/login/v2"
+
+    // TODO: 必须填写由SudMGP提供的appId 及 appKey
+    #define SUDMGP_APP_ID                  @"1461564080052506636"
+    #define SUDMGP_APP_KEY                 @"03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc"
+
+    // TODO: 是否是测试环境,生产环境必须设置为NO
+    #if DEBUG
+    #define GAME_TEST_ENV    YES
+    #else
+    #define GAME_TEST_ENV    NO
+    #endif
+  ```
+      3.保持使用QuickStart后端服务login/getCode；
+        3.1 实现APP快速加载运行游戏，使用QuickStart服务；
+        3.2 填好接入信息表后，测试环境，会把APP的bundleId和applicationId，同时加入到QuickStart的appId；
+  </details>
+  
+
+- 第三步：在目标ViewController中定义一个游戏View容器，例如：QuickStartViewController.h
+    <details>
+    <summary>详细描述 QuickStartViewController.h</summary>
+
+    ``` objc
+    @interface QuickStartViewController ()
+    /// 游戏加载主view
+    @property(nonatomic, strong) UIView *gameView;
+    ```
+    </details>
+  
+
+- 第四步：创建SudMDPWrapper实例，例如：QuickStartViewController.m
+    <details>
+    <summary>详细描述 QuickStartViewController.m</summary>
+    
+    ``` objc
+    - (void)viewDidLoad {
+        [super viewDidLoad];
+
+        // 1. 创建SudMDPWrapper
+        [self createSudMGPWrapper];
+
+        ...
+    }     
+    ```
+    </details>
+  
+
+- 第五步：加载游戏
+    <details>
+    <summary>详细描述 QuickStartViewController.m</summary>
+
 
     ``` objc
     - (void)viewDidLoad {
         [super viewDidLoad];
 
-        /// 加载游戏三部曲
+        /// 加载游戏步骤
 
-        // 1. 创建SudMDPWrapper
+        // 创建SudMDPWrapper
         [self createSudMGPWrapper];
 
-        // 2. 配置加载SudMGP必须参数
+        // 配置加载SudMGP必须参数
         SudMGPLoadConfigModel *sudGameConfigModel = [[SudMGPLoadConfigModel alloc] init];
-        sudGameConfigModel.gameId = 替换游戏ID;
-        sudGameConfigModel.roomId = @"替换房间ID";
-        sudGameConfigModel.language = @"zh-CN";
-        sudGameConfigModel.gameView = 替换游戏展示视图;
-        sudGameConfigModel.userId = 替换为当前用户ID;
+        sudGameConfigModel.gameId = 1461227817776713818;// 碰碰我最强， SudMGP平台64bit游戏ID
+        sudGameConfigModel.roomId = @"10000"; // 房间ID
+        sudGameConfigModel.language = @"zh-CN";// 游戏语言
+        sudGameConfigModel.gameView = self.gameView;// 游戏视图
+        sudGameConfigModel.userId = @"123456";// 业务方APP当前登录的用户ID
 
-        // 3. 登录游戏
+        // 加载游戏
         if (sudGameConfigModel.gameId > 0) {
             [self loginGame:self.sudMGPLoadConfigModel];
         }
-    }       
+    }        
     ```
+    </details>
+  
 
+- 第六步：销毁游戏
+    <details>
+    <summary>详细描述 QuickStartViewController+Game.m</summary>
 
-- 第四步：页面销毁时调用`QuickStartViewController+Game`分类的`logoutGame`方法销毁游戏
+    ``` objc
+    /// 三：退出游戏 销毁SudMGP SDK
+    - (void)logoutGame {
+        // 销毁游戏
+        [self.sudFSMMGDecorator clearAllStates];
+        [self.sudFSTAPPDecorator destroyMG];
+    }
+    ```
+    </details>  
 
 # QuickStart 架构图
 ![QuickStartArch.png](doc/QuickStartArch.png)

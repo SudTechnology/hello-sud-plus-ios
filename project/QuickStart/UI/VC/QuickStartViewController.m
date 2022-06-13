@@ -21,7 +21,7 @@
 /// 背景视图
 @property(nonatomic, strong) UIImageView *bgImageView;
 /// 游戏加载主view
-@property(nonatomic, strong) BaseView *gameView;
+@property(nonatomic, strong) UIView *gameView;
 /// 场景视图，所有子类场景
 @property(nonatomic, strong) BaseView *sceneView;
 /// 房间顶部导航
@@ -45,12 +45,12 @@
     self.view.backgroundColor = UIColor.blackColor;
 
 
-    /// 加载游戏三部曲
+    /// 加载游戏步骤
 
-    // 1. 创建SudMDPWrapper
+    // 创建SudMDPWrapper
     [self createSudMGPWrapper];
 
-    // 2. 配置加载SudMGP必须参数
+    // 配置加载SudMGP必须参数
     SudMGPLoadConfigModel *sudGameConfigModel = [[SudMGPLoadConfigModel alloc] init];
     sudGameConfigModel.gameId = self.gameId;
     sudGameConfigModel.roomId = self.roomId;
@@ -59,7 +59,7 @@
     sudGameConfigModel.userId = QSAppPreferences.shared.currentUserID;
     self.sudMGPLoadConfigModel = sudGameConfigModel;
 
-    // 3. 登录游戏
+    // 登录游戏
     if (self.sudMGPLoadConfigModel.gameId > 0) {
         [self loginGame:self.sudMGPLoadConfigModel];
     }
@@ -265,9 +265,9 @@
     return _bgImageView;
 }
 
-- (BaseView *)gameView {
+- (UIView *)gameView {
     if (_gameView == nil) {
-        _gameView = [[BaseView alloc]init];
+        _gameView = [[UIView alloc]init];
     }
     return _gameView;
 }
