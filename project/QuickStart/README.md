@@ -65,7 +65,6 @@
         QuickStartViewController+Game.m
       2.保持配置参数不变，appId和appKey使用QuickStart
         QuickStartViewController+Game.h
-      3.QuickStartViewController+Game分类名称改成目标ViewController对应名称
   ``` objc
     // TODO: 登录接入方服务器url
     #define SUDMGP_GAME_LOGIN_URL          @"https://fat-mgp-hello.sudden.ltd/login/v2"
@@ -81,9 +80,10 @@
     #define GAME_TEST_ENV    NO
     #endif
   ```
-      3.保持使用QuickStart后端服务login/getCode；
-        3.1 实现APP快速加载运行游戏，使用QuickStart服务；
-        3.2 填好接入信息表后，测试环境，会把APP的bundleId和applicationId，同时加入到QuickStart的appId；
+      3.QuickStartViewController+Game分类名称改成目标ViewController对应名称
+      4.保持使用QuickStart后端服务login/getCode；
+        4.1 实现APP快速加载运行游戏，使用QuickStart服务；
+        4.2 填好接入信息表后，测试环境，会把APP的bundleId和applicationId，同时加入到QuickStart的appId；
   </details>
   
 
@@ -170,19 +170,15 @@
 ![QuickStartArch.png](doc/QuickStartArch.png)
 
 # 1. SudMGP SDK
-### 1.1 SudMGP Android 客户端SDK
-- 例如：SudMGP-v1.1.52.554.aar
-- [下载 SudMGP-Android SDK](https://github.com/SudTechnology/sud-mgp-android/releases)
-  
-### 1.2 SudMGP iOS 客户端SDK
-- 例如：SudMGP.xcframework
-- [下载 SudMGP-iOS SDK](https://github.com/SudTechnology/sud-mgp-ios/releases)
+### 1.1 SudMGP Client SDK
 
-### 1.3 接入文档
-- [接入文档](https://docs.sud.tech/zh-CN/app/Client/)
+- [下载 SudMGP-Android-v1.1.52.554.zip](https://github.com/SudTechnology/sud-mgp-android/releases)
+- [下载 SudMGP-iOS-v1.1.52.527.zip](https://github.com/SudTechnology/sud-mgp-ios/releases)
 
-### 1.4 接入FAQ
- - 准备中，敬请期待
+### 1.2 接入文档
+
+- [接入文档](https://docs.sud.tech/zh-CN/app/Client/API/)
+- [FAQ](https://docs.sud.tech/zh-CN/app/Client/FAQ/)
 
 # 2. SudMGPWrapper
 - `SudMGPWrapper封装SudMGP，简化App和游戏相互调用接口`；
