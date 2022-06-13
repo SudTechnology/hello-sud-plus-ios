@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)int64_t gameId;
 
 /// 游戏加载主view
-@property(nonatomic, strong, readonly) BaseView *gameView;
+@property(nonatomic, strong, readonly) UIView *gameView;
 
 /// 更新游戏人数
 /// @param count <#count description#>
