@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 /// 房间内猜自己赢挂件视图
 @interface GuessMineView : BaseView
-
+/// 更新押注金币
+/// @param betCoin betCoin
+- (void)updateBetCoin:(NSInteger)betCoin;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -239,6 +239,7 @@
         [self handleGameUpMic];
     }
     self.gameNumLabel.text = [NSString stringWithFormat:@"%@：%ld/%ld", NSString.dt_game_person_count, self.sudFSMMGDecorator.onlineUserIdList.count, self.totalGameUserCount];
+    [self playerIsInGameStateChanged:userId];
 }
 
 

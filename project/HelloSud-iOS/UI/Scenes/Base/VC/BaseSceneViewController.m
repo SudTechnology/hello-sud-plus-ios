@@ -943,4 +943,9 @@
 - (void)onGameMGCommonSelfClickStartBtn {
 }
 
+/// 加入状态处理发生变更
+- (void)playerIsInGameStateChanged:(NSString *)userId {
+    
+}
+
 @end

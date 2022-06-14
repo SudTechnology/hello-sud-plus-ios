@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 /// 自动竞猜切换弹出视图
 @interface SwitchAutoGuessPopView : BaseView
+@property(nonatomic, assign) NSInteger betCoin;
 @property (nonatomic, copy)void(^onCloseBlock)(void);
 @property (nonatomic, copy)void(^onOpenBlock)(void);
 @end

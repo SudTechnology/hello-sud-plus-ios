@@ -35,6 +35,7 @@ typedef void(^Int64Block)(int64_t);
 #import "BaseView.h"
 #import "BaseModel.h"
 #import "BaseTableViewCell.h"
+#import "BaseCollectionViewCell.h"
 #import "BaseViewController.h"
 #import "BaseNavigationViewController.h"
 

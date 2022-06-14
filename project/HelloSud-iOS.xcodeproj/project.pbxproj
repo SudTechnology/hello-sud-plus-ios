@@ -155,6 +155,8 @@
 		6C4607FC285346BF005C99EF /* QuickSendColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607FB285346BE005C99EF /* QuickSendColCell.m */; };
 		6C4607FF28572099005C99EF /* GuessMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607FE28572099005C99EF /* GuessMineView.m */; };
 		6C460802285727B7005C99EF /* SwitchAutoGuessPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460801285727B7005C99EF /* SwitchAutoGuessPopView.m */; };
+		6C46080528583A30005C99EF /* GuessSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46080428583A2F005C99EF /* GuessSelectPopView.m */; };
+		6C460808285840B4005C99EF /* GuessSelectColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460807285840B4005C99EF /* GuessSelectColCell.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
@@ -619,6 +621,10 @@
 		6C4607FE28572099005C99EF /* GuessMineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessMineView.m; sourceTree = "<group>"; };
 		6C460800285727B7005C99EF /* SwitchAutoGuessPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchAutoGuessPopView.h; sourceTree = "<group>"; };
 		6C460801285727B7005C99EF /* SwitchAutoGuessPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchAutoGuessPopView.m; sourceTree = "<group>"; };
+		6C46080328583A2F005C99EF /* GuessSelectPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessSelectPopView.h; sourceTree = "<group>"; };
+		6C46080428583A2F005C99EF /* GuessSelectPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessSelectPopView.m; sourceTree = "<group>"; };
+		6C460806285840B4005C99EF /* GuessSelectColCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessSelectColCell.h; sourceTree = "<group>"; };
+		6C460807285840B4005C99EF /* GuessSelectColCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessSelectColCell.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1595,6 +1601,10 @@
 				6C4607FE28572099005C99EF /* GuessMineView.m */,
 				6C460800285727B7005C99EF /* SwitchAutoGuessPopView.h */,
 				6C460801285727B7005C99EF /* SwitchAutoGuessPopView.m */,
+				6C46080328583A2F005C99EF /* GuessSelectPopView.h */,
+				6C46080428583A2F005C99EF /* GuessSelectPopView.m */,
+				6C460806285840B4005C99EF /* GuessSelectColCell.h */,
+				6C460807285840B4005C99EF /* GuessSelectColCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2464,6 +2474,7 @@
 				4455AD9627EAC658001516EE /* MainTabBarController.m in Sources */,
 				444F59EB27F7035800FA1FB2 /* TicketChooseLevelView.m in Sources */,
 				4455ADA827EAC658001516EE /* RoomCmdChatTextModel.m in Sources */,
+				6C460808285840B4005C99EF /* GuessSelectColCell.m in Sources */,
 				44D9F3B3280FFF83000B14B5 /* GameConfigPopView.m in Sources */,
 				6C4607B928519FB3005C99EF /* RankNumItemView.m in Sources */,
 				6C4607B628519618005C99EF /* RankHeadItemView.m in Sources */,
@@ -2491,6 +2502,7 @@
 				4455ADB127EAC658001516EE /* GiftUserCollectionViewCell.m in Sources */,
 				4455AD9F27EAC658001516EE /* SwitchMicModel.m in Sources */,
 				4455AE0627EAC6F7001516EE /* BaseSceneViewController.m in Sources */,
+				6C46080528583A30005C99EF /* GuessSelectPopView.m in Sources */,
 				4455AD8A27EAC658001516EE /* HSSettingModel.m in Sources */,
 				4455AD9127EAC658001516EE /* UserInfoListModel.m in Sources */,
 				4452DDDE281134A9001FEEDB /* CustomRoomApiView.m in Sources */,

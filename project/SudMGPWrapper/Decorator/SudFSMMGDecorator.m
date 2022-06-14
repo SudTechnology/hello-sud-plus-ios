@@ -299,7 +299,9 @@
         MGCommonPlayerReadyModel *m = [MGCommonPlayerReadyModel mj_objectWithKeyValues: dataJson];
         /// 更新
         [self setValueGamePlayerStateMap:userId state:state model:m];
-        self.isReady = m.isReady;
+        if ([userId isEqualToString:self.currentUserId]) {
+            self.isReady = m.isReady;
+        }
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerReady:userId:model:)]) {
             [self.listener onPlayerMGCommonPlayerReady:handle userId:userId model:m];
             return;

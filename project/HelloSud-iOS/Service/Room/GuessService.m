@@ -27,11 +27,24 @@
 
 /// 查询竞猜游戏列表
 /// @param finished 完成回调
-+ (void)reqGuessListWithFinished:(void(^)(RespMoreGuessModel *))finished {
++ (void)reqGuessListWithFinished:(void (^)(RespMoreGuessModel *))finished {
     NSDictionary *dicParam = @{};
     [HSHttpService postRequestWithURL:kINTERACTURL(@"quiz/list/v1") param:dicParam respClass:RespMoreGuessModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (finished) {
-            finished((RespMoreGuessModel *)resp);
+            finished((RespMoreGuessModel *) resp);
+        }
+    }                         failure:nil];
+}
+
+/// 查询竞猜游戏列表
+/// @param userIdList id列表
+/// @param roomId 房间ID
+/// @param finished 完成回调
++ (void)reqGuessPlayerList:(NSArray <NSString *> *)userIdList roomId:(NSString *)roomId finished:(void (^)(RespGuessPlayerListModel *))finished {
+    NSDictionary *dicParam = @{@"roomId": roomId, @"playerList": userIdList ? userIdList : @[]};
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"quiz/game-player/v1") param:dicParam respClass:RespGuessPlayerListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (finished) {
+            finished((RespGuessPlayerListModel *) resp);
         }
     }                         failure:nil];
 }

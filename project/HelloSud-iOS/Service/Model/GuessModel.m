@@ -9,7 +9,6 @@
 #import "GuessModel.h"
 
 @implementation MoreGuessGameModel
-
 @end
 
 @implementation RespMoreGuessModel
@@ -17,3 +16,13 @@
     return @{@"quizGameInfoList": [MoreGuessGameModel class]};
 }
 @end
+
+@implementation GuessPlayerModel
+@end
+
+@implementation RespGuessPlayerListModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"playerList": [GuessPlayerModel class]};
+}
+@end
+

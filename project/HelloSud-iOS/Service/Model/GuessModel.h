@@ -38,4 +38,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)NSArray<MoreGuessGameModel *> *quizGameInfoList;
 @end
 
+/// 竞猜数据玩家列表数据
+@interface GuessPlayerModel : BaseModel
+@property (nonatomic, assign)int64_t userId;
+@property (nonatomic, assign)BOOL support;
+@property (nonatomic, assign)NSInteger supportedUserCount;
+@property (nonatomic, strong)NSString * header;
+@property (nonatomic, strong)NSString * nickname;
+
+/// 是否已经选中
+@property (nonatomic, assign)BOOL isSelected;
+@end
+
+/// 竞猜数据玩家列表数据
+@interface RespGuessPlayerListModel : BaseRespModel
+/// 赢金币数(每人)
+@property (nonatomic, assign)NSInteger winCoin;
+/// 投注金币数(每人)
+@property (nonatomic, assign)NSInteger betCoin;
+@property (nonatomic, strong)NSArray<GuessPlayerModel *> *playerList;
+@end
+
 NS_ASSUME_NONNULL_END

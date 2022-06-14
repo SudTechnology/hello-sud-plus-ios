@@ -20,6 +20,8 @@
 #define kPKService ((PKService *)AppService.shared.scene)
 // 门票服务
 #define kTicketService ((TicketService *)AppService.shared.scene)
+// 竞猜服务
+#define kGuessService ((GuessService *)AppService.shared.scene)
 
 @class AudioConfigModel;
 

@@ -50,12 +50,18 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    self.coinLabel.text = @"x200";
+    [self updateBetCoin:200];
     self.tipLabel.text = @"猜自己赢";
 }
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
+}
+
+/// 更新押注金币
+/// @param betCoin betCoin
+- (void)updateBetCoin:(NSInteger)betCoin {
+    self.coinLabel.text = [NSString stringWithFormat:@"x%@", @(betCoin)];
 }
 
 - (UIImageView *)bgImageView {

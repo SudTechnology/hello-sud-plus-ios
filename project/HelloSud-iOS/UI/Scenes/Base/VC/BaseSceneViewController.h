@@ -177,6 +177,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏：点击了开始按钮
 - (void)onGameMGCommonSelfClickStartBtn;
 
+/// 加入状态处理发生变更
+- (void)playerIsInGameStateChanged:(NSString *)userId;
 @end
 
 NS_ASSUME_NONNULL_END

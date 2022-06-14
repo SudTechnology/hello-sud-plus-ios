@@ -71,7 +71,7 @@
 - (void)dtUpdateUI {
     [super dtUpdateUI];
     self.titleLabel.text = @"猜自己赢\n夺第一名 得5倍奖励";
-    self.tipLabel.text = @"是否开启每轮自动猜自己赢？\n（每轮200金币）";
+    self.tipLabel.text = [NSString stringWithFormat:@"是否开启每轮自动猜自己赢？\n（每轮%@金币）", @(self.betCoin)];
 }
 
 - (void)dtConfigEvents {
