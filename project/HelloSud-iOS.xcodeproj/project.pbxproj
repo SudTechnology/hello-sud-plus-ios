@@ -157,6 +157,8 @@
 		6C460802285727B7005C99EF /* SwitchAutoGuessPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460801285727B7005C99EF /* SwitchAutoGuessPopView.m */; };
 		6C46080528583A30005C99EF /* GuessSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46080428583A2F005C99EF /* GuessSelectPopView.m */; };
 		6C460808285840B4005C99EF /* GuessSelectColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460807285840B4005C99EF /* GuessSelectColCell.m */; };
+		6C46080B285899E6005C99EF /* GuessResultPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46080A285899E6005C99EF /* GuessResultPopView.m */; };
+		6C46080E2858A452005C99EF /* GuessResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46080D2858A452005C99EF /* GuessResultTableViewCell.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
@@ -625,6 +627,10 @@
 		6C46080428583A2F005C99EF /* GuessSelectPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessSelectPopView.m; sourceTree = "<group>"; };
 		6C460806285840B4005C99EF /* GuessSelectColCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessSelectColCell.h; sourceTree = "<group>"; };
 		6C460807285840B4005C99EF /* GuessSelectColCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessSelectColCell.m; sourceTree = "<group>"; };
+		6C460809285899E6005C99EF /* GuessResultPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessResultPopView.h; sourceTree = "<group>"; };
+		6C46080A285899E6005C99EF /* GuessResultPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessResultPopView.m; sourceTree = "<group>"; };
+		6C46080C2858A452005C99EF /* GuessResultTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessResultTableViewCell.h; sourceTree = "<group>"; };
+		6C46080D2858A452005C99EF /* GuessResultTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessResultTableViewCell.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1605,6 +1611,10 @@
 				6C46080428583A2F005C99EF /* GuessSelectPopView.m */,
 				6C460806285840B4005C99EF /* GuessSelectColCell.h */,
 				6C460807285840B4005C99EF /* GuessSelectColCell.m */,
+				6C460809285899E6005C99EF /* GuessResultPopView.h */,
+				6C46080A285899E6005C99EF /* GuessResultPopView.m */,
+				6C46080C2858A452005C99EF /* GuessResultTableViewCell.h */,
+				6C46080D2858A452005C99EF /* GuessResultTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2375,6 +2385,7 @@
 				6C076ED727A298FC00650209 /* GameService.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				4455ADAE27EAC658001516EE /* AudioUserModel.m in Sources */,
+				6C46080E2858A452005C99EF /* GuessResultTableViewCell.m in Sources */,
 				4455ADAD27EAC658001516EE /* RoomCmdChangeGameModel.m in Sources */,
 				44241ADB27EACF39001EE125 /* SwitchLanguageViewController.m in Sources */,
 				6C076EB6279FF3FF00650209 /* GiftModel.m in Sources */,
@@ -2390,6 +2401,7 @@
 				4455ADA927EAC658001516EE /* RoomCmdSendGiftModel.m in Sources */,
 				4455AE1227EAC6F7001516EE /* AudioMicContentView.m in Sources */,
 				6CE6CD48283F591C0026BDAB /* BaseCollectionReusableView.m in Sources */,
+				6C46080B285899E6005C99EF /* GuessResultPopView.m in Sources */,
 				4455AD8D27EAC658001516EE /* ChangeRTCTCell.m in Sources */,
 				4455AE0927EAC6F7001516EE /* AudioRoomMicModel.m in Sources */,
 				4455ADA727EAC658001516EE /* ShowViewController.m in Sources */,

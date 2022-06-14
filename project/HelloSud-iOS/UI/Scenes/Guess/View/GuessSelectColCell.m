@@ -8,7 +8,7 @@
 
 #import "GuessSelectColCell.h"
 
-@interface GuessSelectColCell()
+@interface GuessSelectColCell ()
 @property(nonatomic, strong) UIImageView *headImageView;
 @property(nonatomic, strong) UIButton *supportBtn;
 @property(nonatomic, strong) UILabel *supportNumLabel;
@@ -60,11 +60,13 @@
     if (![self.model isKindOfClass:GuessPlayerModel.class]) {
         return;
     }
-    GuessPlayerModel *m = (GuessPlayerModel *)self.model;
+
+    GuessPlayerModel *m = (GuessPlayerModel *) self.model;
     self.supportNumLabel.text = [NSString stringWithFormat:@"已有%@人支持", @(m.supportedUserCount)];
     if (m.header) {
         [self.headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.header]];
     }
+
     if (m.support || m.isSelected) {
         // 选中或者支持的
         self.headImageView.layer.borderWidth = 2;
@@ -79,7 +81,13 @@
         self.supportBtn.enabled = NO;
         self.supportBtn.layer.borderWidth = 0;
         self.supportBtn.layer.borderColor = nil;
+        if (self.isGamePlaying) {
+            [_supportBtn setTitle:@"未支持" forState:UIControlStateNormal];
+        } else {
+            [_supportBtn setTitle:@"猜TA赢" forState:UIControlStateNormal];
+        }
     }
+
 }
 
 - (UIImageView *)headImageView {

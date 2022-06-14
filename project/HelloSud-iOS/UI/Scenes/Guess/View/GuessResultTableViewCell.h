@@ -1,17 +1,17 @@
 //
-//  GuessSelectColCell.h
+//  GuessResultTableViewCell.h
 //  HelloSud-iOS
 //
 //  Created by kaniel on 2022/6/14.
 //  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseTableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
-/// 竞猜选择cell
-@interface GuessSelectColCell : BaseCollectionViewCell
-@property (nonatomic, assign)BOOL isGamePlaying;
+
+@interface GuessResultTableViewCell : BaseTableViewCell
+
 @end
 
 NS_ASSUME_NONNULL_END
