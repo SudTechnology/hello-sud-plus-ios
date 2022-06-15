@@ -127,7 +127,7 @@
     full.yy_headIndent = 10;
 
     NSMutableAttributedString *attTime = [[NSMutableAttributedString alloc] initWithString:timeStr];
-    attTime.yy_font = UIFONT_REGULAR(12);
+    attTime.yy_font = UIFONT_BOLD(12);
     attTime.yy_color = HEX_COLOR(@"#000000");
     [full appendAttributedString:attTime];
 
@@ -140,7 +140,7 @@
     [full appendAttributedString:attPersonTitle];
 
     NSMutableAttributedString *attPersonValue = [[NSMutableAttributedString alloc] initWithString:@"∞"];
-    attPersonValue.yy_font = UIFONT_REGULAR(12);
+    attPersonValue.yy_font = UIFONT_BOLD(12);
     attPersonValue.yy_color = HEX_COLOR(@"#000000");
     [full appendAttributedString:attPersonValue];
 
@@ -153,7 +153,7 @@
 
     NSString *feeStr =  m.ticketCoin > 0 ? [NSString stringWithFormat:@"%@金币", @(m.ticketCoin)] : @"免费";
     NSMutableAttributedString *enterTitleValue = [[NSMutableAttributedString alloc] initWithString:feeStr];
-    enterTitleValue.yy_font = UIFONT_REGULAR(12);
+    enterTitleValue.yy_font = UIFONT_BOLD(12);
     enterTitleValue.yy_color = HEX_COLOR(@"#000000");
     [full appendAttributedString:enterTitleValue];
 
