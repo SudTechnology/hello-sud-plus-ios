@@ -319,6 +319,7 @@
         };
         view.moreGuessBlock = ^(UIButton *sender) {
             MoreGuessViewController *vc = MoreGuessViewController.new;
+            vc.sceneId = weakSelf.headerSceneList[indexPath.section].sceneId;
             [weakSelf.navigationController pushViewController:vc animated:true];
         };
         supplementaryView = view;

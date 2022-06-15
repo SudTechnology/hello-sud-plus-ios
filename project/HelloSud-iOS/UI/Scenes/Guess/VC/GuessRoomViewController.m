@@ -324,9 +324,9 @@
         AudioUserModel *user = arrUsers[i];
         NSString *content = @"";
         if ([user.userID isEqualToString:model.sendUser.userID]) {
-            content = [NSString stringWithFormat:@"%@ 胸有成竹,猜自己一定能赢", model.sendUser.name];
+            content = [NSString stringWithFormat:@"%@ 胸有成竹，猜自己一定能赢", model.sendUser.name];
         } else {
-            content = [NSString stringWithFormat:@"%@ 为 %@ 打call,猜TA赢", model.sendUser.name, user.name];
+            content = [NSString stringWithFormat:@"%@ 为 %@ 打call，猜TA赢", model.sendUser.name, user.name];
         }
         [self addBetPublicMsgContent:content];
     }

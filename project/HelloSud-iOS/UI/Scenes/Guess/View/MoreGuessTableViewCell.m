@@ -128,6 +128,16 @@
     [self updateCountdown];
 }
 
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    [self.playBtn addTarget:self action:@selector(onClickPlayBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)onClickPlayBtn:(id)sender {
+    MoreGuessGameModel *m = (MoreGuessGameModel *)self.model;
+    [AudioRoomService reqMatchRoom:m.gameId sceneType:self.sceneId gameLevel:-1];
+}
+
 - (void)beginCountdown {
     WeakSelf
     MoreGuessGameModel *m = (MoreGuessGameModel *)self.model;

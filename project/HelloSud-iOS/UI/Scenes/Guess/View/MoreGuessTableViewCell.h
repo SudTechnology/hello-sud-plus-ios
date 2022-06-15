@@ -5,4 +5,5 @@
 
 /// 更多竞猜列表cell
 @interface MoreGuessTableViewCell : BaseTableViewCell
+@property (nonatomic, assign) NSInteger sceneId;
 @end

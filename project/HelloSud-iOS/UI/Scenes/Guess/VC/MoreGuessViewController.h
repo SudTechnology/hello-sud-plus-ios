@@ -5,4 +5,5 @@
 
 /// 更多竞猜
 @interface MoreGuessViewController : BaseViewController
+@property (nonatomic, assign) NSInteger sceneId;
 @end

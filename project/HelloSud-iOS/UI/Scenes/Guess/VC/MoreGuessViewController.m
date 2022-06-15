@@ -70,6 +70,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MoreGuessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MoreGuessTableViewCell"];
+    cell.sceneId = self.sceneId;
     cell.model = self.dataList[indexPath.row];
     return cell;
 }
