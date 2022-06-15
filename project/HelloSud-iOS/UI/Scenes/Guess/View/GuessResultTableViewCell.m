@@ -81,12 +81,11 @@
         [self.headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.header]];
     }
     self.titleLabel.text = m.nickname;
-    if (m.rank >= 0 && m.rank <= 2) {
-        self.rankImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guess_result_rank_%@", @(m.rank + 1)]];
+    if (m.rank >= 1 && m.rank <= 3) {
+        self.rankImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guess_result_rank_%@", @(m.rank)]];
     } else {
         self.rankImageView.image = nil;
     }
-    m.support = YES;
     if (m.support) {
         self.supportLabel.hidden = NO;
         [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -98,8 +97,8 @@
             make.centerY.equalTo(self.headImageView).offset(0);
         }];
     }
-    [self updateStar:10];
-    [self updateClub:1];
+    [self updateStar:m.score];
+    [self updateClub:m.award];
 }
 
 - (UIImageView *)headImageView {

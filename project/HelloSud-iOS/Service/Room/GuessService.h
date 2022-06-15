@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param betType betType
 /// @param userList 用户ID列表
 /// @param finished
-+ (void)reqBet:(NSInteger)betType coin:(NSInteger)coin userList:(NSArray <NSString *> *)userList finished:(void (^)(void))finished;
++ (void)reqBet:(NSInteger)betType coin:(NSInteger)coin userList:(NSArray <NSString *> *)userList finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure;
 
 /// 查询竞猜游戏列表
 /// @param finished 完成回调
@@ -29,6 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param roomId 房间ID
 /// @param finished 完成回调
 + (void)reqGuessPlayerList:(NSArray <NSString *> *)userIdList roomId:(NSString *)roomId finished:(void (^)(RespGuessPlayerListModel *))finished;
+
+/// 发送押注通知消息
+/// @param roomID roomID
+/// @param betUsers roomID
+- (void)sendBetNotifyMsg:(NSString *)roomID betUsers:(NSArray<AudioUserModel *>*)betUsers;
 @end
 
 NS_ASSUME_NONNULL_END

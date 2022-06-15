@@ -7,6 +7,7 @@
 //
 
 #import "GuessService.h"
+#import "GuessRoomViewController.h"
 
 @implementation GuessService
 
@@ -16,13 +17,13 @@
 /// @param coin 消费金额
 /// @param userList 用户ID列表
 /// @param finished 完成回调
-+ (void)reqBet:(NSInteger)betType coin:(NSInteger)coin userList:(NSArray <NSString *> *)userList finished:(void (^)(void))finished {
++ (void)reqBet:(NSInteger)betType coin:(NSInteger)coin userList:(NSArray <NSString *> *)userList finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure {
     NSDictionary *dicParam = @{@"quizType": @(betType), @"coin": @(coin), @"supportedUserIdList": userList == nil ? @[] : userList};
     [HSHttpService postRequestWithURL:kINTERACTURL(@"quiz/bet/v1") param:dicParam respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (finished) {
             finished();
         }
-    }                         failure:nil];
+    }                         failure:failure];
 }
 
 /// 查询竞猜游戏列表
@@ -49,4 +50,14 @@
     }                         failure:nil];
 }
 
+/// 发送押注通知消息
+/// @param roomID roomID
+/// @param betUsers roomID
+- (void)sendBetNotifyMsg:(NSString *)roomID betUsers:(NSArray<AudioUserModel *>*)betUsers {
+    RoomCmdGuessBetNotifyModel *msg = [[RoomCmdGuessBetNotifyModel alloc]init];
+    [msg configBaseInfoWithCmd:CMD_ROOM_QUIZ_BET];
+    msg.recUser = betUsers;
+    [self.currentRoomVC sendMsg:msg isAddToShow:NO];
+    [(GuessRoomViewController *)self.currentRoomVC showBetScreenMsg:msg];
+}
 @end

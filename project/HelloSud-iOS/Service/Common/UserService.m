@@ -62,9 +62,11 @@
 }
 
 - (void)reqUserCoinDetail:(Int64Block)success fail:(StringBlock)fail {
+    WeakSelf
     [HSHttpService postRequestWithURL:kBASEURL(@"get-account/v1") param:@{} respClass:RespUserCoinInfoModel.class showErrorToast:NO success:^(BaseRespModel *resp) {
         RespUserCoinInfoModel *model = (RespUserCoinInfoModel*)resp;
         if (success) {
+            weakSelf.currentUserCoin = model.coin;
             success(model.coin);
         }
     } failure:^(NSError *error) {

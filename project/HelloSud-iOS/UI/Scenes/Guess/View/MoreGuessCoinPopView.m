@@ -134,7 +134,7 @@
         if (self.onSupportCoinBlock) {
             self.onSupportCoinBlock(self.selectedCoin);
         }
-    }];
+    }            failure:nil];
 }
 
 - (void)updateSelectState:(MoreGuessCoinItemView *)selectedView {

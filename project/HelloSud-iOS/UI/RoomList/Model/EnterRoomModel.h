@@ -52,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) NSInteger sceneType;
 /// pk当前状态信息
 @property (nonatomic, strong)PKResultModel * pkResultVO;
+/// 弹幕拉流ID
+@property(nonatomic, copy) NSString *streamId;
 @end
 
 NS_ASSUME_NONNULL_END

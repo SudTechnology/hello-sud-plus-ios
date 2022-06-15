@@ -19,6 +19,10 @@ typedef NS_ENUM(NSInteger, GuessResultPopViewType) {
 
 /// 竞猜结果弹出框视图
 @interface GuessResultPopView : BaseView
+/// 游戏玩家信息列表
+@property(nonatomic, strong) NSArray <GuessPlayerModel *> *dataList;
+@property(nonatomic, assign) GuessResultPopViewType resultStateType;
+@property(nonatomic, assign) NSInteger winCoin;
 @end
 
 NS_ASSUME_NONNULL_END

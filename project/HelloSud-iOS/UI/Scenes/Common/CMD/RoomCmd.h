@@ -25,6 +25,7 @@
 #define CMD_ROOM_PK_AGAIN	          10108	/// 1.3.0	重新PK
 #define CMD_ROOM_ORDER_USER           10200 /// 用户发起点单
 #define CMD_ROOM_ORDER_OPERATE        10201 /// 主播同意或者拒绝，发出点单结果
+#define CMD_ROOM_QUIZ_BET	          10300	/// 1.4.0	竞猜下注通知
 
 #pragma mark 后台通知信令
 

@@ -138,15 +138,29 @@
 - (void)onConfirmBtnClick:(id)sender {
 
     NSMutableArray *selectedUserIdList = [[NSMutableArray alloc]init];
+    NSMutableArray *msgBetUserList = [[NSMutableArray alloc]init];
     for (int i = 0; i < self.dataList.count; ++i) {
-        if (self.dataList[i].isSelected) {
+        GuessPlayerModel *playerModel = self.dataList[i];
+        if (playerModel.isSelected) {
             [selectedUserIdList addObject:@(self.dataList[i].userId)];
+
+            AudioUserModel *userModel = AudioUserModel.new;
+            userModel.userID = [NSString stringWithFormat:@"%@", @(playerModel.userId)];
+            userModel.name = playerModel.nickname;
+            userModel.icon = playerModel.header;
+            userModel.sex = 0;
+            userModel.roomID = kGuessService.currentRoomVC.roomID;
+            [msgBetUserList addObject:userModel];
         }
     }
+
+
     [GuessService reqBet:2 coin:self.betCoin userList:selectedUserIdList finished:^{
         [DTSheetView close];
         [ToastUtil show:@"已投注，等待游戏结果公布"];
-    }];
+        DDLogDebug(@"投注成功");
+        [kGuessService sendBetNotifyMsg:kGuessService.currentRoomVC.roomID betUsers:msgBetUserList];
+    }            failure:nil];
 }
 
 /// 更新确认按钮值

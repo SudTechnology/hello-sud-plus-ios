@@ -22,11 +22,10 @@
 @property(nonatomic, strong) UIButton *closeBtn;
 @property(nonatomic, strong) UIImageView *joinImageView;
 @property(nonatomic, strong) MarqueeLabel *joinTipLabel;
-@property(nonatomic, strong) NSArray <GuessPlayerModel *> *dataList;
 @property(nonatomic, assign) NSInteger betCoin;
-@property(nonatomic, assign) GuessResultPopViewType resultStateType;
-@property (nonatomic, assign)NSInteger countdown;
-@property (nonatomic, strong)DTTimer * timer;
+
+@property(nonatomic, assign) NSInteger countdown;
+@property(nonatomic, strong) DTTimer *timer;
 @end
 
 @implementation GuessResultPopView
@@ -119,33 +118,16 @@
     }];
 
 
-
 }
 
 - (void)dtConfigUI {
     [super dtConfigUI];
     [self updateCoin:0];
-    [self reqData];
 }
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-//    self.resultStateType = GuessResultPopViewTypeWin;
-//    self.resultStateType = GuessResultPopViewTypeLose;
-    self.resultStateType = GuessResultPopViewTypeNotBet;
     [self handleStateResult];
-}
-
-- (void)reqData {
-    WeakSelf
-    NSArray *playerUserIdList = kGuessService.currentRoomVC.sudFSMMGDecorator.onlineUserIdList;
-    NSString *roomId = kGuessService.currentRoomVC.roomID;
-    [GuessService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
-        weakSelf.betCoin = model.betCoin;
-        weakSelf.dataList = model.playerList;
-        [weakSelf.tableView reloadData];
-        [weakSelf dtUpdateUI];
-    }];
 }
 
 /// 处理状态结果
@@ -182,15 +164,15 @@
     }
 
     switch (self.resultStateType) {
-        case GuessResultPopViewTypeWin:{
+        case GuessResultPopViewTypeWin: {
             /// 猜中
             self.titleLabel.text = isInGame ? @"恭喜获胜" : @"猜中了";
-            [self updateCoin:1000];
+            [self updateCoin:self.winCoin];
             self.tipLabel.text = isInGame ? @"超过了94.8%的人" : @"料事如神，乘胜追击~";
             [self beginCountdown];
         }
             break;
-        case GuessResultPopViewTypeLose:{
+        case GuessResultPopViewTypeLose: {
             /// 未猜中
             self.titleLabel.text = @"下次加油";
             self.tipLabel.text = @"不必气馁，下把翻盘！";
@@ -203,7 +185,7 @@
             [self beginCountdown];
         }
             break;
-        case GuessResultPopViewTypeNotBet:{
+        case GuessResultPopViewTypeNotBet: {
             /// 未参与
             self.titleLabel.text = @"未竞猜";
             self.tipLabel.text = @"猜中将获得5倍奖励！下轮一起来吧~";
@@ -296,7 +278,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GuessResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GuessResultTableViewCell"];
-    self.dataList[indexPath.row].rank = indexPath.row;
     cell.model = self.dataList[indexPath.row];
     return cell;
 }

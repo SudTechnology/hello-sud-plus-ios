@@ -48,7 +48,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否已经选中
 @property (nonatomic, assign)BOOL isSelected;
-@property (nonatomic, assign)NSInteger rank;
+/// 排名 从 1 开始
+@property (nonatomic, assign) NSInteger rank;
+/// 奖励
+@property (nonatomic, assign) NSInteger award;
+/// 积分
+@property (nonatomic, assign) NSInteger score;
 @end
 
 /// 竞猜数据玩家列表数据

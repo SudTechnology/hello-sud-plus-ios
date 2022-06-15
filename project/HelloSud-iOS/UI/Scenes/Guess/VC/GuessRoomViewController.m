@@ -19,7 +19,8 @@
 /// 围观者导航视图
 @property(nonatomic, strong) BaseView *normalGuessNavView;
 @property(nonatomic, strong) MarqueeLabel *normalGuessNavLabel;
-
+/// 开启了自动竞猜
+@property(nonatomic, assign) BOOL openAutoBet;
 @property(nonatomic, assign) NSInteger betCoin;
 @end
 
@@ -127,7 +128,7 @@
 
 /// 游戏玩家加入游戏状态变化
 - (void)playerIsInGameStateChanged:(NSString *)userId {
-    if (![AppService.shared.loginUserID isEqualToString: userId]) {
+    if (![AppService.shared.loginUserID isEqualToString:userId]) {
         return;
     }
 
@@ -140,39 +141,66 @@
         return;
     }
     // 当前用户加入了游戏
-    self.guessMineView.hidden = NO;
+    
+    // 如果未开启自动竞猜，展示挂件
+    if (!self.openAutoBet) {
+        self.guessMineView.hidden = NO;
+    }
     self.normalGuessNavView.hidden = YES;
 }
 
 /// 我的猜输赢挂件响应
 - (void)onTap:(id)tap {
-    [self showResultAlertView];
-    return;
+
+    if (self.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
+        [ToastUtil show:@"游戏进行中，暂不可开启竞猜"];
+        return;
+    }
     WeakSelf
-    SwitchAutoGuessPopView *v = [[SwitchAutoGuessPopView alloc]init];
+    SwitchAutoGuessPopView *v = [[SwitchAutoGuessPopView alloc] init];
     v.betCoin = self.betCoin;
     [v dtUpdateUI];
     v.onCloseBlock = ^{
         [DTSheetView close];
     };
     v.onOpenBlock = ^{
+        if (UserService.shared.currentUserCoin < self.betCoin) {
+            [ToastUtil show:@"余额不足"];
+            return;
+        }
         // 开启的时候自动扣费
         [GuessService reqBet:2 coin:self.betCoin userList:@[AppService.shared.loginUserID] finished:^{
             [DTSheetView close];
+            DDLogDebug(@"开启自动扣费：投注成功");
+            weakSelf.openAutoBet = YES;
             [weakSelf showNaviAutoStateView:YES];
-        }];
+            // 自己押注消息
+            AudioUserModel *userModel = AudioUserModel.new;
+            userModel.userID = AppService.shared.login.loginUserInfo.userID;
+            userModel.name = AppService.shared.login.loginUserInfo.name;
+            userModel.icon = AppService.shared.login.loginUserInfo.icon;
+            userModel.sex = AppService.shared.login.loginUserInfo.sex;
+            [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
+        }            failure:nil];
+
     };
     [DTSheetView show:v onCloseCallback:^{
-        
+
     }];
 }
 
 /// 自动竞猜状态开关响应
 - (void)onTapAuto:(id)tap {
+
+    if (self.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
+        [ToastUtil show:@"游戏进行中，暂不可关闭竞猜"];
+        return;
+    }
     WeakSelf
     [DTAlertView showTextAlert:@"是否关闭每轮自动猜自己赢?" sureText:@"确认关闭" cancelText:@"返回" onSureCallback:^{
+        weakSelf.openAutoBet = NO;
         [weakSelf showNaviAutoStateView:NO];
-    } onCloseCallback:^{
+    }          onCloseCallback:^{
         [DTAlertView close];
     }];
 
@@ -180,7 +208,7 @@
 
 /// 普通用户猜输赢开关响应
 - (void)onTapNormal:(id)tap {
-    GuessSelectPopView *v = [[GuessSelectPopView alloc]init];
+    GuessSelectPopView *v = [[GuessSelectPopView alloc] init];
     v.mj_h = kScreenHeight * 0.77;
     [DTSheetView show:v onCloseCallback:^{
 
@@ -213,13 +241,168 @@
     }
 }
 
-- (void)showResultAlertView {
-    GuessResultPopView *v = [[GuessResultPopView alloc]init];
+/// 展示结果弹窗
+- (void)showResultAlertView:(NSArray<GuessPlayerModel *> *)playerList winCoin:(NSInteger)winCoin {
+    GuessResultPopView *v = [[GuessResultPopView alloc] init];
+    v.dataList = playerList;
+
+    BOOL isSupport = NO;
+    for (int i = 0; i < playerList.count; ++i) {
+        if (playerList[i].support) {
+            isSupport = YES;
+            break;
+        }
+    }
+    if (playerList.count > 0 && playerList[0].support) {
+        v.resultStateType = GuessResultPopViewTypeWin;
+    } else if (isSupport) {
+        v.resultStateType = GuessResultPopViewTypeLose;
+    } else {
+        v.resultStateType = GuessResultPopViewTypeNotBet;
+    }
+    [v dtUpdateUI];
     v.backgroundColor = UIColor.clearColor;
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:NO onCloseCallback:^{
 
     }];
 }
+
+/// 请求结果玩家列表
+/// @param results results
+- (void)reqResultPlayerListData:(NSArray<MGCommonGameSettleResults *> *)results {
+    WeakSelf
+
+    NSMutableArray *playerUserIdList = [[NSMutableArray alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    for (int i = 0; i < results.count; ++i) {
+        MGCommonGameSettleResults *m = results[i];
+        if (m.uid) {
+            [playerUserIdList addObject:m.uid];
+            dic[m.uid] = m;
+        }
+    }
+    NSString *roomId = kGuessService.currentRoomVC.roomID;
+    [GuessService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
+        weakSelf.betCoin = model.betCoin;
+        NSArray *arr = model.playerList;
+
+        for (int i = 0; i < arr.count; ++i) {
+            GuessPlayerModel *m = arr[i];
+            MGCommonGameSettleResults *resultModel = dic[[NSString stringWithFormat:@"%@", @(m.userId)]];
+            if (resultModel) {
+                m.rank = resultModel.rank;
+                m.award = resultModel.award;
+                m.score = resultModel.score;
+            }
+        }
+        arr = [arr sortedArrayUsingComparator:^NSComparisonResult(GuessPlayerModel *_Nonnull obj1, GuessPlayerModel *_Nonnull obj2) {
+            return obj1.rank > obj2.rank;
+        }];
+        [weakSelf showResultAlertView:arr winCoin:model.winCoin];
+    }];
+}
+
+/// 处理业务指令
+- (void)handleBusyCommand:(NSInteger)cmd command:(NSString *)command {
+    WeakSelf
+    switch (cmd) {
+        case CMD_ROOM_QUIZ_BET: {
+            // 押注公屏
+            RoomCmdGuessBetNotifyModel *model = [RoomCmdGuessBetNotifyModel fromJSON:command];
+            [weakSelf showBetScreenMsg:model];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)showBetScreenMsg:(RoomCmdGuessBetNotifyModel *)model {
+
+    NSArray <AudioUserModel *> *arrUsers = model.recUser;
+    for (int i = 0; i < arrUsers.count; ++i) {
+        AudioUserModel *user = arrUsers[i];
+        NSString *content = @"";
+        if ([user.userID isEqualToString:model.sendUser.userID]) {
+            content = [NSString stringWithFormat:@"%@ 胸有成竹,猜自己一定能赢", model.sendUser.name];
+        } else {
+            content = [NSString stringWithFormat:@"%@ 为 %@ 打call,猜TA赢", model.sendUser.name, user.name];
+        }
+        [self addBetPublicMsgContent:content];
+    }
+}
+
+- (void)addBetPublicMsgContent:(NSString *)content {
+    if (content.length == 0) {
+        return;
+    }
+    NSMutableAttributedString *attrMsg = [[NSMutableAttributedString alloc] initWithString:content];
+    if (attrMsg.length > 0) {
+        attrMsg.yy_lineSpacing = 6;
+        attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+        attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#ffffff" alpha:1];
+        AudioMsgSystemModel *msgModel = [AudioMsgSystemModel makeMsgWithAttr:attrMsg];
+        /// 公屏添加消息
+        [self addMsg:msgModel isShowOnScreen:YES];
+    }
+}
+
+#pragma mark game events
+
+/// 获取游戏Config  【需要实现】
+- (NSString *)onGetGameCfg {
+
+    GameSettle *gameSettle = [[GameSettle alloc] init];
+    gameSettle.hide = YES;
+
+    LobbyPlayers *l = [[LobbyPlayers alloc] init];
+    l.hide = true;
+
+    GameUi *ui = [[GameUi alloc] init];
+    ui.gameSettle = gameSettle;
+    ui.lobby_players = l;
+
+    GameCfgModel *m = [GameCfgModel defaultCfgModel];
+    m.ui = ui;
+
+    return [m mj_JSONString];
+}
+
+/// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
+- (void)onGameMGCommonSelfClickStartBtn {
+    // 通过游戏透传业务竞猜场景ID到业务服务端
+    NSDictionary *dic = @{@"sceneId": @(self.configModel.enterRoomModel.sceneType)};
+    [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
+    WeakSelf
+    /// 开启了自动扣费
+    if (self.openAutoBet) {
+        [GuessService reqBet:2 coin:self.betCoin userList:@[AppService.shared.loginUserID] finished:^{
+            [DTSheetView close];
+            DDLogDebug(@"开启自动扣费：投注成功");
+            // 自己押注消息
+            AudioUserModel *userModel = AudioUserModel.new;
+            userModel.userID = AppService.shared.login.loginUserInfo.userID;
+            userModel.name = AppService.shared.login.loginUserInfo.name;
+            userModel.icon = AppService.shared.login.loginUserInfo.icon;
+            userModel.sex = AppService.shared.login.loginUserInfo.sex;
+            [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
+        }            failure:^(NSError *error) {
+            weakSelf.openAutoBet = NO;
+            [weakSelf showNaviAutoStateView:NO];
+        }];
+    }
+}
+
+/// 游戏: 游戏结算状态     MG_COMMON_GAME_SETTLE
+- (void)onGameMGCommonGameSettle:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSettleModel *)model {
+
+    // 展示游戏结果
+    [self reqResultPlayerListData:model.results];
+
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+}
+
+#pragma mark lazy
 
 - (GuessMineView *)guessMineView {
     if (!_guessMineView) {
