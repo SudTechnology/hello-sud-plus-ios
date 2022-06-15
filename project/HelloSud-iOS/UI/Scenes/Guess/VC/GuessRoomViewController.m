@@ -7,6 +7,7 @@
 #import "GuessMineView.h"
 #import "SwitchAutoGuessPopView.h"
 #import "GuessSelectPopView.h"
+#import "GuessResultPopView.h"
 
 @interface GuessRoomViewController ()
 /// 猜我赢挂件视图
@@ -145,6 +146,8 @@
 
 /// 我的猜输赢挂件响应
 - (void)onTap:(id)tap {
+    [self showResultAlertView];
+    return;
     WeakSelf
     SwitchAutoGuessPopView *v = [[SwitchAutoGuessPopView alloc]init];
     v.betCoin = self.betCoin;
@@ -208,6 +211,14 @@
             make.leading.greaterThanOrEqualTo(self.naviView.onlineImageView.mas_trailing).offset(10);
         }];
     }
+}
+
+- (void)showResultAlertView {
+    GuessResultPopView *v = [[GuessResultPopView alloc]init];
+    v.backgroundColor = UIColor.clearColor;
+    [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:NO onCloseCallback:^{
+
+    }];
 }
 
 - (GuessMineView *)guessMineView {

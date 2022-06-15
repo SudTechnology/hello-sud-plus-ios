@@ -120,7 +120,7 @@
         [AppService.shared saveAgreement];
     } onCloseCallback:^{
         SweetPromptView *promptView = [[SweetPromptView alloc] init];
-        [DTAlertView show:promptView rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+        [DTAlertView show:promptView rootView:AppUtil.currentWindow clickToClose:false showDefaultBackground:YES onCloseCallback:^{
         }];
         promptView.agreeTapBlock = ^(UIButton *sender) {
             [DTAlertView close];

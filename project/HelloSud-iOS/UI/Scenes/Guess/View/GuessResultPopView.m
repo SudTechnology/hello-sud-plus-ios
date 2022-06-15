@@ -11,29 +11,45 @@
 
 @interface GuessResultPopView () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIImageView *bgImageView;
+@property(nonatomic, strong) BaseView *bgView;
 @property(nonatomic, strong) BaseView *contentView;
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) YYLabel *coinLabel;
-@property(nonatomic, strong) UIButton *confirmBtn;
+@property(nonatomic, strong) MarqueeLabel *tipLabel;
+@property(nonatomic, strong) UILabel *listTipLabel;
 @property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) UILabel *emptyLabel;
+@property(nonatomic, strong) UIButton *againBtn;
+@property(nonatomic, strong) UIButton *closeBtn;
+@property(nonatomic, strong) UIImageView *joinImageView;
+@property(nonatomic, strong) MarqueeLabel *joinTipLabel;
 @property(nonatomic, strong) NSArray <GuessPlayerModel *> *dataList;
 @property(nonatomic, assign) NSInteger betCoin;
 @property(nonatomic, assign) GuessResultPopViewType resultStateType;
+@property (nonatomic, assign)NSInteger countdown;
+@property (nonatomic, strong)DTTimer * timer;
 @end
 
 @implementation GuessResultPopView
 
+- (void)dealloc {
+    [self closeCountdown];
+}
+
 
 - (void)dtAddViews {
 
+    [self addSubview:self.bgView];
     [self addSubview:self.bgImageView];
     [self addSubview:self.contentView];
-    [self addSubview:self.titleLabel];
-    [self addSubview:self.coinLabel];
-    [self addSubview:self.confirmBtn];
-    [self addSubview:self.tableView];
-    [self addSubview:self.emptyLabel];
+    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.coinLabel];
+    [self.contentView addSubview:self.tipLabel];
+    [self.contentView addSubview:self.joinImageView];
+    [self.contentView addSubview:self.joinTipLabel];
+    [self.contentView addSubview:self.listTipLabel];
+    [self.contentView addSubview:self.tableView];
+    [self.contentView addSubview:self.againBtn];
+    [self.contentView addSubview:self.closeBtn];
 }
 
 - (void)dtLayoutViews {
@@ -42,6 +58,13 @@
         make.top.equalTo(@0);
         make.leading.trailing.equalTo(@0);
         make.height.equalTo(@260);
+    }];
+    [self.bgView dt_cornerRadius:12];
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bgImageView).offset(103);
+        make.leading.trailing.equalTo(@0);
+        make.height.equalTo(@417);
+        make.bottom.equalTo(@0);
     }];
     [self.contentView dt_cornerRadius:12];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -53,36 +76,48 @@
 
 
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@28);
+        make.top.equalTo(@30);
         make.leading.equalTo(@16);
         make.trailing.equalTo(@-16);
-        make.height.greaterThanOrEqualTo(@0);
+        make.height.greaterThanOrEqualTo(@37);
     }];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(14);
-        make.leading.trailing.equalTo(@0);
-        make.bottom.equalTo(self.confirmBtn.mas_top);
-    }];
-    [self.coinLabel dt_cornerRadius:12];
     [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(@16);
-        make.height.equalTo(@24);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(4);
+        make.height.greaterThanOrEqualTo(@0);
         make.width.greaterThanOrEqualTo(@0);
-        make.centerY.equalTo(self.confirmBtn);
+        make.centerX.equalTo(self.titleLabel);
 
     }];
-    CGFloat bottom = kAppSafeBottom + 12;
-    [self.confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(42);
+        make.leading.equalTo(@16);
         make.trailing.equalTo(@-16);
-        make.height.equalTo(@36);
-        make.width.equalTo(@180);
-        make.bottom.equalTo(@(-bottom));
-    }];
-    [self.emptyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.equalTo(@0);
         make.height.greaterThanOrEqualTo(@0);
-        make.centerY.equalTo(self.tableView);
     }];
+    [self.joinImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(@46);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(35);
+        make.height.equalTo(@24);
+        make.width.equalTo(@114);
+    }];
+
+    [self.joinTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.joinImageView.mas_trailing).offset(4);
+        make.centerY.equalTo(self.joinImageView);
+        make.height.greaterThanOrEqualTo(@0);
+        make.width.lessThanOrEqualTo(@100);
+    }];
+    [self.listTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@134);
+        make.leading.equalTo(@16);
+        make.width.height.greaterThanOrEqualTo(@0);
+    }];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.listTipLabel.mas_bottom).offset(6);
+        make.leading.trailing.equalTo(@0);
+        make.height.equalTo(@176);
+    }];
+
 
 
 }
@@ -90,29 +125,19 @@
 - (void)dtConfigUI {
     [super dtConfigUI];
     [self updateCoin:0];
-    [self updateConfirmBtn];
     [self reqData];
-
-    NSDictionary *dic = @{NSFontAttributeName: UIFONT_BOLD(24), NSForegroundColorAttributeName: HEX_COLOR(@"#000000")};
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:@"选择你支持的玩家\n" attributes:dic];
-    dic = @{NSFontAttributeName: UIFONT_BOLD(30), NSForegroundColorAttributeName: HEX_COLOR(@"#000000")};
-    NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:@"猜对得5倍奖励！" attributes:dic];
-    [attr appendAttributedString:attr2];
-    self.titleLabel.attributedText = attr;
 }
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    self.emptyLabel.hidden = self.dataList.count > 0;
+//    self.resultStateType = GuessResultPopViewTypeWin;
+//    self.resultStateType = GuessResultPopViewTypeLose;
+    self.resultStateType = GuessResultPopViewTypeNotBet;
+    [self handleStateResult];
 }
 
 - (void)reqData {
     WeakSelf
-    [UserService.shared reqUserCoinDetail:^(int64_t i) {
-        [weakSelf updateCoin:i];
-    }                                fail:^(NSString *errStr) {
-        [ToastUtil show:errStr];
-    }];
     NSArray *playerUserIdList = kGuessService.currentRoomVC.sudFSMMGDecorator.onlineUserIdList;
     NSString *roomId = kGuessService.currentRoomVC.roomID;
     [GuessService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
@@ -123,19 +148,124 @@
     }];
 }
 
+/// 处理状态结果
+- (void)handleStateResult {
+
+    // 是否在游戏
+    BOOL isInGame = kGuessService.currentRoomVC.sudFSMMGDecorator.isInGame;
+
+    if (isInGame) {
+        self.closeBtn.hidden = NO;
+        [self.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(@14);
+            make.height.equalTo(@36);
+            make.bottom.equalTo(@(-24));
+        }];
+        [self.againBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.closeBtn.mas_trailing).offset(16);
+            make.height.equalTo(@36);
+            make.bottom.equalTo(@(-24));
+            make.trailing.equalTo(@-16);
+            make.width.equalTo(self.closeBtn);
+        }];
+
+    } else {
+        self.againBtn.hidden = YES;
+        [self.closeBtn setBackgroundImage:HEX_COLOR(@"#FFE373").dt_toImage forState:UIControlStateNormal];
+        self.closeBtn.layer.borderColor = HEX_COLOR(@"#FFBF3A").CGColor;
+        [self.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(@47);
+            make.trailing.equalTo(@-47);
+            make.height.equalTo(@36);
+            make.bottom.equalTo(@(-24));
+        }];
+    }
+
+    switch (self.resultStateType) {
+        case GuessResultPopViewTypeWin:{
+            /// 猜中
+            self.titleLabel.text = isInGame ? @"恭喜获胜" : @"猜中了";
+            [self updateCoin:1000];
+            self.tipLabel.text = isInGame ? @"超过了94.8%的人" : @"料事如神，乘胜追击~";
+            [self beginCountdown];
+        }
+            break;
+        case GuessResultPopViewTypeLose:{
+            /// 未猜中
+            self.titleLabel.text = @"下次加油";
+            self.tipLabel.text = @"不必气馁，下把翻盘！";
+            self.joinImageView.hidden = NO;
+            self.joinTipLabel.hidden = NO;
+            self.coinLabel.hidden = YES;
+            [self.tipLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.titleLabel.mas_bottom).offset(8);
+            }];
+            [self beginCountdown];
+        }
+            break;
+        case GuessResultPopViewTypeNotBet:{
+            /// 未参与
+            self.titleLabel.text = @"未竞猜";
+            self.tipLabel.text = @"猜中将获得5倍奖励！下轮一起来吧~";
+            self.joinImageView.hidden = NO;
+            self.joinTipLabel.hidden = NO;
+            self.coinLabel.hidden = YES;
+            [self.tipLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.titleLabel.mas_bottom).offset(8);
+            }];
+            [self beginCountdown];
+        }
+            break;
+        default:
+            break;
+
+    }
+}
+
+- (void)beginCountdown {
+    WeakSelf
+    if (!self.timer) {
+        self.countdown = 10;
+        [self updateCountdown];
+        self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
+            weakSelf.countdown--;
+            [weakSelf updateCountdown];
+        }];
+    }
+}
+
+- (void)updateCountdown {
+
+    if (self.countdown <= 0) {
+        [DTAlertView close];
+        [self.timer stopTimer];
+        self.timer = nil;
+        return;
+    }
+    NSString *closeStr = [NSString stringWithFormat:@"关闭(%@s)", @(self.countdown)];
+    [self.closeBtn setTitle:closeStr forState:UIControlStateNormal];
+}
+
+- (void)closeCountdown {
+    if (self.timer) {
+        [self.timer stopTimer];
+        self.timer = nil;
+    }
+}
+
 - (void)updateCoin:(NSInteger)coin {
     NSMutableAttributedString *full = [[NSMutableAttributedString alloc] init];
     full.yy_alignment = NSTextAlignmentCenter;
 
 
-    UIImage *iconImage = [UIImage imageNamed:@"guess_award_coin"];
-    NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(14, 14) alignToFont:[UIFont systemFontOfSize:16 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
+    UIImage *iconImage = [UIImage imageNamed:@"guess_result_coin"];
+    NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(24, 24) alignToFont:[UIFont systemFontOfSize:20 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     attrIcon.yy_firstLineHeadIndent = 8;
     [full appendAttributedString:attrIcon];
 
-    NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@  ", @(coin)]];
-    attrAwardValue.yy_font = UIFONT_MEDIUM(14);
-    attrAwardValue.yy_color = HEX_COLOR(@"#F6A209");
+    NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" +%@", @(coin)]];
+    attrAwardValue.yy_font = UIFONT_MEDIUM(20);
+    attrAwardValue.yy_color = HEX_COLOR(@"#FF7B14");
     [full appendAttributedString:attrAwardValue];
 
     self.coinLabel.attributedText = full;
@@ -144,48 +274,18 @@
 - (void)dtConfigEvents {
     [super dtConfigEvents];
 
-    [self.confirmBtn addTarget:self action:@selector(onConfirmBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.closeBtn addTarget:self action:@selector(onCloseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.againBtn addTarget:self action:@selector(onAgainBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-
-- (void)onConfirmBtnClick:(id)sender {
-
-    NSMutableArray *selectedUserIdList = [[NSMutableArray alloc] init];
-    for (int i = 0; i < self.dataList.count; ++i) {
-        if (self.dataList[i].isSelected) {
-            [selectedUserIdList addObject:@(self.dataList[i].userId)];
-        }
-    }
-    [GuessService reqBet:2 coin:self.betCoin userList:selectedUserIdList finished:^{
-        [DTSheetView close];
-        [ToastUtil show:@"已投注，等待游戏结果公布"];
-    }];
+- (void)onCloseBtnClick:(id)sender {
+    [self closeCountdown];
+    [DTAlertView close];
 }
 
-/// 更新确认按钮值
-- (void)updateConfirmBtn {
-    /// 游戏开始后不能下注
-    if (kGuessService.currentRoomVC.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
-        [self.confirmBtn setTitle:@"已截止" forState:UIControlStateDisabled];
-        self.confirmBtn.enabled = NO;
-        [self.tableView reloadData];
-        return;
-    }
-    NSInteger selectedCount = 0;
-    for (int i = 0; i < self.dataList.count; ++i) {
-        if (self.dataList[i].isSelected) {
-            selectedCount++;
-        }
-    }
-    NSString *totalCoinStr = [NSString stringWithFormat:@"确认(%@金币)", @(selectedCount * self.betCoin)];
-    [self.confirmBtn setTitle:totalCoinStr forState:UIControlStateNormal];
-    self.confirmBtn.enabled = selectedCount > 0;
-    if (self.confirmBtn.enabled) {
-        _confirmBtn.layer.borderColor = HEX_COLOR(@"#FFBF3A").CGColor;
-    } else {
-        _confirmBtn.layer.borderColor = HEX_COLOR(@"#FFE8B9").CGColor;
-    }
-
+- (void)onAgainBtnClick:(id)sender {
+    [self closeCountdown];
+    [DTAlertView close];
 }
 
 #pragma mark - UITableViewDelegate || UITableViewDataSource
@@ -196,6 +296,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GuessResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GuessResultTableViewCell"];
+    self.dataList[indexPath.row].rank = indexPath.row;
     cell.model = self.dataList[indexPath.row];
     return cell;
 }
@@ -211,10 +312,10 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 134;
+        _tableView.rowHeight = 50;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
+        _tableView.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFCED" alpha:1];
         [_tableView registerClass:[GuessResultTableViewCell class] forCellReuseIdentifier:@"GuessResultTableViewCell"];
     }
     return _tableView;
@@ -226,14 +327,22 @@
         _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
         _bgImageView.clipsToBounds = YES;
         _bgImageView.image = [UIImage imageNamed:@"guess_result_bg"];
+        _bgImageView.backgroundColor = UIColor.clearColor;
     }
     return _bgImageView;
+}
+
+- (BaseView *)bgView {
+    if (!_bgView) {
+        _bgView = [[BaseView alloc] init];
+        _bgView.backgroundColor = HEX_COLOR(@"#FCF4D2");
+    }
+    return _bgView;
 }
 
 - (BaseView *)contentView {
     if (!_contentView) {
         _contentView = [[BaseView alloc] init];
-        _contentView.backgroundColor = HEX_COLOR(@"#FCF4D2");
     }
     return _contentView;
 }
@@ -241,53 +350,90 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = UIFONT_BOLD(30);
+        _titleLabel.font = UIFONT_BOLD(26);
         _titleLabel.textColor = HEX_COLOR(@"#000000");
         _titleLabel.shadowColor = HEX_COLOR(@"#FFDE00");
         _titleLabel.shadowOffset = CGSizeMake(1, 2);
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.numberOfLines = 0;
     }
     return _titleLabel;
 }
 
-- (UILabel *)emptyLabel {
-    if (!_emptyLabel) {
-        _emptyLabel = [[UILabel alloc] init];
-        _emptyLabel.font = UIFONT_REGULAR(14);
-        _emptyLabel.textColor = HEX_COLOR_A(@"#000000", 0.4);
-        _emptyLabel.textAlignment = NSTextAlignmentCenter;
-        _emptyLabel.numberOfLines = 0;
-        _emptyLabel.text = @"暂无玩家游戏中，请稍候再来";
-        _emptyLabel.hidden = YES;
+- (MarqueeLabel *)tipLabel {
+    if (!_tipLabel) {
+        _tipLabel = [[MarqueeLabel alloc] init];
+        _tipLabel.font = UIFONT_REGULAR(12);
+        _tipLabel.textColor = HEX_COLOR(@"#FF0E00");
+        _tipLabel.textAlignment = NSTextAlignmentCenter;
     }
-    return _emptyLabel;
+    return _tipLabel;
+}
+
+- (UILabel *)listTipLabel {
+    if (!_listTipLabel) {
+        _listTipLabel = [[UILabel alloc] init];
+        _listTipLabel.font = UIFONT_REGULAR(12);
+        _listTipLabel.textColor = HEX_COLOR(@"#000000");
+        _listTipLabel.textAlignment = NSTextAlignmentCenter;
+        _listTipLabel.text = @"游戏战况";
+    }
+    return _listTipLabel;
 }
 
 - (YYLabel *)coinLabel {
     if (!_coinLabel) {
         _coinLabel = [[YYLabel alloc] init];
         _coinLabel.textAlignment = NSTextAlignmentCenter;
-        _coinLabel.numberOfLines = 0;
-        _coinLabel.backgroundColor = UIColor.whiteColor;
     }
     return _coinLabel;
 }
 
-- (UIButton *)confirmBtn {
-    if (!_confirmBtn) {
-        _confirmBtn = [[UIButton alloc] init];
-        [_confirmBtn setTitle:@"确认(200金币)" forState:UIControlStateNormal];
-        [_confirmBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
-        [_confirmBtn setTitleColor:HEX_COLOR_A(@"#6C3800", 0.3) forState:UIControlStateDisabled];
-        [_confirmBtn setBackgroundImage:HEX_COLOR(@"#FFE373").dt_toImage forState:UIControlStateNormal];
-        [_confirmBtn setBackgroundImage:HEX_COLOR(@"#FBF2D0").dt_toImage forState:UIControlStateDisabled];
-        _confirmBtn.enabled = NO;
-        _confirmBtn.layer.borderWidth = 1;
-        _confirmBtn.layer.borderColor = HEX_COLOR(@"#FFBF3A").CGColor;
-        _confirmBtn.titleLabel.font = UIFONT_BOLD(14);
+- (UIButton *)againBtn {
+    if (!_againBtn) {
+        _againBtn = [[UIButton alloc] init];
+        [_againBtn setTitle:@"再来一局" forState:UIControlStateNormal];
+        [_againBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
+        [_againBtn setBackgroundImage:HEX_COLOR(@"#FFE373").dt_toImage forState:UIControlStateNormal];
+        _againBtn.layer.borderWidth = 1;
+        _againBtn.layer.borderColor = HEX_COLOR(@"#FFBF3A").CGColor;
+        _againBtn.titleLabel.font = UIFONT_MEDIUM(14);
     }
-    return _confirmBtn;
+    return _againBtn;
+}
+
+- (UIButton *)closeBtn {
+    if (!_closeBtn) {
+        _closeBtn = [[UIButton alloc] init];
+        [_closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
+        [_closeBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
+        [_closeBtn setBackgroundImage:HEX_COLOR(@"#FFFFFF").dt_toImage forState:UIControlStateNormal];
+        _closeBtn.layer.borderWidth = 1;
+        _closeBtn.layer.borderColor = HEX_COLOR(@"#EEE8D0").CGColor;
+        _closeBtn.titleLabel.font = UIFONT_MEDIUM(14);
+    }
+    return _closeBtn;
+}
+
+- (UIImageView *)joinImageView {
+    if (!_joinImageView) {
+        _joinImageView = [[UIImageView alloc] init];
+        _joinImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _joinImageView.clipsToBounds = YES;
+        _joinImageView.image = [UIImage imageNamed:@"guess_join_avatar"];
+        _joinImageView.hidden = YES;
+    }
+    return _joinImageView;
+}
+
+- (MarqueeLabel *)joinTipLabel {
+    if (!_joinTipLabel) {
+        _joinTipLabel = [[MarqueeLabel alloc] init];
+        _joinTipLabel.text = @"他们已参与竞猜";
+        _joinTipLabel.font = UIFONT_REGULAR(12);
+        _joinTipLabel.textColor = HEX_COLOR_A(@"#000000", 0.7);
+        _joinTipLabel.hidden = YES;
+    }
+    return _joinTipLabel;
 }
 
 @end

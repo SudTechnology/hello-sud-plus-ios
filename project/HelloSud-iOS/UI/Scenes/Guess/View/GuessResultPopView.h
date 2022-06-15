@@ -15,9 +15,6 @@ typedef NS_ENUM(NSInteger, GuessResultPopViewType) {
     GuessResultPopViewTypeNotBet = 0,// 未参与
     GuessResultPopViewTypeLose = 1,// 未猜中
     GuessResultPopViewTypeWin = 2,// 猜中了
-    GuessResultPopViewTypeJoinGameNotBet = 3,// 在玩游戏，未参与
-    GuessResultPopViewTypeJoinGameLose = 4,// 在玩游戏，未猜中
-    GuessResultPopViewTypeJoinGameWin = 5// 在玩游戏，猜中了
 };
 
 /// 竞猜结果弹出框视图

@@ -89,7 +89,7 @@
 - (void)onTapHead:(id)tap {
     /// 展示用户金币信息
     UserDetailView *v = [[UserDetailView alloc] init];
-    [DTAlertView show:v rootView:AppUtil.currentWindow isHitTest:YES onCloseCallback:^{
+    [DTAlertView show:v rootView:AppUtil.currentWindow clickToClose:YES showDefaultBackground:YES onCloseCallback:^{
 
     }];
 }

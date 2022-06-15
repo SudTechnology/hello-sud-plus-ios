@@ -61,22 +61,24 @@
 /// - Parameters:
 ///   - view: 展示的view
 ///   - onView: 当前的父视图
-///   - isHitTest: 是否可点击 -- 默认不可点击
+///   - clickToClose: 是否可点击背景层关闭 -- 默认不可点击
 ///   - onCloseCallBack: 关闭弹窗回调
-+ (DTAlertView *)show:(UIView *)view rootView:(UIView *)rootView isHitTest:(BOOL)isHitTest onCloseCallback:(void(^)(void))cb {
++ (DTAlertView *)show:(UIView *)view rootView:(UIView *)rootView clickToClose:(BOOL)clickToClose showDefaultBackground:(BOOL)showDefaultBackground onCloseCallback:(void (^)(void))cb {
     UIView *superView = rootView;
     if (rootView == nil) {
         superView = AppUtil.currentWindow;
     }
-    
+
     /// 如果存在移除当前展示弹窗
     if ([self getAlert] != nil && [NSStringFromClass(self) isEqualToString:@"DTAlertView"]) {
         [[self getAlert] removeFromSuperview];
     }
-    
+
     DTAlertView *alert = [[DTAlertView alloc] init];
-    alert.contentView.backgroundColor = [UIColor dt_colorWithHexString:@"#F2F2F2" alpha:1];
-    alert.isHitTest = isHitTest;
+    if (showDefaultBackground) {
+        alert.contentView.backgroundColor = [UIColor dt_colorWithHexString:@"#F2F2F2" alpha:1];
+    }
+    alert.isHitTest = clickToClose;
     alert.customView = view;
     alert.contentView.layer.cornerRadius = 8;
     alert.contentView.layer.masksToBounds = true;
@@ -97,7 +99,7 @@
 + (DTAlertView *)showTextAlert:(NSString *)msg sureText:(NSString *)sureText cancelText:(nullable NSString *)cancelText onSureCallback:(void(^)(void))sureCb onCloseCallback:(nullable void(^)(void))closeCb {
     DTTextAlertView *alert = [[DTTextAlertView alloc] init];
     [alert config:msg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
-    [DTAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+    [DTAlertView show:alert rootView:AppUtil.currentWindow clickToClose:false showDefaultBackground:YES onCloseCallback:^{
 //        closeCb();
     }];
     return [self getAlert];
@@ -114,7 +116,7 @@
     DTTextAlertView *alert = [[DTTextAlertView alloc] init];
     alert.disableAutoCloseWhenClick = disableAutoClose;
     [alert config:msg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
-    [DTAlertView show:alert rootView:AppUtil.currentWindow isHitTest:false onCloseCallback:^{
+    [DTAlertView show:alert rootView:AppUtil.currentWindow clickToClose:false showDefaultBackground:YES onCloseCallback:^{
 //        closeCb();
     }];
     return [self getAlert];
@@ -130,7 +132,7 @@
 + (DTAlertView *)showAttrTextAlert:(NSAttributedString *)attrMsg sureText:(NSString *)sureText cancelText:(NSString *)cancelText rootView:(UIView *)rootView onSureCallback:(void(^)(void))sureCb onCloseCallback:(void(^)(void))closeCb {
     DTTextAlertView *alert = [[DTTextAlertView alloc] init];
     [alert configAttr:attrMsg sureText:sureText cancelText:cancelText isClickClose:false onSureCallback:sureCb onCloseCallback:closeCb];
-    [DTAlertView show:alert rootView:rootView == nil ? AppUtil.currentWindow : rootView isHitTest:false onCloseCallback:^{
+    [DTAlertView show:alert rootView:rootView == nil ? AppUtil.currentWindow : rootView clickToClose:false showDefaultBackground:YES onCloseCallback:^{
 //        closeCb();
     }];
     return [self getAlert];
