@@ -236,10 +236,10 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    MoreGuessHeaderCellModel *m = self.model;
-    if (![m isKindOfClass:[MoreGuessHeaderCellModel class]]) {
+    if (![self.model isKindOfClass:[MoreGuessHeaderCellModel class]]) {
         return;
     }
+    MoreGuessHeaderCellModel *m = (MoreGuessHeaderCellModel *)self.model;
     if (m.duration > 0) {
         if (m.leftSupportCoin > 0) {
             self.leftSupportImageView.hidden = NO;
@@ -252,6 +252,7 @@
         }
         if (m.rightSupportCoin > 0) {
             self.rightSupportImageView.hidden = NO;
+            self.rightSupportLabel.hidden = NO;
             self.rightSupportLabel.text = [NSString stringWithFormat:@"已支持 %@", @(m.rightSupportCoin)];
             self.leftSupportBtn.enabled = NO;
             self.rightSupportBtn.selected = YES;
