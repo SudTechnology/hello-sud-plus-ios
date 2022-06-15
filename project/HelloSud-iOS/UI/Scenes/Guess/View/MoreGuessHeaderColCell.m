@@ -295,14 +295,16 @@
     MoreGuessHeaderCellModel *m = (MoreGuessHeaderCellModel *)self.model;
     if (!self.timer) {
         self.countdown = m.duration;
+        [weakSelf updateCountdown];
         self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
+            weakSelf.countdown--;
             [weakSelf updateCountdown];
         }];
     }
 }
 
 - (void)updateCountdown {
-    self.countdown--;
+
     if (self.countdown < 0) {
         MoreGuessHeaderCellModel *m = (MoreGuessHeaderCellModel *)self.model;
         self.countdown = m.duration;
