@@ -10,18 +10,23 @@
 #import "ConfigModel.h"
 #import "LoginService.h"
 #import "AudioRoomService.h"
-#import "TicketService.h"
-#import "PKService.h"
-#import "GuessService.h"
+#import "TicketRoomService.h"
+#import "PKRoomService.h"
+#import "GuessRoomService.h"
+#import "DanmakuRoomService.h"
 
 // 语音服务
 #define kAudioRoomService ((AudioRoomService *)AppService.shared.scene)
 // pk服务
-#define kPKService ((PKService *)AppService.shared.scene)
+#define kPKService ((PKRoomService *)AppService.shared.scene)
 // 门票服务
-#define kTicketService ((TicketService *)AppService.shared.scene)
+#define kTicketService ((TicketRoomService *)AppService.shared.scene)
 // 竞猜服务
-#define kGuessService ((GuessService *)AppService.shared.scene)
+#define kGuessService ((GuessRoomService *)AppService.shared.scene)
+// 弹幕房间服务
+#define kDanmakuRoomService ((DanmakuRoomService *)AppService.shared.scene)
+
+
 
 @class AudioConfigModel;
 

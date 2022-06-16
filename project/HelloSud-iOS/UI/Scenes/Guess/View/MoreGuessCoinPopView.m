@@ -130,11 +130,11 @@
 
 - (void)onSupportBtnCLick:(id)sender {
 
-    [GuessService reqBet:1 coin:self.selectedCoin userList:nil finished:^{
+    [GuessRoomService reqBet:1 coin:self.selectedCoin userList:nil finished:^{
         if (self.onSupportCoinBlock) {
             self.onSupportCoinBlock(self.selectedCoin);
         }
-    }            failure:nil];
+    }                failure:nil];
 }
 
 - (void)updateSelectState:(MoreGuessCoinItemView *)selectedView {

@@ -29,7 +29,7 @@
 }
 
 - (Class)serviceClass {
-    return GuessService.class;
+    return GuessRoomService.class;
 }
 
 
@@ -120,7 +120,7 @@
     WeakSelf
     NSArray *playerUserIdList = @[AppService.shared.loginUserID ? AppService.shared.loginUserID : @""];
     NSString *roomId = kGuessService.currentRoomVC.roomID;
-    [GuessService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
+    [GuessRoomService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
         weakSelf.betCoin = model.betCoin;
         [weakSelf dtUpdateUI];
     }];
@@ -169,7 +169,7 @@
             return;
         }
         // 开启的时候自动扣费
-        [GuessService reqBet:2 coin:self.betCoin userList:@[AppService.shared.loginUserID] finished:^{
+        [GuessRoomService reqBet:2 coin:self.betCoin userList:@[AppService.shared.loginUserID] finished:^{
             [DTSheetView close];
             DDLogDebug(@"开启自动扣费：投注成功");
             weakSelf.openAutoBet = YES;
@@ -282,7 +282,7 @@
         }
     }
     NSString *roomId = kGuessService.currentRoomVC.roomID;
-    [GuessService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
+    [GuessRoomService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
         weakSelf.betCoin = model.betCoin;
         NSArray *arr = model.playerList;
 
@@ -381,7 +381,7 @@
     WeakSelf
     /// 开启了自动扣费
     if (self.openAutoBet) {
-        [GuessService reqBet:2 coin:self.betCoin userList:@[AppService.shared.loginUserID] finished:^{
+        [GuessRoomService reqBet:2 coin:self.betCoin userList:@[AppService.shared.loginUserID] finished:^{
             [DTSheetView close];
             DDLogDebug(@"开启自动扣费：投注成功");
             // 自己押注消息
@@ -391,7 +391,7 @@
             userModel.icon = AppService.shared.login.loginUserInfo.icon;
             userModel.sex = AppService.shared.login.loginUserInfo.sex;
             [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
-        }            failure:^(NSError *error) {
+        }                failure:^(NSError *error) {
             weakSelf.openAutoBet = NO;
             [weakSelf showNaviAutoStateView:NO];
         }];

@@ -12,8 +12,12 @@
 @interface DanmakuRoomViewController ()
 /// 快速发送视图
 @property(nonatomic, strong) DanmakuQuickSendView *quickSendView;
+/// 弹幕内容视图
+@property (nonatomic, strong)BaseView *danmakuContentView;
 /// 视频视图
 @property(nonatomic, strong) BaseView *videoView;
+/// 是否强制横屏
+@property (nonatomic, assign)BOOL forceLandscape;
 @end
 
 @implementation DanmakuRoomViewController
@@ -26,6 +30,10 @@
     if (self.enterModel.streamId.length > 0) {
         [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
     }
+}
+
+- (Class)serviceClass {
+    return [DanmakuRoomService class];
 }
 
 - (void)dtAddViews {
@@ -61,7 +69,7 @@
                 [weakSelf.quickSendView.superview layoutIfNeeded];
                 [weakSelf.quickSendView showOpen:YES];
             }];
-            [weakSelf dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
+//            [weakSelf dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
 
         } else {
             [UIView animateWithDuration:0.25 animations:^{
@@ -88,6 +96,13 @@
     return NO;
 }
 
+- (BaseView *)danmakuContentView {
+    if (!_danmakuContentView) {
+        _danmakuContentView = [[BaseView alloc] init];
+    }
+    return _danmakuContentView;
+}
+
 - (BaseView *)videoView {
     if (!_videoView) {
         _videoView = [[BaseView alloc] init];
@@ -105,6 +120,6 @@
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+    return self.forceLandscape ? UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight : UIInterfaceOrientationMaskPortrait;
 }
 @end

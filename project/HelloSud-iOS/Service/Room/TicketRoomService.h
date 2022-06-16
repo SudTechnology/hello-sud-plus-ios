@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 门票加入弹窗key
 #define kKeyTicketJoinPop @"key_ticket_join_pop"
 
-@interface TicketService : AudioRoomService
+@interface TicketRoomService : AudioRoomService
 typedef NS_ENUM(NSInteger, TicketLevelType) {
     TicketLevelTypePrimary = 1,
     TicketLevelTypeMedia,

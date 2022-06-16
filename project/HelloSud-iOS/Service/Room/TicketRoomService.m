@@ -6,9 +6,9 @@
 //  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "TicketService.h"
+#import "TicketRoomService.h"
 
-@implementation TicketService
+@implementation TicketRoomService
 
 /// 请求确认加入门票游戏
 /// @param roomId 房间ID

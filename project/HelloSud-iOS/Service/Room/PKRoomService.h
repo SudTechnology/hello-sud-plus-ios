@@ -6,7 +6,7 @@
 #import "AudioRoomService.h"
 
 /// PK场景服务
-@interface PKService : AudioRoomService
+@interface PKRoomService : AudioRoomService
 
 #pragma mark 后台接口
 

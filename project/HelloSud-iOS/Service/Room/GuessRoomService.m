@@ -6,10 +6,10 @@
 //  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "GuessService.h"
+#import "GuessRoomService.h"
 #import "GuessRoomViewController.h"
 
-@implementation GuessService
+@implementation GuessRoomService
 
 
 /// 下注1：跨房PK 2：游戏

@@ -3,10 +3,10 @@
 // Copyright (c) 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "PKService.h"
+#import "PKRoomService.h"
 
 
-@implementation PKService
+@implementation PKRoomService
 
 #pragma mark 后台接口
 

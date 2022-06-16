@@ -54,7 +54,7 @@
 - (void)reqData {
 
     WeakSelf
-    [GuessService reqGuessListWithFinished:^(RespMoreGuessModel *model) {
+    [GuessRoomService reqGuessListWithFinished:^(RespMoreGuessModel *model) {
         weakSelf.dataList = model.quizGameInfoList;
         weakSelf.headerView.duration = model.pkCountDownCycle;
         [weakSelf.headerView dtUpdateUI];

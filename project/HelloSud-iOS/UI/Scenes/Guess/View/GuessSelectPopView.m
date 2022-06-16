@@ -102,7 +102,7 @@
     }];
     NSArray *playerUserIdList = kGuessService.currentRoomVC.sudFSMMGDecorator.onlineUserIdList;
     NSString *roomId = kGuessService.currentRoomVC.roomID;
-    [GuessService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
+    [GuessRoomService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
         weakSelf.betCoin = model.betCoin;
         weakSelf.dataList = model.playerList;
         [weakSelf.collectionView reloadData];
@@ -155,12 +155,12 @@
     }
 
 
-    [GuessService reqBet:2 coin:self.betCoin userList:selectedUserIdList finished:^{
+    [GuessRoomService reqBet:2 coin:self.betCoin userList:selectedUserIdList finished:^{
         [DTSheetView close];
         [ToastUtil show:@"已投注，等待游戏结果公布"];
         DDLogDebug(@"投注成功");
         [kGuessService sendBetNotifyMsg:kGuessService.currentRoomVC.roomID betUsers:msgBetUserList];
-    }            failure:nil];
+    }                failure:nil];
 }
 
 /// 更新确认按钮值

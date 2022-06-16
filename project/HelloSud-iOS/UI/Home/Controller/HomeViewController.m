@@ -202,7 +202,7 @@
 
 - (void)reqGuessGameList:(HSSceneModel *)guessModel {
     WeakSelf
-    [GuessService reqGuessListWithFinished:^(RespMoreGuessModel *model) {
+    [GuessRoomService reqGuessListWithFinished:^(RespMoreGuessModel *model) {
         if (model.quizGameInfoList.count > 5) {
             // 取前5个即可
             weakSelf.quizGameInfoList = [model.quizGameInfoList subarrayWithRange:NSMakeRange(0, 5)];

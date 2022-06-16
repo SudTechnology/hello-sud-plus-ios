@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 /// 竞猜服务
-@interface GuessService : AudioRoomService
+@interface GuessRoomService : AudioRoomService
 /// 玩家列表
 @property (nonatomic, strong)NSMutableArray *playerList;
 
