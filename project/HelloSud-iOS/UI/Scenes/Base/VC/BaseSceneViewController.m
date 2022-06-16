@@ -365,6 +365,18 @@
 
 }
 
+/// 将要发送消息
+/// @param msg msg
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg {
+    DDLogDebug(@"onWillSendMsg");
+}
+
+/// 已经发送消息
+/// @param msg msg
+- (void)onDidSendMsg:(RoomBaseCMDModel *)msg {
+    DDLogDebug(@"onDidSendMsg");
+}
+
 /// 发送房间切换消息
 /// @param gameId
 - (void)sendGameChangedMsg:(int64_t)gameId operatorUser:(NSString *)userID {

@@ -17,8 +17,11 @@
     msg.sendUser.roomID = self.roomID;
     NSString *command = [[NSString alloc]initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
     DDLogDebug(@"send content:%@", command);
+    [self onWillSendMsg:msg];
+    WeakSelf
     [AudioEngineFactory.shared.audioEngine sendCommand:command listener:^(int errorCode) {
         DDLogDebug(@"send result:%d", errorCode);
+        [weakSelf onDidSendMsg:msg];
     }];
     [self addMsg:msg isShowOnScreen:isAddToShow];
     /// Game - 发送文本命中

@@ -96,6 +96,20 @@
     return NO;
 }
 
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg {
+    if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
+        RoomCmdChatTextModel *m = (RoomCmdChatTextModel *)msg;
+        // 发送弹幕
+        [DanmakuRoomService reqSendBarrage:self.roomID content:m.content finished:^{
+//            [ToastUtil show:@"发送弹幕成功"];
+        } failure:^(NSError *error) {
+
+        }];
+    }
+}
+
+#pragma mark lazy
+
 - (BaseView *)danmakuContentView {
     if (!_danmakuContentView) {
         _danmakuContentView = [[BaseView alloc] init];

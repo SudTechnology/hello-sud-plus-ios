@@ -167,6 +167,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param reloadGame 是否重新加载游戏
 - (void)updateGameRoomID:(NSString *)gameRoomID reloadGame:(BOOL)reloadGame;
 
+/// 将要发送消息
+/// @param msg msg
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg;
+/// 已经发送消息
+/// @param msg msg
+- (void)onDidSendMsg:(RoomBaseCMDModel *)msg;
 #pragma mark - SudFSMMGListener
 /// 游戏配置
 - (NSString *)onGetGameCfg;
@@ -179,6 +185,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 加入状态处理发生变更
 - (void)playerIsInGameStateChanged:(NSString *)userId;
+
 @end
 
 NS_ASSUME_NONNULL_END
