@@ -7,7 +7,7 @@
 //
 
 #import "DanmakuQuickSendView.h"
-#import "QuickSendColCell.h"
+#import "QuickSendEffectColCell.h"
 
 @interface DanmakuQuickSendView()
 @property (nonatomic, strong)UIButton *showBtn;
@@ -98,7 +98,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    QuickSendColCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuickSendColCell" forIndexPath:indexPath];
+    QuickSendEffectColCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuickSendEffectColCell" forIndexPath:indexPath];
     [cell dt_cornerRadius:8];
     cell.model = self.dataList[indexPath.row];
     return cell;
@@ -128,7 +128,7 @@
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView registerClass:[QuickSendColCell class] forCellWithReuseIdentifier:@"QuickSendColCell"];
+        [_collectionView registerClass:[QuickSendEffectColCell class] forCellWithReuseIdentifier:@"QuickSendEffectColCell"];
     }
     return _collectionView;
 }

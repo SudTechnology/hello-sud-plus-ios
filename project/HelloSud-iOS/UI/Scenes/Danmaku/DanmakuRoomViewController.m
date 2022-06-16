@@ -13,11 +13,12 @@
 /// 快速发送视图
 @property(nonatomic, strong) DanmakuQuickSendView *quickSendView;
 /// 弹幕内容视图
-@property (nonatomic, strong)BaseView *danmakuContentView;
+@property(nonatomic, strong) BaseView *danmakuContentView;
 /// 视频视图
 @property(nonatomic, strong) BaseView *videoView;
 /// 是否强制横屏
-@property (nonatomic, assign)BOOL forceLandscape;
+@property(nonatomic, assign) BOOL forceLandscape;
+@property(nonatomic, strong) NSArray<DanmakuCallWarcraftModel *> *dataList;
 @end
 
 @implementation DanmakuRoomViewController
@@ -30,6 +31,7 @@
     if (self.enterModel.streamId.length > 0) {
         [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
     }
+    [self reqData];
 }
 
 - (Class)serviceClass {
@@ -83,6 +85,14 @@
     };
 }
 
+- (void)reqData {
+    WeakSelf
+    [DanmakuRoomService reqShortSendEffectList:self.gameId finished:^(NSArray<DanmakuCallWarcraftModel *> *modelList) {
+        weakSelf.dataList = modelList;
+
+    }                                  failure:nil];
+}
+
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {
     [super setConfigModel:configModel];
     self.gameId = 0;
@@ -98,11 +108,11 @@
 
 - (void)onWillSendMsg:(RoomBaseCMDModel *)msg {
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
-        RoomCmdChatTextModel *m = (RoomCmdChatTextModel *)msg;
+        RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
         // 发送弹幕
         [DanmakuRoomService reqSendBarrage:self.roomID content:m.content finished:^{
 //            [ToastUtil show:@"发送弹幕成功"];
-        } failure:^(NSError *error) {
+        }                          failure:^(NSError *error) {
 
         }];
     }

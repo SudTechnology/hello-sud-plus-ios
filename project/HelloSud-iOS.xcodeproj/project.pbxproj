@@ -152,7 +152,7 @@
 		6C4607C528520175005C99EF /* DanmakuQuickSendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607C428520175005C99EF /* DanmakuQuickSendView.m */; };
 		6C4607C828520D22005C99EF /* GuessRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607C728520D22005C99EF /* GuessRoomService.m */; };
 		6C4607CB2852DEAE005C99EF /* GuessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607CA2852DEAE005C99EF /* GuessModel.m */; };
-		6C4607FC285346BF005C99EF /* QuickSendColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607FB285346BE005C99EF /* QuickSendColCell.m */; };
+		6C4607FC285346BF005C99EF /* QuickSendEffectColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607FB285346BE005C99EF /* QuickSendEffectColCell.m */; };
 		6C4607FF28572099005C99EF /* GuessMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607FE28572099005C99EF /* GuessMineView.m */; };
 		6C460802285727B7005C99EF /* SwitchAutoGuessPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460801285727B7005C99EF /* SwitchAutoGuessPopView.m */; };
 		6C46080528583A30005C99EF /* GuessSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46080428583A2F005C99EF /* GuessSelectPopView.m */; };
@@ -161,6 +161,7 @@
 		6C46080E2858A452005C99EF /* GuessResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46080D2858A452005C99EF /* GuessResultTableViewCell.m */; };
 		6C4608112859D26F005C99EF /* RoomCmdGuessBetNotifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4608102859D26E005C99EF /* RoomCmdGuessBetNotifyModel.m */; };
 		6C460814285B1DF3005C99EF /* DanmakuRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460813285B1DF2005C99EF /* DanmakuRoomService.m */; };
+		6C460817285B3039005C99EF /* RespDanmakuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460816285B3039005C99EF /* RespDanmakuModel.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
@@ -619,8 +620,8 @@
 		6C4607C728520D22005C99EF /* GuessRoomService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRoomService.m; sourceTree = "<group>"; };
 		6C4607C92852DEAE005C99EF /* GuessModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessModel.h; sourceTree = "<group>"; };
 		6C4607CA2852DEAE005C99EF /* GuessModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessModel.m; sourceTree = "<group>"; };
-		6C4607FA285346BE005C99EF /* QuickSendColCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickSendColCell.h; sourceTree = "<group>"; };
-		6C4607FB285346BE005C99EF /* QuickSendColCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickSendColCell.m; sourceTree = "<group>"; };
+		6C4607FA285346BE005C99EF /* QuickSendEffectColCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickSendEffectColCell.h; sourceTree = "<group>"; };
+		6C4607FB285346BE005C99EF /* QuickSendEffectColCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickSendEffectColCell.m; sourceTree = "<group>"; };
 		6C4607FD28572099005C99EF /* GuessMineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessMineView.h; sourceTree = "<group>"; };
 		6C4607FE28572099005C99EF /* GuessMineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessMineView.m; sourceTree = "<group>"; };
 		6C460800285727B7005C99EF /* SwitchAutoGuessPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchAutoGuessPopView.h; sourceTree = "<group>"; };
@@ -637,6 +638,8 @@
 		6C4608102859D26E005C99EF /* RoomCmdGuessBetNotifyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCmdGuessBetNotifyModel.m; sourceTree = "<group>"; };
 		6C460812285B1DF2005C99EF /* DanmakuRoomService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanmakuRoomService.h; sourceTree = "<group>"; };
 		6C460813285B1DF2005C99EF /* DanmakuRoomService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanmakuRoomService.m; sourceTree = "<group>"; };
+		6C460815285B3039005C99EF /* RespDanmakuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespDanmakuModel.h; sourceTree = "<group>"; };
+		6C460816285B3039005C99EF /* RespDanmakuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespDanmakuModel.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1517,6 +1520,8 @@
 				BC210739F0C0EA7E87C2CC3B /* RespModel.h */,
 				6C4607C92852DEAE005C99EF /* GuessModel.h */,
 				6C4607CA2852DEAE005C99EF /* GuessModel.m */,
+				6C460815285B3039005C99EF /* RespDanmakuModel.h */,
+				6C460816285B3039005C99EF /* RespDanmakuModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1655,8 +1660,8 @@
 			children = (
 				6C4607C328520175005C99EF /* DanmakuQuickSendView.h */,
 				6C4607C428520175005C99EF /* DanmakuQuickSendView.m */,
-				6C4607FA285346BE005C99EF /* QuickSendColCell.h */,
-				6C4607FB285346BE005C99EF /* QuickSendColCell.m */,
+				6C4607FA285346BE005C99EF /* QuickSendEffectColCell.h */,
+				6C4607FB285346BE005C99EF /* QuickSendEffectColCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2389,7 +2394,7 @@
 				6C460814285B1DF3005C99EF /* DanmakuRoomService.m in Sources */,
 				4455ADCB27EAC658001516EE /* TocketChooseModel.m in Sources */,
 				4455AD8927EAC658001516EE /* ChangeRTCModel.m in Sources */,
-				6C4607FC285346BF005C99EF /* QuickSendColCell.m in Sources */,
+				6C4607FC285346BF005C99EF /* QuickSendEffectColCell.m in Sources */,
 				6CE6CD28283F591C0026BDAB /* DTWebViewController.m in Sources */,
 				4455ADB627EAC658001516EE /* AudioRoomViewController.m in Sources */,
 				444F59EE27F83FEF00FA1FB2 /* TicketJoinModel.m in Sources */,
@@ -2462,6 +2467,7 @@
 				6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */,
 				4455AD8C27EAC658001516EE /* HSSettingCell.m in Sources */,
 				4455ADA227EAC658001516EE /* MatchRoomModel.m in Sources */,
+				6C460817285B3039005C99EF /* RespDanmakuModel.m in Sources */,
 				4455ADCE27EAC658001516EE /* TicketChooseNoticeView.m in Sources */,
 				6CE6CD56283F591D0026BDAB /* DTNSError+Custom.m in Sources */,
 				E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */,

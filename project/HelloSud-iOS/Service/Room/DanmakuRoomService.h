@@ -17,6 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param finished finished
 /// @param failure failure
 + (void)reqSendBarrage:(NSString *)roomId content:(NSString *)content finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure;
+
+/// 拉取快捷弹幕列表
+/// @param gameId gameId
+/// @param finished finished
+/// @param failure failure
++ (void)reqShortSendEffectList:(int64_t)gameId finished:(void (^)(NSArray<DanmakuCallWarcraftModel *> *modelList))finished failure:(void (^)(NSError *error))failure;
 @end
 
 NS_ASSUME_NONNULL_END

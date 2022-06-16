@@ -63,6 +63,7 @@
 #import "RespUserInfoModel.h"
 #import "RespModel.h"
 #import "GuessModel.h"
+#import "RespDanmakuModel.h"
 
 
 #import "AppService.h"

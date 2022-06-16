@@ -9,8 +9,8 @@
 #import "BaseCollectionViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@interface QuickSendColCell : BaseCollectionViewCell
+/// 快速发送动效(弹幕、礼物)cell
+@interface QuickSendEffectColCell : BaseCollectionViewCell
 
 @end
 
