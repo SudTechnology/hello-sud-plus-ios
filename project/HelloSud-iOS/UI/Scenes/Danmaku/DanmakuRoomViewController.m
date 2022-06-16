@@ -21,6 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    if (self.enterModel.streamId.length > 0) {
+        [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
+    }
 }
 
 - (void)dtAddViews {

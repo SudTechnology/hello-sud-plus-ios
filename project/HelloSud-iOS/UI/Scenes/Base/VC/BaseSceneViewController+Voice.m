@@ -97,6 +97,12 @@
     [AudioEngineFactory.shared.audioEngine stopPCMCapture];
 }
 
+/// 拉取视频流
+/// @param videoView 展示视频视图
+- (void)startToPullVideo:(UIView *)videoView streamID:(NSString *)streamID {
+    [AudioEngineFactory.shared.audioEngine startPlayingStream:streamID view:videoView];
+}
+
 #pragma mark delegate
 /// 捕获本地音量变化
 /// @param soundLevel 本地音量级别，取值范围[0, 100]
