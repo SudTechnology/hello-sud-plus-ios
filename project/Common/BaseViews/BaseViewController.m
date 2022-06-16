@@ -87,4 +87,21 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
+
+// 默认只支持竖屏
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+/// 切换指定屏幕方向，需要supportedInterfaceOrientations中返回支持的方向
+/// @param orientation 指定方向
+- (void)dtSwitchOrientation:(UIInterfaceOrientation)orientation {
+
+    NSNumber *orientationUnknown = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
+    [[UIDevice currentDevice] setValue:orientationUnknown forKey:@"orientation"];
+    NSNumber *orientationTarget = [NSNumber numberWithInt:(int)orientation];
+    [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
+    [UIViewController attemptRotationToDeviceOrientation];
+}
+
 @end

@@ -22,6 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    // 加载视频流
     if (self.enterModel.streamId.length > 0) {
         [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
     }
@@ -60,6 +61,7 @@
                 [weakSelf.quickSendView.superview layoutIfNeeded];
                 [weakSelf.quickSendView showOpen:YES];
             }];
+            [weakSelf dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
 
         } else {
             [UIView animateWithDuration:0.25 animations:^{
@@ -100,5 +102,9 @@
         [_quickSendView showOpen:NO];
     }
     return _quickSendView;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
 }
 @end

@@ -188,4 +188,9 @@
     } // Uses os_log
     DDLogDebug(@"config log");
 }
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    UIInterfaceOrientationMask mask = self.window.rootViewController.supportedInterfaceOrientations;
+    return mask;
+}
 @end
