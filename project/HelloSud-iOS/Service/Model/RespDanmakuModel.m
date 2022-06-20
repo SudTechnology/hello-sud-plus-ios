@@ -8,8 +8,21 @@
 
 #import "RespDanmakuModel.h"
 
-@implementation DanmakuCallWarcraftModel
+@interface DanmakuCallWarcraftModel() {
+    CGFloat cellWidth_;
+}
+@end
 
+@implementation DanmakuCallWarcraftModel
+- (CGFloat)cellWidth {
+    if (cellWidth_ <= 0) {
+        cellWidth_ = 106;
+        if (self.warcraftImageList.count > 2) {
+            cellWidth_ += (self.warcraftImageList.count - 2) * 40;
+        }
+    }
+    return cellWidth_;
+}
 @end
 
 @implementation DanmakuJoinTeamModel

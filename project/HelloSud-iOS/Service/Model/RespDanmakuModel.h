@@ -37,8 +37,14 @@ typedef NS_ENUM(NSInteger, DanmakuEffectModelShowType) {
 @property(nonatomic, assign) NSInteger giftId;
 /// 礼物数量
 @property(nonatomic, assign) NSInteger giftAmount;
+/// 礼物图片
+@property(nonatomic, strong) NSString *giftUrl;
+/// 礼物价格
+@property(nonatomic, assign) NSInteger giftPrice;
 /// 名称
 @property(nonatomic, strong) NSString *name;
+/// 标题
+@property(nonatomic, strong) NSString *title;
 /// 标题色值
 @property(nonatomic, strong) NSString *titleColor;
 /// 文本内容(弹幕使用)
@@ -48,9 +54,9 @@ typedef NS_ENUM(NSInteger, DanmakuEffectModelShowType) {
 
 #pragma mark custom
 /// 弹幕快捷输入cell动效展示类型(加入战队、召唤)
-@property (nonatomic, assign) DanmakuEffectModelShowType effectShowType;
+@property(nonatomic, assign) DanmakuEffectModelShowType effectShowType;
 @property(nonatomic, strong) NSArray<DanmakuJoinTeamModel *> *joinTeamList;
-
+@property(nonatomic, assign, readonly) CGFloat cellWidth;
 @end
 
 /// 弹幕列表

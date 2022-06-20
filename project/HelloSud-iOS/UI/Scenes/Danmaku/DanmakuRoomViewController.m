@@ -64,6 +64,10 @@
     WeakSelf
     self.quickSendView.onOpenBlock = ^(BOOL isOpen) {
         if (isOpen) {
+            if (weakSelf.quickSendView.dataList.count == 0) {
+                weakSelf.quickSendView.dataList = weakSelf.dataList;
+                [weakSelf.quickSendView dtUpdateUI];
+            }
             [UIView animateWithDuration:0.25 animations:^{
                 [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.height.equalTo(@120);
@@ -89,13 +93,16 @@
     WeakSelf
     [DanmakuRoomService reqShortSendEffectList:self.gameId finished:^(NSArray<DanmakuCallWarcraftModel *> *modelList) {
         weakSelf.dataList = modelList;
+        if (weakSelf.quickSendView.dataList.count == 0) {
+            weakSelf.quickSendView.dataList = weakSelf.dataList;
+            [weakSelf.quickSendView dtUpdateUI];
+        }
 
     }                                  failure:nil];
 }
 
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {
     [super setConfigModel:configModel];
-    self.gameId = 0;
 }
 
 - (BOOL)isShowAudioContent {
@@ -106,13 +113,26 @@
     return NO;
 }
 
+/// 是否需要加载游戏，子类根据场景要求是否加载游戏，默认YES,加载
+- (BOOL)isNeedToLoadGame {
+    return NO;
+}
+
 - (void)onWillSendMsg:(RoomBaseCMDModel *)msg {
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
         // 发送弹幕
         [DanmakuRoomService reqSendBarrage:self.roomID content:m.content finished:^{
-//            [ToastUtil show:@"发送弹幕成功"];
+            DDLogDebug(@"发送弹幕成功");
         }                          failure:^(NSError *error) {
+
+        }];
+    } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
+        RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
+        // 发送礼物
+        [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount finished:^{
+            DDLogDebug(@"发送礼物成功");
+        } failure:^(NSError *error) {
 
         }];
     }

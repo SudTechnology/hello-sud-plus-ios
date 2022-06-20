@@ -8,12 +8,13 @@
 
 #import "DanmakuQuickSendView.h"
 #import "QuickSendEffectColCell.h"
+#import "QuickSendJoinColCell.h"
 
-@interface DanmakuQuickSendView()
+@interface DanmakuQuickSendView()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong)UIButton *showBtn;
 @property (nonatomic, strong)UIButton *closeBtn;
 @property (nonatomic, strong)UICollectionView *collectionView;
-@property (nonatomic, strong) NSArray <BaseModel *> *dataList;
+
 @end
 
 @implementation DanmakuQuickSendView
@@ -48,11 +49,12 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-    self.collectionView.backgroundColor = UIColor.orangeColor;
+    self.collectionView.backgroundColor = HEX_COLOR_A(@"#000000", 0.9);
 }
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
+    [self.collectionView reloadData];
 }
 
 - (void)dtConfigEvents {
@@ -98,11 +100,18 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    QuickSendEffectColCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuickSendEffectColCell" forIndexPath:indexPath];
-    [cell dt_cornerRadius:8];
+    DanmakuCallWarcraftModel *m = self.dataList[indexPath.row];
+    BaseCollectionViewCell *cell = nil;
+    if (m.effectShowType == DanmakuEffectModelShowTypeJoin) {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuickSendJoinColCell" forIndexPath:indexPath];
+    } else {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuickSendEffectColCell" forIndexPath:indexPath];
+    }
+    cell.backgroundColor = UIColor.clearColor;
     cell.model = self.dataList[indexPath.row];
     return cell;
 }
+
 
 
 #pragma mark - UICollectionViewDelegate
@@ -111,15 +120,20 @@
 
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat width = 112;
+    DanmakuCallWarcraftModel *m = self.dataList[indexPath.row];
+    if (m.effectShowType == DanmakuEffectModelShowTypeCall) {
+        width = m.cellWidth;
+    }
+    return CGSizeMake(width, 100);
+}
+
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         CGFloat lineSpace = 0;
-        CGFloat itemW = 112;
-        CGFloat itemH = 100;
-
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.itemSize = CGSizeMake(itemW, itemH);
         flowLayout.minimumLineSpacing = lineSpace;
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -129,6 +143,8 @@
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[QuickSendEffectColCell class] forCellWithReuseIdentifier:@"QuickSendEffectColCell"];
+        [_collectionView registerClass:[QuickSendJoinColCell class] forCellWithReuseIdentifier:@"QuickSendJoinColCell"];
+
     }
     return _collectionView;
 }

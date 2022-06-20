@@ -51,7 +51,7 @@
     self.language = [SettingsService getCurLanguageLocale];
     [self initSudFSMMG];
     [self loginRoom];
-    if (self.gameId > 0) {
+    if (self.gameId > 0 && self.isNeedToLoadGame) {
         [self loginGame];
     }
     [self dtUpdateUI];
@@ -186,8 +186,7 @@
     };
     self.inputView.inputMsgBlock = ^(NSString *_Nonnull msg) {
         // 发送公屏消息
-        RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:msg];
-        [weakSelf sendMsg:m isAddToShow:YES];
+        [weakSelf sendContentMsg:msg];
     };
 
     self.gameMicContentView.updateMicArrCallBack = ^(NSArray<AudioMicroView *> *_Nonnull micArr) {
@@ -376,6 +375,19 @@
 - (void)onDidSendMsg:(RoomBaseCMDModel *)msg {
     DDLogDebug(@"onDidSendMsg");
 }
+
+/// 是否需要加载游戏，子类根据场景要求是否加载游戏，默认YES,加载
+- (BOOL)isNeedToLoadGame {
+    return YES;
+}
+
+/// 发送公屏文本消息
+/// @param content content
+- (void)sendContentMsg:(NSString *)content {
+    RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:content];
+    [self sendMsg:m isAddToShow:YES];
+}
+
 
 /// 发送房间切换消息
 /// @param gameId

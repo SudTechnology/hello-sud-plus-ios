@@ -173,6 +173,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 已经发送消息
 /// @param msg msg
 - (void)onDidSendMsg:(RoomBaseCMDModel *)msg;
+/// 是否需要加载游戏，子类根据场景要求是否加载游戏，默认YES,加载
+- (BOOL)isNeedToLoadGame;
+/// 发送公屏文本消息
+/// @param content content
+- (void)sendContentMsg:(NSString *)content;
 #pragma mark - SudFSMMGListener
 /// 游戏配置
 - (NSString *)onGetGameCfg;
