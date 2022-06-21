@@ -13,4 +13,13 @@
 - (BOOL)dt_isInsensitiveEqualToString:(NSString *)dest {
     return [self caseInsensitiveCompare:dest] == NSOrderedSame;
 }
+
+/// 转成URL，包含对http处理
+/// @return
+- (NSURL *)dt_toURL {
+    if ([self hasPrefix:@"http"]) {
+        return [[NSURL alloc] initWithString:self];
+    }
+    return [NSURL fileURLWithPath:self];
+}
 @end

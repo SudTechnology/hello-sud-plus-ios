@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger, DanmakuEffectModelShowType) {
 @property(nonatomic, assign) NSInteger giftAmount;
 /// 礼物图片
 @property(nonatomic, strong) NSString *giftUrl;
+/// 动效图
+@property(nonatomic, strong) NSString *animationUrl;
 /// 礼物价格
 @property(nonatomic, assign) NSInteger giftPrice;
 /// 名称

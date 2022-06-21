@@ -10,4 +10,7 @@
 /// @param dest
 /// @return
 - (BOOL)dt_isInsensitiveEqualToString:(NSString *)dest;
+/// 转成URL，包含对http处理
+/// @return
+- (NSURL *)dt_toURL;
 @end

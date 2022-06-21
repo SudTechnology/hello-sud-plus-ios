@@ -8,7 +8,7 @@
 
 #import "QuickSendEffectColCell.h"
 
-@interface QuickSendEffectColCell()
+@interface QuickSendEffectColCell ()
 @property(nonatomic, strong) MarqueeLabel *titleLabel;
 @property(nonatomic, strong) UIView *iconContentView;
 @property(nonatomic, strong) BaseView *callView;
@@ -64,7 +64,7 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-    
+
 
 }
 
@@ -74,7 +74,7 @@
     if (![self.model isKindOfClass:DanmakuCallWarcraftModel.class]) {
         return;
     }
-    DanmakuCallWarcraftModel *m = (DanmakuCallWarcraftModel *)self.model;
+    DanmakuCallWarcraftModel *m = (DanmakuCallWarcraftModel *) self.model;
     self.titleLabel.text = m.title;
     if (m.titleColor.length > 0) {
         self.titleLabel.tintColor = HEX_COLOR(m.titleColor);
@@ -86,8 +86,8 @@
 
 
 - (void)relayoutImages:(DanmakuCallWarcraftModel *)model {
-    
-    NSArray <UIView *>*arrSubviews = self.iconContentView.subviews;
+
+    NSArray <UIView *> *arrSubviews = self.iconContentView.subviews;
     for (int i = 0; i < arrSubviews.count; ++i) {
         [arrSubviews[i] removeFromSuperview];
     }
@@ -105,7 +105,7 @@
     }
     CGFloat itemW = 30;
     CGFloat cellWidth = model.cellWidth;
-    CGFloat marginX = (cellWidth - imageList.count * itemW - (imageList.count - 1) * 10)  / 2;
+    CGFloat marginX = (cellWidth - imageList.count * itemW - (imageList.count - 1) * 10) / 2;
     [arrImageView dt_mas_distributeSudokuViewsWithFixedLineSpacing:10 fixedInteritemSpacing:10 warpCount:arrImageView.count topSpacing:0 bottomSpacing:0 leadSpacing:marginX tailSpacing:marginX];
 }
 
@@ -155,7 +155,7 @@
 
 }
 
-- (void)loadImage:(NSString *)imageURL completed:(void(^)(UIImage *image))completed {
+- (void)loadImage:(NSString *)imageURL completed:(void (^)(UIImage *image))completed {
     if (imageURL.length == 0) {
         if (completed) {
             completed(nil);
@@ -183,14 +183,32 @@
 }
 
 - (void)onTapCallView:(id)tap {
-    DanmakuCallWarcraftModel *m = (DanmakuCallWarcraftModel *)self.model;
+    DanmakuCallWarcraftModel *m = (DanmakuCallWarcraftModel *) self.model;
     if (m.callMode == 1) {
         // 弹幕
         [kDanmakuRoomService.currentRoomVC sendContentMsg:m.content];
-    } else if (m.callMode == 2){
+    } else if (m.callMode == 2) {
         // 礼物
-        AudioUserModel *toUser = [[AudioUserModel alloc]init];
+        AudioUserModel *toUser = nil;
+
+        // 找到房主，发送给房主
+        NSArray<AudioRoomMicModel *> *micList = kAudioRoomService.currentRoomVC.dicMicModel.allValues;
+        for (int i = 0; i < micList.count; ++i) {
+            AudioUserModel *user = micList[i].user;
+            if (user && user.roleType == 1) {
+                toUser = user;
+                break;
+            }
+        }
+        if (!toUser) {
+            toUser = [[AudioUserModel alloc] init];
+        }
+
         RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:m.giftId giftCount:m.giftAmount toUser:toUser];
+        giftMsg.type = 1;// 后台礼物
+        giftMsg.giftUrl = m.giftUrl;
+        giftMsg.animationUrl = m.animationUrl;
+        giftMsg.giftName = m.name;
         [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
     }
 

@@ -240,10 +240,10 @@
                 make.width.mas_equalTo(115);
                 make.height.mas_equalTo(24);
             }];
-            
+
             [self.gameMicContentView scaleToSmallView];
             [self.gameMicContentView.superview layoutIfNeeded];
-        } completion: ^(BOOL finished){
+        }                completion:^(BOOL finished) {
             [self.gameMicContentView showSmallState];
         }];
 
@@ -257,7 +257,7 @@
             }];
             [self.gameMicContentView scaleToBigView];
             [self.gameMicContentView.superview layoutIfNeeded];
-        } completion: ^(BOOL finished){
+        }                completion:^(BOOL finished) {
             [self.gameMicContentView showBigState];
         }];
     }
@@ -625,17 +625,39 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_MIC_CHANGED object:nil userInfo:@{@"msgModel": model}];
 }
 
+- (GiftModel *)getGiftModelFromMsg:(RoomCmdSendGiftModel *)msgModel {
+    GiftModel *giftModel = nil;
+    if (msgModel.type == 1) {
+        // 后台礼物
+        giftModel = [[GiftModel alloc] init];
+        if (msgModel.animationUrl) {
+            NSURL *url = msgModel.animationUrl.dt_toURL;
+            giftModel.animateType = url.pathExtension;
+        }
+        giftModel.animateURL = msgModel.animationUrl;
+        giftModel.giftID = msgModel.giftID;
+        giftModel.giftName = msgModel.giftName;
+        giftModel.giftURL = msgModel.giftUrl;
+        giftModel.smallGiftURL = msgModel.giftUrl;
+    } else {
+        // 内置
+        giftModel = [GiftService.shared giftByID:msgModel.giftID];;
+    }
+    return giftModel;
+}
+
 /// 处理礼物动效
 /// @param model model description
 - (void)handleGiftEffect:(RoomCmdSendGiftModel *)model {
-    GiftModel *giftModel = [GiftService.shared giftByID:model.giftID];
+
+    GiftModel *giftModel = [self getGiftModelFromMsg:model];
     if (!giftModel) {
         NSLog(@"No exist the gift info:%ld", model.giftID);
         return;
     }
     if ([giftModel.animateType isEqualToString:@"svga"]) {
         DTSVGAPlayerView *v = DTSVGAPlayerView.new;
-        NSURL *url = [NSURL fileURLWithPath:giftModel.animateURL];
+        NSURL *url = [giftModel.animateURL hasPrefix:@"http"] ? [[NSURL alloc] initWithString:giftModel.animateURL] : [NSURL fileURLWithPath:giftModel.animateURL];
         [v setURL:url];
         [self.view addSubview:v];
         [v mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -648,7 +670,7 @@
             [weakV removeFromSuperview];
         }];
     } else if ([giftModel.animateType isEqualToString:@"lottie"]) {
-        NSURL *url = [NSURL fileURLWithPath:giftModel.animateURL];
+        NSURL *url = [giftModel.animateURL hasPrefix:@"http"] ? [[NSURL alloc] initWithString:giftModel.animateURL] : [NSURL fileURLWithPath:giftModel.animateURL];
 
         LOTAnimationView *v = [[LOTAnimationView alloc] initWithContentsOfURL:url];
         [self.view addSubview:v];
@@ -969,7 +991,7 @@
 
 /// 加入状态处理发生变更
 - (void)playerIsInGameStateChanged:(NSString *)userId {
-    
+
 }
 
 @end
