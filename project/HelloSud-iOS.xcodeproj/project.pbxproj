@@ -163,6 +163,7 @@
 		6C460814285B1DF3005C99EF /* DanmakuRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460813285B1DF2005C99EF /* DanmakuRoomService.m */; };
 		6C460817285B3039005C99EF /* RespDanmakuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460816285B3039005C99EF /* RespDanmakuModel.m */; };
 		6C46081A2860165F005C99EF /* QuickSendJoinColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4608192860165E005C99EF /* QuickSendJoinColCell.m */; };
+		6C46081D2861ABB0005C99EF /* LandscapePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46081C2861ABAE005C99EF /* LandscapePopView.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
@@ -643,6 +644,8 @@
 		6C460816285B3039005C99EF /* RespDanmakuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespDanmakuModel.m; sourceTree = "<group>"; };
 		6C4608182860165E005C99EF /* QuickSendJoinColCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickSendJoinColCell.h; sourceTree = "<group>"; };
 		6C4608192860165E005C99EF /* QuickSendJoinColCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickSendJoinColCell.m; sourceTree = "<group>"; };
+		6C46081B2861ABAE005C99EF /* LandscapePopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandscapePopView.h; sourceTree = "<group>"; };
+		6C46081C2861ABAE005C99EF /* LandscapePopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandscapePopView.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1667,6 +1670,8 @@
 				6C4607FB285346BE005C99EF /* QuickSendEffectColCell.m */,
 				6C4608182860165E005C99EF /* QuickSendJoinColCell.h */,
 				6C4608192860165E005C99EF /* QuickSendJoinColCell.m */,
+				6C46081B2861ABAE005C99EF /* LandscapePopView.h */,
+				6C46081C2861ABAE005C99EF /* LandscapePopView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2501,6 +2506,7 @@
 				4455ADC827EAC658001516EE /* ASRViewController.m in Sources */,
 				445EAB3627A1330D000DCC72 /* BaseRespModel.m in Sources */,
 				4455AD8B27EAC658001516EE /* VersionInfoCell.m in Sources */,
+				6C46081D2861ABB0005C99EF /* LandscapePopView.m in Sources */,
 				6CE6CD2A283F591C0026BDAB /* DTTextAlertView.m in Sources */,
 				6C076EDA27A2993C00650209 /* RespGameInfoModel.m in Sources */,
 				4455AD9727EAC658001516EE /* HomeViewController.m in Sources */,
@@ -2838,7 +2844,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

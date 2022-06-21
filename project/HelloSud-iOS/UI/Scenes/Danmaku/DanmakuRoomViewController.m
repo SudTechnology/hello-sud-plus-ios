@@ -8,6 +8,7 @@
 
 #import "DanmakuRoomViewController.h"
 #import "DanmakuQuickSendView.h"
+#import "LandscapePopView.h"
 
 @interface DanmakuRoomViewController ()
 /// 快速发送视图
@@ -26,12 +27,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     // 加载视频流
     if (self.enterModel.streamId.length > 0) {
         [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
     }
     [self reqData];
+    [self checkIfNeedToShowLandscapeTip];
 }
 
 - (Class)serviceClass {
@@ -75,7 +76,7 @@
                 [weakSelf.quickSendView.superview layoutIfNeeded];
                 [weakSelf.quickSendView showOpen:YES];
             }];
-//            [weakSelf dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
+
 
         } else {
             [UIView animateWithDuration:0.25 animations:^{
@@ -99,6 +100,23 @@
         }
 
     }                                  failure:nil];
+}
+
+/// 检测是否展示横屏提示
+- (void)checkIfNeedToShowLandscapeTip {
+//    if (AppService.shared.alreadyShowLandscape) {
+//        return;
+//    }
+    WeakSelf
+    AppService.shared.alreadyShowLandscape = YES;
+    LandscapePopView *v = [[LandscapePopView alloc] init];
+    v.enterBlock = ^{
+        // 强制横屏
+        [DTAlertView close];
+        weakSelf.forceLandscape = YES;
+        [weakSelf dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
+    };
+    [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
 }
 
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {
@@ -132,7 +150,7 @@
         // 发送礼物
         [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount finished:^{
             DDLogDebug(@"发送礼物成功");
-        } failure:^(NSError *error) {
+        }                       failure:^(NSError *error) {
 
         }];
     }

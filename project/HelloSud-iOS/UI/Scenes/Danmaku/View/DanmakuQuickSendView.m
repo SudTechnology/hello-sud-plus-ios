@@ -29,21 +29,21 @@
 - (void)dtLayoutViews {
     [super dtLayoutViews];
     [self.showBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@0);
+        make.top.equalTo(@-6);
         make.leading.trailing.equalTo(@0);
         make.height.equalTo(@24);
     }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@0);
         make.leading.trailing.equalTo(@0);
-        make.bottom.equalTo(self.closeBtn.mas_top).offset(0);
+        make.bottom.equalTo(self.closeBtn.mas_top).offset(4);
     }];
 
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@0);
         make.width.equalTo(@90);
         make.height.equalTo(@24);
         make.centerX.equalTo(self);
+        make.bottom.equalTo(@0);
     }];
 }
 

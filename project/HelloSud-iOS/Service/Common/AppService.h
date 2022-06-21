@@ -65,6 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)BaseSceneService *scene;
 /// 更多竞猜头部数据列表缓存
 @property(nonatomic, strong) NSArray <BaseModel *> *moreGuessHeaderArrayCache;
+/// 是否已经展示过横屏提示
+@property(nonatomic, assign) BOOL alreadyShowLandscape;
 
 + (instancetype)shared;
 
