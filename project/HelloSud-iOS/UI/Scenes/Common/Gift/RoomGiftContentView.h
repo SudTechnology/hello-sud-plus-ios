@@ -14,6 +14,9 @@ typedef void(^GIFT_SELECTED_BLCOK)(GiftModel *giftModel);
 /// 选中礼物回调
 @property(nonatomic, copy)GIFT_SELECTED_BLCOK didSelectedCallback;
 @property (nonatomic, strong) GiftModel *didSelectedGift;
+/// 场景礼物列表
+@property (nonatomic, strong)NSArray<GiftModel *> *sceneGiftList;
+
 @end
 
 NS_ASSUME_NONNULL_END

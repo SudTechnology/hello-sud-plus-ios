@@ -31,7 +31,14 @@
 }
 
 - (void)dtUpdateUI {
-    [self.dataList setArray:GiftService.shared.giftList];
+    if (self.sceneGiftList.count > 0) {
+        [self.dataList setArray:self.sceneGiftList];
+        [self.dataList addObjectsFromArray:GiftService.shared.giftList];
+    } else {
+        [self.dataList setArray:GiftService.shared.giftList];
+    }
+
+
     for (GiftModel *m in self.dataList) {
         m.isSelected = NO;
     }
@@ -42,6 +49,13 @@
     }
     [self.collectionView reloadData];
 }
+
+- (void)setSceneGiftList:(NSArray<GiftModel *> *)sceneGiftList {
+    _sceneGiftList = sceneGiftList;
+    [self dtUpdateUI];
+}
+
+
 
 #pragma mark - UICollectionViewDataSource
 

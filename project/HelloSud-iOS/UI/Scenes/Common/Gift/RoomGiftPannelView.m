@@ -140,6 +140,16 @@
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil];
 }
 
+/// 加载场景礼物
+/// @param gameId gameId
+/// @param sceneId sceneId
+- (void)loadSceneGift:(int64_t)gameId sceneId:(NSInteger)sceneId {
+    [GiftService reqGiftListWithGameId:gameId sceneId:sceneId finished:^(NSArray<GiftModel *> *modelList) {
+        
+    } failure:nil];
+}
+
+
 - (void)onBtnSend:(UIButton *)sender {
     
     NSMutableArray<AudioUserModel*> *arrWaitForSend = NSMutableArray.new;
