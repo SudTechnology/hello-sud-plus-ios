@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 横屏提示弹出框
 @interface LandscapePopView : BaseView
 @property (nonatomic, copy)void(^enterBlock)(void);
+/// 开启倒计时
+- (void)beginCountdown;
 @end
 
 NS_ASSUME_NONNULL_END

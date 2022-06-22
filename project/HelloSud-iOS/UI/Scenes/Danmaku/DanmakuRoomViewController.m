@@ -14,8 +14,6 @@
 @interface DanmakuRoomViewController ()
 /// 快速发送视图
 @property(nonatomic, strong) DanmakuQuickSendView *quickSendView;
-/// 弹幕内容视图
-@property(nonatomic, strong) BaseView *danmakuContentView;
 /// 视频视图
 @property(nonatomic, strong) BaseView *videoView;
 /// 横屏导航栏
@@ -159,9 +157,9 @@
 
 /// 检测是否展示横屏提示
 - (void)checkIfNeedToShowLandscapeTip {
-//    if (AppService.shared.alreadyShowLandscape) {
-//        return;
-//    }
+    if (AppService.shared.alreadyShowLandscape) {
+        return;
+    }
     WeakSelf
     AppService.shared.alreadyShowLandscape = YES;
     LandscapePopView *v = [[LandscapePopView alloc] init];
@@ -173,6 +171,7 @@
 
     };
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
+    [v beginCountdown];
 }
 
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {
@@ -284,17 +283,9 @@
 
 #pragma mark lazy
 
-- (BaseView *)danmakuContentView {
-    if (!_danmakuContentView) {
-        _danmakuContentView = [[BaseView alloc] init];
-    }
-    return _danmakuContentView;
-}
-
 - (BaseView *)videoView {
     if (!_videoView) {
         _videoView = [[BaseView alloc] init];
-        _videoView.backgroundColor = UIColor.greenColor;
         _videoView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _videoView;

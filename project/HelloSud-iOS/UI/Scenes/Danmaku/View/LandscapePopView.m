@@ -14,10 +14,17 @@
 @property(nonatomic, strong) UIImageView *landscapeImageView;
 @property(nonatomic, strong) UIButton *enterBtn;
 @property(nonatomic, strong) UIButton *closeBtn;
+@property(nonatomic, strong) DTTimer *timer;
+@property(nonatomic, assign) NSInteger countdown;
 
 @end
 
 @implementation LandscapePopView
+
+- (void)dealloc {
+    [self endCountdown];
+}
+
 - (void)dtAddViews {
     [super dtAddViews];
     [self addSubview:self.titleLabel];
@@ -77,13 +84,45 @@
     [self.closeBtn addTarget:self action:@selector(onCloseBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)beginCountdown {
+    WeakSelf
+    if (!self.timer) {
+        // 倒计时秒数
+        self.countdown = 5;
+        [self updateCountdown];
+        self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
+            weakSelf.countdown--;
+            [weakSelf updateCountdown];
+        }];
+    }
+}
+
+- (void)endCountdown {
+    [self.timer stopTimer];
+    self.timer = nil;
+}
+
+- (void)updateCountdown {
+    if (self.countdown <= 0) {
+        [self endCountdown];
+        // 自动进入横屏
+        if (self.enterBlock) {
+            self.enterBlock();
+        }
+        return;
+    }
+    _tipLabel.text = [NSString stringWithFormat:@"%@秒后会自动进入全屏", @(self.countdown)];
+}
+
 - (void)onEnterBtn:(id)sender {
+    [self endCountdown];
     if (self.enterBlock) {
         self.enterBlock();
     }
 }
 
 - (void)onCloseBtn:(id)sender {
+    [self endCountdown];
     [DTAlertView close];
 }
 
