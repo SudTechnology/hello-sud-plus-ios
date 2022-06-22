@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param giftId giftId
 /// @param finished finished
 /// @param failure failure
-+ (void)reqSendGift:(NSString *)roomId giftId:(NSString *)giftId amount:(NSInteger)amount finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure;
++ (void)reqSendGift:(NSString *)roomId giftId:(NSString *)giftId amount:(NSInteger)amount price:(NSInteger)price type:(NSInteger)type finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure;
 
 /// 拉取快捷弹幕列表
 /// @param gameId gameId

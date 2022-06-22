@@ -180,6 +180,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)sendContentMsg:(NSString *)content;
 /// 展示更多视图
 - (void)showMoreView;
+/// 是否需要展示礼物动效
+- (BOOL)isNeedToShowGiftEffect;
 #pragma mark - SudFSMMGListener
 /// 游戏配置
 - (NSString *)onGetGameCfg;

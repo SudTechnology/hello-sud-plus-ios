@@ -28,6 +28,8 @@ typedef void(^GiftLoadImageBlock)(UIImage *image);
 @property(nonatomic, assign)NSInteger giftID;
 /// 是否选中
 @property(nonatomic, assign)BOOL isSelected;
+/// 金额
+@property(nonatomic, assign)NSInteger price;
 @property(nonatomic, copy)HSGiftModelSelectedBlock selectedChangedCallback;
 
 /// 加载webp

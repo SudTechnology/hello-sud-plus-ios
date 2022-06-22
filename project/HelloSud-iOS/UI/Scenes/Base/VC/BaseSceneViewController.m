@@ -393,6 +393,11 @@
     }];
 }
 
+/// 是否需要展示礼物动效
+- (BOOL)isNeedToShowGiftEffect {
+    return YES;
+}
+
 /// 发送房间切换消息
 /// @param gameId
 - (void)sendGameChangedMsg:(int64_t)gameId operatorUser:(NSString *)userID {
@@ -653,7 +658,9 @@
 /// 处理礼物动效
 /// @param model model description
 - (void)handleGiftEffect:(RoomCmdSendGiftModel *)model {
-
+    if (!self.isNeedToShowGiftEffect) {
+        return;
+    }
     GiftModel *giftModel = [self getGiftModelFromMsg:model];
     if (!giftModel) {
         NSLog(@"No exist the gift info:%ld", model.giftID);

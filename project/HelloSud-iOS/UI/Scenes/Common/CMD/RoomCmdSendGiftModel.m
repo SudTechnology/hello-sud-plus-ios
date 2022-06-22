@@ -52,7 +52,8 @@
         giftModel.smallGiftURL = self.giftUrl;
     } else {
         // 内置
-        giftModel = [GiftService.shared giftByID:self.giftID];;
+        giftModel = [GiftService.shared giftByID:self.giftID];
+        giftModel.price = 100;// 默认
     }
     return giftModel;
 }

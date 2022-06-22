@@ -192,6 +192,11 @@
     return NO;
 }
 
+/// 是否需要展示礼物动效
+- (BOOL)isNeedToShowGiftEffect {
+    return !self.isLandscape;
+}
+
 - (void)onWillSendMsg:(RoomBaseCMDModel *)msg {
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
@@ -203,8 +208,9 @@
         }];
     } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
+        GiftModel *giftModel = [m getGiftModel];
         // 发送礼物
-        [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount finished:^{
+        [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount price:giftModel.price type:m.type == 1 ? 2 : 1 finished:^{
             DDLogDebug(@"发送礼物成功");
         }                       failure:^(NSError *error) {
 
