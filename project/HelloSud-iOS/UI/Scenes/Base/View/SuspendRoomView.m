@@ -34,9 +34,10 @@ static SuspendRoomView *g_suspendView = nil;
                 }];
                 DanmakuRoomViewController *danmakuRoomViewController = (DanmakuRoomViewController *)vc;
                 [g_suspendView showVideo:danmakuRoomViewController.videoView];
+                g_suspendView.layer.cornerRadius = 0;
 
             } else {
-
+                g_suspendView.layer.cornerRadius = 8;
                 [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.width.mas_equalTo(146);
                     make.height.mas_equalTo(44);
