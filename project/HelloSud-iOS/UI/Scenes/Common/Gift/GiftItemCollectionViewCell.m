@@ -53,7 +53,7 @@
             [weakSelf checkSelected:YES];
             [weakSelf dtUpdateUI];
         };
-        [self.giftIconView sd_setImageWithURL:[NSURL fileURLWithPath:m.smallGiftURL]];
+        [self.giftIconView sd_setImageWithURL:m.smallGiftURL.dt_toURL];
         self.nameLabel.text = m.giftName;
         [self checkSelected:NO];
     }

@@ -182,6 +182,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showMoreView;
 /// 是否需要展示礼物动效
 - (BOOL)isNeedToShowGiftEffect;
+/// 是否需要加载场景礼物
+- (BOOL)isNeedToLoadSceneGiftList;
+/// 是否需要自动上麦
+- (BOOL)isNeedAutoUpMic;
 #pragma mark - SudFSMMGListener
 /// 游戏配置
 - (NSString *)onGetGameCfg;

@@ -197,6 +197,17 @@
     return !self.isLandscape;
 }
 
+/// 是否需要加载场景礼物
+- (BOOL)isNeedToLoadSceneGiftList {
+    return YES;
+}
+
+/// 是否需要自动上麦
+- (BOOL)isNeedAutoUpMic {
+    // 默认自动上麦
+    return self.enterModel.roleType == 1;
+}
+
 - (void)onWillSendMsg:(RoomBaseCMDModel *)msg {
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;

@@ -96,6 +96,7 @@
                 giftModel.price = item.giftPrice;
                 giftModel.giftURL = item.giftUrl;
                 giftModel.smallGiftURL = item.smallGiftUrl;
+                giftModel.animateURL = item.animationUrl;
                 giftModel.giftName = item.name;
                 [arr addObject:giftModel];
             }

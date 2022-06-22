@@ -10,22 +10,22 @@
 #import "RoomGiftContentView.h"
 #import "../../Base/VC/BaseSceneViewController+IM.h"
 
-@interface RoomGiftPannelView ()<UICollectionViewDelegate, UICollectionViewDataSource>
-@property (nonatomic, strong) UIView *topView;
-@property (nonatomic, strong) UILabel *sendToLabel;
-@property (nonatomic, strong) UIButton *checkAllBtn;
-@property (nonatomic, strong) UIButton *sendBtn;
-@property (nonatomic, strong) UIView *sendView;
-@property (nonatomic, strong) UIView *lineView;
-@property (nonatomic, strong) RoomGiftContentView *giftContentView;
-@property (nonatomic, strong) DTBlurEffectView *blurView;
+@interface RoomGiftPannelView () <UICollectionViewDelegate, UICollectionViewDataSource>
+@property(nonatomic, strong) UIView *topView;
+@property(nonatomic, strong) UILabel *sendToLabel;
+@property(nonatomic, strong) UIButton *checkAllBtn;
+@property(nonatomic, strong) UIButton *sendBtn;
+@property(nonatomic, strong) UIView *sendView;
+@property(nonatomic, strong) UIView *lineView;
+@property(nonatomic, strong) RoomGiftContentView *giftContentView;
+@property(nonatomic, strong) DTBlurEffectView *blurView;
 /// 选择用户
-@property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray<AudioRoomMicModel *> *userDataList;
-@property (nonatomic, assign) BOOL isFirstSelected;
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) NSMutableArray<AudioRoomMicModel *> *userDataList;
+@property(nonatomic, assign) BOOL isFirstSelected;
 
 /// 选中用户状态缓存
-@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *selectedCacheMap;
+@property(nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *selectedCacheMap;
 @end
 
 @implementation RoomGiftPannelView
@@ -91,9 +91,20 @@
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     WeakSelf
-    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
         [weakSelf dtUpdateUI];
     }];
+}
+
+/// 过滤麦位
+/// @param micModel
+/// @return
+- (BOOL)skipMicModel:(AudioRoomMicModel *)micModel {
+    // 弹幕场景，送礼列表中只展示房主
+    if (kAudioRoomService.currentRoomVC.enterModel.sceneType == SceneTypeDanmaku && micModel.user.roleType != 1) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)dtUpdateUI {
@@ -102,6 +113,11 @@
     NSMutableDictionary *tempSelectedCacheMap = NSMutableDictionary.new;
     for (AudioRoomMicModel *m in arrModel) {
         if (m.user != nil) {
+
+            if ([self skipMicModel:m]) {
+                continue;
+            }
+
             [userList addObject:m];
             m.isSelected = NO;
             if (self.selectedCacheMap[m.user.userID]) {
@@ -110,13 +126,13 @@
             }
         }
     }
-    NSArray *sortArr = [userList sortedArrayUsingComparator:^NSComparisonResult(AudioRoomMicModel *  _Nonnull obj1, AudioRoomMicModel *  _Nonnull obj2) {
+    NSArray *sortArr = [userList sortedArrayUsingComparator:^NSComparisonResult(AudioRoomMicModel *_Nonnull obj1, AudioRoomMicModel *_Nonnull obj2) {
         return obj1.micIndex > obj2.micIndex;
     }];
     [self.userDataList setArray:sortArr];
     [self.selectedCacheMap setDictionary:tempSelectedCacheMap];
-    
-    
+
+
     if (self.userDataList.count > 0) {
         // 没有选中时，首次默认选中第一个
         if (self.selectedCacheMap.count == 0 && !self.isFirstSelected) {
@@ -137,22 +153,23 @@
     }
     [self.collectionView reloadData];
     [self updateAllSelectedState];
-    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil];
 }
 
 /// 加载场景礼物
 /// @param gameId gameId
 /// @param sceneId sceneId
 - (void)loadSceneGift:(int64_t)gameId sceneId:(NSInteger)sceneId {
+    WeakSelf
     [GiftService reqGiftListWithGameId:gameId sceneId:sceneId finished:^(NSArray<GiftModel *> *modelList) {
-        
-    } failure:nil];
+        weakSelf.giftContentView.sceneGiftList = modelList;
+    }                          failure:nil];
 }
 
 
 - (void)onBtnSend:(UIButton *)sender {
-    
-    NSMutableArray<AudioUserModel*> *arrWaitForSend = NSMutableArray.new;
+
+    NSMutableArray<AudioUserModel *> *arrWaitForSend = NSMutableArray.new;
     for (AudioRoomMicModel *m in self.userDataList) {
         if (m.isSelected && m.user != nil) {
             [arrWaitForSend addObject:m.user];
@@ -170,13 +187,18 @@
         GiftModel *giftModel = self.giftContentView.didSelectedGift;
         AudioUserModel *toUser = user;
         RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
+        giftMsg.type = giftModel.type;
+        giftMsg.giftUrl = giftModel.giftURL;
+        giftMsg.animationUrl = giftModel.animateURL;
+        giftMsg.giftName = giftModel.giftName;
+
         [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
     }
 }
 
 - (void)onCheckAllSelect:(UIButton *)sender {
     [self.checkAllBtn setSelected:!self.checkAllBtn.isSelected];
-    
+
     for (AudioRoomMicModel *m in self.userDataList) {
         m.isSelected = self.checkAllBtn.isSelected ? true : false;
         if (m.user) {
@@ -186,7 +208,7 @@
                 [self.selectedCacheMap removeObjectForKey:m.user.userID];
             }
         }
-        [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel": m}];
     }
     [self.collectionView reloadData];
 }
@@ -229,7 +251,7 @@
             [self.selectedCacheMap removeObjectForKey:m.user.userID];
         }
     }
-    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel": m}];
     [self updateAllSelectedState];
 }
 
@@ -242,12 +264,13 @@
             [self.selectedCacheMap removeObjectForKey:m.user.userID];
         }
     }
-    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel":m}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel": m}];
     [self updateAllSelectedState];
 }
 
 
 #pragma mark - 懒加载
+
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -330,17 +353,17 @@
         _sendView.layer.borderWidth = 1;
         _sendView.layer.borderColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1].CGColor;
         _sendView.layer.masksToBounds = true;
-        
+
         UILabel *numLabel = [[UILabel alloc] init];
         numLabel.text = @"x1";
         numLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         numLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
-        
+
         UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"room_gift_send_num"]];
         [_sendView addSubview:numLabel];
         [_sendView addSubview:iconView];
         [_sendView addSubview:self.sendBtn];
-        
+
         [numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(15);
             make.centerY.mas_equalTo(_sendView);
@@ -378,9 +401,9 @@
 - (DTBlurEffectView *)blurView {
     if (_blurView == nil) {
         UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-        _blurView = [[DTBlurEffectView alloc]initWithEffect:effect];
+        _blurView = [[DTBlurEffectView alloc] initWithEffect:effect];
         _blurView.blurLevel = 0.35;
-        _blurView.backgroundColor =  HEX_COLOR_A(@"#000000", 0.7);
+        _blurView.backgroundColor = HEX_COLOR_A(@"#000000", 0.7);
     }
     return _blurView;
 }

@@ -154,7 +154,11 @@
         return currentView;
     };
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
-        [DTSheetView show:[[RoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow hiddenBackCover:YES onCloseCallback:^{
+        RoomGiftPannelView *pannelView = [[RoomGiftPannelView alloc] init];
+        if (weakSelf.isNeedToLoadSceneGiftList) {
+            [pannelView loadSceneGift:weakSelf.gameId sceneId:weakSelf.enterModel.sceneType];
+        }
+        [DTSheetView show:pannelView rootView:AppUtil.currentWindow hiddenBackCover:YES onCloseCallback:^{
             [weakSelf.operatorView resetAllSelectedUser];
         }];
     };
@@ -398,6 +402,16 @@
     return YES;
 }
 
+/// 是否需要加载场景礼物
+- (BOOL)isNeedToLoadSceneGiftList {
+    return NO;
+}
+
+/// 是否需要自动上麦
+- (BOOL)isNeedAutoUpMic {
+    // 默认自动上麦
+    return YES;
+}
 /// 发送房间切换消息
 /// @param gameId
 - (void)sendGameChangedMsg:(int64_t)gameId operatorUser:(NSString *)userID {
@@ -777,6 +791,10 @@
 
 /// 进入房间 自动上麦
 - (void)handleAutoUpMic {
+    if (!self.isNeedAutoUpMic) {
+        DDLogDebug(@"isNeedAutoUpMic false, not auto up mic");
+        return;
+    }
     if (![self isInMic]) {
         [self handleGameUpMic];
     }
