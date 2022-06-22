@@ -9,6 +9,7 @@
 #import "DanmakuRoomViewController.h"
 #import "DanmakuQuickSendView.h"
 #import "LandscapePopView.h"
+#import "LandscapeNaviView.h"
 
 @interface DanmakuRoomViewController ()
 /// 快速发送视图
@@ -17,8 +18,14 @@
 @property(nonatomic, strong) BaseView *danmakuContentView;
 /// 视频视图
 @property(nonatomic, strong) BaseView *videoView;
+/// 横屏导航栏
+@property(nonatomic, strong) LandscapeNaviView *landscapeNaviView;
+/// 退出横屏按钮
+@property(nonatomic, strong) UIButton *exitLandscapeBtn;
+
 /// 是否强制横屏
 @property(nonatomic, assign) BOOL forceLandscape;
+@property(nonatomic, assign) BOOL isLandscape;
 @property(nonatomic, strong) NSArray<DanmakuCallWarcraftModel *> *dataList;
 @end
 
@@ -43,6 +50,8 @@
     [super dtAddViews];
     [self.sceneView addSubview:self.videoView];
     [self.sceneView addSubview:self.quickSendView];
+    [self.sceneView addSubview:self.landscapeNaviView];
+    [self.sceneView addSubview:self.exitLandscapeBtn];
 }
 
 - (void)dtLayoutViews {
@@ -57,6 +66,16 @@
         make.leading.trailing.equalTo(@0);
         make.height.equalTo(@24);
     }];
+    [self.landscapeNaviView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.leading.trailing.equalTo(@0);
+        make.height.equalTo(@48);
+    }];
+    CGFloat right = [UIDevice dt_safeAreaInsets].right + 17;
+    [self.exitLandscapeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(@(-right));
+        make.width.height.equalTo(@24);
+        make.bottom.equalTo(@-22);
+    }];
 
 }
 
@@ -69,24 +88,60 @@
                 weakSelf.quickSendView.dataList = weakSelf.dataList;
                 [weakSelf.quickSendView dtUpdateUI];
             }
-            [UIView animateWithDuration:0.25 animations:^{
-                [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.height.equalTo(@120);
-                }];
-                [weakSelf.quickSendView.superview layoutIfNeeded];
-                [weakSelf.quickSendView showOpen:YES];
-            }];
 
+            if (self.isLandscape) {
+                // 横屏
+                [UIView animateWithDuration:0.25 animations:^{
+                    [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.equalTo(@126);
+                    }];
+                    [weakSelf.quickSendView.superview layoutIfNeeded];
+                } completion:^(BOOL finished){
+                    [weakSelf.quickSendView showOpen:YES];
+                }];
+
+            } else {
+                [UIView animateWithDuration:0.25 animations:^{
+                    [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.equalTo(@120);
+                    }];
+                    [weakSelf.quickSendView.superview layoutIfNeeded];
+                } completion:^(BOOL finished){
+                    [weakSelf.quickSendView showOpen:YES];
+                }];
+
+            }
 
         } else {
-            [UIView animateWithDuration:0.25 animations:^{
-                [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.height.equalTo(@24);
+            if (self.isLandscape) {
+                // 横屏
+                [UIView animateWithDuration:0.25 animations:^{
+                    [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.equalTo(@47);
+                    }];
+                    [weakSelf.quickSendView.superview layoutIfNeeded];
+                } completion:^(BOOL finished){
+                    [weakSelf.quickSendView showOpen:NO];
                 }];
-                [weakSelf.quickSendView.superview layoutIfNeeded];
-                [weakSelf.quickSendView showOpen:NO];
-            }];
+
+            } else {
+                [UIView animateWithDuration:0.25 animations:^{
+                    [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.equalTo(@24);
+                    }];
+                    [weakSelf.quickSendView.superview layoutIfNeeded];
+                } completion:^(BOOL finished){
+                    [weakSelf.quickSendView showOpen:NO];
+                }];
+
+            }
         }
+    };
+    self.landscapeNaviView.backTapBlock = ^(UIButton *sender) {
+        [weakSelf exitLandscape];
+    };
+    self.landscapeNaviView.closeTapBlock = ^(UIButton *sender) {
+        [weakSelf showMoreView];
     };
 }
 
@@ -115,6 +170,7 @@
         [DTAlertView close];
         weakSelf.forceLandscape = YES;
         [weakSelf dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
+
     };
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
 }
@@ -156,6 +212,59 @@
     }
 }
 
+- (void)setRoomName:(NSString *)roomName {
+    [super setRoomName:roomName];
+    self.landscapeNaviView.roomName = roomName;
+}
+
+- (void)updateOrientationState {
+
+    BOOL isLandscape = self.isLandscape;
+    if (isLandscape) {
+        self.landscapeNaviView.hidden = NO;
+        self.exitLandscapeBtn.hidden = NO;
+        [self.quickSendView updateOrientation:YES];
+        CGFloat top = kAppSafeTop;
+        CGFloat bottom = kAppSafeBottom;
+        [self.videoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.trailing.equalTo(@0);
+            make.top.equalTo(@(top));
+            make.bottom.equalTo(@(-bottom));
+        }];
+        [self.quickSendView showOpen:NO];
+        [self.quickSendView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(@122);
+            make.trailing.equalTo(@-122);
+            make.height.equalTo(@47);
+            make.bottom.equalTo(@0);
+        }];
+    } else {
+        [self.quickSendView updateOrientation:NO];
+        self.landscapeNaviView.hidden = YES;
+        self.exitLandscapeBtn.hidden = YES;
+        [self.videoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.naviView.mas_bottom).offset(5);
+            make.leading.trailing.equalTo(@0);
+            make.height.equalTo(@212);
+        }];
+        [self.quickSendView showOpen:NO];
+        [self.quickSendView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.videoView.mas_bottom).offset(0);
+            make.leading.trailing.equalTo(@0);
+            make.height.equalTo(@24);
+        }];
+    }
+}
+
+- (void)onClickExitBtn:(UIButton *)sender {
+    [self exitLandscape];
+}
+
+- (void)exitLandscape {
+    self.forceLandscape = NO;
+    [self dtSwitchOrientation:UIInterfaceOrientationPortrait];
+}
+
 #pragma mark lazy
 
 - (BaseView *)danmakuContentView {
@@ -169,9 +278,19 @@
     if (!_videoView) {
         _videoView = [[BaseView alloc] init];
         _videoView.backgroundColor = UIColor.greenColor;
+        _videoView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _videoView;
 }
+
+- (LandscapeNaviView *)landscapeNaviView {
+    if (!_landscapeNaviView) {
+        _landscapeNaviView = [[LandscapeNaviView alloc] init];
+        _landscapeNaviView.hidden = YES;
+    }
+    return _landscapeNaviView;
+}
+
 
 - (DanmakuQuickSendView *)quickSendView {
     if (!_quickSendView) {
@@ -181,7 +300,29 @@
     return _quickSendView;
 }
 
+- (UIButton *)exitLandscapeBtn {
+    if (!_exitLandscapeBtn) {
+        _exitLandscapeBtn = [[UIButton alloc] init];
+        [_exitLandscapeBtn setImage:[UIImage imageNamed:@"md_exit_landscape"] forState:UIControlStateNormal];
+        [_exitLandscapeBtn addTarget:self action:@selector(onClickExitBtn:) forControlEvents:UIControlEventTouchUpInside];
+        _exitLandscapeBtn.hidden = YES;
+    }
+    return _exitLandscapeBtn;
+}
+
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return self.forceLandscape ? UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight : UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    DDLogDebug(@"didRotateFromInterfaceOrientation:%@", @(fromInterfaceOrientation));
+    UIInterfaceOrientation orientation = UIInterfaceOrientationUnknown;
+    if (@available(iOS 13.0, *)) {
+        orientation = UIApplication.sharedApplication.windows.firstObject.windowScene.interfaceOrientation;
+    } else {
+        orientation = UIApplication.sharedApplication.statusBarOrientation;
+    }
+    self.isLandscape = UIInterfaceOrientationIsLandscape(orientation);
+    [self updateOrientationState];
 }
 @end

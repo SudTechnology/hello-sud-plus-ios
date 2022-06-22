@@ -198,26 +198,7 @@
         [weakSelf handleMicTap:micModel];
     };
     self.naviView.closeTapBlock = ^(UIButton *sender) {
-
-        RoomMoreView *v = [[RoomMoreView alloc] init];
-        v.suspendCallback = ^{
-            [DTSheetView close];
-            [SuspendRoomView show:weakSelf];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        };
-        v.exitCallback = ^{
-            [DTSheetView close];
-            [DTAlertView showTextAlert:NSString.dt_room_sure_leave_cur_room sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
-                [DTSheetView close];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf exitRoomFromSuspend:NO finished:nil];
-                });
-            }          onCloseCallback:^{
-            }];
-        };
-        [DTSheetView showTop:v cornerRadius:0 onCloseCallback:^{
-
-        }];
+        [weakSelf showMoreView];
     };
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
         [weakSelf showSelectGameView];
@@ -388,6 +369,29 @@
     [self sendMsg:m isAddToShow:YES];
 }
 
+/// 展示更多视图
+- (void)showMoreView {
+    WeakSelf
+    RoomMoreView *v = [[RoomMoreView alloc] init];
+    v.suspendCallback = ^{
+        [DTSheetView close];
+        [SuspendRoomView show:weakSelf];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+    v.exitCallback = ^{
+        [DTSheetView close];
+        [DTAlertView showTextAlert:NSString.dt_room_sure_leave_cur_room sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
+            [DTSheetView close];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf exitRoomFromSuspend:NO finished:nil];
+            });
+        }          onCloseCallback:^{
+        }];
+    };
+    [DTSheetView showTop:v cornerRadius:0 onCloseCallback:^{
+
+    }];
+}
 
 /// 发送房间切换消息
 /// @param gameId

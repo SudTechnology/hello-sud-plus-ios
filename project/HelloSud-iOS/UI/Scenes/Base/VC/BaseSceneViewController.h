@@ -178,6 +178,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 发送公屏文本消息
 /// @param content content
 - (void)sendContentMsg:(NSString *)content;
+/// 展示更多视图
+- (void)showMoreView;
 #pragma mark - SudFSMMGListener
 /// 游戏配置
 - (NSString *)onGetGameCfg;
