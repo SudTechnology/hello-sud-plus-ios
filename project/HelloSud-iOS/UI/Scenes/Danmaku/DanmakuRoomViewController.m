@@ -14,6 +14,8 @@
 @interface DanmakuRoomViewController ()
 /// 快速发送视图
 @property(nonatomic, strong) DanmakuQuickSendView *quickSendView;
+/// 视频内容视图 为了适配房间挂起后恢复便捷增加的视图
+@property(nonatomic, strong) BaseView *videoContentView;
 /// 视频视图
 @property(nonatomic, strong) BaseView *videoView;
 /// 横屏导航栏
@@ -46,7 +48,9 @@
 
 - (void)dtAddViews {
     [super dtAddViews];
-    [self.sceneView addSubview:self.videoView];
+
+    [self.sceneView addSubview:self.videoContentView];
+    [self.videoContentView addSubview:self.videoView];
     [self.sceneView addSubview:self.quickSendView];
     [self.sceneView addSubview:self.landscapeNaviView];
     [self.sceneView addSubview:self.exitLandscapeBtn];
@@ -54,13 +58,16 @@
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
-    [self.videoView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.videoContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviView.mas_bottom).offset(5);
         make.leading.trailing.equalTo(@0);
         make.height.equalTo(@212);
     }];
+    [self.videoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.trailing.bottom.equalTo(@0);
+    }];
     [self.quickSendView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.videoView.mas_bottom).offset(0);
+        make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
         make.leading.trailing.equalTo(@0);
         make.height.equalTo(@24);
     }];
@@ -141,6 +148,14 @@
     self.landscapeNaviView.closeTapBlock = ^(UIButton *sender) {
         [weakSelf showMoreView];
     };
+}
+
+/// 重置视频视图
+- (void)resetVideoView {
+    [self.videoContentView addSubview:self.videoView];
+    [self.videoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+       make.leading.top.trailing.bottom.equalTo(@0);
+    }];
 }
 
 - (void)reqData {
@@ -242,7 +257,7 @@
         [self.quickSendView updateOrientation:YES];
         CGFloat top = kAppSafeTop;
         CGFloat bottom = kAppSafeBottom;
-        [self.videoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [self.videoContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.trailing.equalTo(@0);
             make.top.equalTo(@(top));
             make.bottom.equalTo(@(-bottom));
@@ -258,14 +273,14 @@
         [self.quickSendView updateOrientation:NO];
         self.landscapeNaviView.hidden = YES;
         self.exitLandscapeBtn.hidden = YES;
-        [self.videoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [self.videoContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.naviView.mas_bottom).offset(5);
             make.leading.trailing.equalTo(@0);
             make.height.equalTo(@212);
         }];
         [self.quickSendView showOpen:NO];
         [self.quickSendView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.videoView.mas_bottom).offset(0);
+            make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
             make.leading.trailing.equalTo(@0);
             make.height.equalTo(@24);
         }];
@@ -289,6 +304,14 @@
         _videoView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _videoView;
+}
+
+- (BaseView *)videoContentView {
+    if (!_videoContentView) {
+        _videoContentView = [[BaseView alloc] init];
+        _videoContentView.contentMode = UIViewContentModeScaleAspectFill;
+    }
+    return _videoContentView;
 }
 
 - (LandscapeNaviView *)landscapeNaviView {
