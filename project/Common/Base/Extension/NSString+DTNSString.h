@@ -13,4 +13,6 @@
 /// 转成URL，包含对http处理
 /// @return
 - (NSURL *)dt_toURL;
+/// 转成md5
+- (NSString*)dt_md5;
 @end

@@ -52,7 +52,7 @@
     
     NIMSDKOption *option = [NIMSDKOption optionWithAppKey:@"110f7db7c00ee497bd7b32954c36464c"];
     [[NIMSDK sharedSDK] registerWithOption:option];
-    
+    [self cacheLocalData];
     return YES;
 }
 
@@ -187,6 +187,14 @@
         [DDLog addLogger:[DDASLLogger sharedInstance]]; //iOS10之前
     } // Uses os_log
     DDLogDebug(@"config log");
+}
+
+/// 缓存本地数据
+- (void)cacheLocalData {
+
+    // 缓存首页webp图片
+    NSString *path = [NSBundle.mainBundle pathForResource:@"home_danmuka" ofType:@"webp" inDirectory:@"Res"];
+    [WebpImageCacheService.shared loadWebp:path result:nil];
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {

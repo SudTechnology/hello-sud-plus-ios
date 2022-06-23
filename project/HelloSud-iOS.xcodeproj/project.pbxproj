@@ -167,6 +167,7 @@
 		6C4608202862B025005C99EF /* LandscapeNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46081F2862B024005C99EF /* LandscapeNaviView.m */; };
 		6C46082328630CD7005C99EF /* RespGiftListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46082228630CD6005C99EF /* RespGiftListModel.m */; };
 		6C4608262864062D005C99EF /* LandscapeGuideTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4608252864062D005C99EF /* LandscapeGuideTipView.m */; };
+		6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460828286441B4005C99EF /* WebpImageCacheService.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
@@ -655,6 +656,8 @@
 		6C46082228630CD6005C99EF /* RespGiftListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespGiftListModel.m; sourceTree = "<group>"; };
 		6C4608242864062D005C99EF /* LandscapeGuideTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandscapeGuideTipView.h; sourceTree = "<group>"; };
 		6C4608252864062D005C99EF /* LandscapeGuideTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandscapeGuideTipView.m; sourceTree = "<group>"; };
+		6C460827286441B4005C99EF /* WebpImageCacheService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebpImageCacheService.h; sourceTree = "<group>"; };
+		6C460828286441B4005C99EF /* WebpImageCacheService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebpImageCacheService.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1823,6 +1826,8 @@
 				BC210F28C7CAB6BCA3140175 /* HSHttpService.m */,
 				BC210337708736FFF222750A /* BaseSceneService.m */,
 				BC2103C043B5568FCBA68B06 /* BaseSceneService.h */,
+				6C460827286441B4005C99EF /* WebpImageCacheService.h */,
+				6C460828286441B4005C99EF /* WebpImageCacheService.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2607,6 +2612,7 @@
 				BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */,
 				BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */,
 				BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */,
+				6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */,
 				BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */,
 				BC210F738CED39591CB7541D /* MoreGuessCoinPopView.m in Sources */,
 				BC210E9E33806A6BFD2AE89A /* MoreGuessCoinItemView.m in Sources */,

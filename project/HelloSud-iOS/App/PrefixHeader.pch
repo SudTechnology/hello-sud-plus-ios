@@ -51,6 +51,7 @@
 #import "ServiceConstHeader.h"
 #import "HSHttpService.h"
 #import "BaseSceneService.h"
+#import "WebpImageCacheService.h"
 
 /// Page
 #import "CommonRoomModelHeader.h"

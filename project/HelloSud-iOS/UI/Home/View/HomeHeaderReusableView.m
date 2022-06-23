@@ -108,15 +108,14 @@
 
 - (void)setSceneModel:(HSSceneModel *)sceneModel {
     _sceneModel = sceneModel;
-    
+    WeakSelf
     [self.customView setHidden:sceneModel.sceneId != SceneTypeCustom];
     self.titleLabel.text = sceneModel.sceneName;
     if (self.sceneModel.sceneId == SceneTypeDanmaku) {
         NSString *path = [NSBundle.mainBundle pathForResource:@"home_danmuka" ofType:@"webp" inDirectory:@"Res"];
-        NSData * gifData = [NSData dataWithContentsOfFile:path];
-//    UIImage * gifImage = [UIImage sd_imageWithGIFData:gifData];
-        UIImage *wimage = [[SDImageWebPCoder sharedCoder] decodedImageWithData:gifData options:nil];
-        self.previewView.image = wimage;
+        [WebpImageCacheService.shared loadWebp:path result:^(UIImage *image) {
+            weakSelf.previewView.image = image;
+        }];
     } else {
         [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImageNew]];
     }
