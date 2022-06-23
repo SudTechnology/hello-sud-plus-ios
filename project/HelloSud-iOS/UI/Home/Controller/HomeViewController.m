@@ -59,14 +59,12 @@
         [self requestData];
     }
     self.homeCategoryView.selectSectionBlock = ^(NSInteger section) {
-//
-//        TestColVC *vc = [[TestColVC alloc] init];
-//        [weakSelf.navigationController pushViewController:vc animated:YES];
-//        weakSelf.isClickSegItem = true;
-//        UICollectionViewLayoutAttributes *attributes = [weakSelf.collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-//        CGRect rect = attributes.frame;
-//        CGFloat bottomY = weakSelf.collectionView.contentSize.height - weakSelf.collectionView.mj_h;
-//        [weakSelf.collectionView setContentOffset:CGPointMake(weakSelf.collectionView.bounds.origin.x, rect.origin.y - 150 > bottomY ? bottomY : rect.origin.y - 150) animated:true];
+
+        weakSelf.isClickSegItem = true;
+        UICollectionViewLayoutAttributes *attributes = [weakSelf.collectionView layoutAttributesForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+        CGRect rect = attributes.frame;
+        CGFloat bottomY = weakSelf.collectionView.contentSize.height - weakSelf.collectionView.mj_h;
+        [weakSelf.collectionView setContentOffset:CGPointMake(weakSelf.collectionView.bounds.origin.x, rect.origin.y > bottomY ? bottomY : rect.origin.y) animated:true];
     };
 }
 
