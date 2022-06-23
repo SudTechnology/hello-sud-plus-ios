@@ -10,6 +10,7 @@
 #import "DanmakuQuickSendView.h"
 #import "LandscapePopView.h"
 #import "LandscapeNaviView.h"
+#import "LandscapeGuideTipView.h"
 
 @interface DanmakuRoomViewController ()
 /// 快速发送视图
@@ -20,6 +21,8 @@
 @property(nonatomic, strong) BaseView *videoView;
 /// 横屏导航栏
 @property(nonatomic, strong) LandscapeNaviView *landscapeNaviView;
+/// 横屏引导
+@property(nonatomic, strong) LandscapeGuideTipView *guideTipView;
 /// 退出横屏按钮
 @property(nonatomic, strong) UIButton *exitLandscapeBtn;
 
@@ -27,6 +30,8 @@
 @property(nonatomic, assign) BOOL forceLandscape;
 @property(nonatomic, assign) BOOL isLandscape;
 @property(nonatomic, strong) NSArray<DanmakuCallWarcraftModel *> *dataList;
+@property(nonatomic, strong) DTTimer *timer;
+@property(nonatomic, assign) NSInteger countdown;
 @end
 
 @implementation DanmakuRoomViewController
@@ -98,10 +103,10 @@
                 // 横屏
                 [UIView animateWithDuration:0.25 animations:^{
                     [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.height.equalTo(@126);
+                        make.height.equalTo(@136);
                     }];
                     [weakSelf.quickSendView.superview layoutIfNeeded];
-                } completion:^(BOOL finished){
+                }                completion:^(BOOL finished) {
                     [weakSelf.quickSendView showOpen:YES];
                 }];
 
@@ -111,7 +116,7 @@
                         make.height.equalTo(@120);
                     }];
                     [weakSelf.quickSendView.superview layoutIfNeeded];
-                } completion:^(BOOL finished){
+                }                completion:^(BOOL finished) {
                     [weakSelf.quickSendView showOpen:YES];
                 }];
 
@@ -125,7 +130,7 @@
                         make.height.equalTo(@47);
                     }];
                     [weakSelf.quickSendView.superview layoutIfNeeded];
-                } completion:^(BOOL finished){
+                }                completion:^(BOOL finished) {
                     [weakSelf.quickSendView showOpen:NO];
                 }];
 
@@ -135,7 +140,7 @@
                         make.height.equalTo(@24);
                     }];
                     [weakSelf.quickSendView.superview layoutIfNeeded];
-                } completion:^(BOOL finished){
+                }                completion:^(BOOL finished) {
                     [weakSelf.quickSendView showOpen:NO];
                 }];
 
@@ -148,13 +153,32 @@
     self.landscapeNaviView.closeTapBlock = ^(UIButton *sender) {
         [weakSelf showMoreView];
     };
+    UITapGestureRecognizer *videoTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapVideo:)];
+    [self.videoView addGestureRecognizer:videoTap];
+}
+
+- (void)onTapVideo:(id)tap {
+
+    [self endCountdown];
+    [self closeGuideTipView];
+    if (self.landscapeNaviView.hidden) {
+        [self showLandscapeNaviView];
+    } else {
+        [self closeLandscapeNaviView];
+    }
+}
+
+- (void)closeGuideTipView {
+    if (_guideTipView) {
+        [_guideTipView close];
+    }
 }
 
 /// 重置视频视图
 - (void)resetVideoView {
     [self.videoContentView addSubview:self.videoView];
     [self.videoView mas_remakeConstraints:^(MASConstraintMaker *make) {
-       make.leading.top.trailing.bottom.equalTo(@0);
+        make.leading.top.trailing.bottom.equalTo(@0);
     }];
 }
 
@@ -269,6 +293,8 @@
             make.height.equalTo(@47);
             make.bottom.equalTo(@0);
         }];
+        [self checkIfNeedToShowLandscapeGuide];
+        [self beginCountdown];
     } else {
         [self.quickSendView updateOrientation:NO];
         self.landscapeNaviView.hidden = YES;
@@ -284,6 +310,7 @@
             make.leading.trailing.equalTo(@0);
             make.height.equalTo(@24);
         }];
+        [self closeGuideTipView];
     }
 }
 
@@ -294,6 +321,58 @@
 - (void)exitLandscape {
     self.forceLandscape = NO;
     [self dtSwitchOrientation:UIInterfaceOrientationPortrait];
+}
+
+/// 检查是否需要横屏引导
+- (void)checkIfNeedToShowLandscapeGuide {
+
+    [self.sceneView addSubview:self.guideTipView];
+    [self.guideTipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.quickSendView.mas_top).offset(0);
+        make.trailing.equalTo(self.quickSendView);
+        make.width.height.greaterThanOrEqualTo(@0);
+    }];
+    [self.guideTipView show];
+}
+
+- (void)beginCountdown {
+    WeakSelf
+    if (!self.timer) {
+        // 倒计时秒数
+        self.countdown = 3;
+        self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
+            weakSelf.countdown--;
+            if (weakSelf.countdown <= 0) {
+                [weakSelf endCountdown];
+                [weakSelf closeLandscapeNaviView];
+            }
+        }];
+    }
+}
+
+- (void)endCountdown {
+    [self.timer stopTimer];
+    self.timer = nil;
+}
+
+- (void)showLandscapeNaviView {
+    self.landscapeNaviView.hidden = NO;
+    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.landscapeNaviView.transform = CGAffineTransformIdentity;
+        self.exitLandscapeBtn.transform = CGAffineTransformIdentity;
+    }                completion:^(BOOL finished) {
+
+    }];
+}
+
+- (void)closeLandscapeNaviView {
+
+    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.landscapeNaviView.transform = CGAffineTransformMakeTranslation(0, -(self.landscapeNaviView.mj_h + self.landscapeNaviView.mj_y + 10));
+        self.exitLandscapeBtn.transform = CGAffineTransformMakeTranslation(0,  kScreenHeight - self.exitLandscapeBtn.mj_y);
+    }                completion:^(BOOL finished) {
+        self.landscapeNaviView.hidden = YES;
+    }];
 }
 
 #pragma mark lazy
@@ -339,6 +418,14 @@
         _exitLandscapeBtn.hidden = YES;
     }
     return _exitLandscapeBtn;
+}
+
+- (LandscapeGuideTipView *)guideTipView {
+    if (!_guideTipView) {
+        _guideTipView = [[LandscapeGuideTipView alloc] init];
+        _guideTipView.hidden = YES;
+    }
+    return _guideTipView;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
