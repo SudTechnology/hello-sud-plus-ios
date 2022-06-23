@@ -66,7 +66,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 更多竞猜头部数据列表缓存
 @property(nonatomic, strong) NSArray <BaseModel *> *moreGuessHeaderArrayCache;
 /// 是否已经展示过横屏提示
-@property(nonatomic, assign) BOOL alreadyShowLandscape;
+@property(nonatomic, assign) BOOL alreadyShowLandscapePopAlert;
+/// 是否已经展示过横屏指引提示
+@property(nonatomic, assign) BOOL alreadyShowLandscapeGuideTip;
 
 + (instancetype)shared;
 

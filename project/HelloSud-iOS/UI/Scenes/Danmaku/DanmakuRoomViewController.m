@@ -197,11 +197,11 @@
 
 /// 检测是否展示横屏提示
 - (void)checkIfNeedToShowLandscapeTip {
-    if (AppService.shared.alreadyShowLandscape) {
+    if (AppService.shared.alreadyShowLandscapePopAlert) {
         return;
     }
     WeakSelf
-    AppService.shared.alreadyShowLandscape = YES;
+    AppService.shared.alreadyShowLandscapePopAlert = YES;
     LandscapePopView *v = [[LandscapePopView alloc] init];
     v.enterBlock = ^{
         // 强制横屏
@@ -327,6 +327,10 @@
 /// 检查是否需要横屏引导
 - (void)checkIfNeedToShowLandscapeGuide {
 
+    if (AppService.shared.alreadyShowLandscapeGuideTip) {
+        return;
+    }
+    AppService.shared.alreadyShowLandscapeGuideTip = YES;
     [self.sceneView addSubview:self.guideTipView];
     [self.guideTipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.quickSendView.mas_top).offset(0);
