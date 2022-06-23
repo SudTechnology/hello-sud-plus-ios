@@ -93,19 +93,19 @@
     WeakSelf
     self.quickSendView.onOpenBlock = ^(BOOL isOpen) {
         if (isOpen) {
+            // 展开
             if (weakSelf.quickSendView.dataList.count == 0) {
                 weakSelf.quickSendView.dataList = weakSelf.dataList;
                 [weakSelf.quickSendView dtUpdateUI];
             }
 
-            if (self.isLandscape) {
+            if (weakSelf.isLandscape) {
                 // 横屏
                 [UIView animateWithDuration:0.25 animations:^{
                     [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
                         make.height.equalTo(@136);
                     }];
                     [weakSelf.quickSendView.superview layoutIfNeeded];
-                }                completion:^(BOOL finished) {
                     [weakSelf.quickSendView showOpen:YES];
                 }];
 
@@ -115,21 +115,21 @@
                         make.height.equalTo(@120);
                     }];
                     [weakSelf.quickSendView.superview layoutIfNeeded];
-                }                completion:^(BOOL finished) {
                     [weakSelf.quickSendView showOpen:YES];
                 }];
 
             }
 
         } else {
-            if (self.isLandscape) {
+            // 收起
+
+            if (weakSelf.isLandscape) {
                 // 横屏
                 [UIView animateWithDuration:0.25 animations:^{
                     [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
                         make.height.equalTo(@47);
                     }];
                     [weakSelf.quickSendView.superview layoutIfNeeded];
-                }                completion:^(BOOL finished) {
                     [weakSelf.quickSendView showOpen:NO];
                 }];
 
@@ -139,7 +139,6 @@
                         make.height.equalTo(@24);
                     }];
                     [weakSelf.quickSendView.superview layoutIfNeeded];
-                }                completion:^(BOOL finished) {
                     [weakSelf.quickSendView showOpen:NO];
                 }];
 
@@ -270,10 +269,12 @@
     self.landscapeNaviView.roomName = roomName;
 }
 
+/// 根据当前屏幕方向更新视图状态
 - (void)updateOrientationState {
 
     BOOL isLandscape = self.isLandscape;
     if (isLandscape) {
+        // 横屏
         self.landscapeNaviView.hidden = NO;
         self.exitLandscapeBtn.hidden = NO;
         [self.quickSendView updateOrientation:YES];

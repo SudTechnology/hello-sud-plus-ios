@@ -67,6 +67,7 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
+    self.clipsToBounds = YES;
 
 }
 
@@ -84,6 +85,7 @@
 - (void)onShowBtn:(id)sender {
 
     self.showBtn.hidden = YES;
+
     if (self.onOpenBlock) {
         self.onOpenBlock(YES);
     }
@@ -91,6 +93,7 @@
 
 - (void)closeBtn:(id)sender {
     self.closeBtn.hidden = YES;
+//    self.contentView.hidden = YES;
     if (self.onOpenBlock) {
         self.onOpenBlock(NO);
     }
@@ -103,12 +106,12 @@
         self.showBtn.hidden = YES;
         self.showIconImageView.alpha = 0;
         self.closeBtn.hidden = NO;
-        self.collectionView.hidden = NO;
+        self.contentView.alpha = 1;
     } else {
         self.showBtn.hidden = NO;
         self.showIconImageView.alpha = 1;
         self.closeBtn.hidden = YES;
-        self.collectionView.hidden = YES;
+        self.contentView.alpha = 0;
     }
 }
 
