@@ -44,9 +44,7 @@
 
     // 加载视频流
     if (self.enterModel.streamId.length > 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
-        });
+        [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
     }
 }
 
