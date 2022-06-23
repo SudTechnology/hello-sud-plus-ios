@@ -26,8 +26,6 @@
 /// 退出横屏按钮
 @property(nonatomic, strong) UIButton *exitLandscapeBtn;
 
-/// 是否强制横屏
-@property(nonatomic, assign) BOOL forceLandscape;
 @property(nonatomic, assign) BOOL isLandscape;
 @property(nonatomic, strong) NSArray<DanmakuCallWarcraftModel *> *dataList;
 @property(nonatomic, strong) DTTimer *timer;
@@ -206,7 +204,6 @@
     v.enterBlock = ^{
         // 强制横屏
         [DTAlertView close];
-        weakSelf.forceLandscape = YES;
         [weakSelf dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
 
     };
@@ -320,7 +317,6 @@
 }
 
 - (void)exitLandscape {
-    self.forceLandscape = NO;
     [self dtSwitchOrientation:UIInterfaceOrientationPortrait];
 }
 
@@ -434,7 +430,7 @@
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return self.forceLandscape ? UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight : UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
