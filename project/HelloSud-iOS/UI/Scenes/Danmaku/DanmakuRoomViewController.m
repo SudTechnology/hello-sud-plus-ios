@@ -39,12 +39,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    // 加载视频流
-    if (self.enterModel.streamId.length > 0) {
-        [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
-    }
     [self reqData];
     [self checkIfNeedToShowLandscapeTip];
+
+    // 加载视频流
+    if (self.enterModel.streamId.length > 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
+        });
+    }
 }
 
 - (Class)serviceClass {

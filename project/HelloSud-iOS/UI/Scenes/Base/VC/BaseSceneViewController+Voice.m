@@ -103,6 +103,12 @@
     [AudioEngineFactory.shared.audioEngine startPlayingStream:streamID view:videoView];
 }
 
+/// 停止拉取视频流
+/// @param streamID 视频流ID
+- (void)stopPullVideoStream:(NSString *)streamID {
+    [AudioEngineFactory.shared.audioEngine stopPlayingStream:streamID];
+}
+
 #pragma mark delegate
 /// 捕获本地音量变化
 /// @param soundLevel 本地音量级别，取值范围[0, 100]

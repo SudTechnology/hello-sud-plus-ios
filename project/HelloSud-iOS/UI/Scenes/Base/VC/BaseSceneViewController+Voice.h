@@ -35,6 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param videoView 展示视频视图
 /// @param streamID 视频流ID
 - (void)startToPullVideo:(UIView *)videoView streamID:(NSString *)streamID;
+
+/// 停止拉取视频流
+/// @param streamID 视频流ID
+- (void)stopPullVideoStream:(NSString *)streamID;
 @end
 
 NS_ASSUME_NONNULL_END
