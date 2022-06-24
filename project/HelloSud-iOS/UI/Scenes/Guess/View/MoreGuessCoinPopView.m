@@ -32,7 +32,7 @@
     [self addSubview:self.coinContentView];
     [self addSubview:self.supportBtn];
     MoreGuessCoinItemView *v1 = [[MoreGuessCoinItemView alloc] init];
-    v1.isSelected = YES;
+    v1.isSelected = NO;
     v1.coin = 10;
     self.selectedCoin = v1.coin;
     WeakSelf
@@ -41,7 +41,7 @@
     };
 
     MoreGuessCoinItemView *v2 = [[MoreGuessCoinItemView alloc] init];
-    v2.isSelected = NO;
+    v2.isSelected = YES;
     v2.coin = 100;
     v2.onStateChangedBlock = ^(MoreGuessCoinItemView *view, BOOL isSelected) {
         [weakSelf updateSelectState:view];
