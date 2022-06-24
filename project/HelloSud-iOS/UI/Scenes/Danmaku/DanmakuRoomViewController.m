@@ -152,7 +152,7 @@
         [weakSelf showMoreView];
     };
     UITapGestureRecognizer *videoTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapVideo:)];
-    [self.videoView addGestureRecognizer:videoTap];
+    [self.videoContentView addGestureRecognizer:videoTap];
 }
 
 - (void)onTapVideo:(id)tap {
