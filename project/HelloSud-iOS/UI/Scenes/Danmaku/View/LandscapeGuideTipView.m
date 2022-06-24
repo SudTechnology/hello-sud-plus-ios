@@ -94,7 +94,8 @@
 - (UIImageView *)landscapeImageView {
     if (!_landscapeImageView) {
         _landscapeImageView = [[UIImageView alloc] init];
-        _landscapeImageView.backgroundColor = HEX_COLOR_A(@"#000000", 0.6);
+        UIImage *image = [[UIImage imageNamed:@"dm_landscape_tip_guide_bg"] resizableImageWithCapInsets:UIEdgeInsetsMake(19, 12, 18, 36) resizingMode:UIImageResizingModeStretch];
+        _landscapeImageView.image = image;
     }
     return _landscapeImageView;
 }
