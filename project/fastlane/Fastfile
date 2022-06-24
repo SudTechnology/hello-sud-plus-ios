@@ -71,7 +71,7 @@ platform :ios do
     sh("mv #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud.app.dSYM #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
     sh("pwd")
     sh("java -version")
-    sh("java -jar ../../tool/buglyqq-upload-symbol.jar -appid 0d680b2d4c -appkey fdea2fe7-9b55-48fe-9d14-eb294dd1c4df -bundleid tech.sud.mgp.hello -version #{VERSION_NUM}.#{ENV['CI_BUILD_ID']} -platform IOS -inputSymbol #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
+    sh("java -jar ../tool/buglyqq-upload-symbol.jar -appid 0d680b2d4c -appkey fdea2fe7-9b55-48fe-9d14-eb294dd1c4df -bundleid tech.sud.mgp.hello -version #{VERSION_NUM}.#{ENV['CI_BUILD_ID']} -platform IOS -inputSymbol #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
     buildFooter
   end
 
@@ -101,7 +101,7 @@ platform :ios do
     sh("mv #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud.app.dSYM #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
     sh("pwd")
     sh("java -version")
-    sh("java -jar ../../tool/buglyqq-upload-symbol.jar -appid 8385698b84 -appkey 1010766c-9314-490c-8be3-e153c0bfba6f -bundleid tech.sud.mgp.hello -version #{VERSION_NUM}.#{ENV['CI_BUILD_ID']} -platform IOS -inputSymbol #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
+    sh("java -jar ../tool/buglyqq-upload-symbol.jar -appid 8385698b84 -appkey 1010766c-9314-490c-8be3-e153c0bfba6f -bundleid tech.sud.mgp.hello -version #{VERSION_NUM}.#{ENV['CI_BUILD_ID']} -platform IOS -inputSymbol #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
     buildFooter
   end
 
