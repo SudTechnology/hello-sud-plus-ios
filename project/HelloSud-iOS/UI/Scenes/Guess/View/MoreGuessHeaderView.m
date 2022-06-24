@@ -10,7 +10,7 @@
 
 #define ITEM_WIDTH (kScreenWidth - 32 - 62)
 
-@interface MoreGuessHeaderView ()
+@interface MoreGuessHeaderView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property(nonatomic, strong) UIImageView *bannerImageView;
 @property(nonatomic, strong) UILabel *titleOneLabel;
 @property(nonatomic, strong) UILabel *titleTwoLabel;
@@ -182,6 +182,7 @@
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 13, 0, 13);
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _collectionView.backgroundColor = UIColor.clearColor;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
