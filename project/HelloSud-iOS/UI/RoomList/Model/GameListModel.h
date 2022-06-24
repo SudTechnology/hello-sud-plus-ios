@@ -46,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * sceneImageNew;
 /// 是否等待数据
 @property (nonatomic, assign) BOOL isGameWait;
+/// 首个游戏
+@property (nonatomic, strong)HSGameItem *firstGame;
 @end
 
 /// 查询游戏列表Model

@@ -11,22 +11,24 @@
 #import "UIImage+GIF.h"
 
 @interface HomeHeaderReusableView ()
-@property (nonatomic, strong) BaseView *contentView;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIImageView *previewView;
+@property(nonatomic, strong) BaseView *contentView;
+@property(nonatomic, strong) UILabel *titleLabel;
+@property(nonatomic, strong) UIImageView *previewView;
 //@property (nonatomic, strong) UIView *itemContainerView;
-@property (nonatomic, assign) CGFloat itemW;
-@property (nonatomic, assign) CGFloat itemH;
-@property (nonatomic, strong) UILabel *tipLabel;
+@property(nonatomic, assign) CGFloat itemW;
+@property(nonatomic, assign) CGFloat itemH;
+@property(nonatomic, strong) UILabel *tipLabel;
 /// 创建房间
-@property (nonatomic, strong) UIView *borderView;
-@property (nonatomic, strong) DTPaddingLabel *createNode;
-@property (nonatomic, strong) UIButton *customView;
+@property(nonatomic, strong) UIView *borderView;
+@property(nonatomic, strong) DTPaddingLabel *createNode;
+@property(nonatomic, strong) UIButton *customView;
 /// 更多内容
-@property (nonatomic, strong) UIButton *moreBtn;
-@property (nonatomic, strong) DTSVGAPlayerView *moreEffectView;
+@property(nonatomic, strong) UIButton *moreBtn;
+@property(nonatomic, strong) DTSVGAPlayerView *moreEffectView;
 /// 竞猜视图
-@property (nonatomic, strong) GuessCategoryView *guessView;
+@property(nonatomic, strong) GuessCategoryView *guessView;
+/// 弹幕首个首席名称
+@property(nonatomic, strong) UILabel *firstGameNameLabel;
 @end
 
 @implementation HomeHeaderReusableView
@@ -38,6 +40,7 @@
     [self.contentView addSubview:self.borderView];
     [self.borderView addSubview:self.createNode];
     [self.contentView addSubview:self.customView];
+    [self.contentView addSubview:self.firstGameNameLabel];
 
 }
 
@@ -77,12 +80,29 @@
         make.centerY.mas_equalTo(self.titleLabel);
         make.size.mas_equalTo(CGSizeMake(24, 24));
     }];
+    [self.firstGameNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.previewView).offset(12);
+        make.bottom.equalTo(self.previewView).offset(-10);
+        make.width.height.greaterThanOrEqualTo(@0);
+    }];
 }
 
 - (void)dtConfigUI {
     self.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
     self.itemW = (kScreenWidth - 32) / 4;
     self.itemH = 125 + 12;
+}
+
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapPreview:)];
+    [self.previewView addGestureRecognizer:tap];
+}
+
+- (void)onTapPreview:(id)tap {
+    if (self.sceneModel.sceneId == SceneTypeDanmaku && self.sceneModel.firstGame) {
+        [AudioRoomService reqMatchRoom:self.sceneModel.firstGame.gameId sceneType:self.sceneModel.sceneId gameLevel:-1];
+    }
 }
 
 - (void)prepareForReuse {
@@ -100,6 +120,8 @@
         [_guessView removeFromSuperview];
         _guessView = nil;
     }
+    self.borderView.hidden = NO;
+    self.firstGameNameLabel.text = nil;
 }
 
 - (void)setHeaderGameList:(NSArray<HSGameItem *> *)headerGameList {
@@ -112,6 +134,7 @@
     [self.customView setHidden:sceneModel.sceneId != SceneTypeCustom];
     self.titleLabel.text = sceneModel.sceneName;
     if (self.sceneModel.sceneId == SceneTypeDanmaku) {
+        self.borderView.hidden = YES;
         NSString *path = [NSBundle.mainBundle pathForResource:@"home_danmuka" ofType:@"webp" inDirectory:@"Res"];
         [WebpImageCacheService.shared loadWebp:path result:^(UIImage *image) {
             weakSelf.previewView.image = image;
@@ -120,7 +143,9 @@
         [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImageNew]];
     }
     self.createNode.textColor = sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A");
-
+    if (self.sceneModel.firstGame) {
+        self.firstGameNameLabel.text = self.sceneModel.firstGame.gameName;
+    }
     /// 竞猜场景视图
     if (self.sceneModel.sceneId == SceneTypeGuess) {
         [self.contentView addSubview:self.moreEffectView];
@@ -139,17 +164,16 @@
 
         [self.contentView addSubview:self.guessView];
         [self.guessView mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.leading.trailing.equalTo(@0);
-           make.top.equalTo(self.previewView.mas_bottom).offset(10);
-           make.height.equalTo(@290);
-           make.bottom.equalTo(@(0));
+            make.leading.trailing.equalTo(@0);
+            make.top.equalTo(self.previewView.mas_bottom).offset(10);
+            make.height.equalTo(@290);
+            make.bottom.equalTo(@(0));
         }];
         self.guessView.gameList = self.quizGameInfoList;
         self.guessView.sceneModel = self.sceneModel;
         [self.guessView dtUpdateUI];
     }
 }
-
 
 
 - (void)tapInputEvent:(UITapGestureRecognizer *)gesture {
@@ -160,7 +184,7 @@
         // 假数据
         return;
     }
-    
+
 //    [kAudioRoomService reqMatchRoom:m.gameId sceneType:self.sceneModel.sceneId];
 }
 
@@ -172,12 +196,13 @@
     /// 门票场景
     if (self.sceneModel.sceneId == SceneTypeTicket) {
         TicketChooseLevelView *node = TicketChooseLevelView.new;
-        [DTSheetView show:node rootView:AppUtil.currentWindow hiddenBackCover:false onCloseCallback:^{}];
+        [DTSheetView show:node rootView:AppUtil.currentWindow hiddenBackCover:false onCloseCallback:^{
+        }];
         node.onGameLevelCallBack = ^(NSInteger gameLevel) {
-            [AudioRoomService reqCreateRoom:self.sceneModel.sceneId gameLevel: gameLevel];
+            [AudioRoomService reqCreateRoom:self.sceneModel.sceneId gameLevel:gameLevel];
         };
     } else {
-        [AudioRoomService reqCreateRoom:self.sceneModel.sceneId gameLevel: -1];
+        [AudioRoomService reqCreateRoom:self.sceneModel.sceneId gameLevel:-1];
     }
 }
 
@@ -230,6 +255,7 @@
         _previewView = [[UIImageView alloc] init];
         _previewView.image = [UIImage imageNamed:@"home_preview_0"];
         _previewView.clipsToBounds = YES;
+        _previewView.userInteractionEnabled = YES;
         [_previewView dt_cornerRadius:8];
     }
     return _previewView;
@@ -255,7 +281,7 @@
         _createNode.clipsToBounds = true;
         _createNode.layer.cornerRadius = 18;
         _createNode.backgroundColor = HEX_COLOR(@"#FFFFFF");
-        [_createNode addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickCreateEvent:)]];
+        [_createNode addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCreateEvent:)]];
     }
     return _createNode;
 }
@@ -299,5 +325,14 @@
     return _guessView;
 }
 
+
+- (UILabel *)firstGameNameLabel {
+    if (!_firstGameNameLabel) {
+        _firstGameNameLabel = [[UILabel alloc] init];
+        _firstGameNameLabel.textColor = [UIColor dt_colorWithHexString:@"#ffffff" alpha:1];
+        _firstGameNameLabel.font = UIFONT_BOLD(14);
+    }
+    return _firstGameNameLabel;
+}
 
 @end

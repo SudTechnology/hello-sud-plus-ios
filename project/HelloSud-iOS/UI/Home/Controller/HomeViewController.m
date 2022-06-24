@@ -185,6 +185,10 @@
             [weakSelf.dataList addObject:arr];
             if (m.sceneId == SceneTypeGuess) {
                 [weakSelf reqGuessGameList:m];
+            } else if (m.sceneId == SceneTypeDanmaku) {
+                if (arr.count > 0) {
+                    m.firstGame = arr[0];
+                }
             }
         }
         [weakSelf.headerSceneList addObjectsFromArray:model.sceneList];
@@ -251,7 +255,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     HSSceneModel *m = self.headerSceneList[section];
-    if (m.sceneId == SceneTypeGuess) {
+    if (m.sceneId == SceneTypeGuess || m.sceneId == SceneTypeDanmaku) {
         return 0;
     }
     NSArray *arr = self.dataList[section];
