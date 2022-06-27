@@ -28,8 +28,11 @@
 
 @property(nonatomic, assign) BOOL isLandscape;
 @property(nonatomic, strong) NSArray<DanmakuCallWarcraftModel *> *dataList;
-@property(nonatomic, strong) DTTimer *timer;
+// 横屏倒计时
+@property(nonatomic, strong) DTTimer *landscapeNaviHiddenTimer;
 @property(nonatomic, assign) NSInteger countdown;
+// 横屏提示倒计时
+@property(nonatomic, strong) DTTimer *landscapeTipTimer;
 @end
 
 @implementation DanmakuRoomViewController
@@ -38,7 +41,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self reqData];
-    [self checkIfNeedToShowLandscapeTip];
+    [self beginCheckLandscapeTimer];
 
     // 加载视频流
     if (self.enterModel.streamId.length > 0) {
@@ -192,6 +195,21 @@
     }                                  failure:nil];
 }
 
+/// 开启检测横屏定时器
+- (void)beginCheckLandscapeTimer {
+    WeakSelf
+    if (!self.landscapeTipTimer) {
+        self.landscapeTipTimer = [DTTimer timerWithTimeCountdown:5 progressBlock:nil endBlock:^(DTTimer *timer) {
+            [weakSelf checkIfNeedToShowLandscapeTip];
+        }];
+    }
+}
+
+/// 停止检测横屏定时器
+- (void)stopCheckLandscapeTimer {
+    [self.landscapeTipTimer stopTimer];
+}
+
 /// 检测是否展示横屏提示
 - (void)checkIfNeedToShowLandscapeTip {
     if (AppService.shared.alreadyShowLandscapePopAlert) {
@@ -294,6 +312,7 @@
         }];
         [self checkIfNeedToShowLandscapeGuide];
         [self beginCountdown];
+        [self stopCheckLandscapeTimer];
     } else {
         [self.quickSendView updateOrientation:NO];
         self.landscapeNaviView.hidden = YES;
@@ -339,10 +358,10 @@
 
 - (void)beginCountdown {
     WeakSelf
-    if (!self.timer) {
+    if (!self.landscapeNaviHiddenTimer) {
         // 倒计时秒数
         self.countdown = 3;
-        self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
+        self.landscapeNaviHiddenTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
             weakSelf.countdown--;
             if (weakSelf.countdown <= 0) {
                 [weakSelf endCountdown];
@@ -353,8 +372,8 @@
 }
 
 - (void)endCountdown {
-    [self.timer stopTimer];
-    self.timer = nil;
+    [self.landscapeNaviHiddenTimer stopTimer];
+    self.landscapeNaviHiddenTimer = nil;
 }
 
 - (void)showLandscapeNaviView {

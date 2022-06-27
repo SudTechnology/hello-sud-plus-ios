@@ -9,7 +9,9 @@
 @property(nonatomic, strong) dispatch_source_t timer;
 @property(nonatomic, assign) NSTimeInterval interval;
 @property(nonatomic, assign) BOOL repeats;
+/// 普通定时器回调
 @property(nonatomic, copy) void (^timerBlock)(DTTimer *timer);
+@property(nonatomic, assign) NSInteger countdown;
 @property(nonatomic, assign) NSInteger callbackCount;
 @end
 
@@ -25,6 +27,32 @@
     timer.interval = interval;
     timer.repeats = repeats;
     timer.timerBlock = block;
+    [timer createTimer];
+    return timer;
+}
+
+/// 开启倒计时定时器
+/// @param countdown 总倒计时,单位 second
+/// @param progressBlock 倒计时进度
+/// @param endBlock 倒计时正常结束回调
+/// @return DTTimer
++ (DTTimer *)timerWithTimeCountdown:(NSInteger)countdown progressBlock:(void (^)(DTTimer *timer, NSInteger currentCountdown))progressBlock endBlock:(void(^)(DTTimer *timer))endBlock {
+    DTTimer *timer = [[DTTimer alloc] init];
+    timer.interval = 1;
+    timer.countdown = countdown;
+    timer.repeats = YES;
+    timer.timerBlock = ^(DTTimer *t) {
+        t.countdown--;
+        if (progressBlock) {
+            progressBlock(t, t.countdown);
+        }
+        if (t.countdown <= 0) {
+            [t stopTimer];
+            if (endBlock) {
+                endBlock(t);
+            }
+        }
+    };
     [timer createTimer];
     return timer;
 }
