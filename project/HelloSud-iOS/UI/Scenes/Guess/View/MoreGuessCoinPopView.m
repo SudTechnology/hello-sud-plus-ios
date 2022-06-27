@@ -152,8 +152,12 @@
     UIImage *iconImage = [UIImage imageNamed:@"guess_award_coin"];
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(14, 14) alignToFont:[UIFont systemFontOfSize:16 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     [full appendAttributedString:attrIcon];
-
-    NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", @(coin)]];
+    NSNumber *number = @(coin);
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = kCFNumberFormatterDecimalStyle;
+    formatter.positiveFormat = @"###,###";
+    NSString *amountString = [formatter stringFromNumber:number];
+    NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", amountString]];
     attrAwardValue.yy_font = UIFONT_MEDIUM(14);
     attrAwardValue.yy_color = HEX_COLOR(@"#F6A209");
     [full appendAttributedString:attrAwardValue];
