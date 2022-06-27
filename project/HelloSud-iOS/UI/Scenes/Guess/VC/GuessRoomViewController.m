@@ -19,6 +19,7 @@
 /// 围观者导航视图
 @property(nonatomic, strong) BaseView *normalGuessNavView;
 @property(nonatomic, strong) MarqueeLabel *normalGuessNavLabel;
+@property(nonatomic, strong) UIImageView *fingerImageView;
 /// 开启了自动竞猜
 @property(nonatomic, assign) BOOL openAutoBet;
 @property(nonatomic, assign) NSInteger betCoin;
@@ -43,6 +44,7 @@
     [self.autoGuessNavView addSubview:self.autoTitleLabel];
 
     [self.normalGuessNavView addSubview:self.normalGuessNavLabel];
+    [self.naviView addSubview:self.fingerImageView];
 
 }
 
@@ -87,6 +89,12 @@
         make.width.greaterThanOrEqualTo(@0);
         make.height.equalTo(self.normalGuessNavView);
     }];
+    [self.fingerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.normalGuessNavView.mas_trailing);
+        make.top.equalTo(self.normalGuessNavView.mas_bottom);
+        make.width.equalTo(@31);
+        make.height.equalTo(@26);
+    }];
 
 }
 
@@ -99,8 +107,8 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-
     [self.guessMineView updateBetCoin:self.betCoin];
+    [self showFingerAnimate];
 }
 
 - (void)dtConfigEvents {
@@ -126,6 +134,41 @@
     }];
 }
 
+- (void)showFingerAnimate {
+
+    [self.fingerImageView.layer removeAllAnimations];
+    CAAnimationGroup *group = [[CAAnimationGroup alloc] init];
+    group.duration = 1.6;
+    group.repeatCount = CGFLOAT_MAX;
+    group.removedOnCompletion = YES;
+    group.fillMode = kCAFillModeRemoved;
+
+    CABasicAnimation *moveDown = [CABasicAnimation animationWithKeyPath:@"transform.translation"];
+    // 设置运动形式
+    [moveDown setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    // 设置开始位置
+    moveDown.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, 0)];
+    moveDown.toValue = [NSValue valueWithCGPoint:CGPointMake(-10, -10)];
+    moveDown.removedOnCompletion = NO;
+    moveDown.duration = 0.8;
+    moveDown.repeatCount = 1;
+    moveDown.fillMode = kCAFillModeForwards;
+
+    CABasicAnimation *moveUp = [CABasicAnimation animationWithKeyPath:@"transform.translation"];
+    // 设置运动形式
+    [moveUp setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    moveUp.fromValue = [NSValue valueWithCGPoint:CGPointMake(-10, -10)];;
+    moveUp.toValue = [NSValue valueWithCGPoint:CGPointMake(0, 0)];
+    moveUp.duration = 0.8;
+    moveUp.beginTime = 0.8;
+    moveUp.repeatCount = 1;
+    moveUp.removedOnCompletion = NO;
+    moveUp.fillMode = kCAFillModeForwards;
+
+    group.animations = @[moveDown, moveUp];
+    [self.fingerImageView.layer addAnimation:group forKey:@"moveAnimate"];
+}
+
 /// 游戏玩家加入游戏状态变化
 - (void)playerIsInGameStateChanged:(NSString *)userId {
     if (![AppService.shared.loginUserID isEqualToString:userId]) {
@@ -138,6 +181,7 @@
         [self showNaviAutoStateView:NO];
         self.guessMineView.hidden = YES;
         self.normalGuessNavView.hidden = NO;
+        self.fingerImageView.hidden = NO;
         return;
     }
     // 当前用户加入了游戏
@@ -147,6 +191,7 @@
         self.guessMineView.hidden = NO;
     }
     self.normalGuessNavView.hidden = YES;
+    self.fingerImageView.hidden = YES;
 }
 
 /// 我的猜输赢挂件响应
@@ -464,10 +509,20 @@
     if (!_normalGuessNavLabel) {
         _normalGuessNavLabel = [[MarqueeLabel alloc] init];
         _normalGuessNavLabel.text = NSString.dt_room_start_pk;
-        _normalGuessNavLabel.textColor = UIColor.whiteColor;
+        _normalGuessNavLabel.textColor = HEX_COLOR(@"#482500");
         _normalGuessNavLabel.font = UIFONT_MEDIUM(12);
         _normalGuessNavLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _normalGuessNavLabel;
+}
+
+- (UIImageView *)fingerImageView {
+    if (!_fingerImageView) {
+        _fingerImageView = [[UIImageView alloc] init];
+        _fingerImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _fingerImageView.clipsToBounds = YES;
+        _fingerImageView.image = [UIImage imageNamed:@"guess_finger_guide"];
+    }
+    return _fingerImageView;
 }
 @end

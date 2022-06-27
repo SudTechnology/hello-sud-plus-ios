@@ -120,7 +120,12 @@
     attrIcon.yy_firstLineHeadIndent = 8;
     [full appendAttributedString:attrIcon];
 
-    NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@  ", @(coin)]];
+    NSNumber *number = @(coin);
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = kCFNumberFormatterDecimalStyle;
+    formatter.positiveFormat = @"###,###";
+    NSString *amountString = [formatter stringFromNumber:number];
+    NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@  ", amountString]];
     attrAwardValue.yy_font = UIFONT_MEDIUM(14);
     attrAwardValue.yy_color = HEX_COLOR(@"#F6A209");
     [full appendAttributedString:attrAwardValue];
