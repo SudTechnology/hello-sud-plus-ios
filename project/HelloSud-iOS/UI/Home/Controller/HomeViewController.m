@@ -237,7 +237,7 @@
     if (self.isClickSegItem) {
         return;
     }
-    NSArray *visibleCellIndex = self.collectionView.indexPathsForVisibleItems;
+    NSArray *visibleCellIndex = [self.collectionView indexPathsForVisibleSupplementaryElementsOfKind:UICollectionElementKindSectionHeader];
     NSArray *sortedIndexPaths = [visibleCellIndex sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         NSIndexPath *path1 = (NSIndexPath *)obj1;
         NSIndexPath *path2 = (NSIndexPath *)obj2;
