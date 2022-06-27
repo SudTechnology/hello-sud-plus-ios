@@ -188,7 +188,7 @@
         case GuessResultPopViewTypeNotBet: {
             /// 未参与
             self.titleLabel.text = @"未竞猜";
-            self.tipLabel.text = @"猜中将获得5倍奖励！下轮一起来吧~";
+            self.tipLabel.text = isInGame ? @"投自己赢，获胜讲赢得5倍奖励！" : @"猜中将获得5倍奖励！下轮一起来吧~";
             self.joinImageView.hidden = NO;
             self.joinTipLabel.hidden = NO;
             self.coinLabel.hidden = YES;
