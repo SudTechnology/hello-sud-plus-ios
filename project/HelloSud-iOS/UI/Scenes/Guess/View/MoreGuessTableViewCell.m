@@ -122,7 +122,7 @@
         [self.headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.gamePic]];
     }
     self.nameLabel.text = m.gameName;
-    self.coinLabel.text = [NSString stringWithFormat:@"入场 %@金币", @(m.ticketCoin)];
+    self.coinLabel.text = [NSString stringWithFormat:@"入场 %@", m.ticketCoin > 0 ? [NSString stringWithFormat:@"%@金币", @(m.ticketCoin)] : @"免费"];
     [self updateAward:m.winCoin];
     [self beginCountdown];
     [self updateCountdown];

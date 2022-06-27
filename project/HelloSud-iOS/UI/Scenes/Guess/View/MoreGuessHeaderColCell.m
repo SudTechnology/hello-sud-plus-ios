@@ -271,6 +271,7 @@
         self.leftIDLabel.text = @"ID 8721";
         self.rightNameLabel.text = @"年年不忘团";
         self.rightIDLabel.text = @"ID 8719";
+        self.coinTipLabel.text = @"预测成功瓜分奖池";
         [self updateCoin:50000];
         [self beginCountdown];
     } else {
