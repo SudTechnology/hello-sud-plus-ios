@@ -30,7 +30,7 @@
         make.trailing.mas_equalTo(-52);
         make.centerY.mas_equalTo(self);
         if (self.roomModeView.hidden) {
-            make.size.mas_equalTo(CGSizeMake(0, 20)).priorityHigh();
+            make.size.mas_equalTo(CGSizeMake(0, 20));
         } else {
             make.size.mas_greaterThanOrEqualTo(CGSizeMake(78, 20)).priorityHigh();
         }
@@ -51,7 +51,7 @@
         make.trailing.mas_equalTo(-52);
         make.centerY.mas_equalTo(self);
         if (self.roomModeView.hidden) {
-            make.size.mas_equalTo(CGSizeMake(0, 20)).priorityHigh();
+            make.size.mas_equalTo(CGSizeMake(0, 20));
         } else {
             make.size.mas_greaterThanOrEqualTo(CGSizeMake(78, 20)).priorityHigh();
         }
