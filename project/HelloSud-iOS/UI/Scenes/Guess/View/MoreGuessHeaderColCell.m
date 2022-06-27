@@ -82,10 +82,10 @@
 - (void)dtLayoutViews {
     [super dtLayoutViews];
 
-    [self.stateContentView setPartRoundCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadius:8];
+    [self.stateContentView dt_cornerRadius:4];
     [self.stateContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@0);
-        make.height.equalTo(@30);
+        make.top.equalTo(@-4);
+        make.height.equalTo(@34);
         make.centerX.equalTo(self.contentView);
         make.width.greaterThanOrEqualTo(@0);
     }];
@@ -93,7 +93,8 @@
     [self.stateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@10);
         make.trailing.equalTo(@-10);
-        make.width.height.greaterThanOrEqualTo(@0);
+        make.width.greaterThanOrEqualTo(@0);
+        make.height.equalTo(@20);
         make.bottom.equalTo(@-5);
     }];
 
@@ -114,7 +115,7 @@
         make.leading.equalTo(self.leftImageView);
         make.top.equalTo(self.leftImageView.mas_bottom).offset(2);
         make.height.greaterThanOrEqualTo(@0);
-        make.width.equalTo(@80);
+        make.trailing.equalTo(self.vsImageView.mas_centerX);
     }];
     [self.leftSupportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.leftImageView.mas_trailing).offset(6);
@@ -148,7 +149,7 @@
         make.trailing.equalTo(self.rightImageView);
         make.top.equalTo(self.rightImageView.mas_bottom).offset(2);
         make.height.greaterThanOrEqualTo(@0);
-        make.width.equalTo(@80);
+        make.leading.equalTo(self.vsImageView.mas_centerX);
     }];
     [self.rightSupportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.rightImageView.mas_leading).offset(-6);
@@ -266,7 +267,9 @@
         self.rightSupportBtn.hidden = NO;
         self.leftImageView.image = [UIImage imageNamed:@"ic_avatar_7"];
         self.rightImageView.image = [UIImage imageNamed:@"ic_avatar_8"];
+        self.leftNameLabel.text = @"趣味辩论";
         self.leftIDLabel.text = @"ID 8721";
+        self.rightNameLabel.text = @"年年不忘团";
         self.rightIDLabel.text = @"ID 8719";
         [self updateCoin:50000];
         [self beginCountdown];
@@ -283,7 +286,9 @@
         self.rightSupportImageView.hidden = YES;
         self.leftImageView.image = [UIImage imageNamed:@"ic_avatar_9"];
         self.rightImageView.image = [UIImage imageNamed:@"ic_avatar_10"];
+        self.leftNameLabel.text = @"梦语女友";
         self.leftIDLabel.text = @"ID 8526";
+        self.rightNameLabel.text = @"彼岸花开";
         self.rightIDLabel.text = @"ID 8329";
 
         [self updateCoin:30000];
@@ -355,7 +360,14 @@
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(18, 18) alignToFont:[UIFont systemFontOfSize:16 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     [full appendAttributedString:attrIcon];
 
-    NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", @(coin)]];
+
+    NSNumber *number = @(coin);
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = kCFNumberFormatterDecimalStyle;
+    formatter.positiveFormat = @"###,###";
+    NSString *amountString = [formatter stringFromNumber:number];
+    NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", amountString]];
+
     attrAwardValue.yy_font = UIFONT_MEDIUM(16);
     attrAwardValue.yy_color = HEX_COLOR(@"#FFFF22");
     [full appendAttributedString:attrAwardValue];
@@ -377,9 +389,6 @@
 - (BaseView *)stateContentView {
     if (!_stateContentView) {
         _stateContentView = [[BaseView alloc] init];
-        _stateContentView.backgroundColor = HEX_COLOR(@"#FF711A");
-//        [_stateContentView dt_cornerRadius:8];
-
         _stateContentView.layer.borderWidth = 1;
         _stateContentView.layer.borderColor = HEX_COLOR(@"#FFBF3A").CGColor;
     }
