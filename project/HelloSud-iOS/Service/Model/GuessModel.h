@@ -26,8 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 奖励(金币)
 @property (nonatomic, assign)NSInteger winCoin;
 
-/// 开始倒计时时间
-@property (nonatomic, assign)NSTimeInterval beginTimestamp;
 @end
 
 

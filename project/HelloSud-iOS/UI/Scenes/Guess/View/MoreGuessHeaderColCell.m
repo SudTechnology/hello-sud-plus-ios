@@ -299,7 +299,7 @@
     WeakSelf
     MoreGuessHeaderCellModel *m = (MoreGuessHeaderCellModel *)self.model;
     if (!self.timer) {
-        self.countdown = m.duration;
+        self.countdown = m.duration - (int64_t)[NSDate date].timeIntervalSince1970 % m.duration;
         [weakSelf updateCountdown];
         self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
             weakSelf.countdown--;

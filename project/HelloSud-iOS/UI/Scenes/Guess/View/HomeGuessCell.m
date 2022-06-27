@@ -167,20 +167,9 @@
         return;
     }
     // 经历过时间戳
-    NSInteger countdown = 0;
-    if (m.beginTimestamp > 0) {
-        NSInteger passTime = [[NSDate date] timeIntervalSince1970] - m.beginTimestamp;
-        countdown = m.gameCountDownCycle - passTime % m.gameCountDownCycle;
-    }
-    if (countdown <= 0) {
-        countdown = m.gameCountDownCycle;
-    }
+    NSInteger countdown = m.gameCountDownCycle - (int64_t)[NSDate date].timeIntervalSince1970 % m.gameCountDownCycle;
     if (!self.timer) {
         self.countdown = countdown;
-        // 记录倒计时开始时间
-        if (m.beginTimestamp <= 0) {
-            m.beginTimestamp = [[NSDate date] timeIntervalSince1970];
-        }
         self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
             [weakSelf updateCountdown];
         }];
