@@ -10,7 +10,7 @@
 #import "SwitchAutoGuessPopView.h"
 
 @interface GuessMineView()
-@property(nonatomic, strong) UIImageView *bgImageView;
+@property(nonatomic, strong) DTSVGAPlayerView *bgEffectView;
 @property(nonatomic, strong) UILabel *coinLabel;
 @property(nonatomic, strong) MarqueeLabel *tipLabel;
 @end
@@ -19,14 +19,14 @@
 
 - (void)dtAddViews {
 
-    [self addSubview:self.bgImageView];
+    [self addSubview:self.bgEffectView];
     [self addSubview:self.coinLabel];
     [self addSubview:self.tipLabel];
 }
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
-    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.bgEffectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
     }];
 
@@ -64,14 +64,16 @@
     self.coinLabel.text = [NSString stringWithFormat:@"x%@", @(betCoin)];
 }
 
-- (UIImageView *)bgImageView {
-    if (!_bgImageView) {
-        _bgImageView = [[UIImageView alloc] init];
-        _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _bgImageView.clipsToBounds = YES;
-        _bgImageView.image = [UIImage imageNamed:@"guess_mine_bg"];
+- (DTSVGAPlayerView *)bgEffectView {
+    if (!_bgEffectView) {
+        _bgEffectView = [[DTSVGAPlayerView alloc] init];
+        NSString *path = [NSBundle.mainBundle pathForResource:@"scese_win" ofType:@"svga" inDirectory:@"Res"];
+        if (path) {
+            [_bgEffectView setURL:[NSURL fileURLWithPath:path]];
+        }
+        [_bgEffectView play:100000000 didFinished:nil];
     }
-    return _bgImageView;
+    return _bgEffectView;
 }
 
 - (UILabel *)coinLabel {
