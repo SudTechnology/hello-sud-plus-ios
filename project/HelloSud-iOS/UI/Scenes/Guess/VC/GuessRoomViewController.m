@@ -424,7 +424,7 @@
 
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
 - (void)onGameMGCommonGameState:(id<ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    [super onGameMGCommonGameState:handle model:model];
     // 游戏进行开始时，扣费
     if (model.gameState == MGCommonGameStateTypeLoading) {
         WeakSelf
