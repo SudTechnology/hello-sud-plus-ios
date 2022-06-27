@@ -402,11 +402,14 @@
 
     LobbyPlayers *l = [[LobbyPlayers alloc] init];
     l.hide = true;
+    
+    GameCfgStartBtn *start_btn = [[GameCfgStartBtn alloc] init];
+    start_btn.custom = YES;
 
     GameUi *ui = [[GameUi alloc] init];
     ui.gameSettle = gameSettle;
     ui.lobby_players = l;
-
+    ui.start_btn = start_btn;
 
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
     m.ui = ui;
