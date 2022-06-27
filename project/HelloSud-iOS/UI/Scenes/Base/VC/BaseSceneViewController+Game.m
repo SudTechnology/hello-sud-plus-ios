@@ -50,18 +50,15 @@
 - (void)onGetGameViewInfo:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
     CGFloat scale = [[UIScreen mainScreen] nativeScale];
     GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    GameViewSize *viewSize = [[GameViewSize alloc] init];
-    viewSize.width = kScreenWidth * scale;
-    viewSize.height = kScreenHeight * scale;
-    ViewGameRect *viewRect = [[ViewGameRect alloc] init];
-    viewRect.top = (kStatusBarHeight + 120) * scale;
-    viewRect.left = 0;
-    viewRect.bottom = (kAppSafeBottom + 150) * scale;
-    viewRect.right = 0;
+    m.view_size.width = kScreenWidth * scale;
+    m.view_size.height = kScreenHeight * scale;
+    m.view_game_rect.top = (kStatusBarHeight + 120) * scale;
+    m.view_game_rect.left = 0;
+    m.view_game_rect.bottom = (kAppSafeBottom + 150) * scale;
+    m.view_game_rect.right = 0;
+
     m.ret_code = 0;
     m.ret_msg = @"success";
-    m.view_size = viewSize;
-    m.view_game_rect = viewRect;
     [handle success:m.mj_JSONString];
 }
 

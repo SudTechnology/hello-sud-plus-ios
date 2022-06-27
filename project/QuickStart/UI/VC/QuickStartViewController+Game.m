@@ -168,24 +168,20 @@
 
     GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
     // 游戏展示区域
-    GameViewSize *viewSize = [[GameViewSize alloc] init];
-    viewSize.width = screenSize.width * scale;
-    viewSize.height = screenSize.height * scale;
-    ViewGameRect *viewRect = [[ViewGameRect alloc] init];
+    m.view_size.width = screenSize.width * scale;
+    m.view_size.height = screenSize.height * scale;
     // 游戏内容布局安全区域，根据自身业务调整顶部间距
     // 顶部间距
-    viewRect.top = (statusBarHeight + 80) * scale;
+    m.view_game_rect.top = (statusBarHeight + 80) * scale;
     // 左边
-    viewRect.left = 0;
+    m.view_game_rect.left = 0;
     // 右边
-    viewRect.right = 0;
+    m.view_game_rect.right = 0;
     // 底部安全区域
-    viewRect.bottom = (safeArea.bottom + 100) * scale;
+    m.view_game_rect.bottom = (safeArea.bottom + 100) * scale;
 
     m.ret_code = 0;
     m.ret_msg = @"success";
-    m.view_size = viewSize;
-    m.view_game_rect = viewRect;
     [handle success:m.toJSON];
 }
 
