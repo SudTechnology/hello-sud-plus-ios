@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 更新方向
 /// @param isLandscape 是否横屏
 - (void)updateOrientation:(BOOL)isLandscape;
+/// 切换到打开状态
+/// @param open 打开
+- (void)switchToOpen:(BOOL)open;
 @end
 
 NS_ASSUME_NONNULL_END

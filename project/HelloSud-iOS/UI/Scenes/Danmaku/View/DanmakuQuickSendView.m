@@ -115,6 +115,14 @@
     }
 }
 
+/// 切换到打开状态
+/// @param open 打开
+- (void)switchToOpen:(BOOL)open {
+    if (self.onOpenBlock) {
+        self.onOpenBlock(open);
+    }
+}
+
 /// 更新方向
 /// @param isLandscape 是否横屏
 - (void)updateOrientation:(BOOL)isLandscape {

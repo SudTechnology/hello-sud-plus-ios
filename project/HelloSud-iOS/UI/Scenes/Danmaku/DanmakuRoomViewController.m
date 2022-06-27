@@ -76,7 +76,7 @@
     [self.quickSendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
         make.leading.trailing.equalTo(@0);
-        make.height.equalTo(@24);
+        make.height.equalTo(@120);
     }];
     [self.landscapeNaviView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.leading.trailing.equalTo(@0);
@@ -89,6 +89,11 @@
         make.bottom.equalTo(@-22);
     }];
 
+}
+
+- (void)dtConfigUI {
+    [super dtConfigUI];
+    [self.quickSendView showOpen:YES];
 }
 
 - (void)dtConfigEvents {
@@ -144,7 +149,6 @@
                     [weakSelf.quickSendView.superview layoutIfNeeded];
                     [weakSelf.quickSendView showOpen:NO];
                 }];
-
             }
         }
     };
