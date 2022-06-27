@@ -396,29 +396,12 @@
 
 /// 获取游戏Config  【需要实现】
 - (NSString *)onGetGameCfg {
-
-    GameSettle *gameSettle = [[GameSettle alloc] init];
-    gameSettle.hide = YES;
-
-    LobbyPlayers *l = [[LobbyPlayers alloc] init];
-    l.hide = true;
-    
-    GameCfgStartBtn *start_btn = [[GameCfgStartBtn alloc] init];
-    start_btn.custom = YES;
-
-    GameCfgJoinBtn *joinBtn = [[GameCfgJoinBtn alloc]init];
-    joinBtn.custom = YES;
-
-    GameUi *ui = [[GameUi alloc] init];
-    ui.gameSettle = gameSettle;
-    ui.lobby_players = l;
-    ui.start_btn = start_btn;
-    ui.join_btn = joinBtn;
-
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
-    m.ui = ui;
-
-    return [m mj_JSONString];
+    m.ui.gameSettle.hide = YES;
+    m.ui.lobby_players.hide = YES;
+    m.ui.start_btn.custom = YES;
+    m.ui.join_btn.custom = YES;
+    return [m toJSON];
 }
 
 /// 接管加入游戏
