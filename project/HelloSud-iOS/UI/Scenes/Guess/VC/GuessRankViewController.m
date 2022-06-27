@@ -17,6 +17,7 @@
 @property(nonatomic, strong) NSArray<NSString *> *subTitles;
 @property(nonatomic, assign) NSInteger titleIndex;
 @property(nonatomic, strong) UIButton *backBtn;
+@property(nonatomic, strong) NSMutableDictionary *dicSelected;
 @end
 
 @implementation GuessRankViewController
@@ -24,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.dicSelected = [[NSMutableDictionary alloc]init];
 }
 
 - (BOOL)dtIsHiddenNavigationBar {
@@ -81,7 +83,7 @@
 
 - (UIButton *)backBtn {
     if (!_backBtn) {
-        _backBtn = [[UIButton alloc]init];
+        _backBtn = [[UIButton alloc] init];
         _backBtn.tintColor = UIColor.whiteColor;
         [_backBtn setImage:[[UIImage imageNamed:@"navi_back"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [_backBtn addTarget:self action:@selector(dtNavigationBackClick) forControlEvents:UIControlEventTouchUpInside];
@@ -157,7 +159,18 @@
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
     if (self.titleCategoryView == categoryView) {
         self.titleIndex = index;
+        NSString *key = [NSString stringWithFormat:@"%@", @(self.titleIndex)];
+        if (self.dicSelected[key]) {
+            self.subTitleCategoryView.defaultSelectedIndex = [self.dicSelected[key] integerValue];
+        } else {
+            self.subTitleCategoryView.defaultSelectedIndex = 0;
+        }
+        [self.subTitleCategoryView reloadData];
+    } else if (self.subTitleCategoryView == categoryView) {
+        NSString *key = [NSString stringWithFormat:@"%@", @(self.titleIndex)];
+        self.dicSelected[key] = @(index);
     }
+
     [_listContainerView reloadData];
 }
 
@@ -181,6 +194,7 @@
         listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"贝茗" avatar:@"ic_avatar_9"];
         listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"庹启黛" avatar:@"ic_avatar_8"];
     }
+
     [listView dtUpdateUI];
     return listView;
 }
