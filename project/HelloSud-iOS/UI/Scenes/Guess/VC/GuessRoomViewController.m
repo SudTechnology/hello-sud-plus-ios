@@ -415,6 +415,7 @@
     // 通过游戏透传业务竞猜场景ID到业务服务端
     NSDictionary *dic = @{@"sceneId": @(self.configModel.enterRoomModel.sceneType)};
     [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
+    DDLogDebug(@"onGameMGCommonSelfClickStartBtn");
 
 }
 
@@ -425,21 +426,34 @@
     if (model.gameState == MGCommonGameStateTypeLoading) {
         WeakSelf
         /// 开启了自动扣费
+        DDLogDebug(@"开启了自动扣费");
         if (self.openAutoBet) {
-            [GuessRoomService reqBet:2 coin:self.betCoin userList:@[AppService.shared.loginUserID] finished:^{
-                [DTSheetView close];
-                DDLogDebug(@"开启自动扣费：投注成功");
-                // 自己押注消息
-                AudioUserModel *userModel = AudioUserModel.new;
-                userModel.userID = AppService.shared.login.loginUserInfo.userID;
-                userModel.name = AppService.shared.login.loginUserInfo.name;
-                userModel.icon = AppService.shared.login.loginUserInfo.icon;
-                userModel.sex = AppService.shared.login.loginUserInfo.sex;
-                [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
-            }                failure:^(NSError *error) {
-                weakSelf.openAutoBet = NO;
-                [weakSelf showNaviAutoStateView:NO];
-            }];
+            [UserService.shared reqUserCoinDetail:^(int64_t i) {
+
+                if (i < weakSelf.betCoin) {
+                    [ToastUtil show:@"余额不足，自动竞猜已关闭，快去充值吧~"];
+                    weakSelf.openAutoBet = NO;
+                    [weakSelf showNaviAutoStateView:NO];
+                    return;
+                }
+
+                [GuessRoomService reqBet:2 coin:weakSelf.betCoin userList:@[AppService.shared.loginUserID] finished:^{
+                    [DTSheetView close];
+                    DDLogDebug(@"开启自动扣费：投注成功");
+                    // 自己押注消息
+                    AudioUserModel *userModel = AudioUserModel.new;
+                    userModel.userID = AppService.shared.login.loginUserInfo.userID;
+                    userModel.name = AppService.shared.login.loginUserInfo.name;
+                    userModel.icon = AppService.shared.login.loginUserInfo.icon;
+                    userModel.sex = AppService.shared.login.loginUserInfo.sex;
+                    [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
+                }                failure:^(NSError *error) {
+                    DDLogError(@"开启自动扣费：失败：%@", error.dt_errMsg);
+                    weakSelf.openAutoBet = NO;
+                    [weakSelf showNaviAutoStateView:NO];
+                }];
+            } fail:nil];
+
         }
     }
 }
