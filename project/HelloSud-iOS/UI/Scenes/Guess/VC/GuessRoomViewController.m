@@ -22,8 +22,10 @@
 @property(nonatomic, strong) UIImageView *fingerImageView;
 /// 开启了自动竞猜
 @property(nonatomic, assign) BOOL openAutoBet;
+/// 是否是下一轮
+@property(nonatomic, assign) BOOL isNextRound;
 @property(nonatomic, assign) NSInteger betCoin;
-@property (nonatomic, strong)RespGuessPlayerListModel *playerListModel;
+@property(nonatomic, strong) RespGuessPlayerListModel *playerListModel;
 @end
 
 @implementation GuessRoomViewController {
@@ -186,7 +188,7 @@
         return;
     }
     // 当前用户加入了游戏
-    
+
     // 如果未开启自动竞猜，展示挂件
     if (!self.openAutoBet) {
         self.guessMineView.hidden = NO;
@@ -210,14 +212,10 @@
         [DTSheetView close];
     };
     v.onOpenBlock = ^{
-        if (UserService.shared.currentUserCoin < self.betCoin) {
-            [ToastUtil show:@"余额不足"];
-            return;
-        }
         // 开启的时候自动扣费
         [GuessRoomService reqBet:2 coin:self.betCoin userList:@[AppService.shared.loginUserID] finished:^{
             [DTSheetView close];
-            DDLogDebug(@"开启自动扣费：投注成功");
+            DDLogDebug(@"onTapShowOpenAutoGuess 开启自动扣费：投注成功");
             weakSelf.openAutoBet = YES;
             [weakSelf showNaviAutoStateView:YES];
             // 自己押注消息
@@ -227,8 +225,11 @@
             userModel.icon = AppService.shared.login.loginUserInfo.icon;
             userModel.sex = AppService.shared.login.loginUserInfo.sex;
             [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
-        }            failure:nil];
-
+        }                failure:^(NSError *error) {
+            if (error.code == 3005) {
+                [ToastUtil show:@"余额不足，快去充值吧~"];
+            }
+        }];
     };
     [DTSheetView show:v onCloseCallback:^{
 
@@ -400,40 +401,30 @@
 
 /// 请求自动下注
 /// @param finished finished
-- (void)reqAutoBet:(void(^)(BOOL success))finished {
+- (void)reqAutoBet:(void (^)(BOOL success))finished {
     WeakSelf
-    [UserService.shared reqUserCoinDetail:^(int64_t i) {
+    [GuessRoomService reqBet:2 coin:weakSelf.betCoin userList:@[AppService.shared.loginUserID] finished:^{
+        [DTSheetView close];
+        DDLogDebug(@"开启自动扣费：投注成功");
+        // 自己押注消息
+        AudioUserModel *userModel = AudioUserModel.new;
+        userModel.userID = AppService.shared.login.loginUserInfo.userID;
+        userModel.name = AppService.shared.login.loginUserInfo.name;
+        userModel.icon = AppService.shared.login.loginUserInfo.icon;
+        userModel.sex = AppService.shared.login.loginUserInfo.sex;
+        [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
+        if (finished) finished(YES);
 
-        if (i < weakSelf.betCoin) {
+    }                failure:^(NSError *error) {
+        if (error.code == 3005) {
             [ToastUtil show:@"余额不足，自动竞猜已关闭，快去充值吧~"];
             weakSelf.openAutoBet = NO;
             [weakSelf showNaviAutoStateView:NO];
-            if (finished) finished(NO);
-            return;
         }
-
-        [GuessRoomService reqBet:2 coin:weakSelf.betCoin userList:@[AppService.shared.loginUserID] finished:^{
-            [DTSheetView close];
-            DDLogDebug(@"开启自动扣费：投注成功");
-            // 自己押注消息
-            AudioUserModel *userModel = AudioUserModel.new;
-            userModel.userID = AppService.shared.login.loginUserInfo.userID;
-            userModel.name = AppService.shared.login.loginUserInfo.name;
-            userModel.icon = AppService.shared.login.loginUserInfo.icon;
-            userModel.sex = AppService.shared.login.loginUserInfo.sex;
-            [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
-            if (finished) finished(YES);
-            
-        }                failure:^(NSError *error) {
-            DDLogError(@"开启自动扣费：失败：%@", error.dt_errMsg);
-            weakSelf.openAutoBet = NO;
-            [weakSelf showNaviAutoStateView:NO];
-            
-            if (finished) finished(NO);
-        }];
-    } fail:^(NSString *errStr){
+        DDLogError(@"开启自动扣费：失败：%@", error.dt_errMsg);
         if (finished) finished(NO);
     }];
+
 }
 
 #pragma mark game events
@@ -450,7 +441,7 @@
 }
 
 /// 接管加入游戏
-- (void)onGameMGCommonSelfClickJoinBtn:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonSelfClickCancelJoinBtn *)model {
+- (void)onGameMGCommonSelfClickJoinBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickCancelJoinBtn *)model {
     [self.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
     [self onTapShowOpenAutoGuess:nil];
 }
@@ -465,12 +456,12 @@
 }
 
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
-- (void)onGameMGCommonGameState:(id<ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
+- (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
     [super onGameMGCommonGameState:handle model:model];
     // 游戏进行开始时，扣费
     if (model.gameState == MGCommonGameStateTypeLoading) {
         WeakSelf
-        if (!self.openAutoBet) {
+        if (!(self.openAutoBet && self.isNextRound)) {
             [self reqBetList];
             return;
         }
@@ -485,6 +476,7 @@
 /// 游戏: 游戏结算状态     MG_COMMON_GAME_SETTLE
 - (void)onGameMGCommonGameSettle:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSettleModel *)model {
 
+    self.isNextRound = YES;
     // 展示游戏结果
     [self handlePlayerGameResult:model.results];
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];

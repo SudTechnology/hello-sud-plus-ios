@@ -131,7 +131,8 @@
 - (void)setSceneModel:(HSSceneModel *)sceneModel {
     _sceneModel = sceneModel;
     WeakSelf
-    [self.customView setHidden:sceneModel.sceneId != SceneTypeCustom];
+    [self updateCustomMoreBtn:sceneModel];
+
     self.titleLabel.text = sceneModel.sceneName;
     if (self.sceneModel.sceneId == SceneTypeDanmaku) {
         self.borderView.hidden = YES;
@@ -172,6 +173,29 @@
         self.guessView.gameList = self.quizGameInfoList;
         self.guessView.sceneModel = self.sceneModel;
         [self.guessView dtUpdateUI];
+    }
+}
+
+/// 更新自定义更多按钮
+/// @param sceneModel
+- (void)updateCustomMoreBtn:(HSSceneModel *)sceneModel {
+    WeakSelf
+    if (sceneModel.sceneId == SceneTypeCustom) {
+        // 自定义
+        [self.customView setImage:[UIImage imageNamed:@"home_section_custom_icon"] forState:UIControlStateNormal];
+        [self.customView setHidden:NO];
+        [self.customView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(24, 24));
+        }];
+    } else if (sceneModel.sceneId == SceneTypeDiscoDancing) {
+        // 蹦迪
+        [self.customView setImage:[UIImage imageNamed:@"disco_rank"] forState:UIControlStateNormal];
+        [self.customView setHidden:NO];
+        [self.customView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(32, 32));
+        }];
+    } else {
+        [self.customView setHidden:YES];
     }
 }
 
