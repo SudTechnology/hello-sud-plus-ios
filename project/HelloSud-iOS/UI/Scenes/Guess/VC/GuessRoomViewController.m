@@ -23,6 +23,7 @@
 /// 开启了自动竞猜
 @property(nonatomic, assign) BOOL openAutoBet;
 @property(nonatomic, assign) NSInteger betCoin;
+@property (nonatomic, strong)RespGuessPlayerListModel *playerListModel;
 @end
 
 @implementation GuessRoomViewController {
@@ -312,9 +313,9 @@
     }];
 }
 
-/// 请求结果玩家列表
+/// 处理游戏结果
 /// @param results results
-- (void)reqResultPlayerListData:(NSArray<MGCommonGameSettleResults *> *)results {
+- (void)handlePlayerGameResult:(NSArray<MGCommonGameSettleResults *> *)results {
     WeakSelf
 
     NSMutableArray *playerUserIdList = [[NSMutableArray alloc] init];
@@ -326,25 +327,20 @@
             dic[m.uid] = m;
         }
     }
-    NSString *roomId = kGuessService.currentRoomVC.roomID;
-    [GuessRoomService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
-        weakSelf.betCoin = model.betCoin;
-        NSArray *arr = model.playerList;
-
-        for (int i = 0; i < arr.count; ++i) {
-            GuessPlayerModel *m = arr[i];
-            MGCommonGameSettleResults *resultModel = dic[[NSString stringWithFormat:@"%@", @(m.userId)]];
-            if (resultModel) {
-                m.rank = resultModel.rank;
-                m.award = resultModel.award;
-                m.score = resultModel.score;
-            }
+    NSArray *arr = self.playerListModel.playerList;
+    for (int i = 0; i < arr.count; ++i) {
+        GuessPlayerModel *m = arr[i];
+        MGCommonGameSettleResults *resultModel = dic[[NSString stringWithFormat:@"%@", @(m.userId)]];
+        if (resultModel) {
+            m.rank = resultModel.rank;
+            m.award = resultModel.award;
+            m.score = resultModel.score;
         }
-        arr = [arr sortedArrayUsingComparator:^NSComparisonResult(GuessPlayerModel *_Nonnull obj1, GuessPlayerModel *_Nonnull obj2) {
-            return obj1.rank > obj2.rank;
-        }];
-        [weakSelf showResultAlertView:arr winCoin:model.winCoin];
+    }
+    arr = [arr sortedArrayUsingComparator:^NSComparisonResult(GuessPlayerModel *_Nonnull obj1, GuessPlayerModel *_Nonnull obj2) {
+        return obj1.rank > obj2.rank;
     }];
+    [weakSelf showResultAlertView:arr winCoin:self.playerListModel.winCoin];
 }
 
 /// 处理业务指令
@@ -392,6 +388,54 @@
     }
 }
 
+/// 获取下注列表
+- (void)reqBetList {
+    WeakSelf
+    NSString *roomId = kGuessService.currentRoomVC.roomID;
+    [GuessRoomService reqGuessPlayerList:self.sudFSMMGDecorator.onlineUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
+        weakSelf.betCoin = model.betCoin;
+        weakSelf.playerListModel = model;
+    }];
+}
+
+/// 请求自动下注
+/// @param finished finished
+- (void)reqAutoBet:(void(^)(BOOL success))finished {
+    WeakSelf
+    [UserService.shared reqUserCoinDetail:^(int64_t i) {
+
+        if (i < weakSelf.betCoin) {
+            [ToastUtil show:@"余额不足，自动竞猜已关闭，快去充值吧~"];
+            weakSelf.openAutoBet = NO;
+            [weakSelf showNaviAutoStateView:NO];
+            if (finished) finished(NO);
+            return;
+        }
+
+        [GuessRoomService reqBet:2 coin:weakSelf.betCoin userList:@[AppService.shared.loginUserID] finished:^{
+            [DTSheetView close];
+            DDLogDebug(@"开启自动扣费：投注成功");
+            // 自己押注消息
+            AudioUserModel *userModel = AudioUserModel.new;
+            userModel.userID = AppService.shared.login.loginUserInfo.userID;
+            userModel.name = AppService.shared.login.loginUserInfo.name;
+            userModel.icon = AppService.shared.login.loginUserInfo.icon;
+            userModel.sex = AppService.shared.login.loginUserInfo.sex;
+            [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
+            if (finished) finished(YES);
+            
+        }                failure:^(NSError *error) {
+            DDLogError(@"开启自动扣费：失败：%@", error.dt_errMsg);
+            weakSelf.openAutoBet = NO;
+            [weakSelf showNaviAutoStateView:NO];
+            
+            if (finished) finished(NO);
+        }];
+    } fail:^(NSString *errStr){
+        if (finished) finished(NO);
+    }];
+}
+
 #pragma mark game events
 
 /// 获取游戏Config  【需要实现】
@@ -425,36 +469,15 @@
     // 游戏进行开始时，扣费
     if (model.gameState == MGCommonGameStateTypeLoading) {
         WeakSelf
+        if (!self.openAutoBet) {
+            [self reqBetList];
+            return;
+        }
         /// 开启了自动扣费
         DDLogDebug(@"开启了自动扣费");
-        if (self.openAutoBet) {
-            [UserService.shared reqUserCoinDetail:^(int64_t i) {
-
-                if (i < weakSelf.betCoin) {
-                    [ToastUtil show:@"余额不足，自动竞猜已关闭，快去充值吧~"];
-                    weakSelf.openAutoBet = NO;
-                    [weakSelf showNaviAutoStateView:NO];
-                    return;
-                }
-
-                [GuessRoomService reqBet:2 coin:weakSelf.betCoin userList:@[AppService.shared.loginUserID] finished:^{
-                    [DTSheetView close];
-                    DDLogDebug(@"开启自动扣费：投注成功");
-                    // 自己押注消息
-                    AudioUserModel *userModel = AudioUserModel.new;
-                    userModel.userID = AppService.shared.login.loginUserInfo.userID;
-                    userModel.name = AppService.shared.login.loginUserInfo.name;
-                    userModel.icon = AppService.shared.login.loginUserInfo.icon;
-                    userModel.sex = AppService.shared.login.loginUserInfo.sex;
-                    [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
-                }                failure:^(NSError *error) {
-                    DDLogError(@"开启自动扣费：失败：%@", error.dt_errMsg);
-                    weakSelf.openAutoBet = NO;
-                    [weakSelf showNaviAutoStateView:NO];
-                }];
-            } fail:nil];
-
-        }
+        [self reqAutoBet:^(BOOL success) {
+            [self reqBetList];
+        }];
     }
 }
 
@@ -462,8 +485,7 @@
 - (void)onGameMGCommonGameSettle:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSettleModel *)model {
 
     // 展示游戏结果
-    [self reqResultPlayerListData:model.results];
-
+    [self handlePlayerGameResult:model.results];
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
