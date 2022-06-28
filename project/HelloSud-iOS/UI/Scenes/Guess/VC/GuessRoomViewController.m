@@ -292,7 +292,7 @@
 - (void)showResultAlertView:(NSArray<GuessPlayerModel *> *)playerList winCoin:(NSInteger)winCoin {
     GuessResultPopView *v = [[GuessResultPopView alloc] init];
     v.dataList = playerList;
-
+    v.winCoin = winCoin;
     BOOL isSupport = NO;
     for (int i = 0; i < playerList.count; ++i) {
         if (playerList[i].support) {
@@ -368,7 +368,7 @@
         if ([user.userID isEqualToString:model.sendUser.userID]) {
             content = [NSString stringWithFormat:@"%@ 胸有成竹，猜自己一定能赢", model.sendUser.name];
         } else {
-            content = [NSString stringWithFormat:@"%@ 为 %@ 打call，猜TA赢", model.sendUser.name, user.name];
+            content = [NSString stringWithFormat:@"%@ 为 %@ 打call，猜TA会赢", model.sendUser.name, user.name];
         }
         [self addBetPublicMsgContent:content];
     }

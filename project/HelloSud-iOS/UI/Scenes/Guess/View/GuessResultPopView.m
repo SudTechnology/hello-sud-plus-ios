@@ -169,6 +169,12 @@
             self.titleLabel.text = isInGame ? @"恭喜获胜" : @"猜中了";
             [self updateCoin:self.winCoin];
             self.tipLabel.text = isInGame ? @"超过了94.8%的人" : @"料事如神，乘胜追击~";
+            self.coinLabel.hidden = NO;
+            self.joinImageView.hidden = YES;
+            self.joinTipLabel.hidden = YES;
+            [self.tipLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.titleLabel.mas_bottom).offset(42);
+            }];
             [self beginCountdown];
         }
             break;
