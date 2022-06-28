@@ -127,6 +127,7 @@
 - (GameCfgShareBtn *)share_btn {
     if (!_share_btn) {
         _share_btn = [[GameCfgShareBtn alloc] init];
+        _share_btn.hide = YES;
     }
     return _share_btn;
 }

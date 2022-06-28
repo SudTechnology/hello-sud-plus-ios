@@ -445,7 +445,8 @@
     m.ui.lobby_players.hide = YES;
     m.ui.start_btn.custom = YES;
     m.ui.join_btn.custom = YES;
-    return [m toJSON];
+    NSString *jsonStr = [m toJSON];
+    return jsonStr;
 }
 
 /// 接管加入游戏
