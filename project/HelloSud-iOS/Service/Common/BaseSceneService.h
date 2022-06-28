@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 @class BaseSceneViewController;
-/// 1：语聊房场景 2：1v1场景 3：才艺房场景 4：秀场场景 5:门票场景 6：竞猜场景 7：跨房PK场景 8：点单场景 9：语音识别场景 10：联赛场景 11：自定义场景 12：弹幕
+/// 1：语聊房场景 2：1v1场景 3：才艺房场景 4：秀场场景 5:门票场景 6：竞猜场景 7：跨房PK场景 8：点单场景 9：语音识别场景 10：联赛场景 11：自定义场景 12：弹幕, 13: 蹦迪
 typedef NS_ENUM(NSInteger, SceneType) {
     SceneTypeAudio = 1,
     SceneTypeOneOne = 2,
@@ -18,7 +18,8 @@ typedef NS_ENUM(NSInteger, SceneType) {
     SceneTypeASR = 9,
     SceneTypeLeague = 10,
     SceneTypeCustom = 11,
-    SceneTypeDanmaku = 12
+    SceneTypeDanmaku = 12,
+    SceneTypeDiscoDancing = 13
 };
 
 /// 基础场景服务

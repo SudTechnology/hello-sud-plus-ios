@@ -168,6 +168,7 @@
 		6C46082328630CD7005C99EF /* RespGiftListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46082228630CD6005C99EF /* RespGiftListModel.m */; };
 		6C4608262864062D005C99EF /* LandscapeGuideTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4608252864062D005C99EF /* LandscapeGuideTipView.m */; };
 		6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460828286441B4005C99EF /* WebpImageCacheService.m */; };
+		6C46082D28658E80005C99EF /* DiscoDancingRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46082C28658E7F005C99EF /* DiscoDancingRoomViewController.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
@@ -658,6 +659,8 @@
 		6C4608252864062D005C99EF /* LandscapeGuideTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandscapeGuideTipView.m; sourceTree = "<group>"; };
 		6C460827286441B4005C99EF /* WebpImageCacheService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebpImageCacheService.h; sourceTree = "<group>"; };
 		6C460828286441B4005C99EF /* WebpImageCacheService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebpImageCacheService.m; sourceTree = "<group>"; };
+		6C46082B28658E7F005C99EF /* DiscoDancingRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoDancingRoomViewController.h; sourceTree = "<group>"; };
+		6C46082C28658E7F005C99EF /* DiscoDancingRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoDancingRoomViewController.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1123,6 +1126,7 @@
 		4455AD1327EAC658001516EE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				6C46082A28658E1D005C99EF /* DiscoDancing */,
 				6C4607BE2851F701005C99EF /* Danmaku */,
 				4455ADD327EAC6F7001516EE /* Base */,
 				4455AD1427EAC658001516EE /* Orderentertainment */,
@@ -1692,6 +1696,15 @@
 				6C4608252864062D005C99EF /* LandscapeGuideTipView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		6C46082A28658E1D005C99EF /* DiscoDancing */ = {
+			isa = PBXGroup;
+			children = (
+				6C46082B28658E7F005C99EF /* DiscoDancingRoomViewController.h */,
+				6C46082C28658E7F005C99EF /* DiscoDancingRoomViewController.m */,
+			);
+			path = DiscoDancing;
 			sourceTree = "<group>";
 		};
 		6C702B68283F80DF005D80B8 /* App */ = {
@@ -2491,6 +2504,7 @@
 				4455ADCA27EAC658001516EE /* TicketViewController.m in Sources */,
 				4455ADA527EAC658001516EE /* GameListTableViewCell.m in Sources */,
 				4455AD9C27EAC658001516EE /* GameListViewController.m in Sources */,
+				6C46082D28658E80005C99EF /* DiscoDancingRoomViewController.m in Sources */,
 				6CE6CD32283F591C0026BDAB /* DTRippleAnimationView.m in Sources */,
 				6CE6CD38283F591C0026BDAB /* BaseTableViewCell.m in Sources */,
 				6C4608202862B025005C99EF /* LandscapeNaviView.m in Sources */,
