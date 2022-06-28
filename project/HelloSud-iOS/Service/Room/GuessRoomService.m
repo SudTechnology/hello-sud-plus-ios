@@ -19,7 +19,7 @@
 /// @param finished 完成回调
 + (void)reqBet:(NSInteger)betType coin:(NSInteger)coin userList:(NSArray <NSString *> *)userList finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure {
     NSDictionary *dicParam = @{@"quizType": @(betType), @"coin": @(coin), @"supportedUserIdList": userList == nil ? @[] : userList};
-    [HSHttpService postRequestWithURL:kINTERACTURL(@"quiz/bet/v1") param:dicParam respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"quiz/bet/v1") param:dicParam respClass:BaseRespModel.class showErrorToast:NO success:^(BaseRespModel *resp) {
         if (finished) {
             finished();
         }

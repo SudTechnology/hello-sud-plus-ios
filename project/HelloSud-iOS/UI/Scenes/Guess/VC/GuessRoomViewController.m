@@ -228,6 +228,8 @@
         }                failure:^(NSError *error) {
             if (error.code == 3005) {
                 [ToastUtil show:@"余额不足，快去充值吧~"];
+            } else {
+                [ToastUtil show:error.dt_errMsg];
             }
         }];
     };
@@ -420,6 +422,8 @@
             [ToastUtil show:@"余额不足，自动竞猜已关闭，快去充值吧~"];
             weakSelf.openAutoBet = NO;
             [weakSelf showNaviAutoStateView:NO];
+        } else {
+            [ToastUtil show:error.dt_errMsg];
         }
         DDLogError(@"开启自动扣费：失败：%@", error.dt_errMsg);
         if (finished) finished(NO);
