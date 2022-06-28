@@ -9,6 +9,10 @@
 #import "RoomMoreView.h"
 #import "SuspendRoomView.h"
 
+#define I_GUESS_YOU_SAID      1468434504892882946L // 你说我猜
+#define DIGITAL_BOMB          1468091457989509190L // 数字炸弹
+#define YOU_DRAW_AND_I_GUESS  1461228410184400899L // 你画我猜
+
 @interface BaseSceneViewController () <BDAlphaPlayerMetalViewDelegate>
 
 @property(nonatomic, strong) SceneContentView *contentView;
@@ -23,6 +27,12 @@
 @property(nonatomic, strong) BaseView *sceneView;
 /// 场景服务
 @property(nonatomic, strong) BaseSceneService *service;
+
+@property(nonatomic, strong) UIButton *btnTip;
+@property(nonatomic, strong) MarqueeLabel *asrTipLabel;
+@property(nonatomic, strong) NSTimer *timer;
+@property(nonatomic, weak) id stateNTF;
+@property(nonatomic, weak) id asrStateNTF;
 
 @end
 
@@ -84,6 +94,7 @@
     [self.sceneView addSubview:self.msgBgView];
     [self.msgBgView addSubview:self.msgTableView];
     [self.contentView addSubview:self.inputView];
+    [self.sceneView addSubview:self.asrTipLabel];
 }
 
 - (void)dtLayoutViews {
@@ -137,6 +148,12 @@
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(80);
+    }];
+    [self.asrTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.mas_equalTo(-16);
+        make.height.mas_greaterThanOrEqualTo(0);
+        make.width.mas_equalTo(230);
+        make.bottom.equalTo(self.gameNumLabel);
     }];
 }
 
@@ -212,6 +229,10 @@
     self.gameMicContentView.changeScaleBlock = ^(BOOL isSmall) {
         [weakSelf changeScaleSmallMic:isSmall];
     };
+    /// asr状态变化
+    self.asrStateNTF = [[NSNotificationCenter defaultCenter]addObserverForName:NTF_ASR_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf handlePlayerStateChanged];
+    }];
 }
 
 /// 调整麦位是否缩放
@@ -755,6 +776,7 @@
             [self logoutGame];
         }
     }
+    [self.asrTipLabel setHidden:gameID == HSAudio];
 }
 
 - (void)handleMicList:(NSArray<HSRoomMicList *> *)micList {
@@ -837,7 +859,76 @@
     return YES;
 }
 
+/// 处理游戏状态变化
+- (void)handlePlayerStateChanged {
+    
+    if (!self.sudFSMMGDecorator.keyWordASRing) {
+        return;
+    }
+    if (self.operatorView.voiceBtnState != VoiceBtnStateTypeWaitOpen) {
+        return;
+    }
+    if (self.gameId == DIGITAL_BOMB || self.gameId == YOU_DRAW_AND_I_GUESS || self.gameId == I_GUESS_YOU_SAID) {
+        [self showVoiceTip];
+    }
+}
+
+- (void)showVoiceTip {
+
+    if (!self.btnTip) {
+        self.btnTip = [[UIButton alloc] init];
+        UIImage *bgImage = [[[UIImage imageNamed:@"voice_tip"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 50, 19, 49) resizingMode:UIImageResizingModeStretch] imageFlippedForRightToLeftLayoutDirection];
+        [self.btnTip setBackgroundImage:bgImage forState:UIControlStateNormal];
+        NSString *tip = @"";
+        if (self.gameId == DIGITAL_BOMB) {
+            tip = NSString.dt_asr_open_mic_num_tip;
+        } else {
+            tip = NSString.dt_asr_open_mic_tip;
+        }
+        [self.btnTip setTitle:tip forState:UIControlStateNormal];
+        [self.btnTip setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
+        self.btnTip.titleLabel.font = UIFONT_REGULAR(16);
+        [self.btnTip setContentEdgeInsets:UIEdgeInsetsMake(0, 12, 12, 6)];
+        [self.sceneView addSubview:self.btnTip];
+        [self.btnTip mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_lessThanOrEqualTo(kScreenWidth - 32);
+            make.height.mas_greaterThanOrEqualTo(0);
+            make.bottom.equalTo(self.operatorView.mas_top).offset(0);
+            make.leading.mas_equalTo(16);
+        }];
+        if (self.timer) {
+            [self.timer invalidate];
+        }
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)onTimer:(NSTimer *)timer {
+    [self closeTip];
+}
+
+- (void)closeTip {
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    [self.btnTip removeFromSuperview];
+    self.btnTip = nil;
+}
+
 #pragma mark lazy
+
+- (MarqueeLabel *)asrTipLabel {
+    if (!_asrTipLabel) {
+        _asrTipLabel = [[MarqueeLabel alloc] init];
+        _asrTipLabel.fadeLength = 10;
+        _asrTipLabel.trailingBuffer = 20;
+        _asrTipLabel.font = UIFONT_MEDIUM(11);
+        _asrTipLabel.textColor = UIColor.whiteColor;
+        _asrTipLabel.text = NSString.dt_asr_tip;
+    }
+    return _asrTipLabel;
+}
 
 - (UIImageView *)bgImageView {
     if (!_bgImageView) {
@@ -963,6 +1054,10 @@
 
 - (void)dealloc {
     NSLog(@"base scene vc dealloc");
+    
+    if (self.asrStateNTF) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self.asrStateNTF];
+    }
 }
 
 - (BOOL)isShowGameMic {
