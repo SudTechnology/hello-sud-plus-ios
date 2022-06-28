@@ -79,12 +79,14 @@
 }
 
 - (void)updateWinCount:(NSInteger)count {
+    GuessRankModel *m = (GuessRankModel *)self.model;
+
     NSDictionary *dic = @{NSFontAttributeName: UIFONT_MEDIUM(16), NSForegroundColorAttributeName: HEX_COLOR(@"#000000")};
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", @(count)]
                                                                              attributes:dic];
     attr.yy_alignment = NSTextAlignmentRight;
     NSDictionary *dic2 = @{NSFontAttributeName: UIFONT_REGULAR(12), NSForegroundColorAttributeName: HEX_COLOR_A(@"#000000", 0.6)};
-    NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:@"\n竞猜获胜"
+    NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@", m.tip]
                                                                               attributes:dic2];
     attr2.yy_alignment = NSTextAlignmentRight;
     [attr appendAttributedString:attr2];
@@ -92,12 +94,17 @@
 }
 
 - (void)updateName:(NSString *)name {
+    GuessRankModel *m = (GuessRankModel *)self.model;
+    NSString *subTitle = m.subTitle;
+    if (!subTitle) {
+        subTitle = @"竞猜王者";
+    }
     NSDictionary *dic = @{NSFontAttributeName: UIFONT_MEDIUM(16), NSForegroundColorAttributeName: HEX_COLOR(@"#000000")};
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", name]
                                                                              attributes:dic];
     attr.yy_alignment = NSTextAlignmentLeft;
     NSDictionary *dic2 = @{NSFontAttributeName: UIFONT_REGULAR(12), NSForegroundColorAttributeName: HEX_COLOR_A(@"#666666", 0.6)};
-    NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:@"\n竞猜王者"
+    NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@", subTitle]
                                                                               attributes:dic2];
     attr2.yy_alignment = NSTextAlignmentLeft;
     [attr appendAttributedString:attr2];

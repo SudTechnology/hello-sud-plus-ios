@@ -97,6 +97,10 @@
     self.numFirstView.count = self.firstModel.count;
     self.numSecondView.count = self.secondModel.count;
     self.numThirdView.count = self.thirdModel.count;
+    self.numFirstView.tip = self.firstModel.tip;
+    self.numSecondView.tip = self.secondModel.tip;
+    self.numThirdView.tip = self.thirdModel.tip;
+
 
     [self.rankFirstView dtUpdateUI];
     [self.rankSecondView dtUpdateUI];

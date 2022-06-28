@@ -64,6 +64,7 @@
     self.headImageView.image = [UIImage imageNamed:self.model.avatar];
     NSString *rankImageName = [NSString stringWithFormat:@"rank_head_icon_%@", @(self.model.rank)];
     self.rankIconImageView.image = [UIImage imageNamed:rankImageName];
+    self.tagLabel.text = self.model.subTitle;
     switch (self.model.rank) {
         case 1:{
             [self.headImageView dt_cornerRadius:40];

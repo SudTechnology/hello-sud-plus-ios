@@ -11,7 +11,7 @@
 
 @interface DiscoRankViewController () <JXCategoryViewDelegate>
 @property(nonatomic, strong) BaseView *bgView;
-@property(nonatomic, strong) JXCategoryTitleView *titleCategoryView;
+@property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) JXCategoryTitleView *subTitleCategoryView;
 @property(nonatomic, strong) JXCategoryListContainerView *listContainerView;
 @property(nonatomic, strong) NSArray<NSString *> *subTitles;
@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.dicSelected = [[NSMutableDictionary alloc]init];
+    self.dicSelected = [[NSMutableDictionary alloc] init];
 }
 
 - (BOOL)dtIsHiddenNavigationBar {
@@ -35,7 +35,7 @@
 - (void)dtAddViews {
     [super dtAddViews];
     [self.view addSubview:self.bgView];
-    [self.view addSubview:self.titleCategoryView];
+    [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.subTitleCategoryView];
     [self.view addSubview:self.listContainerView];
     [self.view addSubview:self.backBtn];
@@ -49,16 +49,17 @@
         make.leading.trailing.equalTo(@0);
         make.height.equalTo(@375);
     }];
-    [self.titleCategoryView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(kAppSafeTop));
-        make.height.equalTo(@36);
-        make.width.equalTo(@248);
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(kAppSafeTop + 10));
+        make.width.greaterThanOrEqualTo(@0);
+        make.height.equalTo(@25);
         make.centerX.equalTo(self.view);
     }];
+
     [self.subTitleCategoryView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleCategoryView.mas_bottom).offset(8);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(8);
         make.height.equalTo(@20);
-        make.width.equalTo(@80);
+        make.width.equalTo(@140);
         make.centerX.equalTo(self.view);
     }];
     [self.listContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,7 +70,7 @@
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@24);
         make.leading.equalTo(@16);
-        make.centerY.equalTo(self.titleCategoryView);
+        make.centerY.equalTo(self.titleLabel);
     }];
 
 }
@@ -78,6 +79,7 @@
     [super dtConfigUI];
     self.view.backgroundColor = UIColor.whiteColor;
     self.subTitleCategoryView.listContainer = self.listContainerView;
+    self.titleLabel.text = @"蹦迪排行";
 }
 
 
@@ -99,44 +101,20 @@
     return _bgView;
 }
 
-- (JXCategoryTitleView *)titleCategoryView {
-    if (!_titleCategoryView) {
-        _titleCategoryView = [[JXCategoryTitleView alloc] init];
-        _titleCategoryView.delegate = self;
-        _titleCategoryView.titleColor = HEX_COLOR(@"#ffffff");
-        _titleCategoryView.titleSelectedColor = HEX_COLOR(@"#1A1A1A");
-        _titleCategoryView.titleFont = UIFONT_REGULAR(14);
-        _titleCategoryView.titleSelectedFont = UIFONT_MEDIUM(14);
-        _titleCategoryView.backgroundColor = HEX_COLOR_A(@"#C0A48F", 0.3);
-        _titleCategoryView.titles = @[@"竞猜王", @"大神榜"];
-        _titleCategoryView.cellSpacing = 0;
-        _titleCategoryView.cellWidth = 124;
-        JXCategoryIndicatorBackgroundView *backgroundIndicator = [[JXCategoryIndicatorBackgroundView alloc] init];
-        // 设置指示器固定宽度
-        backgroundIndicator.indicatorColor = HEX_COLOR(@"#FFF2E3");
-        backgroundIndicator.indicatorCornerRadius = 0;
-        backgroundIndicator.scrollEnabled = NO;
-//        backgroundIndicator.indicatorWidth = 124;
-        backgroundIndicator.indicatorWidthIncrement = 0;
-        _titleCategoryView.indicators = @[backgroundIndicator];
-
-    }
-    return _titleCategoryView;
-}
-
 - (JXCategoryTitleView *)subTitleCategoryView {
     if (!_subTitleCategoryView) {
+        self.subTitles = @[@"焦点王", @"人气主播榜"];
         _subTitleCategoryView = [[JXCategoryTitleView alloc] init];
         _subTitleCategoryView.delegate = self;
         _subTitleCategoryView.titleColor = HEX_COLOR_A(@"#ffffff", 0.8);
         _subTitleCategoryView.titleSelectedColor = HEX_COLOR(@"#ffffff");
         _subTitleCategoryView.titleFont = UIFONT_REGULAR(12);
         _subTitleCategoryView.titleSelectedFont = UIFONT_MEDIUM(12);
-        _subTitleCategoryView.titles = @[@"日榜", @"周榜"];
+        _subTitleCategoryView.titles = self.subTitles;
         _subTitleCategoryView.cellSpacing = 30;
         _subTitleCategoryView.contentEdgeInsetLeft = 0;
         _subTitleCategoryView.contentEdgeInsetRight = 0;
-        self.subTitles = @[@"日榜", @"周榜"];
+
 
         JXCategoryIndicatorLineView *lineIndicator = [[JXCategoryIndicatorLineView alloc] init];
         // 设置指示器固定宽度
@@ -148,6 +126,16 @@
     return _subTitleCategoryView;
 }
 
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.font = UIFONT_MEDIUM(18);
+        _titleLabel.textColor = HEX_COLOR(@"#ffffff");
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _titleLabel;
+}
+
 - (JXCategoryListContainerView *)listContainerView {
     if (!_listContainerView) {
         // 列表容器视图
@@ -157,21 +145,8 @@
 }
 
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
-    if (self.titleCategoryView == categoryView) {
-        self.titleIndex = index;
-        NSString *key = [NSString stringWithFormat:@"%@", @(self.titleIndex)];
-        if (self.dicSelected[key]) {
-            self.subTitleCategoryView.defaultSelectedIndex = [self.dicSelected[key] integerValue];
-        } else {
-            self.subTitleCategoryView.defaultSelectedIndex = 0;
-        }
-        [self.subTitleCategoryView reloadData];
-    } else if (self.subTitleCategoryView == categoryView) {
-        NSString *key = [NSString stringWithFormat:@"%@", @(self.titleIndex)];
-        self.dicSelected[key] = @(index);
-    }
 
-    [_listContainerView reloadData];
+//    [_listContainerView reloadData];
 }
 
 #pragma mark - JXCategoryListContainerViewDelegate
@@ -185,15 +160,11 @@
 - (id <JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     GuessRankContentView *listView = [[GuessRankContentView alloc] init];
     listView.dataList = [self createDataList];
-    if (self.titleIndex == 0) {
-        listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"盛世红盛" avatar:@"ic_avatar_1"];
-        listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"念念不忘" avatar:@"ic_avatar_2"];
-        listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"杏岛绮月" avatar:@"ic_avatar_3"];
-    } else {
-        listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"满馨" avatar:@"ic_avatar_10"];
-        listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"贝茗" avatar:@"ic_avatar_9"];
-        listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"庹启黛" avatar:@"ic_avatar_8"];
-    }
+    NSString *tip = @"获得特写(次)";
+    listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"盛世红盛" avatar:@"ic_avatar_1" tip:tip subTitle:@""];
+    listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"念念不忘" avatar:@"ic_avatar_2" tip:tip subTitle:@""];
+    listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"杏岛绮月" avatar:@"ic_avatar_3" tip:tip subTitle:@""];
+
 
     [listView dtUpdateUI];
     return listView;
@@ -203,24 +174,15 @@
 
 - (NSArray *)createDataList {
     NSMutableArray *arr = [[NSMutableArray alloc] init];
+    NSString *tip = @"获得特写(次)";
+    [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"娜以香" avatar:@"ic_avatar_4" tip:tip subTitle:@""]];
+    [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"大真蓓" avatar:@"ic_avatar_5" tip:tip subTitle:@""]];
+    [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"宦滢" avatar:@"ic_avatar_6" tip:tip subTitle:@""]];
+    [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7" tip:tip subTitle:@""]];
+    [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"庹启黛" avatar:@"ic_avatar_8" tip:tip subTitle:@""]];
+    [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"贝茗" avatar:@"ic_avatar_9" tip:tip subTitle:@""]];
+    [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"满馨" avatar:@"ic_avatar_10" tip:tip subTitle:@""]];
 
-    if (self.titleIndex == 0) {
-        [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"娜以香" avatar:@"ic_avatar_4"]];
-        [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"大真蓓" avatar:@"ic_avatar_5"]];
-        [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"宦滢" avatar:@"ic_avatar_6"]];
-        [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7"]];
-        [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"庹启黛" avatar:@"ic_avatar_8"]];
-        [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"贝茗" avatar:@"ic_avatar_9"]];
-        [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"满馨" avatar:@"ic_avatar_10"]];
-    } else {
-        [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"满馨" avatar:@"ic_avatar_10"]];
-        [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"贝茗" avatar:@"ic_avatar_9"]];
-        [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"庹启黛" avatar:@"ic_avatar_8"]];
-        [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7"]];
-        [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"宦滢" avatar:@"ic_avatar_6"]];
-        [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"大真蓓" avatar:@"ic_avatar_5"]];
-        [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"娜以香" avatar:@"ic_avatar_4"]];
-    }
     return arr;
 }
 @end

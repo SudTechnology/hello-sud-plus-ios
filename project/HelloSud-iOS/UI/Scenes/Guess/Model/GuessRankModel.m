@@ -9,12 +9,14 @@
 #import "GuessRankModel.h"
 
 @implementation GuessRankModel
-+ (GuessRankModel *)createModel:(NSInteger)rank count:(NSInteger)count name:(NSString *)name avatar:(NSString *)avatar {
-    GuessRankModel *m = [[GuessRankModel alloc]init];
++ (GuessRankModel *)createModel:(NSInteger)rank count:(NSInteger)count name:(NSString *)name avatar:(NSString *)avatar tip:(NSString *)tip subTitle:(NSString *)subTitle {
+    GuessRankModel *m = [[GuessRankModel alloc] init];
     m.rank = rank;
     m.count = count;
     m.name = name;
     m.avatar = avatar;
+    m.tip = tip;
+    m.subTitle = subTitle;
     return m;
 }
 @end

@@ -15,7 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign)NSInteger count;
 @property (nonatomic, strong)NSString * name;
 @property (nonatomic, strong)NSString * avatar;
-+(GuessRankModel *)createModel:(NSInteger)rank count:(NSInteger)count name:(NSString *)name avatar:(NSString *)avatar;
+@property (nonatomic, strong)NSString * tip;
+@property (nonatomic, strong)NSString * subTitle;
+
++ (GuessRankModel *)createModel:(NSInteger)rank count:(NSInteger)count name:(NSString *)name avatar:(NSString *)avatar tip:(NSString *)tip subTitle:(NSString *)subTitle;
 @end
 
 NS_ASSUME_NONNULL_END

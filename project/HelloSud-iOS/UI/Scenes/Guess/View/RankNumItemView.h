@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RankNumItemView : BaseView
 @property (nonatomic, assign)NSInteger rank;
 @property (nonatomic, assign)NSInteger count;
+@property (nonatomic, strong)NSString * tip;
 @end
 
 NS_ASSUME_NONNULL_END

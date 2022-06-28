@@ -185,14 +185,15 @@
 - (id <JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     GuessRankContentView *listView = [[GuessRankContentView alloc] init];
     listView.dataList = [self createDataList];
+    NSString *subTitle = @"竞猜王者";
     if (self.titleIndex == 0) {
-        listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"盛世红盛" avatar:@"ic_avatar_1"];
-        listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"念念不忘" avatar:@"ic_avatar_2"];
-        listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"杏岛绮月" avatar:@"ic_avatar_3"];
+        listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"盛世红盛" avatar:@"ic_avatar_1" tip:@"胜利(场)" subTitle:subTitle];
+        listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"念念不忘" avatar:@"ic_avatar_2" tip:@"胜利(场)" subTitle:subTitle];
+        listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"杏岛绮月" avatar:@"ic_avatar_3" tip:@"胜利(场)" subTitle:subTitle];
     } else {
-        listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"满馨" avatar:@"ic_avatar_10"];
-        listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"贝茗" avatar:@"ic_avatar_9"];
-        listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"庹启黛" avatar:@"ic_avatar_8"];
+        listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"满馨" avatar:@"ic_avatar_10" tip:@"胜利(场)" subTitle:subTitle];
+        listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"贝茗" avatar:@"ic_avatar_9" tip:@"胜利(场)" subTitle:subTitle];
+        listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"庹启黛" avatar:@"ic_avatar_8" tip:@"胜利(场)" subTitle:subTitle];
     }
 
     [listView dtUpdateUI];
@@ -205,21 +206,21 @@
     NSMutableArray *arr = [[NSMutableArray alloc] init];
 
     if (self.titleIndex == 0) {
-        [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"娜以香" avatar:@"ic_avatar_4"]];
-        [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"大真蓓" avatar:@"ic_avatar_5"]];
-        [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"宦滢" avatar:@"ic_avatar_6"]];
-        [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7"]];
-        [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"庹启黛" avatar:@"ic_avatar_8"]];
-        [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"贝茗" avatar:@"ic_avatar_9"]];
-        [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"满馨" avatar:@"ic_avatar_10"]];
+        [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"娜以香" avatar:@"ic_avatar_4" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"大真蓓" avatar:@"ic_avatar_5" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"宦滢" avatar:@"ic_avatar_6" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"庹启黛" avatar:@"ic_avatar_8" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"贝茗" avatar:@"ic_avatar_9" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"满馨" avatar:@"ic_avatar_10" tip:@"胜利(场)" subTitle:nil]];
     } else {
-        [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"满馨" avatar:@"ic_avatar_10"]];
-        [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"贝茗" avatar:@"ic_avatar_9"]];
-        [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"庹启黛" avatar:@"ic_avatar_8"]];
-        [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7"]];
-        [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"宦滢" avatar:@"ic_avatar_6"]];
-        [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"大真蓓" avatar:@"ic_avatar_5"]];
-        [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"娜以香" avatar:@"ic_avatar_4"]];
+        [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"满馨" avatar:@"ic_avatar_10" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"贝茗" avatar:@"ic_avatar_9" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"庹启黛" avatar:@"ic_avatar_8" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"宦滢" avatar:@"ic_avatar_6" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"大真蓓" avatar:@"ic_avatar_5" tip:@"胜利(场)" subTitle:nil]];
+        [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"娜以香" avatar:@"ic_avatar_4" tip:@"胜利(场)" subTitle:nil]];
     }
     return arr;
 }

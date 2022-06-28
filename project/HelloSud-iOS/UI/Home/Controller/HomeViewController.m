@@ -17,20 +17,21 @@
 #import "GameConfigViewController.h"
 #import "GuessCategoryView.h"
 #import "MoreGuessViewController.h"
+#import "DiscoRankViewController.h"
 
-@interface HomeViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
-@property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *dataList;
+@interface HomeViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) NSMutableArray *dataList;
 /// 头部数据源
-@property (nonatomic, strong) NSMutableArray <HSSceneModel *> *headerSceneList;
-@property (nonatomic, strong) NSMutableArray <NSArray<HSGameItem *>*> *headerGameList;
-@property (nonatomic, strong) SearchHeaderView *searchHeaderView;
-@property (nonatomic, strong) HomeCategoryView *homeCategoryView;
-@property (nonatomic, assign) CGFloat itemW;
-@property (nonatomic, assign) CGFloat itemH;
-@property (nonatomic, assign) BOOL isClickSegItem;
+@property(nonatomic, strong) NSMutableArray <HSSceneModel *> *headerSceneList;
+@property(nonatomic, strong) NSMutableArray <NSArray<HSGameItem *> *> *headerGameList;
+@property(nonatomic, strong) SearchHeaderView *searchHeaderView;
+@property(nonatomic, strong) HomeCategoryView *homeCategoryView;
+@property(nonatomic, assign) CGFloat itemW;
+@property(nonatomic, assign) CGFloat itemH;
+@property(nonatomic, assign) BOOL isClickSegItem;
 /// 竞猜游戏列表
-@property (nonatomic, strong)NSArray<MoreGuessGameModel *> *quizGameInfoList;
+@property(nonatomic, strong) NSArray<MoreGuessGameModel *> *quizGameInfoList;
 
 @end
 
@@ -41,14 +42,14 @@
 }
 
 - (void)dtConfigUI {
-    self.itemW = (kScreenWidth - 32 - 24 - 24 )/4;
+    self.itemW = (kScreenWidth - 32 - 24 - 24) / 4;
     self.itemH = 125 + 12;
     self.view.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
 - (void)dtConfigEvents {
     WeakSelf
-    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
         if (AppService.shared.login.isRefreshedToken) {
             [weakSelf requestData];
         } else {
@@ -126,11 +127,12 @@
 }
 
 #pragma mark - requst Data
+
 - (void)requestData {
     WeakSelf
     [HSHttpService postRequestWithURL:kINTERACTURL(@"game/list/v1") param:@{} respClass:GameListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
         [weakSelf.collectionView.mj_header endRefreshing];
-        GameListModel *model = (GameListModel *)resp;
+        GameListModel *model = (GameListModel *) resp;
         [weakSelf.headerSceneList removeAllObjects];
         [weakSelf.headerGameList removeAllObjects];
         [weakSelf.dataList removeAllObjects];
@@ -162,7 +164,7 @@
 
         /// dataList  headerGameList  headerSceneList 业务需求赋值
         for (HSSceneModel *m in model.sceneList) {
-            NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%ld", (long)m.sceneId]];
+            NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%ld", (long) m.sceneId]];
             NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
             if (arr.count == 0) {
                 NSArray *waitArr = [self makeGameWaitItems:3];
@@ -195,7 +197,7 @@
 
         [weakSelf.collectionView reloadData];
         weakSelf.homeCategoryView.sceneList = weakSelf.headerSceneList;
-    } failure: ^(NSError *error){
+    }                         failure:^(NSError *error) {
         [ToastUtil show:error.dt_errMsg];
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
@@ -238,9 +240,9 @@
         return;
     }
     NSArray *visibleCellIndex = [self.collectionView indexPathsForVisibleSupplementaryElementsOfKind:UICollectionElementKindSectionHeader];
-    NSArray *sortedIndexPaths = [visibleCellIndex sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        NSIndexPath *path1 = (NSIndexPath *)obj1;
-        NSIndexPath *path2 = (NSIndexPath *)obj2;
+    NSArray *sortedIndexPaths = [visibleCellIndex sortedArrayUsingComparator:^NSComparisonResult(id _Nonnull obj1, id _Nonnull obj2) {
+        NSIndexPath *path1 = (NSIndexPath *) obj1;
+        NSIndexPath *path2 = (NSIndexPath *) obj2;
         return [path1 compare:path2];
     }];
     NSIndexPath *indexPath = [sortedIndexPaths firstObject];
@@ -291,10 +293,10 @@
 }
 
 // 设置Header的尺寸
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     HSSceneModel *m = self.headerSceneList[section];
     UIFont *font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
-    CGRect rect = [m.sceneName boundingRectWithSize:CGSizeMake(kScreenWidth - 62, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
+    CGRect rect = [m.sceneName boundingRectWithSize:CGSizeMake(kScreenWidth - 62, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: font} context:nil];
     CGFloat baseH = 140;
     if (m.sceneId == SceneTypeGuess) {
         baseH += 290;
@@ -303,20 +305,26 @@
 }
 
 // 设置Footer的尺寸
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     return CGSizeMake(kScreenWidth, 12);
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     WeakSelf
     UICollectionReusableView *supplementaryView;
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
+        HSSceneModel *sceneModel = self.headerSceneList[indexPath.section];
         view.sceneModel = self.headerSceneList[indexPath.section];
         view.headerGameList = self.dataList[indexPath.section];
         view.quizGameInfoList = self.quizGameInfoList;
         view.customBlock = ^(UIButton *sender) {
-            GameConfigViewController *vc = GameConfigViewController.new;
+            BaseSceneViewController *vc = nil;
+            if (sceneModel.sceneId == SceneTypeDiscoDancing) {
+                vc = [[DiscoRankViewController alloc] init];
+            } else {
+                vc = GameConfigViewController.new;
+            }
             [weakSelf.navigationController pushViewController:vc animated:true];
         };
         view.moreGuessBlock = ^(UIButton *sender) {
@@ -325,7 +333,7 @@
             [weakSelf.navigationController pushViewController:vc animated:true];
         };
         supplementaryView = view;
-    } else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
+    } else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
         HomeFooterReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HomeFooterReusableView" forIndexPath:indexPath];
         supplementaryView = view;
     }
@@ -333,11 +341,12 @@
 }
 
 #pragma mark - 懒加载
+
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         CGFloat itemW = (kScreenWidth - 32) / 3;
         CGFloat itemH = 62;
-        
+
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         flowLayout.itemSize = CGSizeMake(itemW, itemH);

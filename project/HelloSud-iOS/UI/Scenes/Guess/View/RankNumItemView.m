@@ -36,7 +36,7 @@
 - (void)dtUpdateUI {
     [super dtUpdateUI];
     NSDictionary *dic = @{NSFontAttributeName: UIFONT_REGULAR(10), NSForegroundColorAttributeName: HEX_COLOR_A(@"#000000", 0.6)};
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:@"胜利(场)\n"
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", self.tip]
                                                                              attributes:dic];
     NSDictionary *dic2 = @{NSFontAttributeName: UIFONT_BOLD(24), NSForegroundColorAttributeName: HEX_COLOR(@"#5C3B20")};
     NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", @(self.count)]
