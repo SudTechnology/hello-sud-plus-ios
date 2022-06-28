@@ -776,7 +776,8 @@
             [self logoutGame];
         }
     }
-    [self.asrTipLabel setHidden:gameID == HSAudio];
+    BOOL showTip = self.gameId == DIGITAL_BOMB || self.gameId == YOU_DRAW_AND_I_GUESS || self.gameId == I_GUESS_YOU_SAID;
+    [self.asrTipLabel setHidden:showTip ? NO : YES];
 }
 
 - (void)handleMicList:(NSArray<HSRoomMicList *> *)micList {
@@ -926,6 +927,7 @@
         _asrTipLabel.font = UIFONT_MEDIUM(11);
         _asrTipLabel.textColor = UIColor.whiteColor;
         _asrTipLabel.text = NSString.dt_asr_tip;
+        _asrTipLabel.hidden = YES;
     }
     return _asrTipLabel;
 }
