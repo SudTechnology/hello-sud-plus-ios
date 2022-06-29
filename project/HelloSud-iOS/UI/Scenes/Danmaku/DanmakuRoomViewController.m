@@ -199,6 +199,7 @@
     [self closeGuideTipView];
     if (self.landscapeNaviView.hidden) {
         [self showLandscapeNaviView];
+        [self beginCountdown];
     } else {
         [self closeLandscapeNaviView];
     }
