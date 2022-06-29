@@ -63,6 +63,7 @@
     [self loginRoom];
     if (self.gameId > 0 && self.isNeedToLoadGame) {
         [self loginGame];
+        [self roomGameDidChanged:self.gameId];
     }
     [self dtUpdateUI];
     [self.naviView hiddenNodeWithRoleType:kAudioRoomService.roleType];

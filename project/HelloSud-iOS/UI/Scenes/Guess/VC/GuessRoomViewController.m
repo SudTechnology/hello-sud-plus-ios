@@ -226,11 +226,7 @@
             userModel.sex = AppService.shared.login.loginUserInfo.sex;
             [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
         }                failure:^(NSError *error) {
-            if (error.code == 3005) {
-                [ToastUtil show:@"余额不足，快去充值吧~"];
-            } else {
-                [ToastUtil show:error.dt_errMsg];
-            }
+            [ToastUtil show:error.dt_errMsg];
         }];
     };
     [DTSheetView show:v onCloseCallback:^{
