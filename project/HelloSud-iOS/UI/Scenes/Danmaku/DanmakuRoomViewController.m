@@ -27,8 +27,10 @@
 @property(nonatomic, strong) UIButton *enterLandscapeBtn;
 /// 退出横屏按钮
 @property(nonatomic, strong) UIButton *exitLandscapeBtn;
-
+/// 当前屏幕状态
 @property(nonatomic, assign) BOOL isLandscape;
+/// 是否手动横屏
+@property(nonatomic, assign) BOOL isManualLandscape;
 @property(nonatomic, strong) NSArray<DanmakuCallWarcraftModel *> *dataList;
 // 横屏倒计时
 @property(nonatomic, strong) DTTimer *landscapeNaviHiddenTimer;
@@ -395,11 +397,13 @@
 
 - (void)exitLandscape {
     [self endHiddenNaviCountdown];
+    self.isManualLandscape = NO;
     [self dtSwitchOrientation:UIInterfaceOrientationPortrait];
 }
 
 - (void)enterLandscape {
     AppService.shared.alreadyShowLandscapePopAlert = YES;
+    self.isManualLandscape = YES;
     [self dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
 }
 
@@ -526,7 +530,7 @@
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortrait;
+    return self.isManualLandscape ? UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight : UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
