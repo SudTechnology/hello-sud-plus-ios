@@ -142,8 +142,8 @@
 
 - (void)onConfirmBtnClick:(id)sender {
 
-    NSMutableArray *selectedUserIdList = [[NSMutableArray alloc]init];
-    NSMutableArray *msgBetUserList = [[NSMutableArray alloc]init];
+    NSMutableArray *selectedUserIdList = [[NSMutableArray alloc] init];
+    NSMutableArray *msgBetUserList = [[NSMutableArray alloc] init];
     for (int i = 0; i < self.dataList.count; ++i) {
         GuessPlayerModel *playerModel = self.dataList[i];
         if (playerModel.isSelected) {
@@ -165,7 +165,9 @@
         [ToastUtil show:@"已投注，等待游戏结果公布"];
         DDLogDebug(@"投注成功");
         [kGuessService sendBetNotifyMsg:kGuessService.currentRoomVC.roomID betUsers:msgBetUserList];
-    }                failure:nil];
+    }                failure:^(NSError *error) {
+        [ToastUtil show:error.dt_errMsg];
+    }];
 }
 
 /// 更新确认按钮值

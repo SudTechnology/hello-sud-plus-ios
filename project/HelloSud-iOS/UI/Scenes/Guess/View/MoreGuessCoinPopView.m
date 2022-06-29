@@ -118,7 +118,7 @@
     WeakSelf
     [UserService.shared reqUserCoinDetail:^(int64_t i) {
         [weakSelf updateCoin:i];
-    } fail:^(NSString *errStr) {
+    }                                fail:^(NSString *errStr) {
         [ToastUtil show:errStr];
     }];
 }
@@ -134,7 +134,9 @@
         if (self.onSupportCoinBlock) {
             self.onSupportCoinBlock(self.selectedCoin);
         }
-    }                failure:nil];
+    }                failure:^(NSError *error) {
+        [ToastUtil show:error.dt_errMsg];
+    }];
 }
 
 - (void)updateSelectState:(MoreGuessCoinItemView *)selectedView {
