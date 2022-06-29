@@ -373,7 +373,8 @@
 
 /// 将要发送消息
 /// @param msg msg
-- (void)onWillSendMsg:(RoomBaseCMDModel *)msg {
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void(^)(BOOL shouldSend))shouldSend {
+    if (shouldSend) shouldSend(YES);
     DDLogDebug(@"onWillSendMsg");
 }
 

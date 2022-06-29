@@ -286,7 +286,7 @@
     return self.enterModel.roleType == 1;
 }
 
-- (void)onWillSendMsg:(RoomBaseCMDModel *)msg {
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void (^)(BOOL shouldSend))shouldSend {
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
         // 发送弹幕
@@ -295,13 +295,16 @@
         }                          failure:^(NSError *error) {
 
         }];
+        if (shouldSend) shouldSend(YES);
     } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
         GiftModel *giftModel = [m getGiftModel];
         // 发送礼物
         [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount price:giftModel.price type:m.type == 1 ? 2 : 1 finished:^{
             DDLogDebug(@"发送礼物成功");
+            if (shouldSend) shouldSend(YES);
         }                       failure:^(NSError *error) {
+            if (shouldSend) shouldSend(NO);
 
         }];
     }
@@ -425,7 +428,7 @@
 
     [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.landscapeNaviView.transform = CGAffineTransformMakeTranslation(0, -(self.landscapeNaviView.mj_h + self.landscapeNaviView.mj_y + 10));
-        self.exitLandscapeBtn.transform = CGAffineTransformMakeTranslation(0,  kScreenHeight - self.exitLandscapeBtn.mj_y);
+        self.exitLandscapeBtn.transform = CGAffineTransformMakeTranslation(0, kScreenHeight - self.exitLandscapeBtn.mj_y);
     }                completion:^(BOOL finished) {
         self.landscapeNaviView.hidden = YES;
     }];

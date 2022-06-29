@@ -169,7 +169,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 将要发送消息
 /// @param msg msg
-- (void)onWillSendMsg:(RoomBaseCMDModel *)msg;
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void(^)(BOOL shouldSend))shouldSend;
 /// 已经发送消息
 /// @param msg msg
 - (void)onDidSendMsg:(RoomBaseCMDModel *)msg;
