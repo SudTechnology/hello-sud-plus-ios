@@ -51,7 +51,7 @@
 
 }
 
-- (void)beginCountdown {
+- (void)beginCountdown:(void(^)(void))finished  {
     WeakSelf
     if (!self.timer) {
         // 倒计时秒数
@@ -61,6 +61,7 @@
             if (weakSelf.countdown <= 0) {
                 [weakSelf endCountdown];
                 weakSelf.hidden = NO;
+                if (finished) finished();
             }
         }];
     }
@@ -71,8 +72,8 @@
     self.timer = nil;
 }
 
-- (void)show {
-    [self beginCountdown];
+- (void)show:(void(^)(void))finished {
+    [self beginCountdown:finished];
 }
 
 - (void)close {

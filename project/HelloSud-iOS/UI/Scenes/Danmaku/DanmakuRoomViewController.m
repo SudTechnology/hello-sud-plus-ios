@@ -23,6 +23,8 @@
 @property(nonatomic, strong) LandscapeNaviView *landscapeNaviView;
 /// 横屏引导
 @property(nonatomic, strong) LandscapeGuideTipView *guideTipView;
+/// 横屏引导蒙层
+@property(nonatomic, strong) UIView *guideTipBgView;
 /// 进入横屏按钮
 @property(nonatomic, strong) UIButton *enterLandscapeBtn;
 /// 退出横屏按钮
@@ -219,6 +221,10 @@
     if (_guideTipView) {
         [_guideTipView close];
     }
+    if (_guideTipBgView) {
+        [_guideTipBgView removeFromSuperview];
+        _guideTipBgView = nil;
+    }
 }
 
 /// 重置视频视图
@@ -328,6 +334,8 @@
             if (shouldSend) shouldSend(NO);
 
         }];
+    } else {
+        if (shouldSend) shouldSend(YES);
     }
 }
 
@@ -410,17 +418,24 @@
 /// 检查是否需要横屏引导
 - (void)checkIfNeedToShowLandscapeGuide {
 
+    WeakSelf
     if (AppService.shared.alreadyShowLandscapeBubbleTip) {
         return;
     }
     AppService.shared.alreadyShowLandscapeBubbleTip = YES;
+    [self.sceneView insertSubview:self.guideTipBgView belowSubview:self.quickSendView];
     [self.sceneView addSubview:self.guideTipView];
+    [self.guideTipBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.leading.top.trailing.bottom.equalTo(@0);
+    }];
     [self.guideTipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.quickSendView.mas_top).offset(0);
         make.trailing.equalTo(self.quickSendView);
         make.width.height.greaterThanOrEqualTo(@0);
     }];
-    [self.guideTipView show];
+    [self.guideTipView show:^{
+        weakSelf.guideTipBgView.hidden = NO;
+    }];
 }
 
 /// 开始隐藏导航栏倒计时
@@ -519,6 +534,18 @@
         _exitLandscapeBtn.hidden = YES;
     }
     return _exitLandscapeBtn;
+}
+
+
+
+- (UIView *)guideTipBgView {
+    if (!_guideTipBgView) {
+        _guideTipBgView = [[UIView alloc] init];
+        _guideTipBgView.backgroundColor = HEX_COLOR_A(@"#000000", 0.5);
+        _guideTipBgView.userInteractionEnabled = NO;
+        _guideTipBgView.hidden = YES;
+    }
+    return _guideTipBgView;
 }
 
 - (LandscapeGuideTipView *)guideTipView {
