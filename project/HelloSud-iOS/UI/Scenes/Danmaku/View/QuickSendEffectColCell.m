@@ -55,11 +55,13 @@
         make.height.equalTo(self.callView);
     }];
     [self.callLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.giftLabel.mas_trailing);
+        make.leading.equalTo(self.giftLabel.mas_trailing).offset(2);
         make.trailing.equalTo(@0);
         make.top.equalTo(@0);
         make.height.equalTo(self.callView);
     }];
+    [self.giftLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.callLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 }
 
 - (void)dtConfigUI {
