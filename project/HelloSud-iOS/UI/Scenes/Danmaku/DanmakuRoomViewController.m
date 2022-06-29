@@ -37,6 +37,15 @@
 
 @implementation DanmakuRoomViewController
 
+- (void)dealloc {
+    if (self.landscapeNaviHiddenTimer) {
+        [self.landscapeTipTimer stopTimer];
+    }
+    if (self.landscapeTipTimer) {
+        [self.landscapeTipTimer stopTimer];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -163,6 +172,10 @@
 }
 
 - (void)onTapVideo:(id)tap {
+
+    if (![self isLandscape]) {
+        return;
+    }
 
     [self endCountdown];
     [self closeGuideTipView];
