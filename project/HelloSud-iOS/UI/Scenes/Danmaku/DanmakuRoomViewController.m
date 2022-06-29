@@ -385,16 +385,17 @@
 }
 
 - (void)enterLandscape {
+    AppService.shared.alreadyShowLandscapePopAlert = YES;
     [self dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
 }
 
 /// 检查是否需要横屏引导
 - (void)checkIfNeedToShowLandscapeGuide {
 
-    if (AppService.shared.alreadyShowLandscapeGuideTip) {
+    if (AppService.shared.alreadyShowLandscapeBubbleTip) {
         return;
     }
-    AppService.shared.alreadyShowLandscapeGuideTip = YES;
+    AppService.shared.alreadyShowLandscapeBubbleTip = YES;
     [self.sceneView addSubview:self.guideTipView];
     [self.guideTipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.quickSendView.mas_top).offset(0);
