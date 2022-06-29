@@ -179,6 +179,16 @@
     [self.videoContentView addGestureRecognizer:videoTap];
 }
 
+/// 设置游戏房间内容
+- (void)setupGameRoomContent {
+    [super setupGameRoomContent];
+    [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.quickSendView.mas_bottom).offset(30);
+        make.leading.trailing.mas_equalTo(self.contentView);
+        make.bottom.mas_equalTo(self.operatorView.mas_top).offset(0);
+    }];
+}
+
 - (void)onTapVideo:(id)tap {
 
     if (![self isLandscape]) {
