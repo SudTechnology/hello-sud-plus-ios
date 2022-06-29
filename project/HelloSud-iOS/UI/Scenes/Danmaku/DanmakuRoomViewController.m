@@ -23,6 +23,8 @@
 @property(nonatomic, strong) LandscapeNaviView *landscapeNaviView;
 /// 横屏引导
 @property(nonatomic, strong) LandscapeGuideTipView *guideTipView;
+/// 进入横屏按钮
+@property(nonatomic, strong) UIButton *enterLandscapeBtn;
 /// 退出横屏按钮
 @property(nonatomic, strong) UIButton *exitLandscapeBtn;
 
@@ -67,6 +69,7 @@
 
     [self.sceneView addSubview:self.videoContentView];
     [self.videoContentView addSubview:self.videoView];
+    [self.videoContentView addSubview:self.enterLandscapeBtn];
     [self.sceneView addSubview:self.quickSendView];
     [self.sceneView addSubview:self.landscapeNaviView];
     [self.sceneView addSubview:self.exitLandscapeBtn];
@@ -81,6 +84,11 @@
     }];
     [self.videoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.bottom.equalTo(@0);
+    }];
+    [self.enterLandscapeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(@-6);
+        make.trailing.equalTo(@-16);
+        make.width.height.equalTo(@24);
     }];
     [self.quickSendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
@@ -194,7 +202,7 @@
 
 /// 重置视频视图
 - (void)resetVideoView {
-    [self.videoContentView addSubview:self.videoView];
+    [self.videoContentView insertSubview:self.videoView atIndex:0];
     [self.videoView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.bottom.equalTo(@0);
     }];
@@ -238,7 +246,7 @@
     v.enterBlock = ^{
         // 强制横屏
         [DTAlertView close];
-        [weakSelf dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
+        [weakSelf enterLandscape];
 
     };
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
@@ -310,6 +318,7 @@
     BOOL isLandscape = self.isLandscape;
     if (isLandscape) {
         // 横屏
+        self.enterLandscapeBtn.hidden = YES;
         self.landscapeNaviView.hidden = NO;
         self.exitLandscapeBtn.hidden = NO;
         [self.quickSendView updateOrientation:YES];
@@ -331,6 +340,7 @@
         [self beginCountdown];
         [self stopCheckLandscapeTimer];
     } else {
+        self.enterLandscapeBtn.hidden = NO;
         [self.quickSendView updateOrientation:NO];
         self.landscapeNaviView.hidden = YES;
         self.exitLandscapeBtn.hidden = YES;
@@ -349,12 +359,20 @@
     }
 }
 
+- (void)onClickEnterBtn:(UIButton *)sender {
+    [self enterLandscape];
+}
+
 - (void)onClickExitBtn:(UIButton *)sender {
     [self exitLandscape];
 }
 
 - (void)exitLandscape {
     [self dtSwitchOrientation:UIInterfaceOrientationPortrait];
+}
+
+- (void)enterLandscape {
+    [self dtSwitchOrientation:UIInterfaceOrientationLandscapeRight];
 }
 
 /// 检查是否需要横屏引导
@@ -446,6 +464,15 @@
         [_quickSendView showOpen:NO];
     }
     return _quickSendView;
+}
+
+- (UIButton *)enterLandscapeBtn {
+    if (!_enterLandscapeBtn) {
+        _enterLandscapeBtn = [[UIButton alloc] init];
+        [_enterLandscapeBtn setImage:[UIImage imageNamed:@"dm_fullscreen"] forState:UIControlStateNormal];
+        [_enterLandscapeBtn addTarget:self action:@selector(onClickEnterBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _enterLandscapeBtn;
 }
 
 - (UIButton *)exitLandscapeBtn {
