@@ -75,7 +75,7 @@
 
     GiftModel *currentModel = self.dataList[indexPath.row];
     currentModel.isSelected = YES;
-    if (self.didSelectedGift != nil && currentModel.giftID != self.didSelectedGift.giftID) {
+    if (self.didSelectedGift != nil && ![currentModel.giftKey isEqualToString:self.didSelectedGift.giftKey]) {
         self.didSelectedGift.isSelected = NO;
         self.didSelectedGift.selectedChangedCallback();
     }
@@ -89,7 +89,7 @@
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         CGFloat itemW = (kScreenWidth - 16)/4 - 1;
-        CGFloat itemH = 90;
+        CGFloat itemH = 120;
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         flowLayout.itemSize = CGSizeMake(itemW, itemH);

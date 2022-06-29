@@ -13,6 +13,7 @@
 @interface RoomGiftPannelView () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property(nonatomic, strong) UIView *topView;
 @property(nonatomic, strong) UILabel *sendToLabel;
+@property(nonatomic, strong) YYLabel * coinLabel;
 @property(nonatomic, strong) UIButton *checkAllBtn;
 @property(nonatomic, strong) UIButton *sendBtn;
 @property(nonatomic, strong) UIView *sendView;
@@ -31,6 +32,8 @@
 @implementation RoomGiftPannelView
 
 - (void)dtConfigUI {
+    [super dtConfigUI];
+    [self reqCoinData];
 }
 
 - (void)dtAddViews {
@@ -41,6 +44,7 @@
     [self.topView addSubview:self.lineView];
     [self.topView addSubview:self.collectionView];
     [self addSubview:self.giftContentView];
+    [self addSubview:self.coinLabel];
     [self addSubview:self.sendView];
 }
 
@@ -78,13 +82,19 @@
     [self.giftContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.mas_equalTo(self);
         make.top.mas_equalTo(self.topView.mas_bottom).offset(10);
-        make.height.mas_equalTo(110);
+        make.height.mas_equalTo(254);
     }];
     [self.sendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.giftContentView.mas_bottom).offset(24);
         make.trailing.mas_equalTo(-16);
         make.size.mas_equalTo(CGSizeMake(56 + 56, 32));
         make.bottom.mas_equalTo(-kAppSafeBottom - 8);
+    }];
+    [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(@24);
+        make.height.equalTo(@20);
+        make.width.greaterThanOrEqualTo(@0);
+        make.centerY.equalTo(self.sendView);
     }];
 }
 
@@ -166,6 +176,38 @@
     }                          failure:nil];
 }
 
+
+- (void)updateCoin:(NSInteger)coin {
+    NSMutableAttributedString *full = [[NSMutableAttributedString alloc] init];
+    full.yy_alignment = NSTextAlignmentCenter;
+
+
+    UIImage *iconImage = [UIImage imageNamed:@"guess_award_coin"];
+    NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(14, 14) alignToFont:[UIFont systemFontOfSize:16 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
+    attrIcon.yy_firstLineHeadIndent = 8;
+    [full appendAttributedString:attrIcon];
+
+    NSNumber *number = @(coin);
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = kCFNumberFormatterDecimalStyle;
+    formatter.positiveFormat = @"###,###";
+    NSString *amountString = [formatter stringFromNumber:number];
+    NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@  ", amountString]];
+    attrAwardValue.yy_font = UIFONT_MEDIUM(14);
+    attrAwardValue.yy_color = HEX_COLOR(@"#F6A209");
+    [full appendAttributedString:attrAwardValue];
+
+    self.coinLabel.attributedText = full;
+}
+
+- (void)reqCoinData {
+    WeakSelf
+    [UserService.shared reqUserCoinDetail:^(int64_t i) {
+        [weakSelf updateCoin:i];
+    } fail:^(NSString *errStr) {
+        [ToastUtil show:errStr];
+    }];
+}
 
 - (void)onBtnSend:(UIButton *)sender {
 
@@ -309,6 +351,13 @@
         _topView = [[UIView alloc] init];
     }
     return _topView;
+}
+
+- (YYLabel *)coinLabel {
+    if (!_coinLabel) {
+        _coinLabel = [[YYLabel alloc] init];
+    }
+    return _coinLabel;
 }
 
 - (UILabel *)sendToLabel {

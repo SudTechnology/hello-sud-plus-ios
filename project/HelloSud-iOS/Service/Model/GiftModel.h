@@ -32,6 +32,8 @@ typedef void(^GiftLoadImageBlock)(UIImage *image);
 @property(nonatomic, assign)NSInteger price;
 /// 类型 0 内置礼物 1 服务端礼物
 @property(nonatomic, assign)NSInteger type;
+/// 礼物标识
+@property (nonatomic, strong)NSString *giftKey;
 
 @property(nonatomic, copy)HSGiftModelSelectedBlock selectedChangedCallback;
 

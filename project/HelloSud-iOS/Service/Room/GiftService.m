@@ -32,6 +32,7 @@
     giftSvga.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
     giftSvga.animateType = @"svga";
     giftSvga.giftName = @"svga";
+    giftSvga.price = 1;
 
     GiftModel *giftLottie = GiftModel.new;
     giftLottie.giftID = 2;
@@ -40,6 +41,7 @@
     giftLottie.animateURL = [NSBundle.mainBundle pathForResource:@"sud_lottie" ofType:@"json" inDirectory:@"Res"];
     giftLottie.animateType = @"lottie";
     giftLottie.giftName = @"lottie";
+    giftLottie.price = 100;
 
     GiftModel *giftWebp = GiftModel.new;
     giftWebp.giftID = 3;
@@ -48,6 +50,7 @@
     giftWebp.animateURL = [NSBundle.mainBundle pathForResource:@"sud_webp" ofType:@"webp" inDirectory:@"Res"];
     giftWebp.animateType = @"webp";
     giftWebp.giftName = @"webp";
+    giftWebp.price = 1000;
     [giftWebp loadWebp:nil];
 
     GiftModel *giftMP4 = GiftModel.new;
@@ -60,6 +63,7 @@
 //    giftMP4.animateURL = [NSBundle.mainBundle pathForResource:@"mp4_600" ofType:@"mp4" inDirectory:@"Res"];
     giftMP4.animateType = @"mp4";
     giftMP4.giftName = @"mp4";
+    giftMP4.price = 10000;
     _giftList = @[giftSvga, giftLottie, giftWebp, giftMP4];
     self.dicGift = @{[NSString stringWithFormat:@"%ld", (long) giftSvga.giftID]: giftSvga,
             [NSString stringWithFormat:@"%ld", (long) giftLottie.giftID]: giftLottie,
