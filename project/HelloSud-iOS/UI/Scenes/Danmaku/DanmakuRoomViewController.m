@@ -117,57 +117,7 @@
     [super dtConfigEvents];
     WeakSelf
     self.quickSendView.onOpenBlock = ^(BOOL isOpen) {
-        if (isOpen) {
-            // 展开
-            if (weakSelf.quickSendView.dataList.count == 0) {
-                weakSelf.quickSendView.dataList = weakSelf.dataList;
-                [weakSelf.quickSendView dtUpdateUI];
-            }
-
-            if (weakSelf.isLandscape) {
-                // 横屏
-                [UIView animateWithDuration:0.25 animations:^{
-                    [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.height.equalTo(@136);
-                    }];
-                    [weakSelf.quickSendView.superview layoutIfNeeded];
-                    [weakSelf.quickSendView showOpen:YES];
-                }];
-
-            } else {
-                [UIView animateWithDuration:0.25 animations:^{
-                    [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.height.equalTo(@120);
-                    }];
-                    [weakSelf.quickSendView.superview layoutIfNeeded];
-                    [weakSelf.quickSendView showOpen:YES];
-                }];
-
-            }
-
-        } else {
-            // 收起
-
-            if (weakSelf.isLandscape) {
-                // 横屏
-                [UIView animateWithDuration:0.25 animations:^{
-                    [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.height.equalTo(@47);
-                    }];
-                    [weakSelf.quickSendView.superview layoutIfNeeded];
-                    [weakSelf.quickSendView showOpen:NO];
-                }];
-
-            } else {
-                [UIView animateWithDuration:0.25 animations:^{
-                    [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.height.equalTo(@24);
-                    }];
-                    [weakSelf.quickSendView.superview layoutIfNeeded];
-                    [weakSelf.quickSendView showOpen:NO];
-                }];
-            }
-        }
+        [weakSelf handleQuickSendOpen:isOpen];
     };
     self.landscapeNaviView.backTapBlock = ^(UIButton *sender) {
         [weakSelf exitLandscape];
@@ -189,17 +139,75 @@
     }];
 }
 
+/// 处理快捷指令开关
+/// @param isOpen
+- (void)handleQuickSendOpen:(BOOL)isOpen {
+    WeakSelf
+    [self closeGuideTipView];
+    if (isOpen) {
+        // 展开
+        if (weakSelf.quickSendView.dataList.count == 0) {
+            weakSelf.quickSendView.dataList = weakSelf.dataList;
+            [weakSelf.quickSendView dtUpdateUI];
+        }
+
+        if (weakSelf.isLandscape) {
+            // 横屏
+            [UIView animateWithDuration:0.25 animations:^{
+                [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@136);
+                }];
+                [weakSelf.quickSendView.superview layoutIfNeeded];
+                [weakSelf.quickSendView showOpen:YES];
+            }];
+
+        } else {
+            [UIView animateWithDuration:0.25 animations:^{
+                [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@120);
+                }];
+                [weakSelf.quickSendView.superview layoutIfNeeded];
+                [weakSelf.quickSendView showOpen:YES];
+            }];
+
+        }
+
+    } else {
+        // 收起
+
+        if (weakSelf.isLandscape) {
+            // 横屏
+            [UIView animateWithDuration:0.25 animations:^{
+                [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@47);
+                }];
+                [weakSelf.quickSendView.superview layoutIfNeeded];
+                [weakSelf.quickSendView showOpen:NO];
+            }];
+
+        } else {
+            [UIView animateWithDuration:0.25 animations:^{
+                [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@24);
+                }];
+                [weakSelf.quickSendView.superview layoutIfNeeded];
+                [weakSelf.quickSendView showOpen:NO];
+            }];
+        }
+    }
+}
+
 - (void)onTapVideo:(id)tap {
 
     if (![self isLandscape]) {
         return;
     }
 
-    [self endCountdown];
+    [self endHiddenNaviCountdown];
     [self closeGuideTipView];
     if (self.landscapeNaviView.hidden) {
         [self showLandscapeNaviView];
-        [self beginCountdown];
+        [self beginHiddenNaviCountdown];
     } else {
         [self closeLandscapeNaviView];
     }
@@ -336,6 +344,7 @@
         self.landscapeNaviView.hidden = NO;
         self.exitLandscapeBtn.hidden = NO;
         [self.quickSendView updateOrientation:YES];
+        self.operatorView.hidden = YES;
         CGFloat top = kAppSafeTop;
         CGFloat bottom = kAppSafeBottom;
         [self.videoContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -347,17 +356,20 @@
         [self.quickSendView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(@122);
             make.trailing.equalTo(@-122);
-            make.height.equalTo(@47);
+            make.height.equalTo(@136);
             make.bottom.equalTo(@0);
         }];
         [self checkIfNeedToShowLandscapeGuide];
-        [self beginCountdown];
+        [self beginHiddenNaviCountdown];
         [self stopCheckLandscapeTimer];
+        [self.quickSendView showOpen:YES];
+        [self showLandscapeNaviView];
     } else {
         self.enterLandscapeBtn.hidden = NO;
         [self.quickSendView updateOrientation:NO];
         self.landscapeNaviView.hidden = YES;
         self.exitLandscapeBtn.hidden = YES;
+        self.operatorView.hidden = NO;
         [self.videoContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.naviView.mas_bottom).offset(5);
             make.leading.trailing.equalTo(@0);
@@ -382,6 +394,7 @@
 }
 
 - (void)exitLandscape {
+    [self endHiddenNaviCountdown];
     [self dtSwitchOrientation:UIInterfaceOrientationPortrait];
 }
 
@@ -406,7 +419,8 @@
     [self.guideTipView show];
 }
 
-- (void)beginCountdown {
+/// 开始隐藏导航栏倒计时
+- (void)beginHiddenNaviCountdown {
     WeakSelf
     if (!self.landscapeNaviHiddenTimer) {
         // 倒计时秒数
@@ -414,19 +428,22 @@
         self.landscapeNaviHiddenTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
             weakSelf.countdown--;
             if (weakSelf.countdown <= 0) {
-                [weakSelf endCountdown];
+                [weakSelf endHiddenNaviCountdown];
                 [weakSelf closeLandscapeNaviView];
             }
         }];
     }
 }
 
-- (void)endCountdown {
+- (void)endHiddenNaviCountdown {
     [self.landscapeNaviHiddenTimer stopTimer];
     self.landscapeNaviHiddenTimer = nil;
 }
 
 - (void)showLandscapeNaviView {
+    if (!self.landscapeNaviView.hidden) {
+        return;
+    }
     self.landscapeNaviView.hidden = NO;
     [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.landscapeNaviView.transform = CGAffineTransformIdentity;
