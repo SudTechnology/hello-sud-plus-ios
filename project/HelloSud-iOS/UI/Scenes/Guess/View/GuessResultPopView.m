@@ -274,6 +274,7 @@
 - (void)onAgainBtnClick:(id)sender {
     [self closeCountdown];
     [DTAlertView close];
+    if (self.againBlock) self.againBlock();
 }
 
 #pragma mark - UITableViewDelegate || UITableViewDataSource

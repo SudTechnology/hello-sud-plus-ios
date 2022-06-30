@@ -288,7 +288,12 @@
 
 /// 展示结果弹窗
 - (void)showResultAlertView:(NSArray<GuessPlayerModel *> *)playerList winCoin:(NSInteger)winCoin {
+    WeakSelf
     GuessResultPopView *v = [[GuessResultPopView alloc] init];
+    v.againBlock = ^{
+        // 下一轮游戏准备
+        [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:YES];
+    };
     v.dataList = playerList;
     v.winCoin = winCoin;
     BOOL isSupport = NO;
@@ -443,7 +448,9 @@
 /// 接管加入游戏
 - (void)onGameMGCommonSelfClickJoinBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickCancelJoinBtn *)model {
     [self.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
-    [self onTapShowOpenAutoGuess:nil];
+    if (!self.openAutoBet) {
+        [self onTapShowOpenAutoGuess:nil];
+    }
 }
 
 /// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN

@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, GuessResultPopViewType) {
 @property(nonatomic, strong) NSArray <GuessPlayerModel *> *dataList;
 @property(nonatomic, assign) GuessResultPopViewType resultStateType;
 @property(nonatomic, assign) NSInteger winCoin;
+@property (nonatomic, strong)void(^againBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END

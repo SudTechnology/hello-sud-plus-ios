@@ -346,6 +346,8 @@
             [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
         }
         if (finished) finished();
+        [DTSheetView close];
+        [DTAlertView close];
     });
 }
 
