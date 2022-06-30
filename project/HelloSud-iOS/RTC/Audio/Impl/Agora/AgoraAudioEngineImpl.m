@@ -320,7 +320,7 @@
     if (self.mRtmKit != nil) {
         // 登录Agora RTM 系统
         [_mRtmKit loginByToken:model.token user:model.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
-            if (errorCode == AgoraRtmLoginErrorOk) {
+            if (errorCode == AgoraRtmLoginErrorOk || errorCode == AgoraRtmLoginErrorAlreadyLogin) {
                 if (success != nil) {
                     [HSThreadUtils runOnUiThread:^{
                         success();
