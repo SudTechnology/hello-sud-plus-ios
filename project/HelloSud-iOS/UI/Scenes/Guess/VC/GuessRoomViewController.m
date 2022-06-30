@@ -242,7 +242,7 @@
         return;
     }
     WeakSelf
-    [DTAlertView showTextAlert:@"是否关闭每轮自动猜自己赢?" sureText:@"确认关闭" cancelText:@"返回" onSureCallback:^{
+    [DTAlertView showTextAlert:@"是否关闭每轮自动猜自己赢?" sureText:@"关闭" cancelText:@"返回" onSureCallback:^{
         weakSelf.openAutoBet = NO;
         [weakSelf showNaviAutoStateView:NO];
     }          onCloseCallback:^{
