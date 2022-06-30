@@ -299,6 +299,11 @@
         vc.gameName = model.gameName;
         [self.navigationController pushViewController:vc animated:true];
     } else {
+
+        if (![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
+            [ToastUtil show:@"请使用即构RTC体验"];
+            return;
+        }
         [AudioRoomService reqMatchRoom:model.gameId sceneType:self.headerSceneList[indexPath.section].sceneId gameLevel:-1];
     }
 }

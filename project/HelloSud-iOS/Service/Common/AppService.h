@@ -104,6 +104,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取RTC厂商名称
 /// @param rtcType rtc类型
 - (NSString *)getRTCTypeName:(NSString *)rtcType;
+
+/// 是否是相同rtc厂商
+/// @param rtcConfig rtcConfig
+/// @param rtcType rtcType
+/// @return
+- (BOOL)isSameRtc:(HSConfigContent *)rtcConfig rtcType:(NSString *)rtcType;
 @end
 
 NS_ASSUME_NONNULL_END
