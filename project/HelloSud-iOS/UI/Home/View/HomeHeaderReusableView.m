@@ -187,7 +187,7 @@
         [self.customView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(24, 24));
         }];
-    } else if (sceneModel.sceneId == SceneTypeDiscoDancing) {
+    } else if (sceneModel.sceneId == SceneTypeDisco) {
         // 蹦迪
         [self.customView setImage:[UIImage imageNamed:@"disco_rank"] forState:UIControlStateNormal];
         [self.customView setHidden:NO];

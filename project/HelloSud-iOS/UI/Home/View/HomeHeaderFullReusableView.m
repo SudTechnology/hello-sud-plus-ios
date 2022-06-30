@@ -52,7 +52,7 @@
     _sceneModel = sceneModel;
     WeakSelf
     self.titleLabel.text = sceneModel.sceneName;
-    if (sceneModel.sceneId == SceneTypeDiscoDancing) {
+    if (sceneModel.sceneId == SceneTypeDisco) {
         // 蹦迪
         [self.customView setImage:[UIImage imageNamed:@"disco_rank"] forState:UIControlStateNormal];
         [self.customView setHidden:NO];

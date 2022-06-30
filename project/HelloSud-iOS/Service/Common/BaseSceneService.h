@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, SceneType) {
     SceneTypeLeague = 10,
     SceneTypeCustom = 11,
     SceneTypeDanmaku = 12,
-    SceneTypeDiscoDancing = 13
+    SceneTypeDisco = 13
 };
 
 /// 基础场景服务

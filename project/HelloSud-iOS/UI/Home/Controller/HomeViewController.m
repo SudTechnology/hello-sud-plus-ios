@@ -177,7 +177,7 @@
             } else {
 
                 // 是否需要满行
-                BOOL isNeedToFullRow = m.sceneId != SceneTypeDiscoDancing && m.sceneId != SceneTypeDanmaku;
+                BOOL isNeedToFullRow = m.sceneId != SceneTypeDisco && m.sceneId != SceneTypeDanmaku;
                 if (isNeedToFullRow) {
                     /// 求余 填满整个屏幕
                     int row = 3;
@@ -278,7 +278,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BaseCollectionViewCell *cell = nil;
     HSSceneModel *m = self.headerSceneList[indexPath.section];
-    if (m.sceneId == SceneTypeDiscoDancing || m.sceneId == SceneTypeDanmaku) {
+    if (m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeDanmaku) {
         GameItemFullCollectionViewCell *c = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemFullCollectionViewCell" forIndexPath:indexPath];
         c.sceneId = m.sceneId;
         cell = c;
@@ -321,7 +321,7 @@
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     CGFloat itemW = (kScreenWidth - 32) / 3;
     CGFloat itemH = 62;
-    if (m.sceneId == SceneTypeDiscoDancing) {
+    if (m.sceneId == SceneTypeDisco) {
         itemW = kScreenWidth - 32;
         itemH = 200;
     } else if (m.sceneId == SceneTypeDanmaku) {
@@ -341,7 +341,7 @@
     if (m.sceneId == SceneTypeGuess) {
         baseH += 290;
         h = baseH + rect.size.height;
-    } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDiscoDancing) {
+    } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDisco) {
         baseH = 46;
         h = baseH + rect.size.height;
     }
@@ -358,13 +358,13 @@
     UICollectionReusableView *supplementaryView;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         HSSceneModel *sceneModel = self.headerSceneList[indexPath.section];
-        if (sceneModel.sceneId == SceneTypeDanmaku || sceneModel.sceneId == SceneTypeDiscoDancing) {
+        if (sceneModel.sceneId == SceneTypeDanmaku || sceneModel.sceneId == SceneTypeDisco) {
             HomeHeaderFullReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderFullReusableView" forIndexPath:indexPath];
             view.sceneModel = sceneModel;
             supplementaryView = view;
             view.customBlock = ^(UIButton *sender) {
                 BaseSceneViewController *vc = nil;
-                if (sceneModel.sceneId == SceneTypeDiscoDancing) {
+                if (sceneModel.sceneId == SceneTypeDisco) {
                     vc = [[DiscoRankViewController alloc] init];
                     [weakSelf.navigationController pushViewController:vc animated:true];
                 }
@@ -376,7 +376,7 @@
             view.quizGameInfoList = self.quizGameInfoList;
             view.customBlock = ^(UIButton *sender) {
                 BaseSceneViewController *vc = nil;
-                if (sceneModel.sceneId == SceneTypeDiscoDancing) {
+                if (sceneModel.sceneId == SceneTypeDisco) {
                     vc = [[DiscoRankViewController alloc] init];
                 } else {
                     vc = GameConfigViewController.new;

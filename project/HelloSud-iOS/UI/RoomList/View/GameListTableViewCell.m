@@ -38,7 +38,7 @@
                 @(SceneTypeLeague): @"#CB1530",
                 @(SceneTypeCustom): @"#198DE2",
                 @(SceneTypeDanmaku): @"#00CBD2",
-                @(SceneTypeDiscoDancing): @"#DD01CB",
+                @(SceneTypeDisco): @"#DD01CB",
         };
     }
     NSString *colorStr = dicSencen[@(sceneType)];

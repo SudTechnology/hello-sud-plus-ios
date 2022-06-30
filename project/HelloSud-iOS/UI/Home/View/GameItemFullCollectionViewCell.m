@@ -147,7 +147,7 @@
             [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.homeGamePic]];
         }
     }
-    if (self.sceneId == SceneTypeDiscoDancing) {
+    if (self.sceneId == SceneTypeDisco) {
         self.joinBtn.hidden = NO;
         self.createBtn.hidden = NO;
         self.nameLabel.hidden = YES;

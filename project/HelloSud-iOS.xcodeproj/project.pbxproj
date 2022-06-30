@@ -172,6 +172,7 @@
 		6C460832286AD41B005C99EF /* DiscoRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460830286AD41A005C99EF /* DiscoRankViewController.m */; };
 		6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */; };
 		6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */; };
+		6C460865286D82BA005C99EF /* DiscoNaviRankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460864286D82BA005C99EF /* DiscoNaviRankView.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
@@ -670,6 +671,8 @@
 		6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameItemFullCollectionViewCell.m; sourceTree = "<group>"; };
 		6C460860286D3BC7005C99EF /* HomeHeaderFullReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHeaderFullReusableView.h; sourceTree = "<group>"; };
 		6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderFullReusableView.m; sourceTree = "<group>"; };
+		6C460863286D82BA005C99EF /* DiscoNaviRankView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoNaviRankView.h; sourceTree = "<group>"; };
+		6C460864286D82BA005C99EF /* DiscoNaviRankView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoNaviRankView.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1734,6 +1737,8 @@
 		6C46082F286ABA64005C99EF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6C460863286D82BA005C99EF /* DiscoNaviRankView.h */,
+				6C460864286D82BA005C99EF /* DiscoNaviRankView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2654,6 +2659,7 @@
 				BC210F74B7434253E2FEF91D /* GuessRoomViewController.m in Sources */,
 				6C4607FF28572099005C99EF /* GuessMineView.m in Sources */,
 				BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */,
+				6C460865286D82BA005C99EF /* DiscoNaviRankView.m in Sources */,
 				BC210D9F0C69893639DD84A5 /* HomeGuessCell.m in Sources */,
 				BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */,
 				6C4607C12851F725005C99EF /* DanmakuRoomViewController.m in Sources */,
