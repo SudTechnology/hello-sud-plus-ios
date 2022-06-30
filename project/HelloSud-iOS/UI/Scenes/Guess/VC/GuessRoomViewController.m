@@ -407,15 +407,7 @@
 - (void)reqAutoBet:(void (^)(BOOL success))finished {
     WeakSelf
     [GuessRoomService reqBet:2 coin:weakSelf.betCoin userList:@[AppService.shared.loginUserID] finished:^{
-        [DTSheetView close];
-        DDLogDebug(@"开启自动扣费：投注成功");
-        // 自己押注消息
-        AudioUserModel *userModel = AudioUserModel.new;
-        userModel.userID = AppService.shared.login.loginUserInfo.userID;
-        userModel.name = AppService.shared.login.loginUserInfo.name;
-        userModel.icon = AppService.shared.login.loginUserInfo.icon;
-        userModel.sex = AppService.shared.login.loginUserInfo.sex;
-        [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
+        DDLogDebug(@"自动下注：投注成功");
         if (finished) finished(YES);
 
     }                failure:^(NSError *error) {
