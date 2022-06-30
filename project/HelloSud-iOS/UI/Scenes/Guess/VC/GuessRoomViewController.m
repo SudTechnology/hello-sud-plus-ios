@@ -448,7 +448,9 @@
 /// 接管加入游戏
 - (void)onGameMGCommonSelfClickJoinBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickCancelJoinBtn *)model {
     [self.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
-    if (!self.openAutoBet) {
+    if (self.openAutoBet) {
+        [self showNaviAutoStateView:YES];
+    } else {
         [self onTapShowOpenAutoGuess:nil];
     }
 }
