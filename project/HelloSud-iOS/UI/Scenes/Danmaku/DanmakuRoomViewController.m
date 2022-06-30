@@ -109,7 +109,7 @@
         make.width.height.equalTo(@24);
         make.bottom.equalTo(@-22);
     }];
-
+    [self.operatorView hiddenVoiceBtn:YES];
 }
 
 - (void)dtConfigUI {

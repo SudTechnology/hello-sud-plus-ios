@@ -32,6 +32,9 @@ typedef NS_ENUM(NSInteger, VoiceBtnStateType) {
 
 /// 重置所有选择用户
 - (void)resetAllSelectedUser;
+/// 是否隐藏上麦按钮
+/// @param hidden
+- (void)hiddenVoiceBtn:(BOOL)hidden;
 @end
 
 NS_ASSUME_NONNULL_END

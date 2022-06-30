@@ -102,6 +102,22 @@
     }
 }
 
+/// 是否隐藏上麦按钮
+/// @param hidden
+- (void)hiddenVoiceBtn:(BOOL)hidden {
+    if (hidden) {
+        self.voiceUpBtn.hidden = hidden;
+        [self.inputLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(16);
+        }];
+    } else {
+        self.voiceUpBtn.hidden = hidden;
+        [self.inputLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(self.voiceUpBtn.mas_trailing).offset(12);
+        }];
+    }
+}
+
 - (UIButton *)voiceUpBtn {
     if (!_voiceUpBtn) {
         _voiceUpBtn = [[UIButton alloc] init];
