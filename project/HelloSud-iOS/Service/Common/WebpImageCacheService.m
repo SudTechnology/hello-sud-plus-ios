@@ -35,7 +35,13 @@
     if (self.animateURL) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSDate *date = [NSDate date];
-            NSData *webpData = [NSData dataWithContentsOfFile:self.animateURL];
+            NSURL *url = nil;
+            if ([self.animateURL hasPrefix:@"http"]) {
+                url = [[NSURL alloc] initWithString:self.animateURL];
+            } else {
+                url = [NSURL fileURLWithPath:self.animateURL];
+            }
+            NSData *webpData = [NSData dataWithContentsOfURL:url];
             NSLog(@"load data time:%@", @([[NSDate date] timeIntervalSince1970] - date.timeIntervalSince1970));
             UIImage *wimage = [[SDImageWebPCoder sharedCoder] decodedImageWithData:webpData options:nil];
             NSLog(@"decode data time:%@", @([[NSDate date] timeIntervalSince1970] - date.timeIntervalSince1970));

@@ -49,7 +49,7 @@
 }
 
 - (void)setIndexPath:(NSIndexPath *)indexPath {
-    _indexPath = indexPath;
+    [super setIndexPath:indexPath];
     NSInteger v = indexPath.row % 3;
 
     CGFloat w = [self imageW];

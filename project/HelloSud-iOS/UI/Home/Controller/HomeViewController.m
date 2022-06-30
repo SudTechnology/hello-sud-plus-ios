@@ -9,6 +9,7 @@
 #import "SearchHeaderView.h"
 #import "HomeCategoryView.h"
 #import "GameItemCollectionViewCell.h"
+#import "GameItemFullCollectionViewCell.h"
 #import "HomeHeaderReusableView.h"
 #import "HomeFooterReusableView.h"
 #import "AudioRoomViewController.h"
@@ -18,6 +19,7 @@
 #import "GuessCategoryView.h"
 #import "MoreGuessViewController.h"
 #import "DiscoRankViewController.h"
+#import "HomeHeaderFullReusableView.h"
 
 @interface HomeViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
@@ -172,25 +174,26 @@
                 [arr setArray:waitArr];
             } else {
 
-                /// 求余 填满整个屏幕
-                int row = 3;
-                double fmodCount = fmod(arr.count, row);
-                if (fmodCount > 0) {
-                    for (int i = fmodCount; i < row; i++) {
-                        HSGameItem *m = [[HSGameItem alloc] init];
-                        m.isBlank = true;
-                        [arr addObject:m];
+                // 是否需要满行
+                BOOL isNeedToFullRow = m.sceneId != SceneTypeDiscoDancing && m.sceneId != SceneTypeDanmaku;
+                if (isNeedToFullRow) {
+                    /// 求余 填满整个屏幕
+                    int row = 3;
+                    double fmodCount = fmod(arr.count, row);
+                    if (fmodCount > 0) {
+                        for (int i = fmodCount; i < row; i++) {
+                            HSGameItem *m = [[HSGameItem alloc] init];
+                            m.isBlank = true;
+                            [arr addObject:m];
+                        }
                     }
                 }
             }
 
             [weakSelf.dataList addObject:arr];
             if (m.sceneId == SceneTypeGuess) {
+                // 竞猜
                 [weakSelf reqGuessGameList:m];
-            } else if (m.sceneId == SceneTypeDanmaku) {
-                if (arr.count > 0) {
-                    m.firstGame = arr[0];
-                }
             }
         }
         [weakSelf.headerSceneList addObjectsFromArray:model.sceneList];
@@ -257,7 +260,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     HSSceneModel *m = self.headerSceneList[section];
-    if (m.sceneId == SceneTypeGuess || m.sceneId == SceneTypeDanmaku) {
+    if (m.sceneId == SceneTypeGuess) {
         return 0;
     }
     NSArray *arr = self.dataList[section];
@@ -265,10 +268,18 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    GameItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
+    BaseCollectionViewCell *cell = nil;
+    HSSceneModel *m = self.headerSceneList[indexPath.section];
+    if (m.sceneId == SceneTypeDiscoDancing || m.sceneId == SceneTypeDanmaku) {
+        GameItemFullCollectionViewCell *c = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemFullCollectionViewCell" forIndexPath:indexPath];
+        c.sceneId = m.sceneId;
+        cell = c;
+    } else {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
+    }
     NSArray<HSGameItem *> *arr = self.dataList[indexPath.section];
-    cell.model = arr[indexPath.row];
     cell.indexPath = indexPath;
+    cell.model = arr[indexPath.row];
     return cell;
 }
 
@@ -292,16 +303,35 @@
     }
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    HSSceneModel *m = self.headerSceneList[indexPath.section];
+    CGFloat itemW = (kScreenWidth - 32) / 3;
+    CGFloat itemH = 62;
+    if (m.sceneId == SceneTypeDiscoDancing) {
+        itemW = kScreenWidth - 32;
+        itemH = 200;
+    } else if (m.sceneId == SceneTypeDanmaku) {
+        itemW = kScreenWidth - 32;
+        itemH = 140;
+    }
+    return CGSizeMake(itemW, itemH);
+}
+
 // 设置Header的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     HSSceneModel *m = self.headerSceneList[section];
     UIFont *font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
     CGRect rect = [m.sceneName boundingRectWithSize:CGSizeMake(kScreenWidth - 62, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: font} context:nil];
     CGFloat baseH = 140;
+    CGFloat h = baseH + rect.size.height;
     if (m.sceneId == SceneTypeGuess) {
         baseH += 290;
+        h = baseH + rect.size.height;
+    } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDiscoDancing) {
+        baseH = 46;
+        h = baseH + rect.size.height;
     }
-    return CGSizeMake(kScreenWidth, baseH + rect.size.height);
+    return CGSizeMake(kScreenWidth, h);
 }
 
 // 设置Footer的尺寸
@@ -313,26 +343,33 @@
     WeakSelf
     UICollectionReusableView *supplementaryView;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
         HSSceneModel *sceneModel = self.headerSceneList[indexPath.section];
-        view.sceneModel = self.headerSceneList[indexPath.section];
-        view.headerGameList = self.dataList[indexPath.section];
-        view.quizGameInfoList = self.quizGameInfoList;
-        view.customBlock = ^(UIButton *sender) {
-            BaseSceneViewController *vc = nil;
-            if (sceneModel.sceneId == SceneTypeDiscoDancing) {
-                vc = [[DiscoRankViewController alloc] init];
-            } else {
-                vc = GameConfigViewController.new;
-            }
-            [weakSelf.navigationController pushViewController:vc animated:true];
-        };
-        view.moreGuessBlock = ^(UIButton *sender) {
-            MoreGuessViewController *vc = MoreGuessViewController.new;
-            vc.sceneId = weakSelf.headerSceneList[indexPath.section].sceneId;
-            [weakSelf.navigationController pushViewController:vc animated:true];
-        };
-        supplementaryView = view;
+        if (sceneModel.sceneId == SceneTypeDanmaku || sceneModel.sceneId == SceneTypeDiscoDancing) {
+            HomeHeaderFullReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderFullReusableView" forIndexPath:indexPath];
+            view.sceneModel = sceneModel;
+            supplementaryView = view;
+        } else {
+            HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
+            view.sceneModel = self.headerSceneList[indexPath.section];
+            view.headerGameList = self.dataList[indexPath.section];
+            view.quizGameInfoList = self.quizGameInfoList;
+            view.customBlock = ^(UIButton *sender) {
+                BaseSceneViewController *vc = nil;
+                if (sceneModel.sceneId == SceneTypeDiscoDancing) {
+                    vc = [[DiscoRankViewController alloc] init];
+                } else {
+                    vc = GameConfigViewController.new;
+                }
+                [weakSelf.navigationController pushViewController:vc animated:true];
+            };
+            view.moreGuessBlock = ^(UIButton *sender) {
+                MoreGuessViewController *vc = MoreGuessViewController.new;
+                vc.sceneId = weakSelf.headerSceneList[indexPath.section].sceneId;
+                [weakSelf.navigationController pushViewController:vc animated:true];
+            };
+            supplementaryView = view;
+        }
+
     } else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
         HomeFooterReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HomeFooterReusableView" forIndexPath:indexPath];
         supplementaryView = view;
@@ -344,22 +381,23 @@
 
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        CGFloat itemW = (kScreenWidth - 32) / 3;
-        CGFloat itemH = 62;
 
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        flowLayout.itemSize = CGSizeMake(itemW, itemH);
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[GameItemCollectionViewCell class] forCellWithReuseIdentifier:@"GameItemCollectionViewCell"];
+        [_collectionView registerClass:[GameItemFullCollectionViewCell class] forCellWithReuseIdentifier:@"GameItemFullCollectionViewCell"];
+
         [_collectionView registerClass:[HomeHeaderReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView"];
+        [_collectionView registerClass:[HomeHeaderFullReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderFullReusableView"];
         [_collectionView registerClass:[HomeFooterReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HomeFooterReusableView"];
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         v.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];

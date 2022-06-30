@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseCollectionViewCell : UICollectionViewCell
 @property(nonatomic, strong)BaseModel *model;
+@property(nonatomic, strong)NSIndexPath *indexPath;
 
 /// 增加子view
 - (void)dtAddViews;
