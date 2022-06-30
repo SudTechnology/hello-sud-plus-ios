@@ -70,7 +70,13 @@
             }];
         }
     } error:^(RCConnectErrorCode errorCode) {
-        
+        if (errorCode == RC_CONNECTION_EXIST) {
+            if (success != nil) {
+                [HSThreadUtils runOnUiThread:^{
+                    success();
+                }];
+            }
+        }
     }];
         
     [[RCCoreClient sharedCoreClient] addReceiveMessageDelegate:self];
