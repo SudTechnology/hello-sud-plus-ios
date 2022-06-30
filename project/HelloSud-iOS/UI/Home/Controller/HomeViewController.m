@@ -299,6 +299,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    HSSceneModel *m = self.headerSceneList[indexPath.section];
     HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
     if (self.headerSceneList[indexPath.section].sceneId == SceneTypeTicket) {
         TicketChooseViewController *vc = TicketChooseViewController.new;
@@ -308,7 +309,7 @@
         [self.navigationController pushViewController:vc animated:true];
     } else {
 
-        if (![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
+        if (m.sceneId == SceneTypeDanmaku && ![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
             [ToastUtil show:@"请使用即构RTC体验"];
             return;
         }
@@ -361,6 +362,13 @@
             HomeHeaderFullReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderFullReusableView" forIndexPath:indexPath];
             view.sceneModel = sceneModel;
             supplementaryView = view;
+            view.customBlock = ^(UIButton *sender) {
+                BaseSceneViewController *vc = nil;
+                if (sceneModel.sceneId == SceneTypeDiscoDancing) {
+                    vc = [[DiscoRankViewController alloc] init];
+                    [weakSelf.navigationController pushViewController:vc animated:true];
+                }
+            };
         } else {
             HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
             view.sceneModel = self.headerSceneList[indexPath.section];

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 /// 蹦迪场景
-@interface DiscoDancingRoomViewController : AudioRoomViewController
+@interface DiscoRoomViewController : AudioRoomViewController
 
 @end
 

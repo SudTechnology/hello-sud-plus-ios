@@ -11,6 +11,7 @@
 @interface HomeHeaderFullReusableView()
 @property(nonatomic, strong) BaseView *contentView;
 @property(nonatomic, strong) UILabel *titleLabel;
+@property(nonatomic, strong) UIButton *customView;
 @end
 
 @implementation HomeHeaderFullReusableView
@@ -18,6 +19,7 @@
 - (void)dtAddViews {
     [self addSubview:self.contentView];
     [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.customView];
 
 }
 
@@ -35,6 +37,11 @@
         make.height.mas_greaterThanOrEqualTo(0);
         make.width.mas_greaterThanOrEqualTo(0);
     }];
+    [self.customView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.mas_equalTo(-14);
+        make.centerY.mas_equalTo(self.titleLabel);
+        make.size.mas_equalTo(CGSizeMake(24, 24));
+    }];
 }
 
 - (void)dtConfigUI {
@@ -45,7 +52,20 @@
     _sceneModel = sceneModel;
     WeakSelf
     self.titleLabel.text = sceneModel.sceneName;
+    if (sceneModel.sceneId == SceneTypeDiscoDancing) {
+        // 蹦迪
+        [self.customView setImage:[UIImage imageNamed:@"disco_rank"] forState:UIControlStateNormal];
+        [self.customView setHidden:NO];
+        [self.customView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(32, 32));
+        }];
+    }
+}
 
+- (void)customBtnEvent:(UIButton *)btn {
+    if (self.customBlock) {
+        self.customBlock(btn);
+    }
 }
 
 - (BaseView *)contentView {
@@ -66,5 +86,15 @@
         _titleLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
     }
     return _titleLabel;
+}
+
+- (UIButton *)customView {
+    if (!_customView) {
+        _customView = [[UIButton alloc] init];
+        [_customView setImage:[UIImage imageNamed:@"home_section_custom_icon"] forState:UIControlStateNormal];
+        [_customView setHidden:true];
+        [_customView addTarget:self action:@selector(customBtnEvent:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _customView;
 }
 @end

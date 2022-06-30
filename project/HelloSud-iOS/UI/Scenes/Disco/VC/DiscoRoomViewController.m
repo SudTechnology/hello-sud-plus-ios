@@ -6,13 +6,13 @@
 //  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "DiscoDancingRoomViewController.h"
+#import "DiscoRoomViewController.h"
 
-@interface DiscoDancingRoomViewController ()
+@interface DiscoRoomViewController ()
 
 @end
 
-@implementation DiscoDancingRoomViewController
+@implementation DiscoRoomViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

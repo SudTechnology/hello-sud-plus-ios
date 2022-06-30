@@ -168,7 +168,7 @@
 		6C46082328630CD7005C99EF /* RespGiftListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46082228630CD6005C99EF /* RespGiftListModel.m */; };
 		6C4608262864062D005C99EF /* LandscapeGuideTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4608252864062D005C99EF /* LandscapeGuideTipView.m */; };
 		6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460828286441B4005C99EF /* WebpImageCacheService.m */; };
-		6C46082D28658E80005C99EF /* DiscoDancingRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46082C28658E7F005C99EF /* DiscoDancingRoomViewController.m */; };
+		6C46082D28658E80005C99EF /* DiscoRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46082C28658E7F005C99EF /* DiscoRoomViewController.m */; };
 		6C460832286AD41B005C99EF /* DiscoRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460830286AD41A005C99EF /* DiscoRankViewController.m */; };
 		6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */; };
 		6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */; };
@@ -662,8 +662,8 @@
 		6C4608252864062D005C99EF /* LandscapeGuideTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandscapeGuideTipView.m; sourceTree = "<group>"; };
 		6C460827286441B4005C99EF /* WebpImageCacheService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebpImageCacheService.h; sourceTree = "<group>"; };
 		6C460828286441B4005C99EF /* WebpImageCacheService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebpImageCacheService.m; sourceTree = "<group>"; };
-		6C46082B28658E7F005C99EF /* DiscoDancingRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoDancingRoomViewController.h; sourceTree = "<group>"; };
-		6C46082C28658E7F005C99EF /* DiscoDancingRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoDancingRoomViewController.m; sourceTree = "<group>"; };
+		6C46082B28658E7F005C99EF /* DiscoRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRoomViewController.h; sourceTree = "<group>"; };
+		6C46082C28658E7F005C99EF /* DiscoRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRoomViewController.m; sourceTree = "<group>"; };
 		6C460830286AD41A005C99EF /* DiscoRankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoRankViewController.m; sourceTree = "<group>"; };
 		6C460831286AD41B005C99EF /* DiscoRankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoRankViewController.h; sourceTree = "<group>"; };
 		6C46085D286C4E26005C99EF /* GameItemFullCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameItemFullCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1139,7 +1139,7 @@
 		4455AD1327EAC658001516EE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				6C46082A28658E1D005C99EF /* DiscoDancing */,
+				6C46082A28658E1D005C99EF /* Disco */,
 				6C4607BE2851F701005C99EF /* Danmaku */,
 				4455ADD327EAC6F7001516EE /* Base */,
 				4455AD1427EAC658001516EE /* Orderentertainment */,
@@ -1711,13 +1711,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		6C46082A28658E1D005C99EF /* DiscoDancing */ = {
+		6C46082A28658E1D005C99EF /* Disco */ = {
 			isa = PBXGroup;
 			children = (
 				6C46082F286ABA64005C99EF /* View */,
 				6C46082E286ABA47005C99EF /* VC */,
 			);
-			path = DiscoDancing;
+			path = Disco;
 			sourceTree = "<group>";
 		};
 		6C46082E286ABA47005C99EF /* VC */ = {
@@ -1725,8 +1725,8 @@
 			children = (
 				6C460831286AD41B005C99EF /* DiscoRankViewController.h */,
 				6C460830286AD41A005C99EF /* DiscoRankViewController.m */,
-				6C46082B28658E7F005C99EF /* DiscoDancingRoomViewController.h */,
-				6C46082C28658E7F005C99EF /* DiscoDancingRoomViewController.m */,
+				6C46082B28658E7F005C99EF /* DiscoRoomViewController.h */,
+				6C46082C28658E7F005C99EF /* DiscoRoomViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2536,7 +2536,7 @@
 				4455ADCA27EAC658001516EE /* TicketViewController.m in Sources */,
 				4455ADA527EAC658001516EE /* GameListTableViewCell.m in Sources */,
 				4455AD9C27EAC658001516EE /* GameListViewController.m in Sources */,
-				6C46082D28658E80005C99EF /* DiscoDancingRoomViewController.m in Sources */,
+				6C46082D28658E80005C99EF /* DiscoRoomViewController.m in Sources */,
 				6CE6CD32283F591C0026BDAB /* DTRippleAnimationView.m in Sources */,
 				6CE6CD38283F591C0026BDAB /* BaseTableViewCell.m in Sources */,
 				6C4608202862B025005C99EF /* LandscapeNaviView.m in Sources */,
