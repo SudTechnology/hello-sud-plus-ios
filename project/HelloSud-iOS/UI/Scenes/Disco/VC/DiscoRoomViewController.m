@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.naviView hiddenNodeWithRoleType:kAudioRoomService.roleType];
+    [self.naviView hiddenNodeWithRoleType:0];
     [self updateSettingState:self.gameId > 0];
 }
 
@@ -66,9 +66,21 @@
         [self handleChangeToGame:0];
         [self updateSettingState:NO];
     } else {
-        [self handleChangeToGame:0];
+        [self handleChangeToGame:[self getCurrentGameID]];
         [self updateSettingState:YES];
     }
+}
+
+- (int64_t)getCurrentGameID {
+    NSArray <HSGameItem *> *dataArr = AppService.shared.gameList;
+    for (HSGameItem *item in dataArr) {
+        for (NSNumber *scene in item.suitScene) {
+            if ([scene integerValue] == self.configModel.enterRoomModel.sceneType) {
+                return item.gameId;
+            }
+        }
+    }
+    return 0;
 }
 
 - (void)updateSettingState:(BOOL)isGameExist {
@@ -89,6 +101,15 @@
                                     endPoint:CGPointMake(1, 0.5)
                                 cornerRadius:0];
     }
+}
+
+
+
+- (DiscoNaviRankView *)rankView {
+    if (!_rankView) {
+        _rankView = [[DiscoNaviRankView alloc] init];
+    }
+    return _rankView;
 }
 
 - (BaseView *)settingView {
