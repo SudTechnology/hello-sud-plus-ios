@@ -159,6 +159,8 @@
                 NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%d", suitId]];
                 NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
                 [arr addObject:model.gameList[i]];
+                [weakSelf checkCacheWebp:model.gameList[i]];
+
             }
         }
         AppService.shared.gameList = originalGameArr;
@@ -205,6 +207,12 @@
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
     [self.searchHeaderView dtUpdateUI];
+}
+
+- (void)checkCacheWebp:(HSGameItem *)item {
+    if ([item.homeGamePic hasSuffix:@"webp"]) {
+        [WebpImageCacheService.shared loadWebp:item.homeGamePic result:nil];
+    }
 }
 
 - (void)reqGuessGameList:(HSSceneModel *)guessModel {
