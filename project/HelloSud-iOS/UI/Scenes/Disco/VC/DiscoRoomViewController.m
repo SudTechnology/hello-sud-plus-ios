@@ -9,11 +9,15 @@
 #import "DiscoRoomViewController.h"
 #import "DiscoNaviRankView.h"
 #import "DiscoRankPopView.h"
+#import "DiscoMenuView.h"
+#import "DiscoPopMenuListView.h"
 
 @interface DiscoRoomViewController ()
 @property(nonatomic, strong) BaseView *settingView;
 @property(nonatomic, strong) MarqueeLabel *settingLabel;
 @property(nonatomic, strong) DiscoNaviRankView *rankView;
+@property(nonatomic, strong) DiscoMenuView *menuView;
+
 @end
 
 @implementation DiscoRoomViewController
@@ -34,6 +38,7 @@
     [self.naviView addSubview:self.rankView];
     [self.naviView addSubview:self.settingView];
     [self.settingView addSubview:self.settingLabel];
+    [self.sceneView addSubview:self.menuView];
 }
 
 - (void)dtLayoutViews {
@@ -58,6 +63,12 @@
         make.height.mas_greaterThanOrEqualTo(0);
         make.width.mas_lessThanOrEqualTo(@66);
     }];
+    CGFloat b = kAppSafeBottom + 93;
+    [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(@-9);
+        make.bottom.equalTo(@(-b));
+        make.width.height.greaterThanOrEqualTo(@0);
+    }];
 
 }
 
@@ -68,6 +79,8 @@
     [self.settingView addGestureRecognizer:tap];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRankViewTap:)];
     [self.rankView addGestureRecognizer:tap2];
+    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onMenuViewTap:)];
+    [self.menuView addGestureRecognizer:tap3];
 
 
 }
@@ -75,6 +88,12 @@
 - (void)dtConfigUI {
     [super dtConfigUI];
 
+}
+
+/// 点击跳舞菜单
+- (void)onMenuViewTap:(UITapGestureRecognizer *)tap {
+    DiscoPopMenuListView *v = [[DiscoPopMenuListView alloc]init];
+    [DTSheetView show:v onCloseCallback:nil];
 }
 
 /// 点击排行榜
@@ -127,12 +146,18 @@
 }
 
 
-
 - (DiscoNaviRankView *)rankView {
     if (!_rankView) {
         _rankView = [[DiscoNaviRankView alloc] init];
     }
     return _rankView;
+}
+
+- (DiscoMenuView *)menuView {
+    if (!_menuView) {
+        _menuView = [[DiscoMenuView alloc] init];
+    }
+    return _menuView;
 }
 
 - (BaseView *)settingView {

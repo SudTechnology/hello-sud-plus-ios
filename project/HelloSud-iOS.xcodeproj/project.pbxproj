@@ -178,6 +178,10 @@
 		6C46086E286DAC76005C99EF /* DiscoRankPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46086D286DAC76005C99EF /* DiscoRankPopView.m */; };
 		6C460871286DB5CF005C99EF /* DiscoRankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */; };
 		6C460875286DB610005C99EF /* DiscoRankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460874286DB610005C99EF /* DiscoRankModel.m */; };
+		6C460878286E9CCD005C99EF /* DiscoMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460877286E9CCD005C99EF /* DiscoMenuView.m */; };
+		6C46087B286EA886005C99EF /* DiscoPopMenuListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */; };
+		6C46087E286ECC2D005C99EF /* DiscoMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */; };
+		6C460881286ECC8A005C99EF /* DiscoMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460880286ECC8A005C99EF /* DiscoMenuModel.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
@@ -688,6 +692,14 @@
 		6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankTableViewCell.m; sourceTree = "<group>"; };
 		6C460873286DB610005C99EF /* DiscoRankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankModel.h; sourceTree = "<group>"; };
 		6C460874286DB610005C99EF /* DiscoRankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankModel.m; sourceTree = "<group>"; };
+		6C460876286E9CCD005C99EF /* DiscoMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuView.h; sourceTree = "<group>"; };
+		6C460877286E9CCD005C99EF /* DiscoMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuView.m; sourceTree = "<group>"; };
+		6C460879286EA886005C99EF /* DiscoPopMenuListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoPopMenuListView.h; sourceTree = "<group>"; };
+		6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoPopMenuListView.m; sourceTree = "<group>"; };
+		6C46087C286ECC2D005C99EF /* DiscoMenuTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuTableViewCell.h; sourceTree = "<group>"; };
+		6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuTableViewCell.m; sourceTree = "<group>"; };
+		6C46087F286ECC8A005C99EF /* DiscoMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuModel.h; sourceTree = "<group>"; };
+		6C460880286ECC8A005C99EF /* DiscoMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuModel.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1761,6 +1773,12 @@
 				6C46086D286DAC76005C99EF /* DiscoRankPopView.m */,
 				6C46086F286DB5CF005C99EF /* DiscoRankTableViewCell.h */,
 				6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */,
+				6C460876286E9CCD005C99EF /* DiscoMenuView.h */,
+				6C460877286E9CCD005C99EF /* DiscoMenuView.m */,
+				6C460879286EA886005C99EF /* DiscoPopMenuListView.h */,
+				6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */,
+				6C46087C286ECC2D005C99EF /* DiscoMenuTableViewCell.h */,
+				6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1770,6 +1788,8 @@
 			children = (
 				6C460873286DB610005C99EF /* DiscoRankModel.h */,
 				6C460874286DB610005C99EF /* DiscoRankModel.m */,
+				6C46087F286ECC8A005C99EF /* DiscoMenuModel.h */,
+				6C460880286ECC8A005C99EF /* DiscoMenuModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2553,6 +2573,7 @@
 				4455AE1627EAC6F7001516EE /* RoomInputView.m in Sources */,
 				4455AD9927EAC658001516EE /* HomeHeaderReusableView.m in Sources */,
 				4455AD8627EAC658001516EE /* ChangeRTCViewController.m in Sources */,
+				6C46087E286ECC2D005C99EF /* DiscoMenuTableViewCell.m in Sources */,
 				4455ADAB27EAC658001516EE /* RoomCmdUpMicModel.m in Sources */,
 				6CE6CD42283F591C0026BDAB /* BaseTextView.m in Sources */,
 				4455AE1027EAC6F7001516EE /* MicOperateView.m in Sources */,
@@ -2572,6 +2593,7 @@
 				6CE6CD5C283F591D0026BDAB /* LanguageUtil.m in Sources */,
 				44D9F3A5280FB0DB000B14B5 /* CustomRoomViewController.m in Sources */,
 				44DD752E2812AEFE0041FE3C /* PKSettingView.m in Sources */,
+				6C46087B286EA886005C99EF /* DiscoPopMenuListView.m in Sources */,
 				6CE6CD54283F591D0026BDAB /* DTUIColor+Extension.m in Sources */,
 				4455AE0C27EAC6F7001516EE /* RoomSystemTableViewCell.m in Sources */,
 				4455ADCA27EAC658001516EE /* TicketViewController.m in Sources */,
@@ -2623,6 +2645,7 @@
 				E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */,
 				6C076EBC27A01BC000650209 /* AudioRoomService.m in Sources */,
 				4455AD9627EAC658001516EE /* MainTabBarController.m in Sources */,
+				6C460878286E9CCD005C99EF /* DiscoMenuView.m in Sources */,
 				444F59EB27F7035800FA1FB2 /* TicketChooseLevelView.m in Sources */,
 				4455ADA827EAC658001516EE /* RoomCmdChatTextModel.m in Sources */,
 				6C460808285840B4005C99EF /* GuessSelectColCell.m in Sources */,
@@ -2708,6 +2731,7 @@
 				BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */,
 				BC210F738CED39591CB7541D /* MoreGuessCoinPopView.m in Sources */,
 				BC210E9E33806A6BFD2AE89A /* MoreGuessCoinItemView.m in Sources */,
+				6C460881286ECC8A005C99EF /* DiscoMenuModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
