@@ -67,7 +67,7 @@
         QuickStartViewController+Game.h
   ``` objc
     // TODO: 登录接入方服务器url
-    #define SUDMGP_GAME_LOGIN_URL          @"https://fat-mgp-hello.sudden.ltd/login/v2"
+    #define GAME_LOGIN_URL          @"https://fat-mgp-hello.sudden.ltd/login/v2"
 
     // TODO: 必须填写由SudMGP提供的appId 及 appKey
     #define SUDMGP_APP_ID                  @"1461564080052506636"

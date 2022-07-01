@@ -68,7 +68,7 @@
         return;
     }
     NSDictionary *dicParam = @{@"user_id": userId};
-    [self postHttpRequestWithURL:SUDMGP_GAME_LOGIN_URL param:dicParam success:^(NSDictionary *rootDict) {
+    [self postHttpRequestWithURL:GAME_LOGIN_URL param:dicParam success:^(NSDictionary *rootDict) {
 
         NSDictionary *dic = [rootDict objectForKey:@"data"];
         /// 这里的code用于登录游戏sdk服务器
@@ -102,7 +102,7 @@
 
                if (retCode != 0) {
                    /// 初始化失败, 可根据业务重试
-                   NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@", retMsg);
+                   NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@(%@)", retMsg, @(retCode));
                    return;
                }
                NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
