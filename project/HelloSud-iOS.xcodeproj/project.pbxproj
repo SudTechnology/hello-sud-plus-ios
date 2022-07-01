@@ -182,6 +182,7 @@
 		6C46087B286EA886005C99EF /* DiscoPopMenuListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */; };
 		6C46087E286ECC2D005C99EF /* DiscoMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */; };
 		6C460881286ECC8A005C99EF /* DiscoMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460880286ECC8A005C99EF /* DiscoMenuModel.m */; };
+		6C460884286EFA22005C99EF /* DiscoMenuRuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460883286EFA21005C99EF /* DiscoMenuRuleView.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
@@ -700,6 +701,8 @@
 		6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuTableViewCell.m; sourceTree = "<group>"; };
 		6C46087F286ECC8A005C99EF /* DiscoMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuModel.h; sourceTree = "<group>"; };
 		6C460880286ECC8A005C99EF /* DiscoMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuModel.m; sourceTree = "<group>"; };
+		6C460882286EFA21005C99EF /* DiscoMenuRuleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuRuleView.h; sourceTree = "<group>"; };
+		6C460883286EFA21005C99EF /* DiscoMenuRuleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuRuleView.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1779,6 +1782,8 @@
 				6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */,
 				6C46087C286ECC2D005C99EF /* DiscoMenuTableViewCell.h */,
 				6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */,
+				6C460882286EFA21005C99EF /* DiscoMenuRuleView.h */,
+				6C460883286EFA21005C99EF /* DiscoMenuRuleView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2618,6 +2623,7 @@
 				6CE6CD4E283F591D0026BDAB /* NSBundle+Language.m in Sources */,
 				6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */,
 				4452DDDB28112BFE001FEEDB /* CustomRoomHelpView.m in Sources */,
+				6C460884286EFA22005C99EF /* DiscoMenuRuleView.m in Sources */,
 				6CE6CD34283F591C0026BDAB /* DTSlider.m in Sources */,
 				4455AE0B27EAC6F7001516EE /* SwitchRoomCell.m in Sources */,
 				6C076EB3279FF3DD00650209 /* GiftService.m in Sources */,
