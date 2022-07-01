@@ -60,7 +60,7 @@
 - (UIImageView *)iconImageView {
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.backgroundColor = HEX_COLOR_A(@"#FFFFFF", 0.2);
+        _iconImageView.backgroundColor = HEX_COLOR(@"#FFFFFF");
     }
     return _iconImageView;
 }
@@ -69,7 +69,9 @@
     if (!_rankLabel) {
         _rankLabel = [[DTPaddingLabel alloc] init];
         _rankLabel.font = UIFONT_REGULAR(6);
+        _rankLabel.paddingX = 4;
         _rankLabel.textColor = HEX_COLOR_A(@"#000000", 1);
+        _rankLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _rankLabel;
 }

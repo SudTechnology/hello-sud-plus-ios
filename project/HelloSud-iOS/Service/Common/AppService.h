@@ -14,6 +14,7 @@
 #import "PKRoomService.h"
 #import "GuessRoomService.h"
 #import "DanmakuRoomService.h"
+#import "DiscoRoomService.h"
 
 // 语音服务
 #define kAudioRoomService ((AudioRoomService *)AppService.shared.scene)
@@ -25,6 +26,8 @@
 #define kGuessService ((GuessRoomService *)AppService.shared.scene)
 // 弹幕房间服务
 #define kDanmakuRoomService ((DanmakuRoomService *)AppService.shared.scene)
+// 蹦迪房间服务
+#define kDiscoRoomService ((DiscoRoomService *)AppService.shared.scene)
 
 
 

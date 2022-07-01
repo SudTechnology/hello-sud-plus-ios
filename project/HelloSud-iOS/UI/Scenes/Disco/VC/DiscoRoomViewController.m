@@ -8,6 +8,7 @@
 
 #import "DiscoRoomViewController.h"
 #import "DiscoNaviRankView.h"
+#import "DiscoRankPopView.h"
 
 @interface DiscoRoomViewController ()
 @property(nonatomic, strong) BaseView *settingView;
@@ -24,19 +25,30 @@
     [self updateSettingState:self.gameId > 0];
 }
 
+- (Class)serviceClass {
+    return DiscoRoomService.class;
+}
+
 - (void)dtAddViews {
     [super dtAddViews];
+    [self.naviView addSubview:self.rankView];
     [self.naviView addSubview:self.settingView];
     [self.settingView addSubview:self.settingLabel];
 }
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
-    [self.settingView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.rankView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(self.naviView.roomModeView);
         make.centerY.equalTo(self.naviView.roomModeView);
+        make.height.greaterThanOrEqualTo(@0);
+        make.width.greaterThanOrEqualTo(@0);
+    }];
+    [self.settingView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.rankView);
         make.height.equalTo(@20);
         make.width.mas_greaterThanOrEqualTo(56);
-        make.trailing.equalTo(self.naviView.roomModeView.mas_leading).offset(-10);
+        make.trailing.equalTo(self.rankView.mas_leading).offset(-10);
         make.leading.greaterThanOrEqualTo(self.naviView.onlineImageView.mas_trailing).offset(10);
     }];
     [self.settingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,6 +58,7 @@
         make.height.mas_greaterThanOrEqualTo(0);
         make.width.mas_lessThanOrEqualTo(@66);
     }];
+
 }
 
 - (void)dtConfigEvents {
@@ -53,11 +66,21 @@
     WeakSelf
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSettingTap:)];
     [self.settingView addGestureRecognizer:tap];
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRankViewTap:)];
+    [self.rankView addGestureRecognizer:tap2];
+
+
 }
 
 - (void)dtConfigUI {
     [super dtConfigUI];
 
+}
+
+/// 点击排行榜
+- (void)onRankViewTap:(UITapGestureRecognizer *)tap {
+    DiscoRankPopView *v = [[DiscoRankPopView alloc]init];
+    [DTSheetView show:v onCloseCallback:nil];
 }
 
 /// 点击PK设置

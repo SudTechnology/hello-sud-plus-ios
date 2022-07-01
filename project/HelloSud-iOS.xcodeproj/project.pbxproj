@@ -174,6 +174,10 @@
 		6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */; };
 		6C460865286D82BA005C99EF /* DiscoNaviRankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460864286D82BA005C99EF /* DiscoNaviRankView.m */; };
 		6C460868286D9982005C99EF /* DiscoRankHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460867286D9981005C99EF /* DiscoRankHeadView.m */; };
+		6C46086B286DAAF0005C99EF /* DiscoRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46086A286DAAF0005C99EF /* DiscoRoomService.m */; };
+		6C46086E286DAC76005C99EF /* DiscoRankPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46086D286DAC76005C99EF /* DiscoRankPopView.m */; };
+		6C460871286DB5CF005C99EF /* DiscoRankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */; };
+		6C460875286DB610005C99EF /* DiscoRankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460874286DB610005C99EF /* DiscoRankModel.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
@@ -676,6 +680,14 @@
 		6C460864286D82BA005C99EF /* DiscoNaviRankView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoNaviRankView.m; sourceTree = "<group>"; };
 		6C460866286D9981005C99EF /* DiscoRankHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankHeadView.h; sourceTree = "<group>"; };
 		6C460867286D9981005C99EF /* DiscoRankHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankHeadView.m; sourceTree = "<group>"; };
+		6C460869286DAAF0005C99EF /* DiscoRoomService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRoomService.h; sourceTree = "<group>"; };
+		6C46086A286DAAF0005C99EF /* DiscoRoomService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRoomService.m; sourceTree = "<group>"; };
+		6C46086C286DAC76005C99EF /* DiscoRankPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankPopView.h; sourceTree = "<group>"; };
+		6C46086D286DAC76005C99EF /* DiscoRankPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankPopView.m; sourceTree = "<group>"; };
+		6C46086F286DB5CF005C99EF /* DiscoRankTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankTableViewCell.h; sourceTree = "<group>"; };
+		6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankTableViewCell.m; sourceTree = "<group>"; };
+		6C460873286DB610005C99EF /* DiscoRankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankModel.h; sourceTree = "<group>"; };
+		6C460874286DB610005C99EF /* DiscoRankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankModel.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -1720,6 +1732,7 @@
 		6C46082A28658E1D005C99EF /* Disco */ = {
 			isa = PBXGroup;
 			children = (
+				6C460872286DB5F2005C99EF /* Model */,
 				6C46082F286ABA64005C99EF /* View */,
 				6C46082E286ABA47005C99EF /* VC */,
 			);
@@ -1744,8 +1757,21 @@
 				6C460864286D82BA005C99EF /* DiscoNaviRankView.m */,
 				6C460866286D9981005C99EF /* DiscoRankHeadView.h */,
 				6C460867286D9981005C99EF /* DiscoRankHeadView.m */,
+				6C46086C286DAC76005C99EF /* DiscoRankPopView.h */,
+				6C46086D286DAC76005C99EF /* DiscoRankPopView.m */,
+				6C46086F286DB5CF005C99EF /* DiscoRankTableViewCell.h */,
+				6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		6C460872286DB5F2005C99EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C460873286DB610005C99EF /* DiscoRankModel.h */,
+				6C460874286DB610005C99EF /* DiscoRankModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6C702B68283F80DF005D80B8 /* App */ = {
@@ -1862,6 +1888,8 @@
 				6C4607C728520D22005C99EF /* GuessRoomService.m */,
 				6C460812285B1DF2005C99EF /* DanmakuRoomService.h */,
 				6C460813285B1DF2005C99EF /* DanmakuRoomService.m */,
+				6C460869286DAAF0005C99EF /* DiscoRoomService.h */,
+				6C46086A286DAAF0005C99EF /* DiscoRoomService.m */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -2453,10 +2481,12 @@
 				4455AD8527EAC658001516EE /* VersionInfoViewController.m in Sources */,
 				4455AE2127EAC71A001516EE /* SceneFactory.m in Sources */,
 				6CE6CD2C283F591C0026BDAB /* DTAlertView.m in Sources */,
+				6C460871286DB5CF005C99EF /* DiscoRankTableViewCell.m in Sources */,
 				6CE6CD40283F591C0026BDAB /* BaseModel.m in Sources */,
 				44D9F3AB280FC08C000B14B5 /* GameConfigViewController.m in Sources */,
 				4455AE0727EAC6F7001516EE /* BaseSceneViewController+Voice.m in Sources */,
 				6CE6CD64283F591D0026BDAB /* HSThreadUtils.m in Sources */,
+				6C460875286DB610005C99EF /* DiscoRankModel.m in Sources */,
 				4455AE0E27EAC6F7001516EE /* HSRoomTextTableViewCell.m in Sources */,
 				44241AE127EAD07B001EE125 /* SwitchLangTableViewCell.m in Sources */,
 				4455AE0A27EAC6F7001516EE /* RoomGameInfoModel.m in Sources */,
@@ -2551,6 +2581,7 @@
 				6CE6CD32283F591C0026BDAB /* DTRippleAnimationView.m in Sources */,
 				6CE6CD38283F591C0026BDAB /* BaseTableViewCell.m in Sources */,
 				6C4608202862B025005C99EF /* LandscapeNaviView.m in Sources */,
+				6C46086B286DAAF0005C99EF /* DiscoRoomService.m in Sources */,
 				6CE6CD50283F591D0026BDAB /* DTNSArray+Masonry.m in Sources */,
 				6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */,
 				4455AD8C27EAC658001516EE /* HSSettingCell.m in Sources */,
@@ -2642,6 +2673,7 @@
 				BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */,
 				BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */,
 				6CE6CD2E283F591C0026BDAB /* DTPaddingLabel.m in Sources */,
+				6C46086E286DAC76005C99EF /* DiscoRankPopView.m in Sources */,
 				6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */,
 				6C46082328630CD7005C99EF /* RespGiftListModel.m in Sources */,
 				BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */,
