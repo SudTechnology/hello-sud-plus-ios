@@ -288,7 +288,7 @@
 - (UIButton *)confirmBtn {
     if (!_confirmBtn) {
         _confirmBtn = [[UIButton alloc] init];
-        [_confirmBtn setTitle:@"确认(200金币)" forState:UIControlStateNormal];
+        [_confirmBtn setTitle:@"确认" forState:UIControlStateNormal];
         [_confirmBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         [_confirmBtn setTitleColor:HEX_COLOR_A(@"#6C3800", 0.3) forState:UIControlStateDisabled];
         [_confirmBtn setBackgroundImage:HEX_COLOR(@"#FFE373").dt_toImage forState:UIControlStateNormal];
