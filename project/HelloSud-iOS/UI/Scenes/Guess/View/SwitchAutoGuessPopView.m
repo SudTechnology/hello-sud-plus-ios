@@ -133,6 +133,7 @@
         [_closeBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         _closeBtn.layer.borderWidth = 1;
         _closeBtn.layer.borderColor = HEX_COLOR(@"#EEE8D0").CGColor;
+        _closeBtn.backgroundColor = HEX_COLOR(@"#FFFFFF");
         _closeBtn.titleLabel.font = UIFONT_BOLD(14);
     }
     return _closeBtn;

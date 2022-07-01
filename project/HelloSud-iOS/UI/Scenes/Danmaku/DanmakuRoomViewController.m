@@ -44,12 +44,7 @@
 @implementation DanmakuRoomViewController
 
 - (void)dealloc {
-    if (self.landscapeNaviHiddenTimer) {
-        [self.landscapeTipTimer stopTimer];
-    }
-    if (self.landscapeTipTimer) {
-        [self.landscapeTipTimer stopTimer];
-    }
+    [self closeAllTimer];
 }
 
 - (void)viewDidLoad {
@@ -131,6 +126,20 @@
     };
     UITapGestureRecognizer *videoTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapVideo:)];
     [self.videoContentView addGestureRecognizer:videoTap];
+}
+
+- (void)exitRoomFromSuspend:(BOOL)isSuspend finished:(void (^)(void))finished {
+    [super exitRoomFromSuspend:isSuspend finished:finished];
+    [self closeAllTimer];
+}
+
+- (void)closeAllTimer {
+    if (self.landscapeNaviHiddenTimer) {
+        [self.landscapeTipTimer stopTimer];
+    }
+    if (self.landscapeTipTimer) {
+        [self.landscapeTipTimer stopTimer];
+    }
 }
 
 /// 设置游戏房间内容
