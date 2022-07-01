@@ -297,13 +297,16 @@
     v.dataList = playerList;
     v.winCoin = winCoin;
     BOOL isSupport = NO;
+    BOOL isWin = NO;
     for (int i = 0; i < playerList.count; ++i) {
         if (playerList[i].support) {
             isSupport = YES;
-            break;
+            if (playerList[i].rank == 1) {
+                isWin = YES;
+            }
         }
     }
-    if (playerList.count > 0 && playerList[0].support) {
+    if (isWin) {
         v.resultStateType = GuessResultPopViewTypeWin;
     } else if (isSupport) {
         v.resultStateType = GuessResultPopViewTypeLose;
