@@ -1113,6 +1113,14 @@
     return [m mj_JSONString];
 }
 
+/// 处理游戏开始
+- (void)handleGameStared {
+    /// 如果当前用户在麦上，自动加入游戏
+    if ([self isInMic] && [self isAutoJoinGame]) {
+        [self notifyGameToJoin];
+    }
+}
+
 - (void)onGameMGCommonSelfClickReadyBtn {
 }
 

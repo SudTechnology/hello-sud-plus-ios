@@ -189,6 +189,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - SudFSMMGListener
 /// 游戏配置
 - (NSString *)onGetGameCfg;
+/// 处理游戏开始
+- (void)handleGameStared;
 
 /// 游戏：点击了准备按钮
 - (void)onGameMGCommonSelfClickReadyBtn;

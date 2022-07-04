@@ -35,10 +35,7 @@
 
 /// 游戏开始
 - (void)onGameStarted {
-    /// 如果当前用户在麦上，自动加入游戏
-    if ([self isInMic] && [self isAutoJoinGame]) {
-        [self notifyGameToJoin];
-    }
+    [self handleGameStared];
 }
 
 - (void)onGameDestroyed {

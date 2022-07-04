@@ -33,6 +33,11 @@
     return DiscoRoomService.class;
 }
 
+/// 是否需要自动上麦
+- (BOOL)isNeedAutoUpMic {
+    return NO;
+}
+
 - (void)dtAddViews {
     [super dtAddViews];
     [self.naviView addSubview:self.rankView];
@@ -144,8 +149,14 @@
                                 cornerRadius:0];
     }
 }
+#pragma game
+/// 处理游戏开始
+- (void)handleGameStared {
+    [super handleGameStared];
+    [kDiscoRoomService joinDancePool:nil];
+}
 
-
+#pragma mark lazy
 - (DiscoNaviRankView *)rankView {
     if (!_rankView) {
         _rankView = [[DiscoNaviRankView alloc] init];
