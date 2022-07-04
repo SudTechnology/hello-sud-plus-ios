@@ -8,7 +8,7 @@
 
 #define ITEM_WIDTH (kScreenWidth - 32 - 62)
 
-@interface GuessCategoryView()
+@interface GuessCategoryView()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
 /// 当前页码
 @property (nonatomic, assign)NSInteger currentPage;

@@ -11,6 +11,7 @@
 
 @interface HomeGuessCell ()
 @property(nonatomic, strong) UIImageView *iconImageView;
+@property(nonatomic, strong) UIImageView *bgImageView;
 @property(nonatomic, strong) UIView *awardBackgroundView;
 @property(nonatomic, strong) YYLabel *awardLabel;
 @property(nonatomic, strong) UILabel *nameLabel;
@@ -33,6 +34,7 @@
 - (void)dtAddViews {
 
     [super dtAddViews];
+    [self.contentView addSubview:self.bgImageView];
     [self.contentView addSubview:self.iconImageView];
     [self.contentView addSubview:self.awardBackgroundView];
     [self.awardBackgroundView addSubview:self.awardLabel];
@@ -43,13 +45,18 @@
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.equalTo(@0);
         make.height.equalTo(@100);
     }];
+    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.bgImageView).offset(18);
+        make.width.height.equalTo(@64);
+        make.centerY.equalTo(self.bgImageView);
+    }];
     [self.awardBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(@8);
-        make.centerY.equalTo(self.iconImageView);
+        make.centerY.equalTo(self.bgImageView);
         make.height.equalTo(@40);
         make.width.greaterThanOrEqualTo(@0);
     }];
@@ -61,7 +68,7 @@
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(@0);
-        make.top.equalTo(self.iconImageView.mas_bottom).offset(0);
+        make.top.equalTo(self.bgImageView.mas_bottom).offset(0);
         make.height.equalTo(@40);
     }];
     [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -91,7 +98,10 @@
     }
     MoreGuessGameModel *m = (MoreGuessGameModel *)self.model;
     if (m.homeGamePic) {
-        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.homeGamePic]];
+        [self.bgImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.homeGamePic]];
+    }
+    if (m.gamePic) {
+        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.gamePic]];
     }
     self.nameLabel.text = m.gameName;
     [self updateInfoLabel:@"00:00:00"];
@@ -213,6 +223,15 @@
     [full appendAttributedString:attrAwardValue];
 
     _awardLabel.attributedText = full;
+}
+
+- (UIImageView *)bgImageView {
+    if (!_bgImageView) {
+        _bgImageView = [[UIImageView alloc] init];
+        _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _bgImageView.clipsToBounds = YES;
+    }
+    return _bgImageView;
 }
 
 - (UIImageView *)iconImageView {
