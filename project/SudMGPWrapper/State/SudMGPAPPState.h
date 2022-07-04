@@ -43,6 +43,22 @@ static NSString* APP_COMMON_OPEN_BRATE   = @"app_common_open_vibrate";
 static NSString* APP_COMMON_SOUND_VOLUME   = @"app_common_game_sound_volume";
 /// 设置游戏上报信息扩展参数（透传)
 static NSString* APP_COMMON_GAME_INFO_EXTRAS   = @"app_common_report_game_info_extras";
+/// 元宇宙砂砂舞相关设置
+static NSString* APP_COMMON_GAME_DISCO_ACTION   = @"app_common_game_disco_action";
 
+/// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
+/// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
+@interface AppCommonGameDiscoAction : NSObject
+/// 必传的参数，用于指定类型的序号，不同序号用于区分游戏内的不同功能，不传则会判断为无效指令
+@property (nonatomic, assign)NSInteger actionId;
+/// 持续时间，单位秒，部分功能有持续时间就需要传对应的数值，不传或传错则会按各自功能的默认值处理
+@property (nonatomic, assign)NSInteger cooldown;
+/// 是否置顶，针对部分功能可排队置顶（false：不置顶；true：置顶；默认为false）
+@property (nonatomic, assign)BOOL isTop;
+/// 额外参数1，针对部分功能有具体的意义
+@property (nonatomic, strong)NSString * field1;
+// 额外参数2，针对部分功能有具体的意义
+@property (nonatomic, strong)NSString * field2;
+@end
 
 #endif /* SudMGPAPPState2_h */

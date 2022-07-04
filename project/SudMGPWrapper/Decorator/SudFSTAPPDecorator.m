@@ -140,6 +140,12 @@
     [self notifyStateChange:APP_COMMON_GAME_INFO_EXTRAS dataJson:dic.mj_JSONString];
 }
 
+/// 元宇宙砂砂舞相关设置(app_common_game_disco_action)
+/// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
+/// @param actionModel 指令参数model
+- (void)notifyAppCommonGameDiscoAction:(AppCommonGameDiscoAction *)actionModel {
+    [self notifyStateChange:APP_COMMON_GAME_DISCO_ACTION dataJson:actionModel.mj_JSONString];
+}
 
 #pragma mark =======APP->游戏状态处理=======
 /// 状态通知（app to mg）

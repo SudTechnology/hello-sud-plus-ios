@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 蹦迪服务
 @interface DiscoRoomService : AudioRoomService
 
+- (void)joinDancePool:(NSString *)songId rhythm:(CGFloat)rhythm;
 @end
 
 NS_ASSUME_NONNULL_END

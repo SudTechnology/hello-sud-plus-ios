@@ -13,6 +13,7 @@
 #import <SudMGP/ISudFSTAPP.h>
 #import <SudMGP/SudMGP.h>
 #import <SudMGP/ISudFSMStateHandle.h>
+#import "SudMGPAPPState.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -99,6 +100,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param reportGameInfoExtras   string类型，Https服务回调report_game_info参数，最大长度1024字节，超过则截断（2022-01-21）
 - (void)notifyAppComonReportGameInfoExtras:(NSString *)reportGameInfoExtras;
 
+/// 元宇宙砂砂舞相关设置(app_common_game_disco_action)
+/// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
+/// @param actionModel 指令参数model
+- (void)notifyAppCommonGameDiscoAction:(AppCommonGameDiscoAction *)actionModel;
 
 /// 继续游戏
 - (void)playMG;
