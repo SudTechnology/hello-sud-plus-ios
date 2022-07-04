@@ -70,9 +70,9 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SSZipArchive (2.4.3)
-  - SudMGPWrapper (0.0.1):
-    - SudMGPWrapper/SudMGPWrapper (= 0.0.1)
-  - SudMGPWrapper/SudMGPWrapper (0.0.1):
+  - SudMGPWrapper (1.0.2):
+    - SudMGPWrapper/SudMGPWrapper (= 1.0.2)
+  - SudMGPWrapper/SudMGPWrapper (1.0.2):
     - MJExtension (~> 3.4.1)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -83,9 +83,9 @@ PODS:
   - SVGAPlayer/ProtoFiles (2.5.6):
     - Protobuf (~> 3.4)
   - SVProgressHUD (2.2.5)
-  - TXLiteAVSDK_TRTC (10.1.11335):
-    - TXLiteAVSDK_TRTC/TRTC (= 10.1.11335)
-  - TXLiteAVSDK_TRTC/TRTC (10.1.11335)
+  - TXLiteAVSDK_TRTC (10.2.11418):
+    - TXLiteAVSDK_TRTC/TRTC (= 10.2.11418)
+  - TXLiteAVSDK_TRTC/TRTC (10.2.11418)
   - VolcEngineRTC (3.37.101):
     - VolcEngineRTC/Core (= 3.37.101)
   - VolcEngineRTC/Core (3.37.101)
@@ -117,7 +117,7 @@ DEPENDENCIES:
   - SudMGPWrapper (from `./`)
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
-  - TXLiteAVSDK_TRTC (from `https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec`)
+  - TXLiteAVSDK_TRTC (= 10.2.11418)
   - VolcEngineRTC (= 3.37.101)
   - YYText (~> 1.0.7)
   - ZegoExpressEngine (~> 2.17.0)
@@ -151,6 +151,7 @@ SPEC REPOS:
     - SDWebImageWebPCoder
     - SSZipArchive
     - SVProgressHUD
+    - TXLiteAVSDK_TRTC
     - YYText
     - ZegoExpressEngine
     - ZIM
@@ -161,8 +162,6 @@ EXTERNAL SOURCES:
   SVGAPlayer:
     :git: https://github.com/svga/SVGAPlayer-iOS.git
     :tag: 2.5.6
-  TXLiteAVSDK_TRTC:
-    :podspec: https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec
 
 CHECKOUT OPTIONS:
   SVGAPlayer:
@@ -193,15 +192,15 @@ SPEC CHECKSUMS:
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  SudMGPWrapper: 97bcd0001370efb3c43126788617296afdfff39d
+  SudMGPWrapper: 93fd54d9561bfc2175bd91c163be183bb35b1482
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  TXLiteAVSDK_TRTC: 7d122872df8e70eae4786a43eed33545c8d32b1e
+  TXLiteAVSDK_TRTC: a653d0195b9519222b6ff8a6329d7c942aeb1a62
   VolcEngineRTC: 6db475579381dd86105092ef7cc8100eb8db3345
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 6a4f294825ac93f16c5101d3e97d211c2d17fa33
 
-PODFILE CHECKSUM: 1dfd2707a48351ba72e3198039b19b75c2bf850a
+PODFILE CHECKSUM: 8d3668ee374a52f4959190e6db940d26749366c6
 
 COCOAPODS: 1.11.2
