@@ -462,6 +462,7 @@
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
 - (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
     [super onGameMGCommonGameState:handle model:model];
+    DDLogDebug(@"onGameMGCommonGameState：%@", @(model.gameState));
     // 游戏进行开始时，扣费
     if (model.gameState == MGCommonGameStateTypeLoading) {
         WeakSelf
@@ -474,6 +475,8 @@
         [self reqAutoBet:^(BOOL success) {
             [self reqBetList];
         }];
+    } else if (model.gameState == MGCommonGameStateTypePlaying) {
+        [self reqBetList];
     }
 }
 
