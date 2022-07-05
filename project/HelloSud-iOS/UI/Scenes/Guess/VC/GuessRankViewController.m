@@ -185,6 +185,7 @@
 // 返回各个列表菜单下的实例，该实例需要遵守并实现 <JXCategoryListContentViewDelegate> 协议
 - (id <JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     GuessRankContentView *listView = [[GuessRankContentView alloc] init];
+    [listView updateHeadHeight:253];
     listView.dataList = [self createDataList];
     if (self.titleIndex == 0) {
         NSString *subTitle = @"竞猜王者";

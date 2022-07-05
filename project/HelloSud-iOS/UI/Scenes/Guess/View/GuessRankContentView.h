@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)GuessRankModel *firstModel;
 @property(nonatomic, strong)GuessRankModel *secondModel;
 @property(nonatomic, strong)GuessRankModel *thirdModel;
+- (void)updateHeadHeight:(CGFloat)headHeight;
 @end
 
 NS_ASSUME_NONNULL_END

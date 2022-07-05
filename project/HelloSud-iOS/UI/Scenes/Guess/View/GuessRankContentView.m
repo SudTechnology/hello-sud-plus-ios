@@ -20,6 +20,12 @@
 
 @implementation GuessRankContentView
 
+- (void)updateHeadHeight:(CGFloat)headHeight {
+    self.headerView.mj_h = headHeight;
+    self.tableView.tableHeaderView = self.headerView;
+    self.headerView.backgroundColor = UIColor.clearColor;
+}
+
 - (UIView *)listView {
     return self;
 }
@@ -38,9 +44,7 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-    self.headerView.mj_h = 240;
-    self.tableView.tableHeaderView = self.headerView;
-    self.headerView.backgroundColor = UIColor.clearColor;
+
     self.tableView.backgroundColor = UIColor.clearColor;
 }
 

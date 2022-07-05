@@ -157,6 +157,7 @@
 // 返回各个列表菜单下的实例，该实例需要遵守并实现 <JXCategoryListContentViewDelegate> 协议
 - (id <JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     GuessRankContentView *listView = [[GuessRankContentView alloc] init];
+    [listView updateHeadHeight:240];
     listView.dataList = [self createDataList];
     NSString *tip = @"获得特写(次)";
     listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"盛世红盛" avatar:@"ic_avatar_1" tip:tip subTitle:@""];
