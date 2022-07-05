@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DanmakuQuickSendView : BaseView
 @property (nonatomic, copy)void(^onOpenBlock)(BOOL isOpen);
 @property (nonatomic, strong) NSArray <DanmakuCallWarcraftModel *> *dataList;
+
 /// 调整是否展开状态
 /// @param isOpen YES 开 NO关
 - (void)showOpen:(BOOL)isOpen;

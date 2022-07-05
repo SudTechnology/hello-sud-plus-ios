@@ -39,6 +39,10 @@
 @property(nonatomic, assign) NSInteger countdown;
 // 横屏提示倒计时
 @property(nonatomic, strong) DTTimer *landscapeTipTimer;
+/// 是否是竖屏开启
+@property (nonatomic, assign)BOOL isPortraitOpen;
+/// 正在展示横屏引导
+@property (nonatomic, assign)BOOL isShowingLandscapeGuide;
 @end
 
 @implementation DanmakuRoomViewController
@@ -89,6 +93,7 @@
         make.trailing.equalTo(@-16);
         make.width.height.equalTo(@24);
     }];
+    self.isPortraitOpen = YES;
     [self.quickSendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
         make.leading.trailing.equalTo(@0);
@@ -156,7 +161,9 @@
 /// @param isOpen
 - (void)handleQuickSendOpen:(BOOL)isOpen {
     WeakSelf
-    [self closeGuideTipView];
+    if (self.isShowingLandscapeGuide) {
+        [self closeGuideTipView];
+    }
     if (isOpen) {
         // 展开
         if (weakSelf.quickSendView.dataList.count == 0) {
@@ -175,6 +182,7 @@
             }];
 
         } else {
+            self.isPortraitOpen = isOpen;
             [UIView animateWithDuration:0.25 animations:^{
                 [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.height.equalTo(@120);
@@ -199,6 +207,7 @@
             }];
 
         } else {
+            self.isPortraitOpen = isOpen;
             [UIView animateWithDuration:0.25 animations:^{
                 [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.height.equalTo(@24);
@@ -217,7 +226,9 @@
     }
 
     [self endHiddenNaviCountdown];
-    [self closeGuideTipView];
+    if (self.isShowingLandscapeGuide) {
+        [self closeGuideTipView];
+    }
     if (self.landscapeNaviView.hidden) {
         [self showLandscapeNaviView];
         [self beginHiddenNaviCountdown];
@@ -234,6 +245,7 @@
         [_guideTipBgView removeFromSuperview];
         _guideTipBgView = nil;
     }
+    self.isShowingLandscapeGuide = NO;
 }
 
 /// 重置视频视图
@@ -394,12 +406,22 @@
             make.leading.trailing.equalTo(@0);
             make.height.equalTo(@212);
         }];
-        [self.quickSendView showOpen:NO];
-        [self.quickSendView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
-            make.leading.trailing.equalTo(@0);
-            make.height.equalTo(@24);
-        }];
+        if (self.isPortraitOpen) {
+            [self.quickSendView showOpen:YES];
+            [self.quickSendView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
+                make.leading.trailing.equalTo(@0);
+                make.height.equalTo(@120);
+            }];
+        } else {
+
+            [self.quickSendView showOpen:NO];
+            [self.quickSendView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
+                make.leading.trailing.equalTo(@0);
+                make.height.equalTo(@24);
+            }];
+        }
         [self closeGuideTipView];
     }
 }
@@ -439,11 +461,12 @@
     }];
     [self.guideTipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.quickSendView.mas_top).offset(0);
-        make.trailing.equalTo(self.quickSendView);
+        make.trailing.equalTo(@(-(kScreenWidth - 568) / 2));
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.guideTipView show:^{
         weakSelf.guideTipBgView.hidden = NO;
+        weakSelf.isShowingLandscapeGuide = YES;
     }];
 }
 
@@ -505,6 +528,7 @@
     if (!_videoContentView) {
         _videoContentView = [[BaseView alloc] init];
         _videoContentView.contentMode = UIViewContentModeScaleAspectFill;
+        _videoContentView.backgroundColor = UIColor.blackColor;
     }
     return _videoContentView;
 }

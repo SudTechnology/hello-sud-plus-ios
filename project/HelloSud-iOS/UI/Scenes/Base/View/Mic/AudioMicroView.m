@@ -6,6 +6,7 @@
 //
 
 #import "AudioMicroView.h"
+#import <MJExtension/MJExtension.h>
 
 @interface AudioMicroView ()
 @property(nonatomic, strong) UIImageView *headerView;
@@ -166,19 +167,23 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
         RoomCmdUpMicModel *msgModel = note.userInfo[@"msgModel"];
         if ([msgModel isKindOfClass:RoomCmdUpMicModel.class]) {
+            DDLogDebug(@"NTF_MIC_CHANGED msg info:%@", [msgModel mj_JSONString]);
+            BOOL isSameMicUser = weakSelf.model.user != nil && [msgModel.sendUser.userID isEqualToString:weakSelf.model.user.userID];
             // 操作麦位与当前符合
             if (msgModel.micIndex == weakSelf.model.micIndex) {
                 if (msgModel.cmd == CMD_DOWN_MIC_NOTIFY) {
                     // 下麦,清空用户信息
-                    weakSelf.model.user = nil;
-                    weakSelf.giftImageView.hidden = true;
-                    [weakSelf hiddenGameNode:true];
+                    if (isSameMicUser){
+                        weakSelf.model.user = nil;
+                        weakSelf.giftImageView.hidden = true;
+                        [weakSelf hiddenGameNode:true];
+                    }
                 } else {
                     weakSelf.model.user = msgModel.sendUser;
                     weakSelf.model.user.roleType = msgModel.roleType;
                     weakSelf.model.streamID = msgModel.streamID;
                 }
-            } else if (weakSelf.model.user != nil && [msgModel.sendUser.userID isEqualToString:weakSelf.model.user.userID]) {
+            } else if (isSameMicUser) {
                 // 当前用户ID与切换用户ID一致，则清除掉
                 weakSelf.model.user = nil;
                 weakSelf.giftImageView.hidden = true;

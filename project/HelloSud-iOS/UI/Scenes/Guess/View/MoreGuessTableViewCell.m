@@ -276,6 +276,7 @@
 - (UIButton *)playBtn {
     if (!_playBtn) {
         _playBtn = [[UIButton alloc] init];
+        _playBtn.titleLabel.font = UIFONT_BOLD(16);
         [_playBtn setTitle:@"立即玩" forState:UIControlStateNormal];
         [_playBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         [_playBtn setBackgroundImage:HEX_COLOR(@"#FFE373").dt_toImage forState:UIControlStateNormal];
