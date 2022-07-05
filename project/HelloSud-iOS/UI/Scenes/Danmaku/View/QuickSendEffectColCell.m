@@ -203,7 +203,13 @@
             }
         }
         if (!toUser) {
-            toUser = [[AudioUserModel alloc] init];
+            [ToastUtil show:@"主播不在线"];
+            DDLogError(@"找不到房主发送,mic count:%@", @(micList.count));
+            for (int i = 0; i < micList.count; ++i) {
+                AudioUserModel *user = micList[i].user;
+                DDLogError(@"mic users name:%@,userId:%@,roleType:%@", user.name, user.userID, @(user.roleType));
+            }
+            return;
         }
 
         RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:m.giftId giftCount:m.giftAmount toUser:toUser];
