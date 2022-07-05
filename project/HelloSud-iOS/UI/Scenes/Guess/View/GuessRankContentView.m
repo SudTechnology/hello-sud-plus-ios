@@ -38,7 +38,7 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-    self.headerView.mj_h = 253;
+    self.headerView.mj_h = 240;
     self.tableView.tableHeaderView = self.headerView;
     self.headerView.backgroundColor = UIColor.clearColor;
     self.tableView.backgroundColor = UIColor.clearColor;

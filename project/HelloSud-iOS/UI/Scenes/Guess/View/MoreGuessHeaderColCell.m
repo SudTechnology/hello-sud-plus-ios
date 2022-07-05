@@ -270,7 +270,7 @@
         self.leftNameLabel.text = @"趣味辩论";
 
         self.leftIDLabel.text = @"ID 8721";
-        self.rightNameLabel.text = @"年年不忘团";
+        self.rightNameLabel.text = @"念念不忘团";
         self.rightIDLabel.text = @"ID 8719";
         self.coinTipLabel.text = @"预测成功瓜分奖池";
         self.vsImageView.alpha = 1;

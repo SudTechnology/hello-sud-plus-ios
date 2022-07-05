@@ -55,11 +55,11 @@
         make.height.equalTo(@25);
         make.centerX.equalTo(self.view);
     }];
-
+    [self.subTitleCategoryView dt_cornerRadius:10];
     [self.subTitleCategoryView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(8);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
         make.height.equalTo(@20);
-        make.width.equalTo(@140);
+        make.width.equalTo(@160);
         make.centerX.equalTo(self.view);
     }];
     [self.listContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -107,21 +107,19 @@
         _subTitleCategoryView = [[JXCategoryTitleView alloc] init];
         _subTitleCategoryView.delegate = self;
         _subTitleCategoryView.titleColor = HEX_COLOR_A(@"#ffffff", 0.8);
-        _subTitleCategoryView.titleSelectedColor = HEX_COLOR(@"#ffffff");
+        _subTitleCategoryView.titleSelectedColor = HEX_COLOR(@"#3F3228");
         _subTitleCategoryView.titleFont = UIFONT_REGULAR(12);
         _subTitleCategoryView.titleSelectedFont = UIFONT_MEDIUM(12);
         _subTitleCategoryView.titles = self.subTitles;
-        _subTitleCategoryView.cellSpacing = 30;
-        _subTitleCategoryView.contentEdgeInsetLeft = 0;
-        _subTitleCategoryView.contentEdgeInsetRight = 0;
-
-
-        JXCategoryIndicatorLineView *lineIndicator = [[JXCategoryIndicatorLineView alloc] init];
-        // 设置指示器固定宽度
-        lineIndicator.indicatorColor = HEX_COLOR(@"#ffffff");
-        lineIndicator.indicatorWidth = 8;
-        lineIndicator.indicatorHeight = 2;
-        _subTitleCategoryView.indicators = @[lineIndicator];
+        _subTitleCategoryView.backgroundColor = HEX_COLOR_A(@"#C0A48F", 0.3);
+        _subTitleCategoryView.contentEdgeInsetLeft = 15;
+        _subTitleCategoryView.contentEdgeInsetRight = 15;
+        _subTitleCategoryView.titleColorGradientEnabled = YES;
+        _subTitleCategoryView.titleLabelZoomScrollGradientEnabled = NO;
+        JXCategoryIndicatorBackgroundView *backgroundIndicator = [[JXCategoryIndicatorBackgroundView alloc] init];
+        backgroundIndicator.indicatorColor = HEX_COLOR(@"#FFF2E3");
+        backgroundIndicator.indicatorWidth = 80;
+        _subTitleCategoryView.indicators = @[backgroundIndicator];
     }
     return _subTitleCategoryView;
 }
