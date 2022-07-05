@@ -505,6 +505,7 @@
     if (!_videoContentView) {
         _videoContentView = [[BaseView alloc] init];
         _videoContentView.contentMode = UIViewContentModeScaleAspectFill;
+        _videoContentView.backgroundColor = UIColor.blackColor;
     }
     return _videoContentView;
 }
