@@ -39,6 +39,7 @@
 
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@0);
+        make.centerX.equalTo(self);
         make.leading.trailing.equalTo(@0);
         make.bottom.equalTo(self.closeBtn.mas_top).offset(4);
     }];
@@ -138,7 +139,8 @@
         }];
         [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.closeBtn.mas_bottom).offset(-2);
-            make.leading.trailing.equalTo(@0);
+            make.width.equalTo(@568);
+            make.centerX.equalTo(self);
             make.bottom.equalTo(@0);
         }];
         [self.showBtn mas_remakeConstraints:^(MASConstraintMaker *make) {

@@ -461,7 +461,7 @@
     }];
     [self.guideTipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.quickSendView.mas_top).offset(0);
-        make.trailing.equalTo(self.quickSendView);
+        make.trailing.equalTo(@(-(kScreenWidth - 568) / 2));
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.guideTipView show:^{
