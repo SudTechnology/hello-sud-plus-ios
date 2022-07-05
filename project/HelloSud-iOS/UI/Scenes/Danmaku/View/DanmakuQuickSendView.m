@@ -16,7 +16,6 @@
 @property (nonatomic, strong)UIImageView *showIconImageView;
 @property (nonatomic, strong)BaseView *contentView;
 @property (nonatomic, strong)UICollectionView *collectionView;
-
 @end
 
 @implementation DanmakuQuickSendView

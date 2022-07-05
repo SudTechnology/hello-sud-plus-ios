@@ -39,6 +39,8 @@
 @property(nonatomic, assign) NSInteger countdown;
 // 横屏提示倒计时
 @property(nonatomic, strong) DTTimer *landscapeTipTimer;
+/// 是否是竖屏开启
+@property (nonatomic, assign)BOOL isPortraitOpen;
 @end
 
 @implementation DanmakuRoomViewController
@@ -89,6 +91,7 @@
         make.trailing.equalTo(@-16);
         make.width.height.equalTo(@24);
     }];
+    self.isPortraitOpen = YES;
     [self.quickSendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
         make.leading.trailing.equalTo(@0);
@@ -175,6 +178,7 @@
             }];
 
         } else {
+            self.isPortraitOpen = isOpen;
             [UIView animateWithDuration:0.25 animations:^{
                 [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.height.equalTo(@120);
@@ -199,6 +203,7 @@
             }];
 
         } else {
+            self.isPortraitOpen = isOpen;
             [UIView animateWithDuration:0.25 animations:^{
                 [weakSelf.quickSendView mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.height.equalTo(@24);
@@ -394,12 +399,22 @@
             make.leading.trailing.equalTo(@0);
             make.height.equalTo(@212);
         }];
-        [self.quickSendView showOpen:NO];
-        [self.quickSendView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
-            make.leading.trailing.equalTo(@0);
-            make.height.equalTo(@24);
-        }];
+        if (self.isPortraitOpen) {
+            [self.quickSendView showOpen:YES];
+            [self.quickSendView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
+                make.leading.trailing.equalTo(@0);
+                make.height.equalTo(@120);
+            }];
+        } else {
+
+            [self.quickSendView showOpen:NO];
+            [self.quickSendView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.videoContentView.mas_bottom).offset(0);
+                make.leading.trailing.equalTo(@0);
+                make.height.equalTo(@24);
+            }];
+        }
         [self closeGuideTipView];
     }
 }
