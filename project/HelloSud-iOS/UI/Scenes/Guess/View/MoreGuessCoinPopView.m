@@ -128,6 +128,11 @@
     [self.supportBtn addTarget:self action:@selector(onSupportBtnCLick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
+    self.titleLabel.text = [NSString stringWithFormat:@"你要投入多少支持%@", self.name];
+}
+
 - (void)onSupportBtnCLick:(id)sender {
 
     [GuessRoomService reqBet:1 coin:self.selectedCoin userList:nil finished:^{
@@ -197,7 +202,6 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = UIFONT_MEDIUM(16);
         _titleLabel.textColor = HEX_COLOR(@"#000000");
-        _titleLabel.text = @"你要投入多少支持趣味辩论";
         _titleLabel.numberOfLines = 0;
     }
     return _titleLabel;

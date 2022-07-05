@@ -268,12 +268,16 @@
         self.leftImageView.image = [UIImage imageNamed:@"ic_avatar_7"];
         self.rightImageView.image = [UIImage imageNamed:@"ic_avatar_8"];
         self.leftNameLabel.text = @"趣味辩论";
+
         self.leftIDLabel.text = @"ID 8721";
         self.rightNameLabel.text = @"年年不忘团";
         self.rightIDLabel.text = @"ID 8719";
         self.coinTipLabel.text = @"预测成功瓜分奖池";
+        self.vsImageView.alpha = 1;
         [self updateCoin:50000];
         [self beginCountdown];
+        m.leftRoomName = self.leftNameLabel.text;
+        m.rightRoomName = self.rightNameLabel.text;
     } else {
         self.stateLabel.text = @"已结束";
         self.coinTipLabel.text = @"13人预测成功瓜分奖池";
@@ -291,7 +295,7 @@
         self.leftIDLabel.text = @"ID 8526";
         self.rightNameLabel.text = @"彼岸花开";
         self.rightIDLabel.text = @"ID 8329";
-
+        self.vsImageView.alpha = 0.7;
         [self updateCoin:30000];
     }
 }
@@ -324,13 +328,16 @@
 
 - (void)onLeftSupportClick:(id)sender {
     WeakSelf
+    MoreGuessHeaderCellModel *m = (MoreGuessHeaderCellModel *)self.model;
+    if (![m isKindOfClass:[MoreGuessHeaderCellModel class]]) {
+        return;
+    }
     MoreGuessCoinPopView *v = [[MoreGuessCoinPopView alloc]init];
+    v.name = m.leftRoomName;
+    [v dtUpdateUI];
     v.onSupportCoinBlock = ^(NSInteger coin) {
 
-        MoreGuessHeaderCellModel *m = (MoreGuessHeaderCellModel *)weakSelf.model;
-        if (![m isKindOfClass:[MoreGuessHeaderCellModel class]]) {
-            return;
-        }
+
         m.leftSupportCoin += coin;
         [weakSelf dtUpdateUI];
         [DTSheetView close];
@@ -340,7 +347,13 @@
 
 - (void)onRightSupportClick:(id)sender {
     WeakSelf
+    MoreGuessHeaderCellModel *m = (MoreGuessHeaderCellModel *)self.model;
+    if (![m isKindOfClass:[MoreGuessHeaderCellModel class]]) {
+        return;
+    }
     MoreGuessCoinPopView *v = [[MoreGuessCoinPopView alloc]init];
+    v.name = m.rightRoomName;
+    [v dtUpdateUI];
     v.onSupportCoinBlock = ^(NSInteger coin) {
         MoreGuessHeaderCellModel *m = weakSelf.model;
         if (![m isKindOfClass:[MoreGuessHeaderCellModel class]]) {

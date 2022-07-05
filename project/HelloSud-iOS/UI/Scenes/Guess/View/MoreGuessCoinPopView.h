@@ -5,5 +5,6 @@
 
 /// 更多竞猜金币弹出视图
 @interface MoreGuessCoinPopView : BaseView
+@property (nonatomic, copy)NSString *name;
 @property (nonatomic, copy)void(^onSupportCoinBlock)(NSInteger coin);
 @end

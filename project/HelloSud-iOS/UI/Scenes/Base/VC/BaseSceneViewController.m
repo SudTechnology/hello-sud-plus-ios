@@ -376,7 +376,20 @@
 /// 将要发送消息
 /// @param msg msg
 - (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void(^)(BOOL shouldSend))shouldSend {
-    if (shouldSend) shouldSend(YES);
+    if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
+        RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
+        GiftModel *giftModel = [m getGiftModel];
+        // 发送礼物
+        [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount price:giftModel.price type:m.type == 1 ? 2 : 1 finished:^{
+            DDLogDebug(@"发送礼物成功");
+            if (shouldSend) shouldSend(YES);
+        }                       failure:^(NSError *error) {
+            if (shouldSend) shouldSend(NO);
+
+        }];
+    } else {
+        if (shouldSend) shouldSend(YES);
+    }
     DDLogDebug(@"onWillSendMsg");
 }
 
