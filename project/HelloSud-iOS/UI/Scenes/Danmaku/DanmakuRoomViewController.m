@@ -41,6 +41,8 @@
 @property(nonatomic, strong) DTTimer *landscapeTipTimer;
 /// 是否是竖屏开启
 @property (nonatomic, assign)BOOL isPortraitOpen;
+/// 正在展示横屏引导
+@property (nonatomic, assign)BOOL isShowingLandscapeGuide;
 @end
 
 @implementation DanmakuRoomViewController
@@ -159,7 +161,9 @@
 /// @param isOpen
 - (void)handleQuickSendOpen:(BOOL)isOpen {
     WeakSelf
-    [self closeGuideTipView];
+    if (self.isShowingLandscapeGuide) {
+        [self closeGuideTipView];
+    }
     if (isOpen) {
         // 展开
         if (weakSelf.quickSendView.dataList.count == 0) {
@@ -222,7 +226,9 @@
     }
 
     [self endHiddenNaviCountdown];
-    [self closeGuideTipView];
+    if (self.isShowingLandscapeGuide) {
+        [self closeGuideTipView];
+    }
     if (self.landscapeNaviView.hidden) {
         [self showLandscapeNaviView];
         [self beginHiddenNaviCountdown];
@@ -239,6 +245,7 @@
         [_guideTipBgView removeFromSuperview];
         _guideTipBgView = nil;
     }
+    self.isShowingLandscapeGuide = NO;
 }
 
 /// 重置视频视图
@@ -459,6 +466,7 @@
     }];
     [self.guideTipView show:^{
         weakSelf.guideTipBgView.hidden = NO;
+        weakSelf.isShowingLandscapeGuide = YES;
     }];
 }
 
