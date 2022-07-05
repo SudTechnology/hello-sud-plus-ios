@@ -7,9 +7,6 @@
 //  Created by Mary on 2022/2/19.
 //
 
-#ifndef SudMGPAPPState2_h
-#define SudMGPAPPState2_h
-
 #pragma mark - APP-->MG 状态
 /// 参考文档： https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html
 
@@ -61,4 +58,4 @@ static NSString* APP_COMMON_GAME_DISCO_ACTION   = @"app_common_game_disco_action
 @property (nonatomic, strong)NSString * field2;
 @end
 
-#endif /* SudMGPAPPState2_h */
+

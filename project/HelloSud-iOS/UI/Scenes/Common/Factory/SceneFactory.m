@@ -46,9 +46,9 @@
         case SceneTypeDanmaku:
             vc = [[DanmakuRoomViewController alloc]init];
             break;
-//        case SceneTypeDisco:
-//            vc = [[DiscoRoomViewController alloc]init];
-//            break;
+        case SceneTypeDisco:
+            vc = [[DiscoRoomViewController alloc]init];
+            break;
         default:
             vc = [[BaseSceneViewController alloc] init];
             break;

@@ -5,7 +5,8 @@
 //  Created by kaniel on 2022/7/4.
 //
 
-#import "SudMGPMGState.h"
+#import "SudMGPAPPState.h"
 
 @implementation AppCommonGameDiscoAction
 @end
+
