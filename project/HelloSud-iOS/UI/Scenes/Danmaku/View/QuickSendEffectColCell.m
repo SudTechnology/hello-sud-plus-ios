@@ -79,7 +79,7 @@
     DanmakuCallWarcraftModel *m = (DanmakuCallWarcraftModel *) self.model;
     self.titleLabel.text = m.title;
     if (m.titleColor.length > 0) {
-        self.titleLabel.tintColor = HEX_COLOR(m.titleColor);
+        self.titleLabel.textColor = HEX_COLOR(m.titleColor);
     }
     [self relayoutImages:m];
     [self showCallViewContent:m];

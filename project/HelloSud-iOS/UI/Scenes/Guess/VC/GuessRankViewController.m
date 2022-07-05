@@ -28,6 +28,10 @@
     self.dicSelected = [[NSMutableDictionary alloc]init];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (BOOL)dtIsHiddenNavigationBar {
     return YES;
 }
@@ -52,13 +56,14 @@
     [self.titleCategoryView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(kAppSafeTop));
         make.height.equalTo(@36);
-        make.width.equalTo(@248);
+        make.width.greaterThanOrEqualTo(@152);
         make.centerX.equalTo(self.view);
     }];
+    [self.subTitleCategoryView dt_cornerRadius:10];
     [self.subTitleCategoryView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleCategoryView.mas_bottom).offset(8);
+        make.top.equalTo(self.titleCategoryView.mas_bottom).offset(10);
         make.height.equalTo(@20);
-        make.width.equalTo(@80);
+        make.width.equalTo(@116);
         make.centerX.equalTo(self.view);
     }];
     [self.listContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -103,22 +108,20 @@
     if (!_titleCategoryView) {
         _titleCategoryView = [[JXCategoryTitleView alloc] init];
         _titleCategoryView.delegate = self;
-        _titleCategoryView.titleColor = HEX_COLOR(@"#ffffff");
-        _titleCategoryView.titleSelectedColor = HEX_COLOR(@"#1A1A1A");
-        _titleCategoryView.titleFont = UIFONT_REGULAR(14);
-        _titleCategoryView.titleSelectedFont = UIFONT_MEDIUM(14);
-        _titleCategoryView.backgroundColor = HEX_COLOR_A(@"#C0A48F", 0.3);
+        _titleCategoryView.titleColor = HEX_COLOR_A(@"#ffffff", 0.7);
+        _titleCategoryView.titleSelectedColor = HEX_COLOR(@"#ffffff");
+        _titleCategoryView.titleFont = UIFONT_REGULAR(18);
+        _titleCategoryView.titleSelectedFont = UIFONT_BOLD(18);
         _titleCategoryView.titles = @[@"竞猜王", @"大神榜"];
-        _titleCategoryView.cellSpacing = 0;
-        _titleCategoryView.cellWidth = 124;
-        JXCategoryIndicatorBackgroundView *backgroundIndicator = [[JXCategoryIndicatorBackgroundView alloc] init];
+        _titleCategoryView.contentEdgeInsetLeft = 0;
+        _titleCategoryView.contentEdgeInsetRight = 0;
+
+        JXCategoryIndicatorLineView *lineIndicator = [[JXCategoryIndicatorLineView alloc] init];
         // 设置指示器固定宽度
-        backgroundIndicator.indicatorColor = HEX_COLOR(@"#FFF2E3");
-        backgroundIndicator.indicatorCornerRadius = 0;
-        backgroundIndicator.scrollEnabled = NO;
-//        backgroundIndicator.indicatorWidth = 124;
-        backgroundIndicator.indicatorWidthIncrement = 0;
-        _titleCategoryView.indicators = @[backgroundIndicator];
+        lineIndicator.indicatorColor = HEX_COLOR(@"#ffffff");
+        lineIndicator.indicatorWidth = 20;
+        lineIndicator.indicatorHeight = 2;
+        _titleCategoryView.indicators = @[lineIndicator];
 
     }
     return _titleCategoryView;
@@ -129,21 +132,20 @@
         _subTitleCategoryView = [[JXCategoryTitleView alloc] init];
         _subTitleCategoryView.delegate = self;
         _subTitleCategoryView.titleColor = HEX_COLOR_A(@"#ffffff", 0.8);
-        _subTitleCategoryView.titleSelectedColor = HEX_COLOR(@"#ffffff");
+        _subTitleCategoryView.titleSelectedColor = HEX_COLOR(@"#3F3228");
         _subTitleCategoryView.titleFont = UIFONT_REGULAR(12);
         _subTitleCategoryView.titleSelectedFont = UIFONT_MEDIUM(12);
         _subTitleCategoryView.titles = @[@"日榜", @"周榜"];
-        _subTitleCategoryView.cellSpacing = 30;
-        _subTitleCategoryView.contentEdgeInsetLeft = 0;
-        _subTitleCategoryView.contentEdgeInsetRight = 0;
+        _subTitleCategoryView.backgroundColor = HEX_COLOR_A(@"#C0A48F", 0.3);
+        _subTitleCategoryView.contentEdgeInsetLeft = 15;
+        _subTitleCategoryView.contentEdgeInsetRight = 15;
+        _subTitleCategoryView.titleColorGradientEnabled = YES;
+        _subTitleCategoryView.titleLabelZoomScrollGradientEnabled = NO;
         self.subTitles = @[@"日榜", @"周榜"];
-
-        JXCategoryIndicatorLineView *lineIndicator = [[JXCategoryIndicatorLineView alloc] init];
-        // 设置指示器固定宽度
-        lineIndicator.indicatorColor = HEX_COLOR(@"#ffffff");
-        lineIndicator.indicatorWidth = 8;
-        lineIndicator.indicatorHeight = 2;
-        _subTitleCategoryView.indicators = @[lineIndicator];
+        JXCategoryIndicatorBackgroundView *backgroundIndicator = [[JXCategoryIndicatorBackgroundView alloc] init];
+        backgroundIndicator.indicatorColor = HEX_COLOR(@"#FFF2E3");
+        backgroundIndicator.indicatorWidth = 54;
+        _subTitleCategoryView.indicators = @[backgroundIndicator];
     }
     return _subTitleCategoryView;
 }
@@ -171,7 +173,6 @@
         self.dicSelected[key] = @(index);
     }
 
-    [_listContainerView reloadData];
 }
 
 #pragma mark - JXCategoryListContainerViewDelegate

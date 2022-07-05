@@ -50,13 +50,13 @@
         make.top.equalTo(self.rankFirstView).offset(25);
         make.width.equalTo(@72);
         make.height.greaterThanOrEqualTo(@0);
-        make.trailing.equalTo(self.rankFirstView.mas_leading).offset(-35);
+        make.leading.equalTo(self.numSecondView).offset(21);
     }];
     [self.rankThirdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.rankFirstView).offset(25);
         make.width.equalTo(@72);
         make.height.greaterThanOrEqualTo(@0);
-        make.leading.equalTo(self.rankFirstView.mas_trailing).offset(35);
+        make.trailing.equalTo(self.numThirdView).offset(-21);
     }];
 
     [self.numFirstView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,13 +69,13 @@
         make.top.equalTo(self.numFirstView).offset(20);
         make.width.equalTo(@136);
         make.height.equalTo(@50);
-        make.leading.equalTo(self.rankSecondView).offset(-21);
+        make.leading.equalTo(@19);
     }];
     [self.numThirdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.numFirstView).offset(20);
         make.width.equalTo(@136);
         make.height.equalTo(@50);
-        make.trailing.equalTo(self.rankThirdView).offset(21);
+        make.trailing.equalTo(@-20);
     }];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(@0);
