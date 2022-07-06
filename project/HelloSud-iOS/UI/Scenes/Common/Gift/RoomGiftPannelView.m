@@ -169,9 +169,10 @@
 /// 加载场景礼物
 /// @param gameId gameId
 /// @param sceneId sceneId
-- (void)loadSceneGift:(int64_t)gameId sceneId:(NSInteger)sceneId {
+- (void)loadSceneGift:(int64_t)gameId sceneId:(NSInteger)sceneId isAppend:(BOOL)isAppend {
     WeakSelf
     [GiftService reqGiftListWithGameId:gameId sceneId:sceneId finished:^(NSArray<GiftModel *> *modelList) {
+        weakSelf.giftContentView.appendSceneGift = isAppend;
         weakSelf.giftContentView.sceneGiftList = modelList;
         [weakSelf updateLayoutForGiftCount:modelList.count + 4];
     }                          failure:nil];

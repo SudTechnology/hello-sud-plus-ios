@@ -184,8 +184,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isNeedToShowGiftEffect;
 /// 是否需要加载场景礼物
 - (BOOL)isNeedToLoadSceneGiftList;
+/// 是否是追加方式
+- (BOOL)isAppendSceneGiftList;
 /// 是否需要自动上麦
 - (BOOL)isNeedAutoUpMic;
+/// 处理礼物动效
+/// @param model model description
+- (void)handleGiftEffect:(RoomCmdSendGiftModel *)model;
 #pragma mark - SudFSMMGListener
 /// 游戏配置
 - (NSString *)onGetGameCfg;

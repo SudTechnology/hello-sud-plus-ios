@@ -31,6 +31,7 @@ typedef void(^Int64Block)(int64_t);
 #import "ToastUtil.h"
 #import "LanguageUtil.h"
 #import "DTTimer.h"
+#import "HSThreadUtils.h"
 /// Base
 #import "BaseView.h"
 #import "BaseModel.h"

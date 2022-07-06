@@ -67,7 +67,14 @@
     if (![self.model isKindOfClass:DiscoMenuModel.class]) {
         return;
     }
+    WeakSelf
     DiscoMenuModel *m = (DiscoMenuModel *) self.model;
+    m.updateDancingDurationBlock = ^(NSInteger second) {
+        [weakSelf updateRemainTime];
+        if (second <= 0 && weakSelf.danceFinishedBlock) {
+            weakSelf.danceFinishedBlock();
+        }
+    };
     self.rankLabel.text = [NSString stringWithFormat:@"%@", @(m.rank + 1)];
     if (m.fromUser.icon) {
         [self.headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.fromUser.icon]];
@@ -78,31 +85,38 @@
 
 - (void)updateRemainTime {
     DiscoMenuModel *m = (DiscoMenuModel *) self.model;
-    BOOL isPassed = [NSDate date].timeIntervalSince1970 - m.duration > m.beginTime;
+    NSInteger remainSecond = (NSInteger) (m.duration - ([NSDate date].timeIntervalSince1970 - m.beginTime));
     self.rankLabel.hidden = NO;
     [self.headImageView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@57);
     }];
     if (m.beginTime == 0) {
         self.timeLabel.text = @"等待中";
+        self.timeLabel.textColor = HEX_COLOR(@"#ffffff");
         self.timeLabel.backgroundColor = HEX_COLOR_A(@"#000000", 0.15);
         [self.timeLabel dt_cornerRadius:4];
         self.timeLabel.paddingX = 11;
-    } else if (isPassed) {
+    } else if (remainSecond <= 0) {
         // 结束
         self.rankLabel.hidden = YES;
         [self.headImageView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(@16);
         }];
         self.timeLabel.text = @"";
-        self.timeLabel.backgroundColor = UIColor.clearColor;;
+        self.timeLabel.backgroundColor = UIColor.clearColor;
         [self.timeLabel dt_cornerRadius:0];
         self.timeLabel.paddingX = 0;
     } else {
         self.timeLabel.backgroundColor = UIColor.clearColor;
+        self.timeLabel.textColor = HEX_COLOR(@"#FF573D");
         [self.timeLabel dt_cornerRadius:0];
         self.timeLabel.paddingX = 0;
-        self.timeLabel.text = [NSString stringWithFormat:@"剩余%@s", @(m.duration)];
+        NSInteger minute = remainSecond / 60.0;
+        if (minute > 0) {
+            self.timeLabel.text = [NSString stringWithFormat:@"剩余%@min", @(minute)];
+        } else {
+            self.timeLabel.text = [NSString stringWithFormat:@"剩余%@s", @(remainSecond)];
+        }
     }
 }
 

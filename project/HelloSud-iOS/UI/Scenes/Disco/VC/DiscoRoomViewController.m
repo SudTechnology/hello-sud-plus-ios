@@ -12,6 +12,13 @@
 #import "DiscoMenuView.h"
 #import "DiscoPopMenuListView.h"
 
+static NSString *discoKeyWordsMove = @"移动";
+static NSString *discoKeyWordsUp = @"上天";
+static NSString *discoKeyWordsSwitchRole = @"换角色";
+static NSString *discoKeyWordsJoinWork = @"上班";
+static NSString *discoKeyWordsLeaveWork = @"下班";
+static NSString *discoKeyWordsFocus = @"聚焦";
+
 @interface DiscoRoomViewController ()
 @property(nonatomic, strong) BaseView *settingView;
 @property(nonatomic, strong) MarqueeLabel *settingLabel;
@@ -36,6 +43,16 @@
 /// 是否需要自动上麦
 - (BOOL)isNeedAutoUpMic {
     return NO;
+}
+
+/// 是否需要加载场景礼物
+- (BOOL)isNeedToLoadSceneGiftList {
+    return YES;
+}
+
+/// 是否是追加方式
+- (BOOL)isAppendSceneGiftList {
+    return YES;
 }
 
 - (void)dtAddViews {
@@ -97,13 +114,13 @@
 
 /// 点击跳舞菜单
 - (void)onMenuViewTap:(UITapGestureRecognizer *)tap {
-    DiscoPopMenuListView *v = [[DiscoPopMenuListView alloc]init];
+    DiscoPopMenuListView *v = [[DiscoPopMenuListView alloc] init];
     [DTSheetView show:v onCloseCallback:nil];
 }
 
 /// 点击排行榜
 - (void)onRankViewTap:(UITapGestureRecognizer *)tap {
-    DiscoRankPopView *v = [[DiscoRankPopView alloc]init];
+    DiscoRankPopView *v = [[DiscoRankPopView alloc] init];
     [DTSheetView show:v onCloseCallback:nil];
 }
 
@@ -149,14 +166,115 @@
                                 cornerRadius:0];
     }
 }
+
+/// 处理礼物动效
+/// @param model model description
+- (void)handleGiftEffect:(RoomCmdSendGiftModel *)model {
+    [super handleGiftEffect:model];
+    [kDiscoRoomService updateDanceMenuInfo:model];
+}
+
 #pragma game
+
 /// 处理游戏开始
 - (void)handleGameStared {
     [super handleGameStared];
-    [kDiscoRoomService joinDancePool:nil];
+    // 延迟1秒加入舞池，目前游戏直接加入有问题，待游戏解决
+    [HSThreadUtils dispatchMainAfter:1 callback:^{
+        [kDiscoRoomService joinDancePool:nil];
+    }];
+}
+
+/// 已经发送消息
+/// @param msg msg
+- (void)onDidSendMsg:(RoomBaseCMDModel *)msg {
+    [super onDidSendMsg:msg];
+    /// Game - 发送文本命中
+    if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
+        RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
+        [self handleMsgContent:m.content];
+    } else if ([msg isKindOfClass:RoomCmdUpMicModel.class] && msg.cmd == CMD_UP_MIC_NOTIFY) {
+        [kDiscoRoomService joinAnchorPosition:nil];
+    } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
+        RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
+        [self handleGiftMsg:m];
+    }
+}
+
+- (void)handleGiftMsg:(RoomCmdSendGiftModel *)m {
+    switch (m.giftID) {
+        case 1: {
+            // 礼物价格1
+            NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
+            [kDiscoRoomService showMsgPop:3 field1:content];
+        }
+            break;
+        case 2: {
+            // 礼物价格100
+            NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
+            [kDiscoRoomService showMsgPop:3 field1:content];
+            // 特写镜头
+            [kDiscoRoomService specialRole:3 isTop:false];
+        }
+            break;
+        case 3: {
+            // 礼物价格1000
+            NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
+            [kDiscoRoomService showMsgPop:6 field1:content];
+            // 特写镜头
+            [kDiscoRoomService specialRole:3 isTop:false];
+            // 角色放大
+            [kDiscoRoomService scaleBiggerRole:30 field1:@"2"];
+        }
+            break;
+        case 4: {
+            // 礼物价格10000
+            NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
+            [kDiscoRoomService showMsgPop:9 field1:content];
+            // 特写镜头
+            [kDiscoRoomService specialRole:5 isTop:false];
+            // 随机角色
+            [kDiscoRoomService switchRole:2 * 60 * 60 field1:nil field2:nil];
+            // 角色放大
+            [kDiscoRoomService scaleBiggerRole:60 field1:@"2"];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+/// 处理消息内容, 响应游戏指令
+- (void)handleMsgContent:(NSString *)content {
+
+    if ([discoKeyWordsJoinWork isEqualToString:content]) {
+        // 加入主播位
+        if ([self isInMic]) {
+            [kDiscoRoomService joinAnchorPosition:nil];
+        }
+    } else if ([discoKeyWordsMove isEqualToString:content]) {
+        // 移动
+        [kDiscoRoomService movePosition:10 field1:nil];
+    } else if ([discoKeyWordsLeaveWork isEqualToString:content]) {
+        // 离开主播位
+        [kDiscoRoomService leaveAnchorPositionWithPlayerId:AppService.shared.loginUserID];
+    } else if ([discoKeyWordsUp isEqualToString:content]) {
+        // 上天
+        [kDiscoRoomService flySky:3];
+    } else if ([discoKeyWordsSwitchRole isEqualToString:content]) {
+        // 切换角色
+        [kDiscoRoomService switchRole:-1 field1:nil field2:nil];
+    } else if ([discoKeyWordsFocus isEqualToString:content]) {
+        // 聚焦
+        if ([self isInMic]) {
+            [kDiscoRoomService specialRole:4 isTop:false];
+        }
+    }
+
 }
 
 #pragma mark lazy
+
 - (DiscoNaviRankView *)rankView {
     if (!_rankView) {
         _rankView = [[DiscoNaviRankView alloc] init];

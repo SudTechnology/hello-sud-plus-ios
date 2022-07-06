@@ -32,8 +32,13 @@
 
 - (void)dtUpdateUI {
     if (self.sceneGiftList.count > 0) {
-        [self.dataList setArray:self.sceneGiftList];
-        [self.dataList addObjectsFromArray:GiftService.shared.giftList];
+        if (self.appendSceneGift) {
+            [self.dataList setArray:GiftService.shared.giftList];
+            [self.dataList addObjectsFromArray:self.sceneGiftList];
+        } else {
+            [self.dataList setArray:self.sceneGiftList];
+            [self.dataList addObjectsFromArray:GiftService.shared.giftList];
+        }
     } else {
         [self.dataList setArray:GiftService.shared.giftList];
     }
@@ -73,6 +78,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
+    GiftItemCollectionViewCell *c = [collectionView cellForItemAtIndexPath:indexPath];
+    
     GiftModel *currentModel = self.dataList[indexPath.row];
     currentModel.isSelected = YES;
     if (self.didSelectedGift != nil && ![currentModel.giftKey isEqualToString:self.didSelectedGift.giftKey]) {

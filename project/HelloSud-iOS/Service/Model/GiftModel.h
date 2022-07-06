@@ -34,7 +34,8 @@ typedef void(^GiftLoadImageBlock)(UIImage *image);
 @property(nonatomic, assign)NSInteger type;
 /// 礼物标识
 @property (nonatomic, strong)NSString *giftKey;
-
+/// tag
+@property(nonatomic, copy)NSArray<NSString *> *tagList;
 @property(nonatomic, copy)HSGiftModelSelectedBlock selectedChangedCallback;
 
 /// 加载webp

@@ -79,7 +79,7 @@
 - (void)dtConfigUI {
     [super dtConfigUI];
     self.backgroundColor = UIColor.whiteColor;
-    [self testData];
+    [self loadData];
 }
 
 - (void)dtUpdateUI {
@@ -100,41 +100,30 @@
 }
 
 - (void)closeRuleView {
-    if (_ruleView){
+    if (_ruleView) {
         [_ruleView removeFromSuperview];
         _ruleView = nil;
     }
     self.contentView.hidden = NO;
 }
 
-- (void)testData {
-
-    DiscoMenuModel *m = [DiscoMenuModel alloc];
-    AudioUserModel *userModel = AudioUserModel.new;
-    userModel.userID = AppService.shared.login.loginUserInfo.userID;
-    userModel.name = AppService.shared.login.loginUserInfo.name;
-    userModel.icon = AppService.shared.login.loginUserInfo.icon;
-    userModel.sex = AppService.shared.login.loginUserInfo.sex;
-    m.fromUser = userModel;
-    m.toUser = userModel;
-    m.duration = 100;
-    m.beginTime = 0;
-
-    DiscoMenuModel *m1 = [DiscoMenuModel alloc];
-    m1.fromUser = userModel;
-    m1.toUser = userModel;
-    m1.duration = 100;
-    m1.beginTime = 1;
-
-    DiscoMenuModel *m2 = [DiscoMenuModel alloc];
-    m2.fromUser = userModel;
-    m2.toUser = userModel;
-    m2.duration = 1000;
-    m2.beginTime = [NSDate date].timeIntervalSince1970;
-
-    [self.dataList setArray:@[@[m, m2], @[m1]]];
+- (void)loadData {
+    NSArray *arr = kDiscoRoomService.danceMenuList;
+    NSMutableArray *normalArr = [[NSMutableArray alloc] init];
+    NSMutableArray *finishedArr = [[NSMutableArray alloc] init];
+    for (int i = 0; i < arr.count; ++i) {
+        DiscoMenuModel *m = arr[i];
+        if (m.isDanceFinished) {
+            [finishedArr addObject:m];
+        } else {
+            [normalArr addObject:m];
+        }
+    }
+    if (normalArr.count > 0 || finishedArr.count > 0) {
+        [self.dataList setArray:@[normalArr, finishedArr]];
+    }
+    [self.tableView reloadData];
 }
-
 
 #pragma mark - UITableViewDelegate || UITableViewDataSource
 
@@ -147,8 +136,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WeakSelf
     DiscoMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiscoMenuTableViewCell"];
-    cell.model = self.dataList[indexPath.section][indexPath.row];
+    DiscoMenuModel *model = self.dataList[indexPath.section][indexPath.row];
+    cell.model = model;
+    cell.danceFinishedBlock = ^{
+        [weakSelf loadData];
+    };
     return cell;
 }
 
@@ -178,6 +172,7 @@
         label.font = UIFONT_REGULAR(14);
         label.textColor = HEX_COLOR(@"#ffffff");
         label.text = @"已结束";
+        label.hidden = self.dataList[section].count == 0;
         [v addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(@16);

@@ -27,40 +27,277 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     DiscoActionTypeJoinDancePool = 15,
     /// 离开舞池
     DiscoActionTypeLeaveDancePool = 16,
+    /// 清场
+    DiscoActionTypeClearDancePool = 17,
+    /// 角色移动
+    DiscoActionTypeMoveRole = 18,
+    /// 角色变大
+    DiscoActionTypeBiggerRole = 19,
+    /// 角色飞天
+    DiscoActionTypeFlyRole = 20,
+    /// 角色特效
+    DiscoActionTypeEffectRole = 22,
+    /// 角色特写
+    DiscoActionTypeSpecialRole = 23,
+    /// 文字气泡
+    DiscoActionTypeMsgPop = 24,
+    /// 角色称号
+    DiscoActionTypeNamedRole = 25,
+    /// 上DJ台
+    DiscoActionTypeUpDJ = 26,
+    /// 跳舞模式
+    DiscoActionTypeDancingMode = 27,
+    /// 和主播跳舞
+    DiscoActionTypeDancingWithAnchor = 28,
 };
 
-@interface DiscoRoomService()
+@interface DiscoRoomService ()
+/// 当前主播跳舞池
+@property (nonatomic, strong)NSMutableDictionary<NSString *, DiscoMenuModel *> *dicDancingMap;
 @end
 
 @implementation DiscoRoomService
+
+- (DiscoMenuModel *)findSameSendUser:(NSString *)userID {
+    NSArray *arr = self.danceMenuList;
+    for (int i = 0; i < arr.count; ++i) {
+        DiscoMenuModel *m = arr[i];
+        if ([m.fromUser.userID isEqualToString:userID] && !m.isDanceFinished) {
+            return m;
+        }
+    }
+    return nil;
+}
+
+/// 更新舞池列表
+/// @param giftModel
+- (void)updateDanceMenuInfo:(RoomCmdSendGiftModel *)giftModel {
+
+    DiscoMenuModel *m = [self findSameSendUser:giftModel.sendUser.userID];
+    NSInteger addDuration = 0;
+    switch (giftModel.giftID) {
+        case 5: {
+            // 礼物价格50
+            addDuration = 60;
+            if (m && !m.isDanceFinished) {
+                m.duration += addDuration;
+            } else {
+                m = [[DiscoMenuModel alloc] init];
+                m.duration = addDuration;
+                m.fromUser = giftModel.sendUser;
+                m.toUser = giftModel.toUser;
+                [self.danceMenuList addObject:m];
+            }
+        }
+            break;
+        case 6: {
+            // 礼物价格150
+            // 与主播跳舞
+            addDuration = 3 * 60;
+            if (m && !m.isDanceFinished) {
+                m.duration += addDuration;
+            } else {
+                m = [[DiscoMenuModel alloc] init];
+                m.duration = addDuration;
+                m.fromUser = giftModel.sendUser;
+                m.toUser = giftModel.toUser;
+                [self.danceMenuList addObject:m];
+            }
+        }
+            break;
+        case 7: {
+            // 礼物价格1500
+            // 插队
+            if (m) {
+                [self.danceMenuList removeObject:m];
+                if (self.danceMenuList.count > 0) {
+                    [self.danceMenuList insertObject:m atIndex:1];
+                } else {
+                    [self.danceMenuList addObject:m];
+                }
+            }
+        }
+            break;
+        default:
+            break;
+    }
+
+    if (addDuration > 0) {
+        if (m.beginTime == 0) {
+            NSString *anchorID = m.toUser.userID;
+            if ([self isAnchorDancing:anchorID]){
+                // 当前主播在跳舞
+                if ([self isAnchorDancingWithMe:anchorID]) {
+                    // 发送者是自己，执行与主播跳舞指令
+                    [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
+                }
+                return;
+            }
+            // 开始跳舞
+            [m beginDancing];
+            self.dicDancingMap[anchorID] = m;
+            if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
+                // 发送者是自己，执行与主播跳舞指令
+                [self danceWithAnchor:m.duration isTop:NO field1:m.toUser.userID];
+            }
+        }
+    }
+
+}
+
+/// 主播是否正在跳舞
+- (BOOL)isAnchorDancing:(NSString *)anchorID {
+    return self.dicDancingMap[anchorID];
+}
+
+/// 主播是否正在和我跳舞
+- (BOOL)isAnchorDancingWithMe:(NSString *)anchorID {
+    DiscoMenuModel *m = self.dicDancingMap[anchorID];
+    if (m && [AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
+        return YES;
+    }
+    return NO;
+}
+
+/// 检测是否要跳舞
+- (void)checkIfNeedToDancing {
+    NSArray *arr = self.danceMenuList;
+    for (int i = 0; i < arr.count; ++i) {
+        DiscoMenuModel *model = arr[i];
+        if (model.beginTime == 0) {
+            [model beginDancing];
+            if ([AppService.shared.login.loginUserInfo isMeByUserID:model.fromUser.userID]) {
+                // 发送者是自己，执行与主播跳舞指令
+                [self danceWithAnchor:model.duration isTop:NO field1:model.toUser.userID];
+            }
+        }
+    }
+}
+
+-(NSMutableDictionary<NSString *, DiscoMenuModel *> *)dicDancingMap {
+    if (!_dicDancingMap) {
+        _dicDancingMap = [[NSMutableDictionary alloc]init];
+    }
+    return _dicDancingMap;
+}
+
+- (NSMutableArray <DiscoMenuModel *> *)danceMenuList {
+    if (!_danceMenuList) {
+        _danceMenuList = [[NSMutableArray alloc] init];
+    }
+    return _danceMenuList;
+}
+
 /// 加入舞池
 /// @param colorHexValue 昵称的颜色色值
 - (void)joinDancePool:(NSString *)colorHexValue {
-    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc]init];
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeJoinDancePool;
     m.field1 = colorHexValue;
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
+
 /// 离开舞池
 - (void)leaveDancePool {
-    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc]init];
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeLeaveDancePool;
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
+
 /// 加入主播位
 /// @param position 0-0号主播位；1-1号主播位；2-2号主播位；3-3号主播位；4-4号主播位；5-5号主播位；6-6号主播位；7-7号主播位；-1-随机，默认随机
 - (void)joinAnchorPosition:(NSString *)position {
-    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc]init];
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeJoinAnchorPosition;
     m.field1 = position;
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
+
 /// 离开主播位
 /// @param playerId playerId（离开主播位的玩家id），默认自己离开，如果该玩家本来就不在主播位则没有任何效果
 - (void)leaveAnchorPositionWithPlayerId:(NSString *)playerId {
-    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc]init];
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeLeaveAnchorPosition;
     m.field1 = playerId;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
+/// 角色移动
+/// @param cooldown 移动的持续时间，单位秒（范围为3-300，超出范围会取默认值）默认10秒
+/// @param field1 移动速度快慢的数值（范围为0.1-3，保留1位小数点，1为正常速度，超出范围会取默认值）；默认1
+- (void)movePosition:(int)cooldown field1:(NSString *)field1 {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeMoveRole;
+    m.cooldown = cooldown;
+    m.field1 = field1;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
+/// 角色飞天
+/// @param cooldown 飞天的持续时间，单位秒（-1为永久）默认30秒
+- (void)flySky:(int)cooldown {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeFlyRole;
+    m.cooldown = cooldown;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
+/// 角色称号
+/// @param cooldown 称号的持续时间，单位秒（-1为永久）默认永久
+/// @param field1 称号的文字内容（6个汉字的长度）；默认在“全场最靓”，“最强王者”和“元宇宙砂砂舞”中随机
+/// @param field2 称号特效ID（1：称号1；2：称号2；3：称号3）默认随机
+- (void)switchRole:(int)cooldown field1:(NSString *)field1 field2:(NSString *)field2 {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeNamedRole;
+    m.cooldown = cooldown;
+    m.field1 = field1;
+    m.field2 = field2;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
+/// 角色特写
+/// @param cooldown 特写的持续时间，单位秒（范围为1-30，超出范围会取默认值）默认舞池角色1秒,DJ台角色3秒,跳舞的角色5秒
+/// @param isTop false-不置顶；true-置顶
+- (void)specialRole:(int)cooldown isTop:(BOOL)isTop {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeSpecialRole;
+    m.cooldown = cooldown;
+    m.isTop = isTop;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
+/// 文字气泡
+/// @param cooldown 气泡的持续时间，单位秒（-1为永久）默认3秒
+/// @param field1 气泡的文字内容；默认为空
+- (void)showMsgPop:(int)cooldown field1:(NSString *)field1 {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeMsgPop;
+    m.cooldown = cooldown;
+    m.field1 = field1;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
+/// 角色变大
+/// @param cooldown 变大的持续时间，单位秒（-1为永久）默认60秒
+/// @param field1 放大倍数的数值（范围为0.1-5，保留1位小数点，1为原始大小，超出范围会取默认值）；默认2
+- (void)scaleBiggerRole:(int)cooldown field1:(NSString *)field1 {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeBiggerRole;
+    m.cooldown = cooldown;
+    m.field1 = field1;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
+/// 和主播跳舞
+/// @param cooldown 和主播跳舞的持续时间，单位秒（-1为永久）默认30秒
+/// @param isTop false-不置顶；true-置顶
+/// @param field1 playerId（主播玩家的id）；该参数必传，不传则没有任何效果
+- (void)danceWithAnchor:(int)cooldown isTop:(BOOL)isTop field1:(NSString *)field1 {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeDancingWithAnchor;
+    m.cooldown = cooldown;
+    m.isTop = isTop;
+    m.field1 = field1;
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 @end

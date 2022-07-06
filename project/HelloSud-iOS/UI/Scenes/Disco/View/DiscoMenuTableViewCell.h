@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 /// 蹦迪菜单列表cell
 @interface DiscoMenuTableViewCell : BaseTableViewCell
-
+@property (nonatomic, strong)void(^danceFinishedBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END

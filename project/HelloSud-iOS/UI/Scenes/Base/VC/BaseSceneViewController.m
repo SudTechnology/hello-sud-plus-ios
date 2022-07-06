@@ -174,7 +174,7 @@
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
         RoomGiftPannelView *pannelView = [[RoomGiftPannelView alloc] init];
         if (weakSelf.isNeedToLoadSceneGiftList) {
-            [pannelView loadSceneGift:weakSelf.gameId sceneId:weakSelf.enterModel.sceneType];
+            [pannelView loadSceneGift:weakSelf.gameId sceneId:weakSelf.enterModel.sceneType isAppend:weakSelf.isAppendSceneGiftList];
         }
         [DTSheetView show:pannelView rootView:AppUtil.currentWindow hiddenBackCover:YES onCloseCallback:^{
             [weakSelf.operatorView resetAllSelectedUser];
@@ -231,7 +231,7 @@
         [weakSelf changeScaleSmallMic:isSmall];
     };
     /// asr状态变化
-    self.asrStateNTF = [[NSNotificationCenter defaultCenter]addObserverForName:NTF_ASR_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+    self.asrStateNTF = [[NSNotificationCenter defaultCenter] addObserverForName:NTF_ASR_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
         [weakSelf handlePlayerStateChanged];
     }];
 }
@@ -375,7 +375,7 @@
 
 /// 将要发送消息
 /// @param msg msg
-- (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void(^)(BOOL shouldSend))shouldSend {
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void (^)(BOOL shouldSend))shouldSend {
     if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
         GiftModel *giftModel = [m getGiftModel];
@@ -445,11 +445,17 @@
     return NO;
 }
 
+/// 是否是追加方式
+- (BOOL)isAppendSceneGiftList {
+    return NO;
+}
+
 /// 是否需要自动上麦
 - (BOOL)isNeedAutoUpMic {
     // 默认自动上麦
     return YES;
 }
+
 /// 发送房间切换消息
 /// @param gameId
 - (void)sendGameChangedMsg:(int64_t)gameId operatorUser:(NSString *)userID {
@@ -647,6 +653,9 @@
 - (void)handleGameUpMic {
     NSLog(@"handleGameUpMic");
     if ([self isInMic]) {
+        return;
+    }
+    if (!self.isNeedAutoUpMic) {
         return;
     }
     AudioRoomMicModel *micModel = [self getOneEmptyMic];
@@ -879,7 +888,7 @@
 
 /// 处理游戏状态变化
 - (void)handlePlayerStateChanged {
-    
+
     if (!self.sudFSMMGDecorator.keyWordASRing) {
         return;
     }
@@ -1073,7 +1082,7 @@
 
 - (void)dealloc {
     NSLog(@"base scene vc dealloc");
-    
+
     if (self.asrStateNTF) {
         [[NSNotificationCenter defaultCenter] removeObserver:self.asrStateNTF];
     }
