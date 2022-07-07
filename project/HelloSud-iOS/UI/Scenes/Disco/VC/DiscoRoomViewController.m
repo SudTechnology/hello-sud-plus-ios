@@ -44,6 +44,11 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     [self updateSettingState:self.gameId > 0];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self beginScrollTip];
+}
+
 - (Class)serviceClass {
     return DiscoRoomService.class;
 }
@@ -117,7 +122,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         make.height.equalTo(@24);
     }];
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.top.trailing.bottom.equalTo(@0);
+        make.leading.top.equalTo(@0);
+        make.width.greaterThanOrEqualTo(@0);
+        make.height.equalTo(@24);
     }];
     [self.tipOpenLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@5);
@@ -247,6 +254,22 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     [super roomGameDidChanged:gameID];
     self.menuView.hidden = gameID == 0;
     self.tipView.hidden = gameID == 0;
+}
+
+- (void)beginScrollTip {
+
+    CABasicAnimation *moveLeft = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
+    // 设置运动形式
+    [moveLeft setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+    // 设置开始位置
+    moveLeft.fromValue = @(self.tipView.bounds.size.width);
+    moveLeft.toValue = @(-self.tipLabel.bounds.size.width);
+    moveLeft.removedOnCompletion = NO;
+    moveLeft.duration = 25;
+    moveLeft.repeatCount = 1000000;
+    moveLeft.fillMode = kCAFillModeForwards;
+    [self.tipLabel.layer addAnimation:moveLeft forKey:@"moveLeft"];
+    self.tipView.alpha = 1;
 }
 
 #pragma game
@@ -611,7 +634,8 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         _tipLabel.font = UIFONT_REGULAR(12);
         _tipLabel.numberOfLines = 0;
         _tipLabel.scrollDuration = 30;
-        _tipLabel.attributedText = [self createTip:NO];
+        _tipLabel.forceScrolling = YES;
+
     }
     return _tipLabel;
 }
@@ -644,13 +668,15 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     if (!_tipView) {
         _tipView = [[UIView alloc] init];
         _tipView.backgroundColor = HEX_COLOR_A(@"#000000", 0.8);
+        _tipView.clipsToBounds = YES;
+        _tipView.alpha = 0;
     }
     return _tipView;
 }
 
 - (MarqueeLabel *)settingLabel {
     if (!_settingLabel) {
-        _settingLabel = [[MarqueeLabel alloc] init];
+        _settingLabel = [[UILabel alloc] init];
         _settingLabel.textColor = UIColor.whiteColor;
         _settingLabel.font = UIFONT_BOLD(12);
         _settingLabel.textAlignment = NSTextAlignmentCenter;
