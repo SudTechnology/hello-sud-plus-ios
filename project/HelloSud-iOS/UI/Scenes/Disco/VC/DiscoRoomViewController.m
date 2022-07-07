@@ -45,6 +45,14 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     return DiscoRoomService.class;
 }
 
+- (void)setConfigModel:(BaseSceneConfigModel *)configModel {
+    [super setConfigModel:configModel];
+    // 非房主不展示开关按钮
+    if (!self.isRoomOwner) {
+        self.settingView.hidden = YES;
+    }
+}
+
 /// 是否需要自动上麦
 - (BOOL)isNeedAutoUpMic {
     return NO;
