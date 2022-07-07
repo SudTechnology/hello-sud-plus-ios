@@ -235,6 +235,12 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     [kDiscoRoomService updateDanceMenuInfo:model];
 }
 
+- (void)roomGameDidChanged:(NSInteger)gameID {
+    [super roomGameDidChanged:gameID];
+    self.menuView.hidden = gameID == 0;
+    self.tipView.hidden = gameID == 0;
+}
+
 #pragma game
 
 /// 处理游戏开始

@@ -53,14 +53,14 @@
     self.rankLabel.backgroundColor = self.borderColor;
     self.rankLabel.text = [NSString stringWithFormat:@"%@", @(self.rank)];
     if (self.imageURL) {
-        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:self.imageURL]];
+        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:self.imageURL] placeholderImage:[UIImage imageNamed:@"room_mic_up"]];
     }
 }
 
 - (UIImageView *)iconImageView {
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.backgroundColor = HEX_COLOR(@"#FFFFFF");
+        _iconImageView.image = [UIImage imageNamed:@"room_mic_up"];
     }
     return _iconImageView;
 }

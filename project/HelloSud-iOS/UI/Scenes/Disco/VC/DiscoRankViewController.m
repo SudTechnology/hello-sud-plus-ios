@@ -30,6 +30,10 @@
     self.dicSelected = [[NSMutableDictionary alloc] init];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (BOOL)dtIsHiddenNavigationBar {
     return YES;
 }
