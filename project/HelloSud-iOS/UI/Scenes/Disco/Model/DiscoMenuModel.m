@@ -43,6 +43,7 @@
     if (remainSecond <= 0) {
         [self.danceTimer stopTimer];
         self.danceTimer = nil;
+        [kDiscoRoomService handleAnchorStopDancing:self.toUser.userID];
     }
     if (self.updateDancingDurationBlock) self.updateDancingDurationBlock(remainSecond);
 }

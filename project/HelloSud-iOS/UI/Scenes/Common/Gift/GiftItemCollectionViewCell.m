@@ -128,6 +128,7 @@
         self.nameLabel.text = m.giftName;
         [self checkSelected:NO];
         [self updateCoin:m.price];
+
         if (m.tagList.count > 0) {
             self.tagLabel1.text = m.tagList[0];
             [self.tagLabel1 dtUpdateUI];
@@ -137,6 +138,10 @@
             self.tagLabel2.text = m.tagList[1];
             [self.tagLabel2 dtUpdateUI];
             self.tagLabel2.hidden = NO;
+        }
+        if (kAudioRoomService.currentRoomVC.enterModel.sceneType != SceneTypeDisco) {
+            self.tagLabel1.hidden = YES;
+            self.tagLabel2.hidden = YES;
         }
     }
 }
