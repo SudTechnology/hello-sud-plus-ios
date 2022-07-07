@@ -22,9 +22,14 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 @interface DiscoRoomViewController ()
 @property(nonatomic, strong) BaseView *settingView;
 @property(nonatomic, strong) MarqueeLabel *settingLabel;
+@property(nonatomic, strong) MarqueeLabel *tipLabel;
+@property(nonatomic, strong) UIView *tipView;
+@property(nonatomic, strong) YYLabel *tipOpenLabel;
 @property(nonatomic, strong) DiscoNaviRankView *rankView;
 @property(nonatomic, strong) DiscoMenuView *menuView;
-
+/// 同步蹦迪信息用户ID
+@property(nonatomic, strong) NSString *syncDiscoInfoUserID;
+@property(nonatomic, assign) BOOL isTipOpened;
 @end
 
 @implementation DiscoRoomViewController
@@ -61,6 +66,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     [self.naviView addSubview:self.settingView];
     [self.settingView addSubview:self.settingLabel];
     [self.sceneView addSubview:self.menuView];
+    [self.sceneView addSubview:self.tipView];
+    [self.tipView addSubview:self.tipLabel];
+    [self.tipView addSubview:self.tipOpenLabel];
 }
 
 - (void)dtLayoutViews {
@@ -91,6 +99,19 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         make.bottom.equalTo(@(-b));
         make.width.height.greaterThanOrEqualTo(@0);
     }];
+    [self.tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.gameMicContentView.mas_bottom).offset(10);
+        make.leading.equalTo(@16);
+        make.trailing.equalTo(@-16);
+        make.height.equalTo(@24);
+    }];
+    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.leading.top.trailing.bottom.equalTo(@0);
+    }];
+    [self.tipOpenLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(@5);
+        make.top.trailing.bottom.equalTo(@0);
+    }];
 
 }
 
@@ -104,11 +125,39 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onMenuViewTap:)];
     [self.menuView addGestureRecognizer:tap3];
 
+    UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTipLabelTap:)];
+    [self.tipView addGestureRecognizer:tap4];
+
 
 }
 
 - (void)dtConfigUI {
     [super dtConfigUI];
+
+}
+
+- (void)onTipLabelTap:(id)tap {
+
+    self.isTipOpened = !self.isTipOpened;
+    if (self.isTipOpened) {
+        self.tipOpenLabel.hidden = NO;
+        self.tipLabel.hidden = YES;
+        [self.tipView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.gameMicContentView.mas_bottom).offset(10);
+            make.leading.equalTo(@16);
+            make.trailing.equalTo(@-16);
+            make.height.equalTo(@112);
+        }];
+    } else {
+        self.tipOpenLabel.hidden = YES;
+        self.tipLabel.hidden = NO;
+        [self.tipView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.gameMicContentView.mas_bottom).offset(10);
+            make.leading.equalTo(@16);
+            make.trailing.equalTo(@-16);
+            make.height.equalTo(@24);
+        }];
+    }
 
 }
 
@@ -127,8 +176,12 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// 点击PK设置
 - (void)onSettingTap:(UITapGestureRecognizer *)tap {
     if (self.gameId > 0) {
-        [self handleChangeToGame:0];
-        [self updateSettingState:NO];
+        NSString *tip = @"确定要关闭蹦迪吗？ 关闭后本场蹦迪将清空，包括正在进行中的跳舞、排队中的跳舞、角色特效";
+        [DTAlertView showTextAlert:tip sureText:@"关闭" cancelText:@"返回" onSureCallback:^{
+            [self handleChangeToGame:0];
+            [self updateSettingState:NO];
+        }          onCloseCallback:nil];
+
     } else {
         [self handleChangeToGame:[self getCurrentGameID]];
         [self updateSettingState:YES];
@@ -185,6 +238,128 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     }];
 }
 
+- (void)handleBusyCommand:(NSInteger)cmd command:(NSString *)command {
+    switch (cmd) {
+        case CMD_ROOM_DISCO_INFO_REQ:
+            // 请求蹦迪信息
+            [self handleIfNeedToRespDiscoInfo];
+            break;
+        case CMD_ROOM_DISCO_INFO_RESP: {
+            // 响应蹦迪信息
+            RespDiscoInfoModel *model = [RespDiscoInfoModel fromJSON:command];
+            [self handleDiscoInfoResp:model];
+        }
+
+            break;
+        case CMD_ROOM_DISCO_BECOME_DJ:
+            // 上DJ台
+            break;
+        default:
+            [super handleBusyCommand:cmd command:command];
+            break;
+    }
+}
+
+/// 检测自己是否是麦位第一位用户
+- (BOOL)checkIsFirstMicUser {
+    NSArray<AudioRoomMicModel *> *micArr = self.dicMicModel.allValues;
+    NSArray *sortedArr = [micArr sortedArrayUsingComparator:^NSComparisonResult(AudioRoomMicModel *obj1, AudioRoomMicModel *obj2) {
+        return obj1.micIndex < obj2.micIndex;
+    }];
+    BOOL isExistUser = NO;
+    for (AudioRoomMicModel *m in sortedArr) {
+        if (!m.user) {
+            continue;
+        }
+        if ([m.user.userID isEqualToString:AppService.shared.login.loginUserInfo.userID] && !isExistUser) {
+            return YES;
+        }
+        return NO;
+    }
+    return NO;
+}
+
+/// 处理是否需要响应该消息
+- (void)handleIfNeedToRespDiscoInfo {
+    if (![self checkIsFirstMicUser]) {
+        return;
+    }
+    // 响应数据给请求者
+    NSArray *arr = kDiscoRoomService.danceMenuList;
+    for (int i = 0; i < arr.count; ++i) {
+        RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
+        [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
+        resp.dancingMenu = @[arr[i]];
+        [self sendMsg:resp isAddToShow:NO];
+    }
+    // 贡献榜数据
+    NSArray *rankArr = kDiscoRoomService.rankList;
+    for (int i = 0; i < rankArr.count; ++i) {
+        RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
+        [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
+        resp.contribution = @[rankArr[i]];
+        [self sendMsg:resp isAddToShow:NO];
+    }
+    // 告知结束
+    RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
+    [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
+    resp.isEnd = YES;
+    [self sendMsg:resp isAddToShow:NO];
+}
+
+/// 处理蹦迪信息响应
+- (void)handleDiscoInfoResp:(RespDiscoInfoModel *)resp {
+
+    // 如果同步者非首次同步，忽略他的信息，只接受首次同步者信息
+    if (self.syncDiscoInfoUserID && ![self.syncDiscoInfoUserID isEqualToString:resp.sendUser.userID]) {
+        return;
+    }
+    if (!self.syncDiscoInfoUserID) {
+        self.syncDiscoInfoUserID = resp.sendUser.userID;
+    }
+    if (resp.dancingMenu.count > 0) {
+        for (int i = 0; i < resp.dancingMenu.count; ++i) {
+            [kDiscoRoomService addDanceMenuInfo:resp.dancingMenu[i]];
+        }
+    }
+    if (resp.contribution.count > 0) {
+        [kDiscoRoomService.rankList addObjectsFromArray:resp.contribution];
+    }
+    [kDiscoRoomService handleRankInfo];
+    [self updateNaviHeadIcon];
+}
+
+/// 展示公屏消息
+/// @param msg 消息体
+/// @param isShowOnScreen 是否展示公屏
+- (void)addMsg:(RoomBaseCMDModel *)msg isShowOnScreen:(BOOL)isShowOnScreen {
+    [super addMsg:msg isShowOnScreen:isShowOnScreen];
+    [self handleRankInfo:msg];
+}
+
+/// 处理排行榜数据
+- (void)handleRankInfo:(RoomBaseCMDModel *)msg {
+
+    if (msg.cmd == CMD_CHAT_TEXT_NOTIFY || msg.cmd == CMD_SEND_GIFT_NOTIFY) {
+        // 公屏消息+1,礼物+1
+        [kDiscoRoomService addRankCount:msg.sendUser count:1];
+        [self updateNaviHeadIcon];
+    }
+}
+
+/// 更新导航排行榜头像
+- (void)updateNaviHeadIcon {
+    NSMutableArray *arrList = [[NSMutableArray alloc] init];
+    NSArray<DiscoContributionModel *> *arr = kDiscoRoomService.rankList;
+    for (int i = 0; i < 3; ++i) {
+        if (arr.count > i) {
+            [arrList addObject:arr[i].fromUser.icon];
+        }
+    }
+    self.rankView.iconList = arrList.copy;
+    [self.rankView dtUpdateUI];
+}
+
 /// 已经发送消息
 /// @param msg msg
 - (void)onDidSendMsg:(RoomBaseCMDModel *)msg {
@@ -198,7 +373,17 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
         [self handleGiftMsg:m];
+    } else if (msg.cmd == CMD_ENTER_ROOM_NOTIFY) {
+        // 首次进入房间
+        [self sendCmdToGetDiscoInfo];
     }
+}
+
+
+- (void)sendCmdToGetDiscoInfo {
+    RoomBaseCMDModel *m = [RoomBaseCMDModel alloc];
+    [m configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_REQ];
+    [self sendMsg:m isAddToShow:NO];
 }
 
 - (void)handleGiftMsg:(RoomCmdSendGiftModel *)m {
@@ -295,6 +480,49 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         _settingView.backgroundColor = HEX_COLOR_A(@"#FFFFFF", 0.2);
     }
     return _settingView;
+}
+
+- (MarqueeLabel *)tipLabel {
+    if (!_tipLabel) {
+        _tipLabel = [[MarqueeLabel alloc] init];
+        _tipLabel.textColor = UIColor.whiteColor;
+        _tipLabel.font = UIFONT_REGULAR(12);
+        _tipLabel.numberOfLines = 0;
+        _tipLabel.scrollDuration = 30;
+        _tipLabel.userInteractionEnabled = YES;
+        _tipLabel.text = @"1. 贡献榜前五随机DJ（26秒刷新） 2. 送礼可触发不同的效果或点主播跳舞。 3. 公屏指令：【移动】【上天】【换角色】， 4. 麦上用户发送【上班】可上到主播位，发送【下班】可下主播位。 5. 主播发文字或语音【聚焦】可触发特写";
+    }
+    return _tipLabel;
+}
+
+
+- (YYLabel *)tipOpenLabel {
+    if (!_tipOpenLabel) {
+        _tipOpenLabel = [[YYLabel alloc] init];
+        _tipOpenLabel.textColor = UIColor.whiteColor;
+        _tipOpenLabel.font = UIFONT_REGULAR(12);
+        _tipOpenLabel.hidden = YES;
+        _tipOpenLabel.numberOfLines = 0;
+        NSString *tip = @"1. 贡献榜前五随机DJ（26秒刷新） \n2. 送礼可触发不同的效果或点主播跳舞。 \n3. 公屏指令：【移动】【上天】【换角色】， \n4. 麦上用户发送【上班】可上到主播位，发送【下班】可下主播位。 \n5. 主播发文字或语音【聚焦】可触发特写";
+        NSRange range = [tip rangeOfString:@"前五"];
+        _tipOpenLabel.text = tip;
+        NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:tip];
+        [attrTitle yy_setAttribute:NSForegroundColorAttributeName value:HEX_COLOR(@"#ff0000") range:range];
+
+        attrTitle.yy_lineSpacing = 5;
+        attrTitle.yy_font = UIFONT_REGULAR(12);
+        attrTitle.yy_color = HEX_COLOR(@"#ffffff");
+        _tipOpenLabel.attributedText = attrTitle;
+    }
+    return _tipOpenLabel;
+}
+
+- (UIView *)tipView {
+    if (!_tipView) {
+        _tipView = [[UIView alloc] init];
+        _tipView.backgroundColor = HEX_COLOR_A(@"#000000", 0.8);
+    }
+    return _tipView;
 }
 
 - (MarqueeLabel *)settingLabel {

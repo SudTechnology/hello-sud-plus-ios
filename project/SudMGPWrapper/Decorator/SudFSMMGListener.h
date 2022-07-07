@@ -99,6 +99,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏: 耳机（听筒，扬声器）状态   MG_COMMON_GAME_SELF_HEADEPHONE
 - (void)onGameMGCommonGameSelfHeadphone:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameSelfHeadphone *)model;
 
+/// 元宇宙砂砂舞 指令回调  MG_COMMON_GAME_DISCO_ACTION
+- (void)onGameMGCommonGameDiscoAction:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionModel *)model;
+
+/// 元宇宙砂砂舞 指令动作结束通知  MG_COMMON_GAME_DISCO_ACTION_END
+- (void)onGameMGCommonGameDiscoActionEnd:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionEndModel *)model;
+
 
 /// 玩家状态变化
 /// 玩家: 加入状态  MG_COMMON_PLAYER_IN

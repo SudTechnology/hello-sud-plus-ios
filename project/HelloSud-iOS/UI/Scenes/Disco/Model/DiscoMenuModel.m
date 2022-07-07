@@ -8,11 +8,15 @@
 
 #import "DiscoMenuModel.h"
 
-@interface DiscoMenuModel()
-@property (nonatomic, strong)DTTimer *danceTimer;
+@interface DiscoMenuModel ()
+@property(nonatomic, strong) DTTimer *danceTimer;
 @end
 
 @implementation DiscoMenuModel
++ (NSArray *)mj_ignoredPropertyNames {
+    return @[@"danceTimer", @"rank", @"updateDancingDurationBlock"];
+}
+
 /// 跳舞是否结束
 /// @return
 - (BOOL)isDanceFinished {
@@ -35,7 +39,6 @@
 }
 
 - (void)handleTimerCallback {
-
     NSInteger remainSecond = self.duration - (NSInteger) ([NSDate date].timeIntervalSince1970 - self.beginTime);
     if (remainSecond <= 0) {
         [self.danceTimer stopTimer];

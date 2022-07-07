@@ -13,6 +13,7 @@
 #import <SudMGP/ISudAPPD.h>
 #import <SudMGP/ISudFSMStateHandle.h>
 #import <SudMGP/SudMGP-umbrella.h>
+#import <SudMGPWrapper/SudMGPMGState.h>
 
 @implementation BaseSceneViewController(Game)
 
@@ -192,6 +193,17 @@
         [AudioEngineFactory.shared.audioEngine stopSubscribingStream];
     }
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+}
+
+/// 元宇宙砂砂舞 指令回调  MG_COMMON_GAME_DISCO_ACTION
+- (void)onGameMGCommonGameDiscoAction:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionModel *)model {
+
+    DDLogDebug(@"onGameMGCommonGameDiscoAction: actionID:%@, isSuccess:%@", model.actionId, @(model.isSuccess));
+}
+
+/// 元宇宙砂砂舞 指令动作结束通知  MG_COMMON_GAME_DISCO_ACTION_END
+- (void)onGameMGCommonGameDiscoActionEnd:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionEndModel *)model {
+    DDLogDebug(@"onGameMGCommonGameDiscoActionEnd: actionID:%@, playerID:%@", model.actionId, model.playerId);
 }
 
 

@@ -67,6 +67,22 @@
     [self.arrViews[2] dtUpdateUI];
 }
 
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
+    if (self.iconList.count > 0) {
+        self.arrViews[0].imageURL = self.iconList[0];
+        [self.arrViews[0] dtUpdateUI];
+    }
+    if (self.iconList.count > 1) {
+        self.arrViews[1].imageURL = self.iconList[1];
+        [self.arrViews[1] dtUpdateUI];
+    }
+    if (self.iconList.count > 2) {
+        self.arrViews[2].imageURL = self.iconList[2];
+        [self.arrViews[2] dtUpdateUI];
+    }
+}
+
 - (NSMutableArray<DiscoRankHeadView *> *)arrViews {
     if (!_arrViews) {
         _arrViews = [[NSMutableArray alloc]init];

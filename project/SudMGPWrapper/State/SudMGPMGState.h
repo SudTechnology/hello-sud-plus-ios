@@ -84,6 +84,11 @@ static NSString *MG_DG_ERRORANSWER = @"mg_dg_erroranswer";
 static NSString *MG_DG_TOTALSCORE = @"mg_dg_totalscore";
 /// 本次积分
 static NSString *MG_DG_SCORE = @"mg_dg_score";
+#pragma mark - 元宇宙砂砂舞
+/// 元宇宙砂砂舞指令回调
+static NSString *MG_COMMON_GAME_DISCO_ACTION = @"mg_common_game_disco_action";
+/// 指令动作结束通知
+static NSString *MG_COMMON_GAME_DISCO_ACTION_END = @"mg_common_game_disco_action_end";
 
 
 #pragma mark - MG_COMMON_PUBLIC_MESSAGE
@@ -465,6 +470,27 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 /// 字符串类型 展示本次获得积分
 @property(nonatomic, copy) NSString *msg;
 @end
+
+#pragma mark - 元宇宙砂砂舞 指令回调  MG_COMMON_GAME_DISCO_ACTION
+
+@interface MGCommonGameDiscoActionModel : NSObject
+/// 指令序号类型
+@property(nonatomic, copy) NSString *actionId;
+/// true 指令成功，false 指令失败
+@property(nonatomic, assign) BOOL isSuccess;
+
+@end
+
+#pragma mark - 元宇宙砂砂舞 指令动作结束通知  MG_COMMON_GAME_DISCO_ACTION_END
+
+@interface MGCommonGameDiscoActionEndModel : NSObject
+/// 指令序号类型
+@property(nonatomic, copy) NSString *actionId;
+/// 玩家ID string 类型
+@property(nonatomic, copy) NSString *playerId;
+
+@end
+
 
 
 NS_ASSUME_NONNULL_END

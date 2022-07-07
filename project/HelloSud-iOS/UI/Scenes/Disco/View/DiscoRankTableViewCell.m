@@ -74,10 +74,10 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    if (![self.model isKindOfClass:DiscoRankModel.class]) {
+    if (![self.model isKindOfClass:DiscoContributionModel.class]) {
         return;
     }
-    DiscoRankModel *m = (DiscoRankModel *)self.model;
+    DiscoContributionModel *m = (DiscoContributionModel *)self.model;
 
     if (m.rank < 3) {
         self.rankImageView.hidden = NO;
@@ -88,13 +88,15 @@
         self.rankLabel.hidden = NO;
         self.rankLabel.text = [NSString stringWithFormat:@"%@", @(m.rank + 1)];
     }
-    self.headImageView.image = [UIImage imageNamed:m.avatar];
+    if (m.fromUser.icon) {
+        [self.headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.fromUser.icon]];
+    }
     [self updateWinCount:m.count];
-    [self updateName:m.name];
+    [self updateName:m.fromUser.name];
 }
 
 - (void)updateWinCount:(NSInteger)count {
-    DiscoRankModel *m = (DiscoRankModel *)self.model;
+    
 
     NSDictionary *dic = @{NSFontAttributeName: UIFONT_MEDIUM(16), NSForegroundColorAttributeName: HEX_COLOR(@"#000000")};
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", @(count)]
@@ -104,7 +106,7 @@
 }
 
 - (void)updateName:(NSString *)name {
-    DiscoRankModel *m = (DiscoRankModel *)self.model;
+    
     NSDictionary *dic = @{NSFontAttributeName: UIFONT_MEDIUM(16), NSForegroundColorAttributeName: HEX_COLOR(@"#000000")};
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", name]
                                                                              attributes:dic];

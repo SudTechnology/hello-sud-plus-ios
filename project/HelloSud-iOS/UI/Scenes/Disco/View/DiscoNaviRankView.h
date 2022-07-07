@@ -9,9 +9,10 @@
 #import "BaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 /// 导航栏上的排行视图
 @interface DiscoNaviRankView : BaseView
-
+@property(nonatomic, strong) NSArray *iconList;
 @end
 
 NS_ASSUME_NONNULL_END

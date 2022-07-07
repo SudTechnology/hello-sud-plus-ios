@@ -193,3 +193,10 @@
 @implementation MGDGScoreModel
 
 @end
+
+
+@implementation MGCommonGameDiscoActionModel
+@end
+
+@implementation MGCommonGameDiscoActionEndModel
+@end

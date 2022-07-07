@@ -53,7 +53,9 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 
 @interface DiscoRoomService ()
 /// 当前主播跳舞池
-@property (nonatomic, strong)NSMutableDictionary<NSString *, DiscoMenuModel *> *dicDancingMap;
+@property(nonatomic, strong) NSMutableDictionary<NSString *, DiscoMenuModel *> *dicDancingMap;
+/// 贡献榜
+@property(nonatomic, strong) NSMutableDictionary <NSString *, DiscoContributionModel *> *rankMap;
 @end
 
 @implementation DiscoRoomService
@@ -123,25 +125,89 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     }
 
     if (addDuration > 0) {
-        if (m.beginTime == 0) {
-            NSString *anchorID = m.toUser.userID;
-            if ([self isAnchorDancing:anchorID]){
-                // 当前主播在跳舞
-                if ([self isAnchorDancingWithMe:anchorID]) {
-                    // 发送者是自己，执行与主播跳舞指令
-                    [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
-                }
-                return;
-            }
-            // 开始跳舞
-            [m beginDancing];
-            self.dicDancingMap[anchorID] = m;
-            if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
-                // 发送者是自己，执行与主播跳舞指令
-                [self danceWithAnchor:m.duration isTop:NO field1:m.toUser.userID];
-            }
+        [self checkIfNeedToDancing:m duration:addDuration];
+    }
+
+}
+
+- (void)checkIfNeedToDancing:(DiscoMenuModel *)m duration:(NSInteger)addDuration {
+    if (m.beginTime == 0) {
+        // 未开始跳舞
+        NSString *anchorID = m.toUser.userID;
+        if (!anchorID) {
+            DDLogError(@"will dancing with anchor, but anchor id isempty");
+            return;
+        }
+        if ([self isAnchorDancing:anchorID]) {
+            // 当前主播在跳舞
+            return;
+        }
+        // 开始跳舞
+        [m beginDancing];
+        self.dicDancingMap[anchorID] = m;
+        if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
+            // 发送者是自己，执行与主播跳舞指令
+            [self danceWithAnchor:m.duration isTop:NO field1:m.toUser.userID];
+        }
+    } else {
+        // 已经在跳，如果是与自己在跳，则通知游戏继续跳
+        if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
+            // 发送者是自己，执行与主播跳舞指令
+            [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
         }
     }
+}
+
+/// 增加跳舞信息
+/// @param model
+- (void)addDanceMenuInfo:(DiscoMenuModel *)model {
+    [self.danceMenuList addObject:model];
+    [self checkIfNeedToDancing:model duration:model.duration];
+}
+
+/// 增数据
+/// @param model
+- (void)addRankInfo:(DiscoContributionModel *)model {
+    self.rankMap[model.fromUser.userID] = model;
+    [self reSortRankList];
+}
+
+- (void)reSortRankList {
+    NSArray *arr = [self.rankMap allValues];
+    NSArray *sortedArr = [arr sortedArrayUsingComparator:^NSComparisonResult(DiscoContributionModel * obj1, DiscoContributionModel * obj2) {
+        if (obj1.count == obj2.count) {
+            return obj1.fromUser.userID < obj2.fromUser.userID;
+        }
+        return obj1.count > obj2.count;
+    }];
+    [self.rankList setArray:sortedArr];
+}
+
+/// 增加分值
+/// @param fromUser
+/// @param count
+- (void)addRankCount:(AudioUserModel *)fromUser count:(NSInteger)count {
+    DiscoContributionModel *m = self.rankMap[fromUser.userID];
+    if (!m) {
+        m = [[DiscoContributionModel alloc]init];
+        m.fromUser = fromUser;
+        [self addRankInfo:m];
+    }
+    m.count += count;
+    [self reSortRankList];
+}
+
+/// 处理主播停止了跳舞
+/// @param anchorID
+- (void)handleAnchorStopDancing:(NSString *)anchorID {
+    if (anchorID) {
+        [self.dicDancingMap removeObjectForKey:anchorID];
+    }
+}
+
+
+/// 处理排版数据
+- (void)handleRankInfo {
 
 }
 
@@ -174,11 +240,18 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     }
 }
 
--(NSMutableDictionary<NSString *, DiscoMenuModel *> *)dicDancingMap {
+- (NSMutableDictionary<NSString *, DiscoMenuModel *> *)dicDancingMap {
     if (!_dicDancingMap) {
-        _dicDancingMap = [[NSMutableDictionary alloc]init];
+        _dicDancingMap = [[NSMutableDictionary alloc] init];
     }
     return _dicDancingMap;
+}
+
+- (NSMutableDictionary<NSString *, DiscoContributionModel *> *)rankMap {
+    if (!_rankMap) {
+        _rankMap = [[NSMutableDictionary alloc] init];
+    }
+    return _rankMap;
 }
 
 - (NSMutableArray <DiscoMenuModel *> *)danceMenuList {
@@ -186,6 +259,13 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         _danceMenuList = [[NSMutableArray alloc] init];
     }
     return _danceMenuList;
+}
+
+- (NSMutableArray <DiscoContributionModel *> *)rankList {
+    if (!_rankList) {
+        _rankList = [[NSMutableArray alloc] init];
+    }
+    return _rankList;
 }
 
 /// 加入舞池

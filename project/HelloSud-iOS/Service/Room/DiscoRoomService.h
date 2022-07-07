@@ -16,9 +16,34 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DiscoRoomService : AudioRoomService
 /// 跳舞单
 @property(nonatomic, strong) NSMutableArray <DiscoMenuModel *> *danceMenuList;
+/// 贡献榜
+@property(nonatomic, strong) NSMutableArray <DiscoContributionModel *> *rankList;
+
 /// 更新舞池列表
 /// @param giftModel
 - (void)updateDanceMenuInfo:(RoomCmdSendGiftModel *)giftModel;
+
+/// 增加跳舞信息
+/// @param model
+- (void)addDanceMenuInfo:(DiscoMenuModel *)model;
+
+/// 增数据
+/// @param model
+- (void)addRankInfo:(DiscoContributionModel *)model;
+
+/// 增加分值
+/// @param fromUser
+/// @param count
+- (void)addRankCount:(AudioUserModel *)fromUser count:(NSInteger)count;
+
+/// 处理主播停止了跳舞
+/// @param anchorID
+- (void)handleAnchorStopDancing:(NSString *)anchorID;
+
+/// 处理排版数据
+- (void)handleRankInfo;
+
+#pragma mark game cmd
 
 /// 加入舞池
 /// @param colorHexValue 昵称的颜色色值

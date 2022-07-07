@@ -15,7 +15,7 @@
 @property(nonatomic, strong) UILabel *subTitleLabel;
 @property(nonatomic, strong) UILabel *tipLabel;
 @property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray <DiscoRankModel *> *dataList;
+@property(nonatomic, strong) NSMutableArray <DiscoContributionModel *> *dataList;
 @end
 
 @implementation DiscoRankPopView
@@ -68,34 +68,11 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    [self testData];
+    [self loadData];
 }
 
-- (void)testData {
-    DiscoRankModel *m1 = [[DiscoRankModel alloc]init];
-    m1.rank = 0;
-    m1.avatar = nil;
-    m1.name = @"张三";
-    m1.count = 8645;
-
-    DiscoRankModel *m2 = [[DiscoRankModel alloc]init];
-    m2.rank = 1;
-    m2.avatar = nil;
-    m2.name = @"李四";
-    m2.count = 7431;
-
-    DiscoRankModel *m3 = [[DiscoRankModel alloc]init];
-    m3.rank = 2;
-    m3.avatar = nil;
-    m3.name = @"王五";
-    m3.count = 6940;
-
-    DiscoRankModel *m4 = [[DiscoRankModel alloc]init];
-    m4.rank = 3;
-    m4.avatar = nil;
-    m4.name = @"何路加";
-    m4.count = 5599;
-    [self.dataList setArray: @[m1, m2, m3, m4]];
+- (void)loadData {
+    [self.dataList setArray:kDiscoRoomService.rankList];
     [self.tableView reloadData];
 }
 
@@ -107,6 +84,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DiscoRankTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiscoRankTableViewCell"];
+    DiscoContributionModel *m = self.dataList[indexPath.row];
+    m.rank = indexPath.row;
     cell.model = self.dataList[indexPath.row];
     return cell;
 }

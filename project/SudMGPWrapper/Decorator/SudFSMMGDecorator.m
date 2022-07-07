@@ -267,6 +267,20 @@
             [self.listener onGameMGCommonGameSelfHeadphone:handle model:m];
             return;
         }
+    } else if ([state isEqualToString:MG_COMMON_GAME_DISCO_ACTION]){
+        /// 元宇宙砂砂舞 指令回调  MG_COMMON_GAME_DISCO_ACTION
+        MGCommonGameDiscoActionModel *m = [MGCommonGameDiscoActionModel mj_objectWithKeyValues: dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameDiscoAction:model:)]) {
+            [self.listener onGameMGCommonGameDiscoAction:handle model:m];
+            return;
+        }
+    }else if ([state isEqualToString:MG_COMMON_GAME_DISCO_ACTION_END]){
+        /// 元宇宙砂砂舞 指令动作结束通知  MG_COMMON_GAME_DISCO_ACTION_END
+        MGCommonGameDiscoActionEndModel *m = [MGCommonGameDiscoActionEndModel mj_objectWithKeyValues: dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameDiscoActionEnd:model:)]) {
+            [self.listener onGameMGCommonGameDiscoActionEnd:handle model:m];
+            return;
+        }
     } else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
