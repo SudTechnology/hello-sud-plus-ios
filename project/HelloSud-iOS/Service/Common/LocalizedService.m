@@ -304,5 +304,27 @@
 + (NSString *)dt_ticket_order_msg_fmt { return @"dt_ticket_order_msg_fmt".localized; }
 + (NSString *)dt_room_mic_game_ing { return @"dt_room_mic_game_ing".localized; }
 
+/// 1.4.0
++ (NSString *)dt_room_disco_dancing_fmt { return @"dt_room_disco_dancing_fmt".localized; }
++ (NSString *)dt_room_disco_tip_one_fmt { return @"dt_room_disco_tip_one_fmt".localized; }
++ (NSString *)dt_room_disco_tip_two_fmt { return @"dt_room_disco_tip_two_fmt".localized; }
++ (NSString *)dt_room_disco_tip_three_fmt { return @"dt_room_disco_tip_three_fmt".localized; }
++ (NSString *)dt_room_disco_tip_four_fmt { return @"dt_room_disco_tip_four_fmt".localized; }
++ (NSString *)dt_room_disco_tip_five_fmt { return @"dt_room_disco_tip_five_fmt".localized; }
++ (NSString *)dt_room_disco_countdown_fmt { return @"dt_room_disco_countdown_fmt".localized; }
++ (NSString *)dt_room_guess_win_msg_fmt { return @"dt_room_guess_win_msg_fmt".localized; }
++ (NSString *)dt_room_guess_diff_user_win_msg_fmt { return @"dt_room_guess_diff_user_win_msg_fmt".localized; }
++ (NSString *)dt_room_guess_enter_fmt { return @"dt_room_guess_enter_fmt".localized; }
++ (NSString *)dt_room_guess_coin_fmt { return @"dt_room_guess_coin_fmt".localized; }
++ (NSString *)dt_room_guess_support_fmt { return @"dt_room_guess_support_fmt".localized; }
++ (NSString *)dt_room_guess_distance_time_fmt { return @"dt_room_guess_distance_time_fmt".localized; }
++ (NSString *)dt_room_guess_your_support_fmt { return @"dt_room_guess_your_support_fmt".localized; }
++ (NSString *)dt_room_guess_win_me_fmt { return @"dt_room_guess_win_me_fmt".localized; }
++ (NSString *)dt_room_guess_guess_self_fmt { return @"dt_room_guess_guess_self_fmt".localized; }
++ (NSString *)dt_room_guess_confirm_coin_fmt { return @"dt_room_guess_confirm_coin_fmt".localized; }
++ (NSString *)dt_room_guess_close_fmt { return @"dt_room_guess_close_fmt".localized; }
++ (NSString *)dt_room_disco_dancing_minute_fmt { return @"dt_room_disco_dancing_minute_fmt".localized; }
++ (NSString *)dt_room_guess_had_support_fmt { return @"dt_room_guess_had_support_fmt".localized; }
+
 
 @end

@@ -230,7 +230,7 @@
         self.timer = nil;
         return;
     }
-    NSString *closeStr = [NSString stringWithFormat:@"关闭(%@s)", @(self.countdown)];
+    NSString *closeStr = [NSString stringWithFormat:NSString.dt_room_guess_close_fmt, @(self.countdown)];
     [self.closeBtn setTitle:closeStr forState:UIControlStateNormal];
 }
 

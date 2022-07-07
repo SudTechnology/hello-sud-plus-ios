@@ -185,7 +185,7 @@
             selectedCount++;
         }
     }
-    NSString *totalCoinStr = [NSString stringWithFormat:@"确认(%@金币)", @(selectedCount * self.betCoin)];
+    NSString *totalCoinStr = [NSString stringWithFormat:NSString.dt_room_guess_confirm_coin_fmt, @(selectedCount * self.betCoin)];
     [self.confirmBtn setTitle:totalCoinStr forState:UIControlStateNormal];
     self.confirmBtn.enabled = selectedCount > 0;
     if (self.confirmBtn.enabled) {

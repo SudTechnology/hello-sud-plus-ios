@@ -111,7 +111,7 @@
         }
         return;
     }
-    _tipLabel.text = [NSString stringWithFormat:@"%@秒后会自动进入全屏", @(self.countdown)];
+    _tipLabel.text = [NSString stringWithFormat:NSString.dt_room_disco_countdown_fmt, @(self.countdown)];
 }
 
 - (void)onEnterBtn:(id)sender {
@@ -141,7 +141,7 @@
 - (UILabel *)tipLabel {
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
-        _tipLabel.text = @"3秒后会自动进入全屏";
+        _tipLabel.text = @"";
         _tipLabel.font = UIFONT_REGULAR(12);
         _tipLabel.textColor = HEX_COLOR(@"#000000");
         _tipLabel.textAlignment = NSTextAlignmentCenter;

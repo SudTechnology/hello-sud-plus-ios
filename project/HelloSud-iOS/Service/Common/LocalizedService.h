@@ -299,6 +299,28 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_ticket_order_msg_fmt;
 + (NSString *)dt_room_mic_game_ing;
 
+/// 1.4.0
++ (NSString *)dt_room_disco_dancing_fmt;
++ (NSString *)dt_room_disco_tip_one_fmt;
++ (NSString *)dt_room_disco_tip_two_fmt;
++ (NSString *)dt_room_disco_tip_three_fmt;
++ (NSString *)dt_room_disco_tip_four_fmt;
++ (NSString *)dt_room_disco_tip_five_fmt;
++ (NSString *)dt_room_disco_countdown_fmt;
++ (NSString *)dt_room_guess_win_msg_fmt;
++ (NSString *)dt_room_guess_diff_user_win_msg_fmt;
++ (NSString *)dt_room_guess_enter_fmt;
++ (NSString *)dt_room_guess_coin_fmt;
++ (NSString *)dt_room_guess_support_fmt;
++ (NSString *)dt_room_guess_distance_time_fmt;
++ (NSString *)dt_room_guess_your_support_fmt;
++ (NSString *)dt_room_guess_win_me_fmt;
++ (NSString *)dt_room_guess_guess_self_fmt;
++ (NSString *)dt_room_guess_confirm_coin_fmt;
++ (NSString *)dt_room_guess_close_fmt;
++ (NSString *)dt_room_disco_dancing_minute_fmt;
++ (NSString *)dt_room_guess_had_support_fmt;
+
 
 @end
 NS_ASSUME_NONNULL_END

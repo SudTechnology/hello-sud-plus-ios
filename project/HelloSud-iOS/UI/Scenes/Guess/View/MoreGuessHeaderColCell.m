@@ -244,7 +244,7 @@
     if (m.duration > 0) {
         if (m.leftSupportCoin > 0) {
             self.leftSupportImageView.hidden = NO;
-            self.leftSupportLabel.text = [NSString stringWithFormat:@"已支持 %@", @(m.leftSupportCoin)];
+            self.leftSupportLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_support_fmt, @(m.leftSupportCoin)];
             self.rightSupportBtn.enabled = NO;
             self.leftSupportBtn.selected = YES;
         } else {
@@ -254,7 +254,7 @@
         if (m.rightSupportCoin > 0) {
             self.rightSupportImageView.hidden = NO;
             self.rightSupportLabel.hidden = NO;
-            self.rightSupportLabel.text = [NSString stringWithFormat:@"已支持 %@", @(m.rightSupportCoin)];
+            self.rightSupportLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_support_fmt, @(m.rightSupportCoin)];
             self.leftSupportBtn.enabled = NO;
             self.rightSupportBtn.selected = YES;
         } else {
@@ -323,7 +323,7 @@
     NSInteger hour = (self.countdown - day * DAY_SEC) / HOUR_SEC;
     NSInteger min = (self.countdown - day * DAY_SEC - hour * HOUR_SEC) / MINUTE_SEC;
     NSInteger sec = self.countdown - day * DAY_SEC - hour * HOUR_SEC - min * MINUTE_SEC;
-    _stateLabel.text = [NSString stringWithFormat:@"距离开始 %02ld:%02ld:%02ld:%02ld", day, hour, min, sec];
+    _stateLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_distance_time_fmt, day, hour, min, sec];
 }
 
 - (void)onLeftSupportClick:(id)sender {
@@ -414,7 +414,7 @@
         _stateLabel = [[UILabel alloc] init];
         _stateLabel.textColor = HEX_COLOR(@"#6C3800");
         _stateLabel.font = UIFONT_MEDIUM(14);
-        _stateLabel.text = @"距离开始 02:38:28:56";
+        _stateLabel.text = @"";
     }
     return _stateLabel;
 }

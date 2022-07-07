@@ -294,3 +294,25 @@
 "dt_room_pk_invite" = "เชิญ";
 "dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
 "dt_room_mic_game_ing" = "กำลังเล่นเกม";
+
+/// 1.4.0
+"dt_room_disco_dancing_fmt" = "%@\n邀请%@跳舞%@分钟";
+"dt_room_disco_tip_one_fmt" = "1. 贡献榜%@随机DJ（%@秒刷新）";
+"dt_room_disco_tip_two_fmt" = "2. 送礼可触发不同的效果或点主播跳舞。";
+"dt_room_disco_tip_three_fmt" = "3. 公屏指令：【%@】【%@】【%@】";
+"dt_room_disco_tip_four_fmt" = "4. 麦上用户发送【%@】可上到主播位，发送【%@】可下主播位。";
+"dt_room_disco_tip_five_fmt" = "5. 主播发文字或语音【%@】可触发特写";
+"dt_room_disco_countdown_fmt" = "%@秒后会自动进入全屏";
+"dt_room_guess_win_msg_fmt" = "%@ 胸有成竹，猜自己一定能赢";
+"dt_room_guess_diff_user_win_msg_fmt" = "%@ 为 %@ 打call，猜TA会赢";
+"dt_room_guess_enter_fmt" = "入场 %@";
+"dt_room_guess_coin_fmt" = "%@金币";
+"dt_room_guess_support_fmt" = "已支持 %@";
+"dt_room_guess_distance_time_fmt" = "距离开始 %02ld:%02ld:%02ld:%02ld";
+"dt_room_guess_your_support_fmt" = "你要投入多少支持%@";
+"dt_room_guess_win_me_fmt" = "猜自己赢\n夺第一名 得5倍奖励";
+"dt_room_guess_guess_self_fmt" = "是否开启每轮自动猜自己赢？\n（每轮%@金币）";
+"dt_room_guess_confirm_coin_fmt" = "确认(%@金币)";
+"dt_room_guess_close_fmt" = "关闭(%@s)";
+"dt_room_disco_dancing_minute_fmt" = "跳舞%@分钟";
+"dt_room_guess_had_support_fmt" = "已有%@人支持";

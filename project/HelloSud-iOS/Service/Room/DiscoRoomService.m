@@ -241,6 +241,12 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     }
 }
 
+/// 清空舞池单
+- (void)clearAllDancingMenu {
+    [self.danceMenuList removeAllObjects];
+    [self.dicDancingMap removeAllObjects];
+}
+
 - (NSMutableDictionary<NSString *, DiscoMenuModel *> *)dicDancingMap {
     if (!_dicDancingMap) {
         _dicDancingMap = [[NSMutableDictionary alloc] init];

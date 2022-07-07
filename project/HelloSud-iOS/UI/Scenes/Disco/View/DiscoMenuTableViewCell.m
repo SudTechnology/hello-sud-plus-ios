@@ -123,7 +123,7 @@
 - (void)updateName {
     DiscoMenuModel *m = (DiscoMenuModel *) self.model;
     NSInteger min = m.duration / 60;
-    NSString *fullStr = [NSString stringWithFormat:@"%@\n邀请%@跳舞%@分钟", m.fromUser.name, m.toUser.name, @(min)];
+    NSString *fullStr = [NSString stringWithFormat:NSString.dt_room_disco_dancing_fmt, m.fromUser.name, m.toUser.name, @(min)];
     NSDictionary *dic = @{NSFontAttributeName: UIFONT_MEDIUM(14), NSForegroundColorAttributeName: HEX_COLOR(@"#ffffff")};
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", fullStr]
                                                                              attributes:dic];

@@ -31,6 +31,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 @property(nonatomic, strong) NSString *syncDiscoInfoUserID;
 @property(nonatomic, assign) BOOL syncEnd;
 @property(nonatomic, assign) BOOL isTipOpened;
+@property(nonatomic, assign) NSInteger djCountdown;
 @property(nonatomic, assign) DTTimer *djRandTimer;
 @end
 
@@ -141,7 +142,13 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 - (void)dtConfigUI {
     [super dtConfigUI];
+    self.djCountdown = 60;
+    [self updateTipLabel];
     [self.tipLabel restartLabel];
+    WeakSelf
+    self.djRandTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
+        [weakSelf handleDJTimerCallback];
+    }];
 }
 
 - (void)onTipLabelTap:(id)tap {
@@ -186,6 +193,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     if (self.gameId > 0) {
         NSString *tip = @"确定要关闭蹦迪吗？ 关闭后本场蹦迪将清空，包括正在进行中的跳舞、排队中的跳舞、角色特效";
         [DTAlertView showTextAlert:tip sureText:@"关闭" cancelText:@"返回" onSureCallback:^{
+            [kDiscoRoomService clearAllDancingMenu];
             [self handleChangeToGame:0];
             [self updateSettingState:NO];
         }          onCloseCallback:nil];
@@ -407,6 +415,12 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     } else if (msg.cmd == CMD_ENTER_ROOM_NOTIFY) {
         // 首次进入房间
         [self sendCmdToGetDiscoInfo];
+    } else if (msg.cmd == CMD_ROOM_DISCO_BECOME_DJ) {
+        // 上DJ台
+        RespDiscoBecomeDJModel *model = (RespDiscoBecomeDJModel *)msg;
+        if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
+            [kDiscoRoomService upToDJ:180];
+        }
     }
 }
 
@@ -489,9 +503,23 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 }
 
+- (void)updateTipLabel {
+    self.tipOpenLabel.attributedText = [self createTip:YES];
+    self.tipLabel.attributedText = [self createTip:NO];
+}
+
 /// 处理DJ随机上台
 - (void)handleDJTimerCallback {
+    self.djCountdown--;
+    if (self.djCountdown <= 0) {
+        self.djCountdown = 60;
+        [self checkUpToDJ];
+    }
+    [self updateTipLabel];
+}
 
+- (void)checkUpToDJ {
+    
     if (![self checkIsFirstMicUser]){
         DDLogDebug(@"handleDJTimerCallback, but not in the first mic,so skip");
         return;
@@ -499,7 +527,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     NSMutableArray *randUserList = [[NSMutableArray alloc]init];
     NSArray *rankList = kDiscoRoomService.rankList;
     for (int i = 0; i < 5; ++i) {
-        if (rankList.count > 5) {
+        if (rankList.count > i) {
             DiscoContributionModel *m = rankList[i];
             if (m.fromUser.userID){
                 [randUserList addObject:m.fromUser.userID];
@@ -547,11 +575,20 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 }
 
 - (NSMutableAttributedString *)createTip:(BOOL)isMoreLines {
-    NSString *tip1 = @"1. 贡献榜前五随机DJ（26秒刷新）";
-    NSString *tip2 = @"2. 送礼可触发不同的效果或点主播跳舞。";
-    NSString *tip3 = @"3. 公屏指令：【移动】【上天】【换角色】";
-    NSString *tip4 = @"4. 麦上用户发送【上班】可上到主播位，发送【下班】可下主播位。";
-    NSString *tip5 = @"5. 主播发文字或语音【聚焦】可触发特写";
+    
+    NSString *key1 = @"前五";
+    NSString *key2 = @"移动";
+    NSString *key3 = @"上天";
+    NSString *key4 = @"换角色";
+    NSString *key5 = @"上班";
+    NSString *key6 = @"下班";
+    NSString *key7 = @"聚焦";
+    
+    NSString *tip1 = [NSString stringWithFormat:NSString.dt_room_disco_tip_one_fmt, key1, @(self.djCountdown)];
+    NSString *tip2 = NSString.dt_room_disco_tip_two_fmt;
+    NSString *tip3 = [NSString stringWithFormat:NSString.dt_room_disco_tip_three_fmt, key2, key3, key4];
+    NSString *tip4 = [NSString stringWithFormat:NSString.dt_room_disco_tip_four_fmt, key5, key6];
+    NSString *tip5 = [NSString stringWithFormat:NSString.dt_room_disco_tip_five_fmt, key7];
     if (isMoreLines) {
         tip1 = [NSString stringWithFormat:@"%@\n", tip1];
         tip2 = [NSString stringWithFormat:@"%@\n", tip2];
@@ -559,11 +596,11 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         tip4 = [NSString stringWithFormat:@"%@\n", tip4];
     }
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] init];
-    [attrTitle appendAttributedString:[self createYYAttr:tip1 hilightStr:@[@"前五"]]];
+    [attrTitle appendAttributedString:[self createYYAttr:tip1 hilightStr:@[key1]]];
     [attrTitle appendAttributedString:[self createYYAttr:tip2 hilightStr:nil]];
-    [attrTitle appendAttributedString:[self createYYAttr:tip3 hilightStr:@[@"移动", @"上天", @"换角色"]]];
-    [attrTitle appendAttributedString:[self createYYAttr:tip4 hilightStr:@[@"上班", @"下班"]]];
-    [attrTitle appendAttributedString:[self createYYAttr:tip5 hilightStr:@[@"聚焦"]]];
+    [attrTitle appendAttributedString:[self createYYAttr:tip3 hilightStr:@[key2, key3, key4]]];
+    [attrTitle appendAttributedString:[self createYYAttr:tip4 hilightStr:@[key5, key6]]];
+    [attrTitle appendAttributedString:[self createYYAttr:tip5 hilightStr:@[key7]]];
     return attrTitle;
 }
 
@@ -621,13 +658,4 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     return _settingLabel;
 }
 
-- (DTTimer *)djRandTimer {
-    if (!_djRandTimer) {
-        WeakSelf
-        _djRandTimer = [DTTimer timerWithTimeInterval:60 repeats:YES block:^(DTTimer *timer) {
-            [weakSelf handleDJTimerCallback];
-        }];
-    }
-    return _djRandTimer;
-}
 @end

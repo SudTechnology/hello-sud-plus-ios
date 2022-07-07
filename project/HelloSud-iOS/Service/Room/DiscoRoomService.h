@@ -43,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 处理排版数据
 - (void)handleRankInfo;
 
+/// 清空舞池单
+- (void)clearAllDancingMenu;
+
 #pragma mark game cmd
 
 /// 加入舞池

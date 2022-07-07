@@ -131,7 +131,7 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    self.titleLabel.text = [NSString stringWithFormat:@"你要投入多少支持%@", self.name];
+    self.titleLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_your_support_fmt, self.name];
 }
 
 - (void)onSupportBtnCLick:(id)sender {

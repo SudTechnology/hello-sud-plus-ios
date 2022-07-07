@@ -273,7 +273,7 @@
 - (YYLabel *)infoLabel {
     if (!_infoLabel) {
         _infoLabel = [[YYLabel alloc] init];
-        _infoLabel.text = @"剩余：00000\n参与人数上限：xxx\n入场 免费";
+        _infoLabel.text = @"";
         _infoLabel.font = UIFONT_REGULAR(12);
         _infoLabel.textColor = HEX_COLOR(@"#666666");
         _infoLabel.numberOfLines = 0;

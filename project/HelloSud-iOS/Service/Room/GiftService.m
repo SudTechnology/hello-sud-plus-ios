@@ -99,7 +99,7 @@
         gift1.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
         gift1.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
         gift1.animateType = @"svga";
-        gift1.giftName = @"跳舞一分钟";
+        gift1.giftName = [NSString stringWithFormat:NSString.dt_room_disco_dancing_minute_fmt, @"一"];
         gift1.price = 50;
 
         GiftModel *gift2 = GiftModel.new;
@@ -108,7 +108,7 @@
         gift2.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
         gift2.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
         gift2.animateType = @"svga";
-        gift2.giftName = @"跳舞三分钟";
+        gift2.giftName = [NSString stringWithFormat:NSString.dt_room_disco_dancing_minute_fmt, @"三"];
         gift2.price = 150;
 
         GiftModel *gift3 = GiftModel.new;

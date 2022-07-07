@@ -62,7 +62,7 @@
     }
 
     GuessPlayerModel *m = (GuessPlayerModel *) self.model;
-    self.supportNumLabel.text = [NSString stringWithFormat:@"已有%@人支持", @(m.supportedUserCount)];
+    self.supportNumLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_had_support_fmt, @(m.supportedUserCount)];
     if (m.header) {
         [self.headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.header]];
     }
