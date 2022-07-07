@@ -30,6 +30,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// 同步蹦迪信息用户ID
 @property(nonatomic, strong) NSString *syncDiscoInfoUserID;
 @property(nonatomic, assign) BOOL isTipOpened;
+@property(nonatomic, assign) DTTimer *djRandTimer;
 @end
 
 @implementation DiscoRoomViewController
@@ -475,6 +476,39 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 }
 
+/// 处理DJ随机上台
+- (void)handleDJTimerCallback {
+
+    if (![self checkIsFirstMicUser]){
+        DDLogDebug(@"handleDJTimerCallback, but not in the first mic,so skip");
+        return;
+    }
+    NSMutableArray *randUserList = [[NSMutableArray alloc]init];
+    NSArray *rankList = kDiscoRoomService.rankList;
+    for (int i = 0; i < 5; ++i) {
+        if (rankList.count > 5) {
+            DiscoContributionModel *m = rankList[i];
+            if (m.fromUser.userID){
+                [randUserList addObject:m.fromUser.userID];
+            }
+        }
+    }
+    NSString *userID = nil;
+    if (randUserList.count > 0) {
+        NSInteger randIndex = arc4random() % randUserList.count;
+        userID = randUserList[randIndex];
+    }
+    if (!userID) {
+        DDLogDebug(@"up dj user id is empty, randUserList count:%@", @(randUserList.count));
+        return;
+    }
+    RespDiscoBecomeDJModel *djModel = [[RespDiscoBecomeDJModel alloc]init];
+    [djModel configBaseInfoWithCmd:CMD_ROOM_DISCO_BECOME_DJ];
+    djModel.userID = userID;
+    [self sendMsg:djModel isAddToShow:NO];
+    DDLogDebug(@"send the up dj cmd to all, up dj id is:%@", userID);
+}
+
 #pragma mark lazy
 
 - (DiscoNaviRankView *)rankView {
@@ -572,5 +606,15 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         _settingLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _settingLabel;
+}
+
+- (DTTimer *)djRandTimer {
+    if (!_djRandTimer) {
+        WeakSelf
+        _djRandTimer = [DTTimer timerWithTimeInterval:60 repeats:YES block:^(DTTimer *timer) {
+            [weakSelf handleDJTimerCallback];
+        }];
+    }
+    return _djRandTimer;
 }
 @end
