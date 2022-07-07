@@ -34,7 +34,7 @@
     MoreGuessCoinItemView *v1 = [[MoreGuessCoinItemView alloc] init];
     v1.isSelected = NO;
     v1.coin = 10;
-    self.selectedCoin = v1.coin;
+
     WeakSelf
     v1.onStateChangedBlock = ^(MoreGuessCoinItemView *view, BOOL isSelected) {
         [weakSelf updateSelectState:view];
@@ -42,6 +42,7 @@
 
     MoreGuessCoinItemView *v2 = [[MoreGuessCoinItemView alloc] init];
     v2.isSelected = YES;
+    self.selectedCoin = v2.coin;
     v2.coin = 100;
     v2.onStateChangedBlock = ^(MoreGuessCoinItemView *view, BOOL isSelected) {
         [weakSelf updateSelectState:view];

@@ -183,8 +183,8 @@
 - (id <JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     GuessRankContentView *listView = [[GuessRankContentView alloc] init];
     [listView updateHeadHeight:240];
-    listView.dataList = [self createDataList];
-    NSString *tip = @"获得特写(次)";
+    listView.dataList = [self createDataList:index];
+    NSString *tip = index == 0 ? @"获得特写(次)" : @"被邀约(次)";
     listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"盛世红盛" avatar:@"ic_avatar_1" tip:tip subTitle:@""];
     listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"念念不忘" avatar:@"ic_avatar_2" tip:tip subTitle:@""];
     listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"杏岛绮月" avatar:@"ic_avatar_3" tip:tip subTitle:@""];
@@ -196,9 +196,9 @@
 
 #pragma mark - private
 
-- (NSArray *)createDataList {
+- (NSArray *)createDataList:(NSInteger)index {
     NSMutableArray *arr = [[NSMutableArray alloc] init];
-    NSString *tip = @"获得特写(次)";
+    NSString *tip = index == 0 ? @"获得特写(次)" : @"被邀约(次)";
     [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"娜以香" avatar:@"ic_avatar_4" tip:tip subTitle:@""]];
     [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"大真蓓" avatar:@"ic_avatar_5" tip:tip subTitle:@""]];
     [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"宦滢" avatar:@"ic_avatar_6" tip:tip subTitle:@""]];
