@@ -323,16 +323,12 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
-/// 角色称号
-/// @param cooldown 称号的持续时间，单位秒（-1为永久）默认永久
-/// @param field1 称号的文字内容（6个汉字的长度）；默认在“全场最靓”，“最强王者”和“元宇宙砂砂舞”中随机
-/// @param field2 称号特效ID（1：称号1；2：称号2；3：称号3）默认随机
-- (void)switchRole:(int)cooldown field1:(NSString *)field1 field2:(NSString *)field2 {
+/// 换角色
+/// @param field1 角色ID（1：角色1（男）；2：角色2（男）；3：角色3（男）；4：角色4（男）；5：角色5（男）；6：角色6（男）；7：角色7（男）；8：角色8（男）；9：角色9（男）；10：角色10（男）；11：角色11（男）；12：角色12（女）；13：角色13（女）；14：角色14（女）；15：角色15（女）；16：角色16（女）；17：角色17（女）；18：角色18（女）；19：角色19（女）；20：角色20（女）；21：角色21（女））；默认随机
+- (void)switchRole:(NSString *)field1 {
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
-    m.actionId = DiscoActionTypeNamedRole;
-    m.cooldown = cooldown;
+    m.actionId = DiscoActionTypeChangeRole;
     m.field1 = field1;
-    m.field2 = field2;
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 

@@ -450,7 +450,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             // 特写镜头
             [kDiscoRoomService specialRole:5 isTop:false];
             // 随机角色
-            [kDiscoRoomService switchRole:2 * 60 * 60 field1:nil field2:nil];
+            [kDiscoRoomService switchRole:nil];
             // 角色放大
             [kDiscoRoomService scaleBiggerRole:60 field1:@"2"];
         }
@@ -479,7 +479,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         [kDiscoRoomService flySky:3];
     } else if ([discoKeyWordsSwitchRole isEqualToString:content]) {
         // 切换角色
-        [kDiscoRoomService switchRole:-1 field1:nil field2:nil];
+        [kDiscoRoomService switchRole:nil];
     } else if ([discoKeyWordsFocus isEqualToString:content]) {
         // 聚焦
         if ([self isInMic]) {

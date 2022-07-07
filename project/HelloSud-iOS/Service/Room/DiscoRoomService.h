@@ -70,10 +70,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)flySky:(int)cooldown;
 
 /// 角色称号
-/// @param cooldown 称号的持续时间，单位秒（-1为永久）默认永久
+/// @param field1 称号的持续时间，单位秒（-1为永久）默认永久
 /// @param field1 称号的文字内容（6个汉字的长度）；默认在“全场最靓”，“最强王者”和“元宇宙砂砂舞”中随机
 /// @param field2 称号特效ID（1：称号1；2：称号2；3：称号3）默认随机
-- (void)switchRole:(int)cooldown field1:(NSString *)field1 field2:(NSString *)field2;
+- (void)switchRole:(NSString *)field1;
 
 /// 角色特写
 /// @param cooldown 特写的持续时间，单位秒（范围为1-30，超出范围会取默认值）默认舞池角色1秒,DJ台角色3秒,跳舞的角色5秒
