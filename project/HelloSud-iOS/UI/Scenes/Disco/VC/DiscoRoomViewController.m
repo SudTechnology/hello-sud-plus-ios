@@ -106,7 +106,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         make.height.equalTo(@24);
     }];
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.leading.top.trailing.bottom.equalTo(@0);
+        make.leading.top.trailing.bottom.equalTo(@0);
     }];
     [self.tipOpenLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@5);
@@ -251,7 +251,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         }
 
             break;
-        case CMD_ROOM_DISCO_BECOME_DJ:{
+        case CMD_ROOM_DISCO_BECOME_DJ: {
             // 上DJ台
             RespDiscoBecomeDJModel *model = [RespDiscoBecomeDJModel fromJSON:command];
             if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
@@ -295,7 +295,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
         [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
         resp.dancingMenu = @[arr[i]];
-        [self sendMsg:resp isAddToShow:NO];
+        [HSThreadUtils dispatchMainAfter:0.01 callback:^{
+            [self sendMsg:resp isAddToShow:NO];
+        }];
     }
     // 贡献榜数据
     NSArray *rankArr = kDiscoRoomService.rankList;
@@ -309,7 +311,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
     [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
     resp.isEnd = YES;
-    [self sendMsg:resp isAddToShow:NO];
+    [HSThreadUtils dispatchMainAfter:0.01 callback:^{
+        [self sendMsg:resp isAddToShow:NO];
+    }];
 }
 
 /// 处理蹦迪信息响应
@@ -487,6 +491,27 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     return _settingView;
 }
 
+- (NSMutableAttributedString *)createTip:(BOOL)isMoreLines {
+    NSString *tip1 = @"1. 贡献榜前五随机DJ（26秒刷新）";
+    NSString *tip2 = @"2. 送礼可触发不同的效果或点主播跳舞。";
+    NSString *tip3 = @"3. 公屏指令：【移动】【上天】【换角色】，";
+    NSString *tip4 = @"4. 麦上用户发送【上班】可上到主播位，发送【下班】可下主播位。";
+    NSString *tip5 = @"5. 主播发文字或语音【聚焦】可触发特写";
+    if (isMoreLines) {
+        tip1 = [NSString stringWithFormat:@"%@\n", tip1];
+        tip2 = [NSString stringWithFormat:@"%@\n", tip2];
+        tip3 = [NSString stringWithFormat:@"%@\n", tip3];
+        tip4 = [NSString stringWithFormat:@"%@\n", tip4];
+    }
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] init];
+    [attrTitle appendAttributedString:[self createYYAttr:tip1 hilightStr:@[@"前五"]]];
+    [attrTitle appendAttributedString:[self createYYAttr:tip2 hilightStr:nil]];
+    [attrTitle appendAttributedString:[self createYYAttr:tip3 hilightStr:@[@"移动", @"上天", @"换角色"]]];
+    [attrTitle appendAttributedString:[self createYYAttr:tip4 hilightStr:@[@"上班", @"下班"]]];
+    [attrTitle appendAttributedString:[self createYYAttr:tip5 hilightStr:@[@"聚焦"]]];
+    return attrTitle;
+}
+
 - (MarqueeLabel *)tipLabel {
     if (!_tipLabel) {
         _tipLabel = [[MarqueeLabel alloc] init];
@@ -494,8 +519,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         _tipLabel.font = UIFONT_REGULAR(12);
         _tipLabel.numberOfLines = 0;
         _tipLabel.scrollDuration = 30;
-        _tipLabel.userInteractionEnabled = YES;
-        _tipLabel.text = @"1. 贡献榜前五随机DJ（26秒刷新） 2. 送礼可触发不同的效果或点主播跳舞。 3. 公屏指令：【移动】【上天】【换角色】， 4. 麦上用户发送【上班】可上到主播位，发送【下班】可下主播位。 5. 主播发文字或语音【聚焦】可触发特写";
+        NSMutableAttributedString *attr = [self createTip:NO];
+        _tipLabel.attributedText = attr;
+//        _tipLabel.backgroundColor = UIColor.redColor;
     }
     return _tipLabel;
 }
@@ -508,18 +534,20 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         _tipOpenLabel.font = UIFONT_REGULAR(12);
         _tipOpenLabel.hidden = YES;
         _tipOpenLabel.numberOfLines = 0;
-        NSString *tip = @"1. 贡献榜前五随机DJ（26秒刷新） \n2. 送礼可触发不同的效果或点主播跳舞。 \n3. 公屏指令：【移动】【上天】【换角色】， \n4. 麦上用户发送【上班】可上到主播位，发送【下班】可下主播位。 \n5. 主播发文字或语音【聚焦】可触发特写";
-        NSRange range = [tip rangeOfString:@"前五"];
-        _tipOpenLabel.text = tip;
-        NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:tip];
-        [attrTitle yy_setAttribute:NSForegroundColorAttributeName value:HEX_COLOR(@"#ff0000") range:range];
-
-        attrTitle.yy_lineSpacing = 5;
-        attrTitle.yy_font = UIFONT_REGULAR(12);
-        attrTitle.yy_color = HEX_COLOR(@"#ffffff");
-        _tipOpenLabel.attributedText = attrTitle;
+        _tipOpenLabel.attributedText = _tipLabel.attributedText = [self createTip:YES];;
     }
     return _tipOpenLabel;
+}
+
+- (NSMutableAttributedString *)createYYAttr:(NSString *)str hilightStr:(NSArray<NSString *> *)hilightStrList {
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:str];
+    attrTitle.yy_lineSpacing = 5;
+    attrTitle.yy_font = UIFONT_REGULAR(12);
+    attrTitle.yy_color = HEX_COLOR_A(@"#ffffff", 0.9);
+    for (int i = 0; i < hilightStrList.count; ++i) {
+        [attrTitle yy_setAttribute:NSForegroundColorAttributeName value:HEX_COLOR(@"#FFD731") range:[str rangeOfString:hilightStrList[i]]];
+    }
+    return attrTitle;
 }
 
 - (UIView *)tipView {

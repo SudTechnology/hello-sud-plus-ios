@@ -139,6 +139,7 @@
     WeakSelf
     DiscoMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiscoMenuTableViewCell"];
     DiscoMenuModel *model = self.dataList[indexPath.section][indexPath.row];
+    model.rank = indexPath.row;
     cell.model = model;
     cell.danceFinishedBlock = ^{
         [weakSelf loadData];
