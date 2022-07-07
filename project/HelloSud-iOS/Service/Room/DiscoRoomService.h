@@ -95,6 +95,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param isTop false-不置顶；true-置顶
 /// @param field1 playerId（主播玩家的id）；该参数必传，不传则没有任何效果
 - (void)danceWithAnchor:(int)cooldown isTop:(BOOL)isTop field1:(NSString *)field1;
+
+/// 上DJ台
+/// @param cooldown 上DJ台的持续时间，单位秒（-1为永久）默认180秒
+- (void)upToDJ:(int)cooldown;
 @end
 
 NS_ASSUME_NONNULL_END

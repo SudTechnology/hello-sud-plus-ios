@@ -21,3 +21,6 @@
     };
 }
 @end
+
+@implementation RespDiscoBecomeDJModel
+@end

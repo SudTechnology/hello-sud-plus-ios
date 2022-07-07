@@ -380,4 +380,13 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     m.field1 = field1;
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
+
+/// 上DJ台
+/// @param cooldown 上DJ台的持续时间，单位秒（-1为永久）默认180秒
+- (void)upToDJ:(int)cooldown {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeUpDJ;
+    m.cooldown = cooldown;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
 @end

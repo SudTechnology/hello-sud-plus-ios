@@ -251,8 +251,13 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         }
 
             break;
-        case CMD_ROOM_DISCO_BECOME_DJ:
+        case CMD_ROOM_DISCO_BECOME_DJ:{
             // 上DJ台
+            RespDiscoBecomeDJModel *model = [RespDiscoBecomeDJModel fromJSON:command];
+            if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
+                [kDiscoRoomService upToDJ:180];
+            }
+        }
             break;
         default:
             [super handleBusyCommand:cmd command:command];

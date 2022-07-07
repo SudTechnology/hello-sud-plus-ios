@@ -25,4 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL isEnd;
 @end
 
+// CMD_ROOM_DISCO_BECOME_DJ
+@interface RespDiscoBecomeDJModel : RoomBaseCMDModel
+@property (nonatomic, strong)NSString * userID;
+@end
+
 NS_ASSUME_NONNULL_END
