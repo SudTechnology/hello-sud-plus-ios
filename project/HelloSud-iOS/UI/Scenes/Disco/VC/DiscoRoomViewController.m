@@ -29,6 +29,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 @property(nonatomic, strong) DiscoMenuView *menuView;
 /// 同步蹦迪信息用户ID
 @property(nonatomic, strong) NSString *syncDiscoInfoUserID;
+@property(nonatomic, assign) BOOL syncEnd;
 @property(nonatomic, assign) BOOL isTipOpened;
 @property(nonatomic, assign) DTTimer *djRandTimer;
 @end
@@ -126,7 +127,6 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
-    WeakSelf
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSettingTap:)];
     [self.settingView addGestureRecognizer:tap];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRankViewTap:)];
@@ -136,7 +136,6 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
     UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTipLabelTap:)];
     [self.tipView addGestureRecognizer:tap4];
-
 
 }
 
@@ -332,6 +331,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     if (self.syncDiscoInfoUserID && ![self.syncDiscoInfoUserID isEqualToString:resp.sendUser.userID]) {
         return;
     }
+    if (self.syncEnd) {
+        DDLogDebug(@"sync data end");
+        return;
+    }
     if (!self.syncDiscoInfoUserID) {
         self.syncDiscoInfoUserID = resp.sendUser.userID;
     }
@@ -342,6 +345,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     }
     if (resp.contribution.count > 0) {
         [kDiscoRoomService.rankList addObjectsFromArray:resp.contribution];
+    }
+    if (resp.isEnd) {
+        // 同步结束
+        self.syncEnd = YES;
     }
     [kDiscoRoomService handleRankInfo];
     [self updateNaviHeadIcon];
