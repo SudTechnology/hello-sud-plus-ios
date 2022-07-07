@@ -77,7 +77,6 @@
         return;
     }
     GuessPlayerModel *m = (GuessPlayerModel *) self.model;
-    self.backgroundColor = [AppService.shared.login.loginUserInfo isMeByUserID:[NSString stringWithFormat:@"%@", @(m.userId)]] ? HEX_COLOR(@"#FFD16C") : nil;
     if (m.header) {
         [self.headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.header]];
     }
@@ -97,6 +96,15 @@
         [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.headImageView).offset(0);
         }];
+    }
+    if ([AppService.shared.login.loginUserInfo isMeByUserID:[NSString stringWithFormat:@"%@", @(m.userId)]]) {
+        self.backgroundColor = HEX_COLOR(@"#FFD16C");
+        self.supportLabel.hidden = YES;
+        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.headImageView).offset(0);
+        }];
+    } else {
+        self.backgroundColor = nil;
     }
     [self updateStar:m.score];
     [self updateClub:m.award];
