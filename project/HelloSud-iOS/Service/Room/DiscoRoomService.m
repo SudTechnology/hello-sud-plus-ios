@@ -202,6 +202,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 - (void)handleAnchorStopDancing:(NSString *)anchorID {
     if (anchorID) {
         [self.dicDancingMap removeObjectForKey:anchorID];
+        [self checkIfNeedToDancing];
     }
 }
 
