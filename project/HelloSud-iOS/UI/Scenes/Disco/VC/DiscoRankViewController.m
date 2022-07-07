@@ -8,6 +8,7 @@
 
 #import "DiscoRankViewController.h"
 #import "GuessRankContentView.h"
+#import "DiscoRankTipViewController.h"
 
 @interface DiscoRankViewController () <JXCategoryViewDelegate>
 @property(nonatomic, strong) BaseView *bgView;
@@ -17,6 +18,7 @@
 @property(nonatomic, strong) NSArray<NSString *> *subTitles;
 @property(nonatomic, assign) NSInteger titleIndex;
 @property(nonatomic, strong) UIButton *backBtn;
+@property(nonatomic, strong) UIButton *tipBtn;
 @property(nonatomic, strong) NSMutableDictionary *dicSelected;
 @end
 
@@ -39,6 +41,7 @@
     [self.view addSubview:self.subTitleCategoryView];
     [self.view addSubview:self.listContainerView];
     [self.view addSubview:self.backBtn];
+    [self.view addSubview:self.tipBtn];
 }
 
 - (void)dtLayoutViews {
@@ -73,6 +76,13 @@
         make.centerY.equalTo(self.titleLabel);
     }];
 
+    [self.tipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.greaterThanOrEqualTo(@24);
+        make.width.greaterThanOrEqualTo(@0);
+        make.trailing.equalTo(@-20);
+        make.centerY.equalTo(self.backBtn);
+    }];
+
 }
 
 - (void)dtConfigUI {
@@ -82,6 +92,21 @@
     self.titleLabel.text = @"蹦迪排行";
 }
 
+- (void)onClickTipBtn:(id)sender {
+    DiscoRankTipViewController *vc = [[DiscoRankTipViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (UIButton *)tipBtn {
+    if (!_tipBtn) {
+        _tipBtn = [[UIButton alloc] init];
+        _tipBtn.titleLabel.font = UIFONT_REGULAR(12);
+        [_tipBtn setTitleColor:HEX_COLOR_A(@"#ffffff", 0.8) forState:UIControlStateNormal];
+        [_tipBtn setTitle:@"说明" forState:UIControlStateNormal];
+        [_tipBtn addTarget:self action:@selector(onClickTipBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _tipBtn;
+}
 
 - (UIButton *)backBtn {
     if (!_backBtn) {

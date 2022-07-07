@@ -135,6 +135,7 @@
 		6C076ED427A274FE00650209 /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED327A274FE00650209 /* UserService.m */; };
 		6C076ED727A298FC00650209 /* GameService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED627A298FC00650209 /* GameService.m */; };
 		6C076EDA27A2993C00650209 /* RespGameInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED927A2993C00650209 /* RespGameInfoModel.m */; };
+		6C097D152876726400D105A7 /* DiscoRankTipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C097D142876726400D105A7 /* DiscoRankTipViewController.m */; };
 		6C192E4D279523B000553034 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E4C279523B000553034 /* AppDelegate.m */; };
 		6C192E56279523B000553034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E54279523B000553034 /* Main.storyboard */; };
 		6C192E58279523B100553034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E57279523B100553034 /* Assets.xcassets */; };
@@ -607,6 +608,8 @@
 		6C076ED627A298FC00650209 /* GameService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameService.m; sourceTree = "<group>"; };
 		6C076ED827A2993C00650209 /* RespGameInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespGameInfoModel.h; sourceTree = "<group>"; };
 		6C076ED927A2993C00650209 /* RespGameInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespGameInfoModel.m; sourceTree = "<group>"; };
+		6C097D132876726400D105A7 /* DiscoRankTipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankTipViewController.h; sourceTree = "<group>"; };
+		6C097D142876726400D105A7 /* DiscoRankTipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankTipViewController.m; sourceTree = "<group>"; };
 		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1766,6 +1769,8 @@
 				6C460830286AD41A005C99EF /* DiscoRankViewController.m */,
 				6C46082B28658E7F005C99EF /* DiscoRoomViewController.h */,
 				6C46082C28658E7F005C99EF /* DiscoRoomViewController.m */,
+				6C097D132876726400D105A7 /* DiscoRankTipViewController.h */,
+				6C097D142876726400D105A7 /* DiscoRankTipViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2517,6 +2522,7 @@
 				4455AE0727EAC6F7001516EE /* BaseSceneViewController+Voice.m in Sources */,
 				6CE6CD64283F591D0026BDAB /* HSThreadUtils.m in Sources */,
 				6C460875286DB610005C99EF /* DiscoRankModel.m in Sources */,
+				6C097D152876726400D105A7 /* DiscoRankTipViewController.m in Sources */,
 				4455AE0E27EAC6F7001516EE /* HSRoomTextTableViewCell.m in Sources */,
 				44241AE127EAD07B001EE125 /* SwitchLangTableViewCell.m in Sources */,
 				4455AE0A27EAC6F7001516EE /* RoomGameInfoModel.m in Sources */,
