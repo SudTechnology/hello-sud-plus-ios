@@ -13,7 +13,6 @@
 #import <SudMGP/ISudAPPD.h>
 #import <SudMGP/ISudFSMStateHandle.h>
 #import <SudMGP/SudMGP-umbrella.h>
-#import <SudMGPWrapper/SudMGPMGState.h>
 
 @implementation BaseSceneViewController(Game)
 
