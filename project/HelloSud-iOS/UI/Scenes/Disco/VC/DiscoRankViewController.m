@@ -141,10 +141,12 @@
         _subTitleCategoryView.titleSelectedFont = UIFONT_MEDIUM(12);
         _subTitleCategoryView.titles = self.subTitles;
         _subTitleCategoryView.backgroundColor = HEX_COLOR_A(@"#C0A48F", 0.3);
-        _subTitleCategoryView.contentEdgeInsetLeft = 15;
-        _subTitleCategoryView.contentEdgeInsetRight = 15;
+        _subTitleCategoryView.contentEdgeInsetLeft = 0;//15;
+        _subTitleCategoryView.contentEdgeInsetRight = 0;//15;
+        _subTitleCategoryView.cellSpacing = 0;
         _subTitleCategoryView.titleColorGradientEnabled = YES;
         _subTitleCategoryView.titleLabelZoomScrollGradientEnabled = NO;
+        _subTitleCategoryView.cellWidth = 80;
         JXCategoryIndicatorBackgroundView *backgroundIndicator = [[JXCategoryIndicatorBackgroundView alloc] init];
         backgroundIndicator.indicatorColor = HEX_COLOR(@"#FFF2E3");
         backgroundIndicator.indicatorWidth = 80;
