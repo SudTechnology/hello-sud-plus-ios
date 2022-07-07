@@ -133,7 +133,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-
+    [self.tipLabel restartLabel];
 }
 
 - (void)onTipLabelTap:(id)tap {
@@ -494,7 +494,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 - (NSMutableAttributedString *)createTip:(BOOL)isMoreLines {
     NSString *tip1 = @"1. 贡献榜前五随机DJ（26秒刷新）";
     NSString *tip2 = @"2. 送礼可触发不同的效果或点主播跳舞。";
-    NSString *tip3 = @"3. 公屏指令：【移动】【上天】【换角色】，";
+    NSString *tip3 = @"3. 公屏指令：【移动】【上天】【换角色】";
     NSString *tip4 = @"4. 麦上用户发送【上班】可上到主播位，发送【下班】可下主播位。";
     NSString *tip5 = @"5. 主播发文字或语音【聚焦】可触发特写";
     if (isMoreLines) {
@@ -519,9 +519,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         _tipLabel.font = UIFONT_REGULAR(12);
         _tipLabel.numberOfLines = 0;
         _tipLabel.scrollDuration = 30;
-        NSMutableAttributedString *attr = [self createTip:NO];
-        _tipLabel.attributedText = attr;
-//        _tipLabel.backgroundColor = UIColor.redColor;
+        _tipLabel.attributedText = [self createTip:NO];
     }
     return _tipLabel;
 }
@@ -534,7 +532,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         _tipOpenLabel.font = UIFONT_REGULAR(12);
         _tipOpenLabel.hidden = YES;
         _tipOpenLabel.numberOfLines = 0;
-        _tipOpenLabel.attributedText = _tipLabel.attributedText = [self createTip:YES];;
+        _tipOpenLabel.attributedText = [self createTip:YES];;
     }
     return _tipOpenLabel;
 }
