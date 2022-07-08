@@ -74,6 +74,41 @@
             [NSString stringWithFormat:@"%ld", (long) giftWebp.giftID]: giftWebp,
             [NSString stringWithFormat:@"%ld", (long) giftMP4.giftID]: giftMP4,
     }];
+
+
+    /// disco
+    GiftModel *gift1 = GiftModel.new;
+    gift1.giftID = 5;
+    gift1.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
+    gift1.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
+    gift1.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
+    gift1.animateType = @"svga";
+    gift1.giftName = [NSString stringWithFormat:NSString.dt_room_disco_dancing_minute_fmt, @"一"];
+    gift1.price = 50;
+
+    GiftModel *gift2 = GiftModel.new;
+    gift2.giftID = 6;
+    gift2.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
+    gift2.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
+    gift2.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
+    gift2.animateType = @"svga";
+    gift2.giftName = [NSString stringWithFormat:NSString.dt_room_disco_dancing_minute_fmt, @"三"];
+    gift2.price = 150;
+
+    GiftModel *gift3 = GiftModel.new;
+    gift3.giftID = 7;
+    gift3.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
+    gift3.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
+    gift3.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
+    gift3.animateType = @"svga";
+    gift3.giftName = @"跳舞插队";
+    gift3.price = 1500;
+
+    self.dicGift[[NSString stringWithFormat:@"%@", @(gift1.giftID)]] = gift1;
+    self.dicGift[[NSString stringWithFormat:@"%@", @(gift2.giftID)]] = gift2;
+    self.dicGift[[NSString stringWithFormat:@"%@", @(gift3.giftID)]] = gift3;
+    self.discoGiftList = @[gift1, gift2, gift3];
+
 }
 
 - (NSMutableDictionary<NSString *, GiftModel *> *)dicGift {
@@ -88,44 +123,6 @@
 - (nullable GiftModel *)giftByID:(NSInteger)giftID {
     NSString *strGiftID = [NSString stringWithFormat:@"%ld", giftID];
     return self.dicGift[strGiftID];
-}
-
-- (NSArray<GiftModel *> *)discoGiftList {
-    if (!_discoGiftList) {
-
-        GiftModel *gift1 = GiftModel.new;
-        gift1.giftID = 5;
-        gift1.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
-        gift1.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
-        gift1.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
-        gift1.animateType = @"svga";
-        gift1.giftName = [NSString stringWithFormat:NSString.dt_room_disco_dancing_minute_fmt, @"一"];
-        gift1.price = 50;
-
-        GiftModel *gift2 = GiftModel.new;
-        gift2.giftID = 6;
-        gift2.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
-        gift2.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
-        gift2.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
-        gift2.animateType = @"svga";
-        gift2.giftName = [NSString stringWithFormat:NSString.dt_room_disco_dancing_minute_fmt, @"三"];
-        gift2.price = 150;
-
-        GiftModel *gift3 = GiftModel.new;
-        gift3.giftID = 7;
-        gift3.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
-        gift3.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
-        gift3.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
-        gift3.animateType = @"svga";
-        gift3.giftName = @"跳舞插队";
-        gift3.price = 1500;
-
-        self.dicGift[[NSString stringWithFormat:@"%@", @(gift1.giftID)]] = gift1;
-        self.dicGift[[NSString stringWithFormat:@"%@", @(gift2.giftID)]] = gift2;
-        self.dicGift[[NSString stringWithFormat:@"%@", @(gift3.giftID)]] = gift3;
-        _discoGiftList = @[gift1, gift2, gift3];
-    }
-    return _discoGiftList;
 }
 
 /// 拉取礼物列表
