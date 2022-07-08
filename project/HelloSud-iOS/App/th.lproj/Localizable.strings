@@ -296,7 +296,7 @@
 "dt_room_mic_game_ing" = "กำลังเล่นเกม";
 
 /// 1.4.0
-"dt_room_disco_dancing_fmt" = "%@\n邀请%@跳舞%@分钟";
+"dt_room_disco_dancing_fmt" = "%@\n邀请 %@ 跳舞%@分钟";
 "dt_room_disco_tip_one_fmt" = "1. 贡献榜%@随机DJ（%@秒刷新）";
 "dt_room_disco_tip_two_fmt" = "2. 送礼可触发不同的效果或点主播跳舞。";
 "dt_room_disco_tip_three_fmt" = "3. 公屏指令：【%@】【%@】【%@】";
