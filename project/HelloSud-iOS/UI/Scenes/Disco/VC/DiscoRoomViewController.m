@@ -349,25 +349,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         resp.contribution = @[rankArr[i]];
         [self sendMsg:resp isAddToShow:NO finished:nil];
     }
-    NSArray *arr = kDiscoRoomService.danceMenuList;
-    NSMutableArray *waitSendList = [[NSMutableArray alloc] initWithArray:arr];
+    NSMutableArray *waitSendList = [[NSMutableArray alloc] init];
+    [waitSendList addObjectsFromArray:kDiscoRoomService.danceMenuList];
+    [waitSendList addObjectsFromArray:kDiscoRoomService.finishedDanceMenuList];
     [self queueSendMenu:waitSendList];
-//    for (int i = 0; i < arr.count; ++i) {
-//        RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
-//        [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
-//        resp.dancingMenu = @[arr[i]];
-//        [HSThreadUtils dispatchMainAfter:0.01 * i callback:^{
-//            [self sendMsg:resp isAddToShow:NO finished:nil];
-//        }];
-//    }
-//
-//    // 告知结束
-//    RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
-//    [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
-//    resp.isEnd = YES;
-//    [HSThreadUtils dispatchMainAfter:0.1 callback:^{
-//        [self sendMsg:resp isAddToShow:NO finished:nil];
-//    }];
 }
 
 /// 顺序发送舞池列表
