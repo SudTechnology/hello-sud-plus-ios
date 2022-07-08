@@ -149,7 +149,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-    self.djCountdown = 60;
+    self.djCountdown = 60 - (int64_t) [NSDate date].timeIntervalSince1970 % 60;
     [self updateTipLabel];
     [self.tipLabel restartLabel];
     WeakSelf
@@ -312,13 +312,11 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 /// 检测自己是否是麦位第一位用户
 - (BOOL)checkIsFirstMicUser {
-    NSArray<AudioRoomMicModel *> *micArr = self.dicMicModel.allValues;
-    NSArray *sortedArr = [micArr sortedArrayUsingComparator:^NSComparisonResult(AudioRoomMicModel *obj1, AudioRoomMicModel *obj2) {
-        return obj1.micIndex < obj2.micIndex;
-    }];
+    NSArray<AudioMicroView *> *micViewList = self.gameMicContentView.micArr;
     BOOL isExistUser = NO;
-    for (AudioRoomMicModel *m in sortedArr) {
-        if (!m.user) {
+    for (AudioMicroView *view in micViewList) {
+        AudioRoomMicModel *m = view.model;
+        if (!m || !m.user) {
             continue;
         }
         if ([m.user.userID isEqualToString:AppService.shared.login.loginUserInfo.userID] && !isExistUser) {
@@ -381,7 +379,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         }
     }
     if (resp.contribution.count > 0) {
-        [kDiscoRoomService.rankList addObjectsFromArray:resp.contribution];
+        for (int i = 0; i < resp.contribution.count; ++i) {
+            [kDiscoRoomService addRankInfo:resp.contribution[i]];
+        }
     }
     if (resp.isEnd) {
         // 同步结束
