@@ -164,6 +164,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// 增加跳舞信息
 /// @param model
 - (void)addDanceMenuInfo:(DiscoMenuModel *)model {
+    DDLogDebug(@"addDanceMenuInfo: fromUser:%@, toUserID:%@", model.fromUser.userID, model.toUser.userID);
     [self.danceMenuList addObject:model];
     [self checkIfNeedToDancing:model duration:model.duration];
 }
@@ -171,6 +172,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// 增数据
 /// @param model
 - (void)addRankInfo:(DiscoContributionModel *)model {
+    DDLogDebug(@"addRankInfo: fromUser:%@", model.fromUser.userID);
     self.rankMap[model.fromUser.userID] = model;
     [self reSortRankList];
 }

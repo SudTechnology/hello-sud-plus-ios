@@ -173,12 +173,12 @@
             weakSelf.micIndex = micIndex;
             upMicModel.roleType = self.roleType;
             upMicModel.streamID = model.streamId;
-            [weakSelf.currentRoomVC sendMsg:upMicModel isAddToShow:NO];
+            [weakSelf.currentRoomVC sendMsg:upMicModel isAddToShow:NO finished:nil];
         } else {
             weakSelf.micIndex = -1;
             RoomCmdUpMicModel *downMicModel = [RoomCmdUpMicModel makeDownMicMsgWithMicIndex:micIndex];
             downMicModel.streamID = nil;
-            [weakSelf.currentRoomVC sendMsg:downMicModel isAddToShow:NO];
+            [weakSelf.currentRoomVC sendMsg:downMicModel isAddToShow:NO finished:nil];
         }
         if (success) {
             success();

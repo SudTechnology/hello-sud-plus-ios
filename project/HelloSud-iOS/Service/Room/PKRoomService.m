@@ -167,7 +167,7 @@
 - (void)sendPKOpenedMsg {
     RoomBaseCMDModel *msg = [[RoomBaseCMDModel alloc] init];
     [msg configBaseInfoWithCmd:CMD_ROOM_PK_OPEN_MATCH];
-    [self.currentRoomVC sendMsg:msg isAddToShow:NO];
+    [self.currentRoomVC sendMsg:msg isAddToShow:NO finished:nil];
 }
 
 /// 给房间内用户发送应答邀请
@@ -183,7 +183,7 @@
     }
     [msg configBaseInfoWithCmd:CMD_ROOM_PK_ANSWER];
     msg.otherUser = otherUser;
-    [self.currentRoomVC sendMsg:msg isAddToShow:NO];
+    [self.currentRoomVC sendMsg:msg isAddToShow:NO finished:nil];
 }
 
 /// 给房间内用户发送PK结束
@@ -192,7 +192,7 @@
 - (void)sendPKClosedMsg {
     RoomBaseCMDModel *msg = [[RoomBaseCMDModel alloc] init];
     [msg configBaseInfoWithCmd:CMD_ROOM_PK_FINISH];
-    [self.currentRoomVC sendMsg:msg isAddToShow:NO];
+    [self.currentRoomVC sendMsg:msg isAddToShow:NO finished:nil];
 }
 
 /// 给房间内用户发送PK移除对手
@@ -200,7 +200,7 @@
 - (void)sendCrossPKRemoveOtherMsg {
     RoomBaseCMDModel *msg = [[RoomBaseCMDModel alloc] init];
     [msg configBaseInfoWithCmd:CMD_ROOM_PK_REMOVE_RIVAL];
-    [self.currentRoomVC sendMsg:msg isAddToShow:NO];
+    [self.currentRoomVC sendMsg:msg isAddToShow:NO finished:nil];
 }
 
 /// 发送开始PK到本房间
@@ -213,7 +213,7 @@
     if (pkId > 0) {
         msg.pkId = [NSString stringWithFormat:@"%lld", pkId];
     }
-    [self.currentRoomVC sendMsg:msg isAddToShow:NO];
+    [self.currentRoomVC sendMsg:msg isAddToShow:NO finished:nil];
 }
 
 /// 发送PK时长消息
@@ -223,6 +223,6 @@
     RoomCmdPKStartedModel *msg = [[RoomCmdPKStartedModel alloc] init];
     [msg configBaseInfoWithCmd:CMD_ROOM_PK_SETTINGS];
     msg.minuteDuration = minuteDuration;
-    [self.currentRoomVC sendMsg:msg isAddToShow:NO];
+    [self.currentRoomVC sendMsg:msg isAddToShow:NO finished:nil];
 }
 @end

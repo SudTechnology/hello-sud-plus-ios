@@ -251,6 +251,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// @param model model description
 - (void)handleGiftEffect:(RoomCmdSendGiftModel *)model {
     [super handleGiftEffect:model];
+    // 收礼者与送礼者相同时忽略
+    if ([model.sendUser.userID isEqualToString:model.toUser.userID]) {
+        return;
+    }
     [kDiscoRoomService updateDanceMenuInfo:model];
 }
 
@@ -343,23 +347,51 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
         [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
         resp.contribution = @[rankArr[i]];
-        [self sendMsg:resp isAddToShow:NO];
+        [self sendMsg:resp isAddToShow:NO finished:nil];
     }
     NSArray *arr = kDiscoRoomService.danceMenuList;
-    for (int i = 0; i < arr.count; ++i) {
+    NSMutableArray *waitSendList = [[NSMutableArray alloc] initWithArray:arr];
+    [self queueSendMenu:waitSendList];
+//    for (int i = 0; i < arr.count; ++i) {
+//        RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
+//        [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
+//        resp.dancingMenu = @[arr[i]];
+//        [HSThreadUtils dispatchMainAfter:0.01 * i callback:^{
+//            [self sendMsg:resp isAddToShow:NO finished:nil];
+//        }];
+//    }
+//
+//    // 告知结束
+//    RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
+//    [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
+//    resp.isEnd = YES;
+//    [HSThreadUtils dispatchMainAfter:0.1 callback:^{
+//        [self sendMsg:resp isAddToShow:NO finished:nil];
+//    }];
+}
+
+/// 顺序发送舞池列表
+/// @param arr
+- (void)queueSendMenu:(NSMutableArray *)arr {
+    WeakSelf
+    if (arr.count > 0) {
         RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
         [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
-        resp.dancingMenu = @[arr[i]];
-        [self sendMsg:resp isAddToShow:NO];
+        DiscoMenuModel *item = [arr firstObject];
+        [arr removeObjectAtIndex:0];
+        resp.dancingMenu = @[item];
+        [self sendMsg:resp isAddToShow:NO finished:^(int errCode){
+            [weakSelf queueSendMenu:arr];
+        }];
+    } else {
+        // 告知结束
+        RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
+        [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
+        resp.isEnd = YES;
+        [HSThreadUtils dispatchMainAfter:0.1 callback:^{
+            [self sendMsg:resp isAddToShow:NO finished:nil];
+        }];
     }
-
-    // 告知结束
-    RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
-    [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
-    resp.isEnd = YES;
-    [HSThreadUtils dispatchMainAfter:0.1 callback:^{
-        [self sendMsg:resp isAddToShow:NO];
-    }];
 }
 
 /// 处理蹦迪信息响应
@@ -367,6 +399,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
     // 如果同步者非首次同步，忽略他的信息，只接受首次同步者信息
     if (self.syncDiscoInfoUserID && ![self.syncDiscoInfoUserID isEqualToString:resp.sendUser.userID]) {
+        DDLogDebug(@"sync data end syncDiscoInfoUserID:%@, resp.sendUser.userID:%@", self.syncDiscoInfoUserID, resp.sendUser.userID);
         return;
     }
     if (self.syncEnd) {
@@ -405,9 +438,13 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// 处理排行榜数据
 - (void)handleRankInfo:(RoomBaseCMDModel *)msg {
 
-    if (msg.cmd == CMD_CHAT_TEXT_NOTIFY || msg.cmd == CMD_SEND_GIFT_NOTIFY) {
-        // 公屏消息+1,礼物+1
+    if (msg.cmd == CMD_CHAT_TEXT_NOTIFY) {
+        // 公屏消息+1
         [kDiscoRoomService addRankCount:msg.sendUser count:1];
+        [self updateNaviHeadIcon];
+    } else if (msg.cmd == CMD_SEND_GIFT_NOTIFY) {
+        RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *)msg;
+        [kDiscoRoomService addRankCount:msg.sendUser count:m.getGiftModel.price];
         [self updateNaviHeadIcon];
     }
 }
@@ -454,7 +491,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 - (void)sendCmdToGetDiscoInfo {
     RoomBaseCMDModel *m = [RoomBaseCMDModel alloc];
     [m configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_REQ];
-    [self sendMsg:m isAddToShow:NO];
+    [self sendMsg:m isAddToShow:NO finished:nil];
 }
 
 - (void)handleGiftMsg:(RoomCmdSendGiftModel *)m {
@@ -572,7 +609,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     RespDiscoBecomeDJModel *djModel = [[RespDiscoBecomeDJModel alloc] init];
     [djModel configBaseInfoWithCmd:CMD_ROOM_DISCO_BECOME_DJ];
     djModel.userID = userID;
-    [self sendMsg:djModel isAddToShow:NO];
+    [self sendMsg:djModel isAddToShow:NO finished:nil];
     DDLogDebug(@"send the up dj cmd to all, up dj id is:%@", userID);
 }
 

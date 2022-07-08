@@ -408,7 +408,7 @@
 /// @param content content
 - (void)sendContentMsg:(NSString *)content {
     RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:content];
-    [self sendMsg:m isAddToShow:YES];
+    [self sendMsg:m isAddToShow:YES finished:nil];
 }
 
 /// 展示更多视图
@@ -462,7 +462,7 @@
     // 发送游戏切换给其它用户
     RoomCmdChangeGameModel *msg = [RoomCmdChangeGameModel makeMsg:gameId];
     if (msg) {
-        [self sendMsg:msg isAddToShow:false];
+        [self sendMsg:msg isAddToShow:false finished:nil];
     }
 }
 

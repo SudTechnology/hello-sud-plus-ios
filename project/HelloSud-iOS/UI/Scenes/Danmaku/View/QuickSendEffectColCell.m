@@ -217,7 +217,7 @@
         giftMsg.giftUrl = m.giftUrl;
         giftMsg.animationUrl = m.animationUrl;
         giftMsg.giftName = m.name;
-        [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
+        [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
     }
 
 }

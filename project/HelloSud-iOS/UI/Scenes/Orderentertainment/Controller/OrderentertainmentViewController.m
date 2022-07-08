@@ -217,7 +217,7 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
             msg.toUserNames = userNameList;
             [msg configBaseInfoWithCmd:CMD_ROOM_ORDER_USER];
             /// 公屏添加消息
-            [weakSelf sendMsg:msg isAddToShow:NO];
+            [weakSelf sendMsg:msg isAddToShow:NO finished:nil];
             [weakSelf showOrderMsg:msg];
             /// 下单
             [ToastUtil show:NSString.dt_room_order_placed];
@@ -328,7 +328,7 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
     msg.operate = operate;
     [msg configBaseInfoWithCmd:CMD_ROOM_ORDER_OPERATE];
     /// 公屏添加消息
-    [self sendMsg:msg isAddToShow:NO];
+    [self sendMsg:msg isAddToShow:NO finished:nil];
 }
 
 #pragma mark - Lazy

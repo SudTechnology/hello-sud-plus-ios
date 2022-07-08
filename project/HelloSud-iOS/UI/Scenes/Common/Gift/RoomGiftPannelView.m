@@ -247,7 +247,7 @@
         giftMsg.animationUrl = giftModel.animateURL;
         giftMsg.giftName = giftModel.giftName;
 
-        [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES];
+        [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
     }
 }
 

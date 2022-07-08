@@ -57,7 +57,7 @@
     RoomCmdGuessBetNotifyModel *msg = [[RoomCmdGuessBetNotifyModel alloc]init];
     [msg configBaseInfoWithCmd:CMD_ROOM_QUIZ_BET];
     msg.recUser = betUsers;
-    [self.currentRoomVC sendMsg:msg isAddToShow:NO];
+    [self.currentRoomVC sendMsg:msg isAddToShow:NO finished:nil];
     [(GuessRoomViewController *)self.currentRoomVC showBetScreenMsg:msg];
 }
 @end

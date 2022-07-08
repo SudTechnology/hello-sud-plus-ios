@@ -13,7 +13,7 @@
 /// 发送消息
 /// @param msg 消息体
 /// @param isAddToShow 是否公屏展示
-- (void)sendMsg:(RoomBaseCMDModel *)msg isAddToShow:(BOOL)isAddToShow {
+- (void)sendMsg:(RoomBaseCMDModel *)msg isAddToShow:(BOOL)isAddToShow finished:(void (^)(int errorCode))finished {
     msg.sendUser.roomID = self.roomID;
     NSString *command = [[NSString alloc] initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
     DDLogDebug(@"send content:%@", command);
@@ -25,6 +25,7 @@
         [AudioEngineFactory.shared.audioEngine sendCommand:command listener:^(int errorCode) {
             DDLogDebug(@"send result:%d", errorCode);
             [weakSelf onDidSendMsg:msg];
+            if (finished) finished(errorCode);
         }];
         [self addMsg:msg isShowOnScreen:isAddToShow];
         /// Game - 发送文本命中
@@ -74,7 +75,7 @@
     AudioMsgSystemModel *msg = [AudioMsgSystemModel makeMsg:[NSString stringWithFormat:@"%@ %@", AppService.shared.login.loginUserInfo.name, NSString.dt_enter_room_tip]];
     [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NOTIFY];
     /// 公屏添加消息
-    [self sendMsg:msg isAddToShow:YES];
+    [self sendMsg:msg isAddToShow:YES finished:nil];
     /// 连接成功后拉取麦位列表
     [self reqMicList];
 }
