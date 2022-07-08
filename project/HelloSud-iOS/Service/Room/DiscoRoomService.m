@@ -262,6 +262,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// 清空舞池单
 - (void)clearAllDancingMenu {
     [self.danceMenuList removeAllObjects];
+    [self.finishedDanceMenuList removeAllObjects];
     [self.dicDancingMap removeAllObjects];
 }
 
