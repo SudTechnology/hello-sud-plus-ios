@@ -60,11 +60,11 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 
 @implementation DiscoRoomService
 
-- (DiscoMenuModel *)findSameSendUser:(NSString *)userID {
+- (DiscoMenuModel *)findSameSendUser:(RoomCmdSendGiftModel *)giftModel {
     NSArray *arr = self.danceMenuList;
     for (int i = 0; i < arr.count; ++i) {
         DiscoMenuModel *m = arr[i];
-        if ([m.fromUser.userID isEqualToString:userID] && !m.isDanceFinished) {
+        if ([m.fromUser.userID isEqualToString:giftModel.sendUser.userID] && [m.toUser.userID isEqualToString:giftModel.toUser.userID] && !m.isDanceFinished) {
             return m;
         }
     }
@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// @param giftModel
 - (void)updateDanceMenuInfo:(RoomCmdSendGiftModel *)giftModel {
 
-    DiscoMenuModel *m = [self findSameSendUser:giftModel.sendUser.userID];
+    DiscoMenuModel *m = [self findSameSendUser:giftModel];
     NSInteger addDuration = 0;
     switch (giftModel.giftID) {
         case 5: {
@@ -138,13 +138,15 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
             DDLogError(@"will dancing with anchor, but anchor id isempty");
             return;
         }
-        if ([self isAnchorDancing:anchorID]) {
+        if ([self isUserDancing:anchorID] || [self isUserDancing:m.fromUser.userID]) {
             // 当前主播在跳舞
             return;
         }
         // 开始跳舞
         [m beginDancing];
+        // 用户加入舞池
         self.dicDancingMap[anchorID] = m;
+        self.dicDancingMap[m.fromUser.userID] = m;
         if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
             // 发送者是自己，执行与主播跳舞指令
             [self danceWithAnchor:m.duration isTop:NO field1:m.toUser.userID];
@@ -153,6 +155,9 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         // 已经在跳，如果是与自己在跳，则通知游戏继续跳
         if (!m.isDanceFinished){
             [m beginDancing];
+            // 用户加入舞池
+            self.dicDancingMap[m.toUser.userID] = m;
+            self.dicDancingMap[m.fromUser.userID] = m;
             if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
                 // 发送者是自己，执行与主播跳舞指令
                 [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
@@ -206,7 +211,11 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// @param anchorID
 - (void)handleAnchorStopDancing:(NSString *)anchorID {
     if (anchorID) {
+        DiscoMenuModel *m = self.dicDancingMap[anchorID];
+        // 移除主播
         [self.dicDancingMap removeObjectForKey:anchorID];
+        // 移除主播舞伴
+        [self.dicDancingMap removeObjectForKey:m.fromUser.userID];
         [self checkIfNeedToDancing];
     }
 }
@@ -218,7 +227,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 }
 
 /// 主播是否正在跳舞
-- (BOOL)isAnchorDancing:(NSString *)anchorID {
+- (BOOL)isUserDancing:(NSString *)anchorID {
     return self.dicDancingMap[anchorID];
 }
 

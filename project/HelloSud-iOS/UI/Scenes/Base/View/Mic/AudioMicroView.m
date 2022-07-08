@@ -292,6 +292,9 @@
 }
 
 - (void)updateGameUI {
+    if (self.skipGameState) {
+        return;
+    }
     if (self.micType == HSGameMic) {
         if (self.model.user == nil) {
             self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
