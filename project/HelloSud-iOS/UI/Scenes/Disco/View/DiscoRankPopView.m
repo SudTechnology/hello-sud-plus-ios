@@ -103,8 +103,6 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 60;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.bounces = NO;
         _tableView.backgroundColor = UIColor.whiteColor;
         [_tableView registerClass:[DiscoRankTableViewCell class] forCellReuseIdentifier:@"DiscoRankTableViewCell"];
     }

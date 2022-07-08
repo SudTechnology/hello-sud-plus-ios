@@ -40,8 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param anchorID
 - (void)handleAnchorStopDancing:(NSString *)anchorID;
 
-/// 处理排版数据
-- (void)handleRankInfo;
+/// 处理结束同步数据
+- (void)handleFinishedSyncDataInfo;
 
 /// 清空舞池单
 - (void)clearAllDancingMenu;

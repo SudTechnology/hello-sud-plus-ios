@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isDanceFinished;
 /// 开始跳舞
 - (void)beginDancing;
+- (NSInteger)remainDuration;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -151,9 +151,12 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         }
     } else {
         // 已经在跳，如果是与自己在跳，则通知游戏继续跳
-        if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
-            // 发送者是自己，执行与主播跳舞指令
-            [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
+        if (!m.isDanceFinished){
+            [m beginDancing];
+            if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
+                // 发送者是自己，执行与主播跳舞指令
+                [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
+            }
         }
     }
 }
@@ -207,9 +210,9 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 }
 
 
-/// 处理排版数据
-- (void)handleRankInfo {
-
+/// 处理同步后数据
+- (void)handleFinishedSyncDataInfo {
+    [self checkIfNeedToDancing];
 }
 
 /// 主播是否正在跳舞
@@ -231,13 +234,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     NSArray *arr = self.danceMenuList;
     for (int i = 0; i < arr.count; ++i) {
         DiscoMenuModel *model = arr[i];
-        if (model.beginTime == 0) {
-            [model beginDancing];
-            if ([AppService.shared.login.loginUserInfo isMeByUserID:model.fromUser.userID]) {
-                // 发送者是自己，执行与主播跳舞指令
-                [self danceWithAnchor:model.duration isTop:NO field1:model.toUser.userID];
-            }
-        }
+        [self checkIfNeedToDancing:model duration:model.remainDuration];
     }
 }
 

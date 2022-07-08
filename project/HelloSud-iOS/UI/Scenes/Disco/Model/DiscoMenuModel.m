@@ -26,13 +26,23 @@
     return [NSDate date].timeIntervalSince1970 - self.beginTime > self.duration;
 }
 
+- (NSInteger)remainDuration {
+    NSInteger remainSecond = self.duration - (NSInteger) ([NSDate date].timeIntervalSince1970 - self.beginTime);
+    if (remainSecond > 0) {
+        return remainSecond;
+    }
+    return 0;
+}
+
 /// 开始跳舞
 - (void)beginDancing {
     if (self.danceTimer) {
         return;
     }
     WeakSelf
-    self.beginTime = [NSDate date].timeIntervalSince1970;
+    if (self.beginTime == 0) {
+        self.beginTime = [NSDate date].timeIntervalSince1970;
+    }
     self.danceTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
         [weakSelf handleTimerCallback];
     }];

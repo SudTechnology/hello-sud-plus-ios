@@ -389,8 +389,8 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     if (resp.isEnd) {
         // 同步结束
         self.syncEnd = YES;
+        [kDiscoRoomService handleFinishedSyncDataInfo];
     }
-    [kDiscoRoomService handleRankInfo];
     [self updateNaviHeadIcon];
 }
 
