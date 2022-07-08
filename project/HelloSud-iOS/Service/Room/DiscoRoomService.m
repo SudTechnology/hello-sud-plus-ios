@@ -176,7 +176,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     NSArray *arr = [self.rankMap allValues];
     NSArray *sortedArr = [arr sortedArrayUsingComparator:^NSComparisonResult(DiscoContributionModel * obj1, DiscoContributionModel * obj2) {
         if (obj1.count == obj2.count) {
-            return obj1.fromUser.userID < obj2.fromUser.userID;
+            return [obj1.fromUser.userID compare:obj2.fromUser.userID];
         }
         return obj1.count < obj2.count;
     }];
