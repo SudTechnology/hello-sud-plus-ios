@@ -241,6 +241,9 @@
     }];
     /// 游戏玩家状态变化
     [[NSNotificationCenter defaultCenter] addObserverForName:NTF_PLAYER_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
+        if (weakSelf.skipGameState) {
+            return;
+        }
         [weakSelf updateGameUI];
         [weakSelf updateOrderUI];
     }];

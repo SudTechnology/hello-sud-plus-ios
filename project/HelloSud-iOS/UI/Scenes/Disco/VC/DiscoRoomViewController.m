@@ -42,6 +42,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     // Do any additional setup after loading the view.
     [self.naviView hiddenNodeWithRoleType:0];
     [self updateSettingState:self.gameId > 0];
+    // 跳过游戏状态监听
+    for (AudioMicroView *v in self.gameMicContentView.micArr) {
+        v.skipGameState = YES;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -333,15 +337,6 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         return;
     }
     // 响应数据给请求者
-    NSArray *arr = kDiscoRoomService.danceMenuList;
-    for (int i = 0; i < arr.count; ++i) {
-        RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
-        [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
-        resp.dancingMenu = @[arr[i]];
-        [HSThreadUtils dispatchMainAfter:0.01 callback:^{
-            [self sendMsg:resp isAddToShow:NO];
-        }];
-    }
     // 贡献榜数据
     NSArray *rankArr = kDiscoRoomService.rankList;
     for (int i = 0; i < rankArr.count; ++i) {
@@ -350,11 +345,19 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         resp.contribution = @[rankArr[i]];
         [self sendMsg:resp isAddToShow:NO];
     }
+    NSArray *arr = kDiscoRoomService.danceMenuList;
+    for (int i = 0; i < arr.count; ++i) {
+        RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
+        [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
+        resp.dancingMenu = @[arr[i]];
+        [self sendMsg:resp isAddToShow:NO];
+    }
+
     // 告知结束
     RespDiscoInfoModel *resp = [[RespDiscoInfoModel alloc] init];
     [resp configBaseInfoWithCmd:CMD_ROOM_DISCO_INFO_RESP];
     resp.isEnd = YES;
-    [HSThreadUtils dispatchMainAfter:0.01 callback:^{
+    [HSThreadUtils dispatchMainAfter:0.1 callback:^{
         [self sendMsg:resp isAddToShow:NO];
     }];
 }

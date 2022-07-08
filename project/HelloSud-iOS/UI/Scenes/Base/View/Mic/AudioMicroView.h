@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger, MicType) {
 @property (nonatomic, strong) AudioRoomMicModel *model;
 /// 点击麦位回调
 @property (nonatomic, copy)TapMicViewBlock onTapCallback;
+/// 跳过游戏状态
+@property (nonatomic, assign)BOOL skipGameState;
 /// 切换缩放比例
 /// @param isSmall isSmall
 - (void)changeScale:(BOOL)isSmall;
