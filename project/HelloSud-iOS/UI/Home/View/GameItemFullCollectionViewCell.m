@@ -186,7 +186,7 @@
     if (!_createBtn) {
         _createBtn = [[GameItemBorderButton alloc] init];
         _createBtn.hidden = YES;
-        _createBtn.text = @"创建房间";
+        _createBtn.text = NSString.dt_home_create_room;
     }
     return _createBtn;
 }
@@ -195,7 +195,7 @@
     if (!_joinBtn) {
         _joinBtn = [[GameItemBorderButton alloc] init];
         _joinBtn.hidden = YES;
-        _joinBtn.text = @"立即加入";
+        _joinBtn.text = NSString.dt_room_guess_join_now;
     }
     return _joinBtn;
 }

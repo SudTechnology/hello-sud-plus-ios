@@ -323,7 +323,7 @@
 - (UIButton *)moreBtn {
     if (!_moreBtn) {
         _moreBtn = [[UIButton alloc] init];
-        [_moreBtn setTitle:@"更多活动" forState:UIControlStateNormal];
+        [_moreBtn setTitle:NSString.dt_room_guess_more_activity forState:UIControlStateNormal];
         [_moreBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         _moreBtn.titleLabel.font = UIFONT_BOLD(14);
         [_moreBtn addTarget:self action:@selector(onClickMoreBtn:) forControlEvents:UIControlEventTouchUpInside];

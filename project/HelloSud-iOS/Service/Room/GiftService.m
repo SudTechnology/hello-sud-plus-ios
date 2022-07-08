@@ -44,7 +44,7 @@
     giftLottie.animateType = @"lottie";
     giftLottie.giftName = @"lottie";
     giftLottie.price = 100;
-    giftLottie.tagList = @[@"特写"];
+    giftLottie.tagList = @[NSString.dt_room_disco_tag_special];
 
     GiftModel *giftWebp = GiftModel.new;
     giftWebp.giftID = 3;
@@ -54,7 +54,7 @@
     giftWebp.animateType = @"webp";
     giftWebp.giftName = @"webp";
     giftWebp.price = 1000;
-    giftWebp.tagList = @[@"特写"];
+    giftWebp.tagList = @[NSString.dt_room_disco_tag_special];
     [giftWebp loadWebp:nil];
 
     GiftModel *giftMP4 = GiftModel.new;
@@ -67,7 +67,7 @@
     giftMP4.animateType = @"mp4";
     giftMP4.giftName = @"mp4";
     giftMP4.price = 10000;
-    giftMP4.tagList = @[@"特写", @"特效"];
+    giftMP4.tagList = @[NSString.dt_room_disco_tag_special, NSString.dt_room_disco_tag_effect];
     _giftList = @[giftSvga, giftLottie, giftWebp, giftMP4];
     [self.dicGift setDictionary:@{[NSString stringWithFormat:@"%ld", (long) giftSvga.giftID]: giftSvga,
             [NSString stringWithFormat:@"%ld", (long) giftLottie.giftID]: giftLottie,

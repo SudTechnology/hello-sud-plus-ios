@@ -599,13 +599,13 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 - (NSMutableAttributedString *)createTip:(BOOL)isMoreLines {
     
-    NSString *key1 = @"前五";
-    NSString *key2 = @"移动";
-    NSString *key3 = @"上天";
-    NSString *key4 = @"换角色";
-    NSString *key5 = @"上班";
-    NSString *key6 = @"下班";
-    NSString *key7 = @"聚焦";
+    NSString *key1 = NSString.dt_room_disco_keyword_top_five;
+    NSString *key2 = NSString.dt_room_disco_keyword_move;
+    NSString *key3 = NSString.dt_room_disco_keyword_up_sky;
+    NSString *key4 = NSString.dt_room_disco_keyword_witch_role;
+    NSString *key5 = NSString.dt_room_disco_keyword_work;
+    NSString *key6 = NSString.dt_room_disco_keyword_unwork;
+    NSString *key7 = NSString.dt_room_disco_keyword_focus;
     
     NSString *tip1 = [NSString stringWithFormat:NSString.dt_room_disco_tip_one_fmt, key1, @(self.djCountdown)];
     NSString *tip2 = NSString.dt_room_disco_tip_two_fmt;

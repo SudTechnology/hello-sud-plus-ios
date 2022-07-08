@@ -321,6 +321,21 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_room_disco_dancing_minute_fmt;
 + (NSString *)dt_room_guess_had_support_fmt;
 
++ (NSString *)dt_room_disco_waitting;
++ (NSString *)dt_room_disco_keyword_top_five;
++ (NSString *)dt_room_disco_keyword_move;
++ (NSString *)dt_room_disco_keyword_up_sky;
++ (NSString *)dt_room_disco_keyword_witch_role;
++ (NSString *)dt_room_disco_keyword_work;
++ (NSString *)dt_room_disco_keyword_unwork;
++ (NSString *)dt_room_disco_keyword_focus;
++ (NSString *)dt_room_disco_tag_special;
++ (NSString *)dt_room_disco_tag_effect;
++ (NSString *)dt_room_guess_more_activity;
++ (NSString *)dt_room_guess_aword;
++ (NSString *)dt_room_guess_join_now;
++ (NSString *)dt_room_guess_remain;
+
 
 @end
 NS_ASSUME_NONNULL_END

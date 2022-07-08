@@ -185,7 +185,7 @@
 }
 
 - (void)updateAward:(NSInteger)award {
-    NSMutableAttributedString *full = [[NSMutableAttributedString alloc] initWithString:@"奖励 "];
+    NSMutableAttributedString *full = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", NSString.dt_room_guess_aword]];
     full.yy_font = UIFONT_MEDIUM(14);
     full.yy_color = HEX_COLOR(@"#ffffff");
 

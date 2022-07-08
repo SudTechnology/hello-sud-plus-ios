@@ -316,3 +316,18 @@
 "dt_room_guess_close_fmt" = "关闭(%@s)";
 "dt_room_disco_dancing_minute_fmt" = "跳舞%@分钟";
 "dt_room_guess_had_support_fmt" = "已有%@人支持";
+
+"dt_room_disco_waitting" = "等待中";
+"dt_room_disco_keyword_top_five" = "前五";
+"dt_room_disco_keyword_move" = "移动";
+"dt_room_disco_keyword_up_sky" = "上天";
+"dt_room_disco_keyword_witch_role" = "换角色";
+"dt_room_disco_keyword_work" = "上班";
+"dt_room_disco_keyword_unwork" = "下班";
+"dt_room_disco_keyword_focus" = "聚焦";
+"dt_room_disco_tag_special" = "特写";
+"dt_room_disco_tag_effect" = "特效";
+"dt_room_guess_more_activity" = "更多活动";
+"dt_room_guess_aword" = "奖励";
+"dt_room_guess_join_now" = "立即加入";
+"dt_room_guess_remain" = "剩余";

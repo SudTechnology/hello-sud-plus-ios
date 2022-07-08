@@ -326,5 +326,20 @@
 + (NSString *)dt_room_disco_dancing_minute_fmt { return @"dt_room_disco_dancing_minute_fmt".localized; }
 + (NSString *)dt_room_guess_had_support_fmt { return @"dt_room_guess_had_support_fmt".localized; }
 
++ (NSString *)dt_room_disco_waitting { return @"dt_room_disco_waitting".localized; }
++ (NSString *)dt_room_disco_keyword_top_five { return @"dt_room_disco_keyword_top_five".localized; }
++ (NSString *)dt_room_disco_keyword_move { return @"dt_room_disco_keyword_move".localized; }
++ (NSString *)dt_room_disco_keyword_up_sky { return @"dt_room_disco_keyword_up_sky".localized; }
++ (NSString *)dt_room_disco_keyword_witch_role { return @"dt_room_disco_keyword_witch_role".localized; }
++ (NSString *)dt_room_disco_keyword_work { return @"dt_room_disco_keyword_work".localized; }
++ (NSString *)dt_room_disco_keyword_unwork { return @"dt_room_disco_keyword_unwork".localized; }
++ (NSString *)dt_room_disco_keyword_focus { return @"dt_room_disco_keyword_focus".localized; }
++ (NSString *)dt_room_disco_tag_special { return @"dt_room_disco_tag_special".localized; }
++ (NSString *)dt_room_disco_tag_effect { return @"dt_room_disco_tag_effect".localized; }
++ (NSString *)dt_room_guess_more_activity { return @"dt_room_guess_more_activity".localized; }
++ (NSString *)dt_room_guess_aword { return @"dt_room_guess_aword".localized; }
++ (NSString *)dt_room_guess_join_now { return @"dt_room_guess_join_now".localized; }
++ (NSString *)dt_room_guess_remain { return @"dt_room_guess_remain".localized; }
+
 
 @end

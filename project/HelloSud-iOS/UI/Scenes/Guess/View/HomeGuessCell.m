@@ -129,7 +129,8 @@
 - (void)updateInfoLabel:(NSString *)timeStr {
 
     MoreGuessGameModel *m = (MoreGuessGameModel *)self.model;
-    NSMutableAttributedString *full = [[NSMutableAttributedString alloc] initWithString:@"剩余 "];
+    NSString *fmt = [NSString stringWithFormat:@"%@ ", NSString.dt_room_guess_remain];
+    NSMutableAttributedString *full = [[NSMutableAttributedString alloc] initWithString:fmt];
     full.yy_lineSpacing = 6;
     full.yy_font = UIFONT_REGULAR(12);
     full.yy_color = HEX_COLOR(@"#666666");
@@ -209,7 +210,7 @@
 }
 
 - (void)updateAward:(NSInteger)award {
-    NSMutableAttributedString *full = [[NSMutableAttributedString alloc] initWithString:@"奖励 "];
+    NSMutableAttributedString *full = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", NSString.dt_room_guess_aword]];
     full.yy_font = UIFONT_MEDIUM(14);
     full.yy_color = HEX_COLOR(@"#ffffff");
 
@@ -285,7 +286,7 @@
 - (UIButton *)enterBtn {
     if (!_enterBtn) {
         _enterBtn = [[UIButton alloc] init];
-        [_enterBtn setTitle:@"立即加入" forState:UIControlStateNormal];
+        [_enterBtn setTitle:NSString.dt_room_guess_join_now forState:UIControlStateNormal];
         [_enterBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         _enterBtn.titleLabel.font = UIFONT_REGULAR(16);
         _enterBtn.backgroundColor = UIColor.blackColor;
