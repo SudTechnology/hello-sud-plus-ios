@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DiscoRoomService : AudioRoomService
 /// 跳舞单
 @property(nonatomic, strong) NSMutableArray <DiscoMenuModel *> *danceMenuList;
+/// 结束跳舞单
+@property(nonatomic, strong) NSMutableArray <DiscoMenuModel *> *finishedDanceMenuList;
 /// 贡献榜
 @property(nonatomic, strong) NSMutableArray <DiscoContributionModel *> *rankList;
 

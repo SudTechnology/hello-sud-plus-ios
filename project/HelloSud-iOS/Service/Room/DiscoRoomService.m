@@ -71,6 +71,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     return nil;
 }
 
+
 /// 更新舞池列表
 /// @param giftModel
 - (void)updateDanceMenuInfo:(RoomCmdSendGiftModel *)giftModel {
@@ -138,8 +139,9 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
             DDLogError(@"will dancing with anchor, but anchor id isempty");
             return;
         }
-        if ([self isUserDancing:anchorID] || [self isUserDancing:m.fromUser.userID]) {
+        if ([self isUserDancing:anchorID]) {
             // 当前主播在跳舞
+            DDLogDebug(@"current anchor is dancing:, anchorID:%@", anchorID);
             return;
         }
         // 开始跳舞
@@ -153,7 +155,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         }
     } else {
         // 已经在跳，如果是与自己在跳，则通知游戏继续跳
-        if (!m.isDanceFinished){
+        if (!m.isDanceFinished) {
             [m beginDancing];
             // 用户加入舞池
             self.dicDancingMap[m.toUser.userID] = m;
@@ -170,7 +172,13 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// @param model
 - (void)addDanceMenuInfo:(DiscoMenuModel *)model {
     DDLogDebug(@"addDanceMenuInfo: fromUser:%@, toUserID:%@", model.fromUser.userID, model.toUser.userID);
-    [self.danceMenuList addObject:model];
+    if (model.isDanceFinished) {
+        // 已经结束列表
+        [self.finishedDanceMenuList addObject:model];
+    } else {
+        [self.danceMenuList addObject:model];
+    }
+
     [self checkIfNeedToDancing:model duration:model.duration];
 }
 
@@ -184,7 +192,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 
 - (void)reSortRankList {
     NSArray *arr = [self.rankMap allValues];
-    NSArray *sortedArr = [arr sortedArrayUsingComparator:^NSComparisonResult(DiscoContributionModel * obj1, DiscoContributionModel * obj2) {
+    NSArray *sortedArr = [arr sortedArrayUsingComparator:^NSComparisonResult(DiscoContributionModel *obj1, DiscoContributionModel *obj2) {
         if (obj1.count == obj2.count) {
             return [obj1.fromUser.userID compare:obj2.fromUser.userID];
         }
@@ -199,7 +207,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 - (void)addRankCount:(AudioUserModel *)fromUser count:(NSInteger)count {
     DiscoContributionModel *m = self.rankMap[fromUser.userID];
     if (!m) {
-        m = [[DiscoContributionModel alloc]init];
+        m = [[DiscoContributionModel alloc] init];
         m.fromUser = fromUser;
         [self addRankInfo:m];
     }
@@ -212,6 +220,8 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 - (void)handleAnchorStopDancing:(NSString *)anchorID {
     if (anchorID) {
         DiscoMenuModel *m = self.dicDancingMap[anchorID];
+        [self.danceMenuList removeObject:m];
+        [self.finishedDanceMenuList insertObject:m atIndex:0];
         // 移除主播
         [self.dicDancingMap removeObjectForKey:anchorID];
         // 移除主播舞伴
@@ -267,6 +277,13 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         _rankMap = [[NSMutableDictionary alloc] init];
     }
     return _rankMap;
+}
+
+- (NSMutableArray <DiscoMenuModel *> *)finishedDanceMenuList {
+    if (!_finishedDanceMenuList) {
+        _finishedDanceMenuList = [[NSMutableArray alloc] init];
+    }
+    return _finishedDanceMenuList;
 }
 
 - (NSMutableArray <DiscoMenuModel *> *)danceMenuList {

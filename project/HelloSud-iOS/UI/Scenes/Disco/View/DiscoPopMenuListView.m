@@ -108,17 +108,8 @@
 }
 
 - (void)loadData {
-    NSArray *arr = kDiscoRoomService.danceMenuList;
-    NSMutableArray *normalArr = [[NSMutableArray alloc] init];
-    NSMutableArray *finishedArr = [[NSMutableArray alloc] init];
-    for (int i = 0; i < arr.count; ++i) {
-        DiscoMenuModel *m = arr[i];
-        if (m.isDanceFinished) {
-            [finishedArr addObject:m];
-        } else {
-            [normalArr addObject:m];
-        }
-    }
+    NSMutableArray *normalArr = [[NSMutableArray alloc] initWithArray:kDiscoRoomService.danceMenuList];
+    NSMutableArray *finishedArr = [[NSMutableArray alloc] initWithArray:kDiscoRoomService.finishedDanceMenuList];
     if (normalArr.count > 0 || finishedArr.count > 0) {
         [self.dataList setArray:@[normalArr, finishedArr]];
     }
