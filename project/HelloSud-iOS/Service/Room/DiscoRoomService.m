@@ -178,7 +178,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         if (obj1.count == obj2.count) {
             return obj1.fromUser.userID < obj2.fromUser.userID;
         }
-        return obj1.count > obj2.count;
+        return obj1.count < obj2.count;
     }];
     [self.rankList setArray:sortedArr];
 }
