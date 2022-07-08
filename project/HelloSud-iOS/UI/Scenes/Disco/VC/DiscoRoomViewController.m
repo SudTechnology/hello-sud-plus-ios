@@ -440,7 +440,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         [self sendCmdToGetDiscoInfo];
     } else if (msg.cmd == CMD_ROOM_DISCO_BECOME_DJ) {
         // 上DJ台
-        RespDiscoBecomeDJModel *model = (RespDiscoBecomeDJModel *)msg;
+        RespDiscoBecomeDJModel *model = (RespDiscoBecomeDJModel *) msg;
         if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
             [kDiscoRoomService upToDJ:180];
         }
@@ -486,8 +486,8 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             [kDiscoRoomService showMsgPop:9 field1:content];
             // 特写镜头
             [kDiscoRoomService specialRole:5 isTop:false];
-            // 随机角色
-            [kDiscoRoomService switchRole:nil];
+            // 角色特效
+            [kDiscoRoomService switchEffectRole:2 * 60 * 60 field1:nil];
             // 角色放大
             [kDiscoRoomService scaleBiggerRole:60 field1:@"2"];
         }
@@ -542,17 +542,17 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 }
 
 - (void)checkUpToDJ {
-    
-    if (![self checkIsFirstMicUser]){
+
+    if (![self checkIsFirstMicUser]) {
         DDLogDebug(@"handleDJTimerCallback, but not in the first mic,so skip");
         return;
     }
-    NSMutableArray *randUserList = [[NSMutableArray alloc]init];
+    NSMutableArray *randUserList = [[NSMutableArray alloc] init];
     NSArray *rankList = kDiscoRoomService.rankList;
     for (int i = 0; i < 5; ++i) {
         if (rankList.count > i) {
             DiscoContributionModel *m = rankList[i];
-            if (m.fromUser.userID){
+            if (m.fromUser.userID) {
                 [randUserList addObject:m.fromUser.userID];
             }
         }
@@ -566,7 +566,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         DDLogDebug(@"up dj user id is empty, randUserList count:%@", @(randUserList.count));
         return;
     }
-    RespDiscoBecomeDJModel *djModel = [[RespDiscoBecomeDJModel alloc]init];
+    RespDiscoBecomeDJModel *djModel = [[RespDiscoBecomeDJModel alloc] init];
     [djModel configBaseInfoWithCmd:CMD_ROOM_DISCO_BECOME_DJ];
     djModel.userID = userID;
     [self sendMsg:djModel isAddToShow:NO];
@@ -598,7 +598,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 }
 
 - (NSMutableAttributedString *)createTip:(BOOL)isMoreLines {
-    
+
     NSString *key1 = NSString.dt_room_disco_keyword_top_five;
     NSString *key2 = NSString.dt_room_disco_keyword_move;
     NSString *key3 = NSString.dt_room_disco_keyword_up_sky;
@@ -606,7 +606,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     NSString *key5 = NSString.dt_room_disco_keyword_work;
     NSString *key6 = NSString.dt_room_disco_keyword_unwork;
     NSString *key7 = NSString.dt_room_disco_keyword_focus;
-    
+
     NSString *tip1 = [NSString stringWithFormat:NSString.dt_room_disco_tip_one_fmt, key1, @(self.djCountdown)];
     NSString *tip2 = NSString.dt_room_disco_tip_two_fmt;
     NSString *tip3 = [NSString stringWithFormat:NSString.dt_room_disco_tip_three_fmt, key2, key3, key4];

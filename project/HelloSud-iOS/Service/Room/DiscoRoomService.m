@@ -371,6 +371,17 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
+/// 角色特效
+/// @param cooldown 特效的持续时间，单位秒（-1为永久）默认60秒
+/// @param field1 特效ID（1：特效1；2：特效2；3：特效3；4：特效4；5：特效5；6：特效6）；默认随机
+- (void)switchEffectRole:(int)cooldown field1:(NSString *)field1 {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeEffectRole;
+    m.cooldown = cooldown;
+    m.field1 = field1;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
 /// 和主播跳舞
 /// @param cooldown 和主播跳舞的持续时间，单位秒（-1为永久）默认30秒
 /// @param isTop false-不置顶；true-置顶
