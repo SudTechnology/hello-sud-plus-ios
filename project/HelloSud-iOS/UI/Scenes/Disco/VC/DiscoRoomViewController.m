@@ -11,6 +11,7 @@
 #import "DiscoRankPopView.h"
 #import "DiscoMenuView.h"
 #import "DiscoPopMenuListView.h"
+#import "DiscoRankTipView.h"
 
 static NSString *discoKeyWordsMove = @"移动";
 static NSString *discoKeyWordsUp = @"上天";
@@ -27,6 +28,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 @property(nonatomic, strong) YYLabel *tipOpenLabel;
 @property(nonatomic, strong) DiscoNaviRankView *rankView;
 @property(nonatomic, strong) DiscoMenuView *menuView;
+@property(nonatomic, strong) DiscoRankTipView *rankTipView;
 /// 同步蹦迪信息用户ID
 @property(nonatomic, strong) NSString *syncDiscoInfoUserID;
 @property(nonatomic, assign) BOOL syncEnd;
@@ -89,6 +91,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     [self.sceneView addSubview:self.tipView];
     [self.tipView addSubview:self.tipLabel];
     [self.tipView addSubview:self.tipOpenLabel];
+    [self.sceneView addSubview:self.rankTipView];
 }
 
 - (void)dtLayoutViews {
@@ -119,6 +122,11 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         make.bottom.equalTo(@(-b));
         make.width.height.greaterThanOrEqualTo(@0);
     }];
+    [self.rankTipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(self.menuView).offset(-7);
+        make.bottom.equalTo(self.menuView.mas_top);
+        make.width.height.greaterThanOrEqualTo(@0);
+    }];
     [self.tipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.gameMicContentView.mas_bottom).offset(10);
         make.leading.equalTo(@16);
@@ -139,6 +147,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
+    WeakSelf
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSettingTap:)];
     [self.settingView addGestureRecognizer:tap];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRankViewTap:)];
@@ -148,6 +157,13 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
     UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTipLabelTap:)];
     [self.tipView addGestureRecognizer:tap4];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:showWaitingForDancingNTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        weakSelf.rankTipView.hidden = NO;
+        [weakSelf.rankTipView show:^{
+            weakSelf.rankTipView.hidden = YES;
+        }];
+    }];
 
 }
 
@@ -251,11 +267,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// @param model model description
 - (void)handleGiftEffect:(RoomCmdSendGiftModel *)model {
     [super handleGiftEffect:model];
-    // 收礼者与送礼者相同时忽略
-    if ([model.sendUser.userID isEqualToString:model.toUser.userID]) {
-        return;
-    }
-    [kDiscoRoomService updateDanceMenuInfo:model];
+    [kDiscoRoomService handleUserSentGift:model];
 }
 
 - (void)roomGameDidChanged:(NSInteger)gameID {
@@ -365,7 +377,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         DiscoMenuModel *item = [arr firstObject];
         [arr removeObjectAtIndex:0];
         resp.dancingMenu = @[item];
-        [self sendMsg:resp isAddToShow:NO finished:^(int errCode){
+        [self sendMsg:resp isAddToShow:NO finished:^(int errCode) {
             [weakSelf queueSendMenu:arr];
         }];
     } else {
@@ -428,7 +440,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         [kDiscoRoomService addRankCount:msg.sendUser count:1];
         [self updateNaviHeadIcon];
     } else if (msg.cmd == CMD_SEND_GIFT_NOTIFY) {
-        RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *)msg;
+        RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
         [kDiscoRoomService addRankCount:msg.sendUser count:m.getGiftModel.price];
         [self updateNaviHeadIcon];
     }
@@ -612,6 +624,14 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         _menuView = [[DiscoMenuView alloc] init];
     }
     return _menuView;
+}
+
+- (DiscoRankTipView *)rankTipView {
+    if (!_rankTipView) {
+        _rankTipView = [[DiscoRankTipView alloc] init];
+        _rankTipView.hidden = YES;
+    }
+    return _rankTipView;
 }
 
 - (BaseView *)settingView {

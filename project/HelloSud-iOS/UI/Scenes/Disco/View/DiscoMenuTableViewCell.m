@@ -70,7 +70,7 @@
     WeakSelf
     DiscoMenuModel *m = (DiscoMenuModel *) self.model;
     m.updateDancingDurationBlock = ^(NSInteger second) {
-        [weakSelf updateRemainTime];
+        [weakSelf updateRemainTime:second];
         if (second <= 0 && weakSelf.danceFinishedBlock) {
             weakSelf.danceFinishedBlock();
         }
@@ -79,13 +79,12 @@
     if (m.fromUser.icon) {
         [self.headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.fromUser.icon]];
     }
-    [self updateRemainTime];
+    [self updateRemainTime:m.remainDuration];
     [self updateName];
 }
 
-- (void)updateRemainTime {
+- (void)updateRemainTime:(NSInteger)remainSecond {
     DiscoMenuModel *m = (DiscoMenuModel *) self.model;
-    NSInteger remainSecond = (NSInteger) (m.duration - ([NSDate date].timeIntervalSince1970 - m.beginTime));
     self.rankLabel.hidden = NO;
     [self.headImageView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@57);

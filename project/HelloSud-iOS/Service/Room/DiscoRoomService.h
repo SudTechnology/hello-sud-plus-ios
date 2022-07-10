@@ -11,6 +11,8 @@
 #import "DiscoMenuModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+/// 展示等待跳舞通知
+FOUNDATION_EXPORT NSNotificationName const showWaitingForDancingNTF;
 
 /// 蹦迪服务
 @interface DiscoRoomService : AudioRoomService
@@ -23,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 更新舞池列表
 /// @param giftModel
-- (void)updateDanceMenuInfo:(RoomCmdSendGiftModel *)giftModel;
+- (void)handleUserSentGift:(RoomCmdSendGiftModel *)giftModel;
 
 /// 增加跳舞信息
 /// @param model

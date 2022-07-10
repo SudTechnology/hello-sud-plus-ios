@@ -8,6 +8,7 @@
 
 #import "DiscoRoomService.h"
 #import "SudMGPAPPState.h"
+NSNotificationName const showWaitingForDancingNTF = @"showWaitingForDancingNTF";
 
 /// 元宇宙砂砂舞Action类型
 typedef NS_ENUM(NSInteger, DiscoActionType) {
@@ -59,12 +60,16 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 @end
 
 @implementation DiscoRoomService
-
-- (DiscoMenuModel *)findSameSendUser:(RoomCmdSendGiftModel *)giftModel {
+/// 找出发送者，接受者一致的舞单
+/// @param giftModel
+/// @return
+- (DiscoMenuModel *)findSameSendAndRecvUser:(RoomCmdSendGiftModel *)giftModel {
     NSArray *arr = self.danceMenuList;
     for (int i = 0; i < arr.count; ++i) {
         DiscoMenuModel *m = arr[i];
-        if ([m.fromUser.userID isEqualToString:giftModel.sendUser.userID] && [m.toUser.userID isEqualToString:giftModel.toUser.userID] && !m.isDanceFinished) {
+        if ([m.fromUser.userID isEqualToString:giftModel.sendUser.userID] &&
+                [m.toUser.userID isEqualToString:giftModel.toUser.userID] &&
+                !m.isDanceFinished) {
             return m;
         }
     }
@@ -72,11 +77,15 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 }
 
 
-/// 更新舞池列表
+/// 处理用户送出礼物
 /// @param giftModel
-- (void)updateDanceMenuInfo:(RoomCmdSendGiftModel *)giftModel {
+- (void)handleUserSentGift:(RoomCmdSendGiftModel *)giftModel {
 
-    DiscoMenuModel *m = [self findSameSendUser:giftModel];
+    // 收礼者与送礼者相同时忽略
+    if ([giftModel.sendUser.userID isEqualToString:giftModel.toUser.userID]) {
+        return;
+    }
+    DiscoMenuModel *m = [self findSameSendAndRecvUser:giftModel];
     NSInteger addDuration = 0;
     switch (giftModel.giftID) {
         case 5: {
@@ -126,12 +135,12 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     }
 
     if (addDuration > 0) {
-        [self checkIfNeedToDancing:m duration:addDuration];
+        [self checkIfNeedToDancing:m duration:addDuration fromSentGift:YES];
     }
 
 }
 
-- (void)checkIfNeedToDancing:(DiscoMenuModel *)m duration:(NSInteger)addDuration {
+- (void)checkIfNeedToDancing:(DiscoMenuModel *)m duration:(NSInteger)addDuration fromSentGift:(BOOL)fromSentGift {
     if (m.beginTime == 0) {
         // 未开始跳舞
         NSString *anchorID = m.toUser.userID;
@@ -142,6 +151,10 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         if ([self isUserDancing:anchorID]) {
             // 当前主播在跳舞
             DDLogDebug(@"current anchor is dancing:, anchorID:%@", anchorID);
+            // 提示等待
+            if (fromSentGift) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:showWaitingForDancingNTF object:nil];
+            }
             return;
         }
         // 开始跳舞
@@ -179,7 +192,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         [self.danceMenuList addObject:model];
     }
 
-    [self checkIfNeedToDancing:model duration:model.duration];
+    [self checkIfNeedToDancing:model duration:model.duration fromSentGift:NO];
 }
 
 /// 增数据
@@ -255,7 +268,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     NSArray *arr = self.danceMenuList;
     for (int i = 0; i < arr.count; ++i) {
         DiscoMenuModel *model = arr[i];
-        [self checkIfNeedToDancing:model duration:model.remainDuration];
+        [self checkIfNeedToDancing:model duration:model.remainDuration fromSentGift:NO];
     }
 }
 
