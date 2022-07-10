@@ -34,6 +34,7 @@ project/HelloSud-iOS/DerivedData/
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
 project/Pods/
+project/DeveloperKit/Pods/
 
 
 workspace.xml
@@ -47,3 +48,4 @@ project/.idea/xcode.xml
 project/HelloSud-iOS.xcodeproj/xcuserdata/kaniel.xcuserdatad/xcschemes/HelloSud-iOS.xcscheme
 project/HelloSud-iOS.xcodeproj/xcuserdata/kaniel.xcuserdatad/xcschemes/xcschememanagement.plist
 project/HelloSud-iOS.xcworkspace/xcuserdata/kaniel.xcuserdatad/xcschemes/xcschememanagement.plist
+DeveloperKit.xcscheme

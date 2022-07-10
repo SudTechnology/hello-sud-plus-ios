@@ -1,0 +1,332 @@
+/*
+  Localizable.strings
+  HelloSud-iOS
+
+  Created by Mary on 2022/3/14.
+  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
+*/
+
+/// Login
+"dt_login_welcome" = "\nHelloSud 체험을 환영합니다.";
+"dt_login_welcome_helloSud" = "HelloSud사용을 환영합니다.";
+"dt_login_we_take_information" = "저희는개인 정보 보호에 각별히 주의하고 있습니다. 개인 정보 수집 및 사용에 관한 세부 정보는 ";
+"dt_login_user_agreement" = "<사용자 약관>";
+"dt_login_and" = "및";
+"dt_login_privacy_policy" = "<개인 정보 정책>";
+"dt_login_click_agree_agreement" = "을 클릭하여 이해할 수 있습니다. 동의를 클릭하면 상기 모든 약관을 열람하고 동의함을 의미합니다.";
+"dt_login_welcome_to_the" = "즉시 체험하기";
+"dt_login_your_nickname" = "닉네임";
+"dt_login_experience_immediately" = "즉시 체험하기";
+"dt_login_warm_prompt" = "도움말";
+"dt_login_warm_prompt_des" = "HelloSud는 서비스 및 체험 개선 용도로만 개인 정보를 사용합니다. 개인 정보 보호에 최선을 다 할 예정이니 동의 후 사용하여주시기 바랍니다.";
+"dt_login_agree_continue" = "동의 및 계속 사용";
+"dt_login_quit_application" = "앱 종료";
+
+/// Settings
+"dt_settings_total" = "총";
+"dt_settings_size_occupied" = "점용 크기";
+"dt_settings_version_info" = "버전 정보";
+"dt_settings_switch_rtc" = "RTC서비스 제공자로 전환";
+"dt_settings_zego" = "Zego";
+"dt_settings_agora" = "Agora";
+"dt_settings_rong_cloud" = "RongCloud";
+"dt_settings_net_ease" = "CommsEase";
+"dt_settings_volcano" = "VolcEngine";
+"dt_settings_alicloud" = "Alibaba Cloud";
+"dt_settings_tencent" = "Tencent Cloud";
+"dt_settings_switch_language" = "언어 전환";
+"dt_settings_open_source" = "오픈소스 약관";
+"dt_settings_user_agreement" = "사용자 약관";
+"dt_settings_privacy_policy" = "개인정보 정책";
+"dt_settings_contact_us" = "더 많은 자문이나 피드백이 필요하시면 이메일로 연락해주세요：\nhelp@sud.tech";
+"dt_settings_work_in_progress" = "제작 중이니 잠시 기다려주세요!";
+"dt_settings_confirm_switch_rtc" = "RTC서비스 제공자를 로 전환하시겠습니까";
+
+/// RoomList
+"dt_room_list_room_number" = "방 ID";
+"dt_room_list_users" = "인";
+"dt_room_list_no_room_available" = "방송 중인 방이 없음 \n홈에서 생성하세요~";
+
+/// Home
+"dt_home_user_id" = "사용자ID";
+"dt_home_enter_room_num" = "방 번호를 입력하여 빠르게 들어가기";
+"dt_home_enter" = "들어가기";
+"dt_home_join" = "게임입장";
+"dt_home_coming_soon" = "기다려주세요.";
+"dt_home_create_room" = "방 생성";
+"dt_home_in_game" = "게임 중";
+
+/// common
+"dt_common_select_all" = "모두";
+"dt_common_agree" = "동의";
+"dt_common_not_agree" = "거절";
+"dt_common_sure" = "확인";
+"dt_common_cancel" = "취소";
+"dt_common_forward" = "가다";
+"dt_common_close" = "끄기";
+"dt_common_back" = "나가기";
+
+/// Main
+"dt_tab_home" = "홈";
+"dt_tab_room" = "방";
+"dt_tab_setting" = "설정";
+
+/// Scenes
+"dt_send" = "보내기";
+"dt_down_mic" = "마이크 끄기";
+"dt_select_person" = "받는 대상을 선택하세요.";
+"dt_select_gift" = "선물 선택";
+"dt_send_gift" = "증정";
+"dt_room_owner" = "방 주인";
+"dt_mic_index" = "%ld 마이크";
+"dt_mic_name" = "마이크";
+"dt_ticket_choose_item_reward" = "%@배 보너스 취득";
+"dt_ticket_choose_item_join" = "즉시 참여";
+"dt_ticket_choose_play_user_num" = "%d인이 플레이중";
+"dt_ticket_choose_level_item_title_one" = "초급장";
+"dt_ticket_choose_level_item_title_two" = "중급장";
+"dt_ticket_choose_level_item_title_thr" = "고급장";
+"dt_ticket_choose_pop_des_detail" = "게임 참여시 %@코인이 소모됩니다. 계속하시겠습니까?";
+"dt_ticket_choose_pop_not_alert" = "다시 보지 않음";
+"dt_ticket_choose_pop_sure_enter" = "가입 확인";
+"dt_ticket_reward_str" = "축하합니다%@의 중급장 %@코인 취득하셨습니다!";
+"dt_room_input_text" = "채팅~";
+"dt_room_up_mic" = "마이크 켜기";
+"dt_room_choose_game" = "게임 선택";
+"dt_room_send" = "발송";
+"dt_room_please_input" = "메시지 발송…";
+"dt_room_end_game" = "게임 종료";
+"dt_room_num_id" = "방 번호 %@";
+"dt_room_not_ready" = "준비 전";
+"dt_room_is_ready" = "준비 완료";
+"dt_room_click_mic" = "마이크 켜기 클릭";
+"dt_room_close_game" = "게임 끄기";
+"dt_room_confirm_flight" = "도망가기 확인";
+"dt_room_flight_tile" = "현재 게임 중입니다. 나가시겠습니까？";
+"dt_room_sure_end_game" = "게임 종료를 확인하시겠습니까?";
+"dt_room_unable_switch_game" = "우선 게임을 완료해야 게임을 전환 가능";
+"dt_room_sure_leave_cur_room" = "현재 방을 나가시겠습니까?";
+
+"dt_next_time_again_say" = "다음에 다시 보기";
+"dt_update_now" = "즉시 갱신";
+"dt_update_app_ver_low" = "App의 버전이 낮습니다, 우선 버전을 업그레이드 해주십시오!";
+"dt_update_app_ver_new" = "새로운 버전이 있습니다. 갱신하시겠습니까? ";
+
+"MJRefreshHeaderIdleText" = "아래로 당겨 새로고침";
+"MJRefreshHeaderPullingText" = "놓으면 새로고침";
+"MJRefreshHeaderRefreshingText" = "로딩중...";
+
+"MJRefreshAutoFooterIdleText" = "탭 또는 위로 당겨 로드함";
+"MJRefreshAutoFooterRefreshingText" = "로딩중...";
+"MJRefreshAutoFooterNoMoreDataText" = "더이상 데이터 없음";
+
+"MJRefreshBackFooterIdleText" = "위로 당겨 더 로드 가능";
+"MJRefreshBackFooterPullingText" = "놓으면 더 로드됨.";
+"MJRefreshBackFooterRefreshingText" = "로딩중...";
+"MJRefreshBackFooterNoMoreDataText" = "더이상 데이터 없음";
+
+"MJRefreshHeaderLastTimeText" = "마지막 업데이트: ";
+"MJRefreshHeaderDateTodayText" = "오늘";
+"MJRefreshHeaderNoneLastDateText" = "기록 없음";
+
+"dt_asr_tip" = "본 게임은 음성 식별을 지원합니다. 마이크 켜고 매력을 어필해 보세요~";
+"dt_asr_open_mic_tip" = "마이크를 켜고 문제에 대답해 보세요, 타자를 더 빨리 쳐 보십시오!";
+"dt_asr_open_mic_num_tip" = "마이크 켜고 숫자 확인하기, 귀차니즘이 있는 분들을 위한 혜택!";
+"dt_enter_room_tip" = "방에 들어왔습니다";
+"dt_game_person_count" = "게임 인원수";
+
+
+"dt_custom_game_system" = "Game system";
+"dt_custom_game_cpu" = "The CPU power dissipation of the game";
+"dt_custom_game_cpu_normal" = "0: normal";
+"dt_custom_game_cpu_low" = "1：low";
+"dt_custom_in_game_sound" = "Indicates whether the game plays sound";
+"dt_custom_game_play_sound" = "0：game plays sound";
+"dt_custom_app_play_sound" = "1：the game does not play sound";
+"dt_custom_in_game_volume" = "The volume level of the game";
+"dt_custom_hide_settlement" = "Indicates whether to hide the post-game screen";
+"dt_custom_hide_ping" = "Indicates whether to hide the ping value";
+"dt_custom_hide_version" = "Indicates whether to hide the version information";
+"dt_custom_hide_rank" = "Indicates whether to hide the ranking tier";
+"dt_custom_hide_lobby_sound" = "Indicates whether to hide the Settings/Sound Effect button in the lobby";
+"dt_custom_hide_lobby_help" = "Indicates whether to hide the Help button in the lobby";
+"dt_custom_hide_lobby_slot" = "Indicates whether to hide the game seat area in the lobby";
+"dt_custom_hide_lobby_captain" = "Indicates whether to hide the captain logo on the game seat in the lobby";
+"dt_custom_hide_lobby_kick" = "Indicates whether to hide the Kick button on the game seat in the lobby";
+"dt_custom_hide_lobby_des" = "Indicates whether to hide the description of game rules in the lobby";
+"dt_custom_hide_lobby_settings" = "Indicates whether to hide the game settings checkbox in the lobby";
+"dt_custom_hide_btn_join_game" = "Indicates whether to hide the Join button";
+"dt_custom_hide_btn_exit_game" = "Indicates whether to hide the Exit button";
+"dt_custom_hide_btn_prepare" = "Indicates whether to hide the Ready button";
+"dt_custom_hide_btn_cancel_prepare" = "Indicates whether to hide the Cancel Ready button";
+"dt_custom_hide_btn_start_game" = "Indicates whether to hide the Start button";
+"dt_custom_hide_btn_share" = "Indicates whether to hide the Share button";
+"dt_custom_hide_btn_sound" = "Indicates whether to hide the Settings/Sound Effect button in the game";
+"dt_custom_hide_btn_help_scene" = "Indicates whether to hide the Help button in the game";
+"dt_custom_hide_game_bg" = "Indicates whether to hide the background images, including the lobby and the game scene";
+"dt_custom_click_join_game" = "Indicates whether players can join a team by tapping the game seat";
+"dt_custom_handle_join_game" = "Indicates whether players can join a game by tapping the Join button";
+"dt_custom_handle_exit_game" = "Indicates whether players can exit the game by tapping the Exit button";
+"dt_custom_handle_prepare" = "Indicates whether players can get ready by tapping the Ready button";
+"dt_custom_handle_cancel_prepare" = "Indicates whether players can cancel their ready state by tapping the Cancel Ready button";
+"dt_custom_handle_start_game" = "Indicates whether players can enter the game by tapping the Start button";
+"dt_custom_handle_share" = "Indicates whether players can share their team by tapping the Share button";
+"dt_custom_btn_close" = "Indicates whether players can close the post-game screen and go back to the lobby by tapping the Close button on the post-game screen";
+"dt_custom_btn_one_more_round" = "Indicates whether players can play again by tapping the Play Again button on the post-game screen";
+"dt_custom_prevent_change_seat" = "Indicates whether to disable the seat change feature";
+"dt_custom_false_change_seat" = "false: player seats can be changed";
+"dt_custom_true_not_change_seat" = "true: player seats cannot be changed";
+"dt_custom_false_ready_state" = "false: the post-game screen is closed and players go back to the lobby with a Ready state";
+"dt_custom_false_close_settlement" = "false: the game notifies the app of the user tap";
+"dt_custom_true_game_notifies" = "true: the game notifies the app of the user tap";
+"dt_custom_false_game_processing" = "false: based on the game processing logic";
+"dt_custom_true_only_notifies" = "true: the game notifies the app of the user tap";
+"dt_custom_false_show" = "false: show";
+"dt_custom_true_hide" = "true: hide";
+
+/// 1.3.0
+"dt_room_unable_speak_present" = "현재 발언 못함";
+"dt_room_there_no_mic" = "공석없음";
+"dt_settings_more_set" = "자세한 설정";
+"dt_room_transfer_leader" = "대장 양도";
+"dt_room_kick_game" = "게임에서 쫓겨나기";
+"dt_network_error_p_check" = "네트 오류, 네트 연결을 확인하십시오";
+"dt_room_switched_language" = "언어 전환됨";
+"dt_room_my_order_list" = "주문 필요";
+"dt_room_select_mic_users" = "마이크 사용자를 선택";
+"dt_room_designate_mc_anchor" = "마이크 앵커를 지정하여 함께 플레이";
+"dt_room_place_order_play" = "시작하다";
+"dt_room_seleted_people" = "%ld명을 선정";
+"dt_home_all_scenes" = "모든 장면";
+"dt_room_hang_room" = "룸 중단";
+"dt_room_exit_room" = "룸 퇴출";
+"dt_room_bureau_person" = "200/판/인";
+"dt_room_need_end_game_can_switch" = "우선 게임을 완료해야 게임을 끄기 가능";
+"dt_room_hope_play_is_join" = "%@ \n【%@】함께 게임을 희망\n 가입 여부";
+"dt_room_reject" = "거절";
+"dt_room_place_order" = "주문하기";
+"dt_room_custom_ready" = "준비";
+"dt_room_custom_cancel_ready" = "준비취소";
+"dt_room_custom_quit_game" = "게임퇴장";
+"dt_room_custom_start_game" = "게임시작";
+"dt_room_custom_escape" = "도주:";
+"dt_room_custom_dissolve_game" = "게임 해산(팀장):";
+"dt_room_game_config" = "게임 구성";
+"dt_room_exit_room_reload" = "배치를 수정한후 룸을 종료하고 다시 게임을 로딩";
+"dt_room_game_stage" = "게임 단계";
+"dt_room_api_interface" = "API";
+"dt_room_before_join_game" = "게임 가입전";
+"dt_room_c_join_game" = "①게임 가입";
+"dt_room_c_preparation_stage" = "준비 단계";
+"dt_room_c_preparation" = "②준비";
+"dt_room_cancel_preparation" = "준비취소";
+"dt_room_c_start_game" = "③게임시작";
+"dt_room_quit_game" = "게임 종료";
+"dt_room_custom_in_game" = "게임 중";
+"dt_room_base_escape" = "도주";
+"dt_room_dissolve_game" = "게임 해산";
+"dt_room_suspend_game" = "게임 중단";
+"dt_room_enter_game" = "게임 진입";
+"dt_room_select_anchor" = "앵커를 선택하기";
+"dt_room_select_game" = "게임을 선택하기";
+"dt_room_to_be_started" = "시작 대기";
+"dt_room_closed" = "เกิน";
+"dt_room_empty_seat" = "";
+"dt_room_pk_cross_room" = "다른 서버룸 열기";
+"dt_room_start_pk" = "경기 시작";
+"dt_room_pk_settings" = "설정";
+"dt_room_pk_select_one_game" = "한개 게임을 선택하여 경기";
+"dt_room_air_room_list" = "방송중 룸 목록";
+"dt_room_pk_rules" = "경기 규칙";
+"dt_room_order_placed" = "이미 주문";
+"dt_room_pk_duration_set" = "경기 시간 설정";
+"dt_room_close_cross_room" = "다른 서버룸 닫기";
+"dt_room_minutes" = "%@분간";
+"dt_room_confirm_modification" = "수정 확인";
+"dt_room_pk_no_room_available" = "잠시동안 매칭 가능한 룸 없음";
+"dt_room_pk_invitation_accept" = "%@의 룸에서 발송한 다른룸 게임 초청, 접수 여부?";
+"dt_room_acceptance" = "확인";
+"dt_room_pk_red_team" = "레드측";
+"dt_room_pk_blue_team" = "블루측";
+"dt_room_pk_enter_other_room_tip" = "상대측 룸에 출발 여부?";
+"dt_room_pk_remove_toast_tip" = "경기 완료 전, 삭제 못함";
+"dt_room_pk_remove_gaming_toast_tip" = "게임 완료 전, 삭제 못함";
+"dt_room_pk_remove_other_tip" = "본 상대자의 삭제 여부?";
+"dt_room_game_system" = "게임 시스템";
+"dt_room_pk_rules_content" = "1.레드 블루 진영으로 구분, 동일한 룸내 사용자는 한개 진영.\n\n2.경기 시간내에 게임 득점 순위를 통하여 자기측 진영에 점수를 추가 가능.\n\n3.매번 게임의 순위 가점수：\n 제1등+100점\n제2등+50점\n제3등+20점\n\n4.공평을 위하여 양측은 같은 수량의 플레이어를 파견하여 게임에 참가 가능~";
+"dt_room_pk_select_game" = "게임 선택";
+"dt_room_pk_wait_onwer_select" = "방주인의 게임선택을 대기";
+"dt_room_invitation_failed" = "초청 발송 실패(%ld)";
+"dt_room_invitation_send" = "초청 발송완료, 대기하기";
+"dt_room_opposite_room_id_empty" = "상대측 룸ID는 공백";
+"dt_room_another_pk" = "한번더";
+"dt_room_close_pk" = "다른 서버룸 닫기";
+"dt_room_close_pk_advance_tip" = "다른룸 게임 끄기 확인?\n 끄면 앞당겨 결제 및 게임 종지.";
+"dt_room_refuse_invitation_find" = "%@ 초청을 거절, 타인을 찾아 게임하기";
+"dt_room_round_game_over" = "이번 게임 완료,\n 또한번 시도 여부?";
+"dt_room_unable_display_msg" = "본 메시지가 표시되지않음, 최신버전으로 갱신하기,cmd:%ld";
+"dt_room_cross_id_not_empty" = "다른 서버룸 ID공백불가";
+"dt_room_load_failed" = "게임 로딩 실패, 변수를 검사하기";
+"dt_follow_system" = "추적 시스템";
+"dt_unable_microphone_tip" = "마이크 방문 못함, ”설정-개인정보”에서 마이크 방문 권한을 켜기";
+"dt_unable_microphone_not_have" = "잠시동안 사용 못함";
+"dt_unable_microphone_open" = "켜기";
+"dt_login_has_expired" = "만기된 로그인, 다시 진입하기";
+"dt_room_back_game" = "게임 나가기";
+"dt_room_input_not_null" = "입력 내용은 필수";
+"dt_ticket_choose_pop_des_title" = "최고 %@ 코인 보너스를 취득 가능";
+"dt_ticket_choose_pop_title" = "1등을 취득";
+"dt_ticket_choose_level_title" = "구성한 입장권 횟수 급별을 선택";
+"dt_up_mic" = "%ld호 마이크를 연결";
+
+"dt_win_first_tip" = "축하,%@는 1등 취득,%@에게%@점을 추가!";
+"dt_win_second_tip" = "%@는 2등 취득,%@에게%@점을 추가!";
+"dt_win_third_tip" = "%@는 3등 취득,%@에게%@점을 추가!";
+"dt_room_pk_score_fmt" = "%@恭喜%@夺得第%@为%@加%@分! ";
+"dt_user_receive_invite_msg" = "%@당신과 함께 플레이를 동의【%@】";
+"dt_room_pk_show_invite_tip" = "상대측을 초청하기";
+"dt_room_join_status" = "게임입장";
+"dt_room_pk_closed_msg" = "상대방의 강제 퇴장으로 게임이 일찍 종료됩니다.";
+"dt_room_pk_status_ing" = "게임 중";
+"dt_room_pk_waitting" = "어울리는";
+"dt_room_pk_remove_sure" = "예";
+"dt_room_pk_invite" = "초청";
+"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_room_mic_game_ing" = "게임 중";
+
+/// 1.4.0
+"dt_room_disco_dancing_fmt" = "%@\n邀请 %@ 跳舞%@分钟";
+"dt_room_disco_tip_one_fmt" = "1. 贡献榜%@随机DJ（%@秒刷新）";
+"dt_room_disco_tip_two_fmt" = "2. 送礼可触发不同的效果或点主播跳舞。";
+"dt_room_disco_tip_three_fmt" = "3. 公屏指令：【%@】【%@】【%@】";
+"dt_room_disco_tip_four_fmt" = "4. 麦上用户发送【%@】可上到主播位，发送【%@】可下主播位。";
+"dt_room_disco_tip_five_fmt" = "5. 主播发文字或语音【%@】可触发特写";
+"dt_room_disco_countdown_fmt" = "%@秒后会自动进入全屏";
+"dt_room_guess_win_msg_fmt" = "%@ 胸有成竹，猜自己一定能赢";
+"dt_room_guess_diff_user_win_msg_fmt" = "%@ 为 %@ 打call，猜TA会赢";
+"dt_room_guess_enter_fmt" = "入场 %@";
+"dt_room_guess_coin_fmt" = "%@金币";
+"dt_room_guess_support_fmt" = "已支持 %@";
+"dt_room_guess_distance_time_fmt" = "距离开始 %02ld:%02ld:%02ld:%02ld";
+"dt_room_guess_your_support_fmt" = "你要投入多少支持%@";
+"dt_room_guess_win_me_fmt" = "猜自己赢\n夺第一名 得5倍奖励";
+"dt_room_guess_guess_self_fmt" = "是否开启每轮自动猜自己赢？\n（每轮%@金币）";
+"dt_room_guess_confirm_coin_fmt" = "确认(%@金币)";
+"dt_room_guess_close_fmt" = "关闭(%@s)";
+"dt_room_disco_dancing_minute_fmt" = "跳舞%@分钟";
+"dt_room_guess_had_support_fmt" = "已有%@人支持";
+
+"dt_room_disco_waitting" = "等待中";
+"dt_room_disco_keyword_top_five" = "前五";
+"dt_room_disco_keyword_move" = "移动";
+"dt_room_disco_keyword_up_sky" = "上天";
+"dt_room_disco_keyword_witch_role" = "换角色";
+"dt_room_disco_keyword_work" = "上班";
+"dt_room_disco_keyword_unwork" = "下班";
+"dt_room_disco_keyword_focus" = "聚焦";
+"dt_room_disco_tag_special" = "特写";
+"dt_room_disco_tag_effect" = "特效";
+"dt_room_guess_more_activity" = "更多活动";
+"dt_room_guess_aword" = "奖励";
+"dt_room_guess_join_now" = "立即加入";
+"dt_room_guess_remain" = "剩余";
