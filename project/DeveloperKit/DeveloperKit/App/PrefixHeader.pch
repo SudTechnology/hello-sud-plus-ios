@@ -53,6 +53,8 @@
 #import "BaseSceneService.h"
 #import "WebpImageCacheService.h"
 
+#import "QSAppPreferences.h"
+
 /// Page
 #import "CommonRoomModelHeader.h"
 /// Example Audio

@@ -9,6 +9,7 @@
 #import "GameListViewController.h"
 #import "HSSettingViewController.h"
 #import "HomeViewController.h"
+#import "QSGameListViewController.h"
 
 @interface MainTabBarController ()
 
@@ -30,7 +31,8 @@
 - (void)configMainPage {
     // Do any additional setup after loading the view.
     
-    HomeViewController *home = [[HomeViewController alloc]init];
+//    HomeViewController *home = [[HomeViewController alloc]init];
+    QSGameListViewController *home = [[QSGameListViewController alloc]init];
     BaseNavigationViewController * navHome = [[BaseNavigationViewController alloc]initWithRootViewController:home];
     home.tabBarItem.title = NSString.dt_tab_home;
     home.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_game_list"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

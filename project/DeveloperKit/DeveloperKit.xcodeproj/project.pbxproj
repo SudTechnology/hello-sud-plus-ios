@@ -151,6 +151,19 @@
 		6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460828286441B4005C99EF /* WebpImageCacheService.m */; };
 		6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */; };
 		6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */; };
+		6CCA0B0E287AC14700CAFF40 /* QuickStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFA287AC14700CAFF40 /* QuickStartViewController.m */; };
+		6CCA0B0F287AC14700CAFF40 /* QSGameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFB287AC14700CAFF40 /* QSGameListViewController.m */; };
+		6CCA0B10287AC14700CAFF40 /* QuickStartViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFC287AC14700CAFF40 /* QuickStartViewController+Game.m */; };
+		6CCA0B11287AC14700CAFF40 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFF287AC14700CAFF40 /* QSSwitchRoomModeView.m */; };
+		6CCA0B12287AC14700CAFF40 /* QSRoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B03287AC14700CAFF40 /* QSRoomMoreView.m */; };
+		6CCA0B13287AC14700CAFF40 /* QSRoomOperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B06287AC14700CAFF40 /* QSRoomOperatorView.m */; };
+		6CCA0B14287AC14700CAFF40 /* QSHomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B07287AC14700CAFF40 /* QSHomeHeaderView.m */; };
+		6CCA0B15287AC14700CAFF40 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B09287AC14700CAFF40 /* QSSwitchRoomCell.m */; };
+		6CCA0B16287AC14700CAFF40 /* QSGameListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B0A287AC14700CAFF40 /* QSGameListCell.m */; };
+		6CCA0B17287AC14700CAFF40 /* QSRoomInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B0B287AC14700CAFF40 /* QSRoomInputView.m */; };
+		6CCA0B18287AC14700CAFF40 /* QSRoomNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B0D287AC14700CAFF40 /* QSRoomNaviView.m */; };
+		6CCA0B1F287AC15400CAFF40 /* QSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B1A287AC15400CAFF40 /* QSAppPreferences.m */; };
+		6CCA0B20287AC15400CAFF40 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B1D287AC15400CAFF40 /* QSGameItemModel.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
 		6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85627BE37D600D8F76C /* SettingsService.m */; };
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
@@ -513,6 +526,32 @@
 		6C460860286D3BC7005C99EF /* HomeHeaderFullReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHeaderFullReusableView.h; sourceTree = "<group>"; };
 		6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderFullReusableView.m; sourceTree = "<group>"; };
 		6C75F36A27C348A50019BB74 /* KeyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHeader.h; sourceTree = "<group>"; };
+		6CCA0AF7287AC14700CAFF40 /* QuickStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickStartViewController.h; sourceTree = "<group>"; };
+		6CCA0AF8287AC14700CAFF40 /* QuickStartViewController+Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QuickStartViewController+Game.h"; sourceTree = "<group>"; };
+		6CCA0AF9287AC14700CAFF40 /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
+		6CCA0AFA287AC14700CAFF40 /* QuickStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickStartViewController.m; sourceTree = "<group>"; };
+		6CCA0AFB287AC14700CAFF40 /* QSGameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameListViewController.m; sourceTree = "<group>"; };
+		6CCA0AFC287AC14700CAFF40 /* QuickStartViewController+Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QuickStartViewController+Game.m"; sourceTree = "<group>"; };
+		6CCA0AFE287AC14700CAFF40 /* QSHomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSHomeHeaderView.h; sourceTree = "<group>"; };
+		6CCA0AFF287AC14700CAFF40 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
+		6CCA0B00287AC14700CAFF40 /* QSRoomOperatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSRoomOperatorView.h; sourceTree = "<group>"; };
+		6CCA0B01287AC14700CAFF40 /* QSGameListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListCell.h; sourceTree = "<group>"; };
+		6CCA0B02287AC14700CAFF40 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
+		6CCA0B03287AC14700CAFF40 /* QSRoomMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSRoomMoreView.m; sourceTree = "<group>"; };
+		6CCA0B04287AC14700CAFF40 /* QSRoomInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSRoomInputView.h; sourceTree = "<group>"; };
+		6CCA0B05287AC14700CAFF40 /* QSRoomNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSRoomNaviView.h; sourceTree = "<group>"; };
+		6CCA0B06287AC14700CAFF40 /* QSRoomOperatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSRoomOperatorView.m; sourceTree = "<group>"; };
+		6CCA0B07287AC14700CAFF40 /* QSHomeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSHomeHeaderView.m; sourceTree = "<group>"; };
+		6CCA0B08287AC14700CAFF40 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
+		6CCA0B09287AC14700CAFF40 /* QSSwitchRoomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomCell.m; sourceTree = "<group>"; };
+		6CCA0B0A287AC14700CAFF40 /* QSGameListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameListCell.m; sourceTree = "<group>"; };
+		6CCA0B0B287AC14700CAFF40 /* QSRoomInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSRoomInputView.m; sourceTree = "<group>"; };
+		6CCA0B0C287AC14700CAFF40 /* QSRoomMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSRoomMoreView.h; sourceTree = "<group>"; };
+		6CCA0B0D287AC14700CAFF40 /* QSRoomNaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSRoomNaviView.m; sourceTree = "<group>"; };
+		6CCA0B1A287AC15400CAFF40 /* QSAppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSAppPreferences.m; sourceTree = "<group>"; };
+		6CCA0B1C287AC15400CAFF40 /* QSGameItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameItemModel.h; sourceTree = "<group>"; };
+		6CCA0B1D287AC15400CAFF40 /* QSGameItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameItemModel.m; sourceTree = "<group>"; };
+		6CCA0B1E287AC15400CAFF40 /* QSAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSAppPreferences.h; sourceTree = "<group>"; };
 		6CD6E85227BE37C300D8F76C /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		6CD6E85327BE37C300D8F76C /* LoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 		6CD6E85527BE37D600D8F76C /* SettingsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsService.h; sourceTree = "<group>"; };
@@ -571,6 +610,7 @@
 		44018CE027EAC49900FD9D0F /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6CCA0AF5287AC14700CAFF40 /* QuickStart */,
 				4455ACED27EAC658001516EE /* Home */,
 				4455ACDA27EAC657001516EE /* Login */,
 				4455ACEA27EAC658001516EE /* Main */,
@@ -1124,6 +1164,7 @@
 		6C192E4A279523B000553034 /* DeveloperKit */ = {
 			isa = PBXGroup;
 			children = (
+				6CCA0B19287AC15400CAFF40 /* Preferences */,
 				6CD6E84B27BE30BE00D8F76C /* App */,
 				44018CE027EAC49900FD9D0F /* UI */,
 				6C076EA3279F983100650209 /* Service */,
@@ -1268,6 +1309,70 @@
 				6C390547287AB0FF000056E1 /* LanguageUtil.h */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		6CCA0AF5287AC14700CAFF40 /* QuickStart */ = {
+			isa = PBXGroup;
+			children = (
+				6CCA0AF6287AC14700CAFF40 /* VC */,
+				6CCA0AFD287AC14700CAFF40 /* View */,
+			);
+			path = QuickStart;
+			sourceTree = "<group>";
+		};
+		6CCA0AF6287AC14700CAFF40 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				6CCA0AF7287AC14700CAFF40 /* QuickStartViewController.h */,
+				6CCA0AF8287AC14700CAFF40 /* QuickStartViewController+Game.h */,
+				6CCA0AF9287AC14700CAFF40 /* QSGameListViewController.h */,
+				6CCA0AFA287AC14700CAFF40 /* QuickStartViewController.m */,
+				6CCA0AFB287AC14700CAFF40 /* QSGameListViewController.m */,
+				6CCA0AFC287AC14700CAFF40 /* QuickStartViewController+Game.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		6CCA0AFD287AC14700CAFF40 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6CCA0AFE287AC14700CAFF40 /* QSHomeHeaderView.h */,
+				6CCA0AFF287AC14700CAFF40 /* QSSwitchRoomModeView.m */,
+				6CCA0B00287AC14700CAFF40 /* QSRoomOperatorView.h */,
+				6CCA0B01287AC14700CAFF40 /* QSGameListCell.h */,
+				6CCA0B02287AC14700CAFF40 /* QSSwitchRoomCell.h */,
+				6CCA0B03287AC14700CAFF40 /* QSRoomMoreView.m */,
+				6CCA0B04287AC14700CAFF40 /* QSRoomInputView.h */,
+				6CCA0B05287AC14700CAFF40 /* QSRoomNaviView.h */,
+				6CCA0B06287AC14700CAFF40 /* QSRoomOperatorView.m */,
+				6CCA0B07287AC14700CAFF40 /* QSHomeHeaderView.m */,
+				6CCA0B08287AC14700CAFF40 /* QSSwitchRoomModeView.h */,
+				6CCA0B09287AC14700CAFF40 /* QSSwitchRoomCell.m */,
+				6CCA0B0A287AC14700CAFF40 /* QSGameListCell.m */,
+				6CCA0B0B287AC14700CAFF40 /* QSRoomInputView.m */,
+				6CCA0B0C287AC14700CAFF40 /* QSRoomMoreView.h */,
+				6CCA0B0D287AC14700CAFF40 /* QSRoomNaviView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6CCA0B19287AC15400CAFF40 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				6CCA0B1A287AC15400CAFF40 /* QSAppPreferences.m */,
+				6CCA0B1B287AC15400CAFF40 /* Model */,
+				6CCA0B1E287AC15400CAFF40 /* QSAppPreferences.h */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		6CCA0B1B287AC15400CAFF40 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6CCA0B1C287AC15400CAFF40 /* QSGameItemModel.h */,
+				6CCA0B1D287AC15400CAFF40 /* QSGameItemModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6CD6E84727BE2CDA00D8F76C /* Impl */ = {
@@ -1590,9 +1695,11 @@
 				4455ADAD27EAC658001516EE /* RoomCmdChangeGameModel.m in Sources */,
 				44241ADB27EACF39001EE125 /* SwitchLanguageViewController.m in Sources */,
 				6C076EB6279FF3FF00650209 /* GiftModel.m in Sources */,
+				6CCA0B15287AC14700CAFF40 /* QSSwitchRoomCell.m in Sources */,
 				4455AD8727EAC658001516EE /* VersionInfoModel.m in Sources */,
 				6C076EA6279F98AA00650209 /* AppService.m in Sources */,
 				6C390555287AB0FF000056E1 /* BaseViewController.m in Sources */,
+				6CCA0B20287AC15400CAFF40 /* QSGameItemModel.m in Sources */,
 				6C076ED427A274FE00650209 /* UserService.m in Sources */,
 				4455AE1427EAC6F7001516EE /* RoomNaviView.m in Sources */,
 				4455AE0D27EAC6F7001516EE /* BaseMsgCell.m in Sources */,
@@ -1611,7 +1718,10 @@
 				4455AD9027EAC658001516EE /* LoginViewController.m in Sources */,
 				6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */,
 				6C076E80279E8EBD00650209 /* AudioCommon.m in Sources */,
+				6CCA0B10287AC14700CAFF40 /* QuickStartViewController+Game.m in Sources */,
+				6CCA0B0F287AC14700CAFF40 /* QSGameListViewController.m in Sources */,
 				E551BF31281500900046D417 /* IMRoomManager.m in Sources */,
+				6CCA0B17287AC14700CAFF40 /* QSRoomInputView.m in Sources */,
 				6C390564287AB0FF000056E1 /* LanguageUtil.m in Sources */,
 				E5EDC0BE281B941D00E6875B /* AsyncCallWrapper.m in Sources */,
 				6C076E7D279E833C00650209 /* AudioEngineFactory.m in Sources */,
@@ -1655,6 +1765,7 @@
 				6C390550287AB0FF000056E1 /* DTSlider.m in Sources */,
 				6C39055C287AB0FF000056E1 /* NSString+DTNSString.m in Sources */,
 				445EAB3627A1330D000DCC72 /* BaseRespModel.m in Sources */,
+				6CCA0B13287AC14700CAFF40 /* QSRoomOperatorView.m in Sources */,
 				4455AD8B27EAC658001516EE /* VersionInfoCell.m in Sources */,
 				6C076EDA27A2993C00650209 /* RespGameInfoModel.m in Sources */,
 				4455AD9727EAC658001516EE /* HomeViewController.m in Sources */,
@@ -1666,6 +1777,7 @@
 				4455AD9627EAC658001516EE /* MainTabBarController.m in Sources */,
 				4455ADA827EAC658001516EE /* RoomCmdChatTextModel.m in Sources */,
 				44D9F3B3280FFF83000B14B5 /* GameConfigPopView.m in Sources */,
+				6CCA0B12287AC14700CAFF40 /* QSRoomMoreView.m in Sources */,
 				4455AE2027EAC71A001516EE /* BaseSceneConfigModel.m in Sources */,
 				4455AE1727EAC6F7001516EE /* RoomMsgTableView.m in Sources */,
 				44D9F3B0280FF6CC000B14B5 /* RoomCustomModel.m in Sources */,
@@ -1673,6 +1785,7 @@
 				448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */,
 				4455AD9827EAC658001516EE /* SearchHeaderView.m in Sources */,
 				6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */,
+				6CCA0B0E287AC14700CAFF40 /* QuickStartViewController.m in Sources */,
 				44D9F3A8280FB0FB000B14B5 /* GameConfigTableViewCell.m in Sources */,
 				44BC48E52815433400E4E3F7 /* RoomCmdOrderCreateModel.m in Sources */,
 				6C390563287AB0FF000056E1 /* DTTimer.m in Sources */,
@@ -1681,6 +1794,7 @@
 				4455AE1327EAC6F7001516EE /* GameMicContentView.m in Sources */,
 				4455ADB127EAC658001516EE /* GiftUserCollectionViewCell.m in Sources */,
 				4455AD9F27EAC658001516EE /* SwitchMicModel.m in Sources */,
+				6CCA0B16287AC14700CAFF40 /* QSGameListCell.m in Sources */,
 				4455AE0627EAC6F7001516EE /* BaseSceneViewController.m in Sources */,
 				6C39055B287AB0FF000056E1 /* DTUIDevice+Extension.m in Sources */,
 				4455AD8A27EAC658001516EE /* HSSettingModel.m in Sources */,
@@ -1691,12 +1805,15 @@
 				E51A737828091CD00097007C /* ZIMManager.m in Sources */,
 				6C39055E287AB0FF000056E1 /* DTNSArray+Masonry.m in Sources */,
 				6C390551287AB0FF000056E1 /* DTBlurEffectView.m in Sources */,
+				6CCA0B1F287AC15400CAFF40 /* QSAppPreferences.m in Sources */,
 				44241ADE27EACF9C001EE125 /* SwitchLangModel.m in Sources */,
 				4455AD9227EAC658001516EE /* LoginModel.m in Sources */,
 				4455AD9A27EAC658001516EE /* GameItemCollectionViewCell.m in Sources */,
 				4455ADA327EAC658001516EE /* ExitRoomModel.m in Sources */,
+				6CCA0B18287AC14700CAFF40 /* QSRoomNaviView.m in Sources */,
 				4455ADB227EAC658001516EE /* GiftItemCollectionViewCell.m in Sources */,
 				BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */,
+				6CCA0B11287AC14700CAFF40 /* QSSwitchRoomModeView.m in Sources */,
 				BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */,
 				6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */,
 				6C46082328630CD7005C99EF /* RespGiftListModel.m in Sources */,
@@ -1710,6 +1827,7 @@
 				BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */,
 				6C39055F287AB0FF000056E1 /* DTUIView+Extension.m in Sources */,
 				6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */,
+				6CCA0B14287AC14700CAFF40 /* QSHomeHeaderView.m in Sources */,
 				6C390561287AB0FF000056E1 /* DTNSError+Custom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
