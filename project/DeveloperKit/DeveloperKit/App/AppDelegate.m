@@ -14,7 +14,7 @@
 #import "AudioEngineFactory.h"
 #import "LoginViewController.h"
 #import "KeyHeader.h"
-#import <NIMSDK/NIMSDK.h>
+
 
 @interface AppDelegate () {
 
@@ -49,9 +49,7 @@
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     [GiftService.shared loadFromDisk];
-    
-    NIMSDKOption *option = [NIMSDKOption optionWithAppKey:@"110f7db7c00ee497bd7b32954c36464c"];
-    [[NIMSDK sharedSDK] registerWithOption:option];
+
     [self cacheLocalData];
     return YES;
 }

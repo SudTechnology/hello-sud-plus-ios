@@ -7,12 +7,7 @@
 
 #import "AppService.h"
 #import "ZegoAudioEngineImpl.h"
-#import "AgoraAudioEngineImpl.h"
-#import "RCloudAudioEngineImpl.h"
-#import "NeteaseAudioEngineImpl.h"
-#import "TXAudioEngineImpl.h"
-#import "VolcAudioEngineImpl.h"
-#import "AliyunAudioEngineImpl.h"
+
 /// 用户登录确认key
 #define kKeyLoginAgreement @"key_login_agreement"
 
@@ -199,52 +194,11 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     HSConfigContent *rtcConfig = nil;
     DDLogInfo(@"切换RTC厂商:%@", rtcType);
     [AudioEngineFactory.shared.audioEngine destroy];
-    if ([self isSameRtc:self.configModel.zegoCfg rtcType:rtcType]) {
-
-        DDLogInfo(@"使用zego语音引擎");
-        [AudioEngineFactory.shared createEngine:ZegoAudioEngineImpl.class];
-        rtcConfig = self.configModel.zegoCfg;
-    } else if ([self isSameRtc:self.configModel.agoraCfg rtcType:rtcType]) {
-
-        DDLogInfo(@"使用agora语音引擎");
-        [AudioEngineFactory.shared createEngine:AgoraAudioEngineImpl.class];
-        rtcConfig = self.configModel.agoraCfg;
-    } else if ([self isSameRtc:self.configModel.rongCloudCfg rtcType:rtcType]) {
-
-        DDLogInfo(@"使用rongCloud语音引擎");
-        [AudioEngineFactory.shared createEngine:RCloudAudioEngineImpl.class];
-        rtcConfig = self.configModel.rongCloudCfg;
-    } else if ([self isSameRtc:self.configModel.commsEaseCfg rtcType:rtcType]) {
-
-        DDLogInfo(@"使用commsEas语音引擎");
-        [AudioEngineFactory.shared createEngine:NeteaseAudioEngineImpl.class];
-        rtcConfig = self.configModel.commsEaseCfg;
-    } else if ([self isSameRtc:self.configModel.tencentCloudCfg rtcType:rtcType]) {
-
-        DDLogInfo(@"使用TencentCloud语音引擎");
-        [AudioEngineFactory.shared createEngine:TXAudioEngineImpl.class];
-        rtcConfig = self.configModel.tencentCloudCfg;
-    } else if ([self isSameRtc:self.configModel.volcEngineCfg rtcType:rtcType]) {
-
-        DDLogInfo(@"使用VolcEngine语音引擎");
-        [AudioEngineFactory.shared createEngine:VolcAudioEngineImpl.class];
-        rtcConfig = self.configModel.volcEngineCfg;
-    } else if ([self isSameRtc:self.configModel.alibabaCloudCfg rtcType:rtcType]) {
-
-        DDLogInfo(@"使用AlibabaCloud语音引擎");
-        [AudioEngineFactory.shared createEngine:AliyunAudioEngineImpl.class];
-        rtcConfig = self.configModel.alibabaCloudCfg;
-    } else {
-        if (rtcType.length == 0 && self.configModel.zegoCfg) {
-            rtcType = self.configModel.zegoCfg.rtcType;
-            [AudioEngineFactory.shared createEngine:ZegoAudioEngineImpl.class];
-            rtcConfig = self.configModel.zegoCfg;
-            DDLogInfo(@"默认RTC厂商：%@", rtcType);
-        } else {
-            DDLogError(@"切换RTC厂商失败，对应配置为空");
-            return rtcType;
-        }
-    }
+    
+    rtcType = self.configModel.zegoCfg.rtcType;
+    [AudioEngineFactory.shared createEngine:ZegoAudioEngineImpl.class];
+    rtcConfig = self.configModel.zegoCfg;
+    DDLogInfo(@"默认RTC厂商：%@", rtcType);
 
     /// 初始化引擎SDK
     NSString *appID = rtcConfig.appId;

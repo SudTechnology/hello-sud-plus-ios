@@ -114,7 +114,6 @@
 		6C192E58279523B100553034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E57279523B100553034 /* Assets.xcassets */; };
 		6C192E5B279523B100553034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E59279523B100553034 /* LaunchScreen.storyboard */; };
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
-		6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */; };
 		6C390549287AB0FF000056E1 /* DTSVGAPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C390501287AB0FF000056E1 /* DTSVGAPlayerView.m */; };
 		6C39054A287AB0FF000056E1 /* DTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C390502287AB0FF000056E1 /* DTWebViewController.m */; };
 		6C39054B287AB0FF000056E1 /* DTTextAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C390503287AB0FF000056E1 /* DTTextAlertView.m */; };
@@ -154,10 +153,6 @@
 		6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
 		6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85627BE37D600D8F76C /* SettingsService.m */; };
-		6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87227BF42B200D8F76C /* NeteaseAudioEngineImpl.m */; };
-		6CD6E87627BF42F900D8F76C /* VolcAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87527BF42F900D8F76C /* VolcAudioEngineImpl.m */; };
-		6CD6E87927BF431500D8F76C /* AliyunAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87827BF431500D8F76C /* AliyunAudioEngineImpl.m */; };
-		6CD6E87C27BF433500D8F76C /* TXAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */; };
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
 		B4D36843752B458B8E1B7051 /* Pods_DeveloperKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407A021D22DFBF6FB45F629D /* Pods_DeveloperKit.framework */; };
 		BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */; };
@@ -170,7 +165,6 @@
 		BC210FF63EC24685CBC7FBAC /* SuspendRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */; };
 		E51A737828091CD00097007C /* ZIMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51A737728091CD00097007C /* ZIMManager.m */; };
 		E551BF31281500900046D417 /* IMRoomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E551BF30281500900046D417 /* IMRoomManager.m */; };
-		E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */; };
 		E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BC27E874DF00EE99D0 /* AudioConfigModel.m */; };
 		E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */; };
 		E5EDC0BE281B941D00E6875B /* AsyncCallWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E5EDC0BD281B941D00E6875B /* AsyncCallWrapper.m */; };
@@ -442,8 +436,6 @@
 		6C192E7F2797C63100553034 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		6C192E802797C63100553034 /* Constant.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
 		6C192E882797E2C700553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraAudioEngineImpl.h; sourceTree = "<group>"; };
-		6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgoraAudioEngineImpl.m; sourceTree = "<group>"; };
 		6C390501287AB0FF000056E1 /* DTSVGAPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTSVGAPlayerView.m; sourceTree = "<group>"; };
 		6C390502287AB0FF000056E1 /* DTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTWebViewController.m; sourceTree = "<group>"; };
 		6C390503287AB0FF000056E1 /* DTTextAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTextAlertView.m; sourceTree = "<group>"; };
@@ -525,14 +517,6 @@
 		6CD6E85327BE37C300D8F76C /* LoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 		6CD6E85527BE37D600D8F76C /* SettingsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsService.h; sourceTree = "<group>"; };
 		6CD6E85627BE37D600D8F76C /* SettingsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsService.m; sourceTree = "<group>"; };
-		6CD6E87127BF42B200D8F76C /* NeteaseAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NeteaseAudioEngineImpl.h; sourceTree = "<group>"; };
-		6CD6E87227BF42B200D8F76C /* NeteaseAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NeteaseAudioEngineImpl.m; sourceTree = "<group>"; };
-		6CD6E87427BF42F900D8F76C /* VolcAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VolcAudioEngineImpl.h; sourceTree = "<group>"; };
-		6CD6E87527BF42F900D8F76C /* VolcAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VolcAudioEngineImpl.m; sourceTree = "<group>"; };
-		6CD6E87727BF431500D8F76C /* AliyunAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AliyunAudioEngineImpl.h; sourceTree = "<group>"; };
-		6CD6E87827BF431500D8F76C /* AliyunAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AliyunAudioEngineImpl.m; sourceTree = "<group>"; };
-		6CD6E87A27BF433500D8F76C /* TXAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAudioEngineImpl.h; sourceTree = "<group>"; };
-		6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAudioEngineImpl.m; sourceTree = "<group>"; };
 		6CD6E87D27C0A36100D8F76C /* ServiceConstHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceConstHeader.h; sourceTree = "<group>"; };
 		6CEF766627F5A22000A12220 /* MoreSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreSettingViewController.h; sourceTree = "<group>"; };
 		6CEF766727F5A22000A12220 /* MoreSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSettingViewController.m; sourceTree = "<group>"; };
@@ -561,8 +545,6 @@
 		E5C82F7227FFE09C00A409D5 /* NERtcSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NERtcSDK.framework; path = Vendors/netease/NERtcSDK.framework; sourceTree = "<group>"; };
 		E5C82F7327FFE09C00A409D5 /* NIMSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NIMSDK.framework; path = Vendors/netease/NIMSDK.framework; sourceTree = "<group>"; };
 		E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMCBasicModuleFramework.framework; path = Vendors/netease/NMCBasicModuleFramework.framework; sourceTree = "<group>"; };
-		E5C82F8227FFE56900A409D5 /* RCloudAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCloudAudioEngineImpl.h; sourceTree = "<group>"; };
-		E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCloudAudioEngineImpl.m; sourceTree = "<group>"; };
 		E5D4B4D7280FDFC6000E7AC4 /* NIMSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = NIMSDK.xcframework; path = Vendors/netease/NIMSDK.xcframework; sourceTree = "<group>"; };
 		E5D4B4D8280FDFC6000E7AC4 /* NMCBasicModuleFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = NMCBasicModuleFramework.xcframework; path = Vendors/netease/NMCBasicModuleFramework.xcframework; sourceTree = "<group>"; };
 		E5D4B4D9280FDFC6000E7AC4 /* NERtcSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = NERtcSDK.xcframework; path = Vendors/netease/NERtcSDK.xcframework; sourceTree = "<group>"; };
@@ -1069,7 +1051,6 @@
 			isa = PBXGroup;
 			children = (
 				6CD6E84A27BE306500D8F76C /* Audio */,
-				6CD6E84927BE305D00D8F76C /* Video */,
 			);
 			path = RTC;
 			sourceTree = "<group>";
@@ -1157,15 +1138,6 @@
 				44DF03972796B2C5006EE6AC /* AppUtil.m */,
 			);
 			name = "Recovered References";
-			sourceTree = "<group>";
-		};
-		6C1D007527BA03DC000F0998 /* Agora */ = {
-			isa = PBXGroup;
-			children = (
-				6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */,
-				6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */,
-			);
-			path = Agora;
 			sourceTree = "<group>";
 		};
 		6C3904FF287AB0FF000056E1 /* Common */ = {
@@ -1301,12 +1273,6 @@
 		6CD6E84727BE2CDA00D8F76C /* Impl */ = {
 			isa = PBXGroup;
 			children = (
-				E5C82F8127FFE52000A409D5 /* RCloud */,
-				6CD6E87027BF428200D8F76C /* TX */,
-				6CD6E86F27BF427800D8F76C /* Aliyun */,
-				6CD6E86E27BF426B00D8F76C /* Volc */,
-				6CD6E86D27BF425800D8F76C /* Netease */,
-				6C1D007527BA03DC000F0998 /* Agora */,
 				6C076E6E279E424900650209 /* Zego */,
 				E551BF2F2815007D0046D417 /* IMRoomManager.h */,
 				E551BF30281500900046D417 /* IMRoomManager.m */,
@@ -1323,13 +1289,6 @@
 				6C076E7C279E833C00650209 /* AudioEngineFactory.m */,
 			);
 			path = Factory;
-			sourceTree = "<group>";
-		};
-		6CD6E84927BE305D00D8F76C /* Video */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Video;
 			sourceTree = "<group>";
 		};
 		6CD6E84A27BE306500D8F76C /* Audio */ = {
@@ -1413,42 +1372,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		6CD6E86D27BF425800D8F76C /* Netease */ = {
-			isa = PBXGroup;
-			children = (
-				6CD6E87127BF42B200D8F76C /* NeteaseAudioEngineImpl.h */,
-				6CD6E87227BF42B200D8F76C /* NeteaseAudioEngineImpl.m */,
-			);
-			path = Netease;
-			sourceTree = "<group>";
-		};
-		6CD6E86E27BF426B00D8F76C /* Volc */ = {
-			isa = PBXGroup;
-			children = (
-				6CD6E87427BF42F900D8F76C /* VolcAudioEngineImpl.h */,
-				6CD6E87527BF42F900D8F76C /* VolcAudioEngineImpl.m */,
-			);
-			path = Volc;
-			sourceTree = "<group>";
-		};
-		6CD6E86F27BF427800D8F76C /* Aliyun */ = {
-			isa = PBXGroup;
-			children = (
-				6CD6E87727BF431500D8F76C /* AliyunAudioEngineImpl.h */,
-				6CD6E87827BF431500D8F76C /* AliyunAudioEngineImpl.m */,
-			);
-			path = Aliyun;
-			sourceTree = "<group>";
-		};
-		6CD6E87027BF428200D8F76C /* TX */ = {
-			isa = PBXGroup;
-			children = (
-				6CD6E87A27BF433500D8F76C /* TXAudioEngineImpl.h */,
-				6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */,
-			);
-			path = TX;
-			sourceTree = "<group>";
-		};
 		BC21001B5F7B2F0EA130BEDF /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1465,15 +1388,6 @@
 				6C076E72279E457D00650209 /* ISudAudioEventListener.h */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		E5C82F8127FFE52000A409D5 /* RCloud */ = {
-			isa = PBXGroup;
-			children = (
-				E5C82F8227FFE56900A409D5 /* RCloudAudioEngineImpl.h */,
-				E5C82F8327FFE57C00A409D5 /* RCloudAudioEngineImpl.m */,
-			);
-			path = RCloud;
 			sourceTree = "<group>";
 		};
 		E5EDB8BA27E8737700EE99D0 /* Model */ = {
@@ -1526,7 +1440,6 @@
 				6C192E46279523B000553034 /* Resources */,
 				1057205B42502B672EE74406 /* [CP] Embed Pods Frameworks */,
 				44DF038F2796ADCD006EE6AC /* Embed Frameworks */,
-				7B794445875629A1759C23F6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1616,23 +1529,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeveloperKit/Pods-DeveloperKit-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7B794445875629A1759C23F6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DeveloperKit/Pods-DeveloperKit-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DeveloperKit/Pods-DeveloperKit-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeveloperKit/Pods-DeveloperKit-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D23D6C32901616787A057FFD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1678,7 +1574,6 @@
 				4455AD9327EAC658001516EE /* GameLoginModel.m in Sources */,
 				4455ADA427EAC658001516EE /* EnterRoomModel.m in Sources */,
 				4455AD9D27EAC658001516EE /* GameListModel.m in Sources */,
-				6CD6E87C27BF433500D8F76C /* TXAudioEngineImpl.m in Sources */,
 				4455AE0527EAC6F7001516EE /* BaseSceneViewController+Game.m in Sources */,
 				4455AD8827EAC658001516EE /* HSSettingHeaderModel.m in Sources */,
 				4455AD8927EAC658001516EE /* ChangeRTCModel.m in Sources */,
@@ -1727,7 +1622,6 @@
 				4455ADAB27EAC658001516EE /* RoomCmdUpMicModel.m in Sources */,
 				4455AE1027EAC6F7001516EE /* MicOperateView.m in Sources */,
 				4455AE1927EAC6F7001516EE /* RoomMsgBgView.m in Sources */,
-				6CD6E87627BF42F900D8F76C /* VolcAudioEngineImpl.m in Sources */,
 				6C192E5E279523B100553034 /* main.m in Sources */,
 				4455ADAF27EAC658001516EE /* RoomGiftPannelView.m in Sources */,
 				4455AE1527EAC6F7001516EE /* RoomOperatorView.m in Sources */,
@@ -1776,14 +1670,11 @@
 				4455AE1727EAC6F7001516EE /* RoomMsgTableView.m in Sources */,
 				44D9F3B0280FF6CC000B14B5 /* RoomCustomModel.m in Sources */,
 				44BC48E8281543FE00E4E3F7 /* RoomCmdOrderOperateModel.m in Sources */,
-				6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */,
 				448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */,
 				4455AD9827EAC658001516EE /* SearchHeaderView.m in Sources */,
 				6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */,
 				44D9F3A8280FB0FB000B14B5 /* GameConfigTableViewCell.m in Sources */,
-				6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */,
 				44BC48E52815433400E4E3F7 /* RoomCmdOrderCreateModel.m in Sources */,
-				E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */,
 				6C390563287AB0FF000056E1 /* DTTimer.m in Sources */,
 				4455AE0827EAC6F7001516EE /* BaseSceneViewController+IM.m in Sources */,
 				6C390554287AB0FF000056E1 /* BaseView.m in Sources */,
@@ -1797,7 +1688,6 @@
 				4452DDDE281134A9001FEEDB /* CustomRoomApiView.m in Sources */,
 				4455AD9527EAC658001516EE /* SweetPromptView.m in Sources */,
 				4455AE1827EAC6F7001516EE /* SwitchRoomModeView.m in Sources */,
-				6CD6E87927BF431500D8F76C /* AliyunAudioEngineImpl.m in Sources */,
 				E51A737828091CD00097007C /* ZIMManager.m in Sources */,
 				6C39055E287AB0FF000056E1 /* DTNSArray+Masonry.m in Sources */,
 				6C390551287AB0FF000056E1 /* DTBlurEffectView.m in Sources */,
