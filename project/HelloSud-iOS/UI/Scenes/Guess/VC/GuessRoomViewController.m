@@ -192,6 +192,8 @@
     // 如果未开启自动竞猜，展示挂件
     if (!self.openAutoBet) {
         self.guessMineView.hidden = NO;
+    } else {
+        [self showNaviAutoStateView:YES];
     }
     self.normalGuessNavView.hidden = YES;
     self.fingerImageView.hidden = YES;
