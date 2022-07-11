@@ -251,6 +251,8 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
             [self.finishedDanceMenuList insertObject:m atIndex:0];
             // 移除主播舞伴
             [self.dicDancingMap removeObjectForKey:m.fromUser.userID];
+        } else {
+            DDLogError(@"handleAnchorStopDancing, no model in dancing map,anchorID:%@", anchorID);
         }
 
         // 移除主播
