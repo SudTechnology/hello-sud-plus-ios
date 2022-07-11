@@ -123,8 +123,18 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
             // 插队
             if (m) {
                 [self.danceMenuList removeObject:m];
-                if (self.danceMenuList.count > 0) {
-                    [self.danceMenuList insertObject:m atIndex:1];
+                // 首个等待用户
+                NSInteger firstWaitingIndex = -1;
+                NSArray *arrTemp = self.danceMenuList;
+                for (int i = 0; i < arrTemp.count; ++i) {
+                    DiscoMenuModel *m = arrTemp[i];
+                    if (m.beginTime == 0) {
+                        firstWaitingIndex = i;
+                        break;
+                    }
+                }
+                if (firstWaitingIndex >= 0) {
+                    [self.danceMenuList insertObject:m atIndex:firstWaitingIndex];
                 } else {
                     [self.danceMenuList addObject:m];
                 }
