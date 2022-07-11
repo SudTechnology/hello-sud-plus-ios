@@ -421,7 +421,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
         [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
         // 结束游戏
         if ([self.sudFSMMGDecorator isPlayerIsCaptain:AppService.shared.login.loginUserInfo.userID]) {
-            [self.sudFSTAPPDecorator notifyAppComonSetEnd];
+            [self.sudFSTAPPDecorator notifyAppCommonSelfEnd];
         }
         // 延迟关闭以便上面指令执行
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (100 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{

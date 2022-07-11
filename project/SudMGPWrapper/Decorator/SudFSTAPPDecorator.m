@@ -56,7 +56,7 @@
 }
 
 /// 结束游戏
-- (void)notifyAppComonSetEnd {
+- (void)notifyAppCommonSelfEnd {
     
     [self notifyStateChange:APP_COMMON_SELF_END dataJson:@{}.mj_JSONString];
 }

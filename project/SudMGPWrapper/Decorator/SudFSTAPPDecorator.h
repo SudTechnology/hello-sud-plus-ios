@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyAppComonKickStateWithUserId:(NSString *)userId;
 
 /// 结束游戏
-- (void)notifyAppComonSetEnd;
+- (void)notifyAppCommonSelfEnd;
 
 /// 房间状态（depreated 已废弃v1.1.30.xx）
 /// @param isIn    true 在房间内，false 不在房间内
