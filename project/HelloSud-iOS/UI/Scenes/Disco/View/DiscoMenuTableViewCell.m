@@ -112,7 +112,7 @@
         self.timeLabel.paddingX = 0;
         NSInteger minute = remainSecond / 60.0;
         if (minute > 0) {
-            self.timeLabel.text = [NSString stringWithFormat:@"%@%@min", NSString.dt_room_guess_remain, @(minute)];
+            self.timeLabel.text = [NSString stringWithFormat:@"%@%@mins", NSString.dt_room_guess_remain, @(minute)];
         } else {
             self.timeLabel.text = [NSString stringWithFormat:@"%@%@s", NSString.dt_room_guess_remain, @(remainSecond)];
         }
