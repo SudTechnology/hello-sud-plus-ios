@@ -11,7 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 /// 应用ID信息
 @interface AppIDInfoModel : BaseModel
-
+@property(nonatomic, strong)NSString *app_id;
+@property(nonatomic, strong)NSString *app_key;
+@property(nonatomic, strong)NSString *app_name;
+@property(nonatomic, assign)BOOL isSelect;
 @end
 /// APP ID列表
 @interface RespAppIDListModel : BaseRespModel

@@ -15,6 +15,8 @@
 #define kKeyCurrentRTCType @"key_current_rtc_type"
 /// 配置信息缓存key
 #define kKeyConfigModel @"key_config_model"
+/// 配置信息缓存appId
+#define kAppIdInfoModel @"key_appId_model"
 
 NSString *const kRtcTypeZego = @"zego";
 NSString *const kRtcTypeAgora = @"agora";
@@ -65,8 +67,15 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     if (configStr) {
         _configModel = [ConfigModel mj_objectWithKeyValues:configStr];
     }
+    NSString *appIdInfoStr = [NSUserDefaults.standardUserDefaults stringForKey:kAppIdInfoModel];
+    if (appIdInfoStr) {
+        _currentAppIdModel = [AppIDInfoModel mj_objectWithKeyValues:configStr];
+    }
 
     [self switchRtcType:cacheRTCType];
+    [SettingsService reqAppIdListWithSuccess:^(NSArray<AppIDInfoModel *> * _Nonnull appIdList) {
+        [self updateAppIdList:appIdList];
+    } fail:nil];
 }
 
 - (void)setConfigModel:(ConfigModel *)configModel {
@@ -185,6 +194,20 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
         return [rtcConfig isSameRtc:rtcType];
     }
     return NO;
+}
+
+/// 更新应用列表
+/// @param appIdList 应用列表
+- (void)updateAppIdList:(NSArray<AppIDInfoModel *> *)appIdList {
+    self.appIdList = appIdList;
+    if (!self.currentAppIdModel && appIdList.count > 0) {
+        [self cacheAppIdInfoModel:appIdList[0]];
+    }
+}
+
+- (void)cacheAppIdInfoModel:(AppIDInfoModel *)model {
+    self.currentAppIdModel = model;
+    [NSUserDefaults.standardUserDefaults setObject:model.mj_JSONString forKey:kAppIdInfoModel];
 }
 
 /// 切换RTC语音SDK

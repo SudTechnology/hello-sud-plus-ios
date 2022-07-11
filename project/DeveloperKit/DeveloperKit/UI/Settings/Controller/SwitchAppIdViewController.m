@@ -16,7 +16,7 @@
 @property(nonatomic, strong)UITableView *tableView;
 @property(nonatomic, strong)UIView *contactUsView;
 /// 页面数据
-@property(nonatomic, strong)NSArray <SwitchLangModel *>*arrData;
+@property(nonatomic, strong)NSArray <AppIDInfoModel *>*arrData;
 @end
 
 @implementation SwitchAppIdViewController
@@ -31,9 +31,13 @@
 /// 配置页面数据
 - (void)loadData {
     WeakSelf
-    [SettingsService reqAppIdListWithSuccess:^(NSArray<AppIDInfoModel *> *appIdList) {
-        [weakSelf handleData:appIdList];
-    } fail:nil];
+    if (AppService.shared.appIdList.count > 0) {
+        [self handleData:AppService.shared.appIdList];
+    } else {
+        [SettingsService reqAppIdListWithSuccess:^(NSArray<AppIDInfoModel *> *appIdList) {
+            [weakSelf handleData:appIdList];
+        } fail:nil];
+    }
 
 
 //    NSArray <SwitchLangModel *>*dataArray = [SettingsService getLanguageArr];
@@ -89,44 +93,21 @@
 }
 
 - (void)changeLanguage:(NSIndexPath *)indexPath {
-//    SwitchLangModel *model = self.arrData[indexPath.row];
-//    if (model.isSelect) {
-//        return;
-//    }
-//    for (SwitchLangModel *model in self.arrData) {
-//        model.isSelect = NO;
-//    }
-//    model.isSelect = !model.isSelect;
-//    [self.tableView reloadData];
-//
-//    LanguageUtil.userLanguage = model.language;
-//
-//    [[AppService shared] setupNetWorkHeader];
-//
-//    //创建新的UITabbarController
-//    MainTabBarController *tabbar = [MainTabBarController new];
-//    //找到对应的nav
-////    tabbar.selectedIndex = 2;
-////    BaseNavigationViewController *nav = tabbar.selectedViewController;
-////    NSMutableArray *navVCs = nav.viewControllers.mutableCopy;
-////
-////    //添加指定vc到nav栈中
-////    SwitchLanguageViewController *vc = [SwitchLanguageViewController new];
-////    vc.hidesBottomBarWhenPushed = YES;
-////    [navVCs addObject:vc];
-//
-//    //主线程刷新UI
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [UIApplication sharedApplication].delegate.window.rootViewController = tabbar;
-////        nav.viewControllers = navVCs;
-//        [ToastUtil show:NSString.dt_room_switched_language];
-//        NSLog(@"当前语言 %@", [NSBundle currentLanguage]);
-//    });
+    AppIDInfoModel *model = self.arrData[indexPath.row];
+    if (model.isSelect) {
+        return;
+    }
+    for (AppIDInfoModel *model in self.arrData) {
+        model.isSelect = NO;
+    }
+    model.isSelect = !model.isSelect;
+    [self.tableView reloadData];
+
 }
 
 #pragma mark UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SwitchLangTableViewCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SwitchAppIdTableViewCell" forIndexPath:indexPath];
     return cell;
 }
 
@@ -138,7 +119,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    WeakSelf
     [SuspendRoomView exitRoom:^{
         [self changeLanguage:indexPath];
     }];

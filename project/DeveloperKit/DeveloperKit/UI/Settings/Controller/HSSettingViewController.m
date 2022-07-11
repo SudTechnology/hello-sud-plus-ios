@@ -38,52 +38,52 @@
 
 /// 配置页面数据
 - (void)configData {
-//    HSSettingModel *verModel = [HSSettingModel new];
-//    verModel.title = NSString.dt_settings_version_info;
-//    verModel.isMore = YES;
-//    verModel.pageURL = @"";
-//
-//    HSSettingModel *rtcModel = [HSSettingModel new];
-//    rtcModel.title = NSString.dt_settings_more_set;
-//    rtcModel.isMore = YES;
-//    rtcModel.pageURL = @"";
-
+    //    HSSettingModel *verModel = [HSSettingModel new];
+    //    verModel.title = NSString.dt_settings_version_info;
+    //    verModel.isMore = YES;
+    //    verModel.pageURL = @"";
+    //
+    //    HSSettingModel *rtcModel = [HSSettingModel new];
+    //    rtcModel.title = NSString.dt_settings_more_set;
+    //    rtcModel.isMore = YES;
+    //    rtcModel.pageURL = @"";
+    
     HSSettingModel *languageModel = [HSSettingModel new];
     languageModel.title = NSString.dt_settings_switch_language;
     languageModel.isMore = YES;
     languageModel.pageURL = @"";
-
+    
     HSSettingModel *appIdModel = [HSSettingModel new];
     appIdModel.title = AppIdTitleName;
     appIdModel.isMore = YES;
     appIdModel.pageURL = @"";
-
-
-//    HSSettingModel *gitHubModel = [HSSettingModel new];
-//    gitHubModel.title = @"GitHub";
-//    gitHubModel.subTitle = @"hello-sud";
-//    gitHubModel.isMore = YES;
-//    gitHubModel.pageURL = @"https://github.com/SudTechnology/hello-sud-ios";
-//    HSSettingModel *oProtocolModel = [HSSettingModel new];
-//    oProtocolModel.title = NSString.dt_settings_open_source;
-//    oProtocolModel.isMore = YES;
-//    oProtocolModel.pageURL = [SettingsService appLicenseURL].absoluteString;
-//    HSSettingModel *userProtocolModel = [HSSettingModel new];
-//    userProtocolModel.title = NSString.dt_settings_user_agreement;
-//    userProtocolModel.isMore = YES;
-//    userProtocolModel.pageURL = [SettingsService appProtocolURL].absoluteString;
-//    HSSettingModel *privacyModel = [HSSettingModel new];
-//    privacyModel.title = NSString.dt_settings_privacy_policy;
-//    privacyModel.isMore = YES;
-//    privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
-
-//    if (self.showMoreSetting) {
-//        self.arrData = @[@[verModel], @[languageModel, rtcModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
-//    } else {
-//        self.arrData = @[@[verModel], @[languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
-//    }
+    
+    
+    //    HSSettingModel *gitHubModel = [HSSettingModel new];
+    //    gitHubModel.title = @"GitHub";
+    //    gitHubModel.subTitle = @"hello-sud";
+    //    gitHubModel.isMore = YES;
+    //    gitHubModel.pageURL = @"https://github.com/SudTechnology/hello-sud-ios";
+    //    HSSettingModel *oProtocolModel = [HSSettingModel new];
+    //    oProtocolModel.title = NSString.dt_settings_open_source;
+    //    oProtocolModel.isMore = YES;
+    //    oProtocolModel.pageURL = [SettingsService appLicenseURL].absoluteString;
+    //    HSSettingModel *userProtocolModel = [HSSettingModel new];
+    //    userProtocolModel.title = NSString.dt_settings_user_agreement;
+    //    userProtocolModel.isMore = YES;
+    //    userProtocolModel.pageURL = [SettingsService appProtocolURL].absoluteString;
+    //    HSSettingModel *privacyModel = [HSSettingModel new];
+    //    privacyModel.title = NSString.dt_settings_privacy_policy;
+    //    privacyModel.isMore = YES;
+    //    privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
+    
+    //    if (self.showMoreSetting) {
+    //        self.arrData = @[@[verModel], @[languageModel, rtcModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+    //    } else {
+    //        self.arrData = @[@[verModel], @[languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+    //    }
     self.arrData = @[@[languageModel, appIdModel]];
-
+    
     WeakSelf
     HSSetingHeadView *header = HSSetingHeadView.new;
     header.tapCallback = ^{
@@ -109,7 +109,7 @@
     [super dtAddViews];
     self.view.backgroundColor = HEX_COLOR(@"#F5F6FB");
     [self.view addSubview:self.tableView];
-
+    
 }
 
 - (void)dtLayoutViews {
@@ -132,7 +132,7 @@
         _tableView.showsHorizontalScrollIndicator = NO;
         _tableView.showsVerticalScrollIndicator = NO;
         
-
+        
     }
     return _tableView;
 }
@@ -193,7 +193,7 @@
         } else {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.pageURL]];
         }
-    } else if ([model.title isEqualToString:AppIdTitleName){
+    } else if ([model.title isEqualToString:AppIdTitleName]){
         // 切换应用
         SwitchAppIdViewController *vc = SwitchAppIdViewController.new;
         [self.navigationController pushViewController:vc animated:YES];

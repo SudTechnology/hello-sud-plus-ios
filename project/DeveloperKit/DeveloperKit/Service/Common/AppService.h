@@ -57,6 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL alreadyShowLandscapePopAlert;
 /// 是否已经展示过横屏气泡指引提示
 @property(nonatomic, assign) BOOL alreadyShowLandscapeBubbleTip;
+/// 应用列表
+@property(nonatomic, strong) NSArray<AppIDInfoModel *>appIdList;
+/// 当前AppId信息
+@property(nonatomic, strong) AppIDInfoModel *currentAppIdModel;
 
 + (instancetype)shared;
 
@@ -98,6 +102,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param rtcType rtcType
 /// @return
 - (BOOL)isSameRtc:(HSConfigContent *)rtcConfig rtcType:(NSString *)rtcType;
+
+/// 更新应用列表
+/// @param appIdList 应用列表
+- (void)updateAppIdList:(NSArray<AppIDInfoModel *> *)appIdList;
 @end
 
 NS_ASSUME_NONNULL_END

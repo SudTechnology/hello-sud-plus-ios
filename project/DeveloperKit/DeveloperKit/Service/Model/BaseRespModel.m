@@ -14,7 +14,7 @@
 + (instancetype)decodeModel:(NSDictionary *)rootDic {
     BaseRespModel *m = nil;
     NSDictionary *data = rootDic[@"data"];
-    if (data && ![data isKindOfClass:[NSNull class]]) {
+    if (data && ![data isKindOfClass:[NSNull class]] && ![data isKindOfClass:NSArray.class]) {
         m = [[self class] mj_objectWithKeyValues:data];
     } else {
         m = [[self class] mj_objectWithKeyValues:rootDic];

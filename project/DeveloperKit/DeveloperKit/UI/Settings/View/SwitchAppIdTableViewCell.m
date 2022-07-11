@@ -60,11 +60,11 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    if (![self.model isKindOfClass:[SwitchLangModel class]]) {
+    if (![self.model isKindOfClass:[AppIDInfoModel class]]) {
         return;
     }
-    SwitchLangModel *model = (SwitchLangModel *)self.model;
-    self.titleLabel.text = model.title;
+    AppIDInfoModel *model = (AppIDInfoModel *)self.model;
+    self.titleLabel.text = model.app_name;
     self.rightImageView.hidden = model.isSelect ? NO : YES;
 }
 
