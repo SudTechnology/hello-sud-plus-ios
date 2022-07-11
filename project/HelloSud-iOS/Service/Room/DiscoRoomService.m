@@ -8,6 +8,7 @@
 
 #import "DiscoRoomService.h"
 #import "SudMGPAPPState.h"
+
 NSNotificationName const showWaitingForDancingNTF = @"showWaitingForDancingNTF";
 
 /// 元宇宙砂砂舞Action类型
@@ -135,7 +136,9 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     }
 
     if (addDuration > 0) {
-        [self checkIfNeedToDancing:m duration:addDuration fromSentGift:YES];
+        // 送礼人是自己
+        BOOL fromSentGift = [AppService.shared.login.loginUserInfo isMeByUserID:giftModel.sendUser.userID];
+        [self checkIfNeedToDancing:m duration:addDuration fromSentGift:fromSentGift];
     }
 
 }
