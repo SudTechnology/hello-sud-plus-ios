@@ -319,9 +319,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         case CMD_ROOM_DISCO_BECOME_DJ: {
             // 上DJ台
             RespDiscoBecomeDJModel *model = [RespDiscoBecomeDJModel fromJSON:command];
-            if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
-                [kDiscoRoomService upToDJ:180];
-            }
+            [self handleUpDJ:model];
         }
             break;
         default:
@@ -478,9 +476,16 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     } else if (msg.cmd == CMD_ROOM_DISCO_BECOME_DJ) {
         // 上DJ台
         RespDiscoBecomeDJModel *model = (RespDiscoBecomeDJModel *) msg;
-        if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
-            [kDiscoRoomService upToDJ:180];
-        }
+        [self handleUpDJ:model];
+    }
+}
+
+/// 处理上DJ
+- (void)handleUpDJ:(RespDiscoBecomeDJModel *)model {
+    if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
+        [kDiscoRoomService upToDJ:180];
+        // 3秒特写
+        [kDiscoRoomService specialRole:3 isTop:false];
     }
 }
 
