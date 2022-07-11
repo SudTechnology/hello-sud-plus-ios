@@ -233,12 +233,15 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 - (void)handleAnchorStopDancing:(NSString *)anchorID {
     if (anchorID) {
         DiscoMenuModel *m = self.dicDancingMap[anchorID];
-        [self.danceMenuList removeObject:m];
-        [self.finishedDanceMenuList insertObject:m atIndex:0];
+        if (m) {
+            [self.danceMenuList removeObject:m];
+            [self.finishedDanceMenuList insertObject:m atIndex:0];
+            // 移除主播舞伴
+            [self.dicDancingMap removeObjectForKey:m.fromUser.userID];
+        }
+
         // 移除主播
         [self.dicDancingMap removeObjectForKey:anchorID];
-        // 移除主播舞伴
-        [self.dicDancingMap removeObjectForKey:m.fromUser.userID];
         [self checkIfNeedToDancing];
     }
 }

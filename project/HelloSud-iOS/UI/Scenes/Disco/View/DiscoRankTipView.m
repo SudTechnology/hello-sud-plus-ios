@@ -62,6 +62,7 @@
     self.countdown = 4;
     self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
         weakSelf.countdown--;
+        DDLogDebug(@"disco rank tip countdown:%@", @(weakSelf.countdown));
         if (weakSelf.countdown <= 0) {
             [weakSelf endCountdown];
             if (finished) finished();
@@ -75,6 +76,7 @@
 }
 
 - (void)show:(void(^)(void))finished {
+    DDLogDebug(@"disco rank tip show");
     [self beginCountdown:finished];
 }
 
