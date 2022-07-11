@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = NSString.dt_settings_switch_language;
+    self.title = @"切换应用";
     [self loadData];
 }
 
@@ -39,25 +39,17 @@
         } fail:nil];
     }
 
-
-//    NSArray <SwitchLangModel *>*dataArray = [SettingsService getLanguageArr];
-//
-//    BOOL isNotSupportLanguage = [SettingsService isNotSupportLanguage];
-//    if (LanguageUtil.userLanguage.length > 0) {
-//        NSString *str = [[NSBundle currentLanguage] languageCountryCode];
-//        for (NSInteger i = 0; i < dataArray.count; i++) {
-//            SwitchLangModel *model = dataArray[i];
-//            if (isNotSupportLanguage) {
-//                model.isSelect = i == 0;
-//            } else {
-//                model.isSelect = [model.language isEqualToString:str];
-//            }
-//        }
-//    }
-
 }
 
 - (void)handleData:(NSArray<AppIDInfoModel *> *)appIdList {
+    
+    AppIDInfoModel *currentModel = AppService.shared.currentAppIdModel;
+    for (AppIDInfoModel *m in appIdList) {
+        if ([currentModel.app_id isEqual:m.app_id]) {
+            m.isSelect = YES;
+            break;
+        }
+    }
     self.arrData = appIdList;
     [self.tableView reloadData];
 }
@@ -92,7 +84,7 @@
     return _tableView;
 }
 
-- (void)changeLanguage:(NSIndexPath *)indexPath {
+- (void)changeSelectedModel:(NSIndexPath *)indexPath {
     AppIDInfoModel *model = self.arrData[indexPath.row];
     if (model.isSelect) {
         return;
@@ -101,7 +93,9 @@
         model.isSelect = NO;
     }
     model.isSelect = !model.isSelect;
+    [AppService.shared cacheAppIdInfoModel:model];
     [self.tableView reloadData];
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 
@@ -120,7 +114,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [SuspendRoomView exitRoom:^{
-        [self changeLanguage:indexPath];
+        [self changeSelectedModel:indexPath];
     }];
 }
 

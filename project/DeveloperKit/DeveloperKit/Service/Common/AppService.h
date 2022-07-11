@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否已经展示过横屏气泡指引提示
 @property(nonatomic, assign) BOOL alreadyShowLandscapeBubbleTip;
 /// 应用列表
-@property(nonatomic, strong) NSArray<AppIDInfoModel *>appIdList;
+@property(nonatomic, strong) NSArray<AppIDInfoModel *> *appIdList;
 /// 当前AppId信息
 @property(nonatomic, strong) AppIDInfoModel *currentAppIdModel;
 
@@ -106,6 +106,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 更新应用列表
 /// @param appIdList 应用列表
 - (void)updateAppIdList:(NSArray<AppIDInfoModel *> *)appIdList;
+
+/// 缓存选中指定AppIdInfoModel
+/// @param model <#model description#>
+- (void)cacheAppIdInfoModel:(AppIDInfoModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

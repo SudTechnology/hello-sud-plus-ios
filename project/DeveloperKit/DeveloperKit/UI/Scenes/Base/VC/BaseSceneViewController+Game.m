@@ -255,8 +255,8 @@
 /// 接入方客户端 调用 接入方服务端 loginGame: 获取 短期令牌code
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
 - (void)loginGame {
-    NSString *appID = AppService.shared.configModel.sudCfg.appId;
-    NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
+    NSString *appID = AppService.shared.currentAppIdModel.app_id; //AppService.shared.configModel.sudCfg.appId;
+    NSString *appKey = AppService.shared.currentAppIdModel.app_name;//AppService.shared.configModel.sudCfg.appKey;
     if (appID.length == 0 || appKey.length == 0) {
         [ToastUtil show:@"Game appID or appKey is empty"];
         return;

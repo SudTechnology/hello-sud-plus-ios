@@ -69,7 +69,7 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     }
     NSString *appIdInfoStr = [NSUserDefaults.standardUserDefaults stringForKey:kAppIdInfoModel];
     if (appIdInfoStr) {
-        _currentAppIdModel = [AppIDInfoModel mj_objectWithKeyValues:configStr];
+        _currentAppIdModel = [AppIDInfoModel mj_objectWithKeyValues:appIdInfoStr];
     }
 
     [self switchRtcType:cacheRTCType];
