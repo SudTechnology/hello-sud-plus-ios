@@ -33,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)setRoomCustomModel:(RoomCustomModel *)model;
 + (RoomCustomModel *)roomCustomModel;
+/// 获取appid应用列表
++ (void)reqAppIdListWithSuccess:(void (^)(NSArray <AppIDInfoModel *> *appIdList))success fail:(nullable ErrorBlock)fail;
 @end
 
 NS_ASSUME_NONNULL_END

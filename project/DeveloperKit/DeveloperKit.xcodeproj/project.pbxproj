@@ -166,6 +166,9 @@
 		6CCA0B20287AC15400CAFF40 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B1D287AC15400CAFF40 /* QSGameItemModel.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
 		6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85627BE37D600D8F76C /* SettingsService.m */; };
+		6CD7260E287BCEAF004D02F9 /* RespAppIDListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7260D287BCEAF004D02F9 /* RespAppIDListModel.m */; };
+		6CD72611287BD652004D02F9 /* SwitchAppIdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD72610287BD652004D02F9 /* SwitchAppIdViewController.m */; };
+		6CD72614287BD65D004D02F9 /* SwitchAppIdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD72612287BD65D004D02F9 /* SwitchAppIdTableViewCell.m */; };
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
 		B4D36843752B458B8E1B7051 /* Pods_DeveloperKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407A021D22DFBF6FB45F629D /* Pods_DeveloperKit.framework */; };
 		BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */; };
@@ -557,6 +560,12 @@
 		6CD6E85527BE37D600D8F76C /* SettingsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsService.h; sourceTree = "<group>"; };
 		6CD6E85627BE37D600D8F76C /* SettingsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsService.m; sourceTree = "<group>"; };
 		6CD6E87D27C0A36100D8F76C /* ServiceConstHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceConstHeader.h; sourceTree = "<group>"; };
+		6CD7260C287BCEAF004D02F9 /* RespAppIDListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespAppIDListModel.h; sourceTree = "<group>"; };
+		6CD7260D287BCEAF004D02F9 /* RespAppIDListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespAppIDListModel.m; sourceTree = "<group>"; };
+		6CD7260F287BD652004D02F9 /* SwitchAppIdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchAppIdViewController.h; sourceTree = "<group>"; };
+		6CD72610287BD652004D02F9 /* SwitchAppIdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchAppIdViewController.m; sourceTree = "<group>"; };
+		6CD72612287BD65D004D02F9 /* SwitchAppIdTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchAppIdTableViewCell.m; sourceTree = "<group>"; };
+		6CD72613287BD65D004D02F9 /* SwitchAppIdTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchAppIdTableViewCell.h; sourceTree = "<group>"; };
 		6CEF766627F5A22000A12220 /* MoreSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreSettingViewController.h; sourceTree = "<group>"; };
 		6CEF766727F5A22000A12220 /* MoreSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSettingViewController.m; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -634,6 +643,8 @@
 		4455ACBF27EAC657001516EE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6CD7260F287BD652004D02F9 /* SwitchAppIdViewController.h */,
+				6CD72610287BD652004D02F9 /* SwitchAppIdViewController.m */,
 				6CEF766627F5A22000A12220 /* MoreSettingViewController.h */,
 				6CEF766727F5A22000A12220 /* MoreSettingViewController.m */,
 				4455ACC427EAC657001516EE /* HSSettingViewController.h */,
@@ -668,6 +679,8 @@
 		4455ACCF27EAC657001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6CD72613287BD65D004D02F9 /* SwitchAppIdTableViewCell.h */,
+				6CD72612287BD65D004D02F9 /* SwitchAppIdTableViewCell.m */,
 				4455ACD627EAC657001516EE /* VersionInfoCell.h */,
 				4455ACD027EAC657001516EE /* VersionInfoCell.m */,
 				4455ACD727EAC657001516EE /* HSSettingCell.h */,
@@ -1135,6 +1148,8 @@
 				BC210739F0C0EA7E87C2CC3B /* RespModel.h */,
 				6C46082128630CD6005C99EF /* RespGiftListModel.h */,
 				6C46082228630CD6005C99EF /* RespGiftListModel.m */,
+				6CD7260C287BCEAF004D02F9 /* RespAppIDListModel.h */,
+				6CD7260D287BCEAF004D02F9 /* RespAppIDListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1696,6 +1711,7 @@
 				44241ADB27EACF39001EE125 /* SwitchLanguageViewController.m in Sources */,
 				6C076EB6279FF3FF00650209 /* GiftModel.m in Sources */,
 				6CCA0B15287AC14700CAFF40 /* QSSwitchRoomCell.m in Sources */,
+				6CD72614287BD65D004D02F9 /* SwitchAppIdTableViewCell.m in Sources */,
 				4455AD8727EAC658001516EE /* VersionInfoModel.m in Sources */,
 				6C076EA6279F98AA00650209 /* AppService.m in Sources */,
 				6C390555287AB0FF000056E1 /* BaseViewController.m in Sources */,
@@ -1763,6 +1779,7 @@
 				4455ADAC27EAC658001516EE /* AudioMsgSystemModel.m in Sources */,
 				6C076EAA279F993900650209 /* AccountUserModel.m in Sources */,
 				6C390550287AB0FF000056E1 /* DTSlider.m in Sources */,
+				6CD7260E287BCEAF004D02F9 /* RespAppIDListModel.m in Sources */,
 				6C39055C287AB0FF000056E1 /* NSString+DTNSString.m in Sources */,
 				445EAB3627A1330D000DCC72 /* BaseRespModel.m in Sources */,
 				6CCA0B13287AC14700CAFF40 /* QSRoomOperatorView.m in Sources */,
@@ -1771,6 +1788,7 @@
 				4455AD9727EAC658001516EE /* HomeViewController.m in Sources */,
 				4455AE0F27EAC6F7001516EE /* RoomGiftTableViewCell.m in Sources */,
 				E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */,
+				6CD72611287BD652004D02F9 /* SwitchAppIdViewController.m in Sources */,
 				6C076EBC27A01BC000650209 /* AudioRoomService.m in Sources */,
 				6C39055A287AB0FF000056E1 /* BaseCollectionReusableView.m in Sources */,
 				6C390565287AB0FF000056E1 /* DeviceUtil.m in Sources */,

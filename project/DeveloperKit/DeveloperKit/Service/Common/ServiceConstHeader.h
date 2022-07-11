@@ -24,4 +24,5 @@
 #define kINTERACTURL(url) [NSString stringWithFormat:@"%@/%@",InteractURL, url]
 #define kGameURL(url) [NSString stringWithFormat:@"%@/%@",GameURL, url]
 
+#define kMGPURL(path) [NSString stringWithFormat:@"https://mgp-hello.sudden.ltd/%@", path]
 #endif /* ServiceConstHeader_h */

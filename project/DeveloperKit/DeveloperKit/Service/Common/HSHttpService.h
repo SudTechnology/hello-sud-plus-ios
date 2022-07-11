@@ -23,6 +23,19 @@
             showErrorToast:(BOOL)showErrorToast
                    success:(void (^)(BaseRespModel *resp))success
                    failure:(void (^)(NSError *error))failure;
+/// get 请求接口
+/// @param api
+/// @param param
+/// @param respCls
+/// @param showErrorToast
+/// @param success
+/// @param failure
++ (void)getRequestWithURL:(NSString *)api
+                    param:(NSDictionary *)param
+                respClass:(Class)respCls
+           showErrorToast:(BOOL)showErrorToast
+                  success:(void (^)(BaseRespModel *resp))success
+                  failure:(void (^)(NSError *error))failure;
 
 /// 设置请求头
 + (void)setupHeader:(NSDictionary *)dic;

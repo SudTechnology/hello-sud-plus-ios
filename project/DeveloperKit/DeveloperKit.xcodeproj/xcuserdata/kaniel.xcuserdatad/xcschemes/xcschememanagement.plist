@@ -7,17 +7,12 @@
 		<key>DeveloperKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
-		<key>DeveloperKit.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>36</integer>
+			<integer>24</integer>
 		</dict>
 		<key>QuickStart.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>35</integer>
+			<integer>25</integer>
 		</dict>
 	</dict>
 </dict>

@@ -17,7 +17,7 @@
     if (data && ![data isKindOfClass:[NSNull class]]) {
         m = [[self class] mj_objectWithKeyValues:data];
     } else {
-        m = [self class].new;
+        m = [[self class] mj_objectWithKeyValues:rootDic];
     }
     m.retMsg = rootDic[@"retMsg"];
     m.retCode = [rootDic[@"retCode"] integerValue];

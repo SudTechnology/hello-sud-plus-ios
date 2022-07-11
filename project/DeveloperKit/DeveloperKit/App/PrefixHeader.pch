@@ -66,6 +66,7 @@
 #import "RespModel.h"
 #import "RespGiftListModel.h"
 #import "SceneFactory.h"
+#import "RespAppIDListModel.h"
 
 #import "AppService.h"
 #import "UserService.h"
