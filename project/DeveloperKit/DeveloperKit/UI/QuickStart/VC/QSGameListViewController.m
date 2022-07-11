@@ -99,9 +99,19 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     QSGameItemModel *model = self.dataList[indexPath.row];
-    QuickStartViewController *vc = [[QuickStartViewController alloc]init];
-    vc.gameId = model.gameId;
-    [self.navigationController pushViewController:vc animated:YES];
+//    QuickStartViewController *vc = [[QuickStartViewController alloc]init];
+//    vc.gameId = model.gameId;
+//
+    AudioSceneConfigModel *config = [[AudioSceneConfigModel alloc] init];
+    config.gameId = model.gameId;
+    config.roomID = @"10000";//[NSString stringWithFormat:@"%ld", model.roomId];
+    config.roomNumber = @"10000";//[NSString stringWithFormat:@"%ld", model.roomNumber];
+    config.roomType = model.gameId == 0 ? HSAudio : HSGame;
+    config.roomName = @"custom";//model.roomName;
+    config.roleType = 0;//model.roleType;
+    config.enterRoomModel = [[EnterRoomModel alloc]init];
+    BaseSceneViewController *vc = [SceneFactory createSceneVC:SceneTypeCustom configModel:config];
+    [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
 }
 
 // 设置Header的尺寸
