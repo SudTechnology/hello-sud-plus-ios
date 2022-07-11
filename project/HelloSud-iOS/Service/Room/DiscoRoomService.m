@@ -178,6 +178,8 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
             // 发送者是自己，执行与主播跳舞指令
             [self danceWithAnchor:m.duration isTop:NO field1:m.toUser.userID];
+            // 3秒特写
+            [self specialRole:3 isTop:NO];
         }
     } else {
         // 已经在跳，如果是与自己在跳，则通知游戏继续跳

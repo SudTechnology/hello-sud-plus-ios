@@ -484,8 +484,6 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 - (void)handleUpDJ:(RespDiscoBecomeDJModel *)model {
     if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
         [kDiscoRoomService upToDJ:180];
-        // 3秒特写
-        [kDiscoRoomService specialRole:3 isTop:false];
     }
 }
 
