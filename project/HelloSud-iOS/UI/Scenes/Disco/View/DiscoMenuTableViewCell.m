@@ -18,6 +18,15 @@
 
 @implementation DiscoMenuTableViewCell
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    if (![self.model isKindOfClass:DiscoMenuModel.class]) {
+        return;
+    }
+    DiscoMenuModel *m = (DiscoMenuModel *) self.model;
+    m.updateDancingDurationBlock = nil;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
