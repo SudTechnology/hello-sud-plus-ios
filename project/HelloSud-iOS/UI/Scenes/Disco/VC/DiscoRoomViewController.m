@@ -36,6 +36,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 @property(nonatomic, assign) BOOL isTipOpened;
 @property(nonatomic, assign) NSInteger djCountdown;
 @property(nonatomic, assign) DTTimer *djRandTimer;
+@property (nonatomic, assign)BOOL loadedRobotList;
 @end
 
 @implementation DiscoRoomViewController
@@ -177,7 +178,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     self.djRandTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
         [weakSelf handleDJTimerCallback];
     }];
-    self.gameNumLabel.alpha = YES;
+    self.gameNumLabel.alpha = 0;
 }
 
 - (void)onTipLabelTap:(id)tap {
@@ -301,6 +302,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         DDLogDebug(@"you not the room owner, don't need load robot");
         return;
     }
+    if (self.loadedRobotList) {
+        DDLogDebug(@"had loaded robot list");
+        return;
+    }
     WeakSelf
     [DiscoRoomService reqRobotListWithFinished:^(NSArray<RotbotInfoModel *> *robotList) {
         [weakSelf handleRobotUpMic:robotList];
@@ -313,6 +318,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// 处理机器人上麦逻辑
 - (void)handleRobotUpMic:(NSArray<RotbotInfoModel *> *)robotList {
 
+    self.loadedRobotList = YES;
     NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
     for (int i = 0; i < robotList.count; ++i) {
         RotbotInfoModel *robotModel = robotList[i];

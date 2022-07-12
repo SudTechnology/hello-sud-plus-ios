@@ -178,6 +178,7 @@
             upMicModel.roleType = self.roleType;
             upMicModel.streamID = model.streamId;
             if (proxyUser) {
+                upMicModel.roleType = 0;
                 upMicModel.sendUser = proxyUser;
             }
             [weakSelf.currentRoomVC sendMsg:upMicModel isAddToShow:NO finished:nil];

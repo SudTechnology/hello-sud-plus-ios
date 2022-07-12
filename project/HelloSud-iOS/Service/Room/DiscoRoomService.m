@@ -354,6 +354,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// @param field1 0-0号主播位；1-1号主播位；2-2号主播位；3-3号主播位；4-4号主播位；5-5号主播位；6-6号主播位；7-7号主播位；-1-随机，默认随机
 /// @param field2 机器人id
 - (void)joinAnchorField1:(NSString *)field1 field2:(NSString *)field2 {
+    DDLogDebug(@"joinAnchorField2:%@", field2);
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeJoinAnchorPosition;
     m.field1 = field1;
