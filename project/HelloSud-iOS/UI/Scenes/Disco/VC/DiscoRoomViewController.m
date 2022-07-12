@@ -466,7 +466,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
         [self handleMsgContent:m.content];
     } else if ([msg isKindOfClass:RoomCmdUpMicModel.class] && msg.cmd == CMD_UP_MIC_NOTIFY) {
-        [kDiscoRoomService joinAnchorPosition:nil];
+        if ([self checkIfCanJoin]) {
+            [kDiscoRoomService joinAnchorPosition:nil];
+        }
     } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
         [self handleGiftMsg:m];
@@ -543,7 +545,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     if ([discoKeyWordsJoinWork isEqualToString:content]) {
         // 加入主播位
         if ([self isInMic]) {
-            [kDiscoRoomService joinAnchorPosition:nil];
+            if ([self checkIfCanJoin]) {
+                [kDiscoRoomService joinAnchorPosition:nil];
+            }
         }
     } else if ([discoKeyWordsMove isEqualToString:content]) {
         // 移动
@@ -564,6 +568,29 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         }
     }
 
+}
+
+/// 检测是否满足主播位，不满足则提示错误
+/// @return
+- (BOOL)checkIfCanJoin {
+    if (self.currentMicCount >= 8) {
+        [ToastUtil show:@"最多同时8个主播上台"];
+        return NO;
+    }
+    return YES;
+}
+
+/// 当前麦位总数
+/// @return
+- (NSInteger)currentMicCount {
+    NSInteger count = 0;
+    NSArray *micArr = self.dicMicModel.allValues;
+    for (AudioRoomMicModel *m in micArr) {
+        if (m.user) {
+            count++;
+        }
+    }
+    return count;
 }
 
 - (void)updateTipLabel {

@@ -265,6 +265,7 @@
         [self.rippleView stopAnimate:YES];
         [self hiddenGameNode:true];
         [self updateGameUI];
+        [self showUserName:@"" showOwner:false];
         return;
     }
     if (self.model.user.icon) {
