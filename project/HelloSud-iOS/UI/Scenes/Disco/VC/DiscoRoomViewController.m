@@ -129,7 +129,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.gameMicContentView.mas_bottom).offset(20);
+        make.top.equalTo(self.gameMicContentView.mas_bottom).offset(15);
         make.leading.equalTo(@16);
         make.trailing.equalTo(@-16);
         make.height.equalTo(@24);
@@ -177,6 +177,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     self.djRandTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
         [weakSelf handleDJTimerCallback];
     }];
+    self.gameNumLabel.alpha = YES;
 }
 
 - (void)onTipLabelTap:(id)tap {
@@ -641,7 +642,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// 检测是否满足主播位，不满足则提示错误
 /// @return
 - (BOOL)checkIfCanJoin {
-    if (self.currentMicCount >= 8) {
+    if (self.currentMicCount > 8) {
         [ToastUtil show:@"最多同时8个主播上台"];
         return NO;
     }
