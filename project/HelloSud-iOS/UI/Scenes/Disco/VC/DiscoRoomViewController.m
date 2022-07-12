@@ -577,7 +577,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
             [kDiscoRoomService showMsgPop:3 field1:content];
             // 特写镜头
-            [kDiscoRoomService specialRole:3 isTop:YES];
+            [kDiscoRoomService specialRole:3 isTop:NO];
         }
             break;
         case 3: {
@@ -585,7 +585,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
             [kDiscoRoomService showMsgPop:6 field1:content];
             // 特写镜头
-            [kDiscoRoomService specialRole:3 isTop:YES];
+            [kDiscoRoomService specialRole:3 isTop:NO];
             // 角色放大
             [kDiscoRoomService scaleBiggerRole:30 field1:@"2"];
         }
@@ -595,7 +595,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
             [kDiscoRoomService showMsgPop:9 field1:content];
             // 特写镜头
-            [kDiscoRoomService specialRole:5 isTop:YES];
+            [kDiscoRoomService specialRole:5 isTop:NO];
             // 角色特效
             [kDiscoRoomService switchEffectRole:2 * 60 * 60 field1:nil];
             // 角色放大
