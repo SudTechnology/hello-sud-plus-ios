@@ -98,7 +98,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 设置游戏上报信息扩展参数（透传）
 /// @param reportGameInfoExtras   string类型，Https服务回调report_game_info参数，最大长度1024字节，超过则截断（2022-01-21）
-- (void)notifyAppComonReportGameInfoExtras:(NSString *)reportGameInfoExtras;
+- (void)notifyAppCommonReportGameInfoExtras:(NSString *)reportGameInfoExtras;
+
+/// 设置游戏中的AI玩家（2022-05-11新增） APP_COMMON_GAME_ADD_AI_PLAYERS
+/// @param appCommonGameAddAiPlayersModel  配置信息
+- (void)notifyAppCommonGameAddAIPlayers:(AppCommonGameAddAIPlayersModel *)appCommonGameAddAiPlayersModel;
 
 /// 元宇宙砂砂舞相关设置(app_common_game_disco_action)
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html

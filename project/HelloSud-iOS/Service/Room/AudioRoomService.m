@@ -159,31 +159,41 @@
 }
 
 
-
 /// 用户上麦或下麦
 /// @param roomId 房间ID
 /// @param micIndex 麦位索引
 /// @param handleType 0：上麦 1: 下麦
-- (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
+/// @param proxyUser 代理上麦用户
+- (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType proxyUser:(AudioUserModel *)proxyUser success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
-    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} respClass:SwitchMicModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
-        SwitchMicModel *model = (SwitchMicModel *)resp;
+    NSMutableDictionary *dicParam = [[NSMutableDictionary alloc] initWithDictionary:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)}];
+    if (proxyUser) {
+        dicParam[@"userId"] = @(proxyUser.userID.integerValue);
+    }
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/switch-mic/v1") param:dicParam respClass:SwitchMicModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        SwitchMicModel *model = (SwitchMicModel *) resp;
         if (handleType == 0) {
             RoomCmdUpMicModel *upMicModel = [RoomCmdUpMicModel makeUpMicMsgWithMicIndex:micIndex];
             weakSelf.micIndex = micIndex;
             upMicModel.roleType = self.roleType;
             upMicModel.streamID = model.streamId;
+            if (proxyUser) {
+                upMicModel.sendUser = proxyUser;
+            }
             [weakSelf.currentRoomVC sendMsg:upMicModel isAddToShow:NO finished:nil];
         } else {
             weakSelf.micIndex = -1;
             RoomCmdUpMicModel *downMicModel = [RoomCmdUpMicModel makeDownMicMsgWithMicIndex:micIndex];
             downMicModel.streamID = nil;
+            if (proxyUser) {
+                downMicModel.sendUser = proxyUser;
+            }
             [weakSelf.currentRoomVC sendMsg:downMicModel isAddToShow:NO finished:nil];
         }
         if (success) {
             success();
         }
-    } failure:fail];
+    }                         failure:fail];
 }
 
 /// 查询房间麦位列表

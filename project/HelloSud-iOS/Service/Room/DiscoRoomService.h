@@ -60,8 +60,9 @@ FOUNDATION_EXPORT NSNotificationName const showWaitingForDancingNTF;
 - (void)leaveDancePool;
 
 /// 加入主播位
-/// @param position 0-0号主播位；1-1号主播位；2-2号主播位；3-3号主播位；4-4号主播位；5-5号主播位；6-6号主播位；7-7号主播位；-1-随机，默认随机
-- (void)joinAnchorPosition:(NSString *)position;
+/// @param field1 0-0号主播位；1-1号主播位；2-2号主播位；3-3号主播位；4-4号主播位；5-5号主播位；6-6号主播位；7-7号主播位；-1-随机，默认随机
+/// @param field2 机器人id
+- (void)joinAnchorField1:(NSString *)field1 field2:(NSString *)field2;
 
 /// 离开主播位
 /// @param playerId playerId（离开主播位的玩家id），默认自己离开，如果该玩家本来就不在主播位则没有任何效果
@@ -111,6 +112,12 @@ FOUNDATION_EXPORT NSNotificationName const showWaitingForDancingNTF;
 /// 上DJ台
 /// @param cooldown 上DJ台的持续时间，单位秒（-1为永久）默认180秒
 - (void)upToDJ:(int)cooldown;
+
+#pragma mark restful api
+/// 拉取机器人
+/// @param finished finished
+/// @param failure failure
++ (void)reqRobotListWithFinished:(void (^)(NSArray<RotbotInfoModel *> *robotList))finished failure:(void (^)(NSError *error))failure;
 @end
 
 NS_ASSUME_NONNULL_END
