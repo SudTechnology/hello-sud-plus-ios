@@ -129,7 +129,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.gameMicContentView.mas_bottom).offset(15);
+        make.top.equalTo(self.gameMicContentView.mas_bottom).offset(20);
         make.leading.equalTo(@16);
         make.trailing.equalTo(@-16);
         make.height.equalTo(@24);
