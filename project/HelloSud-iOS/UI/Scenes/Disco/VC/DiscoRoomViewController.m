@@ -371,6 +371,8 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     [HSThreadUtils dispatchMainAfter:1 callback:^{
         [self loadRobotList];
         [kDiscoRoomService joinDancePool:nil];
+        // 单对多模式
+        [kDiscoRoomService setDanceMode:@"1"];
     }];
 }
 

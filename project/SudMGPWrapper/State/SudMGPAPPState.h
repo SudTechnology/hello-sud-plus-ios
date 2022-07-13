@@ -44,6 +44,8 @@ static NSString *APP_COMMON_GAME_INFO_EXTRAS = @"app_common_report_game_info_ext
 static NSString *APP_COMMON_GAME_ADD_AI_PLAYERS = @"app_common_game_add_ai_players";
 /// 元宇宙砂砂舞相关设置
 static NSString *APP_COMMON_GAME_DISCO_ACTION = @"app_common_game_disco_action";
+//app_common_game_setting_select_info
+//app_common_game_reconnect
 
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html

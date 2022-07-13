@@ -60,6 +60,10 @@ FOUNDATION_EXPORT NSNotificationName const dancingListChangedNTF;
 /// 离开舞池
 - (void)leaveDancePool;
 
+/// 跳舞模式
+/// @param field1 field1:0-单对单（单个玩家只能和单个主播跳舞）；1-单对多（单个玩家可以和多个主播跳舞）默认0）
+- (void)setDanceMode:(NSString *)field1;
+
 /// 加入主播位
 /// @param field1 0-0号主播位；1-1号主播位；2-2号主播位；3-3号主播位；4-4号主播位；5-5号主播位；6-6号主播位；7-7号主播位；-1-随机，默认随机
 /// @param field2 机器人id
