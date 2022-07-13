@@ -88,6 +88,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     if ([giftModel.sendUser.userID isEqualToString:giftModel.toUser.userID]) {
         return;
     }
+    BOOL refresh = NO;
     DiscoMenuModel *m = [self findSameSendAndRecvUser:giftModel];
     NSInteger addDuration = 0;
     switch (giftModel.giftID) {
@@ -103,6 +104,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
                 m.toUser = giftModel.toUser;
                 [self.danceMenuList addObject:m];
             }
+            refresh = YES;
         }
             break;
         case 6: {
@@ -118,6 +120,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
                 m.toUser = giftModel.toUser;
                 [self.danceMenuList addObject:m];
             }
+            refresh = YES;
         }
             break;
         case 7: {
@@ -140,6 +143,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
                 } else {
                     [self.danceMenuList addObject:m];
                 }
+                refresh = YES;
             }
         }
             break;
@@ -152,7 +156,9 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         BOOL fromSentGift = [AppService.shared.login.loginUserInfo isMeByUserID:giftModel.sendUser.userID];
         [self checkIfNeedToDancing:m duration:addDuration fromSentGift:fromSentGift];
     }
-
+    if (refresh){
+        [[NSNotificationCenter defaultCenter] postNotificationName:dancingListChangedNTF object:nil];
+    }
 }
 
 - (void)checkIfNeedToDancing:(DiscoMenuModel *)m duration:(NSInteger)addDuration fromSentGift:(BOOL)fromSentGift {
