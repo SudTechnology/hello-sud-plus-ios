@@ -118,6 +118,7 @@
     if (normalArr.count > 0 || finishedArr.count > 0) {
         [self.dataList setArray:@[normalArr, finishedArr]];
     }
+    self.noDataLabel.hidden = self.dataList.count > 0;
     [self.tableView reloadData];
 }
 
