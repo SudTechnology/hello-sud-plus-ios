@@ -196,10 +196,10 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
             // 用户加入舞池
             self.dicDancingMap[m.toUser.userID] = m;
             self.dicDancingMap[m.fromUser.userID] = m;
-            if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
-                // 发送者是自己，执行与主播跳舞指令
-                [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
-            }
+//            if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
+//                // 发送者是自己，执行与主播跳舞指令
+//                [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
+//            }
         }
     }
 }

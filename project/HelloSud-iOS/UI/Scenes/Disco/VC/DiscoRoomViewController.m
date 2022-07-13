@@ -364,7 +364,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 #pragma game
 
-/// 处理游戏开始
+/// 处理游戏开始d
 - (void)handleGameStared {
     [super handleGameStared];
     // 延迟1秒加入舞池，目前游戏直接加入有问题，待游戏解决
