@@ -10,6 +10,8 @@
 #import "SudMGPAPPState.h"
 
 NSNotificationName const showWaitingForDancingNTF = @"showWaitingForDancingNTF";
+/// 跳舞列表更新
+NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
 
 /// 元宇宙砂砂舞Action类型
 typedef NS_ENUM(NSInteger, DiscoActionType) {
@@ -208,6 +210,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     }
 
     [self checkIfNeedToDancing:model duration:model.duration fromSentGift:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:dancingListChangedNTF object:nil];
 }
 
 /// 增数据
@@ -260,6 +263,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         // 移除主播
         [self.dicDancingMap removeObjectForKey:anchorID];
         [self checkIfNeedToDancing];
+        [[NSNotificationCenter defaultCenter] postNotificationName:dancingListChangedNTF object:nil];
     }
 }
 

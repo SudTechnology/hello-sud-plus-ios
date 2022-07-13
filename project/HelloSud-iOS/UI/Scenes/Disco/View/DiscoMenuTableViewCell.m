@@ -23,8 +23,6 @@
     if (![self.model isKindOfClass:DiscoMenuModel.class]) {
         return;
     }
-    DiscoMenuModel *m = (DiscoMenuModel *) self.model;
-    m.updateDancingDurationBlock = nil;
 }
 
 - (void)awakeFromNib {
@@ -78,7 +76,12 @@
     }
     WeakSelf
     DiscoMenuModel *m = (DiscoMenuModel *) self.model;
+    DDLogDebug(@"celll dtUpdateUI from user:%@, cell:%@", m.fromUser.name, self);
+    __weak DiscoMenuModel *weakModel = m;
     m.updateDancingDurationBlock = ^(NSInteger second) {
+        if (weakModel != weakSelf.model){
+            return;
+        }
         [weakSelf updateRemainTime:second];
         if (second <= 0 && weakSelf.danceFinishedBlock) {
             weakSelf.danceFinishedBlock();

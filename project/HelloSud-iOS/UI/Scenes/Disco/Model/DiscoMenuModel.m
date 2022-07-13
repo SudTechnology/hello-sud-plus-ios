@@ -36,6 +36,7 @@
 
 /// 开始跳舞
 - (void)beginDancing {
+    DDLogDebug(@"beginDancing, from user:%@", self.fromUser.name);
     if (self.danceTimer) {
         return;
     }
@@ -50,6 +51,7 @@
 
 - (void)handleTimerCallback {
     NSInteger remainSecond = self.duration - (NSInteger) ([NSDate date].timeIntervalSince1970 - self.beginTime);
+    DDLogDebug(@"handleTimerCallback, from user:%@, remainSecond:%@", self.fromUser.name, @(remainSecond));
     if (remainSecond <= 0) {
         [self.danceTimer stopTimer];
         self.danceTimer = nil;

@@ -13,7 +13,8 @@
 NS_ASSUME_NONNULL_BEGIN
 /// 展示等待跳舞通知
 FOUNDATION_EXPORT NSNotificationName const showWaitingForDancingNTF;
-
+/// 跳舞列表更新
+FOUNDATION_EXPORT NSNotificationName const dancingListChangedNTF;
 /// 蹦迪服务
 @interface DiscoRoomService : AudioRoomService
 /// 跳舞单

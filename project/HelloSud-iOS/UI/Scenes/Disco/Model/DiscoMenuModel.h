@@ -7,7 +7,6 @@
 //
 
 #import "BaseModel.h"
-
 NS_ASSUME_NONNULL_BEGIN
 /// 蹦迪菜单数据model
 @interface DiscoMenuModel : BaseModel
