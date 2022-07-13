@@ -648,10 +648,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// 检测是否满足主播位，不满足则提示错误
 /// @return
 - (BOOL)checkIfCanJoin {
-    if (self.currentMicCount > 8) {
-        [ToastUtil show:@"最多同时8个主播上台"];
-        return NO;
-    }
+//    if (self.currentMicCount > 8) {
+//        [ToastUtil show:@"最多同时8个主播上台"];
+//        return NO;
+//    }
     return YES;
 }
 
