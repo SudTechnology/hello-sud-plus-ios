@@ -155,6 +155,17 @@
     [self notifyStateChange:APP_COMMON_GAME_DISCO_ACTION dataJson:actionModel.mj_JSONString];
 }
 
+/// 设置游戏玩法选项（2022-05-10新增） APP_COMMON_GAME_SETTING_SELECT_INFO
+/// @param actionModel 指令参数model
+- (void)notifyAppCommonGameSettingSelectInfo:(AppCommonGameSettingGameInfo *)appCommonGameSettingGameInfo {
+    [self notifyStateChange:APP_COMMON_GAME_SETTING_SELECT_INFO dataJson:appCommonGameSettingGameInfo.mj_JSONString];
+}
+
+/// app在收到游戏断开连接通知后，通知游戏重试连接（2022-06-21新增，暂时支持ludo) APP_COMMON_GAME_RECONNECT
+- (void)notifyAppCommonGameReconnect {
+    [self notifyStateChange:APP_COMMON_GAME_RECONNECT dataJson:@{}.mj_JSONString];
+}
+
 #pragma mark =======APP->游戏状态处理=======
 
 /// 状态通知（app to mg）

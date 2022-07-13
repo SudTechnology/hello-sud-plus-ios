@@ -109,6 +109,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param actionModel 指令参数model
 - (void)notifyAppCommonGameDiscoAction:(AppCommonGameDiscoAction *)actionModel;
 
+/// 设置游戏玩法选项（2022-05-10新增） APP_COMMON_GAME_SETTING_SELECT_INFO
+/// @param actionModel 指令参数model
+- (void)notifyAppCommonGameSettingSelectInfo:(AppCommonGameSettingGameInfo *)appCommonGameSettingGameInfo;
+
+/// app在收到游戏断开连接通知后，通知游戏重试连接（2022-06-21新增，暂时支持ludo) APP_COMMON_GAME_RECONNECT
+- (void)notifyAppCommonGameReconnect;
+
 /// 继续游戏
 - (void)playMG;
 

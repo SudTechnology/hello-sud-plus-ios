@@ -424,9 +424,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 /// 处理是否需要响应该消息
 - (void)handleIfNeedToRespDiscoInfo {
-    if (![self checkIsFirstMicUser]) {
-        return;
-    }
+
     // 响应数据给请求者
     // 贡献榜数据
     NSArray *rankArr = kDiscoRoomService.rankList;

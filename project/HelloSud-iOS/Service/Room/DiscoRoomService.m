@@ -132,8 +132,9 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
                 NSInteger firstWaitingIndex = -1;
                 NSArray *arrTemp = self.danceMenuList;
                 for (int i = 0; i < arrTemp.count; ++i) {
-                    DiscoMenuModel *m = arrTemp[i];
-                    if (m.beginTime == 0) {
+                    DiscoMenuModel *temp = arrTemp[i];
+                    // 相同主播
+                    if (temp.beginTime == 0 && [temp.toUser.userID isEqualToString:m.toUser.userID]) {
                         firstWaitingIndex = i;
                         break;
                     }
@@ -156,7 +157,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         BOOL fromSentGift = [AppService.shared.login.loginUserInfo isMeByUserID:giftModel.sendUser.userID];
         [self checkIfNeedToDancing:m duration:addDuration fromSentGift:fromSentGift];
     }
-    if (refresh){
+    if (refresh) {
         [[NSNotificationCenter defaultCenter] postNotificationName:dancingListChangedNTF object:nil];
     }
 }
@@ -208,15 +209,37 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// @param model
 - (void)addDanceMenuInfo:(DiscoMenuModel *)model {
     DDLogDebug(@"addDanceMenuInfo: fromUser:%@, toUserID:%@", model.fromUser.userID, model.toUser.userID);
+    if ([self checkIsExist:model isFinished:model.isDanceFinished]) {
+        DDLogDebug(@"exist same dance info: fromUser:%@, toUserID:%@", model.fromUser.userID, model.toUser.userID);
+        return;
+    }
     if (model.isDanceFinished) {
         // 已经结束列表
         [self.finishedDanceMenuList addObject:model];
     } else {
         [self.danceMenuList addObject:model];
     }
-
     [self checkIfNeedToDancing:model duration:model.duration fromSentGift:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:dancingListChangedNTF object:nil];
+}
+
+- (BOOL)checkIsExist:(DiscoMenuModel *)model isFinished:(BOOL)isFinished {
+    if (isFinished) {
+        NSArray *arr = self.finishedDanceMenuList;
+        for(DiscoMenuModel *m in arr) {
+            if ([model isSame:m]) {
+                return YES;
+            }
+        }
+    } else {
+        NSArray *arr = self.danceMenuList;
+        for(DiscoMenuModel *m in arr) {
+            if ([model isSame:m]) {
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 /// 增数据

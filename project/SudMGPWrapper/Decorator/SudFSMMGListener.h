@@ -105,6 +105,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// 元宇宙砂砂舞 指令动作结束通知  MG_COMMON_GAME_DISCO_ACTION_END
 - (void)onGameMGCommonGameDiscoActionEnd:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionEndModel *)model;
 
+///// App通用状态操作结果错误码 MG_COMMON_APP_COMMON_SELF_X_RESP
+//- (void)onGameMGCommonGameDiscoActionEnd:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionEndModel *)model;
+//
+///// 游戏通知app层添加陪玩机器人是否成功 MG_COMMON_GAME_ADD_AI_PLAYERS
+//- (void)onGameMGCommonGameDiscoActionEnd:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionEndModel *)model;
+//
+///// 游戏通知app层添当前网络连接状态 MG_COMMON_GAME_NETWORK_STATE
+//- (void)onGameMGCommonGameDiscoActionEnd:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionEndModel *)model;
+
 
 /// 玩家状态变化
 /// 玩家: 加入状态  MG_COMMON_PLAYER_IN

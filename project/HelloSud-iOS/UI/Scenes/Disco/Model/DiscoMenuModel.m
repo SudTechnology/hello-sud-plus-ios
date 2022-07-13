@@ -34,6 +34,23 @@
     return 0;
 }
 
+/// 是否相同
+/// @param model
+/// @return
+- (BOOL)isSame:(DiscoMenuModel *)model {
+    if (model.isDanceFinished && self.isDanceFinished) {
+        // 都结束
+        return [model.fromUser.userID isEqualToString:self.fromUser.userID] && [model.toUser.userID isEqualToString:self.toUser.userID];
+    } else if (model.beginTime == 0 && self.beginTime == 0) {
+        // 都是未开始
+        return model.duration == self.duration && [model.fromUser.userID isEqualToString:self.fromUser.userID] && [model.toUser.userID isEqualToString:self.toUser.userID];
+    } else if (!model.isDanceFinished && !self.isDanceFinished) {
+        // 进行中的
+        return model.beginTime == self.beginTime && [model.fromUser.userID isEqualToString:self.fromUser.userID] && [model.toUser.userID isEqualToString:self.toUser.userID];
+    }
+    return NO;
+}
+
 /// 开始跳舞
 - (void)beginDancing {
     DDLogDebug(@"beginDancing, from user:%@", self.fromUser.name);

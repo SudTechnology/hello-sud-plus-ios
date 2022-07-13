@@ -44,8 +44,10 @@ static NSString *APP_COMMON_GAME_INFO_EXTRAS = @"app_common_report_game_info_ext
 static NSString *APP_COMMON_GAME_ADD_AI_PLAYERS = @"app_common_game_add_ai_players";
 /// 元宇宙砂砂舞相关设置
 static NSString *APP_COMMON_GAME_DISCO_ACTION = @"app_common_game_disco_action";
-//app_common_game_setting_select_info
-//app_common_game_reconnect
+/// 设置游戏玩法选项（2022-05-10新增）
+static NSString *APP_COMMON_GAME_SETTING_SELECT_INFO = @"app_common_game_setting_select_info";
+/// app在收到游戏断开连接通知后，通知游戏重试连接（2022-06-21新增，暂时支持ludo）
+static NSString *APP_COMMON_GAME_RECONNECT = @"app_common_game_reconnect";
 
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
@@ -77,6 +79,22 @@ static NSString *APP_COMMON_GAME_DISCO_ACTION = @"app_common_game_disco_action";
 @property (nonatomic, strong)NSArray <AIPlayerInfoModel *> *aiPlayers;
 /// isReady  机器人加入后是否自动准备 1：自动准备，0：不自动准备 默认为1
 @property (nonatomic, assign)BOOL isReady;
+@end
+
+// ludo游戏玩法选项
+@interface AppCommonGameSettingGameLudo
+/// mode: 默认赛制，0: 快速, 1: 经典;
+@property (nonatomic, assign)NSInteger mode;
+/// chessNum: 默认棋子数量, 2: 对应2颗棋子; 4: 对应4颗棋子;
+@property (nonatomic, assign)NSInteger chessNum;
+/// mode: 默认道具, 1: 有道具, 0: 没有道具
+@property (nonatomic, assign)NSInteger item;
+@end
+
+/// APP_COMMON_GAME_SETTING_SELECT_INFO
+@interface AppCommonGameSettingGameInfo: NSObject
+// 游戏名称
+@property (nonatomic, strong)AppCommonGameSettingGameLudo *ludo;
 @end
 
 

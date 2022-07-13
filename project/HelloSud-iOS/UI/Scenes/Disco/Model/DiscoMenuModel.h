@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 开始跳舞
 - (void)beginDancing;
 - (NSInteger)remainDuration;
+/// 是否相同
+/// @param model
+/// @return
+- (BOOL)isSame:(DiscoMenuModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

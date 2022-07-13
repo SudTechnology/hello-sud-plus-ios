@@ -54,6 +54,12 @@ static NSString *MG_COMMON_GAME_ASR = @"mg_common_game_asr";
 static NSString *MG_COMMON_GAME_SELF_MICROPHONE = @"mg_common_self_microphone";
 /// 耳机（听筒，扬声器）状态
 static NSString *MG_COMMON_GAME_SELF_HEADEPHONE = @"mg_common_self_headphone";
+/// App通用状态操作结果错误码（2022-05-10新增）
+static NSString *MG_COMMON_APP_COMMON_SELF_X_RESP = @"mg_common_app_common_self_x_resp";
+/// 游戏通知app层添加陪玩机器人是否成功（2022-05-17新增）
+static NSString *MG_COMMON_GAME_ADD_AI_PLAYERS = @"mg_common_game_add_ai_players";
+/// 游戏通知app层添当前网络连接状态（2022-06-21新增）
+static NSString *MG_COMMON_GAME_NETWORK_STATE = @"mg_common_game_network_state";
 
 
 #pragma mark - 通用状态-玩家
@@ -492,5 +498,41 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 
 
+#pragma mark - App通用状态操作结果错误码 MG_COMMON_APP_COMMON_SELF_X_RESP
+
+@interface MGCommonAppCommonSelfXRespModel : NSObject
+/// 字段必填, 参考：游戏业务错误 https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html
+@property(nonatomic, strong) NSString *state;
+// 字段必填，参考：游戏业务错误 https://docs.sud.tech/zh-CN/app/Server/ErrorCode.html
+@property(nonatomic, assign) NSInteger resultCode;
+/// 当state=app_common_self_in时，字段必填
+@property(nonatomic, assign) BOOL isIn;
+/// 当state=app_common_self_ready时，字段必填
+@property(nonatomic, assign) BOOL isReady;
+/// 当state=app_common_self_playing时，字段必填
+@property(nonatomic, assign) BOOL isPlaying;
+/// 当state=app_common_self_playing时，字段必填
+@property(nonatomic, strong) NSString *reportGameInfoExtras;
+/// 当state=app_common_self_captain时，字段必填
+@property(nonatomic, strong) NSString *curCaptainUID;
+// 当state=app_common_self_kick时，字段必填
+@property(nonatomic, strong) NSString *kickedUID;
+@end
+
+#pragma mark - 游戏通知app层添加陪玩机器人是否成功 MG_COMMON_GAME_ADD_AI_PLAYERS
+
+@interface MGCommonGameAddAIPlayersModel : NSObject
+/// 返回码 0：成功，非0：不成功
+@property(nonatomic, assign) NSInteger resultCode;
+/// ["123", ...] // 加入成功的playerId列表
+@property(nonatomic, strong) NSArray<NSString *> *userIds;
+@end
+
+#pragma mark - 游戏通知app层添当前网络连接状态 MG_COMMON_GAME_NETWORK_STATE
+
+@interface MGCommonGameNetworkStateModel : NSObject
+/// 0:closed, 1: connected
+@property(nonatomic, assign) NSInteger state;
+@end
 
 NS_ASSUME_NONNULL_END
