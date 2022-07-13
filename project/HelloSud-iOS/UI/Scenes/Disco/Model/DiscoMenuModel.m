@@ -59,7 +59,7 @@
     }
     WeakSelf
     if (self.beginTime == 0) {
-        self.beginTime = [NSDate date].timeIntervalSince1970;
+        self.beginTime = (int64_t)[NSDate date].timeIntervalSince1970;
     }
     self.danceTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
         [weakSelf handleTimerCallback];

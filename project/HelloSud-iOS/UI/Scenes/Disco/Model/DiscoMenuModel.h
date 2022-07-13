@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)AudioUserModel *fromUser;
 @property (nonatomic, strong)AudioUserModel *toUser;
 @property (nonatomic, assign)NSInteger duration;
-@property (nonatomic, assign)NSTimeInterval beginTime;
+@property (nonatomic, assign)int64_t beginTime;
 @property (nonatomic, strong)void(^_Nullable updateDancingDurationBlock)(NSInteger second);
 
 /// 跳舞是否结束
