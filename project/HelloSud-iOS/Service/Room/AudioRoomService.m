@@ -37,7 +37,7 @@
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/create-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         isReqCreate = NO;
         EnterRoomModel *model = (EnterRoomModel *)resp;
-        [AudioRoomService reqEnterRoom:model.roomId success:nil fail:nil];
+        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:YES success:nil fail:nil];
     } failure:^(NSError *error) {
         isReqCreate = NO;
     }];
@@ -45,22 +45,22 @@
 
 /// 请求进入房间
 /// @param roomId 房间ID
-+ (void)reqEnterRoom:(long)roomId success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
++ (void)reqEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
 
     // 如果存在挂起房间，则退出当前挂起房间
     if ([SuspendRoomView isShowSuspend]) {
         [SuspendRoomView exitRoom:^{
-            [self handleEnterRoom:roomId success:success fail:fail];
+            [self handleEnterRoom:roomId isFromCreate:isFromCreate success:success fail:fail];
         }];
         return;
     }
-    [self handleEnterRoom:roomId success:success fail:fail];
+    [self handleEnterRoom:roomId isFromCreate:isFromCreate success:success fail:fail];
 }
 
 /// 处理进入房间
 /// @param roomId 房间ID
-+ (void)handleEnterRoom:(long)roomId success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
++ (void)handleEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
 
     static BOOL isReqEnter = false;
@@ -83,7 +83,8 @@
     }
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/enter-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         isReqEnter = NO;
-        EnterRoomModel *model = (EnterRoomModel *)resp;
+        EnterRoomModel *model = (EnterRoomModel *) resp;
+        model.isFromCreate = isFromCreate;
         if (kAudioRoomService.currentRoomVC != nil) {
             NSLog(@"there is a AudioRoomViewController in the stack");
             return;
@@ -102,7 +103,7 @@
         if (success) {
             success();
         }
-    } failure:^(NSError *error) {
+    }                         failure:^(NSError *error) {
         isReqEnter = NO;
         if (fail) {
             fail(error);
@@ -133,9 +134,9 @@
     }
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/match-room/v1") param:dicParam respClass:MatchRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         MatchRoomModel *model = (MatchRoomModel *)resp;
-        [AudioRoomService reqEnterRoom:model.roomId success:^{
+        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:NO success:^{
             isMatchingRoom = NO;
-        } fail:^(NSError *error) {
+        }                         fail:^(NSError *error) {
             [ToastUtil show:[error debugDescription]];
             isMatchingRoom = NO;
         }];

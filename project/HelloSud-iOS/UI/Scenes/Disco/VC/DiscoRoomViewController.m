@@ -36,7 +36,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 @property(nonatomic, assign) BOOL isTipOpened;
 @property(nonatomic, assign) NSInteger djCountdown;
 @property(nonatomic, assign) DTTimer *djRandTimer;
-@property (nonatomic, assign)BOOL loadedRobotList;
+@property(nonatomic, assign) BOOL loadedRobotList;
 @end
 
 @implementation DiscoRoomViewController
@@ -298,6 +298,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// 处理机器人上麦逻辑
 - (void)loadRobotList {
 
+    if (!self.enterModel.isFromCreate) {
+        return;
+    }
     if (self.enterModel.roleType != 1) {
         DDLogDebug(@"you not the room owner, don't need load robot");
         return;
@@ -553,7 +556,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         [self handleUpDJ:model];
     }
     return [super onWillSendMsg:msg shouldSend:shouldSend];
-    
+
 }
 
 /// 处理上DJ

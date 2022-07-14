@@ -127,7 +127,7 @@
         [ToastUtil show:@"请使用即构RTC体验"];
         return;
     }
-    [AudioRoomService reqEnterRoom:m.roomId success:nil fail:nil];
+    [AudioRoomService reqEnterRoom:m.roomId isFromCreate:NO success:nil fail:nil];
 }
 
 #pragma mark - lazy

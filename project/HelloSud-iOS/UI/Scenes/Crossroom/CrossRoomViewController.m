@@ -309,7 +309,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
     NSString *roomID = self.otherUser.roomID;
     if (roomID.length > 0) {
         [self exitRoomFromSuspend:NO finished:^{
-            [AudioRoomService reqEnterRoom:roomID.longLongValue success:^{
+            [AudioRoomService reqEnterRoom:roomID.longLongValue isFromCreate:NO success:^{
 
             }                         fail:nil];
         }];
