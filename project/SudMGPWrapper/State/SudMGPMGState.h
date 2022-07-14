@@ -77,7 +77,14 @@ static NSString *MG_COMMON_PLAYER_ONLINE = @"mg_common_player_online";
 static NSString *MG_COMMON_PLAYER_CHANGE_SEAT = @"mg_common_player_change_seat";
 /// 游戏通知app点击玩家头像状态
 static NSString *MG_COMMON_SELF_CLICK_GAME_PLAYER_ICON = @"mg_common_self_click_game_player_icon";
-
+/// 游戏通知app玩家死亡状态（2022-04-24新增）
+static NSString *MG_COMMON_SELF_DIE_STATUS = @"mg_common_self_die_status";
+/// 游戏通知app轮到玩家出手状态（2022-04-24新增）
+static NSString *MG_COMMON_SELF_TURN_STATUS = @"mg_common_self_turn_status";
+/// 游戏通知app玩家选择状态（2022-04-24新增）
+static NSString *MG_COMMON_SELF_SELECT_STATUS = @"mg_common_self_select_status";
+/// 游戏通知app层当前游戏剩余时间（2022-05-23新增，目前UMO生效）
+static NSString *MG_COMMON_GAME_COUNTDOWN_TIME = @"mg_common_game_countdown_time";
 
 #pragma mark - 你画我猜
 /// 选词中
@@ -497,9 +504,37 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 
 @end
 
+#pragma mark - 游戏通知app玩家死亡状态  MG_COMMON_SELF_DIE_STATUS
+@interface MGCommonSelfDieStatusModel : NSObject
+/// 用户id
+@property(nonatomic, copy) NSString *uid;
+/// 玩家是否死亡 true:死亡, false: 未死亡；默认 false
+@property(nonatomic, assign) BOOL isDeath;
+@end
+
+#pragma mark - 游戏通知app轮到玩家出手状态  MG_COMMON_SELF_TURN_STATUS
+@interface MGCommonSelfTurnStatusModel : NSObject
+/// 用户id
+@property(nonatomic, copy) NSString *uid;
+/// 是否轮到玩家出手 true:是上面uid玩家的出手回合, false: 不是上面uid玩家的出手回合；默认false
+@property(nonatomic, assign) BOOL isTurn;
+@end
+
+#pragma mark - 游戏通知app玩家选择状态  MG_COMMON_SELF_SELECT_STATUS
+@interface MGCommonSelfSelectStatusModel : NSObject
+/// 用户id
+@property(nonatomic, copy) NSString *uid;
+/// 玩家是否选择 true:选择, false: 未选择； 默认false
+@property(nonatomic, assign) BOOL isSelected;
+@end
+
+#pragma mark - 游戏通知app层当前游戏剩余时间  MG_COMMON_GAME_COUNTDOWN_TIME
+@interface MGCommonGameCountdownTimeModel : NSObject
+/// 剩余时间，单位为秒
+@property(nonatomic, assign) NSInteger countdown;
+@end
 
 #pragma mark - App通用状态操作结果错误码 MG_COMMON_APP_COMMON_SELF_X_RESP
-
 @interface MGCommonAppCommonSelfXRespModel : NSObject
 /// 字段必填, 参考：游戏业务错误 https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html
 @property(nonatomic, strong) NSString *state;

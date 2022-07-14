@@ -192,6 +192,18 @@
 
 @end
 
+@implementation MGCommonSelfDieStatusModel
+@end
+
+@implementation MGCommonSelfTurnStatusModel
+@end
+
+@implementation MGCommonSelfSelectStatusModel
+@end
+
+@implementation MGCommonGameCountdownTimeModel
+@end
+
 @implementation MGCommonGameDiscoActionModel
 @end
 

@@ -276,32 +276,32 @@
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_DISCO_ACTION_END]) {
         /// 元宇宙砂砂舞 指令动作结束通知  MG_COMMON_GAME_DISCO_ACTION_END
-//        MGCommonGameDiscoActionEndModel *m = [MGCommonGameDiscoActionEndModel mj_objectWithKeyValues:dataJson];
-//        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameDiscoActionEnd:model:)]) {
-//            [self.listener onGameMGCommonGameDiscoActionEnd:handle model:m];
-//            return;
-//        }
+        MGCommonGameDiscoActionEndModel *m = [MGCommonGameDiscoActionEndModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameDiscoActionEnd:model:)]) {
+            [self.listener onGameMGCommonGameDiscoActionEnd:handle model:m];
+            return;
+        }
     } else if ([state isEqualToString:MG_COMMON_APP_COMMON_SELF_X_RESP]) {
         /// App通用状态操作结果错误码（2022-05-10新增）
-//        MGCommonAppCommonSelfXRespModel *m = [MGCommonAppCommonSelfXRespModel mj_objectWithKeyValues:dataJson];
-//        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameDiscoActionEnd:model:)]) {
-//            [self.listener onGameMGCommonGameDiscoActionEnd:handle model:m];
-//            return;
-//        }
+        MGCommonAppCommonSelfXRespModel *m = [MGCommonAppCommonSelfXRespModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonAppCommonSelfXResp:model:)]) {
+            [self.listener onGameMGCommonAppCommonSelfXResp:handle model:m];
+            return;
+        }
     } else if ([state isEqualToString:MG_COMMON_GAME_ADD_AI_PLAYERS]) {
         /// 游戏通知app层添加陪玩机器人是否成功（2022-05-17新增）
-//        MGCommonGameAddAIPlayersModel *m = [MGCommonGameAddAIPlayersModel mj_objectWithKeyValues:dataJson];
-//        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameDiscoActionEnd:model:)]) {
-//            [self.listener onGameMGCommonGameDiscoActionEnd:handle model:m];
-//            return;
-//        }
+        MGCommonGameAddAIPlayersModel *m = [MGCommonGameAddAIPlayersModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameAddAIPlayers:model:)]) {
+            [self.listener onGameMGCommonGameAddAIPlayers:handle model:m];
+            return;
+        }
     } else if ([state isEqualToString:MG_COMMON_GAME_NETWORK_STATE]) {
         /// 游戏通知app层添当前网络连接状态（2022-06-21新增）
-//        MGCommonGameNetworkStateModel *m = [MGCommonGameNetworkStateModel mj_objectWithKeyValues:dataJson];
-//        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameDiscoActionEnd:model:)]) {
-//            [self.listener onGameMGCommonGameDiscoActionEnd:handle model:m];
-//            return;
-//        }
+        MGCommonGameNetworkStateModel *m = [MGCommonGameNetworkStateModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameNetworkState)]) {
+            [self.listener onGameMGCommonGameNetworkState];
+            return;
+        }
     } else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
@@ -415,6 +415,38 @@
         [self setValueGamePlayerStateMap:userId state:state model:m];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGScore:userId:model:)]) {
             [self.listener onPlayerMGDGScore:handle userId:userId model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_SELF_DIE_STATUS]) {
+        /// 游戏通知app玩家死亡状态（2022-04-24新增）
+        MGCommonSelfDieStatusModel *m = [MGCommonSelfDieStatusModel mj_objectWithKeyValues:dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonSelfDieStatus:userId:model:)]) {
+            [self.listener onPlayerMGCommonSelfDieStatus:handle userId:userId model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_SELF_TURN_STATUS]) {
+        /// 游戏通知app轮到玩家出手状态（2022-04-24新增）
+        MGCommonSelfTurnStatusModel *m = [MGCommonSelfTurnStatusModel mj_objectWithKeyValues:dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonSelfTurnStatus:userId:model:)]) {
+            [self.listener onPlayerMGCommonSelfTurnStatus:handle userId:userId model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_SELF_SELECT_STATUS]) {
+        /// 游戏通知app玩家选择状态（2022-04-24新增）
+        MGCommonSelfSelectStatusModel *m = [MGCommonSelfSelectStatusModel mj_objectWithKeyValues:dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonSelfSelectStatus:userId:model:)]) {
+            [self.listener onPlayerMGCommonSelfSelectStatus:handle userId:userId model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_COUNTDOWN_TIME]) {
+        /// 游戏通知app层当前游戏剩余时间（2022-05-23新增，目前UMO生效）
+        MGCommonGameCountdownTimeModel *m = [MGCommonGameCountdownTimeModel mj_objectWithKeyValues:dataJson];
+        [self setValueGamePlayerStateMap:userId state:state model:m];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonGameCountdownTime:userId:model:)]) {
+            [self.listener onPlayerMGCommonGameCountdownTime:handle userId:userId model:m];
             return;
         }
     } else {
