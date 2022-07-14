@@ -191,6 +191,7 @@
 - (void)onGameStarted {
     /// 此时表明游戏加载成功
     NSLog(@"游戏加载完毕");
+    self.gameTipLabel.text = @"游戏加载完毕";
 }
 
 /// 游戏销毁
