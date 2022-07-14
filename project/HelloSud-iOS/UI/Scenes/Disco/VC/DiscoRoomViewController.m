@@ -532,10 +532,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     [self.rankView dtUpdateUI];
 }
 
-/// 已经发送消息
-/// @param msg msg
-- (void)onDidSendMsg:(RoomBaseCMDModel *)msg {
-    [super onDidSendMsg:msg];
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void (^)(BOOL))shouldSend {
     /// Game - 发送文本命中
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
@@ -555,6 +552,8 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         RespDiscoBecomeDJModel *model = (RespDiscoBecomeDJModel *) msg;
         [self handleUpDJ:model];
     }
+    return [super onWillSendMsg:msg shouldSend:shouldSend];
+    
 }
 
 /// 处理上DJ

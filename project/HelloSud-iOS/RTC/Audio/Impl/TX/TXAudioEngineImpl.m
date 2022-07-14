@@ -152,6 +152,7 @@
 
 - (void)sendCommand:(nonnull NSString *)command listener:(nonnull void (^)(int))listener {
     if (command == nil) {
+        if (listener) listener(-1);
         return;
     }
     
@@ -159,6 +160,7 @@
     if (engine != nil) {
         [engine sendCustomCmdMsg:0 data:[command dataUsingEncoding:NSUTF8StringEncoding] reliable:YES ordered:YES];
     }
+    if (listener) listener(0);
 }
 
 // 更新房间内用户总人数
