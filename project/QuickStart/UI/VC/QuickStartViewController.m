@@ -32,9 +32,6 @@
 @property (nonatomic, strong) QSRoomInputView *inputView;
 /// 游戏在线人数
 @property (nonatomic, strong) UILabel *gameNumLabel;
-@property (nonatomic, strong)UIScrollView *gameScrollView;
-@property(nonatomic, strong) UIView *normalView;
-@property (nonatomic, strong) UILabel *gameTipLabel;
 
 /// SudMGP SDK加载业务参数
 @property (nonatomic, strong)SudMGPLoadConfigModel *sudMGPLoadConfigModel;
@@ -88,12 +85,7 @@
 - (void)dtAddViews {
     [self.view addSubview:self.contentView];
     [self.contentView addSubview:self.bgImageView];
-
-    [self.contentView addSubview:self.gameScrollView];
-    [self.gameScrollView addSubview:self.normalView];
-    [self.gameScrollView addSubview:self.gameView];
-    [self.normalView addSubview:self.gameTipLabel];
-
+    [self.contentView addSubview:self.gameView];
     [self.contentView addSubview:self.sceneView];
     [self.sceneView addSubview:self.naviView];
     [self.sceneView addSubview:self.operatorView];
@@ -122,22 +114,8 @@
         make.height.mas_equalTo(44);
     }];
 
-    [self.gameScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.contentView);
-    }];
-    [self.normalView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.top.bottom.equalTo(self.gameScrollView);
-        make.width.equalTo(@(kScreenWidth));
-        make.height.equalTo(@(kScreenHeight));
-    }];
     [self.gameView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.normalView.mas_trailing);
-        make.top.trailing.equalTo(self.gameScrollView);
-        make.width.height.equalTo(self.normalView);
-    }];
-    [self.gameTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.greaterThanOrEqualTo(@0);
-        make.center.equalTo(self.normalView);
+        make.edges.equalTo(self.contentView);
     }];
 
     [self.gameNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -291,7 +269,6 @@
 - (UIView *)gameView {
     if (_gameView == nil) {
         _gameView = [[UIView alloc]init];
-        _gameView.clipsToBounds = YES;
     }
     return _gameView;
 }
@@ -323,31 +300,5 @@
     }
     return _inputView;
 }
-
-- (UIView *)normalView {
-    if (!_normalView) {
-        _normalView = [[UIView alloc] init];
-        _normalView.backgroundColor = UIColor.orangeColor;
-    }
-    return _normalView;
-}
-
-- (UIScrollView *)gameScrollView {
-    if (!_gameScrollView) {
-        _gameScrollView = [[UIScrollView alloc] init];
-    }
-    return _gameScrollView;
-}
-
-- (UILabel *)gameTipLabel {
-    if (!_gameTipLabel) {
-        _gameTipLabel = [[UILabel alloc] init];
-        _gameTipLabel.text = @"游戏加载中";
-    }
-    return _gameTipLabel;
-}
-
-
-
 
 @end
