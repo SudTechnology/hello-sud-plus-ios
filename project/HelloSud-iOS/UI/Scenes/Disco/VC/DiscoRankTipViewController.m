@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"蹦迪排行说明";
+    self.title = NSString.dt_room_disco_rank_instrument;
     self.view.backgroundColor = HEX_COLOR(@"#F5F6FB");
 }
 
@@ -55,7 +55,7 @@
         _tipOpenLabel.numberOfLines = 0;
         _tipOpenLabel.preferredMaxLayoutWidth = kScreenWidth - 32;
 
-        NSString *tip = @"榜单周期：周一0点至周日24点，每个自然周为一个榜单周期\n\n焦点王：\n云蹦迪场中，角色获得特写的次数排行\n\n人气主播榜：\n云蹦迪场中，被邀请跳舞的次数排行";
+        NSString *tip = [NSString stringWithFormat:@"%@\n\n%@\n\n%@", NSString.dt_room_disco_rank_tip_one, NSString.dt_room_disco_rank_tip_two, NSString.dt_room_disco_rank_tip_thr];
         NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:tip];
         attrTitle.yy_lineSpacing = 5;
         attrTitle.yy_font = UIFONT_REGULAR(14);

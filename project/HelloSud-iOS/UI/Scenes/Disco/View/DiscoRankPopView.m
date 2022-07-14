@@ -114,7 +114,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = UIFONT_BOLD(20);
         _titleLabel.textColor = HEX_COLOR(@"#000000");
-        _titleLabel.text = @"贡献榜";
+        _titleLabel.text = NSString.dt_room_disco_rank_fee;
     }
     return _titleLabel;
 }
@@ -124,7 +124,7 @@
         _subTitleLabel = [[UILabel alloc] init];
         _subTitleLabel.font = UIFONT_REGULAR(12);
         _subTitleLabel.textColor = HEX_COLOR(@"#000000");
-        _subTitleLabel.text = @"送礼、发弹幕均可上榜";
+        _subTitleLabel.text = NSString.dt_room_disco_operate_tip;
     }
     return _subTitleLabel;
 }
@@ -134,7 +134,7 @@
         _tipLabel = [[UILabel alloc] init];
         _tipLabel.font = UIFONT_REGULAR(12);
         _tipLabel.textColor = HEX_COLOR(@"#000000");
-        _tipLabel.text = @"贡献值";
+        _tipLabel.text = NSString.dt_room_disco_fee_value;
     }
     return _tipLabel;
 }

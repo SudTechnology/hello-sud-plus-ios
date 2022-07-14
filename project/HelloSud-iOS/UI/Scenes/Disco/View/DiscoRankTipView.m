@@ -88,7 +88,7 @@
 - (UILabel *)tipLabel {
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
-        _tipLabel.text = @"跳舞邀请已发出，请稍等";
+        _tipLabel.text = NSString.dt_room_disco_dance_wait;
         _tipLabel.font = UIFONT_REGULAR(10);
         _tipLabel.textColor = HEX_COLOR(@"#ffffff");
         _tipLabel.textAlignment = NSTextAlignmentCenter;

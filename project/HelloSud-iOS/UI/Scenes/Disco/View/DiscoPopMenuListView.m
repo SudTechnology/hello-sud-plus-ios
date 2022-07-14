@@ -225,7 +225,7 @@
         _noDataLabel = [[UILabel alloc] init];
         _noDataLabel.font = UIFONT_REGULAR(14);
         _noDataLabel.textColor = HEX_COLOR_A(@"#ffffff", 0.4);
-        _noDataLabel.text = @"暂无节目，送礼即可邀请主播跳舞哦";
+        _noDataLabel.text = NSString.dt_room_disco_no_menu;
         _noDataLabel.numberOfLines = 0;
         _noDataLabel.textAlignment = NSTextAlignmentCenter;
     }

@@ -103,7 +103,7 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-    self.autoTitleLabel.text = @"自动竞猜";
+    self.autoTitleLabel.text = NSString.dt_room_guess_auto_guess;
     self.normalGuessNavLabel.text = NSString.dt_room_guess_win_lose;
     [self reqData];
 }
@@ -415,7 +415,7 @@
 
     }                failure:^(NSError *error) {
         if (error.code == 3005) {
-            [ToastUtil show:@"余额不足，自动竞猜已关闭，快去充值吧~"];
+            [ToastUtil show:NSString.dt_room_guess_no_more_money];
             weakSelf.openAutoBet = NO;
             [weakSelf showNaviAutoStateView:NO];
         } else {

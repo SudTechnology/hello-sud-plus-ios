@@ -221,7 +221,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// 点击PK设置
 - (void)onSettingTap:(UITapGestureRecognizer *)tap {
     if (self.gameId > 0) {
-        NSString *tip = @"确定要关闭蹦迪吗？ 关闭后本场蹦迪将清空，包括正在进行中的跳舞、排队中的跳舞、角色特效";
+        NSString *tip = NSString.dt_room_disco_confirm_close;
         [DTAlertView showTextAlert:tip sureText:NSString.dt_common_close cancelText:NSString.dt_common_back onSureCallback:^{
             [kDiscoRoomService clearAllDancingMenu];
             [self reqChangeToGameGameId:0 operatorUser:AppService.shared.login.loginUserInfo.userID];
@@ -248,10 +248,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 - (void)updateSettingState:(BOOL)isGameExist {
     if (isGameExist) {
-        self.settingLabel.text = @"关闭蹦迪";
+        self.settingLabel.text = NSString.dt_room_disco_close;
         [self.settingView dtRemoveGradient];
     } else {
-        self.settingLabel.text = @"开启蹦迪";
+        self.settingLabel.text = NSString.dt_room_disco_open;
         [self.settingView dtAddGradientLayer:@[@0, @0.25, @0.35, @0.5, @0.7, @0.85, @1]
                                       colors:@[(id) HEX_COLOR(@"#F40ADE").CGColor,
                                               (id) HEX_COLOR(@"#E02020").CGColor,
