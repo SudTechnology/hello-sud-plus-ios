@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyAppComonKickStateWithUserId:(NSString *)userId;
 
 /// 结束游戏
-- (void)notifyAppComonSetEnd;
+- (void)notifyAppCommonSelfEnd;
 
 /// 房间状态（depreated 已废弃v1.1.30.xx）
 /// @param isIn    true 在房间内，false 不在房间内
@@ -98,12 +98,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 设置游戏上报信息扩展参数（透传）
 /// @param reportGameInfoExtras   string类型，Https服务回调report_game_info参数，最大长度1024字节，超过则截断（2022-01-21）
-- (void)notifyAppComonReportGameInfoExtras:(NSString *)reportGameInfoExtras;
+- (void)notifyAppCommonReportGameInfoExtras:(NSString *)reportGameInfoExtras;
+
+/// 设置游戏中的AI玩家（2022-05-11新增） APP_COMMON_GAME_ADD_AI_PLAYERS
+/// @param appCommonGameAddAiPlayersModel  配置信息
+- (void)notifyAppCommonGameAddAIPlayers:(AppCommonGameAddAIPlayersModel *)appCommonGameAddAiPlayersModel;
 
 /// 元宇宙砂砂舞相关设置(app_common_game_disco_action)
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
 /// @param actionModel 指令参数model
 - (void)notifyAppCommonGameDiscoAction:(AppCommonGameDiscoAction *)actionModel;
+
+/// 设置游戏玩法选项（2022-05-10新增） APP_COMMON_GAME_SETTING_SELECT_INFO
+/// @param actionModel 指令参数model
+- (void)notifyAppCommonGameSettingSelectInfo:(AppCommonGameSettingGameInfo *)appCommonGameSettingGameInfo;
+
+/// app在收到游戏断开连接通知后，通知游戏重试连接（2022-06-21新增，暂时支持ludo) APP_COMMON_GAME_RECONNECT
+- (void)notifyAppCommonGameReconnect;
 
 /// 继续游戏
 - (void)playMG;

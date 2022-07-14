@@ -45,6 +45,7 @@
     self.view.backgroundColor = UIColor.blackColor;
 
 
+
     /// 加载游戏步骤
 
     // 创建SudMDPWrapper
@@ -200,7 +201,7 @@
         // 结束游戏
         if (m.itemType == 2) {
             [DTAlertView showTextAlert:@"确定结束游戏吗" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
+                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfEnd];
             }          onCloseCallback:^{
             }];
             return;
@@ -299,9 +300,5 @@
     }
     return _inputView;
 }
-
-
-
-
 
 @end

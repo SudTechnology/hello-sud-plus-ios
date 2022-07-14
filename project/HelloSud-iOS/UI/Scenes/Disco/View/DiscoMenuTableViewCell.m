@@ -18,6 +18,13 @@
 
 @implementation DiscoMenuTableViewCell
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    if (![self.model isKindOfClass:DiscoMenuModel.class]) {
+        return;
+    }
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -69,7 +76,12 @@
     }
     WeakSelf
     DiscoMenuModel *m = (DiscoMenuModel *) self.model;
+    DDLogDebug(@"celll dtUpdateUI from user:%@, cell:%@", m.fromUser.name, self);
+    __weak DiscoMenuModel *weakModel = m;
     m.updateDancingDurationBlock = ^(NSInteger second) {
+        if (weakModel != weakSelf.model){
+            return;
+        }
         [weakSelf updateRemainTime:second];
         if (second <= 0 && weakSelf.danceFinishedBlock) {
             weakSelf.danceFinishedBlock();
@@ -112,7 +124,7 @@
         self.timeLabel.paddingX = 0;
         NSInteger minute = remainSecond / 60.0;
         if (minute > 0) {
-            self.timeLabel.text = [NSString stringWithFormat:@"%@%@min", NSString.dt_room_guess_remain, @(minute)];
+            self.timeLabel.text = [NSString stringWithFormat:@"%@%@mins", NSString.dt_room_guess_remain, @(minute)];
         } else {
             self.timeLabel.text = [NSString stringWithFormat:@"%@%@s", NSString.dt_room_guess_remain, @(remainSecond)];
         }

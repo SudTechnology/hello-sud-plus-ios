@@ -30,4 +30,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)NSString * userID;
 @end
 
+/// 机器人信息model
+@interface RotbotInfoModel : BaseModel
+@property (nonatomic, assign)int64_t userId;
+@property (nonatomic, strong)NSString * avatar;
+@property (nonatomic, strong)NSString * name;
+/// male female
+@property (nonatomic, strong)NSString * gender;
+@end
+/// 拉取机器人列表数据模型
+@interface RespDiscoRobotListModel : BaseRespModel
+@property (nonatomic, strong)NSArray<RotbotInfoModel *> * robotList;
+@end
+
 NS_ASSUME_NONNULL_END

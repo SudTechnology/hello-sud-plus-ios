@@ -191,6 +191,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 处理礼物动效
 /// @param model model description
 - (void)handleGiftEffect:(RoomCmdSendGiftModel *)model;
+/// 获取空麦位
+- (nullable AudioRoomMicModel *)getOneEmptyMic;
 #pragma mark - SudFSMMGListener
 /// 游戏配置
 - (NSString *)onGetGameCfg;

@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏加载主view
 @property(nonatomic, strong, readonly) UIView *gameView;
 
+
 /// 更新游戏人数
 /// @param count <#count description#>
 - (void)updateGamePersons:(NSInteger)count;

@@ -12,6 +12,7 @@
 #import "DiscoMenuView.h"
 #import "DiscoPopMenuListView.h"
 #import "DiscoRankTipView.h"
+#import "SudMGPAPPState.h"
 
 static NSString *discoKeyWordsMove = @"移动";
 static NSString *discoKeyWordsUp = @"上天";
@@ -35,6 +36,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 @property(nonatomic, assign) BOOL isTipOpened;
 @property(nonatomic, assign) NSInteger djCountdown;
 @property(nonatomic, assign) DTTimer *djRandTimer;
+@property(nonatomic, assign) BOOL loadedRobotList;
 @end
 
 @implementation DiscoRoomViewController
@@ -128,7 +130,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.gameMicContentView.mas_bottom).offset(10);
+        make.top.equalTo(self.gameMicContentView.mas_bottom).offset(15);
         make.leading.equalTo(@16);
         make.trailing.equalTo(@-16);
         make.height.equalTo(@24);
@@ -157,7 +159,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
     UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTipLabelTap:)];
     [self.tipView addGestureRecognizer:tap4];
-    
+
     [[NSNotificationCenter defaultCenter] addObserverForName:showWaitingForDancingNTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         weakSelf.rankTipView.hidden = NO;
         [weakSelf.rankTipView show:^{
@@ -176,6 +178,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     self.djRandTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
         [weakSelf handleDJTimerCallback];
     }];
+    self.gameNumLabel.alpha = 0;
 }
 
 - (void)onTipLabelTap:(id)tap {
@@ -221,12 +224,12 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         NSString *tip = @"确定要关闭蹦迪吗？ 关闭后本场蹦迪将清空，包括正在进行中的跳舞、排队中的跳舞、角色特效";
         [DTAlertView showTextAlert:tip sureText:@"关闭" cancelText:@"返回" onSureCallback:^{
             [kDiscoRoomService clearAllDancingMenu];
-            [self handleChangeToGame:0];
+            [self reqChangeToGameGameId:0 operatorUser:AppService.shared.login.loginUserInfo.userID];
             [self updateSettingState:NO];
         }          onCloseCallback:nil];
 
     } else {
-        [self handleChangeToGame:[self getCurrentGameID]];
+        [self reqChangeToGameGameId:[self getCurrentGameID] operatorUser:AppService.shared.login.loginUserInfo.userID];
         [self updateSettingState:YES];
     }
 }
@@ -292,14 +295,87 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     self.tipView.alpha = 1;
 }
 
+/// 处理机器人上麦逻辑
+- (void)loadRobotList {
+
+    if (!self.enterModel.isFromCreate) {
+        return;
+    }
+    if (self.enterModel.roleType != 1) {
+        DDLogDebug(@"you not the room owner, don't need load robot");
+        return;
+    }
+    if (self.loadedRobotList) {
+        DDLogDebug(@"had loaded robot list");
+        return;
+    }
+    WeakSelf
+    [DiscoRoomService reqRobotListWithFinished:^(NSArray<RotbotInfoModel *> *robotList) {
+        [weakSelf handleRobotUpMic:robotList];
+
+    }                                  failure:^(NSError *_Nonnull error) {
+        DDLogError(@"load robot list err:%@", error.dt_errMsg);
+    }];
+}
+
+/// 处理机器人上麦逻辑
+- (void)handleRobotUpMic:(NSArray<RotbotInfoModel *> *)robotList {
+
+    self.loadedRobotList = YES;
+    NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
+    for (int i = 0; i < robotList.count; ++i) {
+        RotbotInfoModel *robotModel = robotList[i];
+        /// 前6位机器人自动上麦
+        if (i < 6) {
+            [self joinTheRobotToMic:robotModel];
+        }
+        AIPlayerInfoModel *aiPlayerInfoModel = [AIPlayerInfoModel alloc];
+        aiPlayerInfoModel.userId = [NSString stringWithFormat:@"%@", @(robotModel.userId)];
+        aiPlayerInfoModel.name = robotModel.name;
+        aiPlayerInfoModel.avatar = robotModel.avatar;
+        aiPlayerInfoModel.gender = robotModel.gender;
+        [aiPlayers addObject:aiPlayerInfoModel];
+
+    }
+    AppCommonGameAddAIPlayersModel *appCommonGameAddAiPlayersModel = [[AppCommonGameAddAIPlayersModel alloc] init];
+    appCommonGameAddAiPlayersModel.aiPlayers = aiPlayers;
+    appCommonGameAddAiPlayersModel.isReady = YES;
+    [self.sudFSTAPPDecorator notifyAppCommonGameAddAIPlayers:appCommonGameAddAiPlayersModel];
+
+}
+
+- (void)joinTheRobotToMic:(RotbotInfoModel *)robotModel {
+
+    AudioRoomMicModel *micModel = [self getOneEmptyMic];
+    if (micModel == nil) {
+        [ToastUtil show:NSString.dt_room_there_no_mic];
+        return;
+    }
+    if (micModel.user == nil) {
+        /// 无人，上麦
+        AudioUserModel *proxyUser = AudioUserModel.new;
+        proxyUser.userID = [NSString stringWithFormat:@"%@", @(robotModel.userId)];
+        proxyUser.name = robotModel.name;
+        proxyUser.icon = robotModel.avatar;
+        proxyUser.sex = [robotModel.gender isEqualToString:@"male"] ? 1 : 2;
+        proxyUser.isRobot = YES;
+        micModel.user = proxyUser;
+        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 proxyUser:proxyUser success:nil fail:nil];
+        return;
+    }
+}
+
 #pragma game
 
-/// 处理游戏开始
+/// 处理游戏开始d
 - (void)handleGameStared {
     [super handleGameStared];
     // 延迟1秒加入舞池，目前游戏直接加入有问题，待游戏解决
     [HSThreadUtils dispatchMainAfter:1 callback:^{
+        [self loadRobotList];
         [kDiscoRoomService joinDancePool:nil];
+        // 单对多模式
+        [kDiscoRoomService setDanceMode:@"1"];
     }];
 }
 
@@ -319,9 +395,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         case CMD_ROOM_DISCO_BECOME_DJ: {
             // 上DJ台
             RespDiscoBecomeDJModel *model = [RespDiscoBecomeDJModel fromJSON:command];
-            if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
-                [kDiscoRoomService upToDJ:180];
-            }
+            [self handleUpDJ:model];
         }
             break;
         default:
@@ -334,24 +408,26 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 - (BOOL)checkIsFirstMicUser {
     NSArray<AudioMicroView *> *micViewList = self.gameMicContentView.micArr;
     BOOL isExistUser = NO;
-    for (AudioMicroView *view in micViewList) {
-        AudioRoomMicModel *m = view.model;
-        if (!m || !m.user) {
-            continue;
+    for (int i = 0; i < micViewList.count; ++i) {
+        // 跳过机器人，前6默认添加机器人
+        if (i >= 6) {
+            AudioMicroView *view = micViewList[i];
+            AudioRoomMicModel *m = view.model;
+            if (!m || !m.user) {
+                continue;
+            }
+            if ([m.user.userID isEqualToString:AppService.shared.login.loginUserInfo.userID] && !isExistUser) {
+                return YES;
+            }
+            isExistUser = YES;
         }
-        if ([m.user.userID isEqualToString:AppService.shared.login.loginUserInfo.userID] && !isExistUser) {
-            return YES;
-        }
-        return NO;
     }
     return NO;
 }
 
 /// 处理是否需要响应该消息
 - (void)handleIfNeedToRespDiscoInfo {
-    if (![self checkIsFirstMicUser]) {
-        return;
-    }
+
     // 响应数据给请求者
     // 贡献榜数据
     NSArray *rankArr = kDiscoRoomService.rankList;
@@ -459,16 +535,15 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     [self.rankView dtUpdateUI];
 }
 
-/// 已经发送消息
-/// @param msg msg
-- (void)onDidSendMsg:(RoomBaseCMDModel *)msg {
-    [super onDidSendMsg:msg];
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void (^)(BOOL))shouldSend {
     /// Game - 发送文本命中
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
         [self handleMsgContent:m.content];
     } else if ([msg isKindOfClass:RoomCmdUpMicModel.class] && msg.cmd == CMD_UP_MIC_NOTIFY) {
-        [kDiscoRoomService joinAnchorPosition:nil];
+        if ([self checkIfCanJoin]) {
+            [kDiscoRoomService joinAnchorField1:nil field2:msg.sendUser.isRobot ? msg.sendUser.userID : nil];
+        }
     } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
         [self handleGiftMsg:m];
@@ -478,9 +553,16 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     } else if (msg.cmd == CMD_ROOM_DISCO_BECOME_DJ) {
         // 上DJ台
         RespDiscoBecomeDJModel *model = (RespDiscoBecomeDJModel *) msg;
-        if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
-            [kDiscoRoomService upToDJ:180];
-        }
+        [self handleUpDJ:model];
+    }
+    return [super onWillSendMsg:msg shouldSend:shouldSend];
+
+}
+
+/// 处理上DJ
+- (void)handleUpDJ:(RespDiscoBecomeDJModel *)model {
+    if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
+        [kDiscoRoomService upToDJ:180];
     }
 }
 
@@ -504,7 +586,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
             [kDiscoRoomService showMsgPop:3 field1:content];
             // 特写镜头
-            [kDiscoRoomService specialRole:3 isTop:YES];
+            [kDiscoRoomService specialRole:3 isTop:NO];
         }
             break;
         case 3: {
@@ -512,7 +594,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
             [kDiscoRoomService showMsgPop:6 field1:content];
             // 特写镜头
-            [kDiscoRoomService specialRole:3 isTop:YES];
+            [kDiscoRoomService specialRole:3 isTop:NO];
             // 角色放大
             [kDiscoRoomService scaleBiggerRole:30 field1:@"2"];
         }
@@ -522,7 +604,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
             [kDiscoRoomService showMsgPop:9 field1:content];
             // 特写镜头
-            [kDiscoRoomService specialRole:5 isTop:YES];
+            [kDiscoRoomService specialRole:5 isTop:NO];
             // 角色特效
             [kDiscoRoomService switchEffectRole:2 * 60 * 60 field1:nil];
             // 角色放大
@@ -540,7 +622,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     if ([discoKeyWordsJoinWork isEqualToString:content]) {
         // 加入主播位
         if ([self isInMic]) {
-            [kDiscoRoomService joinAnchorPosition:nil];
+            if ([self checkIfCanJoin]) {
+                [kDiscoRoomService joinAnchorField1:nil field2:nil];
+            }
         }
     } else if ([discoKeyWordsMove isEqualToString:content]) {
         // 移动
@@ -561,6 +645,29 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         }
     }
 
+}
+
+/// 检测是否满足主播位，不满足则提示错误
+/// @return
+- (BOOL)checkIfCanJoin {
+//    if (self.currentMicCount > 8) {
+//        [ToastUtil show:@"最多同时8个主播上台"];
+//        return NO;
+//    }
+    return YES;
+}
+
+/// 当前麦位总数
+/// @return
+- (NSInteger)currentMicCount {
+    NSInteger count = 0;
+    NSArray *micArr = self.dicMicModel.allValues;
+    for (AudioRoomMicModel *m in micArr) {
+        if (m.user) {
+            count++;
+        }
+    }
+    return count;
 }
 
 - (void)updateTipLabel {

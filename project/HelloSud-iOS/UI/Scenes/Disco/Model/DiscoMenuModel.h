@@ -7,7 +7,6 @@
 //
 
 #import "BaseModel.h"
-
 NS_ASSUME_NONNULL_BEGIN
 /// 蹦迪菜单数据model
 @interface DiscoMenuModel : BaseModel
@@ -15,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)AudioUserModel *fromUser;
 @property (nonatomic, strong)AudioUserModel *toUser;
 @property (nonatomic, assign)NSInteger duration;
-@property (nonatomic, assign)NSTimeInterval beginTime;
-@property (nonatomic, strong)void(^updateDancingDurationBlock)(NSInteger second);
+@property (nonatomic, assign)int64_t beginTime;
+@property (nonatomic, strong)void(^_Nullable updateDancingDurationBlock)(NSInteger second);
 
 /// 跳舞是否结束
 /// @return
@@ -24,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 开始跳舞
 - (void)beginDancing;
 - (NSInteger)remainDuration;
+/// 是否相同
+/// @param model
+/// @return
+- (BOOL)isSame:(DiscoMenuModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

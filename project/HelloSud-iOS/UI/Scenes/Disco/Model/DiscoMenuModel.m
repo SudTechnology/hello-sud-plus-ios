@@ -34,14 +34,32 @@
     return 0;
 }
 
+/// 是否相同
+/// @param model
+/// @return
+- (BOOL)isSame:(DiscoMenuModel *)model {
+    if (model.isDanceFinished) {
+        // 都结束
+        return model.isDanceFinished == self.isDanceFinished &&
+                [model.fromUser.userID isEqualToString:self.fromUser.userID] &&
+                [model.toUser.userID isEqualToString:self.toUser.userID] &&
+                model.beginTime == self.beginTime;
+    } else {
+        return model.isDanceFinished == self.isDanceFinished &&
+                [model.fromUser.userID isEqualToString:self.fromUser.userID] &&
+                [model.toUser.userID isEqualToString:self.toUser.userID];
+    }
+}
+
 /// 开始跳舞
 - (void)beginDancing {
+    DDLogDebug(@"beginDancing, from user:%@", self.fromUser.name);
     if (self.danceTimer) {
         return;
     }
     WeakSelf
     if (self.beginTime == 0) {
-        self.beginTime = [NSDate date].timeIntervalSince1970;
+        self.beginTime = (int64_t)[NSDate date].timeIntervalSince1970;
     }
     self.danceTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
         [weakSelf handleTimerCallback];
@@ -50,6 +68,7 @@
 
 - (void)handleTimerCallback {
     NSInteger remainSecond = self.duration - (NSInteger) ([NSDate date].timeIntervalSince1970 - self.beginTime);
+    DDLogDebug(@"handleTimerCallback, from user:%@, remainSecond:%@", self.fromUser.name, @(remainSecond));
     if (remainSecond <= 0) {
         [self.danceTimer stopTimer];
         self.danceTimer = nil;

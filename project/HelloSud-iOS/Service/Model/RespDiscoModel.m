@@ -24,3 +24,14 @@
 
 @implementation RespDiscoBecomeDJModel
 @end
+
+/// 机器人信息model
+@implementation RotbotInfoModel
+@end
+
+/// 拉取机器人列表数据模型
+@implementation RespDiscoRobotListModel
++(NSDictionary *)mj_objectClassInArray {
+    return @{@"robotList":RotbotInfoModel.class};
+}
+@end

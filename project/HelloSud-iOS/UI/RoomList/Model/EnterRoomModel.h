@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)PKResultModel * pkResultVO;
 /// 弹幕拉流ID
 @property(nonatomic, copy) NSString *streamId;
+/// 是否来自创建房间
+@property (nonatomic, assign)BOOL isFromCreate;
 @end
 
 NS_ASSUME_NONNULL_END

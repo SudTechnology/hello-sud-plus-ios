@@ -74,6 +74,11 @@
     [super dtConfigEvents];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRuleTap:)];
     [self.ruleLabel addGestureRecognizer:tap];
+    WeakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:dancingListChangedNTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf loadData];
+    }];
+
 }
 
 - (void)dtConfigUI {
@@ -113,6 +118,7 @@
     if (normalArr.count > 0 || finishedArr.count > 0) {
         [self.dataList setArray:@[normalArr, finishedArr]];
     }
+    self.noDataLabel.hidden = self.dataList.count > 0;
     [self.tableView reloadData];
 }
 
@@ -129,13 +135,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WeakSelf
     DiscoMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiscoMenuTableViewCell"];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    WeakSelf
+    DiscoMenuTableViewCell *c = (DiscoMenuTableViewCell *)cell;
     DiscoMenuModel *model = self.dataList[indexPath.section][indexPath.row];
     model.rank = indexPath.row;
-    cell.model = model;
-    cell.danceFinishedBlock = ^{
-        [weakSelf loadData];
-    };
-    return cell;
+    c.model = model;
+    DDLogDebug(@"celll willDisplayCell from user:%@, cell:%@", model.fromUser.name, c);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

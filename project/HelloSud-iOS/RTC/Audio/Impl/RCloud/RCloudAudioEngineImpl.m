@@ -207,16 +207,19 @@
 - (void)sendCommand:(nonnull NSString *)command listener:(nonnull void (^)(int))listener {
     RCRTCRoom *rcrtcroom = [RCRTCEngine sharedInstance].room;
     if (rcrtcroom == nil)
+        if (listener) listener(-1);
         return;
     
     RCVoiceRoomEngine *engine = [self getEngine];
     if (engine != nil) {
         RCTextMessage *messageContent = [RCTextMessage messageWithContent:command];
         [engine sendMessage:messageContent success:^{
-            
+            if (listener) listener(0);
         } error:^(RCVoiceRoomErrorCode code, NSString * _Nonnull msg) {
-            
+            if (listener) listener((NSInteger)code);
         }];
+    } else {
+        if (listener) listener(-1);
     }
 }
 

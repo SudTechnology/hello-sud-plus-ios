@@ -62,6 +62,7 @@
     self.countdown = 4;
     self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
         weakSelf.countdown--;
+        DDLogDebug(@"disco rank tip countdown:%@", @(weakSelf.countdown));
         if (weakSelf.countdown <= 0) {
             [weakSelf endCountdown];
             if (finished) finished();
@@ -75,6 +76,7 @@
 }
 
 - (void)show:(void(^)(void))finished {
+    DDLogDebug(@"disco rank tip show");
     [self beginCountdown:finished];
 }
 
@@ -97,7 +99,7 @@
 - (UIImageView *)landscapeImageView {
     if (!_landscapeImageView) {
         _landscapeImageView = [[UIImageView alloc] init];
-        UIImage *image = [[UIImage imageNamed:@"dm_landscape_tip_guide_bg"] resizableImageWithCapInsets:UIEdgeInsetsMake(19, 12, 18, 36) resizingMode:UIImageResizingModeStretch];
+        UIImage *image = [[UIImage imageNamed:@"disco_rank_tip"] resizableImageWithCapInsets:UIEdgeInsetsMake(13, 10, 14, 38) resizingMode:UIImageResizingModeStretch];
         _landscapeImageView.image = image;
     }
     return _landscapeImageView;

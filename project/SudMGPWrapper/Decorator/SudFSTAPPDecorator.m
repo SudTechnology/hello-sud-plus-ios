@@ -13,7 +13,7 @@
 
 @implementation SudFSTAPPDecorator
 
-- (void)setISudFSTAPP:(id<ISudFSTAPP>)iSudFSTAPP {
+- (void)setISudFSTAPP:(id <ISudFSTAPP>)iSudFSTAPP {
     _iSudFSTAPP = iSudFSTAPP;
 }
 
@@ -23,7 +23,7 @@
 /// @param isSeatRandom 默认为ture, 带有游戏位(座位号)的时候，如果游戏位(座位号)已经被占用，是否随机分配一个空位坐下 isSeatRandom=true 随机分配空位坐下，isSeatRandom=false 不随机分配
 /// @param teamId 不支持分队的游戏：数值填1；支持分队的游戏：数值填1或2（两支队伍）
 - (void)notifyAppComonSelfIn:(BOOL)isIn seatIndex:(int)seatIndex isSeatRandom:(BOOL)isSeatRandom teamId:(int)teamId {
-    NSDictionary *dic = @{@"isIn": @(isIn), @"seatIndex": @(seatIndex), @"isSeatRandom" : @(isSeatRandom), @"teamId" : @(teamId)};
+    NSDictionary *dic = @{@"isIn": @(isIn), @"seatIndex": @(seatIndex), @"isSeatRandom": @(isSeatRandom), @"teamId": @(teamId)};
     [self notifyStateChange:APP_COMMON_SELF_IN dataJson:dic.mj_JSONString];
 }
 
@@ -56,8 +56,8 @@
 }
 
 /// 结束游戏
-- (void)notifyAppComonSetEnd {
-    
+- (void)notifyAppCommonSelfEnd {
+
     [self notifyStateChange:APP_COMMON_SELF_END dataJson:@{}.mj_JSONString];
 }
 
@@ -135,9 +135,17 @@
 
 /// 设置游戏上报信息扩展参数（透传）
 /// @param reportGameInfoExtras   string类型，Https服务回调report_game_info参数，最大长度1024字节，超过则截断（2022-01-21）
-- (void)notifyAppComonReportGameInfoExtras:(NSString *)reportGameInfoExtras {
+- (void)notifyAppCommonReportGameInfoExtras:(NSString *)reportGameInfoExtras {
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:reportGameInfoExtras, @"reportGameInfoExtras", nil];
     [self notifyStateChange:APP_COMMON_GAME_INFO_EXTRAS dataJson:dic.mj_JSONString];
+}
+
+/// 设置游戏中的AI玩家（2022-05-11新增） APP_COMMON_GAME_ADD_AI_PLAYERS
+/// @param appCommonGameAddAiPlayersModel  配置信息
+- (void)notifyAppCommonGameAddAIPlayers:(AppCommonGameAddAIPlayersModel *)appCommonGameAddAiPlayersModel {
+
+    NSString *jsonStr = [appCommonGameAddAiPlayersModel mj_JSONString];
+    [self notifyStateChange:APP_COMMON_GAME_ADD_AI_PLAYERS dataJson:jsonStr];
 }
 
 /// 元宇宙砂砂舞相关设置(app_common_game_disco_action)
@@ -147,11 +155,23 @@
     [self notifyStateChange:APP_COMMON_GAME_DISCO_ACTION dataJson:actionModel.mj_JSONString];
 }
 
+/// 设置游戏玩法选项（2022-05-10新增） APP_COMMON_GAME_SETTING_SELECT_INFO
+/// @param actionModel 指令参数model
+- (void)notifyAppCommonGameSettingSelectInfo:(AppCommonGameSettingGameInfo *)appCommonGameSettingGameInfo {
+    [self notifyStateChange:APP_COMMON_GAME_SETTING_SELECT_INFO dataJson:appCommonGameSettingGameInfo.mj_JSONString];
+}
+
+/// app在收到游戏断开连接通知后，通知游戏重试连接（2022-06-21新增，暂时支持ludo) APP_COMMON_GAME_RECONNECT
+- (void)notifyAppCommonGameReconnect {
+    [self notifyStateChange:APP_COMMON_GAME_RECONNECT dataJson:@{}.mj_JSONString];
+}
+
 #pragma mark =======APP->游戏状态处理=======
+
 /// 状态通知（app to mg）
 /// @param state 状态名称
 /// @param dataJson 需传递的json
-- (void)notifyStateChange:(NSString *) state dataJson:(NSString*) dataJson {
+- (void)notifyStateChange:(NSString *)state dataJson:(NSString *)dataJson {
     [self.iSudFSTAPP notifyStateChange:state dataJson:dataJson listener:^(int retCode, const NSString *retMsg, const NSString *dataJson) {
         NSLog(@"ISudFSMMG:notifyStateChange:retCode=%@ retMsg=%@ dataJson=%@", @(retCode), retMsg, dataJson);
     }];
@@ -178,7 +198,7 @@
 
 /// 更新code
 /// @param code 新的code
-- (void)updateCode:(NSString *) code {
+- (void)updateCode:(NSString *)code {
     [self.iSudFSTAPP updateCode:code listener:^(int retCode, const NSString *retMsg, const NSString *dataJson) {
         NSLog(@"ISudFSMMG:updateGameCode retCode=%@ retMsg=%@ dataJson=%@", @(retCode), retMsg, dataJson);
     }];

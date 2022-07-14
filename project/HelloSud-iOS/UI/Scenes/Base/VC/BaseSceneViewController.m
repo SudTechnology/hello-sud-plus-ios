@@ -276,7 +276,7 @@
     /// 非房主 结束游戏
     if (kAudioRoomService.roleType != 1) {
         [DTAlertView showTextAlert:NSString.dt_room_sure_end_game sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
-            [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
+            [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfEnd];
         }          onCloseCallback:^{
         }];
         return;
@@ -289,7 +289,7 @@
         [DTSheetView close];
         if (m.itemType == 2) {
             [DTAlertView showTextAlert:NSString.dt_room_sure_end_game sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
+                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfEnd];
             }          onCloseCallback:^{
             }];
             return;
@@ -324,7 +324,7 @@
         [self handleExitRoomIsFromSuspend:isSuspend finished:finished];
         return;
     }
-    [kAudioRoomService reqSwitchMic:weakSelf.roomID.integerValue micIndex:(int) kAudioRoomService.micIndex handleType:1 success:^{
+    [kAudioRoomService reqSwitchMic:weakSelf.roomID.integerValue micIndex:(int) kAudioRoomService.micIndex handleType:1 proxyUser:nil success:^{
         [weakSelf handleExitRoomIsFromSuspend:isSuspend finished:finished];
     }                          fail:^(NSError *error) {
         [weakSelf handleExitRoomIsFromSuspend:isSuspend finished:finished];
@@ -471,7 +471,7 @@
 - (void)handleMicTap:(AudioRoomMicModel *)micModel {
     if (micModel.user == nil) {
         /// 无人，上麦
-        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 success:nil fail:nil];
+        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 proxyUser:nil success:nil fail:nil];
         return;
     } else {
         BOOL isPlaying = self.sudFSMMGDecorator.isPlaying;
@@ -516,7 +516,7 @@
                     [DTSheetView close];
                     [DTAlertView showTextAlert:NSString.dt_room_flight_tile sureText:NSString.dt_room_confirm_flight cancelText:NSString.dt_common_cancel onSureCallback:^{
                         // 下麦
-                        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 success:nil fail:nil];
+                        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 proxyUser:nil success:nil fail:nil];
 
                         [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
                     }          onCloseCallback:^{
@@ -525,7 +525,7 @@
                 } else {
 
                     // 下麦
-                    [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 success:nil fail:nil];
+                    [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 proxyUser:nil success:nil fail:nil];
 
                     if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.login.loginUserInfo.userID]) {
                         /// 先退出结束游戏，再退出当前游戏
@@ -665,7 +665,7 @@
     }
     if (micModel.user == nil) {
         /// 无人，上麦
-        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 success:nil fail:nil];
+        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 proxyUser:nil success:nil fail:nil];
         return;
     }
 }

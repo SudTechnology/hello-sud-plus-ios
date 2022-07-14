@@ -8,7 +8,10 @@
 
 #import "DiscoRoomService.h"
 #import "SudMGPAPPState.h"
+
 NSNotificationName const showWaitingForDancingNTF = @"showWaitingForDancingNTF";
+/// 跳舞列表更新
+NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
 
 /// 元宇宙砂砂舞Action类型
 typedef NS_ENUM(NSInteger, DiscoActionType) {
@@ -85,6 +88,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     if ([giftModel.sendUser.userID isEqualToString:giftModel.toUser.userID]) {
         return;
     }
+    BOOL refresh = NO;
     DiscoMenuModel *m = [self findSameSendAndRecvUser:giftModel];
     NSInteger addDuration = 0;
     switch (giftModel.giftID) {
@@ -100,6 +104,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
                 m.toUser = giftModel.toUser;
                 [self.danceMenuList addObject:m];
             }
+            refresh = YES;
         }
             break;
         case 6: {
@@ -115,6 +120,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
                 m.toUser = giftModel.toUser;
                 [self.danceMenuList addObject:m];
             }
+            refresh = YES;
         }
             break;
         case 7: {
@@ -122,11 +128,23 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
             // 插队
             if (m) {
                 [self.danceMenuList removeObject:m];
-                if (self.danceMenuList.count > 0) {
-                    [self.danceMenuList insertObject:m atIndex:1];
+                // 首个等待用户
+                NSInteger firstWaitingIndex = -1;
+                NSArray *arrTemp = self.danceMenuList;
+                for (int i = 0; i < arrTemp.count; ++i) {
+                    DiscoMenuModel *temp = arrTemp[i];
+                    // 相同主播
+                    if (temp.beginTime == 0 && [temp.toUser.userID isEqualToString:m.toUser.userID]) {
+                        firstWaitingIndex = i;
+                        break;
+                    }
+                }
+                if (firstWaitingIndex >= 0) {
+                    [self.danceMenuList insertObject:m atIndex:firstWaitingIndex];
                 } else {
                     [self.danceMenuList addObject:m];
                 }
+                refresh = YES;
             }
         }
             break;
@@ -135,9 +153,13 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     }
 
     if (addDuration > 0) {
-        [self checkIfNeedToDancing:m duration:addDuration fromSentGift:YES];
+        // 送礼人是自己
+        BOOL fromSentGift = [AppService.shared.login.loginUserInfo isMeByUserID:giftModel.sendUser.userID];
+        [self checkIfNeedToDancing:m duration:addDuration fromSentGift:fromSentGift];
     }
-
+    if (refresh) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:dancingListChangedNTF object:nil];
+    }
 }
 
 - (void)checkIfNeedToDancing:(DiscoMenuModel *)m duration:(NSInteger)addDuration fromSentGift:(BOOL)fromSentGift {
@@ -165,6 +187,8 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
             // 发送者是自己，执行与主播跳舞指令
             [self danceWithAnchor:m.duration isTop:NO field1:m.toUser.userID];
+            // 3秒特写
+            [self specialRole:3 isTop:NO];
         }
     } else {
         // 已经在跳，如果是与自己在跳，则通知游戏继续跳
@@ -173,10 +197,10 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
             // 用户加入舞池
             self.dicDancingMap[m.toUser.userID] = m;
             self.dicDancingMap[m.fromUser.userID] = m;
-            if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
-                // 发送者是自己，执行与主播跳舞指令
-                [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
-            }
+//            if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
+//                // 发送者是自己，执行与主播跳舞指令
+//                [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
+//            }
         }
     }
 }
@@ -185,14 +209,37 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// @param model
 - (void)addDanceMenuInfo:(DiscoMenuModel *)model {
     DDLogDebug(@"addDanceMenuInfo: fromUser:%@, toUserID:%@", model.fromUser.userID, model.toUser.userID);
+    if ([self checkIsExist:model isFinished:model.isDanceFinished]) {
+        DDLogDebug(@"exist same dance info: fromUser:%@, toUserID:%@", model.fromUser.userID, model.toUser.userID);
+        return;
+    }
     if (model.isDanceFinished) {
         // 已经结束列表
         [self.finishedDanceMenuList addObject:model];
     } else {
         [self.danceMenuList addObject:model];
     }
-
     [self checkIfNeedToDancing:model duration:model.duration fromSentGift:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:dancingListChangedNTF object:nil];
+}
+
+- (BOOL)checkIsExist:(DiscoMenuModel *)model isFinished:(BOOL)isFinished {
+    if (isFinished) {
+        NSArray *arr = self.finishedDanceMenuList;
+        for(DiscoMenuModel *m in arr) {
+            if ([model isSame:m]) {
+                return YES;
+            }
+        }
+    } else {
+        NSArray *arr = self.danceMenuList;
+        for(DiscoMenuModel *m in arr) {
+            if ([model isSame:m]) {
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 /// 增数据
@@ -233,13 +280,19 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 - (void)handleAnchorStopDancing:(NSString *)anchorID {
     if (anchorID) {
         DiscoMenuModel *m = self.dicDancingMap[anchorID];
-        [self.danceMenuList removeObject:m];
-        [self.finishedDanceMenuList insertObject:m atIndex:0];
+        if (m) {
+            [self.danceMenuList removeObject:m];
+            [self.finishedDanceMenuList insertObject:m atIndex:0];
+            // 移除主播舞伴
+            [self.dicDancingMap removeObjectForKey:m.fromUser.userID];
+        } else {
+            DDLogError(@"handleAnchorStopDancing, no model in dancing map,anchorID:%@", anchorID);
+        }
+
         // 移除主播
         [self.dicDancingMap removeObjectForKey:anchorID];
-        // 移除主播舞伴
-        [self.dicDancingMap removeObjectForKey:m.fromUser.userID];
         [self checkIfNeedToDancing];
+        [[NSNotificationCenter defaultCenter] postNotificationName:dancingListChangedNTF object:nil];
     }
 }
 
@@ -330,12 +383,24 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
+/// 跳舞模式
+/// @param field1 field1:0-单对单（单个玩家只能和单个主播跳舞）；1-单对多（单个玩家可以和多个主播跳舞）默认0）
+- (void)setDanceMode:(NSString *)field1 {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeDancingMode;
+    m.field1 = field1;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
 /// 加入主播位
-/// @param position 0-0号主播位；1-1号主播位；2-2号主播位；3-3号主播位；4-4号主播位；5-5号主播位；6-6号主播位；7-7号主播位；-1-随机，默认随机
-- (void)joinAnchorPosition:(NSString *)position {
+/// @param field1 0-0号主播位；1-1号主播位；2-2号主播位；3-3号主播位；4-4号主播位；5-5号主播位；6-6号主播位；7-7号主播位；-1-随机，默认随机
+/// @param field2 机器人id
+- (void)joinAnchorField1:(NSString *)field1 field2:(NSString *)field2 {
+    DDLogDebug(@"joinAnchorField2:%@", field2);
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeJoinAnchorPosition;
-    m.field1 = position;
+    m.field1 = field1;
+    m.field2 = field2;
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
@@ -426,6 +491,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// @param isTop false-不置顶；true-置顶
 /// @param field1 playerId（主播玩家的id）；该参数必传，不传则没有任何效果
 - (void)danceWithAnchor:(int)cooldown isTop:(BOOL)isTop field1:(NSString *)field1 {
+    DDLogDebug(@"danceWithAnchor: field1:%@", field1);
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeDancingWithAnchor;
     m.cooldown = cooldown;
@@ -441,5 +507,20 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     m.actionId = DiscoActionTypeUpDJ;
     m.cooldown = cooldown;
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
+#pragma mark restful api
+
+/// 拉取机器人
+/// @param finished finished
+/// @param failure failure
++ (void)reqRobotListWithFinished:(void (^)(NSArray<RotbotInfoModel *> *robotList))finished failure:(void (^)(NSError *error))failure {
+    NSDictionary *dicParam = @{@"count": @(30)};
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"robot/list/v1") param:dicParam respClass:RespDiscoRobotListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (finished) {
+            RespDiscoRobotListModel *m = (RespDiscoRobotListModel *) resp;
+            finished(m.robotList);
+        }
+    }                         failure:failure];
 }
 @end

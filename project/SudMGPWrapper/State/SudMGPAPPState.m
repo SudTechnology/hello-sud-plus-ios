@@ -6,7 +6,17 @@
 //
 
 #import "SudMGPAPPState.h"
+#import <MJExtension/MJExtension.h>
 
 @implementation AppCommonGameDiscoAction
 @end
 
+/// AI玩家用户信息
+@implementation AIPlayerInfoModel
+@end
+
+@implementation AppCommonGameAddAIPlayersModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"aiPlayers": AIPlayerInfoModel.class};
+}
+@end
