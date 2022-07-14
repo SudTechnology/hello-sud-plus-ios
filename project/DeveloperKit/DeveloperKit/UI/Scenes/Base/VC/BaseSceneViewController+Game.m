@@ -13,6 +13,7 @@
 #import <SudMGP/ISudAPPD.h>
 #import <SudMGP/ISudFSMStateHandle.h>
 #import <SudMGP/SudMGP-umbrella.h>
+#import <SudMGP/SudLoadMGMode.h>
 
 @implementation BaseSceneViewController(Game)
 
@@ -256,7 +257,7 @@
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
 - (void)loginGame {
     NSString *appID = AppService.shared.currentAppIdModel.app_id; //AppService.shared.configModel.sudCfg.appId;
-    NSString *appKey = AppService.shared.currentAppIdModel.app_name;//AppService.shared.configModel.sudCfg.appKey;
+    NSString *appKey = AppService.shared.currentAppIdModel.app_key;//AppService.shared.configModel.sudCfg.appKey;
     if (appID.length == 0 || appKey.length == 0) {
         [ToastUtil show:@"Game appID or appKey is empty"];
         return;
@@ -313,7 +314,13 @@
         DDLogDebug(@"游戏ID为空，无法加载游戏:%@, currentRoomID:%@, currentGameRoomID:%@", gameId, self.roomID, self.gameRoomID);
         return;
     }
-    [SudMGP initSDK:appID appKey:appKey isTestEnv:GAME_TEST_ENV listener:^(int retCode, const NSString *retMsg) {
+
+    SudInitSDKParamModel *model = [[SudInitSDKParamModel alloc]init];
+    model.appId = appID;
+    model.appKey = appKey;
+    model.isTestEnv = GAME_TEST_ENV;
+    [SudMGP initSDK:model listener:^(int retCode, const NSString * _Nonnull retMsg) {
+
         if (retCode == 0) {
             DDLogInfo(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
             if (weakSelf) {
@@ -344,7 +351,18 @@
 /// @param rootView 游戏根视图
 - (void)loadGame:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t) mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView*)rootView {
 
-    id<ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:self.sudFSMMGDecorator rootView:rootView];
+    SudLoadMGParamModel *model = [[SudLoadMGParamModel alloc]init];
+    model.userId = userId;
+    model.roomId = roomId;
+    model.code = code;
+    model.mgId = mgId;
+    model.language = language;
+    model.gameViewContainer = rootView;
+    if (self.crossSecret.length > 0) {
+        model.loadMGMode = kSudLoadMgModeAppCrossAuth;
+        model.authorizationSecret = self.crossSecret;
+    }
+    id<ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:model fsmMG:self.sudFSTAPPDecorator];
     [self.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
 }
 

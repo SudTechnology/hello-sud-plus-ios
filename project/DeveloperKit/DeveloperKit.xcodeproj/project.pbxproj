@@ -151,6 +151,7 @@
 		6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460828286441B4005C99EF /* WebpImageCacheService.m */; };
 		6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */; };
 		6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */; };
+		6C682D32288010C900B2EC80 /* RespCrossRoomListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C682D31288010C900B2EC80 /* RespCrossRoomListModel.m */; };
 		6CCA0B0E287AC14700CAFF40 /* QuickStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFA287AC14700CAFF40 /* QuickStartViewController.m */; };
 		6CCA0B0F287AC14700CAFF40 /* QSGameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFB287AC14700CAFF40 /* QSGameListViewController.m */; };
 		6CCA0B10287AC14700CAFF40 /* QuickStartViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFC287AC14700CAFF40 /* QuickStartViewController+Game.m */; };
@@ -528,6 +529,8 @@
 		6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameItemFullCollectionViewCell.m; sourceTree = "<group>"; };
 		6C460860286D3BC7005C99EF /* HomeHeaderFullReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHeaderFullReusableView.h; sourceTree = "<group>"; };
 		6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderFullReusableView.m; sourceTree = "<group>"; };
+		6C682D30288010C900B2EC80 /* RespCrossRoomListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespCrossRoomListModel.h; sourceTree = "<group>"; };
+		6C682D31288010C900B2EC80 /* RespCrossRoomListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespCrossRoomListModel.m; sourceTree = "<group>"; };
 		6C75F36A27C348A50019BB74 /* KeyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHeader.h; sourceTree = "<group>"; };
 		6CCA0AF7287AC14700CAFF40 /* QuickStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickStartViewController.h; sourceTree = "<group>"; };
 		6CCA0AF8287AC14700CAFF40 /* QuickStartViewController+Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QuickStartViewController+Game.h"; sourceTree = "<group>"; };
@@ -619,8 +622,8 @@
 		44018CE027EAC49900FD9D0F /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				6CCA0AF5287AC14700CAFF40 /* QuickStart */,
-				4455ACED27EAC658001516EE /* Home */,
+				6CCA0AF5287AC14700CAFF40 /* Home */,
+				4455ACED27EAC658001516EE /* Home-old */,
 				4455ACDA27EAC657001516EE /* Login */,
 				4455ACEA27EAC658001516EE /* Main */,
 				4455ACFA27EAC658001516EE /* RoomList */,
@@ -749,14 +752,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		4455ACED27EAC658001516EE /* Home */ = {
+		4455ACED27EAC658001516EE /* Home-old */ = {
 			isa = PBXGroup;
 			children = (
 				4455ACEE27EAC658001516EE /* Controller */,
 				4455ACF127EAC658001516EE /* View */,
 				BC21001B5F7B2F0EA130BEDF /* Model */,
 			);
-			path = Home;
+			path = "Home-old";
 			sourceTree = "<group>";
 		};
 		4455ACEE27EAC658001516EE /* Controller */ = {
@@ -1150,6 +1153,8 @@
 				6C46082228630CD6005C99EF /* RespGiftListModel.m */,
 				6CD7260C287BCEAF004D02F9 /* RespAppIDListModel.h */,
 				6CD7260D287BCEAF004D02F9 /* RespAppIDListModel.m */,
+				6C682D30288010C900B2EC80 /* RespCrossRoomListModel.h */,
+				6C682D31288010C900B2EC80 /* RespCrossRoomListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1326,13 +1331,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		6CCA0AF5287AC14700CAFF40 /* QuickStart */ = {
+		6CCA0AF5287AC14700CAFF40 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				6CCA0AF6287AC14700CAFF40 /* VC */,
 				6CCA0AFD287AC14700CAFF40 /* View */,
 			);
-			path = QuickStart;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		6CCA0AF6287AC14700CAFF40 /* VC */ = {
@@ -1759,6 +1764,7 @@
 				4455AE0C27EAC6F7001516EE /* RoomSystemTableViewCell.m in Sources */,
 				4455ADA527EAC658001516EE /* GameListTableViewCell.m in Sources */,
 				6C39054D287AB0FF000056E1 /* DTPaddingLabel.m in Sources */,
+				6C682D32288010C900B2EC80 /* RespCrossRoomListModel.m in Sources */,
 				4455AD9C27EAC658001516EE /* GameListViewController.m in Sources */,
 				6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */,
 				4455AD8C27EAC658001516EE /* HSSettingCell.m in Sources */,

@@ -18,6 +18,11 @@
 
 @implementation CustomRoomViewController
 
+- (void)setConfigModel:(BaseSceneConfigModel *)configModel {
+    [super setConfigModel:configModel];
+    self.crossSecret = configModel.enterRoomModel.crossSecret;
+}
+
 - (void)dtAddViews {
     [super dtAddViews];
     
@@ -67,7 +72,7 @@
                 [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:NO reportGameInfoExtras:@""];
                 break;
             case GameAPITypeSelfEnd: // 解散游戏（队长）
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
+                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfEnd];
                 break;
             default:
                 break;

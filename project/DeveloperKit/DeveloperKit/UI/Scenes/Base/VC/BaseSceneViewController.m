@@ -276,7 +276,7 @@
     /// 非房主 结束游戏
     if (kAudioRoomService.roleType != 1) {
         [DTAlertView showTextAlert:NSString.dt_room_sure_end_game sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
-            [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
+            [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfEnd];
         }          onCloseCallback:^{
         }];
         return;
@@ -289,7 +289,7 @@
         [DTSheetView close];
         if (m.itemType == 2) {
             [DTAlertView showTextAlert:NSString.dt_room_sure_end_game sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
+                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfEnd];
             }          onCloseCallback:^{
             }];
             return;

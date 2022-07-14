@@ -10,30 +10,30 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// pk结果房间信息
-@interface PKResultRoomInfoModel: BaseModel
+@interface PKResultRoomInfoModel : BaseModel
 /// 房间id
-@property (nonatomic, assign) int64_t roomId;
+@property(nonatomic, assign) int64_t roomId;
 /// PK分数
-@property (nonatomic, assign) NSInteger score;
+@property(nonatomic, assign) NSInteger score;
 /// 房主图像
-@property (nonatomic, strong) NSString * roomOwnerHeader;
+@property(nonatomic, strong) NSString *roomOwnerHeader;
 /// 房主昵称
-@property (nonatomic, strong) NSString * roomOwnerNickname;
+@property(nonatomic, strong) NSString *roomOwnerNickname;
 @end
 
 /// pk结果房间信息
-@interface PKResultModel: BaseModel
+@interface PKResultModel : BaseModel
 
 /// pk状态（1：待匹配 2：pk已匹配，未开始 3：k已匹配，已开始 4：pk匹配关闭 5：pk已结束）
-@property (nonatomic, assign) NSInteger pkStatus;
+@property(nonatomic, assign) NSInteger pkStatus;
 /// 当前pkId值（有正在进行的PK则返回正在进行的pkId,否则返回null）
-@property (nonatomic, assign) int64_t pkId;
+@property(nonatomic, assign) int64_t pkId;
 /// 发起方用户信息
-@property (nonatomic, strong) PKResultRoomInfoModel * srcRoomInfo;
+@property(nonatomic, strong) PKResultRoomInfoModel *srcRoomInfo;
 /// 受邀方用户信息
-@property (nonatomic, strong) PKResultRoomInfoModel * destRoomInfo;
+@property(nonatomic, strong) PKResultRoomInfoModel *destRoomInfo;
 /// PK剩余时间（单位：秒）
-@property (nonatomic, assign) NSInteger remainSecond;
+@property(nonatomic, assign) NSInteger remainSecond;
 
 @end
 
@@ -51,9 +51,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) NSInteger gameLevel;
 @property(nonatomic, assign) NSInteger sceneType;
 /// pk当前状态信息
-@property (nonatomic, strong)PKResultModel * pkResultVO;
+@property(nonatomic, strong) PKResultModel *pkResultVO;
 /// 弹幕拉流ID
 @property(nonatomic, copy) NSString *streamId;
+/// 跨域秘钥
+@property(nonatomic, copy) NSString *crossSecret;
 @end
 
 NS_ASSUME_NONNULL_END

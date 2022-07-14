@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 请求进入房间
 /// @param roomId 房间ID
-+ (void)reqEnterRoom:(long)roomId success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail;
++ (void)reqEnterRoom:(long)roomId crossSecret:(NSString *)crossSecret success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail;
 
 /// 匹配开播的游戏，并进入游戏房间
 /// @param gameId 游戏ID
@@ -46,11 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param roomId 房间ID
 - (void)reqSwitchGame:(long)roomId gameId:(int64_t)gameId success:(EmptyBlock)success fail:(ErrorBlock)fail;
 
-
-/// 同意接单
-- (void)reqRoomOrderReceive:(NSInteger)orderId success:(EmptyBlock)success fail:(ErrorBlock)fail;
-
-
+/// 获取跨域房间列表
+/// @param authSecret <#authSecret description#>
+/// @param pageNumber <#pageNumber description#>
+/// @param success <#success description#>
+/// @param fail <#fail description#>
++ (void)reqCrossRoomList:(NSString *)authSecret pageNumber:(NSInteger)pageNumber success:(void (^)(NSArray <CrossRoomModel *> *roomList))success fail:(nullable ErrorBlock)fail;
 #pragma mark - Custom
 + (RoomCustomModel *)getCustomModel;
 + (GameCfgModel *)getGameCfgModel;

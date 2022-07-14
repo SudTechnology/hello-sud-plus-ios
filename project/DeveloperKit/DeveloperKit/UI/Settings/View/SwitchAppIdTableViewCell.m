@@ -64,7 +64,7 @@
         return;
     }
     AppIDInfoModel *model = (AppIDInfoModel *)self.model;
-    self.titleLabel.text = model.app_name;
+    self.titleLabel.text = [NSString stringWithFormat:@"%@:%@", model.app_name, model.app_id];
     self.rightImageView.hidden = model.isSelect ? NO : YES;
 }
 

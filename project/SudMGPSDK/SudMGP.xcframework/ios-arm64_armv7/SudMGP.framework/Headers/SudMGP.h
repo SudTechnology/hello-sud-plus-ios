@@ -10,6 +10,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ISudFSTAPP;
 @protocol ISudFSMMG;
 @protocol ISudCfg;
+@class SudInitSDKParamModel;
+@class SudLoadMGParamModel;
 
 @interface SudMGP : NSObject
 
@@ -39,6 +41,14 @@ NS_ASSUME_NONNULL_BEGIN
          appKey:(NSString*_Nonnull)appKey
       isTestEnv:(BOOL)isTestEnv
        listener:(ISudListenerInitSDK _Nullable )listener;
+/**
+ * 初始化SDK
+ * @param model SudInitSDKParamModel
+ * @param listener ISudListenerInitSDK
+ * 最低版本：v1.1.54.xx
+ */
++ (void)initSDK:(SudInitSDKParamModel*)model
+       listener:(ISudListenerInitSDK _Nullable )listener;
 
 /**
  * 反初始化SDK
@@ -60,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param mgId 小游戏ID，测试环境和生成环境小游戏ID是一致的
  * @param language 游戏语言 现支持，简体：zh-CN 繁体：zh-TW 英语：en-US 马来语：ms-MY
  * @param fsmMG ISudFSMMG
- * @param rootView 用于显示游戏的根视图
+ * @param rootView 用于显示游戏的根视图（gameViewContainer）
  * @return ISudFSTAPP
  */
 + (id<ISudFSTAPP>_Nonnull)loadMG:(NSString*_Nonnull)userId
@@ -70,6 +80,16 @@ NS_ASSUME_NONNULL_BEGIN
                         language:(NSString*_Nonnull)language
                            fsmMG:(id<ISudFSMMG>_Nonnull)fsmMG
                         rootView:(UIView*_Nonnull)rootView;
+
+/**
+ * 加载游戏
+ * @param model SudLoadMGParamModel
+ * @param fsmMG ISudFSMMG
+ * @return ISudFSTAPP
+ * 最低版本：v1.1.54.xx
+ */
++ (id<ISudFSTAPP>_Nonnull)loadMG:(SudLoadMGParamModel*_Nonnull)model
+                           fsmMG:(id<ISudFSMMG>_Nonnull)fsmMG;
 
 /**
  * 销毁游戏

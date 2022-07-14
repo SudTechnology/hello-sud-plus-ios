@@ -94,17 +94,26 @@
 #pragma mark - requst Data
 - (void)requestData {
     WeakSelf
-    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/list/v1") param:nil respClass:RoomListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
+    
+    [AudioRoomService reqCrossRoomList:nil pageNumber:0 success:^(NSArray<CrossRoomModel *> * _Nonnull roomList) {
         [weakSelf.tableView.mj_header endRefreshing];
-        RoomListModel *model = (RoomListModel *)resp;
-        [weakSelf.dataList removeAllObjects];
-        [weakSelf.dataList addObjectsFromArray:model.roomInfoList];
-        [weakSelf.tableView reloadData];
-        weakSelf.noDataLabel.hidden = weakSelf.dataList.count != 0;
-    } failure:^(NSError *error) {
+        
+    } fail:^(NSError *error) {
         [ToastUtil show:error.dt_errMsg];
         [weakSelf.tableView.mj_header endRefreshing];
     }];
+//
+//    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/list/v1") param:nil respClass:RoomListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
+//        [weakSelf.tableView.mj_header endRefreshing];
+//        RoomListModel *model = (RoomListModel *)resp;
+//        [weakSelf.dataList removeAllObjects];
+//        [weakSelf.dataList addObjectsFromArray:model.roomInfoList];
+//        [weakSelf.tableView reloadData];
+//        weakSelf.noDataLabel.hidden = weakSelf.dataList.count != 0;
+//    } failure:^(NSError *error) {
+//        [ToastUtil show:error.dt_errMsg];
+//        [weakSelf.tableView.mj_header endRefreshing];
+//    }];
  
     [self.searchHeaderView dtUpdateUI];
 }
@@ -126,7 +135,8 @@
         [ToastUtil show:@"请使用即构RTC体验"];
         return;
     }
-    [AudioRoomService reqEnterRoom:m.roomId success:nil fail:nil];
+    NSString *crossSecret = @"d6089222f1db75211712efec6d87f9cf";
+    [AudioRoomService reqEnterRoom:m.roomId crossSecret:crossSecret success:nil fail:nil];
 }
 
 #pragma mark - lazy

@@ -97,6 +97,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *gameNumLabel;
 /// 是否游戏禁言
 @property (nonatomic, assign)BOOL isGameForbiddenVoice;
+/// 跨房秘钥
+@property (nonatomic, strong)NSString *crossSecret;
 
 /// 创建服务
 - (void)createService;
