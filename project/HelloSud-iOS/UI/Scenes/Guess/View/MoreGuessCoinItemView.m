@@ -91,7 +91,7 @@
         _coinLabel = [[UILabel alloc] init];
         _coinLabel.font = UIFONT_MEDIUM(14);
         _coinLabel.textColor = HEX_COLOR(@"#666666");
-        _coinLabel.text = @"金币";
+        _coinLabel.text = @"";
     }
     return _coinLabel;
 }

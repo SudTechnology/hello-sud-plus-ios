@@ -93,7 +93,7 @@
     [super dtConfigUI];
     self.view.backgroundColor = UIColor.whiteColor;
     self.subTitleCategoryView.listContainer = self.listContainerView;
-    self.titleLabel.text = @"蹦迪排行";
+    self.titleLabel.text = NSString.dt_room_disco_rank;
 }
 
 - (void)onClickTipBtn:(id)sender {
@@ -106,7 +106,7 @@
         _tipBtn = [[UIButton alloc] init];
         _tipBtn.titleLabel.font = UIFONT_REGULAR(12);
         [_tipBtn setTitleColor:HEX_COLOR_A(@"#ffffff", 0.8) forState:UIControlStateNormal];
-        [_tipBtn setTitle:@"说明" forState:UIControlStateNormal];
+        [_tipBtn setTitle:NSString.dt_room_disco_show_tip forState:UIControlStateNormal];
         [_tipBtn addTarget:self action:@selector(onClickTipBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _tipBtn;
@@ -132,7 +132,7 @@
 
 - (JXCategoryTitleView *)subTitleCategoryView {
     if (!_subTitleCategoryView) {
-        self.subTitles = @[@"焦点王", @"人气主播榜"];
+        self.subTitles = @[NSString.dt_room_disco_win, NSString.dt_room_disco_good_anchor];
         _subTitleCategoryView = [[JXCategoryTitleView alloc] init];
         _subTitleCategoryView.delegate = self;
         _subTitleCategoryView.titleColor = HEX_COLOR_A(@"#ffffff", 0.8);

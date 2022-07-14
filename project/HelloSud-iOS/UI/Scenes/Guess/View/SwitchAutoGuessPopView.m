@@ -129,7 +129,7 @@
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
         _closeBtn = [[UIButton alloc] init];
-        [_closeBtn setTitle:@"暂不开启" forState:UIControlStateNormal];
+        [_closeBtn setTitle:NSString.dt_room_guess_not_open forState:UIControlStateNormal];
         [_closeBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         _closeBtn.layer.borderWidth = 1;
         _closeBtn.layer.borderColor = HEX_COLOR(@"#EEE8D0").CGColor;
@@ -142,7 +142,7 @@
 - (UIButton *)openBtn {
     if (!_openBtn) {
         _openBtn = [[UIButton alloc] init];
-        [_openBtn setTitle:@"立即开启" forState:UIControlStateNormal];
+        [_openBtn setTitle:NSString.dt_room_guess_open_now forState:UIControlStateNormal];
         [_openBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         [_openBtn setBackgroundImage:HEX_COLOR(@"#FFE373").dt_toImage forState:UIControlStateNormal];
         _openBtn.layer.borderWidth = 1;

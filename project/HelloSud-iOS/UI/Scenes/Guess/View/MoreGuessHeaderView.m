@@ -152,7 +152,7 @@
         _titleOneLabel = [[UILabel alloc] init];
         _titleOneLabel.font = UIFONT_MEDIUM(22);
         _titleOneLabel.textColor = UIColor.blackColor;
-        _titleOneLabel.text = @"跨房玩游戏，猜猜谁最强？";
+        _titleOneLabel.text = NSString.dt_room_guess_cross_game;
         _titleOneLabel.numberOfLines = 0;
     }
     return _titleOneLabel;
@@ -163,7 +163,7 @@
         _titleTwoLabel = [[UILabel alloc] init];
         _titleTwoLabel.font = UIFONT_MEDIUM(22);
         _titleTwoLabel.textColor = UIColor.blackColor;
-        _titleTwoLabel.text = @"限时竞猜活动";
+        _titleTwoLabel.text = NSString.dt_room_guess_limit_time;
         _titleTwoLabel.numberOfLines = 0;
     }
     return _titleTwoLabel;

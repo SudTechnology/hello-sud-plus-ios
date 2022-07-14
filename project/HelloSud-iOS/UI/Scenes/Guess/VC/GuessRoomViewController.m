@@ -104,7 +104,7 @@
 - (void)dtConfigUI {
     [super dtConfigUI];
     self.autoTitleLabel.text = @"自动竞猜";
-    self.normalGuessNavLabel.text = @"猜输赢";
+    self.normalGuessNavLabel.text = NSString.dt_room_guess_win_lose;
     [self reqData];
 }
 
@@ -201,7 +201,7 @@
 - (void)onTapShowOpenAutoGuess:(id)tap {
 
     if (self.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
-        [ToastUtil show:@"游戏进行中，暂不可开启竞猜"];
+        [ToastUtil show:NSString.dt_room_guess_gameing_not_open];
         return;
     }
     WeakSelf
@@ -238,11 +238,11 @@
 - (void)onTapAuto:(id)tap {
 
     if (self.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
-        [ToastUtil show:@"游戏进行中，暂不可关闭竞猜"];
+        [ToastUtil show:NSString.dt_room_guess_gaming_not_close];
         return;
     }
     WeakSelf
-    [DTAlertView showTextAlert:@"是否关闭每轮自动猜自己赢?" sureText:@"关闭" cancelText:@"返回" onSureCallback:^{
+    [DTAlertView showTextAlert:NSString.dt_room_guess_close_auto sureText:NSString.dt_common_close cancelText:NSString.dt_common_back onSureCallback:^{
         weakSelf.openAutoBet = NO;
         [weakSelf showNaviAutoStateView:NO];
     }          onCloseCallback:^{

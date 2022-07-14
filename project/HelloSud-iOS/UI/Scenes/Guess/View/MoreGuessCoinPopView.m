@@ -213,7 +213,7 @@
         _subtitleLabel = [[UILabel alloc] init];
         _subtitleLabel.font = UIFONT_REGULAR(16);
         _subtitleLabel.textColor = HEX_COLOR(@"#4C4A46");
-        _subtitleLabel.text = @"投的多分的多";
+        _subtitleLabel.text = NSString.dt_room_guess_give_more;
         _subtitleLabel.numberOfLines = 0;
     }
     return _subtitleLabel;
@@ -222,7 +222,7 @@
 - (UIButton *)supportBtn {
     if (!_supportBtn) {
         _supportBtn = [[UIButton alloc] init];
-        [_supportBtn setTitle:@"立即支持" forState:UIControlStateNormal];
+        [_supportBtn setTitle:NSString.dt_room_guess_support_now forState:UIControlStateNormal];
         [_supportBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         [_supportBtn setBackgroundImage:HEX_COLOR(@"#FFE373").dt_toImage forState:UIControlStateNormal];
         _supportBtn.layer.borderColor = HEX_COLOR(@"#FFBF3A").CGColor;

@@ -51,7 +51,7 @@
 - (void)dtUpdateUI {
     [super dtUpdateUI];
     [self updateBetCoin:200];
-    self.tipLabel.text = @"猜自己赢";
+    self.tipLabel.text = NSString.dt_room_guess_self_win;
 }
 
 - (void)dtConfigEvents {

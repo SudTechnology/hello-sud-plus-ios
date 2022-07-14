@@ -97,7 +97,7 @@
     GuessRankModel *m = (GuessRankModel *)self.model;
     NSString *subTitle = m.subTitle;
     if (!subTitle) {
-        subTitle = @"竞猜王者";
+        subTitle = NSString.dt_room_guess_winner;
     }
     NSDictionary *dic = @{NSFontAttributeName: UIFONT_MEDIUM(16), NSForegroundColorAttributeName: HEX_COLOR(@"#000000")};
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", name]

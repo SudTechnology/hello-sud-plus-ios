@@ -81,9 +81,9 @@
     [self reqData];
 
     NSDictionary *dic = @{NSFontAttributeName: UIFONT_BOLD(24), NSForegroundColorAttributeName: HEX_COLOR(@"#000000")};
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:@"选择你支持的玩家\n" attributes:dic];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", NSString.dt_room_guess_select_player] attributes:dic];
     dic = @{NSFontAttributeName: UIFONT_BOLD(30), NSForegroundColorAttributeName: HEX_COLOR(@"#000000")};
-    NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:@"猜对得5倍奖励！" attributes:dic];
+    NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:NSString.dt_room_guess_five_award attributes:dic];
     [attr appendAttributedString:attr2];
     self.titleLabel.attributedText = attr;
 }
@@ -162,7 +162,7 @@
 
     [GuessRoomService reqBet:2 coin:self.betCoin userList:selectedUserIdList finished:^{
         [DTSheetView close];
-        [ToastUtil show:@"已投注，等待游戏结果公布"];
+        [ToastUtil show:NSString.dt_room_guess_had_buy];
         DDLogDebug(@"投注成功");
         [kGuessService sendBetNotifyMsg:kGuessService.currentRoomVC.roomID betUsers:msgBetUserList];
     }                failure:^(NSError *error) {
@@ -174,7 +174,7 @@
 - (void)updateConfirmBtn {
     /// 游戏开始后不能下注
     if (kGuessService.currentRoomVC.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
-        [self.confirmBtn setTitle:@"已截止" forState:UIControlStateDisabled];
+        [self.confirmBtn setTitle:NSString.dt_room_guess_stop forState:UIControlStateDisabled];
         self.confirmBtn.enabled = NO;
         [self.collectionView reloadData];
         return;
@@ -269,7 +269,7 @@
         _emptyLabel.textColor = HEX_COLOR_A(@"#000000", 0.4);
         _emptyLabel.textAlignment = NSTextAlignmentCenter;
         _emptyLabel.numberOfLines = 0;
-        _emptyLabel.text = @"暂无玩家游戏中，请稍候再来";
+        _emptyLabel.text = NSString.dt_room_guess_waitting;
         _emptyLabel.hidden = YES;
     }
     return _emptyLabel;

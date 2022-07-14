@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"精彩竞猜活动";
+    self.title = NSString.dt_room_guess_activity;
     [self reqData];
 }
 

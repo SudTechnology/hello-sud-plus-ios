@@ -129,7 +129,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"游戏激战中，横屏体验更佳";
+        _titleLabel.text = NSString.dt_room_disco_good;
         _titleLabel.font = UIFONT_MEDIUM(16);
         _titleLabel.textColor = HEX_COLOR(@"#000000");
         _titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -161,7 +161,7 @@
 - (UIButton *)enterBtn {
     if (!_enterBtn) {
         _enterBtn = [[UIButton alloc] init];
-        [_enterBtn setTitle:@"马上进入" forState:UIControlStateNormal];
+        [_enterBtn setTitle:NSString.dt_disco_right_now forState:UIControlStateNormal];
         _enterBtn.titleLabel.font = UIFONT_MEDIUM(14);
         [_enterBtn setTitleColor:HEX_COLOR(@"#ffffff") forState:UIControlStateNormal];
         _enterBtn.backgroundColor = HEX_COLOR(@"#000000");

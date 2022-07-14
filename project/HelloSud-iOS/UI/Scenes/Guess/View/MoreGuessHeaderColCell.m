@@ -272,7 +272,7 @@
         self.leftIDLabel.text = @"ID 8721";
         self.rightNameLabel.text = @"念念不忘团";
         self.rightIDLabel.text = @"ID 8719";
-        self.coinTipLabel.text = @"预测成功瓜分奖池";
+        self.coinTipLabel.text = NSString.dt_room_guess_win_pool;
         self.vsImageView.alpha = 1;
         [self updateCoin:50000];
         [self beginCountdown];
@@ -280,7 +280,7 @@
         m.rightRoomName = self.rightNameLabel.text;
     } else {
         self.stateLabel.text = @"已结束";
-        self.coinTipLabel.text = @"13人预测成功瓜分奖池";
+        self.coinTipLabel.text = NSString.dt_room_guess_thirdthhen_pool;
         self.leftResultImageView.hidden = NO;
         self.rightResultImageView.hidden = NO;
         self.leftSupportLabel.hidden = NO;
@@ -432,7 +432,7 @@
 - (YYLabel *)leftSupportLabel {
     if (!_leftSupportLabel) {
         _leftSupportLabel = [[UILabel alloc] init];
-        _leftSupportLabel.text = @"已支持 100";
+        _leftSupportLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_support_fmt, @(100)];
         _leftSupportLabel.font = UIFONT_MEDIUM(10);
         _leftSupportLabel.textColor = HEX_COLOR(@"#FFFF22");
     }
@@ -477,8 +477,8 @@
 - (UIButton *)leftSupportBtn {
     if (!_leftSupportBtn) {
         _leftSupportBtn = [[UIButton alloc] init];
-        [_leftSupportBtn setTitle:@"猜TA赢" forState:UIControlStateNormal];
-        [_leftSupportBtn setTitle:@"加投" forState:UIControlStateSelected];
+        [_leftSupportBtn setTitle:NSString.dt_room_guess_ta_win forState:UIControlStateNormal];
+        [_leftSupportBtn setTitle:NSString.dt_room_guess_add forState:UIControlStateSelected];
 
         [_leftSupportBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         [_leftSupportBtn setTitleColor:HEX_COLOR_A(@"#6C3800", 0.3) forState:UIControlStateDisabled];
@@ -508,7 +508,7 @@
 - (YYLabel *)rightSupportLabel {
     if (!_rightSupportLabel) {
         _rightSupportLabel = [[UILabel alloc] init];
-        _rightSupportLabel.text = @"已支持 100";
+        _rightSupportLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_support_fmt, @(100)];
         _rightSupportLabel.font = UIFONT_MEDIUM(10);
         _rightSupportLabel.textColor = HEX_COLOR(@"#FFFF22");
     }
@@ -553,8 +553,8 @@
 - (UIButton *)rightSupportBtn {
     if (!_rightSupportBtn) {
         _rightSupportBtn = [[UIButton alloc] init];
-        [_rightSupportBtn setTitle:@"猜TA赢" forState:UIControlStateNormal];
-        [_rightSupportBtn setTitle:@"加投" forState:UIControlStateSelected];
+        [_rightSupportBtn setTitle:NSString.dt_room_guess_ta_win forState:UIControlStateNormal];
+        [_rightSupportBtn setTitle:NSString.dt_room_guess_add forState:UIControlStateSelected];
 
         [_rightSupportBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         [_rightSupportBtn setTitleColor:HEX_COLOR_A(@"#6C3800", 0.3) forState:UIControlStateDisabled];
@@ -608,7 +608,7 @@
 - (UILabel *)coinTipLabel {
     if (!_coinTipLabel) {
         _coinTipLabel = [[UILabel alloc] init];
-        _coinTipLabel.text = @"预测成功瓜分奖池";
+        _coinTipLabel.text = NSString.dt_room_guess_win_pool;
         _coinTipLabel.numberOfLines = 0;
         _coinTipLabel.font = UIFONT_MEDIUM(14);
         _coinTipLabel.textColor = HEX_COLOR(@"#ffffff");

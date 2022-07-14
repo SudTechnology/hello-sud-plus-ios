@@ -123,7 +123,7 @@
         _tagLabel = [[UILabel alloc] init];
         _tagLabel.font = UIFONT_REGULAR(10);
         _tagLabel.textColor = UIColor.whiteColor;
-        _tagLabel.text = @"竞猜王者";
+        _tagLabel.text = NSString.dt_room_guess_winner;
         _tagLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _tagLabel;

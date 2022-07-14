@@ -142,7 +142,7 @@
     attTime.yy_color = HEX_COLOR(@"#000000");
     [full appendAttributedString:attTime];
 
-    NSMutableAttributedString *attPersonTitle = [[NSMutableAttributedString alloc] initWithString:@"\n参与人数上限 "];
+    NSMutableAttributedString *attPersonTitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@ ", NSString.dt_room_guess_people_limit]];
     attPersonTitle.yy_lineSpacing = 6;
     attPersonTitle.yy_firstLineHeadIndent = 10;
     attPersonTitle.yy_headIndent = 10;
@@ -155,14 +155,14 @@
     attPersonValue.yy_color = HEX_COLOR(@"#000000");
     [full appendAttributedString:attPersonValue];
 
-    NSMutableAttributedString *enterTitle = [[NSMutableAttributedString alloc] initWithString:@"\n入场 "];
+    NSMutableAttributedString *enterTitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@",[NSString stringWithFormat:NSString.dt_room_guess_enter_fmt, @""]]];
     enterTitle.yy_firstLineHeadIndent = 10;
     enterTitle.yy_headIndent = 10;
     enterTitle.yy_font = UIFONT_REGULAR(12);
     enterTitle.yy_color = HEX_COLOR(@"#666666");
     [full appendAttributedString:enterTitle];
 
-    NSString *feeStr =  m.ticketCoin > 0 ? [NSString stringWithFormat:@"%@金币", @(m.ticketCoin)] : @"免费";
+    NSString *feeStr =  m.ticketCoin > 0 ? [NSString stringWithFormat:@"%@金币", @(m.ticketCoin)] : NSString.dt_room_guess_fee;
     NSMutableAttributedString *enterTitleValue = [[NSMutableAttributedString alloc] initWithString:feeStr];
     enterTitleValue.yy_font = UIFONT_BOLD(12);
     enterTitleValue.yy_color = HEX_COLOR(@"#000000");

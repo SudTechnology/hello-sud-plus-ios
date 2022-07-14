@@ -122,7 +122,7 @@
         [self.headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.gamePic]];
     }
     self.nameLabel.text = m.gameName;
-    self.coinLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_enter_fmt, m.ticketCoin > 0 ? [NSString stringWithFormat:NSString.dt_room_guess_coin_fmt, @(m.ticketCoin)] : @"免费"];
+    self.coinLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_enter_fmt, m.ticketCoin > 0 ? [NSString stringWithFormat:NSString.dt_room_guess_coin_fmt, @(m.ticketCoin)] : [NSString stringWithFormat:@"%@", NSString.dt_room_guess_fee]];
     [self updateAward:m.winCoin];
     [self beginCountdown];
     [self updateCountdown];
@@ -277,7 +277,7 @@
     if (!_playBtn) {
         _playBtn = [[UIButton alloc] init];
         _playBtn.titleLabel.font = UIFONT_BOLD(16);
-        [_playBtn setTitle:@"立即玩" forState:UIControlStateNormal];
+        [_playBtn setTitle:NSString.dt_room_guess_play_now forState:UIControlStateNormal];
         [_playBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         [_playBtn setBackgroundImage:HEX_COLOR(@"#FFE373").dt_toImage forState:UIControlStateNormal];
         _playBtn.layer.borderColor = HEX_COLOR(@"#FFBF3A").CGColor;

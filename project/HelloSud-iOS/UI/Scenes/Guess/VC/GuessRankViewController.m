@@ -112,7 +112,7 @@
         _titleCategoryView.titleSelectedColor = HEX_COLOR(@"#ffffff");
         _titleCategoryView.titleFont = UIFONT_REGULAR(18);
         _titleCategoryView.titleSelectedFont = UIFONT_BOLD(18);
-        _titleCategoryView.titles = @[@"竞猜王", @"大神榜"];
+        _titleCategoryView.titles = @[NSString.dt_room_guess_king, NSString.dt_room_guess_big_rank];
         _titleCategoryView.contentEdgeInsetLeft = 0;
         _titleCategoryView.contentEdgeInsetRight = 0;
 
@@ -135,13 +135,13 @@
         _subTitleCategoryView.titleSelectedColor = HEX_COLOR(@"#3F3228");
         _subTitleCategoryView.titleFont = UIFONT_REGULAR(12);
         _subTitleCategoryView.titleSelectedFont = UIFONT_MEDIUM(12);
-        _subTitleCategoryView.titles = @[@"日榜", @"周榜"];
+        _subTitleCategoryView.titles = @[NSString.dt_room_guess_rank_day, NSString.dt_room_guess_rank_week];
         _subTitleCategoryView.backgroundColor = HEX_COLOR_A(@"#C0A48F", 0.3);
         _subTitleCategoryView.contentEdgeInsetLeft = 15;
         _subTitleCategoryView.contentEdgeInsetRight = 15;
         _subTitleCategoryView.titleColorGradientEnabled = YES;
         _subTitleCategoryView.titleLabelZoomScrollGradientEnabled = NO;
-        self.subTitles = @[@"日榜", @"周榜"];
+        self.subTitles = _subTitleCategoryView.titles;
         JXCategoryIndicatorBackgroundView *backgroundIndicator = [[JXCategoryIndicatorBackgroundView alloc] init];
         backgroundIndicator.indicatorColor = HEX_COLOR(@"#FFF2E3");
         backgroundIndicator.indicatorWidth = 54;
@@ -187,16 +187,18 @@
     GuessRankContentView *listView = [[GuessRankContentView alloc] init];
     [listView updateHeadHeight:253];
     listView.dataList = [self createDataList];
+    NSString *tip = NSString.dt_room_guess_win_round;
     if (self.titleIndex == 0) {
-        NSString *subTitle = @"竞猜王者";
-        listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"盛世红盛" avatar:@"ic_avatar_1" tip:@"胜利(场)" subTitle:subTitle];
-        listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"念念不忘" avatar:@"ic_avatar_2" tip:@"胜利(场)" subTitle:subTitle];
-        listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"杏岛绮月" avatar:@"ic_avatar_3" tip:@"胜利(场)" subTitle:subTitle];
+        NSString *subTitle = NSString.dt_room_guess_winner;
+
+        listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"盛世红盛" avatar:@"ic_avatar_1" tip:tip subTitle:subTitle];
+        listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"念念不忘" avatar:@"ic_avatar_2" tip:tip subTitle:subTitle];
+        listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"杏岛绮月" avatar:@"ic_avatar_3" tip:tip subTitle:subTitle];
     } else {
-        NSString *subTitle = @"游戏高手";
-        listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"满馨" avatar:@"ic_avatar_10" tip:@"胜利(场)" subTitle:subTitle];
-        listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"贝茗" avatar:@"ic_avatar_9" tip:@"胜利(场)" subTitle:subTitle];
-        listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"庹启黛" avatar:@"ic_avatar_8" tip:@"胜利(场)" subTitle:subTitle];
+        NSString *subTitle = NSString.dt_room_guess_game_winner;
+        listView.firstModel = [GuessRankModel createModel:1 count:8763 name:@"满馨" avatar:@"ic_avatar_10" tip:tip subTitle:subTitle];
+        listView.secondModel = [GuessRankModel createModel:2 count:8598 name:@"贝茗" avatar:@"ic_avatar_9" tip:tip subTitle:subTitle];
+        listView.thirdModel = [GuessRankModel createModel:3 count:8267 name:@"庹启黛" avatar:@"ic_avatar_8" tip:tip subTitle:subTitle];
     }
 
     [listView dtUpdateUI];
@@ -209,23 +211,25 @@
     NSMutableArray *arr = [[NSMutableArray alloc] init];
 
     if (self.titleIndex == 0) {
-        NSString *subTitle = @"竞猜王者";
-        [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"娜以香" avatar:@"ic_avatar_4" tip:@"竞猜获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"大真蓓" avatar:@"ic_avatar_5" tip:@"竞猜获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"宦滢" avatar:@"ic_avatar_6" tip:@"竞猜获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7" tip:@"竞猜获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"庹启黛" avatar:@"ic_avatar_8" tip:@"竞猜获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"贝茗" avatar:@"ic_avatar_9" tip:@"竞猜获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"满馨" avatar:@"ic_avatar_10" tip:@"竞猜获胜" subTitle:subTitle]];
+        NSString *subTitle = NSString.dt_room_guess_winner;
+        NSString *tip = NSString.dt_room_guess_will_win;
+        [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"娜以香" avatar:@"ic_avatar_4" tip:tip subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"大真蓓" avatar:@"ic_avatar_5" tip:tip subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"宦滢" avatar:@"ic_avatar_6" tip:tip subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7" tip:tip subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"庹启黛" avatar:@"ic_avatar_8" tip:tip subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"贝茗" avatar:@"ic_avatar_9" tip:tip subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"满馨" avatar:@"ic_avatar_10" tip:tip subTitle:subTitle]];
     } else {
-        NSString *subTitle = @"游戏高手";
-        [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"满馨" avatar:@"ic_avatar_10" tip:@"获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"贝茗" avatar:@"ic_avatar_9" tip:@"获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"庹启黛" avatar:@"ic_avatar_8" tip:@"获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7" tip:@"获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"宦滢" avatar:@"ic_avatar_6" tip:@"获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"大真蓓" avatar:@"ic_avatar_5" tip:@"获胜" subTitle:subTitle]];
-        [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"娜以香" avatar:@"ic_avatar_4" tip:@"获胜" subTitle:subTitle]];
+        NSString *subTitle = NSString.dt_room_guess_game_winner;
+        NSString *win = NSString.dt_room_guess_get_win;
+        [arr addObject:[GuessRankModel createModel:4 count:7862 name:@"满馨" avatar:@"ic_avatar_10" tip:win subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:5 count:7623 name:@"贝茗" avatar:@"ic_avatar_9" tip:win subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:6 count:6592 name:@"庹启黛" avatar:@"ic_avatar_8" tip:win subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:7 count:5689 name:@"易宁" avatar:@"ic_avatar_7" tip:win subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:8 count:4369 name:@"宦滢" avatar:@"ic_avatar_6" tip:win subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:9 count:3321 name:@"大真蓓" avatar:@"ic_avatar_5" tip:win subTitle:subTitle]];
+        [arr addObject:[GuessRankModel createModel:10 count:3114 name:@"娜以香" avatar:@"ic_avatar_4" tip:win subTitle:subTitle]];
     }
     return arr;
 }

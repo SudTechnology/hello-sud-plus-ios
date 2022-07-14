@@ -166,9 +166,9 @@
     switch (self.resultStateType) {
         case GuessResultPopViewTypeWin: {
             /// 猜中
-            self.titleLabel.text = isInGame ? @"恭喜获胜" : @"猜中了";
+            self.titleLabel.text = isInGame ? NSString.dt_room_guess_win_good : NSString.dt_room_guess_win_now;
             [self updateCoin:self.winCoin];
-            self.tipLabel.text = isInGame ? @"超过了94.8%的人" : @"料事如神，乘胜追击~";
+            self.tipLabel.text = isInGame ? NSString.dt_room_guess_over : NSString.dt_room_guess_you_better;
             self.coinLabel.hidden = NO;
             self.joinImageView.hidden = YES;
             self.joinTipLabel.hidden = YES;
@@ -180,8 +180,8 @@
             break;
         case GuessResultPopViewTypeLose: {
             /// 未猜中
-            self.titleLabel.text = @"下次加油";
-            self.tipLabel.text = @"不必气馁，下把翻盘！";
+            self.titleLabel.text = NSString.dt_room_guess_next_win;
+            self.tipLabel.text = NSString.dt_room_guess_never_giveup;
             self.joinImageView.hidden = NO;
             self.joinTipLabel.hidden = NO;
             self.coinLabel.hidden = YES;
@@ -193,8 +193,8 @@
             break;
         case GuessResultPopViewTypeNotBet: {
             /// 未参与
-            self.titleLabel.text = @"未竞猜";
-            self.tipLabel.text = isInGame ? @"投自己赢，获胜讲赢得5倍奖励！" : @"猜中将获得5倍奖励！下轮一起来吧~";
+            self.titleLabel.text = NSString.dt_room_guess_not_guess;
+            self.tipLabel.text = isInGame ? NSString.dt_room_guess_self_win : NSString.dt_room_guess_next_guess;
             self.joinImageView.hidden = NO;
             self.joinTipLabel.hidden = NO;
             self.coinLabel.hidden = YES;
@@ -363,7 +363,7 @@
         _listTipLabel.font = UIFONT_REGULAR(12);
         _listTipLabel.textColor = HEX_COLOR(@"#000000");
         _listTipLabel.textAlignment = NSTextAlignmentCenter;
-        _listTipLabel.text = @"游戏战况";
+        _listTipLabel.text = NSString.dt_room_guess_game_round_state;
     }
     return _listTipLabel;
 }
@@ -379,7 +379,7 @@
 - (UIButton *)againBtn {
     if (!_againBtn) {
         _againBtn = [[UIButton alloc] init];
-        [_againBtn setTitle:@"再来一局" forState:UIControlStateNormal];
+        [_againBtn setTitle:NSString.dt_room_guess_one_more forState:UIControlStateNormal];
         [_againBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         [_againBtn setBackgroundImage:HEX_COLOR(@"#FFE373").dt_toImage forState:UIControlStateNormal];
         _againBtn.layer.borderWidth = 1;
@@ -392,7 +392,7 @@
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
         _closeBtn = [[UIButton alloc] init];
-        [_closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
+        [_closeBtn setTitle:NSString.dt_common_close forState:UIControlStateNormal];
         [_closeBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         [_closeBtn setBackgroundImage:HEX_COLOR(@"#FFFFFF").dt_toImage forState:UIControlStateNormal];
         _closeBtn.layer.borderWidth = 1;
@@ -416,7 +416,7 @@
 - (MarqueeLabel *)joinTipLabel {
     if (!_joinTipLabel) {
         _joinTipLabel = [[MarqueeLabel alloc] init];
-        _joinTipLabel.text = @"他们已参与竞猜";
+        _joinTipLabel.text = NSString.dt_room_guess_they_guess;
         _joinTipLabel.font = UIFONT_REGULAR(12);
         _joinTipLabel.textColor = HEX_COLOR_A(@"#000000", 0.7);
         _joinTipLabel.hidden = YES;

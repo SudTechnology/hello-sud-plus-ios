@@ -222,7 +222,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 - (void)onSettingTap:(UITapGestureRecognizer *)tap {
     if (self.gameId > 0) {
         NSString *tip = @"确定要关闭蹦迪吗？ 关闭后本场蹦迪将清空，包括正在进行中的跳舞、排队中的跳舞、角色特效";
-        [DTAlertView showTextAlert:tip sureText:@"关闭" cancelText:@"返回" onSureCallback:^{
+        [DTAlertView showTextAlert:tip sureText:NSString.dt_common_close cancelText:NSString.dt_common_back onSureCallback:^{
             [kDiscoRoomService clearAllDancingMenu];
             [self reqChangeToGameGameId:0 operatorUser:AppService.shared.login.loginUserInfo.userID];
             [self updateSettingState:NO];

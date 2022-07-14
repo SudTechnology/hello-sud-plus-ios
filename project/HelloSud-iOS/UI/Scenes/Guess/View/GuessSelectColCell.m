@@ -84,7 +84,7 @@
         if (self.isGamePlaying) {
             [_supportBtn setTitle:@"未支持" forState:UIControlStateNormal];
         } else {
-            [_supportBtn setTitle:@"猜TA赢" forState:UIControlStateNormal];
+            [_supportBtn setTitle:NSString.dt_room_guess_ta_win forState:UIControlStateNormal];
         }
     }
 
@@ -102,8 +102,8 @@
 - (UIButton *)supportBtn {
     if (!_supportBtn) {
         _supportBtn = [[UIButton alloc] init];
-        [_supportBtn setTitle:@"猜TA赢" forState:UIControlStateNormal];
-        [_supportBtn setTitle:@"已支持" forState:UIControlStateSelected];
+        [_supportBtn setTitle:NSString.dt_room_guess_ta_win forState:UIControlStateNormal];
+        [_supportBtn setTitle:NSString.dt_room_guess_had_support forState:UIControlStateSelected];
 
         [_supportBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateNormal];
         [_supportBtn setTitleColor:HEX_COLOR(@"#6C3800") forState:UIControlStateSelected];

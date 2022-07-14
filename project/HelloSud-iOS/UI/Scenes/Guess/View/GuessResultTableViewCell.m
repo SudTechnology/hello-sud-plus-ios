@@ -168,7 +168,7 @@
         attrIcon.yy_firstLineHeadIndent = 5;
         [full appendAttributedString:attrIcon];
 
-        NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:@"已支持  "];
+        NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@  ", NSString.dt_room_guess_had_support]];
         attrAwardValue.yy_font = UIFONT_REGULAR(10);
         attrAwardValue.yy_color = HEX_COLOR(@"#FF7B14");
         [full appendAttributedString:attrAwardValue];

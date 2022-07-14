@@ -112,7 +112,7 @@
 - (MarqueeLabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[MarqueeLabel alloc] init];
-        _titleLabel.text = @"加入战队";
+        _titleLabel.text = NSString.dt_room_maku_join;
         _titleLabel.font = UIFONT_REGULAR(12);
         _titleLabel.textColor = HEX_COLOR_A(@"#ffffff", 0.9);
         _titleLabel.textAlignment = NSTextAlignmentCenter;
