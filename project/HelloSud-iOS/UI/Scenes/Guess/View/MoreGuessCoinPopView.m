@@ -48,6 +48,7 @@
         [weakSelf updateSelectState:view];
     };
 
+    self.selectedCoin = v2.coin;
     MoreGuessCoinItemView *v3 = [[MoreGuessCoinItemView alloc] init];
     v3.isSelected = NO;
     v3.coin = 500;

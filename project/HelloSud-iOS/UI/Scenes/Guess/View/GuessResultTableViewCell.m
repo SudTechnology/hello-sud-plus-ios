@@ -106,6 +106,7 @@
     } else {
         self.backgroundColor = nil;
     }
+
     [self updateStar:m.score];
     [self updateClub:m.award];
 }
