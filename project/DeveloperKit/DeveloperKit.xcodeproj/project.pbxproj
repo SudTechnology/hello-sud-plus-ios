@@ -152,9 +152,7 @@
 		6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */; };
 		6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */; };
 		6C682D32288010C900B2EC80 /* RespCrossRoomListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C682D31288010C900B2EC80 /* RespCrossRoomListModel.m */; };
-		6CCA0B0E287AC14700CAFF40 /* QuickStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFA287AC14700CAFF40 /* QuickStartViewController.m */; };
 		6CCA0B0F287AC14700CAFF40 /* QSGameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFB287AC14700CAFF40 /* QSGameListViewController.m */; };
-		6CCA0B10287AC14700CAFF40 /* QuickStartViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFC287AC14700CAFF40 /* QuickStartViewController+Game.m */; };
 		6CCA0B11287AC14700CAFF40 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFF287AC14700CAFF40 /* QSSwitchRoomModeView.m */; };
 		6CCA0B12287AC14700CAFF40 /* QSRoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B03287AC14700CAFF40 /* QSRoomMoreView.m */; };
 		6CCA0B13287AC14700CAFF40 /* QSRoomOperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B06287AC14700CAFF40 /* QSRoomOperatorView.m */; };
@@ -532,12 +530,8 @@
 		6C682D30288010C900B2EC80 /* RespCrossRoomListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespCrossRoomListModel.h; sourceTree = "<group>"; };
 		6C682D31288010C900B2EC80 /* RespCrossRoomListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespCrossRoomListModel.m; sourceTree = "<group>"; };
 		6C75F36A27C348A50019BB74 /* KeyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHeader.h; sourceTree = "<group>"; };
-		6CCA0AF7287AC14700CAFF40 /* QuickStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickStartViewController.h; sourceTree = "<group>"; };
-		6CCA0AF8287AC14700CAFF40 /* QuickStartViewController+Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QuickStartViewController+Game.h"; sourceTree = "<group>"; };
 		6CCA0AF9287AC14700CAFF40 /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
-		6CCA0AFA287AC14700CAFF40 /* QuickStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickStartViewController.m; sourceTree = "<group>"; };
 		6CCA0AFB287AC14700CAFF40 /* QSGameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameListViewController.m; sourceTree = "<group>"; };
-		6CCA0AFC287AC14700CAFF40 /* QuickStartViewController+Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QuickStartViewController+Game.m"; sourceTree = "<group>"; };
 		6CCA0AFE287AC14700CAFF40 /* QSHomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSHomeHeaderView.h; sourceTree = "<group>"; };
 		6CCA0AFF287AC14700CAFF40 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
 		6CCA0B00287AC14700CAFF40 /* QSRoomOperatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSRoomOperatorView.h; sourceTree = "<group>"; };
@@ -1343,12 +1337,8 @@
 		6CCA0AF6287AC14700CAFF40 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				6CCA0AF7287AC14700CAFF40 /* QuickStartViewController.h */,
-				6CCA0AF8287AC14700CAFF40 /* QuickStartViewController+Game.h */,
 				6CCA0AF9287AC14700CAFF40 /* QSGameListViewController.h */,
-				6CCA0AFA287AC14700CAFF40 /* QuickStartViewController.m */,
 				6CCA0AFB287AC14700CAFF40 /* QSGameListViewController.m */,
-				6CCA0AFC287AC14700CAFF40 /* QuickStartViewController+Game.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1739,7 +1729,6 @@
 				4455AD9027EAC658001516EE /* LoginViewController.m in Sources */,
 				6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */,
 				6C076E80279E8EBD00650209 /* AudioCommon.m in Sources */,
-				6CCA0B10287AC14700CAFF40 /* QuickStartViewController+Game.m in Sources */,
 				6CCA0B0F287AC14700CAFF40 /* QSGameListViewController.m in Sources */,
 				E551BF31281500900046D417 /* IMRoomManager.m in Sources */,
 				6CCA0B17287AC14700CAFF40 /* QSRoomInputView.m in Sources */,
@@ -1809,7 +1798,6 @@
 				448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */,
 				4455AD9827EAC658001516EE /* SearchHeaderView.m in Sources */,
 				6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */,
-				6CCA0B0E287AC14700CAFF40 /* QuickStartViewController.m in Sources */,
 				44D9F3A8280FB0FB000B14B5 /* GameConfigTableViewCell.m in Sources */,
 				44BC48E52815433400E4E3F7 /* RoomCmdOrderCreateModel.m in Sources */,
 				6C390563287AB0FF000056E1 /* DTTimer.m in Sources */,

@@ -7,7 +7,7 @@
 #import "QSHomeHeaderView.h"
 #import "QSGameListCell.h"
 #import "QSGameItemModel.h"
-#import "QuickStartViewController.h"
+
 
 /// 游戏视图列表
 @interface QSGameListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -62,9 +62,7 @@
     [super dtConfigEvents];
     WeakSelf
     self.searchHeaderView.onSearchEnterBlock = ^(NSString *searchText) {
-        QuickStartViewController *vc = [[QuickStartViewController alloc]init];
-        vc.roomId = searchText;
-        [weakSelf.navigationController pushViewController:vc animated:YES];
+        [weakSelf enterRoom:searchText gameId :0];
     };
 }
 
@@ -76,6 +74,20 @@
     //TODO: 开发者由SudMGP提供的游戏列表
     NSArray *arrGame = [QSAppPreferences.shared readGameList];
     [self.dataList setArray:arrGame];
+}
+
+- (void)enterRoom:(NSString *)roomId gameId:(int64_t)gameId {
+
+    AudioSceneConfigModel *config = [[AudioSceneConfigModel alloc] init];
+    config.gameId = gameId;
+    config.roomID = roomId;//[NSString stringWithFormat:@"%ld", model.roomId];
+    config.roomNumber = roomId;//[NSString stringWithFormat:@"%ld", model.roomNumber];
+    config.roomType = gameId == 0 ? HSAudio : HSGame;
+    config.roomName = @"custom";//model.roomName;
+    config.roleType = 0;//model.roleType;
+    config.enterRoomModel = [[EnterRoomModel alloc] init];
+    BaseSceneViewController *vc = [SceneFactory createSceneVC:SceneTypeCustom configModel:config];
+    [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -99,20 +111,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     QSGameItemModel *model = self.dataList[indexPath.row];
-//    QuickStartViewController *vc = [[QuickStartViewController alloc]init];
-//    vc.gameId = model.gameId;
-//
-    AudioSceneConfigModel *config = [[AudioSceneConfigModel alloc] init];
-    config.gameId = model.gameId;
-    config.roomID = @"10000";//[NSString stringWithFormat:@"%ld", model.roomId];
-    config.roomNumber = @"10000";//[NSString stringWithFormat:@"%ld", model.roomNumber];
-    config.roomType = model.gameId == 0 ? HSAudio : HSGame;
-    config.roomName = @"custom";//model.roomName;
-    config.roleType = 0;//model.roleType;
-    config.enterRoomModel = [[EnterRoomModel alloc]init];
-    BaseSceneViewController *vc = [SceneFactory createSceneVC:SceneTypeCustom configModel:config];
-    [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
+    [self enterRoom:@"10000" gameId:model.gameId];
 }
+
 
 // 设置Header的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
@@ -143,7 +144,7 @@
 
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        
+
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         CGFloat itemW = floor((kScreenWidth - 32 - 20) / 3);
@@ -152,7 +153,7 @@
         flowLayout.minimumLineSpacing = 10;
         flowLayout.minimumInteritemSpacing = 10;
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        
+
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
