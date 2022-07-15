@@ -85,7 +85,7 @@ platform :ios do
       clean: true,
       include_symbols: true,
       scheme: "DeveloperKit",
-      workspace: "DeveloperKit.xcworkspace",
+      workspace: "DeveloperKit/DeveloperKit.xcworkspace",
       include_bitcode: false,
       configuration: "Debug",
       export_options: {
