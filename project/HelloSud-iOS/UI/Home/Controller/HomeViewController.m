@@ -310,7 +310,7 @@
     } else {
 
         if (m.sceneId == SceneTypeDanmaku && ![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
-            [ToastUtil show:@"请使用即构RTC体验"];
+            [ToastUtil show:@"敬请期待"];
             return;
         }
         [AudioRoomService reqMatchRoom:model.gameId sceneType:self.headerSceneList[indexPath.section].sceneId gameLevel:-1];
