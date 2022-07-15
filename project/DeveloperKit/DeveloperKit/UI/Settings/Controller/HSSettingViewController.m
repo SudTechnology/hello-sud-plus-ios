@@ -13,8 +13,11 @@
 #import "SwitchLanguageViewController.h"
 #import "MoreSettingViewController.h"
 #import "SwitchAppIdViewController.h"
+#import "SwitchGameEnvViewController.h"
 
 #define AppIdTitleName @"切换应用"
+#define GameEnvTitleName @"切换游戏环境"
+
 
 @interface HSSettingViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
@@ -57,8 +60,12 @@
     appIdModel.title = AppIdTitleName;
     appIdModel.isMore = YES;
     appIdModel.pageURL = @"";
-    
-    
+
+    HSSettingModel *gameEnvModel = [HSSettingModel new];
+    gameEnvModel.title = GameEnvTitleName;
+    gameEnvModel.isMore = YES;
+    gameEnvModel.pageURL = @"";
+
     //    HSSettingModel *gitHubModel = [HSSettingModel new];
     //    gitHubModel.title = @"GitHub";
     //    gitHubModel.subTitle = @"hello-sud";
@@ -82,7 +89,7 @@
     //    } else {
     //        self.arrData = @[@[verModel], @[languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
     //    }
-    self.arrData = @[@[languageModel, appIdModel]];
+    self.arrData = @[@[languageModel, appIdModel, gameEnvModel]];
     
     WeakSelf
     HSSetingHeadView *header = HSSetingHeadView.new;
@@ -197,7 +204,11 @@
         // 切换应用
         SwitchAppIdViewController *vc = SwitchAppIdViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
-    } else {
+    } else if ([model.title isEqualToString:GameEnvTitleName]){
+        // 切换环境
+        SwitchGameEnvViewController *vc = SwitchGameEnvViewController.new;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
         if (model.isMore) {
             DTWebViewController *web = DTWebViewController.new;
             web.url = model.pageURL;

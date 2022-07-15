@@ -17,6 +17,8 @@
 #define kKeyConfigModel @"key_config_model"
 /// 配置信息缓存appId
 #define kAppIdInfoModel @"key_appId_model"
+/// 游戏环境
+#define kKeyGameEnvType @"kKeyGameEnvType"
 
 NSString *const kRtcTypeZego = @"zego";
 NSString *const kRtcTypeAgora = @"agora";
@@ -61,6 +63,12 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 - (void)config {
 
     _isAgreement = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginAgreement];
+    id temp = [NSUserDefaults.standardUserDefaults objectForKey:kKeyGameEnvType];
+    if (!temp){
+        _gameEnvType = 4;// 默认dev
+    } else {
+        _gameEnvType = [temp integerValue];
+    }
 
     NSString *cacheRTCType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
     NSString *configStr = [NSUserDefaults.standardUserDefaults stringForKey:kKeyConfigModel];
@@ -73,9 +81,9 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     }
 
     [self switchRtcType:cacheRTCType];
-    [SettingsService reqAppIdListWithSuccess:^(NSArray<AppIDInfoModel *> * _Nonnull appIdList) {
+    [SettingsService reqAppIdListWithSuccess:^(NSArray<AppIDInfoModel *> *_Nonnull appIdList) {
         [self updateAppIdList:appIdList];
-    } fail:nil];
+    }                                   fail:nil];
 }
 
 - (void)setConfigModel:(ConfigModel *)configModel {
@@ -210,6 +218,28 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     [NSUserDefaults.standardUserDefaults setObject:model.mj_JSONString forKey:kAppIdInfoModel];
 }
 
+/// 游戏环境名称
+/// @return
+- (NSString *)gameEnvTypeName:(GameEnvType)envType {
+//    1 pro 2 sim 3 fat 4 dev
+    NSString *name = @"pro";
+    switch (envType) {
+        case GameEnvTypeSim:
+            name = @"sim";
+            break;
+        case GameEnvTypeFat:
+            name = @"fat";
+            break;
+        case GameEnvTypeDev:
+            name = @"dev";
+            break;
+        default:
+            name = @"pro";
+            break;
+    }
+    return name;
+}
+
 /// 切换RTC语音SDK
 /// @param rtcType 厂商类型
 - (NSString *)switchAudioEngine:(NSString *)rtcType {
@@ -217,7 +247,7 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     HSConfigContent *rtcConfig = nil;
     DDLogInfo(@"切换RTC厂商:%@", rtcType);
     [AudioEngineFactory.shared.audioEngine destroy];
-    
+
     rtcType = self.configModel.zegoCfg.rtcType;
     [AudioEngineFactory.shared createEngine:ZegoAudioEngineImpl.class];
     rtcConfig = self.configModel.zegoCfg;
@@ -272,6 +302,14 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     return @"";
 }
 
+
+/// 更新游戏类型
+/// @param envType
+- (void)updateGameEnvType:(GameEnvType)envType {
+    self.gameEnvType = envType;
+    [NSUserDefaults.standardUserDefaults setInteger:envType forKey:kKeyGameEnvType];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
 @end
 
 

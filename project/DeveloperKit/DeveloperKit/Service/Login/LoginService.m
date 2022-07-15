@@ -47,11 +47,12 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
     id temp = [NSUserDefaults.standardUserDefaults objectForKey:kKeyLoginUserInfo];
     if (temp && [temp isKindOfClass:NSString.class]) {
         AccountUserModel *m = [AccountUserModel mj_objectWithKeyValues:temp];
+        m.userID = QSAppPreferences.shared.currentUserID;
         _loginUserInfo = m;
     } else {
         AccountUserModel *m = AccountUserModel.new;
         _loginUserInfo = m;
-        m.userID = @"";
+        m.userID = QSAppPreferences.shared.currentUserID;
         m.name = @"";
         m.icon = @"";
         m.sex = 1;

@@ -11,6 +11,12 @@
 #import "LoginService.h"
 #import "AudioRoomService.h"
 
+typedef NS_ENUM(NSInteger, GameEnvType) {
+    GameEnvTypePro = 1,
+    GameEnvTypeSim = 2,
+    GameEnvTypeFat = 3,
+    GameEnvTypeDev = 4,
+};
 
 // 语音服务
 #define kAudioRoomService ((AudioRoomService *)AppService.shared.scene)
@@ -46,11 +52,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// rtc配置
 @property(nonatomic, strong) AudioConfigModel *rtcConfigModel;
 /// 登录用户ID
-@property (nonatomic, strong, readonly)NSString * loginUserID;
+@property(nonatomic, strong, readonly) NSString *loginUserID;
 /// 登录服务
-@property (nonatomic, strong)LoginService *login;
+@property(nonatomic, strong) LoginService *login;
 /// 场景服务
-@property (nonatomic, strong)BaseSceneService *scene;
+@property(nonatomic, strong) BaseSceneService *scene;
 /// 更多竞猜头部数据列表缓存
 @property(nonatomic, strong) NSArray <BaseModel *> *moreGuessHeaderArrayCache;
 /// 是否已经展示过横屏提示
@@ -61,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSArray<AppIDInfoModel *> *appIdList;
 /// 当前AppId信息
 @property(nonatomic, strong) AppIDInfoModel *currentAppIdModel;
+/// 当前游戏环境 1 pro 2 sim 3 fat 4 dev
+@property(nonatomic, assign) NSInteger gameEnvType;
 
 + (instancetype)shared;
 
@@ -88,6 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 登录成功请求配置信息
 - (void)reqConfigData;
+
 /// 请求版本更新
 /// @param success
 /// @param fail
@@ -110,6 +119,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 缓存选中指定AppIdInfoModel
 /// @param model <#model description#>
 - (void)cacheAppIdInfoModel:(AppIDInfoModel *)model;
+
+/// 游戏环境名称
+/// @return
+- (NSString *)gameEnvTypeName:(GameEnvType)envType;
+
+/// 更新游戏类型
+/// @param envType
+- (void)updateGameEnvType:(GameEnvType)envType;
 @end
 
 NS_ASSUME_NONNULL_END

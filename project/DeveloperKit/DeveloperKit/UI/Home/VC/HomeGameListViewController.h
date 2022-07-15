@@ -7,7 +7,7 @@
 
 
 /// 游戏列表控制器
-@interface QSGameListViewController : BaseViewController
+@interface HomeGameListViewController : BaseViewController
 
 
 @end

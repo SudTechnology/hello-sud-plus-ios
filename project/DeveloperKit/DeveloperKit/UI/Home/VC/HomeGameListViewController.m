@@ -3,14 +3,14 @@
 // Copyright (c) 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "QSGameListViewController.h"
+#import "HomeGameListViewController.h"
 #import "QSHomeHeaderView.h"
 #import "QSGameListCell.h"
 #import "QSGameItemModel.h"
 
 
 /// 游戏视图列表
-@interface QSGameListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface HomeGameListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
 /// 游戏数据源
 @property(nonatomic, strong) NSMutableArray *dataList;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation QSGameListViewController
+@implementation HomeGameListViewController
 
 - (BOOL)dtIsHiddenNavigationBar {
     return YES;
@@ -31,6 +31,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.searchHeaderView dtUpdateUI];
 }
 
 - (void)dtAddViews {

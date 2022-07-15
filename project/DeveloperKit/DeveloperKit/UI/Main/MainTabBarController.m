@@ -6,10 +6,10 @@
 //
 
 #import "MainTabBarController.h"
-#import "GameListViewController.h"
+#import "CrossRoomListViewController.h"
 #import "HSSettingViewController.h"
 #import "HomeViewController.h"
-#import "QSGameListViewController.h"
+#import "HomeGameListViewController.h"
 
 @interface MainTabBarController ()
 
@@ -32,17 +32,17 @@
     // Do any additional setup after loading the view.
     
 //    HomeViewController *home = [[HomeViewController alloc]init];
-    QSGameListViewController *home = [[QSGameListViewController alloc]init];
+    HomeGameListViewController *home = [[HomeGameListViewController alloc]init];
     BaseNavigationViewController * navHome = [[BaseNavigationViewController alloc]initWithRootViewController:home];
     home.tabBarItem.title = NSString.dt_tab_home;
     home.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_game_list"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     home.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_game_list"];
     
-    GameListViewController *gameList = [[GameListViewController alloc]init];
+    CrossRoomListViewController *gameList = [[CrossRoomListViewController alloc]init];
     BaseNavigationViewController * navGameList = [[BaseNavigationViewController alloc]initWithRootViewController:gameList];
-    gameList.tabBarItem.title = NSString.dt_tab_room;
-    gameList.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_room"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    gameList.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_room"];
+    gameList.tabBarItem.title = @"发现";
+    gameList.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_discover"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    gameList.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_discover"];
     
     HSSettingViewController *setting = [[HSSettingViewController alloc]init];
     setting.tabBarItem.title = NSString.dt_tab_setting;

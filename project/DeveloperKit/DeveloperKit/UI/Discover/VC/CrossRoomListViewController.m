@@ -5,19 +5,19 @@
 //  Created by Mary on 2022/1/20.
 //
 
-#import "GameListViewController.h"
+#import "CrossRoomListViewController.h"
 #import "SearchHeaderView.h"
-#import "GameListTableViewCell.h"
+#import "CrossRoomGameCell.h"
 #import "AudioRoomViewController.h"
 
-@interface GameListViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface CrossRoomListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@property(nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) SearchHeaderView *searchHeaderView;
-@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray <CrossRoomModel *> *dataList;
 @property (nonatomic, strong) UILabel *noDataLabel;
 @end
 
-@implementation GameListViewController
+@implementation CrossRoomListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,7 +43,7 @@
         if (AppService.shared.login.isRefreshedToken) {
             [weakSelf requestData];
         } else {
-            [weakSelf.tableView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_header endRefreshing];
         }
     }];
     if (AppService.shared.login.isRefreshedToken) {
@@ -53,7 +53,7 @@
 
 - (void)dtAddViews {
     [self.view addSubview:self.searchHeaderView];
-    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.collectionView];
     [self.view addSubview:self.noDataLabel];
 }
 
@@ -62,8 +62,8 @@
         make.top.leading.trailing.mas_equalTo(self.view);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.searchHeaderView.mas_bottom);
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.searchHeaderView.mas_bottom).offset(20);
         make.leading.mas_equalTo(16);
         make.trailing.mas_equalTo(-16);
         make.bottom.mas_equalTo(-kTabBarHeight);
@@ -87,84 +87,84 @@
     }];
     header.lastUpdatedTimeLabel.hidden = true;
     header.stateLabel.hidden = true;
-    self.tableView.mj_header = header;
-    self.tableView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
+    self.collectionView.mj_header = header;
+    self.collectionView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
 #pragma mark - requst Data
 - (void)requestData {
     WeakSelf
-    
     [AudioRoomService reqCrossRoomList:nil pageNumber:1 success:^(NSArray<CrossRoomModel *> * _Nonnull roomList) {
-        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.dataList setArray:roomList];
-        [weakSelf.tableView reloadData];
+        [weakSelf.collectionView reloadData];
         weakSelf.noDataLabel.hidden = weakSelf.dataList.count != 0;
     } fail:^(NSError *error) {
         [ToastUtil show:error.dt_errMsg];
-        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_header endRefreshing];
     }];
-//
-//    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/list/v1") param:nil respClass:RoomListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
-//        [weakSelf.tableView.mj_header endRefreshing];
-//        RoomListModel *model = (RoomListModel *)resp;
-//        [weakSelf.dataList removeAllObjects];
-//        [weakSelf.dataList addObjectsFromArray:model.roomInfoList];
-//        [weakSelf.tableView reloadData];
-//        weakSelf.noDataLabel.hidden = weakSelf.dataList.count != 0;
-//    } failure:^(NSError *error) {
-//        [ToastUtil show:error.dt_errMsg];
-//        [weakSelf.tableView.mj_header endRefreshing];
-//    }];
- 
     [self.searchHeaderView dtUpdateUI];
 }
 
-#pragma mark - UITableViewDelegate || UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataList.count;
+
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    GameListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GameListTableViewCell"];
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSArray *arr = self.dataList;
+    return arr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CrossRoomGameCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CrossRoomGameCell" forIndexPath:indexPath];
     cell.model = self.dataList[indexPath.row];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     CrossRoomModel *m = self.dataList[indexPath.row];
     NSString *crossSecret = @"d6089222f1db75211712efec6d87f9cf";
-//    [AudioRoomService reqEnterRoom:m.room_id crossSecret:crossSecret success:nil fail:nil];
     AudioSceneConfigModel *config = [[AudioSceneConfigModel alloc] init];
     config.gameId = m.mg_id;
-    config.roomID = @"10000";//[NSString stringWithFormat:@"%ld", model.roomId];
-    config.roomNumber = @"10000";//[NSString stringWithFormat:@"%ld", model.roomNumber];
+    config.roomID = @"10000";
+    config.roomNumber = @"10000";
     config.roomType = HSGame;
-    config.roomName = @"custom";//model.roomName;
-    config.roleType = 0;//model.roleType;
+    config.roomName = @"custom";
+    config.roleType = 0;
     config.enterRoomModel = [[EnterRoomModel alloc]init];
     config.enterRoomModel.crossSecret = crossSecret;
     BaseSceneViewController *vc = [SceneFactory createSceneVC:SceneTypeCustom configModel:config];
     [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - lazy
+#pragma mark - 懒加载
 
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.rowHeight = 90;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-        [_tableView registerClass:[GameListTableViewCell class] forCellReuseIdentifier:@"GameListTableViewCell"];
-        UIView *headerNode = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
-        headerNode.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-        _tableView.tableHeaderView = headerNode;
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        CGFloat itemW = floor((kScreenWidth - 32 - 20) / 2);
+        CGFloat itemH = 168;
+        flowLayout.itemSize = CGSizeMake(itemW, itemH);
+        flowLayout.minimumLineSpacing = 10;
+        flowLayout.minimumInteritemSpacing = 10;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.showsVerticalScrollIndicator = NO;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.backgroundColor = UIColor.whiteColor;
+        [_collectionView registerClass:[CrossRoomGameCell class] forCellWithReuseIdentifier:@"CrossRoomGameCell"];
     }
-    return _tableView;
+    return _collectionView;
 }
 
 - (SearchHeaderView *)searchHeaderView {
