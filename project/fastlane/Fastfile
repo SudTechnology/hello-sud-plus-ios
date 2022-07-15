@@ -29,8 +29,17 @@ platform :ios do
   DYSM_NAME = "#{RESULT_PRE_NAME}.app.dSYM"
   IPA_NAME = "#{RESULT_PRE_NAME}.ipa"
 
-  before_all do
+  # before_all do
+  #   cocoapods(clean_install: true, podfile:"./Podfile")
+  # end
+
+  lane :podinstall do
     cocoapods(clean_install: true, podfile:"./Podfile")
+  end
+
+  # 跨域
+  lane :podinstallCross do
+    cocoapods(clean_install: true, podfile:"DeveloperKit/Podfile")
   end
 
   lane :buildHeader do
@@ -48,6 +57,7 @@ platform :ios do
   lane :buildDebugIOS do
     # add actions here: https://docs.fastlane.tools/actions
     buildHeader
+    podinstall
     build_app(
       clean: true,
       include_symbols: true,
@@ -81,6 +91,7 @@ platform :ios do
     IPA_NAME = "#{RESULT_PRE_NAME}.ipa"
     # add actions here: https://docs.fastlane.tools/actions
     buildHeader
+    podinstallCross
     build_app(
       clean: true,
       include_symbols: true,
@@ -111,6 +122,7 @@ platform :ios do
   lane :buildReleaseIOS do
     # add actions here: https://docs.fastlane.tools/actions
     buildHeader
+    podinstall
     build_app(
       clean: true,
       include_symbols: true,
