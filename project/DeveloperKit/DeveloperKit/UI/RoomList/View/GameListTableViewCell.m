@@ -51,8 +51,8 @@
 - (void)setModel:(BaseModel *)model {
     CrossRoomModel *m = (CrossRoomModel *) model;
     self.roomNameLabel.text = m.room_id;
-    self.roomNumLabel.text = [NSString stringWithFormat:@"%@：%ld", NSString.dt_room_list_room_number, m.room_id];
-    self.onlineLabel.text = [NSString stringWithFormat:@"%ld%@", m.player_total, NSString.dt_room_list_users];
+    self.roomNumLabel.text = [NSString stringWithFormat:@"%@：%@", NSString.dt_room_list_room_number, m.room_id];
+    self.onlineLabel.text = [NSString stringWithFormat:@"%@%@", m.player_total, NSString.dt_room_list_users];
 //    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
 //    self.roomTypeLabel.text = m.sceneTag;
 //

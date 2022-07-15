@@ -7,7 +7,7 @@
 
 /// 场景配置model
 @interface BaseSceneConfigModel : NSObject
-@property(nonatomic, assign) NSInteger gameId;
+@property(nonatomic, assign) int64_t gameId;
 @property(nonatomic, copy) NSString * roomID;
 @property(nonatomic, copy) NSString * roomNumber;
 @property(nonatomic, copy) NSString *roomName;

@@ -311,7 +311,7 @@
     WeakSelf
     [self logoutGame];
     if (gameId <= 0) {
-        DDLogDebug(@"游戏ID为空，无法加载游戏:%@, currentRoomID:%@, currentGameRoomID:%@", gameId, self.roomID, self.gameRoomID);
+        DDLogDebug(@"游戏ID为空，无法加载游戏:%@, currentRoomID:%@, currentGameRoomID:%@", gameId, self.roomID, @(self.gameRoomID));
         return;
     }
     

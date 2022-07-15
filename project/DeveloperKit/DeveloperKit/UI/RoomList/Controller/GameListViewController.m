@@ -13,7 +13,7 @@
 @interface GameListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) SearchHeaderView *searchHeaderView;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray <HSRoomInfoList *> *dataList;
+@property (nonatomic, strong) NSMutableArray <CrossRoomModel *> *dataList;
 @property (nonatomic, strong) UILabel *noDataLabel;
 @end
 
@@ -132,9 +132,20 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    HSRoomInfoList *m = self.dataList[indexPath.row];
+    CrossRoomModel *m = self.dataList[indexPath.row];
     NSString *crossSecret = @"d6089222f1db75211712efec6d87f9cf";
-    [AudioRoomService reqEnterRoom:m.roomId crossSecret:crossSecret success:nil fail:nil];
+//    [AudioRoomService reqEnterRoom:m.room_id crossSecret:crossSecret success:nil fail:nil];
+    AudioSceneConfigModel *config = [[AudioSceneConfigModel alloc] init];
+    config.gameId = m.mg_id;
+    config.roomID = @"10000";//[NSString stringWithFormat:@"%ld", model.roomId];
+    config.roomNumber = @"10000";//[NSString stringWithFormat:@"%ld", model.roomNumber];
+    config.roomType = HSGame;
+    config.roomName = @"custom";//model.roomName;
+    config.roleType = 0;//model.roleType;
+    config.enterRoomModel = [[EnterRoomModel alloc]init];
+    config.enterRoomModel.crossSecret = crossSecret;
+    BaseSceneViewController *vc = [SceneFactory createSceneVC:SceneTypeCustom configModel:config];
+    [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - lazy

@@ -14,6 +14,6 @@
 
 @implementation RespCrossRoomListModel
 + (NSDictionary *)mj_objectClassInArray {
-    return @{@"roomInfos":CrossRoomModel.class};
+    return @{@"room_infos":CrossRoomModel.class};
 }
 @end

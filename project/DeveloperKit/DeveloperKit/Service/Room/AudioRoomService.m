@@ -227,7 +227,7 @@
     [HSHttpService postRequestWithURL:kMGPURL(@"get_auth_room_list") param:dic respClass:RespCrossRoomListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         RespCrossRoomListModel *model = (RespCrossRoomListModel *) resp;
         if (success) {
-            success(model.roomInfos);
+            success(model.room_infos);
         }
     }                        failure:fail];
 }
