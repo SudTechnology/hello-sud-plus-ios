@@ -75,6 +75,39 @@ platform :ios do
     buildFooter
   end
 
+  # 跨域包
+  lane :buildCrossIOS do
+    RESULT_PRE_NAME = "DeveloperKit-#{ENV['CI_BUILD_ID']}"
+    IPA_NAME = "#{RESULT_PRE_NAME}.ipa"
+    # add actions here: https://docs.fastlane.tools/actions
+    buildHeader
+    build_app(
+      clean: true,
+      include_symbols: true,
+      scheme: "DeveloperKit",
+      workspace: "DeveloperKit.xcworkspace",
+      include_bitcode: false,
+      configuration: "Debug",
+      export_options: {
+        method: "development",
+        provisioningProfiles: {
+          "tech.sud.mgp.hello" => "Dev_Sud_MGP"
+        }
+      },
+      xcargs: "-allowProvisioningUpdates",
+      output_directory: TEST_OUTPU_DIR,
+      output_name: IPA_NAME
+    )
+    # 上传符号表到bugly
+    # sh("unzip -d #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH} #{TEST_DYSM_DIR}/#{DYSM_NAME}.zip")
+    # sh("mkdir #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/DeveloperKit-app-dSYM")
+    # sh("mv #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/DeveloperKit.app.dSYM #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/DeveloperKit-app-dSYM")
+    # sh("pwd")
+    # sh("java -version")
+    # sh("java -jar ../tool/buglyqq-upload-symbol.jar -appid 0d680b2d4c -appkey fdea2fe7-9b55-48fe-9d14-eb294dd1c4df -bundleid tech.sud.mgp.hello -version #{VERSION_NUM}.#{ENV['CI_BUILD_ID']} -platform IOS -inputSymbol #{TEST_DYSM_DIR}/#{DYSM_LOAD_PATH}/HelloSud-app-dSYM")
+    buildFooter
+  end
+
   lane :buildReleaseIOS do
     # add actions here: https://docs.fastlane.tools/actions
     buildHeader
