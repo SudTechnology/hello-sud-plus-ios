@@ -36,12 +36,12 @@
     [self observerNTF];
     self.window = [[UIWindow alloc]init];
     // 登录过后，检测刷新token
-    if (AppService.shared.login.isLogin) {
+//    if (AppService.shared.login.isLogin) {
         self.window.rootViewController = [[MainTabBarController alloc]init];
-        [AppService.shared.login checkToken];
-    } else {
-        self.window.rootViewController = [[LoginViewController alloc]init];
-    }
+//        [AppService.shared.login checkToken];
+//    } else {
+//        self.window.rootViewController = [[LoginViewController alloc]init];
+//    }
     self.window.backgroundColor = UIColor.whiteColor;
     [self.window makeKeyAndVisible];
     [self configBugly];
