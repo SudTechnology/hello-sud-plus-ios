@@ -314,6 +314,10 @@
         DDLogDebug(@"游戏ID为空，无法加载游戏:%@, currentRoomID:%@, currentGameRoomID:%@", gameId, self.roomID, self.gameRoomID);
         return;
     }
+    
+    // dev=4 fat=3 sim=2 pro=1
+    [ISudAPPD e:4];
+    [ISudAPPD d];
 
     SudInitSDKParamModel *model = [[SudInitSDKParamModel alloc]init];
     model.appId = appID;
@@ -362,7 +366,7 @@
         model.loadMGMode = kSudLoadMgModeAppCrossAuth;
         model.authorizationSecret = self.crossSecret;
     }
-    id<ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:model fsmMG:self.sudFSTAPPDecorator];
+    id<ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:model fsmMG:self.sudFSMMGDecorator];
     [self.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
 }
 

@@ -224,7 +224,7 @@
 + (void)reqCrossRoomList:(NSString *)authSecret pageNumber:(NSInteger)pageNumber success:(void (^)(NSArray <CrossRoomModel *> *roomList))success fail:(nullable ErrorBlock)fail {
     
     NSDictionary *dic = @{@"authSecret":@"", @"page_number":@(pageNumber), @"page_size":@(50)};
-    [HSHttpService getRequestWithURL:kMGPURL(@"get_auth_room_list") param:dic respClass:RespCrossRoomListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kMGPURL(@"get_auth_room_list") param:dic respClass:RespCrossRoomListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         RespCrossRoomListModel *model = (RespCrossRoomListModel *) resp;
         if (success) {
             success(model.roomInfos);

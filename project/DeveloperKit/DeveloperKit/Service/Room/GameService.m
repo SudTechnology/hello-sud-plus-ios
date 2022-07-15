@@ -19,7 +19,8 @@
 
 /// 登录游戏
 - (void)reqGameLoginWithSuccess:(void (^)(RespGameInfoModel *gameInfo))success fail:(ErrorBlock)fail {
-    [HSHttpService postRequestWithURL:kGameURL(@"base/login/v1") param:@{} respClass:RespGameInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    NSDictionary *dicParam = @{@"user_id": QSAppPreferences.shared.currentUserID};
+    [HSHttpService postRequestWithURL:kMGPURL(@"login/v3") param:dicParam respClass:RespGameInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         RespGameInfoModel *model = (RespGameInfoModel *) resp;
         if (success) {
             success(model);

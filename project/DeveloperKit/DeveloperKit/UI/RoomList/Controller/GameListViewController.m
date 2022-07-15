@@ -95,9 +95,11 @@
 - (void)requestData {
     WeakSelf
     
-    [AudioRoomService reqCrossRoomList:nil pageNumber:0 success:^(NSArray<CrossRoomModel *> * _Nonnull roomList) {
+    [AudioRoomService reqCrossRoomList:nil pageNumber:1 success:^(NSArray<CrossRoomModel *> * _Nonnull roomList) {
         [weakSelf.tableView.mj_header endRefreshing];
-        
+        [weakSelf.dataList setArray:roomList];
+        [weakSelf.tableView reloadData];
+        weakSelf.noDataLabel.hidden = weakSelf.dataList.count != 0;
     } fail:^(NSError *error) {
         [ToastUtil show:error.dt_errMsg];
         [weakSelf.tableView.mj_header endRefreshing];
@@ -131,10 +133,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HSRoomInfoList *m = self.dataList[indexPath.row];
-    if (m.sceneType == SceneTypeDanmaku && ![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
-        [ToastUtil show:@"请使用即构RTC体验"];
-        return;
-    }
     NSString *crossSecret = @"d6089222f1db75211712efec6d87f9cf";
     [AudioRoomService reqEnterRoom:m.roomId crossSecret:crossSecret success:nil fail:nil];
 }

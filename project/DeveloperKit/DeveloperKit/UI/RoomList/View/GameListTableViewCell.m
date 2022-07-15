@@ -49,19 +49,15 @@
 }
 
 - (void)setModel:(BaseModel *)model {
-    HSRoomInfoList *m = (HSRoomInfoList *) model;
-    if (m.gameLevelDesc == nil) {
-        self.roomNameLabel.text = m.roomName;
-    } else {
-        self.roomNameLabel.text = [NSString stringWithFormat:@"%@·%@", m.roomName, m.gameLevelDesc];
-    }
-    self.roomNumLabel.text = [NSString stringWithFormat:@"%@：%ld", NSString.dt_room_list_room_number, m.roomNumber];
-    self.onlineLabel.text = [NSString stringWithFormat:@"%ld%@", m.memberCount, NSString.dt_room_list_users];
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
-    self.roomTypeLabel.text = m.sceneTag;
-
-    self.roomTypeLabel.textColor = UIColor.whiteColor;
-    self.roomTypeLabel.backgroundColor = HEX_COLOR([GameListTableViewCell tagColor:m.sceneType]);
+    CrossRoomModel *m = (CrossRoomModel *) model;
+    self.roomNameLabel.text = m.room_id;
+    self.roomNumLabel.text = [NSString stringWithFormat:@"%@：%ld", NSString.dt_room_list_room_number, m.room_id];
+    self.onlineLabel.text = [NSString stringWithFormat:@"%ld%@", m.player_total, NSString.dt_room_list_users];
+//    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
+//    self.roomTypeLabel.text = m.sceneTag;
+//
+//    self.roomTypeLabel.textColor = UIColor.whiteColor;
+//    self.roomTypeLabel.backgroundColor = HEX_COLOR([GameListTableViewCell tagColor:m.sceneType]);
 }
 
 - (void)dtConfigUI {
