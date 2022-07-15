@@ -63,7 +63,7 @@
     }];
     [self.noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@16);
-        make.trailing.equalTo(@16);
+        make.trailing.equalTo(@-16);
         make.height.greaterThanOrEqualTo(@0);
         make.centerY.equalTo(self.contentView);
     }];
@@ -212,7 +212,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = UIFONT_BOLD(30);
         _titleLabel.textColor = HEX_COLOR(@"#ffffff");
-        _titleLabel.text = @"舞台节目单";
+        _titleLabel.text = NSString.dt_room_disco_menu_name;
         _titleLabel.shadowColor = HEX_COLOR(@"#FB01E3");
         _titleLabel.shadowOffset = CGSizeMake(1, 2);
         _titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -237,7 +237,7 @@
     if (!_ruleLabel) {
         _ruleLabel = [[YYLabel alloc] init];
         _ruleLabel.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
-        NSMutableAttributedString *full = [[NSMutableAttributedString alloc] initWithString:@"规则"];
+        NSMutableAttributedString *full = [[NSMutableAttributedString alloc] initWithString:NSString.dt_room_disco_rule];
         full.yy_font = UIFONT_REGULAR(12);
         full.yy_color = HEX_COLOR(@"#ffffff");
         full.yy_firstLineHeadIndent = 3;

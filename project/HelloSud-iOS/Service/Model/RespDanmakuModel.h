@@ -65,6 +65,7 @@ typedef NS_ENUM(NSInteger, DanmakuEffectModelShowType) {
 @interface RespDanmakuListModel : BaseRespModel
 @property(nonatomic, strong) NSArray<DanmakuCallWarcraftModel *> *callWarcraftInfoList;
 @property(nonatomic, strong) NSArray<DanmakuJoinTeamModel *> *joinTeamList;
+@property(nonatomic, strong) NSString *guideText;
 @end
 
 NS_ASSUME_NONNULL_END

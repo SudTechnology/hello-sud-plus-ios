@@ -101,7 +101,7 @@
     gift3.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
     gift3.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
     gift3.animateType = @"svga";
-    gift3.giftName = @"跳舞插队";
+    gift3.giftName = NSString.dt_room_disco_dance_insert;
     gift3.price = 1500;
 
     self.dicGift[[NSString stringWithFormat:@"%@", @(gift1.giftID)]] = gift1;

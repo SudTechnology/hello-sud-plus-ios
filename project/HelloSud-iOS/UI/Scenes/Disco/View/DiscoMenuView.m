@@ -30,7 +30,8 @@
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.leading.trailing.equalTo(@0);
+        make.leading.equalTo(@10);
+        make.trailing.equalTo(@-10);
         make.height.greaterThanOrEqualTo(@0);
     }];
 }
@@ -62,7 +63,7 @@
         _titleLabel.font = UIFONT_BOLD(14);
         _titleLabel.textColor = HEX_COLOR_A(@"#ffffff", 1);
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.text = @"舞台节目单";
+        _titleLabel.text = NSString.dt_room_disco_menu_name;
     }
     return _titleLabel;
 }

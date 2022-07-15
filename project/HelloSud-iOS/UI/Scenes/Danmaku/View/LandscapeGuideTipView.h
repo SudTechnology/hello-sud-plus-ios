@@ -9,9 +9,13 @@
 #import "BaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 /// 横屏引导视图
 @interface LandscapeGuideTipView : BaseView
-- (void)show:(void(^)(void))finished;
+- (void)updateTip:(NSString *)tip;
+
+- (void)show:(void (^)(void))finished;
+
 - (void)close;
 @end
 

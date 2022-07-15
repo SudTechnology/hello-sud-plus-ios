@@ -72,6 +72,10 @@
     self.timer = nil;
 }
 
+- (void)updateTip:(NSString *)tip {
+    self.tipLabel.text = tip;
+}
+
 - (void)show:(void(^)(void))finished {
     [self beginCountdown:finished];
 }
@@ -84,7 +88,7 @@
 - (UILabel *)tipLabel {
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
-        _tipLabel.text = @"点击按钮即可快速发出弹幕或送礼召唤魔兽";
+        _tipLabel.text = @"";
         _tipLabel.font = UIFONT_BOLD(12);
         _tipLabel.textColor = HEX_COLOR(@"#ffffff");
         _tipLabel.textAlignment = NSTextAlignmentCenter;

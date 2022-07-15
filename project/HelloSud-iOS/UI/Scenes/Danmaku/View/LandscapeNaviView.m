@@ -84,11 +84,11 @@
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
 
-    CGFloat right = [UIDevice dt_safeAreaInsets].right + 17;
+    CGFloat right = [UIDevice dt_safeAreaInsets].right + 8;
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-right);
         make.centerY.mas_equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(44, 44));
+        make.size.mas_equalTo(CGSizeMake(60, 60));
     }];
 
 }

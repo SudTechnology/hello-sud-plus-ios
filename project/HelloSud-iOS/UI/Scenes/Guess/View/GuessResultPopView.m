@@ -194,7 +194,7 @@
         case GuessResultPopViewTypeNotBet: {
             /// 未参与
             self.titleLabel.text = NSString.dt_room_guess_not_guess;
-            self.tipLabel.text = isInGame ? NSString.dt_room_guess_self_win : NSString.dt_room_guess_next_guess;
+            self.tipLabel.text = isInGame ? NSString.dt_room_guess_self_win_five : NSString.dt_room_guess_next_guess;
             self.joinImageView.hidden = NO;
             self.joinTipLabel.hidden = NO;
             self.coinLabel.hidden = YES;

@@ -41,7 +41,7 @@
 /// @param gameId gameId
 /// @param finished finished
 /// @param failure failure
-+ (void)reqShortSendEffectList:(int64_t)gameId finished:(void (^)(NSArray<DanmakuCallWarcraftModel *> *modelList))finished failure:(void (^)(NSError *error))failure {
++ (void)reqShortSendEffectList:(int64_t)gameId finished:(void (^)(NSArray<DanmakuCallWarcraftModel *> *modelList, NSString *guideTip))finished failure:(void (^)(NSError *error))failure {
     NSDictionary *dicParam = @{@"gameId": @(gameId)};
     [HSHttpService postRequestWithURL:kINTERACTURL(@"bullet-chat-game/shortcut-window/v1") param:dicParam respClass:RespDanmakuListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (finished) {
@@ -55,7 +55,7 @@
                 joinTeamModel.joinTeamList = m.joinTeamList;
                 [arr insertObject:joinTeamModel atIndex:0];
             }
-            finished(arr);
+            finished(arr, m.guideText);
         }
     }                         failure:failure];
 }

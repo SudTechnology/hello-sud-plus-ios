@@ -258,8 +258,9 @@
 
 - (void)reqData {
     WeakSelf
-    [DanmakuRoomService reqShortSendEffectList:self.gameId finished:^(NSArray<DanmakuCallWarcraftModel *> *modelList) {
+    [DanmakuRoomService reqShortSendEffectList:self.gameId finished:^(NSArray<DanmakuCallWarcraftModel *> *modelList, NSString *guideTip) {
         weakSelf.dataList = modelList;
+        [weakSelf.guideTipView updateTip:guideTip];
         if (weakSelf.quickSendView.dataList.count == 0) {
             weakSelf.quickSendView.dataList = weakSelf.dataList;
             [weakSelf.quickSendView dtUpdateUI];

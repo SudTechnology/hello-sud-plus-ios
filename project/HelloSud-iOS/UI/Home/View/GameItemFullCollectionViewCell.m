@@ -32,7 +32,6 @@
     [super dtLayoutViews];
     [self.createLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(4, 4, 4, 4));
-        make.width.mas_greaterThanOrEqualTo(0);
     }];
 
 }
@@ -101,15 +100,15 @@
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.createBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(@35);
         make.bottom.equalTo(@-12);
-        make.width.mas_greaterThanOrEqualTo(0);
+        make.width.equalTo(@120);
         make.height.mas_equalTo(44);
+        make.trailing.equalTo(self.contentView.mas_centerX).offset(-20);
     }];
     [self.joinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(@-35);
+        make.leading.equalTo(self.createBtn.mas_trailing).offset(40);
         make.bottom.equalTo(@-12);
-        make.width.mas_greaterThanOrEqualTo(0);
+        make.width.equalTo(self.createBtn);
         make.height.mas_equalTo(44);
     }];
 }
