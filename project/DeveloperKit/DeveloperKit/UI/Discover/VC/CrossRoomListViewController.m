@@ -79,10 +79,6 @@
 - (void)addRefreshHeader {
     WeakSelf
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        if (!AppService.shared.login.isRefreshedToken) {
-            [AppService.shared.login checkToken];
-            return;
-        }
         [weakSelf requestData];
     }];
     header.lastUpdatedTimeLabel.hidden = true;
@@ -131,8 +127,8 @@
     NSString *crossSecret = @"d6089222f1db75211712efec6d87f9cf";
     AudioSceneConfigModel *config = [[AudioSceneConfigModel alloc] init];
     config.gameId = m.mg_id;
-    config.roomID = @"10000";
-    config.roomNumber = @"10000";
+    config.roomID = m.room_id;
+    config.roomNumber = m.room_id;
     config.roomType = HSGame;
     config.roomName = @"custom";
     config.roleType = 0;

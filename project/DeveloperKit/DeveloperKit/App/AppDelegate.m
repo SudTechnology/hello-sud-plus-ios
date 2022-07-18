@@ -71,12 +71,12 @@
         [UserService.shared reqUserCoinDetail:^(int64_t i) {
         } fail:nil];
     }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_FAIL_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        if (![self.window.rootViewController isKindOfClass:[LoginViewController class]]) {
-            /// 切根式图
-            self.window.rootViewController = [[LoginViewController alloc]init];
-        }
-    }];
+//    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_FAIL_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+//        if (![self.window.rootViewController isKindOfClass:[LoginViewController class]]) {
+//            /// 切根式图
+//            self.window.rootViewController = [[LoginViewController alloc]init];
+//        }
+//    }];
 }
 
 - (void)checkAppVersion {

@@ -93,9 +93,10 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
+
     self.infoLabel.text = [NSString stringWithFormat:@"%@(%@)\nEnv:%@  %@",
             AppService.shared.currentAppIdModel.app_name,
-            AppService.shared.currentAppIdModel.app_id, [AppService.shared gameEnvTypeName:AppService.shared.gameEnvType], LanguageUtil.userLanguage];
+            AppService.shared.currentAppIdModel.app_id, [AppService.shared gameEnvTypeName:AppService.shared.gameEnvType], [NSBundle currentLanguage]];
 }
 
 - (void)dtConfigEvents {
