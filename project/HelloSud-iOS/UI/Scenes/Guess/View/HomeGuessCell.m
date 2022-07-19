@@ -162,7 +162,7 @@
     enterTitle.yy_color = HEX_COLOR(@"#666666");
     [full appendAttributedString:enterTitle];
 
-    NSString *feeStr =  m.ticketCoin > 0 ? [NSString stringWithFormat:@"%@金币", @(m.ticketCoin)] : NSString.dt_room_guess_fee;
+    NSString *feeStr =  m.ticketCoin > 0 ? [NSString stringWithFormat:NSString.dt_room_guess_coin_fmt, @(m.ticketCoin)] : NSString.dt_room_guess_fee;
     NSMutableAttributedString *enterTitleValue = [[NSMutableAttributedString alloc] initWithString:feeStr];
     enterTitleValue.yy_font = UIFONT_BOLD(12);
     enterTitleValue.yy_color = HEX_COLOR(@"#000000");

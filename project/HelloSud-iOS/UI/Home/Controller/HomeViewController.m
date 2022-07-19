@@ -316,7 +316,7 @@
     } else {
 
         if (m.sceneId == SceneTypeDanmaku && ![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
-            [ToastUtil show:NSString.dt_disco_rtc_tip];
+            [ToastUtil show:NSString.dt_home_coming_soon];
             return;
         }
         [AudioRoomService reqMatchRoom:model.gameId sceneType:self.headerSceneList[indexPath.section].sceneId gameLevel:-1];

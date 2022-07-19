@@ -251,8 +251,16 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
     }
 
     NSString *msgStr = [NSString stringWithFormat:NSString.dt_ticket_order_msg_fmt, m.sendUser.name, nameStr, m.gameName];
+    if (self.isJpanese) {
+        msgStr = [NSString stringWithFormat:NSString.dt_ticket_order_msg_fmt, m.sendUser.name, m.gameName, nameStr];
+    }
     AudioMsgSystemModel *msg = [AudioMsgSystemModel makeMsg:msgStr];
     [self addMsg:msg isShowOnScreen:true];
+}
+
+- (BOOL)isJpanese{
+    NSString *lang = NSBundle.currentLanguage;
+    return [lang hasPrefix:@"jp"];
 }
 
 - (void)handleBusyCommand:(NSInteger)cmd command:(NSString *)command {

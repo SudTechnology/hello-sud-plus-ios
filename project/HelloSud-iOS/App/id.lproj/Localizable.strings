@@ -286,12 +286,12 @@
 "dt_user_receive_invite_msg" = "%@ setuju untuk bermain [%@] dengan Anda.";
 "dt_room_pk_show_invite_tip" = "Silakan undang lawan Anda terlebih dahulu";
 "dt_room_join_status" = "Join";
-"dt_room_pk_closed_msg" = "Permainan berakhir lebih awal karena lawan secara paksa menarik diri dari permainan";
+"dt_room_pk_closed_msg" = "Lomba berakhir lebih awal karena lawan keluar diri dari lomba";
 "dt_room_pk_status_ing" = "Dalam permainan";
 "dt_room_pk_waitting" = "Cocok";
 "dt_room_pk_remove_sure" = "Ya";
 "dt_room_pk_invite" = "Mengundang";
-"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_ticket_order_msg_fmt" = "%@ memesan %@ untuk bermain 【%@】";
 "dt_room_mic_game_ing" = "Dalam permainan";
 
 /// 1.4.0

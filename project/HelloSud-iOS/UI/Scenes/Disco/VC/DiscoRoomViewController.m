@@ -323,11 +323,12 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
     self.loadedRobotList = YES;
     NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
+    NSMutableArray *robotAnchorList = [[NSMutableArray alloc] init];
     for (int i = 0; i < robotList.count; ++i) {
         RotbotInfoModel *robotModel = robotList[i];
         /// 前6位机器人自动上麦
         if (i < 6) {
-            [self joinTheRobotToMic:robotModel];
+            [robotAnchorList addObject:robotModel];
         }
         AIPlayerInfoModel *aiPlayerInfoModel = [AIPlayerInfoModel alloc];
         aiPlayerInfoModel.userId = [NSString stringWithFormat:@"%@", @(robotModel.userId)];
@@ -341,6 +342,13 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     appCommonGameAddAiPlayersModel.aiPlayers = aiPlayers;
     appCommonGameAddAiPlayersModel.isReady = YES;
     [self.sudFSTAPPDecorator notifyAppCommonGameAddAIPlayers:appCommonGameAddAiPlayersModel];
+    
+    // 机器人加入主播位
+    [HSThreadUtils dispatchMainAfter:1 callback:^{
+        for (RotbotInfoModel *m in robotAnchorList) {
+            [self joinTheRobotToMic:m];
+        }
+    }];
 
 }
 

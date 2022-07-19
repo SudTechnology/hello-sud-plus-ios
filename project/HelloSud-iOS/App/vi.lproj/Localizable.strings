@@ -286,12 +286,12 @@
 "dt_user_receive_invite_msg" = "%@ đồng ý chơi cùng bạn【%@】.";
 "dt_room_pk_show_invite_tip" = "Vui lòng mời đối thủ";
 "dt_room_join_status" = "Chơi";
-"dt_room_pk_closed_msg" = "Trò chơi kết thúc sớm do đối thủ buộc phải rút khỏi trò chơi";
+"dt_room_pk_closed_msg" = "Game kết thúc sớm do đối thủ bị buộc rời game";
 "dt_room_pk_status_ing" = "Đang chơi";
 "dt_room_pk_waitting" = "Phù hợp";
 "dt_room_pk_remove_sure" = "Đúng";
 "dt_room_pk_invite" = "Lời mời";
-"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_ticket_order_msg_fmt" = "%@ cược một trận cho %@, hẹn chơi【%@】";
 "dt_room_mic_game_ing" = "Đang chơi";
 
 /// 1.4.0

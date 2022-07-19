@@ -286,7 +286,7 @@
 "dt_user_receive_invite_msg" = "%@ agree to join you in【%@】";
 "dt_room_pk_show_invite_tip" = "Please invite your opponent first";
 "dt_room_join_status" = "Join";
-"dt_room_pk_closed_msg" = "The game ends early due to the opponent forcibly withdrawing from the game";
+"dt_room_pk_closed_msg" = "The game had ended due to your opponent's forced quit";
 "dt_room_pk_status_ing" = "In play";
 "dt_room_pk_waitting" = "Matching";
 "dt_room_pk_remove_sure" = "Confirm";

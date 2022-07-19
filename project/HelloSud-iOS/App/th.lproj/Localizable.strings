@@ -287,12 +287,12 @@
 "dt_user_receive_invite_msg" = "%@ ยอมรับที่จะเล่น [%@] กับคุณ";
 "dt_room_pk_show_invite_tip" = "โปรดเชิญคู่ต่อสู้ก่อน";
 "dt_room_join_status" = "ร่วมเกม";
-"dt_room_pk_closed_msg" = "เกมจบเร็วเพราะฝ่ายตรงข้ามบังคับถอนตัวออกจากเกม";
+"dt_room_pk_closed_msg" = "เกมจบเร็วเนื่องจากฝ่ายตรงข้ามบังคับให้ถอนตัวออกจากเกม";
 "dt_room_pk_status_ing" = "ในเกม";
 "dt_room_pk_waitting" = "จับคู่";
 "dt_room_pk_remove_sure" = "ใช่";
 "dt_room_pk_invite" = "เชิญ";
-"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_ticket_order_msg_fmt" = "%@ สั่งซื้อ %@ ให้เล่น【%@】";
 "dt_room_mic_game_ing" = "กำลังเล่นเกม";
 
 /// 1.4.0

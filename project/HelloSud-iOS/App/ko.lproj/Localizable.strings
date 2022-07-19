@@ -286,12 +286,12 @@
 "dt_user_receive_invite_msg" = "%@당신과 함께 플레이를 동의【%@】";
 "dt_room_pk_show_invite_tip" = "상대측을 초청하기";
 "dt_room_join_status" = "게임입장";
-"dt_room_pk_closed_msg" = "상대방의 강제 퇴장으로 게임이 일찍 종료됩니다.";
+"dt_room_pk_closed_msg" = "상대측 강제 종료로 경기가 사전 종료";
 "dt_room_pk_status_ing" = "게임 중";
 "dt_room_pk_waitting" = "어울리는";
 "dt_room_pk_remove_sure" = "예";
 "dt_room_pk_invite" = "초청";
-"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_ticket_order_msg_fmt" = "%@는%@에게 한주문은 약【%@】플레이 가능";
 "dt_room_mic_game_ing" = "게임 중";
 
 /// 1.4.0

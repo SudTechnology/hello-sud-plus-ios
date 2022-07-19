@@ -115,7 +115,7 @@
     if (model.callMode == 2) {
         // 礼物
         [self showGiftIcon:model];
-        self.callLabel.text = [NSString stringWithFormat:@"%@金币", @(model.giftPrice)];
+        self.callLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_coin_fmt, @(model.giftPrice)];
         [self.giftLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(@8);
             make.width.greaterThanOrEqualTo(@0);

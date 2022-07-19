@@ -286,7 +286,7 @@
 "dt_user_receive_invite_msg" = "%@ acepta jugar [%@] contigo.";
 "dt_room_pk_show_invite_tip" = "Por favor invite a tu enemigo primero";
 "dt_room_join_status" = "Unirte";
-"dt_room_pk_closed_msg" = "El juego termina temprano debido a que el oponente se retira a la fuerza del juego.";
+"dt_room_pk_closed_msg" = "El juego terminó antes de tiempo por la salida forzada del oponente.";
 "dt_room_pk_status_ing" = "En el juego";
 "dt_room_pk_waitting" = "Pareo";
 "dt_room_pk_remove_sure" = "Sí";

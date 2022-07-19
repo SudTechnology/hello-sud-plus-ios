@@ -286,12 +286,12 @@
 "dt_user_receive_invite_msg" = "%@はあなたと【%@】をプレイすることに同意しました。";
 "dt_room_pk_show_invite_tip" = "まず対戦相手を招待してください";
 "dt_room_join_status" = "プレイする";
-"dt_room_pk_closed_msg" = "対戦相手が強制的にゲームから撤退したため、ゲームは早期に終了します";
+"dt_room_pk_closed_msg" = "対戦相手が強制的に試合から退出したため、試合は早めに終了しました";
 "dt_room_pk_status_ing" = "インプレー";
 "dt_room_pk_waitting" = "マッチング";
 "dt_room_pk_remove_sure" = "はい";
 "dt_room_pk_invite" = "招待する";
-"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_ticket_order_msg_fmt" = "%@は【%@】を一緒にプレイするよう%@にオーダーしました";
 "dt_room_mic_game_ing" = "ゲーム中";
 
 /// 1.4.0

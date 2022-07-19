@@ -286,12 +286,12 @@
 "dt_user_receive_invite_msg" = "يوافق %@ على لعب [%@] معك.";
 "dt_room_pk_show_invite_tip" = "الرجاء دعوة خصمك أولا";
 "dt_room_join_status" = "انضم إلى اللعبة";
-"dt_room_pk_closed_msg" = "تنتهي اللعبة مبكراً بسبب انسحاب الخصم قسراً من اللعبة";
+"dt_room_pk_closed_msg" = "انتهت المباراة مبكراً حيث أجبر الخصم على الخروج من المباراة";
 "dt_room_pk_status_ing" = "في اللعبة";
 "dt_room_pk_waitting" = "مطابقة";
 "dt_room_pk_remove_sure" = "نعم";
 "dt_room_pk_invite" = "دعوة";
-"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_ticket_order_msg_fmt" = "%@ أعطى لـ %@ طلبًا واحدًا، موعد باللعب [%@]";
 "dt_room_mic_game_ing" = "في اللعبة";
 
 /// 1.4.0

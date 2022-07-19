@@ -289,12 +289,12 @@
 "dt_user_receive_invite_msg" = "%@同意和你一起玩【%@】";
 "dt_room_pk_show_invite_tip" = "請先邀請對手";
 "dt_room_join_status" = "加入游戏";
-"dt_room_pk_closed_msg" = "由於對手強行退出比賽，比賽提前結束";
+"dt_room_pk_closed_msg" = "由於對方強制退出比賽，比賽提前結束";
 "dt_room_pk_status_ing" = "比賽中";
 "dt_room_pk_waitting" = "匹配中";
 "dt_room_pk_remove_sure" = "確認移除";
 "dt_room_pk_invite" = "邀請";
-"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_ticket_order_msg_fmt" = "%@ 給%@下了一單，約玩【%@】";
 "dt_room_mic_game_ing" = "遊戲中";
 
 /// 1.4.0
