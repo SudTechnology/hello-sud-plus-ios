@@ -4,34 +4,6 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>EgretNativeJSConsoleRes.bundle/Info.plist</key>
-		<data>
-		+XiqG7vaBDBjWPKrYIJN/3yWIM8=
-		</data>
-		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeDirectory</key>
-		<data>
-		RB2lgwuWHwac+H/QBbiZMCe2Y4s=
-		</data>
-		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements</key>
-		<data>
-		OnX22wWFKRSOFN1+obRynMCeyXM=
-		</data>
-		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements-1</key>
-		<data>
-		ZgTYwoRrMv3v7uAlQ6oaBZWxcg4=
-		</data>
-		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeResources</key>
-		<data>
-		/H+GCq1u2MTuKeO3UnDWOp72vHI=
-		</data>
-		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeSignature</key>
-		<data>
-		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
-		</data>
-		<key>EgretNativeJSConsoleRes.bundle/index.html</key>
-		<data>
-		K/tLkR3L9CMKspWcGjDkJx9cc/Y=
-		</data>
 		<key>Headers/IRTSS.h</key>
 		<data>
 		0y2WBGK/l2oHGrnViE8PdEyEqAQ=
@@ -112,21 +84,61 @@
 		<data>
 		hshBcpfi1tW5ptVbt6Ox0YI/Wog=
 		</data>
+		<key>Headers/SudInitSDKParamModel.h</key>
+		<data>
+		SiQIaHRWqnW+Rx9VEmsmVY63dRI=
+		</data>
+		<key>Headers/SudLoadMGMode.h</key>
+		<data>
+		ENGLk2v08c+iHYFIoyOfn10/t1g=
+		</data>
+		<key>Headers/SudLoadMGParamModel.h</key>
+		<data>
+		XhLSCxVnu4FMX0lhRNFgOxp2Mbk=
+		</data>
 		<key>Headers/SudMGP-umbrella.h</key>
 		<data>
-		AeLWiJ3bwSmQfV4MLEV9EGAfN7o=
+		p/Qqjkb8sTcqgfcuVBiA1WwpwFE=
 		</data>
 		<key>Headers/SudMGP.h</key>
 		<data>
-		ko8pFjxpk7sNcruogaUPXDv7ssY=
+		OvlAAEbyjHSIKDfaUn2uJFTdAKo=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		BneLpaVmdLt/f+JDdPdg4t06lac=
+		NMIyzMebtVq0fy6HWfugFleKNOA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		SqkCCW826QrTr8CHz/pkF0Gg7Uk=
+		</data>
+		<key>SudNativeJSConsoleRes.bundle/Info.plist</key>
+		<data>
+		ByJEGvhjLS+IqdGzsACK6tfykAM=
+		</data>
+		<key>SudNativeJSConsoleRes.bundle/_CodeSignature/CodeDirectory</key>
+		<data>
+		BlzUKPKh+UEcDIejc/rGApYq4DM=
+		</data>
+		<key>SudNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements</key>
+		<data>
+		OnX22wWFKRSOFN1+obRynMCeyXM=
+		</data>
+		<key>SudNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements-1</key>
+		<data>
+		ecCpwEv21UyPrUk7LeSnfrphjws=
+		</data>
+		<key>SudNativeJSConsoleRes.bundle/_CodeSignature/CodeResources</key>
+		<data>
+		/H+GCq1u2MTuKeO3UnDWOp72vHI=
+		</data>
+		<key>SudNativeJSConsoleRes.bundle/_CodeSignature/CodeSignature</key>
+		<data>
+		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+		</data>
+		<key>SudNativeJSConsoleRes.bundle/index.html</key>
+		<data>
+		K/tLkR3L9CMKspWcGjDkJx9cc/Y=
 		</data>
 		<key>fsm_mgp_game_loading_progress.png</key>
 		<data>
@@ -138,7 +150,7 @@
 		</data>
 		<key>plugin.zip</key>
 		<data>
-		DT5CFEb70VfK0g/AcgYOm5zx5pU=
+		lFQAJo2NE+si/dhBhbs/bJ9ELUc=
 		</data>
 		<key>sud.png</key>
 		<data>
@@ -147,83 +159,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>EgretNativeJSConsoleRes.bundle/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			+XiqG7vaBDBjWPKrYIJN/3yWIM8=
-			</data>
-			<key>hash2</key>
-			<data>
-			I4QR1uweesE1r9WuR1VYVPHxNTTgj5+DNUsVcwe2qpc=
-			</data>
-		</dict>
-		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeDirectory</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			RB2lgwuWHwac+H/QBbiZMCe2Y4s=
-			</data>
-			<key>hash2</key>
-			<data>
-			2cJ69F4eW+tMSHYQIVU9QA4WAErgH2vofpkdOhw731k=
-			</data>
-		</dict>
-		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			OnX22wWFKRSOFN1+obRynMCeyXM=
-			</data>
-			<key>hash2</key>
-			<data>
-			mHkgkE6rZQ51eIwFSqCwUk5qgL/HGqMt+NI3phdD+YY=
-			</data>
-		</dict>
-		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements-1</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			ZgTYwoRrMv3v7uAlQ6oaBZWxcg4=
-			</data>
-			<key>hash2</key>
-			<data>
-			qNbozf8esNYcmOHS2/gZCbtWbQ4NO/KX/PBZJDvsIR8=
-			</data>
-		</dict>
-		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			/H+GCq1u2MTuKeO3UnDWOp72vHI=
-			</data>
-			<key>hash2</key>
-			<data>
-			Xz9YqA4rNI0tJMd5iF39XvmYDFNr/Hiq9RiILIbB/AY=
-			</data>
-		</dict>
-		<key>EgretNativeJSConsoleRes.bundle/_CodeSignature/CodeSignature</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			2jmj7l5rSw0yVb/vlWAYkK/YBwk=
-			</data>
-			<key>hash2</key>
-			<data>
-			47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
-			</data>
-		</dict>
-		<key>EgretNativeJSConsoleRes.bundle/index.html</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			K/tLkR3L9CMKspWcGjDkJx9cc/Y=
-			</data>
-			<key>hash2</key>
-			<data>
-			gC2TRtg8NJ8h6hVrPmNen2ffzD1Q2jUcUnOpVwi3ue8=
-			</data>
-		</dict>
 		<key>Headers/IRTSS.h</key>
 		<dict>
 			<key>hash</key>
@@ -444,26 +379,59 @@
 			wZqO4WGOpYS+n8/gPU5eimIMFfeYuZCaezw/2uzmh6w=
 			</data>
 		</dict>
+		<key>Headers/SudInitSDKParamModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			SiQIaHRWqnW+Rx9VEmsmVY63dRI=
+			</data>
+			<key>hash2</key>
+			<data>
+			AFv69r09CrN8P3IDP9qnA90MZgF/6zsv8f5mk56GC2E=
+			</data>
+		</dict>
+		<key>Headers/SudLoadMGMode.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ENGLk2v08c+iHYFIoyOfn10/t1g=
+			</data>
+			<key>hash2</key>
+			<data>
+			54wnGqhxr21hvp4VlbF/dbi2k+elu7u/VIO6nr7itKA=
+			</data>
+		</dict>
+		<key>Headers/SudLoadMGParamModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XhLSCxVnu4FMX0lhRNFgOxp2Mbk=
+			</data>
+			<key>hash2</key>
+			<data>
+			bsgx0yTq5XQ+mfebFQjbhv0I8zePyQiGOQTwenGmqk0=
+			</data>
+		</dict>
 		<key>Headers/SudMGP-umbrella.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			AeLWiJ3bwSmQfV4MLEV9EGAfN7o=
+			p/Qqjkb8sTcqgfcuVBiA1WwpwFE=
 			</data>
 			<key>hash2</key>
 			<data>
-			UG8eSv0H0wyGze+ytVolyrYw+M9OIwLo547IQYcm9B0=
+			boc8emvFfLKxyVU1rLLwTfgIEFVGJ9+wty1EmBa42OY=
 			</data>
 		</dict>
 		<key>Headers/SudMGP.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ko8pFjxpk7sNcruogaUPXDv7ssY=
+			OvlAAEbyjHSIKDfaUn2uJFTdAKo=
 			</data>
 			<key>hash2</key>
 			<data>
-			+PHwAj16fs3HXYlFmd7q+5vcKlJvyYrapx6eS5n5B4Y=
+			aAQ4UCJp7mOgiylIoyxqhrDjen86JTv9+tCNd82cnVc=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -475,6 +443,83 @@
 			<key>hash2</key>
 			<data>
 			82DYi24VDJO9ZsI9GZScAIDV9kyxpUfN6/NyRZTI990=
+			</data>
+		</dict>
+		<key>SudNativeJSConsoleRes.bundle/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ByJEGvhjLS+IqdGzsACK6tfykAM=
+			</data>
+			<key>hash2</key>
+			<data>
+			8FwsBAhnIxzqqvL0eRZ/nobZ85+hiR/xfg2VOQ3wZnM=
+			</data>
+		</dict>
+		<key>SudNativeJSConsoleRes.bundle/_CodeSignature/CodeDirectory</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			BlzUKPKh+UEcDIejc/rGApYq4DM=
+			</data>
+			<key>hash2</key>
+			<data>
+			KHncdIxb1d7sX1JV6YU0v2FmyGQg+EatQNLLMZ64j5Y=
+			</data>
+		</dict>
+		<key>SudNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			OnX22wWFKRSOFN1+obRynMCeyXM=
+			</data>
+			<key>hash2</key>
+			<data>
+			mHkgkE6rZQ51eIwFSqCwUk5qgL/HGqMt+NI3phdD+YY=
+			</data>
+		</dict>
+		<key>SudNativeJSConsoleRes.bundle/_CodeSignature/CodeRequirements-1</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ecCpwEv21UyPrUk7LeSnfrphjws=
+			</data>
+			<key>hash2</key>
+			<data>
+			b8EIjK1jBlmlDNjEcxytLHRIcyIcOij5muCyPVEfX+o=
+			</data>
+		</dict>
+		<key>SudNativeJSConsoleRes.bundle/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/H+GCq1u2MTuKeO3UnDWOp72vHI=
+			</data>
+			<key>hash2</key>
+			<data>
+			Xz9YqA4rNI0tJMd5iF39XvmYDFNr/Hiq9RiILIbB/AY=
+			</data>
+		</dict>
+		<key>SudNativeJSConsoleRes.bundle/_CodeSignature/CodeSignature</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+			</data>
+			<key>hash2</key>
+			<data>
+			47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+			</data>
+		</dict>
+		<key>SudNativeJSConsoleRes.bundle/index.html</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			K/tLkR3L9CMKspWcGjDkJx9cc/Y=
+			</data>
+			<key>hash2</key>
+			<data>
+			gC2TRtg8NJ8h6hVrPmNen2ffzD1Q2jUcUnOpVwi3ue8=
 			</data>
 		</dict>
 		<key>fsm_mgp_game_loading_progress.png</key>
@@ -503,11 +548,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DT5CFEb70VfK0g/AcgYOm5zx5pU=
+			lFQAJo2NE+si/dhBhbs/bJ9ELUc=
 			</data>
 			<key>hash2</key>
 			<data>
-			tLA/Jt5EMBrB1OYfN5RMEx4QjkdrTxizY217oGxA+SU=
+			DTJwzh59XI+rwmW6uffxafdwtN9kuAFj3tHvNTQoMLw=
 			</data>
 		</dict>
 		<key>sud.png</key>
