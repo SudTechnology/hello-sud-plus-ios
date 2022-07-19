@@ -16,3 +16,13 @@
 /// 转成md5
 - (NSString*)dt_md5;
 @end
+
+
+@interface NSAttributedString(DTNSAttributedString)
+
+/// 将图片转换为富文本
+/// @param image 图片
+/// @param size 图片尺寸
+/// @param offsetY 垂直偏移
++ (NSAttributedString *)dt_attrWithImage:(UIImage *)image size:(CGSize)size offsetY:(CGFloat)offsetY;
+@end

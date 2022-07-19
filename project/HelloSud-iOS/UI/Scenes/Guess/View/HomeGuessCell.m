@@ -13,7 +13,7 @@
 @property(nonatomic, strong) UIImageView *iconImageView;
 @property(nonatomic, strong) UIImageView *bgImageView;
 @property(nonatomic, strong) UIView *awardBackgroundView;
-@property(nonatomic, strong) YYLabel *awardLabel;
+@property(nonatomic, strong) UILabel *awardLabel;
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) YYLabel *infoLabel;
 @property(nonatomic, strong) UIButton *enterBtn;
@@ -45,6 +45,7 @@
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.equalTo(@0);
         make.height.equalTo(@100);
@@ -63,8 +64,8 @@
     [self.awardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@10);
         make.trailing.equalTo(@-18);
-        make.centerY.equalTo(self.awardBackgroundView);
-        make.width.height.greaterThanOrEqualTo(@0);
+        make.top.bottom.equalTo(@0);
+        make.width.greaterThanOrEqualTo(@0);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(@0);
@@ -215,15 +216,18 @@
     full.yy_color = HEX_COLOR(@"#ffffff");
 
     UIImage *iconImage = [UIImage imageNamed:@"guess_award_coin"];
-    NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(18, 18) alignToFont:[UIFont systemFontOfSize:16 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
-    [full appendAttributedString:attrIcon];
+//    NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(18, 18) alignToFont:[UIFont systemFontOfSize:16 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
+    //[full appendAttributedString:attrIcon];
+    
+    NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:iconImage size:CGSizeMake(18, 18) offsetY: -4];
+    [full appendAttributedString:iconAttr];
 
     NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", @(award)]];
     attrAwardValue.yy_font = UIFONT_MEDIUM(16);
     attrAwardValue.yy_color = HEX_COLOR(@"#FFFF22");
     [full appendAttributedString:attrAwardValue];
-
     _awardLabel.attributedText = full;
+    
 }
 
 - (UIImageView *)bgImageView {
@@ -253,9 +257,9 @@
     return _awardBackgroundView;
 }
 
-- (YYLabel *)awardLabel {
+- (UILabel *)awardLabel {
     if (!_awardLabel) {
-        _awardLabel = [[YYLabel alloc] init];
+        _awardLabel = [[UILabel alloc] init];
     }
     return _awardLabel;
 }

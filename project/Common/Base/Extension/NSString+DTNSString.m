@@ -37,3 +37,19 @@
 }
 
 @end
+
+@implementation NSAttributedString(DTNSAttributedString)
+
+/// 将图片转换为富文本
+/// @param image 图片
+/// @param size 图片尺寸
+/// @param offsetY 垂直偏移
++ (NSAttributedString *)dt_attrWithImage:(UIImage *)image size:(CGSize)size offsetY:(CGFloat)offsetY {
+    NSTextAttachment *attachment = [[NSTextAttachment alloc]init];
+    attachment.image = image;
+    attachment.bounds = CGRectMake(0, offsetY, size.width, size.height);
+    NSAttributedString *attrStr1 = [NSAttributedString attributedStringWithAttachment:attachment];
+    return attrStr1;
+}
+
+@end
