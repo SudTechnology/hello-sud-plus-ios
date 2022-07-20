@@ -100,13 +100,15 @@
 
 - (void)dtLayoutViews {
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.leading.trailing.equalTo(@0);
+        make.top.bottom.equalTo(@0);
     }];
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.contentView);
     }];
     [self.sceneView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.contentView);
+        make.leading.trailing.equalTo(@0);
+        make.top.bottom.equalTo(@0);
     }];
     [self.gameTopShadeNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(self.sceneView);

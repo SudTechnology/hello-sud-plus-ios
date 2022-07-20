@@ -140,9 +140,12 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         make.width.greaterThanOrEqualTo(@0);
         make.height.equalTo(@24);
     }];
+    self.tipOpenLabel.preferredMaxLayoutWidth = kScreenWidth - 42;
     [self.tipOpenLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@5);
-        make.top.trailing.bottom.equalTo(@0);
+        make.top.equalTo(@5);
+        make.bottom.equalTo(@-5);
+        make.trailing.equalTo(@-5);
     }];
 
 }
@@ -191,7 +194,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             make.top.equalTo(self.gameMicContentView.mas_bottom).offset(10);
             make.leading.equalTo(@16);
             make.trailing.equalTo(@-16);
-            make.height.equalTo(@112);
+            make.height.greaterThanOrEqualTo(@112);
         }];
     } else {
         self.tipOpenLabel.hidden = YES;

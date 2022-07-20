@@ -137,8 +137,16 @@
             make.centerX.equalTo(self);
             make.top.equalTo(@0);
         }];
+
+        CGFloat w = kScreenWidth;
+        if (w < kScreenHeight) {
+            w = kScreenHeight;
+        }
+        CGFloat marginX = (w - 568) / 2;
         [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.closeBtn.mas_bottom).offset(-2);
+//            make.leading.equalTo(@(marginX));
+//            make.trailing.equalTo(@(-marginX));
             make.width.equalTo(@568);
             make.centerX.equalTo(self);
             make.bottom.equalTo(@0);

@@ -58,7 +58,8 @@
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(kAppSafeTop + 10));
-        make.width.greaterThanOrEqualTo(@0);
+        make.leading.equalTo(self.backBtn.mas_trailing).offset(5);
+        make.trailing.equalTo(self.tipBtn.mas_leading).offset(5);
         make.height.equalTo(@25);
         make.centerX.equalTo(self.view);
     }];
