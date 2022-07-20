@@ -406,3 +406,6 @@
 "dt_room_disco_menu_name" = "무대 프로그램";
 "dt_room_disco_dance_insert" = "Cut in line for dance";
 "dt_room_guess_already_join" = "%@인이 퀴즈에 참여함";
+"dt_room_gift_send_fmt" = "내가 증정한것은 %@개【%@】";
+"dt_room_guess_time_remain_min" = "%@mins 잔여";
+"dt_room_guess_time_remain_second" = "%@s잔여";

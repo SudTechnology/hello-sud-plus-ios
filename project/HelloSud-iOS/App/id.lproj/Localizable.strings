@@ -406,3 +406,6 @@
 "dt_room_disco_menu_name" = "program pertunjukan";
 "dt_room_disco_dance_insert" = "Menari untuk melompati antrian";
 "dt_room_guess_already_join" = "%@ orang telah berpartisipasi dalam kuis";
+"dt_room_gift_send_fmt" = "Saya mengirim %@【%@】";
+"dt_room_guess_time_remain_min" = "tersisa %@ menit";
+"dt_room_guess_time_remain_second" = "tersisa %@s";

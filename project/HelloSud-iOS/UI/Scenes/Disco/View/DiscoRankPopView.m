@@ -29,6 +29,9 @@
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+    [self.subTitleLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.tipLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.tipLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@12);
         make.height.equalTo(@28);
@@ -38,9 +41,8 @@
     [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(12);
         make.leading.equalTo(@16);
-        make.centerX.equalTo(self);
-        make.height.equalTo(@17);
-        make.width.greaterThanOrEqualTo(@0);
+        make.height.greaterThanOrEqualTo(@17);
+        make.trailing.equalTo(self.tipLabel.mas_leading).offset(-2);
     }];
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(@-16);
@@ -125,6 +127,7 @@
         _subTitleLabel.font = UIFONT_REGULAR(12);
         _subTitleLabel.textColor = HEX_COLOR(@"#000000");
         _subTitleLabel.text = NSString.dt_room_disco_operate_tip;
+        _subTitleLabel.numberOfLines = 0;
     }
     return _subTitleLabel;
 }

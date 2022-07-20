@@ -384,7 +384,7 @@
 "dt_room_disco_keyword_top_five" = "ห้าอันดับแรก";
 "dt_room_disco_waitting" = "กำลังรออยู่";
 "dt_room_disco_dancing_fmt" = "%@\n เชิญ %@ เต้น %@ นาที";
-"dt_room_disco_tip_one_fmt" = "1. ลำดับการอุทิศของขวัญ %1$s สุ่ม DJ (รีเฟรชใน %@ วินาที)";
+"dt_room_disco_tip_one_fmt" = "1. ลำดับการอุทิศของขวัญ %@ สุ่ม DJ (รีเฟรชใน %@ วินาที)";
 "dt_room_disco_tip_two_fmt" = "2. การส่งของขวัญสามารถกระตุ้นเอฟเฟกต์ต่างๆ ได้หรือสั่งให้โฮสต์เต้นได้";
 "dt_room_disco_tip_three_fmt" = "3. คำสั่งหน้าจอสาธารณะ [%@]  [%@]  [%@]";
 "dt_room_disco_tip_four_fmt" = "4. หากไมค์ส่ง [%@] จะสามารถเข้าตำแหน่งโฮสต์ ส่ง [%@] จะสามารถออกจากตำแหน่งโฮสต์";
@@ -407,3 +407,6 @@
 "dt_room_disco_menu_name" = "โปรแกรมเวที";
 "dt_room_disco_dance_insert" = "แซงคิวการเต้น";
 "dt_room_guess_already_join" = "%@ คนได้เข้าร่วมตอบคำถาม";
+"dt_room_gift_send_fmt" = "ฉันได้ส่ง %@ [%@]";
+"dt_room_guess_time_remain_min" = "เหลือ %@นาที";
+"dt_room_guess_time_remain_second" = "เหลือ %@วินาที";

@@ -406,3 +406,6 @@
 "dt_room_disco_menu_name" = "برنامج المرحلة";
 "dt_room_disco_dance_insert" = "طابور انتظار الرقص";
 "dt_room_guess_already_join" = "لقد شارك %@ شخصًا في التخمين بالفعل";
+"dt_room_gift_send_fmt" = "لقد تبرعت %@ عددًا [%@]";
+"dt_room_guess_time_remain_min" = "المتبقي %@ دقيقة";
+"dt_room_guess_time_remain_second" = "المتبقي %@ ثانية";

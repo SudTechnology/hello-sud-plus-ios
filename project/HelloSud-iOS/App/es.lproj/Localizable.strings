@@ -406,3 +406,6 @@
 "dt_room_disco_menu_name" = "Programas de baile";
 "dt_room_disco_dance_insert" = "Saltarse cola para bailar";
 "dt_room_guess_already_join" = "%@ personas han participado en el concurso";
+"dt_room_gift_send_fmt" = "Envia %@【%@】";
+"dt_room_guess_time_remain_min" = "%@mins restantes";
+"dt_room_guess_time_remain_second" = "Quedan %@ segundo(s)";

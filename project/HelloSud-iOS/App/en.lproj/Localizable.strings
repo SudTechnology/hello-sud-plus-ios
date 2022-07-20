@@ -406,3 +406,6 @@
 "dt_room_disco_menu_name" = "Stage programmes";
 "dt_room_disco_dance_insert" = "Cut in line for dance";
 "dt_room_guess_already_join" = "%@ players have joined the guessing game";
+"dt_room_gift_send_fmt" = "I have sent %@【%@】";
+"dt_room_guess_time_remain_min" = "%@mins remaining";
+"dt_room_guess_time_remain_second" = "%@s remaining";

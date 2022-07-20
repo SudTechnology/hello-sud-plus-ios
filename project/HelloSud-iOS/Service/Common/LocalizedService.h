@@ -411,6 +411,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_room_disco_menu_name;
 + (NSString *)dt_room_disco_dance_insert;
 + (NSString *)dt_room_guess_already_join;
++ (NSString *)dt_room_gift_send_fmt;
++ (NSString *)dt_room_guess_time_remain_min;
++ (NSString *)dt_room_guess_time_remain_second;
 
 @end
 NS_ASSUME_NONNULL_END

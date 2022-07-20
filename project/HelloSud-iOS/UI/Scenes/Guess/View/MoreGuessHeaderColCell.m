@@ -281,7 +281,7 @@
         m.leftRoomName = self.leftNameLabel.text;
         m.rightRoomName = self.rightNameLabel.text;
     } else {
-        self.stateLabel.text = @"已结束";
+        self.stateLabel.text = NSString.dt_room_closed;
         self.coinTipLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_thirdthhen_pool, @(13)];
         self.leftResultImageView.hidden = NO;
         self.rightResultImageView.hidden = NO;

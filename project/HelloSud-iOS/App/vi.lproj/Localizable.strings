@@ -406,3 +406,6 @@
 "dt_room_disco_menu_name" = "Danh sách tiết mục sân khấu";
 "dt_room_disco_dance_insert" = "Chen hàng khiêu vũ";
 "dt_room_guess_already_join" = "%@ người tham gia đoán";
+"dt_room_gift_send_fmt" = "Tôi tặng cho %@【%@】";
+"dt_room_guess_time_remain_min" = "Còn %@mins";
+"dt_room_guess_time_remain_second" = "Còn %@s";

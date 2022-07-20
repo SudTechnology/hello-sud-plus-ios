@@ -585,16 +585,17 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 }
 
 - (void)handleGiftMsg:(RoomCmdSendGiftModel *)m {
+
+    NSString *content = [NSString stringWithFormat:NSString.dt_room_gift_send_fmt, @(1), m.giftName];
     switch (m.giftID) {
         case 1: {
             // 礼物价格1
-            NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
+
             [kDiscoRoomService showMsgPop:3 field1:content];
         }
             break;
         case 2: {
             // 礼物价格100
-            NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
             [kDiscoRoomService showMsgPop:3 field1:content];
             // 特写镜头
             [kDiscoRoomService specialRole:3 isTop:NO];
@@ -602,7 +603,6 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             break;
         case 3: {
             // 礼物价格1000
-            NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
             [kDiscoRoomService showMsgPop:6 field1:content];
             // 特写镜头
             [kDiscoRoomService specialRole:3 isTop:NO];
@@ -612,7 +612,6 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             break;
         case 4: {
             // 礼物价格10000
-            NSString *content = [NSString stringWithFormat:@"我送了一个【%@】", m.giftName];
             [kDiscoRoomService showMsgPop:9 field1:content];
             // 特写镜头
             [kDiscoRoomService specialRole:5 isTop:NO];

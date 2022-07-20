@@ -406,3 +406,6 @@
 "dt_room_disco_menu_name" = "Tunjukan pentas";
 "dt_room_disco_dance_insert" = "menari melompat dalam barisan";
 "dt_room_guess_already_join" = "%@ orang telah mengambil bahagian dalam kuiz";
+"dt_room_gift_send_fmt" = "Saya telah menghantar %@【%@】";
+"dt_room_guess_time_remain_min" = "%@mins lagi";
+"dt_room_guess_time_remain_second" = "%@s tinggal";

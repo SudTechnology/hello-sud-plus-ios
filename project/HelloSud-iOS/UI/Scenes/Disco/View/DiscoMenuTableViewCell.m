@@ -41,6 +41,9 @@
 - (void)dtLayoutViews {
     [super dtLayoutViews];
 
+    [self.nameLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.timeLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.timeLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.rankLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.greaterThanOrEqualTo(@0);
         make.centerY.equalTo(self.contentView);
@@ -52,9 +55,10 @@
         make.leading.equalTo(@57);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.greaterThanOrEqualTo(@0);
+        make.height.greaterThanOrEqualTo(@0);
         make.centerY.equalTo(self.contentView);
         make.leading.equalTo(self.headImageView.mas_trailing).offset(8);
+        make.trailing.equalTo(self.timeLabel.mas_leading).offset(-2);
     }];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.greaterThanOrEqualTo(@0);
@@ -79,7 +83,7 @@
     DDLogDebug(@"celll dtUpdateUI from user:%@, cell:%@", m.fromUser.name, self);
     __weak DiscoMenuModel *weakModel = m;
     m.updateDancingDurationBlock = ^(NSInteger second) {
-        if (weakModel != weakSelf.model){
+        if (weakModel != weakSelf.model) {
             return;
         }
         [weakSelf updateRemainTime:second];
@@ -124,9 +128,9 @@
         self.timeLabel.paddingX = 0;
         NSInteger minute = remainSecond / 60.0;
         if (minute > 0) {
-            self.timeLabel.text = [NSString stringWithFormat:@"%@%@mins", NSString.dt_room_guess_remain, @(minute)];
+            self.timeLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_time_remain_min, @(minute)];
         } else {
-            self.timeLabel.text = [NSString stringWithFormat:@"%@%@s", NSString.dt_room_guess_remain, @(remainSecond)];
+            self.timeLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_time_remain_second, @(remainSecond)];
         }
     }
 }
@@ -138,7 +142,11 @@
     NSDictionary *dic = @{NSFontAttributeName: UIFONT_MEDIUM(14), NSForegroundColorAttributeName: HEX_COLOR(@"#ffffff")};
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", fullStr]
                                                                              attributes:dic];
-    attr.yy_alignment = NSTextAlignmentLeft;
+    if (LanguageUtil.isLanguageRTL) {
+        attr.yy_alignment = NSTextAlignmentRight;
+    } else {
+        attr.yy_alignment = NSTextAlignmentLeft;
+    }
     self.nameLabel.attributedText = attr;
 }
 

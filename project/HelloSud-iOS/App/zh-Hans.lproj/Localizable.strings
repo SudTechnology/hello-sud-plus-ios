@@ -409,3 +409,6 @@
 "dt_room_disco_menu_name" = "舞台节目单";
 "dt_room_disco_dance_insert" = "跳舞插队";
 "dt_room_guess_already_join" = "%@人已参与竞猜";
+"dt_room_gift_send_fmt" = "我送了%@个【%@】";
+"dt_room_guess_time_remain_min" = "剩余%@mins";
+"dt_room_guess_time_remain_second" = "剩余%@s";

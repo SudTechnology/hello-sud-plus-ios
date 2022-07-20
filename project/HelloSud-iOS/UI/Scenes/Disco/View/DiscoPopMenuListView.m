@@ -15,7 +15,7 @@
 @property(nonatomic, strong) UIImageView *bgImageView;
 @property(nonatomic, strong) UIView *contentView;
 @property(nonatomic, strong) UILabel *titleLabel;
-@property(nonatomic, strong) YYLabel *ruleLabel;
+@property(nonatomic, strong) DTPaddingLabel *ruleLabel;
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UILabel *noDataLabel;
 @property(nonatomic, strong) DiscoMenuRuleView *ruleView;
@@ -172,7 +172,7 @@
         UILabel *label = [[UILabel alloc] init];
         label.font = UIFONT_REGULAR(14);
         label.textColor = HEX_COLOR(@"#ffffff");
-        label.text = @"已结束";
+        label.text = NSString.dt_room_closed;
         label.hidden = self.dataList[section].count == 0;
         [v addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -233,9 +233,11 @@
 }
 
 
-- (YYLabel *)ruleLabel {
+- (DTPaddingLabel *)ruleLabel {
     if (!_ruleLabel) {
-        _ruleLabel = [[YYLabel alloc] init];
+        _ruleLabel = [[DTPaddingLabel alloc] init];
+        _ruleLabel.paddingX = 2;
+        _ruleLabel.userInteractionEnabled = YES;
         _ruleLabel.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
         NSMutableAttributedString *full = [[NSMutableAttributedString alloc] initWithString:NSString.dt_room_disco_rule];
         full.yy_font = UIFONT_REGULAR(12);
@@ -243,8 +245,7 @@
         full.yy_firstLineHeadIndent = 3;
 
         UIImage *iconImage = [UIImage imageNamed:@"disco_rule_icon"];
-        NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 12) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
-        [full appendAttributedString:attrIcon];
+        [full appendAttributedString:[NSAttributedString dt_attrWithImage:iconImage size:CGSizeMake(12, 12) offsetY:0]];
         _ruleLabel.attributedText = full;
     }
     return _ruleLabel;

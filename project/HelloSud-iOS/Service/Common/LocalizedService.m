@@ -416,5 +416,8 @@
 + (NSString *)dt_room_disco_menu_name { return @"dt_room_disco_menu_name".localized; }
 + (NSString *)dt_room_disco_dance_insert { return @"dt_room_disco_dance_insert".localized; }
 + (NSString *)dt_room_guess_already_join { return @"dt_room_guess_already_join".localized; }
++ (NSString *)dt_room_gift_send_fmt { return @"dt_room_gift_send_fmt".localized; }
++ (NSString *)dt_room_guess_time_remain_min { return @"dt_room_guess_time_remain_min".localized; }
++ (NSString *)dt_room_guess_time_remain_second { return @"dt_room_guess_time_remain_second".localized; }
 
 @end
