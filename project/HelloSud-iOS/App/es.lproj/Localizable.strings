@@ -405,3 +405,4 @@
 "dt_room_guess_thirdthhen_pool" = "%@personas han hecho una predicción exitosa para ganar el premio";
 "dt_room_disco_menu_name" = "Programas de baile";
 "dt_room_disco_dance_insert" = "Saltarse cola para bailar";
+"dt_room_guess_already_join" = "%@ personas han participado en el concurso";

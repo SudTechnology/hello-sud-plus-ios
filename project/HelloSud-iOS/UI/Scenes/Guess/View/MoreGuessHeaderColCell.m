@@ -18,14 +18,14 @@
 
 @property(nonatomic, strong) UILabel *leftNameLabel;
 @property(nonatomic, strong) UILabel *leftIDLabel;
-@property(nonatomic, strong) UILabel *leftSupportLabel;
+@property(nonatomic, strong) MarqueeLabel *leftSupportLabel;
 @property(nonatomic, strong) UIImageView *leftImageView;
 @property(nonatomic, strong) UIImageView *leftSupportImageView;
 @property(nonatomic, strong) UIButton *leftSupportBtn;
 
 @property(nonatomic, strong) UILabel *rightNameLabel;
 @property(nonatomic, strong) UILabel *rightIDLabel;
-@property(nonatomic, strong) UILabel *rightSupportLabel;
+@property(nonatomic, strong) MarqueeLabel *rightSupportLabel;
 @property(nonatomic, strong) UIImageView *rightImageView;
 @property(nonatomic, strong) UIImageView *rightSupportImageView;
 @property(nonatomic, strong) UIButton *rightSupportBtn;
@@ -120,7 +120,8 @@
     [self.leftSupportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.leftImageView.mas_trailing).offset(6);
         make.top.equalTo(self.vsImageView).offset(6);
-        make.width.height.greaterThanOrEqualTo(@0);
+        make.height.greaterThanOrEqualTo(@0);
+        make.trailing.equalTo(self.contentView.mas_centerX);
     }];
     [self.leftIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.leftImageView);
@@ -154,7 +155,8 @@
     [self.rightSupportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.rightImageView.mas_leading).offset(-6);
         make.top.equalTo(self.vsImageView).offset(6);
-        make.width.height.greaterThanOrEqualTo(@0);
+        make.height.greaterThanOrEqualTo(@0);
+        make.leading.equalTo(self.contentView.mas_centerX);
     }];
     [self.rightIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.rightImageView);
@@ -182,9 +184,9 @@
 
     [self.joinTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.joinImageView.mas_trailing).offset(4);
+        make.trailing.equalTo(@-16);
         make.centerY.equalTo(self.joinImageView);
         make.height.greaterThanOrEqualTo(@0);
-        make.width.lessThanOrEqualTo(@100);
     }];
 
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -280,7 +282,7 @@
         m.rightRoomName = self.rightNameLabel.text;
     } else {
         self.stateLabel.text = @"已结束";
-        self.coinTipLabel.text = NSString.dt_room_guess_thirdthhen_pool;
+        self.coinTipLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_thirdthhen_pool, @(13)];
         self.leftResultImageView.hidden = NO;
         self.rightResultImageView.hidden = NO;
         self.leftSupportLabel.hidden = NO;
@@ -425,13 +427,16 @@
         _leftNameLabel.text = @"趣味辩论";
         _leftNameLabel.font = UIFONT_REGULAR(16);
         _leftNameLabel.textColor = HEX_COLOR(@"#ffffff");
+        if (LanguageUtil.isLanguageRTL) {
+            _leftNameLabel.textAlignment = NSTextAlignmentRight;
+        }
     }
     return _leftNameLabel;
 }
 
-- (YYLabel *)leftSupportLabel {
+- (MarqueeLabel *)leftSupportLabel {
     if (!_leftSupportLabel) {
-        _leftSupportLabel = [[UILabel alloc] init];
+        _leftSupportLabel = [[MarqueeLabel alloc] init];
         _leftSupportLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_support_fmt, @(100)];
         _leftSupportLabel.font = UIFONT_MEDIUM(10);
         _leftSupportLabel.textColor = HEX_COLOR(@"#FFFF22");
@@ -501,13 +506,16 @@
         _rightNameLabel.font = UIFONT_REGULAR(16);
         _rightNameLabel.textColor = HEX_COLOR(@"#ffffff");
         _rightNameLabel.textAlignment = NSTextAlignmentRight;
+        if (LanguageUtil.isLanguageRTL) {
+            _rightNameLabel.textAlignment = NSTextAlignmentLeft;
+        }
     }
     return _rightNameLabel;
 }
 
-- (YYLabel *)rightSupportLabel {
+- (MarqueeLabel *)rightSupportLabel {
     if (!_rightSupportLabel) {
-        _rightSupportLabel = [[UILabel alloc] init];
+        _rightSupportLabel = [[MarqueeLabel alloc] init];
         _rightSupportLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_support_fmt, @(100)];
         _rightSupportLabel.font = UIFONT_MEDIUM(10);
         _rightSupportLabel.textColor = HEX_COLOR(@"#FFFF22");
@@ -583,7 +591,7 @@
 - (MarqueeLabel *)joinTipLabel {
     if (!_joinTipLabel) {
         _joinTipLabel = [[MarqueeLabel alloc] init];
-        _joinTipLabel.text = @"30人已参与竞猜";
+        _joinTipLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_already_join, @(30)];
         _joinTipLabel.font = UIFONT_REGULAR(12);
         _joinTipLabel.textColor = HEX_COLOR_A(@"#000000", 0.7);
     }

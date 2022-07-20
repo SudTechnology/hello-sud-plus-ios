@@ -92,12 +92,14 @@
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.headImageView.mas_trailing).offset(8);
         make.top.equalTo(self.headImageView).offset(7);
-        make.width.height.greaterThanOrEqualTo(@0);
+        make.height.greaterThanOrEqualTo(@0);
+        make.trailing.equalTo(self.playBtn.mas_leading);
     }];
     [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.nameLabel);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(3);
-        make.width.height.greaterThanOrEqualTo(@0);
+        make.height.greaterThanOrEqualTo(@0);
+        make.trailing.equalTo(self.playBtn.mas_leading);
     }];
     [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(@-10);

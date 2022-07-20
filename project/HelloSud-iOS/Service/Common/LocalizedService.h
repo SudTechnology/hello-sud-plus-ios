@@ -410,6 +410,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_room_guess_thirdthhen_pool;
 + (NSString *)dt_room_disco_menu_name;
 + (NSString *)dt_room_disco_dance_insert;
++ (NSString *)dt_room_guess_already_join;
 
 @end
 NS_ASSUME_NONNULL_END

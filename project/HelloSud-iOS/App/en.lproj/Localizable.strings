@@ -405,3 +405,4 @@
 "dt_room_guess_thirdthhen_pool" = "%@players have joined the guessing game to divide the prize pool";
 "dt_room_disco_menu_name" = "Stage programmes";
 "dt_room_disco_dance_insert" = "Cut in line for dance";
+"dt_room_guess_already_join" = "%@ players have joined the guessing game";

@@ -11,7 +11,7 @@
 @interface GuessSelectColCell ()
 @property(nonatomic, strong) UIImageView *headImageView;
 @property(nonatomic, strong) UIButton *supportBtn;
-@property(nonatomic, strong) UILabel *supportNumLabel;
+@property(nonatomic, strong) MarqueeLabel *supportNumLabel;
 @end
 
 @implementation GuessSelectColCell
@@ -34,13 +34,15 @@
     [self.supportBtn dt_cornerRadius:18];
     [self.supportBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.headImageView.mas_bottom);
-        make.width.greaterThanOrEqualTo(@70);
+        make.leading.equalTo(@2);
+        make.trailing.equalTo(@-2);
         make.height.equalTo(@36);
         make.centerX.equalTo(self.headImageView);
     }];
     [self.supportNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.supportBtn.mas_bottom).offset(4);
-        make.leading.trailing.equalTo(self.contentView);
+        make.leading.equalTo(@2);
+        make.trailing.equalTo(@-2);
         make.height.equalTo(@17);
     }];
 }
@@ -117,9 +119,9 @@
     return _supportBtn;
 }
 
-- (UILabel *)supportNumLabel {
+- (MarqueeLabel *)supportNumLabel {
     if (!_supportNumLabel) {
-        _supportNumLabel = [[UILabel alloc] init];
+        _supportNumLabel = [[MarqueeLabel alloc] init];
         _supportNumLabel.font = UIFONT_REGULAR(12);
         _supportNumLabel.textColor = HEX_COLOR_A(@"#000000", 0.7);
         _supportNumLabel.textAlignment = NSTextAlignmentCenter;

@@ -311,7 +311,7 @@
 "dt_room_guess_play_now" = "Main sekarang";
 "dt_room_guess_give_more" = "Bertaruh lebih banyak dan dapatkan poin lebih banyak";
 "dt_room_guess_support_now" = "Dukung sekarang";
-"dt_room_guess_king" = "";
+"dt_room_guess_king" = "Guessing King";
 "dt_room_guess_big_rank" = "Daftar Peringkat Master";
 "dt_room_guess_rank_day" = "harian";
 "dt_room_guess_rank_week" = "mingguan";
@@ -405,3 +405,4 @@
 "dt_room_guess_thirdthhen_pool" = "%@orang telah berhasil memprediksi untuk membagi kumpulan hadiah";
 "dt_room_disco_menu_name" = "program pertunjukan";
 "dt_room_disco_dance_insert" = "Menari untuk melompati antrian";
+"dt_room_guess_already_join" = "%@ orang telah berpartisipasi dalam kuis";

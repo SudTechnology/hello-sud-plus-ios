@@ -91,7 +91,7 @@
         _coinLabel = [[UILabel alloc] init];
         _coinLabel.font = UIFONT_MEDIUM(14);
         _coinLabel.textColor = HEX_COLOR(@"#666666");
-        _coinLabel.text = @"";
+        _coinLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_coin_fmt, @""];
     }
     return _coinLabel;
 }

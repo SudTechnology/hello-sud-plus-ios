@@ -415,5 +415,6 @@
 + (NSString *)dt_room_guess_thirdthhen_pool { return @"dt_room_guess_thirdthhen_pool".localized; }
 + (NSString *)dt_room_disco_menu_name { return @"dt_room_disco_menu_name".localized; }
 + (NSString *)dt_room_disco_dance_insert { return @"dt_room_disco_dance_insert".localized; }
++ (NSString *)dt_room_guess_already_join { return @"dt_room_guess_already_join".localized; }
 
 @end

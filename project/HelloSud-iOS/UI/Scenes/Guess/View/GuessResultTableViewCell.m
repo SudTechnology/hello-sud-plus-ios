@@ -50,7 +50,7 @@
     [self.supportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.titleLabel);
         make.top.equalTo(self.titleLabel.mas_bottom);
-        make.width.greaterThanOrEqualTo(@0);
+        make.trailing.equalTo(self.startLabel.mas_leading).offset(2);
         make.height.equalTo(@14);
     }];
     [self.startLabel mas_makeConstraints:^(MASConstraintMaker *make) {

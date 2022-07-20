@@ -15,7 +15,7 @@
 /// 导航自动竞猜导航视图
 @property(nonatomic, strong) BaseView *autoGuessNavView;
 @property(nonatomic, strong) UIImageView *autoNavImageView;
-@property(nonatomic, strong) UILabel *autoTitleLabel;
+@property(nonatomic, strong) MarqueeLabel *autoTitleLabel;
 /// 围观者导航视图
 @property(nonatomic, strong) BaseView *normalGuessNavView;
 @property(nonatomic, strong) MarqueeLabel *normalGuessNavLabel;
@@ -64,7 +64,7 @@
     [self.autoGuessNavView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.naviView.roomModeView);
         make.height.equalTo(@20);
-        make.width.equalTo(@0);
+        make.width.equalTo(@100);
         make.trailing.equalTo(self.naviView.roomModeView.mas_leading).offset(-10);
         make.leading.greaterThanOrEqualTo(self.naviView.onlineImageView.mas_trailing).offset(10);
     }];
@@ -82,7 +82,7 @@
     [self.normalGuessNavView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.naviView.roomModeView);
         make.height.equalTo(@20);
-        make.width.greaterThanOrEqualTo(@0);
+        make.width.lessThanOrEqualTo(@90);
         make.trailing.equalTo(self.naviView.roomModeView.mas_leading).offset(-10);
         make.leading.greaterThanOrEqualTo(self.naviView.onlineImageView.mas_trailing).offset(10);
     }];
@@ -93,7 +93,11 @@
         make.height.equalTo(self.normalGuessNavView);
     }];
     [self.fingerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.normalGuessNavView.mas_trailing);
+        if (LanguageUtil.isLanguageRTL) {
+            make.trailing.equalTo(self.normalGuessNavView.mas_leading);
+        } else {
+            make.leading.equalTo(self.normalGuessNavView.mas_trailing);
+        }
         make.top.equalTo(self.normalGuessNavView.mas_bottom);
         make.width.equalTo(@31);
         make.height.equalTo(@26);
@@ -521,9 +525,9 @@
     return _autoNavImageView;
 }
 
-- (UILabel *)autoTitleLabel {
+- (MarqueeLabel *)autoTitleLabel {
     if (!_autoTitleLabel) {
-        _autoTitleLabel = [[UILabel alloc] init];
+        _autoTitleLabel = [[MarqueeLabel alloc] init];
         _autoTitleLabel.font = UIFONT_BOLD(12);
         _autoTitleLabel.textColor = HEX_COLOR(@"#FFFFFF");
         _autoTitleLabel.textAlignment = NSTextAlignmentCenter;

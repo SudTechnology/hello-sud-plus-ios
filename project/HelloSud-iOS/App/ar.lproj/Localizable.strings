@@ -405,4 +405,4 @@
 "dt_room_guess_thirdthhen_pool" = "خمن %@شخصاً بنجاح مجموعة الفائزين بالجوائز";
 "dt_room_disco_menu_name" = "برنامج المرحلة";
 "dt_room_disco_dance_insert" = "طابور انتظار الرقص";
-
+"dt_room_guess_already_join" = "لقد شارك %@ شخصًا في التخمين بالفعل";

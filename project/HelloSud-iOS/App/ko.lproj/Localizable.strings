@@ -404,4 +404,5 @@
 "dt_room_guess_had_support_fmt" = "이미%@명이 지원";
 "dt_room_guess_thirdthhen_pool" = "%@인이 예측 성공, 보너스 풀 배분";
 "dt_room_disco_menu_name" = "무대 프로그램";
-"dt_room_disco_dance_insert" = "";
+"dt_room_disco_dance_insert" = "Cut in line for dance";
+"dt_room_guess_already_join" = "%@인이 퀴즈에 참여함";

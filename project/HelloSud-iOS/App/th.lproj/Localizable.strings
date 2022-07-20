@@ -406,3 +406,4 @@
 "dt_room_guess_thirdthhen_pool" = "%@ คนได้คาดการณ์อย่างสำเร็จและแบ่งเงินรางวัล";
 "dt_room_disco_menu_name" = "โปรแกรมเวที";
 "dt_room_disco_dance_insert" = "แซงคิวการเต้น";
+"dt_room_guess_already_join" = "%@ คนได้เข้าร่วมตอบคำถาม";

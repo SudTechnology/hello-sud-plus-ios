@@ -41,7 +41,8 @@
 - (void)dtConfigUI {
     [super dtConfigUI];
     self.view.backgroundColor = UIColor.whiteColor;
-    self.headerView.mj_h = 524;
+    CGFloat h = [self.headerView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, kScreenHeight)].height;
+    self.headerView.mj_h = h;
     self.tableView.tableHeaderView = self.headerView;
     self.headerView.backgroundColor = UIColor.clearColor;
     self.tableView.backgroundColor = UIColor.clearColor;
@@ -58,6 +59,9 @@
         weakSelf.dataList = model.quizGameInfoList;
         weakSelf.headerView.duration = model.pkCountDownCycle;
         [weakSelf.headerView dtUpdateUI];
+        CGFloat h = [weakSelf.headerView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, kScreenHeight)].height;
+        weakSelf.headerView.mj_h = h;
+        weakSelf.tableView.tableHeaderView = weakSelf.headerView;
         [weakSelf.tableView reloadData];
     }];
 }

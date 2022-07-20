@@ -405,3 +405,4 @@
 "dt_room_guess_thirdthhen_pool" = "%@人が予測に成功しました。賞金プールを分配しました";
 "dt_room_disco_menu_name" = "ステージプログラム";
 "dt_room_disco_dance_insert" = "ダンス割り込み";
+"dt_room_guess_already_join" = "%@人がクイズに参加しました";

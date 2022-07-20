@@ -44,18 +44,33 @@
     [attr appendAttributedString:attr2];
     self.tagLabel.attributedText = attr;
 
+    switch (self.rank) {
+        case 1:
+            self.tagLabel.textAlignment = NSTextAlignmentCenter;
+            break;
+        case 2:
+            self.tagLabel.textAlignment = NSTextAlignmentLeft;
+            break;
+        case 3:
+            self.tagLabel.textAlignment = NSTextAlignmentRight;
+            break;
+    }
+
     [self.tagLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.width.greaterThanOrEqualTo(@0);
         make.height.greaterThanOrEqualTo(@0);
         make.centerY.equalTo(self);
         switch (self.rank) {
             case 1:
-                make.centerX.equalTo(self);
+                make.leading.equalTo(@0);
+                make.trailing.equalTo(@0);
                 break;
             case 2:
                 make.leading.equalTo(@26);
+                make.trailing.equalTo(@-26);
                 break;
             case 3:
+                make.leading.equalTo(@26);
                 make.trailing.equalTo(@-26);
                 break;
         }

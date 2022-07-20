@@ -408,3 +408,4 @@
 "dt_room_guess_thirdthhen_pool" = "%@人预测成功瓜分奖池";
 "dt_room_disco_menu_name" = "舞台节目单";
 "dt_room_disco_dance_insert" = "跳舞插队";
+"dt_room_guess_already_join" = "%@人已参与竞猜";
