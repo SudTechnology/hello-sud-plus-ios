@@ -261,11 +261,12 @@
         self.headerView.image = [UIImage imageNamed:@"room_mic_up"];
         if (self.micType == HSAudioMic) {
             [self showUserName:NSString.dt_room_click_mic showOwner:false];
+        } else {
+            [self showUserName:@"" showOwner:false];
         }
         [self.rippleView stopAnimate:YES];
         [self hiddenGameNode:true];
         [self updateGameUI];
-        [self showUserName:@"" showOwner:false];
         return;
     }
     if (self.model.user.icon) {
