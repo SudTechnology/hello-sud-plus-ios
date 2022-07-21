@@ -9,10 +9,12 @@
 #import "DiscoRoomViewController.h"
 #import "DiscoNaviRankView.h"
 #import "DiscoRankPopView.h"
-#import "DiscoMenuView.h"
+#import "DiscoAnchorDatingView.h"
 #import "DiscoPopMenuListView.h"
 #import "DiscoRankTipView.h"
 #import "SudMGPAPPState.h"
+#import "DiscoGameInteractiveView.h"
+#import "DiscoAppointmentPopView.h"
 
 static NSString *discoKeyWordsMove = @"移动";
 static NSString *discoKeyWordsUp = @"上天";
@@ -28,7 +30,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 @property(nonatomic, strong) UIView *tipView;
 @property(nonatomic, strong) YYLabel *tipOpenLabel;
 @property(nonatomic, strong) DiscoNaviRankView *rankView;
-@property(nonatomic, strong) DiscoMenuView *menuView;
+/// 互动视图入口
+@property(nonatomic, strong) DiscoGameInteractiveView *interactiveView;
+/// 与主播约舞视图入口
+@property(nonatomic, strong) DiscoAnchorDatingView *datingView;
 @property(nonatomic, strong) DiscoRankTipView *rankTipView;
 /// 同步蹦迪信息用户ID
 @property(nonatomic, strong) NSString *syncDiscoInfoUserID;
@@ -37,12 +42,15 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 @property(nonatomic, assign) NSInteger djCountdown;
 @property(nonatomic, assign) DTTimer *djRandTimer;
 @property(nonatomic, assign) BOOL loadedRobotList;
+
+@property(nonatomic, strong) UIButton *menuBtn;
 @end
 
 @implementation DiscoRoomViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addMenuBtnToOperatorView];
     // Do any additional setup after loading the view.
     [self.naviView hiddenNodeWithRoleType:0];
     [self updateSettingState:self.gameId > 0];
@@ -89,7 +97,8 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     [self.naviView addSubview:self.rankView];
     [self.naviView addSubview:self.settingView];
     [self.settingView addSubview:self.settingLabel];
-    [self.sceneView addSubview:self.menuView];
+    [self.sceneView addSubview:self.interactiveView];
+    [self.sceneView addSubview:self.datingView];
     [self.sceneView addSubview:self.tipView];
     [self.tipView addSubview:self.tipLabel];
     [self.tipView addSubview:self.tipOpenLabel];
@@ -118,15 +127,19 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         make.height.mas_greaterThanOrEqualTo(0);
         make.width.mas_lessThanOrEqualTo(@66);
     }];
-    CGFloat b = kAppSafeBottom + 93;
-    [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.datingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(@-9);
-        make.bottom.equalTo(@(-b));
+        make.bottom.equalTo(self.operatorView.mas_top).offset(-13);
+        make.width.height.greaterThanOrEqualTo(@0);
+    }];
+    [self.interactiveView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(self.datingView);
+        make.bottom.equalTo(self.datingView.mas_top).offset(-8);
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.rankTipView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.menuView).offset(-7);
-        make.bottom.equalTo(self.menuView.mas_top);
+        make.trailing.equalTo(self.datingView).offset(-7);
+        make.bottom.equalTo(self.datingView.mas_top);
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.tipView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -158,10 +171,13 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRankViewTap:)];
     [self.rankView addGestureRecognizer:tap2];
     UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onMenuViewTap:)];
-    [self.menuView addGestureRecognizer:tap3];
+    [self.datingView addGestureRecognizer:tap3];
 
     UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTipLabelTap:)];
     [self.tipView addGestureRecognizer:tap4];
+
+    UITapGestureRecognizer *tap5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onInteractiveViewTap:)];
+    [self.interactiveView addGestureRecognizer:tap5];
 
     [[NSNotificationCenter defaultCenter] addObserverForName:showWaitingForDancingNTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         weakSelf.rankTipView.hidden = NO;
@@ -170,6 +186,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         }];
     }];
 
+    [self.menuBtn addTarget:self action:@selector(onBtnMenuClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)dtConfigUI {
@@ -182,6 +199,23 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         [weakSelf handleDJTimerCallback];
     }];
     self.gameNumLabel.alpha = 0;
+}
+
+/// 增加舞单按钮到底部操作列表
+- (void)addMenuBtnToOperatorView {
+    [self.operatorView addSubview:self.menuBtn];
+    [self.menuBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.mas_equalTo(self.operatorView.giftBtn.mas_leading).offset(-9);
+        make.centerY.mas_equalTo(self.operatorView);
+        make.size.mas_equalTo(CGSizeMake(36, 32));
+    }];
+    [self.operatorView.inputLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(self.operatorView.voiceUpBtn.mas_trailing).offset(12);
+        make.trailing.mas_equalTo(self.menuBtn.mas_leading).offset(-12);
+        make.centerY.mas_equalTo(self.operatorView);
+        make.height.mas_equalTo(32);
+//        make.width.mas_greaterThanOrEqualTo(0);
+    }];
 }
 
 - (void)onTipLabelTap:(id)tap {
@@ -209,8 +243,14 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 }
 
-/// 点击跳舞菜单
+/// 约主播跳舞视图
 - (void)onMenuViewTap:(UITapGestureRecognizer *)tap {
+    DiscoAppointmentPopView *v = [[DiscoAppointmentPopView alloc] init];
+    [DTSheetView show:v onCloseCallback:nil];
+}
+
+/// 互动视图点击
+- (void)onInteractiveViewTap:(UITapGestureRecognizer *)tap {
     DiscoPopMenuListView *v = [[DiscoPopMenuListView alloc] init];
     [DTSheetView show:v onCloseCallback:nil];
 }
@@ -235,6 +275,11 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         [self reqChangeToGameGameId:[self getCurrentGameID] operatorUser:AppService.shared.login.loginUserInfo.userID];
         [self updateSettingState:YES];
     }
+}
+
+- (void)onBtnMenuClick:(id)sender {
+    DiscoPopMenuListView *v = [[DiscoPopMenuListView alloc] init];
+    [DTSheetView show:v onCloseCallback:nil];
 }
 
 - (int64_t)getCurrentGameID {
@@ -273,12 +318,13 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// @param model model description
 - (void)handleGiftEffect:(RoomCmdSendGiftModel *)model {
     [super handleGiftEffect:model];
+    // 处理送出礼物，执行相应游戏指令
     [kDiscoRoomService handleUserSentGift:model];
 }
 
 - (void)roomGameDidChanged:(NSInteger)gameID {
     [super roomGameDidChanged:gameID];
-    self.menuView.hidden = gameID == 0;
+    self.datingView.hidden = gameID == 0;
     self.tipView.hidden = gameID == 0;
 }
 
@@ -345,7 +391,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     appCommonGameAddAiPlayersModel.aiPlayers = aiPlayers;
     appCommonGameAddAiPlayersModel.isReady = YES;
     [self.sudFSTAPPDecorator notifyAppCommonGameAddAIPlayers:appCommonGameAddAiPlayersModel];
-    
+
     // 机器人加入主播位
     [HSThreadUtils dispatchMainAfter:1 callback:^{
         for (RotbotInfoModel *m in robotAnchorList) {
@@ -554,6 +600,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     } else if ([msg isKindOfClass:RoomCmdUpMicModel.class] && msg.cmd == CMD_UP_MIC_NOTIFY) {
         if ([self checkIfCanJoin]) {
             [kDiscoRoomService joinAnchorField1:nil field2:msg.sendUser.isRobot ? msg.sendUser.userID : nil];
+            NSString *userId = msg.sendUser.isRobot ? msg.sendUser.userID : AppService.shared.loginUserID;
+            // 上报后台加入主播
+            [DiscoRoomService reqUpDownAnchor:YES roomId:self.roomID.longLongValue userId:userId success:nil failure:nil];
         }
     } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
@@ -586,6 +635,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 - (void)handleGiftMsg:(RoomCmdSendGiftModel *)m {
 
+    // 普通礼物消息游戏指令
     NSString *content = [NSString stringWithFormat:NSString.dt_room_gift_send_fmt, @(1), m.giftName];
     switch (m.giftID) {
         case 1: {
@@ -634,6 +684,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         if ([self isInMic]) {
             if ([self checkIfCanJoin]) {
                 [kDiscoRoomService joinAnchorField1:nil field2:nil];
+                NSString *userId = AppService.shared.loginUserID;
+                // 上报后台加入主播
+                [DiscoRoomService reqUpDownAnchor:YES roomId:self.roomID.longLongValue userId:userId success:nil failure:nil];
             }
         }
     } else if ([discoKeyWordsMove isEqualToString:content]) {
@@ -642,6 +695,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     } else if ([discoKeyWordsLeaveWork isEqualToString:content]) {
         // 离开主播位
         [kDiscoRoomService leaveAnchorPositionWithPlayerId:AppService.shared.loginUserID];
+        NSString *userId = AppService.shared.loginUserID;
+        // 上报后台离开主播
+        [DiscoRoomService reqUpDownAnchor:NO roomId:self.roomID.longLongValue userId:userId success:nil failure:nil];
     } else if ([discoKeyWordsUp isEqualToString:content]) {
         // 上天
         [kDiscoRoomService flySky:3];
@@ -736,11 +792,18 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     return _rankView;
 }
 
-- (DiscoMenuView *)menuView {
-    if (!_menuView) {
-        _menuView = [[DiscoMenuView alloc] init];
+- (DiscoGameInteractiveView *)interactiveView {
+    if (!_interactiveView) {
+        _interactiveView = [[DiscoGameInteractiveView alloc] init];
     }
-    return _menuView;
+    return _interactiveView;
+}
+
+- (DiscoAnchorDatingView *)datingView {
+    if (!_datingView) {
+        _datingView = [[DiscoAnchorDatingView alloc] init];
+    }
+    return _datingView;
 }
 
 - (DiscoRankTipView *)rankTipView {
@@ -846,4 +909,12 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     return _settingLabel;
 }
 
+- (UIButton *)menuBtn {
+    if (!_menuBtn) {
+        _menuBtn = [[UIButton alloc] init];
+        [_menuBtn setImage:[UIImage imageNamed:@"disco_menu_btn_icon"] forState:UIControlStateNormal];
+        [_menuBtn addTarget:self action:@selector(onBtnMenuClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _menuBtn;
+}
 @end

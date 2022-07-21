@@ -20,7 +20,7 @@
 #import "MoreGuessViewController.h"
 #import "DiscoRankViewController.h"
 #import "HomeHeaderFullReusableView.h"
-#import "DiscoPopMenuListView.h"
+#import "DiscoAppointmentPopView.h"
 
 @interface HomeViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
@@ -304,9 +304,14 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
-//    DiscoPopMenuListView *v = [[DiscoPopMenuListView alloc]init];
-//    [DTSheetView show:v onCloseCallback:nil];
-//    return;
+
+
+    DiscoAppointmentPopView *v = [[DiscoAppointmentPopView alloc] init];
+    [DTSheetView show:v onCloseCallback:nil];
+    return;
+
+
+
     if (self.headerSceneList[indexPath.section].sceneId == SceneTypeTicket) {
         TicketChooseViewController *vc = TicketChooseViewController.new;
         vc.gameId = model.gameId;

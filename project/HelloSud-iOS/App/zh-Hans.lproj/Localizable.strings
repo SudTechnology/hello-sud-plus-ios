@@ -412,3 +412,11 @@
 "dt_room_gift_send_fmt" = "我送了%@个【%@】";
 "dt_room_guess_time_remain_min" = "剩余%@mins";
 "dt_room_guess_time_remain_second" = "剩余%@s";
+
+// 1.4.2
+"dt_room_disco_appointment_dance" = "约主播跳舞";
+"dt_room_disco_interactive" = "互动";
+"dt_room_disco_select_anchor" = "选择主播跳舞";
+"dt_room_disco_dance_duration" = "跳舞时长";
+"dt_room_disco_appointment_coin_fmt" = "约TA砂舞(%@金币)";
+"dt_room_disco_select_duration_tip" = "请选择时长";

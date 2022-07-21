@@ -9,8 +9,8 @@
 #import "BaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-/// 蹦迪节目单入口视图
-@interface DiscoMenuView : BaseView
+/// 蹦迪约主播跳舞入口视图
+@interface DiscoAnchorDatingView : BaseView
 
 @end
 

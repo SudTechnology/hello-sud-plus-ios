@@ -9,9 +9,7 @@
 #import "RoomGiftPannelView.h"
 
 @interface RoomOperatorView ()
-@property (nonatomic, strong) UIButton *voiceUpBtn;
-@property (nonatomic, strong) UIButton *giftBtn;
-@property (nonatomic, strong) UILabel *inputLabel;
+
 
 @end
 

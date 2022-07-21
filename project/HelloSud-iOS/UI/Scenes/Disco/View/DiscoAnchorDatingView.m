@@ -6,14 +6,14 @@
 //  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "DiscoMenuView.h"
+#import "DiscoAnchorDatingView.h"
 
-@interface DiscoMenuView()
+@interface DiscoAnchorDatingView()
 @property(nonatomic, strong) UIImageView *bgImageView;
 @property(nonatomic, strong) MarqueeLabel *titleLabel;
 @end
 
-@implementation DiscoMenuView
+@implementation DiscoAnchorDatingView
 
 - (void)dtAddViews {
     [super dtAddViews];
@@ -25,14 +25,14 @@
     [super dtLayoutViews];
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.bottom.equalTo(@0);
-        make.width.equalTo(@122);
-        make.height.equalTo(@45);
+        make.width.equalTo(@75);
+        make.height.equalTo(@60);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
-        make.leading.equalTo(@10);
-        make.trailing.equalTo(@-10);
+        make.leading.equalTo(@6);
+        make.trailing.equalTo(@-6);
         make.height.greaterThanOrEqualTo(@0);
+        make.bottom.equalTo(@-3);
     }];
 }
 
@@ -52,7 +52,7 @@
 - (UIImageView *)bgImageView {
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] init];
-        _bgImageView.image = [UIImage imageNamed:@"disco_menu_bg"];
+        _bgImageView.image = [UIImage imageNamed:@"disco_anchor_dating_bg"];
     }
     return _bgImageView;
 }
@@ -60,10 +60,10 @@
 - (MarqueeLabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[MarqueeLabel alloc] init];
-        _titleLabel.font = UIFONT_BOLD(14);
-        _titleLabel.textColor = HEX_COLOR_A(@"#ffffff", 1);
+        _titleLabel.font = UIFONT_MEDIUM(12);
+        _titleLabel.textColor = HEX_COLOR_A(@"#000402", 1);
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.text = NSString.dt_room_disco_menu_name;
+        _titleLabel.text = NSString.dt_room_disco_appointment_dance;
     }
     return _titleLabel;
 }

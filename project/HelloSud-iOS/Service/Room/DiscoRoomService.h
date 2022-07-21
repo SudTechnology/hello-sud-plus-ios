@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 FOUNDATION_EXPORT NSNotificationName const showWaitingForDancingNTF;
 /// 跳舞列表更新
 FOUNDATION_EXPORT NSNotificationName const dancingListChangedNTF;
+
 /// 蹦迪服务
 @interface DiscoRoomService : AudioRoomService
 /// 跳舞单
@@ -119,10 +120,31 @@ FOUNDATION_EXPORT NSNotificationName const dancingListChangedNTF;
 - (void)upToDJ:(int)cooldown;
 
 #pragma mark restful api
+
 /// 拉取机器人
 /// @param finished finished
 /// @param failure failure
 + (void)reqRobotListWithFinished:(void (^)(NSArray<RotbotInfoModel *> *robotList))finished failure:(void (^)(NSError *error))failure;
+
+/// 上下主播位
+/// @param up 上下
+/// @param roomId roomId
+/// @param userId userId
+/// @param finished finished
+/// @param failure failure
++ (void)reqUpDownAnchor:(BOOL)up roomId:(int64_t)roomId userId:(NSString *)userId success:(void (^)(void))success failure:(void (^)(NSError *error))failure;
+
+/// 扣费
+/// @param coin 扣金币
+/// @param finished finished
+/// @param failure failure
++ (void)reqPayCoin:(NSInteger)coin success:(void (^)(void))success failure:(void (^)(NSError *error))failure;
+
+/// 拉取主播列表
+/// @param roomId roomId
+/// @param finished finished
+/// @param failure failure
++ (void)reqAnchorList:(int64_t)roomId success:(void (^)(NSArray<AnchorUserInfoModel *> *robotList))success failure:(void (^)(NSError *error))failure;
 @end
 
 NS_ASSUME_NONNULL_END

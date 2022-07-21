@@ -420,4 +420,13 @@
 + (NSString *)dt_room_guess_time_remain_min { return @"dt_room_guess_time_remain_min".localized; }
 + (NSString *)dt_room_guess_time_remain_second { return @"dt_room_guess_time_remain_second".localized; }
 
+
+// 1.4.2
++ (NSString *)dt_room_disco_appointment_dance { return @"dt_room_disco_appointment_dance".localized; }
++ (NSString *)dt_room_disco_interactive { return @"dt_room_disco_interactive".localized; }
++ (NSString *)dt_room_disco_select_anchor { return @"dt_room_disco_select_anchor".localized; }
++ (NSString *)dt_room_disco_dance_duration { return @"dt_room_disco_dance_duration".localized; }
++ (NSString *)dt_room_disco_appointment_coin_fmt { return @"dt_room_disco_appointment_coin_fmt".localized; }
++ (NSString *)dt_room_disco_select_duration_tip { return @"dt_room_disco_select_duration_tip".localized; }
+
 @end

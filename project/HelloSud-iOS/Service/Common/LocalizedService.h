@@ -415,5 +415,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_room_guess_time_remain_min;
 + (NSString *)dt_room_guess_time_remain_second;
 
+
+// 1.4.2
++ (NSString *)dt_room_disco_appointment_dance;
++ (NSString *)dt_room_disco_interactive;
++ (NSString *)dt_room_disco_select_anchor;
++ (NSString *)dt_room_disco_dance_duration;
++ (NSString *)dt_room_disco_appointment_coin_fmt;
++ (NSString *)dt_room_disco_select_duration_tip;
+
 @end
 NS_ASSUME_NONNULL_END

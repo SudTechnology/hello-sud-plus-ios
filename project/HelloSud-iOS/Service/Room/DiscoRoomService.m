@@ -94,7 +94,7 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
     switch (giftModel.giftID) {
         case 5: {
             // 礼物价格50
-            addDuration = 60;
+            addDuration = 60 * giftModel.giftCount;
             if (m && !m.isDanceFinished) {
                 m.duration += addDuration;
             } else {
@@ -226,14 +226,14 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 - (BOOL)checkIsExist:(DiscoMenuModel *)model isFinished:(BOOL)isFinished {
     if (isFinished) {
         NSArray *arr = self.finishedDanceMenuList;
-        for(DiscoMenuModel *m in arr) {
+        for (DiscoMenuModel *m in arr) {
             if ([model isSame:m]) {
                 return YES;
             }
         }
     } else {
         NSArray *arr = self.danceMenuList;
-        for(DiscoMenuModel *m in arr) {
+        for (DiscoMenuModel *m in arr) {
             if ([model isSame:m]) {
                 return YES;
             }
@@ -520,6 +520,50 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
         if (finished) {
             RespDiscoRobotListModel *m = (RespDiscoRobotListModel *) resp;
             finished(m.robotList);
+        }
+    }                         failure:failure];
+}
+
+/// 上下主播位
+/// @param up 上下
+/// @param roomId roomId
+/// @param userId userId
+/// @param finished finished
+/// @param failure failure
++ (void)reqUpDownAnchor:(BOOL)up roomId:(int64_t)roomId userId:(NSString *)userId success:(void (^)(void))success failure:(void (^)(NSError *error))failure {
+    NSDictionary *dicParam = @{@"roomId": @(roomId), @"handleType": up ? @1 : @2, @"userId": userId};
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"disco/switch-anchors/v1") param:dicParam respClass:RespDiscoRobotListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (success) {
+            success();
+        }
+    }                         failure:failure];
+}
+
+/// 扣费
+/// @param coin 扣金币
+/// @param finished finished
+/// @param failure failure
++ (void)reqPayCoin:(NSInteger)coin success:(void (^)(void))success failure:(void (^)(NSError *error))failure {
+    NSDictionary *dicParam = @{@"price": @(coin)};
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"disco/operation/v1") param:dicParam respClass:RespDiscoRobotListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (success) {
+            success();
+        }
+    }                         failure:failure];
+}
+
+
+/// 拉取主播列表
+/// @param roomId roomId
+/// @param finished finished
+/// @param failure failure
++ (void)reqAnchorList:(int64_t)roomId success:(void (^)(NSArray<AnchorUserInfoModel *> *robotList))success failure:(void (^)(NSError *error))failure {
+
+    NSDictionary *dicParam = @{@"roomId": @(roomId)};
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"disco/anchor-list/v1") param:dicParam respClass:RespDiscoAnchorListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (success) {
+            RespDiscoAnchorListModel *m = (RespDiscoAnchorListModel *) resp;
+            success(m.userInfoList);
         }
     }                         failure:failure];
 }

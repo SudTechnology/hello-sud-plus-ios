@@ -179,7 +179,7 @@
 		6C46086E286DAC76005C99EF /* DiscoRankPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46086D286DAC76005C99EF /* DiscoRankPopView.m */; };
 		6C460871286DB5CF005C99EF /* DiscoRankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */; };
 		6C460875286DB610005C99EF /* DiscoRankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460874286DB610005C99EF /* DiscoRankModel.m */; };
-		6C460878286E9CCD005C99EF /* DiscoMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460877286E9CCD005C99EF /* DiscoMenuView.m */; };
+		6C460878286E9CCD005C99EF /* DiscoAnchorDatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460877286E9CCD005C99EF /* DiscoAnchorDatingView.m */; };
 		6C46087B286EA886005C99EF /* DiscoPopMenuListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */; };
 		6C46087E286ECC2D005C99EF /* DiscoMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */; };
 		6C460881286ECC8A005C99EF /* DiscoMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460880286ECC8A005C99EF /* DiscoMenuModel.m */; };
@@ -281,8 +281,11 @@
 		BC2104A997878EE07744E080 /* PKRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */; };
 		BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210337708736FFF222750A /* BaseSceneService.m */; };
 		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
+		BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */; };
+		BC21076C5084AD192F038DA8 /* DiscoSelectAnchorColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */; };
 		BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */; };
 		BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */; };
+		BC210819F69EB53104902350 /* DiscoAppointmentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */; };
 		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
 		BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */; };
 		BC21098A0CA7595992F3EC61 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */; };
@@ -698,8 +701,8 @@
 		6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankTableViewCell.m; sourceTree = "<group>"; };
 		6C460873286DB610005C99EF /* DiscoRankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankModel.h; sourceTree = "<group>"; };
 		6C460874286DB610005C99EF /* DiscoRankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankModel.m; sourceTree = "<group>"; };
-		6C460876286E9CCD005C99EF /* DiscoMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuView.h; sourceTree = "<group>"; };
-		6C460877286E9CCD005C99EF /* DiscoMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuView.m; sourceTree = "<group>"; };
+		6C460876286E9CCD005C99EF /* DiscoAnchorDatingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoAnchorDatingView.h; sourceTree = "<group>"; };
+		6C460877286E9CCD005C99EF /* DiscoAnchorDatingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoAnchorDatingView.m; sourceTree = "<group>"; };
 		6C460879286EA886005C99EF /* DiscoPopMenuListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoPopMenuListView.h; sourceTree = "<group>"; };
 		6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoPopMenuListView.m; sourceTree = "<group>"; };
 		6C46087C286ECC2D005C99EF /* DiscoMenuTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuTableViewCell.h; sourceTree = "<group>"; };
@@ -829,11 +832,13 @@
 		7A720CB3011AA758F160BFED /* Pods-QuickStart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickStart.debug.xcconfig"; path = "Target Support Files/Pods-QuickStart/Pods-QuickStart.debug.xcconfig"; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC2100A5544CF78174597F1D /* PKGameEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGameEmptyView.h; sourceTree = "<group>"; };
+		BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoGameInteractiveView.m; sourceTree = "<group>"; };
 		BC21011EFE2917ED676C1C64 /* HomeGuessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeGuessCell.h; sourceTree = "<group>"; };
 		BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentView.m; sourceTree = "<group>"; };
 		BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessRoomViewController.h; sourceTree = "<group>"; };
 		BC210203F8E7C5CAEFF19056 /* PKRoomService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRoomService.h; sourceTree = "<group>"; };
 		BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessCategoryView.m; sourceTree = "<group>"; };
+		BC21030C423A46DF8E96F932 /* DiscoAppointmentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoAppointmentPopView.h; sourceTree = "<group>"; };
 		BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderColCell.m; sourceTree = "<group>"; };
 		BC21032C5553ABB17B21F173 /* QSGameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameListViewController.m; sourceTree = "<group>"; };
 		BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGameEmptyView.m; sourceTree = "<group>"; };
@@ -844,6 +849,7 @@
 		BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessRoomViewController.m; sourceTree = "<group>"; };
 		BC2105087E91B70E68E3D640 /* PKStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStateView.h; sourceTree = "<group>"; };
 		BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdPKModel.m; sourceTree = "<group>"; };
+		BC21052EC461448E9238A7C2 /* DiscoGameInteractiveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractiveView.h; sourceTree = "<group>"; };
 		BC2105467EA8857361624481 /* RoomMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomMoreView.m; sourceTree = "<group>"; };
 		BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessViewController.m; sourceTree = "<group>"; };
 		BC21055EE76F1B350D139F19 /* RoomCmdPKModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdPKModel.h; sourceTree = "<group>"; };
@@ -860,6 +866,8 @@
 		BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessViewController.h; sourceTree = "<group>"; };
 		BC2107BC94088B9F062BBA4B /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
 		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
+		BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoAppointmentPopView.m; sourceTree = "<group>"; };
+		BC210992133641B87C11D04E /* DiscoSelectAnchorColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoSelectAnchorColCell.h; sourceTree = "<group>"; };
 		BC2109B31F63F31616E3D68E /* PKRoomListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomListCell.m; sourceTree = "<group>"; };
 		BC210A8B9F817A0399951BD7 /* MoreGuessTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessTableViewCell.h; sourceTree = "<group>"; };
 		BC210ABE07C435063FEB002B /* SuspendRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuspendRoomView.h; sourceTree = "<group>"; };
@@ -872,6 +880,7 @@
 		BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameItemModel.m; sourceTree = "<group>"; };
 		BC210D0CC9CCF32570421BA2 /* MoreGuessCoinItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinItemView.h; sourceTree = "<group>"; };
 		BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinPopView.m; sourceTree = "<group>"; };
+		BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoSelectAnchorColCell.m; sourceTree = "<group>"; };
 		BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderColCell.h; sourceTree = "<group>"; };
 		BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomService.m; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
@@ -1791,14 +1800,20 @@
 				6C46086D286DAC76005C99EF /* DiscoRankPopView.m */,
 				6C46086F286DB5CF005C99EF /* DiscoRankTableViewCell.h */,
 				6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */,
-				6C460876286E9CCD005C99EF /* DiscoMenuView.h */,
-				6C460877286E9CCD005C99EF /* DiscoMenuView.m */,
+				6C460876286E9CCD005C99EF /* DiscoAnchorDatingView.h */,
+				6C460877286E9CCD005C99EF /* DiscoAnchorDatingView.m */,
 				6C460879286EA886005C99EF /* DiscoPopMenuListView.h */,
 				6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */,
 				6C46087C286ECC2D005C99EF /* DiscoMenuTableViewCell.h */,
 				6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */,
 				6C460882286EFA21005C99EF /* DiscoMenuRuleView.h */,
 				6C460883286EFA21005C99EF /* DiscoMenuRuleView.m */,
+				BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */,
+				BC21052EC461448E9238A7C2 /* DiscoGameInteractiveView.h */,
+				BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */,
+				BC21030C423A46DF8E96F932 /* DiscoAppointmentPopView.h */,
+				BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */,
+				BC210992133641B87C11D04E /* DiscoSelectAnchorColCell.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2668,7 +2683,7 @@
 				E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */,
 				6C076EBC27A01BC000650209 /* AudioRoomService.m in Sources */,
 				4455AD9627EAC658001516EE /* MainTabBarController.m in Sources */,
-				6C460878286E9CCD005C99EF /* DiscoMenuView.m in Sources */,
+				6C460878286E9CCD005C99EF /* DiscoAnchorDatingView.m in Sources */,
 				444F59EB27F7035800FA1FB2 /* TicketChooseLevelView.m in Sources */,
 				4455ADA827EAC658001516EE /* RoomCmdChatTextModel.m in Sources */,
 				6C460808285840B4005C99EF /* GuessSelectColCell.m in Sources */,
@@ -2756,6 +2771,9 @@
 				BC210F738CED39591CB7541D /* MoreGuessCoinPopView.m in Sources */,
 				BC210E9E33806A6BFD2AE89A /* MoreGuessCoinItemView.m in Sources */,
 				6C460881286ECC8A005C99EF /* DiscoMenuModel.m in Sources */,
+				BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */,
+				BC210819F69EB53104902350 /* DiscoAppointmentPopView.m in Sources */,
+				BC21076C5084AD192F038DA8 /* DiscoSelectAnchorColCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -43,4 +43,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)NSArray<RotbotInfoModel *> * robotList;
 @end
 
+/// 主播用户信息
+@interface AnchorUserInfoModel : BaseModel
+@property (nonatomic, assign)int64_t userId;
+@property (nonatomic, strong)NSString * avatar;
+@property (nonatomic, strong)NSString * nickname;
+@property (nonatomic, assign)BOOL isSelected;
+@end
+
+/// 拉主播列表数据模型
+@interface RespDiscoAnchorListModel : BaseRespModel
+@property (nonatomic, strong)NSArray<AnchorUserInfoModel *> * userInfoList;
+@end
+
 NS_ASSUME_NONNULL_END

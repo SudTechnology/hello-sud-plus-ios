@@ -35,3 +35,14 @@
     return @{@"robotList":RotbotInfoModel.class};
 }
 @end
+
+
+@implementation AnchorUserInfoModel
+@end
+
+/// 拉主播列表数据模型
+@implementation RespDiscoAnchorListModel
++(NSDictionary *)mj_objectClassInArray {
+    return @{@"userInfoList":AnchorUserInfoModel.class};
+}
+@end
