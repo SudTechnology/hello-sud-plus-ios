@@ -291,7 +291,7 @@
 "dt_room_pk_waitting" = "Pareo";
 "dt_room_pk_remove_sure" = "Sí";
 "dt_room_pk_invite" = "Invitar";
-"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_ticket_order_msg_fmt" = "%@ hizo un pedido a %@, quiere citarse con【%@】";
 "dt_room_mic_game_ing" = "Jugando";
 
 /// 1.4.0

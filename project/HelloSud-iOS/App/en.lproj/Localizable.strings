@@ -291,7 +291,7 @@
 "dt_room_pk_waitting" = "Matching";
 "dt_room_pk_remove_sure" = "Confirm";
 "dt_room_pk_invite" = "Invite";
-"dt_ticket_order_msg_fmt" = "%@ 给%@下了一单，约玩【%@】";
+"dt_ticket_order_msg_fmt" = "%@ has made an order for %@ to join【%@】";
 "dt_room_mic_game_ing" = "In game";
 
 /// 1.4.0
