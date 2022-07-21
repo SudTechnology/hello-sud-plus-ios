@@ -418,3 +418,6 @@
 "dt_room_disco_dance_duration" = "跳舞时长";
 "dt_room_disco_appointment_coin_fmt" = "约TA砂舞(%@金币)";
 "dt_room_disco_select_duration_tip" = "请选择时长";
+"dt_room_disco_category_one" = "功能付费点";
+"dt_room_disco_category_twn" = "组合付费点";
+

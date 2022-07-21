@@ -13,47 +13,7 @@ NSNotificationName const showWaitingForDancingNTF = @"showWaitingForDancingNTF";
 /// 跳舞列表更新
 NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
 
-/// 元宇宙砂砂舞Action类型
-typedef NS_ENUM(NSInteger, DiscoActionType) {
-    /// 切歌
-    DiscoActionTypeSwitchMusic = 9,
-    /// 角色是否绑定性别
-    DiscoActionTypeBindGender = 10,
-    /// 更换角色
-    DiscoActionTypeChangeRole = 11,
-    /// 加入主播位
-    DiscoActionTypeJoinAnchorPosition = 12,
-    /// 离开主播位
-    DiscoActionTypeLeaveAnchorPosition = 13,
-    /// 是否隐藏中央舞台
-    DiscoActionTypeHiddenCenterStage = 14,
-    /// 加入舞池
-    DiscoActionTypeJoinDancePool = 15,
-    /// 离开舞池
-    DiscoActionTypeLeaveDancePool = 16,
-    /// 清场
-    DiscoActionTypeClearDancePool = 17,
-    /// 角色移动
-    DiscoActionTypeMoveRole = 18,
-    /// 角色变大
-    DiscoActionTypeBiggerRole = 19,
-    /// 角色飞天
-    DiscoActionTypeFlyRole = 20,
-    /// 角色特效
-    DiscoActionTypeEffectRole = 22,
-    /// 角色特写
-    DiscoActionTypeSpecialRole = 23,
-    /// 文字气泡
-    DiscoActionTypeMsgPop = 24,
-    /// 角色称号
-    DiscoActionTypeNamedRole = 25,
-    /// 上DJ台
-    DiscoActionTypeUpDJ = 26,
-    /// 跳舞模式
-    DiscoActionTypeDancingMode = 27,
-    /// 和主播跳舞
-    DiscoActionTypeDancingWithAnchor = 28,
-};
+
 
 @interface DiscoRoomService ()
 /// 当前主播跳舞池

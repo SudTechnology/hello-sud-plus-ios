@@ -423,6 +423,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_room_disco_dance_duration;
 + (NSString *)dt_room_disco_appointment_coin_fmt;
 + (NSString *)dt_room_disco_select_duration_tip;
++ (NSString *)dt_room_disco_category_one;
++ (NSString *)dt_room_disco_category_twn;
+
 
 @end
 NS_ASSUME_NONNULL_END

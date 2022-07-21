@@ -428,5 +428,8 @@
 + (NSString *)dt_room_disco_dance_duration { return @"dt_room_disco_dance_duration".localized; }
 + (NSString *)dt_room_disco_appointment_coin_fmt { return @"dt_room_disco_appointment_coin_fmt".localized; }
 + (NSString *)dt_room_disco_select_duration_tip { return @"dt_room_disco_select_duration_tip".localized; }
++ (NSString *)dt_room_disco_category_one { return @"dt_room_disco_category_one".localized; }
++ (NSString *)dt_room_disco_category_twn { return @"dt_room_disco_category_twn".localized; }
+
 
 @end
