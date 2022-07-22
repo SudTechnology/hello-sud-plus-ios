@@ -53,11 +53,14 @@
         make.leading.trailing.equalTo(@0);
         make.height.equalTo(@375);
     }];
-    CGFloat w = 0;
+    CGFloat w = 25;
     for (int i = 0; i < self.titleCategoryView.titles.count; ++i) {
         NSString *title = self.titleCategoryView.titles[i];
-        CGRect rect = [title boundingRectWithSize:CGSizeMake(kScreenWidth - 100, 100) options:NSStringDrawingUsesFontLeading attributes:@{NSForegroundColorAttributeName: UIFONT_MEDIUM(12)} context:nil];
+        CGRect rect = [title boundingRectWithSize:CGSizeMake(kScreenWidth - 100, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: UIFONT_MEDIUM(18)} context:nil];
         w += rect.size.width;
+    }
+    if (w > kScreenWidth - 120) {
+        w = kScreenWidth - 120;
     }
     [self.titleCategoryView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(kAppSafeTop));

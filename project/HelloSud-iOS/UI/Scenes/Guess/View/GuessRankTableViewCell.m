@@ -14,6 +14,7 @@
 @property(nonatomic, strong) UIImageView *headImageView;
 @property(nonatomic, strong) YYLabel *nameLabel;
 @property(nonatomic, strong) YYLabel *winLabel;
+@property(nonatomic, strong) MarqueeLabel *tipLabel;
 @end
 
 @implementation GuessRankTableViewCell
@@ -33,6 +34,7 @@
     [self.contentView addSubview:self.headImageView];
     [self.contentView addSubview:self.nameLabel];
     [self.contentView addSubview:self.winLabel];
+    [self.contentView addSubview:self.tipLabel];
 }
 
 - (void)dtLayoutViews {
@@ -56,7 +58,13 @@
     [self.winLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@80);
         make.height.greaterThanOrEqualTo(@0);
-        make.centerY.equalTo(self.contentView);
+        make.top.equalTo(self.nameLabel);
+        make.trailing.equalTo(@-33);
+    }];
+    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@80);
+        make.height.greaterThanOrEqualTo(@0);
+        make.bottom.equalTo(self.nameLabel);
         make.trailing.equalTo(@-33);
     }];
 }
@@ -85,12 +93,8 @@
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", @(count)]
                                                                              attributes:dic];
     attr.yy_alignment = NSTextAlignmentRight;
-    NSDictionary *dic2 = @{NSFontAttributeName: UIFONT_REGULAR(12), NSForegroundColorAttributeName: HEX_COLOR_A(@"#000000", 0.6)};
-    NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@", m.tip]
-                                                                              attributes:dic2];
-    attr2.yy_alignment = NSTextAlignmentRight;
-    [attr appendAttributedString:attr2];
     self.winLabel.attributedText = attr;
+    self.tipLabel.text = m.tip;
 }
 
 - (void)updateName:(NSString *)name {
@@ -109,6 +113,16 @@
     attr2.yy_alignment = NSTextAlignmentLeft;
     [attr appendAttributedString:attr2];
     self.nameLabel.attributedText = attr;
+}
+
+- (MarqueeLabel *)tipLabel {
+    if (!_tipLabel) {
+        _tipLabel = [[MarqueeLabel alloc] init];
+        _tipLabel.textAlignment = NSTextAlignmentRight;
+        _tipLabel.font = UIFONT_MEDIUM(12);
+        _tipLabel.textColor = HEX_COLOR_A(@"#000000", 0.6);
+    }
+    return _tipLabel;
 }
 
 - (YYLabel *)winLabel {

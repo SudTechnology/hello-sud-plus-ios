@@ -10,7 +10,8 @@
 
 @interface RankNumItemView ()
 
-@property(nonatomic, strong) UILabel *tagLabel;
+@property(nonatomic, strong) MarqueeLabel *titleLabel;
+@property(nonatomic, strong) UILabel *numLabel;
 @end
 
 @implementation RankNumItemView
@@ -18,11 +19,13 @@
 
 - (void)dtAddViews {
     [super dtAddViews];
-    [self addSubview:self.tagLabel];
+    [self addSubview:self.titleLabel];
+    [self addSubview:self.numLabel];
 }
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+
 
 
 }
@@ -35,56 +38,78 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    NSDictionary *dic = @{NSFontAttributeName: UIFONT_REGULAR(10), NSForegroundColorAttributeName: HEX_COLOR_A(@"#000000", 0.6)};
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", self.tip]
-                                                                             attributes:dic];
-    NSDictionary *dic2 = @{NSFontAttributeName: UIFONT_BOLD(24), NSForegroundColorAttributeName: HEX_COLOR(@"#5C3B20")};
-    NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", @(self.count)]
-                                                                              attributes:dic2];
-    [attr appendAttributedString:attr2];
-    self.tagLabel.attributedText = attr;
+    self.titleLabel.text = self.tip;
+    self.numLabel.text = [NSString stringWithFormat:@"%@", @(self.count)];
 
     switch (self.rank) {
         case 1:
-            self.tagLabel.textAlignment = NSTextAlignmentCenter;
+            self.titleLabel.textAlignment = NSTextAlignmentCenter;
             break;
         case 2:
-            self.tagLabel.textAlignment = NSTextAlignmentLeft;
+            self.titleLabel.textAlignment = NSTextAlignmentLeft;
             break;
         case 3:
-            self.tagLabel.textAlignment = NSTextAlignmentRight;
+            self.titleLabel.textAlignment = NSTextAlignmentRight;
             break;
     }
 
-    [self.tagLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.width.greaterThanOrEqualTo(@0);
-        make.height.greaterThanOrEqualTo(@0);
-        make.centerY.equalTo(self);
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@12);
+        make.bottom.equalTo(self.numLabel.mas_top).offset(0);
         switch (self.rank) {
             case 1:
                 make.leading.equalTo(@0);
                 make.trailing.equalTo(@0);
                 break;
             case 2:
-                make.leading.equalTo(@26);
-                make.trailing.equalTo(@-26);
+                make.leading.equalTo(@16);
+                make.trailing.equalTo(@-36);
                 break;
             case 3:
-                make.leading.equalTo(@26);
-                make.trailing.equalTo(@-26);
+                make.leading.equalTo(@36);
+                make.trailing.equalTo(@-16);
                 break;
         }
     }];
+    [self.numLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.height.greaterThanOrEqualTo(@0);
+        make.top.equalTo(self.mas_centerY).offset(-10);
+        switch (self.rank) {
+            case 1:
+                make.leading.equalTo(@0);
+                make.trailing.equalTo(@0);
+                break;
+            case 2:
+                make.leading.equalTo(@16);
+                make.trailing.equalTo(@-36);
+                break;
+            case 3:
+                make.leading.equalTo(@36);
+                make.trailing.equalTo(@-16);
+                break;
+        }
+    }];
+
+
 }
 
-- (UILabel *)tagLabel {
-    if (!_tagLabel) {
-        _tagLabel = [[UILabel alloc] init];
-        _tagLabel.font = UIFONT_REGULAR(10);
-        _tagLabel.textColor = UIColor.whiteColor;
-        _tagLabel.numberOfLines = 0;
-        _tagLabel.textAlignment = NSTextAlignmentCenter;
+- (MarqueeLabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[MarqueeLabel alloc] init];
+        _titleLabel.font = UIFONT_REGULAR(10);
+        _titleLabel.textColor = HEX_COLOR_A(@"#000000", 0.6);
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
-    return _tagLabel;
+    return _titleLabel;
+}
+
+- (UILabel *)numLabel {
+    if (!_numLabel) {
+        _numLabel = [[UILabel alloc] init];
+        _numLabel.font = UIFONT_MEDIUM(24);
+        _numLabel.textColor = HEX_COLOR(@"5C3B20");
+        _numLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _numLabel;
 }
 @end
