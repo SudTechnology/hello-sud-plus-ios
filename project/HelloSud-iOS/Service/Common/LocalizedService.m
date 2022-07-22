@@ -4,9 +4,17 @@
 - (NSString *)localized {
     NSBundle *bundle = NSBundle.currentLanguageBundle;
     if (bundle) {
-        return [bundle localizedStringForKey:self value:self table:nil];
+        NSString *temp = [bundle localizedStringForKey:self value:self table:nil];
+        if ([temp isEqualToString:self]) {
+            NSBundle *enBundle = NSBundle.defaultLanguageBundle;
+            if (enBundle) {
+                return [enBundle localizedStringForKey:self value:self table:nil];
+            }
+        } else {
+            return temp;
+        }
     }
-    return NSLocalizedString(self, comment: self); 
+    return NSLocalizedString(self, comment: self);
 }
 /*
   Localizable.strings

@@ -456,6 +456,11 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             [self handleUpDJ:model];
         }
             break;
+        case CMD_ROOM_DISCO_ACTION_PAY: {
+            /// 蹦迪付费
+            RespDiscoPayCoinModel *model = [RespDiscoPayCoinModel fromJSON:command];
+            [self handleRankInfo:model];
+        }
         default:
             [super handleBusyCommand:cmd command:command];
             break;
@@ -576,6 +581,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     } else if (msg.cmd == CMD_SEND_GIFT_NOTIFY) {
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
         [kDiscoRoomService addRankCount:msg.sendUser count:m.getGiftModel.price];
+        [self updateNaviHeadIcon];
+    } else if (msg.cmd == CMD_ROOM_DISCO_ACTION_PAY) {
+        RespDiscoPayCoinModel *m = (RespDiscoPayCoinModel *) msg;
+        [kDiscoRoomService addRankCount:msg.sendUser count:m.price];
         [self updateNaviHeadIcon];
     }
 }

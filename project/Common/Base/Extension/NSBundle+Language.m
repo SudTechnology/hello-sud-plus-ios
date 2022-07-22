@@ -11,6 +11,7 @@
 @implementation NSBundle (Language)
 
 static NSBundle *currentLanguageBundle = nil;
+static NSBundle *defaultLanguageBundle = nil;
 
 /// 当前多语言bundle
 + (NSBundle *)currentLanguageBundle {
@@ -53,6 +54,25 @@ static NSBundle *currentLanguageBundle = nil;
         // Fallback on earlier versions
     }
     return language;
+}
+
++ (NSBundle *)defaultLanguageBundle {
+    if (defaultLanguageBundle) {
+        return defaultLanguageBundle;
+    }
+    NSString *language = @"en";
+    NSString *path = nil;
+    language =  @"en";
+    if (@available(iOS 10.0, *)) {
+        language = [language stringByReplacingOccurrencesOfString: [NSString stringWithFormat:@"-%@", NSLocale.currentLocale.countryCode] withString:@""];
+    } else {
+        // Fallback on earlier versions
+    }
+    path = [[NSBundle mainBundle] pathForResource:language ofType:@"lproj"];
+    if (path.length > 0) {
+        defaultLanguageBundle = [NSBundle bundleWithPath:path];
+    }
+    return defaultLanguageBundle;
 }
 
 @end

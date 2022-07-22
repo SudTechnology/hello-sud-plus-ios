@@ -57,7 +57,7 @@
         [self.coinContentView addSubview:btn];
         [arrBtn addObject:btn];
         // 默认选中
-        if (i == 1) {
+        if (i == 0) {
             btn.selected = YES;
             self.selectedMinute = arr[i].integerValue;
         }

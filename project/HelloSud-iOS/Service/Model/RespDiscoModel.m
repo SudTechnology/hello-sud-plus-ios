@@ -25,6 +25,10 @@
 @implementation RespDiscoBecomeDJModel
 @end
 
+@implementation RespDiscoPayCoinModel
+
+@end
+
 /// 机器人信息model
 @implementation RotbotInfoModel
 @end

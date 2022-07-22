@@ -120,6 +120,10 @@
     WeakSelf
     if (m.coin > 0) {
         [DiscoRoomService reqPayCoin:m.coin success:^{
+            RespDiscoPayCoinModel *cmdModel = [[RespDiscoPayCoinModel alloc]init];
+            cmdModel.price = m.coin;
+            [cmdModel configBaseInfoWithCmd:CMD_ROOM_DISCO_ACTION_PAY];
+            [kDiscoRoomService.currentRoomVC sendMsg:cmdModel isAddToShow:NO finished:nil];
             [weakSelf handleSelected:m];
         } failure:nil];
     } else {

@@ -30,6 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)NSString * userID;
 @end
 
+// CMD_ROOM_DISCO_ACTION_PAY
+@interface RespDiscoPayCoinModel : RoomBaseCMDModel
+@property (nonatomic, assign)NSInteger price;
+@end
+
 /// 机器人信息model
 @interface RotbotInfoModel : BaseModel
 @property (nonatomic, assign)int64_t userId;
