@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 互动指令表
 @property (nonatomic, strong)NSArray <NSNumber *>*actionKeyList;
 @property (nonatomic, strong)NSString *name;
+@property (nonatomic, strong)NSString *name2;
 @property (nonatomic, assign)NSInteger coin;
 @end
 

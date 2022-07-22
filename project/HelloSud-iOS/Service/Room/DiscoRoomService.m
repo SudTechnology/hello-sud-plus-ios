@@ -360,6 +360,9 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     m.actionId = DiscoActionTypeJoinAnchorPosition;
     m.field1 = field1;
     m.field2 = field2;
+    if (field2.length == 0) {
+        self.isAnchor = YES;
+    }
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
@@ -369,6 +372,9 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeLeaveAnchorPosition;
     m.field1 = playerId;
+    if ([AppService.shared.loginUserID isEqualToString: playerId]) {
+        self.isAnchor = NO;
+    }
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 

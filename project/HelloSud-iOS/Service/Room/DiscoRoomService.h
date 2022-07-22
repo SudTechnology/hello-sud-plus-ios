@@ -66,6 +66,8 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 @property(nonatomic, strong) NSMutableArray <DiscoMenuModel *> *finishedDanceMenuList;
 /// 贡献榜
 @property(nonatomic, strong) NSMutableArray <DiscoContributionModel *> *rankList;
+// 自己是否是主播
+@property (nonatomic, assign)BOOL isAnchor;
 
 /// 更新舞池列表
 /// @param giftModel

@@ -9,6 +9,8 @@
 #import "DiscoInteractiveModel.h"
 #import "DiscoInteractiveColCell.h"
 
+#define refreshAnchorNTF = @"refreshAnchorNTF"
+
 @interface DiscoCategoryContentView : BaseView <JXCategoryListContentViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSArray <BaseModel *> *dataList;
@@ -36,7 +38,12 @@
         NSInteger actionType = n.integerValue;
         switch (actionType) {
             case DiscoActionTypeJoinAnchorPosition:
-                [kDiscoRoomService joinAnchorField1:nil field2:nil];
+                if (kDiscoRoomService.isAnchor) {
+                    [kDiscoRoomService leaveAnchorPositionWithPlayerId:AppService.shared.loginUserID];
+                } else {
+                    [kDiscoRoomService joinAnchorField1:nil field2:nil];
+                }
+                [self reloadData];
                 break;
             case DiscoActionTypeUpDJ:
                 [kDiscoRoomService upToDJ:180];
@@ -90,6 +97,72 @@
     }
 }
 
+- (void)reloadData {
+    self.dataList = [self createListForIndex:self.index];
+    [self.collectionView reloadData];
+}
+
+- (NSArray *)createListForIndex:(NSInteger)index {
+    if (index == 0) {
+        DiscoInteractiveModel *m1 = [[DiscoInteractiveModel alloc] init];
+        m1.name = kDiscoRoomService.isAnchor ? @"下主播位" : @"上主播位";
+        m1.coin = -1;
+        m1.actionKeyList = @[@(DiscoActionTypeJoinAnchorPosition)];
+
+        DiscoInteractiveModel *m2 = [[DiscoInteractiveModel alloc] init];
+        m2.name = @"上DJ台";
+        m2.coin = 200;
+        m2.actionKeyList = @[@(DiscoActionTypeUpDJ)];
+
+        DiscoInteractiveModel *m3 = [[DiscoInteractiveModel alloc] init];
+        m3.name = NSString.dt_room_disco_keyword_move;
+        m3.coin = 0;
+        m3.actionKeyList = @[@(DiscoActionTypeMoveRole)];
+
+        DiscoInteractiveModel *m4 = [[DiscoInteractiveModel alloc] init];
+        m4.name = NSString.dt_room_disco_keyword_up_sky;
+        m4.coin = 1;
+        m4.actionKeyList = @[@(DiscoActionTypeFlyRole)];
+
+        DiscoInteractiveModel *m5 = [[DiscoInteractiveModel alloc] init];
+        m5.name = @"变大";
+        m5.coin = 5;
+        m5.actionKeyList = @[@(DiscoActionTypeBiggerRole)];
+
+        DiscoInteractiveModel *m6 = [[DiscoInteractiveModel alloc] init];
+        m6.name = @"更换角色";
+        m6.coin = 6;
+        m6.actionKeyList = @[@(DiscoActionTypeChangeRole)];
+
+        DiscoInteractiveModel *m7 = [[DiscoInteractiveModel alloc] init];
+        m7.name = NSString.dt_room_disco_tag_special;
+        m7.coin = 10;
+        m7.actionKeyList = @[@(DiscoActionTypeSpecialRole)];
+
+        DiscoInteractiveModel *m8 = [[DiscoInteractiveModel alloc] init];
+        m8.name = @"称号";
+        m8.coin = 30;
+        m8.actionKeyList = @[@(DiscoActionTypeNamedRole)];
+
+        DiscoInteractiveModel *m9 = [[DiscoInteractiveModel alloc] init];
+        m9.name = NSString.dt_room_disco_tag_effect;
+        m9.coin = 50;
+        m9.actionKeyList = @[@(DiscoActionTypeEffectRole)];
+        return @[m1, m2, m3, m4, m5, m6, m7, m8, m9];
+    } else {
+        DiscoInteractiveModel *m1 = [[DiscoInteractiveModel alloc] init];
+        m1.name = [NSString stringWithFormat:@"%@+%@+%@", @"气泡", @"变大", @"特写"];
+        m1.coin = 1000;
+        m1.actionKeyList = @[@(DiscoActionTypeMsgPop), @(DiscoActionTypeBiggerRole), @(DiscoActionTypeSpecialRole)];
+
+        DiscoInteractiveModel *m2 = [[DiscoInteractiveModel alloc] init];
+        m2.name = [NSString stringWithFormat:@"%@+%@+%@+%@", @"气泡", @"变大", @"特写", @"特效"];
+        m2.coin = 10000;
+        m2.actionKeyList = @[@(DiscoActionTypeMsgPop), @(DiscoActionTypeBiggerRole), @(DiscoActionTypeSpecialRole), @(DiscoActionTypeEffectRole)];
+        return @[m1, m2];
+    }
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -120,12 +193,12 @@
     WeakSelf
     if (m.coin > 0) {
         [DiscoRoomService reqPayCoin:m.coin success:^{
-            RespDiscoPayCoinModel *cmdModel = [[RespDiscoPayCoinModel alloc]init];
+            RespDiscoPayCoinModel *cmdModel = [[RespDiscoPayCoinModel alloc] init];
             cmdModel.price = m.coin;
             [cmdModel configBaseInfoWithCmd:CMD_ROOM_DISCO_ACTION_PAY];
             [kDiscoRoomService.currentRoomVC sendMsg:cmdModel isAddToShow:NO finished:nil];
             [weakSelf handleSelected:m];
-        } failure:nil];
+        }                    failure:nil];
     } else {
         [self handleSelected:m];
     }
@@ -231,7 +304,7 @@
 - (id <JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     DiscoCategoryContentView *v = [[DiscoCategoryContentView alloc] init];
     v.index = index;
-    v.dataList = [self createListForIndex:index];
+    [v reloadData];
     return v;
 }
 
@@ -267,68 +340,6 @@
     }
     return _listContainerView;
 }
-
-- (NSArray *)createListForIndex:(NSInteger)index {
-    if (index == 0) {
-        DiscoInteractiveModel *m1 = [[DiscoInteractiveModel alloc] init];
-        m1.name = @"上主播位";
-        m1.coin = -1;
-        m1.actionKeyList = @[@(DiscoActionTypeJoinAnchorPosition)];
-
-        DiscoInteractiveModel *m2 = [[DiscoInteractiveModel alloc] init];
-        m2.name = @"上DJ台";
-        m2.coin = 200;
-        m2.actionKeyList = @[@(DiscoActionTypeUpDJ)];
-
-        DiscoInteractiveModel *m3 = [[DiscoInteractiveModel alloc] init];
-        m3.name = NSString.dt_room_disco_keyword_move;
-        m3.coin = 0;
-        m3.actionKeyList = @[@(DiscoActionTypeMoveRole)];
-
-        DiscoInteractiveModel *m4 = [[DiscoInteractiveModel alloc] init];
-        m4.name = NSString.dt_room_disco_keyword_up_sky;
-        m4.coin = 1;
-        m4.actionKeyList = @[@(DiscoActionTypeFlyRole)];
-
-        DiscoInteractiveModel *m5 = [[DiscoInteractiveModel alloc] init];
-        m5.name = @"变大";
-        m5.coin = 5;
-        m5.actionKeyList = @[@(DiscoActionTypeBiggerRole)];
-
-        DiscoInteractiveModel *m6 = [[DiscoInteractiveModel alloc] init];
-        m6.name = @"更换角色";
-        m6.coin = 6;
-        m6.actionKeyList = @[@(DiscoActionTypeChangeRole)];
-
-        DiscoInteractiveModel *m7 = [[DiscoInteractiveModel alloc] init];
-        m7.name = NSString.dt_room_disco_tag_special;
-        m7.coin = 10;
-        m7.actionKeyList = @[@(DiscoActionTypeSpecialRole)];
-
-        DiscoInteractiveModel *m8 = [[DiscoInteractiveModel alloc] init];
-        m8.name = @"称号";
-        m8.coin = 30;
-        m8.actionKeyList = @[@(DiscoActionTypeNamedRole)];
-
-        DiscoInteractiveModel *m9 = [[DiscoInteractiveModel alloc] init];
-        m9.name = NSString.dt_room_disco_tag_effect;
-        m9.coin = 50;
-        m9.actionKeyList = @[@(DiscoActionTypeEffectRole)];
-        return @[m1, m2, m3, m4, m5, m6, m7, m8, m9];
-    } else {
-        DiscoInteractiveModel *m1 = [[DiscoInteractiveModel alloc] init];
-        m1.name = [NSString stringWithFormat:@"%@+%@+%@", @"气泡", @"变大", @"特写"];
-        m1.coin = 1000;
-        m1.actionKeyList = @[@(DiscoActionTypeMsgPop), @(DiscoActionTypeBiggerRole), @(DiscoActionTypeSpecialRole)];
-
-        DiscoInteractiveModel *m2 = [[DiscoInteractiveModel alloc] init];
-        m2.name = [NSString stringWithFormat:@"%@+%@+%@+%@", @"气泡", @"变大", @"特写", @"特效"];
-        m2.coin = 10000;
-        m2.actionKeyList = @[@(DiscoActionTypeMsgPop), @(DiscoActionTypeBiggerRole), @(DiscoActionTypeSpecialRole), @(DiscoActionTypeEffectRole)];
-        return @[m1, m2];
-    }
-}
-
 
 @end
 

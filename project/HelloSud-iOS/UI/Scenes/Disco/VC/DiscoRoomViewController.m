@@ -230,7 +230,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             make.top.equalTo(self.gameMicContentView.mas_bottom).offset(10);
             make.leading.equalTo(@16);
             make.trailing.equalTo(@-16);
-            make.height.greaterThanOrEqualTo(@112);
+            make.height.greaterThanOrEqualTo(@0);
         }];
     } else {
         self.tipOpenLabel.hidden = YES;
@@ -491,7 +491,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         case CMD_ROOM_DISCO_BECOME_DJ: {
             // 上DJ台
             RespDiscoBecomeDJModel *model = [RespDiscoBecomeDJModel fromJSON:command];
-            [self handleUpDJ:model];
+            [self handleUpDJ:model duration:60];
         }
             break;
         case CMD_ROOM_DISCO_ACTION_PAY: {
@@ -664,16 +664,16 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     } else if (msg.cmd == CMD_ROOM_DISCO_BECOME_DJ) {
         // 上DJ台
         RespDiscoBecomeDJModel *model = (RespDiscoBecomeDJModel *) msg;
-        [self handleUpDJ:model];
+        [self handleUpDJ:model duration:60];
     }
     return [super onWillSendMsg:msg shouldSend:shouldSend];
 
 }
 
 /// 处理上DJ
-- (void)handleUpDJ:(RespDiscoBecomeDJModel *)model {
+- (void)handleUpDJ:(RespDiscoBecomeDJModel *)model duration:(NSInteger)duration {
     if ([AppService.shared.login.loginUserInfo isMeByUserID:model.userID]) {
-        [kDiscoRoomService upToDJ:180];
+        [kDiscoRoomService upToDJ:duration];
     }
 }
 
