@@ -14,7 +14,6 @@ NSNotificationName const showWaitingForDancingNTF = @"showWaitingForDancingNTF";
 NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
 
 
-
 @interface DiscoRoomService ()
 /// 当前主播跳舞池
 @property(nonatomic, strong) NSMutableDictionary<NSString *, DiscoMenuModel *> *dicDancingMap;
@@ -466,6 +465,19 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeUpDJ;
     m.cooldown = cooldown;
+    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+}
+
+/// 角色称号
+/// @param cooldown 称号的持续时间，单位秒（-1为永久）默认永久
+/// @param field1 称号的文字内容（6个汉字的长度）；默认在“全场最靓”，“最强王者”和“元宇宙砂砂舞”中随机
+/// @param field2 称号特效ID（1：称号1；2：称号2；3：称号3）默认随机
+- (void)switchRoleName:(int)cooldown field1:(NSString *)field1 field2:(NSString *)field2 {
+    AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
+    m.actionId = DiscoActionTypeNamedRole;
+    m.cooldown = cooldown;
+    m.field1 = field1;
+    m.field2 = field2;
     [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 

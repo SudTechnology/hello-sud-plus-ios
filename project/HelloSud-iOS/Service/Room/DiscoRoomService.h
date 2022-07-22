@@ -161,6 +161,12 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 /// @param cooldown 上DJ台的持续时间，单位秒（-1为永久）默认180秒
 - (void)upToDJ:(int)cooldown;
 
+/// 角色称号
+/// @param cooldown 称号的持续时间，单位秒（-1为永久）默认永久
+/// @param field1 称号的文字内容（6个汉字的长度）；默认在“全场最靓”，“最强王者”和“元宇宙砂砂舞”中随机
+/// @param field2 称号特效ID（1：称号1；2：称号2；3：称号3）默认随机
+- (void)switchRoleName:(int)cooldown field1:(NSString *)field1 field2:(NSString *)field2;
+
 #pragma mark restful api
 
 /// 拉取机器人

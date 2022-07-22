@@ -35,25 +35,34 @@
         NSInteger actionType = n.integerValue;
         switch (actionType) {
             case DiscoActionTypeJoinAnchorPosition:
-//                kDiscoRoomService
+                [kDiscoRoomService joinAnchorField1:nil field2:nil];
                 break;
             case DiscoActionTypeUpDJ:
+                [kDiscoRoomService upToDJ:180];
                 break;
             case DiscoActionTypeMoveRole:
+                [kDiscoRoomService movePosition:10 field1:nil];
                 break;
             case DiscoActionTypeFlyRole:
+                [kDiscoRoomService flySky:30];
                 break;
             case DiscoActionTypeBiggerRole:
+                [kDiscoRoomService scaleBiggerRole:60 field1:nil];
                 break;
             case DiscoActionTypeChangeRole:
+                [kDiscoRoomService switchRole:nil];
                 break;
             case DiscoActionTypeSpecialRole:
+                [kDiscoRoomService specialRole:1 isTop:NO];
                 break;
             case DiscoActionTypeNamedRole:
+                [kDiscoRoomService switchRoleName:60 field1:nil field2:nil];
                 break;
             case DiscoActionTypeEffectRole:
+                [kDiscoRoomService switchEffectRole:60 field1:nil];
                 break;
             case DiscoActionTypeMsgPop:
+                [kDiscoRoomService showMsgPop:3 field1:@"莎莎舞"];
                 break;
             default:
                 break;
@@ -87,7 +96,15 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     DiscoInteractiveColCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    [self handleSelected:self.dataList[indexPath.row]];
+    DiscoInteractiveModel *m = self.dataList[indexPath.row];
+    WeakSelf
+    if (m.coin > 0) {
+        [DiscoRoomService reqPayCoin:m.coin success:^{
+            [weakSelf handleSelected:m];
+        } failure:nil];
+    } else {
+        [self handleSelected:m];
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

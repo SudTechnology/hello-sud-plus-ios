@@ -710,7 +710,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             [kDiscoRoomService specialRole:4 isTop:false];
         }
     }
-
+    [kDiscoRoomService showMsgPop:3 field1:content];
 }
 
 /// 检测是否满足主播位，不满足则提示错误
