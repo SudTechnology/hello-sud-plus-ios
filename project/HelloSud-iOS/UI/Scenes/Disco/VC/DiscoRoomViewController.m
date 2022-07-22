@@ -619,7 +619,8 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         [self updateNaviHeadIcon];
     } else if (msg.cmd == CMD_SEND_GIFT_NOTIFY) {
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
-        [kDiscoRoomService addRankCount:msg.sendUser count:m.getGiftModel.price];
+        GiftModel *giftModel = m.getGiftModel;
+        [kDiscoRoomService addRankCount:msg.sendUser count:giftModel.price * m.giftCount];
         [self updateNaviHeadIcon];
     } else if (msg.cmd == CMD_ROOM_DISCO_ACTION_PAY) {
         RespDiscoPayCoinModel *m = (RespDiscoPayCoinModel *) msg;
