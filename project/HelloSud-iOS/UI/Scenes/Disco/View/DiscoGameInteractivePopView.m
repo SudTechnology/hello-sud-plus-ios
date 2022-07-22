@@ -31,6 +31,7 @@
 
 - (void)handleSelected:(DiscoInteractiveModel *)model {
 
+    NSString *content = nil;
     for (NSNumber *n in model.actionKeyList) {
         NSInteger actionType = n.integerValue;
         switch (actionType) {
@@ -39,34 +40,53 @@
                 break;
             case DiscoActionTypeUpDJ:
                 [kDiscoRoomService upToDJ:180];
+                content = @"上DJ台";
                 break;
             case DiscoActionTypeMoveRole:
                 [kDiscoRoomService movePosition:10 field1:nil];
+                content = NSString.dt_room_disco_keyword_move;
                 break;
             case DiscoActionTypeFlyRole:
                 [kDiscoRoomService flySky:30];
+                content = @"飞天";
                 break;
             case DiscoActionTypeBiggerRole:
                 [kDiscoRoomService scaleBiggerRole:60 field1:nil];
+                content = @"变大";
                 break;
             case DiscoActionTypeChangeRole:
                 [kDiscoRoomService switchRole:nil];
+                content = NSString.dt_room_disco_keyword_witch_role;
                 break;
             case DiscoActionTypeSpecialRole:
                 [kDiscoRoomService specialRole:1 isTop:NO];
+                content = NSString.dt_room_disco_tag_special;
                 break;
             case DiscoActionTypeNamedRole:
                 [kDiscoRoomService switchRoleName:60 field1:nil field2:nil];
+                content = @"称号";
                 break;
             case DiscoActionTypeEffectRole:
                 [kDiscoRoomService switchEffectRole:60 field1:nil];
+                content = NSString.dt_room_disco_tag_effect;
                 break;
             case DiscoActionTypeMsgPop:
-                [kDiscoRoomService showMsgPop:3 field1:@"莎莎舞"];
+                [kDiscoRoomService showMsgPop:3 field1:NSString.dt_room_disco_dance_name];
                 break;
             default:
                 break;
         }
+    }
+
+    if (model.actionKeyList.count > 1) {
+        content = NSString.dt_room_disco_dance_name;
+    }
+
+    if (content.length > 0) {
+        RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:content];
+        m.skipParseGameKey = YES;
+        [kDiscoRoomService.currentRoomVC sendMsg:m isAddToShow:YES finished:nil];
+        [kDiscoRoomService showMsgPop:3 field1:content];
     }
 }
 

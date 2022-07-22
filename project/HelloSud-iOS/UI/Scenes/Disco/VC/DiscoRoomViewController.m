@@ -15,6 +15,7 @@
 #import "SudMGPAPPState.h"
 #import "DiscoGameInteractiveView.h"
 #import "DiscoAppointmentPopView.h"
+#import "DiscoGameInteractivePopView.h"
 
 static NSString *discoKeyWordsMove = @"移动";
 static NSString *discoKeyWordsUp = @"上天";
@@ -251,7 +252,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 /// 互动视图点击
 - (void)onInteractiveViewTap:(UITapGestureRecognizer *)tap {
-    DiscoPopMenuListView *v = [[DiscoPopMenuListView alloc] init];
+    DiscoGameInteractivePopView *v = [[DiscoGameInteractivePopView alloc] init];
     [DTSheetView show:v onCloseCallback:nil];
 }
 
@@ -596,7 +597,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     /// Game - 发送文本命中
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
-        [self handleMsgContent:m.content];
+        if (!m.skipParseGameKey) {
+            [self handleMsgContent:m.content];
+        }
     } else if ([msg isKindOfClass:RoomCmdUpMicModel.class] && msg.cmd == CMD_UP_MIC_NOTIFY) {
         if ([self checkIfCanJoin]) {
             [kDiscoRoomService joinAnchorField1:nil field2:msg.sendUser.isRobot ? msg.sendUser.userID : nil];

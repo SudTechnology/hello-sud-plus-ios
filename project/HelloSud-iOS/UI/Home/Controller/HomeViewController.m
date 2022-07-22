@@ -304,10 +304,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
-
-    DiscoGameInteractivePopView *v = [[DiscoGameInteractivePopView alloc] init];
-    [DTSheetView show:v onCloseCallback:nil];
-    return;
+//
+//    DiscoGameInteractivePopView *v = [[DiscoGameInteractivePopView alloc] init];
+//    [DTSheetView show:v onCloseCallback:nil];
+//    return;
 
     if (self.headerSceneList[indexPath.section].sceneId == SceneTypeTicket) {
         TicketChooseViewController *vc = TicketChooseViewController.new;

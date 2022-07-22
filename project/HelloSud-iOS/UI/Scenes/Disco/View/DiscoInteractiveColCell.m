@@ -33,7 +33,8 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@18);
         make.height.greaterThanOrEqualTo(@0);
-        make.leading.trailing.equalTo(@0);
+        make.leading.equalTo(@2);
+        make.trailing.equalTo(@-2);
     }];
     [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(2);
@@ -90,6 +91,8 @@
         self.coinLabel.attributedText = full;
     } else {
         self.coinLabel.attributedText = nil;
+        self.coinLabel.font = UIFONT_MEDIUM(12);
+        self.coinLabel.textColor = HEX_COLOR(@"#FFF6E0");
         self.coinLabel.text = NSString.dt_room_guess_fee;
     }
 }
@@ -118,8 +121,7 @@
 - (YYLabel *)coinLabel {
     if (!_coinLabel) {
         _coinLabel = [[YYLabel alloc] init];
-        _coinLabel.font = UIFONT_MEDIUM(12);
-        _coinLabel.textColor = HEX_COLOR(@"#FFF6E0");
+
     }
     return _coinLabel;
 }

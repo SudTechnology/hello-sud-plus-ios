@@ -430,6 +430,7 @@
 + (NSString *)dt_room_disco_select_duration_tip { return @"dt_room_disco_select_duration_tip".localized; }
 + (NSString *)dt_room_disco_category_one { return @"dt_room_disco_category_one".localized; }
 + (NSString *)dt_room_disco_category_twn { return @"dt_room_disco_category_twn".localized; }
++ (NSString *)dt_room_disco_dance_name { return @"dt_room_disco_dance_name".localized; }
 
 
 @end
