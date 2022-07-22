@@ -387,7 +387,7 @@
 "dt_room_disco_tip_two_fmt" = "2. Mengirim hadiah dapat memicu efek yang berbeda atau mengarahkan hos untuk menari.";
 "dt_room_disco_tip_three_fmt" = "3. Perintah layar publik: [%@][%@][%@]";
 "dt_room_disco_tip_four_fmt" = "4. Pengguna Maishang dapat mengirim [%@] untuk menuju posisi hos, dan mengirim [%@] untuk menuju posisi hos.";
-"dt_room_disco_tip_five_fmt" = "5. Hos mengirim teks [%@] dapat memicu close-up";
+"dt_room_disco_tip_five_fmt" = "3. Hos mengirim teks [%@] dapat memicu close-up";
 "dt_room_disco_countdown_fmt" = "Masuk ke layar penuh secara otomatis setelah %@ detik";
 "dt_room_guess_win_msg_fmt" = "%@ yakin dia akan menang";
 "dt_room_guess_diff_user_win_msg_fmt" = "%@ membuat panggilan untuk %@, tebak dia akan menang";

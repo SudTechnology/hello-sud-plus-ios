@@ -200,6 +200,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         [weakSelf handleDJTimerCallback];
     }];
     self.gameNumLabel.alpha = 0;
+    [self beginShowHeartAnimate];
 }
 
 /// 增加舞单按钮到底部操作列表
@@ -421,6 +422,43 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 proxyUser:proxyUser success:nil fail:nil];
         return;
     }
+}
+
+// 开始心跳动画
+- (void)beginShowHeartAnimate {
+
+    [self.datingView.superview layoutIfNeeded];
+    [self.datingView.layer removeAllAnimations];
+    CAAnimationGroup *group = [[CAAnimationGroup alloc] init];
+    group.duration = 1.6;
+    group.repeatCount = CGFLOAT_MAX;
+    group.removedOnCompletion = YES;
+    group.fillMode = kCAFillModeRemoved;
+
+    CABasicAnimation *moveDown = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    // 设置运动形式
+    [moveDown setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    // 设置开始位置
+    moveDown.fromValue = @(0.9);
+    moveDown.toValue = @(1.2);
+    moveDown.removedOnCompletion = NO;
+    moveDown.duration = 0.8;
+    moveDown.repeatCount = 1;
+    moveDown.fillMode = kCAFillModeForwards;
+
+    CABasicAnimation *moveUp = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    // 设置运动形式
+    [moveUp setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    moveUp.fromValue = @(1.2);
+    moveUp.toValue = @(0.9);
+    moveUp.duration = 0.8;
+    moveUp.beginTime = 0.8;
+    moveUp.repeatCount = 1;
+    moveUp.removedOnCompletion = NO;
+    moveUp.fillMode = kCAFillModeForwards;
+
+    group.animations = @[moveDown, moveUp];
+    [self.datingView.layer addAnimation:group forKey:@"moveAnimate"];
 }
 
 #pragma game
@@ -846,20 +884,20 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
     NSString *tip1 = [NSString stringWithFormat:NSString.dt_room_disco_tip_one_fmt, key1, @(self.djCountdown)];
     NSString *tip2 = NSString.dt_room_disco_tip_two_fmt;
-    NSString *tip3 = [NSString stringWithFormat:NSString.dt_room_disco_tip_three_fmt, key2, key3, key4];
-    NSString *tip4 = [NSString stringWithFormat:NSString.dt_room_disco_tip_four_fmt, key5, key6];
+//    NSString *tip3 = [NSString stringWithFormat:NSString.dt_room_disco_tip_three_fmt, key2, key3, key4];
+//    NSString *tip4 = [NSString stringWithFormat:NSString.dt_room_disco_tip_four_fmt, key5, key6];
     NSString *tip5 = [NSString stringWithFormat:NSString.dt_room_disco_tip_five_fmt, key7];
     if (isMoreLines) {
         tip1 = [NSString stringWithFormat:@"%@\n", tip1];
         tip2 = [NSString stringWithFormat:@"%@\n", tip2];
-        tip3 = [NSString stringWithFormat:@"%@\n", tip3];
-        tip4 = [NSString stringWithFormat:@"%@\n", tip4];
+//        tip3 = [NSString stringWithFormat:@"%@\n", tip3];
+//        tip4 = [NSString stringWithFormat:@"%@\n", tip4];
     }
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] init];
     [attrTitle appendAttributedString:[self createYYAttr:tip1 hilightStr:@[key1]]];
     [attrTitle appendAttributedString:[self createYYAttr:tip2 hilightStr:nil]];
-    [attrTitle appendAttributedString:[self createYYAttr:tip3 hilightStr:@[key2, key3, key4]]];
-    [attrTitle appendAttributedString:[self createYYAttr:tip4 hilightStr:@[key5, key6]]];
+//    [attrTitle appendAttributedString:[self createYYAttr:tip3 hilightStr:@[key2, key3, key4]]];
+//    [attrTitle appendAttributedString:[self createYYAttr:tip4 hilightStr:@[key5, key6]]];
     [attrTitle appendAttributedString:[self createYYAttr:tip5 hilightStr:@[key7]]];
     return attrTitle;
 }

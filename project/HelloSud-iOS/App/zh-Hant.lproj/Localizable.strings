@@ -390,7 +390,7 @@
 "dt_room_disco_tip_two_fmt" = "2. 送禮可觸發不同的效果或點主播跳舞。";
 "dt_room_disco_tip_three_fmt" = "3. 公屏指令：【%@】【%@】【%@】";
 "dt_room_disco_tip_four_fmt" = "4. 麥上用戶發送【%@】可上到主播位，發送【%@】可下主播位。";
-"dt_room_disco_tip_five_fmt" = "5. 主播發文字【%@】可觸發特寫";
+"dt_room_disco_tip_five_fmt" = "3. 主播發文字【%@】可觸發特寫";
 "dt_room_disco_countdown_fmt" = "%@秒後會自動進入全屏";
 "dt_room_guess_win_msg_fmt" = "%@ 胸有成竹，猜自己一定能贏";
 "dt_room_guess_diff_user_win_msg_fmt" = "%@ 為 %@ 打call，猜TA會贏";

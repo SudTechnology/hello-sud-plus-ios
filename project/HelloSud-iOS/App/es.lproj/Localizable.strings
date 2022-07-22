@@ -387,7 +387,7 @@
 "dt_room_disco_tip_two_fmt" = "2. Los regalos pueden activar diferentes efectos o asignar un presentar a bailar.";
 "dt_room_disco_tip_three_fmt" = "3. Comando de pantalla compartida: [%@][%@][%@]";
 "dt_room_disco_tip_four_fmt" = "4. Los usuarios online pueden enviar [%@] para ser presentadores y enviar [%@] para dejar de presentar.";
-"dt_room_disco_tip_five_fmt" = "5. Un presentador, enviando el texto [%@], puede activar un avatar";
+"dt_room_disco_tip_five_fmt" = "3. Un presentador, enviando el texto [%@], puede activar un avatar";
 "dt_room_disco_countdown_fmt" = "Acceder automáticamente en pantalla completa después de %@ segundos";
 "dt_room_guess_win_msg_fmt" = "¡%@ confía en sí mismo que las sabe todas!";
 "dt_room_guess_diff_user_win_msg_fmt" = "%@ apoyan a %@. ¡Adivina QUIÉN ganará!";

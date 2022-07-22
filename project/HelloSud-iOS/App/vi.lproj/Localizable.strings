@@ -387,7 +387,7 @@
 "dt_room_disco_tip_two_fmt" = "2. Tặng quà có thể kích hoạt hiệu quả khác nhau hoặc chọn streamer khiêu vũ.";
 "dt_room_disco_tip_three_fmt" = "3. Chỉ lệnh màn hình chung：【%@】【%@】【%@】";
 "dt_room_disco_tip_four_fmt" = "4. Người dùng lên mic【%@】có thể lên vị trí streamer，gửi【%@】có thể xuống vị trí streamer.";
-"dt_room_disco_tip_five_fmt" = "5. Streamer đăng bài viết【%@】có thể kích hoạt nổi bật.";
+"dt_room_disco_tip_five_fmt" = "3. Streamer đăng bài viết【%@】có thể kích hoạt nổi bật.";
 "dt_room_disco_countdown_fmt" = "%@ s sau sẽ tự động vào chế độ toàn màn hình";
 "dt_room_guess_win_msg_fmt" = "%@ đã tính trước, đoán bản thân chắc chắn thắng";
 "dt_room_guess_diff_user_win_msg_fmt" = "%@ ủng hộ cho %@ , đoán TA thắng";

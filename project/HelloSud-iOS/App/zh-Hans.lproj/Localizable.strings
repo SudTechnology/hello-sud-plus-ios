@@ -387,10 +387,10 @@
 "dt_room_disco_waitting" = "等待中";
 "dt_room_disco_dancing_fmt" = "%@\n邀请 %@ 跳舞%@分钟";
 "dt_room_disco_tip_one_fmt" = "1. 贡献榜%@随机DJ（%@秒刷新）";
-"dt_room_disco_tip_two_fmt" = "2. 送礼可触发不同的效果或点主播跳舞。";
+"dt_room_disco_tip_two_fmt" = "2. 送礼可与主播跳舞、或触发不同的效果。";
 "dt_room_disco_tip_three_fmt" = "3. 公屏指令：【%@】【%@】【%@】";
 "dt_room_disco_tip_four_fmt" = "4. 麦上用户发送【%@】可上到主播位，发送【%@】可下主播位。";
-"dt_room_disco_tip_five_fmt" = "5. 主播发文字【%@】可触发特写";
+"dt_room_disco_tip_five_fmt" = "3. 麦上用户发送【聚焦】可触发特写。";
 "dt_room_disco_countdown_fmt" = "%@秒后会自动进入全屏";
 "dt_room_guess_win_msg_fmt" = "%@ 胸有成竹，猜自己一定能赢";
 "dt_room_guess_diff_user_win_msg_fmt" = "%@ 为 %@ 打call，猜TA会赢";

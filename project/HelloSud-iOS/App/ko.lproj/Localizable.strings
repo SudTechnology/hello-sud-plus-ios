@@ -387,7 +387,7 @@
 "dt_room_disco_tip_two_fmt" = "2. 기념품 증정으로 서로 다른 효과 활성화 또는 앵커 댄싱을 주문 가능.";
 "dt_room_disco_tip_three_fmt" = "3. 공중 스크린 명령：【%@】【%@】【%@】";
 "dt_room_disco_tip_four_fmt" = "4. 마이크 사용자가 【%@】발표로 앵커위치에 진입, 【%@】 발표로 앵커위치를 이탈.";
-"dt_room_disco_tip_five_fmt" = "5. 앵커의 문장【%@】발표로 클로즈업을 활성화 가능";
+"dt_room_disco_tip_five_fmt" = "3. 앵커의 문장【%@】발표로 클로즈업을 활성화 가능";
 "dt_room_disco_countdown_fmt" = "%@초후 풀스크린에 자동 진입";
 "dt_room_guess_win_msg_fmt" = "%@는 마음속에 타산이 있고, 자체 승리로 예측！";
 "dt_room_guess_diff_user_win_msg_fmt" = "%@는%@ 을 위하여 call, TA승리로 예측";

@@ -387,7 +387,7 @@
 "dt_room_disco_tip_two_fmt" = "2.ギフトは、さまざまな効果を引き起こしたり、キャスターをダンスに招待したりすることができます。";
 "dt_room_disco_tip_three_fmt" = "3.公開画面コマンド：【%@】【%@】【%@】";
 "dt_room_disco_tip_four_fmt" = "4.マイク接続ユーザーは【%@】を送信してキャスターにオンラインでき、【%@】を送信するとキャスターをオフラインできます。";
-"dt_room_disco_tip_five_fmt" = "5.キャスターが【%@】というメッセージを送信すると、クローズアップがトリガーされます。";
+"dt_room_disco_tip_five_fmt" = "3.キャスターが【%@】というメッセージを送信すると、クローズアップがトリガーされます。";
 "dt_room_disco_countdown_fmt" = "%@秒後に自動的に全画面表示";
 "dt_room_guess_win_msg_fmt" = "%@には自信があります。きっと自分が勝利すると思います！";
 "dt_room_guess_diff_user_win_msg_fmt" = "%@は%@を応援し、勝利すると思います！";
