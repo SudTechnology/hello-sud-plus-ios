@@ -46,19 +46,19 @@
                 [self reloadData];
                 break;
             case DiscoActionTypeUpDJ:
-                [kDiscoRoomService upToDJ:180];
+                [kDiscoRoomService upToDJ:0];
                 content = @"上DJ台";
                 break;
             case DiscoActionTypeMoveRole:
-                [kDiscoRoomService movePosition:10 field1:nil];
+                [kDiscoRoomService movePosition:0 field1:nil];
                 content = NSString.dt_room_disco_keyword_move;
                 break;
             case DiscoActionTypeFlyRole:
-                [kDiscoRoomService flySky:30];
+                [kDiscoRoomService flySky:0];
                 content = @"飞天";
                 break;
             case DiscoActionTypeBiggerRole:
-                [kDiscoRoomService scaleBiggerRole:60 field1:nil];
+                [kDiscoRoomService scaleBiggerRole:0 field1:nil];
                 content = @"变大";
                 break;
             case DiscoActionTypeChangeRole:
@@ -66,7 +66,7 @@
                 content = NSString.dt_room_disco_keyword_witch_role;
                 break;
             case DiscoActionTypeSpecialRole:
-                [kDiscoRoomService specialRole:1 isTop:NO];
+                [kDiscoRoomService specialRole:0 isTop:NO];
                 content = NSString.dt_room_disco_tag_special;
                 break;
             case DiscoActionTypeNamedRole:
@@ -74,11 +74,11 @@
                 content = @"称号";
                 break;
             case DiscoActionTypeEffectRole:
-                [kDiscoRoomService switchEffectRole:60 field1:nil];
+                [kDiscoRoomService switchEffectRole:0 field1:nil];
                 content = NSString.dt_room_disco_tag_effect;
                 break;
             case DiscoActionTypeMsgPop:
-                [kDiscoRoomService showMsgPop:3 field1:NSString.dt_room_disco_dance_name];
+                [kDiscoRoomService showMsgPop:0 field1:NSString.dt_room_disco_dance_name];
                 break;
             default:
                 break;
