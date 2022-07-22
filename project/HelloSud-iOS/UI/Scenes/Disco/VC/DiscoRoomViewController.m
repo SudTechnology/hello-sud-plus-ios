@@ -326,8 +326,15 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
 - (void)roomGameDidChanged:(NSInteger)gameID {
     [super roomGameDidChanged:gameID];
-    self.datingView.hidden = gameID == 0;
-    self.tipView.hidden = gameID == 0;
+    if (gameID == 0) {
+        self.datingView.hidden = YES;
+        self.tipView.hidden = YES;
+        self.interactiveView.hidden = YES;
+    } else {
+        self.datingView.hidden = NO;
+        self.tipView.hidden = NO;
+        self.interactiveView.hidden = NO;
+    }
 }
 
 - (void)beginScrollTip {
