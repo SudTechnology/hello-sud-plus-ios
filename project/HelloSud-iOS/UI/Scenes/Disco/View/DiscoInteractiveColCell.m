@@ -13,6 +13,7 @@
 @property(nonatomic, strong) BaseView *bgView;
 @property(nonatomic, strong) MarqueeLabel *titleLabel;
 @property(nonatomic, strong) YYLabel *coinLabel;
+@property(nonatomic, strong) BaseView *coverView;
 @end
 
 @implementation DiscoInteractiveColCell
@@ -22,6 +23,7 @@
     [self.contentView addSubview:self.bgView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.coinLabel];
+    [self.contentView addSubview:self.coverView];
 }
 
 - (void)dtLayoutViews {
@@ -41,6 +43,9 @@
         make.height.greaterThanOrEqualTo(@0);
         make.width.greaterThanOrEqualTo(@0);
         make.centerX.equalTo(self.contentView);
+    }];
+    [self.coverView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.trailing.bottom.equalTo(@0);
     }];
 }
 
@@ -75,6 +80,18 @@
 
 }
 
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    if (selected) {
+        self.coverView.hidden = NO;
+    } else {
+        [HSThreadUtils dispatchMainAfter:0.2 callback:^{
+            self.coverView.hidden = YES;
+        }];
+    }
+    
+}
+
 - (void)updateCoin:(int64_t)coin {
 
     if (coin > 0) {
@@ -106,6 +123,15 @@
         [_bgView dt_cornerRadius:4];
     }
     return _bgView;
+}
+
+- (BaseView *)coverView {
+    if (!_coverView) {
+        _coverView = [[BaseView alloc] init];
+        _coverView.backgroundColor = HEX_COLOR_A(@"#000000", 0.2);
+        _coverView.hidden = YES;
+    }
+    return _coverView;
 }
 
 - (MarqueeLabel *)titleLabel {

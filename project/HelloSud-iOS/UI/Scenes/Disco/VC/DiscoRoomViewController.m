@@ -139,8 +139,8 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.rankTipView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.datingView).offset(-7);
-        make.bottom.equalTo(self.datingView.mas_top);
+        make.trailing.equalTo(@-56);
+        make.bottom.equalTo(self.operatorView.mas_top);
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.tipView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -499,6 +499,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
             RespDiscoPayCoinModel *model = [RespDiscoPayCoinModel fromJSON:command];
             [self handleRankInfo:model];
         }
+            break;
         default:
             [super handleBusyCommand:cmd command:command];
             break;

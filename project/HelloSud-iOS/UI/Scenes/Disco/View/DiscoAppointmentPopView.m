@@ -179,6 +179,10 @@
     WeakSelf
     [DiscoRoomService reqPayCoin:self.totalCoin success:^{
         [weakSelf handlePaySuccess];
+        RespDiscoPayCoinModel *cmdModel = [[RespDiscoPayCoinModel alloc]init];
+        cmdModel.price = weakSelf.totalCoin;
+        [cmdModel configBaseInfoWithCmd:CMD_ROOM_DISCO_ACTION_PAY];
+        [kDiscoRoomService.currentRoomVC sendMsg:cmdModel isAddToShow:NO finished:nil];
         [DTSheetView close];
     }                    failure:nil];
 }
