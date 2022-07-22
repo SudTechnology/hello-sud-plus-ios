@@ -227,7 +227,7 @@
         if (!m.isSelected) {
             continue;
         }
-        AudioUserModel *user = [[AudioUserModel alloc]init];
+        AudioUserModel *user = [[AudioUserModel alloc] init];
         user.userID = [NSString stringWithFormat:@"%@", @(m.userId)];
         user.name = m.nickname;
         user.icon = m.avatar;
@@ -243,7 +243,7 @@
         giftMsg.giftUrl = giftModel.giftURL;
         giftMsg.animationUrl = giftModel.animateURL;
         giftMsg.giftName = giftModel.giftName;
-
+        giftMsg.specialDuration = 5;
         [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
     }
 }

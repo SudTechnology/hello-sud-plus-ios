@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign)NSInteger duration;
 @property (nonatomic, assign)int64_t beginTime;
 @property (nonatomic, strong)void(^_Nullable updateDancingDurationBlock)(NSInteger second);
+/// 特写时间
+@property (nonatomic, assign)NSInteger specialDuration;
 
 /// 跳舞是否结束
 /// @return

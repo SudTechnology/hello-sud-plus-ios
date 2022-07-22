@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 礼物名称
 @property (nonatomic, strong)NSString *giftName;
 
+/// 特写时间
+@property (nonatomic, assign)NSInteger specialDuration;
+
 /// 构建消息
 /// @param giftID giftID description
 /// @param giftCount giftCount description
