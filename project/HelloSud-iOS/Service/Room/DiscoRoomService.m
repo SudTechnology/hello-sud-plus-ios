@@ -148,7 +148,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
             // 发送者是自己，执行与主播跳舞指令
             [self danceWithAnchor:m.duration isTop:NO field1:m.toUser.userID];
             // 3秒特写
-            [self specialRole:m.specialDuration > 0 ? 5 : 3 isTop:NO];
+            [self specialRole:m.specialDuration > 0 ? m.specialDuration : 3 isTop:NO];
 
         }
     } else {
@@ -158,10 +158,11 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
             // 用户加入舞池
             self.dicDancingMap[m.toUser.userID] = m;
             self.dicDancingMap[m.fromUser.userID] = m;
-//            if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
-//                // 发送者是自己，执行与主播跳舞指令
-//                [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
-//            }
+            if ([AppService.shared.login.loginUserInfo isMeByUserID:m.fromUser.userID]) {
+                // 发送者是自己，执行与主播跳舞指令
+                [self danceWithAnchor:addDuration isTop:NO field1:m.toUser.userID];
+                [self specialRole:m.specialDuration > 0 ? m.specialDuration : 3 isTop:NO];
+            }
         }
     }
 }
