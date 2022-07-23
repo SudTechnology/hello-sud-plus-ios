@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)UIBUTTON_TAP_BLOCK closeTapBlock;
 @property(nonatomic, copy)UIVIEW_TAP_BLOCK changeRoomTapBlock;
 
+@property (nonatomic, strong) UIView *roomInfoView;
 @property (nonatomic, strong) UILabel *roomNameLabel;
-@property (nonatomic, strong, readonly) UIImageView *onlineImageView;
 /// 选择游戏视图
 @property (nonatomic, strong, readonly) UIView *roomModeView;
 

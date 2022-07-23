@@ -182,6 +182,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+    [self.settingLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     CGFloat b = 150 + kAppSafeBottom;
     [self.pkView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(self.sceneView);
@@ -198,7 +199,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
         make.height.equalTo(@20);
         make.width.mas_greaterThanOrEqualTo(56);
         make.trailing.equalTo(self.naviView.roomModeView.mas_leading).offset(-10);
-        make.leading.greaterThanOrEqualTo(self.naviView.onlineImageView.mas_trailing).offset(10);
+        make.leading.greaterThanOrEqualTo(self.naviView.roomInfoView.mas_trailing).offset(10);
     }];
     [self.settingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@8);

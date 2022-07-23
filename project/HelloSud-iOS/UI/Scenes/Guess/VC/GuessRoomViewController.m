@@ -53,6 +53,8 @@
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+    [self.normalGuessNavLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.autoTitleLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 
     CGFloat bottom = kAppSafeBottom + 51;
     [self.guessMineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,9 +66,9 @@
     [self.autoGuessNavView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.naviView.roomModeView);
         make.height.equalTo(@20);
-        make.width.equalTo(@100);
+        make.width.equalTo(@0);
         make.trailing.equalTo(self.naviView.roomModeView.mas_leading).offset(-10);
-        make.leading.greaterThanOrEqualTo(self.naviView.onlineImageView.mas_trailing).offset(10);
+        make.leading.greaterThanOrEqualTo(self.naviView.roomInfoView.mas_trailing).offset(10);
     }];
     [self.autoNavImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(@-1);
@@ -82,9 +84,8 @@
     [self.normalGuessNavView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.naviView.roomModeView);
         make.height.equalTo(@20);
-        make.width.lessThanOrEqualTo(@90);
         make.trailing.equalTo(self.naviView.roomModeView.mas_leading).offset(-10);
-        make.leading.greaterThanOrEqualTo(self.naviView.onlineImageView.mas_trailing).offset(10);
+        make.leading.greaterThanOrEqualTo(self.naviView.roomInfoView.mas_trailing).offset(10);
     }];
     [self.normalGuessNavLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@8);
@@ -277,7 +278,7 @@
             make.height.equalTo(@20);
             make.width.greaterThanOrEqualTo(@0);
             make.trailing.equalTo(self.naviView.roomModeView.mas_leading).offset(-10);
-            make.leading.greaterThanOrEqualTo(self.naviView.onlineImageView.mas_trailing).offset(10);
+            make.leading.greaterThanOrEqualTo(self.naviView.roomInfoView.mas_trailing).offset(10);
         }];
     } else {
         self.autoGuessNavView.hidden = YES;
@@ -287,9 +288,10 @@
             make.height.equalTo(@20);
             make.width.greaterThanOrEqualTo(@0);
             make.trailing.equalTo(self.naviView.roomModeView.mas_leading).offset(-10);
-            make.leading.greaterThanOrEqualTo(self.naviView.onlineImageView.mas_trailing).offset(10);
+            make.leading.greaterThanOrEqualTo(self.naviView.roomInfoView.mas_trailing).offset(10);
         }];
     }
+    [self.naviView layoutIfNeeded];
 }
 
 /// 展示结果弹窗
