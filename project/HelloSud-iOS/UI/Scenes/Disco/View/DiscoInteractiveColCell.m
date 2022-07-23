@@ -77,7 +77,6 @@
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
-
 }
 
 - (void)setSelected:(BOOL)selected {

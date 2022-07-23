@@ -32,18 +32,23 @@
 }
 
 - (void)handleSelected:(DiscoInteractiveModel *)model {
-
+    WeakSelf
     NSString *content = nil;
     for (NSNumber *n in model.actionKeyList) {
         NSInteger actionType = n.integerValue;
         switch (actionType) {
-            case DiscoActionTypeJoinAnchorPosition:
+            case DiscoActionTypeJoinAnchorPosition: {
+                
                 if (kDiscoRoomService.isAnchor) {
                     [kDiscoRoomService leaveAnchorPositionWithPlayerId:AppService.shared.loginUserID];
                 } else {
                     [kDiscoRoomService joinAnchorField1:nil field2:nil];
                 }
-                [self reloadData];
+                
+                [HSThreadUtils dispatchMainAfter:0.3 callback:^{
+                    [weakSelf reloadData];
+                }];
+            }
                 break;
             case DiscoActionTypeUpDJ:
                 [kDiscoRoomService upToDJ:0];
