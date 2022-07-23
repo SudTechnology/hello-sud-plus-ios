@@ -92,11 +92,7 @@
         }
     }
 
-    if (model.actionKeyList.count > 1) {
-        // 组合的不发送公屏消息，只展示气泡
-        content = NSString.dt_room_disco_dance_name;
-        [kDiscoRoomService showMsgPop:0 field1:content];
-    } else {
+    if (model.actionKeyList.count == 1) {
         if (content.length > 0) {
             RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:content];
             m.skipParseGameKey = YES;
