@@ -43,6 +43,8 @@
                     [kDiscoRoomService leaveAnchorPositionWithPlayerId:AppService.shared.loginUserID];
                 } else {
                     [kDiscoRoomService joinAnchorField1:nil field2:nil];
+                    // 上报后台加入主播
+                    [DiscoRoomService reqUpDownAnchor:YES roomId:kDiscoRoomService.currentRoomVC.roomID.integerValue userId:AppService.shared.loginUserID success:nil failure:nil];
                 }
                 
                 [HSThreadUtils dispatchMainAfter:0.3 callback:^{

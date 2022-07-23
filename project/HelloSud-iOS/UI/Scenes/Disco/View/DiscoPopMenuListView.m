@@ -243,6 +243,7 @@
         full.yy_font = UIFONT_REGULAR(12);
         full.yy_color = HEX_COLOR(@"#ffffff");
         full.yy_firstLineHeadIndent = 3;
+        full.yy_baselineOffset = @(2);
 
         UIImage *iconImage = [UIImage imageNamed:@"disco_rule_icon"];
         [full appendAttributedString:[NSAttributedString dt_attrWithImage:iconImage size:CGSizeMake(12, 12) offsetY:0]];
