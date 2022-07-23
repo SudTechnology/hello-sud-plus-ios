@@ -201,6 +201,9 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     }];
     self.gameNumLabel.alpha = 0;
     [self beginShowHeartAnimate];
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf beginShowHeartAnimate];
+    }];
 }
 
 /// 增加舞单按钮到底部操作列表
@@ -248,13 +251,13 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 /// 约主播跳舞视图
 - (void)onMenuViewTap:(UITapGestureRecognizer *)tap {
     DiscoAppointmentPopView *v = [[DiscoAppointmentPopView alloc] init];
-    [DTSheetView show:v onCloseCallback:nil];
+    [DTSheetView show:v rootView:nil hiddenBackCover:YES onCloseCallback:nil];
 }
 
 /// 互动视图点击
 - (void)onInteractiveViewTap:(UITapGestureRecognizer *)tap {
     DiscoGameInteractivePopView *v = [[DiscoGameInteractivePopView alloc] init];
-    [DTSheetView show:v onCloseCallback:nil];
+    [DTSheetView show:v rootView:nil hiddenBackCover:YES onCloseCallback:nil];
 }
 
 /// 点击排行榜
