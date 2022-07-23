@@ -59,6 +59,8 @@
         [self.customView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(32, 32));
         }];
+    } else {
+        [self.customView setHidden:YES];
     }
 }
 

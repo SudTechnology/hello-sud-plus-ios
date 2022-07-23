@@ -122,6 +122,7 @@
     }
     self.borderView.hidden = NO;
     self.firstGameNameLabel.text = nil;
+
 }
 
 - (void)setHeaderGameList:(NSArray<HSGameItem *> *)headerGameList {
@@ -130,6 +131,8 @@
 
 - (void)setSceneModel:(HSSceneModel *)sceneModel {
     _sceneModel = sceneModel;
+    self.previewView.image = nil;
+    [self.customView setHidden:YES];
     WeakSelf
     [self updateCustomMoreBtn:sceneModel];
 
