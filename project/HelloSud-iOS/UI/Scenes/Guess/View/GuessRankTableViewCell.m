@@ -64,7 +64,7 @@
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@80);
         make.height.greaterThanOrEqualTo(@0);
-        make.bottom.equalTo(self.nameLabel);
+        make.top.equalTo(self.winLabel.mas_bottom).offset(0);
         make.trailing.equalTo(@-33);
     }];
 }
