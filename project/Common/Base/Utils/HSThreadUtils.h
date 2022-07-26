@@ -12,5 +12,8 @@
 @interface HSThreadUtils : NSObject
 
 +(void)runOnUiThread:(dispatch_block_t) block;
-
+/// 主线程延迟回调
+/// @param second 秒
+/// @param callback 回调
++(void)dispatchMainAfter:(NSTimeInterval)second callback:(void(^)(void))callback;
 @end

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)resetLanguageBundle;
 /// 当前多语言bundle
 + (NSBundle *)currentLanguageBundle;
++ (NSBundle *)defaultLanguageBundle;
 @end
 
 NS_ASSUME_NONNULL_END

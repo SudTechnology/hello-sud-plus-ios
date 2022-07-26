@@ -31,7 +31,19 @@
 }
 
 - (void)dtUpdateUI {
-    [self.dataList setArray:GiftService.shared.giftList];
+    if (self.sceneGiftList.count > 0) {
+        if (self.appendSceneGift) {
+            [self.dataList setArray:GiftService.shared.giftList];
+            [self.dataList addObjectsFromArray:self.sceneGiftList];
+        } else {
+            [self.dataList setArray:self.sceneGiftList];
+            [self.dataList addObjectsFromArray:GiftService.shared.giftList];
+        }
+    } else {
+        [self.dataList setArray:GiftService.shared.giftList];
+    }
+
+
     for (GiftModel *m in self.dataList) {
         m.isSelected = NO;
     }
@@ -42,6 +54,13 @@
     }
     [self.collectionView reloadData];
 }
+
+- (void)setSceneGiftList:(NSArray<GiftModel *> *)sceneGiftList {
+    _sceneGiftList = sceneGiftList;
+    [self dtUpdateUI];
+}
+
+
 
 #pragma mark - UICollectionViewDataSource
 
@@ -59,9 +78,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
+    GiftItemCollectionViewCell *c = [collectionView cellForItemAtIndexPath:indexPath];
+    
     GiftModel *currentModel = self.dataList[indexPath.row];
     currentModel.isSelected = YES;
-    if (self.didSelectedGift != nil && currentModel.giftID != self.didSelectedGift.giftID) {
+    if (self.didSelectedGift != nil && ![currentModel.giftKey isEqualToString:self.didSelectedGift.giftKey]) {
         self.didSelectedGift.isSelected = NO;
         self.didSelectedGift.selectedChangedCallback();
     }
@@ -75,7 +96,7 @@
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         CGFloat itemW = (kScreenWidth - 16)/4 - 1;
-        CGFloat itemH = 90;
+        CGFloat itemH = 120;
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         flowLayout.itemSize = CGSizeMake(itemW, itemH);

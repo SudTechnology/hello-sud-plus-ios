@@ -10,15 +10,26 @@
 #import "ConfigModel.h"
 #import "LoginService.h"
 #import "AudioRoomService.h"
-#import "TicketService.h"
-#import "PKService.h"
+#import "TicketRoomService.h"
+#import "PKRoomService.h"
+#import "GuessRoomService.h"
+#import "DanmakuRoomService.h"
+#import "DiscoRoomService.h"
 
 // 语音服务
 #define kAudioRoomService ((AudioRoomService *)AppService.shared.scene)
 // pk服务
-#define kPKService ((PKService *)AppService.shared.scene)
+#define kPKService ((PKRoomService *)AppService.shared.scene)
 // 门票服务
-#define kTicketService ((TicketService *)AppService.shared.scene)
+#define kTicketService ((TicketRoomService *)AppService.shared.scene)
+// 竞猜服务
+#define kGuessService ((GuessRoomService *)AppService.shared.scene)
+// 弹幕房间服务
+#define kDanmakuRoomService ((DanmakuRoomService *)AppService.shared.scene)
+// 蹦迪房间服务
+#define kDiscoRoomService ((DiscoRoomService *)AppService.shared.scene)
+
+
 
 @class AudioConfigModel;
 
@@ -55,6 +66,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)LoginService *login;
 /// 场景服务
 @property (nonatomic, strong)BaseSceneService *scene;
+/// 更多竞猜头部数据列表缓存
+@property(nonatomic, strong) NSArray <BaseModel *> *moreGuessHeaderArrayCache;
+/// 是否已经展示过横屏提示
+@property(nonatomic, assign) BOOL alreadyShowLandscapePopAlert;
+/// 是否已经展示过横屏气泡指引提示
+@property(nonatomic, assign) BOOL alreadyShowLandscapeBubbleTip;
 
 + (instancetype)shared;
 
@@ -90,6 +107,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取RTC厂商名称
 /// @param rtcType rtc类型
 - (NSString *)getRTCTypeName:(NSString *)rtcType;
+
+/// 是否是相同rtc厂商
+/// @param rtcConfig rtcConfig
+/// @param rtcType rtcType
+/// @return
+- (BOOL)isSameRtc:(HSConfigContent *)rtcConfig rtcType:(NSString *)rtcType;
 @end
 
 NS_ASSUME_NONNULL_END

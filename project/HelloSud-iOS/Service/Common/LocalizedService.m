@@ -4,9 +4,17 @@
 - (NSString *)localized {
     NSBundle *bundle = NSBundle.currentLanguageBundle;
     if (bundle) {
-        return [bundle localizedStringForKey:self value:self table:nil];
+        NSString *temp = [bundle localizedStringForKey:self value:self table:nil];
+        if ([temp isEqualToString:self]) {
+            NSBundle *enBundle = NSBundle.defaultLanguageBundle;
+            if (enBundle) {
+                return [enBundle localizedStringForKey:self value:self table:nil];
+            }
+        } else {
+            return temp;
+        }
     }
-    return NSLocalizedString(self, comment: self); 
+    return NSLocalizedString(self, comment: self);
 }
 /*
   Localizable.strings
@@ -303,6 +311,134 @@
 + (NSString *)dt_room_pk_invite { return @"dt_room_pk_invite".localized; }
 + (NSString *)dt_ticket_order_msg_fmt { return @"dt_ticket_order_msg_fmt".localized; }
 + (NSString *)dt_room_mic_game_ing { return @"dt_room_mic_game_ing".localized; }
+
+/// 1.4.0
++ (NSString *)dt_room_guess_more_activity { return @"dt_room_guess_more_activity".localized; }
++ (NSString *)dt_room_guess_aword { return @"dt_room_guess_aword".localized; }
++ (NSString *)dt_room_guess_join_now { return @"dt_room_guess_join_now".localized; }
++ (NSString *)dt_room_guess_remain { return @"dt_room_guess_remain".localized; }
++ (NSString *)dt_room_guess_people_limit { return @"dt_room_guess_people_limit".localized; }
++ (NSString *)dt_room_guess_fee { return @"dt_room_guess_fee".localized; }
++ (NSString *)dt_room_guess_activity { return @"dt_room_guess_activity".localized; }
++ (NSString *)dt_room_guess_cross_game { return @"dt_room_guess_cross_game".localized; }
++ (NSString *)dt_room_guess_add { return @"dt_room_guess_add".localized; }
++ (NSString *)dt_room_guess_ta_win { return @"dt_room_guess_ta_win".localized; }
++ (NSString *)dt_room_guess_win_pool { return @"dt_room_guess_win_pool".localized; }
++ (NSString *)dt_room_guess_had_support { return @"dt_room_guess_had_support".localized; }
++ (NSString *)dt_room_guess_limit_time { return @"dt_room_guess_limit_time".localized; }
++ (NSString *)dt_room_guess_play_now { return @"dt_room_guess_play_now".localized; }
++ (NSString *)dt_room_guess_give_more { return @"dt_room_guess_give_more".localized; }
++ (NSString *)dt_room_guess_support_now { return @"dt_room_guess_support_now".localized; }
++ (NSString *)dt_room_guess_king { return @"dt_room_guess_king".localized; }
++ (NSString *)dt_room_guess_big_rank { return @"dt_room_guess_big_rank".localized; }
++ (NSString *)dt_room_guess_rank_day { return @"dt_room_guess_rank_day".localized; }
++ (NSString *)dt_room_guess_rank_week { return @"dt_room_guess_rank_week".localized; }
++ (NSString *)dt_room_guess_win_round { return @"dt_room_guess_win_round".localized; }
++ (NSString *)dt_room_guess_winner { return @"dt_room_guess_winner".localized; }
++ (NSString *)dt_room_guess_will_win { return @"dt_room_guess_will_win".localized; }
++ (NSString *)dt_room_guess_game_winner { return @"dt_room_guess_game_winner".localized; }
++ (NSString *)dt_room_guess_get_win { return @"dt_room_guess_get_win".localized; }
++ (NSString *)dt_room_guess_win_lose { return @"dt_room_guess_win_lose".localized; }
++ (NSString *)dt_room_guess_select_player { return @"dt_room_guess_select_player".localized; }
++ (NSString *)dt_room_guess_five_award { return @"dt_room_guess_five_award".localized; }
++ (NSString *)dt_room_guess_self_win { return @"dt_room_guess_self_win".localized; }
++ (NSString *)dt_room_guess_not_open { return @"dt_room_guess_not_open".localized; }
++ (NSString *)dt_room_guess_open_now { return @"dt_room_guess_open_now".localized; }
++ (NSString *)dt_room_guess_gameing_not_open { return @"dt_room_guess_gameing_not_open".localized; }
++ (NSString *)dt_room_guess_gaming_not_close { return @"dt_room_guess_gaming_not_close".localized; }
++ (NSString *)dt_room_guess_auto_guess { return @"dt_room_guess_auto_guess".localized; }
++ (NSString *)dt_room_guess_close_auto { return @"dt_room_guess_close_auto".localized; }
++ (NSString *)dt_room_guess_waitting { return @"dt_room_guess_waitting".localized; }
++ (NSString *)dt_room_guess_had_buy { return @"dt_room_guess_had_buy".localized; }
++ (NSString *)dt_room_guess_game_round_state { return @"dt_room_guess_game_round_state".localized; }
++ (NSString *)dt_room_guess_never_giveup { return @"dt_room_guess_never_giveup".localized; }
++ (NSString *)dt_room_guess_they_guess { return @"dt_room_guess_they_guess".localized; }
++ (NSString *)dt_room_guess_one_more { return @"dt_room_guess_one_more".localized; }
++ (NSString *)dt_room_guess_win_now { return @"dt_room_guess_win_now".localized; }
++ (NSString *)dt_room_guess_next_win { return @"dt_room_guess_next_win".localized; }
++ (NSString *)dt_room_guess_not_guess { return @"dt_room_guess_not_guess".localized; }
++ (NSString *)dt_room_guess_win_good { return @"dt_room_guess_win_good".localized; }
++ (NSString *)dt_room_guess_over { return @"dt_room_guess_over".localized; }
++ (NSString *)dt_room_guess_self_win_five { return @"dt_room_guess_self_win_five".localized; }
++ (NSString *)dt_room_guess_you_better { return @"dt_room_guess_you_better".localized; }
++ (NSString *)dt_room_guess_next_guess { return @"dt_room_guess_next_guess".localized; }
++ (NSString *)dt_room_disco_good { return @"dt_room_disco_good".localized; }
++ (NSString *)dt_disco_right_now { return @"dt_disco_right_now".localized; }
++ (NSString *)dt_disco_rtc_tip { return @"dt_disco_rtc_tip".localized; }
++ (NSString *)dt_room_maku_join { return @"dt_room_maku_join".localized; }
++ (NSString *)dt_room_guess_stop { return @"dt_room_guess_stop".localized; }
++ (NSString *)dt_room_disco_rank { return @"dt_room_disco_rank".localized; }
++ (NSString *)dt_room_disco_show_tip { return @"dt_room_disco_show_tip".localized; }
++ (NSString *)dt_room_disco_win { return @"dt_room_disco_win".localized; }
++ (NSString *)dt_room_disco_good_anchor { return @"dt_room_disco_good_anchor".localized; }
++ (NSString *)dt_room_disco_get_times { return @"dt_room_disco_get_times".localized; }
++ (NSString *)dt_room_disco_invite { return @"dt_room_disco_invite".localized; }
++ (NSString *)dt_room_disco_rank_instrument { return @"dt_room_disco_rank_instrument".localized; }
++ (NSString *)dt_room_disco_rank_tip_one { return @"dt_room_disco_rank_tip_one".localized; }
++ (NSString *)dt_room_disco_rank_tip_two { return @"dt_room_disco_rank_tip_two".localized; }
++ (NSString *)dt_room_disco_rank_tip_thr { return @"dt_room_disco_rank_tip_thr".localized; }
++ (NSString *)dt_room_guess_no_more_money { return @"dt_room_guess_no_more_money".localized; }
++ (NSString *)dt_room_disco_open { return @"dt_room_disco_open".localized; }
++ (NSString *)dt_room_disco_close { return @"dt_room_disco_close".localized; }
++ (NSString *)dt_room_disco_confirm_close { return @"dt_room_disco_confirm_close".localized; }
++ (NSString *)dt_room_disco_keyword_move { return @"dt_room_disco_keyword_move".localized; }
++ (NSString *)dt_room_disco_keyword_up_sky { return @"dt_room_disco_keyword_up_sky".localized; }
++ (NSString *)dt_room_disco_keyword_witch_role { return @"dt_room_disco_keyword_witch_role".localized; }
++ (NSString *)dt_room_disco_keyword_work { return @"dt_room_disco_keyword_work".localized; }
++ (NSString *)dt_room_disco_keyword_unwork { return @"dt_room_disco_keyword_unwork".localized; }
++ (NSString *)dt_room_disco_keyword_focus { return @"dt_room_disco_keyword_focus".localized; }
++ (NSString *)dt_room_disco_tag_special { return @"dt_room_disco_tag_special".localized; }
++ (NSString *)dt_room_disco_tag_effect { return @"dt_room_disco_tag_effect".localized; }
++ (NSString *)dt_room_disco_no_menu { return @"dt_room_disco_no_menu".localized; }
++ (NSString *)dt_room_disco_rule { return @"dt_room_disco_rule".localized; }
++ (NSString *)dt_room_disco_menu_rule_one { return @"dt_room_disco_menu_rule_one".localized; }
++ (NSString *)dt_room_disco_menu_rule_two { return @"dt_room_disco_menu_rule_two".localized; }
++ (NSString *)dt_room_disco_menu_rule_thr { return @"dt_room_disco_menu_rule_thr".localized; }
++ (NSString *)dt_room_disco_dance_wait { return @"dt_room_disco_dance_wait".localized; }
++ (NSString *)dt_room_disco_rank_fee { return @"dt_room_disco_rank_fee".localized; }
++ (NSString *)dt_room_disco_operate_tip { return @"dt_room_disco_operate_tip".localized; }
++ (NSString *)dt_room_disco_fee_value { return @"dt_room_disco_fee_value".localized; }
++ (NSString *)dt_room_disco_keyword_top_five { return @"dt_room_disco_keyword_top_five".localized; }
++ (NSString *)dt_room_disco_waitting { return @"dt_room_disco_waitting".localized; }
++ (NSString *)dt_room_disco_dancing_fmt { return @"dt_room_disco_dancing_fmt".localized; }
++ (NSString *)dt_room_disco_tip_one_fmt { return @"dt_room_disco_tip_one_fmt".localized; }
++ (NSString *)dt_room_disco_tip_two_fmt { return @"dt_room_disco_tip_two_fmt".localized; }
++ (NSString *)dt_room_disco_tip_three_fmt { return @"dt_room_disco_tip_three_fmt".localized; }
++ (NSString *)dt_room_disco_tip_four_fmt { return @"dt_room_disco_tip_four_fmt".localized; }
++ (NSString *)dt_room_disco_tip_five_fmt { return @"dt_room_disco_tip_five_fmt".localized; }
++ (NSString *)dt_room_disco_countdown_fmt { return @"dt_room_disco_countdown_fmt".localized; }
++ (NSString *)dt_room_guess_win_msg_fmt { return @"dt_room_guess_win_msg_fmt".localized; }
++ (NSString *)dt_room_guess_diff_user_win_msg_fmt { return @"dt_room_guess_diff_user_win_msg_fmt".localized; }
++ (NSString *)dt_room_guess_enter_fmt { return @"dt_room_guess_enter_fmt".localized; }
++ (NSString *)dt_room_guess_coin_fmt { return @"dt_room_guess_coin_fmt".localized; }
++ (NSString *)dt_room_guess_support_fmt { return @"dt_room_guess_support_fmt".localized; }
++ (NSString *)dt_room_guess_distance_time_fmt { return @"dt_room_guess_distance_time_fmt".localized; }
++ (NSString *)dt_room_guess_your_support_fmt { return @"dt_room_guess_your_support_fmt".localized; }
++ (NSString *)dt_room_guess_win_me_fmt { return @"dt_room_guess_win_me_fmt".localized; }
++ (NSString *)dt_room_guess_guess_self_fmt { return @"dt_room_guess_guess_self_fmt".localized; }
++ (NSString *)dt_room_guess_confirm_coin_fmt { return @"dt_room_guess_confirm_coin_fmt".localized; }
++ (NSString *)dt_room_guess_close_fmt { return @"dt_room_guess_close_fmt".localized; }
++ (NSString *)dt_room_disco_dancing_minute_fmt { return @"dt_room_disco_dancing_minute_fmt".localized; }
++ (NSString *)dt_room_guess_had_support_fmt { return @"dt_room_guess_had_support_fmt".localized; }
++ (NSString *)dt_room_guess_thirdthhen_pool { return @"dt_room_guess_thirdthhen_pool".localized; }
++ (NSString *)dt_room_disco_menu_name { return @"dt_room_disco_menu_name".localized; }
++ (NSString *)dt_room_disco_dance_insert { return @"dt_room_disco_dance_insert".localized; }
++ (NSString *)dt_room_guess_already_join { return @"dt_room_guess_already_join".localized; }
++ (NSString *)dt_room_gift_send_fmt { return @"dt_room_gift_send_fmt".localized; }
++ (NSString *)dt_room_guess_time_remain_min { return @"dt_room_guess_time_remain_min".localized; }
++ (NSString *)dt_room_guess_time_remain_second { return @"dt_room_guess_time_remain_second".localized; }
+
+
+// 1.4.2
++ (NSString *)dt_room_disco_appointment_dance { return @"dt_room_disco_appointment_dance".localized; }
++ (NSString *)dt_room_disco_interactive { return @"dt_room_disco_interactive".localized; }
++ (NSString *)dt_room_disco_select_anchor { return @"dt_room_disco_select_anchor".localized; }
++ (NSString *)dt_room_disco_dance_duration { return @"dt_room_disco_dance_duration".localized; }
++ (NSString *)dt_room_disco_appointment_coin_fmt { return @"dt_room_disco_appointment_coin_fmt".localized; }
++ (NSString *)dt_room_disco_select_duration_tip { return @"dt_room_disco_select_duration_tip".localized; }
++ (NSString *)dt_room_disco_category_one { return @"dt_room_disco_category_one".localized; }
++ (NSString *)dt_room_disco_category_twn { return @"dt_room_disco_category_twn".localized; }
++ (NSString *)dt_room_disco_dance_name { return @"dt_room_disco_dance_name".localized; }
 
 
 @end

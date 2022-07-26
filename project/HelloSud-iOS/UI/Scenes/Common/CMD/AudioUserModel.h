@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *icon;
 @property(nonatomic, copy)NSString *roomID;
 @property(nonatomic, assign)NSInteger sex;
-
+/// 是否是机器人
+@property (nonatomic, assign)BOOL isRobot;
 /// 用户角色
 @property(nonatomic, assign)NSInteger roleType;
 + (instancetype)makeUserWithUserID:(NSString *)userID name:(NSString *)name icon:(NSString *)icon sex:(NSInteger)sex;

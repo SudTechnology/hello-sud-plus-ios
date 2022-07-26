@@ -197,6 +197,7 @@
     NSError *error = nil;
     
     [[[NIMSDK sharedSDK] chatManager] sendMessage:message toSession:session error:&error];
+    if (listener) listener(error == nil ? 0 : (int)error.code);
 }
 
 // 更新房间内用户总人数

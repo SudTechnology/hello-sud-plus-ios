@@ -11,7 +11,7 @@
 #import "TocketChooseModel.h"
 #import "DTRollTableView.h"
 #import "TicketJoinPopView.h"
-#import "TicketService.h"
+#import "TicketRoomService.h"
 
 @interface TicketChooseViewController ()
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -48,7 +48,7 @@
     [self.view addSubview:self.noticeView];
     [self setupContentItems];
     
-    self.noticeView.dataArray = [TicketService getTicketRewardAttributedStrArr];
+    self.noticeView.dataArray = [TicketRoomService getTicketRewardAttributedStrArr];
     [self.noticeView reloadData];
 }
 

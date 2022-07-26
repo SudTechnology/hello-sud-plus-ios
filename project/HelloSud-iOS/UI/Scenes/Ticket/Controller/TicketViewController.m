@@ -21,7 +21,7 @@
 
 /// 服务类，子类返回对应服务类型，用于构建对应场景服务
 - (Class)serviceClass {
-    return [TicketService class];
+    return [TicketRoomService class];
 }
 
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {

@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 用户管理模块
 @interface UserService : NSObject
+/// 当前账户金币，每次请求接口更新
+@property (nonatomic, assign)int64_t currentUserCoin;
 
 + (instancetype)shared;
 

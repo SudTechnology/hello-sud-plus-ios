@@ -23,6 +23,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取礼物信息
 /// @param giftID 礼物ID
 - (nullable GiftModel *)giftByID:(NSInteger)giftID;
+
+/// 拉取礼物列表
+/// @param gameId gameId
+/// @param sceneId sceneId
+/// @param finished finished
+/// @param failure failure
++ (void)reqGiftListWithGameId:(int64_t)gameId sceneId:(NSInteger)sceneId finished:(void (^)(NSArray<GiftModel *> *modelList))finished failure:(void (^)(NSError *error))failure;
 @end
 
 NS_ASSUME_NONNULL_END

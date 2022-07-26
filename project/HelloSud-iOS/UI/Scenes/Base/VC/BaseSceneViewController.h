@@ -167,15 +167,46 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param reloadGame 是否重新加载游戏
 - (void)updateGameRoomID:(NSString *)gameRoomID reloadGame:(BOOL)reloadGame;
 
+/// 将要发送消息
+/// @param msg msg
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void(^)(BOOL shouldSend))shouldSend;
+/// 已经发送消息
+/// @param msg msg
+- (void)onDidSendMsg:(RoomBaseCMDModel *)msg;
+/// 是否需要加载游戏，子类根据场景要求是否加载游戏，默认YES,加载
+- (BOOL)isNeedToLoadGame;
+/// 发送公屏文本消息
+/// @param content content
+- (void)sendContentMsg:(NSString *)content;
+/// 展示更多视图
+- (void)showMoreView;
+/// 是否需要展示礼物动效
+- (BOOL)isNeedToShowGiftEffect;
+/// 是否需要加载场景礼物
+- (BOOL)isNeedToLoadSceneGiftList;
+/// 是否是追加方式
+- (BOOL)isAppendSceneGiftList;
+/// 是否需要自动上麦
+- (BOOL)isNeedAutoUpMic;
+/// 处理礼物动效
+/// @param model model description
+- (void)handleGiftEffect:(RoomCmdSendGiftModel *)model;
+/// 获取空麦位
+- (nullable AudioRoomMicModel *)getOneEmptyMic;
 #pragma mark - SudFSMMGListener
 /// 游戏配置
 - (NSString *)onGetGameCfg;
+/// 处理游戏开始
+- (void)handleGameStared;
 
 /// 游戏：点击了准备按钮
 - (void)onGameMGCommonSelfClickReadyBtn;
 
 /// 游戏：点击了开始按钮
 - (void)onGameMGCommonSelfClickStartBtn;
+
+/// 加入状态处理发生变更
+- (void)playerIsInGameStateChanged:(NSString *)userId;
 
 @end
 

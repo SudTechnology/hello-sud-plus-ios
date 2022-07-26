@@ -16,6 +16,7 @@
 
 /// 流与ID关系[streamID:userID]
 @property(nonatomic, strong)NSMutableDictionary<NSString *, NSString *> *dicStreamUser;
+
 @end
 
 @implementation ZegoAudioEngineImpl
@@ -39,7 +40,6 @@
 - (void)setEventListener:(id<ISudAudioEventListener>)listener {
     _mISudAudioEventListener = listener;
 }
-
 
 - (void)initWithConfig:(AudioConfigModel *)model success:(nullable void(^)(void))success {
     if (model == nil)
@@ -194,6 +194,23 @@
     }
 }
 
+/// 观众开始拉流
+- (void)startPlayingStream:(NSString *)streamID view:(UIView *)view {
+    ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
+    if (engine != nil) {
+        ZegoCanvas *canvas = [ZegoCanvas canvasWithView:view];
+        [engine startPlayingStream:streamID canvas:canvas];
+    }
+}
+
+/// 观众停止拉流
+- (void)stopPlayingStream:(NSString *)streamID {
+    ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
+    if (engine != nil) {
+        [engine stopPlayingStream:streamID];
+    }
+}
+
 #pragma mark ZegoEventHandler
 
 - (void)onDebugError:(int)errorCode funcName:(NSString *)funcName info:(NSString *)info {
@@ -252,7 +269,7 @@
             switch (updateType) {
                 case ZegoUpdateTypeAdd:
                     for (ZegoStream * zegoStream in streamList) {
-                        [engine startPlayingStream:zegoStream.streamID];
+                        [engine startPlayingStream:zegoStream.streamID canvas:nil];
                     }
                     break;
                 case ZegoUpdateTypeDelete:
@@ -300,6 +317,18 @@
 - (void)onRoomOnlineUserCountUpdate:(int)count roomID:(NSString *)roomID {
     if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRoomOnlineUserCountUpdate:)]) {
         [self.mISudAudioEventListener onRoomOnlineUserCountUpdate:count];
+    }
+}
+
+- (void)onPlayerStateUpdate:(ZegoPlayerState) state errorCode:(int) errorCode extendedData:(nullable NSDictionary *) extendedData streamID:(NSString *) streamID {    
+    if (state == ZegoPlayerStatePlaying) {
+        if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onPlayingStreamingAdd:)]) {
+            [self.mISudAudioEventListener onPlayingStreamingAdd:streamID];
+        }
+    } else if (state == ZegoPlayerStateNoPlay) {
+        if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onPlayingStreamingDelete:)]) {
+            [self.mISudAudioEventListener onPlayingStreamingDelete:streamID];
+        }
     }
 }
 

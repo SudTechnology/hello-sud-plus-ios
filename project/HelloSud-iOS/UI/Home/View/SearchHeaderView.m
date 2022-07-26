@@ -89,7 +89,7 @@
 - (void)onTapHead:(id)tap {
     /// 展示用户金币信息
     UserDetailView *v = [[UserDetailView alloc] init];
-    [DTAlertView show:v rootView:AppUtil.currentWindow isHitTest:YES onCloseCallback:^{
+    [DTAlertView show:v rootView:AppUtil.currentWindow clickToClose:YES showDefaultBackground:YES onCloseCallback:^{
 
     }];
 }
@@ -162,9 +162,9 @@
     [self.searchTextField resignFirstResponder];
     NSString *searchText = self.searchTextField.text;
     WeakSelf
-    [AudioRoomService reqEnterRoom:searchText.longLongValue success:^{
+    [AudioRoomService reqEnterRoom:searchText.longLongValue isFromCreate:NO success:^{
         weakSelf.searchTextField.text = nil;
-    } fail:^(NSError *error) {
+    }                         fail:^(NSError *error) {
         weakSelf.searchTextField.text = @"";
         [weakSelf.searchBtn setHidden:true];
     }];

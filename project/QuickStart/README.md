@@ -18,11 +18,12 @@
   <details>
   <summary>详细描述</summary>
 
-      1.APP服务端实现了5个HTTP API；（接入信息表填的）
-      2.请使用APP客户端自己的appId、appKey、isTestEnv=true、bundleId(iOS)、applicationId(Android)；
-      3.请使用APP自己的服务端login/getCode接口，获取短期令牌code；
-      4.APP客户端和APP服务端联调5个HTTP API；
-      5.完成HTTP API联调；
+      1.APP服务端实现4个HTTP API；（接入信息表填的）
+      2.APP服务端实现login/getCode接口，获取短期令牌code；
+      3.请使用APP客户端自己的appId、appKey、isTestEnv=true、bundleId(iOS)、applicationId(Android)；
+      4.请使用APP自己的服务端login/getCode接口，获取短期令牌code；
+      5.APP客户端和APP服务端联调5个HTTP API；
+      6.完成HTTP API联调；
   </details>
 
 
@@ -67,7 +68,7 @@
         QuickStartViewController+Game.h
   ``` objc
     // TODO: 登录接入方服务器url
-    #define SUDMGP_GAME_LOGIN_URL          @"https://fat-mgp-hello.sudden.ltd/login/v2"
+    #define GAME_LOGIN_URL          @"https://fat-mgp-hello.sudden.ltd/login/v2"
 
     // TODO: 必须填写由SudMGP提供的appId 及 appKey
     #define SUDMGP_APP_ID                  @"1461564080052506636"

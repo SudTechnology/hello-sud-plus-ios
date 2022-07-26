@@ -68,7 +68,7 @@
         return;
     }
     NSDictionary *dicParam = @{@"user_id": userId};
-    [self postHttpRequestWithURL:SUDMGP_GAME_LOGIN_URL param:dicParam success:^(NSDictionary *rootDict) {
+    [self postHttpRequestWithURL:GAME_LOGIN_URL param:dicParam success:^(NSDictionary *rootDict) {
 
         NSDictionary *dic = [rootDict objectForKey:@"data"];
         /// 这里的code用于登录游戏sdk服务器
@@ -102,7 +102,7 @@
 
                if (retCode != 0) {
                    /// 初始化失败, 可根据业务重试
-                   NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@", retMsg);
+                   NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@(%@)", retMsg, @(retCode));
                    return;
                }
                NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
@@ -168,24 +168,20 @@
 
     GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
     // 游戏展示区域
-    GameViewSize *viewSize = [[GameViewSize alloc] init];
-    viewSize.width = screenSize.width * scale;
-    viewSize.height = screenSize.height * scale;
-    ViewGameRect *viewRect = [[ViewGameRect alloc] init];
+    m.view_size.width = screenSize.width * scale;
+    m.view_size.height = screenSize.height * scale;
     // 游戏内容布局安全区域，根据自身业务调整顶部间距
     // 顶部间距
-    viewRect.top = (statusBarHeight + 80) * scale;
+    m.view_game_rect.top = (statusBarHeight + 80) * scale;
     // 左边
-    viewRect.left = 0;
+    m.view_game_rect.left = 0;
     // 右边
-    viewRect.right = 0;
+    m.view_game_rect.right = 0;
     // 底部安全区域
-    viewRect.bottom = (safeArea.bottom + 100) * scale;
+    m.view_game_rect.bottom = (safeArea.bottom + 100) * scale;
 
     m.ret_code = 0;
     m.ret_msg = @"success";
-    m.view_size = viewSize;
-    m.view_game_rect = viewRect;
     [handle success:m.toJSON];
 }
 

@@ -66,4 +66,7 @@
     [super pushViewController:viewController animated:animated];
 }
 
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return self.topViewController.supportedInterfaceOrientations;
+}
 @end

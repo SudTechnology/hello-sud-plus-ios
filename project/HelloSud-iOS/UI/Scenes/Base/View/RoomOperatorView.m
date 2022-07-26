@@ -9,9 +9,7 @@
 #import "RoomGiftPannelView.h"
 
 @interface RoomOperatorView ()
-@property (nonatomic, strong) UIButton *voiceUpBtn;
-@property (nonatomic, strong) UIButton *giftBtn;
-@property (nonatomic, strong) UILabel *inputLabel;
+
 
 @end
 
@@ -99,6 +97,22 @@
             [_voiceUpBtn setTitle:NSString.dt_room_up_mic forState:UIControlStateNormal];
             [self.voiceUpBtn dt_setGradientBackgroundWithColors:@[[UIColor dt_colorWithHexString:@"#FFC243" alpha:1], [UIColor dt_colorWithHexString:@"#F38D2E" alpha:1]] locations:nil startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 0)];
             break;
+    }
+}
+
+/// 是否隐藏上麦按钮
+/// @param hidden
+- (void)hiddenVoiceBtn:(BOOL)hidden {
+    if (hidden) {
+        self.voiceUpBtn.hidden = hidden;
+        [self.inputLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(16);
+        }];
+    } else {
+        self.voiceUpBtn.hidden = hidden;
+        [self.inputLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(self.voiceUpBtn.mas_trailing).offset(12);
+        }];
     }
 }
 

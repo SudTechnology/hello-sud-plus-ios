@@ -80,9 +80,9 @@
 - (void)logoutRoom {
     [kAudioRoomService reqExitRoom:self.roomID.longLongValue];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
-    
-    [AudioEngineFactory.shared.audioEngine destroy];
-    [[IMRoomManager sharedInstance] destroy];
+    // 离开房间
+    [AudioEngineFactory.shared.audioEngine leaveRoom];
+    [[IMRoomManager sharedInstance] leaveRoom];
     [self logoutGame];
 }
 
@@ -95,6 +95,18 @@
 /// 停止音频采集
 - (void)stopCaptureAudioToASR {
     [AudioEngineFactory.shared.audioEngine stopPCMCapture];
+}
+
+/// 拉取视频流
+/// @param videoView 展示视频视图
+- (void)startToPullVideo:(UIView *)videoView streamID:(NSString *)streamID {
+    [AudioEngineFactory.shared.audioEngine startPlayingStream:streamID view:videoView];
+}
+
+/// 停止拉取视频流
+/// @param streamID 视频流ID
+- (void)stopPullVideoStream:(NSString *)streamID {
+    [AudioEngineFactory.shared.audioEngine stopPlayingStream:streamID];
 }
 
 #pragma mark delegate

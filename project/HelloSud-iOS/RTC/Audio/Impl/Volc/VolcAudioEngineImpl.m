@@ -135,6 +135,7 @@
     if (self.mEngine != nil) {
         [self.mEngine sendRoomMessage:command];
     }
+    if (listener) listener(0);
 }
 
 #pragma mark ---------------- ByteRTCEngineDelegate -------------------

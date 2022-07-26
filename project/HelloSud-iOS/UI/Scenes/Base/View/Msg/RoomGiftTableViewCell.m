@@ -9,13 +9,13 @@
 
 @implementation RoomGiftTableViewCell
 
-- (void)hsAddViews {
-    [super hsAddViews];
+- (void)dtAddViews {
+    [super dtAddViews];
     [self.msgContentView addSubview:self.msgLabel];
 }
 
-- (void)hsLayoutViews {
-    [super hsLayoutViews];
+- (void)dtLayoutViews {
+    [super dtLayoutViews];
     [self.msgLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(3, 3, 3, 5));
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
@@ -23,7 +23,7 @@
 
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.msgContentView.backgroundColor = [UIColor dt_colorWithHexString:@"#A99862" alpha:0.6];
 }
 

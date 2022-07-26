@@ -8,6 +8,8 @@
 #import "RoomNaviView.h"
 
 @interface RoomNaviView ()
+
+//@property (nonatomic, strong, readonly) UIImageView *onlineImageView;
 @property (nonatomic, strong) UILabel *roomNumLabel;
 @property (nonatomic, strong) UIImageView *onlineImageView;
 @property (nonatomic, strong) UILabel *onlineLabel;
@@ -32,7 +34,7 @@
         if (self.roomModeView.hidden) {
             make.size.mas_equalTo(CGSizeMake(0, 20));
         } else {
-            make.size.mas_greaterThanOrEqualTo(CGSizeMake(78, 20));
+            make.size.mas_greaterThanOrEqualTo(CGSizeMake(78, 20)).priorityHigh();
         }
     }];
     [self.roomModeImageView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -53,7 +55,7 @@
         if (self.roomModeView.hidden) {
             make.size.mas_equalTo(CGSizeMake(0, 20));
         } else {
-            make.size.mas_greaterThanOrEqualTo(CGSizeMake(78, 20));
+            make.size.mas_greaterThanOrEqualTo(CGSizeMake(78, 20)).priorityHigh();
         }
     }];
     [self.roomModeImageView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -64,10 +66,12 @@
 }
 
 - (void)dtAddViews {
-    [self addSubview:self.roomNameLabel];
-    [self addSubview:self.roomNumLabel];
-    [self addSubview:self.onlineImageView];
-    [self addSubview:self.onlineLabel];
+
+    [self addSubview:self.roomInfoView];
+    [self.roomInfoView addSubview:self.roomNameLabel];
+    [self.roomInfoView addSubview:self.roomNumLabel];
+    [self.roomInfoView addSubview:self.onlineImageView];
+    [self.roomInfoView addSubview:self.onlineLabel];
     [self addSubview:self.closeBtn];
     [self addSubview:self.roomModeView];
     [self.roomModeView addSubview:self.roomModeLabel];
@@ -97,15 +101,32 @@
 }
 
 - (void)dtLayoutViews {
-    [self.roomNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.roomNameLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.roomNumLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.onlineLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+
+    [self.roomNameLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.roomNumLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.onlineLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+
+    [self.roomInfoView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+
+    [self.roomInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
         make.top.mas_equalTo(6);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
-    [self.roomNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.mas_equalTo(16);
-        make.top.mas_equalTo(self.roomNameLabel.mas_bottom);
+    [self.roomNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(0);
+        make.top.mas_equalTo(6);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.trailing.mas_equalTo(@0);
+    }];
+    [self.roomNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(0);
+        make.top.mas_equalTo(self.roomNameLabel.mas_bottom);
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero).priorityHigh();
+        make.bottom.equalTo(@0);
     }];
     [self.onlineImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(self.roomNumLabel.mas_trailing).offset(6);
@@ -115,7 +136,8 @@
     [self.onlineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(self.onlineImageView.mas_trailing).offset(3);
         make.centerY.mas_equalTo(self.roomNumLabel);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero).priorityHigh();
+        make.trailing.mas_equalTo(@0);
     }];
     
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,6 +181,13 @@
         _roomNumLabel.font = [UIFont systemFontOfSize:10 weight:UIFontWeightRegular];
     }
     return _roomNumLabel;
+}
+
+- (UIView *)roomInfoView {
+    if (!_roomInfoView) {
+        _roomInfoView = [[UIView alloc] init];
+    }
+    return _roomInfoView;
 }
 
 - (UILabel *)onlineLabel {

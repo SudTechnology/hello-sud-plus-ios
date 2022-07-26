@@ -37,7 +37,7 @@
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/create-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         isReqCreate = NO;
         EnterRoomModel *model = (EnterRoomModel *)resp;
-        [AudioRoomService reqEnterRoom:model.roomId success:nil fail:nil];
+        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:YES success:nil fail:nil];
     } failure:^(NSError *error) {
         isReqCreate = NO;
     }];
@@ -45,22 +45,22 @@
 
 /// 请求进入房间
 /// @param roomId 房间ID
-+ (void)reqEnterRoom:(long)roomId success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
++ (void)reqEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
 
     // 如果存在挂起房间，则退出当前挂起房间
     if ([SuspendRoomView isShowSuspend]) {
         [SuspendRoomView exitRoom:^{
-            [self handleEnterRoom:roomId success:success fail:fail];
+            [self handleEnterRoom:roomId isFromCreate:isFromCreate success:success fail:fail];
         }];
         return;
     }
-    [self handleEnterRoom:roomId success:success fail:fail];
+    [self handleEnterRoom:roomId isFromCreate:isFromCreate success:success fail:fail];
 }
 
 /// 处理进入房间
 /// @param roomId 房间ID
-+ (void)handleEnterRoom:(long)roomId success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
++ (void)handleEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
 
     static BOOL isReqEnter = false;
@@ -83,7 +83,8 @@
     }
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/enter-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         isReqEnter = NO;
-        EnterRoomModel *model = (EnterRoomModel *)resp;
+        EnterRoomModel *model = (EnterRoomModel *) resp;
+        model.isFromCreate = isFromCreate;
         if (kAudioRoomService.currentRoomVC != nil) {
             NSLog(@"there is a AudioRoomViewController in the stack");
             return;
@@ -102,7 +103,7 @@
         if (success) {
             success();
         }
-    } failure:^(NSError *error) {
+    }                         failure:^(NSError *error) {
         isReqEnter = NO;
         if (fail) {
             fail(error);
@@ -133,9 +134,9 @@
     }
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/match-room/v1") param:dicParam respClass:MatchRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         MatchRoomModel *model = (MatchRoomModel *)resp;
-        [AudioRoomService reqEnterRoom:model.roomId success:^{
+        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:NO success:^{
             isMatchingRoom = NO;
-        } fail:^(NSError *error) {
+        }                         fail:^(NSError *error) {
             [ToastUtil show:[error debugDescription]];
             isMatchingRoom = NO;
         }];
@@ -159,31 +160,42 @@
 }
 
 
-
 /// 用户上麦或下麦
 /// @param roomId 房间ID
 /// @param micIndex 麦位索引
 /// @param handleType 0：上麦 1: 下麦
-- (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
+/// @param proxyUser 代理上麦用户
+- (void)reqSwitchMic:(long)roomId micIndex:(int)micIndex handleType:(int)handleType proxyUser:(AudioUserModel *)proxyUser success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
-    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/switch-mic/v1") param:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)} respClass:SwitchMicModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
-        SwitchMicModel *model = (SwitchMicModel *)resp;
+    NSMutableDictionary *dicParam = [[NSMutableDictionary alloc] initWithDictionary:@{@"roomId": @(roomId), @"micIndex": @(micIndex), @"handleType": @(handleType)}];
+    if (proxyUser) {
+        dicParam[@"userId"] = @(proxyUser.userID.integerValue);
+    }
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/switch-mic/v1") param:dicParam respClass:SwitchMicModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        SwitchMicModel *model = (SwitchMicModel *) resp;
         if (handleType == 0) {
             RoomCmdUpMicModel *upMicModel = [RoomCmdUpMicModel makeUpMicMsgWithMicIndex:micIndex];
             weakSelf.micIndex = micIndex;
             upMicModel.roleType = self.roleType;
             upMicModel.streamID = model.streamId;
-            [weakSelf.currentRoomVC sendMsg:upMicModel isAddToShow:NO];
+            if (proxyUser) {
+                upMicModel.roleType = 0;
+                upMicModel.sendUser = proxyUser;
+            }
+            [weakSelf.currentRoomVC sendMsg:upMicModel isAddToShow:NO finished:nil];
         } else {
             weakSelf.micIndex = -1;
             RoomCmdUpMicModel *downMicModel = [RoomCmdUpMicModel makeDownMicMsgWithMicIndex:micIndex];
             downMicModel.streamID = nil;
-            [weakSelf.currentRoomVC sendMsg:downMicModel isAddToShow:NO];
+            if (proxyUser) {
+                downMicModel.sendUser = proxyUser;
+            }
+            [weakSelf.currentRoomVC sendMsg:downMicModel isAddToShow:NO finished:nil];
         }
         if (success) {
             success();
         }
-    } failure:fail];
+    }                         failure:fail];
 }
 
 /// 查询房间麦位列表

@@ -19,6 +19,7 @@
     DDLogDebug(@"req api:%@, param:%@", api, param);
     [HttpRequest postRequestWithApi:api param:param success:^(NSDictionary *rootDict) {
 
+        DDLogDebug(@"req api:%@, rootDict:%@", api, rootDict);
         if ([respCls isSubclassOfClass:BaseRespModel.class]) {
             id temp = [respCls decodeModel:rootDict];
             BaseRespModel *resp = temp;

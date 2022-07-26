@@ -53,4 +53,17 @@
     [self addChildViewController:navGameList];
     [self addChildViewController:navSetting];
 }
+
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    UIViewController *visibleViewController = self.presentedViewController;
+    if (!visibleViewController || visibleViewController.isBeingDismissed || [visibleViewController isKindOfClass:UIAlertController.class]) {
+        visibleViewController = self.selectedViewController;
+    }
+    if ([visibleViewController isKindOfClass:NSClassFromString(@"AVFullScreenViewController")]) {
+        return visibleViewController.supportedInterfaceOrientations;
+    }
+
+    return [visibleViewController supportedInterfaceOrientations];
+}
 @end

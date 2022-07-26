@@ -35,6 +35,28 @@
     return m;
 }
 
+/// 获取礼物model
+- (GiftModel *)getGiftModel {
+    GiftModel *giftModel = nil;
+    if (self.type == 1) {
+        // 后台礼物
+        giftModel = [[GiftModel alloc] init];
+        if (self.animationUrl) {
+            NSURL *url = [[NSURL alloc] initWithString:self.animationUrl];
+            giftModel.animateType = url.pathExtension;
+        }
+        giftModel.animateURL = self.animationUrl;
+        giftModel.giftID = self.giftID;
+        giftModel.giftName = self.giftName;
+        giftModel.giftURL = self.giftUrl;
+        giftModel.smallGiftURL = self.giftUrl;
+    } else {
+        // 内置
+        giftModel = [GiftService.shared giftByID:self.giftID];
+    }
+    return giftModel;
+}
+
 - (CGFloat)caculateHeight {
     CGFloat h = [super caculateHeight];
     CGFloat yMargin = 3;
@@ -49,7 +71,7 @@
     if (!toUserName) {
         toUserName = @"";
     }
-    GiftModel *giftModel = [GiftService.shared giftByID:self.giftID];
+    GiftModel *giftModel = [self getGiftModel];
     if (giftModel) {
         giftName = giftModel.giftName;
     }
@@ -67,8 +89,11 @@
     attrGetName.yy_lineSpacing = 6;
     attrGetName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrGetName.yy_color = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
-    
-    UIImage *iconImage = giftModel.smallGiftURL.length > 0 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:giftModel.smallGiftURL]]] : [UIImage new];
+    NSURL *giftIconURL = nil;
+    if (giftModel.smallGiftURL.length > 0) {
+        giftIconURL = giftModel.smallGiftURL.dt_toURL;
+    }
+    UIImage *iconImage = giftIconURL ? [UIImage imageWithData:[NSData dataWithContentsOfURL:giftIconURL]] : [UIImage new];
     NSMutableAttributedString *attrGift = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(24, 20) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     
     NSMutableAttributedString *attrGiftCount = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"x%ld", self.giftCount]];

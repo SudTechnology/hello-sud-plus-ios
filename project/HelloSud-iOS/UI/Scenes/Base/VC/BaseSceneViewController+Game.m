@@ -35,10 +35,8 @@
 
 /// 游戏开始
 - (void)onGameStarted {
-    /// 如果当前用户在麦上，自动加入游戏
-    if ([self isInMic] && [self isAutoJoinGame]) {
-        [self notifyGameToJoin];
-    }
+    DDLogDebug(@"onGameStarted");
+    [self handleGameStared];
 }
 
 - (void)onGameDestroyed {
@@ -50,18 +48,15 @@
 - (void)onGetGameViewInfo:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
     CGFloat scale = [[UIScreen mainScreen] nativeScale];
     GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    GameViewSize *viewSize = [[GameViewSize alloc] init];
-    viewSize.width = kScreenWidth * scale;
-    viewSize.height = kScreenHeight * scale;
-    ViewGameRect *viewRect = [[ViewGameRect alloc] init];
-    viewRect.top = (kStatusBarHeight + 120) * scale;
-    viewRect.left = 0;
-    viewRect.bottom = (kAppSafeBottom + 150) * scale;
-    viewRect.right = 0;
+    m.view_size.width = kScreenWidth * scale;
+    m.view_size.height = kScreenHeight * scale;
+    m.view_game_rect.top = (kStatusBarHeight + 120) * scale;
+    m.view_game_rect.left = 0;
+    m.view_game_rect.bottom = (kAppSafeBottom + 150) * scale;
+    m.view_game_rect.right = 0;
+
     m.ret_code = 0;
     m.ret_msg = @"success";
-    m.view_size = viewSize;
-    m.view_game_rect = viewRect;
     [handle success:m.mj_JSONString];
 }
 
@@ -119,6 +114,7 @@
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
 - (void)onGameMGCommonGameState:(id<ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    DDLogDebug(@"onGameMGCommonGameState:%@", @(model.gameState));
     // 游戏进行开始时，把麦位缩小
     if (model.gameState == 1) {
         [self.gameMicContentView switchToSmallView];
@@ -198,6 +194,17 @@
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
+/// 元宇宙砂砂舞 指令回调  MG_COMMON_GAME_DISCO_ACTION
+- (void)onGameMGCommonGameDiscoAction:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionModel *)model {
+
+    DDLogDebug(@"onGameMGCommonGameDiscoAction: actionID:%@, isSuccess:%@", model.actionId, @(model.isSuccess));
+}
+
+/// 元宇宙砂砂舞 指令动作结束通知  MG_COMMON_GAME_DISCO_ACTION_END
+- (void)onGameMGCommonGameDiscoActionEnd:(nonnull id<ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionEndModel *)model {
+    DDLogDebug(@"onGameMGCommonGameDiscoActionEnd: actionID:%@, playerID:%@", model.actionId, model.playerId);
+}
+
 
 #pragma mark =======Comonn状态处理=======
 /// 公屏消息状态 ---> 添加公屏消息
@@ -239,6 +246,7 @@
         [self handleGameUpMic];
     }
     self.gameNumLabel.text = [NSString stringWithFormat:@"%@：%ld/%ld", NSString.dt_game_person_count, self.sudFSMMGDecorator.onlineUserIdList.count, self.totalGameUserCount];
+    [self playerIsInGameStateChanged:userId];
 }
 
 

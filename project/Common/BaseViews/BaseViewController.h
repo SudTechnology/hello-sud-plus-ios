@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dtConfigUI;
 /// 更新UI
 - (void)dtUpdateUI;
+/// 切换指定屏幕方向，需要supportedInterfaceOrientations中返回支持的方向
+/// @param orientation 指定方向
+- (void)dtSwitchOrientation:(UIInterfaceOrientation)orientation;
 @end
 
 NS_ASSUME_NONNULL_END

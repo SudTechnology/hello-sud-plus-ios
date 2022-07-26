@@ -32,6 +32,9 @@ typedef NS_ENUM(NSInteger, HSSVGAPlayerStateType) {
 /// @param loops 循环次数
 /// @param didFinished 播放结束
 - (void)play:(NSInteger)loops didFinished:(EmptyBlock)didFinished;
+
+/// 停止播放
+- (void)stop;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,35 +8,45 @@
 #import "BaseSceneViewController+IM.h"
 #import "IMRoomManager.h"
 
-@implementation BaseSceneViewController(IM)
+@implementation BaseSceneViewController (IM)
 
 /// 发送消息
 /// @param msg 消息体
 /// @param isAddToShow 是否公屏展示
-- (void)sendMsg:(RoomBaseCMDModel *)msg isAddToShow:(BOOL)isAddToShow {
+- (void)sendMsg:(RoomBaseCMDModel *)msg isAddToShow:(BOOL)isAddToShow finished:(void (^)(int errorCode))finished {
     msg.sendUser.roomID = self.roomID;
-    NSString *command = [[NSString alloc]initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
+    NSString *command = [[NSString alloc] initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
     DDLogDebug(@"send content:%@", command);
-    [AudioEngineFactory.shared.audioEngine sendCommand:command listener:^(int errorCode) {
-        DDLogDebug(@"send result:%d", errorCode);
-    }];
-    [self addMsg:msg isShowOnScreen:isAddToShow];
-    /// Game - 发送文本命中
-    if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
-        RoomCmdChatTextModel *m = (RoomCmdChatTextModel *)msg;
-        [self handleGameKeywordHitting:m.content];
-    } else if ([msg isKindOfClass:RoomCmdUpMicModel.class]) {
-        if (self.isEnteredRoom) {
-            RoomCmdUpMicModel *m = (RoomCmdUpMicModel *)msg;
-            if (m.cmd == CMD_UP_MIC_NOTIFY) {
-                if ([self isAutoJoinGame]) {
-                    [self notifyGameToJoin];
+    WeakSelf
+    [self onWillSendMsg:msg shouldSend:^(BOOL shouldSend) {
+        if (!shouldSend) {
+            return;
+        }
+        [AudioEngineFactory.shared.audioEngine sendCommand:command listener:^(int errorCode) {
+            DDLogDebug(@"send result:%d", errorCode);
+            [weakSelf onDidSendMsg:msg];
+            if (finished) finished(errorCode);
+        }];
+        [self addMsg:msg isShowOnScreen:isAddToShow];
+        /// Game - 发送文本命中
+        if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
+            RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
+            [self handleGameKeywordHitting:m.content];
+        } else if ([msg isKindOfClass:RoomCmdUpMicModel.class]) {
+            if (self.isEnteredRoom) {
+                RoomCmdUpMicModel *m = (RoomCmdUpMicModel *) msg;
+                if (m.cmd == CMD_UP_MIC_NOTIFY) {
+                    if ([self isAutoJoinGame]) {
+                        [self notifyGameToJoin];
+                    }
+                } else if (m.cmd == CMD_DOWN_MIC_NOTIFY) {
+                    [self notifyGameToExit];
                 }
-            } else if (m.cmd == CMD_DOWN_MIC_NOTIFY) {
-                [self notifyGameToExit];
             }
         }
-    }
+    }];
+
+
 }
 
 /// 发送跨房消息
@@ -48,7 +58,7 @@
         return;
     }
     msg.sendUser.roomID = self.roomID;
-    NSString *command = [[NSString alloc]initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
+    NSString *command = [[NSString alloc] initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
     DDLogDebug(@"send cross content, my roomId:%@, toRoomId:%@ \ncontent:%@", self.roomID, toRoomId, command);
     [IMRoomManager.sharedInstance sendXRoomCommand:toRoomId command:command listener:^(int errorCode) {
         DDLogDebug(@"send cross room:%@ msg result:%d", toRoomId, errorCode);
@@ -65,7 +75,7 @@
     AudioMsgSystemModel *msg = [AudioMsgSystemModel makeMsg:[NSString stringWithFormat:@"%@ %@", AppService.shared.login.loginUserInfo.name, NSString.dt_enter_room_tip]];
     [msg configBaseInfoWithCmd:CMD_ENTER_ROOM_NOTIFY];
     /// 公屏添加消息
-    [self sendMsg:msg isAddToShow:YES];
+    [self sendMsg:msg isAddToShow:YES finished:nil];
     /// 连接成功后拉取麦位列表
     [self reqMicList];
 }
@@ -105,24 +115,24 @@
     RoomBaseCMDModel *msgModel = nil;
     BOOL isShowOnScreen = YES;
     switch (cmd) {
-        case CMD_CHAT_TEXT_NOTIFY:{
+        case CMD_CHAT_TEXT_NOTIFY: {
             // 公屏消息
             RoomCmdChatTextModel *msgTextModel = [RoomCmdChatTextModel fromJSON:command];
             msgModel = msgTextModel;
         }
             break;
-        case CMD_SEND_GIFT_NOTIFY:{
+        case CMD_SEND_GIFT_NOTIFY: {
             // 礼物消息
             msgModel = [RoomCmdSendGiftModel fromJSON:command];
         }
             break;
-        case CMD_UP_MIC_NOTIFY:{
+        case CMD_UP_MIC_NOTIFY: {
             // 上麦消息
             msgModel = [RoomCmdUpMicModel fromJSON:command];
             isShowOnScreen = NO;
         }
             break;
-        case CMD_DOWN_MIC_NOTIFY:{
+        case CMD_DOWN_MIC_NOTIFY: {
             // 下麦消息
             msgModel = [RoomCmdUpMicModel fromJSON:command];
             isShowOnScreen = NO;
@@ -134,7 +144,7 @@
             [self handleChangeToGame:m.gameID];
         }
             break;
-            
+
         case CMD_ENTER_ROOM_NOTIFY: {
             // 进入房间
             AudioMsgSystemModel *m = [AudioMsgSystemModel fromJSON:command];
@@ -161,9 +171,10 @@
 }
 
 #pragma mark - 业务处理
+
 /// 加入游戏
 - (void)notifyGameToJoin {
-    
+
     if (![self.sudFSMMGDecorator isPlayerIn:AppService.shared.login.loginUserInfo.userID]) {
         if (self.sudFSMMGDecorator.gameStateType == GameStateTypeLeisure && !self.sudFSMMGDecorator.isInGame) {
             /// 上麦，就是加入游戏
@@ -187,7 +198,7 @@
 - (void)handleGameKeywordHitting:(NSString *)content {
 
     if (self.sudFSMMGDecorator.isHitBomb) {
-        if ([self isPureInt: content]) {
+        if ([self isPureInt:content]) {
             /// 关键词命中
             [self.sudFSTAPPDecorator notifyAppComonDrawTextHit:false keyWord:@"" text:content];
         }
@@ -199,8 +210,8 @@
     }
 }
 
-- (BOOL)isPureInt:(NSString *)string{
-    NSScanner* scan = [NSScanner scannerWithString:string];
+- (BOOL)isPureInt:(NSString *)string {
+    NSScanner *scan = [NSScanner scannerWithString:string];
     int val;
     return [scan scanInt:&val] && [scan isAtEnd];
 }

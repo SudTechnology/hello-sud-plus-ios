@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
 
 /// 服务类，子类返回对应服务类型，用于构建对应场景服务
 - (Class)serviceClass {
-    return [PKService class];
+    return [PKRoomService class];
 }
 
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {
@@ -182,6 +182,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+    [self.settingLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     CGFloat b = 150 + kAppSafeBottom;
     [self.pkView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(self.sceneView);
@@ -198,7 +199,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
         make.height.equalTo(@20);
         make.width.mas_greaterThanOrEqualTo(56);
         make.trailing.equalTo(self.naviView.roomModeView.mas_leading).offset(-10);
-        make.leading.greaterThanOrEqualTo(self.naviView.onlineImageView.mas_trailing).offset(10);
+        make.leading.greaterThanOrEqualTo(self.naviView.roomInfoView.mas_trailing).offset(10);
     }];
     [self.settingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@8);
@@ -309,7 +310,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
     NSString *roomID = self.otherUser.roomID;
     if (roomID.length > 0) {
         [self exitRoomFromSuspend:NO finished:^{
-            [AudioRoomService reqEnterRoom:roomID.longLongValue success:^{
+            [AudioRoomService reqEnterRoom:roomID.longLongValue isFromCreate:NO success:^{
 
             }                         fail:nil];
         }];
@@ -421,7 +422,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
         [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
         // 结束游戏
         if ([self.sudFSMMGDecorator isPlayerIsCaptain:AppService.shared.login.loginUserInfo.userID]) {
-            [self.sudFSTAPPDecorator notifyAppComonSetEnd];
+            [self.sudFSTAPPDecorator notifyAppCommonSelfEnd];
         }
         // 延迟关闭以便上面指令执行
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (100 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{

@@ -123,7 +123,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HSRoomInfoList *m = self.dataList[indexPath.row];
-    [AudioRoomService reqEnterRoom:m.roomId success:nil fail:nil];
+    if (m.sceneType == SceneTypeDanmaku && ![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
+        [ToastUtil show:NSString.dt_home_coming_soon];
+        return;
+    }
+    [AudioRoomService reqEnterRoom:m.roomId isFromCreate:NO success:nil fail:nil];
 }
 
 #pragma mark - lazy

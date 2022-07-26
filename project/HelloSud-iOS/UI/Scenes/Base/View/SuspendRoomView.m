@@ -5,9 +5,11 @@
 
 #import "SuspendRoomView.h"
 #import "BaseSceneViewController.h"
+#import "DanmakuRoomViewController.h"
 
 @interface SuspendRoomView ()
 @property(nonatomic, strong) UIButton *exitBtn;
+@property(nonatomic, strong)UIButton *closeVideoBtn;
 @property(nonatomic, strong) MarqueeLabel *nameLabel;
 @property(nonatomic, strong)BaseSceneViewController *vc;
 @end
@@ -22,12 +24,27 @@ static SuspendRoomView *g_suspendView = nil;
         UIWindow *win = AppUtil.currentWindow;
         if (win) {
             [win addSubview:g_suspendView];
-            [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(146);
-                make.height.mas_equalTo(44);
-                make.trailing.mas_equalTo(-16);
-                make.bottom.mas_equalTo(-155);
-            }];
+
+            if ([vc isKindOfClass:[DanmakuRoomViewController class]]) {
+                [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(224);
+                    make.height.mas_equalTo(126);
+                    make.trailing.mas_equalTo(-16);
+                    make.bottom.mas_equalTo(-155);
+                }];
+                DanmakuRoomViewController *danmakuRoomViewController = (DanmakuRoomViewController *)vc;
+                [g_suspendView showVideo:danmakuRoomViewController.videoView];
+                g_suspendView.layer.cornerRadius = 0;
+
+            } else {
+                g_suspendView.layer.cornerRadius = 8;
+                [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(146);
+                    make.height.mas_equalTo(44);
+                    make.trailing.mas_equalTo(-16);
+                    make.bottom.mas_equalTo(-155);
+                }];
+            }
         }
     }
     g_suspendView.vc = vc;
@@ -113,8 +130,19 @@ static SuspendRoomView *g_suspendView = nil;
 
 - (void)onTap:(UITapGestureRecognizer *)tap {
     if (self.vc) {
+        if (_closeVideoBtn) {
+            [_closeVideoBtn removeFromSuperview];
+        }
+        [self checkIfNeedToResetVideoView];
         [AppUtil.currentViewController.navigationController pushViewController:self.vc animated:YES];
         [SuspendRoomView close];
+    }
+}
+
+- (void)checkIfNeedToResetVideoView {
+    if ([self.vc isKindOfClass:[DanmakuRoomViewController class]]) {
+        DanmakuRoomViewController *danmakuRoomViewController = (DanmakuRoomViewController *) self.vc;
+        [danmakuRoomViewController resetVideoView];
     }
 }
 
@@ -137,7 +165,7 @@ static SuspendRoomView *g_suspendView = nil;
         }                completion:nil];
     } else if (pan.state == UIGestureRecognizerStateEnded || pan.state == UIGestureRecognizerStateCancelled) {
         CGRect frame = self.frame;
-        CGFloat roundEntryViewWidth = 158;
+        CGFloat roundEntryViewWidth = self.mj_w;
         CGFloat roundEntryViewMargin = 20;
         // 设置横向坐标
         if (point.x > kScreenWidth / 2) {
@@ -164,8 +192,42 @@ static SuspendRoomView *g_suspendView = nil;
 }
 
 - (void)onExit:(UIButton *)btn {
+    if (_closeVideoBtn) {
+        [_closeVideoBtn removeFromSuperview];
+    }
     [SuspendRoomView exitRoom:^{
     }];
+}
+
+- (void)onCloseBtnCLick:(UIButton *)btn {
+    if (_closeVideoBtn) {
+        [_closeVideoBtn removeFromSuperview];
+    }
+    [SuspendRoomView exitRoom:^{
+    }];
+}
+
+
+- (void)showVideo:(UIView *)videoView {
+    [self addSubview:videoView];
+    [self addSubview:self.closeVideoBtn];
+    [videoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.trailing.bottom.equalTo(@0);
+    }];
+    [self.closeVideoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.top.trailing.equalTo(@0);
+       make.width.height.equalTo(@24);
+    }];
+
+}
+
+- (UIButton *)closeVideoBtn {
+    if (!_closeVideoBtn) {
+        _closeVideoBtn = [[UIButton alloc] init];
+        [_closeVideoBtn setImage:[UIImage imageNamed:@"suspend_video_close"] forState:UIControlStateNormal];
+        [_closeVideoBtn addTarget:self action:@selector(onCloseBtnCLick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _closeVideoBtn;
 }
 
 - (UIButton *)exitBtn {

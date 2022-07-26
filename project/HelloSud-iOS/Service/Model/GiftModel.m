@@ -15,6 +15,10 @@
 
 @implementation GiftModel
 
+- (NSString *)giftKey {
+    return [NSString stringWithFormat:@"%@%@", @(self.type), @(self.giftID)];
+}
+
 /// 加载webp
 - (void)loadWebp:(nullable GiftLoadImageBlock)result {
     if (self.cacheWebpImage && result) {

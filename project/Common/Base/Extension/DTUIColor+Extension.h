@@ -45,6 +45,10 @@ NS_ASSUME_NONNULL_BEGIN
  @return 16进制字符串对应的颜色
  */
 +(UIColor *)dt_colorWithHexString:(NSString *)hex alpha:(float)opacity;
+
+/// 转换成图片
+/// @return 返回图片
+- (UIImage *)dt_toImage;
 @end
 
 NS_ASSUME_NONNULL_END

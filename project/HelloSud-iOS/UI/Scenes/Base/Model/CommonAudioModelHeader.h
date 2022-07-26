@@ -20,5 +20,7 @@
 #import "RoomCmdOrderOperateModel.h"
 #import "RoomCmdOrderCreateModel.h"
 #import "RoomCmdPKModel.h"
+#import "RoomCmdGuessBetNotifyModel.h"
+
 
 #endif /* CommonAudioModelHeader_h */

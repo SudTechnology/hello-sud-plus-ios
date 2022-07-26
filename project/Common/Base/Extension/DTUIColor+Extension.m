@@ -50,4 +50,16 @@
                             blue:((float)b / 255.0f)
                            alpha:opacity];
 }
+
+/// 转换成图片
+/// @return 返回图片
+- (UIImage *)dt_toImage {
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    [self setFill];
+    UIRectFill(rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 @end

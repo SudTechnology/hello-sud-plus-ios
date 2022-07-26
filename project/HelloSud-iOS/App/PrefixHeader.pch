@@ -51,6 +51,7 @@
 #import "ServiceConstHeader.h"
 #import "HSHttpService.h"
 #import "BaseSceneService.h"
+#import "WebpImageCacheService.h"
 
 /// Page
 #import "CommonRoomModelHeader.h"
@@ -58,11 +59,14 @@
 #import "../UI/Scenes/Base/SceneConstantHeader.h"
 #import "CommonAudioModelHeader.h"
 
-#import "SceneFactory.h"
 /// manager
 #import "RespUserInfoModel.h"
 #import "RespModel.h"
-
+#import "GuessModel.h"
+#import "RespDanmakuModel.h"
+#import "RespGiftListModel.h"
+#import "RespDiscoModel.h"
+#import "SceneFactory.h"
 
 #import "AppService.h"
 #import "UserService.h"
@@ -73,6 +77,5 @@
 
 #import "LoginService.h"
 #import "SettingsService.h"
-
 
 #endif /* PrefixHeader_pch */

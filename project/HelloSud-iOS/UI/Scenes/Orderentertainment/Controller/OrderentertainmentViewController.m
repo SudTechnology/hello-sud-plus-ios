@@ -217,7 +217,7 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
             msg.toUserNames = userNameList;
             [msg configBaseInfoWithCmd:CMD_ROOM_ORDER_USER];
             /// 公屏添加消息
-            [weakSelf sendMsg:msg isAddToShow:NO];
+            [weakSelf sendMsg:msg isAddToShow:NO finished:nil];
             [weakSelf showOrderMsg:msg];
             /// 下单
             [ToastUtil show:NSString.dt_room_order_placed];
@@ -251,8 +251,16 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
     }
 
     NSString *msgStr = [NSString stringWithFormat:NSString.dt_ticket_order_msg_fmt, m.sendUser.name, nameStr, m.gameName];
+    if (self.isJpanese) {
+        msgStr = [NSString stringWithFormat:NSString.dt_ticket_order_msg_fmt, m.sendUser.name, m.gameName, nameStr];
+    }
     AudioMsgSystemModel *msg = [AudioMsgSystemModel makeMsg:msgStr];
     [self addMsg:msg isShowOnScreen:true];
+}
+
+- (BOOL)isJpanese{
+    NSString *lang = NSBundle.currentLanguage;
+    return [lang hasPrefix:@"jp"];
 }
 
 - (void)handleBusyCommand:(NSInteger)cmd command:(NSString *)command {
@@ -328,7 +336,7 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
     msg.operate = operate;
     [msg configBaseInfoWithCmd:CMD_ROOM_ORDER_OPERATE];
     /// 公屏添加消息
-    [self sendMsg:msg isAddToShow:NO];
+    [self sendMsg:msg isAddToShow:NO finished:nil];
 }
 
 #pragma mark - Lazy

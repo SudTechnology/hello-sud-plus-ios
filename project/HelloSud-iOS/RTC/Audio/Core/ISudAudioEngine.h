@@ -11,7 +11,6 @@
 #import "AudioJoinRoomModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
 /// 多媒体语音引擎接口，多引擎实现以下接口
 @protocol ISudAudioEngine <NSObject>
 @required
@@ -66,6 +65,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 发送指令
 /// @param command 指令内容
 - (void)sendCommand:(NSString *)command listener:(void(^)(int))listener;
+
+#pragma mark -8. 直播接口
+/// 观众开始拉流
+- (void)startPlayingStream:(NSString *)streamID view:(UIView *)view;
+
+/// 观众停止拉流
+- (void)stopPlayingStream:(NSString *)streamID;
 
 @end
 

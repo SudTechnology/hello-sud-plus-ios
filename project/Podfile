@@ -1,5 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '9.0'
+#source 'https://github.com/CocoaPods/Specs.git'
 
 inhibit_all_warnings!
 
@@ -40,8 +41,8 @@ target 'HelloSud-iOS' do
   # SudMGP包装类
   pod 'SudMGPWrapper', :path => './'
   # RTC厂商引入
-  # zego语音SDK
-  pod 'ZegoExpressEngine/Audio', '~> 2.17.0'
+  # zego语音/视频SDK
+  pod 'ZegoExpressEngine', '~> 2.17.0'
   # zego IM SDK
   pod 'ZIM', '2.1.1'
   # agora语音SDK
@@ -57,7 +58,9 @@ target 'HelloSud-iOS' do
   # volc火山引擎SDK
   pod 'VolcEngineRTC', '3.37.101',:source => 'https://github.com/volcengine/volcengine-specs.git'
   # tx腾讯云SDK
-  pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
+  #pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
+  pod 'TXLiteAVSDK_TRTC', '10.2.11418'
+
 end
 
 # QuickStart

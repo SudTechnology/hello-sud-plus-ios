@@ -8,14 +8,14 @@
 #import "GameListTableViewCell.h"
 
 @interface GameListTableViewCell ()
-@property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, strong) UIImageView *iconImageView;
-@property (nonatomic, strong) DTPaddingLabel *roomTypeLabel;
-@property (nonatomic, strong) MarqueeLabel *roomNameLabel;
-@property (nonatomic, strong) UILabel *roomNumLabel;
-@property (nonatomic, strong) UILabel *onlineLabel;
-@property (nonatomic, strong) UIButton *enterRoomBtn;
-@property (nonatomic, strong) BaseView *maskView;
+@property(nonatomic, strong) UIView *containerView;
+@property(nonatomic, strong) UIImageView *iconImageView;
+@property(nonatomic, strong) DTPaddingLabel *roomTypeLabel;
+@property(nonatomic, strong) MarqueeLabel *roomNameLabel;
+@property(nonatomic, strong) UILabel *roomNumLabel;
+@property(nonatomic, strong) UILabel *onlineLabel;
+@property(nonatomic, strong) UIButton *enterRoomBtn;
+@property(nonatomic, strong) BaseView *maskView;
 @end
 
 @implementation GameListTableViewCell
@@ -26,17 +26,19 @@
     static NSDictionary *dicSencen = nil;
     if (!dicSencen) {
         dicSencen = @{
-            @(SceneTypeAudio):@"#8324DF",
-            @(SceneTypeOneOne):@"#1378F1",
-            @(SceneTypeTalent):@"#F7268B",
-            @(SceneTypeShow):@"#EC5420",
-            @(SceneTypeTicket):@"#E35017",
-            @(SceneTypeGuess):@"#FDAB26",
-            @(SceneTypeCross):@"#504EEB",
-            @(SceneTypeOrder):@"#27B7E8",
-            @(SceneTypeASR):@"#9622C1",
-            @(SceneTypeLeague):@"#CB1530",
-            @(SceneTypeCustom):@"#198DE2",
+                @(SceneTypeAudio): @"#8324DF",
+                @(SceneTypeOneOne): @"#1378F1",
+                @(SceneTypeTalent): @"#F7268B",
+                @(SceneTypeShow): @"#EC5420",
+                @(SceneTypeTicket): @"#E35017",
+                @(SceneTypeGuess): @"#FDAB26",
+                @(SceneTypeCross): @"#504EEB",
+                @(SceneTypeOrder): @"#27B7E8",
+                @(SceneTypeASR): @"#9622C1",
+                @(SceneTypeLeague): @"#CB1530",
+                @(SceneTypeCustom): @"#198DE2",
+                @(SceneTypeDanmaku): @"#00CBD2",
+                @(SceneTypeDisco): @"#DD01CB",
         };
     }
     NSString *colorStr = dicSencen[@(sceneType)];
@@ -57,17 +59,17 @@
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld%@", m.memberCount, NSString.dt_room_list_users];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.roomPic]];
     self.roomTypeLabel.text = m.sceneTag;
-    
+
     self.roomTypeLabel.textColor = UIColor.whiteColor;
     self.roomTypeLabel.backgroundColor = HEX_COLOR([GameListTableViewCell tagColor:m.sceneType]);
 }
 
-- (void)hsConfigUI {
+- (void)dtConfigUI {
     self.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
     self.contentView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
-- (void)hsAddViews {
+- (void)dtAddViews {
     [self.contentView addSubview:self.containerView];
     [self.containerView addSubview:self.iconImageView];
     [self.containerView addSubview:self.roomTypeLabel];
@@ -77,7 +79,7 @@
     [self.containerView addSubview:self.enterRoomBtn];
 }
 
-- (void)hsLayoutViews {
+- (void)dtLayoutViews {
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 8, 0));
     }];
@@ -92,7 +94,7 @@
         make.width.mas_greaterThanOrEqualTo(0);
         make.height.mas_equalTo(20);
     }];
-    
+
     [self.roomNameLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.roomNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.iconImageView.mas_top).offset(3);
@@ -112,7 +114,7 @@
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
         make.trailing.mas_lessThanOrEqualTo(self.enterRoomBtn.mas_leading);
     }];
-    
+
     [self.enterRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(-12);
         make.trailing.mas_equalTo(-16);

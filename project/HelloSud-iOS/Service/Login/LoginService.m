@@ -8,13 +8,13 @@
 #import "LoginService.h"
 
 /// 配置信息缓存key
-#define kKeyRefreshToken @"key_refresh_token"
+#define kKeyRefreshToken [self envKey:@"key_refresh_token"]
 /// 用户信息缓存key
-#define kKeyLoginUserInfo @"key_login_user_info"
+#define kKeyLoginUserInfo [self envKey:@"key_login_user_info"]
 /// 用户是否登录缓存key
-#define kKeyLoginIsLogin @"key_login_isLogin"
+#define kKeyLoginIsLogin [self envKey:@"key_login_isLogin"]
 /// 用户是否登录token缓存key
-#define kKeyLoginToken @"key_login_token"
+#define kKeyLoginToken [self envKey:@"key_login_token"]
 
 /// token刷新通知
 NSString *const TOKEN_REFRESH_SUCCESS_NTF = @"TOKEN_REFRESH_SUCCESS_NTF";
@@ -30,6 +30,17 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         service = LoginService.new;
     });
     return service;
+}
+
+/// 环境隔离key
+/// @param key key
+/// @return
+- (NSString *)envKey:(NSString *)key {
+#if DEBUG
+    return [NSString stringWithFormat:@"debug_%@", key];
+#else
+    return [NSString stringWithFormat:@"%@", key];
+#endif
 }
 
 - (void)config {

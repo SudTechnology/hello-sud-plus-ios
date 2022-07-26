@@ -65,7 +65,7 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 
     _isAgreement = [NSUserDefaults.standardUserDefaults boolForKey:kKeyLoginAgreement];
 
-    NSString *cacheRTCType = [NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
+    NSString *cacheRTCType = nil;//[NSUserDefaults.standardUserDefaults stringForKey:kKeyCurrentRTCType];
     NSString *configStr = [NSUserDefaults.standardUserDefaults stringForKey:kKeyConfigModel];
     if (configStr) {
         _configModel = [ConfigModel mj_objectWithKeyValues:configStr];
@@ -86,8 +86,8 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 
 - (void)setRtcType:(NSString *)rtcType {
     _rtcType = rtcType;
-    [NSUserDefaults.standardUserDefaults setObject:rtcType forKey:kKeyCurrentRTCType];
-    [NSUserDefaults.standardUserDefaults synchronize];
+//    [NSUserDefaults.standardUserDefaults setObject:rtcType forKey:kKeyCurrentRTCType];
+//    [NSUserDefaults.standardUserDefaults synchronize];
 }
 
 

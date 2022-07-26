@@ -21,5 +21,13 @@
     }
 }
 
-
+/// 主线程延迟回调
+/// @param second 秒
+/// @param callback 回调
++(void)dispatchMainAfter:(NSTimeInterval)second callback:(void(^)(void))callback {
+    // 延迟关闭以便上面指令执行
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (second * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (callback) callback();
+    });
+}
 @end

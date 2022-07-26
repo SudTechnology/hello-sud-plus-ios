@@ -11,6 +11,9 @@
 #import "OrderentertainmentViewController.h"
 #import "CrossRoomViewController.h"
 #import "CustomRoomViewController.h"
+#import "GuessRoomViewController.h"
+#import "DanmakuRoomViewController.h"
+#import "DiscoRoomViewController.h"
 
 @implementation SceneFactory {
 
@@ -36,6 +39,15 @@
             break;
         case SceneTypeCustom:
             vc = [[CustomRoomViewController alloc]init];
+            break;
+        case SceneTypeGuess:
+            vc = [[GuessRoomViewController alloc]init];
+            break;
+        case SceneTypeDanmaku:
+            vc = [[DanmakuRoomViewController alloc]init];
+            break;
+        case SceneTypeDisco:
+            vc = [[DiscoRoomViewController alloc]init];
             break;
         default:
             vc = [[BaseSceneViewController alloc] init];

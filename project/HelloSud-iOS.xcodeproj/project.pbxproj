@@ -112,7 +112,7 @@
 		44BC48E228153ABB00E4E3F7 /* RoomOrderCreateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BC48E128153ABB00E4E3F7 /* RoomOrderCreateModel.m */; };
 		44BC48E52815433400E4E3F7 /* RoomCmdOrderCreateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BC48E42815433400E4E3F7 /* RoomCmdOrderCreateModel.m */; };
 		44BC48E8281543FE00E4E3F7 /* RoomCmdOrderOperateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BC48E7281543FE00E4E3F7 /* RoomCmdOrderOperateModel.m */; };
-		44C8FF9227F318A70030ED40 /* TicketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C8FF9127F318A70030ED40 /* TicketService.m */; };
+		44C8FF9227F318A70030ED40 /* TicketRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C8FF9127F318A70030ED40 /* TicketRoomService.m */; };
 		44D9F3A5280FB0DB000B14B5 /* CustomRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D9F3A4280FB0DB000B14B5 /* CustomRoomViewController.m */; };
 		44D9F3A8280FB0FB000B14B5 /* GameConfigTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D9F3A7280FB0FB000B14B5 /* GameConfigTableViewCell.m */; };
 		44D9F3AB280FC08C000B14B5 /* GameConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D9F3AA280FC08C000B14B5 /* GameConfigViewController.m */; };
@@ -135,14 +135,59 @@
 		6C076ED427A274FE00650209 /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED327A274FE00650209 /* UserService.m */; };
 		6C076ED727A298FC00650209 /* GameService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED627A298FC00650209 /* GameService.m */; };
 		6C076EDA27A2993C00650209 /* RespGameInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C076ED927A2993C00650209 /* RespGameInfoModel.m */; };
+		6C097D152876726400D105A7 /* DiscoRankTipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C097D142876726400D105A7 /* DiscoRankTipViewController.m */; };
 		6C192E4D279523B000553034 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E4C279523B000553034 /* AppDelegate.m */; };
 		6C192E56279523B000553034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E54279523B000553034 /* Main.storyboard */; };
 		6C192E58279523B100553034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E57279523B100553034 /* Assets.xcassets */; };
 		6C192E5B279523B100553034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E59279523B100553034 /* LaunchScreen.storyboard */; };
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
 		6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */; };
+		6C4607AA285083CB005C99EF /* GuessRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607A9285083CB005C99EF /* GuessRankViewController.m */; };
+		6C4607AD2850A818005C99EF /* GuessRankContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AC2850A817005C99EF /* GuessRankContentView.m */; };
+		6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AF28518FB7005C99EF /* GuessRankHeaderView.m */; };
+		6C4607B32851908F005C99EF /* GuessRankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607B22851908F005C99EF /* GuessRankTableViewCell.m */; };
+		6C4607B628519618005C99EF /* RankHeadItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607B528519618005C99EF /* RankHeadItemView.m */; };
+		6C4607B928519FB3005C99EF /* RankNumItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607B828519FB3005C99EF /* RankNumItemView.m */; };
+		6C4607BC2851D29F005C99EF /* GuessRankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607BB2851D29E005C99EF /* GuessRankModel.m */; };
+		6C4607C12851F725005C99EF /* DanmakuRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607C02851F725005C99EF /* DanmakuRoomViewController.m */; };
+		6C4607C528520175005C99EF /* DanmakuQuickSendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607C428520175005C99EF /* DanmakuQuickSendView.m */; };
+		6C4607C828520D22005C99EF /* GuessRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607C728520D22005C99EF /* GuessRoomService.m */; };
+		6C4607CB2852DEAE005C99EF /* GuessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607CA2852DEAE005C99EF /* GuessModel.m */; };
+		6C4607FC285346BF005C99EF /* QuickSendEffectColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607FB285346BE005C99EF /* QuickSendEffectColCell.m */; };
+		6C4607FF28572099005C99EF /* GuessMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607FE28572099005C99EF /* GuessMineView.m */; };
+		6C460802285727B7005C99EF /* SwitchAutoGuessPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460801285727B7005C99EF /* SwitchAutoGuessPopView.m */; };
+		6C46080528583A30005C99EF /* GuessSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46080428583A2F005C99EF /* GuessSelectPopView.m */; };
+		6C460808285840B4005C99EF /* GuessSelectColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460807285840B4005C99EF /* GuessSelectColCell.m */; };
+		6C46080B285899E6005C99EF /* GuessResultPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46080A285899E6005C99EF /* GuessResultPopView.m */; };
+		6C46080E2858A452005C99EF /* GuessResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46080D2858A452005C99EF /* GuessResultTableViewCell.m */; };
+		6C4608112859D26F005C99EF /* RoomCmdGuessBetNotifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4608102859D26E005C99EF /* RoomCmdGuessBetNotifyModel.m */; };
+		6C460814285B1DF3005C99EF /* DanmakuRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460813285B1DF2005C99EF /* DanmakuRoomService.m */; };
+		6C460817285B3039005C99EF /* RespDanmakuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460816285B3039005C99EF /* RespDanmakuModel.m */; };
+		6C46081A2860165F005C99EF /* QuickSendJoinColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4608192860165E005C99EF /* QuickSendJoinColCell.m */; };
+		6C46081D2861ABB0005C99EF /* LandscapePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46081C2861ABAE005C99EF /* LandscapePopView.m */; };
+		6C4608202862B025005C99EF /* LandscapeNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46081F2862B024005C99EF /* LandscapeNaviView.m */; };
+		6C46082328630CD7005C99EF /* RespGiftListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46082228630CD6005C99EF /* RespGiftListModel.m */; };
+		6C4608262864062D005C99EF /* LandscapeGuideTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4608252864062D005C99EF /* LandscapeGuideTipView.m */; };
+		6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460828286441B4005C99EF /* WebpImageCacheService.m */; };
+		6C46082D28658E80005C99EF /* DiscoRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46082C28658E7F005C99EF /* DiscoRoomViewController.m */; };
+		6C460832286AD41B005C99EF /* DiscoRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460830286AD41A005C99EF /* DiscoRankViewController.m */; };
+		6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */; };
+		6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */; };
+		6C460865286D82BA005C99EF /* DiscoNaviRankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460864286D82BA005C99EF /* DiscoNaviRankView.m */; };
+		6C460868286D9982005C99EF /* DiscoRankHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460867286D9981005C99EF /* DiscoRankHeadView.m */; };
+		6C46086B286DAAF0005C99EF /* DiscoRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46086A286DAAF0005C99EF /* DiscoRoomService.m */; };
+		6C46086E286DAC76005C99EF /* DiscoRankPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46086D286DAC76005C99EF /* DiscoRankPopView.m */; };
+		6C460871286DB5CF005C99EF /* DiscoRankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */; };
+		6C460875286DB610005C99EF /* DiscoRankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460874286DB610005C99EF /* DiscoRankModel.m */; };
+		6C460878286E9CCD005C99EF /* DiscoAnchorDatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460877286E9CCD005C99EF /* DiscoAnchorDatingView.m */; };
+		6C46087B286EA886005C99EF /* DiscoPopMenuListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */; };
+		6C46087E286ECC2D005C99EF /* DiscoMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */; };
+		6C460881286ECC8A005C99EF /* DiscoMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460880286ECC8A005C99EF /* DiscoMenuModel.m */; };
+		6C460884286EFA22005C99EF /* DiscoMenuRuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460883286EFA21005C99EF /* DiscoMenuRuleView.m */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
+		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
+		6CCF8ACA287A464900DB3AB8 /* DiscoRankTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCF8AC9287A464900DB3AB8 /* DiscoRankTipView.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
 		6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85627BE37D600D8F76C /* SettingsService.m */; };
 		6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87227BF42B200D8F76C /* NeteaseAudioEngineImpl.m */; };
@@ -229,19 +274,35 @@
 		6CE6CD77283F66680026BDAB /* QuickStartViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD76283F66670026BDAB /* QuickStartViewController+Game.m */; };
 		6CE6CD7C283F68330026BDAB /* QSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD7B283F68330026BDAB /* QSAppPreferences.m */; };
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
+		BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */; };
+		BC210093C2C7796FBA9F334C /* DiscoGameInteractivePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */; };
 		BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */; };
 		BC21032F94AB142E1BAA2114 /* PKRoomListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109B31F63F31616E3D68E /* PKRoomListCell.m */; };
-		BC2104A997878EE07744E080 /* PKService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DBB3E69BCD73E9DC870 /* PKService.m */; };
+		BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */; };
+		BC2104A997878EE07744E080 /* PKRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */; };
 		BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210337708736FFF222750A /* BaseSceneService.m */; };
 		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
+		BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */; };
+		BC210743E83852E3D938F5A9 /* DiscoInteractiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */; };
+		BC21076C5084AD192F038DA8 /* DiscoSelectAnchorColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */; };
+		BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */; };
+		BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */; };
+		BC210819F69EB53104902350 /* DiscoAppointmentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */; };
 		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
 		BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */; };
 		BC21098A0CA7595992F3EC61 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */; };
 		BC2109B53CC40DBF0DEB10B2 /* RoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105467EA8857361624481 /* RoomMoreView.m */; };
+		BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */; };
+		BC210A75257DF698A543C29A /* DiscoInteractiveColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */; };
 		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
 		BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
+		BC210D9F0C69893639DD84A5 /* HomeGuessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21056B5487F677973E97B8 /* HomeGuessCell.m */; };
 		BC210E3D2377EDF7498C2DF1 /* PKGameEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */; };
+		BC210E9E33806A6BFD2AE89A /* MoreGuessCoinItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */; };
+		BC210F738CED39591CB7541D /* MoreGuessCoinPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */; };
+		BC210F74B7434253E2FEF91D /* GuessRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */; };
+		BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */; };
 		BC210FF63EC24685CBC7FBAC /* SuspendRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */; };
 		E51A737828091CD00097007C /* ZIMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51A737728091CD00097007C /* ZIMManager.m */; };
 		E551BF31281500900046D417 /* IMRoomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E551BF30281500900046D417 /* IMRoomManager.m */; };
@@ -504,8 +565,8 @@
 		44BC48E42815433400E4E3F7 /* RoomCmdOrderCreateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCmdOrderCreateModel.m; sourceTree = "<group>"; };
 		44BC48E6281543FE00E4E3F7 /* RoomCmdOrderOperateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCmdOrderOperateModel.h; sourceTree = "<group>"; };
 		44BC48E7281543FE00E4E3F7 /* RoomCmdOrderOperateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCmdOrderOperateModel.m; sourceTree = "<group>"; };
-		44C8FF9027F318A70030ED40 /* TicketService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketService.h; sourceTree = "<group>"; };
-		44C8FF9127F318A70030ED40 /* TicketService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketService.m; sourceTree = "<group>"; };
+		44C8FF9027F318A70030ED40 /* TicketRoomService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketRoomService.h; sourceTree = "<group>"; };
+		44C8FF9127F318A70030ED40 /* TicketRoomService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketRoomService.m; sourceTree = "<group>"; };
 		44D9F3A3280FB0DB000B14B5 /* CustomRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomRoomViewController.h; sourceTree = "<group>"; };
 		44D9F3A4280FB0DB000B14B5 /* CustomRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomRoomViewController.m; sourceTree = "<group>"; };
 		44D9F3A6280FB0FB000B14B5 /* GameConfigTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfigTableViewCell.h; sourceTree = "<group>"; };
@@ -554,6 +615,8 @@
 		6C076ED627A298FC00650209 /* GameService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameService.m; sourceTree = "<group>"; };
 		6C076ED827A2993C00650209 /* RespGameInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespGameInfoModel.h; sourceTree = "<group>"; };
 		6C076ED927A2993C00650209 /* RespGameInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespGameInfoModel.m; sourceTree = "<group>"; };
+		6C097D132876726400D105A7 /* DiscoRankTipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankTipViewController.h; sourceTree = "<group>"; };
+		6C097D142876726400D105A7 /* DiscoRankTipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankTipViewController.m; sourceTree = "<group>"; };
 		6C192E48279523B000553034 /* HelloSud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C192E4B279523B000553034 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C192E4C279523B000553034 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -567,11 +630,99 @@
 		6C192E882797E2C700553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraAudioEngineImpl.h; sourceTree = "<group>"; };
 		6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgoraAudioEngineImpl.m; sourceTree = "<group>"; };
+		6C4607A8285083CB005C99EF /* GuessRankViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankViewController.h; sourceTree = "<group>"; };
+		6C4607A9285083CB005C99EF /* GuessRankViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankViewController.m; sourceTree = "<group>"; };
+		6C4607AB2850A817005C99EF /* GuessRankContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankContentView.h; sourceTree = "<group>"; };
+		6C4607AC2850A817005C99EF /* GuessRankContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankContentView.m; sourceTree = "<group>"; };
+		6C4607AE28518FB7005C99EF /* GuessRankHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankHeaderView.h; sourceTree = "<group>"; };
+		6C4607AF28518FB7005C99EF /* GuessRankHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankHeaderView.m; sourceTree = "<group>"; };
+		6C4607B12851908F005C99EF /* GuessRankTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankTableViewCell.h; sourceTree = "<group>"; };
+		6C4607B22851908F005C99EF /* GuessRankTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankTableViewCell.m; sourceTree = "<group>"; };
+		6C4607B428519618005C99EF /* RankHeadItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankHeadItemView.h; sourceTree = "<group>"; };
+		6C4607B528519618005C99EF /* RankHeadItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankHeadItemView.m; sourceTree = "<group>"; };
+		6C4607B728519FB2005C99EF /* RankNumItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankNumItemView.h; sourceTree = "<group>"; };
+		6C4607B828519FB3005C99EF /* RankNumItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankNumItemView.m; sourceTree = "<group>"; };
+		6C4607BA2851D29E005C99EF /* GuessRankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankModel.h; sourceTree = "<group>"; };
+		6C4607BB2851D29E005C99EF /* GuessRankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankModel.m; sourceTree = "<group>"; };
+		6C4607BF2851F725005C99EF /* DanmakuRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanmakuRoomViewController.h; sourceTree = "<group>"; };
+		6C4607C02851F725005C99EF /* DanmakuRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanmakuRoomViewController.m; sourceTree = "<group>"; };
+		6C4607C328520175005C99EF /* DanmakuQuickSendView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanmakuQuickSendView.h; sourceTree = "<group>"; };
+		6C4607C428520175005C99EF /* DanmakuQuickSendView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanmakuQuickSendView.m; sourceTree = "<group>"; };
+		6C4607C628520D22005C99EF /* GuessRoomService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRoomService.h; sourceTree = "<group>"; };
+		6C4607C728520D22005C99EF /* GuessRoomService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRoomService.m; sourceTree = "<group>"; };
+		6C4607C92852DEAE005C99EF /* GuessModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessModel.h; sourceTree = "<group>"; };
+		6C4607CA2852DEAE005C99EF /* GuessModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessModel.m; sourceTree = "<group>"; };
+		6C4607FA285346BE005C99EF /* QuickSendEffectColCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickSendEffectColCell.h; sourceTree = "<group>"; };
+		6C4607FB285346BE005C99EF /* QuickSendEffectColCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickSendEffectColCell.m; sourceTree = "<group>"; };
+		6C4607FD28572099005C99EF /* GuessMineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessMineView.h; sourceTree = "<group>"; };
+		6C4607FE28572099005C99EF /* GuessMineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessMineView.m; sourceTree = "<group>"; };
+		6C460800285727B7005C99EF /* SwitchAutoGuessPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchAutoGuessPopView.h; sourceTree = "<group>"; };
+		6C460801285727B7005C99EF /* SwitchAutoGuessPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchAutoGuessPopView.m; sourceTree = "<group>"; };
+		6C46080328583A2F005C99EF /* GuessSelectPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessSelectPopView.h; sourceTree = "<group>"; };
+		6C46080428583A2F005C99EF /* GuessSelectPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessSelectPopView.m; sourceTree = "<group>"; };
+		6C460806285840B4005C99EF /* GuessSelectColCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessSelectColCell.h; sourceTree = "<group>"; };
+		6C460807285840B4005C99EF /* GuessSelectColCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessSelectColCell.m; sourceTree = "<group>"; };
+		6C460809285899E6005C99EF /* GuessResultPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessResultPopView.h; sourceTree = "<group>"; };
+		6C46080A285899E6005C99EF /* GuessResultPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessResultPopView.m; sourceTree = "<group>"; };
+		6C46080C2858A452005C99EF /* GuessResultTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessResultTableViewCell.h; sourceTree = "<group>"; };
+		6C46080D2858A452005C99EF /* GuessResultTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessResultTableViewCell.m; sourceTree = "<group>"; };
+		6C46080F2859D26E005C99EF /* RoomCmdGuessBetNotifyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCmdGuessBetNotifyModel.h; sourceTree = "<group>"; };
+		6C4608102859D26E005C99EF /* RoomCmdGuessBetNotifyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCmdGuessBetNotifyModel.m; sourceTree = "<group>"; };
+		6C460812285B1DF2005C99EF /* DanmakuRoomService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanmakuRoomService.h; sourceTree = "<group>"; };
+		6C460813285B1DF2005C99EF /* DanmakuRoomService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanmakuRoomService.m; sourceTree = "<group>"; };
+		6C460815285B3039005C99EF /* RespDanmakuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespDanmakuModel.h; sourceTree = "<group>"; };
+		6C460816285B3039005C99EF /* RespDanmakuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespDanmakuModel.m; sourceTree = "<group>"; };
+		6C4608182860165E005C99EF /* QuickSendJoinColCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickSendJoinColCell.h; sourceTree = "<group>"; };
+		6C4608192860165E005C99EF /* QuickSendJoinColCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickSendJoinColCell.m; sourceTree = "<group>"; };
+		6C46081B2861ABAE005C99EF /* LandscapePopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandscapePopView.h; sourceTree = "<group>"; };
+		6C46081C2861ABAE005C99EF /* LandscapePopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandscapePopView.m; sourceTree = "<group>"; };
+		6C46081E2862B024005C99EF /* LandscapeNaviView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandscapeNaviView.h; sourceTree = "<group>"; };
+		6C46081F2862B024005C99EF /* LandscapeNaviView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandscapeNaviView.m; sourceTree = "<group>"; };
+		6C46082128630CD6005C99EF /* RespGiftListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespGiftListModel.h; sourceTree = "<group>"; };
+		6C46082228630CD6005C99EF /* RespGiftListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespGiftListModel.m; sourceTree = "<group>"; };
+		6C4608242864062D005C99EF /* LandscapeGuideTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandscapeGuideTipView.h; sourceTree = "<group>"; };
+		6C4608252864062D005C99EF /* LandscapeGuideTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandscapeGuideTipView.m; sourceTree = "<group>"; };
+		6C460827286441B4005C99EF /* WebpImageCacheService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebpImageCacheService.h; sourceTree = "<group>"; };
+		6C460828286441B4005C99EF /* WebpImageCacheService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebpImageCacheService.m; sourceTree = "<group>"; };
+		6C46082B28658E7F005C99EF /* DiscoRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRoomViewController.h; sourceTree = "<group>"; };
+		6C46082C28658E7F005C99EF /* DiscoRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRoomViewController.m; sourceTree = "<group>"; };
+		6C460830286AD41A005C99EF /* DiscoRankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoRankViewController.m; sourceTree = "<group>"; };
+		6C460831286AD41B005C99EF /* DiscoRankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoRankViewController.h; sourceTree = "<group>"; };
+		6C46085D286C4E26005C99EF /* GameItemFullCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameItemFullCollectionViewCell.h; sourceTree = "<group>"; };
+		6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameItemFullCollectionViewCell.m; sourceTree = "<group>"; };
+		6C460860286D3BC7005C99EF /* HomeHeaderFullReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHeaderFullReusableView.h; sourceTree = "<group>"; };
+		6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderFullReusableView.m; sourceTree = "<group>"; };
+		6C460863286D82BA005C99EF /* DiscoNaviRankView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoNaviRankView.h; sourceTree = "<group>"; };
+		6C460864286D82BA005C99EF /* DiscoNaviRankView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoNaviRankView.m; sourceTree = "<group>"; };
+		6C460866286D9981005C99EF /* DiscoRankHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankHeadView.h; sourceTree = "<group>"; };
+		6C460867286D9981005C99EF /* DiscoRankHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankHeadView.m; sourceTree = "<group>"; };
+		6C460869286DAAF0005C99EF /* DiscoRoomService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRoomService.h; sourceTree = "<group>"; };
+		6C46086A286DAAF0005C99EF /* DiscoRoomService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRoomService.m; sourceTree = "<group>"; };
+		6C46086C286DAC76005C99EF /* DiscoRankPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankPopView.h; sourceTree = "<group>"; };
+		6C46086D286DAC76005C99EF /* DiscoRankPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankPopView.m; sourceTree = "<group>"; };
+		6C46086F286DB5CF005C99EF /* DiscoRankTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankTableViewCell.h; sourceTree = "<group>"; };
+		6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankTableViewCell.m; sourceTree = "<group>"; };
+		6C460873286DB610005C99EF /* DiscoRankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoRankModel.h; sourceTree = "<group>"; };
+		6C460874286DB610005C99EF /* DiscoRankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoRankModel.m; sourceTree = "<group>"; };
+		6C460876286E9CCD005C99EF /* DiscoAnchorDatingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoAnchorDatingView.h; sourceTree = "<group>"; };
+		6C460877286E9CCD005C99EF /* DiscoAnchorDatingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoAnchorDatingView.m; sourceTree = "<group>"; };
+		6C460879286EA886005C99EF /* DiscoPopMenuListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoPopMenuListView.h; sourceTree = "<group>"; };
+		6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoPopMenuListView.m; sourceTree = "<group>"; };
+		6C46087C286ECC2D005C99EF /* DiscoMenuTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuTableViewCell.h; sourceTree = "<group>"; };
+		6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuTableViewCell.m; sourceTree = "<group>"; };
+		6C46087F286ECC8A005C99EF /* DiscoMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuModel.h; sourceTree = "<group>"; };
+		6C460880286ECC8A005C99EF /* DiscoMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuModel.m; sourceTree = "<group>"; };
+		6C460882286EFA21005C99EF /* DiscoMenuRuleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuRuleView.h; sourceTree = "<group>"; };
+		6C460883286EFA21005C99EF /* DiscoMenuRuleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuRuleView.m; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
 		6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomCell.m; sourceTree = "<group>"; };
 		6C75F36A27C348A50019BB74 /* KeyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHeader.h; sourceTree = "<group>"; };
+		6C7E0CE42875EB0500DBA208 /* RespDiscoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespDiscoModel.h; sourceTree = "<group>"; };
+		6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespDiscoModel.m; sourceTree = "<group>"; };
+		6CCF8AC8287A464900DB3AB8 /* DiscoRankTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoRankTipView.h; sourceTree = "<group>"; };
+		6CCF8AC9287A464900DB3AB8 /* DiscoRankTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoRankTipView.m; sourceTree = "<group>"; };
 		6CD6E85227BE37C300D8F76C /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		6CD6E85327BE37C300D8F76C /* LoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 		6CD6E85527BE37D600D8F76C /* SettingsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsService.h; sourceTree = "<group>"; };
@@ -684,31 +835,63 @@
 		7A720CB3011AA758F160BFED /* Pods-QuickStart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickStart.debug.xcconfig"; path = "Target Support Files/Pods-QuickStart/Pods-QuickStart.debug.xcconfig"; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC2100A5544CF78174597F1D /* PKGameEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGameEmptyView.h; sourceTree = "<group>"; };
+		BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoGameInteractiveView.m; sourceTree = "<group>"; };
+		BC21011EFE2917ED676C1C64 /* HomeGuessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeGuessCell.h; sourceTree = "<group>"; };
 		BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentView.m; sourceTree = "<group>"; };
-		BC210203F8E7C5CAEFF19056 /* PKService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKService.h; sourceTree = "<group>"; };
+		BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessRoomViewController.h; sourceTree = "<group>"; };
+		BC210203F8E7C5CAEFF19056 /* PKRoomService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRoomService.h; sourceTree = "<group>"; };
+		BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessCategoryView.m; sourceTree = "<group>"; };
+		BC21030C423A46DF8E96F932 /* DiscoAppointmentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoAppointmentPopView.h; sourceTree = "<group>"; };
+		BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderColCell.m; sourceTree = "<group>"; };
 		BC21032C5553ABB17B21F173 /* QSGameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameListViewController.m; sourceTree = "<group>"; };
 		BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGameEmptyView.m; sourceTree = "<group>"; };
 		BC210337708736FFF222750A /* BaseSceneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSceneService.m; sourceTree = "<group>"; };
 		BC2103C043B5568FCBA68B06 /* BaseSceneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSceneService.h; sourceTree = "<group>"; };
+		BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinItemView.m; sourceTree = "<group>"; };
+		BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderView.h; sourceTree = "<group>"; };
+		BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessRoomViewController.m; sourceTree = "<group>"; };
 		BC2105087E91B70E68E3D640 /* PKStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStateView.h; sourceTree = "<group>"; };
 		BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdPKModel.m; sourceTree = "<group>"; };
+		BC21052EC461448E9238A7C2 /* DiscoGameInteractiveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractiveView.h; sourceTree = "<group>"; };
 		BC2105467EA8857361624481 /* RoomMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomMoreView.m; sourceTree = "<group>"; };
+		BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessViewController.m; sourceTree = "<group>"; };
 		BC21055EE76F1B350D139F19 /* RoomCmdPKModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdPKModel.h; sourceTree = "<group>"; };
+		BC21056B5487F677973E97B8 /* HomeGuessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeGuessCell.m; sourceTree = "<group>"; };
 		BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSelectRoomView.m; sourceTree = "<group>"; };
 		BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendRoomView.m; sourceTree = "<group>"; };
 		BC21069C06A918E5FCF30F8A /* QSGameItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameItemModel.h; sourceTree = "<group>"; };
 		BC2106F2C4C48C00499B89E4 /* RoomMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomMoreView.h; sourceTree = "<group>"; };
+		BC2106F845ECA957808046FE /* MoreGuessHeaderCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderCellModel.h; sourceTree = "<group>"; };
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
+		BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinPopView.h; sourceTree = "<group>"; };
 		BC2107929CECA531C851C092 /* PKSelectRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSelectRoomView.h; sourceTree = "<group>"; };
+		BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessCategoryView.h; sourceTree = "<group>"; };
+		BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessViewController.h; sourceTree = "<group>"; };
 		BC2107BC94088B9F062BBA4B /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
 		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
+		BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoAppointmentPopView.m; sourceTree = "<group>"; };
+		BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoGameInteractivePopView.m; sourceTree = "<group>"; };
+		BC210992133641B87C11D04E /* DiscoSelectAnchorColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoSelectAnchorColCell.h; sourceTree = "<group>"; };
 		BC2109B31F63F31616E3D68E /* PKRoomListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomListCell.m; sourceTree = "<group>"; };
+		BC210A8B9F817A0399951BD7 /* MoreGuessTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessTableViewCell.h; sourceTree = "<group>"; };
 		BC210ABE07C435063FEB002B /* SuspendRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuspendRoomView.h; sourceTree = "<group>"; };
+		BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderView.m; sourceTree = "<group>"; };
+		BC210AD2E65543CE739F514F /* DiscoInteractiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoInteractiveModel.h; sourceTree = "<group>"; };
+		BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveModel.m; sourceTree = "<group>"; };
+		BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveColCell.m; sourceTree = "<group>"; };
 		BC210BDF39D45429F38899B7 /* PKRoomListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRoomListCell.h; sourceTree = "<group>"; };
+		BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderCellModel.m; sourceTree = "<group>"; };
 		BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKStateView.m; sourceTree = "<group>"; };
+		BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessTableViewCell.m; sourceTree = "<group>"; };
 		BC210C677DD6442EA5963655 /* RespModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespModel.m; sourceTree = "<group>"; };
 		BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameItemModel.m; sourceTree = "<group>"; };
-		BC210DBB3E69BCD73E9DC870 /* PKService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKService.m; sourceTree = "<group>"; };
+		BC210D0CC9CCF32570421BA2 /* MoreGuessCoinItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinItemView.h; sourceTree = "<group>"; };
+		BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinPopView.m; sourceTree = "<group>"; };
+		BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoSelectAnchorColCell.m; sourceTree = "<group>"; };
+		BC210D8DD3658817195900DF /* DiscoInteractiveColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoInteractiveColCell.h; sourceTree = "<group>"; };
+		BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderColCell.h; sourceTree = "<group>"; };
+		BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomService.m; sourceTree = "<group>"; };
+		BC210DCE2A6257343B4539CF /* DiscoGameInteractivePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractivePopView.h; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
 		BC210F28C7CAB6BCA3140175 /* HSHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSHttpService.m; sourceTree = "<group>"; };
 		BC210F7B6D59DA493CE16350 /* SceneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentView.h; sourceTree = "<group>"; };
@@ -922,6 +1105,7 @@
 			children = (
 				4455ACEE27EAC658001516EE /* Controller */,
 				4455ACF127EAC658001516EE /* View */,
+				BC21001B5F7B2F0EA130BEDF /* Model */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -952,6 +1136,10 @@
 				443BA4EB280D5F11008B2BFB /* HomeCategoryView.m */,
 				3306D63E22DDCC827A67B80F /* AllCategoryView.h */,
 				3306DC54D7DCF6D286A5C732 /* AllCategoryView.m */,
+				6C46085D286C4E26005C99EF /* GameItemFullCollectionViewCell.h */,
+				6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */,
+				6C460860286D3BC7005C99EF /* HomeHeaderFullReusableView.h */,
+				6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1011,6 +1199,8 @@
 		4455AD1327EAC658001516EE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				6C46082A28658E1D005C99EF /* Disco */,
+				6C4607BE2851F701005C99EF /* Danmaku */,
 				4455ADD327EAC6F7001516EE /* Base */,
 				4455AD1427EAC658001516EE /* Orderentertainment */,
 				4455AD1727EAC658001516EE /* Show */,
@@ -1022,6 +1212,7 @@
 				44D9F39F280FB06A000B14B5 /* Custom */,
 				4455AD7B27EAC658001516EE /* Crossroom */,
 				4455AD7E27EAC658001516EE /* OneOne */,
+				BC210F37AC7DEE92904D5429 /* Guess */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -1079,6 +1270,8 @@
 				44BC48E7281543FE00E4E3F7 /* RoomCmdOrderOperateModel.m */,
 				BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */,
 				BC21055EE76F1B350D139F19 /* RoomCmdPKModel.h */,
+				6C46080F2859D26E005C99EF /* RoomCmdGuessBetNotifyModel.h */,
+				6C4608102859D26E005C99EF /* RoomCmdGuessBetNotifyModel.m */,
 			);
 			path = CMD;
 			sourceTree = "<group>";
@@ -1420,6 +1613,14 @@
 				6C076ED927A2993C00650209 /* RespGameInfoModel.m */,
 				BC210C677DD6442EA5963655 /* RespModel.m */,
 				BC210739F0C0EA7E87C2CC3B /* RespModel.h */,
+				6C4607C92852DEAE005C99EF /* GuessModel.h */,
+				6C4607CA2852DEAE005C99EF /* GuessModel.m */,
+				6C460815285B3039005C99EF /* RespDanmakuModel.h */,
+				6C460816285B3039005C99EF /* RespDanmakuModel.m */,
+				6C46082128630CD6005C99EF /* RespGiftListModel.h */,
+				6C46082228630CD6005C99EF /* RespGiftListModel.m */,
+				6C7E0CE42875EB0500DBA208 /* RespDiscoModel.h */,
+				6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1474,6 +1675,173 @@
 				6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */,
 			);
 			path = Agora;
+			sourceTree = "<group>";
+		};
+		6C4607A528503E0B005C99EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */,
+				BC2106F845ECA957808046FE /* MoreGuessHeaderCellModel.h */,
+				6C4607BA2851D29E005C99EF /* GuessRankModel.h */,
+				6C4607BB2851D29E005C99EF /* GuessRankModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6C4607A628503E13005C99EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C4607B728519FB2005C99EF /* RankNumItemView.h */,
+				6C4607B828519FB3005C99EF /* RankNumItemView.m */,
+				BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */,
+				BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */,
+				BC21056B5487F677973E97B8 /* HomeGuessCell.m */,
+				BC21011EFE2917ED676C1C64 /* HomeGuessCell.h */,
+				BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */,
+				BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */,
+				BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */,
+				BC210A8B9F817A0399951BD7 /* MoreGuessTableViewCell.h */,
+				BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */,
+				BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */,
+				BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */,
+				BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */,
+				BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */,
+				BC210D0CC9CCF32570421BA2 /* MoreGuessCoinItemView.h */,
+				6C4607AB2850A817005C99EF /* GuessRankContentView.h */,
+				6C4607AC2850A817005C99EF /* GuessRankContentView.m */,
+				6C4607AE28518FB7005C99EF /* GuessRankHeaderView.h */,
+				6C4607AF28518FB7005C99EF /* GuessRankHeaderView.m */,
+				6C4607B12851908F005C99EF /* GuessRankTableViewCell.h */,
+				6C4607B22851908F005C99EF /* GuessRankTableViewCell.m */,
+				6C4607B428519618005C99EF /* RankHeadItemView.h */,
+				6C4607B528519618005C99EF /* RankHeadItemView.m */,
+				6C4607FD28572099005C99EF /* GuessMineView.h */,
+				6C4607FE28572099005C99EF /* GuessMineView.m */,
+				6C460800285727B7005C99EF /* SwitchAutoGuessPopView.h */,
+				6C460801285727B7005C99EF /* SwitchAutoGuessPopView.m */,
+				6C46080328583A2F005C99EF /* GuessSelectPopView.h */,
+				6C46080428583A2F005C99EF /* GuessSelectPopView.m */,
+				6C460806285840B4005C99EF /* GuessSelectColCell.h */,
+				6C460807285840B4005C99EF /* GuessSelectColCell.m */,
+				6C460809285899E6005C99EF /* GuessResultPopView.h */,
+				6C46080A285899E6005C99EF /* GuessResultPopView.m */,
+				6C46080C2858A452005C99EF /* GuessResultTableViewCell.h */,
+				6C46080D2858A452005C99EF /* GuessResultTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C4607A728503E1A005C99EF /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */,
+				BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */,
+				BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */,
+				BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */,
+				6C4607A8285083CB005C99EF /* GuessRankViewController.h */,
+				6C4607A9285083CB005C99EF /* GuessRankViewController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		6C4607BE2851F701005C99EF /* Danmaku */ = {
+			isa = PBXGroup;
+			children = (
+				6C4607C228520148005C99EF /* View */,
+				6C4607BF2851F725005C99EF /* DanmakuRoomViewController.h */,
+				6C4607C02851F725005C99EF /* DanmakuRoomViewController.m */,
+			);
+			path = Danmaku;
+			sourceTree = "<group>";
+		};
+		6C4607C228520148005C99EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C4607C328520175005C99EF /* DanmakuQuickSendView.h */,
+				6C4607C428520175005C99EF /* DanmakuQuickSendView.m */,
+				6C4607FA285346BE005C99EF /* QuickSendEffectColCell.h */,
+				6C4607FB285346BE005C99EF /* QuickSendEffectColCell.m */,
+				6C4608182860165E005C99EF /* QuickSendJoinColCell.h */,
+				6C4608192860165E005C99EF /* QuickSendJoinColCell.m */,
+				6C46081B2861ABAE005C99EF /* LandscapePopView.h */,
+				6C46081C2861ABAE005C99EF /* LandscapePopView.m */,
+				6C46081E2862B024005C99EF /* LandscapeNaviView.h */,
+				6C46081F2862B024005C99EF /* LandscapeNaviView.m */,
+				6C4608242864062D005C99EF /* LandscapeGuideTipView.h */,
+				6C4608252864062D005C99EF /* LandscapeGuideTipView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C46082A28658E1D005C99EF /* Disco */ = {
+			isa = PBXGroup;
+			children = (
+				6C460872286DB5F2005C99EF /* Model */,
+				6C46082F286ABA64005C99EF /* View */,
+				6C46082E286ABA47005C99EF /* VC */,
+			);
+			path = Disco;
+			sourceTree = "<group>";
+		};
+		6C46082E286ABA47005C99EF /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				6C460831286AD41B005C99EF /* DiscoRankViewController.h */,
+				6C460830286AD41A005C99EF /* DiscoRankViewController.m */,
+				6C46082B28658E7F005C99EF /* DiscoRoomViewController.h */,
+				6C46082C28658E7F005C99EF /* DiscoRoomViewController.m */,
+				6C097D132876726400D105A7 /* DiscoRankTipViewController.h */,
+				6C097D142876726400D105A7 /* DiscoRankTipViewController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		6C46082F286ABA64005C99EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6CCF8AC8287A464900DB3AB8 /* DiscoRankTipView.h */,
+				6CCF8AC9287A464900DB3AB8 /* DiscoRankTipView.m */,
+				6C460863286D82BA005C99EF /* DiscoNaviRankView.h */,
+				6C460864286D82BA005C99EF /* DiscoNaviRankView.m */,
+				6C460866286D9981005C99EF /* DiscoRankHeadView.h */,
+				6C460867286D9981005C99EF /* DiscoRankHeadView.m */,
+				6C46086C286DAC76005C99EF /* DiscoRankPopView.h */,
+				6C46086D286DAC76005C99EF /* DiscoRankPopView.m */,
+				6C46086F286DB5CF005C99EF /* DiscoRankTableViewCell.h */,
+				6C460870286DB5CF005C99EF /* DiscoRankTableViewCell.m */,
+				6C460876286E9CCD005C99EF /* DiscoAnchorDatingView.h */,
+				6C460877286E9CCD005C99EF /* DiscoAnchorDatingView.m */,
+				6C460879286EA886005C99EF /* DiscoPopMenuListView.h */,
+				6C46087A286EA886005C99EF /* DiscoPopMenuListView.m */,
+				6C46087C286ECC2D005C99EF /* DiscoMenuTableViewCell.h */,
+				6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */,
+				6C460882286EFA21005C99EF /* DiscoMenuRuleView.h */,
+				6C460883286EFA21005C99EF /* DiscoMenuRuleView.m */,
+				BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */,
+				BC21052EC461448E9238A7C2 /* DiscoGameInteractiveView.h */,
+				BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */,
+				BC21030C423A46DF8E96F932 /* DiscoAppointmentPopView.h */,
+				BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */,
+				BC210992133641B87C11D04E /* DiscoSelectAnchorColCell.h */,
+				BC210DCE2A6257343B4539CF /* DiscoGameInteractivePopView.h */,
+				BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */,
+				BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */,
+				BC210D8DD3658817195900DF /* DiscoInteractiveColCell.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C460872286DB5F2005C99EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C460873286DB610005C99EF /* DiscoRankModel.h */,
+				6C460874286DB610005C99EF /* DiscoRankModel.m */,
+				6C46087F286ECC8A005C99EF /* DiscoMenuModel.h */,
+				6C460880286ECC8A005C99EF /* DiscoMenuModel.m */,
+				BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */,
+				BC210AD2E65543CE739F514F /* DiscoInteractiveModel.h */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6C702B68283F80DF005D80B8 /* App */ = {
@@ -1582,10 +1950,16 @@
 				6C076ED627A298FC00650209 /* GameService.m */,
 				6C076EB1279FF3DD00650209 /* GiftService.h */,
 				6C076EB2279FF3DD00650209 /* GiftService.m */,
-				44C8FF9027F318A70030ED40 /* TicketService.h */,
-				44C8FF9127F318A70030ED40 /* TicketService.m */,
-				BC210DBB3E69BCD73E9DC870 /* PKService.m */,
-				BC210203F8E7C5CAEFF19056 /* PKService.h */,
+				44C8FF9027F318A70030ED40 /* TicketRoomService.h */,
+				44C8FF9127F318A70030ED40 /* TicketRoomService.m */,
+				BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */,
+				BC210203F8E7C5CAEFF19056 /* PKRoomService.h */,
+				6C4607C628520D22005C99EF /* GuessRoomService.h */,
+				6C4607C728520D22005C99EF /* GuessRoomService.m */,
+				6C460812285B1DF2005C99EF /* DanmakuRoomService.h */,
+				6C460813285B1DF2005C99EF /* DanmakuRoomService.m */,
+				6C460869286DAAF0005C99EF /* DiscoRoomService.h */,
+				6C46086A286DAAF0005C99EF /* DiscoRoomService.m */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -1604,6 +1978,8 @@
 				BC210F28C7CAB6BCA3140175 /* HSHttpService.m */,
 				BC210337708736FFF222750A /* BaseSceneService.m */,
 				BC2103C043B5568FCBA68B06 /* BaseSceneService.h */,
+				6C460827286441B4005C99EF /* WebpImageCacheService.h */,
+				6C460828286441B4005C99EF /* WebpImageCacheService.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1847,6 +2223,13 @@
 			path = Preferences;
 			sourceTree = "<group>";
 		};
+		BC21001B5F7B2F0EA130BEDF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		BC21079FFAE4B7B10EB8C5DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1865,6 +2248,16 @@
 				6C076E72279E457D00650209 /* ISudAudioEventListener.h */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		BC210F37AC7DEE92904D5429 /* Guess */ = {
+			isa = PBXGroup;
+			children = (
+				6C4607A728503E1A005C99EF /* VC */,
+				6C4607A628503E13005C99EF /* View */,
+				6C4607A528503E0B005C99EF /* Model */,
+			);
+			path = Guess;
 			sourceTree = "<group>";
 		};
 		BC210F7EBEE7DBCC883BD9B2 /* View */ = {
@@ -2158,10 +2551,13 @@
 				4455AD8527EAC658001516EE /* VersionInfoViewController.m in Sources */,
 				4455AE2127EAC71A001516EE /* SceneFactory.m in Sources */,
 				6CE6CD2C283F591C0026BDAB /* DTAlertView.m in Sources */,
+				6C460871286DB5CF005C99EF /* DiscoRankTableViewCell.m in Sources */,
 				6CE6CD40283F591C0026BDAB /* BaseModel.m in Sources */,
 				44D9F3AB280FC08C000B14B5 /* GameConfigViewController.m in Sources */,
 				4455AE0727EAC6F7001516EE /* BaseSceneViewController+Voice.m in Sources */,
 				6CE6CD64283F591D0026BDAB /* HSThreadUtils.m in Sources */,
+				6C460875286DB610005C99EF /* DiscoRankModel.m in Sources */,
+				6C097D152876726400D105A7 /* DiscoRankTipViewController.m in Sources */,
 				4455AE0E27EAC6F7001516EE /* HSRoomTextTableViewCell.m in Sources */,
 				44241AE127EAD07B001EE125 /* SwitchLangTableViewCell.m in Sources */,
 				4455AE0A27EAC6F7001516EE /* RoomGameInfoModel.m in Sources */,
@@ -2175,17 +2571,24 @@
 				4455AE0527EAC6F7001516EE /* BaseSceneViewController+Game.m in Sources */,
 				4455ADC927EAC658001516EE /* TicketChooseViewController.m in Sources */,
 				443BA4DD280D1557008B2BFB /* OrderChooseView.m in Sources */,
+				6C4607C528520175005C99EF /* DanmakuQuickSendView.m in Sources */,
 				4455ADCD27EAC658001516EE /* TicketChooseItemView.m in Sources */,
 				4455AD8827EAC658001516EE /* HSSettingHeaderModel.m in Sources */,
 				6CE6CD5E283F591D0026BDAB /* DeviceUtil.m in Sources */,
+				6C4607BC2851D29F005C99EF /* GuessRankModel.m in Sources */,
+				6C460814285B1DF3005C99EF /* DanmakuRoomService.m in Sources */,
 				4455ADCB27EAC658001516EE /* TocketChooseModel.m in Sources */,
+				6C460868286D9982005C99EF /* DiscoRankHeadView.m in Sources */,
 				4455AD8927EAC658001516EE /* ChangeRTCModel.m in Sources */,
+				6C4607FC285346BF005C99EF /* QuickSendEffectColCell.m in Sources */,
 				6CE6CD28283F591C0026BDAB /* DTWebViewController.m in Sources */,
 				4455ADB627EAC658001516EE /* AudioRoomViewController.m in Sources */,
 				444F59EE27F83FEF00FA1FB2 /* TicketJoinModel.m in Sources */,
 				6C076ED727A298FC00650209 /* GameService.m in Sources */,
+				6C4608112859D26F005C99EF /* RoomCmdGuessBetNotifyModel.m in Sources */,
 				6C192E4D279523B000553034 /* AppDelegate.m in Sources */,
 				4455ADAE27EAC658001516EE /* AudioUserModel.m in Sources */,
+				6C46080E2858A452005C99EF /* GuessResultTableViewCell.m in Sources */,
 				4455ADAD27EAC658001516EE /* RoomCmdChangeGameModel.m in Sources */,
 				44241ADB27EACF39001EE125 /* SwitchLanguageViewController.m in Sources */,
 				6C076EB6279FF3FF00650209 /* GiftModel.m in Sources */,
@@ -2196,10 +2599,12 @@
 				6CE6CD4A283F591C0026BDAB /* DTUIDevice+Extension.m in Sources */,
 				6CE6CD36283F591C0026BDAB /* DTBlurEffectView.m in Sources */,
 				4455AE1427EAC6F7001516EE /* RoomNaviView.m in Sources */,
+				6C4607AD2850A818005C99EF /* GuessRankContentView.m in Sources */,
 				4455AE0D27EAC6F7001516EE /* BaseMsgCell.m in Sources */,
 				4455ADA927EAC658001516EE /* RoomCmdSendGiftModel.m in Sources */,
 				4455AE1227EAC6F7001516EE /* AudioMicContentView.m in Sources */,
 				6CE6CD48283F591C0026BDAB /* BaseCollectionReusableView.m in Sources */,
+				6C46080B285899E6005C99EF /* GuessResultPopView.m in Sources */,
 				4455AD8D27EAC658001516EE /* ChangeRTCTCell.m in Sources */,
 				4455AE0927EAC6F7001516EE /* AudioRoomMicModel.m in Sources */,
 				4455ADA727EAC658001516EE /* ShowViewController.m in Sources */,
@@ -2214,10 +2619,12 @@
 				6C076E80279E8EBD00650209 /* AudioCommon.m in Sources */,
 				E551BF31281500900046D417 /* IMRoomManager.m in Sources */,
 				E5EDC0BE281B941D00E6875B /* AsyncCallWrapper.m in Sources */,
+				6C4607C828520D22005C99EF /* GuessRoomService.m in Sources */,
 				6C076E7D279E833C00650209 /* AudioEngineFactory.m in Sources */,
 				4455AE1627EAC6F7001516EE /* RoomInputView.m in Sources */,
 				4455AD9927EAC658001516EE /* HomeHeaderReusableView.m in Sources */,
 				4455AD8627EAC658001516EE /* ChangeRTCViewController.m in Sources */,
+				6C46087E286ECC2D005C99EF /* DiscoMenuTableViewCell.m in Sources */,
 				4455ADAB27EAC658001516EE /* RoomCmdUpMicModel.m in Sources */,
 				6CE6CD42283F591C0026BDAB /* BaseTextView.m in Sources */,
 				4455AE1027EAC6F7001516EE /* MicOperateView.m in Sources */,
@@ -2226,26 +2633,33 @@
 				6C192E5E279523B100553034 /* main.m in Sources */,
 				4455ADAF27EAC658001516EE /* RoomGiftPannelView.m in Sources */,
 				4455AE1527EAC6F7001516EE /* RoomOperatorView.m in Sources */,
+				6C460802285727B7005C99EF /* SwitchAutoGuessPopView.m in Sources */,
 				6CE6CD58283F591D0026BDAB /* HttpRequest.m in Sources */,
 				4455ADA627EAC658001516EE /* OrderentertainmentViewController.m in Sources */,
 				4455AD8E27EAC658001516EE /* HSSetingHeadView.m in Sources */,
 				443BA4E3280D3BF8008B2BFB /* OrderChooseUsersCell.m in Sources */,
 				44D9F3B6281009DE000B14B5 /* GameConfigPopCell.m in Sources */,
 				4455AD9B27EAC658001516EE /* HomeFooterReusableView.m in Sources */,
+				6C460832286AD41B005C99EF /* DiscoRankViewController.m in Sources */,
 				6CE6CD5C283F591D0026BDAB /* LanguageUtil.m in Sources */,
 				44D9F3A5280FB0DB000B14B5 /* CustomRoomViewController.m in Sources */,
 				44DD752E2812AEFE0041FE3C /* PKSettingView.m in Sources */,
+				6C46087B286EA886005C99EF /* DiscoPopMenuListView.m in Sources */,
 				6CE6CD54283F591D0026BDAB /* DTUIColor+Extension.m in Sources */,
 				4455AE0C27EAC6F7001516EE /* RoomSystemTableViewCell.m in Sources */,
 				4455ADCA27EAC658001516EE /* TicketViewController.m in Sources */,
 				4455ADA527EAC658001516EE /* GameListTableViewCell.m in Sources */,
 				4455AD9C27EAC658001516EE /* GameListViewController.m in Sources */,
+				6C46082D28658E80005C99EF /* DiscoRoomViewController.m in Sources */,
 				6CE6CD32283F591C0026BDAB /* DTRippleAnimationView.m in Sources */,
 				6CE6CD38283F591C0026BDAB /* BaseTableViewCell.m in Sources */,
+				6C4608202862B025005C99EF /* LandscapeNaviView.m in Sources */,
+				6C46086B286DAAF0005C99EF /* DiscoRoomService.m in Sources */,
 				6CE6CD50283F591D0026BDAB /* DTNSArray+Masonry.m in Sources */,
 				6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */,
 				4455AD8C27EAC658001516EE /* HSSettingCell.m in Sources */,
 				4455ADA227EAC658001516EE /* MatchRoomModel.m in Sources */,
+				6C460817285B3039005C99EF /* RespDanmakuModel.m in Sources */,
 				4455ADCE27EAC658001516EE /* TicketChooseNoticeView.m in Sources */,
 				6CE6CD56283F591D0026BDAB /* DTNSError+Custom.m in Sources */,
 				E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */,
@@ -2253,7 +2667,9 @@
 				44BC48E228153ABB00E4E3F7 /* RoomOrderCreateModel.m in Sources */,
 				443BA4E6280D41FF008B2BFB /* OrderChooseGamesCell.m in Sources */,
 				6CE6CD4E283F591D0026BDAB /* NSBundle+Language.m in Sources */,
+				6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */,
 				4452DDDB28112BFE001FEEDB /* CustomRoomHelpView.m in Sources */,
+				6C460884286EFA22005C99EF /* DiscoMenuRuleView.m in Sources */,
 				6CE6CD34283F591C0026BDAB /* DTSlider.m in Sources */,
 				4455AE0B27EAC6F7001516EE /* SwitchRoomCell.m in Sources */,
 				6C076EB3279FF3DD00650209 /* GiftService.m in Sources */,
@@ -2262,6 +2678,7 @@
 				4455ADA027EAC658001516EE /* RoomListModel.m in Sources */,
 				4455ADD227EAC658001516EE /* TalentRoomViewController.m in Sources */,
 				4455AD9427EAC658001516EE /* ConfigModel.m in Sources */,
+				6C46081A2860165F005C99EF /* QuickSendJoinColCell.m in Sources */,
 				6CE6CD26283F591C0026BDAB /* DTSVGAPlayerView.m in Sources */,
 				4455AE1127EAC6F7001516EE /* AudioMicroView.m in Sources */,
 				4455ADD027EAC658001516EE /* CrossRoomViewController.m in Sources */,
@@ -2272,38 +2689,49 @@
 				4455ADC827EAC658001516EE /* ASRViewController.m in Sources */,
 				445EAB3627A1330D000DCC72 /* BaseRespModel.m in Sources */,
 				4455AD8B27EAC658001516EE /* VersionInfoCell.m in Sources */,
+				6C46081D2861ABB0005C99EF /* LandscapePopView.m in Sources */,
 				6CE6CD2A283F591C0026BDAB /* DTTextAlertView.m in Sources */,
 				6C076EDA27A2993C00650209 /* RespGameInfoModel.m in Sources */,
 				4455AD9727EAC658001516EE /* HomeViewController.m in Sources */,
+				6CCF8ACA287A464900DB3AB8 /* DiscoRankTipView.m in Sources */,
 				4455AE0F27EAC6F7001516EE /* RoomGiftTableViewCell.m in Sources */,
 				E5EDB8BD27E874DF00EE99D0 /* AudioConfigModel.m in Sources */,
 				6C076EBC27A01BC000650209 /* AudioRoomService.m in Sources */,
 				4455AD9627EAC658001516EE /* MainTabBarController.m in Sources */,
+				6C460878286E9CCD005C99EF /* DiscoAnchorDatingView.m in Sources */,
 				444F59EB27F7035800FA1FB2 /* TicketChooseLevelView.m in Sources */,
 				4455ADA827EAC658001516EE /* RoomCmdChatTextModel.m in Sources */,
+				6C460808285840B4005C99EF /* GuessSelectColCell.m in Sources */,
 				44D9F3B3280FFF83000B14B5 /* GameConfigPopView.m in Sources */,
+				6C4607B928519FB3005C99EF /* RankNumItemView.m in Sources */,
+				6C4607B628519618005C99EF /* RankHeadItemView.m in Sources */,
 				4455AE2027EAC71A001516EE /* BaseSceneConfigModel.m in Sources */,
 				4455AE1727EAC6F7001516EE /* RoomMsgTableView.m in Sources */,
 				443BA4E9280D450B008B2BFB /* OrderChooseGamesView.m in Sources */,
-				44C8FF9227F318A70030ED40 /* TicketService.m in Sources */,
+				44C8FF9227F318A70030ED40 /* TicketRoomService.m in Sources */,
+				6C4607B32851908F005C99EF /* GuessRankTableViewCell.m in Sources */,
 				44D9F3B0280FF6CC000B14B5 /* RoomCustomModel.m in Sources */,
 				44BC48E8281543FE00E4E3F7 /* RoomCmdOrderOperateModel.m in Sources */,
 				6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */,
 				448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */,
 				4455AD9827EAC658001516EE /* SearchHeaderView.m in Sources */,
 				44DD7529281293B60041FE3C /* PKRuleView.m in Sources */,
+				6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */,
 				44D9F3A8280FB0FB000B14B5 /* GameConfigTableViewCell.m in Sources */,
 				6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */,
 				6CE6CD3A283F591C0026BDAB /* BaseAlertView.m in Sources */,
 				44BC48E52815433400E4E3F7 /* RoomCmdOrderCreateModel.m in Sources */,
 				4455ADCC27EAC658001516EE /* TicketJoinPopView.m in Sources */,
 				E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */,
+				6C4607CB2852DEAE005C99EF /* GuessModel.m in Sources */,
 				4455AE0827EAC6F7001516EE /* BaseSceneViewController+IM.m in Sources */,
 				4455ADD127EAC658001516EE /* OneOneViewController.m in Sources */,
+				6C4608262864062D005C99EF /* LandscapeGuideTipView.m in Sources */,
 				4455AE1327EAC6F7001516EE /* GameMicContentView.m in Sources */,
 				4455ADB127EAC658001516EE /* GiftUserCollectionViewCell.m in Sources */,
 				4455AD9F27EAC658001516EE /* SwitchMicModel.m in Sources */,
 				4455AE0627EAC6F7001516EE /* BaseSceneViewController.m in Sources */,
+				6C46080528583A30005C99EF /* GuessSelectPopView.m in Sources */,
 				4455AD8A27EAC658001516EE /* HSSettingModel.m in Sources */,
 				4455AD9127EAC658001516EE /* UserInfoListModel.m in Sources */,
 				4452DDDE281134A9001FEEDB /* CustomRoomApiView.m in Sources */,
@@ -2321,6 +2749,10 @@
 				BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */,
 				BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */,
 				6CE6CD2E283F591C0026BDAB /* DTPaddingLabel.m in Sources */,
+				6C46086E286DAC76005C99EF /* DiscoRankPopView.m in Sources */,
+				6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */,
+				6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */,
+				6C46082328630CD7005C99EF /* RespGiftListModel.m in Sources */,
 				BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */,
 				443BA4EC280D5F11008B2BFB /* HomeCategoryView.m in Sources */,
 				6CE6CD4C283F591D0026BDAB /* NSString+DTNSString.m in Sources */,
@@ -2331,13 +2763,35 @@
 				BC210FF63EC24685CBC7FBAC /* SuspendRoomView.m in Sources */,
 				BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */,
 				BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */,
-				BC2104A997878EE07744E080 /* PKService.m in Sources */,
+				6C4607AA285083CB005C99EF /* GuessRankViewController.m in Sources */,
+				BC2104A997878EE07744E080 /* PKRoomService.m in Sources */,
 				6CE6CD46283F591C0026BDAB /* BaseNavigationViewController.m in Sources */,
 				BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */,
 				6CE6CD52283F591D0026BDAB /* DTUIView+Extension.m in Sources */,
 				BC210E3D2377EDF7498C2DF1 /* PKGameEmptyView.m in Sources */,
 				BC21032F94AB142E1BAA2114 /* PKRoomListCell.m in Sources */,
 				BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */,
+				BC210F74B7434253E2FEF91D /* GuessRoomViewController.m in Sources */,
+				6C4607FF28572099005C99EF /* GuessMineView.m in Sources */,
+				BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */,
+				6C460865286D82BA005C99EF /* DiscoNaviRankView.m in Sources */,
+				BC210D9F0C69893639DD84A5 /* HomeGuessCell.m in Sources */,
+				BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */,
+				6C4607C12851F725005C99EF /* DanmakuRoomViewController.m in Sources */,
+				BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */,
+				BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */,
+				BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */,
+				6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */,
+				BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */,
+				BC210F738CED39591CB7541D /* MoreGuessCoinPopView.m in Sources */,
+				BC210E9E33806A6BFD2AE89A /* MoreGuessCoinItemView.m in Sources */,
+				6C460881286ECC8A005C99EF /* DiscoMenuModel.m in Sources */,
+				BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */,
+				BC210819F69EB53104902350 /* DiscoAppointmentPopView.m in Sources */,
+				BC21076C5084AD192F038DA8 /* DiscoSelectAnchorColCell.m in Sources */,
+				BC210093C2C7796FBA9F334C /* DiscoGameInteractivePopView.m in Sources */,
+				BC210743E83852E3D938F5A9 /* DiscoInteractiveModel.m in Sources */,
+				BC210A75257DF698A543C29A /* DiscoInteractiveColCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2590,7 +3044,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2619,7 +3073,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = Dev_Sud_MGP;
@@ -2663,7 +3117,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = Dis_Tech_Sud_Mgp_Hello;

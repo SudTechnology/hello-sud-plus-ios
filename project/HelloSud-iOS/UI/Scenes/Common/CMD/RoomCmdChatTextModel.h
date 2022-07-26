@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否隐藏头像
 @property(nonatomic, assign)BOOL hiddeHeadIcon;
+/// 是否跳过解析
+@property (nonatomic, assign)BOOL skipParseGameKey;
 
 /// 构建消息
 /// @param content 消息内容

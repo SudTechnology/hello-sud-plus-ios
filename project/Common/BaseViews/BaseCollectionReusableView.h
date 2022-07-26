@@ -11,15 +11,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseCollectionReusableView : UICollectionReusableView
 /// 增加子view
-- (void)hsAddViews;
+- (void)dtAddViews;
 /// 布局视图
-- (void)hsLayoutViews;
+- (void)dtLayoutViews;
 /// 配置事件
-- (void)hsConfigEvents;
+- (void)dtConfigEvents;
 /// 试图初始化
-- (void)hsConfigUI;
+- (void)dtConfigUI;
 /// 更新UI
-- (void)hsUpdateUI;
+- (void)dtUpdateUI;
 @end
 
 NS_ASSUME_NONNULL_END

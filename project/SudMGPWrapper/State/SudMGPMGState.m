@@ -12,27 +12,27 @@
 @implementation GamePublicText
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
-             @"degf"  : @"default",
-             @"en_GB" : @"en-GB",
-             @"en_US" : @"en-US",
-             @"ms_BN" : @"ms-BN",
-             @"ms_MY" : @"ms-MY",
-             @"zh_CN" : @"zh-CN",
-             @"zh_HK" : @"zh-HK",
-             @"zh_MO" : @"zh-MO",
-             @"zh_SG" : @"zh-SG",
-             @"zh_TW" : @"zh-TW",
-             
-             @"vi_VN" : @"vi-VN",
-             @"th_TH" : @"th-TH",
-             @"ko_KR" : @"ko-KR",
-             @"ja_JP" : @"ja-JP",
-             @"es_ES" : @"es-ES",
-             @"id_ID" : @"id-ID",
-             @"ar_SA" : @"ar-SA",
-             @"tr_TR" : @"tr-TR",
-             @"ur_PK" : @"ur-PK",
-             };
+            @"degf": @"default",
+            @"en_GB": @"en-GB",
+            @"en_US": @"en-US",
+            @"ms_BN": @"ms-BN",
+            @"ms_MY": @"ms-MY",
+            @"zh_CN": @"zh-CN",
+            @"zh_HK": @"zh-HK",
+            @"zh_MO": @"zh-MO",
+            @"zh_SG": @"zh-SG",
+            @"zh_TW": @"zh-TW",
+
+            @"vi_VN": @"vi-VN",
+            @"th_TH": @"th-TH",
+            @"ko_KR": @"ko-KR",
+            @"ja_JP": @"ja-JP",
+            @"es_ES": @"es-ES",
+            @"id_ID": @"id-ID",
+            @"ar_SA": @"ar-SA",
+            @"tr_TR": @"tr-TR",
+            @"ur_PK": @"ur-PK",
+    };
 }
 @end
 
@@ -143,7 +143,6 @@
 @end
 
 
-
 @implementation MGCommonPlayerInModel
 
 @end
@@ -173,7 +172,6 @@
 @end
 
 
-
 @implementation MGDGSelectingModel
 
 @end
@@ -192,4 +190,31 @@
 
 @implementation MGDGScoreModel
 
+@end
+
+@implementation MGCommonSelfDieStatusModel
+@end
+
+@implementation MGCommonSelfTurnStatusModel
+@end
+
+@implementation MGCommonSelfSelectStatusModel
+@end
+
+@implementation MGCommonGameCountdownTimeModel
+@end
+
+@implementation MGCommonGameDiscoActionModel
+@end
+
+@implementation MGCommonGameDiscoActionEndModel
+@end
+
+@implementation MGCommonAppCommonSelfXRespModel
+@end
+
+@implementation MGCommonGameAddAIPlayersModel
+@end
+
+@implementation MGCommonGameNetworkStateModel
 @end

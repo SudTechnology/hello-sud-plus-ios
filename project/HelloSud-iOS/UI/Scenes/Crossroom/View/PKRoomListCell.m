@@ -9,13 +9,13 @@
 @end
 
 @implementation PKRoomListCell
-- (void)hsAddViews {
-    [super hsAddViews];
+- (void)dtAddViews {
+    [super dtAddViews];
     [self.iconImageView addSubview:self.pkStatusLabel];
 }
 
-- (void)hsLayoutViews {
-    [super hsLayoutViews];
+- (void)dtLayoutViews {
+    [super dtLayoutViews];
     [self.pkStatusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
        make.leading.top.equalTo(@0);
        make.height.equalTo(@16);

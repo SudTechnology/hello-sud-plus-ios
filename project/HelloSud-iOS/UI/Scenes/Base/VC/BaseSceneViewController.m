@@ -9,6 +9,10 @@
 #import "RoomMoreView.h"
 #import "SuspendRoomView.h"
 
+#define I_GUESS_YOU_SAID      1468434504892882946L // 你说我猜
+#define DIGITAL_BOMB          1468091457989509190L // 数字炸弹
+#define YOU_DRAW_AND_I_GUESS  1461228410184400899L // 你画我猜
+
 @interface BaseSceneViewController () <BDAlphaPlayerMetalViewDelegate>
 
 @property(nonatomic, strong) SceneContentView *contentView;
@@ -23,6 +27,12 @@
 @property(nonatomic, strong) BaseView *sceneView;
 /// 场景服务
 @property(nonatomic, strong) BaseSceneService *service;
+
+@property(nonatomic, strong) UIButton *btnTip;
+@property(nonatomic, strong) MarqueeLabel *asrTipLabel;
+@property(nonatomic, strong) NSTimer *timer;
+@property(nonatomic, weak) id stateNTF;
+@property(nonatomic, weak) id asrStateNTF;
 
 @end
 
@@ -51,8 +61,9 @@
     self.language = [SettingsService getCurLanguageLocale];
     [self initSudFSMMG];
     [self loginRoom];
-    if (self.gameId > 0) {
+    if (self.gameId > 0 && self.isNeedToLoadGame) {
         [self loginGame];
+        [self roomGameDidChanged:self.gameId];
     }
     [self dtUpdateUI];
     [self.naviView hiddenNodeWithRoleType:kAudioRoomService.roleType];
@@ -84,17 +95,20 @@
     [self.sceneView addSubview:self.msgBgView];
     [self.msgBgView addSubview:self.msgTableView];
     [self.contentView addSubview:self.inputView];
+    [self.sceneView addSubview:self.asrTipLabel];
 }
 
 - (void)dtLayoutViews {
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.leading.trailing.equalTo(@0);
+        make.top.bottom.equalTo(@0);
     }];
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.contentView);
     }];
     [self.sceneView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.contentView);
+        make.leading.trailing.equalTo(@0);
+        make.top.bottom.equalTo(@0);
     }];
     [self.gameTopShadeNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(self.sceneView);
@@ -138,6 +152,12 @@
         make.leading.trailing.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(80);
     }];
+    [self.asrTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.mas_equalTo(-16);
+        make.height.mas_greaterThanOrEqualTo(0);
+        make.width.mas_equalTo(230);
+        make.bottom.equalTo(self.gameNumLabel);
+    }];
 }
 
 - (void)dtConfigUI {
@@ -154,7 +174,11 @@
         return currentView;
     };
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
-        [DTSheetView show:[[RoomGiftPannelView alloc] init] rootView:AppUtil.currentWindow hiddenBackCover:YES onCloseCallback:^{
+        RoomGiftPannelView *pannelView = [[RoomGiftPannelView alloc] init];
+        if (weakSelf.isNeedToLoadSceneGiftList) {
+            [pannelView loadSceneGift:weakSelf.gameId sceneId:weakSelf.enterModel.sceneType isAppend:weakSelf.isAppendSceneGiftList];
+        }
+        [DTSheetView show:pannelView rootView:AppUtil.currentWindow hiddenBackCover:YES onCloseCallback:^{
             [weakSelf.operatorView resetAllSelectedUser];
         }];
     };
@@ -186,8 +210,7 @@
     };
     self.inputView.inputMsgBlock = ^(NSString *_Nonnull msg) {
         // 发送公屏消息
-        RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:msg];
-        [weakSelf sendMsg:m isAddToShow:YES];
+        [weakSelf sendContentMsg:msg];
     };
 
     self.gameMicContentView.updateMicArrCallBack = ^(NSArray<AudioMicroView *> *_Nonnull micArr) {
@@ -199,26 +222,7 @@
         [weakSelf handleMicTap:micModel];
     };
     self.naviView.closeTapBlock = ^(UIButton *sender) {
-
-        RoomMoreView *v = [[RoomMoreView alloc] init];
-        v.suspendCallback = ^{
-            [DTSheetView close];
-            [SuspendRoomView show:weakSelf];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        };
-        v.exitCallback = ^{
-            [DTSheetView close];
-            [DTAlertView showTextAlert:NSString.dt_room_sure_leave_cur_room sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
-                [DTSheetView close];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf exitRoomFromSuspend:NO finished:nil];
-                });
-            }          onCloseCallback:^{
-            }];
-        };
-        [DTSheetView showTop:v cornerRadius:0 onCloseCallback:^{
-
-        }];
+        [weakSelf showMoreView];
     };
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
         [weakSelf showSelectGameView];
@@ -228,6 +232,10 @@
     self.gameMicContentView.changeScaleBlock = ^(BOOL isSmall) {
         [weakSelf changeScaleSmallMic:isSmall];
     };
+    /// asr状态变化
+    self.asrStateNTF = [[NSNotificationCenter defaultCenter] addObserverForName:NTF_ASR_STATE_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
+        [weakSelf handlePlayerStateChanged];
+    }];
 }
 
 /// 调整麦位是否缩放
@@ -241,10 +249,10 @@
                 make.width.mas_equalTo(115);
                 make.height.mas_equalTo(24);
             }];
-            
+
             [self.gameMicContentView scaleToSmallView];
             [self.gameMicContentView.superview layoutIfNeeded];
-        } completion: ^(BOOL finished){
+        }                completion:^(BOOL finished) {
             [self.gameMicContentView showSmallState];
         }];
 
@@ -258,7 +266,7 @@
             }];
             [self.gameMicContentView scaleToBigView];
             [self.gameMicContentView.superview layoutIfNeeded];
-        } completion: ^(BOOL finished){
+        }                completion:^(BOOL finished) {
             [self.gameMicContentView showBigState];
         }];
     }
@@ -270,7 +278,7 @@
     /// 非房主 结束游戏
     if (kAudioRoomService.roleType != 1) {
         [DTAlertView showTextAlert:NSString.dt_room_sure_end_game sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
-            [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
+            [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfEnd];
         }          onCloseCallback:^{
         }];
         return;
@@ -283,7 +291,7 @@
         [DTSheetView close];
         if (m.itemType == 2) {
             [DTAlertView showTextAlert:NSString.dt_room_sure_end_game sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSetEnd];
+                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfEnd];
             }          onCloseCallback:^{
             }];
             return;
@@ -318,7 +326,7 @@
         [self handleExitRoomIsFromSuspend:isSuspend finished:finished];
         return;
     }
-    [kAudioRoomService reqSwitchMic:weakSelf.roomID.integerValue micIndex:(int) kAudioRoomService.micIndex handleType:1 success:^{
+    [kAudioRoomService reqSwitchMic:weakSelf.roomID.integerValue micIndex:(int) kAudioRoomService.micIndex handleType:1 proxyUser:nil success:^{
         [weakSelf handleExitRoomIsFromSuspend:isSuspend finished:finished];
     }                          fail:^(NSError *error) {
         [weakSelf handleExitRoomIsFromSuspend:isSuspend finished:finished];
@@ -340,6 +348,8 @@
             [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
         }
         if (finished) finished();
+        [DTSheetView close];
+        [DTAlertView close];
     });
 }
 
@@ -365,13 +375,96 @@
 
 }
 
+/// 将要发送消息
+/// @param msg msg
+- (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void (^)(BOOL shouldSend))shouldSend {
+    if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
+        RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
+        GiftModel *giftModel = [m getGiftModel];
+        // 发送礼物
+        [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount price:giftModel.price type:m.type == 1 ? 2 : 1 finished:^{
+            DDLogDebug(@"发送礼物成功");
+            if (shouldSend) shouldSend(YES);
+        }                       failure:^(NSError *error) {
+            if (shouldSend) shouldSend(NO);
+
+        }];
+    } else {
+        if (shouldSend) shouldSend(YES);
+    }
+    DDLogDebug(@"onWillSendMsg");
+}
+
+/// 已经发送消息
+/// @param msg msg
+- (void)onDidSendMsg:(RoomBaseCMDModel *)msg {
+    DDLogDebug(@"onDidSendMsg");
+}
+
+/// 是否需要加载游戏，子类根据场景要求是否加载游戏，默认YES,加载
+- (BOOL)isNeedToLoadGame {
+    return YES;
+}
+
+/// 发送公屏文本消息
+/// @param content content
+- (void)sendContentMsg:(NSString *)content {
+    RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:content];
+    [self sendMsg:m isAddToShow:YES finished:nil];
+}
+
+/// 展示更多视图
+- (void)showMoreView {
+    WeakSelf
+    RoomMoreView *v = [[RoomMoreView alloc] init];
+    v.suspendCallback = ^{
+        [DTSheetView close];
+        [SuspendRoomView show:weakSelf];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+    v.exitCallback = ^{
+        [DTSheetView close];
+        [DTAlertView showTextAlert:NSString.dt_room_sure_leave_cur_room sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
+            [DTSheetView close];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf exitRoomFromSuspend:NO finished:nil];
+            });
+        }          onCloseCallback:^{
+        }];
+    };
+    [DTSheetView showTop:v cornerRadius:0 onCloseCallback:^{
+
+    }];
+}
+
+/// 是否需要展示礼物动效
+- (BOOL)isNeedToShowGiftEffect {
+    return YES;
+}
+
+/// 是否需要加载场景礼物
+- (BOOL)isNeedToLoadSceneGiftList {
+    return NO;
+}
+
+/// 是否是追加方式
+- (BOOL)isAppendSceneGiftList {
+    return NO;
+}
+
+/// 是否需要自动上麦
+- (BOOL)isNeedAutoUpMic {
+    // 默认自动上麦
+    return YES;
+}
+
 /// 发送房间切换消息
 /// @param gameId
 - (void)sendGameChangedMsg:(int64_t)gameId operatorUser:(NSString *)userID {
     // 发送游戏切换给其它用户
     RoomCmdChangeGameModel *msg = [RoomCmdChangeGameModel makeMsg:gameId];
     if (msg) {
-        [self sendMsg:msg isAddToShow:false];
+        [self sendMsg:msg isAddToShow:false finished:nil];
     }
 }
 
@@ -380,7 +473,7 @@
 - (void)handleMicTap:(AudioRoomMicModel *)micModel {
     if (micModel.user == nil) {
         /// 无人，上麦
-        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 success:nil fail:nil];
+        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 proxyUser:nil success:nil fail:nil];
         return;
     } else {
         BOOL isPlaying = self.sudFSMMGDecorator.isPlaying;
@@ -425,7 +518,7 @@
                     [DTSheetView close];
                     [DTAlertView showTextAlert:NSString.dt_room_flight_tile sureText:NSString.dt_room_confirm_flight cancelText:NSString.dt_common_cancel onSureCallback:^{
                         // 下麦
-                        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 success:nil fail:nil];
+                        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 proxyUser:nil success:nil fail:nil];
 
                         [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
                     }          onCloseCallback:^{
@@ -434,7 +527,7 @@
                 } else {
 
                     // 下麦
-                    [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 success:nil fail:nil];
+                    [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 proxyUser:nil success:nil fail:nil];
 
                     if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.login.loginUserInfo.userID]) {
                         /// 先退出结束游戏，再退出当前游戏
@@ -564,6 +657,9 @@
     if ([self isInMic]) {
         return;
     }
+    if (!self.isNeedAutoUpMic) {
+        return;
+    }
     AudioRoomMicModel *micModel = [self getOneEmptyMic];
     if (micModel == nil) {
         [ToastUtil show:NSString.dt_room_there_no_mic];
@@ -571,7 +667,7 @@
     }
     if (micModel.user == nil) {
         /// 无人，上麦
-        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 success:nil fail:nil];
+        [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 proxyUser:nil success:nil fail:nil];
         return;
     }
 }
@@ -601,17 +697,41 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_MIC_CHANGED object:nil userInfo:@{@"msgModel": model}];
 }
 
+- (GiftModel *)getGiftModelFromMsg:(RoomCmdSendGiftModel *)msgModel {
+    GiftModel *giftModel = nil;
+    if (msgModel.type == 1) {
+        // 后台礼物
+        giftModel = [[GiftModel alloc] init];
+        if (msgModel.animationUrl) {
+            NSURL *url = msgModel.animationUrl.dt_toURL;
+            giftModel.animateType = url.pathExtension;
+        }
+        giftModel.animateURL = msgModel.animationUrl;
+        giftModel.giftID = msgModel.giftID;
+        giftModel.giftName = msgModel.giftName;
+        giftModel.giftURL = msgModel.giftUrl;
+        giftModel.smallGiftURL = msgModel.giftUrl;
+    } else {
+        // 内置
+        giftModel = [GiftService.shared giftByID:msgModel.giftID];;
+    }
+    return giftModel;
+}
+
 /// 处理礼物动效
 /// @param model model description
 - (void)handleGiftEffect:(RoomCmdSendGiftModel *)model {
-    GiftModel *giftModel = [GiftService.shared giftByID:model.giftID];
+    if (!self.isNeedToShowGiftEffect) {
+        return;
+    }
+    GiftModel *giftModel = [self getGiftModelFromMsg:model];
     if (!giftModel) {
         NSLog(@"No exist the gift info:%ld", model.giftID);
         return;
     }
     if ([giftModel.animateType isEqualToString:@"svga"]) {
         DTSVGAPlayerView *v = DTSVGAPlayerView.new;
-        NSURL *url = [NSURL fileURLWithPath:giftModel.animateURL];
+        NSURL *url = [giftModel.animateURL hasPrefix:@"http"] ? [[NSURL alloc] initWithString:giftModel.animateURL] : [NSURL fileURLWithPath:giftModel.animateURL];
         [v setURL:url];
         [self.view addSubview:v];
         [v mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -624,7 +744,7 @@
             [weakV removeFromSuperview];
         }];
     } else if ([giftModel.animateType isEqualToString:@"lottie"]) {
-        NSURL *url = [NSURL fileURLWithPath:giftModel.animateURL];
+        NSURL *url = [giftModel.animateURL hasPrefix:@"http"] ? [[NSURL alloc] initWithString:giftModel.animateURL] : [NSURL fileURLWithPath:giftModel.animateURL];
 
         LOTAnimationView *v = [[LOTAnimationView alloc] initWithContentsOfURL:url];
         [self.view addSubview:v];
@@ -684,6 +804,8 @@
             [self logoutGame];
         }
     }
+    BOOL showTip = self.gameId == DIGITAL_BOMB || self.gameId == YOU_DRAW_AND_I_GUESS || self.gameId == I_GUESS_YOU_SAID;
+    [self.asrTipLabel setHidden:showTip ? NO : YES];
 }
 
 - (void)handleMicList:(NSArray<HSRoomMicList *> *)micList {
@@ -720,6 +842,10 @@
 
 /// 进入房间 自动上麦
 - (void)handleAutoUpMic {
+    if (!self.isNeedAutoUpMic) {
+        DDLogDebug(@"isNeedAutoUpMic false, not auto up mic");
+        return;
+    }
     if (![self isInMic]) {
         [self handleGameUpMic];
     }
@@ -762,7 +888,77 @@
     return YES;
 }
 
+/// 处理游戏状态变化
+- (void)handlePlayerStateChanged {
+
+    if (!self.sudFSMMGDecorator.keyWordASRing) {
+        return;
+    }
+    if (self.operatorView.voiceBtnState != VoiceBtnStateTypeWaitOpen) {
+        return;
+    }
+    if (self.gameId == DIGITAL_BOMB || self.gameId == YOU_DRAW_AND_I_GUESS || self.gameId == I_GUESS_YOU_SAID) {
+        [self showVoiceTip];
+    }
+}
+
+- (void)showVoiceTip {
+
+    if (!self.btnTip) {
+        self.btnTip = [[UIButton alloc] init];
+        UIImage *bgImage = [[[UIImage imageNamed:@"voice_tip"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 50, 19, 49) resizingMode:UIImageResizingModeStretch] imageFlippedForRightToLeftLayoutDirection];
+        [self.btnTip setBackgroundImage:bgImage forState:UIControlStateNormal];
+        NSString *tip = @"";
+        if (self.gameId == DIGITAL_BOMB) {
+            tip = NSString.dt_asr_open_mic_num_tip;
+        } else {
+            tip = NSString.dt_asr_open_mic_tip;
+        }
+        [self.btnTip setTitle:tip forState:UIControlStateNormal];
+        [self.btnTip setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
+        self.btnTip.titleLabel.font = UIFONT_REGULAR(16);
+        [self.btnTip setContentEdgeInsets:UIEdgeInsetsMake(0, 12, 12, 6)];
+        [self.sceneView addSubview:self.btnTip];
+        [self.btnTip mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_lessThanOrEqualTo(kScreenWidth - 32);
+            make.height.mas_greaterThanOrEqualTo(0);
+            make.bottom.equalTo(self.operatorView.mas_top).offset(0);
+            make.leading.mas_equalTo(16);
+        }];
+        if (self.timer) {
+            [self.timer invalidate];
+        }
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)onTimer:(NSTimer *)timer {
+    [self closeTip];
+}
+
+- (void)closeTip {
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    [self.btnTip removeFromSuperview];
+    self.btnTip = nil;
+}
+
 #pragma mark lazy
+
+- (MarqueeLabel *)asrTipLabel {
+    if (!_asrTipLabel) {
+        _asrTipLabel = [[MarqueeLabel alloc] init];
+        _asrTipLabel.fadeLength = 10;
+        _asrTipLabel.trailingBuffer = 20;
+        _asrTipLabel.font = UIFONT_MEDIUM(11);
+        _asrTipLabel.textColor = UIColor.whiteColor;
+        _asrTipLabel.text = NSString.dt_asr_tip;
+        _asrTipLabel.hidden = YES;
+    }
+    return _asrTipLabel;
+}
 
 - (UIImageView *)bgImageView {
     if (!_bgImageView) {
@@ -888,6 +1084,10 @@
 
 - (void)dealloc {
     NSLog(@"base scene vc dealloc");
+
+    if (self.asrStateNTF) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self.asrStateNTF];
+    }
 }
 
 - (BOOL)isShowGameMic {
@@ -937,10 +1137,23 @@
     return [m mj_JSONString];
 }
 
+/// 处理游戏开始
+- (void)handleGameStared {
+    /// 如果当前用户在麦上，自动加入游戏
+    if ([self isInMic] && [self isAutoJoinGame]) {
+        [self notifyGameToJoin];
+    }
+}
+
 - (void)onGameMGCommonSelfClickReadyBtn {
 }
 
 - (void)onGameMGCommonSelfClickStartBtn {
+}
+
+/// 加入状态处理发生变更
+- (void)playerIsInGameStateChanged:(NSString *)userId {
+
 }
 
 @end
