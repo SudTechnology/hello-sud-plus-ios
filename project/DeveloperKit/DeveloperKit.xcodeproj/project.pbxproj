@@ -152,6 +152,7 @@
 		6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */; };
 		6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */; };
 		6C682D32288010C900B2EC80 /* RespCrossRoomListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C682D31288010C900B2EC80 /* RespCrossRoomListModel.m */; };
+		6CB3D145288FC8C30037EE88 /* GamePreloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3D144288FC8C30037EE88 /* GamePreloadViewController.m */; };
 		6CCA0B0F287AC14700CAFF40 /* HomeGameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFB287AC14700CAFF40 /* HomeGameListViewController.m */; };
 		6CCA0B11287AC14700CAFF40 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0AFF287AC14700CAFF40 /* QSSwitchRoomModeView.m */; };
 		6CCA0B12287AC14700CAFF40 /* QSRoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA0B03287AC14700CAFF40 /* QSRoomMoreView.m */; };
@@ -178,6 +179,7 @@
 		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
 		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
 		BC2109B53CC40DBF0DEB10B2 /* RoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105467EA8857361624481 /* RoomMoreView.m */; };
+		BC210BC2D342FD904F923B17 /* GamePreloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102FE75B90D63F85C1E0A /* GamePreloadCell.m */; };
 		BC210BD58CEB06F2F0AFCF2A /* SwitchGameEnvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104DB2454F354A9118BBA /* SwitchGameEnvViewController.m */; };
 		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
@@ -534,6 +536,8 @@
 		6C682D30288010C900B2EC80 /* RespCrossRoomListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespCrossRoomListModel.h; sourceTree = "<group>"; };
 		6C682D31288010C900B2EC80 /* RespCrossRoomListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespCrossRoomListModel.m; sourceTree = "<group>"; };
 		6C75F36A27C348A50019BB74 /* KeyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHeader.h; sourceTree = "<group>"; };
+		6CB3D143288FC8C30037EE88 /* GamePreloadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GamePreloadViewController.h; sourceTree = "<group>"; };
+		6CB3D144288FC8C30037EE88 /* GamePreloadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GamePreloadViewController.m; sourceTree = "<group>"; };
 		6CCA0AF9287AC14700CAFF40 /* HomeGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeGameListViewController.h; sourceTree = "<group>"; };
 		6CCA0AFB287AC14700CAFF40 /* HomeGameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeGameListViewController.m; sourceTree = "<group>"; };
 		6CCA0AFE287AC14700CAFF40 /* QSHomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSHomeHeaderView.h; sourceTree = "<group>"; };
@@ -573,9 +577,11 @@
 		6CEF766727F5A22000A12220 /* MoreSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSettingViewController.m; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentView.m; sourceTree = "<group>"; };
+		BC2102FE75B90D63F85C1E0A /* GamePreloadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePreloadCell.m; sourceTree = "<group>"; };
 		BC210337708736FFF222750A /* BaseSceneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSceneService.m; sourceTree = "<group>"; };
 		BC2103A4FFA7EDE6A259089E /* SwitchGameEnvModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchGameEnvModel.m; sourceTree = "<group>"; };
 		BC2103C043B5568FCBA68B06 /* BaseSceneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSceneService.h; sourceTree = "<group>"; };
+		BC2103CE60C63BCEAFCDA31C /* GamePreloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePreloadCell.h; sourceTree = "<group>"; };
 		BC2104DB2454F354A9118BBA /* SwitchGameEnvViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchGameEnvViewController.m; sourceTree = "<group>"; };
 		BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdPKModel.m; sourceTree = "<group>"; };
 		BC2105467EA8857361624481 /* RoomMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomMoreView.m; sourceTree = "<group>"; };
@@ -667,6 +673,8 @@
 				44241ADA27EACF39001EE125 /* SwitchLanguageViewController.m */,
 				BC2104DB2454F354A9118BBA /* SwitchGameEnvViewController.m */,
 				BC2108432DB9CD59465E5459 /* SwitchGameEnvViewController.h */,
+				6CB3D143288FC8C30037EE88 /* GamePreloadViewController.h */,
+				6CB3D144288FC8C30037EE88 /* GamePreloadViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -709,6 +717,8 @@
 				4455ACD527EAC657001516EE /* HSSetingHeadView.m */,
 				BC210804A01D1545CE4CAC9A /* SwitchGameEnvTableViewCell.m */,
 				BC210914B054EA1B822C6890 /* SwitchGameEnvTableViewCell.h */,
+				BC2102FE75B90D63F85C1E0A /* GamePreloadCell.m */,
+				BC2103CE60C63BCEAFCDA31C /* GamePreloadCell.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1787,6 +1797,7 @@
 				4455AE1027EAC6F7001516EE /* MicOperateView.m in Sources */,
 				4455AE1927EAC6F7001516EE /* RoomMsgBgView.m in Sources */,
 				6C192E5E279523B100553034 /* main.m in Sources */,
+				6CB3D145288FC8C30037EE88 /* GamePreloadViewController.m in Sources */,
 				4455ADAF27EAC658001516EE /* RoomGiftPannelView.m in Sources */,
 				4455AE1527EAC6F7001516EE /* RoomOperatorView.m in Sources */,
 				4455AD8E27EAC658001516EE /* HSSetingHeadView.m in Sources */,
@@ -1889,6 +1900,7 @@
 				BC210BD58CEB06F2F0AFCF2A /* SwitchGameEnvViewController.m in Sources */,
 				BC21018BF3324EAE31DADD69 /* SwitchGameEnvTableViewCell.m in Sources */,
 				BC2103D785DB3121525492EC /* SwitchGameEnvModel.m in Sources */,
+				BC210BC2D342FD904F923B17 /* GamePreloadCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,9 +14,11 @@
 #import "MoreSettingViewController.h"
 #import "SwitchAppIdViewController.h"
 #import "SwitchGameEnvViewController.h"
+#import "GamePreloadViewController.h""
 
 #define AppIdTitleName @"切换应用"
 #define GameEnvTitleName @"切换游戏环境"
+#define GamePreloadTitleName @"预加载"
 
 
 @interface HSSettingViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -50,12 +52,12 @@
     //    rtcModel.title = NSString.dt_settings_more_set;
     //    rtcModel.isMore = YES;
     //    rtcModel.pageURL = @"";
-    
+
     HSSettingModel *languageModel = [HSSettingModel new];
     languageModel.title = NSString.dt_settings_switch_language;
     languageModel.isMore = YES;
     languageModel.pageURL = @"";
-    
+
     HSSettingModel *appIdModel = [HSSettingModel new];
     appIdModel.title = AppIdTitleName;
     appIdModel.isMore = YES;
@@ -65,6 +67,11 @@
     gameEnvModel.title = GameEnvTitleName;
     gameEnvModel.isMore = YES;
     gameEnvModel.pageURL = @"";
+
+    HSSettingModel *gamePreloadModel = [HSSettingModel new];
+    gamePreloadModel.title = GamePreloadTitleName;
+    gamePreloadModel.isMore = YES;
+    gamePreloadModel.pageURL = @"";
 
     //    HSSettingModel *gitHubModel = [HSSettingModel new];
     //    gitHubModel.title = @"GitHub";
@@ -83,14 +90,14 @@
     //    privacyModel.title = NSString.dt_settings_privacy_policy;
     //    privacyModel.isMore = YES;
     //    privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
-    
+
     //    if (self.showMoreSetting) {
     //        self.arrData = @[@[verModel], @[languageModel, rtcModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
     //    } else {
     //        self.arrData = @[@[verModel], @[languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
     //    }
-    self.arrData = @[@[languageModel, appIdModel, gameEnvModel]];
-    
+    self.arrData = @[@[languageModel, appIdModel, gameEnvModel, gamePreloadModel]];
+
     WeakSelf
     HSSetingHeadView *header = HSSetingHeadView.new;
     header.tapCallback = ^{
@@ -116,7 +123,7 @@
     [super dtAddViews];
     self.view.backgroundColor = HEX_COLOR(@"#F5F6FB");
     [self.view addSubview:self.tableView];
-    
+
 }
 
 - (void)dtLayoutViews {
@@ -138,8 +145,8 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsHorizontalScrollIndicator = NO;
         _tableView.showsVerticalScrollIndicator = NO;
-        
-        
+
+
     }
     return _tableView;
 }
@@ -200,15 +207,18 @@
         } else {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.pageURL]];
         }
-    } else if ([model.title isEqualToString:AppIdTitleName]){
+    } else if ([model.title isEqualToString:AppIdTitleName]) {
         // 切换应用
         SwitchAppIdViewController *vc = SwitchAppIdViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ([model.title isEqualToString:GameEnvTitleName]){
+    } else if ([model.title isEqualToString:GameEnvTitleName]) {
         // 切换环境
         SwitchGameEnvViewController *vc = SwitchGameEnvViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
-    }else {
+    } else if ([model.title isEqualToString:GamePreloadTitleName]) {
+        GamePreloadViewController *vc = GamePreloadViewController.new;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
         if (model.isMore) {
             DTWebViewController *web = DTWebViewController.new;
             web.url = model.pageURL;
