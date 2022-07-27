@@ -9,6 +9,7 @@
 #import "GameListViewController.h"
 #import "HSSettingViewController.h"
 #import "HomeViewController.h"
+#import "MyViewController.h"
 
 @interface MainTabBarController ()
 
@@ -41,11 +42,11 @@
     gameList.tabBarItem.title = NSString.dt_tab_room;
     gameList.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_room"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     gameList.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_room"];
-    
-    HSSettingViewController *setting = [[HSSettingViewController alloc]init];
-    setting.tabBarItem.title = NSString.dt_tab_setting;
-    setting.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_setting"];
-    setting.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+
+    MyViewController *setting = [[MyViewController alloc]init];
+    setting.tabBarItem.title = @"我的";//NSString.dt_tab_setting;
+    setting.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_my"];
+    setting.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_my"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     BaseNavigationViewController * navSetting = [[BaseNavigationViewController alloc]initWithRootViewController:setting];
     
     

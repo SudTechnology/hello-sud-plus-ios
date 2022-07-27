@@ -5,7 +5,7 @@
 //  Created by kaniel on 2022/1/20.
 //
 
-#import "HSSettingViewController.h"
+#import "AboutViewController.h"
 #import "HSSettingCell.h"
 #import "HSSettingModel.h"
 #import "HSSetingHeadView.h"
@@ -13,7 +13,7 @@
 #import "SwitchLanguageViewController.h"
 #import "MoreSettingViewController.h"
 
-@interface HSSettingViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface AboutViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UIView *contactUsView;
 /// 页面数据
@@ -22,11 +22,10 @@
 @property(nonatomic, assign) BOOL showMoreSetting;
 @end
 
-@implementation HSSettingViewController
+@implementation AboutViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = NSString.dt_tab_setting;
     self.navigationItem.leftBarButtonItem = nil;
     // Do any additional setup after loading the view.
     [self configData];
@@ -69,30 +68,26 @@
     privacyModel.isMore = YES;
     privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
 
-    if (self.showMoreSetting) {
-        self.arrData = @[@[verModel], @[languageModel, rtcModel]];
-    } else {
-        self.arrData = @[@[verModel], @[languageModel]];
-    }
+    self.arrData = @[@[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
 
-    WeakSelf
-    HSSetingHeadView *header = HSSetingHeadView.new;
-    header.tapCallback = ^{
-        weakSelf.showMoreSetting = YES;
-        [weakSelf configData];
-    };
-    header.frame = CGRectMake(0, 0, kScreenWidth, 217);
-    [header dtUpdateUI];
-    self.tableView.tableHeaderView = header;
-    [header mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.top.trailing.mas_equalTo(0);
-        make.height.mas_equalTo(217);
-        make.width.mas_equalTo(kScreenWidth - 32);
-    }];
-//    CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
-//    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
-//    self.contactUsView.frame = targetFrame;
-//    self.tableView.tableFooterView = self.contactUsView;
+//    WeakSelf
+//    HSSetingHeadView *header = HSSetingHeadView.new;
+//    header.tapCallback = ^{
+//        weakSelf.showMoreSetting = YES;
+//        [weakSelf configData];
+//    };
+//    header.frame = CGRectMake(0, 0, kScreenWidth, 217);
+//    [header dtUpdateUI];
+//    self.tableView.tableHeaderView = header;
+//    [header mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.leading.top.trailing.mas_equalTo(0);
+//        make.height.mas_equalTo(217);
+//        make.width.mas_equalTo(kScreenWidth - 32);
+//    }];
+    CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
+    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
+    self.contactUsView.frame = targetFrame;
+    self.tableView.tableFooterView = self.contactUsView;
     [self.tableView reloadData];
 }
 
@@ -161,9 +156,9 @@
     HSSettingCell *c = (HSSettingCell *) cell;
     c.isShowTopLine = indexPath.row > 0;
     c.model = self.arrData[indexPath.section][indexPath.row];
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        c.isShowTopLine = true;
-    }
+//    if (indexPath.section == 0 && indexPath.row == 0) {
+//        c.isShowTopLine = true;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

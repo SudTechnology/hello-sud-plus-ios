@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, readonly) AccountUserModel *loginUserInfo;
 /// token
 @property(nonatomic, copy, readonly) NSString *token;
+/// 绑定钱包
+@property(nonatomic, copy) NSString *walletAddress;
 
 - (void)prepare;
 
