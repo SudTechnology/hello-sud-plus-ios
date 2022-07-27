@@ -60,7 +60,9 @@
     // Do any additional setup after loading the view.
     self.language = [SettingsService getCurLanguageLocale];
     [self initSudFSMMG];
-    [self loginRoom];
+    if (self.isNeedToRTC) {
+        [self loginRoom];
+    }
     if (self.gameId > 0 && self.isNeedToLoadGame) {
         [self loginGame];
         [self roomGameDidChanged:self.gameId];
@@ -770,6 +772,12 @@
 
         [v playWithMetalConfiguration:configuration];
     }
+}
+
+
+/// 是否需要RTC功能
+- (BOOL)isNeedToRTC {
+    return YES;
 }
 
 /// 同步麦位列表

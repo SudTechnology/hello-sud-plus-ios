@@ -16,4 +16,7 @@
 
 /// 业务需要 默认为0  1 = 关闭游戏 2 = 结束游戏
 @property (nonatomic, assign) NSInteger itemType;
+
+@property (nonatomic, assign)long downloadedSize;
+@property (nonatomic, assign)long totalSize;
 @end

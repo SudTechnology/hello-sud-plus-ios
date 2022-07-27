@@ -13,6 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否展示顶部线条
 @property(nonatomic, assign)BOOL isShowTopLine;
+@property(nonatomic, copy)void(^loadGameBlock)(void);
+@property(nonatomic, copy)void(^startDownloadBlock)(void);
+@property(nonatomic, copy)void(^cancelDownloadBlock)(void);
+@property(nonatomic, copy)void(^pauseDownloadBlock)(void);
+- (void)updateDownloadedSize:(long) downloadedSize totalSize:(long) totalSize;
 @end
 
 NS_ASSUME_NONNULL_END

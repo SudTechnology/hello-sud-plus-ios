@@ -36,6 +36,7 @@
 
 - (void)dtAddViews {
     [super dtAddViews];
+    self.backgroundColor = UIColor.clearColor;
     [self.contentView addSubview:self.topView];
     [self.contentView addSubview:self.nameLabel];
     [self.contentView addSubview:self.progressLabel];
@@ -109,6 +110,7 @@
     QSGameItemModel *model = (QSGameItemModel *)self.model;
     self.nameLabel.text = model.gameName;
     self.iconImageView.image = [UIImage imageNamed:model.gameRoomPic];
+    [self updateDownloadedSize:model.downloadedSize totalSize:model.totalSize];
     
 }
 
@@ -123,18 +125,40 @@
 - (void)onBtnClick:(UIButton *)sender {
     if (sender == self.loadBtn) {
         // 加载
+        if (self.loadGameBlock) self.loadGameBlock();
     } else if (sender == self.startBtn) {
         // 开始
+        if (self.startDownloadBlock) self.startDownloadBlock();
     } else if (sender == self.cancelBtn) {
         // 取消
+        if (self.cancelDownloadBlock) self.cancelDownloadBlock();
     } else if (sender == self.pauseBtn) {
         // 暂停
+        if (self.pauseDownloadBlock) self.pauseDownloadBlock();
     }
 }
 
 - (void)setIsShowTopLine:(BOOL)isShowTopLine {
     _isShowTopLine = isShowTopLine;
     self.topView.hidden = isShowTopLine ? NO : YES;
+}
+
+- (void)updateDownloadedSize:(long) downloadedSize totalSize:(long) totalSize {
+    QSGameItemModel *model = (QSGameItemModel *)self.model;
+    model.downloadedSize = downloadedSize;
+    model.totalSize = totalSize;
+    
+    CGFloat totalMB = totalSize * 1.0 / 1024 / 1024;
+    CGFloat downloadedMB = downloadedSize * 1.0 / 1024 / 1024;
+    self.progressLabel.text = [NSString stringWithFormat:@"进度：%.02fMB/%.02fMB", downloadedMB, totalMB];
+    if (totalMB > 0) {
+        self.progressView.progress = downloadedMB / totalMB;
+    } else {
+        self.progressView.progress = 0;
+    }
+    if (downloadedSize == totalSize && totalSize > 0) {
+        self.progressLabel.text = @"已完成";
+    }
 }
 
 #pragma mark lazy
@@ -170,7 +194,7 @@
         _progressLabel.font = [UIFont systemFontOfSize:12];
         _progressLabel.textColor = HEX_COLOR(@"#8A8A8E");
         _progressLabel.textAlignment = NSTextAlignmentRight;
-        _progressLabel.text = @"已完成";
+        _progressLabel.text = @"未下载";
     }
     return _progressLabel;
 }

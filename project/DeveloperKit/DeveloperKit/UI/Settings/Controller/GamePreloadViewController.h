@@ -6,11 +6,11 @@
 //  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseSceneViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /// 游戏包预加载
-@interface GamePreloadViewController : BaseViewController
+@interface GamePreloadViewController : BaseSceneViewController
 
 @end
 

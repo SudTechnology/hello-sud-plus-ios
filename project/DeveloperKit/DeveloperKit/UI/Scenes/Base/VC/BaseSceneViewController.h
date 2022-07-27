@@ -193,6 +193,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 处理礼物动效
 /// @param model model description
 - (void)handleGiftEffect:(RoomCmdSendGiftModel *)model;
+/// 是否需要RTC功能
+- (BOOL)isNeedToRTC;
 #pragma mark - SudFSMMGListener
 /// 游戏配置
 - (NSString *)onGetGameCfg;
