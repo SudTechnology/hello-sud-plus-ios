@@ -309,9 +309,9 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 /// 使用NFT
 /// @param contractAddress
 /// @param tokenId
-- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId {
+- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId add:(BOOL)add {
     NSString *key = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNFT, AppService.shared.loginUserID, contractAddress, tokenId];
-    [NSUserDefaults.standardUserDefaults setBool:YES forKey:key];
+    [NSUserDefaults.standardUserDefaults setBool:add ? YES : NO forKey:key];
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 

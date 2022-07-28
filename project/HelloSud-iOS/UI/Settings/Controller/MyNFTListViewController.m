@@ -30,11 +30,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addRefreshHeader];
+//    [self addRefreshHeader];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.collectionView reloadData];
 }
 
 - (void)dtAddViews {

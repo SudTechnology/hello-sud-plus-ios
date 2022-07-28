@@ -68,9 +68,10 @@
 /// @param nftDetailToken nftDetailToken
 - (void)handleWearDetailToken:(NSString *)nftDetailToken {
     WeakSelf
-    [UserService reqWearNFT:nftDetailToken isWear:self.wearBtn.selected ? NO : YES success:^(BaseRespModel *resp) {
+    BOOL isWear = self.wearBtn.selected ? NO : YES;
+    [UserService reqWearNFT:nftDetailToken isWear:isWear success:^(BaseRespModel *resp) {
         weakSelf.wearBtn.enabled = YES;
-        [AppService.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId];
+        [AppService.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId add:isWear];
         [weakSelf updateWearBtn];
     }                  fail:^(NSError *error) {
         weakSelf.wearBtn.enabled = YES;

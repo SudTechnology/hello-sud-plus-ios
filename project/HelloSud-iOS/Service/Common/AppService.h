@@ -123,7 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 使用NFT
 /// @param contractAddress
 /// @param tokenId
-- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId;
+- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId add:(BOOL)add;
 @end
 
 NS_ASSUME_NONNULL_END
