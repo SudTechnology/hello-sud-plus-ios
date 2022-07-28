@@ -8,10 +8,11 @@
 #import "MyNFTListViewController.h"
 #import "MyNFTColCell.h"
 #import "MyNFTDetailViewController.h"
+#import "HSNFTListCellModel.h"
 
 @interface MyNFTListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
-@property(nonatomic, strong) NSArray *dataList;
+@property(nonatomic, strong) NSMutableArray<HSNFTListCellModel *> *dataList;
 
 @end
 
@@ -52,7 +53,6 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    self.dataList = @[[[BaseModel alloc] init],[[BaseModel alloc] init],[[BaseModel alloc] init],[[BaseModel alloc] init] ];
 }
 
 // 添加下来刷新
@@ -69,6 +69,16 @@
     header.stateLabel.hidden = true;
     self.collectionView.mj_header = header;
     self.collectionView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
+}
+
+- (void)updateNFTListModel:(SudNFTListModel *)nftListModel {
+
+    for (SudNFTModel *m in nftListModel.list) {
+        HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc]init];
+        cellModel.nftModel = m;
+        [self.dataList addObject:cellModel];
+    }
+    [self.collectionView reloadData];
 }
 
 #pragma mark - requst Data
@@ -98,6 +108,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     MyNFTDetailViewController *vc = [[MyNFTDetailViewController alloc]init];
+    vc.cellModel = self.dataList[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -126,5 +137,12 @@
         [_collectionView registerClass:[MyNFTColCell class] forCellWithReuseIdentifier:@"MyNFTColCell"];
     }
     return _collectionView;
+}
+
+- (NSMutableArray *)dataList {
+    if (!_dataList) {
+        _dataList = [[NSMutableArray alloc]init];
+    }
+    return _dataList;
 }
 @end

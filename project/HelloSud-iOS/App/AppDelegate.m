@@ -15,6 +15,7 @@
 #import "LoginViewController.h"
 #import "KeyHeader.h"
 #import <NIMSDK/NIMSDK.h>
+#import <SudMGP/SudNFT.h>
 
 @interface AppDelegate () {
 
@@ -53,6 +54,7 @@
     NIMSDKOption *option = [NIMSDKOption optionWithAppKey:@"110f7db7c00ee497bd7b32954c36464c"];
     [[NIMSDK sharedSDK] registerWithOption:option];
     [self cacheLocalData];
+    
     return YES;
 }
 
@@ -61,6 +63,8 @@
     [Bugly updateAppVersion:version];
     [Bugly startWithAppId:BUGLEY_APP_ID];
 }
+
+
 
 - (void)observerNTF {
     // 监听token刷新状态切换视图
@@ -201,4 +205,14 @@
     UIInterfaceOrientationMask mask = self.window.rootViewController.supportedInterfaceOrientations;
     return mask;
 }
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+
+    // 三方返回APP时，要将返回数据传入SudNFT去处理解析
+    if ([SudNFT handleOpenUniversalLink:userActivity]) {
+        return YES;
+    }
+    return YES;
+}
+
 @end

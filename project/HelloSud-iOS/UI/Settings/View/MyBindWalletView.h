@@ -7,4 +7,6 @@
 
 /// 我的钱包绑定
 @interface MyBindWalletView : BaseView
+@property (nonatomic, strong)void(^clickWalletBlock)(SudNFTWalletModel *wallModel);
+- (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList;
 @end

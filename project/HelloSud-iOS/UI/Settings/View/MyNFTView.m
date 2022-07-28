@@ -5,14 +5,16 @@
 
 #import "MyNFTView.h"
 #import "MyNFTListViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface MyNFTView ()
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) UIView *nftContentView;
 @property(nonatomic, strong) NSArray<UIImageView *> *iconImageViewList;
 @property(nonatomic, strong) UILabel *nftCountLabel;
-@property (nonatomic, strong)UIImageView *rightMoreImageView;
+@property(nonatomic, strong) UIImageView *rightMoreImageView;
 @property(nonatomic, strong) UIView *moreTapView;
+@property(nonatomic, strong) SudNFTListModel *nftListModel;
 @end
 
 @implementation MyNFTView
@@ -27,10 +29,10 @@
     [self addSubview:self.nftCountLabel];
     [self addSubview:self.moreTapView];
 
-    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (int i = 0; i < 3; ++i) {
-        UIImageView *iv = [[UIImageView alloc]init];
-        iv.backgroundColor = UIColor.orangeColor;
+        UIImageView *iv = [[UIImageView alloc] init];
+//        iv.backgroundColor = UIColor.orangeColor;
         [iv dt_cornerRadius:8];
         [arr addObject:iv];
         [self.nftContentView addSubview:iv];
@@ -81,6 +83,29 @@
 
 }
 
+- (void)updateNFTList:(SudNFTListModel *)nftListModel {
+    self.nftListModel = nftListModel;
+    for (int i = 0; i < self.iconImageViewList.count; ++i) {
+        UIImageView *iv = self.iconImageViewList[i];
+        if (nftListModel.list.count > i) {
+            SudNFTModel *nftModel = nftListModel.list[i];
+            [SudNFT getNFTMetadata:nftModel.contractAddress tokenId:nftModel.tokenId chainType:SudENFTEthereumChainsTypeGoerli listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
+                if (errCode != 0) {
+                    NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+                    DDLogError(@"getNFTMetadata:%@", msg);
+                    return;
+                }
+                if (metaDataModel.image) {
+                    DDLogDebug(@"show image:%@", metaDataModel.image);
+                    [iv setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image]];
+                }
+            }];
+        }
+    }
+    self.nftCountLabel.text = [NSString stringWithFormat:@"%@", @(nftListModel.totalCount)];
+
+}
+
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     UITapGestureRecognizer *tapMore = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapMoreView:)];
@@ -91,6 +116,7 @@
     /// 点击更多
     MyNFTListViewController *vc = [[MyNFTListViewController alloc] init];
     vc.title = self.nameLabel.text;
+    [vc updateNFTListModel:self.nftListModel];
     [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
 }
 

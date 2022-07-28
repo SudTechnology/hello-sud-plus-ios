@@ -69,6 +69,8 @@ typedef NS_ENUM(NSInteger, SudENFTEthereumChainsType) {
 @interface SudNFTListModel : NSObject
 /// 合约列表
 @property(nonatomic, copy) NSArray <SudNFTModel *> *list;
+/// 总数量
+@property (nonatomic, assign)NSInteger totalCount;
 /// 分页键，第一次不设置，当返回值存在page_key时，使用该值请求下一页数据，page_key有效期10分钟
 @property(nonatomic, copy) NSString *pageKey;
 @end

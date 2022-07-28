@@ -6,7 +6,7 @@
 //
 
 #import "MyNFTColCell.h"
-
+#import "HSNFTListCellModel.h"
 @interface MyNFTColCell ()
 @property (nonatomic, strong) UIImageView *tagView;
 @property (nonatomic, strong) UILabel *tagLabel;
@@ -73,6 +73,26 @@
     self.backgroundColor = UIColor.whiteColor;
 }
 
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
+    if (![self.model isKindOfClass:HSNFTListCellModel.class]) {
+        return;
+    }
+    HSNFTListCellModel *m = (HSNFTListCellModel *)self.model;
+    WeakSelf
+    [m getMetaData:^(SudNFTMetaDataModel *metaDataModel) {
+        if (metaDataModel.image) {
+            [weakSelf.gameImageView sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image] placeholderImage:[UIImage imageNamed:@"default_nft_icon"]];
+            weakSelf.nameLabel.text = metaDataModel.name;
+        } else {
+            weakSelf.nameLabel.text = @"未拉取到图片";
+            weakSelf.gameImageView.image = [UIImage imageNamed:@"default_nft_icon"];
+        }
+    }];
+    BOOL isWear = [AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
+    self.tagView.hidden = isWear ? NO : YES;
+}
+
 - (UIImageView *)tagView {
     if (!_tagView) {
         _tagView = [[UIImageView alloc] init];
@@ -85,6 +105,7 @@
     if (!_gameImageView) {
         _gameImageView = [[UIImageView alloc] init];
         _gameImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _gameImageView.clipsToBounds = YES;
     }
     return _gameImageView;
 }

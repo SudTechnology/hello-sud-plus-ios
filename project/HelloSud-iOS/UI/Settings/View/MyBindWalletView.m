@@ -8,6 +8,7 @@
 @interface BindBtnView : BaseView
 @property(nonatomic, strong) UIImageView *iconImageView;
 @property(nonatomic, strong) UILabel *nameLabel;
+@property(nonatomic, strong) SudNFTWalletModel *model;
 @end
 
 @implementation BindBtnView
@@ -29,8 +30,12 @@
     }];
 }
 
-- (void)update:(NSString *)name icon:(NSString *)icon {
-    self.nameLabel.text = name;
+
+- (void)update:(SudNFTWalletModel *)model {
+    self.nameLabel.text = model.name;
+    if (model.icon) {
+        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:model.icon]];
+    }
 }
 
 - (UIImageView *)iconImageView {
@@ -44,7 +49,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"连接到你的钱包";
+        _nameLabel.text = @"";
         _nameLabel.numberOfLines = 1;
         _nameLabel.textColor = HEX_COLOR(@"#ffffff");
         _nameLabel.font = UIFONT_MEDIUM(14);
@@ -87,7 +92,26 @@
 
 - (void)dtUpdateUI {
     AccountUserModel *userInfo = AppService.shared.login.loginUserInfo;
-    [self.metamaskView update:@"MetaMask" icon:nil];
+}
+
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [self.metamaskView addGestureRecognizer:tap];
+}
+
+- (void)onTap:(id)tap {
+    if (self.clickWalletBlock) {
+        self.clickWalletBlock(self.metamaskView.model);
+    }
+}
+
+- (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList {
+    for (SudNFTWalletModel *m in walletList) {
+        if (m.type == SudNFTWalletTypeMetaMask) {
+            [self.metamaskView update: m];
+        }
+    }
 }
 
 - (BindBtnView *)metamaskView {

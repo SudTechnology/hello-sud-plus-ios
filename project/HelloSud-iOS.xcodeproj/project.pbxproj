@@ -288,6 +288,7 @@
 		BC2106C085BCFA772D1B9F96 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21001E47A02C2A2F8EE39B /* AboutViewController.m */; };
 		BC210743E83852E3D938F5A9 /* DiscoInteractiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */; };
 		BC2107536FE74BA445EB4391 /* MyNFTView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AF99A3482B805EB68C8 /* MyNFTView.m */; };
+		BC21075C27415E8D75B17780 /* HSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101ECC4794AA0F7897DAE /* HSNFTListCellModel.m */; };
 		BC21076C5084AD192F038DA8 /* DiscoSelectAnchorColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */; };
 		BC2107A7C8A2991A5FD3E278 /* MyBindWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21034C2F7EE6607593A6DC /* MyBindWalletView.m */; };
 		BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */; };
@@ -853,6 +854,7 @@
 		BC210122CBC769498A9DBED6 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentView.m; sourceTree = "<group>"; };
 		BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessRoomViewController.h; sourceTree = "<group>"; };
+		BC2101ECC4794AA0F7897DAE /* HSNFTListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSNFTListCellModel.m; sourceTree = "<group>"; };
 		BC2101EF59A5BF2EE40D5494 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
 		BC210203F8E7C5CAEFF19056 /* PKRoomService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRoomService.h; sourceTree = "<group>"; };
 		BC21026DC2310D6C27C12757 /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
@@ -886,6 +888,7 @@
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
 		BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinPopView.h; sourceTree = "<group>"; };
 		BC2107929CECA531C851C092 /* PKSelectRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSelectRoomView.h; sourceTree = "<group>"; };
+		BC2107A8EE8748E0B0A38A2B /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
 		BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessCategoryView.h; sourceTree = "<group>"; };
 		BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessViewController.h; sourceTree = "<group>"; };
 		BC2107BC94088B9F062BBA4B /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
@@ -1061,6 +1064,8 @@
 				4455ACCC27EAC657001516EE /* ChangeRTCModel.m */,
 				44241ADC27EACF9C001EE125 /* SwitchLangModel.h */,
 				44241ADD27EACF9C001EE125 /* SwitchLangModel.m */,
+				BC2101ECC4794AA0F7897DAE /* HSNFTListCellModel.m */,
+				BC2107A8EE8748E0B0A38A2B /* HSNFTListCellModel.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2848,6 +2853,7 @@
 				BC2107EAE0746B2D4D2234C6 /* MyNFTListViewController.m in Sources */,
 				BC210E8DA59477CC32152825 /* MyNFTColCell.m in Sources */,
 				BC21066011CC87113AF9D72E /* MyNFTDetailViewController.m in Sources */,
+				BC21075C27415E8D75B17780 /* HSNFTListCellModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3133,7 +3139,7 @@
 				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
-				PROVISIONING_PROFILE_SPECIFIER = Dev_Sud_MGP;
+				PROVISIONING_PROFILE_SPECIFIER = HelloSudPlus_Dev;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_WORKSPACE = YES;

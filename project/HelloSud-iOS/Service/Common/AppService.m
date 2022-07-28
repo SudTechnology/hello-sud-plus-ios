@@ -20,6 +20,8 @@
 #define kKeyCurrentRTCType @"key_current_rtc_type"
 /// 配置信息缓存key
 #define kKeyConfigModel @"key_config_model"
+/// 穿戴NFT key
+#define kKeyUsedNFT @"key_used_nft_"
 
 NSString *const kRtcTypeZego = @"zego";
 NSString *const kRtcTypeAgora = @"agora";
@@ -293,6 +295,24 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
         return NSString.dt_settings_tencent;
     }
     return @"";
+}
+
+/// 是否已经穿戴
+/// @param contractAddress contractAddress
+/// @param tokenId tokenId
+/// @return
+- (BOOL)isNFTAlreadyUsed:(NSString *)contractAddress tokenId:(NSString *)tokenId {
+    NSString *key = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNFT, AppService.shared.loginUserID, contractAddress, tokenId];
+    return [NSUserDefaults.standardUserDefaults boolForKey:key];
+}
+
+/// 使用NFT
+/// @param contractAddress
+/// @param tokenId
+- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId {
+    NSString *key = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNFT, AppService.shared.loginUserID, contractAddress, tokenId];
+    [NSUserDefaults.standardUserDefaults setBool:YES forKey:key];
+    [NSUserDefaults.standardUserDefaults synchronize];
 }
 
 @end

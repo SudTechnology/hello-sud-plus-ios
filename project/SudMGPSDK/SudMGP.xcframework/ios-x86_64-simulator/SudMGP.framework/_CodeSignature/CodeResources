@@ -4,34 +4,6 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Headers/BaseRespModel.h</key>
-		<data>
-		Z5FcYzQoMRbJf8ZiSQsnvI74T8w=
-		</data>
-		<key>Headers/BindWalletRespModel.h</key>
-		<data>
-		gzRDzzUMSL0UggEw9dfFF7f+5yQ=
-		</data>
-		<key>Headers/GenerateDetailsNFTTokenRespModel.h</key>
-		<data>
-		YrCHFtJs7rrttyeIQfsnSEtQ5xk=
-		</data>
-		<key>Headers/GetNFTListRespModel.h</key>
-		<data>
-		q5QFd+T0yA3YhxDluy7Ol3CBJR4=
-		</data>
-		<key>Headers/GetNFTMetaDataRespModel.h</key>
-		<data>
-		ZDPbVaIrT7buKnp9m3nN5OuTong=
-		</data>
-		<key>Headers/GetSignNonceRespModel.h</key>
-		<data>
-		fzdunOyIRGQeRXjzR8WSAWOXz0g=
-		</data>
-		<key>Headers/GetWalletListRespModel.h</key>
-		<data>
-		d9Ave7mAPOalsaBt3sGqPc9VoTI=
-		</data>
 		<key>Headers/IRTSS.h</key>
 		<data>
 		0y2WBGK/l2oHGrnViE8PdEyEqAQ=
@@ -104,21 +76,9 @@
 		<data>
 		zwAWsgZCbQL4W2vFTc0K0BLvUhU=
 		</data>
-		<key>Headers/ISudNFTPrivateListener.h</key>
-		<data>
-		T+VBSTf+D836kJq5CUMYv8pcGsE=
-		</data>
-		<key>Headers/ProtoHeader.h</key>
-		<data>
-		kweEDd1k2jlKN2H3C36Y1tfjGbE=
-		</data>
 		<key>Headers/RTSSResult.h</key>
 		<data>
 		80kyv8aQpoAipg6Ia8MkA8kinNQ=
-		</data>
-		<key>Headers/SDKGetTokenRespModel.h</key>
-		<data>
-		FRo1odaqMUzjGpE9am4A1vb+QMo=
 		</data>
 		<key>Headers/SmRtAsr.h</key>
 		<data>
@@ -127,10 +87,6 @@
 		<key>Headers/SmRtAsrClient.h</key>
 		<data>
 		hshBcpfi1tW5ptVbt6Ox0YI/Wog=
-		</data>
-		<key>Headers/SudBaseHttpRequest.h</key>
-		<data>
-		1Y8LfY0RYH4J7CRGkw5z/K0J2eU=
 		</data>
 		<key>Headers/SudInitSDKParamModel.h</key>
 		<data>
@@ -144,13 +100,9 @@
 		<data>
 		XhLSCxVnu4FMX0lhRNFgOxp2Mbk=
 		</data>
-		<key>Headers/SudMGP-Swift.h</key>
-		<data>
-		uLAbsJYxecIezS1gFEmvTcXWbxw=
-		</data>
 		<key>Headers/SudMGP-umbrella.h</key>
 		<data>
-		vIn5YleGzzX6SVTgr8ElSluErb4=
+		5DlISTNy/oWEinBGzMrb93MoHX8=
 		</data>
 		<key>Headers/SudMGP.h</key>
 		<data>
@@ -160,49 +112,17 @@
 		<data>
 		xnBlRpjhZ14Li6X2AwSoYHBDf30=
 		</data>
-		<key>Headers/SudNFTHttpService.h</key>
-		<data>
-		vEnKtRlfE9giKKagmfMPv3hYz+8=
-		</data>
-		<key>Headers/SudNFTLocalPreferences.h</key>
-		<data>
-		khCM2fTJbDI0WVY+QkEW8A5V7+U=
-		</data>
 		<key>Headers/SudNFTModels.h</key>
 		<data>
-		OzyWMgUp970KRVLYkoAs+g90YKE=
+		r6rf6p94KIdkyDu6bLHa11bfKRE=
 		</data>
 		<key>Info.plist</key>
 		<data>
 		NMIyzMebtVq0fy6HWfugFleKNOA=
 		</data>
-		<key>Modules/SudMGP.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
-		<data>
-		13vMmZa2R863MWabH9J2ZH2Sbos=
-		</data>
-		<key>Modules/SudMGP.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
-		<data>
-		Gb9iJCjJ9rIbwd0eZRp1Wm143Zs=
-		</data>
-		<key>Modules/SudMGP.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
-		<data>
-		4LKkiBb073mE51bvLT58gpK2/Eg=
-		</data>
-		<key>Modules/SudMGP.swiftmodule/x86_64.swiftdoc</key>
-		<data>
-		13vMmZa2R863MWabH9J2ZH2Sbos=
-		</data>
-		<key>Modules/SudMGP.swiftmodule/x86_64.swiftinterface</key>
-		<data>
-		Gb9iJCjJ9rIbwd0eZRp1Wm143Zs=
-		</data>
-		<key>Modules/SudMGP.swiftmodule/x86_64.swiftmodule</key>
-		<data>
-		4LKkiBb073mE51bvLT58gpK2/Eg=
-		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		Ay0XKkYurpdsCja9Co+/AxIB0/k=
+		SqkCCW826QrTr8CHz/pkF0Gg7Uk=
 		</data>
 		<key>SudNativeJSConsoleRes.bundle/Info.plist</key>
 		<data>
@@ -251,83 +171,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Headers/BaseRespModel.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Z5FcYzQoMRbJf8ZiSQsnvI74T8w=
-			</data>
-			<key>hash2</key>
-			<data>
-			bdGqsgSS2P7T74jq55fLN8YcBpyTbBvbZ6pFL22H9mI=
-			</data>
-		</dict>
-		<key>Headers/BindWalletRespModel.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			gzRDzzUMSL0UggEw9dfFF7f+5yQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			t/Z9HV+1zeOiNpIPWA64pEAeMAT9qoFqJreQuCQb+Cg=
-			</data>
-		</dict>
-		<key>Headers/GenerateDetailsNFTTokenRespModel.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			YrCHFtJs7rrttyeIQfsnSEtQ5xk=
-			</data>
-			<key>hash2</key>
-			<data>
-			Qq6H7UmamLDcRis4+NLujKcs+3ZxuVX0syZXqyxYqo4=
-			</data>
-		</dict>
-		<key>Headers/GetNFTListRespModel.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			q5QFd+T0yA3YhxDluy7Ol3CBJR4=
-			</data>
-			<key>hash2</key>
-			<data>
-			uixatoT5WKaqKkinpVOx4rlTWbKZv+zGWiDJSH1Rfoo=
-			</data>
-		</dict>
-		<key>Headers/GetNFTMetaDataRespModel.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			ZDPbVaIrT7buKnp9m3nN5OuTong=
-			</data>
-			<key>hash2</key>
-			<data>
-			NoWkBsqXDKSPRwinP/3H4leB4a/ZjlPnncC6FBp0HtQ=
-			</data>
-		</dict>
-		<key>Headers/GetSignNonceRespModel.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			fzdunOyIRGQeRXjzR8WSAWOXz0g=
-			</data>
-			<key>hash2</key>
-			<data>
-			f/Mq+cAA6/mYjpG1FXadyEaTDEErnD6u0jU+acT9hIg=
-			</data>
-		</dict>
-		<key>Headers/GetWalletListRespModel.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			d9Ave7mAPOalsaBt3sGqPc9VoTI=
-			</data>
-			<key>hash2</key>
-			<data>
-			01Th1cnibx3VEOCMUF8gH4Qoua9vbAk4S9syHgVrUSg=
-			</data>
-		</dict>
 		<key>Headers/IRTSS.h</key>
 		<dict>
 			<key>hash</key>
@@ -526,28 +369,6 @@
 			I3HF9UP8F+YJ14FMgA4Qvfc837+RIIpFSxLLdz8VP1w=
 			</data>
 		</dict>
-		<key>Headers/ISudNFTPrivateListener.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			T+VBSTf+D836kJq5CUMYv8pcGsE=
-			</data>
-			<key>hash2</key>
-			<data>
-			CDQxTnrLVsQADShdlkzHYaZQFlzksSPSd1podGpx7Jc=
-			</data>
-		</dict>
-		<key>Headers/ProtoHeader.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			kweEDd1k2jlKN2H3C36Y1tfjGbE=
-			</data>
-			<key>hash2</key>
-			<data>
-			0nboxtIlwTvyv99IK16WAdmQeW6sDu2RzDYbNbLB2OI=
-			</data>
-		</dict>
 		<key>Headers/RTSSResult.h</key>
 		<dict>
 			<key>hash</key>
@@ -557,17 +378,6 @@
 			<key>hash2</key>
 			<data>
 			pU2NBhGvfAME1J7lBpqvtZhFVMFZuDiajV/0wiZNDNk=
-			</data>
-		</dict>
-		<key>Headers/SDKGetTokenRespModel.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			FRo1odaqMUzjGpE9am4A1vb+QMo=
-			</data>
-			<key>hash2</key>
-			<data>
-			pqOx94wA7/vV1bu9xRRCsMFgC1AmM7tLgLG0GFaDGcE=
 			</data>
 		</dict>
 		<key>Headers/SmRtAsr.h</key>
@@ -590,17 +400,6 @@
 			<key>hash2</key>
 			<data>
 			wZqO4WGOpYS+n8/gPU5eimIMFfeYuZCaezw/2uzmh6w=
-			</data>
-		</dict>
-		<key>Headers/SudBaseHttpRequest.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			1Y8LfY0RYH4J7CRGkw5z/K0J2eU=
-			</data>
-			<key>hash2</key>
-			<data>
-			QFXErkbpdsNkX7/FhpQTv6W8xV1KipQgThFCdFsB31E=
 			</data>
 		</dict>
 		<key>Headers/SudInitSDKParamModel.h</key>
@@ -636,26 +435,15 @@
 			bsgx0yTq5XQ+mfebFQjbhv0I8zePyQiGOQTwenGmqk0=
 			</data>
 		</dict>
-		<key>Headers/SudMGP-Swift.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			uLAbsJYxecIezS1gFEmvTcXWbxw=
-			</data>
-			<key>hash2</key>
-			<data>
-			gcRIj8AlW2S6jDHG7WW2DiQzFW/0tuXbWbfroaplZ3k=
-			</data>
-		</dict>
 		<key>Headers/SudMGP-umbrella.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vIn5YleGzzX6SVTgr8ElSluErb4=
+			5DlISTNy/oWEinBGzMrb93MoHX8=
 			</data>
 			<key>hash2</key>
 			<data>
-			qfAiWXokNA8E0G/5S+b5WPzxUuEz8fgZBPcDDG5ARpg=
+			uoiUuwQKbgCFhalml/5tRgcbKhOIOXsg4tpjhVS+JdQ=
 			</data>
 		</dict>
 		<key>Headers/SudMGP.h</key>
@@ -680,114 +468,26 @@
 			/e+/6WZ5jz9OXA8p1F0j8YqSwvqIVkciVt8jPgZ3BJE=
 			</data>
 		</dict>
-		<key>Headers/SudNFTHttpService.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			vEnKtRlfE9giKKagmfMPv3hYz+8=
-			</data>
-			<key>hash2</key>
-			<data>
-			ltRXDxfpvTwzQHDv7H3HJvPq4wCTXAjClB7m9I5t/mk=
-			</data>
-		</dict>
-		<key>Headers/SudNFTLocalPreferences.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			khCM2fTJbDI0WVY+QkEW8A5V7+U=
-			</data>
-			<key>hash2</key>
-			<data>
-			bOMSy41rFx9IPt4QIjXrG1d8Bs6iCzQXJBkBSlptSBs=
-			</data>
-		</dict>
 		<key>Headers/SudNFTModels.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OzyWMgUp970KRVLYkoAs+g90YKE=
+			r6rf6p94KIdkyDu6bLHa11bfKRE=
 			</data>
 			<key>hash2</key>
 			<data>
-			LhNri7uhIm6SzIJOgKbku44VQOs/GPQiCzRb2cEoLvU=
-			</data>
-		</dict>
-		<key>Modules/SudMGP.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			13vMmZa2R863MWabH9J2ZH2Sbos=
-			</data>
-			<key>hash2</key>
-			<data>
-			rgdbS8tEqiBPt+wRCUcreqZWAj2FMwDNPDFRIv6mcWI=
-			</data>
-		</dict>
-		<key>Modules/SudMGP.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Gb9iJCjJ9rIbwd0eZRp1Wm143Zs=
-			</data>
-			<key>hash2</key>
-			<data>
-			sBPaQuX1juaNyqz/7Z0ereHEaEETn+4YERI8FBLV1yo=
-			</data>
-		</dict>
-		<key>Modules/SudMGP.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			4LKkiBb073mE51bvLT58gpK2/Eg=
-			</data>
-			<key>hash2</key>
-			<data>
-			7rntbfquLp9WNkU9kh0fHGX/hKrjEJ1nuidcZsj2zbc=
-			</data>
-		</dict>
-		<key>Modules/SudMGP.swiftmodule/x86_64.swiftdoc</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			13vMmZa2R863MWabH9J2ZH2Sbos=
-			</data>
-			<key>hash2</key>
-			<data>
-			rgdbS8tEqiBPt+wRCUcreqZWAj2FMwDNPDFRIv6mcWI=
-			</data>
-		</dict>
-		<key>Modules/SudMGP.swiftmodule/x86_64.swiftinterface</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Gb9iJCjJ9rIbwd0eZRp1Wm143Zs=
-			</data>
-			<key>hash2</key>
-			<data>
-			sBPaQuX1juaNyqz/7Z0ereHEaEETn+4YERI8FBLV1yo=
-			</data>
-		</dict>
-		<key>Modules/SudMGP.swiftmodule/x86_64.swiftmodule</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			4LKkiBb073mE51bvLT58gpK2/Eg=
-			</data>
-			<key>hash2</key>
-			<data>
-			7rntbfquLp9WNkU9kh0fHGX/hKrjEJ1nuidcZsj2zbc=
+			r+s8fGfnO8w+ZU9dD+CIMdndDF9R75EHvnTqQquupH0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Ay0XKkYurpdsCja9Co+/AxIB0/k=
+			SqkCCW826QrTr8CHz/pkF0Gg7Uk=
 			</data>
 			<key>hash2</key>
 			<data>
-			gjzoiY0AfQ+wgdymDZKYKRbyC05oOX740kj07iL4rjs=
+			82DYi24VDJO9ZsI9GZScAIDV9kyxpUfN6/NyRZTI990=
 			</data>
 		</dict>
 		<key>SudNativeJSConsoleRes.bundle/Info.plist</key>

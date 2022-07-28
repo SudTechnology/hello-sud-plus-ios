@@ -4,7 +4,10 @@
 //
 
 #import "BaseView.h"
-
+@class SudNFTWalletModel;
 
 @interface MyHeaderView : BaseView
+@property (nonatomic, strong)void(^clickWalletBlock)(SudNFTWalletModel *wallModel);
+- (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList;
+- (void)updateNFTList:(SudNFTListModel *)nftListModel;
 @end

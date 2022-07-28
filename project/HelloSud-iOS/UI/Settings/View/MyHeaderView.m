@@ -8,13 +8,14 @@
 #import "MyBindWalletView.h"
 #import "MyNFTView.h"
 
-@interface MyHeaderView () <UITextFieldDelegate>
-@property (nonatomic, strong) UIImageView *headerView;
-@property (nonatomic, strong) UILabel *userNameLabel;
-@property (nonatomic, strong) UILabel *userIdLabel;
-@property (nonatomic, strong) UIImageView *nftView;
-@property (nonatomic, strong)MyBindWalletView *bindView;
-@property (nonatomic, strong)MyNFTView *myNFTView;
+@interface MyHeaderView ()
+@property(nonatomic, strong) UIImageView *headerView;
+@property(nonatomic, strong) UILabel *userNameLabel;
+@property(nonatomic, strong) UILabel *userIdLabel;
+@property(nonatomic, strong) DTPaddingLabel *walletAddressLabel;
+@property(nonatomic, strong) UIImageView *nftView;
+@property(nonatomic, strong) MyBindWalletView *bindView;
+@property(nonatomic, strong) MyNFTView *myNFTView;
 
 @end
 
@@ -28,13 +29,14 @@
     [self addSubview:self.headerView];
     [self addSubview:self.userNameLabel];
     [self addSubview:self.userIdLabel];
+    [self addSubview:self.walletAddressLabel];
     [self addSubview:self.nftView];
 }
 
 - (void)dtLayoutViews {
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(7);
-        make.leading.mas_equalTo(16);
+        make.leading.mas_equalTo(8);
         make.size.mas_equalTo(CGSizeMake(56, 56));
     }];
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,6 +48,13 @@
         make.leading.mas_equalTo(self.headerView.mas_trailing).offset(10);
         make.top.mas_equalTo(self.userNameLabel.mas_bottom).offset(6);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+    }];
+    [self.walletAddressLabel dt_cornerRadius:10];
+    [self.walletAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(self.headerView.mas_trailing).offset(10);
+        make.top.mas_equalTo(self.userNameLabel.mas_bottom).offset(6);
+        make.width.equalTo(@160);
+        make.height.equalTo(@20);
     }];
     [self.nftView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headerView.mas_bottom).offset(10);
@@ -65,9 +74,12 @@
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:userInfo.icon]];
     }
 
-    BOOL isBindWallet = YES;// AppService.shared.login.walletAddress.length > 0;
+    BOOL isBindWallet = AppService.shared.login.walletAddress.length > 0;
     if (isBindWallet) {
         // 绑定过了钱包
+        self.walletAddressLabel.text = AppService.shared.login.walletAddress;
+        self.walletAddressLabel.hidden = NO;
+        self.userIdLabel.hidden = YES;
         if (_bindView) {
             [_bindView removeFromSuperview];
             _bindView = nil;
@@ -80,6 +92,8 @@
         }];
     } else {
         // 未绑定钱包
+        self.walletAddressLabel.hidden = YES;
+        self.userIdLabel.hidden = NO;
         if (_myNFTView) {
             [_myNFTView removeFromSuperview];
             _myNFTView = nil;
@@ -90,6 +104,12 @@
         [self.bindView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.leading.trailing.bottom.equalTo(@0);
         }];
+        WeakSelf
+        self.bindView.clickWalletBlock = ^(SudNFTWalletModel *m){
+            if (weakSelf.clickWalletBlock) {
+                weakSelf.clickWalletBlock(m);
+            }
+        };
     }
 }
 
@@ -108,11 +128,19 @@
     }];
 }
 
+- (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList {
+    [self.bindView updateSupportWallet:walletList];
+}
+
+- (void)updateNFTList:(SudNFTListModel *)nftListModel {
+    [self.myNFTView updateNFTList:nftListModel];
+}
+
 - (UIImageView *)headerView {
     if (!_headerView) {
         _headerView = [[UIImageView alloc] init];
         _headerView.clipsToBounds = true;
-        _headerView.layer.cornerRadius = 56/2;
+        _headerView.layer.cornerRadius = 56 / 2;
     }
     return _headerView;
 }
@@ -137,6 +165,21 @@
     }
     return _userIdLabel;
 }
+
+- (DTPaddingLabel *)walletAddressLabel {
+    if (!_walletAddressLabel) {
+        _walletAddressLabel = [[DTPaddingLabel alloc] init];
+        _walletAddressLabel.paddingX = 8;
+        _walletAddressLabel.textColor = [UIColor dt_colorWithHexString:@"#333333" alpha:1];
+        _walletAddressLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+        _walletAddressLabel.backgroundColor = HEX_COLOR_A(@"#DBDEEC", 0.7);
+        _walletAddressLabel.hidden = YES;
+        _walletAddressLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        _walletAddressLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _walletAddressLabel;
+}
+
 
 - (UIImageView *)nftView {
     if (!_nftView) {

@@ -12,8 +12,9 @@
 #import "MyHeaderView.h"
 #import "HSSettingViewController.h"
 #import "AboutViewController.h"
+#import <SudMGP/SudNFT.h>
 
-@interface MyViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, ISudNFTListener>
 @property(nonatomic, strong) UITableView *tableView;
 /// 页面数据
 @property(nonatomic, strong) NSArray <NSArray <HSSettingModel *> *> *arrData;
@@ -26,6 +27,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configData];
+    [self configSudNFT];
+}
+
+- (void)configSudNFT {
+    [SudNFT initNFTWithAppId:@"1461564080052506636" appKey:@"03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc" userId:@"123" universalLink:@"https://fat-links.sud.tech" env:1 listener:self];
 }
 
 - (BOOL)dtIsHiddenNavigationBar {
@@ -51,6 +57,40 @@
     [self.tableView reloadData];
 }
 
+- (void)checkWalletInfo {
+
+    BOOL bindWallet = AppService.shared.login.walletAddress.length > 0;
+    if (!bindWallet) {
+        // 未绑定钱包
+        [SudNFT getWalletListWithListener:^(NSInteger errCode, NSString *errMsg, NSArray<SudNFTWalletModel *> *walletList) {
+            if (errCode != 0) {
+                [ToastUtil show:errMsg];
+                return;
+            }
+            [self.myHeaderView updateSupportWallet:walletList];
+            [self reloadHeadView];
+        }];
+        return;
+    }
+    // 拉取NFT列表
+    [SudNFT getNFTListWithWalletAddress:AppService.shared.login.walletAddress chainType:SudENFTEthereumChainsTypeGoerli pageKey:nil listener:^(NSInteger errCode, NSString *errMsg, SudNFTListModel *nftListModel) {
+        if (errCode != 0) {
+            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            [ToastUtil show:msg];
+            return;
+        }
+        [self.myHeaderView updateNFTList:nftListModel];
+        [self reloadHeadView];
+    }];
+}
+
+- (void)reloadHeadView {
+    CGSize size = [self.myHeaderView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
+    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
+    self.myHeaderView.frame = targetFrame;
+    self.tableView.tableHeaderView = self.myHeaderView;
+}
+
 - (void)dtAddViews {
     [super dtAddViews];
     self.view.backgroundColor = HEX_COLOR(@"#F5F6FB");
@@ -64,10 +104,25 @@
         make.edges.mas_equalTo(UIEdgeInsetsMake(20, 16, 0, 16));
     }];
 
-    CGSize size = [self.myHeaderView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
-    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
-    self.myHeaderView.frame = targetFrame;
-    self.tableView.tableHeaderView = self.myHeaderView;
+    [self reloadHeadView];
+}
+
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    WeakSelf
+    self.myHeaderView.clickWalletBlock = ^(SudNFTWalletModel *m) {
+        [SudNFT bindWallet:m.type listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindWalletInfoModel *walletInfoModel) {
+            if (errCode != 0) {
+                NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+                [ToastUtil show:msg];
+                return;
+            }
+            // 绑定钱包成功
+            AppService.shared.login.walletAddress = walletInfoModel.address;
+            [weakSelf.myHeaderView dtUpdateUI];
+            [weakSelf checkWalletInfo];
+        }];
+    };
 }
 
 #pragma makr lazy
@@ -154,5 +209,22 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     return UIView.new;
 }
+#pragma mark ISudNFTListener
+/// SudNFT初始化状态
+/// @param errCode 0 成功，非0 失败
+/// @param errMsg 失败描述
+- (void)onSudNFTInitStateChanged:(NSInteger)errCode errMsg:(NSString *_Nullable)errMsg {
+    if (errCode != 0) {
+        DDLogError(@"onSudNFTInitStateChanged: errCode:%@, errMsg:$@", @(errCode), errMsg);
+        // SDK初始失败，重试或者提示错误
+        return;
+    }
+    DDLogError(@"onSudNFTInitStateChanged init success");
+    [self checkWalletInfo];
+}
 
+/// 绑定钱包token过期，需要重新验证绑定
+- (void)onSudNFTBindWalletTokenExpired {
+    DDLogWarn(@"onSudNFTBindWalletTokenExpired");
+}
 @end

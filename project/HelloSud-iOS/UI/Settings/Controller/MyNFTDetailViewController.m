@@ -9,15 +9,15 @@
 
 @interface MyNFTDetailViewController ()
 @property(nonatomic, strong) UIImageView *iconImageView;
-@property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UILabel *contractAddressLabel;
-@property (nonatomic, strong) UILabel *tokenIDLabel;
-@property (nonatomic, strong) UILabel *tokenStandLabel;
-@property (nonatomic, strong) UIButton *copyBtn;
-@property (nonatomic, strong) BaseView *topView;
-@property (nonatomic, strong) BaseView *bottomView;
-@property (nonatomic, strong) UIButton *wearBtn;
-@property (nonatomic, strong) UIButton *backBtn;
+@property(nonatomic, strong) UILabel *nameLabel;
+@property(nonatomic, strong) UILabel *contractAddressLabel;
+@property(nonatomic, strong) UILabel *tokenIDLabel;
+@property(nonatomic, strong) UILabel *tokenStandLabel;
+@property(nonatomic, strong) UIButton *copyBtn;
+@property(nonatomic, strong) BaseView *topView;
+@property(nonatomic, strong) BaseView *bottomView;
+@property(nonatomic, strong) UIButton *wearBtn;
+@property(nonatomic, strong) UIButton *backBtn;
 
 @end
 
@@ -26,7 +26,7 @@
     return YES;
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
+- (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
@@ -37,7 +37,59 @@
 
 - (void)dtConfigEvents {
     WeakSelf
+    [_backBtn addTarget:self action:@selector(dtNavigationBackClick) forControlEvents:UIControlEventTouchUpInside];
+    [_wearBtn addTarget:self action:@selector(onWearBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_copyBtn addTarget:self action:@selector(onCopyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+}
 
+- (void)onWearBtnClick:(UIButton *)sender {
+
+    WeakSelf
+    sender.enabled = NO;
+    [SudNFT generateNFTDetailToken:self.cellModel.nftModel.contractAddress
+                           tokenId:self.cellModel.nftModel.tokenId
+                         chainType:SudENFTEthereumChainsTypeGoerli
+                          listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenerateDetailTokenModel *generateDetailTokenModel) {
+                              if (errCode != 0) {
+                                  NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+                                  [ToastUtil show:msg];
+                                  sender.enabled = YES;
+                                  return;
+                              }
+                              [weakSelf handleWearDetailToken:generateDetailTokenModel.nftDetailsToken];
+                          }];
+}
+
+- (void)onCopyBtnClick:(id)sender {
+    [AppUtil copyToPasteProcess:self.cellModel.nftModel.contractAddress toast:@"复制成功"];
+}
+
+/// 上报后台
+/// @param nftDetailToken nftDetailToken
+- (void)handleWearDetailToken:(NSString *)nftDetailToken {
+    WeakSelf
+    [UserService reqWearNFT:nftDetailToken isWear:self.wearBtn.selected ? NO : YES success:^(BaseRespModel *resp) {
+        weakSelf.wearBtn.enabled = YES;
+        [AppService.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId];
+        [weakSelf updateWearBtn];
+    }                  fail:^(NSError *error) {
+        weakSelf.wearBtn.enabled = YES;
+    }];
+}
+
+- (void)updateWearBtn {
+    BOOL isUsed = [AppService.shared isNFTAlreadyUsed:self.cellModel.nftModel.contractAddress tokenId:self.cellModel.nftModel.tokenId];
+    if (isUsed) {
+        _wearBtn.selected = YES;
+        _wearBtn.layer.borderWidth = 1;
+        _wearBtn.layer.borderColor = UIColor.blackColor.CGColor;
+        _wearBtn.backgroundColor = UIColor.whiteColor;
+    } else {
+        _wearBtn.selected = NO;
+        _wearBtn.layer.borderWidth = 0;
+        _wearBtn.layer.borderColor = nil;
+        _wearBtn.backgroundColor = UIColor.blackColor;
+    }
 }
 
 - (void)viewDidLoad {
@@ -83,7 +135,7 @@
     }];
     [self.contractAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
-        make.trailing.equalTo(self.copyBtn.mas_leading);
+        make.trailing.equalTo(self.copyBtn.mas_leading).offset(-60);
         make.height.greaterThanOrEqualTo(@0);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(28);
     }];
@@ -127,11 +179,25 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    self.nameLabel.text = @"一只小猴猴";
+    if (!self.cellModel) {
+        return;
+    }
+    WeakSelf
+    [self.cellModel getMetaData:^(SudNFTMetaDataModel *metaDataModel) {
+        [weakSelf updateWithMetadata:metaDataModel];
+    }];
+    [self updateWearBtn];
+}
 
-    self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:@"0x3u2e3u20ur3u432" subColor:UIColor.blackColor];
-    self.tokenIDLabel.attributedText = [self generate:@"Token ID\n" subtitle:@"12345" subColor:UIColor.blackColor];
-    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:@"ERC-877" subColor:UIColor.blackColor];
+
+- (void)updateWithMetadata:(SudNFTMetaDataModel *)metaDataModel {
+    self.nameLabel.text = metaDataModel.name;
+    self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:metaDataModel.contractAddress subColor:UIColor.blackColor];
+    self.tokenIDLabel.attributedText = [self generate:@"Token ID\n" subtitle:metaDataModel.tokenId subColor:UIColor.blackColor];
+    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:metaDataModel.tokenType subColor:UIColor.blackColor];
+    if (metaDataModel.image) {
+        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image]];
+    }
 }
 
 - (NSAttributedString *)generate:(NSString *)title subtitle:(NSString *)subtitle subColor:(UIColor *)subColor {
@@ -139,9 +205,10 @@
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#8A8A8E");
 
-    NSMutableAttributedString *subtitleAttr = [[NSMutableAttributedString alloc] initWithString:subtitle];
+    NSMutableAttributedString *subtitleAttr = [[NSMutableAttributedString alloc] initWithString:subtitle ? subtitle : @""];
     subtitleAttr.yy_font = UIFONT_REGULAR(14);
     subtitleAttr.yy_color = subColor;
+    subtitleAttr.yy_lineBreakMode = NSLineBreakByTruncatingMiddle;
     [fullAttr appendAttributedString:subtitleAttr];
     return fullAttr;
 }
@@ -157,7 +224,7 @@
 
 - (UIImageView *)iconImageView {
     if (!_iconImageView) {
-        _iconImageView = [[UIImageView alloc]init];
+        _iconImageView = [[UIImageView alloc] init];
     }
     return _iconImageView;
 }
@@ -180,7 +247,7 @@
         _contractAddressLabel.textColor = UIColor.blackColor;
         _contractAddressLabel.font = UIFONT_BOLD(16);
         _contractAddressLabel.textAlignment = NSTextAlignmentLeft;
-        _contractAddressLabel.numberOfLines = 0;
+        _contractAddressLabel.numberOfLines = 2;
     }
     return _contractAddressLabel;
 }
@@ -190,6 +257,7 @@
         _tokenIDLabel = [[UILabel alloc] init];
         _tokenIDLabel.text = @"";
         _tokenIDLabel.textColor = UIColor.blackColor;
+
         _tokenIDLabel.font = UIFONT_BOLD(16);
         _tokenIDLabel.textAlignment = NSTextAlignmentLeft;
         _tokenIDLabel.numberOfLines = 0;
@@ -224,8 +292,10 @@
         _wearBtn = [[UIButton alloc] init];
         [_wearBtn setTitle:@"穿戴" forState:UIControlStateNormal];
         [_wearBtn setTitleColor:HEX_COLOR(@"#ffffff") forState:UIControlStateNormal];
+        [_wearBtn setTitle:@"取消穿戴" forState:UIControlStateSelected];
+        [_wearBtn setTitleColor:HEX_COLOR(@"#000000") forState:UIControlStateSelected];
+
         _wearBtn.titleLabel.font = UIFONT_BOLD(14);
-        _wearBtn.backgroundColor = UIColor.blackColor;
     }
     return _wearBtn;
 }
@@ -235,7 +305,6 @@
         _backBtn = [[UIButton alloc] init];
         [_backBtn setImage:[[UIImage imageNamed:@"navi_back"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [_backBtn setTintColor:UIColor.whiteColor];
-        [_backBtn addTarget:self action:@selector(dtNavigationBackClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backBtn;
 }
@@ -252,8 +321,8 @@
 - (BaseView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[BaseView alloc] init];
-        _bottomView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.0800].CGColor;
-        _bottomView.layer.shadowOffset = CGSizeMake(0,0);
+        _bottomView.layer.shadowColor = [UIColor colorWithRed:0 / 255.0 green:0 / 255.0 blue:0 / 255.0 alpha:0.0800].CGColor;
+        _bottomView.layer.shadowOffset = CGSizeMake(0, 0);
         _bottomView.layer.shadowOpacity = 1;
         _bottomView.layer.shadowRadius = 10;
         _bottomView.backgroundColor = UIColor.whiteColor;

@@ -6,13 +6,15 @@
 //
 
 #import <Foundation/Foundation.h>
+
 /// token刷新成功通知
-extern NSString * const TOKEN_REFRESH_SUCCESS_NTF;
+extern NSString *const TOKEN_REFRESH_SUCCESS_NTF;
 /// token刷新失败通知
-extern NSString * const TOKEN_REFRESH_FAIL_NTF;
+extern NSString *const TOKEN_REFRESH_FAIL_NTF;
 
 
 NS_ASSUME_NONNULL_BEGIN
+
 /// 登录服务
 @interface LoginService : NSObject
 
@@ -33,7 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param name 昵称
 /// @param userID 用户ID
 - (void)reqLogin:(NSString *)name userID:(nullable NSString *)userID sucess:(EmptyBlock)success;
+
 - (void)checkToken;
+
 @end
 
 NS_ASSUME_NONNULL_END

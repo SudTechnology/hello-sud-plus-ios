@@ -68,4 +68,14 @@
     return topVC;
 }
 
+/// 复制内容到剪切板
+/// @param content content
+/// @param msg content
++ (void)copyToPasteProcess:(NSString *)content toast:(NSString *)msg {
+    [UIPasteboard generalPasteboard].string = content;
+    if (msg) {
+        [ToastUtil show:msg];
+    }
+}
+
 @end
