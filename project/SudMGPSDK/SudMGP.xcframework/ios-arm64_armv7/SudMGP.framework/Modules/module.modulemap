@@ -4,3 +4,8 @@ framework module SudMGP {
   export *
   module * { export * }
 }
+
+module SudMGP.Swift {
+    header "SudMGP-Swift.h"
+    requires objc
+}
