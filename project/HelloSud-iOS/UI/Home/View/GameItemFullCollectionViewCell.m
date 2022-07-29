@@ -138,16 +138,7 @@
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
     }
     if (m.homeGamePic) {
-        if ([m.homeGamePic.dt_toURL.pathExtension isEqualToString:@"webp"]) {
-            [WebpImageCacheService.shared loadWebp:m.homeGamePic result:^(UIImage *image) {
-                if (weakSelf.model != m) {
-                    return;
-                }
-                weakSelf.gameImageView.image = image;
-            }];
-        } else {
-            [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.homeGamePic]];
-        }
+        [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.homeGamePic]];
     }
     if (self.sceneId == SceneTypeDisco) {
         self.joinBtn.hidden = NO;

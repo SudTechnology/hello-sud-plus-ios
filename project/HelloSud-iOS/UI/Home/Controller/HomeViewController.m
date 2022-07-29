@@ -160,7 +160,6 @@
                 NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%d", suitId]];
                 NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
                 [arr addObject:model.gameList[i]];
-                [weakSelf checkCacheWebp:model.gameList[i]];
 
             }
         }
@@ -208,12 +207,6 @@
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
     [self.searchHeaderView dtUpdateUI];
-}
-
-- (void)checkCacheWebp:(HSGameItem *)item {
-    if ([item.homeGamePic hasSuffix:@"webp"]) {
-        [WebpImageCacheService.shared loadWebp:item.homeGamePic result:nil];
-    }
 }
 
 - (void)reqGuessGameList:(HSSceneModel *)guessModel {
@@ -286,18 +279,10 @@
     } else {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
     }
-//    NSArray<HSGameItem *> *arr = self.dataList[indexPath.section];
-//    cell.indexPath = indexPath;
-//    cell.model = arr[indexPath.row];
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)c forItemAtIndexPath:(NSIndexPath *)indexPath {
-    BaseCollectionViewCell *cell = c;
-    HSSceneModel *m = self.headerSceneList[indexPath.section];
     NSArray<HSGameItem *> *arr = self.dataList[indexPath.section];
     cell.indexPath = indexPath;
     cell.model = arr[indexPath.row];
+    return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
