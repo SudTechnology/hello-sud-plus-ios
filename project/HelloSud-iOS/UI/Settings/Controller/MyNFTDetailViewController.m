@@ -73,6 +73,16 @@
         weakSelf.wearBtn.enabled = YES;
         [AppService.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId add:isWear];
         [weakSelf updateWearBtn];
+
+        if (isWear) {
+            AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.metaDataModel.image;
+            AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNFT;
+        } else {
+            AppService.shared.login.loginUserInfo.headerNftUrl = nil;
+            AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
+        }
+        [AppService.shared.login saveLoginUserInfo];
+
     }                  fail:^(NSError *error) {
         weakSelf.wearBtn.enabled = YES;
     }];

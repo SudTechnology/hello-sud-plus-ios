@@ -55,7 +55,7 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         _loginUserInfo = m;
         m.userID = @"";
         m.name = @"";
-        m.icon = @"";
+        m.avatar = @"";
         m.sex = 1;
     }
 
@@ -122,7 +122,7 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         /// 存储用户信息
         weakSelf.loginUserInfo.name = model.nickname;
         weakSelf.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.userId];
-        weakSelf.loginUserInfo.icon = model.avatar;
+        weakSelf.loginUserInfo.avatar = model.avatar;
 
         weakSelf.loginUserInfo.sex = 1;
         [weakSelf saveLoginUserInfo];

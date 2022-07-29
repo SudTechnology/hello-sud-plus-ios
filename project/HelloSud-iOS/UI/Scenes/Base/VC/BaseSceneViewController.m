@@ -828,7 +828,7 @@
                 micModel.user.userID = [NSString stringWithFormat:@"%ld", m.userId];
                 if (userInfo) {
                     micModel.user.name = userInfo.nickname;
-                    micModel.user.icon = userInfo.avatar;
+                    micModel.user.icon = userInfo.headImage;
                     micModel.user.sex = [userInfo.gender isEqualToString:@"male"] ? 1 : 2;
                 }
             }

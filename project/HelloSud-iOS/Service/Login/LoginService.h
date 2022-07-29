@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)checkToken;
 
+/// 保持用户信息
+- (void)saveLoginUserInfo;
 @end
 
 NS_ASSUME_NONNULL_END

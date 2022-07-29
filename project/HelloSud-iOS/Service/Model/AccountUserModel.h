@@ -14,9 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用户ID
 @property(nonatomic, copy)NSString *userID;
 @property(nonatomic, copy)NSString *name;
-@property(nonatomic, copy)NSString *icon;
+@property(nonatomic, copy, readonly)NSString *icon;
 /// 1男 2女
 @property(nonatomic, assign)NSInteger sex;
+@property(nonatomic, copy)NSString *avatar;
+@property(nonatomic, assign) NSInteger headerType;
+@property(nonatomic, strong) NSString *headerNftUrl;
 
 /// 判断是否是自己
 /// @param userID 用户ID

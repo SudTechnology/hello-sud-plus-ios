@@ -8,8 +8,8 @@
 #import "UserInfoListModel.h"
 
 @implementation HSUserInfoData
-
 @end
+
 @implementation UserInfoListModel
 
 + (NSDictionary *)mj_objectClassInArray {

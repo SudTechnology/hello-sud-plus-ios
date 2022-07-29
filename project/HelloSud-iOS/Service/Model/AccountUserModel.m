@@ -7,6 +7,10 @@
 
 #import "AccountUserModel.h"
 
+@interface AccountUserModel()
+@property(nonatomic, copy)NSString *icon;
+@end
+
 @implementation AccountUserModel
 
 /// 判断是否是自己
@@ -16,5 +20,13 @@
         return YES;
     }
     return NO;
+}
+
+- (NSString *)icon {
+    return _headerType == HSUserHeadTypeNFT ? _headerNftUrl : _avatar;
+}
+
+- (void)setIcon:(NSString *)icon {
+    _avatar = icon;
 }
 @end

@@ -181,6 +181,7 @@
         _noDataLabel.text = @"尚无NFT";
         _noDataLabel.textColor = HEX_COLOR_A(@"#ffffff", 0.4);
         _noDataLabel.font = UIFONT_REGULAR(14);
+        _noDataLabel.hidden = YES;
     }
     return _noDataLabel;
 }
