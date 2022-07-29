@@ -430,6 +430,7 @@
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         [_collectionView registerClass:[GameItemCollectionViewCell class] forCellWithReuseIdentifier:@"GameItemCollectionViewCell"];
         [_collectionView registerClass:[GameItemFullCollectionViewCell class] forCellWithReuseIdentifier:@"GameItemFullCollectionViewCell"];
 
@@ -438,7 +439,6 @@
         [_collectionView registerClass:[HomeFooterReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HomeFooterReusableView"];
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         v.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-        //        _collectionView.backgroundView = v;
     }
     return _collectionView;
 }
