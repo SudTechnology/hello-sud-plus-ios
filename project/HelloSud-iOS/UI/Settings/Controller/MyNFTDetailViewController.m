@@ -61,7 +61,7 @@
 }
 
 - (void)onCopyBtnClick:(id)sender {
-    [AppUtil copyToPasteProcess:self.cellModel.nftModel.contractAddress toast:@"复制成功"];
+    [AppUtil copyToPasteProcess:self.cellModel.nftModel.contractAddress toast:@"地址已复制"];
 }
 
 /// 上报后台
@@ -184,7 +184,7 @@
         return;
     }
     WeakSelf
-    [self.cellModel getMetaData:^(SudNFTMetaDataModel *metaDataModel) {
+    [self.cellModel getMetaData:^(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel) {
         [weakSelf updateWithMetadata:metaDataModel];
     }];
     [self updateWearBtn];

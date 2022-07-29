@@ -16,7 +16,7 @@
 @property(nonatomic, strong) UIImageView *nftView;
 @property(nonatomic, strong) MyBindWalletView *bindView;
 @property(nonatomic, strong) MyNFTView *myNFTView;
-
+@property(nonatomic, strong) UIButton *deleteBtn;
 @end
 
 @implementation MyHeaderView
@@ -30,6 +30,7 @@
     [self addSubview:self.userNameLabel];
     [self addSubview:self.userIdLabel];
     [self addSubview:self.walletAddressLabel];
+    [self addSubview:self.deleteBtn];
     [self addSubview:self.nftView];
 }
 
@@ -56,6 +57,12 @@
         make.width.equalTo(@160);
         make.height.equalTo(@20);
     }];
+    [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(@-18);
+        make.centerY.equalTo(self.headerView);
+        make.width.equalTo(@18);
+        make.height.equalTo(@18);
+    }];
     [self.nftView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headerView.mas_bottom).offset(10);
         make.leading.equalTo(@0);
@@ -80,6 +87,7 @@
         self.walletAddressLabel.text = AppService.shared.login.walletAddress;
         self.walletAddressLabel.hidden = NO;
         self.userIdLabel.hidden = YES;
+        self.deleteBtn.hidden = NO;
         if (_bindView) {
             [_bindView removeFromSuperview];
             _bindView = nil;
@@ -94,6 +102,7 @@
         // 未绑定钱包
         self.walletAddressLabel.hidden = YES;
         self.userIdLabel.hidden = NO;
+        self.deleteBtn.hidden = YES;
         if (_myNFTView) {
             [_myNFTView removeFromSuperview];
             _myNFTView = nil;
@@ -105,7 +114,7 @@
             make.top.leading.trailing.bottom.equalTo(@0);
         }];
         WeakSelf
-        self.bindView.clickWalletBlock = ^(SudNFTWalletModel *m){
+        self.bindView.clickWalletBlock = ^(SudNFTWalletModel *m) {
             if (weakSelf.clickWalletBlock) {
                 weakSelf.clickWalletBlock(m);
             }
@@ -118,6 +127,14 @@
     self.headerView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapHead:)];
     [self.headerView addGestureRecognizer:tap];
+    [self.deleteBtn addTarget:self action:@selector(onDeleteWalletClick:) forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer *walletTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapWalletAddressLabel:)];
+    [self.walletAddressLabel addGestureRecognizer:walletTap];
+
+}
+
+- (void)onTapWalletAddressLabel:(id)tap {
+    [AppUtil copyToPasteProcess:self.walletAddressLabel.text toast:@"地址已复制"];
 }
 
 - (void)onTapHead:(id)tap {
@@ -126,6 +143,12 @@
     [DTAlertView show:v rootView:AppUtil.currentWindow clickToClose:YES showDefaultBackground:YES onCloseCallback:^{
 
     }];
+}
+
+- (void)onDeleteWalletClick:(id)sender {
+    if (self.deleteWalletBlock) {
+        self.deleteWalletBlock();
+    }
 }
 
 - (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList {
@@ -176,6 +199,7 @@
         _walletAddressLabel.hidden = YES;
         _walletAddressLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
         _walletAddressLabel.textAlignment = NSTextAlignmentCenter;
+        _walletAddressLabel.userInteractionEnabled = YES;
     }
     return _walletAddressLabel;
 }
@@ -202,6 +226,14 @@
         _myNFTView = [[MyNFTView alloc] init];
     }
     return _myNFTView;
+}
+
+- (UIButton *)deleteBtn {
+    if (!_deleteBtn) {
+        _deleteBtn = [[UIButton alloc] init];
+        [_deleteBtn setImage:[UIImage imageNamed:@"wallet_delete"] forState:UIControlStateNormal];
+    }
+    return _deleteBtn;
 }
 
 @end

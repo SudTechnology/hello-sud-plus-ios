@@ -5,5 +5,6 @@
 /// NFT列表cell model
 @interface HSNFTListCellModel : BaseModel
 @property (nonatomic, strong)SudNFTModel *nftModel;
-- (void)getMetaData:(void(^)(SudNFTMetaDataModel *metaDataModel))completed;
+
+- (void)getMetaData:(void(^)(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel))completed;
 @end

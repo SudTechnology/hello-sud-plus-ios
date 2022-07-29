@@ -22,12 +22,6 @@
     self.gameImageView.image = nil;
 }
 
-- (void)setModel:(BaseModel *)model {
-    [super setModel:model];
-    self.nameLabel.text = @"未拉取到图片";
-    self.gameImageView.image = [UIImage imageNamed:@"default_nft_icon"];
-}
-
 - (void)setIndexPath:(NSIndexPath *)indexPath {
     [super setIndexPath:indexPath];
 }
@@ -80,11 +74,16 @@
     }
     HSNFTListCellModel *m = (HSNFTListCellModel *)self.model;
     WeakSelf
-    [m getMetaData:^(SudNFTMetaDataModel *metaDataModel) {
+    [m getMetaData:^(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel) {
+        DDLogDebug(@"cell:%@, model:%@, meta:%@", weakSelf, weakSelf.model, metaDataModel);
+        if (weakSelf.model != model) {
+            return;
+        }
         if (metaDataModel.image) {
             [weakSelf.gameImageView sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image] placeholderImage:[UIImage imageNamed:@"default_nft_icon"]];
             weakSelf.nameLabel.text = metaDataModel.name;
         } else {
+            DDLogDebug(@"no image cell:%@, model:%@, meta:%@", weakSelf, weakSelf.model, metaDataModel);
             weakSelf.nameLabel.text = @"未拉取到图片";
             weakSelf.gameImageView.image = [UIImage imageNamed:@"default_nft_icon"];
         }

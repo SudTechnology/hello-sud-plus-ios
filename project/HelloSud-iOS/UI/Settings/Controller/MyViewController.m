@@ -123,6 +123,14 @@
             [weakSelf checkWalletInfo];
         }];
     };
+    self.myHeaderView.deleteWalletBlock = ^{
+        [DTAlertView showTextAlert:@"确定要接触连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+            AppService.shared.login.walletAddress = nil;
+            [weakSelf.myHeaderView dtUpdateUI];
+            [weakSelf reloadHeadView];
+            [weakSelf checkWalletInfo];
+        }          onCloseCallback:nil];
+    };
 }
 
 #pragma makr lazy

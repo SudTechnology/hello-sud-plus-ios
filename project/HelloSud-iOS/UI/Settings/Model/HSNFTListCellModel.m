@@ -5,24 +5,26 @@
 
 #import "HSNFTListCellModel.h"
 
+typedef void(^META_DATA_BLOCK)(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel);
+
 @interface HSNFTListCellModel()
-@property (nonatomic, strong)void(^getMetadataCompletedBlock)(SudNFTMetaDataModel *metaDataModel);
 @property (nonatomic, assign)BOOL isLoading;
 @property (nonatomic, strong)SudNFTMetaDataModel *metaDataModel;
+@property (nonatomic, strong)NSMutableArray<META_DATA_BLOCK> *arrBlock;
 @end
 
 @implementation HSNFTListCellModel {
 
 }
 
-- (void)getMetaData:(void(^)(SudNFTMetaDataModel *metaDataModel))completed {
+- (void)getMetaData:(void(^)(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel))completed {
     if (self.metaDataModel) {
         if (completed) {
-            completed(self.metaDataModel);
+            completed(self, self.metaDataModel);
         }
         return;
     }
-    self.getMetadataCompletedBlock = completed;
+    [self.arrBlock addObject:completed];
     if (self.isLoading) {
         return;
     }
@@ -36,10 +38,20 @@
             return;
         }
         weakSelf.metaDataModel = metaDataModel;
-        if (weakSelf.getMetadataCompletedBlock) {
-            weakSelf.getMetadataCompletedBlock(metaDataModel);
+        for (META_DATA_BLOCK b in self.arrBlock) {
+            if (b) {
+                b(weakSelf, metaDataModel);
+            }
         }
+        [self.arrBlock removeAllObjects];
     }];
 
+}
+
+- (NSMutableArray *)arrBlock {
+    if (!_arrBlock) {
+        _arrBlock = [[NSMutableArray alloc]init];
+    }
+    return _arrBlock;
 }
 @end
