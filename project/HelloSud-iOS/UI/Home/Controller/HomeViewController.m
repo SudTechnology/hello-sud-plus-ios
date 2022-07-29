@@ -286,10 +286,18 @@
     } else {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
     }
+//    NSArray<HSGameItem *> *arr = self.dataList[indexPath.section];
+//    cell.indexPath = indexPath;
+//    cell.model = arr[indexPath.row];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)c forItemAtIndexPath:(NSIndexPath *)indexPath {
+    BaseCollectionViewCell *cell = c;
+    HSSceneModel *m = self.headerSceneList[indexPath.section];
     NSArray<HSGameItem *> *arr = self.dataList[indexPath.section];
     cell.indexPath = indexPath;
     cell.model = arr[indexPath.row];
-    return cell;
 }
 
 #pragma mark - UICollectionViewDelegate

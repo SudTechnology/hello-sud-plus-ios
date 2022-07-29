@@ -140,6 +140,9 @@
     if (m.homeGamePic) {
         if ([m.homeGamePic.dt_toURL.pathExtension isEqualToString:@"webp"]) {
             [WebpImageCacheService.shared loadWebp:m.homeGamePic result:^(UIImage *image) {
+                if (weakSelf.model != m) {
+                    return;
+                }
                 weakSelf.gameImageView.image = image;
             }];
         } else {
