@@ -49,7 +49,8 @@
 - (void)dtLayoutViews {
     [self.chainsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.width.equalTo(@190);
+        make.height.equalTo(@30);
         make.top.equalTo(@0);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -8,6 +8,7 @@
 #define kKeyEtherChains @"kKeyEtherChains"
 
 NSString *const MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF = @"MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF";
+NSString *const MY_NFT_WEAR_CHANGE_NTF = @"MY_NFT_WEAR_CHANGE_NTF";
 
 /// 用户选择链网
 #define kKeySelectedEthereumChain [self envKey:@"kKeySelectedEthereumChain"]

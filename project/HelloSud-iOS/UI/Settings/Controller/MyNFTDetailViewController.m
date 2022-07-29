@@ -82,6 +82,7 @@
             AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
         }
         [AppService.shared.login saveLoginUserInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_WEAR_CHANGE_NTF object:nil userInfo:nil];
 
     }                  fail:^(NSError *error) {
         weakSelf.wearBtn.enabled = YES;

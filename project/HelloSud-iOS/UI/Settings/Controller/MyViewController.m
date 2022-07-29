@@ -30,9 +30,13 @@
     [self configSudNFT];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 - (void)configSudNFT {
 //    [SudNFT initNFTWithAppId:@"1461564080052506636" appKey:@"03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc" userId:@"123" universalLink:@"https://fat-links.sud.tech" env:1 listener:self];
-    [SudNFT initNFTWithAppId:@"1486637108889305089" appKey:@"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR" userId:@"123" universalLink:@"https://fat-links.sud.tech" env:1 listener:self];
+    [SudNFT initNFTWithAppId:@"1486637108889305089" appKey:@"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR" userId:AppService.shared.loginUserID universalLink:@"https://fat-links.sud.tech" env:1 listener:self];
 }
 
 - (BOOL)dtIsHiddenNavigationBar {
@@ -161,6 +165,10 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         [weakSelf checkWalletInfo];
     }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_NFT_WEAR_CHANGE_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf.myHeaderView dtUpdateUI];
+    }];
+
 }
 
 #pragma makr lazy

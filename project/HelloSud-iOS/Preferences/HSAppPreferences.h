@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *const MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF;
+extern NSString *const MY_NFT_WEAR_CHANGE_NTF;
 
 /// 应用本地配置
 @interface HSAppPreferences : NSObject
