@@ -6,8 +6,11 @@
 #import "MyNFTView.h"
 #import "MyNFTListViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "MySelectEtherChainsView.h"
+#import "MyEthereumChainsSelectPopView.h"
 
 @interface MyNFTView ()
+@property(nonatomic, strong) MySelectEtherChainsView *chainsView;
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) UIView *nftContentView;
 @property(nonatomic, strong) NSArray<UIImageView *> *iconImageViewList;
@@ -15,6 +18,8 @@
 @property(nonatomic, strong) UIImageView *rightMoreImageView;
 @property(nonatomic, strong) UIView *moreTapView;
 @property(nonatomic, strong) SudNFTListModel *nftListModel;
+@property(nonatomic, strong) UILabel *noDataLabel;
+@property(nonatomic, strong) NSArray<SudNFTEthereumChainsModel *> *chains;
 @end
 
 @implementation MyNFTView
@@ -23,16 +28,17 @@
 }
 
 - (void)dtAddViews {
+    [self addSubview:self.chainsView];
     [self addSubview:self.nameLabel];
     [self addSubview:self.nftContentView];
     [self addSubview:self.rightMoreImageView];
     [self addSubview:self.nftCountLabel];
     [self addSubview:self.moreTapView];
+    [self addSubview:self.noDataLabel];
 
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (int i = 0; i < 3; ++i) {
         UIImageView *iv = [[UIImageView alloc] init];
-//        iv.backgroundColor = UIColor.orangeColor;
         [iv dt_cornerRadius:8];
         [arr addObject:iv];
         [self.nftContentView addSubview:iv];
@@ -41,9 +47,14 @@
 }
 
 - (void)dtLayoutViews {
+    [self.chainsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.top.equalTo(@0);
+    }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@20);
-        make.top.equalTo(@16);
+        make.top.equalTo(self.chainsView.mas_bottom).offset(18);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
     }];
     [self.nftContentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -77,6 +88,12 @@
         make.centerY.equalTo(self.nameLabel);
         make.leading.equalTo(self.nftCountLabel);
     }];
+    [self.noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.greaterThanOrEqualTo(@0);
+        make.centerX.equalTo(self);
+        make.bottom.equalTo(@-53);
+    }];
+
 }
 
 - (void)dtUpdateUI {
@@ -85,11 +102,14 @@
 
 - (void)updateNFTList:(SudNFTListModel *)nftListModel {
     self.nftListModel = nftListModel;
+    for (UIImageView *iv in self.iconImageViewList) {
+        iv.image = nil;
+    }
     for (int i = 0; i < self.iconImageViewList.count; ++i) {
         UIImageView *iv = self.iconImageViewList[i];
         if (nftListModel.list.count > i) {
             SudNFTModel *nftModel = nftListModel.list[i];
-            [SudNFT getNFTMetadata:nftModel.contractAddress tokenId:nftModel.tokenId chainType:SudENFTEthereumChainsTypeGoerli listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
+            [SudNFT getNFTMetadata:nftModel.contractAddress tokenId:nftModel.tokenId chainType:HSAppPreferences.shared.selectedEthereumChainType listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
                 if (errCode != 0) {
                     NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
                     DDLogError(@"getNFTMetadata:%@", msg);
@@ -103,13 +123,31 @@
         }
     }
     self.nftCountLabel.text = [NSString stringWithFormat:@"%@", @(nftListModel.totalCount)];
+    self.noDataLabel.hidden = nftListModel.totalCount == 0 ? NO : YES;
+}
 
+- (void)updateEthereumList:(NSArray<SudNFTEthereumChainsModel *> *)chains {
+    self.chains = chains;
+    for (SudNFTEthereumChainsModel *m in chains) {
+        if (m.type == HSAppPreferences.shared.selectedEthereumChainType) {
+            [self.chainsView update:m];
+            break;
+        }
+    }
 }
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     UITapGestureRecognizer *tapMore = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapMoreView:)];
     [self.moreTapView addGestureRecognizer:tapMore];
+    UITapGestureRecognizer *tapChainsView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapChainsView:)];
+    [self.chainsView addGestureRecognizer:tapChainsView];
+}
+
+- (void)onTapChainsView:(id)tap {
+    MyEthereumChainsSelectPopView *v = [[MyEthereumChainsSelectPopView alloc] init];
+    [v updateChains:self.chains];
+    [DTAlertView show:v rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:nil];
 }
 
 - (void)onTapMoreView:(id)tap {
@@ -137,6 +175,17 @@
     return _nameLabel;
 }
 
+- (UILabel *)noDataLabel {
+    if (!_noDataLabel) {
+        _noDataLabel = [[UILabel alloc] init];
+        _noDataLabel.text = @"尚无NFT";
+        _noDataLabel.textColor = HEX_COLOR_A(@"#ffffff", 0.4);
+        _noDataLabel.font = UIFONT_REGULAR(14);
+    }
+    return _noDataLabel;
+}
+
+
 - (UIImageView *)rightMoreImageView {
     if (!_rightMoreImageView) {
         _rightMoreImageView = [[UIImageView alloc] init];
@@ -160,6 +209,15 @@
         _moreTapView = [[UIView alloc] init];
     }
     return _moreTapView;
+}
+
+- (MySelectEtherChainsView *)chainsView {
+    if (!_chainsView) {
+        _chainsView = [[MySelectEtherChainsView alloc] init];
+        _chainsView.backgroundColor = HEX_COLOR(@"#000000");
+        [_chainsView setPartRoundCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadius:8];
+    }
+    return _chainsView;
 }
 
 @end

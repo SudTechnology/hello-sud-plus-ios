@@ -12,13 +12,13 @@
 #import "MyHeaderView.h"
 #import "HSSettingViewController.h"
 #import "AboutViewController.h"
-#import <SudMGP/SudNFT.h>
 
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource, ISudNFTListener>
 @property(nonatomic, strong) UITableView *tableView;
 /// 页面数据
 @property(nonatomic, strong) NSArray <NSArray <HSSettingModel *> *> *arrData;
 @property(nonatomic, strong) MyHeaderView *myHeaderView;
+@property(nonatomic, strong) NSArray<SudNFTWalletModel *> *walletList;
 @end
 
 @implementation MyViewController
@@ -32,6 +32,7 @@
 
 - (void)configSudNFT {
     [SudNFT initNFTWithAppId:@"1461564080052506636" appKey:@"03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc" userId:@"123" universalLink:@"https://fat-links.sud.tech" env:1 listener:self];
+//    [SudNFT initNFTWithAppId:@"1486637108889305089" appKey:@"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR" userId:@"123" universalLink:@"https://fat-links.sud.tech" env:1 listener:self];
 }
 
 - (BOOL)dtIsHiddenNavigationBar {
@@ -73,7 +74,7 @@
         return;
     }
     // 拉取NFT列表
-    [SudNFT getNFTListWithWalletAddress:AppService.shared.login.walletAddress chainType:SudENFTEthereumChainsTypeGoerli pageKey:nil listener:^(NSInteger errCode, NSString *errMsg, SudNFTListModel *nftListModel) {
+    [SudNFT getNFTListWithWalletAddress:AppService.shared.login.walletAddress chainType:HSAppPreferences.shared.selectedEthereumChainType pageKey:nil listener:^(NSInteger errCode, NSString *errMsg, SudNFTListModel *nftListModel) {
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];
@@ -82,6 +83,30 @@
         [self.myHeaderView updateNFTList:nftListModel];
         [self reloadHeadView];
     }];
+    // 更新链网数据
+    if (self.walletList.count == 0) {
+        [SudNFT getWalletListWithListener:^(NSInteger errCode, NSString *errMsg, NSArray<SudNFTWalletModel *> *walletList) {
+            if (errCode != 0) {
+                [ToastUtil show:errMsg];
+                return;
+            }
+            self.walletList = walletList;
+            [self updateWalletEtherChains];
+        }];
+    } else {
+        [self updateWalletEtherChains];
+    }
+}
+
+/// 更新钱包链网类型
+- (void)updateWalletEtherChains {
+    for (SudNFTWalletModel *m in self.walletList){
+        if (m.type == HSAppPreferences.shared.bindWalletType) {
+            [self.myHeaderView updateEthereumList:m.chains];
+            break;
+        }
+    }
+    [self reloadHeadView];
 }
 
 - (void)reloadHeadView {
@@ -111,6 +136,7 @@
     [super dtConfigEvents];
     WeakSelf
     self.myHeaderView.clickWalletBlock = ^(SudNFTWalletModel *m) {
+
         [SudNFT bindWallet:m.type listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindWalletInfoModel *walletInfoModel) {
             if (errCode != 0) {
                 NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
@@ -118,6 +144,7 @@
                 return;
             }
             // 绑定钱包成功
+            HSAppPreferences.shared.bindWalletType = m.type;
             AppService.shared.login.walletAddress = walletInfoModel.address;
             [weakSelf.myHeaderView dtUpdateUI];
             [weakSelf checkWalletInfo];
@@ -131,6 +158,9 @@
             [weakSelf checkWalletInfo];
         }          onCloseCallback:nil];
     };
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf checkWalletInfo];
+    }];
 }
 
 #pragma makr lazy
@@ -217,7 +247,9 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     return UIView.new;
 }
+
 #pragma mark ISudNFTListener
+
 /// SudNFT初始化状态
 /// @param errCode 0 成功，非0 失败
 /// @param errMsg 失败描述

@@ -48,7 +48,7 @@
     sender.enabled = NO;
     [SudNFT generateNFTDetailToken:self.cellModel.nftModel.contractAddress
                            tokenId:self.cellModel.nftModel.tokenId
-                         chainType:SudENFTEthereumChainsTypeGoerli
+                         chainType:HSAppPreferences.shared.selectedEthereumChainType
                           listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenerateDetailTokenModel *generateDetailTokenModel) {
                               if (errCode != 0) {
                                   NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];

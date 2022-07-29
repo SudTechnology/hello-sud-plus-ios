@@ -30,7 +30,7 @@ typedef void(^META_DATA_BLOCK)(HSNFTListCellModel *model, SudNFTMetaDataModel *m
     }
     self.isLoading = YES;
     WeakSelf
-    [SudNFT getNFTMetadata:self.nftModel.contractAddress tokenId:self.nftModel.tokenId chainType:SudENFTEthereumChainsTypeGoerli listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
+    [SudNFT getNFTMetadata:self.nftModel.contractAddress tokenId:self.nftModel.tokenId chainType:HSAppPreferences.shared.selectedEthereumChainType listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
         weakSelf.isLoading = YES;
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];

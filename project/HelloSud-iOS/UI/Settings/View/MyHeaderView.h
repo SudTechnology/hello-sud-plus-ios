@@ -11,4 +11,5 @@
 @property (nonatomic, strong)void(^deleteWalletBlock)(void);
 - (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList;
 - (void)updateNFTList:(SudNFTListModel *)nftListModel;
+- (void)updateEthereumList:(NSArray<SudNFTEthereumChainsModel *> *)chains;
 @end

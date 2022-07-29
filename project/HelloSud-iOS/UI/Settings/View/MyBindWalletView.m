@@ -110,6 +110,7 @@
     for (SudNFTWalletModel *m in walletList) {
         if (m.type == SudNFTWalletTypeMetaMask) {
             [self.metamaskView update: m];
+            self.metamaskView.hidden = NO;
         }
     }
 }
@@ -119,6 +120,7 @@
         _metamaskView = [[BindBtnView alloc] init];
         _metamaskView.layer.borderColor = UIColor.whiteColor.CGColor;
         _metamaskView.layer.borderWidth = 1;
+        _metamaskView.hidden = YES;
     }
     return _metamaskView;
 }

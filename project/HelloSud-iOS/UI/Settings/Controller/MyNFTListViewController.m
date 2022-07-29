@@ -113,8 +113,6 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    MyNFTColCell *c = [collectionView cellForItemAtIndexPath:indexPath];
-    DDLogDebug(@"cell:%@, model:%@", c, c.model);
     MyNFTDetailViewController *vc = [[MyNFTDetailViewController alloc]init];
     vc.cellModel = self.dataList[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];

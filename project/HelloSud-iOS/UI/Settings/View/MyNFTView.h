@@ -8,4 +8,5 @@
 /// 我的NFT内容视图
 @interface MyNFTView : BaseView
 - (void)updateNFTList:(SudNFTListModel *)nftListModel;
+- (void)updateEthereumList:(NSArray<SudNFTEthereumChainsModel *> *)chains;
 @end

@@ -159,6 +159,11 @@
     [self.myNFTView updateNFTList:nftListModel];
 }
 
+- (void)updateEthereumList:(NSArray<SudNFTEthereumChainsModel *> *)chains {
+    [self.myNFTView updateEthereumList:chains];
+}
+
+
 - (UIImageView *)headerView {
     if (!_headerView) {
         _headerView = [[UIImageView alloc] init];
