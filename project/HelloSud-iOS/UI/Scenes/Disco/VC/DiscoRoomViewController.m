@@ -93,6 +93,10 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     return YES;
 }
 
+- (BOOL)isLoadCommonRobotList {
+    return NO;
+}
+
 - (void)dtAddViews {
     [super dtAddViews];
     [self.naviView addSubview:self.rankView];
@@ -371,7 +375,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         return;
     }
     WeakSelf
-    [DiscoRoomService reqRobotListWithFinished:^(NSArray<RotbotInfoModel *> *robotList) {
+    [AudioRoomService reqRobotListWithFinished:^(NSArray<RobotInfoModel *> *robotList) {
         [weakSelf handleRobotUpMic:robotList];
 
     }                                  failure:^(NSError *_Nonnull error) {
@@ -380,13 +384,13 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 }
 
 /// 处理机器人上麦逻辑
-- (void)handleRobotUpMic:(NSArray<RotbotInfoModel *> *)robotList {
+- (void)handleRobotUpMic:(NSArray<RobotInfoModel *> *)robotList {
 
     self.loadedRobotList = YES;
     NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
     NSMutableArray *robotAnchorList = [[NSMutableArray alloc] init];
     for (int i = 0; i < robotList.count; ++i) {
-        RotbotInfoModel *robotModel = robotList[i];
+        RobotInfoModel *robotModel = robotList[i];
         /// 前6位机器人自动上麦
         if (i < 6) {
             [robotAnchorList addObject:robotModel];
@@ -406,16 +410,16 @@ static NSString *discoKeyWordsFocus = @"聚焦";
 
     // 机器人加入主播位
     [HSThreadUtils dispatchMainAfter:1 callback:^{
-        for (RotbotInfoModel *m in robotAnchorList) {
+        for (RobotInfoModel *m in robotAnchorList) {
             [self joinTheRobotToMic:m];
         }
     }];
 
 }
 
-- (void)joinTheRobotToMic:(RotbotInfoModel *)robotModel {
+- (void)joinTheRobotToMic:(RobotInfoModel *)robotModel {
 
-    AudioRoomMicModel *micModel = [self getOneEmptyMic];
+    AudioRoomMicModel *micModel = [self getOneEmptyMic:0];
     if (micModel == nil) {
         [ToastUtil show:NSString.dt_room_there_no_mic];
         return;
@@ -428,6 +432,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
         proxyUser.icon = robotModel.avatar;
         proxyUser.sex = [robotModel.gender isEqualToString:@"male"] ? 1 : 2;
         proxyUser.isRobot = YES;
+        proxyUser.isAi = YES;
         micModel.user = proxyUser;
         [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 proxyUser:proxyUser success:nil fail:nil];
         return;

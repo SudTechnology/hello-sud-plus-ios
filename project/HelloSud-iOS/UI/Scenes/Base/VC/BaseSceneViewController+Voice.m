@@ -155,6 +155,7 @@
     if (state == HSAudioEngineStateConnected && !self.isSentEnterRoom) {
         self.isSentEnterRoom = YES;
         [self sendEnterRoomMsg];
+        [self onHandleEnteredRoom];
     }
 }
 

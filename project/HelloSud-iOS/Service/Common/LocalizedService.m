@@ -4,17 +4,9 @@
 - (NSString *)localized {
     NSBundle *bundle = NSBundle.currentLanguageBundle;
     if (bundle) {
-        NSString *temp = [bundle localizedStringForKey:self value:self table:nil];
-        if ([temp isEqualToString:self]) {
-            NSBundle *enBundle = NSBundle.defaultLanguageBundle;
-            if (enBundle) {
-                return [enBundle localizedStringForKey:self value:self table:nil];
-            }
-        } else {
-            return temp;
-        }
+        return [bundle localizedStringForKey:self value:self table:nil];
     }
-    return NSLocalizedString(self, comment: self);
+    return NSLocalizedString(self, comment: self); 
 }
 /*
   Localizable.strings
@@ -439,6 +431,7 @@
 + (NSString *)dt_room_disco_category_one { return @"dt_room_disco_category_one".localized; }
 + (NSString *)dt_room_disco_category_twn { return @"dt_room_disco_category_twn".localized; }
 + (NSString *)dt_room_disco_dance_name { return @"dt_room_disco_dance_name".localized; }
++ (NSString *)dt_room_kick_out_room { return @"dt_room_kick_out_room".localized; }
 
 
 @end

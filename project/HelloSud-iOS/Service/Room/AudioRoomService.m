@@ -242,6 +242,19 @@
     } failure:fail];
 }
 
+/// 拉取机器人
+/// @param finished finished
+/// @param failure failure
++ (void)reqRobotListWithFinished:(void (^)(NSArray<RobotInfoModel *> *robotList))finished failure:(void (^)(NSError *error))failure {
+    NSDictionary *dicParam = @{@"count": @(30)};
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"robot/list/v1") param:dicParam respClass:RespDiscoRobotListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (finished) {
+            RespDiscoRobotListModel *m = (RespDiscoRobotListModel *) resp;
+            finished(m.robotList);
+        }
+    }                         failure:failure];
+}
+
 #pragma mark - Custom
 + (RoomCustomModel *)getCustomModel {
     RoomCustomModel *model = [SettingsService roomCustomModel];

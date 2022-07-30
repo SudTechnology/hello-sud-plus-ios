@@ -55,7 +55,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 同意接单
 - (void)reqRoomOrderReceive:(NSInteger)orderId success:(EmptyBlock)success fail:(ErrorBlock)fail;
 
-
+/// 拉取机器人
+/// @param finished finished
+/// @param failure failure
++ (void)reqRobotListWithFinished:(void (^)(NSArray<RobotInfoModel *> *robotList))finished failure:(void (^)(NSError *error))failure;
 #pragma mark - Custom
 + (RoomCustomModel *)getCustomModel;
 + (GameCfgModel *)getGameCfgModel;

@@ -156,6 +156,9 @@
     } else {
         self.isShowEndGame = false;
     }
+    if ([AppService.shared.loginUserID isEqualToString:userId] && model.isCaptain) {
+        [self onHandleIsGameCaptain];
+    }
     
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }

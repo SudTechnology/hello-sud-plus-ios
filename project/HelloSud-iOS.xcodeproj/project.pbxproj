@@ -294,6 +294,7 @@
 		BC2109B53CC40DBF0DEB10B2 /* RoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105467EA8857361624481 /* RoomMoreView.m */; };
 		BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */; };
 		BC210A75257DF698A543C29A /* DiscoInteractiveColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */; };
+		BC210A7C7C41EA6AC304F981 /* RoomCmdKickoutRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */; };
 		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
 		BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
@@ -869,6 +870,7 @@
 		BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessViewController.h; sourceTree = "<group>"; };
 		BC2107BC94088B9F062BBA4B /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
 		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
+		BC2108CFC574A8AFEFE2FEDA /* RoomCmdKickoutRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdKickoutRoomModel.h; sourceTree = "<group>"; };
 		BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoAppointmentPopView.m; sourceTree = "<group>"; };
 		BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoGameInteractivePopView.m; sourceTree = "<group>"; };
 		BC210992133641B87C11D04E /* DiscoSelectAnchorColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoSelectAnchorColCell.h; sourceTree = "<group>"; };
@@ -878,6 +880,7 @@
 		BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderView.m; sourceTree = "<group>"; };
 		BC210AD2E65543CE739F514F /* DiscoInteractiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoInteractiveModel.h; sourceTree = "<group>"; };
 		BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveModel.m; sourceTree = "<group>"; };
+		BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdKickoutRoomModel.m; sourceTree = "<group>"; };
 		BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveColCell.m; sourceTree = "<group>"; };
 		BC210BDF39D45429F38899B7 /* PKRoomListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRoomListCell.h; sourceTree = "<group>"; };
 		BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderCellModel.m; sourceTree = "<group>"; };
@@ -1272,6 +1275,8 @@
 				BC21055EE76F1B350D139F19 /* RoomCmdPKModel.h */,
 				6C46080F2859D26E005C99EF /* RoomCmdGuessBetNotifyModel.h */,
 				6C4608102859D26E005C99EF /* RoomCmdGuessBetNotifyModel.m */,
+				BC2108CFC574A8AFEFE2FEDA /* RoomCmdKickoutRoomModel.h */,
+				BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */,
 			);
 			path = CMD;
 			sourceTree = "<group>";
@@ -2792,6 +2797,7 @@
 				BC210093C2C7796FBA9F334C /* DiscoGameInteractivePopView.m in Sources */,
 				BC210743E83852E3D938F5A9 /* DiscoInteractiveModel.m in Sources */,
 				BC210A75257DF698A543C29A /* DiscoInteractiveColCell.m in Sources */,
+				BC210A7C7C41EA6AC304F981 /* RoomCmdKickoutRoomModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
