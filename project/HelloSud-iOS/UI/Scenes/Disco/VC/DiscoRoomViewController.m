@@ -97,6 +97,11 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     return NO;
 }
 
+/// 是否显示添加通用机器人按钮
+- (BOOL)isShowAddRobotBtn {
+    return NO;
+}
+
 - (void)dtAddViews {
     [super dtAddViews];
     [self.naviView addSubview:self.rankView];

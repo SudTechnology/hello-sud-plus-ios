@@ -335,6 +335,11 @@
     return self.enterModel.roleType == 1;
 }
 
+/// 是否显示添加通用机器人按钮
+- (BOOL)isShowAddRobotBtn {
+    return NO;
+}
+
 - (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void (^)(BOOL shouldSend))shouldSend {
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;

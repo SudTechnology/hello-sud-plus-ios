@@ -30,7 +30,7 @@
     
     [self.gameApiNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
-        make.bottom.mas_equalTo(-64 - kAppSafeBottom);
+        make.bottom.equalTo(self.robotView.mas_top).offset(-12);
         make.size.mas_equalTo(CGSizeMake(48, 48));
     }];
     [self.gameApiBtn mas_makeConstraints:^(MASConstraintMaker *make) {

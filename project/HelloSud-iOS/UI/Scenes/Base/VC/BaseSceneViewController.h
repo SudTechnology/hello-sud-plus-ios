@@ -45,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, readonly) UIView *gameView;
 /// 场景视图，所有子类场景
 @property(nonatomic, strong, readonly) BaseView *sceneView;
+/// 添加机器人按钮
+@property(nonatomic, strong, readonly) BaseView *robotView;
 
 
 /// 游戏上遮罩背景视图
@@ -200,6 +202,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否加载通用机器人
 - (BOOL)isLoadCommonRobotList;
+
+/// 是否显示添加通用机器人按钮
+- (BOOL)isShowAddRobotBtn;
 
 /// 处理礼物动效
 /// @param model model description

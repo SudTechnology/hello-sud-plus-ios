@@ -345,6 +345,7 @@
         self.totalGameUserCount = [AppService.shared getTotalGameCountWithGameID:self.gameId];
     }
     [self setupGameRoomContent];
+    self.robotView.hidden = self.isShowAddRobotBtn ? NO : YES;
 }
 
 /// 退出房间
@@ -1220,6 +1221,11 @@
 }
 
 - (BOOL)isLoadCommonRobotList {
+    return YES;
+}
+
+/// 是否显示添加通用机器人按钮
+- (BOOL)isShowAddRobotBtn {
     return YES;
 }
 

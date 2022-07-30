@@ -56,12 +56,11 @@
     [self.normalGuessNavLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.autoTitleLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 
-    CGFloat bottom = kAppSafeBottom + 51;
     [self.guessMineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(@(-18));
+        make.trailing.equalTo(@(-16));
         make.width.equalTo(@80);
         make.height.equalTo(@90);
-        make.bottom.equalTo(@(-bottom));
+        make.bottom.equalTo(self.robotView.mas_top).offset(-12);
     }];
     [self.autoGuessNavView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.naviView.roomModeView);
