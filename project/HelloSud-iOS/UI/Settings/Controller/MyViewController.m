@@ -35,8 +35,12 @@
 }
 
 - (void)configSudNFT {
-//    [SudNFT initNFTWithAppId:@"1461564080052506636" appKey:@"03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc" userId:@"123" universalLink:@"https://fat-links.sud.tech" env:1 listener:self];
-    [SudNFT initNFTWithAppId:@"1486637108889305089" appKey:@"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR" userId:AppService.shared.loginUserID universalLink:@"https://fat-links.sud.tech" env:1 listener:self];
+//    [SudNFT initNFTWithAppId:@"1461564080052506636" appKey:@"03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc" userId:@"123" universalLink:@"https://fat-links.sud.tech"  listener:self];
+    [SudNFT initNFTWithAppId:@"1486637108889305089"
+                      appKey:@"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR"
+                      userId:AppService.shared.loginUserID
+               universalLink:@"https://fat-links.sud.tech"
+                    listener:self];
 }
 
 - (BOOL)dtIsHiddenNavigationBar {
@@ -104,7 +108,7 @@
 
 /// 更新钱包链网类型
 - (void)updateWalletEtherChains {
-    for (SudNFTWalletModel *m in self.walletList){
+    for (SudNFTWalletModel *m in self.walletList) {
         if (m.type == HSAppPreferences.shared.bindWalletType) {
             [self.myHeaderView updateEthereumList:m.chains];
             break;

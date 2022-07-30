@@ -20,13 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param appKey 应用key
 /// @param userId 用户ID
 /// @param universalLink 应用universalLink; 前面必须完整https,后面不需要/ 如：https://links.example.com
-/// @param env 环境变量：默认填0:release, 1:dev 2:fat
 /// @param listener 结果回调
 + (void)initNFTWithAppId:(NSString *_Nonnull)appId
                   appKey:(NSString *_Nonnull)appKey
                   userId:(NSString *_Nonnull)userId
            universalLink:(NSString *_Nonnull)universalLink
-                     env:(int)env
                 listener:(id <ISudNFTListener> _Nullable)listener;
 
 /// 获取支持钱包列表
