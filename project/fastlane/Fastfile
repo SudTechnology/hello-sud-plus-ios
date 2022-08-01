@@ -58,7 +58,7 @@ platform :ios do
       export_options: {
         method: "development",
         provisioningProfiles: {
-          "tech.sud.mgp.hello" => "Dev_Sud_MGP"
+          "tech.sud.mgp.hello" => "HelloSudPlus_Dev"
         }
       },
       xcargs: "-allowProvisioningUpdates",
