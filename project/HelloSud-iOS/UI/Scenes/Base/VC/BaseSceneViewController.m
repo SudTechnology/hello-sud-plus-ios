@@ -770,7 +770,11 @@
         RoomCmdKickoutRoomModel *m = (RoomCmdKickoutRoomModel *)msg;
         if ([AppService.shared.login.loginUserInfo isMeByUserID:m.userID]) {
             // 自己被踢出去
-            [self handleExitRoomIsFromSuspend:NO finished:nil];
+            if (SuspendRoomView.isShowSuspend) {
+                [SuspendRoomView exitRoom:nil];
+            } else {
+                [self handleExitRoomIsFromSuspend:NO finished:nil];
+            }
         } else {
             // 是队长，把该人踢出游戏
             if ([self.sudFSMMGDecorator isPlayerIsCaptain:AppService.shared.loginUserID]) {
