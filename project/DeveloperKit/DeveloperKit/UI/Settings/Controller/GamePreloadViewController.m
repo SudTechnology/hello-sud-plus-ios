@@ -10,7 +10,7 @@
 #import "GamePreloadCell.h"
 #import <SudMGP/SudMGP.h>
 #import <SudMGP/SudInitSDKParamModel.h>
-#import "PkgDownloadStatus.h"
+#import <SudMGP/PkgDownloadStatus.h>
 
 @interface GamePreloadViewController ()<UITableViewDelegate, UITableViewDataSource, ISudListenerPreloadMGPkg>
 @property(nonatomic, strong) NSArray <QSGameItemModel *> *dataList;

@@ -10,6 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ISudFSTAPP;
 @protocol ISudFSMMG;
 @protocol ISudCfg;
+@protocol ISudListenerPreloadMGPkg;
 @class SudInitSDKParamModel;
 @class SudLoadMGParamModel;
 
@@ -97,6 +98,18 @@ NS_ASSUME_NONNULL_BEGIN
  * @return boolean
  */
 + (bool)destroyMG:(id<ISudFSTAPP>_Nonnull) fstAPP;
+
+/**
+* 预加载游戏包列表
+* @param mgIdList 游戏ID列表
+*/
++ (void) preloadMGPkgList:(NSArray<NSNumber *> *) mgIdList listener:(id<ISudListenerPreloadMGPkg>) listener;
+
+/**
+* 取消预加载游戏包
+* @param mgIdList 游戏ID列表
+*/
++ (void) cancelPreloadMGPkgList:(NSArray<NSNumber *> *) mgIdList;
 
 /**
  * 设置统计上报userId
