@@ -35,6 +35,10 @@
 }
 
 - (void)configSudNFT {
+#if DEBUG
+    // 测试环境
+    [ISudAPPD e:2];
+#endif
 //    [SudNFT initNFTWithAppId:@"1461564080052506636" appKey:@"03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc" userId:@"123" universalLink:@"https://fat-links.sud.tech"  listener:self];
     [SudNFT initNFTWithAppId:@"1486637108889305089"
                       appKey:@"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR"

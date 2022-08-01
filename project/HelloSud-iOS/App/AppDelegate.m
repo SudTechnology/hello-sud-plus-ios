@@ -16,6 +16,7 @@
 #import "KeyHeader.h"
 #import <NIMSDK/NIMSDK.h>
 #import <SudMGP/SudNFT.h>
+#import <SudMGP/ISudAPPD.h>
 
 @interface AppDelegate () {
 
