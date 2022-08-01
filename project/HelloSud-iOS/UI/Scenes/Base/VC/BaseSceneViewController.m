@@ -262,7 +262,7 @@
     // 查找一个未在麦位机器人
     [self findOneNotInMicRobot:^(RobotInfoModel *robotInfoModel) {
         /// 将机器人上麦
-        [weakSelf joinCommonRobotToMic:robotInfoModel];
+        [weakSelf joinCommonRobotToMic:robotInfoModel showNoMic:YES];
     }];
     
 }
@@ -1361,17 +1361,19 @@
     // 机器人加入主播位
     [HSThreadUtils dispatchMainAfter:1 callback:^{
         for (RobotInfoModel *m in robotAnchorList) {
-            [self joinCommonRobotToMic:m];
+            [self joinCommonRobotToMic:m showNoMic:NO];
         }
     }];
 }
 
-- (void)joinCommonRobotToMic:(RobotInfoModel *)robotModel {
-    
+- (void)joinCommonRobotToMic:(RobotInfoModel *)robotModel showNoMic:(BOOL)showNoMic {
+
     // 从麦位号1开始，0留给自己
     AudioRoomMicModel *micModel = [self getOneEmptyMic:1];
     if (micModel == nil) {
-        [ToastUtil show:NSString.dt_room_there_no_mic];
+        if (showNoMic) {
+            [ToastUtil show:NSString.dt_room_there_no_mic];
+        }
         return;
     }
     if (micModel.user == nil) {
