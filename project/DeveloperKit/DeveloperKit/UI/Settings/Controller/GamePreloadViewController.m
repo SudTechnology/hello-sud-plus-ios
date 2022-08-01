@@ -234,6 +234,11 @@
 
 -(void) onPreloadSuccess:(int64_t) mgId {
     DDLogDebug(@"onPreloadSuccess mgId:%@", @(mgId));
+    NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
+    GamePreloadCell *cell = self.cellMap[key];
+    if (cell) {
+        [cell updateFailureWithCode:0 msg:@"已完成"];
+    }
 }
 
 -(void) onPreloadFailure:(int64_t) mgId errCode:(int) errCode errMsg:(NSString *) errMsg {
@@ -246,11 +251,13 @@
 }
 
 -(void) onPreloadStatus:(int64_t) mgId downloadedSize:(long) downloadedSize totalSize:(long) totalSize status:(PkgDownloadStatus) status {
-//    DDLogDebug(@"onPreloadStatus mgId:%@, downloadedSize:%@, totalSize:(%@)", @(mgId), @(downloadedSize), @(totalSize));
-    NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
-    GamePreloadCell *cell = self.cellMap[key];
-    if (cell) {
-        [cell updateDownloadedSize:downloadedSize totalSize:totalSize];
+    if (PKG_DOWNLOAD_DOWNLOADING == status) {
+        DDLogDebug(@"onPreloadStatus mgId:%@, downloadedSize:%@, totalSize:(%@)", @(mgId), @(downloadedSize), @(totalSize));
+        NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
+        GamePreloadCell *cell = self.cellMap[key];
+        if (cell) {
+            [cell updateDownloadedSize:downloadedSize totalSize:totalSize];
+        }
     }
 }
 

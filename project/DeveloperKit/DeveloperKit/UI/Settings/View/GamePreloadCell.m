@@ -162,7 +162,11 @@
 }
 
 - (void)updateFailureWithCode:(NSInteger)code msg:(NSString *)msg {
-    self.progressLabel.text = [NSString stringWithFormat:@"%@(%@)", msg, @(code)];
+    if (code == 0) {
+        self.progressLabel.text = msg;
+    } else {
+        self.progressLabel.text = [NSString stringWithFormat:@"%@(%@)", msg, @(code)];
+    }
 }
 
 #pragma mark lazy

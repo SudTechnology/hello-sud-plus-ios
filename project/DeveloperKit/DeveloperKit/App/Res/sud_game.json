@@ -118,5 +118,17 @@
         "gameId": 1490944604005199873,
         "gamePic": "dice.jpg",
         "gameRoomPic": "ic_dhs.png"
+    },
+    {
+        "gameName": "Unity石头剪刀布",
+        "gameId": 1516981349717762050L,
+        "gamePic": "stjdb.jpg",
+        "gameRoomPic": "ic_stjdb.png"
+    },
+    {
+        "gameName": "Unity Mirror Demo",
+        "gameId": 1536921423523704833L,
+        "gamePic": "dice.jpg",
+        "gameRoomPic": "ic_dhs.png"
     }
 ]
