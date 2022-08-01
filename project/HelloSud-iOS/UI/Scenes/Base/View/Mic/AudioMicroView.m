@@ -173,7 +173,7 @@
             if (msgModel.micIndex == weakSelf.model.micIndex) {
                 if (msgModel.cmd == CMD_DOWN_MIC_NOTIFY) {
                     // 下麦,清空用户信息
-                    if (isSameMicUser){
+                    if (isSameMicUser) {
                         weakSelf.model.user = nil;
                         weakSelf.giftImageView.hidden = true;
                         [weakSelf hiddenGameNode:true];
@@ -315,31 +315,33 @@
         [self.gamingImageView setHidden:true];
         [self.gameStateLabel setHidden:true];
 
-        /// 是否是在准备
-        if ([self.iSudFSMMG isPlayerIsReady:self.model.user.userID] == 1) {
-            [self.gameStateLabel setHidden:false];
-            self.gameStateLabel.text = NSString.dt_room_is_ready;
-            self.gameStateLabel.textColor = [UIColor whiteColor];
-            self.gameStateLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#13AD21" alpha:1];
-            self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
+        /// 是否还在游戏中
+        if (![self.iSudFSMMG isPlayerInGame:self.model.user.userID]) {
+            // 不在游戏中
+            [self hiddenGameNode:false];
         } else {
-            /// 是否还在游戏中
-            if ([self.iSudFSMMG isPlayerInGame:self.model.user.userID]) {
+            // 在游戏大厅中
+            if ([self.iSudFSMMG isPlayerIsPlaying:self.model.user.userID]) {
+                // 正在玩游戏
+                [self hiddenGameNode:false];
+                [self.gamingImageView setHidden:false];
+            } else if ([self.iSudFSMMG isPlayerIsReady:self.model.user.userID]) {
+                // 准备
+                [self.gameStateLabel setHidden:false];
+                self.gameStateLabel.text = NSString.dt_room_is_ready;
+                self.gameStateLabel.textColor = [UIColor whiteColor];
+                self.gameStateLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#13AD21" alpha:1];
+                self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
+            } else {
+                // 未准备
                 [self.gameStateLabel setHidden:false];
                 self.gameStateLabel.text = NSString.dt_room_not_ready;
                 self.gameStateLabel.textColor = [UIColor whiteColor];
                 self.gameStateLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#FF6E65" alpha:1];
                 self.gameStateLabel.layer.borderColor = UIColor.whiteColor.CGColor;
-            } else {
-                [self hiddenGameNode:false];
             }
         }
-        if ([self.iSudFSMMG isPlayerIsPlaying:self.model.user.userID]) {
-            [self hiddenGameNode:false];
-            [self.gamingImageView setHidden:false];
-        } else {
-            [self.gamingImageView setHidden:true];
-        }
+
     } else {
         [self hiddenGameNode:false];
     }
