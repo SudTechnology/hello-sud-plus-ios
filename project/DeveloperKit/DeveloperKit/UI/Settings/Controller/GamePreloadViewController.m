@@ -9,9 +9,10 @@
 #import "GamePreloadViewController.h"
 #import "GamePreloadCell.h"
 #import <SudMGP/SudMGP.h>
-#import <SudMGP/ISudListenerGamePkgPreload.h>
+#import <SudMGP/SudInitSDKParamModel.h>
+#import "PkgDownloadStatus.h"
 
-@interface GamePreloadViewController ()<UITableViewDelegate, UITableViewDataSource, ISudListenerGamePkgPreload>
+@interface GamePreloadViewController ()<UITableViewDelegate, UITableViewDataSource, ISudListenerPreloadMGPkg>
 @property(nonatomic, strong) NSArray <QSGameItemModel *> *dataList;
 @property(nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong)UIButton *startBtn;
@@ -37,6 +38,7 @@
     self.cellMap = [[NSMutableDictionary alloc]init];
     // Do any additional setup after loading the view.
     self.title = @"预加载";
+    [self initSudMGP];
 }
 
 - (void)dtAddViews {
@@ -71,6 +73,32 @@
 - (void)dtConfigUI {
     [super dtConfigUI];
     [self loadGameList];
+}
+
+- (void)initSudMGP {
+
+    [self configGameEnv];
+    NSString *appID = AppService.shared.currentAppIdModel.app_id; //AppService.shared.configModel.sudCfg.appId;
+    NSString *appKey = AppService.shared.currentAppIdModel.app_key;//AppService.shared.configModel.sudCfg.appKey;
+    if (appID.length == 0 || appKey.length == 0) {
+        [ToastUtil show:@"Game appID or appKey is empty"];
+        return;
+    }
+    SudInitSDKParamModel *model = [[SudInitSDKParamModel alloc]init];
+    model.appId = appID;
+    model.appKey = appKey;
+    if (AppService.shared.gameEnvType != GameEnvTypePro) {
+        model.isTestEnv = GAME_TEST_ENV;
+    }
+    [SudMGP initSDK:model listener:^(int retCode, const NSString * _Nonnull retMsg) {
+
+        if (retCode == 0) {
+            DDLogInfo(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
+        } else {
+            /// 初始化失败, 可根据业务重试
+            DDLogError(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@",retMsg);
+        }
+    }];
 }
 
 /// 加载游戏列表
@@ -159,6 +187,8 @@
         c.isShowTopLine = true;
     }
     QSGameItemModel *model = self.dataList[indexPath.row];
+    NSMutableArray<NSNumber *> *mgIdList = [NSMutableArray new];
+    [mgIdList addObject:[NSNumber numberWithLongLong:model.gameId]];
     WeakSelf
     c.loadGameBlock = ^{
         /// 加载游戏
@@ -169,15 +199,14 @@
     };
     c.startDownloadBlock = ^{
         /// 开始下载
-        [SudMGP preloadGamePkg:model.gameId listener:weakSelf];
+        [SudMGP preloadMGPkgList:mgIdList listener:weakSelf];
     };
     c.cancelDownloadBlock = ^{
         /// 取消下载
-        [SudMGP cancelPreloadGamePkg:model.gameId];
+        [SudMGP cancelPreloadMGPkgList:mgIdList];
     };
     c.pauseDownloadBlock = ^{
         /// 暂停下载
-        [SudMGP pausePreloadGamePkg:model.gameId];
     };
 }
 
@@ -209,10 +238,15 @@
 
 -(void) onPreloadFailure:(int64_t) mgId errCode:(int) errCode errMsg:(NSString *) errMsg {
     DDLogDebug(@"onPreloadFailure mgId:%@, error:%@(%@)", @(mgId), errMsg, @(errCode));
+    NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
+    GamePreloadCell *cell = self.cellMap[key];
+    if (cell) {
+        [cell updateFailureWithCode:errCode msg:errMsg];
+    }
 }
 
--(void) onPreloadStatus:(int64_t) mgId downloadedSize:(long) downloadedSize totalSize:(long) totalSize status:(PkgPreloadStatus) status {
-    DDLogDebug(@"onPreloadStatus mgId:%@, downloadedSize:%@, totalSize:(%@)", @(mgId), @(downloadedSize), @(totalSize));
+-(void) onPreloadStatus:(int64_t) mgId downloadedSize:(long) downloadedSize totalSize:(long) totalSize status:(PkgDownloadStatus) status {
+//    DDLogDebug(@"onPreloadStatus mgId:%@, downloadedSize:%@, totalSize:(%@)", @(mgId), @(downloadedSize), @(totalSize));
     NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
     GamePreloadCell *cell = self.cellMap[key];
     if (cell) {

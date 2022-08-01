@@ -32,6 +32,12 @@
 
 - (void)hanldeInitSudFSMMG {}
 
+/// 配置游戏环境
+- (void)configGameEnv {
+    NSInteger gameEnvType =  AppService.shared.gameEnvType;
+    [ISudAPPD e:(int)gameEnvType];
+}
+
 #pragma mark =======SudFSMMGListener=======
 
 /// 游戏开始
@@ -315,14 +321,13 @@
         return;
     }
     
-    // dev=4 fat=3 sim=2 pro=1
-    [ISudAPPD e:4];
-    [ISudAPPD d];
-
+    [self configGameEnv];
     SudInitSDKParamModel *model = [[SudInitSDKParamModel alloc]init];
     model.appId = appID;
     model.appKey = appKey;
-    model.isTestEnv = GAME_TEST_ENV;
+    if (AppService.shared.gameEnvType != GameEnvTypePro) {    
+        model.isTestEnv = GAME_TEST_ENV;
+    }
     [SudMGP initSDK:model listener:^(int retCode, const NSString * _Nonnull retMsg) {
 
         if (retCode == 0) {

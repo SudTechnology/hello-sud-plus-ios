@@ -44,7 +44,7 @@
     [self.contentView addSubview:self.loadBtn];
     [self.contentView addSubview:self.startBtn];
     [self.contentView addSubview:self.cancelBtn];
-    [self.contentView addSubview:self.pauseBtn];
+//    [self.contentView addSubview:self.pauseBtn];
     [self.contentView addSubview:self.progressView];
 }
 
@@ -80,16 +80,16 @@
         make.trailing.equalTo(self.contentView.mas_centerX);
         make.top.equalTo(self.progressLabel.mas_bottom).offset(2);
     }];
-    [self.pauseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
         make.width.height.mas_greaterThanOrEqualTo(0);
         make.centerY.equalTo(self.contentView);
     }];
-    [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.pauseBtn.mas_leading).offset(-5);
-        make.width.height.mas_greaterThanOrEqualTo(0);
-        make.centerY.equalTo(self.contentView);
-    }];
+//    [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.trailing.equalTo(self.pauseBtn.mas_leading).offset(-5);
+//        make.width.height.mas_greaterThanOrEqualTo(0);
+//        make.centerY.equalTo(self.contentView);
+//    }];
     [self.startBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.cancelBtn.mas_leading).offset(-5);
         make.width.height.mas_greaterThanOrEqualTo(0);
@@ -159,6 +159,10 @@
     if (downloadedSize == totalSize && totalSize > 0) {
         self.progressLabel.text = @"已完成";
     }
+}
+
+- (void)updateFailureWithCode:(NSInteger)code msg:(NSString *)msg {
+    self.progressLabel.text = [NSString stringWithFormat:@"%@(%@)", msg, @(code)];
 }
 
 #pragma mark lazy

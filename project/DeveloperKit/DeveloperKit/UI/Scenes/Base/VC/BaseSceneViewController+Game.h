@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param gameID 新的游戏ID
 - (void)handleChangeToGame:(int64_t)gameID;
 - (void)hanldeInitSudFSMMG;
+/// 配置游戏环境
+- (void)configGameEnv;
 @end
 
 NS_ASSUME_NONNULL_END
