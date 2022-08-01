@@ -47,10 +47,11 @@
         make.centerY.equalTo(self.headImageView).offset(0);
     }];
     [self.supportLabel dt_cornerRadius:7];
+    [self.supportLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.supportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.titleLabel);
         make.top.equalTo(self.titleLabel.mas_bottom);
-        make.trailing.equalTo(self.startLabel.mas_leading).offset(2);
+        make.trailing.lessThanOrEqualTo(self.startLabel.mas_leading).offset(2);
         make.height.equalTo(@14);
     }];
     [self.startLabel mas_makeConstraints:^(MASConstraintMaker *make) {
