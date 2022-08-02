@@ -223,11 +223,11 @@
         usLabel.textAlignment = NSTextAlignmentCenter;
         usLabel.numberOfLines = 0;
         [_contactUsView addSubview:usLabel];
-        usLabel.preferredMaxLayoutWidth = kScreenWidth - 34;
         [usLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(17);
+            make.trailing.mas_equalTo(-17);
             make.top.mas_equalTo(0);
-            make.width.height.mas_greaterThanOrEqualTo(0);
+            make.height.mas_greaterThanOrEqualTo(0);
             make.bottom.mas_equalTo(0);
         }];
     }
