@@ -26,9 +26,9 @@
     return YES;
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    return UIStatusBarStyleLightContent;
+//}
 
 - (void)dtConfigUI {
     self.iconImageView.backgroundColor = UIColor.orangeColor;
