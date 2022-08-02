@@ -26,8 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = nil;
-    // Do any additional setup after loading the view.
     [self configData];
 }
 

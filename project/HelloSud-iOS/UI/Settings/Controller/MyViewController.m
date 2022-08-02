@@ -19,6 +19,7 @@
 @property(nonatomic, strong) NSArray <NSArray <HSSettingModel *> *> *arrData;
 @property(nonatomic, strong) MyHeaderView *myHeaderView;
 @property(nonatomic, strong) NSArray<SudNFTWalletModel *> *walletList;
+@property(nonatomic, strong) UIView *contactUsView;
 @end
 
 @implementation MyViewController
@@ -67,6 +68,10 @@
     aboutModel.pageURL = @"";
 
     self.arrData = @[@[settingModel], @[aboutModel]];
+    CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
+    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
+    self.contactUsView.frame = targetFrame;
+    self.tableView.tableFooterView = self.contactUsView;
     [self.tableView reloadData];
 }
 
@@ -138,7 +143,7 @@
 - (void)dtLayoutViews {
     [super dtLayoutViews];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(20, 16, 0, 16));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 16, 0, 16));
     }];
 
     [self reloadHeadView];
@@ -160,15 +165,18 @@
             AppService.shared.login.walletAddress = walletInfoModel.address;
             [weakSelf.myHeaderView dtUpdateUI];
             [weakSelf checkWalletInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
         }];
     };
     self.myHeaderView.deleteWalletBlock = ^{
-        [DTAlertView showTextAlert:@"确定要接触连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+        [DTAlertView showTextAlert:@"确定要解除连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             AppService.shared.login.walletAddress = nil;
             [weakSelf.myHeaderView dtUpdateUI];
             [weakSelf reloadHeadView];
             [weakSelf checkWalletInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
         }          onCloseCallback:nil];
+
     };
     [[NSNotificationCenter defaultCenter] addObserverForName:MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         [weakSelf checkWalletInfo];
@@ -204,6 +212,28 @@
     return _tableView;
 }
 
+- (UIView *)contactUsView {
+    if (_contactUsView == nil) {
+        _contactUsView = UIView.new;
+        UILabel *usLabel = UILabel.new;
+        usLabel.numberOfLines = 0;
+        usLabel.text = NSString.dt_settings_contact_us;
+        usLabel.textColor = HEX_COLOR(@"#8A8A8E");
+        usLabel.font = UIFONT_REGULAR(12);
+        usLabel.textAlignment = NSTextAlignmentCenter;
+        usLabel.numberOfLines = 0;
+        [_contactUsView addSubview:usLabel];
+        usLabel.preferredMaxLayoutWidth = kScreenWidth - 34;
+        [usLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(17);
+            make.top.mas_equalTo(0);
+            make.width.height.mas_greaterThanOrEqualTo(0);
+            make.bottom.mas_equalTo(0);
+        }];
+    }
+    return _contactUsView;
+}
+
 #pragma mark UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -223,11 +253,11 @@
     HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
     if ([model.title isEqualToString:@"设置"]) {
         HSSettingViewController *vc = HSSettingViewController.new;
-        [self.navigationController pushViewController:vc animated:YES];
+        [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
     } else if ([model.title isEqualToString:@"关于我们"]) {
         AboutViewController *vc = AboutViewController.new;
         vc.title = model.title;
-        [self.navigationController pushViewController:vc animated:YES];
+        [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
     }
 }
 

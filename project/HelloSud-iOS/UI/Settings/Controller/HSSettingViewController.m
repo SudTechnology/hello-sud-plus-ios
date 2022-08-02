@@ -27,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = NSString.dt_tab_setting;
-    self.navigationItem.leftBarButtonItem = nil;
     // Do any additional setup after loading the view.
     [self configData];
 }

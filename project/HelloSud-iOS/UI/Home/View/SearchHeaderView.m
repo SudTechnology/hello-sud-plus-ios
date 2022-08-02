@@ -12,6 +12,7 @@
 @property (nonatomic, strong) UIImageView *headerView;
 @property (nonatomic, strong) UILabel *userNameLabel;
 @property (nonatomic, strong) UILabel *userIdLabel;
+@property(nonatomic, strong) DTPaddingLabel *walletAddressLabel;
 @property (nonatomic, strong) UIView *textFieldView;
 @property (nonatomic, strong) UIButton *searchBtn;
 @property (nonatomic, strong) UITextField *searchTextField;
@@ -27,6 +28,7 @@
     [self addSubview:self.headerView];
     [self addSubview:self.userNameLabel];
     [self addSubview:self.userIdLabel];
+    [self addSubview:self.walletAddressLabel];
     [self addSubview:self.textFieldView];
     [self.textFieldView addSubview:self.searchTextField];
     [self.textFieldView addSubview:self.searchBtn];
@@ -47,6 +49,13 @@
         make.leading.mas_equalTo(self.headerView.mas_trailing).offset(10);
         make.top.mas_equalTo(self.userNameLabel.mas_bottom).offset(6);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+    }];
+    [self.walletAddressLabel dt_cornerRadius:10];
+    [self.walletAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(self.headerView.mas_trailing).offset(10);
+        make.top.mas_equalTo(self.userNameLabel.mas_bottom).offset(6);
+        make.width.equalTo(@160);
+        make.height.equalTo(@20);
     }];
     [self.textFieldView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(24);
@@ -77,13 +86,39 @@
     if (userInfo.icon.length > 0) {
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:userInfo.icon]];
     }
+    BOOL isBindWallet = AppService.shared.login.walletAddress.length > 0;
+    if (isBindWallet) {
+        // 绑定过了钱包
+        self.walletAddressLabel.text = AppService.shared.login.walletAddress;
+        self.walletAddressLabel.hidden = NO;
+        self.userIdLabel.hidden = YES;
+    } else {
+        // 未绑定钱包
+        self.walletAddressLabel.hidden = YES;
+        self.userIdLabel.hidden = NO;
+    }
 }
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
+    WeakSelf
     self.headerView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapHead:)];
     [self.headerView addGestureRecognizer:tap];
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_NFT_WEAR_CHANGE_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf dtUpdateUI];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf dtUpdateUI];
+    }];
+
+    UITapGestureRecognizer *walletTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapWalletAddressLabel:)];
+    [self.walletAddressLabel addGestureRecognizer:walletTap];
+
+}
+
+- (void)onTapWalletAddressLabel:(id)tap {
+    [AppUtil copyToPasteProcess:self.walletAddressLabel.text toast:@"地址已复制"];
 }
 
 - (void)onTapHead:(id)tap {
@@ -156,6 +191,21 @@
         [_searchBtn setHidden:true];
     }
     return _searchBtn;
+}
+
+- (DTPaddingLabel *)walletAddressLabel {
+    if (!_walletAddressLabel) {
+        _walletAddressLabel = [[DTPaddingLabel alloc] init];
+        _walletAddressLabel.paddingX = 8;
+        _walletAddressLabel.textColor = [UIColor dt_colorWithHexString:@"#333333" alpha:1];
+        _walletAddressLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
+        _walletAddressLabel.backgroundColor = HEX_COLOR_A(@"#DBDEEC", 0.7);
+        _walletAddressLabel.hidden = YES;
+        _walletAddressLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        _walletAddressLabel.textAlignment = NSTextAlignmentCenter;
+        _walletAddressLabel.userInteractionEnabled = YES;
+    }
+    return _walletAddressLabel;
 }
 
 - (void)enterEvent {
