@@ -19,9 +19,14 @@ typedef NS_ENUM(NSInteger, HSUserHeadType) {
 @property(nonatomic, strong)NSString *avatar;
 @property(nonatomic, strong)NSString *nickname;
 @property(nonatomic, strong)NSString *gender;
+
 @property(nonatomic, assign) NSInteger headerType;
 @property(nonatomic, strong) NSString *headerNftUrl;
 - (NSString *)headImage;
+
+/// 是否是机器人
+@property (nonatomic, assign)BOOL ai;
+
 @end
 
 /// 响应用户信息model

@@ -29,20 +29,20 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
     // Override point for customization after application launch.
     [self configLog];
     [[AppService shared] prepare];
     [[AppService shared] setupNetWorkHeader];
-    
+
     [self observerNTF];
-    self.window = [[UIWindow alloc]init];
+    self.window = [[UIWindow alloc] init];
     // 登录过后，检测刷新token
     if (AppService.shared.login.isLogin) {
-        self.window.rootViewController = [[MainTabBarController alloc]init];
+        self.window.rootViewController = [[MainTabBarController alloc] init];
         [AppService.shared.login checkToken];
     } else {
-        self.window.rootViewController = [[LoginViewController alloc]init];
+        self.window.rootViewController = [[LoginViewController alloc] init];
     }
     self.window.backgroundColor = UIColor.whiteColor;
     [self.window makeKeyAndVisible];
@@ -51,11 +51,11 @@
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     [GiftService.shared loadFromDisk];
-    
+
     NIMSDKOption *option = [NIMSDKOption optionWithAppKey:@"110f7db7c00ee497bd7b32954c36464c"];
     [[NIMSDK sharedSDK] registerWithOption:option];
-    [self cacheLocalData];
-    
+    [self configWebpCoder];
+
     return YES;
 }
 
@@ -69,19 +69,19 @@
 
 - (void)observerNTF {
     // 监听token刷新状态切换视图
-    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
         if (AppService.shared.login.isRefreshedToken && ![self.window.rootViewController isKindOfClass:[MainTabBarController class]]) {
             /// 切根式图
             self.window.rootViewController = [[MainTabBarController alloc] init];
         }
         [self checkAppVersion];
         [UserService.shared reqUserCoinDetail:^(int64_t i) {
-        } fail:nil];
+        }                                fail:nil];
     }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_FAIL_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_FAIL_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
         if (![self.window.rootViewController isKindOfClass:[LoginViewController class]]) {
             /// 切根式图
-            self.window.rootViewController = [[LoginViewController alloc]init];
+            self.window.rootViewController = [[LoginViewController alloc] init];
         }
     }];
 }
@@ -89,11 +89,11 @@
 - (void)checkAppVersion {
     [[AppService shared] reqAppUpdate:^(BaseRespModel *resp) {
         [self showUpgrade:(RespVersionUpdateInfoModel *) resp];
-    } fail:nil];
+    }                            fail:nil];
 }
 
 - (void)showUpgrade:(RespVersionUpdateInfoModel *)model {
-    
+
     if (model == nil || model.packageUrl.length == 0) {
         return;
     }
@@ -101,7 +101,7 @@
         /// 强制升级
         [DTAlertView showTextAlert:NSString.dt_update_app_ver_low sureText:NSString.dt_update_now cancelText:nil disableAutoClose:YES onSureCallback:^{
             [self openPath:model.packageUrl];
-        } onCloseCallback:^{
+        }          onCloseCallback:^{
             [DTAlertView close];
         }];
     } else if (model.upgradeType == 2) {
@@ -117,9 +117,9 @@
             [DTAlertView showTextAlert:NSString.dt_update_app_ver_new sureText:NSString.dt_update_now cancelText:NSString.dt_next_time_again_say onSureCallback:^{
                 [self openPath:model.packageUrl];
                 [DTAlertView close];
-            } onCloseCallback:nil];
+            }          onCloseCallback:nil];
         }
-        
+
     }
 }
 
@@ -139,7 +139,7 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    
+
     if (self.taskId != UIBackgroundTaskInvalid) {
         return;
     }
@@ -149,11 +149,11 @@
         NSLog(@"app suspend");
     }];
     // 申请延迟 Task
-    self.timer =[NSTimer scheduledTimerWithTimeInterval:1.0f
-                                                     target:self
-                                                   selector:@selector(longTimeTask:)
-                                                   userInfo:nil
-                                                    repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                                  target:self
+                                                selector:@selector(longTimeTask:)
+                                                userInfo:nil
+                                                 repeats:YES];
 }
 
 - (void)endTask {
@@ -168,9 +168,9 @@
 }
 
 - (void)longTimeTask:(NSTimer *)tiemr {
-    
-    NSTimeInterval time =[[UIApplication sharedApplication] backgroundTimeRemaining];
-    
+
+    NSTimeInterval time = [[UIApplication sharedApplication] backgroundTimeRemaining];
+
     DDLogDebug(@"app background remain time: = %.02f Seconds", time);
 }
 
@@ -195,11 +195,11 @@
 }
 
 /// 缓存本地数据
-- (void)cacheLocalData {
-
-    // 缓存首页webp图片
-    NSString *path = [NSBundle.mainBundle pathForResource:@"home_danmuka" ofType:@"webp" inDirectory:@"Res"];
-    [WebpImageCacheService.shared loadWebp:path result:nil];
+- (void)configWebpCoder {
+    // Add coder
+    SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
+    [[SDImageCodersManager sharedManager] addCoder:webPCoder];
+//    [[SDWebImageDownloader sharedDownloader] setValue:@"image/webp,image/*,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {

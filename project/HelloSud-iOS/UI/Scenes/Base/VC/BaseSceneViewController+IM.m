@@ -33,7 +33,8 @@
             RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
             [self handleGameKeywordHitting:m.content];
         } else if ([msg isKindOfClass:RoomCmdUpMicModel.class]) {
-            if (self.isEnteredRoom) {
+            BOOL isMe = [AppService.shared.login.loginUserInfo isMeByUserID:msg.sendUser.userID];
+            if (self.isEnteredRoom && isMe) {
                 RoomCmdUpMicModel *m = (RoomCmdUpMicModel *) msg;
                 if (m.cmd == CMD_UP_MIC_NOTIFY) {
                     if ([self isAutoJoinGame]) {
@@ -152,6 +153,14 @@
             msgModel = m;
         }
             break;
+        case CMD_KICK_OUT_ROOM: {
+            // 踢出房间
+            RoomCmdKickoutRoomModel *m = [RoomCmdKickoutRoomModel fromJSON:command];
+            msgModel = m;
+            isShowOnScreen = NO;
+        }
+            break;
+
         default:
             // 业务指令
             [self handleBusyCommand:cmd command:command];

@@ -39,7 +39,9 @@
         self.gameImageView.image = nil;
     }  else {
         self.nameLabel.textColor = UIColor.whiteColor;
-        [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.homeGamePic] placeholderImage:[UIImage imageNamed:@"default_game_bg"]];
+        if (m.homeGamePic) {
+            [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.homeGamePic] placeholderImage:[UIImage imageNamed:@"default_game_bg"]];
+        }
     }
     self.enterLabel.hidden = m.isBlank;
 }

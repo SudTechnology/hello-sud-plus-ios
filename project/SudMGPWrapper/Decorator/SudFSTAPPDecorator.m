@@ -173,7 +173,7 @@
 /// @param dataJson 需传递的json
 - (void)notifyStateChange:(NSString *)state dataJson:(NSString *)dataJson {
     [self.iSudFSTAPP notifyStateChange:state dataJson:dataJson listener:^(int retCode, const NSString *retMsg, const NSString *dataJson) {
-        NSLog(@"ISudFSMMG:notifyStateChange:retCode=%@ retMsg=%@ dataJson=%@", @(retCode), retMsg, dataJson);
+        NSLog(@"ISudFSMMG:notifyStateChange:statte=%@ retCode=%@ retMsg=%@ dataJson=%@", state, @(retCode), retMsg, dataJson);
     }];
 }
 

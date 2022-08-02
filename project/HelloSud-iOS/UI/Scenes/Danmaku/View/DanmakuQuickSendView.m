@@ -107,11 +107,13 @@
         self.showIconImageView.alpha = 0;
         self.closeBtn.hidden = NO;
         self.contentView.alpha = 1;
+        self.isOpen = YES;
     } else {
         self.showBtn.hidden = NO;
         self.showIconImageView.alpha = 1;
         self.closeBtn.hidden = YES;
         self.contentView.alpha = 0;
+        self.isOpen = NO;
     }
 }
 

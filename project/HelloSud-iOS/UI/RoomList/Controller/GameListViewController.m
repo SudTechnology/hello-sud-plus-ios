@@ -144,7 +144,10 @@
         [_tableView registerClass:[PKRoomListCell class] forCellReuseIdentifier:@"PKRoomListCell"];
         UIView *headerNode = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
         headerNode.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
+        UIView *tailNode = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 12)];
+        tailNode.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
         _tableView.tableHeaderView = headerNode;
+        _tableView.tableFooterView = tailNode;
     }
     return _tableView;
 }
