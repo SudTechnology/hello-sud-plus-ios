@@ -20,6 +20,7 @@
 @property (nonatomic, strong)UIButton *startAllGameBtn;
 @property (nonatomic, strong)UIButton *cancelAllGameBtn;
 @property(nonatomic, strong)NSMutableDictionary<NSString *, GamePreloadCell *> *cellMap;
+@property(nonatomic, strong)NSMutableDictionary<NSString *, QSGameItemModel *> *modelMap;
 @end
 
 @implementation GamePreloadViewController
@@ -38,8 +39,10 @@
     self.sceneView.hidden = YES;
     self.bgImageView.hidden = YES;
     self.cellMap = [[NSMutableDictionary alloc]init];
+    self.modelMap = [[NSMutableDictionary alloc]init];
     // Do any additional setup after loading the view.
     self.title = @"预加载";
+    [self loadGameList];
     [self initSudMGP];
 }
 
@@ -87,7 +90,6 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-    [self loadGameList];
 }
 
 - (void)initSudMGP {
@@ -122,6 +124,10 @@
     //TODO: 开发者由SudMGP提供的游戏列表
     NSArray *arrGame = [QSAppPreferences.shared readGameList];
     self.dataList = arrGame;
+    for (QSGameItemModel *m in self.dataList) {
+        NSString *key = [NSString stringWithFormat:@"%@", @(m.gameId)];
+        self.modelMap[key] = m;
+    }
 }
 
 - (void)onHiddenTableClick:(UIButton *)sender {
@@ -302,17 +308,27 @@
     DDLogDebug(@"onPreloadSuccess mgId:%@", @(mgId));
     NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
     GamePreloadCell *cell = self.cellMap[key];
+    QSGameItemModel *model = self.modelMap[key];
+    if (model) {
+        model.success = YES;
+    }
     if (cell) {
-        [cell updateFailureWithCode:0 msg:@"已完成" mgId:mgId];
+        [cell dtUpdateUI];
     }
 }
 
 -(void) onPreloadFailure:(int64_t) mgId errCode:(int) errCode errMsg:(NSString *) errMsg {
     DDLogDebug(@"onPreloadFailure mgId:%@, error:%@(%@)", @(mgId), errMsg, @(errCode));
     NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
+    QSGameItemModel *model = self.modelMap[key];
+    if (model) {
+        model.success = NO;
+        model.errCode = errCode;
+        model.errMsg = errMsg;
+    }
     GamePreloadCell *cell = self.cellMap[key];
     if (cell) {
-        [cell updateFailureWithCode:errCode msg:errMsg mgId:mgId];
+        [cell dtUpdateUI];
     }
 }
 
@@ -320,9 +336,15 @@
     if (PKG_DOWNLOAD_DOWNLOADING == status) {
         DDLogDebug(@"onPreloadStatus mgId:%@, downloadedSize:%@, totalSize:(%@)", @(mgId), @(downloadedSize), @(totalSize));
         NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
+        QSGameItemModel *model = self.modelMap[key];
+        if (model) {
+            model.success = NO;
+            model.downloadedSize = downloadedSize;
+            model.totalSize = totalSize;
+        }
         GamePreloadCell *cell = self.cellMap[key];
         if (cell) {
-            [cell updateDownloadedSize:downloadedSize totalSize:totalSize mgId:mgId];
+            [cell dtUpdateUI];
         }
     }
 }

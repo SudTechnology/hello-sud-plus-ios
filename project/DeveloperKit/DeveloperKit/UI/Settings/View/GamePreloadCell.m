@@ -51,6 +51,10 @@
 - (void)dtLayoutViews {
     [super dtLayoutViews];
     [self.nameLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    
+    [self.loadBtn setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.startBtn setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.cancelBtn setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.trailing.mas_equalTo(-20);
@@ -107,12 +111,19 @@
     if (![self.model isKindOfClass:[QSGameItemModel class]]) {
         return;
     }
-    self.progressView.progress = 0;
     QSGameItemModel *model = (QSGameItemModel *)self.model;
     self.nameLabel.text = model.gameName;
     self.iconImageView.image = [UIImage imageNamed:model.gameRoomPic];
-    [self updateDownloadedSize:model.downloadedSize totalSize:model.totalSize mgId:model.gameId];
-    
+
+    if (model.success) {
+        self.progressView.progress = 1;
+        self.progressLabel.text = @"已完成";
+    } else {
+        if (model.errCode != 0) {
+            [self updateFailureWithCode:model.errCode msg:model.errMsg mgId:model.gameId];
+        }
+        [self updateDownloadedSize:model.downloadedSize totalSize:model.totalSize mgId:model.gameId];
+    }
 }
 
 - (void)dtConfigEvents {
