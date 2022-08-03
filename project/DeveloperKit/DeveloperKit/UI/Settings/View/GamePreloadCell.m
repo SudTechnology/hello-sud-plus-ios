@@ -119,10 +119,10 @@
         self.progressView.progress = 1;
         self.progressLabel.text = @"已完成";
     } else {
+        [self updateDownloadedSize:model.downloadedSize totalSize:model.totalSize mgId:model.gameId];
         if (model.errCode != 0) {
             [self updateFailureWithCode:model.errCode msg:model.errMsg mgId:model.gameId];
         }
-        [self updateDownloadedSize:model.downloadedSize totalSize:model.totalSize mgId:model.gameId];
     }
 }
 
@@ -172,9 +172,6 @@
     } else {
         self.progressView.progress = 0;
         self.progressLabel.text = @"未下载";
-    }
-    if (downloadedSize == totalSize && totalSize > 0) {
-        self.progressLabel.text = @"已完成";
     }
 }
 
