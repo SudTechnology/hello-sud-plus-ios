@@ -344,7 +344,7 @@
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
         // 发送弹幕
-        [DanmakuRoomService reqSendBarrage:self.roomID content:m.content finished:^{
+        [DanmakuRoomService reqSendBarrage:self.roomID content:m.content gameId:self.gameId finished:^{
             DDLogDebug(@"发送弹幕成功");
         }                          failure:^(NSError *error) {
 
