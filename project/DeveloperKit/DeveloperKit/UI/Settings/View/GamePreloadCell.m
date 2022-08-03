@@ -107,10 +107,11 @@
     if (![self.model isKindOfClass:[QSGameItemModel class]]) {
         return;
     }
+    self.progressView.progress = 0;
     QSGameItemModel *model = (QSGameItemModel *)self.model;
     self.nameLabel.text = model.gameName;
     self.iconImageView.image = [UIImage imageNamed:model.gameRoomPic];
-    [self updateDownloadedSize:model.downloadedSize totalSize:model.totalSize mgId:0];
+    [self updateDownloadedSize:model.downloadedSize totalSize:model.totalSize mgId:model.gameId];
     
 }
 
