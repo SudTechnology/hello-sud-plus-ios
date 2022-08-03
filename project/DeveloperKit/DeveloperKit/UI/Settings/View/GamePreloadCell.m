@@ -110,7 +110,7 @@
     QSGameItemModel *model = (QSGameItemModel *)self.model;
     self.nameLabel.text = model.gameName;
     self.iconImageView.image = [UIImage imageNamed:model.gameRoomPic];
-    [self updateDownloadedSize:model.downloadedSize totalSize:model.totalSize];
+    [self updateDownloadedSize:model.downloadedSize totalSize:model.totalSize mgId:0];
     
 }
 
@@ -143,25 +143,34 @@
     self.topView.hidden = isShowTopLine ? NO : YES;
 }
 
-- (void)updateDownloadedSize:(long) downloadedSize totalSize:(long) totalSize {
-    QSGameItemModel *model = (QSGameItemModel *)self.model;
+- (void)updateDownloadedSize:(long)downloadedSize totalSize:(long)totalSize mgId:(int64_t)mgId {
+    QSGameItemModel *model = (QSGameItemModel *) self.model;
+    if (model.gameId != mgId) {
+        return;
+    }
     model.downloadedSize = downloadedSize;
     model.totalSize = totalSize;
-    
+
     CGFloat totalMB = totalSize * 1.0 / 1024 / 1024;
     CGFloat downloadedMB = downloadedSize * 1.0 / 1024 / 1024;
-    self.progressLabel.text = [NSString stringWithFormat:@"进度：%.02fMB/%.02fMB", downloadedMB, totalMB];
+
     if (totalMB > 0) {
+        self.progressLabel.text = [NSString stringWithFormat:@"进度：%.02fMB/%.02fMB", downloadedMB, totalMB];
         self.progressView.progress = downloadedMB / totalMB;
     } else {
         self.progressView.progress = 0;
+        self.progressLabel.text = @"未下载";
     }
     if (downloadedSize == totalSize && totalSize > 0) {
         self.progressLabel.text = @"已完成";
     }
 }
 
-- (void)updateFailureWithCode:(NSInteger)code msg:(NSString *)msg {
+- (void)updateFailureWithCode:(NSInteger)code msg:(NSString *)msg mgId:(int64_t)mgId {
+    QSGameItemModel *model = (QSGameItemModel *) self.model;
+    if (model.gameId != mgId) {
+        return;
+    }
     if (code == 0) {
         self.progressLabel.text = msg;
     } else {

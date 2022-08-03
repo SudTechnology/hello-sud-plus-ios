@@ -17,6 +17,8 @@
 @property(nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong)UIButton *startBtn;
 @property (nonatomic, strong)UIButton *cancelBtn;
+@property (nonatomic, strong)UIButton *startAllGameBtn;
+@property (nonatomic, strong)UIButton *cancelAllGameBtn;
 @property(nonatomic, strong)NSMutableDictionary<NSString *, GamePreloadCell *> *cellMap;
 @end
 
@@ -46,6 +48,8 @@
     self.view.backgroundColor = HEX_COLOR(@"#F5F6FB");
     [self.view addSubview:self.startBtn];
     [self.view addSubview:self.cancelBtn];
+    [self.view addSubview:self.startAllGameBtn];
+    [self.view addSubview:self.cancelAllGameBtn];
     [self.view addSubview:self.tableView];
 
 }
@@ -64,9 +68,20 @@
         make.trailing.equalTo(@-16);
         make.width.height.equalTo(self.startBtn);
     }];
+    [self.startAllGameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(@16);
+        make.top.equalTo(self.startBtn.mas_bottom).offset(5);
+        make.height.equalTo(@44);
+    }];
+    [self.cancelAllGameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.startAllGameBtn.mas_trailing).offset(20);
+        make.top.equalTo(self.startBtn.mas_bottom).offset(5);
+        make.trailing.equalTo(@-16);
+        make.width.height.equalTo(self.startBtn);
+    }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(@0);
-        make.top.equalTo(self.startBtn.mas_bottom);
+        make.top.equalTo(self.startAllGameBtn.mas_bottom);
     }];
 }
 
@@ -122,6 +137,26 @@
     [self logoutGame];
 }
 
+- (void)onStartAllBtnClick:(UIButton *)sender {
+    // 下载所有游戏
+    NSMutableArray<NSNumber *> *mgIdList = [NSMutableArray new];
+    for (QSGameItemModel *m in self.dataList) {
+        [mgIdList addObject:@(m.gameId)];
+    }
+    [SudMGP preloadMGPkgList:mgIdList listener:self];
+    [ToastUtil show:@"已执行所有下载"];
+}
+
+- (void)onCancelAllBtnClick:(UIButton *)sender {
+    // 取消所有游戏
+    NSMutableArray<NSNumber *> *mgIdList = [NSMutableArray new];
+    for (QSGameItemModel *m in self.dataList) {
+        [mgIdList addObject:@(m.gameId)];
+    }
+    [SudMGP cancelPreloadMGPkgList:mgIdList];
+    [ToastUtil show:@"已取消所有下载"];
+}
+
 #pragma makr lazy
 
 - (UITableView *)tableView {
@@ -169,24 +204,55 @@
     return  _cancelBtn;
 }
 
+- (UIButton *)startAllGameBtn {
+    if (!_startAllGameBtn) {
+        _startAllGameBtn = [[UIButton alloc]init];
+        [_startAllGameBtn setTitle:@"下载所有" forState:UIControlStateNormal];
+        [_startAllGameBtn setTitle:@"下载所有" forState:UIControlStateSelected];
+        _startAllGameBtn.titleLabel.font = UIFONT_REGULAR(14);
+        _startAllGameBtn.layer.borderWidth = 2;
+        _startAllGameBtn.layer.borderColor = UIColor.orangeColor.CGColor;
+        [_startAllGameBtn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
+        [_startAllGameBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+        [_startAllGameBtn addTarget:self action:@selector(onStartAllBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        _startAllGameBtn.backgroundColor = UIColor.whiteColor;
+    }
+    return  _startAllGameBtn;
+}
+
+- (UIButton *)cancelAllGameBtn {
+    if (!_cancelAllGameBtn) {
+        _cancelAllGameBtn = [[UIButton alloc]init];
+        [_cancelAllGameBtn setTitle:@"取消所有" forState:UIControlStateNormal];
+        _cancelAllGameBtn.titleLabel.font = UIFONT_REGULAR(14);
+        _cancelAllGameBtn.layer.borderWidth = 2;
+        _cancelAllGameBtn.layer.borderColor = UIColor.orangeColor.CGColor;
+        [_cancelAllGameBtn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
+        [_cancelAllGameBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+        [_cancelAllGameBtn addTarget:self action:@selector(onCancelAllBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        _cancelAllGameBtn.backgroundColor = UIColor.whiteColor;
+    }
+    return  _cancelAllGameBtn;
+}
+
+
 #pragma mark UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GamePreloadCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GamePreloadCell" forIndexPath:indexPath];
-    QSGameItemModel *model = self.dataList[indexPath.row];
-    NSString *key = [NSString stringWithFormat:@"%@", @(model.gameId)];
-    self.cellMap[key] = cell;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     GamePreloadCell *c = (GamePreloadCell *) cell;
     c.isShowTopLine = indexPath.row > 0;
+    QSGameItemModel *model = self.dataList[indexPath.row];
+    NSString *key = [NSString stringWithFormat:@"%@", @(model.gameId)];
     c.model = self.dataList[indexPath.row];
     if (indexPath.section == 0 && indexPath.row == 0) {
         c.isShowTopLine = true;
     }
-    QSGameItemModel *model = self.dataList[indexPath.row];
+    self.cellMap[key] = cell;
     NSMutableArray<NSNumber *> *mgIdList = [NSMutableArray new];
     [mgIdList addObject:[NSNumber numberWithLongLong:model.gameId]];
     WeakSelf
@@ -237,7 +303,7 @@
     NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
     GamePreloadCell *cell = self.cellMap[key];
     if (cell) {
-        [cell updateFailureWithCode:0 msg:@"已完成"];
+        [cell updateFailureWithCode:0 msg:@"已完成" mgId:mgId];
     }
 }
 
@@ -246,7 +312,7 @@
     NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
     GamePreloadCell *cell = self.cellMap[key];
     if (cell) {
-        [cell updateFailureWithCode:errCode msg:errMsg];
+        [cell updateFailureWithCode:errCode msg:errMsg mgId:mgId];
     }
 }
 
@@ -256,7 +322,7 @@
         NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
         GamePreloadCell *cell = self.cellMap[key];
         if (cell) {
-            [cell updateDownloadedSize:downloadedSize totalSize:totalSize];
+            [cell updateDownloadedSize:downloadedSize totalSize:totalSize mgId:mgId];
         }
     }
 }

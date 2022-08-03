@@ -17,8 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)void(^startDownloadBlock)(void);
 @property(nonatomic, copy)void(^cancelDownloadBlock)(void);
 @property(nonatomic, copy)void(^pauseDownloadBlock)(void);
-- (void)updateDownloadedSize:(long) downloadedSize totalSize:(long) totalSize;
-- (void)updateFailureWithCode:(NSInteger)code msg:(NSString *)msg;
+
+
+- (void)updateDownloadedSize:(long)downloadedSize totalSize:(long)totalSize mgId:(int64_t)mgId;
+
+- (void)updateFailureWithCode:(NSInteger)code msg:(NSString *)msg mgId:(int64_t)mgId;
 @end
 
 NS_ASSUME_NONNULL_END
