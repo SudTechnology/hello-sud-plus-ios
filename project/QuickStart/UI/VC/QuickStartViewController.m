@@ -214,9 +214,7 @@
 /// 退出房间
 - (void)handleExitRoomIsFromSuspend:(BOOL)isSuspend finished:(void (^)(void))finished {
 
-    if ([self.sudFSMMGDecorator isInGame]) {
-        [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
-    }
+    [self handleExitGame];
     // 延迟关闭以便上面指令执行
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (500 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
 
@@ -226,6 +224,21 @@
         }
         if (finished) finished();
     });
+}
+
+/// 根据所处状态，退出游戏
+- (void)handleExitGame {
+    NSString *myUserId = QSAppPreferences.shared.currentUserID;
+    if ([self.sudFSMMGDecorator isPlayerInGame:myUserId]) {
+        if ([self.sudFSMMGDecorator isPlayerIsPlaying:myUserId]) {
+            // 用户正在游戏中，先退出本局游戏，再退出游戏
+            [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
+        } else if ([self.sudFSMMGDecorator isPlayerIsReady:myUserId]) {
+            // 准备时，先退出准备
+            [self.sudFSTAPPDecorator notifyAppCommonSelfReady:false];
+        }
+        [self.sudFSTAPPDecorator notifyAppComonSelfIn:false seatIndex:-1 isSeatRandom:true teamId:1];
+    }
 }
 
 /// 更新游戏人数

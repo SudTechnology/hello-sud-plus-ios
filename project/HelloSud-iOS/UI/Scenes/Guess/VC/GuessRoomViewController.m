@@ -299,7 +299,7 @@
     GuessResultPopView *v = [[GuessResultPopView alloc] init];
     v.againBlock = ^{
         // 下一轮游戏准备
-        [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:YES];
+        [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
     };
     v.dataList = playerList;
     v.winCoin = winCoin;

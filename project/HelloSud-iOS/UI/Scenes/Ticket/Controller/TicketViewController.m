@@ -60,12 +60,12 @@
         [DTSheetView show:node rootView:AppUtil.currentWindow hiddenBackCover:false onCloseCallback:^{}];
         node.onJoinCallBack = ^(UIButton *sender) {
             [kTicketService reqJoinRoom:(long)self.roomID sceneId:kAudioRoomService.sceneType gameId:self.gameId gameLevel: kTicketService.ticketLevelType finished:^{
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:true];
+                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:true];
             }];
         };
     } else {
         [kTicketService reqJoinRoom:(long)self.roomID sceneId:kAudioRoomService.sceneType gameId:self.gameId gameLevel: kTicketService.ticketLevelType finished:^{
-            [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:true];
+            [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:true];
         }];
     }
 }
