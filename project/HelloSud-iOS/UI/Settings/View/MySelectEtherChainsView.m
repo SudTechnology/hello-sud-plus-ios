@@ -27,13 +27,14 @@
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@12);
         make.centerY.equalTo(self);
-        make.trailing.equalTo(self.nameLabel.mas_leading).offset(-4);
+        make.leading.equalTo(@20);
+
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.iconImageView.mas_trailing).offset(4);
         make.top.equalTo(@6);
         make.width.equalTo(@135);
         make.height.equalTo(@17);
-        make.trailing.equalTo(@-20);
         make.bottom.equalTo(@-7);
     }];
 }
@@ -54,14 +55,13 @@
         [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:model.icon]];
     }
     CGRect rect = [model.name boundingRectWithSize:CGSizeMake(190 - 16, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.nameLabel.font} context:nil];
-    [self.nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.iconImageView.mas_trailing).offset(4);
-        make.top.equalTo(@6);
-        make.width.equalTo(@(rect.size.width));
-        make.height.equalTo(@17);
-        make.trailing.equalTo(@-20);
-        make.centerX.equalTo(self).offset(12);
-        make.bottom.equalTo(@-7);
+    CGFloat labelW = ceil(rect.size.width);
+    CGFloat left = (190 - labelW - 16) / 2;
+    [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(@(left));
+    }];
+    [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(labelW));
     }];
 }
 
