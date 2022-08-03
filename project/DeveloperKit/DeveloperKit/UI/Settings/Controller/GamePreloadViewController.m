@@ -126,6 +126,11 @@
     self.dataList = arrGame;
     for (QSGameItemModel *m in self.dataList) {
         NSString *key = [NSString stringWithFormat:@"%@", @(m.gameId)];
+        m.success = NO;
+        m.errCode = 0;
+        m.errMsg = nil;
+        m.totalSize = 0;
+        m.downloadedSize = 0;
         self.modelMap[key] = m;
     }
 }
@@ -311,6 +316,8 @@
     QSGameItemModel *model = self.modelMap[key];
     if (model) {
         model.success = YES;
+        model.errCode = 0;
+        model.errMsg = nil;
     }
     if (cell) {
         [cell dtUpdateUI];
@@ -333,10 +340,17 @@
 }
 
 -(void) onPreloadStatus:(int64_t) mgId downloadedSize:(long) downloadedSize totalSize:(long) totalSize status:(PkgDownloadStatus) status {
-    if (PKG_DOWNLOAD_DOWNLOADING == status) {
-        DDLogDebug(@"onPreloadStatus mgId:%@, downloadedSize:%@, totalSize:(%@)", @(mgId), @(downloadedSize), @(totalSize));
-        NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
-        QSGameItemModel *model = self.modelMap[key];
+    DDLogDebug(@"onPreloadStatus mgId:%@, downloadedSize:%@, totalSize:(%@)", @(mgId), @(downloadedSize), @(totalSize));
+    NSString *key = [NSString stringWithFormat:@"%@", @(mgId)];
+    QSGameItemModel *model = self.modelMap[key];
+    if (PKG_DOWNLOAD_STARTED == status) {
+        model.success = NO;
+        model.errCode = 0;
+        model.errMsg = nil;
+        model.totalSize = totalSize;
+        model.downloadedSize = downloadedSize;
+    } else if (PKG_DOWNLOAD_DOWNLOADING == status) {
+
         if (model) {
             model.success = NO;
             model.downloadedSize = downloadedSize;
