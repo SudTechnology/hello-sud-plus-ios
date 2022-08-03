@@ -132,9 +132,10 @@
         usLabel.textAlignment = NSTextAlignmentCenter;
         usLabel.numberOfLines = 0;
         [_contactUsView addSubview:usLabel];
+        usLabel.preferredMaxLayoutWidth = kScreenWidth - 34;
         [usLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(17);
-            make.trailing.mas_equalTo(-17);
+            make.width.equalTo(@(kScreenWidth - 34));
             make.top.mas_equalTo(0);
             make.height.mas_greaterThanOrEqualTo(0);
             make.bottom.mas_equalTo(0);
@@ -154,9 +155,6 @@
     HSSettingCell *c = (HSSettingCell *) cell;
     c.isShowTopLine = indexPath.row > 0;
     c.model = self.arrData[indexPath.section][indexPath.row];
-//    if (indexPath.section == 0 && indexPath.row == 0) {
-//        c.isShowTopLine = true;
-//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

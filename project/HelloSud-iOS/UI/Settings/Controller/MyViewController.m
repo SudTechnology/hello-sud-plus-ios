@@ -72,6 +72,11 @@
     CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
     self.contactUsView.frame = targetFrame;
     self.tableView.tableFooterView = self.contactUsView;
+//    [self.contactUsView mas_makeConstraints:^(MASConstraintMaker *make) {
+//       make.height.equalTo(@(size.height));
+//       make.width.equalTo(@(kScreenWidth));
+//       make.bottom.equalTo(@0);
+//    }];
     [self.tableView reloadData];
 }
 
@@ -127,10 +132,17 @@
 }
 
 - (void)reloadHeadView {
-    CGSize size = [self.myHeaderView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
-    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
+    CGFloat w = kScreenWidth - 32;
+    CGSize size = [self.myHeaderView systemLayoutSizeFittingSize:CGSizeMake(w, 10000)];
+    CGRect targetFrame = CGRectMake(0, 0, w, size.height);
+    DDLogDebug(@"reloadHeadView size:%@", [NSValue valueWithCGSize:size]);
     self.myHeaderView.frame = targetFrame;
     self.tableView.tableHeaderView = self.myHeaderView;
+    [self.myHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.leading.top.equalTo(@0);
+       make.width.equalTo(@(w));
+       make.height.equalTo(@(size.height));
+    }];
 }
 
 - (void)dtAddViews {
@@ -223,9 +235,10 @@
         usLabel.textAlignment = NSTextAlignmentCenter;
         usLabel.numberOfLines = 0;
         [_contactUsView addSubview:usLabel];
+        usLabel.preferredMaxLayoutWidth = kScreenWidth - 34;
         [usLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(17);
-            make.trailing.mas_equalTo(-17);
+            make.width.equalTo(@(kScreenWidth - 34));
             make.top.mas_equalTo(0);
             make.height.mas_greaterThanOrEqualTo(0);
             make.bottom.mas_equalTo(0);
