@@ -25,7 +25,9 @@
 
 - (void)dtConfigEvents {
     WeakSelf
-
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_NFT_WEAR_CHANGE_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf resortNFTList];
+    }];
 }
 
 - (void)viewDidLoad {
@@ -35,7 +37,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.collectionView reloadData];
 }
 
 - (void)dtAddViews {
@@ -77,12 +78,23 @@
     for (SudNFTModel *m in nftListModel.list) {
         HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc]init];
         cellModel.nftModel = m;
-        if ([AppService.shared isNFTAlreadyUsed:m.contractAddress tokenId:m.tokenId]) {
-            [self.dataList insertObject:cellModel atIndex:0];
+        [self.dataList addObject:cellModel];
+    }
+    [self resortNFTList];
+
+}
+
+- (void)resortNFTList {
+    NSArray *temp = self.dataList.copy;
+    NSMutableArray *sortList = [[NSMutableArray alloc]init];
+    for (HSNFTListCellModel *m in temp) {
+        if ([AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId]) {
+            [sortList insertObject:m atIndex:0];
         } else {
-            [self.dataList addObject:cellModel];
+            [sortList addObject:m];
         }
     }
+    [self.dataList setArray:sortList];
     [self.collectionView reloadData];
 }
 
