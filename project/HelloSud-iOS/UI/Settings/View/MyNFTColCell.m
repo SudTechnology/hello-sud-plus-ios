@@ -36,6 +36,7 @@
 
 - (void)dtLayoutViews {
 
+    [self.gameImageView dt_cornerRadius:6];
     [self.gameImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
         make.leading.mas_equalTo(5);

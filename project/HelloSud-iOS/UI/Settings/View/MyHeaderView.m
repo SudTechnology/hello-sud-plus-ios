@@ -198,6 +198,7 @@
     if (!_walletAddressLabel) {
         _walletAddressLabel = [[DTPaddingLabel alloc] init];
         _walletAddressLabel.paddingX = 8;
+        _walletAddressLabel.isPaddingXUseForFixedWidth = YES;
         _walletAddressLabel.textColor = [UIColor dt_colorWithHexString:@"#333333" alpha:1];
         _walletAddressLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
         _walletAddressLabel.backgroundColor = HEX_COLOR_A(@"#DBDEEC", 0.7);
