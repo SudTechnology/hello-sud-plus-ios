@@ -133,6 +133,7 @@
 
 - (void)reloadHeadView {
     CGFloat w = kScreenWidth - 32;
+    [self.myHeaderView layoutIfNeeded];
     CGSize size = [self.myHeaderView systemLayoutSizeFittingSize:CGSizeMake(w, 10000)];
     CGRect targetFrame = CGRectMake(0, 0, w, size.height);
     DDLogDebug(@"reloadHeadView size:%@", [NSValue valueWithCGSize:size]);
@@ -143,6 +144,7 @@
        make.width.equalTo(@(w));
        make.height.equalTo(@(size.height));
     }];
+
 }
 
 - (void)dtAddViews {
@@ -176,20 +178,27 @@
             HSAppPreferences.shared.bindWalletType = m.type;
             AppService.shared.login.walletAddress = walletInfoModel.address;
             [weakSelf.myHeaderView dtUpdateUI];
+            [weakSelf reloadHeadView];
             [weakSelf checkWalletInfo];
             [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
         }];
     };
     self.myHeaderView.deleteWalletBlock = ^{
         [DTAlertView showTextAlert:@"确定要解除连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
-            AppService.shared.login.walletAddress = nil;
-            [weakSelf.myHeaderView dtUpdateUI];
-            [weakSelf reloadHeadView];
-            [weakSelf checkWalletInfo];
-            [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
+            [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
+                AppService.shared.login.walletAddress = nil;
+                [AppService.shared useNFT:@"" tokenId:@"" add:NO];
+                AppService.shared.login.loginUserInfo.headerNftUrl = nil;
+                AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
+                [AppService.shared.login saveLoginUserInfo];
+                [weakSelf.myHeaderView dtUpdateUI];
+                [weakSelf reloadHeadView];
+                [weakSelf checkWalletInfo];
+                [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
+            } fail:nil];
         }          onCloseCallback:nil];
-
     };
+
     [[NSNotificationCenter defaultCenter] addObserverForName:MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         [weakSelf checkWalletInfo];
     }];
