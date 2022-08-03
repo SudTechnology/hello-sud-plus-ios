@@ -312,5 +312,10 @@
 /// 绑定钱包token过期，需要重新验证绑定
 - (void)onSudNFTBindWalletTokenExpired {
     DDLogWarn(@"onSudNFTBindWalletTokenExpired");
+    AppService.shared.login.walletAddress = nil;
+    [self.myHeaderView dtUpdateUI];
+    [self reloadHeadView];
+    [self checkWalletInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
 }
 @end

@@ -77,7 +77,11 @@
     for (SudNFTModel *m in nftListModel.list) {
         HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc]init];
         cellModel.nftModel = m;
-        [self.dataList addObject:cellModel];
+        if ([AppService.shared isNFTAlreadyUsed:m.contractAddress tokenId:m.tokenId]) {
+            [self.dataList insertObject:cellModel atIndex:0];
+        } else {
+            [self.dataList addObject:cellModel];
+        }
     }
     [self.collectionView reloadData];
 }

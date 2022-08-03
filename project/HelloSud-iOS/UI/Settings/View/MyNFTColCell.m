@@ -75,13 +75,13 @@
     HSNFTListCellModel *m = (HSNFTListCellModel *)self.model;
     WeakSelf
     [m getMetaData:^(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel) {
-        DDLogDebug(@"cell:%@, model:%@, meta:%@", weakSelf, weakSelf.model, metaDataModel);
+        DDLogDebug(@"cell:%@, model:%@, meta name:%@, image:%@", weakSelf, weakSelf.model, metaDataModel.name, metaDataModel.image);
         if (weakSelf.model != model) {
             return;
         }
+        weakSelf.nameLabel.text = metaDataModel.name;
         if (metaDataModel.image) {
             [weakSelf.gameImageView sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image] placeholderImage:[UIImage imageNamed:@"default_nft_icon"]];
-            weakSelf.nameLabel.text = metaDataModel.name;
         } else {
             DDLogDebug(@"no image cell:%@, model:%@, meta:%@", weakSelf, weakSelf.model, metaDataModel);
             weakSelf.nameLabel.text = @"未拉取到图片";

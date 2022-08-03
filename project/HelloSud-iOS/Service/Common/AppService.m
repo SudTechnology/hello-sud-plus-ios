@@ -302,16 +302,26 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 /// @param tokenId tokenId
 /// @return
 - (BOOL)isNFTAlreadyUsed:(NSString *)contractAddress tokenId:(NSString *)tokenId {
-    NSString *key = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNFT, AppService.shared.loginUserID, contractAddress, tokenId];
-    return [NSUserDefaults.standardUserDefaults boolForKey:key];
+    NSString *key = [NSString stringWithFormat:@"%@%@", kKeyUsedNFT, AppService.shared.loginUserID];
+    NSString *value = [NSString stringWithFormat:@"%@_%@", contractAddress, tokenId];
+    id temp = [NSUserDefaults.standardUserDefaults stringForKey:key];
+    if (temp && [temp isKindOfClass:NSString.class]) {
+        return [value isEqualToString:temp];
+    }
+    return NO;
 }
 
 /// 使用NFT
 /// @param contractAddress
 /// @param tokenId
 - (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId add:(BOOL)add {
-    NSString *key = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNFT, AppService.shared.loginUserID, contractAddress, tokenId];
-    [NSUserDefaults.standardUserDefaults setBool:add ? YES : NO forKey:key];
+    NSString *key = [NSString stringWithFormat:@"%@%@", kKeyUsedNFT, AppService.shared.loginUserID];
+    NSString *value = [NSString stringWithFormat:@"%@_%@", contractAddress, tokenId];
+    if (add) {
+        [NSUserDefaults.standardUserDefaults setObject:value forKey:key];
+    } else {
+        [NSUserDefaults.standardUserDefaults removeObjectForKey:key];
+    }
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 

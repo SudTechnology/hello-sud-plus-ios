@@ -204,7 +204,7 @@
 
 - (void)updateWithMetadata:(SudNFTMetaDataModel *)metaDataModel {
     self.nameLabel.text = metaDataModel.name;
-    self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:metaDataModel.contractAddress subColor:UIColor.blackColor];
+    self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:metaDataModel.contractAddress subColor:HEX_COLOR(@"#0053FF")];
     self.tokenIDLabel.attributedText = [self generate:@"Token ID\n" subtitle:metaDataModel.tokenId subColor:UIColor.blackColor];
     self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:metaDataModel.tokenType subColor:UIColor.blackColor];
     if (metaDataModel.image) {
@@ -256,7 +256,7 @@
     if (!_contractAddressLabel) {
         _contractAddressLabel = [[UILabel alloc] init];
         _contractAddressLabel.text = @"";
-        _contractAddressLabel.textColor = UIColor.blackColor;
+        _contractAddressLabel.textColor = HEX_COLOR(@"#0053FF");
         _contractAddressLabel.font = UIFONT_BOLD(16);
         _contractAddressLabel.textAlignment = NSTextAlignmentLeft;
         _contractAddressLabel.numberOfLines = 2;

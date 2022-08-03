@@ -111,14 +111,18 @@
         if (nftListModel.list.count > i) {
             SudNFTModel *nftModel = nftListModel.list[i];
             [SudNFT getNFTMetadata:nftModel.contractAddress tokenId:nftModel.tokenId chainType:HSAppPreferences.shared.selectedEthereumChainType listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
+                
                 if (errCode != 0) {
-                    NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+                    NSString *msg = [NSString stringWithFormat:@"contractAddress:%@, tokenId:%@, %@(%@)", nftModel.contractAddress, nftModel.tokenId, errMsg, @(errCode)];
                     DDLogError(@"getNFTMetadata:%@", msg);
                     return;
                 }
+                
+                DDLogDebug(@"show contractAddress:%@, tokenId:%@, image:%@, name:%@", nftModel.contractAddress, nftModel.tokenId, metaDataModel.image, metaDataModel.name);
                 if (metaDataModel.image) {
-                    DDLogDebug(@"show image:%@", metaDataModel.image);
-                    [iv setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image]];
+                    [iv setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image] placeholderImage:[UIImage imageNamed:@"default_nft_icon"]];
+                } else {
+                    iv.image = [UIImage imageNamed:@"default_nft_icon"];
                 }
             }];
         }
