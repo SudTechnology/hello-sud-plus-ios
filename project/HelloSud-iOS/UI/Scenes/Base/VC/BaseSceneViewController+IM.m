@@ -197,7 +197,7 @@
 
     if (self.sudFSMMGDecorator.isReady) {
         /// 如果已经准备先退出准备状态
-        [self.sudFSTAPPDecorator notifyAppComonSetReady:false];
+        [self.sudFSTAPPDecorator notifyAppCommonSelfReady:false];
     }
     /// 下麦，就是退出游戏
     [self.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];

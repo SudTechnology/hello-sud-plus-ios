@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param content content
 /// @param finished finished
 /// @param failure failure
-+ (void)reqSendBarrage:(NSString *)roomId content:(NSString *)content finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure;
++ (void)reqSendBarrage:(NSString *)roomId content:(NSString *)content gameId:(int64_t)gameId finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure;
 
 /// 发送礼物
 /// @param roomId roomId

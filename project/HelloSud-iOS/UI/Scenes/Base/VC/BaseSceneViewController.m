@@ -92,7 +92,7 @@
     [self.contentView addSubview:self.bgImageView];
     [self.contentView addSubview:self.gameView];
     [self.contentView addSubview:self.sceneView];
-    
+
     [self.sceneView addSubview:self.gameTopShadeNode];
     [self.sceneView addSubview:self.naviView];
     [self.sceneView addSubview:self.operatorView];
@@ -131,7 +131,7 @@
         make.bottom.mas_equalTo(-kAppSafeBottom);
         make.height.mas_equalTo(44);
     }];
-    
+
     [self.gameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
@@ -224,11 +224,11 @@
         // 发送公屏消息
         [weakSelf sendContentMsg:msg];
     };
-    
+
     self.gameMicContentView.updateMicArrCallBack = ^(NSArray<AudioMicroView *> *_Nonnull micArr) {
         weakSelf.arrAnchorView = micArr;
     };
-    
+
     self.gameMicContentView.onTapCallback = ^(AudioRoomMicModel *_Nonnull micModel) {
         /// 麦位点击回调
         [weakSelf handleMicTap:micModel];
@@ -239,7 +239,7 @@
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
         [weakSelf showSelectGameView];
     };
-    
+
     // 切换大小模式
     self.gameMicContentView.changeScaleBlock = ^(BOOL isSmall) {
         [weakSelf changeScaleSmallMic:isSmall];
@@ -264,7 +264,7 @@
         /// 将机器人上麦
         [weakSelf joinCommonRobotToMic:robotInfoModel showNoMic:YES];
     }];
-    
+
 }
 
 /// 调整麦位是否缩放
@@ -278,13 +278,13 @@
                 make.width.mas_equalTo(115);
                 make.height.mas_equalTo(24);
             }];
-            
+
             [self.gameMicContentView scaleToSmallView];
             [self.gameMicContentView.superview layoutIfNeeded];
         }                completion:^(BOOL finished) {
             [self.gameMicContentView showSmallState];
         }];
-        
+
     } else {
         [UIView animateWithDuration:0.35 animations:^{
             [self.gameMicContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -335,7 +335,7 @@
             return;
         }
         [weakSelf reqChangeToGameGameId:m.gameId operatorUser:AppService.shared.login.loginUserInfo.userID];
-        
+
     };
 }
 
@@ -365,13 +365,12 @@
 
 /// 退出房间
 - (void)handleExitRoomIsFromSuspend:(BOOL)isSuspend finished:(void (^)(void))finished {
-    
-    if ([self.sudFSMMGDecorator isInGame]) {
-        [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
-    }
+
+    // 根据游戏状态执行相应指令退出游戏
+    [self handleExitGame];
     // 延迟关闭以便上面指令执行
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (500 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
-        
+
         [self logoutRoom];
         [self logoutGame];
         if (!isSuspend) {
@@ -381,6 +380,21 @@
         [DTSheetView close];
         [DTAlertView close];
     });
+}
+
+/// 根据所处状态，退出游戏
+- (void)handleExitGame {
+    NSString *myUserId = AppService.shared.loginUserID;
+    if ([self.sudFSMMGDecorator isPlayerInGame:myUserId]) {
+        if ([self.sudFSMMGDecorator isPlayerIsPlaying:myUserId]) {
+            // 用户正在游戏中，先退出本局游戏，再退出游戏
+            [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
+        } else if ([self.sudFSMMGDecorator isPlayerIsReady:myUserId]) {
+            // 准备时，先退出准备
+            [self.sudFSTAPPDecorator notifyAppCommonSelfReady:false];
+        }
+        [self.sudFSTAPPDecorator notifyAppComonSelfIn:false seatIndex:-1 isSeatRandom:true teamId:1];
+    }
 }
 
 /// 更新游戏房间ID
@@ -402,7 +416,7 @@
     }                           fail:^(NSError *error) {
         NSLog(@"reqSwitchGame error:%@", error.debugDescription);
     }];
-    
+
 }
 
 /// 将要发送消息
@@ -417,7 +431,7 @@
             if (shouldSend) shouldSend(YES);
         }                       failure:^(NSError *error) {
             if (shouldSend) shouldSend(NO);
-            
+
         }];
     } else {
         if (shouldSend) shouldSend(YES);
@@ -463,7 +477,7 @@
         }];
     };
     [DTSheetView showTop:v cornerRadius:0 onCloseCallback:^{
-        
+
     }];
 }
 
@@ -518,12 +532,12 @@
         NSMutableArray *arrOperate = [[NSMutableArray alloc] init];
         if (isMe) {
             [arrOperate addObject:NSString.dt_down_mic];
-        } else{
+        } else {
             if (isCaptain && isMicUserInGame) {
                 [arrOperate addObject:transCaptainStr];
                 // 加载游戏中或者游戏中不能再踢人
                 if (self.sudFSMMGDecorator.gameStateType != GameStateTypeLoading &&
-                    self.sudFSMMGDecorator.gameStateType != GameStateTypePlaying) {
+                        self.sudFSMMGDecorator.gameStateType != GameStateTypePlaying) {
                     [arrOperate addObject:kickOutStr];
                 }
             }
@@ -536,12 +550,12 @@
         if (arrOperate.count == 0) {
             return;
         }
-        
+
         // 是自己或者房主
         MicOperateView *v = [[MicOperateView alloc] initWithOperateList:arrOperate];
         WeakSelf
         v.operateCallback = ^(NSString *str) {
-            
+
             if ([str isEqualToString:transCaptainStr]) {
                 // 转让队长
                 [weakSelf.sudFSTAPPDecorator notifyAppComonSetCaptainStateWithUserId:micUserID];
@@ -560,33 +574,33 @@
                     // 发送踢出房间
                     RoomCmdKickoutRoomModel *msg = [RoomCmdKickoutRoomModel makeKickoutRoomMsg:micUserID];
                     [weakSelf sendMsg:msg isAddToShow:NO finished:nil];
-                } fail:nil];
+                }                          fail:nil];
                 [DTSheetView close];
             } else {
-                
+
                 // 自己下麦
                 if (isPlaying) {
                     [DTSheetView close];
                     [DTAlertView showTextAlert:NSString.dt_room_flight_tile sureText:NSString.dt_room_confirm_flight cancelText:NSString.dt_common_cancel onSureCallback:^{
                         // 下麦
                         [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 proxyUser:nil success:nil fail:nil];
-                        
+
                         [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
                     }          onCloseCallback:^{
-                        
+
                     }];
                 } else {
-                    
+
                     // 下麦
                     [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:1 proxyUser:nil success:nil fail:nil];
-                    
+
                     if ([self.sudFSMMGDecorator isPlayerIsPlaying:AppService.shared.login.loginUserInfo.userID]) {
                         /// 先退出结束游戏，再退出当前游戏
                         [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
                         [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
                     } else if ([self.sudFSMMGDecorator isPlayerIsReady:AppService.shared.login.loginUserInfo.userID]) {
                         /// 先取消准备游戏，再退出当前游戏
-                        [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:false];
+                        [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:false];
                         [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
                     } else if ([self.sudFSMMGDecorator isPlayerIn:AppService.shared.login.loginUserInfo.userID]) {
                         /// 退出当前游戏
@@ -595,13 +609,13 @@
                     [DTSheetView close];
                 }
             }
-            
+
         };
         v.cancelCallback = ^(UIButton *sender) {
             [DTSheetView close];
         };
         [DTSheetView show:v rootView:self.view hiddenBackCover:NO onCloseCallback:^{
-            
+
         }];
     }
 }
@@ -622,7 +636,7 @@
             return NSOrderedAscending;
         }
     }];
-    
+
     AudioRoomMicModel *emptyModel = nil;
     for (int i = 0; i < arr.count; ++i) {
         if (i < beginMic) {
@@ -704,7 +718,7 @@
             }];
             break;
     }
-    
+
 }
 
 /// 游戏开关麦
@@ -725,7 +739,7 @@
             [self changeTapVoiceState:VoiceBtnStateTypeWaitOpen];
         }
     }
-    
+
 }
 
 
@@ -765,9 +779,9 @@
         [self handleMicChanged:(RoomCmdUpMicModel *) msg];
     } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
         [self handleGiftEffect:(RoomCmdSendGiftModel *) msg];
-    }else if ([msg isKindOfClass:RoomCmdKickoutRoomModel.class]) {
+    } else if ([msg isKindOfClass:RoomCmdKickoutRoomModel.class]) {
         // 踢出房间
-        RoomCmdKickoutRoomModel *m = (RoomCmdKickoutRoomModel *)msg;
+        RoomCmdKickoutRoomModel *m = (RoomCmdKickoutRoomModel *) msg;
         if ([AppService.shared.login.loginUserInfo isMeByUserID:m.userID]) {
             // 自己被踢出去
             if (SuspendRoomView.isShowSuspend) {
@@ -790,8 +804,8 @@
     // 通知麦位变化
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_MIC_CHANGED object:nil userInfo:@{@"msgModel": model}];
     if (model.cmd == CMD_UP_MIC_NOTIFY &&
-        [self.sudFSMMGDecorator isPlayerIsCaptain:AppService.shared.loginUserID] &&
-        model.sendUser.isAi) {
+            [self.sudFSMMGDecorator isPlayerIsCaptain:AppService.shared.loginUserID] &&
+            model.sendUser.isAi) {
         // 自己是队长，将机器人加入游戏中
         [self addRobotFromMicUserModels:@[model.sendUser]];
     }
@@ -845,10 +859,10 @@
         }];
     } else if ([giftModel.animateType isEqualToString:@"lottie"]) {
         NSURL *url = [giftModel.animateURL hasPrefix:@"http"] ? [[NSURL alloc] initWithString:giftModel.animateURL] : [NSURL fileURLWithPath:giftModel.animateURL];
-        
+
         LOTAnimationView *v = [[LOTAnimationView alloc] initWithContentsOfURL:url];
         [self.view addSubview:v];
-        
+
         [v mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(self.view);
         }];
@@ -857,7 +871,7 @@
             [weakV removeFromSuperview];
         }];
     } else if ([giftModel.animateType isEqualToString:@"webp"]) {
-        
+
         [giftModel loadWebp:^(UIImage *_Nonnull image) {
             UIImageView *v = [[UIImageView alloc] init];
             v.image = image;
@@ -883,7 +897,7 @@
         configuration.directory = giftModel.animateURL;
         configuration.renderSuperViewFrame = self.view.frame;
         configuration.orientation = BDAlphaPlayerOrientationPortrait;
-        
+
         [v playWithMetalConfiguration:configuration];
     }
 }
@@ -934,11 +948,11 @@
                 }
             }
         }
-        
+
         [weakSelf handleAutoUpMic];
         [NSNotificationCenter.defaultCenter postNotificationName:NTF_MIC_CHANGED object:nil];
     }];
-    
+
 }
 
 /// 进入房间 自动上麦
@@ -991,7 +1005,7 @@
 
 /// 处理游戏状态变化
 - (void)handlePlayerStateChanged {
-    
+
     if (!self.sudFSMMGDecorator.keyWordASRing) {
         return;
     }
@@ -1004,7 +1018,7 @@
 }
 
 - (void)showVoiceTip {
-    
+
     if (!self.btnTip) {
         self.btnTip = [[UIButton alloc] init];
         UIImage *bgImage = [[[UIImage imageNamed:@"voice_tip"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 50, 19, 49) resizingMode:UIImageResizingModeStretch] imageFlippedForRightToLeftLayoutDirection];
@@ -1137,7 +1151,7 @@
 - (BaseView *)robotView {
     if (!_robotView) {
         _robotView = BaseView.new;
-        
+
         UILabel *lab = [[UILabel alloc] init];
         lab.text = @"添加机器人";
         lab.font = UIFONT_MEDIUM(12);
@@ -1198,7 +1212,7 @@
 
 - (void)setIsShowEndGame:(BOOL)isShowEndGame {
     _isShowEndGame = isShowEndGame;
-    
+
     if (kAudioRoomService.roleType != 1) {
         [self.naviView hiddenNodeWithEndGame:!isShowEndGame];
     }
@@ -1206,7 +1220,7 @@
 
 - (void)dealloc {
     NSLog(@"base scene vc dealloc");
-    
+
     if (self.asrStateNTF) {
         [[NSNotificationCenter defaultCenter] removeObserver:self.asrStateNTF];
     }
@@ -1243,7 +1257,7 @@
         [self.gameMicContentView setHidden:true];
     }
     self.gameView.hidden = NO;
-    
+
     CGFloat h = [UIDevice dt_isiPhoneXSeries] ? 106 : 50;
     [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.mas_equalTo(self.view);
@@ -1257,7 +1271,7 @@
 
 /// 处理机器人上麦逻辑
 - (void)loadCommonRobotList {
-    
+
     if (self.enterModel.roleType != 1) {
         DDLogDebug(@"you not the room owner, don't need load robot");
         return;
@@ -1271,7 +1285,7 @@
         weakSelf.isLoadedRobotListCompleted = YES;
         weakSelf.cacheRobotList = robotList;
         [weakSelf onLoadCommonRobotCompleted:robotList];
-        
+
     }                                  failure:^(NSError *_Nonnull error) {
         weakSelf.isLoadedRobotListCompleted = NO;
         DDLogError(@"load robot list err:%@", error.dt_errMsg);
@@ -1330,7 +1344,7 @@
 /// 加载通用机器人完毕
 /// @param robotList
 - (void)onLoadCommonRobotCompleted:(NSArray<RobotInfoModel *> *)robotList {
-    
+
     if (self.hasRobotInMic) {
         DDLogDebug(@"has robot in mic, don't up the robot to mic list");
         return;
@@ -1351,13 +1365,13 @@
         aiPlayerInfoModel.avatar = robotModel.avatar;
         aiPlayerInfoModel.gender = robotModel.gender;
         [aiPlayers addObject:aiPlayerInfoModel];
-        
+
     }
     AppCommonGameAddAIPlayersModel *appCommonGameAddAiPlayersModel = [[AppCommonGameAddAIPlayersModel alloc] init];
     appCommonGameAddAiPlayersModel.aiPlayers = aiPlayers;
     appCommonGameAddAiPlayersModel.isReady = YES;
     [self.sudFSTAPPDecorator notifyAppCommonGameAddAIPlayers:appCommonGameAddAiPlayersModel];
-    
+
     // 机器人加入主播位
     [HSThreadUtils dispatchMainAfter:1 callback:^{
         for (RobotInfoModel *m in robotAnchorList) {
@@ -1429,7 +1443,7 @@
 /// 自己成为了队长事件处理
 - (void)onHandleIsGameCaptain {
     DDLogDebug(@"我成为了队长");
-    
+
     NSArray *robotMicUserList = [self getAllRobotMic];
     [self addRobotFromMicUserModels:robotMicUserList];
 }
@@ -1446,7 +1460,7 @@
         aiPlayerInfoModel.avatar = micUser.icon;
         aiPlayerInfoModel.gender = micUser.sex == 1 ? @"male" : @"female";
         [aiPlayers addObject:aiPlayerInfoModel];
-        
+
     }
     // 如果麦位有机器人，自动加入游戏中
     AppCommonGameAddAIPlayersModel *appCommonGameAddAiPlayersModel = [[AppCommonGameAddAIPlayersModel alloc] init];
@@ -1457,7 +1471,7 @@
 
 /// 加入状态处理发生变更
 - (void)playerIsInGameStateChanged:(NSString *)userId {
-    
+
 }
 
 @end

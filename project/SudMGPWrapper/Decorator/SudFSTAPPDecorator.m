@@ -29,7 +29,7 @@
 
 /// 是否设置为准备状态
 /// @param isReady  true 准备，false 取消准备
-- (void)notifyAppComonSetReady:(BOOL)isReady {
+- (void)notifyAppCommonSelfReady:(BOOL)isReady {
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isReady), @"isReady", nil];
     [self notifyStateChange:APP_COMMON_SELF_READY dataJson:dic.mj_JSONString];
 }

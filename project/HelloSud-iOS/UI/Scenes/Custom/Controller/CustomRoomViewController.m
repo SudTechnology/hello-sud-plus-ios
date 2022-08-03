@@ -52,10 +52,10 @@
                 [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
                 break;
             case GameAPITypeSelfReady: // 准备
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:YES];
+                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
                 break;
             case GameAPITypeSelfReadyCancel: // 取消准备
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:NO];
+                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:NO];
                 break;
             case GameAPITypeSelfInOut: // 退出游戏
                 [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
