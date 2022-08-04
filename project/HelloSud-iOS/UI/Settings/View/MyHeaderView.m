@@ -13,7 +13,8 @@
 @property(nonatomic, strong) UILabel *userNameLabel;
 @property(nonatomic, strong) UILabel *userIdLabel;
 @property(nonatomic, strong) DTPaddingLabel *walletAddressLabel;
-@property(nonatomic, strong) UIImageView *nftView;
+@property(nonatomic, strong) UIView *nftView;
+@property(nonatomic, strong) UIImageView *nftBgView;
 @property(nonatomic, strong) MyBindWalletView *bindView;
 @property(nonatomic, strong) MyNFTView *myNFTView;
 @property(nonatomic, strong) UIButton *deleteBtn;
@@ -32,6 +33,7 @@
     [self addSubview:self.walletAddressLabel];
     [self addSubview:self.deleteBtn];
     [self addSubview:self.nftView];
+    [self.nftView addSubview:self.nftBgView];
 }
 
 - (void)dtLayoutViews {
@@ -63,6 +65,9 @@
         make.width.equalTo(@18);
         make.height.equalTo(@18);
     }];
+    [self.nftBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.trailing.bottom.equalTo(@0);
+    }];
     [self.nftView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headerView.mas_bottom).offset(10);
         make.leading.equalTo(@0);
@@ -70,6 +75,7 @@
         make.height.greaterThanOrEqualTo(@0);
         make.bottom.equalTo(@-24);
     }];
+
 
 }
 
@@ -99,6 +105,7 @@
             make.top.leading.trailing.bottom.equalTo(@0);
             make.height.greaterThanOrEqualTo(@0);
         }];
+
     } else {
         // 未绑定钱包
         self.walletAddressLabel.hidden = YES;
@@ -113,6 +120,7 @@
         }
         [self.bindView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.leading.trailing.bottom.equalTo(@0);
+            make.height.greaterThanOrEqualTo(@0);
         }];
         WeakSelf
         self.bindView.clickWalletBlock = ^(SudNFTWalletModel *m) {
@@ -212,14 +220,23 @@
 }
 
 
-- (UIImageView *)nftView {
+- (UIView *)nftView {
     if (!_nftView) {
-        _nftView = [[UIImageView alloc] init];
-        _nftView.image = [UIImage imageNamed:@"nft_bg"];
-        _nftView.userInteractionEnabled = YES;
+        _nftView = [[UIView alloc] init];
     }
     return _nftView;
 }
+
+- (UIImageView *)nftBgView {
+    if (!_nftBgView) {
+        _nftBgView = [[UIImageView alloc] init];
+        _nftBgView.image = [UIImage imageNamed:@"nft_bg"];
+        _nftBgView.userInteractionEnabled = YES;
+    }
+    return _nftBgView;
+}
+
+
 
 - (MyBindWalletView *)bindView {
     if (!_bindView) {

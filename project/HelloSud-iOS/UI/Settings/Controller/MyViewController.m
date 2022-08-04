@@ -137,9 +137,7 @@
     [self.myHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
        make.leading.top.equalTo(@0);
        make.width.equalTo(@(w));
-       make.height.equalTo(@(size.height));
     }];
-    [self.myHeaderView layoutIfNeeded];
 
 }
 
