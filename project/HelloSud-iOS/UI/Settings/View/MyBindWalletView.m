@@ -26,7 +26,8 @@
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.iconImageView.mas_trailing).offset(8);
         make.centerY.equalTo(self);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.height.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.width.equalTo(@80);
     }];
 }
 
@@ -36,6 +37,16 @@
     if (model.icon) {
         [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:model.icon]];
     }
+    CGFloat maxWidth = kScreenWidth - 40 - 32;
+    CGRect rect = [model.name boundingRectWithSize:CGSizeMake(maxWidth, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.nameLabel.font} context:nil];
+    CGFloat labelW = ceil(rect.size.width);
+    CGFloat left = (maxWidth - labelW - 28 - 16) / 2;
+    [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(@(left));
+    }];
+    [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(labelW));
+    }];
 }
 
 - (UIImageView *)iconImageView {
