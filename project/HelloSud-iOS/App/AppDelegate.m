@@ -17,6 +17,7 @@
 #import <NIMSDK/NIMSDK.h>
 #import <SudMGP/SudNFT.h>
 #import <SudMGP/ISudAPPD.h>
+#import <SDWebImageSVGKitPlugin/SDImageSVGKCoder.h>
 
 @interface AppDelegate () {
 
@@ -64,7 +65,6 @@
     [Bugly updateAppVersion:version];
     [Bugly startWithAppId:BUGLEY_APP_ID];
 }
-
 
 
 - (void)observerNTF {
@@ -199,7 +199,9 @@
     // Add coder
     SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
     [[SDImageCodersManager sharedManager] addCoder:webPCoder];
-//    [[SDWebImageDownloader sharedDownloader] setValue:@"image/webp,image/*,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
+    // register coder, on AppDelegate
+    SDImageSVGKCoder *svgCoder = [SDImageSVGKCoder sharedCoder];
+    [[SDImageCodersManager sharedManager] addCoder:svgCoder];
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
@@ -207,7 +209,7 @@
     return mask;
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id <UIUserActivityRestoring>> *_Nullable))restorationHandler {
 
     // 三方返回APP时，要将返回数据传入SudNFT去处理解析
     if ([SudNFT handleOpenUniversalLink:userActivity]) {

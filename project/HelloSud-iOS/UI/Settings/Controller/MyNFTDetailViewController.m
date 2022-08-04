@@ -31,7 +31,6 @@
 //}
 
 - (void)dtConfigUI {
-    self.iconImageView.backgroundColor = UIColor.orangeColor;
     self.view.backgroundColor = UIColor.whiteColor;
 }
 
@@ -203,12 +202,17 @@
 
 
 - (void)updateWithMetadata:(SudNFTMetaDataModel *)metaDataModel {
+    WeakSelf
     self.nameLabel.text = metaDataModel.name;
     self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:metaDataModel.contractAddress subColor:HEX_COLOR(@"#0053FF")];
     self.tokenIDLabel.attributedText = [self generate:@"Token ID\n" subtitle:metaDataModel.tokenId subColor:UIColor.blackColor];
     self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:metaDataModel.tokenType subColor:UIColor.blackColor];
     if (metaDataModel.image) {
-        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image]];
+        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL){
+            if (error == nil) {
+                weakSelf.wearBtn.hidden = NO;
+            }
+        }];
     }
 }
 
@@ -306,8 +310,8 @@
         [_wearBtn setTitleColor:HEX_COLOR(@"#ffffff") forState:UIControlStateNormal];
         [_wearBtn setTitle:@"取消穿戴" forState:UIControlStateSelected];
         [_wearBtn setTitleColor:HEX_COLOR(@"#000000") forState:UIControlStateSelected];
-
         _wearBtn.titleLabel.font = UIFONT_BOLD(14);
+        _wearBtn.hidden = YES;
     }
     return _wearBtn;
 }

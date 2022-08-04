@@ -22,8 +22,9 @@ target 'HelloSud-iOS' do
   # 异常追踪
   pod 'Bugly', '2.5.90'
   # 图片加载
-  pod 'SDWebImage', '5.12.2'
+  pod 'SDWebImage', '5.13.2'
   pod 'SDWebImageWebPCoder'
+  pod 'SDWebImageSVGKitPlugin'
   # SVGA动画库
   pod 'SVGAPlayer', :git =>'https://github.com/svga/SVGAPlayer-iOS.git', :tag => '2.5.6'
   # lottie动画库
@@ -81,7 +82,7 @@ target 'QuickStart' do
   # Toast
   pod 'SVProgressHUD', '~> 2.2.5'
   # 图片加载
-  pod 'SDWebImage', '5.12.2'
+  pod 'SDWebImage', '5.13.2'
   # 键盘管理
   pod 'IQKeyboardManager', '~> 6.5.9'
   # 跑马灯
