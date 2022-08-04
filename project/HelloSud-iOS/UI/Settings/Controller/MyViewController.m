@@ -72,11 +72,6 @@
     CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
     self.contactUsView.frame = targetFrame;
     self.tableView.tableFooterView = self.contactUsView;
-//    [self.contactUsView mas_makeConstraints:^(MASConstraintMaker *make) {
-//       make.height.equalTo(@(size.height));
-//       make.width.equalTo(@(kScreenWidth));
-//       make.bottom.equalTo(@0);
-//    }];
     [self.tableView reloadData];
 }
 
@@ -133,7 +128,7 @@
 
 - (void)reloadHeadView {
     CGFloat w = kScreenWidth - 32;
-    [self.myHeaderView layoutIfNeeded];
+    
     CGSize size = [self.myHeaderView systemLayoutSizeFittingSize:CGSizeMake(w, 10000)];
     CGRect targetFrame = CGRectMake(0, 0, w, size.height);
     DDLogDebug(@"reloadHeadView size:%@", [NSValue valueWithCGSize:size]);
@@ -144,6 +139,7 @@
        make.width.equalTo(@(w));
        make.height.equalTo(@(size.height));
     }];
+    [self.myHeaderView layoutIfNeeded];
 
 }
 
@@ -171,7 +167,8 @@
         [SudNFT bindWallet:m.type listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindWalletInfoModel *walletInfoModel) {
             if (errCode != 0) {
                 NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
-                [ToastUtil show:msg];
+                DDLogError(@"bind wallet err:%@", msg);
+                [weakSelf showBindErrorAlert];
                 return;
             }
             // 绑定钱包成功
@@ -206,6 +203,25 @@
         [weakSelf.myHeaderView dtUpdateUI];
     }];
 
+}
+
+- (void)showBindErrorAlert {
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", @"连接失败"]];
+    attrTitle.yy_lineSpacing = 16;
+    attrTitle.yy_font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
+    attrTitle.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
+    attrTitle.yy_alignment = NSTextAlignmentCenter;
+
+    NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:@"你拒绝了钱包中的操作"];
+    attrStr_0.yy_lineSpacing = 6;
+    attrStr_0.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+    attrStr_0.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
+    attrStr_0.yy_alignment = NSTextAlignmentCenter;
+    [attrTitle appendAttributedString:attrStr_0];
+    [DTAlertView showAttrTextAlert:attrTitle sureText:@"确定" cancelText:nil rootView:nil onSureCallback:^{
+        [DTAlertView close];
+    } onCloseCallback:nil];
+    return;
 }
 
 #pragma makr lazy

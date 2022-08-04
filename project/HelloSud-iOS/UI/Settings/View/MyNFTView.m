@@ -28,17 +28,18 @@
 }
 
 - (void)dtAddViews {
-    [self addSubview:self.chainsView];
     [self addSubview:self.nameLabel];
     [self addSubview:self.nftContentView];
     [self addSubview:self.rightMoreImageView];
     [self addSubview:self.nftCountLabel];
     [self addSubview:self.moreTapView];
+    [self addSubview:self.chainsView];
     [self addSubview:self.noDataLabel];
 
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (int i = 0; i < 3; ++i) {
         UIImageView *iv = [[UIImageView alloc] init];
+        iv.contentMode = UIViewContentModeScaleAspectFill;
         [iv dt_cornerRadius:8];
         [arr addObject:iv];
         [self.nftContentView addSubview:iv];
@@ -56,7 +57,8 @@
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@20);
         make.top.equalTo(self.chainsView.mas_bottom).offset(18);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.trailing.equalTo(self.nftCountLabel.mas_leading);
+        make.height.equalTo(@22);
     }];
     [self.nftContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameLabel.mas_bottom).offset(16);
@@ -78,16 +80,14 @@
         make.width.height.equalTo(@12);
         make.centerY.equalTo(self.nameLabel);
     }];
+    [self.nftCountLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.nftCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.rightMoreImageView.mas_leading).offset(-16);
         make.width.height.greaterThanOrEqualTo(@0);
         make.centerY.equalTo(self.nameLabel);
     }];
     [self.moreTapView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.rightMoreImageView);
-        make.height.equalTo(@44);
-        make.centerY.equalTo(self.nameLabel);
-        make.leading.equalTo(self.nftCountLabel);
+        make.leading.top.trailing.bottom.equalTo(@0);
     }];
     [self.noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.greaterThanOrEqualTo(@0);

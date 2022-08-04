@@ -97,6 +97,7 @@
         }
         [self.myNFTView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.leading.trailing.bottom.equalTo(@0);
+            make.height.greaterThanOrEqualTo(@0);
         }];
     } else {
         // 未绑定钱包
