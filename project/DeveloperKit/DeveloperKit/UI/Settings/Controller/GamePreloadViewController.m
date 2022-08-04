@@ -104,6 +104,7 @@
     SudInitSDKParamModel *model = [[SudInitSDKParamModel alloc]init];
     model.appId = appID;
     model.appKey = appKey;
+    model.isTestEnv = NO;
     if (AppService.shared.gameEnvType != GameEnvTypePro) {
         model.isTestEnv = GAME_TEST_ENV;
     }
