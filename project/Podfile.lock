@@ -63,9 +63,9 @@ PODS:
     - RongCloudIM/IMLibCore
   - RongCloudRTC/RongRTCLib (5.1.17):
     - RongCloudIM/IMLibCore (>= 5.1.3)
-  - SDWebImage (5.13.2):
-    - SDWebImage/Core (= 5.13.2)
-  - SDWebImage/Core (5.13.2)
+  - SDWebImage (5.12.2):
+    - SDWebImage/Core (= 5.12.2)
+  - SDWebImage/Core (5.12.2)
   - SDWebImageSVGKitPlugin (1.4.0):
     - SDWebImage/Core (~> 5.10)
     - SVGKit (~> 3.0)
@@ -117,7 +117,7 @@ DEPENDENCIES:
   - NERtcSDK (~> 4.6.0)
   - NIMSDK_LITE (= 9.0.1)
   - RCVoiceRoomLib (~> 2.0.7)
-  - SDWebImage (= 5.13.2)
+  - SDWebImage (= 5.12.2)
   - SDWebImageSVGKitPlugin
   - SDWebImageWebPCoder
   - SudMGPWrapper (from `./`)
@@ -197,7 +197,7 @@ SPEC CHECKSUMS:
   RCVoiceRoomLib: 8242df93f9a2b8fc1cf28e95c8fa48a135de1e3d
   RongCloudIM: c871de12fdc601a4335e17d8df17232f56b8d089
   RongCloudRTC: 6171037c157b9c8ce8f4c2868b72b197a84eea13
-  SDWebImage: 72f86271a6f3139cc7e4a89220946489d4b9a866
+  SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
@@ -211,6 +211,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 6a4f294825ac93f16c5101d3e97d211c2d17fa33
 
-PODFILE CHECKSUM: b3ffbd990ee47f4d0745728c483e5244f0fe547a
+PODFILE CHECKSUM: e31adf007452e8a7528a7f12aa299673776a6617
 
 COCOAPODS: 1.11.2
