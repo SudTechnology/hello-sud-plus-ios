@@ -24,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSArray<NSNumber *> * suitScene;
 @property (nonatomic, copy) NSString * gamePic;
 @property (nonatomic, copy) NSString * homeGamePic;
+/// 联赛场景名称
+@property (nonatomic, copy) NSString * leagueSceneName;
+/// 联赛场景图片
+@property (nonatomic, copy) NSString * leagueScenePic;
 /// 是否是空白区域占位
 @property (nonatomic, assign) BOOL isBlank;
 /// 是否等待数据
