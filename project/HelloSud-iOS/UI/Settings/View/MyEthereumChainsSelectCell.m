@@ -34,7 +34,7 @@
         make.centerY.equalTo(self.contentView);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.iconImageView.mas_trailing).offset(4);
+        make.leading.equalTo(self.iconImageView.mas_trailing).offset(10);
         make.width.height.greaterThanOrEqualTo(@0);
         make.centerY.equalTo(self.contentView);
     }];
