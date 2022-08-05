@@ -103,6 +103,7 @@
 
 - (void)updateNFTList:(SudNFTListModel *)nftListModel {
     self.nftListModel = nftListModel;
+    WeakSelf
     for (UIImageView *iv in self.iconImageViewList) {
         iv.image = nil;
     }
@@ -110,18 +111,26 @@
         UIImageView *iv = self.iconImageViewList[i];
         if (nftListModel.list.count > i) {
             SudNFTModel *nftModel = nftListModel.list[i];
+            [self showLoadAnimate:iv];
             [SudNFT getNFTMetadata:nftModel.contractAddress tokenId:nftModel.tokenId chainType:HSAppPreferences.shared.selectedEthereumChainType listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
-                
+
                 if (errCode != 0) {
+                    [weakSelf closeLoadAnimate:iv];
                     NSString *msg = [NSString stringWithFormat:@"contractAddress:%@, tokenId:%@, %@(%@)", nftModel.contractAddress, nftModel.tokenId, errMsg, @(errCode)];
                     DDLogError(@"getNFTMetadata:%@", msg);
                     return;
                 }
-                
+
                 DDLogDebug(@"show contractAddress:%@, tokenId:%@, image:%@, name:%@", nftModel.contractAddress, nftModel.tokenId, metaDataModel.image, metaDataModel.name);
                 if (metaDataModel.image) {
-                    [iv setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image] placeholderImage:[UIImage imageNamed:@"default_nft_icon"]];
+                    __weak UIImageView *weakIV = iv;
+                    [iv sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image]
+                       placeholderImage:[UIImage imageNamed:@"default_nft_icon"]
+                              completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
+                                  [weakSelf closeLoadAnimate:weakIV];
+                              }];
                 } else {
+                    [weakSelf closeLoadAnimate:iv];
                     iv.image = [UIImage imageNamed:@"default_nft_icon"];
                 }
             }];
@@ -161,6 +170,37 @@
     vc.title = self.nameLabel.text;
     [vc updateNFTListModel:self.nftListModel];
     [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)showLoadAnimate:(UIView *)imageView {
+
+    [self closeLoadAnimate:imageView];
+    CGColorRef whiteBegin = HEX_COLOR_A(@"#ffffff", 0.1).CGColor;
+    CGColorRef whiteEnd = HEX_COLOR_A(@"#ffffff", 0.16).CGColor;
+    CGFloat duration = 0.6;
+    CABasicAnimation *anim1 = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+    anim1.duration = duration;
+    anim1.fromValue = (__bridge id) whiteBegin;
+    anim1.toValue = (__bridge id) whiteEnd;
+
+    CABasicAnimation *anim2 = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+    anim2.beginTime = duration;
+    anim2.duration = duration;
+    anim2.fromValue = (__bridge id) whiteEnd;
+    anim2.toValue = (__bridge id) whiteBegin;
+
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.duration = duration * 2;
+    group.animations = @[anim1, anim2];
+    group.removedOnCompletion = NO;
+    group.fillMode = kCAFillModeForwards;
+    group.repeatCount = 10000000;
+
+    [imageView.layer addAnimation:group forKey:@"animate_background"];
+}
+
+- (void)closeLoadAnimate:(UIView *)imageView {
+    [imageView.layer removeAllAnimations];
 }
 
 - (UIView *)nftContentView {

@@ -7,11 +7,12 @@
 
 #import "MyNFTColCell.h"
 #import "HSNFTListCellModel.h"
+
 @interface MyNFTColCell ()
-@property (nonatomic, strong) UIImageView *tagView;
-@property (nonatomic, strong) UILabel *tagLabel;
-@property (nonatomic, strong) UIImageView *gameImageView;
-@property (nonatomic, strong) UILabel *nameLabel;
+@property(nonatomic, strong) UIImageView *tagView;
+@property(nonatomic, strong) UILabel *tagLabel;
+@property(nonatomic, strong) UIImageView *gameImageView;
+@property(nonatomic, strong) UILabel *nameLabel;
 @end
 
 @implementation MyNFTColCell
@@ -73,8 +74,9 @@
     if (![self.model isKindOfClass:HSNFTListCellModel.class]) {
         return;
     }
-    HSNFTListCellModel *m = (HSNFTListCellModel *)self.model;
+    HSNFTListCellModel *m = (HSNFTListCellModel *) self.model;
     WeakSelf
+    [self showLoadAnimate];
     [m getMetaData:^(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel) {
         DDLogDebug(@"cell:%@, model:%@, meta name:%@, image:%@", weakSelf, weakSelf.model, metaDataModel.name, metaDataModel.image);
         if (weakSelf.model != model) {
@@ -82,8 +84,13 @@
         }
         weakSelf.nameLabel.text = metaDataModel.name;
         if (metaDataModel.image) {
-            [weakSelf.gameImageView sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image] placeholderImage:[UIImage imageNamed:@"default_nft_icon"]];
+            [weakSelf.gameImageView sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image]
+                                      placeholderImage:[UIImage imageNamed:@"default_nft_icon"]
+                                             completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
+                [weakSelf closeLoadAnimate];
+            }];
         } else {
+            [weakSelf closeLoadAnimate];
             DDLogDebug(@"no image cell:%@, model:%@, meta:%@", weakSelf, weakSelf.model, metaDataModel);
             weakSelf.nameLabel.text = @"未拉取到图片";
             weakSelf.gameImageView.image = [UIImage imageNamed:@"default_nft_icon"];
@@ -91,6 +98,37 @@
     }];
     BOOL isWear = [AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
     self.tagView.hidden = isWear ? NO : YES;
+}
+
+- (void)showLoadAnimate {
+
+    [self closeLoadAnimate];
+    CGColorRef whiteBegin = HEX_COLOR_A(@"#000000", 0.05).CGColor;
+    CGColorRef whiteEnd = HEX_COLOR_A(@"#000000", 0.1).CGColor;
+    CGFloat duration = 0.6;
+    CABasicAnimation *anim1 = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+    anim1.duration = duration;
+    anim1.fromValue = (__bridge id) whiteBegin;
+    anim1.toValue = (__bridge id) whiteEnd;
+
+    CABasicAnimation *anim2 = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+    anim2.beginTime = duration;
+    anim2.duration = duration;
+    anim2.fromValue = (__bridge id) whiteEnd;
+    anim2.toValue = (__bridge id) whiteBegin;
+
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.duration = duration * 2;
+    group.animations = @[anim1, anim2];
+    group.removedOnCompletion = NO;
+    group.fillMode = kCAFillModeForwards;
+    group.repeatCount = 10000000;
+
+    [self.gameImageView.layer addAnimation:group forKey:@"animate_background"];
+}
+
+- (void)closeLoadAnimate {
+    [self.gameImageView.layer removeAllAnimations];
 }
 
 - (UIImageView *)tagView {
