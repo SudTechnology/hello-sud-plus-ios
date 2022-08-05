@@ -230,7 +230,7 @@
 - (UIImageView *)nftBgView {
     if (!_nftBgView) {
         _nftBgView = [[UIImageView alloc] init];
-        _nftBgView.image = [UIImage imageNamed:@"nft_bg"];
+        _nftBgView.image = [[UIImage imageNamed:@"nft_bg"] resizableImageWithCapInsets:UIEdgeInsetsMake(89, 170, 170, 88) resizingMode:UIImageResizingModeStretch];
         _nftBgView.userInteractionEnabled = YES;
     }
     return _nftBgView;

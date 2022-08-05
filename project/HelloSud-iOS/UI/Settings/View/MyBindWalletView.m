@@ -9,6 +9,8 @@
 @property(nonatomic, strong) UIImageView *iconImageView;
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) SudNFTWalletModel *model;
+
+@property (nonatomic, strong)void(^clickWalletBlock)(SudNFTWalletModel *wallModel);
 @end
 
 @implementation BindBtnView
@@ -33,6 +35,7 @@
 
 
 - (void)update:(SudNFTWalletModel *)model {
+    self.model = model;
     self.nameLabel.text = model.name;
     if (model.icon) {
         [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:model.icon]];
@@ -47,6 +50,18 @@
     [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(labelW));
     }];
+}
+
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [self addGestureRecognizer:tap];
+}
+
+- (void)onTap:(id)tap {
+    if (self.clickWalletBlock) {
+        self.clickWalletBlock(self.model);
+    }
 }
 
 - (UIImageView *)iconImageView {
@@ -71,18 +86,18 @@
 
 @interface MyBindWalletView ()
 @property(nonatomic, strong) UILabel *nameLabel;
-@property(nonatomic, strong) BindBtnView *metamaskView;
+@property(nonatomic, strong) NSMutableArray<BindBtnView *> *bindViewList;
 @end
 
 @implementation MyBindWalletView
 
 - (void)dtConfigUI {
+    [super dtConfigUI];
+    self.bindViewList = [[NSMutableArray alloc] init];
 }
 
 - (void)dtAddViews {
     [self addSubview:self.nameLabel];
-    [self addSubview:self.metamaskView];
-
 }
 
 - (void)dtLayoutViews {
@@ -90,15 +105,9 @@
         make.leading.equalTo(@20);
         make.top.equalTo(@16);
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.bottom.equalTo(@-140);
     }];
-    [self.metamaskView dt_cornerRadius:22];
-    [self.metamaskView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.nameLabel.mas_bottom).offset(20);
-        make.leading.equalTo(@20);
-        make.trailing.equalTo(@-20);
-        make.height.equalTo(@44);
-        make.bottom.equalTo(@-76);
-    }];
+
 }
 
 - (void)dtUpdateUI {
@@ -107,33 +116,61 @@
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    [self.metamaskView addGestureRecognizer:tap];
 }
 
-- (void)onTap:(id)tap {
-    if (self.clickWalletBlock) {
-        self.clickWalletBlock(self.metamaskView.model);
-    }
-}
 
 - (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList {
-    for (SudNFTWalletModel *m in walletList) {
-        if (m.type == SudNFTWalletTypeMetaMask) {
-            [self.metamaskView update: m];
-            self.metamaskView.hidden = NO;
-        }
+    for (BindBtnView *v in self.bindViewList) {
+        [v removeFromSuperview];
     }
-}
+    SudNFTWalletModel *temp = walletList[0];
+//    walletList = @[temp, temp, temp, temp];
+    [self.bindViewList removeAllObjects];
+    BindBtnView *lastView = nil;
+    WeakSelf
+    for (int i = 0; i < walletList.count; ++i) {
+        SudNFTWalletModel *m = walletList[i];
+        BindBtnView *bindBtnView = [[BindBtnView alloc] init];
+        bindBtnView.layer.borderColor = UIColor.whiteColor.CGColor;
+        bindBtnView.layer.borderWidth = 1;
+        [self addSubview:bindBtnView];
+        [self.bindViewList addObject:bindBtnView];
+        bindBtnView.clickWalletBlock = ^(SudNFTWalletModel *wallModel){
+            if (weakSelf.clickWalletBlock) {
+                weakSelf.clickWalletBlock(wallModel);
+            }
+        };
 
-- (BindBtnView *)metamaskView {
-    if (!_metamaskView) {
-        _metamaskView = [[BindBtnView alloc] init];
-        _metamaskView.layer.borderColor = UIColor.whiteColor.CGColor;
-        _metamaskView.layer.borderWidth = 1;
-        _metamaskView.hidden = YES;
+        [bindBtnView update:m];
+        [bindBtnView dt_cornerRadius:22];
+        if (self.bindViewList.count == 1) {
+            [self.nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.leading.equalTo(@20);
+                make.top.equalTo(@16);
+                make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+            }];
+            [bindBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.nameLabel.mas_bottom).offset(20);
+                make.leading.equalTo(@20);
+                make.trailing.equalTo(@-20);
+                make.height.equalTo(@44);
+                if (i == walletList.count - 1) {
+                    make.bottom.equalTo(@-20);
+                }
+            }];
+        } else {
+            [bindBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(lastView.mas_bottom).offset(12);
+                make.leading.equalTo(@20);
+                make.trailing.equalTo(@-20);
+                make.height.equalTo(@44);
+                if (i == walletList.count - 1) {
+                    make.bottom.equalTo(@-20);
+                }
+            }];
+        }
+        lastView = bindBtnView;
     }
-    return _metamaskView;
 }
 
 - (UILabel *)nameLabel {
