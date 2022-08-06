@@ -463,6 +463,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
             [self.naviView hiddenNodeWithRoleType:kAudioRoomService.roleType];
             self.settingLabel.text = NSString.dt_room_pk_settings;
             [self.settingView dtRemoveGradient];
+            [self.pkStateView resetResult];
             [self.pkStateView startCountdown:self.totalDuration * 60];
             break;
         case PKStateTypeEnd: {
