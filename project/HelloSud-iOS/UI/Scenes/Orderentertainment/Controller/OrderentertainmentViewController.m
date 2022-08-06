@@ -229,10 +229,8 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
     if (self.orderStateType == OrderStateTypeGame) {
         self.orderStateType = OrderStateTypeHangup;
-        [self.sudFSTAPPDecorator pauseMG];
     } else if (self.orderStateType == OrderStateTypeHangup) {
         self.orderStateType = OrderStateTypeGame;
-        [self.sudFSTAPPDecorator playMG];
     }
 }
 
