@@ -48,13 +48,13 @@
     }];
     [self.moreTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.greaterThanOrEqualTo(@0);
-        make.centerX.equalTo(self.moreView).offset(-7);
+        make.centerX.equalTo(self.moreView).offset(-9);
         make.centerY.equalTo(self.moreView);
     }];
     [self.moreIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.moreView);
-        make.height.equalTo(@4);
-        make.width.equalTo(@8);
+        make.height.equalTo(@12);
+        make.width.equalTo(@12);
         make.leading.equalTo(self.moreTitleLabel.mas_trailing).offset(6);
     }];
 }
@@ -86,10 +86,10 @@
 - (void)updateMoreShowState {
     if (self.isMoreOpened) {
         self.moreTitleLabel.text = @"收起";
-        self.moreIconImageView.image = [UIImage imageNamed:@"right_more"];
+        self.moreIconImageView.image = [UIImage imageNamed:@"my_nft_more_up"];
     } else {
         self.moreTitleLabel.text = @"更多";
-        self.moreIconImageView.image = [UIImage imageNamed:@"right_more"];
+        self.moreIconImageView.image = [UIImage imageNamed:@"my_nft_more_down"];
     }
 }
 

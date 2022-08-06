@@ -39,6 +39,7 @@
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (int i = 0; i < 3; ++i) {
         UIImageView *iv = [[UIImageView alloc] init];
+        [self showLoadAnimate:iv];
         iv.contentMode = UIViewContentModeScaleAspectFill;
         [iv dt_cornerRadius:8];
         [arr addObject:iv];
@@ -138,6 +139,11 @@
     }
     self.nftCountLabel.text = [NSString stringWithFormat:@"%@", @(nftListModel.totalCount)];
     self.noDataLabel.hidden = nftListModel.totalCount == 0 ? NO : YES;
+    if (nftListModel.totalCount == 0) {
+        for (UIImageView *iv in self.iconImageViewList) {
+            [self closeLoadAnimate:iv];
+        }
+    }
 }
 
 - (void)updateEthereumList:(NSArray<SudNFTEthereumChainsModel *> *)chains {
