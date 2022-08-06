@@ -28,7 +28,7 @@
 
     [self addSubview:self.titleLabel];
     [self addSubview:self.tableView];
-    [self addSubview:self.sureBtn];
+//    [self addSubview:self.sureBtn];
 
 }
 
@@ -45,15 +45,16 @@
         make.top.equalTo(self.titleLabel.mas_bottom).offset(12);
         make.leading.trailing.equalTo(@0);
         make.height.equalTo(@280);
+        make.bottom.equalTo(@-20);
     }];
 
-    [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.tableView.mas_bottom).offset(30);
-        make.height.equalTo(@36);
-        make.width.equalTo(@140);
-        make.bottom.equalTo(@-20);
-        make.centerX.equalTo(self);
-    }];
+//    [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.tableView.mas_bottom).offset(30);
+//        make.height.equalTo(@36);
+//        make.width.equalTo(@140);
+//        make.bottom.equalTo(@-20);
+//        make.centerX.equalTo(self);
+//    }];
 
 }
 
