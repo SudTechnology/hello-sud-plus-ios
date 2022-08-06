@@ -1327,13 +1327,21 @@
 /// 从缓存机器人中找出一个未在麦位的
 /// @param completed
 - (void)findOneNotInMicRobotFromCacheList:(void (^)(RobotInfoModel *robotInfoModel))completed {
+    NSMutableArray *tempList = [[NSMutableArray alloc]initWithArray:self.cacheRobotList];
     for (RobotInfoModel *robotInfoModel in self.cacheRobotList) {
         if (![self isUserInMic:[NSString stringWithFormat:@"%@", @(robotInfoModel.userId)]]) {
-            if (completed) {
-                completed(robotInfoModel);
-            }
-            return;
+            [tempList addObject:robotInfoModel];
         }
+    }
+    // 随机一个
+    if (tempList.count > 0) {
+        NSInteger count = tempList.count;
+        NSInteger randIndex = arc4random() % count;
+        RobotInfoModel *randModel = tempList[randIndex];
+        if (completed) {
+            completed(randModel);
+        }
+        return;
     }
     if (completed) {
         completed(nil);
@@ -1352,8 +1360,19 @@
     // 默认处理机器人上麦
     NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
     NSMutableArray *robotAnchorList = [[NSMutableArray alloc] init];
-    for (int i = 0; i < robotList.count; ++i) {
-        RobotInfoModel *robotModel = robotList[i];
+    NSMutableArray *randList = [[NSMutableArray alloc]init];
+    if (robotList.count <= 3) {
+        [randList setArray:robotList];
+    } else {
+        NSInteger count = robotList.count;
+        [randList addObject:robotList[(NSUInteger) (arc4random() % count)]];
+        [randList addObject:robotList[(NSUInteger) (arc4random() % count)]];
+        [randList addObject:robotList[(NSUInteger) (arc4random() % count)]];
+    }
+
+
+    for (int i = 0; i < randList.count; ++i) {
+        RobotInfoModel *robotModel = randList[i];
         /// 前3位机器人自动上麦
         if (i >= 3) {
             break;
