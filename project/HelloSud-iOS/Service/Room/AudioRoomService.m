@@ -175,20 +175,24 @@
         SwitchMicModel *model = (SwitchMicModel *) resp;
         if (handleType == 0) {
             RoomCmdUpMicModel *upMicModel = [RoomCmdUpMicModel makeUpMicMsgWithMicIndex:micIndex];
-            weakSelf.micIndex = micIndex;
-            upMicModel.roleType = self.roleType;
+            
             upMicModel.streamID = model.streamId;
             if (proxyUser) {
                 upMicModel.roleType = 0;
                 upMicModel.sendUser = proxyUser;
+            } else {
+                upMicModel.roleType = self.roleType;
+                weakSelf.micIndex = micIndex;
             }
             [weakSelf.currentRoomVC sendMsg:upMicModel isAddToShow:NO finished:nil];
         } else {
-            weakSelf.micIndex = -1;
+            
             RoomCmdUpMicModel *downMicModel = [RoomCmdUpMicModel makeDownMicMsgWithMicIndex:micIndex];
             downMicModel.streamID = nil;
             if (proxyUser) {
                 downMicModel.sendUser = proxyUser;
+            }else {
+                weakSelf.micIndex = -1;
             }
             [weakSelf.currentRoomVC sendMsg:downMicModel isAddToShow:NO finished:nil];
         }
