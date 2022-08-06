@@ -4,89 +4,19 @@
 //
 
 #import "MyBindWalletView.h"
-
-@interface BindBtnView : BaseView
-@property(nonatomic, strong) UIImageView *iconImageView;
-@property(nonatomic, strong) UILabel *nameLabel;
-@property(nonatomic, strong) SudNFTWalletModel *model;
-
-@property (nonatomic, strong)void(^clickWalletBlock)(SudNFTWalletModel *wallModel);
-@end
-
-@implementation BindBtnView
-- (void)dtAddViews {
-    [self addSubview:self.iconImageView];
-    [self addSubview:self.nameLabel];
-}
-
-- (void)dtLayoutViews {
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(@102);
-        make.centerY.equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(22, 22));
-    }];
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.iconImageView.mas_trailing).offset(8);
-        make.centerY.equalTo(self);
-        make.height.mas_greaterThanOrEqualTo(CGSizeZero);
-        make.width.equalTo(@80);
-    }];
-}
-
-
-- (void)update:(SudNFTWalletModel *)model {
-    self.model = model;
-    self.nameLabel.text = model.name;
-    if (model.icon) {
-        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:model.icon]];
-    }
-    CGFloat maxWidth = kScreenWidth - 40 - 32;
-    CGRect rect = [model.name boundingRectWithSize:CGSizeMake(maxWidth, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.nameLabel.font} context:nil];
-    CGFloat labelW = ceil(rect.size.width);
-    CGFloat left = (maxWidth - labelW - 28 - 16) / 2;
-    [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(@(left));
-    }];
-    [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(labelW));
-    }];
-}
-
-- (void)dtConfigEvents {
-    [super dtConfigEvents];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    [self addGestureRecognizer:tap];
-}
-
-- (void)onTap:(id)tap {
-    if (self.clickWalletBlock) {
-        self.clickWalletBlock(self.model);
-    }
-}
-
-- (UIImageView *)iconImageView {
-    if (!_iconImageView) {
-        _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.clipsToBounds = true;
-    }
-    return _iconImageView;
-}
-
-- (UILabel *)nameLabel {
-    if (!_nameLabel) {
-        _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"";
-        _nameLabel.numberOfLines = 1;
-        _nameLabel.textColor = HEX_COLOR(@"#ffffff");
-        _nameLabel.font = UIFONT_MEDIUM(14);
-    }
-    return _nameLabel;
-}
-@end
+#import "BindBtnView.h"
+#import "MyViewController.h"
 
 @interface MyBindWalletView ()
 @property(nonatomic, strong) UILabel *nameLabel;
+
+@property(nonatomic, strong) UIView *moreView;
+@property(nonatomic, strong) UIImageView *moreIconImageView;
+@property(nonatomic, strong) UILabel *moreTitleLabel;
 @property(nonatomic, strong) NSMutableArray<BindBtnView *> *bindViewList;
+/// 是否更多处于打开状态
+@property(nonatomic, assign) BOOL isMoreOpened;
+@property(nonatomic, strong) NSArray<SudNFTWalletModel *> *walletList;
 @end
 
 @implementation MyBindWalletView
@@ -98,6 +28,9 @@
 
 - (void)dtAddViews {
     [self addSubview:self.nameLabel];
+    [self addSubview:self.moreView];
+    [self.moreView addSubview:self.moreTitleLabel];
+    [self.moreView addSubview:self.moreIconImageView];
 }
 
 - (void)dtLayoutViews {
@@ -107,35 +40,88 @@
         make.size.mas_greaterThanOrEqualTo(CGSizeZero);
         make.bottom.equalTo(@-140);
     }];
-
+    [self.moreView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(@-10);
+        make.height.equalTo(@44);
+        make.leading.equalTo(@20);
+        make.trailing.equalTo(@-20);
+    }];
+    [self.moreTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.greaterThanOrEqualTo(@0);
+        make.centerX.equalTo(self.moreView).offset(-7);
+        make.centerY.equalTo(self.moreView);
+    }];
+    [self.moreIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.moreView);
+        make.height.equalTo(@4);
+        make.width.equalTo(@8);
+        make.leading.equalTo(self.moreTitleLabel.mas_trailing).offset(6);
+    }];
 }
 
 - (void)dtUpdateUI {
     AccountUserModel *userInfo = AppService.shared.login.loginUserInfo;
+    [self updateMoreShowState];
 }
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
+    UITapGestureRecognizer *walletTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapMoreView:)];
+    [self.moreView addGestureRecognizer:walletTap];
+
 }
 
+- (void)onTapMoreView:(id)tap {
+    self.isMoreOpened = !self.isMoreOpened;
+    [self updateMoreShowState];
+    [self updateSupportWallet:self.walletList];
+    UIViewController *currentViewController = AppUtil.currentViewController;
+    if ([currentViewController isKindOfClass:MyViewController.class]){
+        MyViewController *myViewController = (MyViewController *)currentViewController;
+        [myViewController reloadHeadView];
+    }
+
+}
+
+- (void)updateMoreShowState {
+    if (self.isMoreOpened) {
+        self.moreTitleLabel.text = @"收起";
+        self.moreIconImageView.image = [UIImage imageNamed:@"right_more"];
+    } else {
+        self.moreTitleLabel.text = @"更多";
+        self.moreIconImageView.image = [UIImage imageNamed:@"right_more"];
+    }
+}
 
 - (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList {
+
+    self.walletList = walletList;
     for (BindBtnView *v in self.bindViewList) {
         [v removeFromSuperview];
     }
-    SudNFTWalletModel *temp = walletList[0];
-//    walletList = @[temp, temp, temp, temp];
+    NSArray *showWalletList = walletList;
+    // 小于5个隐藏
+    if (walletList.count < 5) {
+        self.moreView.hidden = YES;
+    } else {
+        self.moreView.hidden = NO;
+        if (!self.isMoreOpened) {
+            // 展示五个
+            showWalletList = [walletList subarrayWithRange:NSMakeRange(0, 5)];
+        }
+    }
+
     [self.bindViewList removeAllObjects];
     BindBtnView *lastView = nil;
     WeakSelf
-    for (int i = 0; i < walletList.count; ++i) {
-        SudNFTWalletModel *m = walletList[i];
+    for (int i = 0; i < showWalletList.count; ++i) {
+        SudNFTWalletModel *m = showWalletList[i];
         BindBtnView *bindBtnView = [[BindBtnView alloc] init];
         bindBtnView.layer.borderColor = UIColor.whiteColor.CGColor;
         bindBtnView.layer.borderWidth = 1;
         [self addSubview:bindBtnView];
         [self.bindViewList addObject:bindBtnView];
-        bindBtnView.clickWalletBlock = ^(SudNFTWalletModel *wallModel){
+        bindBtnView.clickWalletBlock = ^(SudNFTWalletModel *wallModel) {
             if (weakSelf.clickWalletBlock) {
                 weakSelf.clickWalletBlock(wallModel);
             }
@@ -154,8 +140,8 @@
                 make.leading.equalTo(@20);
                 make.trailing.equalTo(@-20);
                 make.height.equalTo(@44);
-                if (i == walletList.count - 1) {
-                    make.bottom.equalTo(@-20);
+                if (i == showWalletList.count - 1) {
+                    make.bottom.equalTo(@(self.moreView.hidden ? -20 : -66));
                 }
             }];
         } else {
@@ -164,8 +150,8 @@
                 make.leading.equalTo(@20);
                 make.trailing.equalTo(@-20);
                 make.height.equalTo(@44);
-                if (i == walletList.count - 1) {
-                    make.bottom.equalTo(@-20);
+                if (i == showWalletList.count - 1) {
+                    make.bottom.equalTo(@(self.moreView.hidden ? -20 : -66));
                 }
             }];
         }
@@ -182,5 +168,32 @@
         _nameLabel.font = UIFONT_MEDIUM(14);
     }
     return _nameLabel;
+}
+
+- (UIView *)moreView {
+    if (!_moreView) {
+        _moreView = [[UIView alloc] init];
+        _moreView.hidden = YES;
+    }
+    return _moreView;
+}
+
+- (UIImageView *)moreIconImageView {
+    if (!_moreIconImageView) {
+        _moreIconImageView = [[UIImageView alloc] init];
+        _moreIconImageView.clipsToBounds = true;
+    }
+    return _moreIconImageView;
+}
+
+- (UILabel *)moreTitleLabel {
+    if (!_moreTitleLabel) {
+        _moreTitleLabel = [[UILabel alloc] init];
+        _moreTitleLabel.text = @"";
+        _moreTitleLabel.numberOfLines = 1;
+        _moreTitleLabel.textColor = HEX_COLOR(@"#ffffff");
+        _moreTitleLabel.font = UIFONT_MEDIUM(14);
+    }
+    return _moreTitleLabel;
 }
 @end

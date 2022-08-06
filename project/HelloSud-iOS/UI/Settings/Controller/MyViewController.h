@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 我的页面
 @interface MyViewController : BaseViewController
-
+- (void)reloadHeadView;
 @end
 
 NS_ASSUME_NONNULL_END
