@@ -3079,7 +3079,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.5;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = Dev_Sud_MGP;
@@ -3123,7 +3123,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.5;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = Dis_Tech_Sud_Mgp_Hello;
