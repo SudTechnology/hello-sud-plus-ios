@@ -8,7 +8,7 @@
 #import "MyNFTListViewController.h"
 #import "MyNFTColCell.h"
 #import "MyNFTDetailViewController.h"
-#import "HSNFTListCellModel.h"
+
 
 @interface MyNFTListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
@@ -72,13 +72,8 @@
     self.collectionView.mj_header = header;
 }
 
-- (void)updateNFTListModel:(SudNFTListModel *)nftListModel {
-
-    for (SudNFTModel *m in nftListModel.list) {
-        HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
-        cellModel.nftModel = m;
-        [self.dataList addObject:cellModel];
-    }
+- (void)updateNFTList:(NSArray<HSNFTListCellModel *> *)list {
+    [self.dataList setArray:list];
     [self resortNFTList];
 
 }

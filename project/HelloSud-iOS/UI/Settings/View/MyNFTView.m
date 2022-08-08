@@ -8,6 +8,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "MySelectEtherChainsView.h"
 #import "MyEthereumChainsSelectPopView.h"
+#import "HSNFTListCellModel.h"
 
 @interface MyNFTView ()
 @property(nonatomic, strong) MySelectEtherChainsView *chainsView;
@@ -18,6 +19,8 @@
 @property(nonatomic, strong) UIImageView *rightMoreImageView;
 @property(nonatomic, strong) UIView *moreTapView;
 @property(nonatomic, strong) SudNFTListModel *nftListModel;
+@property(nonatomic, strong) NSArray<HSNFTListCellModel *> *nftCellModelList;
+
 @property(nonatomic, strong) UILabel *noDataLabel;
 @property(nonatomic, strong) NSArray<SudNFTEthereumChainsModel *> *chains;
 @end
@@ -104,6 +107,14 @@
 
 - (void)updateNFTList:(SudNFTListModel *)nftListModel {
     self.nftListModel = nftListModel;
+
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    for (SudNFTModel *m in nftListModel.list) {
+        HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
+        cellModel.nftModel = m;
+        [arr addObject:cellModel];
+    }
+    self.nftCellModelList = arr;
     WeakSelf
     for (UIImageView *iv in self.iconImageViewList) {
         iv.image = nil;
@@ -178,7 +189,7 @@
     /// 点击更多
     MyNFTListViewController *vc = [[MyNFTListViewController alloc] init];
     vc.title = self.nameLabel.text;
-    [vc updateNFTListModel:self.nftListModel];
+    [vc updateNFTList:self.nftCellModelList];
     [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
 }
 
