@@ -208,7 +208,13 @@
     self.tokenIDLabel.attributedText = [self generate:@"Token ID\n" subtitle:metaDataModel.tokenId subColor:UIColor.blackColor];
     self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:metaDataModel.tokenType subColor:UIColor.blackColor];
     if (metaDataModel.image) {
-        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL){
+
+        SDWebImageContext *context = nil;
+        NSURL *url = [[NSURL alloc] initWithString:metaDataModel.image];
+        if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame){
+            context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(kScreenWidth, kScreenWidth))};
+        }
+        [self.iconImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_nft_icon"] options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             if (error == nil) {
                 weakSelf.wearBtn.hidden = NO;
             }
@@ -241,6 +247,7 @@
 - (UIImageView *)iconImageView {
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc] init];
+        _iconImageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _iconImageView;
 }

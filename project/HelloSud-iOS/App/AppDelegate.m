@@ -17,7 +17,7 @@
 #import <NIMSDK/NIMSDK.h>
 #import <SudMGP/SudNFT.h>
 #import <SudMGP/ISudAPPD.h>
-#import <SDWebImageSVGKitPlugin/SDImageSVGKCoder.h>
+#import "SDImageSVGNativeCoder.h"
 
 @interface AppDelegate () {
 
@@ -200,8 +200,9 @@
     SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
     [[SDImageCodersManager sharedManager] addCoder:webPCoder];
     // register coder, on AppDelegate
-    SDImageSVGKCoder *svgCoder = [SDImageSVGKCoder sharedCoder];
-    [[SDImageCodersManager sharedManager] addCoder:svgCoder];
+
+    SDImageSVGNativeCoder *SVGNativeCoder = [SDImageSVGNativeCoder sharedCoder];
+    [[SDImageCodersManager sharedManager] addCoder:SVGNativeCoder];
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {

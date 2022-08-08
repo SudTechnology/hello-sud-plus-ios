@@ -184,6 +184,8 @@
 		6C46087E286ECC2D005C99EF /* DiscoMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C46087D286ECC2D005C99EF /* DiscoMenuTableViewCell.m */; };
 		6C460881286ECC8A005C99EF /* DiscoMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460880286ECC8A005C99EF /* DiscoMenuModel.m */; };
 		6C460884286EFA22005C99EF /* DiscoMenuRuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460883286EFA21005C99EF /* DiscoMenuRuleView.m */; };
+		6C67317928A1124600232992 /* libSDImageSVGNativeCoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C67317628A1124600232992 /* libSDImageSVGNativeCoder.a */; };
+		6C67317A28A1124600232992 /* libsvgnative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C67317728A1124600232992 /* libsvgnative.a */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
@@ -731,6 +733,9 @@
 		6C460880286ECC8A005C99EF /* DiscoMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuModel.m; sourceTree = "<group>"; };
 		6C460882286EFA21005C99EF /* DiscoMenuRuleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoMenuRuleView.h; sourceTree = "<group>"; };
 		6C460883286EFA21005C99EF /* DiscoMenuRuleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoMenuRuleView.m; sourceTree = "<group>"; };
+		6C67317628A1124600232992 /* libSDImageSVGNativeCoder.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSDImageSVGNativeCoder.a; sourceTree = "<group>"; };
+		6C67317728A1124600232992 /* libsvgnative.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsvgnative.a; sourceTree = "<group>"; };
+		6C67317828A1124600232992 /* SDImageSVGNativeCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageSVGNativeCoder.h; sourceTree = "<group>"; };
 		6C702B69283F8A46005D80B8 /* QSSwitchRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomCell.h; sourceTree = "<group>"; };
 		6C702B6A283F8A46005D80B8 /* QSSwitchRoomModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSSwitchRoomModeView.h; sourceTree = "<group>"; };
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
@@ -974,6 +979,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C67317A28A1124600232992 /* libsvgnative.a in Frameworks */,
+				6C67317928A1124600232992 /* libSDImageSVGNativeCoder.a in Frameworks */,
 				039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1736,6 +1743,7 @@
 		6C192E4A279523B000553034 /* HelloSud-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				6C67313D28A0FE8100232992 /* ThirdParty */,
 				6CB3D146288FEE220037EE88 /* HelloSud-iOS.entitlements */,
 				6CD6E84B27BE30BE00D8F76C /* App */,
 				44018CE027EAC49900FD9D0F /* UI */,
@@ -1928,6 +1936,24 @@
 				BC210AD2E65543CE739F514F /* DiscoInteractiveModel.h */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6C67313D28A0FE8100232992 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				6C67317528A1120400232992 /* SDImageSVGNativeCoder */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		6C67317528A1120400232992 /* SDImageSVGNativeCoder */ = {
+			isa = PBXGroup;
+			children = (
+				6C67317628A1124600232992 /* libSDImageSVGNativeCoder.a */,
+				6C67317728A1124600232992 /* libsvgnative.a */,
+				6C67317828A1124600232992 /* SDImageSVGNativeCoder.h */,
+			);
+			path = SDImageSVGNativeCoder;
 			sourceTree = "<group>";
 		};
 		6C702B68283F80DF005D80B8 /* App */ = {
@@ -3186,6 +3212,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HelloSud-iOS/SVG",
+					"$(PROJECT_DIR)/HelloSud-iOS/ThirdParty/SDImageSVGNativeCoder",
+				);
 				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
@@ -3230,6 +3261,11 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HelloSud-iOS/SVG",
+					"$(PROJECT_DIR)/HelloSud-iOS/ThirdParty/SDImageSVGNativeCoder",
 				);
 				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;

@@ -84,7 +84,13 @@
     self.userNameLabel.text = userInfo.name;
     self.userIdLabel.text = [NSString stringWithFormat:@"%@ %@", NSString.dt_home_user_id, userInfo.userID];
     if (userInfo.icon.length > 0) {
-        [self.headerView sd_setImageWithURL:[NSURL URLWithString:userInfo.icon]];
+        SDWebImageContext *context = nil;
+        NSURL *url = [[NSURL alloc] initWithString:userInfo.icon];
+        if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame){
+            context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(200, 200))};
+        }
+        [self.headerView  sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        }];
     }
 
     BOOL isBindWallet = AppService.shared.login.walletAddress.length > 0;

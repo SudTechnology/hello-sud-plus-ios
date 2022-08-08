@@ -78,15 +78,17 @@
     WeakSelf
     [self showLoadAnimate];
     [m getMetaData:^(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel) {
-        DDLogDebug(@"cell:%@, model:%@, meta name:%@, image:%@", weakSelf, weakSelf.model, metaDataModel.name, metaDataModel.image);
         if (weakSelf.model != model) {
             return;
         }
         weakSelf.nameLabel.text = metaDataModel.name;
         if (metaDataModel.image) {
-            [weakSelf.gameImageView sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image]
-                                      placeholderImage:[UIImage imageNamed:@"default_nft_icon"]
-                                             completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
+            SDWebImageContext *context = nil;
+            NSURL *url = [[NSURL alloc] initWithString:metaDataModel.image];
+            if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame){
+                context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(200, 200))};
+            }
+            [weakSelf.gameImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_nft_icon"] options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 [weakSelf closeLoadAnimate];
             }];
         } else {
