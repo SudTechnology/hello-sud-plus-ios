@@ -7,17 +7,17 @@
 
 typedef void(^META_DATA_BLOCK)(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel);
 
-@interface HSNFTListCellModel()
-@property (nonatomic, assign)BOOL isLoading;
-@property (nonatomic, strong)SudNFTMetaDataModel *metaDataModel;
-@property (nonatomic, strong)NSMutableArray<META_DATA_BLOCK> *arrBlock;
+@interface HSNFTListCellModel ()
+@property(nonatomic, assign) BOOL isLoading;
+@property(nonatomic, strong) SudNFTMetaDataModel *metaDataModel;
+@property(nonatomic, strong) NSMutableArray<META_DATA_BLOCK> *arrBlock;
 @end
 
 @implementation HSNFTListCellModel {
 
 }
 
-- (void)getMetaData:(void(^)(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel))completed {
+- (void)getMetaData:(void (^)(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel))completed {
     if (self.metaDataModel) {
         if (completed) {
             completed(self, self.metaDataModel);
@@ -30,7 +30,11 @@ typedef void(^META_DATA_BLOCK)(HSNFTListCellModel *model, SudNFTMetaDataModel *m
     }
     self.isLoading = YES;
     WeakSelf
-    [SudNFT getNFTMetadata:self.nftModel.contractAddress tokenId:self.nftModel.tokenId chainType:HSAppPreferences.shared.selectedEthereumChainType listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
+    SudNFTGetNFTMetadataParamModel *paramModel = SudNFTGetNFTMetadataParamModel.new;
+    paramModel.contractAddress = self.nftModel.contractAddress;
+    paramModel.tokenId = self.nftModel.tokenId;
+    paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
+    [SudNFT getNFTMetadata:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
         weakSelf.isLoading = YES;
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
@@ -50,7 +54,7 @@ typedef void(^META_DATA_BLOCK)(HSNFTListCellModel *model, SudNFTMetaDataModel *m
 
 - (NSMutableArray *)arrBlock {
     if (!_arrBlock) {
-        _arrBlock = [[NSMutableArray alloc]init];
+        _arrBlock = [[NSMutableArray alloc] init];
     }
     return _arrBlock;
 }

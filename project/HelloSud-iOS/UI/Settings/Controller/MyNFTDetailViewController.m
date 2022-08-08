@@ -45,18 +45,19 @@
 
     WeakSelf
     sender.enabled = NO;
-    [SudNFT generateNFTDetailToken:self.cellModel.nftModel.contractAddress
-                           tokenId:self.cellModel.nftModel.tokenId
-                         chainType:HSAppPreferences.shared.selectedEthereumChainType
-                          listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenerateDetailTokenModel *generateDetailTokenModel) {
-                              if (errCode != 0) {
-                                  NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
-                                  [ToastUtil show:msg];
-                                  sender.enabled = YES;
-                                  return;
-                              }
-                              [weakSelf handleWearDetailToken:generateDetailTokenModel.nftDetailsToken];
-                          }];
+    SudNFTGetNFTMetadataParamModel *paramModel = SudNFTGetNFTMetadataParamModel.new;
+    paramModel.contractAddress = self.cellModel.nftModel.contractAddress;
+    paramModel.tokenId = self.cellModel.nftModel.tokenId;
+    paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
+    [SudNFT genNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenerateDetailTokenModel *generateDetailTokenModel) {
+        if (errCode != 0) {
+            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            [ToastUtil show:msg];
+            sender.enabled = YES;
+            return;
+        }
+        [weakSelf handleWearDetailToken:generateDetailTokenModel.nftDetailsToken];
+    }];
 }
 
 - (void)onCopyBtnClick:(id)sender {
@@ -211,10 +212,10 @@
 
         SDWebImageContext *context = nil;
         NSURL *url = [[NSURL alloc] initWithString:metaDataModel.image];
-        if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame){
+        if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame) {
             context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(kScreenWidth, kScreenWidth))};
         }
-        [self.iconImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_nft_icon"] options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        [self.iconImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_nft_icon"] options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
             if (error == nil) {
                 weakSelf.wearBtn.hidden = NO;
             }

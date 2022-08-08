@@ -36,16 +36,20 @@
 }
 
 - (void)configSudNFT {
+    BOOL isTestEnv = NO;
 #if DEBUG
     // 测试环境
-    [ISudAPPD e:2];
+    [ISudNFTD e:2];
+    isTestEnv = YES;
 #endif
-//    [SudNFT initNFTWithAppId:@"1461564080052506636" appKey:@"03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc" userId:@"123" universalLink:@"https://fat-links.sud.tech"  listener:self];
-    [SudNFT initNFTWithAppId:@"1486637108889305089"
-                      appKey:@"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR"
-                      userId:AppService.shared.loginUserID
-               universalLink:@"https://fat-links.sud.tech"
-                    listener:self];
+    SudInitNFTParamModel *paramModel = SudInitNFTParamModel.new;
+    paramModel.appId = @"1486637108889305089";
+    paramModel.appKey = @"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR";
+    paramModel.userId = AppService.shared.loginUserID;
+    paramModel.universalLink = @"https://fat-links.sud.tech";
+    paramModel.isTestEnv = isTestEnv;
+    [SudNFT initNFT:paramModel
+           listener:self];
 }
 
 - (BOOL)dtIsHiddenNavigationBar {
@@ -91,7 +95,11 @@
         return;
     }
     // 拉取NFT列表
-    [SudNFT getNFTListWithWalletAddress:AppService.shared.login.walletAddress chainType:HSAppPreferences.shared.selectedEthereumChainType pageKey:nil listener:^(NSInteger errCode, NSString *errMsg, SudNFTListModel *nftListModel) {
+    SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
+    paramModel.walletAddress = AppService.shared.login.walletAddress;
+    paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
+    paramModel.pageKey = nil;
+    [SudNFT getNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTListModel *nftListModel) {
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];
@@ -128,15 +136,15 @@
 
 - (void)reloadHeadView {
     CGFloat w = kScreenWidth - 32;
-    
+
     CGSize size = [self.myHeaderView systemLayoutSizeFittingSize:CGSizeMake(w, 10000)];
     CGRect targetFrame = CGRectMake(0, 0, w, size.height);
     DDLogDebug(@"reloadHeadView size:%@", [NSValue valueWithCGSize:size]);
     self.myHeaderView.frame = targetFrame;
     self.tableView.tableHeaderView = self.myHeaderView;
     [self.myHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.leading.top.equalTo(@0);
-       make.width.equalTo(@(w));
+        make.leading.top.equalTo(@0);
+        make.width.equalTo(@(w));
     }];
 
 }
@@ -162,7 +170,9 @@
     WeakSelf
     self.myHeaderView.clickWalletBlock = ^(SudNFTWalletModel *m) {
 
-        [SudNFT bindWallet:m.type listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindWalletInfoModel *walletInfoModel) {
+        SudNFTBindWalletParamModel *paramModel = SudNFTBindWalletParamModel.new;
+        paramModel.walletType = m.type;
+        [SudNFT bindWallet:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindWalletInfoModel *walletInfoModel) {
             if (errCode != 0) {
                 NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
                 DDLogError(@"bind wallet err:%@", msg);
@@ -190,7 +200,7 @@
                 [weakSelf reloadHeadView];
                 [weakSelf checkWalletInfo];
                 [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
-            } fail:nil];
+            }                  fail:nil];
         }          onCloseCallback:nil];
     };
 
@@ -218,7 +228,7 @@
     [attrTitle appendAttributedString:attrStr_0];
     [DTAlertView showAttrTextAlert:attrTitle sureText:@"确定" cancelText:nil rootView:nil onSureCallback:^{
         [DTAlertView close];
-    } onCloseCallback:nil];
+    }              onCloseCallback:nil];
     return;
 }
 

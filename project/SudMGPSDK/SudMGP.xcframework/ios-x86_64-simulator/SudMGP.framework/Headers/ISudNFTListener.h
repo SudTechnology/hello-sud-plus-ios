@@ -30,15 +30,15 @@
 
 typedef void(^ISudNFTCommonListener)(NSInteger errCode, NSString *_Nullable errMsg);
 
-typedef void(^ISudNFTGetWalletListListener)(NSInteger errCode, NSString *_Nullable errMsg, NSArray<SudNFTWalletModel *> *_Nullable walletList);
+typedef void(^ISudNFTListenerGetWalletList)(NSInteger errCode, NSString *_Nullable errMsg, NSArray<SudNFTWalletModel *> *_Nullable walletList);
 
-typedef void(^ISudNFTGeMetaDataListener)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTMetaDataModel *_Nullable metaDataModel);
+typedef void(^ISudNFTListenerGeMetadata)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTMetaDataModel *_Nullable metaDataModel);
 
-typedef void(^ISudNFTGeNFTListListener)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTListModel *_Nullable nftListModel);
+typedef void(^ISudNFTListenerGeNFTList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTListModel *_Nullable nftListModel);
 
-typedef void(^ISudNFTBindWalletListener)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindWalletInfoModel *_Nullable walletInfoModel);
+typedef void(^ISudNFTListenerBindWallet)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindWalletInfoModel *_Nullable walletInfoModel);
 
-typedef void(^ISudNFTGenerateDetailTokenListener)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGenerateDetailTokenModel *_Nullable generateDetailTokenModel);
+typedef void(^ISudNFTListenerGenNFTCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGenerateDetailTokenModel *_Nullable generateDetailTokenModel);
 
 
 /// NFT模块监听者

@@ -113,7 +113,11 @@
         if (nftListModel.list.count > i) {
             SudNFTModel *nftModel = nftListModel.list[i];
             [self showLoadAnimate:iv];
-            [SudNFT getNFTMetadata:nftModel.contractAddress tokenId:nftModel.tokenId chainType:HSAppPreferences.shared.selectedEthereumChainType listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
+            SudNFTGetNFTMetadataParamModel *paramModel = SudNFTGetNFTMetadataParamModel.new;
+            paramModel.contractAddress = nftModel.contractAddress;
+            paramModel.tokenId = nftModel.tokenId;
+            paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
+            [SudNFT getNFTMetadata:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
 
                 if (errCode != 0) {
                     [weakSelf closeLoadAnimate:iv];

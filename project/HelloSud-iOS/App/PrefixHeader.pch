@@ -46,6 +46,7 @@
 @import MarqueeLabel;
 
 #import <SudMGP/SudNFT.h>
+#import <SudMGP/ISudNFTD.h>
 #import "Lottie.h"
 
 /// Comon

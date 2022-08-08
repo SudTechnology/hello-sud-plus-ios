@@ -29,6 +29,7 @@
 #import "SudLoadMGMode.h"
 #import "SudLoadMGParamModel.h"
 #import "SudMGP.h"
+#import "ISudNFTD.h"
 #import "ISudNFTListener.h"
 #import "SudNFT.h"
 #import "SudNFTModels.h"

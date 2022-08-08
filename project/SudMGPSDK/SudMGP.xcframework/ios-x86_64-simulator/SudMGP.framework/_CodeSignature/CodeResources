@@ -72,9 +72,13 @@
 		<data>
 		jTVkYtMibuUnks31dwc+LW0ScQE=
 		</data>
+		<key>Headers/ISudNFTD.h</key>
+		<data>
+		wPx6/K4ttwfYjlYxt/hnDA5l+uA=
+		</data>
 		<key>Headers/ISudNFTListener.h</key>
 		<data>
-		zwAWsgZCbQL4W2vFTc0K0BLvUhU=
+		XNbztfdobKRW9iRBAHFpRODiM0c=
 		</data>
 		<key>Headers/RTSSResult.h</key>
 		<data>
@@ -102,7 +106,7 @@
 		</data>
 		<key>Headers/SudMGP-umbrella.h</key>
 		<data>
-		5DlISTNy/oWEinBGzMrb93MoHX8=
+		dC6RrkMQGH077mcjTBaFsD1jm7U=
 		</data>
 		<key>Headers/SudMGP.h</key>
 		<data>
@@ -110,11 +114,11 @@
 		</data>
 		<key>Headers/SudNFT.h</key>
 		<data>
-		wplC+bJFfW+1biKZyFrk7HFCAiw=
+		qahTdqfxFNmYhss+lcKGPfMpvi0=
 		</data>
 		<key>Headers/SudNFTModels.h</key>
 		<data>
-		r6rf6p94KIdkyDu6bLHa11bfKRE=
+		lQhmFHNjq6pGQEwGMxgNZzoJe0U=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -358,15 +362,26 @@
 			iCdKI3ofxZf+tL///BgQljkcPTaFTTY5fU0ptZqIceg=
 			</data>
 		</dict>
+		<key>Headers/ISudNFTD.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			wPx6/K4ttwfYjlYxt/hnDA5l+uA=
+			</data>
+			<key>hash2</key>
+			<data>
+			PtFnfGALDiqXUdJijwHIa8WIxx58JOuyqIR+VFBhDsE=
+			</data>
+		</dict>
 		<key>Headers/ISudNFTListener.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zwAWsgZCbQL4W2vFTc0K0BLvUhU=
+			XNbztfdobKRW9iRBAHFpRODiM0c=
 			</data>
 			<key>hash2</key>
 			<data>
-			I3HF9UP8F+YJ14FMgA4Qvfc837+RIIpFSxLLdz8VP1w=
+			vZSBlrHFshE04BtHxbb0cwlJABBXRyawkCBM0MoIU/E=
 			</data>
 		</dict>
 		<key>Headers/RTSSResult.h</key>
@@ -439,11 +454,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5DlISTNy/oWEinBGzMrb93MoHX8=
+			dC6RrkMQGH077mcjTBaFsD1jm7U=
 			</data>
 			<key>hash2</key>
 			<data>
-			uoiUuwQKbgCFhalml/5tRgcbKhOIOXsg4tpjhVS+JdQ=
+			llKcvMDbbhiyD6o9v/s9SXRxL3WwJONh0tSvakcUmI0=
 			</data>
 		</dict>
 		<key>Headers/SudMGP.h</key>
@@ -461,22 +476,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wplC+bJFfW+1biKZyFrk7HFCAiw=
+			qahTdqfxFNmYhss+lcKGPfMpvi0=
 			</data>
 			<key>hash2</key>
 			<data>
-			2T0ERhozov2RknxVAMWQeSjqwUeaAJ+hdbEB7lbbeC4=
+			M31wPINnk+3bMo+MN6GTrxJKLHnSkeqjQStiuHPIR10=
 			</data>
 		</dict>
 		<key>Headers/SudNFTModels.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			r6rf6p94KIdkyDu6bLHa11bfKRE=
+			lQhmFHNjq6pGQEwGMxgNZzoJe0U=
 			</data>
 			<key>hash2</key>
 			<data>
-			r+s8fGfnO8w+ZU9dD+CIMdndDF9R75EHvnTqQquupH0=
+			9x0oHrhg38yGi8jf3BKU1x8IBWvOcoBP19YFylynt9I=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

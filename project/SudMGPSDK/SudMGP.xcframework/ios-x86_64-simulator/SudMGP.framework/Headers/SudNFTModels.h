@@ -103,4 +103,53 @@ typedef NS_ENUM(NSInteger, SudENFTEthereumChainsType) {
 @property(nonatomic, copy) NSString *nftDetailsToken;
 @end
 
+/// 初始化NFT参数model
+@interface SudInitNFTParamModel: NSObject
+/// 应用ID
+@property (nonatomic, copy, nonnull)NSString *appId;
+/// 应用key
+@property (nonatomic, copy, nonnull)NSString *appKey;
+/// 用户ID
+@property (nonatomic, copy, nonnull)NSString *userId;
+/// 应用universalLink; 前面必须完整https,后面不需要/ 如：https://links.example.com
+@property (nonatomic, copy, nonnull)NSString *universalLink;
+/// 是否测试环境 默认 NO, YES为测试环境，NO为正式环境
+@property (nonatomic, assign)BOOL isTestEnv;
+@end
+
+/// 绑定钱包参数model
+@interface SudNFTBindWalletParamModel: NSObject
+/// 钱包类型
+@property (nonatomic, assign)NSInteger walletType;
+@end
+
+/// 生成NFT使用凭证参数model
+@interface SudNFTCredentialsTokenParamModel:NSObject
+/// 合约地址
+@property (nonatomic, copy, nonnull)NSString *contractAddress;
+/// NFT tokenId
+@property (nonatomic, copy, nonnull)NSString *tokenId;
+/// 链网类型
+@property (nonatomic, assign)NSInteger chainType;
+@end
+
+/// 获取NFT列表参数model
+@interface SudNFTGetNFTListParamModel: NSObject
+/// 钱包地址
+@property (nonatomic, copy, nonnull)NSString *walletAddress;
+/// 分页key,首页可不传,下一页时，请求上一页返回pageKey
+@property (nonatomic, copy, nullable)NSString *pageKey;
+/// 链网类型
+@property (nonatomic, assign)NSInteger chainType;
+@end
+
+/// 获取NFT元数据参数model
+@interface SudNFTGetNFTMetadataParamModel: NSObject
+/// 合约地址
+@property (nonatomic, copy, nonnull)NSString *contractAddress;
+/// NFT tokenId
+@property (nonatomic, copy, nonnull)NSString *tokenId;
+/// 链网类型
+@property (nonatomic, assign)NSInteger chainType;
+@end
 NS_ASSUME_NONNULL_END
