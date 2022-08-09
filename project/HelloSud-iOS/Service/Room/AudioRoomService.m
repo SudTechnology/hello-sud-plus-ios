@@ -175,20 +175,24 @@
         SwitchMicModel *model = (SwitchMicModel *) resp;
         if (handleType == 0) {
             RoomCmdUpMicModel *upMicModel = [RoomCmdUpMicModel makeUpMicMsgWithMicIndex:micIndex];
-            weakSelf.micIndex = micIndex;
-            upMicModel.roleType = self.roleType;
+            
             upMicModel.streamID = model.streamId;
             if (proxyUser) {
                 upMicModel.roleType = 0;
                 upMicModel.sendUser = proxyUser;
+            } else {
+                upMicModel.roleType = self.roleType;
+                weakSelf.micIndex = micIndex;
             }
             [weakSelf.currentRoomVC sendMsg:upMicModel isAddToShow:NO finished:nil];
         } else {
-            weakSelf.micIndex = -1;
+            
             RoomCmdUpMicModel *downMicModel = [RoomCmdUpMicModel makeDownMicMsgWithMicIndex:micIndex];
             downMicModel.streamID = nil;
             if (proxyUser) {
                 downMicModel.sendUser = proxyUser;
+            }else {
+                weakSelf.micIndex = -1;
             }
             [weakSelf.currentRoomVC sendMsg:downMicModel isAddToShow:NO finished:nil];
         }
@@ -240,6 +244,19 @@
             success();
         }
     } failure:fail];
+}
+
+/// 拉取机器人
+/// @param finished finished
+/// @param failure failure
++ (void)reqRobotListWithFinished:(void (^)(NSArray<RobotInfoModel *> *robotList))finished failure:(void (^)(NSError *error))failure {
+    NSDictionary *dicParam = @{@"count": @(30)};
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"robot/list/v1") param:dicParam respClass:RespDiscoRobotListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (finished) {
+            RespDiscoRobotListModel *m = (RespDiscoRobotListModel *) resp;
+            finished(m.robotList);
+        }
+    }                         failure:failure];
 }
 
 #pragma mark - Custom

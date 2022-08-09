@@ -29,7 +29,7 @@
 
 /// 是否设置为准备状态
 /// @param isReady  true 准备，false 取消准备
-- (void)notifyAppComonSetReady:(BOOL)isReady {
+- (void)notifyAppCommonSelfReady:(BOOL)isReady {
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isReady), @"isReady", nil];
     [self notifyStateChange:APP_COMMON_SELF_READY dataJson:dic.mj_JSONString];
 }
@@ -173,7 +173,7 @@
 /// @param dataJson 需传递的json
 - (void)notifyStateChange:(NSString *)state dataJson:(NSString *)dataJson {
     [self.iSudFSTAPP notifyStateChange:state dataJson:dataJson listener:^(int retCode, const NSString *retMsg, const NSString *dataJson) {
-        NSLog(@"ISudFSMMG:notifyStateChange:retCode=%@ retMsg=%@ dataJson=%@", @(retCode), retMsg, dataJson);
+        NSLog(@"ISudFSMMG:notifyStateChange:statte=%@ retCode=%@ retMsg=%@ dataJson=%@", state, @(retCode), retMsg, dataJson);
     }];
 }
 

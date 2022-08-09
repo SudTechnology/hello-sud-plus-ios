@@ -104,4 +104,11 @@
     }
     [item loadWebp:result];
 }
+
+- (NSMutableDictionary *)cacheMap {
+    if (!_cacheMap) {
+        _cacheMap = [[NSMutableDictionary alloc]init];
+    }
+    return _cacheMap;
+}
 @end

@@ -426,6 +426,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_room_disco_category_one;
 + (NSString *)dt_room_disco_category_twn;
 + (NSString *)dt_room_disco_dance_name;
++ (NSString *)dt_room_kick_out_room;
 
 
 @end

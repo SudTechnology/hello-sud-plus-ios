@@ -160,7 +160,6 @@
                 NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%d", suitId]];
                 NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
                 [arr addObject:model.gameList[i]];
-                [weakSelf checkCacheWebp:model.gameList[i]];
 
             }
         }
@@ -208,12 +207,6 @@
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
     [self.searchHeaderView dtUpdateUI];
-}
-
-- (void)checkCacheWebp:(HSGameItem *)item {
-    if ([item.homeGamePic hasSuffix:@"webp"]) {
-        [WebpImageCacheService.shared loadWebp:item.homeGamePic result:nil];
-    }
 }
 
 - (void)reqGuessGameList:(HSSceneModel *)guessModel {
@@ -422,6 +415,7 @@
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         [_collectionView registerClass:[GameItemCollectionViewCell class] forCellWithReuseIdentifier:@"GameItemCollectionViewCell"];
         [_collectionView registerClass:[GameItemFullCollectionViewCell class] forCellWithReuseIdentifier:@"GameItemFullCollectionViewCell"];
 
@@ -430,7 +424,6 @@
         [_collectionView registerClass:[HomeFooterReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HomeFooterReusableView"];
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         v.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-        //        _collectionView.backgroundView = v;
     }
     return _collectionView;
 }

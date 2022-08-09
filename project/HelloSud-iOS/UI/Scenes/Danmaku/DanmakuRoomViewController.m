@@ -274,7 +274,7 @@
     WeakSelf
     if (!self.landscapeTipTimer) {
         self.landscapeTipTimer = [DTTimer timerWithTimeCountdown:5 progressBlock:nil endBlock:^(DTTimer *timer) {
-            [weakSelf checkIfNeedToShowLandscapeTip];
+            [weakSelf checkIfNeedToShowLandscapeAlertView];
         }];
     }
 }
@@ -285,7 +285,7 @@
 }
 
 /// 检测是否展示横屏提示
-- (void)checkIfNeedToShowLandscapeTip {
+- (void)checkIfNeedToShowLandscapeAlertView {
     if (AppService.shared.alreadyShowLandscapePopAlert) {
         return;
     }
@@ -335,11 +335,16 @@
     return self.enterModel.roleType == 1;
 }
 
+/// 是否显示添加通用机器人按钮
+- (BOOL)isShowAddRobotBtn {
+    return NO;
+}
+
 - (void)onWillSendMsg:(RoomBaseCMDModel *)msg shouldSend:(void (^)(BOOL shouldSend))shouldSend {
     if ([msg isKindOfClass:RoomCmdChatTextModel.class]) {
         RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) msg;
         // 发送弹幕
-        [DanmakuRoomService reqSendBarrage:self.roomID content:m.content finished:^{
+        [DanmakuRoomService reqSendBarrage:self.roomID content:m.content gameId:self.gameId finished:^{
             DDLogDebug(@"发送弹幕成功");
         }                          failure:^(NSError *error) {
 
@@ -391,7 +396,7 @@
             make.height.equalTo(@136);
             make.bottom.equalTo(@0);
         }];
-        [self checkIfNeedToShowLandscapeGuide];
+        [self checkIfNeedToShowLandscapeBubbleView];
         [self beginHiddenNaviCountdown];
         [self stopCheckLandscapeTimer];
         [self.quickSendView showOpen:YES];
@@ -448,7 +453,7 @@
 }
 
 /// 检查是否需要横屏引导
-- (void)checkIfNeedToShowLandscapeGuide {
+- (void)checkIfNeedToShowLandscapeBubbleView {
 
     WeakSelf
     if (AppService.shared.alreadyShowLandscapeBubbleTip) {
@@ -466,8 +471,12 @@
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.guideTipView show:^{
-        weakSelf.guideTipBgView.hidden = NO;
-        weakSelf.isShowingLandscapeGuide = YES;
+        if (weakSelf.quickSendView.isOpen) {
+            weakSelf.guideTipBgView.hidden = NO;
+            weakSelf.isShowingLandscapeGuide = YES;
+        } else {
+            [weakSelf closeGuideTipView];
+        }
     }];
 }
 

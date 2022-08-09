@@ -30,7 +30,7 @@
     
     [self.gameApiNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
-        make.bottom.mas_equalTo(-64 - kAppSafeBottom);
+        make.bottom.equalTo(self.robotView.mas_top).offset(-12);
         make.size.mas_equalTo(CGSizeMake(48, 48));
     }];
     [self.gameApiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -52,10 +52,10 @@
                 [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
                 break;
             case GameAPITypeSelfReady: // 准备
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:YES];
+                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
                 break;
             case GameAPITypeSelfReadyCancel: // 取消准备
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSetReady:NO];
+                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:NO];
                 break;
             case GameAPITypeSelfInOut: // 退出游戏
                 [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];

@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)NSString *avatar;
 @property(nonatomic, strong)NSString *nickname;
 @property(nonatomic, strong)NSString *gender;
+/// 是否是机器人
+@property (nonatomic, assign)BOOL ai;
 @end
 
 /// 响应用户信息model

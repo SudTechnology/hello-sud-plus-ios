@@ -492,19 +492,6 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
 
 #pragma mark restful api
 
-/// 拉取机器人
-/// @param finished finished
-/// @param failure failure
-+ (void)reqRobotListWithFinished:(void (^)(NSArray<RotbotInfoModel *> *robotList))finished failure:(void (^)(NSError *error))failure {
-    NSDictionary *dicParam = @{@"count": @(30)};
-    [HSHttpService postRequestWithURL:kINTERACTURL(@"robot/list/v1") param:dicParam respClass:RespDiscoRobotListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
-        if (finished) {
-            RespDiscoRobotListModel *m = (RespDiscoRobotListModel *) resp;
-            finished(m.robotList);
-        }
-    }                         failure:failure];
-}
-
 /// 上下主播位
 /// @param up 上下
 /// @param roomId roomId

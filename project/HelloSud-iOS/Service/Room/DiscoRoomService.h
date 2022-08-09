@@ -171,11 +171,6 @@ typedef NS_ENUM(NSInteger, DiscoActionType) {
 
 #pragma mark restful api
 
-/// 拉取机器人
-/// @param finished finished
-/// @param failure failure
-+ (void)reqRobotListWithFinished:(void (^)(NSArray<RotbotInfoModel *> *robotList))finished failure:(void (^)(NSError *error))failure;
-
 /// 上下主播位
 /// @param up 上下
 /// @param roomId roomId

@@ -49,7 +49,7 @@
 - (UIImageView *)headerImgView {
     if (!_headerImgView) {
         _headerImgView = [[UIImageView alloc] init];
-        _headerImgView.layer.cornerRadius = 32/2;
+        [_headerImgView dt_cornerRadius:16];
         _headerImgView.backgroundColor = UIColor.lightGrayColor;
         _headerImgView.layer.borderWidth = 1;
     }
