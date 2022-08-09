@@ -1364,12 +1364,21 @@
     if (robotList.count <= 3) {
         [randList setArray:robotList];
     } else {
-        NSInteger count = robotList.count;
-        [randList addObject:robotList[(NSUInteger) (arc4random() % count)]];
-        [randList addObject:robotList[(NSUInteger) (arc4random() % count)]];
-        [randList addObject:robotList[(NSUInteger) (arc4random() % count)]];
-    }
+        NSMutableArray *waitRandList = [[NSMutableArray alloc] initWithArray:robotList];
+        NSInteger count = waitRandList.count;
+        NSUInteger index = (NSUInteger) (arc4random() % count);
+        [randList addObject:waitRandList[index]];
 
+        [waitRandList removeObjectAtIndex:index];
+        count = waitRandList.count;
+        index = (NSUInteger) (arc4random() % count);
+        [randList addObject:waitRandList[index]];
+
+        [waitRandList removeObjectAtIndex:index];
+        count = waitRandList.count;
+        index = (NSUInteger) (arc4random() % count);
+        [randList addObject:waitRandList[index]];
+    }
 
     for (int i = 0; i < randList.count; ++i) {
         RobotInfoModel *robotModel = randList[i];
