@@ -341,11 +341,15 @@
 
 - (void)dtUpdateUI {
     [self.naviView dtUpdateUI];
+    [self updateTotalGameUserCount];
+    [self setupGameRoomContent];
+    self.robotView.hidden = self.isShowAddRobotBtn ? NO : YES;
+}
+
+- (void)updateTotalGameUserCount {
     if (self.gameId > 0) {
         self.totalGameUserCount = [AppService.shared getTotalGameCountWithGameID:self.gameId];
     }
-    [self setupGameRoomContent];
-    self.robotView.hidden = self.isShowAddRobotBtn ? NO : YES;
 }
 
 /// 退出房间
@@ -920,6 +924,7 @@
     }
     BOOL showTip = self.gameId == DIGITAL_BOMB || self.gameId == YOU_DRAW_AND_I_GUESS || self.gameId == I_GUESS_YOU_SAID;
     [self.asrTipLabel setHidden:showTip ? NO : YES];
+    [self updateTotalGameUserCount];
 }
 
 - (void)handleMicList:(NSArray<HSRoomMicList *> *)micList {
