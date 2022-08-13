@@ -234,7 +234,7 @@
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
-        _collectionView.showsHorizontalScrollIndicator = YES;
+        _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[DiscoInteractiveColCell class] forCellWithReuseIdentifier:@"DiscoInteractiveColCell"];
     }
     return _collectionView;
