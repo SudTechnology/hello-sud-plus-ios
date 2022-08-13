@@ -1,0 +1,6 @@
+framework module SudNFT {
+  umbrella header "SudNFT-umbrella.h"
+
+  export *
+  module * { export * }
+}

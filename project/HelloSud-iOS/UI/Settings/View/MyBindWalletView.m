@@ -102,7 +102,7 @@
     NSArray *showWalletList = walletList;
     NSInteger limitCount = 4;
     // 小于limitCount个隐藏
-    if (walletList.count < limitCount) {
+    if (walletList.count <= limitCount) {
         self.moreView.hidden = YES;
     } else {
         self.moreView.hidden = NO;

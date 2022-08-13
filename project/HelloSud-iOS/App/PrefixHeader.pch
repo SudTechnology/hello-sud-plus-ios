@@ -45,8 +45,8 @@
 //@import CocoaLumberjack;
 @import MarqueeLabel;
 
-#import <SudMGP/SudNFT.h>
-#import <SudMGP/ISudNFTD.h>
+#import <SudNFT/SudNFT.h>
+#import <SudNFT/ISudNFTD.h>
 #import "Lottie.h"
 
 /// Comon
