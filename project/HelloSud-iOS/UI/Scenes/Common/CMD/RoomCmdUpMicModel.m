@@ -44,6 +44,9 @@
     NSString *name = self.sendUser.name;
     NSString *content = self.cmd == CMD_UP_MIC_NOTIFY ? [NSString stringWithFormat:NSString.dt_up_mic, self.micIndex]  : NSString.dt_down_mic;
     UIImage *iconImage = self.sendUser.icon.length > 0 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sendUser.icon]]] : [UIImage new];
+    if (iconImage) {
+        iconImage = [iconImage dt_circleImage];
+    }
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：", name]];
     attrName.yy_lineSpacing = 6;
