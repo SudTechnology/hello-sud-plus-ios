@@ -94,6 +94,13 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
     [self dtUpdateUI];
 }
 
+- (void)roomGameDidChanged:(NSInteger)gameID {
+    [super roomGameDidChanged:gameID];
+    if (gameID == 0) {
+        self.isShowEndGame = NO;
+    }
+}
+
 /// 处理点单状态改变
 - (void)handleOrderStateTypeChange {
     self.isGameForbiddenVoice = NO;
