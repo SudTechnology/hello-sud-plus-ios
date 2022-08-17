@@ -94,7 +94,6 @@
         } else {
             [weakSelf closeLoadAnimate];
             DDLogDebug(@"no image cell:%@, model:%@, meta:%@", weakSelf, weakSelf.model, metaDataModel);
-            weakSelf.nameLabel.text = @"未拉取到图片";
             weakSelf.gameImageView.image = [UIImage imageNamed:@"default_nft_icon"];
         }
     }];
