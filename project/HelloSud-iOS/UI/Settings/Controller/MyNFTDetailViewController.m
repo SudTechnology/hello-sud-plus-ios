@@ -152,6 +152,9 @@
         make.top.equalTo(self.nameLabel.mas_bottom).offset(28);
     }];
     [self.copyBtn setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.copyBtn setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.contractAddressLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.contractAddressLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.copyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
         make.width.greaterThanOrEqualTo(@0);
@@ -160,13 +163,13 @@
     }];
     [self.tokenIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
-        make.trailing.equalTo(self.copyBtn.mas_leading);
+        make.trailing.equalTo(@-16);
         make.height.greaterThanOrEqualTo(@0);
         make.top.equalTo(self.contractAddressLabel.mas_bottom).offset(14);
     }];
     [self.tokenStandLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
-        make.trailing.equalTo(self.copyBtn.mas_leading);
+        make.trailing.equalTo(@-16);
         make.height.greaterThanOrEqualTo(@0);
         make.top.equalTo(self.tokenIDLabel.mas_bottom).offset(14);
     }];
