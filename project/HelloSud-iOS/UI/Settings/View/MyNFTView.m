@@ -108,7 +108,7 @@
 - (void)updateNFTList:(SudNFTListModel *)nftListModel {
     self.nftListModel = nftListModel;
 
-    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (SudNFTModel *m in nftListModel.list) {
         HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
         cellModel.nftModel = m;
@@ -128,9 +128,11 @@
             if (nftModel.coverURL) {
                 __weak UIImageView *weakIV = iv;
                 [iv sd_setImageWithURL:[[NSURL alloc] initWithString:nftModel.coverURL]
-                      placeholderImage:[UIImage imageNamed:@"default_nft_icon"]
+                      placeholderImage:nil
                              completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
-                                 [weakSelf closeLoadAnimate:weakIV];
+                                 if (!error) {
+                                     [weakSelf closeLoadAnimate:weakIV];
+                                 }
                              }];
             } else {
                 [weakSelf closeLoadAnimate:iv];
@@ -165,6 +167,19 @@
     [self.moreTapView addGestureRecognizer:tapMore];
     UITapGestureRecognizer *tapChainsView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapChainsView:)];
     [self.chainsView addGestureRecognizer:tapChainsView];
+    WeakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf resetNFTState];
+    }];
+}
+
+- (void)resetNFTState {
+    self.nftCountLabel.text = @"0";
+    self.noDataLabel.hidden = YES;
+    for (UIImageView *iv in self.iconImageViewList) {
+        iv.image = nil;
+        [self showLoadAnimate:iv];
+    }
 }
 
 - (void)onTapChainsView:(id)tap {

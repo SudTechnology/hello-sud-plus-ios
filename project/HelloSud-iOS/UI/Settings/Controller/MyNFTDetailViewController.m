@@ -223,15 +223,49 @@
         if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame) {
             context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(kScreenWidth, kScreenWidth))};
         }
-        [self.iconImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_nft_icon"] options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
+        [self showLoadAnimate];
+        [self.iconImageView sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
             if (error == nil) {
                 weakSelf.wearBtn.hidden = NO;
+                [weakSelf closeLoadAnimate];
             }
         }];
+    } else {
+        self.iconImageView.image = [UIImage imageNamed:@"default_nft_icon"];
     }
     [self updateWearBtn];
 }
 
+- (void)showLoadAnimate {
+
+    [self closeLoadAnimate];
+    CGColorRef whiteBegin = HEX_COLOR_A(@"#000000", 0.05).CGColor;
+    CGColorRef whiteEnd = HEX_COLOR_A(@"#000000", 0.1).CGColor;
+    CGFloat duration = 0.6;
+    CABasicAnimation *anim1 = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+    anim1.duration = duration;
+    anim1.fromValue = (__bridge id) whiteBegin;
+    anim1.toValue = (__bridge id) whiteEnd;
+
+    CABasicAnimation *anim2 = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+    anim2.beginTime = duration;
+    anim2.duration = duration;
+    anim2.fromValue = (__bridge id) whiteEnd;
+    anim2.toValue = (__bridge id) whiteBegin;
+
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.duration = duration * 2;
+    group.animations = @[anim1, anim2];
+    group.removedOnCompletion = NO;
+    group.fillMode = kCAFillModeForwards;
+    group.repeatCount = 10000000;
+
+    [self.iconImageView.layer addAnimation:group forKey:@"animate_background"];
+}
+
+- (void)closeLoadAnimate {
+    [self.iconImageView.layer removeAllAnimations];
+}
 
 - (NSAttributedString *)generate:(NSString *)title subtitle:(NSString *)subtitle subColor:(UIColor *)subColor tailImageName:(NSString *)imageName {
     NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];
@@ -352,16 +386,16 @@
 - (BaseView *)topView {
     if (!_topView) {
         _topView = [[BaseView alloc] init];
-        BaseView *radiusView = [[BaseView alloc]init];
+        BaseView *radiusView = [[BaseView alloc] init];
         radiusView.backgroundColor = UIColor.whiteColor;
         [radiusView setPartRoundCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:20];
         [_topView addSubview:radiusView];
         [radiusView mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.leading.top.trailing.bottom.equalTo(@0);
+            make.leading.top.trailing.bottom.equalTo(@0);
         }];
 
-        _topView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.1000].CGColor;
-        _topView.layer.shadowOffset = CGSizeMake(0,-3);
+        _topView.layer.shadowColor = [UIColor colorWithRed:0 / 255.0 green:0 / 255.0 blue:0 / 255.0 alpha:0.1000].CGColor;
+        _topView.layer.shadowOffset = CGSizeMake(0, -3);
         _topView.layer.shadowOpacity = 1;
         _topView.layer.shadowRadius = 12;
     }

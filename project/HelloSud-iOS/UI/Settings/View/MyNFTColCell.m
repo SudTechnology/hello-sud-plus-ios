@@ -85,8 +85,11 @@
             context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(200, 200))};
         }
         [self showLoadAnimate];
-        [weakSelf.gameImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_nft_icon"] options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            [weakSelf closeLoadAnimate];
+        [weakSelf.gameImageView sd_setImageWithURL:url placeholderImage:nil options:0 context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            // 加载成功去掉加载状态
+            if (!error) {
+                [weakSelf closeLoadAnimate];
+            }
         }];
     } else {
         [weakSelf closeLoadAnimate];
