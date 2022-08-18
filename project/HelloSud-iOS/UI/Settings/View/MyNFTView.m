@@ -136,6 +136,8 @@
                 [weakSelf closeLoadAnimate:iv];
                 iv.image = [UIImage imageNamed:@"default_nft_icon"];
             }
+        } else {
+            [self closeLoadAnimate:iv];
         }
     }
     self.nftCountLabel.text = [NSString stringWithFormat:@"%@", @(nftListModel.totalCount)];
@@ -175,8 +177,8 @@
     /// 点击更多
     MyNFTListViewController *vc = [[MyNFTListViewController alloc] init];
     vc.title = self.nameLabel.text;
-    [vc updateNFTList:self.nftCellModelList];
     [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
+    [vc updateNFTList:self.nftCellModelList];
 }
 
 - (void)showLoadAnimate:(UIView *)imageView {
