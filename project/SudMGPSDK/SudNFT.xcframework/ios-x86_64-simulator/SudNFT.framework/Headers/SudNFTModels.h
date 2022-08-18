@@ -67,6 +67,18 @@ typedef NS_ENUM(NSInteger, SudENFTEthereumChainsType) {
 @property(nonatomic, copy) NSString *contractAddress;
 /// NFT tokenId
 @property(nonatomic, copy) NSString *tokenId;
+/// token类型
+@property(nonatomic, copy) NSString *tokenType;
+/// 名称
+@property(nonatomic, copy) NSString *name;
+/// 描述
+@property(nonatomic, copy) NSString *description;
+/// 藏品地址
+@property(nonatomic, copy) NSString *fileURL;
+/// 藏品类型
+@property(nonatomic, copy) NSString *fileType;
+/// 封面，存在的情况下
+@property(nonatomic, copy) NSString *coverURL;
 @end
 
 /// NFT数据模型

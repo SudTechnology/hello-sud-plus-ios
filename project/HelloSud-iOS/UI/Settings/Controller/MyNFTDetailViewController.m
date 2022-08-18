@@ -75,7 +75,7 @@
         [weakSelf updateWearBtn];
 
         if (isWear) {
-            AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.metaDataModel.image;
+            AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.nftModel.coverURL;
             AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNFT;
         } else {
             AppService.shared.login.loginUserInfo.headerNftUrl = nil;
@@ -194,24 +194,16 @@
     if (!self.cellModel) {
         return;
     }
+    SudNFTModel *nftModel = self.cellModel.nftModel;
     WeakSelf
-    [self.cellModel getMetaData:^(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel) {
-        [weakSelf updateWithMetadata:metaDataModel];
-    }];
-    [self updateWearBtn];
-}
-
-
-- (void)updateWithMetadata:(SudNFTMetaDataModel *)metaDataModel {
-    WeakSelf
-    self.nameLabel.text = metaDataModel.name;
-    self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:metaDataModel.contractAddress subColor:HEX_COLOR(@"#0053FF")];
-    self.tokenIDLabel.attributedText = [self generate:@"Token ID\n" subtitle:metaDataModel.tokenId subColor:UIColor.blackColor];
-    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:metaDataModel.tokenType subColor:UIColor.blackColor];
-    if (metaDataModel.image) {
+    self.nameLabel.text = nftModel.name;
+    self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:nftModel.contractAddress subColor:HEX_COLOR(@"#0053FF")];
+    self.tokenIDLabel.attributedText = [self generate:@"Token ID\n" subtitle:nftModel.tokenId subColor:UIColor.blackColor];
+    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:nftModel.tokenType subColor:UIColor.blackColor];
+    if (nftModel.coverURL) {
 
         SDWebImageContext *context = nil;
-        NSURL *url = [[NSURL alloc] initWithString:metaDataModel.image];
+        NSURL *url = [[NSURL alloc] initWithString:nftModel.coverURL];
         if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame) {
             context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(kScreenWidth, kScreenWidth))};
         }
@@ -221,7 +213,9 @@
             }
         }];
     }
+    [self updateWearBtn];
 }
+
 
 - (NSAttributedString *)generate:(NSString *)title subtitle:(NSString *)subtitle subColor:(UIColor *)subColor {
     NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];

@@ -124,32 +124,18 @@
         if (nftListModel.list.count > i) {
             SudNFTModel *nftModel = nftListModel.list[i];
             [self showLoadAnimate:iv];
-            SudNFTGetNFTMetadataParamModel *paramModel = SudNFTGetNFTMetadataParamModel.new;
-            paramModel.contractAddress = nftModel.contractAddress;
-            paramModel.tokenId = nftModel.tokenId;
-            paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
-            [SudNFT getNFTMetadata:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTMetaDataModel *metaDataModel) {
-
-                if (errCode != 0) {
-                    [weakSelf closeLoadAnimate:iv];
-                    NSString *msg = [NSString stringWithFormat:@"contractAddress:%@, tokenId:%@, %@(%@)", nftModel.contractAddress, nftModel.tokenId, errMsg, @(errCode)];
-                    DDLogError(@"getNFTMetadata:%@", msg);
-                    return;
-                }
-
-                DDLogDebug(@"show contractAddress:%@, tokenId:%@, image:%@, name:%@", nftModel.contractAddress, nftModel.tokenId, metaDataModel.image, metaDataModel.name);
-                if (metaDataModel.image) {
-                    __weak UIImageView *weakIV = iv;
-                    [iv sd_setImageWithURL:[[NSURL alloc] initWithString:metaDataModel.image]
-                       placeholderImage:[UIImage imageNamed:@"default_nft_icon"]
-                              completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
-                                  [weakSelf closeLoadAnimate:weakIV];
-                              }];
-                } else {
-                    [weakSelf closeLoadAnimate:iv];
-                    iv.image = [UIImage imageNamed:@"default_nft_icon"];
-                }
-            }];
+            DDLogDebug(@"show contractAddress:%@, tokenId:%@, image:%@, name:%@", nftModel.contractAddress, nftModel.tokenId, nftModel.coverURL, nftModel.name);
+            if (nftModel.coverURL) {
+                __weak UIImageView *weakIV = iv;
+                [iv sd_setImageWithURL:[[NSURL alloc] initWithString:nftModel.coverURL]
+                      placeholderImage:[UIImage imageNamed:@"default_nft_icon"]
+                             completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
+                                 [weakSelf closeLoadAnimate:weakIV];
+                             }];
+            } else {
+                [weakSelf closeLoadAnimate:iv];
+                iv.image = [UIImage imageNamed:@"default_nft_icon"];
+            }
         }
     }
     self.nftCountLabel.text = [NSString stringWithFormat:@"%@", @(nftListModel.totalCount)];

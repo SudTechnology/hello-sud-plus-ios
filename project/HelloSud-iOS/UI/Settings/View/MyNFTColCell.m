@@ -76,27 +76,22 @@
     }
     HSNFTListCellModel *m = (HSNFTListCellModel *) self.model;
     WeakSelf
-    [self showLoadAnimate];
-    [m getMetaData:^(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel) {
-        if (weakSelf.model != model) {
-            return;
+    SudNFTModel *nftModel = m.nftModel;
+    weakSelf.nameLabel.text = nftModel.name;
+    if (nftModel.coverURL) {
+        SDWebImageContext *context = nil;
+        NSURL *url = [[NSURL alloc] initWithString:nftModel.coverURL];
+        if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame){
+            context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(200, 200))};
         }
-        weakSelf.nameLabel.text = metaDataModel.name;
-        if (metaDataModel.image) {
-            SDWebImageContext *context = nil;
-            NSURL *url = [[NSURL alloc] initWithString:metaDataModel.image];
-            if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame){
-                context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(200, 200))};
-            }
-            [weakSelf.gameImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_nft_icon"] options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-                [weakSelf closeLoadAnimate];
-            }];
-        } else {
+        [self showLoadAnimate];
+        [weakSelf.gameImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_nft_icon"] options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             [weakSelf closeLoadAnimate];
-            DDLogDebug(@"no image cell:%@, model:%@, meta:%@", weakSelf, weakSelf.model, metaDataModel);
-            weakSelf.gameImageView.image = [UIImage imageNamed:@"default_nft_icon"];
-        }
-    }];
+        }];
+    } else {
+        [weakSelf closeLoadAnimate];
+        weakSelf.gameImageView.image = [UIImage imageNamed:@"default_nft_icon"];
+    }
     BOOL isWear = [AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
     self.tagView.hidden = isWear ? NO : YES;
 }
