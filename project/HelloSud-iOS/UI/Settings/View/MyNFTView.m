@@ -168,7 +168,7 @@
 - (void)onTapChainsView:(id)tap {
     MyEthereumChainsSelectPopView *v = [[MyEthereumChainsSelectPopView alloc] init];
     [v updateChains:self.chains];
-    [DTAlertView show:v rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:nil];
+    [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
 }
 
 - (void)onTapMoreView:(id)tap {

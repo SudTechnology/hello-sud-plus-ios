@@ -26,9 +26,9 @@
     return YES;
 }
 
-//- (UIStatusBarStyle)preferredStatusBarStyle {
-//    return UIStatusBarStyleLightContent;
-//}
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 
 - (void)dtConfigUI {
     self.view.backgroundColor = UIColor.whiteColor;
@@ -38,7 +38,11 @@
     WeakSelf
     [_backBtn addTarget:self action:@selector(dtNavigationBackClick) forControlEvents:UIControlEventTouchUpInside];
     [_wearBtn addTarget:self action:@selector(onWearBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_copyBtn addTarget:self action:@selector(onCopyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [_copyBtn addTarget:self action:@selector(onCopyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer *addrTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAddrTap:)];
+    [self.contractAddressLabel addGestureRecognizer:addrTap];
+    UITapGestureRecognizer *tokenTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTokenTap:)];
+    [self.tokenIDLabel addGestureRecognizer:tokenTap];
 }
 
 - (void)onWearBtnClick:(UIButton *)sender {
@@ -60,9 +64,17 @@
     }];
 }
 
-- (void)onCopyBtnClick:(id)sender {
+- (void)onAddrTap:(id)sender {
     [AppUtil copyToPasteProcess:self.cellModel.nftModel.contractAddress toast:@"地址已复制"];
 }
+
+- (void)onTokenTap:(id)sender {
+    [AppUtil copyToPasteProcess:self.cellModel.nftModel.tokenId toast:@"Token已复制"];
+}
+
+//- (void)onCopyBtnClick:(id)sender {
+//    [AppUtil copyToPasteProcess:self.cellModel.nftModel.contractAddress toast:@"地址已复制"];
+//}
 
 /// 上报后台
 /// @param nftDetailToken nftDetailToken
@@ -119,7 +131,7 @@
     [self.view addSubview:self.contractAddressLabel];
     [self.view addSubview:self.tokenIDLabel];
     [self.view addSubview:self.tokenStandLabel];
-    [self.view addSubview:self.copyBtn];
+//    [self.view addSubview:self.copyBtn];
     [self.view addSubview:self.bottomView];
     [self.view addSubview:self.wearBtn];
     [self.view addSubview:self.backBtn];
@@ -134,10 +146,10 @@
         make.height.equalTo(@(kScreenWidth));
     }];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.mas_equalTo(0);
+        make.top.equalTo(self.iconImageView.mas_bottom).offset(-30);
+        make.leading.equalTo(@0);
         make.trailing.mas_equalTo(0);
-        make.height.equalTo(@(30));
-        make.bottom.equalTo(self.iconImageView);
+        make.bottom.equalTo(@0);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
@@ -147,23 +159,23 @@
     }];
     [self.contractAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
-        make.trailing.equalTo(self.copyBtn.mas_leading).offset(-60);
+        make.trailing.equalTo(@-118);
         make.height.greaterThanOrEqualTo(@0);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(28);
     }];
-    [self.copyBtn setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [self.copyBtn setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [self.contractAddressLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [self.contractAddressLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [self.copyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.mas_equalTo(-16);
-        make.width.greaterThanOrEqualTo(@0);
-        make.height.equalTo(@20);
-        make.bottom.equalTo(self.contractAddressLabel.mas_bottom);
-    }];
+//    [self.copyBtn setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+//    [self.copyBtn setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+//    [self.contractAddressLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+//    [self.contractAddressLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+//    [self.copyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.trailing.mas_equalTo(-16);
+//        make.width.greaterThanOrEqualTo(@0);
+//        make.height.equalTo(@20);
+//        make.bottom.equalTo(self.contractAddressLabel.mas_bottom);
+//    }];
     [self.tokenIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
-        make.trailing.equalTo(@-16);
+        make.width.equalTo(self.contractAddressLabel);
         make.height.greaterThanOrEqualTo(@0);
         make.top.equalTo(self.contractAddressLabel.mas_bottom).offset(14);
     }];
@@ -186,23 +198,24 @@
         make.top.equalTo(self.bottomView).offset(12);
     }];
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.mas_equalTo(16);
-        make.top.mas_equalTo(54);
-        make.width.height.equalTo(@(24));
+        make.leading.mas_equalTo(12);
+        make.top.mas_equalTo(50);
+        make.width.height.equalTo(@(32));
     }];
 }
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
+    self.view.backgroundColor = UIColor.whiteColor;
     if (!self.cellModel) {
         return;
     }
     SudNFTModel *nftModel = self.cellModel.nftModel;
     WeakSelf
     self.nameLabel.text = nftModel.name;
-    self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:nftModel.contractAddress subColor:HEX_COLOR(@"#0053FF")];
-    self.tokenIDLabel.attributedText = [self generate:@"Token ID\n" subtitle:nftModel.tokenId subColor:UIColor.blackColor];
-    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:nftModel.tokenType subColor:UIColor.blackColor];
+    self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:nftModel.contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
+    self.tokenIDLabel.attributedText = [self generate:@"Token ID\n" subtitle:nftModel.tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
+    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:nftModel.tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
     if (nftModel.coverURL) {
 
         SDWebImageContext *context = nil;
@@ -220,16 +233,20 @@
 }
 
 
-- (NSAttributedString *)generate:(NSString *)title subtitle:(NSString *)subtitle subColor:(UIColor *)subColor {
+- (NSAttributedString *)generate:(NSString *)title subtitle:(NSString *)subtitle subColor:(UIColor *)subColor tailImageName:(NSString *)imageName {
     NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];
     fullAttr.yy_font = UIFONT_REGULAR(14);
-    fullAttr.yy_color = HEX_COLOR(@"#8A8A8E");
+    fullAttr.yy_color = HEX_COLOR(@"#000000");
 
     NSMutableAttributedString *subtitleAttr = [[NSMutableAttributedString alloc] initWithString:subtitle ? subtitle : @""];
     subtitleAttr.yy_font = UIFONT_REGULAR(14);
     subtitleAttr.yy_color = subColor;
     subtitleAttr.yy_lineBreakMode = NSLineBreakByTruncatingMiddle;
     [fullAttr appendAttributedString:subtitleAttr];
+    if (imageName) {
+        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(16, 17) offsetY:-3];
+        [fullAttr appendAttributedString:iconAttr];
+    }
     return fullAttr;
 }
 
@@ -269,6 +286,7 @@
         _contractAddressLabel.font = UIFONT_BOLD(16);
         _contractAddressLabel.textAlignment = NSTextAlignmentLeft;
         _contractAddressLabel.numberOfLines = 2;
+        _contractAddressLabel.userInteractionEnabled = YES;
     }
     return _contractAddressLabel;
 }
@@ -281,7 +299,8 @@
 
         _tokenIDLabel.font = UIFONT_BOLD(16);
         _tokenIDLabel.textAlignment = NSTextAlignmentLeft;
-        _tokenIDLabel.numberOfLines = 0;
+        _tokenIDLabel.numberOfLines = 2;
+        _tokenIDLabel.userInteractionEnabled = YES;
     }
     return _tokenIDLabel;
 }
@@ -324,7 +343,7 @@
 - (UIButton *)backBtn {
     if (!_backBtn) {
         _backBtn = [[UIButton alloc] init];
-        [_backBtn setImage:[[UIImage imageNamed:@"navi_back"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [_backBtn setImage:[UIImage imageNamed:@"my_white_back"] forState:UIControlStateNormal];
         [_backBtn setTintColor:UIColor.whiteColor];
     }
     return _backBtn;
@@ -333,8 +352,18 @@
 - (BaseView *)topView {
     if (!_topView) {
         _topView = [[BaseView alloc] init];
-        _topView.backgroundColor = UIColor.whiteColor;
-        [_topView setPartRoundCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:20];
+        BaseView *radiusView = [[BaseView alloc]init];
+        radiusView.backgroundColor = UIColor.whiteColor;
+        [radiusView setPartRoundCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:20];
+        [_topView addSubview:radiusView];
+        [radiusView mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.leading.top.trailing.bottom.equalTo(@0);
+        }];
+
+        _topView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.1000].CGColor;
+        _topView.layer.shadowOffset = CGSizeMake(0,-3);
+        _topView.layer.shadowOpacity = 1;
+        _topView.layer.shadowRadius = 12;
     }
     return _topView;
 }
