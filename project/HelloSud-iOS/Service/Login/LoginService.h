@@ -11,7 +11,8 @@
 extern NSString *const TOKEN_REFRESH_SUCCESS_NTF;
 /// token刷新失败通知
 extern NSString *const TOKEN_REFRESH_FAIL_NTF;
-
+/// 钱包token失效
+extern NSString *const WALLET_BIND_TOKEN_EXPIRED_NTF;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,8 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, readonly) AccountUserModel *loginUserInfo;
 /// token
 @property(nonatomic, copy, readonly) NSString *token;
-/// 绑定钱包
-@property(nonatomic, copy) NSString *walletAddress;
+
 
 - (void)prepare;
 

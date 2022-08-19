@@ -28,29 +28,14 @@
 ///    1012	bind user wallet failed	绑定用户钱包失败
 ///    1013	nft api not config	nft url 未配置
 
-typedef void(^ISudNFTCommonListener)(NSInteger errCode, NSString *_Nullable errMsg);
+typedef void(^ISudNFTListenerInitNFT)(NSInteger errCode, NSString *_Nullable errMsg);
 
-typedef void(^ISudNFTListenerGetWalletList)(NSInteger errCode, NSString *_Nullable errMsg, NSArray<SudNFTWalletModel *> *_Nullable walletList);
+typedef void(^ISudNFTListenerGetWalletList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGetWalletListModel *_Nullable walletListModel);
 
-typedef void(^ISudNFTListenerGeMetadata)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTMetaDataModel *_Nullable metaDataModel);
+typedef void(^ISudNFTListenerGetNFTList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGetNFTListModel *_Nullable nftListModel);
 
-typedef void(^ISudNFTListenerGeNFTList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTListModel *_Nullable nftListModel);
+typedef void(^ISudNFTListenerBindWallet)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindWalletModel *_Nullable walletInfoModel);
 
-typedef void(^ISudNFTListenerBindWallet)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindWalletInfoModel *_Nullable walletInfoModel);
-
-typedef void(^ISudNFTListenerGenNFTCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGenerateDetailTokenModel *_Nullable generateDetailTokenModel);
-
-
-/// NFT模块监听者
-@protocol ISudNFTListener<NSObject>
-@optional
-/// SudNFT初始化状态
-/// @param errCode 0 成功，非0 失败
-/// @param errMsg 失败描述
-- (void)onSudNFTInitStateChanged:(NSInteger)errCode errMsg:(NSString *_Nullable)errMsg;
-
-/// 绑定钱包token过期，需要重新验证绑定
-- (void)onSudNFTBindWalletTokenExpired;
-@end
+typedef void(^ISudNFTListenerGenNFTCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGenNFTCredentialsTokenModel *_Nullable generateDetailTokenModel);
 
 #endif /* ISudListenerNFT_h */

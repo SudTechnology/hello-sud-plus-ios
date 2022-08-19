@@ -33,6 +33,11 @@
     h += yMargin * 2;
     NSString *name = self.sendUser.name;
     NSString *content = self.content;
+
+    [SDWebImageManager.sharedManager loadImageWithURL:[NSURL URLWithString:self.sendUser.icon] options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSData *data, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+
+    }];
+
     UIImage *iconImage = self.sendUser.icon.length > 0 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sendUser.icon]]] : [UIImage imageNamed:@"room_ope_gift"];
     if (iconImage) {
         iconImage = [iconImage dt_circleImage];

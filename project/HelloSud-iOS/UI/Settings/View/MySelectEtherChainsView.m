@@ -49,7 +49,7 @@
 
 }
 
-- (void)update:(SudNFTEthereumChainsModel *)model {
+- (void)update:(SudNFTChainInfoModel *)model {
     self.nameLabel.text = model.name;
     if (model.icon) {
         [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:model.icon]];

@@ -13,12 +13,12 @@
 #import "HSSettingViewController.h"
 #import "AboutViewController.h"
 
-@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, ISudNFTListener>
+@interface MyViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
 /// 页面数据
 @property(nonatomic, strong) NSArray <NSArray <HSSettingModel *> *> *arrData;
 @property(nonatomic, strong) MyHeaderView *myHeaderView;
-@property(nonatomic, strong) NSArray<SudNFTWalletModel *> *walletList;
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
 @property(nonatomic, strong) UIView *contactUsView;
 @end
 
@@ -48,8 +48,17 @@
     paramModel.userId = AppService.shared.loginUserID;
     paramModel.universalLink = @"https://fat-links.sud.tech";
     paramModel.isTestEnv = isTestEnv;
+    WeakSelf
     [SudNFT initNFT:paramModel
-           listener:self];
+           listener:^(NSInteger errCode, NSString * _Nullable errMsg) {
+        if (errCode != 0) {
+            DDLogError(@"initNFT: errCode:%@, errMsg:%@", @(errCode), errMsg);
+            // SDK初始失败，重试或者提示错误
+            return;
+        }
+        DDLogError(@"onSudNFTInitStateChanged init success");
+        [weakSelf checkWalletInfo];
+    }];
 }
 
 - (BOOL)dtIsHiddenNavigationBar {
@@ -72,37 +81,41 @@
     aboutModel.pageURL = @"";
 
     self.arrData = @[@[settingModel], @[aboutModel]];
-    CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
-    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
-    self.contactUsView.frame = targetFrame;
-    self.tableView.tableFooterView = self.contactUsView;
+//    CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
+//    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
+//    self.contactUsView.frame = targetFrame;
+//    self.tableView.tableFooterView = self.contactUsView;
     [self.tableView reloadData];
 }
 
 - (void)checkWalletInfo {
 
-    BOOL bindWallet = AppService.shared.login.walletAddress.length > 0;
+    BOOL bindWallet = HSAppPreferences.shared.walletAddress.length > 0;
     if (!bindWallet) {
         // 未绑定钱包
-        [SudNFT getWalletListWithListener:^(NSInteger errCode, NSString *errMsg, NSArray<SudNFTWalletModel *> *walletList) {
+        [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
             if (errCode != 0) {
                 [ToastUtil show:errMsg];
                 return;
             }
-            [self.myHeaderView updateSupportWallet:walletList];
+            [self.myHeaderView updateSupportWallet:getWalletListModel.walletList];
             [self reloadHeadView];
         }];
         return;
     }
     // 拉取NFT列表
     SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
-    paramModel.walletAddress = AppService.shared.login.walletAddress;
+    paramModel.walletToken = HSAppPreferences.shared.walletToken;
+    paramModel.walletAddress = HSAppPreferences.shared.walletAddress;
     paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
     paramModel.pageKey = nil;
-    [SudNFT getNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTListModel *nftListModel) {
+    [SudNFT getNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetNFTListModel *nftListModel) {
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];
+            if (errCode == 1008) {
+                [[NSNotificationCenter defaultCenter]postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
+            }
             return;
         }
         [self.myHeaderView updateNFTList:nftListModel];
@@ -110,12 +123,12 @@
     }];
     // 更新链网数据
     if (self.walletList.count == 0) {
-        [SudNFT getWalletListWithListener:^(NSInteger errCode, NSString *errMsg, NSArray<SudNFTWalletModel *> *walletList) {
+        [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
             if (errCode != 0) {
                 [ToastUtil show:errMsg];
                 return;
             }
-            self.walletList = walletList;
+            self.walletList = getWalletListModel.walletList;
             [self updateWalletEtherChains];
         }];
     } else {
@@ -125,9 +138,9 @@
 
 /// 更新钱包链网类型
 - (void)updateWalletEtherChains {
-    for (SudNFTWalletModel *m in self.walletList) {
+    for (SudNFTWalletInfoModel *m in self.walletList) {
         if (m.type == HSAppPreferences.shared.bindWalletType) {
-            [self.myHeaderView updateEthereumList:m.chains];
+            [self.myHeaderView updateEthereumList:m.chainList];
             break;
         }
     }
@@ -168,11 +181,11 @@
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     WeakSelf
-    self.myHeaderView.clickWalletBlock = ^(SudNFTWalletModel *m) {
+    self.myHeaderView.clickWalletBlock = ^(SudNFTWalletInfoModel *m) {
 
         SudNFTBindWalletParamModel *paramModel = SudNFTBindWalletParamModel.new;
         paramModel.walletType = m.type;
-        [SudNFT bindWallet:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindWalletInfoModel *walletInfoModel) {
+        [SudNFT bindWallet:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindWalletModel *bindWalletModel) {
             if (errCode != 0) {
                 NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
                 DDLogError(@"bind wallet err:%@", msg);
@@ -181,17 +194,19 @@
             }
             // 绑定钱包成功
             HSAppPreferences.shared.bindWalletType = m.type;
-            AppService.shared.login.walletAddress = walletInfoModel.address;
+            HSAppPreferences.shared.walletAddress = bindWalletModel.walletAddress;
+            [HSAppPreferences.shared cacheWalletToken:bindWalletModel walletAddress:bindWalletModel.walletAddress];
             [weakSelf.myHeaderView dtUpdateUI];
             [weakSelf reloadHeadView];
             [weakSelf checkWalletInfo];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
         }];
     };
     self.myHeaderView.deleteWalletBlock = ^{
         [DTAlertView showTextAlert:@"确定要解除连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
-                AppService.shared.login.walletAddress = nil;
+                HSAppPreferences.shared.walletAddress = nil;
                 [AppService.shared useNFT:@"" tokenId:@"" add:NO];
                 AppService.shared.login.loginUserInfo.headerNftUrl = nil;
                 AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
@@ -210,6 +225,11 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:MY_NFT_WEAR_CHANGE_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         [weakSelf.myHeaderView dtUpdateUI];
     }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf onSudNFTBindWalletTokenExpired];
+    }];
+    
+    
 
 }
 
@@ -342,23 +362,10 @@
 
 #pragma mark ISudNFTListener
 
-/// SudNFT初始化状态
-/// @param errCode 0 成功，非0 失败
-/// @param errMsg 失败描述
-- (void)onSudNFTInitStateChanged:(NSInteger)errCode errMsg:(NSString *_Nullable)errMsg {
-    if (errCode != 0) {
-        DDLogError(@"onSudNFTInitStateChanged: errCode:%@, errMsg:$@", @(errCode), errMsg);
-        // SDK初始失败，重试或者提示错误
-        return;
-    }
-    DDLogError(@"onSudNFTInitStateChanged init success");
-    [self checkWalletInfo];
-}
-
 /// 绑定钱包token过期，需要重新验证绑定
 - (void)onSudNFTBindWalletTokenExpired {
     DDLogWarn(@"onSudNFTBindWalletTokenExpired");
-    AppService.shared.login.walletAddress = nil;
+    HSAppPreferences.shared.walletAddress = nil;
     [self.myHeaderView dtUpdateUI];
     [self reloadHeadView];
     [self checkWalletInfo];

@@ -6,8 +6,8 @@
 @interface BindBtnView : BaseView
 @property(nonatomic, strong) UIImageView *iconImageView;
 @property(nonatomic, strong) UILabel *nameLabel;
-@property(nonatomic, strong) SudNFTWalletModel *model;
-@property(nonatomic, strong) void (^clickWalletBlock)(SudNFTWalletModel *wallModel);
-- (void)update:(SudNFTWalletModel *)model;
+@property(nonatomic, strong) SudNFTWalletInfoModel *model;
+@property(nonatomic, strong) void (^clickWalletBlock)(SudNFTWalletInfoModel *wallModel);
+- (void)update:(SudNFTWalletInfoModel *)model;
 @end
 

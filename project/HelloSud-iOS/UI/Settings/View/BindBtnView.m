@@ -29,7 +29,7 @@
 }
 
 
-- (void)update:(SudNFTWalletModel *)model {
+- (void)update:(SudNFTWalletInfoModel *)model {
     self.model = model;
     self.nameLabel.text = model.name;
     if (model.icon) {

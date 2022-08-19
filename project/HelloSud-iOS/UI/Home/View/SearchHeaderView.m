@@ -92,10 +92,10 @@
         [self.headerView  sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
     }
-    BOOL isBindWallet = AppService.shared.login.walletAddress.length > 0;
+    BOOL isBindWallet = HSAppPreferences.shared.walletAddress.length > 0;
     if (isBindWallet) {
         // 绑定过了钱包
-        self.walletAddressLabel.text = AppService.shared.login.walletAddress;
+        self.walletAddressLabel.text = HSAppPreferences.shared.walletAddress;
         self.walletAddressLabel.hidden = NO;
         self.userIdLabel.hidden = YES;
     } else {
@@ -124,7 +124,7 @@
 }
 
 - (void)onTapWalletAddressLabel:(id)tap {
-    [AppUtil copyToPasteProcess:self.walletAddressLabel.text toast:@"地址已复制"];
+    [AppUtil copyToPasteProcess:self.walletAddressLabel.text toast:@"复制成功"];
 }
 
 - (void)onTapHead:(id)tap {

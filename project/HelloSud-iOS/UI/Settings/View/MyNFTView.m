@@ -18,11 +18,11 @@
 @property(nonatomic, strong) UILabel *nftCountLabel;
 @property(nonatomic, strong) UIImageView *rightMoreImageView;
 @property(nonatomic, strong) UIView *moreTapView;
-@property(nonatomic, strong) SudNFTListModel *nftListModel;
+@property(nonatomic, strong) SudNFTGetNFTListModel *nftListModel;
 @property(nonatomic, strong) NSArray<HSNFTListCellModel *> *nftCellModelList;
 
 @property(nonatomic, strong) UILabel *noDataLabel;
-@property(nonatomic, strong) NSArray<SudNFTEthereumChainsModel *> *chains;
+@property(nonatomic, strong) NSArray<SudNFTChainInfoModel *> *chains;
 @end
 
 @implementation MyNFTView
@@ -105,11 +105,11 @@
 
 }
 
-- (void)updateNFTList:(SudNFTListModel *)nftListModel {
+- (void)updateNFTList:(SudNFTGetNFTListModel *)nftListModel {
     self.nftListModel = nftListModel;
 
     NSMutableArray *arr = [[NSMutableArray alloc] init];
-    for (SudNFTModel *m in nftListModel.list) {
+    for (SudNFTInfoModel *m in nftListModel.nftList) {
         HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
         cellModel.nftModel = m;
         [arr addObject:cellModel];
@@ -121,8 +121,8 @@
     }
     for (int i = 0; i < self.iconImageViewList.count; ++i) {
         UIImageView *iv = self.iconImageViewList[i];
-        if (nftListModel.list.count > i) {
-            SudNFTModel *nftModel = nftListModel.list[i];
+        if (nftListModel.nftList.count > i) {
+            SudNFTInfoModel *nftModel = nftListModel.nftList[i];
             [self showLoadAnimate:iv];
             DDLogDebug(@"show contractAddress:%@, tokenId:%@, image:%@, name:%@", nftModel.contractAddress, nftModel.tokenId, nftModel.coverURL, nftModel.name);
             if (nftModel.coverURL) {
@@ -151,9 +151,9 @@
     }
 }
 
-- (void)updateEthereumList:(NSArray<SudNFTEthereumChainsModel *> *)chains {
+- (void)updateEthereumList:(NSArray<SudNFTChainInfoModel *> *)chains {
     self.chains = chains;
-    for (SudNFTEthereumChainsModel *m in chains) {
+    for (SudNFTChainInfoModel *m in chains) {
         if (m.type == HSAppPreferences.shared.selectedEthereumChainType) {
             [self.chainsView update:m];
             break;

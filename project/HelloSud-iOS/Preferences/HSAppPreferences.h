@@ -15,6 +15,11 @@ extern NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF;
 @property (nonatomic, assign)NSInteger bindWalletType;
 /// 选择链网类型
 @property (nonatomic, assign)NSInteger selectedEthereumChainType;
+/// 绑定钱包
+@property(nonatomic, copy, nullable) NSString *walletAddress;
 
 + (instancetype)shared;
+- (NSString *)walletToken;
+/// 缓存钱包token
+- (void)cacheWalletToken:(SudNFTBindWalletModel *)walletRespModel walletAddress:(NSString *)walletAddress;
 @end

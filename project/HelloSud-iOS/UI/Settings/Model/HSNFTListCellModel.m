@@ -4,9 +4,6 @@
 //
 
 #import "HSNFTListCellModel.h"
-
-typedef void(^META_DATA_BLOCK)(HSNFTListCellModel *model, SudNFTMetaDataModel *metaDataModel);
-
 @interface HSNFTListCellModel ()
 
 @end

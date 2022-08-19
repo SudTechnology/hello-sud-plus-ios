@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 网链选择
 @interface MyEthereumChainsSelectPopView : BaseView
 
-- (void)updateChains:(NSArray<SudNFTEthereumChainsModel *> *)chains;
+- (void)updateChains:(NSArray<SudNFTChainInfoModel *> *)chains;
 @end
 
 NS_ASSUME_NONNULL_END

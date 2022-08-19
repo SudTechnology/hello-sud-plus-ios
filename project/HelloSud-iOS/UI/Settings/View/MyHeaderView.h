@@ -7,9 +7,9 @@
 @class SudNFTWalletModel;
 
 @interface MyHeaderView : BaseView
-@property (nonatomic, strong)void(^clickWalletBlock)(SudNFTWalletModel *wallModel);
+@property (nonatomic, strong)void(^clickWalletBlock)(SudNFTWalletInfoModel *wallModel);
 @property (nonatomic, strong)void(^deleteWalletBlock)(void);
-- (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList;
-- (void)updateNFTList:(SudNFTListModel *)nftListModel;
-- (void)updateEthereumList:(NSArray<SudNFTEthereumChainsModel *> *)chains;
+- (void)updateSupportWallet:(NSArray<SudNFTWalletInfoModel *> *)walletList;
+- (void)updateNFTList:(SudNFTGetNFTListModel *)nftListModel;
+- (void)updateEthereumList:(NSArray<SudNFTChainInfoModel *> *)chains;
 @end

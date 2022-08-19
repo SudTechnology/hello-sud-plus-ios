@@ -77,9 +77,9 @@
     [DTAlertView close];
 }
 
-- (void)updateChains:(NSArray<SudNFTEthereumChainsModel *> *)chains {
+- (void)updateChains:(NSArray<SudNFTChainInfoModel *> *)chains {
     NSMutableArray *arrList = [[NSMutableArray alloc] init];
-    for (SudNFTEthereumChainsModel *m in chains) {
+    for (SudNFTChainInfoModel *m in chains) {
         MyEthereumChainsCellModel *cellModel = [[MyEthereumChainsCellModel alloc] init];
         cellModel.chainsModel = m;
         [arrList addObject:cellModel];

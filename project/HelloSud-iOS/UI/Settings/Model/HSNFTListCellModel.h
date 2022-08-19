@@ -4,5 +4,5 @@
 //
 /// NFT列表cell model
 @interface HSNFTListCellModel : BaseModel
-@property (nonatomic, strong)SudNFTModel *nftModel;
+@property (nonatomic, strong)SudNFTInfoModel *nftModel;
 @end

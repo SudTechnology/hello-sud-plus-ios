@@ -16,7 +16,7 @@
 @property(nonatomic, strong) NSMutableArray<BindBtnView *> *bindViewList;
 /// 是否更多处于打开状态
 @property(nonatomic, assign) BOOL isMoreOpened;
-@property(nonatomic, strong) NSArray<SudNFTWalletModel *> *walletList;
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
 @end
 
 @implementation MyBindWalletView
@@ -93,7 +93,7 @@
     }
 }
 
-- (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList {
+- (void)updateSupportWallet:(NSArray<SudNFTWalletInfoModel *> *)walletList {
 
     self.walletList = walletList;
     for (BindBtnView *v in self.bindViewList) {
@@ -116,13 +116,13 @@
     BindBtnView *lastView = nil;
     WeakSelf
     for (int i = 0; i < showWalletList.count; ++i) {
-        SudNFTWalletModel *m = showWalletList[i];
+        SudNFTWalletInfoModel *m = showWalletList[i];
         BindBtnView *bindBtnView = [[BindBtnView alloc] init];
         bindBtnView.layer.borderColor = UIColor.whiteColor.CGColor;
         bindBtnView.layer.borderWidth = 1;
         [self addSubview:bindBtnView];
         [self.bindViewList addObject:bindBtnView];
-        bindBtnView.clickWalletBlock = ^(SudNFTWalletModel *wallModel) {
+        bindBtnView.clickWalletBlock = ^(SudNFTWalletInfoModel *wallModel) {
             if (weakSelf.clickWalletBlock) {
                 weakSelf.clickWalletBlock(wallModel);
             }

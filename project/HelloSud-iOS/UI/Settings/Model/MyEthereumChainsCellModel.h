@@ -4,6 +4,6 @@
 //
 /// NFT列表cell model
 @interface MyEthereumChainsCellModel : BaseModel
-@property(nonatomic, strong) SudNFTEthereumChainsModel *chainsModel;
+@property(nonatomic, strong) SudNFTChainInfoModel *chainsModel;
 @property(nonatomic, assign) BOOL isSelected;
 @end

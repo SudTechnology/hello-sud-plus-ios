@@ -76,7 +76,7 @@
     }
     HSNFTListCellModel *m = (HSNFTListCellModel *) self.model;
     WeakSelf
-    SudNFTModel *nftModel = m.nftModel;
+    SudNFTInfoModel *nftModel = m.nftModel;
     weakSelf.nameLabel.text = nftModel.name;
     if (nftModel.coverURL) {
         SDWebImageContext *context = nil;

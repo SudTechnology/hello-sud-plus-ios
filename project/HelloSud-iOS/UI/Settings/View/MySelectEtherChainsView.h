@@ -7,5 +7,5 @@
 
 /// 选择链网视图
 @interface MySelectEtherChainsView : BaseView
-- (void)update:(SudNFTEthereumChainsModel *)model;
+- (void)update:(SudNFTChainInfoModel *)model;
 @end

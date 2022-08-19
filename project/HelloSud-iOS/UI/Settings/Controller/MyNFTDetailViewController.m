@@ -49,15 +49,19 @@
 
     WeakSelf
     sender.enabled = NO;
-    SudNFTGetNFTMetadataParamModel *paramModel = SudNFTGetNFTMetadataParamModel.new;
+    SudNFTCredentialsTokenParamModel *paramModel = SudNFTCredentialsTokenParamModel.new;
+    paramModel.walletToken = HSAppPreferences.shared.walletToken;
     paramModel.contractAddress = self.cellModel.nftModel.contractAddress;
     paramModel.tokenId = self.cellModel.nftModel.tokenId;
     paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
-    [SudNFT genNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenerateDetailTokenModel *generateDetailTokenModel) {
+    [SudNFT genNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenNFTCredentialsTokenModel *generateDetailTokenModel) {
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];
             sender.enabled = YES;
+            if (errCode == 1008) {
+                [[NSNotificationCenter defaultCenter]postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
+            }
             return;
         }
         [weakSelf handleWearDetailToken:generateDetailTokenModel.nftDetailsToken];
@@ -65,11 +69,11 @@
 }
 
 - (void)onAddrTap:(id)sender {
-    [AppUtil copyToPasteProcess:self.cellModel.nftModel.contractAddress toast:@"地址已复制"];
+    [AppUtil copyToPasteProcess:self.cellModel.nftModel.contractAddress toast:@"复制成功"];
 }
 
 - (void)onTokenTap:(id)sender {
-    [AppUtil copyToPasteProcess:self.cellModel.nftModel.tokenId toast:@"Token已复制"];
+    [AppUtil copyToPasteProcess:self.cellModel.nftModel.tokenId toast:@"复制成功"];
 }
 
 //- (void)onCopyBtnClick:(id)sender {
@@ -210,7 +214,8 @@
     if (!self.cellModel) {
         return;
     }
-    SudNFTModel *nftModel = self.cellModel.nftModel;
+    
+    SudNFTInfoModel *nftModel = self.cellModel.nftModel;
     WeakSelf
     self.nameLabel.text = nftModel.name;
     self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:nftModel.contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
