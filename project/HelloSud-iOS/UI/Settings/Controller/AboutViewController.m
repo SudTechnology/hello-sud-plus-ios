@@ -134,8 +134,8 @@
         [_contactUsView addSubview:usLabel];
         usLabel.preferredMaxLayoutWidth = kScreenWidth - 34;
         [usLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.mas_equalTo(17);
-            make.width.equalTo(@(kScreenWidth - 34));
+            make.leading.mas_equalTo(0);
+            make.trailing.equalTo(@0);
             make.top.mas_equalTo(0);
             make.height.mas_greaterThanOrEqualTo(0);
             make.bottom.mas_equalTo(0);
