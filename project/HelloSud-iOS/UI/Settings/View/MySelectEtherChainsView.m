@@ -10,7 +10,7 @@
 @interface MySelectEtherChainsView ()
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) UIImageView *iconImageView;
-
+@property(nonatomic, strong) UIButton *clickBtn;
 @end
 
 @implementation MySelectEtherChainsView
@@ -21,6 +21,7 @@
 - (void)dtAddViews {
     [self addSubview:self.nameLabel];
     [self addSubview:self.iconImageView];
+    [self addSubview:self.clickBtn];
 }
 
 - (void)dtLayoutViews {
@@ -37,6 +38,10 @@
         make.height.equalTo(@17);
         make.bottom.equalTo(@-7);
     }];
+
+    [self.clickBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
 }
 
 - (void)dtUpdateUI {
@@ -46,7 +51,13 @@
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
+    [self.clickBtn addTarget:self action:@selector(onClickBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
 
+- (void)onClickBtn:(UIButton *)sender {
+    if (self.clickBlock) {
+        self.clickBlock();
+    }
 }
 
 - (void)update:(SudNFTChainInfoModel *)model {
@@ -80,5 +91,12 @@
         _iconImageView = [[UIImageView alloc] init];
     }
     return _iconImageView;
+}
+
+- (UIButton *)clickBtn {
+    if (!_clickBtn) {
+        _clickBtn = [[UIButton alloc]init];
+    }
+    return _clickBtn;
 }
 @end

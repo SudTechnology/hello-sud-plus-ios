@@ -7,5 +7,6 @@
 
 /// 选择链网视图
 @interface MySelectEtherChainsView : BaseView
+@property (nonatomic, copy)void(^clickBlock)();
 - (void)update:(SudNFTChainInfoModel *)model;
 @end

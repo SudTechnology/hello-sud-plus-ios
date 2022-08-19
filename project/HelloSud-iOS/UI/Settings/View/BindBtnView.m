@@ -5,12 +5,15 @@
 
 #import "BindBtnView.h"
 
+@interface BindBtnView()
+@property(nonatomic, strong) UIButton *clickBtn;
+@end
 
 @implementation BindBtnView
 - (void)dtAddViews {
     [self addSubview:self.iconImageView];
     [self addSubview:self.nameLabel];
-
+    [self addSubview:self.clickBtn];
 }
 
 - (void)dtLayoutViews {
@@ -25,7 +28,9 @@
         make.height.mas_greaterThanOrEqualTo(CGSizeZero);
         make.width.equalTo(@80);
     }];
-
+    [self.clickBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
 }
 
 
@@ -49,8 +54,7 @@
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    [self addGestureRecognizer:tap];
+    [self.clickBtn addTarget:self action:@selector(onTap:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)onTap:(id)tap {
@@ -76,6 +80,13 @@
         _nameLabel.font = UIFONT_MEDIUM(14);
     }
     return _nameLabel;
+}
+
+- (UIButton *)clickBtn {
+    if (!_clickBtn) {
+        _clickBtn = [[UIButton alloc]init];
+    }
+    return _clickBtn;
 }
 
 @end

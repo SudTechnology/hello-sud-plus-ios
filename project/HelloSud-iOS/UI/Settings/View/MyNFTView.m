@@ -17,7 +17,7 @@
 @property(nonatomic, strong) NSArray<UIImageView *> *iconImageViewList;
 @property(nonatomic, strong) UILabel *nftCountLabel;
 @property(nonatomic, strong) UIImageView *rightMoreImageView;
-@property(nonatomic, strong) UIView *moreTapView;
+@property(nonatomic, strong) UIButton *moreClickBtn;
 @property(nonatomic, strong) SudNFTGetNFTListModel *nftListModel;
 @property(nonatomic, strong) NSArray<HSNFTListCellModel *> *nftCellModelList;
 
@@ -35,7 +35,7 @@
     [self addSubview:self.nftContentView];
     [self addSubview:self.rightMoreImageView];
     [self addSubview:self.nftCountLabel];
-    [self addSubview:self.moreTapView];
+    [self addSubview:self.moreClickBtn];
     [self addSubview:self.chainsView];
     [self addSubview:self.noDataLabel];
 
@@ -90,7 +90,7 @@
         make.width.height.greaterThanOrEqualTo(@0);
         make.centerY.equalTo(self.nameLabel);
     }];
-    [self.moreTapView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.moreClickBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.bottom.equalTo(@0);
     }];
     [self.noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -163,11 +163,12 @@
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
-    UITapGestureRecognizer *tapMore = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapMoreView:)];
-    [self.moreTapView addGestureRecognizer:tapMore];
-    UITapGestureRecognizer *tapChainsView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapChainsView:)];
-    [self.chainsView addGestureRecognizer:tapChainsView];
     WeakSelf
+    [self.moreClickBtn addTarget:self action:@selector(onTapMoreView:) forControlEvents:UIControlEventTouchUpInside];
+    self.chainsView.clickBlock = ^{
+        [weakSelf onTapChainsView:nil];
+    };
+
     [[NSNotificationCenter defaultCenter] addObserverForName:MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         [weakSelf resetNFTState];
     }];
@@ -274,11 +275,11 @@
     return _nftCountLabel;
 }
 
-- (UIView *)moreTapView {
-    if (!_moreTapView) {
-        _moreTapView = [[UIView alloc] init];
+- (UIButton *)moreClickBtn {
+    if (!_moreClickBtn) {
+        _moreClickBtn = [[UIButton alloc] init];
     }
-    return _moreTapView;
+    return _moreClickBtn;
 }
 
 - (MySelectEtherChainsView *)chainsView {
