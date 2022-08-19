@@ -37,15 +37,26 @@
     return @"RoomSystemTableViewCell";
 }
 
-- (CGFloat)caculateHeight {
-    CGFloat h = [super caculateHeight];
-    CGFloat yMargin = 3;
-    h += yMargin * 2;
+- (void)refreshAttrContent:(void (^)(void))completed {
+    if (self.sendUser.icon.length == 0) {
+        if (completed) completed();
+        return;
+    }
+    WeakSelf
+    [SDWebImageManager.sharedManager loadImageWithURL:[NSURL URLWithString:self.sendUser.icon] options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSData *data, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        [weakSelf generateAttrContent:image];
+        if (completed) completed();
+    }];
+}
+
+- (NSAttributedString *)generateAttrContent:(UIImage *)image {
     NSString *name = self.sendUser.name;
     NSString *content = self.cmd == CMD_UP_MIC_NOTIFY ? [NSString stringWithFormat:NSString.dt_up_mic, self.micIndex]  : NSString.dt_down_mic;
-    UIImage *iconImage = self.sendUser.icon.length > 0 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sendUser.icon]]] : [UIImage new];
+    UIImage *iconImage = image;
     if (iconImage) {
         iconImage = [iconImage dt_circleImage];
+    } else {
+        iconImage = [[UIImage alloc]init];
     }
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：", name]];
@@ -59,6 +70,14 @@
     [attrIcon appendAttributedString:attrName];
     [attrIcon appendAttributedString:attrMsg];
     _attrContent = attrIcon;
+    return attrName;
+}
+
+- (CGFloat)caculateHeight {
+    CGFloat h = [super caculateHeight];
+    CGFloat yMargin = 3;
+    h += yMargin * 2;
+    NSMutableAttributedString *attrIcon = [self generateAttrContent:UIImage.new];
     YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(MAX_CELL_CONTENT_WIDTH - 8, CGFLOAT_MAX) text:attrIcon];
     if (layout) {
         h += layout.textBoundingSize.height;

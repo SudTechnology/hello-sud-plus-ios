@@ -33,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self addRefreshHeader];
+    [self.collectionView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,7 +76,6 @@
 - (void)updateNFTList:(NSArray<HSNFTListCellModel *> *)list {
     [self.dataList setArray:list];
     [self resortNFTList];
-
 }
 
 - (void)resortNFTList {
@@ -89,7 +89,6 @@
         }
     }
     [self.dataList setArray:sortList];
-    [self.collectionView reloadData];
 }
 
 #pragma mark - requst Data
