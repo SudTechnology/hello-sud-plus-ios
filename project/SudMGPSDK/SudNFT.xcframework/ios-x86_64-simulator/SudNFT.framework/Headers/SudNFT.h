@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// NFT钱包
 @interface SudNFT : NSObject
+/// 获取版本号
+/// @return 返回SDK版本号
++ (NSString *)getVersion;
 
 /// 初始化, 必须初始化后使用
 /// @param paramModel 参数model

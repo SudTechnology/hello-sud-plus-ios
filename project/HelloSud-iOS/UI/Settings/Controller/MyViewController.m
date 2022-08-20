@@ -39,9 +39,12 @@
     BOOL isTestEnv = NO;
 #if DEBUG
     // 测试环境
-    [ISudNFTD e:2];
+    [ISudNFTD e:3];
     isTestEnv = YES;
 #endif
+    NSString *sudNFTSDKVersoin = [SudNFT getVersion];
+    NSLog(@"sudNFTSDKVersoin:%@", sudNFTSDKVersoin);
+    
     SudInitNFTParamModel *paramModel = SudInitNFTParamModel.new;
     paramModel.appId = @"1486637108889305089";
     paramModel.appKey = @"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR";
