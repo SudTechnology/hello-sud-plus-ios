@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addRefreshHeader];
-    [self.collectionView reloadData];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -103,6 +103,7 @@
         }
     }
     [self.dataList setArray:sortList];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - requst Data
