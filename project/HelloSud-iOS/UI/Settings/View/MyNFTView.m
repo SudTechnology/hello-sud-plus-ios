@@ -41,7 +41,9 @@
 
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (int i = 0; i < 3; ++i) {
-        UIImageView *iv = [[UIImageView alloc] init];
+        SDAnimatedImageView *iv = [[SDAnimatedImageView alloc] init];
+        iv.shouldCustomLoopCount = YES;
+        iv.animationRepeatCount = NSIntegerMax;
         [self showLoadAnimate:iv];
         iv.contentMode = UIViewContentModeScaleAspectFill;
         [iv dt_cornerRadius:8];

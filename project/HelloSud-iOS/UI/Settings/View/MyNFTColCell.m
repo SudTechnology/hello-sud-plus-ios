@@ -11,7 +11,7 @@
 @interface MyNFTColCell ()
 @property(nonatomic, strong) UIImageView *tagView;
 @property(nonatomic, strong) UILabel *tagLabel;
-@property(nonatomic, strong) UIImageView *gameImageView;
+@property(nonatomic, strong) SDAnimatedImageView *gameImageView;
 @property(nonatomic, strong) UILabel *nameLabel;
 @end
 
@@ -139,9 +139,11 @@
     return _tagView;
 }
 
-- (UIImageView *)gameImageView {
+- (SDAnimatedImageView *)gameImageView {
     if (!_gameImageView) {
         _gameImageView = [[SDAnimatedImageView alloc] init];
+        _gameImageView.shouldCustomLoopCount = YES;
+        _gameImageView.animationRepeatCount = NSIntegerMax;
         _gameImageView.contentMode = UIViewContentModeScaleAspectFill;
         _gameImageView.clipsToBounds = YES;
     }

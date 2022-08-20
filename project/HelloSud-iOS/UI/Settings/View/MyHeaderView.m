@@ -9,7 +9,7 @@
 #import "MyNFTView.h"
 
 @interface MyHeaderView ()
-@property(nonatomic, strong) UIImageView *headerView;
+@property(nonatomic, strong) SDAnimatedImageView *headerView;
 @property(nonatomic, strong) UILabel *userNameLabel;
 @property(nonatomic, strong) UILabel *userIdLabel;
 @property(nonatomic, strong) DTPaddingLabel *walletAddressLabel;
@@ -179,9 +179,11 @@
 }
 
 
-- (UIImageView *)headerView {
+- (SDAnimatedImageView *)headerView {
     if (!_headerView) {
-        _headerView = [[UIImageView alloc] init];
+        _headerView = [[SDAnimatedImageView alloc] init];
+        _headerView.shouldCustomLoopCount = YES;
+        _headerView.animationRepeatCount = NSIntegerMax;
         _headerView.clipsToBounds = true;
         _headerView.layer.cornerRadius = 56 / 2;
     }

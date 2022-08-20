@@ -9,7 +9,7 @@
 #import <MJExtension/MJExtension.h>
 
 @interface AudioMicroView ()
-@property(nonatomic, strong) UIImageView *headerView;
+@property(nonatomic, strong) SDAnimatedImageView *headerView;
 @property(nonatomic, strong) YYLabel *nameLabel;
 @property(nonatomic, strong) UIImageView *giftImageView;
 
@@ -384,9 +384,11 @@
 
 #pragma mark - lazy
 
-- (UIImageView *)headerView {
+- (SDAnimatedImageView *)headerView {
     if (!_headerView) {
-        _headerView = [[UIImageView alloc] init];
+        _headerView = [[SDAnimatedImageView alloc] init];
+        _headerView.shouldCustomLoopCount = YES;
+        _headerView.animationRepeatCount = NSIntegerMax;
         _headerView.image = [UIImage imageNamed:@"room_mic_up"];
         _headerView.userInteractionEnabled = YES;
         _headerView.clipsToBounds = YES;

@@ -164,13 +164,13 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MyNFTColCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyNFTColCell" forIndexPath:indexPath];
-
+    MyNFTColCell *c = (MyNFTColCell *) cell;
+    c.model = self.dataList[indexPath.row];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    MyNFTColCell *c = (MyNFTColCell *) cell;
-    c.model = self.dataList[indexPath.row];
+
 }
 
 #pragma mark - UICollectionViewDelegate
