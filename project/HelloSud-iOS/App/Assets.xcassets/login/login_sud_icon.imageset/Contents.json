@@ -5,12 +5,11 @@
       "scale" : "1x"
     },
     {
-      "filename" : "login_sud_icon@2x.png",
+      "filename" : "96x96直角.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "login_sud_icon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

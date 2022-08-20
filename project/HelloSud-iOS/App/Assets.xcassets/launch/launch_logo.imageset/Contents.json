@@ -5,12 +5,11 @@
       "scale" : "1x"
     },
     {
-      "filename" : "logo@2x.png",
+      "filename" : "384x384直角.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "logo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
