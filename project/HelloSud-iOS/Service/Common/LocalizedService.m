@@ -194,6 +194,10 @@
 + (NSString *)dt_custom_false_show { return @"dt_custom_false_show".localized; }
 + (NSString *)dt_custom_true_hide { return @"dt_custom_true_hide".localized; }
 
++ (NSString *)dt_custom_hide_nft_avatar { return @"dt_custom_hide_nft_avatar".localized; }
++ (NSString *)dt_custom_hide_game_opening { return @"dt_custom_hide_game_opening".localized; }
++ (NSString *)dt_custom_hide_game_mvp { return @"dt_custom_hide_game_mvp".localized; }
+
 /// 1.3.0
 + (NSString *)dt_settings_more_set { return @"dt_settings_more_set".localized; }
 + (NSString *)dt_room_transfer_leader { return @"dt_room_transfer_leader".localized; }

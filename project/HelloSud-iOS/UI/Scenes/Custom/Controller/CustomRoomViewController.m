@@ -82,9 +82,6 @@
 /// 获取游戏Config  【需要实现】
 - (NSString *)onGetGameCfg {
     GameCfgModel *m = [AudioRoomService getGameCfgModel];
-    m.ui.game_mvp.hide = NO;
-    m.ui.game_opening.hide = NO;
-    m.ui.nft_avatar.hide = NO;
     return [m mj_JSONString];
 }
 

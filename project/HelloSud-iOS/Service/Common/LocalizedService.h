@@ -189,6 +189,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_custom_false_show;
 + (NSString *)dt_custom_true_hide;
 
++ (NSString *)dt_custom_hide_nft_avatar;
++ (NSString *)dt_custom_hide_game_opening;
++ (NSString *)dt_custom_hide_game_mvp;
+
 /// 1.3.0
 + (NSString *)dt_settings_more_set;
 + (NSString *)dt_room_transfer_leader;
