@@ -76,6 +76,7 @@
     }
     HSNFTListCellModel *m = (HSNFTListCellModel *) self.model;
     WeakSelf
+
     SudNFTInfoModel *nftModel = m.nftModel;
     weakSelf.nameLabel.text = nftModel.name;
     if (nftModel.coverURL) {
@@ -140,7 +141,7 @@
 
 - (UIImageView *)gameImageView {
     if (!_gameImageView) {
-        _gameImageView = [[UIImageView alloc] init];
+        _gameImageView = [[SDAnimatedImageView alloc] init];
         _gameImageView.contentMode = UIViewContentModeScaleAspectFill;
         _gameImageView.clipsToBounds = YES;
     }
