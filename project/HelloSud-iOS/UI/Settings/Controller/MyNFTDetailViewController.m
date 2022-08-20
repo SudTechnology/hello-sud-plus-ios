@@ -8,7 +8,7 @@
 #import "MyNFTDetailViewController.h"
 
 @interface MyNFTDetailViewController ()
-@property(nonatomic, strong) UIImageView *iconImageView;
+@property(nonatomic, strong) SDAnimatedImageView *iconImageView;
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) UILabel *contractAddressLabel;
 @property(nonatomic, strong) UILabel *tokenIDLabel;
@@ -298,9 +298,11 @@
 
 #pragma mark - 懒加载
 
-- (UIImageView *)iconImageView {
+- (SDAnimatedImageView *)iconImageView {
     if (!_iconImageView) {
-        _iconImageView = [[UIImageView alloc] init];
+        _iconImageView = [[SDAnimatedImageView alloc] init];
+        _iconImageView.shouldCustomLoopCount = YES;
+        _iconImageView.animationRepeatCount = NSIntegerMax;
         _iconImageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _iconImageView;
