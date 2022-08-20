@@ -94,6 +94,18 @@
 
 @end
 
+@implementation NFTAvatar
+
+@end
+
+@implementation GameOpening
+
+@end
+
+@implementation GameMVP
+
+@end
+
 @implementation GameUi
 
 - (LobbyPlayerCaptainIcon *)lobby_player_captain_icon {
@@ -257,6 +269,30 @@
     }
     return _block_change_seat;
 }
+
+- (NFTAvatar *)nft_avatar {
+    if (!_nft_avatar) {
+        _nft_avatar = [[NFTAvatar alloc] init];
+        _nft_avatar.hide = YES;
+    }
+    return _nft_avatar;
+}
+
+- (GameOpening *)game_opening {
+    if (!_game_opening) {
+        _game_opening = [[GameOpening alloc] init];
+        _game_opening.hide = YES;
+    }
+    return _game_opening;
+}
+
+- (GameMVP *)game_mvp {
+    if (!_game_mvp) {
+        _game_mvp = [[GameMVP alloc] init];
+        _game_mvp.hide = YES;
+    }
+    return _game_mvp;
+}
 @end
 
 @interface GameCfgModel ()
@@ -279,6 +315,9 @@
     GameCfgModel *m = [[GameCfgModel alloc] init];
     m.gameSoundVolume = 100;
     m.ui.lobby_players = l;
+    m.ui.nft_avatar.hide = NO;
+    m.ui.game_opening.hide = NO;
+    m.ui.game_mvp.hide = NO;
     return m;
 }
 

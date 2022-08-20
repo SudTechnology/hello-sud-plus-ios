@@ -132,6 +132,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface NFTAvatar : NSObject
+@property(nonatomic, assign) BOOL hide;
+
+@end
+
+@interface GameOpening : NSObject
+@property(nonatomic, assign) BOOL hide;
+
+@end
+
+@interface GameMVP : NSObject
+@property(nonatomic, assign) BOOL hide;
+
+@end
+
 @interface GameUi : NSObject
 /// 大厅游戏位上队长标识
 @property(nonatomic, strong) LobbyPlayerCaptainIcon *lobby_player_captain_icon;
@@ -178,7 +193,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) GameBG *game_bg;
 /// 自定义阻止换座位（目前仅支持飞行棋
 @property(nonatomic, strong) BlockChangeSeat *block_change_seat;
-
+/// 控制NFT头像的开关
+@property(nonatomic, strong) NFTAvatar *nft_avatar;
+/// 控制开场动画的开关
+@property(nonatomic, strong) GameOpening *game_opening;
+/// 控制MVP动画的开关
+@property(nonatomic, strong) GameMVP *game_mvp;
 @end
 
 @interface GameCfgModel : NSObject
