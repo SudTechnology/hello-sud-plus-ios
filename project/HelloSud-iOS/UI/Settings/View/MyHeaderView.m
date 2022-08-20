@@ -38,7 +38,7 @@
 
 - (void)dtLayoutViews {
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(7);
+        make.top.mas_equalTo(7 + kAppSafeTop);
         make.leading.mas_equalTo(8);
         make.size.mas_equalTo(CGSizeMake(56, 56));
     }];

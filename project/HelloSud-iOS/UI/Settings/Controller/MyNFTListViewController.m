@@ -13,7 +13,7 @@
 @interface MyNFTListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray<HSNFTListCellModel *> *dataList;
-
+@property(nonatomic, strong) NSString *pageKey;
 @end
 
 @implementation MyNFTListViewController
@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self addRefreshHeader];
+    [self addRefreshHeader];
     [self.collectionView reloadData];
 }
 
@@ -66,15 +66,29 @@
             [AppService.shared.login checkToken];
             return;
         }
-        [weakSelf requestData];
+        [weakSelf requestData:NO];
     }];
     header.lastUpdatedTimeLabel.hidden = true;
     header.stateLabel.hidden = true;
+
+    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        if (!AppService.shared.login.isRefreshedToken) {
+            [AppService.shared.login checkToken];
+            return;
+        }
+        [weakSelf requestData:YES];
+    }];
+    footer.ignoredScrollViewContentInsetBottom = YES;
     self.collectionView.mj_header = header;
+    self.collectionView.mj_footer = footer;
 }
 
-- (void)updateNFTList:(NSArray<HSNFTListCellModel *> *)list {
-    [self.dataList setArray:list];
+- (void)updateNFTList:(NSArray<HSNFTListCellModel *> *)list add:(BOOL)add {
+    if (add) {
+        [self.dataList addObjectsFromArray:list];
+    } else {
+        [self.dataList setArray:list];
+    }
     [self resortNFTList];
 }
 
@@ -93,9 +107,48 @@
 
 #pragma mark - requst Data
 
-- (void)requestData {
+- (void)requestData:(BOOL)isMore {
     WeakSelf
+    // 拉取NFT列表
+    SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
+    paramModel.walletToken = HSAppPreferences.shared.walletToken;
+    paramModel.walletAddress = HSAppPreferences.shared.walletAddress;
+    paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
+    if (isMore) {
+        paramModel.pageKey = HSAppPreferences.shared.nftListPageKey;
+        if (paramModel.pageKey.length == 0) {
+            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+            return;
+        }
+    }
+    [SudNFT getNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetNFTListModel *nftListModel) {
+        if (isMore) {
+            if (nftListModel.nftList.count == 0) {
+                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+            } else {
+                [weakSelf.collectionView.mj_footer endRefreshing];
+            }
+        } else {
+            [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_footer resetNoMoreData];
+        }
+        if (errCode != 0) {
+            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            [ToastUtil show:msg];
+            if (errCode == 1008) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
+            }
+            return;
+        }
 
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        for (SudNFTInfoModel *m in nftListModel.nftList) {
+            HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
+            cellModel.nftModel = m;
+            [arr addObject:cellModel];
+        }
+        [weakSelf updateNFTList:arr add:isMore];
+    }];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -143,7 +196,7 @@
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         flowLayout.minimumLineSpacing = 10;
         flowLayout.minimumInteritemSpacing = 0;
-        flowLayout.sectionInset = UIEdgeInsetsMake(20, 16, 0, 16);
+        flowLayout.sectionInset = UIEdgeInsetsMake(20, 16, -34, 16);
 
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;

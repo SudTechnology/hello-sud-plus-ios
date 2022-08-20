@@ -17,7 +17,7 @@ extern NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF;
 @property (nonatomic, assign)NSInteger selectedEthereumChainType;
 /// 绑定钱包
 @property(nonatomic, copy, nullable) NSString *walletAddress;
-
+@property (nonatomic, strong)NSString *nftListPageKey;
 + (instancetype)shared;
 - (NSString *)walletToken;
 /// 缓存钱包token

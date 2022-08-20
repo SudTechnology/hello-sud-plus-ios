@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 /// 我的NFT列表控制器
 @interface MyNFTListViewController : BaseViewController
-- (void)updateNFTList:(NSArray<HSNFTListCellModel *> *)list;
+- (void)updateNFTList:(NSArray<HSNFTListCellModel *> *)list add:(BOOL)add;
 @end
 
 NS_ASSUME_NONNULL_END

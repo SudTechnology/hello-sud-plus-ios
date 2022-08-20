@@ -193,7 +193,7 @@
     /// 点击更多
     MyNFTListViewController *vc = [[MyNFTListViewController alloc] init];
     vc.title = self.nameLabel.text;
-    [vc updateNFTList:self.nftCellModelList];
+    [vc updateNFTList:self.nftCellModelList add:NO];
     [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
 }
 

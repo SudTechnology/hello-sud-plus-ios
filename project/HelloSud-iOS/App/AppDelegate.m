@@ -28,6 +28,11 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // 配置顶部tableview不留出状态栏
+    UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    /// 防止键盘弹出抖动问题
+    UIScrollView.appearance.shouldIgnoreContentInsetAdjustment = YES;
 
     // Override point for customization after application launch.
     [self configLog];

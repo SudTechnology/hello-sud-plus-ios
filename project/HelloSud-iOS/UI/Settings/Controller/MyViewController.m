@@ -121,6 +121,7 @@
             }
             return;
         }
+        HSAppPreferences.shared.nftListPageKey = nftListModel.pageKey;
         [self.myHeaderView updateNFTList:nftListModel];
         [self reloadHeadView];
     }];
