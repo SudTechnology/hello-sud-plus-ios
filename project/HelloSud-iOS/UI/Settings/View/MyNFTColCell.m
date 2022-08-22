@@ -134,7 +134,7 @@
 - (UIImageView *)tagView {
     if (!_tagView) {
         _tagView = [[UIImageView alloc] init];
-        _tagView.image = [[UIImage imageNamed:@"user_nft_tag_bg"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 12, 27, 11) resizingMode:UIImageResizingModeStretch];
+        _tagView.image = [[UIImage imageNamed:@"user_nft_tag_bg"] resizableImageWithCapInsets:UIEdgeInsetsMake(12, 28, 13, 27) resizingMode:UIImageResizingModeStretch];
     }
     return _tagView;
 }
