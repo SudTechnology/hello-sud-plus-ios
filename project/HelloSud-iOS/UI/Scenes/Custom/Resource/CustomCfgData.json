@@ -46,51 +46,6 @@
       "name": "UI",
       "items": [
         {
-          "title": "dt_custom_hide_nft_avatar",
-          "subTitle": "(ui.nft_avatar.hide)",
-          "value": false,
-          "optionList": [
-            {
-              "title": "dt_custom_false_show",
-              "isSeleted": true
-            },
-            {
-              "title": "dt_custom_true_hide",
-              "isSeleted": false
-            }
-          ]
-        },
-        {
-          "title": "dt_custom_hide_game_opening",
-          "subTitle": "(ui.game_opening.hide)",
-          "value": false,
-          "optionList": [
-            {
-              "title": "dt_custom_false_show",
-              "isSeleted": true
-            },
-            {
-              "title": "dt_custom_true_hide",
-              "isSeleted": false
-            }
-          ]
-        },
-        {
-          "title": "dt_custom_hide_game_mvp",
-          "subTitle": "(ui.game_mvp.hide)",
-          "value": false,
-          "optionList": [
-            {
-              "title": "dt_custom_false_show",
-              "isSeleted": true
-            },
-            {
-              "title": "dt_custom_true_hide",
-              "isSeleted": false
-            }
-          ]
-        },
-        {
           "title": "dt_custom_hide_settlement",
           "subTitle": "(ui.gameSettle.hide)",
           "value": false,
@@ -387,6 +342,51 @@
             {
               "title": "dt_custom_true_hide",
               "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_nft_avatar",
+          "subTitle": "(ui.nft_avatar.hide)",
+          "value": true,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": false
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": true
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_game_opening",
+          "subTitle": "(ui.game_opening.hide)",
+          "value": true,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": false
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": true
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_game_mvp",
+          "subTitle": "(ui.game_mvp.hide)",
+          "value": true,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": false
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": true
             }
           ]
         }

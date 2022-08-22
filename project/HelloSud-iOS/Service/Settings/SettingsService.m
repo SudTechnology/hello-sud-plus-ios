@@ -6,8 +6,9 @@
 //
 
 #import "SettingsService.h"
-
-static NSString *const DTCustotmModelKey = @"DTCustotmModelKey";
+/// json文件变更的时候改变版本号，重新读取JSON文件，之前本地设置将重复恢复默认值
+static NSString *const DTCustotmModelKeyVersion = @"1.0";
+#define DTCustotmModelKey [NSString stringWithFormat:@"%@%@", @"DTCustotmModelKey", DTCustotmModelKeyVersion]
 @implementation SettingsService
 
 /// APP隐私协议地址

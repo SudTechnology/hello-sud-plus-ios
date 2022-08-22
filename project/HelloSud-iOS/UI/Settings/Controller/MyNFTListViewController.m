@@ -78,7 +78,6 @@
         }
         [weakSelf requestData:YES];
     }];
-//    footer.ignoredScrollViewContentInsetBottom = YES;
     self.collectionView.mj_header = header;
     self.collectionView.mj_footer = footer;
 }
