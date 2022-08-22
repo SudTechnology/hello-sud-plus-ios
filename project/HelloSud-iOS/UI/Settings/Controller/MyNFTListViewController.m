@@ -78,7 +78,7 @@
         }
         [weakSelf requestData:YES];
     }];
-    footer.ignoredScrollViewContentInsetBottom = YES;
+//    footer.ignoredScrollViewContentInsetBottom = YES;
     self.collectionView.mj_header = header;
     self.collectionView.mj_footer = footer;
 }
@@ -197,7 +197,7 @@
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         flowLayout.minimumLineSpacing = 10;
         flowLayout.minimumInteritemSpacing = 0;
-        flowLayout.sectionInset = UIEdgeInsetsMake(20, 16, -34, 16);
+        flowLayout.sectionInset = UIEdgeInsetsMake(20, 16, kAppSafeBottom, 16);
 
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
