@@ -274,7 +274,7 @@
         return;
     }
     if (self.model.user.icon) {
-        [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.model.user.icon]];
+        [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.model.user.icon] placeholderImage:[UIImage imageNamed:@"default_head"]];
     }
     self.giftImageView.hidden = self.model.isSelected && self.micType == HSAudioMic && kAudioRoomService.sceneType != SceneTypeOrder ? NO : YES;
     [self showUserName:self.model.user.name showOwner:self.model.user.roleType == 1 && self.micType == HSAudioMic];

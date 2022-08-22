@@ -277,7 +277,9 @@
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
 
-    NSMutableAttributedString *subtitleAttr = [[NSMutableAttributedString alloc] initWithString:subtitle ? subtitle : @""];
+    subtitle = subtitle ? subtitle : @"";
+    subtitle = [NSString stringWithFormat:@"%@ ", subtitle];
+    NSMutableAttributedString *subtitleAttr = [[NSMutableAttributedString alloc] initWithString:subtitle];
     subtitleAttr.yy_font = UIFONT_REGULAR(14);
     subtitleAttr.yy_color = subColor;
     subtitleAttr.yy_lineBreakMode = NSLineBreakByTruncatingMiddle;

@@ -46,7 +46,7 @@
     if (iconImage) {
         iconImage = [iconImage dt_circleImage];
     } else {
-        iconImage = [[UIImage alloc]init];
+        iconImage = [UIImage imageNamed:@"default_head"];
     }
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：", name]];
@@ -71,7 +71,7 @@
     CGFloat h = [super caculateHeight];
     CGFloat yMargin = 3;
     h += yMargin * 2;
-    NSMutableAttributedString *attrName = [self generateAttrContent:[UIImage imageNamed:@"login_sud_icon"]];
+    NSMutableAttributedString *attrName = [self generateAttrContent:[UIImage imageNamed:@"default_head"]];
     YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(MAX_CELL_CONTENT_WIDTH - 8, CGFLOAT_MAX) text:attrName];
     if (layout) {
         h += layout.textBoundingSize.height;

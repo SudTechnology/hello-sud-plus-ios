@@ -135,7 +135,7 @@
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(126);
         make.leading.mas_equalTo(30);
-        make.size.mas_equalTo(CGSizeMake(49, 22));
+        make.size.mas_equalTo(CGSizeMake(68, 22));
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(30);

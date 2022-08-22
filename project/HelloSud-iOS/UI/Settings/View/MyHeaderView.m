@@ -69,7 +69,7 @@
         make.leading.top.trailing.bottom.equalTo(@0);
     }];
     [self.nftView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.headerView.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.headerView.mas_bottom).offset(20);
         make.leading.equalTo(@0);
         make.trailing.equalTo(@0);
         make.height.greaterThanOrEqualTo(@0);

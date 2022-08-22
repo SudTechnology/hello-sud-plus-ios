@@ -5,11 +5,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "384x384直角.png",
+      "filename" : "launch_logo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "launch_logo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

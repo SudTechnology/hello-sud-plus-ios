@@ -56,7 +56,7 @@
     if (iconImage) {
         iconImage = [iconImage dt_circleImage];
     } else {
-        iconImage = [[UIImage alloc]init];
+        iconImage = [UIImage imageNamed:@"default_head"];
     }
     NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：", name]];
