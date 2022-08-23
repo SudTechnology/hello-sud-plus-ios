@@ -31,12 +31,17 @@
 /// 异步缓存用户信息
 /// @param arrUserID arrUserID description
 /// @param finished finished description
-- (void)asyncCacheUserInfo:(NSArray<NSNumber *> *)arrUserID finished:(EmptyBlock)finished {
+- (void)asyncCacheUserInfo:(NSArray<NSNumber *> *)arrUserID forceRefresh:(BOOL)forceRefresh finished:(EmptyBlock)finished {
     NSMutableArray *arrNotCacheID = NSMutableArray.new;
-    for (NSNumber *num in arrUserID) {
-        NSString *key = [NSString stringWithFormat:@"%@", num];
-        if (!self.dicUserInfo[key]) {
-            [arrNotCacheID addObject:num];
+    if (forceRefresh) {
+        // 强制刷新所有
+        [arrNotCacheID setArray:arrUserID];
+    } else {
+        for (NSNumber *num in arrUserID) {
+            NSString *key = [NSString stringWithFormat:@"%@", num];
+            if (!self.dicUserInfo[key]) {
+                [arrNotCacheID addObject:num];
+            }
         }
     }
     // all cache, don't req server again

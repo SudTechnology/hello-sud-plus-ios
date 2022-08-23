@@ -307,6 +307,7 @@
 		BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */; };
 		BC210A75257DF698A543C29A /* DiscoInteractiveColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */; };
 		BC210A7C7C41EA6AC304F981 /* RoomCmdKickoutRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */; };
+		BC210AAE6896B522765C1CEF /* BindWalletStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21021FFE297653BE615557 /* BindWalletStateView.m */; };
 		BC210ACE5AEABF2588AFE747 /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E38DF055BC8531BC2F9 /* MyEthereumChainsCellModel.m */; };
 		BC210B0390E117B09344D025 /* HSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100D34F80535C6D8EBA57 /* HSAppPreferences.m */; };
 		BC210B4F08432BD34551F5AF /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2103012553EB37A5DCFA1C /* MyHeaderView.m */; };
@@ -873,7 +874,9 @@
 		BC2101ECC4794AA0F7897DAE /* HSNFTListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSNFTListCellModel.m; sourceTree = "<group>"; };
 		BC2101EF59A5BF2EE40D5494 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
 		BC210203F8E7C5CAEFF19056 /* PKRoomService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRoomService.h; sourceTree = "<group>"; };
+		BC21021FFE297653BE615557 /* BindWalletStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindWalletStateView.m; sourceTree = "<group>"; };
 		BC210233A6B918F225A7E721 /* MyEthereumChainsSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectPopView.m; sourceTree = "<group>"; };
+		BC21023815DD950688C8032B /* BindWalletStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindWalletStateView.h; sourceTree = "<group>"; };
 		BC21026DC2310D6C27C12757 /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
 		BC2102BB41FECD66E17DB7BB /* MyBindWalletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBindWalletView.h; sourceTree = "<group>"; };
 		BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessCategoryView.m; sourceTree = "<group>"; };
@@ -1136,6 +1139,8 @@
 				BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */,
 				BC210E7A57C0CECB08491557 /* BindBtnView.m */,
 				BC21049D5A410A93350E5425 /* BindBtnView.h */,
+				BC21023815DD950688C8032B /* BindWalletStateView.h */,
+				BC21021FFE297653BE615557 /* BindWalletStateView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2936,6 +2941,7 @@
 				BC210ACE5AEABF2588AFE747 /* MyEthereumChainsCellModel.m in Sources */,
 				BC210A7C7C41EA6AC304F981 /* RoomCmdKickoutRoomModel.m in Sources */,
 				BC21087036D5517BE88A12AE /* BindBtnView.m in Sources */,
+				BC210AAE6896B522765C1CEF /* BindWalletStateView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

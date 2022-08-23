@@ -939,7 +939,7 @@
     }
     // 缓存用户信息
     WeakSelf
-    [UserService.shared asyncCacheUserInfo:arrUserID finished:^{
+    [UserService.shared asyncCacheUserInfo:arrUserID forceRefresh:YES finished:^{
         for (HSRoomMicList *m in micList) {
             NSString *key = [NSString stringWithFormat:@"%ld", m.micIndex];
             AudioRoomMicModel *micModel = weakSelf.dicMicModel[key];
