@@ -158,12 +158,8 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
 }
 
 - (NSString *)onGetGameCfg {
-    GameBG *bg = [[GameBG alloc] init];
-    bg.hide = true;
-    GameUi *ui = [[GameUi alloc] init];
-    ui.game_bg = bg;
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
-    m.ui = ui;
+    m.ui.game_bg.hide = true;
     return [m mj_JSONString];
 }
 
