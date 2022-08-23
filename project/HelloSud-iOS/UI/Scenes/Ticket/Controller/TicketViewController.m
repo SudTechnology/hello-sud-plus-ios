@@ -33,21 +33,11 @@
 
 /// 获取游戏Config  【需要实现】
 - (NSString *)onGetGameCfg {
-    LobbyPlayers *l = [[LobbyPlayers alloc] init];
-    l.hide = true;
-    GameCfgStartBtn *start_btn = [[GameCfgStartBtn alloc] init];
-    start_btn.custom = true;
-    GameCfgReadyBtn *ready_btn = [[GameCfgReadyBtn alloc] init];
-    ready_btn.custom = true;
-    GameSettleAgainBtn *game_settle_again_btn = [[GameSettleAgainBtn alloc] init];
-    game_settle_again_btn.custom = true;
-    GameUi *ui = [[GameUi alloc] init];
-    ui.lobby_players = l;
-    ui.ready_btn = ready_btn;
-    ui.start_btn = start_btn;
-    ui.game_settle_again_btn = game_settle_again_btn;
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
-    m.ui = ui;
+    m.ui.lobby_players.hide = true;
+    m.ui.ready_btn.custom = true;
+    m.ui.start_btn.custom = true;
+    m.ui.game_settle_again_btn.custom = true;
     return [m mj_JSONString];
 }
 
