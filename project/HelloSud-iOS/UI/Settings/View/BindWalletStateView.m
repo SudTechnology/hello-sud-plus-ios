@@ -42,6 +42,7 @@
 - (void)dtConfigUI {
     [super dtConfigUI];
     self.backgroundColor = HEX_COLOR_A(@"#ffffff", 0.9);
+    [self updateStage:1 event:1];
 }
 
 - (void)updateStage:(NSInteger)stage event:(NSInteger)event {
@@ -49,13 +50,15 @@
     switch (event) {
         case 1:
             self.stateLabel.text = @"钱包连接中...";
-            self.iconImageView = nil;
+            self.iconImageView.image = [UIImage imageNamed:@"nft_bind_connecting"];
             break;
         case 2:
             self.stateLabel.text = @"连接成功，等待签名...";
+            self.iconImageView.image = [UIImage imageNamed:@"nft_bind_siging"];
             break;
         case 4:
             self.stateLabel.text = @"签名成功";
+            self.iconImageView.image = [UIImage imageNamed:@"nft_bind_success"];
             self.timer = [DTTimer timerWithTimeCountdown:3 progressBlock:nil endBlock:^(DTTimer *timer) {
                 [DTAlertView close];
             }];
@@ -71,6 +74,7 @@
 }
 
 - (void)onTap:(id)tap {
+    NSLog(@"onTap");
     if (self.timer) {
         [self.timer stopTimer];
     }
@@ -90,7 +94,7 @@
         _stateLabel = [[UILabel alloc] init];
         _stateLabel.text = @"";
         _stateLabel.numberOfLines = 1;
-        _stateLabel.contentMode = NSTextAlignmentCenter;
+        _stateLabel.textAlignment = NSTextAlignmentCenter;
         _stateLabel.textColor = HEX_COLOR(@"#13141A");
         _stateLabel.font = UIFONT_MEDIUM(14);
     }
@@ -100,6 +104,7 @@
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
         _closeBtn = [[UIButton alloc]init];
+        [_closeBtn setImage:[UIImage imageNamed:@"nft_bind_close"] forState:UIControlStateNormal];
     }
     return _closeBtn;
 }

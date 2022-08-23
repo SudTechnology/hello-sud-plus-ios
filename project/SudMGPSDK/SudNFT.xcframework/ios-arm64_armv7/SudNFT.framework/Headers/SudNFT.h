@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 绑定钱包
 /// @param paramModel 参数model
 /// @param listener 结果回调
-+ (void)bindWallet:(SudNFTBindWalletParamModel *)paramModel listener:(ISudNFTListenerBindWallet)listener;
++ (void)bindWallet:(SudNFTBindWalletParamModel *)paramModel listener:(id<ISudNFTListenerBindWallet>)listener;
 
 /// 获取NFT列表,必须授权成功之后才能获取NFT列表
 /// @param paramModel 参数model

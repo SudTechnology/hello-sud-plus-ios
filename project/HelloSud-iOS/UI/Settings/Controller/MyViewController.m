@@ -12,14 +12,16 @@
 #import "MyHeaderView.h"
 #import "HSSettingViewController.h"
 #import "AboutViewController.h"
+#import "BindWalletStateView.h"
 
-@interface MyViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, ISudNFTListenerBindWallet>
 @property(nonatomic, strong) UITableView *tableView;
 /// 页面数据
 @property(nonatomic, strong) NSArray <NSArray <HSSettingModel *> *> *arrData;
 @property(nonatomic, strong) MyHeaderView *myHeaderView;
 @property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
 @property(nonatomic, strong) UIView *contactUsView;
+@property(nonatomic, weak) BindWalletStateView *bindWalletStateView;
 @end
 
 @implementation MyViewController
@@ -44,7 +46,7 @@
 #endif
     NSString *sudNFTSDKVersoin = [SudNFT getVersion];
     NSLog(@"sudNFTSDKVersoin:%@", sudNFTSDKVersoin);
-    
+
     SudInitNFTParamModel *paramModel = SudInitNFTParamModel.new;
     paramModel.appId = @"1486637108889305089";
     paramModel.appKey = @"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR";
@@ -53,15 +55,15 @@
     paramModel.isTestEnv = isTestEnv;
     WeakSelf
     [SudNFT initNFT:paramModel
-           listener:^(NSInteger errCode, NSString * _Nullable errMsg) {
-        if (errCode != 0) {
-            DDLogError(@"initNFT: errCode:%@, errMsg:%@", @(errCode), errMsg);
-            // SDK初始失败，重试或者提示错误
-            return;
-        }
-        DDLogError(@"onSudNFTInitStateChanged init success");
-        [weakSelf checkWalletInfo];
-    }];
+           listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
+               if (errCode != 0) {
+                   DDLogError(@"initNFT: errCode:%@, errMsg:%@", @(errCode), errMsg);
+                   // SDK初始失败，重试或者提示错误
+                   return;
+               }
+               DDLogError(@"onSudNFTInitStateChanged init success");
+               [weakSelf checkWalletInfo];
+           }];
 }
 
 - (BOOL)dtIsHiddenNavigationBar {
@@ -117,7 +119,7 @@
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];
             if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter]postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
             }
             return;
         }
@@ -187,25 +189,17 @@
     WeakSelf
     self.myHeaderView.clickWalletBlock = ^(SudNFTWalletInfoModel *m) {
 
-        SudNFTBindWalletParamModel *paramModel = SudNFTBindWalletParamModel.new;
-        paramModel.walletType = m.type;
-        [SudNFT bindWallet:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindWalletModel *bindWalletModel) {
-            if (errCode != 0) {
-                NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
-                DDLogError(@"bind wallet err:%@", msg);
-                [weakSelf showBindErrorAlert:msg];
-                return;
-            }
-            // 绑定钱包成功
-            HSAppPreferences.shared.bindWalletType = m.type;
-            HSAppPreferences.shared.walletAddress = bindWalletModel.walletAddress;
-            [HSAppPreferences.shared cacheWalletToken:bindWalletModel walletAddress:bindWalletModel.walletAddress];
-            [weakSelf.myHeaderView dtUpdateUI];
-            [weakSelf reloadHeadView];
-            [weakSelf checkWalletInfo];
+        
+        BindWalletStateView *bindWalletStateView = [[BindWalletStateView alloc] init];
+        [DTAlertView show:bindWalletStateView rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:^{
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
         }];
+        weakSelf.bindWalletStateView = bindWalletStateView;
+        
+        SudNFTBindWalletParamModel * paramModel = SudNFTBindWalletParamModel.new;
+        paramModel.walletType = m.type;
+        HSAppPreferences.shared.bindWalletType = m.type;
+        [SudNFT bindWallet:paramModel listener:self];
     };
     self.myHeaderView.deleteWalletBlock = ^{
         [DTAlertView showTextAlert:@"确定要解除连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
@@ -232,8 +226,6 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         [weakSelf onSudNFTBindWalletTokenExpired];
     }];
-    
-    
 
 }
 
@@ -375,4 +367,46 @@
     [self checkWalletInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
 }
+
+/// 绑定钱包成功回调
+/// @param walletInfoModel 成功回调
+- (void)onSuccess:(SudNFTBindWalletModel *_Nullable)walletInfoModel {
+
+    // 绑定钱包成功
+    HSAppPreferences.shared.walletAddress = walletInfoModel.walletAddress;
+    [HSAppPreferences.shared cacheWalletToken:walletInfoModel walletAddress:walletInfoModel.walletAddress];
+    [self.myHeaderView dtUpdateUI];
+    [self reloadHeadView];
+    [self checkWalletInfo];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
+//    [DTAlertView close];
+}
+
+/// 绑定钱包
+- (void)onFailure:(NSInteger)errCode errMsg:(NSString *_Nullable)errMsg {
+
+    [DTAlertView close];
+    if (errCode != 0) {
+        NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+        DDLogError(@"bind wallet err:%@", msg);
+        [self showBindErrorAlert:msg];
+        return;
+    }
+}
+
+/// 钱包绑定事件通知，可以使用此状态做交互状态展示
+/// @param stage 1: 连接；2：签名
+/// @param event 1：连接开始；2 成功连接钱包；3：签名开始；4:签名结束
+- (void)onBindStageEvent:(NSInteger)stage event:(NSInteger)event {
+    DDLogDebug(@"onBindStageEvent:%@, event:%@", @(stage), @(event));
+    [self.bindWalletStateView updateStage:stage event:event];
+}
+
+/// 绑定步骤顺序列表
+/// @param stageList 对应状态事件列表，如：["1", "2"]
+- (void)onBindStageList:(NSArray <NSNumber *> *_Nullable)stageList {
+    
+}
+
 @end
