@@ -193,7 +193,7 @@
             if (errCode != 0) {
                 NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
                 DDLogError(@"bind wallet err:%@", msg);
-                [weakSelf showBindErrorAlert];
+                [weakSelf showBindErrorAlert:msg];
                 return;
             }
             // 绑定钱包成功
@@ -237,14 +237,14 @@
 
 }
 
-- (void)showBindErrorAlert {
+- (void)showBindErrorAlert:(NSString *)msg {
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", @"连接失败"]];
     attrTitle.yy_lineSpacing = 16;
     attrTitle.yy_font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
     attrTitle.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
     attrTitle.yy_alignment = NSTextAlignmentCenter;
 
-    NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:@"你拒绝了钱包中的操作"];
+    NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:msg];
     attrStr_0.yy_lineSpacing = 6;
     attrStr_0.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
     attrStr_0.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];

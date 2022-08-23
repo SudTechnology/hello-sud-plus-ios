@@ -160,6 +160,7 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
 - (NSString *)onGetGameCfg {
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
     m.ui.game_bg.hide = true;
+    m.ui.lobby_players.hide = NO;
     return [m mj_JSONString];
 }
 

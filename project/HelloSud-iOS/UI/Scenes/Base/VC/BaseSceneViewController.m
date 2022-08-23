@@ -37,6 +37,8 @@
 @property(nonatomic, weak) id asrStateNTF;
 /// 是否加载机器人完毕
 @property(nonatomic, assign) BOOL isLoadedRobotListCompleted;
+/// 是否加载了麦位列表
+@property(nonatomic, assign) BOOL isFinishedMicList;
 // 缓存机器人列表
 @property(nonatomic, strong) NSArray<RobotInfoModel *> *cacheRobotList;
 
@@ -911,7 +913,10 @@
     WeakSelf
     [kAudioRoomService reqMicList:self.roomID.integerValue success:^(NSArray<HSRoomMicList *> *_Nonnull micList) {
         [weakSelf handleMicList:micList];
+
     }                        fail:^(NSError *error) {
+        weakSelf.isFinishedMicList = YES;
+        [weakSelf checkIfNeedToLoadRobotList];
     }];
 }
 
@@ -956,6 +961,8 @@
 
         [weakSelf handleAutoUpMic];
         [NSNotificationCenter.defaultCenter postNotificationName:NTF_MIC_CHANGED object:nil];
+        weakSelf.isFinishedMicList = YES;
+        [weakSelf checkIfNeedToLoadRobotList];
     }];
 
 }
@@ -1332,7 +1339,7 @@
 /// 从缓存机器人中找出一个未在麦位的
 /// @param completed
 - (void)findOneNotInMicRobotFromCacheList:(void (^)(RobotInfoModel *robotInfoModel))completed {
-    NSMutableArray *tempList = [[NSMutableArray alloc]initWithArray:self.cacheRobotList];
+    NSMutableArray *tempList = [[NSMutableArray alloc] initWithArray:self.cacheRobotList];
     for (RobotInfoModel *robotInfoModel in self.cacheRobotList) {
         if (![self isUserInMic:[NSString stringWithFormat:@"%@", @(robotInfoModel.userId)]]) {
             [tempList addObject:robotInfoModel];
@@ -1365,7 +1372,7 @@
     // 默认处理机器人上麦
     NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
     NSMutableArray *robotAnchorList = [[NSMutableArray alloc] init];
-    NSMutableArray *randList = [[NSMutableArray alloc]init];
+    NSMutableArray *randList = [[NSMutableArray alloc] init];
     if (robotList.count <= 3) {
         [randList setArray:robotList];
     } else {
@@ -1467,9 +1474,15 @@
 
 /// 已经进入房间，消息通道已经建立
 - (void)onHandleEnteredRoom {
-    if (self.isLoadCommonRobotList) {
-        // 加载机器人
-        [self loadCommonRobotList];
+    [self checkIfNeedToLoadRobotList];
+}
+
+- (void)checkIfNeedToLoadRobotList {
+    if (self.isEnteredRoom && self.isFinishedMicList) {
+        if (self.isLoadCommonRobotList) {
+            // 加载机器人
+            [self loadCommonRobotList];
+        }
     }
 }
 
