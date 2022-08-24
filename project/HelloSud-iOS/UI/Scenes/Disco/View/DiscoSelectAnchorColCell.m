@@ -48,7 +48,7 @@
     }
     AnchorUserInfoModel *m = (AnchorUserInfoModel *) self.model;
     if (m.avatar) {
-        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.avatar] placeholderImage:[UIImage imageNamed:@"default_head"]];
+        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.headImage] placeholderImage:[UIImage imageNamed:@"default_head"]];
     }
     if (m.isSelected) {
         self.selectTagImageView.hidden = NO;

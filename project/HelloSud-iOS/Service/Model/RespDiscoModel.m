@@ -42,6 +42,9 @@
 
 
 @implementation AnchorUserInfoModel
+- (NSString *)headImage {
+    return _headerType == HSUserHeadTypeNFT ? _headerNftUrl : _avatar;
+}
 @end
 
 /// 拉主播列表数据模型

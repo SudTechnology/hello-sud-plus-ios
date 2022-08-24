@@ -230,7 +230,7 @@
         AudioUserModel *user = [[AudioUserModel alloc] init];
         user.userID = [NSString stringWithFormat:@"%@", @(m.userId)];
         user.name = m.nickname;
-        user.icon = m.avatar;
+        user.icon = m.headImage;
         [arrWaitForSend addObject:user];
     }
 

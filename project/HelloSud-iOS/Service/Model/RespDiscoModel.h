@@ -54,6 +54,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)NSString * avatar;
 @property (nonatomic, strong)NSString * nickname;
 @property (nonatomic, assign)BOOL isSelected;
+@property(nonatomic, assign) NSInteger headerType;
+@property(nonatomic, strong) NSString *headerNftUrl;
+- (NSString *)headImage;
 @end
 
 /// 拉主播列表数据模型
