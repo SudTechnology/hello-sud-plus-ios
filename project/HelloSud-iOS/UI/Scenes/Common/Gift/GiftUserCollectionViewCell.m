@@ -45,7 +45,7 @@
     if ([self.model isKindOfClass:AudioRoomMicModel.class]) {
         AudioRoomMicModel *m = (AudioRoomMicModel *)self.model;
         if (m.user.icon) {
-            [self.headerView sd_setImageWithURL:[NSURL URLWithString:m.user.icon]];
+            [self.headerView sd_setImageWithURL:[NSURL URLWithString:m.user.icon] placeholderImage:[UIImage imageNamed:@"default_head"]];
         }
         self.micNumLabel.text = m.user.roleType == 1 ? NSString.dt_room_owner : [NSString stringWithFormat:NSString.dt_mic_index, m.micIndex + 1];
         self.selectView.image = m.isSelected ? [UIImage imageNamed:@"room_gift_user_select"] : nil;
