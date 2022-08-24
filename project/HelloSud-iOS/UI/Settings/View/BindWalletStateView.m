@@ -50,14 +50,17 @@
     switch (event) {
         case 1:
             self.stateLabel.text = @"钱包连接中...";
+            self.closeBtn.hidden = NO;
             self.iconImageView.image = [UIImage imageNamed:@"nft_bind_connecting"];
             break;
         case 2:
             self.stateLabel.text = @"连接成功，等待签名...";
+            self.closeBtn.hidden = NO;
             self.iconImageView.image = [UIImage imageNamed:@"nft_bind_siging"];
             break;
         case 4:
             self.stateLabel.text = @"签名成功";
+            self.closeBtn.hidden = YES;
             self.iconImageView.image = [UIImage imageNamed:@"nft_bind_success"];
             self.timer = [DTTimer timerWithTimeCountdown:3 progressBlock:nil endBlock:^(DTTimer *timer) {
                 [DTAlertView close];
