@@ -97,6 +97,8 @@
 }
 
 - (void)dtLayoutViews {
+    [self.goldNumLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.goldNumLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(13);
         make.leading.bottom.trailing.mas_equalTo(self);
