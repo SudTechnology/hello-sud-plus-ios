@@ -50,7 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GameSettleAgainBtn : NSObject
 @property(nonatomic, assign) BOOL custom;
-
+// 是否隐藏界面中的再来一局按钮
+@property(nonatomic, assign) BOOL hide;
 @end
 
 @interface LobbyGameSetting : NSObject
