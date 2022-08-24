@@ -51,7 +51,7 @@
     paramModel.appId = @"1486637108889305089";
     paramModel.appKey = @"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR";
     paramModel.userId = AppService.shared.loginUserID;
-    paramModel.universalLink = @"https://fat-links.sud.tech";
+    paramModel.universalLink = @"https://links.sud.tech";
     paramModel.isTestEnv = isTestEnv;
     WeakSelf
     [SudNFT initNFT:paramModel
