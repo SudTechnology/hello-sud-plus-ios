@@ -38,12 +38,20 @@ typedef void(^ISudNFTListenerGetNFTList)(NSInteger errCode, NSString *_Nullable 
 
 typedef void(^ISudNFTListenerGenNFTCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGenNFTCredentialsTokenModel *_Nullable generateDetailTokenModel);
 
+typedef void(^ISudNFTListenerSendVerifyCode)(NSInteger errCode, NSString *_Nullable errMsg);
+
+typedef void(^ISudNFTListenerBindUser)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindUserModel *_Nullable resp);
+
+typedef void(^ISudNFTListenerGetCardList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGetCardListModel *_Nullable resp);
+
+typedef void(^ISudNFTListenerGenCardCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTCardCredentialsTokenModel *_Nullable resp);
+
 /// 钱包绑定状态类型
 typedef NS_ENUM(NSInteger, ISudNFTBindWalletStageType) {
     /// 连接钱包
     ISudNFTBindWalletStageTypeConnect = 1,
     /// 钱包签名
-    ISudNFTBindWalletStageTypeSign = 1,
+    ISudNFTBindWalletStageTypeSign = 2,
 };
 
 /// 钱包绑定事件类型

@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 绑定钱包
 /// @param paramModel 参数model
 /// @param listener 结果回调
-+ (void)bindWallet:(SudNFTBindWalletParamModel *)paramModel listener:(id<ISudNFTListenerBindWallet>)listener;
++ (void)bindWallet:(SudNFTBindWalletParamModel *)paramModel listener:(id <ISudNFTListenerBindWallet>)listener;
 
 /// 获取NFT列表,必须授权成功之后才能获取NFT列表
 /// @param paramModel 参数model
@@ -45,6 +45,29 @@ NS_ASSUME_NONNULL_BEGIN
 /// 处理三方APP拉起时universal link
 /// @param userActivity userActivity description
 + (BOOL)handleOpenUniversalLink:(NSUserActivity *)userActivity;
+
+#pragma mark CNm
+
+/// 发送短信验证码
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)sendPhoneCode:(SudNFTSendVerifyCodeParamModel *)paramModel listener:(ISudNFTListenerSendVerifyCode)listener;
+
+/// 绑定用户
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)bindUser:(SudNFTBindUserParamModel *)paramModel listener:(ISudNFTListenerBindUser)listener;
+
+/// 获取藏品列表
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)getCardList:(SudNFTGetCardListParamModel *)paramModel listener:(ISudNFTListenerGetCardList)listener;
+
+/// 生成藏品使用唯一认证token
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)genCardCredentialsToken:(SudNFTCardCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerGenCardCredentialsToken)listener;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -17,6 +17,10 @@
 /// 是否更多处于打开状态
 @property(nonatomic, assign) BOOL isMoreOpened;
 @property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
+/// 国内钱包列表
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *cnWalletList;
+/// 海外钱包列表
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *foreignWalletList;
 @end
 
 @implementation MyBindWalletView
@@ -100,17 +104,21 @@
         [v removeFromSuperview];
     }
     NSArray *showWalletList = walletList;
-    NSInteger limitCount = 4;
-    // 小于limitCount个隐藏
-    if (walletList.count <= limitCount) {
-        self.moreView.hidden = YES;
-    } else {
-        self.moreView.hidden = NO;
-        if (!self.isMoreOpened) {
-            // 展示limitCount个
-            showWalletList = [walletList subarrayWithRange:NSMakeRange(0, limitCount)];
-        }
+    SudNFTWalletInfoModel *cnInfoModel = nil;
+    SudNFTWalletInfoModel *foreignInfoModel = nil;
+    for (SudNFTWalletInfoModel *m in walletList) {
     }
+//    NSInteger limitCount = 4;
+//    // 小于limitCount个隐藏
+//    if (walletList.count <= limitCount) {
+//        self.moreView.hidden = YES;
+//    } else {
+//        self.moreView.hidden = NO;
+//        if (!self.isMoreOpened) {
+//            // 展示limitCount个
+//            showWalletList = [walletList subarrayWithRange:NSMakeRange(0, limitCount)];
+//        }
+//    }
 
     [self.bindViewList removeAllObjects];
     BindBtnView *lastView = nil;
