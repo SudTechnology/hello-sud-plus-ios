@@ -183,6 +183,7 @@
 + (NSString *)dt_custom_handle_share { return @"dt_custom_handle_share".localized; }
 + (NSString *)dt_custom_btn_close { return @"dt_custom_btn_close".localized; }
 + (NSString *)dt_custom_btn_one_more_round { return @"dt_custom_btn_one_more_round".localized; }
++ (NSString *)dt_custom_btn_one_more_hidden { return @"dt_custom_btn_one_more_hidden".localized; }
 + (NSString *)dt_custom_prevent_change_seat { return @"dt_custom_prevent_change_seat".localized; }
 + (NSString *)dt_custom_false_change_seat { return @"dt_custom_false_change_seat".localized; }
 + (NSString *)dt_custom_true_not_change_seat { return @"dt_custom_true_not_change_seat".localized; }

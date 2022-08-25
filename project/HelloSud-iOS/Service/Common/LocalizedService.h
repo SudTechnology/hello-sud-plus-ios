@@ -178,6 +178,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_custom_handle_share;
 + (NSString *)dt_custom_btn_close;
 + (NSString *)dt_custom_btn_one_more_round;
++ (NSString *)dt_custom_btn_one_more_hidden;
 + (NSString *)dt_custom_prevent_change_seat;
 + (NSString *)dt_custom_false_change_seat;
 + (NSString *)dt_custom_true_not_change_seat;

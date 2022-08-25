@@ -173,6 +173,7 @@
 "dt_custom_handle_share" = "Indicates whether players can share their team by tapping the Share button";
 "dt_custom_btn_close" = "Indicates whether players can close the post-game screen and go back to the lobby by tapping the Close button on the post-game screen";
 "dt_custom_btn_one_more_round" = "Indicates whether players can play again by tapping the Play Again button on the post-game screen";
+"dt_custom_btn_one_more_hidden" = "是否隐藏结算界面中的『再来一局』按钮";
 "dt_custom_prevent_change_seat" = "Indicates whether to disable the seat change feature";
 "dt_custom_false_change_seat" = "false: player seats can be changed";
 "dt_custom_true_not_change_seat" = "true: player seats cannot be changed";
