@@ -30,7 +30,6 @@
 #define kDiscoRoomService ((DiscoRoomService *)AppService.shared.scene)
 
 
-
 @class AudioConfigModel;
 
 /// RTC厂商类型key
@@ -61,11 +60,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// rtc配置
 @property(nonatomic, strong) AudioConfigModel *rtcConfigModel;
 /// 登录用户ID
-@property (nonatomic, strong, readonly)NSString * loginUserID;
+@property(nonatomic, strong, readonly) NSString *loginUserID;
 /// 登录服务
-@property (nonatomic, strong)LoginService *login;
+@property(nonatomic, strong) LoginService *login;
 /// 场景服务
-@property (nonatomic, strong)BaseSceneService *scene;
+@property(nonatomic, strong) BaseSceneService *scene;
 /// 更多竞猜头部数据列表缓存
 @property(nonatomic, strong) NSArray <BaseModel *> *moreGuessHeaderArrayCache;
 /// 是否已经展示过横屏提示
@@ -99,6 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 登录成功请求配置信息
 - (void)reqConfigData;
+
 /// 请求版本更新
 /// @param success
 /// @param fail
@@ -113,6 +113,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param rtcType rtcType
 /// @return
 - (BOOL)isSameRtc:(HSConfigContent *)rtcConfig rtcType:(NSString *)rtcType;
+
+/// 是否已经穿戴
+/// @param contractAddress contractAddress
+/// @param tokenId tokenId
+/// @return
+- (BOOL)isNFTAlreadyUsed:(NSString *)contractAddress tokenId:(NSString *)tokenId;
+
+/// 使用NFT
+/// @param contractAddress
+/// @param tokenId
+- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId add:(BOOL)add;
 @end
 
 NS_ASSUME_NONNULL_END

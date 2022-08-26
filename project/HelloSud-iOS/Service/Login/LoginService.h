@@ -6,13 +6,16 @@
 //
 
 #import <Foundation/Foundation.h>
-/// token刷新成功通知
-extern NSString * const TOKEN_REFRESH_SUCCESS_NTF;
-/// token刷新失败通知
-extern NSString * const TOKEN_REFRESH_FAIL_NTF;
 
+/// token刷新成功通知
+extern NSString *const TOKEN_REFRESH_SUCCESS_NTF;
+/// token刷新失败通知
+extern NSString *const TOKEN_REFRESH_FAIL_NTF;
+/// 钱包token失效
+extern NSString *const WALLET_BIND_TOKEN_EXPIRED_NTF;
 
 NS_ASSUME_NONNULL_BEGIN
+
 /// 登录服务
 @interface LoginService : NSObject
 
@@ -25,13 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// token
 @property(nonatomic, copy, readonly) NSString *token;
 
+
 - (void)prepare;
 
 /// 请求登录
 /// @param name 昵称
 /// @param userID 用户ID
 - (void)reqLogin:(NSString *)name userID:(nullable NSString *)userID sucess:(EmptyBlock)success;
+
 - (void)checkToken;
+
+/// 保持用户信息
+- (void)saveLoginUserInfo;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -904,22 +904,10 @@ typedef NS_ENUM(NSInteger, PKStateType) {
 /// 获取游戏Config  【需要实现】
 - (NSString *)onGetGameCfg {
 
-    LobbyPlayers *lobby = [[LobbyPlayers alloc] init];
-    lobby.hide = NO;
-
-    GameCfgStartBtn *start_btn = [[GameCfgStartBtn alloc] init];
-    start_btn.custom = YES;
-
-    LobbyGameSetting *gameSetting = [[LobbyGameSetting alloc] init];
-    gameSetting.hide = YES;
-
-    GameUi *ui = [[GameUi alloc] init];
-    ui.lobby_players = lobby;
-    ui.start_btn = start_btn;
-    ui.lobby_game_setting = gameSetting;
-
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
-    m.ui = ui;
+    m.ui.lobby_players.hide = NO;
+    m.ui.start_btn.custom = YES;
+    m.ui.lobby_game_setting.hide = YES;
 
     return [m mj_JSONString];
 }

@@ -27,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = NSString.dt_tab_setting;
-    self.navigationItem.leftBarButtonItem = nil;
     // Do any additional setup after loading the view.
     [self configData];
 }
@@ -70,9 +69,9 @@
     privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
 
     if (self.showMoreSetting) {
-        self.arrData = @[@[verModel], @[languageModel, rtcModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+        self.arrData = @[@[verModel], @[languageModel, rtcModel]];
     } else {
-        self.arrData = @[@[verModel], @[languageModel], @[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+        self.arrData = @[@[verModel], @[languageModel]];
     }
 
     WeakSelf
@@ -89,10 +88,10 @@
         make.height.mas_equalTo(217);
         make.width.mas_equalTo(kScreenWidth - 32);
     }];
-    CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
-    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
-    self.contactUsView.frame = targetFrame;
-    self.tableView.tableFooterView = self.contactUsView;
+//    CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
+//    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
+//    self.contactUsView.frame = targetFrame;
+//    self.tableView.tableFooterView = self.contactUsView;
     [self.tableView reloadData];
 }
 

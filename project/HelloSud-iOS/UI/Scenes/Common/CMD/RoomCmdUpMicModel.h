@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)makeDownMicMsgWithMicIndex:(NSInteger)micIndex;
 
 - (NSAttributedString *)attrContent;
+- (void)refreshAttrContent:(void (^)(void))completed;
 @end
 
 NS_ASSUME_NONNULL_END

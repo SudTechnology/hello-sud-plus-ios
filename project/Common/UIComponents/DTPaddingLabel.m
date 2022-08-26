@@ -19,4 +19,12 @@
     return CGSizeMake(changeSize.width + self.paddingX *2, changeSize.height);
 }
 
+- (void)drawTextInRect:(CGRect)rect {
+    if (self.isPaddingXUseForFixedWidth){
+        UIEdgeInsets insets = {0, self.paddingX, 0, self.paddingX};
+        [super drawTextInRect:UIEdgeInsetsInsetRect(rect, insets)];
+    } else {
+        [super drawTextInRect:rect];
+    }
+}
 @end

@@ -16,10 +16,14 @@
 /// 用户是否登录token缓存key
 #define kKeyLoginToken [self envKey:@"key_login_token"]
 
+
 /// token刷新通知
 NSString *const TOKEN_REFRESH_SUCCESS_NTF = @"TOKEN_REFRESH_SUCCESS_NTF";
 /// token刷新失败通知
 NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
+
+/// 钱包token失效
+NSString *const WALLET_BIND_TOKEN_EXPIRED_NTF = @"WALLET_BIND_TOKEN_EXPIRED_NTF";
 
 @implementation LoginService
 
@@ -53,7 +57,7 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         _loginUserInfo = m;
         m.userID = @"";
         m.name = @"";
-        m.icon = @"";
+        m.avatar = @"";
         m.sex = 1;
     }
 
@@ -94,6 +98,7 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
     [[AppService shared] reqConfigData];
 }
 
+
 - (void)prepare {
     [self config];
 }
@@ -113,7 +118,7 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
         /// 存储用户信息
         weakSelf.loginUserInfo.name = model.nickname;
         weakSelf.loginUserInfo.userID = [NSString stringWithFormat:@"%ld", model.userId];
-        weakSelf.loginUserInfo.icon = model.avatar;
+        weakSelf.loginUserInfo.avatar = model.avatar;
 
         weakSelf.loginUserInfo.sex = 1;
         [weakSelf saveLoginUserInfo];

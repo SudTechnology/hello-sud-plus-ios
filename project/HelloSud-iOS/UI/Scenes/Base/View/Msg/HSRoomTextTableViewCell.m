@@ -28,15 +28,24 @@
 }
 
 - (void)setModel:(BaseModel *)model {
+    [super setModel:model];
     if ([model isKindOfClass:RoomCmdChatTextModel.class]) {
-        RoomCmdChatTextModel *m = (RoomCmdChatTextModel *)model;
-        [self setMsgContent: m];
+        RoomCmdChatTextModel *m = (RoomCmdChatTextModel *) model;
+        [self setMsgContent:m];
     }
 }
 
 /// 设置文本消息
 - (void)setMsgContent:(RoomCmdChatTextModel *)m {
+    WeakSelf
     self.msgLabel.attributedText = m.attrContent;
+    __weak typeof(m) weakM = m;
+    [m refreshAttrContent:^{
+        if (weakSelf.model == weakM) {
+            weakSelf.msgLabel.attributedText = weakM.attrContent;
+        }
+    }];
+
 }
 
 - (YYLabel *)msgLabel {

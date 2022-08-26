@@ -9,7 +9,7 @@
 #import <MJExtension/MJExtension.h>
 
 @interface AudioMicroView ()
-@property(nonatomic, strong) UIImageView *headerView;
+@property(nonatomic, strong) SDAnimatedImageView *headerView;
 @property(nonatomic, strong) YYLabel *nameLabel;
 @property(nonatomic, strong) UIImageView *giftImageView;
 
@@ -274,7 +274,7 @@
         return;
     }
     if (self.model.user.icon) {
-        [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.model.user.icon]];
+        [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.model.user.icon] placeholderImage:[UIImage imageNamed:@"default_head"]];
     }
     self.giftImageView.hidden = self.model.isSelected && self.micType == HSAudioMic && kAudioRoomService.sceneType != SceneTypeOrder ? NO : YES;
     [self showUserName:self.model.user.name showOwner:self.model.user.roleType == 1 && self.micType == HSAudioMic];
@@ -384,9 +384,11 @@
 
 #pragma mark - lazy
 
-- (UIImageView *)headerView {
+- (SDAnimatedImageView *)headerView {
     if (!_headerView) {
-        _headerView = [[UIImageView alloc] init];
+        _headerView = [[SDAnimatedImageView alloc] init];
+        _headerView.shouldCustomLoopCount = YES;
+        _headerView.animationRepeatCount = NSIntegerMax;
         _headerView.image = [UIImage imageNamed:@"room_mic_up"];
         _headerView.userInteractionEnabled = YES;
         _headerView.clipsToBounds = YES;

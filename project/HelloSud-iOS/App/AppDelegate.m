@@ -15,6 +15,7 @@
 #import "LoginViewController.h"
 #import "KeyHeader.h"
 #import <NIMSDK/NIMSDK.h>
+#import "SDImageSVGNativeCoder.h"
 
 @interface AppDelegate () {
 
@@ -27,6 +28,11 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // 配置顶部tableview不留出状态栏
+    UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    /// 防止键盘弹出抖动问题
+    UIScrollView.appearance.shouldIgnoreContentInsetAdjustment = YES;
 
     // Override point for customization after application launch.
     [self configLog];
@@ -53,6 +59,7 @@
     NIMSDKOption *option = [NIMSDKOption optionWithAppKey:@"110f7db7c00ee497bd7b32954c36464c"];
     [[NIMSDK sharedSDK] registerWithOption:option];
     [self configWebpCoder];
+
     return YES;
 }
 
@@ -61,6 +68,7 @@
     [Bugly updateAppVersion:version];
     [Bugly startWithAppId:BUGLEY_APP_ID];
 }
+
 
 - (void)observerNTF {
     // 监听token刷新状态切换视图
@@ -194,11 +202,24 @@
     // Add coder
     SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
     [[SDImageCodersManager sharedManager] addCoder:webPCoder];
-//    [[SDWebImageDownloader sharedDownloader] setValue:@"image/webp,image/*,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
+    // register coder, on AppDelegate
+
+    SDImageSVGNativeCoder *SVGNativeCoder = [SDImageSVGNativeCoder sharedCoder];
+    [[SDImageCodersManager sharedManager] addCoder:SVGNativeCoder];
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
     UIInterfaceOrientationMask mask = self.window.rootViewController.supportedInterfaceOrientations;
     return mask;
 }
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id <UIUserActivityRestoring>> *_Nullable))restorationHandler {
+
+    // 三方返回APP时，要将返回数据传入SudNFT去处理解析
+    if ([SudNFT handleOpenUniversalLink:userActivity]) {
+        return YES;
+    }
+    return YES;
+}
+
 @end

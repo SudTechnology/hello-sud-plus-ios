@@ -66,6 +66,9 @@ PODS:
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
+  - SDWebImageSVGKitPlugin (1.4.0):
+    - SDWebImage/Core (~> 5.10)
+    - SVGKit (~> 3.0)
   - SDWebImageWebPCoder (0.8.4):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
@@ -82,6 +85,8 @@ PODS:
     - SVGAPlayer/ProtoFiles
   - SVGAPlayer/ProtoFiles (2.5.6):
     - Protobuf (~> 3.4)
+  - SVGKit (3.0.0):
+    - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
   - TXLiteAVSDK_TRTC (10.2.11418):
     - TXLiteAVSDK_TRTC/TRTC (= 10.2.11418)
@@ -113,6 +118,7 @@ DEPENDENCIES:
   - NIMSDK_LITE (= 9.0.1)
   - RCVoiceRoomLib (~> 2.0.7)
   - SDWebImage (= 5.12.2)
+  - SDWebImageSVGKitPlugin (= 1.4.0)
   - SDWebImageWebPCoder
   - SudMGPWrapper (from `./`)
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
@@ -148,8 +154,10 @@ SPEC REPOS:
     - RongCloudIM
     - RongCloudRTC
     - SDWebImage
+    - SDWebImageSVGKitPlugin
     - SDWebImageWebPCoder
     - SSZipArchive
+    - SVGKit
     - SVProgressHUD
     - TXLiteAVSDK_TRTC
     - YYText
@@ -190,10 +198,12 @@ SPEC CHECKSUMS:
   RongCloudIM: c871de12fdc601a4335e17d8df17232f56b8d089
   RongCloudRTC: 6171037c157b9c8ce8f4c2868b72b197a84eea13
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
+  SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  SudMGPWrapper: 8fa4cf29642ea7a1926e660a733bda7f9e0a21b6
+  SudMGPWrapper: 1bf6e1a20e239e7b88bc9568ff31346375e892cb
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
+  SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TXLiteAVSDK_TRTC: a653d0195b9519222b6ff8a6329d7c942aeb1a62
   VolcEngineRTC: 6db475579381dd86105092ef7cc8100eb8db3345
@@ -201,6 +211,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 6a4f294825ac93f16c5101d3e97d211c2d17fa33
 
-PODFILE CHECKSUM: 8d3668ee374a52f4959190e6db940d26749366c6
+PODFILE CHECKSUM: 510eb04d3a47080db17ade792bb071a70c239d10
 
 COCOAPODS: 1.11.2

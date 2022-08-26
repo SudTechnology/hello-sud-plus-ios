@@ -1,0 +1,412 @@
+//
+//  HSSettingViewController.m
+//  HelloSud-iOS
+//
+//  Created by kaniel on 2022/1/20.
+//
+
+#import "MyViewController.h"
+#import "MyCell.h"
+#import "HSSettingModel.h"
+#import "ChangeRTCViewController.h"
+#import "MyHeaderView.h"
+#import "HSSettingViewController.h"
+#import "AboutViewController.h"
+#import "BindWalletStateView.h"
+
+@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, ISudNFTListenerBindWallet>
+@property(nonatomic, strong) UITableView *tableView;
+/// 页面数据
+@property(nonatomic, strong) NSArray <NSArray <HSSettingModel *> *> *arrData;
+@property(nonatomic, strong) MyHeaderView *myHeaderView;
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
+@property(nonatomic, strong) UIView *contactUsView;
+@property(nonatomic, weak) BindWalletStateView *bindWalletStateView;
+@end
+
+@implementation MyViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    [self configData];
+    [self configSudNFT];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)configSudNFT {
+    BOOL isTestEnv = NO;
+#if DEBUG
+    // 测试环境
+    [ISudNFTD e:2];
+    isTestEnv = YES;
+#endif
+    NSString *sudNFTSDKVersoin = [SudNFT getVersion];
+    NSLog(@"sudNFTSDKVersoin:%@", sudNFTSDKVersoin);
+
+    SudInitNFTParamModel *paramModel = SudInitNFTParamModel.new;
+    paramModel.appId = @"1486637108889305089";
+    paramModel.appKey = @"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR";
+    paramModel.userId = AppService.shared.loginUserID;
+    paramModel.universalLink = @"https://links.sud.tech";
+    paramModel.isTestEnv = isTestEnv;
+    WeakSelf
+    [SudNFT initNFT:paramModel
+           listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
+               if (errCode != 0) {
+                   DDLogError(@"initNFT: errCode:%@, errMsg:%@", @(errCode), errMsg);
+                   // SDK初始失败，重试或者提示错误
+                   return;
+               }
+               DDLogError(@"onSudNFTInitStateChanged init success");
+               [weakSelf checkWalletInfo];
+           }];
+}
+
+- (BOOL)dtIsHiddenNavigationBar {
+    return YES;
+}
+
+/// 配置页面数据
+- (void)configData {
+
+    HSSettingModel *settingModel = [HSSettingModel new];
+    settingModel.title = @"设置";
+    settingModel.subTitle = nil;
+    settingModel.isMore = YES;
+    settingModel.pageURL = @"";
+
+    HSSettingModel *aboutModel = [HSSettingModel new];
+    aboutModel.title = @"关于我们";
+    aboutModel.subTitle = nil;
+    aboutModel.isMore = YES;
+    aboutModel.pageURL = @"";
+
+    self.arrData = @[@[settingModel], @[aboutModel]];
+//    CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
+//    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
+//    self.contactUsView.frame = targetFrame;
+//    self.tableView.tableFooterView = self.contactUsView;
+    [self.tableView reloadData];
+}
+
+- (void)checkWalletInfo {
+
+    BOOL bindWallet = HSAppPreferences.shared.walletAddress.length > 0;
+    if (!bindWallet) {
+        // 未绑定钱包
+        [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
+            if (errCode != 0) {
+                [ToastUtil show:errMsg];
+                return;
+            }
+            [self.myHeaderView updateSupportWallet:getWalletListModel.walletList];
+            [self reloadHeadView];
+        }];
+        return;
+    }
+    // 拉取NFT列表
+    SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
+    paramModel.walletToken = HSAppPreferences.shared.walletToken;
+    paramModel.walletAddress = HSAppPreferences.shared.walletAddress;
+    paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
+    paramModel.pageKey = nil;
+    [SudNFT getNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetNFTListModel *nftListModel) {
+        if (errCode != 0) {
+            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            [ToastUtil show:msg];
+            if (errCode == 1008) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
+            }
+            return;
+        }
+        HSAppPreferences.shared.nftListPageKey = nftListModel.pageKey;
+        [self.myHeaderView updateNFTList:nftListModel];
+        [self reloadHeadView];
+    }];
+    // 更新链网数据
+    if (self.walletList.count == 0) {
+        [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
+            if (errCode != 0) {
+                [ToastUtil show:errMsg];
+                return;
+            }
+            self.walletList = getWalletListModel.walletList;
+            [self updateWalletEtherChains];
+        }];
+    } else {
+        [self updateWalletEtherChains];
+    }
+}
+
+/// 更新钱包链网类型
+- (void)updateWalletEtherChains {
+    for (SudNFTWalletInfoModel *m in self.walletList) {
+        if (m.type == HSAppPreferences.shared.bindWalletType) {
+            [self.myHeaderView updateEthereumList:m.chainList];
+            break;
+        }
+    }
+    [self reloadHeadView];
+}
+
+- (void)reloadHeadView {
+    CGFloat w = kScreenWidth - 32;
+
+    CGSize size = [self.myHeaderView systemLayoutSizeFittingSize:CGSizeMake(w, 10000)];
+    CGRect targetFrame = CGRectMake(0, 0, w, size.height);
+    DDLogDebug(@"reloadHeadView size:%@", [NSValue valueWithCGSize:size]);
+    self.myHeaderView.frame = targetFrame;
+    self.tableView.tableHeaderView = self.myHeaderView;
+    [self.myHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(@0);
+        make.width.equalTo(@(w));
+    }];
+
+}
+
+- (void)dtAddViews {
+    [super dtAddViews];
+    self.view.backgroundColor = HEX_COLOR(@"#F5F6FB");
+    [self.view addSubview:self.tableView];
+
+}
+
+- (void)dtLayoutViews {
+    [super dtLayoutViews];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 16, 0, 16));
+    }];
+
+    [self reloadHeadView];
+}
+
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    WeakSelf
+    self.myHeaderView.clickWalletBlock = ^(SudNFTWalletInfoModel *m) {
+
+        
+        BindWalletStateView *bindWalletStateView = [[BindWalletStateView alloc] init];
+        [DTAlertView show:bindWalletStateView rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:^{
+            
+        }];
+        weakSelf.bindWalletStateView = bindWalletStateView;
+        
+        SudNFTBindWalletParamModel * paramModel = SudNFTBindWalletParamModel.new;
+        paramModel.walletType = m.type;
+        HSAppPreferences.shared.bindWalletType = m.type;
+        [SudNFT bindWallet:paramModel listener:self];
+    };
+    self.myHeaderView.deleteWalletBlock = ^{
+        [DTAlertView showTextAlert:@"确定要解除连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+            [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
+                HSAppPreferences.shared.walletAddress = nil;
+                [AppService.shared useNFT:@"" tokenId:@"" add:NO];
+                AppService.shared.login.loginUserInfo.headerNftUrl = nil;
+                AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
+                [AppService.shared.login saveLoginUserInfo];
+                [weakSelf.myHeaderView dtUpdateUI];
+                [weakSelf reloadHeadView];
+                [weakSelf checkWalletInfo];
+                [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
+            }                  fail:nil];
+        }          onCloseCallback:nil];
+    };
+
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf checkWalletInfo];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_NFT_WEAR_CHANGE_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf.myHeaderView dtUpdateUI];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf onSudNFTBindWalletTokenExpired];
+    }];
+
+}
+
+- (void)showBindErrorAlert:(NSString *)msg {
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", @"连接失败"]];
+    attrTitle.yy_lineSpacing = 16;
+    attrTitle.yy_font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
+    attrTitle.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
+    attrTitle.yy_alignment = NSTextAlignmentCenter;
+
+    NSMutableAttributedString *attrStr_0 = [[NSMutableAttributedString alloc] initWithString:msg];
+    attrStr_0.yy_lineSpacing = 6;
+    attrStr_0.yy_font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+    attrStr_0.yy_color = [UIColor dt_colorWithHexString:@"#1A1A1A" alpha:1];
+    attrStr_0.yy_alignment = NSTextAlignmentCenter;
+    [attrTitle appendAttributedString:attrStr_0];
+    [DTAlertView showAttrTextAlert:attrTitle sureText:@"确定" cancelText:nil rootView:nil onSureCallback:^{
+        [DTAlertView close];
+    }              onCloseCallback:nil];
+    return;
+}
+
+#pragma makr lazy
+
+- (MyHeaderView *)myHeaderView {
+    if (!_myHeaderView) {
+        _myHeaderView = [[MyHeaderView alloc] init];
+        _myHeaderView.backgroundColor = HEX_COLOR(@"#F5F6FB");
+    }
+    return _myHeaderView;
+}
+
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        [_tableView registerClass:[MyCell class] forCellReuseIdentifier:@"MyCell"];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = HEX_COLOR(@"#F5F6FB");
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.showsHorizontalScrollIndicator = NO;
+        _tableView.showsVerticalScrollIndicator = NO;
+
+    }
+    return _tableView;
+}
+
+- (UIView *)contactUsView {
+    if (_contactUsView == nil) {
+        _contactUsView = UIView.new;
+        UILabel *usLabel = UILabel.new;
+        usLabel.numberOfLines = 0;
+        usLabel.text = NSString.dt_settings_contact_us;
+        usLabel.textColor = HEX_COLOR(@"#8A8A8E");
+        usLabel.font = UIFONT_REGULAR(12);
+        usLabel.textAlignment = NSTextAlignmentCenter;
+        usLabel.numberOfLines = 0;
+        [_contactUsView addSubview:usLabel];
+        usLabel.preferredMaxLayoutWidth = kScreenWidth - 34;
+        [usLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(17);
+            make.width.equalTo(@(kScreenWidth - 34));
+            make.top.mas_equalTo(0);
+            make.height.mas_greaterThanOrEqualTo(0);
+            make.bottom.mas_equalTo(0);
+        }];
+    }
+    return _contactUsView;
+}
+
+#pragma mark UITableViewDelegate
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell" forIndexPath:indexPath];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MyCell *c = (MyCell *) cell;
+    c.isShowTopLine = indexPath.row > 0;
+    c.model = self.arrData[indexPath.section][indexPath.row];
+
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
+    if ([model.title isEqualToString:@"设置"]) {
+        HSSettingViewController *vc = HSSettingViewController.new;
+        [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
+    } else if ([model.title isEqualToString:@"关于我们"]) {
+        AboutViewController *vc = AboutViewController.new;
+        vc.title = model.title;
+        [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
+    return model.isMore;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.arrData.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arrData[section].count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 56;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 24;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return UIView.new;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return UIView.new;
+}
+
+#pragma mark ISudNFTListener
+
+/// 绑定钱包token过期，需要重新验证绑定
+- (void)onSudNFTBindWalletTokenExpired {
+    DDLogWarn(@"onSudNFTBindWalletTokenExpired");
+    HSAppPreferences.shared.walletAddress = nil;
+    [self.myHeaderView dtUpdateUI];
+    [self reloadHeadView];
+    [self checkWalletInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
+}
+
+/// 绑定钱包成功回调
+/// @param walletInfoModel 成功回调
+- (void)onSuccess:(SudNFTBindWalletModel *_Nullable)walletInfoModel {
+
+    // 绑定钱包成功
+    HSAppPreferences.shared.walletAddress = walletInfoModel.walletAddress;
+    [HSAppPreferences.shared cacheWalletToken:walletInfoModel walletAddress:walletInfoModel.walletAddress];
+    [self.myHeaderView dtUpdateUI];
+    [self reloadHeadView];
+    [self checkWalletInfo];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
+//    [DTAlertView close];
+}
+
+/// 绑定钱包
+- (void)onFailure:(NSInteger)errCode errMsg:(NSString *_Nullable)errMsg {
+
+    [DTAlertView close];
+    if (errCode != 0) {
+        NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+        DDLogError(@"bind wallet err:%@", msg);
+        [self showBindErrorAlert:msg];
+        return;
+    }
+}
+
+/// 钱包绑定事件通知，可以使用此状态做交互状态展示
+/// @param stage 1: 连接；2：签名
+/// @param event 1：连接开始；2 成功连接钱包；3：签名开始；4:签名结束
+- (void)onBindStageEvent:(NSInteger)stage event:(NSInteger)event {
+    DDLogDebug(@"onBindStageEvent:%@, event:%@", @(stage), @(event));
+    [self.bindWalletStateView updateStage:stage event:event];
+}
+
+/// 绑定步骤顺序列表
+/// @param stageList 对应状态事件列表，如：["1", "2"]
+- (void)onBindStageList:(NSArray <NSNumber *> *_Nullable)stageList {
+    
+}
+
+@end

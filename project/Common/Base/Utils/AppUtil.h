@@ -26,6 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIWindow *)currentWindow;
 //获取当前最上层的控制器
 + (UIViewController *)currentViewController;
+
+/// 复制内容到剪切板
+/// @param content content
+/// @param msg content
++ (void)copyToPasteProcess:(NSString *)content toast:(NSString *)msg;
 @end
 
 NS_ASSUME_NONNULL_END

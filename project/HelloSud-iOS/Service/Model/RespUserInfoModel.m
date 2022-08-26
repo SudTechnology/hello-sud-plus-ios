@@ -9,6 +9,9 @@
 
 /// 响应用户信息model
 @implementation HSUserInfoModel
+- (NSString *)headImage {
+    return _headerType == HSUserHeadTypeNFT ? _headerNftUrl : _avatar;
+}
 @end
 
 /// 响应用户信息model

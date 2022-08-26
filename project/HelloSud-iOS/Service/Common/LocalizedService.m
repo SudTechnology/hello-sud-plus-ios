@@ -183,6 +183,7 @@
 + (NSString *)dt_custom_handle_share { return @"dt_custom_handle_share".localized; }
 + (NSString *)dt_custom_btn_close { return @"dt_custom_btn_close".localized; }
 + (NSString *)dt_custom_btn_one_more_round { return @"dt_custom_btn_one_more_round".localized; }
++ (NSString *)dt_custom_btn_one_more_hidden { return @"dt_custom_btn_one_more_hidden".localized; }
 + (NSString *)dt_custom_prevent_change_seat { return @"dt_custom_prevent_change_seat".localized; }
 + (NSString *)dt_custom_false_change_seat { return @"dt_custom_false_change_seat".localized; }
 + (NSString *)dt_custom_true_not_change_seat { return @"dt_custom_true_not_change_seat".localized; }
@@ -193,6 +194,10 @@
 + (NSString *)dt_custom_true_only_notifies { return @"dt_custom_true_only_notifies".localized; }
 + (NSString *)dt_custom_false_show { return @"dt_custom_false_show".localized; }
 + (NSString *)dt_custom_true_hide { return @"dt_custom_true_hide".localized; }
+
++ (NSString *)dt_custom_hide_nft_avatar { return @"dt_custom_hide_nft_avatar".localized; }
++ (NSString *)dt_custom_hide_game_opening { return @"dt_custom_hide_game_opening".localized; }
++ (NSString *)dt_custom_hide_game_mvp { return @"dt_custom_hide_game_mvp".localized; }
 
 /// 1.3.0
 + (NSString *)dt_settings_more_set { return @"dt_settings_more_set".localized; }

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用户管理模块
 @interface UserService : NSObject
 /// 当前账户金币，每次请求接口更新
-@property (nonatomic, assign)int64_t currentUserCoin;
+@property(nonatomic, assign) int64_t currentUserCoin;
 
 + (instancetype)shared;
 
@@ -23,11 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// 异步缓存用户信息
 /// @param arrUserID arrUserID description
 /// @param finished finished description
-- (void)asyncCacheUserInfo:(NSArray<NSNumber *>*)arrUserID finished:(EmptyBlock)finished;
+- (void)asyncCacheUserInfo:(NSArray<NSNumber *> *)arrUserID forceRefresh:(BOOL)forceRefresh finished:(EmptyBlock)finished;
+
 /// 获取用户金币
 /// @param success
 /// @param fail
 - (void)reqUserCoinDetail:(Int64Block)success fail:(StringBlock)fail;
+
+/// 请求穿戴
+/// @param nftDetailToken 穿戴的NFT详情token
++ (void)reqWearNFT:(NSString *)nftDetailToken isWear:(BOOL)isWear success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail;
 @end
 
 NS_ASSUME_NONNULL_END

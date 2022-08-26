@@ -176,6 +176,7 @@
 "dt_custom_handle_share" = "『分享』按钮抛事件";
 "dt_custom_btn_close" = "结算界面中的『关闭』按钮抛事件";
 "dt_custom_btn_one_more_round" = "结算界面中的『再来一局』按钮抛事件";
+"dt_custom_btn_one_more_hidden" = "是否隐藏结算界面中的『再来一局』按钮";
 "dt_custom_prevent_change_seat" = "自定义阻止换座位";
 "dt_custom_false_change_seat" = "false: 可以换座位";
 "dt_custom_true_not_change_seat" = "true: 不可以换座位";
@@ -186,6 +187,10 @@
 "dt_custom_true_only_notifies" = "true: 游戏只通知app按钮点击事件，不处理";
 "dt_custom_false_show" = "false: 显示";
 "dt_custom_true_hide" = "true: 隐藏";
+
+"dt_custom_hide_nft_avatar" = "控制NFT头像的开关";
+"dt_custom_hide_game_opening" = "控制开场动画的开关";
+"dt_custom_hide_game_mvp" = "控制MVP动画的开关";
 
 /// 1.3.0
 "dt_settings_more_set" = "更多设置";

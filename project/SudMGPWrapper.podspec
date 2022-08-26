@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SudMGPWrapper'
-  s.version          = '1.0.3'
+  s.version          = '1.0.4'
   s.summary          = 'A short description of SudMGPWrapper.'
   
   # This description is used to generate tags and improve search results.
@@ -43,7 +43,8 @@ Pod::Spec.new do |s|
         'SudMGPWrapper/State/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
       ]
       ss.vendored_frameworks = [
-        'SudMGPSDK/SudMGP.xcframework'
+        'SudMGPSDK/SudMGP.xcframework',
+        'SudMGPSDK/SudNFT.xcframework',
       ]
 
       # json

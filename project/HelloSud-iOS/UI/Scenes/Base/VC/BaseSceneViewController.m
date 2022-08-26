@@ -37,6 +37,8 @@
 @property(nonatomic, weak) id asrStateNTF;
 /// 是否加载机器人完毕
 @property(nonatomic, assign) BOOL isLoadedRobotListCompleted;
+/// 是否加载了麦位列表
+@property(nonatomic, assign) BOOL isFinishedMicList;
 // 缓存机器人列表
 @property(nonatomic, strong) NSArray<RobotInfoModel *> *cacheRobotList;
 
@@ -341,11 +343,15 @@
 
 - (void)dtUpdateUI {
     [self.naviView dtUpdateUI];
+    [self updateTotalGameUserCount];
+    [self setupGameRoomContent];
+    self.robotView.hidden = self.isShowAddRobotBtn ? NO : YES;
+}
+
+- (void)updateTotalGameUserCount {
     if (self.gameId > 0) {
         self.totalGameUserCount = [AppService.shared getTotalGameCountWithGameID:self.gameId];
     }
-    [self setupGameRoomContent];
-    self.robotView.hidden = self.isShowAddRobotBtn ? NO : YES;
 }
 
 /// 退出房间
@@ -907,7 +913,10 @@
     WeakSelf
     [kAudioRoomService reqMicList:self.roomID.integerValue success:^(NSArray<HSRoomMicList *> *_Nonnull micList) {
         [weakSelf handleMicList:micList];
+
     }                        fail:^(NSError *error) {
+        weakSelf.isFinishedMicList = YES;
+        [weakSelf checkIfNeedToLoadRobotList];
     }];
 }
 
@@ -920,6 +929,7 @@
     }
     BOOL showTip = self.gameId == DIGITAL_BOMB || self.gameId == YOU_DRAW_AND_I_GUESS || self.gameId == I_GUESS_YOU_SAID;
     [self.asrTipLabel setHidden:showTip ? NO : YES];
+    [self updateTotalGameUserCount];
 }
 
 - (void)handleMicList:(NSArray<HSRoomMicList *> *)micList {
@@ -929,7 +939,7 @@
     }
     // 缓存用户信息
     WeakSelf
-    [UserService.shared asyncCacheUserInfo:arrUserID finished:^{
+    [UserService.shared asyncCacheUserInfo:arrUserID forceRefresh:YES finished:^{
         for (HSRoomMicList *m in micList) {
             NSString *key = [NSString stringWithFormat:@"%ld", m.micIndex];
             AudioRoomMicModel *micModel = weakSelf.dicMicModel[key];
@@ -942,7 +952,7 @@
                 micModel.user.userID = [NSString stringWithFormat:@"%ld", m.userId];
                 if (userInfo) {
                     micModel.user.name = userInfo.nickname;
-                    micModel.user.icon = userInfo.avatar;
+                    micModel.user.icon = userInfo.headImage;
                     micModel.user.sex = [userInfo.gender isEqualToString:@"male"] ? 1 : 2;
                     micModel.user.isAi = userInfo.ai;
                 }
@@ -951,6 +961,8 @@
 
         [weakSelf handleAutoUpMic];
         [NSNotificationCenter.defaultCenter postNotificationName:NTF_MIC_CHANGED object:nil];
+        weakSelf.isFinishedMicList = YES;
+        [weakSelf checkIfNeedToLoadRobotList];
     }];
 
 }
@@ -1327,7 +1339,7 @@
 /// 从缓存机器人中找出一个未在麦位的
 /// @param completed
 - (void)findOneNotInMicRobotFromCacheList:(void (^)(RobotInfoModel *robotInfoModel))completed {
-    NSMutableArray *tempList = [[NSMutableArray alloc]initWithArray:self.cacheRobotList];
+    NSMutableArray *tempList = [[NSMutableArray alloc] initWithArray:self.cacheRobotList];
     for (RobotInfoModel *robotInfoModel in self.cacheRobotList) {
         if (![self isUserInMic:[NSString stringWithFormat:@"%@", @(robotInfoModel.userId)]]) {
             [tempList addObject:robotInfoModel];
@@ -1360,7 +1372,7 @@
     // 默认处理机器人上麦
     NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
     NSMutableArray *robotAnchorList = [[NSMutableArray alloc] init];
-    NSMutableArray *randList = [[NSMutableArray alloc]init];
+    NSMutableArray *randList = [[NSMutableArray alloc] init];
     if (robotList.count <= 3) {
         [randList setArray:robotList];
     } else {
@@ -1462,9 +1474,15 @@
 
 /// 已经进入房间，消息通道已经建立
 - (void)onHandleEnteredRoom {
-    if (self.isLoadCommonRobotList) {
-        // 加载机器人
-        [self loadCommonRobotList];
+    [self checkIfNeedToLoadRobotList];
+}
+
+- (void)checkIfNeedToLoadRobotList {
+    if (self.isEnteredRoom && self.isFinishedMicList) {
+        if (self.isLoadCommonRobotList) {
+            // 加载机器人
+            [self loadCommonRobotList];
+        }
     }
 }
 

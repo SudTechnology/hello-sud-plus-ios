@@ -230,7 +230,7 @@
         AudioUserModel *user = [[AudioUserModel alloc] init];
         user.userID = [NSString stringWithFormat:@"%@", @(m.userId)];
         user.name = m.nickname;
-        user.icon = m.avatar;
+        user.icon = m.headImage;
         [arrWaitForSend addObject:user];
     }
 
@@ -371,7 +371,7 @@
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
-        _collectionView.showsHorizontalScrollIndicator = YES;
+        _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[DiscoSelectAnchorColCell class] forCellWithReuseIdentifier:@"DiscoSelectAnchorColCell"];
     }
     return _collectionView;

@@ -1,506 +1,566 @@
 {
-    "customList": [
+  "customList": [
+    {
+      "name": "dt_custom_game_system",
+      "items": [
         {
-            "name": "dt_custom_game_system",
-            "items": [
-                {
-                    "title": "dt_custom_game_cpu",
-                    "subTitle": "(gameCPU)",
-                    "value": 0,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_game_cpu_normal",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_game_cpu_low",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_in_game_sound",
-                    "subTitle": "(gameSoundControl)",
-                    "value": 0,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_game_play_sound",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_app_play_sound",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_in_game_volume",
-                    "subTitle": "(gameSoundVolume)",
-                    "value": 100,
-                    "optionList": [
-                    ]
-                }
-            ]
+          "title": "dt_custom_game_cpu",
+          "subTitle": "(gameCPU)",
+          "value": 0,
+          "optionList": [
+            {
+              "title": "dt_custom_game_cpu_normal",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_game_cpu_low",
+              "isSeleted": false
+            }
+          ]
         },
         {
-            "name": "UI",
-            "items": [
-                {
-                    "title": "dt_custom_hide_settlement",
-                    "subTitle": "(ui.gameSettle.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_ping",
-                    "subTitle": "(ui.ping.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_version",
-                    "subTitle": "(ui.version.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_rank",
-                    "subTitle": "(ui.level.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_lobby_sound",
-                    "subTitle": "(ui.lobby_setting_btn.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_lobby_help",
-                    "subTitle": "(ui.lobby_help_btn.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_lobby_slot",
-                    "subTitle": "(ui.lobby_players.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_lobby_captain",
-                    "subTitle": "(ui.lobby_player_captain_icon.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_lobby_kick",
-                    "subTitle": "(ui.lobby_player_kickout_icon.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_lobby_des",
-                    "subTitle": "(ui.lobby_rule.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_lobby_settings",
-                    "subTitle": "(ui.lobby_game_setting.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_btn_join_game",
-                    "subTitle": "(ui.join_btn.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_btn_exit_game",
-                    "subTitle": "(ui.cancel_join_btn.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_btn_prepare",
-                    "subTitle": "(ui.ready_btn.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_btn_cancel_prepare",
-                    "subTitle": "(ui.cancel_ready_btn.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_btn_start_game",
-                    "subTitle": "(ui.start_btn.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_btn_share",
-                    "subTitle": "(ui.share_btn.hide)",
-                    "value": true,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": false
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": true
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_btn_sound",
-                    "subTitle": "(ui.game_setting_btn.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_btn_help_scene",
-                    "subTitle": "(ui.game_help_btn.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_hide_game_bg",
-                    "subTitle": "(ui.game_bg.hide)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_show",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_hide",
-                            "isSeleted": false
-                        }
-                    ]
-                }
-            ]
+          "title": "dt_custom_in_game_sound",
+          "subTitle": "(gameSoundControl)",
+          "value": 0,
+          "optionList": [
+            {
+              "title": "dt_custom_game_play_sound",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_app_play_sound",
+              "isSeleted": false
+            }
+          ]
         },
         {
-            "name": "Custom",
-            "items": [
-                {
-                    "title": "dt_custom_click_join_game",
-                    "subTitle": "(ui.lobby_players.custom)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_game_processing",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_only_notifies",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_handle_join_game",
-                    "subTitle": "(ui.join_btn.custom)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_game_processing",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_only_notifies",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_handle_exit_game",
-                    "subTitle": "(ui.cancel_join_btn.custom)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_game_processing",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_only_notifies",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_handle_prepare",
-                    "subTitle": "(ui.ready_btn.custom)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_game_processing",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_only_notifies",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_handle_cancel_prepare",
-                    "subTitle": "(ui.cancel_ready_btn.custom)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_game_processing",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_only_notifies",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_handle_start_game",
-                    "subTitle": "(ui.start_btn.custom)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_game_processing",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_only_notifies",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_handle_share",
-                    "subTitle": "(ui.share_btn.custom)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_game_processing",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_only_notifies",
-                            "isSeleted": false
-                        }
-                    ],
-                },
-                {
-                    "title": "dt_custom_btn_close",
-                    "subTitle": "(ui.game_settle_close_btn.custom)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_close_settlement",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_game_notifies",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_btn_one_more_round",
-                    "subTitle": "(ui.game_settle_again_btn.custom)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_close_settlement",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_game_notifies",
-                            "isSeleted": false
-                        }
-                    ]
-                },
-                {
-                    "title": "dt_custom_prevent_change_seat",
-                    "subTitle": "(ui.block_change_seat.custom)",
-                    "value": false,
-                    "optionList": [
-                        {
-                            "title": "dt_custom_false_change_seat",
-                            "isSeleted": true
-                        },
-                        {
-                            "title": "dt_custom_true_not_change_seat",
-                            "isSeleted": false
-                        }
-                    ]
-                }
-            ]
+          "title": "dt_custom_in_game_volume",
+          "subTitle": "(gameSoundVolume)",
+          "value": 100,
+          "optionList": [
+          ]
         }
-    ]
+      ]
+    },
+    {
+      "name": "UI",
+      "items": [
+        {
+          "title": "dt_custom_hide_settlement",
+          "subTitle": "(ui.gameSettle.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_ping",
+          "subTitle": "(ui.ping.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_version",
+          "subTitle": "(ui.version.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_rank",
+          "subTitle": "(ui.level.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_lobby_sound",
+          "subTitle": "(ui.lobby_setting_btn.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_lobby_help",
+          "subTitle": "(ui.lobby_help_btn.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_lobby_slot",
+          "subTitle": "(ui.lobby_players.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_lobby_captain",
+          "subTitle": "(ui.lobby_player_captain_icon.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_lobby_kick",
+          "subTitle": "(ui.lobby_player_kickout_icon.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_lobby_des",
+          "subTitle": "(ui.lobby_rule.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_lobby_settings",
+          "subTitle": "(ui.lobby_game_setting.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_btn_join_game",
+          "subTitle": "(ui.join_btn.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_btn_exit_game",
+          "subTitle": "(ui.cancel_join_btn.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_btn_prepare",
+          "subTitle": "(ui.ready_btn.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_btn_cancel_prepare",
+          "subTitle": "(ui.cancel_ready_btn.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_btn_start_game",
+          "subTitle": "(ui.start_btn.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_btn_share",
+          "subTitle": "(ui.share_btn.hide)",
+          "value": true,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": false
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": true
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_btn_sound",
+          "subTitle": "(ui.game_setting_btn.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_btn_help_scene",
+          "subTitle": "(ui.game_help_btn.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_game_bg",
+          "subTitle": "(ui.game_bg.hide)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_nft_avatar",
+          "subTitle": "(ui.nft_avatar.hide)",
+          "value": true,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": false
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": true
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_game_opening",
+          "subTitle": "(ui.game_opening.hide)",
+          "value": true,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": false
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": true
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_hide_game_mvp",
+          "subTitle": "(ui.game_mvp.hide)",
+          "value": true,
+          "optionList": [
+            {
+              "title": "dt_custom_false_show",
+              "isSeleted": false
+            },
+            {
+              "title": "dt_custom_true_hide",
+              "isSeleted": true
+            }
+          ]
+        },
+        {
+            "title": "dt_custom_btn_one_more_hidden",
+            "subTitle": "(ui.game_settle_again_btn.hide)",
+            "value": false,
+            "optionList": [
+              {
+                "title": "dt_custom_false_show",
+                "isSeleted": true
+              },
+              {
+                "title": "dt_custom_true_hide",
+                "isSeleted": false
+              }
+            ]
+          }
+      ]
+    },
+    {
+      "name": "Custom",
+      "items": [
+        {
+          "title": "dt_custom_click_join_game",
+          "subTitle": "(ui.lobby_players.custom)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_game_processing",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_only_notifies",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_handle_join_game",
+          "subTitle": "(ui.join_btn.custom)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_game_processing",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_only_notifies",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_handle_exit_game",
+          "subTitle": "(ui.cancel_join_btn.custom)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_game_processing",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_only_notifies",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_handle_prepare",
+          "subTitle": "(ui.ready_btn.custom)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_game_processing",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_only_notifies",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_handle_cancel_prepare",
+          "subTitle": "(ui.cancel_ready_btn.custom)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_game_processing",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_only_notifies",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_handle_start_game",
+          "subTitle": "(ui.start_btn.custom)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_game_processing",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_only_notifies",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_handle_share",
+          "subTitle": "(ui.share_btn.custom)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_game_processing",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_only_notifies",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_btn_close",
+          "subTitle": "(ui.game_settle_close_btn.custom)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_close_settlement",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_game_notifies",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_btn_one_more_round",
+          "subTitle": "(ui.game_settle_again_btn.custom)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_ready_state",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_game_notifies",
+              "isSeleted": false
+            }
+          ]
+        },
+        {
+          "title": "dt_custom_prevent_change_seat",
+          "subTitle": "(ui.block_change_seat.custom)",
+          "value": false,
+          "optionList": [
+            {
+              "title": "dt_custom_false_change_seat",
+              "isSeleted": true
+            },
+            {
+              "title": "dt_custom_true_not_change_seat",
+              "isSeleted": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

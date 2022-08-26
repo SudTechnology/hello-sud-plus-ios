@@ -381,9 +381,9 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @property(nonatomic, assign) BOOL isIn;
 /// 加入哪支队伍;
 @property(nonatomic, assign) int64_t teamId;
-/// 当isIn==false时有效；0 主动退出，1 被踢;（reason默认-1，无意义便于处理）
-@property(nonatomic, copy) NSString *kickUID;
 /// 当reason==1时有效；kickUID为踢人的用户uid；判断被踢的人是本人条件(onPlayerStateChange(userId==kickedUID == selfUID)；（kickUID默认""，无意义便于处理）
+@property(nonatomic, copy) NSString *kickUID;
+/// 当isIn==false时有效；0 主动退出，1 被踢;（reason默认-1，无意义便于处理）
 @property(nonatomic, assign) int reason;
 @end
 
