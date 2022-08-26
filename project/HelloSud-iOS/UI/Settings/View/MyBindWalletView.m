@@ -6,6 +6,7 @@
 #import "MyBindWalletView.h"
 #import "BindBtnView.h"
 #import "MyViewController.h"
+#import "ForeignWalletSelectPopView.h"
 
 @interface MyBindWalletView ()
 @property(nonatomic, strong) UILabel *nameLabel;
@@ -117,7 +118,7 @@
                 foreignInfoModel.zoneType = m.zoneType;
             }
             [foreignWalletList addObject:m];
-        } else if (m.zoneType == 0) {
+        } else if (m.zoneType == 1) {
             if (cnInfoModel == nil){
                 cnInfoModel = SudNFTWalletInfoModel.new;
                 cnInfoModel.name = @"国内账户";
@@ -127,11 +128,11 @@
         }
     }
     if (foreignInfoModel) {
-        foreignInfoModel.walletList = foreignWalletList;
+        self.foreignWalletList = foreignWalletList;
         [showWalletList addObject:foreignInfoModel];
     }
     if (cnInfoModel) {
-        cnInfoModel.walletList = cnWalletList;
+        self.cnWalletList = cnWalletList;
         [showWalletList addObject:cnInfoModel];
     }
 
@@ -158,9 +159,15 @@
         [self addSubview:bindBtnView];
         [self.bindViewList addObject:bindBtnView];
         bindBtnView.clickWalletBlock = ^(SudNFTWalletInfoModel *wallModel) {
-            if (weakSelf.clickWalletBlock) {
-                weakSelf.clickWalletBlock(wallModel);
-            }
+
+            ForeignWalletSelectPopView *v = ForeignWalletSelectPopView.new;
+            v.selectedWalletBlock = ^(SudNFTWalletInfoModel *walletInfoModel){
+                if (weakSelf.clickWalletBlock) {
+                    weakSelf.clickWalletBlock(walletInfoModel);
+                }
+            };
+            [DTSheetView show:v onCloseCallback:nil];
+            [v updateDataList:weakSelf.foreignWalletList];
         };
 
         [bindBtnView update:m];

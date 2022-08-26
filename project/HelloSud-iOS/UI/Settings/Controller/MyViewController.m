@@ -41,7 +41,7 @@
     BOOL isTestEnv = NO;
 #if DEBUG
     // 测试环境
-    [ISudNFTD e:2];
+    [ISudNFTD e:4];
     isTestEnv = YES;
 #endif
     NSString *sudNFTSDKVersoin = [SudNFT getVersion];
@@ -103,6 +103,7 @@
                 [ToastUtil show:errMsg];
                 return;
             }
+            self.walletList = getWalletListModel.walletList;
             [self.myHeaderView updateSupportWallet:getWalletListModel.walletList];
             [self reloadHeadView];
         }];
