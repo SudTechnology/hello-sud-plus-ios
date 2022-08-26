@@ -103,11 +103,38 @@
     for (BindBtnView *v in self.bindViewList) {
         [v removeFromSuperview];
     }
-    NSArray *showWalletList = walletList;
+    NSMutableArray *showWalletList = NSMutableArray.new;
     SudNFTWalletInfoModel *cnInfoModel = nil;
     SudNFTWalletInfoModel *foreignInfoModel = nil;
+
+    NSMutableArray *cnWalletList = NSMutableArray.new;
+    NSMutableArray *foreignWalletList = NSMutableArray.new;
     for (SudNFTWalletInfoModel *m in walletList) {
+        if (m.zoneType == 0) {
+            if (foreignInfoModel == nil){
+                foreignInfoModel = SudNFTWalletInfoModel.new;
+                foreignInfoModel.name = @"海外钱包";
+                foreignInfoModel.zoneType = m.zoneType;
+            }
+            [foreignWalletList addObject:m];
+        } else if (m.zoneType == 0) {
+            if (cnInfoModel == nil){
+                cnInfoModel = SudNFTWalletInfoModel.new;
+                cnInfoModel.name = @"国内账户";
+                cnInfoModel.zoneType = m.zoneType;
+            }
+            [cnWalletList addObject:m];
+        }
     }
+    if (foreignInfoModel) {
+        foreignInfoModel.walletList = foreignWalletList;
+        [showWalletList addObject:foreignInfoModel];
+    }
+    if (cnInfoModel) {
+        cnInfoModel.walletList = cnWalletList;
+        [showWalletList addObject:cnInfoModel];
+    }
+
 //    NSInteger limitCount = 4;
 //    // 小于limitCount个隐藏
 //    if (walletList.count <= limitCount) {
@@ -171,7 +198,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"连接到你的钱包";
+        _nameLabel.text = @"连接账户，同步你的NFT或数字藏品";
         _nameLabel.numberOfLines = 1;
         _nameLabel.textColor = HEX_COLOR(@"#ffffff");
         _nameLabel.font = UIFONT_MEDIUM(14);

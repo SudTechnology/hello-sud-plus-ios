@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *icon;
 /// 支持链列表
 @property(nonatomic, strong) NSArray<SudNFTChainInfoModel *> *chainList;
+@property(nonatomic, strong)NSArray<SudNFTWalletInfoModel *> *walletList;
 @end
 
 /// 获取钱包列表数据模型
