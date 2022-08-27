@@ -313,8 +313,10 @@
     v.walletInfoModel = walletInfoModel;
     [v dtUpdateUI];
     UIView *coverView = UIView.new;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapCover:)];
+    [coverView addGestureRecognizer:tap];
     coverView.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
-    [self.view addSubview:coverView];
+    [AppUtil.currentWindow addSubview:coverView];
     [coverView addSubview:v];
     [coverView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.top.bottom.equalTo(@0);
@@ -332,6 +334,10 @@
         [HSAppPreferences.shared clearBindUserInfoWithWalletType:walletInfoModel.type];
         [selectView dtUpdateUI];
     };
+}
+
+- (void)onTapCover:(UITapGestureRecognizer *)tap {
+    [tap.view removeFromSuperview];
 }
 
 - (void)showBindErrorAlert:(NSString *)msg {
