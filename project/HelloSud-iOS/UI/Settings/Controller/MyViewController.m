@@ -331,8 +331,17 @@
     };
     v.sureBlock = ^{
         [weakCoverView removeFromSuperview];
+        [DTSheetView close];
         [HSAppPreferences.shared clearBindUserInfoWithWalletType:walletInfoModel.type];
-        [selectView dtUpdateUI];
+        HSAppPreferences.shared.walletAddress = nil;
+        [AppService.shared useNFT:@"" tokenId:@"" add:NO];
+        AppService.shared.login.loginUserInfo.headerNftUrl = nil;
+        AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
+        [AppService.shared.login saveLoginUserInfo];
+        [weakSelf.myHeaderView dtUpdateUI];
+        [weakSelf reloadHeadView];
+        [weakSelf checkWalletInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
     };
 }
 

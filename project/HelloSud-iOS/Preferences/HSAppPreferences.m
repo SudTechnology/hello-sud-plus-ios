@@ -202,6 +202,10 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
     [NSUserDefaults.standardUserDefaults removeObjectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserPhone, @(walletType)]];
     // 移除绑定用户token
     [NSUserDefaults.standardUserDefaults removeObjectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserToken, @(walletType)]];
+    /// 清楚绑定类型
+    self.currentSelectedWalletType = -1;
+    self.bindZoneType = -1;
+    self.bindWalletType = -1;
 }
 
 @end
