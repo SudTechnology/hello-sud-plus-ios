@@ -76,6 +76,24 @@
     }];
 }
 
+/// 通过钱包更新
+- (void)updateWithWalletInfoModel:(SudNFTWalletInfoModel *)model {
+    self.nameLabel.text = model.name;
+    if (model.icon) {
+        [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:model.icon]];
+    }
+    CGRect rect = [model.name boundingRectWithSize:CGSizeMake(190 - 16, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.nameLabel.font} context:nil];
+    CGFloat labelW = ceil(rect.size.width);
+    CGFloat left = (190 - labelW - 16) / 2;
+    [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.height.equalTo(@16);
+        make.leading.equalTo(@(left));
+    }];
+    [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(labelW));
+    }];
+}
+
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
@@ -95,7 +113,7 @@
 
 - (UIButton *)clickBtn {
     if (!_clickBtn) {
-        _clickBtn = [[UIButton alloc]init];
+        _clickBtn = [[UIButton alloc] init];
     }
     return _clickBtn;
 }

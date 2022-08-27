@@ -10,6 +10,8 @@
 NSString *const MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF = @"MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF";
 NSString *const MY_NFT_WEAR_CHANGE_NTF = @"MY_NFT_WEAR_CHANGE_NTF";
 NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF = @"MY_NFT_BIND_WALLET_CHANGE_NTF";
+/// 房间列表更新通知
+NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF";
 
 /// 用户选择链网
 #define kKeySelectedEthereumChain [self envKey:@"kKeySelectedEthereumChain"]
@@ -19,9 +21,21 @@ NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF = @"MY_NFT_BIND_WALLET_CHANGE_NTF"
 /// 用户绑定钱包
 #define kKeyBindWallet [self envKey:@"kKeyBindWallet"]
 
-@interface HSAppPreferences()
+/// 用户绑定钱包区域
+#define kKeyBindWalletZone [self envKey:@"kKeyBindWalletZone"]
+
+/// 用户绑定手机号
+#define kKeyBindUserPhone [self envKey:@"kKeyBindUserPhone"]
+
+/// 用户绑定Token
+#define kKeyBindUserToken [self envKey:@"kKeyBindUserToken"]
+
+/// 用户当前选中钱包
+#define kKeyCurrentSelectedWallet [self envKey:@"kKeyCurrentSelectedWallet"]
+
+@interface HSAppPreferences ()
 /// 当前用户绑定钱包token model
-@property (nonatomic, strong)SudNFTBindWalletModel *bindWalletModel;
+@property(nonatomic, strong) SudNFTBindWalletModel *bindWalletModel;
 @end
 
 @implementation HSAppPreferences
@@ -36,8 +50,20 @@ NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF = @"MY_NFT_BIND_WALLET_CHANGE_NTF"
 }
 
 - (void)prepare {
+    _bindZoneType = -1;
+    _bindWalletType = -1;
     _selectedEthereumChainType = [NSUserDefaults.standardUserDefaults integerForKey:kKeySelectedEthereumChain];
-    _bindWalletType = [NSUserDefaults.standardUserDefaults integerForKey:kKeyBindWalletType];
+    id tempBindZoneType = [NSUserDefaults.standardUserDefaults objectForKey:kKeyBindWalletZone];
+    if (tempBindZoneType) {
+        _bindZoneType = [NSUserDefaults.standardUserDefaults integerForKey:kKeyBindWalletZone];
+    }
+    id tempBindWalletType = [NSUserDefaults.standardUserDefaults objectForKey:kKeyBindWalletType];
+    if (tempBindWalletType) {
+        _bindWalletType = [NSUserDefaults.standardUserDefaults integerForKey:kKeyBindWalletType];
+    }
+
+    _currentSelectedWalletType = [NSUserDefaults.standardUserDefaults integerForKey:kKeyCurrentSelectedWallet];
+    _currentSelectedWalletType = _bindWalletType;
     NSString *key = [self currentUserWalletTokenKey];
     NSDictionary *userWalletMap = [NSUserDefaults.standardUserDefaults objectForKey:key];
     NSArray *arrKeys = [userWalletMap allKeys];
@@ -61,6 +87,31 @@ NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF = @"MY_NFT_BIND_WALLET_CHANGE_NTF"
 #endif
 }
 
+/// 是否已经绑定了钱包
+- (BOOL)isBindWallet {
+    if (self.walletAddress.length > 0 || self.bindWalletType > 0) {
+        return YES;
+    }
+    return NO;
+}
+
+/// 是否绑定了国内钱包
+- (BOOL)isBindCNWallet {
+    if (self.bindWalletType > 0) {
+        return YES;
+    }
+    return NO;
+}
+
+
+/// 是否绑定了海外钱包
+- (BOOL)isBindForeignWallet {
+    if (self.walletAddress.length > 0) {
+        return YES;
+    }
+    return NO;
+}
+
 - (void)setSelectedEthereumChainType:(NSInteger)selectedEthereumChainType {
     BOOL isChanged = _selectedEthereumChainType != selectedEthereumChainType;
     _selectedEthereumChainType = selectedEthereumChainType;
@@ -77,6 +128,12 @@ NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF = @"MY_NFT_BIND_WALLET_CHANGE_NTF"
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 
+- (void)setBindZoneType:(NSInteger)bindZoneType {
+    _bindZoneType = bindZoneType;
+    [NSUserDefaults.standardUserDefaults setInteger:bindZoneType forKey:kKeyBindWalletZone];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
 - (NSString *)walletToken {
     return self.bindWalletModel.walletToken;
 }
@@ -87,7 +144,7 @@ NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF = @"MY_NFT_BIND_WALLET_CHANGE_NTF"
     if (walletAddress && walletRespModel) {
         // 本地持久化
         NSString *key = [self currentUserWalletTokenKey];
-        NSMutableDictionary *userWalletMap = [[NSMutableDictionary alloc]init];
+        NSMutableDictionary *userWalletMap = [[NSMutableDictionary alloc] init];
         // 存储钱包数据
         userWalletMap[walletAddress] = [walletRespModel mj_JSONString];
         [NSUserDefaults.standardUserDefaults setObject:userWalletMap forKey:key];
@@ -103,6 +160,48 @@ NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF = @"MY_NFT_BIND_WALLET_CHANGE_NTF"
     _walletAddress = walletAddress;
     [NSUserDefaults.standardUserDefaults setValue:walletAddress forKey:kKeyBindWallet];
     [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+- (void)setCurrentSelectedWalletType:(NSInteger)currentSelectedWalletType {
+    _currentSelectedWalletType = currentSelectedWalletType;
+    [NSUserDefaults.standardUserDefaults setInteger:currentSelectedWalletType forKey:kKeyCurrentSelectedWallet];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+/// 保存绑定用户信息
+/// @param bindUserModel
+/// @param walletType
+/// @param phone
+- (void)saveWalletTokenWithBindUserModel:(SudNFTBindUserModel *)bindUserModel walletType:(NSInteger)walletType phone:(NSString *)phone {
+    // 用户手机号
+    [NSUserDefaults.standardUserDefaults setValue:phone forKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserPhone, @(walletType)]];
+    [NSUserDefaults.standardUserDefaults synchronize];
+    // 用户token
+    [NSUserDefaults.standardUserDefaults setValue:bindUserModel.walletToken forKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserToken, @(walletType)]];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+/// 通过钱包获取绑定用户token
+/// @param walletType
+/// @return
+- (NSString *)getBindUserTokenByWalletType:(NSInteger)walletType {
+    return [NSUserDefaults.standardUserDefaults objectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserToken, @(walletType)]];
+}
+
+/// 通过钱包获取绑定用户手机号
+/// @param walletType
+/// @return
+- (NSString *)getBindUserPhoneByWalletType:(NSInteger)walletType {
+    return [NSUserDefaults.standardUserDefaults objectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserPhone, @(walletType)]];
+}
+
+/// 清除绑定用户信息
+/// @param walletType
+- (void)clearBindUserInfoWithWalletType:(NSInteger)walletType {
+    // 移除绑定用户手机号
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserPhone, @(walletType)]];
+    // 移除绑定用户token
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserToken, @(walletType)]];
 }
 
 @end

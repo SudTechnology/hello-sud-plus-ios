@@ -7,6 +7,7 @@
 #import "BindBtnView.h"
 #import "MyViewController.h"
 #import "ForeignWalletSelectPopView.h"
+#import "CNWalletSelectPopView.h"
 
 @interface MyBindWalletView ()
 @property(nonatomic, strong) UILabel *nameLabel;
@@ -81,8 +82,8 @@
     [self updateMoreShowState];
     [self updateSupportWallet:self.walletList];
     UIViewController *currentViewController = AppUtil.currentViewController;
-    if ([currentViewController isKindOfClass:MyViewController.class]){
-        MyViewController *myViewController = (MyViewController *)currentViewController;
+    if ([currentViewController isKindOfClass:MyViewController.class]) {
+        MyViewController *myViewController = (MyViewController *) currentViewController;
         [myViewController reloadHeadView];
     }
 
@@ -112,14 +113,14 @@
     NSMutableArray *foreignWalletList = NSMutableArray.new;
     for (SudNFTWalletInfoModel *m in walletList) {
         if (m.zoneType == 0) {
-            if (foreignInfoModel == nil){
+            if (foreignInfoModel == nil) {
                 foreignInfoModel = SudNFTWalletInfoModel.new;
                 foreignInfoModel.name = @"海外钱包";
                 foreignInfoModel.zoneType = m.zoneType;
             }
             [foreignWalletList addObject:m];
         } else if (m.zoneType == 1) {
-            if (cnInfoModel == nil){
+            if (cnInfoModel == nil) {
                 cnInfoModel = SudNFTWalletInfoModel.new;
                 cnInfoModel.name = @"国内账户";
                 cnInfoModel.zoneType = m.zoneType;
@@ -158,10 +159,24 @@
         bindBtnView.layer.borderWidth = 1;
         [self addSubview:bindBtnView];
         [self.bindViewList addObject:bindBtnView];
-        bindBtnView.clickWalletBlock = ^(SudNFTWalletInfoModel *wallModel) {
+        bindBtnView.clickWalletBlock = ^(SudNFTWalletInfoModel *zoneWalletModel) {
 
+            // 国内
+            if (zoneWalletModel.zoneType == 1) {
+
+                CNWalletSelectPopView *v = CNWalletSelectPopView.new;
+                v.selectedWalletBlock = ^(SudNFTWalletInfoModel *walletInfoModel) {
+                    if (weakSelf.clickWalletBlock) {
+                        weakSelf.clickWalletBlock(walletInfoModel);
+                    }
+                };
+                [DTSheetView show:v onCloseCallback:nil];
+                [v updateDataList:weakSelf.cnWalletList];
+                return;
+            }
+            // 海外
             ForeignWalletSelectPopView *v = ForeignWalletSelectPopView.new;
-            v.selectedWalletBlock = ^(SudNFTWalletInfoModel *walletInfoModel){
+            v.selectedWalletBlock = ^(SudNFTWalletInfoModel *walletInfoModel) {
                 if (weakSelf.clickWalletBlock) {
                     weakSelf.clickWalletBlock(walletInfoModel);
                 }

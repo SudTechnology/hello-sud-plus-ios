@@ -29,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *name;
 /// 图标
 @property(nonatomic, copy) NSString *icon;
+/// 服务协议链接
+@property(nonatomic, copy) NSString *servicePolicyURL;
+/// 隐私协议链接
+@property(nonatomic, copy) NSString *privacyPolicyURL;
 /// 支持链列表
 @property(nonatomic, strong) NSArray<SudNFTChainInfoModel *> *chainList;
 @end
@@ -186,7 +190,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 封面
 @property(nonatomic, copy) NSString *coverURL;
 /// hash
-@property(nonatomic, copy) NSString *hash;
+@property(nonatomic, copy) NSString *cardHash;
 /// 链地址
 @property(nonatomic, copy) NSString *chainAddr;
 /// 藏品ID
@@ -202,7 +206,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 总数
 @property(nonatomic, assign) NSInteger totalCount;
 /// 藏品列表
-@property(nonatomic, assign) NSArray<SudNFTGetCardListModel *> *list;
+@property(nonatomic, assign) NSArray<SudNFTCardModel *> *list;
 @end
 
 /// 生成藏品使用参数model

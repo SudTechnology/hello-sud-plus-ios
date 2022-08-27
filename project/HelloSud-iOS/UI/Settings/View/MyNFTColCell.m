@@ -78,11 +78,10 @@
     HSNFTListCellModel *m = (HSNFTListCellModel *) self.model;
     WeakSelf
 
-    SudNFTInfoModel *nftModel = m.nftModel;
-    weakSelf.nameLabel.text = nftModel.name;
-    if (nftModel.coverURL) {
+    weakSelf.nameLabel.text = m.name;
+    if (m.coverURL) {
         SDWebImageContext *context = nil;
-        NSURL *url = [[NSURL alloc] initWithString:nftModel.coverURL];
+        NSURL *url = [[NSURL alloc] initWithString:m.coverURL];
         if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame){
             context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(200, 200))};
         }
@@ -97,7 +96,12 @@
         [weakSelf closeLoadAnimate];
         weakSelf.gameImageView.image = [UIImage imageNamed:@"default_nft_icon"];
     }
-    BOOL isWear = [AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
+    BOOL isWear = NO;
+    if (HSAppPreferences.shared.isBindForeignWallet) {
+        isWear = [AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
+    } else if (HSAppPreferences.shared.isBindCNWallet) {
+        isWear = [AppService.shared isNFTAlreadyUsed:m.cardModel.cardHash tokenId:m.cardModel.chainAddr];
+    }
     self.tagView.hidden = isWear ? NO : YES;
 }
 

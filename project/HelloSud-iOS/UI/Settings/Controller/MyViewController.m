@@ -13,6 +13,10 @@
 #import "HSSettingViewController.h"
 #import "AboutViewController.h"
 #import "BindWalletStateView.h"
+#import "CNAuthViewController.h"
+#import "MyCNWalletSwitchPopView.h"
+#import "CNWalletSelectPopView.h"
+#import "CNWalletDeletePopView.h"
 
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource, ISudNFTListenerBindWallet>
 @property(nonatomic, strong) UITableView *tableView;
@@ -86,16 +90,12 @@
     aboutModel.pageURL = @"";
 
     self.arrData = @[@[settingModel], @[aboutModel]];
-//    CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
-//    CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
-//    self.contactUsView.frame = targetFrame;
-//    self.tableView.tableFooterView = self.contactUsView;
     [self.tableView reloadData];
 }
 
 - (void)checkWalletInfo {
 
-    BOOL bindWallet = HSAppPreferences.shared.walletAddress.length > 0;
+    BOOL bindWallet = HSAppPreferences.shared.isBindWallet;
     if (!bindWallet) {
         // 未绑定钱包
         [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
@@ -104,12 +104,36 @@
                 return;
             }
             self.walletList = getWalletListModel.walletList;
+            AppService.shared.walletList = self.walletList;
             [self.myHeaderView updateSupportWallet:getWalletListModel.walletList];
             [self reloadHeadView];
         }];
         return;
     }
     // 拉取NFT列表
+    if (HSAppPreferences.shared.isBindForeignWallet) {
+        [self getNFTList];
+    } else if (HSAppPreferences.shared.isBindCNWallet) {
+        [self getCNCollectionList];
+    }
+    // 更新链网数据
+    if (self.walletList.count == 0) {
+        [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
+            if (errCode != 0) {
+                [ToastUtil show:errMsg];
+                return;
+            }
+            self.walletList = getWalletListModel.walletList;
+            AppService.shared.walletList = self.walletList;
+            [self updateWalletEtherChains];
+        }];
+    } else {
+        [self updateWalletEtherChains];
+    }
+}
+
+/// 获取NFT列表
+- (void)getNFTList {
     SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
     paramModel.walletToken = HSAppPreferences.shared.walletToken;
     paramModel.walletAddress = HSAppPreferences.shared.walletAddress;
@@ -128,19 +152,27 @@
         [self.myHeaderView updateNFTList:nftListModel];
         [self reloadHeadView];
     }];
-    // 更新链网数据
-    if (self.walletList.count == 0) {
-        [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
-            if (errCode != 0) {
-                [ToastUtil show:errMsg];
-                return;
+}
+
+/// 获取国内收藏品
+- (void)getCNCollectionList {
+    SudNFTGetCardListParamModel *paramModel = SudNFTGetCardListParamModel.new;
+    paramModel.pageSize = 20;
+    paramModel.page = 0;
+    paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
+    paramModel.walletToken = [HSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
+    [SudNFT getCardList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCardListModel *resp) {
+        if (errCode != 0) {
+            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            [ToastUtil show:msg];
+            if (errCode == 1008) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
             }
-            self.walletList = getWalletListModel.walletList;
-            [self updateWalletEtherChains];
-        }];
-    } else {
-        [self updateWalletEtherChains];
-    }
+            return;
+        }
+        [self.myHeaderView updateCardList:resp];
+        [self reloadHeadView];
+    }];
 }
 
 /// 更新钱包链网类型
@@ -151,6 +183,7 @@
             break;
         }
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_WALLET_LIST_UPDATE_NTF object:nil userInfo:nil];
     [self reloadHeadView];
 }
 
@@ -190,19 +223,42 @@
     WeakSelf
     self.myHeaderView.clickWalletBlock = ^(SudNFTWalletInfoModel *m) {
 
-        
+        if (m.zoneType == 1) {
+            [weakSelf handleCNWalletClick:m selectView:nil];
+            return;
+        }
+        // 海外 绑定三方钱包
         BindWalletStateView *bindWalletStateView = [[BindWalletStateView alloc] init];
         [DTAlertView show:bindWalletStateView rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:^{
-            
+
         }];
         weakSelf.bindWalletStateView = bindWalletStateView;
-        
-        SudNFTBindWalletParamModel * paramModel = SudNFTBindWalletParamModel.new;
+
+        SudNFTBindWalletParamModel *paramModel = SudNFTBindWalletParamModel.new;
         paramModel.walletType = m.type;
         HSAppPreferences.shared.bindWalletType = m.type;
+        HSAppPreferences.shared.bindZoneType = m.zoneType;
         [SudNFT bindWallet:paramModel listener:self];
     };
     self.myHeaderView.deleteWalletBlock = ^{
+        if (HSAppPreferences.shared.bindZoneType == 1) {
+            // 绑定的是国内
+            CNWalletSelectPopView *v = CNWalletSelectPopView.new;
+            __weak typeof(v) weakV = v;
+            v.selectedWalletBlock = ^(SudNFTWalletInfoModel *walletInfoModel) {
+                [weakSelf handleCNWalletClick:walletInfoModel selectView:weakV];
+            };
+            [DTSheetView show:v onCloseCallback:nil];
+            NSMutableArray *cnWalletList = NSMutableArray.new;
+            for (SudNFTWalletInfoModel *m in weakSelf.walletList) {
+                if (m.zoneType == 1) {
+                    [cnWalletList addObject:m];
+                }
+            }
+            [v updateDataList:cnWalletList];
+            return;
+        }
+
         [DTAlertView showTextAlert:@"确定要解除连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
                 HSAppPreferences.shared.walletAddress = nil;
@@ -228,6 +284,54 @@
         [weakSelf onSudNFTBindWalletTokenExpired];
     }];
 
+}
+
+/// 处理国内钱包选择
+- (void)handleCNWalletClick:(SudNFTWalletInfoModel *)walletInfoModel selectView:(CNWalletSelectPopView *)selectView {
+
+    WeakSelf
+    BOOL isBind = [HSAppPreferences.shared getBindUserTokenByWalletType:walletInfoModel.type].length > 0;
+    // 未绑定
+    if (!isBind) {
+        [DTSheetView close];
+        // 国内钱包授权
+        CNAuthViewController *vc = CNAuthViewController.new;
+        vc.bindSuccessBlock = ^{
+            [weakSelf.myHeaderView dtUpdateUI];
+            [weakSelf reloadHeadView];
+            [weakSelf checkWalletInfo];
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
+        };
+        vc.walletInfoModel = walletInfoModel;
+        [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    // 已绑定，解除绑定
+
+    CNWalletDeletePopView *v = CNWalletDeletePopView.new;
+    v.walletInfoModel = walletInfoModel;
+    [v dtUpdateUI];
+    UIView *coverView = UIView.new;
+    coverView.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
+    [self.view addSubview:coverView];
+    [coverView addSubview:v];
+    [coverView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.top.bottom.equalTo(@0);
+    }];
+    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.bottom.equalTo(@0);
+        make.height.greaterThanOrEqualTo(@0);
+    }];
+    __weak typeof(coverView) weakCoverView = coverView;
+    v.cancelBlock = ^{
+        [weakCoverView removeFromSuperview];
+    };
+    v.sureBlock = ^{
+        [weakCoverView removeFromSuperview];
+        [HSAppPreferences.shared clearBindUserInfoWithWalletType:walletInfoModel.type];
+        [selectView dtUpdateUI];
+    };
 }
 
 - (void)showBindErrorAlert:(NSString *)msg {
@@ -407,7 +511,7 @@
 /// 绑定步骤顺序列表
 /// @param stageList 对应状态事件列表，如：["1", "2"]
 - (void)onBindStageList:(NSArray <NSNumber *> *_Nullable)stageList {
-    
+
 }
 
 @end

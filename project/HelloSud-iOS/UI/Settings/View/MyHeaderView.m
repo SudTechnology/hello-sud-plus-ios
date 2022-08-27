@@ -93,13 +93,19 @@
         }];
     }
 
-    BOOL isBindWallet = HSAppPreferences.shared.walletAddress.length > 0;
+    BOOL isBindWallet = HSAppPreferences.shared.isBindWallet;
     if (isBindWallet) {
         // 绑定过了钱包
-        self.walletAddressLabel.text = HSAppPreferences.shared.walletAddress;
-        self.walletAddressLabel.hidden = NO;
-        self.userIdLabel.hidden = YES;
+        if (HSAppPreferences.shared.isBindForeignWallet) {
+            self.walletAddressLabel.text = HSAppPreferences.shared.walletAddress;
+            self.walletAddressLabel.hidden = NO;
+            self.userIdLabel.hidden = YES;
+        } else {
+            self.walletAddressLabel.hidden = YES;
+            self.userIdLabel.hidden = NO;
+        }
         self.deleteBtn.hidden = NO;
+        self.deleteBtn.selected = HSAppPreferences.shared.bindZoneType == 1;
         if (_bindView) {
             [_bindView removeFromSuperview];
             _bindView = nil;
@@ -173,6 +179,11 @@
 
 - (void)updateNFTList:(SudNFTGetNFTListModel *)nftListModel {
     [self.myNFTView updateNFTList:nftListModel];
+}
+
+/// 更新藏品列表
+- (void)updateCardList:(SudNFTGetCardListModel *)cardListModel {
+    [self.myNFTView updateCardList:cardListModel];
 }
 
 - (void)updateEthereumList:(NSArray<SudNFTChainInfoModel *> *)chains {
@@ -265,6 +276,8 @@
     if (!_deleteBtn) {
         _deleteBtn = [[UIButton alloc] init];
         [_deleteBtn setImage:[UIImage imageNamed:@"wallet_delete"] forState:UIControlStateNormal];
+        [_deleteBtn setImage:[UIImage imageNamed:@"my_cn_nft_bind"] forState:UIControlStateSelected];
+
     }
     return _deleteBtn;
 }

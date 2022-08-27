@@ -35,7 +35,7 @@
 - (void)dtLayoutViews {
     [super dtLayoutViews];
 
-    [self.topView dt_cornerRadius:4];
+    [self.topView dt_cornerRadius:3];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@12);
         make.width.equalTo(@56);

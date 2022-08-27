@@ -71,6 +71,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL alreadyShowLandscapePopAlert;
 /// 是否已经展示过横屏气泡指引提示
 @property(nonatomic, assign) BOOL alreadyShowLandscapeBubbleTip;
+/// 钱包列表
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
 
 + (instancetype)shared;
 
