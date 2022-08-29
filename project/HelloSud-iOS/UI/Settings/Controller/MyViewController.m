@@ -26,6 +26,8 @@
 @property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
 @property(nonatomic, strong) UIView *contactUsView;
 @property(nonatomic, weak) BindWalletStateView *bindWalletStateView;
+/// 等待绑定钱包信息
+@property (nonatomic, strong)SudNFTWalletInfoModel *waitBindWalletInfo;
 @end
 
 @implementation MyViewController
@@ -223,6 +225,7 @@
     WeakSelf
     self.myHeaderView.clickWalletBlock = ^(SudNFTWalletInfoModel *m) {
 
+        weakSelf.waitBindWalletInfo = m;
         if (m.zoneType == 1) {
             [weakSelf handleCNWalletClick:m selectView:nil];
             return;
@@ -232,12 +235,11 @@
         [DTAlertView show:bindWalletStateView rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:^{
 
         }];
+
         weakSelf.bindWalletStateView = bindWalletStateView;
 
         SudNFTBindWalletParamModel *paramModel = SudNFTBindWalletParamModel.new;
         paramModel.walletType = m.type;
-        HSAppPreferences.shared.bindWalletType = m.type;
-        HSAppPreferences.shared.bindZoneType = m.zoneType;
         [SudNFT bindWallet:paramModel listener:self];
     };
     self.myHeaderView.deleteWalletBlock = ^{
@@ -262,6 +264,9 @@
         [DTAlertView showTextAlert:@"确定要解除连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
                 HSAppPreferences.shared.walletAddress = nil;
+                HSAppPreferences.shared.bindWalletType = -1;
+                HSAppPreferences.shared.currentSelectedWalletType = -1;
+                HSAppPreferences.shared.bindZoneType = -1;
                 [AppService.shared useNFT:@"" tokenId:@"" add:NO];
                 AppService.shared.login.loginUserInfo.headerNftUrl = nil;
                 AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
@@ -493,6 +498,8 @@
 - (void)onSuccess:(SudNFTBindWalletModel *_Nullable)walletInfoModel {
 
     // 绑定钱包成功
+    HSAppPreferences.shared.bindWalletType = self.waitBindWalletInfo.type;
+    HSAppPreferences.shared.bindZoneType = self.waitBindWalletInfo.zoneType;
     HSAppPreferences.shared.walletAddress = walletInfoModel.walletAddress;
     [HSAppPreferences.shared cacheWalletToken:walletInfoModel walletAddress:walletInfoModel.walletAddress];
     [self.myHeaderView dtUpdateUI];
