@@ -132,7 +132,11 @@
         [weakSelf updateWearBtn];
 
         if (isWear) {
-            AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.nftModel.coverURL;
+            if (isCN) {
+                AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.cardModel.coverURL;
+            } else {
+                AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.nftModel.coverURL;
+            }
             AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNFT;
         } else {
             AppService.shared.login.loginUserInfo.headerNftUrl = nil;
