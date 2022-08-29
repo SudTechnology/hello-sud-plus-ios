@@ -68,7 +68,7 @@
     if (!self.walletInfoModel) {
         return;
     }
-    self.phoneTextField.text = @"15112308495";
+//    self.phoneTextField.text = @"15112308495";
     self.title = [NSString stringWithFormat:@"%@账号授权", self.walletInfoModel.name];
     self.titleLabel.text = [NSString stringWithFormat:@"授权%@账号", self.walletInfoModel.name];
     self.registerTipTitleLabel.text = [NSString stringWithFormat:@"未注册%@的手机号，授权后将自动注册", self.walletInfoModel.name];
@@ -111,6 +111,7 @@
             [ToastUtil show:msg];
             return;
         }
+        HSAppPreferences.shared.currentSelectedWalletType = paramModel.walletType;
         HSAppPreferences.shared.bindWalletType = paramModel.walletType;
         HSAppPreferences.shared.bindZoneType = self.walletInfoModel.zoneType;
         [HSAppPreferences.shared saveWalletTokenWithBindUserModel:resp walletType:paramModel.walletType phone:paramModel.phone];

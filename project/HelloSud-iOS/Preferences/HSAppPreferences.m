@@ -63,7 +63,6 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
     }
 
     _currentSelectedWalletType = [NSUserDefaults.standardUserDefaults integerForKey:kKeyCurrentSelectedWallet];
-    _currentSelectedWalletType = _bindWalletType;
     NSString *key = [self currentUserWalletTokenKey];
     NSDictionary *userWalletMap = [NSUserDefaults.standardUserDefaults objectForKey:key];
     NSArray *arrKeys = [userWalletMap allKeys];
