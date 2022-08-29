@@ -170,10 +170,10 @@
     attrStr_3.yy_lineSpacing = 6;
     attrStr_3.yy_font = UIFONT_MEDIUM(12);
     attrStr_3.yy_color = HEX_COLOR(@"#147AF9");
-
+    WeakSelf
     [attrStr_1 yy_setTextHighlightRange:attrStr_1.yy_rangeOfAll color:[UIColor dt_colorWithHexString:@"#147AF9" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView *_Nonnull containerView, NSAttributedString *_Nonnull text, NSRange range, CGRect rect) {
         DTWebViewController *web = DTWebViewController.new;
-        web.url = [SettingsService appProtocolURL].absoluteString;
+        web.url = weakSelf.walletInfoModel.servicePolicyURL;
         web.isPresent = true;
         BaseNavigationViewController *nv = [[BaseNavigationViewController alloc] initWithRootViewController:web];
         nv.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -181,7 +181,7 @@
     }];
     [attrStr_3 yy_setTextHighlightRange:attrStr_3.yy_rangeOfAll color:[UIColor dt_colorWithHexString:@"#147AF9" alpha:1] backgroundColor:UIColor.clearColor tapAction:^(UIView *_Nonnull containerView, NSAttributedString *_Nonnull text, NSRange range, CGRect rect) {
         DTWebViewController *web = DTWebViewController.new;
-        web.url = [SettingsService appPrivacyURL].absoluteString;
+        web.url = weakSelf.walletInfoModel.privacyPolicyURL;
         web.isPresent = true;
         BaseNavigationViewController *nv = [[BaseNavigationViewController alloc] initWithRootViewController:web];
         nv.modalPresentationStyle = UIModalPresentationFullScreen;
