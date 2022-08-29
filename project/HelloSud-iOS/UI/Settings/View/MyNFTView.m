@@ -231,7 +231,7 @@
 
 - (void)onTapChainsView:(id)tap {
 
-    NSInteger zoneType = 1;
+    NSInteger zoneType = HSAppPreferences.shared.bindZoneType;
     if (zoneType == 1) {
         // 国内
         MyCNWalletSwitchPopView *v = [[MyCNWalletSwitchPopView alloc] init];
