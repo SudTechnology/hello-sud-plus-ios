@@ -52,8 +52,6 @@
     } else if (HSAppPreferences.shared.isBindForeignWallet) {
         [self wearNFT:sender];
     }
-
-
 }
 
 /// 穿戴NFT
@@ -105,11 +103,23 @@
 }
 
 - (void)onAddrTap:(id)sender {
-    [AppUtil copyToPasteProcess:self.cellModel.nftModel.contractAddress toast:@"复制成功"];
+    NSString *contractAddress = @"";
+    if (HSAppPreferences.shared.isBindCNWallet) {
+        contractAddress = self.cellModel.cardModel.cardHash;
+    } else if (HSAppPreferences.shared.isBindForeignWallet) {
+        contractAddress = self.cellModel.nftModel.contractAddress;
+    }
+    [AppUtil copyToPasteProcess:contractAddress toast:@"复制成功"];
 }
 
 - (void)onTokenTap:(id)sender {
-    [AppUtil copyToPasteProcess:self.cellModel.nftModel.tokenId toast:@"复制成功"];
+    NSString *tokenId = @"";
+    if (HSAppPreferences.shared.isBindCNWallet) {
+        tokenId = self.cellModel.cardModel.chainAddr;
+    } else if (HSAppPreferences.shared.isBindForeignWallet) {
+        tokenId = self.cellModel.nftModel.tokenId;
+    }
+    [AppUtil copyToPasteProcess:tokenId toast:@"复制成功"];
 }
 
 //- (void)onCopyBtnClick:(id)sender {
