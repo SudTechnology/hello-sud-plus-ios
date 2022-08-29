@@ -487,6 +487,9 @@
 - (void)onSudNFTBindWalletTokenExpired {
     DDLogWarn(@"onSudNFTBindWalletTokenExpired");
     HSAppPreferences.shared.walletAddress = nil;
+    NSInteger walletType = HSAppPreferences.shared.currentSelectedWalletType;
+    [HSAppPreferences.shared clearBindUserInfoWithWalletType:walletType];
+    HSAppPreferences.shared.bindZoneType = -1;
     [self.myHeaderView dtUpdateUI];
     [self reloadHeadView];
     [self checkWalletInfo];
