@@ -85,7 +85,7 @@
 /// @param nftDetailToken 穿戴的NFT详情token
 /// @param isWear 1 穿 2 脱
 + (void)reqWearNFT:(NSString *)nftDetailToken isWear:(BOOL)isWear success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail {
-    if (nftDetailToken.length == 0) {
+    if (isWear && nftDetailToken.length == 0) {
         if (fail) {
             fail([NSError dt_errorWithCode:-1 msg:@"Param is invlid"]);
         }
