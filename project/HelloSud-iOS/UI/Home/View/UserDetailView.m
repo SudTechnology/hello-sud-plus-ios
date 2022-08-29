@@ -91,6 +91,7 @@
         _headerView = [[UIImageView alloc] init];
         _headerView.clipsToBounds = true;
         _headerView.layer.cornerRadius = 56 / 2;
+        _headerView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _headerView;
 }
