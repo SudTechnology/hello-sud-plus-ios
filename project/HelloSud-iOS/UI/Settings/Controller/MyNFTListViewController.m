@@ -14,6 +14,7 @@
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray<HSNFTListCellModel *> *dataList;
 @property(nonatomic, strong) NSString *pageKey;
+@property(nonatomic, assign) NSInteger page;
 @end
 
 @implementation MyNFTListViewController
@@ -33,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addRefreshHeader];
-    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -66,7 +67,7 @@
             [AppService.shared.login checkToken];
             return;
         }
-        [weakSelf requestData:NO];
+        [weakSelf reqData:NO];
     }];
     header.lastUpdatedTimeLabel.hidden = true;
     header.stateLabel.hidden = true;
@@ -76,7 +77,7 @@
             [AppService.shared.login checkToken];
             return;
         }
-        [weakSelf requestData:YES];
+        [weakSelf reqData:YES];
     }];
     self.collectionView.mj_header = header;
     self.collectionView.mj_footer = footer;
@@ -95,7 +96,13 @@
     NSArray *temp = self.dataList.copy;
     NSMutableArray *sortList = [[NSMutableArray alloc] init];
     for (HSNFTListCellModel *m in temp) {
-        if ([AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId]) {
+        BOOL isAlreadyUser = NO;
+        if (HSAppPreferences.shared.isBindCNWallet) {
+            isAlreadyUser = [AppService.shared isNFTAlreadyUsed:m.cardModel.cardHash tokenId:m.cardModel.chainAddr];
+        } else {
+            isAlreadyUser = [AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
+        }
+        if (isAlreadyUser) {
             [sortList insertObject:m atIndex:0];
         } else {
             [sortList addObject:m];
@@ -107,7 +114,15 @@
 
 #pragma mark - requst Data
 
-- (void)requestData:(BOOL)isMore {
+- (void)reqData:(BOOL)isMore {
+    if (HSAppPreferences.shared.isBindCNWallet) {
+        [self requestCardListData:isMore];
+    } else {
+        [self requestNFTListData:isMore];
+    }
+}
+
+- (void)requestNFTListData:(BOOL)isMore {
     WeakSelf
     // 拉取NFT列表
     SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
@@ -145,6 +160,50 @@
         for (SudNFTInfoModel *m in nftListModel.nftList) {
             HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
             cellModel.nftModel = m;
+            cellModel.coverURL = m.coverURL;
+            cellModel.name = m.name;
+            [arr addObject:cellModel];
+        }
+        [weakSelf updateNFTList:arr add:isMore];
+    }];
+}
+
+- (void)requestCardListData:(BOOL)isMore {
+    WeakSelf
+    // 拉取藏品列表
+    SudNFTGetCardListParamModel *paramModel = SudNFTGetCardListParamModel.new;
+    paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
+    paramModel.walletToken = [HSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
+    self.page = isMore ? self.page + 1 : 0;
+    paramModel.page = self.page;
+    paramModel.pageSize = 20;
+    [SudNFT getCardList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCardListModel *resp) {
+        if (isMore) {
+            if (resp.list.count == 0) {
+                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+            } else {
+                [weakSelf.collectionView.mj_footer endRefreshing];
+            }
+        } else {
+            [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_footer resetNoMoreData];
+        }
+        if (errCode != 0) {
+            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            [ToastUtil show:msg];
+            if (errCode == 1008) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
+            }
+            return;
+        }
+
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        for (SudNFTCardModel *m in resp.list) {
+            HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
+            cellModel.cardModel = m;
+            cellModel.coverURL = m.coverURL;
+            cellModel.name = m.name;
+            
             [arr addObject:cellModel];
         }
         [weakSelf updateNFTList:arr add:isMore];

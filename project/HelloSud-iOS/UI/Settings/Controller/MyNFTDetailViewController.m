@@ -390,7 +390,7 @@
         _iconImageView = [[SDAnimatedImageView alloc] init];
         _iconImageView.shouldCustomLoopCount = YES;
         _iconImageView.animationRepeatCount = NSIntegerMax;
-        _iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _iconImageView;
 }

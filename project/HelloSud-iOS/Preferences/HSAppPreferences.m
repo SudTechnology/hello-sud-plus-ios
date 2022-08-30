@@ -96,7 +96,7 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
 
 /// 是否绑定了国内钱包
 - (BOOL)isBindCNWallet {
-    if (self.bindWalletType > 0) {
+    if (self.bindZoneType == 1) {
         return YES;
     }
     return NO;
