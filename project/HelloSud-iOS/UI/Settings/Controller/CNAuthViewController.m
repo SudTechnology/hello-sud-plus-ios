@@ -371,9 +371,20 @@
         _phoneTextField.leftView = leftView;
         _phoneTextField.leftViewMode = UITextFieldViewModeAlways;
         _phoneTextField.keyboardType = UIKeyboardTypePhonePad;
-        _phoneTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+//        _phoneTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
+        [clearBtn setImage:[UIImage imageNamed:@"my_cn_nft_auth_close"] forState:UIControlStateNormal];
+        clearBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 16);
+        [clearBtn addTarget:self action:@selector(onClearBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        _phoneTextField.rightView = clearBtn;
+        _phoneTextField.rightViewMode = UITextFieldViewModeWhileEditing;
+
     }
     return _phoneTextField;
+}
+
+- (void)onClearBtnClick:(id)sender {
+    self.phoneTextField.text = nil;
 }
 
 - (UITextField *)codeTextField {
