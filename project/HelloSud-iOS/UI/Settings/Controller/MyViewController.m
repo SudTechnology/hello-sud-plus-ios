@@ -198,7 +198,7 @@
     self.myHeaderView.frame = targetFrame;
     self.tableView.tableHeaderView = self.myHeaderView;
     [self.myHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.top.equalTo(@0);
+        make.leading.trailing.top.equalTo(@0);
         make.width.equalTo(@(w));
     }];
 

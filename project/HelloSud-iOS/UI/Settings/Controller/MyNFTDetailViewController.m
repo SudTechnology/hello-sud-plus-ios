@@ -391,6 +391,7 @@
         _iconImageView.shouldCustomLoopCount = YES;
         _iconImageView.animationRepeatCount = NSIntegerMax;
         _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _iconImageView.clipsToBounds = YES;
     }
     return _iconImageView;
 }
