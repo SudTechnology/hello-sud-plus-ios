@@ -64,6 +64,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // 配置顶部tableview不留出状态栏
+    if (@available(iOS 11.0, *)) {
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
     [SuspendRoomView close];
     // Do any additional setup after loading the view.
     self.language = [SettingsService getCurLanguageLocale];

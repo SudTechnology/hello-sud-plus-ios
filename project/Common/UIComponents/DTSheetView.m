@@ -60,6 +60,19 @@
     return [super hitTest:point withEvent:event];
 }
 
+/// 添加滑动手势
+- (void)addPanGes {
+    UIView *pandView = self.contentView;
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanView:)];
+    pan.delegate = self;
+    pan.delaysTouchesBegan = YES;
+    [pandView addGestureRecognizer:pan];
+}
+
+- (void)onPanView:(UIPanGestureRecognizer *)pan {
+
+}
+
 /// 展示底部弹窗 - （内容自定义）
 /// - Parameters:
 ///   - view: 展示的view

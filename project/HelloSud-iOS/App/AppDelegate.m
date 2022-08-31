@@ -30,7 +30,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // 配置顶部tableview不留出状态栏
-    UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    if (@available(iOS 11.0, *)) {
+        UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+//        UIScrollView.appearance.contentInsetAdjustmentBehavior = NO;
+    }
     /// 防止键盘弹出抖动问题
     UIScrollView.appearance.shouldIgnoreContentInsetAdjustment = YES;
 

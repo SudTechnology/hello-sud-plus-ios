@@ -35,6 +35,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    // 配置顶部tableview不留出状态栏
+    if (@available(iOS 11.0, *)) {
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     [self configData];
     [self configSudNFT];
 }

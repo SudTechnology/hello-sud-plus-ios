@@ -282,12 +282,13 @@
         make.trailing.mas_equalTo(-30);
         make.height.mas_equalTo(44);
     }];
+    CGFloat bottom = UIDevice.dt_isiPhoneXSeries ? kAppSafeBottom + 53 : 20;
     [self.protocolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.loginBtn.mas_bottom).offset(12);
         make.leading.mas_equalTo(30);
         make.trailing.mas_equalTo(-30);
         make.height.mas_greaterThanOrEqualTo(0);
-        make.bottom.mas_equalTo(-(kAppSafeBottom + 53));
+        make.bottom.mas_equalTo(-(bottom));
     }];
 }
 
