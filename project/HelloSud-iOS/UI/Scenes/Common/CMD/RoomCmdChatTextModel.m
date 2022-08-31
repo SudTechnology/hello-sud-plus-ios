@@ -32,23 +32,13 @@
         if (completed) completed();
         return;
     }
-    WeakSelf
-    [SDWebImageManager.sharedManager loadImageWithURL:[NSURL URLWithString:self.sendUser.icon] options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSData *data, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-        [weakSelf generateAttrContent:image];
-        if (completed) completed();
-    }];
+    [self generateAttrContent:nil];
+    if (completed) completed();
 }
 
 - (NSAttributedString *)generateAttrContent:(UIImage *)image {
     NSString *name = self.sendUser.name;
     NSString *content = self.content;
-    UIImage *iconImage = image;
-    if (iconImage) {
-        iconImage = [iconImage dt_circleImage];
-    } else {
-        iconImage = [UIImage imageNamed:@"default_head"];
-    }
-    NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFill attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
     NSMutableAttributedString *attrName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：", name]];
     attrName.yy_lineSpacing = 6;
     attrName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
@@ -57,10 +47,6 @@
     attrMsg.yy_lineSpacing = 6;
     attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
-    if (!_hiddeHeadIcon) {
-        [attrName insertAttributedString:[[NSAttributedString alloc] initWithString:@" "] atIndex:0];
-        [attrName insertAttributedString:attrIcon atIndex:0];
-    }
     [attrName appendAttributedString:attrMsg];
     _attrContent = attrName;
     return attrName;
@@ -71,8 +57,8 @@
     CGFloat h = [super caculateHeight];
     CGFloat yMargin = 3;
     h += yMargin * 2;
-    NSMutableAttributedString *attrName = [self generateAttrContent:[UIImage imageNamed:@"default_head"]];
-    YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(MAX_CELL_CONTENT_WIDTH - 8, CGFLOAT_MAX) text:attrName];
+    NSMutableAttributedString *attrName = [self generateAttrContent:nil];
+    YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(MAX_CELL_CONTENT_WIDTH - 8 - 22, CGFLOAT_MAX) text:attrName];
     if (layout) {
         h += layout.textBoundingSize.height;
     }
