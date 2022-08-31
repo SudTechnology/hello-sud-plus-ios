@@ -256,6 +256,7 @@
                 [weakSelf handleCNWalletClick:walletInfoModel selectView:weakV];
             };
             [DTSheetView show:v onCloseCallback:nil];
+            [DTSheetView addPanGesture];
             NSMutableArray *cnWalletList = NSMutableArray.new;
             for (SudNFTWalletInfoModel *m in weakSelf.walletList) {
                 if (m.zoneType == 1) {

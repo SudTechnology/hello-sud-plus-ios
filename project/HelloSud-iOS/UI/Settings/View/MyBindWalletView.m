@@ -171,6 +171,7 @@
                     }
                 };
                 [DTSheetView show:v onCloseCallback:nil];
+                [DTSheetView addPanGesture];
                 [v updateDataList:weakSelf.cnWalletList];
                 return;
             }
@@ -182,6 +183,7 @@
                 }
             };
             [DTSheetView show:v onCloseCallback:nil];
+            [DTSheetView addPanGesture];
             [v updateDataList:weakSelf.foreignWalletList];
         };
 
