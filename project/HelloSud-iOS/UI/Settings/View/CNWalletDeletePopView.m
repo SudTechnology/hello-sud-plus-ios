@@ -48,7 +48,7 @@
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.sureBtn.mas_bottom);
         make.leading.trailing.equalTo(@0);
-        make.height.equalTo(@1);
+        make.height.equalTo(@0.5);
     }];
     [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lineView.mas_bottom);

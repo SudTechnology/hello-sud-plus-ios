@@ -176,7 +176,7 @@
         }
     }
     if (HSAppPreferences.shared.isBindForeignWallet) {
-        self.nameLabel.text = @"已拥有的NFT";
+        self.nameLabel.text = @"我的NFT";
         self.noDataLabel.text = @"尚无NFT";
     } else if (HSAppPreferences.shared.isBindCNWallet) {
         self.nameLabel.text = @"我的数字藏品";
@@ -294,7 +294,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"已拥有的NFT";
+        _nameLabel.text = @"我的NFT";
         _nameLabel.textColor = HEX_COLOR(@"#ffffff");
         _nameLabel.font = UIFONT_MEDIUM(16);
     }
