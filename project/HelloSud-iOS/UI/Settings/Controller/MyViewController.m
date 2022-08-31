@@ -85,7 +85,7 @@
 - (void)configData {
 
     HSSettingModel *settingModel = [HSSettingModel new];
-    settingModel.title = @"设置";
+    settingModel.title = NSString.dt_tab_setting;
     settingModel.subTitle = nil;
     settingModel.isMore = YES;
     settingModel.pageURL = @"";
@@ -465,7 +465,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HSSettingModel *model = self.arrData[indexPath.section][indexPath.row];
-    if ([model.title isEqualToString:@"设置"]) {
+    if ([model.title isEqualToString:NSString.dt_tab_setting]) {
         HSSettingViewController *vc = HSSettingViewController.new;
         [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
     } else if ([model.title isEqualToString:@"关于我们"]) {
