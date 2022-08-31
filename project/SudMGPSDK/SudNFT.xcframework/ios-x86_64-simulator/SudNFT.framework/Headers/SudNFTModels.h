@@ -157,6 +157,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) NSInteger walletType;
 @end
 
+/// 解绑绑定用户参数model [CN]
+@interface SudNFTUnBindUserParamModel : NSObject
+/// 手机号码
+@property(nonatomic, copy) NSString *phone;
+/// 用ID
+@property(nonatomic, copy) NSString *userId;
+/// 钱包类型
+@property(nonatomic, assign) NSInteger walletType;
+@end
+
 /// 钱包信息
 @interface SudNFTBindUserModel : NSObject
 /// 钱包绑定token

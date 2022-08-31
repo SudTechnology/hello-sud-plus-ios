@@ -58,6 +58,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param listener 回调
 + (void)bindUser:(SudNFTBindUserParamModel *)paramModel listener:(ISudNFTListenerBindUser)listener;
 
+/// 解绑用户
+/// @param paramModel 参数
+/// @param listener 回调
++ (void)unbindUser:(SudNFTUnBindUserParamModel *)paramModel listener:(ISudNFTListenerUnBindUser)listener;
+
 /// 获取藏品列表
 /// @param paramModel 参数model
 /// @param listener 回调

@@ -34,13 +34,13 @@ typedef void(^ISudNFTListenerGetWalletList)(NSInteger errCode, NSString *_Nullab
 
 typedef void(^ISudNFTListenerGetNFTList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGetNFTListModel *_Nullable nftListModel);
 
-//typedef void(^ISudNFTListenerBindWallet)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindWalletModel *_Nullable walletInfoModel);
-
 typedef void(^ISudNFTListenerGenNFTCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGenNFTCredentialsTokenModel *_Nullable generateDetailTokenModel);
 
 typedef void(^ISudNFTListenerSendVerifyCode)(NSInteger errCode, NSString *_Nullable errMsg);
 
 typedef void(^ISudNFTListenerBindUser)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindUserModel *_Nullable resp);
+
+typedef void(^ISudNFTListenerUnBindUser)(NSInteger errCode, NSString *_Nullable errMsg);
 
 typedef void(^ISudNFTListenerGetCardList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGetCardListModel *_Nullable resp);
 

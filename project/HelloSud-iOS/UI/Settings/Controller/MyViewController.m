@@ -27,7 +27,7 @@
 @property(nonatomic, strong) UIView *contactUsView;
 @property(nonatomic, weak) BindWalletStateView *bindWalletStateView;
 /// 等待绑定钱包信息
-@property (nonatomic, strong)SudNFTWalletInfoModel *waitBindWalletInfo;
+@property(nonatomic, strong) SudNFTWalletInfoModel *waitBindWalletInfo;
 @end
 
 @implementation MyViewController
@@ -335,6 +335,14 @@
         [weakCoverView removeFromSuperview];
     };
     v.sureBlock = ^{
+        SudNFTUnBindUserParamModel *paramModel = SudNFTUnBindUserParamModel.new;
+        paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
+        paramModel.userId = AppService.shared.loginUserID;
+        paramModel.phone = [HSAppPreferences.shared getBindUserPhoneByWalletType:paramModel.walletType];
+        [SudNFT unbindUser:paramModel listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
+            DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
+        }];
+
         [weakCoverView removeFromSuperview];
         [DTSheetView close];
         [HSAppPreferences.shared clearBindUserInfoWithWalletType:walletInfoModel.type];
