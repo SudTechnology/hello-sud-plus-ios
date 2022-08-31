@@ -288,6 +288,19 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         [weakSelf onSudNFTBindWalletTokenExpired];
     }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NFT_REFRESH_NFT object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        id temp = note.userInfo[@"nft"];
+        id cardTemp = note.userInfo[@"card"];
+        if (temp && [temp isKindOfClass:[SudNFTGetNFTListModel class]]) {
+            SudNFTGetNFTListModel *nft = (SudNFTGetNFTListModel *)temp;
+            [self.myHeaderView updateNFTList:nft];
+            [self reloadHeadView];
+        } else if (cardTemp && [cardTemp isKindOfClass:[SudNFTGetCardListModel class]]) {
+            SudNFTGetCardListModel *card = (SudNFTGetCardListModel *)cardTemp;
+            [self.myHeaderView updateCardList:card];
+            [self reloadHeadView];
+        }
+    }];
 
 }
 

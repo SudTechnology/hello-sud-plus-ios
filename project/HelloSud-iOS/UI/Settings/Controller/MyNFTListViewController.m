@@ -165,6 +165,10 @@
             [arr addObject:cellModel];
         }
         [weakSelf updateNFTList:arr add:isMore];
+        if (!isMore) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NFT_REFRESH_NFT object:nil userInfo:@{@"nft": nftListModel}];
+        }
+
     }];
 }
 
@@ -203,10 +207,13 @@
             cellModel.cardModel = m;
             cellModel.coverURL = m.coverURL;
             cellModel.name = m.name;
-            
+
             [arr addObject:cellModel];
         }
         [weakSelf updateNFTList:arr add:isMore];
+        if (!isMore) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NFT_REFRESH_NFT object:nil userInfo:@{@"card": resp}];
+        }
     }];
 }
 

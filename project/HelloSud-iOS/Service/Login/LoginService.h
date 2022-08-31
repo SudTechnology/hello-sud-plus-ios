@@ -13,6 +13,8 @@ extern NSString *const TOKEN_REFRESH_SUCCESS_NTF;
 extern NSString *const TOKEN_REFRESH_FAIL_NTF;
 /// 钱包token失效
 extern NSString *const WALLET_BIND_TOKEN_EXPIRED_NTF;
+/// NFT刷新
+extern NSString *const NFT_REFRESH_NFT;
 
 NS_ASSUME_NONNULL_BEGIN
 
