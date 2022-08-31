@@ -107,6 +107,10 @@
     [SudNFT bindUser:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindUserModel *resp) {
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            if (errCode == 1030) {
+                [ToastUtil show:@"验证码错误(1030)"];
+                return;
+            }
             [ToastUtil show:msg];
             return;
         }
