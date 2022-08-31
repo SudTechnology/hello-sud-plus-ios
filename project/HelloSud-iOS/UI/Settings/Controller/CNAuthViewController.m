@@ -281,13 +281,13 @@
         make.leading.mas_equalTo(30);
         make.trailing.mas_equalTo(-30);
         make.height.mas_equalTo(44);
-        make.bottom.mas_equalTo(-(kAppSafeBottom + 82));
     }];
     [self.protocolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.loginBtn.mas_bottom).offset(12);
         make.leading.mas_equalTo(30);
         make.trailing.mas_equalTo(-30);
         make.height.mas_greaterThanOrEqualTo(0);
+        make.bottom.mas_equalTo(-(kAppSafeBottom + 53));
     }];
 }
 

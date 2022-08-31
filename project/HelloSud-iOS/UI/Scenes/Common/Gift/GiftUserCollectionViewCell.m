@@ -8,7 +8,7 @@
 #import "GiftUserCollectionViewCell.h"
 
 @interface GiftUserCollectionViewCell ()
-@property (nonatomic, strong) UIImageView *headerView;
+@property (nonatomic, strong) SDAnimatedImageView *headerView;
 @property (nonatomic, strong) UILabel *micNumLabel;
 @property (nonatomic, strong) UIImageView *selectView;
 @end
@@ -60,10 +60,11 @@
 
 #pragma mark lazy
 
-- (UIImageView *)headerView {
+- (SDAnimatedImageView *)headerView {
     if (!_headerView) {
-        _headerView = [[UIImageView alloc] init];
+        _headerView = [[SDAnimatedImageView alloc] init];
         _headerView.layer.masksToBounds = true;
+        _headerView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _headerView;
 }
