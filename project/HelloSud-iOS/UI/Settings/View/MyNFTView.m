@@ -297,6 +297,7 @@
         _nameLabel.text = @"我的NFT";
         _nameLabel.textColor = HEX_COLOR(@"#ffffff");
         _nameLabel.font = UIFONT_MEDIUM(16);
+        _nameLabel.textAlignment = LanguageUtil.isLanguageRTL ? NSTextAlignmentRight : NSTextAlignmentLeft;
     }
     return _nameLabel;
 }
