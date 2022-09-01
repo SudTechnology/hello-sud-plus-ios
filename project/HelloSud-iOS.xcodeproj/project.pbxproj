@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02B27BD4749E838D1FB7E81D /* Pods_SudNFTQuickStart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A6915D98DAB6BD0EDD8CBA /* Pods_SudNFTQuickStart.framework */; };
 		039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */; };
 		3306D5C159410525EEB8ACF2 /* AllCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306DC54D7DCF6D286A5C732 /* AllCategoryView.m */; };
 		3531BA99B86C5CB859F88C87 /* Pods_QuickStart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0C4B551400EE3ED583FF51 /* Pods_QuickStart.framework */; };
@@ -142,6 +143,68 @@
 		6C192E5B279523B100553034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E59279523B100553034 /* LaunchScreen.storyboard */; };
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
 		6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */; };
+		6C31536F28C0A6440001B565 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31536E28C0A6440001B565 /* AppDelegate.m */; };
+		6C31537528C0A6440001B565 /* QuickStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31537428C0A6440001B565 /* QuickStartViewController.m */; };
+		6C31537828C0A6440001B565 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C31537628C0A6440001B565 /* Main.storyboard */; };
+		6C31537A28C0A6470001B565 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C31537928C0A6470001B565 /* Assets.xcassets */; };
+		6C31537D28C0A6470001B565 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C31537B28C0A6470001B565 /* LaunchScreen.storyboard */; };
+		6C31538028C0A6470001B565 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31537F28C0A6470001B565 /* main.m */; };
+		6C31538428C0A9A40001B565 /* DTSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCE9283F591C0026BDAB /* DTSlider.m */; };
+		6C31538528C0A9A40001B565 /* DTRippleAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCE5283F591C0026BDAB /* DTRippleAnimationView.m */; };
+		6C31538628C0A9A40001B565 /* DTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCE2283F591C0026BDAB /* DTAlertView.m */; };
+		6C31538728C0A9A40001B565 /* DTTextAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCE0283F591C0026BDAB /* DTTextAlertView.m */; };
+		6C31538828C0A9A40001B565 /* DTBlurEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCEE283F591C0026BDAB /* DTBlurEffectView.m */; };
+		6C31538928C0A9A40001B565 /* DTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCDF283F591C0026BDAB /* DTWebViewController.m */; };
+		6C31538A28C0A9A40001B565 /* DTSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCE4283F591C0026BDAB /* DTSheetView.m */; };
+		6C31538B28C0A9A40001B565 /* DTPaddingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCE3283F591C0026BDAB /* DTPaddingLabel.m */; };
+		6C31538D28C0A9B70001B565 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCFF283F591C0026BDAB /* BaseNavigationViewController.m */; };
+		6C31538E28C0A9B70001B565 /* BaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCFD283F591C0026BDAB /* BaseCollectionViewCell.m */; };
+		6C31538F28C0A9B70001B565 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCF4283F591C0026BDAB /* BaseView.m */; };
+		6C31539028C0A9B70001B565 /* BaseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCF3283F591C0026BDAB /* BaseAlertView.m */; };
+		6C31539128C0A9B70001B565 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCF8283F591C0026BDAB /* BaseModel.m */; };
+		6C31539228C0A9B70001B565 /* BaseCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD00283F591C0026BDAB /* BaseCollectionReusableView.m */; };
+		6C31539328C0A9B70001B565 /* BaseTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCFC283F591C0026BDAB /* BaseTextView.m */; };
+		6C31539428C0A9B70001B565 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCF6283F591C0026BDAB /* BaseViewController.m */; };
+		6C31539528C0A9B70001B565 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CCF2283F591C0026BDAB /* BaseTableViewCell.m */; };
+		6C31539628C0A9D30001B565 /* NSString+DTNSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD08283F591C0026BDAB /* NSString+DTNSString.m */; };
+		6C31539728C0A9D30001B565 /* DTUIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD0C283F591C0026BDAB /* DTUIView+Extension.m */; };
+		6C31539828C0A9D30001B565 /* DTNSArray+Masonry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD0B283F591C0026BDAB /* DTNSArray+Masonry.m */; };
+		6C31539928C0A9D30001B565 /* DTUIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD0E283F591C0026BDAB /* DTUIColor+Extension.m */; };
+		6C31539A28C0A9D30001B565 /* DTUIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD05283F591C0026BDAB /* DTUIDevice+Extension.m */; };
+		6C31539B28C0A9D30001B565 /* NSBundle+Language.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD09283F591C0026BDAB /* NSBundle+Language.m */; };
+		6C31539C28C0A9D30001B565 /* DTNSError+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD10283F591C0026BDAB /* DTNSError+Custom.m */; };
+		6C31539D28C0A9D30001B565 /* DTUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */; };
+		6C31539E28C0A9E20001B565 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD14283F591C0026BDAB /* HttpRequest.m */; };
+		6C31539F28C0A9E60001B565 /* DTTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD17283F591C0026BDAB /* DTTimer.m */; };
+		6C3153A028C0A9EC0001B565 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD21283F591C0026BDAB /* AppUtil.m */; };
+		6C3153A128C0A9EC0001B565 /* HSThreadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD23283F591C0026BDAB /* HSThreadUtils.m */; };
+		6C3153A228C0A9EC0001B565 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD20283F591C0026BDAB /* DeviceUtil.m */; };
+		6C3153A328C0A9EC0001B565 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD22283F591C0026BDAB /* ToastUtil.m */; };
+		6C3153A428C0A9EC0001B565 /* LanguageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD1F283F591C0026BDAB /* LanguageUtil.m */; };
+		6C3153B028C0AF9E0001B565 /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */; };
+		6C3153B428C0B0B10001B565 /* SudNFTQSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */; };
+		6C31540628C0BB940001B565 /* MyCNWalletSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E628C0BB910001B565 /* MyCNWalletSwitchCell.m */; };
+		6C31540728C0BB940001B565 /* MyEthereumChainsSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E828C0BB910001B565 /* MyEthereumChainsSelectCell.m */; };
+		6C31540828C0BB940001B565 /* MyNFTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153EC28C0BB910001B565 /* MyNFTView.m */; };
+		6C31540928C0BB940001B565 /* MyCNWalletSwitchPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F028C0BB920001B565 /* MyCNWalletSwitchPopView.m */; };
+		6C31540A28C0BB940001B565 /* ForeignWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F128C0BB920001B565 /* ForeignWalletSelectPopView.m */; };
+		6C31540B28C0BB940001B565 /* BindWalletStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F228C0BB920001B565 /* BindWalletStateView.m */; };
+		6C31540C28C0BB940001B565 /* MyEthereumChainsSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F928C0BB930001B565 /* MyEthereumChainsSelectPopView.m */; };
+		6C31540D28C0BB940001B565 /* CNWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FB28C0BB930001B565 /* CNWalletSelectPopView.m */; };
+		6C31540E28C0BB940001B565 /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FD28C0BB930001B565 /* MyHeaderView.m */; };
+		6C31540F28C0BB940001B565 /* MyBindWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FE28C0BB930001B565 /* MyBindWalletView.m */; };
+		6C31541028C0BB940001B565 /* CNWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540028C0BB930001B565 /* CNWalletSelectCell.m */; };
+		6C31541128C0BB940001B565 /* ForeignWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540128C0BB930001B565 /* ForeignWalletSelectCell.m */; };
+		6C31541228C0BB940001B565 /* CNWalletDeletePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540228C0BB930001B565 /* CNWalletDeletePopView.m */; };
+		6C31541328C0BB940001B565 /* MyNFTColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540328C0BB940001B565 /* MyNFTColCell.m */; };
+		6C31541428C0BB940001B565 /* MySelectEtherChainsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540428C0BB940001B565 /* MySelectEtherChainsView.m */; };
+		6C31541528C0BB940001B565 /* BindBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540528C0BB940001B565 /* BindBtnView.m */; };
+		6C31541C28C0BF8A0001B565 /* MyNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541828C0BF8A0001B565 /* MyNFTListViewController.m */; };
+		6C31541D28C0BF8A0001B565 /* CNAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541928C0BF8A0001B565 /* CNAuthViewController.m */; };
+		6C31541E28C0BF8A0001B565 /* MyNFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541B28C0BF8A0001B565 /* MyNFTDetailViewController.m */; };
+		6C31542528C0BF9B0001B565 /* HSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542128C0BF9B0001B565 /* HSNFTListCellModel.m */; };
+		6C31542628C0BF9B0001B565 /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542228C0BF9B0001B565 /* MyCNWalletSwitchCellModel.m */; };
+		6C31542728C0BF9B0001B565 /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542328C0BF9B0001B565 /* MyEthereumChainsCellModel.m */; };
 		6C4607AA285083CB005C99EF /* GuessRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607A9285083CB005C99EF /* GuessRankViewController.m */; };
 		6C4607AD2850A818005C99EF /* GuessRankContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AC2850A817005C99EF /* GuessRankContentView.m */; };
 		6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AF28518FB7005C99EF /* GuessRankHeaderView.m */; };
@@ -359,6 +422,7 @@
 		1586CB2C580C2AC878CABF7F /* Pods-QuickStart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickStart.release.xcconfig"; path = "Target Support Files/Pods-QuickStart/Pods-QuickStart.release.xcconfig"; sourceTree = "<group>"; };
 		3306D63E22DDCC827A67B80F /* AllCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllCategoryView.h; sourceTree = "<group>"; };
 		3306DC54D7DCF6D286A5C732 /* AllCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllCategoryView.m; sourceTree = "<group>"; };
+		437D227848E0E278AE6F8F75 /* Pods-SudNFTQuickStart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudNFTQuickStart.release.xcconfig"; path = "Target Support Files/Pods-SudNFTQuickStart/Pods-SudNFTQuickStart.release.xcconfig"; sourceTree = "<group>"; };
 		4416001A27F5A4BB00D7EE70 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		4416001B27F5A4BB00D7EE70 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4416001C27F5A4BC00D7EE70 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -619,6 +683,7 @@
 		4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.release.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A0C4B551400EE3ED583FF51 /* Pods_QuickStart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickStart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EF39018227DF79785B696A2 /* Pods-SudNFTQuickStart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudNFTQuickStart.debug.xcconfig"; path = "Target Support Files/Pods-SudNFTQuickStart/Pods-SudNFTQuickStart.debug.xcconfig"; sourceTree = "<group>"; };
 		6C076E6F279E429E00650209 /* ZegoAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZegoAudioEngineImpl.h; sourceTree = "<group>"; };
 		6C076E70279E429E00650209 /* ZegoAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZegoAudioEngineImpl.m; sourceTree = "<group>"; };
 		6C076E72279E457D00650209 /* ISudAudioEventListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISudAudioEventListener.h; sourceTree = "<group>"; };
@@ -660,6 +725,64 @@
 		6C192E882797E2C700553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraAudioEngineImpl.h; sourceTree = "<group>"; };
 		6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgoraAudioEngineImpl.m; sourceTree = "<group>"; };
+		6C31536B28C0A6440001B565 /* SudNFTQuickStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudNFTQuickStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C31536D28C0A6440001B565 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6C31536E28C0A6440001B565 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6C31537328C0A6440001B565 /* QuickStartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickStartViewController.h; sourceTree = "<group>"; };
+		6C31537428C0A6440001B565 /* QuickStartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickStartViewController.m; sourceTree = "<group>"; };
+		6C31537728C0A6440001B565 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6C31537928C0A6470001B565 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6C31537C28C0A6470001B565 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6C31537E28C0A6470001B565 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C31537F28C0A6470001B565 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6C3153A528C0AA3C0001B565 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SudNFT.xcframework; path = SudMGPSDK/SudNFT.xcframework; sourceTree = SOURCE_ROOT; };
+		6C3153B228C0B0B10001B565 /* SudNFTQSAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQSAppPreferences.h; sourceTree = "<group>"; };
+		6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQSAppPreferences.m; sourceTree = "<group>"; };
+		6C3153E628C0BB910001B565 /* MyCNWalletSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCell.m; sourceTree = "<group>"; };
+		6C3153E728C0BB910001B565 /* MyEthereumChainsSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsSelectCell.h; sourceTree = "<group>"; };
+		6C3153E828C0BB910001B565 /* MyEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectCell.m; sourceTree = "<group>"; };
+		6C3153E928C0BB910001B565 /* ForeignWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForeignWalletSelectPopView.h; sourceTree = "<group>"; };
+		6C3153EA28C0BB910001B565 /* BindWalletStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindWalletStateView.h; sourceTree = "<group>"; };
+		6C3153EB28C0BB910001B565 /* MyNFTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTView.h; sourceTree = "<group>"; };
+		6C3153EC28C0BB910001B565 /* MyNFTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTView.m; sourceTree = "<group>"; };
+		6C3153ED28C0BB910001B565 /* MySelectEtherChainsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySelectEtherChainsView.h; sourceTree = "<group>"; };
+		6C3153EE28C0BB920001B565 /* MyEthereumChainsSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsSelectPopView.h; sourceTree = "<group>"; };
+		6C3153EF28C0BB920001B565 /* CNWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletSelectCell.h; sourceTree = "<group>"; };
+		6C3153F028C0BB920001B565 /* MyCNWalletSwitchPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchPopView.m; sourceTree = "<group>"; };
+		6C3153F128C0BB920001B565 /* ForeignWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForeignWalletSelectPopView.m; sourceTree = "<group>"; };
+		6C3153F228C0BB920001B565 /* BindWalletStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindWalletStateView.m; sourceTree = "<group>"; };
+		6C3153F328C0BB920001B565 /* MyCNWalletSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchPopView.h; sourceTree = "<group>"; };
+		6C3153F428C0BB920001B565 /* MyCNWalletSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchCell.h; sourceTree = "<group>"; };
+		6C3153F528C0BB920001B565 /* MyNFTColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTColCell.h; sourceTree = "<group>"; };
+		6C3153F628C0BB920001B565 /* CNWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletSelectPopView.h; sourceTree = "<group>"; };
+		6C3153F728C0BB920001B565 /* ForeignWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForeignWalletSelectCell.h; sourceTree = "<group>"; };
+		6C3153F828C0BB930001B565 /* CNWalletDeletePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletDeletePopView.h; sourceTree = "<group>"; };
+		6C3153F928C0BB930001B565 /* MyEthereumChainsSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectPopView.m; sourceTree = "<group>"; };
+		6C3153FA28C0BB930001B565 /* BindBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindBtnView.h; sourceTree = "<group>"; };
+		6C3153FB28C0BB930001B565 /* CNWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletSelectPopView.m; sourceTree = "<group>"; };
+		6C3153FC28C0BB930001B565 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
+		6C3153FD28C0BB930001B565 /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
+		6C3153FE28C0BB930001B565 /* MyBindWalletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBindWalletView.m; sourceTree = "<group>"; };
+		6C3153FF28C0BB930001B565 /* MyBindWalletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBindWalletView.h; sourceTree = "<group>"; };
+		6C31540028C0BB930001B565 /* CNWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletSelectCell.m; sourceTree = "<group>"; };
+		6C31540128C0BB930001B565 /* ForeignWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForeignWalletSelectCell.m; sourceTree = "<group>"; };
+		6C31540228C0BB930001B565 /* CNWalletDeletePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletDeletePopView.m; sourceTree = "<group>"; };
+		6C31540328C0BB940001B565 /* MyNFTColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTColCell.m; sourceTree = "<group>"; };
+		6C31540428C0BB940001B565 /* MySelectEtherChainsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySelectEtherChainsView.m; sourceTree = "<group>"; };
+		6C31540528C0BB940001B565 /* BindBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindBtnView.m; sourceTree = "<group>"; };
+		6C31541628C0BF890001B565 /* CNAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNAuthViewController.h; sourceTree = "<group>"; };
+		6C31541728C0BF890001B565 /* MyNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTListViewController.h; sourceTree = "<group>"; };
+		6C31541828C0BF8A0001B565 /* MyNFTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTListViewController.m; sourceTree = "<group>"; };
+		6C31541928C0BF8A0001B565 /* CNAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAuthViewController.m; sourceTree = "<group>"; };
+		6C31541A28C0BF8A0001B565 /* MyNFTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTDetailViewController.h; sourceTree = "<group>"; };
+		6C31541B28C0BF8A0001B565 /* MyNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTDetailViewController.m; sourceTree = "<group>"; };
+		6C31541F28C0BF9A0001B565 /* MyCNWalletSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchCellModel.h; sourceTree = "<group>"; };
+		6C31542028C0BF9A0001B565 /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
+		6C31542128C0BF9B0001B565 /* HSNFTListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSNFTListCellModel.m; sourceTree = "<group>"; };
+		6C31542228C0BF9B0001B565 /* MyCNWalletSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCellModel.m; sourceTree = "<group>"; };
+		6C31542328C0BF9B0001B565 /* MyEthereumChainsCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsCellModel.m; sourceTree = "<group>"; };
+		6C31542428C0BF9B0001B565 /* MyEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsCellModel.h; sourceTree = "<group>"; };
 		6C4607A8285083CB005C99EF /* GuessRankViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankViewController.h; sourceTree = "<group>"; };
 		6C4607A9285083CB005C99EF /* GuessRankViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankViewController.m; sourceTree = "<group>"; };
 		6C4607AB2850A817005C99EF /* GuessRankContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankContentView.h; sourceTree = "<group>"; };
@@ -1005,6 +1128,7 @@
 		E5EDB8BF27E8785400EE99D0 /* AudioJoinRoomModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioJoinRoomModel.m; sourceTree = "<group>"; };
 		E5EDC0BC281B940400E6875B /* AsyncCallWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncCallWrapper.h; sourceTree = "<group>"; };
 		E5EDC0BD281B941D00E6875B /* AsyncCallWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncCallWrapper.m; sourceTree = "<group>"; };
+		F7A6915D98DAB6BD0EDD8CBA /* Pods_SudNFTQuickStart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SudNFTQuickStart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1015,6 +1139,15 @@
 				6C67317A28A1124600232992 /* libsvgnative.a in Frameworks */,
 				6C67317928A1124600232992 /* libSDImageSVGNativeCoder.a in Frameworks */,
 				039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C31536828C0A6440001B565 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02B27BD4749E838D1FB7E81D /* Pods_SudNFTQuickStart.framework in Frameworks */,
+				6C3153B028C0AF9E0001B565 /* SudNFT.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1775,6 +1908,7 @@
 				6CE6CCDC283F591C0026BDAB /* Common */,
 				6C192E4A279523B000553034 /* HelloSud-iOS */,
 				6CE6CB58283CB6890026BDAB /* QuickStart */,
+				6C31536C28C0A6440001B565 /* SudNFTQuickStart */,
 				6C192E49279523B000553034 /* Products */,
 				EC6357AE0D30A512FB9D49C4 /* Pods */,
 				E65466148933C05BB06C9A97 /* Frameworks */,
@@ -1789,6 +1923,7 @@
 				6C192E802797C63100553034 /* Constant.m */,
 				6C192E48279523B000553034 /* HelloSud.app */,
 				6CE6CB57283CB6890026BDAB /* QuickStart.app */,
+				6C31536B28C0A6440001B565 /* SudNFTQuickStart.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1822,6 +1957,126 @@
 				6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */,
 			);
 			path = Agora;
+			sourceTree = "<group>";
+		};
+		6C31536C28C0A6440001B565 /* SudNFTQuickStart */ = {
+			isa = PBXGroup;
+			children = (
+				6C3153B128C0B0B10001B565 /* Preferences */,
+				6C3153AE28C0AF7E0001B565 /* Frameworks */,
+				6C3153A728C0AD1D0001B565 /* UI */,
+				6C3153A628C0AD0F0001B565 /* App */,
+			);
+			path = SudNFTQuickStart;
+			sourceTree = "<group>";
+		};
+		6C3153A628C0AD0F0001B565 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6C3153A528C0AA3C0001B565 /* PrefixHeader.pch */,
+				6C31536D28C0A6440001B565 /* AppDelegate.h */,
+				6C31536E28C0A6440001B565 /* AppDelegate.m */,
+				6C31537628C0A6440001B565 /* Main.storyboard */,
+				6C31537928C0A6470001B565 /* Assets.xcassets */,
+				6C31537B28C0A6470001B565 /* LaunchScreen.storyboard */,
+				6C31537E28C0A6470001B565 /* Info.plist */,
+				6C31537F28C0A6470001B565 /* main.m */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		6C3153A728C0AD1D0001B565 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				6C3153AA28C0AEB30001B565 /* Model */,
+				6C3153A928C0ADA40001B565 /* View */,
+				6C3153A828C0AD9F0001B565 /* VC */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		6C3153A828C0AD9F0001B565 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				6C31541628C0BF890001B565 /* CNAuthViewController.h */,
+				6C31541928C0BF8A0001B565 /* CNAuthViewController.m */,
+				6C31541A28C0BF8A0001B565 /* MyNFTDetailViewController.h */,
+				6C31541B28C0BF8A0001B565 /* MyNFTDetailViewController.m */,
+				6C31541728C0BF890001B565 /* MyNFTListViewController.h */,
+				6C31541828C0BF8A0001B565 /* MyNFTListViewController.m */,
+				6C31537328C0A6440001B565 /* QuickStartViewController.h */,
+				6C31537428C0A6440001B565 /* QuickStartViewController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		6C3153A928C0ADA40001B565 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C3153FA28C0BB930001B565 /* BindBtnView.h */,
+				6C31540528C0BB940001B565 /* BindBtnView.m */,
+				6C3153EA28C0BB910001B565 /* BindWalletStateView.h */,
+				6C3153F228C0BB920001B565 /* BindWalletStateView.m */,
+				6C3153F828C0BB930001B565 /* CNWalletDeletePopView.h */,
+				6C31540228C0BB930001B565 /* CNWalletDeletePopView.m */,
+				6C3153EF28C0BB920001B565 /* CNWalletSelectCell.h */,
+				6C31540028C0BB930001B565 /* CNWalletSelectCell.m */,
+				6C3153F628C0BB920001B565 /* CNWalletSelectPopView.h */,
+				6C3153FB28C0BB930001B565 /* CNWalletSelectPopView.m */,
+				6C3153F728C0BB920001B565 /* ForeignWalletSelectCell.h */,
+				6C31540128C0BB930001B565 /* ForeignWalletSelectCell.m */,
+				6C3153E928C0BB910001B565 /* ForeignWalletSelectPopView.h */,
+				6C3153F128C0BB920001B565 /* ForeignWalletSelectPopView.m */,
+				6C3153FF28C0BB930001B565 /* MyBindWalletView.h */,
+				6C3153FE28C0BB930001B565 /* MyBindWalletView.m */,
+				6C3153F428C0BB920001B565 /* MyCNWalletSwitchCell.h */,
+				6C3153E628C0BB910001B565 /* MyCNWalletSwitchCell.m */,
+				6C3153F328C0BB920001B565 /* MyCNWalletSwitchPopView.h */,
+				6C3153F028C0BB920001B565 /* MyCNWalletSwitchPopView.m */,
+				6C3153E728C0BB910001B565 /* MyEthereumChainsSelectCell.h */,
+				6C3153E828C0BB910001B565 /* MyEthereumChainsSelectCell.m */,
+				6C3153EE28C0BB920001B565 /* MyEthereumChainsSelectPopView.h */,
+				6C3153F928C0BB930001B565 /* MyEthereumChainsSelectPopView.m */,
+				6C3153FC28C0BB930001B565 /* MyHeaderView.h */,
+				6C3153FD28C0BB930001B565 /* MyHeaderView.m */,
+				6C3153F528C0BB920001B565 /* MyNFTColCell.h */,
+				6C31540328C0BB940001B565 /* MyNFTColCell.m */,
+				6C3153EB28C0BB910001B565 /* MyNFTView.h */,
+				6C3153EC28C0BB910001B565 /* MyNFTView.m */,
+				6C3153ED28C0BB910001B565 /* MySelectEtherChainsView.h */,
+				6C31540428C0BB940001B565 /* MySelectEtherChainsView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C3153AA28C0AEB30001B565 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C31542028C0BF9A0001B565 /* HSNFTListCellModel.h */,
+				6C31542128C0BF9B0001B565 /* HSNFTListCellModel.m */,
+				6C31541F28C0BF9A0001B565 /* MyCNWalletSwitchCellModel.h */,
+				6C31542228C0BF9B0001B565 /* MyCNWalletSwitchCellModel.m */,
+				6C31542428C0BF9B0001B565 /* MyEthereumChainsCellModel.h */,
+				6C31542328C0BF9B0001B565 /* MyEthereumChainsCellModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6C3153AE28C0AF7E0001B565 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		6C3153B128C0B0B10001B565 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				6C3153B228C0B0B10001B565 /* SudNFTQSAppPreferences.h */,
+				6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 		6C4607A528503E0B005C99EF /* Model */ = {
@@ -2487,6 +2742,7 @@
 				E5C82F7427FFE09C00A409D5 /* NMCBasicModuleFramework.framework */,
 				573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */,
 				5A0C4B551400EE3ED583FF51 /* Pods_QuickStart.framework */,
+				F7A6915D98DAB6BD0EDD8CBA /* Pods_SudNFTQuickStart.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2498,6 +2754,8 @@
 				4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */,
 				7A720CB3011AA758F160BFED /* Pods-QuickStart.debug.xcconfig */,
 				1586CB2C580C2AC878CABF7F /* Pods-QuickStart.release.xcconfig */,
+				5EF39018227DF79785B696A2 /* Pods-SudNFTQuickStart.debug.xcconfig */,
+				437D227848E0E278AE6F8F75 /* Pods-SudNFTQuickStart.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2524,6 +2782,25 @@
 			name = "HelloSud-iOS";
 			productName = HelloSud;
 			productReference = 6C192E48279523B000553034 /* HelloSud.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6C31536A28C0A6440001B565 /* SudNFTQuickStart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C31538328C0A6470001B565 /* Build configuration list for PBXNativeTarget "SudNFTQuickStart" */;
+			buildPhases = (
+				0B2B96443C76E7B1C7CF7011 /* [CP] Check Pods Manifest.lock */,
+				6C31536728C0A6440001B565 /* Sources */,
+				6C31536828C0A6440001B565 /* Frameworks */,
+				6C31536928C0A6440001B565 /* Resources */,
+				9F16B6A6C71FF462AA928BD8 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SudNFTQuickStart;
+			productName = SudNFTQuickStart;
+			productReference = 6C31536B28C0A6440001B565 /* SudNFTQuickStart.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6CE6CB56283CB6890026BDAB /* QuickStart */ = {
@@ -2559,6 +2836,9 @@
 					6C192E47279523B000553034 = {
 						CreatedOnToolsVersion = 13.1;
 					};
+					6C31536A28C0A6440001B565 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
 					6CE6CB56283CB6890026BDAB = {
 						CreatedOnToolsVersion = 13.4;
 					};
@@ -2589,6 +2869,7 @@
 			targets = (
 				6C192E47279523B000553034 /* HelloSud-iOS */,
 				6CE6CB56283CB6890026BDAB /* QuickStart */,
+				6C31536A28C0A6440001B565 /* SudNFTQuickStart */,
 			);
 		};
 /* End PBXProject section */
@@ -2608,6 +2889,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6C31536928C0A6440001B565 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C31537D28C0A6470001B565 /* LaunchScreen.storyboard in Resources */,
+				6C31537A28C0A6470001B565 /* Assets.xcassets in Resources */,
+				6C31537828C0A6440001B565 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CE6CB55283CB6890026BDAB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2622,6 +2913,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0B2B96443C76E7B1C7CF7011 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SudNFTQuickStart-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1057205B42502B672EE74406 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2676,6 +2989,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F16B6A6C71FF462AA928BD8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SudNFTQuickStart/Pods-SudNFTQuickStart-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SudNFTQuickStart/Pods-SudNFTQuickStart-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SudNFTQuickStart/Pods-SudNFTQuickStart-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AD1B8B546C25E4E1CF7C57B3 /* [CP] Embed Pods Frameworks */ = {
@@ -2999,6 +3329,71 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6C31536728C0A6440001B565 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C31538428C0A9A40001B565 /* DTSlider.m in Sources */,
+				6C31539428C0A9B70001B565 /* BaseViewController.m in Sources */,
+				6C31540D28C0BB940001B565 /* CNWalletSelectPopView.m in Sources */,
+				6C31539328C0A9B70001B565 /* BaseTextView.m in Sources */,
+				6C3153A228C0A9EC0001B565 /* DeviceUtil.m in Sources */,
+				6C3153A028C0A9EC0001B565 /* AppUtil.m in Sources */,
+				6C31540F28C0BB940001B565 /* MyBindWalletView.m in Sources */,
+				6C31539A28C0A9D30001B565 /* DTUIDevice+Extension.m in Sources */,
+				6C31538528C0A9A40001B565 /* DTRippleAnimationView.m in Sources */,
+				6C31539128C0A9B70001B565 /* BaseModel.m in Sources */,
+				6C31538F28C0A9B70001B565 /* BaseView.m in Sources */,
+				6C31539D28C0A9D30001B565 /* DTUIImage+Extension.m in Sources */,
+				6C31538928C0A9A40001B565 /* DTWebViewController.m in Sources */,
+				6C31538828C0A9A40001B565 /* DTBlurEffectView.m in Sources */,
+				6C31540628C0BB940001B565 /* MyCNWalletSwitchCell.m in Sources */,
+				6C31537528C0A6440001B565 /* QuickStartViewController.m in Sources */,
+				6C31541228C0BB940001B565 /* CNWalletDeletePopView.m in Sources */,
+				6C31538628C0A9A40001B565 /* DTAlertView.m in Sources */,
+				6C31542728C0BF9B0001B565 /* MyEthereumChainsCellModel.m in Sources */,
+				6C31539B28C0A9D30001B565 /* NSBundle+Language.m in Sources */,
+				6C31541328C0BB940001B565 /* MyNFTColCell.m in Sources */,
+				6C31539E28C0A9E20001B565 /* HttpRequest.m in Sources */,
+				6C31538B28C0A9A40001B565 /* DTPaddingLabel.m in Sources */,
+				6C31542628C0BF9B0001B565 /* MyCNWalletSwitchCellModel.m in Sources */,
+				6C31540728C0BB940001B565 /* MyEthereumChainsSelectCell.m in Sources */,
+				6C3153A328C0A9EC0001B565 /* ToastUtil.m in Sources */,
+				6C31539028C0A9B70001B565 /* BaseAlertView.m in Sources */,
+				6C31540828C0BB940001B565 /* MyNFTView.m in Sources */,
+				6C31539528C0A9B70001B565 /* BaseTableViewCell.m in Sources */,
+				6C31540E28C0BB940001B565 /* MyHeaderView.m in Sources */,
+				6C31539F28C0A9E60001B565 /* DTTimer.m in Sources */,
+				6C31540B28C0BB940001B565 /* BindWalletStateView.m in Sources */,
+				6C31540928C0BB940001B565 /* MyCNWalletSwitchPopView.m in Sources */,
+				6C31540C28C0BB940001B565 /* MyEthereumChainsSelectPopView.m in Sources */,
+				6C31536F28C0A6440001B565 /* AppDelegate.m in Sources */,
+				6C31538728C0A9A40001B565 /* DTTextAlertView.m in Sources */,
+				6C31541428C0BB940001B565 /* MySelectEtherChainsView.m in Sources */,
+				6C31539728C0A9D30001B565 /* DTUIView+Extension.m in Sources */,
+				6C31538E28C0A9B70001B565 /* BaseCollectionViewCell.m in Sources */,
+				6C31538A28C0A9A40001B565 /* DTSheetView.m in Sources */,
+				6C31539828C0A9D30001B565 /* DTNSArray+Masonry.m in Sources */,
+				6C3153B428C0B0B10001B565 /* SudNFTQSAppPreferences.m in Sources */,
+				6C31538D28C0A9B70001B565 /* BaseNavigationViewController.m in Sources */,
+				6C3153A128C0A9EC0001B565 /* HSThreadUtils.m in Sources */,
+				6C31541128C0BB940001B565 /* ForeignWalletSelectCell.m in Sources */,
+				6C31539628C0A9D30001B565 /* NSString+DTNSString.m in Sources */,
+				6C31539228C0A9B70001B565 /* BaseCollectionReusableView.m in Sources */,
+				6C31541028C0BB940001B565 /* CNWalletSelectCell.m in Sources */,
+				6C31541C28C0BF8A0001B565 /* MyNFTListViewController.m in Sources */,
+				6C31542528C0BF9B0001B565 /* HSNFTListCellModel.m in Sources */,
+				6C31538028C0A6470001B565 /* main.m in Sources */,
+				6C31539C28C0A9D30001B565 /* DTNSError+Custom.m in Sources */,
+				6C31541E28C0BF8A0001B565 /* MyNFTDetailViewController.m in Sources */,
+				6C31541528C0BB940001B565 /* BindBtnView.m in Sources */,
+				6C31539928C0A9D30001B565 /* DTUIColor+Extension.m in Sources */,
+				6C3153A428C0A9EC0001B565 /* LanguageUtil.m in Sources */,
+				6C31540A28C0BB940001B565 /* ForeignWalletSelectPopView.m in Sources */,
+				6C31541D28C0BF8A0001B565 /* CNAuthViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CE6CB53283CB6890026BDAB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3105,6 +3500,22 @@
 				4416002A27F5A4DD00D7EE70 /* es */,
 				4416002D27F5A4E200D7EE70 /* th */,
 				4416003027F5A4EB00D7EE70 /* vi */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		6C31537628C0A6440001B565 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C31537728C0A6440001B565 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6C31537B28C0A6470001B565 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C31537C28C0A6470001B565 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -3347,6 +3758,66 @@
 			};
 			name = Release;
 		};
+		6C31538128C0A6470001B565 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EF39018227DF79785B696A2 /* Pods-SudNFTQuickStart.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P6FVM63RW6;
+				GCC_PREFIX_HEADER = SudNFTQuickStart/App/PrefixHeader.pch;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SudNFTQuickStart/App/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		6C31538228C0A6470001B565 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 437D227848E0E278AE6F8F75 /* Pods-SudNFTQuickStart.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P6FVM63RW6;
+				GCC_PREFIX_HEADER = SudNFTQuickStart/App/PrefixHeader.pch;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SudNFTQuickStart/App/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		6CE6CB6D283CB68B0026BDAB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A720CB3011AA758F160BFED /* Pods-QuickStart.debug.xcconfig */;
@@ -3432,6 +3903,15 @@
 			buildConfigurations = (
 				6C192E62279523B100553034 /* Debug */,
 				6C192E63279523B100553034 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6C31538328C0A6470001B565 /* Build configuration list for PBXNativeTarget "SudNFTQuickStart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C31538128C0A6470001B565 /* Debug */,
+				6C31538228C0A6470001B565 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
