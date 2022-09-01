@@ -34,10 +34,10 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 - (void)cacheWalletToken:(SudNFTBindWalletModel *)walletRespModel walletAddress:(NSString *)walletAddress;
 
 /// 保存绑定用户信息
-/// @param bindUserModel bindUserModel
+/// @param bindCnWalletModel bindUserModel
 /// @param walletType walletType
 /// @param phone phone
-- (void)saveWalletTokenWithBindUserModel:(SudNFTBindUserModel *)bindUserModel walletType:(NSInteger)walletType phone:(NSString *)phone;
+- (void)saveWalletTokenWithBindCnWalletModel:(SudNFTBindCnWalletModel *)bindCnWalletModel walletType:(NSInteger)walletType phone:(NSString *)phone;
 
 /// 通过钱包获取绑定用户token
 /// @param walletType walletType

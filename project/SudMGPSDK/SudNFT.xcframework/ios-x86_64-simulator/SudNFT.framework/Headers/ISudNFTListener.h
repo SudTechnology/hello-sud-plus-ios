@@ -36,15 +36,15 @@ typedef void(^ISudNFTListenerGetNFTList)(NSInteger errCode, NSString *_Nullable 
 
 typedef void(^ISudNFTListenerGenNFTCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGenNFTCredentialsTokenModel *_Nullable generateDetailTokenModel);
 
-typedef void(^ISudNFTListenerSendVerifyCode)(NSInteger errCode, NSString *_Nullable errMsg);
+typedef void(^ISudNFTListenerSendSmsCode)(NSInteger errCode, NSString *_Nullable errMsg);
 
-typedef void(^ISudNFTListenerBindUser)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindUserModel *_Nullable resp);
+typedef void(^ISudNFTListenerBindCnWallet)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindCnWalletModel *_Nullable resp);
 
-typedef void(^ISudNFTListenerUnBindUser)(NSInteger errCode, NSString *_Nullable errMsg);
+typedef void(^ISudNFTListenerUnBindCnWallet)(NSInteger errCode, NSString *_Nullable errMsg);
 
-typedef void(^ISudNFTListenerGetCardList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGetCardListModel *_Nullable resp);
+typedef void(^ISudNFTListenerGetCnNFTList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGetCnNFTListModel *_Nullable resp);
 
-typedef void(^ISudNFTListenerGenCardCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTCardCredentialsTokenModel *_Nullable resp);
+typedef void(^ISudNFTListenerCnGenNFTCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTCnCredentialsTokenModel *_Nullable resp);
 
 /// 钱包绑定状态类型
 typedef NS_ENUM(NSInteger, ISudNFTBindWalletStageType) {

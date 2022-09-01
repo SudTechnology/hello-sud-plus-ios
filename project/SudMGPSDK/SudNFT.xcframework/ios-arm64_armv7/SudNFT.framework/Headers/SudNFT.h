@@ -46,33 +46,32 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param userActivity userActivity description
 + (BOOL)handleOpenUniversalLink:(NSUserActivity *)userActivity;
 
-#pragma mark CNm
+#pragma mark CN
 
 /// 发送短信验证码
 /// @param paramModel 参数model
 /// @param listener 回调
-+ (void)sendPhoneCode:(SudNFTSendVerifyCodeParamModel *)paramModel listener:(ISudNFTListenerSendVerifyCode)listener;
++ (void)sendSmsCode:(SudNFTSendSmsCodeParamModel *)paramModel listener:(ISudNFTListenerSendSmsCode)listener;
 
-/// 绑定用户
+/// 绑定国内钱包
 /// @param paramModel 参数model
 /// @param listener 回调
-+ (void)bindUser:(SudNFTBindUserParamModel *)paramModel listener:(ISudNFTListenerBindUser)listener;
++ (void)bindCnWallet:(SudNFTBindCnWalletParamModel *)paramModel listener:(ISudNFTListenerBindCnWallet)listener;
+
+/// 获取国内NFT列表
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)getCnNFTList:(SudNFTGetCnNFTListParamModel *)paramModel listener:(ISudNFTListenerGetCnNFTList)listener;
+
+/// 生成国内NFT使用唯一认证token
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)genCnNFTCredentialsToken:(SudNFTCnCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerCnGenNFTCredentialsToken)listener;
 
 /// 解绑用户
 /// @param paramModel 参数
 /// @param listener 回调
-+ (void)unbindUser:(SudNFTUnBindUserParamModel *)paramModel listener:(ISudNFTListenerUnBindUser)listener;
-
-/// 获取藏品列表
-/// @param paramModel 参数model
-/// @param listener 回调
-+ (void)getCardList:(SudNFTGetCardListParamModel *)paramModel listener:(ISudNFTListenerGetCardList)listener;
-
-/// 生成藏品使用唯一认证token
-/// @param paramModel 参数model
-/// @param listener 回调
-+ (void)genCardCredentialsToken:(SudNFTCardCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerGenCardCredentialsToken)listener;
-
++ (void)unbindCnWallet:(SudNFTUnBindCnWalletParamModel *)paramModel listener:(ISudNFTListenerUnBindCnWallet)listener;
 @end
 
 NS_ASSUME_NONNULL_END

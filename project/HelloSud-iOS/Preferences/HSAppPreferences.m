@@ -168,15 +168,15 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
 }
 
 /// 保存绑定用户信息
-/// @param bindUserModel
+/// @param bindCnWalletModel
 /// @param walletType
 /// @param phone
-- (void)saveWalletTokenWithBindUserModel:(SudNFTBindUserModel *)bindUserModel walletType:(NSInteger)walletType phone:(NSString *)phone {
+- (void)saveWalletTokenWithBindCnWalletModel:(SudNFTBindCnWalletModel *)bindCnWalletModel walletType:(NSInteger)walletType phone:(NSString *)phone {
     // 用户手机号
     [NSUserDefaults.standardUserDefaults setValue:phone forKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserPhone, @(walletType)]];
     [NSUserDefaults.standardUserDefaults synchronize];
     // 用户token
-    [NSUserDefaults.standardUserDefaults setValue:bindUserModel.walletToken forKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserToken, @(walletType)]];
+    [NSUserDefaults.standardUserDefaults setValue:bindCnWalletModel.walletToken forKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserToken, @(walletType)]];
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 

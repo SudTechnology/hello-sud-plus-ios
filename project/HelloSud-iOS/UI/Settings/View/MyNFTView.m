@@ -126,12 +126,12 @@
 }
 
 /// 更新藏品列表
-- (void)updateCardList:(SudNFTGetCardListModel *)cardListModel {
+- (void)updateCardList:(SudNFTGetCnNFTListModel *)cardListModel {
     self.totalCount = cardListModel.totalCount;
     NSMutableArray *arr = [[NSMutableArray alloc] init];
-    for (SudNFTCardModel *m in cardListModel.list) {
+    for (SudNFTCnInfoModel *m in cardListModel.list) {
         HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
-        cellModel.coverURL = m.coverURL;
+        cellModel.coverURL = m.coverUrl;
         cellModel.name = m.name;
         cellModel.cardModel = m;
         [arr addObject:cellModel];

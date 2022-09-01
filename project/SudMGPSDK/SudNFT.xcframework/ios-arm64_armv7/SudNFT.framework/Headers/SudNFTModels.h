@@ -138,7 +138,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark CN
 
 /// 发送验证码参数model [CN]
-@interface SudNFTSendVerifyCodeParamModel : NSObject
+@interface SudNFTSendSmsCodeParamModel : NSObject
 /// 手机号码
 @property(nonatomic, copy) NSString *phone;
 /// 钱包类型
@@ -146,11 +146,11 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// 绑定用户参数model [CN]
-@interface SudNFTBindUserParamModel : NSObject
+@interface SudNFTBindCnWalletParamModel : NSObject
 /// 手机号码
 @property(nonatomic, copy) NSString *phone;
 /// 验证码
-@property(nonatomic, copy) NSString *phoneCode;
+@property(nonatomic, copy) NSString *smsCode;
 /// 用ID
 @property(nonatomic, copy) NSString *userId;
 /// 钱包类型
@@ -158,7 +158,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// 解绑绑定用户参数model [CN]
-@interface SudNFTUnBindUserParamModel : NSObject
+@interface SudNFTUnBindCnWalletParamModel : NSObject
 /// 手机号码
 @property(nonatomic, copy) NSString *phone;
 /// 用ID
@@ -168,37 +168,37 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// 钱包信息
-@interface SudNFTBindUserModel : NSObject
+@interface SudNFTBindCnWalletModel : NSObject
 /// 钱包绑定token
 @property(nonatomic, copy) NSString *walletToken;
-/// token过期时间戳，毫秒
-@property(nonatomic, assign) NSInteger expireAtMs;
 /// token有效期延时，毫秒
 @property(nonatomic, assign) NSInteger delayMs;
+/// token过期时间戳，毫秒
+@property(nonatomic, assign) NSInteger expireAtMs;
 @end
 
 /// 获取藏品列表参数model
-@interface SudNFTGetCardListParamModel : NSObject
+@interface SudNFTGetCnNFTListParamModel : NSObject
 /// 钱包类型
 @property(nonatomic, assign) NSInteger walletType;
 /// 钱包绑定token
 @property(nonatomic, copy) NSString *walletToken;
 /// 页码，从0开始
-@property(nonatomic, assign) NSInteger page;
+@property(nonatomic, assign) NSInteger pageNumber;
 /// 每页大小
 @property(nonatomic, assign) NSInteger pageSize;
 @end
 
 /// 藏品信息model
-@interface SudNFTCardModel : NSObject
+@interface SudNFTCnInfoModel : NSObject
 /// 名称
 @property(nonatomic, copy) NSString *name;
 /// 描述
 @property(nonatomic, copy) NSString *desc;
 /// 藏品地址
-@property(nonatomic, copy) NSString *fileURL;
+@property(nonatomic, copy) NSString *fileUrl;
 /// 封面
-@property(nonatomic, copy) NSString *coverURL;
+@property(nonatomic, copy) NSString *coverUrl;
 /// hash
 @property(nonatomic, copy) NSString *cardHash;
 /// 链地址
@@ -210,17 +210,17 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// 藏品信息返回列表
-@interface SudNFTGetCardListModel : NSObject
+@interface SudNFTGetCnNFTListModel : NSObject
 /// 当前页
-@property(nonatomic, assign) NSInteger page;
+@property(nonatomic, assign) NSInteger pageNumber;
 /// 总数
 @property(nonatomic, assign) NSInteger totalCount;
 /// 藏品列表
-@property(nonatomic, assign) NSArray<SudNFTCardModel *> *list;
+@property(nonatomic, assign) NSArray<SudNFTCnInfoModel *> *list;
 @end
 
 /// 生成藏品使用参数model
-@interface SudNFTCardCredentialsTokenParamModel : NSObject
+@interface SudNFTCnCredentialsTokenParamModel : NSObject
 /// 钱包类型
 @property(nonatomic, assign) NSInteger walletType;
 /// 钱包绑定token
@@ -230,7 +230,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// 生成藏品使用认证token model (穿戴)
-@interface SudNFTCardCredentialsTokenModel : NSObject
+@interface SudNFTCnCredentialsTokenModel : NSObject
 /// nft详情令牌
 @property(nonatomic, copy) NSString *detailsToken;
 @end

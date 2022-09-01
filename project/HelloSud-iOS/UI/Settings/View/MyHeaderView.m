@@ -182,7 +182,7 @@
 }
 
 /// 更新藏品列表
-- (void)updateCardList:(SudNFTGetCardListModel *)cardListModel {
+- (void)updateCardList:(SudNFTGetCnNFTListModel *)cardListModel {
     [self.myNFTView updateCardList:cardListModel];
 }
 

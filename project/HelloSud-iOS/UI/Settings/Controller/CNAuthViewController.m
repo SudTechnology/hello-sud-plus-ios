@@ -99,12 +99,12 @@
 
 /// 立即体验点击事件
 - (void)onAuthClick {
-    SudNFTBindUserParamModel *paramModel = SudNFTBindUserParamModel.new;
+    SudNFTBindCnWalletParamModel *paramModel = SudNFTBindCnWalletParamModel.new;
     paramModel.userId = AppService.shared.loginUserID;
     paramModel.walletType = self.walletInfoModel.type;
-    paramModel.phoneCode = self.codeTextField.text;
+    paramModel.smsCode = self.codeTextField.text;
     paramModel.phone = self.phoneTextField.text;
-    [SudNFT bindUser:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindUserModel *resp) {
+    [SudNFT bindCnWallet:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindCnWalletModel *resp) {
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             if (errCode == 1030) {
@@ -117,7 +117,7 @@
         HSAppPreferences.shared.currentSelectedWalletType = paramModel.walletType;
         HSAppPreferences.shared.bindWalletType = paramModel.walletType;
         HSAppPreferences.shared.bindZoneType = self.walletInfoModel.zoneType;
-        [HSAppPreferences.shared saveWalletTokenWithBindUserModel:resp walletType:paramModel.walletType phone:paramModel.phone];
+        [HSAppPreferences.shared saveWalletTokenWithBindCnWalletModel:resp walletType:paramModel.walletType phone:paramModel.phone];
         [ToastUtil show:@"授权成功"];
         if (self.bindSuccessBlock) {
             self.bindSuccessBlock();
@@ -130,10 +130,10 @@
 - (void)onGetCodeClick {
     WeakSelf
     self.getCodeBtn.enabled = NO;
-    SudNFTSendVerifyCodeParamModel *paramModel = SudNFTSendVerifyCodeParamModel.new;
+    SudNFTSendSmsCodeParamModel *paramModel = SudNFTSendSmsCodeParamModel.new;
     paramModel.phone = self.phoneTextField.text;
     paramModel.walletType = self.walletInfoModel.type;
-    [SudNFT sendPhoneCode:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
+    [SudNFT sendSmsCode:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];

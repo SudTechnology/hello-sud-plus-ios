@@ -83,11 +83,11 @@
     WeakSelf
     DDLogDebug(@"wearCard");
     sender.enabled = NO;
-    SudNFTCardCredentialsTokenParamModel *paramModel = SudNFTCardCredentialsTokenParamModel.new;
+    SudNFTCnCredentialsTokenParamModel *paramModel = SudNFTCnCredentialsTokenParamModel.new;
     paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
     paramModel.walletToken = [HSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
     paramModel.cardId = self.cellModel.cardModel.cardId;
-    [SudNFT genCardCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTCardCredentialsTokenModel *resp) {
+    [SudNFT genCnNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTCnCredentialsTokenModel *resp) {
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];
@@ -143,7 +143,7 @@
 
         if (isWear) {
             if (isCN) {
-                AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.cardModel.coverURL;
+                AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.cardModel.coverUrl;
             } else {
                 AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.nftModel.coverURL;
             }
@@ -291,7 +291,7 @@
         tokenIDTitle = @"令牌ID\n";
         contractAddress = self.cellModel.cardModel.cardHash;
         tokenId = self.cellModel.cardModel.chainAddr;
-        coverURL = self.cellModel.cardModel.coverURL;
+        coverURL = self.cellModel.cardModel.coverUrl;
         name = self.cellModel.cardModel.name;
     } else {
         SudNFTInfoModel *nftModel = self.cellModel.nftModel;

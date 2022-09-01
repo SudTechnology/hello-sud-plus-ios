@@ -163,12 +163,12 @@
 
 /// 获取国内收藏品
 - (void)getCNCollectionList {
-    SudNFTGetCardListParamModel *paramModel = SudNFTGetCardListParamModel.new;
+    SudNFTGetCnNFTListParamModel *paramModel = SudNFTGetCnNFTListParamModel.new;
     paramModel.pageSize = 20;
-    paramModel.page = 0;
+    paramModel.pageNumber = 0;
     paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
     paramModel.walletToken = [HSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
-    [SudNFT getCardList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCardListModel *resp) {
+    [SudNFT getCnNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCnNFTListModel *resp) {
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];
@@ -301,8 +301,8 @@
             SudNFTGetNFTListModel *nft = (SudNFTGetNFTListModel *)temp;
             [self.myHeaderView updateNFTList:nft];
             [self reloadHeadView];
-        } else if (cardTemp && [cardTemp isKindOfClass:[SudNFTGetCardListModel class]]) {
-            SudNFTGetCardListModel *card = (SudNFTGetCardListModel *)cardTemp;
+        } else if (cardTemp && [cardTemp isKindOfClass:[SudNFTGetCnNFTListModel class]]) {
+            SudNFTGetCnNFTListModel *card = (SudNFTGetCnNFTListModel *)cardTemp;
             [self.myHeaderView updateCardList:card];
             [self reloadHeadView];
         }
@@ -354,11 +354,11 @@
         [weakCoverView removeFromSuperview];
     };
     v.sureBlock = ^{
-        SudNFTUnBindUserParamModel *paramModel = SudNFTUnBindUserParamModel.new;
+        SudNFTUnBindCnWalletParamModel *paramModel = SudNFTUnBindCnWalletParamModel.new;
         paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
         paramModel.userId = AppService.shared.loginUserID;
         paramModel.phone = [HSAppPreferences.shared getBindUserPhoneByWalletType:paramModel.walletType];
-        [SudNFT unbindUser:paramModel listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
+        [SudNFT unbindCnWallet:paramModel listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
             DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
         }];
 

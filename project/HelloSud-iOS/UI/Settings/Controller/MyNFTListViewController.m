@@ -175,13 +175,13 @@
 - (void)requestCardListData:(BOOL)isMore {
     WeakSelf
     // 拉取藏品列表
-    SudNFTGetCardListParamModel *paramModel = SudNFTGetCardListParamModel.new;
+    SudNFTGetCnNFTListParamModel *paramModel = SudNFTGetCnNFTListParamModel.new;
     paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
     paramModel.walletToken = [HSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
     self.page = isMore ? self.page + 1 : 0;
-    paramModel.page = self.page;
+    paramModel.pageNumber = self.page;
     paramModel.pageSize = 20;
-    [SudNFT getCardList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCardListModel *resp) {
+    [SudNFT getCnNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCnNFTListModel *resp) {
         if (isMore) {
             if (resp.list.count == 0) {
                 [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
@@ -202,10 +202,10 @@
         }
 
         NSMutableArray *arr = [[NSMutableArray alloc] init];
-        for (SudNFTCardModel *m in resp.list) {
+        for (SudNFTCnInfoModel *m in resp.list) {
             HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
             cellModel.cardModel = m;
-            cellModel.coverURL = m.coverURL;
+            cellModel.coverURL = m.coverUrl;
             cellModel.name = m.name;
 
             [arr addObject:cellModel];

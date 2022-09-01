@@ -9,6 +9,6 @@
 @interface MyNFTView : BaseView
 - (void)updateNFTList:(SudNFTGetNFTListModel *)nftListModel;
 /// 更新藏品列表
-- (void)updateCardList:(SudNFTGetCardListModel *)cardListModel;
+- (void)updateCardList:(SudNFTGetCnNFTListModel *)cardListModel;
 - (void)updateEthereumList:(NSArray<SudNFTChainInfoModel *> *)chains;
 @end

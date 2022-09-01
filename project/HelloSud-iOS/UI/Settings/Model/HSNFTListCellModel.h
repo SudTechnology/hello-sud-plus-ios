@@ -7,7 +7,7 @@
 /// NFT model
 @property (nonatomic, strong)SudNFTInfoModel *nftModel;
 /// 藏品model
-@property (nonatomic, strong)SudNFTCardModel *cardModel;
+@property (nonatomic, strong)SudNFTCnInfoModel *cardModel;
 @property (nonatomic, strong)NSString *coverURL;
 @property (nonatomic, strong)NSString *name;
 
