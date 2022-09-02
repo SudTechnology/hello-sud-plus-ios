@@ -181,28 +181,28 @@
 		6C3153A328C0A9EC0001B565 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD22283F591C0026BDAB /* ToastUtil.m */; };
 		6C3153A428C0A9EC0001B565 /* LanguageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD1F283F591C0026BDAB /* LanguageUtil.m */; };
 		6C3153B428C0B0B10001B565 /* SudNFTQSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */; };
-		6C31540628C0BB940001B565 /* SudNFTQsCnWalletSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E628C0BB910001B565 /* SudNFTQsCnWalletSwitchCell.m */; };
-		6C31540728C0BB940001B565 /* SudNFTQsEthereumChainsSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E828C0BB910001B565 /* SudNFTQsEthereumChainsSelectCell.m */; };
-		6C31540828C0BB940001B565 /* SudNFTQsNFTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153EC28C0BB910001B565 /* SudNFTQsNFTView.m */; };
-		6C31540928C0BB940001B565 /* SudNFTQsCnWalletSwitchPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F028C0BB920001B565 /* SudNFTQsCnWalletSwitchPopView.m */; };
-		6C31540A28C0BB940001B565 /* SudNFTQsForeignWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F128C0BB920001B565 /* SudNFTQsForeignWalletSelectPopView.m */; };
-		6C31540B28C0BB940001B565 /* SudNFTQsBindWalletStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F228C0BB920001B565 /* SudNFTQsBindWalletStateView.m */; };
-		6C31540C28C0BB940001B565 /* SudNFTQsEthereumChainsSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F928C0BB930001B565 /* SudNFTQsEthereumChainsSelectPopView.m */; };
-		6C31540D28C0BB940001B565 /* SudNFTQsCnWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FB28C0BB930001B565 /* SudNFTQsCnWalletSelectPopView.m */; };
-		6C31540E28C0BB940001B565 /* SudNFTQsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FD28C0BB930001B565 /* SudNFTQsHeaderView.m */; };
-		6C31540F28C0BB940001B565 /* SudNFTQsBindWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FE28C0BB930001B565 /* SudNFTQsBindWalletView.m */; };
-		6C31541028C0BB940001B565 /* SudNFTQsCnWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540028C0BB930001B565 /* SudNFTQsCnWalletSelectCell.m */; };
-		6C31541128C0BB940001B565 /* SudNFTQsForeignWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540128C0BB930001B565 /* SudNFTQsForeignWalletSelectCell.m */; };
-		6C31541228C0BB940001B565 /* SudNFTQsCnWalletDeletePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540228C0BB930001B565 /* SudNFTQsCnWalletDeletePopView.m */; };
-		6C31541328C0BB940001B565 /* SudNFTQsNFTColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540328C0BB940001B565 /* SudNFTQsNFTColCell.m */; };
-		6C31541428C0BB940001B565 /* SudNFTQsSelectEtherChainsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540428C0BB940001B565 /* SudNFTQsSelectEtherChainsView.m */; };
-		6C31541528C0BB940001B565 /* SudNFTQsBindBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540528C0BB940001B565 /* SudNFTQsBindBtnView.m */; };
-		6C31541C28C0BF8A0001B565 /* SudNFTQsNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541828C0BF8A0001B565 /* SudNFTQsNFTListViewController.m */; };
-		6C31541D28C0BF8A0001B565 /* SudNFTQsCnAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541928C0BF8A0001B565 /* SudNFTQsCnAuthViewController.m */; };
-		6C31541E28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541B28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.m */; };
-		6C31542528C0BF9B0001B565 /* SudNFTQSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542128C0BF9B0001B565 /* SudNFTQSNFTListCellModel.m */; };
-		6C31542628C0BF9B0001B565 /* SudNFTQsCnWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542228C0BF9B0001B565 /* SudNFTQsCnWalletSwitchCellModel.m */; };
-		6C31542728C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542328C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.m */; };
+		6C31540628C0BB940001B565 /* SQSCnWalletSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E628C0BB910001B565 /* SQSCnWalletSwitchCell.m */; };
+		6C31540728C0BB940001B565 /* SQSEthereumChainsSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E828C0BB910001B565 /* SQSEthereumChainsSelectCell.m */; };
+		6C31540828C0BB940001B565 /* SQSNFTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153EC28C0BB910001B565 /* SQSNFTView.m */; };
+		6C31540928C0BB940001B565 /* SQSCnWalletSwitchPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F028C0BB920001B565 /* SQSCnWalletSwitchPopView.m */; };
+		6C31540A28C0BB940001B565 /* SQSForeignWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F128C0BB920001B565 /* SQSForeignWalletSelectPopView.m */; };
+		6C31540B28C0BB940001B565 /* SQSBindWalletStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F228C0BB920001B565 /* SQSBindWalletStateView.m */; };
+		6C31540C28C0BB940001B565 /* SQSEthereumChainsSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F928C0BB930001B565 /* SQSEthereumChainsSelectPopView.m */; };
+		6C31540D28C0BB940001B565 /* SQSCnWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FB28C0BB930001B565 /* SQSCnWalletSelectPopView.m */; };
+		6C31540E28C0BB940001B565 /* SQSHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FD28C0BB930001B565 /* SQSHeaderView.m */; };
+		6C31540F28C0BB940001B565 /* SQSBindWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FE28C0BB930001B565 /* SQSBindWalletView.m */; };
+		6C31541028C0BB940001B565 /* SQSCnWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540028C0BB930001B565 /* SQSCnWalletSelectCell.m */; };
+		6C31541128C0BB940001B565 /* SQSForeignWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540128C0BB930001B565 /* SQSForeignWalletSelectCell.m */; };
+		6C31541228C0BB940001B565 /* SQSCnWalletDeletePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540228C0BB930001B565 /* SQSCnWalletDeletePopView.m */; };
+		6C31541328C0BB940001B565 /* SQSNFTColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540328C0BB940001B565 /* SQSNFTColCell.m */; };
+		6C31541428C0BB940001B565 /* SQSSelectEtherChainsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540428C0BB940001B565 /* SQSSelectEtherChainsView.m */; };
+		6C31541528C0BB940001B565 /* SQSBindBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540528C0BB940001B565 /* SQSBindBtnView.m */; };
+		6C31541C28C0BF8A0001B565 /* SQSNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541828C0BF8A0001B565 /* SQSNFTListViewController.m */; };
+		6C31541D28C0BF8A0001B565 /* SQSCnAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541928C0BF8A0001B565 /* SQSCnAuthViewController.m */; };
+		6C31541E28C0BF8A0001B565 /* SQSNFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541B28C0BF8A0001B565 /* SQSNFTDetailViewController.m */; };
+		6C31542528C0BF9B0001B565 /* SQSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542128C0BF9B0001B565 /* SQSNFTListCellModel.m */; };
+		6C31542628C0BF9B0001B565 /* SQSCnWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542228C0BF9B0001B565 /* SQSCnWalletSwitchCellModel.m */; };
+		6C31542728C0BF9B0001B565 /* SQSCnEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542328C0BF9B0001B565 /* SQSCnEthereumChainsCellModel.m */; };
 		6C4607AA285083CB005C99EF /* GuessRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607A9285083CB005C99EF /* GuessRankViewController.m */; };
 		6C4607AD2850A818005C99EF /* GuessRankContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AC2850A817005C99EF /* GuessRankContentView.m */; };
 		6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AF28518FB7005C99EF /* GuessRankHeaderView.m */; };
@@ -747,50 +747,50 @@
 		6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SudNFT.xcframework; path = SudMGPSDK/SudNFT.xcframework; sourceTree = SOURCE_ROOT; };
 		6C3153B228C0B0B10001B565 /* SudNFTQSAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQSAppPreferences.h; sourceTree = "<group>"; };
 		6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQSAppPreferences.m; sourceTree = "<group>"; };
-		6C3153E628C0BB910001B565 /* SudNFTQsCnWalletSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletSwitchCell.m; sourceTree = "<group>"; };
-		6C3153E728C0BB910001B565 /* SudNFTQsEthereumChainsSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsEthereumChainsSelectCell.h; sourceTree = "<group>"; };
-		6C3153E828C0BB910001B565 /* SudNFTQsEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsEthereumChainsSelectCell.m; sourceTree = "<group>"; };
-		6C3153E928C0BB910001B565 /* SudNFTQsForeignWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsForeignWalletSelectPopView.h; sourceTree = "<group>"; };
-		6C3153EA28C0BB910001B565 /* SudNFTQsBindWalletStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsBindWalletStateView.h; sourceTree = "<group>"; };
-		6C3153EB28C0BB910001B565 /* SudNFTQsNFTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsNFTView.h; sourceTree = "<group>"; };
-		6C3153EC28C0BB910001B565 /* SudNFTQsNFTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsNFTView.m; sourceTree = "<group>"; };
-		6C3153ED28C0BB910001B565 /* SudNFTQsSelectEtherChainsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsSelectEtherChainsView.h; sourceTree = "<group>"; };
-		6C3153EE28C0BB920001B565 /* SudNFTQsEthereumChainsSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsEthereumChainsSelectPopView.h; sourceTree = "<group>"; };
-		6C3153EF28C0BB920001B565 /* SudNFTQsCnWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletSelectCell.h; sourceTree = "<group>"; };
-		6C3153F028C0BB920001B565 /* SudNFTQsCnWalletSwitchPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletSwitchPopView.m; sourceTree = "<group>"; };
-		6C3153F128C0BB920001B565 /* SudNFTQsForeignWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsForeignWalletSelectPopView.m; sourceTree = "<group>"; };
-		6C3153F228C0BB920001B565 /* SudNFTQsBindWalletStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsBindWalletStateView.m; sourceTree = "<group>"; };
-		6C3153F328C0BB920001B565 /* SudNFTQsCnWalletSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletSwitchPopView.h; sourceTree = "<group>"; };
-		6C3153F428C0BB920001B565 /* SudNFTQsCnWalletSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletSwitchCell.h; sourceTree = "<group>"; };
-		6C3153F528C0BB920001B565 /* SudNFTQsNFTColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsNFTColCell.h; sourceTree = "<group>"; };
-		6C3153F628C0BB920001B565 /* SudNFTQsCnWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletSelectPopView.h; sourceTree = "<group>"; };
-		6C3153F728C0BB920001B565 /* SudNFTQsForeignWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsForeignWalletSelectCell.h; sourceTree = "<group>"; };
-		6C3153F828C0BB930001B565 /* SudNFTQsCnWalletDeletePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletDeletePopView.h; sourceTree = "<group>"; };
-		6C3153F928C0BB930001B565 /* SudNFTQsEthereumChainsSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsEthereumChainsSelectPopView.m; sourceTree = "<group>"; };
-		6C3153FA28C0BB930001B565 /* SudNFTQsBindBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsBindBtnView.h; sourceTree = "<group>"; };
-		6C3153FB28C0BB930001B565 /* SudNFTQsCnWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletSelectPopView.m; sourceTree = "<group>"; };
-		6C3153FC28C0BB930001B565 /* SudNFTQsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsHeaderView.h; sourceTree = "<group>"; };
-		6C3153FD28C0BB930001B565 /* SudNFTQsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsHeaderView.m; sourceTree = "<group>"; };
-		6C3153FE28C0BB930001B565 /* SudNFTQsBindWalletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsBindWalletView.m; sourceTree = "<group>"; };
-		6C3153FF28C0BB930001B565 /* SudNFTQsBindWalletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsBindWalletView.h; sourceTree = "<group>"; };
-		6C31540028C0BB930001B565 /* SudNFTQsCnWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletSelectCell.m; sourceTree = "<group>"; };
-		6C31540128C0BB930001B565 /* SudNFTQsForeignWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsForeignWalletSelectCell.m; sourceTree = "<group>"; };
-		6C31540228C0BB930001B565 /* SudNFTQsCnWalletDeletePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletDeletePopView.m; sourceTree = "<group>"; };
-		6C31540328C0BB940001B565 /* SudNFTQsNFTColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsNFTColCell.m; sourceTree = "<group>"; };
-		6C31540428C0BB940001B565 /* SudNFTQsSelectEtherChainsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsSelectEtherChainsView.m; sourceTree = "<group>"; };
-		6C31540528C0BB940001B565 /* SudNFTQsBindBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsBindBtnView.m; sourceTree = "<group>"; };
-		6C31541628C0BF890001B565 /* SudNFTQsCnAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnAuthViewController.h; sourceTree = "<group>"; };
-		6C31541728C0BF890001B565 /* SudNFTQsNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsNFTListViewController.h; sourceTree = "<group>"; };
-		6C31541828C0BF8A0001B565 /* SudNFTQsNFTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsNFTListViewController.m; sourceTree = "<group>"; };
-		6C31541928C0BF8A0001B565 /* SudNFTQsCnAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnAuthViewController.m; sourceTree = "<group>"; };
-		6C31541A28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsNFTDetailViewController.h; sourceTree = "<group>"; };
-		6C31541B28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsNFTDetailViewController.m; sourceTree = "<group>"; };
-		6C31541F28C0BF9A0001B565 /* SudNFTQsCnWalletSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletSwitchCellModel.h; sourceTree = "<group>"; };
-		6C31542028C0BF9A0001B565 /* SudNFTQSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQSNFTListCellModel.h; sourceTree = "<group>"; };
-		6C31542128C0BF9B0001B565 /* SudNFTQSNFTListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQSNFTListCellModel.m; sourceTree = "<group>"; };
-		6C31542228C0BF9B0001B565 /* SudNFTQsCnWalletSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletSwitchCellModel.m; sourceTree = "<group>"; };
-		6C31542328C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnEthereumChainsCellModel.m; sourceTree = "<group>"; };
-		6C31542428C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnEthereumChainsCellModel.h; sourceTree = "<group>"; };
+		6C3153E628C0BB910001B565 /* SQSCnWalletSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnWalletSwitchCell.m; sourceTree = "<group>"; };
+		6C3153E728C0BB910001B565 /* SQSEthereumChainsSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSEthereumChainsSelectCell.h; sourceTree = "<group>"; };
+		6C3153E828C0BB910001B565 /* SQSEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSEthereumChainsSelectCell.m; sourceTree = "<group>"; };
+		6C3153E928C0BB910001B565 /* SQSForeignWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSForeignWalletSelectPopView.h; sourceTree = "<group>"; };
+		6C3153EA28C0BB910001B565 /* SQSBindWalletStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSBindWalletStateView.h; sourceTree = "<group>"; };
+		6C3153EB28C0BB910001B565 /* SQSNFTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSNFTView.h; sourceTree = "<group>"; };
+		6C3153EC28C0BB910001B565 /* SQSNFTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSNFTView.m; sourceTree = "<group>"; };
+		6C3153ED28C0BB910001B565 /* SQSSelectEtherChainsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSSelectEtherChainsView.h; sourceTree = "<group>"; };
+		6C3153EE28C0BB920001B565 /* SQSEthereumChainsSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSEthereumChainsSelectPopView.h; sourceTree = "<group>"; };
+		6C3153EF28C0BB920001B565 /* SQSCnWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnWalletSelectCell.h; sourceTree = "<group>"; };
+		6C3153F028C0BB920001B565 /* SQSCnWalletSwitchPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnWalletSwitchPopView.m; sourceTree = "<group>"; };
+		6C3153F128C0BB920001B565 /* SQSForeignWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSForeignWalletSelectPopView.m; sourceTree = "<group>"; };
+		6C3153F228C0BB920001B565 /* SQSBindWalletStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSBindWalletStateView.m; sourceTree = "<group>"; };
+		6C3153F328C0BB920001B565 /* SQSCnWalletSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnWalletSwitchPopView.h; sourceTree = "<group>"; };
+		6C3153F428C0BB920001B565 /* SQSCnWalletSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnWalletSwitchCell.h; sourceTree = "<group>"; };
+		6C3153F528C0BB920001B565 /* SQSNFTColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSNFTColCell.h; sourceTree = "<group>"; };
+		6C3153F628C0BB920001B565 /* SQSCnWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnWalletSelectPopView.h; sourceTree = "<group>"; };
+		6C3153F728C0BB920001B565 /* SQSForeignWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSForeignWalletSelectCell.h; sourceTree = "<group>"; };
+		6C3153F828C0BB930001B565 /* SQSCnWalletDeletePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnWalletDeletePopView.h; sourceTree = "<group>"; };
+		6C3153F928C0BB930001B565 /* SQSEthereumChainsSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSEthereumChainsSelectPopView.m; sourceTree = "<group>"; };
+		6C3153FA28C0BB930001B565 /* SQSBindBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSBindBtnView.h; sourceTree = "<group>"; };
+		6C3153FB28C0BB930001B565 /* SQSCnWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnWalletSelectPopView.m; sourceTree = "<group>"; };
+		6C3153FC28C0BB930001B565 /* SQSHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSHeaderView.h; sourceTree = "<group>"; };
+		6C3153FD28C0BB930001B565 /* SQSHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSHeaderView.m; sourceTree = "<group>"; };
+		6C3153FE28C0BB930001B565 /* SQSBindWalletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSBindWalletView.m; sourceTree = "<group>"; };
+		6C3153FF28C0BB930001B565 /* SQSBindWalletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSBindWalletView.h; sourceTree = "<group>"; };
+		6C31540028C0BB930001B565 /* SQSCnWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnWalletSelectCell.m; sourceTree = "<group>"; };
+		6C31540128C0BB930001B565 /* SQSForeignWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSForeignWalletSelectCell.m; sourceTree = "<group>"; };
+		6C31540228C0BB930001B565 /* SQSCnWalletDeletePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnWalletDeletePopView.m; sourceTree = "<group>"; };
+		6C31540328C0BB940001B565 /* SQSNFTColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSNFTColCell.m; sourceTree = "<group>"; };
+		6C31540428C0BB940001B565 /* SQSSelectEtherChainsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSSelectEtherChainsView.m; sourceTree = "<group>"; };
+		6C31540528C0BB940001B565 /* SQSBindBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSBindBtnView.m; sourceTree = "<group>"; };
+		6C31541628C0BF890001B565 /* SQSCnAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnAuthViewController.h; sourceTree = "<group>"; };
+		6C31541728C0BF890001B565 /* SQSNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSNFTListViewController.h; sourceTree = "<group>"; };
+		6C31541828C0BF8A0001B565 /* SQSNFTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSNFTListViewController.m; sourceTree = "<group>"; };
+		6C31541928C0BF8A0001B565 /* SQSCnAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnAuthViewController.m; sourceTree = "<group>"; };
+		6C31541A28C0BF8A0001B565 /* SQSNFTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSNFTDetailViewController.h; sourceTree = "<group>"; };
+		6C31541B28C0BF8A0001B565 /* SQSNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSNFTDetailViewController.m; sourceTree = "<group>"; };
+		6C31541F28C0BF9A0001B565 /* SQSCnWalletSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnWalletSwitchCellModel.h; sourceTree = "<group>"; };
+		6C31542028C0BF9A0001B565 /* SQSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSNFTListCellModel.h; sourceTree = "<group>"; };
+		6C31542128C0BF9B0001B565 /* SQSNFTListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSNFTListCellModel.m; sourceTree = "<group>"; };
+		6C31542228C0BF9B0001B565 /* SQSCnWalletSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnWalletSwitchCellModel.m; sourceTree = "<group>"; };
+		6C31542328C0BF9B0001B565 /* SQSCnEthereumChainsCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnEthereumChainsCellModel.m; sourceTree = "<group>"; };
+		6C31542428C0BF9B0001B565 /* SQSCnEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnEthereumChainsCellModel.h; sourceTree = "<group>"; };
 		6C4607A8285083CB005C99EF /* GuessRankViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankViewController.h; sourceTree = "<group>"; };
 		6C4607A9285083CB005C99EF /* GuessRankViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankViewController.m; sourceTree = "<group>"; };
 		6C4607AB2850A817005C99EF /* GuessRankContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankContentView.h; sourceTree = "<group>"; };
@@ -1997,12 +1997,12 @@
 			children = (
 				6CC3E7A628C1BD8600AA934B /* QuickStartViewController.h */,
 				6CC3E7A528C1BD8600AA934B /* QuickStartViewController.m */,
-				6C31541628C0BF890001B565 /* SudNFTQsCnAuthViewController.h */,
-				6C31541928C0BF8A0001B565 /* SudNFTQsCnAuthViewController.m */,
-				6C31541A28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.h */,
-				6C31541B28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.m */,
-				6C31541728C0BF890001B565 /* SudNFTQsNFTListViewController.h */,
-				6C31541828C0BF8A0001B565 /* SudNFTQsNFTListViewController.m */,
+				6C31541628C0BF890001B565 /* SQSCnAuthViewController.h */,
+				6C31541928C0BF8A0001B565 /* SQSCnAuthViewController.m */,
+				6C31541A28C0BF8A0001B565 /* SQSNFTDetailViewController.h */,
+				6C31541B28C0BF8A0001B565 /* SQSNFTDetailViewController.m */,
+				6C31541728C0BF890001B565 /* SQSNFTListViewController.h */,
+				6C31541828C0BF8A0001B565 /* SQSNFTListViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2010,38 +2010,38 @@
 		6C3153A928C0ADA40001B565 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6C3153FA28C0BB930001B565 /* SudNFTQsBindBtnView.h */,
-				6C31540528C0BB940001B565 /* SudNFTQsBindBtnView.m */,
-				6C3153EA28C0BB910001B565 /* SudNFTQsBindWalletStateView.h */,
-				6C3153F228C0BB920001B565 /* SudNFTQsBindWalletStateView.m */,
-				6C3153F828C0BB930001B565 /* SudNFTQsCnWalletDeletePopView.h */,
-				6C31540228C0BB930001B565 /* SudNFTQsCnWalletDeletePopView.m */,
-				6C3153EF28C0BB920001B565 /* SudNFTQsCnWalletSelectCell.h */,
-				6C31540028C0BB930001B565 /* SudNFTQsCnWalletSelectCell.m */,
-				6C3153F628C0BB920001B565 /* SudNFTQsCnWalletSelectPopView.h */,
-				6C3153FB28C0BB930001B565 /* SudNFTQsCnWalletSelectPopView.m */,
-				6C3153F728C0BB920001B565 /* SudNFTQsForeignWalletSelectCell.h */,
-				6C31540128C0BB930001B565 /* SudNFTQsForeignWalletSelectCell.m */,
-				6C3153E928C0BB910001B565 /* SudNFTQsForeignWalletSelectPopView.h */,
-				6C3153F128C0BB920001B565 /* SudNFTQsForeignWalletSelectPopView.m */,
-				6C3153FF28C0BB930001B565 /* SudNFTQsBindWalletView.h */,
-				6C3153FE28C0BB930001B565 /* SudNFTQsBindWalletView.m */,
-				6C3153F428C0BB920001B565 /* SudNFTQsCnWalletSwitchCell.h */,
-				6C3153E628C0BB910001B565 /* SudNFTQsCnWalletSwitchCell.m */,
-				6C3153F328C0BB920001B565 /* SudNFTQsCnWalletSwitchPopView.h */,
-				6C3153F028C0BB920001B565 /* SudNFTQsCnWalletSwitchPopView.m */,
-				6C3153E728C0BB910001B565 /* SudNFTQsEthereumChainsSelectCell.h */,
-				6C3153E828C0BB910001B565 /* SudNFTQsEthereumChainsSelectCell.m */,
-				6C3153EE28C0BB920001B565 /* SudNFTQsEthereumChainsSelectPopView.h */,
-				6C3153F928C0BB930001B565 /* SudNFTQsEthereumChainsSelectPopView.m */,
-				6C3153FC28C0BB930001B565 /* SudNFTQsHeaderView.h */,
-				6C3153FD28C0BB930001B565 /* SudNFTQsHeaderView.m */,
-				6C3153F528C0BB920001B565 /* SudNFTQsNFTColCell.h */,
-				6C31540328C0BB940001B565 /* SudNFTQsNFTColCell.m */,
-				6C3153EB28C0BB910001B565 /* SudNFTQsNFTView.h */,
-				6C3153EC28C0BB910001B565 /* SudNFTQsNFTView.m */,
-				6C3153ED28C0BB910001B565 /* SudNFTQsSelectEtherChainsView.h */,
-				6C31540428C0BB940001B565 /* SudNFTQsSelectEtherChainsView.m */,
+				6C3153FA28C0BB930001B565 /* SQSBindBtnView.h */,
+				6C31540528C0BB940001B565 /* SQSBindBtnView.m */,
+				6C3153EA28C0BB910001B565 /* SQSBindWalletStateView.h */,
+				6C3153F228C0BB920001B565 /* SQSBindWalletStateView.m */,
+				6C3153F828C0BB930001B565 /* SQSCnWalletDeletePopView.h */,
+				6C31540228C0BB930001B565 /* SQSCnWalletDeletePopView.m */,
+				6C3153EF28C0BB920001B565 /* SQSCnWalletSelectCell.h */,
+				6C31540028C0BB930001B565 /* SQSCnWalletSelectCell.m */,
+				6C3153F628C0BB920001B565 /* SQSCnWalletSelectPopView.h */,
+				6C3153FB28C0BB930001B565 /* SQSCnWalletSelectPopView.m */,
+				6C3153F728C0BB920001B565 /* SQSForeignWalletSelectCell.h */,
+				6C31540128C0BB930001B565 /* SQSForeignWalletSelectCell.m */,
+				6C3153E928C0BB910001B565 /* SQSForeignWalletSelectPopView.h */,
+				6C3153F128C0BB920001B565 /* SQSForeignWalletSelectPopView.m */,
+				6C3153FF28C0BB930001B565 /* SQSBindWalletView.h */,
+				6C3153FE28C0BB930001B565 /* SQSBindWalletView.m */,
+				6C3153F428C0BB920001B565 /* SQSCnWalletSwitchCell.h */,
+				6C3153E628C0BB910001B565 /* SQSCnWalletSwitchCell.m */,
+				6C3153F328C0BB920001B565 /* SQSCnWalletSwitchPopView.h */,
+				6C3153F028C0BB920001B565 /* SQSCnWalletSwitchPopView.m */,
+				6C3153E728C0BB910001B565 /* SQSEthereumChainsSelectCell.h */,
+				6C3153E828C0BB910001B565 /* SQSEthereumChainsSelectCell.m */,
+				6C3153EE28C0BB920001B565 /* SQSEthereumChainsSelectPopView.h */,
+				6C3153F928C0BB930001B565 /* SQSEthereumChainsSelectPopView.m */,
+				6C3153FC28C0BB930001B565 /* SQSHeaderView.h */,
+				6C3153FD28C0BB930001B565 /* SQSHeaderView.m */,
+				6C3153F528C0BB920001B565 /* SQSNFTColCell.h */,
+				6C31540328C0BB940001B565 /* SQSNFTColCell.m */,
+				6C3153EB28C0BB910001B565 /* SQSNFTView.h */,
+				6C3153EC28C0BB910001B565 /* SQSNFTView.m */,
+				6C3153ED28C0BB910001B565 /* SQSSelectEtherChainsView.h */,
+				6C31540428C0BB940001B565 /* SQSSelectEtherChainsView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2049,12 +2049,12 @@
 		6C3153AA28C0AEB30001B565 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6C31542028C0BF9A0001B565 /* SudNFTQSNFTListCellModel.h */,
-				6C31542128C0BF9B0001B565 /* SudNFTQSNFTListCellModel.m */,
-				6C31541F28C0BF9A0001B565 /* SudNFTQsCnWalletSwitchCellModel.h */,
-				6C31542228C0BF9B0001B565 /* SudNFTQsCnWalletSwitchCellModel.m */,
-				6C31542428C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.h */,
-				6C31542328C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.m */,
+				6C31542028C0BF9A0001B565 /* SQSNFTListCellModel.h */,
+				6C31542128C0BF9B0001B565 /* SQSNFTListCellModel.m */,
+				6C31541F28C0BF9A0001B565 /* SQSCnWalletSwitchCellModel.h */,
+				6C31542228C0BF9B0001B565 /* SQSCnWalletSwitchCellModel.m */,
+				6C31542428C0BF9B0001B565 /* SQSCnEthereumChainsCellModel.h */,
+				6C31542328C0BF9B0001B565 /* SQSCnEthereumChainsCellModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3332,11 +3332,11 @@
 			files = (
 				6C31538428C0A9A40001B565 /* DTSlider.m in Sources */,
 				6C31539428C0A9B70001B565 /* BaseViewController.m in Sources */,
-				6C31540D28C0BB940001B565 /* SudNFTQsCnWalletSelectPopView.m in Sources */,
+				6C31540D28C0BB940001B565 /* SQSCnWalletSelectPopView.m in Sources */,
 				6C31539328C0A9B70001B565 /* BaseTextView.m in Sources */,
 				6C3153A228C0A9EC0001B565 /* DeviceUtil.m in Sources */,
 				6C3153A028C0A9EC0001B565 /* AppUtil.m in Sources */,
-				6C31540F28C0BB940001B565 /* SudNFTQsBindWalletView.m in Sources */,
+				6C31540F28C0BB940001B565 /* SQSBindWalletView.m in Sources */,
 				6C31539A28C0A9D30001B565 /* DTUIDevice+Extension.m in Sources */,
 				6C31538528C0A9A40001B565 /* DTRippleAnimationView.m in Sources */,
 				6C31539128C0A9B70001B565 /* BaseModel.m in Sources */,
@@ -3344,28 +3344,28 @@
 				6C31539D28C0A9D30001B565 /* DTUIImage+Extension.m in Sources */,
 				6C31538928C0A9A40001B565 /* DTWebViewController.m in Sources */,
 				6C31538828C0A9A40001B565 /* DTBlurEffectView.m in Sources */,
-				6C31540628C0BB940001B565 /* SudNFTQsCnWalletSwitchCell.m in Sources */,
-				6C31541228C0BB940001B565 /* SudNFTQsCnWalletDeletePopView.m in Sources */,
+				6C31540628C0BB940001B565 /* SQSCnWalletSwitchCell.m in Sources */,
+				6C31541228C0BB940001B565 /* SQSCnWalletDeletePopView.m in Sources */,
 				6C31538628C0A9A40001B565 /* DTAlertView.m in Sources */,
-				6C31542728C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.m in Sources */,
+				6C31542728C0BF9B0001B565 /* SQSCnEthereumChainsCellModel.m in Sources */,
 				6C31539B28C0A9D30001B565 /* NSBundle+Language.m in Sources */,
-				6C31541328C0BB940001B565 /* SudNFTQsNFTColCell.m in Sources */,
+				6C31541328C0BB940001B565 /* SQSNFTColCell.m in Sources */,
 				6C31539E28C0A9E20001B565 /* HttpRequest.m in Sources */,
 				6C31538B28C0A9A40001B565 /* DTPaddingLabel.m in Sources */,
-				6C31542628C0BF9B0001B565 /* SudNFTQsCnWalletSwitchCellModel.m in Sources */,
-				6C31540728C0BB940001B565 /* SudNFTQsEthereumChainsSelectCell.m in Sources */,
+				6C31542628C0BF9B0001B565 /* SQSCnWalletSwitchCellModel.m in Sources */,
+				6C31540728C0BB940001B565 /* SQSEthereumChainsSelectCell.m in Sources */,
 				6C3153A328C0A9EC0001B565 /* ToastUtil.m in Sources */,
 				6C31539028C0A9B70001B565 /* BaseAlertView.m in Sources */,
-				6C31540828C0BB940001B565 /* SudNFTQsNFTView.m in Sources */,
+				6C31540828C0BB940001B565 /* SQSNFTView.m in Sources */,
 				6C31539528C0A9B70001B565 /* BaseTableViewCell.m in Sources */,
-				6C31540E28C0BB940001B565 /* SudNFTQsHeaderView.m in Sources */,
+				6C31540E28C0BB940001B565 /* SQSHeaderView.m in Sources */,
 				6C31539F28C0A9E60001B565 /* DTTimer.m in Sources */,
-				6C31540B28C0BB940001B565 /* SudNFTQsBindWalletStateView.m in Sources */,
-				6C31540928C0BB940001B565 /* SudNFTQsCnWalletSwitchPopView.m in Sources */,
-				6C31540C28C0BB940001B565 /* SudNFTQsEthereumChainsSelectPopView.m in Sources */,
+				6C31540B28C0BB940001B565 /* SQSBindWalletStateView.m in Sources */,
+				6C31540928C0BB940001B565 /* SQSCnWalletSwitchPopView.m in Sources */,
+				6C31540C28C0BB940001B565 /* SQSEthereumChainsSelectPopView.m in Sources */,
 				6C31536F28C0A6440001B565 /* AppDelegate.m in Sources */,
 				6C31538728C0A9A40001B565 /* DTTextAlertView.m in Sources */,
-				6C31541428C0BB940001B565 /* SudNFTQsSelectEtherChainsView.m in Sources */,
+				6C31541428C0BB940001B565 /* SQSSelectEtherChainsView.m in Sources */,
 				6C31539728C0A9D30001B565 /* DTUIView+Extension.m in Sources */,
 				6C31538E28C0A9B70001B565 /* BaseCollectionViewCell.m in Sources */,
 				6C31538A28C0A9A40001B565 /* DTSheetView.m in Sources */,
@@ -3374,20 +3374,20 @@
 				6C3153B428C0B0B10001B565 /* SudNFTQSAppPreferences.m in Sources */,
 				6C31538D28C0A9B70001B565 /* BaseNavigationViewController.m in Sources */,
 				6C3153A128C0A9EC0001B565 /* HSThreadUtils.m in Sources */,
-				6C31541128C0BB940001B565 /* SudNFTQsForeignWalletSelectCell.m in Sources */,
+				6C31541128C0BB940001B565 /* SQSForeignWalletSelectCell.m in Sources */,
 				6C31539628C0A9D30001B565 /* NSString+DTNSString.m in Sources */,
 				6C31539228C0A9B70001B565 /* BaseCollectionReusableView.m in Sources */,
-				6C31541028C0BB940001B565 /* SudNFTQsCnWalletSelectCell.m in Sources */,
-				6C31541C28C0BF8A0001B565 /* SudNFTQsNFTListViewController.m in Sources */,
-				6C31542528C0BF9B0001B565 /* SudNFTQSNFTListCellModel.m in Sources */,
+				6C31541028C0BB940001B565 /* SQSCnWalletSelectCell.m in Sources */,
+				6C31541C28C0BF8A0001B565 /* SQSNFTListViewController.m in Sources */,
+				6C31542528C0BF9B0001B565 /* SQSNFTListCellModel.m in Sources */,
 				6C31538028C0A6470001B565 /* main.m in Sources */,
 				6C31539C28C0A9D30001B565 /* DTNSError+Custom.m in Sources */,
-				6C31541E28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.m in Sources */,
-				6C31541528C0BB940001B565 /* SudNFTQsBindBtnView.m in Sources */,
+				6C31541E28C0BF8A0001B565 /* SQSNFTDetailViewController.m in Sources */,
+				6C31541528C0BB940001B565 /* SQSBindBtnView.m in Sources */,
 				6C31539928C0A9D30001B565 /* DTUIColor+Extension.m in Sources */,
 				6C3153A428C0A9EC0001B565 /* LanguageUtil.m in Sources */,
-				6C31540A28C0BB940001B565 /* SudNFTQsForeignWalletSelectPopView.m in Sources */,
-				6C31541D28C0BF8A0001B565 /* SudNFTQsCnAuthViewController.m in Sources */,
+				6C31540A28C0BB940001B565 /* SQSForeignWalletSelectPopView.m in Sources */,
+				6C31541D28C0BF8A0001B565 /* SQSCnAuthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,19 +7,19 @@
 //
 
 #import "QuickStartViewController.h"
-#import "SudNFTQsHeaderView.h"
-#import "SudNFTQsBindWalletStateView.h"
-#import "SudNFTQsCnAuthViewController.h"
-#import "SudNFTQsCnWalletSwitchPopView.h"
-#import "SudNFTQsCnWalletSelectPopView.h"
-#import "SudNFTQsCnWalletDeletePopView.h"
+#import "SQSHeaderView.h"
+#import "SQSBindWalletStateView.h"
+#import "SQSCnAuthViewController.h"
+#import "SQSCnWalletSwitchPopView.h"
+#import "SQSCnWalletSelectPopView.h"
+#import "SQSCnWalletDeletePopView.h"
 
 @interface QuickStartViewController ()<ISudNFTListenerBindWallet>
 @property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
-@property(nonatomic, weak) SudNFTQsBindWalletStateView *bindWalletStateView;
+@property(nonatomic, weak) SQSBindWalletStateView *bindWalletStateView;
 /// 等待绑定钱包信息
 @property(nonatomic, strong) SudNFTWalletInfoModel *waitBindWalletInfo;
-@property(nonatomic, strong) SudNFTQsHeaderView *myHeaderView;
+@property(nonatomic, strong) SQSHeaderView *myHeaderView;
 @end
 
 @implementation QuickStartViewController
@@ -194,7 +194,7 @@
             return;
         }
         // 海外 绑定三方钱包
-        SudNFTQsBindWalletStateView *bindWalletStateView = [[SudNFTQsBindWalletStateView alloc] init];
+        SQSBindWalletStateView *bindWalletStateView = [[SQSBindWalletStateView alloc] init];
         [DTAlertView show:bindWalletStateView rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:^{
 
         }];
@@ -208,7 +208,7 @@
     self.myHeaderView.deleteWalletBlock = ^{
         if (SudNFTQSAppPreferences.shared.bindZoneType == 1) {
             // 绑定的是国内
-            SudNFTQsCnWalletSelectPopView *v = SudNFTQsCnWalletSelectPopView.new;
+            SQSCnWalletSelectPopView *v = SQSCnWalletSelectPopView.new;
             __weak typeof(v) weakV = v;
             v.selectedWalletBlock = ^(SudNFTWalletInfoModel *walletInfoModel) {
                 [weakSelf handleCNWalletClick:walletInfoModel selectView:weakV];
@@ -269,7 +269,7 @@
 }
 
 /// 处理国内钱包选择
-- (void)handleCNWalletClick:(SudNFTWalletInfoModel *)walletInfoModel selectView:(SudNFTQsCnWalletSelectPopView *)selectView {
+- (void)handleCNWalletClick:(SudNFTWalletInfoModel *)walletInfoModel selectView:(SQSCnWalletSelectPopView *)selectView {
 
     WeakSelf
     BOOL isBind = [SudNFTQSAppPreferences.shared getBindUserTokenByWalletType:walletInfoModel.type].length > 0;
@@ -277,7 +277,7 @@
     if (!isBind) {
         [DTSheetView close];
         // 国内钱包授权
-        SudNFTQsCnAuthViewController *vc = SudNFTQsCnAuthViewController.new;
+        SQSCnAuthViewController *vc = SQSCnAuthViewController.new;
         vc.bindSuccessBlock = ^{
             [weakSelf.myHeaderView dtUpdateUI];
             [weakSelf reloadHeadView];
@@ -291,7 +291,7 @@
     }
     // 已绑定，解除绑定
 
-    SudNFTQsCnWalletDeletePopView *v = SudNFTQsCnWalletDeletePopView.new;
+    SQSCnWalletDeletePopView *v = SQSCnWalletDeletePopView.new;
     v.walletInfoModel = walletInfoModel;
     [v dtUpdateUI];
     UIView *coverView = UIView.new;
@@ -356,9 +356,9 @@
 
 #pragma makr lazy
 
-- (SudNFTQsHeaderView *)myHeaderView {
+- (SQSHeaderView *)myHeaderView {
     if (!_myHeaderView) {
-        _myHeaderView = [[SudNFTQsHeaderView alloc] init];
+        _myHeaderView = [[SQSHeaderView alloc] init];
         _myHeaderView.backgroundColor = HEX_COLOR(@"#F5F6FB");
     }
     return _myHeaderView;
