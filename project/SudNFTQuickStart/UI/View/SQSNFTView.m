@@ -10,6 +10,7 @@
 #import "SQSEthereumChainsSelectPopView.h"
 #import "SQSNFTListCellModel.h"
 #import "SQSCnWalletSwitchPopView.h"
+#import "SQSCnNFTListViewController.h"
 
 @interface SQSNFTView ()
 @property(nonatomic, strong) SQSSelectEtherChainsView *chainsView;
@@ -175,10 +176,10 @@
             [self closeLoadAnimate:iv];
         }
     }
-    if (SudNFTQSAppPreferences.shared.isBindForeignWallet) {
+    if (SQSAppPreferences.shared.isBindForeignWallet) {
         self.nameLabel.text = @"我的NFT";
         self.noDataLabel.text = @"尚无NFT";
-    } else if (SudNFTQSAppPreferences.shared.isBindCNWallet) {
+    } else if (SQSAppPreferences.shared.isBindCNWallet) {
         self.nameLabel.text = @"我的数字藏品";
         self.noDataLabel.text = @"尚无数字藏品";
     }
@@ -186,11 +187,11 @@
 
 - (void)updateEthereumList:(NSArray<SudNFTChainInfoModel *> *)chains {
 
-    NSInteger zoneType = SudNFTQSAppPreferences.shared.bindZoneType;
+    NSInteger zoneType = SQSAppPreferences.shared.bindZoneType;
     if (zoneType == 1) {
         /// 国内钱包
-        for (SudNFTWalletInfoModel *m in SudNFTQSAppPreferences.shared.walletList) {
-            if (m.type == SudNFTQSAppPreferences.shared.currentSelectedWalletType) {
+        for (SudNFTWalletInfoModel *m in SQSAppPreferences.shared.walletList) {
+            if (m.type == SQSAppPreferences.shared.currentSelectedWalletType) {
                 [self.chainsView updateWithWalletInfoModel:m];
                 break;
             }
@@ -200,7 +201,7 @@
 
     self.chains = chains;
     for (SudNFTChainInfoModel *m in chains) {
-        if (m.type == SudNFTQSAppPreferences.shared.selectedEthereumChainType) {
+        if (m.type == SQSAppPreferences.shared.selectedEthereumChainType) {
             [self.chainsView update:m];
             break;
         }
@@ -231,11 +232,11 @@
 
 - (void)onTapChainsView:(id)tap {
 
-    NSInteger zoneType = SudNFTQSAppPreferences.shared.bindZoneType;
+    NSInteger zoneType = SQSAppPreferences.shared.bindZoneType;
     if (zoneType == 1) {
         // 国内
         SQSCnWalletSwitchPopView *v = [[SQSCnWalletSwitchPopView alloc] init];
-        [v updateBindWalletList:SudNFTQSAppPreferences.shared.walletList];
+        [v updateBindWalletList:SQSAppPreferences.shared.walletList];
         [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
         return;
     }
@@ -247,10 +248,19 @@
 
 - (void)onTapMoreView:(id)tap {
     /// 点击更多
-    SQSNFTListViewController *vc = [[SQSNFTListViewController alloc] init];
-    vc.title = self.nameLabel.text;
-    [vc updateNFTList:self.nftCellModelList add:NO];
-    [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
+    if (SQSAppPreferences.shared.isBindCNWallet) {
+        // 国内
+        SQSCnNFTListViewController *vc = [[SQSCnNFTListViewController alloc] init];
+        vc.title = self.nameLabel.text;
+        [vc updateNFTList:self.nftCellModelList add:NO];
+        [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
+    } else{
+
+        SQSNFTListViewController *vc = [[SQSNFTListViewController alloc] init];
+        vc.title = self.nameLabel.text;
+        [vc updateNFTList:self.nftCellModelList add:NO];
+        [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)showLoadAnimate:(UIView *)imageView {

@@ -3,7 +3,7 @@
 // Copyright (c) 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "SudNFTQSAppPreferences.h"
+#import "SQSAppPreferences.h"
 
 #define kKeyEtherChains @"kKeyEtherChains"
 
@@ -38,17 +38,17 @@ NSString *const NFT_REFRESH_NFT = @"NFT_REFRESH_NFT";
 /// 用户当前选中钱包
 #define kKeyCurrentSelectedWallet [self envKey:@"kKeyCurrentSelectedWallet"]
 
-@interface SudNFTQSAppPreferences ()
+@interface SQSAppPreferences ()
 /// 当前用户绑定钱包token model
 @property(nonatomic, strong) SudNFTBindWalletModel *bindWalletModel;
 @end
 
-@implementation SudNFTQSAppPreferences
+@implementation SQSAppPreferences
 + (instancetype)shared {
-    static SudNFTQSAppPreferences *g_manager = nil;
+    static SQSAppPreferences *g_manager = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        g_manager = SudNFTQSAppPreferences.new;
+        g_manager = SQSAppPreferences.new;
         [g_manager prepare];
     });
     return g_manager;

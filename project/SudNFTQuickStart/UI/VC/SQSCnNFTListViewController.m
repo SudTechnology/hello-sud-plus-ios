@@ -5,19 +5,18 @@
 //  Created by Mary on 2022/1/24.
 //
 
-#import "SQSNFTListViewController.h"
+#import "SQSCnNFTListViewController.h"
 #import "SQSNFTColCell.h"
-#import "SQSNFTDetailViewController.h"
+#import "SQSCnNFTDetailViewController.h"
 
-
-@interface SQSNFTListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface SQSCnNFTListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray<SQSNFTListCellModel *> *dataList;
 @property(nonatomic, strong) NSString *pageKey;
 @property(nonatomic, assign) NSInteger page;
 @end
 
-@implementation SQSNFTListViewController
+@implementation SQSCnNFTListViewController
 
 
 - (void)dtConfigUI {
@@ -108,26 +107,21 @@
 #pragma mark - requst Data
 
 - (void)reqData:(BOOL)isMore {
-    [self requestNFTListData:isMore];
+    [self requestCardListData:isMore];
 }
 
-- (void)requestNFTListData:(BOOL)isMore {
+- (void)requestCardListData:(BOOL)isMore {
     WeakSelf
-    // 拉取NFT列表
-    SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
-    paramModel.walletToken = SQSAppPreferences.shared.walletToken;
-    paramModel.walletAddress = SQSAppPreferences.shared.walletAddress;
-    paramModel.chainType = SQSAppPreferences.shared.selectedEthereumChainType;
-    if (isMore) {
-        paramModel.pageKey = SQSAppPreferences.shared.nftListPageKey;
-        if (paramModel.pageKey.length == 0) {
-            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
-            return;
-        }
-    }
-    [SudNFT getNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetNFTListModel *nftListModel) {
+    // 拉取藏品列表
+    SudNFTGetCnNFTListParamModel *paramModel = SudNFTGetCnNFTListParamModel.new;
+    paramModel.walletType = SQSAppPreferences.shared.currentSelectedWalletType;
+    paramModel.walletToken = [SQSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
+    self.page = isMore ? self.page + 1 : 0;
+    paramModel.pageNumber = self.page;
+    paramModel.pageSize = 20;
+    [SudNFT getCnNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCnNFTListModel *resp) {
         if (isMore) {
-            if (nftListModel.nftList.count == 0) {
+            if (resp.list.count == 0) {
                 [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             } else {
                 [weakSelf.collectionView.mj_footer endRefreshing];
@@ -146,18 +140,18 @@
         }
 
         NSMutableArray *arr = [[NSMutableArray alloc] init];
-        for (SudNFTInfoModel *m in nftListModel.nftList) {
+        for (SudNFTCnInfoModel *m in resp.list) {
             SQSNFTListCellModel *cellModel = [[SQSNFTListCellModel alloc] init];
-            cellModel.nftModel = m;
-            cellModel.coverURL = m.coverURL;
+            cellModel.cardModel = m;
+            cellModel.coverURL = m.coverUrl;
             cellModel.name = m.name;
+
             [arr addObject:cellModel];
         }
         [weakSelf updateNFTList:arr add:isMore];
         if (!isMore) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NFT_REFRESH_NFT object:nil userInfo:@{@"nft": nftListModel}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NFT_REFRESH_NFT object:nil userInfo:@{@"card": resp}];
         }
-
     }];
 }
 
@@ -186,7 +180,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    SQSNFTDetailViewController *vc = [[SQSNFTDetailViewController alloc] init];
+    SQSCnNFTDetailViewController *vc = [[SQSCnNFTDetailViewController alloc] init];
     vc.cellModel = self.dataList[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }

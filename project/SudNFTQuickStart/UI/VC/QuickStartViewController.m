@@ -14,6 +14,12 @@
 #import "SQSCnWalletSelectPopView.h"
 #import "SQSCnWalletDeletePopView.h"
 
+// TODO: 必须填写由SudNFT提供的appId 及 appKey
+#define SUDNFT_APP_ID                  @"1461564080052506636"
+#define SUDNFT_APP_KEY                 @"03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc"
+/// TODO: 非WalletConnect连接时，需要配置拉起APP的UniversalLink
+#define UNIVERSAL_LINK @"https://links.sud.tech"
+
 @interface QuickStartViewController ()<ISudNFTListenerBindWallet>
 @property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
 @property(nonatomic, weak) SQSBindWalletStateView *bindWalletStateView;
@@ -31,11 +37,12 @@
     self.title = @"SudNFTQuickStart";
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.myHeaderView.deleteBtn];
-    [self configSudNFT];
+    [self initSudNFT];
     
 }
 
-- (void)configSudNFT {
+/// 初始化SudNFT
+- (void)initSudNFT {
     BOOL isTestEnv = NO;
 #if DEBUG
     // 测试环境
@@ -46,10 +53,10 @@
     NSLog(@"sudNFTSDKVersoin:%@", sudNFTSDKVersoin);
 
     SudInitNFTParamModel *paramModel = SudInitNFTParamModel.new;
-    paramModel.appId = @"1486637108889305089";
-    paramModel.appKey = @"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR";
-    paramModel.userId = @"12345";
-    paramModel.universalLink = @"https://links.sud.tech";
+    paramModel.appId = SUDNFT_APP_ID;
+    paramModel.appKey = SUDNFT_APP_KEY;
+    paramModel.userId = SQSAppPreferences.shared.userId;
+    paramModel.universalLink = UNIVERSAL_LINK;
     paramModel.isTestEnv = isTestEnv;
     WeakSelf
     [SudNFT initNFT:paramModel
@@ -66,26 +73,27 @@
 
 - (void)checkWalletInfo {
 
-    BOOL bindWallet = SudNFTQSAppPreferences.shared.isBindWallet;
+    BOOL bindWallet = SQSAppPreferences.shared.isBindWallet;
     if (!bindWallet) {
         // 未绑定钱包
+        // 获取支持钱包列表
         [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
             if (errCode != 0) {
                 [ToastUtil show:errMsg];
                 return;
             }
             self.walletList = getWalletListModel.walletList;
-            SudNFTQSAppPreferences.shared.walletList = self.walletList;
+            SQSAppPreferences.shared.walletList = self.walletList;
             [self.myHeaderView updateSupportWallet:getWalletListModel.walletList];
             [self reloadHeadView];
         }];
         return;
     }
     // 拉取NFT列表
-    if (SudNFTQSAppPreferences.shared.isBindForeignWallet) {
+    if (SQSAppPreferences.shared.isBindForeignWallet) {
         [self getNFTList];
-    } else if (SudNFTQSAppPreferences.shared.isBindCNWallet) {
-        [self getCNCollectionList];
+    } else if (SQSAppPreferences.shared.isBindCNWallet) {
+        [self getCnNFTList];
     }
     // 更新链网数据
     if (self.walletList.count == 0) {
@@ -95,7 +103,7 @@
                 return;
             }
             self.walletList = getWalletListModel.walletList;
-            SudNFTQSAppPreferences.shared.walletList = self.walletList;
+            SQSAppPreferences.shared.walletList = self.walletList;
             [self updateWalletEtherChains];
         }];
     } else {
@@ -106,9 +114,9 @@
 /// 获取NFT列表
 - (void)getNFTList {
     SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
-    paramModel.walletToken = SudNFTQSAppPreferences.shared.walletToken;
-    paramModel.walletAddress = SudNFTQSAppPreferences.shared.walletAddress;
-    paramModel.chainType = SudNFTQSAppPreferences.shared.selectedEthereumChainType;
+    paramModel.walletToken = SQSAppPreferences.shared.walletToken;
+    paramModel.walletAddress = SQSAppPreferences.shared.walletAddress;
+    paramModel.chainType = SQSAppPreferences.shared.selectedEthereumChainType;
     paramModel.pageKey = nil;
     [SudNFT getNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetNFTListModel *nftListModel) {
         if (errCode != 0) {
@@ -119,19 +127,19 @@
             }
             return;
         }
-        SudNFTQSAppPreferences.shared.nftListPageKey = nftListModel.pageKey;
+        SQSAppPreferences.shared.nftListPageKey = nftListModel.pageKey;
         [self.myHeaderView updateNFTList:nftListModel];
         [self reloadHeadView];
     }];
 }
 
 /// 获取国内收藏品
-- (void)getCNCollectionList {
+- (void)getCnNFTList {
     SudNFTGetCnNFTListParamModel *paramModel = SudNFTGetCnNFTListParamModel.new;
     paramModel.pageSize = 20;
     paramModel.pageNumber = 0;
-    paramModel.walletType = SudNFTQSAppPreferences.shared.currentSelectedWalletType;
-    paramModel.walletToken = [SudNFTQSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
+    paramModel.walletType = SQSAppPreferences.shared.currentSelectedWalletType;
+    paramModel.walletToken = [SQSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
     [SudNFT getCnNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCnNFTListModel *resp) {
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
@@ -149,7 +157,7 @@
 /// 更新钱包链网类型
 - (void)updateWalletEtherChains {
     for (SudNFTWalletInfoModel *m in self.walletList) {
-        if (m.type == SudNFTQSAppPreferences.shared.bindWalletType) {
+        if (m.type == SQSAppPreferences.shared.bindWalletType) {
             [self.myHeaderView updateEthereumList:m.chainList];
             break;
         }
@@ -206,7 +214,7 @@
         [SudNFT bindWallet:paramModel listener:self];
     };
     self.myHeaderView.deleteWalletBlock = ^{
-        if (SudNFTQSAppPreferences.shared.bindZoneType == 1) {
+        if (SQSAppPreferences.shared.bindZoneType == 1) {
             // 绑定的是国内
             SQSCnWalletSelectPopView *v = SQSCnWalletSelectPopView.new;
             __weak typeof(v) weakV = v;
@@ -272,7 +280,7 @@
 - (void)handleCNWalletClick:(SudNFTWalletInfoModel *)walletInfoModel selectView:(SQSCnWalletSelectPopView *)selectView {
 
     WeakSelf
-    BOOL isBind = [SudNFTQSAppPreferences.shared getBindUserTokenByWalletType:walletInfoModel.type].length > 0;
+    BOOL isBind = [SQSAppPreferences.shared getBindUserTokenByWalletType:walletInfoModel.type].length > 0;
     // 未绑定
     if (!isBind) {
         [DTSheetView close];
@@ -313,17 +321,17 @@
     };
     v.sureBlock = ^{
         SudNFTUnBindCnWalletParamModel *paramModel = SudNFTUnBindCnWalletParamModel.new;
-        paramModel.walletType = SudNFTQSAppPreferences.shared.currentSelectedWalletType;
-        paramModel.userId = SudNFTQSAppPreferences.shared.userId;
-        paramModel.phone = [SudNFTQSAppPreferences.shared getBindUserPhoneByWalletType:paramModel.walletType];
+        paramModel.walletType = SQSAppPreferences.shared.currentSelectedWalletType;
+        paramModel.userId = SQSAppPreferences.shared.userId;
+        paramModel.phone = [SQSAppPreferences.shared getBindUserPhoneByWalletType:paramModel.walletType];
         [SudNFT unbindCnWallet:paramModel listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
             DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
         }];
 
         [weakCoverView removeFromSuperview];
         [DTSheetView close];
-        [SudNFTQSAppPreferences.shared clearBindUserInfoWithWalletType:walletInfoModel.type];
-        SudNFTQSAppPreferences.shared.walletAddress = nil;
+        [SQSAppPreferences.shared clearBindUserInfoWithWalletType:walletInfoModel.type];
+        SQSAppPreferences.shared.walletAddress = nil;
         [weakSelf.myHeaderView dtUpdateUI];
         [weakSelf reloadHeadView];
         [weakSelf checkWalletInfo];
@@ -369,10 +377,10 @@
 /// 绑定钱包token过期，需要重新验证绑定
 - (void)onSudNFTBindWalletTokenExpired {
     DDLogWarn(@"onSudNFTBindWalletTokenExpired");
-    SudNFTQSAppPreferences.shared.walletAddress = nil;
-    NSInteger walletType = SudNFTQSAppPreferences.shared.currentSelectedWalletType;
-    [SudNFTQSAppPreferences.shared clearBindUserInfoWithWalletType:walletType];
-    SudNFTQSAppPreferences.shared.bindZoneType = -1;
+    SQSAppPreferences.shared.walletAddress = nil;
+    NSInteger walletType = SQSAppPreferences.shared.currentSelectedWalletType;
+    [SQSAppPreferences.shared clearBindUserInfoWithWalletType:walletType];
+    SQSAppPreferences.shared.bindZoneType = -1;
     [self.myHeaderView dtUpdateUI];
     [self reloadHeadView];
     [self checkWalletInfo];
@@ -385,10 +393,10 @@
 - (void)onSuccess:(SudNFTBindWalletModel *_Nullable)walletInfoModel {
 
     // 绑定钱包成功
-    SudNFTQSAppPreferences.shared.bindWalletType = self.waitBindWalletInfo.type;
-    SudNFTQSAppPreferences.shared.bindZoneType = self.waitBindWalletInfo.zoneType;
-    SudNFTQSAppPreferences.shared.walletAddress = walletInfoModel.walletAddress;
-    [SudNFTQSAppPreferences.shared cacheWalletToken:walletInfoModel walletAddress:walletInfoModel.walletAddress];
+    SQSAppPreferences.shared.bindWalletType = self.waitBindWalletInfo.type;
+    SQSAppPreferences.shared.bindZoneType = self.waitBindWalletInfo.zoneType;
+    SQSAppPreferences.shared.walletAddress = walletInfoModel.walletAddress;
+    [SQSAppPreferences.shared cacheWalletToken:walletInfoModel walletAddress:walletInfoModel.walletAddress];
     [self.myHeaderView dtUpdateUI];
     [self reloadHeadView];
     [self checkWalletInfo];

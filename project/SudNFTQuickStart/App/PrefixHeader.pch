@@ -37,7 +37,7 @@
 #import "DTUIView+Extension.h"
 #import "DTNSArray+Masonry.h"
 #import "NSString+DTNSString.h"
-#import "SudNFTQSAppPreferences.h"
+#import "SQSAppPreferences.h"
 
 @import MarqueeLabel;
 

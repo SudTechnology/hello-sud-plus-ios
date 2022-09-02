@@ -100,7 +100,7 @@
 /// 立即体验点击事件
 - (void)onAuthClick {
     SudNFTBindCnWalletParamModel *paramModel = SudNFTBindCnWalletParamModel.new;
-    paramModel.userId = SudNFTQSAppPreferences.shared.userId;
+    paramModel.userId = SQSAppPreferences.shared.userId;
     paramModel.walletType = self.walletInfoModel.type;
     paramModel.smsCode = self.codeTextField.text;
     paramModel.phone = self.phoneTextField.text;
@@ -114,10 +114,10 @@
             [ToastUtil show:msg];
             return;
         }
-        SudNFTQSAppPreferences.shared.currentSelectedWalletType = paramModel.walletType;
-        SudNFTQSAppPreferences.shared.bindWalletType = paramModel.walletType;
-        SudNFTQSAppPreferences.shared.bindZoneType = self.walletInfoModel.zoneType;
-        [SudNFTQSAppPreferences.shared saveWalletTokenWithBindCnWalletModel:resp walletType:paramModel.walletType phone:paramModel.phone];
+        SQSAppPreferences.shared.currentSelectedWalletType = paramModel.walletType;
+        SQSAppPreferences.shared.bindWalletType = paramModel.walletType;
+        SQSAppPreferences.shared.bindZoneType = self.walletInfoModel.zoneType;
+        [SQSAppPreferences.shared saveWalletTokenWithBindCnWalletModel:resp walletType:paramModel.walletType phone:paramModel.phone];
         [ToastUtil show:@"授权成功"];
         if (self.bindSuccessBlock) {
             self.bindSuccessBlock();

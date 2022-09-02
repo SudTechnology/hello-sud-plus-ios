@@ -5,9 +5,9 @@
 //  Created by Mary on 2022/1/24.
 //
 
-#import "SQSNFTDetailViewController.h"
+#import "SQSCnNFTDetailViewController.h"
 
-@interface SQSNFTDetailViewController ()
+@interface SQSCnNFTDetailViewController ()
 @property(nonatomic, strong) SDAnimatedImageView *iconImageView;
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) UILabel *contractAddressLabel;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation SQSNFTDetailViewController
+@implementation SQSCnNFTDetailViewController
 - (BOOL)dtIsHiddenNavigationBar {
     return YES;
 }
@@ -46,36 +46,7 @@
 }
 
 - (void)onWearBtnClick:(UIButton *)sender {
-
-    if (SQSAppPreferences.shared.isBindCNWallet) {
-        [self wearCard:sender];
-    } else if (SQSAppPreferences.shared.isBindForeignWallet) {
-        [self wearNFT:sender];
-    }
-}
-
-/// 穿戴NFT
-- (void)wearNFT:(UIButton *)sender {
-    WeakSelf
-    DDLogDebug(@"wearNFT");
-    sender.enabled = NO;
-    SudNFTCredentialsTokenParamModel *paramModel = SudNFTCredentialsTokenParamModel.new;
-    paramModel.walletToken = SQSAppPreferences.shared.walletToken;
-    paramModel.contractAddress = self.cellModel.nftModel.contractAddress;
-    paramModel.tokenId = self.cellModel.nftModel.tokenId;
-    paramModel.chainType = SQSAppPreferences.shared.selectedEthereumChainType;
-    [SudNFT genNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenNFTCredentialsTokenModel *generateDetailTokenModel) {
-        if (errCode != 0) {
-            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
-            [ToastUtil show:msg];
-            sender.enabled = YES;
-            if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
-            }
-            return;
-        }
-        [weakSelf handleWearDetailToken:generateDetailTokenModel.nftDetailsToken isCN:NO];
-    }];
+    [self wearCard:sender];
 }
 
 /// 穿戴藏品
@@ -122,11 +93,14 @@
     [AppUtil copyToPasteProcess:tokenId toast:@"复制成功"];
 }
 
+//- (void)onCopyBtnClick:(id)sender {
+//    [AppUtil copyToPasteProcess:self.cellModel.nftModel.contractAddress toast:@"地址已复制"];
+//}
+
 /// 上报后台
 /// @param nftDetailToken nftDetailToken
 - (void)handleWearDetailToken:(NSString *)nftDetailToken isCN:(BOOL)isCN {
     WeakSelf
-    BOOL isWear = self.wearBtn.selected ? NO : YES;
     [DTAlertView showTextAlert:[NSString stringWithFormat:@"穿戴token\n%@", nftDetailToken] sureText:@"确定" cancelText:@"取消" onSureCallback:^{
         [DTAlertView close];
     } onCloseCallback:nil];

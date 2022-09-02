@@ -16,7 +16,7 @@ extern NSString *const WALLET_BIND_TOKEN_EXPIRED_NTF;
 extern NSString *const NFT_REFRESH_NFT;
 
 /// 应用本地配置
-@interface SudNFTQSAppPreferences : NSObject
+@interface SQSAppPreferences : NSObject
 /// 绑定钱包类型
 @property(nonatomic, assign) NSInteger bindWalletType;
 /// 选择链网类型

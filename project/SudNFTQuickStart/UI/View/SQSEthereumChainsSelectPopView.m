@@ -97,7 +97,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SQSEthereumChainsSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyEthereumChainsSelectCell"];
     SQSCnEthereumChainsCellModel *m = self.dataList[indexPath.row];
-    if (m.chainsModel.type == SudNFTQSAppPreferences.shared.selectedEthereumChainType) {
+    if (m.chainsModel.type == SQSAppPreferences.shared.selectedEthereumChainType) {
         m.isSelected = YES;
     }
     cell.model = self.dataList[indexPath.row];
@@ -107,7 +107,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SQSCnEthereumChainsCellModel *m = self.dataList[indexPath.row];
-    SudNFTQSAppPreferences.shared.selectedEthereumChainType = m.chainsModel.type;
+    SQSAppPreferences.shared.selectedEthereumChainType = m.chainsModel.type;
     [self onCloseBtnClick:nil];
 }
 

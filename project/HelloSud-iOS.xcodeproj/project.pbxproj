@@ -180,7 +180,7 @@
 		6C3153A228C0A9EC0001B565 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD20283F591C0026BDAB /* DeviceUtil.m */; };
 		6C3153A328C0A9EC0001B565 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD22283F591C0026BDAB /* ToastUtil.m */; };
 		6C3153A428C0A9EC0001B565 /* LanguageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD1F283F591C0026BDAB /* LanguageUtil.m */; };
-		6C3153B428C0B0B10001B565 /* SudNFTQSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */; };
+		6C3153B428C0B0B10001B565 /* SQSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153B328C0B0B10001B565 /* SQSAppPreferences.m */; };
 		6C31540628C0BB940001B565 /* SQSCnWalletSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E628C0BB910001B565 /* SQSCnWalletSwitchCell.m */; };
 		6C31540728C0BB940001B565 /* SQSEthereumChainsSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E828C0BB910001B565 /* SQSEthereumChainsSelectCell.m */; };
 		6C31540828C0BB940001B565 /* SQSNFTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153EC28C0BB910001B565 /* SQSNFTView.m */; };
@@ -357,6 +357,7 @@
 		6CE6CD77283F66680026BDAB /* QuickStartViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD76283F66670026BDAB /* QuickStartViewController+Game.m */; };
 		6CE6CD7C283F68330026BDAB /* QSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD7B283F68330026BDAB /* QSAppPreferences.m */; };
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
+		BC210033B23381DCEAA0945A /* SQSCnNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DD3EE89D98FDB3EE028 /* SQSCnNFTListViewController.m */; };
 		BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */; };
 		BC210093C2C7796FBA9F334C /* DiscoGameInteractivePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */; };
 		BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */; };
@@ -366,6 +367,7 @@
 		BC2104A997878EE07744E080 /* PKRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */; };
 		BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210337708736FFF222750A /* BaseSceneService.m */; };
 		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
+		BC2106312BE7B7B979F5845D /* SQSCnNFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105C7FC17C37F5A3C71F4 /* SQSCnNFTDetailViewController.m */; };
 		BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */; };
 		BC2106C085BCFA772D1B9F96 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21001E47A02C2A2F8EE39B /* AboutViewController.m */; };
 		BC210743E83852E3D938F5A9 /* DiscoInteractiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */; };
@@ -745,8 +747,8 @@
 		6C31537F28C0A6470001B565 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6C3153A528C0AA3C0001B565 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SudNFT.xcframework; path = SudMGPSDK/SudNFT.xcframework; sourceTree = SOURCE_ROOT; };
-		6C3153B228C0B0B10001B565 /* SudNFTQSAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQSAppPreferences.h; sourceTree = "<group>"; };
-		6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQSAppPreferences.m; sourceTree = "<group>"; };
+		6C3153B228C0B0B10001B565 /* SQSAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSAppPreferences.h; sourceTree = "<group>"; };
+		6C3153B328C0B0B10001B565 /* SQSAppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSAppPreferences.m; sourceTree = "<group>"; };
 		6C3153E628C0BB910001B565 /* SQSCnWalletSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnWalletSwitchCell.m; sourceTree = "<group>"; };
 		6C3153E728C0BB910001B565 /* SQSEthereumChainsSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSEthereumChainsSelectCell.h; sourceTree = "<group>"; };
 		6C3153E828C0BB910001B565 /* SQSEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSEthereumChainsSelectCell.m; sourceTree = "<group>"; };
@@ -923,6 +925,7 @@
 		6CC3E79728C1BBB800AA934B /* MyBindWalletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBindWalletView.m; sourceTree = "<group>"; };
 		6CC3E7A528C1BD8600AA934B /* QuickStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickStartViewController.m; sourceTree = "<group>"; };
 		6CC3E7A628C1BD8600AA934B /* QuickStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickStartViewController.h; sourceTree = "<group>"; };
+		6CC3E7A828C203FC00AA934B /* SudNFTQuickStart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SudNFTQuickStart.entitlements; sourceTree = "<group>"; };
 		6CCF8AC8287A464900DB3AB8 /* DiscoRankTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoRankTipView.h; sourceTree = "<group>"; };
 		6CCF8AC9287A464900DB3AB8 /* DiscoRankTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoRankTipView.m; sourceTree = "<group>"; };
 		6CD6E85227BE37C300D8F76C /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
@@ -1069,7 +1072,9 @@
 		BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessViewController.m; sourceTree = "<group>"; };
 		BC21055EE76F1B350D139F19 /* RoomCmdPKModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdPKModel.h; sourceTree = "<group>"; };
 		BC21056B5487F677973E97B8 /* HomeGuessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeGuessCell.m; sourceTree = "<group>"; };
+		BC2105C7FC17C37F5A3C71F4 /* SQSCnNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnNFTDetailViewController.m; sourceTree = "<group>"; };
 		BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSelectRoomView.m; sourceTree = "<group>"; };
+		BC210615F38DBFB52A350044 /* SQSCnNFTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnNFTDetailViewController.h; sourceTree = "<group>"; };
 		BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendRoomView.m; sourceTree = "<group>"; };
 		BC210692B27543A09E9B3CB6 /* MyNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTListViewController.h; sourceTree = "<group>"; };
 		BC21069C06A918E5FCF30F8A /* QSGameItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameItemModel.h; sourceTree = "<group>"; };
@@ -1081,6 +1086,7 @@
 		BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessCategoryView.h; sourceTree = "<group>"; };
 		BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessViewController.h; sourceTree = "<group>"; };
 		BC2107BC94088B9F062BBA4B /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
+		BC2107C3D55782ACDF272730 /* SQSCnNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnNFTListViewController.h; sourceTree = "<group>"; };
 		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
 		BC2108CFC574A8AFEFE2FEDA /* RoomCmdKickoutRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdKickoutRoomModel.h; sourceTree = "<group>"; };
 		BC2109228F9F8EDC6CC7208C /* HSAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSAppPreferences.h; sourceTree = "<group>"; };
@@ -1112,6 +1118,7 @@
 		BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderColCell.h; sourceTree = "<group>"; };
 		BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomService.m; sourceTree = "<group>"; };
 		BC210DCE2A6257343B4539CF /* DiscoGameInteractivePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractivePopView.h; sourceTree = "<group>"; };
+		BC210DD3EE89D98FDB3EE028 /* SQSCnNFTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnNFTListViewController.m; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
 		BC210EA4458F6CC10378E975 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		BC210F28C7CAB6BCA3140175 /* HSHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSHttpService.m; sourceTree = "<group>"; };
@@ -1959,6 +1966,7 @@
 		6C31536C28C0A6440001B565 /* SudNFTQuickStart */ = {
 			isa = PBXGroup;
 			children = (
+				6CC3E7A828C203FC00AA934B /* SudNFTQuickStart.entitlements */,
 				6C3153B128C0B0B10001B565 /* Preferences */,
 				6C3153AE28C0AF7E0001B565 /* Frameworks */,
 				6C3153A728C0AD1D0001B565 /* UI */,
@@ -2003,6 +2011,10 @@
 				6C31541B28C0BF8A0001B565 /* SQSNFTDetailViewController.m */,
 				6C31541728C0BF890001B565 /* SQSNFTListViewController.h */,
 				6C31541828C0BF8A0001B565 /* SQSNFTListViewController.m */,
+				BC210DD3EE89D98FDB3EE028 /* SQSCnNFTListViewController.m */,
+				BC2107C3D55782ACDF272730 /* SQSCnNFTListViewController.h */,
+				BC2105C7FC17C37F5A3C71F4 /* SQSCnNFTDetailViewController.m */,
+				BC210615F38DBFB52A350044 /* SQSCnNFTDetailViewController.h */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2070,8 +2082,8 @@
 		6C3153B128C0B0B10001B565 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				6C3153B228C0B0B10001B565 /* SudNFTQSAppPreferences.h */,
-				6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */,
+				6C3153B228C0B0B10001B565 /* SQSAppPreferences.h */,
+				6C3153B328C0B0B10001B565 /* SQSAppPreferences.m */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -3371,7 +3383,7 @@
 				6C31538A28C0A9A40001B565 /* DTSheetView.m in Sources */,
 				6CC3E7A728C1BD8600AA934B /* QuickStartViewController.m in Sources */,
 				6C31539828C0A9D30001B565 /* DTNSArray+Masonry.m in Sources */,
-				6C3153B428C0B0B10001B565 /* SudNFTQSAppPreferences.m in Sources */,
+				6C3153B428C0B0B10001B565 /* SQSAppPreferences.m in Sources */,
 				6C31538D28C0A9B70001B565 /* BaseNavigationViewController.m in Sources */,
 				6C3153A128C0A9EC0001B565 /* HSThreadUtils.m in Sources */,
 				6C31541128C0BB940001B565 /* SQSForeignWalletSelectCell.m in Sources */,
@@ -3388,6 +3400,8 @@
 				6C3153A428C0A9EC0001B565 /* LanguageUtil.m in Sources */,
 				6C31540A28C0BB940001B565 /* SQSForeignWalletSelectPopView.m in Sources */,
 				6C31541D28C0BF8A0001B565 /* SQSCnAuthViewController.m in Sources */,
+				BC210033B23381DCEAA0945A /* SQSCnNFTListViewController.m in Sources */,
+				BC2106312BE7B7B979F5845D /* SQSCnNFTDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3761,6 +3775,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SudNFTQuickStart/SudNFTQuickStart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FVM63RW6;
@@ -3772,6 +3787,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3791,6 +3807,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SudNFTQuickStart/SudNFTQuickStart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FVM63RW6;
@@ -3802,6 +3819,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

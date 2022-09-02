@@ -94,11 +94,11 @@
 //        }];
 //    }
 
-    BOOL isBindWallet = SudNFTQSAppPreferences.shared.isBindWallet;
+    BOOL isBindWallet = SQSAppPreferences.shared.isBindWallet;
     if (isBindWallet) {
         // 绑定过了钱包
-        if (SudNFTQSAppPreferences.shared.isBindForeignWallet) {
-            self.walletAddressLabel.text = SudNFTQSAppPreferences.shared.walletAddress;
+        if (SQSAppPreferences.shared.isBindForeignWallet) {
+            self.walletAddressLabel.text = SQSAppPreferences.shared.walletAddress;
             self.walletAddressLabel.hidden = NO;
             self.userIdLabel.hidden = YES;
         } else {
@@ -106,7 +106,7 @@
             self.userIdLabel.hidden = NO;
         }
         self.deleteBtn.hidden = NO;
-        self.deleteBtn.selected = SudNFTQSAppPreferences.shared.bindZoneType == 1;
+        self.deleteBtn.selected = SQSAppPreferences.shared.bindZoneType == 1;
         if (_bindView) {
             [_bindView removeFromSuperview];
             _bindView = nil;

@@ -75,7 +75,7 @@
             continue;
         }
         SQSCnWalletSwitchCellModel *cellModel = [[SQSCnWalletSwitchCellModel alloc] init];
-        if (m.type == SudNFTQSAppPreferences.shared.currentSelectedWalletType) {
+        if (m.type == SQSAppPreferences.shared.currentSelectedWalletType) {
             cellModel.isSelected = YES;
         } else {
             cellModel.isSelected = NO;
@@ -111,7 +111,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SQSCnWalletSwitchCellModel *m = self.dataList[indexPath.row];
-    SudNFTQSAppPreferences.shared.currentSelectedWalletType = m.walletInfoModel.type;
+    SQSAppPreferences.shared.currentSelectedWalletType = m.walletInfoModel.type;
     [self onCloseBtnClick:nil];
 }
 
