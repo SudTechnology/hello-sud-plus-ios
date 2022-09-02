@@ -28,6 +28,10 @@
 @property(nonatomic, weak) BindWalletStateView *bindWalletStateView;
 /// 等待绑定钱包信息
 @property(nonatomic, strong) SudNFTWalletInfoModel *waitBindWalletInfo;
+/// 是否已经初始化
+@property(nonatomic, assign)BOOL isNFTInited;
+/// 是否初始化失败
+@property(nonatomic, assign)BOOL isNFTInitedError;
 @end
 
 @implementation MyViewController
@@ -46,6 +50,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (self.isNFTInited) {
+        [self checkWalletInfo];
+    } else if (self.isNFTInitedError) {
+        [self configSudNFT];
+    }
 }
 
 - (void)configSudNFT {
@@ -70,8 +79,10 @@
                if (errCode != 0) {
                    DDLogError(@"initNFT: errCode:%@, errMsg:%@", @(errCode), errMsg);
                    // SDK初始失败，重试或者提示错误
+                   weakSelf.isNFTInitedError = YES;
                    return;
                }
+               weakSelf.isNFTInited = YES;
                DDLogError(@"onSudNFTInitStateChanged init success");
                [weakSelf checkWalletInfo];
            }];
