@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "QuickStartViewController.h"
+#import "../UI/VC/QuickStartViewController.h"
 
 @interface AppDelegate ()
 

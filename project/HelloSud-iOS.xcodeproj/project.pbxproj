@@ -144,7 +144,6 @@
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
 		6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */; };
 		6C31536F28C0A6440001B565 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31536E28C0A6440001B565 /* AppDelegate.m */; };
-		6C31537528C0A6440001B565 /* QuickStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31537428C0A6440001B565 /* QuickStartViewController.m */; };
 		6C31537828C0A6440001B565 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C31537628C0A6440001B565 /* Main.storyboard */; };
 		6C31537A28C0A6470001B565 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C31537928C0A6470001B565 /* Assets.xcassets */; };
 		6C31537D28C0A6470001B565 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C31537B28C0A6470001B565 /* LaunchScreen.storyboard */; };
@@ -182,28 +181,28 @@
 		6C3153A328C0A9EC0001B565 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD22283F591C0026BDAB /* ToastUtil.m */; };
 		6C3153A428C0A9EC0001B565 /* LanguageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD1F283F591C0026BDAB /* LanguageUtil.m */; };
 		6C3153B428C0B0B10001B565 /* SudNFTQSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */; };
-		6C31540628C0BB940001B565 /* MyCNWalletSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E628C0BB910001B565 /* MyCNWalletSwitchCell.m */; };
-		6C31540728C0BB940001B565 /* MyEthereumChainsSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E828C0BB910001B565 /* MyEthereumChainsSelectCell.m */; };
-		6C31540828C0BB940001B565 /* MyNFTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153EC28C0BB910001B565 /* MyNFTView.m */; };
-		6C31540928C0BB940001B565 /* MyCNWalletSwitchPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F028C0BB920001B565 /* MyCNWalletSwitchPopView.m */; };
-		6C31540A28C0BB940001B565 /* ForeignWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F128C0BB920001B565 /* ForeignWalletSelectPopView.m */; };
-		6C31540B28C0BB940001B565 /* BindWalletStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F228C0BB920001B565 /* BindWalletStateView.m */; };
-		6C31540C28C0BB940001B565 /* MyEthereumChainsSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F928C0BB930001B565 /* MyEthereumChainsSelectPopView.m */; };
-		6C31540D28C0BB940001B565 /* CNWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FB28C0BB930001B565 /* CNWalletSelectPopView.m */; };
-		6C31540E28C0BB940001B565 /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FD28C0BB930001B565 /* MyHeaderView.m */; };
-		6C31540F28C0BB940001B565 /* MyBindWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FE28C0BB930001B565 /* MyBindWalletView.m */; };
-		6C31541028C0BB940001B565 /* CNWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540028C0BB930001B565 /* CNWalletSelectCell.m */; };
-		6C31541128C0BB940001B565 /* ForeignWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540128C0BB930001B565 /* ForeignWalletSelectCell.m */; };
-		6C31541228C0BB940001B565 /* CNWalletDeletePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540228C0BB930001B565 /* CNWalletDeletePopView.m */; };
-		6C31541328C0BB940001B565 /* MyNFTColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540328C0BB940001B565 /* MyNFTColCell.m */; };
-		6C31541428C0BB940001B565 /* MySelectEtherChainsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540428C0BB940001B565 /* MySelectEtherChainsView.m */; };
-		6C31541528C0BB940001B565 /* BindBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540528C0BB940001B565 /* BindBtnView.m */; };
-		6C31541C28C0BF8A0001B565 /* MyNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541828C0BF8A0001B565 /* MyNFTListViewController.m */; };
-		6C31541D28C0BF8A0001B565 /* CNAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541928C0BF8A0001B565 /* CNAuthViewController.m */; };
-		6C31541E28C0BF8A0001B565 /* MyNFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541B28C0BF8A0001B565 /* MyNFTDetailViewController.m */; };
-		6C31542528C0BF9B0001B565 /* HSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542128C0BF9B0001B565 /* HSNFTListCellModel.m */; };
-		6C31542628C0BF9B0001B565 /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542228C0BF9B0001B565 /* MyCNWalletSwitchCellModel.m */; };
-		6C31542728C0BF9B0001B565 /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542328C0BF9B0001B565 /* MyEthereumChainsCellModel.m */; };
+		6C31540628C0BB940001B565 /* SudNFTQsCnWalletSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E628C0BB910001B565 /* SudNFTQsCnWalletSwitchCell.m */; };
+		6C31540728C0BB940001B565 /* SudNFTQsEthereumChainsSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E828C0BB910001B565 /* SudNFTQsEthereumChainsSelectCell.m */; };
+		6C31540828C0BB940001B565 /* SudNFTQsNFTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153EC28C0BB910001B565 /* SudNFTQsNFTView.m */; };
+		6C31540928C0BB940001B565 /* SudNFTQsCnWalletSwitchPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F028C0BB920001B565 /* SudNFTQsCnWalletSwitchPopView.m */; };
+		6C31540A28C0BB940001B565 /* SudNFTQsForeignWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F128C0BB920001B565 /* SudNFTQsForeignWalletSelectPopView.m */; };
+		6C31540B28C0BB940001B565 /* SudNFTQsBindWalletStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F228C0BB920001B565 /* SudNFTQsBindWalletStateView.m */; };
+		6C31540C28C0BB940001B565 /* SudNFTQsEthereumChainsSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153F928C0BB930001B565 /* SudNFTQsEthereumChainsSelectPopView.m */; };
+		6C31540D28C0BB940001B565 /* SudNFTQsCnWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FB28C0BB930001B565 /* SudNFTQsCnWalletSelectPopView.m */; };
+		6C31540E28C0BB940001B565 /* SudNFTQsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FD28C0BB930001B565 /* SudNFTQsHeaderView.m */; };
+		6C31540F28C0BB940001B565 /* SudNFTQsBindWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153FE28C0BB930001B565 /* SudNFTQsBindWalletView.m */; };
+		6C31541028C0BB940001B565 /* SudNFTQsCnWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540028C0BB930001B565 /* SudNFTQsCnWalletSelectCell.m */; };
+		6C31541128C0BB940001B565 /* SudNFTQsForeignWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540128C0BB930001B565 /* SudNFTQsForeignWalletSelectCell.m */; };
+		6C31541228C0BB940001B565 /* SudNFTQsCnWalletDeletePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540228C0BB930001B565 /* SudNFTQsCnWalletDeletePopView.m */; };
+		6C31541328C0BB940001B565 /* SudNFTQsNFTColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540328C0BB940001B565 /* SudNFTQsNFTColCell.m */; };
+		6C31541428C0BB940001B565 /* SudNFTQsSelectEtherChainsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540428C0BB940001B565 /* SudNFTQsSelectEtherChainsView.m */; };
+		6C31541528C0BB940001B565 /* SudNFTQsBindBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31540528C0BB940001B565 /* SudNFTQsBindBtnView.m */; };
+		6C31541C28C0BF8A0001B565 /* SudNFTQsNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541828C0BF8A0001B565 /* SudNFTQsNFTListViewController.m */; };
+		6C31541D28C0BF8A0001B565 /* SudNFTQsCnAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541928C0BF8A0001B565 /* SudNFTQsCnAuthViewController.m */; };
+		6C31541E28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31541B28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.m */; };
+		6C31542528C0BF9B0001B565 /* SudNFTQSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542128C0BF9B0001B565 /* SudNFTQSNFTListCellModel.m */; };
+		6C31542628C0BF9B0001B565 /* SudNFTQsCnWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542228C0BF9B0001B565 /* SudNFTQsCnWalletSwitchCellModel.m */; };
+		6C31542728C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31542328C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.m */; };
 		6C4607AA285083CB005C99EF /* GuessRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607A9285083CB005C99EF /* GuessRankViewController.m */; };
 		6C4607AD2850A818005C99EF /* GuessRankContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AC2850A817005C99EF /* GuessRankContentView.m */; };
 		6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AF28518FB7005C99EF /* GuessRankHeaderView.m */; };
@@ -254,6 +253,23 @@
 		6C8D02D028AB774100C230E5 /* DTUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */; };
 		6CC3E77128C1A6EF00AA934B /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */; };
 		6CC3E77228C1A6EF00AA934B /* SudNFT.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6CC3E77A28C1BB7D00AA934B /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77728C1BB7D00AA934B /* MyEthereumChainsCellModel.m */; };
+		6CC3E77B28C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77828C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m */; };
+		6CC3E77C28C1BB7D00AA934B /* HSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77928C1BB7D00AA934B /* HSNFTListCellModel.m */; };
+		6CC3E79828C1BBB800AA934B /* MySelectEtherChainsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77E28C1BBB500AA934B /* MySelectEtherChainsView.m */; };
+		6CC3E79928C1BBB800AA934B /* ForeignWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E78128C1BBB600AA934B /* ForeignWalletSelectPopView.m */; };
+		6CC3E79A28C1BBB800AA934B /* BindWalletStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E78228C1BBB600AA934B /* BindWalletStateView.m */; };
+		6CC3E79B28C1BBB800AA934B /* BindBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E78328C1BBB600AA934B /* BindBtnView.m */; };
+		6CC3E79C28C1BBB800AA934B /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E78428C1BBB600AA934B /* MyHeaderView.m */; };
+		6CC3E79D28C1BBB800AA934B /* MyEthereumChainsSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E78728C1BBB600AA934B /* MyEthereumChainsSelectPopView.m */; };
+		6CC3E79E28C1BBB800AA934B /* CNWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E78828C1BBB600AA934B /* CNWalletSelectCell.m */; };
+		6CC3E79F28C1BBB800AA934B /* ForeignWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E78B28C1BBB700AA934B /* ForeignWalletSelectCell.m */; };
+		6CC3E7A028C1BBB800AA934B /* CNWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E78C28C1BBB700AA934B /* CNWalletSelectPopView.m */; };
+		6CC3E7A128C1BBB800AA934B /* CNWalletDeletePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E78F28C1BBB700AA934B /* CNWalletDeletePopView.m */; };
+		6CC3E7A228C1BBB800AA934B /* MyCNWalletSwitchPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E79428C1BBB800AA934B /* MyCNWalletSwitchPopView.m */; };
+		6CC3E7A328C1BBB800AA934B /* MyNFTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E79528C1BBB800AA934B /* MyNFTView.m */; };
+		6CC3E7A428C1BBB800AA934B /* MyBindWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E79728C1BBB800AA934B /* MyBindWalletView.m */; };
+		6CC3E7A728C1BD8600AA934B /* QuickStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E7A528C1BD8600AA934B /* QuickStartViewController.m */; };
 		6CCF8ACA287A464900DB3AB8 /* DiscoRankTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCF8AC9287A464900DB3AB8 /* DiscoRankTipView.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
 		6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85627BE37D600D8F76C /* SettingsService.m */; };
@@ -343,29 +359,21 @@
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
 		BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */; };
 		BC210093C2C7796FBA9F334C /* DiscoGameInteractivePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */; };
-		BC21010CE9F221A2322EF0A1 /* ForeignWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E0B1927424F781A582A /* ForeignWalletSelectCell.m */; };
 		BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */; };
 		BC21032F94AB142E1BAA2114 /* PKRoomListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109B31F63F31616E3D68E /* PKRoomListCell.m */; };
 		BC210379CA8856A0C91448E4 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098C63F873C785C0F04B /* MyCell.m */; };
 		BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */; };
-		BC2103DA9F9CA5AA54227DAC /* MyCNWalletSwitchPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106688B420A688898026C /* MyCNWalletSwitchPopView.m */; };
 		BC2104A997878EE07744E080 /* PKRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */; };
 		BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210337708736FFF222750A /* BaseSceneService.m */; };
 		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
 		BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */; };
-		BC21066011CC87113AF9D72E /* MyNFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B1A46D86BF883736532 /* MyNFTDetailViewController.m */; };
 		BC2106C085BCFA772D1B9F96 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21001E47A02C2A2F8EE39B /* AboutViewController.m */; };
 		BC210743E83852E3D938F5A9 /* DiscoInteractiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */; };
-		BC2107536FE74BA445EB4391 /* MyNFTView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AF99A3482B805EB68C8 /* MyNFTView.m */; };
-		BC21075C27415E8D75B17780 /* HSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101ECC4794AA0F7897DAE /* HSNFTListCellModel.m */; };
 		BC21076C5084AD192F038DA8 /* DiscoSelectAnchorColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */; };
-		BC2107A7C8A2991A5FD3E278 /* MyBindWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21034C2F7EE6607593A6DC /* MyBindWalletView.m */; };
 		BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */; };
-		BC2107EAE0746B2D4D2234C6 /* MyNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210FB209E74382C16074E3 /* MyNFTListViewController.m */; };
 		BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */; };
 		BC210819F69EB53104902350 /* DiscoAppointmentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */; };
 		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
-		BC21087036D5517BE88A12AE /* BindBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E7A57C0CECB08491557 /* BindBtnView.m */; };
 		BC21090932848A4335D3546F /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210EA4458F6CC10378E975 /* MyViewController.m */; };
 		BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */; };
 		BC21098A0CA7595992F3EC61 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */; };
@@ -373,26 +381,17 @@
 		BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */; };
 		BC210A75257DF698A543C29A /* DiscoInteractiveColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */; };
 		BC210A7C7C41EA6AC304F981 /* RoomCmdKickoutRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */; };
-		BC210AAE6896B522765C1CEF /* BindWalletStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21021FFE297653BE615557 /* BindWalletStateView.m */; };
-		BC210ACE5AEABF2588AFE747 /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E38DF055BC8531BC2F9 /* MyEthereumChainsCellModel.m */; };
 		BC210B0390E117B09344D025 /* HSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100D34F80535C6D8EBA57 /* HSAppPreferences.m */; };
-		BC210B241681A29E5780F9B4 /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21032146A343F2B5C79698 /* MyCNWalletSwitchCellModel.m */; };
-		BC210B4F08432BD34551F5AF /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2103012553EB37A5DCFA1C /* MyHeaderView.m */; };
-		BC210B7BFEE93DC9BB3913DE /* CNWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210A97C065102AF27BBCCB /* CNWalletSelectPopView.m */; };
-		BC210B9DC5576C2A85DA0C43 /* MySelectEtherChainsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B6B1312C4931D612501 /* MySelectEtherChainsView.m */; };
-		BC210BC43036C2D9D3EA134A /* CNWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102889F426576144E2686 /* CNWalletSelectCell.m */; };
-		BC210BD588F8A5B32D42822C /* CNAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210BCCBD6574B639EF8762 /* CNAuthViewController.m */; };
 		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
-		BC210C90D4424C7B2370D49A /* ForeignWalletSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210EEEF02FC537C546620C /* ForeignWalletSelectPopView.m */; };
 		BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
+		BC210D1C881B0F781AF55226 /* CNAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */; };
 		BC210D9F0C69893639DD84A5 /* HomeGuessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21056B5487F677973E97B8 /* HomeGuessCell.m */; };
-		BC210DB9E4315AD74EA732A8 /* MyEthereumChainsSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210233A6B918F225A7E721 /* MyEthereumChainsSelectPopView.m */; };
 		BC210E2F0BACA26837C44BBC /* MyEthereumChainsSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */; };
 		BC210E3D2377EDF7498C2DF1 /* PKGameEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */; };
+		BC210E61BEB5F8B208DFF505 /* MyNFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101DBC57FB10DD629B4B0 /* MyNFTDetailViewController.m */; };
 		BC210E8DA59477CC32152825 /* MyNFTColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21054139E36B3E6CA45262 /* MyNFTColCell.m */; };
 		BC210E9E33806A6BFD2AE89A /* MoreGuessCoinItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */; };
-		BC210EC9795366E2AD391AC7 /* CNWalletDeletePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CC34DC202025C86F466 /* CNWalletDeletePopView.m */; };
 		BC210F1416AECFDE1A4FEA19 /* MyCNWalletSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210926A0E074910BB1BE29 /* MyCNWalletSwitchCell.m */; };
 		BC210F738CED39591CB7541D /* MoreGuessCoinPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */; };
 		BC210F74B7434253E2FEF91D /* GuessRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */; };
@@ -691,7 +690,6 @@
 		44DD752C2812AEFE0041FE3C /* PKSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKSettingView.h; sourceTree = "<group>"; };
 		44DD752D2812AEFE0041FE3C /* PKSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKSettingView.m; sourceTree = "<group>"; };
 		44DF03812796A981006EE6AC /* ISudAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISudAudioEngine.h; sourceTree = "<group>"; };
-		44DF03972796B2C5006EE6AC /* AppUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtil.m; sourceTree = "<group>"; };
 		4ECE4F17A4D5B79583AC3051 /* Pods-HelloSud-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.release.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		573BC4D24C1A23B3C154A334 /* Pods_HelloSud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A0C4B551400EE3ED583FF51 /* Pods_QuickStart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickStart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -740,8 +738,6 @@
 		6C31536B28C0A6440001B565 /* SudNFTQuickStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudNFTQuickStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31536D28C0A6440001B565 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C31536E28C0A6440001B565 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6C31537328C0A6440001B565 /* QuickStartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickStartViewController.h; sourceTree = "<group>"; };
-		6C31537428C0A6440001B565 /* QuickStartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickStartViewController.m; sourceTree = "<group>"; };
 		6C31537728C0A6440001B565 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C31537928C0A6470001B565 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C31537C28C0A6470001B565 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -751,50 +747,50 @@
 		6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SudNFT.xcframework; path = SudMGPSDK/SudNFT.xcframework; sourceTree = SOURCE_ROOT; };
 		6C3153B228C0B0B10001B565 /* SudNFTQSAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQSAppPreferences.h; sourceTree = "<group>"; };
 		6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQSAppPreferences.m; sourceTree = "<group>"; };
-		6C3153E628C0BB910001B565 /* MyCNWalletSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCell.m; sourceTree = "<group>"; };
-		6C3153E728C0BB910001B565 /* MyEthereumChainsSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsSelectCell.h; sourceTree = "<group>"; };
-		6C3153E828C0BB910001B565 /* MyEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectCell.m; sourceTree = "<group>"; };
-		6C3153E928C0BB910001B565 /* ForeignWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForeignWalletSelectPopView.h; sourceTree = "<group>"; };
-		6C3153EA28C0BB910001B565 /* BindWalletStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindWalletStateView.h; sourceTree = "<group>"; };
-		6C3153EB28C0BB910001B565 /* MyNFTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTView.h; sourceTree = "<group>"; };
-		6C3153EC28C0BB910001B565 /* MyNFTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTView.m; sourceTree = "<group>"; };
-		6C3153ED28C0BB910001B565 /* MySelectEtherChainsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySelectEtherChainsView.h; sourceTree = "<group>"; };
-		6C3153EE28C0BB920001B565 /* MyEthereumChainsSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsSelectPopView.h; sourceTree = "<group>"; };
-		6C3153EF28C0BB920001B565 /* CNWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletSelectCell.h; sourceTree = "<group>"; };
-		6C3153F028C0BB920001B565 /* MyCNWalletSwitchPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchPopView.m; sourceTree = "<group>"; };
-		6C3153F128C0BB920001B565 /* ForeignWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForeignWalletSelectPopView.m; sourceTree = "<group>"; };
-		6C3153F228C0BB920001B565 /* BindWalletStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindWalletStateView.m; sourceTree = "<group>"; };
-		6C3153F328C0BB920001B565 /* MyCNWalletSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchPopView.h; sourceTree = "<group>"; };
-		6C3153F428C0BB920001B565 /* MyCNWalletSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchCell.h; sourceTree = "<group>"; };
-		6C3153F528C0BB920001B565 /* MyNFTColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTColCell.h; sourceTree = "<group>"; };
-		6C3153F628C0BB920001B565 /* CNWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletSelectPopView.h; sourceTree = "<group>"; };
-		6C3153F728C0BB920001B565 /* ForeignWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForeignWalletSelectCell.h; sourceTree = "<group>"; };
-		6C3153F828C0BB930001B565 /* CNWalletDeletePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletDeletePopView.h; sourceTree = "<group>"; };
-		6C3153F928C0BB930001B565 /* MyEthereumChainsSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectPopView.m; sourceTree = "<group>"; };
-		6C3153FA28C0BB930001B565 /* BindBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindBtnView.h; sourceTree = "<group>"; };
-		6C3153FB28C0BB930001B565 /* CNWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletSelectPopView.m; sourceTree = "<group>"; };
-		6C3153FC28C0BB930001B565 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
-		6C3153FD28C0BB930001B565 /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
-		6C3153FE28C0BB930001B565 /* MyBindWalletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBindWalletView.m; sourceTree = "<group>"; };
-		6C3153FF28C0BB930001B565 /* MyBindWalletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBindWalletView.h; sourceTree = "<group>"; };
-		6C31540028C0BB930001B565 /* CNWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletSelectCell.m; sourceTree = "<group>"; };
-		6C31540128C0BB930001B565 /* ForeignWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForeignWalletSelectCell.m; sourceTree = "<group>"; };
-		6C31540228C0BB930001B565 /* CNWalletDeletePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletDeletePopView.m; sourceTree = "<group>"; };
-		6C31540328C0BB940001B565 /* MyNFTColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTColCell.m; sourceTree = "<group>"; };
-		6C31540428C0BB940001B565 /* MySelectEtherChainsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySelectEtherChainsView.m; sourceTree = "<group>"; };
-		6C31540528C0BB940001B565 /* BindBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindBtnView.m; sourceTree = "<group>"; };
-		6C31541628C0BF890001B565 /* CNAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNAuthViewController.h; sourceTree = "<group>"; };
-		6C31541728C0BF890001B565 /* MyNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTListViewController.h; sourceTree = "<group>"; };
-		6C31541828C0BF8A0001B565 /* MyNFTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTListViewController.m; sourceTree = "<group>"; };
-		6C31541928C0BF8A0001B565 /* CNAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAuthViewController.m; sourceTree = "<group>"; };
-		6C31541A28C0BF8A0001B565 /* MyNFTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTDetailViewController.h; sourceTree = "<group>"; };
-		6C31541B28C0BF8A0001B565 /* MyNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTDetailViewController.m; sourceTree = "<group>"; };
-		6C31541F28C0BF9A0001B565 /* MyCNWalletSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchCellModel.h; sourceTree = "<group>"; };
-		6C31542028C0BF9A0001B565 /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
-		6C31542128C0BF9B0001B565 /* HSNFTListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSNFTListCellModel.m; sourceTree = "<group>"; };
-		6C31542228C0BF9B0001B565 /* MyCNWalletSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCellModel.m; sourceTree = "<group>"; };
-		6C31542328C0BF9B0001B565 /* MyEthereumChainsCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsCellModel.m; sourceTree = "<group>"; };
-		6C31542428C0BF9B0001B565 /* MyEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsCellModel.h; sourceTree = "<group>"; };
+		6C3153E628C0BB910001B565 /* SudNFTQsCnWalletSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletSwitchCell.m; sourceTree = "<group>"; };
+		6C3153E728C0BB910001B565 /* SudNFTQsEthereumChainsSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsEthereumChainsSelectCell.h; sourceTree = "<group>"; };
+		6C3153E828C0BB910001B565 /* SudNFTQsEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsEthereumChainsSelectCell.m; sourceTree = "<group>"; };
+		6C3153E928C0BB910001B565 /* SudNFTQsForeignWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsForeignWalletSelectPopView.h; sourceTree = "<group>"; };
+		6C3153EA28C0BB910001B565 /* SudNFTQsBindWalletStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsBindWalletStateView.h; sourceTree = "<group>"; };
+		6C3153EB28C0BB910001B565 /* SudNFTQsNFTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsNFTView.h; sourceTree = "<group>"; };
+		6C3153EC28C0BB910001B565 /* SudNFTQsNFTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsNFTView.m; sourceTree = "<group>"; };
+		6C3153ED28C0BB910001B565 /* SudNFTQsSelectEtherChainsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsSelectEtherChainsView.h; sourceTree = "<group>"; };
+		6C3153EE28C0BB920001B565 /* SudNFTQsEthereumChainsSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsEthereumChainsSelectPopView.h; sourceTree = "<group>"; };
+		6C3153EF28C0BB920001B565 /* SudNFTQsCnWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletSelectCell.h; sourceTree = "<group>"; };
+		6C3153F028C0BB920001B565 /* SudNFTQsCnWalletSwitchPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletSwitchPopView.m; sourceTree = "<group>"; };
+		6C3153F128C0BB920001B565 /* SudNFTQsForeignWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsForeignWalletSelectPopView.m; sourceTree = "<group>"; };
+		6C3153F228C0BB920001B565 /* SudNFTQsBindWalletStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsBindWalletStateView.m; sourceTree = "<group>"; };
+		6C3153F328C0BB920001B565 /* SudNFTQsCnWalletSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletSwitchPopView.h; sourceTree = "<group>"; };
+		6C3153F428C0BB920001B565 /* SudNFTQsCnWalletSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletSwitchCell.h; sourceTree = "<group>"; };
+		6C3153F528C0BB920001B565 /* SudNFTQsNFTColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsNFTColCell.h; sourceTree = "<group>"; };
+		6C3153F628C0BB920001B565 /* SudNFTQsCnWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletSelectPopView.h; sourceTree = "<group>"; };
+		6C3153F728C0BB920001B565 /* SudNFTQsForeignWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsForeignWalletSelectCell.h; sourceTree = "<group>"; };
+		6C3153F828C0BB930001B565 /* SudNFTQsCnWalletDeletePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletDeletePopView.h; sourceTree = "<group>"; };
+		6C3153F928C0BB930001B565 /* SudNFTQsEthereumChainsSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsEthereumChainsSelectPopView.m; sourceTree = "<group>"; };
+		6C3153FA28C0BB930001B565 /* SudNFTQsBindBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsBindBtnView.h; sourceTree = "<group>"; };
+		6C3153FB28C0BB930001B565 /* SudNFTQsCnWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletSelectPopView.m; sourceTree = "<group>"; };
+		6C3153FC28C0BB930001B565 /* SudNFTQsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsHeaderView.h; sourceTree = "<group>"; };
+		6C3153FD28C0BB930001B565 /* SudNFTQsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsHeaderView.m; sourceTree = "<group>"; };
+		6C3153FE28C0BB930001B565 /* SudNFTQsBindWalletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsBindWalletView.m; sourceTree = "<group>"; };
+		6C3153FF28C0BB930001B565 /* SudNFTQsBindWalletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsBindWalletView.h; sourceTree = "<group>"; };
+		6C31540028C0BB930001B565 /* SudNFTQsCnWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletSelectCell.m; sourceTree = "<group>"; };
+		6C31540128C0BB930001B565 /* SudNFTQsForeignWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsForeignWalletSelectCell.m; sourceTree = "<group>"; };
+		6C31540228C0BB930001B565 /* SudNFTQsCnWalletDeletePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletDeletePopView.m; sourceTree = "<group>"; };
+		6C31540328C0BB940001B565 /* SudNFTQsNFTColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsNFTColCell.m; sourceTree = "<group>"; };
+		6C31540428C0BB940001B565 /* SudNFTQsSelectEtherChainsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsSelectEtherChainsView.m; sourceTree = "<group>"; };
+		6C31540528C0BB940001B565 /* SudNFTQsBindBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsBindBtnView.m; sourceTree = "<group>"; };
+		6C31541628C0BF890001B565 /* SudNFTQsCnAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnAuthViewController.h; sourceTree = "<group>"; };
+		6C31541728C0BF890001B565 /* SudNFTQsNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsNFTListViewController.h; sourceTree = "<group>"; };
+		6C31541828C0BF8A0001B565 /* SudNFTQsNFTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsNFTListViewController.m; sourceTree = "<group>"; };
+		6C31541928C0BF8A0001B565 /* SudNFTQsCnAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnAuthViewController.m; sourceTree = "<group>"; };
+		6C31541A28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsNFTDetailViewController.h; sourceTree = "<group>"; };
+		6C31541B28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsNFTDetailViewController.m; sourceTree = "<group>"; };
+		6C31541F28C0BF9A0001B565 /* SudNFTQsCnWalletSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnWalletSwitchCellModel.h; sourceTree = "<group>"; };
+		6C31542028C0BF9A0001B565 /* SudNFTQSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQSNFTListCellModel.h; sourceTree = "<group>"; };
+		6C31542128C0BF9B0001B565 /* SudNFTQSNFTListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQSNFTListCellModel.m; sourceTree = "<group>"; };
+		6C31542228C0BF9B0001B565 /* SudNFTQsCnWalletSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnWalletSwitchCellModel.m; sourceTree = "<group>"; };
+		6C31542328C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudNFTQsCnEthereumChainsCellModel.m; sourceTree = "<group>"; };
+		6C31542428C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudNFTQsCnEthereumChainsCellModel.h; sourceTree = "<group>"; };
 		6C4607A8285083CB005C99EF /* GuessRankViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankViewController.h; sourceTree = "<group>"; };
 		6C4607A9285083CB005C99EF /* GuessRankViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRankViewController.m; sourceTree = "<group>"; };
 		6C4607AB2850A817005C99EF /* GuessRankContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankContentView.h; sourceTree = "<group>"; };
@@ -892,6 +888,41 @@
 		6C8D02CE28AB774000C230E5 /* DTUIImage+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTUIImage+Extension.h"; sourceTree = "<group>"; };
 		6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "DTUIImage+Extension.m"; sourceTree = "<group>"; };
 		6CB3D146288FEE220037EE88 /* HelloSud-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "HelloSud-iOS.entitlements"; sourceTree = "<group>"; };
+		6CC3E77428C1BB7D00AA934B /* MyEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsCellModel.h; sourceTree = "<group>"; };
+		6CC3E77528C1BB7D00AA934B /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
+		6CC3E77628C1BB7D00AA934B /* MyCNWalletSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchCellModel.h; sourceTree = "<group>"; };
+		6CC3E77728C1BB7D00AA934B /* MyEthereumChainsCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsCellModel.m; sourceTree = "<group>"; };
+		6CC3E77828C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCellModel.m; sourceTree = "<group>"; };
+		6CC3E77928C1BB7D00AA934B /* HSNFTListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSNFTListCellModel.m; sourceTree = "<group>"; };
+		6CC3E77D28C1BBB500AA934B /* BindBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindBtnView.h; sourceTree = "<group>"; };
+		6CC3E77E28C1BBB500AA934B /* MySelectEtherChainsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySelectEtherChainsView.m; sourceTree = "<group>"; };
+		6CC3E77F28C1BBB600AA934B /* MyNFTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTView.h; sourceTree = "<group>"; };
+		6CC3E78028C1BBB600AA934B /* MyEthereumChainsSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsSelectPopView.h; sourceTree = "<group>"; };
+		6CC3E78128C1BBB600AA934B /* ForeignWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForeignWalletSelectPopView.m; sourceTree = "<group>"; };
+		6CC3E78228C1BBB600AA934B /* BindWalletStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindWalletStateView.m; sourceTree = "<group>"; };
+		6CC3E78328C1BBB600AA934B /* BindBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindBtnView.m; sourceTree = "<group>"; };
+		6CC3E78428C1BBB600AA934B /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
+		6CC3E78528C1BBB600AA934B /* MyNFTColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTColCell.h; sourceTree = "<group>"; };
+		6CC3E78628C1BBB600AA934B /* MyCNWalletSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchCell.h; sourceTree = "<group>"; };
+		6CC3E78728C1BBB600AA934B /* MyEthereumChainsSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectPopView.m; sourceTree = "<group>"; };
+		6CC3E78828C1BBB600AA934B /* CNWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletSelectCell.m; sourceTree = "<group>"; };
+		6CC3E78928C1BBB700AA934B /* MyBindWalletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBindWalletView.h; sourceTree = "<group>"; };
+		6CC3E78A28C1BBB700AA934B /* CNWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletSelectPopView.h; sourceTree = "<group>"; };
+		6CC3E78B28C1BBB700AA934B /* ForeignWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForeignWalletSelectCell.m; sourceTree = "<group>"; };
+		6CC3E78C28C1BBB700AA934B /* CNWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletSelectPopView.m; sourceTree = "<group>"; };
+		6CC3E78D28C1BBB700AA934B /* CNWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletSelectCell.h; sourceTree = "<group>"; };
+		6CC3E78E28C1BBB700AA934B /* ForeignWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForeignWalletSelectPopView.h; sourceTree = "<group>"; };
+		6CC3E78F28C1BBB700AA934B /* CNWalletDeletePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletDeletePopView.m; sourceTree = "<group>"; };
+		6CC3E79028C1BBB700AA934B /* MyEthereumChainsSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsSelectCell.h; sourceTree = "<group>"; };
+		6CC3E79128C1BBB700AA934B /* ForeignWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForeignWalletSelectCell.h; sourceTree = "<group>"; };
+		6CC3E79228C1BBB700AA934B /* BindWalletStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindWalletStateView.h; sourceTree = "<group>"; };
+		6CC3E79328C1BBB700AA934B /* CNWalletDeletePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletDeletePopView.h; sourceTree = "<group>"; };
+		6CC3E79428C1BBB800AA934B /* MyCNWalletSwitchPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchPopView.m; sourceTree = "<group>"; };
+		6CC3E79528C1BBB800AA934B /* MyNFTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTView.m; sourceTree = "<group>"; };
+		6CC3E79628C1BBB800AA934B /* MySelectEtherChainsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySelectEtherChainsView.h; sourceTree = "<group>"; };
+		6CC3E79728C1BBB800AA934B /* MyBindWalletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBindWalletView.m; sourceTree = "<group>"; };
+		6CC3E7A528C1BD8600AA934B /* QuickStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickStartViewController.m; sourceTree = "<group>"; };
+		6CC3E7A628C1BD8600AA934B /* QuickStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickStartViewController.h; sourceTree = "<group>"; };
 		6CCF8AC8287A464900DB3AB8 /* DiscoRankTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoRankTipView.h; sourceTree = "<group>"; };
 		6CCF8AC9287A464900DB3AB8 /* DiscoRankTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoRankTipView.m; sourceTree = "<group>"; };
 		6CD6E85227BE37C300D8F76C /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
@@ -1006,43 +1037,30 @@
 		7A720CB3011AA758F160BFED /* Pods-QuickStart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickStart.debug.xcconfig"; path = "Target Support Files/Pods-QuickStart/Pods-QuickStart.debug.xcconfig"; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC21001E47A02C2A2F8EE39B /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		BC21003766E51BE06BF1FDB7 /* MyNFTColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTColCell.h; sourceTree = "<group>"; };
-		BC210099E2C4EA168B7C25BD /* CNWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletSelectPopView.h; sourceTree = "<group>"; };
 		BC2100A5544CF78174597F1D /* PKGameEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGameEmptyView.h; sourceTree = "<group>"; };
-		BC2100AF0397B99FC4A73B7A /* ForeignWalletSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForeignWalletSelectPopView.h; sourceTree = "<group>"; };
 		BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoGameInteractiveView.m; sourceTree = "<group>"; };
 		BC2100D34F80535C6D8EBA57 /* HSAppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSAppPreferences.m; sourceTree = "<group>"; };
 		BC2100EDB0B0DC05AA83F84D /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		BC21011EFE2917ED676C1C64 /* HomeGuessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeGuessCell.h; sourceTree = "<group>"; };
 		BC210122CBC769498A9DBED6 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentView.m; sourceTree = "<group>"; };
+		BC2101DBC57FB10DD629B4B0 /* MyNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTDetailViewController.m; sourceTree = "<group>"; };
 		BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessRoomViewController.h; sourceTree = "<group>"; };
-		BC2101ECC4794AA0F7897DAE /* HSNFTListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSNFTListCellModel.m; sourceTree = "<group>"; };
-		BC2101EF59A5BF2EE40D5494 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
 		BC210203F8E7C5CAEFF19056 /* PKRoomService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRoomService.h; sourceTree = "<group>"; };
-		BC21021FFE297653BE615557 /* BindWalletStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindWalletStateView.m; sourceTree = "<group>"; };
 		BC210225026B181652D6B986 /* MyCNWalletSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchPopView.h; sourceTree = "<group>"; };
-		BC210233A6B918F225A7E721 /* MyEthereumChainsSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectPopView.m; sourceTree = "<group>"; };
-		BC21023815DD950688C8032B /* BindWalletStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindWalletStateView.h; sourceTree = "<group>"; };
 		BC21026DC2310D6C27C12757 /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
-		BC2102889F426576144E2686 /* CNWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletSelectCell.m; sourceTree = "<group>"; };
-		BC2102BB41FECD66E17DB7BB /* MyBindWalletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBindWalletView.h; sourceTree = "<group>"; };
 		BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessCategoryView.m; sourceTree = "<group>"; };
-		BC2103012553EB37A5DCFA1C /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
 		BC21030C423A46DF8E96F932 /* DiscoAppointmentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoAppointmentPopView.h; sourceTree = "<group>"; };
 		BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderColCell.m; sourceTree = "<group>"; };
-		BC21032146A343F2B5C79698 /* MyCNWalletSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCellModel.m; sourceTree = "<group>"; };
 		BC21032C5553ABB17B21F173 /* QSGameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameListViewController.m; sourceTree = "<group>"; };
 		BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGameEmptyView.m; sourceTree = "<group>"; };
 		BC210337708736FFF222750A /* BaseSceneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSceneService.m; sourceTree = "<group>"; };
-		BC21034C2F7EE6607593A6DC /* MyBindWalletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBindWalletView.m; sourceTree = "<group>"; };
+		BC210343B3A1CE0A09FB978C /* CNAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNAuthViewController.h; sourceTree = "<group>"; };
 		BC2103C043B5568FCBA68B06 /* BaseSceneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSceneService.h; sourceTree = "<group>"; };
 		BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinItemView.m; sourceTree = "<group>"; };
-		BC210466D708FD7FD90681BC /* CNAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNAuthViewController.h; sourceTree = "<group>"; };
 		BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderView.h; sourceTree = "<group>"; };
-		BC21049D5A410A93350E5425 /* BindBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindBtnView.h; sourceTree = "<group>"; };
+		BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAuthViewController.m; sourceTree = "<group>"; };
 		BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessRoomViewController.m; sourceTree = "<group>"; };
-		BC2104EF389EDDA0DA29AC62 /* MyCNWalletSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchCellModel.h; sourceTree = "<group>"; };
 		BC2105087E91B70E68E3D640 /* PKStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStateView.h; sourceTree = "<group>"; };
 		BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdPKModel.m; sourceTree = "<group>"; };
 		BC21052EC461448E9238A7C2 /* DiscoGameInteractiveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractiveView.h; sourceTree = "<group>"; };
@@ -1051,11 +1069,8 @@
 		BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessViewController.m; sourceTree = "<group>"; };
 		BC21055EE76F1B350D139F19 /* RoomCmdPKModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdPKModel.h; sourceTree = "<group>"; };
 		BC21056B5487F677973E97B8 /* HomeGuessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeGuessCell.m; sourceTree = "<group>"; };
-		BC2105BBA5286286CDF3672B /* CNWalletDeletePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletDeletePopView.h; sourceTree = "<group>"; };
 		BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSelectRoomView.m; sourceTree = "<group>"; };
-		BC210637B4137BBBA03255A1 /* MyCNWalletSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchCell.h; sourceTree = "<group>"; };
 		BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendRoomView.m; sourceTree = "<group>"; };
-		BC2106688B420A688898026C /* MyCNWalletSwitchPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchPopView.m; sourceTree = "<group>"; };
 		BC210692B27543A09E9B3CB6 /* MyNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTListViewController.h; sourceTree = "<group>"; };
 		BC21069C06A918E5FCF30F8A /* QSGameItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameItemModel.h; sourceTree = "<group>"; };
 		BC2106F2C4C48C00499B89E4 /* RoomMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomMoreView.h; sourceTree = "<group>"; };
@@ -1063,15 +1078,11 @@
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
 		BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinPopView.h; sourceTree = "<group>"; };
 		BC2107929CECA531C851C092 /* PKSelectRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSelectRoomView.h; sourceTree = "<group>"; };
-		BC2107A8EE8748E0B0A38A2B /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
 		BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessCategoryView.h; sourceTree = "<group>"; };
 		BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessViewController.h; sourceTree = "<group>"; };
 		BC2107BC94088B9F062BBA4B /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
-		BC2107FDD5B9DF2B993389A8 /* MySelectEtherChainsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySelectEtherChainsView.h; sourceTree = "<group>"; };
 		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
-		BC2108C45A3B70AF3FEEA683 /* MyNFTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTDetailViewController.h; sourceTree = "<group>"; };
 		BC2108CFC574A8AFEFE2FEDA /* RoomCmdKickoutRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdKickoutRoomModel.h; sourceTree = "<group>"; };
-		BC2108DBCA5880DC08EB997D /* MyEthereumChainsSelectPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsSelectPopView.h; sourceTree = "<group>"; };
 		BC2109228F9F8EDC6CC7208C /* HSAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSAppPreferences.h; sourceTree = "<group>"; };
 		BC210926A0E074910BB1BE29 /* MyCNWalletSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCell.m; sourceTree = "<group>"; };
 		BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoAppointmentPopView.m; sourceTree = "<group>"; };
@@ -1080,47 +1091,32 @@
 		BC210992133641B87C11D04E /* DiscoSelectAnchorColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoSelectAnchorColCell.h; sourceTree = "<group>"; };
 		BC2109B31F63F31616E3D68E /* PKRoomListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomListCell.m; sourceTree = "<group>"; };
 		BC210A8B9F817A0399951BD7 /* MoreGuessTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessTableViewCell.h; sourceTree = "<group>"; };
-		BC210A97C065102AF27BBCCB /* CNWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletSelectPopView.m; sourceTree = "<group>"; };
 		BC210ABE07C435063FEB002B /* SuspendRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuspendRoomView.h; sourceTree = "<group>"; };
 		BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderView.m; sourceTree = "<group>"; };
 		BC210AD2E65543CE739F514F /* DiscoInteractiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoInteractiveModel.h; sourceTree = "<group>"; };
 		BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveModel.m; sourceTree = "<group>"; };
-		BC210AF99A3482B805EB68C8 /* MyNFTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTView.m; sourceTree = "<group>"; };
-		BC210B1A46D86BF883736532 /* MyNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTDetailViewController.m; sourceTree = "<group>"; };
 		BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectCell.m; sourceTree = "<group>"; };
-		BC210B6B1312C4931D612501 /* MySelectEtherChainsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySelectEtherChainsView.m; sourceTree = "<group>"; };
 		BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdKickoutRoomModel.m; sourceTree = "<group>"; };
 		BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveColCell.m; sourceTree = "<group>"; };
-		BC210BCCBD6574B639EF8762 /* CNAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAuthViewController.m; sourceTree = "<group>"; };
+		BC210BC408C1D5CBD7FE202D /* MyNFTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTDetailViewController.h; sourceTree = "<group>"; };
 		BC210BDF39D45429F38899B7 /* PKRoomListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRoomListCell.h; sourceTree = "<group>"; };
 		BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderCellModel.m; sourceTree = "<group>"; };
 		BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKStateView.m; sourceTree = "<group>"; };
 		BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessTableViewCell.m; sourceTree = "<group>"; };
 		BC210C677DD6442EA5963655 /* RespModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespModel.m; sourceTree = "<group>"; };
-		BC210CC34DC202025C86F466 /* CNWalletDeletePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWalletDeletePopView.m; sourceTree = "<group>"; };
 		BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameItemModel.m; sourceTree = "<group>"; };
 		BC210D0CC9CCF32570421BA2 /* MoreGuessCoinItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinItemView.h; sourceTree = "<group>"; };
 		BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinPopView.m; sourceTree = "<group>"; };
-		BC210D4E0B4F85F94B09A4CB /* CNWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWalletSelectCell.h; sourceTree = "<group>"; };
 		BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoSelectAnchorColCell.m; sourceTree = "<group>"; };
 		BC210D8DD3658817195900DF /* DiscoInteractiveColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoInteractiveColCell.h; sourceTree = "<group>"; };
 		BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderColCell.h; sourceTree = "<group>"; };
 		BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomService.m; sourceTree = "<group>"; };
 		BC210DCE2A6257343B4539CF /* DiscoGameInteractivePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractivePopView.h; sourceTree = "<group>"; };
-		BC210E0B1927424F781A582A /* ForeignWalletSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForeignWalletSelectCell.m; sourceTree = "<group>"; };
-		BC210E38DF055BC8531BC2F9 /* MyEthereumChainsCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsCellModel.m; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
-		BC210E727D9FBD37B2B43EFD /* ForeignWalletSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForeignWalletSelectCell.h; sourceTree = "<group>"; };
-		BC210E7A57C0CECB08491557 /* BindBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindBtnView.m; sourceTree = "<group>"; };
-		BC210E87C88410106DC30D8A /* MyNFTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTView.h; sourceTree = "<group>"; };
-		BC210E9710FCFBE29008118C /* MyEthereumChainsSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsSelectCell.h; sourceTree = "<group>"; };
 		BC210EA4458F6CC10378E975 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
-		BC210EEEF02FC537C546620C /* ForeignWalletSelectPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForeignWalletSelectPopView.m; sourceTree = "<group>"; };
 		BC210F28C7CAB6BCA3140175 /* HSHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSHttpService.m; sourceTree = "<group>"; };
-		BC210F5F330A8B1903507829 /* MyEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsCellModel.h; sourceTree = "<group>"; };
 		BC210F7B6D59DA493CE16350 /* SceneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentView.h; sourceTree = "<group>"; };
 		BC210FAF33BAD4283645718B /* UserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailView.h; sourceTree = "<group>"; };
-		BC210FB209E74382C16074E3 /* MyNFTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTListViewController.m; sourceTree = "<group>"; };
 		E51A737628091CBE0097007C /* ZIMManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZIMManager.h; sourceTree = "<group>"; };
 		E51A737728091CD00097007C /* ZIMManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZIMManager.m; sourceTree = "<group>"; };
 		E51FFD5728124F2B001BE2BB /* VolcEngineRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VolcEngineRTC.xcframework; path = Vendors/volc/VolcEngineRTC.xcframework; sourceTree = "<group>"; };
@@ -1249,12 +1245,11 @@
 				BC2100EDB0B0DC05AA83F84D /* MyViewController.h */,
 				BC21001E47A02C2A2F8EE39B /* AboutViewController.m */,
 				BC210122CBC769498A9DBED6 /* AboutViewController.h */,
-				BC210FB209E74382C16074E3 /* MyNFTListViewController.m */,
 				BC210692B27543A09E9B3CB6 /* MyNFTListViewController.h */,
-				BC2108C45A3B70AF3FEEA683 /* MyNFTDetailViewController.h */,
-				BC210B1A46D86BF883736532 /* MyNFTDetailViewController.m */,
-				BC210BCCBD6574B639EF8762 /* CNAuthViewController.m */,
-				BC210466D708FD7FD90681BC /* CNAuthViewController.h */,
+				BC210343B3A1CE0A09FB978C /* CNAuthViewController.h */,
+				BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */,
+				BC210BC408C1D5CBD7FE202D /* MyNFTDetailViewController.h */,
+				BC2101DBC57FB10DD629B4B0 /* MyNFTDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1262,6 +1257,12 @@
 		4455ACC627EAC657001516EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6CC3E77528C1BB7D00AA934B /* HSNFTListCellModel.h */,
+				6CC3E77928C1BB7D00AA934B /* HSNFTListCellModel.m */,
+				6CC3E77628C1BB7D00AA934B /* MyCNWalletSwitchCellModel.h */,
+				6CC3E77828C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m */,
+				6CC3E77428C1BB7D00AA934B /* MyEthereumChainsCellModel.h */,
+				6CC3E77728C1BB7D00AA934B /* MyEthereumChainsCellModel.m */,
 				4455ACC827EAC657001516EE /* HSSettingModel.h */,
 				4455ACCD27EAC657001516EE /* HSSettingModel.m */,
 				4455ACCE27EAC657001516EE /* HSSettingHeaderModel.h */,
@@ -1272,12 +1273,6 @@
 				4455ACCC27EAC657001516EE /* ChangeRTCModel.m */,
 				44241ADC27EACF9C001EE125 /* SwitchLangModel.h */,
 				44241ADD27EACF9C001EE125 /* SwitchLangModel.m */,
-				BC2101ECC4794AA0F7897DAE /* HSNFTListCellModel.m */,
-				BC2107A8EE8748E0B0A38A2B /* HSNFTListCellModel.h */,
-				BC210F5F330A8B1903507829 /* MyEthereumChainsCellModel.h */,
-				BC210E38DF055BC8531BC2F9 /* MyEthereumChainsCellModel.m */,
-				BC2104EF389EDDA0DA29AC62 /* MyCNWalletSwitchCellModel.h */,
-				BC21032146A343F2B5C79698 /* MyCNWalletSwitchCellModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1285,6 +1280,33 @@
 		4455ACCF27EAC657001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6CC3E77D28C1BBB500AA934B /* BindBtnView.h */,
+				6CC3E78328C1BBB600AA934B /* BindBtnView.m */,
+				6CC3E79228C1BBB700AA934B /* BindWalletStateView.h */,
+				6CC3E78228C1BBB600AA934B /* BindWalletStateView.m */,
+				6CC3E79328C1BBB700AA934B /* CNWalletDeletePopView.h */,
+				6CC3E78F28C1BBB700AA934B /* CNWalletDeletePopView.m */,
+				6CC3E78D28C1BBB700AA934B /* CNWalletSelectCell.h */,
+				6CC3E78828C1BBB600AA934B /* CNWalletSelectCell.m */,
+				6CC3E78A28C1BBB700AA934B /* CNWalletSelectPopView.h */,
+				6CC3E78C28C1BBB700AA934B /* CNWalletSelectPopView.m */,
+				6CC3E79128C1BBB700AA934B /* ForeignWalletSelectCell.h */,
+				6CC3E78B28C1BBB700AA934B /* ForeignWalletSelectCell.m */,
+				6CC3E78E28C1BBB700AA934B /* ForeignWalletSelectPopView.h */,
+				6CC3E78128C1BBB600AA934B /* ForeignWalletSelectPopView.m */,
+				6CC3E78928C1BBB700AA934B /* MyBindWalletView.h */,
+				6CC3E79728C1BBB800AA934B /* MyBindWalletView.m */,
+				6CC3E78628C1BBB600AA934B /* MyCNWalletSwitchCell.h */,
+				6CC3E79428C1BBB800AA934B /* MyCNWalletSwitchPopView.m */,
+				6CC3E79028C1BBB700AA934B /* MyEthereumChainsSelectCell.h */,
+				6CC3E78028C1BBB600AA934B /* MyEthereumChainsSelectPopView.h */,
+				6CC3E78728C1BBB600AA934B /* MyEthereumChainsSelectPopView.m */,
+				6CC3E78428C1BBB600AA934B /* MyHeaderView.m */,
+				6CC3E78528C1BBB600AA934B /* MyNFTColCell.h */,
+				6CC3E77F28C1BBB600AA934B /* MyNFTView.h */,
+				6CC3E79528C1BBB800AA934B /* MyNFTView.m */,
+				6CC3E79628C1BBB800AA934B /* MySelectEtherChainsView.h */,
+				6CC3E77E28C1BBB500AA934B /* MySelectEtherChainsView.m */,
 				4455ACD627EAC657001516EE /* VersionInfoCell.h */,
 				4455ACD027EAC657001516EE /* VersionInfoCell.m */,
 				4455ACD727EAC657001516EE /* HSSettingCell.h */,
@@ -1299,38 +1321,10 @@
 				4455ACD527EAC657001516EE /* HSSetingHeadView.m */,
 				BC21026DC2310D6C27C12757 /* MyCell.h */,
 				BC21098C63F873C785C0F04B /* MyCell.m */,
-				BC2103012553EB37A5DCFA1C /* MyHeaderView.m */,
-				BC2101EF59A5BF2EE40D5494 /* MyHeaderView.h */,
-				BC21034C2F7EE6607593A6DC /* MyBindWalletView.m */,
-				BC2102BB41FECD66E17DB7BB /* MyBindWalletView.h */,
-				BC210E87C88410106DC30D8A /* MyNFTView.h */,
-				BC210AF99A3482B805EB68C8 /* MyNFTView.m */,
 				BC21054139E36B3E6CA45262 /* MyNFTColCell.m */,
-				BC21003766E51BE06BF1FDB7 /* MyNFTColCell.h */,
-				BC210B6B1312C4931D612501 /* MySelectEtherChainsView.m */,
-				BC2107FDD5B9DF2B993389A8 /* MySelectEtherChainsView.h */,
-				BC2108DBCA5880DC08EB997D /* MyEthereumChainsSelectPopView.h */,
-				BC210233A6B918F225A7E721 /* MyEthereumChainsSelectPopView.m */,
-				BC210E9710FCFBE29008118C /* MyEthereumChainsSelectCell.h */,
 				BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */,
-				BC210E7A57C0CECB08491557 /* BindBtnView.m */,
-				BC21049D5A410A93350E5425 /* BindBtnView.h */,
-				BC21023815DD950688C8032B /* BindWalletStateView.h */,
-				BC21021FFE297653BE615557 /* BindWalletStateView.m */,
-				BC2100AF0397B99FC4A73B7A /* ForeignWalletSelectPopView.h */,
-				BC210EEEF02FC537C546620C /* ForeignWalletSelectPopView.m */,
-				BC210E727D9FBD37B2B43EFD /* ForeignWalletSelectCell.h */,
-				BC210E0B1927424F781A582A /* ForeignWalletSelectCell.m */,
-				BC210A97C065102AF27BBCCB /* CNWalletSelectPopView.m */,
-				BC210099E2C4EA168B7C25BD /* CNWalletSelectPopView.h */,
-				BC2102889F426576144E2686 /* CNWalletSelectCell.m */,
-				BC210D4E0B4F85F94B09A4CB /* CNWalletSelectCell.h */,
 				BC210225026B181652D6B986 /* MyCNWalletSwitchPopView.h */,
-				BC2106688B420A688898026C /* MyCNWalletSwitchPopView.m */,
-				BC210637B4137BBBA03255A1 /* MyCNWalletSwitchCell.h */,
 				BC210926A0E074910BB1BE29 /* MyCNWalletSwitchCell.m */,
-				BC210CC34DC202025C86F466 /* CNWalletDeletePopView.m */,
-				BC2105BBA5286286CDF3672B /* CNWalletDeletePopView.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1924,7 +1918,6 @@
 				6C192E49279523B000553034 /* Products */,
 				EC6357AE0D30A512FB9D49C4 /* Pods */,
 				E65466148933C05BB06C9A97 /* Frameworks */,
-				6C192E872797E28600553034 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1952,14 +1945,6 @@
 				BC210B14EF9AAC932E40E979 /* Preferences */,
 			);
 			path = "HelloSud-iOS";
-			sourceTree = "<group>";
-		};
-		6C192E872797E28600553034 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				44DF03972796B2C5006EE6AC /* AppUtil.m */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		6C1D007527BA03DC000F0998 /* Agora */ = {
@@ -2010,14 +1995,14 @@
 		6C3153A828C0AD9F0001B565 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				6C31541628C0BF890001B565 /* CNAuthViewController.h */,
-				6C31541928C0BF8A0001B565 /* CNAuthViewController.m */,
-				6C31541A28C0BF8A0001B565 /* MyNFTDetailViewController.h */,
-				6C31541B28C0BF8A0001B565 /* MyNFTDetailViewController.m */,
-				6C31541728C0BF890001B565 /* MyNFTListViewController.h */,
-				6C31541828C0BF8A0001B565 /* MyNFTListViewController.m */,
-				6C31537328C0A6440001B565 /* QuickStartViewController.h */,
-				6C31537428C0A6440001B565 /* QuickStartViewController.m */,
+				6CC3E7A628C1BD8600AA934B /* QuickStartViewController.h */,
+				6CC3E7A528C1BD8600AA934B /* QuickStartViewController.m */,
+				6C31541628C0BF890001B565 /* SudNFTQsCnAuthViewController.h */,
+				6C31541928C0BF8A0001B565 /* SudNFTQsCnAuthViewController.m */,
+				6C31541A28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.h */,
+				6C31541B28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.m */,
+				6C31541728C0BF890001B565 /* SudNFTQsNFTListViewController.h */,
+				6C31541828C0BF8A0001B565 /* SudNFTQsNFTListViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2025,38 +2010,38 @@
 		6C3153A928C0ADA40001B565 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6C3153FA28C0BB930001B565 /* BindBtnView.h */,
-				6C31540528C0BB940001B565 /* BindBtnView.m */,
-				6C3153EA28C0BB910001B565 /* BindWalletStateView.h */,
-				6C3153F228C0BB920001B565 /* BindWalletStateView.m */,
-				6C3153F828C0BB930001B565 /* CNWalletDeletePopView.h */,
-				6C31540228C0BB930001B565 /* CNWalletDeletePopView.m */,
-				6C3153EF28C0BB920001B565 /* CNWalletSelectCell.h */,
-				6C31540028C0BB930001B565 /* CNWalletSelectCell.m */,
-				6C3153F628C0BB920001B565 /* CNWalletSelectPopView.h */,
-				6C3153FB28C0BB930001B565 /* CNWalletSelectPopView.m */,
-				6C3153F728C0BB920001B565 /* ForeignWalletSelectCell.h */,
-				6C31540128C0BB930001B565 /* ForeignWalletSelectCell.m */,
-				6C3153E928C0BB910001B565 /* ForeignWalletSelectPopView.h */,
-				6C3153F128C0BB920001B565 /* ForeignWalletSelectPopView.m */,
-				6C3153FF28C0BB930001B565 /* MyBindWalletView.h */,
-				6C3153FE28C0BB930001B565 /* MyBindWalletView.m */,
-				6C3153F428C0BB920001B565 /* MyCNWalletSwitchCell.h */,
-				6C3153E628C0BB910001B565 /* MyCNWalletSwitchCell.m */,
-				6C3153F328C0BB920001B565 /* MyCNWalletSwitchPopView.h */,
-				6C3153F028C0BB920001B565 /* MyCNWalletSwitchPopView.m */,
-				6C3153E728C0BB910001B565 /* MyEthereumChainsSelectCell.h */,
-				6C3153E828C0BB910001B565 /* MyEthereumChainsSelectCell.m */,
-				6C3153EE28C0BB920001B565 /* MyEthereumChainsSelectPopView.h */,
-				6C3153F928C0BB930001B565 /* MyEthereumChainsSelectPopView.m */,
-				6C3153FC28C0BB930001B565 /* MyHeaderView.h */,
-				6C3153FD28C0BB930001B565 /* MyHeaderView.m */,
-				6C3153F528C0BB920001B565 /* MyNFTColCell.h */,
-				6C31540328C0BB940001B565 /* MyNFTColCell.m */,
-				6C3153EB28C0BB910001B565 /* MyNFTView.h */,
-				6C3153EC28C0BB910001B565 /* MyNFTView.m */,
-				6C3153ED28C0BB910001B565 /* MySelectEtherChainsView.h */,
-				6C31540428C0BB940001B565 /* MySelectEtherChainsView.m */,
+				6C3153FA28C0BB930001B565 /* SudNFTQsBindBtnView.h */,
+				6C31540528C0BB940001B565 /* SudNFTQsBindBtnView.m */,
+				6C3153EA28C0BB910001B565 /* SudNFTQsBindWalletStateView.h */,
+				6C3153F228C0BB920001B565 /* SudNFTQsBindWalletStateView.m */,
+				6C3153F828C0BB930001B565 /* SudNFTQsCnWalletDeletePopView.h */,
+				6C31540228C0BB930001B565 /* SudNFTQsCnWalletDeletePopView.m */,
+				6C3153EF28C0BB920001B565 /* SudNFTQsCnWalletSelectCell.h */,
+				6C31540028C0BB930001B565 /* SudNFTQsCnWalletSelectCell.m */,
+				6C3153F628C0BB920001B565 /* SudNFTQsCnWalletSelectPopView.h */,
+				6C3153FB28C0BB930001B565 /* SudNFTQsCnWalletSelectPopView.m */,
+				6C3153F728C0BB920001B565 /* SudNFTQsForeignWalletSelectCell.h */,
+				6C31540128C0BB930001B565 /* SudNFTQsForeignWalletSelectCell.m */,
+				6C3153E928C0BB910001B565 /* SudNFTQsForeignWalletSelectPopView.h */,
+				6C3153F128C0BB920001B565 /* SudNFTQsForeignWalletSelectPopView.m */,
+				6C3153FF28C0BB930001B565 /* SudNFTQsBindWalletView.h */,
+				6C3153FE28C0BB930001B565 /* SudNFTQsBindWalletView.m */,
+				6C3153F428C0BB920001B565 /* SudNFTQsCnWalletSwitchCell.h */,
+				6C3153E628C0BB910001B565 /* SudNFTQsCnWalletSwitchCell.m */,
+				6C3153F328C0BB920001B565 /* SudNFTQsCnWalletSwitchPopView.h */,
+				6C3153F028C0BB920001B565 /* SudNFTQsCnWalletSwitchPopView.m */,
+				6C3153E728C0BB910001B565 /* SudNFTQsEthereumChainsSelectCell.h */,
+				6C3153E828C0BB910001B565 /* SudNFTQsEthereumChainsSelectCell.m */,
+				6C3153EE28C0BB920001B565 /* SudNFTQsEthereumChainsSelectPopView.h */,
+				6C3153F928C0BB930001B565 /* SudNFTQsEthereumChainsSelectPopView.m */,
+				6C3153FC28C0BB930001B565 /* SudNFTQsHeaderView.h */,
+				6C3153FD28C0BB930001B565 /* SudNFTQsHeaderView.m */,
+				6C3153F528C0BB920001B565 /* SudNFTQsNFTColCell.h */,
+				6C31540328C0BB940001B565 /* SudNFTQsNFTColCell.m */,
+				6C3153EB28C0BB910001B565 /* SudNFTQsNFTView.h */,
+				6C3153EC28C0BB910001B565 /* SudNFTQsNFTView.m */,
+				6C3153ED28C0BB910001B565 /* SudNFTQsSelectEtherChainsView.h */,
+				6C31540428C0BB940001B565 /* SudNFTQsSelectEtherChainsView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2064,12 +2049,12 @@
 		6C3153AA28C0AEB30001B565 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6C31542028C0BF9A0001B565 /* HSNFTListCellModel.h */,
-				6C31542128C0BF9B0001B565 /* HSNFTListCellModel.m */,
-				6C31541F28C0BF9A0001B565 /* MyCNWalletSwitchCellModel.h */,
-				6C31542228C0BF9B0001B565 /* MyCNWalletSwitchCellModel.m */,
-				6C31542428C0BF9B0001B565 /* MyEthereumChainsCellModel.h */,
-				6C31542328C0BF9B0001B565 /* MyEthereumChainsCellModel.m */,
+				6C31542028C0BF9A0001B565 /* SudNFTQSNFTListCellModel.h */,
+				6C31542128C0BF9B0001B565 /* SudNFTQSNFTListCellModel.m */,
+				6C31541F28C0BF9A0001B565 /* SudNFTQsCnWalletSwitchCellModel.h */,
+				6C31542228C0BF9B0001B565 /* SudNFTQsCnWalletSwitchCellModel.m */,
+				6C31542428C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.h */,
+				6C31542328C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3071,6 +3056,7 @@
 				4455AE2127EAC71A001516EE /* SceneFactory.m in Sources */,
 				6CE6CD2C283F591C0026BDAB /* DTAlertView.m in Sources */,
 				6C460871286DB5CF005C99EF /* DiscoRankTableViewCell.m in Sources */,
+				6CC3E77B28C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m in Sources */,
 				6CE6CD40283F591C0026BDAB /* BaseModel.m in Sources */,
 				44D9F3AB280FC08C000B14B5 /* GameConfigViewController.m in Sources */,
 				4455AE0727EAC6F7001516EE /* BaseSceneViewController+Voice.m in Sources */,
@@ -3127,6 +3113,7 @@
 				4455AD8D27EAC658001516EE /* ChangeRTCTCell.m in Sources */,
 				4455AE0927EAC6F7001516EE /* AudioRoomMicModel.m in Sources */,
 				4455ADA727EAC658001516EE /* ShowViewController.m in Sources */,
+				6CC3E79F28C1BBB800AA934B /* ForeignWalletSelectCell.m in Sources */,
 				6C076E71279E429E00650209 /* ZegoAudioEngineImpl.m in Sources */,
 				6C076ED127A253C100650209 /* RespUserInfoModel.m in Sources */,
 				4455ADA127EAC658001516EE /* MicListModel.m in Sources */,
@@ -3140,6 +3127,7 @@
 				E5EDC0BE281B941D00E6875B /* AsyncCallWrapper.m in Sources */,
 				6C4607C828520D22005C99EF /* GuessRoomService.m in Sources */,
 				6C076E7D279E833C00650209 /* AudioEngineFactory.m in Sources */,
+				6CC3E79828C1BBB800AA934B /* MySelectEtherChainsView.m in Sources */,
 				4455AE1627EAC6F7001516EE /* RoomInputView.m in Sources */,
 				4455AD9927EAC658001516EE /* HomeHeaderReusableView.m in Sources */,
 				4455AD8627EAC658001516EE /* ChangeRTCViewController.m in Sources */,
@@ -3154,6 +3142,7 @@
 				4455AE1527EAC6F7001516EE /* RoomOperatorView.m in Sources */,
 				6C460802285727B7005C99EF /* SwitchAutoGuessPopView.m in Sources */,
 				6CE6CD58283F591D0026BDAB /* HttpRequest.m in Sources */,
+				6CC3E7A428C1BBB800AA934B /* MyBindWalletView.m in Sources */,
 				4455ADA627EAC658001516EE /* OrderentertainmentViewController.m in Sources */,
 				4455AD8E27EAC658001516EE /* HSSetingHeadView.m in Sources */,
 				443BA4E3280D3BF8008B2BFB /* OrderChooseUsersCell.m in Sources */,
@@ -3170,6 +3159,7 @@
 				4455ADA527EAC658001516EE /* GameListTableViewCell.m in Sources */,
 				4455AD9C27EAC658001516EE /* GameListViewController.m in Sources */,
 				6C46082D28658E80005C99EF /* DiscoRoomViewController.m in Sources */,
+				6CC3E79A28C1BBB800AA934B /* BindWalletStateView.m in Sources */,
 				6CE6CD32283F591C0026BDAB /* DTRippleAnimationView.m in Sources */,
 				6CE6CD38283F591C0026BDAB /* BaseTableViewCell.m in Sources */,
 				6C4608202862B025005C99EF /* LandscapeNaviView.m in Sources */,
@@ -3186,6 +3176,8 @@
 				44BC48E228153ABB00E4E3F7 /* RoomOrderCreateModel.m in Sources */,
 				443BA4E6280D41FF008B2BFB /* OrderChooseGamesCell.m in Sources */,
 				6CE6CD4E283F591D0026BDAB /* NSBundle+Language.m in Sources */,
+				6CC3E7A328C1BBB800AA934B /* MyNFTView.m in Sources */,
+				6CC3E79C28C1BBB800AA934B /* MyHeaderView.m in Sources */,
 				6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */,
 				4452DDDB28112BFE001FEEDB /* CustomRoomHelpView.m in Sources */,
 				6C460884286EFA22005C99EF /* DiscoMenuRuleView.m in Sources */,
@@ -3225,13 +3217,17 @@
 				6C4607B928519FB3005C99EF /* RankNumItemView.m in Sources */,
 				6C4607B628519618005C99EF /* RankHeadItemView.m in Sources */,
 				4455AE2027EAC71A001516EE /* BaseSceneConfigModel.m in Sources */,
+				6CC3E7A228C1BBB800AA934B /* MyCNWalletSwitchPopView.m in Sources */,
 				4455AE1727EAC6F7001516EE /* RoomMsgTableView.m in Sources */,
 				443BA4E9280D450B008B2BFB /* OrderChooseGamesView.m in Sources */,
+				6CC3E79E28C1BBB800AA934B /* CNWalletSelectCell.m in Sources */,
 				44C8FF9227F318A70030ED40 /* TicketRoomService.m in Sources */,
 				6C4607B32851908F005C99EF /* GuessRankTableViewCell.m in Sources */,
 				44D9F3B0280FF6CC000B14B5 /* RoomCustomModel.m in Sources */,
+				6CC3E79D28C1BBB800AA934B /* MyEthereumChainsSelectPopView.m in Sources */,
 				44BC48E8281543FE00E4E3F7 /* RoomCmdOrderOperateModel.m in Sources */,
 				6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */,
+				6CC3E79B28C1BBB800AA934B /* BindBtnView.m in Sources */,
 				448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */,
 				4455AD9827EAC658001516EE /* SearchHeaderView.m in Sources */,
 				44DD7529281293B60041FE3C /* PKRuleView.m in Sources */,
@@ -3259,6 +3255,7 @@
 				6CD6E87927BF431500D8F76C /* AliyunAudioEngineImpl.m in Sources */,
 				E51A737828091CD00097007C /* ZIMManager.m in Sources */,
 				44241ADE27EACF9C001EE125 /* SwitchLangModel.m in Sources */,
+				6CC3E77A28C1BB7D00AA934B /* MyEthereumChainsCellModel.m in Sources */,
 				6CE6CD44283F591C0026BDAB /* BaseCollectionViewCell.m in Sources */,
 				4455AD9227EAC658001516EE /* LoginModel.m in Sources */,
 				6CE6CD3C283F591C0026BDAB /* BaseView.m in Sources */,
@@ -3268,10 +3265,12 @@
 				BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */,
 				BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */,
 				6CE6CD2E283F591C0026BDAB /* DTPaddingLabel.m in Sources */,
+				6CC3E7A028C1BBB800AA934B /* CNWalletSelectPopView.m in Sources */,
 				6C46086E286DAC76005C99EF /* DiscoRankPopView.m in Sources */,
 				6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */,
 				6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */,
 				6C46082328630CD7005C99EF /* RespGiftListModel.m in Sources */,
+				6CC3E77C28C1BB7D00AA934B /* HSNFTListCellModel.m in Sources */,
 				BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */,
 				443BA4EC280D5F11008B2BFB /* HomeCategoryView.m in Sources */,
 				6CE6CD4C283F591D0026BDAB /* NSString+DTNSString.m in Sources */,
@@ -3281,6 +3280,7 @@
 				6CE6CD62283F591D0026BDAB /* ToastUtil.m in Sources */,
 				BC210FF63EC24685CBC7FBAC /* SuspendRoomView.m in Sources */,
 				BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */,
+				6CC3E7A128C1BBB800AA934B /* CNWalletDeletePopView.m in Sources */,
 				BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */,
 				6C4607AA285083CB005C99EF /* GuessRankViewController.m in Sources */,
 				BC2104A997878EE07744E080 /* PKRoomService.m in Sources */,
@@ -3299,6 +3299,7 @@
 				6C4607C12851F725005C99EF /* DanmakuRoomViewController.m in Sources */,
 				BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */,
 				BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */,
+				6CC3E79928C1BBB800AA934B /* ForeignWalletSelectPopView.m in Sources */,
 				BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */,
 				6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */,
 				BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */,
@@ -3314,31 +3315,14 @@
 				BC210A75257DF698A543C29A /* DiscoInteractiveColCell.m in Sources */,
 				BC21090932848A4335D3546F /* MyViewController.m in Sources */,
 				BC210379CA8856A0C91448E4 /* MyCell.m in Sources */,
-				BC210B4F08432BD34551F5AF /* MyHeaderView.m in Sources */,
 				BC2106C085BCFA772D1B9F96 /* AboutViewController.m in Sources */,
-				BC2107A7C8A2991A5FD3E278 /* MyBindWalletView.m in Sources */,
-				BC2107536FE74BA445EB4391 /* MyNFTView.m in Sources */,
-				BC2107EAE0746B2D4D2234C6 /* MyNFTListViewController.m in Sources */,
 				BC210E8DA59477CC32152825 /* MyNFTColCell.m in Sources */,
-				BC21066011CC87113AF9D72E /* MyNFTDetailViewController.m in Sources */,
-				BC21075C27415E8D75B17780 /* HSNFTListCellModel.m in Sources */,
-				BC210B9DC5576C2A85DA0C43 /* MySelectEtherChainsView.m in Sources */,
 				BC210B0390E117B09344D025 /* HSAppPreferences.m in Sources */,
-				BC210DB9E4315AD74EA732A8 /* MyEthereumChainsSelectPopView.m in Sources */,
 				BC210E2F0BACA26837C44BBC /* MyEthereumChainsSelectCell.m in Sources */,
-				BC210ACE5AEABF2588AFE747 /* MyEthereumChainsCellModel.m in Sources */,
 				BC210A7C7C41EA6AC304F981 /* RoomCmdKickoutRoomModel.m in Sources */,
-				BC21087036D5517BE88A12AE /* BindBtnView.m in Sources */,
-				BC210AAE6896B522765C1CEF /* BindWalletStateView.m in Sources */,
-				BC210C90D4424C7B2370D49A /* ForeignWalletSelectPopView.m in Sources */,
-				BC21010CE9F221A2322EF0A1 /* ForeignWalletSelectCell.m in Sources */,
-				BC210B7BFEE93DC9BB3913DE /* CNWalletSelectPopView.m in Sources */,
-				BC210BC43036C2D9D3EA134A /* CNWalletSelectCell.m in Sources */,
-				BC210BD588F8A5B32D42822C /* CNAuthViewController.m in Sources */,
-				BC2103DA9F9CA5AA54227DAC /* MyCNWalletSwitchPopView.m in Sources */,
 				BC210F1416AECFDE1A4FEA19 /* MyCNWalletSwitchCell.m in Sources */,
-				BC210B241681A29E5780F9B4 /* MyCNWalletSwitchCellModel.m in Sources */,
-				BC210EC9795366E2AD391AC7 /* CNWalletDeletePopView.m in Sources */,
+				BC210D1C881B0F781AF55226 /* CNAuthViewController.m in Sources */,
+				BC210E61BEB5F8B208DFF505 /* MyNFTDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3348,11 +3332,11 @@
 			files = (
 				6C31538428C0A9A40001B565 /* DTSlider.m in Sources */,
 				6C31539428C0A9B70001B565 /* BaseViewController.m in Sources */,
-				6C31540D28C0BB940001B565 /* CNWalletSelectPopView.m in Sources */,
+				6C31540D28C0BB940001B565 /* SudNFTQsCnWalletSelectPopView.m in Sources */,
 				6C31539328C0A9B70001B565 /* BaseTextView.m in Sources */,
 				6C3153A228C0A9EC0001B565 /* DeviceUtil.m in Sources */,
 				6C3153A028C0A9EC0001B565 /* AppUtil.m in Sources */,
-				6C31540F28C0BB940001B565 /* MyBindWalletView.m in Sources */,
+				6C31540F28C0BB940001B565 /* SudNFTQsBindWalletView.m in Sources */,
 				6C31539A28C0A9D30001B565 /* DTUIDevice+Extension.m in Sources */,
 				6C31538528C0A9A40001B565 /* DTRippleAnimationView.m in Sources */,
 				6C31539128C0A9B70001B565 /* BaseModel.m in Sources */,
@@ -3360,50 +3344,50 @@
 				6C31539D28C0A9D30001B565 /* DTUIImage+Extension.m in Sources */,
 				6C31538928C0A9A40001B565 /* DTWebViewController.m in Sources */,
 				6C31538828C0A9A40001B565 /* DTBlurEffectView.m in Sources */,
-				6C31540628C0BB940001B565 /* MyCNWalletSwitchCell.m in Sources */,
-				6C31537528C0A6440001B565 /* QuickStartViewController.m in Sources */,
-				6C31541228C0BB940001B565 /* CNWalletDeletePopView.m in Sources */,
+				6C31540628C0BB940001B565 /* SudNFTQsCnWalletSwitchCell.m in Sources */,
+				6C31541228C0BB940001B565 /* SudNFTQsCnWalletDeletePopView.m in Sources */,
 				6C31538628C0A9A40001B565 /* DTAlertView.m in Sources */,
-				6C31542728C0BF9B0001B565 /* MyEthereumChainsCellModel.m in Sources */,
+				6C31542728C0BF9B0001B565 /* SudNFTQsCnEthereumChainsCellModel.m in Sources */,
 				6C31539B28C0A9D30001B565 /* NSBundle+Language.m in Sources */,
-				6C31541328C0BB940001B565 /* MyNFTColCell.m in Sources */,
+				6C31541328C0BB940001B565 /* SudNFTQsNFTColCell.m in Sources */,
 				6C31539E28C0A9E20001B565 /* HttpRequest.m in Sources */,
 				6C31538B28C0A9A40001B565 /* DTPaddingLabel.m in Sources */,
-				6C31542628C0BF9B0001B565 /* MyCNWalletSwitchCellModel.m in Sources */,
-				6C31540728C0BB940001B565 /* MyEthereumChainsSelectCell.m in Sources */,
+				6C31542628C0BF9B0001B565 /* SudNFTQsCnWalletSwitchCellModel.m in Sources */,
+				6C31540728C0BB940001B565 /* SudNFTQsEthereumChainsSelectCell.m in Sources */,
 				6C3153A328C0A9EC0001B565 /* ToastUtil.m in Sources */,
 				6C31539028C0A9B70001B565 /* BaseAlertView.m in Sources */,
-				6C31540828C0BB940001B565 /* MyNFTView.m in Sources */,
+				6C31540828C0BB940001B565 /* SudNFTQsNFTView.m in Sources */,
 				6C31539528C0A9B70001B565 /* BaseTableViewCell.m in Sources */,
-				6C31540E28C0BB940001B565 /* MyHeaderView.m in Sources */,
+				6C31540E28C0BB940001B565 /* SudNFTQsHeaderView.m in Sources */,
 				6C31539F28C0A9E60001B565 /* DTTimer.m in Sources */,
-				6C31540B28C0BB940001B565 /* BindWalletStateView.m in Sources */,
-				6C31540928C0BB940001B565 /* MyCNWalletSwitchPopView.m in Sources */,
-				6C31540C28C0BB940001B565 /* MyEthereumChainsSelectPopView.m in Sources */,
+				6C31540B28C0BB940001B565 /* SudNFTQsBindWalletStateView.m in Sources */,
+				6C31540928C0BB940001B565 /* SudNFTQsCnWalletSwitchPopView.m in Sources */,
+				6C31540C28C0BB940001B565 /* SudNFTQsEthereumChainsSelectPopView.m in Sources */,
 				6C31536F28C0A6440001B565 /* AppDelegate.m in Sources */,
 				6C31538728C0A9A40001B565 /* DTTextAlertView.m in Sources */,
-				6C31541428C0BB940001B565 /* MySelectEtherChainsView.m in Sources */,
+				6C31541428C0BB940001B565 /* SudNFTQsSelectEtherChainsView.m in Sources */,
 				6C31539728C0A9D30001B565 /* DTUIView+Extension.m in Sources */,
 				6C31538E28C0A9B70001B565 /* BaseCollectionViewCell.m in Sources */,
 				6C31538A28C0A9A40001B565 /* DTSheetView.m in Sources */,
+				6CC3E7A728C1BD8600AA934B /* QuickStartViewController.m in Sources */,
 				6C31539828C0A9D30001B565 /* DTNSArray+Masonry.m in Sources */,
 				6C3153B428C0B0B10001B565 /* SudNFTQSAppPreferences.m in Sources */,
 				6C31538D28C0A9B70001B565 /* BaseNavigationViewController.m in Sources */,
 				6C3153A128C0A9EC0001B565 /* HSThreadUtils.m in Sources */,
-				6C31541128C0BB940001B565 /* ForeignWalletSelectCell.m in Sources */,
+				6C31541128C0BB940001B565 /* SudNFTQsForeignWalletSelectCell.m in Sources */,
 				6C31539628C0A9D30001B565 /* NSString+DTNSString.m in Sources */,
 				6C31539228C0A9B70001B565 /* BaseCollectionReusableView.m in Sources */,
-				6C31541028C0BB940001B565 /* CNWalletSelectCell.m in Sources */,
-				6C31541C28C0BF8A0001B565 /* MyNFTListViewController.m in Sources */,
-				6C31542528C0BF9B0001B565 /* HSNFTListCellModel.m in Sources */,
+				6C31541028C0BB940001B565 /* SudNFTQsCnWalletSelectCell.m in Sources */,
+				6C31541C28C0BF8A0001B565 /* SudNFTQsNFTListViewController.m in Sources */,
+				6C31542528C0BF9B0001B565 /* SudNFTQSNFTListCellModel.m in Sources */,
 				6C31538028C0A6470001B565 /* main.m in Sources */,
 				6C31539C28C0A9D30001B565 /* DTNSError+Custom.m in Sources */,
-				6C31541E28C0BF8A0001B565 /* MyNFTDetailViewController.m in Sources */,
-				6C31541528C0BB940001B565 /* BindBtnView.m in Sources */,
+				6C31541E28C0BF8A0001B565 /* SudNFTQsNFTDetailViewController.m in Sources */,
+				6C31541528C0BB940001B565 /* SudNFTQsBindBtnView.m in Sources */,
 				6C31539928C0A9D30001B565 /* DTUIColor+Extension.m in Sources */,
 				6C3153A428C0A9EC0001B565 /* LanguageUtil.m in Sources */,
-				6C31540A28C0BB940001B565 /* ForeignWalletSelectPopView.m in Sources */,
-				6C31541D28C0BF8A0001B565 /* CNAuthViewController.m in Sources */,
+				6C31540A28C0BB940001B565 /* SudNFTQsForeignWalletSelectPopView.m in Sources */,
+				6C31541D28C0BF8A0001B565 /* SudNFTQsCnAuthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
