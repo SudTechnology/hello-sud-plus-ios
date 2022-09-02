@@ -137,7 +137,7 @@
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];
-            weakSelf.getCodeBtn.enabled = NO;
+            weakSelf.getCodeBtn.enabled = YES;
             return;
         }
         [weakSelf showCountdown];
