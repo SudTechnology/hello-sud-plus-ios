@@ -97,11 +97,11 @@
         weakSelf.gameImageView.image = [UIImage imageNamed:@"default_nft_icon"];
     }
     BOOL isWear = NO;
-    if (HSAppPreferences.shared.isBindForeignWallet) {
-        isWear = [AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
-    } else if (HSAppPreferences.shared.isBindCNWallet) {
-        isWear = [AppService.shared isNFTAlreadyUsed:m.cardModel.cardHash tokenId:m.cardModel.chainAddr];
-    }
+//    if (SudNFTQSAppPreferences.shared.isBindForeignWallet) {
+//        isWear = [AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
+//    } else if (HSAppPreferences.shared.isBindCNWallet) {
+//        isWear = [AppService.shared isNFTAlreadyUsed:m.cardModel.cardHash tokenId:m.cardModel.chainAddr];
+//    }
     self.tagView.hidden = isWear ? NO : YES;
 }
 

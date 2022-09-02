@@ -5,7 +5,7 @@
 
 #import "MyBindWalletView.h"
 #import "BindBtnView.h"
-#import "MyViewController.h"
+#import "../VC/QuickStartViewController.h"
 #import "ForeignWalletSelectPopView.h"
 #import "CNWalletSelectPopView.h"
 
@@ -66,7 +66,6 @@
 }
 
 - (void)dtUpdateUI {
-    AccountUserModel *userInfo = AppService.shared.login.loginUserInfo;
     [self updateMoreShowState];
 }
 
@@ -81,11 +80,6 @@
     self.isMoreOpened = !self.isMoreOpened;
     [self updateMoreShowState];
     [self updateSupportWallet:self.walletList];
-    UIViewController *currentViewController = AppUtil.currentViewController;
-    if ([currentViewController isKindOfClass:MyViewController.class]) {
-        MyViewController *myViewController = (MyViewController *) currentViewController;
-        [myViewController reloadHeadView];
-    }
 
 }
 

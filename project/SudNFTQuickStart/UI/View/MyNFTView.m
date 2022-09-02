@@ -189,7 +189,7 @@
     NSInteger zoneType = SudNFTQSAppPreferences.shared.bindZoneType;
     if (zoneType == 1) {
         /// 国内钱包
-        for (SudNFTWalletInfoModel *m in AppService.shared.walletList) {
+        for (SudNFTWalletInfoModel *m in SudNFTQSAppPreferences.shared.walletList) {
             if (m.type == SudNFTQSAppPreferences.shared.currentSelectedWalletType) {
                 [self.chainsView updateWithWalletInfoModel:m];
                 break;

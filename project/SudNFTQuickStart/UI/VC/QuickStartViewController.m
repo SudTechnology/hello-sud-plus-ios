@@ -27,7 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = UIColor.orangeColor;
+//    self.view.backgroundColor = UIColor.orangeColor;
+    self.title = @"SudNFTQuickStart";
     [self configSudNFT];
 }
 
@@ -170,7 +171,9 @@
     [self reloadHeadView];
     CGFloat w = kScreenWidth - 32;
     [self.myHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.top.equalTo(@0);
+        make.top.equalTo(@0);
+        make.leading.equalTo(@16);
+        make.trailing.equalTo(@-16);
         make.width.equalTo(@(w));
         make.height.greaterThanOrEqualTo(@0);
     }];

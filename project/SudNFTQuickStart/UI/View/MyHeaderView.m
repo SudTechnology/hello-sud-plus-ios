@@ -4,7 +4,7 @@
 //
 
 #import "MyHeaderView.h"
-#import "UserDetailView.h"
+//#import "UserDetailView.h"
 #import "MyBindWalletView.h"
 #import "MyNFTView.h"
 
@@ -69,7 +69,8 @@
         make.leading.top.trailing.bottom.equalTo(@0);
     }];
     [self.nftView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.headerView.mas_bottom).offset(20);
+//        make.top.mas_equalTo(self.headerView.mas_bottom).offset(20);
+        make.top.equalTo(@20);
         make.leading.equalTo(@0);
         make.trailing.equalTo(@0);
         make.height.greaterThanOrEqualTo(@0);
@@ -80,24 +81,24 @@
 }
 
 - (void)dtUpdateUI {
-    AccountUserModel *userInfo = AppService.shared.login.loginUserInfo;
-    self.userNameLabel.text = userInfo.name;
-    self.userIdLabel.text = [NSString stringWithFormat:@"%@ %@", NSString.dt_home_user_id, userInfo.userID];
-    if (userInfo.icon.length > 0) {
-        SDWebImageContext *context = nil;
-        NSURL *url = [[NSURL alloc] initWithString:userInfo.icon];
-        if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame){
-            context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(200, 200))};
-        }
-        [self.headerView  sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        }];
-    }
+//    AccountUserModel *userInfo = AppService.shared.login.loginUserInfo;
+//    self.userNameLabel.text = userInfo.name;
+//    self.userIdLabel.text = [NSString stringWithFormat:@"%@ %@", NSString.dt_home_user_id, userInfo.userID];
+//    if (userInfo.icon.length > 0) {
+//        SDWebImageContext *context = nil;
+//        NSURL *url = [[NSURL alloc] initWithString:userInfo.icon];
+//        if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame){
+//            context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(200, 200))};
+//        }
+//        [self.headerView  sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+//        }];
+//    }
 
-    BOOL isBindWallet = HSAppPreferences.shared.isBindWallet;
+    BOOL isBindWallet = SudNFTQSAppPreferences.shared.isBindWallet;
     if (isBindWallet) {
         // 绑定过了钱包
-        if (HSAppPreferences.shared.isBindForeignWallet) {
-            self.walletAddressLabel.text = HSAppPreferences.shared.walletAddress;
+        if (SudNFTQSAppPreferences.shared.isBindForeignWallet) {
+            self.walletAddressLabel.text = SudNFTQSAppPreferences.shared.walletAddress;
             self.walletAddressLabel.hidden = NO;
             self.userIdLabel.hidden = YES;
         } else {
@@ -105,7 +106,7 @@
             self.userIdLabel.hidden = NO;
         }
         self.deleteBtn.hidden = NO;
-        self.deleteBtn.selected = HSAppPreferences.shared.bindZoneType == 1;
+        self.deleteBtn.selected = SudNFTQSAppPreferences.shared.bindZoneType == 1;
         if (_bindView) {
             [_bindView removeFromSuperview];
             _bindView = nil;
@@ -161,10 +162,10 @@
 
 - (void)onTapHead:(id)tap {
     /// 展示用户金币信息
-    UserDetailView *v = [[UserDetailView alloc] init];
-    [DTAlertView show:v rootView:AppUtil.currentWindow clickToClose:YES showDefaultBackground:YES onCloseCallback:^{
-
-    }];
+//    UserDetailView *v = [[UserDetailView alloc] init];
+//    [DTAlertView show:v rootView:AppUtil.currentWindow clickToClose:YES showDefaultBackground:YES onCloseCallback:^{
+//
+//    }];
 }
 
 - (void)onDeleteWalletClick:(id)sender {

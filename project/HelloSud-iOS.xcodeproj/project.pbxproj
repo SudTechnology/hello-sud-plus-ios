@@ -181,7 +181,6 @@
 		6C3153A228C0A9EC0001B565 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD20283F591C0026BDAB /* DeviceUtil.m */; };
 		6C3153A328C0A9EC0001B565 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD22283F591C0026BDAB /* ToastUtil.m */; };
 		6C3153A428C0A9EC0001B565 /* LanguageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD1F283F591C0026BDAB /* LanguageUtil.m */; };
-		6C3153B028C0AF9E0001B565 /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */; };
 		6C3153B428C0B0B10001B565 /* SudNFTQSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153B328C0B0B10001B565 /* SudNFTQSAppPreferences.m */; };
 		6C31540628C0BB940001B565 /* MyCNWalletSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E628C0BB910001B565 /* MyCNWalletSwitchCell.m */; };
 		6C31540728C0BB940001B565 /* MyEthereumChainsSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3153E828C0BB910001B565 /* MyEthereumChainsSelectCell.m */; };
@@ -253,6 +252,8 @@
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
 		6C8D02D028AB774100C230E5 /* DTUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */; };
+		6CC3E77128C1A6EF00AA934B /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */; };
+		6CC3E77228C1A6EF00AA934B /* SudNFT.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6CCF8ACA287A464900DB3AB8 /* DiscoRankTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCF8AC9287A464900DB3AB8 /* DiscoRankTipView.m */; };
 		6CD6E85427BE37C300D8F76C /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85327BE37C300D8F76C /* LoginService.m */; };
 		6CD6E85727BE37D600D8F76C /* SettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E85627BE37D600D8F76C /* SettingsService.m */; };
@@ -412,6 +413,17 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CC3E77328C1A6EF00AA934B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6CC3E77228C1A6EF00AA934B /* SudNFT.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1147,7 +1159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02B27BD4749E838D1FB7E81D /* Pods_SudNFTQuickStart.framework in Frameworks */,
-				6C3153B028C0AF9E0001B565 /* SudNFT.xcframework in Frameworks */,
+				6CC3E77128C1A6EF00AA934B /* SudNFT.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2793,6 +2805,7 @@
 				6C31536828C0A6440001B565 /* Frameworks */,
 				6C31536928C0A6440001B565 /* Resources */,
 				9F16B6A6C71FF462AA928BD8 /* [CP] Embed Pods Frameworks */,
+				6CC3E77328C1A6EF00AA934B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

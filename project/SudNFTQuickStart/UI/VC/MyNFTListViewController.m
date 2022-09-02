@@ -108,7 +108,7 @@
 #pragma mark - requst Data
 
 - (void)reqData:(BOOL)isMore {
-    if (HSAppPreferences.shared.isBindCNWallet) {
+    if (SudNFTQSAppPreferences.shared.isBindCNWallet) {
         [self requestCardListData:isMore];
     } else {
         [self requestNFTListData:isMore];
@@ -123,7 +123,7 @@
     paramModel.walletAddress = SudNFTQSAppPreferences.shared.walletAddress;
     paramModel.chainType = SudNFTQSAppPreferences.shared.selectedEthereumChainType;
     if (isMore) {
-        paramModel.pageKey = HSAppPreferences.shared.nftListPageKey;
+        paramModel.pageKey = SudNFTQSAppPreferences.shared.nftListPageKey;
         if (paramModel.pageKey.length == 0) {
             [self.collectionView.mj_footer endRefreshingWithNoMoreData];
             return;
