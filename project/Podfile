@@ -94,3 +94,30 @@ target 'QuickStart' do
   pod 'SudMGPWrapper', :path => './'
 end
 
+# SudNFTQuickStart
+target 'SudNFTQuickStart' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # 富文本
+  pod 'YYText', '~> 1.0.7'
+  # 自动布局
+  pod 'Masonry', '~> 1.1.0'
+  # json序列化
+  pod 'MJExtension', '~> 3.4.1'
+  # 下拉刷新
+  pod 'MJRefresh', '3.7.5'
+  # Http网络请求库
+  pod 'AFNetworking', '~> 4.0.1'
+  # Toast
+  pod 'SVProgressHUD', '~> 2.2.5'
+  # 图片加载
+  pod 'SDWebImage', '5.12.2'
+  # 键盘管理
+  pod 'IQKeyboardManager', '~> 6.5.9'
+  # 跑马灯
+  pod 'MarqueeLabel'
+  # 日志
+  pod 'CocoaLumberjack'
+
+end

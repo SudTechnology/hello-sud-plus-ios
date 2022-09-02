@@ -5,12 +5,12 @@
 //  Created by Mary on 2022/1/20.
 //
 
-#import "CNAuthViewController.h"
+#import "SQSCnAuthViewController.h"
 #import "MainTabBarController.h"
 #import "SweetPromptView.h"
 #import "AppDelegate.h"
 
-@interface CNAuthViewController ()
+@interface SQSCnAuthViewController ()
 @property(nonatomic, strong) UIImageView *leftImageView;
 @property(nonatomic, strong) UIImageView *middleImageView;
 @property(nonatomic, strong) UIImageView *rightImageView;
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation CNAuthViewController
+@implementation SQSCnAuthViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -100,7 +100,7 @@
 /// 立即体验点击事件
 - (void)onAuthClick {
     SudNFTBindCnWalletParamModel *paramModel = SudNFTBindCnWalletParamModel.new;
-    paramModel.userId = AppService.shared.loginUserID;
+    paramModel.userId = SQSAppPreferences.shared.userId;
     paramModel.walletType = self.walletInfoModel.type;
     paramModel.smsCode = self.codeTextField.text;
     paramModel.phone = self.phoneTextField.text;
@@ -114,10 +114,10 @@
             [ToastUtil show:msg];
             return;
         }
-        HSAppPreferences.shared.currentSelectedWalletType = paramModel.walletType;
-        HSAppPreferences.shared.bindWalletType = paramModel.walletType;
-        HSAppPreferences.shared.bindZoneType = self.walletInfoModel.zoneType;
-        [HSAppPreferences.shared saveWalletTokenWithBindCnWalletModel:resp walletType:paramModel.walletType phone:paramModel.phone];
+        SQSAppPreferences.shared.currentSelectedWalletType = paramModel.walletType;
+        SQSAppPreferences.shared.bindWalletType = paramModel.walletType;
+        SQSAppPreferences.shared.bindZoneType = self.walletInfoModel.zoneType;
+        [SQSAppPreferences.shared saveWalletTokenWithBindCnWalletModel:resp walletType:paramModel.walletType phone:paramModel.phone];
         [ToastUtil show:@"授权成功"];
         if (self.bindSuccessBlock) {
             self.bindSuccessBlock();
@@ -137,7 +137,7 @@
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];
-            weakSelf.getCodeBtn.enabled = YES;
+            weakSelf.getCodeBtn.enabled = NO;
             return;
         }
         [weakSelf showCountdown];
@@ -298,7 +298,7 @@
 
 @end
 
-@implementation CNAuthViewController (LAZY)
+@implementation SQSCnAuthViewController (LAZY)
 
 - (UIImageView *)leftImageView {
     if (!_leftImageView) {
