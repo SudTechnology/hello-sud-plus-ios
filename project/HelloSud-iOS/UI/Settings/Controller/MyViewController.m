@@ -365,6 +365,9 @@
         [weakCoverView removeFromSuperview];
     };
     v.sureBlock = ^{
+        [UserService reqWearNFT:@"" isWear:NO success:nil fail:nil];
+        [UserService reqUnbindUser:0 success:nil fail:nil];
+        
         SudNFTUnBindCnWalletParamModel *paramModel = SudNFTUnBindCnWalletParamModel.new;
         paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
         paramModel.userId = AppService.shared.loginUserID;
@@ -384,6 +387,7 @@
         [weakSelf.myHeaderView dtUpdateUI];
         [weakSelf reloadHeadView];
         [weakSelf checkWalletInfo];
+
         [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
     };
 }
@@ -524,6 +528,10 @@
 /// 绑定钱包token过期，需要重新验证绑定
 - (void)onSudNFTBindWalletTokenExpired {
     DDLogWarn(@"onSudNFTBindWalletTokenExpired");
+    [UserService reqWearNFT:@"" isWear:NO success:nil fail:nil];
+    if (HSAppPreferences.shared.isBindCNWallet) {
+        [UserService reqUnbindUser:0 success:nil fail:nil];
+    }
     HSAppPreferences.shared.walletAddress = nil;
     NSInteger walletType = HSAppPreferences.shared.currentSelectedWalletType;
     [HSAppPreferences.shared clearBindUserInfoWithWalletType:walletType];
@@ -532,6 +540,12 @@
     [self reloadHeadView];
     [self checkWalletInfo];
     [self.navigationController popViewControllerAnimated:YES];
+    // 清空本地穿戴信息
+    AppService.shared.login.loginUserInfo.headerNftUrl = nil;
+    AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
+    [AppService.shared.login saveLoginUserInfo];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_WEAR_CHANGE_NTF object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
 }
 

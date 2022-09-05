@@ -104,6 +104,24 @@
 }
 
 
+/// 请求解绑用户
+/// @param bindType 绑定类型（0：稀物）
+/// @param success success description
+/// @param fail fail description
++ (void)reqUnbindUser:(NSInteger)bindType success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail {
+    [HSHttpService postRequestWithURL:kBASEURL(@"unbind/v1")
+                                param:@{@"bindType": @(bindType)}
+                            respClass:BaseRespModel.class
+                       showErrorToast:YES
+                              success:^(BaseRespModel *resp) {
+                                  if (success) {
+                                      success(resp);
+                                  }
+                              }
+                              failure:fail];
+}
+
+
 /// 查询用户信息
 /// @param userIDList 用户ID列表
 /// @param success 成功
