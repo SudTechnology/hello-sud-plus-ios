@@ -249,6 +249,7 @@
 		6C67317A28A1124600232992 /* libsvgnative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C67317728A1124600232992 /* libsvgnative.a */; };
 		6C702B6D283F8A46005D80B8 /* QSSwitchRoomModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */; };
 		6C702B6E283F8A46005D80B8 /* QSSwitchRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */; };
+		6C7CB61928C5E940003A19A8 /* MyNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */; };
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
 		6C8D02D028AB774100C230E5 /* DTUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */; };
 		6CC3E77128C1A6EF00AA934B /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */; };
@@ -885,6 +886,8 @@
 		6C702B6B283F8A46005D80B8 /* QSSwitchRoomModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomModeView.m; sourceTree = "<group>"; };
 		6C702B6C283F8A46005D80B8 /* QSSwitchRoomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSSwitchRoomCell.m; sourceTree = "<group>"; };
 		6C75F36A27C348A50019BB74 /* KeyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHeader.h; sourceTree = "<group>"; };
+		6C7CB61728C5DE73003A19A8 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
+		6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTListViewController.m; sourceTree = "<group>"; };
 		6C7E0CE42875EB0500DBA208 /* RespDiscoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespDiscoModel.h; sourceTree = "<group>"; };
 		6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespDiscoModel.m; sourceTree = "<group>"; };
 		6C8D02CE28AB774000C230E5 /* DTUIImage+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTUIImage+Extension.h"; sourceTree = "<group>"; };
@@ -1238,6 +1241,7 @@
 		4455ACBF27EAC657001516EE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */,
 				6CEF766627F5A22000A12220 /* MoreSettingViewController.h */,
 				6CEF766727F5A22000A12220 /* MoreSettingViewController.m */,
 				4455ACC427EAC657001516EE /* HSSettingViewController.h */,
@@ -1287,6 +1291,7 @@
 		4455ACCF27EAC657001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6C7CB61728C5DE73003A19A8 /* MyHeaderView.h */,
 				6CC3E77D28C1BBB500AA934B /* BindBtnView.h */,
 				6CC3E78328C1BBB600AA934B /* BindBtnView.m */,
 				6CC3E79228C1BBB700AA934B /* BindWalletStateView.h */,
@@ -3189,6 +3194,7 @@
 				443BA4E6280D41FF008B2BFB /* OrderChooseGamesCell.m in Sources */,
 				6CE6CD4E283F591D0026BDAB /* NSBundle+Language.m in Sources */,
 				6CC3E7A328C1BBB800AA934B /* MyNFTView.m in Sources */,
+				6C7CB61928C5E940003A19A8 /* MyNFTListViewController.m in Sources */,
 				6CC3E79C28C1BBB800AA934B /* MyHeaderView.m in Sources */,
 				6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */,
 				4452DDDB28112BFE001FEEDB /* CustomRoomHelpView.m in Sources */,
