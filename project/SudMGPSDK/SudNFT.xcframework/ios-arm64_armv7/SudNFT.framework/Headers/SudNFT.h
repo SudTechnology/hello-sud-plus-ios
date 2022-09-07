@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param listener 回调
 + (void)genCnNFTCredentialsToken:(SudNFTCnCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerCnGenNFTCredentialsToken)listener;
 
-/// 解绑用户
+/// 解绑国内钱包
 /// @param paramModel 参数
 /// @param listener 回调
 + (void)unbindCnWallet:(SudNFTUnBindCnWalletParamModel *)paramModel listener:(ISudNFTListenerUnBindCnWallet)listener;
