@@ -106,11 +106,7 @@
     paramModel.phone = self.phoneTextField.text;
     [SudNFT bindCnWallet:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindCnWalletModel *resp) {
         if (errCode != 0) {
-            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
-            if (errCode == 1030) {
-                [ToastUtil show:@"验证码错误(1030)"];
-                return;
-            }
+            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             return;
         }
@@ -135,7 +131,7 @@
     paramModel.walletType = self.walletInfoModel.type;
     [SudNFT sendSmsCode:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
         if (errCode != 0) {
-            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             weakSelf.getCodeBtn.enabled = YES;
             return;

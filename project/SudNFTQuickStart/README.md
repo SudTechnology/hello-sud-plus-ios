@@ -68,30 +68,30 @@
 /// @param listener 回调
 + (void)sendSmsCode:(SudNFTSendSmsCodeParamModel *)paramModel listener:(ISudNFTListenerSendSmsCode)listener;
 ```
-- 绑定藏品账户
+- 绑定国内钱包
 ```
-/// 绑定国内藏品账户
+/// 绑定国内钱包
 /// @param paramModel 参数model
 /// @param listener 回调
 + (void)bindCnWallet:(SudNFTBindCnWalletParamModel *)paramModel listener:(ISudNFTListenerBindCnWallet)listener;
 ```
-- 获取藏品列表
+- 获取国内NFT列表
 ```
 /// 获取国内NFT列表
 /// @param paramModel 参数model
 /// @param listener 回调
 + (void)getCnNFTList:(SudNFTGetCnNFTListParamModel *)paramModel listener:(ISudNFTListenerGetCnNFTList)listener;
 ```
-- 生成藏品使用唯一认证token
+- 生成国内NFT使用唯一认证token
 ```
 /// 生成国内NFT使用唯一认证token
 /// @param paramModel 参数model
 /// @param listener 回调
 + (void)genCnNFTCredentialsToken:(SudNFTCnCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerCnGenNFTCredentialsToken)listener;
 ```
-- 解绑绑定平台
+- 解绑国内钱包
 ```
-/// 解绑用户
+/// 解绑国内钱包
 /// @param paramModel 参数
 /// @param listener 回调
 + (void)unbindCnWallet:(SudNFTUnBindCnWalletParamModel *)paramModel listener:(ISudNFTListenerUnBindCnWallet)listener;

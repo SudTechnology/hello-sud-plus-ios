@@ -61,4 +61,6 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 
 /// 是否绑定了海外钱包
 - (BOOL)isBindForeignWallet;
+
+- (NSString *_Nullable)nftErrorMsg:(NSInteger)errCode errorMsg:(NSString *)errorMsg;
 @end

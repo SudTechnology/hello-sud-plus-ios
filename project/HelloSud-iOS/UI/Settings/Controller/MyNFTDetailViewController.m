@@ -66,7 +66,7 @@
     paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
     [SudNFT genNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenNFTCredentialsTokenModel *generateDetailTokenModel) {
         if (errCode != 0) {
-            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             sender.enabled = YES;
             if (errCode == 1008) {
@@ -89,7 +89,7 @@
     paramModel.cardId = self.cellModel.cardModel.cardId;
     [SudNFT genCnNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTCnCredentialsTokenModel *resp) {
         if (errCode != 0) {
-            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             sender.enabled = YES;
             if (errCode == 1008) {

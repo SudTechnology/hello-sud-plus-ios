@@ -207,4 +207,52 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
     self.bindWalletType = -1;
 }
 
+- (NSString *_Nullable)nftErrorMsg:(NSInteger)errCode errorMsg:(NSString *)errorMsg {
+    
+    static NSDictionary * errMsgMap = nil;
+    if (!errMsgMap) {
+        errMsgMap = @{
+            @"1000":@"服务异常",
+            @"1001":@"参数无效异常",
+            @"1002":@"应用信息不存在",
+            @"1003":@"应用id无效",
+            @"1004":@"应用平台无效",
+            @"1005":@"sdk令牌创建失败",
+            @"1006":@"sdk 令牌无效",
+            @"1007":@"钱包签名无效",
+            @"1008":@"钱包令牌无效",
+            @"1009":@"nft api配置不存在",
+            @"1010":@"钱包配置不存在",
+            @"1011":@"用户钱包随机数不存在",
+            @"1012":@"绑定用户钱包失败",
+            @"1013":@"nft url 未配置",
+            @"1014":@"nft不属于用户",
+            @"1015":@"nft穿戴令牌无效",
+            @"1016":@"应用接入方认证请求头无效",
+            @"1017":@"应用接入方认证签名无效",
+            @"1018":@"应用接入方请求超时",
+            @"1019":@"NFT详情令牌过期",
+            @"1020":@"钱包类型不支持",
+            @"1021":@"发送验证码失败",
+            @"1022":@"绑定用户失败",
+            @"1023":@"藏品列表获取失败",
+            @"1024":@"藏品信息获取失败",
+            @"1025":@"藏品不属于用户",
+            @"1026":@"短信验证码发送太频繁",
+            @"1027":@"手机号已被绑定",
+            @"1028":@"该手机号已被其他用户绑定",
+            @"1029":@"用户解绑失败",
+            @"1030":@"短信验证码错误",
+            @"1031":@"用户已绑定手机号",
+            @"1032":@"该手机号不是该用户绑定的"
+        };
+    }
+    NSString *key = [NSString stringWithFormat:@"%@", @(errCode)];
+    NSDictionary *msg = errMsgMap[key];
+    if (!msg){
+        msg = errorMsg;
+    }
+    return [NSString stringWithFormat:@"%@(%@)", msg, key];
+}
+
 @end

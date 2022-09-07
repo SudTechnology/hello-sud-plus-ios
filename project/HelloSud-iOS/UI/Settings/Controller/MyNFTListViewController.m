@@ -193,7 +193,7 @@
             [weakSelf.collectionView.mj_footer resetNoMoreData];
         }
         if (errCode != 0) {
-            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             if (errCode == 1008) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];

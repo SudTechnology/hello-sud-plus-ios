@@ -61,7 +61,7 @@
     BOOL isTestEnv = NO;
 #if DEBUG
     // 测试环境
-    [ISudNFTD e:3];
+//    [ISudNFTD e:3];
     isTestEnv = YES;
 #endif
     NSString *sudNFTSDKVersoin = [SudNFT getVersion];
@@ -118,7 +118,8 @@
         // 未绑定钱包
         [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
             if (errCode != 0) {
-                [ToastUtil show:errMsg];
+                NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+                [ToastUtil show:msg];
                 return;
             }
             self.walletList = getWalletListModel.walletList;
@@ -138,7 +139,8 @@
     if (self.walletList.count == 0) {
         [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
             if (errCode != 0) {
-                [ToastUtil show:errMsg];
+                NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+                [ToastUtil show:msg];
                 return;
             }
             self.walletList = getWalletListModel.walletList;
@@ -159,7 +161,7 @@
     paramModel.pageKey = nil;
     [SudNFT getNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetNFTListModel *nftListModel) {
         if (errCode != 0) {
-            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             if (errCode == 1008) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
@@ -181,7 +183,7 @@
     paramModel.walletToken = [HSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
     [SudNFT getCnNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCnNFTListModel *resp) {
         if (errCode != 0) {
-            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             if (errCode == 1008) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
