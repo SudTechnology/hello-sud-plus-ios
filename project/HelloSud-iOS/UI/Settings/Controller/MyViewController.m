@@ -61,7 +61,7 @@
     BOOL isTestEnv = NO;
 #if DEBUG
     // 测试环境
-//    [ISudNFTD e:3];
+    [ISudNFTD e:3];
     isTestEnv = YES;
 #endif
     NSString *sudNFTSDKVersoin = [SudNFT getVersion];

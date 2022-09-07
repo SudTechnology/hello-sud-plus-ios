@@ -317,7 +317,7 @@
         return;
     }
 #if DEBUG
-//    [ISudAPPD e:3];
+    [ISudAPPD e:3];
 #endif
     [SudMGP initSDK:appID appKey:appKey isTestEnv:GAME_TEST_ENV listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
