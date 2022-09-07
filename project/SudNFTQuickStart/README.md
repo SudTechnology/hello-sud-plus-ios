@@ -1,18 +1,27 @@
-# SudNFT快速接入
-- 申请秘钥集成SDK
-  <details>
-  <summary>详细描述</summary>
-
-      1.appId、appKey和isTestEnv=true，请使用QuickStart客户端的；
-      2.iOS bundleId、Android applicationId，请使用APP客户端自己的；(接入信息表中的bundleId/applicationId)；
-      3.完成集成，Demo跑起来;
-
-  </details>
 # 功能介绍
 1. 支持海外以太坊主链主流钱包Metamask、TrustWallet、Rainbow等钱包端来授权绑定钱包地址
 2. 可以选择各种正式链、测试链、侧链获取对应链NFT列表数据、NFT详情数据
 3. 可以生成NFT的使用token，用于应用端唯一使用NFT的使用凭证
 4. 支持国内（稀物）平台授权绑定、藏品数据列表、详情数据获取及使用
+
+# SudNFT快速接入
+- 申请平台账号及秘钥
+  <details>
+  <summary>详细描述</summary>
+
+      1.向平台申请appId、appKey
+
+  </details>
+- 集成SDK
+  <details>
+  <summary>详细描述</summary>
+
+      1.将SudNFT.xcframework添加入工程
+      2.在工程设置，General->Frameworks、Libraries、and Embedded Content中将SudNFT.xcframework选为Embed & Sign
+      3.完成集成，在工程中引入头文件SudNFT/SudNFT.h即可使用相关接口功能。
+
+  </details>
+
 # 相关接口描述
 - 初始化SDK
 ```
