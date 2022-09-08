@@ -29,9 +29,9 @@
 /// 等待绑定钱包信息
 @property(nonatomic, strong) SudNFTWalletInfoModel *waitBindWalletInfo;
 /// 是否已经初始化
-@property(nonatomic, assign)BOOL isNFTInited;
+@property(nonatomic, assign) BOOL isNFTInited;
 /// 是否初始化失败
-@property(nonatomic, assign)BOOL isNFTInitedError;
+@property(nonatomic, assign) BOOL isNFTInitedError;
 @end
 
 @implementation MyViewController
@@ -41,7 +41,7 @@
     // Do any additional setup after loading the view.
     // 配置顶部tableview不留出状态栏
     if (@available(iOS 11.0, *)) {
-    }else {
+    } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     [self configData];
@@ -281,6 +281,17 @@
         }
 
         [DTAlertView showTextAlert:@"确定要解除连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
+            SudNFTUnbindWalletParamModel *paramModel = SudNFTUnbindWalletParamModel.new;
+            paramModel.walletType = HSAppPreferences.shared.bindWalletType;
+            paramModel.walletAddress = HSAppPreferences.shared.walletAddress;
+            paramModel.userId = AppService.shared.loginUserID;
+            [SudNFT unbindWallet:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
+                if (errCode != 0) {
+                    DDLogError(@"unbindWallet err:%@(%@)", errMsg, @(errCode));
+                    [ToastUtil show:[HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg]];
+                }
+            }];
+
             [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
                 HSAppPreferences.shared.walletAddress = nil;
                 HSAppPreferences.shared.bindWalletType = -1;
@@ -311,11 +322,11 @@
         id temp = note.userInfo[@"nft"];
         id cardTemp = note.userInfo[@"card"];
         if (temp && [temp isKindOfClass:[SudNFTGetNFTListModel class]]) {
-            SudNFTGetNFTListModel *nft = (SudNFTGetNFTListModel *)temp;
+            SudNFTGetNFTListModel *nft = (SudNFTGetNFTListModel *) temp;
             [self.myHeaderView updateNFTList:nft];
             [self reloadHeadView];
         } else if (cardTemp && [cardTemp isKindOfClass:[SudNFTGetCnNFTListModel class]]) {
-            SudNFTGetCnNFTListModel *card = (SudNFTGetCnNFTListModel *)cardTemp;
+            SudNFTGetCnNFTListModel *card = (SudNFTGetCnNFTListModel *) cardTemp;
             [self.myHeaderView updateCardList:card];
             [self reloadHeadView];
         }
@@ -369,7 +380,7 @@
     v.sureBlock = ^{
         [UserService reqWearNFT:@"" isWear:NO success:nil fail:nil];
         [UserService reqUnbindUser:0 success:nil fail:nil];
-        
+
         SudNFTUnBindCnWalletParamModel *paramModel = SudNFTUnBindCnWalletParamModel.new;
         paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
         paramModel.userId = AppService.shared.loginUserID;

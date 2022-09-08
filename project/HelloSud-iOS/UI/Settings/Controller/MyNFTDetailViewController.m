@@ -74,7 +74,7 @@
             }
             return;
         }
-        [weakSelf handleWearDetailToken:generateDetailTokenModel.nftDetailsToken isCN:NO];
+        [weakSelf handleWearDetailToken:generateDetailTokenModel.detailsToken isCN:NO];
     }];
 }
 
@@ -158,6 +158,29 @@
     }                  fail:^(NSError *error) {
         weakSelf.wearBtn.enabled = YES;
     }];
+    if (!isWear) {
+        if (isCN) {
+            SudNFTRemoveCnCredentialsTokenParamModel *paramModel = SudNFTRemoveCnCredentialsTokenParamModel.new;
+            paramModel.walletToken = HSAppPreferences.shared.walletToken;
+            paramModel.detailsToken = nftDetailToken;
+            [SudNFT removeNFTCnCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
+                if (errCode != 0) {
+                    NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+                    [ToastUtil show:msg];
+                }
+            }];
+        } else {
+            SudNFTRemoveCredentialsTokenParamModel *paramModel = SudNFTRemoveCredentialsTokenParamModel.new;
+            paramModel.walletToken = HSAppPreferences.shared.walletToken;
+            paramModel.detailsToken = nftDetailToken;
+            [SudNFT removeNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
+                if (errCode != 0) {
+                    NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+                    [ToastUtil show:msg];
+                }
+            }];
+        }
+    }
 }
 
 - (void)updateWearBtn {

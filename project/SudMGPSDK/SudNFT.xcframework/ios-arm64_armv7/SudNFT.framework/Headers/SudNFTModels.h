@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 图标名称
 @property(nonatomic, copy) NSString *icon;
 /// 链类型
-@property(nonatomic, assign) NSInteger type;
+@property(nonatomic, assign) int64_t type;
 @end
 
 /// 钱包数据模型
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 生成NFT详情token model (穿戴)
 @interface SudNFTGenNFTCredentialsTokenModel : NSObject
 /// nft详情令牌
-@property(nonatomic, copy) NSString *nftDetailsToken;
+@property(nonatomic, copy) NSString *detailsToken;
 @end
 
 /// 初始化NFT参数model
@@ -108,8 +108,19 @@ NS_ASSUME_NONNULL_BEGIN
 /// 绑定钱包参数model
 @interface SudNFTBindWalletParamModel : NSObject
 /// 钱包类型
-@property(nonatomic, assign) NSInteger walletType;
+@property(nonatomic, assign) int64_t walletType;
 @end
+
+/// 绑定钱包参数model
+@interface SudNFTUnbindWalletParamModel : NSObject
+/// 用户ID
+@property(nonatomic, copy, nonnull) NSString *userId;
+/// 钱包类型
+@property(nonatomic, assign) int64_t walletType;
+/// 钱包地址
+@property(nonatomic, copy, nonnull) NSString *walletAddress;
+@end
+
 
 /// 生成NFT使用凭证参数model
 @interface SudNFTCredentialsTokenParamModel : NSObject
@@ -120,8 +131,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// NFT tokenId
 @property(nonatomic, copy, nonnull) NSString *tokenId;
 /// 链网类型
-@property(nonatomic, assign) NSInteger chainType;
+@property(nonatomic, assign) int64_t chainType;
 @end
+
+/// 移除NFT使用凭证参数model
+@interface SudNFTRemoveCredentialsTokenParamModel : NSObject
+/// 钱包token
+@property(nonatomic, copy) NSString *walletToken;
+/// details token
+@property(nonatomic, copy) NSString *detailsToken;
+@end
+
 
 /// 获取NFT列表参数model
 @interface SudNFTGetNFTListParamModel : NSObject
@@ -132,7 +152,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 分页key,首页可不传,下一页时，请求上一页返回pageKey
 @property(nonatomic, copy, nullable) NSString *pageKey;
 /// 链网类型
-@property(nonatomic, assign) NSInteger chainType;
+@property(nonatomic, assign) int64_t chainType;
+/// 分页大小，默认100
+@property(nonatomic, assign) NSInteger pageSize;
+
 @end
 
 #pragma mark CN
@@ -142,7 +165,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 手机号码
 @property(nonatomic, copy) NSString *phone;
 /// 钱包类型
-@property(nonatomic, assign) NSInteger walletType;
+@property(nonatomic, assign) int64_t walletType;
 @end
 
 /// 绑定用户参数model [CN]
@@ -154,7 +177,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用ID
 @property(nonatomic, copy) NSString *userId;
 /// 钱包类型
-@property(nonatomic, assign) NSInteger walletType;
+@property(nonatomic, assign) int64_t walletType;
 @end
 
 /// 解绑绑定用户参数model [CN]
@@ -164,7 +187,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用ID
 @property(nonatomic, copy) NSString *userId;
 /// 钱包类型
-@property(nonatomic, assign) NSInteger walletType;
+@property(nonatomic, assign) int64_t walletType;
 @end
 
 /// 钱包信息
@@ -180,7 +203,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取藏品列表参数model
 @interface SudNFTGetCnNFTListParamModel : NSObject
 /// 钱包类型
-@property(nonatomic, assign) NSInteger walletType;
+@property(nonatomic, assign) int64_t walletType;
 /// 钱包绑定token
 @property(nonatomic, copy) NSString *walletToken;
 /// 页码，从0开始
@@ -222,7 +245,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 生成藏品使用参数model
 @interface SudNFTCnCredentialsTokenParamModel : NSObject
 /// 钱包类型
-@property(nonatomic, assign) NSInteger walletType;
+@property(nonatomic, assign) int64_t walletType;
 /// 钱包绑定token
 @property(nonatomic, copy) NSString *walletToken;
 /// 藏品ID
@@ -235,4 +258,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *detailsToken;
 @end
 
+/// 移除藏品使用参数model
+@interface SudNFTRemoveCnCredentialsTokenParamModel : NSObject
+/// 钱包token
+@property(nonatomic, copy) NSString *walletToken;
+/// details token
+@property(nonatomic, copy) NSString *detailsToken;
+@end
 NS_ASSUME_NONNULL_END
