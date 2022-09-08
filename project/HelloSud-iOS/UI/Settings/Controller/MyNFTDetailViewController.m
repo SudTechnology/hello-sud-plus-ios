@@ -47,20 +47,28 @@
 
 - (void)onWearBtnClick:(UIButton *)sender {
     BOOL isWear = self.wearBtn.selected ? NO : YES;
-    BOOL isCN = NO;
+    if (isWear) {
+        [self handleWear:sender];
+    } else {
+        [self handleRemoveWear:sender];
+    }
+}
+
+/// 处理穿戴
+- (void)handleWear:(UIButton *)sender {
+    BOOL isCN = HSAppPreferences.shared.isBindCNWallet;
+    if (isCN) {
+        [self wearCard:sender];
+    } else {
+        [self wearNFT:sender];
+    }
+}
+
+/// 处理移除穿戴
+- (void)handleRemoveWear:(UIButton *)sender {
+    BOOL isCN = HSAppPreferences.shared.isBindCNWallet;
     NSString *contractAddress = @"";
     NSString *tokenId = @"";
-    if (HSAppPreferences.shared.isBindCNWallet) {
-        isCN = YES;
-    }
-    if (isWear) {
-        if (isCN) {
-            [self wearCard:sender];
-        } else {
-            [self wearNFT:sender];
-        }
-        return;
-    }
     if (isCN) {
         contractAddress = self.cellModel.cardModel.cardHash;
         tokenId = self.cellModel.cardModel.chainAddr;
@@ -71,7 +79,6 @@
     // 解绑
     NSString *detailsToken = [AppService.shared detailsTokenWithContractAddress:contractAddress tokenId:tokenId];
     [self handleWearDetailToken:detailsToken isCN:isCN];
-
 }
 
 /// 穿戴NFT
