@@ -12,7 +12,7 @@ extern NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF;
 extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 
 /// 应用本地配置
-@interface HSAppPreferences : NSObject
+@interface HsNFTPreferences : NSObject
 /// 绑定钱包类型
 @property(nonatomic, assign) NSInteger bindWalletType;
 /// 选择链网类型
@@ -64,4 +64,21 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 - (BOOL)isBindForeignWallet;
 
 - (NSString *_Nullable)nftErrorMsg:(NSInteger)errCode errorMsg:(NSString *)errorMsg;
+
+/// 是否已经穿戴
+/// @param contractAddress contractAddress
+/// @param tokenId tokenId
+/// @return
+- (BOOL)isNFTAlreadyUsed:(NSString *)contractAddress tokenId:(NSString *)tokenId;
+
+/// 使用NFT
+/// @param contractAddress
+/// @param tokenId
+- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId detailsToken:(NSString *)detailsToken add:(BOOL)add;
+
+/// 获取使用详情token
+/// @param contractAddress  contractAddress
+/// @param tokenId  tokenId
+/// @return
+- (NSString *)detailsTokenWithContractAddress:(NSString *)contractAddress tokenId:(NSString *)tokenId;
 @end

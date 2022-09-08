@@ -93,11 +93,11 @@
         }];
     }
 
-    BOOL isBindWallet = HSAppPreferences.shared.isBindWallet;
+    BOOL isBindWallet = HsNFTPreferences.shared.isBindWallet;
     if (isBindWallet) {
         // 绑定过了钱包
-        if (HSAppPreferences.shared.isBindForeignWallet) {
-            self.walletAddressLabel.text = HSAppPreferences.shared.walletAddress;
+        if (HsNFTPreferences.shared.isBindForeignWallet) {
+            self.walletAddressLabel.text = HsNFTPreferences.shared.walletAddress;
             self.walletAddressLabel.hidden = NO;
             self.userIdLabel.hidden = YES;
         } else {
@@ -105,7 +105,7 @@
             self.userIdLabel.hidden = NO;
         }
         self.deleteBtn.hidden = NO;
-        self.deleteBtn.selected = HSAppPreferences.shared.bindZoneType == 1;
+        self.deleteBtn.selected = HsNFTPreferences.shared.bindZoneType == 1;
         if (_bindView) {
             [_bindView removeFromSuperview];
             _bindView = nil;

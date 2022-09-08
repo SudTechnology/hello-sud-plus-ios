@@ -113,12 +113,12 @@
 
 - (void)checkWalletInfo {
 
-    BOOL bindWallet = HSAppPreferences.shared.isBindWallet;
+    BOOL bindWallet = HsNFTPreferences.shared.isBindWallet;
     if (!bindWallet) {
         // 未绑定钱包
         [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
             if (errCode != 0) {
-                NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+                NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
                 [ToastUtil show:msg];
                 return;
             }
@@ -130,16 +130,16 @@
         return;
     }
     // 拉取NFT列表
-    if (HSAppPreferences.shared.isBindForeignWallet) {
+    if (HsNFTPreferences.shared.isBindForeignWallet) {
         [self getNFTList];
-    } else if (HSAppPreferences.shared.isBindCNWallet) {
+    } else if (HsNFTPreferences.shared.isBindCNWallet) {
         [self getCNCollectionList];
     }
     // 更新链网数据
     if (self.walletList.count == 0) {
         [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
             if (errCode != 0) {
-                NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+                NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
                 [ToastUtil show:msg];
                 return;
             }
@@ -155,20 +155,20 @@
 /// 获取NFT列表
 - (void)getNFTList {
     SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
-    paramModel.walletToken = HSAppPreferences.shared.walletToken;
-    paramModel.walletAddress = HSAppPreferences.shared.walletAddress;
-    paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
+    paramModel.walletToken = HsNFTPreferences.shared.walletToken;
+    paramModel.walletAddress = HsNFTPreferences.shared.walletAddress;
+    paramModel.chainType = HsNFTPreferences.shared.selectedEthereumChainType;
     paramModel.pageKey = nil;
     [SudNFT getNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetNFTListModel *nftListModel) {
         if (errCode != 0) {
-            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+            NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             if (errCode == 1008) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
             }
             return;
         }
-        HSAppPreferences.shared.nftListPageKey = nftListModel.pageKey;
+        HsNFTPreferences.shared.nftListPageKey = nftListModel.pageKey;
         [self.myHeaderView updateNFTList:nftListModel];
         [self reloadHeadView];
     }];
@@ -179,11 +179,11 @@
     SudNFTGetCnNFTListParamModel *paramModel = SudNFTGetCnNFTListParamModel.new;
     paramModel.pageSize = 20;
     paramModel.pageNumber = 0;
-    paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
-    paramModel.walletToken = [HSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
+    paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+    paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
     [SudNFT getCnNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCnNFTListModel *resp) {
         if (errCode != 0) {
-            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+            NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             if (errCode == 1008) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
@@ -198,7 +198,7 @@
 /// 更新钱包链网类型
 - (void)updateWalletEtherChains {
     for (SudNFTWalletInfoModel *m in self.walletList) {
-        if (m.type == HSAppPreferences.shared.bindWalletType) {
+        if (m.type == HsNFTPreferences.shared.bindWalletType) {
             [self.myHeaderView updateEthereumList:m.chainList];
             break;
         }
@@ -261,7 +261,7 @@
         [SudNFT bindWallet:paramModel listener:self];
     };
     self.myHeaderView.deleteWalletBlock = ^{
-        if (HSAppPreferences.shared.bindZoneType == 1) {
+        if (HsNFTPreferences.shared.bindZoneType == 1) {
             // 绑定的是国内
             CNWalletSelectPopView *v = CNWalletSelectPopView.new;
             __weak typeof(v) weakV = v;
@@ -282,22 +282,22 @@
 
         [DTAlertView showTextAlert:@"确定要解除连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
             SudNFTUnbindWalletParamModel *paramModel = SudNFTUnbindWalletParamModel.new;
-            paramModel.walletType = HSAppPreferences.shared.bindWalletType;
-            paramModel.walletAddress = HSAppPreferences.shared.walletAddress;
+            paramModel.walletType = HsNFTPreferences.shared.bindWalletType;
+            paramModel.walletAddress = HsNFTPreferences.shared.walletAddress;
             paramModel.userId = AppService.shared.loginUserID;
             [SudNFT unbindWallet:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
                 if (errCode != 0) {
                     DDLogError(@"unbindWallet err:%@(%@)", errMsg, @(errCode));
-                    [ToastUtil show:[HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg]];
+                    [ToastUtil show:[HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg]];
                 }
             }];
 
             [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
-                HSAppPreferences.shared.walletAddress = nil;
-                HSAppPreferences.shared.bindWalletType = -1;
-                HSAppPreferences.shared.currentSelectedWalletType = -1;
-                HSAppPreferences.shared.bindZoneType = -1;
-                [AppService.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
+                HsNFTPreferences.shared.walletAddress = nil;
+                HsNFTPreferences.shared.bindWalletType = -1;
+                HsNFTPreferences.shared.currentSelectedWalletType = -1;
+                HsNFTPreferences.shared.bindZoneType = -1;
+                [HsNFTPreferences.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
                 AppService.shared.login.loginUserInfo.headerNftUrl = nil;
                 AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
                 [AppService.shared.login saveLoginUserInfo];
@@ -338,7 +338,7 @@
 - (void)handleCNWalletClick:(SudNFTWalletInfoModel *)walletInfoModel selectView:(CNWalletSelectPopView *)selectView {
 
     WeakSelf
-    BOOL isBind = [HSAppPreferences.shared getBindUserTokenByWalletType:walletInfoModel.type].length > 0;
+    BOOL isBind = [HsNFTPreferences.shared getBindUserTokenByWalletType:walletInfoModel.type].length > 0;
     // 未绑定
     if (!isBind) {
         [DTSheetView close];
@@ -382,18 +382,18 @@
         [UserService reqUnbindUser:0 success:nil fail:nil];
 
         SudNFTUnBindCnWalletParamModel *paramModel = SudNFTUnBindCnWalletParamModel.new;
-        paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
+        paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
         paramModel.userId = AppService.shared.loginUserID;
-        paramModel.phone = [HSAppPreferences.shared getBindUserPhoneByWalletType:paramModel.walletType];
+        paramModel.phone = [HsNFTPreferences.shared getBindUserPhoneByWalletType:paramModel.walletType];
         [SudNFT unbindCnWallet:paramModel listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
             DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
         }];
 
         [weakCoverView removeFromSuperview];
         [DTSheetView close];
-        [HSAppPreferences.shared clearBindUserInfoWithWalletType:walletInfoModel.type];
-        HSAppPreferences.shared.walletAddress = nil;
-        [AppService.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
+        [HsNFTPreferences.shared clearBindUserInfoWithWalletType:walletInfoModel.type];
+        HsNFTPreferences.shared.walletAddress = nil;
+        [HsNFTPreferences.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
         AppService.shared.login.loginUserInfo.headerNftUrl = nil;
         AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
         [AppService.shared.login saveLoginUserInfo];
@@ -542,13 +542,13 @@
 - (void)onSudNFTBindWalletTokenExpired {
     DDLogWarn(@"onSudNFTBindWalletTokenExpired");
     [UserService reqWearNFT:@"" isWear:NO success:nil fail:nil];
-    if (HSAppPreferences.shared.isBindCNWallet) {
+    if (HsNFTPreferences.shared.isBindCNWallet) {
         [UserService reqUnbindUser:0 success:nil fail:nil];
     }
-    HSAppPreferences.shared.walletAddress = nil;
-    NSInteger walletType = HSAppPreferences.shared.currentSelectedWalletType;
-    [HSAppPreferences.shared clearBindUserInfoWithWalletType:walletType];
-    HSAppPreferences.shared.bindZoneType = -1;
+    HsNFTPreferences.shared.walletAddress = nil;
+    NSInteger walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+    [HsNFTPreferences.shared clearBindUserInfoWithWalletType:walletType];
+    HsNFTPreferences.shared.bindZoneType = -1;
     [self.myHeaderView dtUpdateUI];
     [self reloadHeadView];
     [self checkWalletInfo];
@@ -567,11 +567,11 @@
 - (void)onSuccess:(SudNFTBindWalletModel *_Nullable)walletInfoModel {
 
     // 绑定钱包成功
-    HSAppPreferences.shared.bindWalletType = self.waitBindWalletInfo.type;
-    HSAppPreferences.shared.bindZoneType = self.waitBindWalletInfo.zoneType;
-    HSAppPreferences.shared.walletAddress = walletInfoModel.walletAddress;
-    HSAppPreferences.shared.currentSelectedWalletType = self.waitBindWalletInfo.type;
-    [HSAppPreferences.shared cacheWalletToken:walletInfoModel walletAddress:walletInfoModel.walletAddress];
+    HsNFTPreferences.shared.bindWalletType = self.waitBindWalletInfo.type;
+    HsNFTPreferences.shared.bindZoneType = self.waitBindWalletInfo.zoneType;
+    HsNFTPreferences.shared.walletAddress = walletInfoModel.walletAddress;
+    HsNFTPreferences.shared.currentSelectedWalletType = self.waitBindWalletInfo.type;
+    [HsNFTPreferences.shared cacheWalletToken:walletInfoModel walletAddress:walletInfoModel.walletAddress];
     [self.myHeaderView dtUpdateUI];
     [self reloadHeadView];
     [self checkWalletInfo];

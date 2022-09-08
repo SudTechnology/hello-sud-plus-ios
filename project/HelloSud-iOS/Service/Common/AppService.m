@@ -20,10 +20,6 @@
 #define kKeyCurrentRTCType @"key_current_rtc_type"
 /// 配置信息缓存key
 #define kKeyConfigModel @"key_config_model"
-/// 穿戴NFT key
-#define kKeyUsedNFT @"key_used_nft_"
-/// 穿戴的NFT详情token key
-#define kKeyUsedNftDetailsToken @"key_used_nft_details_token"
 
 NSString *const kRtcTypeZego = @"zego";
 NSString *const kRtcTypeAgora = @"agora";
@@ -32,7 +28,6 @@ NSString *const kRtcTypeCommEase = @"commsEase";
 NSString *const kRtcTypeVolcEngine = @"volcEngine";
 NSString *const kRtcTypeAlibabaCloud = @"alibabaCloud";
 NSString *const kRtcTypeTencentCloud = @"tencentCloud";
-
 
 @interface AppService ()
 @property(nonatomic, strong) NSArray <NSString *> *randomNameArr;
@@ -299,51 +294,7 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     return @"";
 }
 
-/// 是否已经穿戴
-/// @param contractAddress contractAddress
-/// @param tokenId tokenId
-/// @return
-- (BOOL)isNFTAlreadyUsed:(NSString *)contractAddress tokenId:(NSString *)tokenId {
-    NSString *key = [NSString stringWithFormat:@"%@%@", kKeyUsedNFT, AppService.shared.loginUserID];
-    NSString *value = [NSString stringWithFormat:@"%@_%@", contractAddress, tokenId];
-    id temp = [NSUserDefaults.standardUserDefaults stringForKey:key];
-    if (temp && [temp isKindOfClass:NSString.class]) {
-        return [value isEqualToString:temp];
-    }
-    return NO;
-}
 
-/// 使用NFT
-/// @param contractAddress
-/// @param tokenId
-- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId detailsToken:(NSString *)detailsToken add:(BOOL)add {
-    NSString *key = [NSString stringWithFormat:@"%@%@", kKeyUsedNFT, AppService.shared.loginUserID];
-
-    NSString *detailsTokenKey = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNftDetailsToken, contractAddress, tokenId, AppService.shared.loginUserID].dt_md5;
-
-    NSString *value = [NSString stringWithFormat:@"%@_%@", contractAddress, tokenId];
-    if (add) {
-        [NSUserDefaults.standardUserDefaults setObject:value forKey:key];
-        [NSUserDefaults.standardUserDefaults setObject:detailsToken forKey:detailsTokenKey];
-    } else {
-        [NSUserDefaults.standardUserDefaults removeObjectForKey:key];
-        [NSUserDefaults.standardUserDefaults removeObjectForKey:detailsTokenKey];
-    }
-    [NSUserDefaults.standardUserDefaults synchronize];
-}
-
-/// 获取使用详情token
-/// @param contractAddress  contractAddress
-/// @param tokenId  tokenId
-/// @return
-- (NSString *)detailsTokenWithContractAddress:(NSString *)contractAddress tokenId:(NSString *)tokenId {
-    NSString *detailsTokenKey = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNftDetailsToken, contractAddress, tokenId, AppService.shared.loginUserID].dt_md5;
-    id token = [NSUserDefaults.standardUserDefaults stringForKey:detailsTokenKey];
-    if (token) {
-        return token;
-    }
-    return @"";
-}
 @end
 
 

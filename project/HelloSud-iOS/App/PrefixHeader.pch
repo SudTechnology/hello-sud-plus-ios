@@ -63,7 +63,7 @@
 #import "../UI/Scenes/Base/SceneConstantHeader.h"
 #import "CommonAudioModelHeader.h"
 /// preferences
-#import "HSAppPreferences.h"
+#import "HsNFTPreferences.h"
 /// manager
 #import "RespUserInfoModel.h"
 #import "RespModel.h"

@@ -239,7 +239,7 @@
 //                HSAppPreferences.shared.bindWalletType = -1;
 //                HSAppPreferences.shared.currentSelectedWalletType = -1;
 //                HSAppPreferences.shared.bindZoneType = -1;
-//                [AppService.shared useNFT:@"" tokenId:@"" add:NO];
+//                [HSAppPreferences.shared useNFT:@"" tokenId:@"" add:NO];
 //                AppService.shared.login.loginUserInfo.headerNftUrl = nil;
 //                AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
 //                [AppService.shared.login saveLoginUserInfo];

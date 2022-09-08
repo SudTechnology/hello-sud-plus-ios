@@ -56,7 +56,7 @@
 
 /// 处理穿戴
 - (void)handleWear:(UIButton *)sender {
-    BOOL isCN = HSAppPreferences.shared.isBindCNWallet;
+    BOOL isCN = HsNFTPreferences.shared.isBindCNWallet;
     if (isCN) {
         [self wearCard:sender];
     } else {
@@ -66,7 +66,7 @@
 
 /// 处理移除穿戴
 - (void)handleRemoveWear:(UIButton *)sender {
-    BOOL isCN = HSAppPreferences.shared.isBindCNWallet;
+    BOOL isCN = HsNFTPreferences.shared.isBindCNWallet;
     NSString *contractAddress = @"";
     NSString *tokenId = @"";
     if (isCN) {
@@ -77,7 +77,7 @@
         tokenId = self.cellModel.nftModel.tokenId;
     }
     // 解绑
-    NSString *detailsToken = [AppService.shared detailsTokenWithContractAddress:contractAddress tokenId:tokenId];
+    NSString *detailsToken = [HsNFTPreferences.shared detailsTokenWithContractAddress:contractAddress tokenId:tokenId];
     [self handleWearDetailToken:detailsToken isCN:isCN];
 }
 
@@ -88,13 +88,13 @@
     sender.enabled = NO;
 
     SudNFTCredentialsTokenParamModel *paramModel = SudNFTCredentialsTokenParamModel.new;
-    paramModel.walletToken = HSAppPreferences.shared.walletToken;
+    paramModel.walletToken = HsNFTPreferences.shared.walletToken;
     paramModel.contractAddress = self.cellModel.nftModel.contractAddress;
     paramModel.tokenId = self.cellModel.nftModel.tokenId;
-    paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
+    paramModel.chainType = HsNFTPreferences.shared.selectedEthereumChainType;
     [SudNFT genNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenNFTCredentialsTokenModel *generateDetailTokenModel) {
         if (errCode != 0) {
-            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+            NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             sender.enabled = YES;
             if (errCode == 1008) {
@@ -112,12 +112,12 @@
     DDLogDebug(@"wearCard");
     sender.enabled = NO;
     SudNFTCnCredentialsTokenParamModel *paramModel = SudNFTCnCredentialsTokenParamModel.new;
-    paramModel.walletType = HSAppPreferences.shared.currentSelectedWalletType;
-    paramModel.walletToken = [HSAppPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
+    paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+    paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
     paramModel.cardId = self.cellModel.cardModel.cardId;
     [SudNFT genCnNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTCnCredentialsTokenModel *resp) {
         if (errCode != 0) {
-            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+            NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             sender.enabled = YES;
             if (errCode == 1008) {
@@ -132,9 +132,9 @@
 
 - (void)onAddrTap:(id)sender {
     NSString *contractAddress = @"";
-    if (HSAppPreferences.shared.isBindCNWallet) {
+    if (HsNFTPreferences.shared.isBindCNWallet) {
         contractAddress = self.cellModel.cardModel.cardHash;
-    } else if (HSAppPreferences.shared.isBindForeignWallet) {
+    } else if (HsNFTPreferences.shared.isBindForeignWallet) {
         contractAddress = self.cellModel.nftModel.contractAddress;
     }
     [AppUtil copyToPasteProcess:contractAddress toast:@"复制成功"];
@@ -142,9 +142,9 @@
 
 - (void)onTokenTap:(id)sender {
     NSString *tokenId = @"";
-    if (HSAppPreferences.shared.isBindCNWallet) {
+    if (HsNFTPreferences.shared.isBindCNWallet) {
         tokenId = self.cellModel.cardModel.chainAddr;
-    } else if (HSAppPreferences.shared.isBindForeignWallet) {
+    } else if (HsNFTPreferences.shared.isBindForeignWallet) {
         tokenId = self.cellModel.nftModel.tokenId;
     }
     [AppUtil copyToPasteProcess:tokenId toast:@"复制成功"];
@@ -164,9 +164,9 @@
         weakSelf.wearBtn.enabled = YES;
         if (isCN) {
             // 国内
-            [AppService.shared useNFT:weakSelf.cellModel.cardModel.cardHash tokenId:weakSelf.cellModel.cardModel.chainAddr detailsToken:nftDetailToken add:isWear];
+            [HsNFTPreferences.shared useNFT:weakSelf.cellModel.cardModel.cardHash tokenId:weakSelf.cellModel.cardModel.chainAddr detailsToken:nftDetailToken add:isWear];
         } else {
-            [AppService.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId detailsToken:nftDetailToken add:isWear];
+            [HsNFTPreferences.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId detailsToken:nftDetailToken add:isWear];
         }
         [weakSelf updateWearBtn];
 
@@ -190,21 +190,21 @@
     if (!isWear) {
         if (isCN) {
             SudNFTRemoveCnCredentialsTokenParamModel *paramModel = SudNFTRemoveCnCredentialsTokenParamModel.new;
-            paramModel.walletToken = [HSAppPreferences.shared getBindUserTokenByWalletType:HSAppPreferences.shared.currentSelectedWalletType];
+            paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:HsNFTPreferences.shared.currentSelectedWalletType];
             paramModel.detailsToken = nftDetailToken;
             [SudNFT removeNFTCnCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
                 if (errCode != 0) {
-                    NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+                    NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
                     [ToastUtil show:msg];
                 }
             }];
         } else {
             SudNFTRemoveCredentialsTokenParamModel *paramModel = SudNFTRemoveCredentialsTokenParamModel.new;
-            paramModel.walletToken = HSAppPreferences.shared.walletToken;
+            paramModel.walletToken = HsNFTPreferences.shared.walletToken;
             paramModel.detailsToken = nftDetailToken;
             [SudNFT removeNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
                 if (errCode != 0) {
-                    NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+                    NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
                     [ToastUtil show:msg];
                 }
             }];
@@ -214,10 +214,10 @@
 
 - (void)updateWearBtn {
     BOOL isUsed = NO;
-    if (HSAppPreferences.shared.isBindForeignWallet) {
-        isUsed = [AppService.shared isNFTAlreadyUsed:self.cellModel.nftModel.contractAddress tokenId:self.cellModel.nftModel.tokenId];
-    } else if (HSAppPreferences.shared.isBindCNWallet) {
-        isUsed = [AppService.shared isNFTAlreadyUsed:self.cellModel.cardModel.cardHash tokenId:self.cellModel.cardModel.chainAddr];
+    if (HsNFTPreferences.shared.isBindForeignWallet) {
+        isUsed = [HsNFTPreferences.shared isNFTAlreadyUsed:self.cellModel.nftModel.contractAddress tokenId:self.cellModel.nftModel.tokenId];
+    } else if (HsNFTPreferences.shared.isBindCNWallet) {
+        isUsed = [HsNFTPreferences.shared isNFTAlreadyUsed:self.cellModel.cardModel.cardHash tokenId:self.cellModel.cardModel.chainAddr];
     }
     if (isUsed) {
         _wearBtn.selected = YES;
@@ -330,7 +330,7 @@
 
     WeakSelf
 
-    BOOL isCNBind = HSAppPreferences.shared.isBindCNWallet;
+    BOOL isCNBind = HsNFTPreferences.shared.isBindCNWallet;
     NSString *contractTitle = @"Contract Address\n";
     NSString *tokenIDTitle = @"Token ID\n";
     NSString *coverURL = nil;

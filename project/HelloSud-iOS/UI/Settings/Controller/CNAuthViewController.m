@@ -106,14 +106,14 @@
     paramModel.phone = self.phoneTextField.text;
     [SudNFT bindCnWallet:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTBindCnWalletModel *resp) {
         if (errCode != 0) {
-            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+            NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             return;
         }
-        HSAppPreferences.shared.currentSelectedWalletType = paramModel.walletType;
-        HSAppPreferences.shared.bindWalletType = paramModel.walletType;
-        HSAppPreferences.shared.bindZoneType = self.walletInfoModel.zoneType;
-        [HSAppPreferences.shared saveWalletTokenWithBindCnWalletModel:resp walletType:paramModel.walletType phone:paramModel.phone];
+        HsNFTPreferences.shared.currentSelectedWalletType = paramModel.walletType;
+        HsNFTPreferences.shared.bindWalletType = paramModel.walletType;
+        HsNFTPreferences.shared.bindZoneType = self.walletInfoModel.zoneType;
+        [HsNFTPreferences.shared saveWalletTokenWithBindCnWalletModel:resp walletType:paramModel.walletType phone:paramModel.phone];
         [ToastUtil show:@"授权成功"];
         if (self.bindSuccessBlock) {
             self.bindSuccessBlock();
@@ -131,7 +131,7 @@
     paramModel.walletType = self.walletInfoModel.type;
     [SudNFT sendSmsCode:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
         if (errCode != 0) {
-            NSString *msg = [HSAppPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+            NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             weakSelf.getCodeBtn.enabled = YES;
             return;

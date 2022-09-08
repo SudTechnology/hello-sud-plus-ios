@@ -116,22 +116,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return
 - (BOOL)isSameRtc:(HSConfigContent *)rtcConfig rtcType:(NSString *)rtcType;
 
-/// 是否已经穿戴
-/// @param contractAddress contractAddress
-/// @param tokenId tokenId
-/// @return
-- (BOOL)isNFTAlreadyUsed:(NSString *)contractAddress tokenId:(NSString *)tokenId;
-
-/// 使用NFT
-/// @param contractAddress
-/// @param tokenId
-- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId detailsToken:(NSString *)detailsToken add:(BOOL)add;
-
-/// 获取使用详情token
-/// @param contractAddress  contractAddress
-/// @param tokenId  tokenId
-/// @return
-- (NSString *)detailsTokenWithContractAddress:(NSString *)contractAddress tokenId:(NSString *)tokenId;
 @end
 
 NS_ASSUME_NONNULL_END

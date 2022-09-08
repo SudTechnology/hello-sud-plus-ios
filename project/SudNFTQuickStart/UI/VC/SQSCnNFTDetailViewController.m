@@ -110,9 +110,9 @@
 - (void)updateWearBtn {
     BOOL isUsed = NO;
     if (SQSAppPreferences.shared.isBindForeignWallet) {
-//        isUsed = [AppService.shared isNFTAlreadyUsed:self.cellModel.nftModel.contractAddress tokenId:self.cellModel.nftModel.tokenId];
+//        isUsed = [HSAppPreferences.shared isNFTAlreadyUsed:self.cellModel.nftModel.contractAddress tokenId:self.cellModel.nftModel.tokenId];
     } else if (SQSAppPreferences.shared.isBindCNWallet) {
-//        isUsed = [AppService.shared isNFTAlreadyUsed:self.cellModel.cardModel.cardHash tokenId:self.cellModel.cardModel.chainAddr];
+//        isUsed = [HSAppPreferences.shared isNFTAlreadyUsed:self.cellModel.cardModel.cardHash tokenId:self.cellModel.cardModel.chainAddr];
     }
     if (isUsed) {
         _wearBtn.selected = YES;

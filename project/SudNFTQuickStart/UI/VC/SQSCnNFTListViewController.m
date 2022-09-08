@@ -90,9 +90,9 @@
     for (SQSNFTListCellModel *m in temp) {
         BOOL isAlreadyUser = NO;
 //        if (SudNFTQSAppPreferences.shared.isBindCNWallet) {
-//            isAlreadyUser = [AppService.shared isNFTAlreadyUsed:m.cardModel.cardHash tokenId:m.cardModel.chainAddr];
+//            isAlreadyUser = [HSAppPreferences.shared isNFTAlreadyUsed:m.cardModel.cardHash tokenId:m.cardModel.chainAddr];
 //        } else {
-//            isAlreadyUser = [AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
+//            isAlreadyUser = [HSAppPreferences.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
 //        }
         if (isAlreadyUser) {
             [sortList insertObject:m atIndex:0];

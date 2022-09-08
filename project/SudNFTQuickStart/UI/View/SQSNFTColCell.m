@@ -98,9 +98,9 @@
     }
     BOOL isWear = NO;
 //    if (SudNFTQSAppPreferences.shared.isBindForeignWallet) {
-//        isWear = [AppService.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
+//        isWear = [HSAppPreferences.shared isNFTAlreadyUsed:m.nftModel.contractAddress tokenId:m.nftModel.tokenId];
 //    } else if (HSAppPreferences.shared.isBindCNWallet) {
-//        isWear = [AppService.shared isNFTAlreadyUsed:m.cardModel.cardHash tokenId:m.cardModel.chainAddr];
+//        isWear = [HSAppPreferences.shared isNFTAlreadyUsed:m.cardModel.cardHash tokenId:m.cardModel.chainAddr];
 //    }
     self.tagView.hidden = isWear ? NO : YES;
 }

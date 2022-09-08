@@ -3,7 +3,7 @@
 // Copyright (c) 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "HSAppPreferences.h"
+#import "HsNFTPreferences.h"
 
 #define kKeyEtherChains @"kKeyEtherChains"
 
@@ -33,17 +33,22 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
 /// 用户当前选中钱包
 #define kKeyCurrentSelectedWallet [self envKey:@"kKeyCurrentSelectedWallet"]
 
-@interface HSAppPreferences ()
+/// 穿戴NFT key
+#define kKeyUsedNFT @"key_used_nft_"
+/// 穿戴的NFT详情token key
+#define kKeyUsedNftDetailsToken @"key_used_nft_details_token"
+
+@interface HsNFTPreferences ()
 /// 当前用户绑定钱包token model
 @property(nonatomic, strong) SudNFTBindWalletModel *bindWalletModel;
 @end
 
-@implementation HSAppPreferences
+@implementation HsNFTPreferences
 + (instancetype)shared {
-    static HSAppPreferences *g_manager = nil;
+    static HsNFTPreferences *g_manager = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        g_manager = HSAppPreferences.new;
+        g_manager = HsNFTPreferences.new;
         [g_manager prepare];
     });
     return g_manager;
@@ -253,6 +258,52 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
         msg = errorMsg;
     }
     return [NSString stringWithFormat:@"%@(%@)", msg, key];
+}
+
+/// 是否已经穿戴
+/// @param contractAddress contractAddress
+/// @param tokenId tokenId
+/// @return
+- (BOOL)isNFTAlreadyUsed:(NSString *)contractAddress tokenId:(NSString *)tokenId {
+    NSString *key = [NSString stringWithFormat:@"%@%@", kKeyUsedNFT, AppService.shared.loginUserID];
+    NSString *value = [NSString stringWithFormat:@"%@_%@", contractAddress, tokenId];
+    id temp = [NSUserDefaults.standardUserDefaults stringForKey:key];
+    if (temp && [temp isKindOfClass:NSString.class]) {
+        return [value isEqualToString:temp];
+    }
+    return NO;
+}
+
+/// 使用NFT
+/// @param contractAddress
+/// @param tokenId
+- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId detailsToken:(NSString *)detailsToken add:(BOOL)add {
+    NSString *key = [NSString stringWithFormat:@"%@%@", kKeyUsedNFT, AppService.shared.loginUserID];
+
+    NSString *detailsTokenKey = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNftDetailsToken, contractAddress, tokenId, AppService.shared.loginUserID].dt_md5;
+
+    NSString *value = [NSString stringWithFormat:@"%@_%@", contractAddress, tokenId];
+    if (add) {
+        [NSUserDefaults.standardUserDefaults setObject:value forKey:key];
+        [NSUserDefaults.standardUserDefaults setObject:detailsToken forKey:detailsTokenKey];
+    } else {
+        [NSUserDefaults.standardUserDefaults removeObjectForKey:key];
+        [NSUserDefaults.standardUserDefaults removeObjectForKey:detailsTokenKey];
+    }
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+/// 获取使用详情token
+/// @param contractAddress  contractAddress
+/// @param tokenId  tokenId
+/// @return
+- (NSString *)detailsTokenWithContractAddress:(NSString *)contractAddress tokenId:(NSString *)tokenId {
+    NSString *detailsTokenKey = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNftDetailsToken, contractAddress, tokenId, AppService.shared.loginUserID].dt_md5;
+    id token = [NSUserDefaults.standardUserDefaults stringForKey:detailsTokenKey];
+    if (token) {
+        return token;
+    }
+    return @"";
 }
 
 @end

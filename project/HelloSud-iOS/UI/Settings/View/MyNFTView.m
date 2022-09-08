@@ -175,10 +175,10 @@
             [self closeLoadAnimate:iv];
         }
     }
-    if (HSAppPreferences.shared.isBindForeignWallet) {
+    if (HsNFTPreferences.shared.isBindForeignWallet) {
         self.nameLabel.text = @"我的NFT";
         self.noDataLabel.text = @"尚无NFT";
-    } else if (HSAppPreferences.shared.isBindCNWallet) {
+    } else if (HsNFTPreferences.shared.isBindCNWallet) {
         self.nameLabel.text = @"我的数字藏品";
         self.noDataLabel.text = @"尚无数字藏品";
     }
@@ -186,11 +186,11 @@
 
 - (void)updateEthereumList:(NSArray<SudNFTChainInfoModel *> *)chains {
 
-    NSInteger zoneType = HSAppPreferences.shared.bindZoneType;
+    NSInteger zoneType = HsNFTPreferences.shared.bindZoneType;
     if (zoneType == 1) {
         /// 国内钱包
         for (SudNFTWalletInfoModel *m in AppService.shared.walletList) {
-            if (m.type == HSAppPreferences.shared.currentSelectedWalletType) {
+            if (m.type == HsNFTPreferences.shared.currentSelectedWalletType) {
                 [self.chainsView updateWithWalletInfoModel:m];
                 break;
             }
@@ -200,7 +200,7 @@
 
     self.chains = chains;
     for (SudNFTChainInfoModel *m in chains) {
-        if (m.type == HSAppPreferences.shared.selectedEthereumChainType) {
+        if (m.type == HsNFTPreferences.shared.selectedEthereumChainType) {
             [self.chainsView update:m];
             break;
         }
@@ -231,7 +231,7 @@
 
 - (void)onTapChainsView:(id)tap {
 
-    NSInteger zoneType = HSAppPreferences.shared.bindZoneType;
+    NSInteger zoneType = HsNFTPreferences.shared.bindZoneType;
     if (zoneType == 1) {
         // 国内
         MyCNWalletSwitchPopView *v = [[MyCNWalletSwitchPopView alloc] init];
