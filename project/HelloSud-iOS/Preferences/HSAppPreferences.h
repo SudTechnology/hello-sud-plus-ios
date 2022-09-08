@@ -28,6 +28,7 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 
 + (instancetype)shared;
 
+/// 海外钱包token
 - (NSString *)walletToken;
 
 /// 缓存钱包token
@@ -39,7 +40,7 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 /// @param phone phone
 - (void)saveWalletTokenWithBindCnWalletModel:(SudNFTBindCnWalletModel *)bindCnWalletModel walletType:(NSInteger)walletType phone:(NSString *)phone;
 
-/// 通过钱包获取绑定用户token
+/// 国内钱包token
 /// @param walletType walletType
 /// @return xx
 - (NSString *)getBindUserTokenByWalletType:(NSInteger)walletType;

@@ -297,7 +297,7 @@
                 HSAppPreferences.shared.bindWalletType = -1;
                 HSAppPreferences.shared.currentSelectedWalletType = -1;
                 HSAppPreferences.shared.bindZoneType = -1;
-                [AppService.shared useNFT:@"" tokenId:@"" add:NO];
+                [AppService.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
                 AppService.shared.login.loginUserInfo.headerNftUrl = nil;
                 AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
                 [AppService.shared.login saveLoginUserInfo];
@@ -393,7 +393,7 @@
         [DTSheetView close];
         [HSAppPreferences.shared clearBindUserInfoWithWalletType:walletInfoModel.type];
         HSAppPreferences.shared.walletAddress = nil;
-        [AppService.shared useNFT:@"" tokenId:@"" add:NO];
+        [AppService.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
         AppService.shared.login.loginUserInfo.headerNftUrl = nil;
         AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
         [AppService.shared.login saveLoginUserInfo];
@@ -570,6 +570,7 @@
     HSAppPreferences.shared.bindWalletType = self.waitBindWalletInfo.type;
     HSAppPreferences.shared.bindZoneType = self.waitBindWalletInfo.zoneType;
     HSAppPreferences.shared.walletAddress = walletInfoModel.walletAddress;
+    HSAppPreferences.shared.currentSelectedWalletType = self.waitBindWalletInfo.type;
     [HSAppPreferences.shared cacheWalletToken:walletInfoModel walletAddress:walletInfoModel.walletAddress];
     [self.myHeaderView dtUpdateUI];
     [self reloadHeadView];

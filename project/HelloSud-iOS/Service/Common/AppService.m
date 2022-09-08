@@ -22,6 +22,8 @@
 #define kKeyConfigModel @"key_config_model"
 /// 穿戴NFT key
 #define kKeyUsedNFT @"key_used_nft_"
+/// 穿戴的NFT详情token key
+#define kKeyUsedNftDetailsToken @"key_used_nft_details_token"
 
 NSString *const kRtcTypeZego = @"zego";
 NSString *const kRtcTypeAgora = @"agora";
@@ -314,17 +316,34 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 /// 使用NFT
 /// @param contractAddress
 /// @param tokenId
-- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId add:(BOOL)add {
+- (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId detailsToken:(NSString *)detailsToken add:(BOOL)add {
     NSString *key = [NSString stringWithFormat:@"%@%@", kKeyUsedNFT, AppService.shared.loginUserID];
+
+    NSString *detailsTokenKey = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNftDetailsToken, contractAddress, tokenId, AppService.shared.loginUserID].dt_md5;
+
     NSString *value = [NSString stringWithFormat:@"%@_%@", contractAddress, tokenId];
     if (add) {
         [NSUserDefaults.standardUserDefaults setObject:value forKey:key];
+        [NSUserDefaults.standardUserDefaults setObject:detailsToken forKey:detailsTokenKey];
     } else {
         [NSUserDefaults.standardUserDefaults removeObjectForKey:key];
+        [NSUserDefaults.standardUserDefaults removeObjectForKey:detailsTokenKey];
     }
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 
+/// 获取使用详情token
+/// @param contractAddress  contractAddress
+/// @param tokenId  tokenId
+/// @return
+- (NSString *)detailsTokenWithContractAddress:(NSString *)contractAddress tokenId:(NSString *)tokenId {
+    NSString *detailsTokenKey = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNftDetailsToken, contractAddress, tokenId, AppService.shared.loginUserID].dt_md5;
+    id token = [NSUserDefaults.standardUserDefaults stringForKey:detailsTokenKey];
+    if (token) {
+        return token;
+    }
+    return @"";
+}
 @end
 
 

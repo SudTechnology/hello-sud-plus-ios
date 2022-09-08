@@ -46,12 +46,32 @@
 }
 
 - (void)onWearBtnClick:(UIButton *)sender {
-
+    BOOL isWear = self.wearBtn.selected ? NO : YES;
+    BOOL isCN = NO;
+    NSString *contractAddress = @"";
+    NSString *tokenId = @"";
     if (HSAppPreferences.shared.isBindCNWallet) {
-        [self wearCard:sender];
-    } else if (HSAppPreferences.shared.isBindForeignWallet) {
-        [self wearNFT:sender];
+        isCN = YES;
     }
+    if (isWear) {
+        if (isCN) {
+            [self wearCard:sender];
+        } else {
+            [self wearNFT:sender];
+        }
+        return;
+    }
+    if (isCN) {
+        contractAddress = self.cellModel.cardModel.cardHash;
+        tokenId = self.cellModel.cardModel.chainAddr;
+    } else {
+        contractAddress = self.cellModel.nftModel.contractAddress;
+        tokenId = self.cellModel.nftModel.tokenId;
+    }
+    // 解绑
+    NSString *detailsToken = [AppService.shared detailsTokenWithContractAddress:contractAddress tokenId:tokenId];
+    [self handleWearDetailToken:detailsToken isCN:isCN];
+
 }
 
 /// 穿戴NFT
@@ -59,6 +79,7 @@
     WeakSelf
     DDLogDebug(@"wearNFT");
     sender.enabled = NO;
+
     SudNFTCredentialsTokenParamModel *paramModel = SudNFTCredentialsTokenParamModel.new;
     paramModel.walletToken = HSAppPreferences.shared.walletToken;
     paramModel.contractAddress = self.cellModel.nftModel.contractAddress;
@@ -130,14 +151,15 @@
 /// @param nftDetailToken nftDetailToken
 - (void)handleWearDetailToken:(NSString *)nftDetailToken isCN:(BOOL)isCN {
     WeakSelf
+    DDLogDebug(@"handleWearDetailToken:%@, isCN:(%@)", nftDetailToken, @(isCN));
     BOOL isWear = self.wearBtn.selected ? NO : YES;
     [UserService reqWearNFT:nftDetailToken isWear:isWear success:^(BaseRespModel *resp) {
         weakSelf.wearBtn.enabled = YES;
         if (isCN) {
             // 国内
-            [AppService.shared useNFT:weakSelf.cellModel.cardModel.cardHash tokenId:weakSelf.cellModel.cardModel.chainAddr add:isWear];
+            [AppService.shared useNFT:weakSelf.cellModel.cardModel.cardHash tokenId:weakSelf.cellModel.cardModel.chainAddr detailsToken:nftDetailToken add:isWear];
         } else {
-            [AppService.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId add:isWear];
+            [AppService.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId detailsToken:nftDetailToken add:isWear];
         }
         [weakSelf updateWearBtn];
 
@@ -161,7 +183,7 @@
     if (!isWear) {
         if (isCN) {
             SudNFTRemoveCnCredentialsTokenParamModel *paramModel = SudNFTRemoveCnCredentialsTokenParamModel.new;
-            paramModel.walletToken = HSAppPreferences.shared.walletToken;
+            paramModel.walletToken = [HSAppPreferences.shared getBindUserTokenByWalletType:HSAppPreferences.shared.currentSelectedWalletType];
             paramModel.detailsToken = nftDetailToken;
             [SudNFT removeNFTCnCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
                 if (errCode != 0) {
