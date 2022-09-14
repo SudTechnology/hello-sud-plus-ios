@@ -5,7 +5,7 @@
 
 #import "BindBtnView.h"
 
-@interface BindBtnView()
+@interface BindBtnView ()
 @property(nonatomic, strong) UIButton *clickBtn;
 @end
 
@@ -38,18 +38,31 @@
     self.model = model;
     self.nameLabel.text = model.name;
     if (model.icon) {
+        self.iconImageView.hidden = NO;
         [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:model.icon]];
+        [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(@102);
+            make.centerY.equalTo(self);
+            make.size.mas_equalTo(CGSizeMake(22, 22));
+        }];
+        [self.nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.iconImageView.mas_trailing).offset(8);
+            make.centerY.equalTo(self);
+            make.height.mas_greaterThanOrEqualTo(CGSizeZero);
+            make.trailing.equalTo(@-16);
+        }];
+        self.nameLabel.textAlignment = NSTextAlignmentLeft;
+    } else {
+        self.iconImageView.hidden = YES;
+        [self.nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(@16);
+            make.centerY.equalTo(self);
+            make.height.mas_greaterThanOrEqualTo(CGSizeZero);
+            make.trailing.equalTo(@-16);
+        }];
+        self.nameLabel.textAlignment = NSTextAlignmentCenter;
     }
-    CGFloat maxWidth = kScreenWidth - 40 - 32;
-    CGRect rect = [model.name boundingRectWithSize:CGSizeMake(maxWidth, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.nameLabel.font} context:nil];
-    CGFloat labelW = ceil(rect.size.width);
-    CGFloat left = (maxWidth - labelW - 28 - 16) / 2;
-//    [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.leading.equalTo(@(left));
-//    }];
-//    [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(@(labelW));
-//    }];
+
 }
 
 - (void)dtConfigEvents {
@@ -84,7 +97,7 @@
 
 - (UIButton *)clickBtn {
     if (!_clickBtn) {
-        _clickBtn = [[UIButton alloc]init];
+        _clickBtn = [[UIButton alloc] init];
     }
     return _clickBtn;
 }

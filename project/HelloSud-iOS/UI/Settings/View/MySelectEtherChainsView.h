@@ -9,4 +9,5 @@
 @interface MySelectEtherChainsView : BaseView
 @property (nonatomic, copy)void(^clickBlock)();
 - (void)update:(SudNFTChainInfoModel *)model;
+- (void)updateWithWalletInfoModel:(SudNFTWalletInfoModel *)model;
 @end

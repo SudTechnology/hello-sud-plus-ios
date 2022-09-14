@@ -11,8 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 半屏弹出sheet视图
 @interface DTSheetView : BaseAlertView
-typedef NS_ENUM(NSInteger, DTAlertType)
-{
+typedef NS_ENUM(NSInteger, DTAlertType) {
     DTAlertTypeBottom,
     DTAlertTypeTop,
 };
@@ -39,6 +38,9 @@ typedef NS_ENUM(NSInteger, DTAlertType)
 
 /// 关闭弹窗
 + (void)close;
+
+/// 增加下滑手势
++ (void)addPanGesture;
 @end
 
 NS_ASSUME_NONNULL_END

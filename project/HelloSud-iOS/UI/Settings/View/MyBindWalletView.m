@@ -6,6 +6,8 @@
 #import "MyBindWalletView.h"
 #import "BindBtnView.h"
 #import "MyViewController.h"
+#import "ForeignWalletSelectPopView.h"
+#import "CNWalletSelectPopView.h"
 
 @interface MyBindWalletView ()
 @property(nonatomic, strong) UILabel *nameLabel;
@@ -17,6 +19,10 @@
 /// 是否更多处于打开状态
 @property(nonatomic, assign) BOOL isMoreOpened;
 @property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
+/// 国内钱包列表
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *cnWalletList;
+/// 海外钱包列表
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *foreignWalletList;
 @end
 
 @implementation MyBindWalletView
@@ -76,8 +82,8 @@
     [self updateMoreShowState];
     [self updateSupportWallet:self.walletList];
     UIViewController *currentViewController = AppUtil.currentViewController;
-    if ([currentViewController isKindOfClass:MyViewController.class]){
-        MyViewController *myViewController = (MyViewController *)currentViewController;
+    if ([currentViewController isKindOfClass:MyViewController.class]) {
+        MyViewController *myViewController = (MyViewController *) currentViewController;
         [myViewController reloadHeadView];
     }
 
@@ -99,18 +105,49 @@
     for (BindBtnView *v in self.bindViewList) {
         [v removeFromSuperview];
     }
-    NSArray *showWalletList = walletList;
-    NSInteger limitCount = 4;
-    // 小于limitCount个隐藏
-    if (walletList.count <= limitCount) {
-        self.moreView.hidden = YES;
-    } else {
-        self.moreView.hidden = NO;
-        if (!self.isMoreOpened) {
-            // 展示limitCount个
-            showWalletList = [walletList subarrayWithRange:NSMakeRange(0, limitCount)];
+    NSMutableArray *showWalletList = NSMutableArray.new;
+    SudNFTWalletInfoModel *cnInfoModel = nil;
+    SudNFTWalletInfoModel *foreignInfoModel = nil;
+
+    NSMutableArray *cnWalletList = NSMutableArray.new;
+    NSMutableArray *foreignWalletList = NSMutableArray.new;
+    for (SudNFTWalletInfoModel *m in walletList) {
+        if (m.zoneType == 0) {
+            if (foreignInfoModel == nil) {
+                foreignInfoModel = SudNFTWalletInfoModel.new;
+                foreignInfoModel.name = @"海外钱包";
+                foreignInfoModel.zoneType = m.zoneType;
+            }
+            [foreignWalletList addObject:m];
+        } else if (m.zoneType == 1) {
+            if (cnInfoModel == nil) {
+                cnInfoModel = SudNFTWalletInfoModel.new;
+                cnInfoModel.name = @"国内账户";
+                cnInfoModel.zoneType = m.zoneType;
+            }
+            [cnWalletList addObject:m];
         }
     }
+    if (foreignInfoModel) {
+        self.foreignWalletList = foreignWalletList;
+        [showWalletList addObject:foreignInfoModel];
+    }
+    if (cnInfoModel) {
+        self.cnWalletList = cnWalletList;
+        [showWalletList addObject:cnInfoModel];
+    }
+
+//    NSInteger limitCount = 4;
+//    // 小于limitCount个隐藏
+//    if (walletList.count <= limitCount) {
+//        self.moreView.hidden = YES;
+//    } else {
+//        self.moreView.hidden = NO;
+//        if (!self.isMoreOpened) {
+//            // 展示limitCount个
+//            showWalletList = [walletList subarrayWithRange:NSMakeRange(0, limitCount)];
+//        }
+//    }
 
     [self.bindViewList removeAllObjects];
     BindBtnView *lastView = nil;
@@ -122,10 +159,32 @@
         bindBtnView.layer.borderWidth = 1;
         [self addSubview:bindBtnView];
         [self.bindViewList addObject:bindBtnView];
-        bindBtnView.clickWalletBlock = ^(SudNFTWalletInfoModel *wallModel) {
-            if (weakSelf.clickWalletBlock) {
-                weakSelf.clickWalletBlock(wallModel);
+        bindBtnView.clickWalletBlock = ^(SudNFTWalletInfoModel *zoneWalletModel) {
+
+            // 国内
+            if (zoneWalletModel.zoneType == 1) {
+
+                CNWalletSelectPopView *v = CNWalletSelectPopView.new;
+                v.selectedWalletBlock = ^(SudNFTWalletInfoModel *walletInfoModel) {
+                    if (weakSelf.clickWalletBlock) {
+                        weakSelf.clickWalletBlock(walletInfoModel);
+                    }
+                };
+                [DTSheetView show:v onCloseCallback:nil];
+                [DTSheetView addPanGesture];
+                [v updateDataList:weakSelf.cnWalletList];
+                return;
             }
+            // 海外
+            ForeignWalletSelectPopView *v = ForeignWalletSelectPopView.new;
+            v.selectedWalletBlock = ^(SudNFTWalletInfoModel *walletInfoModel) {
+                if (weakSelf.clickWalletBlock) {
+                    weakSelf.clickWalletBlock(walletInfoModel);
+                }
+            };
+            [DTSheetView show:v onCloseCallback:nil];
+            [DTSheetView addPanGesture];
+            [v updateDataList:weakSelf.foreignWalletList];
         };
 
         [bindBtnView update:m];
@@ -163,7 +222,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"连接到你的钱包";
+        _nameLabel.text = @"连接账户，同步你的NFT或数字藏品";
         _nameLabel.numberOfLines = 1;
         _nameLabel.textColor = HEX_COLOR(@"#ffffff");
         _nameLabel.font = UIFONT_MEDIUM(14);

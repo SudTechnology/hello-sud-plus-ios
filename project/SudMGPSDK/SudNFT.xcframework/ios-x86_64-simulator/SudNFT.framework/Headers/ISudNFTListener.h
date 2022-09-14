@@ -34,16 +34,30 @@ typedef void(^ISudNFTListenerGetWalletList)(NSInteger errCode, NSString *_Nullab
 
 typedef void(^ISudNFTListenerGetNFTList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGetNFTListModel *_Nullable nftListModel);
 
-//typedef void(^ISudNFTListenerBindWallet)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindWalletModel *_Nullable walletInfoModel);
-
 typedef void(^ISudNFTListenerGenNFTCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGenNFTCredentialsTokenModel *_Nullable generateDetailTokenModel);
+
+typedef void(^ISudNFTListenerUnbindWallet)(NSInteger errCode, NSString *_Nullable errMsg);
+
+typedef void(^ISudNFTListenerRemoveNFTCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg);
+
+typedef void(^ISudNFTListenerSendSmsCode)(NSInteger errCode, NSString *_Nullable errMsg);
+
+typedef void(^ISudNFTListenerBindCnWallet)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTBindCnWalletModel *_Nullable resp);
+
+typedef void(^ISudNFTListenerUnBindCnWallet)(NSInteger errCode, NSString *_Nullable errMsg);
+
+typedef void(^ISudNFTListenerGetCnNFTList)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTGetCnNFTListModel *_Nullable resp);
+
+typedef void(^ISudNFTListenerCnGenNFTCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg, SudNFTCnCredentialsTokenModel *_Nullable resp);
+
+typedef void(^ISudNFTListenerRemoveNFTCnCredentialsToken)(NSInteger errCode, NSString *_Nullable errMsg);
 
 /// 钱包绑定状态类型
 typedef NS_ENUM(NSInteger, ISudNFTBindWalletStageType) {
     /// 连接钱包
     ISudNFTBindWalletStageTypeConnect = 1,
     /// 钱包签名
-    ISudNFTBindWalletStageTypeSign = 1,
+    ISudNFTBindWalletStageTypeSign = 2,
 };
 
 /// 钱包绑定事件类型

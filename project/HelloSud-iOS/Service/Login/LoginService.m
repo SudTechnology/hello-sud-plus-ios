@@ -24,6 +24,8 @@ NSString *const TOKEN_REFRESH_FAIL_NTF = @"TOKEN_REFRESH_FAIL_NTF";
 
 /// 钱包token失效
 NSString *const WALLET_BIND_TOKEN_EXPIRED_NTF = @"WALLET_BIND_TOKEN_EXPIRED_NTF";
+/// NFT刷新
+NSString *const NFT_REFRESH_NFT = @"NFT_REFRESH_NFT";
 
 @implementation LoginService
 

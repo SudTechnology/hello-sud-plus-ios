@@ -46,34 +46,108 @@
 }
 
 - (void)onWearBtnClick:(UIButton *)sender {
+    BOOL isWear = self.wearBtn.selected ? NO : YES;
+    if (isWear) {
+        [self handleWear:sender];
+    } else {
+        [self handleRemoveWear:sender];
+    }
+}
 
+/// 处理穿戴
+- (void)handleWear:(UIButton *)sender {
+    BOOL isCN = HsNFTPreferences.shared.isBindCNWallet;
+    if (isCN) {
+        [self wearCard:sender];
+    } else {
+        [self wearNFT:sender];
+    }
+}
+
+/// 处理移除穿戴
+- (void)handleRemoveWear:(UIButton *)sender {
+    BOOL isCN = HsNFTPreferences.shared.isBindCNWallet;
+    NSString *contractAddress = @"";
+    NSString *tokenId = @"";
+    if (isCN) {
+        contractAddress = self.cellModel.cardModel.cardHash;
+        tokenId = self.cellModel.cardModel.chainAddr;
+    } else {
+        contractAddress = self.cellModel.nftModel.contractAddress;
+        tokenId = self.cellModel.nftModel.tokenId;
+    }
+    // 解绑
+    NSString *detailsToken = [HsNFTPreferences.shared detailsTokenWithContractAddress:contractAddress tokenId:tokenId];
+    [self handleWearDetailToken:detailsToken isCN:isCN];
+}
+
+/// 穿戴NFT
+- (void)wearNFT:(UIButton *)sender {
     WeakSelf
+    DDLogDebug(@"wearNFT");
     sender.enabled = NO;
+
     SudNFTCredentialsTokenParamModel *paramModel = SudNFTCredentialsTokenParamModel.new;
-    paramModel.walletToken = HSAppPreferences.shared.walletToken;
+    paramModel.walletToken = HsNFTPreferences.shared.walletToken;
     paramModel.contractAddress = self.cellModel.nftModel.contractAddress;
     paramModel.tokenId = self.cellModel.nftModel.tokenId;
-    paramModel.chainType = HSAppPreferences.shared.selectedEthereumChainType;
+    paramModel.chainType = HsNFTPreferences.shared.selectedEthereumChainType;
     [SudNFT genNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenNFTCredentialsTokenModel *generateDetailTokenModel) {
         if (errCode != 0) {
-            NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+            NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             sender.enabled = YES;
             if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter]postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
             }
             return;
         }
-        [weakSelf handleWearDetailToken:generateDetailTokenModel.nftDetailsToken];
+        [weakSelf handleWearDetailToken:generateDetailTokenModel.detailsToken isCN:NO];
     }];
 }
 
+/// 穿戴藏品
+- (void)wearCard:(UIButton *)sender {
+    WeakSelf
+    DDLogDebug(@"wearCard");
+    sender.enabled = NO;
+    SudNFTCnCredentialsTokenParamModel *paramModel = SudNFTCnCredentialsTokenParamModel.new;
+    paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+    paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
+    paramModel.cardId = self.cellModel.cardModel.cardId;
+    [SudNFT genCnNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTCnCredentialsTokenModel *resp) {
+        if (errCode != 0) {
+            NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+            [ToastUtil show:msg];
+            sender.enabled = YES;
+            if (errCode == 1008) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
+            }
+            return;
+        }
+        [weakSelf handleWearDetailToken:resp.detailsToken isCN:YES];
+    }];
+
+}
+
 - (void)onAddrTap:(id)sender {
-    [AppUtil copyToPasteProcess:self.cellModel.nftModel.contractAddress toast:@"复制成功"];
+    NSString *contractAddress = @"";
+    if (HsNFTPreferences.shared.isBindCNWallet) {
+        contractAddress = self.cellModel.cardModel.cardHash;
+    } else if (HsNFTPreferences.shared.isBindForeignWallet) {
+        contractAddress = self.cellModel.nftModel.contractAddress;
+    }
+    [AppUtil copyToPasteProcess:contractAddress toast:@"复制成功"];
 }
 
 - (void)onTokenTap:(id)sender {
-    [AppUtil copyToPasteProcess:self.cellModel.nftModel.tokenId toast:@"复制成功"];
+    NSString *tokenId = @"";
+    if (HsNFTPreferences.shared.isBindCNWallet) {
+        tokenId = self.cellModel.cardModel.chainAddr;
+    } else if (HsNFTPreferences.shared.isBindForeignWallet) {
+        tokenId = self.cellModel.nftModel.tokenId;
+    }
+    [AppUtil copyToPasteProcess:tokenId toast:@"复制成功"];
 }
 
 //- (void)onCopyBtnClick:(id)sender {
@@ -82,16 +156,26 @@
 
 /// 上报后台
 /// @param nftDetailToken nftDetailToken
-- (void)handleWearDetailToken:(NSString *)nftDetailToken {
+- (void)handleWearDetailToken:(NSString *)nftDetailToken isCN:(BOOL)isCN {
     WeakSelf
+    DDLogDebug(@"handleWearDetailToken:%@, isCN:(%@)", nftDetailToken, @(isCN));
     BOOL isWear = self.wearBtn.selected ? NO : YES;
     [UserService reqWearNFT:nftDetailToken isWear:isWear success:^(BaseRespModel *resp) {
         weakSelf.wearBtn.enabled = YES;
-        [AppService.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId add:isWear];
+        if (isCN) {
+            // 国内
+            [HsNFTPreferences.shared useNFT:weakSelf.cellModel.cardModel.cardHash tokenId:weakSelf.cellModel.cardModel.chainAddr detailsToken:nftDetailToken add:isWear];
+        } else {
+            [HsNFTPreferences.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId detailsToken:nftDetailToken add:isWear];
+        }
         [weakSelf updateWearBtn];
 
         if (isWear) {
-            AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.nftModel.coverURL;
+            if (isCN) {
+                AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.cardModel.coverUrl;
+            } else {
+                AppService.shared.login.loginUserInfo.headerNftUrl = self.cellModel.nftModel.coverURL;
+            }
             AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNFT;
         } else {
             AppService.shared.login.loginUserInfo.headerNftUrl = nil;
@@ -103,10 +187,38 @@
     }                  fail:^(NSError *error) {
         weakSelf.wearBtn.enabled = YES;
     }];
+    if (!isWear) {
+        if (isCN) {
+            SudNFTRemoveCnCredentialsTokenParamModel *paramModel = SudNFTRemoveCnCredentialsTokenParamModel.new;
+            paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:HsNFTPreferences.shared.currentSelectedWalletType];
+            paramModel.detailsToken = nftDetailToken;
+            [SudNFT removeNFTCnCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
+                if (errCode != 0) {
+                    NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+                    [ToastUtil show:msg];
+                }
+            }];
+        } else {
+            SudNFTRemoveCredentialsTokenParamModel *paramModel = SudNFTRemoveCredentialsTokenParamModel.new;
+            paramModel.walletToken = HsNFTPreferences.shared.walletToken;
+            paramModel.detailsToken = nftDetailToken;
+            [SudNFT removeNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
+                if (errCode != 0) {
+                    NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
+                    [ToastUtil show:msg];
+                }
+            }];
+        }
+    }
 }
 
 - (void)updateWearBtn {
-    BOOL isUsed = [AppService.shared isNFTAlreadyUsed:self.cellModel.nftModel.contractAddress tokenId:self.cellModel.nftModel.tokenId];
+    BOOL isUsed = NO;
+    if (HsNFTPreferences.shared.isBindForeignWallet) {
+        isUsed = [HsNFTPreferences.shared isNFTAlreadyUsed:self.cellModel.nftModel.contractAddress tokenId:self.cellModel.nftModel.tokenId];
+    } else if (HsNFTPreferences.shared.isBindCNWallet) {
+        isUsed = [HsNFTPreferences.shared isNFTAlreadyUsed:self.cellModel.cardModel.cardHash tokenId:self.cellModel.cardModel.chainAddr];
+    }
     if (isUsed) {
         _wearBtn.selected = YES;
         _wearBtn.layer.borderWidth = 1;
@@ -214,17 +326,42 @@
     if (!self.cellModel) {
         return;
     }
-    
-    SudNFTInfoModel *nftModel = self.cellModel.nftModel;
+
+
     WeakSelf
-    self.nameLabel.text = nftModel.name;
-    self.contractAddressLabel.attributedText = [self generate:@"Contract Address\n" subtitle:nftModel.contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
-    self.tokenIDLabel.attributedText = [self generate:@"Token ID\n" subtitle:nftModel.tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
-    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:nftModel.tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
-    if (nftModel.coverURL) {
+
+    BOOL isCNBind = HsNFTPreferences.shared.isBindCNWallet;
+    NSString *contractTitle = @"Contract Address\n";
+    NSString *tokenIDTitle = @"Token ID\n";
+    NSString *coverURL = nil;
+    NSString *contractAddress = @"";
+    NSString *tokenId = @"";
+    NSString *tokenType = @"";
+    NSString *name = @"";
+    if (isCNBind) {
+        contractTitle = @"地址\n";
+        tokenIDTitle = @"令牌ID\n";
+        contractAddress = self.cellModel.cardModel.cardHash;
+        tokenId = self.cellModel.cardModel.chainAddr;
+        coverURL = self.cellModel.cardModel.coverUrl;
+        name = self.cellModel.cardModel.name;
+    } else {
+        SudNFTInfoModel *nftModel = self.cellModel.nftModel;
+        contractAddress = nftModel.contractAddress;
+        tokenId = nftModel.tokenId;
+        tokenType = nftModel.tokenType;
+        coverURL = nftModel.coverURL;
+        name = nftModel.name;
+    }
+    self.nameLabel.text = name;
+    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
+    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
+    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
+    self.tokenStandLabel.hidden = tokenType.length == 0;
+    if (coverURL) {
 
         SDWebImageContext *context = nil;
-        NSURL *url = [[NSURL alloc] initWithString:nftModel.coverURL];
+        NSURL *url = [[NSURL alloc] initWithString:coverURL];
         if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame) {
             context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(kScreenWidth, kScreenWidth))};
         }
@@ -305,7 +442,8 @@
         _iconImageView = [[SDAnimatedImageView alloc] init];
         _iconImageView.shouldCustomLoopCount = YES;
         _iconImageView.animationRepeatCount = NSIntegerMax;
-        _iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _iconImageView.clipsToBounds = YES;
     }
     return _iconImageView;
 }

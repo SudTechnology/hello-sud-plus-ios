@@ -7,11 +7,13 @@
 
 #import "DTSheetView.h"
 
-@interface DTSheetView()
+@interface DTSheetView ()
 /// 是否响应hitTest
 @property(nonatomic, assign) BOOL isHitTest;
 /// 是否响应hitTest
 @property(nonatomic, assign) DTAlertType alertType;
+@property(nonatomic, assign) CGFloat beginPanY;
+@property(nonatomic, assign) CGFloat moveH;
 @end
 
 @implementation DTSheetView
@@ -60,6 +62,48 @@
     return [super hitTest:point withEvent:event];
 }
 
+/// 添加滑动手势
+- (void)addPanGes {
+    UIView *pandView = self.contentView;
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanView:)];
+    pan.delegate = self;
+    pan.delaysTouchesBegan = YES;
+    [pandView addGestureRecognizer:pan];
+}
+
+- (void)onPanView:(UIPanGestureRecognizer *)pan {
+    CGPoint point = [pan locationInView:self.contentView.superview];
+    CGPoint trans = [pan translationInView:self.contentView.superview];
+    CGFloat moveH = point.y - self.beginPanY;
+    switch (pan.state) {
+        case UIGestureRecognizerStateBegan:
+            self.beginPanY = point.y;
+            break;
+        case UIGestureRecognizerStateChanged:
+            if (moveH >= 0) {
+                self.moveH = moveH;
+                CGAffineTransform transY = CGAffineTransformMakeTranslation(0, moveH);
+                self.contentView.transform = transY;
+            }
+            break;
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+            if (moveH >= 0) {
+                self.moveH = moveH;
+                CGAffineTransform transY = CGAffineTransformMakeTranslation(0, moveH);
+                self.contentView.transform = transY;
+            } else {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.contentView.transform = CGAffineTransformIdentity;
+                }];
+            }
+            if (moveH > 0) {
+                [DTSheetView close];
+            }
+            break;
+    }
+}
+
 /// 展示底部弹窗 - （内容自定义）
 /// - Parameters:
 ///   - view: 展示的view
@@ -67,7 +111,7 @@
 ///   - isHitTest: 是否可点击 -- 默认不可点击
 ///   - onCloseCallBack: 关闭弹窗回调
 + (void)show:(UIView *)view rootView:(UIView *)rootView hiddenBackCover:(BOOL)hiddenBackCover onCloseCallback:(void (^)(void))cb {
-    [self showNode:view rootView:nil hiddenBackCover:hiddenBackCover alertType: DTAlertTypeBottom cornerRadius: 12 onCloseCallback:cb];
+    [self showNode:view rootView:nil hiddenBackCover:hiddenBackCover alertType:DTAlertTypeBottom cornerRadius:12 onCloseCallback:cb];
 }
 
 /// 展示底部弹窗 - （内容自定义）
@@ -75,7 +119,7 @@
 ///   - view: 展示的view
 ///   - onCloseCallBack: 关闭弹窗回调
 + (void)show:(UIView *)view onCloseCallback:(void (^)(void))cb {
-    [self showNode:view rootView:nil hiddenBackCover:false alertType: DTAlertTypeBottom cornerRadius: 0 onCloseCallback:cb];
+    [self showNode:view rootView:nil hiddenBackCover:false alertType:DTAlertTypeBottom cornerRadius:0 onCloseCallback:cb];
 }
 
 /// 展示顶部弹窗 - （内容自定义）
@@ -83,7 +127,7 @@
 ///   - view: 展示的view
 ///   - onCloseCallBack: 关闭弹窗回调
 + (void)showTop:(UIView *)view cornerRadius:(NSInteger)cornerRadius onCloseCallback:(void (^)(void))cb {
-    [self showNode:view rootView:nil hiddenBackCover:false alertType: DTAlertTypeTop cornerRadius: cornerRadius onCloseCallback:cb];
+    [self showNode:view rootView:nil hiddenBackCover:false alertType:DTAlertTypeTop cornerRadius:cornerRadius onCloseCallback:cb];
 }
 
 + (void)showNode:(UIView *)view
@@ -118,10 +162,16 @@
     [superView addSubview:alert];
     [self setAlert:alert];
     [[self getAlert] hs_show];
+
 }
 
 /// 关闭弹窗
 + (void)close {
     [[self getAlert] hs_close];
+}
+
+/// 增加下滑手势
++ (void)addPanGesture {
+    [(DTSheetView *)[self getAlert] addPanGes];
 }
 @end

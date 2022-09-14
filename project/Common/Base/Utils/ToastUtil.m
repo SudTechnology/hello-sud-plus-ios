@@ -20,7 +20,7 @@
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [SVProgressHUD setImageViewSize:CGSizeMake(0, -1)];
-    [SVProgressHUD showImage:[UIImage new] status:msg];
+    [SVProgressHUD showImage:[UIImage imageNamed:@"cell_selected"] status:msg];
     [SVProgressHUD dismissWithDelay:TOAST_DELAY_DISMISS_DURATION];
 }
 @end

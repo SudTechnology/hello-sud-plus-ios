@@ -9,6 +9,7 @@
 #import "MySelectEtherChainsView.h"
 #import "MyEthereumChainsSelectPopView.h"
 #import "HSNFTListCellModel.h"
+#import "MyCNWalletSwitchPopView.h"
 
 @interface MyNFTView ()
 @property(nonatomic, strong) MySelectEtherChainsView *chainsView;
@@ -23,6 +24,7 @@
 
 @property(nonatomic, strong) UILabel *noDataLabel;
 @property(nonatomic, strong) NSArray<SudNFTChainInfoModel *> *chains;
+@property(nonatomic, assign) NSInteger totalCount;
 @end
 
 @implementation MyNFTView
@@ -107,29 +109,51 @@
 
 }
 
+/// 更新NFT列表数据
 - (void)updateNFTList:(SudNFTGetNFTListModel *)nftListModel {
     self.nftListModel = nftListModel;
-
+    self.totalCount = nftListModel.totalCount;
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (SudNFTInfoModel *m in nftListModel.nftList) {
         HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
+        cellModel.coverURL = m.coverURL;
+        cellModel.name = m.name;
         cellModel.nftModel = m;
         [arr addObject:cellModel];
     }
     self.nftCellModelList = arr;
+    [self updateShowInfo];
+}
+
+/// 更新藏品列表
+- (void)updateCardList:(SudNFTGetCnNFTListModel *)cardListModel {
+    self.totalCount = cardListModel.totalCount;
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    for (SudNFTCnInfoModel *m in cardListModel.list) {
+        HSNFTListCellModel *cellModel = [[HSNFTListCellModel alloc] init];
+        cellModel.coverURL = m.coverUrl;
+        cellModel.name = m.name;
+        cellModel.cardModel = m;
+        [arr addObject:cellModel];
+    }
+    self.nftCellModelList = arr;
+    [self updateShowInfo];
+}
+
+/// 更新展示信息
+- (void)updateShowInfo {
     WeakSelf
     for (UIImageView *iv in self.iconImageViewList) {
         iv.image = nil;
     }
     for (int i = 0; i < self.iconImageViewList.count; ++i) {
         UIImageView *iv = self.iconImageViewList[i];
-        if (nftListModel.nftList.count > i) {
-            SudNFTInfoModel *nftModel = nftListModel.nftList[i];
+        if (self.nftCellModelList.count > i) {
+            HSNFTListCellModel *cellModel = self.nftCellModelList[i];
             [self showLoadAnimate:iv];
-            DDLogDebug(@"show contractAddress:%@, tokenId:%@, image:%@, name:%@", nftModel.contractAddress, nftModel.tokenId, nftModel.coverURL, nftModel.name);
-            if (nftModel.coverURL) {
+            if (cellModel.coverURL) {
                 __weak UIImageView *weakIV = iv;
-                [iv sd_setImageWithURL:[[NSURL alloc] initWithString:nftModel.coverURL]
+                [iv sd_setImageWithURL:[[NSURL alloc] initWithString:cellModel.coverURL]
                       placeholderImage:nil
                              completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
                                  if (!error) {
@@ -144,19 +168,39 @@
             [self closeLoadAnimate:iv];
         }
     }
-    self.nftCountLabel.text = [NSString stringWithFormat:@"%@", @(nftListModel.totalCount)];
-    self.noDataLabel.hidden = nftListModel.totalCount == 0 ? NO : YES;
-    if (nftListModel.totalCount == 0) {
+    self.nftCountLabel.text = [NSString stringWithFormat:@"%@", @(self.totalCount)];
+    self.noDataLabel.hidden = self.totalCount == 0 ? NO : YES;
+    if (self.totalCount == 0) {
         for (UIImageView *iv in self.iconImageViewList) {
             [self closeLoadAnimate:iv];
         }
     }
+    if (HsNFTPreferences.shared.isBindForeignWallet) {
+        self.nameLabel.text = @"我的NFT";
+        self.noDataLabel.text = @"尚无NFT";
+    } else if (HsNFTPreferences.shared.isBindCNWallet) {
+        self.nameLabel.text = @"我的数字藏品";
+        self.noDataLabel.text = @"尚无数字藏品";
+    }
 }
 
 - (void)updateEthereumList:(NSArray<SudNFTChainInfoModel *> *)chains {
+
+    NSInteger zoneType = HsNFTPreferences.shared.bindZoneType;
+    if (zoneType == 1) {
+        /// 国内钱包
+        for (SudNFTWalletInfoModel *m in AppService.shared.walletList) {
+            if (m.type == HsNFTPreferences.shared.currentSelectedWalletType) {
+                [self.chainsView updateWithWalletInfoModel:m];
+                break;
+            }
+        }
+        return;
+    }
+
     self.chains = chains;
     for (SudNFTChainInfoModel *m in chains) {
-        if (m.type == HSAppPreferences.shared.selectedEthereumChainType) {
+        if (m.type == HsNFTPreferences.shared.selectedEthereumChainType) {
             [self.chainsView update:m];
             break;
         }
@@ -186,6 +230,16 @@
 }
 
 - (void)onTapChainsView:(id)tap {
+
+    NSInteger zoneType = HsNFTPreferences.shared.bindZoneType;
+    if (zoneType == 1) {
+        // 国内
+        MyCNWalletSwitchPopView *v = [[MyCNWalletSwitchPopView alloc] init];
+        [v updateBindWalletList:AppService.shared.walletList];
+        [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
+        return;
+    }
+    /// 国外选择链
     MyEthereumChainsSelectPopView *v = [[MyEthereumChainsSelectPopView alloc] init];
     [v updateChains:self.chains];
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
@@ -240,9 +294,10 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"已拥有的NFT";
+        _nameLabel.text = @"我的NFT";
         _nameLabel.textColor = HEX_COLOR(@"#ffffff");
         _nameLabel.font = UIFONT_MEDIUM(16);
+        _nameLabel.textAlignment = LanguageUtil.isLanguageRTL ? NSTextAlignmentRight : NSTextAlignmentLeft;
     }
     return _nameLabel;
 }

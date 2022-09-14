@@ -392,6 +392,7 @@
         _headerView.image = [UIImage imageNamed:@"room_mic_up"];
         _headerView.userInteractionEnabled = YES;
         _headerView.clipsToBounds = YES;
+        _headerView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _headerView;
 }

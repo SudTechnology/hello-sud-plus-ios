@@ -15,8 +15,8 @@
         return [[[UIApplication sharedApplication] keyWindow] safeAreaInsets];
     } else {
         // Fallback on earlier versions
+        return UIEdgeInsetsMake(20, 0, 0, 0);
     }
-    return UIEdgeInsetsZero;
 }
 
 /// 是否是iPhone x系列刘海屏设备
