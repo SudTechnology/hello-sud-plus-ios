@@ -55,15 +55,10 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
 
 - (void)prepare {
     _bindZoneType = -1;
-    _bindWalletType = -1;
     _selectedEthereumChainType = [NSUserDefaults.standardUserDefaults integerForKey:kKeySelectedEthereumChain];
     id tempBindZoneType = [NSUserDefaults.standardUserDefaults objectForKey:kKeyBindWalletZone];
     if (tempBindZoneType) {
         _bindZoneType = [NSUserDefaults.standardUserDefaults integerForKey:kKeyBindWalletZone];
-    }
-    id tempBindWalletType = [NSUserDefaults.standardUserDefaults objectForKey:kKeyBindWalletType];
-    if (tempBindWalletType) {
-        _bindWalletType = [NSUserDefaults.standardUserDefaults integerForKey:kKeyBindWalletType];
     }
 
     _currentWalletType = [NSUserDefaults.standardUserDefaults integerForKey:kKeyCurrentSelectedWallet];
@@ -128,12 +123,6 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
         [NSUserDefaults.standardUserDefaults synchronize];
         [[NSNotificationCenter defaultCenter] postNotificationName:MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF object:nil userInfo:nil];
     }
-}
-
-- (void)setBindWalletType:(NSInteger)bindWalletType {
-    _bindWalletType = bindWalletType;
-    [NSUserDefaults.standardUserDefaults setInteger:bindWalletType forKey:kKeyBindWalletType];
-    [NSUserDefaults.standardUserDefaults synchronize];
 }
 
 - (void)setBindZoneType:(NSInteger)bindZoneType {
@@ -223,15 +212,13 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
 
 /// 清除绑定用户信息
 /// @param walletType
-- (void)clearBindUserInfoWithWalletType:(NSInteger)walletType {
+- (void)clearBindInfoWithWalletType:(NSInteger)walletType {
     // 移除绑定用户手机号
     [NSUserDefaults.standardUserDefaults removeObjectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserPhone, @(walletType)]];
     // 移除绑定用户token
     [NSUserDefaults.standardUserDefaults removeObjectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserToken, @(walletType)]];
-    /// 清楚绑定类型
-    self.currentWalletType = -1;
-    self.bindZoneType = -1;
-    self.bindWalletType = -1;
+    // 移除绑定钱包地址
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindWallet, @(walletType)]];
 }
 
 - (NSString *_Nullable)nftErrorMsg:(NSInteger)errCode errorMsg:(NSString *)errorMsg {

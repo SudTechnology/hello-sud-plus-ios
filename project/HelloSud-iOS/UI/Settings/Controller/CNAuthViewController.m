@@ -111,7 +111,6 @@
             return;
         }
         HsNFTPreferences.shared.currentWalletType = paramModel.walletType;
-        HsNFTPreferences.shared.bindWalletType = paramModel.walletType;
         HsNFTPreferences.shared.bindZoneType = self.walletInfoModel.zoneType;
         [HsNFTPreferences.shared saveWalletTokenWithBindCnWalletModel:resp walletType:paramModel.walletType phone:paramModel.phone];
         [ToastUtil show:@"授权成功"];

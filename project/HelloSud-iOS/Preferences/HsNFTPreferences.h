@@ -13,15 +13,12 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 
 /// 应用本地配置
 @interface HsNFTPreferences : NSObject
-/// 绑定钱包类型
-@property(nonatomic, assign) NSInteger bindWalletType;
+
 /// 选择链网类型
 @property(nonatomic, assign) NSInteger selectedEthereumChainType;
-
 @property(nonatomic, strong) NSString *nftListPageKey;
 /// 绑定钱包区域 0海外 1国内
 @property(nonatomic, assign) NSInteger bindZoneType;
-
 /// 当前选中钱包
 @property(nonatomic, assign) NSInteger currentWalletType;
 /// 穿戴数据详情信息
@@ -63,7 +60,7 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 
 /// 清除绑定用户信息
 /// @param walletType walletType
-- (void)clearBindUserInfoWithWalletType:(NSInteger)walletType;
+- (void)clearBindInfoWithWalletType:(NSInteger)walletType;
 
 /// 是否已经绑定了钱包
 - (BOOL)isBindWallet;
