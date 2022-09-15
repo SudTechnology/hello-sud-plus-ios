@@ -148,6 +148,7 @@
             self.walletList = getWalletListModel.walletList;
             AppService.shared.walletList = self.walletList;
             [self updateWalletEtherChains];
+            [self.myHeaderView updateSupportWallet:getWalletListModel.walletList];
         }];
     } else {
         [self updateWalletEtherChains];
@@ -293,6 +294,10 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:MY_NFT_WEAR_CHANGE_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         [weakSelf.myHeaderView dtUpdateUI];
     }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_NFT_WALLET_TYPE_CHANGE_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf checkWalletInfo];
+    }];
+
     [[NSNotificationCenter defaultCenter] addObserverForName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         [weakSelf onSudNFTBindWalletTokenExpired];
     }];

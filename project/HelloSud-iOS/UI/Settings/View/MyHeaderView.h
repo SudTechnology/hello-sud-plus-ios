@@ -4,7 +4,6 @@
 //
 
 #import "BaseView.h"
-@class SudNFTWalletModel;
 
 @interface MyHeaderView : BaseView
 @property (nonatomic, strong)void(^clickWalletBlock)(SudNFTWalletInfoModel *wallModel);

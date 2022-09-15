@@ -8,6 +8,8 @@
 #import "MyBindWalletView.h"
 #import "MyNFTView.h"
 #import "UserWearNftDetailView.h"
+#import "WalletAddressSwitchPopView.h"
+#import "WalletAddressSwitchCellModel.h"
 
 @interface MyHeaderView ()
 @property(nonatomic, strong) SDAnimatedImageView *headerView;
@@ -19,6 +21,8 @@
 @property(nonatomic, strong) MyBindWalletView *bindView;
 @property(nonatomic, strong) MyNFTView *myNFTView;
 @property(nonatomic, strong) UIButton *deleteBtn;
+@property(nonatomic, strong) NSArray <WalletAddressSwitchCellModel *> *walletAddressCellModelList;
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
 @end
 
 @implementation MyHeaderView
@@ -87,10 +91,10 @@
     if (userInfo.icon.length > 0) {
         SDWebImageContext *context = nil;
         NSURL *url = [[NSURL alloc] initWithString:userInfo.icon];
-        if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame){
+        if ([url.pathExtension caseInsensitiveCompare:@"svg"] == NSOrderedSame) {
             context = @{SDWebImageContextImageThumbnailPixelSize: @(CGSizeMake(200, 200))};
         }
-        [self.headerView  sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        [self.headerView sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
         }];
     }
     [self.headerView viewWithTag:100].hidden = userInfo.isWearNFT ? NO : YES;
@@ -98,7 +102,14 @@
     if (isBindWallet) {
         // 绑定过了钱包
         if (HsNFTPreferences.shared.isBindForeignWallet) {
-            self.walletAddressLabel.text = HsNFTPreferences.shared.currentWalletAddress;
+            NSString *str = [NSString stringWithFormat:@"%@ ", HsNFTPreferences.shared.currentWalletAddress];
+            NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:str];
+            fullAttr.yy_font = UIFONT_REGULAR(12);
+            fullAttr.yy_color = HEX_COLOR(@"#333333");
+            NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:@"more_address"] size:CGSizeMake(12, 12) offsetY:-2];
+            [fullAttr appendAttributedString:iconAttr];
+
+            self.walletAddressLabel.attributedText = fullAttr;
             self.walletAddressLabel.hidden = NO;
             self.userIdLabel.hidden = YES;
         } else {
@@ -146,17 +157,24 @@
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
+    WeakSelf
     self.headerView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapHead:)];
     [self.headerView addGestureRecognizer:tap];
     [self.deleteBtn addTarget:self action:@selector(onDeleteWalletClick:) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer *walletTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapWalletAddressLabel:)];
     [self.walletAddressLabel addGestureRecognizer:walletTap];
-
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf dtUpdateUI];
+    }];
 }
 
+
 - (void)onTapWalletAddressLabel:(id)tap {
-    [AppUtil copyToPasteProcess:self.walletAddressLabel.text toast:@"复制成功"];
+//    [AppUtil copyToPasteProcess:self.walletAddressLabel.text toast:@"复制成功"];
+    WalletAddressSwitchPopView *v = WalletAddressSwitchPopView.new;
+    [v updateCellModelList:self.walletAddressCellModelList];
+    [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
 }
 
 - (void)onTapHead:(id)tap {
@@ -180,8 +198,23 @@
     }
 }
 
-- (void)updateSupportWallet:(NSArray<SudNFTWalletModel *> *)walletList {
+- (void)updateSupportWallet:(NSArray<SudNFTWalletInfoModel *> *)walletList {
+    self.walletList = walletList;
     [self.bindView updateSupportWallet:walletList];
+    [self refreshWalletAddressList];
+}
+
+- (void)refreshWalletAddressList {
+    NSMutableArray *arr = NSMutableArray.new;
+    for (SudNFTWalletInfoModel *m in self.walletList) {
+        if (m.zoneType == 0 && [HsNFTPreferences.shared isBindWalletWithType:m.type]) {
+            WalletAddressSwitchCellModel *cellModel = WalletAddressSwitchCellModel.new;
+            cellModel.walletModel = m;
+            cellModel.walletAddress = [HsNFTPreferences.shared getBindWalletAddressByWalletType:m.type];
+            [arr addObject:cellModel];
+        }
+    }
+    self.walletAddressCellModelList = arr;
 }
 
 - (void)updateNFTList:(SudNFTGetNFTListModel *)nftListModel {
@@ -212,7 +245,7 @@
         coverImageView.image = [UIImage imageNamed:@"nft_header_cover"];
         [_headerView addSubview:coverImageView];
         [coverImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.edges.mas_equalTo(UIEdgeInsetsZero);
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
         }];
     }
     return _headerView;
@@ -271,7 +304,6 @@
     }
     return _nftBgView;
 }
-
 
 
 - (MyBindWalletView *)bindView {

@@ -8,6 +8,8 @@
 extern NSString *const MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF;
 extern NSString *const MY_NFT_WEAR_CHANGE_NTF;
 extern NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF;
+extern NSString *const MY_NFT_WALLET_TYPE_CHANGE_NTF;
+
 /// 房间列表更新通知
 extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 
