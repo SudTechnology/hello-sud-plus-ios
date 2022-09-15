@@ -50,8 +50,8 @@
 
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(24);
-        make.leading.equalTo(@24);
-        make.trailing.equalTo(@-24);
+        make.leading.equalTo(@16);
+        make.trailing.equalTo(@-16);
         make.height.equalTo(@436);
         make.bottom.equalTo(@0);
     }];
@@ -93,16 +93,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ForeignWalletSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ForeignWalletSelectCell"];
+    WeakSelf
+    cell.selectedWalletBlock = ^(SudNFTWalletInfoModel *m){
+        if (weakSelf.selectedWalletBlock) {
+            weakSelf.selectedWalletBlock(m);
+        }
+    };
     cell.model = self.dataList[indexPath.section];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SudNFTWalletInfoModel *m = self.dataList[indexPath.section];
-    if (self.selectedWalletBlock) {
-        self.selectedWalletBlock(m);
-    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -128,7 +130,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 48;
+        _tableView.rowHeight = 64;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.backgroundColor = UIColor.clearColor;

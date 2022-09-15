@@ -17,6 +17,8 @@
 #import "MyCNWalletSwitchPopView.h"
 #import "CNWalletSelectPopView.h"
 #import "CNWalletDeletePopView.h"
+#import "ForeignWalletSelectPopView.h"
+#import "WalletDeletePopView.h"
 
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource, ISudNFTListenerBindWallet>
 @property(nonatomic, strong) UITableView *tableView;
@@ -279,34 +281,20 @@
             [v updateDataList:cnWalletList];
             return;
         }
-
-        [DTAlertView showTextAlert:@"确定要解除连接钱包吗？" sureText:@"确定" cancelText:@"取消" onSureCallback:^{
-            SudNFTUnbindWalletParamModel *paramModel = SudNFTUnbindWalletParamModel.new;
-            paramModel.walletType = HsNFTPreferences.shared.bindWalletType;
-            paramModel.walletAddress = HsNFTPreferences.shared.walletAddress;
-            paramModel.userId = AppService.shared.loginUserID;
-            [SudNFT unbindWallet:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
-                if (errCode != 0) {
-                    DDLogError(@"unbindWallet err:%@(%@)", errMsg, @(errCode));
-                    [ToastUtil show:[HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg]];
-                }
-            }];
-
-            [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
-                HsNFTPreferences.shared.walletAddress = nil;
-                HsNFTPreferences.shared.bindWalletType = -1;
-                HsNFTPreferences.shared.currentSelectedWalletType = -1;
-                HsNFTPreferences.shared.bindZoneType = -1;
-                [HsNFTPreferences.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
-                AppService.shared.login.loginUserInfo.headerNftUrl = nil;
-                AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
-                [AppService.shared.login saveLoginUserInfo];
-                [weakSelf.myHeaderView dtUpdateUI];
-                [weakSelf reloadHeadView];
-                [weakSelf checkWalletInfo];
-                [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
-            }                  fail:nil];
-        }          onCloseCallback:nil];
+        // 海外
+        ForeignWalletSelectPopView *v = ForeignWalletSelectPopView.new;
+        v.selectedWalletBlock = ^(SudNFTWalletInfoModel *walletInfoModel) {
+            [weakSelf handleWalletClick:walletInfoModel];
+        };
+        [DTSheetView show:v onCloseCallback:nil];
+        [DTSheetView addPanGesture];
+        NSMutableArray *walletList = NSMutableArray.new;
+        for (SudNFTWalletInfoModel *m in weakSelf.walletList) {
+            if (m.zoneType == 0) {
+                [walletList addObject:m];
+            }
+        }
+        [v updateDataList:walletList];
     };
 
     [[NSNotificationCenter defaultCenter] addObserverForName:MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
@@ -402,6 +390,62 @@
         [weakSelf checkWalletInfo];
 
         [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
+    };
+}
+
+/// 处理国外钱包选择
+- (void)handleWalletClick:(SudNFTWalletInfoModel *)walletInfoModel {
+
+    WeakSelf
+    WalletDeletePopView *v = WalletDeletePopView.new;
+    v.walletInfoModel = walletInfoModel;
+    [v dtUpdateUI];
+    UIView *coverView = UIView.new;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapCover:)];
+    [coverView addGestureRecognizer:tap];
+    coverView.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
+    [AppUtil.currentWindow addSubview:coverView];
+    [coverView addSubview:v];
+    [coverView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.top.bottom.equalTo(@0);
+    }];
+    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.bottom.equalTo(@0);
+        make.height.greaterThanOrEqualTo(@0);
+    }];
+    __weak typeof(coverView) weakCoverView = coverView;
+    v.cancelBlock = ^{
+        [weakCoverView removeFromSuperview];
+    };
+    v.sureBlock = ^{
+        [UserService reqWearNFT:@"" isWear:NO success:nil fail:nil];
+        [UserService reqUnbindUser:1 success:nil fail:nil];
+
+        SudNFTUnbindWalletParamModel *paramModel = SudNFTUnbindWalletParamModel.new;
+        paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+        paramModel.userId = AppService.shared.loginUserID;
+        paramModel.walletAddress = HsNFTPreferences.shared.walletAddress;
+        [SudNFT unbindWallet:paramModel listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
+            DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
+        }];
+
+        [weakCoverView removeFromSuperview];
+        [DTSheetView close];
+
+        [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
+            HsNFTPreferences.shared.walletAddress = nil;
+            HsNFTPreferences.shared.bindWalletType = -1;
+            HsNFTPreferences.shared.currentSelectedWalletType = -1;
+            HsNFTPreferences.shared.bindZoneType = -1;
+            [HsNFTPreferences.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
+            AppService.shared.login.loginUserInfo.headerNftUrl = nil;
+            AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
+            [AppService.shared.login saveLoginUserInfo];
+            [weakSelf.myHeaderView dtUpdateUI];
+            [weakSelf reloadHeadView];
+            [weakSelf checkWalletInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
+        }                  fail:nil];
     };
 }
 

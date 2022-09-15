@@ -291,7 +291,7 @@
 - (UIButton *)deleteBtn {
     if (!_deleteBtn) {
         _deleteBtn = [[UIButton alloc] init];
-        [_deleteBtn setImage:[UIImage imageNamed:@"wallet_delete"] forState:UIControlStateNormal];
+        [_deleteBtn setImage:[UIImage imageNamed:@"unbind_wallet"] forState:UIControlStateNormal];
         [_deleteBtn setImage:[UIImage imageNamed:@"my_cn_nft_bind"] forState:UIControlStateSelected];
         [_deleteBtn setImage:[UIImage imageNamed:@"my_cn_nft_bind"] forState:UIControlStateSelected | UIControlStateHighlighted];
 

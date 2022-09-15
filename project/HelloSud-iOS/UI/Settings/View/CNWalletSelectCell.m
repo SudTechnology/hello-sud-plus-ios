@@ -7,7 +7,6 @@
 //
 
 #import "CNWalletSelectCell.h"
-#import "MyEthereumChainsCellModel.h"
 
 @interface CNWalletSelectCell ()
 @property(nonatomic, strong) UIImageView *iconImageView;
@@ -29,24 +28,25 @@
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
-    [self.iconImageView dt_cornerRadius:10];
+    [self.iconImageView dt_cornerRadius:7];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(@9);
+        make.leading.equalTo(@12);
         make.centerY.equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(64, 64));
+        make.size.mas_equalTo(CGSizeMake(48, 48));
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.iconImageView.mas_trailing).offset(10);
-        make.top.equalTo(self.iconImageView).offset(8);
-        make.height.mas_greaterThanOrEqualTo(CGSizeZero);
-        make.trailing.equalTo(self.titleLabel);
-    }];
-    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.titleLabel);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.iconImageView).offset(2);
         make.height.mas_greaterThanOrEqualTo(CGSizeZero);
         make.trailing.equalTo(self.bindBtn.mas_leading);
     }];
+    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.titleLabel);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(4);
+        make.height.mas_greaterThanOrEqualTo(CGSizeZero);
+        make.trailing.equalTo(self.bindBtn.mas_leading);
+    }];
+    [self.bindBtn setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.bindBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(@-16);
         make.height.equalTo(@24);
@@ -77,12 +77,24 @@
         self.bindBtn.selected = YES;
         self.bindBtn.layer.borderColor = UIColor.blackColor.CGColor;
         self.bindBtn.layer.borderWidth = 1;
-        self.subTitleLabel.text = [NSString stringWithFormat:@"已绑定:%@", phone];
+        self.subTitleLabel.text = [NSString stringWithFormat:@"已绑定：%@", phone];
+        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.iconImageView.mas_trailing).offset(10);
+            make.top.equalTo(self.iconImageView).offset(2);
+            make.height.mas_greaterThanOrEqualTo(CGSizeZero);
+            make.trailing.equalTo(self.bindBtn.mas_leading);
+        }];
     } else {
         self.bindBtn.selected = NO;
         self.bindBtn.layer.borderColor = nil;
         self.bindBtn.layer.borderWidth = 0;
         self.subTitleLabel.text = nil;
+        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.iconImageView.mas_trailing).offset(10);
+            make.centerY.equalTo(self.contentView);
+            make.height.mas_greaterThanOrEqualTo(CGSizeZero);
+            make.trailing.equalTo(self.bindBtn.mas_leading);
+        }];
     }
 }
 

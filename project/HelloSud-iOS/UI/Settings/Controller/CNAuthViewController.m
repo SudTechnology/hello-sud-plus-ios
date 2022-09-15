@@ -130,10 +130,14 @@
     paramModel.phone = self.phoneTextField.text;
     paramModel.walletType = self.walletInfoModel.type;
     [SudNFT sendSmsCode:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
+        weakSelf.getCodeBtn.enabled = YES;
         if (errCode != 0) {
+            if (errCode == 1035) {
+                [ToastUtil show:errMsg];
+                return;
+            }
             NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
-            weakSelf.getCodeBtn.enabled = YES;
             return;
         }
         [weakSelf showCountdown];
