@@ -93,10 +93,10 @@
         [self.headerView  sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
     }
-    BOOL isBindWallet = HsNFTPreferences.shared.walletAddress.length > 0;
+    BOOL isBindWallet = [HsNFTPreferences.shared isBindForeignWallet];
     if (isBindWallet) {
         // 绑定过了钱包
-        self.walletAddressLabel.text = HsNFTPreferences.shared.walletAddress;
+        self.walletAddressLabel.text = [HsNFTPreferences.shared getBindWalletAddressByWalletType:HsNFTPreferences.shared.currentWalletType];
         self.walletAddressLabel.hidden = NO;
         self.userIdLabel.hidden = YES;
     } else {

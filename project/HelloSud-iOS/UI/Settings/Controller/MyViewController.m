@@ -115,7 +115,7 @@
 
 - (void)checkWalletInfo {
 
-    BOOL bindWallet = HsNFTPreferences.shared.isBindWallet;
+    BOOL bindWallet =   HsNFTPreferences.shared.isBindWallet;
     if (!bindWallet) {
         // 未绑定钱包
         [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
@@ -157,8 +157,8 @@
 /// 获取NFT列表
 - (void)getNFTList {
     SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
-    paramModel.walletToken = HsNFTPreferences.shared.walletToken;
-    paramModel.walletAddress = HsNFTPreferences.shared.walletAddress;
+    paramModel.walletToken = HsNFTPreferences.shared.currentWalletToken;
+    paramModel.walletAddress = HsNFTPreferences.shared.currentWalletAddress;
     paramModel.chainType = HsNFTPreferences.shared.selectedEthereumChainType;
     paramModel.pageKey = nil;
     [SudNFT getNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetNFTListModel *nftListModel) {
@@ -181,7 +181,7 @@
     SudNFTGetCnNFTListParamModel *paramModel = SudNFTGetCnNFTListParamModel.new;
     paramModel.pageSize = 20;
     paramModel.pageNumber = 0;
-    paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+    paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
     paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
     [SudNFT getCnNFTList:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGetCnNFTListModel *resp) {
         if (errCode != 0) {
@@ -245,22 +245,12 @@
     WeakSelf
     self.myHeaderView.clickWalletBlock = ^(SudNFTWalletInfoModel *m) {
 
-        weakSelf.waitBindWalletInfo = m;
         if (m.zoneType == 1) {
             [weakSelf handleCNWalletClick:m selectView:nil];
             return;
         }
-        // 海外 绑定三方钱包
-        BindWalletStateView *bindWalletStateView = [[BindWalletStateView alloc] init];
-        [DTAlertView show:bindWalletStateView rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:^{
+        [weakSelf handleWalletClick:m];
 
-        }];
-
-        weakSelf.bindWalletStateView = bindWalletStateView;
-
-        SudNFTBindWalletParamModel *paramModel = SudNFTBindWalletParamModel.new;
-        paramModel.walletType = m.type;
-        [SudNFT bindWallet:paramModel listener:self];
     };
     self.myHeaderView.deleteWalletBlock = ^{
         if (HsNFTPreferences.shared.bindZoneType == 1) {
@@ -370,7 +360,7 @@
         [UserService reqUnbindUser:0 success:nil fail:nil];
 
         SudNFTUnBindCnWalletParamModel *paramModel = SudNFTUnBindCnWalletParamModel.new;
-        paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+        paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
         paramModel.userId = AppService.shared.loginUserID;
         paramModel.phone = [HsNFTPreferences.shared getBindUserPhoneByWalletType:paramModel.walletType];
         [SudNFT unbindCnWallet:paramModel listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
@@ -380,7 +370,6 @@
         [weakCoverView removeFromSuperview];
         [DTSheetView close];
         [HsNFTPreferences.shared clearBindUserInfoWithWalletType:walletInfoModel.type];
-        HsNFTPreferences.shared.walletAddress = nil;
         [HsNFTPreferences.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
         AppService.shared.login.loginUserInfo.headerNftUrl = nil;
         AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
@@ -397,6 +386,24 @@
 - (void)handleWalletClick:(SudNFTWalletInfoModel *)walletInfoModel {
 
     WeakSelf
+    BOOL isBind = [HsNFTPreferences.shared isBindWalletWithType:walletInfoModel.type];
+    // 未绑定
+    if (!isBind) {
+        [DTSheetView close];
+        self.waitBindWalletInfo = walletInfoModel;
+        // 海外 绑定三方钱包
+        BindWalletStateView *bindWalletStateView = [[BindWalletStateView alloc] init];
+        [DTAlertView show:bindWalletStateView rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:^{
+
+        }];
+
+        weakSelf.bindWalletStateView = bindWalletStateView;
+        SudNFTBindWalletParamModel *paramModel = SudNFTBindWalletParamModel.new;
+        paramModel.walletType = walletInfoModel.type;
+        [SudNFT bindWallet:paramModel listener:self];
+        return;
+    }
+    // 已绑定，解除绑定
     WalletDeletePopView *v = WalletDeletePopView.new;
     v.walletInfoModel = walletInfoModel;
     [v dtUpdateUI];
@@ -422,9 +429,9 @@
         [UserService reqUnbindUser:1 success:nil fail:nil];
 
         SudNFTUnbindWalletParamModel *paramModel = SudNFTUnbindWalletParamModel.new;
-        paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+        paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
         paramModel.userId = AppService.shared.loginUserID;
-        paramModel.walletAddress = HsNFTPreferences.shared.walletAddress;
+        paramModel.walletAddress = HsNFTPreferences.shared.currentWalletAddress;
         [SudNFT unbindWallet:paramModel listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
             DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
         }];
@@ -432,10 +439,10 @@
         [weakCoverView removeFromSuperview];
         [DTSheetView close];
 
+        // 去掉穿戴数据
         [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
-            HsNFTPreferences.shared.walletAddress = nil;
             HsNFTPreferences.shared.bindWalletType = -1;
-            HsNFTPreferences.shared.currentSelectedWalletType = -1;
+            HsNFTPreferences.shared.currentWalletType = -1;
             HsNFTPreferences.shared.bindZoneType = -1;
             [HsNFTPreferences.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
             AppService.shared.login.loginUserInfo.headerNftUrl = nil;
@@ -589,8 +596,7 @@
     if (HsNFTPreferences.shared.isBindCNWallet) {
         [UserService reqUnbindUser:0 success:nil fail:nil];
     }
-    HsNFTPreferences.shared.walletAddress = nil;
-    NSInteger walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+    NSInteger walletType = HsNFTPreferences.shared.currentWalletType;
     [HsNFTPreferences.shared clearBindUserInfoWithWalletType:walletType];
     HsNFTPreferences.shared.bindZoneType = -1;
     [self.myHeaderView dtUpdateUI];
@@ -613,9 +619,8 @@
     // 绑定钱包成功
     HsNFTPreferences.shared.bindWalletType = self.waitBindWalletInfo.type;
     HsNFTPreferences.shared.bindZoneType = self.waitBindWalletInfo.zoneType;
-    HsNFTPreferences.shared.walletAddress = walletInfoModel.walletAddress;
-    HsNFTPreferences.shared.currentSelectedWalletType = self.waitBindWalletInfo.type;
-    [HsNFTPreferences.shared cacheWalletToken:walletInfoModel walletAddress:walletInfoModel.walletAddress];
+    HsNFTPreferences.shared.currentWalletType = self.waitBindWalletInfo.type;
+    [HsNFTPreferences.shared saveWalletToken:walletInfoModel walletType:self.waitBindWalletInfo.type walletAddress:walletInfoModel.walletAddress];
     [self.myHeaderView dtUpdateUI];
     [self reloadHeadView];
     [self checkWalletInfo];

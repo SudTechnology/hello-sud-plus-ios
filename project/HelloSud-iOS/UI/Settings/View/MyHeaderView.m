@@ -98,7 +98,7 @@
     if (isBindWallet) {
         // 绑定过了钱包
         if (HsNFTPreferences.shared.isBindForeignWallet) {
-            self.walletAddressLabel.text = HsNFTPreferences.shared.walletAddress;
+            self.walletAddressLabel.text = HsNFTPreferences.shared.currentWalletAddress;
             self.walletAddressLabel.hidden = NO;
             self.userIdLabel.hidden = YES;
         } else {

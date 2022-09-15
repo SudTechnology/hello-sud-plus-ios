@@ -72,8 +72,8 @@
     if (m.icon) {
         [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.icon]];
     }
-    BOOL isBind = HsNFTPreferences.shared.bindWalletType == m.type;
-    NSString *phone = HsNFTPreferences.shared.walletAddress;
+    BOOL isBind = [HsNFTPreferences.shared isBindWalletWithType: m.type];
+    NSString *phone = [HsNFTPreferences.shared getBindWalletAddressByWalletType: m.type];
     if (isBind) {
         self.bindBtn.selected = YES;
         self.bindBtn.layer.borderColor = UIColor.blackColor.CGColor;

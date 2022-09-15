@@ -75,7 +75,7 @@
             continue;
         }
         MyCNWalletSwitchCellModel *cellModel = [[MyCNWalletSwitchCellModel alloc] init];
-        if (m.type == HsNFTPreferences.shared.currentSelectedWalletType) {
+        if (m.type == HsNFTPreferences.shared.currentWalletType) {
             cellModel.isSelected = YES;
         } else {
             cellModel.isSelected = NO;
@@ -111,7 +111,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     MyCNWalletSwitchCellModel *m = self.dataList[indexPath.row];
-    HsNFTPreferences.shared.currentSelectedWalletType = m.walletInfoModel.type;
+    HsNFTPreferences.shared.currentWalletType = m.walletInfoModel.type;
     [self onCloseBtnClick:nil];
 }
 

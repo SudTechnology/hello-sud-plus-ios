@@ -126,8 +126,8 @@
     WeakSelf
     // 拉取NFT列表
     SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
-    paramModel.walletToken = HsNFTPreferences.shared.walletToken;
-    paramModel.walletAddress = HsNFTPreferences.shared.walletAddress;
+    paramModel.walletToken = HsNFTPreferences.shared.currentWalletToken;
+    paramModel.walletAddress = HsNFTPreferences.shared.currentWalletAddress;
     paramModel.chainType = HsNFTPreferences.shared.selectedEthereumChainType;
     if (isMore) {
         paramModel.pageKey = HsNFTPreferences.shared.nftListPageKey;
@@ -176,7 +176,7 @@
     WeakSelf
     // 拉取藏品列表
     SudNFTGetCnNFTListParamModel *paramModel = SudNFTGetCnNFTListParamModel.new;
-    paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+    paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
     paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
     self.page = isMore ? self.page + 1 : 0;
     paramModel.pageNumber = self.page;

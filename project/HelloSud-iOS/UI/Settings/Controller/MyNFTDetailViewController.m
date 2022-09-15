@@ -88,7 +88,7 @@
     sender.enabled = NO;
 
     SudNFTCredentialsTokenParamModel *paramModel = SudNFTCredentialsTokenParamModel.new;
-    paramModel.walletToken = HsNFTPreferences.shared.walletToken;
+    paramModel.walletToken = HsNFTPreferences.shared.currentWalletToken;
     paramModel.contractAddress = self.cellModel.nftModel.contractAddress;
     paramModel.tokenId = self.cellModel.nftModel.tokenId;
     paramModel.chainType = HsNFTPreferences.shared.selectedEthereumChainType;
@@ -112,7 +112,7 @@
     DDLogDebug(@"wearCard");
     sender.enabled = NO;
     SudNFTCnCredentialsTokenParamModel *paramModel = SudNFTCnCredentialsTokenParamModel.new;
-    paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+    paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
     paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
     paramModel.cardId = self.cellModel.cardModel.cardId;
     [SudNFT genCnNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTCnCredentialsTokenModel *resp) {
@@ -192,7 +192,7 @@
     if (!isWear) {
         if (isCN) {
             SudNFTRemoveCnCredentialsTokenParamModel *paramModel = SudNFTRemoveCnCredentialsTokenParamModel.new;
-            paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:HsNFTPreferences.shared.currentSelectedWalletType];
+            paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:HsNFTPreferences.shared.currentWalletType];
             paramModel.detailsToken = nftDetailToken;
             [SudNFT removeNFTCnCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
                 if (errCode != 0) {
@@ -202,7 +202,7 @@
             }];
         } else {
             SudNFTRemoveCredentialsTokenParamModel *paramModel = SudNFTRemoveCredentialsTokenParamModel.new;
-            paramModel.walletToken = HsNFTPreferences.shared.walletToken;
+            paramModel.walletToken = HsNFTPreferences.shared.currentWalletToken;
             paramModel.detailsToken = nftDetailToken;
             [SudNFT removeNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
                 if (errCode != 0) {

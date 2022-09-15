@@ -190,7 +190,7 @@
     if (zoneType == 1) {
         /// 国内钱包
         for (SudNFTWalletInfoModel *m in AppService.shared.walletList) {
-            if (m.type == HsNFTPreferences.shared.currentSelectedWalletType) {
+            if (m.type == HsNFTPreferences.shared.currentWalletType) {
                 [self.chainsView updateWithWalletInfoModel:m];
                 break;
             }
