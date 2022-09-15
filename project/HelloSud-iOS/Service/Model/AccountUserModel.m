@@ -22,6 +22,10 @@
     return NO;
 }
 
+- (BOOL)isWearNFT {
+    return _headerType == HSUserHeadTypeNFT;
+}
+
 - (NSString *)icon {
     return _headerType == HSUserHeadTypeNFT ? _headerNftUrl : _avatar;
 }

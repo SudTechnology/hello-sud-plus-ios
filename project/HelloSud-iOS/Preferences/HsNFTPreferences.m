@@ -20,23 +20,22 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
 #define kWalletTokenKey [self envKey:@"kKeyNFTWalletToken"]
 /// 用户绑定钱包
 #define kKeyBindWallet [self envKey:@"kKeyBindWallet"]
-
 /// 用户绑定钱包区域
 #define kKeyBindWalletZone [self envKey:@"kKeyBindWalletZone"]
-
 /// 用户绑定手机号
 #define kKeyBindUserPhone [self envKey:@"kKeyBindUserPhone"]
-
 /// 用户绑定Token
 #define kKeyBindUserToken [self envKey:@"kKeyBindUserToken"]
-
 /// 用户当前选中钱包
 #define kKeyCurrentSelectedWallet [self envKey:@"kKeyCurrentSelectedWallet"]
-
 /// 穿戴NFT key
 #define kKeyUsedNFT @"key_used_nft_"
 /// 穿戴的NFT详情token key
 #define kKeyUsedNftDetailsToken @"key_used_nft_details_token"
+/// 穿戴的国内NFT详情信息
+#define kKeyWearCnNftModelInfo [self envKey:@"kKeyWearCnNftModelInfo"]
+/// 穿戴的NFT详情信息
+#define kKeyWearNftModelInfo [self envKey:@"kKeyWearNftModelInfo"]
 
 @interface HsNFTPreferences ()
 /// 当前用户绑定钱包token model
@@ -73,6 +72,14 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
     NSArray *arrKeys = [userWalletMap allKeys];
     _walletAddress = [NSUserDefaults.standardUserDefaults objectForKey:kKeyBindWallet];
 
+    id tempStr = [NSUserDefaults.standardUserDefaults objectForKey:kKeyWearCnNftModelInfo];
+    if (tempStr) {
+        _wearCnNftModel = [SudNFTCnInfoModel.class mj_objectWithKeyValues:tempStr];
+    }
+    tempStr = [NSUserDefaults.standardUserDefaults objectForKey:kKeyWearNftModelInfo];
+    if (tempStr) {
+        _wearNftModel = [SudNFTInfoModel.class mj_objectWithKeyValues:tempStr];
+    }
     SudNFTBindWalletModel *m = [SudNFTBindWalletModel mj_objectWithKeyValues:userWalletMap[arrKeys[0]]];
     self.bindWalletModel = m;
     if (m == nil || m.walletToken.length == 0) {
@@ -135,6 +142,20 @@ NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF = @"MY_NFT_WALLET_LIST_UPDATE_NTF"
 - (void)setBindZoneType:(NSInteger)bindZoneType {
     _bindZoneType = bindZoneType;
     [NSUserDefaults.standardUserDefaults setInteger:bindZoneType forKey:kKeyBindWalletZone];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+- (void)setWearCnNftModel:(SudNFTCnInfoModel *)wearCnNftModel {
+    _wearCnNftModel = wearCnNftModel;
+    NSString *json = [wearCnNftModel mj_JSONString];
+    [NSUserDefaults.standardUserDefaults setValue:json forKey:kKeyWearCnNftModelInfo];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+- (void)setWearNftModel:(SudNFTInfoModel *)wearNftModel {
+    _wearNftModel = wearNftModel;
+    NSString *json = [wearNftModel mj_JSONString];
+    [NSUserDefaults.standardUserDefaults setValue:json forKey:kKeyWearNftModelInfo];
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 

@@ -25,6 +25,10 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 
 /// 当前选中钱包
 @property(nonatomic, assign) NSInteger currentSelectedWalletType;
+/// 穿戴数据详情信息
+@property (nonatomic, strong)SudNFTInfoModel *wearNftModel;
+/// 穿戴国内数据详情信息
+@property (nonatomic, strong)SudNFTCnInfoModel *wearCnNftModel;
 
 + (instancetype)shared;
 

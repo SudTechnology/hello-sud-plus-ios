@@ -165,8 +165,10 @@
         if (isCN) {
             // 国内
             [HsNFTPreferences.shared useNFT:weakSelf.cellModel.cardModel.cardHash tokenId:weakSelf.cellModel.cardModel.chainAddr detailsToken:nftDetailToken add:isWear];
+            HsNFTPreferences.shared.wearCnNftModel = weakSelf.cellModel.cardModel;
         } else {
             [HsNFTPreferences.shared useNFT:weakSelf.cellModel.nftModel.contractAddress tokenId:weakSelf.cellModel.nftModel.tokenId detailsToken:nftDetailToken add:isWear];
+            HsNFTPreferences.shared.wearNftModel = weakSelf.cellModel.nftModel;
         }
         [weakSelf updateWearBtn];
 
@@ -279,16 +281,7 @@
         make.height.greaterThanOrEqualTo(@0);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(28);
     }];
-//    [self.copyBtn setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-//    [self.copyBtn setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-//    [self.contractAddressLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-//    [self.contractAddressLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-//    [self.copyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.trailing.mas_equalTo(-16);
-//        make.width.greaterThanOrEqualTo(@0);
-//        make.height.equalTo(@20);
-//        make.bottom.equalTo(self.contractAddressLabel.mas_bottom);
-//    }];
+
     [self.tokenIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
         make.width.equalTo(self.contractAddressLabel);
