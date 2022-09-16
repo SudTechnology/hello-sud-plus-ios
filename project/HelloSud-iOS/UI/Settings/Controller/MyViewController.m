@@ -433,9 +433,9 @@
         }
 
         SudNFTUnbindWalletParamModel *paramModel = SudNFTUnbindWalletParamModel.new;
-        paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
+        paramModel.walletType = walletInfoModel.type;
         paramModel.userId = AppService.shared.loginUserID;
-        paramModel.walletAddress = HsNFTPreferences.shared.currentWalletAddress;
+        paramModel.walletAddress = [HsNFTPreferences.shared getBindWalletAddressByWalletType:walletInfoModel.type];
         [SudNFT unbindWallet:paramModel listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
             DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
         }];
