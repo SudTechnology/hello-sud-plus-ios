@@ -208,6 +208,7 @@
 
 - (void)onTapWalletAddressLabel:(id)tap {
 //    [AppUtil copyToPasteProcess:self.walletAddressLabel.text toast:@"复制成功"];
+    [self refreshWalletAddressList];
     HsNFTPreferences.shared.isShowedSwitchWalletAddress = YES;
     WalletAddressSwitchPopView *v = WalletAddressSwitchPopView.new;
     [v updateCellModelList:self.walletAddressCellModelList];

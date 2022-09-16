@@ -65,7 +65,7 @@
     BOOL isTestEnv = NO;
 #if DEBUG
     // 测试环境
-//    [ISudNFTD e:3];
+    [ISudNFTD e:3];
     isTestEnv = YES;
 #endif
     NSString *sudNFTSDKVersoin = [SudNFT getVersion];
@@ -172,6 +172,7 @@
             if (errCode == 1008) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
             }
+            [self.myHeaderView updateNFTList:nil];
             return;
         }
         HsNFTPreferences.shared.nftListPageKey = nftListModel.pageKey;
@@ -194,6 +195,7 @@
             if (errCode == 1008) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
             }
+            [self.myHeaderView updateCardList:nil];
             return;
         }
         [self.myHeaderView updateCardList:resp];
@@ -369,6 +371,7 @@
         [DTSheetView close];
         [UserService reqWearNFT:@"" isWear:NO success:nil fail:nil];
         [UserService reqUnbindUser:0 success:nil fail:nil];
+        [weakSelf removeLocalWearData];
 
         SudNFTUnBindCnWalletParamModel *paramModel = SudNFTUnBindCnWalletParamModel.new;
         paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
@@ -425,7 +428,7 @@
     };
     v.sureBlock = ^{
         [UserService reqWearNFT:@"" isWear:NO success:nil fail:nil];
-        [UserService reqUnbindUser:1 success:nil fail:nil];
+        [weakSelf removeLocalWearData];
 
         SudNFTUnbindWalletParamModel *paramModel = SudNFTUnbindWalletParamModel.new;
         paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
@@ -435,19 +438,19 @@
             DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
         }];
 
+        [weakSelf removeCurrentWalletData];
         [weakCoverView removeFromSuperview];
         [DTSheetView close];
 
-        // 去掉穿戴数据
-        [UserService reqWearNFT:@"" isWear:NO success:^(BaseRespModel *resp) {
-            [HsNFTPreferences.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
-            AppService.shared.login.loginUserInfo.headerNftUrl = nil;
-            AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
-            [AppService.shared.login saveLoginUserInfo];
-            [weakSelf removeCurrentWalletData];
-        }                  fail:nil];
-
     };
+}
+
+/// 移除本地穿戴数据
+- (void)removeLocalWearData {
+    [HsNFTPreferences.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
+    AppService.shared.login.loginUserInfo.headerNftUrl = nil;
+    AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
+    [AppService.shared.login saveLoginUserInfo];
 }
 
 /// 移除当前钱包数据

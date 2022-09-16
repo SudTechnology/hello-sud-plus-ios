@@ -71,7 +71,7 @@
 - (void)updateBindWalletList:(NSArray<SudNFTWalletInfoModel *> *)bindWalletList {
     NSMutableArray *arrList = [[NSMutableArray alloc] init];
     for (SudNFTWalletInfoModel *m in bindWalletList) {
-        if (m.zoneType != 1) {
+        if (m.zoneType != 1 || ![HsNFTPreferences.shared isBindWalletWithType:m.type]) {
             continue;
         }
         MyCNWalletSwitchCellModel *cellModel = [[MyCNWalletSwitchCellModel alloc] init];
@@ -113,6 +113,8 @@
     MyCNWalletSwitchCellModel *m = self.dataList[indexPath.row];
     HsNFTPreferences.shared.currentWalletType = m.walletInfoModel.type;
     [self onCloseBtnClick:nil];
+    [NSNotificationCenter.defaultCenter postNotificationName:MY_NFT_WALLET_TYPE_CHANGE_NTF object:nil userInfo:nil];
+    [NSNotificationCenter.defaultCenter postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
