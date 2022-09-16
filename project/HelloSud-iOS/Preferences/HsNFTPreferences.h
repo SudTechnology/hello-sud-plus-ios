@@ -102,4 +102,8 @@ extern NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF;
 /// @param tokenId  tokenId
 /// @return
 - (NSString *)detailsTokenWithContractAddress:(NSString *)contractAddress tokenId:(NSString *)tokenId;
+/// 是否当前穿戴来源于当前钱包
+/// @param walletType
+/// @return
+- (BOOL)isCurrentWearFromWalletType:(NSInteger)walletType;
 @end

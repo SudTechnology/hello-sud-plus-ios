@@ -369,9 +369,10 @@
 
         [weakCoverView removeFromSuperview];
         [DTSheetView close];
-        [UserService reqWearNFT:@"" isWear:NO success:nil fail:nil];
         [UserService reqUnbindUser:0 success:nil fail:nil];
-        [weakSelf removeLocalWearData];
+        if ([HsNFTPreferences.shared isCurrentWearFromWalletType:walletInfoModel.type]) {
+            [weakSelf removeWearData];
+        }
 
         SudNFTUnBindCnWalletParamModel *paramModel = SudNFTUnBindCnWalletParamModel.new;
         paramModel.walletType = walletInfoModel.type;
@@ -427,8 +428,9 @@
         [weakCoverView removeFromSuperview];
     };
     v.sureBlock = ^{
-        [UserService reqWearNFT:@"" isWear:NO success:nil fail:nil];
-        [weakSelf removeLocalWearData];
+        if ([HsNFTPreferences.shared isCurrentWearFromWalletType:walletInfoModel.type]) {
+            [weakSelf removeWearData];
+        }
 
         SudNFTUnbindWalletParamModel *paramModel = SudNFTUnbindWalletParamModel.new;
         paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
@@ -441,16 +443,17 @@
         [weakSelf removeWalletData:walletInfoModel.type];
         [weakCoverView removeFromSuperview];
         [DTSheetView close];
-
     };
 }
 
-/// 移除本地穿戴数据
-- (void)removeLocalWearData {
+/// 移除穿戴数据
+- (void)removeWearData {
+    [UserService reqWearNFT:@"" isWear:NO success:nil fail:nil];
     [HsNFTPreferences.shared useNFT:@"" tokenId:@"" detailsToken:nil add:NO];
     AppService.shared.login.loginUserInfo.headerNftUrl = nil;
     AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
     [AppService.shared.login saveLoginUserInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
 }
 
 /// 移除当前钱包数据

@@ -313,15 +313,19 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     NSString *key = [NSString stringWithFormat:@"%@%@", kKeyUsedNFT, AppService.shared.loginUserID];
 
     NSString *detailsTokenKey = [NSString stringWithFormat:@"%@%@_%@_%@", kKeyUsedNftDetailsToken, contractAddress, tokenId, AppService.shared.loginUserID].dt_md5;
-
+    // 保存当前钱包穿戴信息
+    NSString *walletTypeWearKey = [NSString stringWithFormat:@"%@_%@", self.currentWalletAddress, @(self.currentWalletType)];
     NSString *value = [NSString stringWithFormat:@"%@_%@", contractAddress, tokenId];
     if (add) {
         [NSUserDefaults.standardUserDefaults setObject:value forKey:key];
         [NSUserDefaults.standardUserDefaults setObject:detailsToken forKey:detailsTokenKey];
+        [NSUserDefaults.standardUserDefaults setObject:detailsToken forKey:walletTypeWearKey];
     } else {
         [NSUserDefaults.standardUserDefaults removeObjectForKey:key];
         [NSUserDefaults.standardUserDefaults removeObjectForKey:detailsTokenKey];
+        [NSUserDefaults.standardUserDefaults removeObjectForKey:walletTypeWearKey];
     }
+
     [NSUserDefaults.standardUserDefaults synchronize];
 }
 
@@ -336,6 +340,15 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
         return token;
     }
     return @"";
+}
+
+/// 是否当前穿戴来源于当前钱包
+/// @param walletType
+/// @return
+- (BOOL)isCurrentWearFromWalletType:(NSInteger)walletType {
+    NSString *walletTypeWearKey = [NSString stringWithFormat:@"%@_%@", [self getBindWalletAddressByWalletType:walletType], @(walletType)];
+    id temp = [NSUserDefaults.standardUserDefaults objectForKey:walletTypeWearKey];
+    return temp != nil;
 }
 
 @end
