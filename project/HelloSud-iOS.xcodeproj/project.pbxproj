@@ -376,6 +376,7 @@
 		BC210743E83852E3D938F5A9 /* DiscoInteractiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */; };
 		BC21076C5084AD192F038DA8 /* DiscoSelectAnchorColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */; };
 		BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */; };
+		BC2107D8E6B6DC999B46720D /* TipPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21040A1F1E959F6632C911 /* TipPopView.m */; };
 		BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */; };
 		BC210819F69EB53104902350 /* DiscoAppointmentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */; };
 		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
@@ -1070,6 +1071,8 @@
 		BC21035DFEEDEEEBD9F73731 /* WalletDeletePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDeletePopView.h; sourceTree = "<group>"; };
 		BC2103C043B5568FCBA68B06 /* BaseSceneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSceneService.h; sourceTree = "<group>"; };
 		BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinItemView.m; sourceTree = "<group>"; };
+		BC21040A1F1E959F6632C911 /* TipPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipPopView.m; sourceTree = "<group>"; };
+		BC21040EB1CB3FC8E205CB1A /* TipPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipPopView.h; sourceTree = "<group>"; };
 		BC210468B8562E68D5D9699A /* WalletAddressSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchPopView.h; sourceTree = "<group>"; };
 		BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderView.h; sourceTree = "<group>"; };
 		BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAuthViewController.m; sourceTree = "<group>"; };
@@ -1360,6 +1363,8 @@
 				BC210468B8562E68D5D9699A /* WalletAddressSwitchPopView.h */,
 				BC210AEA9019F2D6E08BB65F /* WalletAddressSwitchCell.h */,
 				BC210CF1888895F521C40AFD /* WalletAddressSwitchCell.m */,
+				BC21040A1F1E959F6632C911 /* TipPopView.m */,
+				BC21040EB1CB3FC8E205CB1A /* TipPopView.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3371,6 +3376,7 @@
 				BC210F7B9020973BAD4CF677 /* WalletAddressSwitchPopView.m in Sources */,
 				BC210B212D9241C9CE03A083 /* WalletAddressSwitchCell.m in Sources */,
 				BC210CF89C901006931DE6F5 /* WalletAddressSwitchCellModel.m in Sources */,
+				BC2107D8E6B6DC999B46720D /* TipPopView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

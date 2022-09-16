@@ -12,6 +12,8 @@ extern NSString *const MY_NFT_WALLET_TYPE_CHANGE_NTF;
 
 /// 房间列表更新通知
 extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
+/// 我的页面切换提示气泡状态通知
+extern NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF;
 
 /// 应用本地配置
 @interface HsNFTPreferences : NSObject
@@ -27,6 +29,10 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 @property(nonatomic, strong) SudNFTInfoModel *wearNftModel;
 /// 穿戴国内数据详情信息
 @property(nonatomic, strong) SudNFTCnInfoModel *wearCnNftModel;
+/// 是否已经展示过切换
+@property (nonatomic, assign)BOOL isShowedSwitchWalletAddress;
+/// 是否已经展示过切换链
+@property (nonatomic, assign)BOOL isShowedSwitchChain;
 
 + (instancetype)shared;
 

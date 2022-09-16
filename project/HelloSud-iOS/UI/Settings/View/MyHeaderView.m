@@ -10,6 +10,7 @@
 #import "UserWearNftDetailView.h"
 #import "WalletAddressSwitchPopView.h"
 #import "WalletAddressSwitchCellModel.h"
+#import "TipPopView.h"
 
 @interface MyHeaderView ()
 @property(nonatomic, strong) SDAnimatedImageView *headerView;
@@ -23,6 +24,7 @@
 @property(nonatomic, strong) UIButton *deleteBtn;
 @property(nonatomic, strong) NSArray <WalletAddressSwitchCellModel *> *walletAddressCellModelList;
 @property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
+@property(nonatomic, strong) TipPopView *tipView;
 @end
 
 @implementation MyHeaderView
@@ -167,11 +169,46 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
         [weakSelf dtUpdateUI];
     }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:MY_SWITCH_TIP_STATE_CHANGED_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
+        [weakSelf showTipIfNeed];
+    }];
+
 }
 
+/// 展示提示
+- (void)showTipIfNeed {
+    
+    if (HsNFTPreferences.shared.bindZoneType != 0) {
+        if (_tipView) {
+            [_tipView removeFromSuperview];
+        }
+        return;
+    }
+    
+    if (!HsNFTPreferences.shared.isShowedSwitchWalletAddress) {
+        [self addSubview:self.tipView];
+        [self.tipView updateTip:@"点击切换地址"];
+        [self.tipView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.greaterThanOrEqualTo(@0);
+            make.bottom.equalTo(self.walletAddressLabel.mas_top);
+            make.centerX.equalTo(self.walletAddressLabel.mas_right).offset(-17);
+        }];
+    } else if (!HsNFTPreferences.shared.isShowedSwitchChain) {
+        [self addSubview:self.tipView];
+        [self.tipView updateTip:@"点击切换网络"];
+        [self.tipView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.greaterThanOrEqualTo(@0);
+            make.bottom.equalTo(self.myNFTView.mas_top);
+            make.centerX.equalTo(self.myNFTView);
+        }];
+    } else if (_tipView) {
+        [_tipView removeFromSuperview];
+    }
+}
 
 - (void)onTapWalletAddressLabel:(id)tap {
 //    [AppUtil copyToPasteProcess:self.walletAddressLabel.text toast:@"复制成功"];
+    HsNFTPreferences.shared.isShowedSwitchWalletAddress = YES;
     WalletAddressSwitchPopView *v = WalletAddressSwitchPopView.new;
     [v updateCellModelList:self.walletAddressCellModelList];
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
@@ -331,4 +368,10 @@
     return _deleteBtn;
 }
 
+- (TipPopView *)tipView {
+    if (!_tipView) {
+        _tipView = TipPopView.new;
+    }
+    return _tipView;
+}
 @end

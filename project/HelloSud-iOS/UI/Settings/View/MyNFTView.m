@@ -243,6 +243,7 @@
     MyEthereumChainsSelectPopView *v = [[MyEthereumChainsSelectPopView alloc] init];
     [v updateChains:self.chains];
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
+    HsNFTPreferences.shared.isShowedSwitchChain = YES;
 }
 
 - (void)onTapMoreView:(id)tap {

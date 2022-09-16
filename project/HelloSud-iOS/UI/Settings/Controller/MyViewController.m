@@ -20,6 +20,7 @@
 #import "ForeignWalletSelectPopView.h"
 #import "WalletDeletePopView.h"
 
+
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource, ISudNFTListenerBindWallet>
 @property(nonatomic, strong) UITableView *tableView;
 /// 页面数据
@@ -34,6 +35,7 @@
 @property(nonatomic, assign) BOOL isNFTInited;
 /// 是否初始化失败
 @property(nonatomic, assign) BOOL isNFTInitedError;
+
 @end
 
 @implementation MyViewController
@@ -153,6 +155,7 @@
     } else {
         [self updateWalletEtherChains];
     }
+    [self.myHeaderView showTipIfNeed];
 }
 
 /// 获取NFT列表
@@ -642,7 +645,7 @@
     [self checkWalletInfo];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
-//    [DTAlertView close];
+    [self.myHeaderView showTipIfNeed];
 }
 
 /// 绑定钱包
