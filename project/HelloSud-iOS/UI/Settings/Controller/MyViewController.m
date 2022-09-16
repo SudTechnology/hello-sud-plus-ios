@@ -374,13 +374,13 @@
         [weakSelf removeLocalWearData];
 
         SudNFTUnBindCnWalletParamModel *paramModel = SudNFTUnBindCnWalletParamModel.new;
-        paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
+        paramModel.walletType = walletInfoModel.type;
         paramModel.userId = AppService.shared.loginUserID;
         paramModel.phone = [HsNFTPreferences.shared getBindUserPhoneByWalletType:paramModel.walletType];
         [SudNFT unbindCnWallet:paramModel listener:^(NSInteger errCode, NSString *_Nullable errMsg) {
             DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
         }];
-        [weakSelf removeCurrentWalletData];
+        [weakSelf removeWalletData:walletInfoModel.type];
     };
 }
 
@@ -438,7 +438,7 @@
             DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
         }];
 
-        [weakSelf removeCurrentWalletData];
+        [weakSelf removeWalletData:walletInfoModel.type];
         [weakCoverView removeFromSuperview];
         [DTSheetView close];
 
@@ -454,8 +454,13 @@
 }
 
 /// 移除当前钱包数据
-- (void)removeCurrentWalletData {
-    [HsNFTPreferences.shared clearBindInfoWithWalletType:HsNFTPreferences.shared.currentWalletType];
+- (void)removeWalletData:(NSInteger)walletType {
+    BOOL isRemoveCurrentWalletType = HsNFTPreferences.shared.currentWalletType == walletType;
+    [HsNFTPreferences.shared clearBindInfoWithWalletType:walletType];
+    /// 不是移除当前钱包则清空绑定信息后退出即可，不需要切换钱包
+    if (!isRemoveCurrentWalletType) {
+        return;
+    }
     // 重新选择一个新钱包
     NSInteger zoneType = HsNFTPreferences.shared.bindZoneType;
     BOOL isExistNextBindWalletType = NO;
