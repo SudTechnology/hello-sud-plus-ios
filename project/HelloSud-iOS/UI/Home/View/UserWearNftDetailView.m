@@ -155,11 +155,10 @@
     if (userInfo.icon.length > 0) {
         [self.headerView sd_setImageWithURL:[NSURL URLWithString:userInfo.icon]];
     }
-    self.titleLabel.text = @"NFT详情";
-
     WeakSelf
 
     BOOL isCNBind = HsNFTPreferences.shared.isBindCNWallet;
+    self.titleLabel.text = isCNBind ? @"数字藏品详情" : @"NFT详情";
     NSString *contractTitle = @"Contract Address\n";
     NSString *tokenIDTitle = @"Token ID\n";
     NSString *contractAddress = @"";
