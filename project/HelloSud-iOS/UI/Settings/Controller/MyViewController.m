@@ -120,6 +120,11 @@
     BOOL bindWallet = HsNFTPreferences.shared.isBindWallet;
     if (!bindWallet) {
         // 未绑定钱包
+        if (self.walletList.count > 0) {
+            [self.myHeaderView updateSupportWallet:self.walletList];
+            [self reloadHeadView];
+            return;
+        }
         [SudNFT getWalletList:^(NSInteger errCode, NSString *errMsg, SudNFTGetWalletListModel *getWalletListModel) {
             if (errCode != 0) {
                 NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
