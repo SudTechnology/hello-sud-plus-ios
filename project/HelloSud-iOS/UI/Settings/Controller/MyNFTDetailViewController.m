@@ -321,7 +321,6 @@
         make.height.greaterThanOrEqualTo(@0);
         make.top.equalTo(self.moreLabel.mas_bottom).offset(14);
     }];
-
     [self.tokenIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
         make.width.equalTo(self.contractAddressLabel);
@@ -518,6 +517,7 @@
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
     fullAttr.yy_lineSpacing = 5;
+    fullAttr.yy_lineBreakMode = breakMode;
 
     subtitle = subtitle ? subtitle : @"";
     subtitle = [NSString stringWithFormat:@"%@ ", subtitle];

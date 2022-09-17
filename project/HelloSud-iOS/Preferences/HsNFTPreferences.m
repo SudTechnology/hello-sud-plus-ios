@@ -242,6 +242,8 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     [NSUserDefaults.standardUserDefaults removeObjectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindUserToken, @(walletType)]];
     // 移除绑定钱包地址
     [NSUserDefaults.standardUserDefaults removeObjectForKey:[NSString stringWithFormat:@"%@_%@", kKeyBindWallet, @(walletType)]];
+    // 清楚选择链
+    self.selectedEthereumChainType = 0;
 }
 
 - (NSString *_Nullable)nftErrorMsg:(NSInteger)errCode errorMsg:(NSString *)errorMsg {

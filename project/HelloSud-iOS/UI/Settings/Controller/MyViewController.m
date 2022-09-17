@@ -650,6 +650,9 @@
     // 绑定钱包成功
     HsNFTPreferences.shared.bindZoneType = self.waitBindWalletInfo.zoneType;
     HsNFTPreferences.shared.currentWalletType = self.waitBindWalletInfo.type;
+    if (self.waitBindWalletInfo.chainList[0]) {
+        HsNFTPreferences.shared.selectedEthereumChainType = self.waitBindWalletInfo.chainList[0].type;
+    }
     [HsNFTPreferences.shared saveWalletToken:walletInfoModel walletType:self.waitBindWalletInfo.type walletAddress:walletInfoModel.walletAddress];
     [self.myHeaderView dtUpdateUI];
     [self reloadHeadView];
