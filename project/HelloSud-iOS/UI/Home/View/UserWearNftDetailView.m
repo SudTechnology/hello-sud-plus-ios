@@ -17,9 +17,11 @@
 
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) UILabel *descLabel;
+@property(nonatomic, strong) UILabel *moreLabel;
 @property(nonatomic, strong) UILabel *contractAddressLabel;
 @property(nonatomic, strong) UILabel *tokenIDLabel;
 @property(nonatomic, strong) UILabel *tokenStandLabel;
+@property(nonatomic, assign) BOOL showMore;
 @end
 
 @implementation UserWearNftDetailView
@@ -51,6 +53,7 @@
     [self addSubview:self.titleLabel];
     [self addSubview:self.nameLabel];
     [self addSubview:self.descLabel];
+    [self addSubview:self.moreLabel];
     [self addSubview:self.contractAddressLabel];
     [self addSubview:self.tokenIDLabel];
     [self addSubview:self.tokenStandLabel];
@@ -115,12 +118,17 @@
         make.height.greaterThanOrEqualTo(@0);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
     }];
+    [self.moreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(16);
+        make.width.height.greaterThanOrEqualTo(@0);
+        make.top.equalTo(self.descLabel.mas_bottom).offset(2);
+    }];
 
     [self.contractAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
         make.trailing.equalTo(@-118);
         make.height.greaterThanOrEqualTo(@0);
-        make.top.equalTo(self.descLabel.mas_bottom).offset(14);
+        make.top.equalTo(self.moreLabel.mas_bottom).offset(14);
     }];
 
     [self.tokenIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -178,11 +186,53 @@
         desc = nftModel.desc;
     }
     self.nameLabel.text = name;
-    self.descLabel.attributedText = [self generate:descTitle subtitle:desc subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
-    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
-    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
-    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
+    self.descLabel.attributedText = [self generate:descTitle subtitle:desc subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingTail];
+    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy" breakMode:NSLineBreakByTruncatingMiddle];
+    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy" breakMode:NSLineBreakByTruncatingMiddle];
+    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingMiddle];
     self.tokenStandLabel.hidden = tokenType.length == 0;
+
+    CGRect descRect = [self.descLabel.attributedText boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGFloat limitHeight = 86;
+    if (descRect.size.height > limitHeight) {
+        self.moreLabel.hidden = NO;
+        if (!self.showMore) {
+            [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.leading.mas_equalTo(16);
+                make.trailing.mas_equalTo(-16);
+                make.height.equalTo(@(limitHeight));
+                make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
+            }];
+        } else {
+            [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.leading.mas_equalTo(16);
+                make.trailing.mas_equalTo(-16);
+                make.height.greaterThanOrEqualTo(@0);
+                make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
+            }];
+        }
+        [self.moreLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(16);
+            make.width.height.greaterThanOrEqualTo(@0);
+            make.top.equalTo(self.descLabel.mas_bottom).offset(2);
+        }];
+        [self updateMoreLabel:self.showMore];
+    } else {
+        self.moreLabel.hidden = YES;
+        [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(16);
+            make.trailing.mas_equalTo(-16);
+            make.height.greaterThanOrEqualTo(@0);
+            make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
+        }];
+        [self.moreLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(16);
+            make.width.height.equalTo(@0);
+            make.top.equalTo(self.descLabel.mas_bottom);
+        }];
+    }
+
+
 }
 
 - (void)dtConfigEvents {
@@ -191,6 +241,29 @@
     [self.contractAddressLabel addGestureRecognizer:addrTap];
     UITapGestureRecognizer *tokenTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTokenTap:)];
     [self.tokenIDLabel addGestureRecognizer:tokenTap];
+    UITapGestureRecognizer *moreTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onMoreTap:)];
+    [self.moreLabel addGestureRecognizer:moreTap];
+}
+
+- (void)updateMoreLabel:(BOOL)showMore {
+
+    self.showMore = showMore;
+    NSString *title = showMore ? @"see less" : @"see more";
+    NSString *imageName = showMore ? @"nft_desc_up" : @"nft_desc_down";
+
+    NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];
+    fullAttr.yy_font = UIFONT_REGULAR(14);
+    fullAttr.yy_color = HEX_COLOR(@"#000000");
+    if (imageName) {
+        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(12, 12) offsetY:-3];
+        [fullAttr appendAttributedString:iconAttr];
+    }
+    self.moreLabel.attributedText = fullAttr;
+}
+
+- (void)onMoreTap:(id)sender {
+    self.showMore = !self.showMore;
+    [self dtUpdateUI];
 }
 
 - (void)onAddrTap:(id)sender {
@@ -248,17 +321,23 @@
     [self.headerView.layer removeAllAnimations];
 }
 
-- (NSAttributedString *)generate:(NSString *)title subtitle:(NSString *)subtitle subColor:(UIColor *)subColor tailImageName:(NSString *)imageName {
+- (NSAttributedString *)generate:(NSString *)title
+                        subtitle:(NSString *)subtitle
+                        subColor:(UIColor *)subColor
+                   tailImageName:(NSString *)imageName
+                       breakMode:(NSLineBreakMode)breakMode {
     NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
+    fullAttr.yy_lineSpacing = 5;
 
     subtitle = subtitle ? subtitle : @"";
     subtitle = [NSString stringWithFormat:@"%@ ", subtitle];
     NSMutableAttributedString *subtitleAttr = [[NSMutableAttributedString alloc] initWithString:subtitle];
     subtitleAttr.yy_font = UIFONT_REGULAR(14);
     subtitleAttr.yy_color = subColor;
-    subtitleAttr.yy_lineBreakMode = NSLineBreakByTruncatingMiddle;
+    subtitleAttr.yy_lineBreakMode = breakMode;
+    subtitleAttr.yy_lineSpacing = 5;
     [fullAttr appendAttributedString:subtitleAttr];
     if (imageName) {
         NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(16, 17) offsetY:-3];
@@ -365,11 +444,19 @@
         _descLabel.font = UIFONT_BOLD(16);
         _descLabel.textAlignment = NSTextAlignmentLeft;
         _descLabel.numberOfLines = 0;
+        _descLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _descLabel.userInteractionEnabled = YES;
     }
     return _descLabel;
 }
 
+- (UILabel *)moreLabel {
+    if (!_moreLabel) {
+        _moreLabel = [[UILabel alloc] init];
+        _moreLabel.userInteractionEnabled = YES;
+    }
+    return _moreLabel;
+}
 
 - (UILabel *)contractAddressLabel {
     if (!_contractAddressLabel) {
