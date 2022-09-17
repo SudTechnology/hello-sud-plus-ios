@@ -127,7 +127,7 @@
                 return;
             }
             self.walletList = getWalletListModel.walletList;
-            AppService.shared.walletList = self.walletList;
+            HsNFTPreferences.shared.walletList = self.walletList;
             [self.myHeaderView updateSupportWallet:getWalletListModel.walletList];
             [self reloadHeadView];
         }];
@@ -148,7 +148,7 @@
                 return;
             }
             self.walletList = getWalletListModel.walletList;
-            AppService.shared.walletList = self.walletList;
+            HsNFTPreferences.shared.walletList = self.walletList;
             [self updateWalletEtherChains];
             [self.myHeaderView updateSupportWallet:getWalletListModel.walletList];
         }];
@@ -255,7 +255,7 @@
             [weakSelf handleCNWalletClick:m selectView:nil];
             return;
         }
-        [weakSelf handleWalletClick:m];
+        [weakSelf handleWalletClick:m selectView:nil];
 
     };
     self.myHeaderView.deleteWalletBlock = ^{
@@ -279,8 +279,9 @@
         }
         // 海外
         ForeignWalletSelectPopView *v = ForeignWalletSelectPopView.new;
+        __weak ForeignWalletSelectPopView * weakV = v;
         v.selectedWalletBlock = ^(SudNFTWalletInfoModel *walletInfoModel) {
-            [weakSelf handleWalletClick:walletInfoModel];
+            [weakSelf handleWalletClick:walletInfoModel selectView:weakV];
         };
         [DTSheetView show:v onCloseCallback:nil];
         [DTSheetView addPanGesture];
@@ -368,7 +369,6 @@
     v.sureBlock = ^{
 
         [weakCoverView removeFromSuperview];
-        [DTSheetView close];
         [UserService reqUnbindUser:0 success:nil fail:nil];
         if ([HsNFTPreferences.shared isCurrentWearFromWalletType:walletInfoModel.type]) {
             [weakSelf removeWearData];
@@ -382,11 +382,12 @@
             DDLogDebug(@"unbind user errcode:%@, msg:%@", @(errCode), errMsg);
         }];
         [weakSelf removeWalletData:walletInfoModel.type];
+        [selectView closeIfNoBindAccount];
     };
 }
 
 /// 处理国外钱包选择
-- (void)handleWalletClick:(SudNFTWalletInfoModel *)walletInfoModel {
+- (void)handleWalletClick:(SudNFTWalletInfoModel *)walletInfoModel selectView:(ForeignWalletSelectPopView *)selectView {
 
     WeakSelf
     BOOL isBind = [HsNFTPreferences.shared isBindWalletWithType:walletInfoModel.type];
@@ -442,7 +443,7 @@
 
         [weakSelf removeWalletData:walletInfoModel.type];
         [weakCoverView removeFromSuperview];
-        [DTSheetView close];
+        [selectView closeIfNoBindAccount];
     };
 }
 

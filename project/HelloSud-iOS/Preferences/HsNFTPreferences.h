@@ -33,6 +33,8 @@ extern NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF;
 @property (nonatomic, assign)BOOL isShowedSwitchWalletAddress;
 /// 是否已经展示过切换链
 @property (nonatomic, assign)BOOL isShowedSwitchChain;
+/// 钱包列表
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
 
 + (instancetype)shared;
 

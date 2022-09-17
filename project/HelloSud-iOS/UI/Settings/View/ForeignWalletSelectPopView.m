@@ -81,6 +81,24 @@
     [self.tableView reloadData];
 }
 
+/*
+ * 关闭如果不存在其它绑定账号
+ * */
+- (void)closeIfNoBindAccount {
+    BOOL existAnotherBind = NO;
+    for (SudNFTWalletInfoModel *m in self.dataList) {
+        if ([HsNFTPreferences.shared isBindWalletWithType:m.type]) {
+            existAnotherBind = YES;
+            break;
+        }
+    }
+    if (existAnotherBind) {
+        [self.tableView reloadData];
+    } else {
+        [DTSheetView close];
+    }
+}
+
 #pragma mark - UITableViewDelegate || UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
