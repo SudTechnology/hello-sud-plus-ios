@@ -8,6 +8,8 @@
 #import "MyNFTDetailViewController.h"
 
 @interface MyNFTDetailViewController ()
+@property(nonatomic, strong) UIScrollView *scrollView;
+@property(nonatomic, strong) UIView *contentView;
 @property(nonatomic, strong) SDAnimatedImageView *iconImageView;
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) UILabel *contractAddressLabel;
@@ -18,6 +20,9 @@
 @property(nonatomic, strong) BaseView *bottomView;
 @property(nonatomic, strong) UIButton *wearBtn;
 @property(nonatomic, strong) UIButton *backBtn;
+@property(nonatomic, strong) UILabel *descLabel;
+@property(nonatomic, strong) UILabel *moreLabel;
+@property(nonatomic, assign) BOOL showMore;
 
 @end
 
@@ -43,6 +48,13 @@
     [self.contractAddressLabel addGestureRecognizer:addrTap];
     UITapGestureRecognizer *tokenTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTokenTap:)];
     [self.tokenIDLabel addGestureRecognizer:tokenTap];
+    UITapGestureRecognizer *moreTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onMoreTap:)];
+    [self.moreLabel addGestureRecognizer:moreTap];
+}
+
+- (void)onMoreTap:(id)sender {
+    self.showMore = !self.showMore;
+    [self dtUpdateUI];
 }
 
 - (void)onWearBtnClick:(UIButton *)sender {
@@ -243,13 +255,16 @@
 }
 
 - (void)dtAddViews {
-    [self.view addSubview:self.iconImageView];
-    [self.view addSubview:self.topView];
-    [self.view addSubview:self.nameLabel];
-    [self.view addSubview:self.contractAddressLabel];
-    [self.view addSubview:self.tokenIDLabel];
-    [self.view addSubview:self.tokenStandLabel];
-//    [self.view addSubview:self.copyBtn];
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:self.contentView];
+    [self.contentView addSubview:self.iconImageView];
+    [self.contentView addSubview:self.topView];
+    [self.topView addSubview:self.nameLabel];
+    [self.topView addSubview:self.descLabel];
+    [self.topView addSubview:self.moreLabel];
+    [self.topView addSubview:self.contractAddressLabel];
+    [self.topView addSubview:self.tokenIDLabel];
+    [self.topView addSubview:self.tokenStandLabel];
     [self.view addSubview:self.bottomView];
     [self.view addSubview:self.wearBtn];
     [self.view addSubview:self.backBtn];
@@ -257,6 +272,20 @@
 
 - (void)dtLayoutViews {
 
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
+        make.bottom.equalTo(self.bottomView.mas_top);
+    }];
+    self.contentView.backgroundColor = UIColor.orangeColor;
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
+        make.width.equalTo(self.scrollView);
+        make.height.greaterThanOrEqualTo(@0);
+    }];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.leading.mas_equalTo(0);
@@ -273,13 +302,24 @@
         make.leading.mas_equalTo(16);
         make.trailing.mas_equalTo(-16);
         make.height.equalTo(@22);
-        make.top.equalTo(self.iconImageView.mas_bottom);
+        make.top.equalTo(@30);
+    }];
+    [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(16);
+        make.trailing.mas_equalTo(-16);
+        make.height.greaterThanOrEqualTo(@0);
+        make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
+    }];
+    [self.moreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(16);
+        make.width.height.greaterThanOrEqualTo(@0);
+        make.top.equalTo(self.descLabel.mas_bottom).offset(2);
     }];
     [self.contractAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(16);
         make.trailing.equalTo(@-118);
         make.height.greaterThanOrEqualTo(@0);
-        make.top.equalTo(self.nameLabel.mas_bottom).offset(28);
+        make.top.equalTo(self.moreLabel.mas_bottom).offset(14);
     }];
 
     [self.tokenIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -293,6 +333,7 @@
         make.trailing.equalTo(@-16);
         make.height.greaterThanOrEqualTo(@0);
         make.top.equalTo(self.tokenIDLabel.mas_bottom).offset(14);
+        make.bottom.equalTo(@-20);
     }];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(0);
@@ -319,10 +360,7 @@
     if (!self.cellModel) {
         return;
     }
-
-
     WeakSelf
-
     BOOL isCNBind = HsNFTPreferences.shared.isBindCNWallet;
     NSString *contractTitle = @"Contract Address\n";
     NSString *tokenIDTitle = @"Token ID\n";
@@ -331,13 +369,17 @@
     NSString *tokenId = @"";
     NSString *tokenType = @"";
     NSString *name = @"";
+    NSString *descTitle = @"Description\n";
+    NSString *desc = @"";
     if (isCNBind) {
         contractTitle = @"地址\n";
         tokenIDTitle = @"令牌ID\n";
+        descTitle = @"作品描述\n";
         contractAddress = self.cellModel.cardModel.cardHash;
         tokenId = self.cellModel.cardModel.chainAddr;
         coverURL = self.cellModel.cardModel.coverUrl;
         name = self.cellModel.cardModel.name;
+        desc = self.cellModel.cardModel.desc;
     } else {
         SudNFTInfoModel *nftModel = self.cellModel.nftModel;
         contractAddress = nftModel.contractAddress;
@@ -345,11 +387,13 @@
         tokenType = nftModel.tokenType;
         coverURL = nftModel.coverURL;
         name = nftModel.name;
+        desc = nftModel.desc;
     }
     self.nameLabel.text = name;
-    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
-    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
-    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
+    self.descLabel.attributedText = [self generate:descTitle subtitle:desc subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingTail];
+    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy" breakMode:NSLineBreakByTruncatingMiddle];
+    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy" breakMode:NSLineBreakByTruncatingMiddle];
+    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingMiddle];
     self.tokenStandLabel.hidden = tokenType.length == 0;
     if (coverURL) {
 
@@ -369,6 +413,69 @@
         self.iconImageView.image = [UIImage imageNamed:@"default_nft_icon"];
     }
     [self updateWearBtn];
+
+    CGRect descRect = [self.descLabel.attributedText boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGFloat limitHeight = 86;
+    if (descRect.size.height > limitHeight) {
+        self.moreLabel.hidden = NO;
+        if (!self.showMore) {
+            [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.leading.mas_equalTo(16);
+                make.trailing.mas_equalTo(-16);
+                make.height.equalTo(@(limitHeight));
+                make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
+            }];
+        } else {
+            [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.leading.mas_equalTo(16);
+                make.trailing.mas_equalTo(-16);
+                make.height.greaterThanOrEqualTo(@0);
+                make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
+            }];
+        }
+        [self.moreLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(16);
+            make.width.height.greaterThanOrEqualTo(@0);
+            make.top.equalTo(self.descLabel.mas_bottom).offset(2);
+        }];
+        [self updateMoreLabel:self.showMore];
+    } else {
+        self.moreLabel.hidden = YES;
+        [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(16);
+            make.trailing.mas_equalTo(-16);
+            make.height.greaterThanOrEqualTo(@0);
+            make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
+        }];
+        [self.moreLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(16);
+            make.width.height.equalTo(@0);
+            make.top.equalTo(self.descLabel.mas_bottom);
+        }];
+    }
+    [self.scrollView layoutIfNeeded];
+    CGFloat height = self.contentView.bounds.size.height;
+    self.scrollView.contentSize = CGSizeMake(kScreenWidth, height);
+}
+
+- (void)updateMoreLabel:(BOOL)showMore {
+
+    BOOL isCNBind = HsNFTPreferences.shared.isBindCNWallet;
+    self.showMore = showMore;
+    NSString *title = showMore ? @"see less " : @"see more ";
+    if (isCNBind) {
+        title = showMore ? @"收起 " : @"展开 ";
+    }
+    NSString *imageName = showMore ? @"nft_desc_up" : @"nft_desc_down";
+
+    NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];
+    fullAttr.yy_font = UIFONT_REGULAR(14);
+    fullAttr.yy_color = HEX_COLOR(@"#000000");
+    if (imageName) {
+        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(12, 12) offsetY:-3];
+        [fullAttr appendAttributedString:iconAttr];
+    }
+    self.moreLabel.attributedText = fullAttr;
 }
 
 - (void)showLoadAnimate {
@@ -402,17 +509,23 @@
     [self.iconImageView.layer removeAllAnimations];
 }
 
-- (NSAttributedString *)generate:(NSString *)title subtitle:(NSString *)subtitle subColor:(UIColor *)subColor tailImageName:(NSString *)imageName {
+- (NSAttributedString *)generate:(NSString *)title
+                        subtitle:(NSString *)subtitle
+                        subColor:(UIColor *)subColor
+                   tailImageName:(NSString *)imageName
+                       breakMode:(NSLineBreakMode)breakMode {
     NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
+    fullAttr.yy_lineSpacing = 5;
 
     subtitle = subtitle ? subtitle : @"";
     subtitle = [NSString stringWithFormat:@"%@ ", subtitle];
     NSMutableAttributedString *subtitleAttr = [[NSMutableAttributedString alloc] initWithString:subtitle];
     subtitleAttr.yy_font = UIFONT_REGULAR(14);
     subtitleAttr.yy_color = subColor;
-    subtitleAttr.yy_lineBreakMode = NSLineBreakByTruncatingMiddle;
+    subtitleAttr.yy_lineBreakMode = breakMode;
+    subtitleAttr.yy_lineSpacing = 5;
     [fullAttr appendAttributedString:subtitleAttr];
     if (imageName) {
         NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(16, 17) offsetY:-3];
@@ -429,6 +542,25 @@
 }
 
 #pragma mark - 懒加载
+
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.backgroundColor = UIColor.whiteColor;
+        _scrollView.bounces = YES;
+        _scrollView.alwaysBounceVertical = YES;
+    }
+    return _scrollView;
+}
+
+- (UIView *)contentView {
+    if (!_contentView) {
+        _contentView = [[UIView alloc] init];
+        _contentView.backgroundColor = UIColor.whiteColor;
+        _contentView.clipsToBounds = YES;
+    }
+    return _contentView;
+}
 
 - (SDAnimatedImageView *)iconImageView {
     if (!_iconImageView) {
@@ -538,6 +670,7 @@
         _topView.layer.shadowOffset = CGSizeMake(0, -3);
         _topView.layer.shadowOpacity = 1;
         _topView.layer.shadowRadius = 12;
+
     }
     return _topView;
 }
@@ -552,5 +685,27 @@
         _bottomView.backgroundColor = UIColor.whiteColor;
     }
     return _bottomView;
+}
+
+- (UILabel *)descLabel {
+    if (!_descLabel) {
+        _descLabel = [[UILabel alloc] init];
+        _descLabel.text = @"";
+        _descLabel.textColor = HEX_COLOR(@"#0053FF");
+        _descLabel.font = UIFONT_BOLD(16);
+        _descLabel.textAlignment = NSTextAlignmentLeft;
+        _descLabel.numberOfLines = 0;
+        _descLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        _descLabel.userInteractionEnabled = YES;
+    }
+    return _descLabel;
+}
+
+- (UILabel *)moreLabel {
+    if (!_moreLabel) {
+        _moreLabel = [[UILabel alloc] init];
+        _moreLabel.userInteractionEnabled = YES;
+    }
+    return _moreLabel;
 }
 @end

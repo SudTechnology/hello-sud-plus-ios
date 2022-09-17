@@ -192,6 +192,7 @@
     self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingMiddle];
     self.tokenStandLabel.hidden = tokenType.length == 0;
 
+    self.descLabel.preferredMaxLayoutWidth = kScreenWidth - 32;
     CGRect descRect = [self.descLabel.attributedText boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     CGFloat limitHeight = 86;
     if (descRect.size.height > limitHeight) {
@@ -247,10 +248,13 @@
 
 - (void)updateMoreLabel:(BOOL)showMore {
 
+    BOOL isCNBind = HsNFTPreferences.shared.isBindCNWallet;
     self.showMore = showMore;
-    NSString *title = showMore ? @"see less" : @"see more";
+    NSString *title = showMore ? @"see less " : @"see more ";
+    if (isCNBind) {
+        title = showMore ? @"收起 " : @"展开 ";
+    }
     NSString *imageName = showMore ? @"nft_desc_up" : @"nft_desc_down";
-
     NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
@@ -444,7 +448,6 @@
         _descLabel.font = UIFONT_BOLD(16);
         _descLabel.textAlignment = NSTextAlignmentLeft;
         _descLabel.numberOfLines = 0;
-        _descLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _descLabel.userInteractionEnabled = YES;
     }
     return _descLabel;
