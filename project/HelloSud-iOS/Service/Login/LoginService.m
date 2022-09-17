@@ -161,9 +161,29 @@ NSString *const NFT_REFRESH_NFT = @"NFT_REFRESH_NFT";
         [weakSelf saveToken:model.token];
         [weakSelf saveIsLogin];
         weakSelf.isRefreshedToken = YES;
+        [weakSelf refreshLoginUserInfo];
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_SUCCESS_NTF object:nil];
     } failure:^(NSError *error) {
         [[NSNotificationCenter defaultCenter] postNotificationName:TOKEN_REFRESH_FAIL_NTF object:nil];
+    }];
+}
+
+/// 刷新用户登录信息
+- (void)refreshLoginUserInfo {
+    WeakSelf
+    int64_t loginUserId = AppService.shared.loginUserID.longLongValue;
+    [UserService.shared asyncCacheUserInfo:@[@(loginUserId)] forceRefresh:YES finished:^{
+        NSInteger oldHeaderType = weakSelf.loginUserInfo.headerType;
+        HSUserInfoModel *userInfo = [UserService.shared getCacheUserInfo:loginUserId];
+        weakSelf.loginUserInfo.name = userInfo.nickname;
+        weakSelf.loginUserInfo.headerNftUrl = userInfo.headerNftUrl;
+        weakSelf.loginUserInfo.headerType = userInfo.headerType;
+        weakSelf.loginUserInfo.avatar = userInfo.avatar;
+        [weakSelf saveLoginUserInfo];
+        if (oldHeaderType != userInfo.headerType) {
+            [NSNotificationCenter.defaultCenter postNotificationName:MY_NFT_WEAR_CHANGE_NTF object:nil userInfo:nil];
+        }
+        
     }];
 }
 
