@@ -26,7 +26,7 @@
 		</data>
 		<key>Headers/SudNFTModels.h</key>
 		<data>
-		nXinuYfu2lqr3nfANHAHpyVkGG8=
+		0WGJX9xwCy3knbKl0PQ+RKPGq8E=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -98,11 +98,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			nXinuYfu2lqr3nfANHAHpyVkGG8=
+			0WGJX9xwCy3knbKl0PQ+RKPGq8E=
 			</data>
 			<key>hash2</key>
 			<data>
-			EKzGH6WdDgufJGfnEDi9yeEjmrYMviYP+FFs30gRGXY=
+			d08n8qf823CaK9CWs/TKJNEVXG4nM1VoYIj71pgKLdI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

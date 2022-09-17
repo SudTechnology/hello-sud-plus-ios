@@ -61,6 +61,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *fileType;
 /// 封面，存在的情况下
 @property(nonatomic, copy) NSString *coverURL;
+/// 扩展数据
+@property(nonatomic, strong) id extension;
 @end
 
 /// NFT数据模型
@@ -132,6 +134,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy, nonnull) NSString *tokenId;
 /// 链网类型
 @property(nonatomic, assign) int64_t chainType;
+/// 详情扩展数据
+@property(nonatomic, strong) id extension;
 @end
 
 /// 移除NFT使用凭证参数model

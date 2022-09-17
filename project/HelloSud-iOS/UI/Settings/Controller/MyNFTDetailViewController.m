@@ -104,6 +104,7 @@
     paramModel.contractAddress = self.cellModel.nftModel.contractAddress;
     paramModel.tokenId = self.cellModel.nftModel.tokenId;
     paramModel.chainType = HsNFTPreferences.shared.selectedEthereumChainType;
+    paramModel.extension = self.cellModel.nftModel.extension;
     [SudNFT genNFTCredentialsToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTGenNFTCredentialsTokenModel *generateDetailTokenModel) {
         if (errCode != 0) {
             NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
