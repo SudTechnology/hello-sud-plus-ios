@@ -6,7 +6,7 @@
 #import "UserWearNftDetailView.h"
 
 @interface UserWearNftDetailView ()
-@property(nonatomic, strong) UIImageView *headerView;
+@property(nonatomic, strong) SDAnimatedImageView *headerView;
 @property(nonatomic, strong) UIView *lineView;
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UILabel *userNameLabel;
@@ -348,7 +348,7 @@
 
 - (UIImageView *)headerView {
     if (!_headerView) {
-        _headerView = [[UIImageView alloc] init];
+        _headerView = [[SDAnimatedImageView alloc] init];
         _headerView.clipsToBounds = true;
         _headerView.contentMode = UIViewContentModeScaleAspectFill;
     }
