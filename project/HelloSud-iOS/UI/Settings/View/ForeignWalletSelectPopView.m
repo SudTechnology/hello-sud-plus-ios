@@ -78,6 +78,21 @@
 
 - (void)updateDataList:(NSArray<SudNFTWalletInfoModel *> *)dataList {
     self.dataList = dataList;
+    [self resortList];
+}
+
+- (void)resortList {
+    NSMutableArray *bindList = NSMutableArray.new;
+    NSMutableArray *unbindList = NSMutableArray.new;
+    for (SudNFTWalletInfoModel *m in self.dataList) {
+        if ([HsNFTPreferences.shared isBindWalletWithType:m.type]) {
+            [bindList addObject:m];
+        } else {
+            [unbindList addObject:m];
+        }
+    }
+    [bindList addObjectsFromArray:unbindList];
+    self.dataList = bindList;
     [self.tableView reloadData];
 }
 
@@ -93,7 +108,7 @@
         }
     }
     if (existAnotherBind) {
-        [self.tableView reloadData];
+        [self resortList];
     } else {
         [DTSheetView close];
     }
@@ -112,7 +127,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ForeignWalletSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ForeignWalletSelectCell"];
     WeakSelf
-    cell.selectedWalletBlock = ^(SudNFTWalletInfoModel *m){
+    cell.selectedWalletBlock = ^(SudNFTWalletInfoModel *m) {
         if (weakSelf.selectedWalletBlock) {
             weakSelf.selectedWalletBlock(m);
         }
