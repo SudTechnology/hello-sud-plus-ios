@@ -159,8 +159,10 @@
     TRTCCloud *engine = [self getEngine];
     if (engine != nil) {
         [engine sendCustomCmdMsg:0 data:[command dataUsingEncoding:NSUTF8StringEncoding] reliable:YES ordered:YES];
+        if (listener) listener(0);
+    } else {
+        if (listener) listener(-1);
     }
-    if (listener) listener(0);
 }
 
 // 更新房间内用户总人数
