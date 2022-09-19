@@ -70,7 +70,6 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-    self.backgroundColor = UIColor.orangeColor;
     [self dtAddGradientLayer:@[@0, @1] colors:@[(id) HEX_COLOR(@"#2EE1FF").CGColor, (id) HEX_COLOR(@"#FF9393").CGColor] startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 1) cornerRadius:8];
 }
 

@@ -278,7 +278,6 @@
         make.trailing.mas_equalTo(0);
         make.bottom.equalTo(self.bottomView.mas_top);
     }];
-    self.contentView.backgroundColor = UIColor.orangeColor;
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.leading.mas_equalTo(0);
