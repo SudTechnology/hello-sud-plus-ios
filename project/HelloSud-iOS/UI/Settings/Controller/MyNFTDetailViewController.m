@@ -43,7 +43,6 @@
     WeakSelf
     [_backBtn addTarget:self action:@selector(dtNavigationBackClick) forControlEvents:UIControlEventTouchUpInside];
     [_wearBtn addTarget:self action:@selector(onWearBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//    [_copyBtn addTarget:self action:@selector(onCopyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer *addrTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAddrTap:)];
     [self.contractAddressLabel addGestureRecognizer:addrTap];
     UITapGestureRecognizer *tokenTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTokenTap:)];
@@ -414,7 +413,7 @@
     }
     [self updateWearBtn];
 
-    CGRect descRect = [self.descLabel.attributedText boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGRect descRect = [self.descLabel.attributedText boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesFontLeading context:nil];
     CGFloat limitHeight = 86;
     if (descRect.size.height > limitHeight) {
         self.moreLabel.hidden = NO;

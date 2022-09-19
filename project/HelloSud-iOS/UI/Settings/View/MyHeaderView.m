@@ -148,6 +148,7 @@
                 make.height.greaterThanOrEqualTo(@0);
             }];
         }
+        [self.bindView updateSupportWallet:self.walletList];
         WeakSelf
         self.bindView.clickWalletBlock = ^(SudNFTWalletInfoModel *m) {
             if (weakSelf.clickWalletBlock) {
@@ -238,8 +239,8 @@
 
 - (void)updateSupportWallet:(NSArray<SudNFTWalletInfoModel *> *)walletList {
     self.walletList = walletList;
-    [self.bindView updateSupportWallet:walletList];
     [self refreshWalletAddressList];
+    [self dtUpdateUI];
 }
 
 - (void)refreshWalletAddressList {
