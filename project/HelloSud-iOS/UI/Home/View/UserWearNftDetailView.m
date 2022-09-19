@@ -185,14 +185,21 @@
         desc = nftModel.desc;
     }
     self.nameLabel.text = name;
-    self.descLabel.attributedText = [self generate:descTitle subtitle:desc subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingTail];
-    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy" breakMode:NSLineBreakByTruncatingMiddle];
-    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy" breakMode:NSLineBreakByTruncatingMiddle];
-    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingMiddle];
-    self.tokenStandLabel.hidden = tokenType.length == 0;
 
-    self.descLabel.preferredMaxLayoutWidth = kScreenWidth - 32;
-    CGRect descRect = [self.descLabel.attributedText boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+
+    NSAttributedString *attrDesc = [self generate:descTitle subtitle:desc subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
+    
+    self.descLabel.attributedText = attrDesc;
+    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
+    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
+    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
+    self.tokenStandLabel.hidden = tokenType.length == 0;
+    
+    self.descLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    self.contractAddressLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    self.tokenIDLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+
+    CGRect descRect = [attrDesc boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     CGFloat limitHeight = 86;
     if (descRect.size.height > limitHeight) {
         self.moreLabel.hidden = NO;
@@ -324,11 +331,7 @@
     [self.headerView.layer removeAllAnimations];
 }
 
-- (NSAttributedString *)generate:(NSString *)title
-                        subtitle:(NSString *)subtitle
-                        subColor:(UIColor *)subColor
-                   tailImageName:(NSString *)imageName
-                       breakMode:(NSLineBreakMode)breakMode {
+- (NSAttributedString *)generate:(NSString *)title subtitle:(NSString *)subtitle subColor:(UIColor *)subColor tailImageName:(NSString *)imageName {
     NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
@@ -339,7 +342,6 @@
     NSMutableAttributedString *subtitleAttr = [[NSMutableAttributedString alloc] initWithString:subtitle];
     subtitleAttr.yy_font = UIFONT_REGULAR(14);
     subtitleAttr.yy_color = subColor;
-    subtitleAttr.yy_lineBreakMode = breakMode;
     subtitleAttr.yy_lineSpacing = 5;
     [fullAttr appendAttributedString:subtitleAttr];
     if (imageName) {
