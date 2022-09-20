@@ -16,6 +16,7 @@
 #import "KeyHeader.h"
 #import <NIMSDK/NIMSDK.h>
 #import "SDImageSVGNativeCoder.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface AppDelegate () {
 
@@ -49,7 +50,6 @@
     // 登录过后，检测刷新token
     if (AppService.shared.login.isLogin) {
         self.window.rootViewController = [[MainTabBarController alloc] init];
-        [AppService.shared.login checkToken];
     } else {
         self.window.rootViewController = [[LoginViewController alloc] init];
     }
@@ -64,7 +64,7 @@
     NIMSDKOption *option = [NIMSDKOption optionWithAppKey:@"110f7db7c00ee497bd7b32954c36464c"];
     [[NIMSDK sharedSDK] registerWithOption:option];
     [self configWebpCoder];
-
+    [self checkNetwork];
     return YES;
 }
 
@@ -225,6 +225,23 @@
         return YES;
     }
     return YES;
+}
+
+- (void)checkNetwork {
+    [AFNetworkReachabilityManager.sharedManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        DDLogDebug(@"net status:%@", @(status));
+        switch (status) {
+                
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                if (AppService.shared.login.isLogin) {
+                    [AppService.shared.login checkToken];
+                }
+                break;
+            default:break;
+        }
+    }];
+    [AFNetworkReachabilityManager.sharedManager startMonitoring];
 }
 
 @end
