@@ -207,6 +207,11 @@
     }
 }
 
+/// 移除tip提示
+- (void)removeTipView {
+    [_tipView removeFromSuperview];
+}
+
 - (void)onTapWalletAddressLabel:(id)tap {
 //    [AppUtil copyToPasteProcess:self.walletAddressLabel.text toast:@"复制成功"];
     [self refreshWalletAddressList];

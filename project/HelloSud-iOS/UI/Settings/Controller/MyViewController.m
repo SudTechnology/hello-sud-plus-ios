@@ -119,6 +119,7 @@
 
     BOOL bindWallet = HsNFTPreferences.shared.isBindWallet;
     if (!bindWallet) {
+        [self.myHeaderView removeTipView];
         // 未绑定钱包
         if (self.walletList.count > 0) {
             [self.myHeaderView updateSupportWallet:self.walletList];
