@@ -262,15 +262,18 @@
 }
 
 - (void)updateNFTList:(SudNFTGetNFTListModel *)nftListModel {
+    [self dtUpdateUI];
     [self.myNFTView updateNFTList:nftListModel];
 }
 
 /// 更新藏品列表
 - (void)updateCardList:(SudNFTGetCnNFTListModel *)cardListModel {
+    [self dtUpdateUI];
     [self.myNFTView updateCardList:cardListModel];
 }
 
 - (void)updateEthereumList:(NSArray<SudNFTChainInfoModel *> *)chains {
+    [self dtUpdateUI];
     [self.myNFTView updateEthereumList:chains];
 }
 

@@ -654,6 +654,7 @@
 /// @param walletInfoModel 成功回调
 - (void)onSuccess:(SudNFTBindWalletModel *_Nullable)walletInfoModel {
 
+    DDLogInfo(@"onSuccess:%@", walletInfoModel.walletAddress);
     // 绑定钱包成功
     HsNFTPreferences.shared.bindZoneType = self.waitBindWalletInfo.zoneType;
     HsNFTPreferences.shared.currentWalletType = self.waitBindWalletInfo.type;
@@ -667,12 +668,16 @@
 
     [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
     [self.myHeaderView showTipIfNeed];
+    self.waitBindWalletInfo = nil;
 }
 
 /// 绑定钱包
 - (void)onFailure:(NSInteger)errCode errMsg:(NSString *_Nullable)errMsg {
     NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
     DDLogError(@"bind wallet err:%@", msg);
+    if (!self.waitBindWalletInfo) {
+        return;
+    }
     [DTAlertView close];
     if (errCode != 0) {
         
