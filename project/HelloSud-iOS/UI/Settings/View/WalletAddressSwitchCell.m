@@ -10,6 +10,7 @@
 #import "WalletAddressSwitchCellModel.h"
 
 @interface WalletAddressSwitchCell ()
+@property(nonatomic, strong) UIView *topLineView;
 @property(nonatomic, strong) UILabel *typeLabel;
 @property(nonatomic, strong) UIImageView *markImageView;
 @property(nonatomic, strong) UILabel *titleLabel;
@@ -20,6 +21,7 @@
 
 - (void)dtAddViews {
     [super dtAddViews];
+    [self.contentView addSubview:self.topLineView];
     [self.contentView addSubview:self.typeLabel];
     [self.contentView addSubview:self.markImageView];
     [self.contentView addSubview:self.titleLabel];
@@ -28,6 +30,10 @@
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+    [self.topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.leading.trailing.equalTo(@0);
+        make.height.equalTo(@0.5);
+    }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@19);
         make.top.equalTo(@8);
@@ -63,6 +69,14 @@
     self.titleLabel.text = m.walletAddress;
     self.typeLabel.text = m.walletModel.name;
 
+}
+
+- (UIView *)topLineView {
+    if (!_topLineView) {
+        _topLineView = UIView.new;
+        _topLineView.backgroundColor = HEX_COLOR(@"#D1D1D1");
+    }
+    return _topLineView;
 }
 
 - (UILabel *)typeLabel {

@@ -410,6 +410,7 @@
         weakSelf.bindWalletStateView = bindWalletStateView;
         SudNFTBindWalletParamModel *paramModel = SudNFTBindWalletParamModel.new;
         paramModel.walletType = walletInfoModel.type;
+        DDLogDebug(@"bindWallet:%@", @(paramModel.walletType));
         [SudNFT bindWallet:paramModel listener:self];
         return;
     }

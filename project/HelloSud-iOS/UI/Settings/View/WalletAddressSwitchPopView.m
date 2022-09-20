@@ -76,12 +76,13 @@
     if (h > 280) {
         h = 280;
     }
-    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(12);
         make.leading.trailing.equalTo(@0);
         make.height.equalTo(@(h));
         make.bottom.equalTo(@-20);
     }];
+    [self.tableView layoutIfNeeded];
     [self.tableView reloadData];
 }
 
@@ -108,25 +109,16 @@
     [NSNotificationCenter.defaultCenter postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 0.01;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return UIView.new;
-}
 
 #pragma mark - lazy
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 56;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        _tableView.separatorInset = UIEdgeInsetsZero;
-        _tableView.separatorColor = HEX_COLOR(@"#D1D1D1");
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.backgroundColor = UIColor.clearColor;
         [_tableView registerClass:[WalletAddressSwitchCell class] forCellReuseIdentifier:@"WalletAddressSwitchCell"];
