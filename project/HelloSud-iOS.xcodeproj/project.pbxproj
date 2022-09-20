@@ -143,6 +143,9 @@
 		6C192E5B279523B100553034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E59279523B100553034 /* LaunchScreen.storyboard */; };
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
 		6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */; };
+		6C26CC5728D9C3BD00C2572B /* SwitchGameEnvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26CC5628D9C3BD00C2572B /* SwitchGameEnvViewController.m */; };
+		6C26CC5A28D9C3C900C2572B /* SwitchGameEnvModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26CC5928D9C3C900C2572B /* SwitchGameEnvModel.m */; };
+		6C26CC5D28D9C46E00C2572B /* SwitchGameEnvTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26CC5C28D9C46E00C2572B /* SwitchGameEnvTableViewCell.m */; };
 		6C31536F28C0A6440001B565 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31536E28C0A6440001B565 /* AppDelegate.m */; };
 		6C31537828C0A6440001B565 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C31537628C0A6440001B565 /* Main.storyboard */; };
 		6C31537A28C0A6470001B565 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C31537928C0A6470001B565 /* Assets.xcassets */; };
@@ -744,6 +747,12 @@
 		6C192E882797E2C700553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraAudioEngineImpl.h; sourceTree = "<group>"; };
 		6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgoraAudioEngineImpl.m; sourceTree = "<group>"; };
+		6C26CC5528D9C3BD00C2572B /* SwitchGameEnvViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchGameEnvViewController.h; sourceTree = "<group>"; };
+		6C26CC5628D9C3BD00C2572B /* SwitchGameEnvViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchGameEnvViewController.m; sourceTree = "<group>"; };
+		6C26CC5828D9C3C900C2572B /* SwitchGameEnvModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchGameEnvModel.h; sourceTree = "<group>"; };
+		6C26CC5928D9C3C900C2572B /* SwitchGameEnvModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchGameEnvModel.m; sourceTree = "<group>"; };
+		6C26CC5B28D9C46E00C2572B /* SwitchGameEnvTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchGameEnvTableViewCell.h; sourceTree = "<group>"; };
+		6C26CC5C28D9C46E00C2572B /* SwitchGameEnvTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchGameEnvTableViewCell.m; sourceTree = "<group>"; };
 		6C31536B28C0A6440001B565 /* SudNFTQuickStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudNFTQuickStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31536D28C0A6440001B565 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C31536E28C0A6440001B565 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1259,6 +1268,8 @@
 		4455ACBF27EAC657001516EE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6C26CC5528D9C3BD00C2572B /* SwitchGameEnvViewController.h */,
+				6C26CC5628D9C3BD00C2572B /* SwitchGameEnvViewController.m */,
 				6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */,
 				6CEF766627F5A22000A12220 /* MoreSettingViewController.h */,
 				6CEF766727F5A22000A12220 /* MoreSettingViewController.m */,
@@ -1286,6 +1297,8 @@
 		4455ACC627EAC657001516EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6C26CC5828D9C3C900C2572B /* SwitchGameEnvModel.h */,
+				6C26CC5928D9C3C900C2572B /* SwitchGameEnvModel.m */,
 				6CC3E77528C1BB7D00AA934B /* HSNFTListCellModel.h */,
 				6CC3E77928C1BB7D00AA934B /* HSNFTListCellModel.m */,
 				6CC3E77628C1BB7D00AA934B /* MyCNWalletSwitchCellModel.h */,
@@ -1311,6 +1324,8 @@
 		4455ACCF27EAC657001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6C26CC5B28D9C46E00C2572B /* SwitchGameEnvTableViewCell.h */,
+				6C26CC5C28D9C46E00C2572B /* SwitchGameEnvTableViewCell.m */,
 				6C7CB61728C5DE73003A19A8 /* MyHeaderView.h */,
 				6CC3E77D28C1BBB500AA934B /* BindBtnView.h */,
 				6CC3E78328C1BBB600AA934B /* BindBtnView.m */,
@@ -3104,6 +3119,7 @@
 				6CE6CD2C283F591C0026BDAB /* DTAlertView.m in Sources */,
 				6C460871286DB5CF005C99EF /* DiscoRankTableViewCell.m in Sources */,
 				6CC3E77B28C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m in Sources */,
+				6C26CC5728D9C3BD00C2572B /* SwitchGameEnvViewController.m in Sources */,
 				6CE6CD40283F591C0026BDAB /* BaseModel.m in Sources */,
 				44D9F3AB280FC08C000B14B5 /* GameConfigViewController.m in Sources */,
 				4455AE0727EAC6F7001516EE /* BaseSceneViewController+Voice.m in Sources */,
@@ -3259,6 +3275,7 @@
 				4455AD9627EAC658001516EE /* MainTabBarController.m in Sources */,
 				6C460878286E9CCD005C99EF /* DiscoAnchorDatingView.m in Sources */,
 				444F59EB27F7035800FA1FB2 /* TicketChooseLevelView.m in Sources */,
+				6C26CC5D28D9C46E00C2572B /* SwitchGameEnvTableViewCell.m in Sources */,
 				4455ADA827EAC658001516EE /* RoomCmdChatTextModel.m in Sources */,
 				6C460808285840B4005C99EF /* GuessSelectColCell.m in Sources */,
 				44D9F3B3280FFF83000B14B5 /* GameConfigPopView.m in Sources */,
@@ -3375,6 +3392,7 @@
 				BC21074293C8ADEA821E64D4 /* WalletDeletePopView.m in Sources */,
 				BC210F7B9020973BAD4CF677 /* WalletAddressSwitchPopView.m in Sources */,
 				BC210B212D9241C9CE03A083 /* WalletAddressSwitchCell.m in Sources */,
+				6C26CC5A28D9C3C900C2572B /* SwitchGameEnvModel.m in Sources */,
 				BC210CF89C901006931DE6F5 /* WalletAddressSwitchCellModel.m in Sources */,
 				BC2107D8E6B6DC999B46720D /* TipPopView.m in Sources */,
 			);

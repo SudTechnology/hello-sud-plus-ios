@@ -9,9 +9,9 @@
 #define ServiceConstHeader_h
 
 #if DEBUG
-#define InteractURL      @"https://fat-interact-hello-sud.sud.tech"
-#define BaseURL          @"https://fat-base-hello-sud.sud.tech"
-#define GameURL          @"https://fat-game-hello-sud.sud.tech"
+#define InteractURL      @"https://sim-interact-hello-sud.sud.tech"
+#define BaseURL          @"https://sim-base-hello-sud.sud.tech"
+#define GameURL          @"https://sim-game-hello-sud.sud.tech"
 #define GAME_TEST_ENV    YES
 #else
 #define InteractURL      @"https://interact-hello-sud.sud.tech"
