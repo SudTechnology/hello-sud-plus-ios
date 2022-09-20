@@ -475,7 +475,7 @@
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
     if (imageName) {
-        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(12, 12) offsetY:-3];
+        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(12, 12) offsetY:-2];
         [fullAttr appendAttributedString:iconAttr];
     }
     self.moreLabel.attributedText = fullAttr;

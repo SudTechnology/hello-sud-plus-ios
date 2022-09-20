@@ -198,7 +198,6 @@
     self.descLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     self.contractAddressLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     self.tokenIDLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-
     CGRect descRect = [attrDesc boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     CGFloat limitHeight = 86;
     if (descRect.size.height > limitHeight) {
@@ -265,7 +264,7 @@
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
     if (imageName) {
-        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(12, 12) offsetY:-3];
+        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(12, 12) offsetY:-2];
         [fullAttr appendAttributedString:iconAttr];
     }
     self.moreLabel.attributedText = fullAttr;

@@ -671,11 +671,11 @@
 
 /// 绑定钱包
 - (void)onFailure:(NSInteger)errCode errMsg:(NSString *_Nullable)errMsg {
-
+    NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+    DDLogError(@"bind wallet err:%@", msg);
     [DTAlertView close];
     if (errCode != 0) {
-        NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
-        DDLogError(@"bind wallet err:%@", msg);
+        
         [self showBindErrorAlert:msg];
         return;
     }
