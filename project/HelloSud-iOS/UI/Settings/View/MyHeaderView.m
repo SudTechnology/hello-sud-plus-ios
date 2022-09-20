@@ -127,10 +127,12 @@
         if (!_myNFTView) {
             [self.nftView addSubview:self.myNFTView];
         }
-        [self.myNFTView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.leading.trailing.bottom.equalTo(@0);
-            make.height.greaterThanOrEqualTo(@0);
-        }];
+        if (self.myNFTView.superview) {
+            [self.myNFTView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.leading.trailing.bottom.equalTo(@0);
+                make.height.greaterThanOrEqualTo(@0);
+            }];
+        }
     } else {
         // 未绑定钱包
         self.walletAddressLabel.hidden = YES;
@@ -144,10 +146,12 @@
         if (!_bindView) {
             [self.nftView addSubview:self.bindView];
         }
-        [self.bindView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.leading.trailing.bottom.equalTo(@0);
-            make.height.greaterThanOrEqualTo(@0);
-        }];
+        if (self.bindView.superview) {
+            [self.bindView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.leading.trailing.bottom.equalTo(@0);
+                make.height.greaterThanOrEqualTo(@0);
+            }];
+        }
         [self.bindView updateSupportWallet:self.walletList];
         WeakSelf
         self.bindView.clickWalletBlock = ^(SudNFTWalletInfoModel *m) {
