@@ -143,15 +143,6 @@
             make.height.greaterThanOrEqualTo(@0);
         }];
     }
-    if (self.nftListModel) {
-        [self.myNFTView updateNFTList:self.nftListModel];
-    }
-    if (self.cnNFTListModel) {
-        [self.myNFTView updateCardList:self.cnNFTListModel];
-    }
-    if (self.chains) {
-        [self.myNFTView updateEthereumList:self.chains];
-    }
 }
 
 - (void)updateUnbindWallet {
@@ -291,17 +282,20 @@
 
 - (void)updateNFTList:(SudNFTGetNFTListModel *)nftListModel {
     self.nftListModel = nftListModel;
+    [self.myNFTView updateNFTList:self.nftListModel];
     [self dtUpdateUI];
 }
 
 /// 更新藏品列表
 - (void)updateCardList:(SudNFTGetCnNFTListModel *)cardListModel {
     self.cnNFTListModel = cardListModel;
+    [self.myNFTView updateCardList:self.cnNFTListModel];
     [self dtUpdateUI];
 }
 
 - (void)updateEthereumList:(NSArray<SudNFTChainInfoModel *> *)chains {
     self.chains = chains;
+    [self.myNFTView updateEthereumList:self.chains];
     [self dtUpdateUI];
 }
 
