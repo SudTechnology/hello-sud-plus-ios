@@ -6,6 +6,8 @@
 #import "UserWearNftDetailView.h"
 
 @interface UserWearNftDetailView ()
+@property(nonatomic, strong) UIScrollView *scrollView;
+@property(nonatomic, strong) UIView *contentView;
 @property(nonatomic, strong) SDAnimatedImageView *headerView;
 @property(nonatomic, strong) UIView *lineView;
 @property(nonatomic, strong) UILabel *titleLabel;
@@ -43,23 +45,43 @@
 }
 
 - (void)dtAddViews {
-    [self addSubview:self.headerView];
-    [self addSubview:self.userNameLabel];
-    [self addSubview:self.userIdLabel];
-    [self addSubview:self.coinContentView];
+    [self addSubview:self.scrollView];
+    [self.scrollView addSubview:self.contentView];
+
+    [self.contentView addSubview:self.headerView];
+    [self.contentView addSubview:self.userNameLabel];
+    [self.contentView addSubview:self.userIdLabel];
+    [self.contentView addSubview:self.coinContentView];
+
     [self.coinContentView addSubview:self.coinImageView];
     [self.coinContentView addSubview:self.coinLabel];
-    [self addSubview:self.lineView];
-    [self addSubview:self.titleLabel];
-    [self addSubview:self.nameLabel];
-    [self addSubview:self.descLabel];
-    [self addSubview:self.moreLabel];
-    [self addSubview:self.contractAddressLabel];
-    [self addSubview:self.tokenIDLabel];
-    [self addSubview:self.tokenStandLabel];
+
+    [self.contentView addSubview:self.lineView];
+    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.nameLabel];
+    [self.contentView addSubview:self.descLabel];
+    [self.contentView addSubview:self.moreLabel];
+    [self.contentView addSubview:self.contractAddressLabel];
+    [self.contentView addSubview:self.tokenIDLabel];
+    [self.contentView addSubview:self.tokenStandLabel];
 }
 
 - (void)dtLayoutViews {
+
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
+        make.height.equalTo(@(kScreenHeight - 196));
+        make.bottom.equalTo(@0);
+    }];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
+        make.width.equalTo(self.scrollView);
+        make.height.greaterThanOrEqualTo(@0);
+    }];
 
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@16);
@@ -186,7 +208,6 @@
     }
     self.nameLabel.text = name;
 
-
     NSAttributedString *attrDesc = [self generate:descTitle subtitle:desc subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
     
     self.descLabel.attributedText = attrDesc;
@@ -237,8 +258,9 @@
             make.top.equalTo(self.descLabel.mas_bottom);
         }];
     }
-
-
+    [self.scrollView layoutIfNeeded];
+    CGFloat height = self.contentView.bounds.size.height;
+    self.scrollView.contentSize = CGSizeMake(kScreenWidth, height);
 }
 
 - (void)dtConfigEvents {
@@ -348,6 +370,25 @@
         [fullAttr appendAttributedString:iconAttr];
     }
     return fullAttr;
+}
+
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.backgroundColor = UIColor.whiteColor;
+        _scrollView.bounces = YES;
+        _scrollView.alwaysBounceVertical = YES;
+    }
+    return _scrollView;
+}
+
+- (UIView *)contentView {
+    if (!_contentView) {
+        _contentView = [[UIView alloc] init];
+        _contentView.backgroundColor = UIColor.whiteColor;
+        _contentView.clipsToBounds = YES;
+    }
+    return _contentView;
 }
 
 - (UIImageView *)headerView {
