@@ -102,9 +102,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self onCloseBtnClick:nil];
     WalletAddressSwitchCellModel *m = self.dataList[indexPath.row];
     HsNFTPreferences.shared.currentWalletType = m.walletModel.type;
-    [self onCloseBtnClick:nil];
+    if (m.walletModel.chainList.count > 0) {
+        HsNFTPreferences.shared.selectedEthereumChainType = m.walletModel.chainList[0].type;
+    }
     [NSNotificationCenter.defaultCenter postNotificationName:MY_NFT_WALLET_TYPE_CHANGE_NTF object:nil userInfo:nil];
     [NSNotificationCenter.defaultCenter postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
 }
