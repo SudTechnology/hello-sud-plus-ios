@@ -417,24 +417,17 @@
         self.iconImageView.image = [UIImage imageNamed:@"default_nft_icon"];
     }
     [self updateWearBtn];
+    /// 测算高度
+    self.descLabel.numberOfLines = 4;
+    CGSize size = [self.descLabel sizeThatFits:CGSizeMake(kScreenWidth - 32, 100000)];
     CGRect descRect = [attrDesc boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    CGFloat limitHeight = 86;
+    CGFloat limitHeight = size.height;
     if (descRect.size.height > limitHeight) {
         self.moreLabel.hidden = NO;
         if (!self.showMore) {
-            [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leading.mas_equalTo(16);
-                make.trailing.mas_equalTo(-16);
-                make.height.equalTo(@(limitHeight));
-                make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
-            }];
+            self.descLabel.numberOfLines = 4;
         } else {
-            [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leading.mas_equalTo(16);
-                make.trailing.mas_equalTo(-16);
-                make.height.greaterThanOrEqualTo(@0);
-                make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
-            }];
+            self.descLabel.numberOfLines = 0;
         }
         [self.moreLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(16);
@@ -444,12 +437,7 @@
         [self updateMoreLabel:self.showMore];
     } else {
         self.moreLabel.hidden = YES;
-        [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.leading.mas_equalTo(16);
-            make.trailing.mas_equalTo(-16);
-            make.height.greaterThanOrEqualTo(@0);
-            make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
-        }];
+        self.descLabel.numberOfLines = 0;
         [self.moreLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(16);
             make.width.height.equalTo(@0);
@@ -547,6 +535,7 @@
         _scrollView.backgroundColor = UIColor.whiteColor;
         _scrollView.bounces = YES;
         _scrollView.alwaysBounceVertical = YES;
+        _scrollView.showsVerticalScrollIndicator = NO;
     }
     return _scrollView;
 }
