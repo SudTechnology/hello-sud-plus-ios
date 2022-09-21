@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 /// 切换游戏环境
-@interface SwitchGameEnvViewController : BaseViewController
+@interface SwitchEnvViewController : BaseViewController
 
 @end
 

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SwitchGameEnvTableViewCell : BaseTableViewCell
+@interface SwitchEnvTableViewCell : BaseTableViewCell
 
 /// 是否展示顶部线条
 @property(nonatomic, assign)BOOL isShowTopLine;

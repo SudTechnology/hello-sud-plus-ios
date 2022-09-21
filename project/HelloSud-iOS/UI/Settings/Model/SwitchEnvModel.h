@@ -10,10 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SwitchGameEnvModel : BaseModel
+@interface SwitchEnvModel : BaseModel
 @property(nonatomic, copy)NSString *title;
 @property(nonatomic, assign)BOOL isSelect;
-//@property(nonatomic, assign)GameEnvType envType;
+@property(nonatomic, assign)NSInteger envType;
 
 @end
 

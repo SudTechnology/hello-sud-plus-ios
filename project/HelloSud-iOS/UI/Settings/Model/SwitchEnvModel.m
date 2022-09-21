@@ -6,8 +6,7 @@
 //  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "SwitchGameEnvModel.h"
+#import "SwitchEnvModel.h"
 
-@implementation SwitchGameEnvModel
-
+@implementation SwitchEnvModel
 @end

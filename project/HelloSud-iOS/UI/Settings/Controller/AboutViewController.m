@@ -12,7 +12,7 @@
 #import "VersionInfoViewController.h"
 #import "SwitchLanguageViewController.h"
 #import "MoreSettingViewController.h"
-#import "SwitchGameEnvViewController.h"
+#import "SwitchEnvViewController.h"
 
 @interface AboutViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
@@ -70,7 +70,14 @@
     privacyModel.isMore = YES;
     privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
 
-    self.arrData = @[@[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+    HSSettingModel *envModel = [HSSettingModel new];
+    envModel.title = @"环境设置";
+    envModel.isMore = YES;
+    if (self.showEnvSetting) {
+        self.arrData = @[@[gitHubModel, oProtocolModel, userProtocolModel, privacyModel, envModel]];
+    } else {
+        self.arrData = @[@[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+    }
 
     CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
     CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
@@ -80,7 +87,11 @@
 }
 
 - (void)onTap:(id)tap {
-
+    DDLogDebug(@"ontap");
+    if (!self.showEnvSetting) {
+        self.showEnvSetting = YES;
+        [self configData];
+    }
 }
 
 - (void)dtAddViews {
@@ -173,6 +184,9 @@
         } else {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.pageURL]];
         }
+    }else if ([model.title isEqualToString:@"环境设置"]) {
+        SwitchEnvViewController *vc = SwitchEnvViewController.new;
+        [self.navigationController pushViewController:vc animated:YES];
     } else {
         if (model.isMore) {
             DTWebViewController *web = DTWebViewController.new;

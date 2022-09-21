@@ -6,17 +6,17 @@
 //  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "SwitchGameEnvTableViewCell.h"
-#import "SwitchGameEnvModel.h"
+#import "SwitchEnvTableViewCell.h"
+#import "SwitchEnvModel.h"
 
-@interface SwitchGameEnvTableViewCell()
+@interface SwitchEnvTableViewCell()
 @property(nonatomic, strong)UIView *topView;
 @property(nonatomic, strong)UIImageView *rightImageView;
 @property(nonatomic, strong)UILabel *titleLabel;
 
 @end
 
-@implementation SwitchGameEnvTableViewCell
+@implementation SwitchEnvTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -60,10 +60,10 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    if (![self.model isKindOfClass:[SwitchGameEnvModel class]]) {
+    if (![self.model isKindOfClass:[SwitchEnvModel class]]) {
         return;
     }
-    SwitchGameEnvModel *model = (SwitchGameEnvModel *)self.model;
+    SwitchEnvModel *model = (SwitchEnvModel *)self.model;
     self.titleLabel.text = [NSString stringWithFormat:@"%@", model.title];
     self.rightImageView.hidden = model.isSelect ? NO : YES;
 }
