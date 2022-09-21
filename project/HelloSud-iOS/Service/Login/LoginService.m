@@ -182,6 +182,10 @@ NSString *const NFT_REFRESH_NFT = @"NFT_REFRESH_NFT";
         [weakSelf saveLoginUserInfo];
         if (oldHeaderType != userInfo.headerType) {
             [NSNotificationCenter.defaultCenter postNotificationName:MY_NFT_WEAR_CHANGE_NTF object:nil userInfo:nil];
+            if (userInfo.headerType == HSUserHeadTypeNormal) {
+                // 移除本地穿戴
+                [HsNFTPreferences.shared useNFT:nil tokenId:nil detailsToken:nil add:NO];
+            }
         }
         
     }];

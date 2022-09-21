@@ -461,6 +461,7 @@
     AppService.shared.login.loginUserInfo.headerNftUrl = nil;
     AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
     [AppService.shared.login saveLoginUserInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_WEAR_CHANGE_NTF object:nil userInfo:nil];
 }
 
 /// 移除当前钱包数据
