@@ -318,14 +318,9 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
 /// @param tokenId
 - (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId detailsToken:(NSString *)detailsToken add:(BOOL)add {
 
-    NSMutableDictionary *wearDic = NSMutableDictionary.new;
-    id temp = [NSUserDefaults.standardUserDefaults objectForKey:kKeyWearMap];
-    if (temp && [temp isKindOfClass:NSDictionary.class]) {
-        [wearDic setDictionary:temp];
-    }
     NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@",@(self.currentWalletType)];
-
     if (add) {
+        NSMutableDictionary *wearDic = NSMutableDictionary.new;
         NSMutableDictionary *currentWalletWearInfo = NSMutableDictionary.new;
         currentWalletWearInfo[@"contractAddress"] = contractAddress;
         currentWalletWearInfo[@"tokenId"] = tokenId;
