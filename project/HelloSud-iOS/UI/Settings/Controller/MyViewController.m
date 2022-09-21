@@ -480,6 +480,9 @@
         if (m.zoneType == zoneType) {
             if ([HsNFTPreferences.shared isBindWalletWithType:m.type]) {
                 HsNFTPreferences.shared.currentWalletType = m.type;
+                if (m.chainList.count > 0) {
+                    HsNFTPreferences.shared.selectedEthereumChainType = m.chainList[0].type;
+                }
                 isExistNextBindWalletType = YES;
                 break;
             }
