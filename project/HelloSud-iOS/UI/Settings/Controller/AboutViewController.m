@@ -87,11 +87,13 @@
 }
 
 - (void)onTap:(id)tap {
+#if DEBUG
     DDLogDebug(@"ontap");
     if (!self.showEnvSetting) {
         self.showEnvSetting = YES;
         [self configData];
     }
+#endif
 }
 
 - (void)dtAddViews {
