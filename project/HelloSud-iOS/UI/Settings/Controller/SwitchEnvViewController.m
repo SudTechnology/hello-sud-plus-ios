@@ -25,8 +25,13 @@
     [super viewDidLoad];
     self.title = @"切换环境";
     [self loadData];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"重启" style:UIBarButtonItemStyleDone target:self action:@selector(onSaveClick:)];
 }
 
+- (void)onSaveClick:(id)sender {
+    exit(0);
+}
 
 /// 配置页面数据
 - (void)loadData {

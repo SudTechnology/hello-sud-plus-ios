@@ -88,7 +88,7 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
 /// @return
 - (NSString *)envKey:(NSString *)key {
 #if DEBUG
-    return [NSString stringWithFormat:@"debug_%@", key];
+    return [NSString stringWithFormat:@"debug_%@_%@", key, @(HsAppPreferences.shared.appEnvType)];
 #else
     return [NSString stringWithFormat:@"%@", key];
 #endif

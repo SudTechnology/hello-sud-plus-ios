@@ -22,9 +22,9 @@
 
 - (void)prepare {
 #if DEBUG
-    self.appEnvType = HsAppEnvTypeSim;
-    self.gameEnvType = HsGameEnvTypeSim;
-    self.nftEnvType = HsNftEnvTypeSim;
+    _appEnvType = HsAppEnvTypeSim;
+    _gameEnvType = HsGameEnvTypeSim;
+    _nftEnvType = HsNftEnvTypeSim;
     if ([NSUserDefaults.standardUserDefaults objectForKey:kKeyAppEnvType]) {
         _appEnvType = [NSUserDefaults.standardUserDefaults integerForKey:kKeyAppEnvType];
     }

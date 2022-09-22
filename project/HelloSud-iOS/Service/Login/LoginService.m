@@ -43,7 +43,7 @@ NSString *const NFT_REFRESH_NFT = @"NFT_REFRESH_NFT";
 /// @return
 - (NSString *)envKey:(NSString *)key {
 #if DEBUG
-    return [NSString stringWithFormat:@"debug_%@", key];
+    return [NSString stringWithFormat:@"debug_%@_%@", key, @(HsAppPreferences.shared.appEnvType)];
 #else
     return [NSString stringWithFormat:@"%@", key];
 #endif
