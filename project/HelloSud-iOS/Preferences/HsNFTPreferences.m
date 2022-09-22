@@ -370,4 +370,11 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     return NO;
 }
 
+/// 处理过滤nft错误码
+- (void)handleFilterNftError:(NSInteger)errorCode errMsg:(NSString *)errMsg {
+    if (errorCode == 1008 || errorCode == 1020) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
+    }
+}
+
 @end

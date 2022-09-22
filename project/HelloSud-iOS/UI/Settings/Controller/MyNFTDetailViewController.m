@@ -109,9 +109,7 @@
             NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             sender.enabled = YES;
-            if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
-            }
+            [HsNFTPreferences.shared handleFilterNftError:errCode errMsg:errMsg];
             return;
         }
         [weakSelf handleWearDetailToken:generateDetailTokenModel.detailsToken isCN:NO];
@@ -132,9 +130,7 @@
             NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             sender.enabled = YES;
-            if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
-            }
+            [HsNFTPreferences.shared handleFilterNftError:errCode errMsg:errMsg];
             return;
         }
         [weakSelf handleWearDetailToken:resp.detailsToken isCN:YES];
