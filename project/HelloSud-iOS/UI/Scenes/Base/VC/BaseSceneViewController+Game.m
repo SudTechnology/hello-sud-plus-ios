@@ -316,10 +316,14 @@
         DDLogDebug(@"游戏ID为空，无法加载游戏:%@, currentRoomID:%@, currentGameRoomID:%@", gameId, self.roomID, self.gameRoomID);
         return;
     }
+    BOOL isTest = false;
 #if DEBUG
     [ISudAPPD e:HsAppPreferences.shared.gameEnvType];
+    if (HsAppPreferences.shared.gameEnvType != HsGameEnvTypePro) {
+        isTest = YES;
+    }
 #endif
-    [SudMGP initSDK:appID appKey:appKey isTestEnv:GAME_TEST_ENV listener:^(int retCode, const NSString *retMsg) {
+    [SudMGP initSDK:appID appKey:appKey isTestEnv:isTest listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
             DDLogInfo(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
             if (weakSelf) {

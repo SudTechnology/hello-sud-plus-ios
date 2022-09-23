@@ -66,7 +66,9 @@
 #if DEBUG
     // 测试环境
     [ISudNFTD e:HsAppPreferences.shared.nftEnvType];
-    isTestEnv = YES;
+    if (HsAppPreferences.shared.nftEnvType != HsNftEnvTypePro) {
+        isTestEnv = YES;
+    }
 #endif
     NSString *sudNFTSDKVersoin = [SudNFT getVersion];
     NSLog(@"sudNFTSDKVersoin:%@", sudNFTSDKVersoin);
