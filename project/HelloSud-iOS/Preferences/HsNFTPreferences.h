@@ -108,4 +108,7 @@ extern NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF;
 /// @param walletType
 /// @return
 - (BOOL)isCurrentWearFromWalletType:(NSInteger)walletType;
+
+/// 处理过滤nft错误码
+- (void)handleFilterNftError:(NSInteger)errorCode errMsg:(NSString *)errMsg;
 @end

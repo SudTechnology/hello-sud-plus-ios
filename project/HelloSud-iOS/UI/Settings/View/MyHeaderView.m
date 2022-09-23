@@ -22,9 +22,13 @@
 @property(nonatomic, strong) MyBindWalletView *bindView;
 @property(nonatomic, strong) MyNFTView *myNFTView;
 @property(nonatomic, strong) UIButton *deleteBtn;
+@property(nonatomic, strong) TipPopView *tipView;
 @property(nonatomic, strong) NSArray <WalletAddressSwitchCellModel *> *walletAddressCellModelList;
 @property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
-@property(nonatomic, strong) TipPopView *tipView;
+@property(nonatomic, strong) SudNFTGetNFTListModel *nftListModel;
+@property(nonatomic, strong) SudNFTGetCnNFTListModel *cnNFTListModel;
+@property(nonatomic, strong) NSArray<SudNFTChainInfoModel *> *chains;
+
 @end
 
 @implementation MyHeaderView
@@ -67,10 +71,10 @@
         make.height.equalTo(@20);
     }];
     [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(@-18);
+        make.trailing.equalTo(@-9);
         make.centerY.equalTo(self.headerView);
-        make.width.equalTo(@18);
-        make.height.equalTo(@18);
+        make.width.equalTo(@36);
+        make.height.equalTo(@36);
     }];
     [self.nftBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.bottom.equalTo(@0);
@@ -103,58 +107,73 @@
     BOOL isBindWallet = HsNFTPreferences.shared.isBindWallet;
     if (isBindWallet) {
         // 绑定过了钱包
-        if (HsNFTPreferences.shared.isBindForeignWallet) {
-            NSString *str = [NSString stringWithFormat:@"%@ ", HsNFTPreferences.shared.currentWalletAddress];
-            NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:str];
-            fullAttr.yy_font = UIFONT_REGULAR(12);
-            fullAttr.yy_color = HEX_COLOR(@"#333333");
-            NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:@"more_address"] size:CGSizeMake(12, 12) offsetY:-2];
-            [fullAttr appendAttributedString:iconAttr];
-
-            self.walletAddressLabel.attributedText = fullAttr;
-            self.walletAddressLabel.hidden = NO;
-            self.userIdLabel.hidden = YES;
-        } else {
-            self.walletAddressLabel.hidden = YES;
-            self.userIdLabel.hidden = NO;
-        }
-        self.deleteBtn.hidden = NO;
-        self.deleteBtn.selected = HsNFTPreferences.shared.bindZoneType == 1;
-        if (_bindView) {
-            [_bindView removeFromSuperview];
-            _bindView = nil;
-        }
-        if (!_myNFTView) {
-            [self.nftView addSubview:self.myNFTView];
-            [self.myNFTView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.leading.trailing.bottom.equalTo(@0);
-                make.height.greaterThanOrEqualTo(@0);
-            }];
-        }
+        [self updateBindWallet];
     } else {
         // 未绑定钱包
+        [self updateUnbindWallet];
+    }
+}
+
+- (void)updateBindWallet {
+    if (HsNFTPreferences.shared.isBindForeignWallet) {
+        NSString *str = [NSString stringWithFormat:@"%@ ", HsNFTPreferences.shared.currentWalletAddress];
+        NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:str];
+        fullAttr.yy_font = UIFONT_REGULAR(12);
+        fullAttr.yy_color = HEX_COLOR(@"#333333");
+        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:@"more_address"] size:CGSizeMake(12, 12) offsetY:-2];
+        [fullAttr appendAttributedString:iconAttr];
+
+        self.walletAddressLabel.attributedText = fullAttr;
+        self.walletAddressLabel.hidden = NO;
+        self.userIdLabel.hidden = YES;
+    } else {
         self.walletAddressLabel.hidden = YES;
         self.userIdLabel.hidden = NO;
-        self.deleteBtn.hidden = YES;
-
-        if (_myNFTView) {
-            [_myNFTView removeFromSuperview];
-            _myNFTView = nil;
-        }
-        if (!_bindView) {
-            [self.nftView addSubview:self.bindView];
-            [self.bindView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.leading.trailing.bottom.equalTo(@0);
-                make.height.greaterThanOrEqualTo(@0);
-            }];
-        }
-        WeakSelf
-        self.bindView.clickWalletBlock = ^(SudNFTWalletInfoModel *m) {
-            if (weakSelf.clickWalletBlock) {
-                weakSelf.clickWalletBlock(m);
-            }
-        };
     }
+    self.deleteBtn.hidden = NO;
+    self.deleteBtn.selected = HsNFTPreferences.shared.bindZoneType == 1;
+    if (_bindView) {
+        [_bindView removeFromSuperview];
+        _bindView = nil;
+    }
+    if (!self.myNFTView.superview) {
+        [self.nftView addSubview:self.myNFTView];
+        [self.myNFTView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.leading.trailing.bottom.equalTo(@0);
+            make.height.greaterThanOrEqualTo(@0);
+        }];
+    }
+}
+
+- (void)updateUnbindWallet {
+    self.walletAddressLabel.hidden = YES;
+    self.userIdLabel.hidden = NO;
+    self.deleteBtn.hidden = YES;
+    [self clearData];
+    if (_myNFTView) {
+        [_myNFTView removeFromSuperview];
+        _myNFTView = nil;
+    }
+    if (!self.bindView.superview) {
+        [self.nftView addSubview:self.bindView];
+        [self.bindView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.leading.trailing.bottom.equalTo(@0);
+            make.height.greaterThanOrEqualTo(@0);
+        }];
+    }
+    [self.bindView updateSupportWallet:self.walletList];
+    WeakSelf
+    self.bindView.clickWalletBlock = ^(SudNFTWalletInfoModel *m) {
+        if (weakSelf.clickWalletBlock) {
+            weakSelf.clickWalletBlock(m);
+        }
+    };
+}
+
+- (void)clearData {
+    self.nftListModel = nil;
+    self.cnNFTListModel = nil;
+    self.chains = nil;
 }
 
 - (void)dtConfigEvents {
@@ -177,14 +196,14 @@
 
 /// 展示提示
 - (void)showTipIfNeed {
-    
+
     if (HsNFTPreferences.shared.bindZoneType != 0) {
         if (_tipView) {
             [_tipView removeFromSuperview];
         }
         return;
     }
-    
+
     if (!HsNFTPreferences.shared.isShowedSwitchWalletAddress) {
         [self addSubview:self.tipView];
         [self.tipView updateTip:@"点击切换地址"];
@@ -204,6 +223,11 @@
     } else if (_tipView) {
         [_tipView removeFromSuperview];
     }
+}
+
+/// 移除tip提示
+- (void)removeTipView {
+    [_tipView removeFromSuperview];
 }
 
 - (void)onTapWalletAddressLabel:(id)tap {
@@ -236,11 +260,6 @@
     }
 }
 
-- (void)updateSupportWallet:(NSArray<SudNFTWalletInfoModel *> *)walletList {
-    self.walletList = walletList;
-    [self.bindView updateSupportWallet:walletList];
-    [self refreshWalletAddressList];
-}
 
 - (void)refreshWalletAddressList {
     NSMutableArray *arr = NSMutableArray.new;
@@ -255,19 +274,30 @@
     self.walletAddressCellModelList = arr;
 }
 
+- (void)updateSupportWallet:(NSArray<SudNFTWalletInfoModel *> *)walletList {
+    self.walletList = walletList;
+    [self refreshWalletAddressList];
+    [self dtUpdateUI];
+}
+
 - (void)updateNFTList:(SudNFTGetNFTListModel *)nftListModel {
-    [self.myNFTView updateNFTList:nftListModel];
+    self.nftListModel = nftListModel;
+    [self.myNFTView updateNFTList:self.nftListModel];
+    [self dtUpdateUI];
 }
 
 /// 更新藏品列表
 - (void)updateCardList:(SudNFTGetCnNFTListModel *)cardListModel {
-    [self.myNFTView updateCardList:cardListModel];
+    self.cnNFTListModel = cardListModel;
+    [self.myNFTView updateCardList:self.cnNFTListModel];
+    [self dtUpdateUI];
 }
 
 - (void)updateEthereumList:(NSArray<SudNFTChainInfoModel *> *)chains {
-    [self.myNFTView updateEthereumList:chains];
+    self.chains = chains;
+    [self.myNFTView updateEthereumList:self.chains];
+    [self dtUpdateUI];
 }
-
 
 - (SDAnimatedImageView *)headerView {
     if (!_headerView) {

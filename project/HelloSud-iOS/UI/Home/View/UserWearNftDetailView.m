@@ -6,6 +6,8 @@
 #import "UserWearNftDetailView.h"
 
 @interface UserWearNftDetailView ()
+@property(nonatomic, strong) UIScrollView *scrollView;
+@property(nonatomic, strong) UIView *contentView;
 @property(nonatomic, strong) SDAnimatedImageView *headerView;
 @property(nonatomic, strong) UIView *lineView;
 @property(nonatomic, strong) UILabel *titleLabel;
@@ -43,23 +45,43 @@
 }
 
 - (void)dtAddViews {
-    [self addSubview:self.headerView];
-    [self addSubview:self.userNameLabel];
-    [self addSubview:self.userIdLabel];
-    [self addSubview:self.coinContentView];
+    [self addSubview:self.scrollView];
+    [self.scrollView addSubview:self.contentView];
+
+    [self.contentView addSubview:self.headerView];
+    [self.contentView addSubview:self.userNameLabel];
+    [self.contentView addSubview:self.userIdLabel];
+    [self.contentView addSubview:self.coinContentView];
+
     [self.coinContentView addSubview:self.coinImageView];
     [self.coinContentView addSubview:self.coinLabel];
-    [self addSubview:self.lineView];
-    [self addSubview:self.titleLabel];
-    [self addSubview:self.nameLabel];
-    [self addSubview:self.descLabel];
-    [self addSubview:self.moreLabel];
-    [self addSubview:self.contractAddressLabel];
-    [self addSubview:self.tokenIDLabel];
-    [self addSubview:self.tokenStandLabel];
+
+    [self.contentView addSubview:self.lineView];
+    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.nameLabel];
+    [self.contentView addSubview:self.descLabel];
+    [self.contentView addSubview:self.moreLabel];
+    [self.contentView addSubview:self.contractAddressLabel];
+    [self.contentView addSubview:self.tokenIDLabel];
+    [self.contentView addSubview:self.tokenStandLabel];
 }
 
 - (void)dtLayoutViews {
+
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
+        make.height.equalTo(@(kScreenHeight - 196));
+        make.bottom.equalTo(@0);
+    }];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
+        make.width.equalTo(self.scrollView);
+        make.height.greaterThanOrEqualTo(@0);
+    }];
 
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@16);
@@ -185,31 +207,30 @@
         desc = nftModel.desc;
     }
     self.nameLabel.text = name;
-    self.descLabel.attributedText = [self generate:descTitle subtitle:desc subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingTail];
-    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy" breakMode:NSLineBreakByTruncatingMiddle];
-    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy" breakMode:NSLineBreakByTruncatingMiddle];
-    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingMiddle];
-    self.tokenStandLabel.hidden = tokenType.length == 0;
 
-    self.descLabel.preferredMaxLayoutWidth = kScreenWidth - 32;
-    CGRect descRect = [self.descLabel.attributedText boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    CGFloat limitHeight = 86;
+    NSAttributedString *attrDesc = [self generate:descTitle subtitle:desc subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
+    
+    self.descLabel.attributedText = attrDesc;
+    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
+    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
+    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
+    self.tokenStandLabel.hidden = tokenType.length == 0;
+    
+    self.descLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    self.contractAddressLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    self.tokenIDLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+
+    /// 测算高度
+    self.descLabel.numberOfLines = 4;
+    CGSize size = [self.descLabel sizeThatFits:CGSizeMake(kScreenWidth - 32, 100000)];
+    CGRect descRect = [attrDesc boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGFloat limitHeight = size.height;
     if (descRect.size.height > limitHeight) {
         self.moreLabel.hidden = NO;
         if (!self.showMore) {
-            [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leading.mas_equalTo(16);
-                make.trailing.mas_equalTo(-16);
-                make.height.equalTo(@(limitHeight));
-                make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
-            }];
+            self.descLabel.numberOfLines = 4;
         } else {
-            [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leading.mas_equalTo(16);
-                make.trailing.mas_equalTo(-16);
-                make.height.greaterThanOrEqualTo(@0);
-                make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
-            }];
+            self.descLabel.numberOfLines = 0;
         }
         [self.moreLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(16);
@@ -219,20 +240,16 @@
         [self updateMoreLabel:self.showMore];
     } else {
         self.moreLabel.hidden = YES;
-        [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.leading.mas_equalTo(16);
-            make.trailing.mas_equalTo(-16);
-            make.height.greaterThanOrEqualTo(@0);
-            make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
-        }];
+        self.descLabel.numberOfLines = 0;
         [self.moreLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(16);
             make.width.height.equalTo(@0);
             make.top.equalTo(self.descLabel.mas_bottom);
         }];
     }
-
-
+    [self.scrollView layoutIfNeeded];
+    CGFloat height = self.contentView.bounds.size.height;
+    self.scrollView.contentSize = CGSizeMake(kScreenWidth, height);
 }
 
 - (void)dtConfigEvents {
@@ -258,7 +275,7 @@
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
     if (imageName) {
-        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(12, 12) offsetY:-3];
+        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(12, 12) offsetY:-2];
         [fullAttr appendAttributedString:iconAttr];
     }
     self.moreLabel.attributedText = fullAttr;
@@ -324,11 +341,7 @@
     [self.headerView.layer removeAllAnimations];
 }
 
-- (NSAttributedString *)generate:(NSString *)title
-                        subtitle:(NSString *)subtitle
-                        subColor:(UIColor *)subColor
-                   tailImageName:(NSString *)imageName
-                       breakMode:(NSLineBreakMode)breakMode {
+- (NSAttributedString *)generate:(NSString *)title subtitle:(NSString *)subtitle subColor:(UIColor *)subColor tailImageName:(NSString *)imageName {
     NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
@@ -339,7 +352,6 @@
     NSMutableAttributedString *subtitleAttr = [[NSMutableAttributedString alloc] initWithString:subtitle];
     subtitleAttr.yy_font = UIFONT_REGULAR(14);
     subtitleAttr.yy_color = subColor;
-    subtitleAttr.yy_lineBreakMode = breakMode;
     subtitleAttr.yy_lineSpacing = 5;
     [fullAttr appendAttributedString:subtitleAttr];
     if (imageName) {
@@ -347,6 +359,26 @@
         [fullAttr appendAttributedString:iconAttr];
     }
     return fullAttr;
+}
+
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.backgroundColor = UIColor.whiteColor;
+        _scrollView.bounces = YES;
+        _scrollView.alwaysBounceVertical = YES;
+        _scrollView.showsVerticalScrollIndicator = NO;
+    }
+    return _scrollView;
+}
+
+- (UIView *)contentView {
+    if (!_contentView) {
+        _contentView = [[UIView alloc] init];
+        _contentView.backgroundColor = UIColor.whiteColor;
+        _contentView.clipsToBounds = YES;
+    }
+    return _contentView;
 }
 
 - (UIImageView *)headerView {

@@ -8,20 +8,8 @@
 #ifndef ServiceConstHeader_h
 #define ServiceConstHeader_h
 
-#if DEBUG
-#define InteractURL      @"https://fat-interact-hello-sud.sud.tech"
-#define BaseURL          @"https://fat-base-hello-sud.sud.tech"
-#define GameURL          @"https://fat-game-hello-sud.sud.tech"
-#define GAME_TEST_ENV    YES
-#else
-#define InteractURL      @"https://interact-hello-sud.sud.tech"
-#define BaseURL          @"https://base-hello-sud.sud.tech"
-#define GameURL          @"https://game-hello-sud.sud.tech"
-#define GAME_TEST_ENV    NO
-#endif
-
-#define kBASEURL(url) [NSString stringWithFormat:@"%@/%@",BaseURL, url]
-#define kINTERACTURL(url) [NSString stringWithFormat:@"%@/%@",InteractURL, url]
-#define kGameURL(url) [NSString stringWithFormat:@"%@/%@",GameURL, url]
+#define kBASEURL(url) [NSString stringWithFormat:@"%@/%@",HsAppPreferences.shared.baseUrl, url]
+#define kINTERACTURL(url) [NSString stringWithFormat:@"%@/%@",HsAppPreferences.shared.interactUrl, url]
+#define kGameURL(url) [NSString stringWithFormat:@"%@/%@",HsAppPreferences.shared.gameUrl, url]
 
 #endif /* ServiceConstHeader_h */

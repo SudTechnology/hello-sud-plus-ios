@@ -142,7 +142,7 @@
     if (!_bindBtn) {
         _bindBtn = UIButton.new;
         _bindBtn.titleLabel.font = UIFONT_MEDIUM(12);
-        [_bindBtn setContentEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+        [_bindBtn setContentEdgeInsets:UIEdgeInsetsMake(0, 16, 0, 16)];
         [_bindBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         [_bindBtn setTitle:@"绑定" forState:UIControlStateNormal];
         [_bindBtn setBackgroundImage:UIColor.blackColor.dt_toImage forState:UIControlStateNormal];

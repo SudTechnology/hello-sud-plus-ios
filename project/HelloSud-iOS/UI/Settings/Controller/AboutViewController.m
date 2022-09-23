@@ -12,6 +12,7 @@
 #import "VersionInfoViewController.h"
 #import "SwitchLanguageViewController.h"
 #import "MoreSettingViewController.h"
+#import "SwitchEnvViewController.h"
 
 @interface AboutViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
@@ -19,7 +20,7 @@
 /// 页面数据
 @property(nonatomic, strong) NSArray <NSArray <HSSettingModel *> *> *arrData;
 /// 是否展示更多设置
-@property(nonatomic, assign) BOOL showMoreSetting;
+@property(nonatomic, assign) BOOL showEnvSetting;
 @end
 
 @implementation AboutViewController
@@ -53,40 +54,46 @@
     gitHubModel.subTitle = @"hello-sud";
     gitHubModel.isMore = YES;
     gitHubModel.pageURL = @"https://github.com/SudTechnology/hello-sud-ios";
+
     HSSettingModel *oProtocolModel = [HSSettingModel new];
     oProtocolModel.title = NSString.dt_settings_open_source;
     oProtocolModel.isMore = YES;
     oProtocolModel.pageURL = [SettingsService appLicenseURL].absoluteString;
+
     HSSettingModel *userProtocolModel = [HSSettingModel new];
     userProtocolModel.title = NSString.dt_settings_user_agreement;
     userProtocolModel.isMore = YES;
     userProtocolModel.pageURL = [SettingsService appProtocolURL].absoluteString;
+
     HSSettingModel *privacyModel = [HSSettingModel new];
     privacyModel.title = NSString.dt_settings_privacy_policy;
     privacyModel.isMore = YES;
     privacyModel.pageURL = [SettingsService appPrivacyURL].absoluteString;
 
-    self.arrData = @[@[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+    HSSettingModel *envModel = [HSSettingModel new];
+    envModel.title = @"环境设置";
+    envModel.isMore = YES;
+    if (self.showEnvSetting) {
+        self.arrData = @[@[gitHubModel, oProtocolModel, userProtocolModel, privacyModel, envModel]];
+    } else {
+        self.arrData = @[@[gitHubModel, oProtocolModel, userProtocolModel, privacyModel]];
+    }
 
-//    WeakSelf
-//    HSSetingHeadView *header = HSSetingHeadView.new;
-//    header.tapCallback = ^{
-//        weakSelf.showMoreSetting = YES;
-//        [weakSelf configData];
-//    };
-//    header.frame = CGRectMake(0, 0, kScreenWidth, 217);
-//    [header dtUpdateUI];
-//    self.tableView.tableHeaderView = header;
-//    [header mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.leading.top.trailing.mas_equalTo(0);
-//        make.height.mas_equalTo(217);
-//        make.width.mas_equalTo(kScreenWidth - 32);
-//    }];
     CGSize size = [self.contactUsView systemLayoutSizeFittingSize:CGSizeMake(kScreenWidth, 10000)];
     CGRect targetFrame = CGRectMake(0, 0, kScreenWidth, size.height);
     self.contactUsView.frame = targetFrame;
     self.tableView.tableFooterView = self.contactUsView;
     [self.tableView reloadData];
+}
+
+- (void)onTap:(id)tap {
+#if DEBUG
+    DDLogDebug(@"ontap");
+    if (!self.showEnvSetting) {
+        self.showEnvSetting = YES;
+        [self configData];
+    }
+#endif
 }
 
 - (void)dtAddViews {
@@ -115,7 +122,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsHorizontalScrollIndicator = NO;
         _tableView.showsVerticalScrollIndicator = NO;
-        
+
 
     }
     return _tableView;
@@ -140,6 +147,9 @@
             make.height.mas_greaterThanOrEqualTo(0);
             make.bottom.mas_equalTo(0);
         }];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+        tap.numberOfTapsRequired = 3;
+        [_contactUsView addGestureRecognizer:tap];
     }
     return _contactUsView;
 }
@@ -176,6 +186,9 @@
         } else {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.pageURL]];
         }
+    }else if ([model.title isEqualToString:@"环境设置"]) {
+        SwitchEnvViewController *vc = SwitchEnvViewController.new;
+        [self.navigationController pushViewController:vc animated:YES];
     } else {
         if (model.isMore) {
             DTWebViewController *web = DTWebViewController.new;

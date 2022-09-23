@@ -15,6 +15,7 @@
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *dataList;
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *srcList;
 @end
 
 @implementation ForeignWalletSelectPopView
@@ -77,6 +78,7 @@
 }
 
 - (void)updateDataList:(NSArray<SudNFTWalletInfoModel *> *)dataList {
+    self.srcList = dataList;
     self.dataList = dataList;
     [self resortList];
 }
@@ -84,7 +86,7 @@
 - (void)resortList {
     NSMutableArray *bindList = NSMutableArray.new;
     NSMutableArray *unbindList = NSMutableArray.new;
-    for (SudNFTWalletInfoModel *m in self.dataList) {
+    for (SudNFTWalletInfoModel *m in self.srcList) {
         if ([HsNFTPreferences.shared isBindWalletWithType:m.type]) {
             [bindList addObject:m];
         } else {

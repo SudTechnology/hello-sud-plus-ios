@@ -65,8 +65,10 @@
     BOOL isTestEnv = NO;
 #if DEBUG
     // 测试环境
-    [ISudNFTD e:3];
-    isTestEnv = YES;
+    [ISudNFTD e:HsAppPreferences.shared.nftEnvType];
+    if (HsAppPreferences.shared.nftEnvType != HsNftEnvTypePro) {
+        isTestEnv = YES;
+    }
 #endif
     NSString *sudNFTSDKVersoin = [SudNFT getVersion];
     NSLog(@"sudNFTSDKVersoin:%@", sudNFTSDKVersoin);
@@ -119,6 +121,7 @@
 
     BOOL bindWallet = HsNFTPreferences.shared.isBindWallet;
     if (!bindWallet) {
+        [self.myHeaderView removeTipView];
         // 未绑定钱包
         if (self.walletList.count > 0) {
             [self.myHeaderView updateSupportWallet:self.walletList];
@@ -174,9 +177,7 @@
         if (errCode != 0) {
             NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
-            if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
-            }
+            [HsNFTPreferences.shared handleFilterNftError:errCode errMsg:errMsg];
             [self.myHeaderView updateNFTList:nil];
             return;
         }
@@ -197,9 +198,7 @@
         if (errCode != 0) {
             NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
-            if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
-            }
+            [HsNFTPreferences.shared handleFilterNftError:errCode errMsg:errMsg];
             [self.myHeaderView updateCardList:nil];
             return;
         }
@@ -409,6 +408,7 @@
         weakSelf.bindWalletStateView = bindWalletStateView;
         SudNFTBindWalletParamModel *paramModel = SudNFTBindWalletParamModel.new;
         paramModel.walletType = walletInfoModel.type;
+        DDLogDebug(@"bindWallet:%@", @(paramModel.walletType));
         [SudNFT bindWallet:paramModel listener:self];
         return;
     }
@@ -459,7 +459,7 @@
     AppService.shared.login.loginUserInfo.headerNftUrl = nil;
     AppService.shared.login.loginUserInfo.headerType = HSUserHeadTypeNormal;
     [AppService.shared.login saveLoginUserInfo];
-    [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_WEAR_CHANGE_NTF object:nil userInfo:nil];
 }
 
 /// 移除当前钱包数据
@@ -478,6 +478,9 @@
         if (m.zoneType == zoneType) {
             if ([HsNFTPreferences.shared isBindWalletWithType:m.type]) {
                 HsNFTPreferences.shared.currentWalletType = m.type;
+                if (m.chainList.count > 0) {
+                    HsNFTPreferences.shared.selectedEthereumChainType = m.chainList[0].type;
+                }
                 isExistNextBindWalletType = YES;
                 break;
             }
@@ -653,6 +656,7 @@
 /// @param walletInfoModel 成功回调
 - (void)onSuccess:(SudNFTBindWalletModel *_Nullable)walletInfoModel {
 
+    DDLogInfo(@"onSuccess:%@", walletInfoModel.walletAddress);
     // 绑定钱包成功
     HsNFTPreferences.shared.bindZoneType = self.waitBindWalletInfo.zoneType;
     HsNFTPreferences.shared.currentWalletType = self.waitBindWalletInfo.type;
@@ -666,15 +670,19 @@
 
     [[NSNotificationCenter defaultCenter] postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
     [self.myHeaderView showTipIfNeed];
+    self.waitBindWalletInfo = nil;
 }
 
 /// 绑定钱包
 - (void)onFailure:(NSInteger)errCode errMsg:(NSString *_Nullable)errMsg {
-
+    NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
+    DDLogError(@"bind wallet err:%@", msg);
+    if (!self.waitBindWalletInfo) {
+        return;
+    }
     [DTAlertView close];
     if (errCode != 0) {
-        NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
-        DDLogError(@"bind wallet err:%@", msg);
+        
         [self showBindErrorAlert:msg];
         return;
     }

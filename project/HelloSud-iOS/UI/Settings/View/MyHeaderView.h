@@ -21,5 +21,8 @@
 
 /// 展示提示
 - (void)showTipIfNeed;
+
+/// 移除tip提示
+- (void)removeTipView;
 @end
 

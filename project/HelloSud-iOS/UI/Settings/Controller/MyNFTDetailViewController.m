@@ -43,7 +43,6 @@
     WeakSelf
     [_backBtn addTarget:self action:@selector(dtNavigationBackClick) forControlEvents:UIControlEventTouchUpInside];
     [_wearBtn addTarget:self action:@selector(onWearBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//    [_copyBtn addTarget:self action:@selector(onCopyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer *addrTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAddrTap:)];
     [self.contractAddressLabel addGestureRecognizer:addrTap];
     UITapGestureRecognizer *tokenTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTokenTap:)];
@@ -110,9 +109,7 @@
             NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             sender.enabled = YES;
-            if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
-            }
+            [HsNFTPreferences.shared handleFilterNftError:errCode errMsg:errMsg];
             return;
         }
         [weakSelf handleWearDetailToken:generateDetailTokenModel.detailsToken isCN:NO];
@@ -133,9 +130,7 @@
             NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
             sender.enabled = YES;
-            if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
-            }
+            [HsNFTPreferences.shared handleFilterNftError:errCode errMsg:errMsg];
             return;
         }
         [weakSelf handleWearDetailToken:resp.detailsToken isCN:YES];
@@ -279,7 +274,6 @@
         make.trailing.mas_equalTo(0);
         make.bottom.equalTo(self.bottomView.mas_top);
     }];
-    self.contentView.backgroundColor = UIColor.orangeColor;
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.leading.mas_equalTo(0);
@@ -390,11 +384,17 @@
         desc = nftModel.desc;
     }
     self.nameLabel.text = name;
-    self.descLabel.attributedText = [self generate:descTitle subtitle:desc subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingTail];
-    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy" breakMode:NSLineBreakByTruncatingMiddle];
-    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy" breakMode:NSLineBreakByTruncatingMiddle];
-    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil breakMode:NSLineBreakByTruncatingMiddle];
+    NSAttributedString *attrDesc = [self generate:descTitle subtitle:desc subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
+    self.descLabel.attributedText = attrDesc;
+    self.contractAddressLabel.attributedText = [self generate:contractTitle subtitle:contractAddress subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
+    self.tokenIDLabel.attributedText = [self generate:tokenIDTitle subtitle:tokenId subColor:HEX_COLOR(@"#8A8A8E") tailImageName:@"nft_detail_copy"];
+    self.tokenStandLabel.attributedText = [self generate:@"Token Standard\n" subtitle:tokenType subColor:HEX_COLOR(@"#8A8A8E") tailImageName:nil];
     self.tokenStandLabel.hidden = tokenType.length == 0;
+    
+    self.descLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    self.contractAddressLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    self.tokenIDLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    
     if (coverURL) {
 
         SDWebImageContext *context = nil;
@@ -413,25 +413,17 @@
         self.iconImageView.image = [UIImage imageNamed:@"default_nft_icon"];
     }
     [self updateWearBtn];
-
-    CGRect descRect = [self.descLabel.attributedText boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    CGFloat limitHeight = 86;
+    /// 测算高度
+    self.descLabel.numberOfLines = 4;
+    CGSize size = [self.descLabel sizeThatFits:CGSizeMake(kScreenWidth - 32, 100000)];
+    CGRect descRect = [attrDesc boundingRectWithSize:CGSizeMake(kScreenWidth - 32, 100000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGFloat limitHeight = size.height;
     if (descRect.size.height > limitHeight) {
         self.moreLabel.hidden = NO;
         if (!self.showMore) {
-            [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leading.mas_equalTo(16);
-                make.trailing.mas_equalTo(-16);
-                make.height.equalTo(@(limitHeight));
-                make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
-            }];
+            self.descLabel.numberOfLines = 4;
         } else {
-            [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leading.mas_equalTo(16);
-                make.trailing.mas_equalTo(-16);
-                make.height.greaterThanOrEqualTo(@0);
-                make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
-            }];
+            self.descLabel.numberOfLines = 0;
         }
         [self.moreLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(16);
@@ -441,12 +433,7 @@
         [self updateMoreLabel:self.showMore];
     } else {
         self.moreLabel.hidden = YES;
-        [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.leading.mas_equalTo(16);
-            make.trailing.mas_equalTo(-16);
-            make.height.greaterThanOrEqualTo(@0);
-            make.top.equalTo(self.nameLabel.mas_bottom).offset(18);
-        }];
+        self.descLabel.numberOfLines = 0;
         [self.moreLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(16);
             make.width.height.equalTo(@0);
@@ -472,7 +459,7 @@
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
     if (imageName) {
-        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(12, 12) offsetY:-3];
+        NSAttributedString *iconAttr = [NSAttributedString dt_attrWithImage:[UIImage imageNamed:imageName] size:CGSizeMake(12, 12) offsetY:-2];
         [fullAttr appendAttributedString:iconAttr];
     }
     self.moreLabel.attributedText = fullAttr;
@@ -509,23 +496,17 @@
     [self.iconImageView.layer removeAllAnimations];
 }
 
-- (NSAttributedString *)generate:(NSString *)title
-                        subtitle:(NSString *)subtitle
-                        subColor:(UIColor *)subColor
-                   tailImageName:(NSString *)imageName
-                       breakMode:(NSLineBreakMode)breakMode {
+- (NSAttributedString *)generate:(NSString *)title subtitle:(NSString *)subtitle subColor:(UIColor *)subColor tailImageName:(NSString *)imageName {
     NSMutableAttributedString *fullAttr = [[NSMutableAttributedString alloc] initWithString:title];
     fullAttr.yy_font = UIFONT_REGULAR(14);
     fullAttr.yy_color = HEX_COLOR(@"#000000");
     fullAttr.yy_lineSpacing = 5;
-    fullAttr.yy_lineBreakMode = breakMode;
 
     subtitle = subtitle ? subtitle : @"";
     subtitle = [NSString stringWithFormat:@"%@ ", subtitle];
     NSMutableAttributedString *subtitleAttr = [[NSMutableAttributedString alloc] initWithString:subtitle];
     subtitleAttr.yy_font = UIFONT_REGULAR(14);
     subtitleAttr.yy_color = subColor;
-    subtitleAttr.yy_lineBreakMode = breakMode;
     subtitleAttr.yy_lineSpacing = 5;
     [fullAttr appendAttributedString:subtitleAttr];
     if (imageName) {
@@ -550,6 +531,7 @@
         _scrollView.backgroundColor = UIColor.whiteColor;
         _scrollView.bounces = YES;
         _scrollView.alwaysBounceVertical = YES;
+        _scrollView.showsVerticalScrollIndicator = NO;
     }
     return _scrollView;
 }
