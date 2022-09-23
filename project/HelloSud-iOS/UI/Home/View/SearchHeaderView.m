@@ -7,6 +7,7 @@
 
 #import "SearchHeaderView.h"
 #import "UserDetailView.h"
+#import "UserWearNftDetailView.h"
 
 @interface SearchHeaderView () <UITextFieldDelegate>
 @property (nonatomic, strong) SDAnimatedImageView *headerView;
@@ -92,10 +93,10 @@
         [self.headerView  sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed context:context progress:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
     }
-    BOOL isBindWallet = HsNFTPreferences.shared.walletAddress.length > 0;
+    BOOL isBindWallet = [HsNFTPreferences.shared isBindForeignWallet];
     if (isBindWallet) {
         // 绑定过了钱包
-        self.walletAddressLabel.text = HsNFTPreferences.shared.walletAddress;
+        self.walletAddressLabel.text = [HsNFTPreferences.shared getBindWalletAddressByWalletType:HsNFTPreferences.shared.currentWalletType];
         self.walletAddressLabel.hidden = NO;
         self.userIdLabel.hidden = YES;
     } else {
@@ -103,6 +104,7 @@
         self.walletAddressLabel.hidden = YES;
         self.userIdLabel.hidden = NO;
     }
+    [self.headerView viewWithTag:100].hidden = userInfo.isWearNFT ? NO : YES;
 }
 
 - (void)dtConfigEvents {
@@ -128,11 +130,18 @@
 }
 
 - (void)onTapHead:(id)tap {
-    /// 展示用户金币信息
-    UserDetailView *v = [[UserDetailView alloc] init];
-    [DTAlertView show:v rootView:AppUtil.currentWindow clickToClose:YES showDefaultBackground:YES onCloseCallback:^{
+    AccountUserModel *userInfo = AppService.shared.login.loginUserInfo;
+    BOOL isWearNft = userInfo.isWearNFT;
+    if (isWearNft) {
+        UserWearNftDetailView *v = UserWearNftDetailView.new;
+        [DTSheetView show:v rootView:nil hiddenBackCover:NO onCloseCallback:nil];
+    } else {
+        /// 展示用户金币信息
+        UserDetailView *v = [[UserDetailView alloc] init];
+        [DTAlertView show:v rootView:AppUtil.currentWindow clickToClose:YES showDefaultBackground:YES onCloseCallback:^{
 
-    }];
+        }];
+    }
 }
 
 - (SDAnimatedImageView *)headerView {
@@ -143,6 +152,14 @@
         _headerView.clipsToBounds = true;
         _headerView.layer.cornerRadius = 56/2;
         _headerView.contentMode = UIViewContentModeScaleAspectFill;
+        UIImageView *coverImageView = UIImageView.new;
+        coverImageView.tag = 100;
+        coverImageView.hidden = YES;
+        coverImageView.image = [UIImage imageNamed:@"nft_header_cover_white"];
+        [_headerView addSubview:coverImageView];
+        [coverImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        }];
     }
     return _headerView;
 }

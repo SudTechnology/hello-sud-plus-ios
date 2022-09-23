@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) void (^selectedWalletBlock)(SudNFTWalletInfoModel *walletInfoModel);
 
 - (void)updateDataList:(NSArray<SudNFTWalletInfoModel *> *)dataList;
+
+/*
+ * 关闭如果不存在其它绑定账号
+ * */
+- (void)closeIfNoBindAccount;
 @end
 
 NS_ASSUME_NONNULL_END

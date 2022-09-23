@@ -143,6 +143,9 @@
 		6C192E5B279523B100553034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C192E59279523B100553034 /* LaunchScreen.storyboard */; };
 		6C192E5E279523B100553034 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C192E5D279523B100553034 /* main.m */; };
 		6C1D007827BA0400000F0998 /* AgoraAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */; };
+		6C26CC5728D9C3BD00C2572B /* SwitchEnvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26CC5628D9C3BD00C2572B /* SwitchEnvViewController.m */; };
+		6C26CC5A28D9C3C900C2572B /* SwitchEnvModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26CC5928D9C3C900C2572B /* SwitchEnvModel.m */; };
+		6C26CC5D28D9C46E00C2572B /* SwitchEnvTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26CC5C28D9C46E00C2572B /* SwitchEnvTableViewCell.m */; };
 		6C31536F28C0A6440001B565 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C31536E28C0A6440001B565 /* AppDelegate.m */; };
 		6C31537828C0A6440001B565 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C31537628C0A6440001B565 /* Main.storyboard */; };
 		6C31537A28C0A6470001B565 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C31537928C0A6470001B565 /* Assets.xcassets */; };
@@ -361,6 +364,7 @@
 		BC210033B23381DCEAA0945A /* SQSCnNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DD3EE89D98FDB3EE028 /* SQSCnNFTListViewController.m */; };
 		BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */; };
 		BC210093C2C7796FBA9F334C /* DiscoGameInteractivePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */; };
+		BC2102046258AC22ACD73CF4 /* UserWearNftDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */; };
 		BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */; };
 		BC21032F94AB142E1BAA2114 /* PKRoomListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109B31F63F31616E3D68E /* PKRoomListCell.m */; };
 		BC210379CA8856A0C91448E4 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098C63F873C785C0F04B /* MyCell.m */; };
@@ -371,23 +375,28 @@
 		BC2106312BE7B7B979F5845D /* SQSCnNFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105C7FC17C37F5A3C71F4 /* SQSCnNFTDetailViewController.m */; };
 		BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */; };
 		BC2106C085BCFA772D1B9F96 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21001E47A02C2A2F8EE39B /* AboutViewController.m */; };
+		BC21074293C8ADEA821E64D4 /* WalletDeletePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D7DC4411F5B1BB4F36E /* WalletDeletePopView.m */; };
 		BC210743E83852E3D938F5A9 /* DiscoInteractiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */; };
 		BC21076C5084AD192F038DA8 /* DiscoSelectAnchorColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */; };
 		BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */; };
+		BC2107D8E6B6DC999B46720D /* TipPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21040A1F1E959F6632C911 /* TipPopView.m */; };
 		BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */; };
 		BC210819F69EB53104902350 /* DiscoAppointmentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */; };
 		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
 		BC21090932848A4335D3546F /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210EA4458F6CC10378E975 /* MyViewController.m */; };
 		BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */; };
+		BC21097342CF79274F4049F3 /* HsAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109AEEB6FC34520DCBA33 /* HsAppPreferences.m */; };
 		BC21098A0CA7595992F3EC61 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */; };
 		BC2109B53CC40DBF0DEB10B2 /* RoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105467EA8857361624481 /* RoomMoreView.m */; };
 		BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */; };
 		BC210A75257DF698A543C29A /* DiscoInteractiveColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */; };
 		BC210A7C7C41EA6AC304F981 /* RoomCmdKickoutRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */; };
 		BC210B0390E117B09344D025 /* HsNFTPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100D34F80535C6D8EBA57 /* HsNFTPreferences.m */; };
+		BC210B212D9241C9CE03A083 /* WalletAddressSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF1888895F521C40AFD /* WalletAddressSwitchCell.m */; };
 		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
 		BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
+		BC210CF89C901006931DE6F5 /* WalletAddressSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E8769E66D83BC365AB8 /* WalletAddressSwitchCellModel.m */; };
 		BC210D1C881B0F781AF55226 /* CNAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */; };
 		BC210D9F0C69893639DD84A5 /* HomeGuessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21056B5487F677973E97B8 /* HomeGuessCell.m */; };
 		BC210E2F0BACA26837C44BBC /* MyEthereumChainsSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */; };
@@ -398,6 +407,7 @@
 		BC210F1416AECFDE1A4FEA19 /* MyCNWalletSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210926A0E074910BB1BE29 /* MyCNWalletSwitchCell.m */; };
 		BC210F738CED39591CB7541D /* MoreGuessCoinPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */; };
 		BC210F74B7434253E2FEF91D /* GuessRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */; };
+		BC210F7B9020973BAD4CF677 /* WalletAddressSwitchPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF5CBAF02BB70DCC073 /* WalletAddressSwitchPopView.m */; };
 		BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */; };
 		BC210FF63EC24685CBC7FBAC /* SuspendRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */; };
 		E51A737828091CD00097007C /* ZIMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51A737728091CD00097007C /* ZIMManager.m */; };
@@ -738,6 +748,12 @@
 		6C192E882797E2C700553034 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraAudioEngineImpl.h; sourceTree = "<group>"; };
 		6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgoraAudioEngineImpl.m; sourceTree = "<group>"; };
+		6C26CC5528D9C3BD00C2572B /* SwitchEnvViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchEnvViewController.h; sourceTree = "<group>"; };
+		6C26CC5628D9C3BD00C2572B /* SwitchEnvViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchEnvViewController.m; sourceTree = "<group>"; };
+		6C26CC5828D9C3C900C2572B /* SwitchEnvModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchEnvModel.h; sourceTree = "<group>"; };
+		6C26CC5928D9C3C900C2572B /* SwitchEnvModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchEnvModel.m; sourceTree = "<group>"; };
+		6C26CC5B28D9C46E00C2572B /* SwitchEnvTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchEnvTableViewCell.h; sourceTree = "<group>"; };
+		6C26CC5C28D9C46E00C2572B /* SwitchEnvTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchEnvTableViewCell.m; sourceTree = "<group>"; };
 		6C31536B28C0A6440001B565 /* SudNFTQuickStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudNFTQuickStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31536D28C0A6440001B565 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C31536E28C0A6440001B565 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1062,8 +1078,12 @@
 		BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGameEmptyView.m; sourceTree = "<group>"; };
 		BC210337708736FFF222750A /* BaseSceneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSceneService.m; sourceTree = "<group>"; };
 		BC210343B3A1CE0A09FB978C /* CNAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNAuthViewController.h; sourceTree = "<group>"; };
+		BC21035DFEEDEEEBD9F73731 /* WalletDeletePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDeletePopView.h; sourceTree = "<group>"; };
 		BC2103C043B5568FCBA68B06 /* BaseSceneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSceneService.h; sourceTree = "<group>"; };
 		BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinItemView.m; sourceTree = "<group>"; };
+		BC21040A1F1E959F6632C911 /* TipPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipPopView.m; sourceTree = "<group>"; };
+		BC21040EB1CB3FC8E205CB1A /* TipPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipPopView.h; sourceTree = "<group>"; };
+		BC210468B8562E68D5D9699A /* WalletAddressSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchPopView.h; sourceTree = "<group>"; };
 		BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderView.h; sourceTree = "<group>"; };
 		BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAuthViewController.m; sourceTree = "<group>"; };
 		BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessRoomViewController.m; sourceTree = "<group>"; };
@@ -1078,6 +1098,7 @@
 		BC2105C7FC17C37F5A3C71F4 /* SQSCnNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnNFTDetailViewController.m; sourceTree = "<group>"; };
 		BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSelectRoomView.m; sourceTree = "<group>"; };
 		BC210615F38DBFB52A350044 /* SQSCnNFTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnNFTDetailViewController.h; sourceTree = "<group>"; };
+		BC2106173D42C6A345E85E01 /* HsAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsAppPreferences.h; sourceTree = "<group>"; };
 		BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendRoomView.m; sourceTree = "<group>"; };
 		BC210692B27543A09E9B3CB6 /* MyNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTListViewController.h; sourceTree = "<group>"; };
 		BC21069C06A918E5FCF30F8A /* QSGameItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameItemModel.h; sourceTree = "<group>"; };
@@ -1090,6 +1111,7 @@
 		BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessViewController.h; sourceTree = "<group>"; };
 		BC2107BC94088B9F062BBA4B /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
 		BC2107C3D55782ACDF272730 /* SQSCnNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSCnNFTListViewController.h; sourceTree = "<group>"; };
+		BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserWearNftDetailView.m; sourceTree = "<group>"; };
 		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
 		BC2108CFC574A8AFEFE2FEDA /* RoomCmdKickoutRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdKickoutRoomModel.h; sourceTree = "<group>"; };
 		BC2109228F9F8EDC6CC7208C /* HsNFTPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsNFTPreferences.h; sourceTree = "<group>"; };
@@ -1098,12 +1120,14 @@
 		BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoGameInteractivePopView.m; sourceTree = "<group>"; };
 		BC21098C63F873C785C0F04B /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
 		BC210992133641B87C11D04E /* DiscoSelectAnchorColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoSelectAnchorColCell.h; sourceTree = "<group>"; };
+		BC2109AEEB6FC34520DCBA33 /* HsAppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HsAppPreferences.m; sourceTree = "<group>"; };
 		BC2109B31F63F31616E3D68E /* PKRoomListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomListCell.m; sourceTree = "<group>"; };
 		BC210A8B9F817A0399951BD7 /* MoreGuessTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessTableViewCell.h; sourceTree = "<group>"; };
 		BC210ABE07C435063FEB002B /* SuspendRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuspendRoomView.h; sourceTree = "<group>"; };
 		BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderView.m; sourceTree = "<group>"; };
 		BC210AD2E65543CE739F514F /* DiscoInteractiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoInteractiveModel.h; sourceTree = "<group>"; };
 		BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveModel.m; sourceTree = "<group>"; };
+		BC210AEA9019F2D6E08BB65F /* WalletAddressSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchCell.h; sourceTree = "<group>"; };
 		BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectCell.m; sourceTree = "<group>"; };
 		BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdKickoutRoomModel.m; sourceTree = "<group>"; };
 		BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveColCell.m; sourceTree = "<group>"; };
@@ -1113,16 +1137,22 @@
 		BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKStateView.m; sourceTree = "<group>"; };
 		BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessTableViewCell.m; sourceTree = "<group>"; };
 		BC210C677DD6442EA5963655 /* RespModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespModel.m; sourceTree = "<group>"; };
+		BC210CF1888895F521C40AFD /* WalletAddressSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAddressSwitchCell.m; sourceTree = "<group>"; };
+		BC210CF5CBAF02BB70DCC073 /* WalletAddressSwitchPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAddressSwitchPopView.m; sourceTree = "<group>"; };
 		BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameItemModel.m; sourceTree = "<group>"; };
 		BC210D0CC9CCF32570421BA2 /* MoreGuessCoinItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinItemView.h; sourceTree = "<group>"; };
 		BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinPopView.m; sourceTree = "<group>"; };
 		BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoSelectAnchorColCell.m; sourceTree = "<group>"; };
+		BC210D7BA54D759646784BC7 /* UserWearNftDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserWearNftDetailView.h; sourceTree = "<group>"; };
+		BC210D7DC4411F5B1BB4F36E /* WalletDeletePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDeletePopView.m; sourceTree = "<group>"; };
 		BC210D8DD3658817195900DF /* DiscoInteractiveColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoInteractiveColCell.h; sourceTree = "<group>"; };
 		BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderColCell.h; sourceTree = "<group>"; };
 		BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomService.m; sourceTree = "<group>"; };
 		BC210DCE2A6257343B4539CF /* DiscoGameInteractivePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractivePopView.h; sourceTree = "<group>"; };
 		BC210DD3EE89D98FDB3EE028 /* SQSCnNFTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSCnNFTListViewController.m; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
+		BC210E8769E66D83BC365AB8 /* WalletAddressSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAddressSwitchCellModel.m; sourceTree = "<group>"; };
+		BC210E92C4879AFA76A189D4 /* WalletAddressSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchCellModel.h; sourceTree = "<group>"; };
 		BC210EA4458F6CC10378E975 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		BC210F28C7CAB6BCA3140175 /* HSHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSHttpService.m; sourceTree = "<group>"; };
 		BC210F7B6D59DA493CE16350 /* SceneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentView.h; sourceTree = "<group>"; };
@@ -1241,6 +1271,8 @@
 		4455ACBF27EAC657001516EE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6C26CC5528D9C3BD00C2572B /* SwitchEnvViewController.h */,
+				6C26CC5628D9C3BD00C2572B /* SwitchEnvViewController.m */,
 				6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */,
 				6CEF766627F5A22000A12220 /* MoreSettingViewController.h */,
 				6CEF766727F5A22000A12220 /* MoreSettingViewController.m */,
@@ -1268,6 +1300,8 @@
 		4455ACC627EAC657001516EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6C26CC5828D9C3C900C2572B /* SwitchEnvModel.h */,
+				6C26CC5928D9C3C900C2572B /* SwitchEnvModel.m */,
 				6CC3E77528C1BB7D00AA934B /* HSNFTListCellModel.h */,
 				6CC3E77928C1BB7D00AA934B /* HSNFTListCellModel.m */,
 				6CC3E77628C1BB7D00AA934B /* MyCNWalletSwitchCellModel.h */,
@@ -1284,6 +1318,8 @@
 				4455ACCC27EAC657001516EE /* ChangeRTCModel.m */,
 				44241ADC27EACF9C001EE125 /* SwitchLangModel.h */,
 				44241ADD27EACF9C001EE125 /* SwitchLangModel.m */,
+				BC210E92C4879AFA76A189D4 /* WalletAddressSwitchCellModel.h */,
+				BC210E8769E66D83BC365AB8 /* WalletAddressSwitchCellModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1291,6 +1327,8 @@
 		4455ACCF27EAC657001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6C26CC5B28D9C46E00C2572B /* SwitchEnvTableViewCell.h */,
+				6C26CC5C28D9C46E00C2572B /* SwitchEnvTableViewCell.m */,
 				6C7CB61728C5DE73003A19A8 /* MyHeaderView.h */,
 				6CC3E77D28C1BBB500AA934B /* BindBtnView.h */,
 				6CC3E78328C1BBB600AA934B /* BindBtnView.m */,
@@ -1337,6 +1375,14 @@
 				BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */,
 				BC210225026B181652D6B986 /* MyCNWalletSwitchPopView.h */,
 				BC210926A0E074910BB1BE29 /* MyCNWalletSwitchCell.m */,
+				BC21035DFEEDEEEBD9F73731 /* WalletDeletePopView.h */,
+				BC210D7DC4411F5B1BB4F36E /* WalletDeletePopView.m */,
+				BC210CF5CBAF02BB70DCC073 /* WalletAddressSwitchPopView.m */,
+				BC210468B8562E68D5D9699A /* WalletAddressSwitchPopView.h */,
+				BC210AEA9019F2D6E08BB65F /* WalletAddressSwitchCell.h */,
+				BC210CF1888895F521C40AFD /* WalletAddressSwitchCell.m */,
+				BC21040A1F1E959F6632C911 /* TipPopView.m */,
+				BC21040EB1CB3FC8E205CB1A /* TipPopView.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1433,6 +1479,8 @@
 				6C46085E286C4E26005C99EF /* GameItemFullCollectionViewCell.m */,
 				6C460860286D3BC7005C99EF /* HomeHeaderFullReusableView.h */,
 				6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */,
+				BC210D7BA54D759646784BC7 /* UserWearNftDetailView.h */,
+				BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2680,6 +2728,8 @@
 			children = (
 				BC2100D34F80535C6D8EBA57 /* HsNFTPreferences.m */,
 				BC2109228F9F8EDC6CC7208C /* HsNFTPreferences.h */,
+				BC2109AEEB6FC34520DCBA33 /* HsAppPreferences.m */,
+				BC2106173D42C6A345E85E01 /* HsAppPreferences.h */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -3074,6 +3124,7 @@
 				6CE6CD2C283F591C0026BDAB /* DTAlertView.m in Sources */,
 				6C460871286DB5CF005C99EF /* DiscoRankTableViewCell.m in Sources */,
 				6CC3E77B28C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m in Sources */,
+				6C26CC5728D9C3BD00C2572B /* SwitchEnvViewController.m in Sources */,
 				6CE6CD40283F591C0026BDAB /* BaseModel.m in Sources */,
 				44D9F3AB280FC08C000B14B5 /* GameConfigViewController.m in Sources */,
 				4455AE0727EAC6F7001516EE /* BaseSceneViewController+Voice.m in Sources */,
@@ -3229,6 +3280,7 @@
 				4455AD9627EAC658001516EE /* MainTabBarController.m in Sources */,
 				6C460878286E9CCD005C99EF /* DiscoAnchorDatingView.m in Sources */,
 				444F59EB27F7035800FA1FB2 /* TicketChooseLevelView.m in Sources */,
+				6C26CC5D28D9C46E00C2572B /* SwitchEnvTableViewCell.m in Sources */,
 				4455ADA827EAC658001516EE /* RoomCmdChatTextModel.m in Sources */,
 				6C460808285840B4005C99EF /* GuessSelectColCell.m in Sources */,
 				44D9F3B3280FFF83000B14B5 /* GameConfigPopView.m in Sources */,
@@ -3341,6 +3393,14 @@
 				BC210F1416AECFDE1A4FEA19 /* MyCNWalletSwitchCell.m in Sources */,
 				BC210D1C881B0F781AF55226 /* CNAuthViewController.m in Sources */,
 				BC210E61BEB5F8B208DFF505 /* MyNFTDetailViewController.m in Sources */,
+				BC2102046258AC22ACD73CF4 /* UserWearNftDetailView.m in Sources */,
+				BC21074293C8ADEA821E64D4 /* WalletDeletePopView.m in Sources */,
+				BC210F7B9020973BAD4CF677 /* WalletAddressSwitchPopView.m in Sources */,
+				BC210B212D9241C9CE03A083 /* WalletAddressSwitchCell.m in Sources */,
+				6C26CC5A28D9C3C900C2572B /* SwitchEnvModel.m in Sources */,
+				BC210CF89C901006931DE6F5 /* WalletAddressSwitchCellModel.m in Sources */,
+				BC2107D8E6B6DC999B46720D /* TipPopView.m in Sources */,
+				BC21097342CF79274F4049F3 /* HsAppPreferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3712,7 +3772,7 @@
 					"$(PROJECT_DIR)/HelloSud-iOS/SVG",
 					"$(PROJECT_DIR)/HelloSud-iOS/ThirdParty/SDImageSVGNativeCoder",
 				);
-				MARKETING_VERSION = 1.5.5;
+				MARKETING_VERSION = 1.5.6;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = HelloSudPlus_Dev;
@@ -3764,7 +3824,7 @@
 					"$(PROJECT_DIR)/HelloSud-iOS/SVG",
 					"$(PROJECT_DIR)/HelloSud-iOS/ThirdParty/SDImageSVGNativeCoder",
 				);
-				MARKETING_VERSION = 1.5.5;
+				MARKETING_VERSION = 1.5.6;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = Dis_Tech_Sud_Mgp_Hello;

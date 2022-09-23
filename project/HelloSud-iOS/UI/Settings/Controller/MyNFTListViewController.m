@@ -126,8 +126,8 @@
     WeakSelf
     // 拉取NFT列表
     SudNFTGetNFTListParamModel *paramModel = SudNFTGetNFTListParamModel.new;
-    paramModel.walletToken = HsNFTPreferences.shared.walletToken;
-    paramModel.walletAddress = HsNFTPreferences.shared.walletAddress;
+    paramModel.walletToken = HsNFTPreferences.shared.currentWalletToken;
+    paramModel.walletAddress = HsNFTPreferences.shared.currentWalletAddress;
     paramModel.chainType = HsNFTPreferences.shared.selectedEthereumChainType;
     if (isMore) {
         paramModel.pageKey = HsNFTPreferences.shared.nftListPageKey;
@@ -150,9 +150,7 @@
         if (errCode != 0) {
             NSString *msg = [NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)];
             [ToastUtil show:msg];
-            if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
-            }
+            [HsNFTPreferences.shared handleFilterNftError:errCode errMsg:errMsg];
             return;
         }
 
@@ -176,7 +174,7 @@
     WeakSelf
     // 拉取藏品列表
     SudNFTGetCnNFTListParamModel *paramModel = SudNFTGetCnNFTListParamModel.new;
-    paramModel.walletType = HsNFTPreferences.shared.currentSelectedWalletType;
+    paramModel.walletType = HsNFTPreferences.shared.currentWalletType;
     paramModel.walletToken = [HsNFTPreferences.shared getBindUserTokenByWalletType:paramModel.walletType];
     self.page = isMore ? self.page + 1 : 0;
     paramModel.pageNumber = self.page;
@@ -195,9 +193,7 @@
         if (errCode != 0) {
             NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
-            if (errCode == 1008) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
-            }
+            [HsNFTPreferences.shared handleFilterNftError:errCode errMsg:errMsg];
             return;
         }
 

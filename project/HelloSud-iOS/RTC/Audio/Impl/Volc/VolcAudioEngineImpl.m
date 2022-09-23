@@ -18,6 +18,11 @@
 @end
 
 @implementation VolcAudioEngineImpl
+
+- (ByteRTCEngineKit *)getEngine {
+    return self.mEngine;
+}
+
 - (void)setEventListener:(nonnull id<ISudAudioEventListener>)listener {
     self.mISudAudioEventListener = listener;
 }
@@ -56,7 +61,8 @@
     if (model == nil)
         return;
     
-    if (self.mEngine != nil) {
+    ByteRTCEngineKit *engine = [self getEngine];
+    if (engine != nil) {
         ByteRTCRoomConfig *roomConfig = ByteRTCRoomConfig.new;
         roomConfig.profile = ByteRTCRoomProfileCommunication;
         roomConfig.isAutoPublish = NO;
@@ -65,77 +71,88 @@
         ByteRTCUserInfo *userInfo = ByteRTCUserInfo.new;
         userInfo.userId = model.userID;
         
-        [self.mEngine joinRoomByKey:model.token roomId:model.roomID userInfo:userInfo rtcRoomConfig:roomConfig];
+        [engine joinRoomByKey:model.token roomId:model.roomID userInfo:userInfo rtcRoomConfig:roomConfig];
     }
 }
 
 - (void)leaveRoom {
-    if (self.mEngine != nil) {
+    ByteRTCEngineKit *engine = [self getEngine];
+    if (engine != nil) {
         /* 退出房间 */
-        [self.mEngine leaveRoom];
+        [engine leaveRoom];
     }
 }
 
 - (void)startPublishStream {
-    if (self.mEngine != nil) {
-        [self.mEngine startAudioCapture]; // 开启麦克风采集
-        [self.mEngine publishStream:ByteRTCMediaStreamTypeAudio]; // 发布本地音频流
+    ByteRTCEngineKit *engine = [self getEngine];
+    if (engine != nil) {
+        [engine startAudioCapture]; // 开启麦克风采集
+        [engine publishStream:ByteRTCMediaStreamTypeAudio]; // 发布本地音频流
     }
 }
 
 - (void)stopPublishStream {
-    if (self.mEngine != nil) {
-        [self.mEngine unpublishStream:ByteRTCMediaStreamTypeAudio]; // 取消发布本地音频流
-        [self.mEngine stopAudioCapture]; // 关闭麦克风采集
+    ByteRTCEngineKit *engine = [self getEngine];
+    if (engine != nil) {
+        [engine unpublishStream:ByteRTCMediaStreamTypeAudio]; // 取消发布本地音频流
+        [engine stopAudioCapture]; // 关闭麦克风采集
     }
 }
 
 - (void)startSubscribingStream {
-    if (self.mEngine != nil) {
-        [self.mEngine resumeAllSubscribedStream:ByteRTCControlMediaTypeAudio];
+    ByteRTCEngineKit *engine = [self getEngine];
+    if (engine != nil) {
+        [engine resumeAllSubscribedStream:ByteRTCControlMediaTypeAudio];
     }
 }
 
 - (void)stopSubscribingStream {
-    if (self.mEngine != nil) {
-        [self.mEngine pauseAllSubscribedStream:ByteRTCControlMediaTypeAudio];
+    ByteRTCEngineKit *engine = [self getEngine];
+    if (engine != nil) {
+        [engine pauseAllSubscribedStream:ByteRTCControlMediaTypeAudio];
     }
 }
 
 - (void)startPCMCapture {
-    if (self.mEngine != nil) {
+    ByteRTCEngineKit *engine = [self getEngine];
+    if (engine != nil) {
         ByteRTCAudioFormat * audioFormat = [[ByteRTCAudioFormat alloc] init];
         audioFormat.sampleRate = ByteRTCAudioSampleRate16000;
         audioFormat.channel = ByteRTCAudioChannelMono;
-        [self.mEngine registerLocalAudioProcessor:self format:audioFormat];
+        [engine registerLocalAudioProcessor:self format:audioFormat];
     }
 }
 
 - (void)stopPCMCapture {
-    if (self.mEngine != nil) {
+    ByteRTCEngineKit *engine = [self getEngine];
+    if (engine != nil) {
         /* 置空原始音频数据回调 */
         ByteRTCAudioFormat * audioFormat = [[ByteRTCAudioFormat alloc] init];
         audioFormat.sampleRate = ByteRTCAudioSampleRate16000;
         audioFormat.channel = ByteRTCAudioChannelMono;
-        [self.mEngine registerLocalAudioProcessor:nil format:audioFormat];
+        [engine registerLocalAudioProcessor:nil format:audioFormat];
     }
 }
 
 - (void)setAudioRouteToSpeaker:(BOOL) enabled {
-    if (self.mEngine != nil) {
+    ByteRTCEngineKit *engine = [self getEngine];
+    if (engine != nil) {
         if (enabled) {
-            [self.mEngine setAudioPlaybackDevice:ByteRTCAudioPlaybackDeviceSpeakerphone];
+            [engine setAudioPlaybackDevice:ByteRTCAudioPlaybackDeviceSpeakerphone];
         } else {
-            [self.mEngine setAudioPlaybackDevice:ByteRTCAudioPlaybackDeviceEarpiece];
+            [engine setAudioPlaybackDevice:ByteRTCAudioPlaybackDeviceEarpiece];
         }
     }
 }
 
 - (void)sendCommand:(nonnull NSString *)command listener:(nonnull void (^)(int))listener {
-    if (self.mEngine != nil) {
-        [self.mEngine sendRoomMessage:command];
+    ByteRTCEngineKit *engine = [self getEngine];
+    if (engine != nil) {
+        [engine sendRoomMessage:command];
+        if (listener) listener(0);
+    } else {
+        if (listener) listener(-1);
     }
-    if (listener) listener(0);
 }
 
 #pragma mark ---------------- ByteRTCEngineDelegate -------------------

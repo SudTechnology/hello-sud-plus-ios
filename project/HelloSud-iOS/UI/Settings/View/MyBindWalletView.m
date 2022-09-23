@@ -137,18 +137,6 @@
         [showWalletList addObject:cnInfoModel];
     }
 
-//    NSInteger limitCount = 4;
-//    // 小于limitCount个隐藏
-//    if (walletList.count <= limitCount) {
-//        self.moreView.hidden = YES;
-//    } else {
-//        self.moreView.hidden = NO;
-//        if (!self.isMoreOpened) {
-//            // 展示limitCount个
-//            showWalletList = [walletList subarrayWithRange:NSMakeRange(0, limitCount)];
-//        }
-//    }
-
     [self.bindViewList removeAllObjects];
     BindBtnView *lastView = nil;
     WeakSelf

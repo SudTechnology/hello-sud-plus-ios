@@ -22,14 +22,12 @@
 
 }
 
-
 - (void)dtAddViews {
 
     [self addSubview:self.titleLabel];
     [self addSubview:self.sureBtn];
     [self addSubview:self.lineView];
     [self addSubview:self.cancelBtn];
-
 }
 
 - (void)dtLayoutViews {

@@ -110,8 +110,7 @@
             [ToastUtil show:msg];
             return;
         }
-        HsNFTPreferences.shared.currentSelectedWalletType = paramModel.walletType;
-        HsNFTPreferences.shared.bindWalletType = paramModel.walletType;
+        HsNFTPreferences.shared.currentWalletType = paramModel.walletType;
         HsNFTPreferences.shared.bindZoneType = self.walletInfoModel.zoneType;
         [HsNFTPreferences.shared saveWalletTokenWithBindCnWalletModel:resp walletType:paramModel.walletType phone:paramModel.phone];
         [ToastUtil show:@"授权成功"];
@@ -130,10 +129,15 @@
     paramModel.phone = self.phoneTextField.text;
     paramModel.walletType = self.walletInfoModel.type;
     [SudNFT sendSmsCode:paramModel listener:^(NSInteger errCode, NSString *errMsg) {
+
         if (errCode != 0) {
+            weakSelf.getCodeBtn.enabled = YES;
+            if (errCode == 1035) {
+                [ToastUtil show:errMsg];
+                return;
+            }
             NSString *msg = [HsNFTPreferences.shared nftErrorMsg:errCode errorMsg:errMsg];
             [ToastUtil show:msg];
-            weakSelf.getCodeBtn.enabled = YES;
             return;
         }
         [weakSelf showCountdown];

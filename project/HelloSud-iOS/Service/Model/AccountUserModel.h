@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 判断是否是自己
 /// @param userID 用户ID
 - (BOOL)isMeByUserID:(NSString *)userID;
+/// 是否穿戴了nft
+- (BOOL)isWearNFT;
 @end
 
 NS_ASSUME_NONNULL_END

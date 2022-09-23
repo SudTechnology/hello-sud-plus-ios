@@ -10,6 +10,7 @@
 #import "MyCNWalletSwitchCellModel.h"
 
 @interface MyCNWalletSwitchCell ()
+@property(nonatomic, strong) UIView *topLineView;
 @property(nonatomic, strong) UIImageView *iconImageView;
 @property(nonatomic, strong) UIImageView *markImageView;
 @property(nonatomic, strong) UILabel *titleLabel;
@@ -20,6 +21,7 @@
 
 - (void)dtAddViews {
     [super dtAddViews];
+    [self.contentView addSubview:self.topLineView];
     [self.contentView addSubview:self.iconImageView];
     [self.contentView addSubview:self.markImageView];
     [self.contentView addSubview:self.titleLabel];
@@ -28,6 +30,10 @@
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+    [self.topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.leading.trailing.equalTo(@0);
+        make.height.equalTo(@0.5);
+    }];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@20);
         make.width.height.equalTo(@24);
@@ -62,6 +68,14 @@
     if (m.walletInfoModel.icon) {
         [self.iconImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.walletInfoModel.icon]];
     }
+}
+
+- (UIView *)topLineView {
+    if (!_topLineView) {
+        _topLineView = UIView.new;
+        _topLineView.backgroundColor = HEX_COLOR(@"#D1D1D1");
+    }
+    return _topLineView;
 }
 
 - (UIImageView *)iconImageView {

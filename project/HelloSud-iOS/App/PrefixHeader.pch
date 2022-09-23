@@ -64,6 +64,7 @@
 #import "CommonAudioModelHeader.h"
 /// preferences
 #import "HsNFTPreferences.h"
+#import "HsAppPreferences.h"
 /// manager
 #import "RespUserInfoModel.h"
 #import "RespModel.h"

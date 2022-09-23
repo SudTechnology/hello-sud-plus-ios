@@ -15,6 +15,7 @@
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *dataList;
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *srcList;
 @end
 
 @implementation ForeignWalletSelectPopView
@@ -50,8 +51,8 @@
 
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(24);
-        make.leading.equalTo(@24);
-        make.trailing.equalTo(@-24);
+        make.leading.equalTo(@16);
+        make.trailing.equalTo(@-16);
         make.height.equalTo(@436);
         make.bottom.equalTo(@0);
     }];
@@ -77,8 +78,42 @@
 }
 
 - (void)updateDataList:(NSArray<SudNFTWalletInfoModel *> *)dataList {
+    self.srcList = dataList;
     self.dataList = dataList;
+    [self resortList];
+}
+
+- (void)resortList {
+    NSMutableArray *bindList = NSMutableArray.new;
+    NSMutableArray *unbindList = NSMutableArray.new;
+    for (SudNFTWalletInfoModel *m in self.srcList) {
+        if ([HsNFTPreferences.shared isBindWalletWithType:m.type]) {
+            [bindList addObject:m];
+        } else {
+            [unbindList addObject:m];
+        }
+    }
+    [bindList addObjectsFromArray:unbindList];
+    self.dataList = bindList;
     [self.tableView reloadData];
+}
+
+/*
+ * 关闭如果不存在其它绑定账号
+ * */
+- (void)closeIfNoBindAccount {
+    BOOL existAnotherBind = NO;
+    for (SudNFTWalletInfoModel *m in self.dataList) {
+        if ([HsNFTPreferences.shared isBindWalletWithType:m.type]) {
+            existAnotherBind = YES;
+            break;
+        }
+    }
+    if (existAnotherBind) {
+        [self resortList];
+    } else {
+        [DTSheetView close];
+    }
 }
 
 #pragma mark - UITableViewDelegate || UITableViewDataSource
@@ -93,16 +128,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ForeignWalletSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ForeignWalletSelectCell"];
+    WeakSelf
+    cell.selectedWalletBlock = ^(SudNFTWalletInfoModel *m) {
+        if (weakSelf.selectedWalletBlock) {
+            weakSelf.selectedWalletBlock(m);
+        }
+    };
     cell.model = self.dataList[indexPath.section];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SudNFTWalletInfoModel *m = self.dataList[indexPath.section];
-    if (self.selectedWalletBlock) {
-        self.selectedWalletBlock(m);
-    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -128,7 +165,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 48;
+        _tableView.rowHeight = 64;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.backgroundColor = UIColor.clearColor;

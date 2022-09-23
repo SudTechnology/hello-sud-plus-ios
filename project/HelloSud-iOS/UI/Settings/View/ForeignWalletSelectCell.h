@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 /// 海外钱包选择cell
 @interface ForeignWalletSelectCell : BaseTableViewCell
+@property(nonatomic, copy) void (^selectedWalletBlock)(SudNFTWalletInfoModel *walletInfoModel);
 @end
 
 NS_ASSUME_NONNULL_END

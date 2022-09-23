@@ -189,8 +189,8 @@
     NSInteger zoneType = HsNFTPreferences.shared.bindZoneType;
     if (zoneType == 1) {
         /// 国内钱包
-        for (SudNFTWalletInfoModel *m in AppService.shared.walletList) {
-            if (m.type == HsNFTPreferences.shared.currentSelectedWalletType) {
+        for (SudNFTWalletInfoModel *m in HsNFTPreferences.shared.walletList) {
+            if (m.type == HsNFTPreferences.shared.currentWalletType) {
                 [self.chainsView updateWithWalletInfoModel:m];
                 break;
             }
@@ -235,7 +235,7 @@
     if (zoneType == 1) {
         // 国内
         MyCNWalletSwitchPopView *v = [[MyCNWalletSwitchPopView alloc] init];
-        [v updateBindWalletList:AppService.shared.walletList];
+        [v updateBindWalletList:HsNFTPreferences.shared.walletList];
         [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
         return;
     }
@@ -243,6 +243,7 @@
     MyEthereumChainsSelectPopView *v = [[MyEthereumChainsSelectPopView alloc] init];
     [v updateChains:self.chains];
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
+    HsNFTPreferences.shared.isShowedSwitchChain = YES;
 }
 
 - (void)onTapMoreView:(id)tap {

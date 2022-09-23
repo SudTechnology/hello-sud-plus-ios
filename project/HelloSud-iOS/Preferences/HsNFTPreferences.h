@@ -8,31 +8,49 @@
 extern NSString *const MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF;
 extern NSString *const MY_NFT_WEAR_CHANGE_NTF;
 extern NSString *const MY_NFT_BIND_WALLET_CHANGE_NTF;
+extern NSString *const MY_NFT_WALLET_TYPE_CHANGE_NTF;
+
 /// 房间列表更新通知
 extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
+/// 我的页面切换提示气泡状态通知
+extern NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF;
 
 /// 应用本地配置
 @interface HsNFTPreferences : NSObject
-/// 绑定钱包类型
-@property(nonatomic, assign) NSInteger bindWalletType;
+
 /// 选择链网类型
 @property(nonatomic, assign) NSInteger selectedEthereumChainType;
-/// 绑定钱包
-@property(nonatomic, copy, nullable) NSString *walletAddress;
 @property(nonatomic, strong) NSString *nftListPageKey;
 /// 绑定钱包区域 0海外 1国内
 @property(nonatomic, assign) NSInteger bindZoneType;
-
 /// 当前选中钱包
-@property(nonatomic, assign) NSInteger currentSelectedWalletType;
+@property(nonatomic, assign) NSInteger currentWalletType;
+/// 穿戴数据详情信息
+@property(nonatomic, strong) SudNFTInfoModel *wearNftModel;
+/// 穿戴国内数据详情信息
+@property(nonatomic, strong) SudNFTCnInfoModel *wearCnNftModel;
+/// 是否已经展示过切换
+@property (nonatomic, assign)BOOL isShowedSwitchWalletAddress;
+/// 是否已经展示过切换链
+@property (nonatomic, assign)BOOL isShowedSwitchChain;
+/// 钱包列表
+@property(nonatomic, strong) NSArray<SudNFTWalletInfoModel *> *walletList;
 
 + (instancetype)shared;
 
-/// 海外钱包token
-- (NSString *)walletToken;
+/// 当前海外钱包token
+- (NSString *)currentWalletToken;
+
+/// 当前海外钱包地址
+- (NSString *)currentWalletAddress;
 
 /// 缓存钱包token
-- (void)cacheWalletToken:(SudNFTBindWalletModel *)walletRespModel walletAddress:(NSString *)walletAddress;
+- (void)saveWalletToken:(SudNFTBindWalletModel *)walletRespModel walletType:(NSInteger)walletType walletAddress:(NSString *)walletAddress;
+
+/// 通过钱包类型获取绑定地址
+/// @param walletType walletType
+/// @return
+- (NSString *)getBindWalletAddressByWalletType:(NSInteger)walletType;
 
 /// 保存绑定用户信息
 /// @param bindCnWalletModel bindUserModel
@@ -52,7 +70,7 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 
 /// 清除绑定用户信息
 /// @param walletType walletType
-- (void)clearBindUserInfoWithWalletType:(NSInteger)walletType;
+- (void)clearBindInfoWithWalletType:(NSInteger)walletType;
 
 /// 是否已经绑定了钱包
 - (BOOL)isBindWallet;
@@ -62,6 +80,11 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 
 /// 是否绑定了海外钱包
 - (BOOL)isBindForeignWallet;
+
+/// 判断指定钱包是否绑定
+/// @param walletType
+/// @return
+- (BOOL)isBindWalletWithType:(NSInteger)walletType;
 
 - (NSString *_Nullable)nftErrorMsg:(NSInteger)errCode errorMsg:(NSString *)errorMsg;
 
@@ -81,4 +104,11 @@ extern NSString *const MY_NFT_WALLET_LIST_UPDATE_NTF;
 /// @param tokenId  tokenId
 /// @return
 - (NSString *)detailsTokenWithContractAddress:(NSString *)contractAddress tokenId:(NSString *)tokenId;
+/// 是否当前穿戴来源于当前钱包
+/// @param walletType
+/// @return
+- (BOOL)isCurrentWearFromWalletType:(NSInteger)walletType;
+
+/// 处理过滤nft错误码
+- (void)handleFilterNftError:(NSInteger)errorCode errMsg:(NSString *)errMsg;
 @end

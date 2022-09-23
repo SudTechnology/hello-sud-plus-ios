@@ -71,11 +71,11 @@
 - (void)updateBindWalletList:(NSArray<SudNFTWalletInfoModel *> *)bindWalletList {
     NSMutableArray *arrList = [[NSMutableArray alloc] init];
     for (SudNFTWalletInfoModel *m in bindWalletList) {
-        if (m.zoneType != 1) {
+        if (m.zoneType != 1 || ![HsNFTPreferences.shared isBindWalletWithType:m.type]) {
             continue;
         }
         MyCNWalletSwitchCellModel *cellModel = [[MyCNWalletSwitchCellModel alloc] init];
-        if (m.type == HsNFTPreferences.shared.currentSelectedWalletType) {
+        if (m.type == HsNFTPreferences.shared.currentWalletType) {
             cellModel.isSelected = YES;
         } else {
             cellModel.isSelected = NO;
@@ -111,29 +111,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     MyCNWalletSwitchCellModel *m = self.dataList[indexPath.row];
-    HsNFTPreferences.shared.currentSelectedWalletType = m.walletInfoModel.type;
+    HsNFTPreferences.shared.currentWalletType = m.walletInfoModel.type;
     [self onCloseBtnClick:nil];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 0.01;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return UIView.new;
+    [NSNotificationCenter.defaultCenter postNotificationName:MY_NFT_WALLET_TYPE_CHANGE_NTF object:nil userInfo:nil];
+    [NSNotificationCenter.defaultCenter postNotificationName:MY_NFT_BIND_WALLET_CHANGE_NTF object:nil userInfo:nil];
 }
 
 #pragma mark - lazy
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 56;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        _tableView.separatorInset = UIEdgeInsetsZero;
-        _tableView.separatorColor = HEX_COLOR(@"#D1D1D1");
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.backgroundColor = UIColor.clearColor;
         [_tableView registerClass:[MyCNWalletSwitchCell class] forCellReuseIdentifier:@"MyCNWalletSwitchCell"];
