@@ -58,6 +58,20 @@
 /// @param listener 回调
 + (void)genNFTCredentialsToken:(SudNFTCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerGenNFTCredentialsToken)listener;
 ```
+- 解绑钱包
+```
+/// 解绑钱包
+/// @param paramModel 参数model
+/// @param listener 结果回调
++ (void)unbindWallet:(SudNFTUnbindWalletParamModel *)paramModel listener:(ISudNFTListenerUnbindWallet _Nullable)listener;
+```
+- 移除元数据使用唯一认证token
+```
+/// 移除元数据使用唯一认证token
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)removeNFTCredentialsToken:(SudNFTRemoveCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerRemoveNFTCredentialsToken)listener;
+```
 
 
 ## 国内藏品平台相关接口（稀物）
@@ -89,6 +103,15 @@
 /// @param listener 回调
 + (void)genCnNFTCredentialsToken:(SudNFTCnCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerCnGenNFTCredentialsToken)listener;
 ```
+
+- 移除元数据使用唯一认证token
+```
+/// 移除元数据使用唯一认证token
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)removeNFTCnCredentialsToken:(SudNFTRemoveCnCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerRemoveNFTCnCredentialsToken)listener;
+```
+
 - 解绑国内钱包
 ```
 /// 解绑国内钱包
