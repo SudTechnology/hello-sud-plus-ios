@@ -60,6 +60,10 @@ static NSString *MG_COMMON_APP_COMMON_SELF_X_RESP = @"mg_common_app_common_self_
 static NSString *MG_COMMON_GAME_ADD_AI_PLAYERS = @"mg_common_game_add_ai_players";
 /// 游戏通知app层添当前网络连接状态（2022-06-21新增）
 static NSString *MG_COMMON_GAME_NETWORK_STATE = @"mg_common_game_network_state";
+/// 游戏通知app获取积分
+static NSString *MG_COMMON_GAME_SCORE = @"mg_common_game_score";
+/// 游戏通知app带入积分
+static NSString *MG_COMMON_GAME_SET_SCORE = @"mg_common_game_set_score";
 
 
 #pragma mark - 通用状态-玩家
@@ -410,7 +414,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 /// true 游戏中，false 未在游戏中；
 @property(nonatomic, assign) BOOL isPlaying;
 /// 本轮游戏id，当isPlaying==true时有效
-@property(nonatomic, copy) NSString * gameRoundId;
+@property(nonatomic, copy) NSString *gameRoundId;
 /// 当isPlaying==false时有效；isPlaying=false, 0:正常结束 1:提前结束（自己不玩了）2:无真人可以提前结束（无真人，只有机器人） 3:所有人都提前结束；（reason默认-1，无意义便于处理）
 @property(nonatomic, assign) int reason;
 /// true 建议尽量收缩原生UI，给游戏留出尽量大的操作空间 false 初始状态；
@@ -505,6 +509,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 
 #pragma mark - 游戏通知app玩家死亡状态  MG_COMMON_SELF_DIE_STATUS
+
 @interface MGCommonSelfDieStatusModel : NSObject
 /// 用户id
 @property(nonatomic, copy) NSString *uid;
@@ -513,6 +518,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 
 #pragma mark - 游戏通知app轮到玩家出手状态  MG_COMMON_SELF_TURN_STATUS
+
 @interface MGCommonSelfTurnStatusModel : NSObject
 /// 用户id
 @property(nonatomic, copy) NSString *uid;
@@ -521,6 +527,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 
 #pragma mark - 游戏通知app玩家选择状态  MG_COMMON_SELF_SELECT_STATUS
+
 @interface MGCommonSelfSelectStatusModel : NSObject
 /// 用户id
 @property(nonatomic, copy) NSString *uid;
@@ -529,12 +536,14 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 
 #pragma mark - 游戏通知app层当前游戏剩余时间  MG_COMMON_GAME_COUNTDOWN_TIME
+
 @interface MGCommonGameCountdownTimeModel : NSObject
 /// 剩余时间，单位为秒
 @property(nonatomic, assign) NSInteger countdown;
 @end
 
 #pragma mark - App通用状态操作结果错误码 MG_COMMON_APP_COMMON_SELF_X_RESP
+
 @interface MGCommonAppCommonSelfXRespModel : NSObject
 /// 字段必填, 参考：游戏业务错误 https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html
 @property(nonatomic, strong) NSString *state;
@@ -568,6 +577,25 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @interface MGCommonGameNetworkStateModel : NSObject
 /// 0:closed, 1: connected
 @property(nonatomic, assign) NSInteger state;
+@end
+
+#pragma mark - 游戏通知app获取积分 MG_COMMON_GAME_SCORE
+
+@interface MGCommonGameScoreModel : NSObject
+
+@end
+
+#pragma mark - 游戏通知app带入积分 MG_COMMON_GAME_SET_SCORE
+
+@interface MGCommonGameSetScoreModel : NSObject
+/// 本轮局id
+@property(nonatomic, strong) NSString *roundId;
+/// 本人当前积分
+@property(nonatomic, assign) NSInteger lastRoundScore;
+/// 充值积分
+@property(nonatomic, assign) NSInteger incrementalScore;
+/// 充值后总积分
+@property(nonatomic, assign) NSInteger totalScore;
 @end
 
 NS_ASSUME_NONNULL_END

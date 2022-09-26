@@ -255,6 +255,7 @@
 		6C7CB61928C5E940003A19A8 /* MyNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */; };
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
 		6C8D02D028AB774100C230E5 /* DTUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */; };
+		6CA68C4C28E182E200BDE442 /* ReqAddScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */; };
 		6CC3E77128C1A6EF00AA934B /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */; };
 		6CC3E77228C1A6EF00AA934B /* SudNFT.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3153AF28C0AF9E0001B565 /* SudNFT.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6CC3E77A28C1BB7D00AA934B /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77728C1BB7D00AA934B /* MyEthereumChainsCellModel.m */; };
@@ -908,6 +909,8 @@
 		6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespDiscoModel.m; sourceTree = "<group>"; };
 		6C8D02CE28AB774000C230E5 /* DTUIImage+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTUIImage+Extension.h"; sourceTree = "<group>"; };
 		6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "DTUIImage+Extension.m"; sourceTree = "<group>"; };
+		6CA68C4A28E182E200BDE442 /* ReqAddScoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqAddScoreModel.h; sourceTree = "<group>"; };
+		6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqAddScoreModel.m; sourceTree = "<group>"; };
 		6CB3D146288FEE220037EE88 /* HelloSud-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "HelloSud-iOS.entitlements"; sourceTree = "<group>"; };
 		6CC3E77428C1BB7D00AA934B /* MyEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsCellModel.h; sourceTree = "<group>"; };
 		6CC3E77528C1BB7D00AA934B /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
@@ -1964,6 +1967,8 @@
 				6C46082228630CD6005C99EF /* RespGiftListModel.m */,
 				6C7E0CE42875EB0500DBA208 /* RespDiscoModel.h */,
 				6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */,
+				6CA68C4A28E182E200BDE442 /* ReqAddScoreModel.h */,
+				6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3169,6 +3174,7 @@
 				4455AD8727EAC658001516EE /* VersionInfoModel.m in Sources */,
 				6C076EA6279F98AA00650209 /* AppService.m in Sources */,
 				6C076ED427A274FE00650209 /* UserService.m in Sources */,
+				6CA68C4C28E182E200BDE442 /* ReqAddScoreModel.m in Sources */,
 				6CE6CD4A283F591C0026BDAB /* DTUIDevice+Extension.m in Sources */,
 				6CE6CD36283F591C0026BDAB /* DTBlurEffectView.m in Sources */,
 				4455AE1427EAC6F7001516EE /* RoomNaviView.m in Sources */,

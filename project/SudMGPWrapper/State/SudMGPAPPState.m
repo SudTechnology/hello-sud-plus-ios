@@ -20,3 +20,6 @@
     return @{@"aiPlayers": AIPlayerInfoModel.class};
 }
 @end
+
+@implementation AppCommonGameScore
+@end

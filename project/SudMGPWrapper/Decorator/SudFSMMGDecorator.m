@@ -302,6 +302,20 @@
             [self.listener onGameMGCommonGameNetworkState];
             return;
         }
+    }else if ([state isEqualToString:MG_COMMON_GAME_SCORE]) {
+        /// 游戏通知app获取积分 (2022-09-26新增)
+        MGCommonGameScoreModel *m = [MGCommonGameScoreModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameNetworkState)]) {
+            [self.listener onGameMGCommonGameNetworkState];
+            return;
+        }
+    }else if ([state isEqualToString:MG_COMMON_GAME_SET_SCORE]) {
+        /// 游戏通知app带入积分 (2022-09-26新增)
+        MGCommonGameSetScoreModel *m = [MGCommonGameSetScoreModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameNetworkState)]) {
+            [self.listener onGameMGCommonGameNetworkState];
+            return;
+        }
     } else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
