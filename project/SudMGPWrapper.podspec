@@ -45,9 +45,12 @@ Pod::Spec.new do |s|
       ss.vendored_frameworks = [
         'SudMGPSDK/SudMGP.xcframework',
         'SudMGPSDK/SudNFT.xcframework',
+        #'SudMGPSDK/MicrosoftCognitiveServicesSpeech.xcframework',
       ]
 
       # json
       ss.dependency 'MJExtension', '~> 3.4.1'
+      # azure
+      ss.dependency 'MicrosoftCognitiveServicesSpeech-iOS', '~> 1.23.0'
     end
 end

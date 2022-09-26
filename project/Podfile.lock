@@ -35,6 +35,7 @@ PODS:
   - lottie-ios (2.5.3)
   - MarqueeLabel (4.3.0)
   - Masonry (1.1.0)
+  - MicrosoftCognitiveServicesSpeech-iOS (1.23.0)
   - MJExtension (3.4.1)
   - MJRefresh (3.7.5)
   - NERtcSDK (4.6.0)
@@ -76,6 +77,7 @@ PODS:
   - SudMGPWrapper (1.0.5):
     - SudMGPWrapper/SudMGPWrapper (= 1.0.5)
   - SudMGPWrapper/SudMGPWrapper (1.0.5):
+    - MicrosoftCognitiveServicesSpeech-iOS (~> 1.23.0)
     - MJExtension (~> 3.4.1)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -145,6 +147,7 @@ SPEC REPOS:
     - lottie-ios
     - MarqueeLabel
     - Masonry
+    - MicrosoftCognitiveServicesSpeech-iOS
     - MJExtension
     - MJRefresh
     - NERtcSDK
@@ -189,6 +192,7 @@ SPEC CHECKSUMS:
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MicrosoftCognitiveServicesSpeech-iOS: ce0cde6387499ea720c9dfba494c5ee18df2e75e
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   NERtcSDK: a0edad2337710fbd99a2c0c76c77d175f4b906e2
@@ -201,7 +205,7 @@ SPEC CHECKSUMS:
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  SudMGPWrapper: b65cea0f5e96d857f32b28aa6a84701824aa4537
+  SudMGPWrapper: e78edd284df63322e069d5df2e18850671c5b071
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
@@ -211,6 +215,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 6a4f294825ac93f16c5101d3e97d211c2d17fa33
 
-PODFILE CHECKSUM: 5f5b814af9f1804360dda2ec3d1c9d2d004b21b4
+PODFILE CHECKSUM: 7df5dc894b5478250561135fe0ee4f7e7bb168f8
 
 COCOAPODS: 1.11.2
