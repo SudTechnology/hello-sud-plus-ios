@@ -43,8 +43,7 @@ Pod::Spec.new do |s|
         'SudMGPWrapper/State/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
       ]
       ss.vendored_frameworks = [
-        'SudMGPSDK/SudMGP.xcframework',
-        'SudMGPSDK/SudNFT.xcframework',
+        'SudMGPSDK/SudMGP.xcframework'
       ]
 
       # json

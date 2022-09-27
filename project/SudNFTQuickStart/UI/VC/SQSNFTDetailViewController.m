@@ -74,7 +74,7 @@
             }
             return;
         }
-        [weakSelf handleWearDetailToken:generateDetailTokenModel.nftDetailsToken isCN:NO];
+        [weakSelf handleWearDetailToken:generateDetailTokenModel.detailsToken isCN:NO];
     }];
 }
 
