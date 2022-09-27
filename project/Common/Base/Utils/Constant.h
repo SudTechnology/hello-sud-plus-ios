@@ -35,5 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 #define UIFONT_BOLD(s) [UIFont systemFontOfSize:s weight:UIFontWeightBold]
 /// 常规字号字体
 #define UIFONT_REGULAR(s) [UIFont systemFontOfSize:s weight:UIFontWeightRegular]
+/// 常规字号字体
+#define UIFONT_SEMI_BOLD(s) [UIFont systemFontOfSize:s weight:UIFontWeightSemibold]
+
 
 NS_ASSUME_NONNULL_END

@@ -21,6 +21,7 @@
 #import "DiscoRankViewController.h"
 #import "HomeHeaderFullReusableView.h"
 #import "DiscoGameInteractivePopView.h"
+#import "LeagueEnterViewController.h"
 
 @interface HomeViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
@@ -177,7 +178,7 @@
             } else {
 
                 // 是否需要满行
-                BOOL isNeedToFullRow = m.sceneId != SceneTypeDisco && m.sceneId != SceneTypeDanmaku;
+                BOOL isNeedToFullRow = m.sceneId != SceneTypeDisco && m.sceneId != SceneTypeDanmaku && m.sceneId != SceneTypeLeague;
                 if (isNeedToFullRow) {
                     /// 求余 填满整个屏幕
                     int row = 3;
@@ -272,7 +273,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BaseCollectionViewCell *cell = nil;
     HSSceneModel *m = self.headerSceneList[indexPath.section];
-    if (m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeDanmaku) {
+    if (m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeLeague) {
         GameItemFullCollectionViewCell *c = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemFullCollectionViewCell" forIndexPath:indexPath];
         c.sceneId = m.sceneId;
         cell = c;
@@ -308,6 +309,12 @@
         vc.sceneId = self.headerSceneList[indexPath.section].sceneId;
         vc.gameName = model.gameName;
         [self.navigationController pushViewController:vc animated:true];
+    }else if (self.headerSceneList[indexPath.section].sceneId == SceneTypeLeague) {
+        LeagueEnterViewController *vc = LeagueEnterViewController.new;
+        vc.gameId = model.gameId;
+        vc.sceneId = self.headerSceneList[indexPath.section].sceneId;
+        vc.gameName = model.gameName;
+        [self.navigationController pushViewController:vc animated:true];
     } else {
 
         if (m.sceneId == SceneTypeDanmaku && ![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
@@ -328,6 +335,9 @@
     } else if (m.sceneId == SceneTypeDanmaku) {
         itemW = kScreenWidth - 32;
         itemH = 140;
+    }else if (m.sceneId == SceneTypeLeague) {
+        itemW = kScreenWidth - 32;
+        itemH = 142;
     }
     return CGSizeMake(itemW, itemH);
 }
@@ -342,7 +352,7 @@
     if (m.sceneId == SceneTypeGuess) {
         baseH += 290;
         h = baseH + rect.size.height;
-    } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDisco) {
+    } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeLeague) {
         baseH = 46;
         h = baseH + rect.size.height;
     }

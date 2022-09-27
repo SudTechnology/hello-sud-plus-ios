@@ -90,9 +90,10 @@
 - (void)dtLayoutViews {
     [super dtLayoutViews];
     [self.gameImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(@0);
+        make.top.equalTo(@0);
         make.leading.equalTo(@13);
         make.trailing.equalTo(@-13);
+        make.bottom.equalTo(@-10);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.gameImageView).offset(12);
