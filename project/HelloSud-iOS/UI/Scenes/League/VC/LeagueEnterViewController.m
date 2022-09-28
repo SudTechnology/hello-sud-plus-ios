@@ -177,8 +177,25 @@
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     [_backBtn addTarget:self action:@selector(backEvent) forControlEvents:UIControlEventTouchUpInside];
+    [self.enterBtn addTarget:self action:@selector(onEnterBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.rightBtn addTarget:self action:@selector(onRightBtnCick:) forControlEvents:UIControlEventTouchUpInside];
 }
+
+- (void)backEvent {
+    [self dtNavigationBackClick];
+}
+
+- (void)onRightBtnCick:(id)sender {
+
+    LeagueDetailViewController *vc = LeagueDetailViewController.new;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)onEnterBtnClick:(id)sender {
+
+    [AudioRoomService reqMatchRoom:self.gameId sceneType:self.sceneId gameLevel:-1];
+}
+
 
 - (void)dtConfigUI {
     [super dtConfigUI];
@@ -222,16 +239,6 @@
     detailAttr.yy_color = HEX_COLOR(@"#97A1ED");
     [fullAttr appendAttributedString:detailAttr];
     return fullAttr;
-}
-
-- (void)backEvent {
-    [self dtNavigationBackClick];
-}
-
-- (void)onRightBtnCick:(id)sender {
-
-    LeagueDetailViewController *vc = LeagueDetailViewController.new;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (UIImageView *)bgImageView {

@@ -21,7 +21,7 @@
 #import "DiscoRankViewController.h"
 #import "HomeHeaderFullReusableView.h"
 #import "DiscoGameInteractivePopView.h"
-#import "LeagueEnterViewController.h"
+#import "../../Scenes/League/VC/LeagueEnterViewController.h"
 
 @interface HomeViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;

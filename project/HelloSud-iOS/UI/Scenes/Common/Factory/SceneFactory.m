@@ -14,6 +14,7 @@
 #import "GuessRoomViewController.h"
 #import "DanmakuRoomViewController.h"
 #import "DiscoRoomViewController.h"
+#import "LeagueRoomViewController.h"
 
 @implementation SceneFactory {
 
@@ -49,6 +50,8 @@
         case SceneTypeDisco:
             vc = [[DiscoRoomViewController alloc]init];
             break;
+        case SceneTypeLeague:
+            vc = [[LeagueRoomViewController alloc]init];
         default:
             vc = [[BaseSceneViewController alloc] init];
             break;
