@@ -61,7 +61,7 @@ static NSString *MG_COMMON_GAME_ADD_AI_PLAYERS = @"mg_common_game_add_ai_players
 /// 游戏通知app层添当前网络连接状态（2022-06-21新增）
 static NSString *MG_COMMON_GAME_NETWORK_STATE = @"mg_common_game_network_state";
 /// 游戏通知app获取积分
-static NSString *MG_COMMON_GAME_SCORE = @"mg_common_game_score";
+static NSString *MG_COMMON_GAME_GET_SCORE = @"mg_common_game_get_score";
 /// 游戏通知app带入积分
 static NSString *MG_COMMON_GAME_SET_SCORE = @"mg_common_game_set_score";
 
@@ -581,7 +581,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 
 #pragma mark - 游戏通知app获取积分 MG_COMMON_GAME_SCORE
 
-@interface MGCommonGameScoreModel : NSObject
+@interface MGCommonGameGetScoreModel : NSObject
 
 @end
 

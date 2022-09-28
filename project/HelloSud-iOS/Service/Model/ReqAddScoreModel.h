@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ReqAddScoreModel : NSObject
-@property(nonatomic, strong)NSString *gameId;
+@property(nonatomic, strong)NSString *mgId;
 @property(nonatomic, strong)NSString *roomId;
 @property(nonatomic, strong)NSString *roundId;
 /// 本人当前积分

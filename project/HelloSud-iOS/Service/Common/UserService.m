@@ -142,7 +142,7 @@
 /// @param fail fail description
 - (void)reqAddGameScore:(ReqAddScoreModel *)reqModel success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail {
 
-    [HSHttpService postRequestWithURL:kBASEURL(@"app/bring-chip/v1") param:reqModel.mj_JSONObject respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kGameURL(@"app/bring-chip/v1") param:reqModel.mj_JSONObject respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (success) {
             success(resp);
         }

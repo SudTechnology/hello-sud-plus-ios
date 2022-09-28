@@ -134,7 +134,7 @@
 }
 
 /// 游戏通知app获取积分 MG_COMMON_GAME_SCORE
-- (void)onGameMGCommonGameScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameScoreModel *)model {
+- (void)onGameMGCommonGameGetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameGetScoreModel *)model {
     DDLogDebug(@"onGameMGCommonGameScore");
     [UserService.shared reqUserCoinDetail:^(int64_t i) {
         DDLogError(@"onGameMGCommonGameScore notify game score:%@", @(i));
@@ -150,7 +150,7 @@
 - (void)onGameMGCommonGameSetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSetScoreModel *)model {
     DDLogDebug(@"onGameMGCommonGameSetScore");
     ReqAddScoreModel *reqModel = ReqAddScoreModel.new;
-    reqModel.gameId = [NSString stringWithFormat:@"%@", @(self.gameId)];;
+    reqModel.mgId = [NSString stringWithFormat:@"%@", @(self.gameId)];;
     reqModel.roomId = self.gameRoomID;
     reqModel.roundId = model.roundId;;
     reqModel.lastRoundScore = model.lastRoundScore;
