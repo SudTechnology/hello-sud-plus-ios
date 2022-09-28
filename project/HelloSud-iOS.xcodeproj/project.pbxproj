@@ -193,7 +193,6 @@
 		6C4607C12851F725005C99EF /* DanmakuRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607C02851F725005C99EF /* DanmakuRoomViewController.m */; };
 		6C4607C528520175005C99EF /* DanmakuQuickSendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607C428520175005C99EF /* DanmakuQuickSendView.m */; };
 		6C4607C828520D22005C99EF /* GuessRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607C728520D22005C99EF /* GuessRoomService.m */; };
-		6C4607CB2852DEAE005C99EF /* GuessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607CA2852DEAE005C99EF /* GuessModel.m */; };
 		6C4607FC285346BF005C99EF /* QuickSendEffectColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607FB285346BE005C99EF /* QuickSendEffectColCell.m */; };
 		6C4607FF28572099005C99EF /* GuessMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607FE28572099005C99EF /* GuessMineView.m */; };
 		6C460802285727B7005C99EF /* SwitchAutoGuessPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C460801285727B7005C99EF /* SwitchAutoGuessPopView.m */; };
@@ -376,6 +375,7 @@
 		BC21003E1833458539047CE2 /* LeagueEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210A169901E482D9705365 /* LeagueEnterViewController.m */; };
 		BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */; };
 		BC210093C2C7796FBA9F334C /* DiscoGameInteractivePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */; };
+		BC21009E7AF907C72E3B6D59 /* GuessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210335CCB42308C28FCEC0 /* GuessModel.m */; };
 		BC2102046258AC22ACD73CF4 /* UserWearNftDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */; };
 		BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */; };
 		BC21032F94AB142E1BAA2114 /* PKRoomListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109B31F63F31616E3D68E /* PKRoomListCell.m */; };
@@ -396,6 +396,7 @@
 		BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */; };
 		BC210819F69EB53104902350 /* DiscoAppointmentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */; };
 		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
+		BC2108DF9DCC723A931AC7FA /* LeagueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210FB8B5AA27D3820666AC /* LeagueModel.m */; };
 		BC21090932848A4335D3546F /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210EA4458F6CC10378E975 /* MyViewController.m */; };
 		BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */; };
 		BC21097342CF79274F4049F3 /* HsAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109AEEB6FC34520DCBA33 /* HsAppPreferences.m */; };
@@ -799,8 +800,6 @@
 		6C4607C428520175005C99EF /* DanmakuQuickSendView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanmakuQuickSendView.m; sourceTree = "<group>"; };
 		6C4607C628520D22005C99EF /* GuessRoomService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRoomService.h; sourceTree = "<group>"; };
 		6C4607C728520D22005C99EF /* GuessRoomService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRoomService.m; sourceTree = "<group>"; };
-		6C4607C92852DEAE005C99EF /* GuessModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessModel.h; sourceTree = "<group>"; };
-		6C4607CA2852DEAE005C99EF /* GuessModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessModel.m; sourceTree = "<group>"; };
 		6C4607FA285346BE005C99EF /* QuickSendEffectColCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickSendEffectColCell.h; sourceTree = "<group>"; };
 		6C4607FB285346BE005C99EF /* QuickSendEffectColCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickSendEffectColCell.m; sourceTree = "<group>"; };
 		6C4607FD28572099005C99EF /* GuessMineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessMineView.h; sourceTree = "<group>"; };
@@ -1114,6 +1113,7 @@
 		BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderColCell.m; sourceTree = "<group>"; };
 		BC21032C5553ABB17B21F173 /* QSGameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameListViewController.m; sourceTree = "<group>"; };
 		BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGameEmptyView.m; sourceTree = "<group>"; };
+		BC210335CCB42308C28FCEC0 /* GuessModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessModel.m; sourceTree = "<group>"; };
 		BC210337708736FFF222750A /* BaseSceneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSceneService.m; sourceTree = "<group>"; };
 		BC210343B3A1CE0A09FB978C /* CNAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNAuthViewController.h; sourceTree = "<group>"; };
 		BC21035DFEEDEEEBD9F73731 /* WalletDeletePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDeletePopView.h; sourceTree = "<group>"; };
@@ -1142,6 +1142,7 @@
 		BC2106E92DE53A1CA3532640 /* LeagueResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueResultTableViewCell.h; sourceTree = "<group>"; };
 		BC2106F2C4C48C00499B89E4 /* RoomMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomMoreView.h; sourceTree = "<group>"; };
 		BC2106F845ECA957808046FE /* MoreGuessHeaderCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderCellModel.h; sourceTree = "<group>"; };
+		BC2107088B9BF4F4503AF66D /* GuessModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessModel.h; sourceTree = "<group>"; };
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
 		BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinPopView.h; sourceTree = "<group>"; };
 		BC2107929CECA531C851C092 /* PKSelectRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSelectRoomView.h; sourceTree = "<group>"; };
@@ -1170,6 +1171,7 @@
 		BC210AEA9019F2D6E08BB65F /* WalletAddressSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchCell.h; sourceTree = "<group>"; };
 		BC210B0A37490689FA111F01 /* LeagueResultPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueResultPopView.m; sourceTree = "<group>"; };
 		BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectCell.m; sourceTree = "<group>"; };
+		BC210B77253CA485E709A582 /* LeagueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueModel.h; sourceTree = "<group>"; };
 		BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdKickoutRoomModel.m; sourceTree = "<group>"; };
 		BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveColCell.m; sourceTree = "<group>"; };
 		BC210BC408C1D5CBD7FE202D /* MyNFTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTDetailViewController.h; sourceTree = "<group>"; };
@@ -1199,6 +1201,7 @@
 		BC210F7B6D59DA493CE16350 /* SceneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentView.h; sourceTree = "<group>"; };
 		BC210F8464A2C7258DC5B08F /* LeagueResultPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueResultPopView.h; sourceTree = "<group>"; };
 		BC210FAF33BAD4283645718B /* UserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailView.h; sourceTree = "<group>"; };
+		BC210FB8B5AA27D3820666AC /* LeagueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueModel.m; sourceTree = "<group>"; };
 		E51A737628091CBE0097007C /* ZIMManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZIMManager.h; sourceTree = "<group>"; };
 		E51A737728091CD00097007C /* ZIMManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZIMManager.m; sourceTree = "<group>"; };
 		E51FFD5728124F2B001BE2BB /* VolcEngineRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VolcEngineRTC.xcframework; path = Vendors/volc/VolcEngineRTC.xcframework; sourceTree = "<group>"; };
@@ -2000,8 +2003,6 @@
 				6C076ED927A2993C00650209 /* RespGameInfoModel.m */,
 				BC210C677DD6442EA5963655 /* RespModel.m */,
 				BC210739F0C0EA7E87C2CC3B /* RespModel.h */,
-				6C4607C92852DEAE005C99EF /* GuessModel.h */,
-				6C4607CA2852DEAE005C99EF /* GuessModel.m */,
 				6C460815285B3039005C99EF /* RespDanmakuModel.h */,
 				6C460816285B3039005C99EF /* RespDanmakuModel.m */,
 				6C46082128630CD6005C99EF /* RespGiftListModel.h */,
@@ -2532,6 +2533,10 @@
 				BC2103C043B5568FCBA68B06 /* BaseSceneService.h */,
 				6C460827286441B4005C99EF /* WebpImageCacheService.h */,
 				6C460828286441B4005C99EF /* WebpImageCacheService.m */,
+				BC2107088B9BF4F4503AF66D /* GuessModel.h */,
+				BC210335CCB42308C28FCEC0 /* GuessModel.m */,
+				BC210B77253CA485E709A582 /* LeagueModel.h */,
+				BC210FB8B5AA27D3820666AC /* LeagueModel.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -3401,7 +3406,6 @@
 				44BC48E52815433400E4E3F7 /* RoomCmdOrderCreateModel.m in Sources */,
 				4455ADCC27EAC658001516EE /* TicketJoinPopView.m in Sources */,
 				E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */,
-				6C4607CB2852DEAE005C99EF /* GuessModel.m in Sources */,
 				4455AE0827EAC6F7001516EE /* BaseSceneViewController+IM.m in Sources */,
 				4455ADD127EAC658001516EE /* OneOneViewController.m in Sources */,
 				6C4608262864062D005C99EF /* LandscapeGuideTipView.m in Sources */,
@@ -3500,6 +3504,8 @@
 				BC21003E1833458539047CE2 /* LeagueEnterViewController.m in Sources */,
 				BC210D1CD41015D8819D2304 /* LeagueRoomViewController.m in Sources */,
 				BC210DC90086495C92957F2D /* LeagueAwardView.m in Sources */,
+				BC21009E7AF907C72E3B6D59 /* GuessModel.m in Sources */,
+				BC2108DF9DCC723A931AC7FA /* LeagueModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

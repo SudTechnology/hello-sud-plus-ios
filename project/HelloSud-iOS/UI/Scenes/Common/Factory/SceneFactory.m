@@ -52,6 +52,7 @@
             break;
         case SceneTypeLeague:
             vc = [[LeagueRoomViewController alloc]init];
+            break;
         default:
             vc = [[BaseSceneViewController alloc] init];
             break;

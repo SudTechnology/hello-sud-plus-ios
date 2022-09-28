@@ -5,9 +5,8 @@
 
 #import "LeagueRoomViewController.h"
 #import "GuessMineView.h"
-#import "SwitchAutoGuessPopView.h"
-#import "GuessSelectPopView.h"
-#import "GuessResultPopView.h"
+#import "LeagueResultPopView.h"
+#import "LeagueModel.h"
 
 @interface LeagueRoomViewController ()
 
@@ -17,10 +16,17 @@
 @property(nonatomic, assign) BOOL isNextRound;
 @property(nonatomic, assign) NSInteger betCoin;
 @property(nonatomic, strong) RespGuessPlayerListModel *playerListModel;
+/// 局索引
+@property(nonatomic, assign) NSInteger roundIndex;
+@property(nonatomic, strong) NSArray <LeaguePlayerModel *> *nextRoundPlayerList;
 @end
 
 @implementation LeagueRoomViewController {
 
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
 }
 
 - (Class)serviceClass {
@@ -42,7 +48,6 @@
 - (void)dtConfigUI {
     [super dtConfigUI];
 
-    [self reqData];
 }
 
 - (void)dtUpdateUI {
@@ -78,38 +83,6 @@
 /// 我的猜输赢挂件响应
 - (void)onTapShowOpenAutoGuess:(id)tap {
 
-    if (self.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
-        [ToastUtil show:NSString.dt_room_guess_gameing_not_open];
-        return;
-    }
-    WeakSelf
-    SwitchAutoGuessPopView *v = [[SwitchAutoGuessPopView alloc] init];
-    v.betCoin = self.betCoin;
-    [v dtUpdateUI];
-    v.onCloseBlock = ^{
-        [DTSheetView close];
-    };
-    v.onOpenBlock = ^{
-        // 开启的时候自动扣费
-        [GuessRoomService reqBet:2 coin:self.betCoin userList:@[AppService.shared.loginUserID] finished:^{
-            [DTSheetView close];
-            DDLogDebug(@"onTapShowOpenAutoGuess 开启自动扣费：投注成功");
-            weakSelf.openAutoBet = YES;
-            [weakSelf showNaviAutoStateView:YES];
-            // 自己押注消息
-            AudioUserModel *userModel = AudioUserModel.new;
-            userModel.userID = AppService.shared.login.loginUserInfo.userID;
-            userModel.name = AppService.shared.login.loginUserInfo.name;
-            userModel.icon = AppService.shared.login.loginUserInfo.icon;
-            userModel.sex = AppService.shared.login.loginUserInfo.sex;
-            [kGuessService sendBetNotifyMsg:weakSelf.roomID betUsers:@[userModel]];
-        }                failure:^(NSError *error) {
-            [ToastUtil show:error.dt_errMsg];
-        }];
-    };
-    [DTSheetView show:v onCloseCallback:^{
-
-    }];
 }
 
 /// 自动竞猜状态开关响应
@@ -131,11 +104,7 @@
 
 /// 普通用户猜输赢开关响应
 - (void)onTapNormal:(id)tap {
-    GuessSelectPopView *v = [[GuessSelectPopView alloc] init];
-    v.mj_h = kScreenHeight * 0.77;
-    [DTSheetView show:v onCloseCallback:^{
 
-    }];
 }
 
 /// 展示自动竞猜状态视图
@@ -145,32 +114,60 @@
 }
 
 /// 展示结果弹窗
-- (void)showResultAlertView:(NSArray<GuessPlayerModel *> *)playerList winCoin:(NSInteger)winCoin {
+- (void)showResultAlertView:(NSArray<LeaguePlayerModel *> *)playerList winCoin:(NSInteger)winCoin {
     WeakSelf
-    GuessResultPopView *v = [[GuessResultPopView alloc] init];
-    v.againBlock = ^{
+    LeagueResultPopView *v = [[LeagueResultPopView alloc] init];
+    v.resultStateType = LeagueResultTypeNotJoinFirstResult;
+    v.continueBlock = ^{
         // 下一轮游戏准备
         [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
+        [weakSelf addNextRoundRobot];
     };
     v.dataList = playerList;
-    v.winCoin = winCoin;
-    BOOL isSupport = NO;
-    BOOL isWin = NO;
+    BOOL isPlayer = false;
+    NSMutableArray *nextRoundPlayerList = NSMutableArray.new;
     for (int i = 0; i < playerList.count; ++i) {
-        if (playerList[i].support) {
-            isSupport = YES;
-            if (playerList[i].rank == 1) {
-                isWin = YES;
+        LeaguePlayerModel *m = playerList[i];
+        if (self.roundIndex == 1 && m.rank < 3 && nextRoundPlayerList.count < 3) {
+            [nextRoundPlayerList addObject:m];
+        }
+        self.nextRoundPlayerList = nextRoundPlayerList;
+        if (m.userId == AppService.shared.loginUserID.longLongValue) {
+            isPlayer = true;
+            // me
+            if (self.roundIndex == 1) {
+                if (m.rank <= 3) {
+                    v.resultStateType = LeagueResultTypeJoinFirstBeforeThree;
+                } else {
+                    v.resultStateType = LeagueResultTypeJoinFirstAfterThree;
+                }
+            } else if (self.roundIndex == 2) {
+                // 第二轮
+                if (m.rank == 1) {
+                    v.resultStateType = LeagueResultTypeJoinEndFirst;
+                } else {
+                    v.resultStateType = LeagueResultTypeJoinEndLose;
+                }
             }
         }
+        if (self.roundIndex == 1 && m.rank <= 3) {
+            m.isWin = true;
+        } else if (self.roundIndex == 2 && m.rank == 1) {
+            m.isWin = true;
+        } else {
+            m.isWin = false;
+        }
     }
-    if (isWin) {
-        v.resultStateType = GuessResultPopViewTypeWin;
-    } else if (isSupport) {
-        v.resultStateType = GuessResultPopViewTypeLose;
-    } else {
-        v.resultStateType = GuessResultPopViewTypeNotBet;
+    if (!isPlayer) {
+        // 非玩家
+        if (self.roundIndex == 1) {
+            v.resultStateType = LeagueResultTypeNotJoinFirstResult;
+        } else if (self.roundIndex == 2) {
+            // 第二轮
+            v.resultStateType = LeagueResultTypeNotJoinEndResult;
+        }
     }
+
     [v dtUpdateUI];
     v.backgroundColor = UIColor.clearColor;
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:NO onCloseCallback:^{
@@ -185,27 +182,29 @@
 
     NSMutableArray *playerUserIdList = [[NSMutableArray alloc] init];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    NSMutableArray *playerResultList = NSMutableArray.new;
     for (int i = 0; i < results.count; ++i) {
         MGCommonGameSettleResults *m = results[i];
-        if (m.uid) {
-            [playerUserIdList addObject:m.uid];
-            dic[m.uid] = m;
+        if (!m.uid) {
+            DDLogError(@"result uid is empty");
+            continue;
         }
+        [playerUserIdList addObject:m.uid];
+        dic[m.uid] = m;
+        HSUserInfoModel *infoModel = [UserService.shared getCacheUserInfo:m.uid.longLongValue];
+        LeaguePlayerModel *playerModel = LeaguePlayerModel.new;
+        playerModel.header = infoModel.headImage;
+        playerModel.nickname = infoModel.nickname;
+        playerModel.userId = m.uid.longLongValue;
+        playerModel.award = m.award;
+        playerModel.rank = m.rank;
+        playerModel.score = m.score;
+        playerModel.gender = infoModel.gender;
+        playerModel.isRobot = infoModel.ai;
+        [playerResultList addObject:playerModel];
+
     }
-    NSArray *arr = self.playerListModel.playerList;
-    for (int i = 0; i < arr.count; ++i) {
-        GuessPlayerModel *m = arr[i];
-        MGCommonGameSettleResults *resultModel = dic[[NSString stringWithFormat:@"%@", @(m.userId)]];
-        if (resultModel) {
-            m.rank = resultModel.rank;
-            m.award = resultModel.award;
-            m.score = resultModel.score;
-        }
-    }
-    arr = [arr sortedArrayUsingComparator:^NSComparisonResult(GuessPlayerModel *_Nonnull obj1, GuessPlayerModel *_Nonnull obj2) {
-        return obj1.rank > obj2.rank;
-    }];
-    [weakSelf showResultAlertView:arr winCoin:self.playerListModel.winCoin];
+    [weakSelf showResultAlertView:playerResultList winCoin:self.playerListModel.winCoin];
 }
 
 /// 处理业务指令
@@ -285,13 +284,78 @@
 
 }
 
+- (void)checkAddOtherRobot:(void (^)(void))completed {
+    switch (self.roundIndex) {
+        case 1: {
+
+            // 第一轮
+            NSInteger playerCount = self.sudFSMMGDecorator.onlineUserIdList.count;
+            NSInteger totalCount = self.totalGameUserCount;
+            if (totalCount > playerCount) {
+                // 补全剩余麦位
+                NSInteger count = totalCount - playerCount;
+                NSMutableArray *waitForAddToGameList = NSMutableArray.new;
+                BOOL noAvailableRobot = false;
+                for (int i = 0; i < count; ++i) {
+                    if (noAvailableRobot) {
+                        break;
+                    }
+                    BOOL addRobot = false;
+                    for (RobotInfoModel *m in self.cacheRobotList) {
+                        if (![self.sudFSMMGDecorator isPlayerInGame:[NSString stringWithFormat:@"%@", @(m.userId)]]) {
+                            [waitForAddToGameList addObject:m];
+                            addRobot = YES;
+                            continue;
+                        }
+
+                    }
+                    if (!addRobot) {
+                        // 标记没有可用机器人了
+                        noAvailableRobot = YES;
+                    }
+                }
+                [self addRobotToGame:waitForAddToGameList];
+            }
+        }
+            break;
+        case 2: {
+
+            // 第二轮
+        }
+            break;
+        default:
+            break;
+    }
+    if (completed) {
+        completed();
+    }
+}
+
+/// 添加下一轮游戏机器人
+- (void)addNextRoundRobot {
+
+    NSMutableArray *robotList = NSMutableArray.new;
+    for (LeaguePlayerModel *m in self.nextRoundPlayerList) {
+        if (m.isRobot) {
+            RobotInfoModel *robotInfoModel = RobotInfoModel.new;
+            robotInfoModel.avatar = m.header;
+            robotInfoModel.gender = m.gender;
+            robotInfoModel.name = m.nickname;
+            robotInfoModel.userId = m.userId;
+            [robotList addObject:robotInfoModel];
+        }
+    }
+    [self addRobotToGame:robotList];
+}
+
 #pragma mark game events
 
 /// 获取游戏Config  【需要实现】
 - (NSString *)onGetGameCfg {
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
+    m.ui.lobby_game_setting.hide = YES;
     m.ui.gameSettle.hide = YES;
-    m.ui.lobby_players.hide = YES;
+    m.ui.lobby_players.hide = NO;
     m.ui.start_btn.custom = YES;
     m.ui.join_btn.custom = YES;
     NSString *jsonStr = [m toJSON];
@@ -301,41 +365,23 @@
 /// 接管加入游戏
 - (void)onGameMGCommonSelfClickJoinBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickCancelJoinBtn *)model {
     [self.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
-    if (self.openAutoBet) {
-        [self showNaviAutoStateView:YES];
-    } else {
-        [self onTapShowOpenAutoGuess:nil];
-    }
 }
 
 /// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
 - (void)onGameMGCommonSelfClickStartBtn {
-    // 通过游戏透传业务竞猜场景ID到业务服务端
-    NSDictionary *dic = @{@"sceneId": @(self.configModel.enterRoomModel.sceneType)};
-    [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
     DDLogDebug(@"onGameMGCommonSelfClickStartBtn");
-
+    WeakSelf
+    weakSelf.roundIndex++;
+    [self checkAddOtherRobot:^{
+        NSDictionary *dic = @{};
+        [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
+    }];
 }
 
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
 - (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
     [super onGameMGCommonGameState:handle model:model];
     DDLogDebug(@"onGameMGCommonGameState：%@", @(model.gameState));
-    // 游戏进行开始时，扣费
-    if (model.gameState == MGCommonGameStateTypeLoading) {
-        WeakSelf
-        if (!(self.openAutoBet && self.isNextRound)) {
-            [self reqBetList];
-            return;
-        }
-        /// 开启了自动扣费
-        DDLogDebug(@"开启了自动扣费");
-        [self reqAutoBet:^(BOOL success) {
-            [self reqBetList];
-        }];
-    } else if (model.gameState == MGCommonGameStateTypePlaying) {
-        [self reqBetList];
-    }
 }
 
 /// 游戏: 游戏结算状态     MG_COMMON_GAME_SETTLE
@@ -343,7 +389,17 @@
 
     self.isNextRound = YES;
     // 展示游戏结果
-    [self handlePlayerGameResult:model.results];
+    NSMutableArray *playerUserIdList = [[NSMutableArray alloc] init];
+    for (MGCommonGameSettleResults *m in model.results) {
+        if (m.uid) {
+            [playerUserIdList addObject:m.uid];
+        }
+    }
+    WeakSelf
+    [UserService.shared asyncCacheUserInfo:playerUserIdList forceRefresh:NO finished:^{
+        [weakSelf handlePlayerGameResult:model.results];
+    }];
+
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 

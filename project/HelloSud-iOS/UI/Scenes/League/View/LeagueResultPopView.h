@@ -9,7 +9,7 @@
 #import "BaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class LeaguePlayerModel;
 /// 结果展示类型
 typedef NS_ENUM(NSInteger, LeagueResultPopViewType) {
     LeagueResultTypeNotJoinFirstResult = 0,// 初赛未参与
@@ -23,10 +23,9 @@ typedef NS_ENUM(NSInteger, LeagueResultPopViewType) {
 /// 联赛结果弹出框视图
 @interface LeagueResultPopView : BaseView
 /// 游戏玩家信息列表
-@property(nonatomic, strong) NSArray <GuessPlayerModel *> *dataList;
+@property(nonatomic, strong) NSArray <LeaguePlayerModel *> *dataList;
 @property(nonatomic, assign) LeagueResultPopViewType resultStateType;
-@property(nonatomic, assign) NSInteger winCoin;
-@property(nonatomic, strong) void (^againBlock)(void);
+@property(nonatomic, strong) void (^continueBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END

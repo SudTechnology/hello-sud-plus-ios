@@ -7,6 +7,7 @@
 //
 
 #import "LeagueResultTableViewCell.h"
+#import "LeagueModel.h"
 
 @interface LeagueResultTableViewCell ()
 @property(nonatomic, strong) UIImageView *headImageView;
@@ -14,7 +15,7 @@
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) YYLabel *startLabel;
 @property(nonatomic, strong) YYLabel *clubLabel;
-@property(nonatomic, strong) YYLabel *supportLabel;
+@property(nonatomic, strong) DTPaddingLabel *loseLabel;
 @end
 
 @implementation LeagueResultTableViewCell
@@ -24,13 +25,14 @@
     [self.contentView addSubview:self.headImageView];
     [self.contentView addSubview:self.rankImageView];
     [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.supportLabel];
+    [self.contentView addSubview:self.loseLabel];
     [self.contentView addSubview:self.startLabel];
     [self.contentView addSubview:self.clubLabel];
 }
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+    [self.headImageView dt_cornerRadius:16];
     [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@16);
         make.width.height.equalTo(@32);
@@ -46,12 +48,10 @@
         make.width.height.greaterThanOrEqualTo(@0);
         make.centerY.equalTo(self.headImageView).offset(0);
     }];
-    [self.supportLabel dt_cornerRadius:7];
-    [self.supportLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [self.supportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.loseLabel dt_cornerRadius:7];
+    [self.loseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.titleLabel);
         make.top.equalTo(self.titleLabel.mas_bottom);
-        make.trailing.lessThanOrEqualTo(self.startLabel.mas_leading).offset(2);
         make.height.equalTo(@14);
     }];
     [self.startLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -74,38 +74,30 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    if (![self.model isKindOfClass:GuessPlayerModel.class]) {
+    if (![self.model isKindOfClass:LeaguePlayerModel.class]) {
         return;
     }
-    GuessPlayerModel *m = (GuessPlayerModel *) self.model;
+    LeaguePlayerModel *m = (LeaguePlayerModel *) self.model;
     if (m.header) {
         [self.headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:m.header]];
     }
     self.titleLabel.text = m.nickname;
-    if (m.rank >= 1 && m.rank <= 3) {
+    if (m.isWin) {
         self.rankImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guess_result_rank_%@", @(m.rank)]];
     } else {
         self.rankImageView.image = nil;
     }
-    if (m.support) {
-        self.supportLabel.hidden = NO;
+    if (m.isWin) {
+        self.loseLabel.hidden = YES;
+        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.headImageView).offset(0);
+        }];
+
+    } else {
+        self.loseLabel.hidden = NO;
         [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.headImageView).offset(-7);
         }];
-    } else {
-        self.supportLabel.hidden = YES;
-        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.headImageView).offset(0);
-        }];
-    }
-    if ([AppService.shared.login.loginUserInfo isMeByUserID:[NSString stringWithFormat:@"%@", @(m.userId)]]) {
-        self.backgroundColor = HEX_COLOR(@"#FFD16C");
-        self.supportLabel.hidden = YES;
-        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.headImageView).offset(0);
-        }];
-    } else {
-        self.backgroundColor = nil;
     }
 
     [self updateStar:m.score];
@@ -158,27 +150,17 @@
     return _clubLabel;
 }
 
-- (YYLabel *)supportLabel {
-    if (!_supportLabel) {
-        _supportLabel = [[YYLabel alloc] init];
-        _supportLabel.textAlignment = NSTextAlignmentCenter;
-        NSMutableAttributedString *full = [[NSMutableAttributedString alloc] init];
-        full.yy_alignment = NSTextAlignmentCenter;
-
-        UIImage *iconImage = [UIImage imageNamed:@"guess_result_support"];
-        NSMutableAttributedString *attrIcon = [NSAttributedString yy_attachmentStringWithContent:iconImage contentMode:UIViewContentModeScaleAspectFit attachmentSize:CGSizeMake(10, 8) alignToFont:[UIFont systemFontOfSize:10 weight:UIFontWeightRegular] alignment:YYTextVerticalAlignmentCenter];
-        attrIcon.yy_firstLineHeadIndent = 5;
-        [full appendAttributedString:attrIcon];
-
-        NSMutableAttributedString *attrAwardValue = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@  ", NSString.dt_room_guess_had_support]];
-        attrAwardValue.yy_font = UIFONT_REGULAR(10);
-        attrAwardValue.yy_color = HEX_COLOR(@"#FF7B14");
-        [full appendAttributedString:attrAwardValue];
-
-        _supportLabel.attributedText = full;
-        _supportLabel.backgroundColor = HEX_COLOR(@"#FFE373");
+- (DTPaddingLabel *)loseLabel {
+    if (!_loseLabel) {
+        _loseLabel = [[DTPaddingLabel alloc] init];
+        _loseLabel.text = @"淘汰";
+        _loseLabel.font = UIFONT_REGULAR(10);
+        _loseLabel.textColor = UIColor.blackColor;
+        _loseLabel.backgroundColor = HEX_COLOR_A(@"#ffffff", 0.7);
+        _loseLabel.paddingX = 6;
+        _loseLabel.textAlignment = NSTextAlignmentCenter;
     }
-    return _supportLabel;
+    return _loseLabel;
 }
 
 

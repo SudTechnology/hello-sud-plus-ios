@@ -9,6 +9,7 @@
 #import "LeagueResultPopView.h"
 #import "LeagueResultTableViewCell.h"
 #import "LeagueAwardView.h"
+#import "LeagueModel.h"
 
 @interface LeagueResultPopView () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIImageView *bgImageView;
@@ -163,7 +164,6 @@
             // 初赛未参与
             self.titleLabel.text = @"比赛进入下一局";
             self.bgImageView.image = [UIImage imageNamed:@"league_star"];
-            [self updateCoin:self.winCoin];
             self.coinLabel.hidden = NO;
             self.joinImageView.hidden = YES;
             self.joinTipLabel.hidden = YES;
@@ -297,7 +297,7 @@
 - (void)onAgainBtnClick:(id)sender {
     [self closeCountdown];
     [DTAlertView close];
-    if (self.againBlock) self.againBlock();
+    if (self.continueBlock) self.continueBlock();
 }
 
 #pragma mark - UITableViewDelegate || UITableViewDataSource
@@ -308,7 +308,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LeagueResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LeagueResultTableViewCell"];
-    cell.model = self.dataList[indexPath.row];
+    LeaguePlayerModel *model = self.dataList[indexPath.row];
+    cell.model = model;
     return cell;
 }
 
