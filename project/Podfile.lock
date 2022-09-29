@@ -73,9 +73,9 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SSZipArchive (2.4.3)
-  - SudMGPWrapper (1.0.5):
-    - SudMGPWrapper/SudMGPWrapper (= 1.0.5)
-  - SudMGPWrapper/SudMGPWrapper (1.0.5):
+  - SudMGPWrapper (1.0.6):
+    - SudMGPWrapper/SudMGPWrapper (= 1.0.6)
+  - SudMGPWrapper/SudMGPWrapper (1.0.6):
     - MJExtension (~> 3.4.1)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -201,7 +201,7 @@ SPEC CHECKSUMS:
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  SudMGPWrapper: af5d2107304188c8776fe8e115e7e14e549b5ace
+  SudMGPWrapper: 1757a9d39dd839b34be86119ab93ad7360b6620d
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6

@@ -166,6 +166,11 @@
     [self notifyStateChange:APP_COMMON_GAME_RECONNECT dataJson:@{}.mj_JSONString];
 }
 
+/// app返回玩家当前积分 (2022-09-26 新增)
+- (void)notifyAppCommonGameScore:(AppCommonGameScore *)appCommonGameScore {
+    [self notifyStateChange:APP_COMMON_GAME_SCORE dataJson:appCommonGameScore.mj_JSONString];
+}
+
 #pragma mark =======APP->游戏状态处理=======
 
 /// 状态通知（app to mg）

@@ -48,6 +48,8 @@ static NSString *APP_COMMON_GAME_DISCO_ACTION = @"app_common_game_disco_action";
 static NSString *APP_COMMON_GAME_SETTING_SELECT_INFO = @"app_common_game_setting_select_info";
 /// app在收到游戏断开连接通知后，通知游戏重试连接（2022-06-21新增，暂时支持ludo）
 static NSString *APP_COMMON_GAME_RECONNECT = @"app_common_game_reconnect";
+/// app返回玩家当前积分（2022-09-26新增）
+static NSString *APP_COMMON_GAME_SCORE = @"app_common_game_score";
 
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
@@ -95,6 +97,12 @@ static NSString *APP_COMMON_GAME_RECONNECT = @"app_common_game_reconnect";
 @interface AppCommonGameSettingGameInfo: NSObject
 // 游戏名称
 @property (nonatomic, strong)AppCommonGameSettingGameLudo *ludo;
+@end
+
+/// APP_COMMON_GAME_SCORE
+@interface AppCommonGameScore : NSObject
+/// 玩家当前积分
+@property(nonatomic, assign) NSInteger score;
 @end
 
 

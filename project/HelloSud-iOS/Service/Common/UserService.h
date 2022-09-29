@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ReqAddScoreModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 用户管理模块
@@ -39,6 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param success success description
 /// @param fail fail description
 + (void)reqUnbindUser:(NSInteger)bindType success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail;
+/// 带入游戏积分
+/// @param reqModel reqModel description
+/// @param success success description
+/// @param fail fail description
+- (void)reqAddGameScore:(ReqAddScoreModel *)reqModel success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail;
 @end
 
 NS_ASSUME_NONNULL_END

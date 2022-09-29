@@ -218,3 +218,9 @@
 
 @implementation MGCommonGameNetworkStateModel
 @end
+
+@implementation MGCommonGameGetScoreModel
+@end
+
+@implementation MGCommonGameSetScoreModel
+@end

@@ -136,6 +136,19 @@
     }                         failure:fail];
 }
 
+/// 带入游戏积分
+/// @param reqModel reqModel description
+/// @param success success description
+/// @param fail fail description
+- (void)reqAddGameScore:(ReqAddScoreModel *)reqModel success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail {
+
+    [HSHttpService postRequestWithURL:kGameURL(@"app/bring-chip/v1") param:reqModel.mj_JSONObject respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (success) {
+            success(resp);
+        }
+    }                         failure:fail];
+}
+
 - (NSMutableDictionary *)dicUserInfo {
     if (_dicUserInfo == nil) {
         _dicUserInfo = NSMutableDictionary.new;

@@ -133,6 +133,36 @@
     [[NSNotificationCenter defaultCenter]postNotificationName:NTF_ASR_STATE_CHANGED object:nil userInfo:nil];
 }
 
+/// 游戏通知app获取积分 MG_COMMON_GAME_SCORE
+- (void)onGameMGCommonGameGetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameGetScoreModel *)model {
+    DDLogDebug(@"onGameMGCommonGameScore");
+    [UserService.shared reqUserCoinDetail:^(int64_t i) {
+        DDLogError(@"onGameMGCommonGameScore notify game score:%@", @(i));
+        AppCommonGameScore *m = AppCommonGameScore.new;
+        m.score = i;
+        [self.sudFSTAPPDecorator notifyAppCommonGameScore:m];
+    } fail:^(NSString *str) {
+        DDLogError(@"onGameMGCommonGameScore req user coin err:%@", str);
+    }];
+}
+
+/// 游戏通知app带入积分 MG_COMMON_GAME_SET_SCORE
+- (void)onGameMGCommonGameSetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSetScoreModel *)model {
+    DDLogDebug(@"onGameMGCommonGameSetScore");
+    ReqAddScoreModel *reqModel = ReqAddScoreModel.new;
+    reqModel.mgId = [NSString stringWithFormat:@"%@", @(self.gameId)];;
+    reqModel.roomId = self.gameRoomID;
+    reqModel.roundId = model.roundId;;
+    reqModel.lastRoundScore = model.lastRoundScore;
+    reqModel.incrementalScore = model.incrementalScore;
+    reqModel.totalScore = model.totalScore;
+    [UserService.shared reqAddGameScore:reqModel success:^(BaseRespModel * _Nonnull resp) {
+        DDLogDebug(@"onGameMGCommonGameSetScore add success");
+        } fail:^(NSError *error) {
+            DDLogDebug(@"onGameMGCommonGameSetScore req add score fail:%@", error.dt_errMsg);
+        }];
+}
+
 /// 玩家状态变化
 /// 玩家: 加入状态  MG_COMMON_PLAYER_IN
 - (void)onPlayerMGCommonPlayerIn:(id<ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerInModel *)model {

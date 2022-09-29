@@ -20,10 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// app -> 游戏
 @interface SudFSTAPPDecorator : NSObject
 
-@property (nonatomic, strong) id<ISudFSTAPP> iSudFSTAPP;
+@property(nonatomic, strong) id <ISudFSTAPP> iSudFSTAPP;
 
 /// setI SudFSTAPP
-- (void)setISudFSTAPP:(id<ISudFSTAPP>)iSudFSTAPP;
+- (void)setISudFSTAPP:(id <ISudFSTAPP>)iSudFSTAPP;
 
 /// 加入,退出游戏
 /// @param isIn true 加入游戏，false 退出游戏
@@ -116,6 +116,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// app在收到游戏断开连接通知后，通知游戏重试连接（2022-06-21新增，暂时支持ludo) APP_COMMON_GAME_RECONNECT
 - (void)notifyAppCommonGameReconnect;
 
+/// app返回玩家当前积分 (2022-09-26 新增)
+- (void)notifyAppCommonGameScore:(AppCommonGameScore *)appCommonGameScore;
+
 /// 继续游戏
 - (void)playMG;
 
@@ -126,11 +129,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)destroyMG;
 
 /// 获取游戏View
-- (UIView *) getGameView;
+- (UIView *)getGameView;
 
 /// 更新code
 /// @param code 新的code
-- (void)updateCode:(NSString *) code;
+- (void)updateCode:(NSString *)code;
 
 /// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
 - (void)pushAudio:(NSData *)data;
