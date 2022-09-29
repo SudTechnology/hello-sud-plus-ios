@@ -4,17 +4,10 @@
 //
 
 #import "LeagueRoomViewController.h"
-#import "GuessMineView.h"
 #import "LeagueResultPopView.h"
 #import "LeagueModel.h"
 
 @interface LeagueRoomViewController ()
-
-/// 开启了自动竞猜
-@property(nonatomic, assign) BOOL openAutoBet;
-/// 是否是下一轮
-@property(nonatomic, assign) BOOL isNextRound;
-@property(nonatomic, assign) NSInteger betCoin;
 @property(nonatomic, strong) RespGuessPlayerListModel *playerListModel;
 /// 局索引
 @property(nonatomic, assign) NSInteger roundIndex;
@@ -61,16 +54,6 @@
 
 }
 
-- (void)reqData {
-    WeakSelf
-    NSArray *playerUserIdList = @[AppService.shared.loginUserID ? AppService.shared.loginUserID : @""];
-    NSString *roomId = kGuessService.currentRoomVC.roomID;
-    [GuessRoomService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
-        weakSelf.betCoin = model.betCoin;
-        [weakSelf dtUpdateUI];
-    }];
-}
-
 - (void)showFingerAnimate {
 
 }
@@ -82,34 +65,6 @@
 
 /// 我的猜输赢挂件响应
 - (void)onTapShowOpenAutoGuess:(id)tap {
-
-}
-
-/// 自动竞猜状态开关响应
-- (void)onTapAuto:(id)tap {
-
-    if (self.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
-        [ToastUtil show:NSString.dt_room_guess_gaming_not_close];
-        return;
-    }
-    WeakSelf
-    [DTAlertView showTextAlert:NSString.dt_room_guess_close_auto sureText:NSString.dt_common_close cancelText:NSString.dt_common_back onSureCallback:^{
-        weakSelf.openAutoBet = NO;
-        [weakSelf showNaviAutoStateView:NO];
-    }          onCloseCallback:^{
-        [DTAlertView close];
-    }];
-
-}
-
-/// 普通用户猜输赢开关响应
-- (void)onTapNormal:(id)tap {
-
-}
-
-/// 展示自动竞猜状态视图
-/// @param show  show
-- (void)showNaviAutoStateView:(BOOL)show {
 
 }
 
@@ -261,38 +216,6 @@
     }
 }
 
-/// 获取下注列表
-- (void)reqBetList {
-    WeakSelf
-    NSString *roomId = kGuessService.currentRoomVC.roomID;
-    [GuessRoomService reqGuessPlayerList:self.sudFSMMGDecorator.onlineUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
-        weakSelf.betCoin = model.betCoin;
-        weakSelf.playerListModel = model;
-    }];
-}
-
-/// 请求自动下注
-/// @param finished finished
-- (void)reqAutoBet:(void (^)(BOOL success))finished {
-    WeakSelf
-    [GuessRoomService reqBet:2 coin:weakSelf.betCoin userList:@[AppService.shared.loginUserID] finished:^{
-        DDLogDebug(@"自动下注：投注成功");
-        if (finished) finished(YES);
-
-    }                failure:^(NSError *error) {
-        if (error.code == 3005) {
-            [ToastUtil show:NSString.dt_room_guess_no_more_money];
-            weakSelf.openAutoBet = NO;
-            [weakSelf showNaviAutoStateView:NO];
-        } else {
-            [ToastUtil show:error.dt_errMsg];
-        }
-        DDLogError(@"开启自动扣费：失败：%@", error.dt_errMsg);
-        if (finished) finished(NO);
-    }];
-
-}
-
 - (void)checkAddOtherRobot:(void (^)(void))completed {
     switch (self.roundIndex) {
         case 1: {
@@ -367,6 +290,18 @@
     }
 }
 
+- (BOOL)isCanJoinGame {
+    if (self.roundIndex == 0) {
+        return YES;
+    }
+
+    if ([self.sudFSMMGDecorator isPlayerInGame:AppService.shared.loginUserID]) {
+        return YES;
+    }
+    [ToastUtil show:@"您不是参赛者，不能加入游戏"];
+    return NO;
+}
+
 #pragma mark game events
 
 /// 获取游戏Config  【需要实现】
@@ -383,6 +318,10 @@
 
 /// 接管加入游戏
 - (void)onGameMGCommonSelfClickJoinBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickCancelJoinBtn *)model {
+    if (![self isCanJoinGame]) {
+        DDLogError(@"can not join game");
+        return;
+    }
     [self.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
@@ -391,10 +330,26 @@
     DDLogDebug(@"onGameMGCommonSelfClickStartBtn");
     WeakSelf
     weakSelf.roundIndex++;
-    [self checkAddOtherRobot:^{
-        NSDictionary *dic = @{};
-        [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
-    }];
+    if (self.roundIndex == 1) {
+        [self checkAddOtherRobot:^{
+            NSDictionary *dic = @{};
+            [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
+        }];
+    } else {
+        BOOL hasUserExitGame = NO;
+        for (LeaguePlayerModel *m in self.nextRoundPlayerList) {
+            BOOL isPlayerInGame = [self.sudFSMMGDecorator isPlayerInGame:[NSString stringWithFormat:@"%@", @(m.userId)]];
+            if (!isPlayerInGame) {
+                hasUserExitGame = YES;
+                break;
+            }
+        }
+        if (hasUserExitGame) {
+            [DTAlertView showTextAlert:@"当前有用户退出比赛，\n游戏不能继续进行" sureText:@"我知道了" cancelText:nil onSureCallback:^{
+                [DTAlertView close];
+            } onCloseCallback:nil];
+        }
+    }
 }
 
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
@@ -406,7 +361,6 @@
 /// 游戏: 游戏结算状态     MG_COMMON_GAME_SETTLE
 - (void)onGameMGCommonGameSettle:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSettleModel *)model {
 
-    self.isNextRound = YES;
     // 展示游戏结果
     NSMutableArray *playerUserIdList = [[NSMutableArray alloc] init];
     for (MGCommonGameSettleResults *m in model.results) {
