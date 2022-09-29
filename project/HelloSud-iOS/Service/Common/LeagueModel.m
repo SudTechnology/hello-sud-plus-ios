@@ -10,4 +10,6 @@
 @implementation LeaguePlayerModel
 @end
 
+@implementation RespLeaguePlayingModel
+@end
 

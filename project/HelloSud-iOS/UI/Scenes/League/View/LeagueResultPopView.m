@@ -96,10 +96,10 @@
     }];
 
     [self.awardView mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.leading.trailing.equalTo(@0);
-       make.top.equalTo(self.tableView.mas_bottom);
-       make.height.greaterThanOrEqualTo(@0);
-       make.bottom.equalTo(self.rightBtn.mas_top).offset(-20);
+        make.leading.trailing.equalTo(@0);
+        make.top.equalTo(self.tableView.mas_bottom);
+        make.height.greaterThanOrEqualTo(@0);
+        make.bottom.equalTo(self.rightBtn.mas_top).offset(-20);
     }];
 
 }
@@ -285,19 +285,24 @@
 - (void)dtConfigEvents {
     [super dtConfigEvents];
 
-    [self.rightBtn addTarget:self action:@selector(onAgainBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.leftBtn addTarget:self action:@selector(onCloseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rightBtn addTarget:self action:@selector(onRightBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.leftBtn addTarget:self action:@selector(onLeftBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)onCloseBtnClick:(id)sender {
+- (void)onLeftBtnClick:(id)sender {
     [self closeCountdown];
     [DTAlertView close];
+    if (self.closeBlock) self.closeBlock();
 }
 
-- (void)onAgainBtnClick:(id)sender {
+- (void)onRightBtnClick:(id)sender {
     [self closeCountdown];
     [DTAlertView close];
-    if (self.continueBlock) self.continueBlock();
+    if (self.resultStateType == LeagueResultTypeNotJoinFirstResult || self.resultStateType == LeagueResultTypeJoinFirstBeforeThree) {
+        if (self.continueBlock) self.continueBlock();
+    } else {
+        if (self.closeBlock) self.closeBlock();
+    }
 }
 
 #pragma mark - UITableViewDelegate || UITableViewDataSource

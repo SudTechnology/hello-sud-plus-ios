@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, LeagueResultPopViewType) {
 @property(nonatomic, strong) NSArray <LeaguePlayerModel *> *dataList;
 @property(nonatomic, assign) LeagueResultPopViewType resultStateType;
 @property(nonatomic, strong) void (^continueBlock)(void);
+@property(nonatomic, strong) void (^closeBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END

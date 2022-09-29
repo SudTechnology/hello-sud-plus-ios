@@ -27,4 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+/// 玩家比赛房间
+@interface RespLeaguePlayingModel : BaseRespModel
+/// 参加房间号
+@property (nonatomic, assign)int64_t roomId;
+@end
+
 NS_ASSUME_NONNULL_END

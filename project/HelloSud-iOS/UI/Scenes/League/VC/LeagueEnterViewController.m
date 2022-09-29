@@ -22,12 +22,18 @@
 @property(nonatomic, strong) UILabel *ruleTwoLeftLabel;
 @property(nonatomic, strong) UILabel *ruleTwoRightLabel;
 @property(nonatomic, strong) UIView *coverView;
+/// 继续比赛奖杯
+@property(nonatomic, strong) UIImageView *awardIconImageView;
+/// 继续比赛提示
+@property(nonatomic, strong) DTPaddingLabel *awardTipLabel;
+
+@property(nonatomic, assign) int64_t roomId;
 @end
 
 @implementation LeagueEnterViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self reqData];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -49,6 +55,8 @@
     [self.view addSubview:self.awardImageView];
     [self.view addSubview:self.awardLabel];
     [self.view addSubview:self.giftContentView];
+    [self.view addSubview:self.awardTipLabel];
+    [self.view addSubview:self.awardIconImageView];
     [self.view addSubview:self.enterBtn];
     [self.view addSubview:self.ruleTitleLabel];
     [self.view addSubview:self.ruleOneLeftLabel];
@@ -128,6 +136,20 @@
         make.trailing.equalTo(@-16);
         make.height.equalTo(@(kScaleByW_375(65)));
     }];
+    [self.awardIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.awardTipLabel);
+        make.trailing.equalTo(self.awardTipLabel.mas_leading).offset(10);
+        make.width.equalTo(@24);
+        make.height.equalTo(@23);
+    }];
+
+    [self.awardTipLabel dt_cornerRadius:10];
+    [self.awardTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view).offset(10);
+        make.top.equalTo(self.giftContentView.mas_bottom).offset(10);
+        make.width.greaterThanOrEqualTo(@0);
+        make.height.equalTo(@20);
+    }];
     [self.enterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.top.equalTo(self.giftContentView.mas_bottom).offset(kScaleByW_375(22));
@@ -192,8 +214,13 @@
 }
 
 - (void)onEnterBtnClick:(id)sender {
-
-    [AudioRoomService reqMatchRoom:self.gameId sceneType:self.sceneId gameLevel:-1];
+    if (self.roomId > 0) {
+        DDLogDebug(@"enter room:%@", @(self.roomId));
+        [AudioRoomService reqEnterRoom:self.roomId isFromCreate:false success:nil fail:nil];
+    } else {
+        DDLogDebug(@"enter match room");
+        [AudioRoomService reqMatchRoom:self.gameId sceneType:self.sceneId gameLevel:-1];
+    }
 }
 
 
@@ -218,6 +245,21 @@
     self.ruleTwoLeftLabel.attributedText = [self genLeftAttr:@" 第二局"];
     self.ruleOneRightLabel.attributedText = [self genRightAttr:@"淘汰赛 生死逃杀进前三" detail:@"用户进行比赛， \n排名前三进入前三名"];
     self.ruleTwoRightLabel.attributedText = [self genRightAttr:@"总决赛 勇夺第一名" detail:@"三强用户进行比赛， \n决出第一名"];
+
+    self.awardTipLabel.text = @"你已进入三强";
+
+}
+
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
+    if (self.roomId > 0) {
+        [self.enterBtn setTitle:@"继续比赛" forState:UIControlStateNormal];
+        self.awardIconImageView.hidden = false;
+        self.awardTipLabel.hidden = false;
+    } else {
+        self.awardIconImageView.hidden = true;
+        self.awardTipLabel.hidden = true;
+    }
 }
 
 - (NSMutableAttributedString *)genLeftAttr:(NSString *)title {
@@ -239,6 +281,13 @@
     detailAttr.yy_color = HEX_COLOR(@"#97A1ED");
     [fullAttr appendAttributedString:detailAttr];
     return fullAttr;
+}
+
+- (void)reqData {
+    [LeagueRoomService reqUserPlayingRoom:self.gameId finished:^(RespLeaguePlayingModel *model) {
+        self.roomId = model.roomId;
+        [self dtUpdateUI];
+    }];
 }
 
 - (UIImageView *)bgImageView {
@@ -305,6 +354,27 @@
         _awardLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _awardLabel;
+}
+
+- (UIImageView *)awardIconImageView {
+    if (!_awardIconImageView) {
+        _awardIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"league_award"]];
+        _awardIconImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _awardIconImageView.clipsToBounds = YES;
+    }
+    return _awardIconImageView;
+}
+
+- (DTPaddingLabel *)awardTipLabel {
+    if (!_awardTipLabel) {
+        _awardTipLabel = DTPaddingLabel.new;
+        _awardTipLabel.textColor = HEX_COLOR(@"#ffffff");
+        _awardTipLabel.backgroundColor = HEX_COLOR_A(@"#000000", 0.3);
+        _awardTipLabel.font = UIFONT_REGULAR(14);
+        _awardTipLabel.paddingX = 10;
+        _awardTipLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _awardTipLabel;
 }
 
 - (UIView *)giftContentView {

@@ -119,9 +119,18 @@
     LeagueResultPopView *v = [[LeagueResultPopView alloc] init];
     v.resultStateType = LeagueResultTypeNotJoinFirstResult;
     v.continueBlock = ^{
+        if (weakSelf.roundIndex >= 2) {
+            [weakSelf exitRoomFromSuspend:NO finished:nil];
+            return;
+        }
+
         // 下一轮游戏准备
         [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
+        [weakSelf kikoutRobot:playerList];
         [weakSelf addNextRoundRobot];
+    };
+    v.closeBlock = ^{
+        [weakSelf exitRoomFromSuspend:NO finished:nil];
     };
     v.dataList = playerList;
     BOOL isPlayer = false;
@@ -346,6 +355,16 @@
         }
     }
     [self addRobotToGame:robotList];
+}
+
+/// 踢出机器人
+/// @param playerList
+- (void)kikoutRobot:(NSArray<LeaguePlayerModel *> *)playerList {
+    for (LeaguePlayerModel *m in playerList) {
+        if (m.isRobot) {
+            [self.sudFSTAPPDecorator notifyAppComonKickStateWithUserId:[NSString stringWithFormat:@"%@", @(m.userId)]];
+        }
+    }
 }
 
 #pragma mark game events
