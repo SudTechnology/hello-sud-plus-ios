@@ -218,8 +218,6 @@
 
 - (void)clickCreateEvent:(UITapGestureRecognizer *)tap {
     // 创建房间
-    [self test];
-    return;
     if (self.sceneModel.isGameWait) {
         return;
     }
@@ -234,54 +232,6 @@
     } else {
         [AudioRoomService reqCreateRoom:self.sceneModel.sceneId gameLevel:-1];
     }
-}
-
-- (void)test {
-    WeakSelf
-    LeagueResultPopView *v = [[LeagueResultPopView alloc] init];
-
-    GuessPlayerModel *m1 = GuessPlayerModel.new;
-    m1.rank = 1;
-    m1.header = AppService.shared.login.loginUserInfo.icon;
-    m1.nickname = @"abc1";
-    m1.score = 100;
-    m1.award = 100;
-    GuessPlayerModel *m2 = GuessPlayerModel.new;
-    m2.rank = 2;
-    m2.header = AppService.shared.login.loginUserInfo.icon;
-    m2.nickname = @"abc2";
-    m2.score = 90;
-    m2.award = 90;
-    GuessPlayerModel *m3 = GuessPlayerModel.new;
-    m3.rank = 3;
-    m3.header = AppService.shared.login.loginUserInfo.icon;
-    m3.nickname = @"abc3";
-    m3.score = 80;
-    m3.award = 80;
-    GuessPlayerModel *m4 = GuessPlayerModel.new;
-    m4.rank = 4;
-    m4.header = AppService.shared.login.loginUserInfo.icon;
-    m4.nickname = @"abc4";
-    m4.score = 70;
-    m4.award = 70;
-
-    v.dataList = @[m1, m2, m3, m4];
-    v.resultStateType = LeagueResultTypeNotJoinFirstResult;
-    v.resultStateType = LeagueResultTypeNotJoinEndResult;
-    v.resultStateType = LeagueResultTypeJoinFirstBeforeThree;
-    v.resultStateType = LeagueResultTypeJoinFirstAfterThree;
-    v.resultStateType = LeagueResultTypeJoinEndFirst;
-    v.resultStateType = LeagueResultTypeJoinEndLose;
-//    LeagueResultTypeNotJoinFirstResult = 0,// 初赛未参与
-//            LeagueResultTypeNotJoinEndResult = 1,// 决赛未参与
-//            LeagueResultTypeJoinFirstBeforeThree = 2,// 初赛进入前三
-//            LeagueResultTypeJoinFirstAfterThree = 3,// 初赛未进前三
-//            LeagueResultTypeJoinEndFirst = 4,// 前三名争第一时第一个名
-//            LeagueResultTypeJoinEndLose = 5,// 前三名争第一时未获得第一
-    [v dtUpdateUI];
-    [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:NO onCloseCallback:^{
-
-    }];
 }
 
 - (void)customBtnEvent:(UIButton *)btn {
