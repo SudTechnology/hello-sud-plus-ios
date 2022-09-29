@@ -10,8 +10,15 @@ localizedFile_m="${PWD}/HelloSud-iOS/Service/Common/LocalizedService.m"
 sed "s/^\"\([a-zA-Z|(_)]*\).*/+ (NSString *)\1 { return @\"\1\".localized; }/g" "${localizableFile}" > "${localizedFile_m}.tmp"
 # 先将localized作为计算属性输出到目标文件
 echo "#import \"LocalizedService.h\"\n\n @implementation NSString(Localized)\n- (NSString *)localized {\n    NSBundle *bundle = NSBundle.currentLanguageBundle;
+    NSString *result = nil;
     if (bundle) {
-        return [bundle localizedStringForKey:self value:self table:nil];
+        result = [bundle localizedStringForKey:self value:self table:nil];
+        if (![self isEqualToString:result]) {
+            return result;
+        }
+        if (NSBundle.defaultLanguageBundle) {
+            return [NSBundle.defaultLanguageBundle localizedStringForKey:self value:self table:nil];
+        }
     }
     return NSLocalizedString(self, comment: self); \n}" > "${localizedFile_m}"
 
