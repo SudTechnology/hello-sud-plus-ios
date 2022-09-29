@@ -138,8 +138,12 @@
     } else {
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
     }
-    if (m.homeGamePic) {
-        [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.homeGamePic]];
+    NSString *icon = m.homeGamePic;
+    if (self.sceneId == SceneTypeLeague && m.leagueScenePic.length > 0) {
+        icon = m.leagueScenePic;
+    }
+    if (icon) {
+        [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:icon]];
     }
     if (self.sceneId == SceneTypeDisco) {
         self.joinBtn.hidden = NO;
