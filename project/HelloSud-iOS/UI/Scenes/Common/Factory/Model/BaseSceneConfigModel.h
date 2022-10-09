@@ -14,6 +14,8 @@
 @property(nonatomic, strong)EnterRoomModel *enterRoomModel;
 /// 房间角色 1 为房主
 @property (nonatomic, assign)NSInteger roleType;
+/// 1 语音 2 视频
+@property (nonatomic, assign)NSInteger subSceneType;
 @end
 
 /// 场景配置model

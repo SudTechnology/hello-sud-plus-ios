@@ -22,6 +22,7 @@
 #import "HomeHeaderFullReusableView.h"
 #import "DiscoGameInteractivePopView.h"
 #import "../../Scenes/League/VC/LeagueEnterViewController.h"
+#import "HomeHeaderOneOneReusableView.h"
 
 @interface HomeViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
@@ -178,7 +179,7 @@
             } else {
 
                 // 是否需要满行
-                BOOL isNeedToFullRow = m.sceneId != SceneTypeDisco && m.sceneId != SceneTypeDanmaku && m.sceneId != SceneTypeLeague;
+                BOOL isNeedToFullRow = m.sceneId != SceneTypeDisco && m.sceneId != SceneTypeDanmaku && m.sceneId != SceneTypeLeague && m.sceneId != SceneTypeOneOne;
                 if (isNeedToFullRow) {
                     /// 求余 填满整个屏幕
                     int row = 3;
@@ -263,7 +264,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     HSSceneModel *m = self.headerSceneList[section];
-    if (m.sceneId == SceneTypeGuess) {
+    if (m.sceneId == SceneTypeGuess || m.sceneId == SceneTypeOneOne) {
         return 0;
     }
     NSArray *arr = self.dataList[section];
@@ -294,14 +295,10 @@
 }
 
 
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
-//
-//    DiscoGameInteractivePopView *v = [[DiscoGameInteractivePopView alloc] init];
-//    [DTSheetView show:v onCloseCallback:nil];
-//    return;
+
 
     if (self.headerSceneList[indexPath.section].sceneId == SceneTypeTicket) {
         TicketChooseViewController *vc = TicketChooseViewController.new;
@@ -309,7 +306,7 @@
         vc.sceneId = self.headerSceneList[indexPath.section].sceneId;
         vc.gameName = model.gameName;
         [self.navigationController pushViewController:vc animated:true];
-    }else if (self.headerSceneList[indexPath.section].sceneId == SceneTypeLeague) {
+    } else if (self.headerSceneList[indexPath.section].sceneId == SceneTypeLeague) {
         LeagueEnterViewController *vc = LeagueEnterViewController.new;
         vc.gameId = model.gameId;
         vc.sceneId = self.headerSceneList[indexPath.section].sceneId;
@@ -325,7 +322,7 @@
     }
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     CGFloat itemW = (kScreenWidth - 32) / 3;
     CGFloat itemH = 62;
@@ -335,7 +332,7 @@
     } else if (m.sceneId == SceneTypeDanmaku) {
         itemW = kScreenWidth - 32;
         itemH = 140;
-    }else if (m.sceneId == SceneTypeLeague) {
+    } else if (m.sceneId == SceneTypeLeague) {
         itemW = kScreenWidth - 32;
         itemH = 142;
     }
@@ -354,6 +351,9 @@
         h = baseH + rect.size.height;
     } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeLeague) {
         baseH = 46;
+        h = baseH + rect.size.height;
+    } else if (m.sceneId == SceneTypeOneOne) {
+        baseH = 46 + 142;
         h = baseH + rect.size.height;
     }
     return CGSizeMake(kScreenWidth, h);
@@ -380,6 +380,17 @@
                     [weakSelf.navigationController pushViewController:vc animated:true];
                 }
             };
+        } else if (sceneModel.sceneId == SceneTypeOneOne) {
+            HomeHeaderOneOneReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderOneOneReusableView" forIndexPath:indexPath];
+            view.sceneModel = sceneModel;
+            supplementaryView = view;
+//            view.customBlock = ^(UIButton *sender) {
+//                BaseSceneViewController *vc = nil;
+//                if (sceneModel.sceneId == SceneTypeDisco) {
+//                    vc = [[DiscoRankViewController alloc] init];
+//                    [weakSelf.navigationController pushViewController:vc animated:true];
+//                }
+//            };
         } else {
             HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
             view.sceneModel = self.headerSceneList[indexPath.section];
@@ -429,8 +440,10 @@
         [_collectionView registerClass:[GameItemCollectionViewCell class] forCellWithReuseIdentifier:@"GameItemCollectionViewCell"];
         [_collectionView registerClass:[GameItemFullCollectionViewCell class] forCellWithReuseIdentifier:@"GameItemFullCollectionViewCell"];
 
+
         [_collectionView registerClass:[HomeHeaderReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView"];
         [_collectionView registerClass:[HomeHeaderFullReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderFullReusableView"];
+        [_collectionView registerClass:[HomeHeaderOneOneReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderOneOneReusableView"];
         [_collectionView registerClass:[HomeFooterReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HomeFooterReusableView"];
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         v.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
