@@ -84,16 +84,13 @@
     self.titleLabel.text = m.nickname;
     if (m.isWin) {
         self.rankImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guess_result_rank_%@", @(m.rank)]];
-    } else {
-        self.rankImageView.image = nil;
-    }
-    if (m.isWin) {
         self.loseLabel.hidden = YES;
         [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.headImageView).offset(0);
         }];
 
     } else {
+        self.rankImageView.image = nil;
         self.loseLabel.hidden = NO;
         [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.headImageView).offset(-7);
