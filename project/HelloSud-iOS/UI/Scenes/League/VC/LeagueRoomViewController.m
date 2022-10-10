@@ -12,6 +12,7 @@
 /// 局索引
 @property(nonatomic, assign) NSInteger roundIndex;
 @property(nonatomic, strong) NSArray <LeaguePlayerModel *> *nextRoundPlayerList;
+@property(nonatomic, strong) NSMutableDictionary <NSString*, LeaguePlayerModel *> *nexRoundPlayerMap;
 @end
 
 @implementation LeagueRoomViewController {
@@ -45,7 +46,6 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    [self showFingerAnimate];
 }
 
 - (void)dtConfigEvents {
@@ -54,8 +54,11 @@
 
 }
 
-- (void)showFingerAnimate {
-
+- (NSMutableDictionary *)nexRoundPlayerMap {
+    if (!_nexRoundPlayerMap) {
+        _nexRoundPlayerMap = NSMutableDictionary.new;
+    }
+    return _nexRoundPlayerMap;
 }
 
 /// 游戏玩家加入游戏状态变化
@@ -78,11 +81,9 @@
             [weakSelf exitRoomFromSuspend:NO finished:nil];
             return;
         }
-
         // 下一轮游戏准备
         [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
-        [weakSelf kikoutRobot:playerList];
-        [weakSelf addNextRoundRobot];
+        [weakSelf kikoutLosePlayer:playerList];
     };
     v.closeBlock = ^{
         [weakSelf exitRoomFromSuspend:NO finished:nil];
@@ -90,10 +91,12 @@
     v.dataList = playerList;
     BOOL isPlayer = false;
     NSMutableArray *nextRoundPlayerList = NSMutableArray.new;
+    [self.nexRoundPlayerMap removeAllObjects];
     for (int i = 0; i < playerList.count; ++i) {
         LeaguePlayerModel *m = playerList[i];
-        if (self.roundIndex == 1 && m.rank < 3 && nextRoundPlayerList.count < 3) {
+        if (self.roundIndex == 1 && m.rank <= 3 && nextRoundPlayerList.count < 3) {
             [nextRoundPlayerList addObject:m];
+            self.nexRoundPlayerMap[[NSString stringWithFormat:@"%@", @(m.userId)]] = m;
         }
         self.nextRoundPlayerList = nextRoundPlayerList;
         if (m.userId == AppService.shared.loginUserID.longLongValue) {
@@ -280,15 +283,19 @@
     [self addRobotToGame:robotList];
 }
 
-/// 踢出机器人
+/// 踢出未获得名次的玩家
 /// @param playerList
-- (void)kikoutRobot:(NSArray<LeaguePlayerModel *> *)playerList {
+- (void)kikoutLosePlayer:(NSArray<LeaguePlayerModel *> *)playerList {
     for (LeaguePlayerModel *m in playerList) {
-        if (m.isRobot) {
-            [self.sudFSTAPPDecorator notifyAppComonKickStateWithUserId:[NSString stringWithFormat:@"%@", @(m.userId)]];
+        NSString *strUserId = [NSString stringWithFormat:@"%@", @(m.userId)];
+        if (self.nexRoundPlayerMap[strUserId]) {
+            continue;
         }
+        // 踢出未在第二轮用户
+        [self.sudFSTAPPDecorator notifyAppComonKickStateWithUserId:strUserId];
     }
 }
+
 
 - (BOOL)isCanJoinGame {
     if (self.roundIndex == 0) {
@@ -312,6 +319,8 @@
     m.ui.lobby_players.hide = NO;
     m.ui.start_btn.custom = YES;
     m.ui.join_btn.custom = YES;
+    m.ui.game_opening.hide = YES;
+    m.ui.game_mvp.hide = YES;
     NSString *jsonStr = [m toJSON];
     return jsonStr;
 }
@@ -331,11 +340,14 @@
     WeakSelf
     weakSelf.roundIndex++;
     if (self.roundIndex == 1) {
+        // 第一轮
         [self checkAddOtherRobot:^{
+            // 开始游戏
             NSDictionary *dic = @{};
             [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
         }];
     } else {
+        // 第二轮
         BOOL hasUserExitGame = NO;
         for (LeaguePlayerModel *m in self.nextRoundPlayerList) {
             BOOL isPlayerInGame = [self.sudFSMMGDecorator isPlayerInGame:[NSString stringWithFormat:@"%@", @(m.userId)]];
@@ -348,7 +360,11 @@
             [DTAlertView showTextAlert:@"当前有用户退出比赛，\n游戏不能继续进行" sureText:@"我知道了" cancelText:nil onSureCallback:^{
                 [DTAlertView close];
             } onCloseCallback:nil];
+            return;
         }
+        // 开始游戏
+        NSDictionary *dic = @{};
+        [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
     }
 }
 
