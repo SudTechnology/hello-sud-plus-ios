@@ -94,7 +94,7 @@
     [self.nexRoundPlayerMap removeAllObjects];
     for (int i = 0; i < playerList.count; ++i) {
         LeaguePlayerModel *m = playerList[i];
-        if (self.roundIndex == 1 && m.rank < 3 && nextRoundPlayerList.count < 3) {
+        if (self.roundIndex == 1 && m.rank <= 3 && nextRoundPlayerList.count < 3) {
             [nextRoundPlayerList addObject:m];
             self.nexRoundPlayerMap[[NSString stringWithFormat:@"%@", @(m.userId)]] = m;
         }
