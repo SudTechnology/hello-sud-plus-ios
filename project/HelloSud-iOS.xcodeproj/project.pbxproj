@@ -410,6 +410,7 @@
 		BC210B0390E117B09344D025 /* HsNFTPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100D34F80535C6D8EBA57 /* HsNFTPreferences.m */; };
 		BC210B212D9241C9CE03A083 /* WalletAddressSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF1888895F521C40AFD /* WalletAddressSwitchCell.m */; };
 		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
+		BC210C8C6C47BDEF90D8831A /* OneOneAudioContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21066E637F5FE0337A8630 /* OneOneAudioContentView.m */; };
 		BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
 		BC210CF89C901006931DE6F5 /* WalletAddressSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E8769E66D83BC365AB8 /* WalletAddressSwitchCellModel.m */; };
@@ -1114,6 +1115,7 @@
 		BC210225026B181652D6B986 /* MyCNWalletSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchPopView.h; sourceTree = "<group>"; };
 		BC21026DC2310D6C27C12757 /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
 		BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessCategoryView.m; sourceTree = "<group>"; };
+		BC210300E5A041242AABD164 /* OneOneAudioContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneAudioContentView.h; sourceTree = "<group>"; };
 		BC21030C423A46DF8E96F932 /* DiscoAppointmentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoAppointmentPopView.h; sourceTree = "<group>"; };
 		BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderColCell.m; sourceTree = "<group>"; };
 		BC21032C5553ABB17B21F173 /* QSGameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameListViewController.m; sourceTree = "<group>"; };
@@ -1144,6 +1146,7 @@
 		BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSelectRoomView.m; sourceTree = "<group>"; };
 		BC2106173D42C6A345E85E01 /* HsAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsAppPreferences.h; sourceTree = "<group>"; };
 		BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendRoomView.m; sourceTree = "<group>"; };
+		BC21066E637F5FE0337A8630 /* OneOneAudioContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneAudioContentView.m; sourceTree = "<group>"; };
 		BC210692B27543A09E9B3CB6 /* MyNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTListViewController.h; sourceTree = "<group>"; };
 		BC21069C06A918E5FCF30F8A /* QSGameItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameItemModel.h; sourceTree = "<group>"; };
 		BC2106E92DE53A1CA3532640 /* LeagueResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueResultTableViewCell.h; sourceTree = "<group>"; };
@@ -1782,6 +1785,7 @@
 			children = (
 				4455AD7F27EAC658001516EE /* OneOneViewController.m */,
 				4455AD8027EAC658001516EE /* OneOneViewController.h */,
+				BC2100F03404B991A9FA2553 /* View */,
 			);
 			path = OneOne;
 			sourceTree = "<group>";
@@ -2804,6 +2808,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		BC2100F03404B991A9FA2553 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BC21066E637F5FE0337A8630 /* OneOneAudioContentView.m */,
+				BC210300E5A041242AABD164 /* OneOneAudioContentView.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BC210729E0CDC5D568465E09 /* League */ = {
 			isa = PBXGroup;
 			children = (
@@ -3524,6 +3537,7 @@
 				BC2108DF9DCC723A931AC7FA /* LeagueModel.m in Sources */,
 				BC210A4DEF905819E9635D98 /* LeagueRoomService.m in Sources */,
 				BC210E6B81440DCF104F018F /* HomeHeaderOneOneReusableView.m in Sources */,
+				BC210C8C6C47BDEF90D8831A /* OneOneAudioContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

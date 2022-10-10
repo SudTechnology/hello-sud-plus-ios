@@ -477,14 +477,15 @@
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     v.exitCallback = ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf exitRoomFromSuspend:NO finished:nil];
+        });
         [DTSheetView close];
-        [DTAlertView showTextAlert:NSString.dt_room_sure_leave_cur_room sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
-            [DTSheetView close];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf exitRoomFromSuspend:NO finished:nil];
-            });
-        }          onCloseCallback:^{
-        }];
+//        [DTAlertView showTextAlert:NSString.dt_room_sure_leave_cur_room sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
+//            [DTSheetView close];
+//
+//        }          onCloseCallback:^{
+//        }];
     };
     [DTSheetView showTop:v cornerRadius:0 onCloseCallback:^{
 

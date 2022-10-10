@@ -52,7 +52,7 @@
     HomeGuessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeGuessCell" forIndexPath:indexPath];
     WeakSelf;
     cell.onEnterRoomBlock = ^(MoreGuessGameModel *m) {
-        [AudioRoomService reqMatchRoom:m.gameId sceneType:weakSelf.sceneModel.sceneId gameLevel:-1];
+        [AudioRoomService reqMatchRoom:m.gameId sceneType:weakSelf.sceneModel.sceneId gameLevel:-1 subSceneType:0];
     };
     [cell dt_cornerRadius:8];
     cell.model = self.gameList[indexPath.row];

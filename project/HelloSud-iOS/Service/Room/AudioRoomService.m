@@ -37,7 +37,7 @@
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/create-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         isReqCreate = NO;
         EnterRoomModel *model = (EnterRoomModel *)resp;
-        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:YES success:nil fail:nil];
+        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:YES subSceneType:0 success:nil fail:nil];
     } failure:^(NSError *error) {
         isReqCreate = NO;
     }];
@@ -45,22 +45,22 @@
 
 /// 请求进入房间
 /// @param roomId 房间ID
-+ (void)reqEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
++ (void)reqEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate subSceneType:(NSInteger)subSceneType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
 
     // 如果存在挂起房间，则退出当前挂起房间
     if ([SuspendRoomView isShowSuspend]) {
         [SuspendRoomView exitRoom:^{
-            [self handleEnterRoom:roomId isFromCreate:isFromCreate success:success fail:fail];
+            [self handleEnterRoom:roomId isFromCreate:isFromCreate subSceneType:subSceneType success:success fail:fail];
         }];
         return;
     }
-    [self handleEnterRoom:roomId isFromCreate:isFromCreate success:success fail:fail];
+    [self handleEnterRoom:roomId isFromCreate:isFromCreate subSceneType:subSceneType success:success fail:fail];
 }
 
 /// 处理进入房间
 /// @param roomId 房间ID
-+ (void)handleEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
++ (void)handleEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate subSceneType:(NSInteger)subSceneType success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
 
     static BOOL isReqEnter = false;
@@ -98,6 +98,7 @@
         config.roomName = model.roomName;
         config.roleType = model.roleType;
         config.enterRoomModel = model;
+        config.subSceneType = subSceneType;
         BaseSceneViewController *vc = [SceneFactory createSceneVC:model.sceneType configModel:config];
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
         if (success) {
@@ -114,7 +115,8 @@
 /// 匹配开播的游戏，并进入游戏房间
 /// @param gameId 游戏ID
 /// @param gameLevel 游戏等级（适配当前门票场景）= -1
-+ (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType gameLevel:(NSInteger)gameLevel {
+/// @param subSceneType 子场景类型 1 音频 2 视频 0未知
++ (void)reqMatchRoom:(long)gameId sceneType:(long)sceneType gameLevel:(NSInteger)gameLevel subSceneType:(NSInteger)subSceneType {
     WeakSelf
 
     static BOOL isMatchingRoom = false;
@@ -133,14 +135,14 @@
         dicParam[@"gameLevel"] = @(gameLevel);
     }
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/match-room/v1") param:dicParam respClass:MatchRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
-        MatchRoomModel *model = (MatchRoomModel *)resp;
-        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:NO success:^{
+        MatchRoomModel *model = (MatchRoomModel *) resp;
+        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:NO subSceneType:subSceneType success:^{
             isMatchingRoom = NO;
         }                         fail:^(NSError *error) {
             [ToastUtil show:[error debugDescription]];
             isMatchingRoom = NO;
         }];
-    } failure:^(NSError *error) {
+    }                         failure:^(NSError *error) {
         isMatchingRoom = NO;
     }];
 }

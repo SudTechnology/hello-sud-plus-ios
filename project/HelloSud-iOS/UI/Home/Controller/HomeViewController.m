@@ -318,7 +318,7 @@
             [ToastUtil show:NSString.dt_home_coming_soon];
             return;
         }
-        [AudioRoomService reqMatchRoom:model.gameId sceneType:self.headerSceneList[indexPath.section].sceneId gameLevel:-1];
+        [AudioRoomService reqMatchRoom:model.gameId sceneType:self.headerSceneList[indexPath.section].sceneId gameLevel:-1 subSceneType:0];
     }
 }
 

@@ -137,7 +137,7 @@
 
 - (void)onClickPlayBtn:(id)sender {
     MoreGuessGameModel *m = (MoreGuessGameModel *)self.model;
-    [AudioRoomService reqMatchRoom:m.gameId sceneType:self.sceneId gameLevel:-1];
+    [AudioRoomService reqMatchRoom:m.gameId sceneType:self.sceneId gameLevel:-1 subSceneType:0];
 }
 
 - (void)beginCountdown {

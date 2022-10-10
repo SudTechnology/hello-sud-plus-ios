@@ -239,7 +239,7 @@
     [self.searchTextField resignFirstResponder];
     NSString *searchText = self.searchTextField.text;
     WeakSelf
-    [AudioRoomService reqEnterRoom:searchText.longLongValue isFromCreate:NO success:^{
+    [AudioRoomService reqEnterRoom:searchText.longLongValue isFromCreate:NO subSceneType:0 success:^{
         weakSelf.searchTextField.text = nil;
     }                         fail:^(NSError *error) {
         weakSelf.searchTextField.text = @"";

@@ -99,7 +99,7 @@
 
 - (void)clickItemsEvent:(UITapGestureRecognizer *)tap {
     NSInteger tag = tap.view.tag - 1000 + 1;
-    [AudioRoomService reqMatchRoom:self.gameId sceneType:self.sceneId gameLevel:tag];
+    [AudioRoomService reqMatchRoom:self.gameId sceneType:self.sceneId gameLevel:tag subSceneType:0];
 }
 
 - (void)backEvent {

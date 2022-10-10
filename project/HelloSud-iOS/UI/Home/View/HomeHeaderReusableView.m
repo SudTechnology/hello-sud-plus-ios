@@ -102,7 +102,7 @@
 
 - (void)onTapPreview:(id)tap {
     if (self.sceneModel.sceneId == SceneTypeDanmaku && self.sceneModel.firstGame) {
-        [AudioRoomService reqMatchRoom:self.sceneModel.firstGame.gameId sceneType:self.sceneModel.sceneId gameLevel:-1];
+        [AudioRoomService reqMatchRoom:self.sceneModel.firstGame.gameId sceneType:self.sceneModel.sceneId gameLevel:-1 subSceneType:0];
     }
 }
 

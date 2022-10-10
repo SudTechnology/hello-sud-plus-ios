@@ -119,7 +119,7 @@
     WeakSelf
     self.joinBtn.clickBlock = ^{
         HSGameItem *m = (HSGameItem *) weakSelf.model;
-        [AudioRoomService reqMatchRoom:m.gameId sceneType:weakSelf.sceneId gameLevel:-1];
+        [AudioRoomService reqMatchRoom:m.gameId sceneType:weakSelf.sceneId gameLevel:-1 subSceneType:0];
     };
     self.createBtn.clickBlock = ^{
         HSGameItem *m = (HSGameItem *) weakSelf.model;
