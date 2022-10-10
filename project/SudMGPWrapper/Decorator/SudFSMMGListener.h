@@ -170,6 +170,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏通知app层当前游戏剩余时间  MG_COMMON_GAME_COUNTDOWN_TIME
 - (void)onPlayerMGCommonGameCountdownTime:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGCommonGameCountdownTimeModel *)model;
 
+/// 游戏加载进度(loadMG)
+/// @param stage start=1,loading=2,end=3
+/// @param retCode 错误码，0成功
+/// @param progress [0, 100]
+/// 最低版本：v1.1.30.xx
+-(void) onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress;
 @end
 
 NS_ASSUME_NONNULL_END
