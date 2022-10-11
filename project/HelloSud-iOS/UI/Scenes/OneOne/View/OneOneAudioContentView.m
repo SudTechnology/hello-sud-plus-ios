@@ -19,6 +19,10 @@
 @property(nonatomic, strong) UILabel *leftUserNameLabel;
 @property(nonatomic, strong) UIButton *rightUserHeadBtn;
 @property(nonatomic, strong) UILabel *rightUserNameLabel;
+
+@property(nonatomic, strong) AudioMicroView *leftMicView;
+@property(nonatomic, strong) AudioMicroView *rightMicView;
+
 @property(nonatomic, strong) UIView *addRobotView;
 /// 语音按钮状态类型
 @property(nonatomic, assign) OneOneAudioMicType micStateType;
@@ -46,10 +50,15 @@
     [self addSubview:self.speakerBtn];
     [self addSubview:self.timeLabel];
     [self addSubview:self.micContentView];
-    [self.micContentView addSubview:self.leftUserHeadBtn];
-    [self.micContentView addSubview:self.leftUserNameLabel];
-    [self.micContentView addSubview:self.rightUserHeadBtn];
-    [self.micContentView addSubview:self.rightUserNameLabel];
+    [self.micContentView addSubview:self.leftMicView];
+    [self.micContentView addSubview:self.rightMicView];
+    self.leftMicView.model = kAudioRoomService.currentRoomVC.dicMicModel[@"0"];
+    self.rightMicView.model = kAudioRoomService.currentRoomVC.dicMicModel[@"1"];
+
+//    [self.micContentView addSubview:self.leftUserHeadBtn];
+//    [self.micContentView addSubview:self.leftUserNameLabel];
+//    [self.micContentView addSubview:self.rightUserHeadBtn];
+//    [self.micContentView addSubview:self.rightUserNameLabel];
     [self.micContentView addSubview:self.addRobotView];
 }
 
@@ -92,32 +101,42 @@
         make.trailing.equalTo(@-58);
         make.top.equalTo(self.suspendBtn.mas_bottom).offset(56);
     }];
-
-    [self.leftUserHeadBtn dt_cornerRadius:40];
-    [self.leftUserHeadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.leftMicView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.equalTo(@0);
-        make.width.height.equalTo(@80);
+        make.width.equalTo(@80);
+        make.width.equalTo(@110);
     }];
-    [self.leftUserNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.leftUserHeadBtn.mas_bottom).offset(6);
-        make.leading.trailing.equalTo(self.leftUserHeadBtn);
-        make.height.greaterThanOrEqualTo(@0);
-    }];
-    [self.rightUserHeadBtn dt_cornerRadius:40];
-    [self.rightUserHeadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.rightMicView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.top.equalTo(@0);
-        make.width.height.equalTo(@80);
+        make.width.equalTo(@80);
+        make.width.equalTo(@110);
     }];
-    [self.rightUserNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.rightUserHeadBtn.mas_bottom).offset(6);
-        make.leading.trailing.equalTo(self.rightUserHeadBtn);
-        make.height.greaterThanOrEqualTo(@0);
-    }];
+//
+//    [self.leftUserHeadBtn dt_cornerRadius:40];
+//    [self.leftUserHeadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.leading.top.equalTo(@0);
+//        make.width.height.equalTo(@80);
+//    }];
+//    [self.leftUserNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.leftUserHeadBtn.mas_bottom).offset(6);
+//        make.leading.trailing.equalTo(self.leftUserHeadBtn);
+//        make.height.greaterThanOrEqualTo(@0);
+//    }];
+//    [self.rightUserHeadBtn dt_cornerRadius:40];
+//    [self.rightUserHeadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.trailing.top.equalTo(@0);
+//        make.width.height.equalTo(@80);
+//    }];
+//    [self.rightUserNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.rightUserHeadBtn.mas_bottom).offset(6);
+//        make.leading.trailing.equalTo(self.rightUserHeadBtn);
+//        make.height.greaterThanOrEqualTo(@0);
+//    }];
     [self.addRobotView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.rightUserHeadBtn.mas_bottom).offset(6);
+        make.top.equalTo(self.rightMicView.mas_bottom).offset(6);
         make.width.greaterThanOrEqualTo(@0);
         make.height.equalTo(@32);
-        make.centerX.equalTo(self.rightUserHeadBtn);
+        make.centerX.equalTo(self.rightMicView);
     }];
 }
 
@@ -138,6 +157,7 @@
     [self.micBtn addTarget:self action:@selector(onMicBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.speakerBtn addTarget:self action:@selector(onSpeakerBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.rightUserHeadBtn addTarget:self action:@selector(onRightUserHeadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.leftUserHeadBtn addTarget:self action:@selector(onLeftUserHeadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)onHangupBtnClick:(id)sender {
@@ -159,17 +179,35 @@
 }
 
 - (void)onRightUserHeadBtnClick:(id)sender {
-    CGAffineTransform transScale = CGAffineTransformMakeScale(0.75, 0.75);
-    CGFloat y = self.micContentView.mj_y - self.suspendBtn.mj_y + self.micContentView.mj_h * (1 - 0.75) / 2;
-    CGAffineTransform transMove = CGAffineTransformMakeTranslation(0, -y);
-    CGAffineTransform transGroup = CGAffineTransformConcat(transScale, transMove);
-    self.micContentView.transform = transGroup;
+    [self changeUIState:YES];
+}
+
+- (void)onLeftUserHeadBtnClick:(id)sender {
+    [self changeUIState:NO];
+}
+
+- (void)changeUIState:(BOOL)isGameState {
+    if (isGameState) {
+        // 游戏状态UI
+        [UIView animateWithDuration:0.25 animations:^{
+            CGAffineTransform transScale = CGAffineTransformMakeScale(0.75, 0.75);
+            CGFloat y = self.micContentView.mj_y - self.suspendBtn.mj_y + self.micContentView.mj_h * (1 - 0.75) / 2;
+            CGAffineTransform transMove = CGAffineTransformMakeTranslation(0, -y);
+            CGAffineTransform transGroup = CGAffineTransformConcat(transScale, transMove);
+            self.micContentView.transform = transGroup;
+        }];
+
+    } else {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.micContentView.transform = CGAffineTransformIdentity;
+        }];
+    }
 }
 
 - (void)updateDuration:(NSInteger)duration {
     NSInteger minute = duration / 60;
     NSInteger second = duration - minute * 60;
-    self.timeLabel.text = [NSString stringWithFormat:@"%02d : %02d", minute, second];
+    self.timeLabel.text = [NSString stringWithFormat:@"%02ld : %02ld", minute, second];
 }
 
 - (void)changeMicState:(OneOneAudioMicType)stateType {
@@ -185,7 +223,6 @@
 - (UIView *)micContentView {
     if (!_micContentView) {
         _micContentView = UIView.new;
-        _micContentView.backgroundColor = UIColor.orangeColor;
     }
     return _micContentView;
 }
@@ -307,4 +344,17 @@
     return _rightUserNameLabel;
 }
 
+- (AudioMicroView *)leftMicView {
+    if (!_leftMicView) {
+        _leftMicView = AudioMicroView.new;
+    }
+    return _leftMicView;
+}
+
+- (AudioMicroView *)rightMicView {
+    if (!_rightMicView) {
+        _rightMicView = AudioMicroView.new;
+    }
+    return _rightMicView;
+}
 @end
