@@ -10,6 +10,8 @@
 
 @interface OneOneViewController ()
 @property(nonatomic, strong) OneOneAudioContentView *audioContentView;
+@property(nonatomic, strong) DTTimer *timer;
+@property(nonatomic, assign) NSInteger duration;
 @end
 
 @implementation OneOneViewController
@@ -17,6 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self startPublishStream];
+    [self setAudioRouteToSpeaker:YES];
+    [self.audioContentView changeMicState:OneOneAudioSpeakerTypeOpen];
+    [self.audioContentView changeSpeakerState:OneOneAudioSpeakerTypeOpen];
 }
 
 - (Class)serviceClass {
@@ -41,6 +47,10 @@
     self.naviView.hidden = YES;
     self.operatorView.hidden = YES;
     self.msgBgView.hidden = YES;
+    WeakSelf
+    self.timer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
+        [weakSelf updateDuration];
+    }];
 }
 
 - (void)dtUpdateUI {
@@ -56,11 +66,29 @@
             [weakSelf exitRoomFromSuspend:NO finished:nil];
         }          onCloseCallback:nil];
     };
+    self.audioContentView.micStateChangedBlock = ^(OneOneAudioMicType stateType) {
+        if (stateType == OneOneAudioSpeakerTypeOpen) {
+            [weakSelf startPublishStream];
+        } else {
+            [weakSelf stopPublish];
+        }
+    };
+    self.audioContentView.speakerStateChangedBlock = ^(OneOneAudioSpeakerType stateType) {
+        [weakSelf setAudioRouteToSpeaker:stateType == OneOneAudioSpeakerTypeOpen];
+    };
+    self.audioContentView.selecteGameBlock = ^{
+        [weakSelf showSelectGameView];
+    };
 }
 
 /// 是否显示添加通用机器人按钮
 - (BOOL)isShowAddRobotBtn {
     return NO;
+}
+
+- (void)updateDuration {
+    self.duration++;
+    [self.audioContentView updateDuration:self.duration];
 }
 
 - (OneOneAudioContentView *)audioContentView {

@@ -20,9 +20,22 @@
 @property(nonatomic, strong) UIButton *rightUserHeadBtn;
 @property(nonatomic, strong) UILabel *rightUserNameLabel;
 @property(nonatomic, strong) UIView *addRobotView;
+/// 语音按钮状态类型
+@property(nonatomic, assign) OneOneAudioMicType micStateType;
+/// 外放按钮状态类型
+@property(nonatomic, assign) OneOneAudioSpeakerType speakerStateType;
 @end
 
 @implementation OneOneAudioContentView
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *v = [super hitTest:point withEvent:event];
+    // 穿透
+    if (v == self) {
+        return nil;
+    }
+    return v;
+}
 
 - (void)dtAddViews {
     [super dtAddViews];
@@ -80,6 +93,7 @@
         make.top.equalTo(self.suspendBtn.mas_bottom).offset(56);
     }];
 
+    [self.leftUserHeadBtn dt_cornerRadius:40];
     [self.leftUserHeadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.equalTo(@0);
         make.width.height.equalTo(@80);
@@ -89,6 +103,7 @@
         make.leading.trailing.equalTo(self.leftUserHeadBtn);
         make.height.greaterThanOrEqualTo(@0);
     }];
+    [self.rightUserHeadBtn dt_cornerRadius:40];
     [self.rightUserHeadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.top.equalTo(@0);
         make.width.height.equalTo(@80);
@@ -98,25 +113,79 @@
         make.leading.trailing.equalTo(self.rightUserHeadBtn);
         make.height.greaterThanOrEqualTo(@0);
     }];
+    [self.addRobotView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.rightUserHeadBtn.mas_bottom).offset(6);
+        make.width.greaterThanOrEqualTo(@0);
+        make.height.equalTo(@32);
+        make.centerX.equalTo(self.rightUserHeadBtn);
+    }];
 }
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-    self.timeLabel.text = @"03:38";
+    self.timeLabel.text = @"00 : 00";
+    NSString *icon = AppService.shared.login.loginUserInfo.icon;
+    if (icon) {
+        [self.leftUserHeadBtn sd_setImageWithURL:[[NSURL alloc] initWithString:icon] forState:UIControlStateNormal];
+    }
+    self.leftUserNameLabel.text = [NSString stringWithFormat:@"%@\n(我)", AppService.shared.login.loginUserInfo.name];
 }
 
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     [self.hangupBtn addTarget:self action:@selector(onHangupBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.gameBtn addTarget:self action:@selector(onGameBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.micBtn addTarget:self action:@selector(onMicBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.speakerBtn addTarget:self action:@selector(onSpeakerBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rightUserHeadBtn addTarget:self action:@selector(onRightUserHeadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)onHangupBtnClick:(id)sender {
     if (self.hangupBlock) self.hangupBlock();
 }
 
+- (void)onGameBtnClick:(id)sender {
+    if (self.selecteGameBlock) self.selecteGameBlock();
+}
+
+- (void)onMicBtnClick:(id)sender {
+    self.micBtn.selected = !self.micBtn.selected;
+    if (self.micStateChangedBlock) self.micStateChangedBlock(self.micBtn.selected ? OneOneAudioMicTypeOpen : OneOneAudioMicTypeClose);
+}
+
+- (void)onSpeakerBtnClick:(id)sender {
+    self.speakerBtn.selected = !self.speakerBtn.selected;
+    if (self.speakerStateChangedBlock) self.speakerStateChangedBlock(self.speakerBtn.selected ? OneOneAudioSpeakerTypeOpen : OneOneAudioSpeakerTypeClose);
+}
+
+- (void)onRightUserHeadBtnClick:(id)sender {
+    CGAffineTransform transScale = CGAffineTransformMakeScale(0.75, 0.75);
+    CGFloat y = self.micContentView.mj_y - self.suspendBtn.mj_y + self.micContentView.mj_h * (1 - 0.75) / 2;
+    CGAffineTransform transMove = CGAffineTransformMakeTranslation(0, -y);
+    CGAffineTransform transGroup = CGAffineTransformConcat(transScale, transMove);
+    self.micContentView.transform = transGroup;
+}
+
+- (void)updateDuration:(NSInteger)duration {
+    NSInteger minute = duration / 60;
+    NSInteger second = duration - minute * 60;
+    self.timeLabel.text = [NSString stringWithFormat:@"%02d : %02d", minute, second];
+}
+
+- (void)changeMicState:(OneOneAudioMicType)stateType {
+    self.micStateType = stateType;
+    self.micBtn.selected = stateType == OneOneAudioMicTypeOpen;
+}
+
+- (void)changeSpeakerState:(OneOneAudioSpeakerType)stateType {
+    self.speakerStateType = stateType;
+    self.speakerBtn.selected = stateType == OneOneAudioMicTypeOpen;
+}
+
 - (UIView *)micContentView {
     if (!_micContentView) {
         _micContentView = UIView.new;
+        _micContentView.backgroundColor = UIColor.orangeColor;
     }
     return _micContentView;
 }
@@ -140,7 +209,8 @@
 - (UIButton *)micBtn {
     if (!_micBtn) {
         _micBtn = UIButton.new;
-        [_micBtn setImage:[UIImage imageNamed:@"oneone_mic_open"] forState:UIControlStateNormal];
+        [_micBtn setImage:[UIImage imageNamed:@"oneone_mic_close"] forState:UIControlStateNormal];
+        [_micBtn setImage:[UIImage imageNamed:@"oneone_mic_open"] forState:UIControlStateSelected];
     }
     return _micBtn;
 }
@@ -156,7 +226,8 @@
 - (UIButton *)speakerBtn {
     if (!_speakerBtn) {
         _speakerBtn = UIButton.new;
-        [_speakerBtn setImage:[UIImage imageNamed:@"oneone_speaker_open"] forState:UIControlStateNormal];
+        [_speakerBtn setImage:[UIImage imageNamed:@"oneone_speaker_close"] forState:UIControlStateNormal];
+        [_speakerBtn setImage:[UIImage imageNamed:@"oneone_speaker_open"] forState:UIControlStateSelected];
     }
     return _speakerBtn;
 }
@@ -196,16 +267,17 @@
         UILabel *titleLabel = UILabel.new;
         titleLabel.font = UIFONT_MEDIUM(14);
         titleLabel.textColor = HEX_COLOR(@"#ffffff");
+        titleLabel.text = @"添加机器人";
         [_addRobotView addSubview:iconImageView];
         [_addRobotView addSubview:titleLabel];
         [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.leading.equalTo(@6);
-           make.width.height.equalTo(@16);
-           make.centerY.equalTo(_addRobotView);
+            make.leading.equalTo(@6);
+            make.width.height.equalTo(@24);
+            make.centerY.equalTo(_addRobotView);
         }];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(iconImageView.mas_trailing).offset(8);
-            make.width.height.equalTo(@16);
+            make.width.height.greaterThanOrEqualTo(@0);
             make.centerY.equalTo(_addRobotView);
             make.trailing.equalTo(@-8);
         }];

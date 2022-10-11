@@ -86,6 +86,11 @@
     [self logoutGame];
 }
 
+/// 切换扬声器作为音频通道
+- (void)setAudioRouteToSpeaker:(BOOL) enabled {
+    [AudioEngineFactory.shared.audioEngine setAudioRouteToSpeaker:enabled];
+}
+
 #pragma mark =======音频采集=======
 /// 开始音频采集
 - (void)startCaptureAudioToASR {

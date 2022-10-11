@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 退出房间 rtc相关逻辑
 - (void)logoutRoom;
 
+/// 切换扬声器作为音频通道
+- (void)setAudioRouteToSpeaker:(BOOL) enabled;
+
 #pragma mark =======音频采集=======
 /// 开始音频采集
 - (void)startCaptureAudioToASR;
