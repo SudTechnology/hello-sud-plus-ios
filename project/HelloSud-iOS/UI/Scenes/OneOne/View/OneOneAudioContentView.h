@@ -21,9 +21,13 @@ typedef NS_ENUM(NSInteger, OneOneAudioSpeakerType) {
 @interface OneOneAudioContentView : BaseView
 @property (nonatomic, copy)void(^hangupBlock)(void);
 @property (nonatomic, copy)void(^selecteGameBlock)(void);
+@property (nonatomic, copy)void(^addRobotBlock)(void);
 @property (nonatomic, copy)void(^micStateChangedBlock)(OneOneAudioMicType stateType);
 @property (nonatomic, copy)void(^speakerStateChangedBlock)(OneOneAudioSpeakerType stateType);
 - (void)updateDuration:(NSInteger)duration;
 - (void)changeMicState:(OneOneAudioMicType)stateType;
 - (void)changeSpeakerState:(OneOneAudioSpeakerType)stateType;
+/// 切换UI状态
+/// @param isGameState 是否处于游戏中
+- (void)changeUIState:(BOOL)isGameState;
 @end

@@ -223,6 +223,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// 检测是否有机器人在麦位上
 - (BOOL)hasRobotInMic;
 
+/// 添加机器人到游戏
+/// @param robotList
+- (void)addRobotToGame:(NSArray <RobotInfoModel *> *)robotList;
+
+- (void)joinCommonRobotToMic:(RobotInfoModel *)robotModel showNoMic:(BOOL)showNoMic;
+
+/// 查找一个没有在麦位的机器人
+/// @param completed
+- (void)findOneNotInMicRobot:(void (^)(RobotInfoModel *robotInfoModel))completed;
+/// 收到用户进入房间通知
+/// @param msgModel
+- (void)onUserEnterRoom:(AudioMsgSystemModel *)msgModel;
 #pragma mark - SudFSMMGListener
 
 /// 游戏配置
@@ -250,9 +262,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 自己成为了队长事件处理
 - (void)onHandleIsGameCaptain;
 
-/// 添加机器人到游戏
-/// @param robotList
-- (void)addRobotToGame:(NSArray <RobotInfoModel *>*)robotList;
+
 @end
 
 NS_ASSUME_NONNULL_END

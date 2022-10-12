@@ -382,9 +382,11 @@
 		BC21032F94AB142E1BAA2114 /* PKRoomListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109B31F63F31616E3D68E /* PKRoomListCell.m */; };
 		BC210379CA8856A0C91448E4 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098C63F873C785C0F04B /* MyCell.m */; };
 		BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */; };
+		BC2103C30828E712C9917850 /* RoomCmdOneOneInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105D34CAD0ADE0FE4DB67 /* RoomCmdOneOneInfoModel.m */; };
 		BC2104A997878EE07744E080 /* PKRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */; };
 		BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210337708736FFF222750A /* BaseSceneService.m */; };
 		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
+		BC21057250FA99C46ED6675F /* OneOneAudioMicroView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F8E6A2277C3F0555A9B /* OneOneAudioMicroView.m */; };
 		BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */; };
 		BC2106A53F201A9BF1A9AFCC /* LeagueResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2107EF9AD65D2563C73468 /* LeagueResultTableViewCell.m */; };
 		BC2106C085BCFA772D1B9F96 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21001E47A02C2A2F8EE39B /* AboutViewController.m */; };
@@ -1100,6 +1102,7 @@
 		7A720CB3011AA758F160BFED /* Pods-QuickStart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickStart.debug.xcconfig"; path = "Target Support Files/Pods-QuickStart/Pods-QuickStart.debug.xcconfig"; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC21001E47A02C2A2F8EE39B /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		BC210022D455CF71A00205FB /* OneOneAudioMicroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneAudioMicroView.h; sourceTree = "<group>"; };
 		BC2100509C473308E522D1A8 /* LeagueRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueRoomViewController.h; sourceTree = "<group>"; };
 		BC2100A5544CF78174597F1D /* PKGameEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGameEmptyView.h; sourceTree = "<group>"; };
 		BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoGameInteractiveView.m; sourceTree = "<group>"; };
@@ -1144,6 +1147,7 @@
 		BC21056B5487F677973E97B8 /* HomeGuessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeGuessCell.m; sourceTree = "<group>"; };
 		BC21058E78AF348C1092A108 /* LeagueRoomService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueRoomService.h; sourceTree = "<group>"; };
 		BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSelectRoomView.m; sourceTree = "<group>"; };
+		BC2105D34CAD0ADE0FE4DB67 /* RoomCmdOneOneInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdOneOneInfoModel.m; sourceTree = "<group>"; };
 		BC2106173D42C6A345E85E01 /* HsAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsAppPreferences.h; sourceTree = "<group>"; };
 		BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendRoomView.m; sourceTree = "<group>"; };
 		BC21066E637F5FE0337A8630 /* OneOneAudioContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneAudioContentView.m; sourceTree = "<group>"; };
@@ -1209,9 +1213,11 @@
 		BC210E92C4879AFA76A189D4 /* WalletAddressSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchCellModel.h; sourceTree = "<group>"; };
 		BC210EA4458F6CC10378E975 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		BC210EAA09CBCD7E4BFFBFEB /* LeagueRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueRoomViewController.m; sourceTree = "<group>"; };
+		BC210F16FA81FE8312C05A33 /* RoomCmdOneOneInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdOneOneInfoModel.h; sourceTree = "<group>"; };
 		BC210F28C7CAB6BCA3140175 /* HSHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSHttpService.m; sourceTree = "<group>"; };
 		BC210F7B6D59DA493CE16350 /* SceneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentView.h; sourceTree = "<group>"; };
 		BC210F8464A2C7258DC5B08F /* LeagueResultPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueResultPopView.h; sourceTree = "<group>"; };
+		BC210F8E6A2277C3F0555A9B /* OneOneAudioMicroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneAudioMicroView.m; sourceTree = "<group>"; };
 		BC210FAF33BAD4283645718B /* UserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailView.h; sourceTree = "<group>"; };
 		BC210FB8B5AA27D3820666AC /* LeagueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueModel.m; sourceTree = "<group>"; };
 		E51A737628091CBE0097007C /* ZIMManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZIMManager.h; sourceTree = "<group>"; };
@@ -1676,6 +1682,8 @@
 				6C4608102859D26E005C99EF /* RoomCmdGuessBetNotifyModel.m */,
 				BC2108CFC574A8AFEFE2FEDA /* RoomCmdKickoutRoomModel.h */,
 				BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */,
+				BC2105D34CAD0ADE0FE4DB67 /* RoomCmdOneOneInfoModel.m */,
+				BC210F16FA81FE8312C05A33 /* RoomCmdOneOneInfoModel.h */,
 			);
 			path = CMD;
 			sourceTree = "<group>";
@@ -2813,6 +2821,8 @@
 			children = (
 				BC21066E637F5FE0337A8630 /* OneOneAudioContentView.m */,
 				BC210300E5A041242AABD164 /* OneOneAudioContentView.h */,
+				BC210022D455CF71A00205FB /* OneOneAudioMicroView.h */,
+				BC210F8E6A2277C3F0555A9B /* OneOneAudioMicroView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3538,6 +3548,8 @@
 				BC210A4DEF905819E9635D98 /* LeagueRoomService.m in Sources */,
 				BC210E6B81440DCF104F018F /* HomeHeaderOneOneReusableView.m in Sources */,
 				BC210C8C6C47BDEF90D8831A /* OneOneAudioContentView.m in Sources */,
+				BC21057250FA99C46ED6675F /* OneOneAudioMicroView.m in Sources */,
+				BC2103C30828E712C9917850 /* RoomCmdOneOneInfoModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

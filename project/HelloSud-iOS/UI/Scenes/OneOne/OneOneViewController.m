@@ -79,11 +79,62 @@
     self.audioContentView.selecteGameBlock = ^{
         [weakSelf showSelectGameView];
     };
+    self.audioContentView.addRobotBlock = ^{
+        [weakSelf handleAddRobot];
+    };
+}
+
+- (void)handleAddRobot {
+    WeakSelf
+    // 查找一个未在麦位机器人
+    [self findOneNotInMicRobot:^(RobotInfoModel *robotInfoModel) {
+        /// 将机器人上麦
+        [weakSelf joinCommonRobotToMic:robotInfoModel showNoMic:YES];
+    }];
+
 }
 
 /// 是否显示添加通用机器人按钮
 - (BOOL)isShowAddRobotBtn {
     return NO;
+}
+
+/// 是否加载通用机器人
+- (BOOL)isLoadCommonRobotList {
+    return NO;
+}
+
+- (void)handleBusyCommand:(NSInteger)cmd command:(NSString *)command {
+    switch (cmd) {
+        case CMD_ONEONE_INFO_RESP: {
+            RoomCmdOneOneInfoModel *m = [RoomCmdOneOneInfoModel fromJSON:command];
+            DDLogDebug(@"recv duration:%ld", m.duration);
+            self.duration = m.duration;
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+/// 收到用户进入房间通知
+/// @param msgModel
+- (void)onUserEnterRoom:(AudioMsgSystemModel *)msgModel {
+    [super onUserEnterRoom:msgModel];
+
+    // 发送同步时长指令
+    [self sendOneOneDuration];
+}
+
+- (void)sendOneOneDuration {
+    RoomCmdOneOneInfoModel *m = [RoomCmdOneOneInfoModel makeModelWithDuration:self.duration];
+    [self sendMsg:m isAddToShow:NO finished:nil];
+}
+
+/// 游戏已经发生切换
+- (void)roomGameDidChanged:(NSInteger)gameID {
+    [super roomGameDidChanged:gameID];
+    [self.audioContentView changeUIState:gameID > 0];
 }
 
 - (void)updateDuration {

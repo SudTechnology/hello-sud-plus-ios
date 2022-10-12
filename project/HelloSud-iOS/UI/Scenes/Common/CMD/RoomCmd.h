@@ -31,6 +31,7 @@
 #define CMD_ROOM_DISCO_INFO_RESP	  10401	/// 1.4.0	响应蹦迪信息
 #define CMD_ROOM_DISCO_BECOME_DJ	  10402	/// 1.4.0	上DJ台
 #define CMD_ROOM_DISCO_ACTION_PAY     10403 /// 1.4.2 蹦迪动作付费
+#define CMD_ONEONE_INFO_RESP	      10600	/// 1.5.8	响应1v1语音/视频房信息
 
 #pragma mark 后台通知信令
 

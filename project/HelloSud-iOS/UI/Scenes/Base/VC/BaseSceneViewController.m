@@ -1264,6 +1264,12 @@
     return YES;
 }
 
+/// 收到用户进入房间通知
+/// @param msgModel
+- (void)onUserEnterRoom:(AudioMsgSystemModel *)msgModel {
+
+}
+
 /// 设置游戏房间内容
 - (void)setupGameRoomContent {
     if ([self isShowGameMic]) {
@@ -1451,7 +1457,7 @@
 - (void)joinCommonRobotToMic:(RobotInfoModel *)robotModel showNoMic:(BOOL)showNoMic {
 
     // 从麦位号1开始，0留给自己
-    AudioRoomMicModel *micModel = [self getOneEmptyMic:1];
+    AudioRoomMicModel *micModel = [self getOneEmptyMic:self.configModel.enterRoomModel.sceneType == SceneTypeOneOne ? 0 : 1];
     if (micModel == nil) {
         if (showNoMic) {
             [ToastUtil show:NSString.dt_room_there_no_mic];
