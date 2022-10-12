@@ -90,7 +90,7 @@
 }
 
 - (void)onVideoTap:(id)tap {
-    [AudioRoomService reqMatchRoom:0 sceneType:self.sceneModel.sceneId gameLevel:-1 subSceneType:2];
+    [AudioRoomService reqMatchRoom:0 sceneType:SceneTypeOneOneVideo gameLevel:-1 subSceneType:2];
 }
 
 - (void)setSceneModel:(HSSceneModel *)sceneModel {

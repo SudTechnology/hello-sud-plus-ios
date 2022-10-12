@@ -212,6 +212,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param model model description
 - (void)handleGiftEffect:(RoomCmdSendGiftModel *)model;
 
+/// 处理麦位变化
+/// @param model model description
+- (void)handleMicChanged:(RoomCmdUpMicModel *)model;
+
 /// 获取空麦位
 /// @param beginMic 始于指定位置，比如：1，则从1开始找空的
 /// @return

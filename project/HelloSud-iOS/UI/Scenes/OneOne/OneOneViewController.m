@@ -117,6 +117,16 @@
     }
 }
 
+/// 处理麦位变化
+/// @param model model description
+- (void)handleMicChanged:(RoomCmdUpMicModel *)model {
+    [super handleMicChanged:model];
+    BOOL isMe = [AppService.shared.login.loginUserInfo isMeByUserID:model.sendUser.userID];
+    if (model.cmd == CMD_DOWN_MIC_NOTIFY && !isMe) {
+        [ToastUtil show:@"对方已结束通话"];
+    }
+}
+
 /// 收到用户进入房间通知
 /// @param msgModel
 - (void)onUserEnterRoom:(AudioMsgSystemModel *)msgModel {
