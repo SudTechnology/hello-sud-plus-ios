@@ -14,10 +14,11 @@
 @property(nonatomic, strong) UIButton *gameBtn;
 @property(nonatomic, strong) UILabel *timeLabel;
 
-@property(nonatomic, strong) UIView *micContentView;
+@property(nonatomic, strong) UIImageView *bottomContentView;
+@property(nonatomic, strong) UIImageView *bottomUpBgImageView;
+@property(nonatomic, strong) UIImageView *bottomUpIconImageView;
+@property(nonatomic, strong) UIButton *bottomTopBtn;
 
-@property(nonatomic, strong) OneOneAudioMicroView *leftMicView;
-@property(nonatomic, strong) OneOneAudioMicroView *rightMicView;
 @property(nonatomic, strong) UIImageView *bgImageView;
 @property(nonatomic, strong) UIImageView *otherHeaderImageView;
 @property(nonatomic, strong) UILabel *otherNameLabel;
@@ -45,24 +46,25 @@
 
 - (void)dtAddViews {
     [super dtAddViews];
+
     [self addSubview:self.bgImageView];
     [self addSubview:self.otherVideoView];
     [self addSubview:self.otherHeaderImageView];
     [self addSubview:self.otherNameLabel];
     [self addSubview:self.bottomCoverImageView];
     [self addSubview:self.suspendBtn];
+
+    [self addSubview:self.addRobotView];
+    [self addSubview:self.myVideoView];
+    [self addSubview:self.bottomContentView];
     [self addSubview:self.hangupBtn];
     [self addSubview:self.micBtn];
     [self addSubview:self.gameBtn];
     [self addSubview:self.timeLabel];
-    [self addSubview:self.micContentView];
-    [self.micContentView addSubview:self.leftMicView];
-    [self.micContentView addSubview:self.rightMicView];
-    self.micContentView.hidden = YES;
-    self.leftMicView.model = kAudioRoomService.currentRoomVC.dicMicModel[@"0"];
-    self.otherMicModel = kAudioRoomService.currentRoomVC.dicMicModel[@"1"];
-    [self addSubview:self.addRobotView];
-    [self addSubview:self.myVideoView];
+
+    [self.bottomContentView addSubview:self.bottomUpBgImageView];
+    [self.bottomContentView addSubview:self.bottomUpIconImageView];
+    [self.bottomContentView addSubview:self.bottomTopBtn];
 }
 
 - (void)dtLayoutViews {
@@ -115,21 +117,32 @@
         make.bottom.equalTo(self.gameBtn.mas_top).offset(-17);
     }];
 
-    [self.micContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@130);
-        make.leading.equalTo(@58);
-        make.trailing.equalTo(@-58);
-        make.top.equalTo(self.suspendBtn.mas_bottom).offset(56);
+    [self.bottomContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@180);
+        make.leading.equalTo(@0);
+        make.trailing.equalTo(@0);
+        make.bottom.equalTo(@0);
     }];
-    [self.leftMicView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.top.equalTo(@0);
-        make.width.equalTo(@80);
-        make.height.equalTo(@110);
+
+    [self.bottomUpBgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@51);
+        make.leading.equalTo(@0);
+        make.trailing.equalTo(@0);
+        make.top.equalTo(@0);
     }];
-    [self.rightMicView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.top.equalTo(@0);
-        make.width.equalTo(@80);
-        make.height.equalTo(@110);
+
+    [self.bottomUpIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@14);
+        make.width.equalTo(@24);
+        make.top.equalTo(@0);
+        make.centerX.equalTo(self.bottomContentView);
+    }];
+
+    [self.bottomTopBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@20);
+        make.width.equalTo(@100);
+        make.top.equalTo(@0);
+        make.centerX.equalTo(self.bottomContentView);
     }];
 
     [self.addRobotView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -148,6 +161,7 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
+    self.otherMicModel = kAudioRoomService.currentRoomVC.dicMicModel[@"1"];
     self.timeLabel.text = @"00 : 00";
     self.bgImageView.image = [UIImage imageNamed:@"oneone_video_default_bg"];
 
@@ -179,20 +193,9 @@
     [self.hangupBtn addTarget:self action:@selector(onHangupBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.gameBtn addTarget:self action:@selector(onGameBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.micBtn addTarget:self action:@selector(onMicBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.bottomTopBtn addTarget:self action:@selector(onBottomTopBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer *robotViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAddRobotViewTap:)];
     [self.addRobotView addGestureRecognizer:robotViewTap];
-    self.leftMicView.micUserChangedBlock = ^(AudioRoomMicModel *micModel) {
-        [weakSelf updateAddRobotViewPos];
-    };
-    self.rightMicView.micUserChangedBlock = ^(AudioRoomMicModel *micModel) {
-        [weakSelf updateAddRobotViewPos];
-    };
-    self.leftMicView.onTapCallback = ^(AudioRoomMicModel *micModel) {
-        [weakSelf handleMicClick:micModel];
-    };
-    self.rightMicView.onTapCallback = ^(AudioRoomMicModel *micModel) {
-        [weakSelf handleMicClick:micModel];
-    };
 
     [[NSNotificationCenter defaultCenter] addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
         RoomCmdUpMicModel *msgModel = note.userInfo[@"msgModel"];
@@ -264,6 +267,27 @@
     if (self.micStateChangedBlock) self.micStateChangedBlock(self.micBtn.selected ? OneOneVideoMicTypeOpen : OneOneVideoMicTypeClose);
 }
 
+- (void)onBottomTopBtnClick:(id)sender {
+    self.bottomTopBtn.selected = !self.bottomTopBtn.selected;
+    if (self.bottomTopBtn.selected) {
+        // 展开
+        [UIView animateWithDuration:0.25 animations:^{
+            self.bottomContentView.transform = CGAffineTransformIdentity;
+        }];
+        self.bottomUpBgImageView.alpha = 0;
+        self.bottomContentView.image = [UIImage imageNamed:@"oneone_video_game_bottom_open"];
+    } else {
+        // 收起
+        [UIView animateWithDuration:0.25 animations:^{
+            CGAffineTransform trans = CGAffineTransformMakeScale(0, 130);
+            self.bottomContentView.transform = trans;
+            self.bottomUpBgImageView.alpha = 1;
+        }];
+        self.bottomContentView.image = nil;
+    }
+
+}
+
 - (void)onSpeakerBtnClick:(id)sender {
 
 }
@@ -286,26 +310,14 @@
     if (isGameState) {
         // 游戏状态UI
         [UIView animateWithDuration:0.25 animations:^{
-            CGAffineTransform transScale = CGAffineTransformMakeScale(0.75, 0.75);
-            CGFloat y = self.micContentView.mj_y - self.suspendBtn.mj_y + self.micContentView.mj_h * (1 - 0.75) / 2;
-            CGAffineTransform transMove = CGAffineTransformMakeTranslation(0, -y);
-            CGAffineTransform transGroup = CGAffineTransformConcat(transScale, transMove);
-            self.micContentView.transform = transGroup;
+            CGAffineTransform trans = CGAffineTransformMakeScale(0, 130);
+            self.bottomContentView.transform = trans;
+            self.bottomContentView.alpha = 1;
             self.bottomCoverImageView.alpha = 1;
         }];
 
-        [self.gameBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.equalTo(@32);
-            make.bottom.equalTo(@(-kAppSafeBottom - 4));
-            make.trailing.equalTo(@-17);
-        }];
-        [self.micBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.equalTo(self.gameBtn);
-            make.bottom.equalTo(self.gameBtn);
-            make.leading.equalTo(@16);
-        }];
-
         self.timeLabel.hidden = YES;
+        self.bgImageView.hidden = YES;
         self.gameBtn.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
         self.micBtn.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
         [self.gameBtn dt_cornerRadius:16];
@@ -317,7 +329,9 @@
 
     } else {
         self.bottomCoverImageView.alpha = 0;
+        self.bottomContentView.alpha = 0;
         self.timeLabel.hidden = NO;
+        self.bgImageView.hidden = NO;
         self.gameBtn.backgroundColor = nil;
         self.micBtn.backgroundColor = nil;
 
@@ -329,17 +343,7 @@
         [self.micBtn setImage:[UIImage imageNamed:@"oneone_mic_open"] forState:UIControlStateSelected];
 
         [UIView animateWithDuration:0.25 animations:^{
-            self.micContentView.transform = CGAffineTransformIdentity;
-        }];
-        [self.gameBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.equalTo(@64);
-            make.bottom.equalTo(@(-kAppSafeBottom - 16));
-            make.centerX.equalTo(self);
-        }];
-        [self.micBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.equalTo(self.gameBtn);
-            make.bottom.equalTo(self.gameBtn);
-            make.trailing.equalTo(self.gameBtn.mas_leading).offset(-40);
+            self.bottomContentView.transform = CGAffineTransformIdentity;
         }];
 
     }
@@ -357,11 +361,11 @@
 }
 
 
-- (UIView *)micContentView {
-    if (!_micContentView) {
-        _micContentView = UIView.new;
+- (UIButton *)bottomTopBtn {
+    if (!_bottomTopBtn) {
+        _bottomTopBtn = UIButton.new;
     }
-    return _micContentView;
+    return _bottomTopBtn;
 }
 
 - (UIButton *)suspendBtn {
@@ -458,22 +462,6 @@
     return _otherVideoView;
 }
 
-- (OneOneAudioMicroView *)leftMicView {
-    if (!_leftMicView) {
-        _leftMicView = OneOneAudioMicroView.new;
-        _leftMicView.headWidth = 80;
-    }
-    return _leftMicView;
-}
-
-- (OneOneAudioMicroView *)rightMicView {
-    if (!_rightMicView) {
-        _rightMicView = OneOneAudioMicroView.new;
-        _rightMicView.headWidth = 80;
-    }
-    return _rightMicView;
-}
-
 - (UIImageView *)bgImageView {
     if (!_bgImageView) {
         _bgImageView = UIImageView.new;
@@ -487,6 +475,32 @@
         _otherHeaderImageView.image = [UIImage imageNamed:@"oneone_video_head_default"];
     }
     return _otherHeaderImageView;
+}
+
+- (UIImageView *)bottomContentView {
+    if (!_bottomContentView) {
+        _bottomContentView = UIImageView.new;
+        _bottomContentView.backgroundColor = UIColor.redColor;
+        _bottomContentView.alpha = 0;
+    }
+    return _bottomContentView;
+}
+
+- (UIImageView *)bottomUpBgImageView {
+    if (!_bottomUpBgImageView) {
+        _bottomUpBgImageView = UIImageView.new;
+        _bottomUpBgImageView.image = [UIImage imageNamed:@"oneone_video_game_bottom"];
+        _bottomUpBgImageView.alpha = 0;
+    }
+    return _bottomUpBgImageView;
+}
+- (UIImageView *)bottomUpIconImageView {
+    if (!_bottomUpIconImageView) {
+        _bottomUpIconImageView = UIImageView.new;
+        _bottomUpIconImageView.image = [UIImage imageNamed:@"oneone_video_game_up"];
+        _bottomUpIconImageView.alpha = 0;
+    }
+    return _bottomUpIconImageView;
 }
 
 - (UIImageView *)bottomCoverImageView {
