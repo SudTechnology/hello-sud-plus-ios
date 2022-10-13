@@ -81,7 +81,6 @@
 		4455ADCE27EAC658001516EE /* TicketChooseNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455AD7927EAC658001516EE /* TicketChooseNoticeView.m */; };
 		4455ADCF27EAC658001516EE /* DTRollTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455AD7A27EAC658001516EE /* DTRollTableView.m */; };
 		4455ADD027EAC658001516EE /* CrossRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455AD7D27EAC658001516EE /* CrossRoomViewController.m */; };
-		4455ADD127EAC658001516EE /* OneOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455AD7F27EAC658001516EE /* OneOneViewController.m */; };
 		4455ADD227EAC658001516EE /* TalentRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455AD8327EAC658001516EE /* TalentRoomViewController.m */; };
 		4455AE0527EAC6F7001516EE /* BaseSceneViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455ADD527EAC6F7001516EE /* BaseSceneViewController+Game.m */; };
 		4455AE0627EAC6F7001516EE /* BaseSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4455ADD627EAC6F7001516EE /* BaseSceneViewController.m */; };
@@ -378,15 +377,17 @@
 		BC210093C2C7796FBA9F334C /* DiscoGameInteractivePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */; };
 		BC21009E7AF907C72E3B6D59 /* GuessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210335CCB42308C28FCEC0 /* GuessModel.m */; };
 		BC2102046258AC22ACD73CF4 /* UserWearNftDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */; };
+		BC21027500DB5CA8F3D0A284 /* OneOneAudioMicroView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21030C176F447C19F0CF66 /* OneOneAudioMicroView.m */; };
+		BC2103115D0DCFF02A5F73D6 /* OneOneAudioContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21017B1BE66353744F6465 /* OneOneAudioContentView.m */; };
 		BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */; };
 		BC21032F94AB142E1BAA2114 /* PKRoomListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109B31F63F31616E3D68E /* PKRoomListCell.m */; };
 		BC210379CA8856A0C91448E4 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098C63F873C785C0F04B /* MyCell.m */; };
 		BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */; };
 		BC2103C30828E712C9917850 /* RoomCmdOneOneInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105D34CAD0ADE0FE4DB67 /* RoomCmdOneOneInfoModel.m */; };
+		BC21042DA5077E6013F5AB73 /* OneOneAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106F067AE6B462664D2E4 /* OneOneAudioViewController.m */; };
 		BC2104A997878EE07744E080 /* PKRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */; };
 		BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210337708736FFF222750A /* BaseSceneService.m */; };
 		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
-		BC21057250FA99C46ED6675F /* OneOneAudioMicroView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F8E6A2277C3F0555A9B /* OneOneAudioMicroView.m */; };
 		BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */; };
 		BC2106A53F201A9BF1A9AFCC /* LeagueResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2107EF9AD65D2563C73468 /* LeagueResultTableViewCell.m */; };
 		BC2106C085BCFA772D1B9F96 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21001E47A02C2A2F8EE39B /* AboutViewController.m */; };
@@ -404,6 +405,7 @@
 		BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */; };
 		BC21097342CF79274F4049F3 /* HsAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109AEEB6FC34520DCBA33 /* HsAppPreferences.m */; };
 		BC21098A0CA7595992F3EC61 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */; };
+		BC2109B01B28D63B5CE4CB54 /* OneOneVideoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B3F2B453CCAB4B66AA7 /* OneOneVideoContentView.m */; };
 		BC2109B53CC40DBF0DEB10B2 /* RoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105467EA8857361624481 /* RoomMoreView.m */; };
 		BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */; };
 		BC210A4DEF905819E9635D98 /* LeagueRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E613A87ABC193F3B64D /* LeagueRoomService.m */; };
@@ -412,10 +414,10 @@
 		BC210B0390E117B09344D025 /* HsNFTPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100D34F80535C6D8EBA57 /* HsNFTPreferences.m */; };
 		BC210B212D9241C9CE03A083 /* WalletAddressSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF1888895F521C40AFD /* WalletAddressSwitchCell.m */; };
 		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
-		BC210C8C6C47BDEF90D8831A /* OneOneAudioContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21066E637F5FE0337A8630 /* OneOneAudioContentView.m */; };
 		BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
 		BC210CF89C901006931DE6F5 /* WalletAddressSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E8769E66D83BC365AB8 /* WalletAddressSwitchCellModel.m */; };
+		BC210D17FE184EC8FC156AAC /* OneOneVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F9EB539BECCF8E84ED1 /* OneOneVideoViewController.m */; };
 		BC210D1C881B0F781AF55226 /* CNAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */; };
 		BC210D1CD41015D8819D2304 /* LeagueRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210EAA09CBCD7E4BFFBFEB /* LeagueRoomViewController.m */; };
 		BC210D9F0C69893639DD84A5 /* HomeGuessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21056B5487F677973E97B8 /* HomeGuessCell.m */; };
@@ -636,8 +638,6 @@
 		4455AD7A27EAC658001516EE /* DTRollTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTRollTableView.m; sourceTree = "<group>"; };
 		4455AD7C27EAC658001516EE /* CrossRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossRoomViewController.h; sourceTree = "<group>"; };
 		4455AD7D27EAC658001516EE /* CrossRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossRoomViewController.m; sourceTree = "<group>"; };
-		4455AD7F27EAC658001516EE /* OneOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneViewController.m; sourceTree = "<group>"; };
-		4455AD8027EAC658001516EE /* OneOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneViewController.h; sourceTree = "<group>"; };
 		4455AD8227EAC658001516EE /* TalentRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentRoomViewController.h; sourceTree = "<group>"; };
 		4455AD8327EAC658001516EE /* TalentRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentRoomViewController.m; sourceTree = "<group>"; };
 		4455ADD527EAC6F7001516EE /* BaseSceneViewController+Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BaseSceneViewController+Game.m"; sourceTree = "<group>"; };
@@ -1102,7 +1102,6 @@
 		7A720CB3011AA758F160BFED /* Pods-QuickStart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickStart.debug.xcconfig"; path = "Target Support Files/Pods-QuickStart/Pods-QuickStart.debug.xcconfig"; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC21001E47A02C2A2F8EE39B /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		BC210022D455CF71A00205FB /* OneOneAudioMicroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneAudioMicroView.h; sourceTree = "<group>"; };
 		BC2100509C473308E522D1A8 /* LeagueRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueRoomViewController.h; sourceTree = "<group>"; };
 		BC2100A5544CF78174597F1D /* PKGameEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGameEmptyView.h; sourceTree = "<group>"; };
 		BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoGameInteractiveView.m; sourceTree = "<group>"; };
@@ -1111,6 +1110,7 @@
 		BC2100EDB0B0DC05AA83F84D /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		BC21011EFE2917ED676C1C64 /* HomeGuessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeGuessCell.h; sourceTree = "<group>"; };
 		BC210122CBC769498A9DBED6 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		BC21017B1BE66353744F6465 /* OneOneAudioContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneAudioContentView.m; sourceTree = "<group>"; };
 		BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentView.m; sourceTree = "<group>"; };
 		BC2101DBC57FB10DD629B4B0 /* MyNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTDetailViewController.m; sourceTree = "<group>"; };
 		BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessRoomViewController.h; sourceTree = "<group>"; };
@@ -1118,7 +1118,8 @@
 		BC210225026B181652D6B986 /* MyCNWalletSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchPopView.h; sourceTree = "<group>"; };
 		BC21026DC2310D6C27C12757 /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
 		BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessCategoryView.m; sourceTree = "<group>"; };
-		BC210300E5A041242AABD164 /* OneOneAudioContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneAudioContentView.h; sourceTree = "<group>"; };
+		BC210300D66DE78A9F9065CB /* OneOneAudioContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneAudioContentView.h; sourceTree = "<group>"; };
+		BC21030C176F447C19F0CF66 /* OneOneAudioMicroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneAudioMicroView.m; sourceTree = "<group>"; };
 		BC21030C423A46DF8E96F932 /* DiscoAppointmentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoAppointmentPopView.h; sourceTree = "<group>"; };
 		BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderColCell.m; sourceTree = "<group>"; };
 		BC21032C5553ABB17B21F173 /* QSGameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameListViewController.m; sourceTree = "<group>"; };
@@ -1135,10 +1136,12 @@
 		BC2104491AA7FA888C2F3772 /* LeagueEnterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueEnterViewController.h; sourceTree = "<group>"; };
 		BC210468B8562E68D5D9699A /* WalletAddressSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchPopView.h; sourceTree = "<group>"; };
 		BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderView.h; sourceTree = "<group>"; };
+		BC2104A72D8C2A38D5FA2B26 /* OneOneVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneVideoViewController.h; sourceTree = "<group>"; };
 		BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAuthViewController.m; sourceTree = "<group>"; };
 		BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessRoomViewController.m; sourceTree = "<group>"; };
 		BC2105087E91B70E68E3D640 /* PKStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStateView.h; sourceTree = "<group>"; };
 		BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdPKModel.m; sourceTree = "<group>"; };
+		BC210514ED86671CF721CBC8 /* OneOneAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneAudioViewController.h; sourceTree = "<group>"; };
 		BC21052EC461448E9238A7C2 /* DiscoGameInteractiveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractiveView.h; sourceTree = "<group>"; };
 		BC21054139E36B3E6CA45262 /* MyNFTColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTColCell.m; sourceTree = "<group>"; };
 		BC2105467EA8857361624481 /* RoomMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomMoreView.m; sourceTree = "<group>"; };
@@ -1150,10 +1153,10 @@
 		BC2105D34CAD0ADE0FE4DB67 /* RoomCmdOneOneInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdOneOneInfoModel.m; sourceTree = "<group>"; };
 		BC2106173D42C6A345E85E01 /* HsAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsAppPreferences.h; sourceTree = "<group>"; };
 		BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendRoomView.m; sourceTree = "<group>"; };
-		BC21066E637F5FE0337A8630 /* OneOneAudioContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneAudioContentView.m; sourceTree = "<group>"; };
 		BC210692B27543A09E9B3CB6 /* MyNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTListViewController.h; sourceTree = "<group>"; };
 		BC21069C06A918E5FCF30F8A /* QSGameItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameItemModel.h; sourceTree = "<group>"; };
 		BC2106E92DE53A1CA3532640 /* LeagueResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueResultTableViewCell.h; sourceTree = "<group>"; };
+		BC2106F067AE6B462664D2E4 /* OneOneAudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneAudioViewController.m; sourceTree = "<group>"; };
 		BC2106F2C4C48C00499B89E4 /* RoomMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomMoreView.h; sourceTree = "<group>"; };
 		BC2106F845ECA957808046FE /* MoreGuessHeaderCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderCellModel.h; sourceTree = "<group>"; };
 		BC2107088B9BF4F4503AF66D /* GuessModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessModel.h; sourceTree = "<group>"; };
@@ -1186,6 +1189,7 @@
 		BC210B0A37490689FA111F01 /* LeagueResultPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueResultPopView.m; sourceTree = "<group>"; };
 		BC210B29E61F1F5107F9BC6E /* HomeHeaderOneOneReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderOneOneReusableView.m; sourceTree = "<group>"; };
 		BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectCell.m; sourceTree = "<group>"; };
+		BC210B3F2B453CCAB4B66AA7 /* OneOneVideoContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneVideoContentView.m; sourceTree = "<group>"; };
 		BC210B77253CA485E709A582 /* LeagueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueModel.h; sourceTree = "<group>"; };
 		BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdKickoutRoomModel.m; sourceTree = "<group>"; };
 		BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveColCell.m; sourceTree = "<group>"; };
@@ -1207,17 +1211,19 @@
 		BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderColCell.h; sourceTree = "<group>"; };
 		BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomService.m; sourceTree = "<group>"; };
 		BC210DCE2A6257343B4539CF /* DiscoGameInteractivePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractivePopView.h; sourceTree = "<group>"; };
+		BC210E42169C73E0F3F314DE /* OneOneAudioMicroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneAudioMicroView.h; sourceTree = "<group>"; };
 		BC210E613A87ABC193F3B64D /* LeagueRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueRoomService.m; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
 		BC210E8769E66D83BC365AB8 /* WalletAddressSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAddressSwitchCellModel.m; sourceTree = "<group>"; };
 		BC210E92C4879AFA76A189D4 /* WalletAddressSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchCellModel.h; sourceTree = "<group>"; };
+		BC210E97649558C0E6E3013A /* OneOneVideoContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneVideoContentView.h; sourceTree = "<group>"; };
 		BC210EA4458F6CC10378E975 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		BC210EAA09CBCD7E4BFFBFEB /* LeagueRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueRoomViewController.m; sourceTree = "<group>"; };
 		BC210F16FA81FE8312C05A33 /* RoomCmdOneOneInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdOneOneInfoModel.h; sourceTree = "<group>"; };
 		BC210F28C7CAB6BCA3140175 /* HSHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSHttpService.m; sourceTree = "<group>"; };
 		BC210F7B6D59DA493CE16350 /* SceneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentView.h; sourceTree = "<group>"; };
 		BC210F8464A2C7258DC5B08F /* LeagueResultPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueResultPopView.h; sourceTree = "<group>"; };
-		BC210F8E6A2277C3F0555A9B /* OneOneAudioMicroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneAudioMicroView.m; sourceTree = "<group>"; };
+		BC210F9EB539BECCF8E84ED1 /* OneOneVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneVideoViewController.m; sourceTree = "<group>"; };
 		BC210FAF33BAD4283645718B /* UserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailView.h; sourceTree = "<group>"; };
 		BC210FB8B5AA27D3820666AC /* LeagueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueModel.m; sourceTree = "<group>"; };
 		E51A737628091CBE0097007C /* ZIMManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZIMManager.h; sourceTree = "<group>"; };
@@ -1791,9 +1797,8 @@
 		4455AD7E27EAC658001516EE /* OneOne */ = {
 			isa = PBXGroup;
 			children = (
-				4455AD7F27EAC658001516EE /* OneOneViewController.m */,
-				4455AD8027EAC658001516EE /* OneOneViewController.h */,
-				BC2100F03404B991A9FA2553 /* View */,
+				BC210ACFEFDCA44C90FB570B /* Audio */,
+				BC210E3BF42D06AB2C80B7DF /* Video */,
 			);
 			path = OneOne;
 			sourceTree = "<group>";
@@ -2816,13 +2821,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		BC2100F03404B991A9FA2553 /* View */ = {
+		BC210034DA56868361712B7F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BC21066E637F5FE0337A8630 /* OneOneAudioContentView.m */,
-				BC210300E5A041242AABD164 /* OneOneAudioContentView.h */,
-				BC210022D455CF71A00205FB /* OneOneAudioMicroView.h */,
-				BC210F8E6A2277C3F0555A9B /* OneOneAudioMicroView.m */,
+				BC21017B1BE66353744F6465 /* OneOneAudioContentView.m */,
+				BC210300D66DE78A9F9065CB /* OneOneAudioContentView.h */,
+				BC210E42169C73E0F3F314DE /* OneOneAudioMicroView.h */,
+				BC21030C176F447C19F0CF66 /* OneOneAudioMicroView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2858,6 +2863,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		BC210ACFEFDCA44C90FB570B /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				BC210034DA56868361712B7F /* View */,
+				BC2106F067AE6B462664D2E4 /* OneOneAudioViewController.m */,
+				BC210514ED86671CF721CBC8 /* OneOneAudioViewController.h */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		BC210B14EF9AAC932E40E979 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -2869,6 +2884,15 @@
 			path = Preferences;
 			sourceTree = "<group>";
 		};
+		BC210C600507A9FEFEEE4257 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BC210B3F2B453CCAB4B66AA7 /* OneOneVideoContentView.m */,
+				BC210E97649558C0E6E3013A /* OneOneVideoContentView.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BC210D4E52B63622AFCD7CC7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -2878,6 +2902,16 @@
 				6C076E72279E457D00650209 /* ISudAudioEventListener.h */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		BC210E3BF42D06AB2C80B7DF /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				BC210F9EB539BECCF8E84ED1 /* OneOneVideoViewController.m */,
+				BC2104A72D8C2A38D5FA2B26 /* OneOneVideoViewController.h */,
+				BC210C600507A9FEFEEE4257 /* View */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		BC210F37AC7DEE92904D5429 /* Guess */ = {
@@ -3446,7 +3480,6 @@
 				4455ADCC27EAC658001516EE /* TicketJoinPopView.m in Sources */,
 				E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */,
 				4455AE0827EAC6F7001516EE /* BaseSceneViewController+IM.m in Sources */,
-				4455ADD127EAC658001516EE /* OneOneViewController.m in Sources */,
 				6C4608262864062D005C99EF /* LandscapeGuideTipView.m in Sources */,
 				4455AE1327EAC6F7001516EE /* GameMicContentView.m in Sources */,
 				4455ADB127EAC658001516EE /* GiftUserCollectionViewCell.m in Sources */,
@@ -3547,9 +3580,12 @@
 				BC2108DF9DCC723A931AC7FA /* LeagueModel.m in Sources */,
 				BC210A4DEF905819E9635D98 /* LeagueRoomService.m in Sources */,
 				BC210E6B81440DCF104F018F /* HomeHeaderOneOneReusableView.m in Sources */,
-				BC210C8C6C47BDEF90D8831A /* OneOneAudioContentView.m in Sources */,
-				BC21057250FA99C46ED6675F /* OneOneAudioMicroView.m in Sources */,
 				BC2103C30828E712C9917850 /* RoomCmdOneOneInfoModel.m in Sources */,
+				BC2103115D0DCFF02A5F73D6 /* OneOneAudioContentView.m in Sources */,
+				BC21027500DB5CA8F3D0A284 /* OneOneAudioMicroView.m in Sources */,
+				BC21042DA5077E6013F5AB73 /* OneOneAudioViewController.m in Sources */,
+				BC210D17FE184EC8FC156AAC /* OneOneVideoViewController.m in Sources */,
+				BC2109B01B28D63B5CE4CB54 /* OneOneVideoContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

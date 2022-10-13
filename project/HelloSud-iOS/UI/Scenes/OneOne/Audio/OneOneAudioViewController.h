@@ -9,8 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 1v1场景
-@interface OneOneViewController : BaseSceneViewController
+/// 1v1语音场景
+@interface OneOneAudioViewController : BaseSceneViewController
 
 @end
 

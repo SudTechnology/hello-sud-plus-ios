@@ -5,16 +5,19 @@
 //  Created by kaniel on 2022/2/9.
 //
 
-#import "OneOneViewController.h"
+#import "OneOneAudioViewController.h"
 #import "OneOneAudioContentView.h"
+#import "../Video/View/OneOneVideoContentView.h"
 
-@interface OneOneViewController ()
+@interface OneOneAudioViewController ()
 @property(nonatomic, strong) OneOneAudioContentView *audioContentView;
+@property(nonatomic, strong) OneOneVideoContentView *videoContentView;
+
 @property(nonatomic, strong) DTTimer *timer;
 @property(nonatomic, assign) NSInteger duration;
 @end
 
-@implementation OneOneViewController
+@implementation OneOneAudioViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
