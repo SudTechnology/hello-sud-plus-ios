@@ -29,6 +29,7 @@
 /// 语音按钮状态类型
 @property(nonatomic, assign) OneOneVideoMicType micStateType;
 @property(nonatomic, assign) BOOL isGameState;
+@property(nonatomic, strong) AudioRoomMicModel *otherMicModel;
 @end
 
 @implementation OneOneVideoContentView
@@ -45,6 +46,7 @@
 - (void)dtAddViews {
     [super dtAddViews];
     [self addSubview:self.bgImageView];
+    [self addSubview:self.otherVideoView];
     [self addSubview:self.otherHeaderImageView];
     [self addSubview:self.otherNameLabel];
     [self addSubview:self.bottomCoverImageView];
@@ -58,7 +60,7 @@
     [self.micContentView addSubview:self.rightMicView];
     self.micContentView.hidden = YES;
     self.leftMicView.model = kAudioRoomService.currentRoomVC.dicMicModel[@"0"];
-    self.rightMicView.model = kAudioRoomService.currentRoomVC.dicMicModel[@"1"];
+    self.otherMicModel = kAudioRoomService.currentRoomVC.dicMicModel[@"1"];
     [self addSubview:self.addRobotView];
     [self addSubview:self.myVideoView];
 }
@@ -68,6 +70,10 @@
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.bottom.equalTo(@0);
     }];
+    [self.otherVideoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.trailing.bottom.equalTo(@0);
+    }];
+    [self.otherHeaderImageView dt_cornerRadius:24];
     [self.otherHeaderImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@16);
         make.top.equalTo(self.suspendBtn.mas_bottom).offset(16);
@@ -147,6 +153,26 @@
 
 }
 
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
+    if (self.otherMicModel.user) {
+        NSString *icon = self.otherMicModel.user.icon;
+        if (icon) {
+            [self.otherHeaderImageView sd_setImageWithURL:[[NSURL alloc] initWithString:icon] placeholderImage:[UIImage imageNamed:@"oneone_video_head_default"]];
+        }
+        self.otherNameLabel.text = self.otherMicModel.user.name;
+        if (self.otherMicModel.user.isRobot) {
+            self.bgImageView.image = [UIImage imageNamed:@"oneone_video_robot_bg"];
+        }
+        self.addRobotView.hidden = YES;
+    } else {
+        self.otherHeaderImageView.image = [UIImage imageNamed:@"oneone_video_head_default"];
+        self.otherNameLabel.text = @"等待对方加入";
+        self.bgImageView.image = [UIImage imageNamed:@"oneone_video_default_bg"];
+        self.addRobotView.hidden = NO;
+    }
+}
+
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     WeakSelf
@@ -167,6 +193,35 @@
     self.rightMicView.onTapCallback = ^(AudioRoomMicModel *micModel) {
         [weakSelf handleMicClick:micModel];
     };
+
+    [[NSNotificationCenter defaultCenter] addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
+        RoomCmdUpMicModel *msgModel = note.userInfo[@"msgModel"];
+        if ([msgModel isKindOfClass:RoomCmdUpMicModel.class]) {
+
+            BOOL isSameMicUser = weakSelf.otherMicModel.user != nil && [msgModel.sendUser.userID isEqualToString:weakSelf.otherMicModel.user.userID];
+            // 操作麦位与当前符合
+            if (msgModel.micIndex == weakSelf.otherMicModel.micIndex) {
+                DDLogDebug(@"NTF_MIC_CHANGED msg info:%@", [msgModel mj_JSONString]);
+                if (msgModel.cmd == CMD_DOWN_MIC_NOTIFY) {
+                    // 下麦,清空用户信息
+                    if (isSameMicUser) {
+                        weakSelf.otherMicModel.user = nil;
+                    }
+                } else {
+                    weakSelf.otherMicModel.user = msgModel.sendUser;
+                    weakSelf.otherMicModel.user.roleType = msgModel.roleType;
+                    weakSelf.otherMicModel.streamID = msgModel.streamID;
+                }
+            } else if (isSameMicUser) {
+                DDLogDebug(@"NTF_MIC_CHANGED msg info:%@", [msgModel mj_JSONString]);
+                // 当前用户ID与切换用户ID一致，则清除掉
+                weakSelf.otherMicModel.user = nil;
+            }
+            [weakSelf dtUpdateUI];
+        } else {
+            [weakSelf dtUpdateUI];
+        }
+    }];
 }
 
 - (void)handleMicClick:(AudioRoomMicModel *)micModel {
@@ -357,7 +412,6 @@
         _otherNameLabel = UILabel.new;
         _otherNameLabel.font = UIFONT_REGULAR(14);
         _otherNameLabel.textColor = HEX_COLOR(@"#ffffff");
-        _otherNameLabel.text = @"等待对方加入";
     }
     return _otherNameLabel;
 }
@@ -393,9 +447,15 @@
 - (UIView *)myVideoView {
     if (!_myVideoView) {
         _myVideoView = UIView.new;
-        _myVideoView.backgroundColor = UIColor.redColor;
     }
     return _myVideoView;
+}
+
+- (UIView *)otherVideoView {
+    if (!_otherVideoView) {
+        _otherVideoView = UIView.new;
+    }
+    return _otherVideoView;
 }
 
 - (OneOneAudioMicroView *)leftMicView {

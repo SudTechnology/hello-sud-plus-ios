@@ -23,6 +23,7 @@
     [self startPublishStream];
     [self setAudioRouteToSpeaker:YES];
     [self.videoContentView changeMicState:OneOneVideoMicTypeOpen];
+    [self startPreview:self.videoContentView.myVideoView];
 }
 
 - (Class)serviceClass {
@@ -94,7 +95,7 @@
 
 - (void)onHandleEnteredRoom {
     [super onHandleEnteredRoom];
-    [self startToPullVideo:self.videoContentView.myVideoView streamID:@"123"];
+
 }
 
 /// 是否显示添加通用机器人按钮
@@ -148,6 +149,14 @@
 - (void)roomGameDidChanged:(NSInteger)gameID {
     [super roomGameDidChanged:gameID];
     [self.videoContentView changeUIState:gameID > 0];
+}
+
+/// 流更新
+/// @param updateType 更新类型
+/// @param stream 流信息
+- (void)onStreamUpdated:(HSAudioEngineUpdateType)updateType stream:(AudioStream *)stream {
+    [super onStreamUpdated:updateType stream:stream];
+    [self startToPullVideo:self.videoContentView.otherVideoView streamID:stream.streamID];
 }
 
 - (void)updateDuration {

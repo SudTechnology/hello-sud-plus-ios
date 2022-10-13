@@ -1554,4 +1554,11 @@
 
 }
 
+/// 流更新
+/// @param updateType 更新类型
+/// @param stream 流信息
+- (void)onStreamUpdated:(HSAudioEngineUpdateType)updateType stream:(AudioStream *)stream {
+
+}
+
 @end

@@ -70,6 +70,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 观众停止拉流
 - (void)stopPlayingStream:(NSString *)streamID;
 
+/// 主播本地视频预览
+- (void)startPreview:(UIView *)view;
 @end
 
 NS_ASSUME_NONNULL_END

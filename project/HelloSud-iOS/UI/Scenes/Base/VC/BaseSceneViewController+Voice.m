@@ -108,6 +108,12 @@
     [AudioEngineFactory.shared.audioEngine startPlayingStream:streamID view:videoView];
 }
 
+/// 开始预览窗口
+/// @param view view
+- (void)startPreview:(UIView *)view {
+    [AudioEngineFactory.shared.audioEngine startPreview:view];
+}
+
 /// 停止拉取视频流
 /// @param streamID 视频流ID
 - (void)stopPullVideoStream:(NSString *)streamID {
@@ -140,6 +146,7 @@
         case HSAudioEngineUpdateTypeAdd:
             for (AudioStream *item in streamList) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey:item}];
+                [self onStreamUpdated:updateType stream:item];
             }
             break;
         case HSAudioEngineUpdateTypeDelete:

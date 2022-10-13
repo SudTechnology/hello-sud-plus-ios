@@ -42,6 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 停止拉取视频流
 /// @param streamID 视频流ID
 - (void)stopPullVideoStream:(NSString *)streamID;
+
+/// 开始预览窗口
+/// @param view view
+- (void)startPreview:(UIView *)view;
 @end
 
 NS_ASSUME_NONNULL_END

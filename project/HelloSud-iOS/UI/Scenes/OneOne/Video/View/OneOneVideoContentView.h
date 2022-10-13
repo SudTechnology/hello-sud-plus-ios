@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, OneOneVideoMicType) {
 /// 1v1视频视图
 @interface OneOneVideoContentView : BaseView
 @property(nonatomic, strong, readonly) UIView *myVideoView;
+@property(nonatomic, strong, readonly) UIView *otherVideoView;
 
 @property (nonatomic, copy)void(^hangupBlock)(void);
 @property (nonatomic, copy)void(^selecteGameBlock)(void);

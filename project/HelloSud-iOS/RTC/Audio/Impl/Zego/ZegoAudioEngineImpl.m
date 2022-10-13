@@ -194,12 +194,27 @@
     }
 }
 
+/// 开始预览窗口
+/// @param view view
+- (void)startPreview:(UIView *)view {
+    ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
+    if (engine != nil) {
+        if (view != nil) {
+            ZegoCanvas *canvas = [ZegoCanvas canvasWithView:view];
+            canvas.viewMode = ZegoViewModeAspectFill;
+            [engine startPreview:canvas];
+        }
+    }
+}
+
 /// 观众开始拉流
 - (void)startPlayingStream:(NSString *)streamID view:(UIView *)view {
     ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
     if (engine != nil) {
         ZegoCanvas *canvas = [ZegoCanvas canvasWithView:view];
+        canvas.viewMode = ZegoViewModeAspectFill;
         [engine startPlayingStream:streamID canvas:canvas];
+
     }
 }
 

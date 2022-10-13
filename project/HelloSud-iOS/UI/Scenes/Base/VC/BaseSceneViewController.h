@@ -236,9 +236,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 查找一个没有在麦位的机器人
 /// @param completed
 - (void)findOneNotInMicRobot:(void (^)(RobotInfoModel *robotInfoModel))completed;
+
 /// 收到用户进入房间通知
 /// @param msgModel
 - (void)onUserEnterRoom:(AudioMsgSystemModel *)msgModel;
+
 #pragma mark - SudFSMMGListener
 
 /// 游戏配置
@@ -266,7 +268,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 自己成为了队长事件处理
 - (void)onHandleIsGameCaptain;
 
-
+/// 流更新
+/// @param updateType 更新类型
+/// @param stream 流信息
+- (void)onStreamUpdated:(HSAudioEngineUpdateType)updateType stream:(AudioStream *)stream;
 @end
 
 NS_ASSUME_NONNULL_END
