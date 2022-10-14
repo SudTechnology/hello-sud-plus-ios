@@ -12,6 +12,9 @@
 @property(nonatomic, strong) UIButton *hangupBtn;
 @property(nonatomic, strong) UIButton *micBtn;
 @property(nonatomic, strong) UIButton *gameBtn;
+@property(nonatomic, strong) UILabel *micLabel;
+@property(nonatomic, strong) UILabel *gameLabel;
+@property(nonatomic, strong) UILabel *hangupLabel;
 @property(nonatomic, strong) UILabel *timeLabel;
 
 @property(nonatomic, strong) UIImageView *bottomContentView;
@@ -62,6 +65,9 @@
     [self.bottomContentView addSubview:self.micBtn];
     [self.bottomContentView addSubview:self.gameBtn];
     [self.bottomContentView addSubview:self.timeLabel];
+    [self.bottomContentView addSubview:self.micLabel];
+    [self.bottomContentView addSubview:self.gameLabel];
+    [self.bottomContentView addSubview:self.hangupLabel];
 
     [self.bottomContentView addSubview:self.bottomUpBgImageView];
     [self.bottomContentView addSubview:self.bottomUpIconImageView];
@@ -99,7 +105,6 @@
 
     [self.gameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@64);
-        make.bottom.equalTo(@(-kAppSafeBottom - 16));
         make.centerX.equalTo(self);
     }];
     [self.micBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -107,10 +112,26 @@
         make.bottom.equalTo(self.gameBtn);
         make.trailing.equalTo(self.gameBtn.mas_leading).offset(-40);
     }];
+    [self.micLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.micBtn.mas_bottom).offset(8);
+        make.width.height.greaterThanOrEqualTo(@0);
+        make.centerX.equalTo(self.micBtn);
+    }];
+    [self.gameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.gameBtn.mas_bottom).offset(8);
+        make.width.height.greaterThanOrEqualTo(@0);
+        make.centerX.equalTo(self.gameBtn);
+        make.bottom.equalTo(@(-kAppSafeBottom - 16));
+    }];
     [self.hangupBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(self.gameBtn);
         make.bottom.equalTo(self.gameBtn);
         make.leading.equalTo(self.gameBtn.mas_trailing).offset(40);
+    }];
+    [self.hangupLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.hangupBtn.mas_bottom).offset(8);
+        make.width.height.greaterThanOrEqualTo(@0);
+        make.centerX.equalTo(self.hangupBtn);
     }];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(@0);
@@ -165,7 +186,8 @@
     self.otherMicModel = kAudioRoomService.currentRoomVC.dicMicModel[@"1"];
     self.timeLabel.text = @"00 : 00";
     self.bgImageView.image = [UIImage imageNamed:@"oneone_video_default_bg"];
-
+    self.gameLabel.text = @"玩游戏";
+    self.hangupLabel.text = @"挂断";
 }
 
 - (void)dtUpdateUI {
@@ -265,6 +287,7 @@
 
 - (void)onMicBtnClick:(id)sender {
     self.micBtn.selected = !self.micBtn.selected;
+    [self changeMicState:self.micBtn.selected ? OneOneVideoMicTypeOpen : OneOneVideoMicTypeClose];
     if (self.micStateChangedBlock) self.micStateChangedBlock(self.micBtn.selected ? OneOneVideoMicTypeOpen : OneOneVideoMicTypeClose);
 }
 
@@ -369,6 +392,7 @@
 - (void)changeMicState:(OneOneVideoMicType)stateType {
     self.micStateType = stateType;
     self.micBtn.selected = stateType == OneOneVideoMicTypeOpen;
+    self.micLabel.text = stateType == OneOneVideoMicTypeOpen ? @"麦克风已开" : @"麦克风已关";
 }
 
 
@@ -420,6 +444,33 @@
         _timeLabel.textColor = HEX_COLOR(@"#ffffff");
     }
     return _timeLabel;
+}
+
+- (UILabel *)micLabel {
+    if (!_micLabel) {
+        _micLabel = UILabel.new;
+        _micLabel.font = UIFONT_MEDIUM(12);
+        _micLabel.textColor = HEX_COLOR(@"#ffffff");
+    }
+    return _micLabel;
+}
+
+- (UILabel *)gameLabel {
+    if (!_gameLabel) {
+        _gameLabel = UILabel.new;
+        _gameLabel.font = UIFONT_MEDIUM(12);
+        _gameLabel.textColor = HEX_COLOR(@"#ffffff");
+    }
+    return _gameLabel;
+}
+
+- (UILabel *)hangupLabel {
+    if (!_hangupLabel) {
+        _hangupLabel = UILabel.new;
+        _hangupLabel.font = UIFONT_MEDIUM(12);
+        _hangupLabel.textColor = HEX_COLOR(@"#ffffff");
+    }
+    return _hangupLabel;
 }
 
 - (UILabel *)otherNameLabel {

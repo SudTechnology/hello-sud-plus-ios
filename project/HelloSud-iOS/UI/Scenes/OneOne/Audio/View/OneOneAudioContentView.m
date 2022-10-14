@@ -13,6 +13,9 @@
 @property(nonatomic, strong) UIButton *micBtn;
 @property(nonatomic, strong) UIButton *gameBtn;
 @property(nonatomic, strong) UIButton *speakerBtn;
+@property(nonatomic, strong) UILabel *micLabel;
+@property(nonatomic, strong) UILabel *gameLabel;
+@property(nonatomic, strong) UILabel *speakerLabel;
 @property(nonatomic, strong) UILabel *timeLabel;
 
 @property(nonatomic, strong) UIView *micContentView;
@@ -51,6 +54,9 @@
     [self addSubview:self.micBtn];
     [self addSubview:self.gameBtn];
     [self addSubview:self.speakerBtn];
+    [self addSubview:self.micLabel];
+    [self addSubview:self.gameLabel];
+    [self addSubview:self.speakerLabel];
     [self addSubview:self.timeLabel];
     [self addSubview:self.micContentView];
     [self.micContentView addSubview:self.leftMicView];
@@ -84,18 +90,33 @@
     }];
     [self.gameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@64);
-        make.bottom.equalTo(@(-kAppSafeBottom - 16));
         make.centerX.equalTo(self);
+    }];
+    [self.gameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.gameBtn.mas_bottom).offset(8);
+        make.width.height.greaterThanOrEqualTo(@0);
+        make.centerX.equalTo(self.gameBtn);
+        make.bottom.equalTo(@(-kAppSafeBottom - 16));
     }];
     [self.micBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(self.gameBtn);
         make.bottom.equalTo(self.gameBtn);
         make.trailing.equalTo(self.gameBtn.mas_leading).offset(-40);
     }];
+    [self.micLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.micBtn.mas_bottom).offset(8);
+        make.width.height.greaterThanOrEqualTo(@0);
+        make.centerX.equalTo(self.micBtn);
+    }];
     [self.speakerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(self.gameBtn);
         make.bottom.equalTo(self.gameBtn);
         make.leading.equalTo(self.gameBtn.mas_trailing).offset(40);
+    }];
+    [self.speakerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.speakerBtn.mas_bottom).offset(8);
+        make.width.height.greaterThanOrEqualTo(@0);
+        make.centerX.equalTo(self.speakerBtn);
     }];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(@0);
@@ -136,7 +157,7 @@
 - (void)dtConfigUI {
     [super dtConfigUI];
     self.timeLabel.text = @"00 : 00";
-
+    self.gameLabel.text = @"玩游戏";
 }
 
 - (void)dtConfigEvents {
@@ -209,11 +230,13 @@
 
 - (void)onMicBtnClick:(id)sender {
     self.micBtn.selected = !self.micBtn.selected;
+    [self changeMicState:self.micBtn.selected ? OneOneAudioMicTypeOpen : OneOneAudioMicTypeClose];
     if (self.micStateChangedBlock) self.micStateChangedBlock(self.micBtn.selected ? OneOneAudioMicTypeOpen : OneOneAudioMicTypeClose);
 }
 
 - (void)onSpeakerBtnClick:(id)sender {
     self.speakerBtn.selected = !self.speakerBtn.selected;
+    [self changeSpeakerState:self.speakerBtn.selected ? OneOneAudioSpeakerTypeOpen : OneOneAudioSpeakerTypeClose];
     if (self.speakerStateChangedBlock) self.speakerStateChangedBlock(self.speakerBtn.selected ? OneOneAudioSpeakerTypeOpen : OneOneAudioSpeakerTypeClose);
 }
 
@@ -272,6 +295,9 @@
         [self.micBtn setImage:[UIImage imageNamed:@"room_voice_open_mic"] forState:UIControlStateSelected];
         [self.speakerBtn setImage:[UIImage imageNamed:@"oneone_game_speaker_close"] forState:UIControlStateNormal];
         [self.speakerBtn setImage:[UIImage imageNamed:@"oneone_game_speaker_open"] forState:UIControlStateSelected];
+        self.micLabel.hidden = YES;
+        self.gameLabel.hidden = YES;
+        self.speakerLabel.hidden = YES;
     } else {
         self.vsImageView.alpha = 0;
         self.topCoverImageView.alpha = 0;
@@ -288,12 +314,14 @@
         [self.micBtn setImage:[UIImage imageNamed:@"oneone_mic_open"] forState:UIControlStateSelected];
         [self.speakerBtn setImage:[UIImage imageNamed:@"oneone_speaker_close"] forState:UIControlStateNormal];
         [self.speakerBtn setImage:[UIImage imageNamed:@"oneone_speaker_open"] forState:UIControlStateSelected];
+        self.micLabel.hidden = NO;
+        self.gameLabel.hidden = NO;
+        self.speakerLabel.hidden = NO;
         [UIView animateWithDuration:0.25 animations:^{
             self.micContentView.transform = CGAffineTransformIdentity;
         }];
         [self.gameBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.width.height.equalTo(@64);
-            make.bottom.equalTo(@(-kAppSafeBottom - 16));
             make.centerX.equalTo(self);
         }];
         [self.micBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -318,11 +346,13 @@
 - (void)changeMicState:(OneOneAudioMicType)stateType {
     self.micStateType = stateType;
     self.micBtn.selected = stateType == OneOneAudioMicTypeOpen;
+    self.micLabel.text = stateType == OneOneAudioMicTypeOpen ? @"麦克风已开" : @"麦克风已关";
 }
 
 - (void)changeSpeakerState:(OneOneAudioSpeakerType)stateType {
     self.speakerStateType = stateType;
-    self.speakerBtn.selected = stateType == OneOneAudioMicTypeOpen;
+    self.speakerBtn.selected = stateType == OneOneAudioSpeakerTypeOpen;
+    self.speakerLabel.text = stateType == OneOneAudioSpeakerTypeOpen ? @"扬声器已开" : @"扬声器已关";
 }
 
 - (UIView *)micContentView {
@@ -382,6 +412,33 @@
         _timeLabel.textColor = HEX_COLOR(@"#ffffff");
     }
     return _timeLabel;
+}
+
+- (UILabel *)micLabel {
+    if (!_micLabel) {
+        _micLabel = UILabel.new;
+        _micLabel.font = UIFONT_MEDIUM(12);
+        _micLabel.textColor = HEX_COLOR(@"#ffffff");
+    }
+    return _micLabel;
+}
+
+- (UILabel *)gameLabel {
+    if (!_gameLabel) {
+        _gameLabel = UILabel.new;
+        _gameLabel.font = UIFONT_MEDIUM(12);
+        _gameLabel.textColor = HEX_COLOR(@"#ffffff");
+    }
+    return _gameLabel;
+}
+
+- (UILabel *)speakerLabel {
+    if (!_speakerLabel) {
+        _speakerLabel = UILabel.new;
+        _speakerLabel.font = UIFONT_MEDIUM(12);
+        _speakerLabel.textColor = HEX_COLOR(@"#ffffff");
+    }
+    return _speakerLabel;
 }
 
 - (UIView *)addRobotView {
