@@ -12,7 +12,6 @@
 
 @interface OneOneAudioViewController ()
 @property(nonatomic, strong) OneOneAudioContentView *audioContentView;
-@property(nonatomic, strong) OneOneVideoContentView *videoContentView;
 
 @property(nonatomic, strong) DTTimer *timer;
 

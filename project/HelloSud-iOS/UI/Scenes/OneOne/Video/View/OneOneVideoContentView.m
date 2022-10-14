@@ -213,6 +213,7 @@
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     WeakSelf
+    [self.suspendBtn addTarget:self action:@selector(onSuspendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.hangupBtn addTarget:self action:@selector(onHangupBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.gameBtn addTarget:self action:@selector(onGameBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.micBtn addTarget:self action:@selector(onMicBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -258,20 +259,9 @@
     }
 }
 
-- (void)updateAddRobotViewPos {
-//    if (self.leftMicView.model.user && self.rightMicView.model.user) {
-//        self.addRobotView.hidden = YES;
-//        return;
-//    }
-//    if (self.rightMicView.model.user == nil) {
-//        self.addRobotView.hidden = NO;
-//
-//    } else if (self.leftMicView.model.user == nil) {
-//        self.addRobotView.hidden = NO;
-//
-//    }
+- (void)onSuspendBtnClick:(id)sender {
+    if (self.suspendBlock) self.suspendBlock();
 }
-
 
 - (void)onAddRobotViewTap:(id)tap {
     if (self.addRobotBlock) self.addRobotBlock();
@@ -308,7 +298,7 @@
             self.bottomContentView.transform = trans;
             self.bottomCoverImageView.alpha = 1;
             self.bottomUpBgImageView.alpha = 1;
-        } completion:^(BOOL finished) {
+        }                completion:^(BOOL finished) {
             self.bottomContentView.alpha = 1;
             self.bottomUpIconImageView.alpha = 1;
             self.bottomContentView.image = nil;
@@ -345,7 +335,7 @@
             CGAffineTransform trans = CGAffineTransformMakeTranslation(0, 130);
             self.bottomContentView.transform = trans;
             self.bottomCoverImageView.alpha = 1;
-        } completion:^(BOOL finished) {
+        }                completion:^(BOOL finished) {
             self.bottomContentView.alpha = 1;
             self.bottomUpBgImageView.alpha = 1;
             self.bottomUpIconImageView.alpha = 1;
@@ -387,6 +377,16 @@
     NSInteger minute = duration / 60;
     NSInteger second = duration - minute * 60;
     self.timeLabel.text = [NSString stringWithFormat:@"%02ld : %02ld", minute, second];
+}
+
+- (void)resetVideoView {
+    [self addSubview:self.myVideoView];
+    [self.myVideoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(@-16);
+        make.top.equalTo(self.otherHeaderImageView);
+        make.width.equalTo(@80);
+        make.height.equalTo(@107);
+    }];
 }
 
 - (void)changeMicState:(OneOneVideoMicType)stateType {
@@ -557,6 +557,7 @@
     }
     return _bottomUpBgImageView;
 }
+
 - (UIImageView *)bottomUpIconImageView {
     if (!_bottomUpIconImageView) {
         _bottomUpIconImageView = UIImageView.new;

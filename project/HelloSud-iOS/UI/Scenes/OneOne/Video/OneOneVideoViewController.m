@@ -7,6 +7,7 @@
 
 #import "OneOneVideoViewController.h"
 #import "OneOneVideoContentView.h"
+#import "SuspendRoomView.h"
 
 @interface OneOneVideoViewController ()
 @property(nonatomic, strong) OneOneVideoContentView *videoContentView;
@@ -81,6 +82,18 @@
     self.videoContentView.addRobotBlock = ^{
         [weakSelf handleAddRobot];
     };
+    self.videoContentView.suspendBlock = ^{
+        [SuspendRoomView show:weakSelf];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+}
+
+- (UIView *)getSuspendVideoView {
+    return self.videoContentView.myVideoView;
+}
+
+- (void)resetVideoView {
+    [self.videoContentView resetVideoView];
 }
 
 - (void)handleAddRobot {

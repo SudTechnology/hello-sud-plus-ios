@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, OneOneVideoMicType) {
 @property(nonatomic, strong, readonly) UIView *otherVideoView;
 
 @property (nonatomic, copy)void(^hangupBlock)(void);
+@property (nonatomic, copy)void(^suspendBlock)(void);
 @property (nonatomic, copy)void(^selecteGameBlock)(void);
 @property (nonatomic, copy)void(^addRobotBlock)(void);
 @property (nonatomic, copy)void(^micStateChangedBlock)(OneOneVideoMicType stateType);
@@ -24,4 +25,5 @@ typedef NS_ENUM(NSInteger, OneOneVideoMicType) {
 /// 切换UI状态
 /// @param isGameState 是否处于游戏中
 - (void)changeUIState:(BOOL)isGameState;
+- (void)resetVideoView;
 @end

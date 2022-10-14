@@ -11,7 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 1v1视频场景
 @interface OneOneVideoViewController : BaseSceneViewController
-
+- (UIView *)getSuspendVideoView;
+- (void)resetVideoView;
 @end
 
 NS_ASSUME_NONNULL_END

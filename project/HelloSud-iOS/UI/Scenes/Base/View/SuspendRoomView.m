@@ -44,6 +44,7 @@ static SuspendRoomView *g_suspendView = nil;
                 g_suspendView.layer.cornerRadius = 0;
 
             } else if ([vc isKindOfClass:[OneOneAudioViewController class]]) {
+                // 1v1语音
                 [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.width.mas_equalTo(80);
                     make.height.mas_equalTo(80);
@@ -52,6 +53,17 @@ static SuspendRoomView *g_suspendView = nil;
                 }];
                 OneOneAudioViewController *audioViewController = (OneOneAudioViewController *) vc;
                 [g_suspendView showOneOneAudio:audioViewController.duration];
+            } else if ([vc isKindOfClass:[OneOneVideoViewController class]]) {
+                // 1v1视频
+                [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(80);
+                    make.height.mas_equalTo(107);
+                    make.trailing.mas_equalTo(-16);
+                    make.bottom.mas_equalTo(-155);
+                }];
+                OneOneVideoViewController *videoViewController = (OneOneVideoViewController *) vc;
+                [g_suspendView showOneOneVideo:videoViewController.getSuspendVideoView];
+                g_suspendView.layer.cornerRadius = 0;
             } else {
                 g_suspendView.layer.cornerRadius = 8;
                 [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,6 +171,9 @@ static SuspendRoomView *g_suspendView = nil;
     if ([self.vc isKindOfClass:[DanmakuRoomViewController class]]) {
         DanmakuRoomViewController *danmakuRoomViewController = (DanmakuRoomViewController *) self.vc;
         [danmakuRoomViewController resetVideoView];
+    } else if ([self.vc isKindOfClass:[OneOneVideoViewController class]]) {
+        OneOneVideoViewController *videoViewController = (OneOneVideoViewController *) self.vc;
+        [videoViewController resetVideoView];
     }
 }
 
@@ -249,6 +264,14 @@ static SuspendRoomView *g_suspendView = nil;
     }];
     self.suspendOneOneAudioView.duration = duration;
     [self.suspendOneOneAudioView startDurationTimer];
+}
+
+- (void)showOneOneVideo:(UIView *)videoView {
+    [self addSubview:videoView];
+    [self addSubview:self.closeVideoBtn];
+    [videoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.trailing.bottom.equalTo(@0);
+    }];
 }
 
 - (UIButton *)closeVideoBtn {
