@@ -287,6 +287,9 @@
         // 展开
         [UIView animateWithDuration:0.25 animations:^{
             self.bottomContentView.transform = CGAffineTransformIdentity;
+            self.micBtn.alpha = 1;
+            self.gameBtn.alpha = 1;
+            self.hangupBtn.alpha = 1;
         }];
         self.bottomUpBgImageView.alpha = 0;
         self.bottomContentView.image = [UIImage imageNamed:@"oneone_video_game_bottom_open"];
@@ -298,6 +301,9 @@
             self.bottomContentView.transform = trans;
             self.bottomCoverImageView.alpha = 1;
             self.bottomUpBgImageView.alpha = 1;
+            self.micBtn.alpha = 0;
+            self.gameBtn.alpha = 0;
+            self.hangupBtn.alpha = 0;
         }                completion:^(BOOL finished) {
             self.bottomContentView.alpha = 1;
             self.bottomUpIconImageView.alpha = 1;
@@ -339,6 +345,9 @@
             self.bottomContentView.alpha = 1;
             self.bottomUpBgImageView.alpha = 1;
             self.bottomUpIconImageView.alpha = 1;
+            self.micBtn.alpha = 0;
+            self.gameBtn.alpha = 0;
+            self.hangupBtn.alpha = 0;
         }];
 
         self.timeLabel.hidden = YES;
@@ -366,6 +375,9 @@
         self.addRobotView.alpha = 1;
         [UIView animateWithDuration:0.25 animations:^{
             self.bottomContentView.transform = CGAffineTransformIdentity;
+            self.micBtn.alpha = 1;
+            self.gameBtn.alpha = 1;
+            self.hangupBtn.alpha = 1;
         }];
         [self.otherVideoView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.top.trailing.bottom.equalTo(@0);
