@@ -185,7 +185,12 @@
 /// @param stream 流信息
 - (void)onStreamUpdated:(HSAudioEngineUpdateType)updateType stream:(AudioStream *)stream {
     [super onStreamUpdated:updateType stream:stream];
-    [self startToPullVideo:self.videoContentView.otherVideoView streamID:stream.streamID];
+    if (HSAudioEngineUpdateTypeAdd == updateType) {
+        [self startToPullVideo:self.videoContentView.otherVideoView streamID:stream.streamID];
+        [self.videoContentView changeOtherVideoState:YES];
+    } else {
+        [self.videoContentView changeOtherVideoState:NO];
+    }
 }
 
 - (void)updateDuration {

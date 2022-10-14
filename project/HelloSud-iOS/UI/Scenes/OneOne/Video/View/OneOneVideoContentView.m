@@ -401,6 +401,14 @@
     }];
 }
 
+- (void)changeOtherVideoState:(BOOL)isShowOtherVideo {
+    if (isShowOtherVideo) {
+        self.bgImageView.hidden = YES;
+    } else {
+        self.bgImageView.hidden = NO;
+    }
+}
+
 - (void)changeMicState:(OneOneVideoMicType)stateType {
     self.micStateType = stateType;
     self.micBtn.selected = stateType == OneOneVideoMicTypeOpen;

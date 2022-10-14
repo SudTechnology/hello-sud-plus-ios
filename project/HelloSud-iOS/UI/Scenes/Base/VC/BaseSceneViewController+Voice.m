@@ -150,6 +150,9 @@
             }
             break;
         case HSAudioEngineUpdateTypeDelete:
+            for (AudioStream *item in streamList) {
+                [self onStreamUpdated:updateType stream:item];
+            }
             break;
     }
 }

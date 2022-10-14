@@ -151,6 +151,7 @@
             AudioMsgSystemModel *m = [AudioMsgSystemModel fromJSON:command];
             [m updateContent:[NSString stringWithFormat:@"%@ %@", m.sendUser.name, NSString.dt_enter_room_tip]];
             msgModel = m;
+            [self onUserEnterRoom:m];
         }
             break;
         case CMD_KICK_OUT_ROOM: {

@@ -26,4 +26,5 @@ typedef NS_ENUM(NSInteger, OneOneVideoMicType) {
 /// @param isGameState 是否处于游戏中
 - (void)changeUIState:(BOOL)isGameState;
 - (void)resetVideoView;
+- (void)changeOtherVideoState:(BOOL)isShowOtherVideo;
 @end
