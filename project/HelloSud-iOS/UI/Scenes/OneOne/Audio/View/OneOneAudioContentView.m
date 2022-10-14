@@ -163,6 +163,7 @@
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     WeakSelf
+    [self.suspendBtn addTarget:self action:@selector(onSuspendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.hangupBtn addTarget:self action:@selector(onHangupBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.gameBtn addTarget:self action:@selector(onGameBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.micBtn addTarget:self action:@selector(onMicBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -181,6 +182,10 @@
     self.rightMicView.onTapCallback = ^(AudioRoomMicModel *micModel) {
         [weakSelf handleMicClick:micModel];
     };
+}
+
+- (void)onSuspendBtnClick:(id)sender {
+    if (self.suspendBlock) self.suspendBlock();
 }
 
 - (void)handleMicClick:(AudioRoomMicModel *)micModel {

@@ -8,13 +8,14 @@
 #import "OneOneAudioViewController.h"
 #import "OneOneAudioContentView.h"
 #import "../Video/View/OneOneVideoContentView.h"
+#import "SuspendRoomView.h"
 
 @interface OneOneAudioViewController ()
 @property(nonatomic, strong) OneOneAudioContentView *audioContentView;
 @property(nonatomic, strong) OneOneVideoContentView *videoContentView;
 
 @property(nonatomic, strong) DTTimer *timer;
-@property(nonatomic, assign) NSInteger duration;
+
 @end
 
 @implementation OneOneAudioViewController
@@ -85,6 +86,12 @@
     self.audioContentView.addRobotBlock = ^{
         [weakSelf handleAddRobot];
     };
+    self.audioContentView.suspendBlock = ^{
+        [SuspendRoomView show:weakSelf];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+
+
 }
 
 - (void)handleAddRobot {

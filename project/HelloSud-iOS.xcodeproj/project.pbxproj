@@ -407,6 +407,7 @@
 		BC21098A0CA7595992F3EC61 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */; };
 		BC2109B01B28D63B5CE4CB54 /* OneOneVideoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B3F2B453CCAB4B66AA7 /* OneOneVideoContentView.m */; };
 		BC2109B53CC40DBF0DEB10B2 /* RoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105467EA8857361624481 /* RoomMoreView.m */; };
+		BC210A0A1B9FB2F1A8F0C79B /* SuspendOneOneAudioView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109074FB8C2FC1FD6398D /* SuspendOneOneAudioView.m */; };
 		BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */; };
 		BC210A4DEF905819E9635D98 /* LeagueRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E613A87ABC193F3B64D /* LeagueRoomService.m */; };
 		BC210A75257DF698A543C29A /* DiscoInteractiveColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */; };
@@ -1142,6 +1143,7 @@
 		BC2105087E91B70E68E3D640 /* PKStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStateView.h; sourceTree = "<group>"; };
 		BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdPKModel.m; sourceTree = "<group>"; };
 		BC210514ED86671CF721CBC8 /* OneOneAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneOneAudioViewController.h; sourceTree = "<group>"; };
+		BC21052E35CC664E007241FE /* SuspendOneOneAudioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuspendOneOneAudioView.h; sourceTree = "<group>"; };
 		BC21052EC461448E9238A7C2 /* DiscoGameInteractiveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractiveView.h; sourceTree = "<group>"; };
 		BC21054139E36B3E6CA45262 /* MyNFTColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTColCell.m; sourceTree = "<group>"; };
 		BC2105467EA8857361624481 /* RoomMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomMoreView.m; sourceTree = "<group>"; };
@@ -1170,6 +1172,7 @@
 		BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserWearNftDetailView.m; sourceTree = "<group>"; };
 		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
 		BC2108CFC574A8AFEFE2FEDA /* RoomCmdKickoutRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdKickoutRoomModel.h; sourceTree = "<group>"; };
+		BC2109074FB8C2FC1FD6398D /* SuspendOneOneAudioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendOneOneAudioView.m; sourceTree = "<group>"; };
 		BC2109228F9F8EDC6CC7208C /* HsNFTPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsNFTPreferences.h; sourceTree = "<group>"; };
 		BC210926A0E074910BB1BE29 /* MyCNWalletSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCell.m; sourceTree = "<group>"; };
 		BC210933F8C695B85D71A89E /* DiscoAppointmentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoAppointmentPopView.m; sourceTree = "<group>"; };
@@ -1877,6 +1880,8 @@
 				BC2106F2C4C48C00499B89E4 /* RoomMoreView.h */,
 				BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */,
 				BC210ABE07C435063FEB002B /* SuspendRoomView.h */,
+				BC2109074FB8C2FC1FD6398D /* SuspendOneOneAudioView.m */,
+				BC21052E35CC664E007241FE /* SuspendOneOneAudioView.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3586,6 +3591,7 @@
 				BC21042DA5077E6013F5AB73 /* OneOneAudioViewController.m in Sources */,
 				BC210D17FE184EC8FC156AAC /* OneOneVideoViewController.m in Sources */,
 				BC2109B01B28D63B5CE4CB54 /* OneOneVideoContentView.m in Sources */,
+				BC210A0A1B9FB2F1A8F0C79B /* SuspendOneOneAudioView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

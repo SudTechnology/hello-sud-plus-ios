@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 1v1语音场景
 @interface OneOneAudioViewController : BaseSceneViewController
-
+@property(nonatomic, assign) NSInteger duration;
 @end
 
 NS_ASSUME_NONNULL_END

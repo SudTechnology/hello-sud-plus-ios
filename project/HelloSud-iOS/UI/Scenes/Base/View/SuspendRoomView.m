@@ -6,12 +6,18 @@
 #import "SuspendRoomView.h"
 #import "BaseSceneViewController.h"
 #import "DanmakuRoomViewController.h"
+#import "SuspendOneOneAudioView.h"
+#import "OneOneAudioViewController.h"
+#import "OneOneVideoViewController.h"
 
 @interface SuspendRoomView ()
 @property(nonatomic, strong) UIButton *exitBtn;
-@property(nonatomic, strong)UIButton *closeVideoBtn;
+@property(nonatomic, strong) UIButton *closeVideoBtn;
 @property(nonatomic, strong) MarqueeLabel *nameLabel;
-@property(nonatomic, strong)BaseSceneViewController *vc;
+
+@property(nonatomic, strong) SuspendOneOneAudioView *suspendOneOneAudioView;
+
+@property(nonatomic, strong) BaseSceneViewController *vc;
 @end
 
 @implementation SuspendRoomView
@@ -25,6 +31,7 @@ static SuspendRoomView *g_suspendView = nil;
         if (win) {
             [win addSubview:g_suspendView];
 
+            // 弹幕特殊场景挂起
             if ([vc isKindOfClass:[DanmakuRoomViewController class]]) {
                 [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.width.mas_equalTo(224);
@@ -32,10 +39,19 @@ static SuspendRoomView *g_suspendView = nil;
                     make.trailing.mas_equalTo(-16);
                     make.bottom.mas_equalTo(-155);
                 }];
-                DanmakuRoomViewController *danmakuRoomViewController = (DanmakuRoomViewController *)vc;
+                DanmakuRoomViewController *danmakuRoomViewController = (DanmakuRoomViewController *) vc;
                 [g_suspendView showVideo:danmakuRoomViewController.videoView];
                 g_suspendView.layer.cornerRadius = 0;
 
+            } else if ([vc isKindOfClass:[OneOneAudioViewController class]]) {
+                [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(80);
+                    make.height.mas_equalTo(80);
+                    make.trailing.mas_equalTo(-16);
+                    make.bottom.mas_equalTo(-155);
+                }];
+                OneOneAudioViewController *audioViewController = (OneOneAudioViewController *) vc;
+                [g_suspendView showOneOneAudio:audioViewController.duration];
             } else {
                 g_suspendView.layer.cornerRadius = 8;
                 [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -112,10 +128,10 @@ static SuspendRoomView *g_suspendView = nil;
     [super dtConfigUI];
     self.layer.borderColor = HEX_COLOR_A(@"#FFFFFF", 0.75).CGColor;
     self.layer.borderWidth = 1;
-    self.layer.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.88].CGColor;
+    self.layer.backgroundColor = [UIColor colorWithRed:0 / 255.0 green:0 / 255.0 blue:0 / 255.0 alpha:0.88].CGColor;
     self.layer.cornerRadius = 8;
     self.layer.shadowColor = HEX_COLOR_A(@"#000000", 0.6).CGColor;
-    self.layer.shadowOffset = CGSizeMake(0,0);
+    self.layer.shadowOffset = CGSizeMake(0, 0);
     self.layer.shadowOpacity = 1;
     self.layer.shadowRadius = 30;
 }
@@ -215,10 +231,24 @@ static SuspendRoomView *g_suspendView = nil;
         make.leading.top.trailing.bottom.equalTo(@0);
     }];
     [self.closeVideoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.top.trailing.equalTo(@0);
-       make.width.height.equalTo(@24);
+        make.top.trailing.equalTo(@0);
+        make.width.height.equalTo(@24);
     }];
 
+}
+
+/// 展示1v1挂起视图
+/// @param duration
+- (void)showOneOneAudio:(NSInteger)duration {
+    self.nameLabel.hidden = YES;
+    self.exitBtn.hidden = YES;
+    [self addSubview:self.suspendOneOneAudioView];
+    [self.suspendOneOneAudioView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.equalTo(@0);
+        make.width.height.equalTo(@80);
+    }];
+    self.suspendOneOneAudioView.duration = duration;
+    [self.suspendOneOneAudioView startDurationTimer];
 }
 
 - (UIButton *)closeVideoBtn {
@@ -246,5 +276,12 @@ static SuspendRoomView *g_suspendView = nil;
         _nameLabel.textColor = UIColor.whiteColor;
     }
     return _nameLabel;
+}
+
+- (SuspendOneOneAudioView *)suspendOneOneAudioView {
+    if (!_suspendOneOneAudioView) {
+        _suspendOneOneAudioView = SuspendOneOneAudioView.new;
+    }
+    return _suspendOneOneAudioView;
 }
 @end

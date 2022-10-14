@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, OneOneAudioSpeakerType) {
 /// 1v1语音视图
 @interface OneOneAudioContentView : BaseView
 @property (nonatomic, copy)void(^hangupBlock)(void);
+@property (nonatomic, copy)void(^suspendBlock)(void);
 @property (nonatomic, copy)void(^selecteGameBlock)(void);
 @property (nonatomic, copy)void(^addRobotBlock)(void);
 @property (nonatomic, copy)void(^micStateChangedBlock)(OneOneAudioMicType stateType);
