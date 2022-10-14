@@ -1492,6 +1492,22 @@
     return [m mj_JSONString];
 }
 
+/// 游戏区域配置
+- (NSString *)onGameViewInfo {
+    CGFloat scale = [[UIScreen mainScreen] nativeScale];
+    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
+    m.view_size.width = kScreenWidth * scale;
+    m.view_size.height = kScreenHeight * scale;
+    m.view_game_rect.top = (kStatusBarHeight + 120) * scale;
+    m.view_game_rect.left = 0;
+    m.view_game_rect.bottom = (kAppSafeBottom + 150) * scale;
+    m.view_game_rect.right = 0;
+
+    m.ret_code = 0;
+    m.ret_msg = @"success";
+    return m.mj_JSONString;
+}
+
 /// 处理游戏开始
 - (void)handleGameStared {
     /// 如果当前用户在麦上，自动加入游戏

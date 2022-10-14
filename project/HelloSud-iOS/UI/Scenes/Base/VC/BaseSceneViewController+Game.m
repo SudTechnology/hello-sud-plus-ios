@@ -46,18 +46,7 @@
 
 /// 获取游戏View信息  【需要实现】
 - (void)onGetGameViewInfo:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    CGFloat scale = [[UIScreen mainScreen] nativeScale];
-    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    m.view_size.width = kScreenWidth * scale;
-    m.view_size.height = kScreenHeight * scale;
-    m.view_game_rect.top = (kStatusBarHeight + 120) * scale;
-    m.view_game_rect.left = 0;
-    m.view_game_rect.bottom = (kAppSafeBottom + 150) * scale;
-    m.view_game_rect.right = 0;
-
-    m.ret_code = 0;
-    m.ret_msg = @"success";
-    [handle success:m.mj_JSONString];
+    [handle success:[self onGameViewInfo]];
 }
 
 /// 短期令牌code过期  【需要实现】

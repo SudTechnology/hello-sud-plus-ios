@@ -245,7 +245,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏配置
 - (NSString *)onGetGameCfg;
-
+/// 游戏区域配置
+- (NSString *)onGameViewInfo;
 /// 处理游戏开始
 - (void)handleGameStared;
 

@@ -47,8 +47,8 @@
 - (void)dtAddViews {
     [super dtAddViews];
 
-    [self addSubview:self.bgImageView];
     [self addSubview:self.otherVideoView];
+    [self.otherVideoView addSubview:self.bgImageView];
     [self addSubview:self.otherHeaderImageView];
     [self addSubview:self.otherNameLabel];
     [self addSubview:self.bottomCoverImageView];
@@ -57,10 +57,11 @@
     [self addSubview:self.addRobotView];
     [self addSubview:self.myVideoView];
     [self addSubview:self.bottomContentView];
-    [self addSubview:self.hangupBtn];
-    [self addSubview:self.micBtn];
-    [self addSubview:self.gameBtn];
-    [self addSubview:self.timeLabel];
+
+    [self.bottomContentView addSubview:self.hangupBtn];
+    [self.bottomContentView addSubview:self.micBtn];
+    [self.bottomContentView addSubview:self.gameBtn];
+    [self.bottomContentView addSubview:self.timeLabel];
 
     [self.bottomContentView addSubview:self.bottomUpBgImageView];
     [self.bottomContentView addSubview:self.bottomUpIconImageView];
@@ -134,7 +135,7 @@
     [self.bottomUpIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@14);
         make.width.equalTo(@24);
-        make.top.equalTo(@0);
+        make.top.equalTo(@2);
         make.centerX.equalTo(self.bottomContentView);
     }];
 
@@ -276,14 +277,22 @@
         }];
         self.bottomUpBgImageView.alpha = 0;
         self.bottomContentView.image = [UIImage imageNamed:@"oneone_video_game_bottom_open"];
+        self.bottomUpIconImageView.image = [UIImage imageNamed:@"oneone_video_game_down"];
     } else {
         // 收起
         [UIView animateWithDuration:0.25 animations:^{
-            CGAffineTransform trans = CGAffineTransformMakeScale(0, 130);
+            CGAffineTransform trans = CGAffineTransformMakeTranslation(0, 130);
             self.bottomContentView.transform = trans;
+            self.bottomCoverImageView.alpha = 1;
             self.bottomUpBgImageView.alpha = 1;
+        } completion:^(BOOL finished) {
+            self.bottomContentView.alpha = 1;
+            self.bottomUpIconImageView.alpha = 1;
+            self.bottomContentView.image = nil;
         }];
-        self.bottomContentView.image = nil;
+
+        self.bottomUpIconImageView.image = [UIImage imageNamed:@"oneone_video_game_up"];
+
     }
 
 }
@@ -310,42 +319,44 @@
     if (isGameState) {
         // 游戏状态UI
         [UIView animateWithDuration:0.25 animations:^{
-            CGAffineTransform trans = CGAffineTransformMakeScale(0, 130);
+            CGAffineTransform trans = CGAffineTransformMakeTranslation(0, 130);
             self.bottomContentView.transform = trans;
-            self.bottomContentView.alpha = 1;
             self.bottomCoverImageView.alpha = 1;
+        } completion:^(BOOL finished) {
+            self.bottomContentView.alpha = 1;
+            self.bottomUpBgImageView.alpha = 1;
+            self.bottomUpIconImageView.alpha = 1;
         }];
 
         self.timeLabel.hidden = YES;
-        self.bgImageView.hidden = YES;
-        self.gameBtn.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
-        self.micBtn.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
-        [self.gameBtn dt_cornerRadius:16];
-        [self.micBtn dt_cornerRadius:16];
+        self.bottomUpIconImageView.image = [UIImage imageNamed:@"oneone_video_game_up"];
+        self.bottomTopBtn.enabled = YES;
+        self.addRobotView.alpha = 0;
+        self.otherHeaderImageView.hidden = YES;
+        self.otherNameLabel.hidden = YES;
 
-        [self.gameBtn setImage:[UIImage imageNamed:@"oneone_game_game"] forState:UIControlStateNormal];
-        [self.micBtn setImage:[UIImage imageNamed:@"oneone_game_mic_close"] forState:UIControlStateNormal];
-        [self.micBtn setImage:[UIImage imageNamed:@"room_voice_open_mic"] forState:UIControlStateSelected];
-
+        [self.otherVideoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.equalTo(self.myVideoView);
+            make.top.equalTo(self.myVideoView);
+            make.leading.equalTo(@16);
+        }];
     } else {
+        self.bottomTopBtn.enabled = NO;
         self.bottomCoverImageView.alpha = 0;
-        self.bottomContentView.alpha = 0;
+        self.bottomContentView.image = nil;
+        self.bottomUpIconImageView.alpha = 0;
+        self.bottomUpBgImageView.alpha = 0;
         self.timeLabel.hidden = NO;
-        self.bgImageView.hidden = NO;
-        self.gameBtn.backgroundColor = nil;
-        self.micBtn.backgroundColor = nil;
-
-        [self.gameBtn dt_cornerRadius:0];
-        [self.micBtn dt_cornerRadius:0];
-
-        [self.gameBtn setImage:[UIImage imageNamed:@"oneone_game"] forState:UIControlStateNormal];
-        [self.micBtn setImage:[UIImage imageNamed:@"oneone_mic_close"] forState:UIControlStateNormal];
-        [self.micBtn setImage:[UIImage imageNamed:@"oneone_mic_open"] forState:UIControlStateSelected];
-
+        self.bottomTopBtn.selected = NO;
+        self.otherHeaderImageView.hidden = NO;
+        self.otherNameLabel.hidden = NO;
+        self.addRobotView.alpha = 1;
         [UIView animateWithDuration:0.25 animations:^{
             self.bottomContentView.transform = CGAffineTransformIdentity;
         }];
-
+        [self.otherVideoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.top.trailing.bottom.equalTo(@0);
+        }];
     }
 }
 
@@ -458,6 +469,7 @@
 - (UIView *)otherVideoView {
     if (!_otherVideoView) {
         _otherVideoView = UIView.new;
+        _otherVideoView.clipsToBounds = YES;
     }
     return _otherVideoView;
 }
@@ -465,6 +477,7 @@
 - (UIImageView *)bgImageView {
     if (!_bgImageView) {
         _bgImageView = UIImageView.new;
+        _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _bgImageView;
 }
@@ -480,8 +493,7 @@
 - (UIImageView *)bottomContentView {
     if (!_bottomContentView) {
         _bottomContentView = UIImageView.new;
-        _bottomContentView.backgroundColor = UIColor.redColor;
-        _bottomContentView.alpha = 0;
+        _bottomContentView.userInteractionEnabled = YES;
     }
     return _bottomContentView;
 }
