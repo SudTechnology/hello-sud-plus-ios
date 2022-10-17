@@ -251,6 +251,9 @@
         [DTAlertView close];
         [self.timer stopTimer];
         self.timer = nil;
+        if (self.resultStateType == LeagueResultTypeNotJoinFirstResult || self.resultStateType == LeagueResultTypeJoinFirstBeforeThree) {
+            if (self.continueBlock) self.continueBlock();
+        }
         return;
     }
     NSString *title = self.resultStateType == LeagueResultTypeNotJoinFirstResult ? @"继续观看(%@)" : @"继续比赛(%@)";
