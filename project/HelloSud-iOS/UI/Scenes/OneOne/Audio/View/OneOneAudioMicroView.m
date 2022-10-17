@@ -111,7 +111,7 @@
     if (hiddenCaptain) {
         [self.gameCaptainView setHidden:true];
     }
-    DDLogDebug(@"hiddenGameStateViews");
+//    DDLogDebug(@"hiddenGameStateViews");
     [self.gameStateLabel setHidden:true];
     [self.gameBadgeLabel setHidden:true];
     [self.gamingImageView setHidden:true];

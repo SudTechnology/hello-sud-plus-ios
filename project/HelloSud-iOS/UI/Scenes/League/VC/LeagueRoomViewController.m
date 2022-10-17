@@ -13,6 +13,7 @@
 @property(nonatomic, assign) NSInteger roundIndex;
 @property(nonatomic, strong) NSArray <LeaguePlayerModel *> *nextRoundPlayerList;
 @property(nonatomic, strong) NSMutableDictionary <NSString*, LeaguePlayerModel *> *nexRoundPlayerMap;
+@property (nonatomic, assign)BOOL isGameStared;
 @end
 
 @implementation LeagueRoomViewController {
@@ -124,6 +125,8 @@
         } else {
             m.isWin = false;
         }
+
+        DDLogDebug(@"result data: uid:%@, rank:%@, nickname:%@, isWin:%@", @(m.userId), @(m.rank), m.nickname, @(m.isWin));
     }
     if (!isPlayer) {
         // 非玩家
@@ -336,9 +339,16 @@
 
 /// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
 - (void)onGameMGCommonSelfClickStartBtn {
-    DDLogDebug(@"onGameMGCommonSelfClickStartBtn");
+
+    if (self.isGameStared) {
+        DDLogWarn(@"onGameMGCommonSelfClickStartBtn game started, do not start again");
+        return;
+    }
+
+    self.isGameStared = YES;
     WeakSelf
     weakSelf.roundIndex++;
+    DDLogDebug(@"onGameMGCommonSelfClickStartBtn roundIndex:%@", @(self.roundIndex));
     if (self.roundIndex == 1) {
         // 第一轮
         [self checkAddOtherRobot:^{
@@ -378,8 +388,10 @@
 - (void)onGameMGCommonGameSettle:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSettleModel *)model {
 
     // 展示游戏结果
+    self.isGameStared = NO;
     NSMutableArray *playerUserIdList = [[NSMutableArray alloc] init];
     for (MGCommonGameSettleResults *m in model.results) {
+        DDLogDebug(@"onGameMGCommonGameSettle uid:%@ rank:%@ score:%@ award:%@", m.uid, @(m.rank), @(m.score), @(m.award));
         if (m.uid) {
             [playerUserIdList addObject:m.uid];
         }
