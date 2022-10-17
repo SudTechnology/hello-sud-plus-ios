@@ -106,6 +106,24 @@
 
 @end
 
+@implementation GameSettingSelectPnl
+@end
+
+@implementation GameManagedImage
+@end
+
+@implementation GameCountdownTime
+@end
+
+@implementation GameSelectedTips
+@end
+
+@implementation UmoIcon
+@end
+
+@implementation GameTableImage
+@end
+
 @implementation GameUi
 
 - (LobbyPlayerCaptainIcon *)lobby_player_captain_icon {
@@ -293,6 +311,49 @@
     }
     return _game_mvp;
 }
+
+- (GameSettingSelectPnl *)game_setting_select_pnl {
+    if (!_game_setting_select_pnl) {
+        _game_setting_select_pnl = [[GameSettingSelectPnl alloc]init];
+    }
+    return _game_setting_select_pnl;
+}
+
+- (GameManagedImage *)game_managed_image {
+    if (!_game_managed_image) {
+        _game_managed_image = [[GameManagedImage alloc]init];
+    }
+    return _game_managed_image;
+}
+
+- (GameCountdownTime *)game_countdown_time {
+    if (!_game_countdown_time) {
+        _game_countdown_time = [[GameCountdownTime alloc]init];
+    }
+    return _game_countdown_time;
+}
+
+- (GameSelectedTips *)game_selected_tips {
+    if (!_game_selected_tips) {
+        _game_selected_tips = [[GameSelectedTips alloc]init];
+    }
+    return _game_selected_tips;
+}
+
+- (UmoIcon *)umo_icon {
+    if (!_umo_icon) {
+        _umo_icon = [[UmoIcon alloc]init];
+    }
+    return _umo_icon;
+}
+
+- (GameTableImage *)game_table_image {
+    if (!_game_table_image) {
+        _game_table_image = [[GameTableImage alloc]init];
+    }
+    return _game_table_image;
+}
+
 @end
 
 @interface GameCfgModel ()
