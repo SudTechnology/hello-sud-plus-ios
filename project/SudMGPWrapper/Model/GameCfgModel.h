@@ -148,6 +148,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface GameSettingSelectPnl : NSObject
+@property(nonatomic, assign) BOOL hide;
+@end
+
+@interface GameManagedImage : NSObject
+@property(nonatomic, assign) BOOL hide;
+@end
+
+@interface GameCountdownTime : NSObject
+@property(nonatomic, assign) BOOL hide;
+@end
+
+@interface GameSelectedTips : NSObject
+@property(nonatomic, assign) BOOL hide;
+@end
+
+@interface UmoIcon : NSObject
+@property(nonatomic, assign) BOOL hide;
+@end
+
+@interface GameTableImage : NSObject
+@property(nonatomic, assign) BOOL hide;
+@end
+
+
 @interface GameUi : NSObject
 /// 大厅游戏位上队长标识
 @property(nonatomic, strong) LobbyPlayerCaptainIcon *lobby_player_captain_icon;
@@ -200,6 +225,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) GameOpening *game_opening;
 /// 控制MVP动画的开关
 @property(nonatomic, strong) GameMVP *game_mvp;
+/// 大厅中的玩法选择设置面板
+@property(nonatomic, strong) GameSettingSelectPnl *game_setting_select_pnl;
+/// 游戏中的托管图标
+@property(nonatomic, strong) GameManagedImage *game_managed_image;
+/// 游戏中游戏倒计时显示 （注：现在只针对umo生效）
+@property(nonatomic, strong) GameCountdownTime *game_countdown_time;
+/// 游戏中所选择的玩法提示文字 （注：现在只针对ludo生效）
+@property(nonatomic, strong) GameSelectedTips *game_selected_tips;
+/// 游戏中动画和头像右上角的UMO图标
+@property(nonatomic, strong) UmoIcon *umo_icon;
+/// 游戏中牌桌背景图 （注：只对某些带牌桌类游戏有作用）
+@property(nonatomic, strong) GameTableImage *game_table_image;
 @end
 
 @interface GameCfgModel : NSObject
