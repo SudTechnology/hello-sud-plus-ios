@@ -208,6 +208,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否显示添加通用机器人按钮
 - (BOOL)isShowAddRobotBtn;
 
+/// 总需要添加机器人数
+/// @return
+- (NSInteger)willBeAddedTotalRobotCount;
+
 /// 处理礼物动效
 /// @param model model description
 - (void)handleGiftEffect:(RoomCmdSendGiftModel *)model;

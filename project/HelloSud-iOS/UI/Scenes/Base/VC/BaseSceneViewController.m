@@ -1264,6 +1264,12 @@
     return YES;
 }
 
+/// 总需要添加机器人数
+/// @return
+- (NSInteger)willBeAddedTotalRobotCount {
+    return 3;
+}
+
 /// 收到用户进入房间通知
 /// @param msgModel
 - (void)onUserEnterRoom:(AudioMsgSystemModel *)msgModel {
@@ -1384,7 +1390,9 @@
     NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
     NSMutableArray *robotAnchorList = [[NSMutableArray alloc] init];
     NSMutableArray *randList = [[NSMutableArray alloc] init];
-    if (robotList.count <= 3) {
+
+    NSInteger willBeAddedRobotCount = [self willBeAddedTotalRobotCount];
+    if (robotList.count <= willBeAddedRobotCount) {
         [randList setArray:robotList];
     } else {
         NSMutableArray *waitRandList = [[NSMutableArray alloc] initWithArray:robotList];
@@ -1406,7 +1414,7 @@
     for (int i = 0; i < randList.count; ++i) {
         RobotInfoModel *robotModel = randList[i];
         /// 前3位机器人自动上麦
-        if (i >= 3) {
+        if (i >= willBeAddedRobotCount) {
             break;
         }
         [robotAnchorList addObject:robotModel];

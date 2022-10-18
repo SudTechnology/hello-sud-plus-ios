@@ -223,46 +223,33 @@
 }
 
 - (void)checkAddOtherRobot:(void (^)(void))completed {
-    switch (self.roundIndex) {
-        case 1: {
-
-            // 第一轮
-            NSInteger playerCount = self.sudFSMMGDecorator.onlineUserIdList.count;
-            NSInteger totalCount = self.totalGameUserCount;
-            if (totalCount > playerCount) {
-                // 补全剩余麦位
-                NSInteger count = totalCount - playerCount;
-                NSMutableArray *waitForAddToGameList = NSMutableArray.new;
-                BOOL noAvailableRobot = false;
-                for (int i = 0; i < count; ++i) {
-                    if (noAvailableRobot) {
-                        break;
-                    }
-                    BOOL addRobot = false;
-                    for (RobotInfoModel *m in self.cacheRobotList) {
-                        if (![self.sudFSMMGDecorator isPlayerInGame:[NSString stringWithFormat:@"%@", @(m.userId)]]) {
-                            [waitForAddToGameList addObject:m];
-                            addRobot = YES;
-                            continue;
-                        }
-
-                    }
-                    if (!addRobot) {
-                        // 标记没有可用机器人了
-                        noAvailableRobot = YES;
-                    }
+    // 第一轮
+    NSInteger playerCount = self.sudFSMMGDecorator.onlineUserIdList.count;
+    NSInteger totalCount = self.totalGameUserCount;
+    if (totalCount > playerCount) {
+        // 补全剩余麦位
+        NSInteger count = totalCount - playerCount;
+        NSMutableArray *waitForAddToGameList = NSMutableArray.new;
+        BOOL noAvailableRobot = false;
+        for (int i = 0; i < count; ++i) {
+            if (noAvailableRobot) {
+                break;
+            }
+            BOOL addRobot = false;
+            for (RobotInfoModel *m in self.cacheRobotList) {
+                if (![self.sudFSMMGDecorator isPlayerInGame:[NSString stringWithFormat:@"%@", @(m.userId)]]) {
+                    [waitForAddToGameList addObject:m];
+                    addRobot = YES;
+                    continue;
                 }
-                [self addRobotToGame:waitForAddToGameList];
+
+            }
+            if (!addRobot) {
+                // 标记没有可用机器人了
+                noAvailableRobot = YES;
             }
         }
-            break;
-        case 2: {
-
-            // 第二轮
-        }
-            break;
-        default:
-            break;
+        [self addRobotToGame:waitForAddToGameList];
     }
     if (completed) {
         completed();
@@ -310,6 +297,12 @@
     }
     [ToastUtil show:@"您不是参赛者，不能加入游戏"];
     return NO;
+}
+
+/// 总需要添加机器人数
+/// @return
+- (NSInteger)willBeAddedTotalRobotCount {
+    return 1;
 }
 
 #pragma mark game events
