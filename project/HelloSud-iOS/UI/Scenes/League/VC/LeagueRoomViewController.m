@@ -95,7 +95,7 @@
     [self.nexRoundPlayerMap removeAllObjects];
     for (int i = 0; i < playerList.count; ++i) {
         LeaguePlayerModel *m = playerList[i];
-        if (self.roundIndex == 1 && m.rank <= 3 && nextRoundPlayerList.count < 3) {
+        if (self.roundIndex == 1 && m.rank <= 3) {
             [nextRoundPlayerList addObject:m];
             self.nexRoundPlayerMap[[NSString stringWithFormat:@"%@", @(m.userId)]] = m;
         }
@@ -347,17 +347,16 @@
 
     self.isGameStared = YES;
     WeakSelf
-    weakSelf.roundIndex++;
     DDLogDebug(@"onGameMGCommonSelfClickStartBtn roundIndex:%@", @(self.roundIndex));
-    if (self.roundIndex == 1) {
-        // 第一轮
+    if (self.roundIndex == 0) {
+        // 开始第一轮
         [self checkAddOtherRobot:^{
             // 开始游戏
             NSDictionary *dic = @{};
             [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
         }];
-    } else {
-        // 第二轮
+    } else if (self.roundIndex == 1) {
+        // 开始第二轮
         BOOL hasUserExitGame = NO;
         for (LeaguePlayerModel *m in self.nextRoundPlayerList) {
             BOOL isPlayerInGame = [self.sudFSMMGDecorator isPlayerInGame:[NSString stringWithFormat:@"%@", @(m.userId)]];
@@ -382,6 +381,12 @@
 - (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
     [super onGameMGCommonGameState:handle model:model];
     DDLogDebug(@"onGameMGCommonGameState：%@", @(model.gameState));
+    // 游戏进行开始时，把麦位缩小
+    if (model.gameState == 1) {
+        if (self.roundIndex == 0 || self.roundIndex == 1) {
+            self.roundIndex++;
+        }
+    }
 }
 
 /// 游戏: 游戏结算状态     MG_COMMON_GAME_SETTLE
