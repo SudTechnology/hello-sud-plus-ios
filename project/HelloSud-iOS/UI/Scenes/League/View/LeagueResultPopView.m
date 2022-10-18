@@ -147,7 +147,7 @@
             make.bottom.equalTo(@(-20));
         }];
     }
-    [self.rightBtn setTitle:@"返回到首页" forState:UIControlStateNormal];
+    [self.rightBtn setTitle:@"回到首页" forState:UIControlStateNormal];
     self.awardView.hidden = YES;
     [self.awardView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(@0);
@@ -256,7 +256,7 @@
         }
         return;
     }
-    NSString *title = self.resultStateType == LeagueResultTypeNotJoinFirstResult ? @"继续观看(%@)" : @"继续比赛(%@)";
+    NSString *title = self.resultStateType == LeagueResultTypeNotJoinFirstResult ? @"继续观看(%@s)" : @"继续比赛(%@s)";
     NSString *closeStr = [NSString stringWithFormat:title, @(self.countdown)];
     [self.rightBtn setTitle:closeStr forState:UIControlStateNormal];
 }
