@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 秀场场景
-@interface ShowViewController : AudioRoomViewController
+@interface ShowViewController : BaseSceneViewController
 
 @end
 

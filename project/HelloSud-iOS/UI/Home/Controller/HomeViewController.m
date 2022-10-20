@@ -179,7 +179,7 @@
             } else {
 
                 // 是否需要满行
-                BOOL isNeedToFullRow = m.sceneId != SceneTypeDisco && m.sceneId != SceneTypeDanmaku && m.sceneId != SceneTypeLeague && m.sceneId != SceneTypeOneOne;
+                BOOL isNeedToFullRow = m.sceneId != SceneTypeDisco && m.sceneId != SceneTypeDanmaku && m.sceneId != SceneTypeLeague && m.sceneId != SceneTypeOneOne && m.sceneId != SceneTypeShow;
                 if (isNeedToFullRow) {
                     /// 求余 填满整个屏幕
                     int row = 3;
@@ -266,6 +266,8 @@
     HSSceneModel *m = self.headerSceneList[section];
     if (m.sceneId == SceneTypeGuess || m.sceneId == SceneTypeOneOne) {
         return 0;
+    } else if (m.sceneId == SceneTypeShow) {
+        return 1;
     }
     NSArray *arr = self.dataList[section];
     return arr.count;
@@ -274,9 +276,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BaseCollectionViewCell *cell = nil;
     HSSceneModel *m = self.headerSceneList[indexPath.section];
-    if (m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeLeague) {
+    if (m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeLeague || m.sceneId == SceneTypeShow) {
         GameItemFullCollectionViewCell *c = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemFullCollectionViewCell" forIndexPath:indexPath];
         c.sceneId = m.sceneId;
+        c.sceneImage = m.sceneImageNew;
         cell = c;
     } else {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
@@ -326,7 +329,7 @@
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     CGFloat itemW = (kScreenWidth - 32) / 3;
     CGFloat itemH = 62;
-    if (m.sceneId == SceneTypeDisco) {
+    if (m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeShow) {
         itemW = kScreenWidth - 32;
         itemH = 200;
     } else if (m.sceneId == SceneTypeDanmaku) {
@@ -349,7 +352,7 @@
     if (m.sceneId == SceneTypeGuess) {
         baseH += 290;
         h = baseH + rect.size.height;
-    } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeLeague) {
+    } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeLeague || m.sceneId == SceneTypeShow) {
         baseH = 46;
         h = baseH + rect.size.height;
     } else if (m.sceneId == SceneTypeOneOne) {

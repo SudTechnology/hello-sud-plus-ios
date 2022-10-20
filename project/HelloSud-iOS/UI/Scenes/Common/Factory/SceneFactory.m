@@ -17,6 +17,7 @@
 #import "LeagueRoomViewController.h"
 #import "OneOneAudioViewController.h"
 #import "../../OneOne/Video/OneOneVideoViewController.h"
+#import "ShowViewController.h"
 
 @implementation SceneFactory {
 
@@ -60,6 +61,9 @@
             break;
         case SceneTypeOneOneVideo:
             vc = [[OneOneVideoViewController alloc]init];
+            break;
+        case SceneTypeShow:
+            vc = [[ShowViewController alloc]init];
             break;
         default:
             vc = [[BaseSceneViewController alloc] init];

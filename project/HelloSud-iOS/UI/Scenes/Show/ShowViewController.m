@@ -8,24 +8,73 @@
 #import "ShowViewController.h"
 
 @interface ShowViewController ()
-
+@property(nonatomic, strong) UIImageView *ivShowPlayGame;
+@property(nonatomic, strong) MarqueeLabel *playLabel;
 @end
 
 @implementation ShowViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (Class)serviceClass {
+    return AudioRoomService.class;
 }
-*/
 
+/// 是否显示添加通用机器人按钮
+- (BOOL)isShowAddRobotBtn {
+    return NO;
+}
+
+/// 是否加载通用机器人
+- (BOOL)isLoadCommonRobotList {
+    return NO;
+}
+
+- (void)dtAddViews {
+    [super dtAddViews];
+    [self.sceneView addSubview:self.ivShowPlayGame];
+    [self.sceneView addSubview:self.playLabel];
+}
+
+- (void)dtLayoutViews {
+    [super dtLayoutViews];
+    CGFloat bottom = kAppSafeBottom + 51;
+    [self.ivShowPlayGame mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(@-18);
+        make.width.equalTo(@80);
+        make.height.equalTo(@90);
+        make.bottom.equalTo(@(-bottom));
+    }];
+    [self.playLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.leading.trailing.equalTo(self.ivShowPlayGame);
+       make.height.equalTo(@15);
+       make.bottom.equalTo(self.ivShowPlayGame).offset(-7);
+    }];
+}
+
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
+}
+
+- (UIImageView *)ivShowPlayGame {
+    if (!_ivShowPlayGame) {
+        _ivShowPlayGame = UIImageView.new;
+        _ivShowPlayGame.image = [UIImage imageNamed:@"show_play_game"];
+    }
+    return _ivShowPlayGame;
+}
+
+- (MarqueeLabel *)playLabel {
+    if (!_playLabel) {
+        _playLabel = MarqueeLabel.new;
+        _playLabel.font = UIFONT_SEMI_BOLD(10);
+        _playLabel.textColor = UIColor.whiteColor;
+        _playLabel.textAlignment = NSTextAlignmentCenter;
+        _playLabel.text = @"和主播玩游戏";
+    }
+    return _playLabel;
+}
 @end

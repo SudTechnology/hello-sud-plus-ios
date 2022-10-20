@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GameItemFullCollectionViewCell : BaseCollectionViewCell
 /// 场景ID
 @property (nonatomic, assign)NSInteger sceneId;
+/// 场景图片
+@property (nonatomic, strong)NSString * sceneImage;
 @end
 
 NS_ASSUME_NONNULL_END

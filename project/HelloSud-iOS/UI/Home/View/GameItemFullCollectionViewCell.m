@@ -66,8 +66,8 @@
 @interface GameItemFullCollectionViewCell ()
 @property(nonatomic, strong) UIImageView *gameImageView;
 @property(nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong)GameItemBorderButton *createBtn;
-@property (nonatomic, strong)GameItemBorderButton *joinBtn;
+@property(nonatomic, strong) GameItemBorderButton *createBtn;
+@property(nonatomic, strong) GameItemBorderButton *joinBtn;
 
 @end
 
@@ -101,14 +101,14 @@
         make.width.height.greaterThanOrEqualTo(@0);
     }];
     [self.createBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@-12);
+        make.bottom.equalTo(self.gameImageView).offset(-10);
         make.width.equalTo(@120);
         make.height.mas_equalTo(44);
         make.trailing.equalTo(self.contentView.mas_centerX).offset(-20);
     }];
     [self.joinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.createBtn.mas_trailing).offset(40);
-        make.bottom.equalTo(@-12);
+        make.bottom.equalTo(self.gameImageView).offset(-10);
         make.width.equalTo(self.createBtn);
         make.height.mas_equalTo(44);
     }];
@@ -141,11 +141,18 @@
     NSString *icon = m.homeGamePic;
     if (self.sceneId == SceneTypeLeague && m.leagueScenePic.length > 0) {
         icon = m.leagueScenePic;
+    } else if (self.sceneId == SceneTypeShow) {
+        icon = self.sceneImage;
     }
     if (icon) {
         [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:icon]];
     }
     if (self.sceneId == SceneTypeDisco) {
+        self.joinBtn.hidden = NO;
+        self.createBtn.hidden = NO;
+        self.nameLabel.hidden = YES;
+    } else if (self.sceneId == SceneTypeShow) {
+        self.joinBtn.text = @"匹配房间";
         self.joinBtn.hidden = NO;
         self.createBtn.hidden = NO;
         self.nameLabel.hidden = YES;
@@ -155,7 +162,6 @@
         self.nameLabel.hidden = NO;
     }
 }
-
 
 
 - (UIImageView *)gameImageView {
