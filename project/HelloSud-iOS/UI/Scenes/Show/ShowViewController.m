@@ -55,14 +55,26 @@
     }];
 }
 
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapPlayView:)];
+    [self.ivShowPlayGame addGestureRecognizer:tap];
+
+}
+
 - (void)dtUpdateUI {
     [super dtUpdateUI];
+}
+
+- (void)onTapPlayView:(id)tap {
+    [self showSelectGameView];
 }
 
 - (UIImageView *)ivShowPlayGame {
     if (!_ivShowPlayGame) {
         _ivShowPlayGame = UIImageView.new;
         _ivShowPlayGame.image = [UIImage imageNamed:@"show_play_game"];
+        _ivShowPlayGame.userInteractionEnabled = YES;
     }
     return _ivShowPlayGame;
 }
