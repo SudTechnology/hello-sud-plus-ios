@@ -385,6 +385,7 @@
 		BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C125C32426E56F91862 /* MoreGuessHeaderCellModel.m */; };
 		BC2103C30828E712C9917850 /* RoomCmdOneOneInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105D34CAD0ADE0FE4DB67 /* RoomCmdOneOneInfoModel.m */; };
 		BC21042DA5077E6013F5AB73 /* OneOneAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106F067AE6B462664D2E4 /* OneOneAudioViewController.m */; };
+		BC2104932603D3EF0321AE0B /* ShowSendGiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2108CA6038742A7848B03B /* ShowSendGiftView.m */; };
 		BC2104A997878EE07744E080 /* PKRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */; };
 		BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210337708736FFF222750A /* BaseSceneService.m */; };
 		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
@@ -1162,6 +1163,7 @@
 		BC2106F2C4C48C00499B89E4 /* RoomMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomMoreView.h; sourceTree = "<group>"; };
 		BC2106F845ECA957808046FE /* MoreGuessHeaderCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderCellModel.h; sourceTree = "<group>"; };
 		BC2107088B9BF4F4503AF66D /* GuessModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessModel.h; sourceTree = "<group>"; };
+		BC21072658172097AB64FA65 /* ShowSendGiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowSendGiftView.h; sourceTree = "<group>"; };
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
 		BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinPopView.h; sourceTree = "<group>"; };
 		BC2107929CECA531C851C092 /* PKSelectRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSelectRoomView.h; sourceTree = "<group>"; };
@@ -1171,6 +1173,7 @@
 		BC2107EF9AD65D2563C73468 /* LeagueResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueResultTableViewCell.m; sourceTree = "<group>"; };
 		BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserWearNftDetailView.m; sourceTree = "<group>"; };
 		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
+		BC2108CA6038742A7848B03B /* ShowSendGiftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowSendGiftView.m; sourceTree = "<group>"; };
 		BC2108CFC574A8AFEFE2FEDA /* RoomCmdKickoutRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdKickoutRoomModel.h; sourceTree = "<group>"; };
 		BC2109074FB8C2FC1FD6398D /* SuspendOneOneAudioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendOneOneAudioView.m; sourceTree = "<group>"; };
 		BC2109228F9F8EDC6CC7208C /* HsNFTPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsNFTPreferences.h; sourceTree = "<group>"; };
@@ -1649,6 +1652,7 @@
 			children = (
 				4455AD1827EAC658001516EE /* ShowViewController.m */,
 				4455AD1927EAC658001516EE /* ShowViewController.h */,
+				BC210EB49A6859230F674B8F /* View */,
 			);
 			path = Show;
 			sourceTree = "<group>";
@@ -2919,6 +2923,15 @@
 			path = Video;
 			sourceTree = "<group>";
 		};
+		BC210EB49A6859230F674B8F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BC2108CA6038742A7848B03B /* ShowSendGiftView.m */,
+				BC21072658172097AB64FA65 /* ShowSendGiftView.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BC210F37AC7DEE92904D5429 /* Guess */ = {
 			isa = PBXGroup;
 			children = (
@@ -3592,6 +3605,7 @@
 				BC210D17FE184EC8FC156AAC /* OneOneVideoViewController.m in Sources */,
 				BC2109B01B28D63B5CE4CB54 /* OneOneVideoContentView.m in Sources */,
 				BC210A0A1B9FB2F1A8F0C79B /* SuspendOneOneAudioView.m in Sources */,
+				BC2104932603D3EF0321AE0B /* ShowSendGiftView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

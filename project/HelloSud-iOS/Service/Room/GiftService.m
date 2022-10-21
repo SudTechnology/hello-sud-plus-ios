@@ -104,9 +104,19 @@
     gift3.giftName = NSString.dt_room_disco_dance_insert;
     gift3.price = 1500;
 
+    GiftModel *gift4 = GiftModel.new;
+    gift4.giftID = 8;
+    gift4.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
+    gift4.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
+    gift4.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
+    gift4.animateType = @"svga";
+    gift4.giftName = NSString.dt_room_disco_dance_insert;
+    gift4.price = 520;
+
     self.dicGift[[NSString stringWithFormat:@"%@", @(gift1.giftID)]] = gift1;
     self.dicGift[[NSString stringWithFormat:@"%@", @(gift2.giftID)]] = gift2;
     self.dicGift[[NSString stringWithFormat:@"%@", @(gift3.giftID)]] = gift3;
+    self.dicGift[[NSString stringWithFormat:@"%@", @(gift4.giftID)]] = gift4;
     self.discoGiftList = @[gift1, gift2, gift3];
 
 }
