@@ -4,4 +4,6 @@
 //
 /// 秀场送礼视图
 @interface ShowSendGiftView : BaseView
+@property (nonatomic, copy)void(^sureBlock)(void);
+@property (nonatomic, copy)void(^cancelBlock)(void);
 @end

@@ -25,13 +25,32 @@
 
 - (void)dtLayoutViews {
 
+    [self.giftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@20);
+        make.centerX.equalTo(self);
+        make.width.height.equalTo(@60);
+    }];
+    [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.giftImageView.mas_bottom);
+        make.centerX.equalTo(self);
+        make.height.equalTo(@20);
+        make.width.greaterThanOrEqualTo(@0);
+    }];
+    [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(@10);
+        make.trailing.equalTo(@-10);
+        make.top.equalTo(self.coinLabel.mas_bottom).offset(8);
+        make.height.greaterThanOrEqualTo(@0);
+    }];
     [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.detailLabel.mas_bottom).offset(40);
         make.leading.mas_equalTo(24);
         make.height.mas_equalTo(36);
         make.width.mas_greaterThanOrEqualTo(0);
         make.bottom.mas_equalTo(-24);
     }];
     [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.cancelBtn);
         make.leading.mas_equalTo(self.cancelBtn.mas_trailing).offset(40);
         make.trailing.mas_equalTo(-24);
         make.height.mas_equalTo(36);
@@ -43,6 +62,15 @@
     [super dtConfigUI];
     self.coinLabel.text = @"520金币";
     self.detailLabel.text = @"是否送出邀请主播一起玩游戏？";
+    self.giftImageView.image = [UIImage imageNamed:@"gift_heart"];
+}
+
+- (void)onSureBtnCLick:(id)sender {
+    if (self.sureBlock) self.sureBlock();
+}
+
+- (void)onCancelBtnCLick:(id)sender {
+    if (self.cancelBlock) self.cancelBlock();
 }
 
 - (UIImageView *)giftImageView {
@@ -75,10 +103,11 @@
 - (UIButton *)sureBtn {
     if (!_sureBtn) {
         _sureBtn = [[UIButton alloc] init];
+        [_sureBtn setTitle:NSString.dt_common_sure forState:UIControlStateNormal];
         [_sureBtn setTitleColor:[UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
         _sureBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         _sureBtn.backgroundColor = UIColor.blackColor;
-        [_sureBtn addTarget:self action:@selector(onSureItemEvent) forControlEvents:UIControlEventTouchUpInside];
+        [_sureBtn addTarget:self action:@selector(onSureBtnCLick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureBtn;
 }
@@ -86,10 +115,11 @@
 - (UIButton *)cancelBtn {
     if (!_cancelBtn) {
         _cancelBtn = [[UIButton alloc] init];
+        [_cancelBtn setTitle:NSString.dt_common_cancel forState:UIControlStateNormal];
         [_cancelBtn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
         _cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         _cancelBtn.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
-        [_cancelBtn addTarget:self action:@selector(onCancelItemEvent) forControlEvents:UIControlEventTouchUpInside];
+        [_cancelBtn addTarget:self action:@selector(onCancelBtnCLick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelBtn;
 }

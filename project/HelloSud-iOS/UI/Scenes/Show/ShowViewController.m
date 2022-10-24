@@ -6,6 +6,7 @@
 //
 
 #import "ShowViewController.h"
+#import "ShowSendGiftView.h"
 
 @interface ShowViewController ()
 @property(nonatomic, strong) UIImageView *ivShowPlayGame;
@@ -46,6 +47,61 @@
     return NO;
 }
 
+/// 请求切换房间
+- (void)reqChangeToGameGameId:(int64_t)gameId operatorUser:(NSString *)userID {
+    ShowSendGiftView *v = ShowSendGiftView.new;
+    v.sureBlock = ^{
+        [DTAlertView close];
+        // 先切换游戏
+        [super reqChangeToGameGameId:gameId operatorUser:userID];
+        [HSThreadUtils dispatchMainAfter:1 callback:^{
+            // 发送礼物消息
+            [self sendGiftMsg];
+        }];
+    };
+    v.cancelBlock = ^{
+        [DTAlertView close];
+    };
+    [DTAlertView show:v rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:nil];
+}
+
+/// 发送礼物
+- (void)sendGiftMsg {
+
+    GiftModel *giftModel = [GiftService.shared giftByID:8];
+    AudioUserModel *toUser = AudioUserModel.new;
+    toUser.userID = @"0";
+    toUser.name = @"主播";
+    toUser.roomID = self.roomID;
+    RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
+    giftMsg.type = giftModel.type;
+    giftMsg.giftUrl = giftModel.giftURL;
+    giftMsg.animationUrl = giftModel.animateURL;
+    giftMsg.giftName = giftModel.giftName;
+    [self sendMsg:giftMsg isAddToShow:YES finished:nil];
+}
+
+/// 处理礼物动效
+/// @param model model description
+- (void)handleGiftEffect:(RoomCmdSendGiftModel *)model {
+    [super handleGiftEffect:model];
+    [self showGiftMarquee:model];
+}
+
+- (void)showGiftMarquee:(RoomCmdSendGiftModel *)model {
+    NSString *gameName = @"数字炸弹";
+    NSMutableAttributedString *attrFull = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ 送出", model.sendUser.name]];
+    attrFull.yy_baselineOffset = @(8);
+    NSAttributedString *attr = [NSMutableAttributedString dt_attrWithImage:[UIImage imageNamed:@"gift_heart"] size:CGSizeMake(30, 30) offsetY:-2];
+    NSMutableAttributedString *attrTail = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"x%@ %@ 玩【%@】", @(model.giftCount), model.toUser.name, gameName]];
+    attrTail.yy_baselineOffset = @(8);
+    [attrFull appendAttributedString:attr];
+    [attrFull appendAttributedString:attrTail];
+    NSRange range = [attrFull yy_rangeOfAll];
+    [attrFull addAttributes:@{NSFontAttributeName: UIFONT_MEDIUM(14), NSForegroundColorAttributeName: HEX_COLOR(@"#FFFFFF")} range:range];
+    self.giftMsgLabel.attributedText = attrFull;
+}
+
 - (void)dtAddViews {
     [super dtAddViews];
     [self.sceneView insertSubview:self.videoView atIndex:0];
@@ -83,7 +139,7 @@
     [self.giftMsgLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@10);
         make.trailing.equalTo(@-10);
-        make.height.equalTo(@20);
+        make.height.equalTo(@30);
         make.centerY.equalTo(self.marqueeBottomView);
     }];
     [self.operatorView hiddenVoiceBtn:YES];
@@ -107,7 +163,7 @@
     if (!_marqueeBottomView) {
         _marqueeBottomView = BaseView.new;
         NSArray *colorArr = @[(id) [UIColor dt_colorWithHexString:@"#FEA755" alpha:1].CGColor, (id) [UIColor dt_colorWithHexString:@"#FF5938" alpha:1].CGColor];
-        [_marqueeBottomView dtAddGradientLayer:@[@(0.0f), @(0.0f)] colors:colorArr startPoint:CGPointMake(1, 1) endPoint:CGPointMake(1, 1) cornerRadius:0];
+        [_marqueeBottomView dtAddGradientLayer:@[@(0.0f), @(1.0f)] colors:colorArr startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 1) cornerRadius:0];
     }
     return _marqueeBottomView;
 }
@@ -118,7 +174,6 @@
         _giftMsgLabel.font = UIFONT_MEDIUM(14);
         _giftMsgLabel.textColor = UIColor.whiteColor;
         _giftMsgLabel.textAlignment = NSTextAlignmentCenter;
-        _giftMsgLabel.text = @"星之卡比 送出       x1 邀请主播玩【数字炸弹】";
     }
     return _giftMsgLabel;
 }

@@ -106,9 +106,9 @@
 
     GiftModel *gift4 = GiftModel.new;
     gift4.giftID = 8;
-    gift4.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_128" ofType:@"png" inDirectory:@"Res"];
-    gift4.giftURL = [NSBundle.mainBundle pathForResource:@"sud_600" ofType:@"png" inDirectory:@"Res"];
-    gift4.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
+    gift4.smallGiftURL = [NSBundle.mainBundle pathForResource:@"sud_heart" ofType:@"png" inDirectory:@"Res"];
+    gift4.giftURL = [NSBundle.mainBundle pathForResource:@"sud_heart" ofType:@"png" inDirectory:@"Res"];
+    gift4.animateURL = [NSBundle.mainBundle pathForResource:@"sud_heart" ofType:@"svga" inDirectory:@"Res"];
     gift4.animateType = @"svga";
     gift4.giftName = NSString.dt_room_disco_dance_insert;
     gift4.price = 520;
