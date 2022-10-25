@@ -115,6 +115,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return
 - (BOOL)isSameRtc:(HSConfigContent *)rtcConfig rtcType:(NSString *)rtcType;
 
+/// 获取加载的游戏信息
+/// @param sceneType
+/// @param gameId
+/// @return
+- (HSGameItem *_Nullable)getGameInfo:(NSInteger)sceneType gameId:(int64_t)gameId;
 @end
 
 NS_ASSUME_NONNULL_END

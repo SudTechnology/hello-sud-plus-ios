@@ -415,6 +415,7 @@
 		BC210A7C7C41EA6AC304F981 /* RoomCmdKickoutRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */; };
 		BC210B0390E117B09344D025 /* HsNFTPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100D34F80535C6D8EBA57 /* HsNFTPreferences.m */; };
 		BC210B212D9241C9CE03A083 /* WalletAddressSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF1888895F521C40AFD /* WalletAddressSwitchCell.m */; };
+		BC210C4EA2FC7787EAA76B3B /* PanMoveBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21075880667D53D8E16258 /* PanMoveBaseView.m */; };
 		BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */; };
 		BC210C95ABB4B54FE3951C8B /* PKSelectRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105CB13E224B29A306E7A /* PKSelectRoomView.m */; };
 		BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C677DD6442EA5963655 /* RespModel.m */; };
@@ -1165,6 +1166,7 @@
 		BC2107088B9BF4F4503AF66D /* GuessModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessModel.h; sourceTree = "<group>"; };
 		BC21072658172097AB64FA65 /* ShowSendGiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowSendGiftView.h; sourceTree = "<group>"; };
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
+		BC21075880667D53D8E16258 /* PanMoveBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanMoveBaseView.m; sourceTree = "<group>"; };
 		BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinPopView.h; sourceTree = "<group>"; };
 		BC2107929CECA531C851C092 /* PKSelectRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSelectRoomView.h; sourceTree = "<group>"; };
 		BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessCategoryView.h; sourceTree = "<group>"; };
@@ -1232,6 +1234,7 @@
 		BC210F9EB539BECCF8E84ED1 /* OneOneVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneOneVideoViewController.m; sourceTree = "<group>"; };
 		BC210FAF33BAD4283645718B /* UserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailView.h; sourceTree = "<group>"; };
 		BC210FB8B5AA27D3820666AC /* LeagueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueModel.m; sourceTree = "<group>"; };
+		BC210FC96F80916E6641B91D /* PanMoveBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanMoveBaseView.h; sourceTree = "<group>"; };
 		E51A737628091CBE0097007C /* ZIMManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZIMManager.h; sourceTree = "<group>"; };
 		E51A737728091CD00097007C /* ZIMManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZIMManager.m; sourceTree = "<group>"; };
 		E51FFD5728124F2B001BE2BB /* VolcEngineRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VolcEngineRTC.xcframework; path = Vendors/volc/VolcEngineRTC.xcframework; sourceTree = "<group>"; };
@@ -2928,6 +2931,8 @@
 			children = (
 				BC2108CA6038742A7848B03B /* ShowSendGiftView.m */,
 				BC21072658172097AB64FA65 /* ShowSendGiftView.h */,
+				BC21075880667D53D8E16258 /* PanMoveBaseView.m */,
+				BC210FC96F80916E6641B91D /* PanMoveBaseView.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3606,6 +3611,7 @@
 				BC2109B01B28D63B5CE4CB54 /* OneOneVideoContentView.m in Sources */,
 				BC210A0A1B9FB2F1A8F0C79B /* SuspendOneOneAudioView.m in Sources */,
 				BC2104932603D3EF0321AE0B /* ShowSendGiftView.m in Sources */,
+				BC210C4EA2FC7787EAA76B3B /* PanMoveBaseView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
