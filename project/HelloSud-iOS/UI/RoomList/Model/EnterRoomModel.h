@@ -56,6 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *streamId;
 /// 是否来自创建房间
 @property (nonatomic, assign)BOOL isFromCreate;
+// 秀场播放视频
+@property (nonatomic, strong)NSString * showVideoUrl;
 @end
 
 NS_ASSUME_NONNULL_END

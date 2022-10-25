@@ -8,6 +8,8 @@
 #import "ShowViewController.h"
 #import "ShowSendGiftView.h"
 #import "PanMoveBaseView.h"
+#import <AVKit/AVKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface ShowViewController ()
 @property(nonatomic, strong) UIImageView *ivShowPlayGame;
@@ -21,12 +23,18 @@
 @property(nonatomic, strong) HSGameItem *currentGameItem;
 /// 是否适配处于缩放状态
 @property(nonatomic, assign) BOOL isVideoInScaleMode;
+@property(nonatomic, strong) AVPlayerViewController *avPlayerViewController;
 @end
 
 @implementation ShowViewController
 
+- (void)dealloc {
+    [self removeNotification];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self prepareToPlayVideo];
 }
 
 - (void)dtAddViews {
@@ -99,8 +107,6 @@
     [super dtConfigEvents];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapPlayView:)];
     [self.ivShowPlayGame addGestureRecognizer:tap];
-//    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapVideoView:)];
-//    [self.videoView addGestureRecognizer:tap2];
     UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGameStateView:)];
     [self.gameStateView addGestureRecognizer:tap3];
 }
@@ -154,6 +160,54 @@
 
 - (void)resetVideoView {
     [self changeVideoUIState:self.isVideoInScaleMode];
+}
+
+- (void)prepareToPlayVideo {
+    if (self.enterModel.showVideoUrl) {
+
+        self.avPlayerViewController = [[AVPlayerViewController alloc] init];
+        AVPlayer *avPlayer = [[AVPlayer alloc] initWithURL:[[NSURL alloc] initWithString:self.enterModel.showVideoUrl]];
+        self.avPlayerViewController.player = avPlayer;
+        [self.videoView addSubview:self.avPlayerViewController.view];
+        [self.avPlayerViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.top.trailing.bottom.equalTo(@0);
+        }];
+        self.avPlayerViewController.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        self.avPlayerViewController.view.userInteractionEnabled = false;
+        [avPlayer play];
+        DDLogDebug(@"play video:%@", self.enterModel.showVideoUrl);
+        [self addNotification];
+    }
+}
+
+/**
+*  添加播放器通知
+*/
+- (void)addNotification {
+    //给AVPlayerItem添加播放完成通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.avPlayerViewController.player.currentItem];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterForeground:) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)removeNotification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)applicationDidEnterForeground:(id)sender {
+    [self.avPlayerViewController.player play];
+}
+
+/**
+ *  播放完成通知
+ *
+ *  @param notification 通知对象
+ */
+- (void)playbackFinished:(NSNotification *)notification {
+    NSLog(@"视频播放完成.");
+    // 播放完成后重复播放
+    // 跳到最新的时间点开始播放
+    [self.avPlayerViewController.player seekToTime:CMTimeMake(0, 1)];
+    [self.avPlayerViewController.player play];
 }
 
 /// 请求切换房间
@@ -273,10 +327,6 @@
     [self showSelectGameView];
 }
 
-- (void)onTapVideoView:(id)tap {
-    [self changeVideoUIState:NO];
-}
-
 - (void)onTapGameStateView:(id)tap {
     [self changeVideoUIState:!self.isVideoInScaleMode];
 }
@@ -289,6 +339,7 @@
         [_marqueeBottomView dtAddGradientLayer:@[@(0.0f), @(1.0f)] colors:colorArr startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 1) cornerRadius:0];
     }
     return _marqueeBottomView;
+
 }
 
 - (PanMoveBaseView *)gameStateView {
