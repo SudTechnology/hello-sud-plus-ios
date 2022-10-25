@@ -9,6 +9,7 @@
 #import "SuspendOneOneAudioView.h"
 #import "OneOneAudioViewController.h"
 #import "OneOneVideoViewController.h"
+#import "ShowViewController.h"
 
 @interface SuspendRoomView ()
 @property(nonatomic, strong) UIButton *exitBtn;
@@ -63,6 +64,17 @@ static SuspendRoomView *g_suspendView = nil;
                 }];
                 OneOneVideoViewController *videoViewController = (OneOneVideoViewController *) vc;
                 [g_suspendView showOneOneVideo:videoViewController.getSuspendVideoView];
+                g_suspendView.layer.cornerRadius = 0;
+            } else if ([vc isKindOfClass:[ShowViewController class]]) {
+                // 秀场
+                [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(80);
+                    make.height.mas_equalTo(107);
+                    make.trailing.mas_equalTo(-16);
+                    make.bottom.mas_equalTo(-155);
+                }];
+                ShowViewController *showViewController = (ShowViewController *) vc;
+                [g_suspendView showVideo:showViewController.videoView];
                 g_suspendView.layer.cornerRadius = 0;
             } else {
                 g_suspendView.layer.cornerRadius = 8;
@@ -174,6 +186,9 @@ static SuspendRoomView *g_suspendView = nil;
     } else if ([self.vc isKindOfClass:[OneOneVideoViewController class]]) {
         OneOneVideoViewController *videoViewController = (OneOneVideoViewController *) self.vc;
         [videoViewController resetVideoView];
+    } else if ([self.vc isKindOfClass:[ShowViewController class]]) {
+        ShowViewController *showViewController = (ShowViewController *) self.vc;
+        [showViewController resetVideoView];
     }
 }
 

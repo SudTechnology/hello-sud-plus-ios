@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 秀场场景
 @interface ShowViewController : BaseSceneViewController
 @property(nonatomic, strong, readonly) UIView *videoView;
+- (void)resetVideoView;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -138,6 +138,10 @@
     return NO;
 }
 
+- (void)resetVideoView {
+    [self changeVideoUIState:self.isVideoInScaleMode];
+}
+
 /// 请求切换房间
 - (void)reqChangeToGameGameId:(int64_t)gameId operatorUser:(NSString *)userID {
     if (gameId == 0) {
