@@ -24,6 +24,7 @@
 /// 是否适配处于缩放状态
 @property(nonatomic, assign) BOOL isVideoInScaleMode;
 @property(nonatomic, strong) AVPlayerViewController *avPlayerViewController;
+@property(nonatomic, strong) AVPlayer *avPlayer;
 @end
 
 @implementation ShowViewController
@@ -167,6 +168,7 @@
 
         self.avPlayerViewController = [[AVPlayerViewController alloc] init];
         AVPlayer *avPlayer = [[AVPlayer alloc] initWithURL:[[NSURL alloc] initWithString:self.enterModel.showVideoUrl]];
+        self.avPlayer = avPlayer;
         self.avPlayerViewController.player = avPlayer;
         [self.videoView addSubview:self.avPlayerViewController.view];
         [self.avPlayerViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -187,14 +189,20 @@
     //给AVPlayerItem添加播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.avPlayerViewController.player.currentItem];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterForeground:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
 - (void)removeNotification {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)applicationDidEnterBackground:(id)sender {
+    self.avPlayerViewController.player = nil;
+}
+
 - (void)applicationDidEnterForeground:(id)sender {
-    [self.avPlayerViewController.player play];
+    self.avPlayerViewController.player = self.avPlayer;
+    [self.avPlayer play];
 }
 
 /**
