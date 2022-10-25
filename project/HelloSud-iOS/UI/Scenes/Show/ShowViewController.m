@@ -138,6 +138,20 @@
     return NO;
 }
 
+/// 是否需要自动上麦
+- (BOOL)isNeedAutoUpMic {
+    return NO;
+}
+
+/// 询问是否可以发送该礼物
+/// @param giftModel
+/// @return
+- (BOOL)shouldSendGiftModel:(GiftModel *)giftModel {
+    // 自行处理发送礼物
+    [self sendGiftMsg:giftModel];
+    return NO;
+}
+
 - (void)resetVideoView {
     [self changeVideoUIState:self.isVideoInScaleMode];
 }
@@ -155,7 +169,7 @@
         [super reqChangeToGameGameId:gameId operatorUser:userID];
         [HSThreadUtils dispatchMainAfter:1 callback:^{
             // 发送礼物消息
-            [self sendGiftMsg];
+            [self sendGiftMsg:[GiftService.shared giftByID:8]];
         }];
     };
     v.cancelBlock = ^{
@@ -209,9 +223,8 @@
 }
 
 /// 发送礼物
-- (void)sendGiftMsg {
+- (void)sendGiftMsg:(GiftModel *)giftModel {
 
-    GiftModel *giftModel = [GiftService.shared giftByID:8];
     AudioUserModel *toUser = AudioUserModel.new;
     toUser.userID = @"0";
     toUser.name = @"主播";

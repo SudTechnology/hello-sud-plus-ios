@@ -208,6 +208,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否显示添加通用机器人按钮
 - (BOOL)isShowAddRobotBtn;
 
+/// 询问是否可以发送该礼物
+/// @param giftModel
+/// @return
+- (BOOL)shouldSendGiftModel:(GiftModel *)giftModel;
+
 /// 总需要添加机器人数
 /// @return
 - (NSInteger)willBeAddedTotalRobotCount;

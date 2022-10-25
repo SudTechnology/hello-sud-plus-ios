@@ -196,6 +196,9 @@
         if (weakSelf.isNeedToLoadSceneGiftList) {
             [pannelView loadSceneGift:weakSelf.gameId sceneId:weakSelf.enterModel.sceneType isAppend:weakSelf.isAppendSceneGiftList];
         }
+        pannelView.shouldSendGiftBlock = ^(GiftModel *giftModel){
+            return [weakSelf shouldSendGiftModel:giftModel];
+        };
         [DTSheetView show:pannelView rootView:AppUtil.currentWindow hiddenBackCover:YES onCloseCallback:^{
             [weakSelf.operatorView resetAllSelectedUser];
         }];
@@ -1261,6 +1264,13 @@
 
 /// 是否显示添加通用机器人按钮
 - (BOOL)isShowAddRobotBtn {
+    return YES;
+}
+
+/// 询问是否可以发送该礼物
+/// @param giftModel
+/// @return
+- (BOOL)shouldSendGiftModel:(GiftModel *)giftModel {
     return YES;
 }
 

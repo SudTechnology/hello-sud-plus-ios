@@ -224,6 +224,14 @@
 
 - (void)onBtnSend:(UIButton *)sender {
 
+    GiftModel *giftModel = self.giftContentView.didSelectedGift;
+    if (self.shouldSendGiftBlock) {
+        BOOL should = self.shouldSendGiftBlock(giftModel);
+        if (!should) {
+            return;
+        }
+    }
+
     NSMutableArray<AudioUserModel *> *arrWaitForSend = NSMutableArray.new;
     for (AudioRoomMicModel *m in self.userDataList) {
         if (m.isSelected && m.user != nil) {
@@ -239,7 +247,7 @@
         return;
     }
     for (AudioUserModel *user in arrWaitForSend) {
-        GiftModel *giftModel = self.giftContentView.didSelectedGift;
+
         AudioUserModel *toUser = user;
         RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
         giftMsg.type = giftModel.type;
