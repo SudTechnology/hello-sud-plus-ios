@@ -17,6 +17,7 @@
 #import <NIMSDK/NIMSDK.h>
 #import "SDImageSVGNativeCoder.h"
 #import <AFNetworking/AFNetworking.h>
+#import "UpgradeAlertView.h"
 
 @interface AppDelegate () {
 
@@ -29,7 +30,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
     // 配置顶部tableview不留出状态栏
     if (@available(iOS 11.0, *)) {
         UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -108,11 +109,18 @@
     }
     if (model.upgradeType == 1) {
         /// 强制升级
-        [DTAlertView showTextAlert:NSString.dt_update_app_ver_low sureText:NSString.dt_update_now cancelText:nil disableAutoClose:YES onSureCallback:^{
+
+        UpgradeAlertView *v = [[UpgradeAlertView alloc] initWithTitle:model.dialogTitle content:model.dialogContent upgradeType:model.upgradeType];
+        v.sureBlock = ^{
+            DDLogDebug(@"确定");
             [self openPath:model.packageUrl];
-        }          onCloseCallback:^{
+        };
+        v.cancelBlock = ^{
+            DDLogDebug(@"取消");
             [DTAlertView close];
-        }];
+        };
+        [DTAlertView show:v rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:nil];
+        return;
     } else if (model.upgradeType == 2) {
         /// 引导升级
         // 2.格式化日期
@@ -123,10 +131,18 @@
         if (!isTodayShow) {
             [NSUserDefaults.standardUserDefaults setBool:YES forKey:keyTodayShow];
             [NSUserDefaults.standardUserDefaults synchronize];
-            [DTAlertView showTextAlert:NSString.dt_update_app_ver_new sureText:NSString.dt_update_now cancelText:NSString.dt_next_time_again_say onSureCallback:^{
+            UpgradeAlertView *v = [[UpgradeAlertView alloc] initWithTitle:model.dialogTitle content:model.dialogContent upgradeType:model.upgradeType];
+            v.sureBlock = ^{
+                DDLogDebug(@"确定");
                 [self openPath:model.packageUrl];
                 [DTAlertView close];
-            }          onCloseCallback:nil];
+            };
+            v.cancelBlock = ^{
+                DDLogDebug(@"取消");
+                [DTAlertView close];
+            };
+            [DTAlertView show:v rootView:nil clickToClose:NO showDefaultBackground:YES onCloseCallback:nil];
+            return;
         }
 
     }
@@ -232,14 +248,15 @@
     [AFNetworkReachabilityManager.sharedManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         DDLogDebug(@"net status:%@", @(status));
         switch (status) {
-                
+
             case AFNetworkReachabilityStatusReachableViaWiFi:
             case AFNetworkReachabilityStatusReachableViaWWAN:
                 if (AppService.shared.login.isLogin) {
                     [AppService.shared.login checkToken];
                 }
                 break;
-            default:break;
+            default:
+                break;
         }
     }];
     [AFNetworkReachabilityManager.sharedManager startMonitoring];

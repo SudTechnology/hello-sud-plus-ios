@@ -20,6 +20,10 @@
 @property (nonatomic, copy) NSString * targetVersion;
 /// 升级类型(1强制升级，2引导升级)
 @property (nonatomic, assign) NSInteger upgradeType;
+/// 弹窗标题
+@property (nonatomic, copy) NSString *dialogTitle;
+/// 弹窗内容
+@property (nonatomic, copy) NSString * dialogContent;
 
 @end
 

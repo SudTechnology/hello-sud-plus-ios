@@ -34,7 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否设置为准备状态
 /// @param isReady  true 准备，false 取消准备
-- (void)shid:(BOOL)isReady;
+- (void)notifyAppCommonSelfReady:(BOOL)isReady;
+
 
 /// 游戏中状态设置
 /// @param isPlaying   true 开始游戏，false 结束游戏
