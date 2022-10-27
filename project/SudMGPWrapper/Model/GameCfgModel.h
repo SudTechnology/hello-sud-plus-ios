@@ -172,6 +172,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL hide;
 @end
 
+@interface Logo : NSObject
+@property(nonatomic, assign) BOOL hide;
+@end
+
 
 @interface GameUi : NSObject
 /// 大厅游戏位上队长标识
@@ -237,6 +241,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UmoIcon *umo_icon;
 /// 游戏中牌桌背景图 （注：只对某些带牌桌类游戏有作用）
 @property(nonatomic, strong) GameTableImage *game_table_image;
+/// 大厅中的logo
+@property(nonatomic, strong) Logo *logo;
 @end
 
 @interface GameCfgModel : NSObject
