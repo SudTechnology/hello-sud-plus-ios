@@ -371,14 +371,8 @@
 
 /// 默认配置
 + (GameCfgModel *)defaultCfgModel {
-    LobbyPlayers *l = [[LobbyPlayers alloc] init];
-    l.hide = true;
     GameCfgModel *m = [[GameCfgModel alloc] init];
     m.gameSoundVolume = 100;
-    m.ui.lobby_players = l;
-    m.ui.nft_avatar.hide = NO;
-    m.ui.game_opening.hide = NO;
-    m.ui.game_mvp.hide = NO;
     return m;
 }
 

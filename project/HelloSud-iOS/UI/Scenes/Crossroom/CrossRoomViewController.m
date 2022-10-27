@@ -905,6 +905,9 @@ typedef NS_ENUM(NSInteger, PKStateType) {
 - (NSString *)onGetGameCfg {
 
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
+    m.ui.nft_avatar.hide = NO;
+    m.ui.game_opening.hide = NO;
+    m.ui.game_mvp.hide = NO;
     m.ui.lobby_players.hide = NO;
     m.ui.start_btn.custom = YES;
     m.ui.lobby_game_setting.hide = YES;
