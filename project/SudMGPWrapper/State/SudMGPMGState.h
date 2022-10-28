@@ -85,6 +85,8 @@ static NSString *MG_COMMON_SELF_TURN_STATUS = @"mg_common_self_turn_status";
 static NSString *MG_COMMON_SELF_SELECT_STATUS = @"mg_common_self_select_status";
 /// 游戏通知app层当前游戏剩余时间（2022-05-23新增，目前UMO生效）
 static NSString *MG_COMMON_GAME_COUNTDOWN_TIME = @"mg_common_game_countdown_time";
+/// 游戏通知app层当前玩家死亡后变成ob视角 （2022-08-23新增，前狼人杀生效）
+static NSString *MG_COMMON_SELF_OB_STATUS = @"mg_common_self_ob_status";
 
 #pragma mark - 你画我猜
 /// 选词中
@@ -145,7 +147,9 @@ static NSString *MG_COMMON_GAME_DISCO_ACTION_END = @"mg_common_game_disco_action
 
 @interface MGCommonPublicMessageModel : NSObject
 @property(nonatomic, assign) NSInteger type;
-@property(nonatomic, copy) NSArray<GamePublicMsg *> *msg;
+@property(nonatomic, copy)
+NSArray<GamePublicMsg *> *
+msg;
 @end
 
 
@@ -156,7 +160,9 @@ static NSString *MG_COMMON_GAME_DISCO_ACTION_END = @"mg_common_game_disco_action
 /// 单个关键词，兼容老版本
 @property(nonatomic, copy) NSString *word;
 /// 必填字段；关键词列表，可以传送多个关键词
-@property(nonatomic, strong) NSArray<NSString *> *wordList;
+@property(nonatomic, strong)
+NSArray<NSString *> *
+wordList;
 /// 必填字段；关键词语言，默认:zh-CN(老版本游戏可能没有)；透传
 @property(nonatomic, copy) NSString *wordLanguage;
 /// 必填字段；text:文本包含匹配; number:数字等于匹配(必填字段)；默认:text(老版本游戏可能没有)；数字炸弹填number；透传
@@ -194,7 +200,9 @@ static NSString *MG_COMMON_GAME_DISCO_ACTION_END = @"mg_common_game_disco_action
 /// 本局游戏id
 @property(nonatomic, copy) NSString *gameRoundId;
 ///
-@property(nonatomic, copy) NSArray<MGCommonGameSettleResults *> *results;
+@property(nonatomic, copy)
+NSArray<MGCommonGameSettleResults *> *
+results;
 @end
 
 
@@ -248,10 +256,11 @@ static NSString *MG_COMMON_GAME_DISCO_ACTION_END = @"mg_common_game_disco_action
 
 
 #pragma mark - MG_COMMON_GAME_STATE
-typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
-    MGCommonGameStateTypeIdle = 0, // 空闲状态
-    MGCommonGameStateTypeLoading = 1, // 所有玩家都准备好
-    MGCommonGameStateTypePlaying = 2, // 正在游戏中
+typedef NS_ENUM(NSInteger, MGCommonGameStateType
+) {
+MGCommonGameStateTypeIdle = 0, // 空闲状态
+MGCommonGameStateTypeLoading = 1, // 所有玩家都准备好
+MGCommonGameStateTypePlaying = 2, // 正在游戏中
 };
 
 /// 通用状态-游戏: 游戏状态
@@ -291,7 +300,9 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 
 @interface MGCommonGameSoundListModel : NSObject
-@property(nonatomic, copy) NSArray<MGCommonGameSoundList *> *list;
+@property(nonatomic, copy)
+NSArray<MGCommonGameSoundList *> *
+list;
 
 @end
 
@@ -338,7 +349,9 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 /// true:打开语音识别 false:关闭语音识别
 @property(nonatomic, assign) BOOL isOpen;
 /// 必填字段；关键词列表，可以传送多个关键词
-@property(nonatomic, copy) NSArray <NSString *> *wordList;
+@property(nonatomic, copy)
+NSArray <NSString *> *
+wordList;
 /// 必填字段；关键词语言，默认:zh-CN(老版本游戏可能没有)；透传
 @property(nonatomic, copy) NSString *wordLanguage;
 /// 必填字段；text:文本包含匹配; number:数字等于匹配(必填字段)；默认:text(老版本游戏可能没有)；数字炸弹填number；透传
@@ -410,7 +423,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 /// true 游戏中，false 未在游戏中；
 @property(nonatomic, assign) BOOL isPlaying;
 /// 本轮游戏id，当isPlaying==true时有效
-@property(nonatomic, copy) NSString * gameRoundId;
+@property(nonatomic, copy) NSString *gameRoundId;
 /// 当isPlaying==false时有效；isPlaying=false, 0:正常结束 1:提前结束（自己不玩了）2:无真人可以提前结束（无真人，只有机器人） 3:所有人都提前结束；（reason默认-1，无意义便于处理）
 @property(nonatomic, assign) int reason;
 /// true 建议尽量收缩原生UI，给游戏留出尽量大的操作空间 false 初始状态；
@@ -505,6 +518,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 
 #pragma mark - 游戏通知app玩家死亡状态  MG_COMMON_SELF_DIE_STATUS
+
 @interface MGCommonSelfDieStatusModel : NSObject
 /// 用户id
 @property(nonatomic, copy) NSString *uid;
@@ -513,6 +527,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 
 #pragma mark - 游戏通知app轮到玩家出手状态  MG_COMMON_SELF_TURN_STATUS
+
 @interface MGCommonSelfTurnStatusModel : NSObject
 /// 用户id
 @property(nonatomic, copy) NSString *uid;
@@ -521,6 +536,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 
 #pragma mark - 游戏通知app玩家选择状态  MG_COMMON_SELF_SELECT_STATUS
+
 @interface MGCommonSelfSelectStatusModel : NSObject
 /// 用户id
 @property(nonatomic, copy) NSString *uid;
@@ -529,12 +545,14 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 
 #pragma mark - 游戏通知app层当前游戏剩余时间  MG_COMMON_GAME_COUNTDOWN_TIME
+
 @interface MGCommonGameCountdownTimeModel : NSObject
 /// 剩余时间，单位为秒
 @property(nonatomic, assign) NSInteger countdown;
 @end
 
 #pragma mark - App通用状态操作结果错误码 MG_COMMON_APP_COMMON_SELF_X_RESP
+
 @interface MGCommonAppCommonSelfXRespModel : NSObject
 /// 字段必填, 参考：游戏业务错误 https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html
 @property(nonatomic, strong) NSString *state;
@@ -560,7 +578,9 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 /// 返回码 0：成功，非0：不成功
 @property(nonatomic, assign) NSInteger resultCode;
 /// ["123", ...] // 加入成功的playerId列表
-@property(nonatomic, strong) NSArray<NSString *> *userIds;
+@property(nonatomic, strong)
+NSArray<NSString *> *
+userIds;
 @end
 
 #pragma mark - 游戏通知app层添当前网络连接状态 MG_COMMON_GAME_NETWORK_STATE
@@ -568,6 +588,12 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @interface MGCommonGameNetworkStateModel : NSObject
 /// 0:closed, 1: connected
 @property(nonatomic, assign) NSInteger state;
+@end
+
+#pragma mark - 游戏通知app层当前玩家死亡后变成ob视角 MG_COMMON_SELF_OB_STATUS
+
+@interface MgCommonSelfObStatusModel : NSObject
+@property(nonatomic, assign) BOOL isOb;
 @end
 
 NS_ASSUME_NONNULL_END

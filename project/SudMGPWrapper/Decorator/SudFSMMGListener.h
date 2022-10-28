@@ -114,6 +114,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏通知app层添当前网络连接状态 MG_COMMON_GAME_NETWORK_STATE
 - (void)onGameMGCommonGameNetworkState;
 
+/// 游戏通知app层当前玩家死亡后变成ob视角
+- (void)onGameMGCommonSelfObStatus:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSelfObStatusModel *)model;
+
 
 /// 玩家状态变化
 /// 玩家: 加入状态  MG_COMMON_PLAYER_IN
