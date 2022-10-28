@@ -142,6 +142,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 玩家: 游戏通知app点击玩家头像  MG_COMMON_SELF_CLICK_GAME_PLAYER_ICON
 - (void)onPlayerMGCommonSelfClickGamePlayerIcon:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGCommonSelfClickGamePlayerIconModel *)model;
 
+/// 游戏通知app层当前玩家死亡后变成ob视角
+- (void)onGameMGCommonSelfObStatus:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSelfObStatusModel *)model;
+
 /// 你画我猜状态
 /// 你画我猜: 选词中  MG_DG_SELECTING
 - (void)onPlayerMGDGSelecting:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGDGSelectingModel *)model;

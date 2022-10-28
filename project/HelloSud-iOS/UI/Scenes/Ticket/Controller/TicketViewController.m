@@ -34,6 +34,9 @@
 /// 获取游戏Config  【需要实现】
 - (NSString *)onGetGameCfg {
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
+    m.ui.nft_avatar.hide = NO;
+    m.ui.game_opening.hide = NO;
+    m.ui.game_mvp.hide = NO;
     m.ui.lobby_players.hide = true;
     m.ui.ready_btn.custom = true;
     m.ui.start_btn.custom = true;

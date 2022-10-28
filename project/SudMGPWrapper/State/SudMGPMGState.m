@@ -224,3 +224,7 @@
 
 @implementation MGCommonGameSetScoreModel
 @end
+
+@implementation MgCommonSelfObStatusModel
+@end
+
