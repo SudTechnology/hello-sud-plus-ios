@@ -218,3 +218,6 @@
 
 @implementation MGCommonGameNetworkStateModel
 @end
+
+@implementation MgCommonSelfObStatusModel
+@end

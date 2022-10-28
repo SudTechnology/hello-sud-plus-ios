@@ -449,6 +449,13 @@
             [self.listener onPlayerMGCommonGameCountdownTime:handle userId:userId model:m];
             return;
         }
+    } else if ([state isEqualToString:MG_COMMON_SELF_OB_STATUS]) {
+        /// 游戏通知app层当前玩家死亡后变成ob视角 （2022-08-23新增，前狼人杀生效）
+        MgCommonSelfObStatusModel *m = [MgCommonSelfObStatusModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfObStatus:model:)]) {
+            [self.listener onGameMGCommonSelfObStatus:handle model:m];
+            return;
+        }
     } else {
         NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态");
     }
