@@ -50,7 +50,9 @@ static NSString *APP_COMMON_GAME_SETTING_SELECT_INFO = @"app_common_game_setting
 static NSString *APP_COMMON_GAME_RECONNECT = @"app_common_game_reconnect";
 /// app返回玩家当前积分（2022-09-26新增）
 static NSString *APP_COMMON_GAME_SCORE = @"app_common_game_score";
+
 #pragma mark - 互动礼物<火箭>
+
 /// 礼物配置文件(火箭)
 static NSString *APP_CUSTOM_ROCKET_CONFIG = @"app_custom_rocket_config";
 /// 拥有模型列表(火箭)
@@ -138,6 +140,114 @@ static NSString *APP_CUSTOM_ROCKET_HIDE_GAME = @"app_custom_rocket_hide_game";
 @interface AppCommonGameScore : NSObject
 /// 玩家当前积分
 @property(nonatomic, assign) NSInteger score;
+@end
+
+#pragma mark - 互动礼物火箭 model
+
+/// 火箭组件
+@interface RocketComponentItem : NSObject
+/// 1套装，2主仓，3尾翼
+@property(nonatomic, assign) NSInteger type;
+/// 价格 暂时不考虑小数
+@property(nonatomic, assign) CGFloat price;
+/// 永久：0非永久 1永久
+@property(nonatomic, assign) NSInteger isForever;
+/// 有效期：单位是秒
+@property(nonatomic, assign) NSInteger validTime;
+/// 组件的ID
+@property(nonatomic, assign) NSInteger id;
+/// 锁：0不锁 1锁
+@property(nonatomic, assign) NSInteger isLock;
+/// 展示：0不展示 1展示
+@property(nonatomic, assign) NSInteger isShow;
+/// 显示名称(商城+装配间+购买记录+...)
+@property(nonatomic, copy) NSString *name;
+/// 图片ID
+@property(nonatomic, copy) NSString *imageId;
+@end
+
+/// 火箭头像配置
+@interface RocketHeadItem : NSObject
+/// 4头像(商城+装配间+购买记录+...)
+@property(nonatomic, assign) NSInteger type;
+/// 价格 暂时不考虑小数
+@property(nonatomic, assign) CGFloat price;
+/// 永久：0非永久 1永久
+@property(nonatomic, assign) NSInteger isForever;
+/// 有效期：单位是秒
+@property(nonatomic, assign) NSInteger validTime;
+/// 显示名称
+@property(nonatomic, copy) NSString *name;
+/// 用户的userID
+@property(nonatomic, copy) NSString *userID;
+/// 昵称
+@property(nonatomic, copy) NSString *nickName;
+/// 性别 0:男 1:女
+@property(nonatomic, assign) NSInteger sex;
+/// 头像URL
+@property(nonatomic, copy) NSString *url;
+@end
+
+/// 火箭专属配置
+@interface RocketExtraItem : NSObject
+/// 5签名，6颜色
+@property(nonatomic, assign) NSInteger type;
+/// 显示名称(商城+装配间+购买记录+...)
+@property(nonatomic, copy) NSString *name;
+/// 价格
+@property(nonatomic, assign) CGFloat price;
+/// 永久：0非永久 1永久
+@property(nonatomic, assign) NSInteger isForever;
+/// 有效期：单位是秒
+@property(nonatomic, assign) NSInteger validTime;
+/// 专属签名需花费99999积分,7天过期
+@property(nonatomic, copy) NSString *desc;
+@end
+
+/// APP_CUSTOM_ROCKET_CONFIG
+@interface AppCustomRocketConfig : NSObject
+/// 最大机位
+@property(nonatomic, assign) NSInteger maxSeat;
+/// 发射的静态价格
+@property(nonatomic, assign) CGFloat firePrice;
+/// 发射价格是否动态开关 0:静态 1动态
+@property(nonatomic, assign) NSInteger isDynamicPrice;
+/// 玩法介绍
+@property(nonatomic, copy) NSString *gameIntroduce;
+/// 组件列表
+@property(nonatomic, strong) NSArray<RocketComponentItem *> *componentList;
+/// 过滤不显示的模块(默认是为空)
+/// "mainModel",               //装配间
+/// "shopModel",               //商城
+/// "roomModel",               //展馆
+/// "helpModel",               //购买记录+规则介绍
+/// "recordModel",             //购买记录
+/// "introduceModel",          //规则介绍
+@property(nonatomic, strong) NSArray <NSString *> *filterModel;
+/// 过滤不显示的页面(默认是为空)
+/// "rocketLayer",               //套装
+/// "bodyLayer",                 //主仓
+/// "wingLayer",                 //尾翼
+/// "headLayer",                 //头像
+/// "signLayer",                 //签名
+/// "colorLayer",                //颜色
+@property(nonatomic, strong) NSArray <NSString *> *filterLayer;
+/// 头像配置
+@property(nonatomic, strong) NSArray <RocketHeadItem *> *headList;
+/// 专属配置
+@property(nonatomic, strong) NSArray <RocketExtraItem *> *extraList;
+@end
+
+/// 火箭模型组件item
+@interface RocketModelComponentItem : NSObject
+@end
+
+/// APP_CUSTOM_ROCKET_MODEL_LIST
+@interface AppCustomRocketModelList : NSObject
+/// 默认座位
+@property(nonatomic, assign) NSInteger defaultSeat;
+/// 截图：0不截图 1截图(app上传失败或者过期时,被动截图)
+@property(nonatomic, assign) NSInteger isScreenshot;
 @end
 
 
