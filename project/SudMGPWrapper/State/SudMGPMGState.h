@@ -116,8 +116,8 @@ static NSString *MG_CUSTOM_ROCKET_CONFIG = @"mg_custom_rocket_config";
 static NSString *MG_CUSTOM_ROCKET_MODEL_LIST = @"mg_custom_rocket_model_list";
 /// 拥有组件列表(火箭)
 static NSString *MG_CUSTOM_ROCKET_COMPONENT_LIST = @"mg_custom_rocket_component_list";
-/// 获取用户的头像URL(火箭)
-static NSString *MG_CUSTOM_ROCKET_PLAYER_HEAD_URL = @"mg_custom_rocket_player_head_url";
+/// 获取用户的信息(火箭)
+static NSString *MG_CUSTOM_ROCKET_USER_INFO = @"mg_custom_rocket_user_info";
 /// 订单记录列表(火箭)
 static NSString *MG_CUSTOM_ROCKET_ORDER_RECORD_LIST = @"mg_custom_rocket_order_record_list";
 /// 展馆内列表(火箭)

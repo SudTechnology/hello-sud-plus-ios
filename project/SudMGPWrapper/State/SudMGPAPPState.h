@@ -50,6 +50,41 @@ static NSString *APP_COMMON_GAME_SETTING_SELECT_INFO = @"app_common_game_setting
 static NSString *APP_COMMON_GAME_RECONNECT = @"app_common_game_reconnect";
 /// app返回玩家当前积分（2022-09-26新增）
 static NSString *APP_COMMON_GAME_SCORE = @"app_common_game_score";
+#pragma mark - 互动礼物<火箭>
+/// 礼物配置文件(火箭)
+static NSString *APP_CUSTOM_ROCKET_CONFIG = @"app_custom_rocket_config";
+/// 拥有模型列表(火箭)
+static NSString *APP_CUSTOM_ROCKET_MODEL_LIST = @"app_custom_rocket_model_list";
+/// 获取用户的信息(火箭)
+static NSString *APP_CUSTOM_ROCKET_USER_INFO = @"app_custom_rocket_user_info";
+/// app推送主播信息(火箭)
+static NSString *APP_CUSTOM_ROCKET_NEW_USER_INFO = @"app_custom_rocket_new_user_info";
+/// 订单记录列表(火箭)
+static NSString *APP_CUSTOM_ROCKET_ORDER_RECORD_LIST = @"app_custom_rocket_order_record_list";
+/// 展馆内列表(火箭)
+static NSString *APP_CUSTOM_ROCKET_ROOM_RECORD_LIST = @"app_custom_rocket_room_record_list";
+/// 展馆内玩家送出记录(火箭)
+static NSString *APP_CUSTOM_ROCKET_USER_RECORD_LIST = @"app_custom_rocket_user_record_list";
+/// 设置默认位置(火箭)
+static NSString *APP_CUSTOM_ROCKET_SET_DEFAULT_SEAT = @"app_custom_rocket_set_default_seat";
+/// 动态计算一键发送价格(火箭)
+static NSString *APP_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE = @"app_custom_rocket_dynamic_fire_price";
+/// 一键发送(火箭)
+static NSString *APP_CUSTOM_ROCKET_FIRE_MODEL = @"app_custom_rocket_fire_model";
+/// 新组装模型(火箭)
+static NSString *APP_CUSTOM_ROCKET_CREATE_MODEL = @"app_custom_rocket_create_model";
+/// 更换组件(火箭)
+static NSString *APP_CUSTOM_ROCKET_REPLACE_COMPONENT = @"app_custom_rocket_replace_component";
+/// 购买组件(火箭)
+static NSString *APP_CUSTOM_ROCKET_BUY_COMPONENT = @"app_custom_rocket_buy_component";
+/// app推送播放模型(火箭)
+static NSString *APP_CUSTOM_ROCKET_PLAY_MODEL_LIST = @"app_custom_rocket_play_model_list";
+/// 验证签名合规(火箭)
+static NSString *APP_CUSTOM_ROCKET_VERIFY_SIGN = @"app_custom_rocket_verify_sign";
+/// app主动调起游戏显示(火箭)
+static NSString *APP_CUSTOM_ROCKET_SHOW_GAME = @"app_custom_rocket_show_game";
+/// app主动调起游戏隐藏(火箭)
+static NSString *APP_CUSTOM_ROCKET_HIDE_GAME = @"app_custom_rocket_hide_game";
 
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
@@ -76,27 +111,27 @@ static NSString *APP_COMMON_GAME_SCORE = @"app_common_game_score";
 @end
 
 /// APP_COMMON_GAME_ADD_AI_PLAYERS
-@interface AppCommonGameAddAIPlayersModel: NSObject
+@interface AppCommonGameAddAIPlayersModel : NSObject
 /// 玩家列表
-@property (nonatomic, strong)NSArray <AIPlayerInfoModel *> *aiPlayers;
+@property(nonatomic, strong) NSArray <AIPlayerInfoModel *> *aiPlayers;
 /// isReady  机器人加入后是否自动准备 1：自动准备，0：不自动准备 默认为1
-@property (nonatomic, assign)BOOL isReady;
+@property(nonatomic, assign) BOOL isReady;
 @end
 
 // ludo游戏玩法选项
 @interface AppCommonGameSettingGameLudo
 /// mode: 默认赛制，0: 快速, 1: 经典;
-@property (nonatomic, assign)NSInteger mode;
+@property(nonatomic, assign) NSInteger mode;
 /// chessNum: 默认棋子数量, 2: 对应2颗棋子; 4: 对应4颗棋子;
-@property (nonatomic, assign)NSInteger chessNum;
+@property(nonatomic, assign) NSInteger chessNum;
 /// mode: 默认道具, 1: 有道具, 0: 没有道具
-@property (nonatomic, assign)NSInteger item;
+@property(nonatomic, assign) NSInteger item;
 @end
 
 /// APP_COMMON_GAME_SETTING_SELECT_INFO
-@interface AppCommonGameSettingGameInfo: NSObject
+@interface AppCommonGameSettingGameInfo : NSObject
 // 游戏名称
-@property (nonatomic, strong)AppCommonGameSettingGameLudo *ludo;
+@property(nonatomic, strong) AppCommonGameSettingGameLudo *ludo;
 @end
 
 /// APP_COMMON_GAME_SCORE
