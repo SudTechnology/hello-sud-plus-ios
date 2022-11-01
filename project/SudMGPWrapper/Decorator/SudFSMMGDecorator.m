@@ -140,6 +140,12 @@
  */
 - (void)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
     NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:onGameStateChange:%@ --dataJson:%@", state, dataJson]);
+    if ([self.listener respondsToSelector:@selector(onGameStateChange:state:dataJson:)]) {
+        BOOL isHandled = [self.listener onGameStateChange:handle state:state dataJson:dataJson];
+        if (isHandled) {
+            return;
+        }
+    }
 
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         MGCommonPublicMessageModel *m = [MGCommonPublicMessageModel mj_objectWithKeyValues:dataJson];
@@ -334,6 +340,12 @@
  */
 - (void)onPlayerStateChange:(nullable id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
     NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:userId:%@, onPlayerStateChange:%@ --dataJson:%@", userId, state, dataJson]);
+    if ([self.listener respondsToSelector:@selector(onPlayerStateChange:userId:state:dataJson:)]) {
+        BOOL isHandled = [self.listener onPlayerStateChange:handle userId:userId state:state dataJson:dataJson];
+        if (isHandled) {
+            return;
+        }
+    }
 
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues:dataJson];
