@@ -51,11 +51,13 @@
 
 /// Comon
 #import "AppUtil.h"
-#import "SudMGPWrapperHeader.h"
 #import "ServiceConstHeader.h"
 #import "HSHttpService.h"
 #import "BaseSceneService.h"
 #import "WebpImageCacheService.h"
+
+/// SudMGPWrapper
+#import <SudMGPWrapper/SudMGPWrapperHeader.h>
 
 /// Page
 #import "CommonRoomModelHeader.h"

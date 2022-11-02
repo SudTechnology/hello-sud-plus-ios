@@ -16,6 +16,7 @@
 #import "DanmakuRoomService.h"
 #import "DiscoRoomService.h"
 #import "LeagueRoomService.h"
+#import "RocketService.h"
 
 // 语音服务
 #define kAudioRoomService ((AudioRoomService *)AppService.shared.scene)

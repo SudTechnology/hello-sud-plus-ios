@@ -25,6 +25,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// setI SudFSTAPP
 - (void)setISudFSTAPP:(id <ISudFSTAPP>)iSudFSTAPP;
 
+/// 继续游戏
+- (void)playMG;
+
+/// 暂停游戏
+- (void)pauseMG;
+
+/// 销毁游戏
+- (void)destroyMG;
+
+/// 获取游戏View
+- (UIView *)getGameView;
+
+/// 更新code
+/// @param code 新的code
+- (void)updateCode:(NSString *)code;
+
+/// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
+- (void)pushAudio:(NSData *)data;
+
 /// 加入,退出游戏
 /// @param isIn true 加入游戏，false 退出游戏
 /// @param seatIndex 加入的游戏位(座位号) 默认传seatIndex = -1 随机加入，seatIndex 从0开始，不可大于座位数
@@ -119,26 +138,45 @@ NS_ASSUME_NONNULL_BEGIN
 /// app返回玩家当前积分 (2022-09-26 新增)
 - (void)notifyAppCommonGameScore:(AppCommonGameScore *)appCommonGameScore;
 
-/// 继续游戏
-- (void)playMG;
-
-/// 暂停游戏
-- (void)pauseMG;
-
-/// 销毁游戏
-- (void)destroyMG;
-
-/// 获取游戏View
-- (UIView *)getGameView;
-
-/// 更新code
-/// @param code 新的code
-- (void)updateCode:(NSString *)code;
-
-/// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
-- (void)pushAudio:(NSData *)data;
-
-
+#pragma mark - 互动礼物
+/// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG
+- (void)notifyAppCustomRocketConfig:(AppCustomRocketConfigModel *)model;
+/// 拥有模型列表(火箭) APP_CUSTOM_ROCKET_MODEL_LIST
+- (void)notifyAppCustomRocketModelList:(AppCustomRocketModelListModel *)model;
+/// 拥有组件列表(火箭) APP_CUSTOM_ROCKET_COMPONENT_LIST
+- (void)notifyAppCustomRocketComponentList:(AppCustomRocketComponentListModel *)model;
+/// 获取用户的信息(火箭) APP_CUSTOM_ROCKET_USER_INFO
+- (void)notifyAppCustomRocketUserInfo:(AppCustomRocketUserInfoModel *)model;
+/// app推送主播信息(火箭) APP_CUSTOM_ROCKET_NEW_USER_INFO
+- (void)notifyAppCustomRocketNewUserInfo:(AppCustomRocketUserInfoModel *)model;
+/// 订单记录列表(火箭) APP_CUSTOM_ROCKET_ORDER_RECORD_LIST
+- (void)notifyAppCustomRocketOrderRecordList:(AppCustomRocketOrderRecordListModel *)model;
+/// 展馆内列表(火箭) APP_CUSTOM_ROCKET_ROOM_RECORD_LIST
+- (void)notifyAppCustomRocketRoomRecordList:(AppCustomRocketRoomRecordListModel *)model;
+/// 展馆内玩家送出记录(火箭) APP_CUSTOM_ROCKET_USER_RECORD_LIST
+- (void)notifyAppCustomRocketUserRecordList:(AppCustomRocketUserRecordListModel *)model;
+/// 设置默认位置(火箭) APP_CUSTOM_ROCKET_SET_DEFAULT_SEAT
+- (void)notifyAppCustomRocketSetDefaultSeat:(AppCustomRocketSetDefaultSeatModel *)model;
+/// 动态计算一键发送价格(火箭) APP_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE
+- (void)notifyAppCustomRocketDynamicFirePrice:(AppCustomRocketDynamicFirePriceModel *)model;
+/// 一键发送(火箭) APP_CUSTOM_ROCKET_FIRE_MODEL
+- (void)notifyAppCustomRocketFireModel:(AppCustomRocketFireModel *)model;
+/// 新组装模型(火箭) APP_CUSTOM_ROCKET_CREATE_MODEL
+- (void)notifyAppCustomRocketCreateModel:(AppCustomRocketCreateModel *)model;
+/// 更换组件(火箭) APP_CUSTOM_ROCKET_REPLACE_COMPONENT
+- (void)notifyAppCustomRocketReplaceComponent:(AppCustomRocketReplaceComponentModel *)model;
+/// 购买组件(火箭) APP_CUSTOM_ROCKET_BUY_COMPONENT
+- (void)notifyAppCustomRocketBuyComponent:(AppCustomRocketBuyComponentModel *)model;
+/// app推送播放模型(火箭) APP_CUSTOM_ROCKET_PLAY_MODEL_LIST
+- (void)notifyAppCustomRocketPlayModelList:(AppCustomRocketPlayModelListModel *)model;
+/// 验证签名合规(火箭) APP_CUSTOM_ROCKET_VERIFY_SIGN
+- (void)notifyAppCustomRocketVerifySign:(AppCustomRocketVerifySignModel *)model;
+/// app主动调起游戏显示(火箭) APP_CUSTOM_ROCKET_SHOW_GAME
+- (void)notifyAppCustomRocketShowGame;
+/// app主动调起游戏隐藏(火箭) APP_CUSTOM_ROCKET_HIDE_GAME
+- (void)notifyAppCustomRocketHideGame;
+/// app推送解锁组件（火箭) APP_CUSTOM_ROCKET_UNLOCK_COMPONENT
+- (void)notifyAppCustomRocketUnlockComponent:(AppCustomRocketUnlockComponent *)model;
 @end
 
 NS_ASSUME_NONNULL_END

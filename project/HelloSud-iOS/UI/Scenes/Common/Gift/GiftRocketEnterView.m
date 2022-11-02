@@ -61,7 +61,7 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    GiftModel *giftModel = [GiftService.shared giftByID:9];
+    GiftModel *giftModel = [GiftService.shared giftByID:kRocketGiftID];
     if (giftModel.giftURL) {
         [self.rocketImageView sd_setImageWithURL:giftModel.giftURL.dt_toURL];
     }

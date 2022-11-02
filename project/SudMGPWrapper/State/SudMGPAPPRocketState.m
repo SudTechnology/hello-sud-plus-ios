@@ -101,3 +101,9 @@
 
 @implementation AppCustomRocketVerifySignModel
 @end
+
+@implementation AppCustomRocketFireModel
+@end
+
+@implementation AppCustomRocketUnlockComponent
+@end

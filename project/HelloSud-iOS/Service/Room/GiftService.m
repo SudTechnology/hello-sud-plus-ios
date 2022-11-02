@@ -104,6 +104,12 @@
     gift9.smallGiftURL = [NSBundle.mainBundle pathForResource:@"gift_rocket" ofType:@"png" inDirectory:@"Res"];
     gift9.giftURL = [NSBundle.mainBundle pathForResource:@"gift_rocket" ofType:@"png" inDirectory:@"Res"];
     gift9.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
+    NSString *localRocketImage = [self getRocketImagePath];
+    // 本地缓存火箭截图
+    if (localRocketImage.length == 0) {
+        gift9.smallGiftURL = localRocketImage;
+        gift9.giftURL = localRocketImage;
+    }
     gift9.animateType = @"svga";
     gift9.giftName = @"定制火箭";
     gift9.leftTagImage = @"gift_rocket_flag_bg";
@@ -138,6 +144,37 @@
 - (nullable GiftModel *)giftByID:(NSInteger)giftID {
     NSString *strGiftID = [NSString stringWithFormat:@"%ld", giftID];
     return self.dicGift[strGiftID];
+}
+
+/// 默认火箭图片名称
+- (NSString *)defaultRocketImagePath {
+    return [NSString stringWithFormat:@"%@/Documents/rocket_shortcut.png", NSHomeDirectory()];
+}
+
+/// 保存火箭数据
+/// @param base64Str
+- (NSString *)saveRocketImage:(NSString *)base64Str {
+    if (base64Str.length == 0) {
+        return nil;
+    }
+    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:base64Str options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSString *filePath = [self defaultRocketImagePath];
+    if ([NSFileManager.defaultManager fileExistsAtPath:filePath]) {
+        [NSFileManager.defaultManager removeItemAtPath:filePath error:nil];
+    }
+    if ([imageData writeToFile:filePath atomically:YES]) {
+        return filePath;
+    }
+    return nil;
+}
+
+/// 获取火箭图片,不存在则返回nil
+- (NSString *_Nullable)getRocketImagePath {
+    NSString *filePath = [self defaultRocketImagePath];
+    if ([NSFileManager.defaultManager fileExistsAtPath:filePath]) {
+        return filePath;
+    }
+    return nil;
 }
 
 /// 拉取礼物列表

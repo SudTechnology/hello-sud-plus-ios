@@ -17,6 +17,41 @@
     _iSudFSTAPP = iSudFSTAPP;
 }
 
+
+/// 继续游戏
+- (void)playMG {
+    [self.iSudFSTAPP playMG];
+}
+
+/// 暂停游戏
+- (void)pauseMG {
+    [self.iSudFSTAPP pauseMG];
+}
+
+- (void)destroyMG {
+    [self.iSudFSTAPP destroyMG];
+}
+
+- (UIView *)getGameView {
+    return [self.iSudFSTAPP getGameView];
+}
+
+/// 更新code
+/// @param code 新的code
+- (void)updateCode:(NSString *)code {
+    [self.iSudFSTAPP updateCode:code listener:^(int retCode, const NSString *retMsg, const NSString *dataJson) {
+        NSLog(@"ISudFSMMG:updateGameCode retCode=%@ retMsg=%@ dataJson=%@", @(retCode), retMsg, dataJson);
+    }];
+}
+
+/// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
+- (void)pushAudio:(NSData *)data {
+    /// 必须要在主线程
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.iSudFSTAPP pushAudio:data];
+    });
+}
+
 /// 加入,退出游戏
 /// @param isIn true 加入游戏，false 退出游戏
 /// @param seatIndex 加入的游戏位(座位号) 默认传seatIndex = -1 随机加入，seatIndex 从0开始，不可大于座位数
@@ -182,38 +217,100 @@
     }];
 }
 
+#pragma mark - 互动礼物
 
-/// 继续游戏
-- (void)playMG {
-    [self.iSudFSTAPP playMG];
+/// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG
+- (void)notifyAppCustomRocketConfig:(AppCustomRocketConfigModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_CONFIG dataJson:model.mj_JSONString];
 }
 
-/// 暂停游戏
-- (void)pauseMG {
-    [self.iSudFSTAPP pauseMG];
+/// 拥有模型列表(火箭) APP_CUSTOM_ROCKET_MODEL_LIST
+- (void)notifyAppCustomRocketModelList:(AppCustomRocketModelListModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_MODEL_LIST dataJson:model.mj_JSONString];
 }
 
-- (void)destroyMG {
-    [self.iSudFSTAPP destroyMG];
+/// 拥有组件列表(火箭) APP_CUSTOM_ROCKET_COMPONENT_LIST
+- (void)notifyAppCustomRocketComponentList:(AppCustomRocketComponentListModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_COMPONENT_LIST dataJson:model.mj_JSONString];
 }
 
-- (UIView *)getGameView {
-    return [self.iSudFSTAPP getGameView];
+/// 获取用户的信息(火箭) APP_CUSTOM_ROCKET_USER_INFO
+- (void)notifyAppCustomRocketUserInfo:(AppCustomRocketUserInfoModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_USER_INFO dataJson:model.mj_JSONString];
 }
 
-/// 更新code
-/// @param code 新的code
-- (void)updateCode:(NSString *)code {
-    [self.iSudFSTAPP updateCode:code listener:^(int retCode, const NSString *retMsg, const NSString *dataJson) {
-        NSLog(@"ISudFSMMG:updateGameCode retCode=%@ retMsg=%@ dataJson=%@", @(retCode), retMsg, dataJson);
-    }];
+/// app推送主播信息(火箭) APP_CUSTOM_ROCKET_NEW_USER_INFO
+- (void)notifyAppCustomRocketNewUserInfo:(AppCustomRocketUserInfoModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_NEW_USER_INFO dataJson:model.mj_JSONString];
 }
 
-/// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
-- (void)pushAudio:(NSData *)data {
-    /// 必须要在主线程
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.iSudFSTAPP pushAudio:data];
-    });
+/// 订单记录列表(火箭) APP_CUSTOM_ROCKET_ORDER_RECORD_LIST
+- (void)notifyAppCustomRocketOrderRecordList:(AppCustomRocketOrderRecordListModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_ORDER_RECORD_LIST dataJson:model.mj_JSONString];
+}
+
+/// 展馆内列表(火箭) APP_CUSTOM_ROCKET_ROOM_RECORD_LIST
+- (void)notifyAppCustomRocketRoomRecordList:(AppCustomRocketRoomRecordListModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_ROOM_RECORD_LIST dataJson:model.mj_JSONString];
+}
+
+/// 展馆内玩家送出记录(火箭) APP_CUSTOM_ROCKET_USER_RECORD_LIST
+- (void)notifyAppCustomRocketUserRecordList:(AppCustomRocketUserRecordListModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_USER_RECORD_LIST dataJson:model.mj_JSONString];
+}
+
+/// 设置默认位置(火箭) APP_CUSTOM_ROCKET_SET_DEFAULT_SEAT
+- (void)notifyAppCustomRocketSetDefaultSeat:(AppCustomRocketSetDefaultSeatModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_SET_DEFAULT_SEAT dataJson:model.mj_JSONString];
+}
+
+/// 动态计算一键发送价格(火箭) APP_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE
+- (void)notifyAppCustomRocketDynamicFirePrice:(AppCustomRocketDynamicFirePriceModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE dataJson:model.mj_JSONString];
+}
+
+/// 一键发送(火箭) APP_CUSTOM_ROCKET_FIRE_MODEL
+- (void)notifyAppCustomRocketFireModel:(AppCustomRocketFireModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_FIRE_MODEL dataJson:model.mj_JSONString];
+}
+
+/// 新组装模型(火箭) APP_CUSTOM_ROCKET_CREATE_MODEL
+- (void)notifyAppCustomRocketCreateModel:(AppCustomRocketCreateModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_CREATE_MODEL dataJson:model.mj_JSONString];
+}
+
+/// 更换组件(火箭) APP_CUSTOM_ROCKET_REPLACE_COMPONENT
+- (void)notifyAppCustomRocketReplaceComponent:(AppCustomRocketReplaceComponentModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_REPLACE_COMPONENT dataJson:model.mj_JSONString];
+}
+
+/// 购买组件(火箭) APP_CUSTOM_ROCKET_BUY_COMPONENT
+- (void)notifyAppCustomRocketBuyComponent:(AppCustomRocketBuyComponentModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_BUY_COMPONENT dataJson:model.mj_JSONString];
+}
+
+/// app推送播放模型(火箭) APP_CUSTOM_ROCKET_PLAY_MODEL_LIST
+- (void)notifyAppCustomRocketPlayModelList:(AppCustomRocketPlayModelListModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_PLAY_MODEL_LIST dataJson:model.mj_JSONString];
+}
+
+/// 验证签名合规(火箭) APP_CUSTOM_ROCKET_VERIFY_SIGN
+- (void)notifyAppCustomRocketVerifySign:(AppCustomRocketVerifySignModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_VERIFY_SIGN dataJson:model.mj_JSONString];
+}
+
+/// app主动调起游戏显示(火箭) APP_CUSTOM_ROCKET_SHOW_GAME
+- (void)notifyAppCustomRocketShowGame {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_SHOW_GAME dataJson:@{}.mj_JSONString];
+}
+
+/// app主动调起游戏隐藏(火箭) APP_CUSTOM_ROCKET_HIDE_GAME
+- (void)notifyAppCustomRocketHideGame {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_HIDE_GAME dataJson:@{}.mj_JSONString];
+}
+
+/// app推送解锁组件（火箭) APP_CUSTOM_ROCKET_UNLOCK_COMPONENT
+- (void)notifyAppCustomRocketUnlockComponent:(AppCustomRocketUnlockComponent *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_UNLOCK_COMPONENT dataJson:model.mj_JSONString];
 }
 @end

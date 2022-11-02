@@ -198,7 +198,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onGameMGCustomRocketHideGameScene:(nonnull id <ISudFSMStateHandle>)handle;
 
 /// 点击锁住组件((火箭) MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT
-- (void)onGameMGCustomRocketClickLockComponent:(nonnull id <ISudFSMStateHandle>)handle;
+- (void)onGameMGCustomRocketClickLockComponent:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketClickLockComponent *)model;
 
 #pragma mark - 玩家状态变化
 

@@ -47,3 +47,6 @@
 
 @implementation MGCustomRocketUploadModelIcon
 @end
+
+@implementation MGCustomRocketClickLockComponent
+@end

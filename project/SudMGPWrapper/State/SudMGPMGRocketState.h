@@ -146,5 +146,11 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 @property(nonatomic, copy) NSString *data;
 @end
 
-
+/// 解锁组件（火箭) MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT
+@interface MGCustomRocketClickLockComponent : NSObject
+/// 组件类型
+@property(nonatomic, assign) NSInteger type;
+/// 组件ID
+@property(nonatomic, assign) NSInteger componentId;
+@end
 NS_ASSUME_NONNULL_END
