@@ -27,6 +27,7 @@
 @property(nonatomic, strong) BaseView *sceneView;
 /// 添加机器人按钮
 @property(nonatomic, strong) BaseView *robotView;
+@property (nonatomic, strong)UIImageView *rocketEnterImageView;
 /// 场景服务
 @property(nonatomic, strong) BaseSceneService *service;
 
@@ -108,6 +109,7 @@
     [self.msgBgView addSubview:self.msgTableView];
     [self.contentView addSubview:self.inputView];
     [self.sceneView addSubview:self.robotView];
+    [self.sceneView addSubview:self.rocketEnterImageView];
     [self.sceneView addSubview:self.asrTipLabel];
 }
 
@@ -176,6 +178,13 @@
         make.width.height.mas_greaterThanOrEqualTo(0);
         make.bottom.equalTo(self.operatorView.mas_top).offset(-6);
     }];
+
+    [self.rocketEnterImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.mas_equalTo(-16);
+        make.width.equalTo(@80);
+        make.height.equalTo(@110);
+        make.bottom.equalTo(self.robotView.mas_top).offset(-20);
+    }];
 }
 
 - (void)dtConfigUI {
@@ -196,7 +205,7 @@
         if (weakSelf.isNeedToLoadSceneGiftList) {
             [pannelView loadSceneGift:weakSelf.gameId sceneId:weakSelf.enterModel.sceneType isAppend:weakSelf.isAppendSceneGiftList];
         }
-        [DTSheetView show:pannelView rootView:AppUtil.currentWindow hiddenBackCover:YES onCloseCallback:^{
+        [DTSheetView show:pannelView rootView:AppUtil.currentWindow hiddenBackCover:YES cornerRadius:0 onCloseCallback:^{
             [weakSelf.operatorView resetAllSelectedUser];
         }];
     };
@@ -1183,6 +1192,14 @@
         [_robotView dtAddGradientLayer:@[@(0.0f), @(1.0f)] colors:colorArr startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 0.28) cornerRadius:4];
     }
     return _robotView;
+}
+
+- (UIImageView *)rocketEnterImageView {
+    if (!_rocketEnterImageView) {
+        _rocketEnterImageView = [[UIImageView alloc]init];
+        _rocketEnterImageView.image = [UIImage imageNamed:@"room_rocket_enter"];
+    }
+    return _rocketEnterImageView;
 }
 
 - (NSMutableDictionary *)dicMicModel {

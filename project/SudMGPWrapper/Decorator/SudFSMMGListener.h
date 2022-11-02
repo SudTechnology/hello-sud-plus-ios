@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param state 游戏状态
  * @param dataJson 回调json
  */
-- (void)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
+- (BOOL)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
 
 /**
  * 游戏玩家状态变化,如实现方实现了改接口，并返回YES，则数据解析完全由实现方自行处理，内部不在做数据模型的解析，返回NO则内部执行数据序列化

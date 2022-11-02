@@ -44,6 +44,7 @@
     }
 
 
+
     for (GiftModel *m in self.dataList) {
         m.isSelected = NO;
     }

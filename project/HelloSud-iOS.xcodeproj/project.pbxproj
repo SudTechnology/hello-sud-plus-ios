@@ -231,9 +231,7 @@
 		6C7CB61928C5E940003A19A8 /* MyNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */; };
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
 		6C8D02D028AB774100C230E5 /* DTUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */; };
-
 		6CA68C4C28E182E200BDE442 /* ReqAddScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */; };
-
 		6CA68C5D28E295EA00BDE442 /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; };
 		6CA68C5E28E295EA00BDE442 /* SudNFT.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6CA68C5F28E295F100BDE442 /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; };
@@ -271,9 +269,7 @@
 		6CA68D3228E29CA700BDE442 /* CNWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D1028E29CA600BDE442 /* CNWalletSelectCell.m */; };
 		6CA68D3328E29CA700BDE442 /* MySelectEtherChainsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D1128E29CA600BDE442 /* MySelectEtherChainsView.m */; };
 		6CA68D3628E2A02600BDE442 /* HsNFTPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D3428E2A02500BDE442 /* HsNFTPreferences.m */; };
-
 		6CA68D3B28E3022D00BDE442 /* LeagueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D3A28E3022D00BDE442 /* LeagueDetailViewController.m */; };
-
 		6CC3E77A28C1BB7D00AA934B /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77728C1BB7D00AA934B /* MyEthereumChainsCellModel.m */; };
 		6CC3E77B28C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77828C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m */; };
 		6CC3E77C28C1BB7D00AA934B /* HSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77928C1BB7D00AA934B /* HSNFTListCellModel.m */; };
@@ -403,6 +399,7 @@
 		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
 		BC2108DF9DCC723A931AC7FA /* LeagueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210FB8B5AA27D3820666AC /* LeagueModel.m */; };
 		BC21090932848A4335D3546F /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210EA4458F6CC10378E975 /* MyViewController.m */; };
+		BC210912DF6D4316210B91E9 /* GiftRocketEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21078DF8C35A0D78A4FC3D /* GiftRocketEnterView.m */; };
 		BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */; };
 		BC21097342CF79274F4049F3 /* HsAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109AEEB6FC34520DCBA33 /* HsAppPreferences.m */; };
 		BC21098A0CA7595992F3EC61 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */; };
@@ -882,10 +879,8 @@
 		6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespDiscoModel.m; sourceTree = "<group>"; };
 		6C8D02CE28AB774000C230E5 /* DTUIImage+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTUIImage+Extension.h"; sourceTree = "<group>"; };
 		6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "DTUIImage+Extension.m"; sourceTree = "<group>"; };
-
 		6CA68C4A28E182E200BDE442 /* ReqAddScoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqAddScoreModel.h; sourceTree = "<group>"; };
 		6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqAddScoreModel.m; sourceTree = "<group>"; };
-
 		6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SudNFT.xcframework; sourceTree = "<group>"; };
 		6CA68CCC28E29CA500BDE442 /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
 		6CA68CCD28E29CA500BDE442 /* HSSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSettingModel.h; sourceTree = "<group>"; };
@@ -953,10 +948,8 @@
 		6CA68D1128E29CA600BDE442 /* MySelectEtherChainsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySelectEtherChainsView.m; sourceTree = "<group>"; };
 		6CA68D3428E2A02500BDE442 /* HsNFTPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HsNFTPreferences.m; sourceTree = "<group>"; };
 		6CA68D3528E2A02600BDE442 /* HsNFTPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsNFTPreferences.h; sourceTree = "<group>"; };
-
 		6CA68D3928E3022D00BDE442 /* LeagueDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeagueDetailViewController.h; sourceTree = "<group>"; };
 		6CA68D3A28E3022D00BDE442 /* LeagueDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeagueDetailViewController.m; sourceTree = "<group>"; };
-
 		6CB3D146288FEE220037EE88 /* HelloSud-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "HelloSud-iOS.entitlements"; sourceTree = "<group>"; };
 		6CC3E77428C1BB7D00AA934B /* MyEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsCellModel.h; sourceTree = "<group>"; };
 		6CC3E77528C1BB7D00AA934B /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
@@ -1158,11 +1151,13 @@
 		BC2107088B9BF4F4503AF66D /* GuessModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessModel.h; sourceTree = "<group>"; };
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
 		BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinPopView.h; sourceTree = "<group>"; };
+		BC21078DF8C35A0D78A4FC3D /* GiftRocketEnterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftRocketEnterView.m; sourceTree = "<group>"; };
 		BC2107929CECA531C851C092 /* PKSelectRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSelectRoomView.h; sourceTree = "<group>"; };
 		BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessCategoryView.h; sourceTree = "<group>"; };
 		BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessViewController.h; sourceTree = "<group>"; };
 		BC2107BC94088B9F062BBA4B /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
 		BC2107EF9AD65D2563C73468 /* LeagueResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueResultTableViewCell.m; sourceTree = "<group>"; };
+		BC21080005CEAAFF06F2D9C2 /* GiftRocketEnterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftRocketEnterView.h; sourceTree = "<group>"; };
 		BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserWearNftDetailView.m; sourceTree = "<group>"; };
 		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
 		BC2108CFC574A8AFEFE2FEDA /* RoomCmdKickoutRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdKickoutRoomModel.h; sourceTree = "<group>"; };
@@ -1691,6 +1686,8 @@
 				4455AD3127EAC658001516EE /* RoomGiftPannelView.h */,
 				4455AD3227EAC658001516EE /* GiftItemCollectionViewCell.m */,
 				4455AD3327EAC658001516EE /* RoomGiftContentView.h */,
+				BC21078DF8C35A0D78A4FC3D /* GiftRocketEnterView.m */,
+				BC21080005CEAAFF06F2D9C2 /* GiftRocketEnterView.h */,
 			);
 			path = Gift;
 			sourceTree = "<group>";
@@ -3526,6 +3523,7 @@
 				BC21009E7AF907C72E3B6D59 /* GuessModel.m in Sources */,
 				BC2108DF9DCC723A931AC7FA /* LeagueModel.m in Sources */,
 				BC210A4DEF905819E9635D98 /* LeagueRoomService.m in Sources */,
+				BC210912DF6D4316210B91E9 /* GiftRocketEnterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

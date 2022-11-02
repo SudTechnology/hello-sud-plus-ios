@@ -68,12 +68,7 @@
     giftMP4.giftName = @"mp4";
     giftMP4.price = 10000;
     giftMP4.tagList = @[NSString.dt_room_disco_tag_special, NSString.dt_room_disco_tag_effect];
-    _giftList = @[giftSvga, giftLottie, giftWebp, giftMP4];
-    [self.dicGift setDictionary:@{[NSString stringWithFormat:@"%ld", (long) giftSvga.giftID]: giftSvga,
-            [NSString stringWithFormat:@"%ld", (long) giftLottie.giftID]: giftLottie,
-            [NSString stringWithFormat:@"%ld", (long) giftWebp.giftID]: giftWebp,
-            [NSString stringWithFormat:@"%ld", (long) giftMP4.giftID]: giftMP4,
-    }];
+
 
 
     /// disco
@@ -104,9 +99,29 @@
     gift3.giftName = NSString.dt_room_disco_dance_insert;
     gift3.price = 1500;
 
+    GiftModel *gift9 = GiftModel.new;
+    gift9.giftID = 9;
+    gift9.smallGiftURL = [NSBundle.mainBundle pathForResource:@"gift_rocket" ofType:@"png" inDirectory:@"Res"];
+    gift9.giftURL = [NSBundle.mainBundle pathForResource:@"gift_rocket" ofType:@"png" inDirectory:@"Res"];
+    gift9.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
+    gift9.animateType = @"svga";
+    gift9.giftName = @"定制火箭";
+    gift9.leftTagImage = @"gift_rocket_flag_bg";
+    gift9.leftTagName = @"定制";
+    gift9.price = 1988;
+
+
+    _giftList = @[giftSvga, giftLottie, giftWebp, gift9, giftMP4];
+    [self.dicGift setDictionary:@{[NSString stringWithFormat:@"%ld", (long) giftSvga.giftID]: giftSvga,
+            [NSString stringWithFormat:@"%ld", (long) giftLottie.giftID]: giftLottie,
+            [NSString stringWithFormat:@"%ld", (long) giftWebp.giftID]: giftWebp,
+            [NSString stringWithFormat:@"%ld", (long) giftMP4.giftID]: giftMP4,
+    }];
+
     self.dicGift[[NSString stringWithFormat:@"%@", @(gift1.giftID)]] = gift1;
     self.dicGift[[NSString stringWithFormat:@"%@", @(gift2.giftID)]] = gift2;
     self.dicGift[[NSString stringWithFormat:@"%@", @(gift3.giftID)]] = gift3;
+    self.dicGift[[NSString stringWithFormat:@"%@", @(gift9.giftID)]] = gift9;
     self.discoGiftList = @[gift1, gift2, gift3];
 
 }

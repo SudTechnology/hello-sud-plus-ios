@@ -9,11 +9,13 @@
 #import "GiftUserCollectionViewCell.h"
 #import "RoomGiftContentView.h"
 #import "../../Base/VC/BaseSceneViewController+IM.h"
+#import "GiftRocketEnterView.h"
 
 @interface RoomGiftPannelView () <UICollectionViewDelegate, UICollectionViewDataSource>
+@property(nonatomic, strong) GiftRocketEnterView *rocketEnterView;
 @property(nonatomic, strong) UIView *topView;
 @property(nonatomic, strong) UILabel *sendToLabel;
-@property(nonatomic, strong) YYLabel * coinLabel;
+@property(nonatomic, strong) YYLabel *coinLabel;
 @property(nonatomic, strong) UIButton *checkAllBtn;
 @property(nonatomic, strong) UIButton *sendBtn;
 @property(nonatomic, strong) UIView *sendView;
@@ -34,10 +36,12 @@
 - (void)dtConfigUI {
     [super dtConfigUI];
     [self reqCoinData];
+    [self setPartRoundCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:12];
 }
 
 - (void)dtAddViews {
     [self addSubview:self.blurView];
+    [self addSubview:self.rocketEnterView];
     [self addSubview:self.topView];
     [self.topView addSubview:self.sendToLabel];
     [self.topView addSubview:self.checkAllBtn];
@@ -50,10 +54,16 @@
 
 - (void)dtLayoutViews {
     [self.blurView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self);
+        make.top.equalTo(self.topView);
+        make.leading.trailing.bottom.equalTo(@0);
+    }];
+    [self.rocketEnterView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.leading.trailing.mas_equalTo(self);
+        make.height.mas_equalTo(0);
     }];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.leading.trailing.mas_equalTo(self);
+        make.leading.trailing.mas_equalTo(self);
+        make.top.equalTo(self.rocketEnterView.mas_bottom);
         make.height.mas_equalTo(0);
     }];
     [self.sendToLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,7 +73,7 @@
     }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(self.sendToLabel.mas_trailing).offset(10);
-        make.top.mas_equalTo(self);
+        make.top.mas_equalTo(self.topView);
         make.height.mas_equalTo(72);
         make.width.mas_greaterThanOrEqualTo(0);
         make.trailing.mas_equalTo(self.checkAllBtn.mas_leading).offset(-16);
@@ -82,7 +92,7 @@
     [self.giftContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.mas_equalTo(self);
         make.top.mas_equalTo(self.topView.mas_bottom).offset(10);
-        make.height.mas_equalTo(134);
+        make.height.mas_equalTo(268);
     }];
     [self.sendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.giftContentView.mas_bottom).offset(24);
@@ -104,6 +114,22 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
         [weakSelf dtUpdateUI];
     }];
+
+    self.giftContentView.didSelectedCallback = ^(GiftModel *giftModel) {
+        if (giftModel.giftID == 9) {
+            // 定制火箭
+            [self.rocketEnterView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(80);
+            }];
+            [self dtRemoveRoundCorners];
+        } else {
+            [self.rocketEnterView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(0);
+            }];
+            [self setPartRoundCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:12];
+        }
+
+    };
 }
 
 /// 过滤麦位
@@ -179,8 +205,8 @@
 }
 
 - (void)updateLayoutForGiftCount:(NSInteger)count {
-    NSInteger row = (NSInteger)ceil(count / 4.0);
-    CGFloat  h = 140;
+    NSInteger row = (NSInteger) ceil(count / 4.0);
+    CGFloat h = 140;
     if (row > 1) {
         h = 254;
     }
@@ -217,7 +243,7 @@
     WeakSelf
     [UserService.shared reqUserCoinDetail:^(int64_t i) {
         [weakSelf updateCoin:i];
-    } fail:^(NSString *errStr) {
+    }                                fail:^(NSString *errStr) {
         [ToastUtil show:errStr];
     }];
 }
@@ -357,6 +383,13 @@
         _selectedCacheMap = NSMutableDictionary.new;
     }
     return _selectedCacheMap;
+}
+
+- (GiftRocketEnterView *)rocketEnterView {
+    if (!_rocketEnterView) {
+        _rocketEnterView = GiftRocketEnterView.new;
+    }
+    return _rocketEnterView;
 }
 
 - (UIView *)topView {
