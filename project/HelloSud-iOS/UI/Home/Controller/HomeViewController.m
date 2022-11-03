@@ -255,6 +255,13 @@
     [self.homeCategoryView selectedIndex:indexPath.section];
 }
 
+/// 是否展示banner
+/// @param section
+/// @return
+- (BOOL)showBanner:(NSInteger)section {
+    return section == 0;
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -294,7 +301,6 @@
 }
 
 
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
@@ -309,7 +315,7 @@
         vc.sceneId = self.headerSceneList[indexPath.section].sceneId;
         vc.gameName = model.gameName;
         [self.navigationController pushViewController:vc animated:true];
-    }else if (self.headerSceneList[indexPath.section].sceneId == SceneTypeLeague) {
+    } else if (self.headerSceneList[indexPath.section].sceneId == SceneTypeLeague) {
         LeagueEnterViewController *vc = LeagueEnterViewController.new;
         vc.gameId = model.gameId;
         vc.sceneId = self.headerSceneList[indexPath.section].sceneId;
@@ -325,7 +331,7 @@
     }
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     CGFloat itemW = (kScreenWidth - 32) / 3;
     CGFloat itemH = 62;
@@ -335,7 +341,7 @@
     } else if (m.sceneId == SceneTypeDanmaku) {
         itemW = kScreenWidth - 32;
         itemH = 140;
-    }else if (m.sceneId == SceneTypeLeague) {
+    } else if (m.sceneId == SceneTypeLeague) {
         itemW = kScreenWidth - 32;
         itemH = 142;
     }
@@ -358,7 +364,7 @@
         h = baseH + rect.size.height;
     }
     // 展示banner
-    if (section == 0) {
+    if ([self showBanner:section]) {
         h += 124;
     }
     return CGSizeMake(kScreenWidth, h);
@@ -388,6 +394,7 @@
         } else {
             HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
             view.indexPath = indexPath;
+            view.isShowBanner = [self showBanner:indexPath.section];
             view.sceneModel = self.headerSceneList[indexPath.section];
             view.headerGameList = self.dataList[indexPath.section];
             view.quizGameInfoList = self.quizGameInfoList;

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) UIBUTTON_TAP_BLOCK customBlock;
 @property (nonatomic, copy) UIBUTTON_TAP_BLOCK moreGuessBlock;
 @property (nonatomic, strong)NSIndexPath *indexPath;
+@property (nonatomic, assign)BOOL isShowBanner;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -188,7 +188,7 @@
         [self.guessView dtUpdateUI];
     }
 
-    if (self.indexPath.section == 0) {
+    if (self.isShowBanner) {
         [self.bannerView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(20);
             make.leading.mas_equalTo(0);

@@ -17,6 +17,7 @@
 #import <NIMSDK/NIMSDK.h>
 #import "SDImageSVGNativeCoder.h"
 #import <AFNetworking/AFNetworking.h>
+#import <SudMGP/ISudCfg.h>
 
 @interface AppDelegate () {
 
@@ -65,7 +66,13 @@
     [[NIMSDK sharedSDK] registerWithOption:option];
     [self configWebpCoder];
     [self checkNetwork];
+    [self loadGameEmbedPackage];
     return YES;
+}
+
+/// 加载嵌入游戏包
+- (void)loadGameEmbedPackage {
+//    [[SudMGP getCfg] addEmbeddedMGPkg:123 mgPath:@""];
 }
 
 - (void)configBugly {
