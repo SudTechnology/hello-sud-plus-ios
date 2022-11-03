@@ -182,4 +182,27 @@
                               } failure:nil];
 }
 
+/// 获取发射价格
++ (void)reqRocketDynamicFirePrice:(MGCustomRocketDynamicFirePrice *)paramModel finished:(void (^)(AppCustomRocketDynamicFirePriceModel *respModel))finished {
+    NSDictionary *dicParam = paramModel.mj_JSONObject;
+    [HSHttpService postRequestWithURL:kGameURL(@"rocket/fire-price/v1")
+                                param:dicParam respClass:BaseRespModel.class
+                       showErrorToast:YES
+                              success:^(BaseRespModel *resp) {
+                                  AppCustomRocketDynamicFirePriceModel *respModel = AppCustomRocketDynamicFirePriceModel.new;
+                                  respModel.data = [self decodeModel:RocketDynamicFirePriceModel.class FromDic:resp.srcData];
+                                  if (finished) {
+                                      finished(respModel);
+                                  }
+                              } failure:^(NSError *error) {
+                AppCustomRocketDynamicFirePriceModel *respModel = AppCustomRocketDynamicFirePriceModel.new;
+                respModel.resultCode = error.code;
+                respModel.error = error.dt_errMsg;
+                if (finished) {
+                    finished(respModel);
+                }
+
+            }];
+}
+
 @end

@@ -8,6 +8,7 @@
 #import <SudMGP/SudMGP-umbrella.h>
 #import "RoomMoreView.h"
 #import "SuspendRoomView.h"
+#import "RocketSelectAnchorView.h"
 
 #define I_GUESS_YOU_SAID      1468434504892882946L // 你说我猜
 #define DIGITAL_BOMB          1468091457989509190L // 数字炸弹

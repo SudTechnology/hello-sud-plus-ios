@@ -106,7 +106,7 @@
     gift9.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
     NSString *localRocketImage = [self getRocketImagePath];
     // 本地缓存火箭截图
-    if (localRocketImage.length == 0) {
+    if (localRocketImage.length != 0) {
         gift9.smallGiftURL = localRocketImage;
         gift9.giftURL = localRocketImage;
     }

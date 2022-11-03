@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
                        pageSize:(NSInteger)pageSize
                          userId:(NSString *)userId
                        finished:(void (^)(AppCustomRocketUserRecordListModel *respModel))finished;
+
+/// 获取发射价格
++ (void)reqRocketDynamicFirePrice:(MGCustomRocketDynamicFirePrice *)paramModel finished:(void (^)(AppCustomRocketDynamicFirePriceModel *respModel))finished;
 @end
 
 NS_ASSUME_NONNULL_END

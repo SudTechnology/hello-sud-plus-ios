@@ -8,7 +8,7 @@
 #import "BaseSceneViewController+Game.h"
 #import "BaseSceneViewController+Voice.h"
 #import <SudMGP/ISudCfg.h>
-
+#import "RocketSelectAnchorView.h"
 
 @implementation BaseSceneViewController (Game)
 
@@ -467,14 +467,23 @@
 
 /// 动态计算一键发送价格(火箭) MG_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE
 - (void)onGameMGCustomRocketDynamicFirePrice:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketDynamicFirePrice *)model {
-
+    [RocketService reqRocketDynamicFirePrice:model finished:^(AppCustomRocketDynamicFirePriceModel *respModel) {
+        [self.sudFSTAPPDecorator notifyAppCustomRocketDynamicFirePrice:respModel];
+    }];
 }
 
 /// 一键发送(火箭) MG_CUSTOM_ROCKET_FIRE_MODEL
 - (void)onGameMGCustomRocketFireModel:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketFireModel *)model {
-    [RocketService reqRocketFireModel:model finished:^(AppCustomRocketFireModel *respModel) {
-        [self.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
-    }];
+
+    WeakSelf
+    RocketSelectAnchorView *v = RocketSelectAnchorView.new;
+    v.confirmBlock = ^{
+        [RocketService reqRocketFireModel:model finished:^(AppCustomRocketFireModel *respModel) {
+            [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
+        }];
+    };
+    [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
+
 }
 
 /// 新组装模型(火箭) MG_CUSTOM_ROCKET_CREATE_MODEL
@@ -545,12 +554,18 @@
 /// 点击锁住组件((火箭) MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT
 - (void)onGameMGCustomRocketClickLockComponent:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketClickLockComponent *)model {
 
-    [RocketService reqRocketUnlockComponent:model finished:^{
-        AppCustomRocketUnlockComponent *respModel = AppCustomRocketUnlockComponent.new;
-        respModel.componentId = model.componentId;
-        respModel.type = model.type;
-        [self.sudFSTAPPDecorator notifyAppCustomRocketUnlockComponent:respModel];
+    [DTAlertView showTextAlert:@"该商品锁定中，是否解锁？" sureText:NSString.dt_common_sure cancelText:NSString.dt_common_cancel onSureCallback:^{
+        [DTAlertView close];
+        [RocketService reqRocketUnlockComponent:model finished:^{
+            AppCustomRocketUnlockComponent *respModel = AppCustomRocketUnlockComponent.new;
+            respModel.componentId = model.componentId;
+            respModel.type = model.type;
+            [self.sudFSTAPPDecorator notifyAppCustomRocketUnlockComponent:respModel];
+        }];
+    }          onCloseCallback:^{
+        [DTAlertView close];
     }];
+
 }
 @end
 
