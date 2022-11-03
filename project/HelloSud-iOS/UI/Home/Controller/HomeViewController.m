@@ -339,6 +339,7 @@
         itemW = kScreenWidth - 32;
         itemH = 142;
     }
+
     return CGSizeMake(itemW, itemH);
 }
 
@@ -355,6 +356,10 @@
     } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeLeague) {
         baseH = 46;
         h = baseH + rect.size.height;
+    }
+    // 展示banner
+    if (section == 0) {
+        h += 124;
     }
     return CGSizeMake(kScreenWidth, h);
 }
@@ -382,6 +387,7 @@
             };
         } else {
             HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
+            view.indexPath = indexPath;
             view.sceneModel = self.headerSceneList[indexPath.section];
             view.headerGameList = self.dataList[indexPath.section];
             view.quizGameInfoList = self.quizGameInfoList;

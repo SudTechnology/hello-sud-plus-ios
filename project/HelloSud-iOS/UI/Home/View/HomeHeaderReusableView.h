@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) HSSceneModel *sceneModel;
 @property (nonatomic, copy) UIBUTTON_TAP_BLOCK customBlock;
 @property (nonatomic, copy) UIBUTTON_TAP_BLOCK moreGuessBlock;
+@property (nonatomic, strong)NSIndexPath *indexPath;
 @end
 
 NS_ASSUME_NONNULL_END

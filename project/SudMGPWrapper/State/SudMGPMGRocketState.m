@@ -33,6 +33,9 @@
 @implementation MGCustomRocketFireModel
 @end
 
+@implementation MGCustomRocketCreateModelComponentListItem
+@end
+
 @implementation MGCustomRocketCreateModel
 @end
 
