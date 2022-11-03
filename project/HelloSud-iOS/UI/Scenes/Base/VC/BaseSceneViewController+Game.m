@@ -460,7 +460,7 @@
     }];
 }
 
-/// 设置默认位置(火箭) MG_CUSTOM_ROCKET_SET_DEFAULT_SEAT
+/// 设置默认位置(火箭) MG_CUSTOM_ROCKET_SET_DEFAULT_MODEL
 - (void)onGameMGCustomRocketSetDefaultSeat:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSetDefaultSeat *)model {
     [RocketService reqRocketSetDefaultSeat:model finished:^(AppCustomRocketSetDefaultSeatModel *respModel) {
         [self.sudFSTAPPDecorator notifyAppCustomRocketSetDefaultSeat:respModel];
@@ -479,8 +479,8 @@
 
     WeakSelf
     RocketSelectAnchorView *v = RocketSelectAnchorView.new;
-    v.confirmBlock = ^{
-        [RocketService reqRocketFireModel:model finished:^(AppCustomRocketFireModel *respModel) {
+    v.confirmBlock = ^(NSArray<AudioRoomMicModel *> *userList){
+        [RocketService reqRocketFireModel:model userList:nil finished:^(AppCustomRocketFireModel *respModel) {
             [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
         }];
     };

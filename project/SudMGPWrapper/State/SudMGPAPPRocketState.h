@@ -26,7 +26,7 @@ static NSString *APP_CUSTOM_ROCKET_ROOM_RECORD_LIST = @"app_custom_rocket_room_r
 /// 展馆内玩家送出记录(火箭)
 static NSString *APP_CUSTOM_ROCKET_USER_RECORD_LIST = @"app_custom_rocket_user_record_list";
 /// 设置默认位置(火箭)
-static NSString *APP_CUSTOM_ROCKET_SET_DEFAULT_SEAT = @"app_custom_rocket_set_default_seat";
+static NSString *APP_CUSTOM_ROCKET_SET_DEFAULT_MODEL = @"app_custom_rocket_set_default_model";
 /// 动态计算一键发送价格(火箭)
 static NSString *APP_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE = @"app_custom_rocket_dynamic_fire_price";
 /// 一键发送(火箭)
@@ -68,9 +68,9 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 /// 展示：0不展示 1展示
 @property(nonatomic, assign) NSInteger isShow;
 /// 显示名称(商城+装配间+购买记录+...)
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, strong) NSString *name;
 /// 图片ID
-@property(nonatomic, copy) NSString *imageId;
+@property(nonatomic, strong) NSString *imageId;
 @end
 
 /// 火箭头像配置
@@ -84,15 +84,15 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 /// 有效期：单位是秒
 @property(nonatomic, assign) NSInteger validTime;
 /// 显示名称
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, strong) NSString *name;
 /// 用户的userID
-@property(nonatomic, copy) NSString *userId;
+@property(nonatomic, strong) NSString *userId;
 /// 昵称
-@property(nonatomic, copy) NSString *nickName;
+@property(nonatomic, strong) NSString *nickName;
 /// 性别 0:男 1:女
 @property(nonatomic, assign) NSInteger sex;
 /// 头像URL
-@property(nonatomic, copy) NSString *url;
+@property(nonatomic, strong) NSString *url;
 @end
 
 /// 火箭专属配置
@@ -100,7 +100,7 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 /// 5签名，6颜色
 @property(nonatomic, assign) NSInteger type;
 /// 显示名称(商城+装配间+购买记录+...)
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, strong) NSString *name;
 /// 价格
 @property(nonatomic, assign) CGFloat price;
 /// 永久：0非永久 1永久
@@ -108,7 +108,7 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 /// 有效期：单位是秒
 @property(nonatomic, assign) NSInteger validTime;
 /// 专属签名需花费99999积分,7天过期
-@property(nonatomic, copy) NSString *desc;
+@property(nonatomic, strong) NSString *desc;
 @end
 
 /// APP_CUSTOM_ROCKET_CONFIG
@@ -120,7 +120,7 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 /// 发射价格是否动态开关 0:静态 1动态
 @property(nonatomic, assign) NSInteger isDynamicPrice;
 /// 玩法介绍
-@property(nonatomic, copy) NSString *gameIntroduce;
+@property(nonatomic, strong) NSString *gameIntroduce;
 /// 组件列表
 @property(nonatomic, strong) NSArray<RocketComponentItemModel *> *componentList;
 /// 过滤不显示的模块(默认是为空)
@@ -148,7 +148,8 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 /// 火箭模型组件item
 @interface RocketModelComponentItemModel : NSObject
 @property(nonatomic, assign) NSInteger type;
-@property(nonatomic, copy) NSString *value;
+@property(nonatomic, strong) NSString *itemId;
+@property(nonatomic, strong) NSString *value;
 /// 永久：0非永久 1永久
 @property(nonatomic, assign) NSInteger isForever;
 /// 有效期时间戳：单位是秒
@@ -167,7 +168,7 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 /// APP_CUSTOM_ROCKET_MODEL_LIST
 @interface AppCustomRocketModelListModel : NSObject
 /// 默认座位
-@property(nonatomic, assign) NSInteger defaultSeat;
+@property(nonatomic, strong) NSString *defaultModelId;
 /// 截图：0不截图 1截图(app上传失败或者过期时,被动截图)
 @property(nonatomic, assign) NSInteger isScreenshot;
 @property(nonatomic, strong) NSArray<RocketModelItemModel *> *list;
@@ -176,11 +177,11 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 
 @interface RocketComponentListItemModel : NSObject
 /// 唯一标识
-@property(nonatomic, copy) NSString *itemId;
+@property(nonatomic, strong) NSString *itemId;
 /// 1套装，2主仓，3尾翼
 @property(nonatomic, assign) NSInteger type;
 /// (1套装，2主仓，3尾翼 配置数据的ID)
-@property(nonatomic, copy) NSString *value;
+@property(nonatomic, strong) NSString *value;
 /// 永久：0非永久 1永久
 @property(nonatomic, assign) NSInteger isForever;
 /// 有效期时间戳：单位是秒
@@ -197,13 +198,13 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 
 @interface RocketUserInfoItemModel : NSObject
 /// 用户的userID
-@property(nonatomic, copy) NSString *userId;
+@property(nonatomic, strong) NSString *userId;
 /// 昵称
-@property(nonatomic, copy) NSString *nickName;
+@property(nonatomic, strong) NSString *nickName;
 /// 性别 0:男 1:女
 @property(nonatomic, assign) NSInteger sex;
 /// 头像URL
-@property(nonatomic, copy) NSString *url;
+@property(nonatomic, strong) NSString *url;
 @end
 
 /// APP_CUSTOM_ROCKET_USER_INFO
@@ -219,7 +220,7 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 /// 1套装，2主仓，3尾翼
 @property(nonatomic, assign) NSInteger type;
 /// (1套装，2主仓，3尾翼 配置数据的ID)
-@property(nonatomic, copy) NSString *value;
+@property(nonatomic, strong) NSString *value;
 /// 永久：0非永久 1永久
 @property(nonatomic, assign) NSInteger isForever;
 /// 有效期时间戳：单位是秒
@@ -267,10 +268,10 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 @end
 
 @interface RocketSetDefaultSeatModel : NSObject
-@property(nonatomic, assign) NSInteger seat;
+@property(nonatomic, strong) NSString *modelId;
 @end
 
-/// APP_CUSTOM_ROCKET_SET_DEFAULT_SEAT 设置默认位置
+/// APP_CUSTOM_ROCKET_SET_DEFAULT_MODEL 设置默认位置
 @interface AppCustomRocketSetDefaultSeatModel : NSObject
 /// 0: 请求成功，1：请求失败
 @property(nonatomic, assign) NSInteger resultCode;
@@ -294,7 +295,7 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 
 @interface RocketCreateDataModel : NSObject
 /// 座位ID
-@property(nonatomic, assign) NSInteger seat;
+@property(nonatomic, strong) NSString *modelId;
 /// 可以换装：0不可以 1可以
 @property(nonatomic, assign) NSInteger isAvatar;
 @property(nonatomic, strong) NSArray <RocketModelComponentItemModel *> *componentList;
@@ -339,17 +340,17 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 
 @interface RocketPlayModelListItem : NSObject
 @property(nonatomic, assign) NSInteger type;
-@property(nonatomic, copy) NSString *value;
+@property(nonatomic, strong) NSString *value;
 @end
 
 /// APP_CUSTOM_ROCKET_PLAY_MODEL_LIST app播放火箭发射动效
 @interface AppCustomRocketPlayModelListModel : NSObject
-@property(nonatomic, copy) NSString *orderId;
+@property(nonatomic, strong) NSString *orderId;
 @property(nonatomic, strong) NSArray <RocketPlayModelListItem *> *componentList;
 @end
 
 @interface RocketVerifySignDataModel : NSObject
-@property(nonatomic, copy) NSString *sign;
+@property(nonatomic, strong) NSString *sign;
 @end
 
 /// APP_CUSTOM_ROCKET_VERIFY_SIGN 验证签名合规
@@ -374,5 +375,5 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 /// 组件类型
 @property(nonatomic, assign) NSInteger type;
 /// 组件ID
-@property(nonatomic, assign) NSInteger componentId;
+@property(nonatomic, strong) NSString *componentId;
 @end

@@ -32,7 +32,7 @@ static NSString *MG_CUSTOM_ROCKET_ROOM_RECORD_LIST = @"mg_custom_rocket_room_rec
 /// 展馆内玩家送出记录(火箭)
 static NSString *MG_CUSTOM_ROCKET_USER_RECORD_LIST = @"mg_custom_rocket_user_record_list";
 /// 设置默认位置(火箭)
-static NSString *MG_CUSTOM_ROCKET_SET_DEFAULT_SEAT = @"mg_custom_rocket_set_default_seat";
+static NSString *MG_CUSTOM_ROCKET_SET_DEFAULT_MODEL = @"mg_custom_rocket_set_default_model";
 /// 动态计算一键发送价格(火箭)
 static NSString *MG_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE = @"mg_custom_rocket_dynamic_fire_price";
 /// 一键发送(火箭)
@@ -84,17 +84,17 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 @interface MGCustomRocketUserRecordList : NSObject
 @property(nonatomic, assign) NSInteger pageIndex;
 @property(nonatomic, assign) NSInteger pageSize;
-@property(nonatomic, copy) NSString *userId;
+@property(nonatomic, strong) NSString *userId;
 @end
 
-#pragma mark - MG_CUSTOM_ROCKET_SET_DEFAULT_SEAT
+#pragma mark - MG_CUSTOM_ROCKET_SET_DEFAULT_MODEL
 
 @interface MGCustomRocketSetDefaultSeat : NSObject
-@property(nonatomic, assign) NSInteger seat;
+@property(nonatomic, strong) NSString *modelId;
 @end
 
 @interface MGCustomRocketDynamicFirePriceComponentListItem : NSObject
-@property(nonatomic, assign) NSInteger componentId;
+@property(nonatomic, strong) NSString *componentId;
 @property(nonatomic, assign) NSString *value;
 @end
 
@@ -141,14 +141,14 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 #pragma mark - MG_CUSTOM_ROCKET_VERIFY_SIGN
 
 @interface MGCustomRocketVerifySign : NSObject
-@property(nonatomic, copy) NSString *sign;
+@property(nonatomic, strong) NSString *sign;
 @end
 
 #pragma mark - MG_CUSTOM_ROCKET_UPLOAD_MODEL_ICON
 
 @interface MGCustomRocketUploadModelIcon : NSObject
 /// 图片base64数据
-@property(nonatomic, copy) NSString *data;
+@property(nonatomic, strong) NSString *data;
 @end
 
 /// 解锁组件（火箭) MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT
@@ -156,7 +156,7 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 /// 组件类型
 @property(nonatomic, assign) NSInteger type;
 /// 组件ID
-@property(nonatomic, assign) NSInteger componentId;
+@property(nonatomic, strong) NSString *componentId;
 @end
 
 NS_ASSUME_NONNULL_END

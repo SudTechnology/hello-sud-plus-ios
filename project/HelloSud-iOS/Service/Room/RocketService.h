@@ -25,8 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)reqRocketSaveCreateModel:(MGCustomRocketCreateModel *)paramModel finished:(void (^)(AppCustomRocketCreateModel *respModel))finished;
 /// 更换火箭模型
 + (void)reqRocketReplaceModel:(MGCustomRocketReplaceModel *)paramModel finished:(void (^)(AppCustomRocketReplaceComponentModel *respModel))finished;
+
 /// 发射火箭
-+ (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel finished:(void (^)(AppCustomRocketFireModel *respModel))finished;
++ (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel userList:(NSArray<AudioRoomMicModel *> *)userList finished:(void (^)(AppCustomRocketFireModel *respModel))finished;
 /// 发射火箭记录摘要
 + (void)reqRocketRoomRecordList:(NSInteger)pageIndex
                        pageSize:(NSInteger)pageSize

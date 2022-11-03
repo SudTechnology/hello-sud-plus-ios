@@ -155,7 +155,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyAppCustomRocketRoomRecordList:(AppCustomRocketRoomRecordListModel *)model;
 /// 展馆内玩家送出记录(火箭) APP_CUSTOM_ROCKET_USER_RECORD_LIST
 - (void)notifyAppCustomRocketUserRecordList:(AppCustomRocketUserRecordListModel *)model;
-/// 设置默认位置(火箭) APP_CUSTOM_ROCKET_SET_DEFAULT_SEAT
+/// 设置默认位置(火箭) APP_CUSTOM_ROCKET_SET_DEFAULT_MODEL
 - (void)notifyAppCustomRocketSetDefaultSeat:(AppCustomRocketSetDefaultSeatModel *)model;
 /// 动态计算一键发送价格(火箭) APP_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE
 - (void)notifyAppCustomRocketDynamicFirePrice:(AppCustomRocketDynamicFirePriceModel *)model;

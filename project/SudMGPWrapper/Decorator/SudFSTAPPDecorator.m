@@ -259,9 +259,9 @@
     [self notifyStateChange:APP_CUSTOM_ROCKET_USER_RECORD_LIST dataJson:model.mj_JSONString];
 }
 
-/// 设置默认位置(火箭) APP_CUSTOM_ROCKET_SET_DEFAULT_SEAT
+/// 设置默认位置(火箭) APP_CUSTOM_ROCKET_SET_DEFAULT_MODEL
 - (void)notifyAppCustomRocketSetDefaultSeat:(AppCustomRocketSetDefaultSeatModel *)model {
-    [self notifyStateChange:APP_CUSTOM_ROCKET_SET_DEFAULT_SEAT dataJson:model.mj_JSONString];
+    [self notifyStateChange:APP_CUSTOM_ROCKET_SET_DEFAULT_MODEL dataJson:model.mj_JSONString];
 }
 
 /// 动态计算一键发送价格(火箭) APP_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE

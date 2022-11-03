@@ -368,7 +368,7 @@
             [self.listener onGameMGCustomRocketUserRecordList:handle model:m];
             return;
         }
-    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SET_DEFAULT_SEAT]) {
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SET_DEFAULT_MODEL]) {
         /// 设置默认位置(火箭)
         MGCustomRocketSetDefaultSeat *m = [MGCustomRocketSetDefaultSeat mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketSetDefaultSeat:model:)]) {

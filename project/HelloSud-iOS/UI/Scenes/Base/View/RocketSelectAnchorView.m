@@ -116,7 +116,13 @@
 
 - (void)onConfirmBtn:(id)sender {
     [DTAlertView close];
-    if (self.confirmBlock) self.confirmBlock();
+    NSMutableArray<AudioRoomMicModel *> *selectList = NSMutableArray.new;
+    for (AudioRoomMicModel *m in self.userDataList) {
+        if (m.user != nil && m.isSelected) {
+            [selectList addObject:m];
+        }
+    }
+    if (self.confirmBlock) self.confirmBlock(selectList);
 }
 
 

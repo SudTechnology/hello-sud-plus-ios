@@ -85,7 +85,7 @@
 
 /// 解锁组件
 + (void)reqRocketUnlockComponent:(MGCustomRocketClickLockComponent *)paramModel finished:(void (^)(void))finished {
-    NSDictionary *dicParam = @{@"componentId": @(paramModel.componentId), @"isLock": @(0)};
+    NSDictionary *dicParam = @{@"componentId": paramModel.componentId, @"isLock": @(0)};
     [HSHttpService postRequestWithURL:kGameURL(@"rocket/purchase-component/v1")
                                 param:dicParam respClass:BaseRespModel.class
                        showErrorToast:YES
@@ -127,8 +127,18 @@
 }
 
 /// 发射火箭
-+ (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel finished:(void (^)(AppCustomRocketFireModel *respModel))finished {
-    NSDictionary *dicParam = paramModel.mj_JSONObject;
++ (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel userList:(NSArray<AudioRoomMicModel *> *)userList finished:(void (^)(AppCustomRocketFireModel *respModel))finished {
+    NSDictionary *dicTemp = paramModel.mj_JSONObject;
+    NSMutableDictionary *dicParam = NSMutableDictionary.new;
+    if (dicTemp){
+        [dicParam setDictionary:dicTemp];
+    }
+    NSMutableArray *userIdList = NSMutableArray.new;
+    for (AudioRoomMicModel *m in userList) {
+        [userIdList addObject:m];
+    }
+    dicParam[@"receiver"] = userIdList;
+    dicParam[@"number"] = @(1);
     [HSHttpService postRequestWithURL:kGameURL(@"rocket/fire-rocket/v1")
                                 param:dicParam respClass:BaseRespModel.class
                        showErrorToast:YES
