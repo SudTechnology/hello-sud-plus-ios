@@ -40,6 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 获取发射价格
 + (void)reqRocketDynamicFirePrice:(MGCustomRocketDynamicFirePrice *)paramModel finished:(void (^)(AppCustomRocketDynamicFirePriceModel *respModel))finished;
+/// 设置火箭默认位置
++ (void)reqRocketSetDefaultSeat:(MGCustomRocketSetDefaultSeat *)paramModel finished:(void (^)(AppCustomRocketSetDefaultSeatModel *respModel))finished;
+/// 校验签名合规性
++ (void)reqRocketVerifySign:(MGCustomRocketVerifySign *)paramModel finished:(void (^)(AppCustomRocketVerifySignModel *respModel))finished;
 @end
 
 NS_ASSUME_NONNULL_END

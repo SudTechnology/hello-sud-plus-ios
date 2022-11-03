@@ -191,6 +191,7 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 
 /// APP_CUSTOM_ROCKET_COMPONENT_LIST
 @interface AppCustomRocketComponentListModel : NSObject
+@property(nonatomic, strong) NSArray <RocketComponentListItemModel *> *defaultList;
 @property(nonatomic, strong) NSArray <RocketComponentListItemModel *> *list;
 @end
 

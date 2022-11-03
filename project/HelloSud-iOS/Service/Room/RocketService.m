@@ -205,4 +205,50 @@
             }];
 }
 
+/// 设置火箭默认位置
++ (void)reqRocketSetDefaultSeat:(MGCustomRocketSetDefaultSeat *)paramModel finished:(void (^)(AppCustomRocketSetDefaultSeatModel *respModel))finished {
+    NSDictionary *dicParam = paramModel.mj_JSONObject;
+    [HSHttpService postRequestWithURL:kGameURL(@"rocket/set-default-seat/v1")
+                                param:dicParam respClass:BaseRespModel.class
+                       showErrorToast:YES
+                              success:^(BaseRespModel *resp) {
+                                  AppCustomRocketSetDefaultSeatModel *respModel = AppCustomRocketSetDefaultSeatModel.new;
+                                  respModel.data = [self decodeModel:RocketSetDefaultSeatModel.class FromDic:resp.srcData];
+                                  if (finished) {
+                                      finished(respModel);
+                                  }
+                              } failure:^(NSError *error) {
+                AppCustomRocketSetDefaultSeatModel *respModel = AppCustomRocketSetDefaultSeatModel.new;
+                respModel.resultCode = error.code;
+                respModel.error = error.dt_errMsg;
+                if (finished) {
+                    finished(respModel);
+                }
+
+            }];
+}
+
+/// 校验签名合规性
++ (void)reqRocketVerifySign:(MGCustomRocketVerifySign *)paramModel finished:(void (^)(AppCustomRocketVerifySignModel *respModel))finished {
+    NSDictionary *dicParam = paramModel.mj_JSONObject;
+    [HSHttpService postRequestWithURL:kGameURL(@"rocket/set-default-seat/v1")
+                                param:dicParam respClass:BaseRespModel.class
+                       showErrorToast:YES
+                              success:^(BaseRespModel *resp) {
+                                  AppCustomRocketVerifySignModel *respModel = [self decodeModel:AppCustomRocketVerifySignModel.class FromDic:resp.srcData];
+                                  if (finished) {
+                                      finished(respModel);
+                                  }
+                              } failure:^(NSError *error) {
+                AppCustomRocketVerifySignModel *respModel = AppCustomRocketVerifySignModel.new;
+                respModel.resultCode = error.code;
+                respModel.error = error.dt_errMsg;
+                if (finished) {
+                    finished(respModel);
+                }
+
+            }];
+}
+
+
 @end

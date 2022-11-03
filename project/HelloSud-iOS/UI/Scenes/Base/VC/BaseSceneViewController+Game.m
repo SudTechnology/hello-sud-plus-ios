@@ -462,7 +462,9 @@
 
 /// 设置默认位置(火箭) MG_CUSTOM_ROCKET_SET_DEFAULT_SEAT
 - (void)onGameMGCustomRocketSetDefaultSeat:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSetDefaultSeat *)model {
-
+    [RocketService reqRocketSetDefaultSeat:model finished:^(AppCustomRocketSetDefaultSeatModel *respModel) {
+        [self.sudFSTAPPDecorator notifyAppCustomRocketSetDefaultSeat:respModel];
+    }];
 }
 
 /// 动态计算一键发送价格(火箭) MG_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE
@@ -521,11 +523,9 @@
 /// 验证签名合规((火箭) MG_CUSTOM_ROCKET_VERIFY_SIGN
 - (void)onGameMGCustomRocketVerifySign:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketVerifySign *)model {
 
-    // todo 接入方根据需求是否需要校验用户输入文本数据（风控），这里demo直接不校验返回了
-    AppCustomRocketVerifySignModel *respModel = AppCustomRocketVerifySignModel.new;
-    respModel.data = RocketVerifySignDataModel.new;
-    respModel.data.sign = model.sign;
-    [self.sudFSTAPPDecorator notifyAppCustomRocketVerifySign:respModel];
+    [RocketService reqRocketVerifySign:model finished:^(AppCustomRocketVerifySignModel *respModel) {
+        [self.sudFSTAPPDecorator notifyAppCustomRocketVerifySign:respModel];
+    }];
 }
 
 /// 上传icon(火箭) MG_CUSTOM_ROCKET_UPLOAD_MODEL_ICON

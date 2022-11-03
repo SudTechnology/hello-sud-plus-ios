@@ -94,7 +94,7 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 @end
 
 @interface MGCustomRocketDynamicFirePriceComponentListItem : NSObject
-@property(nonatomic, assign) NSInteger type;
+@property(nonatomic, assign) NSInteger componentId;
 @property(nonatomic, assign) NSString *value;
 @end
 
