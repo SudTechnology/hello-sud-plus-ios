@@ -174,6 +174,7 @@
         [_confirmBtn setTitleColor:HEX_COLOR(@"#FFFFFF") forState:UIControlStateNormal];
         [_confirmBtn setContentEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 20)];
         [_confirmBtn setBackgroundImage:[UIImage imageNamed:@"rocket_select_pop_confirm"] forState:UIControlStateNormal];
+        _confirmBtn.enabled = NO;
     }
     return _confirmBtn;
 }

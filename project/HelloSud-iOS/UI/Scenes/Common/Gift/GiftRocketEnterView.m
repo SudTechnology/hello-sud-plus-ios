@@ -87,6 +87,16 @@
     }
 }
 
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    UITapGestureRecognizer *enterViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onEnterViewTap:)];
+    [self.enterView addGestureRecognizer:enterViewTap];
+}
+
+- (void)onEnterViewTap:(id)tap {
+    if (self.enterRocketBlock) self.enterRocketBlock();
+}
+
 - (UIImageView *)rocketImageView {
     if (!_rocketImageView) {
         _rocketImageView = [[UIImageView alloc] init];

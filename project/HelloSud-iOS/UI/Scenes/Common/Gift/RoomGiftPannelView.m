@@ -130,6 +130,12 @@
         }
 
     };
+    self.rocketEnterView.enterRocketBlock = ^{
+        [DTSheetView close];
+        if (weakSelf.enterRocketBlock) {
+            weakSelf.enterRocketBlock();
+        }
+    };
 }
 
 /// 过滤麦位

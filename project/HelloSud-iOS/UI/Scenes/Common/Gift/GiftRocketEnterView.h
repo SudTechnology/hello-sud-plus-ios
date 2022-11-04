@@ -7,4 +7,5 @@
 
 /// 礼物火箭入口
 @interface GiftRocketEnterView : BaseView
+@property (nonatomic, strong)void(^enterRocketBlock)(void);
 @end

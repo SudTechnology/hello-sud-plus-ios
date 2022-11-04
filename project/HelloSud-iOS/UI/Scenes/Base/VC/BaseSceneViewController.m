@@ -9,6 +9,7 @@
 #import "RoomMoreView.h"
 #import "SuspendRoomView.h"
 #import "RocketSelectAnchorView.h"
+#import "RocketGameManager.h"
 
 #define I_GUESS_YOU_SAID      1468434504892882946L // 你说我猜
 #define DIGITAL_BOMB          1468091457989509190L // 数字炸弹
@@ -22,13 +23,15 @@
 @property(nonatomic, strong) UIImageView *bgImageView;
 
 /// 游戏加载主view
-@property(nonatomic, strong) BaseView *gameView;
+@property(nonatomic, strong) UIView *gameView;
+/// 互动礼物火箭 加载主view
+@property(nonatomic, strong) UIView *rocketGameView;
 
 /// 场景视图，所有子类场景
 @property(nonatomic, strong) BaseView *sceneView;
 /// 添加机器人按钮
 @property(nonatomic, strong) BaseView *robotView;
-@property (nonatomic, strong)UIImageView *rocketEnterImageView;
+@property(nonatomic, strong) UIImageView *rocketEnterImageView;
 /// 场景服务
 @property(nonatomic, strong) BaseSceneService *service;
 
@@ -41,7 +44,8 @@
 @property(nonatomic, assign) BOOL isLoadedRobotListCompleted;
 /// 是否加载了麦位列表
 @property(nonatomic, assign) BOOL isFinishedMicList;
-
+/// 互动礼物火箭
+@property(nonatomic, strong) RocketGameManager *rocketManager;
 @end
 
 @implementation BaseSceneViewController
@@ -100,9 +104,10 @@
     [self.contentView addSubview:self.bgImageView];
     [self.contentView addSubview:self.gameView];
     [self.contentView addSubview:self.sceneView];
+    [self.contentView addSubview:self.rocketGameView];
 
     [self.sceneView addSubview:self.gameTopShadeNode];
-    [self.sceneView addSubview:self.naviView];
+
     [self.sceneView addSubview:self.operatorView];
     [self.sceneView addSubview:self.gameMicContentView];
     [self.sceneView addSubview:self.gameNumLabel];
@@ -112,6 +117,7 @@
     [self.sceneView addSubview:self.robotView];
     [self.sceneView addSubview:self.rocketEnterImageView];
     [self.sceneView addSubview:self.asrTipLabel];
+    [self.sceneView addSubview:self.naviView];
 }
 
 - (void)dtLayoutViews {
@@ -142,6 +148,9 @@
     }];
 
     [self.gameView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
+    }];
+    [self.rocketGameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
     [self.gameMicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -203,6 +212,9 @@
     };
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
         RoomGiftPannelView *pannelView = [[RoomGiftPannelView alloc] init];
+        pannelView.enterRocketBlock = ^{
+            [weakSelf onRocketEnterViewTap:nil];
+        };
         if (weakSelf.isNeedToLoadSceneGiftList) {
             [pannelView loadSceneGift:weakSelf.gameId sceneId:weakSelf.enterModel.sceneType isAppend:weakSelf.isAppendSceneGiftList];
         }
@@ -266,6 +278,10 @@
     }];
     UITapGestureRecognizer *robotViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRobotViewTap:)];
     [self.robotView addGestureRecognizer:robotViewTap];
+
+    UITapGestureRecognizer *rocketEnterViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRocketEnterViewTap:)];
+    [self.rocketEnterImageView addGestureRecognizer:rocketEnterViewTap];
+
 }
 
 - (void)onRobotViewTap:(id)tap {
@@ -281,6 +297,16 @@
         [weakSelf joinCommonRobotToMic:robotInfoModel showNoMic:YES];
     }];
 
+}
+
+- (void)onRocketEnterViewTap:(id)tap {
+    self.rocketGameView.hidden = NO;
+    // 不存在则加载
+    if (!self.rocketManager.isExistGame) {
+        [self.rocketManager loadInteractiveGame:1461227817776713818 roomId:self.gameRoomID gameView:self.rocketGameView];
+        return;
+    }
+    [self.rocketManager showGameView];
 }
 
 /// 调整麦位是否缩放
@@ -393,6 +419,7 @@
 
         [self logoutRoom];
         [self logoutGame];
+        [self.rocketManager destoryGame];
         if (!isSuspend) {
             [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
         }
@@ -1160,11 +1187,19 @@
     return _gameMicContentView;
 }
 
-- (BaseView *)gameView {
+- (UIView *)gameView {
     if (_gameView == nil) {
-        _gameView = BaseView.new;
+        _gameView = UIView.new;
     }
     return _gameView;
+}
+
+- (UIView *)rocketGameView {
+    if (_rocketGameView == nil) {
+        _rocketGameView = UIView.new;
+        _rocketGameView.hidden = YES;
+    }
+    return _rocketGameView;
 }
 
 - (BaseView *)sceneView {
@@ -1197,8 +1232,9 @@
 
 - (UIImageView *)rocketEnterImageView {
     if (!_rocketEnterImageView) {
-        _rocketEnterImageView = [[UIImageView alloc]init];
+        _rocketEnterImageView = [[UIImageView alloc] init];
         _rocketEnterImageView.image = [UIImage imageNamed:@"room_rocket_enter"];
+        _rocketEnterImageView.userInteractionEnabled = YES;
     }
     return _rocketEnterImageView;
 }
@@ -1232,6 +1268,13 @@
         _contentView = [[SceneContentView alloc] init];
     }
     return _contentView;
+}
+
+- (RocketGameManager *)rocketManager {
+    if (!_rocketManager) {
+        _rocketManager = RocketGameManager.new;
+    }
+    return _rocketManager;
 }
 
 - (void)setRoomName:(NSString *)roomName {

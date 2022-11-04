@@ -70,7 +70,7 @@
 
 /// 购买组件
 + (void)reqRocketBuyModel:(MGCustomRocketBuyModel *)buyModel finished:(void (^)(AppCustomRocketBuyComponentModel *respModel))finished {
-    NSDictionary *dicParam = @{@"componentList": buyModel.componentList};
+    NSDictionary *dicParam = buyModel.mj_JSONObject;
     [HSHttpService postRequestWithURL:kGameURL(@"rocket/purchase-component/v1")
                                 param:dicParam respClass:BaseRespModel.class
                        showErrorToast:YES
