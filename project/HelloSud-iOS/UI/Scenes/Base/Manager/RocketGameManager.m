@@ -371,6 +371,7 @@
 /// 前期准备完成((火箭) MG_CUSTOM_ROCKET_PREPARE_FINISH
 - (void)onGameMGCustomRocketPrepareFinish:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：前期准备完成((火箭)");
+    [SVProgressHUD dismiss];
     [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
 }
 

@@ -33,9 +33,12 @@
 }
 @end
 
+@implementation MGCustomRocketFireModelComponentListItem
+@end
+
 @implementation MGCustomRocketFireModel
 + (NSDictionary *)mj_objectClassInArray {
-    return @{@"componentList": MGCustomRocketDynamicFirePriceComponentListItem.class};
+    return @{@"componentList": MGCustomRocketFireModelComponentListItem.class};
 }
 @end
 
@@ -54,9 +57,12 @@
 }
 @end
 
+@implementation MGCustomRocketBuyModelComponentListItem
+@end
+
 @implementation MGCustomRocketBuyModel
 + (NSDictionary *)mj_objectClassInArray {
-    return @{@"componentList": MGCustomRocketDynamicFirePriceComponentListItem.class};
+    return @{@"componentList": MGCustomRocketBuyModelComponentListItem.class};
 }
 @end
 

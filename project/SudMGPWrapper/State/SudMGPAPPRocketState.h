@@ -79,6 +79,8 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 @interface RocketHeadItemModel : NSObject
 /// 4头像(商城+装配间+购买记录+...)
 @property(nonatomic, assign) NSInteger type;
+/// 组件ID
+@property(nonatomic, strong) NSString *componentId;
 /// 价格 暂时不考虑小数
 @property(nonatomic, assign) CGFloat price;
 /// 永久：0非永久 1永久
@@ -101,6 +103,8 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 @interface RocketExtraItemModel : NSObject
 /// 5签名，6颜色
 @property(nonatomic, assign) NSInteger type;
+/// 组件ID
+@property(nonatomic, strong) NSString *componentId;
 /// 显示名称(商城+装配间+购买记录+...)
 @property(nonatomic, strong) NSString *name;
 /// 价格

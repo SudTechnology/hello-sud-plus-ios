@@ -94,8 +94,7 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 @end
 
 @interface MGCustomRocketDynamicFirePriceComponentListItem : NSObject
-@property(nonatomic, strong) NSString *componentId;
-@property(nonatomic, assign) NSString *value;
+@property(nonatomic, strong) NSString *itemId;
 @end
 
 #pragma mark - MG_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE
@@ -107,8 +106,13 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 
 #pragma mark - MG_CUSTOM_ROCKET_FIRE_MODEL
 
+@interface MGCustomRocketFireModelComponentListItem : NSObject
+@property(nonatomic, assign) NSInteger type;
+@property(nonatomic, strong) NSString *itemId;
+@end
+
 @interface MGCustomRocketFireModel : NSObject
-@property(nonatomic, strong) NSArray <MGCustomRocketDynamicFirePriceComponentListItem *> *componentList;
+@property(nonatomic, strong) NSArray <MGCustomRocketFireModelComponentListItem *> *componentList;
 @end
 
 
@@ -134,8 +138,13 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 
 #pragma mark - MG_CUSTOM_ROCKET_BUY_COMPONENT
 
+@interface MGCustomRocketBuyModelComponentListItem : NSObject
+@property(nonatomic, strong) NSString *componentId;
+@property(nonatomic, strong) NSString *value;
+@end
+
 @interface MGCustomRocketBuyModel : NSObject
-@property(nonatomic, strong) NSArray <MGCustomRocketDynamicFirePriceComponentListItem *> *componentList;
+@property(nonatomic, strong) NSArray <MGCustomRocketBuyModelComponentListItem *> *componentList;
 @end
 
 #pragma mark - MG_CUSTOM_ROCKET_VERIFY_SIGN
