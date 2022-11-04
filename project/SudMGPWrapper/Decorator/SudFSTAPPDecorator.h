@@ -171,9 +171,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyAppCustomRocketPlayModelList:(AppCustomRocketPlayModelListModel *)model;
 /// 验证签名合规(火箭) APP_CUSTOM_ROCKET_VERIFY_SIGN
 - (void)notifyAppCustomRocketVerifySign:(AppCustomRocketVerifySignModel *)model;
-/// app主动调起游戏显示(火箭) APP_CUSTOM_ROCKET_SHOW_GAME
+/// app主动调起游戏显示(火箭) APP_CUSTOM_ROCKET_SHOW_GAME_SCENE
 - (void)notifyAppCustomRocketShowGame;
-/// app主动调起游戏隐藏(火箭) APP_CUSTOM_ROCKET_HIDE_GAME
+/// app主动调起游戏隐藏(火箭) APP_CUSTOM_ROCKET_HIDE_GAME_SCENE
 - (void)notifyAppCustomRocketHideGame;
 /// app推送解锁组件（火箭) APP_CUSTOM_ROCKET_UNLOCK_COMPONENT
 - (void)notifyAppCustomRocketUnlockComponent:(AppCustomRocketUnlockComponent *)model;

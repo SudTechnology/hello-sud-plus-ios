@@ -42,9 +42,9 @@ static NSString *APP_CUSTOM_ROCKET_PLAY_MODEL_LIST = @"app_custom_rocket_play_mo
 /// 验证签名合规(火箭)
 static NSString *APP_CUSTOM_ROCKET_VERIFY_SIGN = @"app_custom_rocket_verify_sign";
 /// app主动调起游戏显示(火箭)
-static NSString *APP_CUSTOM_ROCKET_SHOW_GAME = @"app_custom_rocket_show_game";
+static NSString *APP_CUSTOM_ROCKET_SHOW_GAME_SCENE = @"app_custom_rocket_show_game_scene";
 /// app主动调起游戏隐藏(火箭)
-static NSString *APP_CUSTOM_ROCKET_HIDE_GAME = @"app_custom_rocket_hide_game";
+static NSString *APP_CUSTOM_ROCKET_HIDE_GAME_SCENE = @"app_custom_rocket_hide_game_scene";
 /// app推送解锁组件（火箭)
 static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unlock_component";
 

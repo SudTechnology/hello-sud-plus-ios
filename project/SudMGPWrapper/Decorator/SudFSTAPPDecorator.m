@@ -299,14 +299,14 @@
     [self notifyStateChange:APP_CUSTOM_ROCKET_VERIFY_SIGN dataJson:model.mj_JSONString];
 }
 
-/// app主动调起游戏显示(火箭) APP_CUSTOM_ROCKET_SHOW_GAME
+/// app主动调起游戏显示(火箭) APP_CUSTOM_ROCKET_SHOW_GAME_SCENE
 - (void)notifyAppCustomRocketShowGame {
-    [self notifyStateChange:APP_CUSTOM_ROCKET_SHOW_GAME dataJson:@{}.mj_JSONString];
+    [self notifyStateChange:APP_CUSTOM_ROCKET_SHOW_GAME_SCENE dataJson:@{}.mj_JSONString];
 }
 
-/// app主动调起游戏隐藏(火箭) APP_CUSTOM_ROCKET_HIDE_GAME
+/// app主动调起游戏隐藏(火箭) APP_CUSTOM_ROCKET_HIDE_GAME_SCENE
 - (void)notifyAppCustomRocketHideGame {
-    [self notifyStateChange:APP_CUSTOM_ROCKET_HIDE_GAME dataJson:@{}.mj_JSONString];
+    [self notifyStateChange:APP_CUSTOM_ROCKET_HIDE_GAME_SCENE dataJson:@{}.mj_JSONString];
 }
 
 /// app推送解锁组件（火箭) APP_CUSTOM_ROCKET_UNLOCK_COMPONENT

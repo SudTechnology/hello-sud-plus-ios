@@ -114,7 +114,7 @@
     gift9.giftName = @"定制火箭";
     gift9.leftTagImage = @"gift_rocket_flag_bg";
     gift9.leftTagName = @"定制";
-    gift9.price = 1988;
+    gift9.price = 19888;
 
 
     _giftList = @[giftSvga, giftLottie, giftWebp, gift9, giftMP4];

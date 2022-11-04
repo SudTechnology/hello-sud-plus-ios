@@ -125,6 +125,17 @@
     if (self.confirmBlock) self.confirmBlock(selectList);
 }
 
+- (void)updateShowCoin {
+    NSInteger total = 0;
+    NSInteger singlePrice = [GiftService.shared giftByID:kRocketGiftID].price;
+    for (AudioRoomMicModel *m in self.userDataList) {
+        if (m.user != nil && m.isSelected) {
+            total += singlePrice;
+        }
+    }
+    [_confirmBtn setTitle:[NSString stringWithFormat:@"确认发射(%d)金币", total] forState:UIControlStateNormal];
+    _confirmBtn.enabled = total > 0;
+}
 
 #pragma mark - UICollectionViewDelegate
 
@@ -142,6 +153,7 @@
     self.userDataList[indexPath.row].isSelected = !self.userDataList[indexPath.row].isSelected;
     RocketSelectPopUserColCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     [cell dtUpdateUI];
+    [self updateShowCoin];
 }
 
 
