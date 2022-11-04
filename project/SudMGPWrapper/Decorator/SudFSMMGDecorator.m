@@ -324,19 +324,19 @@
         }
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_CONFIG]) {
         /// 礼物配置文件(火箭)
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketConfig)]) {
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketConfig:)]) {
             [self.listener onGameMGCustomRocketConfig:handle];
             return;
         }
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_MODEL_LIST]) {
         /// 拥有模型列表(火箭)
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketModelList)]) {
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketModelList:)]) {
             [self.listener onGameMGCustomRocketModelList:handle];
             return;
         }
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_COMPONENT_LIST]) {
         /// 拥有组件列表(火箭)
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketComponentList)]) {
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketComponentList:)]) {
             [self.listener onGameMGCustomRocketComponentList:handle];
             return;
         }
@@ -412,7 +412,7 @@
         }
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_PLAY_EFFECT_START]) {
         /// 播放效果开始((火箭)
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketPlayEffectStart)]) {
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketPlayEffectStart:)]) {
             [self.listener onGameMGCustomRocketPlayEffectStart:handle];
             return;
         }
@@ -438,13 +438,13 @@
         }
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_PREPARE_FINISH]) {
         /// 前期准备完成((火箭)
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketPrepareFinish)]) {
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketPrepareFinish:)]) {
             [self.listener onGameMGCustomRocketPrepareFinish:handle];
             return;
         }
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_HIDE_GAME_SCENE]) {
         /// 隐藏火箭主界面((火箭)
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketHideGameScene)]) {
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketHideGameScene:)]) {
             [self.listener onGameMGCustomRocketHideGameScene:handle];
             return;
         }

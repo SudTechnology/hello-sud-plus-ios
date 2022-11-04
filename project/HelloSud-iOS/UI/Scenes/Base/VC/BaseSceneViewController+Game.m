@@ -480,7 +480,7 @@
     WeakSelf
     RocketSelectAnchorView *v = RocketSelectAnchorView.new;
     v.confirmBlock = ^(NSArray<AudioRoomMicModel *> *userList){
-        [RocketService reqRocketFireModel:model userList:nil finished:^(AppCustomRocketFireModel *respModel) {
+        [RocketService reqRocketFireModel:model userList:userList finished:^(AppCustomRocketFireModel *respModel) {
             [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
         }];
     };
@@ -544,6 +544,7 @@
 /// 前期准备完成((火箭) MG_CUSTOM_ROCKET_PREPARE_FINISH
 - (void)onGameMGCustomRocketPrepareFinish:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：前期准备完成((火箭)");
+    [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
 }
 
 /// 隐藏火箭主界面((火箭) MG_CUSTOM_ROCKET_HIDE_GAME_SCENE

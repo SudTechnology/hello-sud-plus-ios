@@ -137,7 +137,7 @@
     for (AudioRoomMicModel *m in userList) {
         [userIdList addObject:m];
     }
-    dicParam[@"receiver"] = userIdList;
+    dicParam[@"receiverList"] = userIdList;
     dicParam[@"number"] = @(1);
     [HSHttpService postRequestWithURL:kGameURL(@"rocket/fire-rocket/v1")
                                 param:dicParam respClass:BaseRespModel.class
@@ -218,7 +218,7 @@
 /// 设置火箭默认位置
 + (void)reqRocketSetDefaultSeat:(MGCustomRocketSetDefaultSeat *)paramModel finished:(void (^)(AppCustomRocketSetDefaultSeatModel *respModel))finished {
     NSDictionary *dicParam = paramModel.mj_JSONObject;
-    [HSHttpService postRequestWithURL:kGameURL(@"rocket/set-default-seat/v1")
+    [HSHttpService postRequestWithURL:kGameURL(@"rocket/set-default-model/v1")
                                 param:dicParam respClass:BaseRespModel.class
                        showErrorToast:YES
                               success:^(BaseRespModel *resp) {

@@ -19,45 +19,75 @@
 @end
 
 @implementation AppCustomRocketConfigModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": RocketComponentItemModel.class,
+            @"headList": RocketHeadItemModel.class,
+            @"extraList": RocketExtraItemModel.class};
+}
 @end
 
 @implementation RocketModelComponentItemModel
 @end
 
 @implementation RocketModelItemModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": RocketModelComponentItemModel.class};
+}
 @end
 
 @implementation AppCustomRocketModelListModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"list": RocketModelItemModel.class};
+}
 @end
 
 @implementation RocketComponentListItemModel
 @end
 
 @implementation AppCustomRocketComponentListModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"defaultList": RocketComponentListItemModel.class,
+            @"list":RocketComponentListItemModel.class};
+}
 @end
 
 @implementation RocketUserInfoItemModel
 @end
 
 @implementation AppCustomRocketUserInfoModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"userList": RocketUserInfoItemModel.class};
+}
 @end
 
 @implementation RocketOrderRecordListItemModel
 @end
 
 @implementation AppCustomRocketOrderRecordListModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"list": RocketOrderRecordListItemModel.class};
+}
 @end
 
 @implementation RocketRoomRecordListItemModel
 @end
 
 @implementation AppCustomRocketRoomRecordListModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"list": RocketRoomRecordListItemModel.class};
+}
 @end
 
 @implementation RocketUserRecordListItemModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": RocketModelComponentItemModel.class};
+}
 @end
 
 @implementation AppCustomRocketUserRecordListModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"list": RocketUserRecordListItemModel.class};
+}
 @end
 
 @implementation RocketSetDefaultSeatModel
@@ -73,15 +103,24 @@
 @end
 
 @implementation RocketCreateDataModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": RocketModelComponentItemModel.class};
+}
 @end
 
 @implementation AppCustomRocketCreateModel
 @end
 
 @implementation RocketCreateReplaceDataModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": RocketModelComponentItemModel.class};
+}
 @end
 
 @implementation AppCustomRocketReplaceComponentModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": RocketComponentListItemModel.class};
+}
 @end
 
 @implementation RocketCreateBuyDataModel
@@ -94,6 +133,9 @@
 @end
 
 @implementation AppCustomRocketPlayModelListModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": RocketPlayModelListItem.class};
+}
 @end
 
 @implementation RocketVerifySignDataModel

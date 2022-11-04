@@ -28,21 +28,36 @@
 @end
 
 @implementation MGCustomRocketDynamicFirePrice
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": MGCustomRocketDynamicFirePriceComponentListItem.class};
+}
 @end
 
 @implementation MGCustomRocketFireModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": MGCustomRocketDynamicFirePriceComponentListItem.class};
+}
 @end
 
 @implementation MGCustomRocketCreateModelComponentListItem
 @end
 
 @implementation MGCustomRocketCreateModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": MGCustomRocketCreateModelComponentListItem.class};
+}
 @end
 
 @implementation MGCustomRocketReplaceModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": MGCustomRocketCreateModelComponentListItem.class};
+}
 @end
 
 @implementation MGCustomRocketBuyModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": MGCustomRocketDynamicFirePriceComponentListItem.class};
+}
 @end
 
 @implementation MGCustomRocketVerifySign
