@@ -243,7 +243,7 @@
                 
             case AFNetworkReachabilityStatusReachableViaWiFi:
             case AFNetworkReachabilityStatusReachableViaWWAN:
-                if (AppService.shared.login.isLogin) {
+                if (AppService.shared.login.isLogin && !AppService.shared.login.isRefreshedToken) {
                     [AppService.shared.login checkToken];
                 }
                 break;

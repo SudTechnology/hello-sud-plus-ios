@@ -124,6 +124,9 @@
 @end
 
 @implementation RocketCreateBuyDataModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": RocketComponentListItemModel.class};
+}
 @end
 
 @implementation AppCustomRocketBuyComponentModel
