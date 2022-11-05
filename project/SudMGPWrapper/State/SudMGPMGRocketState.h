@@ -131,7 +131,7 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 #pragma mark - MG_CUSTOM_ROCKET_REPLACE_COMPONENT
 
 @interface MGCustomRocketReplaceModel : NSObject
-@property(nonatomic, strong) NSString * modeId;
+@property(nonatomic, strong) NSString * modelId;
 @property(nonatomic, strong) NSArray <MGCustomRocketCreateModelComponentListItem *> *componentList;
 @end
 
