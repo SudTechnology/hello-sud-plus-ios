@@ -127,7 +127,10 @@
 }
 
 /// 发射火箭
-+ (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel userList:(NSArray<AudioRoomMicModel *> *)userList finished:(void (^)(AppCustomRocketFireModel *respModel))finished {
+/// @param paramModel 发射mg参数
+/// @param userList 选择发送主播列表
+/// @param finished
++ (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel userList:(NSArray<AudioRoomMicModel *> *)userList finished:(void (^)(BaseRespModel *resp))finished {
     NSDictionary *dicTemp = paramModel.mj_JSONObject;
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
     if (dicTemp){
@@ -135,17 +138,17 @@
     }
     NSMutableArray *userIdList = NSMutableArray.new;
     for (AudioRoomMicModel *m in userList) {
-        [userIdList addObject:m];
+        [userIdList addObject:m.user.userID];
     }
     dicParam[@"receiverList"] = userIdList;
     dicParam[@"number"] = @(1);
+    dicParam[@"roomId"] = kAudioRoomService.currentRoomVC.roomID;
     [HSHttpService postRequestWithURL:kGameURL(@"rocket/fire-rocket/v1")
                                 param:dicParam respClass:BaseRespModel.class
                        showErrorToast:YES
                               success:^(BaseRespModel *resp) {
-                                  AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
                                   if (finished) {
-                                      finished(respModel);
+                                      finished(resp);
                                   }
                               } failure:^(NSError *error) {
                 AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
@@ -241,7 +244,7 @@
 /// 校验签名合规性
 + (void)reqRocketVerifySign:(MGCustomRocketVerifySign *)paramModel finished:(void (^)(AppCustomRocketVerifySignModel *respModel))finished {
     NSDictionary *dicParam = paramModel.mj_JSONObject;
-    [HSHttpService postRequestWithURL:kGameURL(@"rocket/set-default-seat/v1")
+    [HSHttpService postRequestWithURL:kGameURL(@"rocket/verify-sign/v1")
                                 param:dicParam respClass:BaseRespModel.class
                        showErrorToast:YES
                               success:^(BaseRespModel *resp) {

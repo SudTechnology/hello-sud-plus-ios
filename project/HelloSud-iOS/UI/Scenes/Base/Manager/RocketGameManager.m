@@ -32,6 +32,7 @@
 
 /// 初始化sud
 - (void)initSudFSMMG {
+    self.language = @"zh-CN";
     self.sudFSTAPPDecorator = [[SudFSTAPPDecorator alloc] init];
     self.sudFSMMGDecorator = [[SudFSMMGDecorator alloc] init];
     [self.sudFSMMGDecorator setCurrentUserId:AppService.shared.login.loginUserInfo.userID];
@@ -307,8 +308,21 @@
     WeakSelf
     RocketSelectAnchorView *v = RocketSelectAnchorView.new;
     v.confirmBlock = ^(NSArray<AudioRoomMicModel *> *userList) {
-        [RocketService reqRocketFireModel:model userList:userList finished:^(AppCustomRocketFireModel *respModel) {
+        [RocketService reqRocketFireModel:model userList:userList finished:^(BaseRespModel *resp) {
+            AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
             [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
+            AppCustomRocketPlayModelListModel *listModel = [RocketService decodeModel:AppCustomRocketPlayModelListModel.class FromDic:resp.srcData];
+            NSDictionary *dicOrderMaps = resp.srcData[@"userOrderIdsMap"];
+            if (dicOrderMaps) {
+                for(AudioRoomMicModel *micModel in userList) {
+                    DDLogDebug(@"播放火箭给用户ID：%@", micModel.user.userID);
+                    listModel.orderId = dicOrderMaps[micModel.user.userID];
+                    [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketPlayModelList:listModel];
+                }
+            } else {
+                DDLogError(@"dicOrderMaps is empty");
+            }
+
         }];
     };
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];

@@ -60,7 +60,7 @@
 
 - (void)dtUpdateUI {
     [super dtUpdateUI];
-    [_confirmBtn setTitle:@"确认发射(8000)金币" forState:UIControlStateNormal];
+    [_confirmBtn setTitle:@"确认发射(0)金币" forState:UIControlStateNormal];
     [self updateAnchorList];
 }
 
