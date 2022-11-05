@@ -318,7 +318,7 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_ rocket_unloc
 
 @interface RocketCreateReplaceDataModel : NSObject
 /// 座位ID
-@property(nonatomic, assign) NSInteger seat;
+@property(nonatomic, strong) NSString *modelId;
 @property(nonatomic, strong) NSArray <RocketModelComponentItemModel *> *componentList;
 @end
 

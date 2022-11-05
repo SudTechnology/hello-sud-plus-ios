@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)reqRocketReplaceModel:(MGCustomRocketReplaceModel *)paramModel finished:(void (^)(AppCustomRocketReplaceComponentModel *respModel))finished;
 
 /// 发射火箭
-+ (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel userList:(NSArray<AudioRoomMicModel *> *)userList finished:(void (^)(BaseRespModel *resp))finished;
++ (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel userList:(NSArray<AudioRoomMicModel *> *)userList sucess:(void (^)(BaseRespModel *resp))sucess failure:(void (^)(NSError *error))failure;
 /// 发射火箭记录摘要
 + (void)reqRocketRoomRecordList:(NSInteger)pageIndex
                        pageSize:(NSInteger)pageSize

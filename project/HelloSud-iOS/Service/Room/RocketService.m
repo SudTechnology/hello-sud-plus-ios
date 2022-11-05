@@ -86,7 +86,7 @@
 /// 解锁组件
 + (void)reqRocketUnlockComponent:(MGCustomRocketClickLockComponent *)paramModel finished:(void (^)(void))finished {
     NSDictionary *dicParam = @{@"componentId": paramModel.componentId, @"isLock": @(0)};
-    [HSHttpService postRequestWithURL:kGameURL(@"rocket/purchase-component/v1")
+    [HSHttpService postRequestWithURL:kGameURL(@"rocket/unlock-component/v1")
                                 param:dicParam respClass:BaseRespModel.class
                        showErrorToast:YES
                               success:^(BaseRespModel *resp) {
@@ -129,11 +129,14 @@
 /// 发射火箭
 /// @param paramModel 发射mg参数
 /// @param userList 选择发送主播列表
-/// @param finished
-+ (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel userList:(NSArray<AudioRoomMicModel *> *)userList finished:(void (^)(BaseRespModel *resp))finished {
+/// @param sucess
++ (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel
+                  userList:(NSArray<AudioRoomMicModel *> *)userList
+                    sucess:(void (^)(BaseRespModel *resp))sucess
+                   failure:(void (^)(NSError *error))failure {
     NSDictionary *dicTemp = paramModel.mj_JSONObject;
     NSMutableDictionary *dicParam = NSMutableDictionary.new;
-    if (dicTemp){
+    if (dicTemp) {
         [dicParam setDictionary:dicTemp];
     }
     NSMutableArray *userIdList = NSMutableArray.new;
@@ -147,18 +150,10 @@
                                 param:dicParam respClass:BaseRespModel.class
                        showErrorToast:YES
                               success:^(BaseRespModel *resp) {
-                                  if (finished) {
-                                      finished(resp);
+                                  if (sucess) {
+                                      sucess(resp);
                                   }
-                              } failure:^(NSError *error) {
-                AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
-                respModel.resultCode = error.code;
-                respModel.error = error.dt_errMsg;
-                if (finished) {
-                    finished(respModel);
-                }
-
-            }];
+                              } failure:failure];
 }
 
 /// 发射火箭记录摘要

@@ -308,25 +308,37 @@
     WeakSelf
     RocketSelectAnchorView *v = RocketSelectAnchorView.new;
     v.confirmBlock = ^(NSArray<AudioRoomMicModel *> *userList) {
-        [RocketService reqRocketFireModel:model userList:userList finished:^(BaseRespModel *resp) {
+        [RocketService reqRocketFireModel:model userList:userList sucess:^(BaseRespModel *resp) {
+            // 响应给游戏
             AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
             [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
-            AppCustomRocketPlayModelListModel *listModel = [RocketService decodeModel:AppCustomRocketPlayModelListModel.class FromDic:resp.srcData];
-            NSDictionary *dicOrderMaps = resp.srcData[@"userOrderIdsMap"];
-            if (dicOrderMaps) {
-                for(AudioRoomMicModel *micModel in userList) {
-                    DDLogDebug(@"播放火箭给用户ID：%@", micModel.user.userID);
-                    listModel.orderId = dicOrderMaps[micModel.user.userID];
-                    [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketPlayModelList:listModel];
-                }
-            } else {
-                DDLogError(@"dicOrderMaps is empty");
-            }
-
+            [weakSelf handleSendRocketInfo:resp userList:userList];
+        }                         failure:^(NSError *error) {
+            AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
+            respModel.resultCode = error.code;
+            respModel.error = error.dt_errMsg;
+            [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
         }];
     };
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
 
+}
+
+/// 处理火箭发送信息
+- (void)handleSendRocketInfo:(BaseRespModel *)resp userList:(NSArray<AudioRoomMicModel *> *)userList {
+    AppCustomRocketPlayModelListModel *listModel = [RocketService decodeModel:AppCustomRocketPlayModelListModel.class FromDic:resp.srcData];
+    NSDictionary *dicOrderMaps = resp.srcData[@"userOrderIdsMap"];
+    if (dicOrderMaps) {
+        for(AudioRoomMicModel *micModel in userList) {
+            DDLogDebug(@"播放火箭给用户ID：%@", micModel.user.userID);
+            listModel.orderId = dicOrderMaps[micModel.user.userID];
+            // 给每个主播播放火箭动效
+            [self.sudFSTAPPDecorator notifyAppCustomRocketPlayModelList:listModel];
+
+        }
+    } else {
+        DDLogError(@"dicOrderMaps is empty");
+    }
 }
 
 /// 新组装模型(火箭) MG_CUSTOM_ROCKET_CREATE_MODEL
