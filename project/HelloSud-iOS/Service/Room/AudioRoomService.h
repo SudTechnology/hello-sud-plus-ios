@@ -10,6 +10,7 @@
 #import "RoomCustomModel.h"
 #import "GameCfgModel.h"
 #import "RoomOrderCreateModel.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// 语音房间管理
@@ -42,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 查询房间麦位列表
 /// @param roomId 房间ID
-- (void)reqMicList:(long)roomId success:(void(^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail;
+- (void)reqMicList:(long)roomId success:(void (^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail;
 
 /// 切换房间游戏接口
 /// @param roomId 房间ID
@@ -50,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 下单
 /// @param roomId 房间ID
-- (void)reqRoomOrderCreate:(long)roomId gameId:(long)gameId userIdList:(NSArray*)userIdList success:(void(^)(RoomOrderCreateModel *m))success fail:(ErrorBlock)fail;
+- (void)reqRoomOrderCreate:(long)roomId gameId:(long)gameId userIdList:(NSArray *)userIdList success:(void (^)(RoomOrderCreateModel *m))success fail:(ErrorBlock)fail;
 
 /// 同意接单
 - (void)reqRoomOrderReceive:(NSInteger)orderId success:(EmptyBlock)success fail:(ErrorBlock)fail;
@@ -59,8 +60,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param finished finished
 /// @param failure failure
 + (void)reqRobotListWithFinished:(void (^)(NSArray<RobotInfoModel *> *robotList))finished failure:(void (^)(NSError *error))failure;
+
+
+/// 获取banner
+/// @param finished finished
+/// @param failure failure
++ (void)reqBannerListWithFinished:(void (^)(RespBannerListModel *respModel))finished failure:(void (^)(NSError *error))failure;
+
 #pragma mark - Custom
+
 + (RoomCustomModel *)getCustomModel;
+
 + (GameCfgModel *)getGameCfgModel;
 
 @end

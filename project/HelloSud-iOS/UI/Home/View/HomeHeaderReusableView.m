@@ -135,6 +135,10 @@
 
 }
 
+- (void)showBanner:(RespBannerListModel *)respBannerListModel {
+    [self.bannerView showBanner:respBannerListModel.list];
+}
+
 - (void)setHeaderGameList:(NSArray<HSGameItem *> *)headerGameList {
     _headerGameList = headerGameList;
 }

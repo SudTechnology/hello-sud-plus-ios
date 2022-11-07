@@ -74,6 +74,7 @@
 #import "RespDanmakuModel.h"
 #import "RespGiftListModel.h"
 #import "RespDiscoModel.h"
+#import "RespBannerListModel.h"
 #import "SceneFactory.h"
 
 #import "AppService.h"

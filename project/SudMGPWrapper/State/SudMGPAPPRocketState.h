@@ -92,7 +92,7 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_rocket_unlock
 /// 用户的userID
 @property(nonatomic, strong) NSString *userId;
 /// 昵称
-@property(nonatomic, strong) NSString *nickName;
+@property(nonatomic, strong) NSString *nickname;
 /// 性别 0:男 1:女
 @property(nonatomic, assign) NSInteger sex;
 /// 头像URL
@@ -206,7 +206,7 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_rocket_unlock
 /// 用户的userID
 @property(nonatomic, strong) NSString *userId;
 /// 昵称
-@property(nonatomic, strong) NSString *nickName;
+@property(nonatomic, strong) NSString *nickname;
 /// 性别 0:男 1:女
 @property(nonatomic, assign) NSInteger sex;
 /// 头像URL

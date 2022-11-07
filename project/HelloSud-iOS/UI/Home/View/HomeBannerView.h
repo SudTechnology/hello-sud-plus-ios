@@ -7,4 +7,5 @@
 
 /// 首页banner视图
 @interface HomeBannerView : BaseView
+- (void)showBanner:(NSArray <BaseModel *>*)bannerList;
 @end

@@ -36,6 +36,7 @@
 @property(nonatomic, assign) BOOL isClickSegItem;
 /// 竞猜游戏列表
 @property(nonatomic, strong) NSArray<MoreGuessGameModel *> *quizGameInfoList;
+@property(nonatomic, strong) RespBannerListModel *respBannerListModel;
 
 @end
 
@@ -208,6 +209,18 @@
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
     [self.searchHeaderView dtUpdateUI];
+    // 请求banner信息
+    [self reqBanner];
+}
+
+/// 请求banner信息
+- (void)reqBanner {
+    [AudioRoomService reqBannerListWithFinished:^(RespBannerListModel *respModel) {
+        self.respBannerListModel = respModel;
+        [self.collectionView reloadData];
+    }                                   failure:^(NSError *error) {
+
+    }];
 }
 
 - (void)reqGuessGameList:(HSSceneModel *)guessModel {
@@ -258,8 +271,8 @@
 /// 是否展示banner
 /// @param section
 /// @return
-- (BOOL)showBanner:(NSInteger)section {
-    return section == 0;
+- (BOOL)checkIfNeedToShowBanner:(NSInteger)section {
+    return section == 0 && self.respBannerListModel.list.count > 0;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -364,7 +377,7 @@
         h = baseH + rect.size.height;
     }
     // 展示banner
-    if ([self showBanner:section]) {
+    if ([self checkIfNeedToShowBanner:section]) {
         h += 124;
     }
     return CGSizeMake(kScreenWidth, h);
@@ -394,7 +407,10 @@
         } else {
             HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
             view.indexPath = indexPath;
-            view.isShowBanner = [self showBanner:indexPath.section];
+            view.isShowBanner = [self checkIfNeedToShowBanner:indexPath.section];
+            if (view.isShowBanner) {
+                [view showBanner:self.respBannerListModel];
+            }
             view.sceneModel = self.headerSceneList[indexPath.section];
             view.headerGameList = self.dataList[indexPath.section];
             view.quizGameInfoList = self.quizGameInfoList;

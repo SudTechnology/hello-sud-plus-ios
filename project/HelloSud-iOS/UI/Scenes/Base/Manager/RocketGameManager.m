@@ -334,7 +334,7 @@
                 continue;
             }
             RocketUserInfoItemModel *itemModel = RocketUserInfoItemModel.new;
-            itemModel.nickName = userInfoModel.nickname;
+            itemModel.nickname = userInfoModel.nickname;
             itemModel.sex = [userInfoModel.gender isEqualToString:@"male"] ? 0 : 1;
             itemModel.url = userInfoModel.avatar;
             itemModel.userId = [NSString stringWithFormat:@"%@", userInfoModel.userId];
