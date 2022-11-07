@@ -73,7 +73,7 @@
 /// 加载嵌入游戏包
 - (void)loadGameEmbedPackage {
     [SudMGP setLogLevel:3];
-    [[SudMGP getCfg] addEmbeddedMGPkg:1461227817776713818 mgPath:@"com_oppo_cocos.rpk"];
+//    [[SudMGP getCfg] addEmbeddedMGPkg:1583284410804244481 mgPath:@"customrockets.rpk"];
 }
 
 - (void)configBugly {

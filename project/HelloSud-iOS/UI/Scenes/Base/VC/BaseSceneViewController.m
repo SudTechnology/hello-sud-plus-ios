@@ -301,12 +301,24 @@
 
 - (void)onRocketEnterViewTap:(id)tap {
     self.rocketGameView.hidden = NO;
+    [self showRocketGame];
+}
+
+- (void)showRocketGame {
     // 不存在则加载
     if (!self.rocketManager.isExistGame) {
-        [self.rocketManager loadInteractiveGame:1461227817776713818 roomId:self.gameRoomID gameView:self.rocketGameView];
-        return;
+        [self.rocketManager loadInteractiveGame:1583284410804244481 roomId:self.gameRoomID gameView:self.rocketGameView];
     }
     [self.rocketManager showGameView];
+}
+
+/// 播放火箭
+/// @param jsonData
+- (void)playRocket:(NSString *)jsonData {
+    [self showRocketGame];
+    if (jsonData) {
+        [self.rocketManager playRocket:jsonData];
+    }
 }
 
 /// 调整麦位是否缩放
@@ -890,6 +902,11 @@
         NSLog(@"No exist the gift info:%ld", model.giftID);
         return;
     }
+    if (giftModel.giftID == kRocketGiftID) {
+        // 火箭礼物
+        [self handleGiftRocket:model];
+        return;
+    }
     if ([giftModel.animateType isEqualToString:@"svga"]) {
         DTSVGAPlayerView *v = DTSVGAPlayerView.new;
         NSURL *url = [giftModel.animateURL hasPrefix:@"http"] ? [[NSURL alloc] initWithString:giftModel.animateURL] : [NSURL fileURLWithPath:giftModel.animateURL];
@@ -947,6 +964,10 @@
 
         [v playWithMetalConfiguration:configuration];
     }
+}
+
+- (void)handleGiftRocket:(RoomCmdSendGiftModel *)model {
+    [self playRocket:model.extData];
 }
 
 /// 同步麦位列表

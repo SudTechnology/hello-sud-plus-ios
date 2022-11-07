@@ -29,4 +29,8 @@
 - (void)destoryGame;
 
 - (BOOL)isExistGame;
+
+/// 播放火箭
+/// @param jsonData
+- (void)playRocket:(NSString *)jsonData;
 @end

@@ -19,6 +19,11 @@
 @property(nonatomic, strong) NSString *gameRoomID;
 @property(nonatomic, strong) NSString *language;
 @property(nonatomic, strong) RocketLoadingView *rocketLoadingView;
+@property(nonatomic, strong) NSMutableArray *rocketQueue;
+/// 是否游戏已经准备完毕
+@property(nonatomic, assign) BOOL isGamePrepareOK;
+/// 是否需要展示游戏
+@property(nonatomic, assign) BOOL isShowGame;
 @end
 
 @implementation RocketGameManager
@@ -63,15 +68,57 @@
     return self.sudFSTAPPDecorator.iSudFSTAPP != nil;
 }
 
+/// 播放火箭
+/// @param jsonData
+- (void)playRocket:(NSString *)jsonData {
+    [self.rocketQueue addObject:jsonData];
+    [self checkIfCanPlay];
+}
+
+- (void)checkIfCanPlay {
+    if (self.rocketQueue.count == 0) {
+        DDLogDebug(@"no rocket to play rocket");
+        return;
+    }
+    if (!self.isGamePrepareOK) {
+        DDLogDebug(@"game is not prepare to play rocket");
+        return;
+    }
+    for (NSString *str in self.rocketQueue) {
+
+        NSDictionary *dicData = [NSJSONSerialization JSONObjectWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        AppCustomRocketPlayModelListModel *listModel = [RocketService decodeModel:AppCustomRocketPlayModelListModel.class FromDic:dicData];
+        NSDictionary *dicOrderMaps = dicData[@"userOrderIdsMap"];
+        if (dicOrderMaps) {
+            NSArray *orderList = dicOrderMaps.allValues;
+            for (NSString *order in orderList) {
+                listModel.orderId = order;
+                // 给每个主播播放火箭动效
+                [self.sudFSTAPPDecorator notifyAppCustomRocketPlayModelList:listModel];
+            }
+        } else {
+            DDLogError(@"dicOrderMaps is empty");
+        }
+    }
+    [self.rocketQueue removeAllObjects];
+}
+
 /// 展示游戏视图
 - (void)showGameView {
-
     self.gameView.hidden = NO;
+    self.isShowGame = YES;
+    if (self.isGamePrepareOK) {
+        [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
+    }
 }
 
 /// 隐藏游戏视图
 - (void)hideGameView {
     self.gameView.hidden = YES;
+    self.isShowGame = NO;
+    if (self.isGamePrepareOK) {
+        [self.sudFSTAPPDecorator notifyAppCustomRocketHideGame];
+    }
 }
 
 /// 销毁互动游戏
@@ -100,6 +147,13 @@
         _rocketLoadingView = RocketLoadingView.new;
     }
     return _rocketLoadingView;
+}
+
+- (NSMutableArray *)rocketQueue {
+    if (!_rocketQueue) {
+        _rocketQueue = NSMutableArray.new;
+    }
+    return _rocketQueue;
 }
 
 #pragma mark =======SudFSMMGListener=======
@@ -332,17 +386,22 @@
     WeakSelf
     RocketSelectAnchorView *v = RocketSelectAnchorView.new;
     v.confirmBlock = ^(NSArray<AudioRoomMicModel *> *userList) {
-        [RocketService reqRocketFireModel:model userList:userList sucess:^(BaseRespModel *resp) {
-            // 响应给游戏
-            AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
-            [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
-            [weakSelf handleSendRocketInfo:resp userList:userList];
-        }                         failure:^(NSError *error) {
-            AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
-            respModel.resultCode = error.code;
-            respModel.error = error.dt_errMsg;
-            [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
-        }];
+        [RocketService reqRocketFireModel:model
+                                 userList:userList
+                                   sucess:^(BaseRespModel *resp) {
+
+                                       // 响应给游戏
+                                       AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
+                                       [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
+                                       [weakSelf handleSendRocketInfo:resp userList:userList];
+
+                                   } failure:^(NSError *error) {
+
+                    AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
+                    respModel.resultCode = error.code;
+                    respModel.error = error.dt_errMsg;
+                    [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
+                }];
     };
     [DTAlertView show:v rootView:nil clickToClose:YES showDefaultBackground:YES onCloseCallback:nil];
 
@@ -358,11 +417,35 @@
             listModel.orderId = dicOrderMaps[micModel.user.userID];
             // 给每个主播播放火箭动效
             [self.sudFSTAPPDecorator notifyAppCustomRocketPlayModelList:listModel];
-
+            // 推送礼物信息给房间其余用户
+            [self sendGiftMsgFoRoomUsers:userList resp:resp];
         }
     } else {
         DDLogError(@"dicOrderMaps is empty");
     }
+}
+
+/// 发送火箭礼物消息给房间其它玩家
+/// @param anchorUserList
+/// @param resp
+- (void)sendGiftMsgFoRoomUsers:(NSArray<AudioRoomMicModel *> *)anchorUserList resp:(BaseRespModel *)resp {
+    for (AudioRoomMicModel *micModel in anchorUserList) {
+        AudioUserModel *user = micModel.user;
+        if (!user) {
+            continue;
+        }
+        GiftModel *giftModel = [GiftService.shared giftByID:kRocketGiftID];
+        AudioUserModel *toUser = user;
+        RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
+        giftMsg.type = giftModel.type;
+        giftMsg.giftUrl = giftModel.giftURL;
+        giftMsg.animationUrl = giftModel.animateURL;
+        giftMsg.giftName = giftModel.giftName;
+        giftMsg.extData = [resp.srcData mj_JSONString];
+
+        [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
+    }
+
 }
 
 /// 新组装模型(火箭) MG_CUSTOM_ROCKET_CREATE_MODEL
@@ -421,8 +504,12 @@
 /// 前期准备完成((火箭) MG_CUSTOM_ROCKET_PREPARE_FINISH
 - (void)onGameMGCustomRocketPrepareFinish:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：前期准备完成((火箭)");
+    self.isGamePrepareOK = YES;
     [self closeLoadingView];
-    [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
+    if (self.isShowGame) {
+        [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
+    }
+    [self checkIfCanPlay];
 }
 
 /// 隐藏火箭主界面((火箭) MG_CUSTOM_ROCKET_HIDE_GAME_SCENE

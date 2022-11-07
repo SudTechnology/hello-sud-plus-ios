@@ -253,6 +253,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 添加机器人到游戏
 /// @param robotList
 - (void)addRobotToGame:(NSArray <RobotInfoModel *>*)robotList;
+
+/// 播放火箭
+/// @param jsonData
+- (void)playRocket:(NSString *)jsonData;
 @end
 
 NS_ASSUME_NONNULL_END

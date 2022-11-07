@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)NSString *animationUrl;
 /// 礼物名称
 @property (nonatomic, strong)NSString *giftName;
+/// 礼物扩展数据
+@property (nonatomic, strong)NSString *extData;
 
 /// 特写时间
 @property (nonatomic, assign)NSInteger specialDuration;

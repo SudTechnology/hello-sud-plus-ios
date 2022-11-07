@@ -293,7 +293,6 @@
 		6CD6E87627BF42F900D8F76C /* VolcAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87527BF42F900D8F76C /* VolcAudioEngineImpl.m */; };
 		6CD6E87927BF431500D8F76C /* AliyunAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87827BF431500D8F76C /* AliyunAudioEngineImpl.m */; };
 		6CD6E87C27BF433500D8F76C /* TXAudioEngineImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */; };
-		6CDAA3212913C9E300942245 /* com_oppo_cocos.rpk in Resources */ = {isa = PBXBuildFile; fileRef = 6CDAA3202913C9E300942245 /* com_oppo_cocos.rpk */; };
 		6CE6CB5B283CB6890026BDAB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CB5A283CB6890026BDAB /* AppDelegate.m */; };
 		6CE6CB64283CB68A0026BDAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE6CB62283CB6890026BDAB /* Main.storyboard */; };
 		6CE6CB66283CB68B0026BDAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE6CB65283CB68B0026BDAB /* Assets.xcassets */; };
@@ -1007,7 +1006,6 @@
 		6CD6E87A27BF433500D8F76C /* TXAudioEngineImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAudioEngineImpl.h; sourceTree = "<group>"; };
 		6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAudioEngineImpl.m; sourceTree = "<group>"; };
 		6CD6E87D27C0A36100D8F76C /* ServiceConstHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceConstHeader.h; sourceTree = "<group>"; };
-		6CDAA3202913C9E300942245 /* com_oppo_cocos.rpk */ = {isa = PBXFileReference; lastKnownFileType = file; path = com_oppo_cocos.rpk; sourceTree = "<group>"; };
 		6CE6CB57283CB6890026BDAB /* QuickStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE6CB59283CB6890026BDAB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6CE6CB5A283CB6890026BDAB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -2627,7 +2625,6 @@
 		6CDAA31F2913C9B900942245 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				6CDAA3202913C9E300942245 /* com_oppo_cocos.rpk */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -3113,7 +3110,6 @@
 				6C076EB0279FF37200650209 /* Res in Resources */,
 				6C192E58279523B100553034 /* Assets.xcassets in Resources */,
 				6C192E56279523B000553034 /* Main.storyboard in Resources */,
-				6CDAA3212913C9E300942245 /* com_oppo_cocos.rpk in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
