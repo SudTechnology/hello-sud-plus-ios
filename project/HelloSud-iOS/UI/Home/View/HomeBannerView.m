@@ -55,7 +55,7 @@
 
 - (void)scrollPage {
     CGPoint offset = self.collectionView.contentOffset;
-    offset.x += self.mj_w;
+    offset.x += (kScreenWidth - 32);
     [self.collectionView setContentOffset:offset animated:YES];
 }
 
@@ -129,7 +129,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(kScreenWidth, 104);
+    return CGSizeMake(kScreenWidth - 32, 104);
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
