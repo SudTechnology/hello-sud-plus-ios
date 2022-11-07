@@ -35,13 +35,16 @@
 }
 
 - (void)showBanner:(NSArray <BaseModel *> *)bannerList {
-    self.dataList = bannerList;
+    if (!bannerList) {
+        return;
+    }
+    [self.dataList setArray:bannerList];
     [self.collectionView reloadData];
     [self beginAutoScroll];
 }
 
 - (void)beginAutoScroll {
-    if (self.timer) {
+    if (self.timer || self.dataList.count <= 1) {
         return;
     }
     WeakSelf
@@ -52,7 +55,7 @@
 
 - (void)scrollPage {
     CGPoint offset = self.collectionView.contentOffset;
-    offset.x += kScreenWidth;
+    offset.x += self.mj_w;
     [self.collectionView setContentOffset:offset animated:YES];
 }
 
@@ -74,6 +77,13 @@
     } else if ([jumpURL hasPrefix:@""]) {
         [AudioRoomService reqMatchRoom:0 sceneType:SceneTypeAudio gameLevel:-1];
     }
+}
+
+- (NSMutableArray *)dataList {
+    if (!_dataList) {
+        _dataList = NSMutableArray.new;
+    }
+    return _dataList;
 }
 
 - (UICollectionView *)collectionView {
@@ -100,21 +110,22 @@
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataList.count > 1 ? HUGE_VAL : self.dataList.count;
+    return self.dataList.count > 1 ? 1000000 : self.dataList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    BaseCollectionViewCell *cell = nil;
     HomeBannerCollectionViewCell *c = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeBannerCollectionViewCell" forIndexPath:indexPath];
     NSInteger index = indexPath.row % self.dataList.count;
-    cell.model = self.dataList[index];
-    return cell;
+    c.model = self.dataList[index];
+    return c;
 }
 
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    NSInteger index = indexPath.row % self.dataList.count;
+    RespBannerModel * model = self.dataList[index];
+    [self handleClick:model.jumpUrl];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

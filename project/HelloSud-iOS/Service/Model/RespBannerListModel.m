@@ -13,6 +13,6 @@
 
 @implementation RespBannerListModel
 + (NSDictionary *)mj_objectClassInArray {
-    return @{@"list": RespBannerModel.class};
+    return @{@"bannerInfoList": RespBannerModel.class};
 }
 @end

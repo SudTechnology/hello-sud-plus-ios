@@ -272,7 +272,7 @@
 /// @param section
 /// @return
 - (BOOL)checkIfNeedToShowBanner:(NSInteger)section {
-    return section == 0 && self.respBannerListModel.list.count > 0;
+    return section == 0 && self.respBannerListModel.bannerInfoList.count > 0;
 }
 
 #pragma mark - UICollectionViewDataSource

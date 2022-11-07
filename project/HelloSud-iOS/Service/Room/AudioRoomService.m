@@ -264,7 +264,7 @@
 /// @param failure failure
 + (void)reqBannerListWithFinished:(void (^)(RespBannerListModel *respModel))finished failure:(void (^)(NSError *error))failure {
     NSDictionary *dicParam = @{};
-    [HSHttpService postRequestWithURL:kINTERACTURL(@"robot/list/v1")
+    [HSHttpService postRequestWithURL:kBASEURL(@"get-banner/v1")
                                 param:dicParam
                             respClass:RespBannerListModel.class
                        showErrorToast:YES
@@ -274,6 +274,7 @@
                                       finished(m);
                                   }
                               } failure:failure];
+
 }
 
 #pragma mark - Custom

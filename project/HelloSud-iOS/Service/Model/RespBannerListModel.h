@@ -13,14 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 单个banner模型
 @interface RespBannerModel : BaseModel
 
-@property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong) NSString *url;
+@property(nonatomic, strong) NSString *image;
+@property(nonatomic, strong) NSString *jumpUrl;
 @end
 
 
 /// banner list
 @interface RespBannerListModel : BaseRespModel
-@property(nonatomic, strong) NSArray<RespBannerModel *> *list;
+@property(nonatomic, strong) NSArray<RespBannerModel *> *bannerInfoList;
 @end
 
 NS_ASSUME_NONNULL_END

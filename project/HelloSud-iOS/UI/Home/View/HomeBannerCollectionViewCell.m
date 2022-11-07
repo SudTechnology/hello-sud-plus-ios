@@ -49,7 +49,7 @@
     WeakSelf
     if ([model isKindOfClass:[RespBannerModel class]]) {
         RespBannerModel *bannerModel = (RespBannerModel *)model;
-        [self.gameImageView setImageWithURL:bannerModel.url.dt_toURL];
+        [self.gameImageView setImageWithURL:bannerModel.image.dt_toURL];
     }
 }
 
