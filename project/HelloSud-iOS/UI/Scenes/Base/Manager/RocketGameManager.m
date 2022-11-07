@@ -7,6 +7,7 @@
 
 #import <SudMGP/ISudCfg.h>
 #import "RocketSelectAnchorView.h"
+#import "RocketLoadingView.h"
 
 @interface RocketGameManager ()
 /// ISudFSTAPP
@@ -17,6 +18,7 @@
 @property(nonatomic, strong) NSString *roomID;
 @property(nonatomic, strong) NSString *gameRoomID;
 @property(nonatomic, strong) NSString *language;
+@property(nonatomic, strong) RocketLoadingView *rocketLoadingView;
 @end
 
 @implementation RocketGameManager
@@ -52,8 +54,7 @@
     self.gameRoomID = roomId;
     self.gameId = gameId;
     self.gameView = gameView;
-    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
-    [SVProgressHUD showWithStatus:@"正在前往火箭台"];
+    [self showLoadingView:gameView];
     [self loginGame];
 }
 
@@ -78,12 +79,35 @@
     [self logoutGame];
 }
 
+- (void)showLoadingView:(UIView *)gameView {
+    [gameView.superview insertSubview:self.rocketLoadingView aboveSubview:gameView];
+    [self.rocketLoadingView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    [self.rocketLoadingView show];
+}
+
+- (void)closeLoadingView {
+    if (_rocketLoadingView) {
+        [_rocketLoadingView close];
+        [_rocketLoadingView removeFromSuperview];
+        _rocketLoadingView = nil;
+    }
+}
+
+- (RocketLoadingView *)rocketLoadingView {
+    if (!_rocketLoadingView) {
+        _rocketLoadingView = RocketLoadingView.new;
+    }
+    return _rocketLoadingView;
+}
+
 #pragma mark =======SudFSMMGListener=======
 
 /// 游戏开始
 - (void)onGameStarted {
     DDLogDebug(@"onGameStarted");
-    [SVProgressHUD dismiss];
+    [self closeLoadingView];
 }
 
 - (void)onGameDestroyed {
@@ -329,7 +353,7 @@
     AppCustomRocketPlayModelListModel *listModel = [RocketService decodeModel:AppCustomRocketPlayModelListModel.class FromDic:resp.srcData];
     NSDictionary *dicOrderMaps = resp.srcData[@"userOrderIdsMap"];
     if (dicOrderMaps) {
-        for(AudioRoomMicModel *micModel in userList) {
+        for (AudioRoomMicModel *micModel in userList) {
             DDLogDebug(@"播放火箭给用户ID：%@", micModel.user.userID);
             listModel.orderId = dicOrderMaps[micModel.user.userID];
             // 给每个主播播放火箭动效
@@ -397,7 +421,7 @@
 /// 前期准备完成((火箭) MG_CUSTOM_ROCKET_PREPARE_FINISH
 - (void)onGameMGCustomRocketPrepareFinish:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：前期准备完成((火箭)");
-    [SVProgressHUD dismiss];
+    [self closeLoadingView];
     [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
 }
 
