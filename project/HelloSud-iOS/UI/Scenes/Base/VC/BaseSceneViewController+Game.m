@@ -354,6 +354,7 @@
         isTest = YES;
     }
 #endif
+    [[SudMGP getCfg] setShowCustomLoading:NO];
     [SudMGP initSDK:appID appKey:appKey isTestEnv:isTest listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
             DDLogInfo(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");

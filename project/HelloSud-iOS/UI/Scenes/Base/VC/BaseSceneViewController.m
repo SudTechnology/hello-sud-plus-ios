@@ -54,6 +54,7 @@
     return YES;
 }
 
+
 - (void)setConfigModel:(BaseSceneConfigModel *)configModel {
     _configModel = configModel;
     self.gameId = configModel.gameId;
@@ -203,10 +204,15 @@
 
 - (void)dtConfigEvents {
     WeakSelf
-    self.contentView.hitTestChangedCallback = ^(UIView *currentView) {
+    self.contentView.hitTestChangedCallback = ^(UIView *currentView, CGPoint point) {
         // 如果场景视图没有响应事件，将该事件穿透到游戏中去
         if (weakSelf.sceneView == currentView) {
             return weakSelf.gameView;
+        } else  if (weakSelf.rocketGameView == [[currentView.superview superview] superview]) {
+            CGPoint pointConvert = [self.rocketGameView convertPoint:point fromView:currentView];
+            if (pointConvert.y < 150) {
+                return (UIView *)weakSelf.sceneView;
+            }
         }
         return currentView;
     };
