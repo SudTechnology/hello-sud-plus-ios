@@ -178,7 +178,8 @@
                        pageSize:(NSInteger)pageSize
                          userId:(NSString *)userId
                        finished:(void (^)(AppCustomRocketUserRecordListModel *respModel))finished {
-    NSDictionary *dicParam = @{@"pageIndex": @(pageIndex), @"pageSize": @(pageSize), @"userId": userId};
+    NSString *roomId = kAudioRoomService.currentRoomVC.roomID ? : @"";
+    NSDictionary *dicParam = @{@"pageIndex": @(pageIndex), @"pageSize": @(pageSize), @"userId": userId, @"roomId":roomId};
     [HSHttpService postRequestWithURL:kGameURL(@"rocket/fire-record/v1")
                                 param:dicParam respClass:BaseRespModel.class
                        showErrorToast:YES
