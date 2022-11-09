@@ -200,6 +200,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 点击锁住组件((火箭) MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT
 - (void)onGameMGCustomRocketClickLockComponent:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketClickLockComponent *)model;
 
+/// 火箭的可点击区域((火箭) MG_CUSTOM_ROCKET_SET_CLICK_RECT
+- (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSetClickRect *)model;
+
 #pragma mark - 玩家状态变化
 
 /// 玩家状态变化

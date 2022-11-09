@@ -24,6 +24,8 @@
 @property(nonatomic, assign) BOOL isGamePrepareOK;
 /// 是否需要展示游戏
 @property(nonatomic, assign) BOOL isShowGame;
+/// 游戏设置点击区域
+@property(nonatomic, strong) MGCustomRocketSetClickRect *rocketSetClickRect;
 @end
 
 @implementation RocketGameManager
@@ -48,7 +50,7 @@
 }
 
 - (void)hanldeInitSudFSMMG {
-    
+
 }
 
 
@@ -74,6 +76,27 @@
 - (void)playRocket:(NSString *)jsonData {
     [self.rocketQueue addObject:jsonData];
     [self checkIfCanPlay];
+}
+
+/// 检测点是否在游戏可点击区域，如果游戏没有指定，则默认游戏需要响应该点，返回YES;否则按照游戏指定区域判断是否在区域内，在则返回YES,不在则返回NO
+/// @param clickPoint 点击事件点
+/// @return
+- (BOOL)checkIfPointInGameClickRect:(CGPoint)clickPoint {
+    if (!self.rocketSetClickRect || self.rocketSetClickRect.list.count == 0) {
+        return YES;
+    }
+    CGFloat scale = 1;
+    if (UIScreen.mainScreen.nativeScale > 0) {
+        scale = UIScreen.mainScreen.nativeScale;
+    }
+
+    for (RocketSetClickRectItem *item in self.rocketSetClickRect.list) {
+        CGRect rect = CGRectMake(item.x / scale, item.y / scale, item.width / scale, item.height / scale);
+        if (CGRectContainsPoint(rect, clickPoint)) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void)checkIfCanPlay {
@@ -115,7 +138,8 @@
 
 /// 隐藏游戏视图
 - (void)hideGameView {
-    self.gameView.hidden = YES;
+    // 暂时不隐藏，由游戏隐藏自己的界面就行，穿透游戏区域
+//    self.gameView.hidden = YES;
     self.isShowGame = NO;
     if (self.isGamePrepareOK) {
         [self.sudFSTAPPDecorator notifyAppCustomRocketHideGame];
@@ -537,5 +561,10 @@
         [DTAlertView close];
     }];
 
+}
+
+/// 火箭的可点击区域((火箭) MG_CUSTOM_ROCKET_SET_CLICK_RECT
+- (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSetClickRect *)model {
+    self.rocketSetClickRect = model;
 }
 @end

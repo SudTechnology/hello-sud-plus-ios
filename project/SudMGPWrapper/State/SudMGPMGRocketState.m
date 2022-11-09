@@ -74,3 +74,12 @@
 
 @implementation MGCustomRocketClickLockComponent
 @end
+
+@implementation RocketSetClickRectItem
+@end
+
+@implementation MGCustomRocketSetClickRect
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"list": RocketSetClickRectItem.class};
+}
+@end

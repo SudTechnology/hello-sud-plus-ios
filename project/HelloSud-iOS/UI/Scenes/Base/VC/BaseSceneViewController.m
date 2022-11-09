@@ -209,8 +209,9 @@
         if (weakSelf.sceneView == currentView) {
             return weakSelf.gameView;
         } else  if (weakSelf.rocketGameView == [[currentView.superview superview] superview]) {
+            // 游戏视图
             CGPoint pointConvert = [self.rocketGameView convertPoint:point fromView:currentView];
-            if (pointConvert.y < 150) {
+            if (![self.rocketManager checkIfPointInGameClickRect:pointConvert]) {
                 return (UIView *)weakSelf.sceneView;
             }
         }

@@ -57,7 +57,8 @@ static NSString *MG_CUSTOM_ROCKET_PREPARE_FINISH = @"mg_custom_rocket_prepare_fi
 static NSString *MG_CUSTOM_ROCKET_HIDE_GAME_SCENE = @"mg_custom_rocket_hide_game_scene";
 /// 点击锁住组件(火箭)
 static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_click_lock_component";
-
+/// 火箭可点击区域
+static NSString *MG_CUSTOM_ROCKET_SET_CLICK_RECT = @"mg_custom_rocket_set_click_rect";
 #pragma mark - MG_CUSTOM_ROCKET_USER_INFO
 
 @interface MGCustomRocketUserInfo : NSObject
@@ -131,7 +132,7 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 #pragma mark - MG_CUSTOM_ROCKET_REPLACE_COMPONENT
 
 @interface MGCustomRocketReplaceModel : NSObject
-@property(nonatomic, strong) NSString * modelId;
+@property(nonatomic, strong) NSString *modelId;
 @property(nonatomic, strong) NSArray <MGCustomRocketCreateModelComponentListItem *> *componentList;
 @end
 
@@ -159,12 +160,28 @@ static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_clic
 @property(nonatomic, strong) NSString *data;
 @end
 
-/// 解锁组件（火箭) MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT
+#pragma mark - MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT
 @interface MGCustomRocketClickLockComponent : NSObject
 /// 组件类型
 @property(nonatomic, assign) NSInteger type;
 /// 组件ID
 @property(nonatomic, strong) NSString *componentId;
 @end
+
+#pragma mark - MG_CUSTOM_ROCKET_SET_CLICK_RECT
+@interface RocketSetClickRectItem : NSObject
+@property(nonatomic, assign) CGFloat x;
+@property(nonatomic, assign) CGFloat y;
+@property(nonatomic, assign) CGFloat width;
+@property(nonatomic, assign) CGFloat height;
+@end
+
+@interface MGCustomRocketSetClickRect : NSObject
+/// 组件类型
+@property(nonatomic, assign) NSInteger type;
+/// 组件ID
+@property(nonatomic, strong) NSArray <RocketSetClickRectItem *> *list;
+@end
+
 
 NS_ASSUME_NONNULL_END

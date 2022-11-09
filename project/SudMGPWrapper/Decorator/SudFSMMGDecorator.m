@@ -455,6 +455,13 @@
             [self.listener onGameMGCustomRocketClickLockComponent:handle model:m];
             return;
         }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SET_CLICK_RECT]) {
+        /// 设置点击区域((火箭)
+        MGCustomRocketSetClickRect *m = [MGCustomRocketSetClickRect mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketSetClickRect:model:)]) {
+            [self.listener onGameMGCustomRocketSetClickRect:handle model:m];
+            return;
+        }
     } else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
