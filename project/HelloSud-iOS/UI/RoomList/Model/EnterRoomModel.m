@@ -18,5 +18,10 @@
 @end
 
 @implementation EnterRoomModel
-
+- (NSMutableDictionary *)dicExtData {
+    if (!_dicExtData){
+        _dicExtData = NSMutableDictionary.new;
+    }
+    return _dicExtData;
+}
 @end

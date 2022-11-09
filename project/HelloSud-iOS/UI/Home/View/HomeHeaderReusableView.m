@@ -257,10 +257,10 @@
         [DTSheetView show:node rootView:AppUtil.currentWindow hiddenBackCover:false onCloseCallback:^{
         }];
         node.onGameLevelCallBack = ^(NSInteger gameLevel) {
-            [AudioRoomService reqCreateRoom:self.sceneModel.sceneId gameLevel:gameLevel];
+            [AudioRoomService reqCreateRoom:self.sceneModel.sceneId extData:nil gameLevel:gameLevel];
         };
     } else {
-        [AudioRoomService reqCreateRoom:self.sceneModel.sceneId gameLevel:-1];
+        [AudioRoomService reqCreateRoom:self.sceneModel.sceneId extData:nil gameLevel:-1];
     }
 }
 

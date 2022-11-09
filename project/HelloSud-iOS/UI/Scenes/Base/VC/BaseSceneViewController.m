@@ -86,6 +86,15 @@
     }
     [self dtUpdateUI];
     [self.naviView hiddenNodeWithRoleType:kAudioRoomService.roleType];
+    [self checkIfNeedToOpenRocket];
+}
+
+// 进入房间，判断是否拉起火箭，banner过来
+- (void)checkIfNeedToOpenRocket {
+     id temp = self.enterModel.dicExtData[@"isOpenRocket"];
+     if (temp) {
+         [self showRocketGame];
+     }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

@@ -123,7 +123,7 @@
     };
     self.createBtn.clickBlock = ^{
         HSGameItem *m = (HSGameItem *) weakSelf.model;
-        [AudioRoomService reqCreateRoom:weakSelf.sceneId gameLevel:-1];
+        [AudioRoomService reqCreateRoom:weakSelf.sceneId extData:nil gameLevel:-1];
     };
 }
 

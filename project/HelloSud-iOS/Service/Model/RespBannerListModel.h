@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong) NSString *image;
 @property(nonatomic, strong) NSString *jumpUrl;
+/// 1 跳房间 2 h5
+@property (nonatomic, assign)NSInteger type;
 @end
 
 

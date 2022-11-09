@@ -19,11 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 请求创建房间
 /// @param sceneType 场景类型
 /// @param gameLevel 游戏等级（适配当前门票场景）
-+ (void)reqCreateRoom:(NSInteger)sceneType gameLevel:(NSInteger)gameLevel;
++ (void)reqCreateRoom:(NSInteger)sceneType extData:(NSDictionary *)extData gameLevel:(NSInteger)gameLevel;
 
 /// 请求进入房间
 /// @param roomId 房间ID
-+ (void)reqEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail;
++ (void)reqEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate extData:(NSDictionary *)extData success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail;
 
 /// 匹配开播的游戏，并进入游戏房间
 /// @param gameId 游戏ID

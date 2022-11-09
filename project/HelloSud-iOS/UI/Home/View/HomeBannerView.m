@@ -68,14 +68,20 @@
 
 /// 调整URL
 /// @param jumpURL
-- (void)handleClick:(NSString *)jumpURL {
-    if ([jumpURL hasPrefix:@"http"]) {
-        DTWebViewController *web = DTWebViewController.new;
-        web.url = jumpURL;
-        [AppUtil.currentViewController.navigationController pushViewController:web animated:YES];
-        return;
-    } else if ([jumpURL hasPrefix:@""]) {
-        [AudioRoomService reqMatchRoom:0 sceneType:SceneTypeAudio gameLevel:-1];
+- (void)handleClick:(RespBannerModel *)model {
+    DDLogDebug(@"click banner, type:%@, jumpUrl:%@", @(model.type), model.jumpUrl);
+    switch (model.type) {
+        case 1:
+            [AudioRoomService reqCreateRoom:SceneTypeAudio extData:@{@"isOpenRocket": @(YES)} gameLevel:-1];
+            break;
+        case 2: {
+            DTWebViewController *web = DTWebViewController.new;
+            web.url = model.jumpUrl;
+            [AppUtil.currentViewController.navigationController pushViewController:web animated:YES];
+        }
+            break;
+        default:
+            break;
     }
 }
 
@@ -124,8 +130,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger index = indexPath.row % self.dataList.count;
-    RespBannerModel * model = self.dataList[index];
-    [self handleClick:model.jumpUrl];
+    RespBannerModel *model = self.dataList[index];
+    [self handleClick:model];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
