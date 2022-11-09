@@ -72,6 +72,7 @@
     DDLogDebug(@"click banner, type:%@, jumpUrl:%@", @(model.type), model.jumpUrl);
     switch (model.type) {
         case 1:
+            // 跳转房间，并拉起火箭
             [AudioRoomService reqCreateRoom:SceneTypeAudio extData:@{@"isOpenRocket": @(YES)} gameLevel:-1];
             break;
         case 2: {
