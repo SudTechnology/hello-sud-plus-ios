@@ -442,7 +442,14 @@
             [self.listener onGameMGCustomRocketPrepareFinish:handle];
             return;
         }
-    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_HIDE_GAME_SCENE]) {
+
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SHOW_GAME_SCENE]) {
+        /// 显示火箭主界面((火箭)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketShowGameScene:)]) {
+            [self.listener onGameMGCustomRocketShowGameScene:handle];
+            return;
+        }
+    }else if ([state isEqualToString:MG_CUSTOM_ROCKET_HIDE_GAME_SCENE]) {
         /// 隐藏火箭主界面((火箭)
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketHideGameScene:)]) {
             [self.listener onGameMGCustomRocketHideGameScene:handle];

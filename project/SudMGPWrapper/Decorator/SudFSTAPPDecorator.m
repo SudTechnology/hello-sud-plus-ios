@@ -30,6 +30,7 @@
 
 - (void)destroyMG {
     [self.iSudFSTAPP destroyMG];
+    self.iSudFSTAPP = nil;
 }
 
 - (UIView *)getGameView {

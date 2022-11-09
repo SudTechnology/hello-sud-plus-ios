@@ -53,7 +53,9 @@ static NSString *MG_CUSTOM_ROCKET_VERIFY_SIGN = @"mg_custom_rocket_verify_sign";
 static NSString *MG_CUSTOM_ROCKET_UPLOAD_MODEL_ICON = @"mg_custom_rocket_upload_model_icon";
 /// 前期准备完成(火箭)
 static NSString *MG_CUSTOM_ROCKET_PREPARE_FINISH = @"mg_custom_rocket_prepare_finish";
-/// 隐藏火箭主界面(火箭)
+/// 火箭主界面已展示(火箭)
+static NSString *MG_CUSTOM_ROCKET_SHOW_GAME_SCENE = @"mg_custom_rocket_show_game_scene";
+/// 火箭主界面已隐藏(火箭)
 static NSString *MG_CUSTOM_ROCKET_HIDE_GAME_SCENE = @"mg_custom_rocket_hide_game_scene";
 /// 点击锁住组件(火箭)
 static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_click_lock_component";

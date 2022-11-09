@@ -9,7 +9,7 @@
 #import "RoomMoreView.h"
 #import "SuspendRoomView.h"
 #import "RocketSelectAnchorView.h"
-#import "RocketGameManager.h"
+#import "InteractiveGameManager.h"
 
 #define I_GUESS_YOU_SAID      1468434504892882946L // 你说我猜
 #define DIGITAL_BOMB          1468091457989509190L // 数字炸弹
@@ -45,7 +45,7 @@
 /// 是否加载了麦位列表
 @property(nonatomic, assign) BOOL isFinishedMicList;
 /// 互动礼物火箭
-@property(nonatomic, strong) RocketGameManager *rocketManager;
+@property(nonatomic, strong) InteractiveGameManager *interactiveGameManager;
 @end
 
 @implementation BaseSceneViewController
@@ -91,10 +91,10 @@
 
 // 进入房间，判断是否拉起火箭，banner过来
 - (void)checkIfNeedToOpenRocket {
-     id temp = self.enterModel.dicExtData[@"isOpenRocket"];
-     if (temp) {
-         [self showRocketGame];
-     }
+    id temp = self.enterModel.dicExtData[@"isOpenRocket"];
+    if (temp) {
+        [self showRocketGame];
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -217,17 +217,19 @@
         // 如果场景视图没有响应事件，将该事件穿透到游戏中去
         if (weakSelf.sceneView == currentView) {
             return weakSelf.gameView;
-        } else  if (weakSelf.rocketGameView == [[currentView.superview superview] superview]) {
+        } else if (weakSelf.rocketGameView == [[currentView.superview superview] superview]) {
             // 游戏视图
             CGPoint pointConvert = [self.rocketGameView convertPoint:point fromView:currentView];
-            if (![self.rocketManager checkIfPointInGameClickRect:pointConvert]) {
-                return (UIView *)weakSelf.sceneView;
+            // 判断火箭可点击区域，穿透非点击区域到业务层
+            if (![self.interactiveGameManager checkIfPointInGameClickRect:pointConvert]) {
+                return (UIView *) weakSelf.sceneView;
             }
         }
         return currentView;
     };
     self.operatorView.giftTapBlock = ^(UIButton *sender) {
         RoomGiftPannelView *pannelView = [[RoomGiftPannelView alloc] init];
+        pannelView.showRocket = [weakSelf shouldShowRocket];
         pannelView.enterRocketBlock = ^{
             [weakSelf onRocketEnterViewTap:nil];
         };
@@ -300,6 +302,12 @@
 
 }
 
+/// 是否展示火箭
+- (BOOL)shouldShowRocket {
+    // 判断是否能展示火箭入口
+    return self.gameId == 0;
+}
+
 - (void)onRobotViewTap:(id)tap {
     WeakSelf
     NSArray *arr = [self getAllRobotMic];
@@ -322,10 +330,10 @@
 
 - (void)showRocketGame {
     // 不存在则加载
-    if (!self.rocketManager.isExistGame) {
-        [self.rocketManager loadInteractiveGame:1583284410804244481 roomId:self.gameRoomID gameView:self.rocketGameView];
+    if (!self.interactiveGameManager.isExistGame) {
+        [self.interactiveGameManager loadInteractiveGame:1583284410804244481 roomId:self.gameRoomID gameView:self.rocketGameView];
     }
-    [self.rocketManager showGameView];
+    [self.interactiveGameManager showGameView];
 }
 
 /// 播放火箭
@@ -333,7 +341,7 @@
 - (void)playRocket:(NSString *)jsonData {
     [self showRocketGame];
     if (jsonData) {
-        [self.rocketManager playRocket:jsonData];
+        [self.interactiveGameManager playRocket:jsonData];
     }
 }
 
@@ -414,6 +422,11 @@
     [self updateTotalGameUserCount];
     [self setupGameRoomContent];
     self.robotView.hidden = self.isShowAddRobotBtn ? NO : YES;
+    self.rocketEnterImageView.hidden = [self shouldShowRocket] ? NO : YES;
+    if (![self shouldShowRocket]) {
+        // 不能加载火箭时销毁已存在的
+        [self.interactiveGameManager destoryGame];
+    }
 }
 
 - (void)updateTotalGameUserCount {
@@ -447,7 +460,7 @@
 
         [self logoutRoom];
         [self logoutGame];
-        [self.rocketManager destoryGame];
+        [self.interactiveGameManager destoryGame];
         if (!isSuspend) {
             [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
         }
@@ -1008,6 +1021,7 @@
     BOOL showTip = self.gameId == DIGITAL_BOMB || self.gameId == YOU_DRAW_AND_I_GUESS || self.gameId == I_GUESS_YOU_SAID;
     [self.asrTipLabel setHidden:showTip ? NO : YES];
     [self updateTotalGameUserCount];
+    [self dtUpdateUI];
 }
 
 - (void)handleMicList:(NSArray<HSRoomMicList *> *)micList {
@@ -1307,11 +1321,11 @@
     return _contentView;
 }
 
-- (RocketGameManager *)rocketManager {
-    if (!_rocketManager) {
-        _rocketManager = RocketGameManager.new;
+- (InteractiveGameManager *)interactiveGameManager {
+    if (!_interactiveGameManager) {
+        _interactiveGameManager = InteractiveGameManager.new;
     }
-    return _rocketManager;
+    return _interactiveGameManager;
 }
 
 - (void)setRoomName:(NSString *)roomName {

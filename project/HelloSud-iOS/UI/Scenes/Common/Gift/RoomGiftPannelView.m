@@ -118,6 +118,9 @@
     self.giftContentView.didSelectedCallback = ^(GiftModel *giftModel) {
         if (giftModel.giftID == 9) {
             // 定制火箭
+            if (!self.showRocket) {
+                return;
+            }
             [self.rocketEnterView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(80);
             }];

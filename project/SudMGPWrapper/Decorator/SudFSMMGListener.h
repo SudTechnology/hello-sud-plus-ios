@@ -194,6 +194,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 前期准备完成((火箭) MG_CUSTOM_ROCKET_PREPARE_FINISH
 - (void)onGameMGCustomRocketPrepareFinish:(nonnull id <ISudFSMStateHandle>)handle;
 
+/// 展示火箭主界面((火箭) MG_CUSTOM_ROCKET_SHOW_GAME_SCENE
+- (void)onGameMGCustomRocketShowGameScene:(nonnull id <ISudFSMStateHandle>)handle;
+
 /// 隐藏火箭主界面((火箭) MG_CUSTOM_ROCKET_HIDE_GAME_SCENE
 - (void)onGameMGCustomRocketHideGameScene:(nonnull id <ISudFSMStateHandle>)handle;
 
