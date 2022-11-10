@@ -547,7 +547,7 @@
 /// 隐藏火箭主界面((火箭) MG_CUSTOM_ROCKET_HIDE_GAME_SCENE
 - (void)onGameMGCustomRocketHideGameScene:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：隐藏火箭主界面((火箭)");
-    [self hideGameView];
+//    [self hideGameView];
 }
 
 /// 展示火箭主界面((火箭) MG_CUSTOM_ROCKET_SHOW_GAME_SCENE
