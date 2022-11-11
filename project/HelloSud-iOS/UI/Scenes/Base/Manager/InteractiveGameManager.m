@@ -474,7 +474,7 @@
         giftMsg.animationUrl = giftModel.animateURL;
         giftMsg.giftName = giftModel.giftName;
         giftMsg.extData = [resp.srcData mj_JSONString];
-
+        giftMsg.skillFee = YES;// 一键发射已经扣费，这里标识发送礼物时不再扣费
         [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
     }
 

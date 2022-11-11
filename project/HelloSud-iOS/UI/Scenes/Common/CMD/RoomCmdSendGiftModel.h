@@ -6,37 +6,42 @@
 //
 
 #import "RoomBaseCMDModel.h"
+
 @class GiftModel;
 NS_ASSUME_NONNULL_BEGIN
 
 /// 礼物消息model
 @interface RoomCmdSendGiftModel : RoomBaseCMDModel
 /// 接受者
-@property(nonatomic, strong)AudioUserModel *toUser;
+@property(nonatomic, strong) AudioUserModel *toUser;
 /// 礼物ID
-@property(nonatomic, assign)NSInteger giftID;
+@property(nonatomic, assign) NSInteger giftID;
 /// 礼物数量
-@property(nonatomic, assign)NSInteger giftCount;
+@property(nonatomic, assign) NSInteger giftCount;
 /// 礼物类型 0为APP内置礼物 1为APP服务端礼物
-@property (nonatomic, assign)NSInteger type;
+@property(nonatomic, assign) NSInteger type;
 /// 礼物图片
-@property (nonatomic, strong)NSString *giftUrl;
+@property(nonatomic, strong) NSString *giftUrl;
 /// 礼物动效图
-@property (nonatomic, strong)NSString *animationUrl;
+@property(nonatomic, strong) NSString *animationUrl;
 /// 礼物名称
-@property (nonatomic, strong)NSString *giftName;
+@property(nonatomic, strong) NSString *giftName;
 /// 礼物扩展数据
-@property (nonatomic, strong)NSString *extData;
+@property(nonatomic, strong) NSString *extData;
 
 /// 特写时间
-@property (nonatomic, assign)NSInteger specialDuration;
+@property(nonatomic, assign) NSInteger specialDuration;
+/// 是否跳过费用支付
+@property(nonatomic, assign) BOOL skillFee;
 
 /// 构建消息
 /// @param giftID giftID description
 /// @param giftCount giftCount description
 /// @param toUser toUser description
 + (instancetype)makeMsgWithGiftID:(NSInteger)giftID giftCount:(NSInteger)giftCount toUser:(AudioUserModel *)toUser;
+
 - (NSAttributedString *)attrContent;
+
 /// 获取礼物model
 - (GiftModel *)getGiftModel;
 @end
