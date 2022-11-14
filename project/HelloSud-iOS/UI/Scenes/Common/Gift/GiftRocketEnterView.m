@@ -90,7 +90,7 @@
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     UITapGestureRecognizer *enterViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onEnterViewTap:)];
-    [self.enterView addGestureRecognizer:enterViewTap];
+    [self addGestureRecognizer:enterViewTap];
 }
 
 - (void)onEnterViewTap:(id)tap {
