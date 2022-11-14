@@ -470,8 +470,8 @@
         AudioUserModel *toUser = user;
         RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
         giftMsg.type = giftModel.type;
-        giftMsg.giftUrl = giftModel.giftURL;
-        giftMsg.animationUrl = giftModel.animateURL;
+//        giftMsg.giftUrl = giftModel.giftURL;
+//        giftMsg.animationUrl = giftModel.animateURL;
         giftMsg.giftName = giftModel.giftName;
         giftMsg.extData = [resp.srcData mj_JSONString];
         giftMsg.skillFee = YES;// 一键发射已经扣费，这里标识发送礼物时不再扣费
