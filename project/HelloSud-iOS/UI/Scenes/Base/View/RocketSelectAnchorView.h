@@ -7,5 +7,5 @@
 
 /// 火箭互动礼物选择主播视图
 @interface RocketSelectAnchorView : BaseView
-@property (nonatomic, copy)void(^confirmBlock)(NSArray<AudioRoomMicModel *> *userList);
+@property (nonatomic, copy)void(^confirmBlock)(NSArray<AudioRoomMicModel *> *toMicList);
 @end

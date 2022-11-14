@@ -102,6 +102,27 @@
     return NO;
 }
 
+/// 礼物面板发送火箭
+/// @param giftModel
+/// @param toMicList
+- (void)sendRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList finished:(void (^)(BOOL success))finished {
+
+    WeakSelf
+    MGCustomRocketFireModel *model = MGCustomRocketFireModel.new;
+    [RocketService reqRocketFireModel:model
+                            toMicList:toMicList
+                               sucess:^(BaseRespModel *resp) {
+                                   [weakSelf handleSendRocketInfo:resp userList:toMicList triggerFromGame:NO];
+                                   if (finished) {
+                                       finished(YES);
+                                   }
+                               } failure:^(NSError *error) {
+                if (finished) {
+                    finished(NO);
+                }
+            }];
+}
+
 - (void)checkIfCanPlay {
     if (self.rocketQueue.count == 0) {
         DDLogDebug(@"no rocket to play rocket");
@@ -417,15 +438,15 @@
 
     WeakSelf
     RocketSelectAnchorView *v = RocketSelectAnchorView.new;
-    v.confirmBlock = ^(NSArray<AudioRoomMicModel *> *userList) {
+    v.confirmBlock = ^(NSArray<AudioRoomMicModel *> *toMicList) {
         [RocketService reqRocketFireModel:model
-                                 userList:userList
+                                toMicList:toMicList
                                    sucess:^(BaseRespModel *resp) {
 
                                        // 响应给游戏
                                        AppCustomRocketFireModel *respModel = AppCustomRocketFireModel.new;
                                        [weakSelf.sudFSTAPPDecorator notifyAppCustomRocketFireModel:respModel];
-                                       [weakSelf handleSendRocketInfo:resp userList:userList];
+                                       [weakSelf handleSendRocketInfo:resp userList:toMicList triggerFromGame:YES];
 
                                    } failure:^(NSError *error) {
 
@@ -440,15 +461,20 @@
 }
 
 /// 处理火箭发送信息
-- (void)handleSendRocketInfo:(BaseRespModel *)resp userList:(NSArray<AudioRoomMicModel *> *)userList {
+- (void)handleSendRocketInfo:(BaseRespModel *)resp userList:(NSArray<AudioRoomMicModel *> *)userList triggerFromGame:(BOOL)triggerFromGame {
     AppCustomRocketPlayModelListModel *listModel = [RocketService decodeModel:AppCustomRocketPlayModelListModel.class FromDic:resp.srcData];
     NSDictionary *dicOrderMaps = resp.srcData[@"userOrderIdsMap"];
     if (dicOrderMaps) {
         for (AudioRoomMicModel *micModel in userList) {
             DDLogDebug(@"播放火箭给用户ID：%@", micModel.user.userID);
             listModel.orderId = dicOrderMaps[micModel.user.userID];
-            // 给每个主播播放火箭动效
-            [self.sudFSTAPPDecorator notifyAppCustomRocketPlayModelList:listModel];
+            if (triggerFromGame) {
+                // 给每个主播播放火箭动效
+                [self.sudFSTAPPDecorator notifyAppCustomRocketPlayModelList:listModel];
+            } else {
+                // 送到播放队列
+                [self playRocket:[resp.srcData mj_JSONString]];
+            }
             // 推送礼物信息给房间其余用户
             [self sendGiftMsgFoRoomUsers:userList resp:resp];
         }

@@ -345,6 +345,18 @@
     }
 }
 
+/// 处理火箭特殊礼物
+/// @param giftModel
+/// @param toMicList
+- (void)handleRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList {
+    WeakSelf
+    [self.interactiveGameManager sendRocketGift:giftModel toMicList:toMicList finished:^(BOOL success) {
+        if (success) {
+            [weakSelf showRocketGame];
+        }
+    }];
+}
+
 /// 调整麦位是否缩放
 /// @param bSmall 是否缩放
 - (void)changeScaleSmallMic:(BOOL)bSmall {

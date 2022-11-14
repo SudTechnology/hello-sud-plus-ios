@@ -35,4 +35,9 @@
 /// @param clickPoint 点击事件点
 /// @return
 - (BOOL)checkIfPointInGameClickRect:(CGPoint)clickPoint;
+
+/// 礼物面板发送火箭
+/// @param giftModel
+/// @param toMicList
+- (void)sendRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioUserModel *> *)toMicList finished:(void (^)(BOOL success))finished;
 @end

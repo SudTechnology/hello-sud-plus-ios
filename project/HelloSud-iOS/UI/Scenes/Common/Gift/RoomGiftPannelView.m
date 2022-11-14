@@ -118,18 +118,18 @@
     self.giftContentView.didSelectedCallback = ^(GiftModel *giftModel) {
         if (giftModel.giftID == 9) {
             // 定制火箭
-            if (!self.showRocket) {
+            if (!weakSelf.showRocket) {
                 return;
             }
-            [self.rocketEnterView mas_updateConstraints:^(MASConstraintMaker *make) {
+            [weakSelf.rocketEnterView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(80);
             }];
-            [self dtRemoveRoundCorners];
+            [weakSelf dtRemoveRoundCorners];
         } else {
-            [self.rocketEnterView mas_updateConstraints:^(MASConstraintMaker *make) {
+            [weakSelf.rocketEnterView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(0);
             }];
-            [self setPartRoundCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:12];
+            [weakSelf setPartRoundCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:12];
         }
 
     };
@@ -273,17 +273,36 @@
         [ToastUtil show:NSString.dt_select_gift];
         return;
     }
-    for (AudioUserModel *user in arrWaitForSend) {
-        GiftModel *giftModel = self.giftContentView.didSelectedGift;
-        AudioUserModel *toUser = user;
-        RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
-        giftMsg.type = giftModel.type;
-        giftMsg.giftUrl = giftModel.giftURL;
-        giftMsg.animationUrl = giftModel.animateURL;
-        giftMsg.giftName = giftModel.giftName;
+    GiftModel *giftModel = self.giftContentView.didSelectedGift;
+    if (giftModel.giftID == kRocketGiftID) {
+        NSMutableArray<AudioRoomMicModel *> *toMicList = NSMutableArray.new;
+        for (AudioRoomMicModel *m in self.userDataList) {
+            if (m.isSelected && m.user != nil) {
+                [toMicList addObject:m];
+            }
+        }
+        [self handleRocketGift:giftModel toMicList:toMicList];
+    } else {
+        for (AudioUserModel *user in arrWaitForSend) {
 
-        [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
+            AudioUserModel *toUser = user;
+            RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
+            giftMsg.type = giftModel.type;
+            giftMsg.giftUrl = giftModel.giftURL;
+            giftMsg.animationUrl = giftModel.animateURL;
+            giftMsg.giftName = giftModel.giftName;
+
+            [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
+        }
     }
+}
+
+/// 处理火箭特殊礼物
+/// @param giftModel
+/// @param userList
+- (void)handleRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList {
+    [DTSheetView close];
+    [kAudioRoomService.currentRoomVC handleRocketGift:giftModel toMicList:toMicList];
 }
 
 - (void)onCheckAllSelect:(UIButton *)sender {

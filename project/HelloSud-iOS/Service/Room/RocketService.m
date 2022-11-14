@@ -128,10 +128,10 @@
 
 /// 发射火箭
 /// @param paramModel 发射mg参数
-/// @param userList 选择发送主播列表
+/// @param toMicList 选择发送主播列表
 /// @param sucess
 + (void)reqRocketFireModel:(MGCustomRocketFireModel *)paramModel
-                  userList:(NSArray<AudioRoomMicModel *> *)userList
+                 toMicList:(NSArray<AudioRoomMicModel *> *)toMicList
                     sucess:(void (^)(BaseRespModel *resp))sucess
                    failure:(void (^)(NSError *error))failure {
     NSDictionary *dicTemp = paramModel.mj_JSONObject;
@@ -140,7 +140,7 @@
         [dicParam setDictionary:dicTemp];
     }
     NSMutableArray *userIdList = NSMutableArray.new;
-    for (AudioRoomMicModel *m in userList) {
+    for (AudioRoomMicModel *m in toMicList) {
         [userIdList addObject:m.user.userID];
     }
     dicParam[@"receiverList"] = userIdList;
