@@ -62,6 +62,7 @@
     [super dtUpdateUI];
     [_confirmBtn setTitle:@"确认发射(0)金币" forState:UIControlStateNormal];
     [self updateAnchorList];
+    [self updateShowCoin];
 }
 
 /// 过滤麦位
@@ -108,6 +109,11 @@
     [super dtConfigEvents];
     [self.closeBtn addTarget:self action:@selector(onCloseBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.confirmBtn addTarget:self action:@selector(onConfirmBtn:) forControlEvents:UIControlEventTouchUpInside];
+    WeakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
+        RoomCmdUpMicModel *msgModel = note.userInfo[@"msgModel"];
+        [weakSelf dtUpdateUI];
+    }];
 }
 
 - (void)onCloseBtn:(id)sender {
