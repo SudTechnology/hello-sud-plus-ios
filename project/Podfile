@@ -43,7 +43,7 @@ target 'HelloSud-iOS' do
   pod 'SudMGPWrapper', :path => './'
   # RTC厂商引入
   # zego语音/视频SDK
-  pod 'ZegoExpressEngine', '~> 3.0.1'
+  pod 'ZegoExpressEngine', '2.17.0'
   # zego IM SDK
   pod 'ZIM', '2.4.2'
   # agora语音SDK
@@ -57,8 +57,8 @@ target 'HelloSud-iOS' do
   # netease IM SDK
   pod 'NIMSDK_LITE', '9.0.1'
   # volc火山引擎SDK
-  # pod 'VolcEngineRTC', '3.37.101' ,:source => 'https://github.com/volcengine/volcengine-specs.git'
-  pod 'VolcEngineRTC', '3.37.101'
+   pod 'VolcEngineRTC', '3.37.101' ,:source => 'https://github.com/volcengine/volcengine-specs.git'
+#  pod 'VolcEngineRTC', '3.37.101'
   # tx腾讯云SDK
   #pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
   pod 'TXLiteAVSDK_TRTC', '10.2.11418'
