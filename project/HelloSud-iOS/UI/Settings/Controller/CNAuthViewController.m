@@ -132,7 +132,7 @@
 
         if (errCode != 0) {
             weakSelf.getCodeBtn.enabled = YES;
-            if (errCode == 1035) {
+            if (errCode == 13035) {
                 [ToastUtil show:errMsg];
                 return;
             }
