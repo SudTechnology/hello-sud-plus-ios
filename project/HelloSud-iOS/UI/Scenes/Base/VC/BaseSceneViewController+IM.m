@@ -25,6 +25,9 @@
         }
         [AudioEngineFactory.shared.audioEngine sendCommand:command listener:^(int errorCode) {
             DDLogDebug(@"send result:%d", errorCode);
+            if (errorCode != 0) {
+                [ToastUtil show:[NSString stringWithFormat:@"RTC send msg error(%@)", @(errorCode)]];
+            }
             [weakSelf onDidSendMsg:msg];
             if (finished) finished(errorCode);
         }];
