@@ -501,7 +501,8 @@
         giftMsg.giftName = giftModel.giftName;
         giftMsg.extData = [resp.srcData mj_JSONString];
         giftMsg.skillFee = YES;// 一键发射已经扣费，这里标识发送礼物时不再扣费
-        [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
+        // 指令内容可能超1024限制，改用跨房指令
+        [kAudioRoomService.currentRoomVC sendCrossRoomMsg:giftMsg toRoomId:kAudioRoomService.currentRoomVC.roomID isAddToShow:YES finished:nil];
     }
 
 }
