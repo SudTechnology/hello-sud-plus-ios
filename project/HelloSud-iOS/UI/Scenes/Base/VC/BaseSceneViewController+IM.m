@@ -15,8 +15,9 @@
 /// @param isAddToShow 是否公屏展示
 - (void)sendMsg:(RoomBaseCMDModel *)msg isAddToShow:(BOOL)isAddToShow finished:(void (^)(int errorCode))finished {
     msg.sendUser.roomID = self.roomID;
-    NSString *command = [[NSString alloc] initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
-    DDLogDebug(@"send content:%@", command);
+    NSData *jsonData = [msg mj_JSONData];
+    NSString *command = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    DDLogDebug(@"send content:%@, bytes:%@", command, @(jsonData.length));
     WeakSelf
     [self onWillSendMsg:msg shouldSend:^(BOOL shouldSend) {
         if (!shouldSend) {
