@@ -393,9 +393,6 @@
 - (void)handleRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList {
     WeakSelf
     [self.interactiveGameManager sendRocketGift:giftModel toMicList:toMicList finished:^(BOOL success) {
-        if (success) {
-            [weakSelf showRocketGame:NO];
-        }
     }];
 }
 

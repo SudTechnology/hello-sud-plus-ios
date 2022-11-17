@@ -29,7 +29,8 @@
 @property(nonatomic, assign) BOOL isShowGame;
 /// 是否需要展示游戏主界面
 @property(nonatomic, assign) BOOL showMainView;
-
+/// 是否加载了游戏
+@property(nonatomic, assign) BOOL isLoadedGame;
 /// 游戏设置点击区域
 @property(nonatomic, strong) MGCustomRocketSetClickRect *rocketSetClickRect;
 @end
@@ -68,13 +69,17 @@
     self.gameRoomID = roomId;
     self.gameId = gameId;
     self.gameView = gameView;
+    self.isLoadedGame = YES;
     [self showLoadingView:gameView];
     [self loginGame];
 }
 
+- (void)clearLoadGameState {
+    self.isLoadedGame = NO;
+}
 
 - (BOOL)isExistGame {
-    return self.sudFSTAPPDecorator.iSudFSTAPP != nil;
+    return self.isLoadedGame;
 }
 
 /// 播放火箭
@@ -184,6 +189,7 @@
 - (void)destoryGame {
     self.gameView.hidden = YES;
     [self logoutGame];
+    [self clearLoadGameState];
 }
 
 - (void)showLoadingView:(UIView *)gameView {
@@ -286,6 +292,7 @@
         [weakSelf login:weakSelf.gameView gameId:weakSelf.gameId code:gameInfo.code appID:appID appKey:appKey];
     }                                      fail:^(NSError *error) {
         [ToastUtil show:error.debugDescription];
+        [self clearLoadGameState];
     }];
 }
 
@@ -311,6 +318,7 @@
     [self logoutGame];
     if (gameId <= 0) {
         DDLogDebug(@"游戏ID为空，无法加载游戏:%@, currentRoomID:%@, currentGameRoomID:%@", gameId, self.roomID, self.gameRoomID);
+        [self clearLoadGameState];
         return;
     }
     BOOL isTest = false;
@@ -339,6 +347,7 @@
         } else {
             /// 初始化失败, 可根据业务重试
             DDLogError(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@", retMsg);
+            [self clearLoadGameState];
         }
     }];
 }
