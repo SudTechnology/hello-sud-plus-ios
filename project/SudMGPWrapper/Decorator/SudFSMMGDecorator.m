@@ -418,7 +418,7 @@
         }
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_PLAY_EFFECT_FINISH]) {
         /// 播放效果完成((火箭)
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketPlayEffectFinish)]) {
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketPlayEffectFinish:)]) {
             [self.listener onGameMGCustomRocketPlayEffectFinish:handle];
             return;
         }

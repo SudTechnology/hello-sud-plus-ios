@@ -20,7 +20,8 @@
 - (void)destoryGame;
 
 /// 展示游戏视图
-- (void)showGameView;
+/// @param showMainView 是否展示游戏主界面，YES时通知游戏拉起主界面，否则默认不展示主界面，只有空白页
+- (void)showGameView:(BOOL)showMainView;
 
 /// 隐藏游戏视图
 - (void)hideGameView;

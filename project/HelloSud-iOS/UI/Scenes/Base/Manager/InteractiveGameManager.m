@@ -27,6 +27,9 @@
 @property(nonatomic, assign) BOOL isGamePrepareOK;
 /// 是否需要展示游戏
 @property(nonatomic, assign) BOOL isShowGame;
+/// 是否需要展示游戏主界面
+@property(nonatomic, assign) BOOL showMainView;
+
 /// 游戏设置点击区域
 @property(nonatomic, strong) MGCustomRocketSetClickRect *rocketSetClickRect;
 @end
@@ -157,10 +160,11 @@
 }
 
 /// 展示游戏视图
-- (void)showGameView {
+- (void)showGameView:(BOOL)showMainView {
     self.gameView.hidden = NO;
     self.isShowGame = YES;
-    if (self.isGamePrepareOK) {
+    self.showMainView = showMainView;
+    if (self.isGamePrepareOK && showMainView) {
         [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
     }
 }
@@ -170,6 +174,7 @@
     // 暂时不隐藏，由游戏隐藏自己的界面就行，穿透游戏区域
 //    self.gameView.hidden = YES;
     self.isShowGame = NO;
+    self.showMainView = NO;
     if (self.isGamePrepareOK) {
         [self.sudFSTAPPDecorator notifyAppCustomRocketHideGame];
     }
@@ -572,7 +577,7 @@
     DDLogDebug(@"mg：前期准备完成((火箭)");
     self.isGamePrepareOK = YES;
     [self closeLoadingView];
-    if (self.isShowGame) {
+    if (self.isShowGame && self.showMainView) {
         [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
     }
     [self checkIfCanPlay];

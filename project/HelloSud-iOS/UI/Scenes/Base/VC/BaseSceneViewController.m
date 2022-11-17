@@ -15,6 +15,8 @@
 #define DIGITAL_BOMB          1468091457989509190L // 数字炸弹
 #define YOU_DRAW_AND_I_GUESS  1461228410184400899L // 你画我猜
 
+#define ROCKET_GAME_ID        1583284410804244481L // 火箭游戏ID
+
 @interface BaseSceneViewController () <BDAlphaPlayerMetalViewDelegate>
 
 @property(nonatomic, strong) SceneContentView *contentView;
@@ -94,7 +96,7 @@
 - (void)checkIfNeedToOpenRocket {
     id temp = self.enterModel.dicExtData[@"isOpenRocket"];
     if (temp) {
-        [self showRocketGame];
+        [self showRocketGame:NO];
     }
 }
 
@@ -225,9 +227,9 @@
         // 如果场景视图没有响应事件，将该事件穿透到游戏中去
         if (weakSelf.sceneView == currentView) {
             return weakSelf.gameView;
-        } else if (weakSelf.rocketGameView == [[currentView.superview superview] superview]) {
+        } else if ([weakSelf isInRocketGameView:currentView]) {
             // 游戏视图
-            CGPoint pointConvert = [self.rocketGameView convertPoint:point fromView:currentView];
+            CGPoint pointConvert = [weakSelf.rocketGameView convertPoint:point fromView:currentView];
             // 判断火箭可点击区域，穿透非点击区域到业务层
             if (![self.interactiveGameManager checkIfPointInGameClickRect:pointConvert]) {
                 return (UIView *) weakSelf.sceneView;
@@ -321,6 +323,23 @@
 
 }
 
+/// 是否是属于火箭视图内部视图
+/// @param otherView otherView
+/// @return
+- (BOOL)isInRocketGameView:(UIView *)otherView {
+    UIView *superView = otherView.superview;
+    if (!superView) {
+        return NO;
+    }
+    while (superView) {
+        if (superView == self.rocketGameView) {
+            return YES;
+        }
+        superView = superView.superview;
+    }
+    return NO;
+}
+
 /// 是否展示火箭
 - (BOOL)shouldShowRocket {
     // 判断是否能展示火箭入口
@@ -348,21 +367,21 @@
 
 - (void)onRocketEnterViewTap:(id)tap {
     self.rocketGameView.hidden = NO;
-    [self showRocketGame];
+    [self showRocketGame:YES];
 }
 
-- (void)showRocketGame {
+- (void)showRocketGame:(BOOL)showMainView {
     // 不存在则加载
     if (!self.interactiveGameManager.isExistGame) {
-        [self.interactiveGameManager loadInteractiveGame:1583284410804244481 roomId:self.gameRoomID gameView:self.rocketGameView];
+        [self.interactiveGameManager loadInteractiveGame:ROCKET_GAME_ID roomId:self.gameRoomID gameView:self.rocketGameView];
     }
-    [self.interactiveGameManager showGameView];
+    [self.interactiveGameManager showGameView:showMainView];
 }
 
 /// 播放火箭
 /// @param jsonData
 - (void)playRocket:(NSString *)jsonData {
-    [self showRocketGame];
+    [self showRocketGame:NO];
     if (jsonData) {
         [self.interactiveGameManager playRocket:jsonData];
     }
@@ -375,7 +394,7 @@
     WeakSelf
     [self.interactiveGameManager sendRocketGift:giftModel toMicList:toMicList finished:^(BOOL success) {
         if (success) {
-            [weakSelf showRocketGame];
+            [weakSelf showRocketGame:NO];
         }
     }];
 }
@@ -1329,7 +1348,7 @@
 - (BaseView *)closeRocketEffectView {
     if (!_closeRocketEffectView) {
         _closeRocketEffectView = BaseView.new;
-//        _closeRocketEffectView.alpha = 0;
+        _closeRocketEffectView.alpha = 0;
 
         UILabel *lab = [[UILabel alloc] init];
         lab.text = @"关闭火箭动效";
