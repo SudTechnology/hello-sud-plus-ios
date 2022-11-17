@@ -311,6 +311,14 @@
     UITapGestureRecognizer *closeRocketEffectTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCloseEffectViewTap:)];
     [self.closeRocketEffectView addGestureRecognizer:closeRocketEffectTap];
 
+    self.interactiveGameManager.rocketEffectBlock = ^(BOOL show) {
+        if (show) {
+            weakSelf.closeRocketEffectView.alpha = 1;
+        } else {
+            weakSelf.closeRocketEffectView.alpha = 0;
+        }
+    };
+
 }
 
 /// 是否展示火箭
@@ -1321,6 +1329,7 @@
 - (BaseView *)closeRocketEffectView {
     if (!_closeRocketEffectView) {
         _closeRocketEffectView = BaseView.new;
+//        _closeRocketEffectView.alpha = 0;
 
         UILabel *lab = [[UILabel alloc] init];
         lab.text = @"关闭火箭动效";

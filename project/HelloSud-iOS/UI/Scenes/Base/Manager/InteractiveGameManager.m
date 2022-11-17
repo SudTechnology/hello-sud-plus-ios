@@ -537,11 +537,13 @@
 /// 播放效果开始((火箭) MG_CUSTOM_ROCKET_PLAY_EFFECT_START
 - (void)onGameMGCustomRocketPlayEffectStart:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：播放效果开始((火箭)");
+    if (self.rocketEffectBlock) self.rocketEffectBlock(YES);
 }
 
 /// 播放效果完成(火箭) MG_CUSTOM_ROCKET_PLAY_EFFECT_FINISH
 - (void)onGameMGCustomRocketPlayEffectFinish:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：播放效果完成(火箭) ");
+    if (self.rocketEffectBlock) self.rocketEffectBlock(NO);
 }
 
 /// 验证签名合规((火箭) MG_CUSTOM_ROCKET_VERIFY_SIGN

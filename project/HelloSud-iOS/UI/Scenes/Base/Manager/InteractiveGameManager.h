@@ -8,6 +8,7 @@
 
 /// 互动游戏管理模块（火箭游戏）
 @interface InteractiveGameManager : NSObject
+@property (nonatomic, copy)void(^rocketEffectBlock)(BOOL show);
 
 /// 加载互动游戏 火箭
 /// @param gameId gameId
