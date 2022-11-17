@@ -40,4 +40,7 @@
 /// @param giftModel
 /// @param toMicList
 - (void)sendRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioUserModel *> *)toMicList finished:(void (^)(BOOL success))finished;
+
+/// 通知游戏关闭火箭动效
+- (void)notifyGameCloseRocketEffect;
 @end

@@ -177,6 +177,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyAppCustomRocketHideGame;
 /// app推送解锁组件（火箭) APP_CUSTOM_ROCKET_UNLOCK_COMPONENT
 - (void)notifyAppCustomRocketUnlockComponent:(AppCustomRocketUnlockComponent *)model;
+/// app推送关闭火箭播放效果(火箭) APP_CUSTOM_ROCKET_CLOSE_PLAY_EFFECT
+- (void)notifyAppCustomRocketClosePlayEffect;
 @end
 
 NS_ASSUME_NONNULL_END

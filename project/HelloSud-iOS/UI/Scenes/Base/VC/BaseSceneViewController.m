@@ -26,7 +26,8 @@
 @property(nonatomic, strong) UIView *gameView;
 /// 互动礼物火箭 加载主view
 @property(nonatomic, strong) UIView *rocketGameView;
-
+/// 关闭火箭动效
+@property(nonatomic, strong) BaseView *closeRocketEffectView;
 /// 场景视图，所有子类场景
 @property(nonatomic, strong) BaseView *sceneView;
 /// 添加机器人按钮
@@ -115,6 +116,7 @@
     [self.contentView addSubview:self.gameView];
     [self.contentView addSubview:self.sceneView];
     [self.contentView addSubview:self.rocketGameView];
+    [self.contentView addSubview:self.closeRocketEffectView];
 
     [self.sceneView addSubview:self.gameTopShadeNode];
 
@@ -197,6 +199,12 @@
         make.trailing.mas_equalTo(-16);
         make.width.height.mas_greaterThanOrEqualTo(0);
         make.bottom.equalTo(self.operatorView.mas_top).offset(-6);
+    }];
+    CGFloat b = kAppSafeBottom + 50;
+    [self.closeRocketEffectView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.mas_equalTo(-16);
+        make.width.height.mas_greaterThanOrEqualTo(0);
+        make.bottom.equalTo(@(-b));
     }];
 
     [self.rocketEnterImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -300,6 +308,9 @@
     UITapGestureRecognizer *rocketEnterViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRocketEnterViewTap:)];
     [self.rocketEnterImageView addGestureRecognizer:rocketEnterViewTap];
 
+    UITapGestureRecognizer *closeRocketEffectTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCloseEffectViewTap:)];
+    [self.closeRocketEffectView addGestureRecognizer:closeRocketEffectTap];
+
 }
 
 /// 是否展示火箭
@@ -321,6 +332,10 @@
         [weakSelf joinCommonRobotToMic:robotInfoModel showNoMic:YES];
     }];
 
+}
+
+- (void)onCloseEffectViewTap:(id)tap {
+    [self.interactiveGameManager notifyGameCloseRocketEffect];
 }
 
 - (void)onRocketEnterViewTap:(id)tap {
@@ -434,10 +449,14 @@
     [self updateTotalGameUserCount];
     [self setupGameRoomContent];
     self.robotView.hidden = self.isShowAddRobotBtn ? NO : YES;
-    self.rocketEnterImageView.hidden = [self shouldShowRocket] ? NO : YES;
     if (![self shouldShowRocket]) {
+        self.rocketEnterImageView.hidden = YES;
+        self.closeRocketEffectView.hidden = YES;
         // 不能加载火箭时销毁已存在的
         [self.interactiveGameManager destoryGame];
+    } else {
+        self.rocketEnterImageView.hidden = NO;
+        self.closeRocketEffectView.hidden = NO;
     }
 }
 
@@ -1297,6 +1316,27 @@
         [_robotView dtAddGradientLayer:@[@(0.0f), @(1.0f)] colors:colorArr startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 0.28) cornerRadius:4];
     }
     return _robotView;
+}
+
+- (BaseView *)closeRocketEffectView {
+    if (!_closeRocketEffectView) {
+        _closeRocketEffectView = BaseView.new;
+
+        UILabel *lab = [[UILabel alloc] init];
+        lab.text = @"关闭火箭动效";
+        lab.font = UIFONT_MEDIUM(12);
+        lab.textColor = UIColor.whiteColor;
+        [_closeRocketEffectView addSubview:lab];
+        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(@6);
+            make.trailing.equalTo(@-6);
+            make.top.equalTo(@3);
+            make.bottom.equalTo(@-3);
+        }];
+        NSArray *colorArr = @[(id) [UIColor dt_colorWithHexString:@"#33FF8B" alpha:1].CGColor, (id) [UIColor dt_colorWithHexString:@"#13C47C" alpha:1].CGColor];
+        [_closeRocketEffectView dtAddGradientLayer:@[@(0.0f), @(1.0f)] colors:colorArr startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 0.28) cornerRadius:4];
+    }
+    return _closeRocketEffectView;
 }
 
 - (UIImageView *)rocketEnterImageView {

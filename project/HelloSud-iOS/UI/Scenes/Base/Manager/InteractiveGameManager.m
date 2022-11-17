@@ -123,6 +123,11 @@
             }];
 }
 
+/// 通知游戏关闭火箭动效
+- (void)notifyGameCloseRocketEffect {
+    [self.sudFSTAPPDecorator notifyAppCustomRocketClosePlayEffect];
+}
+
 - (void)checkIfCanPlay {
     if (self.rocketQueue.count == 0) {
         DDLogDebug(@"no rocket to play rocket");

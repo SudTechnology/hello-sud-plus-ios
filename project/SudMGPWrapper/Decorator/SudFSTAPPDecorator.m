@@ -314,4 +314,9 @@
 - (void)notifyAppCustomRocketUnlockComponent:(AppCustomRocketUnlockComponent *)model {
     [self notifyStateChange:APP_CUSTOM_ROCKET_UNLOCK_COMPONENT dataJson:model.mj_JSONString];
 }
+
+/// app推送关闭火箭播放效果(火箭) APP_CUSTOM_ROCKET_CLOSE_PLAY_EFFECT
+- (void)notifyAppCustomRocketClosePlayEffect {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_CLOSE_PLAY_EFFECT dataJson:@{}.mj_JSONString];
+}
 @end
