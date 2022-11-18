@@ -433,7 +433,7 @@
 
 /// 展馆内玩家送出记录(火箭) MG_CUSTOM_ROCKET_USER_RECORD_LIST
 - (void)onGameMGCustomRocketUserRecordList:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketUserRecordList *)model {
-    [RocketService reqRocketUserRecordList:model.pageIndex pageSize:model.pageSize userId:AppService.shared.loginUserID finished:^(AppCustomRocketUserRecordListModel *respModel) {
+    [RocketService reqRocketUserRecordList:model.pageIndex pageSize:model.pageSize userId:model.userId finished:^(AppCustomRocketUserRecordListModel *respModel) {
         [self.sudFSTAPPDecorator notifyAppCustomRocketUserRecordList:respModel];
     }];
 }
