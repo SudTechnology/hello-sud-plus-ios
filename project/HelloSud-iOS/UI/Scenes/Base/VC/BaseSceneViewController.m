@@ -332,7 +332,7 @@
             weakSelf.flyRocketEffectView.alpha = 1;
         } else {
             weakSelf.closeRocketEffectView.alpha = 0;
-            weakSelf.flyRocketEffectView.alpha = 1;
+            weakSelf.flyRocketEffectView.alpha = 0;
         }
     };
 
