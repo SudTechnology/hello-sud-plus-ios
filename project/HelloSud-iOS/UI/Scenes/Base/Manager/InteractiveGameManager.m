@@ -48,7 +48,7 @@
 
 /// 初始化sud
 - (void)initSudFSMMG {
-    self.language = @"zh-CN";
+    self.language = [SettingsService getCurLanguageLocale];
     self.sudFSTAPPDecorator = [[SudFSTAPPDecorator alloc] init];
     self.sudFSMMGDecorator = [[SudFSMMGDecorator alloc] init];
     [self.sudFSMMGDecorator setCurrentUserId:AppService.shared.login.loginUserInfo.userID];
