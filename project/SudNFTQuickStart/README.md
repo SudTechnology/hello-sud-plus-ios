@@ -72,7 +72,13 @@
 /// @param listener 回调
 + (void)removeNFTCredentialsToken:(SudNFTRemoveCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerRemoveNFTCredentialsToken)listener;
 ```
-
+- 刷新钱包token
+```
+/// 刷新钱包token
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)refreshWalletToken:(SudNFTRefreshWalletTokenParamModel *)paramModel listener:(ISudNFTListenerRefreshWalletToken)listener;
+```
 
 ## 国内藏品平台相关接口（稀物）
 - 发送短信验证码
@@ -119,7 +125,13 @@
 /// @param listener 回调
 + (void)unbindCnWallet:(SudNFTUnBindCnWalletParamModel *)paramModel listener:(ISudNFTListenerUnBindCnWallet)listener;
 ```
-
+- 刷新国内钱包token
+```
+/// 刷新国内钱包token
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)refreshCnWalletToken:(SudNFTRefreshCnWalletTokenParamModel *)paramModel listener:(ISudNFTListenerRefreshCnWalletToken)listener;
+```
 # 接入文档
 
 - [接入文档](https://docs.sud.tech/zh-CN/)
