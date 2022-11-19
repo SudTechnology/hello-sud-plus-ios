@@ -1,3 +1,3 @@
 #/bin/bash
-pod trunk push SudMGPWrapper.podspec --allow-warnings
+pod trunk push SudMGPWrapper.podspec --allow-warnings --verbose
 

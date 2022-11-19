@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/SudTechnology/hello-sud-plus-ios'
   s.license          = { :type => 'MIT', :file => 'project/SudMGPWrapper/LICENSE' }
   s.authors          = { 'sud.tech' => 'dev@sud.tech' }
-  s.source       = { :git => 'https://github.com/SudTechnology/hello-sud-plus-ios.git', :tag => "#{s.version}" }
+  s.source       = { :git => 'https://github.com/SudTechnology/hello-sud-plus-ios.git', :tag => "v#{s.version}" }
   s.frameworks = 'Foundation', 'UIKit'
   s.requires_arc = true
 
