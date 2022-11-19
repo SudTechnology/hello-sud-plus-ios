@@ -49,6 +49,8 @@ static NSString *APP_CUSTOM_ROCKET_HIDE_GAME_SCENE = @"app_custom_rocket_hide_ga
 static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_rocket_unlock_component";
 /// app推送关闭火箭播放效果(火箭)
 static NSString *APP_CUSTOM_ROCKET_CLOSE_PLAY_EFFECT = @"app_custom_rocket_close_play_effect";
+/// app推送火箭效果飞行点击(火箭)
+static NSString *APP_CUSTOM_ROCKET_FLY_CLICK = @"app_custom_rocket_fly_click";
 
 #pragma mark - 互动礼物火箭 model
 

@@ -45,4 +45,7 @@
 
 /// 通知游戏关闭火箭动效
 - (void)notifyGameCloseRocketEffect;
+
+/// 通知游戏火箭加速
+- (void)notifyGameFlyRocket;
 @end

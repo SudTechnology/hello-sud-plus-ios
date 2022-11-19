@@ -30,6 +30,8 @@
 @property(nonatomic, strong) UIView *rocketGameView;
 /// 关闭火箭动效
 @property(nonatomic, strong) BaseView *closeRocketEffectView;
+/// 加速火箭动效
+@property(nonatomic, strong) BaseView *flyRocketEffectView;
 /// 场景视图，所有子类场景
 @property(nonatomic, strong) BaseView *sceneView;
 /// 添加机器人按钮
@@ -119,6 +121,7 @@
     [self.contentView addSubview:self.sceneView];
     [self.contentView addSubview:self.rocketGameView];
     [self.contentView addSubview:self.closeRocketEffectView];
+    [self.contentView addSubview:self.flyRocketEffectView];
 
     [self.sceneView addSubview:self.gameTopShadeNode];
 
@@ -207,6 +210,12 @@
         make.trailing.mas_equalTo(-16);
         make.width.height.mas_greaterThanOrEqualTo(0);
         make.bottom.equalTo(@(-b));
+    }];
+
+    [self.flyRocketEffectView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.mas_equalTo(-16);
+        make.width.height.mas_greaterThanOrEqualTo(0);
+        make.bottom.equalTo(self.closeRocketEffectView.mas_top).offset(-30);
     }];
 
     [self.rocketEnterImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -313,11 +322,17 @@
     UITapGestureRecognizer *closeRocketEffectTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCloseEffectViewTap:)];
     [self.closeRocketEffectView addGestureRecognizer:closeRocketEffectTap];
 
+
+    UITapGestureRecognizer *flyRocketTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onFlyRocketTap:)];
+    [self.flyRocketEffectView addGestureRecognizer:flyRocketTap];
+
     self.interactiveGameManager.rocketEffectBlock = ^(BOOL show) {
         if (show) {
             weakSelf.closeRocketEffectView.alpha = 1;
+            weakSelf.flyRocketEffectView.alpha = 1;
         } else {
             weakSelf.closeRocketEffectView.alpha = 0;
+            weakSelf.flyRocketEffectView.alpha = 1;
         }
     };
 
@@ -363,6 +378,10 @@
 
 - (void)onCloseEffectViewTap:(id)tap {
     [self.interactiveGameManager notifyGameCloseRocketEffect];
+}
+
+- (void)onFlyRocketTap:(id)tap {
+    [self.interactiveGameManager notifyGameFlyRocket];
 }
 
 - (void)onRocketEnterViewTap:(id)tap {
@@ -1363,6 +1382,30 @@
     }
     return _closeRocketEffectView;
 }
+
+- (BaseView *)flyRocketEffectView {
+    if (!_flyRocketEffectView) {
+        _flyRocketEffectView = BaseView.new;
+        _flyRocketEffectView.alpha = 0;
+
+        UILabel *lab = [[UILabel alloc] init];
+        lab.text = @"加速火箭";
+        lab.font = UIFONT_MEDIUM(12);
+        lab.textColor = UIColor.whiteColor;
+        [_flyRocketEffectView addSubview:lab];
+        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(@6);
+            make.trailing.equalTo(@-6);
+            make.top.equalTo(@3);
+            make.bottom.equalTo(@-3);
+        }];
+        NSArray *colorArr = @[(id) [UIColor dt_colorWithHexString:@"#33FF8B" alpha:1].CGColor, (id) [UIColor dt_colorWithHexString:@"#13C47C" alpha:1].CGColor];
+        [_flyRocketEffectView dtAddGradientLayer:@[@(0.0f), @(1.0f)] colors:colorArr startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 0.28) cornerRadius:4];
+    }
+    return _flyRocketEffectView;
+}
+
+
 
 - (UIImageView *)rocketEnterImageView {
     if (!_rocketEnterImageView) {

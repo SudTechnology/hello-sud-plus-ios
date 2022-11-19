@@ -319,4 +319,9 @@
 - (void)notifyAppCustomRocketClosePlayEffect {
     [self notifyStateChange:APP_CUSTOM_ROCKET_CLOSE_PLAY_EFFECT dataJson:@{}.mj_JSONString];
 }
+
+/// app推送火箭效果飞行点击(火箭) APP_CUSTOM_ROCKET_FLY_CLICK
+- (void)notifyAppCustomRocketFlyClick {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_FLY_CLICK dataJson:@{}.mj_JSONString];
+}
 @end

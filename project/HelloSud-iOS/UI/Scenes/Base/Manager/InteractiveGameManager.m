@@ -136,6 +136,11 @@
     [self.sudFSTAPPDecorator notifyAppCustomRocketClosePlayEffect];
 }
 
+/// 通知游戏火箭加速
+- (void)notifyGameFlyRocket {
+    [self.sudFSTAPPDecorator notifyAppCustomRocketFlyClick];
+}
+
 - (void)checkIfCanPlay {
     if (self.rocketQueue.count == 0) {
         DDLogDebug(@"no rocket to play rocket");
