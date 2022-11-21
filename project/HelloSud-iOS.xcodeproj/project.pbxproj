@@ -232,10 +232,6 @@
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
 		6C8D02D028AB774100C230E5 /* DTUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */; };
 		6CA68C4C28E182E200BDE442 /* ReqAddScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */; };
-		6CA68C5D28E295EA00BDE442 /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; };
-		6CA68C5E28E295EA00BDE442 /* SudNFT.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6CA68C5F28E295F100BDE442 /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; };
-		6CA68C6028E295F100BDE442 /* SudNFT.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6CA68D1228E29CA700BDE442 /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68CCE28E29CA500BDE442 /* MyCNWalletSwitchCellModel.m */; };
 		6CA68D1328E29CA700BDE442 /* WalletAddressSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68CCF28E29CA500BDE442 /* WalletAddressSwitchCellModel.m */; };
 		6CA68D1428E29CA700BDE442 /* HSSettingHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68CD028E29CA500BDE442 /* HSSettingHeaderModel.m */; };
@@ -377,9 +373,6 @@
 		BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */; };
 		BC210093C2C7796FBA9F334C /* DiscoGameInteractivePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21098061102DCBC71B59A6 /* DiscoGameInteractivePopView.m */; };
 		BC21009E7AF907C72E3B6D59 /* GuessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210335CCB42308C28FCEC0 /* GuessModel.m */; };
-		BC210107428518AA80E5EAE1 /* RespBannerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21084F1A0F17B2FBD8084A /* RespBannerListModel.m */; };
-		BC21010CDF0736969BAFC09B /* RocketSelectAnchorView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CCD28109E1C3E87256E /* RocketSelectAnchorView.m */; };
-		BC21018D70638E83D2CD2DCE /* RocketLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101465A9A34B6270F9575 /* RocketLoadingView.m */; };
 		BC2102046258AC22ACD73CF4 /* UserWearNftDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */; };
 		BC21031B83709522D9E69BB6 /* RoomCmdPKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */; };
 		BC21032F94AB142E1BAA2114 /* PKRoomListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109B31F63F31616E3D68E /* PKRoomListCell.m */; };
@@ -388,7 +381,6 @@
 		BC2104A997878EE07744E080 /* PKRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */; };
 		BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210337708736FFF222750A /* BaseSceneService.m */; };
 		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
-		BC21065273423DB90B1B4F6E /* InteractiveGameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104ACD7F959557C38A89D /* InteractiveGameManager.m */; };
 		BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */; };
 		BC2106A53F201A9BF1A9AFCC /* LeagueResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2107EF9AD65D2563C73468 /* LeagueResultTableViewCell.m */; };
 		BC2106C085BCFA772D1B9F96 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21001E47A02C2A2F8EE39B /* AboutViewController.m */; };
@@ -396,7 +388,6 @@
 		BC21074293C8ADEA821E64D4 /* WalletDeletePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D7DC4411F5B1BB4F36E /* WalletDeletePopView.m */; };
 		BC210743E83852E3D938F5A9 /* DiscoInteractiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */; };
 		BC21076C5084AD192F038DA8 /* DiscoSelectAnchorColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */; };
-		BC21077AC4BC298A705821E7 /* RocketService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E10D8FB62818722C46B /* RocketService.m */; };
 		BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */; };
 		BC2107D8E6B6DC999B46720D /* TipPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21040A1F1E959F6632C911 /* TipPopView.m */; };
 		BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21031EE628C71DB140AFC5 /* MoreGuessHeaderColCell.m */; };
@@ -404,7 +395,6 @@
 		BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */; };
 		BC2108DF9DCC723A931AC7FA /* LeagueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210FB8B5AA27D3820666AC /* LeagueModel.m */; };
 		BC21090932848A4335D3546F /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210EA4458F6CC10378E975 /* MyViewController.m */; };
-		BC210912DF6D4316210B91E9 /* GiftRocketEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21078DF8C35A0D78A4FC3D /* GiftRocketEnterView.m */; };
 		BC2109288CFA1B5FBB68C0AD /* PKStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */; };
 		BC21097342CF79274F4049F3 /* HsAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109AEEB6FC34520DCBA33 /* HsAppPreferences.m */; };
 		BC21098A0CA7595992F3EC61 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */; };
@@ -421,16 +411,13 @@
 		BC210CF89C901006931DE6F5 /* WalletAddressSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E8769E66D83BC365AB8 /* WalletAddressSwitchCellModel.m */; };
 		BC210D1C881B0F781AF55226 /* CNAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */; };
 		BC210D1CD41015D8819D2304 /* LeagueRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210EAA09CBCD7E4BFFBFEB /* LeagueRoomViewController.m */; };
-		BC210D777B943CA8D215ADA9 /* HomeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2106FFEBC94E3BEF24B53C /* HomeBannerView.m */; };
 		BC210D9F0C69893639DD84A5 /* HomeGuessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21056B5487F677973E97B8 /* HomeGuessCell.m */; };
 		BC210DC90086495C92957F2D /* LeagueAwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21099EE4663323A1EA3D0E /* LeagueAwardView.m */; };
 		BC210E2F0BACA26837C44BBC /* MyEthereumChainsSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */; };
 		BC210E3D2377EDF7498C2DF1 /* PKGameEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21033370E0B93EBED8D767 /* PKGameEmptyView.m */; };
 		BC210E61BEB5F8B208DFF505 /* MyNFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101DBC57FB10DD629B4B0 /* MyNFTDetailViewController.m */; };
-		BC210E7996D825CE67D7E36F /* HomeBannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210A270CB2BDED93B15E84 /* HomeBannerCollectionViewCell.m */; };
 		BC210E8DA59477CC32152825 /* MyNFTColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21054139E36B3E6CA45262 /* MyNFTColCell.m */; };
 		BC210E9E33806A6BFD2AE89A /* MoreGuessCoinItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */; };
-		BC210F0F4BA6423676086C6B /* RocketSelectPopUserColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210EBDD22B8CD022269768 /* RocketSelectPopUserColCell.m */; };
 		BC210F1416AECFDE1A4FEA19 /* MyCNWalletSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210926A0E074910BB1BE29 /* MyCNWalletSwitchCell.m */; };
 		BC210F738CED39591CB7541D /* MoreGuessCoinPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D16CDF7D68F16ED38B0 /* MoreGuessCoinPopView.m */; };
 		BC210F74B7434253E2FEF91D /* GuessRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */; };
@@ -452,7 +439,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6CA68C6028E295F100BDE442 /* SudNFT.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,7 +449,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6CA68C5E28E295EA00BDE442 /* SudNFT.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,7 +874,6 @@
 		6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "DTUIImage+Extension.m"; sourceTree = "<group>"; };
 		6CA68C4A28E182E200BDE442 /* ReqAddScoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqAddScoreModel.h; sourceTree = "<group>"; };
 		6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqAddScoreModel.m; sourceTree = "<group>"; };
-		6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SudNFT.xcframework; sourceTree = "<group>"; };
 		6CA68CCC28E29CA500BDE442 /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
 		6CA68CCD28E29CA500BDE442 /* HSSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSettingModel.h; sourceTree = "<group>"; };
 		6CA68CCE28E29CA500BDE442 /* MyCNWalletSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCellModel.m; sourceTree = "<group>"; };
@@ -1115,8 +1099,6 @@
 		BC2100EDB0B0DC05AA83F84D /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		BC21011EFE2917ED676C1C64 /* HomeGuessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeGuessCell.h; sourceTree = "<group>"; };
 		BC210122CBC769498A9DBED6 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
-		BC2101465A9A34B6270F9575 /* RocketLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketLoadingView.m; sourceTree = "<group>"; };
-		BC210148FC2E316C72D388EC /* RocketSelectAnchorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketSelectAnchorView.h; sourceTree = "<group>"; };
 		BC2101A9A272BD9C77B0A3FF /* SceneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentView.m; sourceTree = "<group>"; };
 		BC2101DBC57FB10DD629B4B0 /* MyNFTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTDetailViewController.m; sourceTree = "<group>"; };
 		BC2101E6D890DDDEB2C28E9B /* GuessRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessRoomViewController.h; sourceTree = "<group>"; };
@@ -1136,12 +1118,9 @@
 		BC2103F04C9B26F647F55386 /* MoreGuessCoinItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessCoinItemView.m; sourceTree = "<group>"; };
 		BC21040A1F1E959F6632C911 /* TipPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipPopView.m; sourceTree = "<group>"; };
 		BC21040EB1CB3FC8E205CB1A /* TipPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipPopView.h; sourceTree = "<group>"; };
-		BC2104332817C5FC05E2A234 /* RocketLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketLoadingView.h; sourceTree = "<group>"; };
 		BC2104491AA7FA888C2F3772 /* LeagueEnterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueEnterViewController.h; sourceTree = "<group>"; };
 		BC210468B8562E68D5D9699A /* WalletAddressSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchPopView.h; sourceTree = "<group>"; };
 		BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderView.h; sourceTree = "<group>"; };
-		BC2104ACD7F959557C38A89D /* InteractiveGameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveGameManager.m; sourceTree = "<group>"; };
-		BC2104AF4BA0B1C6AD33868F /* HomeBannerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerCollectionViewCell.h; sourceTree = "<group>"; };
 		BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAuthViewController.m; sourceTree = "<group>"; };
 		BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessRoomViewController.m; sourceTree = "<group>"; };
 		BC2105087E91B70E68E3D640 /* PKStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStateView.h; sourceTree = "<group>"; };
@@ -1161,21 +1140,16 @@
 		BC2106E92DE53A1CA3532640 /* LeagueResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueResultTableViewCell.h; sourceTree = "<group>"; };
 		BC2106F2C4C48C00499B89E4 /* RoomMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomMoreView.h; sourceTree = "<group>"; };
 		BC2106F845ECA957808046FE /* MoreGuessHeaderCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderCellModel.h; sourceTree = "<group>"; };
-		BC2106FFEBC94E3BEF24B53C /* HomeBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerView.m; sourceTree = "<group>"; };
 		BC2107088B9BF4F4503AF66D /* GuessModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessModel.h; sourceTree = "<group>"; };
 		BC210739F0C0EA7E87C2CC3B /* RespModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespModel.h; sourceTree = "<group>"; };
 		BC21076E1DEFF6D13EBF0453 /* MoreGuessCoinPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessCoinPopView.h; sourceTree = "<group>"; };
-		BC21078DF8C35A0D78A4FC3D /* GiftRocketEnterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftRocketEnterView.m; sourceTree = "<group>"; };
 		BC2107929CECA531C851C092 /* PKSelectRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSelectRoomView.h; sourceTree = "<group>"; };
 		BC2107B79DF2AA92EA9CEA23 /* GuessCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessCategoryView.h; sourceTree = "<group>"; };
 		BC2107B7D4AE80B698559038 /* MoreGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessViewController.h; sourceTree = "<group>"; };
 		BC2107BC94088B9F062BBA4B /* QSGameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSGameListViewController.h; sourceTree = "<group>"; };
 		BC2107EF9AD65D2563C73468 /* LeagueResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueResultTableViewCell.m; sourceTree = "<group>"; };
-		BC21080005CEAAFF06F2D9C2 /* GiftRocketEnterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftRocketEnterView.h; sourceTree = "<group>"; };
 		BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserWearNftDetailView.m; sourceTree = "<group>"; };
-		BC21084F1A0F17B2FBD8084A /* RespBannerListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespBannerListModel.m; sourceTree = "<group>"; };
 		BC21085C9AA17435A1C0A820 /* HSHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHttpService.h; sourceTree = "<group>"; };
-		BC210886067E765325E407C4 /* HomeBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerView.h; sourceTree = "<group>"; };
 		BC2108CFC574A8AFEFE2FEDA /* RoomCmdKickoutRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomCmdKickoutRoomModel.h; sourceTree = "<group>"; };
 		BC2109228F9F8EDC6CC7208C /* HsNFTPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsNFTPreferences.h; sourceTree = "<group>"; };
 		BC210926A0E074910BB1BE29 /* MyCNWalletSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCell.m; sourceTree = "<group>"; };
@@ -1187,9 +1161,7 @@
 		BC2109AEEB6FC34520DCBA33 /* HsAppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HsAppPreferences.m; sourceTree = "<group>"; };
 		BC2109B31F63F31616E3D68E /* PKRoomListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomListCell.m; sourceTree = "<group>"; };
 		BC210A169901E482D9705365 /* LeagueEnterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueEnterViewController.m; sourceTree = "<group>"; };
-		BC210A270CB2BDED93B15E84 /* HomeBannerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerCollectionViewCell.m; sourceTree = "<group>"; };
 		BC210A8B9F817A0399951BD7 /* MoreGuessTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessTableViewCell.h; sourceTree = "<group>"; };
-		BC210AAD54FF2C11B71F914D /* InteractiveGameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractiveGameManager.h; sourceTree = "<group>"; };
 		BC210ABE07C435063FEB002B /* SuspendRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuspendRoomView.h; sourceTree = "<group>"; };
 		BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessHeaderView.m; sourceTree = "<group>"; };
 		BC210AD2E65543CE739F514F /* DiscoInteractiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoInteractiveModel.h; sourceTree = "<group>"; };
@@ -1197,7 +1169,6 @@
 		BC210AEA9019F2D6E08BB65F /* WalletAddressSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchCell.h; sourceTree = "<group>"; };
 		BC210B0A37490689FA111F01 /* LeagueResultPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueResultPopView.m; sourceTree = "<group>"; };
 		BC210B38BBAE5B490BF0FC1D /* MyEthereumChainsSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEthereumChainsSelectCell.m; sourceTree = "<group>"; };
-		BC210B7331D8283502A4B993 /* RespBannerListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespBannerListModel.h; sourceTree = "<group>"; };
 		BC210B77253CA485E709A582 /* LeagueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueModel.h; sourceTree = "<group>"; };
 		BC210B82B2806C5188BB6C4A /* RoomCmdKickoutRoomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdKickoutRoomModel.m; sourceTree = "<group>"; };
 		BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoInteractiveColCell.m; sourceTree = "<group>"; };
@@ -1207,8 +1178,6 @@
 		BC210C4BD7F02BD2A49CE6CD /* PKStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKStateView.m; sourceTree = "<group>"; };
 		BC210C5484715EBB3FE52254 /* MoreGuessTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreGuessTableViewCell.m; sourceTree = "<group>"; };
 		BC210C677DD6442EA5963655 /* RespModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespModel.m; sourceTree = "<group>"; };
-		BC210CCD28109E1C3E87256E /* RocketSelectAnchorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketSelectAnchorView.m; sourceTree = "<group>"; };
-		BC210CDBB8D3EE7DA68B0B8D /* RocketService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketService.h; sourceTree = "<group>"; };
 		BC210CF1888895F521C40AFD /* WalletAddressSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAddressSwitchCell.m; sourceTree = "<group>"; };
 		BC210CF5CBAF02BB70DCC073 /* WalletAddressSwitchPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAddressSwitchPopView.m; sourceTree = "<group>"; };
 		BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSGameItemModel.m; sourceTree = "<group>"; };
@@ -1221,20 +1190,17 @@
 		BC210D91A4E0D4999A243BBF /* MoreGuessHeaderColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderColCell.h; sourceTree = "<group>"; };
 		BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomService.m; sourceTree = "<group>"; };
 		BC210DCE2A6257343B4539CF /* DiscoGameInteractivePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractivePopView.h; sourceTree = "<group>"; };
-		BC210E10D8FB62818722C46B /* RocketService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketService.m; sourceTree = "<group>"; };
 		BC210E613A87ABC193F3B64D /* LeagueRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueRoomService.m; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
 		BC210E8769E66D83BC365AB8 /* WalletAddressSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAddressSwitchCellModel.m; sourceTree = "<group>"; };
 		BC210E92C4879AFA76A189D4 /* WalletAddressSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchCellModel.h; sourceTree = "<group>"; };
 		BC210EA4458F6CC10378E975 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		BC210EAA09CBCD7E4BFFBFEB /* LeagueRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueRoomViewController.m; sourceTree = "<group>"; };
-		BC210EBDD22B8CD022269768 /* RocketSelectPopUserColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketSelectPopUserColCell.m; sourceTree = "<group>"; };
 		BC210F28C7CAB6BCA3140175 /* HSHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSHttpService.m; sourceTree = "<group>"; };
 		BC210F7B6D59DA493CE16350 /* SceneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentView.h; sourceTree = "<group>"; };
 		BC210F8464A2C7258DC5B08F /* LeagueResultPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueResultPopView.h; sourceTree = "<group>"; };
 		BC210FAF33BAD4283645718B /* UserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailView.h; sourceTree = "<group>"; };
 		BC210FB8B5AA27D3820666AC /* LeagueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueModel.m; sourceTree = "<group>"; };
-		BC210FED2B992911A0CCEB5B /* RocketSelectPopUserColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketSelectPopUserColCell.h; sourceTree = "<group>"; };
 		E51A737628091CBE0097007C /* ZIMManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZIMManager.h; sourceTree = "<group>"; };
 		E51A737728091CD00097007C /* ZIMManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZIMManager.m; sourceTree = "<group>"; };
 		E51FFD5728124F2B001BE2BB /* VolcEngineRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VolcEngineRTC.xcframework; path = Vendors/volc/VolcEngineRTC.xcframework; sourceTree = "<group>"; };
@@ -1263,7 +1229,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C67317A28A1124600232992 /* libsvgnative.a in Frameworks */,
-				6CA68C5F28E295F100BDE442 /* SudNFT.xcframework in Frameworks */,
 				6C67317928A1124600232992 /* libSDImageSVGNativeCoder.a in Frameworks */,
 				039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */,
 			);
@@ -1274,7 +1239,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				02B27BD4749E838D1FB7E81D /* Pods_SudNFTQuickStart.framework in Frameworks */,
-				6CA68C5D28E295EA00BDE442 /* SudNFT.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1560,12 +1524,6 @@
 				6C460861286D3BC7005C99EF /* HomeHeaderFullReusableView.m */,
 				BC210D7BA54D759646784BC7 /* UserWearNftDetailView.h */,
 				BC21082FA11C3372A4E94118 /* UserWearNftDetailView.m */,
-				BC2106FFEBC94E3BEF24B53C /* HomeBannerView.m */,
-				BC210886067E765325E407C4 /* HomeBannerView.h */,
-				BC2101465A9A34B6270F9575 /* RocketLoadingView.m */,
-				BC2104332817C5FC05E2A234 /* RocketLoadingView.h */,
-				BC2104AF4BA0B1C6AD33868F /* HomeBannerCollectionViewCell.h */,
-				BC210A270CB2BDED93B15E84 /* HomeBannerCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1716,8 +1674,6 @@
 				4455AD3127EAC658001516EE /* RoomGiftPannelView.h */,
 				4455AD3227EAC658001516EE /* GiftItemCollectionViewCell.m */,
 				4455AD3327EAC658001516EE /* RoomGiftContentView.h */,
-				BC21078DF8C35A0D78A4FC3D /* GiftRocketEnterView.m */,
-				BC21080005CEAAFF06F2D9C2 /* GiftRocketEnterView.h */,
 			);
 			path = Gift;
 			sourceTree = "<group>";
@@ -1832,7 +1788,6 @@
 				4455ADDD27EAC6F7001516EE /* Model */,
 				4455ADE327EAC6F7001516EE /* View */,
 				4455AE0427EAC6F7001516EE /* SceneConstantHeader.h */,
-				BC210CCB199D7EA633AEA581 /* Manager */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1891,10 +1846,6 @@
 				BC2106F2C4C48C00499B89E4 /* RoomMoreView.h */,
 				BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */,
 				BC210ABE07C435063FEB002B /* SuspendRoomView.h */,
-				BC210CCD28109E1C3E87256E /* RocketSelectAnchorView.m */,
-				BC210148FC2E316C72D388EC /* RocketSelectAnchorView.h */,
-				BC210EBDD22B8CD022269768 /* RocketSelectPopUserColCell.m */,
-				BC210FED2B992911A0CCEB5B /* RocketSelectPopUserColCell.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2057,8 +2008,6 @@
 				6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */,
 				6CA68C4A28E182E200BDE442 /* ReqAddScoreModel.h */,
 				6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */,
-				BC210B7331D8283502A4B993 /* RespBannerListModel.h */,
-				BC21084F1A0F17B2FBD8084A /* RespBannerListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2356,14 +2305,6 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		6CA68C5928E295E400BDE442 /* SudNFTSDK */ = {
-			isa = PBXGroup;
-			children = (
-				6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */,
-			);
-			path = SudNFTSDK;
-			sourceTree = "<group>";
-		};
 		6CA68CCB28E29CA500BDE442 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2510,7 +2451,6 @@
 		6CD6E84B27BE30BE00D8F76C /* App */ = {
 			isa = PBXGroup;
 			children = (
-				6CDAA31F2913C9B900942245 /* assets */,
 				6C192E882797E2C700553034 /* PrefixHeader.pch */,
 				6C192E4B279523B000553034 /* AppDelegate.h */,
 				6C192E4C279523B000553034 /* AppDelegate.m */,
@@ -2566,8 +2506,6 @@
 				6C46086A286DAAF0005C99EF /* DiscoRoomService.m */,
 				BC21058E78AF348C1092A108 /* LeagueRoomService.h */,
 				BC210E613A87ABC193F3B64D /* LeagueRoomService.m */,
-				BC210CDBB8D3EE7DA68B0B8D /* RocketService.h */,
-				BC210E10D8FB62818722C46B /* RocketService.m */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -2630,13 +2568,6 @@
 				6CD6E87B27BF433500D8F76C /* TXAudioEngineImpl.m */,
 			);
 			path = TX;
-			sourceTree = "<group>";
-		};
-		6CDAA31F2913C9B900942245 /* assets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = assets;
 			sourceTree = "<group>";
 		};
 		6CE6CB58283CB6890026BDAB /* QuickStart */ = {
@@ -2893,15 +2824,6 @@
 			path = Preferences;
 			sourceTree = "<group>";
 		};
-		BC210CCB199D7EA633AEA581 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				BC2104ACD7F959557C38A89D /* InteractiveGameManager.m */,
-				BC210AAD54FF2C11B71F914D /* InteractiveGameManager.h */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
 		BC210D4E52B63622AFCD7CC7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -2965,7 +2887,6 @@
 		E65466148933C05BB06C9A97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6CA68C5928E295E400BDE442 /* SudNFTSDK */,
 				E51FFD5728124F2B001BE2BB /* VolcEngineRTC.xcframework */,
 				E5D4B4D9280FDFC6000E7AC4 /* NERtcSDK.xcframework */,
 				E5D4B4D7280FDFC6000E7AC4 /* NIMSDK.xcframework */,
@@ -3579,15 +3500,6 @@
 				BC21009E7AF907C72E3B6D59 /* GuessModel.m in Sources */,
 				BC2108DF9DCC723A931AC7FA /* LeagueModel.m in Sources */,
 				BC210A4DEF905819E9635D98 /* LeagueRoomService.m in Sources */,
-				BC210912DF6D4316210B91E9 /* GiftRocketEnterView.m in Sources */,
-				BC21077AC4BC298A705821E7 /* RocketService.m in Sources */,
-				BC21010CDF0736969BAFC09B /* RocketSelectAnchorView.m in Sources */,
-				BC210F0F4BA6423676086C6B /* RocketSelectPopUserColCell.m in Sources */,
-				BC210D777B943CA8D215ADA9 /* HomeBannerView.m in Sources */,
-				BC21065273423DB90B1B4F6E /* InteractiveGameManager.m in Sources */,
-				BC21018D70638E83D2CD2DCE /* RocketLoadingView.m in Sources */,
-				BC210E7996D825CE67D7E36F /* HomeBannerCollectionViewCell.m in Sources */,
-				BC210107428518AA80E5EAE1 /* RespBannerListModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
