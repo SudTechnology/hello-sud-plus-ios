@@ -14,11 +14,18 @@
   </details>
 - 集成SDK
   <details>
-  <summary>详细描述</summary>
+  <summary>手动集成方式</summary>
 
       1.将SudNFT.xcframework添加入工程
       2.在工程设置，General->Frameworks、Libraries、and Embedded Content中将SudNFT.xcframework选为Embed & Sign
       3.完成集成，在工程中引入头文件SudNFT/SudNFT.h即可使用相关接口功能。
+
+  </details>
+  <details>
+  <summary>Cocopods方式</summary>
+
+      1.在Podfile中添加依赖 pod 'SudNFT', '~> 1.0.4'
+      2.pod install
 
   </details>
 
