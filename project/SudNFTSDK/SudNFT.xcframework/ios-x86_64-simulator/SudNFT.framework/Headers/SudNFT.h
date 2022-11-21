@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param listener 回调
 + (void)unbindCnWallet:(SudNFTUnBindCnWalletParamModel *)paramModel listener:(ISudNFTListenerUnBindCnWallet)listener;
 
-/// 刷新Cn钱包token
+/// 刷新国内钱包token
 /// @param paramModel 参数model
 /// @param listener 回调
 + (void)refreshCnWalletToken:(SudNFTRefreshCnWalletTokenParamModel *)paramModel listener:(ISudNFTListenerRefreshCnWalletToken)listener;
