@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '10.0'
 #source 'https://github.com/CocoaPods/Specs.git'
 
 inhibit_all_warnings!
@@ -62,7 +62,8 @@ target 'HelloSud-iOS' do
   # tx腾讯云SDK
   #pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
   pod 'TXLiteAVSDK_TRTC', '10.2.11418'
-
+  # SudNFT SDK
+  pod 'SudNFT', '1.0.4'
 end
 
 # QuickStart
@@ -119,5 +120,7 @@ target 'SudNFTQuickStart' do
   pod 'MarqueeLabel'
   # 日志
   pod 'CocoaLumberjack'
+  # SudNFT SDK
+  pod 'SudNFT', '1.0.4'
 
 end

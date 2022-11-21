@@ -232,10 +232,6 @@
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
 		6C8D02D028AB774100C230E5 /* DTUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */; };
 		6CA68C4C28E182E200BDE442 /* ReqAddScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */; };
-		6CA68C5D28E295EA00BDE442 /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; };
-		6CA68C5E28E295EA00BDE442 /* SudNFT.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6CA68C5F28E295F100BDE442 /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; };
-		6CA68C6028E295F100BDE442 /* SudNFT.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6CA68D1228E29CA700BDE442 /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68CCE28E29CA500BDE442 /* MyCNWalletSwitchCellModel.m */; };
 		6CA68D1328E29CA700BDE442 /* WalletAddressSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68CCF28E29CA500BDE442 /* WalletAddressSwitchCellModel.m */; };
 		6CA68D1428E29CA700BDE442 /* HSSettingHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68CD028E29CA500BDE442 /* HSSettingHeaderModel.m */; };
@@ -443,7 +439,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6CA68C6028E295F100BDE442 /* SudNFT.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,7 +449,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6CA68C5E28E295EA00BDE442 /* SudNFT.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -880,7 +874,6 @@
 		6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "DTUIImage+Extension.m"; sourceTree = "<group>"; };
 		6CA68C4A28E182E200BDE442 /* ReqAddScoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqAddScoreModel.h; sourceTree = "<group>"; };
 		6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqAddScoreModel.m; sourceTree = "<group>"; };
-		6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SudNFT.xcframework; sourceTree = "<group>"; };
 		6CA68CCC28E29CA500BDE442 /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
 		6CA68CCD28E29CA500BDE442 /* HSSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSettingModel.h; sourceTree = "<group>"; };
 		6CA68CCE28E29CA500BDE442 /* MyCNWalletSwitchCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCNWalletSwitchCellModel.m; sourceTree = "<group>"; };
@@ -1236,7 +1229,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C67317A28A1124600232992 /* libsvgnative.a in Frameworks */,
-				6CA68C5F28E295F100BDE442 /* SudNFT.xcframework in Frameworks */,
 				6C67317928A1124600232992 /* libSDImageSVGNativeCoder.a in Frameworks */,
 				039A9E35E1FA57CD18D2423F /* Pods_HelloSud_iOS.framework in Frameworks */,
 			);
@@ -1247,7 +1239,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				02B27BD4749E838D1FB7E81D /* Pods_SudNFTQuickStart.framework in Frameworks */,
-				6CA68C5D28E295EA00BDE442 /* SudNFT.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2314,14 +2305,6 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		6CA68C5928E295E400BDE442 /* SudNFTSDK */ = {
-			isa = PBXGroup;
-			children = (
-				6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */,
-			);
-			path = SudNFTSDK;
-			sourceTree = "<group>";
-		};
 		6CA68CCB28E29CA500BDE442 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2904,7 +2887,6 @@
 		E65466148933C05BB06C9A97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6CA68C5928E295E400BDE442 /* SudNFTSDK */,
 				E51FFD5728124F2B001BE2BB /* VolcEngineRTC.xcframework */,
 				E5D4B4D9280FDFC6000E7AC4 /* NERtcSDK.xcframework */,
 				E5D4B4D7280FDFC6000E7AC4 /* NIMSDK.xcframework */,
