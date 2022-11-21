@@ -56,6 +56,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param userActivity userActivity description
 + (BOOL)handleOpenUniversalLink:(NSUserActivity *)userActivity;
 
+/// 刷新钱包token
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)refreshWalletToken:(SudNFTRefreshWalletTokenParamModel *)paramModel listener:(ISudNFTListenerRefreshWalletToken)listener;
+
 #pragma mark CN
 
 /// 发送短信验证码
@@ -87,6 +92,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param paramModel 参数
 /// @param listener 回调
 + (void)unbindCnWallet:(SudNFTUnBindCnWalletParamModel *)paramModel listener:(ISudNFTListenerUnBindCnWallet)listener;
+
+/// 刷新Cn钱包token
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)refreshCnWalletToken:(SudNFTRefreshCnWalletTokenParamModel *)paramModel listener:(ISudNFTListenerRefreshCnWalletToken)listener;
 @end
 
 NS_ASSUME_NONNULL_END

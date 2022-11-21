@@ -162,6 +162,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/// 刷新钱包Token参数model
+@interface SudNFTRefreshWalletTokenParamModel : NSObject
+/// 钱包token
+@property(nonatomic, copy) NSString *walletToken;
+@end
+
+/// 刷新钱包Token model
+@interface SudNFTRefreshWalletTokenModel : NSObject
+/// 新过期时间
+@property(nonatomic, assign) int64_t expireAtMs;
+@end
+
 #pragma mark CN
 
 /// 发送验证码参数model [CN]
@@ -268,5 +280,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *walletToken;
 /// details token
 @property(nonatomic, copy) NSString *detailsToken;
+@end
+
+/// 刷新CN钱包Token参数model
+@interface SudNFTRefreshCnWalletTokenParamModel : NSObject
+/// 钱包token
+@property(nonatomic, copy) NSString *walletToken;
+@end
+
+/// 刷新CN钱包Token参数model
+@interface SudNFTRefreshCnWalletTokenModel : NSObject
+/// 新过期时间
+@property(nonatomic, assign) int64_t expireAtMs;
 @end
 NS_ASSUME_NONNULL_END

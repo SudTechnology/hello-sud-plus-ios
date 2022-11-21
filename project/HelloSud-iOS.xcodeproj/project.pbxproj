@@ -231,9 +231,7 @@
 		6C7CB61928C5E940003A19A8 /* MyNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */; };
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
 		6C8D02D028AB774100C230E5 /* DTUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */; };
-
 		6CA68C4C28E182E200BDE442 /* ReqAddScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */; };
-
 		6CA68C5D28E295EA00BDE442 /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; };
 		6CA68C5E28E295EA00BDE442 /* SudNFT.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6CA68C5F28E295F100BDE442 /* SudNFT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */; };
@@ -271,9 +269,7 @@
 		6CA68D3228E29CA700BDE442 /* CNWalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D1028E29CA600BDE442 /* CNWalletSelectCell.m */; };
 		6CA68D3328E29CA700BDE442 /* MySelectEtherChainsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D1128E29CA600BDE442 /* MySelectEtherChainsView.m */; };
 		6CA68D3628E2A02600BDE442 /* HsNFTPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D3428E2A02500BDE442 /* HsNFTPreferences.m */; };
-
 		6CA68D3B28E3022D00BDE442 /* LeagueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D3A28E3022D00BDE442 /* LeagueDetailViewController.m */; };
-
 		6CC3E77A28C1BB7D00AA934B /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77728C1BB7D00AA934B /* MyEthereumChainsCellModel.m */; };
 		6CC3E77B28C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77828C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m */; };
 		6CC3E77C28C1BB7D00AA934B /* HSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77928C1BB7D00AA934B /* HSNFTListCellModel.m */; };
@@ -882,10 +878,8 @@
 		6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespDiscoModel.m; sourceTree = "<group>"; };
 		6C8D02CE28AB774000C230E5 /* DTUIImage+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTUIImage+Extension.h"; sourceTree = "<group>"; };
 		6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "DTUIImage+Extension.m"; sourceTree = "<group>"; };
-
 		6CA68C4A28E182E200BDE442 /* ReqAddScoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqAddScoreModel.h; sourceTree = "<group>"; };
 		6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqAddScoreModel.m; sourceTree = "<group>"; };
-
 		6CA68C5A28E295E400BDE442 /* SudNFT.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SudNFT.xcframework; sourceTree = "<group>"; };
 		6CA68CCC28E29CA500BDE442 /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
 		6CA68CCD28E29CA500BDE442 /* HSSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSettingModel.h; sourceTree = "<group>"; };
@@ -953,10 +947,8 @@
 		6CA68D1128E29CA600BDE442 /* MySelectEtherChainsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySelectEtherChainsView.m; sourceTree = "<group>"; };
 		6CA68D3428E2A02500BDE442 /* HsNFTPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HsNFTPreferences.m; sourceTree = "<group>"; };
 		6CA68D3528E2A02600BDE442 /* HsNFTPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsNFTPreferences.h; sourceTree = "<group>"; };
-
 		6CA68D3928E3022D00BDE442 /* LeagueDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeagueDetailViewController.h; sourceTree = "<group>"; };
 		6CA68D3A28E3022D00BDE442 /* LeagueDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeagueDetailViewController.m; sourceTree = "<group>"; };
-
 		6CB3D146288FEE220037EE88 /* HelloSud-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "HelloSud-iOS.entitlements"; sourceTree = "<group>"; };
 		6CC3E77428C1BB7D00AA934B /* MyEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsCellModel.h; sourceTree = "<group>"; };
 		6CC3E77528C1BB7D00AA934B /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };

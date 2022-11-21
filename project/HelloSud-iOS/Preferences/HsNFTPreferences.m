@@ -4,7 +4,6 @@
 //
 
 #import "HsNFTPreferences.h"
-
 #define kKeyEtherChains @"kKeyEtherChains"
 
 NSString *const MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF = @"MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF";
@@ -45,7 +44,6 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
 #define kKeyWearMap [self envKey:@"kKeyWearMap"]
 
 @interface HsNFTPreferences ()
-
 @end
 
 @implementation HsNFTPreferences
@@ -73,11 +71,11 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     NSArray *arrKeys = [userWalletMap allKeys];
     id tempStr = [NSUserDefaults.standardUserDefaults objectForKey:kKeyWearCnNftModelInfo];
     if (tempStr) {
-        _wearCnNftModel = [SudNFTCnInfoModel.class mj_objectWithKeyValues:tempStr];
+        _wearCnNftModel = (SudNFTCnInfoModel *) [SudNFTCnInfoModel.class mj_objectWithKeyValues:tempStr];
     }
     tempStr = [NSUserDefaults.standardUserDefaults objectForKey:kKeyWearNftModelInfo];
     if (tempStr) {
-        _wearNftModel = [SudNFTInfoModel.class mj_objectWithKeyValues:tempStr];
+        _wearNftModel = (SudNFTInfoModel *) [SudNFTInfoModel.class mj_objectWithKeyValues:tempStr];
     }
     _isShowedSwitchWalletAddress = [NSUserDefaults.standardUserDefaults boolForKey:kKeyTipChangeWalletAddress];
     _isShowedSwitchChain = [NSUserDefaults.standardUserDefaults boolForKey:kKeyTipChangeChain];
@@ -302,7 +300,7 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     if (temp && [temp isKindOfClass:NSDictionary.class]) {
         [wearDic setDictionary:temp];
     }
-    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@",@(self.currentWalletType)];
+    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@", @(self.currentWalletType)];
     NSDictionary *currentWalletWearInfo = wearDic[currentWalletTypeKey];
     if (currentWalletWearInfo &&
             [currentWalletWearInfo[@"contractAddress"] isEqualToString:contractAddress] &&
@@ -318,7 +316,7 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
 /// @param tokenId
 - (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId detailsToken:(NSString *)detailsToken add:(BOOL)add {
 
-    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@",@(self.currentWalletType)];
+    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@", @(self.currentWalletType)];
     if (add) {
         NSMutableDictionary *wearDic = NSMutableDictionary.new;
         NSMutableDictionary *currentWalletWearInfo = NSMutableDictionary.new;
@@ -344,7 +342,7 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     if (temp && [temp isKindOfClass:NSDictionary.class]) {
         [wearDic setDictionary:temp];
     }
-    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@",@(self.currentWalletType)];
+    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@", @(self.currentWalletType)];
     NSDictionary *currentWalletWearInfo = wearDic[currentWalletTypeKey];
     id token = currentWalletWearInfo[@"detailsToken"];
     if (token) {
@@ -362,7 +360,7 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     if (temp && [temp isKindOfClass:NSDictionary.class]) {
         [wearDic setDictionary:temp];
     }
-    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@",@(walletType)];
+    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@", @(walletType)];
     NSDictionary *currentWalletWearInfo = wearDic[currentWalletTypeKey];
     if (currentWalletWearInfo) {
         return YES;
@@ -376,5 +374,36 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
         [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
     }
 }
+
+/// 刷新钱包token
+- (void)checkIfNeedToRefreshWalletToken {
+
+    NSArray *walletList = self.walletList;
+    for (SudNFTWalletInfoModel *walletInfoModel in walletList) {
+
+        if (walletInfoModel.zoneType == 0) {
+            NSString *walletToken = [self getBindUserTokenByWalletType:walletInfoModel.type];
+            if (walletToken) {
+                // 国外
+                SudNFTRefreshWalletTokenParamModel *paramModel = SudNFTRefreshWalletTokenParamModel.new;
+                paramModel.walletToken = walletToken;
+                [SudNFT refreshWalletToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTRefreshWalletTokenModel *resp) {
+                    DDLogDebug(@"refresh wallet token,wallet type:%@ errCode:(%@), msg:%@ expire time:%@", @(walletInfoModel.type), @(errCode), errMsg, [NSDate dateWithTimeIntervalSince1970:resp.expireAtMs / 1000.0]);
+                }];
+            }
+        } else if (walletInfoModel.zoneType == 1) {
+            NSString *walletToken = [self getBindUserTokenByWalletType:walletInfoModel.type];
+            if (walletToken) {
+                // 国内
+                SudNFTRefreshCnWalletTokenParamModel *paramModel2 = SudNFTRefreshCnWalletTokenParamModel.new;
+                paramModel2.walletToken = walletToken;
+                [SudNFT refreshCnWalletToken:paramModel2 listener:^(NSInteger errCode, NSString *errMsg, SudNFTRefreshCnWalletTokenModel *resp) {
+                    DDLogDebug(@"refresh wallet token cn,wallet type:%@ errCode:(%@), msg:%@ expire time:%@", @(walletInfoModel.type), @(errCode), errMsg, [NSDate dateWithTimeIntervalSince1970:resp.expireAtMs / 1000.0]);
+                }];
+            }
+        }
+    }
+}
+
 
 @end

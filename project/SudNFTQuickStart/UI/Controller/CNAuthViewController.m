@@ -132,6 +132,7 @@
 
         if (errCode != 0) {
             weakSelf.getCodeBtn.enabled = YES;
+            /// 仅仅是Sud测试链的时验证码信息提示
             if (errCode == 13035) {
                 [ToastUtil show:errMsg];
                 return;
