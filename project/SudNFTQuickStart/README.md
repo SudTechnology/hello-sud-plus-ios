@@ -14,11 +14,18 @@
   </details>
 - 集成SDK
   <details>
-  <summary>详细描述</summary>
+  <summary>手动集成方式</summary>
 
       1.将SudNFT.xcframework添加入工程
       2.在工程设置，General->Frameworks、Libraries、and Embedded Content中将SudNFT.xcframework选为Embed & Sign
       3.完成集成，在工程中引入头文件SudNFT/SudNFT.h即可使用相关接口功能。
+
+  </details>
+  <details>
+  <summary>Cocopods方式</summary>
+
+      1.在Podfile中添加依赖 pod 'SudNFT', '~> 1.0.4'
+      2.pod install
 
   </details>
 
@@ -72,7 +79,13 @@
 /// @param listener 回调
 + (void)removeNFTCredentialsToken:(SudNFTRemoveCredentialsTokenParamModel *)paramModel listener:(ISudNFTListenerRemoveNFTCredentialsToken)listener;
 ```
-
+- 刷新钱包token
+```
+/// 刷新钱包token
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)refreshWalletToken:(SudNFTRefreshWalletTokenParamModel *)paramModel listener:(ISudNFTListenerRefreshWalletToken)listener;
+```
 
 ## 国内藏品平台相关接口（稀物）
 - 发送短信验证码
@@ -119,7 +132,13 @@
 /// @param listener 回调
 + (void)unbindCnWallet:(SudNFTUnBindCnWalletParamModel *)paramModel listener:(ISudNFTListenerUnBindCnWallet)listener;
 ```
-
+- 刷新国内钱包token
+```
+/// 刷新国内钱包token
+/// @param paramModel 参数model
+/// @param listener 回调
++ (void)refreshCnWalletToken:(SudNFTRefreshCnWalletTokenParamModel *)paramModel listener:(ISudNFTListenerRefreshCnWalletToken)listener;
+```
 # 接入文档
 
 - [接入文档](https://docs.sud.tech/zh-CN/)

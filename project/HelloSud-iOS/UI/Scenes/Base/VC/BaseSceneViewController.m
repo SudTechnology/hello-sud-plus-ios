@@ -39,8 +39,6 @@
 @property(nonatomic, assign) BOOL isLoadedRobotListCompleted;
 /// 是否加载了麦位列表
 @property(nonatomic, assign) BOOL isFinishedMicList;
-// 缓存机器人列表
-@property(nonatomic, strong) NSArray<RobotInfoModel *> *cacheRobotList;
 
 @end
 
@@ -66,10 +64,10 @@
     [super viewDidLoad];
     // 配置顶部tableview不留出状态栏
     if (@available(iOS 11.0, *)) {
-    }else {
+    } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    
+
     [SuspendRoomView close];
     // Do any additional setup after loading the view.
     self.language = [SettingsService getCurLanguageLocale];
@@ -1424,6 +1422,29 @@
             [self joinCommonRobotToMic:m showNoMic:NO];
         }
     }];
+}
+
+/// 添加机器人到游戏
+/// @param robotList
+- (void)addRobotToGame:(NSArray <RobotInfoModel *> *)robotList {
+    if (robotList.count == 0) {
+        return;
+    }
+    DDLogDebug(@"add robot to game count:%@", @(robotList.count));
+    NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
+    for (int i = 0; i < robotList.count; ++i) {
+        RobotInfoModel *robotModel = robotList[i];
+        AIPlayerInfoModel *aiPlayerInfoModel = [AIPlayerInfoModel alloc];
+        aiPlayerInfoModel.userId = [NSString stringWithFormat:@"%@", @(robotModel.userId)];
+        aiPlayerInfoModel.name = robotModel.name;
+        aiPlayerInfoModel.avatar = robotModel.avatar;
+        aiPlayerInfoModel.gender = robotModel.gender;
+        [aiPlayers addObject:aiPlayerInfoModel];
+    }
+    AppCommonGameAddAIPlayersModel *appCommonGameAddAiPlayersModel = [[AppCommonGameAddAIPlayersModel alloc] init];
+    appCommonGameAddAiPlayersModel.aiPlayers = aiPlayers;
+    appCommonGameAddAiPlayersModel.isReady = YES;
+    [self.sudFSTAPPDecorator notifyAppCommonGameAddAIPlayers:appCommonGameAddAiPlayersModel];
 }
 
 - (void)joinCommonRobotToMic:(RobotInfoModel *)robotModel showNoMic:(BOOL)showNoMic {

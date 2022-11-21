@@ -91,6 +91,7 @@
                weakSelf.isNFTInited = YES;
                DDLogError(@"onSudNFTInitStateChanged init success");
                [weakSelf checkWalletInfo];
+
            }];
 }
 
@@ -138,6 +139,7 @@
             HsNFTPreferences.shared.walletList = self.walletList;
             [self.myHeaderView updateSupportWallet:getWalletListModel.walletList];
             [self reloadHeadView];
+            [HsNFTPreferences.shared checkIfNeedToRefreshWalletToken];
         }];
         return;
     }
@@ -159,6 +161,7 @@
             HsNFTPreferences.shared.walletList = self.walletList;
             [self updateWalletEtherChains];
             [self.myHeaderView updateSupportWallet:getWalletListModel.walletList];
+            [HsNFTPreferences.shared checkIfNeedToRefreshWalletToken];
         }];
     } else {
         [self updateWalletEtherChains];

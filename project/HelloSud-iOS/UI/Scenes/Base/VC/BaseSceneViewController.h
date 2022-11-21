@@ -80,6 +80,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) EnterRoomModel *enterModel;
 /// 游戏总人数
 @property(nonatomic, assign) NSInteger totalGameUserCount;
+// 缓存机器人列表
+@property(nonatomic, strong) NSArray<RobotInfoModel *> *cacheRobotList;
 #pragma mark - GAME
 
 
@@ -247,6 +249,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 自己成为了队长事件处理
 - (void)onHandleIsGameCaptain;
+
+/// 添加机器人到游戏
+/// @param robotList
+- (void)addRobotToGame:(NSArray <RobotInfoModel *>*)robotList;
 @end
 
 NS_ASSUME_NONNULL_END

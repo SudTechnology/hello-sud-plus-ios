@@ -17,6 +17,12 @@
 #import "../View/ForeignWalletSelectPopView.h"
 #import "../View/WalletDeletePopView.h"
 
+// TODO: 申请APP ID
+#define SUDNFT_APP_ID          @"1486637108889305089"
+// TODO: 申请APP KEY
+#define SUDNFT_APP_KEY         @"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR"
+// TODO: APP 配置universal link 有则填，无暂可为空
+#define APP_UNIVERSAL_LINK  @"https://links.sud.tech"
 
 @interface QuickStartViewController () <ISudNFTListenerBindWallet>
 
@@ -61,19 +67,18 @@
 - (void)configSudNFT {
     BOOL isTestEnv = NO;
 #if DEBUG
-    // 测试环境
-    [ISudNFTD e:2];
+//    [ISudNFTD e:2];
     isTestEnv = YES;
 #endif
     NSString *sudNFTSDKVersoin = [SudNFT getVersion];
     NSLog(@"sudNFTSDKVersoin:%@", sudNFTSDKVersoin);
 
     SudInitNFTParamModel *paramModel = SudInitNFTParamModel.new;
-    paramModel.appId = @"1486637108889305089";
-    paramModel.appKey = @"wVC9gUtJNIDzAqOjIVdIHqU3MY6zF6SR";
-    paramModel.userId = HsNFTPreferences.shared.userId;
-    paramModel.universalLink = @"https://links.sud.tech";
+    paramModel.appId = SUDNFT_APP_ID;
+    paramModel.appKey = SUDNFT_APP_KEY;
+    paramModel.universalLink = APP_UNIVERSAL_LINK;
     paramModel.isTestEnv = isTestEnv;
+    paramModel.userId = HsNFTPreferences.shared.userId;
     WeakSelf
     [SudNFT initNFT:paramModel
            listener:^(NSInteger errCode, NSString *_Nullable errMsg) {

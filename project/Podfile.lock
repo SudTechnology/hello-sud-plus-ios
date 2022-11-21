@@ -77,6 +77,7 @@ PODS:
     - SudMGPWrapper/SudMGPWrapper (= 1.0.6)
   - SudMGPWrapper/SudMGPWrapper (1.0.6):
     - MJExtension (~> 3.4.1)
+  - SudNFT (1.0.4)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
     - SVGAPlayer/ProtoFiles (= 2.5.6)
@@ -121,6 +122,7 @@ DEPENDENCIES:
   - SDWebImageSVGKitPlugin (= 1.4.0)
   - SDWebImageWebPCoder
   - SudMGPWrapper (from `./`)
+  - SudNFT (= 1.0.4)
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
   - TXLiteAVSDK_TRTC (= 10.2.11418)
@@ -157,6 +159,7 @@ SPEC REPOS:
     - SDWebImageSVGKitPlugin
     - SDWebImageWebPCoder
     - SSZipArchive
+    - SudNFT
     - SVGKit
     - SVProgressHUD
     - TXLiteAVSDK_TRTC
@@ -202,6 +205,7 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   SudMGPWrapper: 1757a9d39dd839b34be86119ab93ad7360b6620d
+  SudNFT: efa7ec483a2d6e5c5a8e1dda5f8d6578b97ddf9c
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
@@ -211,6 +215,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 6a4f294825ac93f16c5101d3e97d211c2d17fa33
 
-PODFILE CHECKSUM: 5f5b814af9f1804360dda2ec3d1c9d2d004b21b4
+PODFILE CHECKSUM: 9eb269127f49a6fb16e164165eba2fa727fec8ce
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

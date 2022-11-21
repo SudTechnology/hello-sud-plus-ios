@@ -60,6 +60,10 @@ static NSString *MG_COMMON_APP_COMMON_SELF_X_RESP = @"mg_common_app_common_self_
 static NSString *MG_COMMON_GAME_ADD_AI_PLAYERS = @"mg_common_game_add_ai_players";
 /// 游戏通知app层添当前网络连接状态（2022-06-21新增）
 static NSString *MG_COMMON_GAME_NETWORK_STATE = @"mg_common_game_network_state";
+/// 游戏通知app获取积分
+static NSString *MG_COMMON_GAME_GET_SCORE = @"mg_common_game_get_score";
+/// 游戏通知app带入积分
+static NSString *MG_COMMON_GAME_SET_SCORE = @"mg_common_game_set_score";
 
 
 #pragma mark - 通用状态-玩家
@@ -577,8 +581,26 @@ MGCommonGameStateTypePlaying = 2, // 正在游戏中
 @property(nonatomic, assign) NSInteger state;
 @end
 
-#pragma mark - 游戏通知app层当前玩家死亡后变成ob视角 MG_COMMON_SELF_OB_STATUS
+#pragma mark - 游戏通知app获取积分 MG_COMMON_GAME_SCORE
 
+@interface MGCommonGameGetScoreModel : NSObject
+
+@end
+
+#pragma mark - 游戏通知app带入积分 MG_COMMON_GAME_SET_SCORE
+
+@interface MGCommonGameSetScoreModel : NSObject
+/// 本轮局id
+@property(nonatomic, strong) NSString *roundId;
+/// 本人当前积分
+@property(nonatomic, assign) NSInteger lastRoundScore;
+/// 充值积分
+@property(nonatomic, assign) NSInteger incrementalScore;
+/// 充值后总积分
+@property(nonatomic, assign) NSInteger totalScore;
+@end
+
+#pragma mark - 游戏通知app层当前玩家死亡后变成ob视角 MG_COMMON_SELF_OB_STATUS
 @interface MgCommonSelfObStatusModel : NSObject
 @property(nonatomic, assign) BOOL isOb;
 @end

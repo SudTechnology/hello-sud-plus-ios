@@ -4,7 +4,6 @@
 //
 
 #import "HsNFTPreferences.h"
-
 #define kKeyEtherChains @"kKeyEtherChains"
 
 NSString *const MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF = @"MY_ETHEREUM_CHAINS_SELECT_CHANGED_NTF";
@@ -45,7 +44,6 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
 #define kKeyWearMap [self envKey:@"kKeyWearMap"]
 
 @interface HsNFTPreferences ()
-
 @end
 
 @implementation HsNFTPreferences
@@ -73,11 +71,11 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     NSArray *arrKeys = [userWalletMap allKeys];
     id tempStr = [NSUserDefaults.standardUserDefaults objectForKey:kKeyWearCnNftModelInfo];
     if (tempStr) {
-        _wearCnNftModel = [SudNFTCnInfoModel.class mj_objectWithKeyValues:tempStr];
+        _wearCnNftModel = (SudNFTCnInfoModel *) [SudNFTCnInfoModel.class mj_objectWithKeyValues:tempStr];
     }
     tempStr = [NSUserDefaults.standardUserDefaults objectForKey:kKeyWearNftModelInfo];
     if (tempStr) {
-        _wearNftModel = [SudNFTInfoModel.class mj_objectWithKeyValues:tempStr];
+        _wearNftModel = (SudNFTInfoModel *) [SudNFTInfoModel.class mj_objectWithKeyValues:tempStr];
     }
     _isShowedSwitchWalletAddress = [NSUserDefaults.standardUserDefaults boolForKey:kKeyTipChangeWalletAddress];
     _isShowedSwitchChain = [NSUserDefaults.standardUserDefaults boolForKey:kKeyTipChangeChain];
@@ -248,39 +246,39 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     static NSDictionary *errMsgMap = nil;
     if (!errMsgMap) {
         errMsgMap = @{
-                @"1000": @"服务异常",
-                @"1001": @"参数无效异常",
-                @"1002": @"应用信息不存在",
-                @"1003": @"应用id无效",
-                @"1004": @"应用平台无效",
-                @"1005": @"sdk令牌创建失败",
-                @"1006": @"sdk 令牌无效",
-                @"1007": @"钱包签名无效",
-                @"1008": @"钱包令牌无效",
-                @"1009": @"nft api配置不存在",
-                @"1010": @"钱包配置不存在",
-                @"1011": @"用户钱包随机数不存在",
-                @"1012": @"绑定用户钱包失败",
-                @"1013": @"nft url 未配置",
-                @"1014": @"nft不属于用户",
-                @"1015": @"nft穿戴令牌无效",
-                @"1016": @"应用接入方认证请求头无效",
-                @"1017": @"应用接入方认证签名无效",
-                @"1018": @"应用接入方请求超时",
-                @"1019": @"NFT详情令牌过期",
-                @"1020": @"钱包类型不支持",
-                @"1021": @"发送验证码失败",
-                @"1022": @"绑定用户失败",
-                @"1023": @"藏品列表获取失败",
-                @"1024": @"藏品信息获取失败",
-                @"1025": @"藏品不属于用户",
-                @"1026": @"短信验证码发送太频繁",
-                @"1027": @"手机号已被绑定",
-                @"1028": @"该手机号已被其他用户绑定",
-                @"1029": @"用户解绑失败",
-                @"1030": @"短信验证码错误",
-                @"1031": @"用户已绑定手机号",
-                @"1032": @"该手机号不是该用户绑定的"
+//                @"1000": @"服务异常",
+//                @"1001": @"参数无效异常",
+//                @"1002": @"应用信息不存在",
+//                @"1003": @"应用id无效",
+//                @"1004": @"应用平台无效",
+//                @"1005": @"sdk令牌创建失败",
+//                @"1006": @"sdk 令牌无效",
+//                @"1007": @"钱包签名无效",
+//                @"1008": @"钱包令牌无效",
+//                @"1009": @"nft api配置不存在",
+//                @"1010": @"钱包配置不存在",
+//                @"1011": @"用户钱包随机数不存在",
+//                @"1012": @"绑定用户钱包失败",
+//                @"1013": @"nft url 未配置",
+//                @"1014": @"nft不属于用户",
+//                @"1015": @"nft穿戴令牌无效",
+//                @"1016": @"应用接入方认证请求头无效",
+//                @"1017": @"应用接入方认证签名无效",
+//                @"1018": @"应用接入方请求超时",
+//                @"1019": @"NFT详情令牌过期",
+//                @"1020": @"钱包类型不支持",
+//                @"1021": @"发送验证码失败",
+//                @"1022": @"绑定用户失败",
+//                @"1023": @"藏品列表获取失败",
+//                @"1024": @"藏品信息获取失败",
+//                @"1025": @"藏品不属于用户",
+//                @"1026": @"短信验证码发送太频繁",
+//                @"1027": @"手机号已被绑定",
+//                @"1028": @"该手机号已被其他用户绑定",
+//                @"1029": @"用户解绑失败",
+//                @"1030": @"短信验证码错误",
+//                @"1031": @"用户已绑定手机号",
+//                @"1032": @"该手机号不是该用户绑定的"
         };
     }
     NSString *key = [NSString stringWithFormat:@"%@", @(errCode)];
@@ -302,7 +300,7 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     if (temp && [temp isKindOfClass:NSDictionary.class]) {
         [wearDic setDictionary:temp];
     }
-    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@",@(self.currentWalletType)];
+    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@", @(self.currentWalletType)];
     NSDictionary *currentWalletWearInfo = wearDic[currentWalletTypeKey];
     if (currentWalletWearInfo &&
             [currentWalletWearInfo[@"contractAddress"] isEqualToString:contractAddress] &&
@@ -318,7 +316,7 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
 /// @param tokenId
 - (void)useNFT:(NSString *)contractAddress tokenId:(NSString *)tokenId detailsToken:(NSString *)detailsToken add:(BOOL)add {
 
-    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@",@(self.currentWalletType)];
+    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@", @(self.currentWalletType)];
     if (add) {
         NSMutableDictionary *wearDic = NSMutableDictionary.new;
         NSMutableDictionary *currentWalletWearInfo = NSMutableDictionary.new;
@@ -344,7 +342,7 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     if (temp && [temp isKindOfClass:NSDictionary.class]) {
         [wearDic setDictionary:temp];
     }
-    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@",@(self.currentWalletType)];
+    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@", @(self.currentWalletType)];
     NSDictionary *currentWalletWearInfo = wearDic[currentWalletTypeKey];
     id token = currentWalletWearInfo[@"detailsToken"];
     if (token) {
@@ -362,7 +360,7 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
     if (temp && [temp isKindOfClass:NSDictionary.class]) {
         [wearDic setDictionary:temp];
     }
-    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@",@(walletType)];
+    NSString *currentWalletTypeKey = [NSString stringWithFormat:@"%@", @(walletType)];
     NSDictionary *currentWalletWearInfo = wearDic[currentWalletTypeKey];
     if (currentWalletWearInfo) {
         return YES;
@@ -376,5 +374,36 @@ NSString *const MY_SWITCH_TIP_STATE_CHANGED_NTF = @"MY_SWITCH_TIP_STATE_CHANGED_
         [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_BIND_TOKEN_EXPIRED_NTF object:nil userInfo:nil];
     }
 }
+
+/// 刷新钱包token
+- (void)checkIfNeedToRefreshWalletToken {
+
+    NSArray *walletList = self.walletList;
+    for (SudNFTWalletInfoModel *walletInfoModel in walletList) {
+
+        if (walletInfoModel.zoneType == 0) {
+            NSString *walletToken = [self getBindUserTokenByWalletType:walletInfoModel.type];
+            if (walletToken) {
+                // 国外
+                SudNFTRefreshWalletTokenParamModel *paramModel = SudNFTRefreshWalletTokenParamModel.new;
+                paramModel.walletToken = walletToken;
+                [SudNFT refreshWalletToken:paramModel listener:^(NSInteger errCode, NSString *errMsg, SudNFTRefreshWalletTokenModel *resp) {
+                    DDLogDebug(@"refresh wallet token,wallet type:%@ errCode:(%@), msg:%@ expire time:%@", @(walletInfoModel.type), @(errCode), errMsg, [NSDate dateWithTimeIntervalSince1970:resp.expireAtMs / 1000.0]);
+                }];
+            }
+        } else if (walletInfoModel.zoneType == 1) {
+            NSString *walletToken = [self getBindUserTokenByWalletType:walletInfoModel.type];
+            if (walletToken) {
+                // 国内
+                SudNFTRefreshCnWalletTokenParamModel *paramModel2 = SudNFTRefreshCnWalletTokenParamModel.new;
+                paramModel2.walletToken = walletToken;
+                [SudNFT refreshCnWalletToken:paramModel2 listener:^(NSInteger errCode, NSString *errMsg, SudNFTRefreshCnWalletTokenModel *resp) {
+                    DDLogDebug(@"refresh wallet token cn,wallet type:%@ errCode:(%@), msg:%@ expire time:%@", @(walletInfoModel.type), @(errCode), errMsg, [NSDate dateWithTimeIntervalSince1970:resp.expireAtMs / 1000.0]);
+                }];
+            }
+        }
+    }
+}
+
 
 @end

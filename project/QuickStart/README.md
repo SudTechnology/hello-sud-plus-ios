@@ -134,7 +134,7 @@
         // 配置加载SudMGP必须参数
         SudMGPLoadConfigModel *sudGameConfigModel = [[SudMGPLoadConfigModel alloc] init];
         // 碰碰我最强， SudMGP平台64bit游戏ID（此id与QuickStart绑定。替换Sud平台AppId之后，请修改为对应mgId）
-        sudGameConfigModel.gameId = 1461227817776713818;
+        sudGameConfigModel.mgId = 1461227817776713818;
         // 房间ID
         sudGameConfigModel.roomId = @"10000"; 
         // 游戏语言
@@ -145,7 +145,7 @@
         sudGameConfigModel.userId = @"123456";
 
         // 加载游戏
-        if (sudGameConfigModel.gameId > 0) {
+        if (sudGameConfigModel.mgId > 0) {
             [self loginGame:self.sudMGPLoadConfigModel];
         }
     }        

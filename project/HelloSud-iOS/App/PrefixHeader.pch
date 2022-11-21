@@ -68,7 +68,7 @@
 /// manager
 #import "RespUserInfoModel.h"
 #import "RespModel.h"
-#import "GuessModel.h"
+#import "../Service/Common/GuessModel.h"
 #import "RespDanmakuModel.h"
 #import "RespGiftListModel.h"
 #import "RespDiscoModel.h"

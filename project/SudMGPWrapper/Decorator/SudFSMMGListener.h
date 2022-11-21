@@ -114,6 +114,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏通知app层添当前网络连接状态 MG_COMMON_GAME_NETWORK_STATE
 - (void)onGameMGCommonGameNetworkState;
 
+/// 游戏通知app获取积分 MG_COMMON_GAME_SCORE
+- (void)onGameMGCommonGameGetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameGetScoreModel *)model;
+
+/// 游戏通知app带入积分 MG_COMMON_GAME_SET_SCORE
+- (void)onGameMGCommonGameSetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSetScoreModel *)model;
+
 /// 玩家状态变化
 /// 玩家: 加入状态  MG_COMMON_PLAYER_IN
 - (void)onPlayerMGCommonPlayerIn:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGCommonPlayerInModel *)model;

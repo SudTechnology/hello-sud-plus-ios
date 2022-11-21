@@ -9,6 +9,7 @@
 #import "TicketChooseLevelView.h"
 #import "GuessCategoryView.h"
 #import "UIImage+GIF.h"
+#import "LeagueResultPopView.h"
 
 @interface HomeHeaderReusableView ()
 @property(nonatomic, strong) BaseView *contentView;
