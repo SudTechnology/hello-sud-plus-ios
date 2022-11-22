@@ -73,12 +73,16 @@
 /// 加载嵌入游戏包
 - (void)loadGameEmbedPackage {
     [SudMGP setLogLevel:3];
-//    [[SudMGP getCfg] addEmbeddedMGPkg:1583284410804244481 mgPath:@"customrockets.rpk"];
+    [[SudMGP getCfg] addEmbeddedMGPkg:1583284410804244481 mgPath:@"rocket.rpk"];
 }
 
 - (void)configBugly {
     NSString *version = [NSString stringWithFormat:@"%@.%@", [DeviceUtil getAppVersion], [DeviceUtil getAppBuildCode]];
     [Bugly updateAppVersion:version];
+    
+    
+    
+    
     [Bugly startWithAppId:BUGLEY_APP_ID];
 }
 
