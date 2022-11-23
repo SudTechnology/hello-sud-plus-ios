@@ -73,7 +73,7 @@
 /// 加载嵌入游戏包
 - (void)loadGameEmbedPackage {
     [SudMGP setLogLevel:3];
-    [[SudMGP getCfg] addEmbeddedMGPkg:1583284410804244481 mgPath:@"rocket.rpk"];
+//    [[SudMGP getCfg] addEmbeddedMGPkg:1583284410804244481 mgPath:@"rocket.rpk"];
 }
 
 - (void)configBugly {

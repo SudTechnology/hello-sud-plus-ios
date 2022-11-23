@@ -601,6 +601,7 @@
 - (void)onGameMGCustomRocketHideGameScene:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：隐藏火箭主界面((火箭)");
 //    [self hideGameView];
+    [self destoryGame];
 }
 
 /// 展示火箭主界面((火箭) MG_CUSTOM_ROCKET_SHOW_GAME_SCENE
