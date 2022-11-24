@@ -563,6 +563,7 @@
 - (void)onGameMGCustomRocketPlayEffectFinish:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：播放效果完成(火箭) ");
     if (self.rocketEffectBlock) self.rocketEffectBlock(NO);
+    [self destoryGame];
 }
 
 /// 验证签名合规((火箭) MG_CUSTOM_ROCKET_VERIFY_SIGN
