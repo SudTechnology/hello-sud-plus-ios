@@ -117,6 +117,7 @@
 }
 
 - (void)onCloseBtn:(id)sender {
+    [self clearSelectedState];
     [DTAlertView close];
 }
 
@@ -129,6 +130,15 @@
         }
     }
     if (self.confirmBlock) self.confirmBlock(selectList);
+    [self clearSelectedState];
+}
+
+- (void)clearSelectedState {
+    for (AudioRoomMicModel *m in self.userDataList) {
+        if (m.user != nil && m.isSelected) {
+            m.isSelected = NO;
+        }
+    }
 }
 
 - (void)updateShowCoin {
