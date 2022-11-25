@@ -130,6 +130,8 @@ static NSString *APP_CUSTOM_ROCKET_FLY_CLICK = @"app_custom_rocket_fly_click";
 @property(nonatomic, assign) NSInteger isDynamicPrice;
 /// 玩法介绍
 @property(nonatomic, strong) NSString *gameIntroduce;
+/// 货币单位 金币
+@property(nonatomic, strong) NSString *monetaryUnit;
 /// 组件列表
 @property(nonatomic, strong) NSArray<RocketComponentItemModel *> *componentList;
 /// 过滤不显示的模块(默认是为空)
@@ -171,6 +173,8 @@ static NSString *APP_CUSTOM_ROCKET_FLY_CLICK = @"app_custom_rocket_fly_click";
 @property(nonatomic, strong) NSString *modelId;
 /// 可以换装：0不可以 1可以
 @property(nonatomic, assign) NSInteger isAvatar;
+/// 服务标识 全服
+@property(nonatomic, strong) NSString *serviceFlag;
 @property(nonatomic, strong) NSArray<RocketModelComponentItemModel *> *componentList;
 @end
 
