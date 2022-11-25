@@ -176,6 +176,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL hide;
 @end
 
+/// 你画我猜，你说我猜『弹幕开关』按钮
+@interface BulletScreensBtn : NSObject
+/// 按钮（false: 显示； true: 隐藏；默认为true
+@property(nonatomic, assign) BOOL hide;
+@end
+
 
 @interface GameUi : NSObject
 /// 大厅游戏位上队长标识
@@ -243,6 +249,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) GameTableImage *game_table_image;
 /// 大厅中的logo
 @property(nonatomic, strong) Logo *logo;
+/// 弹幕开关按钮 你画我猜，你说我猜
+@property(nonatomic, strong) BulletScreensBtn *bullet_screens_btn;
 @end
 
 @interface GameCfgModel : NSObject

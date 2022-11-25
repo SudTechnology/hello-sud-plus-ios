@@ -1486,6 +1486,7 @@
     m.ui.nft_avatar.hide = NO;
     m.ui.game_opening.hide = NO;
     m.ui.game_mvp.hide = NO;
+    m.ui.bullet_screens_btn.hide = NO;
     return [m mj_JSONString];
 }
 
