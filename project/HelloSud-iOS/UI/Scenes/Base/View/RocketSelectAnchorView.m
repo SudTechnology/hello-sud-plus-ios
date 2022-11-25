@@ -51,11 +51,12 @@
     }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(30);
-        make.leading.trailing.equalTo(@0);
-        make.width.equalTo(@296);
+        make.leading.equalTo(@0);
+        make.trailing.equalTo(@0);
         make.height.equalTo(@127);
-        make.bottom.equalTo(self.confirmBtn.mas_top).offset(-30);
+        make.bottom.equalTo(self.confirmBtn.mas_top).offset(-9);
     }];
+//    self.collectionView.backgroundColor = UIColor.redColor;
 }
 
 - (void)dtUpdateUI {

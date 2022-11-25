@@ -152,6 +152,7 @@
     }
     for (NSString *str in self.rocketQueue) {
 
+        DDLogDebug(@"rocket queue:%@", str);
         NSDictionary *dicData = [NSJSONSerialization JSONObjectWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
         AppCustomRocketPlayModelListModel *listModel = [RocketService decodeModel:AppCustomRocketPlayModelListModel.class FromDic:dicData];
         NSDictionary *dicOrderMaps = dicData[@"userOrderIdsMap"];
@@ -159,6 +160,7 @@
             NSArray *orderList = dicOrderMaps.allValues;
             for (NSString *order in orderList) {
                 listModel.orderId = order;
+                DDLogDebug(@"notify game play rocket order:%@", order);
                 // 给每个主播播放火箭动效
                 [self.sudFSTAPPDecorator notifyAppCustomRocketPlayModelList:listModel];
             }
@@ -486,44 +488,32 @@
 
 /// 处理火箭发送信息
 - (void)handleSendRocketInfo:(BaseRespModel *)resp userList:(NSArray<AudioRoomMicModel *> *)userList triggerFromGame:(BOOL)triggerFromGame {
-    AppCustomRocketPlayModelListModel *listModel = [RocketService decodeModel:AppCustomRocketPlayModelListModel.class FromDic:resp.srcData];
-    NSDictionary *dicOrderMaps = resp.srcData[@"userOrderIdsMap"];
-    if (dicOrderMaps) {
-        for (AudioRoomMicModel *micModel in userList) {
-            DDLogDebug(@"播放火箭给用户ID：%@", micModel.user.userID);
-            listModel.orderId = dicOrderMaps[micModel.user.userID];
-            if (triggerFromGame) {
-                // 给每个主播播放火箭动效
-                [self.sudFSTAPPDecorator notifyAppCustomRocketPlayModelList:listModel];
-            } else {
-                // 送到播放队列
-                [self playRocket:[resp.srcData mj_JSONString]];
-            }
-            // 推送礼物信息给房间其余用户
-            [self sendGiftMsgFoRoomUsers:userList resp:resp];
-        }
-    } else {
-        DDLogError(@"dicOrderMaps is empty");
-    }
+    [self sendGiftMsgForRoomUsers:userList resp:resp];
 }
 
 /// 发送火箭礼物消息给房间其它玩家
 /// @param anchorUserList
 /// @param resp
-- (void)sendGiftMsgFoRoomUsers:(NSArray<AudioRoomMicModel *> *)anchorUserList resp:(BaseRespModel *)resp {
+- (void)sendGiftMsgForRoomUsers:(NSArray<AudioRoomMicModel *> *)anchorUserList resp:(BaseRespModel *)resp {
+    NSDictionary *dicOrderMaps = resp.srcData[@"userOrderIdsMap"];
     for (AudioRoomMicModel *micModel in anchorUserList) {
         AudioUserModel *user = micModel.user;
         if (!user) {
             continue;
         }
+        id orderId = dicOrderMaps[micModel.user.userID];
+        if (!orderId) {
+            continue;
+        }
+        // 推送礼物信息给房间其余用户 拆分成单个
+        NSMutableDictionary *dicExData = [[NSMutableDictionary alloc] initWithDictionary:resp.srcData];
+        dicExData[@"userOrderIdsMap"] = @{micModel.user.userID:orderId};
         GiftModel *giftModel = [GiftService.shared giftByID:kRocketGiftID];
         AudioUserModel *toUser = user;
         RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
         giftMsg.type = giftModel.type;
-//        giftMsg.giftUrl = giftModel.giftURL;
-//        giftMsg.animationUrl = giftModel.animateURL;
         giftMsg.giftName = giftModel.giftName;
-        giftMsg.extData = [resp.srcData mj_JSONString];
+        giftMsg.extData = [dicExData mj_JSONString];
         giftMsg.skillFee = YES;// 一键发射已经扣费，这里标识发送礼物时不再扣费
         // 指令内容可能超1024限制，改用跨房指令
         [kAudioRoomService.currentRoomVC sendCrossRoomMsg:giftMsg toRoomId:kAudioRoomService.currentRoomVC.roomID isAddToShow:YES finished:nil];
