@@ -235,10 +235,12 @@
 - (void)onGameStarted {
     DDLogDebug(@"onGameStarted");
     [self closeLoadingView];
+    [[IQKeyboardManager sharedManager] setEnable:NO];
 }
 
 - (void)onGameDestroyed {
     DDLogDebug(@"onGameDestroyed");
+    [[IQKeyboardManager sharedManager] setEnable:YES];
 }
 
 /// 获取游戏View信息  【需要实现】
