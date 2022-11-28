@@ -244,6 +244,7 @@ static NSString *APP_CUSTOM_ROCKET_FLY_CLICK = @"app_custom_rocket_fly_click";
 
 /// APP_CUSTOM_ROCKET_ORDER_RECORD_LIST
 @interface AppCustomRocketOrderRecordListModel : NSObject
+@property(nonatomic, assign) NSInteger pageIndex;
 @property(nonatomic, assign) NSInteger pageCount;
 @property(nonatomic, strong) NSArray <RocketOrderRecordListItemModel *> *list;
 @end
@@ -257,6 +258,7 @@ static NSString *APP_CUSTOM_ROCKET_FLY_CLICK = @"app_custom_rocket_fly_click";
 
 /// APP_CUSTOM_ROCKET_ROOM_RECORD_LIST
 @interface AppCustomRocketRoomRecordListModel : NSObject
+@property(nonatomic, assign) NSInteger pageIndex;
 @property(nonatomic, assign) NSInteger pageCount;
 @property(nonatomic, strong) NSArray <RocketRoomRecordListItemModel *> *list;
 @end
@@ -274,6 +276,7 @@ static NSString *APP_CUSTOM_ROCKET_FLY_CLICK = @"app_custom_rocket_fly_click";
 
 /// APP_CUSTOM_ROCKET_USER_RECORD_LIST 展馆内玩家送出记录
 @interface AppCustomRocketUserRecordListModel : NSObject
+@property(nonatomic, assign) NSInteger pageIndex;
 @property(nonatomic, assign) NSInteger pageCount;
 /// 送礼人
 @property(nonatomic, strong) RocketUserInfoItemModel *fromUser;
