@@ -126,6 +126,8 @@ static NSString *APP_CUSTOM_ROCKET_FLY_CLICK = @"app_custom_rocket_fly_click";
 @property(nonatomic, assign) NSInteger maxSeat;
 /// 发射的静态价格
 @property(nonatomic, assign) CGFloat firePrice;
+/// 服务器时间戳，单位：秒
+@property(nonatomic, assign) NSTimeInterval serverTime;
 /// 发射价格是否动态开关 0:静态 1动态
 @property(nonatomic, assign) NSInteger isDynamicPrice;
 /// 玩法介绍
