@@ -316,6 +316,8 @@ static NSString *APP_CUSTOM_ROCKET_FLY_CLICK = @"app_custom_rocket_fly_click";
 @property(nonatomic, strong) NSString *modelId;
 /// 可以换装：0不可以 1可以
 @property(nonatomic, assign) NSInteger isAvatar;
+/// 服务标识
+@property(nonatomic, strong) NSString *serviceFlag;
 @property(nonatomic, strong) NSArray <RocketModelComponentItemModel *> *componentList;
 @end
 
