@@ -127,6 +127,10 @@
 @implementation Logo
 @end
 
+@implementation BulletScreensBtn
+@end
+
+
 @implementation GameUi
 
 - (LobbyPlayerCaptainIcon *)lobby_player_captain_icon {
@@ -362,6 +366,14 @@
         _logo = [[Logo alloc] init];
     }
     return _logo;
+}
+
+- (BulletScreensBtn *)bullet_screens_btn {
+    if (!_bullet_screens_btn) {
+        _bullet_screens_btn = [[BulletScreensBtn alloc] init];
+        _bullet_screens_btn.hide = true;
+    }
+    return _bullet_screens_btn;
 }
 
 @end
