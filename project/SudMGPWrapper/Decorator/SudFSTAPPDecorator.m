@@ -324,4 +324,21 @@
 - (void)notifyAppCustomRocketFlyClick {
     [self notifyStateChange:APP_CUSTOM_ROCKET_FLY_CLICK dataJson:@{}.mj_JSONString];
 }
+
+#pragma mark - 互动礼物<棒球>
+
+/// 查询排行榜数据 APP_BASEBALL_RANKING
+- (void)notifyAppBaseballRanking:(AppBaseballRankingModel *)model {
+    [self notifyStateChange:APP_BASEBALL_RANKING dataJson:model.mj_JSONString];
+}
+
+/// 查询我的排名数据 APP_BASEBALL_MY_RANKING
+- (void)notifyAppBaseballMyRanking:(AppBaseballMyRankingModel *)model {
+    [self notifyStateChange:APP_BASEBALL_MY_RANKING dataJson:model.mj_JSONString];
+}
+
+/// 排在自己前后的玩家数据 APP_BASEBALL_RANGE_INFO
+- (void)notifyAppBaseballRangeInfo:(AppBaseballRangeInfoModel *)model {
+    [self notifyStateChange:APP_BASEBALL_RANGE_INFO dataJson:model.mj_JSONString];
+}
 @end

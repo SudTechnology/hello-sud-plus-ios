@@ -1,85 +1,45 @@
 //
-// Created by kaniel on 2022/11/4.
+// Created by kaniel on 2022/12/5.
 // Copyright (c) 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
+#import "InteractiveGameRocketHandler.h"
+#import "RocketSelectAnchorView.h"
 #import "InteractiveGameManager.h"
 
-#import <SudMGP/ISudCfg.h>
-#import "RocketSelectAnchorView.h"
-#import "RocketLoadingView.h"
+@interface InteractiveGameRocketHandler ()
 
-@interface InteractiveGameManager ()
-/// ISudFSTAPP
-@property(nonatomic, strong) SudFSMMGDecorator *sudFSMMGDecorator;
-/// app To 游戏 管理类
-@property(nonatomic, strong) SudFSTAPPDecorator *sudFSTAPPDecorator;
-/// 游戏ID
-@property(nonatomic, assign) int64_t gameId;
-/// 游戏加载主view
-@property(nonatomic, strong) UIView *gameView;
-@property(nonatomic, strong) NSString *roomID;
-@property(nonatomic, strong) NSString *gameRoomID;
-@property(nonatomic, strong) NSString *language;
-@property(nonatomic, strong) RocketLoadingView *rocketLoadingView;
 @property(nonatomic, strong) NSMutableArray *rocketQueue;
+/// 游戏设置点击区域
+@property(nonatomic, strong) MGCustomRocketSetClickRect *rocketSetClickRect;
+
 /// 是否游戏已经准备完毕
 @property(nonatomic, assign) BOOL isGamePrepareOK;
 /// 是否需要展示游戏
 @property(nonatomic, assign) BOOL isShowGame;
 /// 是否需要展示游戏主界面
 @property(nonatomic, assign) BOOL showMainView;
-/// 是否加载了游戏
-@property(nonatomic, assign) BOOL isLoadedGame;
-/// 游戏设置点击区域
-@property(nonatomic, strong) MGCustomRocketSetClickRect *rocketSetClickRect;
+@property (nonatomic, copy)void(^rocketEffectBlock)(BOOL show);
 @end
 
-@implementation InteractiveGameManager
+@implementation InteractiveGameRocketHandler
 
-
-- (instancetype)init {
-
-    if (self = [super init]) {
-        [self initSudFSMMG];
+/// 展示游戏视图
+- (void)showGameView:(BOOL)showMainView {
+    self.isShowGame = YES;
+    self.showMainView = showMainView;
+    if (self.isGamePrepareOK && showMainView) {
+        [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
     }
-    return self;
 }
 
-/// 初始化sud
-- (void)initSudFSMMG {
-    self.language = [SettingsService getCurLanguageLocale];
-    self.sudFSTAPPDecorator = [[SudFSTAPPDecorator alloc] init];
-    self.sudFSMMGDecorator = [[SudFSMMGDecorator alloc] init];
-    [self.sudFSMMGDecorator setCurrentUserId:AppService.shared.login.loginUserInfo.userID];
-    [self.sudFSMMGDecorator setEventListener:self];
-    [self hanldeInitSudFSMMG];
-}
-
-- (void)hanldeInitSudFSMMG {
-
-}
-
-
-/// 加载互动游戏 火箭
-/// @param gameId
-/// @param gameView
-- (void)loadInteractiveGame:(int64_t)gameId roomId:(NSString *)roomId gameView:(UIView *)gameView {
-    self.roomID = roomId;
-    self.gameRoomID = roomId;
-    self.gameId = gameId;
-    self.gameView = gameView;
-    self.isLoadedGame = YES;
-    [self showLoadingView:gameView];
-    [self loginGame];
-}
-
-- (void)clearLoadGameState {
-    self.isLoadedGame = NO;
-}
-
-- (BOOL)isExistGame {
-    return self.isLoadedGame;
+/// 隐藏游戏视图
+- (void)hideGameView {
+    self.isShowGame = NO;
+    self.showMainView = NO;
+    if (self.isGamePrepareOK) {
+        [self.sudFSTAPPDecorator notifyAppCustomRocketHideGame];
+    }
 }
 
 /// 播放火箭
@@ -110,6 +70,7 @@
     return NO;
 }
 
+
 /// 礼物面板发送火箭
 /// @param giftModel
 /// @param toMicList
@@ -129,16 +90,6 @@
                     finished(NO);
                 }
             }];
-}
-
-/// 通知游戏关闭火箭动效
-- (void)notifyGameCloseRocketEffect {
-    [self.sudFSTAPPDecorator notifyAppCustomRocketClosePlayEffect];
-}
-
-/// 通知游戏火箭加速
-- (void)notifyGameFlyRocket {
-    [self.sudFSTAPPDecorator notifyAppCustomRocketFlyClick];
 }
 
 - (void)checkIfCanPlay {
@@ -171,209 +122,18 @@
     [self.rocketQueue removeAllObjects];
 }
 
-/// 展示游戏视图
-- (void)showGameView:(BOOL)showMainView {
-    self.gameView.hidden = NO;
-    self.isShowGame = YES;
-    self.showMainView = showMainView;
-    if (self.isGamePrepareOK && showMainView) {
-        [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
-    }
+/// 设置动效回调
+/// @param rocketEffectBlock
+- (void)setupRocketEffectBlock:(void(^)(BOOL show))rocketEffectBlock {
+    self.rocketEffectBlock = rocketEffectBlock;
 }
 
-/// 隐藏游戏视图
-- (void)hideGameView {
-    // 暂时不隐藏，由游戏隐藏自己的界面就行，穿透游戏区域
-//    self.gameView.hidden = YES;
-    self.isShowGame = NO;
-    self.showMainView = NO;
-    if (self.isGamePrepareOK) {
-        [self.sudFSTAPPDecorator notifyAppCustomRocketHideGame];
-    }
-}
-
-/// 销毁互动游戏
-- (void)destoryGame {
-    self.gameView.hidden = YES;
-    [self logoutGame];
-    [self clearLoadGameState];
-}
-
-- (void)showLoadingView:(UIView *)gameView {
-    [gameView.superview insertSubview:self.rocketLoadingView aboveSubview:gameView];
-    [self.rocketLoadingView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsZero);
-    }];
-    [self.rocketLoadingView show];
-}
-
-- (void)closeLoadingView {
-    if (_rocketLoadingView) {
-        [_rocketLoadingView close];
-        [_rocketLoadingView removeFromSuperview];
-        _rocketLoadingView = nil;
-    }
-}
-
-- (RocketLoadingView *)rocketLoadingView {
-    if (!_rocketLoadingView) {
-        _rocketLoadingView = RocketLoadingView.new;
-    }
-    return _rocketLoadingView;
-}
 
 - (NSMutableArray *)rocketQueue {
     if (!_rocketQueue) {
         _rocketQueue = NSMutableArray.new;
     }
     return _rocketQueue;
-}
-
-#pragma mark =======SudFSMMGListener=======
-
-/// 游戏开始
-- (void)onGameStarted {
-    DDLogDebug(@"onGameStarted");
-    [self closeLoadingView];
-    [[IQKeyboardManager sharedManager] setEnable:NO];
-}
-
-- (void)onGameDestroyed {
-    DDLogDebug(@"onGameDestroyed");
-    [[IQKeyboardManager sharedManager] setEnable:YES];
-}
-
-/// 获取游戏View信息  【需要实现】
-- (void)onGetGameViewInfo:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    CGFloat scale = [[UIScreen mainScreen] nativeScale];
-    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    m.view_size.width = kScreenWidth * scale;
-    m.view_size.height = kScreenHeight * scale;
-    m.view_game_rect.top = (kStatusBarHeight + 120) * scale;
-    m.view_game_rect.left = 0;
-    m.view_game_rect.bottom = (kAppSafeBottom + 150) * scale;
-    m.view_game_rect.right = 0;
-
-    m.ret_code = 0;
-    m.ret_msg = @"success";
-    [handle success:m.mj_JSONString];
-}
-
-/// 短期令牌code过期  【需要实现】
-- (void)onExpireCode:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    // 请求业务服务器刷新令牌 Code更新
-    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel *_Nonnull gameInfo) {
-        // 调用游戏接口更新令牌
-        [self.sudFSTAPPDecorator updateCode:gameInfo.code];
-        // 回调成功结果
-        [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
-    }                                      fail:^(NSError *error) {
-        [ToastUtil show:error.debugDescription];
-        // 回调失败结果
-        [handle failure:[self.sudFSMMGDecorator handleMGFailure]];
-    }];
-}
-
-/// 获取游戏Config  【需要实现】
-- (void)onGetGameCfg:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    GameCfgModel *m = [GameCfgModel defaultCfgModel];
-    m.ui.lobby_players.hide = true;
-    m.ui.nft_avatar.hide = NO;
-    m.ui.game_opening.hide = NO;
-    m.ui.game_mvp.hide = NO;
-    [handle success:[m mj_JSONString]];
-}
-
-#pragma mark =======登录 加载 游戏=======
-
-/// 游戏登录
-/// 接入方客户端 调用 接入方服务端 loginGame: 获取 短期令牌code
-/// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
-- (void)loginGame {
-    NSString *appID = AppService.shared.configModel.sudCfg.appId;
-    NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
-    if (appID.length == 0 || appKey.length == 0) {
-        [ToastUtil show:@"Game appID or appKey is empty"];
-        return;
-    }
-    WeakSelf
-    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel *_Nonnull gameInfo) {
-        [weakSelf login:weakSelf.gameView gameId:weakSelf.gameId code:gameInfo.code appID:appID appKey:appKey];
-    }                                      fail:^(NSError *error) {
-        [ToastUtil show:error.debugDescription];
-        [self clearLoadGameState];
-    }];
-}
-
-/// 退出游戏
-- (void)logoutGame {
-    // 销毁游戏
-    [self.sudFSTAPPDecorator destroyMG];
-}
-
-
-#pragma mark =======登录 加载 游戏=======
-
-/// 游戏登录
-/// 接入方客户端 调用 接入方服务端 loginGame: 获取 短期令牌code
-/// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
-- (void)login:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
-    [self initSdk:rootView gameId:gameId code:code appID:appID appKey:appKey];
-}
-
-/// 加载游戏
-- (void)initSdk:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
-    WeakSelf
-    [self logoutGame];
-    if (gameId <= 0) {
-        DDLogDebug(@"游戏ID为空，无法加载游戏:%@, currentRoomID:%@, currentGameRoomID:%@", gameId, self.roomID, self.gameRoomID);
-        [self clearLoadGameState];
-        return;
-    }
-    BOOL isTest = false;
-#if DEBUG
-    [ISudAPPD e:HsAppPreferences.shared.gameEnvType];
-    if (HsAppPreferences.shared.gameEnvType != HsGameEnvTypePro) {
-        isTest = YES;
-    }
-#endif
-    [[SudMGP getCfg] setShowCustomLoading:YES];
-    [[SudMGP getCfg] setShowLoadingGameBg:NO];
-    [SudMGP initSDK:appID appKey:appKey isTestEnv:isTest listener:^(int retCode, const NSString *retMsg) {
-        if (retCode == 0) {
-            DDLogInfo(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
-            if (weakSelf) {
-                // SudMGPSDK初始化成功 加载MG
-                NSString *userID = AppService.shared.login.loginUserInfo.userID;
-                NSString *roomID = weakSelf.gameRoomID;
-                if (userID.length == 0 || roomID.length == 0 || code.length == 0) {
-                    [ToastUtil show:NSString.dt_room_load_failed];
-                    return;
-                }
-                DDLogInfo(@"loadGame:userId:%@, gameRoomId:%@, currentRoomId:%@, gameId:%@", userID, roomID, weakSelf.roomID, @(gameId));
-                [weakSelf loadGame:userID roomId:roomID code:code mgId:gameId language:weakSelf.language fsmMG:weakSelf.sudFSMMGDecorator rootView:rootView];
-            }
-        } else {
-            /// 初始化失败, 可根据业务重试
-            DDLogError(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@", retMsg);
-            [self clearLoadGameState];
-        }
-    }];
-}
-
-/// 加载游戏MG
-/// @param userId 用户唯一ID
-/// @param roomId 房间ID
-/// @param code 游戏登录code
-/// @param mgId 游戏ID
-/// @param language 支持简体"zh-CN "    繁体"zh-TW"    英语"en-US"   马来"ms-MY"
-/// @param fsmMG 控制器
-/// @param rootView 游戏根视图
-- (void)loadGame:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t)mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView *)rootView {
-
-
-    id <ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:self.sudFSMMGDecorator rootView:rootView];
-    [self.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
 }
 
 #pragma mark - Rocket MG state callback
@@ -509,7 +269,7 @@
         }
         // 推送礼物信息给房间其余用户 拆分成单个
         NSMutableDictionary *dicExData = [[NSMutableDictionary alloc] initWithDictionary:resp.srcData];
-        dicExData[@"userOrderIdsMap"] = @{micModel.user.userID:orderId};
+        dicExData[@"userOrderIdsMap"] = @{micModel.user.userID: orderId};
         GiftModel *giftModel = [GiftService.shared giftByID:kRocketGiftID];
         AudioUserModel *toUser = user;
         RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
@@ -555,7 +315,7 @@
 - (void)onGameMGCustomRocketPlayEffectFinish:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：播放效果完成(火箭) ");
     if (self.rocketEffectBlock) self.rocketEffectBlock(NO);
-    [self destoryGame];
+    [self.interactiveGameManager destoryGame];
 }
 
 /// 验证签名合规((火箭) MG_CUSTOM_ROCKET_VERIFY_SIGN
@@ -594,7 +354,7 @@
 - (void)onGameMGCustomRocketHideGameScene:(nonnull id <ISudFSMStateHandle>)handle {
     DDLogDebug(@"mg：隐藏火箭主界面((火箭)");
 //    [self hideGameView];
-    [self destoryGame];
+    [self.interactiveGameManager destoryGame];
 }
 
 /// 展示火箭主界面((火箭) MG_CUSTOM_ROCKET_SHOW_GAME_SCENE

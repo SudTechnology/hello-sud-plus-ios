@@ -6,11 +6,13 @@
 #import <Foundation/Foundation.h>
 #import <SudMGPWrapper/SudFSMMGListener.h>
 
-/// 互动游戏管理模块（火箭游戏）
-@interface InteractiveGameManager : NSObject
-@property (nonatomic, copy)void(^rocketEffectBlock)(BOOL show);
+#define INTERACTIVE_GAME_ROCKET_ID          1583284410804244481L // 火箭游戏ID
+#define INTERACTIVE_GAME_BASEBALL_ID        1594978084509368321L // 棒球游戏ID
 
-/// 加载互动游戏 火箭
+/// 互动游戏管理模块
+@interface InteractiveGameManager : NSObject
+
+/// 加载互动游戏
 /// @param gameId gameId
 /// @param roomId roomId
 /// @param gameView gameView
@@ -28,6 +30,8 @@
 
 /// 是否已经退出游戏
 - (BOOL)isExistGame;
+
+#pragma mark - 火箭
 
 /// 播放火箭
 /// @param jsonData
@@ -48,4 +52,8 @@
 
 /// 通知游戏火箭加速
 - (void)notifyGameFlyRocket;
+
+/// 设置动效回调
+/// @param rocketEffectBlock
+- (void)setupRocketEffectBlock:(void(^)(BOOL show))rocketEffectBlock;
 @end

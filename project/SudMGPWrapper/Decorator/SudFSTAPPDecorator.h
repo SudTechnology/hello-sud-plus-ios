@@ -138,49 +138,81 @@ NS_ASSUME_NONNULL_BEGIN
 /// app返回玩家当前积分 (2022-09-26 新增)
 - (void)notifyAppCommonGameScore:(AppCommonGameScore *)appCommonGameScore;
 
-#pragma mark - 互动礼物
+#pragma mark - 互动礼物<火箭>
+
 /// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG
 - (void)notifyAppCustomRocketConfig:(AppCustomRocketConfigModel *)model;
+
 /// 拥有模型列表(火箭) APP_CUSTOM_ROCKET_MODEL_LIST
 - (void)notifyAppCustomRocketModelList:(AppCustomRocketModelListModel *)model;
+
 /// 拥有组件列表(火箭) APP_CUSTOM_ROCKET_COMPONENT_LIST
 - (void)notifyAppCustomRocketComponentList:(AppCustomRocketComponentListModel *)model;
+
 /// 获取用户的信息(火箭) APP_CUSTOM_ROCKET_USER_INFO
 - (void)notifyAppCustomRocketUserInfo:(AppCustomRocketUserInfoModel *)model;
+
 /// app推送主播信息(火箭) APP_CUSTOM_ROCKET_NEW_USER_INFO
 - (void)notifyAppCustomRocketNewUserInfo:(AppCustomRocketUserInfoModel *)model;
+
 /// 订单记录列表(火箭) APP_CUSTOM_ROCKET_ORDER_RECORD_LIST
 - (void)notifyAppCustomRocketOrderRecordList:(AppCustomRocketOrderRecordListModel *)model;
+
 /// 展馆内列表(火箭) APP_CUSTOM_ROCKET_ROOM_RECORD_LIST
 - (void)notifyAppCustomRocketRoomRecordList:(AppCustomRocketRoomRecordListModel *)model;
+
 /// 展馆内玩家送出记录(火箭) APP_CUSTOM_ROCKET_USER_RECORD_LIST
 - (void)notifyAppCustomRocketUserRecordList:(AppCustomRocketUserRecordListModel *)model;
+
 /// 设置默认位置(火箭) APP_CUSTOM_ROCKET_SET_DEFAULT_MODEL
 - (void)notifyAppCustomRocketSetDefaultSeat:(AppCustomRocketSetDefaultSeatModel *)model;
+
 /// 动态计算一键发送价格(火箭) APP_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE
 - (void)notifyAppCustomRocketDynamicFirePrice:(AppCustomRocketDynamicFirePriceModel *)model;
+
 /// 一键发送(火箭) APP_CUSTOM_ROCKET_FIRE_MODEL
 - (void)notifyAppCustomRocketFireModel:(AppCustomRocketFireModel *)model;
+
 /// 新组装模型(火箭) APP_CUSTOM_ROCKET_CREATE_MODEL
 - (void)notifyAppCustomRocketCreateModel:(AppCustomRocketCreateModel *)model;
+
 /// 更换组件(火箭) APP_CUSTOM_ROCKET_REPLACE_COMPONENT
 - (void)notifyAppCustomRocketReplaceComponent:(AppCustomRocketReplaceComponentModel *)model;
+
 /// 购买组件(火箭) APP_CUSTOM_ROCKET_BUY_COMPONENT
 - (void)notifyAppCustomRocketBuyComponent:(AppCustomRocketBuyComponentModel *)model;
+
 /// app推送播放模型(火箭) APP_CUSTOM_ROCKET_PLAY_MODEL_LIST
 - (void)notifyAppCustomRocketPlayModelList:(AppCustomRocketPlayModelListModel *)model;
+
 /// 验证签名合规(火箭) APP_CUSTOM_ROCKET_VERIFY_SIGN
 - (void)notifyAppCustomRocketVerifySign:(AppCustomRocketVerifySignModel *)model;
+
 /// app主动调起游戏显示(火箭) APP_CUSTOM_ROCKET_SHOW_GAME_SCENE
 - (void)notifyAppCustomRocketShowGame;
+
 /// app主动调起游戏隐藏(火箭) APP_CUSTOM_ROCKET_HIDE_GAME_SCENE
 - (void)notifyAppCustomRocketHideGame;
+
 /// app推送解锁组件（火箭) APP_CUSTOM_ROCKET_UNLOCK_COMPONENT
 - (void)notifyAppCustomRocketUnlockComponent:(AppCustomRocketUnlockComponent *)model;
+
 /// app推送关闭火箭播放效果(火箭) APP_CUSTOM_ROCKET_CLOSE_PLAY_EFFECT
 - (void)notifyAppCustomRocketClosePlayEffect;
+
 /// app推送火箭效果飞行点击(火箭) APP_CUSTOM_ROCKET_FLY_CLICK
 - (void)notifyAppCustomRocketFlyClick;
+
+#pragma mark - 互动礼物<棒球>
+
+/// 查询排行榜数据 APP_BASEBALL_RANKING
+- (void)notifyAppBaseballRanking:(AppBaseballRankingModel *)model;
+
+/// 查询我的排名数据 APP_BASEBALL_MY_RANKING
+- (void)notifyAppBaseballMyRanking:(AppBaseballMyRankingModel *)model;
+
+/// 排在自己前后的玩家数据 APP_BASEBALL_RANGE_INFO
+- (void)notifyAppBaseballRangeInfo:(AppBaseballRangeInfoModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

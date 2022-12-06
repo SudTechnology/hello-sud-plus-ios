@@ -140,6 +140,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏通知app带入积分 MG_COMMON_GAME_SET_SCORE
 - (void)onGameMGCommonGameSetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSetScoreModel *)model;
 
+#pragma mark - 互动礼物<火箭>
+
 /// 礼物配置文件(火箭) MG_CUSTOM_ROCKET_CONFIG
 - (void)onGameMGCustomRocketConfig:(nonnull id <ISudFSMStateHandle>)handle;
 
@@ -205,6 +207,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 火箭的可点击区域((火箭) MG_CUSTOM_ROCKET_SET_CLICK_RECT
 - (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSetClickRect *)model;
+
+#pragma mark - 互动礼物<棒球>
+
+/// 查询排行榜数据(棒球) MG_BASEBALL_RANKING
+- (void)onGameMGBaseballRanking:(nonnull id <ISudFSMStateHandle>)handle model:(MGBaseballRanking *)model;
+
+/// 查询我的排名(棒球) MG_BASEBALL_MY_RANKING
+- (void)onGameMGBaseballMyRanking:(nonnull id <ISudFSMStateHandle>)handle model:(MGBaseballMyRanking *)model;
+
+/// 查询当前距离我的前后玩家数据(棒球) MG_BASEBALL_RANGE_INFO
+- (void)onGameMGBaseballRangeInfo:(nonnull id <ISudFSMStateHandle>)handle model:(MGBaseballRangeInfo *)model;
 
 #pragma mark - 玩家状态变化
 

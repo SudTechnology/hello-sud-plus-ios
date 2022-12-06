@@ -449,7 +449,7 @@
             [self.listener onGameMGCustomRocketShowGameScene:handle];
             return;
         }
-    }else if ([state isEqualToString:MG_CUSTOM_ROCKET_HIDE_GAME_SCENE]) {
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_HIDE_GAME_SCENE]) {
         /// 隐藏火箭主界面((火箭)
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketHideGameScene:)]) {
             [self.listener onGameMGCustomRocketHideGameScene:handle];
@@ -467,6 +467,27 @@
         MGCustomRocketSetClickRect *m = [MGCustomRocketSetClickRect mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketSetClickRect:model:)]) {
             [self.listener onGameMGCustomRocketSetClickRect:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_RANKING]) {
+        /// 查询排行榜数据(棒球)
+        MGBaseballRanking *m = [MGBaseballRanking mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballRanking:model:)]) {
+            [self.listener onGameMGBaseballRanking:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_MY_RANKING]) {
+        /// 查询我的排名(棒球)
+        MGBaseballMyRanking *m = [MGBaseballMyRanking mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballMyRanking:model:)]) {
+            [self.listener onGameMGBaseballMyRanking:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_RANGE_INFO]) {
+        /// 查询当前距离我的前后玩家数据(棒球)
+        MGBaseballRanking *m = [MGBaseballRanking mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballRangeInfo:model:)]) {
+            [self.listener onGameMGBaseballRangeInfo:handle model:m];
             return;
         }
     } else {
