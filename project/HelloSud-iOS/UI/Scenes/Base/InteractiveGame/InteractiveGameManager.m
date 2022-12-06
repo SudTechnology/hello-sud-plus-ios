@@ -7,7 +7,7 @@
 
 #import <SudMGP/ISudCfg.h>
 #import "RocketSelectAnchorView.h"
-#import "RocketLoadingView.h"
+#import "InteractiveGameLoadingView.h"
 #import "handler/InteractiveGameBaseHandler.h"
 #import "Handler/Baseball/InteractiveGameBaseballHandler.h"
 #import "Handler/Rocket/InteractiveGameRocketHandler.h"
@@ -64,8 +64,9 @@
     self.gameId = gameId;
     self.gameView = gameView;
     self.isLoadedGame = YES;
-    [self.baseHandler showLoadingView:gameView];
+    gameView.hidden = NO;
     [self setupHandler:gameId];
+    [self.baseHandler showLoadingView:gameView];
     [self loginGame];
 }
 
@@ -86,6 +87,7 @@
         self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
         self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
     }
+    self.baseHandler.interactiveGameManager = self;
 
 }
 

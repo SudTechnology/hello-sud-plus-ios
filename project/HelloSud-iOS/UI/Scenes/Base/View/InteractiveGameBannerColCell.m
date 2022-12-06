@@ -58,6 +58,7 @@
         _gameImageView = [[UIImageView alloc] init];
         _gameImageView.contentMode = UIViewContentModeScaleAspectFill;
         _gameImageView.clipsToBounds = YES;
+        _gameImageView.userInteractionEnabled = YES;
 //        [_gameImageView dt_cornerRadius:8];
     }
     return _gameImageView;

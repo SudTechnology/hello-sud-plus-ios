@@ -11,6 +11,8 @@
 
 /// 互动游戏管理模块
 @interface InteractiveGameManager : NSObject
+/// 游戏ID
+@property(nonatomic, assign, readonly) int64_t gameId;
 
 /// 加载互动游戏
 /// @param gameId gameId

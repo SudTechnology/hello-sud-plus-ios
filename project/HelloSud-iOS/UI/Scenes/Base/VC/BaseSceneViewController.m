@@ -98,7 +98,7 @@
 - (void)checkIfNeedToOpenRocket {
     id temp = self.enterModel.dicExtData[@"isOpenRocket"];
     if (temp) {
-        [self showInteractiveGame:INTERACTIVE_GAME_ROCKET_ID showMainView:NO];
+        [self showInteractiveGame:INTERACTIVE_GAME_ROCKET_ID showMainView:YES];
     }
 }
 
@@ -342,7 +342,7 @@
 
     self.interactiveGameEnterView.clickBlock = ^(InteractiveGameBannerModel *model){
         weakSelf.interactiveGameView.hidden = NO;
-        [weakSelf showInteractiveGame:model.gameId showMainView:NO];
+        [weakSelf showInteractiveGame:model.gameId showMainView:YES];
     };
 
 }

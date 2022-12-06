@@ -373,7 +373,7 @@
 		6CE7271F292B82FF0023D5BE /* RocketSelectAnchorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE7271C292B82FE0023D5BE /* RocketSelectAnchorView.m */; };
 		6CE72720292B82FF0023D5BE /* RocketSelectPopUserColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE7271E292B82FE0023D5BE /* RocketSelectPopUserColCell.m */; };
 		6CE72724292B83190023D5BE /* InteractiveGameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72723292B83190023D5BE /* InteractiveGameManager.m */; };
-		6CE7272B292B83870023D5BE /* RocketLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72725292B83860023D5BE /* RocketLoadingView.m */; };
+		6CE7272B292B83870023D5BE /* InteractiveGameLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72725292B83860023D5BE /* InteractiveGameLoadingView.m */; };
 		6CE7272C292B83870023D5BE /* HomeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72727292B83860023D5BE /* HomeBannerView.m */; };
 		6CE7272D292B83870023D5BE /* HomeBannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE7272A292B83870023D5BE /* HomeBannerCollectionViewCell.m */; };
 		6CE72730292B83C90023D5BE /* GiftRocketEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE7272E292B83C90023D5BE /* GiftRocketEnterView.m */; };
@@ -1112,11 +1112,11 @@
 		6CE7271E292B82FE0023D5BE /* RocketSelectPopUserColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketSelectPopUserColCell.m; sourceTree = "<group>"; };
 		6CE72722292B83190023D5BE /* InteractiveGameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractiveGameManager.h; sourceTree = "<group>"; };
 		6CE72723292B83190023D5BE /* InteractiveGameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveGameManager.m; sourceTree = "<group>"; };
-		6CE72725292B83860023D5BE /* RocketLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketLoadingView.m; sourceTree = "<group>"; };
+		6CE72725292B83860023D5BE /* InteractiveGameLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveGameLoadingView.m; sourceTree = "<group>"; };
 		6CE72726292B83860023D5BE /* HomeBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerView.h; sourceTree = "<group>"; };
 		6CE72727292B83860023D5BE /* HomeBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerView.m; sourceTree = "<group>"; };
 		6CE72728292B83870023D5BE /* HomeBannerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerCollectionViewCell.h; sourceTree = "<group>"; };
-		6CE72729292B83870023D5BE /* RocketLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketLoadingView.h; sourceTree = "<group>"; };
+		6CE72729292B83870023D5BE /* InteractiveGameLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractiveGameLoadingView.h; sourceTree = "<group>"; };
 		6CE7272A292B83870023D5BE /* HomeBannerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerCollectionViewCell.m; sourceTree = "<group>"; };
 		6CE7272E292B83C90023D5BE /* GiftRocketEnterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftRocketEnterView.m; sourceTree = "<group>"; };
 		6CE7272F292B83C90023D5BE /* GiftRocketEnterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftRocketEnterView.h; sourceTree = "<group>"; };
@@ -1556,8 +1556,8 @@
 				6CE7272A292B83870023D5BE /* HomeBannerCollectionViewCell.m */,
 				6CE72726292B83860023D5BE /* HomeBannerView.h */,
 				6CE72727292B83860023D5BE /* HomeBannerView.m */,
-				6CE72729292B83870023D5BE /* RocketLoadingView.h */,
-				6CE72725292B83860023D5BE /* RocketLoadingView.m */,
+				6CE72729292B83870023D5BE /* InteractiveGameLoadingView.h */,
+				6CE72725292B83860023D5BE /* InteractiveGameLoadingView.m */,
 				4455ACF627EAC658001516EE /* SearchHeaderView.h */,
 				4455ACF227EAC658001516EE /* SearchHeaderView.m */,
 				4455ACF727EAC658001516EE /* HomeHeaderReusableView.h */,
@@ -3580,7 +3580,7 @@
 				BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */,
 				6CE72720292B82FF0023D5BE /* RocketSelectPopUserColCell.m in Sources */,
 				6CC3E79928C1BBB800AA934B /* ForeignWalletSelectPopView.m in Sources */,
-				6CE7272B292B83870023D5BE /* RocketLoadingView.m in Sources */,
+				6CE7272B292B83870023D5BE /* InteractiveGameLoadingView.m in Sources */,
 				BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */,
 				6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */,
 				BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */,

@@ -4,11 +4,12 @@
 //
 
 #import "InteractiveGameBaseHandler.h"
-#import "RocketLoadingView.h"
+#import "InteractiveGameLoadingView.h"
+#import "InteractiveGameManager.h"
 
 @interface InteractiveGameBaseHandler()
 
-@property(nonatomic, strong) RocketLoadingView *rocketLoadingView;
+@property(nonatomic, strong) InteractiveGameLoadingView *rocketLoadingView;
 @end
 
 @implementation InteractiveGameBaseHandler
@@ -18,7 +19,11 @@
     [self.rocketLoadingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
-    [self.rocketLoadingView show];
+    NSString *title = @"正在前往火箭台...";
+    if (self.interactiveGameManager.gameId == INTERACTIVE_GAME_BASEBALL_ID) {
+        title = @"正在前往棒球...";
+    }
+    [self.rocketLoadingView showWithTitle:title];
 }
 
 - (void)closeLoadingView {
@@ -29,9 +34,9 @@
     }
 }
 
-- (RocketLoadingView *)rocketLoadingView {
+- (InteractiveGameLoadingView *)rocketLoadingView {
     if (!_rocketLoadingView) {
-        _rocketLoadingView = RocketLoadingView.new;
+        _rocketLoadingView = InteractiveGameLoadingView.new;
     }
     return _rocketLoadingView;
 }

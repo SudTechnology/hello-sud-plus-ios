@@ -5,8 +5,8 @@
 
 #import <Foundation/Foundation.h>
 
-/// 火箭loading视图
-@interface RocketLoadingView : BaseView
-- (void)show;
+/// 互动礼物loading视图
+@interface InteractiveGameLoadingView : BaseView
+- (void)showWithTitle:(NSString *)title;
 - (void)close;
 @end
