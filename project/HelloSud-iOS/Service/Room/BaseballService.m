@@ -50,4 +50,17 @@
         }
     }                         failure:nil];
 }
+
+/// 打棒球
+/// @param num 个数
+/// @param roomId roomId
+/// @param finished finished
++ (void)reqPlayBaseballWithNum:(NSInteger)num roomId:(NSString *)roomId finished:(void (^)(BaseRespModel *respModel))finished {
+    NSDictionary *dicParam = @{@"number": @(num), @"roomId": roomId};
+    [HSHttpService postRequestWithURL:kGameURL(@"baseball/play/v1") param:dicParam respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (finished) {
+            finished(resp);
+        }
+    }                         failure:nil];
+}
 @end

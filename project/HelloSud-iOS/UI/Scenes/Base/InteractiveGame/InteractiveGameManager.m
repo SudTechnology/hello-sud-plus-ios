@@ -111,10 +111,7 @@
 /// @param clickPoint 点击事件点
 /// @return
 - (BOOL)checkIfPointInGameClickRect:(CGPoint)clickPoint {
-    if ([self.baseHandler isKindOfClass:[InteractiveGameRocketHandler class]]) {
-        return [(InteractiveGameRocketHandler *) self.baseHandler checkIfPointInGameClickRect:clickPoint];
-    }
-    return NO;
+    return [self.baseHandler checkIfPointInGameClickRect:clickPoint];
 }
 
 /// 礼物面板发送火箭
@@ -147,9 +144,7 @@
 /// 展示游戏视图
 - (void)showGameView:(BOOL)showMainView {
     self.gameView.hidden = NO;
-    if ([self.baseHandler isKindOfClass:[InteractiveGameRocketHandler class]]) {
-        [(InteractiveGameRocketHandler *) self.baseHandler showGameView:showMainView];
-    }
+    [self.baseHandler showGameView:showMainView];
 }
 
 /// 销毁互动游戏

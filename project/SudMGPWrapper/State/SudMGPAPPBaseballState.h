@@ -15,7 +15,10 @@ static NSString *APP_BASEBALL_RANKING = @"app_baseball_ranking";
 static NSString *APP_BASEBALL_MY_RANKING = @"app_baseball_my_ranking";
 /// 排在自己前后的玩家数据(棒球)
 static NSString *APP_BASEBALL_RANGE_INFO = @"app_baseball_range_info";
-
+/// app主动调起主界面(棒球)
+static NSString *APP_BASEBALL_SHOW_GAME_SCENE = @"app_baseball_show_game_scene";
+/// app主动隐藏主界面(棒球)
+static NSString *APP_BASEBALL_HIDE_GAME_SCENE = @"app_baseball_hide_game_scene";
 
 #pragma mark - 互动礼物棒球 model
 

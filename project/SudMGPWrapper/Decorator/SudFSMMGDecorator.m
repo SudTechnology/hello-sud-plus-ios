@@ -464,7 +464,7 @@
         }
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SET_CLICK_RECT]) {
         /// 设置点击区域((火箭)
-        MGCustomRocketSetClickRect *m = [MGCustomRocketSetClickRect mj_objectWithKeyValues:dataJson];
+        MGCustomGameSetClickRect *m = [MGCustomGameSetClickRect mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketSetClickRect:model:)]) {
             [self.listener onGameMGCustomRocketSetClickRect:handle model:m];
             return;
@@ -490,11 +490,36 @@
             [self.listener onGameMGBaseballRangeInfo:handle model:m];
             return;
         }
+    } else if ([state isEqualToString:MG_BASEBALL_PREPARE_FINISH]) {
+        /// 前期准备完成((棒球)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballPrepareFinish:)]) {
+            [self.listener onGameMGBaseballPrepareFinish:handle];
+            return;
+        }
+
+    } else if ([state isEqualToString:MG_BASEBALL_SHOW_GAME_SCENE]) {
+        /// 显示主界面((棒球)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballShowGameScene:)]) {
+            [self.listener onGameMGBaseballShowGameScene:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_HIDE_GAME_SCENE]) {
+        /// 隐藏主界面((棒球)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballHideGameScene:)]) {
+            [self.listener onGameMGBaseballHideGameScene:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_SET_CLICK_RECT]) {
+        /// 设置点击区域((棒球)
+        MGCustomGameSetClickRect *m = [MGCustomGameSetClickRect mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballSetClickRect:model:)]) {
+            [self.listener onGameMGBaseballSetClickRect:handle model:m];
+            return;
+        }
     } else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
     }
-
     [handle success:[self handleMGSuccess]];
 }
 

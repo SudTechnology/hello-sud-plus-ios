@@ -22,6 +22,15 @@ static NSString *MG_BASEBALL_RANKING = @"mg_baseball_ranking";
 static NSString *MG_BASEBALL_MY_RANKING = @"mg_baseball_my_ranking";
 /// 查询当前距离我的前后玩家数据
 static NSString *MG_BASEBALL_RANGE_INFO = @"mg_baseball_range_info";
+/// 设置app提供给游戏可点击区域
+static NSString *MG_BASEBALL_SET_CLICK_RECT = @"mg_baseball_set_click_rect";
+/// 前期准备完成
+static NSString *MG_BASEBALL_PREPARE_FINISH = @"mg_baseball_prepare_finish";
+/// 主界面已显示
+static NSString *MG_BASEBALL_SHOW_GAME_SCENE = @"mg_baseball_show_game_scene";
+/// 主界面已隐藏
+static NSString *MG_BASEBALL_HIDE_GAME_SCENE = @"mg_baseball_hide_game_scene";
+
 
 #pragma mark - MG_BASEBALL_RANKING
 @interface MGBaseballRanking : NSObject

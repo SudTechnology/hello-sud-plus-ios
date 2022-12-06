@@ -18,6 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 查询排在自己前后的玩家数据
 + (void)reqRangeInfo:(MGBaseballRangeInfo *)reqModel finished:(void (^)(AppBaseballRangeInfoModel *respModel))finished;
+
+/// 打棒球
+/// @param num 个数
+/// @param roomId roomId
+/// @param finished finished
++ (void)reqPlayBaseballWithNum:(NSInteger)num roomId:(NSString *)roomId finished:(void (^)(BaseRespModel *respModel))finished;
 @end
 
 NS_ASSUME_NONNULL_END

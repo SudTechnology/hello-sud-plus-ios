@@ -213,6 +213,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 排在自己前后的玩家数据 APP_BASEBALL_RANGE_INFO
 - (void)notifyAppBaseballRangeInfo:(AppBaseballRangeInfoModel *)model;
+
+/// app主动调起主界面 APP_BASEBALL_SHOW_GAME_SCENE
+- (void)notifyAppBaseballShowGameScene;
+
+/// app主动隐藏主界面 APP_BASEBALL_HIDE_GAME_SCENE
+- (void)notifyAppBaseballHideGameScene;
 @end
 
 NS_ASSUME_NONNULL_END

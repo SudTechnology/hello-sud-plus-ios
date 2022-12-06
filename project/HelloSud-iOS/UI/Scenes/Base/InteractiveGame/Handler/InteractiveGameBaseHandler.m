@@ -10,9 +10,25 @@
 @interface InteractiveGameBaseHandler()
 
 @property(nonatomic, strong) InteractiveGameLoadingView *rocketLoadingView;
+
 @end
 
 @implementation InteractiveGameBaseHandler
+
+/// 展示游戏视图
+- (void)showGameView:(BOOL)showMainView {
+    self.isShowGame = YES;
+    self.showMainView = showMainView;
+    if (self.isGamePrepareOK && showMainView) {
+        [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
+    }
+}
+
+/// 隐藏游戏视图
+- (void)hideGameView {
+    self.isShowGame = NO;
+    self.showMainView = NO;
+}
 
 - (void)showLoadingView:(UIView *)gameView {
     [gameView.superview insertSubview:self.rocketLoadingView aboveSubview:gameView];
@@ -24,6 +40,27 @@
         title = @"正在前往棒球...";
     }
     [self.rocketLoadingView showWithTitle:title];
+}
+
+/// 检测点是否在游戏可点击区域，如果游戏没有指定，则默认游戏需要响应该点，返回YES;否则按照游戏指定区域判断是否在区域内，在则返回YES,不在则返回NO
+/// @param clickPoint 点击事件点
+/// @return
+- (BOOL)checkIfPointInGameClickRect:(CGPoint)clickPoint {
+    if (!self.gameClickRect || self.gameClickRect.list.count == 0) {
+        return YES;
+    }
+    CGFloat scale = 1;
+    if (UIScreen.mainScreen.nativeScale > 0) {
+        scale = UIScreen.mainScreen.nativeScale;
+    }
+
+    for (GameSetClickRectItem *item in self.gameClickRect.list) {
+        CGRect rect = CGRectMake(item.x / scale, item.y / scale, item.width / scale, item.height / scale);
+        if (CGRectContainsPoint(rect, clickPoint)) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void)closeLoadingView {

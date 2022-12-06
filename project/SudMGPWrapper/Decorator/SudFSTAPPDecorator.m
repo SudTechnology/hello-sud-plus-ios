@@ -341,4 +341,14 @@
 - (void)notifyAppBaseballRangeInfo:(AppBaseballRangeInfoModel *)model {
     [self notifyStateChange:APP_BASEBALL_RANGE_INFO dataJson:model.mj_JSONString];
 }
+
+/// app主动调起主界面 APP_BASEBALL_SHOW_GAME_SCENE
+- (void)notifyAppBaseballShowGameScene {
+    [self notifyStateChange:APP_BASEBALL_SHOW_GAME_SCENE dataJson:@{}.mj_JSONString];
+}
+
+/// app主动隐藏主界面 APP_BASEBALL_HIDE_GAME_SCENE
+- (void)notifyAppBaseballHideGameScene {
+    [self notifyStateChange:APP_BASEBALL_HIDE_GAME_SCENE dataJson:@{}.mj_JSONString];
+}
 @end

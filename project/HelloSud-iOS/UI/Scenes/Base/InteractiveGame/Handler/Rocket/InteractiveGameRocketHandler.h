@@ -11,10 +11,6 @@
 /// 播放火箭
 /// @param jsonData
 - (void)playRocket:(NSString *)jsonData;
-/// 检测点是否在游戏可点击区域，如果游戏没有指定，则默认游戏需要响应该点，返回YES;否则按照游戏指定区域判断是否在区域内，在则返回YES,不在则返回NO
-/// @param clickPoint 点击事件点
-/// @return
-- (BOOL)checkIfPointInGameClickRect:(CGPoint)clickPoint;
 
 /// 礼物面板发送火箭
 /// @param giftModel
