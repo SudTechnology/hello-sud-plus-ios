@@ -322,6 +322,13 @@
             [self.listener onGameMGCommonGameSetScore:handle model:m];
             return;
         }
+    } else if ([state isEqualToString:MG_COMMON_GAME_CREATE_ORDER]) {
+        /// 创建订单 MG_COMMON_GAME_CREATE_ORDER
+        MgCommonGameCreateOrderModel *m = [MgCommonGameCreateOrderModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameCreateOrder:model:)]) {
+            [self.listener onGameMGCommonGameCreateOrder:handle model:m];
+            return;
+        }
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_CONFIG]) {
         /// 礼物配置文件(火箭)
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketConfig:)]) {
@@ -485,7 +492,7 @@
         }
     } else if ([state isEqualToString:MG_BASEBALL_RANGE_INFO]) {
         /// 查询当前距离我的前后玩家数据(棒球)
-        MGBaseballRanking *m = [MGBaseballRanking mj_objectWithKeyValues:dataJson];
+        MGBaseballRangeInfo *m = [MGBaseballRangeInfo mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballRangeInfo:model:)]) {
             [self.listener onGameMGBaseballRangeInfo:handle model:m];
             return;
