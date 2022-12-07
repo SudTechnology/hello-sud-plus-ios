@@ -24,6 +24,7 @@
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+    [self.collectionView dt_cornerRadius:8];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.bottom.equalTo(@0);
     }];
