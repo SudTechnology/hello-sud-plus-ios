@@ -1,5 +1,5 @@
 //
-//  SudMGPWrapperHeader.h
+//  SudMGPWrapper.h
 //  HelloSud-iOS
 //
 // Copyright © Sud.Tech (https://sud.tech)
@@ -7,8 +7,8 @@
 //  Created by Mary on 2022/2/19.
 //
 
-#ifndef SudMGPWrapperHeader_h
-#define SudMGPWrapperHeader_h
+#ifndef SudMGPWrapper_h
+#define SudMGPWrapper_h
 
 #import "SudMGPAPPState.h"
 #import "SudMGPMGState.h"
@@ -20,4 +20,4 @@
 #import "GameCfgModel.h"
 #import "MGPlayerStateMapModel.h"
 
-#endif /* SudMGPWrapperHeader_h */
+#endif /* SudMGPWrapper_h */

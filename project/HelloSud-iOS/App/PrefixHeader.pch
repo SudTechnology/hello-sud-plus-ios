@@ -57,7 +57,7 @@
 #import "WebpImageCacheService.h"
 
 /// SudMGPWrapper
-#import <SudMGPWrapper/SudMGPWrapperHeader.h>
+#import <SudMGPWrapper/SudMGPWrapper.h>
 
 /// Page
 #import "CommonRoomModelHeader.h"
