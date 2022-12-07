@@ -32,7 +32,7 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-    self.backgroundColor = UIColor.redColor;
+    
 }
 
 - (void)showBanner:(NSArray <BaseModel *> *)bannerList {
