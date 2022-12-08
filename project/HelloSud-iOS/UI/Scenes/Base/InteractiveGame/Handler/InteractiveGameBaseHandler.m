@@ -19,13 +19,10 @@
 - (void)showGameView:(BOOL)showMainView {
     self.isShowGame = YES;
     self.showMainView = showMainView;
-    if (self.isGamePrepareOK && showMainView) {
-        [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
-    }
 }
 
 /// 隐藏游戏视图
-- (void)hideGameView {
+- (void)hideGameView:(BOOL)notifyGame {
     self.isShowGame = NO;
     self.showMainView = NO;
 }

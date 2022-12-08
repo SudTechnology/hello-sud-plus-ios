@@ -17,9 +17,6 @@
 /// @param toMicList
 - (void)sendRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList finished:(void (^)(BOOL success))finished;
 
-/// 展示游戏视图
-- (void)showGameView:(BOOL)showMainView;
-
 /// 设置动效回调
 /// @param rocketEffectBlock
 - (void)setupRocketEffectBlock:(void(^)(BOOL show))rocketEffectBlock;

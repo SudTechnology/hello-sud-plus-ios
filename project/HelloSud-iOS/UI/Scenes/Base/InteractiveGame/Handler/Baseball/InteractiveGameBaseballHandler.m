@@ -8,10 +8,20 @@
 
 @implementation InteractiveGameBaseballHandler
 
-- (void)hideGameView {
-    [super hideGameView];
-    if (self.isGamePrepareOK) {
+- (void)hideGameView:(BOOL)notifyGame {
+    [super hideGameView:notifyGame];
+    if (self.isGamePrepareOK && notifyGame) {
         [self.sudFSTAPPDecorator notifyAppBaseballHideGameScene];
+    }
+}
+
+/// 展示游戏视图
+- (void)showGameView:(BOOL)showMainView {
+    [super showGameView:showMainView];
+    self.isShowGame = YES;
+    self.showMainView = showMainView;
+    if (self.isGamePrepareOK && showMainView) {
+        [self.sudFSTAPPDecorator notifyAppBaseballShowGameScene];
     }
 }
 
@@ -56,7 +66,7 @@
 /// 隐藏主界面(棒球) MG_BASEBALL_HIDE_GAME_SCENE
 - (void)onGameMGBaseballHideGameScene:(nonnull id <ISudFSMStateHandle>)handle{
     DDLogDebug(@"mg：隐藏棒球主界面");
-    [self hideGameView];
+    [self hideGameView:NO];
 //    [self.interactiveGameManager destoryGame];
 }
 

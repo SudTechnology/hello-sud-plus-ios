@@ -27,7 +27,7 @@
 - (void)showGameView:(BOOL)showMainView;
 
 /// 隐藏游戏视图
-- (void)hideGameView;
+- (void)hideGameView:(BOOL)notifyGame;
 
 /// 展示loading视图
 - (void)showLoadingView:(UIView *)gameView;

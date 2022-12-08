@@ -18,10 +18,20 @@
 
 @implementation InteractiveGameRocketHandler
 
-- (void)hideGameView {
-    [super hideGameView];
-    if (self.isGamePrepareOK) {
+- (void)hideGameView:(BOOL)notifyGame {
+    [super hideGameView:notifyGame];
+    if (self.isGamePrepareOK && notifyGame) {
         [self.sudFSTAPPDecorator notifyAppCustomRocketHideGame];
+    }
+}
+
+/// 展示游戏视图
+- (void)showGameView:(BOOL)showMainView {
+    [super showGameView:showMainView];
+    self.isShowGame = YES;
+    self.showMainView = showMainView;
+    if (self.isGamePrepareOK && showMainView) {
+        [self.sudFSTAPPDecorator notifyAppCustomRocketShowGame];
     }
 }
 
