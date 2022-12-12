@@ -219,6 +219,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// app主动隐藏主界面 APP_BASEBALL_HIDE_GAME_SCENE
 - (void)notifyAppBaseballHideGameScene;
+
+/// 排在自己前后的玩家数据 APP_BASEBALL_TEXT_CONFIG
+- (void)notifyAppBaseballTextConfig:(AppBaseballTextConfigModel *)model;
+
 @end
 
 NS_ASSUME_NONNULL_END

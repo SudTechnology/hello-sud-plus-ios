@@ -22,3 +22,6 @@
 
 @implementation AppBaseballRangeInfoModel
 @end
+
+@implementation AppBaseballTextConfigModel
+@end

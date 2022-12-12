@@ -351,4 +351,9 @@
 - (void)notifyAppBaseballHideGameScene {
     [self notifyStateChange:APP_BASEBALL_HIDE_GAME_SCENE dataJson:@{}.mj_JSONString];
 }
+
+/// 排在自己前后的玩家数据 APP_BASEBALL_TEXT_CONFIG
+- (void)notifyAppBaseballTextConfig:(AppBaseballTextConfigModel *)model {
+    [self notifyStateChange:APP_BASEBALL_TEXT_CONFIG dataJson:model.mj_JSONString];
+}
 @end

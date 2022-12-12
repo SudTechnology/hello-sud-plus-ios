@@ -30,6 +30,8 @@ static NSString *MG_BASEBALL_PREPARE_FINISH = @"mg_baseball_prepare_finish";
 static NSString *MG_BASEBALL_SHOW_GAME_SCENE = @"mg_baseball_show_game_scene";
 /// 主界面已隐藏
 static NSString *MG_BASEBALL_HIDE_GAME_SCENE = @"mg_baseball_hide_game_scene";
+/// 获取配置
+static NSString *MG_BASEBALL_TEXT_CONFIG = @"mg_baseball_text_config";
 
 
 #pragma mark - MG_BASEBALL_RANKING

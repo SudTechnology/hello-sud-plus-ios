@@ -19,6 +19,8 @@ static NSString *APP_BASEBALL_RANGE_INFO = @"app_baseball_range_info";
 static NSString *APP_BASEBALL_SHOW_GAME_SCENE = @"app_baseball_show_game_scene";
 /// app主动隐藏主界面(棒球)
 static NSString *APP_BASEBALL_HIDE_GAME_SCENE = @"app_baseball_hide_game_scene";
+/// 获取配置(棒球)
+static NSString *APP_BASEBALL_TEXT_CONFIG = @"app_baseball_text_config";
 
 #pragma mark - 互动礼物棒球 model
 
@@ -53,5 +55,13 @@ static NSString *APP_BASEBALL_HIDE_GAME_SCENE = @"app_baseball_hide_game_scene";
 @property(nonatomic, strong) AppBaseballRankingItemModel *before;
 /// 后一名
 @property(nonatomic, strong) AppBaseballRankingItemModel *after;
+@end
+
+/// APP_BASEBALL_TEXT_CONFIG 文本配置
+@interface AppBaseballTextConfigModel : NSObject
+/// 模式1
+@property(nonatomic, strong) NSString *mode1;
+/// 模式2
+@property(nonatomic, strong) NSString *mode2;
 @end
 

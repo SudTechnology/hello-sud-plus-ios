@@ -88,4 +88,12 @@
         [DTAlertView close];
     }];
 }
+
+
+/// 获取文本配置(棒球) MG_BASEBALL_TEXT_CONFIG
+- (void)onGameMGBaseballTextConfig:(nonnull id <ISudFSMStateHandle>)handle {
+    [BaseballService reqTextConfigWithFinished:^(AppBaseballTextConfigModel *respModel) {
+        [self.sudFSTAPPDecorator notifyAppBaseballTextConfig:respModel];
+    }];
+}
 @end

@@ -523,6 +523,13 @@
             [self.listener onGameMGBaseballSetClickRect:handle model:m];
             return;
         }
+    } else if ([state isEqualToString:MG_BASEBALL_TEXT_CONFIG]) {
+        /// 获取配置((棒球)
+        MGCustomGameSetClickRect *m = [MGCustomGameSetClickRect mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballTextConfig:)]) {
+            [self.listener onGameMGBaseballTextConfig:handle];
+            return;
+        }
     } else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);

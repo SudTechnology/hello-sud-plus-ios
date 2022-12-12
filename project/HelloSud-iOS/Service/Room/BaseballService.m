@@ -63,4 +63,15 @@
         }
     }                         failure:nil];
 }
+
+/// 获取文本配置
++ (void)reqTextConfigWithFinished:(void (^)(AppBaseballTextConfigModel *respModel))finished {
+    NSDictionary *dicParam = @{};
+    [HSHttpService postRequestWithURL:kGameURL(@"baseball/text-config/v1") param:dicParam respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        AppBaseballTextConfigModel *model = [self decodeModel:AppBaseballTextConfigModel.class FromDic:resp.srcData];
+        if (finished) {
+            finished(model);
+        }
+    }                         failure:nil];
+}
 @end

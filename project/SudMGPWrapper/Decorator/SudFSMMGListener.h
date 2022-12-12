@@ -234,6 +234,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 可点击区域(棒球) MG_BASEBALL_SET_CLICK_RECT
 - (void)onGameMGBaseballSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomGameSetClickRect *)model;
 
+/// 获取文本配置(棒球) MG_BASEBALL_TEXT_CONFIG
+- (void)onGameMGBaseballTextConfig:(nonnull id <ISudFSMStateHandle>)handle;
+
+
 #pragma mark - 玩家状态变化
 
 /// 玩家状态变化
