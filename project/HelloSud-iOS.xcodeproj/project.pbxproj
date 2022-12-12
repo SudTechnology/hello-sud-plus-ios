@@ -3940,7 +3940,7 @@
 					"$(PROJECT_DIR)/HelloSud-iOS/SVG",
 					"$(PROJECT_DIR)/HelloSud-iOS/ThirdParty/SDImageSVGNativeCoder",
 				);
-				MARKETING_VERSION = 1.5.6;
+				MARKETING_VERSION = 1.5.8;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = HelloSudPlus_Dev;
@@ -3992,7 +3992,7 @@
 					"$(PROJECT_DIR)/HelloSud-iOS/SVG",
 					"$(PROJECT_DIR)/HelloSud-iOS/ThirdParty/SDImageSVGNativeCoder",
 				);
-				MARKETING_VERSION = 1.5.6;
+				MARKETING_VERSION = 1.5.8;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = Dis_Tech_Sud_Mgp_Hello;
