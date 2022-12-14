@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SudMGPWrapper'
-  s.version          = '1.5.6'
+  s.version          = '1.5.8'
   s.summary          = 'This is a Wrapper for SudMGP SDK'
   
   # This description is used to generate tags and improve search results.
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/SudTechnology/hello-sud-plus-ios'
   s.license          = { :type => 'MIT', :file => 'project/SudMGPWrapper/LICENSE' }
   s.authors          = { 'sud.tech' => 'dev@sud.tech' }
-  s.source       = { :git => 'https://github.com/SudTechnology/hello-sud-plus-ios.git', :tag => "#{s.version}" }
+  s.source       = { :git => 'https://github.com/SudTechnology/hello-sud-plus-ios.git', :tag => "v#{s.version}" }
   s.frameworks = 'Foundation', 'UIKit'
   s.requires_arc = true
 
