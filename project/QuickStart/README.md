@@ -46,14 +46,23 @@
 # 三分钟集成代码
 - 第一步：导入模块SudMGPSDK、SudMGPWrapper
   <details>
-  <summary>详细描述</summary>
+  <summary>本地pod方式导入</summary>
 
       1.将QuickStart同级目录下的SudMGPSDK、SudMGPWrapper两个目录所有文件及SudMGPWrapper.podspec文件拷贝到目标工程Podfile所在的目录下
       2.APP主工程Podfile文件中，添加 SudMGPWrapper 依赖;
   ``` ruby
   pod 'SudMGPWrapper', :path => './'
   ```
-      3. 执行pod install，将SudMGPWrapper模块依赖进工程中
+      3. 执行pod install，将SudMGP SDK、SudMGPWrapper模块依赖进工程中
+  </details>
+  <details>
+  <summary>cocoapods方式导入</summary>
+
+      1.APP主工程Podfile文件中，添加 SudMGPWrapper 依赖;
+  ``` ruby
+  pod 'SudMGPWrapper', '~> 1.5.8'
+  ```
+      3. 执行pod install，将SudMGP SDK、SudMGPWrapper模块依赖进工程中
   </details>
   
 

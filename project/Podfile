@@ -39,8 +39,6 @@ target 'HelloSud-iOS' do
   pod 'MarqueeLabel'
   # 日志
   pod 'CocoaLumberjack'
-  # SudMGP包装类
-  pod 'SudMGPWrapper', :path => './'
   # RTC厂商引入
   # zego语音/视频SDK
   pod 'ZegoExpressEngine', '2.17.1.1'
@@ -62,6 +60,9 @@ target 'HelloSud-iOS' do
   # tx腾讯云SDK
   #pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
   pod 'TXLiteAVSDK_TRTC', '10.2.11418'
+  # SudMGP包装类
+  pod 'SudMGPWrapper', :path => './'
+#  pod 'SudMGPWrapper', '~> 1.5.8'
   # SudNFT SDK
   pod 'SudNFT', '1.0.4'
 end
@@ -93,6 +94,7 @@ target 'QuickStart' do
   pod 'CocoaLumberjack'
   # SudMGPSDK包装类
   pod 'SudMGPWrapper', :path => './'
+#  pod 'SudMGPWrapper', '~> 1.5.8'
 end
 
 # SudNFTQuickStart
