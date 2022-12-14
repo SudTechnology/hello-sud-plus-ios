@@ -22,14 +22,14 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/SudTechnology/hello-sud-plus-ios'
   s.license          = { :type => 'MIT', :file => 'project/SudMGPWrapper/LICENSE' }
   s.authors          = { 'sud.tech' => 'dev@sud.tech' }
-  s.source       = { :git => 'https://github.com/SudTechnology/hello-sud-plus-ios.git', :tag => "v#{s.version}" }
+  s.source       = { :git => 'https://github.com/SudTechnology/hello-sud-plus-ios.git', :tag => "#{s.version}" }
   s.frameworks = 'Foundation', 'UIKit'
   s.requires_arc = true
 
   s.ios.deployment_target = '10.0'
-  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]': 'i386 arm64'}
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386 arm64'}
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386 arm64' }
 
-  s.ios.deployment_target = '10.0'
   s.public_header_files = 'project/SudMGPWrapper/**/*.h'
 
   s.source_files = [
@@ -38,10 +38,7 @@ Pod::Spec.new do |s|
     'project/SudMGPWrapper/Model/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
     'project/SudMGPWrapper/State/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
   ]
-  # ss.vendored_frameworks = [
-  #   'SudMGPSDK/SudMGP.xcframework'
-  # ]
-  s.dependency 'SudMGP', '1.2.5'
+  s.dependency 'SudMGP', '~> 1.2.5.1'
   # json
   s.dependency 'MJExtension', '~> 3.4.1'
 end
