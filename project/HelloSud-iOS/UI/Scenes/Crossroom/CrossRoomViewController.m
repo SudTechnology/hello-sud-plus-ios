@@ -229,7 +229,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
     self.gameEmptyView.onClickBlock = ^{
         [weakSelf showSelectGameView];
     };
-    self.pkView.hitTestChangedCallback = ^(UIView *currentView) {
+    self.pkView.hitTestChangedCallback = ^(UIView *currentView, CGPoint point) {
         if (weakSelf.pkView == currentView) {
             // pk子视图不响应，给到游戏视图
             return (UIView *) weakSelf.gameView;
@@ -310,7 +310,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
     NSString *roomID = self.otherUser.roomID;
     if (roomID.length > 0) {
         [self exitRoomFromSuspend:NO finished:^{
-            [AudioRoomService reqEnterRoom:roomID.longLongValue isFromCreate:NO success:^{
+            [AudioRoomService reqEnterRoom:roomID.longLongValue isFromCreate:NO extData:nil success:^{
 
             }                         fail:nil];
         }];

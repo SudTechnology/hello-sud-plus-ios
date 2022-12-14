@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "SudMGPMGRocketState.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -108,7 +109,6 @@ static NSString *MG_DG_SCORE = @"mg_dg_score";
 static NSString *MG_COMMON_GAME_DISCO_ACTION = @"mg_common_game_disco_action";
 /// 指令动作结束通知
 static NSString *MG_COMMON_GAME_DISCO_ACTION_END = @"mg_common_game_disco_action_end";
-
 
 #pragma mark - MG_COMMON_PUBLIC_MESSAGE
 

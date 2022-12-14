@@ -10,6 +10,7 @@
 #import "GuessCategoryView.h"
 #import "UIImage+GIF.h"
 #import "LeagueResultPopView.h"
+#import "HomeBannerView.h"
 
 @interface HomeHeaderReusableView ()
 @property(nonatomic, strong) BaseView *contentView;
@@ -30,12 +31,14 @@
 @property(nonatomic, strong) GuessCategoryView *guessView;
 /// 弹幕首个首席名称
 @property(nonatomic, strong) UILabel *firstGameNameLabel;
+@property(nonatomic, strong) HomeBannerView *bannerView;
 @end
 
 @implementation HomeHeaderReusableView
 
 - (void)dtAddViews {
     [self addSubview:self.contentView];
+    [self addSubview:self.bannerView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.previewView];
     [self.contentView addSubview:self.borderView];
@@ -46,8 +49,14 @@
 }
 
 - (void)dtLayoutViews {
+    [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.leading.mas_equalTo(0);
+        make.trailing.mas_equalTo(0);
+        make.height.mas_equalTo(0);
+    }];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
+        make.top.equalTo(self.bannerView.mas_bottom).offset(20);
         make.leading.mas_equalTo(0);
         make.trailing.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
@@ -126,6 +135,10 @@
 
 }
 
+- (void)showBanner:(RespBannerListModel *)respBannerListModel {
+    [self.bannerView showBanner:respBannerListModel.bannerInfoList];
+}
+
 - (void)setHeaderGameList:(NSArray<HSGameItem *> *)headerGameList {
     _headerGameList = headerGameList;
 }
@@ -178,6 +191,23 @@
         self.guessView.sceneModel = self.sceneModel;
         [self.guessView dtUpdateUI];
     }
+
+    if (self.isShowBanner) {
+        [self.bannerView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(20);
+            make.leading.mas_equalTo(0);
+            make.trailing.mas_equalTo(0);
+            make.height.mas_equalTo(104);
+        }];
+    } else {
+        [self.bannerView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(0);
+            make.leading.mas_equalTo(0);
+            make.trailing.mas_equalTo(0);
+            make.height.mas_equalTo(0);
+        }];
+    }
+
 }
 
 /// 更新自定义更多按钮
@@ -227,10 +257,10 @@
         [DTSheetView show:node rootView:AppUtil.currentWindow hiddenBackCover:false onCloseCallback:^{
         }];
         node.onGameLevelCallBack = ^(NSInteger gameLevel) {
-            [AudioRoomService reqCreateRoom:self.sceneModel.sceneId gameLevel:gameLevel];
+            [AudioRoomService reqCreateRoom:self.sceneModel.sceneId extData:nil gameLevel:gameLevel];
         };
     } else {
-        [AudioRoomService reqCreateRoom:self.sceneModel.sceneId gameLevel:-1];
+        [AudioRoomService reqCreateRoom:self.sceneModel.sceneId extData:nil gameLevel:-1];
     }
 }
 
@@ -363,4 +393,10 @@
     return _firstGameNameLabel;
 }
 
+- (HomeBannerView *)bannerView {
+    if (!_bannerView) {
+        _bannerView = HomeBannerView.new;
+    }
+    return _bannerView;
+}
 @end

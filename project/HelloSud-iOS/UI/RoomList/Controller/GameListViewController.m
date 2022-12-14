@@ -127,7 +127,7 @@
         [ToastUtil show:NSString.dt_home_coming_soon];
         return;
     }
-    [AudioRoomService reqEnterRoom:m.roomId isFromCreate:NO success:nil fail:nil];
+    [AudioRoomService reqEnterRoom:m.roomId isFromCreate:NO extData:nil success:nil fail:nil];
 }
 
 #pragma mark - lazy

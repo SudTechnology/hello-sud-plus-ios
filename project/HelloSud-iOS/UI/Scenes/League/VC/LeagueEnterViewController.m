@@ -216,7 +216,7 @@
 - (void)onEnterBtnClick:(id)sender {
     if (self.roomId > 0) {
         DDLogDebug(@"enter room:%@", @(self.roomId));
-        [AudioRoomService reqEnterRoom:self.roomId isFromCreate:false success:nil fail:nil];
+        [AudioRoomService reqEnterRoom:self.roomId isFromCreate:false extData:nil success:nil fail:nil];
     } else {
         DDLogDebug(@"enter match room");
         [AudioRoomService reqMatchRoom:self.gameId sceneType:self.sceneId gameLevel:-1];

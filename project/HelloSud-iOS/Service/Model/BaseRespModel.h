@@ -17,6 +17,8 @@ typedef void(^RespModelBlock)(BaseRespModel *resp);
 @property (nonatomic, assign) NSInteger retCode;
 /// 接口错误信息
 @property (nonatomic, copy) NSString * retMsg;
+/// 原始data数据
+@property (nonatomic, strong) NSDictionary * srcData;
 /// 解码消息
 /// @param rootDic 根JSON
 + (instancetype)decodeModel:(NSDictionary *)rootDic;

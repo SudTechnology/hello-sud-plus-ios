@@ -8,7 +8,7 @@
 #import "AudioRoomService.h"
 #import "SuspendRoomView.h"
 
-@interface AudioRoomService()
+@interface AudioRoomService ()
 @end
 
 @implementation AudioRoomService
@@ -16,7 +16,7 @@
 /// 请求创建房间
 /// @param sceneType 场景类型
 /// @param gameLevel 游戏等级（适配当前门票场景）= -1
-+ (void)reqCreateRoom:(NSInteger)sceneType gameLevel:(NSInteger)gameLevel {
++ (void)reqCreateRoom:(NSInteger)sceneType extData:(NSDictionary *)extData gameLevel:(NSInteger)gameLevel {
 
     static BOOL isReqCreate = false;
 
@@ -36,31 +36,31 @@
     WeakSelf
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/create-room/v1") param:dicParam respClass:EnterRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         isReqCreate = NO;
-        EnterRoomModel *model = (EnterRoomModel *)resp;
-        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:YES success:nil fail:nil];
-    } failure:^(NSError *error) {
+        EnterRoomModel *model = (EnterRoomModel *) resp;
+        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:YES extData:extData success:nil fail:nil];
+    }                         failure:^(NSError *error) {
         isReqCreate = NO;
     }];
 }
 
 /// 请求进入房间
 /// @param roomId 房间ID
-+ (void)reqEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
++ (void)reqEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate extData:(NSDictionary *)extData success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
 
     // 如果存在挂起房间，则退出当前挂起房间
     if ([SuspendRoomView isShowSuspend]) {
         [SuspendRoomView exitRoom:^{
-            [self handleEnterRoom:roomId isFromCreate:isFromCreate success:success fail:fail];
+            [self handleEnterRoom:roomId isFromCreate:isFromCreate extData:extData success:success fail:fail];
         }];
         return;
     }
-    [self handleEnterRoom:roomId isFromCreate:isFromCreate success:success fail:fail];
+    [self handleEnterRoom:roomId isFromCreate:isFromCreate extData:extData success:success fail:fail];
 }
 
 /// 处理进入房间
 /// @param roomId 房间ID
-+ (void)handleEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
++ (void)handleEnterRoom:(long)roomId isFromCreate:(BOOL)isFromCreate extData:(NSDictionary *)extData success:(nullable EmptyBlock)success fail:(nullable ErrorBlock)fail {
     WeakSelf
 
     static BOOL isReqEnter = false;
@@ -98,6 +98,9 @@
         config.roomName = model.roomName;
         config.roleType = model.roleType;
         config.enterRoomModel = model;
+        if (extData) {
+            [model.dicExtData setDictionary:extData];
+        }
         BaseSceneViewController *vc = [SceneFactory createSceneVC:model.sceneType configModel:config];
         [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
         if (success) {
@@ -133,14 +136,14 @@
         dicParam[@"gameLevel"] = @(gameLevel);
     }
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/match-room/v1") param:dicParam respClass:MatchRoomModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
-        MatchRoomModel *model = (MatchRoomModel *)resp;
-        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:NO success:^{
+        MatchRoomModel *model = (MatchRoomModel *) resp;
+        [AudioRoomService reqEnterRoom:model.roomId isFromCreate:NO extData:nil success:^{
             isMatchingRoom = NO;
         }                         fail:^(NSError *error) {
             [ToastUtil show:[error debugDescription]];
             isMatchingRoom = NO;
         }];
-    } failure:^(NSError *error) {
+    }                         failure:^(NSError *error) {
         isMatchingRoom = NO;
     }];
 }
@@ -175,7 +178,7 @@
         SwitchMicModel *model = (SwitchMicModel *) resp;
         if (handleType == 0) {
             RoomCmdUpMicModel *upMicModel = [RoomCmdUpMicModel makeUpMicMsgWithMicIndex:micIndex];
-            
+
             upMicModel.streamID = model.streamId;
             if (proxyUser) {
                 upMicModel.roleType = 0;
@@ -186,12 +189,12 @@
             }
             [weakSelf.currentRoomVC sendMsg:upMicModel isAddToShow:NO finished:nil];
         } else {
-            
+
             RoomCmdUpMicModel *downMicModel = [RoomCmdUpMicModel makeDownMicMsgWithMicIndex:micIndex];
             downMicModel.streamID = nil;
             if (proxyUser) {
                 downMicModel.sendUser = proxyUser;
-            }else {
+            } else {
                 weakSelf.micIndex = -1;
             }
             [weakSelf.currentRoomVC sendMsg:downMicModel isAddToShow:NO finished:nil];
@@ -204,14 +207,14 @@
 
 /// 查询房间麦位列表
 /// @param roomId 房间ID
-- (void)reqMicList:(long)roomId success:(void(^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail {
+- (void)reqMicList:(long)roomId success:(void (^)(NSArray<HSRoomMicList *> *micList))success fail:(ErrorBlock)fail {
 
-    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)}  respClass:MicListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
-        MicListModel *model = (MicListModel *)resp;
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/mic/list/v1") param:@{@"roomId": @(roomId)} respClass:MicListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        MicListModel *model = (MicListModel *) resp;
         if (success) {
             success(model.roomMicList);
         }
-    } failure:fail];
+    }                         failure:fail];
 }
 
 /// 切换房间游戏接口
@@ -222,19 +225,19 @@
         if (success) {
             success();
         }
-    } failure:fail];
+    }                         failure:fail];
 }
 
 /// 下单
 /// @param roomId 房间ID
-- (void)reqRoomOrderCreate:(long)roomId gameId:(long)gameId userIdList:(NSArray*)userIdList
-                   success:(void(^)(RoomOrderCreateModel *m))success fail:(ErrorBlock)fail {
+- (void)reqRoomOrderCreate:(long)roomId gameId:(long)gameId userIdList:(NSArray *)userIdList
+                   success:(void (^)(RoomOrderCreateModel *m))success fail:(ErrorBlock)fail {
     [HSHttpService postRequestWithURL:kINTERACTURL(@"room/order/create/v1") param:@{@"roomId": @(roomId), @"gameId": @(gameId), @"userIdList": userIdList} respClass:RoomOrderCreateModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
-        RoomOrderCreateModel *model = (RoomOrderCreateModel *)resp;
+        RoomOrderCreateModel *model = (RoomOrderCreateModel *) resp;
         if (success) {
             success(model);
         }
-    } failure:fail];
+    }                         failure:fail];
 }
 
 /// 同意接单
@@ -243,7 +246,7 @@
         if (success) {
             success();
         }
-    } failure:fail];
+    }                         failure:fail];
 }
 
 /// 拉取机器人
@@ -259,7 +262,26 @@
     }                         failure:failure];
 }
 
+/// 获取banner
+/// @param finished finished
+/// @param failure failure
++ (void)reqBannerListWithFinished:(void (^)(RespBannerListModel *respModel))finished failure:(void (^)(NSError *error))failure {
+    NSDictionary *dicParam = @{};
+    [HSHttpService postRequestWithURL:kBASEURL(@"get-banner/v1")
+                                param:dicParam
+                            respClass:RespBannerListModel.class
+                       showErrorToast:YES
+                              success:^(BaseRespModel *resp) {
+                                  if (finished) {
+                                      RespBannerListModel *m = (RespBannerListModel *) resp;
+                                      finished(m);
+                                  }
+                              } failure:failure];
+
+}
+
 #pragma mark - Custom
+
 + (RoomCustomModel *)getCustomModel {
     RoomCustomModel *model = [SettingsService roomCustomModel];
     if (model) {

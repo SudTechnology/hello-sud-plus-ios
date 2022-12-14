@@ -7,13 +7,16 @@
 
 #import "BaseView.h"
 #import "GiftModel.h"
+
 NS_ASSUME_NONNULL_BEGIN
+/// 火箭礼物ID
+#define kRocketGiftID 9
 
 /// 礼物管理
 @interface GiftService : BaseView
 
 /// 礼物列表
-@property(nonatomic, strong, readonly)NSArray<GiftModel*> *giftList;
+@property(nonatomic, strong, readonly) NSArray<GiftModel *> *giftList;
 
 + (instancetype)shared;
 
@@ -30,6 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param finished finished
 /// @param failure failure
 + (void)reqGiftListWithGameId:(int64_t)gameId sceneId:(NSInteger)sceneId finished:(void (^)(NSArray<GiftModel *> *modelList))finished failure:(void (^)(NSError *error))failure;
+
+/// 保存火箭数据,保存成功返回保存路径，失败则返回nil
+/// @param base64Str
+- (NSString *_Nullable)saveRocketImage:(NSString *)base64Str;
+
+/// 获取火箭图片,不存在则返回nil
+- (NSString *_Nullable)getRocketImagePath;
 @end
 
 NS_ASSUME_NONNULL_END

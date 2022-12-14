@@ -41,6 +41,26 @@ NS_ASSUME_NONNULL_BEGIN
 /// 最低版本：v1.1.30.xx
 - (void)onGameLog:(nonnull NSString *)dataJson;
 
+
+/**
+ * 游戏状态变化
+ * @param handle 回调句柄
+ * @param state 游戏状态
+ * @param dataJson 回调json
+ */
+- (BOOL)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
+
+/**
+ * 游戏玩家状态变化,如实现方实现了改接口，并返回YES，则数据解析完全由实现方自行处理，内部不在做数据模型的解析，返回NO则内部执行数据序列化
+ * @param handle 回调句柄
+ * @param userId 用户id
+ * @param state  玩家状态
+ * @param dataJson 回调JSON
+ */
+- (BOOL)onPlayerStateChange:(nullable id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
+
+#pragma mark - 通用状态-游戏
+
 /// 通用状态-游戏
 /// 游戏: 公屏消息状态    MG_COMMON_PUBLIC_MESSAGE
 - (void)onGameMGCommonPublicMessage:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonPublicMessageModel *)model;
@@ -120,6 +140,74 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏通知app带入积分 MG_COMMON_GAME_SET_SCORE
 - (void)onGameMGCommonGameSetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSetScoreModel *)model;
 
+/// 礼物配置文件(火箭) MG_CUSTOM_ROCKET_CONFIG
+- (void)onGameMGCustomRocketConfig:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 拥有模型列表(火箭) MG_CUSTOM_ROCKET_MODEL_LIST
+- (void)onGameMGCustomRocketModelList:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 拥有组件列表(火箭) MG_CUSTOM_ROCKET_COMPONENT_LIST
+- (void)onGameMGCustomRocketComponentList:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 获取用户信息(火箭) MG_CUSTOM_ROCKET_USER_INFO
+- (void)onGameMGCustomRocketUserInfo:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketUserInfo *)model;
+
+/// 订单记录列表(火箭) MG_CUSTOM_ROCKET_ORDER_RECORD_LIST
+- (void)onGameMGCustomRocketOrderRecordList:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketOrderRecordList *)model;
+
+/// 展馆内列表(火箭) MG_CUSTOM_ROCKET_ROOM_RECORD_LIST
+- (void)onGameMGCustomRocketRoomRecordList:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketRoomRecordList *)model;
+
+/// 展馆内玩家送出记录(火箭) MG_CUSTOM_ROCKET_USER_RECORD_LIST
+- (void)onGameMGCustomRocketUserRecordList:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketUserRecordList *)model;
+
+/// 设置默认位置(火箭) MG_CUSTOM_ROCKET_SET_DEFAULT_MODEL
+- (void)onGameMGCustomRocketSetDefaultSeat:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSetDefaultSeat *)model;
+
+/// 动态计算一键发送价格(火箭) MG_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE
+- (void)onGameMGCustomRocketDynamicFirePrice:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketDynamicFirePrice *)model;
+
+/// 一键发送(火箭) MG_CUSTOM_ROCKET_FIRE_MODEL
+- (void)onGameMGCustomRocketFireModel:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketFireModel *)model;
+
+/// 新组装模型(火箭) MG_CUSTOM_ROCKET_CREATE_MODEL
+- (void)onGameMGCustomRocketCreateModel:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketCreateModel *)model;
+
+/// 更换组件(火箭) MG_CUSTOM_ROCKET_REPLACE_COMPONENT
+- (void)onGameMGCustomRocketReplaceModel:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketReplaceModel *)model;
+
+/// 购买组件(火箭) MG_CUSTOM_ROCKET_BUY_COMPONENT
+- (void)onGameMGCustomRocketBuyModel:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketBuyModel *)model;
+
+/// 播放效果开始((火箭) MG_CUSTOM_ROCKET_PLAY_EFFECT_START
+- (void)onGameMGCustomRocketPlayEffectStart:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 播放效果完成((火箭) MG_CUSTOM_ROCKET_PLAY_EFFECT_FINISH
+- (void)onGameMGCustomRocketPlayEffectFinish:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 验证签名合规((火箭) MG_CUSTOM_ROCKET_VERIFY_SIGN
+- (void)onGameMGCustomRocketVerifySign:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketVerifySign *)model;
+
+/// 上传icon(火箭) MG_CUSTOM_ROCKET_UPLOAD_MODEL_ICON
+- (void)onGameMGCustomRocketUploadModelIcon:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketUploadModelIcon *)model;
+
+/// 前期准备完成((火箭) MG_CUSTOM_ROCKET_PREPARE_FINISH
+- (void)onGameMGCustomRocketPrepareFinish:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 展示火箭主界面((火箭) MG_CUSTOM_ROCKET_SHOW_GAME_SCENE
+- (void)onGameMGCustomRocketShowGameScene:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 隐藏火箭主界面((火箭) MG_CUSTOM_ROCKET_HIDE_GAME_SCENE
+- (void)onGameMGCustomRocketHideGameScene:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 点击锁住组件((火箭) MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT
+- (void)onGameMGCustomRocketClickLockComponent:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketClickLockComponent *)model;
+
+/// 火箭的可点击区域((火箭) MG_CUSTOM_ROCKET_SET_CLICK_RECT
+- (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSetClickRect *)model;
+
+#pragma mark - 玩家状态变化
+
 /// 玩家状态变化
 /// 玩家: 加入状态  MG_COMMON_PLAYER_IN
 - (void)onPlayerMGCommonPlayerIn:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGCommonPlayerInModel *)model;
@@ -172,6 +260,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏通知app层当前游戏剩余时间  MG_COMMON_GAME_COUNTDOWN_TIME
 - (void)onPlayerMGCommonGameCountdownTime:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGCommonGameCountdownTimeModel *)model;
+
 
 @end
 

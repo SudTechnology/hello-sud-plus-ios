@@ -8,8 +8,13 @@
 #import "BaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 /// 礼物弹窗
 @interface RoomGiftPannelView : BaseView
+/// 是否展示火箭
+@property(nonatomic, assign) BOOL showRocket;
+@property(nonatomic, strong) void (^enterRocketBlock)(void);
+
 /// 加载场景礼物
 /// @param gameId gameId
 /// @param sceneId sceneId

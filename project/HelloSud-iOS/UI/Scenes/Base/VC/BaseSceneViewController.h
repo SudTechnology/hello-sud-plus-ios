@@ -253,6 +253,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// 添加机器人到游戏
 /// @param robotList
 - (void)addRobotToGame:(NSArray <RobotInfoModel *>*)robotList;
+
+/// 播放火箭
+/// @param jsonData
+- (void)playRocket:(NSString *)jsonData;
+
+/// 处理火箭特殊礼物
+/// @param giftModel
+/// @param toMicList
+- (void)handleRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -368,6 +368,15 @@
 		6CE6CD74283F61770026BDAB /* QSRoomInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD6E283F61770026BDAB /* QSRoomInputView.m */; };
 		6CE6CD77283F66680026BDAB /* QuickStartViewController+Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD76283F66670026BDAB /* QuickStartViewController+Game.m */; };
 		6CE6CD7C283F68330026BDAB /* QSAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6CD7B283F68330026BDAB /* QSAppPreferences.m */; };
+		6CE72717292B82740023D5BE /* RespBannerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72716292B82740023D5BE /* RespBannerListModel.m */; };
+		6CE7271A292B82950023D5BE /* RocketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72719292B82950023D5BE /* RocketService.m */; };
+		6CE7271F292B82FF0023D5BE /* RocketSelectAnchorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE7271C292B82FE0023D5BE /* RocketSelectAnchorView.m */; };
+		6CE72720292B82FF0023D5BE /* RocketSelectPopUserColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE7271E292B82FE0023D5BE /* RocketSelectPopUserColCell.m */; };
+		6CE72724292B83190023D5BE /* InteractiveGameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72723292B83190023D5BE /* InteractiveGameManager.m */; };
+		6CE7272B292B83870023D5BE /* RocketLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72725292B83860023D5BE /* RocketLoadingView.m */; };
+		6CE7272C292B83870023D5BE /* HomeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72727292B83860023D5BE /* HomeBannerView.m */; };
+		6CE7272D292B83870023D5BE /* HomeBannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE7272A292B83870023D5BE /* HomeBannerCollectionViewCell.m */; };
+		6CE72730292B83C90023D5BE /* GiftRocketEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE7272E292B83C90023D5BE /* GiftRocketEnterView.m */; };
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
 		BC21003E1833458539047CE2 /* LeagueEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210A169901E482D9705365 /* LeagueEnterViewController.m */; };
 		BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */; };
@@ -1086,6 +1095,24 @@
 		6CE6CD76283F66670026BDAB /* QuickStartViewController+Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QuickStartViewController+Game.m"; sourceTree = "<group>"; };
 		6CE6CD7A283F68330026BDAB /* QSAppPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSAppPreferences.h; sourceTree = "<group>"; };
 		6CE6CD7B283F68330026BDAB /* QSAppPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSAppPreferences.m; sourceTree = "<group>"; };
+		6CE72715292B82740023D5BE /* RespBannerListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespBannerListModel.h; sourceTree = "<group>"; };
+		6CE72716292B82740023D5BE /* RespBannerListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespBannerListModel.m; sourceTree = "<group>"; };
+		6CE72718292B82950023D5BE /* RocketService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketService.h; sourceTree = "<group>"; };
+		6CE72719292B82950023D5BE /* RocketService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketService.m; sourceTree = "<group>"; };
+		6CE7271B292B82FE0023D5BE /* RocketSelectAnchorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketSelectAnchorView.h; sourceTree = "<group>"; };
+		6CE7271C292B82FE0023D5BE /* RocketSelectAnchorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketSelectAnchorView.m; sourceTree = "<group>"; };
+		6CE7271D292B82FE0023D5BE /* RocketSelectPopUserColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketSelectPopUserColCell.h; sourceTree = "<group>"; };
+		6CE7271E292B82FE0023D5BE /* RocketSelectPopUserColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketSelectPopUserColCell.m; sourceTree = "<group>"; };
+		6CE72722292B83190023D5BE /* InteractiveGameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractiveGameManager.h; sourceTree = "<group>"; };
+		6CE72723292B83190023D5BE /* InteractiveGameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveGameManager.m; sourceTree = "<group>"; };
+		6CE72725292B83860023D5BE /* RocketLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketLoadingView.m; sourceTree = "<group>"; };
+		6CE72726292B83860023D5BE /* HomeBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerView.h; sourceTree = "<group>"; };
+		6CE72727292B83860023D5BE /* HomeBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerView.m; sourceTree = "<group>"; };
+		6CE72728292B83870023D5BE /* HomeBannerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerCollectionViewCell.h; sourceTree = "<group>"; };
+		6CE72729292B83870023D5BE /* RocketLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketLoadingView.h; sourceTree = "<group>"; };
+		6CE7272A292B83870023D5BE /* HomeBannerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerCollectionViewCell.m; sourceTree = "<group>"; };
+		6CE7272E292B83C90023D5BE /* GiftRocketEnterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftRocketEnterView.m; sourceTree = "<group>"; };
+		6CE7272F292B83C90023D5BE /* GiftRocketEnterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftRocketEnterView.h; sourceTree = "<group>"; };
 		6CEF766627F5A22000A12220 /* MoreSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreSettingViewController.h; sourceTree = "<group>"; };
 		6CEF766727F5A22000A12220 /* MoreSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSettingViewController.m; sourceTree = "<group>"; };
 		7A720CB3011AA758F160BFED /* Pods-QuickStart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickStart.debug.xcconfig"; path = "Target Support Files/Pods-QuickStart/Pods-QuickStart.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1504,6 +1531,12 @@
 		4455ACF127EAC658001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6CE72728292B83870023D5BE /* HomeBannerCollectionViewCell.h */,
+				6CE7272A292B83870023D5BE /* HomeBannerCollectionViewCell.m */,
+				6CE72726292B83860023D5BE /* HomeBannerView.h */,
+				6CE72727292B83860023D5BE /* HomeBannerView.m */,
+				6CE72729292B83870023D5BE /* RocketLoadingView.h */,
+				6CE72725292B83860023D5BE /* RocketLoadingView.m */,
 				4455ACF627EAC658001516EE /* SearchHeaderView.h */,
 				4455ACF227EAC658001516EE /* SearchHeaderView.m */,
 				4455ACF727EAC658001516EE /* HomeHeaderReusableView.h */,
@@ -1666,6 +1699,8 @@
 		4455AD2B27EAC658001516EE /* Gift */ = {
 			isa = PBXGroup;
 			children = (
+				6CE7272F292B83C90023D5BE /* GiftRocketEnterView.h */,
+				6CE7272E292B83C90023D5BE /* GiftRocketEnterView.m */,
 				4455AD2C27EAC658001516EE /* RoomGiftPannelView.m */,
 				4455AD2D27EAC658001516EE /* GiftUserCollectionViewCell.h */,
 				4455AD2E27EAC658001516EE /* GiftItemCollectionViewCell.h */,
@@ -1784,6 +1819,7 @@
 		4455ADD327EAC6F7001516EE /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				6CE72721292B83190023D5BE /* Manager */,
 				4455ADD427EAC6F7001516EE /* VC */,
 				4455ADDD27EAC6F7001516EE /* Model */,
 				4455ADE327EAC6F7001516EE /* View */,
@@ -1822,6 +1858,10 @@
 		4455ADE327EAC6F7001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6CE7271B292B82FE0023D5BE /* RocketSelectAnchorView.h */,
+				6CE7271C292B82FE0023D5BE /* RocketSelectAnchorView.m */,
+				6CE7271D292B82FE0023D5BE /* RocketSelectPopUserColCell.h */,
+				6CE7271E292B82FE0023D5BE /* RocketSelectPopUserColCell.m */,
 				4455ADE527EAC6F7001516EE /* RoomMsgTableView.h */,
 				4455ADE627EAC6F7001516EE /* RoomInputView.h */,
 				4455ADE727EAC6F7001516EE /* RoomMsgBgView.h */,
@@ -1988,6 +2028,8 @@
 		6C076EA7279F991700650209 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6CE72715292B82740023D5BE /* RespBannerListModel.h */,
+				6CE72716292B82740023D5BE /* RespBannerListModel.m */,
 				445EAB3427A1330D000DCC72 /* BaseRespModel.h */,
 				445EAB3527A1330D000DCC72 /* BaseRespModel.m */,
 				6C076EA8279F993900650209 /* AccountUserModel.h */,
@@ -2488,6 +2530,8 @@
 		6CD6E84F27BE367700D8F76C /* Room */ = {
 			isa = PBXGroup;
 			children = (
+				6CE72718292B82950023D5BE /* RocketService.h */,
+				6CE72719292B82950023D5BE /* RocketService.m */,
 				6C076EBA27A01BC000650209 /* AudioRoomService.h */,
 				6C076EBB27A01BC000650209 /* AudioRoomService.m */,
 				6C076ED527A298FC00650209 /* GameService.h */,
@@ -2773,6 +2817,15 @@
 				6CE6CD7B283F68330026BDAB /* QSAppPreferences.m */,
 			);
 			path = Preferences;
+			sourceTree = "<group>";
+		};
+		6CE72721292B83190023D5BE /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6CE72722292B83190023D5BE /* InteractiveGameManager.h */,
+				6CE72723292B83190023D5BE /* InteractiveGameManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		BC21001B5F7B2F0EA130BEDF /* Model */ = {
@@ -3238,6 +3291,7 @@
 				4455ADCD27EAC658001516EE /* TicketChooseItemView.m in Sources */,
 				4455AD8827EAC658001516EE /* HSSettingHeaderModel.m in Sources */,
 				6CE6CD5E283F591D0026BDAB /* DeviceUtil.m in Sources */,
+				6CE72717292B82740023D5BE /* RespBannerListModel.m in Sources */,
 				6C4607BC2851D29F005C99EF /* GuessRankModel.m in Sources */,
 				6C460814285B1DF3005C99EF /* DanmakuRoomService.m in Sources */,
 				4455ADCB27EAC658001516EE /* TocketChooseModel.m in Sources */,
@@ -3275,6 +3329,7 @@
 				6CC3E79F28C1BBB800AA934B /* ForeignWalletSelectCell.m in Sources */,
 				6C076E71279E429E00650209 /* ZegoAudioEngineImpl.m in Sources */,
 				6C076ED127A253C100650209 /* RespUserInfoModel.m in Sources */,
+				6CE7271F292B82FF0023D5BE /* RocketSelectAnchorView.m in Sources */,
 				4455ADA127EAC658001516EE /* MicListModel.m in Sources */,
 				6CE6CD60283F591D0026BDAB /* AppUtil.m in Sources */,
 				4455AD9E27EAC658001516EE /* SwitchGameModel.m in Sources */,
@@ -3338,6 +3393,7 @@
 				6CC3E7A328C1BBB800AA934B /* MyNFTView.m in Sources */,
 				6C7CB61928C5E940003A19A8 /* MyNFTListViewController.m in Sources */,
 				6CC3E79C28C1BBB800AA934B /* MyHeaderView.m in Sources */,
+				6CE72730292B83C90023D5BE /* GiftRocketEnterView.m in Sources */,
 				6C4607B028518FB7005C99EF /* GuessRankHeaderView.m in Sources */,
 				4452DDDB28112BFE001FEEDB /* CustomRoomHelpView.m in Sources */,
 				6C460884286EFA22005C99EF /* DiscoMenuRuleView.m in Sources */,
@@ -3354,6 +3410,7 @@
 				4455AE1127EAC6F7001516EE /* AudioMicroView.m in Sources */,
 				4455ADD027EAC658001516EE /* CrossRoomViewController.m in Sources */,
 				6CE6CD30283F591C0026BDAB /* DTSheetView.m in Sources */,
+				6CE7272D292B83870023D5BE /* HomeBannerCollectionViewCell.m in Sources */,
 				443BA4E0280D3B70008B2BFB /* OrderChooseUsersView.m in Sources */,
 				4455ADAC27EAC658001516EE /* AudioMsgSystemModel.m in Sources */,
 				6C076EAA279F993900650209 /* AccountUserModel.m in Sources */,
@@ -3399,6 +3456,7 @@
 				44BC48E52815433400E4E3F7 /* RoomCmdOrderCreateModel.m in Sources */,
 				4455ADCC27EAC658001516EE /* TicketJoinPopView.m in Sources */,
 				E5C82F8427FFE57C00A409D5 /* RCloudAudioEngineImpl.m in Sources */,
+				6CE7271A292B82950023D5BE /* RocketService.m in Sources */,
 				4455AE0827EAC6F7001516EE /* BaseSceneViewController+IM.m in Sources */,
 				4455ADD127EAC658001516EE /* OneOneViewController.m in Sources */,
 				6C4608262864062D005C99EF /* LandscapeGuideTipView.m in Sources */,
@@ -3428,6 +3486,7 @@
 				6CC3E7A028C1BBB800AA934B /* CNWalletSelectPopView.m in Sources */,
 				6C46086E286DAC76005C99EF /* DiscoRankPopView.m in Sources */,
 				6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */,
+				6CE72724292B83190023D5BE /* InteractiveGameManager.m in Sources */,
 				6C460862286D3BC7005C99EF /* HomeHeaderFullReusableView.m in Sources */,
 				6C46082328630CD7005C99EF /* RespGiftListModel.m in Sources */,
 				6CC3E77C28C1BB7D00AA934B /* HSNFTListCellModel.m in Sources */,
@@ -3460,7 +3519,9 @@
 				6C4607C12851F725005C99EF /* DanmakuRoomViewController.m in Sources */,
 				BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */,
 				BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */,
+				6CE72720292B82FF0023D5BE /* RocketSelectPopUserColCell.m in Sources */,
 				6CC3E79928C1BBB800AA934B /* ForeignWalletSelectPopView.m in Sources */,
+				6CE7272B292B83870023D5BE /* RocketLoadingView.m in Sources */,
 				BC2107FE8EDA29F77C42CD64 /* MoreGuessHeaderColCell.m in Sources */,
 				6C460829286441B5005C99EF /* WebpImageCacheService.m in Sources */,
 				BC21039C130C9B79153365E5 /* MoreGuessHeaderCellModel.m in Sources */,
@@ -3486,6 +3547,7 @@
 				BC210E61BEB5F8B208DFF505 /* MyNFTDetailViewController.m in Sources */,
 				BC2102046258AC22ACD73CF4 /* UserWearNftDetailView.m in Sources */,
 				BC21074293C8ADEA821E64D4 /* WalletDeletePopView.m in Sources */,
+				6CE7272C292B83870023D5BE /* HomeBannerView.m in Sources */,
 				BC210F7B9020973BAD4CF677 /* WalletAddressSwitchPopView.m in Sources */,
 				BC210B212D9241C9CE03A083 /* WalletAddressSwitchCell.m in Sources */,
 				6C26CC5A28D9C3C900C2572B /* SwitchEnvModel.m in Sources */,
@@ -3878,7 +3940,7 @@
 					"$(PROJECT_DIR)/HelloSud-iOS/SVG",
 					"$(PROJECT_DIR)/HelloSud-iOS/ThirdParty/SDImageSVGNativeCoder",
 				);
-				MARKETING_VERSION = 1.5.6;
+				MARKETING_VERSION = 1.5.8;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = HelloSudPlus_Dev;
@@ -3930,7 +3992,7 @@
 					"$(PROJECT_DIR)/HelloSud-iOS/SVG",
 					"$(PROJECT_DIR)/HelloSud-iOS/ThirdParty/SDImageSVGNativeCoder",
 				);
-				MARKETING_VERSION = 1.5.6;
+				MARKETING_VERSION = 1.5.8;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
 				PROVISIONING_PROFILE_SPECIFIER = Dis_Tech_Sud_Mgp_Hello;

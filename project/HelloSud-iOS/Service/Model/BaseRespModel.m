@@ -19,6 +19,7 @@
     } else {
         m = [self class].new;
     }
+    m.srcData = data;
     m.retMsg = rootDic[@"retMsg"];
     m.retCode = [rootDic[@"retCode"] integerValue];
     return m;

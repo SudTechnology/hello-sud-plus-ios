@@ -36,6 +36,7 @@
 @property(nonatomic, assign) BOOL isClickSegItem;
 /// 竞猜游戏列表
 @property(nonatomic, strong) NSArray<MoreGuessGameModel *> *quizGameInfoList;
+@property(nonatomic, strong) RespBannerListModel *respBannerListModel;
 
 @end
 
@@ -208,6 +209,18 @@
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
     [self.searchHeaderView dtUpdateUI];
+    // 请求banner信息
+    [self reqBanner];
+}
+
+/// 请求banner信息
+- (void)reqBanner {
+    [AudioRoomService reqBannerListWithFinished:^(RespBannerListModel *respModel) {
+        self.respBannerListModel = respModel;
+        [self.collectionView reloadData];
+    }                                   failure:^(NSError *error) {
+
+    }];
 }
 
 - (void)reqGuessGameList:(HSSceneModel *)guessModel {
@@ -255,6 +268,13 @@
     [self.homeCategoryView selectedIndex:indexPath.section];
 }
 
+/// 是否展示banner
+/// @param section
+/// @return
+- (BOOL)checkIfNeedToShowBanner:(NSInteger)section {
+    return section == 0 && self.respBannerListModel.bannerInfoList.count > 0;
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -294,7 +314,6 @@
 }
 
 
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
@@ -309,7 +328,7 @@
         vc.sceneId = self.headerSceneList[indexPath.section].sceneId;
         vc.gameName = model.gameName;
         [self.navigationController pushViewController:vc animated:true];
-    }else if (self.headerSceneList[indexPath.section].sceneId == SceneTypeLeague) {
+    } else if (self.headerSceneList[indexPath.section].sceneId == SceneTypeLeague) {
         LeagueEnterViewController *vc = LeagueEnterViewController.new;
         vc.gameId = model.gameId;
         vc.sceneId = self.headerSceneList[indexPath.section].sceneId;
@@ -325,7 +344,7 @@
     }
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     CGFloat itemW = (kScreenWidth - 32) / 3;
     CGFloat itemH = 62;
@@ -335,10 +354,11 @@
     } else if (m.sceneId == SceneTypeDanmaku) {
         itemW = kScreenWidth - 32;
         itemH = 140;
-    }else if (m.sceneId == SceneTypeLeague) {
+    } else if (m.sceneId == SceneTypeLeague) {
         itemW = kScreenWidth - 32;
         itemH = 142;
     }
+
     return CGSizeMake(itemW, itemH);
 }
 
@@ -355,6 +375,10 @@
     } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeLeague) {
         baseH = 46;
         h = baseH + rect.size.height;
+    }
+    // 展示banner
+    if ([self checkIfNeedToShowBanner:section]) {
+        h += 124;
     }
     return CGSizeMake(kScreenWidth, h);
 }
@@ -382,6 +406,11 @@
             };
         } else {
             HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
+            view.indexPath = indexPath;
+            view.isShowBanner = [self checkIfNeedToShowBanner:indexPath.section];
+            if (view.isShowBanner) {
+                [view showBanner:self.respBannerListModel];
+            }
             view.sceneModel = self.headerSceneList[indexPath.section];
             view.headerGameList = self.dataList[indexPath.section];
             view.quizGameInfoList = self.quizGameInfoList;
