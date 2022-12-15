@@ -400,6 +400,9 @@
 
 - (void)showInteractiveGame:(int64_t)gameId showMainView:(BOOL)showMainView {
     // 不存在则加载
+    if (self.interactiveGameManager.isExistGame && self.interactiveGameManager.gameId != gameId) {
+        [self.interactiveGameManager destoryGame];
+    }
     if (!self.interactiveGameManager.isExistGame) {
         [self.interactiveGameManager loadInteractiveGame:gameId roomId:self.gameRoomID gameView:self.interactiveGameView];
     }

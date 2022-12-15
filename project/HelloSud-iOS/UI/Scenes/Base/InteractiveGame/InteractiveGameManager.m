@@ -150,6 +150,8 @@
 /// 销毁互动游戏
 - (void)destoryGame {
     self.gameView.hidden = YES;
+    self.gameId = 0;
+    self.gameRoomID = nil;
     [self logoutGame];
     [self clearLoadGameState];
 }

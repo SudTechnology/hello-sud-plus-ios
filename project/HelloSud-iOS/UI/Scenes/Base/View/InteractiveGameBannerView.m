@@ -65,8 +65,11 @@
 - (void)scrollPage {
     CGPoint offset = self.collectionView.contentOffset;
     offset.x += 80;
-    [self.collectionView setContentOffset:offset animated:YES];
+    NSInteger pageIndex = offset.x / 80;
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:pageIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+//    [self.collectionView setContentOffset:offset animated:YES];
     [self updatePageControl:offset.x];
+
 }
 
 - (void)updatePageControl:(CGFloat)offsetX {
