@@ -81,7 +81,7 @@
     NSString *msg = [NSString stringWithFormat:@"是否消费%@金币打%@次", @(model.value == 1 ? 5 : 50), @(model.value)];
     [DTAlertView showTextAlert:msg sureText:@"确认" cancelText:@"取消" onSureCallback:^{
         [DTAlertView close];
-        [BaseballService reqPlayBaseballWithNum:model.value roomId:kAudioRoomService.currentRoomVC.roomID finished:^(BaseRespModel *respModel) {
+        [BaseballService reqPlayBaseballWithNum:model.value roomId:kAudioRoomService.currentRoomVC.roomID cmd:model.cmd finished:^(BaseRespModel *respModel) {
 
         }];
     } onCloseCallback:^{

@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param num 个数
 /// @param roomId roomId
 /// @param finished finished
-+ (void)reqPlayBaseballWithNum:(NSInteger)num roomId:(NSString *)roomId finished:(void (^)(BaseRespModel *respModel))finished;
++ (void)reqPlayBaseballWithNum:(NSInteger)num roomId:(NSString *)roomId cmd:(NSString *)cmd finished:(void (^)(BaseRespModel *respModel))finished;
 
 /// 获取文本配置
 + (void)reqTextConfigWithFinished:(void (^)(AppBaseballTextConfigModel *respModel))finished;

@@ -63,5 +63,7 @@ static NSString *APP_BASEBALL_TEXT_CONFIG = @"app_baseball_text_config";
 @property(nonatomic, strong) NSString *mode1;
 /// 模式2
 @property(nonatomic, strong) NSString *mode2;
+/// 模式3
+@property(nonatomic, strong) NSString *mode3;
 @end
 
