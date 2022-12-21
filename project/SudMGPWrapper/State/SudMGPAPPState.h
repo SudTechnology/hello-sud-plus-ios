@@ -8,6 +8,7 @@
 //
 
 #import "SudMGPAPPRocketState.h"
+#import "SudMGPAPPBaseballState.h"
 
 #pragma mark - APP-->MG 状态
 /// 参考文档： https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html

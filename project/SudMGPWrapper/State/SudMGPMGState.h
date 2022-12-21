@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "SudMGPMGRocketState.h"
+#import "SudMGPMGBaseballState.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -65,6 +66,8 @@ static NSString *MG_COMMON_GAME_NETWORK_STATE = @"mg_common_game_network_state";
 static NSString *MG_COMMON_GAME_GET_SCORE = @"mg_common_game_get_score";
 /// 游戏通知app带入积分
 static NSString *MG_COMMON_GAME_SET_SCORE = @"mg_common_game_set_score";
+/// 创建订单
+static NSString *MG_COMMON_GAME_CREATE_ORDER = @"mg_common_game_create_order";
 
 
 #pragma mark - 通用状态-玩家
@@ -603,6 +606,20 @@ MGCommonGameStateTypePlaying = 2, // 正在游戏中
 #pragma mark - 游戏通知app层当前玩家死亡后变成ob视角 MG_COMMON_SELF_OB_STATUS
 @interface MgCommonSelfObStatusModel : NSObject
 @property(nonatomic, assign) BOOL isOb;
+@end
+
+#pragma mark - 创建订单 MG_COMMON_GAME_CREATE_ORDER
+@interface MgCommonGameCreateOrderModel : NSObject
+/// 触发的行为动作，比如打赏，购买等
+@property(nonatomic, strong) NSString *cmd;
+/// 付费用户uid
+@property(nonatomic, strong) NSString *fromUid;
+/// 目标用户uid
+@property(nonatomic, strong) NSString *toUid;
+/// 所属的游戏价值
+@property(nonatomic, assign) NSInteger value;
+/// 扩展数据 json 字符串, 特殊可选
+@property(nonatomic, strong) NSString *payload;
 @end
 
 NS_ASSUME_NONNULL_END
