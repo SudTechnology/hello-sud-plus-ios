@@ -140,6 +140,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏通知app带入积分 MG_COMMON_GAME_SET_SCORE
 - (void)onGameMGCommonGameSetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSetScoreModel *)model;
 
+/// 创建订单 MG_COMMON_GAME_CREATE_ORDER
+- (void)onGameMGCommonGameCreateOrder:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameCreateOrderModel *)model;
+
+#pragma mark - 互动礼物<火箭>
+
 /// 礼物配置文件(火箭) MG_CUSTOM_ROCKET_CONFIG
 - (void)onGameMGCustomRocketConfig:(nonnull id <ISudFSMStateHandle>)handle;
 
@@ -204,7 +209,34 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onGameMGCustomRocketClickLockComponent:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketClickLockComponent *)model;
 
 /// 火箭的可点击区域((火箭) MG_CUSTOM_ROCKET_SET_CLICK_RECT
-- (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSetClickRect *)model;
+- (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomGameSetClickRect *)model;
+
+#pragma mark - 互动礼物<棒球>
+
+/// 查询排行榜数据(棒球) MG_BASEBALL_RANKING
+- (void)onGameMGBaseballRanking:(nonnull id <ISudFSMStateHandle>)handle model:(MGBaseballRanking *)model;
+
+/// 查询我的排名(棒球) MG_BASEBALL_MY_RANKING
+- (void)onGameMGBaseballMyRanking:(nonnull id <ISudFSMStateHandle>)handle model:(MGBaseballMyRanking *)model;
+
+/// 查询当前距离我的前后玩家数据(棒球) MG_BASEBALL_RANGE_INFO
+- (void)onGameMGBaseballRangeInfo:(nonnull id <ISudFSMStateHandle>)handle model:(MGBaseballRangeInfo *)model;
+
+/// 前期准备完成(棒球) MG_BASEBALL_PREPARE_FINISH
+- (void)onGameMGBaseballPrepareFinish:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 展示主界面(棒球) MG_BASEBALL_SHOW_GAME_SCENE
+- (void)onGameMGBaseballShowGameScene:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 隐藏主界面(棒球) MG_BASEBALL_HIDE_GAME_SCENE
+- (void)onGameMGBaseballHideGameScene:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 可点击区域(棒球) MG_BASEBALL_SET_CLICK_RECT
+- (void)onGameMGBaseballSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomGameSetClickRect *)model;
+
+/// 获取文本配置(棒球) MG_BASEBALL_TEXT_CONFIG
+- (void)onGameMGBaseballTextConfig:(nonnull id <ISudFSMStateHandle>)handle;
+
 
 #pragma mark - 玩家状态变化
 

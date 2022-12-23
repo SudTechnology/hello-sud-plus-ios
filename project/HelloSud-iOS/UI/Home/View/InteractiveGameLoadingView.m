@@ -3,15 +3,15 @@
 // Copyright (c) 2022 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
-#import "RocketLoadingView.h"
+#import "InteractiveGameLoadingView.h"
 
-@interface RocketLoadingView ()
+@interface InteractiveGameLoadingView ()
 @property(nonatomic, strong) UIView *contentView;
 @property(nonatomic, strong) UIImageView *loadingImageView;
 @property(nonatomic, strong) UILabel *loadingLabel;
 @end
 
-@implementation RocketLoadingView
+@implementation InteractiveGameLoadingView
 
 - (void)dtConfigUI {
     [self dtUpdateUI];
@@ -46,15 +46,13 @@
 
 }
 
-- (void)show {
-
+- (void)showWithTitle:(NSString *)title {
+    self.loadingLabel.text = title;
     [self showLoadingAnimate:YES];
 }
 
 - (void)close {
-
     [self showLoadingAnimate:NO];
-
 }
 
 - (void)showLoadingAnimate:(BOOL)show {

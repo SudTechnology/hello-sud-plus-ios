@@ -228,3 +228,7 @@
 @implementation MgCommonSelfObStatusModel
 @end
 
+@implementation MgCommonGameCreateOrderModel
+@end
+
+

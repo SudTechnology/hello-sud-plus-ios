@@ -10,12 +10,11 @@
 #import "SuspendRoomView.h"
 #import "RocketSelectAnchorView.h"
 #import "InteractiveGameManager.h"
+#import "InteractiveGameBannerView.h"
 
 #define I_GUESS_YOU_SAID      1468434504892882946L // 你说我猜
 #define DIGITAL_BOMB          1468091457989509190L // 数字炸弹
 #define YOU_DRAW_AND_I_GUESS  1461228410184400899L // 你画我猜
-
-#define ROCKET_GAME_ID        1583284410804244481L // 火箭游戏ID
 
 @interface BaseSceneViewController () <BDAlphaPlayerMetalViewDelegate>
 
@@ -27,7 +26,7 @@
 /// 游戏加载主view
 @property(nonatomic, strong) UIView *gameView;
 /// 互动礼物火箭 加载主view
-@property(nonatomic, strong) UIView *rocketGameView;
+@property(nonatomic, strong) UIView *interactiveGameView;
 /// 关闭火箭动效
 @property(nonatomic, strong) BaseView *closeRocketEffectView;
 /// 加速火箭动效
@@ -36,7 +35,8 @@
 @property(nonatomic, strong) BaseView *sceneView;
 /// 添加机器人按钮
 @property(nonatomic, strong) BaseView *robotView;
-@property(nonatomic, strong) UIImageView *rocketEnterImageView;
+/// 互动礼物入口
+@property(nonatomic, strong) InteractiveGameBannerView *interactiveGameEnterView;
 /// 场景服务
 @property(nonatomic, strong) BaseSceneService *service;
 
@@ -98,7 +98,7 @@
 - (void)checkIfNeedToOpenRocket {
     id temp = self.enterModel.dicExtData[@"isOpenRocket"];
     if (temp) {
-        [self showRocketGame:NO];
+        [self showInteractiveGame:INTERACTIVE_GAME_ROCKET_ID showMainView:YES];
     }
 }
 
@@ -119,7 +119,7 @@
     [self.contentView addSubview:self.bgImageView];
     [self.contentView addSubview:self.gameView];
     [self.contentView addSubview:self.sceneView];
-    [self.contentView addSubview:self.rocketGameView];
+    [self.contentView addSubview:self.interactiveGameView];
     [self.contentView addSubview:self.closeRocketEffectView];
     [self.contentView addSubview:self.flyRocketEffectView];
 
@@ -132,7 +132,7 @@
     [self.msgBgView addSubview:self.msgTableView];
     [self.contentView addSubview:self.inputView];
     [self.sceneView addSubview:self.robotView];
-    [self.sceneView addSubview:self.rocketEnterImageView];
+    [self.sceneView addSubview:self.interactiveGameEnterView];
     [self.sceneView addSubview:self.asrTipLabel];
     [self.sceneView addSubview:self.naviView];
 }
@@ -167,7 +167,7 @@
     [self.gameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
-    [self.rocketGameView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.interactiveGameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
     [self.gameMicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -218,16 +218,24 @@
         make.bottom.equalTo(self.closeRocketEffectView.mas_top).offset(-30);
     }];
 
-    [self.rocketEnterImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.interactiveGameEnterView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
-        make.width.equalTo(@80);
-        make.height.equalTo(@110);
+        make.width.height.greaterThanOrEqualTo(@80);
         make.bottom.equalTo(self.robotView.mas_top).offset(-20);
     }];
 }
 
 - (void)dtConfigUI {
     [super dtConfigUI];
+
+    InteractiveGameBannerModel *rocketBannerModel = InteractiveGameBannerModel.new;
+    rocketBannerModel.gameId = INTERACTIVE_GAME_ROCKET_ID;
+    rocketBannerModel.image = @"room_rocket_enter";
+    InteractiveGameBannerModel *baseballBannerModel = InteractiveGameBannerModel.new;
+    baseballBannerModel.gameId = INTERACTIVE_GAME_BASEBALL_ID;
+    baseballBannerModel.image = @"room_baseball_enter";
+    NSArray *list = @[rocketBannerModel, baseballBannerModel];
+    [self.interactiveGameEnterView showBanner:list];
 }
 
 - (void)dtConfigEvents {
@@ -238,7 +246,7 @@
             return weakSelf.gameView;
         } else if ([weakSelf isInRocketGameView:currentView]) {
             // 游戏视图
-            CGPoint pointConvert = [weakSelf.rocketGameView convertPoint:point fromView:currentView];
+            CGPoint pointConvert = [weakSelf.interactiveGameView convertPoint:point fromView:currentView];
             // 判断火箭可点击区域，穿透非点击区域到业务层
             if (![self.interactiveGameManager checkIfPointInGameClickRect:pointConvert]) {
                 return (UIView *) weakSelf.sceneView;
@@ -316,24 +324,25 @@
     UITapGestureRecognizer *robotViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRobotViewTap:)];
     [self.robotView addGestureRecognizer:robotViewTap];
 
-    UITapGestureRecognizer *rocketEnterViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRocketEnterViewTap:)];
-    [self.rocketEnterImageView addGestureRecognizer:rocketEnterViewTap];
-
     UITapGestureRecognizer *closeRocketEffectTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCloseEffectViewTap:)];
     [self.closeRocketEffectView addGestureRecognizer:closeRocketEffectTap];
 
 
     UITapGestureRecognizer *flyRocketTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onFlyRocketTap:)];
     [self.flyRocketEffectView addGestureRecognizer:flyRocketTap];
+    [self.interactiveGameManager setupRocketEffectBlock:^(BOOL show) {
+            if (show) {
+                weakSelf.closeRocketEffectView.alpha = 1;
+                weakSelf.flyRocketEffectView.alpha = 1;
+            } else {
+                weakSelf.closeRocketEffectView.alpha = 0;
+                weakSelf.flyRocketEffectView.alpha = 0;
+            }
+        }];
 
-    self.interactiveGameManager.rocketEffectBlock = ^(BOOL show) {
-        if (show) {
-            weakSelf.closeRocketEffectView.alpha = 1;
-            weakSelf.flyRocketEffectView.alpha = 1;
-        } else {
-            weakSelf.closeRocketEffectView.alpha = 0;
-            weakSelf.flyRocketEffectView.alpha = 0;
-        }
+    self.interactiveGameEnterView.clickBlock = ^(InteractiveGameBannerModel *model){
+        weakSelf.interactiveGameView.hidden = NO;
+        [weakSelf showInteractiveGame:model.gameId showMainView:YES];
     };
 
 }
@@ -347,7 +356,7 @@
         return NO;
     }
     while (superView) {
-        if (superView == self.rocketGameView) {
+        if (superView == self.interactiveGameView) {
             return YES;
         }
         superView = superView.superview;
@@ -385,14 +394,17 @@
 }
 
 - (void)onRocketEnterViewTap:(id)tap {
-    self.rocketGameView.hidden = NO;
-    [self showRocketGame:YES];
+    self.interactiveGameView.hidden = NO;
+    [self showInteractiveGame:INTERACTIVE_GAME_ROCKET_ID showMainView:YES];
 }
 
-- (void)showRocketGame:(BOOL)showMainView {
+- (void)showInteractiveGame:(int64_t)gameId showMainView:(BOOL)showMainView {
     // 不存在则加载
+    if (self.interactiveGameManager.isExistGame && self.interactiveGameManager.gameId != gameId) {
+        [self.interactiveGameManager destoryGame];
+    }
     if (!self.interactiveGameManager.isExistGame) {
-        [self.interactiveGameManager loadInteractiveGame:ROCKET_GAME_ID roomId:self.gameRoomID gameView:self.rocketGameView];
+        [self.interactiveGameManager loadInteractiveGame:gameId roomId:self.gameRoomID gameView:self.interactiveGameView];
     }
     [self.interactiveGameManager showGameView:showMainView];
 }
@@ -400,7 +412,7 @@
 /// 播放火箭
 /// @param jsonData
 - (void)playRocket:(NSString *)jsonData {
-    [self showRocketGame:NO];
+    [self showInteractiveGame:INTERACTIVE_GAME_ROCKET_ID showMainView:NO];
     if (jsonData) {
         [self.interactiveGameManager playRocket:jsonData];
     }
@@ -493,12 +505,12 @@
     [self setupGameRoomContent];
     self.robotView.hidden = self.isShowAddRobotBtn ? NO : YES;
     if (![self shouldShowRocket]) {
-        self.rocketEnterImageView.hidden = YES;
+        self.interactiveGameEnterView.hidden = YES;
         self.closeRocketEffectView.hidden = YES;
         // 不能加载火箭时销毁已存在的
         [self.interactiveGameManager destoryGame];
     } else {
-        self.rocketEnterImageView.hidden = NO;
+        self.interactiveGameEnterView.hidden = NO;
         self.closeRocketEffectView.hidden = NO;
     }
 }
@@ -1325,12 +1337,12 @@
     return _gameView;
 }
 
-- (UIView *)rocketGameView {
-    if (_rocketGameView == nil) {
-        _rocketGameView = UIView.new;
-        _rocketGameView.hidden = YES;
+- (UIView *)interactiveGameView {
+    if (_interactiveGameView == nil) {
+        _interactiveGameView = UIView.new;
+        _interactiveGameView.hidden = YES;
     }
-    return _rocketGameView;
+    return _interactiveGameView;
 }
 
 - (BaseView *)sceneView {
@@ -1407,13 +1419,13 @@
 
 
 
-- (UIImageView *)rocketEnterImageView {
-    if (!_rocketEnterImageView) {
-        _rocketEnterImageView = [[UIImageView alloc] init];
-        _rocketEnterImageView.image = [UIImage imageNamed:@"room_rocket_enter"];
-        _rocketEnterImageView.userInteractionEnabled = YES;
+- (InteractiveGameBannerView *)interactiveGameEnterView {
+    if (!_interactiveGameEnterView) {
+        _interactiveGameEnterView = [[InteractiveGameBannerView alloc] init];
+//        _interactiveGameEnterView.image = [UIImage imageNamed:@"room_rocket_enter"];
+//        _interactiveGameEnterView.userInteractionEnabled = YES;
     }
-    return _rocketEnterImageView;
+    return _interactiveGameEnterView;
 }
 
 - (NSMutableDictionary *)dicMicModel {

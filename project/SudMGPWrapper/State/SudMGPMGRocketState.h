@@ -171,18 +171,18 @@ static NSString *MG_CUSTOM_ROCKET_SET_CLICK_RECT = @"mg_custom_rocket_set_click_
 @end
 
 #pragma mark - MG_CUSTOM_ROCKET_SET_CLICK_RECT
-@interface RocketSetClickRectItem : NSObject
+@interface GameSetClickRectItem : NSObject
 @property(nonatomic, assign) CGFloat x;
 @property(nonatomic, assign) CGFloat y;
 @property(nonatomic, assign) CGFloat width;
 @property(nonatomic, assign) CGFloat height;
 @end
 
-@interface MGCustomRocketSetClickRect : NSObject
+@interface MGCustomGameSetClickRect : NSObject
 /// 组件类型
 @property(nonatomic, assign) NSInteger type;
 /// 组件ID
-@property(nonatomic, strong) NSArray <RocketSetClickRectItem *> *list;
+@property(nonatomic, strong) NSArray <GameSetClickRectItem *> *list;
 @end
 
 

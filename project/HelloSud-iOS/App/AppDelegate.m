@@ -74,15 +74,12 @@
 - (void)loadGameEmbedPackage {
     [SudMGP setLogLevel:3];
 //    [[SudMGP getCfg] addEmbeddedMGPkg:1583284410804244481 mgPath:@"rocket.rpk"];
+//    [[SudMGP getCfg] addEmbeddedMGPkg:1594978084509368321 mgPath:@"baseball.rpk"];
 }
 
 - (void)configBugly {
     NSString *version = [NSString stringWithFormat:@"%@.%@", [DeviceUtil getAppVersion], [DeviceUtil getAppBuildCode]];
     [Bugly updateAppVersion:version];
-    
-    
-    
-    
     [Bugly startWithAppId:BUGLEY_APP_ID];
 }
 
