@@ -78,7 +78,8 @@
 /// 创建订单 MG_COMMON_GAME_CREATE_ORDER
 - (void)onGameMGCommonGameCreateOrder:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameCreateOrderModel *)model {
 
-    NSString *msg = [NSString stringWithFormat:@"是否消费%@金币打%@次", @(model.value == 1 ? 5 : 50), @(model.value)];
+    NSInteger coin = model.value * 5;
+    NSString *msg = [NSString stringWithFormat:@"是否消费%@金币打%@次", @(coin), @(model.value)];
     [DTAlertView showTextAlert:msg sureText:@"确认" cancelText:@"取消" onSureCallback:^{
         [DTAlertView close];
         [BaseballService reqPlayBaseballWithNum:model.value roomId:kAudioRoomService.currentRoomVC.roomID cmd:model.cmd finished:^(BaseRespModel *respModel) {
