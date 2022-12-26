@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SudMGPWrapper'
-  s.version          = '1.5.8'
+  s.version          = '1.5.9'
   s.summary          = 'This is a Wrapper for SudMGP SDK'
   
   # This description is used to generate tags and improve search results.
