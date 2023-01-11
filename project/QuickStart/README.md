@@ -71,7 +71,7 @@
   ``` ruby
   pod 'MicrosoftCognitiveServicesSpeech-iOS', '1.23.0'
   ```
-      3. 执行pod install，将微软语音识别库模块依赖进工程中
+      3. 执行pod install，将ASR语音识别库模块依赖进工程中
   </details>
   
 
