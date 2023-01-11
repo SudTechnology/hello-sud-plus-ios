@@ -65,7 +65,7 @@ target 'HelloSud-iOS' do
 #  pod 'SudMGPWrapper', '~> 1.5.8'
   # SudNFT SDK
   pod 'SudNFT', '1.0.4'
-  #azure 需要使用微软ASR时集成该库
+  #需要使用ASR时集成该库
   pod 'MicrosoftCognitiveServicesSpeech-iOS', '1.23.0'
 end
 

@@ -65,9 +65,9 @@
       3. 执行pod install，将SudMGP SDK、SudMGPWrapper模块依赖进工程中
   </details>
   <details>
-  <summary>微软ASR识别支持（可选 v1.2.7及后续版本支持）</summary>
+  <summary>ASR识别支持（可选 v1.2.7及后续版本支持）</summary>
 
-      1.APP主工程Podfile文件中，添加 微软语音识别库 依赖;
+      1.APP主工程Podfile文件中，添加 ASR语音识别库 依赖;
   ``` ruby
   pod 'MicrosoftCognitiveServicesSpeech-iOS', '1.23.0'
   ```
