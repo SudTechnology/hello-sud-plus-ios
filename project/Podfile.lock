@@ -35,6 +35,7 @@ PODS:
   - lottie-ios (2.5.3)
   - MarqueeLabel (4.3.0)
   - Masonry (1.1.0)
+  - MicrosoftCognitiveServicesSpeech-iOS (1.23.0)
   - MJExtension (3.4.1)
   - MJRefresh (3.7.5)
   - NERtcSDK (4.6.0)
@@ -113,6 +114,7 @@ DEPENDENCIES:
   - lottie-ios (~> 2.5.3)
   - MarqueeLabel
   - Masonry (~> 1.1.0)
+  - MicrosoftCognitiveServicesSpeech-iOS (~> 1.23.0)
   - MJExtension (~> 3.4.1)
   - MJRefresh (= 3.7.5)
   - NERtcSDK (~> 4.6.0)
@@ -147,6 +149,7 @@ SPEC REPOS:
     - lottie-ios
     - MarqueeLabel
     - Masonry
+    - MicrosoftCognitiveServicesSpeech-iOS
     - MJExtension
     - MJRefresh
     - NERtcSDK
@@ -192,6 +195,7 @@ SPEC CHECKSUMS:
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MicrosoftCognitiveServicesSpeech-iOS: ce0cde6387499ea720c9dfba494c5ee18df2e75e
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   NERtcSDK: a0edad2337710fbd99a2c0c76c77d175f4b906e2
@@ -215,6 +219,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 8dd5f80f38f51f1ea20057b1848e49dd20d3ff1e
 
-PODFILE CHECKSUM: 5f0f05c998ebf26a65658c0284900daecdb5500d
+PODFILE CHECKSUM: ad1cea03bd0f2a3cb25694b3a672833f1508aa24
 
 COCOAPODS: 1.11.3

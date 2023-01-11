@@ -390,6 +390,14 @@
     return _ui;
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        //游戏模式（每个游戏默认模式是1，不填是1）
+        _gameMode = 1;
+    }
+    return self;
+}
+
 
 /// 默认配置
 + (GameCfgModel *)defaultCfgModel {

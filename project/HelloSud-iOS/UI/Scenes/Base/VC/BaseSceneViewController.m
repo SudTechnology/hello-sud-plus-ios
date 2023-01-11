@@ -558,6 +558,7 @@
 
 /// 根据所处状态，退出游戏
 - (void)handleExitGame {
+    self.isGameLoadFinished = NO;
     NSString *myUserId = AppService.shared.loginUserID;
     if ([self.sudFSMMGDecorator isPlayerInGame:myUserId]) {
         if ([self.sudFSMMGDecorator isPlayerIsPlaying:myUserId]) {
@@ -1742,10 +1743,12 @@
 
 /// 处理游戏开始
 - (void)handleGameStared {
+    self.isGameLoadFinished = YES;
     /// 如果当前用户在麦上，自动加入游戏
     if ([self isInMic] && [self isAutoJoinGame]) {
         [self notifyGameToJoin];
     }
+    
 }
 
 - (void)onGameMGCommonSelfClickReadyBtn {
@@ -1795,6 +1798,7 @@
     appCommonGameAddAiPlayersModel.aiPlayers = aiPlayers;
     appCommonGameAddAiPlayersModel.isReady = YES;
     [self.sudFSTAPPDecorator notifyAppCommonGameAddAIPlayers:appCommonGameAddAiPlayersModel];
+    DDLogDebug(@"设置机器人给游戏，人数：%@", @(aiPlayers.count));
 }
 
 /// 加入状态处理发生变更

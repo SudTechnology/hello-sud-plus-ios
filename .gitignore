@@ -1346,3 +1346,6 @@ project/DeveloperKit/Pods/ZIM/iOS/ZIM.xcframework/ios-arm64_x86_64-simulator/ZIM
 project/DeveloperKit/Pods/ZIM/iOS/ZIM.xcframework/ios-arm64_x86_64-simulator/ZIM.framework/Headers/ZIMEventHandler.h
 project/DeveloperKit/Pods/ZIM/iOS/ZIM.xcframework/ios-arm64_x86_64-simulator/ZIM.framework/Modules/module.modulemap
 
+project/fastlane/Appfile
+project/fastlane/Fastfile
+project/fastlane/RV2AG3W74H.json

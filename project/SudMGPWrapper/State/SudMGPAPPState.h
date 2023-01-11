@@ -83,7 +83,7 @@ static NSString *APP_COMMON_GAME_SCORE = @"app_common_game_score";
 /// 玩家列表
 @property(nonatomic, strong) NSArray <AIPlayerInfoModel *> *aiPlayers;
 /// isReady  机器人加入后是否自动准备 1：自动准备，0：不自动准备 默认为1
-@property(nonatomic, assign) BOOL isReady;
+@property(nonatomic, assign) NSInteger isReady;
 @end
 
 // ludo游戏玩法选项

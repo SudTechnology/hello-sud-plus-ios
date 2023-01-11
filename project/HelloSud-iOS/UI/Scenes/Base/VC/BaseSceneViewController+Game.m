@@ -7,7 +7,7 @@
 
 #import "BaseSceneViewController+Game.h"
 #import "BaseSceneViewController+Voice.h"
-#import <SudMGP/ISudCfg.h>
+#import <SudMGP/SudMGP-umbrella.h>
 #import "RocketSelectAnchorView.h"
 
 @implementation BaseSceneViewController (Game)
@@ -356,7 +356,11 @@
 #endif
     [[SudMGP getCfg] setShowCustomLoading:NO];
     [[SudMGP getCfg] setShowLoadingGameBg:YES];
-    [SudMGP initSDK:appID appKey:appKey isTestEnv:isTest listener:^(int retCode, const NSString *retMsg) {
+    SudInitSDKParamModel *model = [[SudInitSDKParamModel alloc]init];
+    model.appId = appID;
+    model.appKey = appKey;
+    model.isTestEnv = isTest;
+    [SudMGP initSDK:model listener:^(int retCode, const NSString * _Nonnull retMsg) {
         if (retCode == 0) {
             DDLogInfo(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
             if (weakSelf) {
@@ -387,7 +391,14 @@
 /// @param rootView 游戏根视图
 - (void)loadGame:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t)mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView *)rootView {
 
-    id <ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:self.sudFSMMGDecorator rootView:rootView];
+    SudLoadMGParamModel *model = [[SudLoadMGParamModel alloc]init];
+    model.userId = userId;
+    model.roomId = roomId;
+    model.code = code;
+    model.mgId = mgId;
+    model.language = language;
+    model.gameViewContainer = rootView;
+    id<ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:model fsmMG:self.sudFSMMGDecorator];
     [self.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
 }
 @end

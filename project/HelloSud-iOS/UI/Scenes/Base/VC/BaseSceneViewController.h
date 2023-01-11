@@ -102,6 +102,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UILabel *gameNumLabel;
 /// 是否游戏禁言
 @property(nonatomic, assign) BOOL isGameForbiddenVoice;
+/// 是否游戏已经加载完毕
+@property(nonatomic, assign) BOOL isGameLoadFinished;
 
 /// 创建服务
 - (void)createService;
