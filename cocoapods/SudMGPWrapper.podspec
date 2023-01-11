@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SudMGPWrapper'
-  s.version          = '1.5.6'
+  s.version          = '1.5.9'
   s.summary          = 'This is a Wrapper for SudMGP SDK'
   
   # This description is used to generate tags and improve search results.
@@ -27,23 +27,18 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.ios.deployment_target = '10.0'
-  s.pod_target_xcconfig = { 'PRODUCT_BUNDLE_IDENTIFIER': 'tech.sud.SudMGPWrapper' }
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386 arm64'}
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386 arm64' }
 
-  s.subspec 'SudMGPWrapper' do |ss|
-      ss.ios.deployment_target = '10.0'
-      ss.public_header_files = 'project/SudMGPWrapper/**/*.h'
+  s.public_header_files = 'project/SudMGPWrapper/**/*.h'
 
-      ss.source_files = [
-        'project/SudMGPWrapper/*.{h,m,mm,cpp,c,hpp,cc,swift}',
-        'project/SudMGPWrapper/Decorator/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
-        'project/SudMGPWrapper/Model/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
-        'project/SudMGPWrapper/State/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
-      ]
-      # ss.vendored_frameworks = [
-      #   'SudMGPSDK/SudMGP.xcframework'
-      # ]
-      ss.dependency 'SudMGP', '1.2.5'
-      # json
-      ss.dependency 'MJExtension', '~> 3.4.1'
-    end
+  s.source_files = [
+    'project/SudMGPWrapper/*.{h,m,mm,cpp,c,hpp,cc,swift}',
+    'project/SudMGPWrapper/Decorator/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
+    'project/SudMGPWrapper/Model/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
+    'project/SudMGPWrapper/State/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
+  ]
+  s.dependency 'SudMGP', '~> 1.2.5.1'
+  # json
+  s.dependency 'MJExtension', '~> 3.4.1'
 end

@@ -40,7 +40,7 @@
 
 /// Comon
 #import "AppUtil.h"
-#import "SudMGPWrapperHeader.h"
+#import "SudMGPWrapper.h"
 
 #import "QSAppPreferences.h"
 

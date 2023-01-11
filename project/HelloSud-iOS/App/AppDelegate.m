@@ -17,6 +17,7 @@
 #import <NIMSDK/NIMSDK.h>
 #import "SDImageSVGNativeCoder.h"
 #import <AFNetworking/AFNetworking.h>
+#import <SudMGP/ISudCfg.h>
 
 @interface AppDelegate () {
 
@@ -65,7 +66,15 @@
     [[NIMSDK sharedSDK] registerWithOption:option];
     [self configWebpCoder];
     [self checkNetwork];
+    [self loadGameEmbedPackage];
     return YES;
+}
+
+/// 加载嵌入游戏包
+- (void)loadGameEmbedPackage {
+    [SudMGP setLogLevel:3];
+//    [[SudMGP getCfg] addEmbeddedMGPkg:1583284410804244481 mgPath:@"rocket.rpk"];
+//    [[SudMGP getCfg] addEmbeddedMGPkg:1594978084509368321 mgPath:@"baseball.rpk"];
 }
 
 - (void)configBugly {
@@ -235,7 +244,7 @@
                 
             case AFNetworkReachabilityStatusReachableViaWiFi:
             case AFNetworkReachabilityStatusReachableViaWWAN:
-                if (AppService.shared.login.isLogin) {
+                if (AppService.shared.login.isLogin && !AppService.shared.login.isRefreshedToken) {
                     [AppService.shared.login checkToken];
                 }
                 break;

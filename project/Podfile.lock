@@ -99,7 +99,7 @@ PODS:
   - ZegoExpressEngine (2.17.1.1):
     - ZegoExpressEngine/Video (= 2.17.1.1)
   - ZegoExpressEngine/Video (2.17.1.1)
-  - ZIM (2.1.1)
+  - ZIM (2.4.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
@@ -128,8 +128,8 @@ DEPENDENCIES:
   - TXLiteAVSDK_TRTC (= 10.2.11418)
   - VolcEngineRTC (= 3.37.101)
   - YYText (~> 1.0.7)
-  - ZegoExpressEngine (~> 2.17.0)
-  - ZIM (= 2.1.1)
+  - ZegoExpressEngine (= 2.17.1.1)
+  - ZIM (= 2.4.2)
 
 SPEC REPOS:
   https://github.com/volcengine/volcengine-specs.git:
@@ -213,8 +213,8 @@ SPEC CHECKSUMS:
   VolcEngineRTC: 6db475579381dd86105092ef7cc8100eb8db3345
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
-  ZIM: 6a4f294825ac93f16c5101d3e97d211c2d17fa33
+  ZIM: 8dd5f80f38f51f1ea20057b1848e49dd20d3ff1e
 
-PODFILE CHECKSUM: 9eb269127f49a6fb16e164165eba2fa727fec8ce
+PODFILE CHECKSUM: 5f0f05c998ebf26a65658c0284900daecdb5500d
 
 COCOAPODS: 1.11.3

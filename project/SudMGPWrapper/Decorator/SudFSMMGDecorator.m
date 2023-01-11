@@ -140,6 +140,12 @@
  */
 - (void)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
     NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:onGameStateChange:%@ --dataJson:%@", state, dataJson]);
+    if ([self.listener respondsToSelector:@selector(onGameStateChange:state:dataJson:)]) {
+        BOOL isHandled = [self.listener onGameStateChange:handle state:state dataJson:dataJson];
+        if (isHandled) {
+            return;
+        }
+    }
 
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         MGCommonPublicMessageModel *m = [MGCommonPublicMessageModel mj_objectWithKeyValues:dataJson];
@@ -316,11 +322,218 @@
             [self.listener onGameMGCommonGameSetScore:handle model:m];
             return;
         }
+    } else if ([state isEqualToString:MG_COMMON_GAME_CREATE_ORDER]) {
+        /// 创建订单 MG_COMMON_GAME_CREATE_ORDER
+        MgCommonGameCreateOrderModel *m = [MgCommonGameCreateOrderModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameCreateOrder:model:)]) {
+            [self.listener onGameMGCommonGameCreateOrder:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_CONFIG]) {
+        /// 礼物配置文件(火箭)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketConfig:)]) {
+            [self.listener onGameMGCustomRocketConfig:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_MODEL_LIST]) {
+        /// 拥有模型列表(火箭)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketModelList:)]) {
+            [self.listener onGameMGCustomRocketModelList:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_COMPONENT_LIST]) {
+        /// 拥有组件列表(火箭)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketComponentList:)]) {
+            [self.listener onGameMGCustomRocketComponentList:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_USER_INFO]) {
+        /// 获取用户信息(火箭)
+        MGCustomRocketUserInfo *m = [MGCustomRocketUserInfo mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketUserInfo:model:)]) {
+            [self.listener onGameMGCustomRocketUserInfo:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_ORDER_RECORD_LIST]) {
+        /// 订单记录列表(火箭)
+        MGCustomRocketOrderRecordList *m = [MGCustomRocketOrderRecordList mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketOrderRecordList:model:)]) {
+            [self.listener onGameMGCustomRocketOrderRecordList:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_ROOM_RECORD_LIST]) {
+        /// 展馆内列表(火箭)
+        MGCustomRocketRoomRecordList *m = [MGCustomRocketRoomRecordList mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketRoomRecordList:model:)]) {
+            [self.listener onGameMGCustomRocketRoomRecordList:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_USER_RECORD_LIST]) {
+        /// 展馆内玩家送出记录(火箭)
+        MGCustomRocketUserRecordList *m = [MGCustomRocketUserRecordList mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketUserRecordList:model:)]) {
+            [self.listener onGameMGCustomRocketUserRecordList:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SET_DEFAULT_MODEL]) {
+        /// 设置默认位置(火箭)
+        MGCustomRocketSetDefaultSeat *m = [MGCustomRocketSetDefaultSeat mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketSetDefaultSeat:model:)]) {
+            [self.listener onGameMGCustomRocketSetDefaultSeat:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE]) {
+        /// 动态计算一键发送价格(火箭)
+        MGCustomRocketDynamicFirePrice *m = [MGCustomRocketDynamicFirePrice mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketDynamicFirePrice:model:)]) {
+            [self.listener onGameMGCustomRocketDynamicFirePrice:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_FIRE_MODEL]) {
+        /// 一键发送(火箭)
+        MGCustomRocketFireModel *m = [MGCustomRocketFireModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketFireModel:model:)]) {
+            [self.listener onGameMGCustomRocketFireModel:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_CREATE_MODEL]) {
+        /// 新组装模型(火箭)
+        MGCustomRocketCreateModel *m = [MGCustomRocketCreateModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketCreateModel:model:)]) {
+            [self.listener onGameMGCustomRocketCreateModel:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_REPLACE_COMPONENT]) {
+        /// 更换组件(火箭)
+        MGCustomRocketReplaceModel *m = [MGCustomRocketReplaceModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketReplaceModel:model:)]) {
+            [self.listener onGameMGCustomRocketReplaceModel:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_BUY_COMPONENT]) {
+        /// 购买组件(火箭)
+        MGCustomRocketBuyModel *m = [MGCustomRocketBuyModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketBuyModel:model:)]) {
+            [self.listener onGameMGCustomRocketBuyModel:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_PLAY_EFFECT_START]) {
+        /// 播放效果开始((火箭)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketPlayEffectStart:)]) {
+            [self.listener onGameMGCustomRocketPlayEffectStart:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_PLAY_EFFECT_FINISH]) {
+        /// 播放效果完成((火箭)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketPlayEffectFinish:)]) {
+            [self.listener onGameMGCustomRocketPlayEffectFinish:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_VERIFY_SIGN]) {
+        /// 验证签名合规((火箭)
+        MGCustomRocketVerifySign *m = [MGCustomRocketVerifySign mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketVerifySign:model:)]) {
+            [self.listener onGameMGCustomRocketVerifySign:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_UPLOAD_MODEL_ICON]) {
+        /// 上传icon(火箭)
+        MGCustomRocketUploadModelIcon *m = [MGCustomRocketUploadModelIcon mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketUploadModelIcon:model:)]) {
+            [self.listener onGameMGCustomRocketUploadModelIcon:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_PREPARE_FINISH]) {
+        /// 前期准备完成((火箭)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketPrepareFinish:)]) {
+            [self.listener onGameMGCustomRocketPrepareFinish:handle];
+            return;
+        }
+
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SHOW_GAME_SCENE]) {
+        /// 显示火箭主界面((火箭)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketShowGameScene:)]) {
+            [self.listener onGameMGCustomRocketShowGameScene:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_HIDE_GAME_SCENE]) {
+        /// 隐藏火箭主界面((火箭)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketHideGameScene:)]) {
+            [self.listener onGameMGCustomRocketHideGameScene:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT]) {
+        /// 点击锁住组件((火箭)
+        MGCustomRocketClickLockComponent *m = [MGCustomRocketClickLockComponent mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketClickLockComponent:model:)]) {
+            [self.listener onGameMGCustomRocketClickLockComponent:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SET_CLICK_RECT]) {
+        /// 设置点击区域((火箭)
+        MGCustomGameSetClickRect *m = [MGCustomGameSetClickRect mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketSetClickRect:model:)]) {
+            [self.listener onGameMGCustomRocketSetClickRect:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_RANKING]) {
+        /// 查询排行榜数据(棒球)
+        MGBaseballRanking *m = [MGBaseballRanking mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballRanking:model:)]) {
+            [self.listener onGameMGBaseballRanking:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_MY_RANKING]) {
+        /// 查询我的排名(棒球)
+        MGBaseballMyRanking *m = [MGBaseballMyRanking mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballMyRanking:model:)]) {
+            [self.listener onGameMGBaseballMyRanking:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_RANGE_INFO]) {
+        /// 查询当前距离我的前后玩家数据(棒球)
+        MGBaseballRangeInfo *m = [MGBaseballRangeInfo mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballRangeInfo:model:)]) {
+            [self.listener onGameMGBaseballRangeInfo:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_PREPARE_FINISH]) {
+        /// 前期准备完成((棒球)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballPrepareFinish:)]) {
+            [self.listener onGameMGBaseballPrepareFinish:handle];
+            return;
+        }
+
+    } else if ([state isEqualToString:MG_BASEBALL_SHOW_GAME_SCENE]) {
+        /// 显示主界面((棒球)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballShowGameScene:)]) {
+            [self.listener onGameMGBaseballShowGameScene:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_HIDE_GAME_SCENE]) {
+        /// 隐藏主界面((棒球)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballHideGameScene:)]) {
+            [self.listener onGameMGBaseballHideGameScene:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_SET_CLICK_RECT]) {
+        /// 设置点击区域((棒球)
+        MGCustomGameSetClickRect *m = [MGCustomGameSetClickRect mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballSetClickRect:model:)]) {
+            [self.listener onGameMGBaseballSetClickRect:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_BASEBALL_TEXT_CONFIG]) {
+        /// 获取配置((棒球)
+        MGCustomGameSetClickRect *m = [MGCustomGameSetClickRect mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballTextConfig:)]) {
+            [self.listener onGameMGBaseballTextConfig:handle];
+            return;
+        }
     } else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
     }
-
     [handle success:[self handleMGSuccess]];
 }
 
@@ -334,6 +547,12 @@
  */
 - (void)onPlayerStateChange:(nullable id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
     NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:userId:%@, onPlayerStateChange:%@ --dataJson:%@", userId, state, dataJson]);
+    if ([self.listener respondsToSelector:@selector(onPlayerStateChange:userId:state:dataJson:)]) {
+        BOOL isHandled = [self.listener onPlayerStateChange:handle userId:userId state:state dataJson:dataJson];
+        if (isHandled) {
+            return;
+        }
+    }
 
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues:dataJson];

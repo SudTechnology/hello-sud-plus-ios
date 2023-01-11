@@ -54,6 +54,8 @@
 @property(nonatomic, strong) UIView *selectView;
 @property(nonatomic, strong) GiftTagView *tagLabel1;
 @property(nonatomic, strong) GiftTagView *tagLabel2;
+@property(nonatomic, strong) UIImageView *leftTagImageView;
+@property(nonatomic, strong) UILabel *leftTagLabel;
 @end
 
 @implementation GiftItemCollectionViewCell
@@ -72,6 +74,8 @@
     [self.contentView addSubview:self.tagLabel1];
     [self.contentView addSubview:self.tagLabel2];
     [self.contentView addSubview:self.selectView];
+    [self.contentView addSubview:self.leftTagImageView];
+    [self.contentView addSubview:self.leftTagLabel];
 }
 
 - (void)dtLayoutViews {
@@ -113,6 +117,18 @@
         make.edges.mas_equalTo(self.contentView);
     }];
 
+    [self.leftTagImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@0);
+        make.leading.equalTo(@0);
+        make.width.equalTo(@38);
+        make.height.equalTo(@20);
+    }];
+    [self.leftTagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.equalTo(self.leftTagImageView);
+        make.height.greaterThanOrEqualTo(@0);
+        make.centerY.equalTo(self.leftTagImageView);
+    }];
+
 }
 
 - (void)dtUpdateUI {
@@ -142,6 +158,16 @@
         if (kAudioRoomService.currentRoomVC.enterModel.sceneType != SceneTypeDisco) {
             self.tagLabel1.hidden = YES;
             self.tagLabel2.hidden = YES;
+        }
+        self.leftTagImageView.hidden = YES;
+        self.leftTagLabel.hidden = YES;
+        if (m.leftTagImage) {
+            self.leftTagImageView.image = [UIImage imageNamed:m.leftTagImage];
+            self.leftTagImageView.hidden = NO;
+        }
+        if (m.leftTagName) {
+            self.leftTagLabel.text = m.leftTagName;
+            self.leftTagLabel.hidden = NO;
         }
     }
 }
@@ -262,5 +288,23 @@
     return _coinLabel;
 }
 
+
+- (UILabel *)leftTagLabel {
+    if (!_leftTagLabel) {
+        _leftTagLabel = [[UILabel alloc] init];
+        _leftTagLabel.textAlignment = NSTextAlignmentCenter;
+        _leftTagLabel.font = UIFONT_MEDIUM(10);
+        _leftTagLabel.textColor = UIColor.whiteColor;
+    }
+    return _leftTagLabel;
+}
+
+- (UIImageView *)leftTagImageView {
+    if (!_leftTagImageView) {
+        _leftTagImageView = [[UIImageView alloc] init];
+        _leftTagImageView.layer.masksToBounds = true;
+    }
+    return _leftTagImageView;
+}
 
 @end

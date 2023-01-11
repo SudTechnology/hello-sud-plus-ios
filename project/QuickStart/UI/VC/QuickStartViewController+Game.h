@@ -5,7 +5,7 @@
 
 #import "QuickStartViewController.h"
 /// Model
-#import "SudMGPWrapperHeader.h"
+#import "SudMGPWrapper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

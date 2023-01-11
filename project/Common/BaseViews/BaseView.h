@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef UIView *_Nullable(^DTHitTestBlock)(UIView *hitView);
+typedef UIView *_Nullable(^DTHitTestBlock)(UIView *hitView, CGPoint point);
 /// 基础View
 @interface BaseView : UIView
 

@@ -7,6 +7,9 @@
 //  Created by Mary on 2022/2/19.
 //
 
+#import "SudMGPAPPRocketState.h"
+#import "SudMGPAPPBaseballState.h"
+
 #pragma mark - APP-->MG 状态
 /// 参考文档： https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html
 
@@ -76,27 +79,27 @@ static NSString *APP_COMMON_GAME_SCORE = @"app_common_game_score";
 @end
 
 /// APP_COMMON_GAME_ADD_AI_PLAYERS
-@interface AppCommonGameAddAIPlayersModel: NSObject
+@interface AppCommonGameAddAIPlayersModel : NSObject
 /// 玩家列表
-@property (nonatomic, strong)NSArray <AIPlayerInfoModel *> *aiPlayers;
+@property(nonatomic, strong) NSArray <AIPlayerInfoModel *> *aiPlayers;
 /// isReady  机器人加入后是否自动准备 1：自动准备，0：不自动准备 默认为1
-@property (nonatomic, assign)BOOL isReady;
+@property(nonatomic, assign) BOOL isReady;
 @end
 
 // ludo游戏玩法选项
 @interface AppCommonGameSettingGameLudo
 /// mode: 默认赛制，0: 快速, 1: 经典;
-@property (nonatomic, assign)NSInteger mode;
+@property(nonatomic, assign) NSInteger mode;
 /// chessNum: 默认棋子数量, 2: 对应2颗棋子; 4: 对应4颗棋子;
-@property (nonatomic, assign)NSInteger chessNum;
+@property(nonatomic, assign) NSInteger chessNum;
 /// mode: 默认道具, 1: 有道具, 0: 没有道具
-@property (nonatomic, assign)NSInteger item;
+@property(nonatomic, assign) NSInteger item;
 @end
 
 /// APP_COMMON_GAME_SETTING_SELECT_INFO
-@interface AppCommonGameSettingGameInfo: NSObject
+@interface AppCommonGameSettingGameInfo : NSObject
 // 游戏名称
-@property (nonatomic, strong)AppCommonGameSettingGameLudo *ludo;
+@property(nonatomic, strong) AppCommonGameSettingGameLudo *ludo;
 @end
 
 /// APP_COMMON_GAME_SCORE
@@ -104,5 +107,3 @@ static NSString *APP_COMMON_GAME_SCORE = @"app_common_game_score";
 /// 玩家当前积分
 @property(nonatomic, assign) NSInteger score;
 @end
-
-
