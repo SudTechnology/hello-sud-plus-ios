@@ -83,7 +83,7 @@
         make.top.mas_equalTo(self.headerView.mas_bottom).offset(20);
         make.leading.equalTo(@0);
         make.trailing.equalTo(@0);
-        make.height.greaterThanOrEqualTo(@0);
+        make.height.equalTo(@0);
         make.bottom.equalTo(@-24);
     }];
 
@@ -168,6 +168,29 @@
             weakSelf.clickWalletBlock(m);
         }
     };
+}
+
+- (void)updateConnectAccountView:(BOOL)accountStatus {
+    if (!accountStatus) {
+        [self.nftView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headerView.mas_bottom).offset(20);
+            make.leading.equalTo(@0);
+            make.trailing.equalTo(@0);
+            make.height.equalTo(@0);
+            make.bottom.equalTo(@-24);
+        }];
+        self.nftView.hidden = YES;
+    } else {
+        [self.nftView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headerView.mas_bottom).offset(20);
+            make.leading.equalTo(@0);
+            make.trailing.equalTo(@0);
+            make.height.greaterThanOrEqualTo(@0);
+            make.bottom.equalTo(@-24);
+        }];
+        self.nftView.hidden = NO;
+
+    }
 }
 
 - (void)clearData {

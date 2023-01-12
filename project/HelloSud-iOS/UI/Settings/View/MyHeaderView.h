@@ -24,5 +24,7 @@
 
 /// 移除tip提示
 - (void)removeTipView;
+
+- (void)updateConnectAccountView:(BOOL)accountStatus;
 @end
 

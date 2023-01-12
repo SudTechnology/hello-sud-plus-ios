@@ -74,10 +74,10 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SSZipArchive (2.4.3)
-  - SudMGPWrapper (1.0.6):
-    - SudMGPWrapper/SudMGPWrapper (= 1.0.6)
-  - SudMGPWrapper/SudMGPWrapper (1.0.6):
+  - SudMGP (1.2.7)
+  - SudMGPWrapper (1.6.0):
     - MJExtension (~> 3.4.1)
+    - SudMGP (~> 1.2.7)
   - SudNFT (1.0.4)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -114,7 +114,7 @@ DEPENDENCIES:
   - lottie-ios (~> 2.5.3)
   - MarqueeLabel
   - Masonry (~> 1.1.0)
-  - MicrosoftCognitiveServicesSpeech-iOS (~> 1.23.0)
+  - MicrosoftCognitiveServicesSpeech-iOS (= 1.23.0)
   - MJExtension (~> 3.4.1)
   - MJRefresh (= 3.7.5)
   - NERtcSDK (~> 4.6.0)
@@ -123,7 +123,7 @@ DEPENDENCIES:
   - SDWebImage (= 5.12.2)
   - SDWebImageSVGKitPlugin (= 1.4.0)
   - SDWebImageWebPCoder
-  - SudMGPWrapper (from `./`)
+  - SudMGPWrapper (~> 1.6.0)
   - SudNFT (= 1.0.4)
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
@@ -162,6 +162,8 @@ SPEC REPOS:
     - SDWebImageSVGKitPlugin
     - SDWebImageWebPCoder
     - SSZipArchive
+    - SudMGP
+    - SudMGPWrapper
     - SudNFT
     - SVGKit
     - SVProgressHUD
@@ -171,8 +173,6 @@ SPEC REPOS:
     - ZIM
 
 EXTERNAL SOURCES:
-  SudMGPWrapper:
-    :path: "./"
   SVGAPlayer:
     :git: https://github.com/svga/SVGAPlayer-iOS.git
     :tag: 2.5.6
@@ -208,7 +208,8 @@ SPEC CHECKSUMS:
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  SudMGPWrapper: 1757a9d39dd839b34be86119ab93ad7360b6620d
+  SudMGP: e8a3e676c2b6a4b1c9ba2cf29d30f75890ba3472
+  SudMGPWrapper: 958fc56e76445d6b689c8206d91e3c57d1c8b677
   SudNFT: efa7ec483a2d6e5c5a8e1dda5f8d6578b97ddf9c
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
@@ -219,6 +220,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 8dd5f80f38f51f1ea20057b1848e49dd20d3ff1e
 
-PODFILE CHECKSUM: ad1cea03bd0f2a3cb25694b3a672833f1508aa24
+PODFILE CHECKSUM: 1e1196ad8125b5d4f1e35cd161a524e6558ff7b2
 
 COCOAPODS: 1.11.3

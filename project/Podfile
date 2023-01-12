@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '10.0'
+platform :ios, '11.0'
 #source 'https://github.com/CocoaPods/Specs.git'
 
 inhibit_all_warnings!
@@ -61,11 +61,11 @@ target 'HelloSud-iOS' do
   #pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
   pod 'TXLiteAVSDK_TRTC', '10.2.11418'
   # SudMGP包装类
-  pod 'SudMGPWrapper', :path => './'
-#  pod 'SudMGPWrapper', '~> 1.5.8'
+#  pod 'SudMGPWrapper', :path => './'
+  pod 'SudMGPWrapper', '~> 1.6.0'
   # SudNFT SDK
   pod 'SudNFT', '1.0.4'
-  #需要使用ASR时集成该库
+  #使用ASR时集成该库
   pod 'MicrosoftCognitiveServicesSpeech-iOS', '1.23.0'
 end
 
@@ -95,8 +95,8 @@ target 'QuickStart' do
   # 日志
   pod 'CocoaLumberjack'
   # SudMGPSDK包装类
-  pod 'SudMGPWrapper', :path => './'
-#  pod 'SudMGPWrapper', '~> 1.5.8'
+#  pod 'SudMGPWrapper', :path => './'
+  pod 'SudMGPWrapper', '~> 1.6.0'
 end
 
 # SudNFTQuickStart
@@ -133,6 +133,7 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['ARCHS'] = 'arm64'
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
     end
   end
 end

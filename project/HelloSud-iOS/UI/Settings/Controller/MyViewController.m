@@ -36,12 +36,16 @@
 /// 是否初始化失败
 @property(nonatomic, assign) BOOL isNFTInitedError;
 
+@property(nonatomic, assign)NSInteger accountStatus;
+
 @end
 
 @implementation MyViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.accountStatus = -1;
+    [self.myHeaderView updateConnectAccountView:NO];
     // Do any additional setup after loading the view.
     // 配置顶部tableview不留出状态栏
     if (@available(iOS 11.0, *)) {
@@ -59,6 +63,17 @@
     } else if (self.isNFTInitedError) {
         [self configSudNFT];
     }
+ 
+    [self updateAccountStatus];
+}
+
+- (void)updateAccountStatus {
+    if (self.accountStatus == AppService.shared.configModel.accountStatus) {
+        return;
+    }
+    self.accountStatus = AppService.shared.configModel.accountStatus;
+    [self.myHeaderView updateConnectAccountView:self.accountStatus];
+    [self reloadHeadView];
 }
 
 - (void)configSudNFT {

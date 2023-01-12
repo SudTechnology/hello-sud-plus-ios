@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) HSConfigContent *alibabaCloudCfg;
 @property (nonatomic, strong) HSConfigContent *volcEngineCfg;
 @property (nonatomic, strong) HSConfigContent *sudCfg;
+@property (nonatomic, assign) NSInteger accountStatus;
 @end
 
 NS_ASSUME_NONNULL_END

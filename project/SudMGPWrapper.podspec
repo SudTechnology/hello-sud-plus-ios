@@ -29,11 +29,11 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   #  s.static_framework = false
   
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '11.0'
   s.pod_target_xcconfig = { 'PRODUCT_BUNDLE_IDENTIFIER': 'tech.sud.SudMGPWrapper' }
 
   s.subspec 'SudMGPWrapper' do |ss|
-      ss.ios.deployment_target = '9.0'
+      ss.ios.deployment_target = '11.0'
       ss.public_header_files = 'SudMGPWrapper/**/*.h'
 
       ss.source_files = [
@@ -42,11 +42,12 @@ Pod::Spec.new do |s|
         'SudMGPWrapper/Model/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
         'SudMGPWrapper/State/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
       ]
-      ss.vendored_frameworks = [
-        'SudMGPSDK/SudMGP.xcframework'
-      ]
+#      ss.vendored_frameworks = [
+#        'SudMGPSDK/SudMGP.xcframework'
+#      ]
 
       # json
       ss.dependency 'MJExtension', '~> 3.4.1'
+#      ss.dependency 'SudMGP_Lite', '1.2.7'
     end
 end
