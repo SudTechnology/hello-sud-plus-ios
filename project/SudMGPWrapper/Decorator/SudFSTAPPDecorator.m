@@ -15,6 +15,29 @@
 
 - (void)setISudFSTAPP:(id <ISudFSTAPP>)iSudFSTAPP {
     _iSudFSTAPP = iSudFSTAPP;
+    if (!self.stopBackgroundGameState) {    
+        [self addNotification];
+    }
+}
+
+- (void)addNotification {
+    NSNotificationCenter* defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter removeObserver:self];
+    // 维护游戏进入前后台状态
+    [defaultCenter addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [defaultCenter addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+}
+
+- (void)applicationDidEnterBackground:(NSNotification*)notification {
+    if (_iSudFSTAPP) {
+        [_iSudFSTAPP pauseMG];
+    }
+}
+
+- (void)applicationWillEnterForeground:(NSNotification*)notification {
+    if (_iSudFSTAPP) {
+        [_iSudFSTAPP playMG];
+    }
 }
 
 

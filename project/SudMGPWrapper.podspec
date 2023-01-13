@@ -49,5 +49,6 @@ Pod::Spec.new do |s|
       # json
       ss.dependency 'MJExtension', '~> 3.4.1'
 #      ss.dependency 'SudMGP_Lite', '1.2.7'
+      ss.dependency 'SudMGP', '1.2.7'
     end
 end

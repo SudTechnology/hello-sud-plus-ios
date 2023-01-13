@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// app -> 游戏
 @interface SudFSTAPPDecorator : NSObject
-
+// 是否停止游戏后台状态维护;默认false,即自动维护切换前后台游戏状态
+@property(nonatomic, assign) BOOL stopBackgroundGameState;
 @property(nonatomic, strong) id <ISudFSTAPP> iSudFSTAPP;
 
 /// setI SudFSTAPP

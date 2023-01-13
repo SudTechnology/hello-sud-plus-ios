@@ -61,8 +61,8 @@ target 'HelloSud-iOS' do
   #pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
   pod 'TXLiteAVSDK_TRTC', '10.2.11418'
   # SudMGP包装类
-#  pod 'SudMGPWrapper', :path => './'
-  pod 'SudMGPWrapper', '~> 1.6.0'
+  pod 'SudMGPWrapper', :path => './'
+#  pod 'SudMGPWrapper', '~> 1.6.0'
   # SudNFT SDK
   pod 'SudNFT', '1.0.4'
   #使用ASR时集成该库
@@ -95,8 +95,8 @@ target 'QuickStart' do
   # 日志
   pod 'CocoaLumberjack'
   # SudMGPSDK包装类
-#  pod 'SudMGPWrapper', :path => './'
-  pod 'SudMGPWrapper', '~> 1.6.0'
+  pod 'SudMGPWrapper', :path => './'
+#  pod 'SudMGPWrapper', '~> 1.6.0'
 end
 
 # SudNFTQuickStart
