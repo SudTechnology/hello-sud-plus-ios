@@ -74,12 +74,12 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SSZipArchive (2.4.3)
-  - SudMGP (1.2.7)
+  - SudMGP (1.2.8)
   - SudMGPWrapper (1.0.6):
     - SudMGPWrapper/SudMGPWrapper (= 1.0.6)
   - SudMGPWrapper/SudMGPWrapper (1.0.6):
     - MJExtension (~> 3.4.1)
-    - SudMGP (= 1.2.7)
+    - SudMGP (= 1.2.8)
   - SudNFT (1.0.4)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -186,7 +186,7 @@ CHECKOUT OPTIONS:
     :tag: 2.5.6
 
 SPEC CHECKSUMS:
-  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   AgoraAudio_iOS: d64f3fcd15576a8bb9b715997978ec427008f287
   AgoraRtm_iOS: b4bb9a431ce36f9b44cda423e66b2f96945ca2ab
   BDAlphaPlayer: 3b31756760ea37b9710bfb36a18b431ad05f6da7
@@ -211,8 +211,8 @@ SPEC CHECKSUMS:
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  SudMGP: e8a3e676c2b6a4b1c9ba2cf29d30f75890ba3472
-  SudMGPWrapper: e6a4b32065009272588394c8e0c2de4a1caa836c
+  SudMGP: 201ec1b8d4b16e87f2975efea476b12b4e61c3c5
+  SudMGPWrapper: ae8462ce296b17784f6a2aad735e862a66acfa96
   SudNFT: efa7ec483a2d6e5c5a8e1dda5f8d6578b97ddf9c
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea

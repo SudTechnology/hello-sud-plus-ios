@@ -280,6 +280,23 @@
 
 }
 
+/// 创建应用订单，用于游戏指令创建订单
+/// @param finished finished
+/// @param failure failure
++ (void)reqAppOrder:(ReqAppOrderModel *)reqModel finished:(void (^)(BaseRespModel *respModel))finished failure:(void (^)(NSError *error))failure {
+    NSDictionary *dicParam = reqModel.mj_JSONObject;
+    [HSHttpService postRequestWithURL:kGameURL(@"app/create-order/v1")
+                                param:dicParam
+                            respClass:BaseRespModel.class
+                       showErrorToast:YES
+                              success:^(BaseRespModel *resp) {
+                                  if (finished) {
+                                      BaseRespModel *m = (BaseRespModel *) resp;
+                                      finished(m);
+                                  }
+                              } failure:failure];
+}
+
 #pragma mark - Custom
 
 + (RoomCustomModel *)getCustomModel {

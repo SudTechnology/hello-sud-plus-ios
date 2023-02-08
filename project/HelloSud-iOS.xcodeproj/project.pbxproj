@@ -231,6 +231,7 @@
 		6C7CB61928C5E940003A19A8 /* MyNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */; };
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
 		6C8D02D028AB774100C230E5 /* DTUIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */; };
+		6CA21CCC2975268800F5AE8E /* ReqAppOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA21CCB2975268800F5AE8E /* ReqAppOrderModel.m */; };
 		6CA68C4C28E182E200BDE442 /* ReqAddScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */; };
 		6CA68D1228E29CA700BDE442 /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68CCE28E29CA500BDE442 /* MyCNWalletSwitchCellModel.m */; };
 		6CA68D1328E29CA700BDE442 /* WalletAddressSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68CCF28E29CA500BDE442 /* WalletAddressSwitchCellModel.m */; };
@@ -888,6 +889,8 @@
 		6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RespDiscoModel.m; sourceTree = "<group>"; };
 		6C8D02CE28AB774000C230E5 /* DTUIImage+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTUIImage+Extension.h"; sourceTree = "<group>"; };
 		6C8D02CF28AB774000C230E5 /* DTUIImage+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "DTUIImage+Extension.m"; sourceTree = "<group>"; };
+		6CA21CCA2975268800F5AE8E /* ReqAppOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqAppOrderModel.h; sourceTree = "<group>"; };
+		6CA21CCB2975268800F5AE8E /* ReqAppOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqAppOrderModel.m; sourceTree = "<group>"; };
 		6CA68C4A28E182E200BDE442 /* ReqAddScoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqAddScoreModel.h; sourceTree = "<group>"; };
 		6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqAddScoreModel.m; sourceTree = "<group>"; };
 		6CA68CCC28E29CA500BDE442 /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
@@ -2077,6 +2080,8 @@
 				6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */,
 				6CA68C4A28E182E200BDE442 /* ReqAddScoreModel.h */,
 				6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */,
+				6CA21CCA2975268800F5AE8E /* ReqAppOrderModel.h */,
+				6CA21CCB2975268800F5AE8E /* ReqAppOrderModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3520,6 +3525,7 @@
 				4455ADD127EAC658001516EE /* OneOneViewController.m in Sources */,
 				6C4608262864062D005C99EF /* LandscapeGuideTipView.m in Sources */,
 				4455AE1327EAC6F7001516EE /* GameMicContentView.m in Sources */,
+				6CA21CCC2975268800F5AE8E /* ReqAppOrderModel.m in Sources */,
 				4455ADB127EAC658001516EE /* GiftUserCollectionViewCell.m in Sources */,
 				4455AD9F27EAC658001516EE /* SwitchMicModel.m in Sources */,
 				4455AE0627EAC6F7001516EE /* BaseSceneViewController.m in Sources */,

@@ -235,6 +235,25 @@
     DDLogDebug(@"onGameMGCommonGameDiscoActionEnd: actionID:%@, playerID:%@", model.actionId, model.playerId);
 }
 
+/// 创建订单 MG_COMMON_GAME_CREATE_ORDER
+- (void)onGameMGCommonGameCreateOrder:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameCreateOrderModel *)model {
+
+    ReqAppOrderModel *reqModel = ReqAppOrderModel.new;
+    reqModel.roomId = self.roomID;
+    reqModel.gameId = self.gameId;
+    reqModel.value = model.value;
+    reqModel.cmd = model.cmd;
+    reqModel.fromUid = model.fromUid;
+    reqModel.toUid = model.toUid;
+    reqModel.payload = model.payload;
+    
+    [AudioRoomService reqAppOrder:reqModel finished:^(BaseRespModel * _Nonnull respModel) {
+        DDLogDebug(@"reqAppOrder success");
+        } failure:^(NSError * _Nonnull error) {
+            DDLogDebug(@"reqAppOrder fail:%@", error.debugDescription);
+        }];
+}
+
 
 #pragma mark =======Comonn状态处理=======
 

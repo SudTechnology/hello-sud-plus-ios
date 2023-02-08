@@ -10,6 +10,7 @@
 #import "RoomCustomModel.h"
 #import "GameCfgModel.h"
 #import "RoomOrderCreateModel.h"
+#import "ReqAppOrderModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -66,6 +67,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param finished finished
 /// @param failure failure
 + (void)reqBannerListWithFinished:(void (^)(RespBannerListModel *respModel))finished failure:(void (^)(NSError *error))failure;
+
+/// 创建应用订单，用于游戏指令创建订单
+/// @param finished finished
+/// @param failure failure
++ (void)reqAppOrder:(ReqAppOrderModel *)reqModel finished:(void (^)(BaseRespModel *respModel))finished failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Custom
 
