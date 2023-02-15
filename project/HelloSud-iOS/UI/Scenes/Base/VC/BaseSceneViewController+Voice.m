@@ -9,7 +9,7 @@
 #import "BaseSceneViewController.h"
 #import "IMRoomManager.h"
 
-@implementation BaseSceneViewController(Voice)
+@implementation BaseSceneViewController (Voice)
 
 /// 开启推流
 - (void)startPublishStream {
@@ -29,7 +29,7 @@
 
 - (void)loginRoom {
     /// 设置语音引擎事件回调
-
+    WeakSelf
     AudioJoinRoomModel *audioJoinRoomModel = nil;
     audioJoinRoomModel = [[AudioJoinRoomModel alloc] init];
     audioJoinRoomModel.userID = AppService.shared.login.loginUserInfo.userID;
@@ -39,7 +39,7 @@
     if (AppService.shared.rtcConfigModel != nil) {
         audioJoinRoomModel.appId = AppService.shared.rtcConfigModel.appId;
     }
-    
+
     if (audioJoinRoomModel == nil)
         return;
 
@@ -47,17 +47,25 @@
     AudioConfigModel *configModel = AppService.shared.rtcConfigModel;
     if (configModel) {
         NSString *rtcType = AppService.shared.rtcType;
-        
+
         configModel.userID = AppService.shared.login.loginUserInfo.userID;
         if ([rtcType isEqualToString:kRtcTypeRongCloud]) {
             configModel.token = self.enterModel.rtcToken;
         } else {
             configModel.token = self.enterModel.rtiToken;
         }
-        
+
         if ([AppService shared].configModel != nil && [AppService shared].configModel.zegoCfg != nil) {
             [[IMRoomManager sharedInstance] init:[AppService shared].configModel.zegoCfg.appId listener:self];
-            [[IMRoomManager sharedInstance] joinRoom:self.roomID userID:AppService.shared.login.loginUserInfo.userID userName:AppService.shared.login.loginUserInfo.name token:self.enterModel.imToken];
+            [[IMRoomManager sharedInstance] joinRoom:self.roomID
+                                              userID:AppService.shared.login.loginUserInfo.userID
+                                            userName:AppService.shared.login.loginUserInfo.name
+                                               token:self.enterModel.imToken
+                                             success:^{
+                                                 [weakSelf onHandleCrossRoomImConnected];
+                                             } fail:^(NSInteger code, NSString *msg) {
+
+                    }];
         }
 
         [AudioEngineFactory.shared.audioEngine initWithConfig:configModel success:^{
@@ -67,8 +75,11 @@
     }
 
     [self joinRoom:audioJoinRoomModel];
-    
-    [[IMRoomManager sharedInstance] joinRoom:self.roomID userID:AppService.shared.login.loginUserInfo.userID userName:AppService.shared.login.loginUserInfo.name token:self.enterModel.imToken];
+
+    [[IMRoomManager sharedInstance] joinRoom:self.roomID userID:AppService.shared.login.loginUserInfo.userID userName:AppService.shared.login.loginUserInfo.name token:self.enterModel.imToken success:^{
+        [weakSelf onHandleCrossRoomImConnected];
+    }                                   fail:^(NSInteger code, NSString *msg) {
+    }];
 }
 
 - (void)joinRoom:(AudioJoinRoomModel *)audioJoinRoomModel {
@@ -77,16 +88,18 @@
     [AudioEngineFactory.shared.audioEngine setAudioRouteToSpeaker:YES];
 }
 
-- (void)logoutRoom {
+- (void)logoutRoom:(void (^)(void))finished {
     [kAudioRoomService reqExitRoom:self.roomID.longLongValue];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
     // 离开房间
     [AudioEngineFactory.shared.audioEngine leaveRoom];
     [[IMRoomManager sharedInstance] leaveRoom];
     [self logoutGame];
+    if (finished) finished();
 }
 
 #pragma mark =======音频采集=======
+
 /// 开始音频采集
 - (void)startCaptureAudioToASR {
     [AudioEngineFactory.shared.audioEngine startPCMCapture];
@@ -110,19 +123,20 @@
 }
 
 #pragma mark delegate
+
 /// 捕获本地音量变化
 /// @param soundLevel 本地音量级别，取值范围[0, 100]
-- (void)onCapturedSoundLevelUpdate:(NSNumber*)soundLevel {
+- (void)onCapturedSoundLevelUpdate:(NSNumber *)soundLevel {
     if (soundLevel.intValue > 0) {
 //        NSLog(@"local voice:%@", soundLevel);
-        [[NSNotificationCenter defaultCenter]postNotificationName:NTF_LOCAL_VOICE_VOLUME_CHANGED object:nil userInfo:@{@"volume":soundLevel}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NTF_LOCAL_VOICE_VOLUME_CHANGED object:nil userInfo:@{@"volume": soundLevel}];
     }
 }
 
 /// 捕获远程音流音量变化
 /// @param soundLevels [流ID: 音量]，音量取值范围[0, 100]
-- (void)onRemoteSoundLevelUpdate:(NSDictionary<NSString*, NSNumber*>*)soundLevels {
-    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_REMOTE_VOICE_VOLUME_CHANGED object:nil userInfo:@{@"dicVolume":soundLevels}];
+- (void)onRemoteSoundLevelUpdate:(NSDictionary<NSString *, NSNumber *> *)soundLevels {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_REMOTE_VOICE_VOLUME_CHANGED object:nil userInfo:@{@"dicVolume": soundLevels}];
 }
 
 /// 房间流更新 增、减，需要收到此事件后播放对应流
@@ -130,11 +144,11 @@
 /// @param updateType 流更新类型 增，减
 /// @param streamList 变动流列表
 /// @param extendedData 扩展信息
-- (void)onRoomStreamUpdate:(NSString *)roomID updateType:(HSAudioEngineUpdateType)updateType streamList:(NSArray<AudioStream *>*)streamList extendedData:(NSDictionary<NSString *, NSObject*>*)extendedData {
+- (void)onRoomStreamUpdate:(NSString *)roomID updateType:(HSAudioEngineUpdateType)updateType streamList:(NSArray<AudioStream *> *)streamList extendedData:(NSDictionary<NSString *, NSObject *> *)extendedData {
     switch (updateType) {
         case HSAudioEngineUpdateTypeAdd:
             for (AudioStream *item in streamList) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey:item}];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey: item}];
             }
             break;
         case HSAudioEngineUpdateTypeDelete:
@@ -152,10 +166,22 @@
 
 - (void)onRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData {
     DDLogInfo(@"onRoomStateUpdate:%@, errorCode:%@", @(state), @(errorCode));
-    if (state == HSAudioEngineStateConnected && !self.isSentEnterRoom) {
-        self.isSentEnterRoom = YES;
-        [self sendEnterRoomMsg];
-        [self onHandleEnteredRoom];
+    if (state == HSAudioEngineStateConnecting) {
+        // 连接中
+        if (self.isEnteredRoom) {
+            self.isNeedReLoginRoom = YES;
+            DDLogDebug(@"re connecting room");
+        }
+    } else if (state == HSAudioEngineStateConnected) {
+        if (self.isNeedReLoginRoom) {
+            DDLogDebug(@"re login room");
+            [self loginRoom];
+        }
+        if (!self.isSentEnterRoom) {
+            self.isSentEnterRoom = YES;
+            [self sendEnterRoomMsg];
+            [self onHandleEnteredRoom];
+        }
     }
 }
 

@@ -19,7 +19,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <SudMGP/ISudCfg.h>
 
-@interface AppDelegate () {
+@interface AppDelegate ()<BuglyDelegate> {
 
 }
 
@@ -80,7 +80,9 @@
 - (void)configBugly {
     NSString *version = [NSString stringWithFormat:@"%@.%@", [DeviceUtil getAppVersion], [DeviceUtil getAppBuildCode]];
     [Bugly updateAppVersion:version];
-    [Bugly startWithAppId:BUGLEY_APP_ID];
+    BuglyConfig *config = BuglyConfig.new;
+    config.delegate = self;
+    [Bugly startWithAppId:BUGLEY_APP_ID config:config];
 }
 
 
@@ -252,6 +254,18 @@
         }
     }];
     [AFNetworkReachabilityManager.sharedManager startMonitoring];
+}
+
+/**
+ *  发生异常时回调
+ *
+ *  @param exception 异常信息
+ *
+ *  @return 返回需上报记录，随异常上报一起上报
+ */
+- (NSString * BLY_NULLABLE)attachmentForException:(NSException * BLY_NULLABLE)exception {
+    DDLogError(@"bugly error:%@, info:%@", exception.debugDescription, exception.userInfo);
+    return @"";
 }
 
 @end

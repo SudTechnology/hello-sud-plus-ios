@@ -6,7 +6,7 @@
 //
 
 #import "EnterRoomModel.h"
-
+#import "RoomCmdCrossAppModel.h"
 
 /// pk结果房间信息
 @implementation PKResultRoomInfoModel
@@ -17,11 +17,22 @@
 
 @end
 
+@implementation CrossAppMatchModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"userList": UserIndexInfo.class};
+}
+@end
+
+@implementation CrossAppRoomModel
+@end
+
 @implementation EnterRoomModel
 - (NSMutableDictionary *)dicExtData {
-    if (!_dicExtData){
+    if (!_dicExtData) {
         _dicExtData = NSMutableDictionary.new;
     }
     return _dicExtData;
 }
 @end
+
+

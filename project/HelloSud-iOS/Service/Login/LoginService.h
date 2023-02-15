@@ -42,6 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 保持用户信息
 - (void)saveLoginUserInfo;
+
+/// 移除登录信息
+- (void)removeLoginInfo;
 @end
 
 NS_ASSUME_NONNULL_END

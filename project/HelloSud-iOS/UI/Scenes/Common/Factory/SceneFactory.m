@@ -15,6 +15,7 @@
 #import "DanmakuRoomViewController.h"
 #import "DiscoRoomViewController.h"
 #import "LeagueRoomViewController.h"
+#import "../../CrossApp/VC/CrossAppViewController.h"
 
 @implementation SceneFactory {
 
@@ -53,8 +54,14 @@
         case SceneTypeLeague:
             vc = [[LeagueRoomViewController alloc]init];
             break;
+        case SceneTypeCrossApp:
+            vc = [[CrossAppViewController alloc]init];
+            break;
+        case  SceneTypeCrossDomain:
+            vc = [[AudioRoomViewController alloc] init];
+            break;
         default:
-            vc = [[BaseSceneViewController alloc] init];
+            vc = [[AudioRoomViewController alloc] init];
             break;
     }
     [vc createService];

@@ -90,6 +90,14 @@ NSString *const NFT_REFRESH_NFT = @"NFT_REFRESH_NFT";
     }
 }
 
+/// 移除登录信息
+- (void)removeLoginInfo {
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:kKeyLoginUserInfo];
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:kKeyLoginIsLogin];
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:kKeyLoginToken];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
 /// 保存token
 - (void)saveToken:(NSString *)token {
     _token = token;
@@ -113,6 +121,9 @@ NSString *const NFT_REFRESH_NFT = @"NFT_REFRESH_NFT";
     NSMutableDictionary *dicParam = [NSMutableDictionary dictionaryWithDictionary:@{@"nickname": name, @"deviceId": deviceId}];
     if (userID.length > 0) {
         dicParam[@"userId"] = @(userID.integerValue);
+    }
+    if (HsAppPreferences.shared.appId) {
+        dicParam[@"appId"] = HsAppPreferences.shared.appId;
     }
     WeakSelf
     [HSHttpService postRequestWithURL:kBASEURL(@"login/v1") param:dicParam respClass:LoginModel.class showErrorToast:YES success:^(BaseRespModel *resp) {

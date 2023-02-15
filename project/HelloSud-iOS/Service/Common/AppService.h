@@ -17,6 +17,7 @@
 #import "DiscoRoomService.h"
 #import "LeagueRoomService.h"
 #import "RocketService.h"
+#import "CrossAppRoomService.h"
 #import "BaseballService.h"
 
 // 语音服务
@@ -117,6 +118,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return
 - (BOOL)isSameRtc:(HSConfigContent *)rtcConfig rtcType:(NSString *)rtcType;
 
+/// 获取游戏信息
+/// @param gameId gameId
+/// @return
+- (HSGameItem *)getSceneGameInfo:(int64_t)gameId;
+
+- (void)removeAllConfig;
 @end
 
 NS_ASSUME_NONNULL_END

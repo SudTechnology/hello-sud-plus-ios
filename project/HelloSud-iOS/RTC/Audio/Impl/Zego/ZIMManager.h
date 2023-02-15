@@ -22,7 +22,7 @@ typedef void (^OnReceiveRoomMessage)(NSString* roomID, NSString* senderUserID, N
 
 - (void)destroy;
 
-- (void)joinRoom:(NSString *)roomID userID:(NSString *)userID userName:(NSString *)userName token:(NSString *)token;
+- (void)joinRoom:(NSString *)roomID userID:(NSString *)userID userName:(NSString *)userName token:(NSString *)token success:(void (^)(void))success fail:(void (^)(NSInteger code, NSString *msg))fail;
 
 - (void)leaveRoom;
 

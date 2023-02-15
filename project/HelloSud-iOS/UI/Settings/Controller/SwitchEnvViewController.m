@@ -83,12 +83,20 @@
     SwitchEnvModel *nftProModel = [SwitchEnvModel alloc];
     nftProModel.title = @"pro";
     nftProModel.envType = HsNftEnvTypePro;
+    // appId切换
+    SwitchEnvModel *appIdDefaultModel = [SwitchEnvModel alloc];
+    appIdDefaultModel.title = @"默认配置";
+    appIdDefaultModel.envType = HsAppIdTypeDefault;
 
+    SwitchEnvModel *appIdDefaultModel2 = [SwitchEnvModel alloc];
+    appIdDefaultModel2.title = @"1544232043822546945";
+    appIdDefaultModel2.envType = HsAppIdType945;
 
     NSArray *appEnvArr = @[devModel, simModel, fatModel, proModel];
     NSArray *gameEnvArr = @[gameDevModel, gameSimModel, gameFatModel, gameProModel];
     NSArray *nftEnvArr = @[nftDevModel, nftSimModel, nftFatModel, nftProModel];
-    [self handleData:@[appEnvArr, gameEnvArr, nftEnvArr]];
+    NSArray *appIdArr = @[appIdDefaultModel, appIdDefaultModel2];
+    [self handleData:@[appEnvArr, gameEnvArr, nftEnvArr, appIdArr]];
 }
 
 - (void)handleData:(NSArray<SwitchEnvModel *> *)list {
@@ -142,6 +150,12 @@
         case 2:
             HsAppPreferences.shared.nftEnvType = model.envType;
             break;
+        case 3:
+            HsAppPreferences.shared.appIdType = model.envType;
+            /// 移除登录信息，重新登录
+            [AppService.shared.login removeLoginInfo];
+            [AppService.shared removeAllConfig];
+            break;
     }
     [self.tableView reloadData];
 }
@@ -165,6 +179,9 @@
             break;
         case 2:
             model.isSelect = model.envType == HsAppPreferences.shared.nftEnvType;
+            break;
+        case 3:
+            model.isSelect = model.envType == HsAppPreferences.shared.appIdType;
             break;
     }
     c.model = model;
@@ -206,6 +223,8 @@
             return @"游戏环境设置";
         case 2:
             return @"NFT环境设置";
+        case 3:
+            return @"APPID切换";
     }
     return @"";
 }

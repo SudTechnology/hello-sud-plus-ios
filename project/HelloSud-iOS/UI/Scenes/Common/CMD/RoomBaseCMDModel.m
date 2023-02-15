@@ -51,4 +51,13 @@
 + (instancetype)fromJSON:(id)keyValues {
     return [self mj_objectWithKeyValues:keyValues];
 }
+
+/// 解码服务器返回的model
+/// @param keyValues keyValues json对象
++ (instancetype)fromServerJSON:(NSString *)keyValues {
+    NSDictionary *dicData = [NSJSONSerialization JSONObjectWithData:[keyValues dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    RoomBaseCMDModel *base = [self mj_objectWithKeyValues:dicData[@"content"]];
+    base.cmd = [dicData[@"cmd"] integerValue];
+    return base;
+}
 @end

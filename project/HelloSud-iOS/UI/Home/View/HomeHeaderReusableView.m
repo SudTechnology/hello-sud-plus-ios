@@ -10,7 +10,9 @@
 #import "GuessCategoryView.h"
 #import "UIImage+GIF.h"
 #import "LeagueResultPopView.h"
+#import "CrossAppSelectGameView.h"
 #import "HomeBannerView.h"
+
 
 @interface HomeHeaderReusableView ()
 @property(nonatomic, strong) BaseView *contentView;
@@ -161,6 +163,11 @@
         [self.previewView sd_setImageWithURL:[NSURL URLWithString:sceneModel.sceneImageNew]];
     }
     self.createNode.textColor = sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A");
+    if (self.sceneModel.sceneId == SceneTypeCrossApp) {
+        self.createNode.text = @"选择游戏";
+    } else {
+        self.createNode.text = NSString.dt_home_create_room;
+    }
     if (self.sceneModel.firstGame) {
         self.firstGameNameLabel.text = self.sceneModel.firstGame.gameName;
     }
@@ -259,6 +266,15 @@
         node.onGameLevelCallBack = ^(NSInteger gameLevel) {
             [AudioRoomService reqCreateRoom:self.sceneModel.sceneId extData:nil gameLevel:gameLevel];
         };
+    } else if (self.sceneModel.sceneId == SceneTypeCrossApp) {
+        // 选择游戏
+        CrossAppSelectGameView *v = [[CrossAppSelectGameView alloc] init];
+        [v reloadData:self.sceneModel.sceneId gameID:0 isShowCloseGame:false];
+        v.matchClickCallback = ^(HSGameItem *selectedGame, NSInteger matchType) {
+            [AudioRoomService reqCreateRoom:SceneTypeCrossApp extData:@{@"crossAppType": @(matchType), @"matchGameId":@(selectedGame.gameId)} gameLevel:0];
+        };
+        [DTSheetView show:v rootView:AppUtil.currentWindow hiddenBackCover:NO onCloseCallback:^{
+        }];
     } else {
         [AudioRoomService reqCreateRoom:self.sceneModel.sceneId extData:nil gameLevel:-1];
     }

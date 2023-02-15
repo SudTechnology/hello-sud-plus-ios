@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign)NSInteger  gameId;
 
 /// 登录游戏
-- (void)reqGameLoginWithSuccess:(void(^)(RespGameInfoModel *gameInfo))success fail:(ErrorBlock)fail;
+- (void)reqGameLoginWithAppId:(NSString *)appId success:(void (^)(RespGameInfoModel *gameInfo))success fail:(ErrorBlock)fail;
 
 @end
 

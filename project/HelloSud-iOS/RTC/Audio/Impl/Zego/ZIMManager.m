@@ -55,30 +55,40 @@
     self.mRoomID = nil;
 }
 
-- (void)joinRoom:(NSString *)roomID userID:(NSString *)userID userName:(NSString *)userName token:(NSString *)token {
+- (void)joinRoom:(NSString *)roomID userID:(NSString *)userID userName:(NSString *)userName token:(NSString *)token success:(void (^)(void))success fail:(void (^)(NSInteger code, NSString *msg))fail {
     if (self.zim == nil) {
+        if (fail) {
+            fail(-1, @"");
+        }
         return;
     }
-    
+
     NSLog(@"ZIMManager： roomID = %@", roomID);
-    
+
     ZIMUserInfo *userInfo = [[ZIMUserInfo alloc] init];
     userInfo.userID = userID;
     userInfo.userName = userName;
     [self.zim loginWithUserInfo:userInfo token:token callback:^(ZIMError *errorInfo) {
         if (errorInfo.code == ZIMErrorCodeSuccess || errorInfo.code == ZIMErrorCodeNetworkModuleUserHasAlreadyLogged) {
-            
+
             ZIMRoomInfo *zimRoomInfo = ZIMRoomInfo.new;
             zimRoomInfo.roomID = roomID;
             zimRoomInfo.roomName = roomID;
-            
+
             ZIMRoomAdvancedConfig *zimRoomAdvancedConfig = ZIMRoomAdvancedConfig.new;
             zimRoomAdvancedConfig.roomAttributes = [[NSDictionary alloc] init];
-            
-            [self.zim enterRoom:zimRoomInfo config:zimRoomAdvancedConfig callback:^(ZIMRoomFullInfo * _Nonnull roomInfo, ZIMError * _Nonnull errorInfo) {
+
+            [self.zim enterRoom:zimRoomInfo config:zimRoomAdvancedConfig callback:^(ZIMRoomFullInfo *_Nonnull roomInfo, ZIMError *_Nonnull errorInfo) {
                 NSLog(@"enterRoom： %lu", errorInfo.code);
                 if (errorInfo.code == ZIMErrorCodeSuccess) {
                     self.mRoomID = roomID;
+                    if (success) {
+                        success();
+                    }
+                } else {
+                    if (fail) {
+                        fail(errorInfo.code, errorInfo.message);
+                    }
                 }
             }];
         }

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)loginRoom;
 
 /// 退出房间 rtc相关逻辑
-- (void)logoutRoom;
+- (void)logoutRoom:(void (^)(void))finished;
 
 #pragma mark =======音频采集=======
 /// 开始音频采集

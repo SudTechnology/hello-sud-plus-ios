@@ -9,6 +9,8 @@
 #import "BaseSceneViewController+Voice.h"
 #import <SudMGP/SudMGP-umbrella.h>
 #import "RocketSelectAnchorView.h"
+#import <SudMGP/SudMGP-umbrella.h>
+#import <SudMGP/SudLoadMGMode.h>
 
 @implementation BaseSceneViewController (Game)
 
@@ -37,6 +39,7 @@
 }
 
 - (void)onGameDestroyed {
+    [self updateGamePeopleCount];
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
 
 }
@@ -60,12 +63,12 @@
 /// 短期令牌code过期  【需要实现】
 - (void)onExpireCode:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
     // 请求业务服务器刷新令牌 Code更新
-    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel *_Nonnull gameInfo) {
+    [GameService.shared reqGameLoginWithAppId:nil success:^(RespGameInfoModel *gameInfo) {
         // 调用游戏接口更新令牌
         [self.sudFSTAPPDecorator updateCode:gameInfo.code];
         // 回调成功结果
         [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
-    }                                      fail:^(NSError *error) {
+    }                                    fail:^(NSError *error) {
         [ToastUtil show:error.debugDescription];
         // 回调失败结果
         [handle failure:[self.sudFSMMGDecorator handleMGFailure]];
@@ -296,7 +299,7 @@
         // 请求上麦
         [self handleGameUpMic];
     }
-    self.gameNumLabel.text = [NSString stringWithFormat:@"%@：%ld/%ld", NSString.dt_game_person_count, self.sudFSMMGDecorator.onlineUserIdList.count, self.totalGameUserCount];
+    [self updateGamePeopleCount];
     [self playerIsInGameStateChanged:userId];
 }
 
@@ -307,16 +310,18 @@
 /// 接入方客户端 调用 接入方服务端 loginGame: 获取 短期令牌code
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
 - (void)loginGame {
-    NSString *appID = AppService.shared.configModel.sudCfg.appId;
-    NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
+
+    NSString *appID = HsAppPreferences.shared.appId;
+    NSString *appKey = HsAppPreferences.shared.appKey;
+    DDLogDebug(@"appId:%@", appID);
     if (appID.length == 0 || appKey.length == 0) {
         [ToastUtil show:@"Game appID or appKey is empty"];
         return;
     }
     WeakSelf
-    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel *_Nonnull gameInfo) {
+    [GameService.shared reqGameLoginWithAppId:appID success:^(RespGameInfoModel *gameInfo) {
         [weakSelf login:weakSelf.gameView gameId:weakSelf.gameId code:gameInfo.code appID:appID appKey:appKey];
-    }                                      fail:^(NSError *error) {
+    }                                    fail:^(NSError *error) {
         [ToastUtil show:error.debugDescription];
     }];
 }
@@ -417,6 +422,12 @@
     model.mgId = mgId;
     model.language = language;
     model.gameViewContainer = rootView;
+
+    if (self.enterModel.extraRoomVO.authSecret.length > 0) {
+        model.loadMGMode = kSudLoadMgModeAppCrossAuth;
+        model.authorizationSecret = self.enterModel.extraRoomVO.authSecret;
+    }
+
     id<ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:model fsmMG:self.sudFSMMGDecorator];
     [self.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
 }

@@ -76,6 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *roomName;
 /// 是否发送进入房间
 @property(nonatomic, assign) BOOL isSentEnterRoom;
+/// 是否重新登录房间
+@property(nonatomic, assign) BOOL isNeedReLoginRoom;
 /// 进入房间信息
 @property(nonatomic, strong) EnterRoomModel *enterModel;
 /// 游戏总人数
@@ -249,6 +251,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 已经进入房间，消息通道已经建立
 - (void)onHandleEnteredRoom;
 
+/// 跨房消息通道建立
+- (void)onHandleCrossRoomImConnected;
+
 /// 自己成为了队长事件处理
 - (void)onHandleIsGameCaptain;
 
@@ -264,6 +269,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param giftModel
 /// @param toMicList
 - (void)handleRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList;
+
+- (void)updateGamePeopleCount;
 @end
 
 NS_ASSUME_NONNULL_END

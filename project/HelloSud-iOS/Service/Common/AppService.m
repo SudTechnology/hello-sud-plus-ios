@@ -191,6 +191,19 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     return NO;
 }
 
+/// 获取游戏信息
+/// @param gameId gameId
+/// @return
+- (HSGameItem *)getSceneGameInfo:(int64_t)gameId {
+    NSArray <HSGameItem *> *dataArr = AppService.shared.gameList;
+    for (HSGameItem *item in dataArr) {
+        if (item.gameId == gameId) {
+            return item;
+        }
+    }
+    return nil;
+}
+
 /// 切换RTC语音SDK
 /// @param rtcType 厂商类型
 - (NSString *)switchAudioEngine:(NSString *)rtcType {
@@ -294,7 +307,10 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     return @"";
 }
 
-
+- (void)removeAllConfig {
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:kKeyConfigModel];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
 @end
 
 

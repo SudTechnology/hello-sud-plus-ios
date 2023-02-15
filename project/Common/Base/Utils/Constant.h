@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 #define UIFONT_REGULAR(s) [UIFont systemFontOfSize:s weight:UIFontWeightRegular]
 /// 常规字号字体
 #define UIFONT_SEMI_BOLD(s) [UIFont systemFontOfSize:s weight:UIFontWeightSemibold]
-
-
+/// 转换Integer -> NSString
+#define DT_STR(p) [NSString stringWithFormat:@"%@", @(p)]
+/// 字符串比对
+#define DT_STR_IS_EQUAL(a,b) [a isEqualToString:b]
 NS_ASSUME_NONNULL_END

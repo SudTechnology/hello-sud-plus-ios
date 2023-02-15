@@ -51,6 +51,8 @@
 @property(nonatomic, assign) BOOL isFinishedMicList;
 /// 互动礼物火箭
 @property(nonatomic, strong) InteractiveGameManager *interactiveGameManager;
+/// 是否来自跨房
+@property(nonatomic, assign) BOOL isFromCrossRoom;
 @end
 
 @implementation BaseSceneViewController
@@ -68,7 +70,15 @@
     self.roomName = configModel.roomName;
     self.enterModel = configModel.enterRoomModel;
     // 默认游戏房间ID=当前房间ID
-    self.gameRoomID = self.roomID;
+    BOOL crossAppRoomId = [configModel.enterRoomModel.dicExtData[@"isFromCrossRoom"] boolValue];
+    if (crossAppRoomId) {
+        /// 跨域游戏房roomId
+        self.gameRoomID = configModel.enterRoomModel.extraRoomVO.roomId;
+        self.isFromCrossRoom = YES;
+    } else {
+        self.gameRoomID = self.roomID;
+    }
+
     DDLogDebug(@"enter roomID:%@, roleType:%@", self.roomID, @(configModel.roleType));
 }
 
@@ -90,7 +100,11 @@
         [self roomGameDidChanged:self.gameId];
     }
     [self dtUpdateUI];
-    [self.naviView hiddenNodeWithRoleType:kAudioRoomService.roleType];
+    NSInteger roleType = kAudioRoomService.roleType;
+    if (self.isFromCrossRoom) {
+        roleType = 0;
+    }
+    [self.naviView hiddenNodeWithRoleType:roleType];
     [self checkIfNeedToOpenRocket];
 }
 
@@ -331,16 +345,16 @@
     UITapGestureRecognizer *flyRocketTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onFlyRocketTap:)];
     [self.flyRocketEffectView addGestureRecognizer:flyRocketTap];
     [self.interactiveGameManager setupRocketEffectBlock:^(BOOL show) {
-            if (show) {
-                weakSelf.closeRocketEffectView.alpha = 1;
-                weakSelf.flyRocketEffectView.alpha = 1;
-            } else {
-                weakSelf.closeRocketEffectView.alpha = 0;
-                weakSelf.flyRocketEffectView.alpha = 0;
-            }
-        }];
+        if (show) {
+            weakSelf.closeRocketEffectView.alpha = 1;
+            weakSelf.flyRocketEffectView.alpha = 1;
+        } else {
+            weakSelf.closeRocketEffectView.alpha = 0;
+            weakSelf.flyRocketEffectView.alpha = 0;
+        }
+    }];
 
-    self.interactiveGameEnterView.clickBlock = ^(InteractiveGameBannerModel *model){
+    self.interactiveGameEnterView.clickBlock = ^(InteractiveGameBannerModel *model) {
         weakSelf.interactiveGameView.hidden = NO;
         [weakSelf showInteractiveGame:model.gameId showMainView:YES];
     };
@@ -544,15 +558,16 @@
     // 延迟关闭以便上面指令执行
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (500 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
 
-        [self logoutRoom];
-        [self logoutGame];
         [self.interactiveGameManager destoryGame];
-        if (!isSuspend) {
-            [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
-        }
-        if (finished) finished();
-        [DTSheetView close];
-        [DTAlertView close];
+        [self logoutRoom:^{
+            if (!isSuspend) {
+                [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
+            }
+            [DTSheetView close];
+            [DTAlertView close];
+            if (finished) finished();
+        }];
+
     });
 }
 
@@ -1419,7 +1434,6 @@
 }
 
 
-
 - (InteractiveGameBannerView *)interactiveGameEnterView {
     if (!_interactiveGameEnterView) {
         _interactiveGameEnterView = [[InteractiveGameBannerView alloc] init];
@@ -1482,6 +1496,10 @@
 
     if (kAudioRoomService.roleType != 1) {
         [self.naviView hiddenNodeWithEndGame:!isShowEndGame];
+    } else {
+        if (self.isFromCrossRoom) {
+            [self.naviView hiddenNodeWithEndGame:YES];
+        }
     }
 }
 
@@ -1762,6 +1780,11 @@
     [self checkIfNeedToLoadRobotList];
 }
 
+/// 跨房消息通道建立
+- (void)onHandleCrossRoomImConnected {
+    DDLogDebug(@"onHandleCrossRoomImConnected");
+}
+
 - (void)checkIfNeedToLoadRobotList {
     if (self.isEnteredRoom && self.isFinishedMicList) {
         if (self.isLoadCommonRobotList) {
@@ -1806,4 +1829,7 @@
 
 }
 
+- (void)updateGamePeopleCount {
+    self.gameNumLabel.text = [NSString stringWithFormat:@"%@：%ld/%ld", NSString.dt_game_person_count, self.sudFSMMGDecorator.onlineUserIdList.count, self.totalGameUserCount];
+}
 @end

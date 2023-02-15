@@ -39,6 +39,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 解码model
 /// @param keyValues keyValues json对象
 + (instancetype)fromJSON:(id)keyValues;
+
+/// 解码服务器返回的model
+/// @param keyValues keyValues json对象
++ (instancetype)fromServerJSON:(NSString *)keyValues;
 @end
 
 NS_ASSUME_NONNULL_END

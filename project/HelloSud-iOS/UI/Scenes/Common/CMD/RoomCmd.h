@@ -34,6 +34,11 @@
 
 #pragma mark 后台通知信令
 
-#define CMD_ROOM_PK_GAME_SETTLE_NOTIFY	20000 /// 跨房pk游戏结算消息
-#define CMD_ROOM_PK_CLOSE_NOTIFY	    20001 /// 跨房pk对手房间关闭消息
+#define CMD_ROOM_PK_GAME_SETTLE_NOTIFY	             20000 /// 跨房pk游戏结算消息
+#define CMD_ROOM_PK_CLOSE_NOTIFY	                 20001 /// 跨房pk对手房间关闭消息
+#define CMD_GAME_EXTRA_JOIN_TEAM_NOTIFY              21000 /// 1.6.1    跨域加入组队消息
+#define CMD_GAME_EXTRA_MATCH_USERS_CHANGED_NOTIFY    21001 /// 1.6.1    跨域匹配人数变更通知
+#define CMD_GAME_EXTRA_MATCH_STATUS_CHANGED_NOTIFY   21002 /// 1.6.1    跨域匹配状态变更通知
+#define CMD_GAME_EXTRA_TEAM_CHANGED_NOTIFY	         21003 /// 1.6.1	跨域匹配队伍变更通知
+#define CMD_GAME_EXTRA_GAME_SWITCH_NOTIFY	         21004 /// 1.6.1跨域匹配游戏切换通知
 #endif /* HSAudioMsgConst_h */

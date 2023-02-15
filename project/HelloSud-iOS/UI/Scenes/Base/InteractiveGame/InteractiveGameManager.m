@@ -170,9 +170,9 @@
         return;
     }
     WeakSelf
-    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel *_Nonnull gameInfo) {
+    [GameService.shared reqGameLoginWithAppId:appID success:^(RespGameInfoModel *gameInfo) {
         [weakSelf login:weakSelf.gameView gameId:weakSelf.gameId code:gameInfo.code appID:appID appKey:appKey];
-    }                                      fail:^(NSError *error) {
+    }                                    fail:^(NSError *error) {
         [ToastUtil show:error.debugDescription];
         [self clearLoadGameState];
     }];

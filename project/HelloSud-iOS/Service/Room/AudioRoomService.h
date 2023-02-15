@@ -10,6 +10,7 @@
 #import "RoomCustomModel.h"
 #import "GameCfgModel.h"
 #import "RoomOrderCreateModel.h"
+#import "RespCrossRoomListModel.h"
 #import "ReqAppOrderModel.h"
 
 NS_ASSUME_NONNULL_BEGIN

@@ -6,7 +6,7 @@
 //
 
 #import "AudioRoomViewController.h"
-
+#import "EnterRoomModel.h"
 
 @interface AudioRoomViewController ()
 @end
@@ -57,6 +57,21 @@
 - (void)dtUpdateUI {
     [super dtUpdateUI];
     [self roomTypeReloadContent];
+}
+
+- (NSString *)onGetGameCfg {
+    if (self.configModel.enterRoomModel.sceneType == SceneTypeAudio) {
+        
+        GameCfgModel *m = [GameCfgModel defaultCfgModel];
+        m.ui.lobby_players.hide = NO;
+        m.ui.nft_avatar.hide = NO;
+        m.ui.game_opening.hide = NO;
+        m.ui.game_mvp.hide = NO;
+        m.ui.bullet_screens_btn.hide = NO;
+        return [m mj_JSONString];
+    } else {
+        return [super onGetGameCfg];
+    }
 }
 
 - (void)roomTypeReloadContent {

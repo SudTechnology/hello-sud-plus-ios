@@ -7,27 +7,25 @@
 
 #import "GameListViewController.h"
 #import "SearchHeaderView.h"
-#import "GameListTableViewCell.h"
-#import "PKRoomListCell.h"
-#import "AudioRoomViewController.h"
+#import "../View/RoomListContentView.h"
+#import "../View/CrossAppRoomListContentView.h"
 
 @interface GameListViewController () <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, strong) SearchHeaderView *searchHeaderView;
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray <HSRoomInfoList *> *dataList;
-@property (nonatomic, strong) UILabel *noDataLabel;
+@property(nonatomic, strong) SearchHeaderView *searchHeaderView;
+@property(nonatomic, strong) JXCategoryTitleView *titleCategoryView;
+@property(nonatomic, strong) JXCategoryListContainerView *listContainerView;
+@property(nonatomic, strong) NSArray<NSString *> *titles;
+@property(nonatomic, assign) NSInteger titleIndex;
 @end
 
 @implementation GameListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addRefreshHeader];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self requestData];
 }
 
 - (BOOL)dtIsHiddenNavigationBar {
@@ -36,26 +34,14 @@
 
 - (void)dtConfigUI {
     self.view.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
+    self.titleCategoryView.listContainer = self.listContainerView;
 }
 
-- (void)dtConfigEvents {
-    WeakSelf
-    [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        if (AppService.shared.login.isRefreshedToken) {
-            [weakSelf requestData];
-        } else {
-            [weakSelf.tableView.mj_header endRefreshing];
-        }
-    }];
-    if (AppService.shared.login.isRefreshedToken) {
-        [self requestData];
-    }
-}
 
 - (void)dtAddViews {
     [self.view addSubview:self.searchHeaderView];
-    [self.view addSubview:self.tableView];
-    [self.view addSubview:self.noDataLabel];
+    [self.view addSubview:self.titleCategoryView];
+    [self.view addSubview:self.listContainerView];
 }
 
 - (void)dtLayoutViews {
@@ -63,94 +49,21 @@
         make.top.leading.trailing.mas_equalTo(self.view);
         make.height.mas_greaterThanOrEqualTo(0);
     }];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.searchHeaderView.mas_bottom);
-        make.leading.mas_equalTo(16);
-        make.trailing.mas_equalTo(-16);
-        make.bottom.mas_equalTo(-kTabBarHeight);
+    [self.titleCategoryView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.searchHeaderView.mas_bottom);
+        make.centerX.equalTo(self.view);
+        make.leading.trailing.equalTo(@0);
+        make.height.equalTo(@44);
     }];
-    [self.noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.searchHeaderView.mas_bottom).offset(109);
-        make.centerX.mas_equalTo(self.view);
-        make.size.mas_greaterThanOrEqualTo(CGSizeZero);
+    [self.listContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.titleCategoryView.mas_bottom).offset(0);
+        make.leading.trailing.bottom.equalTo(@0);
     }];
 }
 
-// 添加下来刷新
-- (void)addRefreshHeader {
-    WeakSelf
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        if (!AppService.shared.login.isRefreshedToken) {
-            [AppService.shared.login checkToken];
-            return;
-        }
-        [weakSelf requestData];
-    }];
-    header.lastUpdatedTimeLabel.hidden = true;
-    header.stateLabel.hidden = true;
-    self.tableView.mj_header = header;
-    self.tableView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-}
-
-#pragma mark - requst Data
-- (void)requestData {
-    WeakSelf
-    [HSHttpService postRequestWithURL:kINTERACTURL(@"room/list/v1") param:nil respClass:RoomListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
-        [weakSelf.tableView.mj_header endRefreshing];
-        RoomListModel *model = (RoomListModel *)resp;
-        [weakSelf.dataList removeAllObjects];
-        [weakSelf.dataList addObjectsFromArray:model.roomInfoList];
-        [weakSelf.tableView reloadData];
-        weakSelf.noDataLabel.hidden = weakSelf.dataList.count != 0;
-    } failure:^(NSError *error) {
-        [ToastUtil show:error.dt_errMsg];
-        [weakSelf.tableView.mj_header endRefreshing];
-    }];
- 
-    [self.searchHeaderView dtUpdateUI];
-}
-
-#pragma mark - UITableViewDelegate || UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataList.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PKRoomListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PKRoomListCell"];
-    cell.model = self.dataList[indexPath.row];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    HSRoomInfoList *m = self.dataList[indexPath.row];
-    if (m.sceneType == SceneTypeDanmaku && ![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
-        [ToastUtil show:NSString.dt_home_coming_soon];
-        return;
-    }
-    [AudioRoomService reqEnterRoom:m.roomId isFromCreate:NO extData:nil success:nil fail:nil];
-}
 
 #pragma mark - lazy
 
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.rowHeight = 90;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-        [_tableView registerClass:[PKRoomListCell class] forCellReuseIdentifier:@"PKRoomListCell"];
-        UIView *headerNode = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
-        headerNode.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-        UIView *tailNode = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 12)];
-        tailNode.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
-        _tableView.tableHeaderView = headerNode;
-        _tableView.tableFooterView = tailNode;
-    }
-    return _tableView;
-}
 
 - (SearchHeaderView *)searchHeaderView {
     if (!_searchHeaderView) {
@@ -159,24 +72,62 @@
     return _searchHeaderView;
 }
 
-- (NSMutableArray *)dataList {
-    if (!_dataList) {
-        _dataList = [NSMutableArray array];
+
+- (JXCategoryTitleView *)titleCategoryView {
+    if (!_titleCategoryView) {
+        self.titles = @[@"房间列表", @"跨域连接"];
+        _titleCategoryView = [[JXCategoryTitleView alloc] init];
+        _titleCategoryView.delegate = self;
+        _titleCategoryView.titleColor = HEX_COLOR_A(@"#666666", 1);
+        _titleCategoryView.titleSelectedColor = HEX_COLOR(@"#1A1A1A");
+        _titleCategoryView.titleFont = UIFONT_REGULAR(18);
+        _titleCategoryView.titleSelectedFont = UIFONT_MEDIUM(18);
+        _titleCategoryView.titles = self.titles;
+        _titleCategoryView.backgroundColor = UIColor.whiteColor;
+
+
+        JXCategoryIndicatorLineView *lineIndicator = [[JXCategoryIndicatorLineView alloc] init];
+        // 设置指示器固定宽度
+        lineIndicator.indicatorColor = HEX_COLOR(@"#000000");
+        lineIndicator.indicatorWidth = 18;
+        lineIndicator.indicatorHeight = 4;
+        _titleCategoryView.indicators = @[lineIndicator];
+
     }
-    return _dataList;
+    return _titleCategoryView;
 }
 
-- (UILabel *)noDataLabel {
-    if (!_noDataLabel) {
-        _noDataLabel = UILabel.new;
-        _noDataLabel.text = NSString.dt_room_list_no_room_available;
-        _noDataLabel.textColor = [UIColor dt_colorWithHexString:@"#8A8A8E" alpha:1];
-        _noDataLabel.font = UIFONT_REGULAR(14);
-        _noDataLabel.numberOfLines = 0;
-        _noDataLabel.textAlignment = NSTextAlignmentCenter;
-        _noDataLabel.hidden = true;
+- (JXCategoryListContainerView *)listContainerView {
+    if (!_listContainerView) {
+        // 列表容器视图
+        _listContainerView = [[JXCategoryListContainerView alloc] initWithType:JXCategoryListContainerType_ScrollView delegate:self];
     }
-    return _noDataLabel;
+    return _listContainerView;
 }
 
+- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
+
+}
+
+#pragma mark - JXCategoryListContainerViewDelegate
+
+// 返回列表的数量
+- (NSInteger)numberOfListsInlistContainerView:(JXCategoryListContainerView *)listContainerView {
+    return self.titles.count;
+}
+
+// 返回各个列表菜单下的实例，该实例需要遵守并实现 <JXCategoryListContentViewDelegate> 协议
+- (id <JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
+    switch (index){
+        case 0:{
+            RoomListContentView *listView = [[RoomListContentView alloc] init];
+            return listView;
+        }
+        break;
+        default:{
+            CrossAppRoomListContentView *listView = [[CrossAppRoomListContentView alloc] init];
+            return listView;
+        }
+    }
+}
 @end

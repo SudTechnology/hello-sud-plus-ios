@@ -283,7 +283,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     HSSceneModel *m = self.headerSceneList[section];
-    if (m.sceneId == SceneTypeGuess) {
+    if (m.sceneId == SceneTypeGuess || m.sceneId == SceneTypeCrossApp) {
         return 0;
     }
     NSArray *arr = self.dataList[section];

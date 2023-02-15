@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 角色展示隐藏选择游戏按钮
 - (void)hiddenNodeWithRoleType:(NSInteger)roleType;
 /// 展示隐藏结束按钮
-- (void)hiddenNodeWithEndGame:(BOOL)isShowEndGame;
+- (void)hiddenNodeWithEndGame:(BOOL)hiddenEndGame;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,7 +7,7 @@
 #import "InteractiveGameLoadingView.h"
 #import "InteractiveGameManager.h"
 
-@interface InteractiveGameBaseHandler()
+@interface InteractiveGameBaseHandler ()
 
 @property(nonatomic, strong) InteractiveGameLoadingView *rocketLoadingView;
 
@@ -77,17 +77,6 @@
 
 #pragma mark =======SudFSMMGListener=======
 
-
-/// 获取游戏Config  【需要实现】
-- (void)onGetGameCfg:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    GameCfgModel *m = [GameCfgModel defaultCfgModel];
-    m.ui.lobby_players.hide = true;
-    m.ui.nft_avatar.hide = NO;
-    m.ui.game_opening.hide = NO;
-    m.ui.game_mvp.hide = NO;
-    [handle success:[m mj_JSONString]];
-}
-
 /// 游戏开始
 - (void)onGameStarted {
     DDLogDebug(@"onGameStarted");
@@ -119,12 +108,12 @@
 /// 短期令牌code过期  【需要实现】
 - (void)onExpireCode:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
     // 请求业务服务器刷新令牌 Code更新
-    [GameService.shared reqGameLoginWithSuccess:^(RespGameInfoModel *_Nonnull gameInfo) {
+    [GameService.shared reqGameLoginWithAppId:nil success:^(RespGameInfoModel *gameInfo) {
         // 调用游戏接口更新令牌
         [self.sudFSTAPPDecorator updateCode:gameInfo.code];
         // 回调成功结果
         [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
-    }                                      fail:^(NSError *error) {
+    }                                    fail:^(NSError *error) {
         [ToastUtil show:error.debugDescription];
         // 回调失败结果
         [handle failure:[self.sudFSMMGDecorator handleMGFailure]];

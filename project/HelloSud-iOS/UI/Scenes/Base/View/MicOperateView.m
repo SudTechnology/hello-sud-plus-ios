@@ -66,7 +66,7 @@
         UIButton * btn = UIButton.new;
         [self.operateView addSubview:btn];
         [btn setTitle:name forState:UIControlStateNormal];
-        btn.titleLabel.font = UIFONT_REGULAR(13);
+        btn.titleLabel.font = UIFONT_REGULAR(16);
         [btn setTitleColor:HEX_COLOR(@"#000000") forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(onBtnOperate:) forControlEvents:UIControlEventTouchUpInside];
         if (lastBtn == nil) {
@@ -117,7 +117,7 @@
     if (_cancelBtn == nil) {
         _cancelBtn = UIButton.new;
         [_cancelBtn setTitle:NSString.dt_common_cancel forState:UIControlStateNormal];
-        _cancelBtn.titleLabel.font = UIFONT_REGULAR(13);
+        _cancelBtn.titleLabel.font = UIFONT_REGULAR(16);
         [_cancelBtn setTitleColor:HEX_COLOR(@"#000000") forState:UIControlStateNormal];
         [_cancelBtn addTarget:self action:@selector(onBtnCancel:) forControlEvents:UIControlEventTouchUpInside];
     }

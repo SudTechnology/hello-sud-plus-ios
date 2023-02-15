@@ -46,8 +46,8 @@
 }
 
 /// 展示隐藏结束按钮
-- (void)hiddenNodeWithEndGame:(BOOL)isShowEndGame {
-    self.roomModeView.hidden = isShowEndGame;
+- (void)hiddenNodeWithEndGame:(BOOL)hiddenEndGame {
+    self.roomModeView.hidden = hiddenEndGame;
     self.roomModeLabel.text = NSString.dt_room_end_game;
     [self.roomModeView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-52);
@@ -84,7 +84,11 @@
 }
 
 - (void)dtUpdateUI {
+#ifdef DEBUG
+    self.roomNumLabel.text = [NSString stringWithFormat: @"%@ %@-%@", NSString.dt_room_list_room_number, kAudioRoomService.currentRoomVC.roomNumber, kAudioRoomService.currentRoomVC.gameRoomID];
+#else
     self.roomNumLabel.text = [NSString stringWithFormat: @"%@ %@", NSString.dt_room_list_room_number, kAudioRoomService.currentRoomVC.roomNumber];
+#endif
     self.onlineLabel.text = [NSString stringWithFormat:@"%ld", kAudioRoomService.currentRoomVC.totalUserCount];
 }
 

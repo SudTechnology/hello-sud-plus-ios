@@ -26,6 +26,11 @@ typedef NS_ENUM(NSInteger, HsNftEnvType) {
     HsNftEnvTypeDev = 4,
 };
 
+typedef NS_ENUM(NSInteger, HsAppIdType) {
+    HsAppIdTypeDefault = 0,
+    HsAppIdType945 = 1,
+};
+
 /// App设置
 @interface HsAppPreferences : NSObject
 /// APP环境
@@ -34,10 +39,18 @@ typedef NS_ENUM(NSInteger, HsNftEnvType) {
 @property(nonatomic, assign) HsGameEnvType gameEnvType;
 /// NFT环境
 @property(nonatomic, assign) HsNftEnvType nftEnvType;
+/// appId 切换
+@property(nonatomic, assign) HsAppIdType appIdType;
 
 + (instancetype)shared;
 
 - (NSString *)baseUrl;
+
 - (NSString *)interactUrl;
+
 - (NSString *)gameUrl;
+
+- (NSString *)appId;
+
+- (NSString *)appKey;
 @end
