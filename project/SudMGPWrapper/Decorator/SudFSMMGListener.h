@@ -59,6 +59,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)onPlayerStateChange:(nullable id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
 
+/// 游戏加载进度(loadMG)
+/// @param stage start=1,loading=2,end=3
+/// @param retCode 错误码，0成功
+/// @param progress [0, 100]
+/// 最低版本：v1.1.30.xx
+-(void) onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress;
+
+
 #pragma mark - 通用状态-游戏
 
 /// 通用状态-游戏

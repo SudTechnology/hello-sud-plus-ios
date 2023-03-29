@@ -60,6 +60,15 @@
     [handle success:m.mj_JSONString];
 }
 
+/// 游戏加载进度(loadMG)
+/// @param stage start=1,loading=2,end=3
+/// @param retCode 错误码，0成功
+/// @param progress [0, 100]
+/// 最低版本：v1.1.30.xx
+-(void) onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress {
+    NSLog(@"onGameLoadingProgress:stage:%@,code:%@, progress:%@", @(stage), @(retCode), @(progress));
+}
+
 /// 短期令牌code过期  【需要实现】
 - (void)onExpireCode:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
     // 请求业务服务器刷新令牌 Code更新
@@ -252,9 +261,15 @@
     
     [AudioRoomService reqAppOrder:reqModel finished:^(BaseRespModel * _Nonnull respModel) {
         DDLogDebug(@"reqAppOrder success");
-        } failure:^(NSError * _Nonnull error) {
-            DDLogDebug(@"reqAppOrder fail:%@", error.debugDescription);
-        }];
+        AppCommonGameCreateOrderResult *m = AppCommonGameCreateOrderResult.new;
+        m.result = 1;
+        [self.sudFSTAPPDecorator notifyAppCommonGameCreateOrderResult:m];
+    } failure:^(NSError * _Nonnull error) {
+        DDLogDebug(@"reqAppOrder fail:%@", error.debugDescription);
+        AppCommonGameCreateOrderResult *m = AppCommonGameCreateOrderResult.new;
+        m.result = 0;
+        [self.sudFSTAPPDecorator notifyAppCommonGameCreateOrderResult:m];
+    }];
 }
 
 

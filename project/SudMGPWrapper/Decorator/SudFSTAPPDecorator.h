@@ -139,6 +139,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// app返回玩家当前积分 (2022-09-26 新增)
 - (void)notifyAppCommonGameScore:(AppCommonGameScore *)appCommonGameScore;
 
+/// APP_COMMON_GAME_CREATE_ORDER_RESULT
+- (void)notifyAppCommonGameCreateOrderResult:(AppCommonGameCreateOrderResult *)model;
 #pragma mark - 互动礼物<火箭>
 
 /// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG

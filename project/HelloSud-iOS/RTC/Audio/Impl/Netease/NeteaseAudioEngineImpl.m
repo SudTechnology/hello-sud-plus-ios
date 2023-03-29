@@ -65,11 +65,13 @@
         context.engineDelegate = self;
         // 设置当前应用的appKey
         context.appKey = model.appKey;
-        
+        [engine setParameters:@{kNERtcKeyPublishSelfStreamEnabled: @YES, kNERtcKeyAutoSubscribeAudio: @YES, }];
+        [engine setAudioProfile:kNERtcAudioProfileHighQualityStereo scenario:kNERtcAudioScenarioChatRoom];
         [engine setupEngineWithContext:context];
-        [engine setAudioProfile:kNERtcAudioProfileHighQuality scenario:kNERtcAudioScenarioChatRoom];
-        [engine setChannelProfile:kNERtcChannelProfileCommunication];
+        [engine enableAudioVolumeIndication:YES interval:1000];
+        [engine setChannelProfile:kNERtcChannelProfileLiveBroadcasting];
         [engine setLoudspeakerMode:YES];
+        [engine setAudioSessionOperationRestriction:kNERtcAudioSessionOperationRestrictionDeactivateSession];
     }
 }
 

@@ -53,6 +53,8 @@ static NSString *APP_COMMON_GAME_SETTING_SELECT_INFO = @"app_common_game_setting
 static NSString *APP_COMMON_GAME_RECONNECT = @"app_common_game_reconnect";
 /// app返回玩家当前积分（2022-09-26新增）
 static NSString *APP_COMMON_GAME_SCORE = @"app_common_game_score";
+/// app通知游戏创建订单结果
+static NSString *APP_COMMON_GAME_CREATE_ORDER_RESULT = @"app_common_game_create_order_result";
 
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
@@ -106,4 +108,12 @@ static NSString *APP_COMMON_GAME_SCORE = @"app_common_game_score";
 @interface AppCommonGameScore : NSObject
 /// 玩家当前积分
 @property(nonatomic, assign) NSInteger score;
+@end
+
+
+/// app通知游戏创建订单结果
+/// APP_COMMON_GAME_CREATE_ORDER_RESULT
+@interface AppCommonGameCreateOrderResult : NSObject
+/// 创建订单结果 0：失败 1：成功
+@property(nonatomic, assign) NSInteger result;
 @end

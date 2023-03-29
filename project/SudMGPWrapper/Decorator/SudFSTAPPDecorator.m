@@ -241,6 +241,11 @@
     }];
 }
 
+/// APP_COMMON_GAME_CREATE_ORDER_RESULT
+- (void)notifyAppCommonGameCreateOrderResult:(AppCommonGameCreateOrderResult *)model {
+    [self notifyStateChange:APP_COMMON_GAME_CREATE_ORDER_RESULT dataJson:model.mj_JSONString];
+}
+
 #pragma mark - 互动礼物
 
 /// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG

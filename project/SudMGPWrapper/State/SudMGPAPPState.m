@@ -23,3 +23,7 @@
 
 @implementation AppCommonGameScore
 @end
+
+@implementation AppCommonGameCreateOrderResult
+@end
+

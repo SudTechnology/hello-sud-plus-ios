@@ -695,6 +695,17 @@
     [handle success:[self handleMGSuccess]];
 }
 
+/// 游戏加载进度(loadMG)
+/// @param stage start=1,loading=2,end=3
+/// @param retCode 错误码，0成功
+/// @param progress [0, 100]
+/// 最低版本：v1.1.30.xx
+-(void) onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress {
+    if (self.listener && [self.listener respondsToSelector:@selector(onGameLoadingProgress:retCode:progress:)]) {
+        [self.listener onGameLoadingProgress:stage retCode:retCode progress:progress];
+    }
+}
+
 #pragma mark - GameState状态处理
 
 /// 关键词获取状态 - 更新

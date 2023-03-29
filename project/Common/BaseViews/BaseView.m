@@ -19,6 +19,10 @@
 
 @implementation BaseView
 
+- (void)dealloc {
+    NSLog(@"%@ dealloc", self.class);
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self dtAddViews];

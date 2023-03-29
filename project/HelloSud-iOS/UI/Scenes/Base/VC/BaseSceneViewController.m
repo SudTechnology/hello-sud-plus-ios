@@ -262,7 +262,7 @@
             // 游戏视图
             CGPoint pointConvert = [weakSelf.interactiveGameView convertPoint:point fromView:currentView];
             // 判断火箭可点击区域，穿透非点击区域到业务层
-            if (![self.interactiveGameManager checkIfPointInGameClickRect:pointConvert]) {
+            if (![weakSelf.interactiveGameManager checkIfPointInGameClickRect:pointConvert]) {
                 return (UIView *) weakSelf.sceneView;
             }
         }
