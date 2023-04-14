@@ -394,6 +394,8 @@ MGCommonGameStateTypePlaying = 2, // 正在游戏中
 @property(nonatomic, copy) NSString *kickUID;
 /// 当isIn==false时有效；0 主动退出，1 被踢;（reason默认-1，无意义便于处理）
 @property(nonatomic, assign) int reason;
+/// 玩家的座位号 0开始(isIn 为true 时才有效)
+@property(nonatomic, assign) NSInteger seatIndex;
 @end
 
 

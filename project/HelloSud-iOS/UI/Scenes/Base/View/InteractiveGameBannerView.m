@@ -6,11 +6,14 @@
 #import "InteractiveGameBannerView.h"
 #import "InteractiveGameBannerColCell.h"
 
+#define MaxListCount 1000000
+
 @interface InteractiveGameBannerView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UIPageControl *pageControl;
 @property(nonatomic, strong) NSMutableArray *dataList;
 @property(nonatomic, strong) DTTimer *timer;
+
 @end
 
 @implementation InteractiveGameBannerView {
@@ -49,7 +52,13 @@
     }
     [self.dataList setArray:bannerList];
     [self.collectionView reloadData];
-    [self beginAutoScroll];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CGPoint offset = self.collectionView.contentOffset;
+        offset.x = 0;
+        [self.collectionView setContentOffset:offset animated:NO];
+        [self beginAutoScroll];
+    });
 }
 
 - (void)beginAutoScroll {
@@ -66,8 +75,10 @@
     CGPoint offset = self.collectionView.contentOffset;
     offset.x += 80;
     NSInteger pageIndex = offset.x / 80;
+    if (pageIndex >= MaxListCount) {
+        pageIndex = MaxListCount - 1;
+    }
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:pageIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
-//    [self.collectionView setContentOffset:offset animated:YES];
     [self updatePageControl:offset.x];
 
 }
@@ -131,7 +142,7 @@
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataList.count > 1 ? 1000000 : self.dataList.count;
+    return self.dataList.count > 1 ? MaxListCount : self.dataList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

@@ -41,7 +41,13 @@
     }
     [self.dataList setArray:bannerList];
     [self.collectionView reloadData];
-    [self beginAutoScroll];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CGPoint offset = self.collectionView.contentOffset;
+        offset.x = 0;
+        [self.collectionView setContentOffset:offset animated:NO];
+        [self beginAutoScroll];
+    });
+
 }
 
 - (void)beginAutoScroll {
@@ -56,7 +62,13 @@
 
 - (void)scrollPage {
     CGPoint offset = self.collectionView.contentOffset;
-    offset.x += (kScreenWidth - 32);
+    NSInteger w = (kScreenWidth - 32);
+    offset.x += w;
+    if (offset.x >= w * 1000000) {
+        offset.x = 0;
+        [self.collectionView setContentOffset:offset animated:NO];
+        return;
+    }
     [self.collectionView setContentOffset:offset animated:YES];
 }
 

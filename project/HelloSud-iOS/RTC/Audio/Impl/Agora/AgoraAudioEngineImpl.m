@@ -51,6 +51,8 @@
             [self.mEngine setChannelProfile:AgoraChannelProfileCommunication];
             [self.mEngine enableAudioVolumeIndication:300 smooth:3 report_vad:YES];
             
+            [self.mEngine setAudioSessionOperationRestriction:AgoraAudioSessionOperationRestrictionDeactivateSession];
+            
             // 初始化rtm信令
             [self initRtm:model success:success];
         }
