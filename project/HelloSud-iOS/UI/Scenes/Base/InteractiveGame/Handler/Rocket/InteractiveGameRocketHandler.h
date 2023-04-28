@@ -8,16 +8,18 @@
 
 /// 火箭互动处理模块
 @interface InteractiveGameRocketHandler : InteractiveGameBaseHandler
-/// 播放火箭
-/// @param jsonData
-- (void)playRocket:(NSString *)jsonData;
 
 /// 礼物面板发送火箭
 /// @param giftModel
 /// @param toMicList
-- (void)sendRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList finished:(void (^)(BOOL success))finished;
++ (void)sendRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList finished:(void (^)(BOOL success))finished;
+
+/// 播放火箭
+/// @param jsonData
+- (void)playRocket:(NSString *)jsonData;
 
 /// 设置动效回调
 /// @param rocketEffectBlock
 - (void)setupRocketEffectBlock:(void(^)(BOOL show))rocketEffectBlock;
+
 @end

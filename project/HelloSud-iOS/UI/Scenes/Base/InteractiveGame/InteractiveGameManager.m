@@ -118,9 +118,10 @@
 /// @param giftModel
 /// @param toMicList
 - (void)sendRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList finished:(void (^)(BOOL success))finished {
-    if ([self.baseHandler isKindOfClass:[InteractiveGameRocketHandler class]]) {
-        [(InteractiveGameRocketHandler *) self.baseHandler sendRocketGift:giftModel toMicList:toMicList finished:finished];
-    }
+    [InteractiveGameRocketHandler sendRocketGift:giftModel toMicList:toMicList finished:finished];
+//    if ([self.baseHandler isKindOfClass:[InteractiveGameRocketHandler class]]) {
+//        [(InteractiveGameRocketHandler *) self.baseHandler sendRocketGift:giftModel toMicList:toMicList finished:finished];
+//    }
 }
 
 /// 通知游戏关闭火箭动效

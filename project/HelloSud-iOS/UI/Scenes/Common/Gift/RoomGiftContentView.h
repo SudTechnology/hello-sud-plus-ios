@@ -18,7 +18,8 @@ typedef void(^GIFT_SELECTED_BLCOK)(GiftModel *giftModel);
 @property (nonatomic, strong)NSArray<GiftModel *> *sceneGiftList;
 /// 是否追加到尾部
 @property (nonatomic, assign)BOOL appendSceneGift;
-
+/// 是否展示火箭
+@property(nonatomic, assign) BOOL showRocket;
 @end
 
 NS_ASSUME_NONNULL_END

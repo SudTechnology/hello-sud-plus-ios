@@ -27,24 +27,35 @@
 - (void)dtLayoutViews {
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
+        make.height.equalTo(@0);
     }];
 }
 
 - (void)dtUpdateUI {
+    
+    NSArray<GiftModel *> *giftList = GiftService.shared.giftList;
+    if (!self.showRocket) {
+        NSMutableArray *tempList = [[NSMutableArray alloc]initWithArray:giftList];
+        for (GiftModel *m in giftList) {
+            if (m.giftID == kRocketGiftID) {
+                [tempList removeObject:m];
+                break;
+            }
+        }
+        giftList = tempList;
+    }
     if (self.sceneGiftList.count > 0) {
         if (self.appendSceneGift) {
-            [self.dataList setArray:GiftService.shared.giftList];
+            [self.dataList setArray:giftList];
             [self.dataList addObjectsFromArray:self.sceneGiftList];
         } else {
             [self.dataList setArray:self.sceneGiftList];
-            [self.dataList addObjectsFromArray:GiftService.shared.giftList];
+            [self.dataList addObjectsFromArray:giftList];
         }
     } else {
-        [self.dataList setArray:GiftService.shared.giftList];
+        [self.dataList setArray:giftList];
     }
-
-
-
+    [self updateContentLayout];
     for (GiftModel *m in self.dataList) {
         m.isSelected = NO;
     }
@@ -59,6 +70,18 @@
 - (void)setSceneGiftList:(NSArray<GiftModel *> *)sceneGiftList {
     _sceneGiftList = sceneGiftList;
     [self dtUpdateUI];
+}
+
+- (void)updateContentLayout {
+    NSInteger count = self.dataList.count;
+    NSInteger row = (NSInteger) ceil(count / 4.0);
+    CGFloat h = 140;
+    if (row > 1) {
+        h = 254;
+    }
+    [self.collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(h);
+    }];
 }
 
 

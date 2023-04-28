@@ -92,7 +92,7 @@
     [self.giftContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.mas_equalTo(self);
         make.top.mas_equalTo(self.topView.mas_bottom).offset(10);
-        make.height.mas_equalTo(268);
+        make.height.mas_greaterThanOrEqualTo(0);
     }];
     [self.sendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.giftContentView.mas_bottom).offset(24);
@@ -209,19 +209,13 @@
     [GiftService reqGiftListWithGameId:gameId sceneId:sceneId finished:^(NSArray<GiftModel *> *modelList) {
         weakSelf.giftContentView.appendSceneGift = isAppend;
         weakSelf.giftContentView.sceneGiftList = modelList;
-        [weakSelf updateLayoutForGiftCount:modelList.count + 4];
     }                          failure:nil];
 }
 
-- (void)updateLayoutForGiftCount:(NSInteger)count {
-    NSInteger row = (NSInteger) ceil(count / 4.0);
-    CGFloat h = 140;
-    if (row > 1) {
-        h = 254;
-    }
-    [self.giftContentView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(h);
-    }];
+- (void)setShowRocket:(BOOL)showRocket {
+    _showRocket = showRocket;
+    self.giftContentView.showRocket = showRocket;
+    [self.giftContentView dtUpdateUI];
 }
 
 
