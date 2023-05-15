@@ -27,3 +27,15 @@
 @implementation AppCommonGameCreateOrderResult
 @end
 
+@implementation AppCommonGameCustomHelpInfo
+@end
+
+@implementation AppCommonUsersInfoItem
+@end
+
+@implementation AppCommonUsersInfo
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"infos": AppCommonUsersInfoItem.class};
+}
+@end
+

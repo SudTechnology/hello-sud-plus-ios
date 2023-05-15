@@ -14,8 +14,11 @@
 @implementation SudFSTAPPDecorator
 
 - (void)setISudFSTAPP:(id <ISudFSTAPP>)iSudFSTAPP {
+    if (_iSudFSTAPP) {
+        [_iSudFSTAPP destroyMG];
+    }
     _iSudFSTAPP = iSudFSTAPP;
-    if (!self.stopBackgroundGameState) {    
+    if (!self.stopBackgroundGameState) {
         [self addNotification];
     }
 }
@@ -116,7 +119,7 @@
 
 /// 结束游戏
 - (void)notifyAppCommonSelfEnd {
-
+    
     [self notifyStateChange:APP_COMMON_SELF_END dataJson:@{}.mj_JSONString];
 }
 
@@ -202,7 +205,7 @@
 /// 设置游戏中的AI玩家（2022-05-11新增） APP_COMMON_GAME_ADD_AI_PLAYERS
 /// @param appCommonGameAddAiPlayersModel  配置信息
 - (void)notifyAppCommonGameAddAIPlayers:(AppCommonGameAddAIPlayersModel *)appCommonGameAddAiPlayersModel {
-
+    
     NSString *jsonStr = [appCommonGameAddAiPlayersModel mj_JSONString];
     [self notifyStateChange:APP_COMMON_GAME_ADD_AI_PLAYERS dataJson:jsonStr];
 }
@@ -241,11 +244,30 @@
     }];
 }
 
+/// APP_COMMON_USERS_INFO
+- (void)notifyAppCommonUsersInfo:(AppCommonUsersInfo *)model {
+    [self notifyStateChange:APP_COMMON_USERS_INFO dataJson:model.mj_JSONString];
+}
+
 /// APP_COMMON_GAME_CREATE_ORDER_RESULT
 - (void)notifyAppCommonGameCreateOrderResult:(AppCommonGameCreateOrderResult *)model {
     [self notifyStateChange:APP_COMMON_GAME_CREATE_ORDER_RESULT dataJson:model.mj_JSONString];
 }
 
+/// APP_COMMON_CUSTOM_HELP_INFO
+- (void)notifyAppCommonCustomHelpInfo:(AppCommonGameCustomHelpInfo *)model {
+    [self notifyStateChange:APP_COMMON_CUSTOM_HELP_INFO dataJson:model.mj_JSONString];
+}
+
+/// app主动调起主界面 APP_COMMON_SHOW_GAME_SCENE
+- (void)notifyAppCommonShowGameScene {
+    [self notifyStateChange:APP_COMMON_SHOW_GAME_SCENE dataJson:@{}.mj_JSONString];
+}
+
+/// app主动隐藏主界面 APP_COMMON_HIDE_GAME_SCENE
+- (void)notifyAppCommonHideGameScene {
+    [self notifyStateChange:APP_COMMON_HIDE_GAME_SCENE dataJson:@{}.mj_JSONString];
+}
 #pragma mark - 互动礼物
 
 /// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG

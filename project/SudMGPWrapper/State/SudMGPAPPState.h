@@ -55,6 +55,14 @@ static NSString *APP_COMMON_GAME_RECONNECT = @"app_common_game_reconnect";
 static NSString *APP_COMMON_GAME_SCORE = @"app_common_game_score";
 /// app通知游戏创建订单结果
 static NSString *APP_COMMON_GAME_CREATE_ORDER_RESULT = @"app_common_game_create_order_result";
+/// app通知游戏玩家信息列表
+static NSString *APP_COMMON_USERS_INFO = @"app_common_users_info";
+/// app通知游戏自定义帮助内容
+static NSString *APP_COMMON_CUSTOM_HELP_INFO = @"app_common_custom_help_info";
+/// app主动调起主界面
+static NSString *APP_COMMON_SHOW_GAME_SCENE = @"app_common_show_game_scene";
+/// app主动隐藏主界面
+static NSString *APP_COMMON_HIDE_GAME_SCENE = @"app_common_hide_game_scene";
 
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
@@ -116,4 +124,29 @@ static NSString *APP_COMMON_GAME_CREATE_ORDER_RESULT = @"app_common_game_create_
 @interface AppCommonGameCreateOrderResult : NSObject
 /// 创建订单结果 0：失败 1：成功
 @property(nonatomic, assign) NSInteger result;
+@end
+
+/// app通知游戏自定义帮助内容
+/// APP_COMMON_CUSTOM_HELP_INFO
+@interface AppCommonGameCustomHelpInfo : NSObject
+/// 帮助内容
+@property(nonatomic, strong) NSArray<NSString *> * content;
+@end
+
+/// 玩家信息列表item
+@interface AppCommonUsersInfoItem:NSObject
+/// 玩家id
+@property(nonatomic, strong)NSString * uid;
+/// 玩家头像url
+@property(nonatomic, strong)NSString *avatar;
+/// 玩家名字
+@property(nonatomic, strong)NSString *name;
+
+@end
+
+/// app通知游戏玩家信息列表
+/// APP_COMMON_USERS_INFO
+@interface AppCommonUsersInfo : NSObject
+/// 帮助内容
+@property(nonatomic, strong) NSArray<AppCommonUsersInfoItem *> * infos;
 @end

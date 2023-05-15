@@ -231,4 +231,18 @@
 @implementation MgCommonGameCreateOrderModel
 @end
 
+@implementation MgCommonUsersInfoModel
+@end
+
+@implementation MgCommonSetClickRectItem
+@end
+
+@implementation MgCommonSetClickRect
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"list": [MgCommonSetClickRectItem class]
+    };
+}
+@end
+
+
 

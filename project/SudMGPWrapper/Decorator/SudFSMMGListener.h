@@ -151,6 +151,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// 创建订单 MG_COMMON_GAME_CREATE_ORDER
 - (void)onGameMGCommonGameCreateOrder:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameCreateOrderModel *)model;
 
+/// 获取玩家信息 MG_COMMON_USERS_INFO
+- (void)onGameMGCommonUsersInfo:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonUsersInfoModel *)model;
+
+/// 前期准备完成 MG_COMMON_GAME_PREPARE_FINISH
+- (void)onGameMGCommonPrepareFinish:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 展示主界面 MG_COMMON_SHOW_GAME_SCENE
+- (void)onGameMGCommonShowGameScene:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 隐藏主界面 MG_COMMON_HIDE_GAME_SCENE
+- (void)onGameMGCommonHideGameScene:(nonnull id <ISudFSMStateHandle>)handle;
+
+/// 可点击区域 MG_COMMON_SET_CLICK_RECT
+- (void)onGameMGCommonSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomGameSetClickRect *)model;
+
 #pragma mark - 互动礼物<火箭>
 
 /// 礼物配置文件(火箭) MG_CUSTOM_ROCKET_CONFIG

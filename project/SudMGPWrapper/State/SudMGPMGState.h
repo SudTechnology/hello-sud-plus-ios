@@ -69,6 +69,16 @@ static NSString *MG_COMMON_GAME_SET_SCORE = @"mg_common_game_set_score";
 /// 创建订单
 static NSString *MG_COMMON_GAME_CREATE_ORDER = @"mg_common_game_create_order";
 
+/// 通知app提供对应uids列表玩家的数据
+static NSString *MG_COMMON_USERS_INFO = @"mg_common_users_info";
+/// 设置app提供给游戏可点击区域
+static NSString *MG_COMMON_SET_CLICK_RECT = @"mg_common_set_click_rect";
+/// 前期准备完成
+static NSString *MG_COMMON_GAME_PREPARE_FINISH = @"mg_common_game_prepare_finish";
+/// 主界面已显示
+static NSString *MG_COMMON_SHOW_GAME_SCENE = @"mg_common_show_game_scene";
+/// 主界面已隐藏
+static NSString *MG_COMMON_HIDE_GAME_SCENE = @"mg_common_hide_game_scene";
 
 #pragma mark - 通用状态-玩家
 /// 加入状态
@@ -624,4 +634,24 @@ MGCommonGameStateTypePlaying = 2, // 正在游戏中
 @property(nonatomic, strong) NSString *payload;
 @end
 
+#pragma mark - 获取玩家信息 MG_COMMON_USERS_INFO
+@interface MgCommonUsersInfoModel : NSObject
+/// 玩家列表id
+@property(nonatomic, strong) NSArray<NSString *> *uids;
+@end
+
+#pragma mark - MG_COMMON_SET_CLICK_RECT
+@interface MgCommonSetClickRectItem : NSObject
+@property(nonatomic, assign) CGFloat x;
+@property(nonatomic, assign) CGFloat y;
+@property(nonatomic, assign) CGFloat width;
+@property(nonatomic, assign) CGFloat height;
+@end
+
+@interface MgCommonSetClickRect : NSObject
+/// 组件类型
+@property(nonatomic, assign) NSInteger type;
+/// 组件ID
+@property(nonatomic, strong) NSArray <MgCommonSetClickRectItem *> *list;
+@end
 NS_ASSUME_NONNULL_END

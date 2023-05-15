@@ -146,7 +146,7 @@
             return;
         }
     }
-
+    
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         MGCommonPublicMessageModel *m = [MGCommonPublicMessageModel mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonPublicMessage:model:)]) {
@@ -449,7 +449,7 @@
             [self.listener onGameMGCustomRocketPrepareFinish:handle];
             return;
         }
-
+        
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SHOW_GAME_SCENE]) {
         /// 显示火箭主界面((火箭)
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketShowGameScene:)]) {
@@ -503,7 +503,7 @@
             [self.listener onGameMGBaseballPrepareFinish:handle];
             return;
         }
-
+        
     } else if ([state isEqualToString:MG_BASEBALL_SHOW_GAME_SCENE]) {
         /// 显示主界面((棒球)
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballShowGameScene:)]) {
@@ -525,12 +525,43 @@
         }
     } else if ([state isEqualToString:MG_BASEBALL_TEXT_CONFIG]) {
         /// 获取配置((棒球)
-        MGCustomGameSetClickRect *m = [MGCustomGameSetClickRect mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballTextConfig:)]) {
             [self.listener onGameMGBaseballTextConfig:handle];
             return;
         }
-    } else {
+    }else if ([state isEqualToString:MG_COMMON_USERS_INFO]) {
+        
+        MgCommonUsersInfoModel *m = [MgCommonUsersInfoModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonUsersInfo:model:)]) {
+            [self.listener onGameMGCommonUsersInfo:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PREPARE_FINISH]) {
+        
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonPrepareFinish:)]) {
+            [self.listener onGameMGCommonPrepareFinish:handle];
+            return;
+        }
+    }else if ([state isEqualToString:MG_COMMON_SHOW_GAME_SCENE]) {
+        
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonShowGameScene:)]) {
+            [self.listener onGameMGCommonShowGameScene:handle];
+            return;
+        }
+    }else if ([state isEqualToString:MG_COMMON_HIDE_GAME_SCENE]) {
+        
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonHideGameScene:)]) {
+            [self.listener onGameMGCommonHideGameScene:handle];
+            return;
+        }
+    }else if ([state isEqualToString:MG_COMMON_SET_CLICK_RECT]) {
+        
+        MgCommonSetClickRect *m = [MgCommonSetClickRect mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSetClickRect:model:)]) {
+            [self.listener onGameMGCommonSetClickRect:handle model:m];
+            return;
+        }
+    }else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
     }
@@ -553,7 +584,7 @@
             return;
         }
     }
-
+    
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues:dataJson];
         /// 更新
@@ -742,11 +773,11 @@
 
 /// 加入状态 - 更新
 - (void)updateCommonPlayerIn:(MGCommonPlayerInModel *)m userId:(nonnull NSString *)userId {
-
+    
     if ([userId isEqualToString:self.currentUserId]) {
         self.isInGame = m.isIn;
     }
-
+    
     if (m.isIn) {
         [self.onlineUserIdList addObject:userId];
         NSSet *set = [NSSet setWithArray:self.onlineUserIdList];
@@ -843,7 +874,7 @@
 /// 获取用户是否已经加入了游戏
 - (BOOL)isPlayerInGame:(NSString *)userId {
     MGPlayerStateMapModel *mapModel = self.gamePlayerStateMap[[NSString stringWithFormat:@"%@%@", userId, MG_COMMON_PLAYER_IN]];
-//    MGPlayerStateMapModel *mapModel = [self.gamePlayerStateMap objectForKey:userId];
+    //    MGPlayerStateMapModel *mapModel = [self.gamePlayerStateMap objectForKey:userId];
     if (mapModel != nil) {
         return true;
     }
@@ -858,7 +889,7 @@
         return m.isPainting;
     }
     return false;
-
+    
 }
 
 /// 获取用户是否在队长
