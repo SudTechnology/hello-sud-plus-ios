@@ -48,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)reqRocketSetDefaultSeat:(MGCustomRocketSetDefaultSeat *)paramModel finished:(void (^)(AppCustomRocketSetDefaultSeatModel *respModel))finished;
 /// 校验签名合规性
 + (void)reqRocketVerifySign:(MGCustomRocketVerifySign *)paramModel finished:(void (^)(AppCustomRocketVerifySignModel *respModel))finished;
+/// 保存颜色或签名
++ (void)reqRocketSaveSignColor:(MGCustomRocketSaveSignColorModel *)paramModel finished:(void (^)(AppCustomRocketSaveSignColorModel *respModel))finished;
 @end
 
 NS_ASSUME_NONNULL_END

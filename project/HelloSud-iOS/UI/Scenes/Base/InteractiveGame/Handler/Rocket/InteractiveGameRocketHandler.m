@@ -354,7 +354,15 @@
 }
 
 /// 火箭的可点击区域((火箭) MG_CUSTOM_ROCKET_SET_CLICK_RECT
-- (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomGameSetClickRect *)model {
+- (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSetClickRect *)model {
     self.gameClickRect = model;
+}
+
+/// 颜色和签名自定义改到装配间的模式，保存颜色或签名 MG_CUSTOM_ROCKET_SAVE_SIGN_COLOR
+- (void)onGameMGCustomRocketSaveSignColor:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSaveSignColorModel *)model {
+    
+    [RocketService reqRocketSaveSignColor:model finished:^(AppCustomRocketSaveSignColorModel *respModel){
+        [self.sudFSTAPPDecorator notifyAppCustomRocketSaveSignColor:respModel];
+    }];
 }
 @end

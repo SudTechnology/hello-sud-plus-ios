@@ -375,6 +375,11 @@
     [self notifyStateChange:APP_CUSTOM_ROCKET_FLY_CLICK dataJson:@{}.mj_JSONString];
 }
 
+/// 颜色和签名自定义改到装配间的模式，保存颜色或签名 APP_CUSTOM_ROCKET_SAVE_SIGN_COLOR
+- (void)notifyAppCustomRocketSaveSignColor:(AppCustomRocketSaveSignColorModel *)model {
+    [self notifyStateChange:APP_CUSTOM_ROCKET_SAVE_SIGN_COLOR dataJson:model.mj_JSONString];
+}
+
 #pragma mark - 互动礼物<棒球>
 
 /// 查询排行榜数据 APP_BASEBALL_RANKING

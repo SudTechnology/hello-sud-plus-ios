@@ -33,9 +33,21 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     NSString *title = @"正在前往火箭台...";
-    if (self.interactiveGameManager.gameId == INTERACTIVE_GAME_BASEBALL_ID) {
-        title = @"正在前往棒球...";
+    switch (self.interactiveGameManager.gameId) {
+        case INTERACTIVE_GAME_BASEBALL_ID:{
+            title = @"正在前往棒球...";
+        }
+            
+            break;
+        case INTERACTIVE_GAME_CRAZY_CAR_ID:{
+            title = @"正在前往赛车...";
+        }
+            break;
+            
+        default:
+            break;
     }
+
     [self.rocketLoadingView showWithTitle:title];
 }
 

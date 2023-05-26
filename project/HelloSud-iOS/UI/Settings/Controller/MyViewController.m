@@ -124,7 +124,7 @@
     settingModel.pageURL = @"";
 
     HSSettingModel *aboutModel = [HSSettingModel new];
-    aboutModel.title = @"关于我们";
+    aboutModel.title = NSString.dt_my_about_us;
     aboutModel.subTitle = nil;
     aboutModel.isMore = YES;
     aboutModel.pageURL = @"";
@@ -605,7 +605,7 @@
     if ([model.title isEqualToString:NSString.dt_tab_setting]) {
         HSSettingViewController *vc = HSSettingViewController.new;
         [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];
-    } else if ([model.title isEqualToString:@"关于我们"]) {
+    } else if ([model.title isEqualToString:NSString.dt_my_about_us]) {
         AboutViewController *vc = AboutViewController.new;
         vc.title = model.title;
         [AppUtil.currentViewController.navigationController pushViewController:vc animated:YES];

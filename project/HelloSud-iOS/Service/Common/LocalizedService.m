@@ -87,6 +87,8 @@
 + (NSString *)dt_tab_home { return @"dt_tab_home".localized; }
 + (NSString *)dt_tab_room { return @"dt_tab_room".localized; }
 + (NSString *)dt_tab_setting { return @"dt_tab_setting".localized; }
++ (NSString *)dt_tab_my { return @"dt_tab_my".localized; }
++ (NSString *)dt_my_about_us { return @"dt_my_about_us".localized; }
 
 /// Scenes
 + (NSString *)dt_send { return @"dt_send".localized; }

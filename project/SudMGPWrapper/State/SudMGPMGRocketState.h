@@ -61,6 +61,8 @@ static NSString *MG_CUSTOM_ROCKET_HIDE_GAME_SCENE = @"mg_custom_rocket_hide_game
 static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_click_lock_component";
 /// 火箭可点击区域
 static NSString *MG_CUSTOM_ROCKET_SET_CLICK_RECT = @"mg_custom_rocket_set_click_rect";
+/// 颜色和签名自定义改到装配间的模式，保存颜色或签名
+static NSString *MG_CUSTOM_ROCKET_SAVE_SIGN_COLOR = @"mg_custom_rocket_save_sign_color";
 #pragma mark - MG_CUSTOM_ROCKET_USER_INFO
 
 @interface MGCustomRocketUserInfo : NSObject
@@ -184,6 +186,8 @@ static NSString *MG_CUSTOM_ROCKET_SET_CLICK_RECT = @"mg_custom_rocket_set_click_
 /// 组件ID
 @property(nonatomic, strong) NSArray <GameSetClickRectItem *> *list;
 @end
-
-
+#pragma mark - MG_CUSTOM_ROCKET_SAVE_SIGN_COLOR
+@interface MGCustomRocketSaveSignColorModel : NSObject
+@property(nonatomic, strong) NSArray <MGCustomRocketBuyModelComponentListItem *> *componentList;
+@end
 NS_ASSUME_NONNULL_END

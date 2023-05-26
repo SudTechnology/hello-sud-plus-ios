@@ -75,6 +75,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dt_tab_home;
 + (NSString *)dt_tab_room;
 + (NSString *)dt_tab_setting;
++ (NSString *)dt_tab_my;
++ (NSString *)dt_my_about_us;
 
 /// Scenes
 + (NSString *)dt_send;

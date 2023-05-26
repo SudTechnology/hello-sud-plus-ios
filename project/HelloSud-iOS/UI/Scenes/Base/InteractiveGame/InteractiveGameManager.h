@@ -4,10 +4,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SudMGPWrapper/SudFSMMGListener.h>
+
 
 #define INTERACTIVE_GAME_ROCKET_ID          1583284410804244481L // 火箭游戏ID
 #define INTERACTIVE_GAME_BASEBALL_ID        1594978084509368321L // 棒球游戏ID
+#define INTERACTIVE_GAME_CRAZY_CAR_ID        1649319572314173442L // 塞车游戏ID
 
 /// 互动游戏管理模块
 @interface InteractiveGameManager : NSObject

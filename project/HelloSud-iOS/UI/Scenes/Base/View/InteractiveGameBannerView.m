@@ -127,7 +127,7 @@
 - (UIPageControl *)pageControl {
     if (!_pageControl) {
         _pageControl = [[UIPageControl alloc] initWithFrame:CGRectZero];
-        _pageControl.numberOfPages = 2;
+        _pageControl.numberOfPages = 3;
         _pageControl.pageIndicatorTintColor = HEX_COLOR_A(@"#ffffff", 0.4);
         _pageControl.currentPageIndicatorTintColor = HEX_COLOR_A(@"#ffffff", 1);
         if (@available(iOS 14.0, *)) {

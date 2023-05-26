@@ -45,7 +45,7 @@
 
     MyViewController *setting = [[MyViewController alloc]init];
     BaseNavigationViewController * navSetting = [[BaseNavigationViewController alloc]initWithRootViewController:setting];
-    setting.tabBarItem.title = @"我的";//NSString.dt_tab_setting;
+    setting.tabBarItem.title = NSString.dt_tab_my;
     setting.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_my"];
     setting.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_my"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 

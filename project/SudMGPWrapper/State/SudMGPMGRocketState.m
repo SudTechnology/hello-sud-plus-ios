@@ -83,3 +83,9 @@
     return @{@"list": GameSetClickRectItem.class};
 }
 @end
+
+@implementation MGCustomRocketSaveSignColorModel : NSObject
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"componentList": MGCustomRocketBuyModelComponentListItem.class};
+}
+@end

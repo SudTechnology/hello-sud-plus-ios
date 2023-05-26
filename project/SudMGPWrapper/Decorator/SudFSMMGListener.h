@@ -232,7 +232,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onGameMGCustomRocketClickLockComponent:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketClickLockComponent *)model;
 
 /// 火箭的可点击区域((火箭) MG_CUSTOM_ROCKET_SET_CLICK_RECT
-- (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomGameSetClickRect *)model;
+- (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSetClickRect *)model;
+
+/// 颜色和签名自定义改到装配间的模式，保存颜色或签名 MG_CUSTOM_ROCKET_SAVE_SIGN_COLOR
+- (void)onGameMGCustomRocketSaveSignColor:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSaveSignColorModel *)model;
 
 #pragma mark - 互动礼物<棒球>
 
@@ -288,6 +291,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏通知app层当前玩家死亡后变成ob视角
 - (void)onGameMGCommonSelfObStatus:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSelfObStatusModel *)model;
 
+/// 游戏通知app玩家角色(狼人杀，谁是卧底) MG_COMMON_PLAYER_ROLE_ID
+- (void)onPlayerMGCommonPlayerRoleId:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonPlayerRoleIdModel *)model;
+
 /// 你画我猜状态
 /// 你画我猜: 选词中  MG_DG_SELECTING
 - (void)onPlayerMGDGSelecting:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGDGSelectingModel *)model;
@@ -315,7 +321,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏通知app层当前游戏剩余时间  MG_COMMON_GAME_COUNTDOWN_TIME
 - (void)onPlayerMGCommonGameCountdownTime:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGCommonGameCountdownTimeModel *)model;
-
 
 @end
 

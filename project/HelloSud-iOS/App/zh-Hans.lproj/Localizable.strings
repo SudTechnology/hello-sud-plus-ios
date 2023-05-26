@@ -70,6 +70,8 @@
 "dt_tab_home" = "首页";
 "dt_tab_room" = "房间";
 "dt_tab_setting" = "设置";
+"dt_tab_my" = "我的";
+"dt_my_about_us" = "关于我们";
 
 /// Scenes
 "dt_send" = "送给";

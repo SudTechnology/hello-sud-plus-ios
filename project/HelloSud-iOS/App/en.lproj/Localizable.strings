@@ -70,6 +70,8 @@
 "dt_tab_home" = "Home";
 "dt_tab_room" = "Room";
 "dt_tab_setting" = "Settings";
+"dt_tab_my" = "My";
+"dt_my_about_us" = "About";
 
 /// Scenes
 "dt_send" = "Give";

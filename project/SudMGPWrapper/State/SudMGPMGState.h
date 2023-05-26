@@ -105,6 +105,9 @@ static NSString *MG_COMMON_SELF_SELECT_STATUS = @"mg_common_self_select_status";
 static NSString *MG_COMMON_GAME_COUNTDOWN_TIME = @"mg_common_game_countdown_time";
 /// 游戏通知app层当前玩家死亡后变成ob视角 （2022-08-23新增，前狼人杀生效）
 static NSString *MG_COMMON_SELF_OB_STATUS = @"mg_common_self_ob_status";
+/// 游戏通知app玩家角色(狼人杀，谁是卧底)
+static NSString *MG_COMMON_PLAYER_ROLE_ID = @"mg_common_player_role_id";
+
 
 #pragma mark - 你画我猜
 /// 选词中
@@ -654,4 +657,17 @@ MGCommonGameStateTypePlaying = 2, // 正在游戏中
 /// 组件ID
 @property(nonatomic, strong) NSArray <MgCommonSetClickRectItem *> *list;
 @end
+
+#pragma mark - MG_COMMON_PLAYER_ROLE_ID
+@interface MgCommonPlayerRoleIdItem : NSObject
+/// 玩家id
+@property(nonatomic, strong)NSString *uid;
+/// 角色id
+@property(nonatomic, assign)NSInteger roleId;
+@end
+
+@interface MgCommonPlayerRoleIdModel : NSObject
+@property(nonatomic, strong)NSArray<MgCommonPlayerRoleIdItem*> *playersRoleId;
+@end
+
 NS_ASSUME_NONNULL_END

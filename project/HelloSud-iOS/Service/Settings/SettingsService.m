@@ -47,13 +47,13 @@ static NSString *const DTCustotmModelKeyVersion = @"1.3";
 
 /// 获取当前
 + (NSString *)getCurLanguage {
-    NSString *local = [NSLocale preferredLanguages].firstObject;
+    NSString *local = NSBundle.currentLanguage;// [NSLocale preferredLanguages].firstObject;
     NSArray <SwitchLangModel *>*dataArray = [self getLanguageArr];
     for (SwitchLangModel *m in dataArray) {
         if (m.language == nil) {
             continue;
         }
-        if ([local containsString:m.language]) {
+        if ([m.language containsString:local]) {
             return m.locale;
         }
     }
@@ -120,8 +120,38 @@ static NSString *const DTCustotmModelKeyVersion = @"1.3";
     m_11.title = @"日本語";
     m_11.language = [@"ja" languageCountryCode];
     m_11.locale = @"ja-JP";
+
+    SwitchLangModel *m_12 = [SwitchLangModel new];
+    m_12.title = @"اردو";
+    m_12.language = [@"ur" languageCountryCode];
+    m_12.locale = @"ur-PK";
     
-    NSArray <SwitchLangModel *>*dataArray = @[m_0, m_1, m_2, m_3, m_4, m_5, m_6, m_7, m_8, m_9, m_10, m_11];
+    SwitchLangModel *m_13 = [SwitchLangModel new];
+    m_13.title = @"Türkçe";
+    m_13.language = [@"tr" languageCountryCode];
+    m_13.locale = @"tr-TR";
+    
+    SwitchLangModel *m_14 = [SwitchLangModel new];
+    m_14.title = @"Português";
+    m_14.language = [@"pt" languageCountryCode];
+    m_14.locale = @"pt-PT";
+    
+    SwitchLangModel *m_15 = [SwitchLangModel new];
+    m_15.title = @"हिंदी";
+    m_15.language = [@"hi" languageCountryCode];
+    m_15.locale = @"hi-IN";
+    
+    SwitchLangModel *m_16 = [SwitchLangModel new];
+    m_16.title = @"বাংলা";
+    m_16.language = [@"bn" languageCountryCode];
+    m_16.locale = @"bn-BD";
+    
+    SwitchLangModel *m_17 = [SwitchLangModel new];
+    m_17.title = @"Tagalog (Pilipinas)";
+    m_17.language = [@"tl" languageCountryCode];
+    m_17.locale = @"tl-PH";
+    
+    NSArray <SwitchLangModel *>*dataArray = @[m_0, m_1, m_2, m_3, m_4, m_5, m_6, m_7, m_8, m_9, m_10, m_11, m_12, m_13, m_14, m_15, m_16, m_17];
     return dataArray;
 }
 

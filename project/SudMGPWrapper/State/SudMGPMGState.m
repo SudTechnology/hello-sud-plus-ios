@@ -244,5 +244,15 @@
 }
 @end
 
+@implementation MgCommonPlayerRoleIdItem
+@end
+
+@implementation MgCommonPlayerRoleIdModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"playersRoleId": [MgCommonPlayerRoleIdItem class]
+    };
+}
+@end
+
 
 

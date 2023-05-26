@@ -268,6 +268,7 @@
 		6CA68D3328E29CA700BDE442 /* MySelectEtherChainsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D1128E29CA600BDE442 /* MySelectEtherChainsView.m */; };
 		6CA68D3628E2A02600BDE442 /* HsNFTPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D3428E2A02500BDE442 /* HsNFTPreferences.m */; };
 		6CA68D3B28E3022D00BDE442 /* LeagueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D3A28E3022D00BDE442 /* LeagueDetailViewController.m */; };
+		6CB9996C2A0CC7CB00AD12CF /* InteractiveGameCrazyCarHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9996A2A0CC7CA00AD12CF /* InteractiveGameCrazyCarHandler.m */; };
 		6CC3E77A28C1BB7D00AA934B /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77728C1BB7D00AA934B /* MyEthereumChainsCellModel.m */; };
 		6CC3E77B28C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77828C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m */; };
 		6CC3E77C28C1BB7D00AA934B /* HSNFTListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77928C1BB7D00AA934B /* HSNFTListCellModel.m */; };
@@ -979,6 +980,8 @@
 		6CA68D3928E3022D00BDE442 /* LeagueDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeagueDetailViewController.h; sourceTree = "<group>"; };
 		6CA68D3A28E3022D00BDE442 /* LeagueDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeagueDetailViewController.m; sourceTree = "<group>"; };
 		6CB3D146288FEE220037EE88 /* HelloSud-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "HelloSud-iOS.entitlements"; sourceTree = "<group>"; };
+		6CB9996A2A0CC7CA00AD12CF /* InteractiveGameCrazyCarHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveGameCrazyCarHandler.m; sourceTree = "<group>"; };
+		6CB9996B2A0CC7CA00AD12CF /* InteractiveGameCrazyCarHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractiveGameCrazyCarHandler.h; sourceTree = "<group>"; };
 		6CC3E77428C1BB7D00AA934B /* MyEthereumChainsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEthereumChainsCellModel.h; sourceTree = "<group>"; };
 		6CC3E77528C1BB7D00AA934B /* HSNFTListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNFTListCellModel.h; sourceTree = "<group>"; };
 		6CC3E77628C1BB7D00AA934B /* MyCNWalletSwitchCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCNWalletSwitchCellModel.h; sourceTree = "<group>"; };
@@ -2535,6 +2538,15 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		6CB999692A0CC7CA00AD12CF /* CrazyCar */ = {
+			isa = PBXGroup;
+			children = (
+				6CB9996A2A0CC7CA00AD12CF /* InteractiveGameCrazyCarHandler.m */,
+				6CB9996B2A0CC7CA00AD12CF /* InteractiveGameCrazyCarHandler.h */,
+			);
+			path = CrazyCar;
+			sourceTree = "<group>";
+		};
 		6CD6E84727BE2CDA00D8F76C /* Impl */ = {
 			isa = PBXGroup;
 			children = (
@@ -2952,6 +2964,7 @@
 		BC210274F1EC9FD037B7AB18 /* Handler */ = {
 			isa = PBXGroup;
 			children = (
+				6CB999692A0CC7CA00AD12CF /* CrazyCar */,
 				BC210AC68BCB5FC106610729 /* InteractiveGameBaseHandler.h */,
 				BC2103CCED6EB29E638F1796 /* InteractiveGameBaseHandler.m */,
 				BC210AB9DFD67EFECAB17E53 /* Baseball */,
@@ -3691,6 +3704,7 @@
 				BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */,
 				6C4607C12851F725005C99EF /* DanmakuRoomViewController.m in Sources */,
 				BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */,
+				6CB9996C2A0CC7CB00AD12CF /* InteractiveGameCrazyCarHandler.m in Sources */,
 				BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */,
 				6CE72720292B82FF0023D5BE /* RocketSelectPopUserColCell.m in Sources */,
 				6CC3E79928C1BBB800AA934B /* ForeignWalletSelectPopView.m in Sources */,

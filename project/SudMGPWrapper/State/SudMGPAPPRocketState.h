@@ -51,7 +51,8 @@ static NSString *APP_CUSTOM_ROCKET_UNLOCK_COMPONENT = @"app_custom_rocket_unlock
 static NSString *APP_CUSTOM_ROCKET_CLOSE_PLAY_EFFECT = @"app_custom_rocket_close_play_effect";
 /// app推送火箭效果飞行点击(火箭)
 static NSString *APP_CUSTOM_ROCKET_FLY_CLICK = @"app_custom_rocket_fly_click";
-
+/// 颜色和签名自定义改到装配间的模式，保存颜色或签名回调
+static NSString *APP_CUSTOM_ROCKET_SAVE_SIGN_COLOR = @"app_custom_rocket_save_sign_color";
 #pragma mark - 互动礼物火箭 model
 
 /// 火箭组件
@@ -397,3 +398,16 @@ static NSString *APP_CUSTOM_ROCKET_FLY_CLICK = @"app_custom_rocket_fly_click";
 /// 组件ID
 @property(nonatomic, strong) NSString *componentId;
 @end
+
+@interface AppCustomRocketSaveSignColorData : NSObject
+@property(nonatomic, strong) NSArray <RocketComponentListItemModel *> *componentList;
+@end
+
+@interface AppCustomRocketSaveSignColorModel : NSObject
+/// 0: 请求成功，1：请求失败
+@property(nonatomic, assign) NSInteger resultCode;
+/// 错误描述
+@property(nonatomic, strong) NSString *error;
+@property(nonatomic, strong)AppCustomRocketSaveSignColorData *data;
+@end
+

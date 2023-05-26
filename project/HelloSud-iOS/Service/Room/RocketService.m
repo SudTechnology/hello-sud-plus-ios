@@ -259,5 +259,29 @@
             }];
 }
 
+/// 保存颜色或签名
++ (void)reqRocketSaveSignColor:(MGCustomRocketSaveSignColorModel *)paramModel finished:(void (^)(AppCustomRocketSaveSignColorModel *respModel))finished {
+    NSDictionary *dicParam = paramModel.mj_JSONObject;
+    [HSHttpService postRequestWithURL:kGameURL(@"rocket/save-sign-color/v1")
+                                param:dicParam respClass:BaseRespModel.class
+                       showErrorToast:YES
+                              success:^(BaseRespModel *resp) {
+        AppCustomRocketSaveSignColorModel *respModel = AppCustomRocketSaveSignColorModel.new;
+        respModel.data = [self decodeModel:AppCustomRocketSaveSignColorData.class FromDic:resp.srcData];
+        respModel.resultCode = resp.retCode;
+        respModel.error = resp.retMsg;
+                                  if (finished) {
+                                      finished(respModel);
+                                  }
+                              } failure:^(NSError *error) {
+                                  AppCustomRocketSaveSignColorModel *respModel = AppCustomRocketSaveSignColorModel.new;
+                respModel.resultCode = error.code;
+                respModel.error = error.dt_errMsg;
+                if (finished) {
+                    finished(respModel);
+                }
+
+            }];
+}
 
 @end

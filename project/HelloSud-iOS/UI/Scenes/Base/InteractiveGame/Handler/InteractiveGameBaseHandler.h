@@ -15,7 +15,7 @@
 @property(nonatomic, strong) SudFSTAPPDecorator *sudFSTAPPDecorator;
 @property(nonatomic, weak) InteractiveGameManager *interactiveGameManager;
 /// 游戏设置点击区域
-@property(nonatomic, strong) MGCustomGameSetClickRect *gameClickRect;
+@property(nonatomic, strong) MgCommonSetClickRect *gameClickRect;
 /// 是否游戏已经准备完毕
 @property(nonatomic, assign) BOOL isGamePrepareOK;
 /// 是否需要展示游戏

@@ -11,6 +11,7 @@
 #import "handler/InteractiveGameBaseHandler.h"
 #import "Handler/Baseball/InteractiveGameBaseballHandler.h"
 #import "Handler/Rocket/InteractiveGameRocketHandler.h"
+#import "Handler/CrazyCar/InteractiveGameCrazyCarHandler.h"
 
 @interface InteractiveGameManager ()
 /// ISudFSTAPP
@@ -73,20 +74,35 @@
 /// 设置游戏处理
 /// @param gameId
 - (void)setupHandler:(int64_t)gameId {
-    if (gameId == INTERACTIVE_GAME_BASEBALL_ID) {
-        // 棒球
-        self.baseHandler = InteractiveGameBaseballHandler.new;
-        [self.sudFSMMGDecorator setEventListener:self.baseHandler];
-        self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
-        self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
-    } else if (gameId == INTERACTIVE_GAME_ROCKET_ID) {
-
-        // 火箭
-        self.baseHandler = InteractiveGameRocketHandler.new;
-        [self.sudFSMMGDecorator setEventListener:self.baseHandler];
-        self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
-        self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
+    switch (gameId) {
+        case INTERACTIVE_GAME_BASEBALL_ID:{
+            // 棒球
+            self.baseHandler = InteractiveGameBaseballHandler.new;
+            [self.sudFSMMGDecorator setEventListener:self.baseHandler];
+            self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
+            self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
+        }
+            break;
+        case INTERACTIVE_GAME_ROCKET_ID:{
+            // 火箭
+            self.baseHandler = InteractiveGameRocketHandler.new;
+            [self.sudFSMMGDecorator setEventListener:self.baseHandler];
+            self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
+            self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
+        }
+            break;
+        case INTERACTIVE_GAME_CRAZY_CAR_ID:{
+            // 赛车
+            self.baseHandler = InteractiveGameCrazyCarHandler.new;
+            [self.sudFSMMGDecorator setEventListener:self.baseHandler];
+            self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
+            self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
+        }
+            break;
+        default:
+            break;
     }
+
     self.baseHandler.interactiveGameManager = self;
 
 }

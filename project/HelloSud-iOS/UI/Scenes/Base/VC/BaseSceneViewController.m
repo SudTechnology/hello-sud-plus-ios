@@ -248,7 +248,10 @@
     InteractiveGameBannerModel *baseballBannerModel = InteractiveGameBannerModel.new;
     baseballBannerModel.gameId = INTERACTIVE_GAME_BASEBALL_ID;
     baseballBannerModel.image = @"room_baseball_enter";
-    NSArray *list = @[rocketBannerModel, baseballBannerModel];
+    InteractiveGameBannerModel *crazyCarBannerModel = InteractiveGameBannerModel.new;
+    crazyCarBannerModel.gameId = INTERACTIVE_GAME_CRAZY_CAR_ID;
+    crazyCarBannerModel.image = @"room_crazy_car_enter";
+    NSArray *list = @[rocketBannerModel, baseballBannerModel, crazyCarBannerModel];
     [self.interactiveGameEnterView showBanner:list];
 }
 

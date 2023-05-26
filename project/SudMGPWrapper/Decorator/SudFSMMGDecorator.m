@@ -471,9 +471,16 @@
         }
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SET_CLICK_RECT]) {
         /// 设置点击区域((火箭)
-        MGCustomGameSetClickRect *m = [MGCustomGameSetClickRect mj_objectWithKeyValues:dataJson];
+        MgCommonSetClickRect *m = [MgCommonSetClickRect mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketSetClickRect:model:)]) {
             [self.listener onGameMGCustomRocketSetClickRect:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SAVE_SIGN_COLOR]) {
+        /// 设置点击区域((火箭)
+        MGCustomRocketSaveSignColorModel *m = [MGCustomRocketSaveSignColorModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketSaveSignColor:model:)]) {
+            [self.listener onGameMGCustomRocketSaveSignColor:handle model:m];
             return;
         }
     } else if ([state isEqualToString:MG_BASEBALL_RANKING]) {
@@ -561,7 +568,14 @@
             [self.listener onGameMGCommonSetClickRect:handle model:m];
             return;
         }
-    }else {
+    } else if ([state isEqualToString:MG_COMMON_PLAYER_ROLE_ID]) {
+        /// 游戏通知app玩家角色(狼人杀，谁是卧底)
+        MgCommonPlayerRoleIdModel *m = [MgCommonPlayerRoleIdModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerRoleId:model:)]) {
+            [self.listener onPlayerMGCommonPlayerRoleId:handle model:m];
+            return;
+        }
+    } else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
     }

@@ -218,6 +218,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// app推送火箭效果飞行点击(火箭) APP_CUSTOM_ROCKET_FLY_CLICK
 - (void)notifyAppCustomRocketFlyClick;
 
+/// 颜色和签名自定义改到装配间的模式，保存颜色或签名 APP_CUSTOM_ROCKET_SAVE_SIGN_COLOR
+- (void)notifyAppCustomRocketSaveSignColor:(AppCustomRocketSaveSignColorModel *)model;
+
 #pragma mark - 互动礼物<棒球>
 
 /// 查询排行榜数据 APP_BASEBALL_RANKING
