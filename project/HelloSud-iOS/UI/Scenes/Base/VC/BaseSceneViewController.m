@@ -248,11 +248,17 @@
     InteractiveGameBannerModel *baseballBannerModel = InteractiveGameBannerModel.new;
     baseballBannerModel.gameId = INTERACTIVE_GAME_BASEBALL_ID;
     baseballBannerModel.image = @"room_baseball_enter";
-    InteractiveGameBannerModel *crazyCarBannerModel = InteractiveGameBannerModel.new;
-    crazyCarBannerModel.gameId = INTERACTIVE_GAME_CRAZY_CAR_ID;
-    crazyCarBannerModel.image = @"room_crazy_car_enter";
-    NSArray *list = @[rocketBannerModel, baseballBannerModel, crazyCarBannerModel];
-    [self.interactiveGameEnterView showBanner:list];
+    if (HsAppPreferences.shared.appEnvType == HsAppEnvTypePro) {
+        // 线上移除赛车
+        NSArray *list = @[rocketBannerModel, baseballBannerModel];
+        [self.interactiveGameEnterView showBanner:list];
+    } else {
+        InteractiveGameBannerModel *crazyCarBannerModel = InteractiveGameBannerModel.new;
+        crazyCarBannerModel.gameId = INTERACTIVE_GAME_CRAZY_CAR_ID;
+        crazyCarBannerModel.image = @"room_crazy_car_enter";
+        NSArray *list = @[rocketBannerModel, baseballBannerModel, crazyCarBannerModel];
+        [self.interactiveGameEnterView showBanner:list];
+    }
 }
 
 - (void)dtConfigEvents {

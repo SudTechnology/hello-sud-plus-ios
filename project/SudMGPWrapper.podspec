@@ -43,7 +43,7 @@ Pod::Spec.new do |s|
         'SudMGPWrapper/State/**/*.{h,m,mm,cpp,c,hpp,cc,swift}',
       ]
       ss.vendored_frameworks = [
-        # 'SudMGPSDK/SudMGP.xcframework'
+         'SudMGPSDK/SudMGP.xcframework'
       ]
 
       # json
@@ -51,6 +51,6 @@ Pod::Spec.new do |s|
       # 轻量版（不支持部分游戏，包体较小）
 #      ss.dependency 'SudMGP_Lite', '1.3.0'
       # 标准版（支持全部游戏，包体会大一些）
-     ss.dependency 'SudMGP', '1.3.3.1'
+     #ss.dependency 'SudMGP', '1.3.3.1'
     end
 end

@@ -154,11 +154,10 @@
 @end
 
 @implementation AppCustomRocketSaveSignColorData
-@end
-
-@implementation AppCustomRocketSaveSignColorModel
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"componentList": RocketComponentListItemModel.class};
 }
+@end
 
+@implementation AppCustomRocketSaveSignColorModel
 @end
