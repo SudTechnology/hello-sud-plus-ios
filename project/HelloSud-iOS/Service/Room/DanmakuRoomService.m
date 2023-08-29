@@ -15,7 +15,7 @@
 /// @param finished finished
 /// @param failure failure
 + (void)reqSendBarrage:(NSString *)roomId content:(NSString *)content gameId:(int64_t)gameId finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure {
-    NSDictionary *dicParam = @{@"roomId": roomId, @"content": content, @"gameId":[NSString stringWithFormat:@"%@", @(gameId)]};
+    NSDictionary *dicParam = @{@"roomId": roomId, @"content": content, @"gameId": [NSString stringWithFormat:@"%@", @(gameId)]};
     [HSHttpService postRequestWithURL:kINTERACTURL(@"bullet-chat-game/send-barrage/v1") param:dicParam respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (finished) {
             finished();
@@ -41,21 +41,11 @@
 /// @param gameId gameId
 /// @param finished finished
 /// @param failure failure
-+ (void)reqShortSendEffectList:(int64_t)gameId finished:(void (^)(NSArray<DanmakuCallWarcraftModel *> *modelList, NSString *guideTip))finished failure:(void (^)(NSError *error))failure {
-    NSDictionary *dicParam = @{@"gameId": @(gameId)};
++ (void)reqShortSendEffectList:(int64_t)gameId roomId:(NSString *)roomId finished:(void (^)(RespDanmakuListModel *resp))finished failure:(void (^)(NSError *error))failure {
+    NSDictionary *dicParam = @{@"gameId": @(gameId), @"roomId": roomId};
     [HSHttpService postRequestWithURL:kINTERACTURL(@"bullet-chat-game/shortcut-window/v1") param:dicParam respClass:RespDanmakuListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (finished) {
-            RespDanmakuListModel *m = (RespDanmakuListModel *) resp;
-            NSMutableArray <DanmakuCallWarcraftModel *> *arr = [[NSMutableArray alloc] init];
-            [arr setArray:m.callWarcraftInfoList];
-            // 处理一下加入阵队数据，复用DanmakuCallWarcraftModel model
-            if (m.joinTeamList.count > 0) {
-                DanmakuCallWarcraftModel *joinTeamModel = [[DanmakuCallWarcraftModel alloc] init];
-                joinTeamModel.effectShowType = DanmakuEffectModelShowTypeJoin;
-                joinTeamModel.joinTeamList = m.joinTeamList;
-                [arr insertObject:joinTeamModel atIndex:0];
-            }
-            finished(arr, m.guideText);
+            finished((RespDanmakuListModel *) resp);
         }
     }                         failure:failure];
 }

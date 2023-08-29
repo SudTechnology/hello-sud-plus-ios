@@ -38,6 +38,7 @@
                 @(SceneTypeLeague): @"#CB1530",
                 @(SceneTypeCustom): @"#198DE2",
                 @(SceneTypeDanmaku): @"#00CBD2",
+                @(SceneTypeVertical): @"#00CBD2",
                 @(SceneTypeDisco): @"#DD01CB",
                 @(SceneTypeCrossApp): @"#0D0DEB",
         };

@@ -204,6 +204,8 @@ static NSString *APP_CUSTOM_ROCKET_SAVE_SIGN_COLOR = @"app_custom_rocket_save_si
 @property(nonatomic, assign) NSInteger validTime;
 /// 有效期时间戳：单位是秒
 @property(nonatomic, assign) NSInteger date;
+/// 可选，字段存在显示内容，字段不存在显示时间或者永久
+@property(nonatomic, strong) NSString *extra;
 @end
 
 /// APP_CUSTOM_ROCKET_COMPONENT_LIST
@@ -364,9 +366,19 @@ static NSString *APP_CUSTOM_ROCKET_SAVE_SIGN_COLOR = @"app_custom_rocket_save_si
 @property(nonatomic, strong) NSString *value;
 @end
 
+@interface InteractConfigModel : NSObject
+@property(nonatomic, strong)NSString * interactivePlay;
+@property(nonatomic, strong)NSArray<NSString *> *gear;
+@property(nonatomic, strong)NSString *nicknameTips;
+@property(nonatomic, strong)NSString *uiSwitche;
+@property(nonatomic, strong)NSString *guide;
+
+@end
+
 /// APP_CUSTOM_ROCKET_PLAY_MODEL_LIST app播放火箭发射动效
 @interface AppCustomRocketPlayModelListModel : NSObject
 @property(nonatomic, strong) NSString *orderId;
+@property(nonatomic, strong) InteractConfigModel *interactConfig;
 @property(nonatomic, strong) NSArray <RocketPlayModelListItem *> *componentList;
 @end
 

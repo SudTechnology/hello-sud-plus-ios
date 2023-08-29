@@ -22,6 +22,8 @@
 @property(nonatomic, assign) BOOL isShowGame;
 /// 是否需要展示游戏主界面
 @property(nonatomic, assign) BOOL showMainView;
+/// 游戏id
+@property(nonatomic, assign) int64_t gameId;
 
 /// 展示游戏视图
 - (void)showGameView:(BOOL)showMainView;

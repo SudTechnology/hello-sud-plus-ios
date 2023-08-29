@@ -75,7 +75,13 @@
     }
 
     [self joinRoom:audioJoinRoomModel];
+    [self joinRoomIm];
+}
 
+/// 加入房间IM
+- (void)joinRoomIm {
+    WeakSelf
+    DDLogDebug(@"joinRoomIm");
     [[IMRoomManager sharedInstance] joinRoom:self.roomID userID:AppService.shared.login.loginUserInfo.userID userName:AppService.shared.login.loginUserInfo.name token:self.enterModel.imToken success:^{
         [weakSelf onHandleCrossRoomImConnected];
     }                                   fail:^(NSInteger code, NSString *msg) {
@@ -87,6 +93,7 @@
     [AudioEngineFactory.shared.audioEngine setEventListener:self];
     [AudioEngineFactory.shared.audioEngine setAudioRouteToSpeaker:YES];
 }
+
 
 - (void)logoutRoom:(void (^)(void))finished {
     [kAudioRoomService reqExitRoom:self.roomID.longLongValue];
@@ -184,6 +191,22 @@
         }
     }
 }
+
+- (void)onImRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData {
+    DDLogInfo(@"onImRoomStateUpdate:%@, errorCode:%@", @(state), @(errorCode));
+//    if (state == HSAudioEngineStateDisconnected || state == HSAudioEngineStateConnecting) {
+//        if (self.isLoginedIm) {
+//            DDLogDebug(@"re login room im");
+//            self.isNeedReLoginedIm = YES;
+//        }
+//    } else if (state == HSAudioEngineStateConnected){
+//        if (self.isNeedReLoginedIm){
+//            [self joinRoomIm];
+//        }
+//    }
+}
+
+
 
 - (void)onCapturedPCMData:(NSData *)data {
     [self.sudFSTAPPDecorator pushAudio:data];

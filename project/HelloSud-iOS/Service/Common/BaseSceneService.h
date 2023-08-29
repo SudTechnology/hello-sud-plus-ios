@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, SceneType) {
     SceneTypeDisco = 13,
     SceneTypeCrossDomain = 14,
     SceneTypeCrossApp = 16,
+    SceneTypeVertical = 18,
 };
 
 /// 基础场景服务

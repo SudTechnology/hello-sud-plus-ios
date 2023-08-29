@@ -13,8 +13,13 @@
 
 @implementation SudFSTAPPDecorator
 
+- (void)dealloc {
+    NSLog(@"dealloc:%@", [self class]);
+}
+
 - (void)setISudFSTAPP:(id <ISudFSTAPP>)iSudFSTAPP {
     if (_iSudFSTAPP) {
+        NSLog(@"_iSudFSTAPP will destroy");
         [_iSudFSTAPP destroyMG];
     }
     _iSudFSTAPP = iSudFSTAPP;

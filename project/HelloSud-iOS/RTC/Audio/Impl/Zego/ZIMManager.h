@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^OnReceiveRoomMessage)(NSString* roomID, NSString* senderUserID, NSString* message);
 
 @interface ZIMManager: NSObject
+@property(nonatomic, weak) id <ISudAudioEventListener> iSudAudioEventListener;
 
 + (instancetype)sharedInstance;
 

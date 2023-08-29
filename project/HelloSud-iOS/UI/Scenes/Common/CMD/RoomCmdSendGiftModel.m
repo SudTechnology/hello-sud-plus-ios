@@ -83,7 +83,7 @@
     NSMutableAttributedString *attrSend = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ ", NSString.dt_send]];
     attrSend.yy_lineSpacing = 6;
     attrSend.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
-    attrSend.yy_color = [UIColor dt_colorWithHexString:@"#AAAAAA" alpha:1];
+    attrSend.yy_color = [UIColor dt_colorWithHexString:@"#f6ff00" alpha:1];
     
     NSMutableAttributedString *attrGetName = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@   %@", toUserName, giftName]];
     attrGetName.yy_lineSpacing = 6;

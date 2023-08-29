@@ -37,13 +37,15 @@
         case INTERACTIVE_GAME_BASEBALL_ID:{
             title = @"正在前往棒球...";
         }
-            
             break;
         case INTERACTIVE_GAME_CRAZY_CAR_ID:{
             title = @"正在前往赛车...";
         }
             break;
-            
+        case INTERACTIVE_GAME_BIG_EATER_ID:{
+            title = @"正在前往大胃王...";
+        }
+            break;
         default:
             break;
     }

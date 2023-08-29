@@ -33,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 #define UIFONT_MEDIUM(s) [UIFont systemFontOfSize:s weight:UIFontWeightMedium]
 /// 加粗号字体
 #define UIFONT_BOLD(s) [UIFont systemFontOfSize:s weight:UIFontWeightBold]
+/// 加重号字体
+#define UIFONT_HEAVY(s) [UIFont systemFontOfSize:s weight:UIFontWeightHeavy]
 /// 常规字号字体
 #define UIFONT_REGULAR(s) [UIFont systemFontOfSize:s weight:UIFontWeightRegular]
 /// 常规字号字体

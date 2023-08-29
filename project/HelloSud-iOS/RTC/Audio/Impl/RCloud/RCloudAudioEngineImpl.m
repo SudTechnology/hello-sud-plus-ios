@@ -206,9 +206,10 @@
 
 - (void)sendCommand:(nonnull NSString *)command listener:(nonnull void (^)(int))listener {
     RCRTCRoom *rcrtcroom = [RCRTCEngine sharedInstance].room;
-    if (rcrtcroom == nil)
+    if (rcrtcroom == nil) {
         if (listener) listener(-1);
         return;
+    }
     
     RCVoiceRoomEngine *engine = [self getEngine];
     if (engine != nil) {

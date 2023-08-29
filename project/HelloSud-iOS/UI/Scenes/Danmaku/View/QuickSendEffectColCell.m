@@ -112,7 +112,7 @@
 }
 
 - (void)showCallViewContent:(DanmakuCallWarcraftModel *)model {
-    if (model.callMode == 2) {
+    if (model.callMode == DanmakuCallWarcraftModelTypeGift) {
         // 礼物
         [self showGiftIcon:model];
         self.callLabel.text = [NSString stringWithFormat:NSString.dt_room_guess_coin_fmt, @(model.giftPrice)];
@@ -186,10 +186,10 @@
 
 - (void)onTapCallView:(id)tap {
     DanmakuCallWarcraftModel *m = (DanmakuCallWarcraftModel *) self.model;
-    if (m.callMode == 1) {
+    if (m.callMode == DanmakuCallWarcraftModelTypeDanmuka) {
         // 弹幕
         [kDanmakuRoomService.currentRoomVC sendContentMsg:m.content];
-    } else if (m.callMode == 2) {
+    } else if (m.callMode == DanmakuCallWarcraftModelTypeGift) {
         // 礼物
         AudioUserModel *toUser = nil;
 

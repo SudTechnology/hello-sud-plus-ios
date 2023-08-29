@@ -35,3 +35,6 @@
             @"joinTeamList": [DanmakuJoinTeamModel class]};
 }
 @end
+
+@implementation RespDanmakuJoinTeamMsgNtf
+@end

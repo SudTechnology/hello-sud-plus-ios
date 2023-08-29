@@ -50,6 +50,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param extendedData 扩展数据
 - (void)onRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(nullable NSDictionary *)extendedData;
 
+/// IM房间状态通知
+/// @param state 状态
+/// @param errorCode 错误码
+/// @param extendedData 扩展数据
+- (void)onImRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(nullable NSDictionary *)extendedData;
+
 /// 语音原始音频采集
 /// @param data 数据
 - (void)onCapturedPCMData:(NSData *)data;

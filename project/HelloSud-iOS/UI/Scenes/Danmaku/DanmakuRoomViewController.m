@@ -40,9 +40,9 @@
 // 横屏提示倒计时
 @property(nonatomic, strong) DTTimer *landscapeTipTimer;
 /// 是否是竖屏开启
-@property (nonatomic, assign)BOOL isPortraitOpen;
+@property(nonatomic, assign) BOOL isPortraitOpen;
 /// 正在展示横屏引导
-@property (nonatomic, assign)BOOL isShowingLandscapeGuide;
+@property(nonatomic, assign) BOOL isShowingLandscapeGuide;
 @end
 
 @implementation DanmakuRoomViewController
@@ -258,9 +258,20 @@
 
 - (void)reqData {
     WeakSelf
-    [DanmakuRoomService reqShortSendEffectList:self.gameId finished:^(NSArray<DanmakuCallWarcraftModel *> *modelList, NSString *guideTip) {
-        weakSelf.dataList = modelList;
-        [weakSelf.guideTipView updateTip:guideTip];
+    [DanmakuRoomService reqShortSendEffectList:self.gameId roomId:self.roomID finished:^(RespDanmakuListModel *resp) {
+        RespDanmakuListModel *m = resp;
+        NSMutableArray <DanmakuCallWarcraftModel *> *arr = [[NSMutableArray alloc] init];
+        [arr setArray:m.callWarcraftInfoList];
+        // 处理一下加入阵队数据，复用DanmakuCallWarcraftModel model
+        if (m.joinTeamList.count > 0) {
+            DanmakuCallWarcraftModel *joinTeamModel = [[DanmakuCallWarcraftModel alloc] init];
+            joinTeamModel.effectShowType = DanmakuEffectModelShowTypeJoin;
+            joinTeamModel.joinTeamList = m.joinTeamList;
+            [arr insertObject:joinTeamModel atIndex:0];
+        }
+
+        weakSelf.dataList = arr;
+        [weakSelf.guideTipView updateTip:m.guideText];
         if (weakSelf.quickSendView.dataList.count == 0) {
             weakSelf.quickSendView.dataList = weakSelf.dataList;
             [weakSelf.quickSendView dtUpdateUI];
@@ -337,6 +348,10 @@
 
 /// 是否显示添加通用机器人按钮
 - (BOOL)isShowAddRobotBtn {
+    return NO;
+}
+
+- (BOOL)isLoadCommonRobotList {
     return NO;
 }
 
@@ -463,7 +478,7 @@
     [self.sceneView insertSubview:self.guideTipBgView belowSubview:self.quickSendView];
     [self.sceneView addSubview:self.guideTipView];
     [self.guideTipBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.leading.top.trailing.bottom.equalTo(@0);
+        make.leading.top.trailing.bottom.equalTo(@0);
     }];
     [self.guideTipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.quickSendView.mas_top).offset(0);
@@ -578,7 +593,6 @@
     }
     return _exitLandscapeBtn;
 }
-
 
 
 - (UIView *)guideTipBgView {

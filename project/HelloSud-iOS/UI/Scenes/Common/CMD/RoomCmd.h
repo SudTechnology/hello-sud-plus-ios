@@ -41,4 +41,5 @@
 #define CMD_GAME_EXTRA_MATCH_STATUS_CHANGED_NOTIFY   21002 /// 1.6.1    跨域匹配状态变更通知
 #define CMD_GAME_EXTRA_TEAM_CHANGED_NOTIFY	         21003 /// 1.6.1	跨域匹配队伍变更通知
 #define CMD_GAME_EXTRA_GAME_SWITCH_NOTIFY	         21004 /// 1.6.1跨域匹配游戏切换通知
+#define CMD_GAME_BULLET_JOIN_TEAM_NOTIFY	         21006 /// 1.6.1弹幕游戏加入战队通知
 #endif /* HSAudioMsgConst_h */

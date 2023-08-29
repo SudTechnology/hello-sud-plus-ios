@@ -89,7 +89,7 @@
 
     ReqAppOrderModel *reqModel = ReqAppOrderModel.new;
     reqModel.roomId = kAudioRoomService.currentRoomVC.roomID;
-    reqModel.gameId = INTERACTIVE_GAME_CRAZY_CAR_ID;
+    reqModel.gameId = self.gameId;
     reqModel.value = model.value;
     reqModel.cmd = model.cmd;
     reqModel.fromUid = model.fromUid;

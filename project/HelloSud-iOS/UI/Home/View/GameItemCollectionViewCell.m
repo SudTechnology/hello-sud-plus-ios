@@ -24,27 +24,7 @@
     self.gameImageView.image = nil;
 }
 
-- (void)setModel:(BaseModel *)model {
-    HSGameItem *m = (HSGameItem *) model;
-    self.nameLabel.text = m.gameName;
-    if (LanguageUtil.isLanguageRTL) {
-        self.nameLabel.textAlignment = NSTextAlignmentRight;
-    } else {
-        self.nameLabel.textAlignment = NSTextAlignmentLeft;
-    }
-    if (m.isGameWait) {
-        self.nameLabel.textColor = HEX_COLOR(@"#AAAAAA");
-        self.gameImageView.image = [UIImage imageNamed:m.gamePic];
-    } else if (m.isBlank){
-        self.gameImageView.image = nil;
-    }  else {
-        self.nameLabel.textColor = UIColor.whiteColor;
-        if (m.homeGamePic) {
-            [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.homeGamePic] placeholderImage:[UIImage imageNamed:@"default_game_bg"]];
-        }
-    }
-    self.enterLabel.hidden = m.isBlank;
-}
+
 
 - (CGFloat)imageW {
     return (kScreenWidth - 16 * 2 - 13 * 2 - 9 * 2) / 3;
@@ -95,6 +75,43 @@
 
 - (void)dtConfigUI {
     self.backgroundColor = UIColor.whiteColor;
+}
+
+- (void)dtUpdateUI {
+    [super dtUpdateUI];
+    if (![self.model isKindOfClass:[HSGameItem class]]) {
+        self.nameLabel.text = nil;
+        self.gameImageView.image = nil;
+        return;
+    }
+    HSGameItem *m = (HSGameItem *) self.model;
+
+    // 有些直接赋值，sdwebimage无法取消出现覆盖图片问题，故主动取消
+    [self.gameImageView sd_cancelCurrentImageLoad];
+    self.nameLabel.text = m.gameName;
+    if (LanguageUtil.isLanguageRTL) {
+        self.nameLabel.textAlignment = NSTextAlignmentRight;
+    } else {
+        self.nameLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    if (m.isGameWait) {
+        self.nameLabel.textColor = HEX_COLOR(@"#AAAAAA");
+        self.gameImageView.image = [UIImage imageNamed:m.gamePic];
+    } else if (m.isBlank){
+        self.gameImageView.image = nil;
+    }  else {
+        self.nameLabel.textColor = UIColor.whiteColor;
+        if (m.homeGamePic) {
+            [self.gameImageView sd_setImageWithURL:[NSURL URLWithString:m.homeGamePic] placeholderImage:[UIImage imageNamed:@"default_game_bg"]];
+        }
+        
+    }
+    self.enterLabel.hidden = m.isBlank;
+    if (self.sceneId == SceneTypeVertical) {
+        self.nameLabel.hidden = YES;
+    } else {
+        self.nameLabel.hidden = NO;
+    }
 }
 
 - (UIView *)containerView {

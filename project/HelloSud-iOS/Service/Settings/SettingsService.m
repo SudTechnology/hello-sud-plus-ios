@@ -47,7 +47,7 @@ static NSString *const DTCustotmModelKeyVersion = @"1.3";
 
 /// 获取当前
 + (NSString *)getCurLanguage {
-    NSString *local = NSBundle.currentLanguage;// [NSLocale preferredLanguages].firstObject;
+    NSString *local = NSBundle.currentLanguage;
     NSArray <SwitchLangModel *>*dataArray = [self getLanguageArr];
     for (SwitchLangModel *m in dataArray) {
         if (m.language == nil) {

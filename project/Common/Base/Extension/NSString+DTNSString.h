@@ -15,6 +15,8 @@
 - (NSURL *)dt_toURL;
 /// 转成md5
 - (NSString*)dt_md5;
+/// 本地化语言
+- (NSString *)dt_lan;
 @end
 
 

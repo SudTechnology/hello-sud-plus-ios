@@ -24,13 +24,20 @@ typedef NS_ENUM(NSInteger, DanmakuEffectModelShowType) {
 @property(nonatomic, strong) NSString *buttonPic;
 /// 文本内容(弹幕使用)
 @property(nonatomic, strong) NSString *content;
-
+/// 背景颜色
+@property(nonatomic, strong) NSString *backgroundColor;
 @end
 
 /// 召唤数据模型
 @interface DanmakuCallWarcraftModel : BaseModel
+
+typedef NS_ENUM(NSInteger, DanmakuCallWarcraftModelType){
+    DanmakuCallWarcraftModelTypeDanmuka = 1,
+    DanmakuCallWarcraftModelTypeGift = 2,
+};
+
 /// 召唤方式（1弹幕，2礼物）
-@property(nonatomic, assign) NSInteger callMode;
+@property(nonatomic, assign) DanmakuCallWarcraftModelType callMode;
 /// 魔兽类型（1弹幕魔兽，2初级魔兽，3精英魔兽，4远古魔兽）
 @property(nonatomic, assign) NSInteger warcraftType;
 /// 礼物id
@@ -68,4 +75,10 @@ typedef NS_ENUM(NSInteger, DanmakuEffectModelShowType) {
 @property(nonatomic, strong) NSString *guideText;
 @end
 
+
+// CMD_GAME_BULLET_JOIN_TEAM_NOTIFY
+@interface RespDanmakuJoinTeamMsgNtf : RoomBaseCMDModel
+@property (nonatomic, strong)NSString *userId;
+@property (nonatomic, strong)NSString *content;/// 已加入红方战队
+@end
 NS_ASSUME_NONNULL_END

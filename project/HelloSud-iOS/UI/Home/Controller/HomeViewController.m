@@ -294,11 +294,15 @@
     BaseCollectionViewCell *cell = nil;
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     if (m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeLeague) {
+        // 全屏宽度cell
         GameItemFullCollectionViewCell *c = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemFullCollectionViewCell" forIndexPath:indexPath];
         c.sceneId = m.sceneId;
         cell = c;
     } else {
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
+        // 默认一行三个
+        GameItemCollectionViewCell *c = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
+        c.sceneId = m.sceneId;
+        cell = c;
     }
     NSArray<HSGameItem *> *arr = self.dataList[indexPath.section];
     cell.indexPath = indexPath;
@@ -317,10 +321,6 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     HSSceneModel *m = self.headerSceneList[indexPath.section];
     HSGameItem *model = self.dataList[indexPath.section][indexPath.row];
-//
-//    DiscoGameInteractivePopView *v = [[DiscoGameInteractivePopView alloc] init];
-//    [DTSheetView show:v onCloseCallback:nil];
-//    return;
 
     if (self.headerSceneList[indexPath.section].sceneId == SceneTypeTicket) {
         TicketChooseViewController *vc = TicketChooseViewController.new;
@@ -336,7 +336,7 @@
         [self.navigationController pushViewController:vc animated:true];
     } else {
 
-        if (m.sceneId == SceneTypeDanmaku && ![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
+        if ((m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeVertical) && ![AppService.shared isSameRtc:AppService.shared.configModel.zegoCfg rtcType:AppService.shared.rtcType]) {
             [ToastUtil show:NSString.dt_home_coming_soon];
             return;
         }
@@ -369,12 +369,26 @@
     CGRect rect = [m.sceneName boundingRectWithSize:CGSizeMake(kScreenWidth - 62, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: font} context:nil];
     CGFloat baseH = 140;
     CGFloat h = baseH + rect.size.height;
-    if (m.sceneId == SceneTypeGuess) {
-        baseH += 290;
-        h = baseH + rect.size.height;
-    } else if (m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeLeague) {
-        baseH = 46;
-        h = baseH + rect.size.height;
+    switch (m.sceneId) {
+        case SceneTypeGuess:{
+            baseH += 290;
+            h = baseH + rect.size.height;
+        }
+            break;
+        case SceneTypeDanmaku:
+        case SceneTypeDisco:
+        case SceneTypeLeague:{
+            baseH = 46;
+            h = baseH + rect.size.height;
+        }
+            break;
+        case SceneTypeVertical:{
+            baseH = 46;
+            h = baseH + rect.size.height;
+        }
+            break;
+        default:
+            break;
     }
     // 展示banner
     if ([self checkIfNeedToShowBanner:section]) {
@@ -393,7 +407,7 @@
     UICollectionReusableView *supplementaryView;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         HSSceneModel *sceneModel = self.headerSceneList[indexPath.section];
-        if (sceneModel.sceneId == SceneTypeDanmaku || sceneModel.sceneId == SceneTypeDisco) {
+        if (sceneModel.sceneId == SceneTypeDanmaku || sceneModel.sceneId == SceneTypeDisco || sceneModel.sceneId == SceneTypeVertical) {
             HomeHeaderFullReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderFullReusableView" forIndexPath:indexPath];
             view.sceneModel = sceneModel;
             supplementaryView = view;

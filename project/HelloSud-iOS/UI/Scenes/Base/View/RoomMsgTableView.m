@@ -81,6 +81,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = UIColor.clearColor;
         _tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+        _tableView.showsVerticalScrollIndicator = NO;
         [_tableView registerClass:[BaseMsgCell class] forCellReuseIdentifier:NSStringFromClass(BaseMsgCell.class)];
         [_tableView registerClass:[HSRoomTextTableViewCell class] forCellReuseIdentifier:NSStringFromClass(HSRoomTextTableViewCell.class)];
         [_tableView registerClass:[RoomSystemTableViewCell class] forCellReuseIdentifier:NSStringFromClass(RoomSystemTableViewCell.class)];

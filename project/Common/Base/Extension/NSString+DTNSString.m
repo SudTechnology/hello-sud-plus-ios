@@ -36,6 +36,10 @@
     return [outPutStr lowercaseString];
 }
 
+- (NSString *)dt_lan {
+    return self.localized;
+}
+
 @end
 
 @implementation NSAttributedString(DTNSAttributedString)

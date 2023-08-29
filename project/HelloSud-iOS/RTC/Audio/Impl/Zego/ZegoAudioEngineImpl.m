@@ -199,6 +199,9 @@
     ZegoExpressEngine *engine = [ZegoExpressEngine sharedEngine];
     if (engine != nil) {
         ZegoCanvas *canvas = [ZegoCanvas canvasWithView:view];
+        if (view.contentMode == UIViewContentModeScaleAspectFill) {
+            canvas.viewMode = ZegoViewModeAspectFill;
+        }
         [engine startPlayingStream:streamID canvas:canvas];
     }
 }

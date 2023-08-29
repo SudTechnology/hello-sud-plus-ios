@@ -381,6 +381,7 @@
 		6CE7272D292B83870023D5BE /* HomeBannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE7272A292B83870023D5BE /* HomeBannerCollectionViewCell.m */; };
 		6CE72730292B83C90023D5BE /* GiftRocketEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE7272E292B83C90023D5BE /* GiftRocketEnterView.m */; };
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
+		6CF3E1CF2A3C5903002FADDA /* InteractiveGameBigEaterHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF3E1CE2A3C5903002FADDA /* InteractiveGameBigEaterHandler.m */; };
 		BC210007DE8200E08B5F7786 /* InteractiveGameBaseballHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105C765AF62922C05A556 /* InteractiveGameBaseballHandler.m */; };
 		BC21003E1833458539047CE2 /* LeagueEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210A169901E482D9705365 /* LeagueEnterViewController.m */; };
 		BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AC026DDD3A9396B9687 /* MoreGuessHeaderView.m */; };
@@ -396,6 +397,7 @@
 		BC2104A8898C8884DFEED23A /* InteractiveGameBannerColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21085B92103036187278E4 /* InteractiveGameBannerColCell.m */; };
 		BC2104A997878EE07744E080 /* PKRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */; };
 		BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210337708736FFF222750A /* BaseSceneService.m */; };
+		BC21050572DF2DB75CC07654 /* DanmakuVerticalRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100D46C12819FFA16C48D /* DanmakuVerticalRoomViewController.m */; };
 		BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210F28C7CAB6BCA3140175 /* HSHttpService.m */; };
 		BC2106022464099DABC583C0 /* InteractiveGameBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100B2496E97D9ADBA9BF0 /* InteractiveGameBannerView.m */; };
 		BC21065ED9627E0D5785EE40 /* DiscoGameInteractiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */; };
@@ -408,6 +410,7 @@
 		BC21074293C8ADEA821E64D4 /* WalletDeletePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D7DC4411F5B1BB4F36E /* WalletDeletePopView.m */; };
 		BC210743E83852E3D938F5A9 /* DiscoInteractiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210AD7CAE14B5B2F1F64D6 /* DiscoInteractiveModel.m */; };
 		BC21076C5084AD192F038DA8 /* DiscoSelectAnchorColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210D5EF65138F4AB70FAC0 /* DiscoSelectAnchorColCell.m */; };
+		BC2107AD164800877FAD4D9B /* VerticalSendEffectColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210638033719E2C5D303C4 /* VerticalSendEffectColCell.m */; };
 		BC2107B494D56606BB22C758 /* MoreGuessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21054B9ED5F97727A00590 /* MoreGuessViewController.m */; };
 		BC2107B89AA92C9C99EDFB4F /* RespCrossAppModels.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2101C546C293CFE555AE41 /* RespCrossAppModels.m */; };
 		BC2107D8E6B6DC999B46720D /* TipPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21040A1F1E959F6632C911 /* TipPopView.m */; };
@@ -421,6 +424,7 @@
 		BC21097342CF79274F4049F3 /* HsAppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2109AEEB6FC34520DCBA33 /* HsAppPreferences.m */; };
 		BC21098A0CA7595992F3EC61 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210CF9790D9F2CCBFEE6E7 /* QSGameItemModel.m */; };
 		BC2109B53CC40DBF0DEB10B2 /* RoomMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105467EA8857361624481 /* RoomMoreView.m */; };
+		BC2109BEA889628184045A49 /* DanmakuVerticalSendView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E60030DFFD9BE577CD6 /* DanmakuVerticalSendView.m */; };
 		BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2102E5E65CF1B289868F50 /* GuessCategoryView.m */; };
 		BC210A4DEF905819E9635D98 /* LeagueRoomService.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210E613A87ABC193F3B64D /* LeagueRoomService.m */; };
 		BC210A75257DF698A543C29A /* DiscoInteractiveColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210B8B446B743E55BFA8FD /* DiscoInteractiveColCell.m */; };
@@ -1145,18 +1149,22 @@
 		6CE7272F292B83C90023D5BE /* GiftRocketEnterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftRocketEnterView.h; sourceTree = "<group>"; };
 		6CEF766627F5A22000A12220 /* MoreSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreSettingViewController.h; sourceTree = "<group>"; };
 		6CEF766727F5A22000A12220 /* MoreSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSettingViewController.m; sourceTree = "<group>"; };
+		6CF3E1CD2A3C5903002FADDA /* InteractiveGameBigEaterHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractiveGameBigEaterHandler.h; sourceTree = "<group>"; };
+		6CF3E1CE2A3C5903002FADDA /* InteractiveGameBigEaterHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractiveGameBigEaterHandler.m; sourceTree = "<group>"; };
 		7A720CB3011AA758F160BFED /* Pods-QuickStart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickStart.debug.xcconfig"; path = "Target Support Files/Pods-QuickStart/Pods-QuickStart.debug.xcconfig"; sourceTree = "<group>"; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC21001E47A02C2A2F8EE39B /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		BC210021B73B4A36E7B8EE17 /* CrossAppRoomListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossAppRoomListCell.m; sourceTree = "<group>"; };
 		BC2100509C473308E522D1A8 /* LeagueRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueRoomViewController.h; sourceTree = "<group>"; };
 		BC21006D4562966F8464897E /* MatchSeatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchSeatView.m; sourceTree = "<group>"; };
+		BC21008CD379E2A0514B3C09 /* DanmakuVerticalRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DanmakuVerticalRoomViewController.h; sourceTree = "<group>"; };
 		BC2100A329015CF1BD8FE09B /* RoomListContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomListContentView.m; sourceTree = "<group>"; };
 		BC2100A5544CF78174597F1D /* PKGameEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGameEmptyView.h; sourceTree = "<group>"; };
 		BC2100B2496E97D9ADBA9BF0 /* InteractiveGameBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveGameBannerView.m; sourceTree = "<group>"; };
 		BC2100B590FFC635FE3A6DB3 /* DiscoGameInteractiveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoGameInteractiveView.m; sourceTree = "<group>"; };
 		BC2100C7BE76D8285B007DF5 /* LeagueAwardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueAwardView.h; sourceTree = "<group>"; };
 		BC2100D34F80535C6D8EBA57 /* HsNFTPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HsNFTPreferences.m; sourceTree = "<group>"; };
+		BC2100D46C12819FFA16C48D /* DanmakuVerticalRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DanmakuVerticalRoomViewController.m; sourceTree = "<group>"; };
 		BC2100EDB0B0DC05AA83F84D /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		BC21011EFE2917ED676C1C64 /* HomeGuessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeGuessCell.h; sourceTree = "<group>"; };
 		BC210122CBC769498A9DBED6 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -1189,10 +1197,12 @@
 		BC21040A1F1E959F6632C911 /* TipPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipPopView.m; sourceTree = "<group>"; };
 		BC21040EB1CB3FC8E205CB1A /* TipPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipPopView.h; sourceTree = "<group>"; };
 		BC2104491AA7FA888C2F3772 /* LeagueEnterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeagueEnterViewController.h; sourceTree = "<group>"; };
+		BC21045091B9C6970E717F95 /* VerticalSendEffectColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalSendEffectColCell.h; sourceTree = "<group>"; };
 		BC210468B8562E68D5D9699A /* WalletAddressSwitchPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAddressSwitchPopView.h; sourceTree = "<group>"; };
 		BC21049CF5C9F999DAF90B87 /* MoreGuessHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreGuessHeaderView.h; sourceTree = "<group>"; };
 		BC2104B2DEDEF79A8A8CB1F1 /* CNAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAuthViewController.m; sourceTree = "<group>"; };
 		BC2104DD25E97D84D4A3F209 /* GuessRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessRoomViewController.m; sourceTree = "<group>"; };
+		BC2104ECAFE7A2A5F95C088C /* DanmakuVerticalSendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DanmakuVerticalSendView.h; sourceTree = "<group>"; };
 		BC2105087E91B70E68E3D640 /* PKStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStateView.h; sourceTree = "<group>"; };
 		BC21050C581F3DE256C8DDC8 /* RoomCmdPKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomCmdPKModel.m; sourceTree = "<group>"; };
 		BC21052EC461448E9238A7C2 /* DiscoGameInteractiveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractiveView.h; sourceTree = "<group>"; };
@@ -1210,6 +1220,7 @@
 		BC2106173D42C6A345E85E01 /* HsAppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HsAppPreferences.h; sourceTree = "<group>"; };
 		BC21062A67227ECCD65969F8 /* InteractiveGameBannerColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractiveGameBannerColCell.h; sourceTree = "<group>"; };
 		BC21062DD637012C5F80072E /* CrossAppSelectGameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossAppSelectGameModel.m; sourceTree = "<group>"; };
+		BC210638033719E2C5D303C4 /* VerticalSendEffectColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalSendEffectColCell.m; sourceTree = "<group>"; };
 		BC21063AB72644BFDE61ECEE /* SuspendRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendRoomView.m; sourceTree = "<group>"; };
 		BC21064125B3640C7DE6425C /* CrossRoomGameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossRoomGameCell.m; sourceTree = "<group>"; };
 		BC210692B27543A09E9B3CB6 /* MyNFTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNFTListViewController.h; sourceTree = "<group>"; };
@@ -1283,6 +1294,7 @@
 		BC210DBB3E69BCD73E9DC870 /* PKRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRoomService.m; sourceTree = "<group>"; };
 		BC210DCE2A6257343B4539CF /* DiscoGameInteractivePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoGameInteractivePopView.h; sourceTree = "<group>"; };
 		BC210DD9F3ECF2DABBA6129D /* CrossRoomGameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossRoomGameCell.h; sourceTree = "<group>"; };
+		BC210E60030DFFD9BE577CD6 /* DanmakuVerticalSendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DanmakuVerticalSendView.m; sourceTree = "<group>"; };
 		BC210E613A87ABC193F3B64D /* LeagueRoomService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeagueRoomService.m; sourceTree = "<group>"; };
 		BC210E71F9C6DA23CDE18BD7 /* UserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailView.m; sourceTree = "<group>"; };
 		BC210E75F991BB33898ED5B2 /* BaseballService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseballService.m; sourceTree = "<group>"; };
@@ -2313,6 +2325,8 @@
 				6C4607C228520148005C99EF /* View */,
 				6C4607BF2851F725005C99EF /* DanmakuRoomViewController.h */,
 				6C4607C02851F725005C99EF /* DanmakuRoomViewController.m */,
+				BC21008CD379E2A0514B3C09 /* DanmakuVerticalRoomViewController.h */,
+				BC2100D46C12819FFA16C48D /* DanmakuVerticalRoomViewController.m */,
 			);
 			path = Danmaku;
 			sourceTree = "<group>";
@@ -2332,6 +2346,10 @@
 				6C46081F2862B024005C99EF /* LandscapeNaviView.m */,
 				6C4608242864062D005C99EF /* LandscapeGuideTipView.h */,
 				6C4608252864062D005C99EF /* LandscapeGuideTipView.m */,
+				BC2104ECAFE7A2A5F95C088C /* DanmakuVerticalSendView.h */,
+				BC210E60030DFFD9BE577CD6 /* DanmakuVerticalSendView.m */,
+				BC21045091B9C6970E717F95 /* VerticalSendEffectColCell.h */,
+				BC210638033719E2C5D303C4 /* VerticalSendEffectColCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2935,6 +2953,15 @@
 			path = InteractiveGame;
 			sourceTree = "<group>";
 		};
+		6CF3E1CC2A3C58A9002FADDA /* BigEater */ = {
+			isa = PBXGroup;
+			children = (
+				6CF3E1CD2A3C5903002FADDA /* InteractiveGameBigEaterHandler.h */,
+				6CF3E1CE2A3C5903002FADDA /* InteractiveGameBigEaterHandler.m */,
+			);
+			path = BigEater;
+			sourceTree = "<group>";
+		};
 		BC21001B5F7B2F0EA130BEDF /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2964,6 +2991,7 @@
 		BC210274F1EC9FD037B7AB18 /* Handler */ = {
 			isa = PBXGroup;
 			children = (
+				6CF3E1CC2A3C58A9002FADDA /* BigEater */,
 				6CB999692A0CC7CA00AD12CF /* CrazyCar */,
 				BC210AC68BCB5FC106610729 /* InteractiveGameBaseHandler.h */,
 				BC2103CCED6EB29E638F1796 /* InteractiveGameBaseHandler.m */,
@@ -3601,6 +3629,7 @@
 				4455ADC827EAC658001516EE /* ASRViewController.m in Sources */,
 				445EAB3627A1330D000DCC72 /* BaseRespModel.m in Sources */,
 				4455AD8B27EAC658001516EE /* VersionInfoCell.m in Sources */,
+				6CF3E1CF2A3C5903002FADDA /* InteractiveGameBigEaterHandler.m in Sources */,
 				6C46081D2861ABB0005C99EF /* LandscapePopView.m in Sources */,
 				6CE6CD2A283F591C0026BDAB /* DTTextAlertView.m in Sources */,
 				6C076EDA27A2993C00650209 /* RespGameInfoModel.m in Sources */,
@@ -3770,6 +3799,9 @@
 				BC21039A6B7AAC35234486ED /* RoomListContentView.m in Sources */,
 				BC2108561A91BF4D6C3E5BD1 /* CrossRoomGameCell.m in Sources */,
 				BC210B20A4043439929419EA /* CrossAppRoomListContentView.m in Sources */,
+				BC21050572DF2DB75CC07654 /* DanmakuVerticalRoomViewController.m in Sources */,
+				BC2109BEA889628184045A49 /* DanmakuVerticalSendView.m in Sources */,
+				BC2107AD164800877FAD4D9B /* VerticalSendEffectColCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4113,11 +4145,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "HelloSud-iOS/HelloSud-iOS.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 99;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = P6FVM63RW6;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6FVM63RW6;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = armv7;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4151,7 +4185,8 @@
 				MARKETING_VERSION = 1.5.9;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.sud.mgp.hello;
 				PRODUCT_NAME = HelloSud;
-				PROVISIONING_PROFILE_SPECIFIER = HelloSudPlus_Dev;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = HelloSudPlus_Dev;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_WORKSPACE = YES;

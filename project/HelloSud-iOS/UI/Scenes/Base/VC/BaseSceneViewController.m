@@ -173,7 +173,7 @@
         make.height.mas_equalTo(44);
     }];
     [self.operatorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.equalTo(self.contentView);
+        make.leading.trailing.equalTo(self.sceneView);
         make.bottom.mas_equalTo(-kAppSafeBottom);
         make.height.mas_equalTo(44);
     }];
@@ -248,15 +248,21 @@
     InteractiveGameBannerModel *baseballBannerModel = InteractiveGameBannerModel.new;
     baseballBannerModel.gameId = INTERACTIVE_GAME_BASEBALL_ID;
     baseballBannerModel.image = @"room_baseball_enter";
+    
+    InteractiveGameBannerModel *bigeaterBannerModel = InteractiveGameBannerModel.new;
+    bigeaterBannerModel.gameId = INTERACTIVE_GAME_BIG_EATER_ID;
+    bigeaterBannerModel.image = @"room_bigeater_enter";
+    
+    
     if (HsAppPreferences.shared.appEnvType == HsAppEnvTypePro) {
-        // 线上移除赛车
+        // 线上移除赛车、大胃王
         NSArray *list = @[rocketBannerModel, baseballBannerModel];
         [self.interactiveGameEnterView showBanner:list];
     } else {
         InteractiveGameBannerModel *crazyCarBannerModel = InteractiveGameBannerModel.new;
         crazyCarBannerModel.gameId = INTERACTIVE_GAME_CRAZY_CAR_ID;
         crazyCarBannerModel.image = @"room_crazy_car_enter";
-        NSArray *list = @[rocketBannerModel, baseballBannerModel, crazyCarBannerModel];
+        NSArray *list = @[rocketBannerModel, baseballBannerModel, crazyCarBannerModel, bigeaterBannerModel];
         [self.interactiveGameEnterView showBanner:list];
     }
 }
@@ -1792,6 +1798,7 @@
 /// 跨房消息通道建立
 - (void)onHandleCrossRoomImConnected {
     DDLogDebug(@"onHandleCrossRoomImConnected");
+    self.isLoginedIm = YES;
 }
 
 - (void)checkIfNeedToLoadRobotList {

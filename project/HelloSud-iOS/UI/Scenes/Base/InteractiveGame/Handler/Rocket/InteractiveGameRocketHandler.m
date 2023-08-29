@@ -353,6 +353,16 @@
 
 }
 
+/// 火箭效果飞行点击(火箭) MG_CUSTOM_ROCKET_FLY_CLICK
+- (void)onGameMGCustomRocketFlyClick:(nonnull id <ISudFSMStateHandle>)handle {
+    
+}
+
+/// 火箭效果飞行结束(火箭) MG_CUSTOM_ROCKET_FLY_END
+- (void)onGameMGCustomRocketFlyEnd:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketFlyEnd *)model {
+    
+}
+
 /// 火箭的可点击区域((火箭) MG_CUSTOM_ROCKET_SET_CLICK_RECT
 - (void)onGameMGCustomRocketSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSetClickRect *)model {
     self.gameClickRect = model;

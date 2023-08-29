@@ -84,6 +84,10 @@
 }
 @end
 
+@implementation InteractConfigModel
+
+@end
+
 @implementation AppCustomRocketUserRecordListModel
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"list": RocketUserRecordListItemModel.class};
@@ -161,3 +165,5 @@
 
 @implementation AppCustomRocketSaveSignColorModel
 @end
+
+

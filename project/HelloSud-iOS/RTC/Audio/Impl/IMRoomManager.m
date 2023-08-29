@@ -33,7 +33,7 @@
 
 - (void)init:(NSString *)appId listener:(id <ISudAudioEventListener>)listener {
     self.mISudAudioEventListener = listener;
-
+    [ZIMManager sharedInstance].iSudAudioEventListener = listener;
     [[ZIMManager sharedInstance] create:[appId longLongValue]];
     [[ZIMManager sharedInstance] setReceiveRoomMessageCallback:^(NSString *_Nonnull roomID, NSString *_Nonnull senderUserID, NSString *_Nonnull message) {
         [HSThreadUtils runOnUiThread:^{

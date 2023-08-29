@@ -78,6 +78,9 @@
 @implementation GameSetClickRectItem
 @end
 
+@implementation MGCustomRocketFlyEnd
+@end
+
 @implementation MGCustomGameSetClickRect
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"list": GameSetClickRectItem.class};

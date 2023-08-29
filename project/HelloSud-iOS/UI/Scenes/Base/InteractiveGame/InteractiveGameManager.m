@@ -12,6 +12,8 @@
 #import "Handler/Baseball/InteractiveGameBaseballHandler.h"
 #import "Handler/Rocket/InteractiveGameRocketHandler.h"
 #import "Handler/CrazyCar/InteractiveGameCrazyCarHandler.h"
+#import "Handler/BigEater/InteractiveGameBigEaterHandler.h"
+
 
 @interface InteractiveGameManager ()
 /// ISudFSTAPP
@@ -99,10 +101,18 @@
             self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
         }
             break;
+        case INTERACTIVE_GAME_BIG_EATER_ID:{
+            // 大胃王
+            self.baseHandler = InteractiveGameBigEaterHandler.new;
+            [self.sudFSMMGDecorator setEventListener:self.baseHandler];
+            self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
+            self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
+        }
+            break;
         default:
             break;
     }
-
+    self.baseHandler.gameId = gameId;
     self.baseHandler.interactiveGameManager = self;
 
 }

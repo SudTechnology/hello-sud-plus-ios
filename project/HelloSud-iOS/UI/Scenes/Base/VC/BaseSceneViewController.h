@@ -107,6 +107,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否游戏已经加载完毕
 @property(nonatomic, assign) BOOL isGameLoadFinished;
 
+/// 是否登录过Im
+@property(nonatomic, assign) BOOL isLoginedIm;
+@property(nonatomic, assign) BOOL isNeedReLoginedIm;
+
 /// 创建服务
 - (void)createService;
 

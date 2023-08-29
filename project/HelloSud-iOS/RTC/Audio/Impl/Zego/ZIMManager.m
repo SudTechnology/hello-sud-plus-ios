@@ -63,7 +63,7 @@
         return;
     }
 
-    NSLog(@"ZIMManager： roomID = %@", roomID);
+    DDLogDebug(@"ZIMManager： roomID = %@", roomID);
 
     ZIMUserInfo *userInfo = [[ZIMUserInfo alloc] init];
     userInfo.userID = userID;
@@ -77,9 +77,10 @@
 
             ZIMRoomAdvancedConfig *zimRoomAdvancedConfig = ZIMRoomAdvancedConfig.new;
             zimRoomAdvancedConfig.roomAttributes = [[NSDictionary alloc] init];
-
+            DDLogDebug(@"loginWithUserInfo： %@,%@", errorInfo.message, @(errorInfo.code));
             [self.zim enterRoom:zimRoomInfo config:zimRoomAdvancedConfig callback:^(ZIMRoomFullInfo *_Nonnull roomInfo, ZIMError *_Nonnull errorInfo) {
-                NSLog(@"enterRoom： %lu", errorInfo.code);
+
+                DDLogDebug(@"enterRoom： %@,%@", errorInfo.message, @(errorInfo.code));
                 if (errorInfo.code == ZIMErrorCodeSuccess) {
                     self.mRoomID = roomID;
                     if (success) {
@@ -126,7 +127,7 @@
         [self.zim joinRoom:roomID callback:^(ZIMRoomFullInfo * _Nonnull roomInfo, ZIMError * _Nonnull errorInfo) {
             if (errorInfo.code == ZIMErrorCodeSuccess) {
                 [self.zim sendRoomMessage:textMessage toRoomID:roomID config:config callback:^(ZIMMessage * _Nonnull message, ZIMError * _Nonnull errorInfo) {
-                    NSLog(@"ZIMManager: sendRoomMessage: %lu", errorInfo.code);
+                    DDLogDebug(@"ZIMManager: sendRoomMessage: %lu", errorInfo.code);
                     
                     int errorCode = (int)errorInfo.code;
                     [self.zim leaveRoom:roomID callback:^(NSString * _Nonnull roomID, ZIMError * _Nonnull errorInfo) {
@@ -143,7 +144,7 @@
         }];
     } else {
         [self.zim sendRoomMessage:textMessage toRoomID:roomID config:config callback:^(ZIMMessage * _Nonnull message, ZIMError * _Nonnull errorInfo) {
-            NSLog(@"ZIMManager: sendRoomMessage: %lu", errorInfo.code);
+            DDLogDebug(@"ZIMManager: sendRoomMessage: %lu", errorInfo.code);
             if (resultCallback != nil) {
                 resultCallback((int)errorInfo.code);
             }
@@ -153,7 +154,7 @@
 
 #pragma mark ZIMEventHandler
 - (void)zim:(ZIM *)zim errorInfo:(ZIMError *)errorInfo {
-    NSLog(@"ZIMManager: onError: %lu", errorInfo.code);
+    DDLogDebug(@"ZIMManager: onError: %lu", errorInfo.code);
 }
 
 - (void)zim:(ZIM *)zim receiveRoomMessage:(NSArray<ZIMMessage *> *)messageList fromRoomID:(NSString *)fromRoomID {    
@@ -174,7 +175,10 @@
 }
 
 - (void)zim:(ZIM *)zim roomStateChanged:(ZIMRoomState)state event:(ZIMRoomEvent)event extendedData:(NSDictionary *)extendedData roomID:(NSString *)roomID {
-    NSLog(@"ZIMManager： roomStateChanged: %lu", state);
+    DDLogDebug(@"ZIMManager： roomStateChanged: %lu， roomId:%@", state, roomID);
+    if (self.iSudAudioEventListener && [self.iSudAudioEventListener respondsToSelector:@selector(onImRoomStateUpdate:errorCode:extendedData:)]){
+        [self.iSudAudioEventListener onImRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)event extendedData:extendedData];
+    }
 }
 
 @end

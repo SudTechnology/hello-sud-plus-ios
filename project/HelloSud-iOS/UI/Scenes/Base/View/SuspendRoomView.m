@@ -6,6 +6,7 @@
 #import "SuspendRoomView.h"
 #import "BaseSceneViewController.h"
 #import "DanmakuRoomViewController.h"
+#import "DanmakuVerticalRoomViewController.h"
 
 @interface SuspendRoomView ()
 @property(nonatomic, strong) UIButton *exitBtn;
@@ -24,7 +25,7 @@ static SuspendRoomView *g_suspendView = nil;
         UIWindow *win = AppUtil.currentWindow;
         if (win) {
             [win addSubview:g_suspendView];
-
+            
             if ([vc isKindOfClass:[DanmakuRoomViewController class]]) {
                 [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.width.mas_equalTo(224);
@@ -35,7 +36,19 @@ static SuspendRoomView *g_suspendView = nil;
                 DanmakuRoomViewController *danmakuRoomViewController = (DanmakuRoomViewController *)vc;
                 [g_suspendView showVideo:danmakuRoomViewController.videoView];
                 g_suspendView.layer.cornerRadius = 0;
-
+                
+            } else if ([vc isKindOfClass:[DanmakuVerticalRoomViewController class]]) {
+                [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(224);
+                    make.height.mas_equalTo(126);
+                    make.trailing.mas_equalTo(-16);
+                    make.bottom.mas_equalTo(-155);
+                }];
+                DanmakuVerticalRoomViewController *danmakuRoomViewController = (DanmakuVerticalRoomViewController *)vc;
+                [danmakuRoomViewController changeVideoViewToFit];
+                [g_suspendView showVideo:danmakuRoomViewController.videoView];
+                g_suspendView.layer.cornerRadius = 0;
+                
             } else {
                 g_suspendView.layer.cornerRadius = 8;
                 [g_suspendView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,7 +77,7 @@ static SuspendRoomView *g_suspendView = nil;
         }
         return;
     }
-
+    
     [g_suspendView.vc exitRoomFromSuspend:YES finished:^{
         [SuspendRoomView close];
         if (finished) {
@@ -143,11 +156,14 @@ static SuspendRoomView *g_suspendView = nil;
     if ([self.vc isKindOfClass:[DanmakuRoomViewController class]]) {
         DanmakuRoomViewController *danmakuRoomViewController = (DanmakuRoomViewController *) self.vc;
         [danmakuRoomViewController resetVideoView];
+    } else if ([self.vc isKindOfClass:[DanmakuVerticalRoomViewController class]]) {
+        DanmakuVerticalRoomViewController *danmakuRoomViewController = (DanmakuVerticalRoomViewController *) self.vc;
+        [danmakuRoomViewController resetVideoView];
     }
 }
 
 - (void)onPan:(UIPanGestureRecognizer *)pan {
-
+    
     CGPoint point = [pan locationInView:self.superview];
     if (pan.state == UIGestureRecognizerStateBegan) {
         [UIView animateWithDuration:0.1 delay:0 options:(UIViewAnimationOptions) UIViewAnimationCurveEaseInOut animations:^{
@@ -215,10 +231,10 @@ static SuspendRoomView *g_suspendView = nil;
         make.leading.top.trailing.bottom.equalTo(@0);
     }];
     [self.closeVideoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.top.trailing.equalTo(@0);
-       make.width.height.equalTo(@24);
+        make.top.trailing.equalTo(@0);
+        make.width.height.equalTo(@24);
     }];
-
+    
 }
 
 - (UIButton *)closeVideoBtn {

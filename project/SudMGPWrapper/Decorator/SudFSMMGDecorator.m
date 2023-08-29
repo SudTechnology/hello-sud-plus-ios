@@ -469,6 +469,20 @@
             [self.listener onGameMGCustomRocketClickLockComponent:handle model:m];
             return;
         }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_FLY_CLICK]) {
+        ///  火箭效果飞行点击(火箭)
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketFlyClick:)]) {
+            [self.listener onGameMGCustomRocketFlyClick:handle];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_ROCKET_FLY_END]) {
+        /// 火箭效果飞行结束(火箭)
+        MGCustomRocketFlyEnd *m = [MGCustomRocketFlyEnd mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketFlyEnd:model:)]) {
+            [self.listener onGameMGCustomRocketFlyEnd:handle model:m];
+            return;
+        }
+        
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SET_CLICK_RECT]) {
         /// 设置点击区域((火箭)
         MgCommonSetClickRect *m = [MgCommonSetClickRect mj_objectWithKeyValues:dataJson];

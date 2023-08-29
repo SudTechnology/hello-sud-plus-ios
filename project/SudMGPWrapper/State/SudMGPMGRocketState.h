@@ -17,51 +17,55 @@ NS_ASSUME_NONNULL_BEGIN
 /// 参考文档： https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStateGame.html
 
 #pragma mark - 互动礼物<火箭>
-/// 礼物配置文件(火箭)
+/// 1. 礼物配置文件(火箭)
 static NSString *MG_CUSTOM_ROCKET_CONFIG = @"mg_custom_rocket_config";
-/// 拥有模型列表(火箭)
+/// 2. 拥有模型列表(火箭)
 static NSString *MG_CUSTOM_ROCKET_MODEL_LIST = @"mg_custom_rocket_model_list";
-/// 拥有组件列表(火箭)
+/// 3. 拥有组件列表(火箭)
 static NSString *MG_CUSTOM_ROCKET_COMPONENT_LIST = @"mg_custom_rocket_component_list";
-/// 获取用户的信息(火箭)
+/// 4. 获取用户的信息(火箭)
 static NSString *MG_CUSTOM_ROCKET_USER_INFO = @"mg_custom_rocket_user_info";
-/// 订单记录列表(火箭)
+/// 5. 订单记录列表(火箭)
 static NSString *MG_CUSTOM_ROCKET_ORDER_RECORD_LIST = @"mg_custom_rocket_order_record_list";
-/// 展馆内列表(火箭)
+/// 6. 展馆内列表(火箭)
 static NSString *MG_CUSTOM_ROCKET_ROOM_RECORD_LIST = @"mg_custom_rocket_room_record_list";
-/// 展馆内玩家送出记录(火箭)
+/// 7. 展馆内玩家送出记录(火箭)
 static NSString *MG_CUSTOM_ROCKET_USER_RECORD_LIST = @"mg_custom_rocket_user_record_list";
-/// 设置默认位置(火箭)
+/// 8. 设置默认位置(火箭)
 static NSString *MG_CUSTOM_ROCKET_SET_DEFAULT_MODEL = @"mg_custom_rocket_set_default_model";
-/// 动态计算一键发送价格(火箭)
+/// 9. 动态计算一键发送价格(火箭)
 static NSString *MG_CUSTOM_ROCKET_DYNAMIC_FIRE_PRICE = @"mg_custom_rocket_dynamic_fire_price";
-/// 一键发送(火箭)
+/// 10. 一键发送(火箭)
 static NSString *MG_CUSTOM_ROCKET_FIRE_MODEL = @"mg_custom_rocket_fire_model";
-/// 新组装模型(火箭)
+/// 11. 新组装模型(火箭)
 static NSString *MG_CUSTOM_ROCKET_CREATE_MODEL = @"mg_custom_rocket_create_model";
-/// 更换组件(火箭)
+/// 12. 更换组件(火箭)
 static NSString *MG_CUSTOM_ROCKET_REPLACE_COMPONENT = @"mg_custom_rocket_replace_component";
-/// 购买组件(火箭)
+/// 13. 购买组件(火箭)
 static NSString *MG_CUSTOM_ROCKET_BUY_COMPONENT = @"mg_custom_rocket_buy_component";
-/// 播放效果开始(火箭)
+/// 14. 播放效果开始(火箭)
 static NSString *MG_CUSTOM_ROCKET_PLAY_EFFECT_START = @"mg_custom_rocket_play_effect_start";
-/// 播放效果完成(火箭)
+/// 15. 播放效果完成(火箭)
 static NSString *MG_CUSTOM_ROCKET_PLAY_EFFECT_FINISH = @"mg_custom_rocket_play_effect_finish";
-/// 验证签名(火箭)
+/// 16. 验证签名(火箭)
 static NSString *MG_CUSTOM_ROCKET_VERIFY_SIGN = @"mg_custom_rocket_verify_sign";
-/// 上传icon(火箭)
+/// 17. 上传icon(火箭)
 static NSString *MG_CUSTOM_ROCKET_UPLOAD_MODEL_ICON = @"mg_custom_rocket_upload_model_icon";
-/// 前期准备完成(火箭)
+/// 18. 前期准备完成(火箭)
 static NSString *MG_CUSTOM_ROCKET_PREPARE_FINISH = @"mg_custom_rocket_prepare_finish";
-/// 火箭主界面已展示(火箭)
+/// 19. 火箭主界面已展示(火箭)
 static NSString *MG_CUSTOM_ROCKET_SHOW_GAME_SCENE = @"mg_custom_rocket_show_game_scene";
-/// 火箭主界面已隐藏(火箭)
+/// 20. 火箭主界面已隐藏(火箭)
 static NSString *MG_CUSTOM_ROCKET_HIDE_GAME_SCENE = @"mg_custom_rocket_hide_game_scene";
-/// 点击锁住组件(火箭)
+/// 21. 点击锁住组件(火箭)
 static NSString *MG_CUSTOM_ROCKET_CLICK_LOCK_COMPONENT = @"mg_custom_rocket_click_lock_component";
-/// 火箭可点击区域
+/// 22. 火箭效果飞行点击(火箭)
+static NSString *MG_CUSTOM_ROCKET_FLY_CLICK = @"mg_custom_rocket_fly_click";
+/// 23. 火箭效果飞行结束(火箭)
+static NSString *MG_CUSTOM_ROCKET_FLY_END = @"mg_custom_rocket_fly_end";
+/// 24. 火箭可点击区域
 static NSString *MG_CUSTOM_ROCKET_SET_CLICK_RECT = @"mg_custom_rocket_set_click_rect";
-/// 颜色和签名自定义改到装配间的模式，保存颜色或签名
+/// 25. 颜色和签名自定义改到装配间的模式，保存颜色或签名
 static NSString *MG_CUSTOM_ROCKET_SAVE_SIGN_COLOR = @"mg_custom_rocket_save_sign_color";
 #pragma mark - MG_CUSTOM_ROCKET_USER_INFO
 
@@ -170,6 +174,14 @@ static NSString *MG_CUSTOM_ROCKET_SAVE_SIGN_COLOR = @"mg_custom_rocket_save_sign
 @property(nonatomic, assign) NSInteger type;
 /// 组件ID
 @property(nonatomic, strong) NSString *componentId;
+@end
+
+#pragma mark - MG_CUSTOM_ROCKET_FLY_END
+@interface MGCustomRocketFlyEnd : NSObject
+/// 点击多少次
+@property(nonatomic, assign) NSInteger clickNumber;
+/// 飞行多远
+@property(nonatomic, assign) NSInteger flyNumber;
 @end
 
 #pragma mark - MG_CUSTOM_ROCKET_SET_CLICK_RECT

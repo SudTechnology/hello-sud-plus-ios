@@ -18,6 +18,7 @@
 #import "SDImageSVGNativeCoder.h"
 #import <AFNetworking/AFNetworking.h>
 #import <SudMGP/ISudCfg.h>
+#import <SudMGP/ISudLogger.h>
 
 @interface AppDelegate ()<BuglyDelegate> {
 
@@ -72,7 +73,7 @@
 
 /// 加载嵌入游戏包
 - (void)loadGameEmbedPackage {
-    [SudMGP setLogLevel:3];
+    [SudMGP setLogLevel:SudLogVERBOSE];
 //    [[SudMGP getCfg] addEmbeddedMGPkg:1583284410804244481 mgPath:@"customrockets.sp"];
 //    [[SudMGP getCfg] addEmbeddedMGPkg:1594978084509368321 mgPath:@"baseball.rpk"];
 }

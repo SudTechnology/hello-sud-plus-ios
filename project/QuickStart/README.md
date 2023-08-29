@@ -1,4 +1,3 @@
- [English](README_en.md)
 # 开启快速接入和联调SUD游戏之旅
 - 第一步：APP客户端集成SUD游戏（三分钟集成代码）
   <details>
@@ -60,10 +59,13 @@
   <summary>cocoapods方式导入</summary>
 
       1.APP主工程Podfile文件中，添加 SudMGPWrapper 依赖;
+   [Cocoapods最新集成版本](https://github.com/SudTechnology/sud-mgp-ios)
   ``` ruby
-  pod 'SudMGPWrapper', '~> 1.5.8'
+  pod 'SudMGPWrapper', '~> x.x.x'
+  
   ```
       3. 执行pod install，将SudMGP SDK、SudMGPWrapper模块依赖进工程中
+
   </details>
   <details>
   <summary>ASR识别支持（可选 v1.2.7及后续版本支持）</summary>

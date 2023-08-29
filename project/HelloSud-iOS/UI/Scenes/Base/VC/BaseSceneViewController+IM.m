@@ -178,9 +178,10 @@
 /// 处理cmd - 用于重写
 - (void)handleBusyCommand:(NSInteger)cmd command:(NSString *)command {
     // 无法解析消息
-    RoomCmdChatTextModel *textModel = RoomCmdChatTextModel.new;
-    textModel.content = [NSString stringWithFormat:NSString.dt_room_unable_display_msg, cmd];
-    [self addMsg:textModel isShowOnScreen:YES];
+    DDLogWarn(@"无法解析消息 cmd：%@, content:%@", @(cmd), command);
+//    RoomCmdChatTextModel *textModel = RoomCmdChatTextModel.new;
+//    textModel.content = [NSString stringWithFormat:NSString.dt_room_unable_display_msg, cmd];
+//    [self addMsg:textModel isShowOnScreen:YES];
 }
 
 #pragma mark - 业务处理
