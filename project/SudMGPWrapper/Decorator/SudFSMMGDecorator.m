@@ -146,7 +146,7 @@
             return;
         }
     }
-    
+
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         MGCommonPublicMessageModel *m = [MGCommonPublicMessageModel mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonPublicMessage:model:)]) {
@@ -449,7 +449,7 @@
             [self.listener onGameMGCustomRocketPrepareFinish:handle];
             return;
         }
-        
+
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SHOW_GAME_SCENE]) {
         /// 显示火箭主界面((火箭)
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomRocketShowGameScene:)]) {
@@ -482,7 +482,7 @@
             [self.listener onGameMGCustomRocketFlyEnd:handle model:m];
             return;
         }
-        
+
     } else if ([state isEqualToString:MG_CUSTOM_ROCKET_SET_CLICK_RECT]) {
         /// 设置点击区域((火箭)
         MgCommonSetClickRect *m = [MgCommonSetClickRect mj_objectWithKeyValues:dataJson];
@@ -524,7 +524,7 @@
             [self.listener onGameMGBaseballPrepareFinish:handle];
             return;
         }
-        
+
     } else if ([state isEqualToString:MG_BASEBALL_SHOW_GAME_SCENE]) {
         /// 显示主界面((棒球)
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGBaseballShowGameScene:)]) {
@@ -550,33 +550,33 @@
             [self.listener onGameMGBaseballTextConfig:handle];
             return;
         }
-    }else if ([state isEqualToString:MG_COMMON_USERS_INFO]) {
-        
+    } else if ([state isEqualToString:MG_COMMON_USERS_INFO]) {
+
         MgCommonUsersInfoModel *m = [MgCommonUsersInfoModel mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonUsersInfo:model:)]) {
             [self.listener onGameMGCommonUsersInfo:handle model:m];
             return;
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_PREPARE_FINISH]) {
-        
+
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonPrepareFinish:)]) {
             [self.listener onGameMGCommonPrepareFinish:handle];
             return;
         }
-    }else if ([state isEqualToString:MG_COMMON_SHOW_GAME_SCENE]) {
-        
+    } else if ([state isEqualToString:MG_COMMON_SHOW_GAME_SCENE]) {
+
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonShowGameScene:)]) {
             [self.listener onGameMGCommonShowGameScene:handle];
             return;
         }
-    }else if ([state isEqualToString:MG_COMMON_HIDE_GAME_SCENE]) {
-        
+    } else if ([state isEqualToString:MG_COMMON_HIDE_GAME_SCENE]) {
+
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonHideGameScene:)]) {
             [self.listener onGameMGCommonHideGameScene:handle];
             return;
         }
-    }else if ([state isEqualToString:MG_COMMON_SET_CLICK_RECT]) {
-        
+    } else if ([state isEqualToString:MG_COMMON_SET_CLICK_RECT]) {
+
         MgCommonSetClickRect *m = [MgCommonSetClickRect mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSetClickRect:model:)]) {
             [self.listener onGameMGCommonSetClickRect:handle model:m];
@@ -587,6 +587,34 @@
         MgCommonPlayerRoleIdModel *m = [MgCommonPlayerRoleIdModel mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGCommonPlayerRoleId:model:)]) {
             [self.listener onPlayerMGCommonPlayerRoleId:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_GOLD_BTN]) {
+        /// 通知app点击了游戏的金币按钮
+        MgCommonSelfClickGoldBtnModel *m = [MgCommonSelfClickGoldBtnModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickGoldBtn:model:)]) {
+            [self.listener onGameMGCommonSelfClickGoldBtn:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PIECE_ARRIVE_END]) {
+        /// 通知app棋子到达终点
+        MgCommonGamePieceArriveEndModel *m = [MgCommonGamePieceArriveEndModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGamePieceArriveEnd:model:)]) {
+            [self.listener onGameMGCommonGamePieceArriveEnd:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PLAYER_MANAGED_STATE]) {
+        /// 通知app玩家是否托管
+        MgCommonGamePlayerManagedStateModel *m = [MgCommonGamePlayerManagedStateModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGamePlayerManagedState:model:)]) {
+            [self.listener onGameMGCommonGamePlayerManagedState:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_SEND_BURST_WORD]) {
+        /// 游戏通知app爆词的内容
+        MgCommonGameSendBurstWordModel *m = [MgCommonGameSendBurstWordModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameSendBurstWord:model:)]) {
+            [self.listener onGameMGCommonGameSendBurstWord:handle model:m];
             return;
         }
     } else {
@@ -612,7 +640,7 @@
             return;
         }
     }
-    
+
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues:dataJson];
         /// 更新
@@ -759,7 +787,7 @@
 /// @param retCode 错误码，0成功
 /// @param progress [0, 100]
 /// 最低版本：v1.1.30.xx
--(void) onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress {
+- (void)onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress {
     if (self.listener && [self.listener respondsToSelector:@selector(onGameLoadingProgress:retCode:progress:)]) {
         [self.listener onGameLoadingProgress:stage retCode:retCode progress:progress];
     }
@@ -801,11 +829,11 @@
 
 /// 加入状态 - 更新
 - (void)updateCommonPlayerIn:(MGCommonPlayerInModel *)m userId:(nonnull NSString *)userId {
-    
+
     if ([userId isEqualToString:self.currentUserId]) {
         self.isInGame = m.isIn;
     }
-    
+
     if (m.isIn) {
         [self.onlineUserIdList addObject:userId];
         NSSet *set = [NSSet setWithArray:self.onlineUserIdList];
@@ -917,7 +945,7 @@
         return m.isPainting;
     }
     return false;
-    
+
 }
 
 /// 获取用户是否在队长

@@ -254,5 +254,16 @@
 }
 @end
 
+@implementation MgCommonSelfClickGoldBtnModel
+@end
+
+@implementation MgCommonGamePieceArriveEndModel
+@end
+
+@implementation MgCommonGamePlayerManagedStateModel
+@end
+
+@implementation MgCommonGameSendBurstWordModel
+@end
 
 

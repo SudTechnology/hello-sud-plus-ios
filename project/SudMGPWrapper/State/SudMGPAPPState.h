@@ -63,6 +63,9 @@ static NSString *APP_COMMON_CUSTOM_HELP_INFO = @"app_common_custom_help_info";
 static NSString *APP_COMMON_SHOW_GAME_SCENE = @"app_common_show_game_scene";
 /// app主动隐藏主界面
 static NSString *APP_COMMON_HIDE_GAME_SCENE = @"app_common_hide_game_scene";
+/// app通知游戏爆词内容(谁是卧底)
+static NSString *APP_COMMON_GAME_SEND_BURST_WORD = @"app_common_game_send_burst_word";
+
 
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
@@ -149,4 +152,11 @@ static NSString *APP_COMMON_HIDE_GAME_SCENE = @"app_common_hide_game_scene";
 @interface AppCommonUsersInfo : NSObject
 /// 帮助内容
 @property(nonatomic, strong) NSArray<AppCommonUsersInfoItem *> * infos;
+@end
+
+/// app通知游戏爆词内容(谁是卧底)
+/// APP_COMMON_GAME_SEND_BURST_WORD
+@interface AppCommonGameSendBurstWord : NSObject
+/// 爆词内容 备注：如果不传该字段就是原始内容
+@property(nonatomic, strong) NSString * text;
 @end

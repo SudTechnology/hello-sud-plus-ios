@@ -153,6 +153,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// app主动隐藏主界面 APP_COMMON_HIDE_GAME_SCENE
 - (void)notifyAppCommonHideGameScene;
+
+/// app通知游戏爆词内容(谁是卧底) APP_COMMON_GAME_SEND_BURST_WORD
+- (void)notifyAppCommonGameSendBurstWord:(AppCommonGameSendBurstWord *)model;
 #pragma mark - 互动礼物<火箭>
 
 /// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG

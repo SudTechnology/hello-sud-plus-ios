@@ -39,3 +39,6 @@
 }
 @end
 
+@implementation AppCommonGameSendBurstWord
+@end
+

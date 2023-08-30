@@ -166,6 +166,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// 可点击区域 MG_COMMON_SET_CLICK_RECT
 - (void)onGameMGCommonSetClickRect:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomGameSetClickRect *)model;
 
+/// 通知app点击了游戏的金币按钮 MG_COMMON_SELF_CLICK_GOLD_BTN
+- (void)onGameMGCommonSelfClickGoldBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSelfClickGoldBtnModel *)model;
+
+/// 通知app棋子到达终点 MG_COMMON_GAME_PIECE_ARRIVE_END
+- (void)onGameMGCommonGamePieceArriveEnd:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePieceArriveEndModel *)model;
+
+/// 通知app玩家是否托管 MG_COMMON_GAME_PLAYER_MANAGED_STATE
+- (void)onGameMGCommonGamePlayerManagedState:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerManagedStateModel *)model;
+
+/// 游戏通知app爆词的内容 MG_COMMON_GAME_SEND_BURST_WORD
+- (void)onGameMGCommonGameSendBurstWord:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameSendBurstWordModel *)model;
+
 #pragma mark - 互动礼物<火箭>
 
 /// 礼物配置文件(火箭) MG_CUSTOM_ROCKET_CONFIG

@@ -273,6 +273,11 @@
 - (void)notifyAppCommonHideGameScene {
     [self notifyStateChange:APP_COMMON_HIDE_GAME_SCENE dataJson:@{}.mj_JSONString];
 }
+
+/// app通知游戏爆词内容(谁是卧底) APP_COMMON_GAME_SEND_BURST_WORD
+- (void)notifyAppCommonGameSendBurstWord:(AppCommonGameSendBurstWord *)model {
+    [self notifyStateChange:APP_COMMON_GAME_SEND_BURST_WORD dataJson:model.mj_JSONString];
+}
 #pragma mark - 互动礼物
 
 /// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG
