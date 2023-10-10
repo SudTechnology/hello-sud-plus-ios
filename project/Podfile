@@ -8,7 +8,9 @@ target 'HelloSud-iOS' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   # 富文本
-  pod 'YYText', '~> 1.0.7'
+  #pod 'YYText', '~> 1.0.7'
+  # fixed xcode 15接口废弃引擎奔溃问题
+  pod 'YYText', :git =>'https://github.com/kaniel520/YYText.git', :tag => '1.0.9'
   # 自动布局
   pod 'Masonry', '~> 1.1.0'
   # json序列化
@@ -78,7 +80,8 @@ target 'QuickStart' do
   use_frameworks!
 
   # 富文本
-  pod 'YYText', '~> 1.0.7'
+  #pod 'YYText', '~> 1.0.7'
+  pod 'YYText', :git =>'https://github.com/kaniel520/YYText.git', :tag => '1.0.9'
   # 自动布局
   pod 'Masonry', '~> 1.1.0'
   # json序列化
@@ -111,7 +114,8 @@ target 'SudNFTQuickStart' do
   use_frameworks!
 
   # 富文本
-  pod 'YYText', '~> 1.0.7'
+  #pod 'YYText', '~> 1.0.7'
+  pod 'YYText', :git =>'https://github.com/kaniel520/YYText.git', :tag => '1.0.9'
   # 自动布局
   pod 'Masonry', '~> 1.1.0'
   # json序列化
