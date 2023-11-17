@@ -44,6 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置圆角
 /// @param cornerRadius 圆角值
 - (void)dt_cornerRadius:(CGFloat)cornerRadius;
+
+/// 点击手势
+/// @param clickBlock
+- (void)dt_onTap:(void (^)(UITapGestureRecognizer *tap))clickBlock;
 @end
 
 NS_ASSUME_NONNULL_END

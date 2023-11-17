@@ -5,6 +5,8 @@
 
 #import "QuickStartViewController+Game.h"
 #import <objc/runtime.h>
+#import <SudMGP/SudInitSDKParamModel.h>
+#import <SudMGP/SudLoadMGParamModel.h>
 
 @implementation SudMGPLoadConfigModel
 
@@ -95,20 +97,22 @@
         return;
     }
     // 2. 初始化SudMGP SDK<SudMGP initSDK>
-    [SudMGP initSDK:SUDMGP_APP_ID
-             appKey:SUDMGP_APP_KEY
-          isTestEnv:GAME_TEST_ENV
-           listener:^(int retCode, const NSString *retMsg) {
-
-               if (retCode != 0) {
-                   /// 初始化失败, 可根据业务重试
-                   NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@(%@)", retMsg, @(retCode));
-                   return;
-               }
-               NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
-               // 加载游戏SDK
-               [weakSelf loadGame:configModel code:code];
-           }];
+    SudInitSDKParamModel *paramModel = SudInitSDKParamModel.new;
+    paramModel.appId = SUDMGP_APP_ID;
+    paramModel.appKey = SUDMGP_APP_KEY;
+    paramModel.isTestEnv = GAME_TEST_ENV;
+    
+    [SudMGP initSDK:paramModel listener:^(int retCode, const NSString * _Nonnull retMsg) {
+        
+        if (retCode != 0) {
+            /// 初始化失败, 可根据业务重试
+            NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@(%@)", retMsg, @(retCode));
+            return;
+        }
+        NSLog(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
+        // 加载游戏SDK
+        [weakSelf loadGame:configModel code:code];
+    }];
 }
 
 /// 加载游戏MG
@@ -128,13 +132,14 @@
     // 必须配置当前登录用户
     [self.sudFSMMGDecorator setCurrentUserId:configModel.userId];
     // 3. 加载SudMGP SDK<SudMGP loadMG>，注：客户端必须持有iSudFSTAPP实例
-    id <ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:configModel.userId
-                                         roomId:configModel.roomId
-                                           code:code
-                                           mgId:configModel.gameId
-                                       language:configModel.language
-                                          fsmMG:self.sudFSMMGDecorator
-                                       rootView:configModel.gameView];
+    SudLoadMGParamModel *paramModel = SudLoadMGParamModel.new;
+    paramModel.userId = configModel.userId;
+    paramModel.roomId = configModel.roomId;
+    paramModel.code = code;
+    paramModel.mgId = configModel.gameId;
+    paramModel.language = configModel.language;
+    paramModel.gameViewContainer = configModel.gameView;
+    id <ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:paramModel fsmMG:self.sudFSMMGDecorator];
     [self.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
 }
 

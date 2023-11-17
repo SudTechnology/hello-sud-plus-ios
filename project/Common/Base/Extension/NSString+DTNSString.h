@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (DTNSString)
+- (NSString *)localized;
 /// 大小写不敏感比对
 /// @param dest
 /// @return

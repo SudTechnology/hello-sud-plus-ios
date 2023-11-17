@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, SceneType) {
     SceneTypeCrossDomain = 14,
     SceneTypeCrossApp = 16,
     SceneTypeVertical = 18,
+    SceneTypeAudio3D = 19,
 };
 
 /// 基础场景服务
@@ -42,4 +43,12 @@ typedef NS_ENUM(NSInteger, SceneType) {
 @property(nonatomic, assign)NSInteger micIndex;
 /// 当前房间VC
 @property(nonatomic, weak)BaseSceneViewController *currentRoomVC;
+
+/// 发送礼物
+/// @param roomId roomId
+/// @param giftId giftId
+/// @param finished finished
+/// @param failure failure
++ (void)reqSendGift:(NSString *)roomId giftId:(NSString *)giftId amount:(NSInteger)amount price:(NSInteger)price type:(NSInteger)type receiverList:(NSArray<NSString *> *)receiverList finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure;
+
 @end

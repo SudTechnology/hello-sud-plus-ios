@@ -17,6 +17,7 @@
 #import "LeagueRoomViewController.h"
 #import "../../CrossApp/VC/CrossAppViewController.h"
 #import "DanmakuVerticalRoomViewController.h"
+#import "Audio3DRoomViewController.h"
 
 @implementation SceneFactory {
 
@@ -63,6 +64,9 @@
             break;
         case SceneTypeVertical:
             vc = [[DanmakuVerticalRoomViewController alloc]init];
+            break;
+        case SceneTypeAudio3D:
+            vc = Audio3DRoomViewController.new;
             break;
         default:
             vc = [[AudioRoomViewController alloc] init];

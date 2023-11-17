@@ -6,6 +6,8 @@
 //
 
 #import "GiftModel.h"
+
+
 @interface GiftModel()
 /// 缓存webp图片
 @property(nonatomic, strong)UIImage *cacheWebpImage;

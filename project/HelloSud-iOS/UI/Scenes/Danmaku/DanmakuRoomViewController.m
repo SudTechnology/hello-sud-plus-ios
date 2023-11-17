@@ -369,7 +369,7 @@
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
         GiftModel *giftModel = [m getGiftModel];
         // 发送礼物
-        [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount price:giftModel.price type:m.type == 1 ? 2 : 1 finished:^{
+        [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount price:giftModel.price type:m.type == 1 ? 2 : 1 receiverList:nil finished:^{
             DDLogDebug(@"发送礼物成功");
             if (shouldSend) shouldSend(YES);
         }                       failure:^(NSError *error) {

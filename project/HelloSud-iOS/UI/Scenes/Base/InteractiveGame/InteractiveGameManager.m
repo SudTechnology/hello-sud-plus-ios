@@ -237,8 +237,6 @@
         isTest = YES;
     }
 #endif
-    [[SudMGP getCfg] setShowCustomLoading:YES];
-    [[SudMGP getCfg] setShowLoadingGameBg:NO];
     [SudMGP initSDK:appID appKey:appKey isTestEnv:isTest listener:^(int retCode, const NSString *retMsg) {
         if (retCode == 0) {
             DDLogInfo(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
@@ -271,6 +269,7 @@
 /// @param rootView 游戏根视图
 - (void)loadGame:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t)mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView *)rootView {
 
+    [[SudMGP getCfg] setShowCustomLoading:YES];
     id <ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:self.sudFSMMGDecorator rootView:rootView];
     [self.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
 }

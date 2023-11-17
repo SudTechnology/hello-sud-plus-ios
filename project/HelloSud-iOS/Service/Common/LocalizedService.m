@@ -1,20 +1,21 @@
 #import "LocalizedService.h"
+#import "NSString+DTNSString.h"
 
  @implementation NSString(Localized)
-- (NSString *)localized {
-    NSBundle *bundle = NSBundle.currentLanguageBundle;
-    NSString *result = nil;
-    if (bundle) {
-        result = [bundle localizedStringForKey:self value:self table:nil];
-        if (![self isEqualToString:result]) {
-            return result;
-        }
-        if (NSBundle.defaultLanguageBundle) {
-            return [NSBundle.defaultLanguageBundle localizedStringForKey:self value:self table:nil];
-        }
-    }
-    return NSLocalizedString(self, comment: self); 
-}
+//- (NSString *)localized {
+//    NSBundle *bundle = NSBundle.currentLanguageBundle;
+//    NSString *result = nil;
+//    if (bundle) {
+//        result = [bundle localizedStringForKey:self value:self table:nil];
+//        if (![self isEqualToString:result]) {
+//            return result;
+//        }
+//        if (NSBundle.defaultLanguageBundle) {
+//            return [NSBundle.defaultLanguageBundle localizedStringForKey:self value:self table:nil];
+//        }
+//    }
+//    return NSLocalizedString(self, comment: self); 
+//}
 /*
   Localizable.strings
   HelloSud-iOS

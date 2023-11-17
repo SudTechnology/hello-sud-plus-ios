@@ -121,6 +121,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return YES显示，NO隐藏
 - (BOOL)showSudMGPLoadingGameBackground;
 
+/// 是否自定义游戏进度条
+/// @return YES显示，NO隐藏
+- (BOOL)showCustomLoadingView;
+
 /// 是否在座位上
 - (BOOL)isInMic;
 
@@ -226,10 +230,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable AudioRoomMicModel *)getOneEmptyMic:(NSInteger)beginMic;
 
 /// 获取所有机器人麦位
-- (NSArray <AudioRoomMicModel *> *)getAllRobotMic;
+- (NSArray <AudioUserModel *> *)getAllRobotMic;
+
+/// 获取所有存在麦位用户
+- (NSArray <AudioUserModel *> *)getAllMic;
 
 /// 检测是否有机器人在麦位上
 - (BOOL)hasRobotInMic;
+
+/// 声音状态变化
+- (void)onVoiceStateChanged:(VoiceBtnStateType)state;
 
 #pragma mark - SudFSMMGListener
 
@@ -263,7 +273,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 添加机器人到游戏
 /// @param robotList
-- (void)addRobotToGame:(NSArray <RobotInfoModel *>*)robotList;
+- (void)addRobotToGame:(NSArray <RobotInfoModel *> *)robotList;
 
 /// 播放火箭
 /// @param jsonData
@@ -275,6 +285,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)handleRocketGift:(GiftModel *)giftModel toMicList:(NSArray<AudioRoomMicModel *> *)toMicList;
 
 - (void)updateGamePeopleCount;
+
+/// 展示礼物面板
+- (void)showGiftPannelView:(nullable NSString *)selectedUserId;
+
+/// 场景视图被点击了
+- (void)onSceneViewClick;
+
+/// 退出房间
+- (void)handleExitRoomIsFromSuspend:(BOOL)isSuspend finished:(void (^)(void))finished;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 礼物消息model
 @interface RoomCmdSendGiftModel : RoomBaseCMDModel
-/// 接受者
-@property(nonatomic, strong) AudioUserModel *toUser;
+
+@property(nonatomic, strong) NSArray<AudioUserModel *> *toUserList;
 /// 礼物ID
 @property(nonatomic, assign) NSInteger giftID;
 /// 礼物数量
@@ -33,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) NSInteger specialDuration;
 /// 是否跳过费用支付
 @property(nonatomic, assign) BOOL skillFee;
+/// 是否全麦
+@property(nonatomic, assign) BOOL isAllSeat;
 
 /// 构建消息
 /// @param giftID giftID description
@@ -40,10 +42,24 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param toUser toUser description
 + (instancetype)makeMsgWithGiftID:(NSInteger)giftID giftCount:(NSInteger)giftCount toUser:(AudioUserModel *)toUser;
 
+/// 构建消息
+/// @param giftID giftID description
+/// @param giftCount giftCount description
+/// @param toUserList toUserList description
++ (instancetype)makeMsgWithGiftID:(NSInteger)giftID giftCount:(NSInteger)giftCount toUserList:(NSArray<AudioUserModel *> *)toUserList;
+
 - (NSAttributedString *)attrContent;
 
 /// 获取礼物model
 - (GiftModel *)getGiftModel;
+
+/// 设置展示接收方这是支持多个人的礼物消息
+- (void)setShowToUser:(AudioUserModel *)toUser;
+
+- (AudioUserModel *)toUser;
+
+// 根据用户列表产生展示的礼物消息
+- (NSArray<RoomCmdSendGiftModel *> *)getShowGiftMsgModelListByUserList;
 @end
 
 NS_ASSUME_NONNULL_END

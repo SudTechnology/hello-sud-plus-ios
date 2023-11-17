@@ -30,6 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param fail
 - (void)reqUserCoinDetail:(Int64Block)success fail:(StringBlock)fail;
 
+/// 增加用户金币
+/// @param success
+/// @param fail
+- (void)reqAddUserCoin:(Int64Block)success fail:(StringBlock)fail;
+
 /// 请求穿戴
 /// @param nftDetailToken 穿戴的NFT详情token
 + (void)reqWearNFT:(NSString *)nftDetailToken isWear:(BOOL)isWear success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail;

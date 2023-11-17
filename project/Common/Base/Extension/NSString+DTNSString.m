@@ -8,6 +8,22 @@
 #define CC_MD5_DIGEST_LENGTH 16
 
 @implementation NSString (DTNSString)
+
+- (NSString *)localized {
+    NSBundle *bundle = NSBundle.currentLanguageBundle;
+    NSString *result = nil;
+    if (bundle) {
+        result = [bundle localizedStringForKey:self value:self table:nil];
+        if (![self isEqualToString:result]) {
+            return result;
+        }
+        if (NSBundle.defaultLanguageBundle) {
+            return [NSBundle.defaultLanguageBundle localizedStringForKey:self value:self table:nil];
+        }
+    }
+    return NSLocalizedString(self, comment: self);
+}
+
 /// 大小写不敏感比对
 /// @param dest
 /// @return

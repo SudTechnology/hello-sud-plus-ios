@@ -2,7 +2,7 @@
 
 NS_ASSUME_NONNULL_BEGIN 
 @interface NSString(Localized)
-- (NSString *)localized;
+//- (NSString *)localized;
 /*
   Localizable.strings
   HelloSud-iOS

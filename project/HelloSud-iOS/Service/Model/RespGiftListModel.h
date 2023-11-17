@@ -9,6 +9,21 @@
 #import "BaseRespModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@interface GiftItemDetailModel : BaseModel
+typedef NS_ENUM(NSInteger, GiftItemDetailCardType){
+    GiftItemDetailCardTypeRole = 1,
+    GiftItemDetailCardTypeCard = 2
+};
+
+@property(nonatomic, strong)NSString *backgroundUrl;
+@property(nonatomic, assign)GiftItemDetailCardType cardType;
+@property(nonatomic, strong)NSString *desc;
+@property(nonatomic, strong)NSString *textColor;
+@property(nonatomic, strong)NSString *title;
+@property(nonatomic, strong)NSString *content;
+@end
+
 /// 单个礼物模型
 @interface RespGiftModel : BaseModel
 @property(nonatomic, assign) NSInteger giftId;
@@ -18,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSString *bigGiftUrl;
 @property(nonatomic, strong) NSString *smallGiftUrl;
 @property(nonatomic, strong) NSString *animationUrl;
+@property(nonatomic, strong) GiftItemDetailModel *details;
 @end
 
 

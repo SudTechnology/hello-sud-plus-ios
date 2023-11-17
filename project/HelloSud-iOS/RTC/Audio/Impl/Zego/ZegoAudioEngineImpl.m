@@ -344,4 +344,10 @@
     }
 }
 
+
+- (void)onPlayerVideoSizeChanged:(CGSize)size streamID:(NSString *)streamID {
+    if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onPlayerVideoSizeChanged:streamID:)]) {
+        [self.mISudAudioEventListener onPlayerVideoSizeChanged:size streamID:streamID];
+    }
+}
 @end

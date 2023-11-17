@@ -29,10 +29,15 @@
 
 @end
 
+@implementation DanmakuActionListeItemModel
+
+@end
+
 @implementation RespDanmakuListModel
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"callWarcraftInfoList": [DanmakuCallWarcraftModel class],
-            @"joinTeamList": [DanmakuJoinTeamModel class]};
+             @"joinTeamList": [DanmakuJoinTeamModel class],
+             @"actionList": [DanmakuActionListeItemModel class]};
 }
 @end
 

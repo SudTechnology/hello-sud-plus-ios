@@ -12,8 +12,8 @@
 #import "Msg/RoomGiftTableViewCell.h"
 
 @interface RoomMsgTableView () <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray<RoomBaseCMDModel*> *msgList;
+@property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) NSMutableArray<RoomBaseCMDModel *> *msgList;
 @end
 
 @implementation RoomMsgTableView
@@ -41,6 +41,17 @@
     [self scrollToBottom];
 }
 
+/// 展示公屏消息
+/// @param msg 消息体
+- (void)addMsgList:(NSArray<RoomBaseCMDModel *> *)msgList {
+    for (RoomBaseCMDModel *cmdModel in msgList) {
+        [cmdModel prepare];
+    }
+    [self.msgList addObjectsFromArray:msgList];
+    [self.tableView reloadData];
+    [self scrollToBottom];
+}
+
 
 /// 滚动到底部
 - (void)scrollToBottom {
@@ -57,6 +68,7 @@
 }
 
 #pragma mark - UITableViewDelegate || UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.msgList.count;
 }
@@ -75,7 +87,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:self.frame style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:self.frame style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

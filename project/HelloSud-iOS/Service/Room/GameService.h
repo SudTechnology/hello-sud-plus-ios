@@ -10,6 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// 大富翁游戏ID
+#define GAME_ID_RICH_MAN 1704460412809043970
+
+
 /// 游戏管理模块
 @interface GameService : NSObject
 + (instancetype)shared;

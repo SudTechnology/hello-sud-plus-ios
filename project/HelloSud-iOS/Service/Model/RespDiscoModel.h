@@ -37,11 +37,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 机器人信息model
 @interface RobotInfoModel : BaseModel
+typedef NS_ENUM(NSInteger, RobotLvelType){
+    RobotLevelTypeSimple = 1,
+    RobotLevelTypeMid = 2,
+    RobotLevelTypeHard = 3,
+};
 @property (nonatomic, assign)int64_t userId;
 @property (nonatomic, strong)NSString * avatar;
 @property (nonatomic, strong)NSString * name;
 /// male female
 @property (nonatomic, strong)NSString * gender;
+// 难道级别 1：简单，2：适中，3：困难
+@property (nonatomic, assign)RobotLvelType level;
 @end
 /// 拉取机器人列表数据模型
 @interface RespDiscoRobotListModel : BaseRespModel

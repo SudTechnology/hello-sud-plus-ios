@@ -9,7 +9,7 @@
 #import <MJExtension/MJExtension.h>
 
 @interface AudioMicroView ()
-@property(nonatomic, strong) SDAnimatedImageView *headerView;
+
 @property(nonatomic, strong) YYLabel *nameLabel;
 @property(nonatomic, strong) UIImageView *giftImageView;
 

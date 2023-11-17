@@ -25,6 +25,7 @@
     // 控制SDK游戏加载背景
     BOOL isShowSDKLoadingBackground = [self showSudMGPLoadingGameBackground];
     [[SudMGP getCfg] setShowLoadingGameBg:isShowSDKLoadingBackground];
+    [[SudMGP getCfg] setShowCustomLoading:self.showCustomLoadingView];
 }
 
 - (void)hanldeInitSudFSMMG {
@@ -58,15 +59,6 @@
     m.ret_code = 0;
     m.ret_msg = @"success";
     [handle success:m.mj_JSONString];
-}
-
-/// 游戏加载进度(loadMG)
-/// @param stage start=1,loading=2,end=3
-/// @param retCode 错误码，0成功
-/// @param progress [0, 100]
-/// 最低版本：v1.1.30.xx
--(void) onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress {
-    NSLog(@"onGameLoadingProgress:stage:%@,code:%@, progress:%@", @(stage), @(retCode), @(progress));
 }
 
 /// 短期令牌code过期  【需要实现】
@@ -272,6 +264,21 @@
     }];
 }
 
+/// 游戏向app发送获取玩家持有的道具卡（只支持大富翁） MG_COMMON_GAME_PLAYER_MONOPOLY_CARDS
+- (void)onGameMGPlayerMonopolyCards:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerMonopolyCardsModel *)model {
+ 
+    [AudioRoomService reqMonopolyCardsWithFinished:^(BaseRespModel * _Nonnull respModel) {
+    
+        RespMonopolyModel *resp = (RespMonopolyModel *)respModel;
+        AppCommonGamePlayerMonopolyCards *cards = AppCommonGamePlayerMonopolyCards.new;
+        cards.reroll_card_count = resp.rerollCardCount;
+        cards.free_rent_card_count = resp.freeRentCardCount;
+        cards.ctrl_dice_card_count = resp.ctrlDiceCardCount;
+        [self.sudFSTAPPDecorator notifyAppCommonGamePlayerMonopolyCards:cards];
+    } failure:nil];
+    
+    
+}
 
 #pragma mark =======Comonn状态处理=======
 
@@ -393,7 +400,6 @@
         isTest = YES;
     }
 #endif
-    [[SudMGP getCfg] setShowCustomLoading:NO];
     [[SudMGP getCfg] setShowLoadingGameBg:YES];
     SudInitSDKParamModel *model = [[SudInitSDKParamModel alloc]init];
     model.appId = appID;

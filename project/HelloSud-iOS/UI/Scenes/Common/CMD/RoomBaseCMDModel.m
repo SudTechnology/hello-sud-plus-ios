@@ -7,7 +7,7 @@
 
 #import "RoomBaseCMDModel.h"
 
-@interface RoomBaseCMDModel(){
+@interface RoomBaseCMDModel () {
     CGFloat _cellHeight;
 }
 
@@ -15,9 +15,10 @@
 
 @implementation RoomBaseCMDModel
 
--(NSString *)cellName {
+- (NSString *)cellName {
     return @"cell";
 }
+
 /// cell高度
 - (CGFloat)cellHeight {
     return _cellHeight;
@@ -34,6 +35,7 @@
 - (void)prepare {
     _cellHeight = ceil([self caculateHeight]);
 }
+
 /// 配置消息
 /// @param cmd 消息指令
 - (void)configBaseInfoWithCmd:(NSInteger)cmd {
@@ -60,4 +62,18 @@
     base.cmd = [dicData[@"cmd"] integerValue];
     return base;
 }
+
+/// 解码服务器返回的model
+/// @param keyValues keyValues json对象
++ (id)parseInstance:(Class)cls fromServerJSON:(NSString *)keyValues {
+    NSDictionary *dicData = [NSJSONSerialization JSONObjectWithData:[keyValues dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    id temp = [cls mj_objectWithKeyValues:dicData[@"content"]];
+    return temp;
+}
+@end
+
+
+@implementation RoomGameMonopolyCardGiftNotifyCMDModel
+
+
 @end

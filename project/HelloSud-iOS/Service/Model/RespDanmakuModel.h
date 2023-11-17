@@ -68,10 +68,26 @@ typedef NS_ENUM(NSInteger, DanmakuCallWarcraftModelType){
 @property(nonatomic, assign, readonly) CGFloat cellWidth;
 @end
 
+/// 弹幕操作列表item
+@interface DanmakuActionListeItemModel : BaseModel
+/// 召唤方式（1弹幕，2礼物）
+@property(nonatomic, assign) DanmakuCallWarcraftModelType callMode;
+/// 标题
+@property(nonatomic, strong) NSString *title;
+/// 标题颜色值
+@property(nonatomic, strong) NSString *titleColor;
+/// 文本内容(弹幕使用)
+@property(nonatomic, strong) NSString *content;
+/// 背景图片
+@property(nonatomic, strong) NSString *backgroundUrl;
+@end
+
+
 /// 弹幕列表
 @interface RespDanmakuListModel : BaseRespModel
 @property(nonatomic, strong) NSArray<DanmakuCallWarcraftModel *> *callWarcraftInfoList;
 @property(nonatomic, strong) NSArray<DanmakuJoinTeamModel *> *joinTeamList;
+@property(nonatomic, strong) NSArray<DanmakuActionListeItemModel *> *actionList;
 @property(nonatomic, strong) NSString *guideText;
 @end
 

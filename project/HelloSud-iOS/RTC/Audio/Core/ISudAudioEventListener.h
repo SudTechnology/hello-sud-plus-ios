@@ -65,6 +65,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 观众拉流结束通知
 - (void)onPlayingStreamingDelete:(NSString *)streamID;
+
+/// 视频流程尺寸发生变化
+- (void)onPlayerVideoSizeChanged:(CGSize)size streamID:(NSString *)streamID;
 @end
 
 NS_ASSUME_NONNULL_END

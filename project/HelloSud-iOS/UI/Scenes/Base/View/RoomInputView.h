@@ -6,16 +6,20 @@
 //
 
 #import "BaseView.h"
-
+#import "BaseTextView.h"
 NS_ASSUME_NONNULL_BEGIN
-/// 输入框
-@interface RoomInputView : BaseView
-
 typedef void(^INPUT_MSG_BLOCK)(NSString *msg);
+@interface RoomInputView : BaseView
+/// 输入框
+@property (nonatomic, strong) BaseTextView *textView;
+@property (nonatomic, strong) UIButton *sendBtn;
+@property (nonatomic, assign) CGFloat lineNumber;
 @property(nonatomic, copy)INPUT_MSG_BLOCK inputMsgBlock;
 
 - (void)hsBecomeFirstResponder;
 - (void)hsResignFirstResponder;
+- (CGFloat)textViewSingleLineHeight;
+- (void)hiddenInputView;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -56,6 +56,7 @@
 @property(nonatomic, strong) GiftTagView *tagLabel2;
 @property(nonatomic, strong) UIImageView *leftTagImageView;
 @property(nonatomic, strong) UILabel *leftTagLabel;
+@property(nonatomic, strong) UIButton *moreDetailBtn;
 @end
 
 @implementation GiftItemCollectionViewCell
@@ -76,6 +77,7 @@
     [self.contentView addSubview:self.selectView];
     [self.contentView addSubview:self.leftTagImageView];
     [self.contentView addSubview:self.leftTagLabel];
+    [self.contentView addSubview:self.moreDetailBtn];
 }
 
 - (void)dtLayoutViews {
@@ -128,6 +130,12 @@
         make.height.greaterThanOrEqualTo(@0);
         make.centerY.equalTo(self.leftTagImageView);
     }];
+    [self.moreDetailBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.giftIconView).offset(-5);
+        make.trailing.equalTo(self.giftIconView).offset(5);
+        make.width.equalTo(@22);
+        make.height.equalTo(@22);
+    }];
 
 }
 
@@ -169,7 +177,22 @@
             self.leftTagLabel.text = m.leftTagName;
             self.leftTagLabel.hidden = NO;
         }
+        if (m.details) {
+            self.moreDetailBtn.hidden = NO;
+        }else {
+            self.moreDetailBtn.hidden = YES;
+        }
     }
+}
+
+- (void)dtConfigEvents {
+    [super dtConfigEvents];
+    WeakSelf
+    [self.moreDetailBtn dt_onClick:^(UIButton *sender) {
+        if (weakSelf.moreGiftDetailClickBlock) {
+            weakSelf.moreGiftDetailClickBlock(weakSelf.model);
+        }
+    }];
 }
 
 - (void)updateCoin:(NSInteger)coin {
@@ -306,5 +329,15 @@
     }
     return _leftTagImageView;
 }
+
+- (UIButton *)moreDetailBtn {
+    if (!_moreDetailBtn){
+        _moreDetailBtn = UIButton.new;
+        [_moreDetailBtn setImage:[UIImage imageNamed:@"gift_more_info"] forState:UIControlStateNormal];
+    }
+    return _moreDetailBtn;
+}
+
+
 
 @end

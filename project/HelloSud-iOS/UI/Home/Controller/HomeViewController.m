@@ -179,7 +179,12 @@
             } else {
 
                 // 是否需要满行
-                BOOL isNeedToFullRow = m.sceneId != SceneTypeDisco && m.sceneId != SceneTypeDanmaku && m.sceneId != SceneTypeLeague;
+
+                BOOL isNeedToFullRow = m.sceneId != SceneTypeDisco &&
+                        m.sceneId != SceneTypeDanmaku &&
+                        m.sceneId != SceneTypeLeague &&
+                        m.sceneId != SceneTypeAudio3D;
+
                 if (isNeedToFullRow) {
                     /// 求余 填满整个屏幕
                     int row = 3;
@@ -283,7 +288,9 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     HSSceneModel *m = self.headerSceneList[section];
-    if (m.sceneId == SceneTypeGuess || m.sceneId == SceneTypeCrossApp) {
+    if (m.sceneId == SceneTypeGuess ||
+            m.sceneId == SceneTypeCrossApp ||
+            m.sceneId == SceneTypeAudio3D) {
         return 0;
     }
     NSArray *arr = self.dataList[section];
@@ -293,16 +300,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BaseCollectionViewCell *cell = nil;
     HSSceneModel *m = self.headerSceneList[indexPath.section];
-    if (m.sceneId == SceneTypeDisco || m.sceneId == SceneTypeDanmaku || m.sceneId == SceneTypeLeague) {
-        // 全屏宽度cell
-        GameItemFullCollectionViewCell *c = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemFullCollectionViewCell" forIndexPath:indexPath];
+    cell = [collectionView dequeueReusableCellWithReuseIdentifier:m.reuseCell forIndexPath:indexPath];
+    if ([cell isKindOfClass:GameItemFullCollectionViewCell.class]) {
+        GameItemFullCollectionViewCell *c = (GameItemFullCollectionViewCell *) cell;
         c.sceneId = m.sceneId;
-        cell = c;
-    } else {
-        // 默认一行三个
-        GameItemCollectionViewCell *c = [collectionView dequeueReusableCellWithReuseIdentifier:@"GameItemCollectionViewCell" forIndexPath:indexPath];
+    } else if ([cell isKindOfClass:GameItemCollectionViewCell.class]) {
+        GameItemCollectionViewCell *c = (GameItemCollectionViewCell *) cell;
         c.sceneId = m.sceneId;
-        cell = c;
     }
     NSArray<HSGameItem *> *arr = self.dataList[indexPath.section];
     cell.indexPath = indexPath;
@@ -351,7 +355,9 @@
     if (m.sceneId == SceneTypeDisco) {
         itemW = kScreenWidth - 32;
         itemH = 200;
+
     } else if (m.sceneId == SceneTypeDanmaku) {
+
         itemW = kScreenWidth - 32;
         itemH = 140;
     } else if (m.sceneId == SceneTypeLeague) {
@@ -407,8 +413,11 @@
     UICollectionReusableView *supplementaryView;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         HSSceneModel *sceneModel = self.headerSceneList[indexPath.section];
-        if (sceneModel.sceneId == SceneTypeDanmaku || sceneModel.sceneId == SceneTypeDisco || sceneModel.sceneId == SceneTypeVertical) {
-            HomeHeaderFullReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderFullReusableView" forIndexPath:indexPath];
+        NSString *headIdentifier = sceneModel.headIdentifier;
+        BaseCollectionReusableView *reuseHead = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headIdentifier forIndexPath:indexPath];
+
+        if ([reuseHead isKindOfClass:HomeHeaderFullReusableView.class]) {
+            HomeHeaderFullReusableView *view = (HomeHeaderFullReusableView *) reuseHead;
             view.sceneModel = sceneModel;
             supplementaryView = view;
             view.customBlock = ^(UIButton *sender) {
@@ -418,8 +427,8 @@
                     [weakSelf.navigationController pushViewController:vc animated:true];
                 }
             };
-        } else {
-            HomeHeaderReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HomeHeaderReusableView" forIndexPath:indexPath];
+        } else if ([reuseHead isKindOfClass:HomeHeaderReusableView.class]) {
+            HomeHeaderReusableView *view = (HomeHeaderReusableView *) reuseHead;
             view.indexPath = indexPath;
             view.isShowBanner = [self checkIfNeedToShowBanner:indexPath.section];
             if (view.isShowBanner) {

@@ -164,7 +164,9 @@
     }
     self.createNode.textColor = sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A");
     if (self.sceneModel.sceneId == SceneTypeCrossApp) {
-        self.createNode.text = @"选择游戏";
+        self.createNode.text = @"dt_room_home_select_game".dt_lan;
+    }else if (self.sceneModel.sceneId == SceneTypeAudio3D) {
+        self.createNode.text = @"dt_room_home_click_enter".dt_lan;
     } else {
         self.createNode.text = NSString.dt_home_create_room;
     }

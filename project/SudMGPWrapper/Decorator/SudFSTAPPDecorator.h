@@ -32,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 暂停游戏
 - (void)pauseMG;
 
+/// 重新加载游戏
+- (void)reLoadMG;
+
 /// 销毁游戏
 - (void)destroyMG;
 
@@ -44,6 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
 - (void)pushAudio:(NSData *)data;
+
+/// 状态通知（app to mg）
+/// @param state 状态名称
+/// @param dataJson 需传递的json
+- (void)notifyStateChange:(NSString *)state dataJson:(NSString *)dataJson;
 
 /// 加入,退出游戏
 /// @param isIn true 加入游戏，false 退出游戏
@@ -156,6 +164,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// app通知游戏爆词内容(谁是卧底) APP_COMMON_GAME_SEND_BURST_WORD
 - (void)notifyAppCommonGameSendBurstWord:(AppCommonGameSendBurstWord *)model;
+
+/// app通知游戏玩家所持有的道具卡(大富翁) APP_COMMON_GAME_PLAYER_MONOPOLY_CARDS
+- (void)notifyAppCommonGamePlayerMonopolyCards:(AppCommonGamePlayerMonopolyCards *)model;
+
+/// app通知游戏获取到道具卡（大富翁） APP_COMMON_GAME_SHOW_MONOPOLY_CARD_EFFECT
+- (void)notifyAppCommonGameShowMonopolyCardEffect:(AppCommonGameShowMonopolyCardEffect *)model;
+
+/// app 通知游戏点赞玩家（2022-11-19 增加，当前支持你画我猜，你说我猜，友尽闯关）APP_COMMON_SELF_CLICK_GOOD
+- (void)notifyAppCommonSelfClickGood:(AppCommonSelfClickGood *)model;
+
+/// app 通知游戏扔大便玩家（2022-11-19 增加，当前支持你画我猜，你说我猜，友尽闯关）APP_COMMON_SELF_CLICK_POOP
+- (void)notifyAppCommonSelfClickPoop:(AppCommonSelfClickPoop *)model;
+
+/// app 通知游戏设置 FPS APP_COMMON_GAME_FPS
+- (void)notifyAppCommonGameFps:(AppCommonGameFps *)model;
+
+/// app 通知游戏设置玩法（只支持 德州 pro 和 teenpattipro）APP_COMMON_GAME_SETTINGS
+- (void)notifyAppCommonGameSettings:(AppCommonGameSettings *)model;
+
+/// app 通知游返回大厅（当前支持umo）APP_COMMON_GAME_BACK_LOBBY
+- (void)notifyAppCommonGameBackLobby:(AppCommonGameBackLobby *)model;
+
+/// app通知游戏定制UI配置表 (支持ludo和五子棋) APP_COMMON_GAME_UI_CUSTOM_CONFIG
+- (void)notifyAppCommonGameUiCustomConfig:(AppCommonGameUiCustomConfig *)model;
+
 #pragma mark - 互动礼物<火箭>
 
 /// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG
@@ -244,6 +277,28 @@ NS_ASSUME_NONNULL_BEGIN
 /// 排在自己前后的玩家数据 APP_BASEBALL_TEXT_CONFIG
 - (void)notifyAppBaseballTextConfig:(AppBaseballTextConfigModel *)model;
 
+#pragma mark - 3d语聊房
+
+/// 设置房间配置 APP_CUSTOM_CR_SET_ROOM_CONFIG
+- (void)notifyAppCustomCrSetRoomConfig:(AppCustomCrSetRoomConfigModel *)model;
+
+/// 设置主播位数据 APP_CUSTOM_CR_SET_SEATS
+- (void)notifyAppCustomCrSetSeats:(AppCustomCrSetSeatsModel *)model;
+
+/// 播放收礼效果 APP_CUSTOM_CR_PLAY_GIFT_EFFECT
+- (void)notifyAppCustomCrPlayGiftEffect:(AppCustomCrPlayGiftEffectModel *)model;
+
+/// 通知播放爆灯特效 APP_CUSTOM_CR_SET_LIGHT_FLASH
+- (void)notifyAppCustomCrSetLightFlash:(AppCustomCrSetLightFlashModel *)model;
+
+/// 通知主播播放指定动作 APP_CUSTOM_CR_PLAY_ANIM
+- (void)notifyAppCustomCrPlayAnim:(AppCustomCrPlayAnimModel *)model;
+
+/// 通知麦浪值变化 APP_CUSTOM_CR_MICPHONE_VALUE_SEAT
+- (void)notifyAppCustomCrMicphoneValueSeat:(AppCustomCrMicphoneValueSeatModel *)model;
+
+/// 通知暂停或恢复立方体自转 APP_CUSTOM_CR_PAUSE_ROTATE
+- (void)notifyAppCustomCrPauseRotate:(AppCustomCrPauseRotateModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

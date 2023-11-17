@@ -34,11 +34,16 @@ typedef NS_ENUM(NSInteger, VoiceBtnStateType) {
 @property (nonatomic, strong) UIButton *giftBtn;
 @property (nonatomic, strong) UILabel *inputLabel;
 
+
 /// 重置所有选择用户
 - (void)resetAllSelectedUser;
 /// 是否隐藏上麦按钮
 /// @param hidden
 - (void)hiddenVoiceBtn:(BOOL)hidden;
+
+/// 根据场景更新展示样式
+/// @param sceneType
+- (void)updateForSceneType:(SceneType)sceneType;
 @end
 
 NS_ASSUME_NONNULL_END

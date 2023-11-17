@@ -297,6 +297,24 @@
                               } failure:failure];
 }
 
+/// 获取背包卡片数量
+/// @param finished finished
+/// @param failure failure
++ (void)reqMonopolyCardsWithFinished:(void (^)(BaseRespModel *respModel))finished failure:(void (^)(NSError *error))failure {
+    NSDictionary *dicParam = @{};
+    [HSHttpService postRequestWithURL:kGameURL(@"monopoly/player/cards/v1")
+                                param:dicParam
+                            respClass:RespMonopolyModel.class
+                       showErrorToast:YES
+                              success:^(BaseRespModel *resp) {
+                                  if (finished) {
+                                      BaseRespModel *m = (BaseRespModel *) resp;
+                                      finished(m);
+                                  }
+                              } failure:failure];
+}
+
+
 #pragma mark - Custom
 
 + (RoomCustomModel *)getCustomModel {

@@ -12,6 +12,7 @@
 #import "RoomOrderCreateModel.h"
 #import "RespCrossRoomListModel.h"
 #import "ReqAppOrderModel.h"
+#import "RespMonopolyModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -73,6 +74,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param finished finished
 /// @param failure failure
 + (void)reqAppOrder:(ReqAppOrderModel *)reqModel finished:(void (^)(BaseRespModel *respModel))finished failure:(void (^)(NSError *error))failure;
+
+/// 获取背包卡片数量
+/// @param finished finished
+/// @param failure failure
++ (void)reqMonopolyCardsWithFinished:(void (^)(BaseRespModel *respModel))finished failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Custom
 

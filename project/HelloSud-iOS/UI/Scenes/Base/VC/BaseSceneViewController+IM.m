@@ -65,13 +65,21 @@
     msg.sendUser.roomID = self.roomID;
     NSString *command = [[NSString alloc] initWithData:[msg mj_JSONData] encoding:NSUTF8StringEncoding];
     DDLogDebug(@"send cross content, my roomId:%@, toRoomId:%@ \ncontent:%@", self.roomID, toRoomId, command);
-    [IMRoomManager.sharedInstance sendXRoomCommand:toRoomId command:command listener:^(int errorCode) {
-        DDLogDebug(@"send cross room:%@ msg result:%d", toRoomId, errorCode);
-        if (finished) {
-            finished(errorCode);
+    WeakSelf
+    [self onWillSendMsg:msg shouldSend:^(BOOL shouldSend) {
+        if (!shouldSend) {
+            return;
         }
+        [IMRoomManager.sharedInstance sendXRoomCommand:toRoomId command:command listener:^(int errorCode) {
+            DDLogDebug(@"send cross room:%@ msg result:%d", toRoomId, errorCode);
+            [weakSelf onDidSendMsg:msg];
+            if (finished) {
+                finished(errorCode);
+            }
+        }];
+        [self addMsg:msg isShowOnScreen:isAddToShow];
     }];
-    [self addMsg:msg isShowOnScreen:isAddToShow];
+
 }
 
 /// 发送进房消息
@@ -179,9 +187,32 @@
 - (void)handleBusyCommand:(NSInteger)cmd command:(NSString *)command {
     // 无法解析消息
     DDLogWarn(@"无法解析消息 cmd：%@, content:%@", @(cmd), command);
-//    RoomCmdChatTextModel *textModel = RoomCmdChatTextModel.new;
-//    textModel.content = [NSString stringWithFormat:NSString.dt_room_unable_display_msg, cmd];
-//    [self addMsg:textModel isShowOnScreen:YES];
+    //    RoomCmdChatTextModel *textModel = RoomCmdChatTextModel.new;
+    //    textModel.content = [NSString stringWithFormat:NSString.dt_room_unable_display_msg, cmd];
+    //    [self addMsg:textModel isShowOnScreen:YES];
+    switch (cmd) {
+        case CMD_GAME_MONOPOLY_CARD_GIFT_NOTIFY: {
+            // 进入房间
+            RoomGameMonopolyCardGiftNotifyCMDModel *m = [RoomGameMonopolyCardGiftNotifyCMDModel fromServerJSON:command];
+            
+            for (NSNumber *n in m.receiverUidList) {
+                
+                AppCommonGameShowMonopolyCardEffect *cardEffect = AppCommonGameShowMonopolyCardEffect.new;
+                cardEffect.fromUid =[NSString stringWithFormat:@"%@", @(m.senderUid)];
+                cardEffect.type = m.type;
+                cardEffect.toUid = [NSString stringWithFormat:@"%@", n];
+                cardEffect.count = m.amount;
+                [self.sudFSTAPPDecorator notifyAppCommonGameShowMonopolyCardEffect:cardEffect];
+                
+            }
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 #pragma mark - 业务处理
@@ -200,6 +231,9 @@
 /// 退出游戏
 - (void)notifyGameToExit {
 
+    if (![self.sudFSMMGDecorator isPlayerInGame:AppService.shared.login.loginUserInfo.userID]) {
+        return;
+    }
     if (self.sudFSMMGDecorator.isReady) {
         /// 如果已经准备先退出准备状态
         [self.sudFSTAPPDecorator notifyAppCommonSelfReady:false];

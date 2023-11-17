@@ -157,6 +157,10 @@
     DDLogDebug(@"ZIMManager: onError: %lu", errorInfo.code);
 }
 
+- (void)zim:(ZIM *)zim tokenWillExpire:(unsigned int)second {
+    DDLogError(@"ZIMManager: tokenWillExpire: %lu", second);
+}
+
 - (void)zim:(ZIM *)zim receiveRoomMessage:(NSArray<ZIMMessage *> *)messageList fromRoomID:(NSString *)fromRoomID {    
     for (ZIMMessage *zimMessage in messageList) {
         if ([zimMessage isKindOfClass:[ZIMTextMessage class]]) {

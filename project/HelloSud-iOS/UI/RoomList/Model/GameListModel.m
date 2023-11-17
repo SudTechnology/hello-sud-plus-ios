@@ -18,7 +18,28 @@
 @end
 
 @implementation HSSceneModel
+- (NSString *)headIdentifier {
 
+    switch (self.sceneId) {
+        case SceneTypeDanmaku:
+        case SceneTypeDisco:
+        case SceneTypeVertical:
+            return @"HomeHeaderFullReusableView";
+        default:
+            return @"HomeHeaderReusableView";
+    }
+}
+
+- (NSString *)reuseCell {
+    switch (self.sceneId) {
+        case SceneTypeDanmaku:
+        case SceneTypeDisco:
+        case SceneTypeLeague:
+            return @"GameItemFullCollectionViewCell";
+        default:
+            return @"GameItemCollectionViewCell";
+    }
+}
 @end
 
 @implementation GameListModel

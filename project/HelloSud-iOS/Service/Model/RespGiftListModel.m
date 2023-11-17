@@ -8,6 +8,13 @@
 
 #import "RespGiftListModel.h"
 
+@implementation GiftItemDetailModel
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{@"desc":@"description"};
+}
+
+@end
+
 @implementation RespGiftModel
 @end
 

@@ -589,6 +589,22 @@
             [self.listener onPlayerMGCommonPlayerRoleId:handle model:m];
             return;
         }
+
+    } else if ([state isEqualToString:MG_CUSTOM_CR_ROOM_INIT_DATA]) {
+        /// 请求房间数据
+        MGCustomCrRoomInitData *m = [MGCustomCrRoomInitData mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomCrRoomInitData:model:)]) {
+            [self.listener onGameMGCustomCrRoomInitData:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_CUSTOM_CR_CLICK_SEAT]) {
+        /// 点击主播位或老板位通知
+        MGCustomCrClickSeat *m = [MGCustomCrClickSeat mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCustomCrClickSeat:model:)]) {
+            [self.listener onGameMGCustomCrClickSeat:handle model:m];
+            return;
+        }
+
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_GOLD_BTN]) {
         /// 通知app点击了游戏的金币按钮
         MgCommonSelfClickGoldBtnModel *m = [MgCommonSelfClickGoldBtnModel mj_objectWithKeyValues:dataJson];
@@ -615,6 +631,135 @@
         MgCommonGameSendBurstWordModel *m = [MgCommonGameSendBurstWordModel mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameSendBurstWord:model:)]) {
             [self.listener onGameMGCommonGameSendBurstWord:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PLAYER_MONOPOLY_CARDS]) {
+        /// 游戏向app发送获取玩家持有的道具卡（只支持大富翁）
+        MgCommonGamePlayerMonopolyCardsModel *m = [MgCommonGamePlayerMonopolyCardsModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGPlayerMonopolyCards:model:)]) {
+            [self.listener onGameMGPlayerMonopolyCards:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PLAYER_RANKS]) {
+        // 游戏向app发送玩家实时排名（只支持怪物消消乐）
+        MgCommonGamePlayerRanksModel *m = [MgCommonGamePlayerRanksModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGPlayerRanks:model:)]) {
+            [self.listener onGameMGPlayerRanks:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PLAYER_PAIR_SINGULAR]) {
+        /// 游戏向app发送玩家即时变化的单双牌（只支持okey101）
+        MgCommonGamePlayerPairSingularModel *m = [MgCommonGamePlayerPairSingularModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGPlayerPairSingular:model:)]) {
+            [self.listener onGameMGPlayerPairSingular:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PLAYER_SCORES]) {
+        /// 游戏向app发送玩家实时积分（只支持怪物消消乐）
+        MgCommonGamePlayerScoresModel *m = [MgCommonGamePlayerScoresModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGPlayerScores:model:)]) {
+            [self.listener onGameMGPlayerScores:handle model:m];
+            return;
+        }
+    }
+
+        //............
+    else if ([state isEqualToString:MG_COMMON_GAME_UI_CUSTOM_CONFIG]) {
+        /// 游戏通知 app 下发定制 ui 配置表（支持ludo和五子棋）MG_COMMON_GAME_UI_CUSTOM_CONFIG
+        MgCommonGameUiCustomConfigModel *m = [MgCommonGameUiCustomConfigModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameUiCustomConfig:model:)]) {
+            [self.listener onGameMGCommonGameUiCustomConfig:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_MONEY_NOT_ENOUGH]) {
+        /// 游戏通知 app 钱币不足（只支持德州 pro，teenpatti pro）MG_COMMON_GAME_MONEY_NOT_ENOUGH
+        MgCommonGameMoneyNotEnoughModel *m = [MgCommonGameMoneyNotEnoughModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameMoneyNotEnough:model:)]) {
+            [self.listener onGameMGCommonGameMoneyNotEnough:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_SETTINGS]) {
+        /// 游戏通知 app 进行玩法设置（只支持德州 pro，teenpatti pro）MG_COMMON_GAME_SETTINGS
+        MgCommonGameSettingsModel *m = [MgCommonGameSettingsModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameSettings:model:)]) {
+            [self.listener onGameMGCommonGameSettings:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_RULE]) {
+        /// 游戏通知 app 当前游戏的设置信息（只支持德州 pro，teenpatti pro）MG_COMMON_GAME_RULE
+        MgCommonGameRuleModel *m = [MgCommonGameRuleModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameRule:model:)]) {
+            [self.listener onGameMGCommonGameRule:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_IS_APP_CHIP]) {
+        /// 游戏通知 app 是否要开启带入积分（只支持 teenpattipro 与 德州 pro）MG_COMMON_GAME_IS_APP_CHIP
+        MgCommonGameIsAppChipModel *m = [MgCommonGameIsAppChipModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameIsAppChip:model:)]) {
+            [self.listener onGameMGCommonGameIsAppChip:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_EXIT_GAME_BTN]) {
+        /// 游戏通知 app 退出游戏（只支持 teenpattipro 与 德州 pro）MG_COMMON_SELF_CLICK_EXIT_GAME_BTN
+        MgCommonSelfClickExitGameBtnModel *m = [MgCommonSelfClickExitGameBtnModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickExitGameBtn:model:)]) {
+            [self.listener onGameMGCommonSelfClickExitGameBtn:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PLAYER_ICON_POSITION]) {
+        /// 游戏通知 app 玩家头像的坐标（支持 ludo, 飞镖, umo, 多米诺, teenpatti, texasholdem）MG_COMMON_GAME_PLAYER_ICON_POSITION
+        MgCommonGamePlayerIconPositionModel *m = [MgCommonGamePlayerIconPositionModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonGamePlayerIconPosition:model:)]) {
+            [self.listener onGameMgCommonGamePlayerIconPosition:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PLAYER_COLOR]) {
+        /// 游戏通知 app 玩家颜色（支持友尽闯关 与 ludo）MG_COMMON_GAME_PLAYER_COLOR
+        MgCommonGamePlayerColorModel *m = [MgCommonGamePlayerColorModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonGamePlayerColor:model:)]) {
+            [self.listener onGameMgCommonGamePlayerColor:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_OVER_TIP]) {
+        /// 游戏通知 app 因玩家逃跑导致游戏结束（只支持友尽闯关）MG_COMMON_GAME_OVER_TIP
+        MgCommonGameOverTipModel *m = [MgCommonGameOverTipModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonGameOverTip:model:)]) {
+            [self.listener onGameMgCommonGameOverTip:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_WORST_TEAMMATE]) {
+        /// 游戏通知 app 最坑队友（只支持友尽闯关）MG_COMMON_WORST_TEAMMATE
+        MgCommonWorstTeammateModel *m = [MgCommonWorstTeammateModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonWorstTeammate:model:)]) {
+            [self.listener onGameMgCommonWorstTeammate:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_ALERT]) {
+        /// 游戏通知 app 游戏弹框 MG_COMMON_ALERT
+        MgCommonAlertModel *m = [MgCommonAlertModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonAlert:model:)]) {
+            [self.listener onGameMgCommonAlert:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_FPS]) {
+        /// 游戏通知 app 游戏 FPS(仅对碰碰，多米诺骨牌，飞镖达人生效) MG_COMMON_GAME_FPS
+        MgCommonGameFpsModel *m = [MgCommonGameFpsModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonGameFps:model:)]) {
+            [self.listener onGameMgCommonGameFps:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_GOOD]) {
+        /// 游戏通知 app 玩家被点赞(仅对你画我猜有效) MG_COMMON_SELF_CLICK_GOOD
+        MgCommonSelfClickGoodModel *m = [MgCommonSelfClickGoodModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonSelfClickGood:model:)]) {
+            [self.listener onGameMgCommonSelfClickGood:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_POOP]) {
+        /// 游戏通知 app 玩家被扔便便(仅对你画我猜有效) MG_COMMON_SELF_CLICK_POOP
+        MgCommonSelfClickPoopModel *m = [MgCommonSelfClickPoopModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonSelfClickPoop:model:)]) {
+            [self.listener onGameMgCommonSelfClickPoop:handle model:m];
             return;
         }
     } else {

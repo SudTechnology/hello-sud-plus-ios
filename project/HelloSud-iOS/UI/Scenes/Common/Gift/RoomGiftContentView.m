@@ -84,7 +84,72 @@
     }];
 }
 
+// 展示卡片更多信息
+- (void)showMoreInfoView:(GiftModel *)giftModel {
+    UIView *rootView = self.superview.superview.superview;
+    static BaseView *cardInfoView = nil;
+    if (cardInfoView){
+        [cardInfoView removeFromSuperview];
+    }
+    NSString *title = giftModel.details.title;
+    NSString *textColor = giftModel.details.textColor;
+    NSString *bgUrl = giftModel.details.backgroundUrl;
+    NSString *desc = giftModel.details.desc;
+    
+    cardInfoView = BaseView.new;
+    cardInfoView.dtNeedAcceptEvent = YES;
 
+    cardInfoView.backgroundColor = HEX_COLOR_A(@"#000000", 0.4);
+    UIImageView * bgImageView = UIImageView.new;
+    [bgImageView sd_setImageWithURL:bgUrl.dt_toURL];
+    
+    UILabel *titleLabel = UILabel.new;
+    titleLabel.text = title;
+    titleLabel.textColor = HEX_COLOR(textColor);
+    titleLabel.font = UIFONT_SEMI_BOLD(20);
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    UILabel *descLabel = UILabel.new;
+    descLabel.text = desc;
+    descLabel.textColor = HEX_COLOR(textColor);
+    descLabel.font = UIFONT_MEDIUM(14);
+    descLabel.numberOfLines = 0;
+    descLabel.textAlignment = NSTextAlignmentCenter;
+    descLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    [rootView insertSubview:cardInfoView atIndex:0];
+    [cardInfoView addSubview:bgImageView];
+    [cardInfoView addSubview:titleLabel];
+    [cardInfoView addSubview:descLabel];
+    
+    [cardInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.top.bottom.equalTo(@0);
+    }];
+    [bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@175);
+        make.height.equalTo(@250);
+        make.top.equalTo(@(kAppSafeTop + 88));
+        make.centerX.equalTo(cardInfoView);
+    }];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@30);
+        make.top.equalTo(bgImageView.mas_top).offset(49);
+        make.leading.trailing.equalTo(bgImageView);
+    }];
+    [descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleLabel.mas_bottom).offset(0);
+        make.leading.equalTo(bgImageView).offset(10);
+        make.trailing.equalTo(bgImageView).offset(-10);
+        make.bottom.equalTo(bgImageView).offset(-10);
+    }];
+    
+    
+    [cardInfoView dt_onTap:^(UITapGestureRecognizer * _Nonnull tap) {
+        [cardInfoView removeFromSuperview];
+        cardInfoView = nil;
+    }];
+    
+    
+}
 
 #pragma mark - UICollectionViewDataSource
 
@@ -95,6 +160,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GiftItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GiftItemCollectionViewCell" forIndexPath:indexPath];
     cell.model = self.dataList[indexPath.row];
+    WeakSelf
+    cell.moreGiftDetailClickBlock = ^(BaseModel * _Nonnull giftModel) {
+        [weakSelf showMoreInfoView:(GiftModel *)giftModel];
+    };
     return cell;
 }
 

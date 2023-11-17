@@ -15,6 +15,8 @@ typedef UIView *_Nullable(^DTHitTestBlock)(UIView *hitView, CGPoint point);
 
 /// 事件处理视图改变回调
 @property (nonatomic, copy)DTHitTestBlock hitTestChangedCallback;
+/// 需要需要接收事件，如果接收事件，则DTSheetView组件持续透传
+@property(nonatomic, assign)BOOL dtNeedAcceptEvent;
 
 /// 增加子view
 - (void)dtAddViews;

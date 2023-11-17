@@ -19,6 +19,7 @@
 #import "RocketService.h"
 #import "CrossAppRoomService.h"
 #import "BaseballService.h"
+#import "Audio3dRoomService.h"
 
 // 语音服务
 #define kAudioRoomService ((AudioRoomService *)AppService.shared.scene)
@@ -32,7 +33,8 @@
 #define kDanmakuRoomService ((DanmakuRoomService *)AppService.shared.scene)
 // 蹦迪房间服务
 #define kDiscoRoomService ((DiscoRoomService *)AppService.shared.scene)
-
+// 蹦迪房间服务
+#define kAudio3dRoomService ((Audio3dRoomService *)AppService.shared.scene)
 
 @class AudioConfigModel;
 

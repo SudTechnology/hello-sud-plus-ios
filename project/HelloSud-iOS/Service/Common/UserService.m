@@ -81,6 +81,24 @@
     }];
 }
 
+/// 增加用户金币
+/// @param success
+/// @param fail
+- (void)reqAddUserCoin:(Int64Block)success fail:(StringBlock)fail {
+    WeakSelf
+    [HSHttpService postRequestWithURL:kBASEURL(@"add-coin/v1") param:@{@"userId": AppService.shared.loginUserID ?: @"", @"coin": @(100000)} respClass:RespUserCoinInfoModel.class showErrorToast:NO success:^(BaseRespModel *resp) {
+        RespUserCoinInfoModel *model = (RespUserCoinInfoModel *) resp;
+        if (success) {
+            weakSelf.currentUserCoin = model.coin;
+            success(model.coin);
+        }
+    }                         failure:^(NSError *error) {
+        if (fail) {
+            fail(error.dt_errMsg);
+        }
+    }];
+}
+
 /// 请求穿戴
 /// @param nftDetailToken 穿戴的NFT详情token
 /// @param isWear 1 穿 2 脱
@@ -92,7 +110,7 @@
         return;
     }
     [HSHttpService postRequestWithURL:kBASEURL(@"wear-nft-header/v1")
-                                param:@{@"nftToken": nftDetailToken, @"type":@(isWear ? 1 : 2)}
+                                param:@{@"nftToken": nftDetailToken, @"type": @(isWear ? 1 : 2)}
                             respClass:BaseRespModel.class
                        showErrorToast:YES
                               success:^(BaseRespModel *resp) {
@@ -142,7 +160,7 @@
 /// @param fail fail description
 - (void)reqAddGameScore:(ReqAddScoreModel *)reqModel success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail {
 
-    [HSHttpService postRequestWithURL:kGameURL(@"app/bring-chip/v1") param:reqModel.mj_JSONObject respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    [HSHttpService postRequestWithURL:kGameURL(@"app/bring-chip/v1") param:reqModel.mj_JSONObject respClass:RespUserInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (success) {
             success(resp);
         }

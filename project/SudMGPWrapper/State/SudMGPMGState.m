@@ -12,26 +12,26 @@
 @implementation GamePublicText
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
-            @"degf": @"default",
-            @"en_GB": @"en-GB",
-            @"en_US": @"en-US",
-            @"ms_BN": @"ms-BN",
-            @"ms_MY": @"ms-MY",
-            @"zh_CN": @"zh-CN",
-            @"zh_HK": @"zh-HK",
-            @"zh_MO": @"zh-MO",
-            @"zh_SG": @"zh-SG",
-            @"zh_TW": @"zh-TW",
-
-            @"vi_VN": @"vi-VN",
-            @"th_TH": @"th-TH",
-            @"ko_KR": @"ko-KR",
-            @"ja_JP": @"ja-JP",
-            @"es_ES": @"es-ES",
-            @"id_ID": @"id-ID",
-            @"ar_SA": @"ar-SA",
-            @"tr_TR": @"tr-TR",
-            @"ur_PK": @"ur-PK",
+        @"degf": @"default",
+        @"en_GB": @"en-GB",
+        @"en_US": @"en-US",
+        @"ms_BN": @"ms-BN",
+        @"ms_MY": @"ms-MY",
+        @"zh_CN": @"zh-CN",
+        @"zh_HK": @"zh-HK",
+        @"zh_MO": @"zh-MO",
+        @"zh_SG": @"zh-SG",
+        @"zh_TW": @"zh-TW",
+        
+        @"vi_VN": @"vi-VN",
+        @"th_TH": @"th-TH",
+        @"ko_KR": @"ko-KR",
+        @"ja_JP": @"ja-JP",
+        @"es_ES": @"es-ES",
+        @"id_ID": @"id-ID",
+        @"ar_SA": @"ar-SA",
+        @"tr_TR": @"tr-TR",
+        @"ur_PK": @"ur-PK",
     };
 }
 @end
@@ -264,6 +264,106 @@
 @end
 
 @implementation MgCommonGameSendBurstWordModel
+@end
+
+@implementation MgCommonGamePlayerMonopolyCardsModel
+@end
+
+#pragma mark - MG_COMMON_GAME_PLAYER_RANKS
+@implementation MgCommonGamePlayerRanksItem
+@end
+
+@implementation MgCommonGamePlayerRanksModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"ranks": [MgCommonGamePlayerRanksItem class]
+    };
+}
+@end
+
+#pragma mark - MG_COMMON_GAME_PLAYER_PAIR_SINGULAR
+@implementation MgCommonGamePlayerPairSingularItem
+@end
+
+@implementation MgCommonGamePlayerPairSingularModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"pairs": [MgCommonGamePlayerPairSingularItem class]
+    };
+}
+@end
+
+#pragma mark - MG_COMMON_GAME_PLAYER_SCORES
+@implementation MgCommonGamePlayerScoresItem
+@end
+
+@implementation MgCommonGamePlayerScoresModel : NSObject
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"scores": [MgCommonGamePlayerScoresItem class]
+    };
+}
+@end
+
+
+#pragma mark - MG_COMMON_GAME_UI_CUSTOM_CONFIG
+@implementation MgCommonGameUiCustomConfigModel
+@end
+
+#pragma mark - MG_COMMON_GAME_MONEY_NOT_ENOUGH
+@implementation MgCommonGameMoneyNotEnoughModel
+@end
+#pragma mark - MG_COMMON_GAME_SETTINGS
+@implementation MgCommonGameSettingsModel
+@end
+#pragma mark - MG_COMMON_GAME_RULE
+@implementation MgCommonGameRuleGameModeModel
+
+@end
+@implementation MgCommonGameRuleModel
+@end
+#pragma mark - MG_COMMON_GAME_IS_APP_CHIP
+@implementation MgCommonGameIsAppChipModel
+
+@end
+#pragma mark - MG_COMMON_SELF_CLICK_EXIT_GAME_BTN
+@implementation MgCommonSelfClickExitGameBtnModel
+
+@end
+#pragma mark - MG_COMMON_GAME_PLAYER_ICON_POSITION
+@implementation MgFrameRectModel
+@end
+
+@implementation MgCommonGamePlayerIconPositionModel
+@end
+
+#pragma mark - MG_COMMON_GAME_PLAYER_COLOR
+@implementation MgCommonGamePlayerColorItem
+@end
+
+@implementation MgCommonGamePlayerColorModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"players": [MgCommonGamePlayerColorItem class]
+    };
+}
+
+@end
+#pragma mark - MG_COMMON_GAME_OVER_TIP
+@implementation MgCommonGameOverTipModel
+@end
+#pragma mark - MG_COMMON_WORST_TEAMMATE
+@implementation MgCommonWorstTeammateModel
+@end
+#pragma mark - MG_COMMON_ALERT
+@implementation MgCommonAlertModel
+@end
+#pragma mark - MG_COMMON_GAME_FPS
+@implementation MgCommonGameFpsModel
+@end
+#pragma mark - MG_COMMON_SELF_CLICK_GOOD
+@implementation MgCommonSelfClickGoodModel
+
+@end
+#pragma mark - MG_COMMON_SELF_CLICK_POOP
+@implementation MgCommonSelfClickPoopModel
+
 @end
 
 

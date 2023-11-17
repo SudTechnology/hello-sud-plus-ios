@@ -6,10 +6,13 @@
 //
 
 #import "BaseModel.h"
+#import "RespGiftListModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^HSGiftModelSelectedBlock)(void);
 typedef void(^GiftLoadImageBlock)(UIImage *image);
+
+
 
 /// 礼物model
 @interface GiftModel : BaseModel
@@ -41,7 +44,10 @@ typedef void(^GiftLoadImageBlock)(UIImage *image);
 /// 左侧标签图片
 @property(nonatomic, copy)NSString *leftTagImage;
 @property(nonatomic, copy)HSGiftModelSelectedBlock selectedChangedCallback;
+@property(nonatomic, strong)GiftItemDetailModel *details;
 
+@property(nonatomic, assign)BOOL isEmptyModel;
+@property(nonatomic, assign)BOOL isDanmu;
 /// 加载webp
 - (void)loadWebp:(nullable GiftLoadImageBlock)result;
 @end

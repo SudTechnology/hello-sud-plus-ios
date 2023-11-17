@@ -49,6 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isGameWait;
 /// 首个游戏
 @property (nonatomic, strong)HSGameItem *firstGame;
+/// 重用头id
+- (NSString *)headIdentifier;
+/// 重用cell
+- (NSString *)reuseCell;
 @end
 
 /// 查询游戏列表Model

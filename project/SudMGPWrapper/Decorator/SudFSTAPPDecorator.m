@@ -29,20 +29,20 @@
 }
 
 - (void)addNotification {
-    NSNotificationCenter* defaultCenter = [NSNotificationCenter defaultCenter];
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter removeObserver:self];
     // 维护游戏进入前后台状态
     [defaultCenter addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [defaultCenter addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
-- (void)applicationDidEnterBackground:(NSNotification*)notification {
+- (void)applicationDidEnterBackground:(NSNotification *)notification {
     if (_iSudFSTAPP) {
         [_iSudFSTAPP pauseMG];
     }
 }
 
-- (void)applicationWillEnterForeground:(NSNotification*)notification {
+- (void)applicationWillEnterForeground:(NSNotification *)notification {
     if (_iSudFSTAPP) {
         [_iSudFSTAPP playMG];
     }
@@ -57,6 +57,11 @@
 /// 暂停游戏
 - (void)pauseMG {
     [self.iSudFSTAPP pauseMG];
+}
+
+/// 重新加载游戏
+- (void)reLoadMG {
+    [self.iSudFSTAPP reloadMG];
 }
 
 - (void)destroyMG {
@@ -124,7 +129,7 @@
 
 /// 结束游戏
 - (void)notifyAppCommonSelfEnd {
-    
+
     [self notifyStateChange:APP_COMMON_SELF_END dataJson:@{}.mj_JSONString];
 }
 
@@ -210,7 +215,7 @@
 /// 设置游戏中的AI玩家（2022-05-11新增） APP_COMMON_GAME_ADD_AI_PLAYERS
 /// @param appCommonGameAddAiPlayersModel  配置信息
 - (void)notifyAppCommonGameAddAIPlayers:(AppCommonGameAddAIPlayersModel *)appCommonGameAddAiPlayersModel {
-    
+
     NSString *jsonStr = [appCommonGameAddAiPlayersModel mj_JSONString];
     [self notifyStateChange:APP_COMMON_GAME_ADD_AI_PLAYERS dataJson:jsonStr];
 }
@@ -245,7 +250,7 @@
 /// @param dataJson 需传递的json
 - (void)notifyStateChange:(NSString *)state dataJson:(NSString *)dataJson {
     [self.iSudFSTAPP notifyStateChange:state dataJson:dataJson listener:^(int retCode, const NSString *retMsg, const NSString *dataJson) {
-        NSLog(@"ISudFSMMG:notifyStateChange:statte=%@ retCode=%@ retMsg=%@ dataJson=%@", state, @(retCode), retMsg, dataJson);
+        NSLog(@"ISudFSMMG:notifyStateChange:state=%@ retCode=%@ retMsg=%@ dataJson=%@", state, @(retCode), retMsg, dataJson);
     }];
 }
 
@@ -278,6 +283,47 @@
 - (void)notifyAppCommonGameSendBurstWord:(AppCommonGameSendBurstWord *)model {
     [self notifyStateChange:APP_COMMON_GAME_SEND_BURST_WORD dataJson:model.mj_JSONString];
 }
+
+/// app通知游戏玩家所持有的道具卡(大富翁) APP_COMMON_GAME_PLAYER_MONOPOLY_CARDS
+- (void)notifyAppCommonGamePlayerMonopolyCards:(AppCommonGamePlayerMonopolyCards *)model {
+    [self notifyStateChange:APP_COMMON_GAME_PLAYER_MONOPOLY_CARDS dataJson:model.mj_JSONString];
+}
+
+/// app通知游戏获取到道具卡（大富翁） APP_COMMON_GAME_SHOW_MONOPOLY_CARD_EFFECT
+- (void)notifyAppCommonGameShowMonopolyCardEffect:(AppCommonGameShowMonopolyCardEffect *)model {
+    [self notifyStateChange:APP_COMMON_GAME_SHOW_MONOPOLY_CARD_EFFECT dataJson:model.mj_JSONString];
+}
+
+/// app 通知游戏点赞玩家（2022-11-19 增加，当前支持你画我猜，你说我猜，友尽闯关）APP_COMMON_SELF_CLICK_GOOD
+- (void)notifyAppCommonSelfClickGood:(AppCommonSelfClickGood *)model {
+    [self notifyStateChange:APP_COMMON_SELF_CLICK_GOOD dataJson:model.mj_JSONString];
+}
+
+/// app 通知游戏扔大便玩家（2022-11-19 增加，当前支持你画我猜，你说我猜，友尽闯关）APP_COMMON_SELF_CLICK_POOP
+- (void)notifyAppCommonSelfClickPoop:(AppCommonSelfClickPoop *)model {
+    [self notifyStateChange:APP_COMMON_SELF_CLICK_POOP dataJson:model.mj_JSONString];
+}
+
+/// app 通知游戏设置 FPS APP_COMMON_GAME_FPS
+- (void)notifyAppCommonGameFps:(AppCommonGameFps *)model {
+    [self notifyStateChange:APP_COMMON_GAME_FPS dataJson:model.mj_JSONString];
+}
+
+/// app 通知游戏设置玩法（只支持 德州 pro 和 teenpattipro）APP_COMMON_GAME_SETTINGS
+- (void)notifyAppCommonGameSettings:(AppCommonGameSettings *)model {
+    [self notifyStateChange:APP_COMMON_GAME_SETTINGS dataJson:model.mj_JSONString];
+}
+
+/// app 通知游返回大厅（当前支持umo）APP_COMMON_GAME_BACK_LOBBY
+- (void)notifyAppCommonGameBackLobby:(AppCommonGameBackLobby *)model {
+    [self notifyStateChange:APP_COMMON_GAME_BACK_LOBBY dataJson:model.mj_JSONString];
+}
+
+/// app通知游戏定制UI配置表 (支持ludo和五子棋) APP_COMMON_GAME_UI_CUSTOM_CONFIG
+- (void)notifyAppCommonGameUiCustomConfig:(AppCommonGameUiCustomConfig *)model {
+    [self notifyStateChange:APP_COMMON_GAME_UI_CUSTOM_CONFIG dataJson:model.mj_JSONString];
+}
+
 #pragma mark - 互动礼物
 
 /// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG
@@ -420,5 +466,44 @@
 /// 排在自己前后的玩家数据 APP_BASEBALL_TEXT_CONFIG
 - (void)notifyAppBaseballTextConfig:(AppBaseballTextConfigModel *)model {
     [self notifyStateChange:APP_BASEBALL_TEXT_CONFIG dataJson:model.mj_JSONString];
+}
+
+#pragma mark - 3d语聊房
+
+/// 设置房间配置 APP_CUSTOM_CR_SET_ROOM_CONFIG
+- (void)notifyAppCustomCrSetRoomConfig:(AppCustomCrSetRoomConfigModel *)model {
+    [self notifyStateChange:APP_CUSTOM_CR_SET_ROOM_CONFIG dataJson:model.mj_JSONString];
+}
+
+/// 设置主播位数据 APP_CUSTOM_CR_SET_SEATS
+- (void)notifyAppCustomCrSetSeats:(AppCustomCrSetSeatsModel *)model {
+    [self notifyStateChange:APP_CUSTOM_CR_SET_SEATS dataJson:model.mj_JSONString];
+}
+
+/// 播放收礼效果 APP_CUSTOM_CR_PLAY_GIFT_EFFECT
+- (void)notifyAppCustomCrPlayGiftEffect:(AppCustomCrPlayGiftEffectModel *)model {
+    [self notifyStateChange:APP_CUSTOM_CR_PLAY_GIFT_EFFECT dataJson:model.mj_JSONString];
+}
+
+/// 通知播放爆灯特效 APP_CUSTOM_CR_SET_LIGHT_FLASH
+- (void)notifyAppCustomCrSetLightFlash:(AppCustomCrSetLightFlashModel *)model {
+    [self notifyStateChange:APP_CUSTOM_CR_SET_LIGHT_FLASH dataJson:model.mj_JSONString];
+}
+
+
+/// 通知主播播放指定动作 APP_CUSTOM_CR_PLAY_ANIM
+- (void)notifyAppCustomCrPlayAnim:(AppCustomCrPlayAnimModel *)model {
+    [self notifyStateChange:APP_CUSTOM_CR_PLAY_ANIM dataJson:model.mj_JSONString];
+
+}
+
+/// 通知麦浪值变化 APP_CUSTOM_CR_MICPHONE_VALUE_SEAT
+- (void)notifyAppCustomCrMicphoneValueSeat:(AppCustomCrMicphoneValueSeatModel *)model {
+    [self notifyStateChange:APP_CUSTOM_CR_MICPHONE_VALUE_SEAT dataJson:model.mj_JSONString];
+}
+
+/// 通知暂停或恢复立方体自转 APP_CUSTOM_CR_PAUSE_ROTATE
+- (void)notifyAppCustomCrPauseRotate:(AppCustomCrPauseRotateModel *)model {
+    [self notifyStateChange:APP_CUSTOM_CR_PAUSE_ROTATE dataJson:model.mj_JSONString];
 }
 @end

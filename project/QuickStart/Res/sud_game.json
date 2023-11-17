@@ -119,4 +119,46 @@
         "gamePic": "dice.jpg",
         "gameRoomPic": "ic_dhs.png"
     }
+    
+    ,
+    {
+        "gameName": "桌球",
+        "gameId": 1582551621189419010,
+        "gamePic": "zq.jpg",
+        "gameRoomPic": "ic_zq.png"
+    }
+    ,
+    {
+        "gameName": "连线激斗",
+        "gameId": 1572529757165293569,
+        "gamePic": "lxjd.jpg",
+        "gameRoomPic": "ic_lxjd.png"
+    }
+    ,
+    {
+        "gameName": "麻将对对碰",
+        "gameId": 1559030313895714818,
+        "gamePic": "mjddp.jpg",
+        "gameRoomPic": "ic_mjddp.png"
+    }
+    ,
+    {
+        "gameName": "科学计算器",
+        "gameId": 1564814666005299201,
+        "gamePic": "kxjsq.jpg",
+        "gameRoomPic": "ic_kxjsq.png"
+    }
+    ,
+    {
+        "gameName": "疯狂购物",
+        "gameId": 1564814818015264770,
+        "gamePic": "fkgw.jpg",
+        "gameRoomPic": "ic_fkgw.png"
+    },
+    {
+        "gameName": "魔法大乐斗",
+        "gameId": 1585556944972623874,
+        "gamePic": "mfdld.jpg",
+        "gameRoomPic": "ic_mfdld.png"
+    }
 ]

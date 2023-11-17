@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "AudioUserModel.h"
 #import "RoomCmd.h"
+
 NS_ASSUME_NONNULL_BEGIN
 /// 最大cell内容宽度
 #define MAX_CELL_CONTENT_WIDTH 260
@@ -16,10 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RoomBaseCMDModel : BaseModel
 
 /// 指令值
-@property(nonatomic, assign)NSInteger cmd;
+@property(nonatomic, assign) NSInteger cmd;
 
 /// 发送者信息
-@property(nonatomic, strong)AudioUserModel *sendUser;
+@property(nonatomic, strong) AudioUserModel *sendUser;
 
 /// 获取model对应cell名称
 - (NSString *)cellName;
@@ -32,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 触发计算属性
 - (void)prepare;
+
 /// 配置消息
 /// @param cmd 消息指令
 - (void)configBaseInfoWithCmd:(NSInteger)cmd;
@@ -43,6 +45,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// 解码服务器返回的model
 /// @param keyValues keyValues json对象
 + (instancetype)fromServerJSON:(NSString *)keyValues;
+
+/// 解码服务器返回的model
+/// @param keyValues keyValues json对象
++ (id)parseInstance:(Class)cls fromServerJSON:(NSString *)keyValues;
+@end
+
+/// 跨房PK游戏结果指令 model
+@interface RoomGameMonopolyCardGiftNotifyCMDModel : RoomBaseCMDModel
+@property(nonatomic, assign) NSInteger type;// 1: 重摇卡， 2：免租卡， 3：指定点数卡
+@property(nonatomic, assign) NSInteger senderUid;// 发送者uid
+@property(nonatomic, assign) NSArray<NSNumber *> *receiverUidList;// 接收者用户id列表
+@property(nonatomic, assign) NSInteger amount;
 @end
 
 NS_ASSUME_NONNULL_END

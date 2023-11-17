@@ -7,8 +7,27 @@
 
 #import "DTUIView+Extension.h"
 #import <objc/runtime.h>
+typedef void(^TapBlock)(UITapGestureRecognizer *tap);
 
 @implementation UIView (DTViewExtension)
+
+static char TapTag;
+
+/// 点击手势
+/// @param clickBlock
+- (void)dt_onTap:(void (^)(UITapGestureRecognizer *tap))clickBlock {
+
+    objc_setAssociatedObject(self, &TapTag, clickBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dt_on_tap:)];
+    [self addGestureRecognizer:tap];
+}
+
+- (void)dt_on_tap:(id)sender {
+    TapBlock blockAction = (TapBlock) objc_getAssociatedObject(self, &TapTag);
+    if (blockAction) {
+        blockAction(self);
+    }
+}
 
 + (Class)layerClass {
     return [CAGradientLayer class];

@@ -10,7 +10,6 @@
 
 @interface RoomOperatorView ()
 
-
 @end
 
 @implementation RoomOperatorView
@@ -45,11 +44,11 @@
 
 - (void)dtConfigEvents {
     WeakSelf
-    [[NSNotificationCenter defaultCenter]addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:NTF_MIC_CHANGED object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
         RoomCmdUpMicModel *msgModel = note.userInfo[@"msgModel"];
-        if ([msgModel isKindOfClass:RoomCmdUpMicModel.class] ) {
+        if ([msgModel isKindOfClass:RoomCmdUpMicModel.class]) {
             // 操作麦位与当前符合
-            if ([AppService.shared.login.loginUserInfo isMeByUserID: msgModel.sendUser.userID]) {
+            if ([AppService.shared.login.loginUserInfo isMeByUserID:msgModel.sendUser.userID]) {
                 if (msgModel.cmd == CMD_DOWN_MIC_NOTIFY) {
                     // 下麦
                     weakSelf.voiceBtnState = VoiceBtnStateTypeNormal;
@@ -116,6 +115,19 @@
     }
 }
 
+/// 根据场景更新展示样式
+/// @param sceneType
+- (void)updateForSceneType:(SceneType)sceneType {
+    switch (sceneType) {
+        case SceneTypeAudio3D: {
+
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 - (UIButton *)voiceUpBtn {
     if (!_voiceUpBtn) {
         _voiceUpBtn = [[UIButton alloc] init];
@@ -124,7 +136,7 @@
         [_voiceUpBtn setTitleColor:[UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
         _voiceUpBtn.titleLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
         _voiceUpBtn.backgroundColor = UIColor.darkGrayColor;
-        _voiceUpBtn.layer.cornerRadius = 30/2;
+        _voiceUpBtn.layer.cornerRadius = 30 / 2;
         [_voiceUpBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 0)];
         [_voiceUpBtn addTarget:self action:@selector(onBtnVoice:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -138,10 +150,10 @@
         _inputLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:0.5];
         _inputLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
         _inputLabel.backgroundColor = [UIColor dt_colorWithHexString:@"#000000" alpha:0.4];
-        _inputLabel.layer.cornerRadius = 32/2;
+        _inputLabel.layer.cornerRadius = 32 / 2;
         _inputLabel.layer.masksToBounds = true;
         [_inputLabel setUserInteractionEnabled:true];
-        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInputEvent:)];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInputEvent:)];
         [_inputLabel addGestureRecognizer:tapGesture];
     }
     return _inputLabel;
@@ -170,7 +182,7 @@
     for (AudioRoomMicModel *m in arr) {
         m.isSelected = NO;
     }
-    [[NSNotificationCenter defaultCenter]postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil];
 }
 
 - (void)tapInputEvent:(UITapGestureRecognizer *)gesture {

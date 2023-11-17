@@ -54,3 +54,19 @@ Pod::Spec.new do |s|
       ss.dependency 'SudMGP', '1.3.5'
     end
 end
+
+## 备注：
+# 1. 本地依赖SDK时
+# 屏蔽直接依赖 ss.dependency 'SudMGPxx', 'x.x.x.x'，放开
+# ss.vendored_frameworks = [
+#   'SudMGPSDK/SudMGP.xcframework'
+# ]
+#
+# 2. 本地远程依赖SDK
+# 屏蔽本地依赖SDK
+# ss.vendored_frameworks = [
+#   'SudMGPSDK/SudMGP.xcframework'
+# ]
+# 放开远程依赖：ss.dependency 'SudMGPxx', 'x.x.x.x'
+
+

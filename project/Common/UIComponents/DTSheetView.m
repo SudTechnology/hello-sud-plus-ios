@@ -53,6 +53,13 @@
         CGRect frame = [v convertRect:v.bounds toView:self];
         BOOL contains = CGRectContainsPoint(frame, point);
         if (!contains) {
+            UIView *testNextView = [super hitTest:point withEvent:event];
+            if ([testNextView isKindOfClass:BaseView.class]) {
+                if (((BaseView *)testNextView).dtNeedAcceptEvent) {
+                    return testNextView;
+                }
+            }
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hs_close];
             });

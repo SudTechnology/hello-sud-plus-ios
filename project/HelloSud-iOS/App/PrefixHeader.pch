@@ -32,7 +32,7 @@
 #import <BDAlphaPlayer/BDAlphaPlayer.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <JXCategoryView/JXCategoryView.h>
-
+//#import <XHPageControl/XHPageControl.h>
 #import "CommonHeader.h"
 #import "DTSheetView.h"
 #import "DTAlertView.h"
@@ -40,6 +40,7 @@
 #import "DTUIView+Extension.h"
 #import "DTNSArray+Masonry.h"
 #import "NSString+DTNSString.h"
+#import "UIButton+DTExtension.h"
 
 
 //@import CocoaLumberjack;

@@ -23,20 +23,6 @@
     }                         failure:failure];
 }
 
-/// 发送礼物
-/// @param roomId roomId
-/// @param giftId giftId
-/// @param finished finished
-/// @param failure failure
-+ (void)reqSendGift:(NSString *)roomId giftId:(NSString *)giftId amount:(NSInteger)amount price:(NSInteger)price type:(NSInteger)type finished:(void (^)(void))finished failure:(void (^)(NSError *error))failure {
-    NSDictionary *dicParam = @{@"roomId": roomId, @"giftId": giftId, @"amount": @(amount), @"giftConfigType": @(type), @"giftPrice": @(price)};
-    [HSHttpService postRequestWithURL:kINTERACTURL(@"gift/send/v1") param:dicParam respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
-        if (finished) {
-            finished();
-        }
-    }                         failure:failure];
-}
-
 /// 拉取快捷弹幕列表
 /// @param gameId gameId
 /// @param finished finished

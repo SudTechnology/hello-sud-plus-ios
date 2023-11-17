@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #import "SudMGPMGRocketState.h"
 #import "SudMGPMGBaseballState.h"
+#import "SudMGPMGAudio3dState.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -88,7 +89,43 @@ static NSString *MG_COMMON_GAME_PIECE_ARRIVE_END = @"mg_common_game_piece_arrive
 static NSString *MG_COMMON_GAME_PLAYER_MANAGED_STATE = @"mg_common_game_player_managed_state";
 /// 游戏通知app爆词的内容
 static NSString *MG_COMMON_GAME_SEND_BURST_WORD = @"mg_common_game_send_burst_word";
+/// 游戏向app发送获取玩家持有的道具卡（只支持大富翁）
+static NSString *MG_COMMON_GAME_PLAYER_MONOPOLY_CARDS = @"mg_common_game_player_monopoly_cards";
 
+///  游戏向app发送玩家实时排名（只支持怪物消消乐）
+static NSString *MG_COMMON_GAME_PLAYER_RANKS = @"mg_common_game_player_ranks";
+/// 游戏向app发送玩家即时变化的单双牌（只支持okey101）
+static NSString *MG_COMMON_GAME_PLAYER_PAIR_SINGULAR = @"mg_common_game_player_pair_singular";
+/// 游戏向app发送玩家实时积分（只支持怪物消消乐）
+static NSString *MG_COMMON_GAME_PLAYER_SCORES = @"mg_common_game_player_scores";
+/// 游戏通知 app 下发定制 ui 配置表（支持ludo和五子棋）
+static NSString *MG_COMMON_GAME_UI_CUSTOM_CONFIG = @"mg_common_game_ui_custom_config";
+/// 游戏通知 app 钱币不足（只支持德州 pro，teenpatti pro）
+static NSString *MG_COMMON_GAME_MONEY_NOT_ENOUGH = @"mg_common_game_money_not_enough";
+/// 游戏通知 app 进行玩法设置（只支持德州 pro，teenpatti pro）
+static NSString *MG_COMMON_GAME_SETTINGS = @"mg_common_game_settings";
+/// 游戏通知 app 当前游戏的设置信息（只支持德州 pro，teenpatti pro）
+static NSString *MG_COMMON_GAME_RULE = @"mg_common_game_rule";
+/// 游戏通知 app 是否要开启带入积分（只支持 teenpattipro 与 德州 pro）
+static NSString *MG_COMMON_GAME_IS_APP_CHIP = @"mg_common_game_is_app_chip";
+/// 游戏通知 app 退出游戏（只支持 teenpattipro 与 德州 pro）
+static NSString *MG_COMMON_SELF_CLICK_EXIT_GAME_BTN = @"mg_common_self_click_exit_game_btn";
+/// 游戏通知 app 玩家头像的坐标（支持 ludo, 飞镖, umo, 多米诺, teenpatti, texasholdem）
+static NSString *MG_COMMON_GAME_PLAYER_ICON_POSITION = @"mg_common_game_player_icon_position";
+/// 游戏通知 app 玩家颜色（支持友尽闯关 与 ludo）
+static NSString *MG_COMMON_GAME_PLAYER_COLOR = @"mg_common_game_player_color";
+/// 游戏通知 app 因玩家逃跑导致游戏结束（只支持友尽闯关）
+static NSString *MG_COMMON_GAME_OVER_TIP = @"mg_common_game_over_tip";
+/// 游戏通知 app 最坑队友（只支持友尽闯关）
+static NSString *MG_COMMON_WORST_TEAMMATE = @"mg_common_worst_teammate";
+/// 游戏通知 app 游戏弹框
+static NSString *MG_COMMON_ALERT = @"mg_common_alert";
+/// 游戏通知 app 游戏 FPS(仅对碰碰，多米诺骨牌，飞镖达人生效)
+static NSString *MG_COMMON_GAME_FPS = @"mg_common_game_fps";
+/// 游戏通知 app 玩家被点赞(仅对你画我猜有效)
+static NSString *MG_COMMON_SELF_CLICK_GOOD = @"mg_common_self_click_good";
+/// 游戏通知 app 玩家被扔便便(仅对你画我猜有效)
+static NSString *MG_COMMON_SELF_CLICK_POOP = @"mg_common_self_click_poop";
 
 #pragma mark - 通用状态-玩家
 /// 加入状态
@@ -277,9 +314,9 @@ static NSString *MG_COMMON_GAME_DISCO_ACTION_END = @"mg_common_game_disco_action
 
 #pragma mark - MG_COMMON_GAME_STATE
 typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
-MGCommonGameStateTypeIdle = 0, // 空闲状态
-MGCommonGameStateTypeLoading = 1, // 所有玩家都准备好
-MGCommonGameStateTypePlaying = 2, // 正在游戏中
+    MGCommonGameStateTypeIdle = 0, // 空闲状态
+    MGCommonGameStateTypeLoading = 1, // 所有玩家都准备好
+    MGCommonGameStateTypePlaying = 2, // 正在游戏中
 };
 
 /// 通用状态-游戏: 游戏状态
@@ -689,6 +726,134 @@ MGCommonGameStateTypePlaying = 2, // 正在游戏中
 @interface MgCommonGameSendBurstWordModel : NSObject
 /// 爆词
 @property(nonatomic, strong)NSString *text;
+@end
+
+#pragma mark - MG_COMMON_GAME_PLAYER_MONOPOLY_CARDS
+@interface MgCommonGamePlayerMonopolyCardsModel : NSObject
+
+@end
+
+
+#pragma mark - MG_COMMON_GAME_PLAYER_RANKS
+@interface MgCommonGamePlayerRanksItem : NSObject
+/// 玩家id
+@property(nonatomic, strong)NSString *uid;
+/// 排名
+@property(nonatomic, assign)NSInteger rank;
+@end
+
+@interface MgCommonGamePlayerRanksModel : NSObject
+@property(nonatomic, strong)NSArray<MgCommonGamePlayerRanksItem *> *ranks;
+@end
+
+#pragma mark - MG_COMMON_GAME_PLAYER_PAIR_SINGULAR
+@interface MgCommonGamePlayerPairSingularItem : NSObject
+/// 玩家id
+@property(nonatomic, strong)NSString *uid;
+/// pair: 1 双，0 单
+@property(nonatomic, assign)NSInteger pair;
+@end
+
+@interface MgCommonGamePlayerPairSingularModel : NSObject
+@property(nonatomic, strong)NSArray<MgCommonGamePlayerPairSingularItem *> *pairs;
+@end
+
+#pragma mark - MG_COMMON_GAME_PLAYER_SCORES
+@interface MgCommonGamePlayerScoresItem : NSObject
+/// 玩家id
+@property(nonatomic, strong)NSString *uid;
+/// 分值
+@property(nonatomic, assign)NSInteger score;
+@end
+
+@interface MgCommonGamePlayerScoresModel : NSObject
+@property(nonatomic, strong)NSArray<MgCommonGamePlayerScoresItem *> *scores;
+@end
+
+#pragma mark - MG_COMMON_GAME_UI_CUSTOM_CONFIG
+@interface MgCommonGameUiCustomConfigModel:NSObject
+@end
+
+#pragma mark - MG_COMMON_GAME_MONEY_NOT_ENOUGH
+@interface MgCommonGameMoneyNotEnoughModel:NSObject
+@end
+#pragma mark - MG_COMMON_GAME_SETTINGS
+@interface MgCommonGameSettingsModel:NSObject
+@end
+#pragma mark - MG_COMMON_GAME_RULE
+@interface MgCommonGameRuleGameModeModel:NSObject
+@property(nonatomic, assign)NSInteger smallBlind;// 小盲
+@property(nonatomic, assign)NSInteger ante;// 前注
+@property(nonatomic, assign)NSInteger isStraddle;// 0：关闭，1自由，2强制
+@property(nonatomic, assign)NSInteger sBuyIn;// 带入值/最小带入配置
+@property(nonatomic, assign)NSInteger bBuyIn;// 最大带入，无限（0）
+@property(nonatomic, assign)NSInteger isAutoStart; // 是否自动开始
+@property(nonatomic, assign)NSInteger tableDuration;// 牌桌时长配置（小时）
+@property(nonatomic, assign)NSInteger thinkTime;// 思考时间（秒）
+
+@property(nonatomic, assign)NSInteger darkCard;// 暗牌回合
+@property(nonatomic, assign)NSInteger potLimit;// 最大带入
+@property(nonatomic, assign)NSInteger round;// 最大回合
+@property(nonatomic, assign)NSInteger singleLimit;// 单注限
+
+@end
+@interface MgCommonGameRuleModel:NSObject
+@property(nonatomic, strong)MgCommonGameRuleGameModeModel * gameMode;
+@end
+#pragma mark - MG_COMMON_GAME_IS_APP_CHIP
+@interface MgCommonGameIsAppChipModel:NSObject
+@property(nonatomic, assign)NSInteger isAppChip;// 0:不开启，1：开启
+@end
+#pragma mark - MG_COMMON_SELF_CLICK_EXIT_GAME_BTN
+@interface MgCommonSelfClickExitGameBtnModel:NSObject
+
+@end
+#pragma mark - MG_COMMON_GAME_PLAYER_ICON_POSITION
+@interface MgFrameRectModel:NSObject
+@property(nonatomic, assign)NSInteger x;
+@property(nonatomic, assign)NSInteger y;
+@property(nonatomic, assign)NSInteger width;
+@property(nonatomic, assign)NSInteger height;
+@end
+
+@interface MgCommonGamePlayerIconPositionModel:NSObject
+@property(nonatomic, strong)NSString *uid; // 玩家id
+@property(nonatomic, strong)MgFrameRectModel *position; // 头像坐标及大小
+@end
+
+#pragma mark - MG_COMMON_GAME_PLAYER_COLOR
+@interface MgCommonGamePlayerColorItem:NSObject
+@property(nonatomic, strong)NSString *uid;
+@property(nonatomic, assign)NSInteger color;
+@end
+
+@interface MgCommonGamePlayerColorModel:NSObject
+@property(nonatomic, strong)NSArray<MgCommonGamePlayerColorItem *> *players;
+
+@end
+#pragma mark - MG_COMMON_GAME_OVER_TIP
+@interface MgCommonGameOverTipModel:NSObject
+@property(nonatomic, strong)NSArray<NSString *> *uids;
+@end
+#pragma mark - MG_COMMON_WORST_TEAMMATE
+@interface MgCommonWorstTeammateModel:NSObject
+@property(nonatomic, strong)NSString *uid;
+@end
+#pragma mark - MG_COMMON_ALERT
+@interface MgCommonAlertModel:NSObject
+@property(nonatomic, strong)NSString *state;// show:显示，close:关闭
+@end
+#pragma mark - MG_COMMON_GAME_FPS
+@interface MgCommonGameFpsModel:NSObject
+@property(nonatomic, assign)NSInteger fps;
+@end
+#pragma mark - MG_COMMON_SELF_CLICK_GOOD
+@interface MgCommonSelfClickGoodModel:NSObject
+
+@end
+#pragma mark - MG_COMMON_SELF_CLICK_POOP
+@interface MgCommonSelfClickPoopModel:NSObject
+
 @end
 
 NS_ASSUME_NONNULL_END

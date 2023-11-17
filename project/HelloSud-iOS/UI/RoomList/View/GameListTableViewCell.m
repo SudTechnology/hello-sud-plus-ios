@@ -41,6 +41,7 @@
                 @(SceneTypeVertical): @"#00CBD2",
                 @(SceneTypeDisco): @"#DD01CB",
                 @(SceneTypeCrossApp): @"#0D0DEB",
+                @(SceneTypeAudio3D): @"#258cfb",
         };
     }
     NSString *colorStr = dicSencen[@(sceneType)];

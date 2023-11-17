@@ -10,12 +10,14 @@
 #import "RoomGiftContentView.h"
 #import "../../Base/VC/BaseSceneViewController+IM.h"
 #import "GiftRocketEnterView.h"
+#import "GiftNumSelectView.h"
 
 @interface RoomGiftPannelView () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property(nonatomic, strong) GiftRocketEnterView *rocketEnterView;
 @property(nonatomic, strong) UIView *topView;
 @property(nonatomic, strong) UILabel *sendToLabel;
 @property(nonatomic, strong) YYLabel *coinLabel;
+@property(nonatomic, strong) UIButton *addCoinBtn;
 @property(nonatomic, strong) UIButton *checkAllBtn;
 @property(nonatomic, strong) UIButton *sendBtn;
 @property(nonatomic, strong) UIView *sendView;
@@ -26,6 +28,10 @@
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray<AudioRoomMicModel *> *userDataList;
 @property(nonatomic, assign) BOOL isFirstSelected;
+@property(nonatomic, weak) GiftNumSelectView *numSelectView;
+@property(nonatomic, weak) UILabel *numLabel;
+@property(nonatomic, assign) NSInteger giftNum;
+
 
 /// 选中用户状态缓存
 @property(nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *selectedCacheMap;
@@ -35,6 +41,7 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
+    self.giftNum = 1;
     [self reqCoinData];
     [self setPartRoundCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:12];
 }
@@ -49,6 +56,7 @@
     [self.topView addSubview:self.collectionView];
     [self addSubview:self.giftContentView];
     [self addSubview:self.coinLabel];
+    [self addSubview:self.addCoinBtn];
     [self addSubview:self.sendView];
 }
 
@@ -97,7 +105,9 @@
     [self.sendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.giftContentView.mas_bottom).offset(24);
         make.trailing.mas_equalTo(-16);
-        make.size.mas_equalTo(CGSizeMake(56 + 56, 32));
+        make.height.equalTo(@32);
+        make.width.greaterThanOrEqualTo(@0);
+//        make.size.mas_equalTo(CGSizeMake(56 + 56, 32));
         make.bottom.mas_equalTo(-kAppSafeBottom - 8);
     }];
     [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -105,6 +115,13 @@
         make.height.equalTo(@20);
         make.width.greaterThanOrEqualTo(@0);
         make.centerY.equalTo(self.sendView);
+    }];
+    [self.addCoinBtn dt_cornerRadius:8];
+    [self.addCoinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.leading.equalTo(self.coinLabel.mas_trailing).offset(5);
+       make.height.equalTo(@16);
+       make.centerY.equalTo(self.coinLabel);
+       make.width.greaterThanOrEqualTo(@50);
     }];
 }
 
@@ -116,6 +133,7 @@
     }];
 
     self.giftContentView.didSelectedCallback = ^(GiftModel *giftModel) {
+        [weakSelf handleCloseSelectNumView];
         if (giftModel.giftID == 9) {
             // 定制火箭
             if (!weakSelf.showRocket) {
@@ -139,6 +157,40 @@
             weakSelf.enterRocketBlock();
         }
     };
+    [self.sendView dt_onTap:^(UITapGestureRecognizer *tap) {
+        [weakSelf showGiftNumView];
+    }];
+
+    [self.addCoinBtn dt_onClick:^(UIButton *sender) {
+        [UserService.shared reqAddUserCoin:^(int64_t i) {
+            [weakSelf updateCoin:i];
+        } fail:^(NSString *str) {
+            [ToastUtil show:str];
+        }];
+
+    }];
+}
+
+- (void)showGiftNumView {
+    if (self.numSelectView) {
+        [self handleCloseSelectNumView];
+        return;
+    }
+    GiftNumSelectView *v = GiftNumSelectView.new;
+    self.numSelectView = v;
+    [self addSubview:v];
+    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@71);
+        make.height.equalTo(@113);
+        make.bottom.equalTo(self.sendView.mas_top).offset(-10);
+        make.leading.equalTo(self.sendView).offset(-17);
+    }];
+    WeakSelf
+    v.numSelectedBlock = ^(NSInteger num) {
+        weakSelf.giftNum = num;
+        weakSelf.numLabel.text = [NSString stringWithFormat:@"x%@", @(num)];
+        [weakSelf handleCloseSelectNumView];
+    };
 }
 
 /// 过滤麦位
@@ -146,10 +198,18 @@
 /// @return
 - (BOOL)skipMicModel:(AudioRoomMicModel *)micModel {
     // 弹幕场景，送礼列表中只展示房主
-    if (kAudioRoomService.currentRoomVC.enterModel.sceneType == SceneTypeDanmaku && micModel.user.roleType != 1) {
+    BOOL fitSceneType = kAudioRoomService.currentRoomVC.enterModel.sceneType == SceneTypeDanmaku ||
+    kAudioRoomService.currentRoomVC.enterModel.sceneType == SceneTypeVertical;
+    
+    if (fitSceneType && micModel.user.roleType != 1) {
         return YES;
     }
     return NO;
+}
+
+- (void)setDefaultSelectedUserId:(NSString *)defaultSelectedUserId {
+    _defaultSelectedUserId = defaultSelectedUserId;
+    [self.selectedCacheMap removeAllObjects];
 }
 
 - (void)dtUpdateUI {
@@ -164,7 +224,7 @@
             }
 
             [userList addObject:m];
-            m.isSelected = NO;
+            m.isSelected = self.defaultSelectedUserId && [m.user.userID isEqualToString:self.defaultSelectedUserId] ? YES : NO;
             if (self.selectedCacheMap[m.user.userID]) {
                 m.isSelected = YES;
                 tempSelectedCacheMap[m.user.userID] = @(YES);
@@ -253,12 +313,15 @@
 
 - (void)onBtnSend:(UIButton *)sender {
 
+    [self handleCloseSelectNumView];
     NSMutableArray<AudioUserModel *> *arrWaitForSend = NSMutableArray.new;
+
     for (AudioRoomMicModel *m in self.userDataList) {
         if (m.isSelected && m.user != nil) {
             [arrWaitForSend addObject:m.user];
         }
     }
+
     if (arrWaitForSend.count == 0) {
         [ToastUtil show:NSString.dt_select_person];
         return;
@@ -269,6 +332,12 @@
     }
     GiftModel *giftModel = self.giftContentView.didSelectedGift;
     if (giftModel.giftID == kRocketGiftID) {
+        if (self.giftNum > 1) {
+            [ToastUtil show:@"dt_rocket_limit_tip".dt_lan];
+            return;
+        }
+
+
         NSMutableArray<AudioRoomMicModel *> *toMicList = NSMutableArray.new;
         for (AudioRoomMicModel *m in self.userDataList) {
             if (m.isSelected && m.user != nil) {
@@ -277,17 +346,19 @@
         }
         [self handleRocketGift:giftModel toMicList:toMicList];
     } else {
-        for (AudioUserModel *user in arrWaitForSend) {
+        // 是否全麦
+        BOOL isAllSeat = arrWaitForSend.count == self.userDataList.count;
 
-            AudioUserModel *toUser = user;
-            RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 toUser:toUser];
-            giftMsg.type = giftModel.type;
-            giftMsg.giftUrl = giftModel.giftURL;
-            giftMsg.animationUrl = giftModel.animateURL;
-            giftMsg.giftName = giftModel.giftName;
+        RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:self.giftNum toUserList:arrWaitForSend];
+        giftMsg.type = giftModel.type;
+        giftMsg.giftUrl = giftModel.giftURL;
+        giftMsg.animationUrl = giftModel.animateURL;
+        giftMsg.giftName = giftModel.giftName;
+        giftMsg.isAllSeat = isAllSeat;
+//        [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
+        // 普通消息有限制字节，转为跨房指令
+        [kAudioRoomService.currentRoomVC sendCrossRoomMsg:giftMsg toRoomId:kAudioRoomService.currentRoomVC.roomID isAddToShow:YES finished:nil];
 
-            [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
-        }
     }
 }
 
@@ -356,6 +427,7 @@
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel": m}];
     [self updateAllSelectedState];
+    [self handleCloseSelectNumView];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -369,6 +441,13 @@
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_SEND_GIFT_USER_CHANGED object:nil userInfo:@{@"micModel": m}];
     [self updateAllSelectedState];
+}
+
+- (void)handleCloseSelectNumView {
+    if (self.numSelectView) {
+        [self.numSelectView removeFromSuperview];
+        self.numSelectView = nil;
+    }
 }
 
 
@@ -463,6 +542,19 @@
     return _sendBtn;
 }
 
+- (UIButton *)addCoinBtn {
+    if (!_addCoinBtn) {
+        _addCoinBtn = [[UIButton alloc] init];
+        [_addCoinBtn setTitle:@"dt_add_coin".dt_lan forState:UIControlStateNormal];
+        [_addCoinBtn setTitleColor:[UIColor dt_colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        _addCoinBtn.titleLabel.font = UIFONT_BOLD(8);
+        _addCoinBtn.backgroundColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
+        _addCoinBtn.hidden = YES;// 3d语聊房没有部署先隐藏
+    }
+    return _addCoinBtn;
+}
+
+
 - (UIView *)sendView {
     if (!_sendView) {
         _sendView = [[UIView alloc] init];
@@ -475,7 +567,7 @@
         numLabel.text = @"x1";
         numLabel.textColor = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
         numLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
-
+        self.numLabel = numLabel;
         UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"room_gift_send_num"]];
         [_sendView addSubview:numLabel];
         [_sendView addSubview:iconView];
@@ -490,9 +582,10 @@
             make.leading.mas_equalTo(numLabel.mas_trailing).offset(5);
             make.centerY.mas_equalTo(_sendView);
             make.size.mas_equalTo(CGSizeMake(12, 12));
+            make.trailing.equalTo(self.sendBtn.mas_leading).offset(-8);
         }];
         [self.sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.mas_equalTo(54);
+//            make.leading.mas_equalTo(54);
             make.top.trailing.bottom.mas_equalTo(_sendView);
             make.width.mas_equalTo(56);
         }];

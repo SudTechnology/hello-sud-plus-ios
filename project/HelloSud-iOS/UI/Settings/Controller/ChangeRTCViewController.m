@@ -28,8 +28,8 @@
 - (void)configData {
 
     NSMutableArray *arr = [[NSMutableArray alloc]init];
-    [arr addObject:[ChangeRTCModel makeModel:NSString.dt_settings_zego rtcConfig:AppService.shared.configModel.zegoCfg]];
     [arr addObject:[ChangeRTCModel makeModel:NSString.dt_settings_agora rtcConfig:AppService.shared.configModel.agoraCfg]];
+    [arr addObject:[ChangeRTCModel makeModel:NSString.dt_settings_zego rtcConfig:AppService.shared.configModel.zegoCfg]];
     [arr addObject:[ChangeRTCModel makeModel:NSString.dt_settings_rong_cloud rtcConfig:AppService.shared.configModel.rongCloudCfg]];
     [arr addObject:[ChangeRTCModel makeModel:NSString.dt_settings_net_ease rtcConfig:AppService.shared.configModel.commsEaseCfg]];
     [arr addObject:[ChangeRTCModel makeModel:NSString.dt_settings_volcano rtcConfig:AppService.shared.configModel.volcEngineCfg]];

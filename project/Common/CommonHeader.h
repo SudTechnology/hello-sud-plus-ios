@@ -46,6 +46,7 @@ typedef void(^Int64Block)(int64_t);
 #import "DTNSError+Custom.h"
 #import "NSBundle+Language.h"
 #import "DTUIImage+Extension.h"
+#import "UIButton+DTExtension.h"
 
 /// Views
 #import "DTSheetView.h"

@@ -9,9 +9,7 @@
 #import "BaseTextView.h"
 
 @interface RoomInputView ()
-@property (nonatomic, strong) BaseTextView *textView;
-@property (nonatomic, strong) UIButton *sendBtn;
-@property (nonatomic, assign) CGFloat lineNumber;
+
 
 @end
 

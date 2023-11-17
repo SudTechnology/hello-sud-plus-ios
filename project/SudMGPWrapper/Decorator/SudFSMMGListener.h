@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param retCode 错误码，0成功
 /// @param progress [0, 100]
 /// 最低版本：v1.1.30.xx
--(void) onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress;
+- (void)onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress;
 
 
 #pragma mark - 通用状态-游戏
@@ -178,6 +178,61 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏通知app爆词的内容 MG_COMMON_GAME_SEND_BURST_WORD
 - (void)onGameMGCommonGameSendBurstWord:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameSendBurstWordModel *)model;
 
+/// 游戏向app发送获取玩家持有的道具卡（只支持大富翁） MG_COMMON_GAME_PLAYER_MONOPOLY_CARDS
+- (void)onGameMGPlayerMonopolyCards:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerMonopolyCardsModel *)model;
+
+///  游戏向app发送玩家实时排名（只支持怪物消消乐） MG_COMMON_GAME_PLAYER_RANKS
+- (void)onGameMGPlayerRanks:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerRanksModel *)model;
+
+/// 游戏向app发送玩家即时变化的单双牌（只支持okey101） MG_COMMON_GAME_PLAYER_PAIR_SINGULAR
+- (void)onGameMGPlayerPairSingular:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerPairSingularModel *)model;
+
+/// 游戏向app发送玩家实时积分（只支持怪物消消乐） MG_COMMON_GAME_PLAYER_SCORES
+- (void)onGameMGPlayerScores:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerScoresModel *)model;
+
+
+/// 游戏通知 app 下发定制 ui 配置表（支持ludo和五子棋）MG_COMMON_GAME_UI_CUSTOM_CONFIG
+- (void)onGameMGCommonGameUiCustomConfig:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameUiCustomConfigModel *)model;
+
+/// 游戏通知 app 钱币不足（只支持德州 pro，teenpatti pro）MG_COMMON_GAME_MONEY_NOT_ENOUGH
+- (void)onGameMGCommonGameMoneyNotEnough:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameMoneyNotEnoughModel *)model;
+
+/// 游戏通知 app 进行玩法设置（只支持德州 pro，teenpatti pro）MG_COMMON_GAME_SETTINGS
+- (void)onGameMGCommonGameSettings:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameSettingsModel *)model;
+
+/// 游戏通知 app 当前游戏的设置信息（只支持德州 pro，teenpatti pro）MG_COMMON_GAME_RULE
+- (void)onGameMGCommonGameRule:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameRuleModel *)model;
+
+/// 游戏通知 app 是否要开启带入积分（只支持 teenpattipro 与 德州 pro）MG_COMMON_GAME_IS_APP_CHIP
+- (void)onGameMGCommonGameIsAppChip:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameIsAppChipModel *)model;
+
+/// 游戏通知 app 退出游戏（只支持 teenpattipro 与 德州 pro）MG_COMMON_SELF_CLICK_EXIT_GAME_BTN
+- (void)onGameMGCommonSelfClickExitGameBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSelfClickExitGameBtnModel *)model;
+
+/// 游戏通知 app 玩家头像的坐标（支持 ludo, 飞镖, umo, 多米诺, teenpatti, texasholdem）MG_COMMON_GAME_PLAYER_ICON_POSITION
+- (void)onGameMgCommonGamePlayerIconPosition:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerIconPositionModel *)model;
+
+/// 游戏通知 app 玩家颜色（支持友尽闯关 与 ludo）MG_COMMON_GAME_PLAYER_COLOR
+- (void)onGameMgCommonGamePlayerColor:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerColorModel *)model;
+
+/// 游戏通知 app 因玩家逃跑导致游戏结束（只支持友尽闯关）MG_COMMON_GAME_OVER_TIP
+- (void)onGameMgCommonGameOverTip:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameOverTipModel *)model;
+
+/// 游戏通知 app 最坑队友（只支持友尽闯关）MG_COMMON_WORST_TEAMMATE
+- (void)onGameMgCommonWorstTeammate:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonWorstTeammateModel *)model;
+
+/// 游戏通知 app 游戏弹框 MG_COMMON_ALERT
+- (void)onGameMgCommonAlert:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonAlertModel *)model;
+
+/// 游戏通知 app 游戏 FPS(仅对碰碰，多米诺骨牌，飞镖达人生效) MG_COMMON_GAME_FPS
+- (void)onGameMgCommonGameFps:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameFpsModel *)model;
+
+/// 游戏通知 app 玩家被点赞(仅对你画我猜有效) MG_COMMON_SELF_CLICK_GOOD
+- (void)onGameMgCommonSelfClickGood:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSelfClickGoodModel *)model;
+
+/// 游戏通知 app 玩家被扔便便(仅对你画我猜有效) MG_COMMON_SELF_CLICK_POOP
+- (void)onGameMgCommonSelfClickPoop:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSelfClickPoopModel *)model;
+
 #pragma mark - 互动礼物<火箭>
 
 /// 礼物配置文件(火箭) MG_CUSTOM_ROCKET_CONFIG
@@ -255,6 +310,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 颜色和签名自定义改到装配间的模式，保存颜色或签名 MG_CUSTOM_ROCKET_SAVE_SIGN_COLOR
 - (void)onGameMGCustomRocketSaveSignColor:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomRocketSaveSignColorModel *)model;
 
+
 #pragma mark - 互动礼物<棒球>
 
 /// 查询排行榜数据(棒球) MG_BASEBALL_RANKING
@@ -281,6 +337,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取文本配置(棒球) MG_BASEBALL_TEXT_CONFIG
 - (void)onGameMGBaseballTextConfig:(nonnull id <ISudFSMStateHandle>)handle;
 
+#pragma mark - 3d语聊房状态变化
+
+/// 请求房间数据 MG_CUSTOM_CR_ROOM_INIT_DATA
+- (void)onGameMGCustomCrRoomInitData:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomCrRoomInitData *)model;
+
+/// 点击主播位或老板位通知 MG_CUSTOM_CR_CLICK_SEAT
+- (void)onGameMGCustomCrClickSeat:(nonnull id <ISudFSMStateHandle>)handle model:(MGCustomCrClickSeat *)model;
 
 #pragma mark - 玩家状态变化
 
@@ -339,6 +402,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏通知app层当前游戏剩余时间  MG_COMMON_GAME_COUNTDOWN_TIME
 - (void)onPlayerMGCommonGameCountdownTime:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGCommonGameCountdownTimeModel *)model;
+
 
 @end
 

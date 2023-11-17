@@ -10,7 +10,7 @@
 @interface GiftService ()
 @property(nonatomic, strong) NSMutableDictionary<NSString *, GiftModel *> *dicGift;
 @property(nonatomic, strong) NSArray<GiftModel *> *discoGiftList;
-
+@property(nonatomic, strong) NSMutableDictionary<NSString *, NSArray<GiftModel *> *> *cacheMap;
 @end
 
 @implementation GiftService
@@ -34,7 +34,7 @@
     giftSvga.animateURL = [NSBundle.mainBundle pathForResource:@"sud_svga" ofType:@"svga" inDirectory:@"Res"];
     giftSvga.animateType = @"svga";
     giftSvga.giftName = @"svga";
-    giftSvga.price = 1;
+    giftSvga.price = 100;
 
     GiftModel *giftLottie = GiftModel.new;
     giftLottie.giftID = 2;
@@ -43,7 +43,7 @@
     giftLottie.animateURL = [NSBundle.mainBundle pathForResource:@"sud_lottie" ofType:@"json" inDirectory:@"Res"];
     giftLottie.animateType = @"lottie";
     giftLottie.giftName = @"lottie";
-    giftLottie.price = 100;
+    giftLottie.price = 1;
     giftLottie.tagList = @[NSString.dt_room_disco_tag_special];
 
     GiftModel *giftWebp = GiftModel.new;
@@ -53,7 +53,7 @@
     giftWebp.animateURL = [NSBundle.mainBundle pathForResource:@"sud_webp" ofType:@"webp" inDirectory:@"Res"];
     giftWebp.animateType = @"webp";
     giftWebp.giftName = @"webp";
-    giftWebp.price = 1000;
+    giftWebp.price = 10;
     giftWebp.tagList = @[NSString.dt_room_disco_tag_special];
     [giftWebp loadWebp:nil];
 
@@ -66,7 +66,7 @@
     giftMP4.animateURL = directory;
     giftMP4.animateType = @"mp4";
     giftMP4.giftName = @"mp4";
-    giftMP4.price = 10000;
+    giftMP4.price = 50;
     giftMP4.tagList = @[NSString.dt_room_disco_tag_special, NSString.dt_room_disco_tag_effect];
 
 
@@ -117,7 +117,7 @@
     gift9.price = 19888;
 
 
-    _giftList = @[giftSvga, giftLottie, giftWebp, gift9, giftMP4];
+    _giftList = @[giftLottie, giftWebp, giftMP4, giftSvga,gift9];
     [self.dicGift setDictionary:@{[NSString stringWithFormat:@"%ld", (long) giftSvga.giftID]: giftSvga,
             [NSString stringWithFormat:@"%ld", (long) giftLottie.giftID]: giftLottie,
             [NSString stringWithFormat:@"%ld", (long) giftWebp.giftID]: giftWebp,
@@ -137,6 +137,13 @@
         _dicGift = [[NSMutableDictionary alloc] init];
     }
     return _dicGift;
+}
+
+- (NSMutableDictionary<NSString *, NSArray<GiftModel *> *> *)cacheMap {
+    if (!_cacheMap) {
+        _cacheMap = NSMutableDictionary.new;
+    }
+    return _cacheMap;
 }
 
 /// 获取礼物信息
@@ -187,6 +194,14 @@
         if (finished) finished(GiftService.shared.discoGiftList);
         return;
     }
+    
+    NSString *key = [NSString stringWithFormat:@"%@", @(sceneId)];
+    NSArray<GiftModel *> *cacheArr = GiftService.shared.cacheMap[key];
+    if (cacheArr.count > 0) {
+        if (finished) finished(cacheArr);
+        return;
+    }
+    
     NSDictionary *dicParam = @{@"gameId": @(gameId), @"sceneId": @(sceneId)};
     [HSHttpService postRequestWithURL:kINTERACTURL(@"gift/list/v1") param:dicParam respClass:RespGiftListModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (finished) {
@@ -203,8 +218,10 @@
                 giftModel.smallGiftURL = item.smallGiftUrl;
                 giftModel.animateURL = item.animationUrl;
                 giftModel.giftName = item.name;
+                giftModel.details = item.details;
                 [arr addObject:giftModel];
             }
+            GiftService.shared.cacheMap[key] = arr;
             finished(arr);
         }
     }                         failure:failure];

@@ -118,7 +118,7 @@ PODS:
   - VolcEngineRTC (3.37.101):
     - VolcEngineRTC/Core (= 3.37.101)
   - VolcEngineRTC/Core (3.37.101)
-  - YYText (1.0.7)
+  - YYText (1.0.9)
   - ZegoExpressEngine (2.17.1.1):
     - ZegoExpressEngine/Video (= 2.17.1.1)
   - ZegoExpressEngine/Video (2.17.1.1)
@@ -151,7 +151,7 @@ DEPENDENCIES:
   - SVProgressHUD (~> 2.2.5)
   - TXLiteAVSDK_TRTC (= 10.2.11418)
   - VolcEngineRTC (= 3.37.101)
-  - YYText (~> 1.0.7)
+  - YYText (from `https://github.com/kaniel520/YYText.git`, tag `1.0.9`)
   - ZegoExpressEngine (= 2.17.1.1)
   - ZIM (= 2.4.2)
 
@@ -190,7 +190,6 @@ SPEC REPOS:
     - SVGKit
     - SVProgressHUD
     - TXLiteAVSDK_TRTC
-    - YYText
     - ZegoExpressEngine
     - ZIM
 
@@ -200,11 +199,17 @@ EXTERNAL SOURCES:
   SVGAPlayer:
     :git: https://github.com/svga/SVGAPlayer-iOS.git
     :tag: 2.5.6
+  YYText:
+    :git: https://github.com/kaniel520/YYText.git
+    :tag: 1.0.9
 
 CHECKOUT OPTIONS:
   SVGAPlayer:
     :git: https://github.com/svga/SVGAPlayer-iOS.git
     :tag: 2.5.6
+  YYText:
+    :git: https://github.com/kaniel520/YYText.git
+    :tag: 1.0.9
 
 SPEC CHECKSUMS:
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
@@ -241,10 +246,10 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TXLiteAVSDK_TRTC: a653d0195b9519222b6ff8a6329d7c942aeb1a62
   VolcEngineRTC: 6db475579381dd86105092ef7cc8100eb8db3345
-  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
+  YYText: 3ca7b42c083989328295d69e3a0ce0b0293f0a6a
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 8dd5f80f38f51f1ea20057b1848e49dd20d3ff1e
 
-PODFILE CHECKSUM: df1bc819d76c81495a637a58a2fa4af71c4c9f3a
+PODFILE CHECKSUM: 8ca187c5e0cf8524021756d69ab3d25149bda368
 
 COCOAPODS: 1.12.1

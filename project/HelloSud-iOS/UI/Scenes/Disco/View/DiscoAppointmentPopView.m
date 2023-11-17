@@ -236,16 +236,13 @@
 
     // 跳舞一分钟礼物
     GiftModel *giftModel = [GiftService.shared giftByID:5];
-    for (AudioUserModel *user in arrWaitForSend) {
-        AudioUserModel *toUser = user;
-        RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 * self.selectedMinute toUser:toUser];
-        giftMsg.type = giftModel.type;
-        giftMsg.giftUrl = giftModel.giftURL;
-        giftMsg.animationUrl = giftModel.animateURL;
-        giftMsg.giftName = giftModel.giftName;
-        giftMsg.specialDuration = 5;
-        [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
-    }
+    RoomCmdSendGiftModel *giftMsg = [RoomCmdSendGiftModel makeMsgWithGiftID:giftModel.giftID giftCount:1 * self.selectedMinute toUserList:arrWaitForSend];
+    giftMsg.type = giftModel.type;
+    giftMsg.giftUrl = giftModel.giftURL;
+    giftMsg.animationUrl = giftModel.animateURL;
+    giftMsg.giftName = giftModel.giftName;
+    giftMsg.specialDuration = 5;
+    [kAudioRoomService.currentRoomVC sendMsg:giftMsg isAddToShow:YES finished:nil];
 }
 
 #pragma mark - UICollectionViewDataSource

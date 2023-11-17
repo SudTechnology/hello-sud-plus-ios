@@ -11,10 +11,12 @@
 #import "LandscapePopView.h"
 #import "LandscapeNaviView.h"
 #import "LandscapeGuideTipView.h"
+#import "DanmakuActionView.h"
 
 @interface DanmakuVerticalRoomViewController ()
 /// 快速发送视图
 @property(nonatomic, strong) DanmakuVerticalSendView *quickSendView;
+@property(nonatomic, strong) DanmakuActionView *actionvView;;
 /// 视频内容视图 为了适配房间挂起后恢复便捷增加的视图
 @property(nonatomic, strong) BaseView *videoContentView;
 /// 视频视图
@@ -46,6 +48,8 @@
 @property(nonatomic, strong) UIButton *joinBtn2;
 @property(nonatomic, strong) UIButton *chatHiddenBtn;
 @property(nonatomic, strong) RespDanmakuListModel *danmakuListModel;
+/// 视频大小
+@property(nonatomic, assign)CGSize videoSize;
 @end
 
 @implementation DanmakuVerticalRoomViewController
@@ -56,11 +60,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // 开始隐藏选择游戏
     [self.naviView hiddenNodeWithRoleType:0];
     // Do any additional setup after loading the view.
     [self reqData];
-
+    
     // 加载视频流
     if (self.enterModel.streamId.length > 0) {
         [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
@@ -75,31 +80,33 @@
 
 - (void)dtAddViews {
     [super dtAddViews];
-
+    
     [self.sceneView insertSubview:self.videoContentView atIndex:0];
     [self.videoContentView addSubview:self.videoView];
-//    self.videoView.backgroundColor = UIColor.redColor;
-
+    
     [self.sceneView addSubview:self.chatHiddenBtn];
     [self.sceneView addSubview:self.joinBtn1];
     [self.sceneView addSubview:self.joinBtn2];
     [self.sceneView addSubview:self.quickSendView];
+    [self.sceneView addSubview:self.actionvView];
 }
 
 - (void)dtLayoutViews {
     [super dtLayoutViews];
+    self.videoSize = CGSizeMake(kScreenWidth, kScreenWidth);
     [self.videoContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@0);
         make.leading.trailing.equalTo(@0);
         make.bottom.equalTo(@0);
     }];
     [self.videoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.top.trailing.bottom.equalTo(@0);
+        make.center.equalTo(self.videoContentView);
+        make.size.mas_equalTo(self.videoSize);
     }];
     self.isPortraitOpen = YES;
-
+    
     [self.joinBtn1 dt_cornerRadius:15];
-
+    
     [self.joinBtn1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@15);
         make.height.equalTo(@32);
@@ -119,6 +126,12 @@
         make.height.equalTo(@31);
         make.centerY.equalTo(self.operatorView);
     }];
+    [self.actionvView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(@0);
+        make.trailing.equalTo(@0);
+        make.bottom.equalTo(self.quickSendView.mas_top).offset(-7);
+        make.height.greaterThanOrEqualTo(@0);
+    }];
     [self.quickSendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@0);
         make.trailing.equalTo(@0);
@@ -135,7 +148,7 @@
 - (void)dtConfigEvents {
     [super dtConfigEvents];
     WeakSelf
-
+    
     UITapGestureRecognizer *videoTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapVideo:)];
     [self.videoContentView addGestureRecognizer:videoTap];
     [self.chatHiddenBtn addTarget:self action:@selector(onClickHiddenBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -168,13 +181,17 @@
         self.joinBtn2.alpha = 0;
         self.msgBgView.alpha = 0;
         self.quickSendView.alpha = 0;
+        self.actionvView.alpha = 0;
+        self.naviView.alpha = 0;
     }else {
         self.joinBtn1.alpha = 1;
         self.joinBtn2.alpha = 1;
         self.msgBgView.alpha = 1;
         self.quickSendView.alpha = 1;
+        self.naviView.alpha = 1;
+        self.actionvView.alpha = 1;
     }
-
+    
 }
 
 - (void)exitRoomFromSuspend:(BOOL)isSuspend finished:(void (^)(void))finished {
@@ -185,7 +202,7 @@
 - (void)closeAllTimer {
     if (self.landscapeNaviHiddenTimer) {
     }
-
+    
 }
 
 /// 设置游戏房间内容
@@ -194,7 +211,7 @@
     [self.msgBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@140);
         make.leading.trailing.mas_equalTo(self.contentView);
-        make.bottom.mas_equalTo(self.joinBtn1.mas_top).offset(-26);
+        make.bottom.mas_equalTo(self.actionvView.mas_top).offset(-7);
     }];
     [self.operatorView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.chatHiddenBtn.mas_trailing).offset(0);
@@ -208,7 +225,7 @@
 
 
 - (void)onTapVideo:(id)tap {
-
+    
     [self.inputView endEditing:YES];
 }
 
@@ -225,14 +242,15 @@
 
 /// 重置视频视图
 - (void)resetVideoView {
-    self.videoView.contentMode = UIViewContentModeScaleAspectFill;
+    self.videoView.contentMode = UIViewContentModeScaleAspectFit;
     // 加载视频流
     if (self.enterModel.streamId.length > 0) {
         [self startToPullVideo:self.videoView streamID:self.enterModel.streamId];
     }
-    [self.videoContentView insertSubview:self.videoView atIndex:0];
+    [self.videoContentView addSubview:self.videoView];
     [self.videoView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.leading.top.trailing.bottom.equalTo(@0);
+        make.center.equalTo(self.videoContentView);
+        make.size.mas_equalTo(self.videoSize);
     }];
 }
 
@@ -246,20 +264,22 @@
 
 /// 重新布局
 - (void)relayoutJoinBtns {
-
-//    self.msgBgView.backgroundColor = UIColor.orangeColor;
+    
+    //    self.msgBgView.backgroundColor = UIColor.orangeColor;
     NSInteger btnCount = self.danmakuListModel.joinTeamList.count;
     switch (btnCount) {
         case 0: {
             self.joinBtn1.hidden = YES;
             self.joinBtn2.hidden = YES;
             self.quickSendView.hidden = NO;
+            self.actionvView.hidden = NO;
         }
             break;
         case 1: {
             self.joinBtn1.hidden = NO;
             self.joinBtn2.hidden = YES;
             self.quickSendView.hidden = YES;
+            self.actionvView.hidden = YES;
             DanmakuJoinTeamModel *m1 = self.danmakuListModel.joinTeamList[0];
             [self.joinBtn1 setTitle:m1.name forState:UIControlStateNormal];
             [self.joinBtn1 setBackgroundImage:HEX_COLOR(m1.backgroundColor ?: @"#000000").dt_toImage forState:UIControlStateNormal];
@@ -281,14 +301,15 @@
             self.joinBtn1.hidden = NO;
             self.joinBtn2.hidden = NO;
             self.quickSendView.hidden = YES;
+            self.actionvView.hidden = YES;
             DanmakuJoinTeamModel *m1 = self.danmakuListModel.joinTeamList[0];
             [self.joinBtn1 setTitle:m1.name forState:UIControlStateNormal];
             [self.joinBtn1 setBackgroundImage:HEX_COLOR(m1.backgroundColor ?: @"#000000").dt_toImage forState:UIControlStateNormal];
-
+            
             DanmakuJoinTeamModel *m2 = self.danmakuListModel.joinTeamList[1];
             [self.joinBtn2 setTitle:m2.name forState:UIControlStateNormal];
             [self.joinBtn2 setBackgroundImage:HEX_COLOR(m2.backgroundColor ?: @"#000000").dt_toImage forState:UIControlStateNormal];
-
+            
             [self.joinBtn1 mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.leading.equalTo(@21);
                 make.height.equalTo(@32);
@@ -303,9 +324,9 @@
             }];
         }
             break;
-
+            
     }
-
+    
 }
 
 - (void)reqData {
@@ -313,10 +334,12 @@
     [DanmakuRoomService reqShortSendEffectList:self.gameId roomId:self.roomID finished:^(RespDanmakuListModel *resp) {
         weakSelf.danmakuListModel = resp;
         self.quickSendView.dataList = resp.callWarcraftInfoList;
+        self.actionvView.dataList = resp.actionList;
         [self.quickSendView dtUpdateUI];
+        [self.actionvView dtUpdateUI];
         [weakSelf relayoutJoinBtns];
-
-
+        
+        
     }                                  failure:nil];
 }
 
@@ -369,19 +392,19 @@
         [DanmakuRoomService reqSendBarrage:self.roomID content:m.content gameId:self.gameId finished:^{
             DDLogDebug(@"发送弹幕成功");
         }                          failure:^(NSError *error) {
-
+            
         }];
         if (shouldSend) shouldSend(YES);
     } else if ([msg isKindOfClass:RoomCmdSendGiftModel.class]) {
         RoomCmdSendGiftModel *m = (RoomCmdSendGiftModel *) msg;
         GiftModel *giftModel = [m getGiftModel];
         // 发送礼物
-        [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount price:giftModel.price type:m.type == 1 ? 2 : 1 finished:^{
+        [DanmakuRoomService reqSendGift:self.roomID giftId:[NSString stringWithFormat:@"%@", @(m.giftID)] amount:m.giftCount price:giftModel.price type:m.type == 1 ? 2 : 1 receiverList:nil finished:^{
             DDLogDebug(@"发送礼物成功");
             if (shouldSend) shouldSend(YES);
         }                       failure:^(NSError *error) {
             if (shouldSend) shouldSend(NO);
-
+            
         }];
     } else {
         if (shouldSend) shouldSend(YES);
@@ -430,12 +453,12 @@
         self.landscapeNaviView.transform = CGAffineTransformIdentity;
         self.exitLandscapeBtn.transform = CGAffineTransformIdentity;
     }                completion:^(BOOL finished) {
-
+        
     }];
 }
 
 - (void)closeLandscapeNaviView {
-
+    
     [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.landscapeNaviView.transform = CGAffineTransformMakeTranslation(0, -(self.landscapeNaviView.mj_h + self.landscapeNaviView.mj_y + 10));
         self.exitLandscapeBtn.transform = CGAffineTransformMakeTranslation(0, kScreenHeight - self.exitLandscapeBtn.mj_y);
@@ -449,7 +472,7 @@
 - (BaseView *)videoView {
     if (!_videoView) {
         _videoView = [[BaseView alloc] init];
-        _videoView.contentMode = UIViewContentModeScaleAspectFill;
+        _videoView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _videoView;
 }
@@ -459,6 +482,12 @@
         _videoContentView = [[BaseView alloc] init];
         _videoContentView.contentMode = UIViewContentModeScaleAspectFill;
         _videoContentView.backgroundColor = UIColor.blackColor;
+        UIImageView *maskImageView = UIImageView.new;
+        maskImageView.image = [UIImage imageNamed:@"mask_bg"];
+        [_videoContentView addSubview:maskImageView];
+        [maskImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        }];
     }
     return _videoContentView;
 }
@@ -479,6 +508,15 @@
     }
     return _quickSendView;
 }
+
+- (DanmakuActionView *)actionvView {
+    if (!_actionvView) {
+        _actionvView = [[DanmakuActionView alloc] init];
+        _actionvView.hidden = YES;
+    }
+    return _actionvView;
+}
+
 
 - (UIButton *)enterLandscapeBtn {
     if (!_enterLandscapeBtn) {
@@ -553,7 +591,7 @@
         }
             break;
     }
-
+    
 }
 
 /// 处理用户加入通知
@@ -563,5 +601,14 @@
         AudioMsgSystemModel *m = [AudioMsgSystemModel makeMsg:nft.content];
         [self addMsg:m isShowOnScreen:YES];
     }
+}
+
+- (void)onPlayerVideoSizeChanged:(CGSize)size streamID:(NSString *)streamID {
+    CGFloat w = kScreenWidth;
+    CGFloat h = size.height / size.width * w;
+    self.videoSize = CGSizeMake(w, h);
+    [self.videoView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(self.videoSize);
+    }];
 }
 @end

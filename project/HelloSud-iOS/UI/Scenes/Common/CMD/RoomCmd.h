@@ -31,6 +31,7 @@
 #define CMD_ROOM_DISCO_INFO_RESP	  10401	/// 1.4.0	响应蹦迪信息
 #define CMD_ROOM_DISCO_BECOME_DJ	  10402	/// 1.4.0	上DJ台
 #define CMD_ROOM_DISCO_ACTION_PAY     10403 /// 1.4.2 蹦迪动作付费
+#define CMD_ROOM_3D_SEND_FACE_NOTIFY  10700	/// 1.6.7	3D语聊房发送表情通知
 
 #pragma mark 后台通知信令
 
@@ -42,4 +43,10 @@
 #define CMD_GAME_EXTRA_TEAM_CHANGED_NOTIFY	         21003 /// 1.6.1	跨域匹配队伍变更通知
 #define CMD_GAME_EXTRA_GAME_SWITCH_NOTIFY	         21004 /// 1.6.1跨域匹配游戏切换通知
 #define CMD_GAME_BULLET_JOIN_TEAM_NOTIFY	         21006 /// 1.6.1弹幕游戏加入战队通知
+
+#define CMD_ROOM_GIFT_VALUES_CHANGE_NOTIFY_V2	     21010 /// 1.6.6 3d语聊房心动值变更
+#define CMD_ROOM_3D_CONFIG_CHANGE_NOTIFY	         21011 /// 1.6.6 3D语聊房配置变更
+#define CMD_ROOM_3D_MIC_STATE_CHANGE_NOTIFY	         21012 /// 1.6.6 3D语聊房麦位状态变更
+#define CMD_GAME_MONOPOLY_CARD_GIFT_NOTIFY           22001 /// 1.6.9 大富翁道具卡送礼通知
+
 #endif /* HSAudioMsgConst_h */
