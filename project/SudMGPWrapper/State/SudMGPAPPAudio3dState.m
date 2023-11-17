@@ -8,9 +8,6 @@
 #import "SudMGPAPPAudio3dState.h"
 #import <MJExtension/MJExtension.h>
 
-@implementation AppCustomCrSetRoomConfig
-@end
-
 /// 设置房间配置数据模型
 @implementation AppCustomCrSetRoomConfigModel
 @end
