@@ -247,10 +247,10 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
         [AudioEngineFactory.shared createEngine:AliyunAudioEngineImpl.class];
         rtcConfig = self.configModel.alibabaCloudCfg;
     } else {
-        if (rtcType.length == 0 && self.configModel.agoraCfg) {
-            rtcType = self.configModel.agoraCfg.rtcType;
-            [AudioEngineFactory.shared createEngine:AgoraAudioEngineImpl.class];
-            rtcConfig = self.configModel.agoraCfg;
+        if (rtcType.length == 0 && self.configModel.zegoCfg) {
+            rtcType = self.configModel.zegoCfg.rtcType;
+            [AudioEngineFactory.shared createEngine:ZegoAudioEngineImpl.class];
+            rtcConfig = self.configModel.zegoCfg;
             DDLogInfo(@"默认RTC厂商：%@", rtcType);
         } else {
             DDLogError(@"切换RTC厂商失败，对应配置为空");
