@@ -98,14 +98,15 @@
     ```
     </details>
   
-- Step 4：Create a game interaction event handler subclass that inherits from `BaseSudGameEventHandler` and implements the necessary interfaces, for example：QuickStartSudGameEventHandler.m
+- Step 4：Create a game interaction event handler subclass that inherits from `BaseSudGameEventHandler` and implements the necessary interfaces, for example：QuickStartSudGameEventHandler.h
     <details>
-    <summary>详细描述 QuickStartSudGameEventHandler.m</summary>
+    <summary>detail QuickStartSudGameEventHandler.h</summary>
 
     ``` objc
-    @interface QuickStartViewController ()
-    /// 游戏加载主view
-    @property(nonatomic, strong) UIView *gameView;
+    /// QuickStart demo实现游戏事件处理模块，接入方可以参照次处理模块，将QuickStartSudGameEventHandler改个名称并实现自己应用的即可
+    /// QuickStart demo game event processing module, access can consult the processing module, the QuickStartSudGameEventHandler change a name and realize their own application
+    @interface QuickStartSudGameEventHandler : BaseSudGameEventHandler
+    @end
     ```
     </details>
 
