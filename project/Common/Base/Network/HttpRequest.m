@@ -50,8 +50,24 @@ static AFHTTPSessionManager *aManager;
         [[self sharedAFManager] GET:urlString parameters:parameters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            id JSON = nil;
+            NSError *error = nil;
+            @try {
+                JSON =  [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            } @catch (NSException *exception) {
+                NSString *errorStr = [NSString stringWithFormat:@"parse json exception:%@, responseObject:%@", exception.debugDescription, responseObject];
+                NSLog(@"%@", errorStr);
+                error = [[NSError alloc]initWithDomain:NSNetServicesErrorDomain code:-1 userInfo:@{NSLocalizedFailureReasonErrorKey:errorStr}];
+            } @finally {
+                
+            }
+            if (error){
+                if (failureBlock){
+                    failureBlock(error);
+                }
+                return;
+            }
             if (successBlock){
-                id JSON =  [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 successBlock(JSON);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -69,10 +85,28 @@ static AFHTTPSessionManager *aManager;
         [[self sharedAFManager] POST:urlString parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            id JSON =  [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            id JSON = nil;
+            NSError *error = nil;
+            @try {
+                JSON =  [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            } @catch (NSException *exception) {
+                NSString *errorStr = [NSString stringWithFormat:@"parse json exception:%@, responseObject:%@", exception.debugDescription, responseObject];
+                NSLog(@"%@", errorStr);
+                error = [[NSError alloc]initWithDomain:NSNetServicesErrorDomain code:-1 userInfo:@{NSLocalizedFailureReasonErrorKey:errorStr}];
+            } @finally {
+                
+            }
+            if (error){
+                if (failureBlock){
+                    failureBlock(error);
+                }
+                return;
+            }
             if (successBlock){
                 successBlock(JSON);
             }
+
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             if (error.code !=-999) {
                 if (failureBlock){

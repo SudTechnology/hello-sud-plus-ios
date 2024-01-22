@@ -119,7 +119,7 @@ static NSString *APP_COMMON_GAME_UI_CUSTOM_CONFIG = @"app_common_game_ui_custom_
 @end
 
 // ludo游戏玩法选项
-@interface AppCommonGameSettingGameLudo
+@interface AppCommonGameSettingGameLudo : NSObject
 /// mode: 默认赛制，0: 快速, 1: 经典;
 @property(nonatomic, assign) NSInteger mode;
 /// chessNum: 默认棋子数量, 2: 对应2颗棋子; 4: 对应4颗棋子;

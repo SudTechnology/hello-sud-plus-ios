@@ -21,6 +21,16 @@
 }
 @end
 
+@implementation AppCommonGameSettingGameLudo
+
+@end
+
+@implementation AppCommonGameSettingGameInfo
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"ludo": AppCommonGameSettingGameLudo.class};
+}
+@end
+
 @implementation AppCommonGameScore
 @end
 
