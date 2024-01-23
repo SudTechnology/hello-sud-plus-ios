@@ -34,6 +34,7 @@
   <summary>详细描述</summary>
 
       1.参考SudMGP文档、SudMGPWrapper、QuickStart、HelloSud体验Demo（展示多场景，Custom自定义场景）；
+
       2.专注于APP UI交互、功能是否支持、如何实现
       比如：
       调整游戏View大小、位置；
@@ -51,20 +52,21 @@
   <details>
     <summary>cocoapods方式导入，推荐使用该方式导入</summary>
 
-      1.APP主工程Podfile文件中，添加 SudMGPWrapper 依赖;
+      1. APP主工程Podfile文件中，添加 SudMGPWrapper 依赖;
    [Cocoapods最新集成版本](https://github.com/SudTechnology/sud-mgp-ios)
   ``` ruby
   pod 'SudMGPWrapper', '~> x.x.x'
   
   ```
-      3. 执行pod install，将SudMGP SDK、SudMGPWrapper模块依赖进工程中
+      2. 执行pod install，将SudMGP SDK、SudMGPWrapper模块依赖进工程中
 
   </details>
   <details>
   <summary>本地pod方式导入</summary>
 
-      1.将QuickStart同级目录下的SudMGPSDK、SudMGPWrapper两个目录所有文件及SudMGPWrapper.podspec文件拷贝到目标工程Podfile所在的目录下
-      2.APP主工程Podfile文件中，添加 SudMGPWrapper 依赖;
+      1. 将QuickStart同级目录下的SudMGPSDK、SudMGPWrapper两个目录所有文件及SudMGPWrapper.podspec文件拷贝到目标工程Podfile所在的目录下
+
+      2. APP主工程Podfile文件中，添加 SudMGPWrapper 依赖;
   ``` ruby
   pod 'SudMGPWrapper', :path => '../../'
   ```
@@ -72,13 +74,13 @@
   </details>
   <details>
 
-  <summary>ASR识别支持（可选 v1.2.7及后续版本支持）</summary>
+  <summary>ASR识别支持（可选，只有用到游戏语音识别才需要用 v1.2.7及后续版本支持）</summary>
 
-      1.APP主工程Podfile文件中，添加 ASR语音识别库 依赖;
+      1. APP主工程Podfile文件中，添加 ASR语音识别库 依赖;
   ``` ruby
   pod 'MicrosoftCognitiveServicesSpeech-iOS', '1.23.0'
   ```
-      3. 执行pod install，将ASR语音识别库模块依赖进工程中
+      2. 执行pod install，将ASR语音识别库模块依赖进工程中
   </details>
   
 
@@ -118,6 +120,7 @@
 - 第五步：创建SudGameManager游戏管理模块实例、游戏事件处理模块实例QuickStartSudGameEventHandler，例如：QuickStartViewController.m
     <details>
     <summary>详细描述 QuickStartViewController.m</summary>
+
     1. 返回游戏配置，主要配置游戏模式、按钮自定义等UI，如以下样例配置：
 
     ``` objc
@@ -130,6 +133,7 @@
     return gameCfgModel;
     }
     ```
+    
     2. 返回游戏视图整体区域大小、安全区（顶底预留间距），如以下样例配置：
 
     ``` objc

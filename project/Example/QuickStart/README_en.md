@@ -45,20 +45,24 @@
   </details>
 
 # 3-Minute Code Integration
+
 - Step 1: Import SudMGPSDK and SudMGPWrapper modules
   <summary>CocoaPods import method</summary> 
 
       1. Add SudMGPWrapper dependency to the app's main Podfile;[Cocoapods new version](https://github.com/SudTechnology/sud-mgp-ios/blob/main/README_en.md)
+
   ```ruby
   pod 'SudMGPWrapper', '~> x.x.x'
   ```
       2. Run pod install to add SudMGP SDK and SudMGPWrapper module dependencies to the project.
+
   </details> 
   <details> 
   <details> 
   <summary>Local pod import method</summary> 
 
       1. Copy all files in the SudMGPSDK and SudMGPWrapper directories, as well as the SudMGPWrapper.podspec file, to the target project's Podfile directory. 
+
       2. Add SudMGPWrapper dependency to the app's main Podfile;
   ```ruby
   pod 'SudMGPWrapper', :path => '../../'
@@ -70,6 +74,7 @@
   <summary>ASR recognition support (optional, supported in v1.2.7 and later)</summary> 
 
       1. Add ASR speech recognition library dependency to the app's main Podfile;
+      
   ```ruby 
   pod 'MicrosoftCognitiveServicesSpeech-iOS', '1.23.0'
   ```
