@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The  `onGetGameCfg`  method is a method that configures the game view. The method takes no parameters and returns a  `GameCfgModel`  object. The  `GameCfgModel`  object contains the configuration information for the game view, such as the size, position, and visibility of the game view. The developer can use this information to configure the game view according to their own needs.
 - (nonnull GameCfgModel *)onGetGameCfg;
 
-/// 获取游戏View信息,默认返回全屏，应用根据自身需要覆写并返回视图信息
+/// 获取游戏View信息,默认返回全屏，应用根据自身需要覆写并返回视图信息(注意：此回调返回真实屏幕视图点距离即可，不需要使用计算scale值去算，内部会自行换算)
 /// The  `onGetGameViewInfo`  method is a method that returns the game view information. The method takes no parameters and returns a  `GameViewInfoModel`  object. The  `GameViewInfoModel`  object contains the information about the game view, such as the size, position, and visibility of the game view. The application can use this information to display the game view.
 - (nonnull GameViewInfoModel *)onGetGameViewInfo;
 @end

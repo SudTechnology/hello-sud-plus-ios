@@ -54,6 +54,10 @@
 - (nonnull GameViewInfoModel *)onGetGameViewInfo {
     GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
     CGRect gameViewRect = self.loadConfigModel.gameView.bounds;
+    // 默认游戏展示区域
+    // Default area of game display
+    m.view_size.width = gameViewRect.size.width;
+    m.view_size.height = gameViewRect.size.height;
     return m;
 }
 
