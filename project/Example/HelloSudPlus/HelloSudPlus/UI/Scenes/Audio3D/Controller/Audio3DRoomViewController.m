@@ -112,13 +112,13 @@
         if (faceItemModel.type == Audio3dFaceItemModelLight) {
             AppCustomCrSetLightFlashModel *flashModel = AppCustomCrSetLightFlashModel.new;
             flashModel.seatIndex = seatIndex;
-            [weakSelf.sudFSTAPPDecorator notifyAppCustomCrSetLightFlash:flashModel];
+            [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrSetLightFlash:flashModel];
         } else if (faceItemModel.type == Audio3dFaceItemModelFace) {
             // 选择动效
             AppCustomCrPlayAnimModel *playAnimModel = AppCustomCrPlayAnimModel.new;
             playAnimModel.animId = faceItemModel.faceId;
             playAnimModel.seatIndex = seatIndex;
-            [weakSelf.sudFSTAPPDecorator notifyAppCustomCrPlayAnim:playAnimModel];
+            [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrPlayAnim:playAnimModel];
 
 
         }
@@ -144,7 +144,7 @@
                 AppCustomCrMicphoneValueSeatModel *valueSeatModel = AppCustomCrMicphoneValueSeatModel.new;
                 valueSeatModel.value = (NSInteger) (value);
                 valueSeatModel.seatIndex = m.seatIndex;
-                [weakSelf.sudFSTAPPDecorator notifyAppCustomCrMicphoneValueSeat:valueSeatModel];
+                [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrMicphoneValueSeat:valueSeatModel];
             }
         }
     }];
@@ -161,7 +161,7 @@
             AppCustomCrMicphoneValueSeatModel *valueSeatModel = AppCustomCrMicphoneValueSeatModel.new;
             valueSeatModel.value = (NSInteger) (value);
             valueSeatModel.seatIndex = m.seatIndex;
-            [weakSelf.sudFSTAPPDecorator notifyAppCustomCrMicphoneValueSeat:valueSeatModel];
+            [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrMicphoneValueSeat:valueSeatModel];
         }
     }];
 
@@ -278,10 +278,10 @@
     self.roomConfigModel.platformRotate = self.configStateModel.isRotateStateOpen;
     self.roomConfigModel.flashVFX = self.configStateModel.isLightStateOpen;
     self.roomConfigModel.micphoneWave = self.configStateModel.isVoiceStateOpen;
-    [self.sudFSTAPPDecorator notifyAppCustomCrSetRoomConfig:self.roomConfigModel];
+    [self.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrSetRoomConfig:self.roomConfigModel];
 }
 
-- (NSString *)onGetGameCfg {
+- (GameCfgModel *)onGetGameCfg {
     if (self.configModel.enterRoomModel.sceneType == SceneTypeAudio) {
 
         GameCfgModel *m = [GameCfgModel defaultCfgModel];
@@ -290,7 +290,7 @@
         m.ui.game_opening.hide = NO;
         m.ui.game_mvp.hide = NO;
         m.ui.bullet_screens_btn.hide = NO;
-        return [m mj_JSONString];
+        return m;
     } else {
         return [super onGetGameCfg];
     }
@@ -494,7 +494,7 @@
         retryBtn.hidden = YES;
         WeakSelf
         [retryBtn dt_onClick:^(UIButton *sender) {
-            [weakSelf.sudFSTAPPDecorator reLoadMG];
+            [weakSelf.gameEventHandler.sudFSTAPPDecorator reLoadMG];
         }];
 
         self.progressTipLabel = tipLabel;
@@ -635,14 +635,14 @@
     
     AppCustomCrPauseRotateModel *model = AppCustomCrPauseRotateModel.new;
     model.pause = 1;
-    [self.sudFSTAPPDecorator notifyAppCustomCrPauseRotate:model];
+    [self.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrPauseRotate:model];
 }
 
 - (void)resetRotate {
 
     AppCustomCrPauseRotateModel *model = AppCustomCrPauseRotateModel.new;
     model.pause = 0;
-    [self.sudFSTAPPDecorator notifyAppCustomCrPauseRotate:model];
+    [self.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrPauseRotate:model];
 }
 
 
@@ -654,7 +654,7 @@
     [kAudio3dRoomService reqGet3dRoomConfig:self.roomID finished:^(AppCustomCrSetRoomConfigModel *resp) {
         // 设置房间配置给游戏
         self.roomConfigModel = resp;
-        [weakSelf.sudFSTAPPDecorator notifyAppCustomCrSetRoomConfig:resp];
+        [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrSetRoomConfig:resp];
     }];
     // 获取麦位列表
     ReqAudio3dMicSeatsModel *seatsModel = ReqAudio3dMicSeatsModel.new;
@@ -662,7 +662,7 @@
     [kAudio3dRoomService req3dRoomMicSeatsList:seatsModel finished:^(AppCustomCrSetSeatsModel *seatsModel) {
         // 设置麦位列表给游戏
         weakSelf.seatsModel = seatsModel;
-        [weakSelf.sudFSTAPPDecorator notifyAppCustomCrSetSeats:seatsModel];
+        [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrSetSeats:seatsModel];
     }];
 }
 
@@ -895,7 +895,7 @@
             AppCustomCrSetSeatsModel *seatsModel = AppCustomCrSetSeatsModel.new;
             seatsModel.seats = m.seats;
             self.seatsModel = seatsModel;
-            [self.sudFSTAPPDecorator notifyAppCustomCrSetSeats:seatsModel];
+            [self.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrSetSeats:seatsModel];
             // 更新自己开闭状态
             [self handleGameMicState:self.operatorView.voiceBtnState];
         }
@@ -905,7 +905,7 @@
             // 设置房间配置给游戏
             AppCustomCrSetRoomConfigModel *configModel = [RoomBaseCMDModel parseInstance:AppCustomCrSetRoomConfigModel.class fromServerJSON:command];
             self.roomConfigModel = configModel;
-            [self.sudFSTAPPDecorator notifyAppCustomCrSetRoomConfig:configModel];
+            [self.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrSetRoomConfig:configModel];
 
         }
             break;
@@ -916,14 +916,14 @@
             if (m.type == Audio3dFaceItemModelLight) {
                 AppCustomCrSetLightFlashModel *flashModel = AppCustomCrSetLightFlashModel.new;
                 flashModel.seatIndex = m.seatIndex;
-                [self.sudFSTAPPDecorator notifyAppCustomCrSetLightFlash:flashModel];
+                [self.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrSetLightFlash:flashModel];
                 [self showMicEffect:m];
             } else if (m.type == Audio3dFaceItemModelFace) {
                 // 选择动效
                 AppCustomCrPlayAnimModel *playAnimModel = AppCustomCrPlayAnimModel.new;
                 playAnimModel.animId = m.faceId;
                 playAnimModel.seatIndex = m.seatIndex;
-                [self.sudFSTAPPDecorator notifyAppCustomCrPlayAnim:playAnimModel];
+                [self.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrPlayAnim:playAnimModel];
             }
         }
             break;
@@ -987,7 +987,7 @@
         effectModel.isAllSeat = NO;
     }
     effectModel.giftList = giftList;
-    [self.sudFSTAPPDecorator notifyAppCustomCrPlayGiftEffect:effectModel];
+    [self.gameEventHandler.sudFSTAPPDecorator notifyAppCustomCrPlayGiftEffect:effectModel];
 }
 
 /// 随机获取级别

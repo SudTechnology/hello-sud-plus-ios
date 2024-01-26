@@ -45,24 +45,20 @@
   </details>
 
 # 3-Minute Code Integration
-
 - Step 1: Import SudMGPSDK and SudMGPWrapper modules
   <summary>CocoaPods import method</summary> 
 
       1. Add SudMGPWrapper dependency to the app's main Podfile;[Cocoapods new version](https://github.com/SudTechnology/sud-mgp-ios/blob/main/README_en.md)
-
   ```ruby
   pod 'SudMGPWrapper', '~> x.x.x'
   ```
       2. Run pod install to add SudMGP SDK and SudMGPWrapper module dependencies to the project.
-
   </details> 
   <details> 
   <details> 
   <summary>Local pod import method</summary> 
 
       1. Copy all files in the SudMGPSDK and SudMGPWrapper directories, as well as the SudMGPWrapper.podspec file, to the target project's Podfile directory. 
-
       2. Add SudMGPWrapper dependency to the app's main Podfile;
   ```ruby
   pod 'SudMGPWrapper', :path => '../../'
@@ -74,7 +70,6 @@
   <summary>ASR recognition support (optional, supported in v1.2.7 and later)</summary> 
 
       1. Add ASR speech recognition library dependency to the app's main Podfile;
-
   ```ruby 
   pod 'MicrosoftCognitiveServicesSpeech-iOS', '1.23.0'
   ```
@@ -88,7 +83,7 @@
 
   Copy SudGameHelper directory, Demo project directory path (project->SudGameHelper): 
   `SudGameManager` loads the game and destroys the game management module. 
-  `BaseSudGameEventHandler` processes the interaction between the game and the APP. The app only needs to create subclasses and receive defined game callbacks to receive various game state callbacks
+  `SudGameBaseEventHandlerEventHandler` processes the interaction between the game and the APP. The app only needs to create subclasses and receive defined game callbacks to receive various game state callbacks
   </details>
   
 
@@ -103,68 +98,69 @@
     ```
     </details>
   
-- Step 4：Create a game interaction event handler subclass that inherits from `BaseSudGameEventHandler` and implements the necessary interfaces, for example：QuickStartSudGameEventHandler.h
+- Step 4：Create a game interaction event handler subclass that inherits from `SudGameBaseEventHandlerEventHandler` and implements the necessary interfaces, for example：QuickStartSudGameEventHandler.m
     <details>
-    <summary>detail `QuickStartSudGameEventHandler` </summary>
+    <summary>详细描述 QuickStartSudGameEventHandler.m</summary>
 
-    #### Class declaration QuickStartSudGameEventHandler.h
     ``` objc
-    /// QuickStart demo实现游戏事件处理模块，接入方可以参照次处理模块，将QuickStartSudGameEventHandler改个名称并实现自己应用的即可
-    /// QuickStart demo game event processing module, access can consult the processing module, the QuickStartSudGameEventHandler change a name and realize their own application
-    @interface QuickStartSudGameEventHandler : BaseSudGameEventHandler
-    @end
+    @interface QuickStartViewController ()
+    /// 游戏加载主view
+    @property(nonatomic, strong) UIView *gameView;
     ```
-    #### Implement necessary interfaces, detail QuickStartSudGameEventHandler.m
+    </details>
 
-        1. Return to the game configuration, mainly configure the game mode, button customization and other UI, such as the following sample configuration:
+- Step 5：Create `SudGameManager` game management module instance, instance `QuickStartSudGameEventHandler` event processing module, for example：QuickStartViewController.m
+    <details>
+    <summary>detail QuickStartViewController.m</summary>
+    1. Return to the game configuration, mainly configure the game mode, button customization and other UI, such as the following sample configuration:
 
     ``` objc
     - (nonnull GameCfgModel *)onGetGameCfg {
-        GameCfgModel *gameCfgModel = [GameCfgModel defaultCfgModel];
-        /// 可以在此根据自身应用需要配置游戏，例如配置声音
-        /// You can configure the game according to your application needs here, such as configuring the sound
-        gameCfgModel.gameSoundVolume = 100;
-        /// ...
-        return gameCfgModel;
+    GameCfgModel *gameCfgModel = [GameCfgModel defaultCfgModel];
+    /// 可以在此根据自身应用需要配置游戏，例如配置声音
+    /// You can configure the game according to your application needs here, such as configuring the sound
+    gameCfgModel.gameSoundVolume = 100;
+    /// ...
+    return gameCfgModel;
     }
     ```
     2. Return the size of the overall area of the game view and the safety zone (reserved space between the top and bottom), as shown in the following example:
 
     ``` objc
     - (nonnull GameViewInfoModel *)onGetGameViewInfo {
-        
-        /// 应用根据自身布局需求在此配置游戏显示视图信息
-        /// The application configures the game display view information here according to its layout requirements
-        
-        // 屏幕安全区
-        // Screen Safety zone
-        UIEdgeInsets safeArea = [self safeAreaInsets];
-        // 状态栏高度
-        // Status bar height
-        CGFloat statusBarHeight = safeArea.top == 0 ? 20 : safeArea.top;
-        
-        GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-        CGRect gameViewRect = self.loadConfigModel.gameView.bounds;
+    
+    /// 应用根据自身布局需求在此配置游戏显示视图信息
+    /// The application configures the game display view information here according to its layout requirements
+    
+    // 屏幕安全区
+    // Screen Safety zone
+    UIEdgeInsets safeArea = [self safeAreaInsets];
+    // 状态栏高度
+    // Status bar height
+    CGFloat statusBarHeight = safeArea.top == 0 ? 20 : safeArea.top;
+    
+    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
+    CGRect gameViewRect = self.loadConfigModel.gameView.bounds;
 
-        // 游戏展示区域
-        // Game display area
-        m.view_size.width = gameViewRect.size.width;
-        m.view_size.height = gameViewRect.size.height;
-        // 游戏内容布局安全区域，根据自身业务调整顶部间距
-        // Game content layout security area, adjust the top spacing according to their own business
-        // 顶部间距
-        // top spacing
-        m.view_game_rect.top = (statusBarHeight + 80);
-        // 左边
-        // Left
-        m.view_game_rect.left = 0;
-        // 右边
-        // Right
-        m.view_game_rect.right = 0;
-        // 底部安全区域
-        // Bottom safe area
-        m.view_game_rect.bottom = (safeArea.bottom + 100);
-        return m;
+    // 游戏展示区域
+    // Game display area
+    m.view_size.width = gameViewRect.size.width;
+    m.view_size.height = gameViewRect.size.height;
+    // 游戏内容布局安全区域，根据自身业务调整顶部间距
+    // Game content layout security area, adjust the top spacing according to their own business
+    // 顶部间距
+    // top spacing
+    m.view_game_rect.top = (statusBarHeight + 80);
+    // 左边
+    // Left
+    m.view_game_rect.left = 0;
+    // 右边
+    // Right
+    m.view_game_rect.right = 0;
+    // 底部安全区域
+    // Bottom safe area
+    m.view_game_rect.bottom = (safeArea.bottom + 100);
+    return m;
     }
     ```
 
@@ -173,61 +169,34 @@
     ``` objc
     - (void)onGetCode:(NSString *)userId result:(void (^)(NSString * _Nonnull))result {
     
-        /// 获取加载游戏的code,此处请求自己服务端接口获取code并回调返回即可
-        /// Get the code of loading the game, here request your server interface to get the code and callback return
-        
-        if (userId.length == 0) {
-            NSLog(@"用户ID不能为空");
-            return;
-        }
-        
-        /// 以下是当前demo向demo应用服务获取code的代码
-        /// The following is the code that demo obtains the code from demo application service
-        
-        /// 此接口为QuickStart样例请求接口
-        /// This interface is a QuickStart sample request interface
-        NSString *getCodeUrl = @"https://mgp-hello.sudden.ltd/login/v3";
-        NSDictionary *dicParam = @{@"user_id": userId};
-        [self postHttpRequestWithURL:getCodeUrl param:dicParam success:^(NSDictionary *rootDict) {
-
-            NSDictionary *dic = [rootDict objectForKey:@"data"];
-            /// 这里的code用于登录游戏sdk服务器
-            /// The code here is used to log in to the game sdk server
-            NSString *code = [dic objectForKey:@"code"];
-            int retCode = (int) [[dic objectForKey:@"ret_code"] longValue];
-            result(code);
-
-        }                    failure:^(NSError *error) {
-            NSLog(@"login game server error:%@", error.debugDescription);
-        }];
+    /// 获取加载游戏的code,此处请求自己服务端接口获取code并回调返回即可
+    /// Get the code of loading the game, here request your server interface to get the code and callback return
     
+    if (userId.length == 0) {
+        NSLog(@"用户ID不能为空");
+        return;
     }
-    ```
-    </details>
-
-- Step 5：Create `SudGameManager` game management module instance, instance `QuickStartSudGameEventHandler` event processing module, for example：QuickStartViewController.m
-    <details>
-    <summary>detail QuickStartViewController.m</summary>
-
-    ```objc
-    - (void)viewDidLoad {
-        [super viewDidLoad];
-        // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.blackColor;
-        
-        /// 1. step
-        
-        // 创建游戏管理实例
-        // Create a game management instance
-        self.sudGameManager = SudGameManager.new;;
-        // 创建游戏事件处理对象实例
-        // Create an instance of the game event handler object
-        self.gameEventHandler = QuickStartSudGameEventHandler.new;
-        // 将游戏事件处理对象实例注册进游戏管理对象实例中
-        // Register the game event processing object instance into the game management object instance
-        [self.sudGameManager registerGameEventHandler:self.gameEventHandler];
     
+    /// 以下是当前demo向demo应用服务获取code的代码
+    /// The following is the code that demo obtains the code from demo application service
+    
+    /// 此接口为QuickStart样例请求接口
+    /// This interface is a QuickStart sample request interface
+    NSString *getCodeUrl = @"https://mgp-hello.sudden.ltd/login/v3";
+    NSDictionary *dicParam = @{@"user_id": userId};
+    [self postHttpRequestWithURL:getCodeUrl param:dicParam success:^(NSDictionary *rootDict) {
 
+        NSDictionary *dic = [rootDict objectForKey:@"data"];
+        /// 这里的code用于登录游戏sdk服务器
+        /// The code here is used to log in to the game sdk server
+        NSString *code = [dic objectForKey:@"code"];
+        int retCode = (int) [[dic objectForKey:@"ret_code"] longValue];
+        result(code);
+
+    }                    failure:^(NSError *error) {
+        NSLog(@"login game server error:%@", error.debugDescription);
+    }];
+    
     }
     ```
     </details>
@@ -444,7 +413,7 @@
 - 3.1 Please use the QuickStart project to run.
 - 3.2 QuickStart uses SudMGPWrapper and SudMGPSDK to enable fast integration of games.
 - 3.3 Quick integration guides: [StartUp-Android](https://docs.sud.tech/zh-CN/app/Client/StartUp-Android.html) and [StartUp-iOS](https://docs.sud.tech/zh-CN/app/Client/StartUp-iOS.html).
-- 3.4  The 'SudGameHelper' directory is a module that uses the game itself to encapsulate reusable game-related interfaces, and can be copied to the access application for reuse
+- 3.4  QuickStartViewController(Game)  contains the relevant call logic for the game section, which is responsible for login (App getCode) --> SudMGP.initSDK --> SudMGP.loadMG.
 - 3.5  QuickStartViewController  displays the relevant UI for the game room.
 - 3.6  QuickStart Server  [hello-sud-java](https://github.com/SudTechnology/hello-sud-java) contains the login (App getCode to obtain a short-term token code) functionality. If it cannot be accessed, please contact SUD to add the GitHub account.
 

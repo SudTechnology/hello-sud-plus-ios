@@ -60,7 +60,7 @@
     [super dtConfigEvents];
     WeakSelf;
     self.thirdGameView.onCloseGameBlock = ^{
-        [weakSelf handleChangeToGame:0];
+        [weakSelf switchToGame:0];
     };
     self.thirdGameView.onGamePayBlock = ^{
         [UserService.shared reqAddUserCoin:^(int64_t i) {
@@ -79,14 +79,14 @@
 //    self.operatorView.hidden = YES;
 }
 
-- (NSString *)onGetGameCfg {
+- (GameCfgModel *)onGetGameCfg {
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
     m.ui.lobby_players.hide = NO;
     m.ui.nft_avatar.hide = NO;
     m.ui.game_opening.hide = NO;
     m.ui.game_mvp.hide = NO;
     m.ui.bullet_screens_btn.hide = NO;
-    return [m mj_JSONString];
+    return m;
 }
 
 - (void)updateGameViewSize:(CGFloat)scale {
@@ -103,21 +103,21 @@
     return _thirdGameView;
 }
 
-- (void)loginGame {
+- (void)loadGame {
     if (self.loadType == GameCategoryLoadTypH5) {
         [self reqGameToken];
         return;
     }
-    [super loginGame];
+    [super loadGame];
 }
 
-- (void)logoutGame {
+- (void)destroyGame {
     if (self.loadType == GameCategoryLoadTypH5) {
         [self.thirdGameView destryGame];
         self.thirdGameView.hidden = YES;
         return;
     }
-    [super logoutGame];
+    [super destroyGame];
 }
 
 

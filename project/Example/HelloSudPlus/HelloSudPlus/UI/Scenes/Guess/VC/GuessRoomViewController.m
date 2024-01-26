@@ -182,7 +182,7 @@
         return;
     }
 
-    BOOL isInGame = self.sudFSMMGDecorator.isInGame;
+    BOOL isInGame = self.gameEventHandler.sudFSMMGDecorator.isInGame;
     if (!isInGame) {
         // 当前用户没有加入游戏
         [self showNaviAutoStateView:NO];
@@ -206,7 +206,7 @@
 /// 我的猜输赢挂件响应
 - (void)onTapShowOpenAutoGuess:(id)tap {
 
-    if (self.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
+    if (self.gameEventHandler.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
         [ToastUtil show:NSString.dt_room_guess_gameing_not_open];
         return;
     }
@@ -243,7 +243,7 @@
 /// 自动竞猜状态开关响应
 - (void)onTapAuto:(id)tap {
 
-    if (self.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
+    if (self.gameEventHandler.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
         [ToastUtil show:NSString.dt_room_guess_gaming_not_close];
         return;
     }
@@ -299,7 +299,7 @@
     GuessResultPopView *v = [[GuessResultPopView alloc] init];
     v.againBlock = ^{
         // 下一轮游戏准备
-        [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
+        [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
     };
     v.dataList = playerList;
     v.winCoin = winCoin;
@@ -406,7 +406,7 @@
 - (void)reqBetList {
     WeakSelf
     NSString *roomId = kGuessService.currentRoomVC.roomID;
-    [GuessRoomService reqGuessPlayerList:self.sudFSMMGDecorator.onlineUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
+    [GuessRoomService reqGuessPlayerList:self.gameEventHandler.sudFSMMGDecorator.onlineUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
         weakSelf.betCoin = model.betCoin;
         weakSelf.playerListModel = model;
     }];
@@ -437,7 +437,7 @@
 #pragma mark game events
 
 /// 获取游戏Config  【需要实现】
-- (NSString *)onGetGameCfg {
+- (GameCfgModel *)onGetGameCfg {
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
     m.ui.nft_avatar.hide = NO;
     m.ui.game_opening.hide = NO;
@@ -446,13 +446,12 @@
     m.ui.lobby_players.hide = YES;
     m.ui.start_btn.custom = YES;
     m.ui.join_btn.custom = YES;
-    NSString *jsonStr = [m toJSON];
-    return jsonStr;
+    return m;
 }
 
 /// 接管加入游戏
 - (void)onGameMGCommonSelfClickJoinBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickCancelJoinBtn *)model {
-    [self.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+    [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
     if (self.openAutoBet) {
         [self showNaviAutoStateView:YES];
     } else {
@@ -464,7 +463,7 @@
 - (void)onGameMGCommonSelfClickStartBtn {
     // 通过游戏透传业务竞猜场景ID到业务服务端
     NSDictionary *dic = @{@"sceneId": @(self.configModel.enterRoomModel.sceneType)};
-    [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
+    [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
     DDLogDebug(@"onGameMGCommonSelfClickStartBtn");
 
 }
@@ -496,7 +495,7 @@
     self.isNextRound = YES;
     // 展示游戏结果
     [self handlePlayerGameResult:model.results];
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    [handle success:[self.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
 }
 
 #pragma mark lazy

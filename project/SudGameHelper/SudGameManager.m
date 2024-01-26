@@ -13,7 +13,7 @@
 @interface SudGameManager()
 /// 游戏事件处理对象
 /// Game event handling object
-@property(nonatomic, weak)BaseSudGameEventHandler *sudGameEventHandler;
+@property(nonatomic, weak)SudGameBaseEventHandler *sudGameEventHandler;
 @end
 
 @implementation SudGameManager
@@ -24,7 +24,7 @@
 
 #pragma mark --- public
 
-- (void)registerGameEventHandler:(BaseSudGameEventHandler *)eventHandler {
+- (void)registerGameEventHandler:(SudGameBaseEventHandler *)eventHandler {
     self.sudGameEventHandler = eventHandler;
     [self.sudGameEventHandler.sudFSMMGDecorator setEventListener:eventHandler];
 }
@@ -42,6 +42,7 @@
 
 - (void)destroyGame {
     NSAssert(self.sudGameEventHandler, @"Must registerGameEventHandler before!");
+    [self.sudGameEventHandler.sudFSMMGDecorator clearAllStates];
     [self.sudGameEventHandler.sudFSTAPPDecorator destroyMG];
 }
 

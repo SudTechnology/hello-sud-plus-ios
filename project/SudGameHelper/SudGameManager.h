@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <SudMGPWrapper/SudMGPWrapper.h>
-#import "BaseSudGameEventHandler.h"
+#import "SudGameBaseEventHandler.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// SUD 游戏管理模块
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter eventHandler: eventHandler 游戏事件监听对象，所有游戏与app交互事件从这里回调给listener，备注：内部不强制引用，外部必须强持有该handler
 /// Register a game event handler to listen for game events.
 /// @param eventHandler The event handler object that will receive callbacks for game events. Note: References are not mandatory internally, and this handler must be held externally
-- (void)registerGameEventHandler:(BaseSudGameEventHandler *)eventHandler;
+- (void)registerGameEventHandler:(SudGameBaseEventHandler *)eventHandler;
 
 /// 二：加载游戏
 /// 接入方客户端 调用 接入方服务端 getCode: 获取 短期令牌code

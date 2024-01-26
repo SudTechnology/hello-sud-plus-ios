@@ -49,25 +49,25 @@
     node.gameAPITypeBlock = ^(int64_t type) {
         switch (type) {
             case GameAPITypeSelfIn: // 加入状态
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+                [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
                 break;
             case GameAPITypeSelfReady: // 准备
-                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
+                [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
                 break;
             case GameAPITypeSelfReadyCancel: // 取消准备
-                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:NO];
+                [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCommonSelfReady:NO];
                 break;
             case GameAPITypeSelfInOut: // 退出游戏
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+                [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
                 break;
             case GameAPITypeSelfPlaying: // 开始游戏
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:YES reportGameInfoExtras:@""];
+                [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfPlaying:YES reportGameInfoExtras:@""];
                 break;
             case GameAPITypeSelfPlayingNot: // 逃跑
-                [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:NO reportGameInfoExtras:@""];
+                [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfPlaying:NO reportGameInfoExtras:@""];
                 break;
             case GameAPITypeSelfEnd: // 解散游戏（队长）
-                [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfEnd];
+                [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCommonSelfEnd];
                 break;
             default:
                 break;
@@ -80,9 +80,9 @@
 #pragma mark - SudFSMMGListener
 
 /// 获取游戏Config  【需要实现】
-- (NSString *)onGetGameCfg {
+- (GameCfgModel *)onGetGameCfg {
     GameCfgModel *m = [AudioRoomService getGameCfgModel];
-    return [m mj_JSONString];
+    return m;
 }
 
 #pragma mark - Lazy

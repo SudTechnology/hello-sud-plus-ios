@@ -335,14 +335,14 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeJoinDancePool;
     m.field1 = colorHexValue;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 离开舞池
 - (void)leaveDancePool {
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeLeaveDancePool;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 跳舞模式
@@ -351,7 +351,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeDancingMode;
     m.field1 = field1;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 加入主播位
@@ -366,7 +366,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     if (field2.length == 0) {
         self.isAnchor = YES;
     }
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 离开主播位
@@ -378,7 +378,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     if ([AppService.shared.loginUserID isEqualToString: playerId]) {
         self.isAnchor = NO;
     }
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 角色移动
@@ -389,7 +389,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     m.actionId = DiscoActionTypeMoveRole;
     m.cooldown = cooldown;
     m.field1 = field1;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 角色飞天
@@ -398,7 +398,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeFlyRole;
     m.cooldown = cooldown;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 换角色
@@ -407,7 +407,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeChangeRole;
     m.field1 = field1;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 角色特写
@@ -418,7 +418,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     m.actionId = DiscoActionTypeSpecialRole;
     m.cooldown = cooldown;
     m.isTop = isTop;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 文字气泡
@@ -429,7 +429,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     m.actionId = DiscoActionTypeMsgPop;
     m.cooldown = cooldown;
     m.field1 = field1;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 角色变大
@@ -440,7 +440,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     m.actionId = DiscoActionTypeBiggerRole;
     m.cooldown = cooldown;
     m.field1 = field1;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 角色特效
@@ -451,7 +451,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     m.actionId = DiscoActionTypeEffectRole;
     m.cooldown = cooldown;
     m.field1 = field1;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 和主播跳舞
@@ -465,7 +465,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     m.cooldown = cooldown;
     m.isTop = isTop;
     m.field1 = field1;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 上DJ台
@@ -474,7 +474,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     AppCommonGameDiscoAction *m = [[AppCommonGameDiscoAction alloc] init];
     m.actionId = DiscoActionTypeUpDJ;
     m.cooldown = cooldown;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 /// 角色称号
@@ -487,7 +487,7 @@ NSNotificationName const dancingListChangedNTF = @"dancingListChangedNTF";
     m.cooldown = cooldown;
     m.field1 = field1;
     m.field2 = field2;
-    [self.currentRoomVC.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
+    [self.currentRoomVC.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameDiscoAction:m];
 }
 
 #pragma mark restful api

@@ -13,7 +13,7 @@
 
 /// 开启推流
 - (void)startPublishStream {
-    if (self.sudFSMMGDecorator.keyWordASRing) {
+    if (self.gameEventHandler.sudFSMMGDecorator.keyWordASRing) {
         [self startCaptureAudioToASR];
     }
     [AudioEngineFactory.shared.audioEngine startPublishStream];
@@ -21,7 +21,7 @@
 
 /// 关闭推流
 - (void)stopPublish {
-    if (self.sudFSMMGDecorator.keyWordASRing) {
+    if (self.gameEventHandler.sudFSMMGDecorator.keyWordASRing) {
         [self stopCaptureAudioToASR];
     }
     [AudioEngineFactory.shared.audioEngine stopPublishStream];
@@ -101,7 +101,7 @@
     // 离开房间
     [AudioEngineFactory.shared.audioEngine leaveRoom];
     [[IMRoomManager sharedInstance] leaveRoom];
-    [self logoutGame];
+    [self destroyGame];
     if (finished) finished();
 }
 
@@ -211,6 +211,6 @@
 
 
 - (void)onCapturedPCMData:(NSData *)data {
-    [self.sudFSTAPPDecorator pushAudio:data];
+    [self.gameEventHandler.sudFSTAPPDecorator pushAudio:data];
 }
 @end

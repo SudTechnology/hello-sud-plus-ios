@@ -15,14 +15,18 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BaseSceneViewController(Game) <SudFSMMGListener>
 
 /// 初始化sud
-- (void)initSudFSMMG;
-/// 登录游戏业务服务
-- (void)loginGame;
-/// 退出游戏
-- (void)logoutGame;
+- (void)configSudGame;
+
+/// 加载游戏
+- (void)loadGame;
+
+/// 销毁游戏
+- (void)destroyGame;
+
 /// 处理切换游戏
 /// @param gameID 新的游戏ID
-- (void)handleChangeToGame:(int64_t)gameID;
+- (void)switchToGame:(int64_t)gameID;
+
 - (void)hanldeInitSudFSMMG;
 @end
 

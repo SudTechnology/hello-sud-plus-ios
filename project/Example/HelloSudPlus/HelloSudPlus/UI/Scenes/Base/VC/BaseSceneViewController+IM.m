@@ -154,7 +154,7 @@
         case CMD_CHANGE_GAME_NOTIFY: {
             // 游戏切换
             RoomCmdChangeGameModel *m = [RoomCmdChangeGameModel fromJSON:command];
-            [self handleChangeToGame:m.gameID];
+            [self switchToGame:m.gameID];
         }
             break;
 
@@ -202,7 +202,7 @@
                 cardEffect.type = m.type;
                 cardEffect.toUid = [NSString stringWithFormat:@"%@", n];
                 cardEffect.count = m.amount;
-                [self.sudFSTAPPDecorator notifyAppCommonGameShowMonopolyCardEffect:cardEffect];
+                [self.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameShowMonopolyCardEffect:cardEffect];
                 
             }
             
@@ -220,10 +220,10 @@
 /// 加入游戏
 - (void)notifyGameToJoin {
 
-    if (![self.sudFSMMGDecorator isPlayerIn:AppService.shared.login.loginUserInfo.userID]) {
-        if (self.sudFSMMGDecorator.gameStateType == GameStateTypeLeisure && !self.sudFSMMGDecorator.isInGame) {
+    if (![self.gameEventHandler.sudFSMMGDecorator isPlayerIn:AppService.shared.login.loginUserInfo.userID]) {
+        if (self.gameEventHandler.sudFSMMGDecorator.gameStateType == GameStateTypeLeisure && !self.gameEventHandler.sudFSMMGDecorator.isInGame) {
             /// 上麦，就是加入游戏
-            [self.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+            [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
         }
     }
 }
@@ -231,30 +231,30 @@
 /// 退出游戏
 - (void)notifyGameToExit {
 
-    if (![self.sudFSMMGDecorator isPlayerInGame:AppService.shared.login.loginUserInfo.userID]) {
+    if (![self.gameEventHandler.sudFSMMGDecorator isPlayerInGame:AppService.shared.login.loginUserInfo.userID]) {
         return;
     }
-    if (self.sudFSMMGDecorator.isReady) {
+    if (self.gameEventHandler.sudFSMMGDecorator.isReady) {
         /// 如果已经准备先退出准备状态
-        [self.sudFSTAPPDecorator notifyAppCommonSelfReady:false];
+        [self.gameEventHandler.sudFSTAPPDecorator notifyAppCommonSelfReady:false];
     }
     /// 下麦，就是退出游戏
-    [self.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
+    [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfIn:NO seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 /// 你画我猜命中
 - (void)handleGameKeywordHitting:(NSString *)content {
 
-    if (self.sudFSMMGDecorator.isHitBomb) {
+    if (self.gameEventHandler.sudFSMMGDecorator.isHitBomb) {
         if ([self isPureInt:content]) {
             /// 关键词命中
-            [self.sudFSTAPPDecorator notifyAppComonDrawTextHit:false keyWord:@"" text:content];
+            [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonDrawTextHit:false keyWord:@"" text:content];
         }
         return;
     }
-    if (self.sudFSMMGDecorator.keyWordHiting == YES && [content isEqualToString:self.sudFSMMGDecorator.drawKeyWord]) {
+    if (self.gameEventHandler.sudFSMMGDecorator.keyWordHiting == YES && [content isEqualToString:self.gameEventHandler.sudFSMMGDecorator.drawKeyWord]) {
         /// 关键词命中
-        [self.sudFSTAPPDecorator notifyAppComonDrawTextHit:true keyWord:self.sudFSMMGDecorator.drawKeyWord text:self.sudFSMMGDecorator.drawKeyWord];
+        [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonDrawTextHit:true keyWord:self.gameEventHandler.sudFSMMGDecorator.drawKeyWord text:self.gameEventHandler.sudFSMMGDecorator.drawKeyWord];
     }
 }
 

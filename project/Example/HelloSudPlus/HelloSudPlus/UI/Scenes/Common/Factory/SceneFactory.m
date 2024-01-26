@@ -43,6 +43,9 @@
         case SceneTypeGameCategoryDanmaku:
             vc = [[DanmakuVerticalRoomViewController alloc]init];
             break;
+        case SceneTypeGameCategory3DAudio:
+            vc = Audio3DRoomViewController.new;
+            break;
         default:
             vc = [[ThirdGameViewController alloc] init];
             break;

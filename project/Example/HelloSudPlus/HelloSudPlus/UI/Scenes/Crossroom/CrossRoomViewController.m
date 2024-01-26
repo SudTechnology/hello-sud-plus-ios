@@ -12,6 +12,7 @@
 #import "DTTextAlertView.h"
 #import "PKGameEmptyView.h"
 #import "SuspendRoomView.h"
+#import "CrossRoomSceneGameEventHandler.h"
 
 /// pk状态类型
 typedef NS_ENUM(NSInteger, PKStateType) {
@@ -269,7 +270,7 @@ typedef NS_ENUM(NSInteger, PKStateType) {
             [DTAlertView close];
 
             // 游戏中
-            if (weakSelf.sudFSMMGDecorator.isPlaying) {
+            if (weakSelf.gameEventHandler.sudFSMMGDecorator.isPlaying) {
                 [ToastUtil show:NSString.dt_room_pk_remove_gaming_toast_tip];
                 return;
             } else if (weakSelf.pkState == PKStateTypeIng) {
@@ -417,12 +418,12 @@ typedef NS_ENUM(NSInteger, PKStateType) {
 
 /// 如果是队长，结束游戏
 - (void)endGameIfIamCaptainWithFinished:(void (^)(void))finished {
-    if ([self.sudFSMMGDecorator isInGame]) {
+    if ([self.gameEventHandler.sudFSMMGDecorator isInGame]) {
         // 离开游戏
-        [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
+        [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfPlaying:false reportGameInfoExtras:@""];
         // 结束游戏
-        if ([self.sudFSMMGDecorator isPlayerIsCaptain:AppService.shared.login.loginUserInfo.userID]) {
-            [self.sudFSTAPPDecorator notifyAppCommonSelfEnd];
+        if ([self.gameEventHandler.sudFSMMGDecorator isPlayerIsCaptain:AppService.shared.login.loginUserInfo.userID]) {
+            [self.gameEventHandler.sudFSTAPPDecorator notifyAppCommonSelfEnd];
         }
         // 延迟关闭以便上面指令执行
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (100 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
@@ -882,27 +883,8 @@ typedef NS_ENUM(NSInteger, PKStateType) {
 
 }
 
-/// 获取游戏View信息  【需要实现】
-- (void)onGetGameViewInfo:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    CGFloat scale = [[UIScreen mainScreen] nativeScale];
-    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    GameViewSize *viewSize = [[GameViewSize alloc] init];
-    viewSize.width = kScreenWidth * scale;
-    viewSize.height = kScreenHeight * scale;
-    ViewGameRect *viewRect = [[ViewGameRect alloc] init];
-    viewRect.top = (kStatusBarHeight + 170) * scale;
-    viewRect.left = 0;
-    viewRect.bottom = (kAppSafeBottom + 150) * scale;
-    viewRect.right = 0;
-    m.ret_code = 0;
-    m.ret_msg = @"success";
-    m.view_size = viewSize;
-    m.view_game_rect = viewRect;
-    [handle success:m.mj_JSONString];
-}
-
 /// 获取游戏Config  【需要实现】
-- (NSString *)onGetGameCfg {
+- (GameCfgModel *)onGetGameCfg {
 
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
     m.ui.nft_avatar.hide = NO;
@@ -912,12 +894,16 @@ typedef NS_ENUM(NSInteger, PKStateType) {
     m.ui.start_btn.custom = YES;
     m.ui.lobby_game_setting.hide = YES;
 
-    return [m mj_JSONString];
+    return m;
 }
 
 /// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
 - (void)onGameMGCommonSelfClickStartBtn {
     NSDictionary *dic = @{@"pkId": @(self.pkId), @"sceneId": @(self.configModel.enterRoomModel.sceneType)};
-    [self.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
+    [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
+}
+
+- (BaseSceneGameEventHandler *)createGameEventHandler  {
+    return CrossRoomSceneGameEventHandler.new;
 }
 @end

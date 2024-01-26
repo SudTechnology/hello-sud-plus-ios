@@ -34,8 +34,7 @@
     }
 }
 
-/// 获取游戏View信息  【需要实现】
-- (void)onGetGameViewInfo:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
+- (GameViewInfoModel *)onGetGameViewInfo {
     CGFloat scale = [[UIScreen mainScreen] nativeScale];
     GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
     m.view_size.width = kScreenWidth * scale;
@@ -45,9 +44,7 @@
     m.view_game_rect.bottom = 0;//(kAppSafeBottom + 150) * scale;
     m.view_game_rect.right = 0;
 
-    m.ret_code = 0;
-    m.ret_msg = @"success";
-    [handle success:m.mj_JSONString];
+    return m;
 }
 
 /// 可点击区域(棒球) MG_BASEBALL_SET_CLICK_RECT

@@ -31,6 +31,7 @@
 /// 是否加载了游戏
 @property(nonatomic, assign) BOOL isLoadedGame;
 @property(nonatomic, strong) InteractiveGameBaseHandler *baseHandler;
+@property(nonatomic, strong)SudGameManager *gameManager;
 @end
 
 @implementation InteractiveGameManager
@@ -39,17 +40,15 @@
 - (instancetype)init {
 
     if (self = [super init]) {
-        [self initSudFSMMG];
+        [self configSudGame];
     }
     return self;
 }
 
 /// 初始化sud
-- (void)initSudFSMMG {
+- (void)configSudGame {
     self.language = [SettingsService getCurLanguageLocale];
-    self.sudFSTAPPDecorator = [[SudFSTAPPDecorator alloc] init];
-    self.sudFSMMGDecorator = [[SudFSMMGDecorator alloc] init];
-    [self.sudFSMMGDecorator setCurrentUserId:AppService.shared.login.loginUserInfo.userID];
+    self.gameManager = SudGameManager.new;
     [self hanldeInitSudFSMMG];
 }
 
@@ -70,7 +69,7 @@
     gameView.hidden = NO;
     [self setupHandler:gameId];
     [self.baseHandler showLoadingView:gameView];
-    [self loginGame];
+    [self loadGame];
 }
 
 /// 设置游戏处理
@@ -80,33 +79,24 @@
         case INTERACTIVE_GAME_BASEBALL_ID:{
             // 棒球
             self.baseHandler = InteractiveGameBaseballHandler.new;
-            [self.sudFSMMGDecorator setEventListener:self.baseHandler];
-            self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
-            self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
         }
             break;
         case INTERACTIVE_GAME_ROCKET_ID:{
             // 火箭
             self.baseHandler = InteractiveGameRocketHandler.new;
-            [self.sudFSMMGDecorator setEventListener:self.baseHandler];
-            self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
-            self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
+
         }
             break;
         case INTERACTIVE_GAME_CRAZY_CAR_ID:{
             // 赛车
             self.baseHandler = InteractiveGameCrazyCarHandler.new;
-            [self.sudFSMMGDecorator setEventListener:self.baseHandler];
-            self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
-            self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
+
         }
             break;
         case INTERACTIVE_GAME_BIG_EATER_ID:{
             // 大胃王
             self.baseHandler = InteractiveGameBigEaterHandler.new;
-            [self.sudFSMMGDecorator setEventListener:self.baseHandler];
-            self.baseHandler.sudFSTAPPDecorator = self.sudFSTAPPDecorator;
-            self.baseHandler.sudFSMMGDecorator = self.sudFSMMGDecorator;
+
         }
             break;
         default:
@@ -114,7 +104,7 @@
     }
     self.baseHandler.gameId = gameId;
     self.baseHandler.interactiveGameManager = self;
-
+    [self.gameManager registerGameEventHandler:self.baseHandler];
 }
 
 - (void)clearLoadGameState {
@@ -179,7 +169,7 @@
     self.gameView.hidden = YES;
     self.gameId = 0;
     self.gameRoomID = nil;
-    [self logoutGame];
+    [self destroyGame];
     [self clearLoadGameState];
     if (self.onGameDestryedBlock) {
         self.onGameDestryedBlock();
@@ -198,47 +188,24 @@
 #pragma mark =======登录 加载 游戏=======
 
 /// 游戏登录
-/// 接入方客户端 调用 接入方服务端 loginGame: 获取 短期令牌code
+/// 接入方客户端 调用 接入方服务端 loadGame: 获取 短期令牌code
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
-- (void)loginGame {
+- (void)loadGame {
+    
+    // 自定义进度条
+    [[SudMGP getCfg] setShowCustomLoading:YES];
+    
     NSString *appID = AppService.shared.configModel.sudCfg.appId;
     NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
     if (appID.length == 0 || appKey.length == 0) {
         [ToastUtil show:@"Game appID or appKey is empty"];
         return;
     }
-    WeakSelf
-    [GameService.shared reqGameLoginWithAppId:appID success:^(RespGameInfoModel *gameInfo) {
-        [weakSelf login:weakSelf.gameView gameId:weakSelf.gameId code:gameInfo.code appID:appID appKey:appKey];
-    }                                    fail:^(NSError *error) {
-        [ToastUtil show:error.debugDescription];
-        [self clearLoadGameState];
-    }];
-}
-
-/// 退出游戏
-- (void)logoutGame {
-    // 销毁游戏
-    [self.sudFSTAPPDecorator destroyMG];
-}
-
-
-#pragma mark =======登录 加载 游戏=======
-
-/// 游戏登录
-/// 接入方客户端 调用 接入方服务端 loginGame: 获取 短期令牌code
-/// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
-- (void)login:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
-    [self initSdk:rootView gameId:gameId code:code appID:appID appKey:appKey];
-}
-
-/// 加载游戏
-- (void)initSdk:(UIView *)rootView gameId:(int64_t)gameId code:(NSString *)code appID:(NSString *)appID appKey:(NSString *)appKey {
-    WeakSelf
-    [self logoutGame];
-    if (gameId <= 0) {
-        DDLogDebug(@"游戏ID为空，无法加载游戏:%@, currentRoomID:%@, currentGameRoomID:%@", gameId, self.roomID, self.gameRoomID);
-        [self clearLoadGameState];
+    
+    NSString *userID = AppService.shared.login.loginUserInfo.userID;
+    NSString *roomID = self.gameRoomID;
+    if (userID.length == 0 || roomID.length == 0) {
+        [ToastUtil show:NSString.dt_room_load_failed];
         return;
     }
     BOOL isTest = false;
@@ -248,41 +215,22 @@
         isTest = YES;
     }
 #endif
-    [SudMGP initSDK:appID appKey:appKey isTestEnv:isTest listener:^(int retCode, const NSString *retMsg) {
-        if (retCode == 0) {
-            DDLogInfo(@"ISudFSMMG:initGameSDKWithAppID:初始化游戏SDK成功");
-            if (weakSelf) {
-                // SudMGPSDK初始化成功 加载MG
-                NSString *userID = AppService.shared.login.loginUserInfo.userID;
-                NSString *roomID = weakSelf.gameRoomID;
-                if (userID.length == 0 || roomID.length == 0 || code.length == 0) {
-                    [ToastUtil show:NSString.dt_room_load_failed];
-                    return;
-                }
-                DDLogInfo(@"loadGame:userId:%@, gameRoomId:%@, currentRoomId:%@, gameId:%@", userID, roomID, weakSelf.roomID, @(gameId));
-                [weakSelf loadGame:userID roomId:roomID code:code mgId:gameId language:weakSelf.language fsmMG:weakSelf.sudFSMMGDecorator rootView:rootView];
-            }
-        } else {
-            /// 初始化失败, 可根据业务重试
-            DDLogError(@"ISudFSMMG:initGameSDKWithAppID:初始化sdk失败 :%@", retMsg);
-            [self clearLoadGameState];
-        }
-    }];
+    SudGameLoadConfigModel *configModel = SudGameLoadConfigModel.new;
+    configModel.appId = appID;
+    configModel.appKey = appKey;
+    configModel.roomId = roomID;
+    configModel.userId = userID;
+    configModel.gameId = self.gameId;
+    configModel.gameView = self.gameView;
+    configModel.language = self.language;
+    configModel.isTestEnv = isTest;
+
+    [self.gameManager loadGame:configModel];
 }
 
-/// 加载游戏MG
-/// @param userId 用户唯一ID
-/// @param roomId 房间ID
-/// @param code 游戏登录code
-/// @param mgId 游戏ID
-/// @param language 支持简体"zh-CN "    繁体"zh-TW"    英语"en-US"   马来"ms-MY"
-/// @param fsmMG 控制器
-/// @param rootView 游戏根视图
-- (void)loadGame:(NSString *)userId roomId:(NSString *)roomId code:(NSString *)code mgId:(int64_t)mgId language:(NSString *)language fsmMG:(id)fsmMG rootView:(UIView *)rootView {
-
-    [[SudMGP getCfg] setShowCustomLoading:YES];
-    id <ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:userId roomId:roomId code:code mgId:mgId language:language fsmMG:self.sudFSMMGDecorator rootView:rootView];
-    [self.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
+/// 退出游戏
+- (void)destroyGame {
+    // 销毁游戏
+    [self.gameManager destroyGame];
 }
-
 @end

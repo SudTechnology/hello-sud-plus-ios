@@ -82,7 +82,7 @@
             return;
         }
         // 下一轮游戏准备
-        [weakSelf.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
+        [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCommonSelfReady:YES];
         [weakSelf kikoutLosePlayer:playerList];
     };
     v.closeBlock = ^{
@@ -224,7 +224,7 @@
         case 1: {
 
             // 第一轮
-            NSInteger playerCount = self.sudFSMMGDecorator.onlineUserIdList.count;
+            NSInteger playerCount = self.gameEventHandler.sudFSMMGDecorator.onlineUserIdList.count;
             NSInteger totalCount = self.totalGameUserCount;
             if (totalCount > playerCount) {
                 // 补全剩余麦位
@@ -237,7 +237,7 @@
                     }
                     BOOL addRobot = false;
                     for (RobotInfoModel *m in self.cacheRobotList) {
-                        if (![self.sudFSMMGDecorator isPlayerInGame:[NSString stringWithFormat:@"%@", @(m.userId)]]) {
+                        if (![self.gameEventHandler.sudFSMMGDecorator isPlayerInGame:[NSString stringWithFormat:@"%@", @(m.userId)]]) {
                             [waitForAddToGameList addObject:m];
                             addRobot = YES;
                             continue;
@@ -292,7 +292,7 @@
             continue;
         }
         // 踢出未在第二轮用户
-        [self.sudFSTAPPDecorator notifyAppComonKickStateWithUserId:strUserId];
+        [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonKickStateWithUserId:strUserId];
     }
 }
 
@@ -302,7 +302,7 @@
         return YES;
     }
 
-    if ([self.sudFSMMGDecorator isPlayerInGame:AppService.shared.loginUserID]) {
+    if ([self.gameEventHandler.sudFSMMGDecorator isPlayerInGame:AppService.shared.loginUserID]) {
         return YES;
     }
     [ToastUtil show:@"您不是参赛者，不能加入游戏"];
@@ -312,7 +312,7 @@
 #pragma mark game events
 
 /// 获取游戏Config  【需要实现】
-- (NSString *)onGetGameCfg {
+- (GameCfgModel *)onGetGameCfg {
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
     m.ui.lobby_game_setting.hide = YES;
     m.ui.gameSettle.hide = YES;
@@ -321,8 +321,7 @@
     m.ui.join_btn.custom = YES;
     m.ui.game_opening.hide = YES;
     m.ui.game_mvp.hide = YES;
-    NSString *jsonStr = [m toJSON];
-    return jsonStr;
+    return m;
 }
 
 /// 接管加入游戏
@@ -331,7 +330,7 @@
         DDLogError(@"can not join game");
         return;
     }
-    [self.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
+    [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfIn:YES seatIndex:-1 isSeatRandom:true teamId:1];
 }
 
 /// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
@@ -344,13 +343,13 @@
         [self checkAddOtherRobot:^{
             // 开始游戏
             NSDictionary *dic = @{};
-            [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
+            [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
         }];
     } else {
         // 第二轮
         BOOL hasUserExitGame = NO;
         for (LeaguePlayerModel *m in self.nextRoundPlayerList) {
-            BOOL isPlayerInGame = [self.sudFSMMGDecorator isPlayerInGame:[NSString stringWithFormat:@"%@", @(m.userId)]];
+            BOOL isPlayerInGame = [self.gameEventHandler.sudFSMMGDecorator isPlayerInGame:[NSString stringWithFormat:@"%@", @(m.userId)]];
             if (!isPlayerInGame) {
                 hasUserExitGame = YES;
                 break;
@@ -364,7 +363,7 @@
         }
         // 开始游戏
         NSDictionary *dic = @{};
-        [weakSelf.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
+        [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppComonSelfPlaying:true reportGameInfoExtras:dic.mj_JSONString];
     }
 }
 
@@ -389,7 +388,7 @@
         [weakSelf handlePlayerGameResult:model.results];
     }];
 
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    [handle success:[self.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
 }
 
 #pragma mark lazy

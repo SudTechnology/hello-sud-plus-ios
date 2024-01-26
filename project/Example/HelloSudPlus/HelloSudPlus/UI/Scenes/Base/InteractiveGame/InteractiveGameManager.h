@@ -65,4 +65,7 @@
 /// 设置动效回调
 /// @param rocketEffectBlock
 - (void)setupRocketEffectBlock:(void(^)(BOOL show))rocketEffectBlock;
+
+/// 清除加载状态
+- (void)clearLoadGameState;
 @end

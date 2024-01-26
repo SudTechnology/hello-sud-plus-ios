@@ -28,7 +28,8 @@
 #import "BaseSceneConfigModel.h"
 #import "SceneContentView.h"
 #import "InteractiveGameManager.h"
-
+#import "BaseSceneGameEventHandler.h"
+#import "SudGameManager.h"
 NS_ASSUME_NONNULL_BEGIN
 @class BaseSceneService;
 
@@ -91,12 +92,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSArray<RobotInfoModel *> *cacheRobotList;
 #pragma mark - GAME
 
-
-/// ISudFSTAPP
-@property(nonatomic, strong) SudFSMMGDecorator *sudFSMMGDecorator;
-/// app To 游戏 管理类
-@property(nonatomic, strong) SudFSTAPPDecorator *sudFSTAPPDecorator;
-
 /// 业务：是否展示结束游戏 (队长 + 正在游戏)
 @property(nonatomic, assign) BOOL isShowEndGame;
 /// 当前游戏语言
@@ -120,6 +115,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 互动礼物
 @property(nonatomic, strong) InteractiveGameManager *interactiveGameManager;
+/// 游戏事件处理模块
+@property(nonatomic, strong)BaseSceneGameEventHandler *gameEventHandler;
+/// 游戏管理模块
+@property(nonatomic, strong)SudGameManager *gameManager;
 
 /// 创建服务
 - (void)createService;
@@ -262,7 +261,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - SudFSMMGListener
 
 /// 游戏配置
-- (NSString *)onGetGameCfg;
+- (GameCfgModel *)onGetGameCfg;
 
 /// 处理游戏开始
 - (void)handleGameStared;
@@ -312,6 +311,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 退出房间
 - (void)handleExitRoomIsFromSuspend:(BOOL)isSuspend finished:(void (^)(void))finished;
+
+/// 创建游戏事件处理模块
+- (BaseSceneGameEventHandler *)createGameEventHandler;
 @end
 
 NS_ASSUME_NONNULL_END

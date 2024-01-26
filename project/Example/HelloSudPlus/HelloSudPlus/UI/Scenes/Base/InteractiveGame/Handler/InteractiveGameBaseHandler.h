@@ -4,15 +4,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SudGameBaseEventHandler.h"
 
 @class InteractiveGameManager;
 
 /// 互动游戏base处理模块
-@interface InteractiveGameBaseHandler : NSObject <SudFSMMGListener>
-/// ISudFSTAPP
-@property(nonatomic, strong) SudFSMMGDecorator *sudFSMMGDecorator;
-/// app To 游戏 管理类
-@property(nonatomic, strong) SudFSTAPPDecorator *sudFSTAPPDecorator;
+@interface InteractiveGameBaseHandler : SudGameBaseEventHandler
+
 @property(nonatomic, weak) InteractiveGameManager *interactiveGameManager;
 /// 游戏设置点击区域
 @property(nonatomic, strong) MgCommonSetClickRect *gameClickRect;

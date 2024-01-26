@@ -119,7 +119,7 @@
     self.circleImageView.hidden = YES;
     [self.matchGroupView showJoinState];
     if (self.gameId > 0) {
-        [self handleChangeToGame:0];
+        [self switchToGame:0];
     }
 }
 
@@ -142,7 +142,7 @@
         }
     }
     if (self.gameId > 0) {
-        [self handleChangeToGame:0];
+        [self switchToGame:0];
     }
 }
 
@@ -501,7 +501,7 @@
 #pragma mark - SudFSMMGListener
 
 /// 获取游戏Config  【需要实现】
-- (NSString *)onGetGameCfg {
+- (GameCfgModel *)onGetGameCfg {
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
     m.ui.nft_avatar.hide = NO;
     m.ui.game_opening.hide = NO;
@@ -509,7 +509,7 @@
     m.ui.lobby_players.hide = true;
     m.ui.game_settle_again_btn.hide = YES;
     m.ui.game_settle_close_btn.custom = YES;
-    return [m mj_JSONString];
+    return m;
 }
 
 /// 游戏: 结算界面关闭按钮点击状态   MG_COMMON_SELF_CLICK_GAME_SETTLE_CLOSE_BTN
@@ -519,7 +519,7 @@
     // 展示加入组队画面
     [self showJoinGroupState:self.isMeInGroup];
     [self updateSelectGameState];
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    [handle success:[self.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
 }
 
 @end

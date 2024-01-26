@@ -123,7 +123,7 @@
 
 /// 处理切换游戏
 /// @param gameID 新的游戏ID
-- (void)handleChangeToGame:(int64_t)gameID {
+- (void)handleSwitchToGame:(int64_t)gameID {
     [self.gameEventHandler.sudFSMMGDecorator clearAllStates];
     if (gameID == 0) {
         /// 销毁游戏
@@ -286,7 +286,7 @@
         }
         // 切换游戏
         // Switch games
-        [weakSelf handleChangeToGame:m.gameId];
+        [weakSelf handleSwitchToGame:m.gameId];
     };
 }
 

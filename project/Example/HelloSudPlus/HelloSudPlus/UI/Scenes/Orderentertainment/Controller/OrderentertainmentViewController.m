@@ -110,8 +110,8 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
             [self.gameStateLabel setHidden:true];
             self.roomType = HSAudio;
             self.gameId = 0;
-            [self logoutGame];
-            [self.sudFSMMGDecorator clearAllStates];
+            [self destroyGame];
+            [self.gameEventHandler.sudFSMMGDecorator clearAllStates];
             break;
         case OrderStateTypeGame:
             [self.wantOrderView setHidden:true];
@@ -157,14 +157,14 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
     [handle success:m.mj_JSONString];
 }
 
-- (NSString *)onGetGameCfg {
+- (GameCfgModel *)onGetGameCfg {
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
     m.ui.nft_avatar.hide = NO;
     m.ui.game_opening.hide = NO;
     m.ui.game_mvp.hide = NO;
     m.ui.game_bg.hide = true;
     m.ui.lobby_players.hide = NO;
-    return [m mj_JSONString];
+    return m;
 }
 
 /// 游戏: 游戏结算状态     MG_COMMON_GAME_SETTLE
@@ -192,7 +192,7 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
         self.toGameUserId = @"";
     }
     
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    [handle success:[self.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
 }
 
 #pragma mark - Event

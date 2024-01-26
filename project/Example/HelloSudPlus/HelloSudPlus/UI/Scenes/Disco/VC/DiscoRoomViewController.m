@@ -411,7 +411,7 @@ static NSString *discoKeyWordsFocus = @"聚焦";
     AppCommonGameAddAIPlayersModel *appCommonGameAddAiPlayersModel = [[AppCommonGameAddAIPlayersModel alloc] init];
     appCommonGameAddAiPlayersModel.aiPlayers = aiPlayers;
     appCommonGameAddAiPlayersModel.isReady = YES;
-    [self.sudFSTAPPDecorator notifyAppCommonGameAddAIPlayers:appCommonGameAddAiPlayersModel];
+    [self.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameAddAIPlayers:appCommonGameAddAiPlayersModel];
 
     // 机器人加入主播位
     [HSThreadUtils dispatchMainAfter:1 callback:^{

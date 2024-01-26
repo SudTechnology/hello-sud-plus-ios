@@ -134,7 +134,7 @@
 - (void)handleStateResult {
 
     // 是否在游戏
-    BOOL isInGame = kGuessService.currentRoomVC.sudFSMMGDecorator.isInGame;
+    BOOL isInGame = kGuessService.currentRoomVC.gameEventHandler.sudFSMMGDecorator.isInGame;
 
     if (isInGame) {
         self.closeBtn.hidden = NO;

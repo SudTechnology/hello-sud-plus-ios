@@ -59,7 +59,7 @@
     [self roomTypeReloadContent];
 }
 
-- (NSString *)onGetGameCfg {
+- (GameCfgModel *)onGetGameCfg {
     if (self.configModel.enterRoomModel.sceneType == SceneTypeAudio) {
         
         GameCfgModel *m = [GameCfgModel defaultCfgModel];
@@ -68,7 +68,7 @@
         m.ui.game_opening.hide = NO;
         m.ui.game_mvp.hide = NO;
         m.ui.bullet_screens_btn.hide = NO;
-        return [m mj_JSONString];
+        return m;
     } else {
         return [super onGetGameCfg];
     }
@@ -139,7 +139,7 @@
 }
 
 - (void)hanldeInitSudFSMMG {
-    self.audioMicContentView.iSudFSMMG = self.sudFSMMGDecorator;
+    self.audioMicContentView.iSudFSMMG = self.gameEventHandler.sudFSMMGDecorator;
 }
 
 @end

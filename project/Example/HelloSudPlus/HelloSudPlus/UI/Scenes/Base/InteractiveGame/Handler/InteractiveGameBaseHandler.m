@@ -103,34 +103,33 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
 }
 
-/// 获取游戏View信息  【需要实现】
-- (void)onGetGameViewInfo:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    CGFloat scale = [[UIScreen mainScreen] nativeScale];
-    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    m.view_size.width = kScreenWidth * scale;
-    m.view_size.height = kScreenHeight * scale;
-    m.view_game_rect.top = (kStatusBarHeight + 120) * scale;
-    m.view_game_rect.left = 0;
-    m.view_game_rect.bottom = (kAppSafeBottom + 150) * scale;
-    m.view_game_rect.right = 0;
+- (GameViewInfoModel *)onGetGameViewInfo {
 
-    m.ret_code = 0;
-    m.ret_msg = @"success";
-    [handle success:m.mj_JSONString];
+    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
+    CGSize gameSize = self.loadConfigModel.gameView.bounds.size;
+    m.view_size.width = gameSize.width ;
+    m.view_size.height = gameSize.height ;
+    m.view_game_rect.top = (kStatusBarHeight + 120) ;
+    m.view_game_rect.left = 0;
+    m.view_game_rect.bottom = (kAppSafeBottom + 150) ;
+    m.view_game_rect.right = 0;
+    return m;
 }
 
-/// 短期令牌code过期  【需要实现】
-- (void)onExpireCode:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    // 请求业务服务器刷新令牌 Code更新
-    [GameService.shared reqGameLoginWithAppId:nil success:^(RespGameInfoModel *gameInfo) {
-        // 调用游戏接口更新令牌
-        [self.sudFSTAPPDecorator updateCode:gameInfo.code];
-        // 回调成功结果
-        [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+
+- (void)onGetCode:(NSString *)userId result:(void (^)(NSString * _Nonnull))result {
+    NSString *appID = AppService.shared.configModel.sudCfg.appId;
+    NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
+    if (appID.length == 0 || appKey.length == 0) {
+        [ToastUtil show:@"Game appID or appKey is empty"];
+        return;
+    }
+    WeakSelf
+    [GameService.shared reqGameLoginWithAppId:appID success:^(RespGameInfoModel *gameInfo) {
+        result(gameInfo.code);
     }                                    fail:^(NSError *error) {
         [ToastUtil show:error.debugDescription];
-        // 回调失败结果
-        [handle failure:[self.sudFSMMGDecorator handleMGFailure]];
+        [weakSelf.interactiveGameManager clearLoadGameState];
     }];
 }
 @end

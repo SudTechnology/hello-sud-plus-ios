@@ -121,7 +121,7 @@
 
     [self closeCountdown];
     // 是否在游戏
-    BOOL isInGame = kGuessService.currentRoomVC.sudFSMMGDecorator.isInGame;
+    BOOL isInGame = kGuessService.currentRoomVC.gameEventHandler.sudFSMMGDecorator.isInGame;
 
     if (self.resultStateType == LeagueResultTypeNotJoinFirstResult) {
         self.leftBtn.hidden = NO;

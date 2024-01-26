@@ -100,7 +100,7 @@
     }                                fail:^(NSString *errStr) {
         [ToastUtil show:errStr];
     }];
-    NSArray *playerUserIdList = kGuessService.currentRoomVC.sudFSMMGDecorator.onlineUserIdList;
+    NSArray *playerUserIdList = kGuessService.currentRoomVC.gameEventHandler.sudFSMMGDecorator.onlineUserIdList;
     NSString *roomId = kGuessService.currentRoomVC.roomID;
     [GuessRoomService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
         weakSelf.betCoin = model.betCoin;
@@ -173,7 +173,7 @@
 /// 更新确认按钮值
 - (void)updateConfirmBtn {
     /// 游戏开始后不能下注
-    if (kGuessService.currentRoomVC.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
+    if (kGuessService.currentRoomVC.gameEventHandler.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
         [self.confirmBtn setTitle:NSString.dt_room_guess_stop forState:UIControlStateDisabled];
         self.confirmBtn.enabled = NO;
         [self.collectionView reloadData];
@@ -208,7 +208,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GuessSelectColCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GuessSelectColCell" forIndexPath:indexPath];
-    BOOL isGamePlaying = kGuessService.currentRoomVC.sudFSMMGDecorator.gameStateType == GameStateTypePlaying;
+    BOOL isGamePlaying = kGuessService.currentRoomVC.gameEventHandler.sudFSMMGDecorator.gameStateType == GameStateTypePlaying;
     if (isGamePlaying) {
         // 游戏开始后选中作废
         self.dataList[indexPath.row].isSelected = NO;
@@ -229,7 +229,7 @@
         return;
     }
     /// 游戏已经开始后不能选择
-    if (kGuessService.currentRoomVC.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
+    if (kGuessService.currentRoomVC.gameEventHandler.sudFSMMGDecorator.gameStateType == GameStateTypePlaying) {
         [self updateConfirmBtn];
         return;
     }
