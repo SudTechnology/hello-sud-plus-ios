@@ -704,7 +704,9 @@
     // 延迟关闭以便上面指令执行
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (500 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
 
-        [self.interactiveGameManager destoryGame];
+        if (self.interactiveGameManager.isExistGame) {
+            [self.interactiveGameManager destoryGame];
+        }
         [self logoutRoom:^{
             if (!isSuspend) {
                 [AppUtil.currentViewController.navigationController popViewControllerAnimated:true];
