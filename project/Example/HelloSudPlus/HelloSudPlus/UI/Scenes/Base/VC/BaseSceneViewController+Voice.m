@@ -85,6 +85,7 @@
     [[IMRoomManager sharedInstance] joinRoom:self.roomID userID:AppService.shared.login.loginUserInfo.userID userName:AppService.shared.login.loginUserInfo.name token:self.enterModel.imToken success:^{
         [weakSelf onHandleCrossRoomImConnected];
     }                                   fail:^(NSInteger code, NSString *msg) {
+        DDLogError(@"joinRoomIm error:%@(%ld)", msg, code);
     }];
 }
 
@@ -196,6 +197,7 @@
 
 - (void)onImRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData {
     DDLogInfo(@"onImRoomStateUpdate:%@, errorCode:%@", @(state), @(errorCode));
+    
 //    if (state == HSAudioEngineStateDisconnected || state == HSAudioEngineStateConnecting) {
 //        if (self.isLoginedIm) {
 //            DDLogDebug(@"re login room im");

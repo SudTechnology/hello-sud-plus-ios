@@ -12,6 +12,7 @@
 #import "GameMatchGroupView.h"
 #import "CrossAppSelectGameView.h"
 #import "SuspendRoomView.h"
+#import "CrossAppSceneGameEventHandler.h"
 
 @interface CrossAppViewController ()
 @property(nonatomic, strong) GameMatchingView *matchingView;
@@ -520,6 +521,10 @@
     [self showJoinGroupState:self.isMeInGroup];
     [self updateSelectGameState];
     [handle success:[self.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+}
+
+- (BaseSceneGameEventHandler *)createGameEventHandler {
+    return CrossAppSceneGameEventHandler.new;
 }
 
 @end

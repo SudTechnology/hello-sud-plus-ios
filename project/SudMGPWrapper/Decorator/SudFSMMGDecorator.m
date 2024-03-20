@@ -304,8 +304,8 @@
     } else if ([state isEqualToString:MG_COMMON_GAME_NETWORK_STATE]) {
         /// 游戏通知app层添当前网络连接状态（2022-06-21新增）
         MGCommonGameNetworkStateModel *m = [MGCommonGameNetworkStateModel mj_objectWithKeyValues:dataJson];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameNetworkState)]) {
-            [self.listener onGameMGCommonGameNetworkState];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameNetworkState:model:)]) {
+            [self.listener onGameMGCommonGameNetworkState:handle model:m];
             return;
         }
     } else if ([state isEqualToString:MG_COMMON_GAME_GET_SCORE]) {

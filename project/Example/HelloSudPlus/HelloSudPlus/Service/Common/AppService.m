@@ -276,12 +276,10 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 /// @param gameID 游戏ID
 - (NSInteger)getTotalGameCountWithGameID:(NSInteger)gameID {
     NSInteger count = 0;
-    for (HSGameItem *item in self.gameList) {
-        if (gameID == item.gameId) {
-            if (item.gameModeList.count > 0) {
-                count = [[item.gameModeList[0].count lastObject] integerValue];
-            }
-            break;
+    HSGameItem *item = [self getSceneGameInfo:gameID];
+    if (item) {
+        if (item.gameModeList.count > 0) {
+            count = [[item.gameModeList[0].count lastObject] integerValue];
         }
     }
     return count;
@@ -338,20 +336,19 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     NSMutableArray *allGameList = NSMutableArray.new;
     for (NSString *key in self.tabGameMap.allKeys) {
         NSArray *arrTmp = self.tabGameMap[key];
-        if (arrTmp.count > 0) {
-            [allGameList addObjectsFromArray:arrTmp];
-        }
-        
-    }
-    for (HSGameItem *item in allGameList) {
-        if (item.gameId == gameId) {
-            for (NSNumber *num in item.suitScene) {
-                if (num.integerValue == sceneType) {
-                    return item;
+        for (HSGameItem *item in arrTmp) {
+            if (item.gameId == gameId) {
+                for (NSNumber *num in item.suitScene) {
+                    if (num.integerValue == sceneType) {
+                        item.tabType = [key integerValue];
+                        return item;
+                    }
                 }
             }
         }
+        
     }
+
     return nil;
 }
 

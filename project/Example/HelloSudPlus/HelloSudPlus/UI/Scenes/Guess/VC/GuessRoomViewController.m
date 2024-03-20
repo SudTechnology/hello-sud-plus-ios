@@ -8,6 +8,7 @@
 #import "SwitchAutoGuessPopView.h"
 #import "GuessSelectPopView.h"
 #import "GuessResultPopView.h"
+#import "GuessRoomSceneGameEventHandler.h"
 
 @interface GuessRoomViewController ()
 /// 猜我赢挂件视图
@@ -565,5 +566,9 @@
         _fingerImageView.image = [UIImage imageNamed:@"guess_finger_guide"];
     }
     return _fingerImageView;
+}
+
+- (BaseSceneGameEventHandler *)createGameEventHandler {
+    return GuessRoomSceneGameEventHandler.new;
 }
 @end

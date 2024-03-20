@@ -6,6 +6,7 @@
 #import "LeagueRoomViewController.h"
 #import "LeagueResultPopView.h"
 #import "LeagueModel.h"
+#import "LeagueRoomSceneGameEventHandler.h"
 
 @interface LeagueRoomViewController ()
 @property(nonatomic, strong) RespGuessPlayerListModel *playerListModel;
@@ -391,6 +392,9 @@
     [handle success:[self.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
 }
 
+- (BaseSceneGameEventHandler *)createGameEventHandler {
+    return LeagueRoomSceneGameEventHandler.new;
+}
 #pragma mark lazy
 
 @end

@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isSelect;
 /// 游戏加载类型说明 类型id    说明0:sdk 1:h5 2:rtmp
 @property (nonatomic, assign) NSInteger loadType;
+/// 类别
+@property (nonatomic, assign) NSInteger tabType;
 @end
 /// 列表场景model
 @interface HSSceneModel: BaseModel

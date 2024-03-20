@@ -8,6 +8,7 @@
 #import "OrderentertainmentViewController.h"
 #import "OrderChooseView.h"
 #import "SuspendRoomView.h"
+#import "OrderentertainmentRoomSceneGameEventHandler.h"
 
 // 用户当前点单状态
 typedef NS_ENUM(NSInteger, OrderUserStateType) {
@@ -138,24 +139,6 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
 
 #pragma mark =======SudFSMMGListener=======
 
-/// 获取游戏View信息  【需要实现】
-- (void)onGetGameViewInfo:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    CGFloat scale = [[UIScreen mainScreen] nativeScale];
-    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    GameViewSize *viewSize = [[GameViewSize alloc] init];
-    viewSize.width = kScreenWidth * scale;
-    viewSize.height = kScreenHeight * scale;
-    ViewGameRect *viewRect = [[ViewGameRect alloc] init];
-    viewRect.top = (kStatusBarHeight + 44) * scale;
-    viewRect.left = 0;
-    viewRect.bottom = (kAppSafeBottom + 150) * scale;
-    viewRect.right = 0;
-    m.ret_code = 0;
-    m.ret_msg = @"success";
-    m.view_size = viewSize;
-    m.view_game_rect = viewRect;
-    [handle success:m.mj_JSONString];
-}
 
 - (GameCfgModel *)onGetGameCfg {
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
@@ -416,6 +399,10 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
 - (void)setOrderStateType:(OrderStateType)orderStateType {
     _orderStateType = orderStateType;
     [self handleOrderStateTypeChange];
+}
+
+- (BaseSceneGameEventHandler *)createGameEventHandler {
+    return OrderentertainmentRoomSceneGameEventHandler.new;
 }
 
 @end

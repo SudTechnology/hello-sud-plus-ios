@@ -205,6 +205,11 @@
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
 		6C84E6D82AC1310F002F1E0C /* Audio3dConfigStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C84E6D62AC1310E002F1E0C /* Audio3dConfigStateModel.m */; };
 		6C84E6DB2AC1312A002F1E0C /* RoomRobotLevelSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C84E6D92AC13129002F1E0C /* RoomRobotLevelSelectView.m */; };
+		6C8B61322BA9479000ADFEE3 /* Audio3dRoomSceneGameEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B61312BA9479000ADFEE3 /* Audio3dRoomSceneGameEventHandler.m */; };
+		6C8B61352BA94A7E00ADFEE3 /* CrossAppSceneGameEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B61342BA94A7E00ADFEE3 /* CrossAppSceneGameEventHandler.m */; };
+		6C8B61382BA9633000ADFEE3 /* LeagueRoomSceneGameEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B61372BA9633000ADFEE3 /* LeagueRoomSceneGameEventHandler.m */; };
+		6C8B613B2BA965EA00ADFEE3 /* GuessRoomSceneGameEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B613A2BA965EA00ADFEE3 /* GuessRoomSceneGameEventHandler.m */; };
+		6C8B613E2BA9674700ADFEE3 /* OrderentertainmentRoomSceneGameEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B613D2BA9674700ADFEE3 /* OrderentertainmentRoomSceneGameEventHandler.m */; };
 		6CA21CCC2975268800F5AE8E /* ReqAppOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA21CCB2975268800F5AE8E /* ReqAppOrderModel.m */; };
 		6CA68C4C28E182E200BDE442 /* ReqAddScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */; };
 		6CA68D3B28E3022D00BDE442 /* LeagueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D3A28E3022D00BDE442 /* LeagueDetailViewController.m */; };
@@ -833,6 +838,16 @@
 		6C84E6D72AC1310F002F1E0C /* Audio3dConfigStateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio3dConfigStateModel.h; sourceTree = "<group>"; };
 		6C84E6D92AC13129002F1E0C /* RoomRobotLevelSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomRobotLevelSelectView.m; sourceTree = "<group>"; };
 		6C84E6DA2AC1312A002F1E0C /* RoomRobotLevelSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomRobotLevelSelectView.h; sourceTree = "<group>"; };
+		6C8B61302BA9479000ADFEE3 /* Audio3dRoomSceneGameEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Audio3dRoomSceneGameEventHandler.h; sourceTree = "<group>"; };
+		6C8B61312BA9479000ADFEE3 /* Audio3dRoomSceneGameEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Audio3dRoomSceneGameEventHandler.m; sourceTree = "<group>"; };
+		6C8B61332BA94A7E00ADFEE3 /* CrossAppSceneGameEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrossAppSceneGameEventHandler.h; sourceTree = "<group>"; };
+		6C8B61342BA94A7E00ADFEE3 /* CrossAppSceneGameEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrossAppSceneGameEventHandler.m; sourceTree = "<group>"; };
+		6C8B61362BA9633000ADFEE3 /* LeagueRoomSceneGameEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeagueRoomSceneGameEventHandler.h; sourceTree = "<group>"; };
+		6C8B61372BA9633000ADFEE3 /* LeagueRoomSceneGameEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeagueRoomSceneGameEventHandler.m; sourceTree = "<group>"; };
+		6C8B61392BA965EA00ADFEE3 /* GuessRoomSceneGameEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRoomSceneGameEventHandler.h; sourceTree = "<group>"; };
+		6C8B613A2BA965EA00ADFEE3 /* GuessRoomSceneGameEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessRoomSceneGameEventHandler.m; sourceTree = "<group>"; };
+		6C8B613C2BA9674700ADFEE3 /* OrderentertainmentRoomSceneGameEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderentertainmentRoomSceneGameEventHandler.h; sourceTree = "<group>"; };
+		6C8B613D2BA9674700ADFEE3 /* OrderentertainmentRoomSceneGameEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderentertainmentRoomSceneGameEventHandler.m; sourceTree = "<group>"; };
 		6CA21CCA2975268800F5AE8E /* ReqAppOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqAppOrderModel.h; sourceTree = "<group>"; };
 		6CA21CCB2975268800F5AE8E /* ReqAppOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqAppOrderModel.m; sourceTree = "<group>"; };
 		6CA68C4A28E182E200BDE442 /* ReqAddScoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqAddScoreModel.h; sourceTree = "<group>"; };
@@ -1592,6 +1607,8 @@
 				443BA4DA280D14A0008B2BFB /* View */,
 				443BA4D9280D149B008B2BFB /* Model */,
 				443BA4D8280D1496008B2BFB /* Controller */,
+				6C8B613C2BA9674700ADFEE3 /* OrderentertainmentRoomSceneGameEventHandler.h */,
+				6C8B613D2BA9674700ADFEE3 /* OrderentertainmentRoomSceneGameEventHandler.m */,
 			);
 			path = Orderentertainment;
 			sourceTree = "<group>";
@@ -2782,6 +2799,8 @@
 			children = (
 				6CA68D3728E301EE00BDE442 /* VC */,
 				BC210733C61B100B36D57A4B /* View */,
+				6C8B61362BA9633000ADFEE3 /* LeagueRoomSceneGameEventHandler.h */,
+				6C8B61372BA9633000ADFEE3 /* LeagueRoomSceneGameEventHandler.m */,
 			);
 			path = League;
 			sourceTree = "<group>";
@@ -2828,6 +2847,8 @@
 				BC210D5A1994DB6A85AD0505 /* VC */,
 				BC2101AD5C142F3117DC0759 /* View */,
 				BC2103201777CB3158AE71F4 /* Model */,
+				6C8B61332BA94A7E00ADFEE3 /* CrossAppSceneGameEventHandler.h */,
+				6C8B61342BA94A7E00ADFEE3 /* CrossAppSceneGameEventHandler.m */,
 			);
 			path = CrossApp;
 			sourceTree = "<group>";
@@ -2888,6 +2909,8 @@
 				6C4607A728503E1A005C99EF /* VC */,
 				6C4607A628503E13005C99EF /* View */,
 				6C4607A528503E0B005C99EF /* Model */,
+				6C8B61392BA965EA00ADFEE3 /* GuessRoomSceneGameEventHandler.h */,
+				6C8B613A2BA965EA00ADFEE3 /* GuessRoomSceneGameEventHandler.m */,
 			);
 			path = Guess;
 			sourceTree = "<group>";
@@ -2917,6 +2940,8 @@
 				6C5BF6272A7CA4CE00D11233 /* Model */,
 				BC21069D76569E76D761C42F /* Controller */,
 				BC21075BC90FB9A93CA65CC4 /* View */,
+				6C8B61302BA9479000ADFEE3 /* Audio3dRoomSceneGameEventHandler.h */,
+				6C8B61312BA9479000ADFEE3 /* Audio3dRoomSceneGameEventHandler.m */,
 			);
 			path = Audio3D;
 			sourceTree = "<group>";
@@ -3140,6 +3165,7 @@
 				6C17AE532B2AD6A500AD1A34 /* ReqAppWebGameTokenModel.m in Sources */,
 				6CEBC0B92B57CC590047B3D4 /* BaseModel.m in Sources */,
 				4455AD9D27EAC658001516EE /* GameListModel.m in Sources */,
+				6C8B61322BA9479000ADFEE3 /* Audio3dRoomSceneGameEventHandler.m in Sources */,
 				6CD6E87C27BF433500D8F76C /* TXAudioEngineImpl.m in Sources */,
 				4455AE0527EAC6F7001516EE /* BaseSceneViewController+Game.m in Sources */,
 				4455ADC927EAC658001516EE /* TicketChooseViewController.m in Sources */,
@@ -3151,6 +3177,7 @@
 				6C4607BC2851D29F005C99EF /* GuessRankModel.m in Sources */,
 				6C460814285B1DF3005C99EF /* DanmakuRoomService.m in Sources */,
 				6C17AE562B2AD74600AD1A34 /* RespWebGameTokenModel.m in Sources */,
+				6C8B613E2BA9674700ADFEE3 /* OrderentertainmentRoomSceneGameEventHandler.m in Sources */,
 				4455ADCB27EAC658001516EE /* TocketChooseModel.m in Sources */,
 				6C460868286D9982005C99EF /* DiscoRankHeadView.m in Sources */,
 				4455AD8927EAC658001516EE /* ChangeRTCModel.m in Sources */,
@@ -3242,6 +3269,7 @@
 				6C84E6DB2AC1312A002F1E0C /* RoomRobotLevelSelectView.m in Sources */,
 				4455AD8C27EAC658001516EE /* HSSettingCell.m in Sources */,
 				4455ADA227EAC658001516EE /* MatchRoomModel.m in Sources */,
+				6C8B61352BA94A7E00ADFEE3 /* CrossAppSceneGameEventHandler.m in Sources */,
 				6C460817285B3039005C99EF /* RespDanmakuModel.m in Sources */,
 				4455ADCE27EAC658001516EE /* TicketChooseNoticeView.m in Sources */,
 				E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */,
@@ -3348,6 +3376,7 @@
 				6CEBC0BF2B57CC590047B3D4 /* DTUIImage+Extension.m in Sources */,
 				6CC3E77A28C1BB7D00AA934B /* MyEthereumChainsCellModel.m in Sources */,
 				4455AD9227EAC658001516EE /* LoginModel.m in Sources */,
+				6C8B613B2BA965EA00ADFEE3 /* GuessRoomSceneGameEventHandler.m in Sources */,
 				4455AD9A27EAC658001516EE /* GameItemCollectionViewCell.m in Sources */,
 				4455ADA327EAC658001516EE /* ExitRoomModel.m in Sources */,
 				4455ADB227EAC658001516EE /* GiftItemCollectionViewCell.m in Sources */,
@@ -3429,6 +3458,7 @@
 				BC210B212D9241C9CE03A083 /* WalletAddressSwitchCell.m in Sources */,
 				6C26CC5A28D9C3C900C2572B /* SwitchEnvModel.m in Sources */,
 				BC210CF89C901006931DE6F5 /* WalletAddressSwitchCellModel.m in Sources */,
+				6C8B61382BA9633000ADFEE3 /* LeagueRoomSceneGameEventHandler.m in Sources */,
 				BC2107D8E6B6DC999B46720D /* TipPopView.m in Sources */,
 				BC21097342CF79274F4049F3 /* HsAppPreferences.m in Sources */,
 				6CEBC0B82B57CC590047B3D4 /* BaseViewController.m in Sources */,

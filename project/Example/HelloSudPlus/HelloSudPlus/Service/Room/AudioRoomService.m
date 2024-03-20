@@ -133,6 +133,7 @@
             HSGameItem *gameItem = [AppService.shared getGameInfoByGameId:model.gameId sceneType:model.sceneType];
             if (gameItem) {
                 config.loadGameType = gameItem.loadType;
+                sceneParamModel.tabType = gameItem.tabType;
             }
         }
         BaseSceneViewController *vc = [SceneFactory createSceneVC:sceneParamModel];

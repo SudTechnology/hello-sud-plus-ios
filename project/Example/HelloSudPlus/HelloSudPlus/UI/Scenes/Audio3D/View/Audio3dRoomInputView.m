@@ -36,6 +36,11 @@
 
 }
 
+- (void)onKeyboardWillShow {
+    [super onKeyboardWillShow];
+    self.faceBtn.selected = NO;
+}
+
 - (void)selectFace:(BOOL)bSelect {
     if (bSelect) {
         if (self.faceClickBlock) {

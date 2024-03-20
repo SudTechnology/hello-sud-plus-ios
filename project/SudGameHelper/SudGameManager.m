@@ -62,7 +62,6 @@
     paramModel.appId = configModel.appId;
     paramModel.appKey = configModel.appKey;
     paramModel.isTestEnv = configModel.isTestEnv;
-    
     [SudMGP initSDK:paramModel listener:^(int retCode, const NSString * _Nonnull retMsg) {
         
         if (retCode != 0) {

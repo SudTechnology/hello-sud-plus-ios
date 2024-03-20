@@ -17,6 +17,7 @@
 #import "InviteAnchorPopView.h"
 #import "RoomCmdAudio3dSendFaceModel.h"
 #import "Audio3dGiftSideView.h"
+#import "Audio3dRoomSceneGameEventHandler.h"
 
 
 @interface Audio3DRoomViewController () {
@@ -101,6 +102,11 @@
     };
     _audio3dRoomInputView.onKeyboardHiddenBlock = ^{
         [weakSelf resetRotate];
+    };
+    
+    _audio3dRoomInputView.onKeyboardShowBlock = ^{
+        [weakSelf resetRotate];
+        weakSelf.faceView.hidden = YES;
     };
 
     self.faceView.faceItemClickBlock = ^(Audio3dFaceItemModel *faceItemModel) {
@@ -195,6 +201,11 @@
 
 - (BOOL)isNeedToShowGiftEffect {
     return NO;
+}
+
+/// 创建游戏事件处理模块
+- (BaseSceneGameEventHandler *)createGameEventHandler {
+    return Audio3dRoomSceneGameEventHandler.new;
 }
 
 - (void)handleBottomFaceClick {

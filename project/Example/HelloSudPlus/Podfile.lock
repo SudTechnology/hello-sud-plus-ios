@@ -124,10 +124,10 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SSZipArchive (2.4.3)
-  - SudMGP (1.3.6)
   - SudMGPWrapper (1.3.6.1):
+    - SudMGPWrapper/SudMGPWrapper (= 1.3.6.1)
+  - SudMGPWrapper/SudMGPWrapper (1.3.6.1):
     - MJExtension (~> 3.4.1)
-    - SudMGP (~> 1.3.6)
   - SudNFT (1.0.4)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -173,7 +173,7 @@ DEPENDENCIES:
   - SDWebImage (= 5.12.2)
   - SDWebImageSVGKitPlugin (= 1.4.0)
   - SDWebImageWebPCoder
-  - SudMGPWrapper (~> 1.3.6.1)
+  - SudMGPWrapper (from `../../`)
   - SudNFT (= 1.0.4)
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
@@ -214,8 +214,6 @@ SPEC REPOS:
     - SDWebImageSVGKitPlugin
     - SDWebImageWebPCoder
     - SSZipArchive
-    - SudMGP
-    - SudMGPWrapper
     - SudNFT
     - SVGKit
     - SVProgressHUD
@@ -224,6 +222,8 @@ SPEC REPOS:
     - ZIM
 
 EXTERNAL SOURCES:
+  SudMGPWrapper:
+    :path: "../../"
   SVGAPlayer:
     :git: https://github.com/svga/SVGAPlayer-iOS.git
     :tag: 2.5.6
@@ -267,8 +267,7 @@ SPEC CHECKSUMS:
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  SudMGP: a2e97ba31db5f6c3b6b6c44848da362ddd215b09
-  SudMGPWrapper: 94d2f79d87b9fa9faaefa541ccda420730d59c34
+  SudMGPWrapper: 0bc75fb30515c1ed6d3c4c67560744ce8b2a13f8
   SudNFT: efa7ec483a2d6e5c5a8e1dda5f8d6578b97ddf9c
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
@@ -279,6 +278,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 8dd5f80f38f51f1ea20057b1848e49dd20d3ff1e
 
-PODFILE CHECKSUM: 7669144fcc3fe505c73ebcdcf78384fc67bbc6b7
+PODFILE CHECKSUM: 40c16f05e09f52d7bb5ddd64d7ceda561696106b
 
 COCOAPODS: 1.14.3

@@ -15,11 +15,14 @@ typedef void(^INPUT_MSG_BLOCK)(NSString *msg);
 @property (nonatomic, strong) UIButton *sendBtn;
 @property (nonatomic, assign) CGFloat lineNumber;
 @property(nonatomic, copy)INPUT_MSG_BLOCK inputMsgBlock;
+@property(nonatomic, copy)void(^onKeyboardShowBlock)(void);
 
 - (void)hsBecomeFirstResponder;
 - (void)hsResignFirstResponder;
 - (CGFloat)textViewSingleLineHeight;
 - (void)hiddenInputView;
+- (void)onKeyboardWillHidden;
+- (void)onKeyboardWillShow;
 @end
 
 NS_ASSUME_NONNULL_END

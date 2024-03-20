@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GameSettleCloseBtn : NSObject
 @property(nonatomic, assign) BOOL custom;
-
+@property(nonatomic, assign) BOOL hide;
 @end
 
 @interface GameSettleAgainBtn : NSObject

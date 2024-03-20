@@ -36,6 +36,7 @@
 #pragma -mark event response
 
 - (void)keyboardWillChangeFrameNotification:(NSNotification *)notification {
+    [self onKeyboardWillShow];
     if ( !self.textView.isFirstResponder )  return;
     
     CGRect endRect = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -57,6 +58,7 @@
 }
 
 - (void)keyboardWillHidden:(NSNotification *)notification {
+    [self onKeyboardWillHidden];
     [self hiddenInputView];
 }
 
@@ -149,6 +151,16 @@
         [self.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];
+}
+
+- (void)onKeyboardWillHidden {
+    
+}
+
+- (void)onKeyboardWillShow {
+    if (self.onKeyboardShowBlock) {
+        self.onKeyboardShowBlock();
+    }
 }
 
 @end
