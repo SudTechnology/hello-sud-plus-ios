@@ -108,9 +108,87 @@
     <summary>详细描述 QuickStartSudGameEventHandler.m</summary>
 
     ``` objc
-    @interface QuickStartViewController ()
-    /// 游戏加载主view
-    @property(nonatomic, strong) UIView *gameView;
+    @implementation QuickStartSudGameEventHandler
+
+
+    - (nonnull GameCfgModel *)onGetGameCfg {
+        GameCfgModel *gameCfgModel = [GameCfgModel defaultCfgModel];
+        /// 可以在此根据自身应用需要配置游戏，例如配置声音
+        /// You can configure the game according to your application needs here, such as configuring the sound
+        gameCfgModel.gameSoundVolume = 100;
+        /// ...
+        return gameCfgModel;
+    }
+
+    - (nonnull GameViewInfoModel *)onGetGameViewInfo {
+        
+        /// 应用根据自身布局需求在此配置游戏显示视图信息
+        /// The application configures the game display view information here according to its layout requirements
+        
+        // 屏幕安全区
+        // Screen Safety zone
+        UIEdgeInsets safeArea = [self safeAreaInsets];
+        // 状态栏高度
+        // Status bar height
+        CGFloat statusBarHeight = safeArea.top == 0 ? 20 : safeArea.top;
+        
+        GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
+        CGRect gameViewRect = self.loadConfigModel.gameView.bounds;
+
+        // 游戏展示区域
+        // Game display area
+        m.view_size.width = gameViewRect.size.width;
+        m.view_size.height = gameViewRect.size.height;
+        // 游戏内容布局安全区域，根据自身业务调整顶部间距
+        // Game content layout security area, adjust the top spacing according to their own business
+        // 顶部间距
+        // top spacing
+        m.view_game_rect.top = (statusBarHeight + 80);
+        // 左边
+        // Left
+        m.view_game_rect.left = 0;
+        // 右边
+        // Right
+        m.view_game_rect.right = 0;
+        // 底部安全区域
+        // Bottom safe area
+        m.view_game_rect.bottom = (safeArea.bottom + 100);
+        return m;
+    }
+
+    - (void)onGetCode:(NSString *)userId result:(void (^)(NSString * _Nonnull))result {
+        
+        /// 获取加载游戏的code,此处请求自己服务端接口获取code并回调返回即可
+        /// Get the code of loading the game, here request your server interface to get the code and callback return
+        
+        if (userId.length == 0) {
+            NSLog(@"用户ID不能为空");
+            return;
+        }
+        
+        /// 以下是当前demo向demo应用服务获取code的代码
+        /// The following is the code that demo obtains the code from demo application service
+        
+        /// 此接口为QuickStart样例请求接口
+        /// This interface is a QuickStart sample request interface
+        NSString *getCodeUrl = @"https://mgp-hello.sudden.ltd/login/v3";
+        NSDictionary *dicParam = @{@"user_id": userId};
+        [self postHttpRequestWithURL:getCodeUrl param:dicParam success:^(NSDictionary *rootDict) {
+
+            NSDictionary *dic = [rootDict objectForKey:@"data"];
+            /// 这里的code用于登录游戏sdk服务器
+            /// The code here is used to log in to the game sdk server
+            NSString *code = [dic objectForKey:@"code"];
+            int retCode = (int) [[dic objectForKey:@"ret_code"] longValue];
+            result(code);
+
+        }                    failure:^(NSError *error) {
+            NSLog(@"login game server error:%@", error.debugDescription);
+        }];
+        
+    }
+    /// ...
+    @end
     ```
     </details>
 
