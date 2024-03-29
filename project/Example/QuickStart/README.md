@@ -98,7 +98,7 @@
 
     ``` objc
     @interface QuickStartViewController ()
-    /// 游戏加载主view
+    /// 游戏加载主view Add game view
     @property(nonatomic, strong) UIView *gameView;
     ```
     </details>
