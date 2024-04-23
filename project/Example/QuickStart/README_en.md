@@ -85,7 +85,7 @@
 
   Copy SudGameHelper directory, Demo project directory path (project->SudGameHelper): 
   `SudGameManager` loads the game and destroys the game management module. 
-  `SudGameBaseEventHandlerEventHandler` processes the interaction between the game and the APP. The app only needs to create subclasses and receive defined game callbacks to receive various game state callbacks
+  `SudGameBaseEventHandler` processes the interaction between the game and the APP. The app only needs to create subclasses and receive defined game callbacks to receive various game state callbacks
   </details>
   
 
@@ -100,7 +100,7 @@
     ```
     </details>
   
-- Step 4：Create a game interaction event handler subclass that inherits from `SudGameBaseEventHandlerEventHandler` and implements the necessary interfaces, for example：QuickStartSudGameEventHandler.m
+- Step 4：Create a game interaction event handler subclass that inherits from `SudGameBaseEventHandler` and implements the necessary interfaces, for example：QuickStartSudGameEventHandler.m
     <details>
     <summary>详细描述 QuickStartSudGameEventHandler.m</summary>
 

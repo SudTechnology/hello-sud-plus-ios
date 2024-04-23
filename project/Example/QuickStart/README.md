@@ -88,7 +88,7 @@
 
       拷贝SudGameHelper目录，Demo工程目录路径(project->SudGameHelper):
         SudGameManager 为加载游戏、销毁游戏管理模块
-        SudGameBaseEventHandlerEventHandler 为游戏与APP交互处理模块，应用只需创建改子类并接收定义好的游戏回调即可收到游戏各种状态回调
+        SudGameBaseEventHandler 为游戏与APP交互处理模块，应用只需创建改子类并接收定义好的游戏回调即可收到游戏各种状态回调
   </details>
   
 
@@ -103,7 +103,7 @@
     ```
     </details>
   
-- 第四步：创建一个游戏交互事件处理子类继承自SudGameBaseEventHandlerEventHandler,并实现必要接口，例如：QuickStartSudGameEventHandler.m
+- 第四步：创建一个游戏交互事件处理子类继承自SudGameBaseEventHandler,并实现必要接口，例如：QuickStartSudGameEventHandler.m
     <details>
     <summary>详细描述 QuickStartSudGameEventHandler.m</summary>
 
