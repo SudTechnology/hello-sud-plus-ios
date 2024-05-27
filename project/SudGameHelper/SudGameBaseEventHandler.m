@@ -86,22 +86,22 @@
     GameViewInfoModel *m = [self onGetGameViewInfo];
     // 游戏展示区域
     // Game display area
-    m.view_size.width = (NSInteger)m.view_size.width * scale;
-    m.view_size.height = (NSInteger)m.view_size.height * scale;
+    m.view_size.width = (NSInteger)(m.view_size.width * scale);
+    m.view_size.height = (NSInteger)(m.view_size.height * scale);
     // 游戏内容布局安全区域，根据自身业务调整顶部间距
     // Game content layout security area, adjust the top spacing according to their own business
     // 顶部间距
     // top spacing
-    m.view_game_rect.top = (NSInteger)m.view_game_rect.top * scale;
+    m.view_game_rect.top = (NSInteger)(m.view_game_rect.top * scale);
     // 左边
     // To the left
-    m.view_game_rect.left = (NSInteger)m.view_game_rect.left * scale;
+    m.view_game_rect.left = (NSInteger)(m.view_game_rect.left * scale);
     // 右边
     // Right
-    m.view_game_rect.right = (NSInteger)m.view_game_rect.right * scale;;
+    m.view_game_rect.right = (NSInteger)(m.view_game_rect.right * scale);
     // 底部安全区域
     // Bottom safe area
-    m.view_game_rect.bottom = (NSInteger)m.view_game_rect.bottom * scale;
+    m.view_game_rect.bottom = (NSInteger)(m.view_game_rect.bottom * scale);
 
     m.ret_code = 0;
     m.ret_msg = @"success";
