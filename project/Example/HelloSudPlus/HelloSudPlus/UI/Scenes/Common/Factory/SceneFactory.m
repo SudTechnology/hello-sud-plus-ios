@@ -116,6 +116,7 @@
         case SceneTypeGameCategoryInteractive://    互动礼物
         case SceneTypeGameCategoryBetting://    Betting Games
         case SceneTypeGameCategoryLingxian:
+        case SceneTypeGameCategoryHotGame:
             vc = ThirdGameViewController.new;
             break;
         default:

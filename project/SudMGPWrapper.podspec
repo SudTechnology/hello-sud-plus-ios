@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SudMGPWrapper'
-  s.version          = '1.3.7'
+  s.version          = '1.4.0'
   s.summary          = 'A short description of SudMGPWrapper.'
   
   # This description is used to generate tags and improve search results.
@@ -49,9 +49,9 @@ Pod::Spec.new do |s|
       # json
       ss.dependency 'MJExtension', '~> 3.4.1'
       # 轻量版（不支持部分游戏，包体较小）
-#      ss.dependency 'SudMGP_Lite', '1.3.5'
+#      ss.dependency 'SudMGP_Lite', '1.3.8'
       # 标准版（支持全部游戏，包体会大一些）
-#      ss.dependency 'SudMGP', '1.3.6'
+#      ss.dependency 'SudMGP', '1.3.8'
     end
 end
 

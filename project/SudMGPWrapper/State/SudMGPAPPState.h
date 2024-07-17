@@ -83,7 +83,12 @@ static NSString *APP_COMMON_GAME_SETTINGS = @"app_common_game_settings";
 static NSString *APP_COMMON_GAME_BACK_LOBBY = @"app_common_game_back_lobby";
 /// app通知游戏定制UI配置表 (支持ludo和五子棋)
 static NSString *APP_COMMON_GAME_UI_CUSTOM_CONFIG = @"app_common_game_ui_custom_config";
-
+/// app通知游戏侧更新游戏币（概率游戏相关玩法)
+static NSString *APP_COMMON_UPDATE_GAME_MONEY = @"app_common_update_game_money";
+/// app通知游戏玩家所持有的道具卡（只支持飞行棋）
+static NSString *APP_COMMON_GAME_PLAYER_PROPS_CARDS = @"app_common_game_player_props_cards";
+/// app通知游戏播放玩家所获得的道具卡的特效（只支持飞行棋）
+static NSString *APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT = @"app_common_game_player_props_cards_effect";
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
 @interface AppCommonGameDiscoAction : NSObject
@@ -324,4 +329,27 @@ static NSString *APP_COMMON_GAME_UI_CUSTOM_CONFIG = @"app_common_game_ui_custom_
 @property(nonatomic, strong)NSString *chessRed;
 /// 玩家设置，具体参见 https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html
 @property(nonatomic, strong)NSDictionary *players;
+@end
+
+/// APP_COMMON_UPDATE_GAME_MONEY
+@interface AppCommonUpdateGameMoney : NSObject
+
+@end
+
+/// APP_COMMON_GAME_PLAYER_PROPS_CARDS
+@interface AppCommonGamePlayerPropsCards : NSObject
+/// 道具卡数量结构的json字符串，具体返回如下 注：返回的是一个json数据的字符串，specify_dice_rol1是選控骰子字段对应的数量'{"specify_dice_roll":0}'
+@property(nonatomic, strong)NSString *props;
+@end
+
+/// APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT
+@interface AppCommonGamePlayerPropsCardsEffect : NSObject
+/// 获得的道具卡名字（注：道具卡名字标注请看下方说明）
+@property(nonatomic, strong)NSString *paid_events_type;
+/// 发送的玩家id
+@property(nonatomic, strong)NSString *fromUid;
+/// 接收的玩家id
+@property(nonatomic, strong)NSString *toUid;
+/// 数量
+@property(nonatomic, assign)NSInteger count;
 @end

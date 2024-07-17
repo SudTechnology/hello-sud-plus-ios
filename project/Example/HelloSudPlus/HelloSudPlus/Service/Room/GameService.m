@@ -19,7 +19,11 @@
 
 /// 登录游戏
 - (void)reqGameLoginWithAppId:(NSString *)appId success:(void (^)(RespGameInfoModel *gameInfo))success fail:(ErrorBlock)fail {
-    [HSHttpService postRequestWithURL:kGameURL(@"base/login/v1") param:@{@"appId": appId ?: @""} respClass:RespGameInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+    NSMutableDictionary *dicParams = NSMutableDictionary.new;
+    if (appId) {
+        dicParams[@"appId"] = appId;
+    }
+    [HSHttpService postRequestWithURL:kGameURL(@"base/login/v1") param:dicParams respClass:RespGameInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         RespGameInfoModel *model = (RespGameInfoModel *) resp;
         if (success) {
             success(model);

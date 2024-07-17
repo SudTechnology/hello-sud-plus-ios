@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SudMGPWrapper/SudMGPWrapper.h>
+#import "SudMGPWrapper.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 加载SudMGP SDK加载必须的业务参数
@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 加载展示视图
 /// The view for displaying the game.
 @property (nonatomic, strong)UIView * gameView;
+/// 授权秘钥,跨域使用，默认不需要设置
+/// Just use for cross app, default is nil
+@property(nonatomic, strong)NSString *authorizationSecret;
 @end
 
 /// 游戏事件处理基类模块

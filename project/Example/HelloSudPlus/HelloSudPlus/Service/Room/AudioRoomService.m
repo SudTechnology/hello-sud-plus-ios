@@ -133,6 +133,7 @@
             HSGameItem *gameItem = [AppService.shared getGameInfoByGameId:model.gameId sceneType:model.sceneType];
             if (gameItem) {
                 config.loadGameType = gameItem.loadType;
+                config.tabType = gameItem.tabType;
                 sceneParamModel.tabType = gameItem.tabType;
             }
         }
@@ -389,6 +390,24 @@
 }
 
 
+/// 获取游戏玩家道具卡数量
+/// @param finished finished
+/// @param failure failure
++ (void)reqPlayerPropsCards:(ReqPlayerPropsCardsParamModel *)reqModel finished:(void (^)(BaseRespModel *respModel))finished failure:(void (^)(NSError *error))failure {
+    NSDictionary *dicParam = reqModel.mj_JSONObject;
+    [HSHttpService postRequestWithURL:kGameURL(@"game/player-props/v1")
+                                param:dicParam
+                            respClass:RespPlayerPropsCardsModel.class
+                       showErrorToast:YES
+                              success:^(BaseRespModel *resp) {
+                                  if (finished) {
+                                      BaseRespModel *m = (BaseRespModel *) resp;
+                                      finished(m);
+                                  }
+                              } failure:failure];
+}
+
+
 #pragma mark - Custom
 
 + (RoomCustomModel *)getCustomModel {
@@ -414,6 +433,21 @@
                 failure:(nullable void (^)(NSError *error))failure {
     NSDictionary *dicParam = req.mj_JSONObject;
     [HSHttpService postRequestWithURL:kGameURL(@"app/webgame/token/v1") param:dicParam respClass:RespWebGameTokenModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (finished) {
+            RespWebGameTokenModel *m = (RespWebGameTokenModel *) resp;
+            finished(m);
+        }
+    }                         failure:failure];
+}
+
+/// 获取顶层游戏配置
+/// @param finished finished
+/// @param failure failure
++ (void)reqTopGameConfig:(ReqAppWebGameTokenModel *)req
+                success:(void (^)(RespWebGameTokenModel *resp))finished
+                failure:(nullable void (^)(NSError *error))failure {
+    NSDictionary *dicParam = req.mj_JSONObject;
+    [HSHttpService postRequestWithURL:kGameURL(@"app/game/config/v1") param:dicParam respClass:RespWebGameTokenModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
         if (finished) {
             RespWebGameTokenModel *m = (RespWebGameTokenModel *) resp;
             finished(m);

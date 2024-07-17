@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SudMGPWrapper/SudMGPWrapper.h>
+#import "SudMGPWrapper.h"
 #import "SudGameBaseEventHandler.h"
 NS_ASSUME_NONNULL_BEGIN
 

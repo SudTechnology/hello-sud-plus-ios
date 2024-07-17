@@ -154,6 +154,11 @@
         case CMD_CHANGE_GAME_NOTIFY: {
             // 游戏切换
             RoomCmdChangeGameModel *m = [RoomCmdChangeGameModel fromJSON:command];
+            HSGameItem *gameItem = [AppService.shared getGameInfoByGameId:m.gameID tabType:self.tabType];
+            if (gameItem) {
+                self.loadType = gameItem.loadType;
+            }
+            
             [self switchToGame:m.gameID];
         }
             break;
@@ -204,6 +209,22 @@
                 cardEffect.count = m.amount;
                 [self.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameShowMonopolyCardEffect:cardEffect];
                 
+            }
+            
+        }
+            break;
+        case CMD_GAME_PROPS_CARD_GIFT_NOTIFY: {
+            // 进入房间
+            RoomGamePropsCardGiftNotifyCMDModel *m = [RoomGamePropsCardGiftNotifyCMDModel fromServerJSON:command];
+            
+            for (NSNumber *n in m.receiverUidList) {
+                
+                AppCommonGamePlayerPropsCardsEffect *cardEffect = AppCommonGamePlayerPropsCardsEffect.new;
+                cardEffect.fromUid = [NSString stringWithFormat:@"%@", @(m.senderUid)];
+                cardEffect.paid_events_type = m.paidEventType;
+                cardEffect.toUid = [NSString stringWithFormat:@"%@", n];
+                cardEffect.count = m.amount;
+                [self.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGamePlayerPropsCardsEffect:cardEffect];
             }
             
         }

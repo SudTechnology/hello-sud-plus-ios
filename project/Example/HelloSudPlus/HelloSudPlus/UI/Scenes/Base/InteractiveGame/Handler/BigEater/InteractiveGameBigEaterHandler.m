@@ -35,13 +35,12 @@
 }
 
 - (GameViewInfoModel *)onGetGameViewInfo {
-    CGFloat scale = [[UIScreen mainScreen] nativeScale];
     GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    m.view_size.width = kScreenWidth * scale;
-    m.view_size.height = kScreenHeight * scale;
-    m.view_game_rect.top = (kScreenHeight - kScreenWidth * 1.1) * scale;
+    m.view_size.width = kScreenWidth;
+    m.view_size.height = kScreenHeight;
+    m.view_game_rect.top = (kScreenHeight - kScreenWidth * 1.1);
     m.view_game_rect.left = 0;
-    m.view_game_rect.bottom = 0;//(kAppSafeBottom + 150) * scale;
+    m.view_game_rect.bottom = 0;
     m.view_game_rect.right = 0;
 
     return m;

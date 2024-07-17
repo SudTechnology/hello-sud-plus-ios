@@ -17,6 +17,8 @@
 @property(nonatomic, weak) id <SudFSMMGListener> listener;
 /// 当前用户ID
 @property(nonatomic, strong) NSString *currentUserId;
+/// 当前加入游戏玩家ID列表
+@property (nonatomic, strong) NSMutableArray <NSString *>*joinedGamePlayerIdList;
 @end
 
 @implementation SudFSMMGDecorator
@@ -209,12 +211,6 @@
         MGCommonSelfClickShareBtn *m = [MGCommonSelfClickShareBtn mj_objectWithKeyValues:dataJson];
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonSelfClickShareBtn:model:)]) {
             [self.listener onGameMGCommonSelfClickShareBtn:handle model:m];
-            return;
-        }
-    } else if ([state isEqualToString:MG_COMMON_GAME_STATE]) {
-        MGCommonGameState *m = [MGCommonGameState mj_objectWithKeyValues:dataJson];
-        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMGCommonGameState:model:)]) {
-            [self.listener onGameMGCommonGameState:handle model:m];
             return;
         }
     } else if ([state isEqualToString:MG_COMMON_SELF_CLICK_GAME_SETTLE_CLOSE_BTN]) {
@@ -762,7 +758,40 @@
             [self.listener onGameMgCommonSelfClickPoop:handle model:m];
             return;
         }
-    } else {
+    } else if ([state isEqualToString:MG_COMMON_DESTROY_GAME_SCENE]) {
+        /// 游戏通知 MG_COMMON_DESTROY_GAME_SCENE
+        MgCommonDestroyGameSceneModel *m = [MgCommonDestroyGameSceneModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonDestroyGameScene:model:)]) {
+            [self.listener onGameMgCommonDestroyGameScene:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PLAYER_PROPS_CARDS]) {
+        /// 游戏通知 MG_COMMON_GAME_PLAYER_PROPS_CARDS
+        MgCommonGamePlayerPropsCardsModel *m = [MgCommonGamePlayerPropsCardsModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonGamePlayerPropsCards:model:)]) {
+            [self.listener onGameMgCommonGamePlayerPropsCards:handle model:m];
+            return;
+        }
+        
+    } else if ([state isEqualToString:MG_COMMON_GAME_INFO_X]) {
+        /// 游戏通知 MG_COMMON_GAME_INFO_X
+        MgCommonGameInfoXModel *m = [MgCommonGameInfoXModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonGameInfoX:model:)]) {
+            [self.listener onGameMgCommonGameInfoX:handle model:m];
+            return;
+        }
+        
+    } else if ([state isEqualToString:MG_COMMON_GAME_INFO_X]) {
+        /// 游戏通知 MG_COMMON_GAME_BILLIARDS_HIT_STATE
+        MgCommonGameBilliardsHitStateModel *m = [MgCommonGameBilliardsHitStateModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonGameBilliardsHitState:model:)]) {
+            [self.listener onGameMgCommonGameBilliardsHitState:handle model:m];
+            return;
+        }
+        
+    }
+    
+    else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
     }
@@ -980,16 +1009,16 @@
     }
 
     if (m.isIn) {
-        [self.onlineUserIdList addObject:userId];
-        NSSet *set = [NSSet setWithArray:self.onlineUserIdList];
-        [self.onlineUserIdList setArray:[set allObjects]];
+        [self.joinedGamePlayerIdList addObject:userId];
+        NSSet *set = [NSSet setWithArray:self.joinedGamePlayerIdList];
+        [self.joinedGamePlayerIdList setArray:[set allObjects]];
     } else {
         [self.gamePlayerStateMap removeObjectForKey:[NSString stringWithFormat:@"%@%@", userId, MG_COMMON_PLAYER_IN]];
-        if (self.onlineUserIdList.count > 0) {
-            NSMutableArray *arrTemp = [[NSMutableArray alloc] initWithArray:self.onlineUserIdList];
+        if (self.joinedGamePlayerIdList.count > 0) {
+            NSMutableArray *arrTemp = [[NSMutableArray alloc] initWithArray:self.joinedGamePlayerIdList];
             for (NSString *item in arrTemp) {
                 if ([item isEqualToString:userId]) {
-                    [self.onlineUserIdList removeObject:userId];
+                    [self.joinedGamePlayerIdList removeObject:userId];
                 }
             }
         }
@@ -1017,7 +1046,7 @@
 
 /// 清除所有存储数组
 - (void)clearAllStates {
-    [self.onlineUserIdList removeAllObjects];
+    [self.joinedGamePlayerIdList removeAllObjects];
     self.drawKeyWord = @"";
     self.captainUserId = @"";
     self.keyWordHiting = false;
@@ -1054,6 +1083,9 @@
 
 /// 获取用户是否在准备中
 - (BOOL)isPlayerIsReady:(NSString *)userId {
+    if (![self isPlayerIn:userId]) {
+        return false;
+    }
     MGPlayerStateMapModel *mapModel = self.gamePlayerStateMap[[NSString stringWithFormat:@"%@%@", userId, MG_COMMON_PLAYER_READY]];
     if ([mapModel.model isKindOfClass:MGCommonPlayerReadyModel.class]) {
         MGCommonPlayerReadyModel *m = mapModel.model;
@@ -1064,6 +1096,9 @@
 
 /// 获取用户是否在游戏中
 - (BOOL)isPlayerIsPlaying:(NSString *)userId {
+    if (![self isPlayerIn:userId]) {
+        return false;
+    }
     MGPlayerStateMapModel *mapModel = self.gamePlayerStateMap[[NSString stringWithFormat:@"%@%@", userId, MG_COMMON_PLAYER_PLAYING]];
     if ([mapModel.model isKindOfClass:MGCommonPlayerPlayingModel.class]) {
         MGCommonPlayerPlayingModel *m = mapModel.model;
@@ -1074,16 +1109,14 @@
 
 /// 获取用户是否已经加入了游戏
 - (BOOL)isPlayerInGame:(NSString *)userId {
-    MGPlayerStateMapModel *mapModel = self.gamePlayerStateMap[[NSString stringWithFormat:@"%@%@", userId, MG_COMMON_PLAYER_IN]];
-    //    MGPlayerStateMapModel *mapModel = [self.gamePlayerStateMap objectForKey:userId];
-    if (mapModel != nil) {
-        return true;
-    }
-    return false;
+    return [self isPlayerIn:userId];
 }
 
 /// 获取用户是否在在绘画
 - (BOOL)isPlayerPaining:(NSString *)userId {
+    if (![self isPlayerIn:userId]) {
+        return false;
+    }
     MGPlayerStateMapModel *mapModel = self.gamePlayerStateMap[[NSString stringWithFormat:@"%@%@", userId, MG_DG_PAINTING]];
     if ([mapModel.model isKindOfClass:MGDGPaintingModel.class]) {
         MGDGPaintingModel *m = mapModel.model;
@@ -1099,11 +1132,11 @@
     return isCaptain;
 }
 
-- (NSMutableArray<NSString *> *)onlineUserIdList {
-    if (_onlineUserIdList == nil) {
-        _onlineUserIdList = NSMutableArray.new;
+- (NSMutableArray<NSString *> *)joinedGamePlayerIdList {
+    if (_joinedGamePlayerIdList == nil) {
+        _joinedGamePlayerIdList = NSMutableArray.new;
     }
-    return _onlineUserIdList;;
+    return _joinedGamePlayerIdList;;
 }
 
 - (NSMutableDictionary *)gamePlayerStateMap {
@@ -1113,4 +1146,13 @@
     return _gamePlayerStateMap;
 }
 
+/// 当前游戏在线userid列表
+- (NSArray <NSString *>*)onlineUserIdList {
+    return self.joinedGamePlayerIdList;
+}
+
+/// 获取当前玩家列表(不含观战人数)
+- (NSArray<NSString *> *)getJoinedGamePlayerIdList {
+    return self.joinedGamePlayerIdList;
+}
 @end

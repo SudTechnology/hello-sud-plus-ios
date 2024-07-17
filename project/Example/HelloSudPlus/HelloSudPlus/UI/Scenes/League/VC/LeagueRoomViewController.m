@@ -225,7 +225,7 @@
         case 1: {
 
             // 第一轮
-            NSInteger playerCount = self.gameEventHandler.sudFSMMGDecorator.onlineUserIdList.count;
+            NSInteger playerCount = self.gameEventHandler.sudFSMMGDecorator.getJoinedGamePlayerIdList.count;
             NSInteger totalCount = self.totalGameUserCount;
             if (totalCount > playerCount) {
                 // 补全剩余麦位

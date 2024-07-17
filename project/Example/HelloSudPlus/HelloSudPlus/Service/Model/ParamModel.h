@@ -31,4 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)NSInteger tabType;// 应用tab，1: scene, 2: game
 @end
 
+@interface ReqPlayerPropsCardsParamModel : ParamModel
+@property(nonatomic, assign)int64_t gameId;
+@end
+
 NS_ASSUME_NONNULL_END

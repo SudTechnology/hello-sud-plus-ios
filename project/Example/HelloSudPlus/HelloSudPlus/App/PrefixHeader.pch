@@ -58,8 +58,8 @@
 #import "WebpImageCacheService.h"
 
 /// SudMGPWrapper
-#import <SudMGPWrapper/SudMGPWrapper.h>
-#import <SudMGPWrapper/SudFSMMGListener.h>
+#import "SudMGPWrapper.h"
+#import "SudFSMMGListener.h"
 /// Page
 #import "CommonRoomModelHeader.h"
 /// Example Audio

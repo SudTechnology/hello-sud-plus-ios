@@ -90,6 +90,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param failure failure
 + (void)reqMonopolyCardsWithFinished:(void (^)(BaseRespModel *respModel))finished failure:(void (^)(NSError *error))failure;
 
+/// 获取游戏玩家道具卡数量
+/// @param finished finished
+/// @param failure failure
++ (void)reqPlayerPropsCards:(ReqPlayerPropsCardsParamModel *)reqModel finished:(void (^)(BaseRespModel *respModel))finished failure:(void (^)(NSError *error))failure;
+
 #pragma mark - Custom
 
 + (RoomCustomModel *)getCustomModel;
@@ -102,6 +107,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)reqWebGameToken:(ReqAppWebGameTokenModel *)req
                 success:(void (^)(RespWebGameTokenModel *resp))finished
                 failure:(nullable void (^)(NSError *error))failure;
+
+/// 获取顶层游戏配置
+/// @param finished finished
+/// @param failure failure
++ (void)reqTopGameConfig:(ReqAppWebGameTokenModel *)req
+                success:(void (^)(RespWebGameTokenModel *resp))finished
+                 failure:(nullable void (^)(NSError *error))failure;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -18,3 +18,7 @@
 @implementation RespStartPKModel
 
 @end
+
+@implementation RespPlayerPropsCardsModel
+
+@end

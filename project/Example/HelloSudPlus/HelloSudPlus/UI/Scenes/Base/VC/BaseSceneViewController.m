@@ -2072,7 +2072,7 @@
 }
 
 - (void)updateGamePeopleCount {
-    self.gameNumLabel.text = [NSString stringWithFormat:@"%@：%ld/%ld", NSString.dt_game_person_count, self.gameEventHandler.sudFSMMGDecorator.onlineUserIdList.count, self.totalGameUserCount];
+    self.gameNumLabel.text = [NSString stringWithFormat:@"%@：%ld/%ld", NSString.dt_game_person_count, self.gameEventHandler.sudFSMMGDecorator.getJoinedGamePlayerIdList.count, self.totalGameUserCount];
 }
 
 /// 创建游戏事件处理模块

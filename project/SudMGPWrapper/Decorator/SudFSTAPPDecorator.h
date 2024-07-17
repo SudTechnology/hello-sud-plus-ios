@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// app -> 游戏
 @interface SudFSTAPPDecorator : NSObject
-// 是否停止游戏后台状态维护;默认false,即自动维护切换前后台游戏状态
+/// 是否停止游戏后台状态维护;默认false,即自动维护切换前后台游戏状态
+/// 备注：默认不要不改动，停止可能引起某些游戏状态维护异常
 @property(nonatomic, assign) BOOL stopBackgroundGameState;
 @property(nonatomic, strong) id <ISudFSTAPP> iSudFSTAPP;
 
@@ -188,6 +189,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// app通知游戏定制UI配置表 (支持ludo和五子棋) APP_COMMON_GAME_UI_CUSTOM_CONFIG
 - (void)notifyAppCommonGameUiCustomConfig:(AppCommonGameUiCustomConfig *)model;
+
+/// app通知游戏侧更新游戏币（概率游戏相关玩法) APP_COMMON_UPDATE_GAME_MONEY
+- (void)notifyAppCommonUpdateGameMoney:(AppCommonUpdateGameMoney *)model;
+
+/// app通知游戏玩家所持有的道具卡（只支持飞行棋） APP_COMMON_GAME_PLAYER_PROPS_CARDS
+- (void)notifyAppCommonGamePlayerPropsCards:(AppCommonGamePlayerPropsCards *)model;
+
+/// app通知游戏播放玩家所获得的道具卡的特效（只支持飞行棋） APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT
+- (void)notifyAppCommonGamePlayerPropsCardsEffect:(AppCommonGamePlayerPropsCardsEffect *)model;
 
 #pragma mark - 互动礼物<火箭>
 

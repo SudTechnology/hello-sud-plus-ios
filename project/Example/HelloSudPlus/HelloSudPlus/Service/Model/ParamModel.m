@@ -17,3 +17,7 @@
 
 @implementation ReqEnterRoomParamModel
 @end
+
+@implementation ReqPlayerPropsCardsParamModel
+
+@end

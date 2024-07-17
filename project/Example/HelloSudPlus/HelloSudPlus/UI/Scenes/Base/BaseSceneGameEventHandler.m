@@ -247,6 +247,20 @@
     
 }
 
+
+- (void)onGameMgCommonGamePlayerPropsCards:(id<ISudFSMStateHandle>)handle model:(MgCommonGamePlayerPropsCardsModel *)model {
+        
+    ReqPlayerPropsCardsParamModel *req = ReqPlayerPropsCardsParamModel.new;
+    req.gameId = self.loadConfigModel.gameId;
+    [AudioRoomService reqPlayerPropsCards:req finished:^(BaseRespModel * _Nonnull respModel) {
+    
+        RespPlayerPropsCardsModel *resp = (RespPlayerPropsCardsModel *)respModel;
+        AppCommonGamePlayerPropsCards *cards = AppCommonGamePlayerPropsCards.new;
+        cards.props = resp.props;
+        [self.vc.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGamePlayerPropsCards:cards];
+    } failure:nil];
+}
+
 - (void)onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress {
     NSLog(@"onGameLoadingProgress:stage:%@ retCode:%@, progress:%@", @(stage), @(retCode), @(progress));
 }
@@ -282,6 +296,19 @@
         NSLog(@"error msg is empty");
     }
 
+}
+
+- (void)onGameMgCommonDestroyGameScene:(id<ISudFSMStateHandle>)handle model:(MgCommonDestroyGameSceneModel *)model {
+    [self.vc switchToGame:0];
+}
+
+- (void)onGameMGCommonGameMoneyNotEnough:(id<ISudFSMStateHandle>)handle model:(MgCommonGameMoneyNotEnoughModel *)model {
+    [UserService.shared reqAddUserCoin:^(int64_t i) {
+        AppCommonUpdateGameMoney *model = AppCommonUpdateGameMoney.new;
+        [self.sudFSTAPPDecorator notifyAppCommonUpdateGameMoney:model];
+    } fail:^(NSString *str) {
+        [ToastUtil show:str];
+    }];
 }
 
 #pragma mark =======玩家状态处理=======

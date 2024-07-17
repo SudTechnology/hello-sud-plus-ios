@@ -48,5 +48,5 @@
 #define CMD_ROOM_3D_CONFIG_CHANGE_NOTIFY	         21011 /// 1.6.6 3D语聊房配置变更
 #define CMD_ROOM_3D_MIC_STATE_CHANGE_NOTIFY	         21012 /// 1.6.6 3D语聊房麦位状态变更
 #define CMD_GAME_MONOPOLY_CARD_GIFT_NOTIFY           22001 /// 1.6.9 大富翁道具卡送礼通知
-
+#define CMD_GAME_PROPS_CARD_GIFT_NOTIFY              22002 /// 1.6.9 游戏道具卡送礼通知
 #endif /* HSAudioMsgConst_h */

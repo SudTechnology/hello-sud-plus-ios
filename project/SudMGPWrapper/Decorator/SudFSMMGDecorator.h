@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, GameStateType) {
 /// 当前游戏成员的游戏状态Map
 @property (nonatomic, strong) NSMutableDictionary *gamePlayerStateMap;
 /// 当前游戏在线userid列表
-@property (nonatomic, strong) NSMutableArray <NSString *>*onlineUserIdList;
+@property (nonatomic, strong, readonly) NSArray <NSString *>*onlineUserIdList __attribute__((deprecated("use getJoinedGamePlayerIdList instead")));
 
 /// 设置事件处理器
 /// @param listener 事件处理实例
@@ -73,6 +73,10 @@ typedef NS_ENUM(NSInteger, GameStateType) {
 /// 2MG失败回调
 - (NSString *)handleMGFailure;
 
+#pragma mark - 获取是否存在gamePlayerStateMap中 （用于判断用户是否在游戏里了）
+/// 获取用户是否已经加入了游戏
+- (BOOL)isPlayerInGame:(NSString *)userId __attribute__((deprecated("Use isPlayerIn: instead")));
+
 #pragma mark - 获取gamePlayerStateMap中最新的一个状态
 /// 获取用户加入状态
 - (BOOL)isPlayerIn:(NSString *)userId;
@@ -85,9 +89,9 @@ typedef NS_ENUM(NSInteger, GameStateType) {
 /// 获取用户是否在在绘画
 - (BOOL)isPlayerPaining:(NSString *)userId;
 
-#pragma mark - 获取是否存在gamePlayerStateMap中 （用于判断用户是否在游戏里了）
-/// 获取用户是否已经加入了游戏
-- (BOOL)isPlayerInGame:(NSString *)userId;
+/// 获取当前玩家列表(不含观战人数)
+- (NSArray<NSString *> *)getJoinedGamePlayerIdList;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -41,22 +41,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// 最低版本：v1.1.30.xx
 - (void)onGameLog:(nonnull NSString *)dataJson;
 
-
-/**
- * 游戏状态变化,如实现方实现了改接口，并返回YES，则数据解析完全由实现方自行处理，内部不在做数据模型的解析，返回NO则内部执行数据序列化
- * @param handle 回调句柄
- * @param state 游戏状态
- * @param dataJson 回调json
- */
+/// 游戏状态变化
+/// 注意：实现了该接口，只有实现方自行处理了的state则返回YES（内部不再具体分发到相应的回调中），其余返回NO（其余的内部执行数据序列化并分发到具体实现的回调中）
+/// @param handle handle 回调句柄
+/// @param state state 对应事件状态
+/// @param dataJson dataJson 回调json串
 - (BOOL)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
 
-/**
- * 游戏玩家状态变化,如实现方实现了改接口，并返回YES，则数据解析完全由实现方自行处理，内部不在做数据模型的解析，返回NO则内部执行数据序列化
- * @param handle 回调句柄
- * @param userId 用户id
- * @param state  玩家状态
- * @param dataJson 回调JSON
- */
+ /// 游戏玩家状态变化
+ /// 注意：实现了该接口，只有实现方自行处理了的state则返回YES（内部不再具体分发到相应的回调中），其余返回NO（其余的内部执行数据序列化并分发到具体实现的回调中）
+ /// @param handle handle 回调句柄
+ /// @param state state 对应事件状态
+ /// @param dataJson dataJson 回调json串
 - (BOOL)onPlayerStateChange:(nullable id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
 
 /// 游戏加载进度(loadMG)
@@ -232,6 +228,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏通知 app 玩家被扔便便(仅对你画我猜有效) MG_COMMON_SELF_CLICK_POOP
 - (void)onGameMgCommonSelfClickPoop:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonSelfClickPoopModel *)model;
+
+/// 游戏通知游戏场景销毁 MG_COMMON_DESTROY_GAME_SCENE
+- (void)onGameMgCommonDestroyGameScene:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonDestroyGameSceneModel *)model;
+/// 游戏向app发送获取玩家持有的指定点数道具卡（只支持飞行棋） MG_COMMON_GAME_PLAYER_PROPS_CARDS
+- (void)onGameMgCommonGamePlayerPropsCards:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerPropsCardsModel *)model;
+
+/// 游戏向app发送获游戏通用数据 MG_COMMON_GAME_INFO_X
+- (void)onGameMgCommonGameInfoX:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameInfoXModel *)model;
+
+/// 游戏通知app击球状态（只支持桌球） MG_COMMON_GAME_BILLIARDS_HIT_STATE
+- (void)onGameMgCommonGameBilliardsHitState:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameBilliardsHitStateModel *)model;
 
 #pragma mark - 互动礼物<火箭>
 

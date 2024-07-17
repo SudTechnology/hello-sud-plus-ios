@@ -407,7 +407,7 @@
 - (void)reqBetList {
     WeakSelf
     NSString *roomId = kGuessService.currentRoomVC.roomID;
-    [GuessRoomService reqGuessPlayerList:self.gameEventHandler.sudFSMMGDecorator.onlineUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
+    [GuessRoomService reqGuessPlayerList:self.gameEventHandler.sudFSMMGDecorator.getJoinedGamePlayerIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
         weakSelf.betCoin = model.betCoin;
         weakSelf.playerListModel = model;
     }];

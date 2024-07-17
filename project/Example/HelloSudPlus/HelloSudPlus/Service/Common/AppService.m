@@ -333,7 +333,6 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 /// - Parameter gameId: gameId description
 - (nullable HSGameItem *)getGameInfoByGameId:(int64_t)gameId sceneType:(NSInteger)sceneType {
     
-    NSMutableArray *allGameList = NSMutableArray.new;
     for (NSString *key in self.tabGameMap.allKeys) {
         NSArray *arrTmp = self.tabGameMap[key];
         for (HSGameItem *item in arrTmp) {
@@ -349,6 +348,19 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
         
     }
 
+    return nil;
+}
+
+/// 通过游戏ID获取游戏数据
+/// - Parameter gameId: gameId description
+- (nullable HSGameItem *)getGameInfoByGameId:(int64_t)gameId tabType:(NSInteger)tabType {
+    
+    NSArray *arrTmp = self.tabGameMap[[NSString stringWithFormat:@"%@", @(tabType)]];
+    for (HSGameItem *item in arrTmp) {
+        if (item.gameId == gameId) {
+            return item;
+        }
+    }
     return nil;
 }
 

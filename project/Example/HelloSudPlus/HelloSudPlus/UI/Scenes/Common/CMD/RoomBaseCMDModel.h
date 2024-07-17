@@ -59,4 +59,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) NSInteger amount;
 @end
 
+/// 游戏道具卡送礼通知 model
+@interface RoomGamePropsCardGiftNotifyCMDModel : RoomBaseCMDModel
+@property(nonatomic, strong) NSString * paidEventType;// specify_dice_roll
+@property(nonatomic, assign) NSInteger senderUid;// 发送者uid
+@property(nonatomic, assign) NSArray<NSNumber *> *receiverUidList;// 接收者用户id列表
+@property(nonatomic, assign) NSInteger amount;
+@end
+
 NS_ASSUME_NONNULL_END

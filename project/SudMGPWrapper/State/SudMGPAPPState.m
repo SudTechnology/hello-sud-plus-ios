@@ -111,3 +111,13 @@
 @implementation AppCommonGameUiCustomConfigLudo
 
 @end
+
+@implementation AppCommonUpdateGameMoney
+
+@end
+
+@implementation AppCommonGamePlayerPropsCards
+@end
+
+@implementation AppCommonGamePlayerPropsCardsEffect
+@end

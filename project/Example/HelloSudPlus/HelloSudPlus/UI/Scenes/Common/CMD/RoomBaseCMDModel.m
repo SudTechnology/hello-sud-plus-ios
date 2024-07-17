@@ -77,3 +77,7 @@
 
 
 @end
+
+
+@implementation RoomGamePropsCardGiftNotifyCMDModel
+@end

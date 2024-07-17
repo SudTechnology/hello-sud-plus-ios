@@ -156,60 +156,67 @@
 
 
 - (NSString *)backupBaseUrl {
-    NSString *url = nil;
-    switch (self.appEnvType) {
-        case HsAppEnvTypePro:
-            url = @"https://base-hello-sud-backup.sud.tech";
-            break;
-        case HsAppEnvTypeSim:
-            url = @"https://sim-base-hello-sud-backup.sud.tech";
-            break;
-        case HsAppEnvTypeFat:
-            url = @"https://fat-base-hello-sud-backup.sud.tech";
-            break;
-        case HsAppEnvTypeDev:
-            url = @"https://dev-base-hello-sud-backup.sud.tech";
-            break;
-    }
-    return url;
+    
+    return @"https://uae-base-hello-sud.sud.tech";
+    
+//    NSString *url = nil;
+//    switch (self.appEnvType) {
+//        case HsAppEnvTypePro:
+//            url = @"https://base-hello-sud-backup.sud.tech";
+//            break;
+//        case HsAppEnvTypeSim:
+//            url = @"https://sim-base-hello-sud-backup.sud.tech";
+//            break;
+//        case HsAppEnvTypeFat:
+//            url = @"https://fat-base-hello-sud-backup.sud.tech";
+//            break;
+//        case HsAppEnvTypeDev:
+//            url = @"https://dev-base-hello-sud-backup.sud.tech";
+//            break;
+//    }
+//    return url;
 }
 
 - (NSString *)backupInteractUrl {
-    NSString *url = nil;
-    switch (self.appEnvType) {
-        case HsAppEnvTypePro:
-            url = @"https://interact-hello-sud-backup.sud.tech";
-            break;
-        case HsAppEnvTypeSim:
-            url = @"https://sim-interact-hello-sud-backup.sud.tech";
-            break;
-        case HsAppEnvTypeFat:
-            url = @"https://fat-interact-hello-sud-backup.sud.tech";
-            break;
-        case HsAppEnvTypeDev:
-            url = @"https://dev-interact-hello-sud-backup.sud.tech";
-            break;
-    }
-    return url;
+    return @"https://uae-interact-hello-sud.sud.tech";
+    
+//    NSString *url = nil;
+//    switch (self.appEnvType) {
+//        case HsAppEnvTypePro:
+//            url = @"https://interact-hello-sud-backup.sud.tech";
+//            break;
+//        case HsAppEnvTypeSim:
+//            url = @"https://sim-interact-hello-sud-backup.sud.tech";
+//            break;
+//        case HsAppEnvTypeFat:
+//            url = @"https://fat-interact-hello-sud-backup.sud.tech";
+//            break;
+//        case HsAppEnvTypeDev:
+//            url = @"https://dev-interact-hello-sud-backup.sud.tech";
+//            break;
+//    }
+//    return url;
 }
 
 - (NSString *)backupGameUrl {
-    NSString *url = nil;
-    switch (self.appEnvType) {
-        case HsAppEnvTypePro:
-            url = @"https://game-hello-sud-backup.sud.tech";
-            break;
-        case HsAppEnvTypeSim:
-            url = @"https://sim-game-hello-sud-backup.sud.tech";
-            break;
-        case HsAppEnvTypeFat:
-            url = @"https://fat-game-hello-sud-backup.sud.tech";
-            break;
-        case HsAppEnvTypeDev:
-            url = @"https://dev-game-hello-sud-backup.sud.tech";
-            break;
-    }
-    return url;
+    return @"https://uae-game-hello-sud.sud.tech";
+    
+//    NSString *url = nil;
+//    switch (self.appEnvType) {
+//        case HsAppEnvTypePro:
+//            url = @"https://game-hello-sud-backup.sud.tech";
+//            break;
+//        case HsAppEnvTypeSim:
+//            url = @"https://sim-game-hello-sud-backup.sud.tech";
+//            break;
+//        case HsAppEnvTypeFat:
+//            url = @"https://fat-game-hello-sud-backup.sud.tech";
+//            break;
+//        case HsAppEnvTypeDev:
+//            url = @"https://dev-game-hello-sud-backup.sud.tech";
+//            break;
+//    }
+//    return url;
 }
 
 

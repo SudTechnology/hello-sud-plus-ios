@@ -32,6 +32,14 @@
         @"ar_SA": @"ar-SA",
         @"tr_TR": @"tr-TR",
         @"ur_PK": @"ur-PK",
+        
+        @"pt_PT": @"pt-PT",
+        @"hi_IN": @"hi-IN",
+        @"bn_BD": @"bn-BD",
+        @"tl_PH": @"tl-PH",
+        @"fa_IR": @"fa-IR",
+        @"ru_RU": @"ru-RU",
+                                   
     };
 }
 @end
@@ -365,5 +373,22 @@
 @implementation MgCommonSelfClickPoopModel
 
 @end
+#pragma mark - MG_COMMON_DESTROY_GAME_SCENE
+@implementation MgCommonDestroyGameSceneModel
 
+@end
+
+
+#pragma mark - MG_COMMON_GAME_PLAYER_PROPS_CARDS
+@implementation MgCommonGamePlayerPropsCardsModel
+
+@end
+
+#pragma mark - MG_COMMON_GAME_INFO_X
+@implementation MgCommonGameInfoXModel
+@end
+
+#pragma mark - MG_COMMON_GAME_BILLIARDS_HIT_STATE
+@implementation MgCommonGameBilliardsHitStateModel
+@end
 

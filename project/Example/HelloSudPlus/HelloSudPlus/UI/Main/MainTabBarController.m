@@ -56,8 +56,8 @@
     setting.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_my"];
     setting.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_my"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
-    [self addChildViewController:navHome];
     [self addChildViewController:navGame];
+    [self addChildViewController:navHome];
     [self addChildViewController:navGameList];
     [self addChildViewController:navSetting];
     

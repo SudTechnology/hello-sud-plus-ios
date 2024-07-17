@@ -137,6 +137,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 通过游戏ID获取游戏数据
 /// - Parameter gameId: gameId description
 - (nullable HSGameItem *)getGameInfoByGameId:(int64_t)gameId sceneType:(NSInteger)sceneType;
+
+/// 通过游戏ID获取游戏数据
+/// - Parameter gameId: gameId description
+- (nullable HSGameItem *)getGameInfoByGameId:(int64_t)gameId tabType:(NSInteger)tabType;
 /// 是否支持视频
 - (BOOL)isCurrentRtcSurpportVideo;
 @end

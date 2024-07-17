@@ -182,6 +182,22 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL hide;
 @end
 
+@interface SudMaskUiCfg : NSObject
+@property(nonatomic, assign) BOOL transparent;
+@end
+
+@interface SudCommonHideUiCfg : NSObject
+@property(nonatomic, assign) BOOL hide;
+@end
+
+@interface SudCommonCustomUiCfg : NSObject
+@property(nonatomic, assign) BOOL custom;
+@end
+
+@interface SudCommonHideCustomUiCfg : NSObject
+@property(nonatomic, assign) BOOL hide;
+@property(nonatomic, assign) BOOL custom;
+@end
 
 @interface GameUi : NSObject
 /// 大厅游戏位上队长标识
@@ -251,6 +267,34 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) Logo *logo;
 /// 弹幕开关按钮 你画我猜，你说我猜
 @property(nonatomic, strong) BulletScreensBtn *bullet_screens_btn;
+
+/// 游戏中的游戏位
+@property(nonatomic, strong) SudCommonHideUiCfg *game_players;
+/// 你画我猜，小局结算界面点击扔大便按钮
+@property(nonatomic, strong) SudCommonCustomUiCfg *round_over_poop_btn;
+/// 你画我猜，小局结算界面点击点赞按钮
+@property(nonatomic, strong) SudCommonCustomUiCfg *round_over_good_btn;
+/// 弹框界面的蒙层
+@property(nonatomic, strong) SudMaskUiCfg *mask;
+/// 友尽闯关中最坑队友的弹框
+@property(nonatomic, strong) SudCommonHideUiCfg *worst_teammate_tip;
+/// 友尽闯关中玩家逃跑导致游戏结束弹框
+@property(nonatomic, strong) SudCommonHideUiCfg *game_over_tip;
+/// 碰碰我最强大厅动画
+@property(nonatomic, strong) SudCommonHideUiCfg *lobby_animation;
+/// 消消乐中的特效
+@property(nonatomic, strong) SudCommonHideUiCfg *game_effect;
+/// 谁是卧底发送爆词按钮
+@property(nonatomic, strong) SudCommonCustomUiCfg *game_burst_send_btn;
+/// okey101 玩家左上角单双牌
+@property(nonatomic, strong) SudCommonHideUiCfg *player_pair_singular;
+/// 怪物消消乐玩家左上角排名
+@property(nonatomic, strong) SudCommonHideUiCfg *game_rank_info;
+/// 是否隐藏游戏中的辅助线（只支持桌球）
+@property(nonatomic, strong) SudCommonHideUiCfg *auxiliary;
+/// 是否隐藏OB玩家观看的提示（只支持ludo）
+@property(nonatomic, strong) SudCommonHideUiCfg *ob_pnl;
+
 @end
 
 @interface GameCfgModel : NSObject
@@ -259,6 +303,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) GameUi *ui;
 @property(nonatomic, assign) NSInteger gameMode;
 @property(nonatomic, assign) NSInteger gameCPU;
+/// 是否游戏区域根据安全区自适应，【0默认、1自适应】
+@property(nonatomic, assign) NSInteger autoScale;
 
 /// 默认配置
 + (GameCfgModel *)defaultCfgModel;

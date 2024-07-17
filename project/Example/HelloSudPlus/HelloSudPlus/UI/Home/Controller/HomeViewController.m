@@ -43,6 +43,12 @@
 
 @implementation HomeViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    [self configNtfOb];
+    return self;
+}
+
 - (BOOL)dtIsHiddenNavigationBar {
     return YES;
 }
@@ -53,7 +59,7 @@
     self.view.backgroundColor = [UIColor dt_colorWithHexString:@"#F5F6FB" alpha:1];
 }
 
-- (void)dtConfigEvents {
+- (void)configNtfOb {
     WeakSelf
     [[NSNotificationCenter defaultCenter] addObserverForName:TOKEN_REFRESH_SUCCESS_NTF object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *_Nonnull note) {
         if (AppService.shared.login.isRefreshedToken) {
@@ -73,6 +79,10 @@
         CGFloat bottomY = weakSelf.collectionView.contentSize.height - weakSelf.collectionView.mj_h;
         [weakSelf.collectionView setContentOffset:CGPointMake(weakSelf.collectionView.bounds.origin.x, rect.origin.y > bottomY ? bottomY : rect.origin.y) animated:true];
     };
+}
+
+- (void)dtConfigEvents {
+
 }
 
 - (void)viewDidLoad {

@@ -56,6 +56,8 @@
         NSLog(@"Game id is empty can not load the game:%@, currentRoomID:%@", @(configModel.gameId), configModel.roomId);
         return;
     }
+//    [[SudMGP getCfg]addEmbeddedMGPkg:1763401430010871809 mgPath:@"GreedyStar_1.0.0.1.sp"];
+    
     // 2. 初始化SudMGP SDK<SudMGP initSDK>
     // 2. Initialize the SudMGP SDK <SudMGP initSDK>
     SudInitSDKParamModel *paramModel = SudInitSDKParamModel.new;
@@ -107,6 +109,7 @@
     paramModel.mgId = configModel.gameId;
     paramModel.language = configModel.language;
     paramModel.gameViewContainer = configModel.gameView;
+    paramModel.authorizationSecret = configModel.authorizationSecret;
     id <ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:paramModel fsmMG:self.sudGameEventHandler.sudFSMMGDecorator];
     [self.sudGameEventHandler.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
 }

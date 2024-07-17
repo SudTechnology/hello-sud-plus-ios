@@ -224,7 +224,6 @@
     configModel.gameView = self.gameView;
     configModel.language = self.language;
     configModel.isTestEnv = isTest;
-
     [self.gameManager loadGame:configModel];
 }
 

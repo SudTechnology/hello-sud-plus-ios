@@ -28,3 +28,9 @@
 /// pk标识
 @property (nonatomic, assign) int64_t pkId;
 @end
+
+/// 响应数据
+@interface RespPlayerPropsCardsModel : BaseRespModel
+/// 道具信息
+@property (nonatomic, strong) NSString * props;
+@end

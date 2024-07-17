@@ -17,10 +17,6 @@
 
 /// 初始化sud
 - (void)configSudGame {
-    // 控制SDK游戏加载背景
-    BOOL isShowSDKLoadingBackground = [self showSudMGPLoadingGameBackground];
-    [[SudMGP getCfg] setShowLoadingGameBg:isShowSDKLoadingBackground];
-    [[SudMGP getCfg] setShowCustomLoading:self.showCustomLoadingView];
     self.gameEventHandler = [self createGameEventHandler];
     self.gameEventHandler.vc = self;
     [self.gameManager registerGameEventHandler:self.gameEventHandler];
@@ -59,7 +55,10 @@
         isTest = YES;
     }
 #endif
-    
+    // 控制SDK游戏加载背景
+    BOOL isShowSDKLoadingBackground = [self showSudMGPLoadingGameBackground];
+    [[SudMGP getCfg] setShowLoadingGameBg:isShowSDKLoadingBackground];
+    [[SudMGP getCfg] setShowCustomLoading:self.showCustomLoadingView];
 
     SudGameLoadConfigModel *configModel = SudGameLoadConfigModel.new;
     configModel.appId = appID;
@@ -70,6 +69,7 @@
     configModel.gameView = self.gameView;
     configModel.language = self.language;
     configModel.isTestEnv = isTest;
+    configModel.authorizationSecret = self.configModel.enterRoomModel.extraRoomVO.authSecret;
     [self.gameManager loadGame:configModel];
 }
 

@@ -100,7 +100,7 @@
     }                                fail:^(NSString *errStr) {
         [ToastUtil show:errStr];
     }];
-    NSArray *playerUserIdList = kGuessService.currentRoomVC.gameEventHandler.sudFSMMGDecorator.onlineUserIdList;
+    NSArray *playerUserIdList = kGuessService.currentRoomVC.gameEventHandler.sudFSMMGDecorator.getJoinedGamePlayerIdList;
     NSString *roomId = kGuessService.currentRoomVC.roomID;
     [GuessRoomService reqGuessPlayerList:playerUserIdList roomId:roomId finished:^(RespGuessPlayerListModel *model) {
         weakSelf.betCoin = model.betCoin;

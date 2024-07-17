@@ -89,9 +89,16 @@
     return m;
 }
 
+
 - (void)updateGameViewSize:(CGFloat)scale {
     [self.thirdGameView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(kScreenWidth * scale + kAppSafeBottom));
+    }];
+}
+
+- (void)updateTopGameViewSize:(CGFloat)scale {
+    [self.thirdGameView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(kScreenWidth * scale));
     }];
 }
 
@@ -104,37 +111,81 @@
 }
 
 - (void)loadGame {
-    if (self.loadType == GameCategoryLoadTypH5) {
-        [self reqGameToken];
-        return;
+    switch (self.loadType) {
+        case GameCategoryLoadTypH5:
+            [self reqGameToken];
+            break;
+        case GameCategoryLoadTypNativeTop:
+            [self reqTopNativeGameScale];
+            break;
+        default:
+            self.thirdGameView.hidden = YES;
+            [self.contentView insertSubview:self.gameView aboveSubview:self.bgImageView];
+            [self.gameView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(self.contentView);
+            }];
+            [super loadGame];
+            break;
     }
-    [super loadGame];
+    
 }
 
 - (void)destroyGame {
-    if (self.loadType == GameCategoryLoadTypH5) {
-        [self.thirdGameView destryGame];
-        self.thirdGameView.hidden = YES;
-        return;
+    switch (self.loadType) {
+        case GameCategoryLoadTypH5:
+            [self.thirdGameView destryGame];
+            self.thirdGameView.hidden = YES;
+            break;
+        case GameCategoryLoadTypNativeTop:
+            self.thirdGameView.hidden = YES;
+            [super destroyGame];
+            break;
+        default:
+            [super destroyGame];
+            
     }
-    [super destroyGame];
+    
 }
 
 
 - (void)reqGameToken {
     WeakSelf
     ReqAppWebGameTokenModel *req = ReqAppWebGameTokenModel.new;
-    req.roomId = self.roomID;
+    req.roomId = self.gameRoomID;
     req.gameId = [NSString stringWithFormat:@"%@", @(self.gameId)];
     [AudioRoomService reqWebGameToken:req success:^(RespWebGameTokenModel * _Nonnull resp) {
         DDLogDebug(@"game url:%@", resp.gameUrl);
         if (resp.gameUrl.length > 0) {
             weakSelf.thirdGameView.hidden = NO;
+            weakSelf.thirdGameView.backgroundColor = UIColor.clearColor;
             [weakSelf.thirdGameView loadGame:resp.gameUrl];
         }
         if (resp.scale > 0) {
             [weakSelf updateGameViewSize:resp.scale];
         }
+    } failure:nil];
+}
+
+- (void)reqTopNativeGameScale {
+    
+    WeakSelf
+    ReqAppWebGameTokenModel *req = ReqAppWebGameTokenModel.new;
+    req.roomId = self.gameRoomID;
+    req.gameId = [NSString stringWithFormat:@"%@", @(self.gameId)];
+    [AudioRoomService reqTopGameConfig:req success:^(RespWebGameTokenModel * _Nonnull resp) {
+        DDLogDebug(@"game url:%@", resp.gameUrl);
+        [weakSelf.thirdGameView addSubview:weakSelf.gameView];
+        [weakSelf.gameView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.top.trailing.equalTo(@0);
+            make.bottom.equalTo(@0);
+        }];
+        weakSelf.thirdGameView.backgroundColor = UIColor.blackColor;// 兼容热游游戏问题
+        weakSelf.thirdGameView.hidden = NO;
+        if (resp.scale > 0) {
+            [weakSelf updateTopGameViewSize:resp.scale];
+        }
+        [super loadGame];
+        
     } failure:nil];
 }
 

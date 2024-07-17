@@ -376,6 +376,97 @@
     return _bullet_screens_btn;
 }
 
+- (SudCommonHideUiCfg *)game_players {
+    if (!_game_players) {
+        _game_players = SudCommonHideUiCfg.new;
+    }
+    return _game_players;
+}
+
+- (SudCommonCustomUiCfg *)round_over_poop_btn {
+    if (!_round_over_poop_btn) {
+        _round_over_poop_btn = SudCommonCustomUiCfg.new;
+    }
+    return _round_over_poop_btn;
+}
+
+- (SudCommonCustomUiCfg *)round_over_good_btn {
+    if (!_round_over_good_btn) {
+        _round_over_good_btn = SudCommonCustomUiCfg.new;
+    }
+    return _round_over_good_btn;
+}
+
+- (SudMaskUiCfg *)mask {
+    if (!_mask) {
+        _mask = SudMaskUiCfg.new;
+    }
+    return _mask;
+}
+
+- (SudCommonHideUiCfg *)worst_teammate_tip {
+    if (!_worst_teammate_tip) {
+        _worst_teammate_tip = SudCommonHideUiCfg.new;
+    }
+    return _worst_teammate_tip;
+}
+
+- (SudCommonHideUiCfg *)game_over_tip {
+    if (!_game_over_tip) {
+        _game_over_tip = SudCommonHideUiCfg.new;
+    }
+    return _game_over_tip;
+}
+
+- (SudCommonHideUiCfg *)lobby_animation {
+    if (!_lobby_animation) {
+        _lobby_animation = SudCommonHideUiCfg.new;
+    }
+    return _lobby_animation;
+}
+
+- (SudCommonHideUiCfg *)game_effect {
+    if (!_game_effect) {
+        _game_effect = SudCommonHideUiCfg.new;
+    }
+    return _game_effect;
+}
+
+- (SudCommonCustomUiCfg *)game_burst_send_btn {
+    if (!_game_burst_send_btn) {
+        _game_burst_send_btn = SudCommonCustomUiCfg.new;
+    }
+    return _game_burst_send_btn;
+}
+
+- (SudCommonHideUiCfg *)player_pair_singular {
+    if (!_player_pair_singular) {
+        _player_pair_singular = SudCommonHideUiCfg.new;
+    }
+    return _player_pair_singular;
+}
+
+- (SudCommonHideUiCfg *)game_rank_info {
+    if (!_game_rank_info) {
+        _game_rank_info = SudCommonHideUiCfg.new;
+    }
+    return _game_rank_info;
+}
+
+- (SudCommonHideUiCfg *)auxiliary {
+    if (!_auxiliary) {
+        _auxiliary = SudCommonHideUiCfg.new;
+    }
+    return _auxiliary;
+}
+
+- (SudCommonHideUiCfg *)ob_pnl {
+    if (!_ob_pnl) {
+        _ob_pnl = SudCommonHideUiCfg.new;
+    }
+    return _ob_pnl;
+}
+
 @end
 
 @interface GameCfgModel ()
@@ -419,3 +510,18 @@
 @implementation BlockChangeSeat
 
 @end
+
+
+@implementation SudMaskUiCfg
+@end
+
+@implementation SudCommonHideUiCfg
+@end
+
+@implementation SudCommonCustomUiCfg
+@end
+
+@implementation SudCommonHideCustomUiCfg
+@end
+
+

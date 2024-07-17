@@ -126,6 +126,14 @@ static NSString *MG_COMMON_GAME_FPS = @"mg_common_game_fps";
 static NSString *MG_COMMON_SELF_CLICK_GOOD = @"mg_common_self_click_good";
 /// 游戏通知 app 玩家被扔便便(仅对你画我猜有效)
 static NSString *MG_COMMON_SELF_CLICK_POOP = @"mg_common_self_click_poop";
+/// 游戏通知 游戏场景销毁
+static NSString *MG_COMMON_DESTROY_GAME_SCENE = @"mg_common_destroy_game_scene";
+/// 游戏向app发送获取玩家持有的指定点数道具卡（只支持飞行棋）
+static NSString *MG_COMMON_GAME_PLAYER_PROPS_CARDS = @"mg_common_game_player_props_cards";
+/// 游戏向app发送获游戏通用数据
+static NSString *MG_COMMON_GAME_INFO_X = @"mg_common_game_info_x";
+/// 游戏通知app击球状态（只支持桌球）
+static NSString *MG_COMMON_GAME_BILLIARDS_HIT_STATE = @"mg_common_game_billiards_hit_state";
 
 #pragma mark - 通用状态-玩家
 /// 加入状态
@@ -197,6 +205,13 @@ static NSString *MG_COMMON_GAME_DISCO_ACTION_END = @"mg_common_game_disco_action
 @property(nonatomic, copy) NSString *ar_SA;
 @property(nonatomic, copy) NSString *tr_TR;
 @property(nonatomic, copy) NSString *ur_PK;
+
+@property(nonatomic, copy) NSString *pt_PT;
+@property(nonatomic, copy) NSString *hi_IN;
+@property(nonatomic, copy) NSString *bn_BD;
+@property(nonatomic, copy) NSString *tl_PH;
+@property(nonatomic, copy) NSString *fa_IR;
+@property(nonatomic, copy) NSString *ru_RU;
 @end
 
 @interface GamePublicUser : NSObject
@@ -383,7 +398,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 /// 通用状态-游戏: 游戏通知app层播放背景音乐状态
 @interface MGCommonGameBgMusicState : NSObject
 /// 背景音乐的开关状态 true: 开，false: 关
-@property(nonatomic, assign) BOOL isPlay;
+@property(nonatomic, assign) BOOL state;
 @end
 
 
@@ -411,6 +426,8 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @interface MGCommonGameSelfMicrophone : NSObject
 /// 麦克风开关状态 true: 开，false: 关
 @property(nonatomic, assign) BOOL isOn;
+/// 1：白天 2：黑夜 3：非游戏
+@property(nonatomic, assign) NSInteger state;
 @end
 
 
@@ -420,6 +437,8 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @interface MGCommonGameSelfHeadphone : NSObject
 /// 耳机（听筒，喇叭）开关状态 true: 开，false: 关
 @property(nonatomic, assign) BOOL isOn;
+/// 1：白天 2：黑夜 3：非游戏
+@property(nonatomic, assign) NSInteger state;
 @end
 
 
@@ -545,7 +564,8 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @property(nonatomic, copy) NSString *actionId;
 /// true 指令成功，false 指令失败
 @property(nonatomic, assign) BOOL isSuccess;
-
+/// 返回错误码
+@property(nonatomic, assign) BOOL errCode;
 @end
 
 #pragma mark - 元宇宙砂砂舞 指令动作结束通知  MG_COMMON_GAME_DISCO_ACTION_END
@@ -854,6 +874,32 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 #pragma mark - MG_COMMON_SELF_CLICK_POOP
 @interface MgCommonSelfClickPoopModel:NSObject
 
+@end
+
+#pragma mark - MG_COMMON_DESTROY_GAME_SCENE
+@interface MgCommonDestroyGameSceneModel:NSObject
+
+@end
+
+#pragma mark - MG_COMMON_GAME_PLAYER_PROPS_CARDS
+@interface MgCommonGamePlayerPropsCardsModel:NSObject
+
+@end
+
+#pragma mark - MG_COMMON_GAME_INFO_X
+@interface MgCommonGameInfoXModel:NSObject
+/// 事件名称 ，（注：具体游戏参考如下）https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStateGame.html
+@property(nonatomic, strong)NSString *eventName;
+/// 具体的数据，为一个JSON字符串， （注：具体游戏参考如下） https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStateGame.html
+@property(nonatomic, strong)NSString *data;
+@end
+
+#pragma mark - MG_COMMON_GAME_BILLIARDS_HIT_STATE
+@interface MgCommonGameBilliardsHitStateModel:NSObject
+/// 操作玩家的id
+@property(nonatomic, strong)NSString *uid;
+/// 请查看下面state状态说明 https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStateGame.html
+@property(nonatomic, assign)NSInteger state;
 @end
 
 NS_ASSUME_NONNULL_END

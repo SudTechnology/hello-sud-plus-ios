@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, GameCategoryLoadType ) {
     GameCategoryLoadTypSdk = 0,
     GameCategoryLoadTypH5 = 1,
     GameCategoryLoadTypVideo = 2,
+    GameCategoryLoadTypNativeTop = 3,
 };
 
 
