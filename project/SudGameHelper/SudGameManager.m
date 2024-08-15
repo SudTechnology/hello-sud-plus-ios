@@ -32,6 +32,7 @@
 - (void)loadGame:(nonnull SudGameLoadConfigModel *)configModel {
     NSAssert(self.sudGameEventHandler, @"Must registerGameEventHandler before!");
     if (self.sudGameEventHandler) {
+        [self.sudGameEventHandler setupLoadConfigModel:configModel];
         __weak typeof(self) weakSelf = self;
         [self.sudGameEventHandler onGetCode:configModel.userId result:^(NSString * _Nonnull code) {
             NSLog(@"on getCode success");

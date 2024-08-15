@@ -63,13 +63,13 @@ target 'HelloSudPlus' do
   #pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
   pod 'TXLiteAVSDK_TRTC', '10.2.11418'
   # SudMGP包装类
-  #  pod 'SudMGPWrapper', :path => '../../'
+    pod 'SudMGPWrapper', :path => '../../'
   # 标准版（支持全部游戏，包体会大一些）
-  pod 'SudMGP', '~> 1.4.0'
-  pod 'SudMGPWrapper', '~> 1.4.0.1'
+#  pod 'SudMGP', '~> 1.4.4'
+#  pod 'SudMGPWrapper', '~> 1.4.4.2'
   # 轻量版（不支持部分游戏，包体较小）
-#  pod 'SudMGP_Lite', '~> 1.4.0'
-#  pod 'SudMGPWrapper_Lite', '~> 1.4.0.1'
+#  pod 'SudMGP_Lite', '~> 1.4.4'
+#  pod 'SudMGPWrapper_Lite', '~> 1.4.4'
   
   # SudNFT SDK
   pod 'SudNFT', '1.0.4'

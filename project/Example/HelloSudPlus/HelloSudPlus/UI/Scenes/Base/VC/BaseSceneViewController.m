@@ -114,6 +114,7 @@
     }
     [self.naviView hiddenNodeWithRoleType:roleType];
     [self checkIfNeedToOpenRocket];
+    IQKeyboardManager.sharedManager.enable = NO;
 }
 
 // 进入房间，判断是否拉起火箭，banner过来

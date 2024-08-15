@@ -72,8 +72,8 @@
     
     /// 此接口为QuickStart样例请求接口
     /// This interface is a QuickStart sample request interface
-    NSString *getCodeUrl = @"https://mgp-hello.sudden.ltd/login/v3";
-    NSDictionary *dicParam = @{@"user_id": userId};
+    NSString *getCodeUrl = @"https://prod-hellosud-base.s00.tech/login/v3";
+    NSDictionary *dicParam = @{@"user_id": userId, @"app_id":self.loadConfigModel.appId };
     [self postHttpRequestWithURL:getCodeUrl param:dicParam success:^(NSDictionary *rootDict) {
 
         NSDictionary *dic = [rootDict objectForKey:@"data"];
@@ -81,10 +81,15 @@
         /// The code here is used to log in to the game sdk server
         NSString *code = [dic objectForKey:@"code"];
         int retCode = (int) [[dic objectForKey:@"ret_code"] longValue];
-        result(code);
+        if (retCode == 0 && code.length > 0) {
+            result(code);
+        } else {
+            [ToastUtil show:@"server error"];
+        }
 
     }                    failure:^(NSError *error) {
         NSLog(@"login game server error:%@", error.debugDescription);
+        [ToastUtil show:error.debugDescription];
     }];
     
 }
