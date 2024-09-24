@@ -42,6 +42,7 @@ typedef NS_ENUM(NSInteger, SceneType) {
     SceneTypeGameCategoryLingxian = 111,//    灵仙
     SceneTypeGameCategory3DAudio = 112,//    灵仙
     SceneTypeGameCategoryHotGame = 113,//    热游
+    SceneTypeGameCategoryAI = 114,//    AI
 };
 
 

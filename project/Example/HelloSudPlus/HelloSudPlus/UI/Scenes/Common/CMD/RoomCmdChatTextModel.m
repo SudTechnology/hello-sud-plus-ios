@@ -43,7 +43,7 @@
     attrName.yy_lineSpacing = 6;
     attrName.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrName.yy_color = [UIColor dt_colorWithHexString:@"#8FE5F6" alpha:1];
-    NSMutableAttributedString *attrMsg = [[NSMutableAttributedString alloc] initWithString:content];
+    NSMutableAttributedString *attrMsg = [[NSMutableAttributedString alloc] initWithString:content ?: @""];
     attrMsg.yy_lineSpacing = 6;
     attrMsg.yy_font = [UIFont systemFontOfSize:12 weight:UIFontWeightRegular];
     attrMsg.yy_color = [UIColor dt_colorWithHexString:@"#FFFFFF" alpha:1];
@@ -68,4 +68,33 @@
 - (NSAttributedString *)attrContent {
     return _attrContent;
 }
+@end
+
+
+@implementation RoomCmdChatTextModelV2
+
+/// 构建消息
+/// @param content 消息内容
++ (instancetype)makeMsg:(NSString *)content {
+    RoomCmdChatTextModelV2 *m = RoomCmdChatTextModelV2.new;
+    [m configBaseInfoWithCmd:CMD_CHAT_MEDIA_NOTIFY];
+    m.content = content;
+    return m;
+}
+
+/// 构建语音消息
++ (instancetype)makeAudioMsg {
+    RoomCmdChatTextModelV2 *m = RoomCmdChatTextModelV2.new;
+    [m configBaseInfoWithCmd:CMD_CHAT_MEDIA_NOTIFY];
+    m.msgType = RoomScreenMsgTypeVoice;
+    return m;
+}
+
+- (NSString *)cellName {
+    if (self.msgType == RoomScreenMsgTypeVoice) {
+        return @"RoomAudioMsgTableViewCell";
+    }
+    return [super cellName];
+}
+
 @end

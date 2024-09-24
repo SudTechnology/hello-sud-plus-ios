@@ -31,20 +31,22 @@
 - (void)addNotification {
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter removeObserver:self];
-    // 维护游戏进入前后台状态
-    [defaultCenter addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [defaultCenter addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    // 维护游戏进入应用活跃非活跃时状态
+    [defaultCenter addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [defaultCenter addObserver:self selector:@selector(appDidBecomeInactive:) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
-- (void)applicationDidEnterBackground:(NSNotification *)notification {
+- (void)appDidBecomeActive:(NSNotification *)notification {
+    NSLog(@"SudMGPWrapper appDidBecomeActive");
     if (_iSudFSTAPP) {
-        [_iSudFSTAPP pauseMG];
+        [_iSudFSTAPP playMG];
     }
 }
 
-- (void)applicationWillEnterForeground:(NSNotification *)notification {
+- (void)appDidBecomeInactive:(NSNotification *)notification {
+    NSLog(@"SudMGPWrapper appDidBecomeInactive");
     if (_iSudFSTAPP) {
-        [_iSudFSTAPP playMG];
+        [_iSudFSTAPP pauseMG];
     }
 }
 
@@ -96,6 +98,16 @@
 /// @param teamId 不支持分队的游戏：数值填1；支持分队的游戏：数值填1或2（两支队伍）
 - (void)notifyAppComonSelfIn:(BOOL)isIn seatIndex:(int)seatIndex isSeatRandom:(BOOL)isSeatRandom teamId:(int)teamId {
     NSDictionary *dic = @{@"isIn": @(isIn), @"seatIndex": @(seatIndex), @"isSeatRandom": @(isSeatRandom), @"teamId": @(teamId)};
+    [self notifyStateChange:APP_COMMON_SELF_IN dataJson:dic.mj_JSONString];
+}
+
+/// 加入,退出游戏
+/// @param isIn true 加入游戏，false 退出游戏
+/// @param seatIndex 加入的游戏位(座位号) 默认传seatIndex = -1 随机加入，seatIndex 从0开始，不可大于座位数
+/// @param isSeatRandom 默认为ture, 带有游戏位(座位号)的时候，如果游戏位(座位号)已经被占用，是否随机分配一个空位坐下 isSeatRandom=true 随机分配空位坐下，isSeatRandom=false 不随机分配
+/// @param teamId 不支持分队的游戏：数值填1；支持分队的游戏：数值填1或2（两支队伍）
+- (void)notifyAppComonSelfInV2:(BOOL)isIn seatIndex:(int)seatIndex isSeatRandom:(BOOL)isSeatRandom teamId:(int)teamId {
+    NSDictionary *dic = @{@"isIn": @(isIn), @"seatIndex": @(seatIndex), @"isSeatRandom": @(isSeatRandom), @"isRandom":@(isSeatRandom), @"teamId": @(teamId)};
     [self notifyStateChange:APP_COMMON_SELF_IN dataJson:dic.mj_JSONString];
 }
 

@@ -213,6 +213,10 @@
 		6CA21CCC2975268800F5AE8E /* ReqAppOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA21CCB2975268800F5AE8E /* ReqAppOrderModel.m */; };
 		6CA68C4C28E182E200BDE442 /* ReqAddScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */; };
 		6CA68D3B28E3022D00BDE442 /* LeagueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D3A28E3022D00BDE442 /* LeagueDetailViewController.m */; };
+		6CB381052C8B279200793AE3 /* ModelAiRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB381032C8B279200793AE3 /* ModelAiRoomViewController.m */; };
+		6CB381082C8BFCD500793AE3 /* ModelAiRoomOperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB381072C8BFCD500793AE3 /* ModelAiRoomOperatorView.m */; };
+		6CB3810C2C8C476800793AE3 /* RWAudioCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3810A2C8C476700793AE3 /* RWAudioCapture.m */; };
+		6CB3810F2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3810E2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.m */; };
 		6CB9996C2A0CC7CB00AD12CF /* InteractiveGameCrazyCarHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9996A2A0CC7CA00AD12CF /* InteractiveGameCrazyCarHandler.m */; };
 		6CC3E77A28C1BB7D00AA934B /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77728C1BB7D00AA934B /* MyEthereumChainsCellModel.m */; };
 		6CC3E77B28C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77828C1BB7D00AA934B /* MyCNWalletSwitchCellModel.m */; };
@@ -854,6 +858,14 @@
 		6CA68C4B28E182E200BDE442 /* ReqAddScoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqAddScoreModel.m; sourceTree = "<group>"; };
 		6CA68D3928E3022D00BDE442 /* LeagueDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeagueDetailViewController.h; sourceTree = "<group>"; };
 		6CA68D3A28E3022D00BDE442 /* LeagueDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeagueDetailViewController.m; sourceTree = "<group>"; };
+		6CB381022C8B279200793AE3 /* ModelAiRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelAiRoomViewController.h; sourceTree = "<group>"; };
+		6CB381032C8B279200793AE3 /* ModelAiRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelAiRoomViewController.m; sourceTree = "<group>"; };
+		6CB381062C8BFCD500793AE3 /* ModelAiRoomOperatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelAiRoomOperatorView.h; sourceTree = "<group>"; };
+		6CB381072C8BFCD500793AE3 /* ModelAiRoomOperatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelAiRoomOperatorView.m; sourceTree = "<group>"; };
+		6CB381092C8C476700793AE3 /* RWAudioCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWAudioCapture.h; sourceTree = "<group>"; };
+		6CB3810A2C8C476700793AE3 /* RWAudioCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWAudioCapture.m; sourceTree = "<group>"; };
+		6CB3810D2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAudioMsgTableViewCell.h; sourceTree = "<group>"; };
+		6CB3810E2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAudioMsgTableViewCell.m; sourceTree = "<group>"; };
 		6CB3D146288FEE220037EE88 /* HelloSudPlus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HelloSudPlus.entitlements; sourceTree = "<group>"; };
 		6CB9996A2A0CC7CA00AD12CF /* InteractiveGameCrazyCarHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveGameCrazyCarHandler.m; sourceTree = "<group>"; };
 		6CB9996B2A0CC7CA00AD12CF /* InteractiveGameCrazyCarHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractiveGameCrazyCarHandler.h; sourceTree = "<group>"; };
@@ -1579,6 +1591,7 @@
 		4455AD1327EAC658001516EE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				6CB381012C8B275600793AE3 /* ModelAI */,
 				6CC5D5AE2B298EA500F16628 /* ThirdGame */,
 				6C46082A28658E1D005C99EF /* Disco */,
 				6C4607BE2851F701005C99EF /* Danmaku */,
@@ -1895,6 +1908,8 @@
 				4455ADEE27EAC6F7001516EE /* HSRoomTextTableViewCell.m */,
 				4455ADEF27EAC6F7001516EE /* RoomGiftTableViewCell.m */,
 				4455ADF027EAC6F7001516EE /* BaseMsgCell.h */,
+				6CB3810D2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.h */,
+				6CB3810E2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.m */,
 			);
 			path = Msg;
 			sourceTree = "<group>";
@@ -2360,6 +2375,34 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		6CB381012C8B275600793AE3 /* ModelAI */ = {
+			isa = PBXGroup;
+			children = (
+				6CB381042C8B279200793AE3 /* Controller */,
+				6CB381062C8BFCD500793AE3 /* ModelAiRoomOperatorView.h */,
+				6CB381072C8BFCD500793AE3 /* ModelAiRoomOperatorView.m */,
+			);
+			path = ModelAI;
+			sourceTree = "<group>";
+		};
+		6CB381042C8B279200793AE3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6CB381022C8B279200793AE3 /* ModelAiRoomViewController.h */,
+				6CB381032C8B279200793AE3 /* ModelAiRoomViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6CB3810B2C8C476700793AE3 /* AudioCapture */ = {
+			isa = PBXGroup;
+			children = (
+				6CB381092C8C476700793AE3 /* RWAudioCapture.h */,
+				6CB3810A2C8C476700793AE3 /* RWAudioCapture.m */,
+			);
+			path = AudioCapture;
+			sourceTree = "<group>";
+		};
 		6CB999692A0CC7CA00AD12CF /* CrazyCar */ = {
 			isa = PBXGroup;
 			children = (
@@ -2650,6 +2693,7 @@
 		6CEBC0832B57CC590047B3D4 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				6CB3810B2C8C476700793AE3 /* AudioCapture */,
 				6CEBC0842B57CC590047B3D4 /* Extension */,
 				6CEBC0972B57CC590047B3D4 /* Network */,
 				6CEBC09A2B57CC590047B3D4 /* Timer */,
@@ -3349,6 +3393,7 @@
 				44D9F3A8280FB0FB000B14B5 /* GameConfigTableViewCell.m in Sources */,
 				6CD6E87327BF42B200D8F76C /* NeteaseAudioEngineImpl.m in Sources */,
 				6CEBC0C12B57CC590047B3D4 /* NSString+DTNSString.m in Sources */,
+				6CB3810F2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.m in Sources */,
 				44BC48E52815433400E4E3F7 /* RoomCmdOrderCreateModel.m in Sources */,
 				6C4D37792AE7EE0F00578244 /* RespMonopolyModel.m in Sources */,
 				4455ADCC27EAC658001516EE /* TicketJoinPopView.m in Sources */,
@@ -3441,6 +3486,7 @@
 				BC21090932848A4335D3546F /* MyViewController.m in Sources */,
 				BC210379CA8856A0C91448E4 /* MyCell.m in Sources */,
 				BC2106C085BCFA772D1B9F96 /* AboutViewController.m in Sources */,
+				6CB381052C8B279200793AE3 /* ModelAiRoomViewController.m in Sources */,
 				BC210E8DA59477CC32152825 /* MyNFTColCell.m in Sources */,
 				BC210B0390E117B09344D025 /* HsNFTPreferences.m in Sources */,
 				6CEBC0BB2B57CC590047B3D4 /* BaseCollectionViewCell.m in Sources */,
@@ -3477,6 +3523,7 @@
 				BC21033DD0AA9A6447EC94C1 /* CrossAppSelectGameModel.m in Sources */,
 				BC21069728DCAFD65BF61715 /* GameMatchingView.m in Sources */,
 				BC210A8BC55D491FB72FE329 /* GameMatchGroupView.m in Sources */,
+				6CB3810C2C8C476800793AE3 /* RWAudioCapture.m in Sources */,
 				BC2106EA643D5C3F1C3C3A8B /* MatchSeatView.m in Sources */,
 				BC210D55859B3FD659E31748 /* CrossAppRoomService.m in Sources */,
 				BC2107B89AA92C9C99EDFB4F /* RespCrossAppModels.m in Sources */,
@@ -3488,6 +3535,7 @@
 				BC2106022464099DABC583C0 /* InteractiveGameBannerView.m in Sources */,
 				BC2104A8898C8884DFEED23A /* InteractiveGameBannerColCell.m in Sources */,
 				BC210CDDE96D0F60CDE9788D /* InteractiveGameBannerModel.m in Sources */,
+				6CB381082C8BFCD500793AE3 /* ModelAiRoomOperatorView.m in Sources */,
 				BC210007DE8200E08B5F7786 /* InteractiveGameBaseballHandler.m in Sources */,
 				BC210692A2E3BBB5ABE65553 /* InteractiveGameRocketHandler.m in Sources */,
 				BC21039A6B7AAC35234486ED /* RoomListContentView.m in Sources */,

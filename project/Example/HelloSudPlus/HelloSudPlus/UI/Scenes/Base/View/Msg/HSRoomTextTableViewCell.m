@@ -8,7 +8,7 @@
 #import "HSRoomTextTableViewCell.h"
 
 @interface HSRoomTextTableViewCell ()
-@property(nonatomic, strong) SDAnimatedImageView *headImageView;
+
 @end
 
 @implementation HSRoomTextTableViewCell

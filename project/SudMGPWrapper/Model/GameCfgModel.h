@@ -271,9 +271,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏中的游戏位
 @property(nonatomic, strong) SudCommonHideUiCfg *game_players;
 /// 你画我猜，小局结算界面点击扔大便按钮
-@property(nonatomic, strong) SudCommonCustomUiCfg *round_over_poop_btn;
+@property(nonatomic, strong) SudCommonHideCustomUiCfg *round_over_poop_btn;
 /// 你画我猜，小局结算界面点击点赞按钮
-@property(nonatomic, strong) SudCommonCustomUiCfg *round_over_good_btn;
+@property(nonatomic, strong) SudCommonHideCustomUiCfg *round_over_good_btn;
 /// 弹框界面的蒙层
 @property(nonatomic, strong) SudMaskUiCfg *mask;
 /// 友尽闯关中最坑队友的弹框

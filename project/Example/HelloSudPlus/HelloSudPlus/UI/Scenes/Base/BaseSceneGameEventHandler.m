@@ -311,6 +311,40 @@
     }];
 }
 
+- (BOOL)onGameStateChange:(id<ISudFSMStateHandle>)handle state:(NSString *)state dataJson:(NSString *)dataJson {
+    if ([state isEqualToString:@"mg_happy_goat_chat"]) {
+        [self handleHappyGoatChat:dataJson];
+        return YES;
+    }
+    return NO;
+}
+
+- (void)handleHappyGoatChat:(NSString *)dataJson {
+    DDLogDebug(@"handleHappyGoatChat:%@", dataJson);
+    NSDictionary *dataDic = [dataJson mj_JSONObject];
+    NSString *icon = dataDic[@"icon"];
+    NSString *nickname = dataDic[@"nickname"];
+    NSArray *textArr = dataDic[@"data"];
+    
+    AudioUserModel *userModel = AudioUserModel.new;
+    userModel.name = nickname;
+    userModel.icon = icon;
+    if ([textArr isKindOfClass:NSArray.class]) {
+        for (NSDictionary *itemDic in textArr) {
+            NSString *text = itemDic[@"text"][@"text"];
+            if (text && [text isKindOfClass:NSString.class]) {
+                
+                /// 发送文本消息
+                RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:text];
+                m.sendUser = userModel;
+                m.skipParseGameKey = YES;
+                [kDiscoRoomService.currentRoomVC sendMsg:m isAddToShow:YES finished:nil];
+            }
+        }
+    }
+
+}
+
 #pragma mark =======玩家状态处理=======
 
 /// 加入状态处理

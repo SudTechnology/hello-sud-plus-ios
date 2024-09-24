@@ -15,6 +15,7 @@
 #define CMD_CHANGE_GAME_NOTIFY        10004 /// 游戏切换
 #define CMD_ENTER_ROOM_NOTIFY         10005 /// 用户进入房间通知
 #define CMD_KICK_OUT_ROOM             10006 /// 踢出房间
+#define CMD_CHAT_MEDIA_NOTIFY         10007 /// 1.7.5    公屏消息V2
 #define CMD_ROOM_PK_SEND_INVITE	      10100	/// 1.3.0 发送跨房PK邀请
 #define CMD_ROOM_PK_ANSWER	          10101	/// 1.3.0 跨房PK邀请应答
 #define CMD_ROOM_PK_START	          10102	/// 1.3.0 开始跨房PK

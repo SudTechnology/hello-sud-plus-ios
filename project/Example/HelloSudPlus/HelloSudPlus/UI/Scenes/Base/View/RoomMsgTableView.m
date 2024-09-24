@@ -10,6 +10,7 @@
 #import "Msg/HSRoomTextTableViewCell.h"
 #import "Msg/RoomSystemTableViewCell.h"
 #import "Msg/RoomGiftTableViewCell.h"
+#import "Msg/RoomAudioMsgTableViewCell.h"
 
 @interface RoomMsgTableView () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
@@ -98,6 +99,7 @@
         [_tableView registerClass:[HSRoomTextTableViewCell class] forCellReuseIdentifier:NSStringFromClass(HSRoomTextTableViewCell.class)];
         [_tableView registerClass:[RoomSystemTableViewCell class] forCellReuseIdentifier:NSStringFromClass(RoomSystemTableViewCell.class)];
         [_tableView registerClass:RoomGiftTableViewCell.class forCellReuseIdentifier:NSStringFromClass(RoomGiftTableViewCell.class)];
+        [_tableView registerClass:RoomAudioMsgTableViewCell.class forCellReuseIdentifier:NSStringFromClass(RoomAudioMsgTableViewCell.class)];
     }
     return _tableView;
 }

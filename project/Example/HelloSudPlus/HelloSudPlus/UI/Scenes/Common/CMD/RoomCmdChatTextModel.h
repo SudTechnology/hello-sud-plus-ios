@@ -27,4 +27,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)refreshAttrContent:(void (^)(void))completed;
 @end
 
+/// 公屏消息V2 支持多媒体
+@interface RoomCmdChatTextModelV2 : RoomCmdChatTextModel
+
+typedef NS_ENUM(NSInteger, RoomScreenMsgType) {
+    RoomScreenMsgTypeText = 0,/// 普通文本
+    RoomScreenMsgTypeVoice = 1,/// 不可读语音
+};
+@property(nonatomic, assign)RoomScreenMsgType msgType;
+
+/// 构建语音消息
++ (instancetype)makeAudioMsg;
+@end
+
 NS_ASSUME_NONNULL_END

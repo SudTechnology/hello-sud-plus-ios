@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HSRoomTextTableViewCell : BaseMsgCell
+@property(nonatomic, strong) SDAnimatedImageView *headImageView;
 @property (nonatomic, strong) YYLabel *msgLabel;
 @end
 

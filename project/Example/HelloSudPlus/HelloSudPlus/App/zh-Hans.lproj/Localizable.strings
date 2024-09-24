@@ -487,3 +487,5 @@
 "dt_room_gift_showcase_title" = "礼物卡橱窗";
 "dt_room_gift_name_prefix" = "赠送";
 "dt_room_danmu_prefix" = "发送";
+"dt_operator_record_tip" = "按住说话";
+"dt_operator_record_end_tip" = "松开结束";

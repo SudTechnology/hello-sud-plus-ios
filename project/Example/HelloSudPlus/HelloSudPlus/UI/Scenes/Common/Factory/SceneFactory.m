@@ -19,6 +19,7 @@
 #import "DanmakuVerticalRoomViewController.h"
 #import "Audio3DRoomViewController.h"
 #import "ThirdGameViewController.h"
+#import "ModelAiRoomViewController.h"
 
 @implementation SceneParamModel
 
@@ -30,31 +31,7 @@
 }
 
 + (BaseSceneViewController *)createSceneVC:(SceneParamModel *)paramModel {
-    if (paramModel.tabType == 2) {
-        return [self handleGameTab:paramModel];
-    }
     return [self handleSceneTab:paramModel];
-}
-
-+ (BaseSceneViewController *)handleGameTab:(SceneParamModel *)paramModel {
-    BaseSceneViewController *vc = nil;
-    
-    switch (paramModel.sceneType) {
-        case SceneTypeGameCategoryDanmaku:
-            vc = [[DanmakuVerticalRoomViewController alloc]init];
-            break;
-        case SceneTypeGameCategory3DAudio:
-            vc = Audio3DRoomViewController.new;
-            break;
-        default:
-            vc = [[ThirdGameViewController alloc] init];
-            break;
-    }
-    [vc createService];
-    vc.service.sceneType = paramModel.configModel.enterRoomModel.sceneType;
-    vc.service.roleType = paramModel.configModel.enterRoomModel.roleType;
-    vc.configModel = paramModel.configModel;
-    return vc;
 }
 
 + (BaseSceneViewController *)handleSceneTab:(SceneParamModel *)paramModel {
@@ -103,9 +80,10 @@
             vc = [[DanmakuVerticalRoomViewController alloc]init];
             break;
         case SceneTypeAudio3D:
+        case SceneTypeGameCategory3DAudio:
             vc = Audio3DRoomViewController.new;
             break;
-            
+
         case SceneTypeGameCategoryAudio:// 语音互动类
         case SceneTypeGameCategoryRealTimePvP://    实时竞技类
         case SceneTypeGameCategoryChess://    经典棋类
@@ -119,8 +97,15 @@
         case SceneTypeGameCategoryHotGame:
             vc = ThirdGameViewController.new;
             break;
+        case SceneTypeGameCategoryAI:
+            vc = ModelAiRoomViewController.new;
+            break;
         default:
-            vc = [[AudioRoomViewController alloc] init];
+            if (paramModel.tabType == 2) {
+                vc = [[ThirdGameViewController alloc] init];
+            } else {
+                vc = [[AudioRoomViewController alloc] init];
+            }
             break;
     }
     [vc createService];

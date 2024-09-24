@@ -177,6 +177,14 @@
             isShowOnScreen = NO;
         }
             break;
+            
+        case CMD_CHAT_MEDIA_NOTIFY: {
+            // 公屏消息V2
+            RoomCmdChatTextModelV2 *m = [RoomCmdChatTextModelV2 fromJSON:command];
+            msgModel = m;
+        }
+            break;
+
 
         default:
             // 业务指令
