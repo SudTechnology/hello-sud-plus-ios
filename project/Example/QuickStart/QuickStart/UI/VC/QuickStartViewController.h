@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏房间ID
 /// Game room ID
-@property(nonatomic, assign)NSString * roomId;
+@property(nonatomic, strong)NSString * roomId;
 
 /// 游戏ID
 /// Game ID
