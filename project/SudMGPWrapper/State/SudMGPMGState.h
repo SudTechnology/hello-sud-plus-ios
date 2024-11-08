@@ -808,7 +808,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @property(nonatomic, assign)NSInteger sBuyIn;// 带入值/最小带入配置
 @property(nonatomic, assign)NSInteger bBuyIn;// 最大带入，无限（0）
 @property(nonatomic, assign)NSInteger isAutoStart; // 是否自动开始
-@property(nonatomic, assign)NSInteger tableDuration;// 牌桌时长配置（小时）
+@property(nonatomic, assign)CGFloat tableDuration;// 牌桌时长配置（小时）
 @property(nonatomic, assign)NSInteger thinkTime;// 思考时间（秒）
 
 @property(nonatomic, assign)NSInteger darkCard;// 暗牌回合

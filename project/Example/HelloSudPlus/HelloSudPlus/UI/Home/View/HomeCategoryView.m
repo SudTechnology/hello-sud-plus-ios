@@ -46,6 +46,27 @@
     [self.titleCategoryView selectItemAtIndex:idx];
 }
 
+/// 滚动到指定场景
+- (void)scrollToDefaultScene:(NSInteger)defaultSceneId {
+    NSInteger index = 0;
+    NSArray *tempArr = self.sceneList.copy;
+    for (int i = 0; i < tempArr.count; ++i) {
+        HSSceneModel *item = tempArr[i];
+        if (item.sceneId == defaultSceneId) {
+            index = i;
+            break;
+        }
+    }
+    if (index > 0) {
+        [HSThreadUtils dispatchMainAfter:0.25 callback:^{
+            [self selectedIndex:index];
+            if (self.selectSectionBlock) {
+                self.selectSectionBlock(index);
+            }
+        }];
+    }
+}
+
 - (void)moreBtnEvent:(UIButton *)btn {
     AllCategoryView *node = AllCategoryView.new;
     [node configUI:self.sceneList selectSceneID:self.sceneList[self.titleCategoryView.selectedIndex].sceneId];

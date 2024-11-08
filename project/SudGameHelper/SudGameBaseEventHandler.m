@@ -112,7 +112,7 @@
 
 
 - (void)onExpireCode:(nonnull id<ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    
+    [handle success:self.sudFSMMGDecorator.handleMGSuccess];
     // 请求业务服务器刷新令牌 Code更新
     // Request the service server to refresh the token Code update
     [self onGetCode:self.loadConfigModel.userId result:^(NSString * _Nonnull code) {

@@ -14,15 +14,20 @@
 
 - (nonnull GameCfgModel *)onGetGameCfg {
     GameCfgModel *gameCfgModel = [GameCfgModel defaultCfgModel];
-    /// 可以在此根据自身应用需要配置游戏，例如配置声音
+    /// 可以在此根据自身应用需要配置游戏，例如配置声音、按钮自定义显示或者接管事件
     /// You can configure the game according to your application needs here, such as configuring the sound
     gameCfgModel.gameSoundVolume = 100;
     /// ...
+    /// 例如可以设置接管游戏画面内的加入游戏按钮，以便用户点击加入按钮时接入方能收到游戏加入事件，并进行自行处理，设置为YES并实现对应回调方法onGameMGCommonSelfClickJoinBtn:model:即可收到加入按钮回调
+    /// For example, you can set up the 'Join Game' button within the game screen so that when the user clicks the join button, the receiving party can receive the game join event and handle it accordingly. Set it to YES and implement the corresponding callback method  onGameMGCommonSelfClickJoinBtn:model:  to receive the join button callback.
+//    gameCfgModel.ui.join_btn.custom = YES;
+    
     return gameCfgModel;
 }
 
 - (nonnull GameViewInfoModel *)onGetGameViewInfo {
     
+    GameViewInfoModel *m = [super onGetGameViewInfo];
     /// 应用根据自身布局需求在此配置游戏显示视图信息
     /// The application configures the game display view information here according to its layout requirements
     
@@ -32,14 +37,6 @@
     // 状态栏高度
     // Status bar height
     CGFloat statusBarHeight = safeArea.top == 0 ? 20 : safeArea.top;
-    
-    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    CGRect gameViewRect = self.loadConfigModel.gameView.bounds;
-
-    // 游戏展示区域
-    // Game display area
-    m.view_size.width = gameViewRect.size.width;
-    m.view_size.height = gameViewRect.size.height;
     // 游戏内容布局安全区域，根据自身业务调整顶部间距
     // Game content layout security area, adjust the top spacing according to their own business
     // 顶部间距
@@ -82,6 +79,7 @@
         NSString *code = [dic objectForKey:@"code"];
         int retCode = (int) [[dic objectForKey:@"ret_code"] longValue];
         if (retCode == 0 && code.length > 0) {
+            // callback the code 
             result(code);
         } else {
             [ToastUtil show:@"server error"];
@@ -264,5 +262,13 @@
 - (void)onGameMGCommonGameSelfHeadphone:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSelfHeadphone *)model {
 
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+}
+
+- (void)onGameMGCommonSelfClickJoinBtn:(id<ISudFSMStateHandle>)handle model:(MGCommonSelfClickJoinBtn *)model {
+    /// 处理来自游戏画面的加入游戏按钮事件
+    /// Handle the event of the 'Join Game' button from the game screen
+    /// 执行完应用自身逻辑，然后调用一下接口通知游戏将当前用户加入游戏即可
+    /// Execute the application's own logic, and then call the following interface to notify the game to add the current user to the game."
+//    [self.sudFSTAPPDecorator notifyAppComonSelfInV2:YES seatIndex:-1 isSeatRandom:YES teamId:0];
 }
 @end

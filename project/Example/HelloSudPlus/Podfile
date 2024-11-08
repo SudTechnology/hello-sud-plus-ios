@@ -49,7 +49,7 @@ target 'HelloSudPlus' do
   # agora语音SDK
   pod 'AgoraRtcEngine_iOS', '4.2.6'
   # agora云信令SDK
-  pod 'AgoraRtm_iOS', '1.4.9'
+  pod 'AgoraRtm_iOS', '2.2.1'
   # rongcloud音频SDK
   pod 'RCVoiceRoomLib', '~> 2.0.7'
   # netease 语音SDK
@@ -63,10 +63,10 @@ target 'HelloSudPlus' do
   #pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
   pod 'TXLiteAVSDK_TRTC', '10.2.11418'
   # SudMGP包装类
-  #  pod 'SudMGPWrapper', :path => '../../'
+    pod 'SudMGPWrapper', :path => '../../'
   # 标准版（支持全部游戏，包体会大一些）
-  pod 'SudMGP', '~> 1.4.5'
-  pod 'SudMGPWrapper', '~> 1.4.4.2'
+#  pod 'SudMGP', '~> 1.4.4'
+#  pod 'SudMGPWrapper', '~> 1.4.4.2'
   # 轻量版（不支持部分游戏，包体较小）
 #  pod 'SudMGP_Lite', '~> 1.4.4'
 #  pod 'SudMGPWrapper_Lite', '~> 1.4.4'
@@ -74,7 +74,7 @@ target 'HelloSudPlus' do
   # SudNFT SDK
   pod 'SudNFT', '1.0.4'
   #使用ASR时集成该库
-  pod 'MicrosoftCognitiveServicesSpeech-iOS', '1.23.0'
+  pod 'MicrosoftCognitiveServicesSpeech-iOS', '1.40.0'
   # 分页点
   #  pod 'XHPageControl'
 end

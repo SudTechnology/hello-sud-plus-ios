@@ -194,6 +194,7 @@
 		6C4D37792AE7EE0F00578244 /* RespMonopolyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D37772AE7EE0E00578244 /* RespMonopolyModel.m */; };
 		6C529CB82B623D7C000F9176 /* BaseSceneGameEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C529CB72B623D7C000F9176 /* BaseSceneGameEventHandler.m */; };
 		6C529CBB2B626D9E000F9176 /* CrossRoomSceneGameEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C529CBA2B626D9E000F9176 /* CrossRoomSceneGameEventHandler.m */; };
+		6C58327E2CBE0BD6000DA123 /* SudAgoraRtmManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C58327D2CBE0BD6000DA123 /* SudAgoraRtmManager.m */; };
 		6C67317928A1124600232992 /* libSDImageSVGNativeCoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C67317628A1124600232992 /* libSDImageSVGNativeCoder.a */; };
 		6C67317A28A1124600232992 /* libsvgnative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C67317728A1124600232992 /* libsvgnative.a */; };
 		6C6DFD282AE10C6C00EC97FB /* DanmakuActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DFD242AE10C6C00EC97FB /* DanmakuActionView.m */; };
@@ -820,6 +821,8 @@
 		6C529CB72B623D7C000F9176 /* BaseSceneGameEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseSceneGameEventHandler.m; sourceTree = "<group>"; };
 		6C529CB92B626D9E000F9176 /* CrossRoomSceneGameEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrossRoomSceneGameEventHandler.h; sourceTree = "<group>"; };
 		6C529CBA2B626D9E000F9176 /* CrossRoomSceneGameEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrossRoomSceneGameEventHandler.m; sourceTree = "<group>"; };
+		6C58327C2CBE0BD6000DA123 /* SudAgoraRtmManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudAgoraRtmManager.h; sourceTree = "<group>"; };
+		6C58327D2CBE0BD6000DA123 /* SudAgoraRtmManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudAgoraRtmManager.m; sourceTree = "<group>"; };
 		6C67317628A1124600232992 /* libSDImageSVGNativeCoder.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSDImageSVGNativeCoder.a; sourceTree = "<group>"; };
 		6C67317728A1124600232992 /* libsvgnative.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsvgnative.a; sourceTree = "<group>"; };
 		6C67317828A1124600232992 /* SDImageSVGNativeCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageSVGNativeCoder.h; sourceTree = "<group>"; };
@@ -2149,6 +2152,8 @@
 			children = (
 				6C1D007627BA0400000F0998 /* AgoraAudioEngineImpl.h */,
 				6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */,
+				6C58327C2CBE0BD6000DA123 /* SudAgoraRtmManager.h */,
+				6C58327D2CBE0BD6000DA123 /* SudAgoraRtmManager.m */,
 			);
 			path = Agora;
 			sourceTree = "<group>";
@@ -3388,6 +3393,7 @@
 				6CC3E79B28C1BBB800AA934B /* BindBtnView.m in Sources */,
 				448A6E0B27DEFF3200004928 /* LocalizedService.m in Sources */,
 				4455AD9827EAC658001516EE /* SearchHeaderView.m in Sources */,
+				6C58327E2CBE0BD6000DA123 /* SudAgoraRtmManager.m in Sources */,
 				44DD7529281293B60041FE3C /* PKRuleView.m in Sources */,
 				6C46085F286C4E28005C99EF /* GameItemFullCollectionViewCell.m in Sources */,
 				44D9F3A8280FB0FB000B14B5 /* GameConfigTableViewCell.m in Sources */,
@@ -3763,7 +3769,7 @@
 				GCC_PREFIX_HEADER = HelloSudPlus/App/PrefixHeader.pch;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HelloSudPlus/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HelloSud;
+				INFOPLIST_KEY_CFBundleDisplayName = HelloSUD;
 				INFOPLIST_KEY_NSCameraUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间视频聊天功能.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中提供精准推荐房间功能.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间语音聊天功能.";
@@ -3820,7 +3826,7 @@
 				GCC_PREFIX_HEADER = HelloSudPlus/App/PrefixHeader.pch;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HelloSudPlus/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HelloSud;
+				INFOPLIST_KEY_CFBundleDisplayName = HelloSUD;
 				INFOPLIST_KEY_NSCameraUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间视频聊天功能.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中提供精准推荐房间功能.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间语音聊天功能.";

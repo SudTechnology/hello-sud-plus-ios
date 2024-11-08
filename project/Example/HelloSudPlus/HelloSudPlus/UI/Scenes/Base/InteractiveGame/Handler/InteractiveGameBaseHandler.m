@@ -105,10 +105,7 @@
 
 - (GameViewInfoModel *)onGetGameViewInfo {
 
-    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    CGSize gameSize = self.loadConfigModel.gameView.bounds.size;
-    m.view_size.width = gameSize.width ;
-    m.view_size.height = gameSize.height ;
+    GameViewInfoModel *m = [super onGetGameViewInfo];
     m.view_game_rect.top = (kStatusBarHeight + 120) ;
     m.view_game_rect.left = 0;
     m.view_game_rect.bottom = (kAppSafeBottom + 150) ;

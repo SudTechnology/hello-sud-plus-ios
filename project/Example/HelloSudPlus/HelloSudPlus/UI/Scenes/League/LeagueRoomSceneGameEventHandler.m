@@ -11,7 +11,7 @@
 
 @implementation LeagueRoomSceneGameEventHandler
 /// 接管加入游戏
-- (void)onGameMGCommonSelfClickJoinBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickCancelJoinBtn *)model {
+- (void)onGameMGCommonSelfClickJoinBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickJoinBtn *)model {
     if ([self.vc respondsToSelector:@selector(onGameMGCommonSelfClickJoinBtn:model:)]) {
         [self.vc onGameMGCommonSelfClickJoinBtn:handle model:model];
     }

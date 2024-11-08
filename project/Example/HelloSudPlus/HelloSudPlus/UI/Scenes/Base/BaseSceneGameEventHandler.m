@@ -16,10 +16,7 @@
 
 
 - (GameViewInfoModel *)onGetGameViewInfo {
-    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    CGRect gameViewRect = self.loadConfigModel.gameView.bounds;
-    m.view_size.width = gameViewRect.size.width;
-    m.view_size.height = gameViewRect.size.height;
+    GameViewInfoModel *m = [super onGetGameViewInfo];
     m.view_game_rect.top = (kStatusBarHeight + 120);
     m.view_game_rect.bottom = (kAppSafeBottom + 150);
     return m;
@@ -50,32 +47,31 @@
 
 /// 游戏: 准备按钮点击状态   MG_COMMON_SELF_CLICK_READY_BTN
 - (void)onGameMGCommonSelfClickReadyBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickReadyBtn *)model {
-    [self.vc onGameMGCommonSelfClickReadyBtn];
     [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+    [self.vc onGameMGCommonSelfClickReadyBtn];
 }
 
 /// 游戏: 结算界面再来一局按钮点击状态   MG_COMMON_SELF_CLICK_GAME_SETTLE_AGAIN_BTN
 - (void)onGameMGCommonSelfClickGameSettleAgainBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickGameSettleAgainBtn *)model {
-    [self.vc onGameMGCommonSelfClickReadyBtn];
     [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+    [self.vc onGameMGCommonSelfClickReadyBtn];
 }
 
 /// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
 - (void)onGameMGCommonSelfClickStartBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickStartBtn *)model {
-    [self.vc onGameMGCommonSelfClickStartBtn];
     [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+    [self.vc onGameMGCommonSelfClickStartBtn];
 }
 
 /// 通用状态-游戏
 /// 游戏: 公屏消息状态    MG_COMMON_PUBLIC_MESSAGE
 - (void)onGameMGCommonPublicMessage:(id <ISudFSMStateHandle>)handle model:(MGCommonPublicMessageModel *)model {
-    [self updateCommonPublicMessageAddMsg:model];
     [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+    [self updateCommonPublicMessageAddMsg:model];
 }
 
 /// 游戏: 关键词状态    MG_COMMON_KEY_WORD_TO_HIT
 - (void)onGameMGCommonKeyWordToHit:(id <ISudFSMStateHandle>)handle model:(MGCommonKeyWrodToHitModel *)model {
-
     [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
 }
 
@@ -91,18 +87,19 @@
 
 /// 游戏: ASR状态(开启和关闭语音识别状态   MG_COMMON_GAME_ASR
 - (void)onGameMGCommonGameASR:(id <ISudFSMStateHandle>)handle model:(MGCommonGameASRModel *)model {
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     /// 语音采集 || 停止采集
     if (model.isOpen) {
         [self.vc startCaptureAudioToASR];
     } else {
         [self.vc stopCaptureAudioToASR];
     }
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_ASR_STATE_CHANGED object:nil userInfo:nil];
 }
 
 /// 游戏通知app获取积分 MG_COMMON_GAME_SCORE
 - (void)onGameMGCommonGameGetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameGetScoreModel *)model {
+    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
     DDLogDebug(@"onGameMGCommonGameScore");
     [UserService.shared reqUserCoinDetail:^(int64_t i) {
         DDLogError(@"onGameMGCommonGameScore notify game score:%@", @(i));
@@ -116,6 +113,7 @@
 
 /// 游戏通知app带入积分 MG_COMMON_GAME_SET_SCORE
 - (void)onGameMGCommonGameSetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSetScoreModel *)model {
+    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
     DDLogDebug(@"onGameMGCommonGameSetScore");
     ReqAddScoreModel *reqModel = ReqAddScoreModel.new;
     reqModel.mgId = [NSString stringWithFormat:@"%@", @(self.vc.gameId)];;
@@ -134,19 +132,20 @@
 /// 玩家状态变化
 /// 玩家: 加入状态  MG_COMMON_PLAYER_IN
 - (void)onPlayerMGCommonPlayerIn:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerInModel *)model {
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     [self updatePlayerCommonPlayerIn:model userId:userId];
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 玩家: 准备状态  MG_COMMON_PLAYER_READY
 - (void)onPlayerMGCommonPlayerReady:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerReadyModel *)model {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
 }
 
 /// 玩家: 队长状态  MG_COMMON_PLAYER_CAPTAIN
 - (void)onPlayerMGCommonPlayerCaptain:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerCaptainModel *)model {
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
 
     if ([AppService.shared.login.loginUserInfo.userID isEqualToString:userId] && self.sudFSMMGDecorator.isPlaying && model.isCaptain) {
@@ -158,11 +157,11 @@
         [self.vc onHandleIsGameCaptain];
     }
 
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 玩家: 游戏状态  MG_COMMON_PLAYER_PLAYING
 - (void)onPlayerMGCommonPlayerPlaying:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerPlayingModel *)model {
+    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
 
     if ([AppService.shared.login.loginUserInfo.userID isEqualToString:self.sudFSMMGDecorator.captainUserId] && self.vc.gameEventHandler.sudFSMMGDecorator.isPlaying) {
@@ -170,44 +169,45 @@
     } else {
         self.vc.isShowEndGame = false;
     }
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 你画我猜: 作画中状态  MG_DG_PAINTING
 - (void)onPlayerMGDGPainting:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGDGPaintingModel *)model {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
     [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
 }
 
 /// 游戏: 麦克风状态   MG_COMMON_GAME_SELF_MICROPHONE
 - (void)onGameMGCommonGameSelfMicrophone:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSelfMicrophone *)model {
-    [self.vc handleGameTapVoice:model.isOn];
     [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+    [self.vc handleGameTapVoice:model.isOn];
 }
 
 /// 游戏: 耳机（听筒，扬声器）状态   MG_COMMON_GAME_SELF_HEADEPHONE
 - (void)onGameMGCommonGameSelfHeadphone:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSelfHeadphone *)model {
+    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
     if (model.isOn) {
         [AudioEngineFactory.shared.audioEngine startSubscribingStream];
     } else {
         [AudioEngineFactory.shared.audioEngine stopSubscribingStream];
     }
-    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 元宇宙砂砂舞 指令回调  MG_COMMON_GAME_DISCO_ACTION
 - (void)onGameMGCommonGameDiscoAction:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionModel *)model {
-
+    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
     DDLogDebug(@"onGameMGCommonGameDiscoAction: actionID:%@, isSuccess:%@", model.actionId, @(model.isSuccess));
 }
 
 /// 元宇宙砂砂舞 指令动作结束通知  MG_COMMON_GAME_DISCO_ACTION_END
 - (void)onGameMGCommonGameDiscoActionEnd:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionEndModel *)model {
+    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
     DDLogDebug(@"onGameMGCommonGameDiscoActionEnd: actionID:%@, playerID:%@", model.actionId, model.playerId);
 }
 
-/// 创建订单 MG_COMMON_GAME_CREATE_ORDER
+/// Create Order MG_COMMON_GAME_CREATE_ORDER
 - (void)onGameMGCommonGameCreateOrder:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameCreateOrderModel *)model {
+    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
 
     ReqAppOrderModel *reqModel = ReqAppOrderModel.new;
     reqModel.roomId = self.vc.roomID;
@@ -233,6 +233,7 @@
 
 /// 游戏向app发送获取玩家持有的道具卡（只支持大富翁） MG_COMMON_GAME_PLAYER_MONOPOLY_CARDS
 - (void)onGameMGPlayerMonopolyCards:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerMonopolyCardsModel *)model {
+    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
  
     [AudioRoomService reqMonopolyCardsWithFinished:^(BaseRespModel * _Nonnull respModel) {
     
@@ -249,6 +250,7 @@
 
 
 - (void)onGameMgCommonGamePlayerPropsCards:(id<ISudFSMStateHandle>)handle model:(MgCommonGamePlayerPropsCardsModel *)model {
+    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
         
     ReqPlayerPropsCardsParamModel *req = ReqPlayerPropsCardsParamModel.new;
     req.gameId = self.loadConfigModel.gameId;
@@ -299,10 +301,12 @@
 }
 
 - (void)onGameMgCommonDestroyGameScene:(id<ISudFSMStateHandle>)handle model:(MgCommonDestroyGameSceneModel *)model {
+    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
     [self.vc switchToGame:0];
 }
 
 - (void)onGameMGCommonGameMoneyNotEnough:(id<ISudFSMStateHandle>)handle model:(MgCommonGameMoneyNotEnoughModel *)model {
+    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
     [UserService.shared reqAddUserCoin:^(int64_t i) {
         AppCommonUpdateGameMoney *model = AppCommonUpdateGameMoney.new;
         [self.sudFSTAPPDecorator notifyAppCommonUpdateGameMoney:model];
@@ -312,6 +316,7 @@
 }
 
 - (BOOL)onGameStateChange:(id<ISudFSMStateHandle>)handle state:(NSString *)state dataJson:(NSString *)dataJson {
+    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
     if ([state isEqualToString:@"mg_happy_goat_chat"]) {
         [self handleHappyGoatChat:dataJson];
         return YES;

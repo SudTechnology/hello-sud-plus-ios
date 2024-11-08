@@ -10,9 +10,9 @@
 #define KeyHeader_h
 
 #if DEBUG
-#define BUGLEY_APP_ID @"0d680b2d4c"
+#define BUGLEY_APP_ID @"ac8e1dd02a"
 #else
-#define BUGLEY_APP_ID @"8385698b84"
+#define BUGLEY_APP_ID @"ac8e1dd02a"
 #endif
 
 #endif /* KeyHeader_h */

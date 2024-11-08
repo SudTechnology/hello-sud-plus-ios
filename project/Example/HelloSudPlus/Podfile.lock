@@ -43,7 +43,7 @@ PODS:
   - AgoraRtcEngine_iOS/VideoCodecEnc (4.2.6)
   - AgoraRtcEngine_iOS/VirtualBackground (4.2.6)
   - AgoraRtcEngine_iOS/VQA (4.2.6)
-  - AgoraRtm_iOS (1.4.9)
+  - AgoraRtm_iOS (2.2.1)
   - BDAlphaPlayer (1.2.2)
   - Bugly (2.5.90)
   - CocoaLumberjack (3.8.0):
@@ -63,7 +63,7 @@ PODS:
   - lottie-ios (2.5.3)
   - MarqueeLabel (4.3.0)
   - Masonry (1.1.0)
-  - MicrosoftCognitiveServicesSpeech-iOS (1.23.0)
+  - MicrosoftCognitiveServicesSpeech-iOS (1.40.0)
   - MJExtension (3.4.1)
   - MJRefresh (3.7.5)
   - NERtcSDK (4.6.50):
@@ -124,10 +124,10 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SSZipArchive (2.4.3)
-  - SudMGP (1.4.5)
-  - SudMGPWrapper (1.4.4.2):
+  - SudMGPWrapper (1.4.0):
+    - SudMGPWrapper/SudMGPWrapper (= 1.4.0)
+  - SudMGPWrapper/SudMGPWrapper (1.4.0):
     - MJExtension (~> 3.4.1)
-    - SudMGP
   - SudNFT (1.0.4)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -155,7 +155,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
   - AgoraRtcEngine_iOS (= 4.2.6)
-  - AgoraRtm_iOS (= 1.4.9)
+  - AgoraRtm_iOS (= 2.2.1)
   - BDAlphaPlayer (~> 1.2.0)
   - Bugly (= 2.5.90)
   - CocoaLumberjack
@@ -164,7 +164,7 @@ DEPENDENCIES:
   - lottie-ios (~> 2.5.3)
   - MarqueeLabel
   - Masonry (~> 1.1.0)
-  - MicrosoftCognitiveServicesSpeech-iOS (= 1.23.0)
+  - MicrosoftCognitiveServicesSpeech-iOS (= 1.40.0)
   - MJExtension (~> 3.4.1)
   - MJRefresh (= 3.7.5)
   - NERtcSDK (~> 4.6.0)
@@ -173,8 +173,7 @@ DEPENDENCIES:
   - SDWebImage (= 5.12.2)
   - SDWebImageSVGKitPlugin (= 1.4.0)
   - SDWebImageWebPCoder
-  - SudMGP (~> 1.4.5)
-  - SudMGPWrapper (~> 1.4.4.2)
+  - SudMGPWrapper (from `../../`)
   - SudNFT (= 1.0.4)
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
@@ -215,8 +214,6 @@ SPEC REPOS:
     - SDWebImageSVGKitPlugin
     - SDWebImageWebPCoder
     - SSZipArchive
-    - SudMGP
-    - SudMGPWrapper
     - SudNFT
     - SVGKit
     - SVProgressHUD
@@ -225,6 +222,8 @@ SPEC REPOS:
     - ZIM
 
 EXTERNAL SOURCES:
+  SudMGPWrapper:
+    :path: "../../"
   SVGAPlayer:
     :git: https://github.com/svga/SVGAPlayer-iOS.git
     :tag: 2.5.6
@@ -243,7 +242,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   AgoraRtcEngine_iOS: ac647332ad8f86d79cf810601c9e62b28c3a4de0
-  AgoraRtm_iOS: b4bb9a431ce36f9b44cda423e66b2f96945ca2ab
+  AgoraRtm_iOS: 80131d7bde5d24152621e1c656ffcfa39bdcba6c
   BDAlphaPlayer: 3b31756760ea37b9710bfb36a18b431ad05f6da7
   Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
   CocoaLumberjack: 78abfb691154e2a9df8ded4350d504ee19d90732
@@ -253,7 +252,7 @@ SPEC CHECKSUMS:
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MicrosoftCognitiveServicesSpeech-iOS: ce0cde6387499ea720c9dfba494c5ee18df2e75e
+  MicrosoftCognitiveServicesSpeech-iOS: 27edbb898c00da13b63a6e73e910d4ced8d54791
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   NERtcSDK: 4a123939a87d7d1382c9de30e33a63facf904710
@@ -268,8 +267,7 @@ SPEC CHECKSUMS:
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  SudMGP: 77e6bbe69f66ca75a905d135531973c9e48ae249
-  SudMGPWrapper: a7bf05e164a861bb5195ab1b84472f9ff617f389
+  SudMGPWrapper: f8e503daabd185833dae5ebd4bc7925ee6bab68d
   SudNFT: efa7ec483a2d6e5c5a8e1dda5f8d6578b97ddf9c
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
@@ -280,6 +278,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: 8dd5f80f38f51f1ea20057b1848e49dd20d3ff1e
 
-PODFILE CHECKSUM: 341a073fac1cd3640507f97af6ccc8941240205f
+PODFILE CHECKSUM: 8fe1cf2f69356f62009dfd753f3bd361ee79c6a6
 
 COCOAPODS: 1.14.3

@@ -10,8 +10,11 @@
 #import <AgoraRtmKit/AgoraRtmKit.h>
 #import "HSThreadUtils.h"
 #import "AsyncCallWrapper.h"
+#import "SudAgoraRtmManager.h"
 
-@interface AgoraAudioEngineImpl()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate, AgoraAudioFrameDelegate>
+//@interface AgoraAudioEngineImpl()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate, AgoraAudioFrameDelegate>
+
+@interface AgoraAudioEngineImpl()<AgoraRtcEngineDelegate, AgoraAudioFrameDelegate>
 
 /// 事件监听者
 @property(nonatomic, weak)id<ISudAudioEventListener> mISudAudioEventListener;
@@ -21,9 +24,9 @@
 @property(nonatomic, strong)NSString *mRoomID;
 
 /// agora信令
-@property(nonatomic, strong)AgoraRtmKit *mRtmKit;
+//@property(nonatomic, strong)AgoraRtmKit *mRtmKit;
 /// 信令通道
-@property(nonatomic, strong)AgoraRtmChannel *mRtmChannel;
+//@property(nonatomic, strong)AgoraRtmChannel *mRtmChannel;
 @property(nonatomic, strong)AgoraRtcVideoCanvas *canvas;
 @end
 
@@ -190,13 +193,16 @@
 /// @param command 指令内容
 - (void)sendCommand:(NSString *)command listener:(void(^)(int))listener {
     [[AsyncCallWrapper sharedInstance] addOperationWithBlock:^{
-        AgoraRtmMessage *msg = AgoraRtmMessage.new;
-        msg.text = command;
-        [self.mRtmChannel sendMessage:msg completion:^(AgoraRtmSendChannelMessageErrorCode errorCode) {
-            if (listener) {
-                listener((int)errorCode);
-            }
-        }];
+        
+        [SudAgoraRtmManager.sharedInstance sendXRoomCommand:self.mRoomID command:command listener:listener];
+        
+//        AgoraRtmMessage *msg = AgoraRtmMessage.new;
+//        msg.text = command;
+//        [self.mRtmChannel sendMessage:msg completion:^(AgoraRtmSendChannelMessageErrorCode errorCode) {
+//            if (listener) {
+//                listener((int)errorCode);
+//            }
+//        }];
     }];
 }
 
@@ -369,95 +375,100 @@
 #pragma mark RTM 信令操作
 /// 初始化rtm信令, 登录 Agora RTM 系统
 - (void)initRtm:(AudioConfigModel *)model success:(nullable dispatch_block_t)success {
-    if (self.mRtmKit == nil) {
-        self.mRtmKit = [[AgoraRtmKit alloc]initWithAppId:model.appId delegate:self];
+    if (success) {
+        success();
     }
-    
-    if (self.mRtmKit != nil) {
-        // 登录Agora RTM 系统
-        [_mRtmKit loginByToken:model.token user:model.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
-            if (errorCode == AgoraRtmLoginErrorOk || errorCode == AgoraRtmLoginErrorAlreadyLogin) {
-                if (success != nil) {
-                    [HSThreadUtils runOnUiThread:^{
-                        success();
-                    }];
-                }
-            }
-        }];
-    }
+//    if (self.mRtmKit == nil) {
+//        self.mRtmKit = [[AgoraRtmKit alloc]initWithAppId:model.appId delegate:self];
+//    }
+//    
+//    if (self.mRtmKit != nil) {
+//        // 登录Agora RTM 系统
+//        [_mRtmKit loginByToken:model.token user:model.userID completion:^(AgoraRtmLoginErrorCode errorCode) {
+//            if (errorCode == AgoraRtmLoginErrorOk || errorCode == AgoraRtmLoginErrorAlreadyLogin) {
+//                if (success != nil) {
+//                    [HSThreadUtils runOnUiThread:^{
+//                        success();
+//                    }];
+//                }
+//            }
+//        }];
+//    }
 }
 
 // 登出 Agora RTM 系统, 释放当前 RtmClient 实例使用的所有资源
 - (void)destroyRtm {
-    if (self.mRtmKit != nil) {
-        [self.mRtmKit logoutWithCompletion:^(AgoraRtmLogoutErrorCode errorCode) {
-            
-        }];
-        self.mRtmKit = nil;
-    }
-    self.mRtmChannel = nil;
+//    if (self.mRtmKit != nil) {
+//        [self.mRtmKit logoutWithCompletion:^(AgoraRtmLogoutErrorCode errorCode) {
+//            
+//        }];
+//        self.mRtmKit = nil;
+//    }
+//    self.mRtmChannel = nil;
 }
 
 // rtm登录房间
 - (void)joinRtmRoom:(NSString *)roomId {
-    if (self.mRtmKit != nil) {
-        // 创建频道
-        self.mRtmChannel = [self.mRtmKit createChannelWithId:roomId delegate:self];
-        if (self.mRtmChannel != nil) {
-            [self.mRtmChannel joinWithCompletion:^(AgoraRtmJoinChannelErrorCode errorCode) {
-                
-            }];
-        }
-    }
+//    if (self.mRtmKit != nil) {
+//        // 创建频道
+//        self.mRtmChannel = [self.mRtmKit createChannelWithId:roomId delegate:self];
+//        if (self.mRtmChannel != nil) {
+//            [self.mRtmChannel joinWithCompletion:^(AgoraRtmJoinChannelErrorCode errorCode) {
+//                
+//            }];
+//        }
+//    }
+    
+    
 }
 
 // rtm退出房间
 - (void)leaveRtmRoom {
-    if (self.mRtmKit != nil && self.mRtmChannel != nil) {
-        [self.mRtmChannel leaveWithCompletion:nil];
-        [self.mRtmKit destroyChannelWithId:self.mRoomID];
-        self.mRtmChannel = nil;
-    }
+//    if (self.mRtmKit != nil && self.mRtmChannel != nil) {
+//        [self.mRtmChannel leaveWithCompletion:nil];
+//        [self.mRtmKit destroyChannelWithId:self.mRoomID];
+//        self.mRtmChannel = nil;
+//    }
 }
 
 #pragma mark AgoraRtmDelegate
 
-- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit connectionStateChanged:(AgoraRtmConnectionState)state reason:(AgoraRtmConnectionChangeReason)reason {
-    NSLog(@"rtmKit connectionStateChanged:%ld, reason:%ld", (long)state, (long)reason);
-}
-
-- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit messageReceived:(AgoraRtmMessage * _Nonnull)message fromPeer:(NSString * _Nonnull)peerId {
-    NSLog(@"rtmKit messageReceived:%@, peerId:%@", message, peerId);
-}
+//- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit connectionStateChanged:(AgoraRtmConnectionState)state reason:(AgoraRtmConnectionChangeReason)reason {
+//    NSLog(@"rtmKit connectionStateChanged:%ld, reason:%ld", (long)state, (long)reason);
+//}
+//
+//- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit messageReceived:(AgoraRtmMessage * _Nonnull)message fromPeer:(NSString * _Nonnull)peerId {
+//    NSLog(@"rtmKit messageReceived:%@, peerId:%@", message, peerId);
+//}
 
 
 #pragma mark AgoraRtmChannelDelegate
 
-- (void)rtcEngine:(AgoraRtcEngineKit *)engine didJoinChannel:(NSString *)channel withUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
-    NSLog(@"didJoinChannel:%@, uid:%@", channel, @(uid));
-}
-
-- (void)channel:(AgoraRtmChannel * _Nonnull)channel messageReceived:(AgoraRtmMessage * _Nonnull)message fromMember:(AgoraRtmMember * _Nonnull)member {
-    NSLog(@"rtmKit messageReceived:%@, userId:%@", message.text, member.userId);
-    if (message.type != AgoraRtmMessageTypeText) {
-        NSLog(@"未识别信令消息");
-        return;
-    }
-    
-    [HSThreadUtils runOnUiThread:^{
-        if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRecvCommand:command:)]) {
-            [self.mISudAudioEventListener onRecvCommand:member.userId command:message.text];
-        }
-    }];
-}
-
-- (void)channel:(AgoraRtmChannel * _Nonnull)channel memberCount:(int)count {
-    
-    [HSThreadUtils runOnUiThread:^{
-        if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRoomOnlineUserCountUpdate:)]) {
-            [self.mISudAudioEventListener onRoomOnlineUserCountUpdate:count];
-        }
-    }];
-}
+//- (void)rtcEngine:(AgoraRtcEngineKit *)engine didJoinChannel:(NSString *)channel withUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
+//    NSLog(@"didJoinChannel:%@, uid:%@", channel, @(uid));
+//}
+//
+//- (void)channel:(AgoraRtmChannel * _Nonnull)channel messageReceived:(AgoraRtmMessage * _Nonnull)message fromMember:(AgoraRtmMember * _Nonnull)member {
+//    NSLog(@"rtmKit messageReceived:%@, userId:%@", message.text, member.userId);
+//    if (message.type != AgoraRtmMessageTypeText) {
+//        NSLog(@"未识别信令消息");
+//        return;
+//    }
+//    
+//    [HSThreadUtils runOnUiThread:^{
+//        if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRecvCommand:command:)]) {
+//            [self.mISudAudioEventListener onRecvCommand:member.userId command:message.text];
+//        }
+//    }];
+//}
+//
+//- (void)channel:(AgoraRtmChannel * _Nonnull)channel memberCount:(int)count {
+//    
+//    [HSThreadUtils runOnUiThread:^{
+//        if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onRoomOnlineUserCountUpdate:)]) {
+//            [self.mISudAudioEventListener onRoomOnlineUserCountUpdate:count];
+//        }
+//    }];
+//}
 
 @end

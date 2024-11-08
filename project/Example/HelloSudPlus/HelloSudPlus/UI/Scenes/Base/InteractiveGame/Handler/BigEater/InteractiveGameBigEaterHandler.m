@@ -35,9 +35,7 @@
 }
 
 - (GameViewInfoModel *)onGetGameViewInfo {
-    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    m.view_size.width = kScreenWidth;
-    m.view_size.height = kScreenHeight;
+    GameViewInfoModel *m = [super onGetGameViewInfo];
     m.view_game_rect.top = (kScreenHeight - kScreenWidth * 1.1);
     m.view_game_rect.left = 0;
     m.view_game_rect.bottom = 0;

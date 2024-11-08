@@ -57,6 +57,7 @@
         NSLog(@"Game id is empty can not load the game:%@, currentRoomID:%@", @(configModel.gameId), configModel.roomId);
         return;
     }
+    /// Show how to embed a local pkg in the project
 //    [[SudMGP getCfg]addEmbeddedMGPkg:1763401430010871809 mgPath:@"GreedyStar_1.0.0.1.sp"];
     
     // 2. 初始化SudMGP SDK<SudMGP initSDK>

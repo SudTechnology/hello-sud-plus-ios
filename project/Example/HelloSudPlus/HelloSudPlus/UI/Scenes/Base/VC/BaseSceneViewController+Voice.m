@@ -55,8 +55,9 @@
             configModel.token = self.enterModel.rtiToken;
         }
 
-        if ([AppService shared].configModel != nil && [AppService shared].configModel.zegoCfg != nil) {
-            [[IMRoomManager sharedInstance] init:[AppService shared].configModel.zegoCfg.appId listener:self];
+        if ([AppService shared].configModel != nil && [AppService shared].configModel.agoraCfg != nil) {
+            IMRoomManager.sharedInstance.userId = AppService.shared.login.loginUserInfo.userID;
+            [[IMRoomManager sharedInstance] init:[AppService shared].configModel.agoraCfg.appId listener:self];
             [[IMRoomManager sharedInstance] joinRoom:self.roomID
                                               userID:AppService.shared.login.loginUserInfo.userID
                                             userName:AppService.shared.login.loginUserInfo.name

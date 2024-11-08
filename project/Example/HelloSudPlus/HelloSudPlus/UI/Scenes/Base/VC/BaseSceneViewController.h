@@ -314,6 +314,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 创建游戏事件处理模块
 - (BaseSceneGameEventHandler *)createGameEventHandler;
+
+- (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model;
 @end
 
 NS_ASSUME_NONNULL_END

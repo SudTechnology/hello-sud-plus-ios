@@ -16,6 +16,8 @@ typedef void(^SelectSectionBlock)(NSInteger section);
 @property (nonatomic, strong) NSArray <HSSceneModel *> *sceneList;
 @property (nonatomic, strong) NSArray *titleArr;
 - (void)selectedIndex:(NSInteger)idx;
+/// 滚动到指定场景
+- (void)scrollToDefaultScene:(NSInteger)defaultSceneId;
 @end
 
 NS_ASSUME_NONNULL_END

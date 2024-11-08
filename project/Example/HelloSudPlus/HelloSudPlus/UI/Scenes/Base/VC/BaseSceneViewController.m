@@ -2087,4 +2087,8 @@
     }
     return _gameManager;
 }
+
+- (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
+    
+}
 @end

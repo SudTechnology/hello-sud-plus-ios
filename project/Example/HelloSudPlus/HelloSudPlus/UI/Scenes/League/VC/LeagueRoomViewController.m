@@ -326,7 +326,7 @@
 }
 
 /// 接管加入游戏
-- (void)onGameMGCommonSelfClickJoinBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickCancelJoinBtn *)model {
+- (void)onGameMGCommonSelfClickJoinBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickJoinBtn *)model {
     if (![self isCanJoinGame]) {
         DDLogError(@"can not join game");
         return;
@@ -370,7 +370,6 @@
 
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
 - (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
-    [super onGameMGCommonGameState:handle model:model];
     DDLogDebug(@"onGameMGCommonGameState：%@", @(model.gameState));
 }
 

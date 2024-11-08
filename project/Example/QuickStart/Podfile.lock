@@ -25,10 +25,10 @@ PODS:
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
-  - SudMGP (1.4.5)
-  - SudMGPWrapper (1.4.4.2):
+  - SudMGP_Lite (1.4.7)
+  - SudMGPWrapper_Lite (1.4.7):
     - MJExtension (~> 3.4.1)
-    - SudMGP
+    - SudMGP_Lite
   - SVProgressHUD (2.2.5)
   - YYText (1.0.9)
 
@@ -41,8 +41,8 @@ DEPENDENCIES:
   - MJExtension (~> 3.4.1)
   - MJRefresh (= 3.7.5)
   - SDWebImage (= 5.12.2)
-  - SudMGP (~> 1.4.5)
-  - SudMGPWrapper (~> 1.4.4)
+  - SudMGP_Lite (~> 1.4.7)
+  - SudMGPWrapper_Lite (~> 1.4.7)
   - SVProgressHUD (~> 2.2.5)
   - YYText (from `https://github.com/kaniel520/YYText.git`, tag `1.0.9`)
 
@@ -56,8 +56,8 @@ SPEC REPOS:
     - MJExtension
     - MJRefresh
     - SDWebImage
-    - SudMGP
-    - SudMGPWrapper
+    - SudMGP_Lite
+    - SudMGPWrapper_Lite
     - SVProgressHUD
 
 EXTERNAL SOURCES:
@@ -79,11 +79,11 @@ SPEC CHECKSUMS:
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
-  SudMGP: 77e6bbe69f66ca75a905d135531973c9e48ae249
-  SudMGPWrapper: a7bf05e164a861bb5195ab1b84472f9ff617f389
+  SudMGP_Lite: 62260a8f52f2877d054a71f9d3bd756c5489d53d
+  SudMGPWrapper_Lite: c87fcafddc85a115ba5c8711a5ce31c62939c336
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   YYText: 3ca7b42c083989328295d69e3a0ce0b0293f0a6a
 
-PODFILE CHECKSUM: 4a932cfdbd17c0079b8b983096b524c6457206cf
+PODFILE CHECKSUM: b21a3f935db1e07541aa2083cbfbf2b871465a65
 
 COCOAPODS: 1.14.3

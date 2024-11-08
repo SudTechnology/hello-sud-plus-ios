@@ -34,8 +34,7 @@
 @property(nonatomic, strong) BaseView *contentView;
 /// 背景视图
 @property(nonatomic, strong) UIImageView *bgImageView;
-/// 游戏加载主view
-@property(nonatomic, strong) UIView *gameView;
+
 /// 场景视图，所有子类场景
 @property(nonatomic, strong) BaseView *sceneView;
 /// 房间顶部导航
@@ -46,6 +45,9 @@
 @property (nonatomic, strong) QSRoomInputView *inputView;
 /// 游戏在线人数
 @property (nonatomic, strong) UILabel *gameNumLabel;
+
+/// 用于加载SUD游戏的主view
+@property(nonatomic, strong) UIView *gameView;
 
 /// SUD 游戏管理模块
 @property(nonatomic, strong)SudGameManager *sudGameManager;
@@ -124,7 +126,6 @@
 /// 处理切换游戏
 /// @param gameID 新的游戏ID
 - (void)handleSwitchToGame:(int64_t)gameID {
-    [self.gameEventHandler.sudFSMMGDecorator clearAllStates];
     if (gameID == 0) {
         /// 销毁游戏
         /// Destroy the game

@@ -79,7 +79,7 @@
     }
     WeakSelf
     self.homeCategoryView.selectSectionBlock = ^(NSInteger section) {
-
+        [weakSelf.collectionView layoutIfNeeded];
         weakSelf.isClickSegItem = true;
         UICollectionViewLayoutAttributes *attributes = [weakSelf.collectionView layoutAttributesForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
         CGRect rect = attributes.frame;
@@ -223,6 +223,7 @@
 
         [weakSelf.collectionView reloadData];
         weakSelf.homeCategoryView.sceneList = weakSelf.headerSceneList;
+        [weakSelf.homeCategoryView scrollToDefaultScene:model.defaultSceneId];
     }                         failure:^(NSError *error) {
         [ToastUtil show:error.dt_errMsg];
         [weakSelf.collectionView.mj_header endRefreshing];

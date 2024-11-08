@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setupLoadConfigModel:(SudGameLoadConfigModel *)loadConfigModel;
 
 
-/// 获取code并返回,子类必须实现像自己应用服务端获取code并返回
+/// 获取code并返回,子类必须实现向自己应用服务端获取code并返回
 /// 接入方客户端 调用 接入方服务端 getCode: 获取 短期令牌code
 /// 参考文档 https://docs.sud.tech/en-US/app/Server/ImplementAuthenticationByYourself.html
 /// - Parameters:

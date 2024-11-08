@@ -1,21 +1,18 @@
 //
-//  IMRoomManager.h
-//  HelloSud-iOS
+//  SudAgoraRtmManager.h
+//  HelloSudPlus
 //
-//  Created by Herbert on 2022/4/24.
-//  Copyright © 2022 Sud.Tech (https://sud.tech). All rights reserved.
+//  Created by kaniel on 10/15/24.
+//  Copyright © 2024 Sud.Tech (https://sud.tech). All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@interface IMRoomManager : NSObject
-@property(nonatomic, strong)NSString *userId;
-
+/// Agora im
+@interface SudAgoraRtmManager : NSObject
 + (instancetype)sharedInstance;
-
-- (void)init:(NSString *)appId listener:(id<ISudAudioEventListener>)listener;
+- (void)init:(NSString *)appId userId:(NSString *)userId listener:(id <ISudAudioEventListener>)listener;
 
 - (void)destroy;
 
@@ -28,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param command  消息内容
 /// @param listener 回调
 - (void)sendXRoomCommand:(NSString *)roomID command:(NSString *)command listener:(void(^)(int))listener;
-
 @end
 
 NS_ASSUME_NONNULL_END

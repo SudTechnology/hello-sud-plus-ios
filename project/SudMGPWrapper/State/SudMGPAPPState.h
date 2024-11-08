@@ -242,7 +242,7 @@ static NSString *APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT = @"app_common_game_p
 /// 0    0：关闭，1自由，2强制
 @property(nonatomic, assign) NSInteger isStraddle;
 /// 0.5 牌桌时长配置（小时）[0.5,1,2,4,6,8]
-@property(nonatomic, assign) NSInteger tableDuration;
+@property(nonatomic, assign) CGFloat tableDuration;
 /// 20   思考时间（秒）[10,15,20]
 @property(nonatomic, assign) NSInteger thinkTime;
 @end
@@ -262,7 +262,7 @@ static NSString *APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT = @"app_common_game_p
 /// 单注限
 @property(nonatomic, assign) NSInteger singleLimit;
 /// 牌桌时长配置（小时）
-@property(nonatomic, assign) NSInteger tableDuration;
+@property(nonatomic, assign) CGFloat tableDuration;
 /// 思考时间（秒）
 @property(nonatomic, assign) NSInteger thinkTime;
 @end

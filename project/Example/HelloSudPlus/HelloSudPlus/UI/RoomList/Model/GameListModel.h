@@ -60,6 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 查询游戏列表Model
 @interface GameListModel: BaseRespModel
+/// 滚动场景索引
+@property(nonatomic, assign)NSInteger defaultSceneId;
 @property (nonatomic, copy) NSArray<HSGameItem *>  * gameList;
 @property (nonatomic, copy) NSArray<HSSceneModel *> * sceneList;
 

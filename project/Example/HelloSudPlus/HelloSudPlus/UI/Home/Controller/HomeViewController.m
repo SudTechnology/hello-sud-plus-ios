@@ -39,6 +39,8 @@
 @property(nonatomic, strong) RespBannerListModel *respBannerListModel;
 /// 所有游戏列表
 @property(nonatomic, strong) NSArray <HSGameItem *> *gameList;
+@property(nonatomic, assign)BOOL isViewDidLoad;
+@property(nonatomic, assign)NSInteger defaultSceneId;
 @end
 
 @implementation HomeViewController
@@ -72,12 +74,13 @@
         [self requestData];
     }
     self.homeCategoryView.selectSectionBlock = ^(NSInteger section) {
-
+        [weakSelf.collectionView layoutIfNeeded];
         weakSelf.isClickSegItem = true;
         UICollectionViewLayoutAttributes *attributes = [weakSelf.collectionView layoutAttributesForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
         CGRect rect = attributes.frame;
         CGFloat bottomY = weakSelf.collectionView.contentSize.height - weakSelf.collectionView.mj_h;
-        [weakSelf.collectionView setContentOffset:CGPointMake(weakSelf.collectionView.bounds.origin.x, rect.origin.y > bottomY ? bottomY : rect.origin.y) animated:true];
+        CGPoint offset = CGPointMake(weakSelf.collectionView.bounds.origin.x, rect.origin.y > bottomY ? bottomY : rect.origin.y);
+        [weakSelf.collectionView setContentOffset:offset animated:true];
     };
 }
 
@@ -87,7 +90,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isViewDidLoad = YES;
     [self addRefreshHeader];
+    if (self.defaultSceneId > 0) {
+        [self.homeCategoryView scrollToDefaultScene:self.defaultSceneId];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -220,6 +227,10 @@
 
         [weakSelf.collectionView reloadData];
         weakSelf.homeCategoryView.sceneList = weakSelf.headerSceneList;
+        weakSelf.defaultSceneId = model.defaultSceneId;
+        if (weakSelf.isViewLoaded) {
+            [weakSelf.homeCategoryView scrollToDefaultScene:model.defaultSceneId];
+        }
     }                         failure:^(NSError *error) {
         [ToastUtil show:error.dt_errMsg];
         [weakSelf.collectionView.mj_header endRefreshing];

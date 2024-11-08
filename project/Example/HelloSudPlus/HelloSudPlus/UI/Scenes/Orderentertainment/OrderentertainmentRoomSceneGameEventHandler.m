@@ -10,10 +10,7 @@
 
 @implementation OrderentertainmentRoomSceneGameEventHandler
 - (GameViewInfoModel *)onGetGameViewInfo {
-    GameViewInfoModel *m = [[GameViewInfoModel alloc] init];
-    CGRect gameViewRect = self.loadConfigModel.gameView.bounds;
-    m.view_size.width = gameViewRect.size.width;
-    m.view_size.height = gameViewRect.size.height;
+    GameViewInfoModel *m = [super onGetGameViewInfo];
     m.view_game_rect.top = (kStatusBarHeight + 44);
     m.view_game_rect.bottom = (kAppSafeBottom + 150);
     return m;
