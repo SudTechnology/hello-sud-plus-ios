@@ -316,6 +316,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (BaseSceneGameEventHandler *)createGameEventHandler;
 
 - (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model;
+
+// 处理AI消息
+- (void)handleGameAiModelMeassage:(MgCommonAiModelMessageModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

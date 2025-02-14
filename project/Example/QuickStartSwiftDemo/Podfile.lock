@@ -1,0 +1,29 @@
+PODS:
+  - MJExtension (3.4.2)
+  - SnapKit (5.7.1)
+  - SudMGP_Lite (1.4.9)
+  - SudMGPWrapper_Lite (1.4.7):
+    - MJExtension (~> 3.4.1)
+    - SudMGP_Lite
+
+DEPENDENCIES:
+  - SnapKit
+  - SudMGP_Lite (= 1.4.9)
+  - SudMGPWrapper_Lite
+
+SPEC REPOS:
+  trunk:
+    - MJExtension
+    - SnapKit
+    - SudMGP_Lite
+    - SudMGPWrapper_Lite
+
+SPEC CHECKSUMS:
+  MJExtension: e97d164cb411aa9795cf576093a1fa208b4a8dd8
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  SudMGP_Lite: 97613ec87c31791d826cff67d7015972e6c6afb0
+  SudMGPWrapper_Lite: c87fcafddc85a115ba5c8711a5ce31c62939c336
+
+PODFILE CHECKSUM: e0f6abf2831d9e21743d4cfe9f5461643801a829
+
+COCOAPODS: 1.14.3

@@ -361,4 +361,41 @@
     [self.vc updateGamePeopleCount];
     [self.vc playerIsInGameStateChanged:userId];
 }
+
+- (void)onGameMGCommonGameUiCustomConfig:(id<ISudFSMStateHandle>)handle model:(MgCommonGameUiCustomConfigModel *)model {
+    
+//    // UI自定义
+//    AppCommonGameUiCustomConfigLudo *ludo = AppCommonGameUiCustomConfigLudo.new;
+//    ludo.chessYellow = @"";
+//    
+//    [self.vc.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameUiCustomConfig:ludo];
+    
+}
+- (void)onGameMgCommonAiModelMessage:(id<ISudFSMStateHandle>)handle model:(MgCommonAiModelMessageModel *)model {
+    [self.vc handleGameAiModelMeassage:model];
+}
+
+- (void)onGameMgCommonAiMessage:(id<ISudFSMStateHandle>)handle model:(MgCommonAiMessageModel *)model {
+    
+    NSInteger uid = model.uid.integerValue;
+    [UserService.shared asyncCacheUserInfo:@[@(uid)] forceRefresh:NO finished:^{
+        
+        HSUserInfoModel *userInfo = [UserService.shared getCacheUserInfo:uid];
+        
+        RoomCmdChatTextModel *msgModel = [RoomCmdChatTextModel makeMsg:model.content];
+        if (msgModel) {
+            
+            AudioUserModel *userModel = AudioUserModel.new;
+            userModel.userID = [NSString stringWithFormat:@"%@",@(userInfo.userId)];
+            userModel.name = userInfo.nickname;
+            userModel.icon = userInfo.headImage;
+            userModel.sex = [userInfo.gender isEqualToString:@"male"] ? 1 : 2;
+            userModel.isAi = userInfo.ai;
+            msgModel.sendUser = userModel;
+            /// 公屏添加消息
+            [self.vc addMsg:msgModel isShowOnScreen:YES];
+        }
+    }];
+
+}
 @end

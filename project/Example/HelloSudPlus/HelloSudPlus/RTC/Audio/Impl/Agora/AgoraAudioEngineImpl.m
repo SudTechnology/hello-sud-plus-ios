@@ -57,6 +57,7 @@
             [self.mEngine setChannelProfile:AgoraChannelProfileLiveBroadcasting];
             [self.mEngine setDualStreamMode:YES];
             [self.mEngine enableVideo];
+            [self.mEngine enableLocalVideo:NO];
             
             [self.mEngine enableAudioVolumeIndication:300 smooth:3 reportVad:YES];
             [self.mEngine setAudioSessionOperationRestriction:AgoraAudioSessionOperationRestrictionDeactivateSession];
@@ -300,6 +301,14 @@
 
 - (void)rtcEngine:(AgoraRtcEngineKit* _Nonnull)engine didOfflineOfUid:(NSUInteger)uid reason:(AgoraUserOfflineReason)reason {
 
+}
+
+- (void)rtcEngine:(AgoraRtcEngineKit *)engine remoteVideoStateChangedOfUid:(NSUInteger)uid state:(AgoraVideoRemoteState)state reason:(AgoraVideoRemoteReason)reason elapsed:(NSInteger)elapsed {
+    NSLog(@"remoteVideoStateChangedOfUid:%@,uid:%@", @(state),@(uid));
+}
+
+- (void)rtcEngine:(AgoraRtcEngineKit * _Nonnull)engine localVideoStateChangedOfState:(AgoraVideoLocalState)state error:(AgoraLocalVideoStreamError)error sourceType:(AgoraVideoSourceType)sourceType {
+    NSLog(@"localVideoStateChangedOfState:%@", @(state));
 }
 
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine firstRemoteVideoFrameOfUid:(NSUInteger)uid size:(CGSize)size elapsed:(NSInteger)elapsed {

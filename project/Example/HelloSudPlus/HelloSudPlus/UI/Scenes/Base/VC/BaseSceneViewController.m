@@ -59,6 +59,8 @@
 /// 礼物橱窗
 @property(nonatomic, strong)RoomGiftShowcaseView *giftShowcaseView;
 @property(nonatomic, strong)NSArray<GiftModel *> *danmuGiftList;
+/// 是否需要发送输入消息给游戏
+@property(nonatomic, assign) BOOL isNeedToSendMessageToGame;
 @end
 
 @implementation BaseSceneViewController
@@ -831,6 +833,11 @@
 - (void)sendContentMsg:(NSString *)content {
     RoomCmdChatTextModel *m = [RoomCmdChatTextModel makeMsg:content];
     [self sendMsg:m isAddToShow:YES finished:nil];
+    if (self.isNeedToSendMessageToGame) {
+        AppCommonAiModelMessages *model = [[AppCommonAiModelMessages alloc]init];
+        model.text = content;
+        [self.gameEventHandler.sudFSTAPPDecorator notifyAppCommonAiModelMessage:model];
+    }
 }
 
 /// 展示更多视图
@@ -1333,6 +1340,7 @@
 /// 处理房间切换
 - (void)roomGameDidChanged:(NSInteger)gameID {
     [self checkIfNeedToShowGiftcaseView];
+    self.isNeedToSendMessageToGame = NO;
     if (gameID == HSAudio) {
         if (self.enterModel.sceneType != SceneTypeAudio) {
             [self destroyGame];
@@ -2090,5 +2098,10 @@
 
 - (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
     
+}
+
+// 处理AI消息
+- (void)handleGameAiModelMeassage:(MgCommonAiModelMessageModel *)model {
+    self.isNeedToSendMessageToGame = YES;
 }
 @end
