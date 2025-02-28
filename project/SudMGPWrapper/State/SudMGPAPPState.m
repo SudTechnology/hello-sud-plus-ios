@@ -121,3 +121,13 @@
 
 @implementation AppCommonGamePlayerPropsCardsEffect
 @end
+
+
+// ai消息语音数据
+@implementation AppCommonAiModelAudioMessages
+@end
+
+
+/// app通知游戏下发ai模型的输入 APP_COMMON_AI_MODEL_MESSAGE
+@implementation AppCommonAiModelMessages
+@end

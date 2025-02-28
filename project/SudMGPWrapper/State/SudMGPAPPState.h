@@ -42,8 +42,6 @@ static NSString *APP_COMMON_OPEN_SOUND = @"app_common_open_sound";
 static NSString *APP_COMMON_OPEN_BRATE = @"app_common_open_vibrate";
 /// 设置游戏的音量大小
 static NSString *APP_COMMON_SOUND_VOLUME = @"app_common_game_sound_volume";
-/// 设置游戏上报信息扩展参数（透传)
-static NSString *APP_COMMON_GAME_INFO_EXTRAS = @"app_common_report_game_info_extras";
 /// 设置游戏中的AI玩家（2022-05-11新增）
 static NSString *APP_COMMON_GAME_ADD_AI_PLAYERS = @"app_common_game_add_ai_players";
 /// 元宇宙砂砂舞相关设置
@@ -89,6 +87,10 @@ static NSString *APP_COMMON_UPDATE_GAME_MONEY = @"app_common_update_game_money";
 static NSString *APP_COMMON_GAME_PLAYER_PROPS_CARDS = @"app_common_game_player_props_cards";
 /// app通知游戏播放玩家所获得的道具卡的特效（只支持飞行棋）
 static NSString *APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT = @"app_common_game_player_props_cards_effect";
+/// app通知游戏下发ai模型的输入
+static NSString *APP_COMMON_AI_MODEL_MESSAGE = @"app_common_ai_model_message";
+
+
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
 @interface AppCommonGameDiscoAction : NSObject
@@ -277,57 +279,57 @@ static NSString *APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT = @"app_common_game_p
 
 @end
 
-/// 五子棋
+/// 五子棋 (Gomoku)
 @interface AppCommonGameUiCustomConfigGomoku : AppCommonGameUiCustomConfig
-/// 棋盘底
-@property(nonatomic, strong)NSString *chessBoard;
-/// 黑棋
-@property(nonatomic, strong)NSString *chessBlack;
-/// 白棋
-@property(nonatomic, strong)NSString *chessWhite;
-/// 棋子背景
-@property(nonatomic, strong)NSString *chessBg;
-/// 提示落棋标志
-@property(nonatomic, strong)NSString *tipsChess;
-/// 当前出棋的白色标志
-@property(nonatomic, strong)NSString *curChessWhiteBg;
-/// 当前出棋的黑色标志
-@property(nonatomic, strong)NSString *curChessBlackBg;
+/// 棋盘底 (Chess board background)
+@property(nonatomic, strong) NSString *chessBoard;
+/// 黑棋 (Black chess piece)
+@property(nonatomic, strong) NSString *chessBlack;
+/// 白棋 (White chess piece)
+@property(nonatomic, strong) NSString *chessWhite;
+/// 棋子背景 (Chess piece background)
+@property(nonatomic, strong) NSString *chessBg;
+/// 提示落棋标志 (Hint for placing chess piece)
+@property(nonatomic, strong) NSString *tipsChess;
+/// 当前出棋的白色标志 (Current turn white piece indicator)
+@property(nonatomic, strong) NSString *curChessWhiteBg;
+/// 当前出棋的黑色标志 (Current turn black piece indicator)
+@property(nonatomic, strong) NSString *curChessBlackBg;
 @end
 
 /// Ludo
 @interface AppCommonGameUiCustomConfigLudo : AppCommonGameUiCustomConfig
-// 棋盘底
+// 棋盘底 (Game board background)
 @property(nonatomic, strong)NSString *gameBoard01;
-// 棋盘
+// 棋盘 (Game board)
 @property(nonatomic, strong)NSString *gameBoard02;
-// 骰子白底
+// 骰子白底 (Dice background - white)
 @property(nonatomic, strong)NSString *diceBg;
-// 黄金骰子底
+// 黄金骰子底 (Golden dice background)
 @property(nonatomic, strong)NSString *diceBgGold;
-// 骰子1
+// 骰子1 (Dice 1)
 @property(nonatomic, strong)NSString *dice01;
-// 骰子2
+// 骰子2 (Dice 2)
 @property(nonatomic, strong)NSString *dice02;
-// 骰子3
+// 骰子3 (Dice 3)
 @property(nonatomic, strong)NSString *dice03;
-// 骰子4
+// 骰子4 (Dice 4)
 @property(nonatomic, strong)NSString *dice04;
-// 骰子5
+// 骰子5 (Dice 5)
 @property(nonatomic, strong)NSString *dice05;
-// 骰子6
+// 骰子6 (Dice 6)
 @property(nonatomic, strong)NSString *dice06;
-// 骰子皇冠
+// 骰子皇冠 (Dice crown)
 @property(nonatomic, strong)NSString *diceCrown;
-// 黄色棋子
+// 黄色棋子 (Yellow chess piece)
 @property(nonatomic, strong)NSString *chessYellow;
-// 蓝色棋子
+// 蓝色棋子 (Blue chess piece)
 @property(nonatomic, strong)NSString *chessBlue;
-// 绿色棋子
+// 绿色棋子 (Green chess piece)
 @property(nonatomic, strong)NSString *chessGreen;
-// 红色棋子
+// 红色棋子 (Red chess piece)
 @property(nonatomic, strong)NSString *chessRed;
-/// 玩家设置，具体参见 https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html
+// 玩家设置，具体参见 https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html (Player settings, see https://docs.sud.tech/en-US/app/Client/APPFST/CommonState.html for details)
 @property(nonatomic, strong)NSDictionary *players;
 @end
 
@@ -352,4 +354,21 @@ static NSString *APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT = @"app_common_game_p
 @property(nonatomic, strong)NSString *toUid;
 /// 数量
 @property(nonatomic, assign)NSInteger count;
+@end
+
+// ai消息语音数据
+@interface AppCommonAiModelAudioMessages:NSObject
+/// 音频URL
+@property(nonatomic, strong)NSString *url;
+/// 音频base64数据
+@property(nonatomic, strong)NSString *base64Data;
+@end
+
+
+/// app通知游戏下发ai模型的输入 APP_COMMON_AI_MODEL_MESSAGE
+@interface AppCommonAiModelMessages : NSObject
+/// 输入的文本
+@property(nonatomic, strong)NSString *text;
+/// 发送的玩家id
+@property(nonatomic, strong)AppCommonAiModelAudioMessages *audio;
 @end

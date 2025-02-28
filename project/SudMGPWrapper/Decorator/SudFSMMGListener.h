@@ -240,6 +240,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏通知app击球状态（只支持桌球） MG_COMMON_GAME_BILLIARDS_HIT_STATE
 - (void)onGameMgCommonGameBilliardsHitState:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameBilliardsHitStateModel *)model;
 
+/// 游戏通知app开启ai大模型消息 MG_COMMON_AI_MODEL_MESSAGE
+- (void)onGameMgCommonAiModelMessage:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonAiModelMessageModel *)model;
+
+/// 游戏通知app ai大模型消息内容 MG_COMMON_AI_MESSAGE
+- (void)onGameMgCommonAiMessage:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonAiMessageModel *)model;
+
+
 #pragma mark - 互动礼物<火箭>
 
 /// 礼物配置文件(火箭) MG_CUSTOM_ROCKET_CONFIG
@@ -409,7 +416,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 游戏通知app层当前游戏剩余时间  MG_COMMON_GAME_COUNTDOWN_TIME
 - (void)onPlayerMGCommonGameCountdownTime:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGCommonGameCountdownTimeModel *)model;
-
 
 @end
 

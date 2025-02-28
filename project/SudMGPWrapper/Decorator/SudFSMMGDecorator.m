@@ -789,6 +789,20 @@
             return;
         }
         
+    } else if ([state isEqualToString:MG_COMMON_AI_MODEL_MESSAGE]) {
+        
+        MgCommonAiModelMessageModel *m = [MgCommonAiModelMessageModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonAiModelMessage:model:)]) {
+            [self.listener onGameMgCommonAiModelMessage:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_AI_MESSAGE]) {
+        
+        MgCommonAiMessageModel *m = [MgCommonAiMessageModel mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonAiMessage:model:)]) {
+            [self.listener onGameMgCommonAiMessage:handle model:m];
+            return;
+        }
     }
     
     else {

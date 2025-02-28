@@ -392,3 +392,10 @@
 @implementation MgCommonGameBilliardsHitStateModel
 @end
 
+#pragma mark - MG_COMMON_AI_MODEL_MESSAGE
+@implementation MgCommonAiModelMessageModel
+@end
+
+#pragma mark - MG_COMMON_AI_MESSAGE
+@implementation MgCommonAiMessageModel
+@end

@@ -217,13 +217,6 @@
     [self notifyStateChange:APP_COMMON_SOUND_VOLUME dataJson:dic.mj_JSONString];
 }
 
-/// 设置游戏上报信息扩展参数（透传）
-/// @param reportGameInfoExtras   string类型，Https服务回调report_game_info参数，最大长度1024字节，超过则截断（2022-01-21）
-- (void)notifyAppCommonReportGameInfoExtras:(NSString *)reportGameInfoExtras {
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:reportGameInfoExtras, @"reportGameInfoExtras", nil];
-    [self notifyStateChange:APP_COMMON_GAME_INFO_EXTRAS dataJson:dic.mj_JSONString];
-}
-
 /// 设置游戏中的AI玩家（2022-05-11新增） APP_COMMON_GAME_ADD_AI_PLAYERS
 /// @param appCommonGameAddAiPlayersModel  配置信息
 - (void)notifyAppCommonGameAddAIPlayers:(AppCommonGameAddAIPlayersModel *)appCommonGameAddAiPlayersModel {
@@ -349,6 +342,11 @@
 /// app通知游戏播放玩家所获得的道具卡的特效（只支持飞行棋） APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT
 - (void)notifyAppCommonGamePlayerPropsCardsEffect:(AppCommonGamePlayerPropsCardsEffect *)model {
     [self notifyStateChange:APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT dataJson:model.mj_JSONString];
+}
+
+/// app通知游戏下发ai模型的输入 APP_COMMON_AI_MODEL_MESSAGE
+- (void)notifyAppCommonAiModelMessage:(AppCommonAiModelMessages *)model {
+    [self notifyStateChange:APP_COMMON_AI_MODEL_MESSAGE dataJson:model.mj_JSONString];
 }
 
 #pragma mark - 互动礼物

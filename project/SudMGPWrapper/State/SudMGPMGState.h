@@ -162,7 +162,10 @@ static NSString *MG_COMMON_GAME_COUNTDOWN_TIME = @"mg_common_game_countdown_time
 static NSString *MG_COMMON_SELF_OB_STATUS = @"mg_common_self_ob_status";
 /// 游戏通知app玩家角色(狼人杀，谁是卧底)
 static NSString *MG_COMMON_PLAYER_ROLE_ID = @"mg_common_player_role_id";
-
+/// 游戏通知app开启ai大模型消息
+static NSString *MG_COMMON_AI_MODEL_MESSAGE = @"mg_common_ai_model_message";
+/// 游戏通知app ai大模型消息展示内容
+static NSString *MG_COMMON_AI_MESSAGE = @"mg_common_ai_message";
 
 #pragma mark - 你画我猜
 /// 选词中
@@ -902,4 +905,16 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @property(nonatomic, assign)NSInteger state;
 @end
 
+#pragma mark - MG_COMMON_AI_MODEL_MESSAGE
+@interface MgCommonAiModelMessageModel:NSObject
+
+@end
+
+#pragma mark - MG_COMMON_AI_MESSAGE
+@interface MgCommonAiMessageModel:NSObject
+/// user id
+@property(nonatomic, strong)NSString *uid;
+/// ai message
+@property(nonatomic, strong)NSString *content;
+@end
 NS_ASSUME_NONNULL_END

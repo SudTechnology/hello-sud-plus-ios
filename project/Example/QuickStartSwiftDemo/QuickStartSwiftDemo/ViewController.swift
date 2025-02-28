@@ -59,8 +59,7 @@ class ViewController: UIViewController {
         sudGameConfigModel.gameView = self.gameView
         // Current user id
         sudGameConfigModel.userId = self.userId
-        
-        self.sudGameManager.loadGame(sudGameConfigModel)
+        self.sudGameManager.loadGame(sudGameConfigModel, success: nil)
     }
 
     /// Destroy game

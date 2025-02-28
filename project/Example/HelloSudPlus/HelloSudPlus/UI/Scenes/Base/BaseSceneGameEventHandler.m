@@ -22,14 +22,15 @@
     return m;
 }
 
-- (void)onGetCode:(NSString *)userId result:(void (^)(NSString * _Nonnull))result {
+- (void)onGetCode:(nonnull NSString *)userId success:(nonnull SudGmSuccessStringBlock)success fail:(nonnull SudGmFailedBlock)fail {
     
     // 请求业务服务器刷新令牌 Code更新
     [GameService.shared reqGameLoginWithAppId:nil success:^(RespGameInfoModel *gameInfo) {
         // 回调成功结果
-        result(gameInfo.code);
+        success(gameInfo.code);
     }                                    fail:^(NSError *error) {
         [ToastUtil show:error.debugDescription];
+        fail(error.code, error.debugDescription);
     }];
 }
 

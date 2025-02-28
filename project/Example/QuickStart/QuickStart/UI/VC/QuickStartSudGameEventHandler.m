@@ -20,7 +20,7 @@
     /// ...
     /// 例如可以设置接管游戏画面内的加入游戏按钮，以便用户点击加入按钮时接入方能收到游戏加入事件，并进行自行处理，设置为YES并实现对应回调方法onGameMGCommonSelfClickJoinBtn:model:即可收到加入按钮回调
     /// For example, you can set up the 'Join Game' button within the game screen so that when the user clicks the join button, the receiving party can receive the game join event and handle it accordingly. Set it to YES and implement the corresponding callback method  onGameMGCommonSelfClickJoinBtn:model:  to receive the join button callback.
-//    gameCfgModel.ui.join_btn.custom = YES;
+    //    gameCfgModel.ui.join_btn.custom = YES;
     
     return gameCfgModel;
 }
@@ -54,13 +54,14 @@
     return m;
 }
 
-- (void)onGetCode:(NSString *)userId result:(void (^)(NSString * _Nonnull))result {
+- (void)onGetCode:(nonnull NSString *)userId success:(nonnull SudGmSuccessStringBlock)success fail:(nonnull SudGmFailedBlock)fail {
     
     /// 获取加载游戏的code,此处请求自己服务端接口获取code并回调返回即可
     /// Get the code of loading the game, here request your server interface to get the code and callback return
     
     if (userId.length == 0) {
         NSLog(@"用户ID不能为空");
+        fail(-1, @"userId is empty");
         return;
     }
     
@@ -72,21 +73,24 @@
     NSString *getCodeUrl = @"https://prod-hellosud-base.s00.tech/login/v3";
     NSDictionary *dicParam = @{@"user_id": userId, @"app_id":self.loadConfigModel.appId };
     [self postHttpRequestWithURL:getCodeUrl param:dicParam success:^(NSDictionary *rootDict) {
-
+        
         NSDictionary *dic = [rootDict objectForKey:@"data"];
         /// 这里的code用于登录游戏sdk服务器
         /// The code here is used to log in to the game sdk server
         NSString *code = [dic objectForKey:@"code"];
-        int retCode = (int) [[dic objectForKey:@"ret_code"] longValue];
+        NSInteger retCode = (int) [[dic objectForKey:@"ret_code"] longValue];
+        NSString *errMsg = [dic objectForKey:@"ret_msg"];
         if (retCode == 0 && code.length > 0) {
-            // callback the code 
-            result(code);
+            // callback the code
+            success(code);
         } else {
+            fail(retCode, errMsg);
             [ToastUtil show:@"server error"];
         }
-
+        
     }                    failure:^(NSError *error) {
         NSLog(@"login game server error:%@", error.debugDescription);
+        fail(error.code, error.debugDescription);
         [ToastUtil show:error.debugDescription];
     }];
     
@@ -117,7 +121,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-
+    
     if (param) {
         NSData *bodyData = [NSJSONSerialization dataWithJSONObject:param options:NSJSONReadingMutableContainers error:nil];
         request.HTTPBody = bodyData;
@@ -155,6 +159,12 @@
     /// 此时表明游戏加载成功
     /// The game is loaded successfully
     NSLog(@"Game load finished");
+}
+
+/// 加载游戏进度
+/// Load game progress
+- (void)onGameLoadingProgress:(int)stage retCode:(int)retCode progress:(int)progress {
+    NSLog(@"loading game:%@, retCode:%@, progress:%@ ", @(stage), @(retCode), @(progress));
 }
 
 /// 游戏销毁
@@ -197,7 +207,7 @@
 /// 游戏: 关键词状态    MG_COMMON_KEY_WORD_TO_HIT
 /// Game: Keyword status MG_COMMON_KEY_WORD_TO_HIT
 - (void)onGameMGCommonKeyWordToHit:(id <ISudFSMStateHandle>)handle model:(MGCommonKeyWrodToHitModel *)model {
-
+    
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
@@ -219,21 +229,21 @@
 /// Player status changes
 /// Player: Adds status MG_COMMON_PLAYER_IN
 - (void)onPlayerMGCommonPlayerIn:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerInModel *)model {
-
+    
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 玩家: 准备状态  MG_COMMON_PLAYER_READY
 /// Player: Ready status MG_COMMON_PLAYER_READY
 - (void)onPlayerMGCommonPlayerReady:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerReadyModel *)model {
-
+    
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 玩家: 队长状态  MG_COMMON_PLAYER_CAPTAIN
 /// Player: Captain status MG_COMMON_PLAYER_CAPTAIN
 - (void)onPlayerMGCommonPlayerCaptain:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerCaptainModel *)model {
-
+    
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
@@ -246,21 +256,21 @@
 /// 你画我猜: 作画中状态  MG_DG_PAINTING
 /// You paint me guess: painting state MG_DG_PAINTING
 - (void)onPlayerMGDGPainting:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGDGPaintingModel *)model {
-
+    
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 游戏: 麦克风状态   MG_COMMON_GAME_SELF_MICROPHONE
 /// Game: Microphone status MG_COMMON_GAME_SELF_MICROPHONE
 - (void)onGameMGCommonGameSelfMicrophone:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSelfMicrophone *)model {
-
+    
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 游戏: 耳机（听筒，扬声器）状态   MG_COMMON_GAME_SELF_HEADEPHONE
 /// Game: Headset (handset, speaker) status MG_COMMON_GAME_SELF_HEADEPHONE
 - (void)onGameMGCommonGameSelfHeadphone:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSelfHeadphone *)model {
-
+    
     [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
 }
 
@@ -269,6 +279,6 @@
     /// Handle the event of the 'Join Game' button from the game screen
     /// 执行完应用自身逻辑，然后调用一下接口通知游戏将当前用户加入游戏即可
     /// Execute the application's own logic, and then call the following interface to notify the game to add the current user to the game."
-//    [self.sudFSTAPPDecorator notifyAppComonSelfInV2:YES seatIndex:-1 isSeatRandom:YES teamId:0];
+    //    [self.sudFSTAPPDecorator notifyAppComonSelfInV2:YES seatIndex:-1 isSeatRandom:YES teamId:0];
 }
 @end

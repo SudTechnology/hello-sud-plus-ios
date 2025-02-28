@@ -207,6 +207,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// app通知游戏播放玩家所获得的道具卡的特效（只支持飞行棋） APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT
 - (void)notifyAppCommonGamePlayerPropsCardsEffect:(AppCommonGamePlayerPropsCardsEffect *)model;
 
+/// app通知游戏下发ai模型的输入 APP_COMMON_AI_MODEL_MESSAGE
+- (void)notifyAppCommonAiModelMessage:(AppCommonAiModelMessages *)model;
+
 #pragma mark - 互动礼物<火箭>
 
 /// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG

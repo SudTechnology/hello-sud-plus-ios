@@ -36,10 +36,11 @@ class QuickStartSudGameEventHandler: SudGameBaseEventHandler { // Replace SomeBa
     }
 
     // Get code for loading game
-    override func onGetCode(_ userId: String, result: @escaping (String) -> Void) {
+    override func onGetCode(_ userId: String, success: @escaping SudGmSuccessStringBlock, fail: @escaping SudGmFailedBlock) {
         // Ensure user ID is not empty
         guard !userId.isEmpty else {
             print("用户ID不能为空")
+            fail(-1, "用户ID不能为空")
             return
         }
 
@@ -53,13 +54,13 @@ class QuickStartSudGameEventHandler: SudGameBaseEventHandler { // Replace SomeBa
                let retCode = rootDict["ret_code"] as? Int64,
                retCode == 0, !code.isEmpty {
                 // Callback the code
-                result(code)
+                success(code)
             } else {
-                
+                fail(-1, "get code error")
             }
         }, failure: { error in
             print("login game server error: \(error.localizedDescription)")
-            
+            fail(-1, error.localizedDescription)
         })
     }
 
