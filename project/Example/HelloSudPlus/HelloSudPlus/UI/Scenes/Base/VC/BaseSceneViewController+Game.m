@@ -70,7 +70,7 @@
     configModel.language = self.language;
     configModel.isTestEnv = isTest;
     configModel.authorizationSecret = self.configModel.enterRoomModel.extraRoomVO.authSecret;
-    [self.gameManager loadGame:configModel success:nil fail:nil];
+    [self.gameManager loadGame:configModel];
 }
 
 

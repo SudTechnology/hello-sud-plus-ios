@@ -137,8 +137,7 @@
         UIView *changedView = self.hitTestChangedCallback(v, point);
         // 如果返回视图不是透传视图，则穿透到返回视图中去
         if (changedView && changedView != v) {
-            CGPoint changedViewPont = [v convertPoint:point toView:changedView];
-            return [changedView hitTest:changedViewPont withEvent:event];
+            return [changedView hitTest:point withEvent:event];
         }
     }
     return v;

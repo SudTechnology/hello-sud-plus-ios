@@ -29,22 +29,16 @@
     [self.sudGameEventHandler.sudFSMMGDecorator setEventListener:eventHandler];
 }
 
-- (void)loadGame:(nonnull SudGameLoadConfigModel *)configModel
-         success:(nullable SudGmSuccessVoidBlock)success
-            fail:(nullable SudGmFailedBlock)fail {
+- (void)loadGame:(nonnull SudGameLoadConfigModel *)configModel {
     NSAssert(self.sudGameEventHandler, @"Must registerGameEventHandler before!");
-    if (!self.sudGameEventHandler) {
-        if (fail){
-            fail(-1, @"Game event handler is nil");
-        }
-        return;
+    if (self.sudGameEventHandler) {
+        [self.sudGameEventHandler setupLoadConfigModel:configModel];
+        __weak typeof(self) weakSelf = self;
+        [self.sudGameEventHandler onGetCode:configModel.userId result:^(NSString * _Nonnull code) {
+            NSLog(@"on getCode success");
+            [weakSelf initSudMGPSDK:configModel code:code];
+        }];
     }
-    [self.sudGameEventHandler setupLoadConfigModel:configModel];
-    __weak typeof(self) weakSelf = self;
-    [self.sudGameEventHandler onGetCode:configModel.userId success:^(NSString * _Nonnull code) {
-        NSLog(@"on getCode success");
-        [weakSelf initSudMGPSDK:configModel code:code success:success fail:fail];
-    } fail:fail];
 }
 
 - (void)destroyGame {
@@ -56,21 +50,15 @@
 #pragma mark --- private
 
 /// 初始化游戏SudMDP SDK
-- (void)initSudMGPSDK:(SudGameLoadConfigModel *)configModel
-                 code:(NSString *)code
-              success:(SudGmSuccessVoidBlock)success
-                 fail:(SudGmFailedBlock)fail  {
-    
+- (void)initSudMGPSDK:(SudGameLoadConfigModel *)configModel code:(NSString *)code {
+
     __weak typeof(self) weakSelf = self;
     if (configModel.gameId <= 0) {
         NSLog(@"Game id is empty can not load the game:%@, currentRoomID:%@", @(configModel.gameId), configModel.roomId);
-        if (fail) {
-            fail(-1, @"game id is empty");
-        }
         return;
     }
     /// Show how to embed a local pkg in the project
-    //    [[SudMGP getCfg]addEmbeddedMGPkg:1763401430010871809 mgPath:@"GreedyStar_1.0.0.1.sp"];
+//    [[SudMGP getCfg]addEmbeddedMGPkg:1763401430010871809 mgPath:@"GreedyStar_1.0.0.1.sp"];
     
     // 2. 初始化SudMGP SDK<SudMGP initSDK>
     // 2. Initialize the SudMGP SDK <SudMGP initSDK>
@@ -78,33 +66,24 @@
     paramModel.appId = configModel.appId;
     paramModel.appKey = configModel.appKey;
     paramModel.isTestEnv = configModel.isTestEnv;
-    [SudMGP initSDK:paramModel listener:^(int retCode,NSString * _Nonnull retMsg) {
+    [SudMGP initSDK:paramModel listener:^(int retCode, const NSString * _Nonnull retMsg) {
         
         if (retCode != 0) {
             NSLog(@"ISudFSMMG:initGameSDKWithAppID init sdk failed :%@(%@)", retMsg, @(retCode));
-            if (fail) {
-                fail(retCode, retMsg);
-            }
             return;
         }
         NSLog(@"ISudFSMMG:initGameSDKWithAppID: init sdk successfully");
         // 加载游戏
         // Load the game
-        [weakSelf loadMG:configModel code:code success:success fail:fail];
+        [weakSelf loadMG:configModel code:code];
     }];
 }
 
 /// 加载游戏MG
 /// Initialize the SudMDP SDK for the game
 /// @param configModel 配置model
-/// @param code config model
-/// @param success success callback
-/// @param fail fail callback
-- (void)loadMG:(SudGameLoadConfigModel *)configModel
-          code:(NSString *)code
-       success:(SudGmSuccessVoidBlock)success
-          fail:(SudGmFailedBlock)fail{
-    
+/// @param configModel cofnig model
+- (void)loadMG:(SudGameLoadConfigModel *)configModel code:(NSString *)code {
     NSAssert(self.sudGameEventHandler, @"Must registerGameEventHandler before!");
     [self.sudGameEventHandler setupLoadConfigModel:configModel];
     // 确保初始化前不存在已加载的游戏 保证SudMGP initSDK前，销毁SudMGP
@@ -112,15 +91,12 @@
     [self destroyGame];
     NSLog(@"loadMG:userId:%@, gameRoomId:%@, gameId:%@", configModel.userId, configModel.roomId, @(configModel.gameId));
     if (configModel.userId.length == 0 ||
-        configModel.roomId.length == 0 ||
-        code.length == 0 ||
-        configModel.language.length == 0 ||
-        configModel.gameId <= 0) {
-        
+            configModel.roomId.length == 0 ||
+            code.length == 0 ||
+            configModel.language.length == 0 ||
+            configModel.gameId <= 0) {
+
         NSLog(@"loadGame: param has some one empty");
-        if (fail) {
-            fail(-1, @"At least one parameter is empty.");
-        }
         return;
     }
     // 必须配置当前登录用户
@@ -137,16 +113,7 @@
     paramModel.gameViewContainer = configModel.gameView;
     paramModel.authorizationSecret = configModel.authorizationSecret;
     id <ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:paramModel fsmMG:self.sudGameEventHandler.sudFSMMGDecorator];
-    if (!iSudFSTAPP) {
-        if (fail){
-            fail(-1, @"loadMG error, please check detail from console");
-        }
-        return;
-    }
     [self.sudGameEventHandler.sudFSTAPPDecorator setISudFSTAPP:iSudFSTAPP];
-    if (success) {
-        success();
-    }
 }
 
 

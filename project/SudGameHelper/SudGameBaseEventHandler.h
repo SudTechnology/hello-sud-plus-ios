@@ -8,11 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "SudMGPWrapper.h"
-
-typedef void(^SudGmSuccessVoidBlock)(void);
-typedef void(^SudGmSuccessStringBlock)(NSString *_Nonnull code);
-typedef void(^SudGmFailedBlock)(NSInteger errCode, NSString *_Nullable errMsg);
-
 NS_ASSUME_NONNULL_BEGIN
 
 /// 加载SudMGP SDK加载必须的业务参数
@@ -76,8 +71,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameters:
 ///   - userId: 当前加载游戏用户ID
 ///   - result: 返回code回调
-///   The  `onGetCode`  method is a method that retrieves the code from the server and returns it. The method takes two parameters: the user ID and the result callback. The user ID is the ID of the user who is loading the game, and the result callback is a function that is called when the code has been retrieved. The method first calls the  `getCode`  method on the server to retrieve the code. If the code is successfully retrieved, the method calls the result callback with the code as the argument. Otherwise, the method calls the success callback with an error.
-- (void)onGetCode:(nonnull NSString *)userId success:(nonnull SudGmSuccessStringBlock)success fail:(nonnull SudGmFailedBlock)fail;
+///   The  `onGetCode`  method is a method that retrieves the code from the server and returns it. The method takes two parameters: the user ID and the result callback. The user ID is the ID of the user who is loading the game, and the result callback is a function that is called when the code has been retrieved. The method first calls the  `getCode`  method on the server to retrieve the code. If the code is successfully retrieved, the method calls the result callback with the code as the argument. Otherwise, the method calls the result callback with an error.
+- (void)onGetCode:(nonnull NSString *)userId result:(void(^)( NSString * _Nonnull code))result;
 
 /// 配置游戏视图，应用根据自身配置游戏
 /// 开发者可以根据自己需求配置游戏相关功能展示

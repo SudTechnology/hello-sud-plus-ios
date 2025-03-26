@@ -114,9 +114,7 @@
     // Current user id
     sudGameConfigModel.userId = QSAppPreferences.shared.currentUserID;
 
-    [self.sudGameManager loadGame:sudGameConfigModel success:nil fail:^(NSInteger errCode, NSString * _Nullable errMsg) {
-        [ToastUtil show:[NSString stringWithFormat:@"%@(%@)", errMsg, @(errCode)]];
-    }];
+    [self.sudGameManager loadGame:sudGameConfigModel];
 }
 
 /// 销毁游戏

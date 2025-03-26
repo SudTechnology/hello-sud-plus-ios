@@ -18,7 +18,7 @@
 #import "SDImageSVGNativeCoder.h"
 #import <AFNetworking/AFNetworking.h>
 #import <SudMGP/ISudCfg.h>
-//#import <SudMGP/ISudLogger.h>
+#import <SudMGP/ISudLogger.h>
 #import <AFNetworking/AFNetworking.h>
 
 @interface AppDelegate ()<BuglyDelegate> {

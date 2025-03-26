@@ -43,9 +43,8 @@
     self.loadConfigModel = loadConfigModel;
 }
 
-- (void)onGetCode:(nonnull NSString *)userId success:(nonnull SudGmSuccessStringBlock)success fail:(nonnull SudGmFailedBlock)fail {
-    NSAssert(NO, @"Please implement the onGetCode callback of SudGameBaseEventHandler.");
-    fail(-1, @"Please implement the onGetCode callback of SudGameBaseEventHandler.");
+- (void)onGetCode:(nonnull NSString *)userId result:(void(^)( NSString * _Nonnull code))result {
+    NSAssert(NO, @"The game code must be loaded from the application service!!");
 }
 
 - (nonnull GameCfgModel *)onGetGameCfg {
@@ -116,12 +115,11 @@
     [handle success:self.sudFSMMGDecorator.handleMGSuccess];
     // 请求业务服务器刷新令牌 Code更新
     // Request the service server to refresh the token Code update
-    [self onGetCode:self.loadConfigModel.userId success:^(NSString * _Nonnull code) {
+    [self onGetCode:self.loadConfigModel.userId result:^(NSString * _Nonnull code) {
         // 调用游戏接口更新令牌
         // Call game interface update token
         [self.sudFSTAPPDecorator updateCode:code];
-    } fail:nil];
-
+    }];
 }
 
 /// 游戏开始
@@ -136,6 +134,4 @@
 - (void)onGameDestroyed {
     NSLog(@"Game destroyed");
 }
-
-
 @end
