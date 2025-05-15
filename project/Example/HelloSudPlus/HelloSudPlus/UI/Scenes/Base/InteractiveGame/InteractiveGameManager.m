@@ -224,7 +224,7 @@
     configModel.gameView = self.gameView;
     configModel.language = self.language;
     configModel.isTestEnv = isTest;
-    [self.gameManager loadGame:configModel];
+    [self.gameManager loadGame:configModel success:nil fail:nil];
 }
 
 /// 退出游戏
