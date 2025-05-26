@@ -82,7 +82,7 @@
   </details>
   <details>
 
-  <summary>ASR识别支持（可选 v1.2.7及后续版本支持）</summary>
+  <summary>ASR识别支持（可选 v1.6.0.1及后续版本支持）</summary>
 
       1.APP主工程Podfile文件中，添加 ASR语音识别库 依赖;
 

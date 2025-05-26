@@ -78,7 +78,7 @@
   </details> 
   <details>
 
-  <summary>ASR recognition support (optional, supported in v1.2.7 and later)</summary>
+  <summary>ASR recognition support (optional, supported in v1.6.0.1 and later)</summary>
 
       1. Add ASR speech recognition library dependency to the app's main Podfile;
 
