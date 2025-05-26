@@ -1,15 +1,15 @@
 //
-//  SudMGPAPPState2.h
+//  SudGIPAPPState2.h
 //  HelloSud-iOS
 //
 // Copyright © Sud.Tech (https://sud.tech)
 //
 //  Created by Mary on 2022/2/19.
 //
-
-#import "SudMGPAPPRocketState.h"
-#import "SudMGPAPPBaseballState.h"
-#import "SudMGPAPPAudio3dState.h"
+#import <SudGIP/SudGIP-umbrella.h>
+#import "SudGIPAPPRocketState.h"
+#import "SudGIPAPPBaseballState.h"
+#import "SudGIPAPPAudio3dState.h"
 
 #pragma mark - APP-->MG 状态
 /// 参考文档： https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html

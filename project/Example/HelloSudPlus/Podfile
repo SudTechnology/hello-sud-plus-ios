@@ -1,6 +1,7 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '12.0'
 #source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://github.com/volcengine/volcengine-specs.git’
 
 inhibit_all_warnings!
 
@@ -43,9 +44,9 @@ target 'HelloSudPlus' do
   pod 'CocoaLumberjack'
   # RTC厂商引入
   # zego语音/视频SDK
-  pod 'ZegoExpressEngine', '2.17.1.1'
+  pod 'ZegoExpressEngine', '~> 3.20.2'
   # zego IM SDK
-  pod 'ZIM', '2.4.2'
+  pod 'ZIM', '~> 2.20.0'
   # agora语音SDK
   pod 'AgoraRtcEngine_iOS', '4.2.6'
   # agora云信令SDK
@@ -53,30 +54,34 @@ target 'HelloSudPlus' do
   # rongcloud音频SDK
   pod 'RCVoiceRoomLib', '~> 2.0.7'
   # netease 语音SDK
-  pod 'NERtcSDK', '~> 4.6.0'
+  pod 'NERtcSDK', '~> 5.8.15'
   # netease IM SDK
-  pod 'NIMSDK_LITE', '9.0.1'
+  pod 'NIMSDK_LITE', '~> 10.8.30'
   # volc火山引擎SDK
-  pod 'VolcEngineRTC', '3.37.101' ,:source => 'https://github.com/volcengine/volcengine-specs.git'
-  #  pod 'VolcEngineRTC', '3.37.101'
+  pod 'VolcEngineRTC', '~> 3.50.308' ,:source => 'https://github.com/volcengine/volcengine-specs.git'
   # tx腾讯云SDK
   #pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
-  pod 'TXLiteAVSDK_TRTC', '10.2.11418'
+  pod 'TXLiteAVSDK_TRTC', '~> 10.2.11418'
   # SudMGP包装类
-    pod 'SudMGPWrapper', :path => '../../'
-  # 标准版（支持全部游戏，包体会大一些）
-#  pod 'SudMGP', '~> 1.4.4'
-#  pod 'SudMGPWrapper', '~> 1.4.4.2'
-  # 轻量版（不支持部分游戏，包体较小）
-#  pod 'SudMGP_Lite', '~> 1.4.4'
-#  pod 'SudMGPWrapper_Lite', '~> 1.4.4'
+#    pod 'SudGIPWrapper', :path => '../../'
+  # 标准版（不支持部分游戏，包体较小）
+#  pod 'SudGIP', '~> 1.6.0.1'
+#  pod 'SudGIPWrapper'
   
+  # pro版本（支持全部游戏，包体会大一些）
+  pod 'SudGIP-pro', '~> 1.6.0.1'
+  pod 'SudGIPWrapper-pro'
+# 语音识别
+#pod 'SudASR', :path => '../../'
+  pod 'SudASR', '~> 1.6.0.1'
+# 最基本，不包含微软
+#pod 'SudASR/Base', :path => '../../'
+#  pod 'SudASR/Base', '~> 1.6.0.1'
   # SudNFT SDK
-  pod 'SudNFT', '1.0.4'
-  #使用ASR时集成该库
-  pod 'MicrosoftCognitiveServicesSpeech-iOS', '1.40.0'
+  pod 'SudNFT', '1.0.5'
   # 分页点
   #  pod 'XHPageControl'
+  pod 'Protobuf', '3.22.3'
 end
 
 
@@ -91,5 +96,37 @@ post_install do |installer|
       end
     end
   end
+  
+  
+#  #移除三方库BitCode
+#  bitcode_strip_path = `xcrun --find bitcode_strip`.chop!
+# 
+#  def strip_bitcode_from_framework(bitcode_strip_path, framework_relative_path)
+#    framework_path = File.join(Dir.pwd, framework_relative_path)
+#    command = "#{bitcode_strip_path} #{framework_path} -r -o #{framework_path}"
+#    puts "Stripping bitcode: #{command}"
+#    system(command)
+#  end
+# 
+#  framework_paths = [
+#    "Pods/NERtcAiDenoise.framework/NERtcAiDenoise",
+#    "Pods/NERtcAiHowling.framework/NERtcAiHowling",
+#    "Pods/NERtcBeauty.framework/NERtcBeauty",
+#    "Pods/NERtcFaceDetect.framework/NERtcFaceDetect",
+#    "Pods/NERtcPersonSegment.framework/NERtcPersonSegment",
+#    "Pods/NERtcReplayKit.framework/NERtcReplayKit",
+#    "Pods/NERtcSDK.framework/NERtcSDK",
+#    "Pods/NERtcnn.framework/NERtcnn",
+#
+#    "Pods/NIMSDK.framework/NIMSDK",
+#    "Pods/RongRTCLib.framework/RongRTCLib",
+#    "Pods/SudNFT.framework/SudNFT",
+#    "Pods/ZIM.framework/ZIM",
+#    "Pods/ZegoExpressEngine.framework/ZegoExpressEngine",
+#  ]
+# 
+#  framework_paths.each do |framework_relative_path|
+#    strip_bitcode_from_framework(bitcode_strip_path, framework_relative_path)
+#  end
 end
 

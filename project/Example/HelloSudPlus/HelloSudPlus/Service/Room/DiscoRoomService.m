@@ -7,7 +7,7 @@
 //
 
 #import "DiscoRoomService.h"
-#import "SudMGPAPPState.h"
+#import "SudGIPAPPState.h"
 
 NSNotificationName const showWaitingForDancingNTF = @"showWaitingForDancingNTF";
 /// 跳舞列表更新

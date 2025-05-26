@@ -10,8 +10,8 @@
 #ifndef SudMGPWrapper_h
 #define SudMGPWrapper_h
 
-#import "SudMGPAPPState.h"
-#import "SudMGPMGState.h"
+#import "SudGIPAPPState.h"
+#import "SudGIPMGState.h"
 
 #import "SudFSTAPPDecorator.h"
 #import "SudFSMMGDecorator.h"

@@ -12,7 +12,7 @@
 #import "DiscoAnchorDatingView.h"
 #import "DiscoPopMenuListView.h"
 #import "DiscoRankTipView.h"
-#import "SudMGPAPPState.h"
+#import "SudGIPAPPState.h"
 #import "DiscoGameInteractiveView.h"
 #import "DiscoAppointmentPopView.h"
 #import "DiscoGameInteractivePopView.h"

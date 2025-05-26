@@ -87,7 +87,7 @@
 - (UILabel *)sudNameLabel {
     if (!_sudNameLabel) {
         _sudNameLabel = [[UILabel alloc] init];
-        _sudNameLabel.text = @"SudMGP";
+        _sudNameLabel.text = @"SudGIP";
         _sudNameLabel.numberOfLines = 1;
         _sudNameLabel.textColor = [UIColor dt_colorWithHexString:@"#13141A" alpha:1];
         _sudNameLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightBold];

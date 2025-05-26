@@ -8,7 +8,6 @@
 #import "VersionInfoViewController.h"
 #import "VersionInfoCell.h"
 #import "VersionInfoModel.h"
-#import <SudMGP/ISudFSMMG.h>
 
 @interface VersionInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong)UITableView *tableView;
@@ -33,7 +32,7 @@
     
     VersionInfoModel *m1 = [VersionInfoModel new];
     m1.title = @"SudMGP SDK";
-    m1.subTitle = [NSString stringWithFormat:@"V%@", [SudMGP getVersion]];
+    m1.subTitle = [NSString stringWithFormat:@"V%@", [SudGIP getVersion]];
     
 //    VersionInfoModel *m2 = [VersionInfoModel new];
 //    m2.title = @"Zego SDK";

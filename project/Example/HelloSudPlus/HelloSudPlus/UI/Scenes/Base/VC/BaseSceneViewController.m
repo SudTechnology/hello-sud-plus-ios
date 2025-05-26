@@ -5,7 +5,6 @@
 //  Created by Mary on 2022/1/21.
 //
 
-#import <SudMGP/SudMGP-umbrella.h>
 #import "RoomMoreView.h"
 #import "SuspendRoomView.h"
 #import "RocketSelectAnchorView.h"

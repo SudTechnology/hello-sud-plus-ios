@@ -1,5 +1,5 @@
 //
-//  SudMGPAPPState2.h
+//  SudGIPAPPState2.h
 //  HelloSud-iOS
 //
 // Copyright © Sud.Tech (https://sud.tech)

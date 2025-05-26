@@ -1,11 +1,11 @@
 //
-//  SudMGPAPPState.m
+//  SudGIPAPPState.m
 //  SudMGPWrapper
 //
 //  Created by kaniel on 2022/7/4.
 //
 
-#import "SudMGPAPPBaseballState.h"
+#import "SudGIPAPPBaseballState.h"
 #import <MJExtension/MJExtension.h>
 
 @implementation AppBaseballRankingItemModel

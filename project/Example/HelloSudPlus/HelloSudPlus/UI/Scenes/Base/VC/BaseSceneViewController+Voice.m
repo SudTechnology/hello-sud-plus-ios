@@ -188,16 +188,18 @@
             DDLogDebug(@"re login room");
             [self loginRoom];
         }
-        if (!self.isSentEnterRoom) {
-            self.isSentEnterRoom = YES;
-            [self sendEnterRoomMsg];
-            [self onHandleEnteredRoom];
-        }
     }
 }
 
 - (void)onImRoomStateUpdate:(HSAudioEngineRoomState)state errorCode:(int)errorCode extendedData:(NSDictionary *)extendedData {
     DDLogInfo(@"onImRoomStateUpdate:%@, errorCode:%@", @(state), @(errorCode));
+    if (state == HSAudioEngineStateConnected) {
+       if (!self.isSentEnterRoom) {
+           self.isSentEnterRoom = YES;
+           [self sendEnterRoomMsg];
+           [self onHandleEnteredRoom];
+       }
+   }
     
 //    if (state == HSAudioEngineStateDisconnected || state == HSAudioEngineStateConnecting) {
 //        if (self.isLoginedIm) {

@@ -6,7 +6,8 @@
 //
 
 #import "VolcAudioEngineImpl.h"
-#import <VolcEngineRTC/objc/rtc/ByteRTCEngineKit.h>
+#import <VolcEngineRTC/VolcEngineRTC.h>
+//#import <VolcEngineRTC/objc/rtc/ByteRTCEngineKit.h>
 #import "HSThreadUtils.h"
 
 @interface VolcAudioEngineImpl () <ByteRTCEngineDelegate, ByteRTCAudioProcessor>

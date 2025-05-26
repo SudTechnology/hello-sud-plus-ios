@@ -135,6 +135,18 @@
     connectionChangedToState:(AgoraRtmClientConnectionState)state
         reason:(AgoraRtmClientConnectionChangeReason)reason {
     DDLogWarn(@"channelName:%@, connectionChangedToState:%@, reason:%@", channelName, @(state), @(reason));
+    
+    NSDictionary *stateDic = @{
+        @(AgoraRtmClientConnectionStateDisconnected):@(HSAudioEngineStateDisconnected),
+        @(AgoraRtmClientConnectionStateConnecting):@(HSAudioEngineStateConnecting),
+        @(AgoraRtmClientConnectionStateReconnecting):@(HSAudioEngineStateConnecting),
+        @(AgoraRtmClientConnectionStateConnected):@(HSAudioEngineStateConnected),
+        @(AgoraRtmClientConnectionStateFailed):@(HSAudioEngineStateDisconnected),
+    };
+
+    if (self.mISudAudioEventListener && [self.mISudAudioEventListener respondsToSelector:@selector(onImRoomStateUpdate:errorCode:extendedData:)]) {
+        [self.mISudAudioEventListener onImRoomStateUpdate:[stateDic[@(state)]integerValue] errorCode:(int)reason extendedData:nil];
+    }
 }
 
 - (void)rtmKit:(AgoraRtmClientKit * _Nonnull)rtmKit

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SudMGPWrapper.h"
+#import "SudGIPWrapper.h"
 
 typedef void(^SudGmSuccessVoidBlock)(void);
 typedef void(^SudGmSuccessStringBlock)(NSString *_Nonnull code);

@@ -58,7 +58,7 @@
 #import "WebpImageCacheService.h"
 
 /// SudMGPWrapper
-#import "SudMGPWrapper.h"
+#import "SudGIPWrapper.h"
 #import "SudFSMMGListener.h"
 /// Page
 #import "CommonRoomModelHeader.h"
@@ -87,5 +87,6 @@
 
 #import "LoginService.h"
 #import "SettingsService.h"
+
 
 #endif /* PrefixHeader_pch */

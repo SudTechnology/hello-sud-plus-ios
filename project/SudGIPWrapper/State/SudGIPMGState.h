@@ -1,5 +1,5 @@
 //
-//  SudMGPMGState.h
+//  SudGIPMGState.h
 //  HelloSud-iOS
 //
 // Copyright © Sud.Tech (https://sud.tech)
@@ -9,9 +9,10 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "SudMGPMGRocketState.h"
-#import "SudMGPMGBaseballState.h"
-#import "SudMGPMGAudio3dState.h"
+#import <SudGIP/SudGIP-umbrella.h>
+#import "SudGIPMGRocketState.h"
+#import "SudGIPMGBaseballState.h"
+#import "SudGIPMGAudio3dState.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -822,6 +823,7 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @end
 @interface MgCommonGameRuleModel:NSObject
 @property(nonatomic, strong)MgCommonGameRuleGameModeModel * gameMode;
+@property(nonatomic, assign)NSInteger mode_ex;
 @end
 #pragma mark - MG_COMMON_GAME_IS_APP_CHIP
 @interface MgCommonGameIsAppChipModel:NSObject

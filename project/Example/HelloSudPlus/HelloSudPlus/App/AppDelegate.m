@@ -17,8 +17,6 @@
 #import <NIMSDK/NIMSDK.h>
 #import "SDImageSVGNativeCoder.h"
 #import <AFNetworking/AFNetworking.h>
-#import <SudMGP/ISudCfg.h>
-//#import <SudMGP/ISudLogger.h>
 #import <AFNetworking/AFNetworking.h>
 
 @interface AppDelegate ()<BuglyDelegate> {
@@ -79,9 +77,9 @@
 
 /// 加载嵌入游戏包
 - (void)loadGameEmbedPackage {
-//    [SudMGP setLogLevel:SudLogVERBOSE];
-//    [[SudMGP getCfg] addEmbeddedMGPkg:1583284410804244481 mgPath:@"customrockets.sp"];
-//    [[SudMGP getCfg] addEmbeddedMGPkg:1594978084509368321 mgPath:@"baseball.rpk"];
+//    [SudGIP setLogLevel:SudLogVERBOSE];
+//    [[SudGIP getCfg] addEmbeddedMGPkg:1583284410804244481 mgPath:@"customrockets.sp"];
+//    [[SudGIP getCfg] addEmbeddedMGPkg:1594978084509368321 mgPath:@"baseball.rpk"];
 }
 
 - (void)configBugly {
@@ -332,16 +330,16 @@
 
 @implementation  AVAudioSession (SudTestAVAudioSession)
 
-+ (void)load
-{
-    swizzleMethod([self class], @selector(setActive:error:), @selector(sud_test_setActive:error:));
-    swizzleMethod([self class], @selector(setActive:withOptions:error:), @selector(sud_test_setActive:withOptions:error:));
-    swizzleMethod([self class], @selector(overrideOutputAudioPort:error:), @selector(sud_test_overrideOutputAudioPort:error:));
-    
-    swizzleMethod([self class], @selector(setCategory:error:), @selector(sud_test_setCategory:error:));
-    swizzleMethod([self class], @selector(setCategory:withOptions:error:), @selector(sud_test_setCategory:withOptions:error:));
-    swizzleMethod([self class], @selector(setCategory:mode:options:error:), @selector(sud_test_setCategory:mode:options:error:));
-}
+//+ (void)load
+//{
+//    swizzleMethod([self class], @selector(setActive:error:), @selector(sud_test_setActive:error:));
+//    swizzleMethod([self class], @selector(setActive:withOptions:error:), @selector(sud_test_setActive:withOptions:error:));
+//    swizzleMethod([self class], @selector(overrideOutputAudioPort:error:), @selector(sud_test_overrideOutputAudioPort:error:));
+//    
+//    swizzleMethod([self class], @selector(setCategory:error:), @selector(sud_test_setCategory:error:));
+//    swizzleMethod([self class], @selector(setCategory:withOptions:error:), @selector(sud_test_setCategory:withOptions:error:));
+//    swizzleMethod([self class], @selector(setCategory:mode:options:error:), @selector(sud_test_setCategory:mode:options:error:));
+//}
 
 
 void swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelector)

@@ -1,11 +1,11 @@
 //
-//  SudMGPAPPState.m
+//  SudGIPAPPState.m
 //  SudMGPWrapper
 //
 //  Created by kaniel on 2022/7/4.
 //
 
-#import "SudMGPAPPRocketState.h"
+#import "SudGIPAPPRocketState.h"
 #import <MJExtension/MJExtension.h>
 
 

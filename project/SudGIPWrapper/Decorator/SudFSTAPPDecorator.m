@@ -9,7 +9,7 @@
 
 #import "SudFSTAPPDecorator.h"
 #import <MJExtension/MJExtension.h>
-#import "SudMGPAPPState.h"
+#import "SudGIPAPPState.h"
 
 @implementation SudFSTAPPDecorator
 

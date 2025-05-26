@@ -7,10 +7,7 @@
 
 #import "BaseSceneViewController+Game.h"
 #import "BaseSceneViewController+Voice.h"
-#import <SudMGP/SudMGP-umbrella.h>
 #import "RocketSelectAnchorView.h"
-#import <SudMGP/SudMGP-umbrella.h>
-#import <SudMGP/SudLoadMGMode.h>
 
 
 @implementation BaseSceneViewController (Game)
@@ -57,8 +54,8 @@
 #endif
     // 控制SDK游戏加载背景
     BOOL isShowSDKLoadingBackground = [self showSudMGPLoadingGameBackground];
-    [[SudMGP getCfg] setShowLoadingGameBg:isShowSDKLoadingBackground];
-    [[SudMGP getCfg] setShowCustomLoading:self.showCustomLoadingView];
+    [[SudGIP getCfg] setShowLoadingGameBg:isShowSDKLoadingBackground];
+    [[SudGIP getCfg] setShowCustomLoading:self.showCustomLoadingView];
 
     SudGameLoadConfigModel *configModel = SudGameLoadConfigModel.new;
     configModel.appId = appID;

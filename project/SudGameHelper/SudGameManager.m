@@ -7,8 +7,6 @@
 //
 
 #import "SudGameManager.h"
-#import <SudMGP/SudInitSDKParamModel.h>
-#import <SudMGP/SudLoadMGParamModel.h>
 
 @interface SudGameManager()
 /// 游戏事件处理对象
@@ -43,7 +41,7 @@
     __weak typeof(self) weakSelf = self;
     [self.sudGameEventHandler onGetCode:configModel.userId success:^(NSString * _Nonnull code) {
         NSLog(@"on getCode success");
-        [weakSelf initSudMGPSDK:configModel code:code success:success fail:fail];
+        [weakSelf initSudGIPSDK:configModel code:code success:success fail:fail];
     } fail:fail];
 }
 
@@ -56,7 +54,7 @@
 #pragma mark --- private
 
 /// 初始化游戏SudMDP SDK
-- (void)initSudMGPSDK:(SudGameLoadConfigModel *)configModel
+- (void)initSudGIPSDK:(SudGameLoadConfigModel *)configModel
                  code:(NSString *)code
               success:(SudGmSuccessVoidBlock)success
                  fail:(SudGmFailedBlock)fail  {
@@ -70,15 +68,15 @@
         return;
     }
     /// Show how to embed a local pkg in the project
-    //    [[SudMGP getCfg]addEmbeddedMGPkg:1763401430010871809 mgPath:@"GreedyStar_1.0.0.1.sp"];
+    //    [[SudGIP getCfg]addEmbeddedMGPkg:1763401430010871809 mgPath:@"GreedyStar_1.0.0.1.sp"];
     
-    // 2. 初始化SudMGP SDK<SudMGP initSDK>
-    // 2. Initialize the SudMGP SDK <SudMGP initSDK>
+    // 2. 初始化SudMGP SDK<SudGIP initSDK>
+    // 2. Initialize the SudMGP SDK <SudGIP initSDK>
     SudInitSDKParamModel *paramModel = SudInitSDKParamModel.new;
     paramModel.appId = configModel.appId;
     paramModel.appKey = configModel.appKey;
     paramModel.isTestEnv = configModel.isTestEnv;
-    [SudMGP initSDK:paramModel listener:^(int retCode,NSString * _Nonnull retMsg) {
+    [SudGIP initSDK:paramModel listener:^(int retCode,NSString * _Nonnull retMsg) {
         
         if (retCode != 0) {
             NSLog(@"ISudFSMMG:initGameSDKWithAppID init sdk failed :%@(%@)", retMsg, @(retCode));
@@ -126,8 +124,8 @@
     // 必须配置当前登录用户
     // The current login user must be configured
     [self.sudGameEventHandler.sudFSMMGDecorator setCurrentUserId:configModel.userId];
-    // 3. 加载SudMGP SDK<SudMGP loadMG>，注：客户端必须持有iSudFSTAPP实例
-    // 3. Load SudMGP SDK<SudMGP loadMG>. Note: The client must hold the iSudFSTAPP instance
+    // 3. 加载SudMGP SDK<SudGIP loadMG>，注：客户端必须持有iSudFSTAPP实例
+    // 3. Load SudMGP SDK<SudGIP loadMG>. Note: The client must hold the iSudFSTAPP instance
     SudLoadMGParamModel *paramModel = SudLoadMGParamModel.new;
     paramModel.userId = configModel.userId;
     paramModel.roomId = configModel.roomId;
@@ -136,7 +134,7 @@
     paramModel.language = configModel.language;
     paramModel.gameViewContainer = configModel.gameView;
     paramModel.authorizationSecret = configModel.authorizationSecret;
-    id <ISudFSTAPP> iSudFSTAPP = [SudMGP loadMG:paramModel fsmMG:self.sudGameEventHandler.sudFSMMGDecorator];
+    id <ISudFSTAPP> iSudFSTAPP = [SudGIP loadMG:paramModel fsmMG:self.sudGameEventHandler.sudFSMMGDecorator];
     if (!iSudFSTAPP) {
         if (fail){
             fail(-1, @"loadMG error, please check detail from console");

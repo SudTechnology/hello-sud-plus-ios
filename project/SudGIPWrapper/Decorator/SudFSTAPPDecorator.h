@@ -8,12 +8,7 @@
 //
 
 #import <Foundation/Foundation.h>
-/// SudMGPSDK
-#import <SudMGP/ISudFSMMG.h>
-#import <SudMGP/ISudFSTAPP.h>
-#import <SudMGP/SudMGP.h>
-#import <SudMGP/ISudFSMStateHandle.h>
-#import "SudMGPAPPState.h"
+#import "SudGIPAPPState.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

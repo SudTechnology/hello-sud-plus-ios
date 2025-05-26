@@ -1,11 +1,11 @@
 //
-//  SudMGPAPPState.m
+//  SudGIPAPPState.m
 //  SudMGPWrapper
 //
 //  Created by kaniel on 2022/7/4.
 //
 
-#import "SudMGPAPPState.h"
+#import "SudGIPAPPState.h"
 #import <MJExtension/MJExtension.h>
 
 @implementation AppCommonGameDiscoAction

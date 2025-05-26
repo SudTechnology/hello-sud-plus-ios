@@ -196,14 +196,6 @@
     [[AsyncCallWrapper sharedInstance] addOperationWithBlock:^{
         
         [SudAgoraRtmManager.sharedInstance sendXRoomCommand:self.mRoomID command:command listener:listener];
-        
-//        AgoraRtmMessage *msg = AgoraRtmMessage.new;
-//        msg.text = command;
-//        [self.mRtmChannel sendMessage:msg completion:^(AgoraRtmSendChannelMessageErrorCode errorCode) {
-//            if (listener) {
-//                listener((int)errorCode);
-//            }
-//        }];
     }];
 }
 

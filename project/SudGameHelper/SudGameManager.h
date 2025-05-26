@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SudMGPWrapper.h"
+#import "SudGIPWrapper.h"
 #import "SudGameBaseEventHandler.h"
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,8 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 参考文档时序图：sud-mgp-doc(https://github.com/SudTechnology/sud-mgp-doc)
 /// 执行步骤：
 /// 1. 请求业务服务接口获取游戏初始化SDK需要的code码<getCode>
-/// 2. 初始化SudMGP SDK<SudMGP initSDK>
-/// 3. 加载SudMGP SDK<SudMGP loadMG>
+/// 2. 初始化SudMGP SDK<SudGIP initSDK>
+/// 3. 加载SudMGP SDK<SudGIP loadMG>
 /// Step 2: Game Login
 /// The client-side of the integration calls the getCode method on the server-side of the integration to obtain a short-term token code.
 /// Please refer to the sequence diagram in the documentation: sud-mgp-doc (https://github.com/SudTechnology/sud-mgp-doc)

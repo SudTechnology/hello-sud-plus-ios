@@ -1,5 +1,5 @@
 //
-//  SudMGPMGState.h
+//  SudGIPMGState.h
 //  HelloSud-iOS
 //
 // Copyright © Sud.Tech (https://sud.tech)

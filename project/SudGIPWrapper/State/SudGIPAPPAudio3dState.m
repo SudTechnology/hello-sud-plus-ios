@@ -1,11 +1,11 @@
 //
-//  SudMGPAPPState.m
+//  SudGIPAPPState.m
 //  SudMGPWrapper
 //
 //  Created by kaniel on 2022/7/4.
 //
 
-#import "SudMGPAPPAudio3dState.h"
+#import "SudGIPAPPAudio3dState.h"
 #import <MJExtension/MJExtension.h>
 
 /// 设置房间配置数据模型

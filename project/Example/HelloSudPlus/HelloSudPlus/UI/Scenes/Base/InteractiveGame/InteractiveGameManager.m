@@ -4,8 +4,6 @@
 //
 
 #import "InteractiveGameManager.h"
-
-#import <SudMGP/ISudCfg.h>
 #import "RocketSelectAnchorView.h"
 #import "InteractiveGameLoadingView.h"
 #import "handler/InteractiveGameBaseHandler.h"
@@ -193,7 +191,7 @@
 - (void)loadGame {
     
     // 自定义进度条
-    [[SudMGP getCfg] setShowCustomLoading:YES];
+    [[SudGIP getCfg] setShowCustomLoading:YES];
     
     NSString *appID = AppService.shared.configModel.sudCfg.appId;
     NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
