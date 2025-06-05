@@ -119,16 +119,22 @@
     NSString *appKey = AppService.shared.configModel.sudCfg.appKey;
     if (appID.length == 0 || appKey.length == 0) {
         [ToastUtil show:@"Game appID or appKey is empty"];
-        fail(-1, @"appID is empty");
+        if (fail) {
+            fail(-1, @"appID is empty");
+        }
         return;
     }
     WeakSelf
     [GameService.shared reqGameLoginWithAppId:appID success:^(RespGameInfoModel *gameInfo) {
-        success(gameInfo.code);
+        if (success) {
+            success(gameInfo.code);
+        }
     }                                    fail:^(NSError *error) {
         [ToastUtil show:error.debugDescription];
         [weakSelf.interactiveGameManager clearLoadGameState];
-        fail(error.code, error.debugDescription);
+        if (fail) {
+            fail(error.code, error.debugDescription);
+        }
     }];
 }
 @end

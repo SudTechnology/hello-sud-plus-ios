@@ -27,10 +27,14 @@
     // 请求业务服务器刷新令牌 Code更新
     [GameService.shared reqGameLoginWithAppId:nil success:^(RespGameInfoModel *gameInfo) {
         // 回调成功结果
-        success(gameInfo.code);
+        if (success) {
+            success(gameInfo.code);
+        }
     }                                    fail:^(NSError *error) {
         [ToastUtil show:error.debugDescription];
-        fail(error.code, error.debugDescription);
+        if (fail) {
+            fail(error.code, error.debugDescription);
+        }
     }];
 }
 

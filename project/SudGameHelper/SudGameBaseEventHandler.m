@@ -45,7 +45,9 @@
 
 - (void)onGetCode:(nonnull NSString *)userId success:(nonnull SudGmSuccessStringBlock)success fail:(nonnull SudGmFailedBlock)fail {
     NSAssert(NO, @"Please implement the onGetCode callback of SudGameBaseEventHandler.");
-    fail(-1, @"Please implement the onGetCode callback of SudGameBaseEventHandler.");
+    if (fail) {
+        fail(-1, @"Please implement the onGetCode callback of SudGameBaseEventHandler.");
+    }
 }
 
 - (nonnull GameCfgModel *)onGetGameCfg {
@@ -120,7 +122,9 @@
         // 调用游戏接口更新令牌
         // Call game interface update token
         [self.sudFSTAPPDecorator updateCode:code];
-    } fail:nil];
+    } fail:^(NSInteger errCode, NSString * _Nullable errMsg) {
+        NSLog(@"onExpireCode error:%@(%@)", errMsg, @(errCode));
+    }];
 
 }
 
@@ -136,6 +140,5 @@
 - (void)onGameDestroyed {
     NSLog(@"Game destroyed");
 }
-
 
 @end

@@ -231,9 +231,12 @@
 
 #pragma mark -------------- TRTCAudioFrameDelegate -----------------
 - (void)onCapturedRawAudioFrame:(TRTCAudioFrame *)frame {
+    
+    NSData *audioData = frame.data.copy;// copy一份新数据，避免上层复用buffer问题
     [HSThreadUtils runOnUiThread:^{
         if (self.mISudAudioEventListener != nil && [self.mISudAudioEventListener respondsToSelector:@selector(onCapturedPCMData:)]) {
-            [self.mISudAudioEventListener onCapturedPCMData:frame.data];
+            DDLogDebug(@"onCapturedRawAudioFrame:%@", @(audioData.length));
+            [self.mISudAudioEventListener onCapturedPCMData:audioData];
         }
     }];
 }
