@@ -202,6 +202,7 @@
 		6C6DFD2C2AE373E800EC97FB /* RoomGiftShowcaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DFD2B2AE373E800EC97FB /* RoomGiftShowcaseView.m */; };
 		6C6DFD2F2AE37E9200EC97FB /* RoomGiftcaseColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DFD2D2AE37E9200EC97FB /* RoomGiftcaseColCell.m */; };
 		6C6DFD322AE3E27000EC97FB /* RoomGiftcaseRoleColCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DFD302AE3E27000EC97FB /* RoomGiftcaseRoleColCell.m */; };
+		6C7767752DBF257000CA3A85 /* SudAgoraMediaPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7767742DBF257000CA3A85 /* SudAgoraMediaPlayerManager.m */; };
 		6C7CB61928C5E940003A19A8 /* MyNFTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */; };
 		6C7E0CE62875EB0500DBA208 /* RespDiscoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E0CE52875EB0500DBA208 /* RespDiscoModel.m */; };
 		6C84E6D82AC1310F002F1E0C /* Audio3dConfigStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C84E6D62AC1310E002F1E0C /* Audio3dConfigStateModel.m */; };
@@ -293,6 +294,7 @@
 		6CEBC0D12B57CDCB0047B3D4 /* QSGameItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEBC0D02B57CDCB0047B3D4 /* QSGameItemModel.m */; };
 		6CEF766827F5A22000A12220 /* MoreSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF766727F5A22000A12220 /* MoreSettingViewController.m */; };
 		6CF3E1CF2A3C5903002FADDA /* InteractiveGameBigEaterHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF3E1CE2A3C5903002FADDA /* InteractiveGameBigEaterHandler.m */; };
+		6CF63E642D8BF7B5004F0A78 /* SudAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF63E632D8BF7B5004F0A78 /* SudAudioPlayer.m */; };
 		97B574F54C3D99C01448A63D /* Pods_HelloSudPlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E54FD0EF02668C7E606552 /* Pods_HelloSudPlus.framework */; };
 		BC210007DE8200E08B5F7786 /* InteractiveGameBaseballHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2105C765AF62922C05A556 /* InteractiveGameBaseballHandler.m */; };
 		BC21003E1833458539047CE2 /* LeagueEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC210A169901E482D9705365 /* LeagueEnterViewController.m */; };
@@ -837,6 +839,8 @@
 		6C6DFD302AE3E27000EC97FB /* RoomGiftcaseRoleColCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomGiftcaseRoleColCell.m; sourceTree = "<group>"; };
 		6C6DFD312AE3E27000EC97FB /* RoomGiftcaseRoleColCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomGiftcaseRoleColCell.h; sourceTree = "<group>"; };
 		6C75F36A27C348A50019BB74 /* KeyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHeader.h; sourceTree = "<group>"; };
+		6C7767732DBF257000CA3A85 /* SudAgoraMediaPlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudAgoraMediaPlayerManager.h; sourceTree = "<group>"; };
+		6C7767742DBF257000CA3A85 /* SudAgoraMediaPlayerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudAgoraMediaPlayerManager.m; sourceTree = "<group>"; };
 		6C7CB61728C5DE73003A19A8 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
 		6C7CB61828C5E940003A19A8 /* MyNFTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNFTListViewController.m; sourceTree = "<group>"; };
 		6C7E0CE42875EB0500DBA208 /* RespDiscoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RespDiscoModel.h; sourceTree = "<group>"; };
@@ -1023,6 +1027,8 @@
 		6CEF766727F5A22000A12220 /* MoreSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreSettingViewController.m; sourceTree = "<group>"; };
 		6CF3E1CD2A3C5903002FADDA /* InteractiveGameBigEaterHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractiveGameBigEaterHandler.h; sourceTree = "<group>"; };
 		6CF3E1CE2A3C5903002FADDA /* InteractiveGameBigEaterHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractiveGameBigEaterHandler.m; sourceTree = "<group>"; };
+		6CF63E622D8BF7B5004F0A78 /* SudAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudAudioPlayer.h; sourceTree = "<group>"; };
+		6CF63E632D8BF7B5004F0A78 /* SudAudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudAudioPlayer.m; sourceTree = "<group>"; };
 		79E54FD0EF02668C7E606552 /* Pods_HelloSudPlus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloSudPlus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8469DECA466E49043668F768 /* Pods-HelloSud-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloSud-iOS.debug.xcconfig"; path = "Target Support Files/Pods-HelloSud-iOS/Pods-HelloSud-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC21001E47A02C2A2F8EE39B /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
@@ -2154,6 +2160,8 @@
 				6C1D007727BA0400000F0998 /* AgoraAudioEngineImpl.m */,
 				6C58327C2CBE0BD6000DA123 /* SudAgoraRtmManager.h */,
 				6C58327D2CBE0BD6000DA123 /* SudAgoraRtmManager.m */,
+				6C7767732DBF257000CA3A85 /* SudAgoraMediaPlayerManager.h */,
+				6C7767742DBF257000CA3A85 /* SudAgoraMediaPlayerManager.m */,
 			);
 			path = Agora;
 			sourceTree = "<group>";
@@ -2698,6 +2706,7 @@
 		6CEBC0832B57CC590047B3D4 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				6CF63E612D8BF793004F0A78 /* AudioPlayer */,
 				6CB3810B2C8C476700793AE3 /* AudioCapture */,
 				6CEBC0842B57CC590047B3D4 /* Extension */,
 				6CEBC0972B57CC590047B3D4 /* Network */,
@@ -2784,6 +2793,15 @@
 				6CF3E1CE2A3C5903002FADDA /* InteractiveGameBigEaterHandler.m */,
 			);
 			path = BigEater;
+			sourceTree = "<group>";
+		};
+		6CF63E612D8BF793004F0A78 /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				6CF63E622D8BF7B5004F0A78 /* SudAudioPlayer.h */,
+				6CF63E632D8BF7B5004F0A78 /* SudAudioPlayer.m */,
+			);
+			path = AudioPlayer;
 			sourceTree = "<group>";
 		};
 		BC21001B5F7B2F0EA130BEDF /* Model */ = {
@@ -3297,6 +3315,7 @@
 				443BA4E3280D3BF8008B2BFB /* OrderChooseUsersCell.m in Sources */,
 				44D9F3B6281009DE000B14B5 /* GameConfigPopCell.m in Sources */,
 				6CEBC0BA2B57CC590047B3D4 /* BaseTextView.m in Sources */,
+				6C7767752DBF257000CA3A85 /* SudAgoraMediaPlayerManager.m in Sources */,
 				4455AD9B27EAC658001516EE /* HomeFooterReusableView.m in Sources */,
 				6C460832286AD41B005C99EF /* DiscoRankViewController.m in Sources */,
 				44D9F3A5280FB0DB000B14B5 /* CustomRoomViewController.m in Sources */,
@@ -3493,6 +3512,7 @@
 				BC210379CA8856A0C91448E4 /* MyCell.m in Sources */,
 				BC2106C085BCFA772D1B9F96 /* AboutViewController.m in Sources */,
 				6CB381052C8B279200793AE3 /* ModelAiRoomViewController.m in Sources */,
+				6CF63E642D8BF7B5004F0A78 /* SudAudioPlayer.m in Sources */,
 				BC210E8DA59477CC32152825 /* MyNFTColCell.m in Sources */,
 				BC210B0390E117B09344D025 /* HsNFTPreferences.m in Sources */,
 				6CEBC0BB2B57CC590047B3D4 /* BaseCollectionViewCell.m in Sources */,

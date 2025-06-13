@@ -8,6 +8,7 @@
 #import "BaseSceneViewController+Voice.h"
 #import "BaseSceneViewController.h"
 #import "IMRoomManager.h"
+#import "SudAudioPlayer.h"
 
 @implementation BaseSceneViewController (Voice)
 
@@ -133,21 +134,80 @@
     [AudioEngineFactory.shared.audioEngine stopPlayingStream:streamID];
 }
 
+/// 同步游戏声音状态
+- (void)syncGameMicState:(NSNumber *)soundLevel userId:(NSString *)userId {
+    
+    if (!self.gameEventHandler.isOpenAiAgent) {
+        return;
+    }
+
+    NSInteger currentVolume = soundLevel.integerValue;
+    [self.gameEventHandler handleUserPlayerAudioState:userId state:currentVolume > 0 ? SudAudioItemPlayerStatePlaying : SudAudioItemPlayerStateFinished];
+}
 #pragma mark delegate
+
+- (void)handleMicStateTimeout {
+    NSTimeInterval currentTs = [[NSDate date]timeIntervalSince1970];
+    NSDictionary *dicTemp = self.userMicUpdateTimeMap.copy;
+    
+    NSMutableDictionary *stopSoundLevels = NSMutableDictionary.new;
+    for (NSString *key in dicTemp.allKeys) {
+        NSTimeInterval lastUpdateTs = [dicTemp[key] doubleValue];
+        // 超过指定时间，给游戏发送暂停
+        if (currentTs - lastUpdateTs > 2) {
+            stopSoundLevels[key] = @(0);
+            [self.userMicUpdateTimeMap removeObjectForKey:key];
+        }
+    }
+    if (stopSoundLevels.count > 0) {
+        DDLogDebug(@"send stop sound levels:%@", stopSoundLevels);
+        [self handleRemoteSoundLevelUpdate:stopSoundLevels];
+    }
+    if (self.userMicUpdateTimeMap.count == 0) {
+        [self.micStateTimer stopTimer];
+        self.micStateTimer = nil;
+    }
+}
+
+
+/// 监控超时未收到的音量信息，并及时停止
+- (void)updateRemoteSoundTimeout:(NSDictionary<NSString *, NSNumber *> *)soundLevels {
+    if (!self.micStateTimer) {
+        WeakSelf
+        self.micStateTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
+            [weakSelf handleMicStateTimeout];
+        }];
+    }
+    for (NSString *userId in soundLevels.allKeys) {
+        NSTimeInterval ts = [[NSDate date]timeIntervalSince1970];
+        self.userMicUpdateTimeMap[userId] = @(ts);
+    }
+}
+
+- (void)handleRemoteSoundLevelUpdate:(NSDictionary<NSString *, NSNumber *> *)soundLevels {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_REMOTE_VOICE_VOLUME_CHANGED object:nil userInfo:@{@"dicVolume": soundLevels}];
+    for (NSString *userId in soundLevels.allKeys) {
+        [self syncGameMicState:soundLevels[userId] userId:userId];
+    }
+}
 
 /// 捕获本地音量变化
 /// @param soundLevel 本地音量级别，取值范围[0, 100]
 - (void)onCapturedSoundLevelUpdate:(NSNumber *)soundLevel {
     if (soundLevel.intValue > 0) {
-//        NSLog(@"local voice:%@", soundLevel);
         [[NSNotificationCenter defaultCenter] postNotificationName:NTF_LOCAL_VOICE_VOLUME_CHANGED object:nil userInfo:@{@"volume": soundLevel}];
     }
+
+    [self syncGameMicState:soundLevel userId:AppService.shared.login.loginUserInfo.userID];
 }
 
 /// 捕获远程音流音量变化
 /// @param soundLevels [流ID: 音量]，音量取值范围[0, 100]
 - (void)onRemoteSoundLevelUpdate:(NSDictionary<NSString *, NSNumber *> *)soundLevels {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_REMOTE_VOICE_VOLUME_CHANGED object:nil userInfo:@{@"dicVolume": soundLevels}];
+    
+    [self updateRemoteSoundTimeout:soundLevels];
+    [self handleRemoteSoundLevelUpdate:soundLevels];
 }
 
 /// 房间流更新 增、减，需要收到此事件后播放对应流
@@ -160,9 +220,12 @@
         case HSAudioEngineUpdateTypeAdd:
             for (AudioStream *item in streamList) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NTF_STREAM_INFO_CHANGED object:nil userInfo:@{kNTFStreamInfoKey: item}];
+                
+                [self.gameEventHandler handleUserPlayerAudioState:item.userID state:SudAudioItemPlayerStatePlaying];
             }
             break;
         case HSAudioEngineUpdateTypeDelete:
+
             break;
     }
 }
@@ -217,5 +280,7 @@
 
 - (void)onCapturedPCMData:(NSData *)data {
     [self.gameEventHandler.sudFSTAPPDecorator pushAudio:data];
+    // 推送给AI
+    [self.gameEventHandler pushAudioToAiAgent:data];
 }
 @end

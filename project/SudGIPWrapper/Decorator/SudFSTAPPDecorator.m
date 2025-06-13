@@ -349,6 +349,19 @@
     [self notifyStateChange:APP_COMMON_AI_MODEL_MESSAGE dataJson:model.mj_JSONString];
 }
 
+
+/// app通知游戏更新麦克风状态 APP_COMMON_GAME_PLAYER_MIC_STATE
+- (void)notifyAppCommonGamePlayerMicState:(AppCommonGamePlayerMicState *)model {
+    [self notifyStateChange:APP_COMMON_GAME_PLAYER_MIC_STATE dataJson:model.mj_JSONString];
+}
+
+/// 设置游戏中的大模型AI玩家 APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS
+/// @param appCommonGameAddAiPlayersModel  配置信息
+- (void)notifyAppCommonGameAddBigScaleModelAPlayers:(AppCommonGameAddBigScaleModelAiPlayersModel *)appCommonGameAddAiPlayersModel {
+
+    NSString *jsonStr = [appCommonGameAddAiPlayersModel mj_JSONString];
+    [self notifyStateChange:APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS dataJson:jsonStr];
+}
 #pragma mark - 互动礼物
 
 /// 礼物配置文件 APP_CUSTOM_ROCKET_CONFIG

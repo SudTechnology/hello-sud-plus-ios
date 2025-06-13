@@ -7,8 +7,114 @@
 //
 
 #import "BaseSceneGameEventHandler.h"
+#import "SudAudioPlayer.h"
+
+
+@interface AiRoomChatMsgModel : NSObject
+// 用户ID
+@property(nonatomic, strong)NSString *uid;
+/// base64音频数据
+@property(nonatomic, strong)NSString *audioData;
+/// 聊天内容
+@property(nonatomic, strong)NSString *content;
+@end
+
+@implementation AiRoomChatMsgModel
+
+@end
+
+@interface BaseSceneGameEventHandler()
+
+// AI代理人
+@property(nonatomic, strong) id<ISudAiAgent> aiAgent;
+// 用户播放语音状态，用于同步状态给游戏
+@property(nonatomic, strong)NSMutableDictionary *userAudioPlayStateMap;
+/// 游戏玩家麦克风状态是否准备好
+@property(nonatomic, assign)BOOL isGamePlayerMicStateOk;
+@end
+
 
 @implementation BaseSceneGameEventHandler
+
+- (BOOL)isOpenAiAgent {
+    return self.aiAgent != nil;
+}
+
+
+- (void)pushAudioToAiAgent:(NSData *)pcmData {
+    if (self.aiAgent) {
+        [self.aiAgent pushAudio:pcmData];
+    }
+}
+
+- (void)pauseAudioToAiAgent {
+    if (!self.aiAgent) {
+        return;
+    }
+    [self.aiAgent pauseAudio];
+}
+
+- (void)sendTextToAiAgent:(NSString *)text {
+    if (self.aiAgent) {
+        [self.aiAgent sendText:text];
+    }
+}
+
+
+- (void)createAiAgent:(id <ISudFSTAPP> )iSudFSTAPP {
+    // 振魂石 和 飞行棋
+    if (self.loadConfigModel.gameId == 1890346721291059202L || self.loadConfigModel.gameId == 1468180338417074177L) {
+        self.aiAgent = [iSudFSTAPP getAiAgent];
+        WeakSelf
+        
+        /// 监听AI大模型互动信息
+        [self.aiAgent setOnRoomChatMessageListener:^(NSString * _Nonnull json) {
+
+            [weakSelf handleAiRoomChatMsg:json];
+        }];
+
+    }
+}
+
+
+/// 处理AI信息
+/// - Parameter json: json description
+- (void)handleAiRoomChatMsg:(NSString *)json {
+    
+    WeakSelf
+    AiRoomChatMsgModel *aiRoomChatMsgModel = [AiRoomChatMsgModel mj_objectWithKeyValues:json];
+    NSString *audioDataBase64 = aiRoomChatMsgModel.audioData;// infoDic[@"audioData"];
+    NSString *playerId = aiRoomChatMsgModel.uid;// infoDic[@"userId"];
+    if (audioDataBase64) {
+        NSData *audioData = [[NSData alloc]initWithBase64EncodedString:audioDataBase64 options:0];
+        BOOL isPlyeByRtc = YES;// 是否选用RTC混音播放器来播放AI声音
+        if (isPlyeByRtc) {
+
+            id audioEngine = AudioEngineFactory.shared.audioEngine;
+            // rtc 如果支持本地播放，则选用，使用RTC本地混音播放
+            if ([audioEngine respondsToSelector:@selector(playLocalAudio:)]) {
+                
+                SudRtcAudioItem *audioItem = [[SudRtcAudioItem alloc]init];
+                audioItem.audioData = audioData;
+                audioItem.extra = playerId;
+                audioItem.playStateChangedBlock = ^(SudRtcAudioItem *item, SudRtcAudioItemPlayerState playerState) {
+                    [weakSelf handleUserPlayerAudioState:item.extra state:playerState];
+                };
+                [audioEngine playLocalAudio:audioItem];
+                return;
+            }
+        }
+        /// 常规系统声音播放器播放
+        SudAudioItem *audioItem = [[SudAudioItem alloc]init];
+        audioItem.audioData = audioData;
+        audioItem.extra = playerId;
+        audioItem.playStateChangedBlock = ^(SudAudioItem *item, SudAudioItemPlayerState playerState) {
+            [weakSelf handleUserPlayerAudioState:item.extra state:playerState];
+        };
+        [SudAudioPlayer.shared playeAudioMulti:audioItem];
+    }
+}
+
 
 - (GameCfgModel *)onGetGameCfg {
     return [self.vc onGetGameCfg];
@@ -42,7 +148,10 @@
 - (void)onGameStarted {
     DDLogDebug(@"onGameStarted");
     [self.vc handleGameStared];
+    /// 创建AI大模型互动
+    [self createAiAgent: self.sudFSTAPPDecorator.iSudFSTAPP];
 }
+
 
 - (void)onGameDestroyed {
     [self.vc updateGamePeopleCount];
@@ -320,13 +429,11 @@
     }];
 }
 
-- (BOOL)onGameStateChange:(id<ISudFSMStateHandle>)handle state:(NSString *)state dataJson:(NSString *)dataJson {
+- (void)onGameStateChange:(id<ISudFSMStateHandle>)handle state:(NSString *)state dataJson:(NSString *)dataJson {
     [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
     if ([state isEqualToString:@"mg_happy_goat_chat"]) {
         [self handleHappyGoatChat:dataJson];
-        return YES;
     }
-    return NO;
 }
 
 - (void)handleHappyGoatChat:(NSString *)dataJson {
@@ -402,5 +509,52 @@
         }
     }];
 
+}
+
+- (void)onGameMgCommonGamePlayerMicState:(id<ISudFSMStateHandle>)handle model:(MgCommonGamePlayerMicState *)model {
+    
+    /// 游戏是否启用了声音状态播放
+    self.isGamePlayerMicStateOk = YES;
+    for (NSString *key in self.userAudioPlayStateMap.allKeys) {
+        NSInteger state = [self.userAudioPlayStateMap[key] integerValue];
+        [self sendGamePlayerAudioState:key state:state];
+    }
+}
+
+
+/// 处理玩家语音播放状态
+/// - Parameters:
+///   - userId: userId description
+///   - state: state description
+- (void)handleUserPlayerAudioState:(NSString *)userId state:(NSInteger)state {
+    
+    // 注意忽略重复状态，不发送重复状态给游戏
+    id tempNum = self.userAudioPlayStateMap[userId];
+    if (tempNum && [tempNum integerValue] == state) {
+        return;
+    }
+    DDLogDebug(@"handleUserPlayerAudioState:%@,userId:%@", @(state), userId);
+    self.userAudioPlayStateMap[userId] = @(state);
+    [self sendGamePlayerAudioState:userId state:state];
+}
+
+/// 发送给用户声音播放状态给游戏
+- (void)sendGamePlayerAudioState:(NSString *)userId state:(NSInteger)state {
+    
+    // 没有开启AI或者游戏没有通知玩家麦克风准备好了， 别发
+    if (!self.isOpenAiAgent || !self.isGamePlayerMicStateOk) {
+        return;
+    }
+    AppCommonGamePlayerMicState *stateModel = AppCommonGamePlayerMicState.new;
+    stateModel.state = SudAudioItemPlayerStatePlaying == state ? 1 : 0;
+    stateModel.uid = userId;
+    [self.sudFSTAPPDecorator notifyAppCommonGamePlayerMicState:stateModel];
+}
+
+- (NSMutableDictionary *)userAudioPlayStateMap {
+    if (!_userAudioPlayStateMap) {
+        _userAudioPlayStateMap = [[NSMutableDictionary alloc]init];
+    }
+    return _userAudioPlayStateMap;
 }
 @end

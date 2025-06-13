@@ -63,20 +63,20 @@ target 'HelloSudPlus' do
   #pod 'TXLiteAVSDK_TRTC', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
   pod 'TXLiteAVSDK_TRTC', '~> 10.2.11418'
   # SudMGP包装类
-#    pod 'SudGIPWrapper', :path => '../../'
+    pod 'SudGIPWrapper', :path => '../../'
   # 标准版（不支持部分游戏，包体较小）
-#  pod 'SudGIP', '~> 1.6.0.1'
+#  pod 'SudGIP', '~> 1.6.1'
 #  pod 'SudGIPWrapper'
   
   # pro版本（支持全部游戏，包体会大一些）
-  pod 'SudGIP-pro', '~> 1.6.0.1'
-  pod 'SudGIPWrapper-pro'
+#  pod 'SudGIP-pro', '~> 1.6.1'
+#  pod 'SudGIPWrapper-pro'
 # 语音识别
-#pod 'SudASR', :path => '../../'
-  pod 'SudASR', '~> 1.6.0.1'
+pod 'SudASR', :path => '../../'
+#  pod 'SudASR'
 # 最基本，不包含微软
 #pod 'SudASR/Base', :path => '../../'
-#  pod 'SudASR/Base', '~> 1.6.0.1'
+#  pod 'SudASR/Base'
   # SudNFT SDK
   pod 'SudNFT', '1.0.5'
   # 分页点

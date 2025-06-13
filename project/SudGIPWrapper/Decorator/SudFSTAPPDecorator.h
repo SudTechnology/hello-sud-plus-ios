@@ -128,10 +128,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param volume  音量大小 0 到 100
 - (void)notifyAppComonOpenSoundVolume:(int)volume;
 
-/// 设置游戏上报信息扩展参数（透传）
-/// @param reportGameInfoExtras   string类型，Https服务回调report_game_info参数，最大长度1024字节，超过则截断（2022-01-21）
-- (void)notifyAppCommonReportGameInfoExtras:(NSString *)reportGameInfoExtras;
-
 /// 设置游戏中的AI玩家（2022-05-11新增） APP_COMMON_GAME_ADD_AI_PLAYERS
 /// @param appCommonGameAddAiPlayersModel  配置信息
 - (void)notifyAppCommonGameAddAIPlayers:(AppCommonGameAddAIPlayersModel *)appCommonGameAddAiPlayersModel;
@@ -204,6 +200,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// app通知游戏下发ai模型的输入 APP_COMMON_AI_MODEL_MESSAGE
 - (void)notifyAppCommonAiModelMessage:(AppCommonAiModelMessages *)model;
+
+/// app通知游戏更新麦克风状态 APP_COMMON_GAME_PLAYER_MIC_STATE
+- (void)notifyAppCommonGamePlayerMicState:(AppCommonGamePlayerMicState *)model;
+
+/// 设置游戏中的大模型AI玩家 APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS
+/// @param appCommonGameAddAiPlayersModel  配置信息
+- (void)notifyAppCommonGameAddBigScaleModelAPlayers:(AppCommonGameAddBigScaleModelAiPlayersModel *)appCommonGameAddAiPlayersModel;
 
 #pragma mark - 互动礼物<火箭>
 

@@ -89,6 +89,10 @@ static NSString *APP_COMMON_GAME_PLAYER_PROPS_CARDS = @"app_common_game_player_p
 static NSString *APP_COMMON_GAME_PLAYER_PROPS_CARDS_EFFECT = @"app_common_game_player_props_cards_effect";
 /// app通知游戏下发ai模型的输入
 static NSString *APP_COMMON_AI_MODEL_MESSAGE = @"app_common_ai_model_message";
+/// app通知游戏更新麦克风状态
+static NSString *APP_COMMON_GAME_PLAYER_MIC_STATE = @"app_common_game_player_mic_state";
+/// app通知游戏设置游戏中的大模型AI玩家
+static NSString *APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS = @"app_common_game_add_big_scale_model_ai_players";
 
 
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
@@ -371,4 +375,31 @@ static NSString *APP_COMMON_AI_MODEL_MESSAGE = @"app_common_ai_model_message";
 @property(nonatomic, strong)NSString *text;
 /// 发送的玩家id
 @property(nonatomic, strong)AppCommonAiModelAudioMessages *audio;
+@end
+
+/// app通知游戏更新麦克风状态 APP_COMMON_GAME_PLAYER_MIC_STATE
+@interface AppCommonGamePlayerMicState : NSObject
+/// 输入的文本
+@property(nonatomic, strong)NSString *uid;
+/// 0 停止说话 1 说话中
+@property(nonatomic, assign)NSInteger state;
+@end
+
+/// AI玩家用户信息
+@interface BigScaleModelAiPlayerInfoModel : NSObject
+@property(nonatomic, strong) NSString *userId;
+@property(nonatomic, strong) NSString *avatar;
+@property(nonatomic, strong) NSString *name;
+/// male female
+@property(nonatomic, strong) NSString *gender;
+/// ai性格
+@property(nonatomic, assign) NSInteger aiId;
+@end
+
+/// APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS
+@interface AppCommonGameAddBigScaleModelAiPlayersModel : NSObject
+/// 玩家列表
+@property(nonatomic, strong) NSArray <BigScaleModelAiPlayerInfoModel *> *aiPlayers;
+/// isReady  机器人加入后是否自动准备 1：自动准备，0：不自动准备 默认为1
+@property(nonatomic, assign) NSInteger isReady;
 @end

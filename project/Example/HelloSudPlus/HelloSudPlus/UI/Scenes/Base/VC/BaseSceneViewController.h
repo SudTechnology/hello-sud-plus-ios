@@ -119,6 +119,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)BaseSceneGameEventHandler *gameEventHandler;
 /// 游戏管理模块
 @property(nonatomic, strong)SudGameManager *gameManager;
+/// 音量状态缓存
+@property(nonatomic, strong)NSMutableDictionary <NSString *, NSNumber *>*cacheVolumeState;
+// 用户声音更新时间戳
+@property(nonatomic, strong)NSMutableDictionary *userMicUpdateTimeMap;
+@property(nonatomic, strong, nullable)DTTimer *micStateTimer;
 
 /// 创建服务
 - (void)createService;

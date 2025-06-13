@@ -37,4 +37,16 @@ typedef NS_ENUM(NSInteger, HSAudioEngineUpdateType) {
 @property(nonatomic, copy)NSString *streamID;
 @property(nonatomic, copy)NSString *extraInfo;
 @end
+
+
+typedef NS_ENUM(NSInteger,SudRtcAudioItemPlayerState) {
+    SudRtcAudioItemPlayerStatePlaying = 0, // 播放中
+    SudRtcAudioItemPlayerStateFinished = 1// 结束
+};
+
+@interface SudRtcAudioItem : NSObject
+@property(nonatomic, strong)NSData *audioData;
+@property(nonatomic, strong)void(^playStateChangedBlock)(SudRtcAudioItem*item, SudRtcAudioItemPlayerState playerState);
+@property(nonatomic, strong)id extra;
+@end
 NS_ASSUME_NONNULL_END

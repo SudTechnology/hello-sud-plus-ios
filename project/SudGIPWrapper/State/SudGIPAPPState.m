@@ -131,3 +131,17 @@
 /// app通知游戏下发ai模型的输入 APP_COMMON_AI_MODEL_MESSAGE
 @implementation AppCommonAiModelMessages
 @end
+
+@implementation AppCommonGamePlayerMicState
+@end
+
+/// AI玩家用户信息
+@implementation BigScaleModelAiPlayerInfoModel
+@end
+
+/// APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS
+@implementation AppCommonGameAddBigScaleModelAiPlayersModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"aiPlayers": BigScaleModelAiPlayerInfoModel.class};
+}
+@end

@@ -18,7 +18,8 @@
 
 + (NSDictionary *)turnStringToDictionary: (NSString *)turnString {
     NSData *turnData = [turnString dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *turnDic = [NSJSONSerialization JSONObjectWithData:turnData options:NSJSONReadingMutableLeaves error:nil];
+    NSError *parseError = nil;
+    NSDictionary *turnDic = [NSJSONSerialization JSONObjectWithData:turnData options:0 error:&parseError];
     return turnDic;
 }
 

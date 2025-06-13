@@ -9,6 +9,8 @@
 #import "ISudAudioEventListener.h"
 #import "AudioConfigModel.h"
 #import "AudioJoinRoomModel.h"
+#import "AudioCommon.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 /// 多媒体语音引擎接口，多引擎实现以下接口
@@ -72,7 +74,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 观众停止拉流
 - (void)stopPlayingStream:(NSString *)streamID;
-
+@optional
+- (void)playLocalAudio:(SudRtcAudioItem *)item;
 @end
 
 NS_ASSUME_NONNULL_END

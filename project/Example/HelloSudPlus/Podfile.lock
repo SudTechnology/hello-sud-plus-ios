@@ -132,16 +132,16 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SSZipArchive (2.4.3)
-  - SudASR (1.6.0.1):
-    - SudASR/Stand (= 1.6.0.1)
-  - SudASR/Base (1.6.0.1)
-  - SudASR/Stand (1.6.0.1):
+  - SudASR (1.0.0):
+    - SudASR/Stand (= 1.0.0)
+  - SudASR/Base (1.0.0)
+  - SudASR/Stand (1.0.0):
     - MicrosoftCognitiveServicesSpeech-iOS (= 1.40.0)
     - SudASR/Base
-  - SudGIP-pro (1.6.0.1)
-  - SudGIPWrapper-pro (1.6.0):
+  - SudGIPWrapper (1.6.1):
+    - SudGIPWrapper/SudGIPWrapper (= 1.6.1)
+  - SudGIPWrapper/SudGIPWrapper (1.6.1):
     - MJExtension (~> 3.4.1)
-    - SudGIP-pro
   - SudNFT (1.0.5)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -186,9 +186,8 @@ DEPENDENCIES:
   - SDWebImage (= 5.12.2)
   - SDWebImageSVGKitPlugin (= 1.4.0)
   - SDWebImageWebPCoder
-  - SudASR (~> 1.6.0.1)
-  - SudGIP-pro (~> 1.6.0.1)
-  - SudGIPWrapper-pro
+  - SudASR (from `../../`)
+  - SudGIPWrapper (from `../../`)
   - SudNFT (= 1.0.5)
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
@@ -228,9 +227,6 @@ SPEC REPOS:
     - SDWebImageSVGKitPlugin
     - SDWebImageWebPCoder
     - SSZipArchive
-    - SudASR
-    - SudGIP-pro
-    - SudGIPWrapper-pro
     - SudNFT
     - SVGKit
     - SVProgressHUD
@@ -240,6 +236,10 @@ SPEC REPOS:
     - ZIM
 
 EXTERNAL SOURCES:
+  SudASR:
+    :path: "../../"
+  SudGIPWrapper:
+    :path: "../../"
   SVGAPlayer:
     :git: https://github.com/svga/SVGAPlayer-iOS.git
     :tag: 2.5.6
@@ -282,9 +282,8 @@ SPEC CHECKSUMS:
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  SudASR: 354e729a1c687222765b192616a91a085374e7b1
-  SudGIP-pro: 0cf2e317ea3b190bdce45f49e16af02d22097c51
-  SudGIPWrapper-pro: b929313f56146be7b9b5e8c38cb75f667a1805e9
+  SudASR: a89774fdee49a84bceee2b49ac78fbb09d7cc17a
+  SudGIPWrapper: 36d5a99181f1d6f75a5b7b721e4bc2b9197370c7
   SudNFT: 086af9cc3612962507ef3beb878777d098f63446
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
@@ -296,6 +295,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 0064f6044b5d1d00c40d815455e6ee032f1cb56b
   ZIM: 1376cbc14e92c31425d91a5bd0874c0b501e4e76
 
-PODFILE CHECKSUM: 6d3701151e37df8cd7506728f71cebbb12c2a1c7
+PODFILE CHECKSUM: f3907261cc60c1e11ef5f1199b22e95257f19ff1
 
 COCOAPODS: 1.14.3

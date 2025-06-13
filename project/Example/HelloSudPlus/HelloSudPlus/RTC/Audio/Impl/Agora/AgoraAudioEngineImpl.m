@@ -11,6 +11,7 @@
 #import "HSThreadUtils.h"
 #import "AsyncCallWrapper.h"
 #import "SudAgoraRtmManager.h"
+#import "SudAgoraMediaPlayerManager.h"
 
 //@interface AgoraAudioEngineImpl()<AgoraRtcEngineDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate, AgoraAudioFrameDelegate>
 
@@ -28,6 +29,7 @@
 /// 信令通道
 //@property(nonatomic, strong)AgoraRtmChannel *mRtmChannel;
 @property(nonatomic, strong)AgoraRtcVideoCanvas *canvas;
+@property(nonatomic, strong)SudAgoraMediaPlayerManager *playerManager;
 @end
 
 @implementation AgoraAudioEngineImpl
@@ -155,6 +157,22 @@
             [engine muteAllRemoteAudioStreams:YES];
         }
     }];
+}
+
+- (SudAgoraMediaPlayerManager *)playerManager {
+    if (!_playerManager) {
+        _playerManager = SudAgoraMediaPlayerManager.new;
+    }
+    return _playerManager;
+}
+
+- (void)setMEngine:(AgoraRtcEngineKit *)mEngine {
+    _mEngine = mEngine;
+    [self.playerManager setupAgoraEngine:self.mEngine];
+}
+
+- (void)playLocalAudio:(SudRtcAudioItem *)item; {
+    [self.playerManager playLocalAudio:item];
 }
 
 /// 开始原始音频采集
@@ -365,7 +383,7 @@
     param.channel = 1;
     param.sampleRate = 16000;
     param.mode = AgoraAudioRawFrameOperationModeReadOnly;
-    param.samplesPerCall = 160;
+    param.samplesPerCall = 1024;//160;
     return param;
 }
 

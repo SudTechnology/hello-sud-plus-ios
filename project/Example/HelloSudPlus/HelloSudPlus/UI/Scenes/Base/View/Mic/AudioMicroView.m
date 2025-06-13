@@ -317,7 +317,7 @@
         }
         /// 设置玩家游戏状态
         [self.gamingImageView setHidden:true];
-        DDLogDebug(@"updateGameUI");
+//        DDLogDebug(@"updateGameUI");
         [self.gameStateLabel setHidden:true];
 
         /// 是否还在游戏中

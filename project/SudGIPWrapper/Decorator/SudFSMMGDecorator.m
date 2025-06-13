@@ -142,12 +142,7 @@
  */
 - (void)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
     NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:onGameStateChange:%@ --dataJson:%@", state, dataJson]);
-    if ([self.listener respondsToSelector:@selector(onGameStateChange:state:dataJson:)]) {
-        BOOL isHandled = [self.listener onGameStateChange:handle state:state dataJson:dataJson];
-        if (isHandled) {
-            return;
-        }
-    }
+
 
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         MGCommonPublicMessageModel *m = [MGCommonPublicMessageModel mj_objectWithKeyValues:dataJson];
@@ -803,13 +798,29 @@
             [self.listener onGameMgCommonAiMessage:handle model:m];
             return;
         }
+    } else if ([state isEqualToString:MG_COMMON_AI_LARGE_SCALE_MODEL_MSG]) {
+        
+        MgCommonAiLargeScaleModelMsg *m = [MgCommonAiLargeScaleModelMsg mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonAiLargeScaleModelMsg:model:)]) {
+            [self.listener onGameMgCommonAiLargeScaleModelMsg:handle model:m];
+            return;
+        }
+    } else if ([state isEqualToString:MG_COMMON_GAME_PLAYER_MIC_STATE]) {
+        /// 通知APP 玩家麦克风状态准备OK
+        MgCommonGamePlayerMicState *m = [MgCommonGamePlayerMicState mj_objectWithKeyValues:dataJson];
+        if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameMgCommonGamePlayerMicState:model:)]) {
+            [self.listener onGameMgCommonGamePlayerMicState:handle model:m];
+            return;
+        }
     }
     
-    else {
+    if ([self.listener respondsToSelector:@selector(onGameStateChange:state:dataJson:)]) {
+        [self.listener onGameStateChange:handle state:state dataJson:dataJson];
+    } else {
         /// 其他状态
         NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
+        [handle success:[self handleMGSuccess]];
     }
-    [handle success:[self handleMGSuccess]];
 }
 
 
@@ -822,12 +833,6 @@
  */
 - (void)onPlayerStateChange:(nullable id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
     NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:userId:%@, onPlayerStateChange:%@ --dataJson:%@", userId, state, dataJson]);
-    if ([self.listener respondsToSelector:@selector(onPlayerStateChange:userId:state:dataJson:)]) {
-        BOOL isHandled = [self.listener onPlayerStateChange:handle userId:userId state:state dataJson:dataJson];
-        if (isHandled) {
-            return;
-        }
-    }
 
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues:dataJson];
@@ -964,10 +969,14 @@
             [self.listener onGameMGCommonSelfObStatus:handle model:m];
             return;
         }
+    }
+    /// 默认派发路径
+    if ([self.listener respondsToSelector:@selector(onPlayerStateChange:userId:state:dataJson:)]) {
+        [self.listener onPlayerStateChange:handle userId:userId state:state dataJson:dataJson];
     } else {
+        [handle success:[self handleMGSuccess]];
         NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态");
     }
-    [handle success:[self handleMGSuccess]];
 }
 
 /// 游戏加载进度(loadMG)

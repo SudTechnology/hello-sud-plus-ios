@@ -25,10 +25,10 @@ PODS:
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
-  - SudGIP (1.6.0.1)
-  - SudGIPWrapper (1.6.0):
+  - SudGIP-pro (1.6.1)
+  - SudGIPWrapper-pro (1.6.1):
     - MJExtension (~> 3.4.1)
-    - SudGIP
+    - SudGIP-pro
   - SVProgressHUD (2.2.5)
   - YYText (1.0.9)
 
@@ -41,8 +41,8 @@ DEPENDENCIES:
   - MJExtension (~> 3.4.1)
   - MJRefresh (= 3.7.5)
   - SDWebImage (= 5.12.2)
-  - SudGIP (~> 1.6.0.1)
-  - SudGIPWrapper
+  - SudGIP-pro (~> 1.6.1)
+  - SudGIPWrapper-pro
   - SVProgressHUD (~> 2.2.5)
   - YYText (from `https://github.com/kaniel520/YYText.git`, tag `1.0.9`)
 
@@ -56,8 +56,8 @@ SPEC REPOS:
     - MJExtension
     - MJRefresh
     - SDWebImage
-    - SudGIP
-    - SudGIPWrapper
+    - SudGIP-pro
+    - SudGIPWrapper-pro
     - SVProgressHUD
 
 EXTERNAL SOURCES:
@@ -79,11 +79,11 @@ SPEC CHECKSUMS:
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
-  SudGIP: 271219f975938fb0c8cfc5dc2ffd2416a3788e07
-  SudGIPWrapper: 30e50374ac48835927062a12a806822c6c57b34f
+  SudGIP-pro: c97657968f3a99dfcc4d4413290935b5077ad340
+  SudGIPWrapper-pro: c0212516e276ff524fd81e4e01741c4faaa13849
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   YYText: 3ca7b42c083989328295d69e3a0ce0b0293f0a6a
 
-PODFILE CHECKSUM: 92994fe252a9da6f523052136affc5d544d9bbdb
+PODFILE CHECKSUM: 63cf292bebcf0bdd8d55ef8b728e5cdd8e0d3543
 
 COCOAPODS: 1.14.3

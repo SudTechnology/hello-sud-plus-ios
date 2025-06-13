@@ -48,6 +48,7 @@
     BOOL isTest = false;
 #if DEBUG
     [ISudAPPD e:HsAppPreferences.shared.gameEnvType];
+    [ISudAPPD d];
     if (HsAppPreferences.shared.gameEnvType != HsGameEnvTypePro) {
         isTest = YES;
     }

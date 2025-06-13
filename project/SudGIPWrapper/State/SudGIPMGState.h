@@ -168,6 +168,11 @@ static NSString *MG_COMMON_AI_MODEL_MESSAGE = @"mg_common_ai_model_message";
 /// 游戏通知app ai大模型消息展示内容
 static NSString *MG_COMMON_AI_MESSAGE = @"mg_common_ai_message";
 
+/// 通知APP ai大模型消息
+static NSString *MG_COMMON_AI_LARGE_SCALE_MODEL_MSG = @"mg_common_ai_large_scale_model_msg";
+
+/// 通知APP 玩家麦克风状态准备OK
+static NSString *MG_COMMON_GAME_PLAYER_MIC_STATE = @"mg_common_game_player_mic_state";
 #pragma mark - 你画我猜
 /// 选词中
 static NSString *MG_DG_SELECTING = @"mg_dg_selecting";
@@ -918,5 +923,30 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 @property(nonatomic, strong)NSString *uid;
 /// ai message
 @property(nonatomic, strong)NSString *content;
+@end
+
+
+#pragma mark - MG_COMMON_AI_LARGE_SCALE_MODEL_MSG
+@interface MgCommonAiLargeScaleModelUserInfo:NSObject
+/// 玩家ID
+@property(nonatomic, strong)NSString *playerId;
+/// 昵称
+@property(nonatomic, strong)NSString *nickName;
+@end
+
+@interface MgCommonAiLargeScaleModelMsg:NSObject
+/// 发送者
+@property(nonatomic, strong)MgCommonAiLargeScaleModelUserInfo *sendUser;
+/// 接收者
+@property(nonatomic, strong)NSArray<MgCommonAiLargeScaleModelUserInfo *>  *receiveUserInfos;
+/// 文本内容
+@property(nonatomic, strong)NSString *content;
+/// MP3格式 base64 数据
+@property(nonatomic, strong)NSString *audioData;
+@end
+
+/// 通知APP 玩家麦克风状态准备OK
+#pragma mark - MG_COMMON_GAME_PLAYER_MIC_STATE
+@interface MgCommonGamePlayerMicState:NSObject
 @end
 NS_ASSUME_NONNULL_END

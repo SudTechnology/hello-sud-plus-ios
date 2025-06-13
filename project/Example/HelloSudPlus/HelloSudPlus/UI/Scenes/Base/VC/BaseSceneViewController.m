@@ -55,6 +55,8 @@
 @property(nonatomic, assign) BOOL isFromCrossRoom;
 /// 机器人级别选择
 @property(nonatomic, strong)RoomRobotLevelSelectView *robotLevelSelectView;
+/// 机器AI id选择
+@property(nonatomic, strong)RoomRobotLevelSelectView *robotIdSelectView;
 /// 礼物橱窗
 @property(nonatomic, strong)RoomGiftShowcaseView *giftShowcaseView;
 @property(nonatomic, strong)NSArray<GiftModel *> *danmuGiftList;
@@ -87,7 +89,7 @@
     } else {
         self.gameRoomID = self.roomID;
     }
-
+    
     DDLogDebug(@"enter roomID:%@, roleType:%@", self.roomID, @(configModel.roleType));
 }
 
@@ -98,7 +100,7 @@
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-
+    
     [SuspendRoomView close];
     // Do any additional setup after loading the view.
     self.language = [SettingsService getCurLanguageLocale];
@@ -161,9 +163,9 @@
     [self.contentView addSubview:self.interactiveGameView];
     [self.contentView addSubview:self.closeRocketEffectView];
     [self.contentView addSubview:self.flyRocketEffectView];
-
+    
     [self.sceneView addSubview:self.gameTopShadeNode];
-
+    
     [self.sceneView addSubview:self.operatorView];
     [self.sceneView addSubview:self.gameMicContentView];
     [self.sceneView addSubview:self.gameNumLabel];
@@ -203,7 +205,7 @@
         make.bottom.mas_equalTo(-kAppSafeBottom);
         make.height.mas_equalTo(44);
     }];
-
+    
     [self.gameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
@@ -251,13 +253,13 @@
         make.width.height.mas_greaterThanOrEqualTo(0);
         make.bottom.equalTo(@(-b));
     }];
-
+    
     [self.flyRocketEffectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
         make.width.height.mas_greaterThanOrEqualTo(0);
         make.bottom.equalTo(self.closeRocketEffectView.mas_top).offset(-30);
     }];
-
+    
     [self.interactiveGameEnterView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
         make.width.height.greaterThanOrEqualTo(@80);
@@ -274,19 +276,19 @@
 
 - (void)dtConfigUI {
     [super dtConfigUI];
-
+    
     InteractiveGameBannerModel *rocketBannerModel = InteractiveGameBannerModel.new;
     rocketBannerModel.gameId = INTERACTIVE_GAME_ROCKET_ID;
     rocketBannerModel.image = @"room_rocket_enter";
     InteractiveGameBannerModel *baseballBannerModel = InteractiveGameBannerModel.new;
     baseballBannerModel.gameId = INTERACTIVE_GAME_BASEBALL_ID;
     baseballBannerModel.image = @"room_baseball_enter";
-
+    
     InteractiveGameBannerModel *bigeaterBannerModel = InteractiveGameBannerModel.new;
     bigeaterBannerModel.gameId = INTERACTIVE_GAME_BIG_EATER_ID;
     bigeaterBannerModel.image = @"room_bigeater_enter";
-
-
+    
+    
     if (HsAppPreferences.shared.appEnvType == HsAppEnvTypePro) {
         // 线上移除赛车、大胃王
         NSArray *list = @[rocketBannerModel, baseballBannerModel];
@@ -304,14 +306,14 @@
     WeakSelf
     self.contentView.hitTestChangedCallback = ^(UIView *currentView, CGPoint point) {
         // 如果场景视图没有响应事件，将该事件穿透到游戏中去
-
+        
         // 关闭机器人级别弹窗
         if (weakSelf.robotLevelSelectView) {
             if (!CGRectContainsPoint(weakSelf.robotLevelSelectView.frame, point)) {
                 [weakSelf closeRobotLevelSelectView];
             }
         }
-
+        
         
         if (weakSelf.sceneView == currentView) {
             [weakSelf onSceneViewClick];
@@ -359,11 +361,11 @@
         // 发送公屏消息
         [weakSelf sendContentMsg:msg];
     };
-
+    
     self.gameMicContentView.updateMicArrCallBack = ^(NSArray<AudioMicroView *> *_Nonnull micArr) {
         weakSelf.arrAnchorView = micArr;
     };
-
+    
     self.gameMicContentView.onTapCallback = ^(AudioRoomMicModel *_Nonnull micModel) {
         /// 麦位点击回调
         [weakSelf handleMicTap:micModel];
@@ -374,7 +376,7 @@
     self.naviView.changeRoomTapBlock = ^(UITapGestureRecognizer *gesture) {
         [weakSelf showSelectGameView];
     };
-
+    
     // 切换大小模式
     self.gameMicContentView.changeScaleBlock = ^(BOOL isSmall) {
         [weakSelf changeScaleSmallMic:isSmall];
@@ -385,11 +387,11 @@
     }];
     UITapGestureRecognizer *robotViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRobotViewTap:)];
     [self.robotView addGestureRecognizer:robotViewTap];
-
+    
     UITapGestureRecognizer *closeRocketEffectTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCloseEffectViewTap:)];
     [self.closeRocketEffectView addGestureRecognizer:closeRocketEffectTap];
-
-
+    
+    
     UITapGestureRecognizer *flyRocketTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onFlyRocketTap:)];
     [self.flyRocketEffectView addGestureRecognizer:flyRocketTap];
     [self.interactiveGameManager setupRocketEffectBlock:^(BOOL show) {
@@ -401,7 +403,7 @@
             weakSelf.flyRocketEffectView.alpha = 0;
         }
     }];
-
+    
     self.interactiveGameEnterView.clickBlock = ^(InteractiveGameBannerModel *model) {
         weakSelf.interactiveGameView.hidden = NO;
         [weakSelf showInteractiveGame:model.gameId showMainView:YES];
@@ -423,19 +425,19 @@
                     make.height.equalTo(@171);
                     make.bottom.equalTo(weakSelf.operatorView.mas_top).offset(0);
                 }];
-
+                
             }
             [weakSelf.giftShowcaseView handleViewShow:bHidden];
             [weakSelf.giftShowcaseView.superview layoutIfNeeded];
         }];
-
-
+        
+        
     };
     [self.giftShowcaseView dt_onTap:^(UITapGestureRecognizer * _Nonnull tap) {
         [weakSelf showGiftPannelView:nil];
     }];
     
-
+    
 }
 
 /// 是否是属于火箭视图内部视图
@@ -479,7 +481,7 @@
     [DTSheetView show:pannelView rootView:AppUtil.currentWindow hiddenBackCover:YES cornerRadius:0 onCloseCallback:^{
         [weakGiftPanelView handleCloseSelectNumView];
         [weakSelf.operatorView resetAllSelectedUser];
-
+        
     }];
 }
 
@@ -489,12 +491,14 @@
 }
 
 - (void)showRobotNumView {
-
+    
     RoomRobotLevelSelectView *v = self.robotLevelSelectView;
     if (!v) {
         v = RoomRobotLevelSelectView.new;
         self.robotLevelSelectView = v;
     }
+    NSArray *titleArr = @[@"dt_room_robot_simple".dt_lan, @"dt_room_robot_middle".dt_lan, @"dt_room_robot_hard".dt_lan, @"dt_room_robot_ai".dt_lan];
+    [v updateTitles:titleArr];
     [self.sceneView addSubview:v];
     [v mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@80);
@@ -504,12 +508,71 @@
     }];
     WeakSelf
     v.numSelectedBlock = ^(NSInteger num) {
+        if (num == 4) {
+            [weakSelf closeRobotLevelSelectView];
+            [weakSelf showAiIdNumView];
+            return;
+        }
         [weakSelf handleRobotSelected:num];
     };
     v.noSelectedBlock = ^(){
         [weakSelf closeRobotLevelSelectView];
     };
 }
+
+- (void)showAiIdNumView {
+    RoomRobotLevelSelectView *v = self.robotIdSelectView;
+    if (!v) {
+        v = RoomRobotLevelSelectView.new;
+        self.robotIdSelectView = v;
+    }
+    NSArray *titleArr = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20"];
+    [v updateTitles:titleArr];
+    [self.sceneView addSubview:v];
+    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@80);
+        make.height.equalTo(@128);
+        make.bottom.equalTo(self.robotView.mas_top).offset(-10);
+        make.centerX.equalTo(self.robotView);
+    }];
+    WeakSelf
+    v.numSelectedBlock = ^(NSInteger num) {
+        [weakSelf handleBigModelRobotIdSelected:num];
+    };
+    v.noSelectedBlock = ^(){
+        [weakSelf closeRobotLevelSelectView];
+    };
+}
+
+- (void)handleBigModelRobotIdSelected:(NSInteger)num {
+    WeakSelf
+    // 查找一个未在麦位机器人
+    
+    [self findOneNotInMicRobotWithLevel:-1 completed:^(RobotInfoModel *robotInfoModel) {
+        if (!robotInfoModel) {
+            return;
+        }
+
+        // 添加大模型AI
+        NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
+        BigScaleModelAiPlayerInfoModel *aiPlayerInfoModel = [BigScaleModelAiPlayerInfoModel alloc];
+        aiPlayerInfoModel.userId = [NSString stringWithFormat:@"%@", @(robotInfoModel.userId)];
+        aiPlayerInfoModel.name = robotInfoModel.name;
+        aiPlayerInfoModel.avatar = robotInfoModel.avatar;
+        aiPlayerInfoModel.gender = robotInfoModel.gender;
+        aiPlayerInfoModel.aiId = num;
+        [aiPlayers addObject:aiPlayerInfoModel];
+
+        AppCommonGameAddBigScaleModelAiPlayersModel *appCommonGameAddAiPlayersModel = [[AppCommonGameAddBigScaleModelAiPlayersModel alloc] init];
+        appCommonGameAddAiPlayersModel.aiPlayers = aiPlayers;
+        appCommonGameAddAiPlayersModel.isReady = YES;
+        [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameAddBigScaleModelAPlayers:appCommonGameAddAiPlayersModel];
+    }];
+    [HSThreadUtils dispatchMainAfter:0 callback:^{
+        [self closeRobotLevelSelectView];
+    }];
+}
+
 
 - (void)handleRobotSelected:(NSInteger)num {
     
@@ -531,10 +594,18 @@
     
 }
 
+
+
+
 - (void)closeRobotLevelSelectView {
     if (self.robotLevelSelectView.superview) {
         [self.robotLevelSelectView removeFromSuperview];
     }
+    if (self.robotIdSelectView.superview) {
+        [self.robotIdSelectView removeFromSuperview];
+        self.robotIdSelectView = nil;
+    }
+    
 }
 
 - (void)onRobotViewTap:(id)tap {
@@ -837,6 +908,9 @@
         model.text = content;
         [self.gameEventHandler.sudFSTAPPDecorator notifyAppCommonAiModelMessage:model];
     }
+    if (self.gameEventHandler.isOpenAiAgent) {
+        [self.gameEventHandler sendTextToAiAgent:content];
+    }
 }
 
 /// 展示更多视图
@@ -1070,7 +1144,13 @@
 
 /// 声音状态变化
 - (void)onVoiceStateChanged:(VoiceBtnStateType)state {
-
+    
+    if (VoiceBtnStateTypeOnVoice == state && [self.gameEventHandler isOpenAiAgent]) {
+//        [AudioEngineFactory.shared.audioEngine setAudioRouteToSpeaker:NO];
+        [self startCaptureAudioToASR];
+    } else {
+//        [AudioEngineFactory.shared.audioEngine setAudioRouteToSpeaker:YES];
+    }
 }
 
 /// 改变语音按钮状态
@@ -1096,9 +1176,13 @@
             break;
         case VoiceBtnStateTypeWaitOpen: {
             // 关闭声音
+            if (self.gameEventHandler.isOpenAiAgent) {
+                [self.gameEventHandler pauseAudioToAiAgent];
+            }
             self.operatorView.voiceBtnState = VoiceBtnStateTypeWaitOpen;
             [self stopPublish];
             [self onVoiceStateChanged:self.operatorView.voiceBtnState];
+
         }
             break;
         case VoiceBtnStateTypeOnVoice:
@@ -1854,8 +1938,16 @@
     NSMutableArray *tempList = [[NSMutableArray alloc] init];
     
     for (RobotInfoModel *robotInfoModel in self.cacheRobotList) {
-        if (![self isUserInMic:[NSString stringWithFormat:@"%@", @(robotInfoModel.userId)]] && robotInfoModel.level == level) {
-            [tempList addObject:robotInfoModel];
+        if (![self isUserInMic:[NSString stringWithFormat:@"%@", @(robotInfoModel.userId)]]) {
+            // 如果存在等级，则加上判断等级，否则直接返回
+            if (level > 0) {
+                if (robotInfoModel.level == level) {
+                    [tempList addObject:robotInfoModel];
+                }
+            } else {
+                [tempList addObject:robotInfoModel];
+            }
+            
         }
     }
     DDLogDebug(@"findOneNotInMicRobotFromCacheListWithLevel:%@, tempList:%@", @(level), @(tempList.count));
@@ -2102,5 +2194,21 @@
 // 处理AI消息
 - (void)handleGameAiModelMeassage:(MgCommonAiModelMessageModel *)model {
     self.isNeedToSendMessageToGame = YES;
+}
+
+
+
+-(NSMutableDictionary <NSString *, NSNumber *>*)cacheVolumeState {
+    if (!_cacheVolumeState) {
+        _cacheVolumeState = NSMutableDictionary.new;
+    }
+    return _cacheVolumeState;
+}
+
+-(NSMutableDictionary <NSString *, NSNumber *>*)userMicUpdateTimeMap {
+    if (!_userMicUpdateTimeMap) {
+        _userMicUpdateTimeMap = NSMutableDictionary.new;
+    }
+    return _userMicUpdateTimeMap;
 }
 @end

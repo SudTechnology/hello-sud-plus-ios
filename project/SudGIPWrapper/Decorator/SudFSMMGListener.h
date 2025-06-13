@@ -37,18 +37,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onGameLog:(nonnull NSString *)dataJson;
 
 /// 游戏状态变化
-/// 注意：实现了该接口，只有实现方自行处理了的state则返回YES（内部不再具体分发到相应的回调中），其余返回NO（其余的内部执行数据序列化并分发到具体实现的回调中）
+/// 如果未接管相应指令回调，则会默认派发到该回调上
 /// @param handle handle 回调句柄
 /// @param state state 对应事件状态
 /// @param dataJson dataJson 回调json串
-- (BOOL)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
+- (void)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
 
  /// 游戏玩家状态变化
- /// 注意：实现了该接口，只有实现方自行处理了的state则返回YES（内部不再具体分发到相应的回调中），其余返回NO（其余的内部执行数据序列化并分发到具体实现的回调中）
+/// 如果未接管相应指令回调，则会默认派发到该回调上
  /// @param handle handle 回调句柄
  /// @param state state 对应事件状态
  /// @param dataJson dataJson 回调json串
-- (BOOL)onPlayerStateChange:(nullable id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
+- (void)onPlayerStateChange:(nullable id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
 
 /// 游戏加载进度(loadMG)
 /// @param stage start=1,loading=2,end=3
@@ -241,7 +241,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏通知app ai大模型消息内容 MG_COMMON_AI_MESSAGE
 - (void)onGameMgCommonAiMessage:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonAiMessageModel *)model;
 
+/// 游戏通知app ai大模型消息内容 MG_COMMON_AI_LARGE_SCALE_MODEL_MSG
+- (void)onGameMgCommonAiLargeScaleModelMsg:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonAiLargeScaleModelMsg *)model;
 
+/// 通知APP 玩家麦克风状态准备OK MG_COMMON_GAME_PLAYER_MIC_STATE
+- (void)onGameMgCommonGamePlayerMicState:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerMicState *)model;
 #pragma mark - 互动礼物<火箭>
 
 /// 礼物配置文件(火箭) MG_CUSTOM_ROCKET_CONFIG

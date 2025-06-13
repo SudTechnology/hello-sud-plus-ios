@@ -476,6 +476,7 @@
 "dt_room_robot_simple" = "Easy";
 "dt_room_robot_middle" = "Medium";
 "dt_room_robot_hard" = "Hard";
+"dt_room_robot_ai" = "AI";
 "dt_room_gift_showcase_role_title" = "Role gift showcase";
 "dt_room_gift_showcase_title" = "Gift card showcase";
 "dt_room_gift_name_prefix" = "Give";

@@ -8,6 +8,7 @@
 //
 
 #import "SudGIPMGState.h"
+#import "MJExtension.h"
 
 @implementation GamePublicText
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
@@ -79,6 +80,13 @@
 
 
 @implementation MGCommonSelfClickJoinBtn
+
+- (instancetype)init {
+    if (self = [super init]) {
+        self.seatIndex = -1;
+    }
+    return self;
+}
 
 @end
 
@@ -398,4 +406,18 @@
 
 #pragma mark - MG_COMMON_AI_MESSAGE
 @implementation MgCommonAiMessageModel
+@end
+#pragma mark - MG_COMMON_AI_LARGE_SCALE_MODEL_MSG
+@implementation MgCommonAiLargeScaleModelUserInfo
+
+@end
+
+@implementation MgCommonAiLargeScaleModelMsg
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"receiveUserInfos": [MgCommonAiLargeScaleModelUserInfo class]};
+}
+@end
+
+@implementation MgCommonGamePlayerMicState
+
 @end
