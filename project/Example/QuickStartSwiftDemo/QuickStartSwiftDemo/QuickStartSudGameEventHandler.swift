@@ -16,7 +16,7 @@ class QuickStartSudGameEventHandler: SudGameBaseEventHandler { // Replace SomeBa
         // Configure game settings as needed
         gameCfgModel.gameSoundVolume = 100
         // Additional configurations can be added here
-        // gameCfgModel.ui.join_btn.custom = true // Uncomment if needed
+//         gameCfgModel.ui.join_btn.custom = true // Uncomment if needed
         return gameCfgModel
     }
 
@@ -131,80 +131,11 @@ class QuickStartSudGameEventHandler: SudGameBaseEventHandler { // Replace SomeBa
 
     // MARK: - Game-related Event Status Callbacks
 
-    // Handle ready button click status
-    func onGameMGCommonSelfClickReadyBtn(handle: ISudFSMStateHandle, model: MGCommonSelfClickReadyBtn) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Handle game settle again button click status
-    func onGameMGCommonSelfClickGameSettleAgainBtn(handle: ISudFSMStateHandle, model: MGCommonSelfClickGameSettleAgainBtn) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Handle start game button click status
-    func onGameMGCommonSelfClickStartBtn(handle: ISudFSMStateHandle, model: MGCommonSelfClickStartBtn) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Handle public message status
-    func onGameMGCommonPublicMessage(handle: ISudFSMStateHandle, model: MGCommonPublicMessageModel) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Handle keyword status
-    func onGameMGCommonKeyWordToHit(handle: ISudFSMStateHandle, model: MGCommonKeyWrodToHitModel) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Handle game state
-    func onGameMGCommonGameState(handle: ISudFSMStateHandle, model: MGCommonGameState) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Handle ASR status
-    func onGameMGCommonGameASR(handle: ISudFSMStateHandle, model: MGCommonGameASRModel) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Player: Join status
-    func onPlayerMGCommonPlayerIn(handle: ISudFSMStateHandle, userId: String, model: MGCommonPlayerInModel) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Player: Ready status
-    func onPlayerMGCommonPlayerReady(handle: ISudFSMStateHandle, userId: String, model: MGCommonPlayerReadyModel) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Player: Captain status
-    func onPlayerMGCommonPlayerCaptain(handle: ISudFSMStateHandle, userId: String, model: MGCommonPlayerCaptainModel) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Player: Game status
-    func onPlayerMGCommonPlayerPlaying(handle: ISudFSMStateHandle, userId: String, model: MGCommonPlayerPlayingModel) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // You paint me guess: painting state
-    func onPlayerMGDGPainting(handle: ISudFSMStateHandle, userId: String, model: MGDGPaintingModel) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Game: Microphone status
-    func onGameMGCommonGameSelfMicrophone(handle: ISudFSMStateHandle, model: MGCommonGameSelfMicrophone) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
-    // Game: Headset status
-    func onGameMGCommonGameSelfHeadphone(handle: ISudFSMStateHandle, model: MGCommonGameSelfHeadphone) {
-        handle.success(sudFSMMGDecorator.handleMGSuccess())
-    }
-
     // Handle join game button event
-    func onGameMGCommonSelfClickJoinBtn(handle: ISudFSMStateHandle, model: MGCommonSelfClickJoinBtn) {
+    override func onGameMGCommonSelfClickJoinBtn(_ handle: ISudFSMStateHandle, model: MGCommonSelfClickJoinBtn) {
         // Handle the event of the 'Join Game' button from the game screen
         // Execute the application's own logic and notify the game to add the current user
-        // [self.sudFSTAPPDecorator notifyAppComonSelfInV2:YES seatIndex:-1 isSeatRandom:YES teamId:0]
+//        self.sudFSTAPPDecorator.notifyAppComonSelf(inV2: true, seatIndex: -1, isSeatRandom: true, teamId: 0)
+        
     }
 }
