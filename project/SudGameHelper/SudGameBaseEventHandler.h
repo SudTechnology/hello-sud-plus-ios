@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// Application Key. Contact SUD to obtain it
 /// The game ID.
 @property(nonatomic, strong)NSString *appKey;
+/// 加载环境，正式环境传入NO,测试环境传入YES.
+/// Load environment. Pass NO to the formal environment and YES to the test environment.
+@property(nonatomic, assign)BOOL isTestEnv __attribute__((deprecated("Not support anymore")));
+
 /// 游戏ID
 /// The game ID.
 @property (nonatomic, assign)int64_t gameId;
