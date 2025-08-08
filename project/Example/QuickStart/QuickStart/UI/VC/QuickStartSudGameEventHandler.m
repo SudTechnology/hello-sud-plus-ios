@@ -182,18 +182,18 @@
 /// 游戏: 准备按钮点击状态   MG_COMMON_SELF_CLICK_READY_BTN
 /// Game: Ready button click status MG_COMMON_SELF_CLICK_READY_BTN
 - (void)onGameMGCommonSelfClickReadyBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickReadyBtn *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// Game: Settlement interface again to a button click status MG_COMMON_SELF_CLICK_GAME_SETTLE_AGAIN_BTN
 - (void)onGameMGCommonSelfClickGameSettleAgainBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickGameSettleAgainBtn *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
 /// Game: Start game button by clicking status MG_COMMON_SELF_CLICK_START_BTN
 - (void)onGameMGCommonSelfClickStartBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickStartBtn *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// 通用状态-游戏
@@ -201,27 +201,27 @@
 /// General status - Game
 /// Game: public screen message status MG_COMMON_PUBLIC_MESSAGE
 - (void)onGameMGCommonPublicMessage:(id <ISudFSMStateHandle>)handle model:(MGCommonPublicMessageModel *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// 游戏: 关键词状态    MG_COMMON_KEY_WORD_TO_HIT
 /// Game: Keyword status MG_COMMON_KEY_WORD_TO_HIT
 - (void)onGameMGCommonKeyWordToHit:(id <ISudFSMStateHandle>)handle model:(MGCommonKeyWrodToHitModel *)model {
     
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
 /// Game: Game state MG_COMMON_GAME_STATE
 - (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// 游戏: ASR状态(开启和关闭语音识别状态   MG_COMMON_GAME_ASR
 /// Game: ASR status (On and off speech recognition status MG_COMMON_GAME_ASR
 - (void)onGameMGCommonGameASR:(id <ISudFSMStateHandle>)handle model:(MGCommonGameASRModel *)model {
     /// 语音采集 || 停止采集
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+  
 }
 
 /// 玩家状态变化
@@ -229,49 +229,48 @@
 /// Player status changes
 /// Player: Adds status MG_COMMON_PLAYER_IN
 - (void)onPlayerMGCommonPlayerIn:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerInModel *)model {
-    
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+
 }
 
 /// 玩家: 准备状态  MG_COMMON_PLAYER_READY
 /// Player: Ready status MG_COMMON_PLAYER_READY
 - (void)onPlayerMGCommonPlayerReady:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerReadyModel *)model {
     
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// 玩家: 队长状态  MG_COMMON_PLAYER_CAPTAIN
 /// Player: Captain status MG_COMMON_PLAYER_CAPTAIN
 - (void)onPlayerMGCommonPlayerCaptain:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerCaptainModel *)model {
     
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// 玩家: 游戏状态  MG_COMMON_PLAYER_PLAYING
 /// Player: Game status MG_COMMON_PLAYER_PLAYING
 - (void)onPlayerMGCommonPlayerPlaying:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerPlayingModel *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// 你画我猜: 作画中状态  MG_DG_PAINTING
 /// You paint me guess: painting state MG_DG_PAINTING
 - (void)onPlayerMGDGPainting:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGDGPaintingModel *)model {
     
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// 游戏: 麦克风状态   MG_COMMON_GAME_SELF_MICROPHONE
 /// Game: Microphone status MG_COMMON_GAME_SELF_MICROPHONE
 - (void)onGameMGCommonGameSelfMicrophone:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSelfMicrophone *)model {
     
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 /// 游戏: 耳机（听筒，扬声器）状态   MG_COMMON_GAME_SELF_HEADEPHONE
 /// Game: Headset (handset, speaker) status MG_COMMON_GAME_SELF_HEADEPHONE
 - (void)onGameMGCommonGameSelfHeadphone:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSelfHeadphone *)model {
     
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 - (void)onGameMGCommonSelfClickJoinBtn:(id<ISudFSMStateHandle>)handle model:(MGCommonSelfClickJoinBtn *)model {

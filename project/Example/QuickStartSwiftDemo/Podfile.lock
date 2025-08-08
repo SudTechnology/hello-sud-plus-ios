@@ -1,14 +1,14 @@
 PODS:
   - MJExtension (3.4.2)
   - SnapKit (5.7.1)
-  - SudGIP (1.6.0.1)
+  - SudGIP (1.6.3)
   - SudGIPWrapper (1.6.0):
     - MJExtension (~> 3.4.1)
     - SudGIP
 
 DEPENDENCIES:
   - SnapKit
-  - SudGIP (= 1.6.0.1)
+  - SudGIP (~> 1.6.3)
   - SudGIPWrapper
 
 SPEC REPOS:
@@ -21,9 +21,9 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   MJExtension: e97d164cb411aa9795cf576093a1fa208b4a8dd8
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  SudGIP: 271219f975938fb0c8cfc5dc2ffd2416a3788e07
+  SudGIP: 72aa5e894897c07619977360c41633af94df0050
   SudGIPWrapper: 30e50374ac48835927062a12a806822c6c57b34f
 
-PODFILE CHECKSUM: 3bca072fccdd837e2672faa6d23324a3a25fe240
+PODFILE CHECKSUM: 045ab1f56a548aa93178910bd2e6c0b0864a122d
 
 COCOAPODS: 1.14.3

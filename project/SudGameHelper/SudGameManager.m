@@ -69,13 +69,15 @@
     }
     /// Show how to embed a local pkg in the project
     //    [[SudGIP getCfg]addEmbeddedMGPkg:1763401430010871809 mgPath:@"GreedyStar_1.0.0.1.sp"];
-    
+    NSString *version = [SudGIP getVersion];
+    NSString *versionAlis = [SudGIP getVersionAlias];
+    NSLog(@"SudGIP:version:%@,versionAlis:%@", version, versionAlis);
     // 2. 初始化SudMGP SDK<SudGIP initSDK>
     // 2. Initialize the SudMGP SDK <SudGIP initSDK>
     SudInitSDKParamModel *paramModel = SudInitSDKParamModel.new;
     paramModel.appId = configModel.appId;
     paramModel.appKey = configModel.appKey;
-    paramModel.isTestEnv = configModel.isTestEnv;
+    paramModel.userId = configModel.userId;
     [SudGIP initSDK:paramModel listener:^(int retCode,NSString * _Nonnull retMsg) {
         
         if (retCode != 0) {

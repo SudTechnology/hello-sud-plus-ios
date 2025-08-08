@@ -7,7 +7,7 @@ inhibit_all_warnings!
 target 'QuickStartSwiftDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'SudGIP', '1.6.0.1'
+  pod 'SudGIP', '~> 1.6.3'
   pod 'SudGIPWrapper'
   pod 'SnapKit'
 end

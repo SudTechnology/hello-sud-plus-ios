@@ -47,8 +47,6 @@ class ViewController: UIViewController {
         sudGameConfigModel.appId = SUDMGP_APP_ID
         // Application key
         sudGameConfigModel.appKey = SUDMGP_APP_KEY
-        // Set to YES during the test and NO when publishing online
-        sudGameConfigModel.isTestEnv = true
         // ID of the game to be loaded
         sudGameConfigModel.gameId = gameId
         // Assign a game room, and people with the same room number are in the same game hall

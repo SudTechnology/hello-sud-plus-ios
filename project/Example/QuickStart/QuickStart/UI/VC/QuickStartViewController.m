@@ -21,14 +21,6 @@
 #define SUDMGP_APP_ID   @"1461564080052506636"
 #define SUDMGP_APP_KEY  @"03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc"
 
-// TODO: 是否是测试环境,生产环境必须设置为NO
-// TODO: Set SUD_GAME_TEST_ENV to NO for production environment.
-#if DEBUG
-#define SUD_GAME_TEST_ENV    YES
-#else
-#define SUD_GAME_TEST_ENV    NO
-#endif
-
 @interface QuickStartViewController ()
 /// 内容视图
 @property(nonatomic, strong) BaseView *contentView;
@@ -95,9 +87,6 @@
     // 申请的应用key
     // Application key
     sudGameConfigModel.appKey = SUDMGP_APP_KEY;
-    // 是否测试环境，测试时为YES, 发布上线设置为NO
-    // Set to YES during the test and NO when publishing online
-    sudGameConfigModel.isTestEnv = SUD_GAME_TEST_ENV;
     // 待加载游戏ID
     // ID of the game to be loaded
     sudGameConfigModel.gameId = gameId;
