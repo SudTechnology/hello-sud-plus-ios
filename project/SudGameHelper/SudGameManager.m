@@ -78,6 +78,7 @@
     paramModel.appId = configModel.appId;
     paramModel.appKey = configModel.appKey;
     paramModel.userId = configModel.userId;
+    paramModel.isTestEnv = configModel.isTestEnv;
     [SudGIP initSDK:paramModel listener:^(int retCode,NSString * _Nonnull retMsg) {
         
         if (retCode != 0) {
