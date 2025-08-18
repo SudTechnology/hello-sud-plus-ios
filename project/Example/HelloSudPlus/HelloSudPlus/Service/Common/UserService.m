@@ -28,6 +28,31 @@
     return self.dicUserInfo[key];
 }
 
+- (void)setAiCloneInfoModel:(RespAiCloneInfoModel *)aiCloneInfoModel {
+    _aiCloneInfoModel = aiCloneInfoModel;
+    if (aiCloneInfoModel ) {
+        _isAiCloneOpen = aiCloneInfoModel.aiInfo.status;
+    }
+}
+
+- (BOOL)checkAiCloneAuth {
+    if (!self.isAiCloneOpen) {
+        [ToastUtil show:@"dt_open_clone".dt_lan];
+    }
+    return self.isAiCloneOpen;
+}
+
+/// 刷新分身信息
+- (void)refreshAiCloneInfo:(void(^)(RespAiCloneInfoModel *aiCloneInfoModel))resultBlock {
+    ReqAiCloneInfoModel *reqModel = ReqAiCloneInfoModel.new;
+    [UserService.shared reqAiCloneInfo:reqModel success:^(RespAiCloneInfoModel * _Nonnull resp) {
+        UserService.shared.aiCloneInfoModel = resp;
+        if (resultBlock) {
+            resultBlock(resp);
+        }
+    } fail:nil];
+}
+
 /// 异步缓存用户信息
 /// @param arrUserID arrUserID description
 /// @param finished finished description
@@ -52,6 +77,44 @@
         return;
     }
     [self reqUserInfo:arrNotCacheID success:^(NSArray<HSUserInfoModel *> *_Nonnull userList) {
+        for (HSUserInfoModel *m in userList) {
+            NSString *key = [NSString stringWithFormat:@"%ld", m.userId];
+            self.dicUserInfo[key] = m;
+        }
+        if (finished) {
+            finished();
+        }
+    }            fail:^(NSError *error) {
+        if (finished) {
+            finished();
+        }
+    }];
+}
+
+/// 异步缓存用户信息
+/// @param arrUserID arrUserID description
+/// @param finished finished description
+- (void)asyncCacheUserInfo:(NSArray<NSNumber *> *)arrUserID forceRefresh:(BOOL)forceRefresh isAi:(BOOL)isAi finished:(EmptyBlock)finished {
+    NSMutableArray *arrNotCacheID = NSMutableArray.new;
+    if (forceRefresh) {
+        // 强制刷新所有
+        [arrNotCacheID setArray:arrUserID];
+    } else {
+        for (NSNumber *num in arrUserID) {
+            NSString *key = [NSString stringWithFormat:@"%@", num];
+            if (!self.dicUserInfo[key]) {
+                [arrNotCacheID addObject:num];
+            }
+        }
+    }
+    // all cache, don't req server again
+    if (arrNotCacheID.count == 0) {
+        if (finished) {
+            finished();
+        }
+        return;
+    }
+    [self reqUserInfo:arrNotCacheID isLlmAi:isAi success:^(NSArray<HSUserInfoModel *> *_Nonnull userList) {
         for (HSUserInfoModel *m in userList) {
             NSString *key = [NSString stringWithFormat:@"%ld", m.userId];
             self.dicUserInfo[key] = m;
@@ -154,6 +217,20 @@
     }                         failure:fail];
 }
 
+/// 查询用户信息
+/// @param userIDList 用户ID列表
+/// @param success 成功
+/// @param fail 失败
+- (void)reqUserInfo:(NSArray<NSNumber *> *)userIDList isLlmAi:(BOOL)isLlmAi success:(void (^)(NSArray<HSUserInfoModel *> *userList))success fail:(ErrorBlock)fail {
+
+    [HSHttpService postRequestWithURL:kBASEURL(@"batch/user-info/v1") param:@{@"userIds": userIDList, @"isAi":@(isLlmAi)} respClass:RespUserInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        RespUserInfoModel *model = (RespUserInfoModel *) resp;
+        if (success) {
+            success(model.userInfoList);
+        }
+    }                         failure:fail];
+}
+
 /// 带入游戏积分
 /// @param reqModel reqModel description
 /// @param success success description
@@ -172,6 +249,57 @@
         _dicUserInfo = NSMutableDictionary.new;
     }
     return _dicUserInfo;
+}
+
+
+/// 修改分身状态
+/// @param reqModel
+/// @param success <#success description#>
+/// @param fail <#fail description#>
+- (void)reqChangeAiState:(ReqAiSwitchStateModel *)reqModel success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"ai/status/update/v1") param:reqModel.mj_JSONObject respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (success) {
+            success(resp);
+        }
+    }                         failure:fail];
+}
+
+
+
+/// 查询分身信息
+/// @param reqModel
+/// @param success success description
+/// @param fail fail description
+- (void)reqAiCloneInfo:(ReqAiCloneInfoModel *)reqModel success:(void (^)(RespAiCloneInfoModel *resp))success fail:(ErrorBlock)fail {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"ai/get/v1") param:reqModel.mj_JSONObject respClass:RespAiCloneInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (success) {
+            success((RespAiCloneInfoModel *)resp);
+        }
+    }                         failure:fail];
+}
+
+/// 保存分身信息
+/// @param reqModel
+/// @param success success description
+/// @param fail fail description
+- (void)reqSaveAiCloneInfo:(ReqSaveAiCloneInfoModel *)reqModel success:(void (^)(BaseRespModel *resp))success fail:(ErrorBlock)fail {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"ai/save/v1") param:reqModel.mj_JSONObject respClass:BaseRespModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (success) {
+            success((BaseRespModel *)resp);
+        }
+    }                         failure:fail];
+}
+
+/// 随机分身信息
+/// @param reqModel
+/// @param success success description
+/// @param fail fail description
+- (void)reqRandAiCloneInfo:(ReqRandAiCloneInfoModel *)reqModel success:(void (^)(RespRandAiCloneInfoModel *resp))success fail:(ErrorBlock)fail {
+    [HSHttpService postRequestWithURL:kINTERACTURL(@"ai/random/v1") param:reqModel.mj_JSONObject respClass:RespRandAiCloneInfoModel.class showErrorToast:YES success:^(BaseRespModel *resp) {
+        if (success) {
+            success((RespRandAiCloneInfoModel *)resp);
+        }
+    }                         failure:fail];
 }
 
 @end

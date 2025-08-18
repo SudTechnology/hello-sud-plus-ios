@@ -100,28 +100,6 @@ PODS:
   - NIMSDK_LITE/NOS (10.8.30):
     - YXArtemis_XCFramework
   - Protobuf (3.22.3)
-  - RCSceneLog (0.0.1.2)
-  - RCVoiceRoomLib (2.0.9.1):
-    - RCSceneLog
-    - RongCloudIM/IMLib
-    - RongCloudRTC/RongRTCLib
-  - RongCloudIM/ChatRoom (5.18.0):
-    - RongCloudIM/IMLibCore
-  - RongCloudIM/CustomerService (5.18.0):
-    - RongCloudIM/IMLibCore
-  - RongCloudIM/Discussion (5.18.0):
-    - RongCloudIM/IMLibCore
-  - RongCloudIM/IMLib (5.18.0):
-    - RongCloudIM/ChatRoom
-    - RongCloudIM/CustomerService
-    - RongCloudIM/Discussion
-    - RongCloudIM/IMLibCore
-    - RongCloudIM/PublicService
-  - RongCloudIM/IMLibCore (5.18.0)
-  - RongCloudIM/PublicService (5.18.0):
-    - RongCloudIM/IMLibCore
-  - RongCloudRTC/RongRTCLib (5.18.0):
-    - RongCloudIM/IMLibCore (>= 5.18.0)
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
@@ -138,10 +116,10 @@ PODS:
   - SudASR/Stand (1.0.0):
     - MicrosoftCognitiveServicesSpeech-iOS (= 1.40.0)
     - SudASR/Base
-  - SudGIPWrapper (1.6.1):
-    - SudGIPWrapper/SudGIPWrapper (= 1.6.1)
-  - SudGIPWrapper/SudGIPWrapper (1.6.1):
+  - SudGIP (1.6.3)
+  - SudGIPWrapper (1.6.2):
     - MJExtension (~> 3.4.1)
+    - SudGIP
   - SudNFT (1.0.5)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -182,12 +160,12 @@ DEPENDENCIES:
   - NERtcSDK (~> 5.8.15)
   - NIMSDK_LITE (~> 10.8.30)
   - Protobuf (= 3.22.3)
-  - RCVoiceRoomLib (~> 2.0.7)
   - SDWebImage (= 5.12.2)
   - SDWebImageSVGKitPlugin (= 1.4.0)
   - SDWebImageWebPCoder
   - SudASR (from `../../`)
-  - SudGIPWrapper (from `../../`)
+  - SudGIP (~> 1.6.3)
+  - SudGIPWrapper
   - SudNFT (= 1.0.5)
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
@@ -219,14 +197,12 @@ SPEC REPOS:
     - NERtcSDK
     - NIMSDK_LITE
     - Protobuf
-    - RCSceneLog
-    - RCVoiceRoomLib
-    - RongCloudIM
-    - RongCloudRTC
     - SDWebImage
     - SDWebImageSVGKitPlugin
     - SDWebImageWebPCoder
     - SSZipArchive
+    - SudGIP
+    - SudGIPWrapper
     - SudNFT
     - SVGKit
     - SVProgressHUD
@@ -237,8 +213,6 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   SudASR:
-    :path: "../../"
-  SudGIPWrapper:
     :path: "../../"
   SVGAPlayer:
     :git: https://github.com/svga/SVGAPlayer-iOS.git
@@ -274,16 +248,13 @@ SPEC CHECKSUMS:
   NERtcSDK: e64224a0feb443a5693162f33873943e04bfb77f
   NIMSDK_LITE: 37b54402f4006e4926ed4bd57322ff0fd93e3914
   Protobuf: d03938d5f7e974a97964fb0567771e36fbe9ecce
-  RCSceneLog: c38de10f8ccd4aa65eb9ac7c0a5c6b2042e7579e
-  RCVoiceRoomLib: 07ca7d08114856b610598abb21648cfdd82c457a
-  RongCloudIM: 95afabd6fc1e402866210d75c9c783fea2057ed1
-  RongCloudRTC: be07b638e998e852bcea88e4f9c7a9035a77381b
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   SudASR: a89774fdee49a84bceee2b49ac78fbb09d7cc17a
-  SudGIPWrapper: 36d5a99181f1d6f75a5b7b721e4bc2b9197370c7
+  SudGIP: 72aa5e894897c07619977360c41633af94df0050
+  SudGIPWrapper: e09c6454ab3fa0322993b7a19d940823622836ea
   SudNFT: 086af9cc3612962507ef3beb878777d098f63446
   SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
@@ -295,6 +266,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 0064f6044b5d1d00c40d815455e6ee032f1cb56b
   ZIM: 1376cbc14e92c31425d91a5bd0874c0b501e4e76
 
-PODFILE CHECKSUM: f3907261cc60c1e11ef5f1199b22e95257f19ff1
+PODFILE CHECKSUM: 0a11e661d2fd218afc4e4bb4968a1fee0ca9c322
 
 COCOAPODS: 1.14.3

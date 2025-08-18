@@ -52,6 +52,7 @@
 - (void)destroy {
     [self.rtm destroy];
     self.rtm = nil;
+    [self.dicSubScribedChannel removeAllObjects];
     self.mISudAudioEventListener = nil;
 }
 
@@ -76,6 +77,7 @@
 }
 
 - (void)leaveRoom {
+    [self.dicSubScribedChannel removeAllObjects];
     [self.rtm logout:nil];
 }
 

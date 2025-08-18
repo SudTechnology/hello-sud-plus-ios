@@ -11,6 +11,7 @@
 #import "HomeViewController.h"
 #import "MyViewController.h"
 #import "GameTabViewController.h"
+#import "LLMBotViewController.h"
 
 @interface MainTabBarController ()
 
@@ -44,6 +45,13 @@
     game.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_game"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     game.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_game"];
     
+    LLMBotViewController *llmBot = [[LLMBotViewController alloc]init];
+    BaseNavigationViewController * navLlmBot = [[BaseNavigationViewController alloc]initWithRootViewController:llmBot];
+    llmBot.tabBarItem.title = @"dt_tab_llm".dt_lan;
+    llmBot.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_icon_bot_selected"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    llmBot.tabBarItem.image = [[UIImage imageNamed:@"tabbar_icon_bot_unselected"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    llmBot.tabBarItem.image = [UIImage imageNamed:@"tabbar_icon_bot_unselected"];
+    
     GameListViewController *gameList = [[GameListViewController alloc]init];
     BaseNavigationViewController * navGameList = [[BaseNavigationViewController alloc]initWithRootViewController:gameList];
     gameList.tabBarItem.title = NSString.dt_tab_room;
@@ -58,6 +66,7 @@
 
     [self addChildViewController:navGame];
     [self addChildViewController:navHome];
+    [self addChildViewController:navLlmBot];
     [self addChildViewController:navGameList];
     [self addChildViewController:navSetting];
     

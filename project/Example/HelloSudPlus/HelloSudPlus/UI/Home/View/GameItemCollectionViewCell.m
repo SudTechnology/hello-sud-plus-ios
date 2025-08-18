@@ -14,6 +14,8 @@
 /// 加入
 @property (nonatomic, strong) UILabel *enterLabel;
 
+@property (nonatomic, strong) UIView *tagView;
+@property (nonatomic, strong) UIImageView *tagImageView;
 @end
 
 @implementation GameItemCollectionViewCell
@@ -24,26 +26,34 @@
     self.gameImageView.image = nil;
 }
 
-
+- (CGFloat)marginL {
+    if (self.marginLBlock) {
+        return self.marginLBlock();
+    }
+    return 0;
+}
 
 - (CGFloat)imageW {
+    if (self.customImageHeightBlock) {
+        return self.customImageHeightBlock();
+    }
     return (kScreenWidth - 16 * 2 - 13 * 2 - 9 * 2) / 3;
 }
 
 - (void)setIndexPath:(NSIndexPath *)indexPath {
     [super setIndexPath:indexPath];
     NSInteger v = indexPath.row % 3;
-
+    CGFloat marginL = self.marginL;
     CGFloat w = [self imageW];
     [self.gameImageView dt_cornerRadius:8];
     [self.gameImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         if (v == 0) {
-            make.leading.mas_equalTo(13);
+            make.leading.mas_equalTo(13+marginL);
         } else if (v == 1) {
             make.centerX.equalTo(self.containerView);
         } else {
-            make.trailing.mas_equalTo(-13);
+            make.trailing.mas_equalTo(-13-marginL);
         }
         make.size.mas_equalTo(CGSizeMake(w, 52));
     }];
@@ -53,6 +63,8 @@
     [self.contentView addSubview:self.containerView];
     [self.containerView addSubview:self.gameImageView];
     [self.gameImageView addSubview:self.nameLabel];
+    [self.gameImageView addSubview:self.tagView];
+    [self.tagView addSubview:self.tagImageView];
 }
 
 - (void)dtLayoutViews {
@@ -70,6 +82,18 @@
         make.trailing.mas_equalTo(0);
         make.height.mas_greaterThanOrEqualTo(0);
         make.centerY.equalTo(self.gameImageView);
+    }];
+    
+    [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.leading.equalTo(@3);
+        make.width.equalTo(@32);
+        make.height.equalTo(@10);
+    }];
+    
+    [self.tagImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.tagView);
+        make.width.equalTo(@24);
+        make.height.equalTo(@6);
     }];
 }
 
@@ -112,6 +136,12 @@
     } else {
         self.nameLabel.hidden = NO;
     }
+    
+    if (m.supportLlm) {
+        self.tagView.hidden = NO;
+    } else {
+        self.tagView.hidden = YES;
+    }
 }
 
 - (UIView *)containerView {
@@ -129,6 +159,26 @@
     }
     return _gameImageView;
 }
+
+- (UIView *)tagView {
+    if (!_tagView) {
+        _tagView = [[UIView alloc] init];
+        [_tagView dt_cornerRadius:5];
+        _tagView.backgroundColor = HEX_COLOR(@"#000000");
+
+    }
+    return _tagView;
+}
+
+- (UIImageView *)tagImageView {
+    if (!_tagImageView) {
+        _tagImageView = [[UIImageView alloc] init];
+        _tagImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _tagImageView.image = [UIImage imageNamed:@"llm_tag"];
+    }
+    return _tagImageView;
+}
+
 
 - (UILabel *)enterLabel {
     if (!_enterLabel) {

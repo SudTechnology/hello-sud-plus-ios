@@ -49,6 +49,10 @@ typedef NS_ENUM(NSInteger, RobotLvelType){
 @property (nonatomic, strong)NSString * gender;
 // 难道级别 1：简单，2：适中，3：困难
 @property (nonatomic, assign)RobotLvelType level;
+
+// 本地
+/// 是否是LLM机器人
+@property (nonatomic, assign)BOOL isLlmBot;
 @end
 /// 拉取机器人列表数据模型
 @interface RespDiscoRobotListModel : BaseRespModel

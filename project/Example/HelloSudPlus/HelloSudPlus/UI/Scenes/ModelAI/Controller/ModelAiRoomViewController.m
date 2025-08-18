@@ -8,14 +8,14 @@
 #import "ModelAiRoomViewController.h"
 #import "EnterRoomModel.h"
 #import "ModelAiRoomOperatorView.h"
-#import "RWAudioCapture.h"
+#import "SudAudioCapture.h"
 
 @interface ModelAiRoomViewController (){
     ModelAiRoomOperatorView *_modelAiRoomOperatorView;
 }
 
 @property(nonatomic, strong)NSMutableData *audioData;
-@property (nonatomic, strong) RWAudioCapture *audioCapture;
+@property (nonatomic, strong) SudAudioCapture *audioCapture;
 @end
 
 @implementation ModelAiRoomViewController
@@ -40,9 +40,9 @@
     return _audioData;
 }
 
-- (RWAudioCapture *)audioCapture {
+- (SudAudioCapture *)audioCapture {
     if (!_audioCapture) {
-        _audioCapture = [[RWAudioCapture alloc]init];
+        _audioCapture = [[SudAudioCapture alloc]init];
     }
     return _audioCapture;
 }

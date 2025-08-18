@@ -311,7 +311,7 @@
     cell.backgroundColor = UIColor.clearColor;
     
     [cell.levelButton setTitle:self.levelTitles[indexPath.row] forState:UIControlStateNormal];
-    cell.levelButton.tag = indexPath.row + 1; // Set tag for button action
+    cell.levelButton.tag = indexPath.row; // Set tag for button action
     
     // Add action for button click
     [cell.levelButton addTarget:self action:@selector(handleButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -329,7 +329,8 @@
 #pragma mark - UITableViewDelegate
 - (void)handleButtonClick:(UIButton *)sender {
     if (self.numSelectedBlock) {
-        self.numSelectedBlock(sender.tag);
+        
+        self.numSelectedBlock(self.levelTitles[sender.tag]);
     }
 }
 @end

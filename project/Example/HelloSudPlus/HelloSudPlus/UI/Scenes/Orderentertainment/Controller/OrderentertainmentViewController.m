@@ -175,7 +175,7 @@ typedef NS_ENUM(NSInteger, OrderUserStateType) {
         self.toGameUserId = @"";
     }
     
-    [handle success:[self.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 #pragma mark - Event

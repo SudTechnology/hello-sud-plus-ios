@@ -8,7 +8,7 @@
 #import "HomeFooterReusableView.h"
 
 @interface HomeFooterReusableView ()
-@property (nonatomic, strong) BaseView *contentView;
+
 @end
 
 @implementation HomeFooterReusableView
@@ -18,23 +18,23 @@
 }
 
 - (void)dtAddViews {
-    [self addSubview:self.contentView];
+    [self addSubview:self.whiteCoverView];
 }
 
 - (void)dtLayoutViews {
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.whiteCoverView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.trailing.mas_equalTo(0);
         make.height.mas_equalTo(12);
     }];
 }
 
-- (BaseView *)contentView {
-    if (!_contentView) {
-        _contentView = [[BaseView alloc] init];
-        _contentView.backgroundColor = UIColor.whiteColor;
-        [_contentView setPartRoundCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadius:8];
+- (BaseView *)whiteCoverView {
+    if (!_whiteCoverView) {
+        _whiteCoverView = [[BaseView alloc] init];
+        _whiteCoverView.backgroundColor = UIColor.whiteColor;
+        [_whiteCoverView setPartRoundCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadius:8];
     }
-    return _contentView;
+    return _whiteCoverView;
 }
 
 @end

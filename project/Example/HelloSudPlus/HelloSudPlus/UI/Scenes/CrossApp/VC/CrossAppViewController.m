@@ -520,7 +520,7 @@
     // 展示加入组队画面
     [self showJoinGroupState:self.isMeInGroup];
     [self updateSelectGameState];
-    [handle success:[self.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 - (BaseSceneGameEventHandler *)createGameEventHandler {

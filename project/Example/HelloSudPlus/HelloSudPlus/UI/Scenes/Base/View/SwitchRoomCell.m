@@ -13,6 +13,9 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, assign) CGFloat itemW;
 @property (nonatomic, assign) CGFloat itemH;
+
+@property (nonatomic, strong) UIView *tagView;
+@property (nonatomic, strong) UIImageView *tagImageView;
 @end
 
 @implementation SwitchRoomCell
@@ -27,6 +30,11 @@
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:m.gamePic]];
         self.nameLabel.text = m.gameName;
     }
+    if (m.supportLlm) {
+        self.tagView.hidden = NO;
+    } else {
+        self.tagView.hidden = YES;
+    }
 }
 
 - (void)dtAddViews {
@@ -36,6 +44,8 @@
     [self.containerView addSubview:self.iconImageView];
     [self.containerView addSubview:self.nameLabel];
     [self.containerView addSubview:self.inGameLabel];
+    [self.iconImageView addSubview:self.tagView];
+    [self.tagView addSubview:self.tagImageView];
 }
 
 - (void)dtLayoutViews {
@@ -56,6 +66,18 @@
     [self.inGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.mas_equalTo(self.iconImageView);
         make.size.mas_equalTo(CGSizeMake(40, 16));
+    }];
+    [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(@-3);
+        make.bottom.equalTo(@-3);
+        make.width.equalTo(@32);
+        make.height.equalTo(@10);
+    }];
+    
+    [self.tagImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.tagView);
+        make.width.equalTo(@24);
+        make.height.equalTo(@6);
     }];
 }
 
@@ -96,6 +118,26 @@
         [_inGameLabel setHidden:true];
     }
     return _inGameLabel;
+}
+
+
+- (UIView *)tagView {
+    if (!_tagView) {
+        _tagView = [[UIView alloc] init];
+        [_tagView dt_cornerRadius:5];
+        _tagView.backgroundColor = HEX_COLOR(@"#000000");
+
+    }
+    return _tagView;
+}
+
+- (UIImageView *)tagImageView {
+    if (!_tagImageView) {
+        _tagImageView = [[UIImageView alloc] init];
+        _tagImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _tagImageView.image = [UIImage imageNamed:@"llm_tag"];
+    }
+    return _tagImageView;
 }
 
 @end

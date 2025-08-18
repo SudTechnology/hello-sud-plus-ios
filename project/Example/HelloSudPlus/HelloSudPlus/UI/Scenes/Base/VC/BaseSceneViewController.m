@@ -12,6 +12,7 @@
 #import "InteractiveGameBannerView.h"
 #import "RoomRobotLevelSelectView.h"
 #import "RoomGiftShowcaseView.h"
+#import "AddBotOperateView.h"
 
 #define I_GUESS_YOU_SAID      1468434504892882946L // 你说我猜
 #define DIGITAL_BOMB          1468091457989509190L // 数字炸弹
@@ -36,6 +37,8 @@
 @property(nonatomic, strong) BaseView *sceneView;
 /// 添加机器人按钮
 @property(nonatomic, strong) BaseView *robotView;
+/// 添加角色分身
+@property(nonatomic, strong) BaseView *llmBotView;
 /// 互动礼物入口
 @property(nonatomic, strong) InteractiveGameBannerView *interactiveGameEnterView;
 /// 场景服务
@@ -174,6 +177,7 @@
     [self.contentView addSubview:self.inputView];
     [self.sceneView addSubview:self.giftShowcaseView];
     [self.sceneView addSubview:self.robotView];
+    [self.sceneView addSubview:self.llmBotView];
     [self.sceneView addSubview:self.interactiveGameEnterView];
     [self.sceneView addSubview:self.asrTipLabel];
     [self.sceneView addSubview:self.naviView];
@@ -244,8 +248,15 @@
     }];
     [self.robotView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-16);
-        make.width.height.mas_greaterThanOrEqualTo(0);
+        make.width.mas_greaterThanOrEqualTo(0);
+        make.height.equalTo(@32);
         make.bottom.equalTo(self.operatorView.mas_top).offset(-6);
+    }];
+    [self.llmBotView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(self.robotView.mas_leading).offset(-8);
+        make.width.mas_greaterThanOrEqualTo(0);
+        make.height.equalTo(@32);
+        make.centerY.equalTo(self.robotView);
     }];
     CGFloat b = kAppSafeBottom + 50;
     [self.closeRocketEffectView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -388,6 +399,9 @@
     UITapGestureRecognizer *robotViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRobotViewTap:)];
     [self.robotView addGestureRecognizer:robotViewTap];
     
+    UITapGestureRecognizer *llmBotViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onLlmbotViewTap:)];
+    [self.llmBotView addGestureRecognizer:llmBotViewTap];
+    
     UITapGestureRecognizer *closeRocketEffectTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCloseEffectViewTap:)];
     [self.closeRocketEffectView addGestureRecognizer:closeRocketEffectTap];
     
@@ -507,12 +521,13 @@
         make.centerX.equalTo(self.robotView);
     }];
     WeakSelf
-    v.numSelectedBlock = ^(NSInteger num) {
-        if (num == 4) {
+    v.numSelectedBlock = ^(NSString *selectedStr) {
+        if ([selectedStr isEqualToString:@"dt_room_robot_ai".dt_lan]) {
             [weakSelf closeRobotLevelSelectView];
             [weakSelf showAiIdNumView];
             return;
         }
+        NSInteger num = [titleArr indexOfObject:selectedStr] + 1;
         [weakSelf handleRobotSelected:num];
     };
     v.noSelectedBlock = ^(){
@@ -520,13 +535,62 @@
     };
 }
 
+- (void)showRobotNumViewV2 {
+
+    // 是自己或者房主
+    AddBotOperateView *v = [[AddBotOperateView alloc] init];
+    WeakSelf
+    v.operateCallback = ^(NSInteger tag) {
+        [DTSheetView close];
+        switch (tag) {
+            case 1:{
+             /// 添加机器人
+                NSInteger num = arc4random()%3 + 1;
+                [weakSelf handleRobotSelected:num];
+            }
+                break;
+            case 2:{
+             /// 添加默认音色
+                NSInteger randId = arc4random() % 275;
+                if (randId <= 0) {
+                    randId = 1;
+                }
+                [weakSelf handleBigModelRobotIdSelected:[NSString stringWithFormat:@"%@", @(randId)]];
+            }
+                break;
+            case 3:{
+             /// 自定义
+                [weakSelf handleAiCloneBot];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    };
+    v.cancelCallback = ^(UIButton *sender) {
+        [DTSheetView close];
+    };
+    [DTSheetView show:v rootView:self.view hiddenBackCover:NO onCloseCallback:^{
+
+    }];
+
+}
+
+
 - (void)showAiIdNumView {
     RoomRobotLevelSelectView *v = self.robotIdSelectView;
     if (!v) {
         v = RoomRobotLevelSelectView.new;
         self.robotIdSelectView = v;
     }
-    NSArray *titleArr = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20"];
+    NSInteger maxCount = 275;
+    NSMutableArray *titleArr = [[NSMutableArray alloc]init];
+//    [titleArr addObject:@"dt_room_robot_ai_clone".dt_lan];
+    for (int i = 1; i <= maxCount; ++i) {
+        [titleArr addObject:[NSString stringWithFormat:@"%@", @(i)]];
+    }
+    
     [v updateTitles:titleArr];
     [self.sceneView addSubview:v];
     [v mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -536,15 +600,59 @@
         make.centerX.equalTo(self.robotView);
     }];
     WeakSelf
-    v.numSelectedBlock = ^(NSInteger num) {
-        [weakSelf handleBigModelRobotIdSelected:num];
+    v.numSelectedBlock = ^(NSString *selectStr) {
+        if ([selectStr isEqualToString:@"dt_room_robot_ai_clone".dt_lan]) {
+            [weakSelf handleAiCloneBot];
+            return;
+        }
+        
+        [weakSelf handleBigModelRobotIdSelected:selectStr];
     };
     v.noSelectedBlock = ^(){
         [weakSelf closeRobotLevelSelectView];
     };
 }
 
-- (void)handleBigModelRobotIdSelected:(NSInteger)num {
+/// 处理分身机器人
+- (void)handleAiCloneBot {
+    
+    DDLogDebug(@"handleAiCloneBot");
+    
+    WeakSelf
+    ReqRandAiCloneInfoModel *reqModel = ReqRandAiCloneInfoModel.new;
+    [UserService.shared reqRandAiCloneInfo:reqModel success:^(RespRandAiCloneInfoModel * _Nonnull resp) {
+    
+        // 添加大模型AI
+        NSMutableArray *aiPlayers = [[NSMutableArray alloc] init];
+        BigScaleModelAiPlayerInfoModel *aiPlayerInfoModel = [BigScaleModelAiPlayerInfoModel alloc];
+        aiPlayerInfoModel.userId = [NSString stringWithFormat:@"%@", @(resp.aiUid)];
+        aiPlayerInfoModel.name = resp.nickname;
+        aiPlayerInfoModel.avatar = resp.avatarUrl;
+        aiPlayerInfoModel.gender = resp.gender;
+        aiPlayerInfoModel.aiIdStr = resp.aiId;
+        [aiPlayers addObject:aiPlayerInfoModel];
+
+        AppCommonGameAddBigScaleModelAiPlayersModel *appCommonGameAddAiPlayersModel = [[AppCommonGameAddBigScaleModelAiPlayersModel alloc] init];
+        appCommonGameAddAiPlayersModel.aiPlayers = aiPlayers;
+        appCommonGameAddAiPlayersModel.isReady = YES;
+        [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameAddBigScaleModelAPlayers:appCommonGameAddAiPlayersModel];
+        /// 将机器人上麦
+        RobotInfoModel *robotInfoModel = RobotInfoModel.new;
+        robotInfoModel.name = aiPlayerInfoModel.name;
+        robotInfoModel.avatar = aiPlayerInfoModel.avatar;
+        robotInfoModel.gender = aiPlayerInfoModel.gender;
+        robotInfoModel.userId = [aiPlayerInfoModel.userId longLongValue];
+        robotInfoModel.isLlmBot = YES;
+        [weakSelf joinCommonRobotToMic:robotInfoModel showNoMic:YES];
+    } fail:nil];
+    
+    [HSThreadUtils dispatchMainAfter:0 callback:^{
+        [self closeRobotLevelSelectView];
+    }];
+}
+
+/// 处理大模型选中ID
+- (void)handleBigModelRobotIdSelected:(NSString *)selectStr {
     WeakSelf
     // 查找一个未在麦位机器人
     
@@ -560,13 +668,16 @@
         aiPlayerInfoModel.name = robotInfoModel.name;
         aiPlayerInfoModel.avatar = robotInfoModel.avatar;
         aiPlayerInfoModel.gender = robotInfoModel.gender;
-        aiPlayerInfoModel.aiId = num;
+        aiPlayerInfoModel.aiIdStr = selectStr;
         [aiPlayers addObject:aiPlayerInfoModel];
 
         AppCommonGameAddBigScaleModelAiPlayersModel *appCommonGameAddAiPlayersModel = [[AppCommonGameAddBigScaleModelAiPlayersModel alloc] init];
         appCommonGameAddAiPlayersModel.aiPlayers = aiPlayers;
         appCommonGameAddAiPlayersModel.isReady = YES;
         [weakSelf.gameEventHandler.sudFSTAPPDecorator notifyAppCommonGameAddBigScaleModelAPlayers:appCommonGameAddAiPlayersModel];
+        /// 将机器人上麦
+        robotInfoModel.isLlmBot = YES;
+        [weakSelf joinCommonRobotToMic:robotInfoModel showNoMic:YES];
     }];
     [HSThreadUtils dispatchMainAfter:0 callback:^{
         [self closeRobotLevelSelectView];
@@ -574,15 +685,16 @@
 }
 
 
+/// 处理添加机器人
 - (void)handleRobotSelected:(NSInteger)num {
     
     NSInteger level = num;
     WeakSelf
-    NSArray *arr = [self getAllRobotMic];
-    if (arr.count > 8) {
-        [ToastUtil show:@"最多只能加8个机器人"];
-        return;
-    }
+//    NSArray *arr = [self getAllRobotMic];
+//    if (arr.count >= 11) {
+//        [ToastUtil show:@"最多只能加11个机器人"];
+//        return;
+//    }
     // 查找一个未在麦位机器人
     [self findOneNotInMicRobotWithLevel:level completed:^(RobotInfoModel *robotInfoModel) {
         /// 将机器人上麦
@@ -593,8 +705,6 @@
     }];
     
 }
-
-
 
 
 - (void)closeRobotLevelSelectView {
@@ -609,8 +719,14 @@
 }
 
 - (void)onRobotViewTap:(id)tap {
-    [self showRobotNumView];
+//    [self showRobotNumView];
+    [self showRobotNumViewV2];
 }
+
+- (void)onLlmbotViewTap:(id)tap {
+    [self handleAiCloneBot];
+}
+
 
 - (void)onCloseEffectViewTap:(id)tap {
     [self.interactiveGameManager notifyGameCloseRocketEffect];
@@ -1289,6 +1405,11 @@
                 if (isUserInGame) {
                     [self.gameEventHandler.sudFSTAPPDecorator notifyAppComonKickStateWithUserId:m.userID];
                 }
+                if (m.userID) {
+                    AppCommonGameExitBigScaleModelAiPlayersModel *exitAiModel = AppCommonGameExitBigScaleModelAiPlayersModel.new;
+                    exitAiModel.playerIds = @[m.userID];
+                    [self.gameEventHandler.sudFSTAPPDecorator notifyStateChange:APP_COMMON_GAME_EXIT_BIG_SCALE_MODEL_AI_PLAYERS dataJson:exitAiModel];
+                }
                 
             }
         }
@@ -1302,7 +1423,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_MIC_CHANGED object:nil userInfo:@{@"msgModel": model}];
     if (model.cmd == CMD_UP_MIC_NOTIFY &&
             [self.gameEventHandler.sudFSMMGDecorator isPlayerIsCaptain:AppService.shared.loginUserID] &&
-            model.sendUser.isAi) {
+            model.sendUser.isAi && !model.sendUser.isLLmBot) {
         // 自己是队长，将机器人加入游戏中
         [self addRobotFromMicUserModels:@[model.sendUser]];
     }
@@ -1698,6 +1819,32 @@
     return _robotView;
 }
 
+
+- (BaseView *)llmBotView {
+    if (!_llmBotView) {
+        _llmBotView = BaseView.new;
+
+        UILabel *lab = [[UILabel alloc] init];
+        lab.text = @"dt_room_robot_ai_clone".dt_lan;
+        lab.font = UIFONT_MEDIUM(12);
+        lab.textColor = UIColor.whiteColor;
+        [_llmBotView addSubview:lab];
+        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(@6);
+            make.trailing.equalTo(@-6);
+            make.top.equalTo(@3);
+            make.bottom.equalTo(@-3);
+        }];
+        NSArray *colorArr = @[(id) [UIColor dt_colorWithHexString:@"#33FF8B" alpha:1].CGColor, (id) [UIColor dt_colorWithHexString:@"#13C47C" alpha:1].CGColor];
+        [_llmBotView dtAddGradientLayer:@[@(0.0f), @(1.0f)] colors:colorArr startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 0.28) cornerRadius:4];
+        _llmBotView.hidden = YES;
+    }
+    return _llmBotView;
+}
+
+
+
+
 - (BaseView *)closeRocketEffectView {
     if (!_closeRocketEffectView) {
         _closeRocketEffectView = BaseView.new;
@@ -1756,7 +1903,7 @@
     if (_dicMicModel == nil) {
         _dicMicModel = NSMutableDictionary.new;
         // 初始化构建9麦model
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 12; i++) {
             AudioRoomMicModel *m = AudioRoomMicModel.new;
             m.micIndex = i;
             NSString *key = [NSString stringWithFormat:@"%@", @(i)];
@@ -1908,6 +2055,10 @@
     return NO;
 }
 
+- (BOOL)isUserInGame:(NSString *)userId {
+    return [self.gameEventHandler.sudFSMMGDecorator isPlayerIn:userId];
+}
+
 /// 查找一个没有在麦位的机器人
 /// @param completed
 - (void)findOneNotInMicRobotWithLevel:(NSInteger)level completed:(void (^)(RobotInfoModel *robotInfoModel))completed {
@@ -1933,12 +2084,13 @@
     }
 }
 
-/// 从缓存机器人中找出一个未在麦位的
+/// 从缓存机器人中找出一个未在麦位也不能在游戏的
 - (RobotInfoModel *)findOneNotInMicRobotFromCacheListWithLevel:(NSInteger)level  {
     NSMutableArray *tempList = [[NSMutableArray alloc] init];
     
     for (RobotInfoModel *robotInfoModel in self.cacheRobotList) {
-        if (![self isUserInMic:[NSString stringWithFormat:@"%@", @(robotInfoModel.userId)]]) {
+        NSString *userId = [NSString stringWithFormat:@"%@", @(robotInfoModel.userId)];
+        if (![self isUserInMic:userId] && ![self isUserInGame:userId]) {
             // 如果存在等级，则加上判断等级，否则直接返回
             if (level > 0) {
                 if (robotInfoModel.level == level) {
@@ -2052,7 +2204,7 @@
     AudioRoomMicModel *micModel = [self getOneEmptyMic:1];
     if (micModel == nil) {
         if (showNoMic) {
-            [ToastUtil show:NSString.dt_room_there_no_mic];
+//            [ToastUtil show:NSString.dt_room_there_no_mic];
         }
         return;
     }
@@ -2066,6 +2218,7 @@
         proxyUser.isRobot = YES;
         proxyUser.isAi = YES;
         proxyUser.level = robotModel.level;
+        proxyUser.isLLmBot = robotModel.isLlmBot;
         micModel.user = proxyUser;
         [kAudioRoomService reqSwitchMic:self.roomID.integerValue micIndex:(int) micModel.micIndex handleType:0 proxyUser:proxyUser success:nil fail:nil];
         return;
@@ -2091,7 +2244,7 @@
 
 - (GameCfgModel *)onGetGameCfg {
     GameCfgModel *m = [GameCfgModel defaultCfgModel];
-    m.ui.lobby_players.hide = true;
+    m.ui.lobby_players.hide = NO;
     m.ui.nft_avatar.hide = NO;
     m.ui.game_opening.hide = NO;
     m.ui.game_mvp.hide = NO;

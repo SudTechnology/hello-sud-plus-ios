@@ -21,3 +21,24 @@
 @implementation ReqPlayerPropsCardsParamModel
 
 @end
+
+@implementation ReqAiSwitchStateModel
+
+@end
+
+@implementation ReqAiCloneInfoModel
+
+
+@end
+
+@implementation ReqSaveAiCloneInfoModel
+
+
+@end
+
+@implementation ReqRandAiCloneInfoModel
+
+
+@end
+
+

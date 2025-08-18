@@ -22,3 +22,16 @@
 @implementation RespPlayerPropsCardsModel
 
 @end
+
+
+@implementation AiInfoModel
+@end
+
+/// 响应数据
+@implementation RespAiCloneInfoModel
+@end
+
+@implementation RespRandAiCloneInfoModel
+@end
+
+

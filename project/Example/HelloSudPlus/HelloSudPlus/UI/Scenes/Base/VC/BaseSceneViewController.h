@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, readonly) BaseView *sceneView;
 /// 添加机器人按钮
 @property(nonatomic, strong, readonly) BaseView *robotView;
+/// 添加角色分身
+@property(nonatomic, strong, readonly) BaseView *llmBotView;
 
 
 /// 游戏上遮罩背景视图

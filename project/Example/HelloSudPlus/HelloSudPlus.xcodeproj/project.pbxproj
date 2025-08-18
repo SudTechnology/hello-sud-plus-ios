@@ -149,6 +149,16 @@
 		6C26CC5728D9C3BD00C2572B /* SwitchEnvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26CC5628D9C3BD00C2572B /* SwitchEnvViewController.m */; };
 		6C26CC5A28D9C3C900C2572B /* SwitchEnvModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26CC5928D9C3C900C2572B /* SwitchEnvModel.m */; };
 		6C26CC5D28D9C46E00C2572B /* SwitchEnvTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C26CC5C28D9C46E00C2572B /* SwitchEnvTableViewCell.m */; };
+		6C2A00122E13912600C766B6 /* TagContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2A00112E13912600C766B6 /* TagContentView.m */; };
+		6C2A00152E142C8F00C766B6 /* AddBotOperateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2A00142E142C8F00C766B6 /* AddBotOperateView.m */; };
+		6C2AFF822E06922B00C766B6 /* LLMBotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2AFF812E06922B00C766B6 /* LLMBotViewController.m */; };
+		6C2AFF8A2E094FD300C766B6 /* LLMTailFooterReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2AFF892E094FD300C766B6 /* LLMTailFooterReusableView.m */; };
+		6C2AFF8D2E0A831500C766B6 /* SoundShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2AFF8C2E0A831500C766B6 /* SoundShowView.m */; };
+		6C2AFF902E0A92B300C766B6 /* BotMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2AFF8F2E0A92B300C766B6 /* BotMoreView.m */; };
+		6C2AFF932E0A933D00C766B6 /* SoundRecordOperateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2AFF922E0A933D00C766B6 /* SoundRecordOperateView.m */; };
+		6C2AFF982E0AD03E00C766B6 /* CommonListStringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2AFF942E0AD03E00C766B6 /* CommonListStringCell.m */; };
+		6C2AFF992E0AD03E00C766B6 /* CommonStringSelectPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2AFF972E0AD03E00C766B6 /* CommonStringSelectPopView.m */; };
+		6C2AFF9C2E0AD15400C766B6 /* CommonListStringCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2AFF9B2E0AD15400C766B6 /* CommonListStringCellModel.m */; };
 		6C453E072948711F00F86B3A /* RespCrossRoomListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C453E052948711F00F86B3A /* RespCrossRoomListModel.m */; };
 		6C4607AA285083CB005C99EF /* GuessRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607A9285083CB005C99EF /* GuessRankViewController.m */; };
 		6C4607AD2850A818005C99EF /* GuessRankContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4607AC2850A817005C99EF /* GuessRankContentView.m */; };
@@ -217,7 +227,7 @@
 		6CA68D3B28E3022D00BDE442 /* LeagueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA68D3A28E3022D00BDE442 /* LeagueDetailViewController.m */; };
 		6CB381052C8B279200793AE3 /* ModelAiRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB381032C8B279200793AE3 /* ModelAiRoomViewController.m */; };
 		6CB381082C8BFCD500793AE3 /* ModelAiRoomOperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB381072C8BFCD500793AE3 /* ModelAiRoomOperatorView.m */; };
-		6CB3810C2C8C476800793AE3 /* RWAudioCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3810A2C8C476700793AE3 /* RWAudioCapture.m */; };
+		6CB3810C2C8C476800793AE3 /* SudAudioCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3810A2C8C476700793AE3 /* SudAudioCapture.m */; };
 		6CB3810F2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3810E2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.m */; };
 		6CB9996C2A0CC7CB00AD12CF /* InteractiveGameCrazyCarHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9996A2A0CC7CA00AD12CF /* InteractiveGameCrazyCarHandler.m */; };
 		6CC3E77A28C1BB7D00AA934B /* MyEthereumChainsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3E77728C1BB7D00AA934B /* MyEthereumChainsCellModel.m */; };
@@ -733,6 +743,26 @@
 		6C26CC5928D9C3C900C2572B /* SwitchEnvModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchEnvModel.m; sourceTree = "<group>"; };
 		6C26CC5B28D9C46E00C2572B /* SwitchEnvTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchEnvTableViewCell.h; sourceTree = "<group>"; };
 		6C26CC5C28D9C46E00C2572B /* SwitchEnvTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchEnvTableViewCell.m; sourceTree = "<group>"; };
+		6C2A00102E13912600C766B6 /* TagContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TagContentView.h; sourceTree = "<group>"; };
+		6C2A00112E13912600C766B6 /* TagContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TagContentView.m; sourceTree = "<group>"; };
+		6C2A00132E142C8F00C766B6 /* AddBotOperateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddBotOperateView.h; sourceTree = "<group>"; };
+		6C2A00142E142C8F00C766B6 /* AddBotOperateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddBotOperateView.m; sourceTree = "<group>"; };
+		6C2AFF802E06922B00C766B6 /* LLMBotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMBotViewController.h; sourceTree = "<group>"; };
+		6C2AFF812E06922B00C766B6 /* LLMBotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMBotViewController.m; sourceTree = "<group>"; };
+		6C2AFF882E094FD300C766B6 /* LLMTailFooterReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMTailFooterReusableView.h; sourceTree = "<group>"; };
+		6C2AFF892E094FD300C766B6 /* LLMTailFooterReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMTailFooterReusableView.m; sourceTree = "<group>"; };
+		6C2AFF8B2E0A831500C766B6 /* SoundShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundShowView.h; sourceTree = "<group>"; };
+		6C2AFF8C2E0A831500C766B6 /* SoundShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundShowView.m; sourceTree = "<group>"; };
+		6C2AFF8E2E0A92B300C766B6 /* BotMoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BotMoreView.h; sourceTree = "<group>"; };
+		6C2AFF8F2E0A92B300C766B6 /* BotMoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BotMoreView.m; sourceTree = "<group>"; };
+		6C2AFF912E0A933D00C766B6 /* SoundRecordOperateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundRecordOperateView.h; sourceTree = "<group>"; };
+		6C2AFF922E0A933D00C766B6 /* SoundRecordOperateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundRecordOperateView.m; sourceTree = "<group>"; };
+		6C2AFF942E0AD03E00C766B6 /* CommonListStringCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonListStringCell.m; sourceTree = "<group>"; };
+		6C2AFF952E0AD03E00C766B6 /* CommonListStringCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonListStringCell.h; sourceTree = "<group>"; };
+		6C2AFF962E0AD03E00C766B6 /* CommonStringSelectPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonStringSelectPopView.h; sourceTree = "<group>"; };
+		6C2AFF972E0AD03E00C766B6 /* CommonStringSelectPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonStringSelectPopView.m; sourceTree = "<group>"; };
+		6C2AFF9A2E0AD15400C766B6 /* CommonListStringCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonListStringCellModel.h; sourceTree = "<group>"; };
+		6C2AFF9B2E0AD15400C766B6 /* CommonListStringCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonListStringCellModel.m; sourceTree = "<group>"; };
 		6C453E052948711F00F86B3A /* RespCrossRoomListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespCrossRoomListModel.m; sourceTree = "<group>"; };
 		6C453E062948711F00F86B3A /* RespCrossRoomListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespCrossRoomListModel.h; sourceTree = "<group>"; };
 		6C4607A8285083CB005C99EF /* GuessRankViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuessRankViewController.h; sourceTree = "<group>"; };
@@ -869,8 +899,8 @@
 		6CB381032C8B279200793AE3 /* ModelAiRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelAiRoomViewController.m; sourceTree = "<group>"; };
 		6CB381062C8BFCD500793AE3 /* ModelAiRoomOperatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelAiRoomOperatorView.h; sourceTree = "<group>"; };
 		6CB381072C8BFCD500793AE3 /* ModelAiRoomOperatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelAiRoomOperatorView.m; sourceTree = "<group>"; };
-		6CB381092C8C476700793AE3 /* RWAudioCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWAudioCapture.h; sourceTree = "<group>"; };
-		6CB3810A2C8C476700793AE3 /* RWAudioCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWAudioCapture.m; sourceTree = "<group>"; };
+		6CB381092C8C476700793AE3 /* SudAudioCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudAudioCapture.h; sourceTree = "<group>"; };
+		6CB3810A2C8C476700793AE3 /* SudAudioCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudAudioCapture.m; sourceTree = "<group>"; };
 		6CB3810D2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAudioMsgTableViewCell.h; sourceTree = "<group>"; };
 		6CB3810E2C8C4E4400793AE3 /* RoomAudioMsgTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAudioMsgTableViewCell.m; sourceTree = "<group>"; };
 		6CB3D146288FEE220037EE88 /* HelloSudPlus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HelloSudPlus.entitlements; sourceTree = "<group>"; };
@@ -1258,6 +1288,7 @@
 		44018CE027EAC49900FD9D0F /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6C2AFF7E2E0691BD00C766B6 /* LLM */,
 				6C17AE5E2B2FF1DA00AD1A34 /* Game */,
 				4455ACED27EAC658001516EE /* Home */,
 				4455ACDA27EAC657001516EE /* Login */,
@@ -1862,6 +1893,8 @@
 		4455ADE327EAC6F7001516EE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6C2A00132E142C8F00C766B6 /* AddBotOperateView.h */,
+				6C2A00142E142C8F00C766B6 /* AddBotOperateView.m */,
 				6C6DFD312AE3E27000EC97FB /* RoomGiftcaseRoleColCell.h */,
 				6C6DFD302AE3E27000EC97FB /* RoomGiftcaseRoleColCell.m */,
 				6C6DFD2E2AE37E9200EC97FB /* RoomGiftcaseColCell.h */,
@@ -2166,6 +2199,47 @@
 			path = Agora;
 			sourceTree = "<group>";
 		};
+		6C2AFF7E2E0691BD00C766B6 /* LLM */ = {
+			isa = PBXGroup;
+			children = (
+				6C2AFF872E094C8600C766B6 /* View */,
+				6C2AFF7F2E0691E200C766B6 /* Controller */,
+			);
+			path = LLM;
+			sourceTree = "<group>";
+		};
+		6C2AFF7F2E0691E200C766B6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6C2AFF802E06922B00C766B6 /* LLMBotViewController.h */,
+				6C2AFF812E06922B00C766B6 /* LLMBotViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6C2AFF872E094C8600C766B6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C2AFF9A2E0AD15400C766B6 /* CommonListStringCellModel.h */,
+				6C2AFF9B2E0AD15400C766B6 /* CommonListStringCellModel.m */,
+				6C2AFF942E0AD03E00C766B6 /* CommonListStringCell.m */,
+				6C2AFF952E0AD03E00C766B6 /* CommonListStringCell.h */,
+				6C2AFF962E0AD03E00C766B6 /* CommonStringSelectPopView.h */,
+				6C2AFF972E0AD03E00C766B6 /* CommonStringSelectPopView.m */,
+				6C2AFF882E094FD300C766B6 /* LLMTailFooterReusableView.h */,
+				6C2AFF892E094FD300C766B6 /* LLMTailFooterReusableView.m */,
+				6C2AFF8B2E0A831500C766B6 /* SoundShowView.h */,
+				6C2AFF8C2E0A831500C766B6 /* SoundShowView.m */,
+				6C2AFF8E2E0A92B300C766B6 /* BotMoreView.h */,
+				6C2AFF8F2E0A92B300C766B6 /* BotMoreView.m */,
+				6C2AFF912E0A933D00C766B6 /* SoundRecordOperateView.h */,
+				6C2AFF922E0A933D00C766B6 /* SoundRecordOperateView.m */,
+				6C2A00102E13912600C766B6 /* TagContentView.h */,
+				6C2A00112E13912600C766B6 /* TagContentView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		6C4607A528503E0B005C99EF /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2410,8 +2484,8 @@
 		6CB3810B2C8C476700793AE3 /* AudioCapture */ = {
 			isa = PBXGroup;
 			children = (
-				6CB381092C8C476700793AE3 /* RWAudioCapture.h */,
-				6CB3810A2C8C476700793AE3 /* RWAudioCapture.m */,
+				6CB381092C8C476700793AE3 /* SudAudioCapture.h */,
+				6CB3810A2C8C476700793AE3 /* SudAudioCapture.m */,
 			);
 			path = AudioCapture;
 			sourceTree = "<group>";
@@ -3072,7 +3146,6 @@
 				6C192E46279523B000553034 /* Resources */,
 				1057205B42502B672EE74406 /* [CP] Embed Pods Frameworks */,
 				44DF038F2796ADCD006EE6AC /* Embed Frameworks */,
-				7B794445875629A1759C23F6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3163,23 +3236,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HelloSudPlus/Pods-HelloSudPlus-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7B794445875629A1759C23F6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HelloSudPlus/Pods-HelloSudPlus-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HelloSudPlus/Pods-HelloSudPlus-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HelloSudPlus/Pods-HelloSudPlus-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D23D6C32901616787A057FFD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3250,6 +3306,7 @@
 				4455AD8927EAC658001516EE /* ChangeRTCModel.m in Sources */,
 				6C529CBB2B626D9E000F9176 /* CrossRoomSceneGameEventHandler.m in Sources */,
 				6C4607FC285346BF005C99EF /* QuickSendEffectColCell.m in Sources */,
+				6C2AFF9C2E0AD15400C766B6 /* CommonListStringCellModel.m in Sources */,
 				4455ADB627EAC658001516EE /* AudioRoomViewController.m in Sources */,
 				444F59EE27F83FEF00FA1FB2 /* TicketJoinModel.m in Sources */,
 				6CEBC0BE2B57CC590047B3D4 /* DTUIDevice+Extension.m in Sources */,
@@ -3292,6 +3349,7 @@
 				6C076E80279E8EBD00650209 /* AudioCommon.m in Sources */,
 				E551BF31281500900046D417 /* IMRoomManager.m in Sources */,
 				E5EDC0BE281B941D00E6875B /* AsyncCallWrapper.m in Sources */,
+				6C2AFF8A2E094FD300C766B6 /* LLMTailFooterReusableView.m in Sources */,
 				6C4607C828520D22005C99EF /* GuessRoomService.m in Sources */,
 				6C076E7D279E833C00650209 /* AudioEngineFactory.m in Sources */,
 				6CC3E79828C1BBB800AA934B /* MySelectEtherChainsView.m in Sources */,
@@ -3342,6 +3400,7 @@
 				4455ADCE27EAC658001516EE /* TicketChooseNoticeView.m in Sources */,
 				E5EDB8C027E8785400EE99D0 /* AudioJoinRoomModel.m in Sources */,
 				6C6DFD2C2AE373E800EC97FB /* RoomGiftShowcaseView.m in Sources */,
+				6C2AFF932E0A933D00C766B6 /* SoundRecordOperateView.m in Sources */,
 				44BC48E228153ABB00E4E3F7 /* RoomOrderCreateModel.m in Sources */,
 				443BA4E6280D41FF008B2BFB /* OrderChooseGamesCell.m in Sources */,
 				6CC3E7A328C1BBB800AA934B /* MyNFTView.m in Sources */,
@@ -3435,6 +3494,7 @@
 				4455AD9F27EAC658001516EE /* SwitchMicModel.m in Sources */,
 				4455AE0627EAC6F7001516EE /* BaseSceneViewController.m in Sources */,
 				6C46080528583A30005C99EF /* GuessSelectPopView.m in Sources */,
+				6C2AFF822E06922B00C766B6 /* LLMBotViewController.m in Sources */,
 				4455AD8A27EAC658001516EE /* HSSettingModel.m in Sources */,
 				4455AD9127EAC658001516EE /* UserInfoListModel.m in Sources */,
 				4452DDDE281134A9001FEEDB /* CustomRoomApiView.m in Sources */,
@@ -3450,6 +3510,7 @@
 				4455AD9A27EAC658001516EE /* GameItemCollectionViewCell.m in Sources */,
 				4455ADA327EAC658001516EE /* ExitRoomModel.m in Sources */,
 				4455ADB227EAC658001516EE /* GiftItemCollectionViewCell.m in Sources */,
+				6C2A00122E13912600C766B6 /* TagContentView.m in Sources */,
 				BC210CD2A39ED43E3A6F1E84 /* RespModel.m in Sources */,
 				6CEBC0CB2B57CC590047B3D4 /* AppUtil.m in Sources */,
 				BC210C6C59677FBEB52A1A64 /* UserDetailView.m in Sources */,
@@ -3461,6 +3522,7 @@
 				6C46082328630CD7005C99EF /* RespGiftListModel.m in Sources */,
 				6CC3E77C28C1BB7D00AA934B /* HSNFTListCellModel.m in Sources */,
 				BC21082AFC6C2839E3D94F4D /* SceneContentView.m in Sources */,
+				6C2A00152E142C8F00C766B6 /* AddBotOperateView.m in Sources */,
 				443BA4EC280D5F11008B2BFB /* HomeCategoryView.m in Sources */,
 				BC2105663A6D9E26AA05DAD3 /* HSHttpService.m in Sources */,
 				3306D5C159410525EEB8ACF2 /* AllCategoryView.m in Sources */,
@@ -3478,6 +3540,7 @@
 				BC210E3D2377EDF7498C2DF1 /* PKGameEmptyView.m in Sources */,
 				BC21032F94AB142E1BAA2114 /* PKRoomListCell.m in Sources */,
 				BC2104F9F2F24A9C64A3CEE7 /* BaseSceneService.m in Sources */,
+				6C2AFF902E0A92B300C766B6 /* BotMoreView.m in Sources */,
 				BC210F74B7434253E2FEF91D /* GuessRoomViewController.m in Sources */,
 				6C4607FF28572099005C99EF /* GuessMineView.m in Sources */,
 				BC210A475DC9C92BEC882414 /* GuessCategoryView.m in Sources */,
@@ -3487,6 +3550,8 @@
 				6C4607C12851F725005C99EF /* DanmakuRoomViewController.m in Sources */,
 				BC21007CAEC5ADAFE38A6BF0 /* MoreGuessHeaderView.m in Sources */,
 				6CEBC0B02B57CC590047B3D4 /* DTPaddingLabel.m in Sources */,
+				6C2AFF982E0AD03E00C766B6 /* CommonListStringCell.m in Sources */,
+				6C2AFF992E0AD03E00C766B6 /* CommonStringSelectPopView.m in Sources */,
 				6CB9996C2A0CC7CB00AD12CF /* InteractiveGameCrazyCarHandler.m in Sources */,
 				BC210F9EEB441541994A75BC /* MoreGuessTableViewCell.m in Sources */,
 				6CE72720292B82FF0023D5BE /* RocketSelectPopUserColCell.m in Sources */,
@@ -3528,6 +3593,7 @@
 				6CE7272C292B83870023D5BE /* HomeBannerView.m in Sources */,
 				BC210F7B9020973BAD4CF677 /* WalletAddressSwitchPopView.m in Sources */,
 				BC210B212D9241C9CE03A083 /* WalletAddressSwitchCell.m in Sources */,
+				6C2AFF8D2E0A831500C766B6 /* SoundShowView.m in Sources */,
 				6C26CC5A28D9C3C900C2572B /* SwitchEnvModel.m in Sources */,
 				BC210CF89C901006931DE6F5 /* WalletAddressSwitchCellModel.m in Sources */,
 				6C8B61382BA9633000ADFEE3 /* LeagueRoomSceneGameEventHandler.m in Sources */,
@@ -3549,7 +3615,7 @@
 				BC21033DD0AA9A6447EC94C1 /* CrossAppSelectGameModel.m in Sources */,
 				BC21069728DCAFD65BF61715 /* GameMatchingView.m in Sources */,
 				BC210A8BC55D491FB72FE329 /* GameMatchGroupView.m in Sources */,
-				6CB3810C2C8C476800793AE3 /* RWAudioCapture.m in Sources */,
+				6CB3810C2C8C476800793AE3 /* SudAudioCapture.m in Sources */,
 				BC2106EA643D5C3F1C3C3A8B /* MatchSeatView.m in Sources */,
 				BC210D55859B3FD659E31748 /* CrossAppRoomService.m in Sources */,
 				BC2107B89AA92C9C99EDFB4F /* RespCrossAppModels.m in Sources */,
@@ -3775,7 +3841,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 99;
+				CURRENT_PROJECT_VERSION = 9900;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6FVM63RW6;
@@ -3835,7 +3901,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 99;
+				CURRENT_PROJECT_VERSION = 9900;
 				DEVELOPMENT_TEAM = P6FVM63RW6;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6FVM63RW6;
 				ENABLE_BITCODE = NO;

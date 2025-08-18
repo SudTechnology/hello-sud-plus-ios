@@ -8,7 +8,7 @@
 /// 机器人选择视图
 @interface RoomRobotLevelSelectView : BaseView
 
-@property (nonatomic, strong)void(^numSelectedBlock)(NSInteger num);
+@property (nonatomic, strong)void(^numSelectedBlock)(NSString *selectStr);
 @property (nonatomic, strong)void(^noSelectedBlock)(void);
 - (void)updateTitles:(NSArray<NSString *>*)titleArr;
 @end

@@ -184,7 +184,7 @@
             }
         }
         [AppService.shared addGameListToTab:0 gameList:originalGameArr];
-        AppService.shared.sceneList = model.sceneList;
+        [AppService.shared addSceneCacheList:model.sceneList toTabId:0];
 
         /// dataList  headerGameList  headerSceneList 业务需求赋值
         for (HSSceneModel *m in model.sceneList) {

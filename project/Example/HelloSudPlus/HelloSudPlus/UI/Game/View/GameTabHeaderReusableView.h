@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)NSIndexPath *indexPath;
 @property (nonatomic, assign)BOOL isShowBanner;
 - (void)showBanner:(RespBannerListModel *)respBannerListModel;
+@property(nonatomic, strong) NSInteger(^marginLBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END

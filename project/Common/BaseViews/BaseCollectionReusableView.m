@@ -11,11 +11,11 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self dtConfigUI];
         [self dtAddViews];
-        [self dtLayoutViews];
+        [self dtConfigUI];
         [self dtConfigEvents];
         [self dtUpdateUI];
+        [self dtLayoutViews];
     }
     return self;
 }

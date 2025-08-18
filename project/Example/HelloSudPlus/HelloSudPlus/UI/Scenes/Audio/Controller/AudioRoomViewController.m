@@ -139,6 +139,7 @@
 }
 
 - (void)hanldeInitSudFSMMG {
+    [super hanldeInitSudFSMMG];
     self.audioMicContentView.iSudFSMMG = self.gameEventHandler.sudFSMMGDecorator;
 }
 

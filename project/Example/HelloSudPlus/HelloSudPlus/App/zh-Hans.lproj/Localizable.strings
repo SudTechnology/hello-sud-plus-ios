@@ -73,6 +73,7 @@
 "dt_tab_my" = "我的";
 "dt_my_about_us" = "关于我们";
 "dt_tab_game" = "游戏";
+"dt_tab_llm" = "大模型";
 /// Scenes
 "dt_send" = "送给";
 "dt_down_mic" = "下麦";
@@ -483,6 +484,8 @@
 "dt_room_robot_middle" = "适中";
 "dt_room_robot_hard" = "困难";
 "dt_room_robot_ai" = "大模型";
+"dt_room_robot_ai_clone" = "角色分身";
+
 
 "dt_room_gift_showcase_role_title" = "角色礼物橱窗";
 "dt_room_gift_showcase_title" = "礼物卡橱窗";
@@ -490,3 +493,42 @@
 "dt_room_danmu_prefix" = "发送";
 "dt_operator_record_tip" = "按住说话";
 "dt_operator_record_end_tip" = "松开结束";
+
+"dt_create_clone_title" = "创建我的分身";
+"dt_voice_training" = "音色训练中";
+"dt_voice_training_failed" = "训练失败请重新提交";
+"dt_open_clone" = "请开启分身";
+"dt_close_clone_tip" = "关闭后本人的LLM_BOT分身无法使用";
+"dt_click_play" = "点击播放";
+"dt_create_clone" = "创建分身";
+"dt_selected_empty" = "无";
+"dt_ai_input_name" = "请输入姓名";
+"dt_ai_open_clone" = "启用分身";
+"dt_ai_clone_name" = "姓名";
+"dt_ai_clone_character_title" = "性格特点";
+"dt_ai_clone_language_style" = "语言风格";
+"dt_ai_clone_language_detail_style" = "其他";
+"dt_ai_voice" = "分身的声音";
+"dt_ai_pls_read" = "请朗读";
+"dt_ai_submit" = "提交";
+"dt_ai_press_tip" = "按住 录制";
+"dt_ai_short_time_tip" = "录音时长至少5秒";
+"dt_hold_press_tip" = "请按住录制我的声音，训练我的音色";
+"dt_record_again" = "重新录制";
+"dt_test_play" = "试听";
+"dt_llm_submit_tip" = "分身创建中，请稍后";
+"dt_llm_more" = "更多";
+"dt_llm_hidden" = "收起";
+"dt_llm_pls_select_tip" = "请选择标签";
+"dt_llm_save" = "保存";
+"dt_llm_my_voice" = "我的声音";
+"dt_llm_press_tip" = "请按住录制后，试听我的原音";
+"dt_llm_re_record" = "重新开始录制";
+"dt_llm_save_tip" = "保存中";
+"dt_llm_save_success" = "保存成功";
+"dt_llm_add_pre_avatar" = "添加预置分身";
+"dt_llm_add_player_avatar" = "添加玩家分身";
+"dt_llm_add_robot_ai" = "添加机器人AI";
+"dt_llm_add_llm_ai" = "添加大模型AI";
+"dt_llm_add_robot" = "添加机器人";
+

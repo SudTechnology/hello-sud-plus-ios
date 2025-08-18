@@ -33,6 +33,8 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 @property(nonatomic, strong) NSArray <NSString *> *randomNameArr;
 // 游戏标签数据
 @property(nonatomic, strong)NSMutableDictionary<NSString *, NSArray <HSGameItem *> *> *tabGameMap;
+// 游戏场景
+@property(nonatomic, strong)NSMutableDictionary<NSString *, NSArray <HSSceneModel *> *> *tabSceneMap;
 @end
 
 @implementation AppService
@@ -205,6 +207,30 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     return nil;
 }
 
+/// 获取场景信息
+/// @param sceneType sceneType description
+- (HSSceneModel *)getSceneInfo:(NSInteger)sceneType {
+    NSArray *allSceneList = self.tabSceneMap.allValues;
+    for (NSArray *sceneList in allSceneList) {
+        for (HSSceneModel *model in sceneList) {
+            
+            if (model.sceneId == sceneType) {
+                return model;
+            }
+        }
+        
+    }
+    return nil;
+}
+
+/// 添加场景缓存
+/// @param list list description
+/// @param tabId tabId description
+- (void)addSceneCacheList:(NSArray *)list toTabId:(NSInteger)tabId {
+    NSString *key = [NSString stringWithFormat:@"%@", @(tabId)];
+    self.tabSceneMap[key] = list;
+}
+
 /// 切换RTC语音SDK
 /// @param rtcType 厂商类型
 - (NSString *)switchAudioEngine:(NSString *)rtcType {
@@ -313,6 +339,13 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
     return _tabGameMap;
 }
 
+- (NSMutableDictionary<NSString *, NSArray <HSSceneModel *> *> *)tabSceneMap {
+    if (!_tabSceneMap) {
+        _tabSceneMap = NSMutableDictionary.new;
+    }
+    return _tabSceneMap;
+}
+
 - (void)removeAllConfig {
     [NSUserDefaults.standardUserDefaults removeObjectForKey:kKeyConfigModel];
     [NSUserDefaults.standardUserDefaults synchronize];
@@ -327,6 +360,22 @@ NSString *const kRtcTypeTencentCloud = @"tencentCloud";
 - (nullable NSArray <HSGameItem *> *)getGameListByTab:(NSInteger)tabId {
     NSString *key = [NSString stringWithFormat:@"%@", @(tabId)];
     return self.tabGameMap[key];
+}
+
+/// 获取对应标签游戏数据
+- (nullable NSArray <HSGameItem *> *)getGameListByScenId:(NSInteger)sceneId {
+    
+    NSMutableArray *gameList = NSMutableArray.new;
+    NSArray *allSceneList = self.tabGameMap.allValues;
+    for (NSArray *sceneList in allSceneList) {
+        for (HSGameItem *model in sceneList) {
+            if ([model.suitScene containsObject:@(sceneId)]) {
+                [gameList addObject:model];
+            }
+        }
+        
+    }
+    return gameList;
 }
 
 /// 通过游戏ID获取游戏数据

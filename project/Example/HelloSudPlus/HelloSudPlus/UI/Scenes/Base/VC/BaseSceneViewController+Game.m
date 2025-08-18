@@ -17,9 +17,11 @@
     self.gameEventHandler = [self createGameEventHandler];
     self.gameEventHandler.vc = self;
     [self.gameManager registerGameEventHandler:self.gameEventHandler];
+    [self hanldeInitSudFSMMG];
 }
 
 - (void)hanldeInitSudFSMMG {
+    self.gameMicContentView.iSudFSMMG = self.gameEventHandler.sudFSMMGDecorator;
 }
 
 

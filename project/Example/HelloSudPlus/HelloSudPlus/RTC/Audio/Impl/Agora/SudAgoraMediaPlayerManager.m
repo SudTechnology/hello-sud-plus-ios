@@ -21,9 +21,7 @@
     if (self.path){
         [NSFileManager.defaultManager removeItemAtPath:self.path error:nil];
     }
-    if (self.audioItem.playStateChangedBlock) {
-        self.audioItem.playStateChangedBlock(self.audioItem, SudRtcAudioItemPlayerStateFinished);
-    }
+    [self.audioItem handleAudioStateChanged:SudRtcAudioItemPlayerStateFinished];
 }
 
 @end
@@ -77,7 +75,7 @@
             NSArray *tempList = self.taskList.copy;
             for (SudAgoraMediaPlayTaskItem *item in self.taskList) {
                 if (item.mediaPlayer == playerKit) {
-                    item.audioItem.playStateChangedBlock(item.audioItem, SudRtcAudioItemPlayerStatePlaying);
+                    [item.audioItem handleAudioStateChanged:SudRtcAudioItemPlayerStatePlaying];
                     break;
                 }
             }

@@ -496,7 +496,7 @@
     self.isNextRound = YES;
     // 展示游戏结果
     [self handlePlayerGameResult:model.results];
-    [handle success:[self.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 #pragma mark lazy

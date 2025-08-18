@@ -38,16 +38,24 @@
 
 }
 
+- (CGFloat)marginL {
+    if (self.marginLBlock) {
+        return self.marginLBlock();
+    }
+    return 0;
+}
+
 - (void)dtLayoutViews {
 
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+    CGFloat margin = self.marginL;
+    [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@20);
         make.leading.mas_equalTo(0);
         make.trailing.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
     }];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.mas_equalTo(15);
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(15+margin);
         make.trailing.mas_equalTo(-15);
         make.top.mas_equalTo(16);
         make.height.mas_greaterThanOrEqualTo(0);

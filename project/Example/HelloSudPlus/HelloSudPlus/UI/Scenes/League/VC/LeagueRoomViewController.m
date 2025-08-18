@@ -388,7 +388,7 @@
         [weakSelf handlePlayerGameResult:model.results];
     }];
 
-    [handle success:[self.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
+    
 }
 
 - (BaseSceneGameEventHandler *)createGameEventHandler {

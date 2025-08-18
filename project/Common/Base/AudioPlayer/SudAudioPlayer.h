@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger,SudAudioItemPlayerState) {
 @property(nonatomic, strong)NSData *audioData;
 @property(nonatomic, strong)void(^playStateChangedBlock)(SudAudioItem*item, SudAudioItemPlayerState playerState);
 @property(nonatomic, strong)id extra;
+- (void)handleAudioStateChanged:(SudAudioItemPlayerState)stateType;
 @end
 
 /// 语音播放

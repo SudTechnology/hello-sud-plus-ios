@@ -9,13 +9,13 @@
 #import "BaseSceneGameEventHandler.h"
 #import "SudAudioPlayer.h"
 
-
+/// 大模型互动回调JSON数据结构
 @interface AiRoomChatMsgModel : NSObject
-// 用户ID
+/// 发送者id
 @property(nonatomic, strong)NSString *uid;
-/// base64音频数据
+/// base64语音数据（mp3）
 @property(nonatomic, strong)NSString *audioData;
-/// 聊天内容
+/// 文本内容
 @property(nonatomic, strong)NSString *content;
 @end
 
@@ -24,10 +24,9 @@
 @end
 
 @interface BaseSceneGameEventHandler()
-
 // AI代理人
 @property(nonatomic, strong) id<ISudAiAgent> aiAgent;
-// 用户播放语音状态，用于同步状态给游戏
+// 用户播放语音状态
 @property(nonatomic, strong)NSMutableDictionary *userAudioPlayStateMap;
 /// 游戏玩家麦克风状态是否准备好
 @property(nonatomic, assign)BOOL isGamePlayerMicStateOk;
@@ -63,7 +62,9 @@
 
 - (void)createAiAgent:(id <ISudFSTAPP> )iSudFSTAPP {
     // 振魂石 和 飞行棋
-    if (self.loadConfigModel.gameId == 1890346721291059202L || self.loadConfigModel.gameId == 1468180338417074177L) {
+    HSGameItem *gameItem = [AppService.shared getSceneGameInfo:self.loadConfigModel.gameId];
+    if (gameItem.supportLlm) {
+//    if (self.loadConfigModel.gameId == 1890346721291059202L || self.loadConfigModel.gameId == 1468180338417074177L) {
         self.aiAgent = [iSudFSTAPP getAiAgent];
         WeakSelf
         
@@ -77,21 +78,47 @@
 }
 
 
-/// 处理AI信息
-/// - Parameter json: json description
+/// 处理大模型回调信息
+/// - Parameter json: json字符串数据
 - (void)handleAiRoomChatMsg:(NSString *)json {
     
     WeakSelf
     AiRoomChatMsgModel *aiRoomChatMsgModel = [AiRoomChatMsgModel mj_objectWithKeyValues:json];
     NSString *audioDataBase64 = aiRoomChatMsgModel.audioData;// infoDic[@"audioData"];
     NSString *playerId = aiRoomChatMsgModel.uid;// infoDic[@"userId"];
+    DDLogDebug(@"handleAiRoomChatMsg:uid:%@,content:%@, audioData:%@", aiRoomChatMsgModel.uid, aiRoomChatMsgModel.content, @(aiRoomChatMsgModel.audioData.length));
+    
+    if (aiRoomChatMsgModel.content.length > 0 && aiRoomChatMsgModel.uid) {
+        
+        NSInteger uid = [aiRoomChatMsgModel.uid longLongValue];
+        [UserService.shared asyncCacheUserInfo:@[@(uid)] forceRefresh:NO isAi:YES finished:^{
+            
+            HSUserInfoModel *userInfo = [UserService.shared getCacheUserInfo:uid];
+            
+            RoomCmdChatTextModel *msgModel = [RoomCmdChatTextModel makeMsg:aiRoomChatMsgModel.content];
+            if (msgModel) {
+                
+                AudioUserModel *userModel = AudioUserModel.new;
+                userModel.userID = [NSString stringWithFormat:@"%@",@(userInfo.userId)];
+                userModel.name = userInfo.nickname;
+                userModel.icon = userInfo.headImage;
+                userModel.sex = [userInfo.gender isEqualToString:@"male"] ? 1 : 2;
+                userModel.isAi = userInfo.ai;
+                msgModel.sendUser = userModel;
+                /// 公屏添加消息
+                [self.vc addMsg:msgModel isShowOnScreen:YES];
+            }
+        }];
+    }
+    
+    
     if (audioDataBase64) {
         NSData *audioData = [[NSData alloc]initWithBase64EncodedString:audioDataBase64 options:0];
-        BOOL isPlyeByRtc = YES;// 是否选用RTC混音播放器来播放AI声音
+        BOOL isPlyeByRtc = YES;
         if (isPlyeByRtc) {
 
             id audioEngine = AudioEngineFactory.shared.audioEngine;
-            // rtc 如果支持本地播放，则选用，使用RTC本地混音播放
+            // rtc 如果支持本地播放，则选用
             if ([audioEngine respondsToSelector:@selector(playLocalAudio:)]) {
                 
                 SudRtcAudioItem *audioItem = [[SudRtcAudioItem alloc]init];
@@ -104,7 +131,7 @@
                 return;
             }
         }
-        /// 常规系统声音播放器播放
+        // 自行创建播放器播放
         SudAudioItem *audioItem = [[SudAudioItem alloc]init];
         audioItem.audioData = audioData;
         audioItem.extra = playerId;
@@ -113,6 +140,8 @@
         };
         [SudAudioPlayer.shared playeAudioMulti:audioItem];
     }
+    
+
 }
 
 
@@ -161,37 +190,31 @@
 
 /// 游戏: 准备按钮点击状态   MG_COMMON_SELF_CLICK_READY_BTN
 - (void)onGameMGCommonSelfClickReadyBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickReadyBtn *)model {
-    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
     [self.vc onGameMGCommonSelfClickReadyBtn];
 }
 
 /// 游戏: 结算界面再来一局按钮点击状态   MG_COMMON_SELF_CLICK_GAME_SETTLE_AGAIN_BTN
 - (void)onGameMGCommonSelfClickGameSettleAgainBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickGameSettleAgainBtn *)model {
-    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
     [self.vc onGameMGCommonSelfClickReadyBtn];
 }
 
 /// 游戏: 开始游戏按钮点击状态   MG_COMMON_SELF_CLICK_START_BTN
 - (void)onGameMGCommonSelfClickStartBtn:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonSelfClickStartBtn *)model {
-    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
     [self.vc onGameMGCommonSelfClickStartBtn];
 }
 
 /// 通用状态-游戏
 /// 游戏: 公屏消息状态    MG_COMMON_PUBLIC_MESSAGE
 - (void)onGameMGCommonPublicMessage:(id <ISudFSMStateHandle>)handle model:(MGCommonPublicMessageModel *)model {
-    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
     [self updateCommonPublicMessageAddMsg:model];
 }
 
 /// 游戏: 关键词状态    MG_COMMON_KEY_WORD_TO_HIT
 - (void)onGameMGCommonKeyWordToHit:(id <ISudFSMStateHandle>)handle model:(MGCommonKeyWrodToHitModel *)model {
-    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
 }
 
 /// 游戏: 游戏状态   MG_COMMON_GAME_STATE
 - (void)onGameMGCommonGameState:(id <ISudFSMStateHandle>)handle model:(MGCommonGameState *)model {
-    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
     DDLogDebug(@"onGameMGCommonGameState:%@", @(model.gameState));
     // 游戏进行开始时，把麦位缩小
     if (model.gameState == 1) {
@@ -201,11 +224,14 @@
 
 /// 游戏: ASR状态(开启和关闭语音识别状态   MG_COMMON_GAME_ASR
 - (void)onGameMGCommonGameASR:(id <ISudFSMStateHandle>)handle model:(MGCommonGameASRModel *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     /// 语音采集 || 停止采集
     if (model.isOpen) {
         [self.vc startCaptureAudioToASR];
     } else {
+        // ai开启，不要中断
+        if (self.isOpenAiAgent) {
+            return;
+        }
         [self.vc stopCaptureAudioToASR];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_ASR_STATE_CHANGED object:nil userInfo:nil];
@@ -213,7 +239,7 @@
 
 /// 游戏通知app获取积分 MG_COMMON_GAME_SCORE
 - (void)onGameMGCommonGameGetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameGetScoreModel *)model {
-    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
+    
     DDLogDebug(@"onGameMGCommonGameScore");
     [UserService.shared reqUserCoinDetail:^(int64_t i) {
         DDLogError(@"onGameMGCommonGameScore notify game score:%@", @(i));
@@ -227,7 +253,6 @@
 
 /// 游戏通知app带入积分 MG_COMMON_GAME_SET_SCORE
 - (void)onGameMGCommonGameSetScore:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSetScoreModel *)model {
-    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
     DDLogDebug(@"onGameMGCommonGameSetScore");
     ReqAddScoreModel *reqModel = ReqAddScoreModel.new;
     reqModel.mgId = [NSString stringWithFormat:@"%@", @(self.vc.gameId)];;
@@ -246,20 +271,17 @@
 /// 玩家状态变化
 /// 玩家: 加入状态  MG_COMMON_PLAYER_IN
 - (void)onPlayerMGCommonPlayerIn:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerInModel *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     [self updatePlayerCommonPlayerIn:model userId:userId];
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
 }
 
 /// 玩家: 准备状态  MG_COMMON_PLAYER_READY
 - (void)onPlayerMGCommonPlayerReady:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerReadyModel *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
 }
 
 /// 玩家: 队长状态  MG_COMMON_PLAYER_CAPTAIN
 - (void)onPlayerMGCommonPlayerCaptain:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerCaptainModel *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
 
     if ([AppService.shared.login.loginUserInfo.userID isEqualToString:userId] && self.sudFSMMGDecorator.isPlaying && model.isCaptain) {
@@ -275,7 +297,6 @@
 
 /// 玩家: 游戏状态  MG_COMMON_PLAYER_PLAYING
 - (void)onPlayerMGCommonPlayerPlaying:(id <ISudFSMStateHandle>)handle userId:(NSString *)userId model:(MGCommonPlayerPlayingModel *)model {
-    [handle success:[self.sudFSMMGDecorator handleMGSuccess]];
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
 
     if ([AppService.shared.login.loginUserInfo.userID isEqualToString:self.sudFSMMGDecorator.captainUserId] && self.vc.gameEventHandler.sudFSMMGDecorator.isPlaying) {
@@ -287,19 +308,16 @@
 
 /// 你画我猜: 作画中状态  MG_DG_PAINTING
 - (void)onPlayerMGDGPainting:(nonnull id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId model:(MGDGPaintingModel *)model {
-    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
     [[NSNotificationCenter defaultCenter] postNotificationName:NTF_PLAYER_STATE_CHANGED object:nil userInfo:nil];
 }
 
 /// 游戏: 麦克风状态   MG_COMMON_GAME_SELF_MICROPHONE
 - (void)onGameMGCommonGameSelfMicrophone:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSelfMicrophone *)model {
-    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
     [self.vc handleGameTapVoice:model.isOn];
 }
 
 /// 游戏: 耳机（听筒，扬声器）状态   MG_COMMON_GAME_SELF_HEADEPHONE
 - (void)onGameMGCommonGameSelfHeadphone:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameSelfHeadphone *)model {
-    [handle success:[self.vc.gameEventHandler.sudFSMMGDecorator handleMGSuccess]];
     if (model.isOn) {
         [AudioEngineFactory.shared.audioEngine startSubscribingStream];
     } else {
@@ -309,19 +327,18 @@
 
 /// 元宇宙砂砂舞 指令回调  MG_COMMON_GAME_DISCO_ACTION
 - (void)onGameMGCommonGameDiscoAction:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionModel *)model {
-    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
     DDLogDebug(@"onGameMGCommonGameDiscoAction: actionID:%@, isSuccess:%@", model.actionId, @(model.isSuccess));
 }
 
 /// 元宇宙砂砂舞 指令动作结束通知  MG_COMMON_GAME_DISCO_ACTION_END
 - (void)onGameMGCommonGameDiscoActionEnd:(nonnull id <ISudFSMStateHandle>)handle model:(MGCommonGameDiscoActionEndModel *)model {
-    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
+    
     DDLogDebug(@"onGameMGCommonGameDiscoActionEnd: actionID:%@, playerID:%@", model.actionId, model.playerId);
 }
 
 /// Create Order MG_COMMON_GAME_CREATE_ORDER
 - (void)onGameMGCommonGameCreateOrder:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameCreateOrderModel *)model {
-    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
+    
 
     ReqAppOrderModel *reqModel = ReqAppOrderModel.new;
     reqModel.roomId = self.vc.roomID;
@@ -347,7 +364,7 @@
 
 /// 游戏向app发送获取玩家持有的道具卡（只支持大富翁） MG_COMMON_GAME_PLAYER_MONOPOLY_CARDS
 - (void)onGameMGPlayerMonopolyCards:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerMonopolyCardsModel *)model {
-    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
+    
  
     [AudioRoomService reqMonopolyCardsWithFinished:^(BaseRespModel * _Nonnull respModel) {
     
@@ -364,7 +381,7 @@
 
 
 - (void)onGameMgCommonGamePlayerPropsCards:(id<ISudFSMStateHandle>)handle model:(MgCommonGamePlayerPropsCardsModel *)model {
-    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
+    
         
     ReqPlayerPropsCardsParamModel *req = ReqPlayerPropsCardsParamModel.new;
     req.gameId = self.loadConfigModel.gameId;
@@ -415,12 +432,12 @@
 }
 
 - (void)onGameMgCommonDestroyGameScene:(id<ISudFSMStateHandle>)handle model:(MgCommonDestroyGameSceneModel *)model {
-    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
+    
     [self.vc switchToGame:0];
 }
 
 - (void)onGameMGCommonGameMoneyNotEnough:(id<ISudFSMStateHandle>)handle model:(MgCommonGameMoneyNotEnoughModel *)model {
-    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
+    
     [UserService.shared reqAddUserCoin:^(int64_t i) {
         AppCommonUpdateGameMoney *model = AppCommonUpdateGameMoney.new;
         [self.sudFSTAPPDecorator notifyAppCommonUpdateGameMoney:model];
@@ -430,7 +447,7 @@
 }
 
 - (void)onGameStateChange:(id<ISudFSMStateHandle>)handle state:(NSString *)state dataJson:(NSString *)dataJson {
-    [handle success:self.vc.gameEventHandler.sudFSMMGDecorator.handleMGSuccess];
+    
     if ([state isEqualToString:@"mg_happy_goat_chat"]) {
         [self handleHappyGoatChat:dataJson];
     }
@@ -512,13 +529,28 @@
 }
 
 - (void)onGameMgCommonGamePlayerMicState:(id<ISudFSMStateHandle>)handle model:(MgCommonGamePlayerMicState *)model {
-    
-    /// 游戏是否启用了声音状态播放
     self.isGamePlayerMicStateOk = YES;
     for (NSString *key in self.userAudioPlayStateMap.allKeys) {
         NSInteger state = [self.userAudioPlayStateMap[key] integerValue];
         [self sendGamePlayerAudioState:key state:state];
     }
+}
+
+/// 游戏通知app ai大模型消息内容 MG_COMMON_AI_MESSAGE
+- (void)onGameMgCommonAiLargeScaleModelMsg:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonAiLargeScaleModelMsg *)model {
+//    NSString *audioDataBase64 = model.audioData;
+//    if (audioDataBase64) {
+//        NSData *audioData = [[NSData alloc]initWithBase64EncodedString:audioDataBase64 options:0];
+//
+//        WeakSelf
+//        SudAudioItem *audioItem = [[SudAudioItem alloc]init];
+//        audioItem.audioData = audioData;
+//        audioItem.extra = model.sendUser.playerId;
+//        audioItem.playStateChangedBlock = ^(SudAudioItem *item, SudAudioItemPlayerState playerState) {
+//            [weakSelf handleUserPlayerAudioState:item.extra state:playerState];
+//        };
+//        [SudAudioPlayer.shared playeAudioMulti:audioItem];
+//    }
 }
 
 
@@ -527,7 +559,6 @@
 ///   - userId: userId description
 ///   - state: state description
 - (void)handleUserPlayerAudioState:(NSString *)userId state:(NSInteger)state {
-    
     // 注意忽略重复状态，不发送重复状态给游戏
     id tempNum = self.userAudioPlayStateMap[userId];
     if (tempNum && [tempNum integerValue] == state) {
@@ -538,9 +569,8 @@
     [self sendGamePlayerAudioState:userId state:state];
 }
 
-/// 发送给用户声音播放状态给游戏
+/// 发送给游戏播放状态
 - (void)sendGamePlayerAudioState:(NSString *)userId state:(NSInteger)state {
-    
     // 没有开启AI或者游戏没有通知玩家麦克风准备好了， 别发
     if (!self.isOpenAiAgent || !self.isGamePlayerMicStateOk) {
         return;

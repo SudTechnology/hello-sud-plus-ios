@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger loadType;
 /// 类别
 @property (nonatomic, assign) NSInteger tabType;
+/// 是否支持llm
+@property (nonatomic, assign) NSInteger supportLlm;
 @end
 /// 列表场景model
 @interface HSSceneModel: BaseModel

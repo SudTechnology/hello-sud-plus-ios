@@ -7,18 +7,62 @@
 
 #import "SudAudioPlayer.h"
 #import <AVFoundation/AVFoundation.h>
+#import "DTTimer.h"
 
 @interface SudAudioItem()
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property(nonatomic, strong)DTTimer *volumeTimer;
 @end
 
 @implementation SudAudioItem
+
+
+- (void)handleAudioStateChanged:(SudAudioItemPlayerState)stateType {
+    WeakSelf
+    switch (stateType) {
+        case SudAudioItemPlayerStatePlaying:{
+            
+            NSString *userId = @"";
+            if ([self.extra isKindOfClass:NSString.class]) {
+                userId = self.extra;
+            }
+            NSInteger soundLevel =  arc4random() % 100;
+            [[NSNotificationCenter defaultCenter] postNotificationName:NTF_REMOTE_VOICE_VOLUME_CHANGED object:nil userInfo:@{@"dicVolume": @{userId:@(soundLevel)}}];
+            if (!self.volumeTimer) {
+                self.volumeTimer = [DTTimer timerWithTimeInterval:1 repeats:YES block:^(DTTimer *timer) {
+                    NSInteger soundLevel =  arc4random() % 100;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NTF_REMOTE_VOICE_VOLUME_CHANGED object:nil userInfo:@{@"dicVolume": @{userId:@(soundLevel)}}];
+                }];
+            }
+        }
+            break;
+        case SudAudioItemPlayerStateFinished:{
+            if (self.volumeTimer) {
+                [self.volumeTimer stopTimer];
+            }
+        }
+            
+        default:
+            break;
+    }
+
+    if (self.playStateChangedBlock) {
+        self.playStateChangedBlock(self, stateType);
+    }
+}
+
+- (void)dealloc {
+    if (self.volumeTimer) {
+        [self.volumeTimer stopTimer];
+    }
+}
 
 @end
 
 @interface SudAudioPlayer()<AVAudioPlayerDelegate>
 @property(nonatomic, strong)AVAudioPlayer *audioPlayer;
 @property(nonatomic, strong)NSMutableArray <SudAudioItem *>*waitPlayAudioList;
+@property(nonatomic, strong)NSMutableArray <SudAudioItem *>*audioPlayerItems;
 @property (nonatomic, strong) NSMutableArray<AVAudioPlayer *> *audioPlayers;
 @property(nonatomic, assign)BOOL isQueuePlayer;
 @end
@@ -50,6 +94,14 @@
     return _waitPlayAudioList;
 }
 
+- (NSMutableArray *)audioPlayerItems {
+    if (!_audioPlayerItems) {
+        _audioPlayerItems = NSMutableArray.new;
+    }
+    return _audioPlayerItems;
+}
+
+
 
 - (void)playeAudio:(SudAudioItem *)audioData {
     if (!audioData) {
@@ -73,8 +125,9 @@
 
 // 一直单次播放
 - (void)playeAudioSingle:(SudAudioItem *)audioData {
-    if (self.audioPlayer) {
-        [self.audioPlayer stop];
+    NSArray *arr = self.audioPlayers.copy;
+    for (AVAudioPlayer *player in arr) {
+        [player stop];
     }
     [self play:audioData];
 }
@@ -93,8 +146,11 @@
 }
 
 - (void)play:(SudAudioItem *)audioItem {
-
+    
     NSError *error = nil;
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:&error];
+
     AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc]initWithData:audioItem.audioData error:&error];
     audioItem.audioPlayer = audioPlayer;
     audioPlayer .delegate = self;
@@ -109,11 +165,8 @@
     }
     [self.audioPlayers addObject:audioPlayer];
     NSLog(@"audioPlayers count:%@", @(self.audioPlayers.count));
-    
-    if (audioItem.playStateChangedBlock) {
-        audioItem.playStateChangedBlock(audioItem, SudAudioItemPlayerStatePlaying);
-    }
-    
+    [audioItem handleAudioStateChanged:SudAudioItemPlayerStatePlaying];
+    [self.audioPlayerItems addObject:audioItem];
 }
 
 - (void)handleFinished:(AVAudioPlayer *)player {
@@ -121,10 +174,17 @@
     NSArray *tmpList = self.waitPlayAudioList.copy;
     for (SudAudioItem *item in tmpList) {
         if (item.audioPlayer == player) {
-            if (item.playStateChangedBlock) {
-                item.playStateChangedBlock(item, SudAudioItemPlayerStateFinished);
-            }
+            [item handleAudioStateChanged:SudAudioItemPlayerStateFinished];
             [self.waitPlayAudioList removeObject:item];
+            break;
+        }
+    }
+    
+    tmpList = self.audioPlayerItems.copy;
+    for (SudAudioItem *item in tmpList) {
+        if (item.audioPlayer == player) {
+            [item handleAudioStateChanged:SudAudioItemPlayerStateFinished];
+            [self.audioPlayerItems removeObject:item];
             break;
         }
     }

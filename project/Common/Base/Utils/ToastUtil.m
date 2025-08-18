@@ -10,6 +10,13 @@
 #define TOAST_DELAY_DISMISS_DURATION 2
 
 @implementation ToastUtil
+
++ (void)setupCommonConfig {
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD setImageViewSize:CGSizeMake(0, -1)];
+}
+
 /// 展示信息，挂载当前window上
 /// @param msg 需要展示内容
 + (void)show:(NSString *)msg {
@@ -22,5 +29,17 @@
     [SVProgressHUD setImageViewSize:CGSizeMake(0, -1)];
     [SVProgressHUD showImage:[UIImage imageNamed:@"cell_selected"] status:msg];
     [SVProgressHUD dismissWithDelay:TOAST_DELAY_DISMISS_DURATION];
+}
+
+
++ (void)showProgress:(nullable NSString *)msg {
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD setImageViewSize:CGSizeMake(28, 28)];
+    [SVProgressHUD showWithStatus:msg];
+}
+
++ (void)dimiss {
+    [SVProgressHUD dismiss];
 }
 @end

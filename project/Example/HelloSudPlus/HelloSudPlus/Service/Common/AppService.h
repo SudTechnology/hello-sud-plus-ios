@@ -121,18 +121,31 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return
 - (BOOL)isSameRtc:(HSConfigContent *)rtcConfig rtcType:(NSString *)rtcType;
 
+
+/// 添加场景缓存
+/// @param list list description
+/// @param tabId tabId description
+- (void)addSceneCacheList:(NSArray *)list toTabId:(NSInteger)tabId;
+
 /// 获取游戏信息
 /// @param gameId gameId
 /// @return
 - (HSGameItem *)getSceneGameInfo:(int64_t)gameId;
 
+/// 获取场景信息
+/// @param sceneType sceneType description
+- (HSSceneModel *)getSceneInfo:(NSInteger)sceneType;
+
 - (void)removeAllConfig;
 
-/// 添加tab标签游戏数据
+/// 添加tab标签游戏数据 0 主页 2游戏
 - (void)addGameListToTab:(NSInteger)tabId gameList:(NSArray *)gameList;
 
 /// 获取对应标签游戏数据
 - (nullable NSArray <HSGameItem *> *)getGameListByTab:(NSInteger)tabId;
+
+/// 获取对应标签游戏数据
+- (nullable NSArray <HSGameItem *> *)getGameListByScenId:(NSInteger)sceneId;
 
 /// 通过游戏ID获取游戏数据
 /// - Parameter gameId: gameId description
@@ -143,6 +156,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable HSGameItem *)getGameInfoByGameId:(int64_t)gameId tabType:(NSInteger)tabType;
 /// 是否支持视频
 - (BOOL)isCurrentRtcSurpportVideo;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

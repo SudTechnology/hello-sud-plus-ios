@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *inGameLabel;
 /// 场景ID
 @property (nonatomic, assign)NSInteger sceneId;
+@property(nonatomic, strong) NSInteger(^customImageHeightBlock)(void);
+@property(nonatomic, strong) NSInteger(^marginLBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -35,4 +35,33 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)int64_t gameId;
 @end
 
+/// 修改分身状态
+@interface ReqAiSwitchStateModel : ParamModel
+/// 状态 0：关闭， 1：开启
+@property(nonatomic, assign)NSInteger status;
+@end
+
+/// 获取分身状态
+@interface ReqAiCloneInfoModel : ParamModel
+@end
+
+/// 保存分身状态
+@interface ReqSaveAiCloneInfoModel : ParamModel
+@property (nonatomic, copy) NSString *nickname;                // Nickname (required)
+@property (nonatomic, copy) NSString *birthday;                // Birthday (yyyy-MM-dd, required)
+@property (nonatomic, copy) NSString *bloodType;               // Blood type (required)
+@property (nonatomic, copy) NSString *mbti;                    // MBTI (required)
+@property (nonatomic, copy) NSArray<NSString *>  *personalities;             // Personality traits (required)
+@property (nonatomic, copy) NSArray<NSString *> *languageStyles;           // Language style (required)
+@property (nonatomic, copy) NSArray<NSString *> *languageDetailStyles;     // Detailed language style (required)
+@property (nonatomic, copy, nullable) NSString *audioData;     // Base64 audio data (optional)
+@property (nonatomic, copy, nullable) NSString *audioFormat;   // Audio format: wav, mp3 (optional)
+@end
+
+/// 保存分身状态
+@interface ReqRandAiCloneInfoModel : ParamModel
+@end
+
+
+
 NS_ASSUME_NONNULL_END

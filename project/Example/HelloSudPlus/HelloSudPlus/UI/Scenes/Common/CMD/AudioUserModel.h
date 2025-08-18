@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)NSInteger roleType;
 @property(nonatomic, assign)NSInteger level;
 + (instancetype)makeUserWithUserID:(NSString *)userID name:(NSString *)name icon:(NSString *)icon sex:(NSInteger)sex;
+
+
+/// 本地字段
+@property (nonatomic, assign)BOOL isLLmBot;
 @end
 
 NS_ASSUME_NONNULL_END

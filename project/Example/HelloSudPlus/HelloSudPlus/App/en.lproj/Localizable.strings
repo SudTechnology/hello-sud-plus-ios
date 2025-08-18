@@ -73,6 +73,7 @@
 "dt_tab_my" = "My";
 "dt_my_about_us" = "About";
 "dt_tab_game" = "Game";
+"dt_tab_llm" = "LLM";
 /// Scenes
 "dt_send" = "Give";
 "dt_down_mic" = "Mike off";
@@ -477,6 +478,8 @@
 "dt_room_robot_middle" = "Medium";
 "dt_room_robot_hard" = "Hard";
 "dt_room_robot_ai" = "AI";
+"dt_room_robot_ai_clone" = "Avatar";
+
 "dt_room_gift_showcase_role_title" = "Role gift showcase";
 "dt_room_gift_showcase_title" = "Gift card showcase";
 "dt_room_gift_name_prefix" = "Give";
@@ -484,3 +487,40 @@
 "dt_operator_record_tip" = "Press and hold to speak";
 "dt_operator_record_end_tip" = "Release to end";
 
+"dt_create_clone_title" = "Create My Avatar";
+"dt_voice_training" = "Voice Training In Progress";
+"dt_voice_training_failed" = "Training Failed, Please Resubmit";
+"dt_open_clone" = "Please Enable Avatar";
+"dt_close_clone_tip" = "Disabling will render your LLM_BOT avatar unusable";
+"dt_click_play" = "Click to Play";
+"dt_create_clone" = "Create Avatar";
+"dt_selected_empty" = "None";
+"dt_ai_input_name" = "Please Enter Name";
+"dt_ai_open_clone" = "Enable Avatar";
+"dt_ai_clone_name" = "Name";
+"dt_ai_clone_character_title" = "Personality Traits";
+"dt_ai_clone_language_style" = "Language Style";
+"dt_ai_clone_language_detail_style" = "Other";
+"dt_ai_voice" = "Avatar's Voice";
+"dt_ai_pls_read" = "Please Read Aloud";
+"dt_ai_submit" = "Submit";
+"dt_ai_press_tip" = "Press and Hold to Record";
+"dt_ai_short_time_tip" = "Recording Duration Must Be At Least 5 Seconds";
+"dt_hold_press_tip" = "Please press and hold to record my voice, training my tone.";
+"dt_record_again" = "Record Again";
+"dt_test_play" = "Test Play";
+"dt_llm_submit_tip" = "Avatar creation in progress, please wait.";
+"dt_llm_more" = "More";
+"dt_llm_hidden" = "Collapse";
+"dt_llm_pls_select_tip" = "Please select a tag.";
+"dt_llm_save" = "Save";
+"dt_llm_my_voice" = "My Voice";
+"dt_llm_press_tip" = "Press and hold to record, then listen to my voice.";
+"dt_llm_re_record" = "Re-record";
+"dt_llm_save_tip" = "Saving...";
+"dt_llm_save_success" = "Save successful.";
+"dt_llm_add_pre_avatar" = "Add Preset Avatar";
+"dt_llm_add_player_avatar" = "Add Player Avatar";
+"dt_llm_add_robot_ai" = "Add Robot AI";
+"dt_llm_add_llm_ai" = "Add Large Model AI";
+"dt_llm_add_robot" = "Add Robot";

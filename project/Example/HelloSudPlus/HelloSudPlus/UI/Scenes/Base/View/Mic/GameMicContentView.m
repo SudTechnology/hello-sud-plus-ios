@@ -7,6 +7,8 @@
 
 #import "GameMicContentView.h"
 
+
+
 @interface GameMicContentView ()
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) UIView *contenView;
@@ -14,6 +16,8 @@
 @property(nonatomic, strong) UIImageView *rightScaleIconImageView;
 /// 左边位置缩小视图
 @property(nonatomic, strong) UIImageView *leftScaleIconImageView;
+
+@property(nonatomic, assign) NSInteger micCount;
 @end
 
 @implementation GameMicContentView
@@ -50,7 +54,10 @@
     for (UIView *v in self.contenView.subviews) {
         [v removeFromSuperview];
     }
-    for (int i = 0; i < 9; i++) {
+    self.micCount = 12;// 麦位总数量
+    self.contenView.frame = CGRectMake(0, 0, 16 + 48 * self.micCount, 55);
+    [self.scrollView setContentSize:CGSizeMake(16 + 48 * self.micCount, 0)];
+    for (int i = 0; i < self.micCount; i++) {
         AudioMicroView *micNode = [[AudioMicroView alloc] init];
         micNode.headWidth = 32;
         WeakSelf
@@ -65,7 +72,7 @@
     }
     [self.contenView.subviews dt_mas_distributeSudokuViewsWithFixedItemWidth:32 fixedItemHeight:55
                                                             fixedLineSpacing:16 fixedInteritemSpacing:16
-                                                                   warpCount:9
+                                                                   warpCount:self.micCount
                                                                   topSpacing:0
                                                                bottomSpacing:0 leadSpacing:16 tailSpacing:16];
     if (self.updateMicArrCallBack) {
@@ -112,11 +119,11 @@
             [micView changeScale:NO];
         }
     }
-    self.contenView.frame = CGRectMake(0, 0, 16 + 48 * 9, 55);
-    [self.scrollView setContentSize:CGSizeMake(16 + 48 * 9, 0)];
+    self.contenView.frame = CGRectMake(0, 0, 16 + 48 * self.micCount, 55);
+    [self.scrollView setContentSize:CGSizeMake(16 + 48 * self.micCount, 0)];
     [self.contenView.subviews dt_mas_distributeSudokuViewsWithFixedItemWidth:32 fixedItemHeight:55
                                                             fixedLineSpacing:16 fixedInteritemSpacing:16
-                                                                   warpCount:9
+                                                                   warpCount:self.micCount
                                                                   topSpacing:0
                                                                bottomSpacing:0 leadSpacing:16 tailSpacing:16];
 }
@@ -139,11 +146,11 @@
             [micView changeScale:YES];
         }
     }
-    self.contenView.frame = CGRectMake(0, 6, 16 + headHeight * 9, headHeight);
-    [self.scrollView setContentSize:CGSizeMake(16 + headHeight * 9, 0)];
+    self.contenView.frame = CGRectMake(0, 6, 16 + headHeight * self.micCount, headHeight);
+    [self.scrollView setContentSize:CGSizeMake(16 + headHeight * self.micCount, 0)];
     [self.contenView.subviews dt_mas_distributeSudokuViewsWithFixedItemWidth:headHeight fixedItemHeight:headHeight
                                                             fixedLineSpacing:4 fixedInteritemSpacing:4
-                                                                   warpCount:9
+                                                                   warpCount:self.micCount
                                                                   topSpacing:0
                                                                bottomSpacing:0 leadSpacing:4 tailSpacing:4];
 }
@@ -172,7 +179,7 @@
         _scrollView = [[UIScrollView alloc] init];
         [_scrollView setShowsHorizontalScrollIndicator:false];
         [_scrollView setShowsVerticalScrollIndicator:false];
-        [_scrollView setContentSize:CGSizeMake(16 + 48 * 9, 0)];
+        
         _scrollView.clipsToBounds = false;
     }
     return _scrollView;
@@ -180,7 +187,7 @@
 
 - (UIView *)contenView {
     if (!_contenView) {
-        _contenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16 + 48 * 9, 55)];
+        _contenView = [[UIView alloc] init];
         _contenView.clipsToBounds = false;
     }
     return _contenView;
