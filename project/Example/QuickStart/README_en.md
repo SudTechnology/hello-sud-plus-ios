@@ -21,7 +21,7 @@
 
       1. Implement 4 HTTP APIs on the app server (as listed in the integration information table);
       2. Implement the login/getCode interface on the app server to obtain the short-term token code;
-      3. Use your own appId, appKey, isTestEnv=true, bundleId (iOS), and applicationId (Android);
+      3. Use your own appId, appKey, bundleId (iOS), and applicationId (Android);
       4. Use your own app server's login/getCode interface to obtain the short-term token code;
       5. Debug 5 HTTP APIs between the app client and server;
       6. Once HTTP API debugging is complete, move on to the next step.

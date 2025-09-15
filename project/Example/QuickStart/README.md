@@ -23,7 +23,7 @@
 
       1.APP服务端实现4个HTTP API；（接入信息表填的）
       2.APP服务端实现login/getCode接口，获取短期令牌code；
-      3.请使用APP客户端自己的appId、appKey、isTestEnv=true、bundleId(iOS)、applicationId(Android)；
+      3.请使用APP客户端自己的appId、appKey、bundleId(iOS)、applicationId(Android)；
       4.请使用APP自己的服务端login/getCode接口，获取短期令牌code；
       5.APP客户端和APP服务端联调5个HTTP API；
       6.完成HTTP API联调；
