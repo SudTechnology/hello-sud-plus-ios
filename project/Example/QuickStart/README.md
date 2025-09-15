@@ -6,7 +6,7 @@
   <details>
   <summary>详细描述</summary>
 
-      1.appId、appKey和isTestEnv=true，请使用QuickStart客户端的；
+      1.appId、appKey，请使用QuickStart客户端的；
       2.iOS bundleId、Android applicationId，请使用APP客户端自己的；(接入信息表中的bundleId/applicationId)；
       3.短期令牌code，请使用QuickStart的后端服务（login/getCode获取的）；
       4.完成集成，游戏跑起来;

@@ -4,7 +4,7 @@
   <details> 
   <summary>Details</summary>
 
-      1. Use the QuickStart client's appId, appKey, and set isTestEnv=true;
+      1. Use the QuickStart client's appId, appKey;
       2. Use your own iOS bundleId and Android applicationId (found in the integration information table);
       3. Use the short-term token code provided by QuickStart's backend service (obtained through login/getCode);
       4. Once integrated, the game should run smoothly.
