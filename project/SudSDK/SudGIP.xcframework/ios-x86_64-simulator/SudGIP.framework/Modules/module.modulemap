@@ -1,0 +1,6 @@
+framework module SudGIP {
+  umbrella header "SudGIP-umbrella.h"
+
+  export *
+  module * { export * }
+}

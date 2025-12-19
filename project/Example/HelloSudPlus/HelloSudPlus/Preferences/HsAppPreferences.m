@@ -22,10 +22,21 @@
 }
 
 - (void)prepare {
+
 #if DEBUG
+    
     _appEnvType = HsAppEnvTypeSim;
     _gameEnvType = HsGameEnvTypeSim;
     _nftEnvType = HsNftEnvTypeSim;
+    /// from Scheme argument
+    NSDictionary *schemeEnv = [[NSProcessInfo processInfo] environment];
+    BOOL hasDebugFlag = (schemeEnv[@"XCODE_LOCAL_DEBUG"] != nil);
+    if (hasDebugFlag) {
+        _appEnvType = HsAppEnvTypeFat;
+        _gameEnvType = HsGameEnvTypeFat;
+        _nftEnvType = HsNftEnvTypeFat;
+    }
+
     _appIdType = HsAppIdTypeDefault;
     if ([NSUserDefaults.standardUserDefaults objectForKey:kKeyAppEnvType]) {
         _appEnvType = [NSUserDefaults.standardUserDefaults integerForKey:kKeyAppEnvType];

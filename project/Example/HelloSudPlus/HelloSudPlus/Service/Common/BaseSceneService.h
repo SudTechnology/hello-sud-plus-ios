@@ -27,7 +27,8 @@ typedef NS_ENUM(NSInteger, SceneType) {
     SceneTypeCrossApp = 16,
     SceneTypeVertical = 18,
     SceneTypeAudio3D = 19,
-//    SceneTypeThirdWebGame = 20, 三方web game
+    SceneTypeThirdWebGame = 20, // 三方web game
+    SceneTypeAd = 21, // 广告
     
     SceneTypeGameCategoryAudio = 101, // 语音互动类
     SceneTypeGameCategoryRealTimePvP = 102,//    实时竞技类

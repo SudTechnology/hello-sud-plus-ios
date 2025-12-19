@@ -1,0 +1,31 @@
+PODS:
+  - Masonry (1.1.0)
+  - SudGIP (1.0.0):
+    - SudGIP/Stand (= 1.0.0)
+  - SudGIP/Base (1.0.0)
+  - SudGIP/Stand (1.0.0):
+    - SudGIP/Base
+  - SVProgressHUD (2.2.5)
+
+DEPENDENCIES:
+  - Masonry
+  - SudGIP (from `../../`)
+  - SVProgressHUD (~> 2.2.5)
+
+SPEC REPOS:
+  trunk:
+    - Masonry
+    - SVProgressHUD
+
+EXTERNAL SOURCES:
+  SudGIP:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  SudGIP: c45052ba600fb0d40a8f69a1cb76d9a38dc857ef
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+
+PODFILE CHECKSUM: adf85110b9fc779cf18af3b0cf575e313bd2b0e6
+
+COCOAPODS: 1.16.2

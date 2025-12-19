@@ -20,6 +20,7 @@
 #import "Audio3DRoomViewController.h"
 #import "ThirdGameViewController.h"
 #import "ModelAiRoomViewController.h"
+#import "SudAdViewController.h"
 
 @implementation SceneParamModel
 
@@ -72,8 +73,17 @@
         case SceneTypeCrossApp:
             vc = [[CrossAppViewController alloc]init];
             break;
-        case  SceneTypeCrossDomain:
-            vc = [[AudioRoomViewController alloc] init];
+//        case  SceneTypeCrossDomain:
+//            vc = [[AudioRoomViewController alloc] init];
+//            break;
+//            
+        case SceneTypeCrossDomain:{
+            // for test
+            SudAdViewController *vc = [[SudAdViewController alloc]init];
+            [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
+        }
+ 
+            
             break;
         case SceneTypeVertical:
         case SceneTypeGameCategoryDanmaku:

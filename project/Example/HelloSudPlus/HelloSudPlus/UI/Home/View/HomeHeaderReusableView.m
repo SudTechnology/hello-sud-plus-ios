@@ -12,6 +12,7 @@
 #import "LeagueResultPopView.h"
 #import "CrossAppSelectGameView.h"
 #import "HomeBannerView.h"
+#import "SudAdViewController.h"
 
 
 @interface HomeHeaderReusableView ()
@@ -165,7 +166,7 @@
     self.createNode.textColor = sceneModel.isGameWait ? HEX_COLOR_A(@"#1A1A1A", 0.2) : HEX_COLOR(@"#1A1A1A");
     if (self.sceneModel.sceneId == SceneTypeCrossApp) {
         self.createNode.text = @"dt_room_home_select_game".dt_lan;
-    }else if (self.sceneModel.sceneId == SceneTypeAudio3D) {
+    }else if (self.sceneModel.sceneId == SceneTypeAudio3D || self.sceneModel.sceneId == SceneTypeAd) {
         self.createNode.text = @"dt_room_home_click_enter".dt_lan;
     } else {
         self.createNode.text = NSString.dt_home_create_room;
@@ -277,6 +278,9 @@
         };
         [DTSheetView show:v rootView:AppUtil.currentWindow hiddenBackCover:NO onCloseCallback:^{
         }];
+    } else if (self.sceneModel.sceneId == SceneTypeAd) {
+        SudAdViewController *vc = [[SudAdViewController alloc]init];
+        [[AppUtil currentViewController].navigationController pushViewController:vc animated:true];
     } else {
         [AudioRoomService reqCreateRoom:self.sceneModel.sceneId extData:nil gameLevel:-1];
     }

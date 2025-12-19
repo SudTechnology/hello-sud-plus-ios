@@ -524,3 +524,7 @@
 "dt_llm_add_robot_ai" = "Add Robot AI";
 "dt_llm_add_llm_ai" = "Add Large Model AI";
 "dt_llm_add_robot" = "Add Robot";
+
+"dt_ad_try_play" = "Play";
+"dt_ad_operate_tip" = "Operate";
+"dt_ad_try_again" = "Try again";

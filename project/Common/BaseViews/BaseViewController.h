@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)dtIsHiddenNavigationBar;
 /// 导航栏点击返回，子类实现是否处理格外逻辑
 - (void)dtNavigationBackClick;
+/// 导航栏点击返回，图片
+- (NSString *)dtNavigationBackIcon;
 /// 增加子view
 - (void)dtAddViews;
 /// 布局视图
@@ -29,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 切换指定屏幕方向，需要supportedInterfaceOrientations中返回支持的方向
 /// @param orientation 指定方向
 - (void)dtSwitchOrientation:(UIInterfaceOrientation)orientation;
+- (BOOL)dtShouldBackGesture;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+
+  <!-- 引入vConsole的JS库 -->
+  <script src="./vconsole.min.js"></script>
+
+</head>
+
+<script>
+  // 初始化vConsole
+  window.vConsole = new window.VConsole({
+    defaultPlugins: ['system'], // 可以在此设定要默认加载的面板
+    maxLogNumber: 483,
+    // disableLogScrolling: true,
+    onReady: function () {
+      document.querySelector(".vc-switch").style.display = "none";
+      document.querySelector(".vc-global-tool.vc-hide").style.display = "none";
+      document.querySelector(".vc-panel").style["min-height"] = "100%";
+      vConsole.show();
+      console.log('vConsole is ready.');
+    },
+    onClearLog: function () {
+      console.log('on clearLog');
+    }
+  });
+</script>
+
+</html>

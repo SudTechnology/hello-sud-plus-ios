@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RespGameInfoModel : BaseRespModel
 /// game code
 @property(nonatomic, copy)NSString *code;
+/// runtime code
+@property(nonatomic, copy)NSString *runtimeCode;
 /// the code expireDate
 @property(nonatomic, assign)NSInteger expireDate;
 @end

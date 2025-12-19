@@ -36,14 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 最低版本：v1.1.30.xx
 - (void)onGameLog:(nonnull NSString *)dataJson;
 
-/// 游戏状态变化
+/// 游戏状态变化 更多指令详情参考： https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStateGame.html
 /// 如果未接管相应指令回调，则会默认派发到该回调上
 /// @param handle handle 回调句柄
 /// @param state state 对应事件状态
 /// @param dataJson dataJson 回调json串
 - (void)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
 
- /// 游戏玩家状态变化
+ /// 游戏玩家状态变化 更多指令详情参考：https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStatePlayer.html
 /// 如果未接管相应指令回调，则会默认派发到该回调上
  /// @param handle handle 回调句柄
  /// @param state state 对应事件状态

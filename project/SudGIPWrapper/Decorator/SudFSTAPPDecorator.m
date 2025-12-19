@@ -253,9 +253,17 @@
 /// 状态通知（app to mg）
 /// @param state 状态名称
 /// @param dataJson 需传递的json
-- (void)notifyStateChange:(NSString *)state dataJson:(NSString *)dataJson {
-    [self.iSudFSTAPP notifyStateChange:state dataJson:dataJson listener:^(int retCode, const NSString *retMsg, const NSString *dataJson) {
-        NSLog(@"ISudFSMMG:notifyStateChange:state=%@ retCode=%@ retMsg=%@ dataJson=%@", state, @(retCode), retMsg, dataJson);
+- (void)notifyStateChange:(NSString *)state dataJson:(id)dataJson {
+    if (![dataJson isKindOfClass:NSObject.class]) {
+        NSLog(@"notifyStateChange dataJson must be an implementation of NSObject");
+        return;
+    }
+    NSObject *jsonObj = (NSObject *)dataJson;
+    NSString *jsonStr = jsonObj.mj_JSONString;
+    [self.iSudFSTAPP notifyStateChange:state dataJson:jsonStr listener:^(int retCode, const NSString *retMsg, const NSString *dataJson) {
+        if (retCode != 0) {
+            NSLog(@"ISudFSMMG:notifyStateChange:state=%@ retCode=%@ retMsg=%@ dataJson=%@", state, @(retCode), retMsg, dataJson);
+        }
     }];
 }
 

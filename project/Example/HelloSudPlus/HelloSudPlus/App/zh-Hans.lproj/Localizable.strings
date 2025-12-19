@@ -532,3 +532,6 @@
 "dt_llm_add_llm_ai" = "添加大模型AI";
 "dt_llm_add_robot" = "添加机器人";
 
+"dt_ad_try_play" = "点我试玩";
+"dt_ad_operate_tip" = "立即去玩";
+"dt_ad_try_again" = "再次试玩";

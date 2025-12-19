@@ -21,7 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navi_back"] style:UIBarButtonItemStylePlain target:self action:@selector(dtNavigationBackClick)];
+    NSString *naviBackIcon = [self dtNavigationBackIcon];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:naviBackIcon] style:UIBarButtonItemStylePlain target:self action:@selector(dtNavigationBackClick)];
     [self dtAddViews];
     [self dtLayoutViews];
     [self dtConfigEvents];
@@ -50,6 +51,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+/// 导航栏点击返回，图片
+- (NSString *)dtNavigationBackIcon {
+    return @"navi_back";
+}
+
 /// 增加子view
 - (void)dtAddViews {
     
@@ -75,14 +81,14 @@
     
 }
 
-- (BOOL)hsShouldBackGesture {
+- (BOOL)dtShouldBackGesture {
     return YES;
 }
 
 #pragma mark UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    return [self hsShouldBackGesture];
+    return [self dtShouldBackGesture];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {

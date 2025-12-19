@@ -94,6 +94,9 @@ static NSString *APP_COMMON_GAME_PLAYER_MIC_STATE = @"app_common_game_player_mic
 /// app通知游戏设置游戏中的大模型AI玩家
 static NSString *APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS = @"app_common_game_add_big_scale_model_ai_players";
 
+/// app通知游戏退出游戏中的大模型AI玩家
+static NSString *APP_COMMON_GAME_EXIT_BIG_SCALE_MODEL_AI_PLAYERS = @"app_common_game_exit_big_scale_model_ai_players";
+
 
 /// 元宇宙砂砂舞相关设置参数model（app_common_game_disco_action）
 /// 参考文档: https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonStateForDisco.html
@@ -393,7 +396,7 @@ static NSString *APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS = @"app_common_g
 /// male female
 @property(nonatomic, strong) NSString *gender;
 /// ai性格
-@property(nonatomic, assign) NSInteger aiId;
+@property(nonatomic, strong) NSString *aiIdStr;
 @end
 
 /// APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS
@@ -402,4 +405,14 @@ static NSString *APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS = @"app_common_g
 @property(nonatomic, strong) NSArray <BigScaleModelAiPlayerInfoModel *> *aiPlayers;
 /// isReady  机器人加入后是否自动准备 1：自动准备，0：不自动准备 默认为1
 @property(nonatomic, assign) NSInteger isReady;
+// 是否加入座位 0：不加入 1：加入 默认为1
+@property(nonatomic, assign) NSInteger isEnter;
 @end
+
+/// APP_COMMON_GAME_EXIT_BIG_SCALE_MODEL_AI_PLAYERS
+@interface AppCommonGameExitBigScaleModelAiPlayersModel : NSObject
+/// 玩家列表
+@property(nonatomic, strong) NSArray <NSString *> *playerIds;
+@end
+
+

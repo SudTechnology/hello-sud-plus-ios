@@ -275,6 +275,12 @@ static NSString *MG_COMMON_GAME_DISCO_ACTION_END = @"mg_common_game_disco_action
 @property(nonatomic, assign) NSInteger score;
 /// 逃跑
 @property(nonatomic, assign) NSInteger isEscaped;
+/// 是否是AI玩家
+@property(nonatomic, assign) NSInteger isAI;
+/// 是否托管完成游戏
+@property(nonatomic, assign) NSInteger isManaged;
+/// 扩展信息
+@property(nonatomic, copy) NSString *extras;
 @end
 
 @interface MGCommonGameSettleModel : NSObject

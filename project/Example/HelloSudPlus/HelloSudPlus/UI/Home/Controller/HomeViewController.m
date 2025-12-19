@@ -22,6 +22,7 @@
 #import "HomeHeaderFullReusableView.h"
 #import "DiscoGameInteractivePopView.h"
 #import "../../Scenes/League/VC/LeagueEnterViewController.h"
+#import "SudAdCacheManager.h"
 
 @interface HomeViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) UICollectionView *collectionView;
@@ -153,6 +154,8 @@
 
 - (void)requestData {
     WeakSelf
+    // 广告加载
+    [SudAdCacheManager.shared loadAdCache];
     [HSHttpService postRequestWithURL:kINTERACTURL(@"game/list/v1") param:@{} respClass:GameListModel.class showErrorToast:false success:^(BaseRespModel *resp) {
         [weakSelf.collectionView.mj_header endRefreshing];
         GameListModel *model = (GameListModel *) resp;
@@ -191,9 +194,12 @@
             NSDictionary *dic = dataMap[[NSString stringWithFormat:@"%ld", (long) m.sceneId]];
             NSMutableArray <HSGameItem *> *arr = [dic objectForKey:@"dataArr"];
             if (arr.count == 0) {
-                NSArray *waitArr = [self makeGameWaitItems:3];
-                m.isGameWait = YES;
-                [arr setArray:waitArr];
+                if (m.sceneId != SceneTypeAd) {
+                    
+                    NSArray *waitArr = [self makeGameWaitItems:3];
+                    m.isGameWait = YES;
+                    [arr setArray:waitArr];
+                }
             } else {
 
                 // 是否需要满行

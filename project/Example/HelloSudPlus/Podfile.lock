@@ -110,16 +110,16 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SSZipArchive (2.4.3)
-  - SudASR (1.0.0):
-    - SudASR/Stand (= 1.0.0)
-  - SudASR/Base (1.0.0)
-  - SudASR/Stand (1.0.0):
+  - SudASR (1.6.3):
+    - SudASR/Stand (= 1.6.3)
+  - SudASR/Base (1.6.3)
+  - SudASR/Stand (1.6.3):
     - MicrosoftCognitiveServicesSpeech-iOS (= 1.40.0)
     - SudASR/Base
-  - SudGIP (1.6.3)
-  - SudGIPWrapper (1.6.2):
+  - SudGIPWrapper (1.6.1):
+    - SudGIPWrapper/SudGIPWrapper (= 1.6.1)
+  - SudGIPWrapper/SudGIPWrapper (1.6.1):
     - MJExtension (~> 3.4.1)
-    - SudGIP
   - SudNFT (1.0.5)
   - SVGAPlayer (2.5.6):
     - SVGAPlayer/Core (= 2.5.6)
@@ -163,9 +163,8 @@ DEPENDENCIES:
   - SDWebImage (= 5.12.2)
   - SDWebImageSVGKitPlugin (= 1.4.0)
   - SDWebImageWebPCoder
-  - SudASR (from `../../`)
-  - SudGIP (~> 1.6.3)
-  - SudGIPWrapper
+  - SudASR
+  - SudGIPWrapper (from `../../`)
   - SudNFT (= 1.0.5)
   - SVGAPlayer (from `https://github.com/svga/SVGAPlayer-iOS.git`, tag `2.5.6`)
   - SVProgressHUD (~> 2.2.5)
@@ -201,8 +200,7 @@ SPEC REPOS:
     - SDWebImageSVGKitPlugin
     - SDWebImageWebPCoder
     - SSZipArchive
-    - SudGIP
-    - SudGIPWrapper
+    - SudASR
     - SudNFT
     - SVGKit
     - SVProgressHUD
@@ -212,7 +210,7 @@ SPEC REPOS:
     - ZIM
 
 EXTERNAL SOURCES:
-  SudASR:
+  SudGIPWrapper:
     :path: "../../"
   SVGAPlayer:
     :git: https://github.com/svga/SVGAPlayer-iOS.git
@@ -252,11 +250,10 @@ SPEC CHECKSUMS:
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  SudASR: a89774fdee49a84bceee2b49ac78fbb09d7cc17a
-  SudGIP: 72aa5e894897c07619977360c41633af94df0050
-  SudGIPWrapper: e09c6454ab3fa0322993b7a19d940823622836ea
+  SudASR: 92fa9ad22a5725b77e46cb7257983cee7220581c
+  SudGIPWrapper: 36d5a99181f1d6f75a5b7b721e4bc2b9197370c7
   SudNFT: 086af9cc3612962507ef3beb878777d098f63446
-  SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
+  SVGAPlayer: 8bac7c3b0804f5014743bd3de3e2bd429ec054ba
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TXLiteAVSDK_TRTC: a653d0195b9519222b6ff8a6329d7c942aeb1a62
@@ -266,6 +263,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 0064f6044b5d1d00c40d815455e6ee032f1cb56b
   ZIM: 1376cbc14e92c31425d91a5bd0874c0b501e4e76
 
-PODFILE CHECKSUM: 0a11e661d2fd218afc4e4bb4968a1fee0ca9c322
+PODFILE CHECKSUM: d1da8b662abf926ed4ac892f7065bcb98f07ae3a
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.16.2

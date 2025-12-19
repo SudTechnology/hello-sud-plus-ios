@@ -42,7 +42,6 @@
  * 游戏开始
  */
 - (void)onGameStarted {
-    NSLog(@"ISudFSMMG:onGameStarted:游戏开始");
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameStarted)]) {
         [self.listener onGameStarted];
     }
@@ -52,7 +51,6 @@
  * 游戏销毁
  */
 - (void)onGameDestroyed {
-    NSLog(@"ISudFSMMG:onGameDestroyed:游戏销毁");
     [self clearAllStates];
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameDestroyed)]) {
         [self.listener onGameDestroyed];
@@ -64,7 +62,6 @@
  * 最低版本：v1.1.30.xx
  */
 - (void)onGameLog:(nonnull NSString *)dataJson {
-    NSLog(@"ISudFSMMG:onGameLog:%@", dataJson);
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onGameLog:)]) {
         [self.listener onGameLog:dataJson];
     }
@@ -76,7 +73,6 @@
  * @param dataJson {"code":"value"}
  */
 - (void)onExpireCode:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    NSLog(@"ISudFSMMG:onExpireCode:Code过期");
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onExpireCode:dataJson:)]) {
         [self.listener onExpireCode:handle dataJson:dataJson];
     }
@@ -91,7 +87,6 @@
  *   最低版本：v1.1.30.xx
  */
 - (void)onGetGameCfg:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    NSLog(@"ISudFSMMG:onGetGameCfg:配置游戏Config");
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onGetGameCfg:dataJson:)]) {
         [self.listener onGetGameCfg:handle dataJson:dataJson];
     }
@@ -107,7 +102,6 @@
  * @param dataJson {}
  */
 - (void)onGetGameViewInfo:(nonnull id <ISudFSMStateHandle>)handle dataJson:(nonnull NSString *)dataJson {
-    NSLog(@"ISudFSMMG:onGetGameViewInfo:配置游戏View信息");
     if (self.listener != nil && [self.listener respondsToSelector:@selector(onGetGameViewInfo:dataJson:)]) {
         [self.listener onGetGameViewInfo:handle dataJson:dataJson];
         return;
@@ -141,8 +135,6 @@
  * @param dataJson 回调json
  */
 - (void)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
-    NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:onGameStateChange:%@ --dataJson:%@", state, dataJson]);
-
 
     if ([state isEqualToString:MG_COMMON_PUBLIC_MESSAGE]) {
         MGCommonPublicMessageModel *m = [MGCommonPublicMessageModel mj_objectWithKeyValues:dataJson];
@@ -816,10 +808,6 @@
     
     if ([self.listener respondsToSelector:@selector(onGameStateChange:state:dataJson:)]) {
         [self.listener onGameStateChange:handle state:state dataJson:dataJson];
-    } else {
-        /// 其他状态
-        NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@", state);
-        [handle success:[self handleMGSuccess]];
     }
 }
 
@@ -832,7 +820,6 @@
  * @param dataJson 回调JSON
  */
 - (void)onPlayerStateChange:(nullable id <ISudFSMStateHandle>)handle userId:(nonnull NSString *)userId state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson {
-    NSLog(@"%@", [NSString stringWithFormat:@"ISudFSMMG:userId:%@, onPlayerStateChange:%@ --dataJson:%@", userId, state, dataJson]);
 
     if ([state isEqualToString:MG_COMMON_PLAYER_IN]) {
         MGCommonPlayerInModel *m = [MGCommonPlayerInModel mj_objectWithKeyValues:dataJson];
@@ -920,8 +907,6 @@
         if (self.listener != nil && [self.listener respondsToSelector:@selector(onPlayerMGDGTotalScore:userId:model:)]) {
             [self.listener onPlayerMGDGTotalScore:handle userId:userId model:m];
             return;
-        } else {
-            [handle success:[self handleMGSuccess]];
         }
     } else if ([state isEqualToString:MG_DG_SCORE]) {
         MGDGScoreModel *m = [MGDGScoreModel mj_objectWithKeyValues:dataJson];
@@ -973,9 +958,6 @@
     /// 默认派发路径
     if ([self.listener respondsToSelector:@selector(onPlayerStateChange:userId:state:dataJson:)]) {
         [self.listener onPlayerStateChange:handle userId:userId state:state dataJson:dataJson];
-    } else {
-        [handle success:[self handleMGSuccess]];
-        NSLog(@"ISudFSMMG:onPlayerStateChange:未做解析状态");
     }
 }
 
