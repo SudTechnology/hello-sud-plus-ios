@@ -128,18 +128,6 @@ SudRt2GameCustomCommandListener>
     paramModel.gameId = self.gameInfo[@"gameId"];
     paramModel.version = self.gameInfo[@"version"];
     paramModel.path = self.gameInfo[@"path"];
-    
-    
-//    paramModel.gameId = @"sud.tech.test";
-//    paramModel.version = @"1.0.0";
-//    paramModel.path = @"http://test-runtime.cocos.com/cocos-runtime-demo/cpk/13/game.creator.cccshooter.13.cpk";
-    
-    // 引擎分离
-//    paramModel.gameId = @"game.creator.duang";
-//    paramModel.version = @"1.0.0";
-//    paramModel.path = @"http://test-runtime.cocos.com/cocos-runtime-demo/cpk/13/game.creator.duang-sheep.sp.13.cpk";
-////    paramModel.path = @"http://test-runtime.cocos.com/cocos-runtime-demo/cpk/13/game.creator3d.simple-games.sp.13.cpk";
-//
 
     [SVProgressHUD showProgress:0 status:@"Loading package"];
     WeakSelf
