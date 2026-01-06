@@ -16,24 +16,24 @@ typedef NS_ENUM(NSInteger, _StoppedState) {
 };
 
 @interface GameRunningModel () <
-SudRt2GameDrawFrameListener,
-SudRt2GameLoadSubpackageListener,
-SudRt2GameQueryExitListener,
-SudRt2GameStateChangeListener,
-SudRt2GameScreenStateChangeListener,
-SudRt2GameQueryAudioOptionsListener,
-SudRt2GameQueryClipboardListener,
-SudRt2MediaPlayerListener>
+SUDRuntime2GameDrawFrameListener,
+SUDRuntime2GameLoadSubpackageListener,
+SUDRuntime2GameQueryExitListener,
+SUDRuntime2GameStateChangeListener,
+SUDRuntime2GameScreenStateChangeListener,
+SUDRuntime2GameQueryAudioOptionsListener,
+SUDRuntime2GameQueryClipboardListener,
+SUDRuntime2MediaPlayerListener>
 @property (nonatomic, assign) int currentState;
 @property (nonatomic, assign, getter=isStopping) BOOL stopping;
 @property (nonatomic, assign) _StoppedState stoppedState;
 @property (nonatomic, copy) GameInfo *gameInfo;
 @property (nonatomic, copy) NSString *userID;
-@property (nonatomic, copy) void (^startHandler)(id<SudRt2GameHandle> _Nullable handle,
+@property (nonatomic, copy) void (^startHandler)(id<SUDRuntime2GameHandle> _Nullable handle,
                                                  NSError * _Nullable error);
 @property (nonatomic, copy) void (^stopHandler)(NSError * _Nullable error);
 
-@property (nonatomic, strong) id<SudRt2GameHandle> gameHandle;
+@property (nonatomic, strong) id<SUDRuntime2GameHandle> gameHandle;
 @property (nonatomic, strong) GamePermissionModel *permissionModel;
 @property (nonatomic, strong) NSMutableDictionary *gameOptions;
 
@@ -63,8 +63,8 @@ SudRt2MediaPlayerListener>
 
 - (void)runGame:(GameInfo *)gameInfo
     gameOptions:(NSDictionary *)options
-  handleCreated:(nullable void (^)(id<SudRt2GameHandle> handle))createHandler
-     completion:(nullable void (^)(id<SudRt2GameHandle> _Nullable handle, NSError * _Nullable error))completion {
+  handleCreated:(nullable void (^)(id<SUDRuntime2GameHandle> handle))createHandler
+     completion:(nullable void (^)(id<SUDRuntime2GameHandle> _Nullable handle, NSError * _Nullable error))completion {
     
     if (_currentState == SUD_RT2_GAME_STATE_UNAVAILABLE) {
         _gameInfo = gameInfo;
@@ -86,14 +86,14 @@ SudRt2MediaPlayerListener>
         NSLog(@"runGame gameTag:%@", gameInfo.tag);
         if (!_gameHandle) {
             GameEnv *gameEnv = [GameEnv getInstance];
-            [SudRuntime2 createRuntime:nil completion:^(id<SudRt2GameRuntime>  _Nullable runtime, NSError *error) {
+            [SUDRuntime2 createRuntime:nil completion:^(id<SUDRuntime2GameRuntime>  _Nullable runtime, NSError *error) {
                 
                 NSString *gameUserId = [NSString stringWithFormat:@"%@_%@", _userID, gameInfo.tag];
                 [runtime createGameHandleWithOptions:@{
                     SUD_RT2_KEY_GAME_USER_ID: gameUserId,
                     SUD_RT2_KEY_GAME_HTTP_CACHE_LIMIT_STORAGE: @(200),
                     SUD_RT2_KEY_GAME_HTTP_CACHE_PATH: [NSTemporaryDirectory() stringByAppendingPathComponent:@"http"],
-                } completion:^(id<SudRt2GameHandle>  _Nullable handle, NSError * _Nullable error) {
+                } completion:^(id<SUDRuntime2GameHandle>  _Nullable handle, NSError * _Nullable error) {
                     NSLog(@"createGameHandleWithOptions gameTag:%@， error:%@, gameUserId:%@", gameInfo.tag, error, gameUserId);
                     if (error) {
                         if (completion) {
@@ -164,7 +164,7 @@ SudRt2MediaPlayerListener>
 - (void)startPlayGame {
     /// 主要控制声音
     /// 正常不需要，runtime内部应该联动处理，暂时先自行处理
-    id<SudRt2GameAudioSession> session = [_gameHandle getGameAudioSession];
+    id<SUDRuntime2GameAudioSession> session = [_gameHandle getGameAudioSession];
     if (session.isMute) {
         [session mute:NO];
     }
@@ -174,7 +174,7 @@ SudRt2MediaPlayerListener>
 - (void)stopPlayGame {
     /// 主要控制声音
     /// 正常不需要，runtime内部应该联动处理，暂时先自行处理
-    id<SudRt2GameAudioSession> session = [_gameHandle getGameAudioSession];
+    id<SUDRuntime2GameAudioSession> session = [_gameHandle getGameAudioSession];
     if (!session.isMute) {
         [session mute:YES];
     }
@@ -212,7 +212,7 @@ SudRt2MediaPlayerListener>
 }
 
 #pragma mark - CRGameQueryClipboardListener
-- (void)onGetClipboardData:(id<SudRt2GameQueryClipboardHandle>)handle
+- (void)onGetClipboardData:(id<SUDRuntime2GameQueryClipboardHandle>)handle
                       data:(NSString *)data
                      appId:(NSString *)appId {
     // 可监听并过滤获取剪贴板内容
@@ -220,7 +220,7 @@ SudRt2MediaPlayerListener>
     [handle allowGetClipboardData:data];
 }
 
-- (void)onSetClipboardData:(id<SudRt2GameQueryClipboardHandle>)handle
+- (void)onSetClipboardData:(id<SUDRuntime2GameQueryClipboardHandle>)handle
                       data:(NSString *)data
                      appId:(NSString *)appId {
     // 可监听并过滤设置剪贴板内容
@@ -242,7 +242,7 @@ SudRt2MediaPlayerListener>
 
 
 #pragma mark - CRGameQueryAudioOptionsListener
-- (void)onQueryAudioSession:(id<SudRt2GameQueryAudioOptionsHandle>)handle appId:(NSString *)appId options:(NSDictionary *)options {
+- (void)onQueryAudioSession:(id<SUDRuntime2GameQueryAudioOptionsHandle>)handle appId:(NSString *)appId options:(NSDictionary *)options {
     // 当有多个游戏实例时，可根据业务逻辑确定某些游戏实例的音频播放状态
     
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -352,7 +352,7 @@ SudRt2MediaPlayerListener>
 
 #pragma mark - CRMediaPlayerListener
 - (void)onMediaPlayerCreated:(UInt64)instanceID {
-    id<SudRt2CocosGameMediaPlayerHandle> mediaPlayerHandle = [_gameHandle getMediaPlayerHandle:instanceID];
+    id<SUDRuntime2CocosGameMediaPlayerHandle> mediaPlayerHandle = [_gameHandle getMediaPlayerHandle:instanceID];
     [_mediaPlayerHandleListener addMediaPlayerHandle:mediaPlayerHandle];
 }
 
@@ -394,7 +394,7 @@ SudRt2MediaPlayerListener>
     [_gameHandle setGameQueryPermissionListener:_permissionModel];
     [_gameHandle setGameQuerySystemPermissionListener:_permissionModel];
     [_gameHandle setMediaPlayerListener:self];
-    id<SudRt2GameAudioSession> session = [_gameHandle getGameAudioSession];
+    id<SUDRuntime2GameAudioSession> session = [_gameHandle getGameAudioSession];
     [session setGameQueryAudioOptionsListener:self];
     
     [_gameHandle setGameStartOptions:_gameInfo.appID

@@ -20,7 +20,7 @@ static NSString * const _KEY_USER_ID = @"user-id";
 static NSString * const _KEY_WEBGL_RENDER_THREAD_MODE = @"webgl_render_thread_mode";
 
 @interface GameEnv ()
-@property (nonatomic, strong) id<SudRt2GameRuntime> runtime;
+@property (nonatomic, strong) id<SUDRuntime2GameRuntime> runtime;
 @end
 
 @implementation GameEnv
@@ -59,7 +59,7 @@ static GameEnv *_singleton = nil;
             SUD_RT2_KEY_RUNTIME_STORAGE_PATH_PLUGIN:pluginPath
         };
         WeakSelf
-        [SudRuntime2 createRuntime:nil completion:^(id<SudRt2GameRuntime>  _Nullable runtime, NSError *error) {
+        [SUDRuntime2 createRuntime:nil completion:^(id<SUDRuntime2GameRuntime>  _Nullable runtime, NSError *error) {
              weakSelf.runtime = runtime;
         }];
     }

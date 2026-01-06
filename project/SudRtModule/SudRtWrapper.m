@@ -25,7 +25,7 @@
 }
 @end
 
-@interface SudRtWrapper()<SudRt2GameCustomCommandListener,SudRt2MediaPlayerHandleListener, GameRunningModelDelegate>
+@interface SudRtWrapper()<SUDRuntime2GameCustomCommandListener,SUDRuntime2MediaPlayerHandleListener, GameRunningModelDelegate>
 @property(nonatomic, strong)GameRunningModel *gameRunningModel;
 @property (nonatomic, copy) NSDictionary *options;
 @property(nonatomic, strong)UIView *rtGameView;
@@ -103,12 +103,12 @@
 ///   - completion: completion description
 - (void)loadGamePackage:(SudRtGameInfo *)sudRtGameInfo completion:(void(^)(NSError *error))completion {
     WeakSelf;
-    SudRtInitSDKParamModel *paramModel = [[SudRtInitSDKParamModel alloc]init];
+    SUDRuntimeInitSDKParamModel *paramModel = [[SUDRuntimeInitSDKParamModel alloc]init];
     [ISudAPPD e:HsAppPreferences.shared.gameEnvType];
     paramModel.appId = HsAppPreferences.shared.appId;
     paramModel.appKey = HsAppPreferences.shared.appKey;
     paramModel.code = sudRtGameInfo.code;
-    [SudRuntime2 initSDK:paramModel completion:^(NSError *error) {
+    [SUDRuntime2 initSDK:paramModel completion:^(NSError *error) {
         NSLog(@"initSDK result:%@", error.localizedDescription);
         if (error) {
             if (completion) {
@@ -118,11 +118,11 @@
         }
 
         
-        SudRt2LoadPackageParamModel *paramModel = SudRt2LoadPackageParamModel.new;
+        SUDRuntime2LoadPackageParamModel *paramModel = SUDRuntime2LoadPackageParamModel.new;
         paramModel.gameId = sudRtGameInfo.gameId;
         paramModel.version = sudRtGameInfo.version;
         paramModel.path = sudRtGameInfo.url;
-        [SudRuntime2 loadPackage:paramModel progress:^(NSInteger progress) {
+        [SUDRuntime2 loadPackage:paramModel progress:^(NSInteger progress) {
             DDLogDebug(@"loadPackage progress:%@%%", @(progress));
         } completion:^(NSError *error) {
             DDLogDebug(@"loadPackage result:%@", error.localizedDescription);
@@ -178,11 +178,11 @@ onUpdatedGameViewBlock:(void(^)(UIView *gameView))onUpdatedGameViewBlock
     self.loadRtCalc.stepName = [NSString stringWithFormat:@"rt startLoadGame, tag:%@", gameInfo.tag];
     [self.loadRtCalc begin];
     
-    SudRt2LoadPackageParamModel *paramModel = SudRt2LoadPackageParamModel.new;
+    SUDRuntime2LoadPackageParamModel *paramModel = SUDRuntime2LoadPackageParamModel.new;
     paramModel.gameId = gameInfo.appID;
     paramModel.version = gameInfo.version;
     paramModel.path = gameInfo.url;
-    [SudRuntime2 loadPackage:paramModel progress:^(NSInteger progress) {
+    [SUDRuntime2 loadPackage:paramModel progress:^(NSInteger progress) {
         DDLogDebug(@"loadGame progress:%@%%", @(progress));
     } completion:^(NSError *error) {
         DDLogDebug(@"loadGame result:%@", error.localizedDescription);
@@ -220,7 +220,7 @@ onUpdatedGameViewBlock:(void(^)(UIView *gameView))onUpdatedGameViewBlock
     [self.runRtCalc begin];
     [_gameRunningModel runGame:gameInfo
                    gameOptions:gameOptions
-                 handleCreated:^(id<SudRt2GameHandle>  _Nonnull handle) {
+                 handleCreated:^(id<SUDRuntime2GameHandle>  _Nonnull handle) {
         // handle 创建后立刻给 gameView 布局，以设置正确的宽高
         if (!weakSelf) {
             return;
@@ -239,7 +239,7 @@ onUpdatedGameViewBlock:(void(^)(UIView *gameView))onUpdatedGameViewBlock
         if (onUpdatedGameViewBlock){
             onUpdatedGameViewBlock(gameView);
         }
-    } completion:^(id<SudRt2GameHandle>  _Nullable handle, NSError * _Nullable error) {
+    } completion:^(id<SUDRuntime2GameHandle>  _Nullable handle, NSError * _Nullable error) {
         [weakSelf.runRtCalc end];
         if (error) {
             DDLogDebug(@"游戏运行失败，%@", error.localizedDescription);
@@ -250,7 +250,7 @@ onUpdatedGameViewBlock:(void(^)(UIView *gameView))onUpdatedGameViewBlock
     }];
 }
 
-- (void)onCallCustomCommand:(id<SudRt2GameCustomCommandHandle>)handle info:(nullable NSDictionary *)argv {
+- (void)onCallCustomCommand:(id<SUDRuntime2GameCustomCommandHandle>)handle info:(nullable NSDictionary *)argv {
     NSLog(@"onCallCustomCommand:%@", argv);
     int count = [[argv objectForKey:@"argc"] intValue];
     NSInteger index = 0;
@@ -268,11 +268,11 @@ onUpdatedGameViewBlock:(void(^)(UIView *gameView))onUpdatedGameViewBlock
     }
 }
 
-- (void)onCallCustomCommandSync:(id<SudRt2GameCustomCommandHandle>)handle info:(nullable NSDictionary *)argv {
+- (void)onCallCustomCommandSync:(id<SUDRuntime2GameCustomCommandHandle>)handle info:(nullable NSDictionary *)argv {
     NSLog(@"onCallCustomCommandSync:%@", argv);
 }
 
-- (void)addMediaPlayerHandle:(id<SudRt2CocosGameMediaPlayerHandle>)mediaPlayerHandle {
+- (void)addMediaPlayerHandle:(id<SUDRuntime2CocosGameMediaPlayerHandle>)mediaPlayerHandle {
     
 }
 

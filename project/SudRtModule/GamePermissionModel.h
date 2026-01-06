@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GamePermissionModel : NSObject<SudRt2GameQueryPermissionListener, SudRt2GameQuerySystemPermissionListener>
+@interface GamePermissionModel : NSObject<SUDRuntime2GameQueryPermissionListener, SUDRuntime2GameQuerySystemPermissionListener>
 
 @end
 

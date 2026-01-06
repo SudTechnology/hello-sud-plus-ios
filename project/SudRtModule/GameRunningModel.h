@@ -3,15 +3,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class GameInfo;
-@protocol SudRt2CocosGameHandle;
+@protocol SUDRuntime2CocosGameHandle;
 
-@protocol SudRt2GameCustomCommandListener;
+@protocol SUDRuntime2GameCustomCommandListener;
 
-@protocol SudRt2CocosGameMediaPlayerHandle;
+@protocol SUDRuntime2CocosGameMediaPlayerHandle;
 
-@protocol SudRt2MediaPlayerHandleListener <NSObject>
+@protocol SUDRuntime2MediaPlayerHandleListener <NSObject>
 
-- (void)addMediaPlayerHandle:(id<SudRt2CocosGameMediaPlayerHandle>)mediaPlayerHandle;
+- (void)addMediaPlayerHandle:(id<SUDRuntime2CocosGameMediaPlayerHandle>)mediaPlayerHandle;
 
 - (void)removeMediaPlayerhandleWithInstanceID:(UInt64) instanceID;
 
@@ -22,10 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GameRunningModel : NSObject
 @property (nonatomic, copy, readonly) GameInfo *gameInfo;
 @property (nonatomic, copy, readonly) NSString *userID;
-@property (nonatomic, strong) id<SudRt2GameCustomCommandListener> customCommandListener;
+@property (nonatomic, strong) id<SUDRuntime2GameCustomCommandListener> customCommandListener;
 @property (nonatomic, strong, readonly) NSDictionary *gameOptions;
-@property (nonatomic, strong, readonly) id<SudRt2GameHandle> gameHandle;
-@property (nonatomic, weak) id<SudRt2MediaPlayerHandleListener> mediaPlayerHandleListener;
+@property (nonatomic, strong, readonly) id<SUDRuntime2GameHandle> gameHandle;
+@property (nonatomic, weak) id<SUDRuntime2MediaPlayerHandleListener> mediaPlayerHandleListener;
 @property (nonatomic, weak) id<GameRunningModelDelegate> delegate;
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -34,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)runGame:(GameInfo *)gameInfo
     gameOptions:(NSDictionary *)options
-  handleCreated:(nullable void (^)(id<SudRt2GameHandle> handle))create
-     completion:(nullable void (^)(id<SudRt2GameHandle> _Nullable handle,
+  handleCreated:(nullable void (^)(id<SUDRuntime2GameHandle> handle))create
+     completion:(nullable void (^)(id<SUDRuntime2GameHandle> _Nullable handle,
                                    NSError * _Nullable error))completion;
 
 - (void)quitWithCompletion:(nullable void (^)(NSError * _Nullable error))completion;

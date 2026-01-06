@@ -14,7 +14,7 @@
 @property(nonatomic, strong)UIButton *startBtn;
 @property(nonatomic, strong)UIButton *destroyBtn;
 @property(nonatomic, strong)UIView *gameContentView;
-@property(nonatomic, strong)id<ISudRt1GameHandle> gameHandle1;
+@property(nonatomic, strong)id<ISUDRuntime1GameHandle> gameHandle1;
 @property(nonatomic, strong)UIView *gameView;
 
 @property(nonatomic, strong)NSDictionary *gameInfo;
@@ -90,12 +90,12 @@
     [QsrCommon.shared reqGetCode:^(NSString *code) {
         [SVProgressHUD dismiss];
         
-        SudRtInitSDKParamModel *paramModel = [[SudRtInitSDKParamModel alloc]init];
+        SUDRuntimeInitSDKParamModel *paramModel = [[SUDRuntimeInitSDKParamModel alloc]init];
         paramModel.appId = SUDMGP_APP_ID;
         paramModel.appKey = SUDMGP_APP_KEY;
         paramModel.code = code;
         /// SDK will skip if initialized, so call it everytime would be ok
-        [SudRuntime2 initSDK:paramModel completion:^(NSError *_Nullable error) {
+        [SUDRuntime2 initSDK:paramModel completion:^(NSError *_Nullable error) {
             if (error) {
                 NSLog(@"initSDK result:%@", error.localizedDescription);
                 [SVProgressHUD showErrorWithStatus:error.localizedDescription];
@@ -113,7 +113,7 @@
 
 - (void)handleLoadGame {
     
-    SudRt1LoadGameParamModel *paramModel = SudRt1LoadGameParamModel.new;
+    SUDRuntime1LoadGameParamModel *paramModel = SUDRuntime1LoadGameParamModel.new;
     paramModel.gameId = self.gameInfo[@"gameId"];
     paramModel.version = self.gameInfo[@"version"];
     paramModel.path = self.gameInfo[@"path"];
@@ -122,10 +122,10 @@
 
     WeakSelf
     /// Loading Game
-    [SudRuntime1 loadGame:paramModel progress:^(NSInteger progress) {
+    [SUDRuntime1 loadGame:paramModel progress:^(NSInteger progress) {
         NSLog(@"loadGame progress:%@", @(progress));
         [SVProgressHUD showProgress:progress/100.0 status:@"Loading Game"];
-    } completion:^(id<ISudRt1GameHandle> _Nullable gameHandle, NSError * _Nullable error) {
+    } completion:^(id<ISUDRuntime1GameHandle> _Nullable gameHandle, NSError * _Nullable error) {
         [SVProgressHUD dismiss];
         NSLog(@"loadGame result:%@", error);
         if (error) {
@@ -140,7 +140,7 @@
 
 }
 
-- (void)onGameHandleCreateSuccess1:(SudRt1LoadGameParamModel *)loadGamePramModel {
+- (void)onGameHandleCreateSuccess1:(SUDRuntime1LoadGameParamModel *)loadGamePramModel {
 
     UIView *gameView = [self.gameHandle1 getGameView];
     self.gameView = gameView;

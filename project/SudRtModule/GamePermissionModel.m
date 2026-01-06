@@ -86,7 +86,7 @@ typedef void (^_RequestPermissionCompletionBlock)(BOOL granted);
                       completion:(nonnull void (^)(BOOL allow))completion {
 //    _GamePermissionType permissionType = [self _permissionTypeWithPermissionScope:permission];
 //    GameEnv *env = [GameEnv getInstance];
-//    id<SudRt2GameRuntime> runtime = [env getCocosGameRuntime];
+//    id<SUDRuntime2GameRuntime> runtime = [env getCocosGameRuntime];
 //    id<CRCocosGamePackageManager> packageManager = (id<CRCocosGamePackageManager>)[runtime getManagerWithName:CR_KEY_MANAGER_GAME_PACKAGE
 //                                                                                                      options:nil];
 //    id<CRCocosGameConfigV2> config = [packageManager getGameConfig:appId];
@@ -241,20 +241,20 @@ typedef void (^_RequestPermissionCompletionBlock)(BOOL granted);
 
 #pragma mark - CRGameQueryPermissionListener
 // 当需要用户允许游戏使用某个权限时调用，返回允许后，系统不会立刻申请相关的系统权限，而是当真正使用对应的api时才会申请
-- (void)onQueryPermission:(id<SudRt2GameQueryPermissionHandle>)handle
+- (void)onQueryPermission:(id<SUDRuntime2GameQueryPermissionHandle>)handle
                permission:(NSString *)permission
                     appId:(NSString *)appId
-               authStatus:(SudRt2PermissionAuthStatus)authStatus {
+               authStatus:(SUDRuntime2PermissionAuthStatus)authStatus {
 
 }
 
 #pragma mark - CRGameQuerySystemPermissionListener
 // 当游戏将要请求系统权限前调用，如果服务被禁用或者未授权，可弹窗引导用户开启对应服务或者权限
-- (void)beforeQuerySystemPermission:(id<SudRt2GameQuerySystemPermissionHandle>)handle
+- (void)beforeQuerySystemPermission:(id<SUDRuntime2GameQuerySystemPermissionHandle>)handle
                        fromJSMethod:(NSString *)methodName
                          permission:(NSString *)permission
                               appId:(NSString *)appId
-                         authStatus:(SudRt2SystemPermissionAuthStatus)authStatus
+                         authStatus:(SUDRuntime2SystemPermissionAuthStatus)authStatus
                       serviceStatus:(BOOL)enabled {
 
 }

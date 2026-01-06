@@ -182,7 +182,7 @@
             return;
         }
         NSArray * jsonArray =  (NSArray *)rootDict;
-        NSArray<SudAdItemModel *> *adModels = [SudAdItemModel mj_objectArrayWithKeyVal≤uesArray:jsonArray];
+        NSArray<SudAdItemModel *> *adModels = [SudAdItemModel mj_objectArrayWithKeyValuesArray:jsonArray];
         if (adModels.count <= 0) {
             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             return;

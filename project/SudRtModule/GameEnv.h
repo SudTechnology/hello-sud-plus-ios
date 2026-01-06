@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, GameLaunchMode) {
 - (BOOL)getShowFPS;
 - (NSInteger)getTempFileIdleTimeInMinute;
 - (NSInteger)getWebGLRenderThreadMode;
-- (id<SudRt2GameRuntime>)getCocosGameRuntime;
+- (id<SUDRuntime2GameRuntime>)getCocosGameRuntime;
 - (void)setDefaultLaunchGameMode:(GameLaunchMode)mode;
 - (void)setEnableDebugger:(BOOL)enable;
 - (void)setEnableDebugModeLaunchGame:(BOOL)enable;

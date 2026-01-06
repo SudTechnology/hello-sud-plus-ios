@@ -10,22 +10,22 @@
 
 @interface Runtime2ViewController()
 
-<SudRt2GameDrawFrameListener,
-SudRt2GameLoadSubpackageListener,
-SudRt2GameQueryExitListener,
-SudRt2GameStateChangeListener,
-SudRt2GameScreenStateChangeListener,
-SudRt2GameQueryAudioOptionsListener,
-SudRt2GameQueryClipboardListener,
-SudRt2MediaPlayerListener,
-SudRt2GameCustomCommandListener>
+<SUDRuntime2GameDrawFrameListener,
+SUDRuntime2GameLoadSubpackageListener,
+SUDRuntime2GameQueryExitListener,
+SUDRuntime2GameStateChangeListener,
+SUDRuntime2GameScreenStateChangeListener,
+SUDRuntime2GameQueryAudioOptionsListener,
+SUDRuntime2GameQueryClipboardListener,
+SUDRuntime2MediaPlayerListener,
+SUDRuntime2GameCustomCommandListener>
 
 @property(nonatomic, strong)UIButton *backBtn;
 @property(nonatomic, strong)UIButton *startBtn;
 @property(nonatomic, strong)UIButton *destroyBtn;
 @property(nonatomic, strong)UIView *gameContentView;
-@property(nonatomic, strong)id<SudRt2GameRuntime> runtime;
-@property(nonatomic, strong)id<SudRt2GameHandle> gameHandle;
+@property(nonatomic, strong)id<SUDRuntime2GameRuntime> runtime;
+@property(nonatomic, strong)id<SUDRuntime2GameHandle> gameHandle;
 @property(nonatomic, strong)UIView *gameView;
 @property(nonatomic, strong)NSDictionary *gameInfo;
 @end
@@ -101,12 +101,12 @@ SudRt2GameCustomCommandListener>
     [QsrCommon.shared reqGetCode:^(NSString *code) {
         [SVProgressHUD dismiss];
         
-        SudRtInitSDKParamModel *paramModel = [[SudRtInitSDKParamModel alloc]init];
+        SUDRuntimeInitSDKParamModel *paramModel = [[SUDRuntimeInitSDKParamModel alloc]init];
         paramModel.appId = SUDMGP_APP_ID;
         paramModel.appKey = SUDMGP_APP_KEY;
         paramModel.code = code;
         /// 初始化SDK，初始化一次成功后，内部会自行判断，不会重复初始化
-        [SudRuntime2 initSDK:paramModel completion:^(NSError *_Nullable error) {
+        [SUDRuntime2 initSDK:paramModel completion:^(NSError *_Nullable error) {
             if (error) {
                 NSLog(@"initSDK result:%@", error.localizedDescription);
                 [SVProgressHUD showErrorWithStatus:error.localizedDescription];
@@ -124,7 +124,7 @@ SudRt2GameCustomCommandListener>
 
 - (void)handleLoadGame {
     
-    SudRt2LoadPackageParamModel *paramModel = SudRt2LoadPackageParamModel.new;
+    SUDRuntime2LoadPackageParamModel *paramModel = SUDRuntime2LoadPackageParamModel.new;
     paramModel.gameId = self.gameInfo[@"gameId"];
     paramModel.version = self.gameInfo[@"version"];
     paramModel.path = self.gameInfo[@"path"];
@@ -132,7 +132,7 @@ SudRt2GameCustomCommandListener>
     [SVProgressHUD showProgress:0 status:@"Loading package"];
     WeakSelf
     // 创建游戏运行时
-    [SudRuntime2 createRuntime:nil completion:^(id<SudRt2GameRuntime>  _Nullable runtime, NSError *_Nullable error) {
+    [SUDRuntime2 createRuntime:nil completion:^(id<SUDRuntime2GameRuntime>  _Nullable runtime, NSError *_Nullable error) {
         weakSelf.runtime = runtime;
         if (error) {
             NSLog(@"createRuntime error:%@", error.localizedDescription);
@@ -140,7 +140,7 @@ SudRt2GameCustomCommandListener>
             return;
         }
         /// 加载游戏
-        [SudRuntime2 loadPackage:paramModel progress:^(NSInteger progress) {
+        [SUDRuntime2 loadPackage:paramModel progress:^(NSInteger progress) {
             NSLog(@"loadGame progress:%@", @(progress));
             [SVProgressHUD showProgress:progress/100.0 status:@"Loading package"];
         } completion:^(NSError * _Nullable error) {
@@ -158,7 +158,7 @@ SudRt2GameCustomCommandListener>
 
 }
 
-- (void)handleRunGame:(SudRt2LoadPackageParamModel *)loadGamePramModel {
+- (void)handleRunGame:(SUDRuntime2LoadPackageParamModel *)loadGamePramModel {
 
     NSString *gameUserId = [NSString stringWithFormat:@"%@", QsrCommon.shared.userId];
     WeakSelf
@@ -166,7 +166,7 @@ SudRt2GameCustomCommandListener>
         SUD_RT2_KEY_GAME_USER_ID: gameUserId,
         SUD_RT2_KEY_GAME_HTTP_CACHE_LIMIT_STORAGE: @(200),
         SUD_RT2_KEY_GAME_HTTP_CACHE_PATH: [NSTemporaryDirectory() stringByAppendingPathComponent:@"http"],
-    } completion:^(id<SudRt2GameHandle>  _Nullable handle, NSError * _Nullable error) {
+    } completion:^(id<SUDRuntime2GameHandle>  _Nullable handle, NSError * _Nullable error) {
         NSLog(@"createGameHandleWithOptions gameTag:%@， error:%@, gameUserId:%@", loadGamePramModel.gameId, error, gameUserId);
         if (error) {
             [weakSelf updateBtnStateWithIsLoadedGame:NO];
@@ -178,7 +178,7 @@ SudRt2GameCustomCommandListener>
     }];
 }
 
-- (void)onGameHandleCreateSuccess:(SudRt2LoadPackageParamModel *)loadGamePramModel {
+- (void)onGameHandleCreateSuccess:(SUDRuntime2LoadPackageParamModel *)loadGamePramModel {
     
     /// 设置游戏视图
     UIView *gameView = [self.gameHandle getGameView];
@@ -238,11 +238,11 @@ SudRt2GameCustomCommandListener>
     NSLog(@"onStateChangedFrom:%@->%@", @(fromState), @(toState));
 }
 
-- (void)onCallCustomCommand:(id<SudRt2GameCustomCommandHandle>)handle info:(nullable NSDictionary *)argv {
+- (void)onCallCustomCommand:(id<SUDRuntime2GameCustomCommandHandle>)handle info:(nullable NSDictionary *)argv {
     NSLog(@"onCallCustomCommand:%@", argv);
 }
 
-- (void)onCallCustomCommandSync:(id<SudRt2GameCustomCommandHandle>)handle info:(nullable NSDictionary *)argv {
+- (void)onCallCustomCommandSync:(id<SUDRuntime2GameCustomCommandHandle>)handle info:(nullable NSDictionary *)argv {
     NSLog(@"onCallCustomCommandSync:%@", argv);
 }
 
