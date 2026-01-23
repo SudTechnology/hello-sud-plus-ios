@@ -280,4 +280,32 @@
     /// Execute the application's own logic, and then call the following interface to notify the game to add the current user to the game."
     //    [self.sudFSTAPPDecorator notifyAppComonSelfInV2:YES seatIndex:-1 isSeatRandom:YES teamId:0];
 }
+
+/// convert the game icon frame to toView
+- (CGRect)convertGameContentViewTo:(UIView *)toView positionModel:(MgCommonGamePlayerIconPositionModel *)model {
+
+    CGFloat nativeScale = UIScreen.mainScreen.nativeScale;
+    // center x
+    CGFloat centerX = model.position.x / nativeScale;
+    // center y
+    CGFloat centerY = model.position.y / nativeScale;
+    CGFloat w = model.position.width / nativeScale;
+    CGFloat h = model.position.height / nativeScale;
+    UIView *gameView = self.loadConfigModel.gameView;
+    CGPoint center = [toView convertPoint:CGPointMake(centerX, centerY) fromView:gameView];
+    CGRect frame = CGRectMake(center.x - w/2, center.y - h/2, w, h);
+    return frame;
+}
+
+- (void)onGameMgCommonGamePlayerIconPosition:(id<ISudFSMStateHandle>)handle model:(MgCommonGamePlayerIconPositionModel *)model {
+    
+    /// Here showing how to add a custom view on the top of the game player icon position
+    
+//    UIView *toView = [[UIView alloc]init];
+//    UIView *iconView = [[UIView alloc] init];
+//    iconView.backgroundColor = [UIColor redColor];
+//    [toView addSubview:iconView];
+//    iconView.frame = [self convertGameContentViewTo:toView positionModel:model];
+
+}
 @end
