@@ -141,7 +141,23 @@
 
 /// APP_COMMON_GAME_ADD_BIG_SCALE_MODEL_AI_PLAYERS
 @implementation AppCommonGameAddBigScaleModelAiPlayersModel
+
+- (instancetype)init {
+    if (self = [super init]) {
+        _isEnter = 1;
+        _isReady = 1;
+    }
+    return self;
+}
+
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"aiPlayers": BigScaleModelAiPlayerInfoModel.class};
 }
 @end
+
+@implementation AppCommonGameExitBigScaleModelAiPlayersModel
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"playerIds": NSString.class};
+}
+@end
+

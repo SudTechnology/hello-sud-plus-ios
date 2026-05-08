@@ -421,3 +421,9 @@
 @implementation MgCommonGamePlayerMicState
 
 @end
+
+@implementation MgCommonGameLoadConfigUiResult
+
+@end
+
+

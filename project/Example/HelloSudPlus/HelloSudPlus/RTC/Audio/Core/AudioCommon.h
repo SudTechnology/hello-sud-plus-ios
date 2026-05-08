@@ -40,8 +40,9 @@ typedef NS_ENUM(NSInteger, HSAudioEngineUpdateType) {
 
 
 typedef NS_ENUM(NSInteger,SudRtcAudioItemPlayerState) {
-    SudRtcAudioItemPlayerStatePlaying = 0, // 播放中
-    SudRtcAudioItemPlayerStateFinished = 1// 结束
+    SudRtcAudioItemPlayerStatePrepare = 0, // 准备
+    SudRtcAudioItemPlayerStatePlaying = 1, // 播放中
+    SudRtcAudioItemPlayerStateFinished = 2// 结束
 };
 
 @interface SudRtcAudioItem : NSObject

@@ -383,16 +383,16 @@
     return _game_players;
 }
 
-- (SudCommonCustomUiCfg *)round_over_poop_btn {
+- (SudCommonHideCustomUiCfg *)round_over_poop_btn {
     if (!_round_over_poop_btn) {
-        _round_over_poop_btn = SudCommonCustomUiCfg.new;
+        _round_over_poop_btn = SudCommonHideCustomUiCfg.new;
     }
     return _round_over_poop_btn;
 }
 
-- (SudCommonCustomUiCfg *)round_over_good_btn {
+- (SudCommonHideCustomUiCfg *)round_over_good_btn {
     if (!_round_over_good_btn) {
-        _round_over_good_btn = SudCommonCustomUiCfg.new;
+        _round_over_good_btn = SudCommonHideCustomUiCfg.new;
     }
     return _round_over_good_btn;
 }

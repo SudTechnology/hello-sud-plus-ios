@@ -54,6 +54,7 @@
         taskItem.mediaPlayer = mediaPlayer;
         taskItem.path = tempFilePath;
         [self.taskList addObject:taskItem];
+        [taskItem.audioItem handleAudioStateChanged:SudRtcAudioItemPlayerStatePrepare];
     }
 }
 

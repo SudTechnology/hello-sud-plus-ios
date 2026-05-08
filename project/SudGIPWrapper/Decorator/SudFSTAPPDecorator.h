@@ -44,10 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 传输音频数据： 传入的音频数据必须是：PCM格式，采样率：16000， 采样位数：16， 声道数： MONO
 - (void)pushAudio:(NSData *)data;
 
-/// 状态通知（app to mg）
+/// 通用通知指定指令给游戏 详情指令参考：https://docs.sud.tech/zh-CN/app/Client/APPFST/CommonState.html
 /// @param state 状态名称
-/// @param dataJson 需传递的json
-- (void)notifyStateChange:(NSString *)state dataJson:(NSString *)dataJson;
+/// @param dataJson 需传递的json NSString NSData NSDictionary NSObject(custom model)
+- (void)notifyStateChange:(NSString *)state dataJson:(id)dataJson;
 
 /// 加入,退出游戏
 /// 备注：已废弃！请使用notifyAppComonSelfInV2版本接口

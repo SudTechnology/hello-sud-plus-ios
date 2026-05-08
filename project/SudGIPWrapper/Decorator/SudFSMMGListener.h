@@ -36,14 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 最低版本：v1.1.30.xx
 - (void)onGameLog:(nonnull NSString *)dataJson;
 
-/// 游戏状态变化
+/// 游戏状态变化 更多指令详情参考： https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStateGame.html
 /// 如果未接管相应指令回调，则会默认派发到该回调上
 /// @param handle handle 回调句柄
 /// @param state state 对应事件状态
 /// @param dataJson dataJson 回调json串
 - (void)onGameStateChange:(nonnull id <ISudFSMStateHandle>)handle state:(nonnull NSString *)state dataJson:(nonnull NSString *)dataJson;
 
- /// 游戏玩家状态变化
+ /// 游戏玩家状态变化 更多指令详情参考：https://docs.sud.tech/zh-CN/app/Client/MGFSM/CommonStatePlayer.html
 /// 如果未接管相应指令回调，则会默认派发到该回调上
  /// @param handle handle 回调句柄
  /// @param state state 对应事件状态
@@ -246,6 +246,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 通知APP 玩家麦克风状态准备OK MG_COMMON_GAME_PLAYER_MIC_STATE
 - (void)onGameMgCommonGamePlayerMicState:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGamePlayerMicState *)model;
+
+/// 通知app下载自定义资源结果 MG_COMMON_GAME_LOAD_CONFIG_UI_RESULT
+- (void)onGameMgCommonGameLoadConfigUiResult:(nonnull id <ISudFSMStateHandle>)handle model:(MgCommonGameLoadConfigUiResult *)model;
 #pragma mark - 互动礼物<火箭>
 
 /// 礼物配置文件(火箭) MG_CUSTOM_ROCKET_CONFIG

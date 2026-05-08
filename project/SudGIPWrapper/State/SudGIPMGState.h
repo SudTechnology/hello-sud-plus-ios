@@ -135,6 +135,8 @@ static NSString *MG_COMMON_GAME_PLAYER_PROPS_CARDS = @"mg_common_game_player_pro
 static NSString *MG_COMMON_GAME_INFO_X = @"mg_common_game_info_x";
 /// 游戏通知app击球状态（只支持桌球）
 static NSString *MG_COMMON_GAME_BILLIARDS_HIT_STATE = @"mg_common_game_billiards_hit_state";
+/// 通知app下载自定义资源结果
+static NSString *MG_COMMON_GAME_LOAD_CONFIG_UI_RESULT = @"mg_common_game_load_config_ui_result";
 
 #pragma mark - 通用状态-玩家
 /// 加入状态
@@ -275,6 +277,12 @@ static NSString *MG_COMMON_GAME_DISCO_ACTION_END = @"mg_common_game_disco_action
 @property(nonatomic, assign) NSInteger score;
 /// 逃跑
 @property(nonatomic, assign) NSInteger isEscaped;
+/// 是否是AI玩家
+@property(nonatomic, assign) NSInteger isAI;
+/// 是否托管完成游戏
+@property(nonatomic, assign) NSInteger isManaged;
+/// 扩展信息
+@property(nonatomic, copy) NSString *extras;
 @end
 
 @interface MGCommonGameSettleModel : NSObject
@@ -948,5 +956,14 @@ typedef NS_ENUM(NSInteger, MGCommonGameStateType) {
 /// 通知APP 玩家麦克风状态准备OK
 #pragma mark - MG_COMMON_GAME_PLAYER_MIC_STATE
 @interface MgCommonGamePlayerMicState:NSObject
+@end
+
+/// 通知app下载自定义资源结果
+#pragma mark - MG_COMMON_GAME_LOAD_CONFIG_UI_RESULT
+@interface MgCommonGameLoadConfigUiResult:NSObject
+/// 下载的url
+@property(nonatomic, strong)NSString *url;
+/// 0: 失败 1：成功
+@property(nonatomic, assign)NSInteger state;
 @end
 NS_ASSUME_NONNULL_END

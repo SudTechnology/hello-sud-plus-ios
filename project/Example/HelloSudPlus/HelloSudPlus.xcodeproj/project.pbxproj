@@ -3856,6 +3856,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HelloSudPlus/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HelloSUD;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSCameraUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间视频聊天功能.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中提供精准推荐房间功能.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间语音聊天功能.";
@@ -3915,6 +3916,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HelloSudPlus/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HelloSUD;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSCameraUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间视频聊天功能.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中提供精准推荐房间功能.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "请点击”好”以允许访问.若不允许,你将无法在HelloSud中使用房间语音聊天功能.";

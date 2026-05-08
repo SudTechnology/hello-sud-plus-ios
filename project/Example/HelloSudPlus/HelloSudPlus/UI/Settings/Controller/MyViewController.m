@@ -68,6 +68,8 @@
 }
 
 - (void)updateAccountStatus {
+    DDLogDebug(@"废弃");
+    return;
     if (self.accountStatus == AppService.shared.configModel.accountStatus) {
         return;
     }
@@ -77,6 +79,8 @@
 }
 
 - (void)configSudNFT {
+    DDLogDebug(@"废弃");
+    return;
     BOOL isTestEnv = NO;
 #if DEBUG
     // 测试环境
@@ -134,6 +138,8 @@
 }
 
 - (void)checkWalletInfo {
+    DDLogDebug(@"废弃");
+    return;
 
     BOOL bindWallet = HsNFTPreferences.shared.isBindWallet;
     if (!bindWallet) {

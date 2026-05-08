@@ -88,6 +88,22 @@
     NSString *playerId = aiRoomChatMsgModel.uid;// infoDic[@"userId"];
     DDLogDebug(@"handleAiRoomChatMsg:uid:%@,content:%@, audioData:%@", aiRoomChatMsgModel.uid, aiRoomChatMsgModel.content, @(aiRoomChatMsgModel.audioData.length));
     
+    BOOL isExistSameUserAudioPlaying = NO;
+    NSInteger userAudioState = -1;
+    if (self.userAudioPlayStateMap[playerId]) {
+        userAudioState = [self.userAudioPlayStateMap[playerId] integerValue];
+    }
+    if (userAudioState == SudRtcAudioItemPlayerStatePrepare||
+        userAudioState == SudRtcAudioItemPlayerStatePlaying) {
+        // 存在在播放中的语音，忽略当前这次
+        DDLogDebug(@"exist same userId audio playing, skip it playerId:%@, userAudioPlayStateMap:%@", playerId, self.userAudioPlayStateMap);
+        isExistSameUserAudioPlaying = YES;
+    }
+    
+    if (isExistSameUserAudioPlaying) {
+        return;
+    }
+    
     if (aiRoomChatMsgModel.content.length > 0 && aiRoomChatMsgModel.uid) {
         
         NSInteger uid = [aiRoomChatMsgModel.uid longLongValue];
@@ -113,6 +129,8 @@
     
     
     if (audioDataBase64) {
+
+
         NSData *audioData = [[NSData alloc]initWithBase64EncodedString:audioDataBase64 options:0];
         BOOL isPlyeByRtc = YES;
         if (isPlyeByRtc) {
@@ -127,6 +145,7 @@
                 audioItem.playStateChangedBlock = ^(SudRtcAudioItem *item, SudRtcAudioItemPlayerState playerState) {
                     [weakSelf handleUserPlayerAudioState:item.extra state:playerState];
                 };
+
                 [audioEngine playLocalAudio:audioItem];
                 return;
             }
@@ -573,6 +592,9 @@
 - (void)sendGamePlayerAudioState:(NSString *)userId state:(NSInteger)state {
     // 没有开启AI或者游戏没有通知玩家麦克风准备好了， 别发
     if (!self.isOpenAiAgent || !self.isGamePlayerMicStateOk) {
+        return;
+    }
+    if (state == SudAudioItemPlayerStatePrepare) {
         return;
     }
     AppCommonGamePlayerMicState *stateModel = AppCommonGamePlayerMicState.new;
